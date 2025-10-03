@@ -4,7 +4,6 @@ from src.ch01_data_toolbox.file_toolbox import open_json
 from src.ch01_data_toolbox.plotly_toolbox import conditional_fig_show
 from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.ch08_timeline_logic._ref.ch08_keywords import Ch08Keywords as wx
 from src.ch08_timeline_logic.timeline_main import (
     add_newtimeline_planunit,
     belieftimelinepoint_shop,
@@ -12,6 +11,7 @@ from src.ch08_timeline_logic.timeline_main import (
     get_min_from_dt_offset,
     new_timeline_planunit,
 )
+from src.ref.ch08_keywords import Ch08Keywords as wx
 
 
 def get_five_config() -> dict:

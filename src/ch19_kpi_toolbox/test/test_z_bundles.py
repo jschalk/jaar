@@ -9,8 +9,8 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
     CREATE_MOMENT_VOICE_NETS_SQLSTR,
     create_prime_tablename,
 )
-from src.ch19_kpi_toolbox._ref.ch19_keywords import Ch19Keywords as wx
 from src.ch19_kpi_toolbox.kpi_mstr import populate_kpi_bundle
+from src.ref.ch19_keywords import Ch19Keywords as wx
 
 
 def test_populate_kpi_bundle_PopulatesTable_Scenario0_WithDefaultBundleID():

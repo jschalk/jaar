@@ -1,6 +1,5 @@
 from src.ch01_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.ch07_belief_logic.belief_config import get_belief_config_dict
-from src.ch09_belief_atom_logic._ref.ch09_keywords import Ch09Keywords as wx
 from src.ch09_belief_atom_logic._ref.ch09_semantic_types import CRUD_command
 from src.ch09_belief_atom_logic.atom_config import (
     get_all_belief_dimen_delete_keys,
@@ -18,6 +17,7 @@ from src.ch09_belief_atom_logic.atom_config import (
     is_belief_dimen,
     set_mog,
 )
+from src.ref.ch09_keywords import Ch09Keywords as wx
 
 
 def test_CRUD_command_Exists():
@@ -469,9 +469,9 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     assert beliefunit_columns.get(wx.credor_respect) is not None
     assert beliefunit_columns.get(wx.debtor_respect) is not None
     assert beliefunit_columns.get("fund_pool") is not None
-    assert beliefunit_columns.get(wx.fund_iota) is not None
-    assert beliefunit_columns.get(wx.respect_bit) is not None
-    assert beliefunit_columns.get(wx.penny) is not None
+    assert beliefunit_columns.get(wx.fund_grain) is not None
+    assert beliefunit_columns.get(wx.respect_grain) is not None
+    assert beliefunit_columns.get(wx.money_grain) is not None
     assert beliefunit_columns.get("tally") is not None
 
     assert len(cat_voiceunit) == 2
@@ -614,7 +614,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(wx.reason_context) == wx.RopeTerm
     assert x_class_types.get("reason_active_requisite") == "bool"
     assert x_class_types.get(wx.begin) == "float"
-    assert x_class_types.get(wx.respect_bit) == "float"
+    assert x_class_types.get(wx.respect_grain) == "float"
     assert x_class_types.get(wx.close) == "float"
     assert x_class_types.get(wx.voice_cred_points) == "float"
     assert x_class_types.get(wx.group_cred_points) == "float"
@@ -627,7 +627,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(wx.fact_context) == wx.RopeTerm
     assert x_class_types.get(wx.fact_upper) == "float"
     assert x_class_types.get(wx.fact_lower) == "float"
-    assert x_class_types.get(wx.fund_iota) == "float"
+    assert x_class_types.get(wx.fund_grain) == "float"
     assert x_class_types.get("fund_pool") == "float"
     assert x_class_types.get("give_force") == "float"
     assert x_class_types.get(wx.gogo_want) == "float"
@@ -640,7 +640,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("reason_upper") == "float"
     assert x_class_types.get(wx.numor) == "int"
     assert x_class_types.get("reason_lower") == "float"
-    assert x_class_types.get(wx.penny) == "float"
+    assert x_class_types.get(wx.money_grain) == "float"
     assert x_class_types.get("fact_state") == wx.RopeTerm
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"

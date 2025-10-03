@@ -5,12 +5,12 @@ from src.ch17_idea_logic._ref.ch17_doc_builder import (
     get_idea_brick_md,
     get_idea_brick_mds,
 )
-from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_config import get_idea_config_dict, get_idea_formats_dir
 from src.ch17_idea_logic.test._util.ch17_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
+from src.ref.ch17_keywords import Ch17Keywords as wx
 
 
 def create_dimens_idea_format_dict() -> dict:
@@ -66,11 +66,11 @@ def test_get_idea_brick_md_ReturnsObj():
             wx.event_int: {wx.otx_key: True},
             wx.face_name: {wx.otx_key: True},
             wx.moment_label: {wx.otx_key: True},
-            wx.fund_iota: {wx.otx_key: False},
+            wx.fund_grain: {wx.otx_key: False},
             wx.job_listen_rotations: {wx.otx_key: False},
             wx.monthday_index: {wx.otx_key: False},
-            wx.penny: {wx.otx_key: False},
-            wx.respect_bit: {wx.otx_key: False},
+            wx.money_grain: {wx.otx_key: False},
+            wx.respect_grain: {wx.otx_key: False},
             wx.timeline_label: {wx.otx_key: False},
             wx.yr1_jan1_offset: {wx.otx_key: False},
         },
@@ -95,9 +95,9 @@ def test_get_idea_brick_md_ReturnsObj():
 - `{wx.c400_number}`
 - `{wx.yr1_jan1_offset}`
 - `{wx.monthday_index}`
-- `{wx.fund_iota}`
-- `{wx.penny}`
-- `{wx.respect_bit}`
+- `{wx.fund_grain}`
+- `{wx.money_grain}`
+- `{wx.respect_grain}`
 - `{wx.knot}`
 - `{wx.job_listen_rotations}`
 """
@@ -115,11 +115,11 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
             wx.event_int: {wx.otx_key: True},
             wx.face_name: {wx.otx_key: True},
             wx.moment_label: {wx.otx_key: True},
-            wx.fund_iota: {wx.otx_key: False},
+            wx.fund_grain: {wx.otx_key: False},
             wx.job_listen_rotations: {wx.otx_key: False},
             wx.monthday_index: {wx.otx_key: False},
-            wx.penny: {wx.otx_key: False},
-            wx.respect_bit: {wx.otx_key: False},
+            wx.money_grain: {wx.otx_key: False},
+            wx.respect_grain: {wx.otx_key: False},
             wx.timeline_label: {wx.otx_key: False},
             wx.yr1_jan1_offset: {wx.otx_key: False},
         },
@@ -144,9 +144,9 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
 - `{wx.c400_number}`
 - `{wx.yr1_jan1_offset}`
 - `{wx.monthday_index}`
-- `{wx.fund_iota}`
-- `{wx.penny}`
-- `{wx.respect_bit}`
+- `{wx.fund_grain}`
+- `{wx.money_grain}`
+- `{wx.respect_grain}`
 - `{wx.knot}`
 - `{wx.job_listen_rotations}`
 """

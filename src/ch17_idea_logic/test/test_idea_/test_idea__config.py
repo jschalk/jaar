@@ -23,7 +23,6 @@ from src.ch16_translate_logic.translate_config import (
     get_translate_dimens,
     get_translateable_args,
 )
-from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_config import (
     get_allowed_curds,
     get_default_sorted_list,
@@ -41,6 +40,7 @@ from src.ch17_idea_logic.idea_config import (
     idea_format_00020_belief_voice_membership_v0_0_0,
     idea_format_00021_belief_voiceunit_v0_0_0,
 )
+from src.ref.ch17_keywords import Ch17Keywords as wx
 
 
 def test_get_idea_elements_sort_order_ReturnsObj():
@@ -201,9 +201,9 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[121] == "problem_bool"
     assert table_sorting_priority[122] == "take_force"
     assert table_sorting_priority[123] == "tally"
-    assert table_sorting_priority[124] == "fund_iota"
-    assert table_sorting_priority[125] == "penny"
-    assert table_sorting_priority[126] == "respect_bit"
+    assert table_sorting_priority[124] == "fund_grain"
+    assert table_sorting_priority[125] == "money_grain"
+    assert table_sorting_priority[126] == "respect_grain"
     assert table_sorting_priority[127] == "amount"
     assert table_sorting_priority[128] == "otx_label"
     assert table_sorting_priority[129] == "inx_label"
@@ -341,10 +341,10 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get("problem_bool") == "INTEGER"
     assert sqlite_types.get(wx.take_force) == "REAL"
     assert sqlite_types.get("tally") == "INTEGER"
-    assert sqlite_types.get(wx.fund_iota) == "REAL"
-    assert sqlite_types.get(wx.penny) == "REAL"
+    assert sqlite_types.get(wx.fund_grain) == "REAL"
+    assert sqlite_types.get(wx.money_grain) == "REAL"
     assert sqlite_types.get(wx.pledge) == "INTEGER"
-    assert sqlite_types.get(wx.respect_bit) == "REAL"
+    assert sqlite_types.get(wx.respect_grain) == "REAL"
     assert sqlite_types.get(wx.amount) == "REAL"
     assert sqlite_types.get(wx.month_label) == "TEXT"
     assert sqlite_types.get(wx.hour_label) == "TEXT"
@@ -770,10 +770,10 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         wx.face_name,
         wx.c400_number,
         wx.moment_label,
-        wx.fund_iota,
+        wx.fund_grain,
         wx.monthday_index,
-        wx.penny,
-        wx.respect_bit,
+        wx.money_grain,
+        wx.respect_grain,
         wx.knot,
         wx.timeline_label,
         wx.yr1_jan1_offset,

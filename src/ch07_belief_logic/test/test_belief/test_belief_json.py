@@ -6,7 +6,6 @@ from src.ch04_voice_logic.labor import laborunit_shop, partyunit_shop
 from src.ch05_reason_logic.reason import factunit_shop
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
-from src.ch07_belief_logic._ref.ch07_keywords import Ch07Keywords as wx
 from src.ch07_belief_logic.belief_main import (
     beliefunit_shop,
     get_beliefunit_from_json,
@@ -18,6 +17,7 @@ from src.ch07_belief_logic.test._util.ch07_examples import (
     get_beliefunit_reason_context_ziet_example,
     get_beliefunit_x1_3levels_1reason_1facts,
 )
+from src.ref.ch07_keywords import Ch07Keywords as wx
 
 
 def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():
@@ -25,8 +25,8 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():
     yao_belief = get_beliefunit_laundry_example1()
     yao_fund_pool = 23000
     yao_belief.fund_pool = yao_fund_pool
-    yao_fund_iota = 23
-    yao_belief.fund_iota = yao_fund_iota
+    yao_fund_grain = 23
+    yao_belief.fund_grain = yao_fund_grain
     belief_tally = 23
     yao_belief.tally = belief_tally
     x_last_pack_id = 77
@@ -43,7 +43,7 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():
     assert belief_dict["tally"] == yao_belief.tally
     assert belief_dict["tally"] == belief_tally
     assert belief_dict["fund_pool"] == yao_fund_pool
-    assert belief_dict["fund_iota"] == yao_fund_iota
+    assert belief_dict["fund_grain"] == yao_fund_grain
     assert belief_dict["max_tree_traverse"] == yao_belief.max_tree_traverse
     assert belief_dict["knot"] == yao_belief.knot
     assert belief_dict["credor_respect"] == yao_belief.credor_respect
@@ -144,12 +144,12 @@ def test_BeliefUnit_get_json_ReturnsJSON_SimpleExample():
     zia_belief = get_beliefunit_x1_3levels_1reason_1facts()
     x_fund_pool = 66000
     zia_belief.fund_pool = x_fund_pool
-    x_fund_iota = 66
-    zia_belief.fund_iota = x_fund_iota
-    x_respect_bit = 7
-    zia_belief.respect_bit = x_respect_bit
-    x_penny = 0.3
-    zia_belief.penny = x_penny
+    x_fund_grain = 66
+    zia_belief.fund_grain = x_fund_grain
+    x_respect_grain = 7
+    zia_belief.respect_grain = x_respect_grain
+    x_money_grain = 0.3
+    zia_belief.money_grain = x_money_grain
     override_str = "override"
     yao_str = "Yao"
     run_str = ";runners"
@@ -173,9 +173,9 @@ def test_BeliefUnit_get_json_ReturnsJSON_SimpleExample():
     assert belief_dict["moment_label"] == zia_belief.moment_label
     assert belief_dict["tally"] == zia_belief.tally
     assert belief_dict["fund_pool"] == zia_belief.fund_pool
-    assert belief_dict["fund_iota"] == zia_belief.fund_iota
-    assert belief_dict["respect_bit"] == zia_belief.respect_bit
-    assert belief_dict["penny"] == zia_belief.penny
+    assert belief_dict["fund_grain"] == zia_belief.fund_grain
+    assert belief_dict["respect_grain"] == zia_belief.respect_grain
+    assert belief_dict["money_grain"] == zia_belief.money_grain
     assert belief_dict["credor_respect"] == zia_belief.credor_respect
     assert belief_dict["debtor_respect"] == zia_belief.debtor_respect
     # with pytest_raises(Exception) as excinfo:
@@ -278,12 +278,12 @@ def test_get_beliefunit_from_json_ReturnsObjSimpleExample():
     zia_belief.set_moment_label(tiger_moment_label)
     zia_fund_pool = 80000
     zia_belief.fund_pool = zia_fund_pool
-    zia_fund_iota = 8
-    zia_belief.fund_iota = zia_fund_iota
+    zia_fund_grain = 8
+    zia_belief.fund_grain = zia_fund_grain
     zia_resepect_bit = 5
-    zia_belief.respect_bit = zia_resepect_bit
-    zia_penny = 2
-    zia_belief.penny = zia_penny
+    zia_belief.respect_grain = zia_resepect_bit
+    zia_money_grain = 2
+    zia_belief.money_grain = zia_money_grain
     zia_credor_respect = 200
     zia_debtor_respect = 200
     zia_belief.set_credor_respect(zia_credor_respect)
@@ -342,12 +342,12 @@ def test_get_beliefunit_from_json_ReturnsObjSimpleExample():
     assert json_belief.moment_label == zia_belief.moment_label
     assert json_belief.fund_pool == zia_fund_pool
     assert json_belief.fund_pool == zia_belief.fund_pool
-    assert json_belief.fund_iota == zia_fund_iota
-    assert json_belief.fund_iota == zia_belief.fund_iota
-    assert json_belief.respect_bit == zia_resepect_bit
-    assert json_belief.respect_bit == zia_belief.respect_bit
-    assert json_belief.penny == zia_penny
-    assert json_belief.penny == zia_belief.penny
+    assert json_belief.fund_grain == zia_fund_grain
+    assert json_belief.fund_grain == zia_belief.fund_grain
+    assert json_belief.respect_grain == zia_resepect_bit
+    assert json_belief.respect_grain == zia_belief.respect_grain
+    assert json_belief.money_grain == zia_money_grain
+    assert json_belief.money_grain == zia_belief.money_grain
     assert json_belief.max_tree_traverse == 23
     assert json_belief.max_tree_traverse == zia_belief.max_tree_traverse
     assert json_belief.knot == zia_belief.knot
@@ -364,8 +364,8 @@ def test_get_beliefunit_from_json_ReturnsObjSimpleExample():
     assert json_planroot.reasonunits == {}
     assert json_planroot.laborunit == zia_belief.planroot.laborunit
     assert json_planroot.laborunit == run_laborunit
-    assert json_planroot.fund_iota == 8
-    assert json_planroot.fund_iota == zia_fund_iota
+    assert json_planroot.fund_grain == 8
+    assert json_planroot.fund_grain == zia_fund_grain
     assert len(json_planroot.factunits) == 1
     assert len(json_planroot.awardunits) == 1
 
@@ -538,7 +538,7 @@ def test_get_dict_of_belief_from_dict_ReturnsDictOfBeliefUnits():
     ccn2_belief = ccn_dict_of_obj.get(x2_belief.belief_name)
     assert ccn2_belief.planroot.plan_label == x2_belief.planroot.plan_label
     assert ccn2_belief.planroot.parent_rope == x2_belief.planroot.parent_rope
-    assert ccn2_belief.planroot.fund_iota == x2_belief.planroot.fund_iota
+    assert ccn2_belief.planroot.fund_grain == x2_belief.planroot.fund_grain
     shave_rope = ccn2_belief.make_l1_rope("shave")
     wk_rope = ccn2_belief.make_l1_rope("sem_jours")
     # assert ccn2_belief.get_plan_obj(shave_rope) == x2_belief.get_plan_obj(shave_rope)

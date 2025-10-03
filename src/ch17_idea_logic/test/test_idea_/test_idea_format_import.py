@@ -1,5 +1,4 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_config import idea_format_00021_belief_voiceunit_v0_0_0
 from src.ch17_idea_logic.idea_db_tool import open_csv
 from src.ch17_idea_logic.idea_main import get_idearef_obj, save_idea_csv
@@ -7,6 +6,7 @@ from src.ch17_idea_logic.test._util.ch17_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
+from src.ref.ch17_keywords import Ch17Keywords as wx
 
 
 def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):

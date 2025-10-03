@@ -13,14 +13,15 @@ LINUX_OS = platform_system() == "Linux"
 def test_create_keywords_class_file_path_ReturnsObj():
     # ESTABLISH
     chapter_dir = get_chapter_temp_dir()
+    ref_dir = create_path(chapter_dir, "ref")
     XX_str = "XX"
 
     # WHEN
-    keywords_class_file_path = create_keywords_class_file_path(chapter_dir, XX_str)
+    keywords_class_file_path = create_keywords_class_file_path(ref_dir, XX_str)
 
     # THEN
     assert keywords_class_file_path
-    ref_dir = create_path(chapter_dir, "_ref")
+    # ref_dir = create_path(chapter_dir, "_ref")
     chXX_str = f"ch{XX_str}"
     expected_file_path = create_path(ref_dir, get_keywords_filename(chXX_str))
     assert keywords_class_file_path == expected_file_path
@@ -28,7 +29,7 @@ def test_create_keywords_class_file_path_ReturnsObj():
 
 def test_create_keywords_class_file_path_HasDocString():
     # ESTABLISH
-    doc_str = create_keywords_class_file_path(chapter_dir="chapter_dir", ch_num="XX")
+    doc_str = create_keywords_class_file_path(chapter_dir="src\\ref", ch_num="XX")
     doc_str = f"Returns path: {doc_str}"
     print(f"{doc_str=}")
     # WHEN / THEN

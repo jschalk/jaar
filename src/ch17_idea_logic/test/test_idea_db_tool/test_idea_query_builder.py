@@ -1,11 +1,11 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_config import get_idea_config_dict
 from src.ch17_idea_logic.idea_db_tool import (
     create_idea_sorted_table,
     get_default_sorted_list,
     get_idea_into_dimen_raw_query,
 )
+from src.ref.ch17_keywords import Ch17Keywords as wx
 
 
 def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_belief_plan_partyunit():

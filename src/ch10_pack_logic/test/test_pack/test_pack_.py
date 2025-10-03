@@ -3,7 +3,6 @@ from src.ch01_data_toolbox.dict_toolbox import x_is_json
 from src.ch04_voice_logic.voice import voiceunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_default_moment_label
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
-from src.ch10_pack_logic._ref.ch10_keywords import Ch10Keywords as wx
 from src.ch10_pack_logic._ref.ch10_semantic_types import FaceName, default_knot_if_None
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.pack import (
@@ -17,6 +16,7 @@ from src.ch10_pack_logic.test._util.ch10_examples import (
     get_atom_example_planunit_sports,
     get_beliefdelta_sue_example,
 )
+from src.ref.ch10_keywords import Ch10Keywords as wx
 
 
 def test_FaceName_Exists():

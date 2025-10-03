@@ -2,11 +2,11 @@ from pytest import raises as pytest_raises
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import get_rowdata
 from src.ch02_rope_logic.rope import create_rope
-from src.ch09_belief_atom_logic._ref.ch09_keywords import Ch09Keywords as wx
 from src.ch09_belief_atom_logic.atom_main import (
     beliefatom_shop,
     get_beliefatom_from_rowdata,
 )
+from src.ref.ch09_keywords import Ch09Keywords as wx
 
 
 def test_BeliefAtom_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():

@@ -54,12 +54,12 @@
     "jkeys": { "moment_label": {"class_type": "LabelTerm"} }, 
     "jvalues": {
       "c400_number"         : { "class_type": "int"       }, 
-      "fund_iota"           : { "class_type": "float"     }, 
+      "fund_grain"          : { "class_type": "float"     }, 
       "job_listen_rotations": { "class_type": "int"       }, 
       "knot"                : { "class_type": "str"       }, 
       "monthday_index"      : { "class_type": "int"       }, 
-      "penny"               : { "class_type": "float"     }, 
-      "respect_bit"         : { "class_type": "float"     }, 
+      "money_grain"               : { "class_type": "float"     }, 
+      "respect_grain"       : { "class_type": "float"     }, 
       "timeline_label"      : { "class_type": "LabelTerm" }, 
       "yr1_jan1_offset"     : { "class_type": "int"       }
     }, 

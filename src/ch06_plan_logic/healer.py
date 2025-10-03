@@ -27,7 +27,7 @@ def healerunit_shop(_healer_names: set[GroupTitle] = None) -> HealerUnit:
     return HealerUnit(_healer_names=get_empty_set_if_None(_healer_names))
 
 
-def healerunit_get_from_dict(x_dict: dict[str, set]) -> HealerUnit:
+def get_healerunit_from_dict(x_dict: dict[str, set]) -> HealerUnit:
     x_healerunit = healerunit_shop()
     if x_dict.get("healerunit_healer_names") is not None:
         for x_healer_name in x_dict.get("healerunit_healer_names"):

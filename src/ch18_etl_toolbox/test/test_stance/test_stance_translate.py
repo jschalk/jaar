@@ -1,6 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch17_idea_logic.idea_csv_tool import create_init_stance_idea_csv_strs
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.stance_tool import (
     add_to_br00042_csv,
     add_to_br00043_csv,
@@ -12,6 +11,7 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_heard_tables,
 )
+from src.ref.ch18_keywords import Ch18Keywords as wx
 
 
 def test_add_to_br00042_csv_ReturnsObj():

@@ -219,11 +219,11 @@
     "jvalues": {
       "credor_respect"   : { "class_type": "float", "column_order": 3, "sqlite_datatype": "REAL"    }, 
       "debtor_respect"   : { "class_type": "float", "column_order": 2, "sqlite_datatype": "REAL"    }, 
-      "fund_iota"        : { "class_type": "float", "column_order": 1, "sqlite_datatype": "REAL"    }, 
+      "fund_grain"       : { "class_type": "float", "column_order": 1, "sqlite_datatype": "REAL"    }, 
       "fund_pool"        : { "class_type": "float", "column_order": 0, "sqlite_datatype": "REAL"    }, 
       "max_tree_traverse": { "class_type": "int"  , "column_order": 5, "sqlite_datatype": "INTEGER" }, 
-      "penny"            : { "class_type": "float", "column_order": 6, "sqlite_datatype": "REAL"    }, 
-      "respect_bit"      : { "class_type": "float", "column_order": 4, "sqlite_datatype": "REAL"    }, 
+      "money_grain"            : { "class_type": "float", "column_order": 6, "sqlite_datatype": "REAL"    }, 
+      "respect_grain"    : { "class_type": "float", "column_order": 4, "sqlite_datatype": "REAL"    }, 
       "tally"            : { "class_type": "int"  , "column_order": 7, "sqlite_datatype": "INTEGER" }
     }, 
     "normal_specs": {"normal_table_name": "belief"}

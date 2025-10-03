@@ -6,10 +6,9 @@ from src.ch01_data_toolbox.db_toolbox import (
     get_row_count,
 )
 from src.ch01_data_toolbox.file_toolbox import open_file
-from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
+from src.ch12_belief_file_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_config import get_moment_dimens
 from src.ch15_moment_logic.moment_main import get_momentunit_from_json
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
@@ -23,6 +22,7 @@ from src.ch18_etl_toolbox.transformers import (
     create_sound_and_heard_tables,
     etl_heard_agg_tables_to_moment_jsons,
 )
+from src.ref.ch18_keywords import Ch18Keywords as wx
 
 
 def test_get_moment_heard_select1_sqlstrs_ReturnsObj_HasAllNeededKeys():
@@ -110,7 +110,7 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj():
         assert gen_blfweek_sqlstr == blfweek_sql
         assert gen_blfoffi_sqlstr == blfoffi_sql
         assert gen_momentunit_sqlstr == momentunit_sql
-        static_example_sqlstr = f"SELECT moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_index, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM momentunit_h_agg WHERE moment_label = '{a23_str}'"
+        static_example_sqlstr = f"SELECT moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_index, fund_grain, money_grain, respect_grain, knot, job_listen_rotations FROM momentunit_h_agg WHERE moment_label = '{a23_str}'"
         assert gen_momentunit_sqlstr == static_example_sqlstr
 
 

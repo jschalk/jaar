@@ -7,12 +7,11 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_empty_list_if_None,
     get_json_from_dict,
 )
-from src.ch03_finance_logic.allot import allot_scale
-from src.ch03_finance_logic.finance_config import FundNum, PennyNum
+from src.ch03_allot_toolbox.allot import allot_scale
 from src.ch05_reason_logic.reason import (
     FactUnit,
-    factunits_get_from_dict,
     get_dict_from_factunits,
+    get_factunits_from_dict,
 )
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
@@ -25,7 +24,13 @@ from src.ch07_belief_logic.belief_tool import (
     get_credit_ledger,
     get_voice_mandate_ledger,
 )
-from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, EventInt, RopeTerm
+from src.ch11_bud_logic._ref.ch11_semantic_types import (
+    BeliefName,
+    EventInt,
+    FundNum,
+    MoneyGrain,
+    RopeTerm,
+)
 
 CELLNODE_QUOTA_DEFAULT = 1000
 
@@ -36,7 +41,7 @@ class CellUnit:
     event_int: EventInt = None
     celldepth: int = None
     bud_belief_name: BeliefName = None
-    penny: PennyNum = None
+    money_grain: MoneyGrain = None
     quota: float = None
     mandate: float = None
     beliefadjust: BeliefUnit = None
@@ -59,7 +64,7 @@ class CellUnit:
 
     def _load_existing_beliefevent(self, x_belief: BeliefUnit):
         self.reason_contexts = x_belief.get_reason_contexts()
-        self.beliefevent_facts = factunits_get_from_dict(get_facts_dict(x_belief))
+        self.beliefevent_facts = get_factunits_from_dict(get_facts_dict(x_belief))
         y_belief = copy_deepcopy(x_belief)
         clear_factunits_from_belief(y_belief)
         y_belief.cashout()
@@ -72,13 +77,13 @@ class CellUnit:
         if not self.beliefadjust:
             return None
         credit_ledger = self.get_beliefevents_credit_ledger()
-        return allot_scale(credit_ledger, self.quota, self.penny)
+        return allot_scale(credit_ledger, self.quota, self.money_grain)
 
     def set_beliefevent_facts_from_dict(self, fact_dict: dict[RopeTerm, dict]):
-        self.beliefevent_facts = factunits_get_from_dict(fact_dict)
+        self.beliefevent_facts = get_factunits_from_dict(fact_dict)
 
     def set_found_facts_from_dict(self, fact_dict: dict[RopeTerm, dict]):
-        self.found_facts = factunits_get_from_dict(fact_dict)
+        self.found_facts = get_factunits_from_dict(fact_dict)
 
     def set_boss_facts_from_other_facts(self):
         self.boss_facts = copy_deepcopy(self.beliefevent_facts)
@@ -151,7 +156,7 @@ class CellUnit:
             "event_int": self.event_int,
             "celldepth": self.celldepth,
             "bud_belief_name": self.bud_belief_name,
-            "penny": self.penny,
+            "money_grain": self.money_grain,
             "quota": self.quota,
             "mandate": self.mandate,
             "beliefadjust": self.beliefadjust.to_dict(),
@@ -169,7 +174,7 @@ def cellunit_shop(
     ancestors: list[BeliefName] = None,
     event_int: EventInt = None,
     celldepth: int = None,
-    penny: PennyNum = None,
+    money_grain: MoneyGrain = None,
     quota: float = None,
     beliefadjust: BeliefUnit = None,
     beliefevent_facts: dict[RopeTerm, FactUnit] = None,
@@ -193,7 +198,7 @@ def cellunit_shop(
         event_int=event_int,
         celldepth=get_0_if_None(celldepth),
         bud_belief_name=bud_belief_name,
-        penny=get_1_if_None(penny),
+        money_grain=get_1_if_None(money_grain),
         quota=quota,
         mandate=mandate,
         beliefadjust=beliefadjust,
@@ -210,7 +215,7 @@ def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
     ancestors = x_dict.get("ancestors")
     event_int = x_dict.get("event_int")
     celldepth = x_dict.get("celldepth")
-    penny = x_dict.get("penny")
+    money_grain = x_dict.get("money_grain")
     quota = x_dict.get("quota")
     mandate = x_dict.get("mandate")
     beliefadjust_dict = x_dict.get("beliefadjust")
@@ -221,15 +226,15 @@ def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
     beliefevent_fact_dict = get_empty_dict_if_None(x_dict.get("beliefevent_facts"))
     found_fact_dict = get_empty_dict_if_None(x_dict.get("found_facts"))
     boss_fact_dict = get_empty_dict_if_None(x_dict.get("boss_facts"))
-    beliefevent_facts = factunits_get_from_dict(beliefevent_fact_dict)
-    found_facts = factunits_get_from_dict(found_fact_dict)
-    boss_facts = factunits_get_from_dict(boss_fact_dict)
+    beliefevent_facts = get_factunits_from_dict(beliefevent_fact_dict)
+    found_facts = get_factunits_from_dict(found_fact_dict)
+    boss_facts = get_factunits_from_dict(boss_fact_dict)
     return cellunit_shop(
         bud_belief_name=bud_belief_name,
         ancestors=ancestors,
         event_int=event_int,
         celldepth=celldepth,
-        penny=penny,
+        money_grain=money_grain,
         quota=quota,
         beliefadjust=beliefadjust_obj,
         beliefevent_facts=beliefevent_facts,
@@ -247,7 +252,7 @@ def create_child_cellunits(parent_cell: CellUnit) -> list[CellUnit]:
         if child_mandate > 0 and parent_cell.celldepth > 0:
             child_ancestors = copy_deepcopy(parent_cell.ancestors)
             child_ancestors.append(child_belief_name)
-            boss_facts = factunits_get_from_dict(
+            boss_facts = get_factunits_from_dict(
                 get_facts_dict(parent_cell.beliefadjust)
             )
             child_cell = cellunit_shop(
@@ -255,7 +260,7 @@ def create_child_cellunits(parent_cell: CellUnit) -> list[CellUnit]:
                 ancestors=child_ancestors,
                 event_int=parent_cell.event_int,
                 celldepth=parent_cell.celldepth - 1,
-                penny=parent_cell.penny,
+                money_grain=parent_cell.money_grain,
                 mandate=child_mandate,
                 boss_facts=boss_facts,
             )

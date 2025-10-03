@@ -1,11 +1,11 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch15_moment_logic.moment_main import get_momentunit_from_dict
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.db_obj_moment_tool import get_moment_dict_from_heard_tables
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
     create_sound_and_heard_tables,
 )
+from src.ref.ch18_keywords import Ch18Keywords as wx
 
 
 def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scenario0():
@@ -15,9 +15,9 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scen
     a23_c400_number = 3
     a23_yr1_jan1_offset = 7
     a23_monthday_index = 9
-    a23_fund_iota = 13
-    a23_penny = 17
-    a23_respect_bit = 23
+    a23_fund_grain = 13
+    a23_money_grain = 17
+    a23_respect_grain = 23
     a23_knot = "."
 
     with sqlite3_connect(":memory:") as conn:
@@ -30,9 +30,9 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scen
 , c400_number
 , yr1_jan1_offset
 , monthday_index
-, fund_iota
-, penny
-, respect_bit
+, fund_grain
+, money_grain
+, respect_grain
 , knot
 )
 VALUES (
@@ -41,9 +41,9 @@ VALUES (
 , {a23_c400_number}
 , {a23_yr1_jan1_offset}
 , {a23_monthday_index}
-, {a23_fund_iota}
-, {a23_penny}
-, {a23_respect_bit}
+, {a23_fund_grain}
+, {a23_money_grain}
+, {a23_respect_grain}
 , '{a23_knot}'
 )
 ;"""
@@ -61,9 +61,9 @@ VALUES (
     assert a23_timeline_dict.get("c400_number") == a23_c400_number
     assert a23_timeline_dict.get("yr1_jan1_offset") == a23_yr1_jan1_offset
     assert a23_timeline_dict.get("monthday_index") == a23_monthday_index
-    assert a23_dict.get("fund_iota") == a23_fund_iota
-    assert a23_dict.get("penny") == a23_penny
-    assert a23_dict.get("respect_bit") == a23_respect_bit
+    assert a23_dict.get("fund_grain") == a23_fund_grain
+    assert a23_dict.get("money_grain") == a23_money_grain
+    assert a23_dict.get("respect_grain") == a23_respect_grain
     assert a23_dict.get("knot") == a23_knot
 
 
@@ -85,9 +85,9 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scen
     assert a23_dict
     assert a23_dict.get("moment_label") == a23_str
     assert "timeline" in set(a23_dict.keys())
-    assert a23_dict.get("fund_iota") is None
-    assert a23_dict.get("penny") is None
-    assert a23_dict.get("respect_bit") is None
+    assert a23_dict.get("fund_grain") is None
+    assert a23_dict.get("money_grain") is None
+    assert a23_dict.get("respect_grain") is None
     assert a23_dict.get("knot") is None
     assert set(a23_dict.keys()) == {
         wx.moment_label,
@@ -357,9 +357,9 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_IsFormatted_Scenario0_mome
     a23_c400_number = 3
     a23_yr1_jan1_offset = 7
     a23_monthday_index = 9
-    a23_fund_iota = 13
-    a23_penny = 17
-    a23_respect_bit = 23
+    a23_fund_grain = 13
+    a23_money_grain = 17
+    a23_respect_grain = 23
     a23_knot = "."
 
     with sqlite3_connect(":memory:") as conn:
@@ -372,9 +372,9 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_IsFormatted_Scenario0_mome
 , c400_number
 , yr1_jan1_offset
 , monthday_index
-, fund_iota
-, penny
-, respect_bit
+, fund_grain
+, money_grain
+, respect_grain
 , knot
 )
 VALUES (
@@ -383,9 +383,9 @@ VALUES (
 , {a23_c400_number}
 , {a23_yr1_jan1_offset}
 , {a23_monthday_index}
-, {a23_fund_iota}
-, {a23_penny}
-, {a23_respect_bit}
+, {a23_fund_grain}
+, {a23_money_grain}
+, {a23_respect_grain}
 , '{a23_knot}'
 )
 ;"""
@@ -401,9 +401,9 @@ VALUES (
     assert a23_momentunit.timeline.c400_number == a23_c400_number
     assert a23_momentunit.timeline.yr1_jan1_offset == a23_yr1_jan1_offset
     assert a23_momentunit.timeline.monthday_index == a23_monthday_index
-    assert a23_momentunit.fund_iota == a23_fund_iota
-    assert a23_momentunit.penny == a23_penny
-    assert a23_momentunit.respect_bit == a23_respect_bit
+    assert a23_momentunit.fund_grain == a23_fund_grain
+    assert a23_momentunit.money_grain == a23_money_grain
+    assert a23_momentunit.respect_grain == a23_respect_grain
     assert a23_momentunit.knot == a23_knot
 
 

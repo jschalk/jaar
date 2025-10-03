@@ -25,9 +25,9 @@ def test_get_moment_belieftimelinepoint_ReturnsObj_Scenario0_Empty_offi_time():
     assert fay_beliefunit.belief_name == "for_belieftimelinepoint_calculation"
     assert fay_beliefunit.moment_label == fay_momentunit.moment_label
     assert fay_beliefunit.knot == fay_momentunit.knot
-    assert fay_beliefunit.fund_iota == fay_momentunit.fund_iota
-    assert fay_beliefunit.respect_bit == fay_momentunit.respect_bit
-    assert fay_beliefunit.penny == fay_momentunit.penny
+    assert fay_beliefunit.fund_grain == fay_momentunit.fund_grain
+    assert fay_beliefunit.respect_grain == fay_momentunit.respect_grain
+    assert fay_beliefunit.money_grain == fay_momentunit.money_grain
     assert fay_belieftimelinepoint._month == "March"
     assert fay_belieftimelinepoint._hour == "12am"
     assert fay_belieftimelinepoint._minute == 0
@@ -40,16 +40,16 @@ def test_get_moment_belieftimelinepoint_ReturnsObj_Scenario1_MomentUnit_NonDefau
     # ESTABLISH
     fay_str = "Fay"
     slash_str = "/"
-    fay_fund_iota = 5
-    fay_respect_bit = 4
-    fay_penny = 7
+    fay_fund_grain = 5
+    fay_respect_grain = 4
+    fay_money_grain = 7
     fay_momentunit = momentunit_shop(
         fay_str,
         get_chapter_temp_dir(),
         knot=slash_str,
-        fund_iota=fay_fund_iota,
-        respect_bit=fay_respect_bit,
-        penny=fay_penny,
+        fund_grain=fay_fund_grain,
+        respect_grain=fay_respect_grain,
+        money_grain=fay_money_grain,
     )
     assert fay_momentunit.timeline == timelineunit_shop(get_creg_config())
     assert not fay_momentunit._offi_time_max
@@ -67,9 +67,9 @@ def test_get_moment_belieftimelinepoint_ReturnsObj_Scenario1_MomentUnit_NonDefau
     assert fay_beliefunit.belief_name == "for_belieftimelinepoint_calculation"
     assert fay_beliefunit.moment_label == fay_momentunit.moment_label
     assert fay_beliefunit.knot == fay_momentunit.knot
-    assert fay_beliefunit.fund_iota == fay_momentunit.fund_iota
-    assert fay_beliefunit.respect_bit == fay_momentunit.respect_bit
-    assert fay_beliefunit.penny == fay_momentunit.penny
+    assert fay_beliefunit.fund_grain == fay_momentunit.fund_grain
+    assert fay_beliefunit.respect_grain == fay_momentunit.respect_grain
+    assert fay_beliefunit.money_grain == fay_momentunit.money_grain
     assert fay_belieftimelinepoint._month == "March"
     assert fay_belieftimelinepoint._hour == "12am"
     assert fay_belieftimelinepoint._minute == 0

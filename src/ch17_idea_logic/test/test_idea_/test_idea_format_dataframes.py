@@ -6,7 +6,6 @@ from src.ch08_timeline_logic.test._util.ch08_examples import (
     add_time_creg_planunit,
     add_time_five_planunit,
 )
-from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_config import (
     idea_format_00013_planunit_v0_0_0,
     idea_format_00019_planunit_v0_0_0,
@@ -18,6 +17,7 @@ from src.ch17_idea_logic.test._util.ch17_env import (
     env_dir_setup_cleanup,
     idea_moments_dir,
 )
+from src.ref.ch17_keywords import Ch17Keywords as wx
 
 
 def test_create_idea_df_Arg_idea_format_00021_belief_voiceunit_v0_0_0():

@@ -12,15 +12,7 @@ from src.ch01_data_toolbox.file_toolbox import (
     open_file,
     set_dir,
 )
-from src.ch03_finance_logic.finance_config import (
-    BitNum,
-    FundIota,
-    FundNum,
-    PennyNum,
-    default_fund_iota_if_None,
-    default_RespectBit_if_None,
-    filter_penny,
-)
+from src.ch03_allot_toolbox.allot import default_grain_num_if_None
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch08_timeline_logic.timeline_main import (
     TimeLinePoint,
@@ -46,8 +38,11 @@ from src.ch11_bud_logic.bud import (
     tranbook_shop,
 )
 from src.ch11_bud_logic.cell import cellunit_shop
-from src.ch12_hub_toolbox.ch12_path import create_cell_dir_path, create_moment_json_path
-from src.ch12_hub_toolbox.hub_tool import (
+from src.ch12_belief_file_toolbox.ch12_path import (
+    create_cell_dir_path,
+    create_moment_json_path,
+)
+from src.ch12_belief_file_toolbox.hub_tool import (
     cellunit_save_to_dir,
     gut_file_exists,
     open_gut_file,
@@ -55,7 +50,16 @@ from src.ch12_hub_toolbox.hub_tool import (
     save_gut_file,
     save_job_file,
 )
-from src.ch12_hub_toolbox.keep_tool import create_treasury_db_file, save_duty_belief
+from src.ch12_belief_file_toolbox.keep_tool import (
+    create_treasury_db_file,
+    save_duty_belief,
+)
+from src.ch13_belief_listen_logic._ref.ch13_semantic_types import (
+    FundGrain,
+    FundNum,
+    MoneyGrain,
+    RespectGrain,
+)
 from src.ch13_belief_listen_logic.basis_beliefs import create_listen_basis
 from src.ch13_belief_listen_logic.listen_main import (
     listen_to_agendas_create_init_job_from_guts,
@@ -100,9 +104,9 @@ class MomentUnit:
     paybook: TranBook = None
     offi_times: set[TimeLinePoint] = None
     knot: str = None
-    fund_iota: FundIota = None
-    respect_bit: BitNum = None
-    penny: PennyNum = None
+    fund_grain: FundGrain = None
+    respect_grain: RespectGrain = None
+    money_grain: MoneyGrain = None
     job_listen_rotations: int = None
     _offi_time_max: TimeLinePoint = None
     _moment_dir: str = None
@@ -157,9 +161,9 @@ class MomentUnit:
             belief_name,
             self.moment_label,
             knot=self.knot,
-            fund_iota=self.fund_iota,
-            respect_bit=self.respect_bit,
-            penny=self.penny,
+            fund_grain=self.fund_grain,
+            respect_grain=self.respect_grain,
+            money_grain=self.money_grain,
         )
 
     def create_gut_file_if_none(self, belief_name: BeliefName) -> None:
@@ -236,10 +240,10 @@ class MomentUnit:
             "moment_label": self.moment_label,
             "moment_mstr_dir": self.moment_mstr_dir,
             "knot": self.knot,
-            "fund_iota": self.fund_iota,
-            "penny": self.penny,
+            "fund_grain": self.fund_grain,
+            "money_grain": self.money_grain,
             "beliefbudhistorys": self._get_beliefbudhistorys_dict(),
-            "respect_bit": self.respect_bit,
+            "respect_grain": self.respect_grain,
             "timeline": self.timeline.to_dict(),
             "offi_times": list(self.offi_times),
         }
@@ -356,7 +360,7 @@ class MomentUnit:
             event_int=past_event_int,
             celldepth=budunit.celldepth,
             quota=budunit.quota,
-            penny=self.penny,
+            money_grain=self.money_grain,
         )
         root_cell_dir = create_cell_dir_path(
             self.moment_mstr_dir, self.moment_label, belief_name, bud_time, []
@@ -398,9 +402,9 @@ def momentunit_shop(
     timeline: TimeLineUnit = None,
     offi_times: set[TimeLinePoint] = None,
     knot: str = None,
-    fund_iota: float = None,
-    respect_bit: float = None,
-    penny: float = None,
+    fund_grain: float = None,
+    respect_grain: float = None,
+    money_grain: float = None,
     job_listen_rotations: int = None,
 ) -> MomentUnit:
     if timeline is None:
@@ -415,9 +419,9 @@ def momentunit_shop(
         paybook=tranbook_shop(moment_label),
         offi_times=get_empty_set_if_None(offi_times),
         knot=default_knot_if_None(knot),
-        fund_iota=default_fund_iota_if_None(fund_iota),
-        respect_bit=default_RespectBit_if_None(respect_bit),
-        penny=filter_penny(penny),
+        fund_grain=default_grain_num_if_None(fund_grain),
+        respect_grain=default_grain_num_if_None(respect_grain),
+        money_grain=default_grain_num_if_None(money_grain),
         all_tranbook=tranbook_shop(moment_label),
         job_listen_rotations=job_listen_rotations,
     )
@@ -442,9 +446,9 @@ def get_momentunit_from_dict(moment_dict: dict) -> MomentUnit:
         moment_mstr_dir=moment_dict.get("moment_mstr_dir"),
         offi_times=set(moment_dict.get("offi_times")),
         knot=moment_dict.get("knot"),
-        fund_iota=moment_dict.get("fund_iota"),
-        respect_bit=moment_dict.get("respect_bit"),
-        penny=moment_dict.get("penny"),
+        fund_grain=moment_dict.get("fund_grain"),
+        respect_grain=moment_dict.get("respect_grain"),
+        money_grain=moment_dict.get("money_grain"),
     )
     moment_dict_timeline_value = moment_dict.get("timeline")
     if moment_dict_timeline_value:

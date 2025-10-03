@@ -1,7 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import create_insert_query
 from src.ch07_belief_logic.belief_config import get_belief_calc_dimen_args
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.db_obj_belief_tool import (
     create_beliefunit_metrics_insert_sqlstr,
     create_blrawar_metrics_insert_sqlstr,
@@ -16,6 +15,7 @@ from src.ch18_etl_toolbox.db_obj_belief_tool import (
     create_blrreas_metrics_insert_sqlstr,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import create_job_tables
+from src.ref.ch18_keywords import Ch18Keywords as wx
 
 
 def test_create_beliefunit_metrics_insert_sqlstr_ReturnsObj():
@@ -35,11 +35,11 @@ def test_create_beliefunit_metrics_insert_sqlstr_ReturnsObj():
     x_tree_traverse_count = 7
     x_credor_respect = 88.2
     x_debtor_respect = 88.4
-    x_fund_iota = 3
+    x_fund_grain = 3
     x_fund_pool = 3000
     x_max_tree_traverse = 22
-    x_penny = 4
-    x_respect_bit = 0.2
+    x_money_grain = 4
+    x_respect_grain = 0.2
     x_tally = 6
     values_dict = {
         "moment_label": x_moment_label,
@@ -52,11 +52,11 @@ def test_create_beliefunit_metrics_insert_sqlstr_ReturnsObj():
         "tree_traverse_count": x_tree_traverse_count,
         "credor_respect": x_credor_respect,
         "debtor_respect": x_debtor_respect,
-        "fund_iota": x_fund_iota,
+        "fund_grain": x_fund_grain,
         "fund_pool": x_fund_pool,
         "max_tree_traverse": x_max_tree_traverse,
-        "penny": x_penny,
-        "respect_bit": x_respect_bit,
+        "money_grain": x_money_grain,
+        "respect_grain": x_respect_grain,
         "tally": x_tally,
     }
     # all args included in values dict
@@ -99,7 +99,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     x_all_voice_debt = 3
     x_descendant_pledge_count = 4
     x_fund_cease = 5
-    x_fund_iota = 6
+    x_fund_grain = 6
     x_fund_onset = 7
     x_fund_ratio = 8
     x_gogo_calc = 9
@@ -128,7 +128,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
         "all_voice_debt": x_all_voice_debt,
         "descendant_pledge_count": x_descendant_pledge_count,
         "fund_cease": x_fund_cease,
-        "fund_iota": x_fund_iota,
+        "fund_grain": x_fund_grain,
         "fund_onset": x_fund_onset,
         "fund_ratio": x_fund_ratio,
         "gogo_calc": x_gogo_calc,
@@ -718,7 +718,7 @@ def test_create_blrgrou_metrics_insert_sqlstr_ReturnsObj():
     x_group_title = 1
     x_credor_pool = 2
     x_debtor_pool = 3
-    x_fund_iota = 4
+    x_fund_grain = 4
     x_fund_give = 5
     x_fund_take = 6
     x_fund_agenda_give = 7
@@ -730,7 +730,7 @@ def test_create_blrgrou_metrics_insert_sqlstr_ReturnsObj():
         "group_title": x_group_title,
         "credor_pool": x_credor_pool,
         "debtor_pool": x_debtor_pool,
-        "fund_iota": x_fund_iota,
+        "fund_grain": x_fund_grain,
         "fund_give": x_fund_give,
         "fund_take": x_fund_take,
         "fund_agenda_give": x_fund_agenda_give,

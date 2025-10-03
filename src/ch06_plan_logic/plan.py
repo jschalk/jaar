@@ -15,12 +15,7 @@ from src.ch02_rope_logic.rope import (
     rebuild_rope,
     replace_knot,
 )
-from src.ch03_finance_logic.allot import allot_scale
-from src.ch03_finance_logic.finance_config import (
-    FundIota,
-    FundNum,
-    default_fund_iota_if_None,
-)
+from src.ch03_allot_toolbox.allot import allot_scale, default_grain_num_if_None
 from src.ch04_voice_logic.group import (
     AwardHeir,
     AwardLine,
@@ -28,13 +23,13 @@ from src.ch04_voice_logic.group import (
     GroupUnit,
     awardheir_shop,
     awardline_shop,
-    awardunits_get_from_dict,
+    get_awardunits_from_dict,
 )
 from src.ch04_voice_logic.labor import (
     LaborHeir,
     LaborUnit,
+    get_laborunit_from_dict,
     laborheir_shop,
-    laborunit_get_from_dict,
     laborunit_shop,
 )
 from src.ch05_reason_logic.reason import (
@@ -47,13 +42,15 @@ from src.ch05_reason_logic.reason import (
     RopeTerm,
     factheir_shop,
     factunit_shop,
-    factunits_get_from_dict,
     get_dict_from_factunits,
+    get_factunits_from_dict,
+    get_reasonunits_from_dict,
     reasonheir_shop,
-    reasons_get_from_dict,
     reasonunit_shop,
 )
 from src.ch06_plan_logic._ref.ch06_semantic_types import (
+    FundGrain,
+    FundNum,
     GroupTitle,
     LabelTerm,
     RopeTerm,
@@ -62,7 +59,7 @@ from src.ch06_plan_logic._ref.ch06_semantic_types import (
 )
 from src.ch06_plan_logic.healer import (
     HealerUnit,
-    healerunit_get_from_dict,
+    get_healerunit_from_dict,
     healerunit_shop,
 )
 from src.ch06_plan_logic.range_toolbox import RangeUnit, get_morphed_rangeunit
@@ -238,7 +235,7 @@ class PlanUnit:
     descendant_pledge_count : int Count of descendant plans marked as pledges.
     factheirs : dict[RopeTerm, FactHeir] parent plan provided facts.
     fund_ratio : float
-    fund_iota : FundIota Smallest indivisible funding component.
+    fund_grain : FundGrain Smallest indivisible funding component.
     fund_onset : FundNum Point at which funding onsets inside BeliefUnit funding range
     fund_cease : FundNum Point at which funding ceases inside BeliefUnit funding range
     healerunit_ratio : float
@@ -283,7 +280,7 @@ class PlanUnit:
     descendant_pledge_count: int = None
     factheirs: dict[RopeTerm, FactHeir] = None
     fund_ratio: float = None
-    fund_iota: FundIota = None
+    fund_grain: FundGrain = None
     fund_onset: FundNum = None
     fund_cease: FundNum = None
     healerunit_ratio: float = None
@@ -527,8 +524,8 @@ class PlanUnit:
             give_ledger[x_awardee_title] = x_awardheir.give_force
             take_ledger[x_awardee_title] = x_awardheir.take_force
         x_fund_share = self.get_fund_share()
-        give_allot = allot_scale(give_ledger, x_fund_share, self.fund_iota)
-        take_allot = allot_scale(take_ledger, x_fund_share, self.fund_iota)
+        give_allot = allot_scale(give_ledger, x_fund_share, self.fund_grain)
+        take_allot = allot_scale(take_ledger, x_fund_share, self.fund_grain)
         for x_awardee_title, x_awardheir in self.awardheirs.items():
             x_awardheir.fund_give = give_allot.get(x_awardee_title)
             x_awardheir.fund_take = take_allot.get(x_awardee_title)
@@ -1033,7 +1030,7 @@ def planunit_shop(
     # Calculated fields
     tree_level: int = None,
     fund_ratio: float = None,
-    fund_iota: FundIota = None,
+    fund_grain: FundGrain = None,
     fund_onset: FundNum = None,
     fund_cease: FundNum = None,
     task: bool = None,
@@ -1077,7 +1074,7 @@ def planunit_shop(
         # Calculated fields
         tree_level=tree_level,
         fund_ratio=fund_ratio,
-        fund_iota=default_fund_iota_if_None(fund_iota),
+        fund_grain=default_grain_num_if_None(fund_grain),
         fund_onset=fund_onset,
         fund_cease=fund_cease,
         task=task,
@@ -1098,30 +1095,30 @@ def planunit_shop(
 def get_obj_from_plan_dict(x_dict: dict[str, dict], dict_key: str) -> any:
     if dict_key == "reasonunits":
         return (
-            reasons_get_from_dict(x_dict[dict_key])
+            get_reasonunits_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
             else None
         )
     elif dict_key == "laborunit":
         return (
-            laborunit_get_from_dict(x_dict[dict_key])
+            get_laborunit_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
             else laborunit_shop()
         )
     elif dict_key == "healerunit":
         return (
-            healerunit_get_from_dict(x_dict[dict_key])
+            get_healerunit_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
             else healerunit_shop()
         )
     elif dict_key == "factunits":
         facts_dict = get_empty_dict_if_None(x_dict.get(dict_key))
-        return factunits_get_from_dict(facts_dict)
+        return get_factunits_from_dict(facts_dict)
     elif dict_key == "awardunits":
         return (
-            awardunits_get_from_dict(x_dict[dict_key])
+            get_awardunits_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
-            else awardunits_get_from_dict({})
+            else get_awardunits_from_dict({})
         )
     elif dict_key in {"kids"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else {}

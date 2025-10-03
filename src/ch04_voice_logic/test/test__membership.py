@@ -1,5 +1,4 @@
 from src.ch01_data_toolbox.dict_toolbox import get_json_from_dict, x_is_json
-from src.ch04_voice_logic._ref.ch04_keywords import Ch04Keywords as wx
 from src.ch04_voice_logic.group import (
     AwardHeir,
     AwardLine,
@@ -15,6 +14,7 @@ from src.ch04_voice_logic.group import (
     membership_shop,
     memberships_get_from_dict,
 )
+from src.ref.ch04_keywords import Ch04Keywords as wx
 
 
 def test_GroupCore_Exists():

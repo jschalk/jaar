@@ -85,7 +85,7 @@ def factunit_shop(
     )
 
 
-def factunits_get_from_dict(x_dict: dict) -> dict[RopeTerm, FactUnit]:
+def get_factunits_from_dict(x_dict: dict) -> dict[RopeTerm, FactUnit]:
     facts = {}
     for fact_dict in x_dict.values():
         x_fact_context = fact_dict["fact_context"]
@@ -682,7 +682,7 @@ def reasonheir_shop(
 
 
 # class Reasonsshop:
-def reasons_get_from_dict(reasons_dict: dict) -> dict[RopeTerm, ReasonUnit]:
+def get_reasonunits_from_dict(reasons_dict: dict) -> dict[RopeTerm, ReasonUnit]:
     x_dict = {}
     for reason_dict in reasons_dict.values():
         x_reasonunit = reasonunit_shop(reason_context=reason_dict["reason_context"])

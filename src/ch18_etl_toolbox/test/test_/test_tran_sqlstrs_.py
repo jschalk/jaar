@@ -15,7 +15,6 @@ from src.ch17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     get_idea_into_dimen_raw_query,
 )
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
     CREATE_MOMENT_EVENT_TIME_AGG_SQLSTR,
@@ -30,6 +29,7 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_sound_and_heard_tables,
     get_idea_stageble_put_dimens,
 )
+from src.ref.ch18_keywords import Ch18Keywords as wx
 
 
 def test_ALL_DIMEN_ABBV7_has_all_dimens():

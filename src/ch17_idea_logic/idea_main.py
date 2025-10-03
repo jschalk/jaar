@@ -213,9 +213,9 @@ def moment_build_from_df(
     br00003_df: DataFrame,
     br00004_df: DataFrame,
     br00005_df: DataFrame,
-    x_fund_iota: float,
-    x_respect_bit: float,
-    x_penny: float,
+    x_fund_grain: float,
+    x_respect_grain: float,
+    x_money_grain: float,
     x_moments_dir: str,
 ) -> dict[MomentLabel, MomentUnit]:
     moment_hours_dict = _get_moment_hours_dict(br00003_df)
@@ -240,9 +240,9 @@ def moment_build_from_df(
             moment_mstr_dir=x_moments_dir,
             timeline=x_timeline,
             knot=row["knot"],
-            fund_iota=x_fund_iota,
-            respect_bit=x_respect_bit,
-            penny=x_penny,
+            fund_grain=x_fund_grain,
+            respect_grain=x_respect_grain,
+            money_grain=x_money_grain,
             job_listen_rotations=row["job_listen_rotations"],
         )
         momentunit_dict[x_momentunit.moment_label] = x_momentunit

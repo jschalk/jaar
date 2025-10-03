@@ -4,10 +4,10 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_empty_dict_if_None,
     get_json_from_dict,
 )
-from src.ch03_finance_logic.allot import allot_scale
+from src.ch03_allot_toolbox.allot import allot_scale
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, VoiceName
-from src.ch12_hub_toolbox.hubunit import HubUnit
+from src.ch12_belief_file_toolbox.hubunit import HubUnit
 
 
 def get_credorledger(x_belief: BeliefUnit) -> dict[VoiceName, float]:
@@ -49,7 +49,7 @@ def create_riverbook(
     x_riverbook._rivergrants = allot_scale(
         ledger=keep_credorledger,
         scale_number=book_point_amount,
-        grain_unit=x_riverbook.hubunit.penny,
+        grain_unit=x_riverbook.hubunit.money_grain,
     )
     return x_riverbook
 

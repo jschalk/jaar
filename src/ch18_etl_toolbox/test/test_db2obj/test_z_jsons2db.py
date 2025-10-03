@@ -60,18 +60,18 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
     x_tree_traverse_count = 7
     x_credor_respect = 88.2
     x_debtor_respect = 88.4
-    x_fund_iota = 3.0
+    x_fund_grain = 3.0
     x_fund_pool = 3000.0
     x_max_tree_traverse = 22
-    x_penny = 4.0
-    x_respect_bit = 0.2
+    x_money_grain = 4.0
+    x_respect_grain = 0.2
     x_tally = 6
     sue_belief = beliefunit_shop(belief_name=x_belief_name, moment_label=x_moment_label)
     sue_belief.fund_pool = x_fund_pool
-    sue_belief.fund_iota = x_fund_iota
-    sue_belief.penny = x_penny
+    sue_belief.fund_grain = x_fund_grain
+    sue_belief.money_grain = x_money_grain
     sue_belief.tally = x_tally
-    sue_belief.respect_bit = x_respect_bit
+    sue_belief.respect_grain = x_respect_grain
     sue_belief.max_tree_traverse = x_max_tree_traverse
     sue_belief.keeps_buildable = x_keeps_buildable
     sue_belief.keeps_justified = x_keeps_justified
@@ -105,9 +105,9 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
             x_fund_pool,
             x_max_tree_traverse,
             x_tally,
-            x_fund_iota,
-            x_penny,
-            x_respect_bit,
+            x_fund_grain,
+            x_money_grain,
+            x_respect_grain,
             x_rational,
             x_keeps_justified,
             x_offtrack_fund,
@@ -152,7 +152,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_problem_bool = 15
     x_active = 16
     x_task = 17
-    x_fund_iota = 18.0
+    x_fund_grain = 18.0
     x_fund_onset = 19.0
     x_fund_cease = 20.0
     x_fund_ratio = 21.0
@@ -181,7 +181,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan.problem_bool = x_problem_bool
     x_plan.active = x_active
     x_plan.task = x_task
-    x_plan.fund_iota = x_fund_iota
+    x_plan.fund_grain = x_fund_grain
     x_plan.fund_onset = x_fund_onset
     x_plan.fund_cease = x_fund_cease
     x_plan.fund_ratio = x_fund_ratio
@@ -206,7 +206,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan.problem_bool = x_problem_bool
     x_plan.active = x_active
     x_plan.task = x_task
-    x_plan.fund_iota = x_fund_iota
+    x_plan.fund_grain = x_fund_grain
     x_plan.fund_onset = x_fund_onset
     x_plan.fund_cease = x_fund_cease
     x_plan.fund_ratio = x_fund_ratio
@@ -250,7 +250,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
             x_star,
             x_pledge,
             x_problem_bool,
-            x_fund_iota,
+            x_fund_grain,
             x_active,
             x_task,
             x_fund_onset,
@@ -571,7 +571,7 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
     x_moment_label = 1
     x_belief_name = 2
     x_group_title = 3
-    x_fund_iota = 4
+    x_fund_grain = 4
     x_knot = 5
     x_credor_pool = 6
     x_debtor_pool = 7
@@ -581,7 +581,7 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
     x_fund_agenda_take = 11
     x_group = groupunit_shop(x_group_title)
     x_group.group_title = x_group_title
-    x_group.fund_iota = x_fund_iota
+    x_group.fund_grain = x_fund_grain
     x_group.knot = x_knot
     x_group.credor_pool = x_credor_pool
     x_group.debtor_pool = x_debtor_pool
@@ -609,7 +609,7 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
             str(x_moment_label),
             str(x_belief_name),
             str(x_group_title),
-            x_fund_iota,
+            x_fund_grain,
             str(x_knot),
             x_credor_pool,
             x_debtor_pool,

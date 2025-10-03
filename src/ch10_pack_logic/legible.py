@@ -363,7 +363,7 @@ def add_belief_planunit_update_to_legible_list(
         morph_value = planunit_atom.get_value("morph")
         star_value = planunit_atom.get_value("star")
         pledge_value = planunit_atom.get_value("pledge")
-        x_str = f"Plan '{rope_value}' set these attributes: "
+        x_str = f"Plan '{rope_value}' set these attrs: "
         if addin_value is not None:
             x_str += f"addin={addin_value}."
         if begin_value is not None:

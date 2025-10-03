@@ -1,6 +1,8 @@
-from src.ch02_rope_logic._ref.ch02_semantic_types import (
+from src.ch03_allot_toolbox._ref.ch03_semantic_types import (
     FirstLabel,
     LabelTerm,
+    RespectGrain,
+    RespectNum,
     RopeTerm,
     default_knot_if_None,
 )
@@ -29,5 +31,17 @@ class GroupTitle(TitleTerm):  # Created to help track the object class relations
 
 class HealerName(NameTerm):
     """A LabelTerm used to identify a Problem's Healer"""
+
+    pass
+
+
+class FundNum(float):
+    """FundNum inherits from float class"""
+
+    pass
+
+
+class FundGrain(float):
+    """Smallest Unit of fund_num"""
 
     pass

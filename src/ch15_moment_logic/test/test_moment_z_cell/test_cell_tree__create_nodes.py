@@ -1,11 +1,11 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch11_bud_logic.cell import cellunit_shop
-from src.ch12_hub_toolbox.ch12_path import (
+from src.ch12_belief_file_toolbox.ch12_path import (
     create_cell_dir_path as cell_dir,
     create_cell_json_path as node_path,
 )
-from src.ch12_hub_toolbox.hub_tool import (
+from src.ch12_belief_file_toolbox.hub_tool import (
     cellunit_get_from_dir,
     cellunit_save_to_dir,
     save_arbitrary_beliefevent as save_beliefevent,
@@ -123,25 +123,25 @@ def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     assert bob37_cell.event_int == 56
     assert bob37_cell.celldepth == 1
     assert bob37_cell.bud_belief_name == bob_str
-    assert bob37_cell.penny == 1
+    assert bob37_cell.money_grain == 1
     assert bob37_cell.quota == 450
     assert bob37_bob_cell.ancestors == [bob_str]
     assert bob37_bob_cell.event_int == 56
     assert bob37_bob_cell.celldepth == 0
     assert bob37_bob_cell.bud_belief_name == bob_str
-    assert bob37_bob_cell.penny == 1
+    assert bob37_bob_cell.money_grain == 1
     assert bob37_bob_cell.quota == 150
     assert bob37_yao_cell.ancestors == [yao_str]
     assert bob37_yao_cell.event_int == 56
     assert bob37_yao_cell.celldepth == 0
     assert bob37_yao_cell.bud_belief_name == bob_str
-    assert bob37_yao_cell.penny == 1
+    assert bob37_yao_cell.money_grain == 1
     assert bob37_yao_cell.quota == 150
     assert bob37_zia_cell.ancestors == [zia_str]
     assert bob37_zia_cell.event_int == 56
     assert bob37_zia_cell.celldepth == 0
     assert bob37_zia_cell.bud_belief_name == bob_str
-    assert bob37_zia_cell.penny == 1
+    assert bob37_zia_cell.money_grain == 1
     assert bob37_zia_cell.quota == 150
     gen_bob37_quota_ledger = bob37_cell.get_beliefevents_quota_ledger()
     gen_bob37_bob_quota_ledger = bob37_bob_cell.get_beliefevents_quota_ledger()
@@ -218,25 +218,25 @@ def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cl
     assert bob37_cell.event_int == 55
     assert bob37_cell.celldepth == 1
     assert bob37_cell.bud_belief_name == bob_str
-    assert bob37_cell.penny == 1
+    assert bob37_cell.money_grain == 1
     assert bob37_cell.quota == 450
     assert bob37_bob_cell.ancestors == [bob_str]
     assert bob37_bob_cell.event_int == 55
     assert bob37_bob_cell.celldepth == 0
     assert bob37_bob_cell.bud_belief_name == bob_str
-    assert bob37_bob_cell.penny == 1
+    assert bob37_bob_cell.money_grain == 1
     assert bob37_bob_cell.quota == 150
     assert bob37_yao_cell.ancestors == [yao_str]
     assert bob37_yao_cell.event_int == 44
     assert bob37_yao_cell.celldepth == 0
     assert bob37_yao_cell.bud_belief_name == bob_str
-    assert bob37_yao_cell.penny == 1
+    assert bob37_yao_cell.money_grain == 1
     assert bob37_yao_cell.quota == 150
     assert bob37_zia_cell.ancestors == [zia_str]
     assert bob37_zia_cell.event_int == 33
     assert bob37_zia_cell.celldepth == 0
     assert bob37_zia_cell.bud_belief_name == bob_str
-    assert bob37_zia_cell.penny == 1
+    assert bob37_zia_cell.money_grain == 1
     assert bob37_zia_cell.quota == 150
     gen_bob37_quota_ledger = bob37_cell.get_beliefevents_quota_ledger()
     gen_bob37_bob_quota_ledger = bob37_bob_cell.get_beliefevents_quota_ledger()
@@ -315,13 +315,13 @@ def test_create_cell_tree_Scenaro4_LedgerDepth1_OneBeliefHasNoPast_beliefevent(
     assert bob37_bob_cell.event_int == 55
     assert bob37_bob_cell.celldepth == 0
     assert bob37_bob_cell.bud_belief_name == bob_str
-    assert bob37_bob_cell.penny == 1
+    assert bob37_bob_cell.money_grain == 1
     assert bob37_bob_cell.quota == 150
     assert bob37_yao_cell.ancestors == [yao_str]
     assert bob37_yao_cell.event_int == 44
     assert bob37_yao_cell.celldepth == 0
     assert bob37_yao_cell.bud_belief_name == bob_str
-    assert bob37_yao_cell.penny == 1
+    assert bob37_yao_cell.money_grain == 1
     assert bob37_yao_cell.quota == 150
     gen_bob37_quota_ledger = bob37_cell.get_beliefevents_quota_ledger()
     gen_bob37_bob_quota_ledger = bob37_bob_cell.get_beliefevents_quota_ledger()

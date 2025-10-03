@@ -3,7 +3,7 @@ from src.ch05_reason_logic.reason import FactUnit, factunit_shop
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.ch12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
+from src.ch12_belief_file_toolbox.hub_tool import open_gut_file, save_gut_file
 from src.ch15_moment_logic.moment_main import MomentUnit, momentunit_shop
 from src.ch15_moment_logic.test._util.ch15_env import get_chapter_temp_dir
 

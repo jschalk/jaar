@@ -1,12 +1,11 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import count_dirs_files, open_json, save_file
 from src.ch11_bud_logic.bud import DEFAULT_CELLDEPTH
-from src.ch12_hub_toolbox.ch12_path import (
+from src.ch12_belief_file_toolbox.ch12_path import (
     create_cell_json_path,
     create_moment_beliefs_dir_path,
     create_moment_json_path,
 )
-from src.ch15_moment_logic._ref.ch15_keywords import Ch15Keywords as wx
 from src.ch15_moment_logic.moment_main import (
     _get_ote1_max_past_event_int,
     momentunit_shop,
@@ -15,6 +14,7 @@ from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
+from src.ref.ch15_keywords import Ch15Keywords as wx
 
 
 def test_get_ote1_max_past_event_int_ReturnsObj_Scenaro0(
@@ -135,11 +135,11 @@ def test_MomentUnit_create_buds_root_cells_Scenaro3_BudExistsNotPerfectMatch_bud
     # ESTABLISH
     mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
-    a23_penny = 2
+    a23_money_grain = 2
 
     # Create MomentUnit with bob bud at time 37
-    amy23_moment = momentunit_shop(a23_str, mstr_dir, penny=a23_penny)
-    print(f"{amy23_moment.penny=}")
+    amy23_moment = momentunit_shop(a23_str, mstr_dir, money_grain=a23_money_grain)
+    print(f"{amy23_moment.money_grain=}")
     bob_str = "Bob"
     timepoint37 = 37
     bud1_quota = 450
@@ -170,5 +170,5 @@ def test_MomentUnit_create_buds_root_cells_Scenaro3_BudExistsNotPerfectMatch_bud
     assert cell_dict.get(wx.event_int) == event3
     assert cell_dict.get(wx.celldepth) == bud1_celldepth
     assert cell_dict.get(wx.bud_belief_name) == bob_str
-    assert cell_dict.get(wx.penny) == a23_penny
+    assert cell_dict.get(wx.money_grain) == a23_money_grain
     assert cell_dict.get(wx.quota) == bud1_quota

@@ -1,5 +1,5 @@
-from src.ch22_belief_viewer._ref.ch22_keywords import Ch22Keywords as wx
 from src.ch22_belief_viewer.belief_viewer_app import get_belief_viewer_template
+from src.ref.ch22_keywords import Ch22Keywords as wx
 
 
 def test_get_belief_viewer_template_ReturnsObj():
@@ -37,7 +37,7 @@ def test_get_belief_viewer_template_ReturnsObj():
         wx.close,
         wx.denom,
         wx.factunits,
-        wx.fund_iota,
+        wx.fund_grain,
         wx.fund_share,
         wx.gogo_want,
         # wx.healerunit,

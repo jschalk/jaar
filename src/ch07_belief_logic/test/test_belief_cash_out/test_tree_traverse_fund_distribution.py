@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import RopeTerm, to_rope
-from src.ch03_finance_logic.finance_config import default_fund_pool
+from src.ch03_allot_toolbox.allot import default_pool_num
 from src.ch04_voice_logic.group import awardline_shop, awardunit_shop
 from src.ch04_voice_logic.voice import voiceunit_shop
 from src.ch06_plan_logic.plan import PlanUnit, planunit_shop
@@ -100,30 +100,20 @@ def test_BeliefUnit_cashout_Sets_planunit_fund_onset_fund_cease_Scenario1():
 
     # THEN
     assert yao_beliefunit.planroot.fund_onset == 0.0
-    assert yao_beliefunit.planroot.fund_cease == default_fund_pool()
+    assert yao_beliefunit.planroot.fund_cease == default_pool_num()
     assert yao_beliefunit.get_plan_obj(auto_rope).fund_onset == 0.0
-    assert (
-        yao_beliefunit.get_plan_obj(auto_rope).fund_cease == default_fund_pool() * 0.1
-    )
-    assert (
-        yao_beliefunit.get_plan_obj(carn_rope).fund_onset == default_fund_pool() * 0.1
-    )
-    assert (
-        yao_beliefunit.get_plan_obj(carn_rope).fund_cease == default_fund_pool() * 0.7
-    )
-    assert (
-        yao_beliefunit.get_plan_obj(coal_rope).fund_onset == default_fund_pool() * 0.7
-    )
-    assert (
-        yao_beliefunit.get_plan_obj(coal_rope).fund_cease == default_fund_pool() * 1.0
-    )
+    assert yao_beliefunit.get_plan_obj(auto_rope).fund_cease == default_pool_num() * 0.1
+    assert yao_beliefunit.get_plan_obj(carn_rope).fund_onset == default_pool_num() * 0.1
+    assert yao_beliefunit.get_plan_obj(carn_rope).fund_cease == default_pool_num() * 0.7
+    assert yao_beliefunit.get_plan_obj(coal_rope).fund_onset == default_pool_num() * 0.7
+    assert yao_beliefunit.get_plan_obj(coal_rope).fund_cease == default_pool_num() * 1.0
 
     duck_after = yao_beliefunit.get_plan_obj(rope=duck_rope)
-    assert duck_after.fund_onset == default_fund_pool() * 0.1
-    assert duck_after.fund_cease == default_fund_pool() * 0.5
+    assert duck_after.fund_onset == default_pool_num() * 0.1
+    assert duck_after.fund_cease == default_pool_num() * 0.5
     lamb_after = yao_beliefunit.get_plan_obj(rope=lamb_rope)
-    assert lamb_after.fund_onset == default_fund_pool() * 0.5
-    assert lamb_after.fund_cease == default_fund_pool() * 0.7
+    assert lamb_after.fund_onset == default_pool_num() * 0.5
+    assert lamb_after.fund_cease == default_pool_num() * 0.7
 
 
 def test_BeliefUnit_cashout_Sets_planunit_fund_onset_fund_cease_Scenario2_DifferentOrderOfPlans():
@@ -174,30 +164,20 @@ def test_BeliefUnit_cashout_Sets_planunit_fund_onset_fund_cease_Scenario2_Differ
 
     # THEN
     assert yao_beliefunit.planroot.fund_onset == 0.0
-    assert yao_beliefunit.planroot.fund_cease == default_fund_pool()
+    assert yao_beliefunit.planroot.fund_cease == default_pool_num()
     assert yao_beliefunit.get_plan_obj(auto_rope).fund_onset == 0.0
-    assert (
-        yao_beliefunit.get_plan_obj(auto_rope).fund_cease == default_fund_pool() * 0.1
-    )
-    assert (
-        yao_beliefunit.get_plan_obj(coal_rope).fund_onset == default_fund_pool() * 0.1
-    )
-    assert (
-        yao_beliefunit.get_plan_obj(coal_rope).fund_cease == default_fund_pool() * 0.4
-    )
-    assert (
-        yao_beliefunit.get_plan_obj(yarn_rope).fund_onset == default_fund_pool() * 0.4
-    )
-    assert (
-        yao_beliefunit.get_plan_obj(yarn_rope).fund_cease == default_fund_pool() * 1.0
-    )
+    assert yao_beliefunit.get_plan_obj(auto_rope).fund_cease == default_pool_num() * 0.1
+    assert yao_beliefunit.get_plan_obj(coal_rope).fund_onset == default_pool_num() * 0.1
+    assert yao_beliefunit.get_plan_obj(coal_rope).fund_cease == default_pool_num() * 0.4
+    assert yao_beliefunit.get_plan_obj(yarn_rope).fund_onset == default_pool_num() * 0.4
+    assert yao_beliefunit.get_plan_obj(yarn_rope).fund_cease == default_pool_num() * 1.0
 
     duck_after = yao_beliefunit.get_plan_obj(rope=duck_rope)
-    assert duck_after.fund_onset == default_fund_pool() * 0.4
-    assert duck_after.fund_cease == default_fund_pool() * 0.8
+    assert duck_after.fund_onset == default_pool_num() * 0.4
+    assert duck_after.fund_cease == default_pool_num() * 0.8
     lamb_after = yao_beliefunit.get_plan_obj(rope=lamb_rope)
-    assert lamb_after.fund_onset == default_fund_pool() * 0.8
-    assert lamb_after.fund_cease == default_fund_pool() * 1.0
+    assert lamb_after.fund_onset == default_pool_num() * 0.8
+    assert lamb_after.fund_cease == default_pool_num() * 1.0
 
 
 def test_BeliefUnit_cashout_Sets_fund_ratio_WithSomePlansOfZero_starScenario0():
@@ -353,9 +333,9 @@ def test_BeliefUnit_cashout_WhenPlanUnitHasFundsBut_kidsHaveNostarDistributeFund
     assert sue_beliefunit.get_groupunit(yao_str).fund_give == 0
     assert sue_beliefunit.get_groupunit(yao_str).fund_take == 0
 
-    assert sue_beliefunit.offtrack_fund == clean_fund_ratio * default_fund_pool()
-    assert sue_beliefunit.get_voice(yao_str).fund_give == default_fund_pool()
-    assert sue_beliefunit.get_voice(yao_str).fund_take == default_fund_pool()
+    assert sue_beliefunit.offtrack_fund == clean_fund_ratio * default_pool_num()
+    assert sue_beliefunit.get_voice(yao_str).fund_give == default_pool_num()
+    assert sue_beliefunit.get_voice(yao_str).fund_take == default_pool_num()
 
 
 def test_BeliefUnit_cashout_TreeTraverseSetsAwardLine_fundFromRoot():
@@ -409,9 +389,9 @@ def test_BeliefUnit_cashout_TreeTraverseSetsAwardLine_fundFromRoot():
     # for kid_plan in root_plan.kids.values():
     #     sum_x += kid_plan.fund_ratio
     #     print(f"  {kid_plan.fund_ratio=} {sum_x=} {kid_plan.get_plan_rope()=}")
-    assert round(sue_awardline.fund_give, 15) == default_fund_pool()
-    assert round(sue_awardline.fund_take, 15) == default_fund_pool()
-    x_awardline = awardline_shop(sue_str, default_fund_pool(), default_fund_pool())
+    assert round(sue_awardline.fund_give, 15) == default_pool_num()
+    assert round(sue_awardline.fund_take, 15) == default_pool_num()
+    x_awardline = awardline_shop(sue_str, default_pool_num(), default_pool_num())
     assert sue_belief.planroot.awardlines == {x_awardline.awardee_title: x_awardline}
 
 
@@ -435,8 +415,8 @@ def test_BeliefUnit_cashout_TreeTraverseSets_awardlines_ToRootPlanUnitFromNon_Ro
     print(f"{sue_belief.planroot.awardlines=}")
     x_awardline = awardline_shop(
         awardee_title=sue_str,
-        fund_give=0.230769231 * default_fund_pool(),
-        fund_take=0.230769231 * default_fund_pool(),
+        fund_give=0.230769231 * default_pool_num(),
+        fund_take=0.230769231 * default_pool_num(),
     )
     assert sue_belief.planroot.awardlines == {x_awardline.awardee_title: x_awardline}
     casa_planunit = sue_belief.get_plan_obj(casa_rope)
@@ -471,18 +451,18 @@ def test_BeliefUnit_cashout_WithRootLevelAwardUnitSetsGroupUnit_fund_give_fund_t
     yao_groupunit = sue_belief.get_groupunit(yao_str)
     zia_groupunit = sue_belief.get_groupunit(zia_str)
     xio_groupunit = sue_belief.get_groupunit(xio_str)
-    assert yao_groupunit.fund_give == 0.5 * default_fund_pool()
-    assert yao_groupunit.fund_take == 0.75 * default_fund_pool()
-    assert zia_groupunit.fund_give == 0.25 * default_fund_pool()
-    assert zia_groupunit.fund_take == 0.125 * default_fund_pool()
-    assert xio_groupunit.fund_give == 0.25 * default_fund_pool()
-    assert xio_groupunit.fund_take == 0.125 * default_fund_pool()
+    assert yao_groupunit.fund_give == 0.5 * default_pool_num()
+    assert yao_groupunit.fund_take == 0.75 * default_pool_num()
+    assert zia_groupunit.fund_give == 0.25 * default_pool_num()
+    assert zia_groupunit.fund_take == 0.125 * default_pool_num()
+    assert xio_groupunit.fund_give == 0.25 * default_pool_num()
+    assert xio_groupunit.fund_take == 0.125 * default_pool_num()
     cred_sum1 = yao_groupunit.fund_give
     cred_sum1 += zia_groupunit.fund_give + xio_groupunit.fund_give
-    assert cred_sum1 == 1 * default_fund_pool()
+    assert cred_sum1 == 1 * default_pool_num()
     debt_sum1 = yao_groupunit.fund_take
     debt_sum1 += zia_groupunit.fund_take + xio_groupunit.fund_take
-    assert debt_sum1 == 1 * default_fund_pool()
+    assert debt_sum1 == 1 * default_pool_num()
 
     # ESTABLISH
     sue_belief.set_voiceunit(voiceunit_shop(sue_str))
@@ -499,20 +479,20 @@ def test_BeliefUnit_cashout_WithRootLevelAwardUnitSetsGroupUnit_fund_give_fund_t
     zia_groupunit = sue_belief.get_groupunit(zia_str)
     xio_groupunit = sue_belief.get_groupunit(xio_str)
     sue_groupunit = sue_belief.get_groupunit(sue_str)
-    assert yao_groupunit.fund_give != 0.5 * default_fund_pool()
-    assert yao_groupunit.fund_take != 0.75 * default_fund_pool()
-    assert zia_groupunit.fund_give != 0.25 * default_fund_pool()
-    assert zia_groupunit.fund_take != 0.125 * default_fund_pool()
-    assert xio_groupunit.fund_give != 0.25 * default_fund_pool()
-    assert xio_groupunit.fund_take != 0.125 * default_fund_pool()
+    assert yao_groupunit.fund_give != 0.5 * default_pool_num()
+    assert yao_groupunit.fund_take != 0.75 * default_pool_num()
+    assert zia_groupunit.fund_give != 0.25 * default_pool_num()
+    assert zia_groupunit.fund_take != 0.125 * default_pool_num()
+    assert xio_groupunit.fund_give != 0.25 * default_pool_num()
+    assert xio_groupunit.fund_take != 0.125 * default_pool_num()
     assert sue_groupunit.fund_give is not None
     assert sue_groupunit.fund_take is not None
     cred_sum1 = yao_groupunit.fund_give + zia_groupunit.fund_give
     cred_sum1 += xio_groupunit.fund_give + sue_groupunit.fund_give
-    assert cred_sum1 == 1 * default_fund_pool()
+    assert cred_sum1 == 1 * default_pool_num()
     debt_sum1 = yao_groupunit.fund_take + zia_groupunit.fund_take
     debt_sum1 += xio_groupunit.fund_take + sue_groupunit.fund_take
-    assert round(debt_sum1) == 1 * default_fund_pool()
+    assert round(debt_sum1) == 1 * default_pool_num()
 
 
 def test_BeliefUnit_cashout_WithLevel3AwardUnitSetsGroupUnit_fund_give_fund_take():
@@ -545,20 +525,20 @@ def test_BeliefUnit_cashout_WithLevel3AwardUnitSetsGroupUnit_fund_give_fund_take
     yao_groupunit = x_belief.get_groupunit(yao_str)
     zia_groupunit = x_belief.get_groupunit(zia_str)
     xio_groupunit = x_belief.get_groupunit(xio_str)
-    assert yao_groupunit.fund_give == 0.5 * default_fund_pool()
-    assert yao_groupunit.fund_take == 0.75 * default_fund_pool()
-    assert zia_groupunit.fund_give == 0.25 * default_fund_pool()
-    assert zia_groupunit.fund_take == 0.125 * default_fund_pool()
-    assert xio_groupunit.fund_give == 0.25 * default_fund_pool()
-    assert xio_groupunit.fund_take == 0.125 * default_fund_pool()
+    assert yao_groupunit.fund_give == 0.5 * default_pool_num()
+    assert yao_groupunit.fund_take == 0.75 * default_pool_num()
+    assert zia_groupunit.fund_give == 0.25 * default_pool_num()
+    assert zia_groupunit.fund_take == 0.125 * default_pool_num()
+    assert xio_groupunit.fund_give == 0.25 * default_pool_num()
+    assert xio_groupunit.fund_take == 0.125 * default_pool_num()
     groupunit_fund_give_sum = (
         yao_groupunit.fund_give + zia_groupunit.fund_give + xio_groupunit.fund_give
     )
     groupunit_fund_take_sum = (
         yao_groupunit.fund_take + zia_groupunit.fund_take + xio_groupunit.fund_take
     )
-    assert groupunit_fund_give_sum == 1 * default_fund_pool()
-    assert groupunit_fund_take_sum == 1 * default_fund_pool()
+    assert groupunit_fund_give_sum == 1 * default_pool_num()
+    assert groupunit_fund_take_sum == 1 * default_pool_num()
 
 
 def test_BeliefUnit_cashout_CreatesNewGroupUnitAndSetsGroup_fund_give_fund_take():
@@ -592,20 +572,20 @@ def test_BeliefUnit_cashout_CreatesNewGroupUnitAndSetsGroup_fund_give_fund_take(
     zia_groupunit = x_belief.get_groupunit(zia_str)
     xio_groupunit = x_belief.get_groupunit(xio_str)
     assert len(x_belief.get_voiceunit_group_titles_dict()) != len(x_belief.groupunits)
-    assert yao_groupunit.fund_give == 0.5 * default_fund_pool()
-    assert yao_groupunit.fund_take == 0.75 * default_fund_pool()
-    assert zia_groupunit.fund_give == 0.25 * default_fund_pool()
-    assert zia_groupunit.fund_take == 0.125 * default_fund_pool()
-    assert xio_groupunit.fund_give == 0.25 * default_fund_pool()
-    assert xio_groupunit.fund_take == 0.125 * default_fund_pool()
+    assert yao_groupunit.fund_give == 0.5 * default_pool_num()
+    assert yao_groupunit.fund_take == 0.75 * default_pool_num()
+    assert zia_groupunit.fund_give == 0.25 * default_pool_num()
+    assert zia_groupunit.fund_take == 0.125 * default_pool_num()
+    assert xio_groupunit.fund_give == 0.25 * default_pool_num()
+    assert xio_groupunit.fund_take == 0.125 * default_pool_num()
     groupunit_fund_give_sum = (
         yao_groupunit.fund_give + zia_groupunit.fund_give + xio_groupunit.fund_give
     )
     groupunit_fund_take_sum = (
         yao_groupunit.fund_take + zia_groupunit.fund_take + xio_groupunit.fund_take
     )
-    assert groupunit_fund_give_sum == 1 * default_fund_pool()
-    assert groupunit_fund_take_sum == 1 * default_fund_pool()
+    assert groupunit_fund_give_sum == 1 * default_pool_num()
+    assert groupunit_fund_take_sum == 1 * default_pool_num()
 
 
 def test_BeliefUnit_cashout_WithLevel3AwardUnitAndEmptyAncestorsSetsGroupUnit_fund_give_fund_take():
@@ -661,19 +641,19 @@ def test_BeliefUnit_cashout_WithLevel3AwardUnitAndEmptyAncestorsSetsGroupUnit_fu
     yao_groupunit = x_belief.get_groupunit(yao_str)
     zia_groupunit = x_belief.get_groupunit(zia_str)
     xio_groupunit = x_belief.get_groupunit(xio_str)
-    assert yao_groupunit.fund_give == 0.125 * default_fund_pool()
-    assert yao_groupunit.fund_take == 0.1875 * default_fund_pool()
-    assert zia_groupunit.fund_give == 0.0625 * default_fund_pool()
-    assert zia_groupunit.fund_take == 0.03125 * default_fund_pool()
-    assert xio_groupunit.fund_give == 0.0625 * default_fund_pool()
-    assert xio_groupunit.fund_take == 0.03125 * default_fund_pool()
+    assert yao_groupunit.fund_give == 0.125 * default_pool_num()
+    assert yao_groupunit.fund_take == 0.1875 * default_pool_num()
+    assert zia_groupunit.fund_give == 0.0625 * default_pool_num()
+    assert zia_groupunit.fund_take == 0.03125 * default_pool_num()
+    assert xio_groupunit.fund_give == 0.0625 * default_pool_num()
+    assert xio_groupunit.fund_take == 0.03125 * default_pool_num()
     assert (
         yao_groupunit.fund_give + zia_groupunit.fund_give + xio_groupunit.fund_give
-        == 0.25 * default_fund_pool()
+        == 0.25 * default_pool_num()
     )
     assert (
         yao_groupunit.fund_take + zia_groupunit.fund_take + xio_groupunit.fund_take
-        == 0.25 * default_fund_pool()
+        == 0.25 * default_pool_num()
     )
 
 
@@ -706,19 +686,19 @@ def test_BeliefUnit_set_awardunit_CalculatesInheritedAwardUnitBeliefFund():
     bheir_yao = plan_bob.awardheirs.get(yao_str)
     bheir_zia = plan_bob.awardheirs.get(zia_str)
     bheir_Xio = plan_bob.awardheirs.get(Xio_str)
-    assert bheir_yao.fund_give == 0.5 * default_fund_pool()
-    assert bheir_yao.fund_take == 0.75 * default_fund_pool()
-    assert bheir_zia.fund_give == 0.25 * default_fund_pool()
-    assert bheir_zia.fund_take == 0.125 * default_fund_pool()
-    assert bheir_Xio.fund_give == 0.25 * default_fund_pool()
-    assert bheir_Xio.fund_take == 0.125 * default_fund_pool()
+    assert bheir_yao.fund_give == 0.5 * default_pool_num()
+    assert bheir_yao.fund_take == 0.75 * default_pool_num()
+    assert bheir_zia.fund_give == 0.25 * default_pool_num()
+    assert bheir_zia.fund_take == 0.125 * default_pool_num()
+    assert bheir_Xio.fund_give == 0.25 * default_pool_num()
+    assert bheir_Xio.fund_take == 0.125 * default_pool_num()
     assert (
         bheir_yao.fund_give + bheir_zia.fund_give + bheir_Xio.fund_give
-        == 1 * default_fund_pool()
+        == 1 * default_pool_num()
     )
     assert (
         bheir_yao.fund_take + bheir_zia.fund_take + bheir_Xio.fund_take
-        == 1 * default_fund_pool()
+        == 1 * default_pool_num()
     )
 
     # fund_give_sum = 0
@@ -770,25 +750,25 @@ def test_BeliefUnit_cashout_SetsGroupLinkBeliefCredAndDebt():
     yao_belief.cashout()
 
     # THEN
-    assert sue_sue_membership.fund_give == 0.5 * default_fund_pool()
-    assert sue_sue_membership.fund_take == 0.8 * default_fund_pool()
-    assert bob_bob_membership.fund_give == 0.25 * default_fund_pool()
-    assert bob_bob_membership.fund_take == 0.1 * default_fund_pool()
-    assert zia_zia_membership.fund_give == 0.25 * default_fund_pool()
-    assert zia_zia_membership.fund_take == 0.1 * default_fund_pool()
+    assert sue_sue_membership.fund_give == 0.5 * default_pool_num()
+    assert sue_sue_membership.fund_take == 0.8 * default_pool_num()
+    assert bob_bob_membership.fund_give == 0.25 * default_pool_num()
+    assert bob_bob_membership.fund_take == 0.1 * default_pool_num()
+    assert zia_zia_membership.fund_give == 0.25 * default_pool_num()
+    assert zia_zia_membership.fund_take == 0.1 * default_pool_num()
 
     membership_cred_sum = (
         sue_sue_membership.fund_give
         + bob_bob_membership.fund_give
         + zia_zia_membership.fund_give
     )
-    assert membership_cred_sum == 1.0 * default_fund_pool()
+    assert membership_cred_sum == 1.0 * default_pool_num()
     membership_debt_sum = (
         sue_sue_membership.fund_take
         + bob_bob_membership.fund_take
         + zia_zia_membership.fund_take
     )
-    assert membership_debt_sum == 1.0 * default_fund_pool()
+    assert membership_debt_sum == 1.0 * default_pool_num()
 
     # ESTABLISH another pledge, check metrics are as expected
     xio_str = "Xio"
@@ -807,12 +787,12 @@ def test_BeliefUnit_cashout_SetsGroupLinkBeliefCredAndDebt():
     sue_sue_membership = sue_voiceunit.get_membership(sue_str)
     bob_bob_membership = bob_voiceunit.get_membership(bob_str)
     zia_zia_membership = zia_voiceunit.get_membership(zia_str)
-    assert sue_sue_membership.fund_give != 0.25 * default_fund_pool()
-    assert sue_sue_membership.fund_take != 0.8 * default_fund_pool()
-    assert bob_bob_membership.fund_give != 0.25 * default_fund_pool()
-    assert bob_bob_membership.fund_take != 0.1 * default_fund_pool()
-    assert zia_zia_membership.fund_give != 0.5 * default_fund_pool()
-    assert zia_zia_membership.fund_take != 0.1 * default_fund_pool()
+    assert sue_sue_membership.fund_give != 0.25 * default_pool_num()
+    assert sue_sue_membership.fund_take != 0.8 * default_pool_num()
+    assert bob_bob_membership.fund_give != 0.25 * default_pool_num()
+    assert bob_bob_membership.fund_take != 0.1 * default_pool_num()
+    assert zia_zia_membership.fund_give != 0.5 * default_pool_num()
+    assert zia_zia_membership.fund_take != 0.1 * default_pool_num()
     assert xio_xio_membership.fund_give is not None
     assert xio_xio_membership.fund_take is not None
 
@@ -823,14 +803,14 @@ def test_BeliefUnit_cashout_SetsGroupLinkBeliefCredAndDebt():
         + xio_xio_membership.fund_give
     )
     print(f"{x_fund_give_sum=}")
-    assert x_fund_give_sum == 1.0 * default_fund_pool()
+    assert x_fund_give_sum == 1.0 * default_pool_num()
     x_fund_take_sum = (
         sue_sue_membership.fund_take
         + bob_bob_membership.fund_take
         + zia_zia_membership.fund_take
         + xio_xio_membership.fund_take
     )
-    assert x_fund_take_sum == 1.0 * default_fund_pool()
+    assert x_fund_take_sum == 1.0 * default_pool_num()
 
 
 def test_BeliefUnit_cashout_SetsVoiceUnitBelief_fund():
@@ -867,20 +847,20 @@ def test_BeliefUnit_cashout_SetsVoiceUnitBelief_fund():
     yao_belief.cashout()
 
     # THEN
-    assert sue_voiceunit.fund_give == 0.5 * default_fund_pool()
-    assert sue_voiceunit.fund_take == 0.8 * default_fund_pool()
-    assert bob_voiceunit.fund_give == 0.25 * default_fund_pool()
-    assert bob_voiceunit.fund_take == 0.1 * default_fund_pool()
-    assert zia_voiceunit.fund_give == 0.25 * default_fund_pool()
-    assert zia_voiceunit.fund_take == 0.1 * default_fund_pool()
+    assert sue_voiceunit.fund_give == 0.5 * default_pool_num()
+    assert sue_voiceunit.fund_take == 0.8 * default_pool_num()
+    assert bob_voiceunit.fund_give == 0.25 * default_pool_num()
+    assert bob_voiceunit.fund_take == 0.1 * default_pool_num()
+    assert zia_voiceunit.fund_give == 0.25 * default_pool_num()
+    assert zia_voiceunit.fund_take == 0.1 * default_pool_num()
 
     assert (
         sue_voiceunit.fund_give + bob_voiceunit.fund_give + zia_voiceunit.fund_give
-        == 1.0 * default_fund_pool()
+        == 1.0 * default_pool_num()
     )
     assert (
         sue_voiceunit.fund_take + bob_voiceunit.fund_take + zia_voiceunit.fund_take
-        == 1.0 * default_fund_pool()
+        == 1.0 * default_pool_num()
     )
 
     # WHEN another pledge, check metrics are as expected
@@ -892,36 +872,36 @@ def test_BeliefUnit_cashout_SetsVoiceUnitBelief_fund():
     # THEN
     xio_voiceunit = yao_belief.get_voice(xio_str)
 
-    assert sue_voiceunit.fund_give != 0.5 * default_fund_pool()
-    assert sue_voiceunit.fund_take != 0.8 * default_fund_pool()
-    assert bob_voiceunit.fund_give != 0.25 * default_fund_pool()
-    assert bob_voiceunit.fund_take != 0.1 * default_fund_pool()
-    assert zia_voiceunit.fund_give != 0.25 * default_fund_pool()
-    assert zia_voiceunit.fund_take != 0.1 * default_fund_pool()
+    assert sue_voiceunit.fund_give != 0.5 * default_pool_num()
+    assert sue_voiceunit.fund_take != 0.8 * default_pool_num()
+    assert bob_voiceunit.fund_give != 0.25 * default_pool_num()
+    assert bob_voiceunit.fund_take != 0.1 * default_pool_num()
+    assert zia_voiceunit.fund_give != 0.25 * default_pool_num()
+    assert zia_voiceunit.fund_take != 0.1 * default_pool_num()
     assert xio_voiceunit.fund_give is not None
     assert xio_voiceunit.fund_take is not None
 
     sum_voiceunit_fund_give = (
         sue_voiceunit.fund_give + bob_voiceunit.fund_give + zia_voiceunit.fund_give
     )
-    assert sum_voiceunit_fund_give < 1.0 * default_fund_pool()
+    assert sum_voiceunit_fund_give < 1.0 * default_pool_num()
     assert (
         sue_voiceunit.fund_give
         + bob_voiceunit.fund_give
         + zia_voiceunit.fund_give
         + xio_voiceunit.fund_give
-        == 1.0 * default_fund_pool()
+        == 1.0 * default_pool_num()
     )
     assert (
         sue_voiceunit.fund_take + bob_voiceunit.fund_take + zia_voiceunit.fund_take
-        < 1.0 * default_fund_pool()
+        < 1.0 * default_pool_num()
     )
     assert (
         sue_voiceunit.fund_take
         + bob_voiceunit.fund_take
         + zia_voiceunit.fund_take
         + xio_voiceunit.fund_take
-        == 1.0 * default_fund_pool()
+        == 1.0 * default_pool_num()
     )
 
 
@@ -956,39 +936,39 @@ def test_BeliefUnit_cashout_SetsPartGroupedLWVoiceUnitBelief_fund():
     sue_groupunit = yao_belief.get_groupunit(sue_str)
     bob_groupunit = yao_belief.get_groupunit(bob_str)
     zia_groupunit = yao_belief.get_groupunit(zia_str)
-    assert sue_groupunit.fund_give != 0.5 * default_fund_pool()
-    assert sue_groupunit.fund_take != 0.8 * default_fund_pool()
-    assert bob_groupunit.fund_give != 0.25 * default_fund_pool()
-    assert bob_groupunit.fund_take != 0.1 * default_fund_pool()
-    assert zia_groupunit.fund_give != 0.25 * default_fund_pool()
-    assert zia_groupunit.fund_take != 0.1 * default_fund_pool()
+    assert sue_groupunit.fund_give != 0.5 * default_pool_num()
+    assert sue_groupunit.fund_take != 0.8 * default_pool_num()
+    assert bob_groupunit.fund_give != 0.25 * default_pool_num()
+    assert bob_groupunit.fund_take != 0.1 * default_pool_num()
+    assert zia_groupunit.fund_give != 0.25 * default_pool_num()
+    assert zia_groupunit.fund_take != 0.1 * default_pool_num()
     assert (
         sue_groupunit.fund_give + bob_groupunit.fund_give + zia_groupunit.fund_give
-        == 0.25 * default_fund_pool()
+        == 0.25 * default_pool_num()
     )
     assert (
         sue_groupunit.fund_take + bob_groupunit.fund_take + zia_groupunit.fund_take
-        == 0.25 * default_fund_pool()
+        == 0.25 * default_pool_num()
     )
 
     sue_voiceunit = yao_belief.get_voice(sue_str)
     bob_voiceunit = yao_belief.get_voice(bob_str)
     zia_voiceunit = yao_belief.get_voice(zia_str)
 
-    assert sue_voiceunit.fund_give == 0.375 * default_fund_pool()
-    assert sue_voiceunit.fund_take == 0.45 * default_fund_pool()
-    assert bob_voiceunit.fund_give == 0.3125 * default_fund_pool()
-    assert bob_voiceunit.fund_take == 0.275 * default_fund_pool()
-    assert zia_voiceunit.fund_give == 0.3125 * default_fund_pool()
-    assert zia_voiceunit.fund_take == 0.275 * default_fund_pool()
+    assert sue_voiceunit.fund_give == 0.375 * default_pool_num()
+    assert sue_voiceunit.fund_take == 0.45 * default_pool_num()
+    assert bob_voiceunit.fund_give == 0.3125 * default_pool_num()
+    assert bob_voiceunit.fund_take == 0.275 * default_pool_num()
+    assert zia_voiceunit.fund_give == 0.3125 * default_pool_num()
+    assert zia_voiceunit.fund_take == 0.275 * default_pool_num()
 
     assert (
         sue_voiceunit.fund_give + bob_voiceunit.fund_give + zia_voiceunit.fund_give
-        == 1.0 * default_fund_pool()
+        == 1.0 * default_pool_num()
     )
     assert (
         sue_voiceunit.fund_take + bob_voiceunit.fund_take + zia_voiceunit.fund_take
-        == 1.0 * default_fund_pool()
+        == 1.0 * default_pool_num()
     )
 
 
@@ -1027,8 +1007,8 @@ def test_BeliefUnit_cashout_CreatesNewGroupUnitAndSetsVoice_fund_give_fund_take(
     zia_voiceunit = bob_belief.get_voice(zia_str)
     voiceunit_fund_give_sum = yao_voiceunit.fund_give + zia_voiceunit.fund_give
     voiceunit_fund_take_sum = yao_voiceunit.fund_take + zia_voiceunit.fund_take
-    assert voiceunit_fund_give_sum == default_fund_pool()
-    assert voiceunit_fund_take_sum == default_fund_pool()
+    assert voiceunit_fund_give_sum == default_pool_num()
+    assert voiceunit_fund_take_sum == default_pool_num()
 
 
 def test_BeliefUnit_cashout_SetsVoiceUnit_fund_give_fund_take():
@@ -1058,11 +1038,11 @@ def test_BeliefUnit_cashout_SetsVoiceUnit_fund_give_fund_take():
     fund_give_sum = (
         sue_voiceunit.fund_give + bob_voiceunit.fund_give + zia_voiceunit.fund_give
     )
-    assert fund_give_sum == 1.0 * default_fund_pool()
+    assert fund_give_sum == 1.0 * default_pool_num()
     fund_take_sum = (
         sue_voiceunit.fund_take + bob_voiceunit.fund_take + zia_voiceunit.fund_take
     )
-    assert fund_take_sum == 1.0 * default_fund_pool()
+    assert fund_take_sum == 1.0 * default_pool_num()
 
 
 def clear_all_voiceunits_groupunits_fund_agenda_give_take(x_belief: BeliefUnit):
@@ -1166,11 +1146,11 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
     # print(f"{sum_belief_agenda_share=}")
     # assert x_awardagendametrics.agenda_no_count == 14
     assert x_awardagendametrics.agenda_yes_count == 49
-    predicted_agenda_no_belief_i_sum = int(0.004107582 * default_fund_pool())
+    predicted_agenda_no_belief_i_sum = int(0.004107582 * default_pool_num())
     assert (
         x_awardagendametrics.agenda_no_belief_i_sum == predicted_agenda_no_belief_i_sum
     )
-    predicted_agenda_yes_belief_i_sum = int(0.003065400 * default_fund_pool())
+    predicted_agenda_yes_belief_i_sum = int(0.003065400 * default_pool_num())
     assert (
         x_awardagendametrics.agenda_yes_belief_i_sum
         == predicted_agenda_yes_belief_i_sum
@@ -1180,7 +1160,7 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
         + x_awardagendametrics.agenda_yes_belief_i_sum,
         x_awardagendametrics.sum_belief_agenda_share,
     )
-    predicted_sum_belief_agenda_share = 0.007172982 * default_fund_pool()
+    predicted_sum_belief_agenda_share = 0.007172982 * default_pool_num()
     assert (
         x_awardagendametrics.sum_belief_agenda_share
         == predicted_sum_belief_agenda_share

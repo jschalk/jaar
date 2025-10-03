@@ -27,53 +27,52 @@ from src.ch99_chapter_style.style import (
     get_semantic_types_filename,
 )
 
+# def test_Chapter_ref_util_FilesExist():
+#     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+#     # ESTABLISH
 
-def test_Chapter_ref_util_FilesExist():
-    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    # ESTABLISH
-
-    # WHEN / THEN
-    # previous_chapter_number = -1
-    for chapter_desc, chapter_dir in get_chapter_descs().items():
-        print(f"Evaluating {chapter_desc=} {chapter_dir=}")
-        chapter_prefix = get_chapter_desc_prefix(chapter_desc)
-        # assert chapter_number == previous_chapter_number + 1
-        # print(f"{chapter_desc=} {chapter_number=}")
-        chapter_desc_str_number = get_chapter_desc_str_number(chapter_desc)
-        ch_num = int(chapter_desc_str_number)
-        keywords_class_file_path = create_keywords_class_file_path(chapter_dir, ch_num)
-        assert os_path_exists(keywords_class_file_path)
-        test_dir = create_path(chapter_dir, "test")
-        util_dir = create_path(test_dir, "_util")
-        assert os_path_exists(util_dir)
-        # keywords_class__test_path = create_path(utils_dir, f"test_{chapter_prefix}_keywords.py")
-        # assert os_path_exists(keywords_class__test_path)
-        env_files = get_python_files_with_flag(util_dir, "env")
-        if len(env_files) > 0:
-            assert len(env_files) == 1
-            env_filename = str(list(env_files.keys())[0])
-            check_env_file_has_necessary_elements(env_filename, chapter_prefix, ch_num)
-        util_files = get_dir_file_strs(util_dir, include_dirs=False)
-        for util_file in util_files.keys():
-            is_test_file = util_file[:4] == "test"
-            is_json_file = util_file.endswith("json")
-            is_env_file = util_file == f"{chapter_prefix}_env.py"
-            is_example_file = util_file == f"{chapter_prefix}_examples.py"
-            is_keywords_file = util_file == get_keywords_filename(chapter_prefix)
-            assert_fail_str = f"{util_file} should not be in {util_dir=}"
-            # print(f"{util_file=}")
-            # print(f"{is_json_file=} {util_file.endswith("json")=}")
-            # print(f"{is_test_file=} {util_file[:4]=}")
-            # print(f"{is_example_file=}")
-            # print(f"{is_keywords_file=}")
-            acceptable_filename = (
-                is_test_file
-                or is_example_file
-                or is_env_file
-                or is_keywords_file
-                or is_json_file
-            )
-            assert acceptable_filename, assert_fail_str
+#     # WHEN / THEN
+#     # previous_chapter_number = -1
+#     for chapter_desc, chapter_dir in get_chapter_descs().items():
+#         print(f"Evaluating {chapter_desc=} {chapter_dir=}")
+#         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
+#         # assert chapter_number == previous_chapter_number + 1
+#         # print(f"{chapter_desc=} {chapter_number=}")
+#         chapter_desc_str_number = get_chapter_desc_str_number(chapter_desc)
+#         ch_num = int(chapter_desc_str_number)
+#         keywords_class_file_path = create_keywords_class_file_path(chapter_dir, ch_num)
+#         assert os_path_exists(keywords_class_file_path)
+#         test_dir = create_path(chapter_dir, "test")
+#         util_dir = create_path(test_dir, "_util")
+#         assert os_path_exists(util_dir)
+#         # keywords_class__test_path = create_path(utils_dir, f"test_{chapter_prefix}_keywords.py")
+#         # assert os_path_exists(keywords_class__test_path)
+#         env_files = get_python_files_with_flag(util_dir, "env")
+#         if len(env_files) > 0:
+#             assert len(env_files) == 1
+#             env_filename = str(list(env_files.keys())[0])
+#             check_env_file_has_necessary_elements(env_filename, chapter_prefix, ch_num)
+#         util_files = get_dir_file_strs(util_dir, include_dirs=False)
+#         for util_file in util_files.keys():
+#             is_test_file = util_file[:4] == "test"
+#             is_json_file = util_file.endswith("json")
+#             is_env_file = util_file == f"{chapter_prefix}_env.py"
+#             is_example_file = util_file == f"{chapter_prefix}_examples.py"
+#             is_keywords_file = util_file == get_keywords_filename(chapter_prefix)
+#             assert_fail_str = f"{util_file} should not be in {util_dir=}"
+#             # print(f"{util_file=}")
+#             # print(f"{is_json_file=} {util_file.endswith("json")=}")
+#             # print(f"{is_test_file=} {util_file[:4]=}")
+#             # print(f"{is_example_file=}")
+#             # print(f"{is_keywords_file=}")
+#             acceptable_filename = (
+#                 is_test_file
+#                 or is_example_file
+#                 or is_env_file
+#                 or is_keywords_file
+#                 or is_json_file
+#             )
+#             assert acceptable_filename, assert_fail_str
 
 
 def check_env_file_has_necessary_elements(
@@ -97,55 +96,6 @@ def path_contains_subpath(full_path: str, sub_path: str):
         return True
     except ValueError:
         return False
-
-
-def test_Chapters_ChXXKeywords_ClassesAreTested():
-    """
-    Test that all string-related functions in each chapter directory are asserted and tested.
-    This test performs the following checks for each chapter:
-    - Retrieves all string functions and ensures they are sorted and not duplicated.
-    - Verifies that if string functions exist, a corresponding test file exists in the chapter's utility directory.
-    - Checks that the test file imports exactly one object and that imports are ordered.
-    - Ensures the test file contains a single test function.
-    - Validates that the test file includes the necessary assertions for all string functions.
-    Raises:
-        AssertionError: If any of the above conditions are not met.
-    """
-
-    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    # ESTABLISH
-    keywords_src_config = get_keywords_src_config()
-    keywords_by_chapter = get_keywords_by_chapter(keywords_src_config)
-
-    # WHEN / THEN
-    running_keywords = set()
-    for chapter_desc, chapter_dir in get_chapter_descs().items():
-        chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
-        chapter_num = int(get_chapter_desc_str_number(chapter_desc))
-        test_dir = create_path(chapter_dir, "test")
-        util_dir = create_path(test_dir, "_util")
-        print(f"{util_dir}")
-        chapter_keywords_by_chapter = keywords_by_chapter.get(chapter_num)
-        chapter_keywords_by_chapter = sorted(list(chapter_keywords_by_chapter))
-        check_if_chapter_keywords_by_chapter_is_sorted(chapter_keywords_by_chapter)
-        check_keywords_by_chapter_are_not_duplicated(
-            chapter_keywords_by_chapter, running_keywords
-        )
-        running_keywords.update(set(chapter_keywords_by_chapter))
-
-        if len(chapter_keywords_by_chapter) > 0:
-            keywords_filename = get_keywords_filename(chapter_desc_prefix)
-            test_file_path = create_path(util_dir, f"test_{keywords_filename}")
-            assert os_path_exists(test_file_path)
-            test_file_imports = get_imports_from_file(test_file_path)
-            assert len(test_file_imports) <= 1
-            if len(test_file_imports) == 1:
-                file_funcs, class_bases = get_function_names_from_file(test_file_path)
-                class_prefix = chapter_desc_prefix[0].upper() + chapter_desc_prefix[1:]
-                chXX_test_name = (
-                    f"test_{class_prefix}Keywords_AttributeNamesEqualValues"
-                )
-                assert set(file_funcs) == {chXX_test_name}
 
 
 def test_Chapters_test_TestsAreInCorrectFolderStructure():

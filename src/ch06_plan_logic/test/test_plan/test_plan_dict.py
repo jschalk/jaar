@@ -7,9 +7,9 @@ from src.ch05_reason_logic.reason import (
     reasonheir_shop,
     reasonunit_shop,
 )
-from src.ch06_plan_logic._ref.ch06_keywords import Ch06Keywords as wx
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import get_obj_from_plan_dict, planunit_shop
+from src.ref.ch06_keywords import Ch06Keywords as wx
 
 
 def test_get_obj_from_plan_dict_ReturnsObj():

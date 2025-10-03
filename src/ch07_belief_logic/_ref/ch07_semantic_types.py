@@ -1,9 +1,13 @@
 from src.ch06_plan_logic._ref.ch06_semantic_types import (
     FirstLabel,
+    FundGrain,
+    FundNum,
     GroupTitle,
     HealerName,
     LabelTerm,
     NameTerm,
+    RespectGrain,
+    RespectNum,
     RopeTerm,
     TitleTerm,
     VoiceName,
@@ -25,5 +29,11 @@ class MomentLabel(NexusLabel):  # Created to help track the object class relatio
 
 class BeliefName(NameTerm):
     """A NameTerm used to identify a BeliefUnit's belief"""
+
+    pass
+
+
+class MoneyGrain(float):
+    """Smallest Unit of MoneyNum"""
 
     pass

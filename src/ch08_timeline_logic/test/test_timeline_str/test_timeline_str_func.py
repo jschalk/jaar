@@ -1,13 +1,13 @@
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None
 from src.ch05_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_timeline_logic._ref.ch08_keywords import Ch08Keywords as wx
 from src.ch08_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
 from src.ch08_timeline_logic.test._util.ch08_examples import get_creg_config, get_thu
 from src.ch08_timeline_logic.timeline_main import add_newtimeline_planunit
+from src.ref.ch08_keywords import Ch08Keywords as wx
 
 
 def test_get_reason_case_readable_str_ReturnsObj_Scenario0_Level1():

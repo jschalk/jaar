@@ -5,7 +5,6 @@ from src.ch09_belief_atom_logic.atom_config import (
     get_atom_args_class_types,
 )
 from src.ch15_moment_logic.moment_config import get_moment_args_class_types
-from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords as wx
 from src.ch16_translate_logic.map import (
     labelmap_shop,
     namemap_shop,
@@ -33,6 +32,7 @@ from src.ch16_translate_logic.translate_config import (
     translateable_class_types,
 )
 from src.ch16_translate_logic.translate_main import TranslateUnit, translateunit_shop
+from src.ref.ch16_keywords import Ch16Keywords as wx
 
 
 def test_get_translate_args_class_types_ReturnsObj():
@@ -64,7 +64,7 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert translate_args_class_types.get("moment_label") == wx.LabelTerm
     assert translate_args_class_types.get("fact_upper") == "float"
     assert translate_args_class_types.get("fact_lower") == "float"
-    assert translate_args_class_types.get("fund_iota") == "float"
+    assert translate_args_class_types.get("fund_grain") == "float"
     assert translate_args_class_types.get("fund_pool") == "float"
     assert translate_args_class_types.get("give_force") == "float"
     assert translate_args_class_types.get("gogo_want") == "float"
@@ -82,12 +82,12 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert translate_args_class_types.get("offi_time") == "TimeLinePoint"
     assert translate_args_class_types.get("belief_name") == wx.NameTerm
     assert translate_args_class_types.get("reason_lower") == "float"
-    assert translate_args_class_types.get("penny") == "float"
+    assert translate_args_class_types.get("money_grain") == "float"
     assert translate_args_class_types.get("fact_state") == wx.RopeTerm
     assert translate_args_class_types.get("pledge") == "bool"
     assert translate_args_class_types.get("problem_bool") == "bool"
     assert translate_args_class_types.get("quota") == "int"
-    assert translate_args_class_types.get("respect_bit") == "float"
+    assert translate_args_class_types.get("respect_grain") == "float"
     assert translate_args_class_types.get("plan_rope") == wx.RopeTerm
     assert translate_args_class_types.get("celldepth") == "int"
     assert translate_args_class_types.get("stop_want") == "float"
@@ -111,9 +111,9 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert moment_args.issubset(translate_args)
     assert atom_args & (moment_args) == {
         wx.voice_name,
-        wx.fund_iota,
-        wx.penny,
-        wx.respect_bit,
+        wx.fund_grain,
+        wx.money_grain,
+        wx.respect_grain,
     }
     assert atom_args.union(moment_args) != translate_args
     assert atom_args.union(moment_args).union({"face_name"}) == translate_args

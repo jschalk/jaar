@@ -1,6 +1,5 @@
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords as wx
 from src.ch16_translate_logic.map import (
     TitleMap,
     get_titlemap_from_dict,
@@ -9,6 +8,7 @@ from src.ch16_translate_logic.map import (
     titlemap_shop,
 )
 from src.ch16_translate_logic.translate_config import default_unknown_str_if_None
+from src.ref.ch16_keywords import Ch16Keywords as wx
 
 
 def test_TitleMap_Exists():
@@ -493,7 +493,7 @@ def test_inherit_titlemap_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_knot(
         inherit_titlemap(new_titlemap, old_titlemap)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_inherit_titlemap_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_knot():
@@ -508,7 +508,7 @@ def test_inherit_titlemap_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_knot(
         inherit_titlemap(new_titlemap, old_titlemap)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_inherit_titlemap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_str():
@@ -523,7 +523,7 @@ def test_inherit_titlemap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown
         inherit_titlemap(new_titlemap, old_titlemap)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_inherit_titlemap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_name():
@@ -538,7 +538,7 @@ def test_inherit_titlemap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_na
         inherit_titlemap(new_titlemap, old_titlemap)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_inherit_titlemap_ReturnsObj_Scenario5_RaiseErrorWhenEventIntsOutOfOrder():

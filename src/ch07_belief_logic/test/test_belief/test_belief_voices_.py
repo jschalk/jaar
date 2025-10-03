@@ -26,8 +26,8 @@ def test_BeliefUnit_set_voiceunit_SetsAttr():
 
 def test_BeliefUnit_set_voice_DoesNotSet_voice_name_membership():
     # ESTABLISH
-    x_respect_bit = 5
-    yao_belief = beliefunit_shop("Yao", respect_bit=x_respect_bit)
+    x_respect_grain = 5
+    yao_belief = beliefunit_shop("Yao", respect_grain=x_respect_grain)
     zia_str = "Zia"
 
     # WHEN
@@ -39,8 +39,8 @@ def test_BeliefUnit_set_voice_DoesNotSet_voice_name_membership():
 
 def test_BeliefUnit_set_voice_DoesSet_voice_name_membership():
     # ESTABLISH
-    x_respect_bit = 5
-    yao_belief = beliefunit_shop("Yao", respect_bit=x_respect_bit)
+    x_respect_grain = 5
+    yao_belief = beliefunit_shop("Yao", respect_grain=x_respect_grain)
     zia_str = "Zia"
 
     # WHEN
@@ -55,8 +55,8 @@ def test_BeliefUnit_set_voice_DoesSet_voice_name_membership():
 
 def test_BeliefUnit_set_voice_DoesNotOverRide_voice_name_membership():
     # ESTABLISH
-    x_respect_bit = 5
-    yao_belief = beliefunit_shop("Yao", respect_bit=x_respect_bit)
+    x_respect_grain = 5
+    yao_belief = beliefunit_shop("Yao", respect_grain=x_respect_grain)
     zia_str = "Zia"
     ohio_str = ";Ohio"
     zia_ohio_credit_w = 33
@@ -78,8 +78,8 @@ def test_BeliefUnit_set_voice_DoesNotOverRide_voice_name_membership():
 
 def test_BeliefUnit_add_voiceunit_Sets_voices():
     # ESTABLISH
-    x_respect_bit = 6
-    yao_belief = beliefunit_shop("Yao", respect_bit=x_respect_bit)
+    x_respect_grain = 6
+    yao_belief = beliefunit_shop("Yao", respect_grain=x_respect_grain)
     zia_str = "Zia"
     sue_str = "Sue"
     xio_str = "Xio"
@@ -94,7 +94,7 @@ def test_BeliefUnit_add_voiceunit_Sets_voices():
     assert len(yao_belief.get_voiceunit_group_titles_dict()) == 3
     assert yao_belief.voices.get(xio_str).voice_cred_points == 17
     assert yao_belief.voices.get(sue_str).voice_debt_points == 5
-    assert yao_belief.voices.get(xio_str).respect_bit == x_respect_bit
+    assert yao_belief.voices.get(xio_str).respect_grain == x_respect_grain
 
 
 def test_BeliefUnit_voice_exists_ReturnsObj():

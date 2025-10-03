@@ -22,7 +22,6 @@ from src.ch17_idea_logic.idea_config import (
     get_idea_config_dict,
     get_idea_sqlite_types,
 )
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
     create_insert_into_translate_core_raw_sqlstr,
@@ -40,6 +39,7 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
     get_moment_belief_sound_agg_tablenames,
     get_prime_create_table_sqlstrs,
 )
+from src.ref.ch18_keywords import Ch18Keywords as wx
 
 BELIEF_PRIME_TABLENAMES = {
     f"{wx.belief_voice_membership}_sound_put_agg": "BLRMEMB_PUT_AGG",

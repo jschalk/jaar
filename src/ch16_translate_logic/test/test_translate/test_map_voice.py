@@ -1,7 +1,6 @@
 from numpy import int64 as numpy_int64
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords as wx
 from src.ch16_translate_logic.map import (
     NameMap,
     get_namemap_from_dict,
@@ -10,6 +9,7 @@ from src.ch16_translate_logic.map import (
     namemap_shop,
 )
 from src.ch16_translate_logic.translate_config import default_unknown_str_if_None
+from src.ref.ch16_keywords import Ch16Keywords as wx
 
 
 def test_NameMap_Exists():
@@ -503,7 +503,7 @@ def test_inherit_namemap_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_knot()
         inherit_namemap(new_namemap, old_namemap)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_inherit_namemap_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_knot():
@@ -518,7 +518,7 @@ def test_inherit_namemap_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_knot()
         inherit_namemap(new_namemap, old_namemap)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_inherit_namemap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_str():
@@ -533,7 +533,7 @@ def test_inherit_namemap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_
         inherit_namemap(new_namemap, old_namemap)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_inherit_namemap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_name():
@@ -548,7 +548,7 @@ def test_inherit_namemap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_nam
         inherit_namemap(new_namemap, old_namemap)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_inherit_namemap_ReturnsObj_Scenario5_RaiseErrorWhenEventIntsOutOfOrder():

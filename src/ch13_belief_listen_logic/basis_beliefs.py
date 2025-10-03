@@ -8,17 +8,17 @@ def create_empty_belief_from_belief(
     x_belief_name = ref_belief.belief_name if x_belief_name is None else x_belief_name
     x_knot = ref_belief.knot
     x_fund_pool = ref_belief.fund_pool
-    x_fund_iota = ref_belief.fund_iota
-    x_respect_bit = ref_belief.respect_bit
-    x_penny = ref_belief.penny
+    x_fund_grain = ref_belief.fund_grain
+    x_respect_grain = ref_belief.respect_grain
+    x_money_grain = ref_belief.money_grain
     return beliefunit_shop(
         belief_name=x_belief_name,
         moment_label=ref_belief.moment_label,
         knot=x_knot,
         fund_pool=x_fund_pool,
-        fund_iota=x_fund_iota,
-        respect_bit=x_respect_bit,
-        penny=x_penny,
+        fund_grain=x_fund_grain,
+        respect_grain=x_respect_grain,
+        money_grain=x_money_grain,
     )
 
 

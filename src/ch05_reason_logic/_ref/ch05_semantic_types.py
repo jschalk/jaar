@@ -1,9 +1,13 @@
 from src.ch04_voice_logic._ref.ch04_semantic_types import (
     FirstLabel,
+    FundGrain,
+    FundNum,
     GroupTitle,
     HealerName,
     LabelTerm,
     NameTerm,
+    RespectGrain,
+    RespectNum,
     RopeTerm,
     TitleTerm,
     VoiceName,

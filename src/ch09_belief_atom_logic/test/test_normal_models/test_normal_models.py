@@ -1,5 +1,4 @@
 from sqlalchemy import inspect
-from src.ch09_belief_atom_logic._ref.ch09_keywords import Ch09Keywords as wx
 from src.ch09_belief_atom_logic.atom_config import get_normalized_belief_table_build
 from src.ch09_belief_atom_logic.normal_models import (
     AwardUnitTable,
@@ -13,6 +12,7 @@ from src.ch09_belief_atom_logic.normal_models import (
     ReasonTable,
     VoiceUnitTable,
 )
+from src.ref.ch09_keywords import Ch09Keywords as wx
 
 
 def get_config_table_name(config_dimen) -> str:

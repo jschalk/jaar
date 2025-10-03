@@ -1,13 +1,8 @@
 from src.ch01_data_toolbox.file_toolbox import create_path, save_file
 from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch03_finance_logic.finance_config import (
-    default_fund_iota_if_None,
-    default_RespectBit_if_None,
-    filter_penny,
-)
+from src.ch03_allot_toolbox.allot import default_grain_num_if_None
 from src.ch08_timeline_logic.timeline_main import get_default_timeline_config_dict
-from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
-from src.ch15_moment_logic._ref.ch15_keywords import Ch15Keywords as wx
+from src.ch12_belief_file_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_main import (
     get_default_path_momentunit,
     get_momentunit_from_dict,
@@ -18,6 +13,7 @@ from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
+from src.ref.ch15_keywords import Ch15Keywords as wx
 
 
 def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
@@ -60,9 +56,9 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     assert x_dict.get(wx.timeline) == get_default_timeline_config_dict()
     assert x_dict.get(offi_times_str) == list(a45_offi_times)
     assert x_dict.get(wx.knot) == default_knot_if_None()
-    assert x_dict.get(wx.fund_iota) == default_fund_iota_if_None()
-    assert x_dict.get(wx.respect_bit) == default_RespectBit_if_None()
-    assert x_dict.get(wx.penny) == filter_penny()
+    assert x_dict.get(wx.fund_grain) == default_grain_num_if_None()
+    assert x_dict.get(wx.respect_grain) == default_grain_num_if_None()
+    assert x_dict.get(wx.money_grain) == default_grain_num_if_None()
     assert x_dict.get(wx.beliefbudhistorys) == amy_moment._get_beliefbudhistorys_dict()
     assert x_dict.get(wx.paybook) == amy_moment.paybook.to_dict()
     assert set(x_dict.keys()) == {
@@ -72,9 +68,9 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
         offi_times_str,
         wx.beliefbudhistorys,
         wx.knot,
-        wx.fund_iota,
-        wx.respect_bit,
-        wx.penny,
+        wx.fund_grain,
+        wx.respect_grain,
+        wx.money_grain,
         wx.paybook,
     }
 
@@ -96,9 +92,9 @@ def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
         f"{wx.offi_time}s",
         wx.beliefbudhistorys,
         wx.knot,
-        wx.fund_iota,
-        wx.respect_bit,
-        wx.penny,
+        wx.fund_grain,
+        wx.respect_grain,
+        wx.money_grain,
     }
 
 
@@ -136,9 +132,9 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     sue_timeline_label = "sue casa"
     amy_moment.timeline.timeline_label = sue_timeline_label
     sue_knot = "/"
-    sue_fund_iota = 0.3
-    sue_respect_bit = 2
-    sue_penny = 3
+    sue_fund_grain = 0.3
+    sue_respect_grain = 2
+    sue_money_grain = 3
     bob_str = "Bob"
     bob_x0_bud_time = 702
     bob_x0_quota = 33
@@ -153,9 +149,9 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     amy_moment.add_budunit(sue_str, sue_x4_bud_time, sue_x4_quota)
     amy_moment.add_budunit(sue_str, sue_x7_bud_time, sue_x7_quota)
     amy_moment.knot = sue_knot
-    amy_moment.fund_iota = sue_fund_iota
-    amy_moment.respect_bit = sue_respect_bit
-    amy_moment.penny = sue_penny
+    amy_moment.fund_grain = sue_fund_grain
+    amy_moment.respect_grain = sue_respect_grain
+    amy_moment.money_grain = sue_money_grain
     amy_moment.add_paypurchase(
         belief_name=bob_str,
         voice_name=sue_str,
@@ -173,9 +169,9 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     assert x_moment.timeline.timeline_label == sue_timeline_label
     assert x_moment.offi_times == a45_offi_times
     assert x_moment.knot == sue_knot
-    assert x_moment.fund_iota == sue_fund_iota
-    assert x_moment.respect_bit == sue_respect_bit
-    assert x_moment.penny == sue_penny
+    assert x_moment.fund_grain == sue_fund_grain
+    assert x_moment.respect_grain == sue_respect_grain
+    assert x_moment.money_grain == sue_money_grain
     assert x_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert x_moment.paybook == amy_moment.paybook
     assert x_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
@@ -191,9 +187,9 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters(
     x_dict = amy_moment.to_dict()
     x_dict["timeline"] = {}
     x_dict.pop("knot")
-    x_dict.pop("fund_iota")
-    x_dict.pop("respect_bit")
-    x_dict.pop("penny")
+    x_dict.pop("fund_grain")
+    x_dict.pop("respect_grain")
+    x_dict.pop("money_grain")
 
     # WHEN
     generated_moment = get_momentunit_from_dict(x_dict)
@@ -205,9 +201,9 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters(
     assert generated_moment.timeline == amy_moment.timeline
     assert generated_moment.offi_times == set()
     assert generated_moment.knot == default_knot_if_None()
-    assert generated_moment.fund_iota == default_fund_iota_if_None()
-    assert generated_moment.respect_bit == default_RespectBit_if_None()
-    assert generated_moment.penny == 1
+    assert generated_moment.fund_grain == default_grain_num_if_None()
+    assert generated_moment.respect_grain == default_grain_num_if_None()
+    assert generated_moment.money_grain == 1
     assert generated_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert generated_moment.paybook == amy_moment.paybook
     assert generated_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
@@ -223,9 +219,9 @@ def test_get_momentunit_from_json_ReturnsMomentUnit():
     amy_moment.timeline.timeline_label = sue_timeline_label
     sue_offi_time_max = 23
     sue_knot = "/"
-    sue_fund_iota = 0.3
-    sue_respect_bit = 2
-    sue_penny = 3
+    sue_fund_grain = 0.3
+    sue_respect_grain = 2
+    sue_money_grain = 3
     bob_str = "Bob"
     bob_x0_bud_time = 702
     bob_x0_quota = 33
@@ -238,9 +234,9 @@ def test_get_momentunit_from_json_ReturnsMomentUnit():
     amy_moment.add_budunit(sue_str, sue_x4_bud_time, sue_x4_quota)
     amy_moment.add_budunit(sue_str, sue_x7_bud_time, sue_x7_quota)
     amy_moment.knot = sue_knot
-    amy_moment.fund_iota = sue_fund_iota
-    amy_moment.respect_bit = sue_respect_bit
-    amy_moment.penny = sue_penny
+    amy_moment.fund_grain = sue_fund_grain
+    amy_moment.respect_grain = sue_respect_grain
+    amy_moment.money_grain = sue_money_grain
     amy_json = amy_moment.get_json()
 
     # WHEN
@@ -251,9 +247,9 @@ def test_get_momentunit_from_json_ReturnsMomentUnit():
     assert x_moment.moment_mstr_dir == temp_moment_mstr_dir
     assert x_moment.timeline.timeline_label == sue_timeline_label
     assert x_moment.knot == sue_knot
-    assert x_moment.fund_iota == sue_fund_iota
-    assert x_moment.respect_bit == sue_respect_bit
-    assert x_moment.penny == sue_penny
+    assert x_moment.fund_grain == sue_fund_grain
+    assert x_moment.respect_grain == sue_respect_grain
+    assert x_moment.money_grain == sue_money_grain
     assert x_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert x_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
     assert x_moment != amy_moment
@@ -267,8 +263,8 @@ def test_get_from_file_ReturnsMomentUnitWith_moment_mstr_dir(env_dir_setup_clean
     amy45_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
     sue_timeline_label = "sue casa"
     amy45_moment.timeline.timeline_label = sue_timeline_label
-    sue_respect_bit = 2
-    amy45_moment.respect_bit = sue_respect_bit
+    sue_respect_grain = 2
+    amy45_moment.respect_grain = sue_respect_grain
     x_moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_bob")
     amy45_json_path = create_moment_json_path(x_moment_mstr_dir, amy45_str)
     save_file(amy45_json_path, None, amy45_moment.get_json())
@@ -281,7 +277,7 @@ def test_get_from_file_ReturnsMomentUnitWith_moment_mstr_dir(env_dir_setup_clean
     assert generated_a45_moment.moment_mstr_dir == x_moment_mstr_dir
     assert generated_a45_moment.moment_label == amy45_str
     assert generated_a45_moment.timeline.timeline_label == sue_timeline_label
-    assert generated_a45_moment.respect_bit == sue_respect_bit
+    assert generated_a45_moment.respect_grain == sue_respect_grain
     x_moments_dir = create_path(x_moment_mstr_dir, "moments")
     expected_a45_moment_dir = create_path(x_moments_dir, amy45_str)
     assert generated_a45_moment._moment_dir == expected_a45_moment_dir

@@ -1,6 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch03_finance_logic.finance_config import default_fund_pool
-from src.ch11_bud_logic._ref.ch11_keywords import Ch11Keywords as wx
+from src.ch03_allot_toolbox.allot import default_pool_num
 from src.ch11_bud_logic.bud import (
     DEFAULT_CELLDEPTH,
     BudUnit,
@@ -8,6 +7,7 @@ from src.ch11_bud_logic.bud import (
     get_budunit_from_dict,
     get_budunit_from_json,
 )
+from src.ref.ch11_keywords import Ch11Keywords as wx
 
 
 def test_DEFAULT_CELLDEPTH():
@@ -38,7 +38,7 @@ def test_budunit_shop_ReturnsObj():
     # THEN
     assert t4_budunit
     assert t4_budunit.bud_time == t4_bud_time
-    assert t4_budunit.quota == default_fund_pool()
+    assert t4_budunit.quota == default_pool_num()
     assert t4_budunit._magnitude == 0
     assert t4_budunit.celldepth == 2
     assert not t4_budunit._bud_voice_nets

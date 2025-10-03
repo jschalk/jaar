@@ -3,7 +3,7 @@
   "knot": ";", 
   "max_tree_traverse": 20, 
   "moment_label": "A", 
-  "penny": 1, 
+  "money_grain": 1, 
   "planroot": {
     "factunits": {
       "A;Aaron Donald objects effected by him;": {
@@ -4189,7 +4189,7 @@
     "star": 1, 
     "uid": 1
   }, 
-  "respect_bit": 1, 
+  "respect_grain": 1, 
   "star": 1, 
   "voices": {
     "A a ron Jones": {

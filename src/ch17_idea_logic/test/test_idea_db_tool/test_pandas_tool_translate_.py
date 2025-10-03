@@ -10,12 +10,12 @@ from src.ch16_translate_logic.test._util.ch16_examples import (
     get_casa_maison_translateunit_set_by_otx2inx,
 )
 from src.ch16_translate_logic.translate_main import translateunit_shop
-from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_db_tool import (
     get_dataframe_translateable_columns,
     translate_all_columns_dataframe,
     translate_single_column_dataframe,
 )
+from src.ref.ch17_keywords import Ch17Keywords as wx
 
 
 def test_get_dataframe_translateable_columns_ReturnsObj():

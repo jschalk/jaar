@@ -1,8 +1,8 @@
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch03_finance_logic.finance_config import default_RespectBit_if_None
-from src.ch04_voice_logic._ref.ch04_keywords import Ch04Keywords as wx
+from src.ch03_allot_toolbox.allot import default_grain_num_if_None
 from src.ch04_voice_logic.voice import VoiceUnit, voiceunit_shop
+from src.ref.ch04_keywords import Ch04Keywords as wx
 
 
 def test_VoiceUnit_Exists():
@@ -30,7 +30,7 @@ def test_VoiceUnit_Exists():
     assert not bob_voiceunit.fund_agenda_give
     assert not bob_voiceunit.fund_agenda_take
     assert not bob_voiceunit.knot
-    assert not bob_voiceunit.respect_bit
+    assert not bob_voiceunit.respect_grain
     obj_attrs = set(bob_voiceunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
@@ -45,7 +45,7 @@ def test_VoiceUnit_Exists():
         wx.inallocable_voice_debt_points,
         wx.irrational_voice_debt_points,
         wx.memberships,
-        wx.respect_bit,
+        wx.respect_grain,
         wx.voice_name,
         wx.knot,
         wx.voice_cred_points,
@@ -103,7 +103,7 @@ def test_voiceunit_shop_SetsAttributes():
     assert yao_voiceunit.fund_agenda_ratio_give == 0
     assert yao_voiceunit.fund_agenda_ratio_take == 0
     assert yao_voiceunit.knot == default_knot_if_None()
-    assert yao_voiceunit.respect_bit == default_RespectBit_if_None()
+    assert yao_voiceunit.respect_grain == default_grain_num_if_None()
 
 
 def test_voiceunit_shop_SetsAttributes_knot():
@@ -117,28 +117,28 @@ def test_voiceunit_shop_SetsAttributes_knot():
     assert yao_voiceunit.knot == slash_str
 
 
-def test_voiceunit_shop_SetsAttributes_respect_bit():
+def test_voiceunit_shop_SetsAttributes_respect_grain():
     # ESTABLISH
-    respect_bit_float = 00.45
+    respect_grain_float = 00.45
 
     # WHEN
-    yao_voiceunit = voiceunit_shop("Yao", respect_bit=respect_bit_float)
+    yao_voiceunit = voiceunit_shop("Yao", respect_grain=respect_grain_float)
 
     # THEN
-    assert yao_voiceunit.respect_bit == 1
+    assert yao_voiceunit.respect_grain == respect_grain_float
 
 
-def test_VoiceUnit_set_respect_bit_SetsAttribute():
+def test_VoiceUnit_set_respect_grain_SetsAttribute():
     # ESTABLISH
     bob_voiceunit = voiceunit_shop("Bob")
-    assert bob_voiceunit.respect_bit == 1
+    assert bob_voiceunit.respect_grain == 1
 
     # WHEN
-    x_respect_bit = 5
-    bob_voiceunit.set_respect_bit(x_respect_bit)
+    x_respect_grain = 5
+    bob_voiceunit.set_respect_grain(x_respect_grain)
 
     # THEN
-    assert bob_voiceunit.respect_bit == x_respect_bit
+    assert bob_voiceunit.respect_grain == x_respect_grain
 
 
 def test_VoiceUnit_set_voice_cred_points_SetsAttribute():

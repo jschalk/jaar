@@ -1,17 +1,17 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import open_file, save_file
 from src.ch10_pack_logic.pack import get_packunit_from_json, packunit_shop
-from src.ch12_hub_toolbox.ch12_path import (
+from src.ch12_belief_file_toolbox.ch12_path import (
     create_belief_event_dir_path as belief_event_dir,
     create_event_all_pack_path as all_pack_path,
 )
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.ch18_etl_toolbox.transformers import etl_event_belief_csvs_to_pack_json
+from src.ref.ch18_keywords import Ch18Keywords as wx
 
 
 def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_beliefunit(
@@ -29,7 +29,7 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_be
     # a23_bob_e3_dir = create_path(a23_bob_dir, event3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
     a23_bob_e3_dir = belief_event_dir(moment_mstr_dir, a23_str, bob_inx, event3)
-    e3_put_csv = f"""{wx.event_int},{wx.face_name},moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit
+    e3_put_csv = f"""{wx.event_int},{wx.face_name},moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_grain,money_grain,respect_grain
 {event3},{sue_inx},{a23_str},{bob_inx},,,,,,,,
 """
     save_file(a23_bob_e3_dir, put_agg_csv_filename, e3_put_csv)

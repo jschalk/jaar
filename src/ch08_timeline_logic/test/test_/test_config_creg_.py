@@ -4,7 +4,6 @@ from src.ch04_voice_logic.group import awardunit_shop
 from src.ch05_reason_logic.reason import reasonunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_timeline_logic._ref.ch08_keywords import Ch08Keywords as wx
 from src.ch08_timeline_logic.test._util.ch08_examples import (
     add_time_creg_planunit,
     add_time_five_planunit,
@@ -32,6 +31,7 @@ from src.ch08_timeline_logic.timeline_main import (
     get_timeline_min_difference,
     get_year_rope,
 )
+from src.ref.ch08_keywords import Ch08Keywords as wx
 
 
 def test_get_creg_config_ReturnsObj():

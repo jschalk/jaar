@@ -9,9 +9,13 @@ from src.ch02_rope_logic.rope import (
     is_labelterm,
     validate_labelterm,
 )
-from src.ch03_finance_logic.allot import allot_scale
-from src.ch03_finance_logic.finance_config import RespectNum, default_RespectBit_if_None
-from src.ch04_voice_logic._ref.ch04_semantic_types import VoiceName
+from src.ch03_allot_toolbox.allot import allot_scale, default_grain_num_if_None
+from src.ch04_voice_logic._ref.ch04_semantic_types import (
+    FundNum,
+    RespectGrain,
+    RespectNum,
+    VoiceName,
+)
 from src.ch04_voice_logic.group import (
     GroupTitle,
     MemberShip,
@@ -20,31 +24,20 @@ from src.ch04_voice_logic.group import (
 )
 
 
-class InvalidVoiceException(Exception):
-    pass
-
-
 class Bad_voice_nameMemberShipException(Exception):
     pass
 
 
 @dataclass
-class VoiceCore:
-    voice_name: VoiceName = None
-    knot: str = None
-    respect_bit: float = None
-
-    def set_name(self, x_voice_name: VoiceName):
-        self.voice_name = validate_labelterm(x_voice_name, self.knot)
-
-
-@dataclass
-class VoiceUnit(VoiceCore):
+class VoiceUnit:
     """This represents the belief_name's opinion of the VoiceUnit.voice_name
     VoiceUnit.voice_cred_points represents how much voice_cred_points the _belief_name projects to the voice_name
     VoiceUnit.voice_debt_points represents how much voice_debt_points the _belief_name projects to the voice_name
     """
 
+    voice_name: VoiceName = None
+    knot: str = None
+    respect_grain: RespectGrain = None
     voice_cred_points: int = None
     voice_debt_points: int = None
     # special attribute: static in belief json, in memory it is deleted after loading and recalculated during saving.
@@ -55,15 +48,18 @@ class VoiceUnit(VoiceCore):
     irrational_voice_debt_points: int = None  # set by listening process
     inallocable_voice_debt_points: int = None  # set by listening process
     # set by Belief.cashout()
-    fund_give: float = None
-    fund_take: float = None
-    fund_agenda_give: float = None
-    fund_agenda_take: float = None
-    fund_agenda_ratio_give: float = None
-    fund_agenda_ratio_take: float = None
+    fund_give: FundNum = None
+    fund_take: FundNum = None
+    fund_agenda_give: FundNum = None
+    fund_agenda_take: FundNum = None
+    fund_agenda_ratio_give: FundNum = None
+    fund_agenda_ratio_take: FundNum = None
 
-    def set_respect_bit(self, x_respect_bit: float):
-        self.respect_bit = x_respect_bit
+    def set_name(self, x_voice_name: VoiceName):
+        self.voice_name = validate_labelterm(x_voice_name, self.knot)
+
+    def set_respect_grain(self, x_respect_grain: float):
+        self.respect_grain = x_respect_grain
 
     def set_credor_voice_debt_points(
         self,
@@ -195,7 +191,7 @@ class VoiceUnit(VoiceCore):
             x_membership.group_title: x_membership.group_cred_points
             for x_membership in self.memberships.values()
         }
-        allot_dict = allot_scale(ledger_dict, self.credor_pool, self.respect_bit)
+        allot_dict = allot_scale(ledger_dict, self.credor_pool, self.respect_grain)
         for x_group_title, alloted_pool in allot_dict.items():
             self.get_membership(x_group_title).credor_pool = alloted_pool
 
@@ -205,7 +201,7 @@ class VoiceUnit(VoiceCore):
             x_membership.group_title: x_membership.group_debt_points
             for x_membership in self.memberships.values()
         }
-        allot_dict = allot_scale(ledger_dict, self.debtor_pool, self.respect_bit)
+        allot_dict = allot_scale(ledger_dict, self.debtor_pool, self.respect_grain)
         for x_group_title, alloted_pool in allot_dict.items():
             self.get_membership(x_group_title).debtor_pool = alloted_pool
 
@@ -283,7 +279,7 @@ def voiceunit_shop(
     voice_cred_points: int = None,
     voice_debt_points: int = None,
     knot: str = None,
-    respect_bit: float = None,
+    respect_grain: float = None,
 ) -> VoiceUnit:
     x_voiceunit = VoiceUnit(
         voice_cred_points=get_1_if_None(voice_cred_points),
@@ -300,7 +296,26 @@ def voiceunit_shop(
         fund_agenda_ratio_give=0,
         fund_agenda_ratio_take=0,
         knot=default_knot_if_None(knot),
-        respect_bit=default_RespectBit_if_None(respect_bit),
+        respect_grain=default_grain_num_if_None(respect_grain),
     )
     x_voiceunit.set_name(x_voice_name=voice_name)
     return x_voiceunit
+
+
+class calc_give_take_net_Exception(Exception):
+    pass
+
+
+def calc_give_take_net(x_give: float, x_take: float) -> float:
+    x_give = get_0_if_None(x_give)
+    x_take = get_0_if_None(x_take)
+    if x_give < 0 or x_take < 0:
+        if x_give < 0 and x_take >= 0:
+            parameters_str = f"calc_give_take_net x_give={x_give}."
+        elif x_give >= 0:
+            parameters_str = f"calc_give_take_net x_take={x_take}."
+        else:
+            parameters_str = f"calc_give_take_net x_give={x_give} and x_take={x_take}."
+        exception_str = f"{parameters_str} Only non-negative numbers allowed."
+        raise calc_give_take_net_Exception(exception_str)
+    return x_give - x_take

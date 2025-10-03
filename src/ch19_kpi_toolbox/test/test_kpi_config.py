@@ -1,4 +1,3 @@
-from src.ch19_kpi_toolbox._ref.ch19_keywords import Ch19Keywords as wx
 from src.ch19_kpi_toolbox.kpi_mstr import (
     create_populate_kpi001_table,
     create_populate_kpi002_table,
@@ -6,6 +5,7 @@ from src.ch19_kpi_toolbox.kpi_mstr import (
     get_bundles_config,
     get_kpi_set_from_bundle,
 )
+from src.ref.ch19_keywords import Ch19Keywords as wx
 
 
 def test_get_all_kpi_functions_ReturnsObj():

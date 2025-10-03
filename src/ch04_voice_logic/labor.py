@@ -68,7 +68,7 @@ def laborunit_shop(_partys: dict[GroupTitle, PartyUnit] = None) -> LaborUnit:
     return LaborUnit(get_empty_dict_if_None(_partys))
 
 
-def laborunit_get_from_dict(laborunit_dict: dict) -> LaborUnit:
+def get_laborunit_from_dict(laborunit_dict: dict) -> LaborUnit:
     x_laborunit = laborunit_shop()
     partys_dict = laborunit_dict.get("_partys")
     for party_dict in partys_dict.values():

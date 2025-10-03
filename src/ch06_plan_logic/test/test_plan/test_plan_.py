@@ -1,11 +1,11 @@
 from inspect import getdoc as inspect_getdoc
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None
-from src.ch03_finance_logic.finance_config import default_fund_iota_if_None
+from src.ch03_allot_toolbox.allot import default_grain_num_if_None
 from src.ch04_voice_logic.group import awardunit_shop
 from src.ch04_voice_logic.labor import laborunit_shop
-from src.ch06_plan_logic._ref.ch06_keywords import Ch06Keywords as wx
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import PlanUnit, planunit_shop
+from src.ref.ch06_keywords import Ch06Keywords as wx
 
 
 def test_PlanUnit_Exists():
@@ -50,7 +50,7 @@ def test_PlanUnit_Exists():
     assert x_planunit.tree_level is None
     assert x_planunit.active_hx is None
     assert x_planunit.fund_ratio is None
-    assert x_planunit.fund_iota is None
+    assert x_planunit.fund_grain is None
     assert x_planunit.fund_onset is None
     assert x_planunit.fund_cease is None
     assert x_planunit.healerunit_ratio is None
@@ -87,7 +87,7 @@ def test_PlanUnit_Exists():
         wx.plan_label,
         wx.denom,
         wx.factunits,
-        wx.fund_iota,
+        wx.fund_grain,
         wx.gogo_want,
         wx.healerunit,
         wx.laborunit,
@@ -165,7 +165,7 @@ def test_planunit_shop_ReturnsObj_WithOneParameter():
     assert x_planunit.tree_level is None
     assert x_planunit.active_hx == {}
     assert x_planunit.fund_ratio is None
-    assert x_planunit.fund_iota == default_fund_iota_if_None()
+    assert x_planunit.fund_grain == default_grain_num_if_None()
     assert x_planunit.fund_onset is None
     assert x_planunit.fund_cease is None
     assert x_planunit.reasonunits == {}
@@ -202,20 +202,20 @@ def test_planunit_shop_ReturnsObj_Given_healerunit_Parameter():
     clean_str = "clean"
     x_healerunit = healerunit_shop({"Sue", "Yao"})
     x_problem_bool = True
-    x_fund_iota = 88
+    x_fund_grain = 88
 
     # WHEN
     x_planunit = planunit_shop(
         clean_str,
         healerunit=x_healerunit,
         problem_bool=x_problem_bool,
-        fund_iota=x_fund_iota,
+        fund_grain=x_fund_grain,
     )
 
     # THEN
     assert x_planunit.healerunit == x_healerunit
     assert x_planunit.problem_bool == x_problem_bool
-    assert x_planunit.fund_iota == x_fund_iota
+    assert x_planunit.fund_grain == x_fund_grain
 
 
 def test_planunit_shop_ReturnsObjWith_awardunits():

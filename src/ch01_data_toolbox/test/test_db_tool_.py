@@ -38,18 +38,18 @@ from src.ch01_data_toolbox.test._util.ch01_env import (
 
 def test_sqlite_obj_str_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert sqlite_obj_str(True, "TEXT") == """'TRUE'"""
-    assert sqlite_obj_str(False, "TEXT") == """'FALSE'"""
-    assert sqlite_obj_str(True, "INTEGER") == "1"
-    assert sqlite_obj_str(False, "INTEGER") == "0"
-    assert sqlite_obj_str("yea", "TEXT") == """'yea'"""
-    assert sqlite_obj_str(2, "TEXT") == "'2'"
-    assert sqlite_obj_str(1, "TEXT") == "'1'"
-    assert sqlite_obj_str(0, "TEXT") == "'0'"
-    assert sqlite_obj_str(None, "TEXT") == "NULL"
-    assert sqlite_obj_str(12.5, "INTEGER") == "12"
-    assert sqlite_obj_str(12.5, "REAL") == "12.5"
-    assert sqlite_obj_str(None, "REAL") == "NULL"
+    assert sqlite_obj_str(True, sqlite_datatype="TEXT") == "'TRUE'"
+    assert sqlite_obj_str(False, sqlite_datatype="TEXT") == "'FALSE'"
+    assert sqlite_obj_str(True, sqlite_datatype="INTEGER") == "1"
+    assert sqlite_obj_str(False, sqlite_datatype="INTEGER") == "0"
+    assert sqlite_obj_str("yea", sqlite_datatype="TEXT") == "'yea'"
+    assert sqlite_obj_str(2, sqlite_datatype="TEXT") == "'2'"
+    assert sqlite_obj_str(1, sqlite_datatype="TEXT") == "'1'"
+    assert sqlite_obj_str(0, sqlite_datatype="TEXT") == "'0'"
+    assert sqlite_obj_str(None, sqlite_datatype="TEXT") == "NULL"
+    assert sqlite_obj_str(12.5, sqlite_datatype="INTEGER") == "12"
+    assert sqlite_obj_str(12.5, sqlite_datatype="REAL") == "12.5"
+    assert sqlite_obj_str(None, sqlite_datatype="REAL") == "NULL"
 
 
 def test_sqlite_create_type_reference_insert_sqlstr_ReturnsObj_Scenario0_WithoutNones():

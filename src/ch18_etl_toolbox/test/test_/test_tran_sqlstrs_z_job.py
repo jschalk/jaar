@@ -3,12 +3,12 @@ from src.ch01_data_toolbox.db_toolbox import db_table_exists, get_create_table_s
 from src.ch07_belief_logic.belief_config import get_belief_config_dict
 from src.ch17_idea_logic.idea_config import get_idea_sqlite_types
 from src.ch17_idea_logic.idea_db_tool import get_default_sorted_list
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_job_tables,
     create_prime_tablename as prime_table,
     get_job_create_table_sqlstrs,
 )
+from src.ref.ch18_keywords import Ch18Keywords as wx
 
 
 def test_get_job_create_table_sqlstrs_ReturnsObj():

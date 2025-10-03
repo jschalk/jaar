@@ -144,11 +144,11 @@
     "jvalues": {
       "credor_respect": {}, 
       "debtor_respect": {}, 
-      "fund_iota": {}, 
+      "fund_grain": {}, 
       "fund_pool": {}, 
       "max_tree_traverse": {}, 
-      "penny": {}, 
-      "respect_bit": {}, 
+      "money_grain": {}, 
+      "respect_grain": {}, 
       "tally": {}
     }
   }, 
@@ -214,12 +214,12 @@
     "jkeys": {"event_int": {}, "face_name": {}, "moment_label": {}}, 
     "jvalues": {
       "c400_number": {}, 
-      "fund_iota": {}, 
+      "fund_grain": {}, 
       "job_listen_rotations": {}, 
       "knot": {}, 
       "monthday_index": {}, 
-      "penny": {}, 
-      "respect_bit": {}, 
+      "money_grain": {}, 
+      "respect_grain": {}, 
       "timeline_label": {}, 
       "yr1_jan1_offset": {}
     }

@@ -71,7 +71,7 @@ def test_generate_ingest_list_ReturnsList_v1():
     ingested_list = generate_ingest_list(
         plan_list=list(zia_beliefunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
-        respect_bit=zia_resepect_bit,
+        respect_grain=zia_resepect_bit,
     )
 
     # THEN
@@ -98,7 +98,7 @@ def test_generate_ingest_list_ReturnsList_v2():
     ingested_list = generate_ingest_list(
         plan_list=list(zia_beliefunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
-        respect_bit=zia_resepect_bit,
+        respect_grain=zia_resepect_bit,
     )
 
     # THEN
@@ -129,7 +129,7 @@ def test_generate_ingest_list_ReturnsList_v3():
     ingested_list = generate_ingest_list(
         plan_list=list(zia_beliefunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
-        respect_bit=zia_resepect_bit,
+        respect_grain=zia_resepect_bit,
     )
 
     # THEN
@@ -158,7 +158,7 @@ def test_generate_ingest_list_ReturnsList_v4():
     ingested_list = generate_ingest_list(
         plan_list=list(zia_beliefunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
-        respect_bit=zia_resepect_bit,
+        respect_grain=zia_resepect_bit,
     )
 
     # THEN

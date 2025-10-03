@@ -40,12 +40,12 @@ def get_moment_dict_from_sqlstrs(
         if monthday_index:
             moment_dict["timeline"]["monthday_index"] = monthday_index
 
-    if fund_iota := momentunit_row[5]:
-        moment_dict["fund_iota"] = fund_iota
-    if penny := momentunit_row[6]:
-        moment_dict["penny"] = penny
-    if respect_bit := momentunit_row[7]:
-        moment_dict["respect_bit"] = respect_bit
+    if fund_grain := momentunit_row[5]:
+        moment_dict["fund_grain"] = fund_grain
+    if money_grain := momentunit_row[6]:
+        moment_dict["money_grain"] = money_grain
+    if respect_grain := momentunit_row[7]:
+        moment_dict["respect_grain"] = respect_grain
     if knot := momentunit_row[8]:
         moment_dict["knot"] = knot
 

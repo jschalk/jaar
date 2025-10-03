@@ -1,7 +1,5 @@
-from src.ch03_finance_logic.finance_config import (
-    default_respect_num,
-    validate_respect_num,
-)
+from src.ch03_allot_toolbox.allot import default_pool_num, validate_pool_num
+from src.ch04_voice_logic.voice import RespectNum
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch13_belief_listen_logic.basis_beliefs import (
@@ -15,8 +13,8 @@ def test_create_empty_belief_from_belief_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     slash_str = "/"
-    penny_float = 0.7
-    yao_gut = beliefunit_shop(yao_str, knot=slash_str, penny=penny_float)
+    money_grain_float = 0.7
+    yao_gut = beliefunit_shop(yao_str, knot=slash_str, money_grain=money_grain_float)
     yao_gut.set_l1_plan(planunit_shop("Iowa"))
     zia_str = "Zia"
     zia_voice_cred_points = 47
@@ -49,13 +47,13 @@ def test_create_empty_belief_from_belief_ReturnsObj():
     assert yao_empty_vision.get_voiceunits_dict() == {}
     assert yao_empty_vision.knot == yao_gut.knot
     assert yao_empty_vision.fund_pool == yao_gut.fund_pool
-    assert yao_empty_vision.fund_iota == yao_gut.fund_iota
-    assert yao_empty_vision.respect_bit == yao_gut.respect_bit
-    assert yao_empty_vision.penny == yao_gut.penny
+    assert yao_empty_vision.fund_grain == yao_gut.fund_grain
+    assert yao_empty_vision.respect_grain == yao_gut.respect_grain
+    assert yao_empty_vision.money_grain == yao_gut.money_grain
     assert yao_empty_vision.credor_respect != yao_gut.credor_respect
-    assert yao_empty_vision.credor_respect == validate_respect_num()
+    assert yao_empty_vision.credor_respect == RespectNum(validate_pool_num())
     assert yao_empty_vision.debtor_respect != yao_gut.debtor_respect
-    assert yao_empty_vision.debtor_respect == validate_respect_num()
+    assert yao_empty_vision.debtor_respect == RespectNum(validate_pool_num())
     yao_empty_vision.cashout()
     assert yao_empty_vision.voices == {}
 
@@ -96,8 +94,8 @@ def test_create_listen_basis_ReturnsObj():
     assert yao_basis_vision.get_voiceunits_dict() == yao_duty.get_voiceunits_dict()
     assert yao_basis_vision.knot == yao_duty.knot
     assert yao_basis_vision.fund_pool == yao_duty.fund_pool
-    assert yao_basis_vision.fund_iota == yao_duty.fund_iota
-    assert yao_basis_vision.respect_bit == yao_duty.respect_bit
+    assert yao_basis_vision.fund_grain == yao_duty.fund_grain
+    assert yao_basis_vision.respect_grain == yao_duty.respect_grain
     assert yao_basis_vision.credor_respect == yao_duty.credor_respect
     assert yao_basis_vision.debtor_respect == yao_duty.debtor_respect
     yao_basis_vision.cashout()
@@ -118,15 +116,15 @@ def test_get_default_job_ReturnsObj():
     blue_str = "blue"
     slash_str = "/"
     x_fund_pool = 99000
-    x_fund_iota = 80
-    x_respect_bit = 5
+    x_fund_grain = 80
+    x_respect_grain = 5
     sue_voice_pool = 800
     casa_str = "casa"
     bob_str = "Bob"
     last_pack_id = 7
     sue_max_tree_traverse = 9
     sue_beliefunit = beliefunit_shop(
-        sue_str, blue_str, slash_str, x_fund_pool, x_fund_iota, x_respect_bit
+        sue_str, blue_str, slash_str, x_fund_pool, x_fund_grain, x_respect_grain
     )
     sue_beliefunit.set_last_pack_id(last_pack_id)
     sue_beliefunit.add_voiceunit(bob_str, 3, 4)
@@ -147,10 +145,10 @@ def test_get_default_job_ReturnsObj():
     assert default_job.moment_label == blue_str
     assert default_job.knot == slash_str
     assert default_job.fund_pool == sue_voice_pool
-    assert default_job.fund_iota == x_fund_iota
-    assert default_job.respect_bit == x_respect_bit
-    assert default_job.credor_respect == default_respect_num()
-    assert default_job.debtor_respect == default_respect_num()
+    assert default_job.fund_grain == x_fund_grain
+    assert default_job.respect_grain == x_respect_grain
+    assert default_job.credor_respect == RespectNum(default_pool_num())
+    assert default_job.debtor_respect == RespectNum(default_pool_num())
     assert default_job.max_tree_traverse == sue_max_tree_traverse
     assert len(default_job.get_voiceunits_dict()) == 1
     assert len(default_job._plan_dict) == 1

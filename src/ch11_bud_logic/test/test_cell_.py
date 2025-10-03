@@ -29,7 +29,7 @@ def test_CellUnit_Exists():
     assert not x_cellunit.event_int
     assert not x_cellunit.celldepth
     assert not x_cellunit.bud_belief_name
-    assert not x_cellunit.penny
+    assert not x_cellunit.money_grain
     assert not x_cellunit.quota
     assert not x_cellunit.mandate
     assert not x_cellunit.beliefadjust
@@ -50,7 +50,7 @@ def test_cellunit_shop_ReturnsObj_Scenario0_WithoutParameters():
     assert x_cellunit.ancestors == []
     assert not x_cellunit.event_int
     assert x_cellunit.celldepth == 0
-    assert x_cellunit.penny == 1
+    assert x_cellunit.money_grain == 1
     assert x_cellunit.quota == CELLNODE_QUOTA_DEFAULT
     assert x_cellunit.mandate == CELLNODE_QUOTA_DEFAULT
     assert x_cellunit.beliefadjust.to_dict() == beliefunit_shop(bob_str).to_dict()
@@ -70,7 +70,7 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
     bob_sue_event7 = 7
     bob_sue_bud_belief = yao_str
     bob_sue_celldepth3 = 3
-    bob_sue_penny2 = 2
+    bob_sue_money_grain2 = 2
     bob_sue_quota300 = 300
     bob_sue_mandate = 444
     bob_sue_belief = beliefunit_shop(sue_str)
@@ -88,7 +88,7 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
         bob_sue_ancestors,
         bob_sue_event7,
         bob_sue_celldepth3,
-        bob_sue_penny2,
+        bob_sue_money_grain2,
         bob_sue_quota300,
         bob_sue_belief,
         bob_sue_beliefevent_factunits,
@@ -102,7 +102,7 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
     assert x_cellunit.event_int == bob_sue_event7
     assert x_cellunit.celldepth == bob_sue_celldepth3
     assert x_cellunit.bud_belief_name == bob_sue_bud_belief
-    assert x_cellunit.penny == bob_sue_penny2
+    assert x_cellunit.money_grain == bob_sue_money_grain2
     assert x_cellunit.quota == bob_sue_quota300
     assert x_cellunit.mandate == bob_sue_mandate
     assert x_cellunit.beliefadjust == bob_sue_belief
@@ -537,7 +537,7 @@ def test_CellUnit_filter_facts_by_reason_contexts_ReturnsObj_Scenario1():
     sue_event7 = 7
     sue_bud_belief = yao_str
     sue_celldepth3 = 3
-    sue_penny2 = 2
+    sue_money_grain2 = 2
     sue_quota300 = 300
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
@@ -550,7 +550,7 @@ def test_CellUnit_filter_facts_by_reason_contexts_ReturnsObj_Scenario1():
         sue_ancestors,
         sue_event7,
         sue_celldepth3,
-        sue_penny2,
+        sue_money_grain2,
         sue_quota300,
         None,
         sue_beliefevent_factunits,
@@ -597,7 +597,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario0():
     sue_event7 = 7
     sue_bud_belief = yao_str
     sue_celldepth3 = 3
-    sue_penny2 = 2
+    sue_money_grain2 = 2
     sue_quota300 = 300
     sue_belief = beliefunit_shop(sue_str, "amy23")
     sue_cell = cellunit_shop(
@@ -605,7 +605,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario0():
         sue_ancestors,
         sue_event7,
         sue_celldepth3,
-        sue_penny2,
+        sue_money_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
     )
@@ -626,7 +626,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario1():
     sue_event7 = 7
     sue_bud_belief = yao_str
     sue_celldepth3 = 3
-    sue_penny2 = 2
+    sue_money_grain2 = 2
     sue_quota300 = 300
     casa_clean_fact = clean_factunit()
     clean_facts = {casa_clean_fact.fact_context: casa_clean_fact}
@@ -637,7 +637,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario1():
         sue_ancestors,
         sue_event7,
         sue_celldepth3,
-        sue_penny2,
+        sue_money_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
         beliefevent_facts=clean_facts,
@@ -664,7 +664,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario2():
     sue_event7 = 7
     sue_bud_belief = yao_str
     sue_celldepth3 = 3
-    sue_penny2 = 2
+    sue_money_grain2 = 2
     sue_quota300 = 300
     casa_clean_fact = clean_factunit()
     casa_dirty_fact = dirty_factunit()
@@ -678,7 +678,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario2():
         sue_ancestors,
         sue_event7,
         sue_celldepth3,
-        sue_penny2,
+        sue_money_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
         beliefevent_facts=clean_facts,
@@ -706,7 +706,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario3():
     sue_event7 = 7
     sue_bud_belief = yao_str
     sue_celldepth3 = 3
-    sue_penny2 = 2
+    sue_money_grain2 = 2
     sue_quota300 = 300
     casa_clean_fact = clean_factunit()
     casa_dirty_fact = dirty_factunit()
@@ -723,7 +723,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario3():
         sue_ancestors,
         sue_event7,
         sue_celldepth3,
-        sue_penny2,
+        sue_money_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
         beliefevent_facts=clean_facts,
@@ -751,7 +751,7 @@ def test_CellUnit_set_voice_mandate_ledger_ReturnsObj_Scenario0():
     sue_ancestors = [sue_str]
     sue_event7 = 7
     sue_celldepth3 = 3
-    sue_penny2 = 2
+    sue_money_grain2 = 2
     sue_quota300 = 300
     sue_mandate = 444
     sue_belief = beliefunit_shop(sue_str, "amy23")
@@ -760,7 +760,7 @@ def test_CellUnit_set_voice_mandate_ledger_ReturnsObj_Scenario0():
         sue_ancestors,
         sue_event7,
         sue_celldepth3,
-        sue_penny2,
+        sue_money_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
         mandate=sue_mandate,
@@ -785,7 +785,7 @@ def test_CellUnit_set_voice_mandate_ledger_ReturnsObj_Scenario1():
     sue_ancestors = [sue_str]
     sue_event7 = 7
     sue_celldepth3 = 3
-    sue_penny2 = 2
+    sue_money_grain2 = 2
     sue_quota300 = 300
     sue_mandate = 444
     sue_belief = beliefunit_shop(sue_str, "amy23")
@@ -796,7 +796,7 @@ def test_CellUnit_set_voice_mandate_ledger_ReturnsObj_Scenario1():
         sue_ancestors,
         sue_event7,
         sue_celldepth3,
-        sue_penny2,
+        sue_money_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
         mandate=sue_mandate,
@@ -822,7 +822,7 @@ def test_CellUnit_calc_voice_mandate_ledger_ReturnsObj_Scenario0():
     sue_ancestors = [sue_str]
     sue_event7 = 7
     sue_celldepth3 = 3
-    sue_penny2 = 2
+    sue_money_grain2 = 2
     sue_quota300 = 300
     sue_mandate = 444
     sue_belief = beliefunit_shop(sue_str, "amy23")
@@ -848,7 +848,7 @@ def test_CellUnit_calc_voice_mandate_ledger_ReturnsObj_Scenario0():
         sue_ancestors,
         sue_event7,
         sue_celldepth3,
-        sue_penny2,
+        sue_money_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
         beliefevent_facts=sue_beliefevent_factunits,
@@ -887,7 +887,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
     sue_ancestors = [sue_str]
     sue_event7 = 7
     sue_celldepth3 = 3
-    sue_penny2 = 2
+    sue_money_grain2 = 2
     sue_quota300 = 300
     sue_mandate = 444
     sue_belief = beliefunit_shop(sue_str, "amy23")
@@ -899,7 +899,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
         sue_ancestors,
         sue_event7,
         sue_celldepth3,
-        sue_penny2,
+        sue_money_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
         mandate=sue_mandate,
@@ -915,7 +915,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
     assert sue_sue_cell.ancestors == [sue_str, sue_str]
     assert sue_sue_cell.event_int == sue_event7
     assert sue_sue_cell.celldepth == sue_celldepth3 - 1
-    assert sue_sue_cell.penny == sue_penny2
+    assert sue_sue_cell.money_grain == sue_money_grain2
     assert sue_sue_cell.mandate == 133
     # assert not sue_sue_cell.beliefadjust
     assert sue_sue_cell.beliefevent_facts == {}
@@ -927,7 +927,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
     assert sue_yao_cell.ancestors == [sue_str, yao_str]
     assert sue_yao_cell.event_int == sue_event7
     assert sue_yao_cell.celldepth == sue_celldepth3 - 1
-    assert sue_yao_cell.penny == sue_penny2
+    assert sue_yao_cell.money_grain == sue_money_grain2
     assert sue_yao_cell.mandate == 311
     # assert sue_yao_cell.beliefadjust
     assert sue_yao_cell.beliefevent_facts == {}
@@ -944,7 +944,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario1_BudDepth0():
     sue_ancestors = [sue_str]
     sue_event7 = 7
     sue_celldepth = 0
-    sue_penny2 = 2
+    sue_money_grain2 = 2
     sue_quota300 = 300
     sue_belief = beliefunit_shop(sue_str, "amy23")
     sue_belief.add_voiceunit(sue_str, 3, 5)
@@ -955,7 +955,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario1_BudDepth0():
         sue_ancestors,
         sue_event7,
         sue_celldepth,
-        sue_penny2,
+        sue_money_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
     )
@@ -1018,7 +1018,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     sue_ancestors = [sue_str]
     sue_event7 = 7
     sue_celldepth3 = 3
-    sue_penny2 = 2
+    sue_money_grain2 = 2
     sue_mandate = 444
     sue_belief = beliefunit_shop(sue_str, "amy23")
     sue_belief.add_voiceunit(sue_str, 3, 5)
@@ -1043,7 +1043,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
         sue_ancestors,
         sue_event7,
         sue_celldepth3,
-        sue_penny2,
+        sue_money_grain2,
         beliefadjust=sue_belief,
         beliefevent_facts=sue_beliefevent_factunits,
         found_facts=sue_found_factunits,

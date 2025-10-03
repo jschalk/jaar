@@ -1,6 +1,5 @@
 from pandas import DataFrame
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None, to_rope
-from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords as wx
 from src.ch16_translate_logic.map import (
     LabelMap,
     NameMap,
@@ -13,6 +12,7 @@ from src.ch16_translate_logic.map import (
 )
 from src.ch16_translate_logic.translate_config import default_unknown_str_if_None
 from src.ch16_translate_logic.translate_main import TranslateUnit, translateunit_shop
+from src.ref.ch16_keywords import Ch16Keywords as wx
 
 
 def get_clean_labelmap() -> LabelMap:

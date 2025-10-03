@@ -6,9 +6,9 @@ from src.ch01_data_toolbox.dict_toolbox import (
     set_in_nested_dict,
 )
 from src.ch01_data_toolbox.file_toolbox import save_file
-from src.ch03_finance_logic.allot import allot_scale
+from src.ch03_allot_toolbox.allot import allot_scale
 from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, VoiceName
-from src.ch12_hub_toolbox.hubunit import HubUnit
+from src.ch12_belief_file_toolbox.hubunit import HubUnit
 from src.ch14_keep_logic.rivercycle import (
     RiverGrade,
     create_init_rivercycle,
@@ -90,7 +90,7 @@ class RiverRun:
 
     def set_tax_dues(self, debtorledger: dict[VoiceName, float]):
         x_amount = self.hubunit.keep_point_magnitude
-        self.tax_dues = allot_scale(debtorledger, x_amount, self.hubunit.penny)
+        self.tax_dues = allot_scale(debtorledger, x_amount, self.hubunit.money_grain)
 
     def voice_has_tax_due(self, x_voice_name: VoiceName) -> bool:
         return self.tax_dues.get(x_voice_name) is not None
@@ -209,7 +209,7 @@ class RiverRun:
         self._grants = allot_scale(
             ledger=grant_credorledger,
             scale_number=self.hubunit.keep_point_magnitude,
-            grain_unit=self.hubunit.penny,
+            grain_unit=self.hubunit.money_grain,
         )
 
     def _save_rivergrade_file(self, voice_name: VoiceName):

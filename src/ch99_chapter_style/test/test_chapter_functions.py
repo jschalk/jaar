@@ -37,24 +37,25 @@ from src.ch99_chapter_style.style import (
 def expected_semantic_types() -> set:
     return {
         "BeliefName",
-        "BitNum",
+        "RespectGrain",
         "CRUD_command",
         "FirstLabel",
         "NexusLabel",
         "EventInt",
         "FaceName",
-        "FundIota",
+        "FundGrain",
         "FundNum",
-        "GrainFloat",
+        "GrainNum",
         "GroupTitle",
         "HealerName",
         "KnotTerm",
         "LabelTerm",
         "LobbyID",
         "MomentLabel",
-        "MoneyUnit",
+        "MoneyNum",
         "NameTerm",
-        "PennyNum",
+        "MoneyGrain",
+        "PoolNum",
         "RespectNum",
         "RopeTerm",
         "TimeLineLabel",
@@ -65,7 +66,7 @@ def expected_semantic_types() -> set:
     }
 
 
-def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
+def test_Chapters_CheckStringMetricsFromEveryFile():
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
     excluded_functions = {
@@ -159,6 +160,9 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
     keywords_dict = get_keywords_src_config()
     keywords_by_chapter = get_keywords_by_chapter(keywords_dict)
     all_keywords_set = set(keywords_dict.keys())
+    keywords_in_ch_count = {}
+    for keyword in keywords_dict.keys():
+        keywords_in_ch_count[keyword] = {}
     cumlative_ch_keywords_dict = get_cumlative_ch_keywords_dict(keywords_by_chapter)
 
     # WHEN / THEN
@@ -195,10 +199,33 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
             if "Keywords" in file_str and not is_doc_builder_file:
                 assert ch_class_name in file_str, enum_x
 
-            if file_path.find(f"\\ch{chapter_num:02}_keywords.py") > -1:
-                print(f"{file_path=}")
+            is_ref_keywords_file = f"\\ch{chapter_num:02}_keywords.py" in file_path
+            if is_ref_keywords_file:
+                # print(f"{file_path=}")
                 assert file_str.count("keywords import") == 0, "No imports"
                 assert file_str.count("from enum import Enum") == 1, "import Enum"
+
+            for keyword in allowed_chapter_keywords:
+                if keyword in file_str:
+                    add_ch_keyword_count(keywords_in_ch_count, keyword, chapter_prefix)
+
+    # Check that keyword is not introduced before it is used.
+    for keyword, chapters_dict in keywords_in_ch_count.items():
+        # for chapter_prefix in sorted(chapters_dict.keys()):
+        #     chapter_count = chapters_dict.get(chapter_prefix)
+        #     # print(f"{keyword=} {chapter_prefix} {chapter_count=}")
+        min_chapter_prefix = min(chapters_dict.keys())
+        min_chapter_count = chapters_dict.get(min_chapter_prefix)
+        if min_chapter_count <= 2:
+            print(f"{keyword=} {min_chapter_prefix} {min_chapter_count=}")
+        assert min_chapter_count != 1
+
+
+def add_ch_keyword_count(keywords_ch_counts: dict, keyword: str, chapter_prefix: str):
+    keyword_ch_counts = keywords_ch_counts.get(keyword)
+    if keyword_ch_counts.get(chapter_prefix) is None:
+        keyword_ch_counts[chapter_prefix] = 0
+    keyword_ch_counts[chapter_prefix] += 1
 
 
 def test_Chapters_FirstLevelFilesDoNotImportKeywords():
@@ -235,19 +262,19 @@ def test_Chapters_KeywordEnumClassesAreCorrectlyTested():
     for chapter_num, ExpectedEnumClass in chXX_keyword_classes.items():
         chapter_desc = chapter_num_descs.get(chapter_num)
         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
-        chapter_ref_keywords_path = f"src.{chapter_desc}._ref.{chapter_prefix}_keywords"
+        chapter_ref_keywords_path = f"src.ref.{chapter_prefix}_keywords"
         print(f"{chapter_ref_keywords_path=}")
 
         # dynamically import the module
         mod = importlib_import_module(chapter_ref_keywords_path)
         enum_class_name = f"Ch{chapter_num:02}Keywords"
-        try:
-            getattr(mod, enum_class_name)
-        except:
-            print(f"class {enum_class_name}(str, Enum):")
-            for keyword in sorted(list(cumlative_ch_keywords_dict.get(chapter_num))):
-                print(f"    {keyword} = '{keyword}'")
-            print("def __str__(self): return self.value")
+        # try:
+        #     getattr(mod, enum_class_name)
+        # except Exception:
+        #     print(f"class {enum_class_name}(str, Enum):")
+        #     for keyword in sorted(list(cumlative_ch_keywords_dict.get(chapter_num))):
+        #         print(f"    {keyword} = '{keyword}'")
+        #     print("def __str__(self): return self.value")
 
         # print(f"{len(mod.__dict__)=}")
         ChKeywordsClass = getattr(mod, enum_class_name)

@@ -1,7 +1,6 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from src.ch01_data_toolbox.file_toolbox import create_path
-from src.ch21_lobby_logic._ref.ch21_keywords import Ch21Keywords as wx
 from src.ch21_lobby_logic.ch21_path import (
     LobbyID,
     create_lobby_dir_path,
@@ -9,6 +8,7 @@ from src.ch21_lobby_logic.ch21_path import (
     create_world_dir_path,
 )
 from src.ch21_lobby_logic.test._util.ch21_env import get_chapter_temp_dir
+from src.ref.ch21_keywords import Ch21Keywords as wx
 
 
 def test_LobbyID_Exists():

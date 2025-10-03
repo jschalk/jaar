@@ -7,7 +7,7 @@ from src.ch01_data_toolbox.plotly_toolbox import (
     add_simp_rect,
     conditional_fig_show,
 )
-from src.ch03_finance_logic.finance_config import default_money_magnitude
+from src.ch03_allot_toolbox.allot import default_pool_num
 from src.ch07_belief_logic.belief_graphics import display_plantree
 from src.ch07_belief_logic.belief_main import BeliefUnit
 
@@ -83,15 +83,15 @@ def get_listen_structures1_fig(graphics_bool: bool = False) -> plotly_Figure:
         d_sue1_p1 = f"Healer = {sue_str} "
         d_sue1_p2 = "Problem = problem1"
         d_sue1_p3 = "Keep = keep1"
-        d_sue1_p4 = f"Money = {default_money_magnitude()} "
+        d_sue1_p4 = f"Money = {default_pool_num()} "
         d_bob1_p1 = f"Healer = {bob_str} "
         d_bob1_p2 = "Problem = problem1"
         d_bob1_p3 = "Keep = keep1"
-        d_bob1_p4 = f"Money = {default_money_magnitude()} "
+        d_bob1_p4 = f"Money = {default_pool_num()} "
         d_sue2_p1 = f"Healer = {sue_str} "
         d_sue2_p2 = "Problem = problem2"
         d_sue2_p3 = "Keep = keep3"
-        d_sue2_p4 = f"Money={default_money_magnitude()} "
+        d_sue2_p4 = f"Money={default_pool_num()} "
 
         add_simp_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_str)
         add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_vision_str)
@@ -157,15 +157,15 @@ def get_listen_structures2_fig(graphics_bool: bool = False) -> plotly_Figure:
         d_sue1_p1 = f"Healer = {sue_str} "
         d_sue1_p2 = "Problem = problem1"
         d_sue1_p3 = "Keep = keep1"
-        d_sue1_p4 = f"Money = {default_money_magnitude()} "
+        d_sue1_p4 = f"Money = {default_pool_num()} "
         d_bob1_p1 = f"Healer = {bob_str} "
         d_bob1_p2 = "Problem = problem1"
         d_bob1_p3 = "Keep = keep1"
-        d_bob1_p4 = f"Money = {default_money_magnitude()} "
+        d_bob1_p4 = f"Money = {default_pool_num()} "
         d_sue2_p1 = f"Healer = {sue_str} "
         d_sue2_p2 = "Problem = problem2"
         d_sue2_p3 = "Keep = keep3"
-        d_sue2_p4 = f"Money={default_money_magnitude()} "
+        d_sue2_p4 = f"Money={default_pool_num()} "
 
         add_simp_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_str)
         add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_vision_str)
@@ -240,7 +240,7 @@ def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
         d_sue1_p1 = f"Healer = {sue_str} "
         d_sue1_p2 = "Problem = problem1"
         d_sue1_p3 = "Keep = keep1"
-        d_sue1_p4 = f"Money = {default_money_magnitude()} "
+        d_sue1_p4 = f"Money = {default_pool_num()} "
 
         add_simp_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_str)
         add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_vision_str)
@@ -279,9 +279,9 @@ def fund_graph13(
     blue_str = "blue"
     blue_str = "blue"
     d_sue1_p1 = "How fund is distributed."
-    d_sue1_p2 = "Regular Fund: Green arrows, all fund_iotas end up at VoiceUnits"
-    d_sue1_p3 = "Agenda Fund: Blue arrows, fund_iotas from active tasks"
-    d_sue1_p4 = f"Money = {default_money_magnitude()} "
+    d_sue1_p2 = "Regular Fund: Green arrows, all fund_grains end up at VoiceUnits"
+    d_sue1_p3 = "Agenda Fund: Blue arrows, fund_grains from active tasks"
+    d_sue1_p4 = f"Money = {default_pool_num()} "
     laborunit_str = "      AwardUnits"
     add_simp_rect(fig, 2, -0.3, 3, 0.3, laborunit_str)
     add_rect_arrow(fig, 2, 0.1, 1.2, 0.1, green_str)

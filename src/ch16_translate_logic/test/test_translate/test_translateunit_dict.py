@@ -1,5 +1,4 @@
 from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords as wx
 from src.ch16_translate_logic.test._util.ch16_examples import (
     get_clean_labelmap,
     get_clean_ropemap,
@@ -16,6 +15,7 @@ from src.ch16_translate_logic.translate_main import (
     get_translateunit_from_json,
     translateunit_shop,
 )
+from src.ref.ch16_keywords import Ch16Keywords as wx
 
 
 def _get_rid_of_translate_core_keys(map_dict: dict) -> dict:

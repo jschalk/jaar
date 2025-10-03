@@ -392,7 +392,7 @@ def inherit_translateunit(older: TranslateUnit, newer: TranslateUnit) -> Transla
         or older.inx_knot != newer.inx_knot
         or older.unknown_str != newer.unknown_str
     ):
-        raise TranslateCoreAttrConflictException("Core attributes in conflict")
+        raise TranslateCoreAttrConflictException("Core attrs in conflict")
     if older.event_int >= newer.event_int:
         raise TranslateCoreAttrConflictException("older translateunit is not older")
     newer.set_namemap(inherit_namemap(newer.namemap, older.namemap))

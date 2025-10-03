@@ -1,9 +1,9 @@
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
-from src.ch19_kpi_toolbox._ref.ch19_keywords import Ch19Keywords as wx
 from src.ch19_kpi_toolbox.kpi_sqlstrs import (
     get_create_kpi001_sqlstr,
     get_create_kpi002_sqlstr,
 )
+from src.ref.ch19_keywords import Ch19Keywords as wx
 
 
 def test_get_create_kpi001_sqlstr_ReturnsObj():

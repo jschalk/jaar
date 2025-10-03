@@ -1,5 +1,4 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     CREATE_BLRPERN_SOUND_PUT_AGG_STR,
     CREATE_TRLCORE_SOUND_VLD_SQLSTR,
@@ -8,6 +7,7 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
 )
 from src.ch18_etl_toolbox.transformers import set_moment_belief_sound_agg_knot_errors
+from src.ref.ch18_keywords import Ch18Keywords as wx
 
 
 def test_create_knot_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTable_Scenario0():

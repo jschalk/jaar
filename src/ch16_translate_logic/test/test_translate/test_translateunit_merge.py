@@ -1,5 +1,4 @@
 from pytest import raises as pytest_raises
-from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords as wx
 from src.ch16_translate_logic.test._util.ch16_examples import (
     get_clean_labelmap,
     get_clean_ropemap,
@@ -10,6 +9,7 @@ from src.ch16_translate_logic.translate_main import (
     inherit_translateunit,
     translateunit_shop,
 )
+from src.ref.ch16_keywords import Ch16Keywords as wx
 
 
 def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario0_EmptyTranslateUnits():
@@ -38,7 +38,7 @@ def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario1_RaiseErrorWhen
         inherit_translateunit(old_translateunit, new_translateunit)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_knot():
@@ -53,7 +53,7 @@ def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario2_RaiseErrorWhen
         inherit_translateunit(old_translateunit, new_translateunit)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_str():
@@ -68,7 +68,7 @@ def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario3_RaiseErrorWhen
         inherit_translateunit(old_translateunit, new_translateunit)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_name():
@@ -83,7 +83,7 @@ def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario4_RaiseErrorWhen
         inherit_translateunit(old_translateunit, new_translateunit)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario5_RaiseErrorWhenEventIntsOutOfOrder():

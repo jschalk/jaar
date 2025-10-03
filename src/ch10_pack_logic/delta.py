@@ -147,10 +147,10 @@ class BeliefDelta:
             x_beliefatom.set_jvalue("tally", after_belief.tally)
         if before_belief.fund_pool != after_belief.fund_pool:
             x_beliefatom.set_jvalue("fund_pool", after_belief.fund_pool)
-        if before_belief.fund_iota != after_belief.fund_iota:
-            x_beliefatom.set_jvalue("fund_iota", after_belief.fund_iota)
-        if before_belief.respect_bit != after_belief.respect_bit:
-            x_beliefatom.set_jvalue("respect_bit", after_belief.respect_bit)
+        if before_belief.fund_grain != after_belief.fund_grain:
+            x_beliefatom.set_jvalue("fund_grain", after_belief.fund_grain)
+        if before_belief.respect_grain != after_belief.respect_grain:
+            x_beliefatom.set_jvalue("respect_grain", after_belief.respect_grain)
         self.set_beliefatom(x_beliefatom)
 
     def add_beliefatoms_voices(

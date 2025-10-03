@@ -1,13 +1,13 @@
 from src.ch02_rope_logic.rope import create_rope
-from src.ch05_reason_logic._ref.ch05_keywords import Ch05Keywords as wx
 from src.ch05_reason_logic.reason import (
     FactCore,
     FactUnit,
     factheir_shop,
     factunit_shop,
-    factunits_get_from_dict,
     get_factunit_from_tuple,
+    get_factunits_from_dict,
 )
+from src.ref.ch05_keywords import Ch05Keywords as wx
 
 
 def test_FactUnit_Exists():
@@ -366,7 +366,7 @@ def test_FactCore_get_obj_key_SetsAttr():
     assert x_factcore.get_obj_key() == min_rope
 
 
-def test_factunits_get_from_dict_BuildsObj():
+def test_get_factunits_from_dict_BuildsObj():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
@@ -382,7 +382,7 @@ def test_factunits_get_from_dict_BuildsObj():
     }
 
     # WHEN
-    facts_dict = factunits_get_from_dict(static_dict)
+    facts_dict = get_factunits_from_dict(static_dict)
 
     # THEN
     assert len(facts_dict) == 1
@@ -390,7 +390,7 @@ def test_factunits_get_from_dict_BuildsObj():
     assert wk_fact == factunit_shop(fact_context=wk_rope, fact_state=sun_rope)
 
 
-def test_factunits_get_from_dict_BuildsObjFromIncompleteDict():
+def test_get_factunits_from_dict_BuildsObjFromIncompleteDict():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
@@ -404,7 +404,7 @@ def test_factunits_get_from_dict_BuildsObjFromIncompleteDict():
     }
 
     # WHEN
-    facts_dict = factunits_get_from_dict(static_dict)
+    facts_dict = get_factunits_from_dict(static_dict)
 
     # THEN
     wk_fact = facts_dict.get(wk_rope)

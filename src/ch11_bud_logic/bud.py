@@ -11,10 +11,11 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_json_from_dict,
     set_in_nested_dict,
 )
-from src.ch03_finance_logic.finance_config import FundNum, default_fund_pool
+from src.ch03_allot_toolbox.allot import default_pool_num
 from src.ch08_timeline_logic.timeline_main import TimeLinePoint
 from src.ch11_bud_logic._ref.ch11_semantic_types import (
     BeliefName,
+    FundNum,
     MomentLabel,
     VoiceName,
 )
@@ -240,7 +241,7 @@ def budunit_shop(
     celldepth: int = None,
 ) -> BudUnit:
     if quota is None:
-        quota = default_fund_pool()
+        quota = default_pool_num()
     if celldepth is None:
         celldepth = DEFAULT_CELLDEPTH
 
