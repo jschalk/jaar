@@ -15,7 +15,6 @@ from src.ch01_data_toolbox.file_toolbox import (
 from src.ch02_rope_logic.rope import validate_labelterm
 from src.ch03_finance_logic.finance_config import (
     default_fund_iota_if_None,
-    default_money_magnitude_if_None,
     default_RespectBit_if_None,
     filter_penny,
     validate_fund_pool,
@@ -440,7 +439,7 @@ def hubunit_shop(
         fund_iota=default_fund_iota_if_None(fund_iota),
         respect_bit=default_RespectBit_if_None(respect_bit),
         penny=filter_penny(penny),
-        keep_point_magnitude=default_money_magnitude_if_None(keep_point_magnitude),
+        keep_point_magnitude=validate_fund_pool(keep_point_magnitude),
     )
     x_hubunit.set_dir_attrs()
     return x_hubunit

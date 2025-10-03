@@ -13,8 +13,6 @@ from src.ch03_finance_logic.finance_config import (
     default_RespectBit_if_None,
     filter_penny,
     get_net,
-    trim_bit_excess,
-    trim_fund_iota_excess,
     trim_penny_excess,
     valid_finance_ratio,
     validate_fund_pool,
@@ -41,16 +39,6 @@ def test_default_RespectBit_if_None_ReturnsObj():
     assert default_RespectBit_if_None(None) == 1
     assert default_RespectBit_if_None(5) == 5
     assert default_RespectBit_if_None(0.03) == 1
-
-
-def test_trim_bit_excess_ReturnsedFloat():
-    # ESTABLISH / WHEN / THEN
-    assert trim_bit_excess(num=5.5, bit=1) == 5
-    assert trim_bit_excess(num=0.5, bit=1) == 0
-    assert trim_bit_excess(num=5.5, bit=0.1) == 5.5
-    assert trim_bit_excess(num=0.5, bit=0.01) == 0.5
-    assert trim_bit_excess(num=0.56, bit=0.1) == 0.5
-    assert trim_bit_excess(num=0.56, bit=0.133) == 0.532
 
 
 def test_RespectNum_Exists():
@@ -145,16 +133,6 @@ def test_default_fund_iota_if_None_ReturnsObj():
     assert default_fund_iota_if_None() == 1
     assert default_fund_iota_if_None(5) == 5
     assert default_fund_iota_if_None(0.03) == 0.03
-
-
-def test_trim_fund_iota_excess_ReturnsedFloat():
-    # ESTABLISH / WHEN / THEN
-    assert trim_fund_iota_excess(num=5.5, fund_iota=1) == 5
-    assert trim_fund_iota_excess(num=0.5, fund_iota=1) == 0
-    assert trim_fund_iota_excess(num=5.5, fund_iota=0.1) == 5.5
-    assert trim_fund_iota_excess(num=0.5, fund_iota=0.01) == 0.5
-    assert trim_fund_iota_excess(num=0.56, fund_iota=0.1) == 0.5
-    assert trim_fund_iota_excess(num=0.56, fund_iota=0.133) == 0.532
 
 
 def test_default_respect_num_ReturnsObj():

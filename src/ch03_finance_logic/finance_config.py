@@ -9,8 +9,19 @@ from src.ch03_finance_logic._ref.ch03_semantic_types import (
 )
 
 
-class missing_base_residual_Exception(Exception):
-    pass
+def get_net(x_give: float, x_take: float) -> float:
+    x_give = get_0_if_None(x_give)
+    x_take = get_0_if_None(x_take)
+    if x_give < 0 or x_take < 0:
+        if x_give < 0 and x_take >= 0:
+            parameters_str = f"get_net x_give={x_give}."
+        elif x_give >= 0:
+            parameters_str = f"get_net x_take={x_take}."
+        else:
+            parameters_str = f"get_net x_give={x_give} and x_take={x_take}."
+        exception_str = f"{parameters_str} Only non-negative numbers allowed."
+        raise get_net_Exception(exception_str)
+    return x_give - x_take
 
 
 class get_net_Exception(Exception):
@@ -25,12 +36,8 @@ def get_whole_grainunit_ratio(num: float, grainunit: float) -> float:
     return grainunit * int(num / grainunit)
 
 
-def trim_fund_iota_excess(num: float, fund_iota: FundIota) -> float:
-    return get_whole_grainunit_ratio(num, fund_iota)
-
-
 def default_fund_pool() -> FundNum:
-    return FundNum(default_money_magnitude())
+    return FundNum(1000000000.0)
 
 
 def validate_fund_pool(x_fund_pool: FundNum = None) -> FundNum:
@@ -53,10 +60,6 @@ def default_RespectBit_if_None(bit: BitNum = None) -> BitNum:
     return max(get_1_if_None(bit), 1)
 
 
-def trim_bit_excess(num: float, bit: BitNum) -> float:
-    return get_whole_grainunit_ratio(num, bit)
-
-
 def default_respect_num() -> RespectNum:
     return RespectNum(default_fund_pool())
 
@@ -73,26 +76,3 @@ def filter_penny(penny: PennyNum = None) -> PennyNum:
 
 def trim_penny_excess(num: MoneyUnit, penny: PennyNum) -> MoneyUnit:
     return get_whole_grainunit_ratio(num, penny)
-
-
-def default_money_magnitude() -> MoneyUnit:
-    return 1000000000
-
-
-def default_money_magnitude_if_None(money_magnitude: int = None) -> int:
-    return default_money_magnitude() if money_magnitude is None else money_magnitude
-
-
-def get_net(x_give: float, x_take: float) -> float:
-    x_give = get_0_if_None(x_give)
-    x_take = get_0_if_None(x_take)
-    if x_give < 0 or x_take < 0:
-        if x_give < 0 and x_take >= 0:
-            parameters_str = f"get_net x_give={x_give}."
-        elif x_give >= 0:
-            parameters_str = f"get_net x_take={x_take}."
-        else:
-            parameters_str = f"get_net x_give={x_give} and x_take={x_take}."
-        exception_str = f"{parameters_str} Only non-negative numbers allowed."
-        raise get_net_Exception(exception_str)
-    return x_give - x_take
