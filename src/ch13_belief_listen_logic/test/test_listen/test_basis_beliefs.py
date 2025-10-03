@@ -1,4 +1,4 @@
-from src.ch03_finance_logic.allot import default_pool_num, validate_pool_num
+from src.ch03_allot_toolbox.allot import default_pool_num, validate_pool_num
 from src.ch04_voice_logic.voice import RespectNum
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop

@@ -7,7 +7,7 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_empty_list_if_None,
     get_json_from_dict,
 )
-from src.ch03_finance_logic.allot import allot_scale
+from src.ch03_allot_toolbox.allot import allot_scale
 from src.ch05_reason_logic.reason import (
     FactUnit,
     get_dict_from_factunits,

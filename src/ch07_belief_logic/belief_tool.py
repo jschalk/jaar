@@ -1,5 +1,5 @@
 from src.ch01_data_toolbox.dict_toolbox import create_csv
-from src.ch03_finance_logic.allot import allot_scale
+from src.ch03_allot_toolbox.allot import allot_scale
 from src.ch04_voice_logic.group import AwardUnit, MemberShip
 from src.ch04_voice_logic.voice import VoiceUnit, calc_give_take_net
 from src.ch05_reason_logic.reason import (

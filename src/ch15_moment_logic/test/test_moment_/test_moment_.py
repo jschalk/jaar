@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists, isdir as os_path_isdir
 from src.ch01_data_toolbox.file_toolbox import create_path, get_json_filename, set_dir
 from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch03_finance_logic.allot import default_grain_num_if_None
+from src.ch03_allot_toolbox.allot import default_grain_num_if_None
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop

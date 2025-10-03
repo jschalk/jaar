@@ -1,4 +1,4 @@
-from src.ch03_finance_logic._ref.ch03_semantic_types import (
+from src.ch03_allot_toolbox._ref.ch03_semantic_types import (
     FirstLabel,
     LabelTerm,
     RespectGrain,

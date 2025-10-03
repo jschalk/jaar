@@ -24,7 +24,7 @@ from src.ch02_rope_logic.rope import (
     rope_is_valid_dir_path,
     to_rope,
 )
-from src.ch03_finance_logic.allot import (
+from src.ch03_allot_toolbox.allot import (
     allot_scale,
     default_grain_num_if_None,
     valid_allotment_ratio,

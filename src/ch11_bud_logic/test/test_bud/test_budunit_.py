@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch03_finance_logic.allot import default_pool_num
+from src.ch03_allot_toolbox.allot import default_pool_num
 from src.ch11_bud_logic._ref.ch11_keywords import Ch11Keywords as wx
 from src.ch11_bud_logic.bud import (
     DEFAULT_CELLDEPTH,

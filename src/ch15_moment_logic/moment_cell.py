@@ -8,7 +8,7 @@ from src.ch01_data_toolbox.file_toolbox import (
     open_json,
     save_json,
 )
-from src.ch03_finance_logic.allot import allot_nested_scale
+from src.ch03_allot_toolbox.allot import allot_nested_scale
 from src.ch05_reason_logic.reason import get_dict_from_factunits
 from src.ch08_timeline_logic.timeline_main import TimeLinePoint
 from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, LabelTerm

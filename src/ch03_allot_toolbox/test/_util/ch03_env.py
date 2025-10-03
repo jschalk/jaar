@@ -3,7 +3,7 @@ from src.ch01_data_toolbox.file_toolbox import delete_dir
 
 
 def get_chapter_temp_dir():
-    return "src\\ch03_finance_logic\\test\\_util\\temp"
+    return "src\\ch03_allot_toolbox\\test\\_util\\temp"
 
 
 @pytest_fixture()

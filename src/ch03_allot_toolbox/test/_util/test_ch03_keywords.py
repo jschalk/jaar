@@ -1,4 +1,4 @@
-from src.ch03_finance_logic._ref.ch03_keywords import Ch03Keywords
+from src.ch03_allot_toolbox._ref.ch03_keywords import Ch03Keywords
 
 
 def test_Ch03Keywords_AttributeNamesEqualValues():

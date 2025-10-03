@@ -15,7 +15,7 @@ from src.ch02_rope_logic.rope import (
     rebuild_rope,
     replace_knot,
 )
-from src.ch03_finance_logic.allot import allot_scale, default_grain_num_if_None
+from src.ch03_allot_toolbox.allot import allot_scale, default_grain_num_if_None
 from src.ch04_voice_logic.group import (
     AwardHeir,
     AwardLine,

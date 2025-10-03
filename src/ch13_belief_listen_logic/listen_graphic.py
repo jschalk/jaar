@@ -7,7 +7,7 @@ from src.ch01_data_toolbox.plotly_toolbox import (
     add_simp_rect,
     conditional_fig_show,
 )
-from src.ch03_finance_logic.allot import default_pool_num
+from src.ch03_allot_toolbox.allot import default_pool_num
 from src.ch07_belief_logic.belief_graphics import display_plantree
 from src.ch07_belief_logic.belief_main import BeliefUnit
 

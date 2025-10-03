@@ -11,7 +11,7 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_json_from_dict,
     set_in_nested_dict,
 )
-from src.ch03_finance_logic.allot import default_pool_num
+from src.ch03_allot_toolbox.allot import default_pool_num
 from src.ch08_timeline_logic.timeline_main import TimeLinePoint
 from src.ch11_bud_logic._ref.ch11_semantic_types import (
     BeliefName,

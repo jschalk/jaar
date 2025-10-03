@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch03_finance_logic.allot import (
+from src.ch03_allot_toolbox.allot import (
     _allot_missing_scale,
     _create_allot_dict,
     _get_missing_scale_list,

@@ -9,7 +9,7 @@ from src.ch02_rope_logic.rope import (
     is_labelterm,
     validate_labelterm,
 )
-from src.ch03_finance_logic.allot import allot_scale, default_grain_num_if_None
+from src.ch03_allot_toolbox.allot import allot_scale, default_grain_num_if_None
 from src.ch04_voice_logic._ref.ch04_semantic_types import (
     FundNum,
     RespectGrain,

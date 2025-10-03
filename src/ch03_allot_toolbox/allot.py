@@ -3,7 +3,7 @@ from os.path import exists as os_path_exists
 from pathlib import Path
 from src.ch01_data_toolbox.dict_toolbox import get_0_if_None, get_1_if_None
 from src.ch01_data_toolbox.file_toolbox import create_path, open_json, save_json
-from src.ch03_finance_logic._ref.ch03_semantic_types import GrainNum, PoolNum
+from src.ch03_allot_toolbox._ref.ch03_semantic_types import GrainNum, PoolNum
 
 
 def default_grain_num_if_None(grain_num: GrainNum = None) -> GrainNum:

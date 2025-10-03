@@ -13,7 +13,7 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_file,
 )
 from src.ch02_rope_logic.rope import validate_labelterm
-from src.ch03_finance_logic.allot import default_grain_num_if_None, validate_pool_num
+from src.ch03_allot_toolbox.allot import default_grain_num_if_None, validate_pool_num
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,

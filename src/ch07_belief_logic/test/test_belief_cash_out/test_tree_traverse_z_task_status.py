@@ -1,5 +1,5 @@
 from src.ch02_rope_logic.rope import to_rope
-from src.ch03_finance_logic.allot import default_pool_num
+from src.ch03_allot_toolbox.allot import default_pool_num
 from src.ch05_reason_logic.reason import caseunit_shop, reasonheir_shop, reasonunit_shop
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import planunit_shop

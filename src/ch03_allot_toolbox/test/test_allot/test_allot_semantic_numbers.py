@@ -1,6 +1,6 @@
 from inspect import getdoc as inspect_getdoc
-from src.ch03_finance_logic._ref.ch03_semantic_types import GrainNum, PoolNum
-from src.ch03_finance_logic.allot import (
+from src.ch03_allot_toolbox._ref.ch03_semantic_types import GrainNum, PoolNum
+from src.ch03_allot_toolbox.allot import (
     default_grain_num_if_None,
     default_pool_num,
     valid_allotment_ratio,
