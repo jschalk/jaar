@@ -152,15 +152,15 @@ def test_create_init_rivercycle_ReturnsObjScenarioThree_voiceunit():
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_voice_cred_points = 7
-    bob_voice_cred_points = 3
-    zia_voice_cred_points = 10
+    yao_voice_cred_shares = 7
+    bob_voice_cred_shares = 3
+    zia_voice_cred_shares = 10
     x_moment_mstr_dir = temp_moment_mstr_dir()
     yao_hubunit = hubunit_shop(x_moment_mstr_dir, None, yao_str)
     yao_belief = beliefunit_shop(yao_str)
-    yao_belief.add_voiceunit(yao_str, yao_voice_cred_points)
-    yao_belief.add_voiceunit(bob_str, bob_voice_cred_points)
-    yao_belief.add_voiceunit(zia_str, zia_voice_cred_points)
+    yao_belief.add_voiceunit(yao_str, yao_voice_cred_shares)
+    yao_belief.add_voiceunit(bob_str, bob_voice_cred_shares)
+    yao_belief.add_voiceunit(zia_str, zia_voice_cred_shares)
     yao_credorledger = get_credorledger(yao_belief)
     keep_credorledgers = {yao_str: yao_credorledger}
     print(f"{keep_credorledgers=}")

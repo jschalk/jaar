@@ -220,19 +220,19 @@ def _modify_belief_voice_membership_update(x_belief: BeliefUnit, x_atom: BeliefA
     x_group_title = x_atom.get_value("group_title")
     x_voiceunit = x_belief.get_voice(x_voice_name)
     x_membership = x_voiceunit.get_membership(x_group_title)
-    x_group_cred_points = x_atom.get_value("group_cred_points")
-    x_group_debt_points = x_atom.get_value("group_debt_points")
-    x_membership.set_group_cred_points(x_group_cred_points)
-    x_membership.set_group_debt_points(x_group_debt_points)
+    x_group_cred_shares = x_atom.get_value("group_cred_shares")
+    x_group_debt_shares = x_atom.get_value("group_debt_shares")
+    x_membership.set_group_cred_shares(x_group_cred_shares)
+    x_membership.set_group_debt_shares(x_group_debt_shares)
 
 
 def _modify_belief_voice_membership_insert(x_belief: BeliefUnit, x_atom: BeliefAtom):
     x_voice_name = x_atom.get_value("voice_name")
     x_group_title = x_atom.get_value("group_title")
-    x_group_cred_points = x_atom.get_value("group_cred_points")
-    x_group_debt_points = x_atom.get_value("group_debt_points")
+    x_group_cred_shares = x_atom.get_value("group_cred_shares")
+    x_group_debt_shares = x_atom.get_value("group_debt_shares")
     x_voiceunit = x_belief.get_voice(x_voice_name)
-    x_voiceunit.add_membership(x_group_title, x_group_cred_points, x_group_debt_points)
+    x_voiceunit.add_membership(x_group_title, x_group_cred_shares, x_group_debt_shares)
 
 
 def _modify_belief_planunit_delete(x_belief: BeliefUnit, x_atom: BeliefAtom):
@@ -419,8 +419,8 @@ def _modify_belief_voiceunit_delete(x_belief: BeliefUnit, x_atom: BeliefAtom):
 def _modify_belief_voiceunit_update(x_belief: BeliefUnit, x_atom: BeliefAtom):
     x_belief.edit_voiceunit(
         voice_name=x_atom.get_value("voice_name"),
-        voice_cred_points=x_atom.get_value("voice_cred_points"),
-        voice_debt_points=x_atom.get_value("voice_debt_points"),
+        voice_cred_shares=x_atom.get_value("voice_cred_shares"),
+        voice_debt_shares=x_atom.get_value("voice_debt_shares"),
     )
 
 
@@ -428,8 +428,8 @@ def _modify_belief_voiceunit_insert(x_belief: BeliefUnit, x_atom: BeliefAtom):
     x_belief.set_voiceunit(
         voiceunit_shop(
             voice_name=x_atom.get_value("voice_name"),
-            voice_cred_points=x_atom.get_value("voice_cred_points"),
-            voice_debt_points=x_atom.get_value("voice_debt_points"),
+            voice_cred_shares=x_atom.get_value("voice_cred_shares"),
+            voice_debt_shares=x_atom.get_value("voice_debt_shares"),
         )
     )
 
@@ -551,8 +551,8 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.fund_grain != y_obj.fund_grain
         )
     elif dimen in {"belief_voice_membership"}:
-        return (x_obj.group_cred_points != y_obj.group_cred_points) or (
-            x_obj.group_debt_points != y_obj.group_debt_points
+        return (x_obj.group_cred_shares != y_obj.group_cred_shares) or (
+            x_obj.group_debt_shares != y_obj.group_debt_shares
         )
     elif dimen in {"belief_plan_awardunit"}:
         return (x_obj.give_force != y_obj.give_force) or (
@@ -584,8 +584,8 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.reason_divisor != y_obj.reason_divisor
         )
     elif dimen == "belief_voiceunit":
-        return (x_obj.voice_cred_points != y_obj.voice_cred_points) or (
-            x_obj.voice_debt_points != y_obj.voice_debt_points
+        return (x_obj.voice_cred_shares != y_obj.voice_cred_shares) or (
+            x_obj.voice_debt_shares != y_obj.voice_debt_shares
         )
 
 
@@ -615,11 +615,11 @@ class AtomRow:
     begin: float = None
     respect_grain: float = None
     close: float = None
-    voice_cred_points: int = None
-    group_cred_points: int = None
+    voice_cred_shares: int = None
+    group_cred_shares: int = None
     credor_respect: int = None
-    voice_debt_points: int = None
-    group_debt_points: int = None
+    voice_debt_shares: int = None
+    group_debt_shares: int = None
     debtor_respect: int = None
     denom: int = None
     reason_divisor: int = None

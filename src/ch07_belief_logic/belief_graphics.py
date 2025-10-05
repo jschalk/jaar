@@ -150,9 +150,9 @@ def get_belief_voices_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     column_header_list = [
         "voice_name",
         "_credor_respect",
-        "voice_cred_points",
+        "voice_cred_shares",
         "_debtor_respect",
-        "voice_debt_points",
+        "voice_debt_shares",
         "fund_give",
         "fund_take",
         "fund_agenda_give",
@@ -170,9 +170,9 @@ def get_belief_voices_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
             values=[
                 df.voice_name,
                 df._credor_respect,
-                df.voice_cred_points,
+                df.voice_cred_shares,
                 df._debtor_respect,
-                df.voice_debt_points,
+                df.voice_debt_shares,
                 df.fund_give,
                 df.fund_take,
                 df.fund_agenda_give,

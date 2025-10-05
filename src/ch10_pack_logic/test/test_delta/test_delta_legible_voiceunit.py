@@ -8,13 +8,13 @@ from src.ref.ch10_keywords import Ch10Keywords as wx
 def test_create_legible_list_ReturnsObj_voiceunit_INSERT():
     # ESTABLISH
     dimen = wx.belief_voiceunit
-    voice_cred_points_value = 81
-    voice_debt_points_value = 43
+    voice_cred_shares_value = 81
+    voice_debt_shares_value = 43
     yao_str = "Yao"
     yao_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     yao_beliefatom.set_arg(wx.voice_name, yao_str)
-    yao_beliefatom.set_arg(wx.voice_cred_points, voice_cred_points_value)
-    yao_beliefatom.set_arg(wx.voice_debt_points, voice_debt_points_value)
+    yao_beliefatom.set_arg(wx.voice_cred_shares, voice_cred_shares_value)
+    yao_beliefatom.set_arg(wx.voice_debt_shares, voice_debt_shares_value)
     # print(f"{yao_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(yao_beliefatom)
@@ -24,7 +24,7 @@ def test_create_legible_list_ReturnsObj_voiceunit_INSERT():
     legible_list = create_legible_list(x_beliefdelta, sue_belief)
 
     # THEN
-    x_str = f"{yao_str} was added with {voice_cred_points_value} score credit and {voice_debt_points_value} score debt"
+    x_str = f"{yao_str} was added with {voice_cred_shares_value} score credit and {voice_debt_shares_value} score debt"
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -32,13 +32,13 @@ def test_create_legible_list_ReturnsObj_voiceunit_INSERT():
 def test_create_legible_list_ReturnsObj_voiceunit_INSERT_score():
     # ESTABLISH
     dimen = wx.belief_voiceunit
-    voice_cred_points_value = 81
-    voice_debt_points_value = 43
+    voice_cred_shares_value = 81
+    voice_debt_shares_value = 43
     yao_str = "Yao"
     yao_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     yao_beliefatom.set_arg(wx.voice_name, yao_str)
-    yao_beliefatom.set_arg(wx.voice_cred_points, voice_cred_points_value)
-    yao_beliefatom.set_arg(wx.voice_debt_points, voice_debt_points_value)
+    yao_beliefatom.set_arg(wx.voice_cred_shares, voice_cred_shares_value)
+    yao_beliefatom.set_arg(wx.voice_debt_shares, voice_debt_shares_value)
     # print(f"{yao_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(yao_beliefatom)
@@ -48,21 +48,21 @@ def test_create_legible_list_ReturnsObj_voiceunit_INSERT_score():
     legible_list = create_legible_list(x_beliefdelta, sue_belief)
 
     # THEN
-    x_str = f"{yao_str} was added with {voice_cred_points_value} score credit and {voice_debt_points_value} score debt"
+    x_str = f"{yao_str} was added with {voice_cred_shares_value} score credit and {voice_debt_shares_value} score debt"
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_cred_points_voice_debt_points():
+def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_cred_shares_voice_debt_shares():
     # ESTABLISH
     dimen = wx.belief_voiceunit
-    voice_cred_points_value = 81
-    voice_debt_points_value = 43
+    voice_cred_shares_value = 81
+    voice_debt_shares_value = 43
     yao_str = "Yao"
     yao_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     yao_beliefatom.set_arg(wx.voice_name, yao_str)
-    yao_beliefatom.set_arg(wx.voice_cred_points, voice_cred_points_value)
-    yao_beliefatom.set_arg(wx.voice_debt_points, voice_debt_points_value)
+    yao_beliefatom.set_arg(wx.voice_cred_shares, voice_cred_shares_value)
+    yao_beliefatom.set_arg(wx.voice_debt_shares, voice_debt_shares_value)
     # print(f"{yao_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(yao_beliefatom)
@@ -72,19 +72,19 @@ def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_cred_points_voice
     legible_list = create_legible_list(x_beliefdelta, sue_belief)
 
     # THEN
-    x_str = f"{yao_str} now has {voice_cred_points_value} score credit and {voice_debt_points_value} score debt."
+    x_str = f"{yao_str} now has {voice_cred_shares_value} score credit and {voice_debt_shares_value} score debt."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_cred_points():
+def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_cred_shares():
     # ESTABLISH
     dimen = wx.belief_voiceunit
-    voice_cred_points_value = 81
+    voice_cred_shares_value = 81
     yao_str = "Yao"
     yao_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     yao_beliefatom.set_arg(wx.voice_name, yao_str)
-    yao_beliefatom.set_arg(wx.voice_cred_points, voice_cred_points_value)
+    yao_beliefatom.set_arg(wx.voice_cred_shares, voice_cred_shares_value)
     # print(f"{yao_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(yao_beliefatom)
@@ -94,19 +94,19 @@ def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_cred_points():
     legible_list = create_legible_list(x_beliefdelta, sue_belief)
 
     # THEN
-    x_str = f"{yao_str} now has {voice_cred_points_value} score credit."
+    x_str = f"{yao_str} now has {voice_cred_shares_value} score credit."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_debt_points():
+def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_debt_shares():
     # ESTABLISH
     dimen = wx.belief_voiceunit
-    voice_debt_points_value = 43
+    voice_debt_shares_value = 43
     yao_str = "Yao"
     yao_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     yao_beliefatom.set_arg(wx.voice_name, yao_str)
-    yao_beliefatom.set_arg(wx.voice_debt_points, voice_debt_points_value)
+    yao_beliefatom.set_arg(wx.voice_debt_shares, voice_debt_shares_value)
     # print(f"{yao_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(yao_beliefatom)
@@ -116,7 +116,7 @@ def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_debt_points():
     legible_list = create_legible_list(x_beliefdelta, sue_belief)
 
     # THEN
-    x_str = f"{yao_str} now has {voice_debt_points_value} score debt."
+    x_str = f"{yao_str} now has {voice_debt_shares_value} score debt."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

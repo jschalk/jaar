@@ -154,8 +154,8 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
 , {wx.moment_label}_inx
 , {wx.belief_name}_inx
 , {wx.voice_name}_inx
-, {wx.voice_cred_points}
-, {wx.voice_debt_points}
+, {wx.voice_cred_shares}
+, {wx.voice_debt_shares}
 )
 VALUES
   ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debt})
@@ -182,8 +182,8 @@ VALUES
 , {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
-, {wx.voice_cred_points}
-, {wx.voice_debt_points}
+, {wx.voice_cred_shares}
+, {wx.voice_debt_shares}
 FROM {blrpern_h_agg_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -224,8 +224,8 @@ def test_etl_heard_raw_tables_to_heard_agg_tables_PopulatesTable_Scenario0():
 , {wx.moment_label}_inx
 , {wx.belief_name}_inx
 , {wx.voice_name}_inx
-, {wx.voice_cred_points}
-, {wx.voice_debt_points}
+, {wx.voice_cred_shares}
+, {wx.voice_debt_shares}
 )
 VALUES
   ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debt})
@@ -250,8 +250,8 @@ VALUES
 , {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
-, {wx.voice_cred_points}
-, {wx.voice_debt_points}
+, {wx.voice_cred_shares}
+, {wx.voice_debt_shares}
 FROM {blrpern_h_agg_put_tablename}
 """
         cursor.execute(select_sqlstr)

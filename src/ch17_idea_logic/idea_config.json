@@ -121,7 +121,7 @@
       "moment_label": {}, 
       "voice_name": {}
     }, 
-    "jvalues": {"group_cred_points": {}, "group_debt_points": {}}
+    "jvalues": {"group_cred_shares": {}, "group_debt_shares": {}}
   }, 
   "belief_voiceunit": {
     "allowed_crud": "delete_insert_update", 
@@ -134,7 +134,7 @@
       "moment_label": {}, 
       "voice_name": {}
     }, 
-    "jvalues": {"voice_cred_points": {}, "voice_debt_points": {}}
+    "jvalues": {"voice_cred_shares": {}, "voice_debt_shares": {}}
   }, 
   "beliefunit": {
     "allowed_crud": "UPDATE", 

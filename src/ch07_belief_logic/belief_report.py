@@ -8,8 +8,8 @@ def get_belief_voiceunits_dataframe(x_belief: BeliefUnit) -> DataFrame:
         return DataFrame(
             columns=[
                 "voice_name",
-                "voice_cred_points",
-                "voice_debt_points",
+                "voice_cred_shares",
+                "voice_debt_shares",
                 "fund_give",
                 "fund_take",
                 "fund_agenda_give",

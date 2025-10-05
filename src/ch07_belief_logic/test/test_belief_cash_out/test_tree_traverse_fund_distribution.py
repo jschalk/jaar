@@ -1050,7 +1050,7 @@ def clear_all_voiceunits_groupunits_fund_agenda_give_take(x_belief: BeliefUnit):
     for x_groupunit in x_belief.groupunits.values():
         x_groupunit.clear_group_fund_give_take()
         # for membership_x in groupunit_x._voices.values():
-        #     print(f"{groupunit_x.} {membership_x.}  {membership_x.fund_give:.6f} {membership_x.voice_debt_points=} {membership_fund_take:t:.6f} {membership_x.} ")
+        #     print(f"{groupunit_x.} {membership_x.}  {membership_x.fund_give:.6f} {membership_x.voice_debt_shares=} {membership_fund_take:t:.6f} {membership_x.} ")
 
     # delete belief_agenda_debt and belief_agenda_cred
     for x_voiceunit in x_belief.voices.values():
@@ -1226,9 +1226,9 @@ def test_BeliefUnit_cashout_SetsAttrsWhenNoFactUnitsNoReasonUnitsEmpty_agenda_ra
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
-    sue_voiceunit = voiceunit_shop(sue_str, 0.5, voice_debt_points=2)
-    bob_voiceunit = voiceunit_shop(bob_str, 1.5, voice_debt_points=3)
-    zia_voiceunit = voiceunit_shop(zia_str, 8, voice_debt_points=5)
+    sue_voiceunit = voiceunit_shop(sue_str, 0.5, voice_debt_shares=2)
+    bob_voiceunit = voiceunit_shop(bob_str, 1.5, voice_debt_shares=3)
+    zia_voiceunit = voiceunit_shop(zia_str, 8, voice_debt_shares=5)
     yao_belief.set_voiceunit(sue_voiceunit)
     yao_belief.set_voiceunit(bob_voiceunit)
     yao_belief.set_voiceunit(zia_voiceunit)

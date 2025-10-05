@@ -14,17 +14,17 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    sue_voice_cred_points = 11
-    bob_voice_cred_points = 13
-    yao_voice_cred_points = 41
-    sue_voice_debt_points = 23
-    bob_voice_debt_points = 29
-    yao_voice_debt_points = 37
+    sue_voice_cred_shares = 11
+    bob_voice_cred_shares = 13
+    yao_voice_cred_shares = 41
+    sue_voice_debt_shares = 23
+    bob_voice_debt_shares = 29
+    yao_voice_debt_shares = 37
     amy_moment_label = "amy56"
     sue_beliefunit = beliefunit_shop(sue_str, amy_moment_label)
-    sue_beliefunit.add_voiceunit(sue_str, sue_voice_cred_points, sue_voice_debt_points)
-    sue_beliefunit.add_voiceunit(bob_str, bob_voice_cred_points, bob_voice_debt_points)
-    sue_beliefunit.add_voiceunit(yao_str, yao_voice_cred_points, yao_voice_debt_points)
+    sue_beliefunit.add_voiceunit(sue_str, sue_voice_cred_shares, sue_voice_debt_shares)
+    sue_beliefunit.add_voiceunit(bob_str, bob_voice_cred_shares, bob_voice_debt_shares)
+    sue_beliefunit.add_voiceunit(yao_str, yao_voice_cred_shares, yao_voice_debt_shares)
     j1_ideaname = idea_format_00021_belief_voiceunit_v0_0_0()
     name_filename = f"{sue_str}_voice_example_01.csv"
     save_idea_csv(j1_ideaname, sue_beliefunit, get_chapter_temp_dir(), name_filename)
@@ -39,20 +39,20 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     assert voice_dataframe.loc[0, wx.moment_label] == amy_moment_label
     assert voice_dataframe.loc[0, wx.belief_name] == sue_beliefunit.belief_name
     assert voice_dataframe.loc[0, wx.voice_name] == bob_str
-    assert voice_dataframe.loc[0, wx.voice_cred_points] == bob_voice_cred_points
-    assert voice_dataframe.loc[0, wx.voice_debt_points] == bob_voice_debt_points
+    assert voice_dataframe.loc[0, wx.voice_cred_shares] == bob_voice_cred_shares
+    assert voice_dataframe.loc[0, wx.voice_debt_shares] == bob_voice_debt_shares
 
     assert voice_dataframe.loc[1, wx.moment_label] == amy_moment_label
     assert voice_dataframe.loc[1, wx.belief_name] == sue_beliefunit.belief_name
     assert voice_dataframe.loc[1, wx.voice_name] == sue_str
-    assert voice_dataframe.loc[1, wx.voice_cred_points] == sue_voice_cred_points
-    assert voice_dataframe.loc[1, wx.voice_debt_points] == sue_voice_debt_points
+    assert voice_dataframe.loc[1, wx.voice_cred_shares] == sue_voice_cred_shares
+    assert voice_dataframe.loc[1, wx.voice_debt_shares] == sue_voice_debt_shares
 
     assert voice_dataframe.loc[2, wx.moment_label] == amy_moment_label
     assert voice_dataframe.loc[2, wx.belief_name] == sue_beliefunit.belief_name
     assert voice_dataframe.loc[2, wx.voice_name] == yao_str
-    assert voice_dataframe.loc[2, wx.voice_cred_points] == yao_voice_cred_points
-    assert voice_dataframe.loc[2, wx.voice_debt_points] == yao_voice_debt_points
+    assert voice_dataframe.loc[2, wx.voice_cred_shares] == yao_voice_cred_shares
+    assert voice_dataframe.loc[2, wx.voice_debt_shares] == yao_voice_debt_shares
 
     assert len(voice_dataframe) == 3
 

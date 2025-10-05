@@ -25,17 +25,17 @@ def test_create_idea_df_Arg_idea_format_00021_belief_voiceunit_v0_0_0():
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    sue_voice_cred_points = 11
-    bob_voice_cred_points = 13
-    yao_voice_cred_points = 41
-    sue_voice_debt_points = 23
-    bob_voice_debt_points = 29
-    yao_voice_debt_points = 37
+    sue_voice_cred_shares = 11
+    bob_voice_cred_shares = 13
+    yao_voice_cred_shares = 41
+    sue_voice_debt_shares = 23
+    bob_voice_debt_shares = 29
+    yao_voice_debt_shares = 37
     amy_moment_label = "amy56"
     sue_beliefunit = beliefunit_shop(sue_str, amy_moment_label)
-    sue_beliefunit.add_voiceunit(sue_str, sue_voice_cred_points, sue_voice_debt_points)
-    sue_beliefunit.add_voiceunit(bob_str, bob_voice_cred_points, bob_voice_debt_points)
-    sue_beliefunit.add_voiceunit(yao_str, yao_voice_cred_points, yao_voice_debt_points)
+    sue_beliefunit.add_voiceunit(sue_str, sue_voice_cred_shares, sue_voice_debt_shares)
+    sue_beliefunit.add_voiceunit(bob_str, bob_voice_cred_shares, bob_voice_debt_shares)
+    sue_beliefunit.add_voiceunit(yao_str, yao_voice_cred_shares, yao_voice_debt_shares)
 
     # WHEN
     x_idea_name = idea_format_00021_belief_voiceunit_v0_0_0()
@@ -48,20 +48,20 @@ def test_create_idea_df_Arg_idea_format_00021_belief_voiceunit_v0_0_0():
     assert voice_dataframe.loc[0, wx.moment_label] == amy_moment_label
     assert voice_dataframe.loc[0, wx.belief_name] == sue_beliefunit.belief_name
     assert voice_dataframe.loc[0, wx.voice_name] == bob_str
-    assert voice_dataframe.loc[0, wx.voice_debt_points] == bob_voice_debt_points
-    assert voice_dataframe.loc[0, wx.voice_cred_points] == bob_voice_cred_points
+    assert voice_dataframe.loc[0, wx.voice_debt_shares] == bob_voice_debt_shares
+    assert voice_dataframe.loc[0, wx.voice_cred_shares] == bob_voice_cred_shares
 
     assert voice_dataframe.loc[1, wx.moment_label] == amy_moment_label
     assert voice_dataframe.loc[1, wx.belief_name] == sue_beliefunit.belief_name
     assert voice_dataframe.loc[1, wx.voice_name] == sue_str
-    assert voice_dataframe.loc[1, wx.voice_debt_points] == sue_voice_debt_points
-    assert voice_dataframe.loc[1, wx.voice_cred_points] == sue_voice_cred_points
+    assert voice_dataframe.loc[1, wx.voice_debt_shares] == sue_voice_debt_shares
+    assert voice_dataframe.loc[1, wx.voice_cred_shares] == sue_voice_cred_shares
 
     assert voice_dataframe.loc[2, wx.moment_label] == amy_moment_label
     assert voice_dataframe.loc[2, wx.belief_name] == sue_beliefunit.belief_name
     assert voice_dataframe.loc[2, wx.voice_name] == yao_str
-    assert voice_dataframe.loc[2, wx.voice_debt_points] == yao_voice_debt_points
-    assert voice_dataframe.loc[2, wx.voice_cred_points] == yao_voice_cred_points
+    assert voice_dataframe.loc[2, wx.voice_debt_shares] == yao_voice_debt_shares
+    assert voice_dataframe.loc[2, wx.voice_cred_shares] == yao_voice_cred_shares
 
     assert len(voice_dataframe) == 3
 
@@ -108,29 +108,29 @@ def test_create_idea_df_Arg_idea_format_00020_belief_voice_membership_v0_0_0():
     assert membership_dataframe.loc[0, wx.belief_name] == sue_beliefunit.belief_name
     assert membership_dataframe.loc[0, wx.voice_name] == bob_str
     assert membership_dataframe.loc[0, wx.group_title] == iowa_str
-    assert membership_dataframe.loc[0, wx.group_cred_points] == bob_iowa_credit_w
-    assert membership_dataframe.loc[0, wx.group_debt_points] == bob_iowa_debt_w
+    assert membership_dataframe.loc[0, wx.group_cred_shares] == bob_iowa_credit_w
+    assert membership_dataframe.loc[0, wx.group_debt_shares] == bob_iowa_debt_w
 
     assert membership_dataframe.loc[3, wx.moment_label] == amy_moment_label
     assert membership_dataframe.loc[3, wx.belief_name] == sue_beliefunit.belief_name
     assert membership_dataframe.loc[3, wx.voice_name] == sue_str
     assert membership_dataframe.loc[3, wx.group_title] == iowa_str
-    assert membership_dataframe.loc[3, wx.group_cred_points] == sue_iowa_credit_w
-    assert membership_dataframe.loc[3, wx.group_debt_points] == sue_iowa_debt_w
+    assert membership_dataframe.loc[3, wx.group_cred_shares] == sue_iowa_credit_w
+    assert membership_dataframe.loc[3, wx.group_debt_shares] == sue_iowa_debt_w
 
     assert membership_dataframe.loc[4, wx.moment_label] == amy_moment_label
     assert membership_dataframe.loc[4, wx.belief_name] == sue_beliefunit.belief_name
     assert membership_dataframe.loc[4, wx.voice_name] == sue_str
     assert membership_dataframe.loc[4, wx.group_title] == sue_str
-    assert membership_dataframe.loc[4, wx.group_cred_points] == 1
-    assert membership_dataframe.loc[4, wx.group_debt_points] == 1
+    assert membership_dataframe.loc[4, wx.group_cred_shares] == 1
+    assert membership_dataframe.loc[4, wx.group_debt_shares] == 1
 
     assert membership_dataframe.loc[7, wx.moment_label] == amy_moment_label
     assert membership_dataframe.loc[7, wx.belief_name] == sue_beliefunit.belief_name
     assert membership_dataframe.loc[7, wx.voice_name] == yao_str
     assert membership_dataframe.loc[7, wx.group_title] == ohio_str
-    assert membership_dataframe.loc[7, wx.group_cred_points] == yao_ohio_credit_w
-    assert membership_dataframe.loc[7, wx.group_debt_points] == yao_ohio_debt_w
+    assert membership_dataframe.loc[7, wx.group_cred_shares] == yao_ohio_credit_w
+    assert membership_dataframe.loc[7, wx.group_debt_shares] == yao_ohio_debt_w
     assert len(membership_dataframe) == 10
 
 
@@ -196,17 +196,17 @@ def test_save_idea_csv_Arg_idea_format_00021_belief_voiceunit_v0_0_0_SaveToCSV(
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    sue_voice_cred_points = 11
-    bob_voice_cred_points = 13
-    yao_voice_cred_points = 41
-    sue_voice_debt_points = 23
-    bob_voice_debt_points = 29
-    yao_voice_debt_points = 37
+    sue_voice_cred_shares = 11
+    bob_voice_cred_shares = 13
+    yao_voice_cred_shares = 41
+    sue_voice_debt_shares = 23
+    bob_voice_debt_shares = 29
+    yao_voice_debt_shares = 37
     amy_moment_label = "amy56"
     sue_beliefunit = beliefunit_shop(sue_str, amy_moment_label)
-    sue_beliefunit.add_voiceunit(sue_str, sue_voice_cred_points, sue_voice_debt_points)
-    sue_beliefunit.add_voiceunit(bob_str, bob_voice_cred_points, bob_voice_debt_points)
-    sue_beliefunit.add_voiceunit(yao_str, yao_voice_cred_points, yao_voice_debt_points)
+    sue_beliefunit.add_voiceunit(sue_str, sue_voice_cred_shares, sue_voice_debt_shares)
+    sue_beliefunit.add_voiceunit(bob_str, bob_voice_cred_shares, bob_voice_debt_shares)
+    sue_beliefunit.add_voiceunit(yao_str, yao_voice_cred_shares, yao_voice_debt_shares)
     j1_ideaname = idea_format_00021_belief_voiceunit_v0_0_0()
     name_filename = f"{sue_str}_voice_example_00.csv"
     csv_example_path = create_path(idea_moments_dir(), name_filename)
@@ -218,7 +218,7 @@ def test_save_idea_csv_Arg_idea_format_00021_belief_voiceunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue1_name_example_csv = """event_int,face_name,moment_label,belief_name,voice_name,voice_cred_points,voice_debt_points
+    sue1_name_example_csv = """event_int,face_name,moment_label,belief_name,voice_name,voice_cred_shares,voice_debt_shares
 ,,amy56,Sue,Bob,13,29
 ,,amy56,Sue,Sue,11,23
 ,,amy56,Sue,Yao,41,37
@@ -235,7 +235,7 @@ def test_save_idea_csv_Arg_idea_format_00021_belief_voiceunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue2_voice_example_csv = """event_int,face_name,moment_label,belief_name,voice_name,voice_cred_points,voice_debt_points
+    sue2_voice_example_csv = """event_int,face_name,moment_label,belief_name,voice_name,voice_cred_shares,voice_debt_shares
 ,,amy56,Sue,Bob,13,29
 ,,amy56,Sue,Sue,11,23
 ,,amy56,Sue,Yao,41,37

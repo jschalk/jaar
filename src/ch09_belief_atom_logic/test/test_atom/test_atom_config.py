@@ -479,17 +479,17 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     assert len(voiceunit_columns) == 4
     assert voiceunit_columns.get("uid") is not None
     assert voiceunit_columns.get(wx.voice_name) is not None
-    assert voiceunit_columns.get(wx.voice_cred_points) is not None
-    assert voiceunit_columns.get(wx.voice_debt_points) is not None
+    assert voiceunit_columns.get(wx.voice_cred_shares) is not None
+    assert voiceunit_columns.get(wx.voice_debt_shares) is not None
 
     voice_name_dict = voiceunit_columns.get(wx.voice_name)
     assert len(voice_name_dict) == 2
     assert voice_name_dict.get(wx.sqlite_datatype) == "TEXT"
     assert voice_name_dict.get("nullable") is False
-    voice_debt_points_dict = voiceunit_columns.get("voice_debt_points")
+    voice_debt_shares_dict = voiceunit_columns.get("voice_debt_shares")
     assert len(voice_name_dict) == 2
-    assert voice_debt_points_dict.get(wx.sqlite_datatype) == "REAL"
-    assert voice_debt_points_dict.get("nullable") is True
+    assert voice_debt_shares_dict.get(wx.sqlite_datatype) == "REAL"
+    assert voice_debt_shares_dict.get("nullable") is True
 
     assert len(cat_plan) == 2
     plan_columns = cat_plan.get(columns_str)
@@ -616,11 +616,11 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(wx.begin) == "float"
     assert x_class_types.get(wx.respect_grain) == "float"
     assert x_class_types.get(wx.close) == "float"
-    assert x_class_types.get(wx.voice_cred_points) == "float"
-    assert x_class_types.get(wx.group_cred_points) == "float"
+    assert x_class_types.get(wx.voice_cred_shares) == "float"
+    assert x_class_types.get(wx.group_cred_shares) == "float"
     assert x_class_types.get(wx.credor_respect) == "float"
-    assert x_class_types.get(wx.voice_debt_points) == "float"
-    assert x_class_types.get(wx.group_debt_points) == "float"
+    assert x_class_types.get(wx.voice_debt_shares) == "float"
+    assert x_class_types.get(wx.group_debt_shares) == "float"
     assert x_class_types.get(wx.debtor_respect) == "float"
     assert x_class_types.get(wx.denom) == "int"
     assert x_class_types.get("reason_divisor") == "int"

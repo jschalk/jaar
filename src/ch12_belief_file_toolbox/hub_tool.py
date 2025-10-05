@@ -163,10 +163,10 @@ def save_arbitrary_beliefevent(
     x_beliefunit = beliefunit_shop(belief_name, moment_label)
     for voice_list in voices:
         try:
-            voice_cred_points = voice_list[1]
+            voice_cred_shares = voice_list[1]
         except Exception:
-            voice_cred_points = None
-        x_beliefunit.add_voiceunit(voice_list[0], voice_cred_points)
+            voice_cred_shares = None
+        x_beliefunit.add_voiceunit(voice_list[0], voice_cred_shares)
     for fact_tup in facts:
         x_reason_context = fact_tup[0]
         x_fact_state = fact_tup[1]

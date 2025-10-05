@@ -1,28 +1,28 @@
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch13_belief_listen_logic.listen_main import (
-    _allocate_irrational_voice_debt_points,
+    _allocate_irrational_voice_debt_shares,
     generate_ingest_list,
     generate_perspective_agenda,
 )
 
 
-def test_allocate_irrational_voice_debt_points_SetsBeliefAttr():
+def test_allocate_irrational_voice_debt_shares_SetsBeliefAttr():
     # ESTABLISH
     yao_str = "Yao"
     zia_str = "Zia"
-    zia_voice_cred_points = 47
-    zia_voice_debt_points = 41
+    zia_voice_cred_shares = 47
+    zia_voice_debt_shares = 41
     yao_belief = beliefunit_shop(yao_str)
-    yao_belief.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
+    yao_belief.add_voiceunit(zia_str, zia_voice_cred_shares, zia_voice_debt_shares)
     zia_voiceunit = yao_belief.get_voice(zia_str)
-    assert zia_voiceunit.irrational_voice_debt_points == 0
+    assert zia_voiceunit.irrational_voice_debt_shares == 0
 
     # WHEN
-    _allocate_irrational_voice_debt_points(yao_belief, zia_str)
+    _allocate_irrational_voice_debt_shares(yao_belief, zia_str)
 
     # THEN
-    assert zia_voiceunit.irrational_voice_debt_points == zia_voice_debt_points
+    assert zia_voiceunit.irrational_voice_debt_shares == zia_voice_debt_shares
 
 
 def test_generate_perspective_agenda_GrabsAgendatasks():
