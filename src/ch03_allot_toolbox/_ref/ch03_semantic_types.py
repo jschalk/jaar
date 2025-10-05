@@ -13,7 +13,7 @@ class GrainNum(float):
 
 
 class PoolNum(float):
-    """PoolNum represents the sum of all numbers in play."""
+    """PoolNum represents any possible Subset of the sum of numbers in the pool."""
 
     pass
 

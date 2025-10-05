@@ -33,7 +33,9 @@ def test_PoolNum_Exists():
     y_PoolNum = PoolNum(x_float)
     # THEN
     assert y_PoolNum == x_float
-    inspect_str = "PoolNum represents the sum of all numbers in play."
+    inspect_str = (
+        """PoolNum represents any possible Subset of the sum of numbers in the pool."""
+    )
     assert inspect_getdoc(y_PoolNum) == inspect_str
 
 
