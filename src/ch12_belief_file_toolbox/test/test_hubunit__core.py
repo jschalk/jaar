@@ -4,7 +4,9 @@ from src.ch02_rope_logic.rope import create_rope, default_knot_if_None
 from src.ch03_allot_toolbox.allot import default_grain_num_if_None, validate_pool_num
 from src.ch12_belief_file_toolbox.ch12_path import (
     create_belief_dir_path,
+    create_keep_grades_path,
     create_keep_rope_path,
+    create_keep_visions_path,
 )
 from src.ch12_belief_file_toolbox.hubunit import HubUnit, hubunit_shop
 from src.ch12_belief_file_toolbox.test._util.ch12_env import get_chapter_temp_dir
@@ -95,7 +97,6 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
         moment_mstr_dir, sue_str, amy23_str, texas_rope, None
     )
     x_visions_path = create_path(keep_path, "visions")
-    x_grades_path = create_path(keep_path, "grades")
 
     assert sue_hubunit.moment_mstr_dir == moment_mstr_dir
     assert sue_hubunit.moment_label == amy23_str
@@ -107,9 +108,13 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.money_grain == default_grain_num_if_None()
     assert sue_hubunit.keep_rope == texas_rope
     bob_str = "Bob"
-    assert sue_hubunit.visions_path() == x_visions_path
-    assert sue_hubunit.grades_path() == x_grades_path
-    sue_grades_path = sue_hubunit.grades_path()
+    amy23_keep_visions_path = create_keep_visions_path(
+        moment_mstr_dir, sue_str, amy23_str, texas_rope, default_knot_if_None()
+    )
+    assert amy23_keep_visions_path == x_visions_path
+    sue_grades_path = create_keep_grades_path(
+        moment_mstr_dir, sue_str, amy23_str, texas_rope, default_knot_if_None()
+    )
     x_grade_path = create_path(sue_grades_path, f"{bob_str}.json")
     assert sue_hubunit.grade_path(bob_str) == x_grade_path
 

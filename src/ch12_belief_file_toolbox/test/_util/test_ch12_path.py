@@ -29,6 +29,7 @@ from src.ch12_belief_file_toolbox.ch12_path import (
     create_job_path,
     create_keep_duty_path,
     create_keep_dutys_path,
+    create_keep_grade_path,
     create_keep_grades_path,
     create_keep_rope_path,
     create_keep_visions_path,
@@ -322,6 +323,33 @@ def test_create_keep_grades_path_ReturnsObj() -> None:
     )
     expected_keep_dutys_path = create_path(keep_casa_path, "grades")
     assert gen_keep_dutys_path == expected_keep_dutys_path
+
+
+def test_create_keep_grade_path_ReturnsObj() -> None:
+    # ESTABLISH
+    x_moment_mstr_dir = get_chapter_temp_dir()
+    amy23_str = "amy23"
+    sue_str = "Sue"
+    casa_str = "casa"
+    casa_rope = create_rope(amy23_str, casa_str)
+    bob_str = "Bob"
+
+    # WHEN
+    gen_keep_grade_path = create_keep_grade_path(
+        moment_mstr_dir=x_moment_mstr_dir,
+        belief_name=sue_str,
+        moment_label=amy23_str,
+        keep_rope=casa_rope,
+        knot=None,
+        grade_belief_name=bob_str,
+    )
+
+    # THEN
+    keep_grades_path = create_keep_grades_path(
+        x_moment_mstr_dir, sue_str, amy23_str, casa_rope, None
+    )
+    expected_grade_path = create_path(keep_grades_path, get_json_filename(bob_str))
+    assert gen_keep_grade_path == expected_grade_path
 
 
 def test_create_keep_visions_path_ReturnsObj() -> None:
@@ -876,6 +904,23 @@ def test_create_keep_grades_path_HasDocString() -> None:
     print(f"{inspect_getdoc(create_keep_grades_path)=}")
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_keep_grades_path) == doc_str
+
+
+def test_create_keep_grade_path_HasDocString() -> None:
+    # ESTABLISH
+    doc_str = create_keep_grade_path(
+        moment_mstr_dir="moment_mstr_dir",
+        moment_label=wx.moment_label,
+        belief_name=wx.belief_name,
+        keep_rope="planroot;level1;leveln",
+        knot=None,
+        grade_belief_name="grade_belief_name",
+    )
+    doc_str = f"Returns path: {doc_str}"
+    print(f"{doc_str=}")
+    print(f"{inspect_getdoc(create_keep_grade_path)=}")
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_keep_grade_path) == doc_str
 
 
 def test_create_keep_visions_path_HasDocString() -> None:

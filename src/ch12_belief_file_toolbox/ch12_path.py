@@ -150,6 +150,21 @@ def create_keep_grades_path(
     return create_path(x_keep_path, "grades")
 
 
+def create_keep_grade_path(
+    moment_mstr_dir: str,
+    belief_name: BeliefName,
+    moment_label: MomentLabel,
+    keep_rope: LabelTerm,
+    knot: str,
+    grade_belief_name: BeliefName,
+) -> str:
+    """Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\keeps\\level1\\grades\\grade_belief_name.json"""
+    x_keep_path = create_keep_grades_path(
+        moment_mstr_dir, belief_name, moment_label, keep_rope, knot
+    )
+    return create_path(x_keep_path, get_json_filename(grade_belief_name))
+
+
 def create_treasury_db_path(
     moment_mstr_dir: str,
     belief_name: BeliefName,

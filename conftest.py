@@ -49,3 +49,19 @@ def save_all_keyword_enum_class_python_files():
         chapter_num = int(get_chapter_desc_str_number(chapter_desc))
         chapter_keywords = cumlative_keywords.get(chapter_num)
         save_keywords_enum_class_file(dest_dir, chapter_num, chapter_keywords)
+
+
+import winsound  # only on Windows
+
+
+def pytest_sessionfinish(session, exitstatus):
+    """Play a sound when pytest finishes."""
+    if exitstatus == 0:
+        # ✅ All tests passed
+        winsound.MessageBeep(winsound.MB_ICONASTERISK)
+    else:
+        # ❌ Some tests failed
+        winsound.MessageBeep(winsound.MB_ICONHAND)
+
+    # Optional: print the status too
+    print("\n[pytest sound] Exit status:", exitstatus)
