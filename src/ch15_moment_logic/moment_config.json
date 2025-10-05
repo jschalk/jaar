@@ -57,8 +57,8 @@
       "fund_grain"          : { "class_type": "float"     }, 
       "job_listen_rotations": { "class_type": "int"       }, 
       "knot"                : { "class_type": "str"       }, 
+      "money_grain"         : { "class_type": "float"     }, 
       "monthday_index"      : { "class_type": "int"       }, 
-      "money_grain"               : { "class_type": "float"     }, 
       "respect_grain"       : { "class_type": "float"     }, 
       "timeline_label"      : { "class_type": "LabelTerm" }, 
       "yr1_jan1_offset"     : { "class_type": "int"       }

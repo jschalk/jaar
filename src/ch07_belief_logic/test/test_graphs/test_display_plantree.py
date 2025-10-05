@@ -53,13 +53,13 @@ def test_get_belief_voices_plotly_fig_DisplaysInfo(graphics_bool):
     luca_belief.set_credor_respect(500)
     luca_belief.set_debtor_respect(400)
     yao_str = "Yao"
-    yao_voice_cred_points = 66
-    yao_voice_debt_points = 77
-    luca_belief.add_voiceunit(yao_str, yao_voice_cred_points, yao_voice_debt_points)
+    yao_voice_cred_shares = 66
+    yao_voice_debt_shares = 77
+    luca_belief.add_voiceunit(yao_str, yao_voice_cred_shares, yao_voice_debt_shares)
     sue_str = "Sue"
-    sue_voice_cred_points = 434
-    sue_voice_debt_points = 323
-    luca_belief.add_voiceunit(sue_str, sue_voice_cred_points, sue_voice_debt_points)
+    sue_voice_cred_shares = 434
+    sue_voice_debt_shares = 323
+    luca_belief.add_voiceunit(sue_str, sue_voice_cred_shares, sue_voice_debt_shares)
 
     # WHEN
     x_fig = get_belief_voices_plotly_fig(luca_belief)

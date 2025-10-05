@@ -29,7 +29,7 @@ class missing_base_residual_Exception(Exception):
 
 
 def _get_missing_scale_list(
-    missing_scale: GrainNum, grain_unit: float, list_length: int
+    missing_scale: PoolNum, grain_unit: GrainNum, list_length: int
 ) -> list[GrainNum]:
     if list_length == 0 or missing_scale == 0:
         return []
@@ -65,11 +65,11 @@ def _get_missing_scale_list(
 
 
 def _allot_missing_scale(
-    ledger: dict[str, GrainNum],
-    scale_number: GrainNum,
-    grain_unit: float,
-    missing_scale: float,
-) -> dict[str, GrainNum]:
+    ledger: dict[str, PoolNum],
+    scale_number: PoolNum,
+    grain_unit: GrainNum,
+    missing_scale: PoolNum,
+) -> dict[str, PoolNum]:
     missing_scale_list = _get_missing_scale_list(missing_scale, grain_unit, len(ledger))
     changes_ledger_list = []
     if missing_scale != 0:
@@ -94,7 +94,7 @@ def _allot_missing_scale(
 
 
 def _calc_allot_value(
-    obj, ledger_value_total, scale_number: GrainNum, grain_unit: float
+    obj, ledger_value_total: PoolNum, scale_number: PoolNum, grain_unit: GrainNum
 ):
     if ledger_value_total == 0:
         return 0
@@ -116,10 +116,10 @@ def _create_allot_dict(
 
 
 def allot_scale(
-    ledger: dict[str, float], scale_number: GrainNum, grain_unit: float
-) -> dict[str, GrainNum]:
+    ledger: dict[str, float], scale_number: PoolNum, grain_unit: GrainNum
+) -> dict[str, PoolNum]:
     """
-    allots the scale_number among ledger with float values with a resolution of the grain unit.
+    allots the scale_number among ledger as float values with a resolution of the grain_unit.
 
     :param ledger: Dictionary of str key with a relative strength attribute.
     :param scale_number: The total number to allot.

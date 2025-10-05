@@ -11,16 +11,16 @@ from src.ch04_voice_logic.voice import (
 def test_VoiceUnit_get_memberships_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
-    sue_group_cred_points = 11
-    sue_group_debt_points = 13
+    sue_group_cred_shares = 11
+    sue_group_debt_shares = 13
     run_str = ";Run"
-    run_group_cred_points = 17
-    run_group_debt_points = 23
+    run_group_cred_shares = 17
+    run_group_debt_shares = 23
     sue_membership = membership_shop(
-        sue_str, sue_group_cred_points, sue_group_debt_points
+        sue_str, sue_group_cred_shares, sue_group_debt_shares
     )
     run_membership = membership_shop(
-        run_str, run_group_cred_points, run_group_debt_points
+        run_str, run_group_cred_shares, run_group_debt_shares
     )
     sue_voiceunit = voiceunit_shop(sue_str)
     sue_voiceunit.set_membership(sue_membership)
@@ -36,13 +36,13 @@ def test_VoiceUnit_get_memberships_dict_ReturnsObj():
     run_membership_dict = sue_memberships_dict.get(run_str)
     assert sue_membership_dict == {
         "group_title": sue_str,
-        "group_cred_points": sue_group_cred_points,
-        "group_debt_points": sue_group_debt_points,
+        "group_cred_shares": sue_group_cred_shares,
+        "group_debt_shares": sue_group_debt_shares,
     }
     assert run_membership_dict == {
         "group_title": run_str,
-        "group_cred_points": run_group_cred_points,
-        "group_debt_points": run_group_debt_points,
+        "group_cred_shares": run_group_cred_shares,
+        "group_debt_shares": run_group_debt_shares,
     }
 
 
@@ -51,10 +51,10 @@ def test_VoiceUnit_to_dict_ReturnsDictWithNecessaryDataForJSON():
     bob_str = "Bob"
     bob_voiceunit = voiceunit_shop(bob_str)
 
-    bob_voice_cred_points = 13
-    bob_voice_debt_points = 17
-    bob_voiceunit.set_voice_cred_points(bob_voice_cred_points)
-    bob_voiceunit.set_voice_debt_points(bob_voice_debt_points)
+    bob_voice_cred_shares = 13
+    bob_voice_debt_shares = 17
+    bob_voiceunit.set_voice_cred_shares(bob_voice_cred_shares)
+    bob_voiceunit.set_voice_debt_shares(bob_voice_debt_shares)
 
     print(f"{bob_str}")
 
@@ -71,18 +71,18 @@ def test_VoiceUnit_to_dict_ReturnsDictWithNecessaryDataForJSON():
     assert x_dict is not None
     assert x_dict == {
         "voice_name": bob_str,
-        "voice_cred_points": bob_voice_cred_points,
-        "voice_debt_points": bob_voice_debt_points,
+        "voice_cred_shares": bob_voice_cred_shares,
+        "voice_debt_shares": bob_voice_debt_shares,
         "memberships": {
             bob_str: {
                 "group_title": bob_str,
-                "group_cred_points": 1,
-                "group_debt_points": 1,
+                "group_cred_shares": 1,
+                "group_debt_shares": 1,
             },
             run_str: {
                 "group_title": run_str,
-                "group_cred_points": 1,
-                "group_debt_points": 1,
+                "group_cred_shares": 1,
+                "group_debt_shares": 1,
             },
         },
     }
@@ -93,14 +93,14 @@ def test_VoiceUnit_to_dict_ReturnsDictWithAllAttrDataForJSON():
     bob_str = "Bob"
     bob_voiceunit = voiceunit_shop(bob_str)
 
-    bob_voice_cred_points = 13
-    bob_voice_debt_points = 17
-    bob_voiceunit.set_voice_cred_points(bob_voice_cred_points)
-    bob_voiceunit.set_voice_debt_points(bob_voice_debt_points)
-    bob_irrational_voice_debt_points = 87
-    bob_inallocable_voice_debt_points = 97
-    bob_voiceunit.add_irrational_voice_debt_points(bob_irrational_voice_debt_points)
-    bob_voiceunit.add_inallocable_voice_debt_points(bob_inallocable_voice_debt_points)
+    bob_voice_cred_shares = 13
+    bob_voice_debt_shares = 17
+    bob_voiceunit.set_voice_cred_shares(bob_voice_cred_shares)
+    bob_voiceunit.set_voice_debt_shares(bob_voice_debt_shares)
+    bob_irrational_voice_debt_shares = 87
+    bob_inallocable_voice_debt_shares = 97
+    bob_voiceunit.add_irrational_voice_debt_shares(bob_irrational_voice_debt_shares)
+    bob_voiceunit.add_inallocable_voice_debt_shares(bob_inallocable_voice_debt_shares)
 
     bob_fund_give = 55
     bob_fund_take = 47
@@ -130,11 +130,11 @@ def test_VoiceUnit_to_dict_ReturnsDictWithAllAttrDataForJSON():
     assert x_dict is not None
     assert x_dict == {
         "voice_name": bob_str,
-        "voice_cred_points": bob_voice_cred_points,
-        "voice_debt_points": bob_voice_debt_points,
+        "voice_cred_shares": bob_voice_cred_shares,
+        "voice_debt_shares": bob_voice_debt_shares,
         "memberships": bob_voiceunit.get_memberships_dict(),
-        "irrational_voice_debt_points": bob_irrational_voice_debt_points,
-        "inallocable_voice_debt_points": bob_inallocable_voice_debt_points,
+        "irrational_voice_debt_shares": bob_irrational_voice_debt_shares,
+        "inallocable_voice_debt_shares": bob_inallocable_voice_debt_shares,
         "fund_give": bob_fund_give,
         "fund_take": bob_fund_take,
         "fund_agenda_give": bob_fund_agenda_give,
@@ -144,63 +144,63 @@ def test_VoiceUnit_to_dict_ReturnsDictWithAllAttrDataForJSON():
     }
 
 
-def test_VoiceUnit_to_dict_ReturnsDictWith_irrational_voice_debt_points_ValuesIsZero():
+def test_VoiceUnit_to_dict_ReturnsDictWith_irrational_voice_debt_shares_ValuesIsZero():
     # ESTABLISH
     bob_str = "Bob"
     bob_voiceunit = voiceunit_shop(bob_str)
-    assert bob_voiceunit.irrational_voice_debt_points == 0
-    assert bob_voiceunit.inallocable_voice_debt_points == 0
+    assert bob_voiceunit.irrational_voice_debt_shares == 0
+    assert bob_voiceunit.inallocable_voice_debt_shares == 0
 
     # WHEN
     x_dict = bob_voiceunit.to_dict(all_attrs=True)
 
     # THEN
-    x_irrational_voice_debt_points = "irrational_voice_debt_points"
-    x_inallocable_voice_debt_points = "inallocable_voice_debt_points"
-    assert x_dict.get(x_irrational_voice_debt_points) is None
-    assert x_dict.get(x_inallocable_voice_debt_points) is None
+    x_irrational_voice_debt_shares = "irrational_voice_debt_shares"
+    x_inallocable_voice_debt_shares = "inallocable_voice_debt_shares"
+    assert x_dict.get(x_irrational_voice_debt_shares) is None
+    assert x_dict.get(x_inallocable_voice_debt_shares) is None
     assert len(x_dict.keys()) == 10
 
 
-def test_VoiceUnit_to_dict_ReturnsDictWith_irrational_voice_debt_points_ValuesIsNumber():
+def test_VoiceUnit_to_dict_ReturnsDictWith_irrational_voice_debt_shares_ValuesIsNumber():
     # ESTABLISH
     bob_str = "Bob"
     bob_voiceunit = voiceunit_shop(bob_str)
-    bob_irrational_voice_debt_points = 87
-    bob_inallocable_voice_debt_points = 97
-    bob_voiceunit.add_irrational_voice_debt_points(bob_irrational_voice_debt_points)
-    bob_voiceunit.add_inallocable_voice_debt_points(bob_inallocable_voice_debt_points)
+    bob_irrational_voice_debt_shares = 87
+    bob_inallocable_voice_debt_shares = 97
+    bob_voiceunit.add_irrational_voice_debt_shares(bob_irrational_voice_debt_shares)
+    bob_voiceunit.add_inallocable_voice_debt_shares(bob_inallocable_voice_debt_shares)
 
     # WHEN
     x_dict = bob_voiceunit.to_dict(all_attrs=True)
 
     # THEN
-    x_irrational_voice_debt_points = "irrational_voice_debt_points"
-    x_inallocable_voice_debt_points = "inallocable_voice_debt_points"
+    x_irrational_voice_debt_shares = "irrational_voice_debt_shares"
+    x_inallocable_voice_debt_shares = "inallocable_voice_debt_shares"
     assert (
-        x_dict.get(x_irrational_voice_debt_points) == bob_irrational_voice_debt_points
+        x_dict.get(x_irrational_voice_debt_shares) == bob_irrational_voice_debt_shares
     )
     assert (
-        x_dict.get(x_inallocable_voice_debt_points) == bob_inallocable_voice_debt_points
+        x_dict.get(x_inallocable_voice_debt_shares) == bob_inallocable_voice_debt_shares
     )
     assert len(x_dict.keys()) == 12
 
 
-def test_VoiceUnit_to_dict_ReturnsDictWith_irrational_voice_debt_points_ValuesIsNone():
+def test_VoiceUnit_to_dict_ReturnsDictWith_irrational_voice_debt_shares_ValuesIsNone():
     # ESTABLISH
     bob_str = "Bob"
     bob_voiceunit = voiceunit_shop(bob_str)
-    bob_voiceunit.irrational_voice_debt_points = None
-    bob_voiceunit.inallocable_voice_debt_points = None
+    bob_voiceunit.irrational_voice_debt_shares = None
+    bob_voiceunit.inallocable_voice_debt_shares = None
 
     # WHEN
     x_dict = bob_voiceunit.to_dict(all_attrs=True)
 
     # THEN
-    x_irrational_voice_debt_points = "irrational_voice_debt_points"
-    x_inallocable_voice_debt_points = "inallocable_voice_debt_points"
-    assert x_dict.get(x_irrational_voice_debt_points) is None
-    assert x_dict.get(x_inallocable_voice_debt_points) is None
+    x_irrational_voice_debt_shares = "irrational_voice_debt_shares"
+    x_inallocable_voice_debt_shares = "inallocable_voice_debt_shares"
+    assert x_dict.get(x_irrational_voice_debt_shares) is None
+    assert x_dict.get(x_inallocable_voice_debt_shares) is None
     assert len(x_dict.keys()) == 10
 
 
@@ -226,15 +226,15 @@ def test_voiceunit_get_from_dict_Returns_memberships():
     before_yao_voiceunit = voiceunit_shop(yao_str, knot=slash_str)
     ohio_str = f"{slash_str}ohio"
     iowa_str = f"{slash_str}iowa"
-    ohio_group_cred_points = 90
-    ohio_group_debt_points = 901
-    iowa_group_cred_points = 902
-    iowa_group_debt_points = 903
+    ohio_group_cred_shares = 90
+    ohio_group_debt_shares = 901
+    iowa_group_cred_shares = 902
+    iowa_group_debt_shares = 903
     ohio_membership = membership_shop(
-        ohio_str, ohio_group_cred_points, ohio_group_debt_points
+        ohio_str, ohio_group_cred_shares, ohio_group_debt_shares
     )
     iowa_membership = membership_shop(
-        iowa_str, iowa_group_cred_points, iowa_group_debt_points
+        iowa_str, iowa_group_cred_shares, iowa_group_debt_shares
     )
     before_yao_voiceunit.set_membership(ohio_membership)
     before_yao_voiceunit.set_membership(iowa_membership)
@@ -268,18 +268,18 @@ def test_voiceunits_get_from_dict_ReturnsObjWith_knot():
 def test_voiceunits_get_from_json_ReturnsObj_SimpleExampleWith_IncompleteData():
     # ESTABLISH
     yao_str = "Yao"
-    yao_voice_cred_points = 13
-    yao_voice_debt_points = 17
-    yao_irrational_voice_debt_points = 87
-    yao_inallocable_voice_debt_points = 97
+    yao_voice_cred_shares = 13
+    yao_voice_debt_shares = 17
+    yao_irrational_voice_debt_shares = 87
+    yao_inallocable_voice_debt_shares = 97
     yao_json_dict = {
         yao_str: {
             "voice_name": yao_str,
-            "voice_cred_points": yao_voice_cred_points,
-            "voice_debt_points": yao_voice_debt_points,
+            "voice_cred_shares": yao_voice_cred_shares,
+            "voice_debt_shares": yao_voice_debt_shares,
             "memberships": {},
-            "irrational_voice_debt_points": yao_irrational_voice_debt_points,
-            "inallocable_voice_debt_points": yao_inallocable_voice_debt_points,
+            "irrational_voice_debt_shares": yao_irrational_voice_debt_shares,
+            "inallocable_voice_debt_shares": yao_inallocable_voice_debt_shares,
         }
     }
     yao_json_str = get_json_from_dict(yao_json_dict)
@@ -293,11 +293,11 @@ def test_voiceunits_get_from_json_ReturnsObj_SimpleExampleWith_IncompleteData():
     yao_voiceunit = yao_obj_dict[yao_str]
 
     assert yao_voiceunit.voice_name == yao_str
-    assert yao_voiceunit.voice_cred_points == yao_voice_cred_points
-    assert yao_voiceunit.voice_debt_points == yao_voice_debt_points
+    assert yao_voiceunit.voice_cred_shares == yao_voice_cred_shares
+    assert yao_voiceunit.voice_debt_shares == yao_voice_debt_shares
     assert (
-        yao_voiceunit.irrational_voice_debt_points == yao_irrational_voice_debt_points
+        yao_voiceunit.irrational_voice_debt_shares == yao_irrational_voice_debt_shares
     )
     assert (
-        yao_voiceunit.inallocable_voice_debt_points == yao_inallocable_voice_debt_points
+        yao_voiceunit.inallocable_voice_debt_shares == yao_inallocable_voice_debt_shares
     )

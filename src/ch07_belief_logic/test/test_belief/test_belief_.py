@@ -39,7 +39,7 @@ def test_BeliefUnit_Exists():
     assert x_belief.rational is None
     assert x_belief.keeps_justified is None
     assert x_belief.keeps_buildable is None
-    assert x_belief.sum_healerunit_share is None
+    assert x_belief.sum_healerunit_plans_fund_total is None
     assert x_belief.offtrack_kids_star_set is None
     assert x_belief.offtrack_fund is None
     assert x_belief.reason_contexts is None
@@ -58,7 +58,7 @@ def test_BeliefUnit_Exists():
         "_range_inheritors",
         wx.rational,
         wx.reason_contexts,
-        wx.sum_healerunit_share,
+        wx.sum_healerunit_plans_fund_total,
         wx.tree_traverse_count,
         wx.voices,
         wx.knot,
@@ -159,7 +159,7 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     assert x_belief.rational is False
     assert x_belief.keeps_justified is False
     assert x_belief.keeps_buildable is False
-    assert x_belief.sum_healerunit_share == 0
+    assert x_belief.sum_healerunit_plans_fund_total == 0
     assert x_belief.offtrack_kids_star_set == set()
     assert not x_belief.offtrack_fund
     assert x_belief.reason_contexts == set()

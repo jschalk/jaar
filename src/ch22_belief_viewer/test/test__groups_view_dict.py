@@ -39,21 +39,21 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     sue_believer = beliefunit_shop(sue_str)
 #     yao_str = "Yao"
 #     bob_str = "Bob"
-#     yao_cred_points = 110
-#     yao_debt_points = 130
-#     bob_cred_points = 230
-#     bob_debt_points = 290
-#     sue_believer.add_voiceunit(yao_str, yao_cred_points, yao_debt_points)
-#     sue_believer.add_voiceunit(bob_str, bob_cred_points, bob_debt_points)
+#     yao_cred_shares = 110
+#     yao_debt_shares = 130
+#     bob_cred_shares = 230
+#     bob_debt_shares = 290
+#     sue_believer.add_voiceunit(yao_str, yao_cred_shares, yao_debt_shares)
+#     sue_believer.add_voiceunit(bob_str, bob_cred_shares, bob_debt_shares)
 #     swim_str = ";swimmers"
-#     bob_swim_cred_points = 66
-#     bob_swim_debt_points = 77
-#     yao_swim_cred_points = 88
-#     yao_swim_debt_points = 99
+#     bob_swim_cred_shares = 66
+#     bob_swim_debt_shares = 77
+#     yao_swim_cred_shares = 88
+#     yao_swim_debt_shares = 99
 #     yao_voice = sue_believer.get_voice(yao_str)
 #     bob_voice = sue_believer.get_voice(bob_str)
-#     yao_voice.add_membership(swim_str, yao_swim_cred_points, yao_swim_debt_points)
-#     bob_voice.add_membership(swim_str, bob_swim_cred_points, bob_swim_debt_points)
+#     yao_voice.add_membership(swim_str, yao_swim_cred_shares, yao_swim_debt_shares)
+#     bob_voice.add_membership(swim_str, bob_swim_cred_shares, bob_swim_debt_shares)
 #     sue_believer.cashout()
 
 #     # WHEN
@@ -133,10 +133,10 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     yao_str = "Yao"
 #     sue_believer.add_voiceunit(yao_str)
 #     swim_str = ";swimmers"
-#     yao_swim_cred_points = 311
-#     yao_swim_debt_points = 313
+#     yao_swim_cred_shares = 311
+#     yao_swim_debt_shares = 313
 #     yao_voiceunit = sue_believer.get_voice(yao_str)
-#     yao_voiceunit.add_membership(swim_str, yao_swim_cred_points, yao_swim_debt_points)
+#     yao_voiceunit.add_membership(swim_str, yao_swim_cred_shares, yao_swim_debt_shares)
 #     sue_believer.cashout()
 
 #     # WHEN
@@ -151,8 +151,8 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     yao_swim_dict = yao_memberships_dict.get(swim_str)
 
 #     group_title_readable_key = add_readable(wx.group_title)
-#     group_cred_points_readable_key = add_readable(wx.group_cred_points)
-#     group_debt_points_readable_key = add_readable(wx.group_debt_points)
+#     group_cred_shares_readable_key = add_readable(wx.group_cred_shares)
+#     group_debt_shares_readable_key = add_readable(wx.group_debt_shares)
 #     credor_pool_readable_key = add_readable(wx.credor_pool)
 #     debtor_pool_readable_key = add_readable(wx.debtor_pool)
 #     fund_agenda_give_readable_key = add_readable(wx.fund_agenda_give)
@@ -164,8 +164,8 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     assert set(yao_swim_dict.keys()) == {
 #         wx.voice_name,
 #        wx.group_title,
-#        wx.group_cred_points,
-#        wx.group_debt_points,
+#        wx.group_cred_shares,
+#        wx.group_debt_shares,
 #         wx.credor_pool,
 #         wx.debtor_pool,
 #         wx.fund_agenda_give,
@@ -175,8 +175,8 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #         wx.fund_give,
 #         wx.fund_take,
 #         group_title_readable_key,
-#         group_cred_points_readable_key,
-#         group_debt_points_readable_key,
+#         group_cred_shares_readable_key,
+#         group_debt_shares_readable_key,
 #         credor_pool_readable_key,
 #         debtor_pool_readable_key,
 #         fund_agenda_give_readable_key,
@@ -188,11 +188,11 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     }
 #     yao_swim_mu = yao_voiceunit.get_membership(swim_str)
 #     expected_group_title_readable = f"{wx.group_title}: {yao_swim_mu.group_title}"
-#     expected_group_cred_points_readable = (
-#         f"{wx.group_cred_points}: {yao_swim_mu.group_cred_points}"
+#     expected_group_cred_shares_readable = (
+#         f"{wx.group_cred_shares}: {yao_swim_mu.group_cred_shares}"
 #     )
-#     expected_group_debt_points_readable = (
-#         f"{wx.group_debt_points}: {yao_swim_mu.group_debt_points}"
+#     expected_group_debt_shares_readable = (
+#         f"{wx.group_debt_shares}: {yao_swim_mu.group_debt_shares}"
 #     )
 #     expected_credor_pool_readable = f"{wx.credor_pool}: {yao_swim_mu.credor_pool}"
 #     expected_debtor_pool_readable = f"{wx.debtor_pool}: {yao_swim_mu.debtor_pool}"
@@ -213,8 +213,8 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 
 #     assert yao_swim_dict.get(wx.voice_name) == yao_swim_mu.voice_name
 #     assert yao_swim_dict.get(wx.group_title) == yao_swim_mu.group_title
-#     assert yao_swim_dict.get(wx.group_cred_points) == yao_swim_mu.group_cred_points
-#     assert yao_swim_dict.get(wx.group_debt_points) == yao_swim_mu.group_debt_points
+#     assert yao_swim_dict.get(wx.group_cred_shares) == yao_swim_mu.group_cred_shares
+#     assert yao_swim_dict.get(wx.group_debt_shares) == yao_swim_mu.group_debt_shares
 #     assert yao_swim_dict.get(wx.credor_pool) == yao_swim_mu.credor_pool
 #     assert yao_swim_dict.get(wx.debtor_pool) == yao_swim_mu.debtor_pool
 #     assert yao_swim_dict.get(wx.fund_agenda_give) == yao_swim_mu.fund_agenda_give
@@ -231,12 +231,12 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     assert yao_swim_dict.get(wx.fund_take) == yao_swim_mu.fund_take
 #     assert yao_swim_dict.get(group_title_readable_key) == expected_group_title_readable
 #     assert (
-#         yao_swim_dict.get(group_cred_points_readable_key)
-#         == expected_group_cred_points_readable
+#         yao_swim_dict.get(group_cred_shares_readable_key)
+#         == expected_group_cred_shares_readable
 #     )
 #     assert (
-#         yao_swim_dict.get(group_debt_points_readable_key)
-#         == expected_group_debt_points_readable
+#         yao_swim_dict.get(group_debt_shares_readable_key)
+#         == expected_group_debt_shares_readable
 #     )
 #     assert (
 #         yao_swim_dict.get(credor_pool_readable_key) == expected_credor_pool_readable
@@ -267,23 +267,23 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     # sue_believer = beliefunit_shop(sue_str)
 #     # yao_str = "Yao"
 #     # bob_str = "Bob"
-#     # yao_cred_points = 110
-#     # yao_debt_points = 130
-#     # bob_cred_points = 230
-#     # bob_debt_points = 290
-#     # sue_believer.add_voiceunit(yao_str, yao_cred_points, yao_debt_points)
-#     # sue_believer.add_voiceunit(bob_str, bob_cred_points, bob_debt_points)
+#     # yao_cred_shares = 110
+#     # yao_debt_shares = 130
+#     # bob_cred_shares = 230
+#     # bob_debt_shares = 290
+#     # sue_believer.add_voiceunit(yao_str, yao_cred_shares, yao_debt_shares)
+#     # sue_believer.add_voiceunit(bob_str, bob_cred_shares, bob_debt_shares)
 #     # swim_str = ";swimmers"
-#     # yao_swim_cred_points = 311
-#     # yao_swim_debt_points = 313
-#     # bob_swim_cred_points = 411
-#     # bob_swim_debt_points = 413
+#     # yao_swim_cred_shares = 311
+#     # yao_swim_debt_shares = 313
+#     # bob_swim_cred_shares = 411
+#     # bob_swim_debt_shares = 413
 #     # clea_str = ";cleaners"
-#     # cleaners_cred_points = 511
-#     # cleaners_debt_points = 513
+#     # cleaners_cred_shares = 511
+#     # cleaners_debt_shares = 513
 #     # yao_voiceunit = sue_believer.get_voice(yao_str)
 #     # bob_voiceunit = sue_believer.get_voice(bob_str)
-#     # bob_voiceunit.add_membership(swim_str, bob_swim_cred_points, bob_swim_debt_points)
-#     # yao_voiceunit.add_membership(swim_str, yao_swim_cred_points, yao_swim_debt_points)
-#     # yao_voiceunit.add_membership(clea_str, cleaners_cred_points, cleaners_debt_points)
+#     # bob_voiceunit.add_membership(swim_str, bob_swim_cred_shares, bob_swim_debt_shares)
+#     # yao_voiceunit.add_membership(swim_str, yao_swim_cred_shares, yao_swim_debt_shares)
+#     # yao_voiceunit.add_membership(clea_str, cleaners_cred_shares, cleaners_debt_shares)
 #     # sue_believer.get_voice(yao_str).add_membership()

@@ -56,7 +56,7 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
     x_keeps_justified = 77
     x_offtrack_fund = 55.5
     x_rational = 92
-    x_sum_healerunit_share = 66.6
+    x_sum_healerunit_plans_fund_total = 66.6
     x_tree_traverse_count = 7
     x_credor_respect = 88.2
     x_debtor_respect = 88.4
@@ -77,7 +77,7 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
     sue_belief.keeps_justified = x_keeps_justified
     sue_belief.offtrack_fund = x_offtrack_fund
     sue_belief.rational = x_rational
-    sue_belief.sum_healerunit_share = x_sum_healerunit_share
+    sue_belief.sum_healerunit_plans_fund_total = x_sum_healerunit_plans_fund_total
     sue_belief.tree_traverse_count = x_tree_traverse_count
     sue_belief.credor_respect = x_credor_respect
     sue_belief.debtor_respect = x_debtor_respect
@@ -111,7 +111,7 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
             x_rational,
             x_keeps_justified,
             x_offtrack_fund,
-            x_sum_healerunit_share,
+            x_sum_healerunit_plans_fund_total,
             x_keeps_buildable,
             x_tree_traverse_count,
         )
@@ -414,8 +414,8 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
     x_belief_name = 2
     x_voice_name = 3
     x_group_title = 4
-    x_group_cred_points = 5.0
-    x_group_debt_points = 6.0
+    x_group_cred_shares = 5.0
+    x_group_debt_shares = 6.0
     x_credor_pool = 7.0
     x_debtor_pool = 8.0
     x_fund_give = 9.0
@@ -426,8 +426,8 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
     x_fund_agenda_ratio_take = 14.0
     x_membership = membership_shop(x_group_title)
     x_membership.voice_name = x_voice_name
-    x_membership.group_cred_points = x_group_cred_points
-    x_membership.group_debt_points = x_group_debt_points
+    x_membership.group_cred_shares = x_group_cred_shares
+    x_membership.group_debt_shares = x_group_debt_shares
     x_membership.credor_pool = x_credor_pool
     x_membership.debtor_pool = x_debtor_pool
     x_membership.fund_give = x_fund_give
@@ -457,8 +457,8 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
             str(x_belief_name),
             str(x_voice_name),
             str(x_group_title),
-            x_group_cred_points,
-            x_group_debt_points,
+            x_group_cred_shares,
+            x_group_debt_shares,
             x_credor_pool,
             x_debtor_pool,
             x_fund_give,
@@ -490,8 +490,8 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     x_moment_label = 1
     x_belief_name = 2
     x_voice_name = 3
-    x_voice_cred_points = 4
-    x_voice_debt_points = 5
+    x_voice_cred_shares = 4
+    x_voice_debt_shares = 5
     x_credor_pool = 6
     x_debtor_pool = 7
     x_fund_give = 8
@@ -500,12 +500,12 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     x_fund_agenda_take = 11
     x_fund_agenda_ratio_give = 12
     x_fund_agenda_ratio_take = 13
-    x_inallocable_voice_debt_points = 14
-    x_irrational_voice_debt_points = 15
+    x_inallocable_voice_debt_shares = 14
+    x_irrational_voice_debt_shares = 15
     x_voice = voiceunit_shop(x_voice_name)
     x_voice.voice_name = x_voice_name
-    x_voice.voice_cred_points = x_voice_cred_points
-    x_voice.voice_debt_points = x_voice_debt_points
+    x_voice.voice_cred_shares = x_voice_cred_shares
+    x_voice.voice_debt_shares = x_voice_debt_shares
     x_voice.credor_pool = x_credor_pool
     x_voice.debtor_pool = x_debtor_pool
     x_voice.fund_give = x_fund_give
@@ -514,8 +514,8 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     x_voice.fund_agenda_take = x_fund_agenda_take
     x_voice.fund_agenda_ratio_give = x_fund_agenda_ratio_give
     x_voice.fund_agenda_ratio_take = x_fund_agenda_ratio_take
-    x_voice.inallocable_voice_debt_points = x_inallocable_voice_debt_points
-    x_voice.irrational_voice_debt_points = x_irrational_voice_debt_points
+    x_voice.inallocable_voice_debt_shares = x_inallocable_voice_debt_shares
+    x_voice.irrational_voice_debt_shares = x_irrational_voice_debt_shares
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -536,8 +536,8 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
             str(x_moment_label),
             str(x_belief_name),
             str(x_voice_name),
-            x_voice_cred_points,
-            x_voice_debt_points,
+            x_voice_cred_shares,
+            x_voice_debt_shares,
             x_credor_pool,
             x_debtor_pool,
             x_fund_give,
@@ -546,8 +546,8 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
             x_fund_agenda_take,
             x_fund_agenda_ratio_give,
             x_fund_agenda_ratio_take,
-            x_inallocable_voice_debt_points,
-            x_irrational_voice_debt_points,
+            x_inallocable_voice_debt_shares,
+            x_irrational_voice_debt_shares,
         )
         expected_data = [expected_row1]
         assert rows == expected_data

@@ -62,18 +62,18 @@ def test_PlanUnit_set_fund_attr_ReturnsObj():
     assert run_awardheir.fund_take == 19
 
 
-def test_PlanUnit_get_fund_share_ReturnsObj():
+def test_PlanUnit_get_plan_fund_total_ReturnsObj():
     # ESTABLISH
     texas_str = "texas"
     texas_plan = planunit_shop(texas_str)
 
     # WHEN / THEN
-    assert texas_plan.get_fund_share() == 0
+    assert texas_plan.get_plan_fund_total() == 0
 
     # WHEN / THEN
     texas_plan.fund_onset = 3
     texas_plan.fund_cease = 14
-    assert texas_plan.get_fund_share() == 11
+    assert texas_plan.get_plan_fund_total() == 11
 
 
 def test_PlanUnit_set_awardunit_SetsAttr():

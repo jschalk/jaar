@@ -72,8 +72,8 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_voiceunit():
             wx.party_title,
             wx.belief_name,
             wx.voice_name,
-            wx.voice_cred_points,
-            wx.voice_debt_points,
+            wx.voice_cred_shares,
+            wx.voice_debt_shares,
             wx.amount,
         ]
         blrpern_cat = "belief_voiceunit"
@@ -95,7 +95,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_voiceunit():
         )
 
         # THEN
-        columns_str = "event_int, face_name, moment_label, belief_name, voice_name, voice_cred_points, voice_debt_points"
+        columns_str = "event_int, face_name, moment_label, belief_name, voice_name, voice_cred_shares, voice_debt_shares"
         expected_sqlstr = f"""INSERT INTO {blrpern_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
@@ -122,7 +122,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_belief_voiceunit():
             wx.party_title,
             wx.belief_name,
             wx.voice_name,
-            wx.voice_cred_points,
+            wx.voice_cred_shares,
             wx.amount,
         ]
         blrpern_cat = "belief_voiceunit"
@@ -144,7 +144,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_belief_voiceunit():
         )
 
         # THEN
-        columns_str = "event_int, face_name, moment_label, belief_name, voice_name, voice_cred_points"
+        columns_str = "event_int, face_name, moment_label, belief_name, voice_name, voice_cred_shares"
         expected_sqlstr = f"""INSERT INTO {blrpern_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw

@@ -3266,305 +3266,305 @@
   "voices": {
     "A a ron Jones": {
       "memberships": {
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
-        ";MerVista Apt": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";MerVista Apt"}, 
-        "A a ron Jones": {"group_cred_points": 1, "group_debt_points": 1, "group_title": "A a ron Jones"}
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
+        ";MerVista Apt": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";MerVista Apt"}, 
+        "A a ron Jones": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": "A a ron Jones"}
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "A a ron Jones"
     }, 
     "America": {
       "memberships": {
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
-        ";Family": {"group_cred_points": 6.45, "group_debt_points": 1, "group_title": ";Family"}, 
-        ";Friends": {"group_cred_points": 6.1, "group_debt_points": 1, "group_title": ";Friends"}, 
-        "America": {"group_cred_points": 1, "group_debt_points": 1, "group_title": "America"}
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
+        ";Family": {"group_cred_shares": 6.45, "group_debt_shares": 1, "group_title": ";Family"}, 
+        ";Friends": {"group_cred_shares": 6.1, "group_debt_shares": 1, "group_title": ";Friends"}, 
+        "America": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": "America"}
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "America"
     }, 
     "Anna": {
       "memberships": {
-        ";Everyone": { "group_cred_points": 1.0, "group_debt_points": 1, "group_title": ";Everyone" }, 
-        ";Family"  : { "group_cred_points": 6.2, "group_debt_points": 1, "group_title": ";Family"   }, 
-        "Anna"     : { "group_cred_points": 1.0, "group_debt_points": 1, "group_title": "Anna"      }
+        ";Everyone": { "group_cred_shares": 1.0, "group_debt_shares": 1, "group_title": ";Everyone" }, 
+        ";Family"  : { "group_cred_shares": 6.2, "group_debt_shares": 1, "group_title": ";Family"   }, 
+        "Anna"     : { "group_cred_shares": 1.0, "group_debt_shares": 1, "group_title": "Anna"      }
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Anna"
     }, 
     "Benjamin Stoddert": {
       "memberships": {
-        ";ACME DevOps": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";ACME DevOps"}, 
-        ";ACME General": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";ACME General"}, 
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
+        ";ACME DevOps": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";ACME DevOps"}, 
+        ";ACME General": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";ACME General"}, 
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
         "Benjamin Stoddert": {
-          "group_cred_points": 1, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 1, 
+          "group_debt_shares": 1, 
           "group_title": "Benjamin Stoddert"
         }
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Benjamin Stoddert"
     }, 
     "Bob302": {
       "memberships": {
         ";ACME DevOps": {
-          "group_cred_points": 6.25, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 6.25, 
+          "group_debt_shares": 1, 
           "group_title": ";ACME DevOps"
         }, 
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
         ";appreciates US DOLLAR": {
-          "group_cred_points": 1, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 1, 
+          "group_debt_shares": 1, 
           "group_title": ";appreciates US DOLLAR"
         }, 
-        "Bob302": {"group_cred_points": 1, "group_debt_points": 1, "group_title": "Bob302"}
+        "Bob302": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": "Bob302"}
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Bob302"
     }, 
     "Chuck Lee": {
       "memberships": {
-        ";ACME DevOps": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";ACME DevOps"}, 
-        ";ACME General": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";ACME General"}, 
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
-        "Chuck Lee": {"group_cred_points": 1, "group_debt_points": 1, "group_title": "Chuck Lee"}
+        ";ACME DevOps": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";ACME DevOps"}, 
+        ";ACME General": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";ACME General"}, 
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
+        "Chuck Lee": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": "Chuck Lee"}
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Chuck Lee"
     }, 
     "Ernesto Chavez": {
       "memberships": {
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
-        ";Philosophy": {"group_cred_points": 6.5, "group_debt_points": 1, "group_title": ";Philosophy"}, 
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
+        ";Philosophy": {"group_cred_shares": 6.5, "group_debt_shares": 1, "group_title": ";Philosophy"}, 
         "Ernesto Chavez": {
-          "group_cred_points": 1, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 1, 
+          "group_debt_shares": 1, 
           "group_title": "Ernesto Chavez"
         }
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Ernesto Chavez"
     }, 
     "Jacque Chirac": {
       "memberships": {
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
-        ";MerVista Apt": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";MerVista Apt"}, 
-        "Jacque Chirac": {"group_cred_points": 1, "group_debt_points": 1, "group_title": "Jacque Chirac"}
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
+        ";MerVista Apt": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";MerVista Apt"}, 
+        "Jacque Chirac": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": "Jacque Chirac"}
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Jacque Chirac"
     }, 
     "Jane Randolph": {
       "memberships": {
-        ";ACME DevOps": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";ACME DevOps"}, 
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
-        "Jane Randolph": {"group_cred_points": 1, "group_debt_points": 1, "group_title": "Jane Randolph"}
+        ";ACME DevOps": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";ACME DevOps"}, 
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
+        "Jane Randolph": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": "Jane Randolph"}
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Jane Randolph"
     }, 
     "Maria Reynolds": {
       "memberships": {
         ";ACME DevOps": {
-          "group_cred_points": 6.75, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 6.75, 
+          "group_debt_shares": 1, 
           "group_title": ";ACME DevOps"
         }, 
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
         "Maria Reynolds": {
-          "group_cred_points": 1, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 1, 
+          "group_debt_shares": 1, 
           "group_title": "Maria Reynolds"
         }
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Maria Reynolds"
     }, 
     "Martha Doubs": {
       "memberships": {
-        ";ACME DevOps": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";ACME DevOps"}, 
-        ";ACME General": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";ACME General"}, 
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
-        "Martha Doubs": {"group_cred_points": 1, "group_debt_points": 1, "group_title": "Martha Doubs"}
+        ";ACME DevOps": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";ACME DevOps"}, 
+        ";ACME General": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";ACME General"}, 
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
+        "Martha Doubs": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": "Martha Doubs"}
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Martha Doubs"
     }, 
     "Mikayla": {
       "memberships": {
-        ";ACME DevOps": {"group_cred_points": 10, "group_debt_points": 1, "group_title": ";ACME DevOps"}, 
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
-        ";Philosophy": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Philosophy"}, 
-        "Mikayla": {"group_cred_points": 1, "group_debt_points": 1, "group_title": "Mikayla"}
+        ";ACME DevOps": {"group_cred_shares": 10, "group_debt_shares": 1, "group_title": ";ACME DevOps"}, 
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
+        ";Philosophy": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Philosophy"}, 
+        "Mikayla": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": "Mikayla"}
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Mikayla"
     }, 
     "Norberto": {
       "memberships": {
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
-        ";MerVista Apt": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";MerVista Apt"}, 
-        "Norberto": {"group_cred_points": 1, "group_debt_points": 1, "group_title": "Norberto"}
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
+        ";MerVista Apt": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";MerVista Apt"}, 
+        "Norberto": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": "Norberto"}
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Norberto"
     }, 
     "Perrison": {
       "memberships": {
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
-        ";Friends": {"group_cred_points": 6.4, "group_debt_points": 1, "group_title": ";Friends"}, 
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
+        ";Friends": {"group_cred_shares": 6.4, "group_debt_shares": 1, "group_title": ";Friends"}, 
         ";appreciates US DOLLAR": {
-          "group_cred_points": 5, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 5, 
+          "group_debt_shares": 1, 
           "group_title": ";appreciates US DOLLAR"
         }, 
-        "Perrison": {"group_cred_points": 1, "group_debt_points": 1, "group_title": "Perrison"}
+        "Perrison": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": "Perrison"}
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Perrison"
     }, 
     "Philipa": {
       "memberships": {
         ";Climate Death": {
-          "group_cred_points": 1, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 1, 
+          "group_debt_shares": 1, 
           "group_title": ";Climate Death"
         }, 
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
-        ";Philosophy": {"group_cred_points": 52, "group_debt_points": 1, "group_title": ";Philosophy"}, 
-        "Philipa": {"group_cred_points": 1, "group_debt_points": 1, "group_title": "Philipa"}
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
+        ";Philosophy": {"group_cred_shares": 52, "group_debt_shares": 1, "group_title": ";Philosophy"}, 
+        "Philipa": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": "Philipa"}
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Philipa"
     }, 
     "Prashant": {
       "memberships": {
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
         ";appreciates US DOLLAR": {
-          "group_cred_points": 2, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 2, 
+          "group_debt_shares": 1, 
           "group_title": ";appreciates US DOLLAR"
         }, 
-        "Prashant": {"group_cred_points": 1, "group_debt_points": 1, "group_title": "Prashant"}
+        "Prashant": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": "Prashant"}
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Prashant"
     }, 
     "Renee Elise Goldsberry": {
       "memberships": {
         ";Climate Death": {
-          "group_cred_points": 1, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 1, 
+          "group_debt_shares": 1, 
           "group_title": ";Climate Death"
         }, 
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
-        ";Friends": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Friends"}, 
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
+        ";Friends": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Friends"}, 
         ";People who identify by UTEP": {
-          "group_cred_points": 1, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 1, 
+          "group_debt_shares": 1, 
           "group_title": ";People who identify by UTEP"
         }, 
-        ";Philosophy": {"group_cred_points": 3, "group_debt_points": 1, "group_title": ";Philosophy"}, 
-        ";SHOW ME2": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";SHOW ME2"}, 
+        ";Philosophy": {"group_cred_shares": 3, "group_debt_shares": 1, "group_title": ";Philosophy"}, 
+        ";SHOW ME2": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";SHOW ME2"}, 
         ";appreciates US DOLLAR": {
-          "group_cred_points": 1, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 1, 
+          "group_debt_shares": 1, 
           "group_title": ";appreciates US DOLLAR"
         }, 
         ";hurt by us dollar": {
-          "group_cred_points": 1, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 1, 
+          "group_debt_shares": 1, 
           "group_title": ";hurt by us dollar"
         }, 
         "Renee Elise Goldsberry": {
-          "group_cred_points": 1, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 1, 
+          "group_debt_shares": 1, 
           "group_title": "Renee Elise Goldsberry"
         }
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Renee Elise Goldsberry"
     }, 
     "Sam zamora": {
       "memberships": {
-        ";ACME DevOps": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";ACME DevOps"}, 
-        ";ACME General": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";ACME General"}, 
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
-        "Sam zamora": {"group_cred_points": 1, "group_debt_points": 1, "group_title": "Sam zamora"}
+        ";ACME DevOps": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";ACME DevOps"}, 
+        ";ACME General": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";ACME General"}, 
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
+        "Sam zamora": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": "Sam zamora"}
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Sam zamora"
     }, 
     "Shadwell Harris": {
       "memberships": {
-        ";ACME DevOps": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";ACME DevOps"}, 
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
+        ";ACME DevOps": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";ACME DevOps"}, 
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
         "Shadwell Harris": {
-          "group_cred_points": 1, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 1, 
+          "group_debt_shares": 1, 
           "group_title": "Shadwell Harris"
         }
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Shadwell Harris"
     }, 
     "Thomas OSU": {
       "memberships": {
         ";Climate Death": {
-          "group_cred_points": 1, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 1, 
+          "group_debt_shares": 1, 
           "group_title": ";Climate Death"
         }, 
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
-        "Thomas OSU": {"group_cred_points": 1, "group_debt_points": 1, "group_title": "Thomas OSU"}
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
+        "Thomas OSU": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": "Thomas OSU"}
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Thomas OSU"
     }, 
     "Travis Fox": {
       "memberships": {
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
-        ";Family": {"group_cred_points": 6.35, "group_debt_points": 1, "group_title": ";Family"}, 
-        "Travis Fox": {"group_cred_points": 1, "group_debt_points": 1, "group_title": "Travis Fox"}
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
+        ";Family": {"group_cred_shares": 6.35, "group_debt_shares": 1, "group_title": ";Family"}, 
+        "Travis Fox": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": "Travis Fox"}
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "Travis Fox"
     }, 
     "WIlliam Wellace": {
       "memberships": {
-        ";ACME DevOps": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";ACME DevOps"}, 
-        ";Everyone": {"group_cred_points": 1, "group_debt_points": 1, "group_title": ";Everyone"}, 
+        ";ACME DevOps": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";ACME DevOps"}, 
+        ";Everyone": {"group_cred_shares": 1, "group_debt_shares": 1, "group_title": ";Everyone"}, 
         "WIlliam Wellace": {
-          "group_cred_points": 1, 
-          "group_debt_points": 1, 
+          "group_cred_shares": 1, 
+          "group_debt_shares": 1, 
           "group_title": "WIlliam Wellace"
         }
       }, 
-      "voice_cred_points": 1, 
-      "voice_debt_points": 1, 
+      "voice_cred_shares": 1, 
+      "voice_debt_shares": 1, 
       "voice_name": "WIlliam Wellace"
     }
   }

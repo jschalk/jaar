@@ -9,7 +9,7 @@
     "fund_pool"        : { "otx_key": false }, 
     "max_tree_traverse": { "otx_key": false }, 
     "moment_label"     : { "otx_key": true  }, 
-    "money_grain"            : { "otx_key": false }, 
+    "money_grain"      : { "otx_key": false }, 
     "respect_grain"    : { "otx_key": false }, 
     "tally"            : { "otx_key": false }
   }, 

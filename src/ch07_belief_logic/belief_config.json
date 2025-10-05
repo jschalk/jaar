@@ -333,8 +333,8 @@
       "fund_agenda_take": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
       "fund_give": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
       "fund_take": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
-      "group_cred_points": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
-      "group_debt_points": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}
+      "group_cred_shares": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
+      "group_debt_shares": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}
     }
   }, 
   "belief_voiceunit": {
@@ -365,10 +365,10 @@
       "fund_agenda_take": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
       "fund_give": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
       "fund_take": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
-      "inallocable_voice_debt_points": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
-      "irrational_voice_debt_points": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
-      "voice_cred_points": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
-      "voice_debt_points": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}
+      "inallocable_voice_debt_shares": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
+      "irrational_voice_debt_shares": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
+      "voice_cred_shares": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
+      "voice_debt_shares": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}
     }
   }, 
   "beliefunit": {
@@ -397,15 +397,15 @@
         "populate_by_cashout": false, 
         "sqlite_datatype": "INTEGER"
       }, 
-      "offtrack_fund": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
       "money_grain": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
+      "offtrack_fund": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
       "rational": {
         "class_type": "bool", 
         "populate_by_cashout": true, 
         "sqlite_datatype": "INTEGER"
       }, 
       "respect_grain": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
-      "sum_healerunit_share": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
+      "sum_healerunit_plans_fund_total": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
       "tally": {
         "class_type": "int", 
         "populate_by_cashout": false, 

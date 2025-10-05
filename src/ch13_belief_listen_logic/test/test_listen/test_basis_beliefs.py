@@ -17,19 +17,19 @@ def test_create_empty_belief_from_belief_ReturnsObj():
     yao_gut = beliefunit_shop(yao_str, knot=slash_str, money_grain=money_grain_float)
     yao_gut.set_l1_plan(planunit_shop("Iowa"))
     zia_str = "Zia"
-    zia_voice_cred_points = 47
-    zia_voice_debt_points = 41
+    zia_voice_cred_shares = 47
+    zia_voice_debt_shares = 41
     zia_credor_pool = 87
     zia_debtor_pool = 81
-    yao_gut.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
-    zia_irrational_voice_debt_points = 11
-    zia_inallocable_voice_debt_points = 22
+    yao_gut.add_voiceunit(zia_str, zia_voice_cred_shares, zia_voice_debt_shares)
+    zia_irrational_voice_debt_shares = 11
+    zia_inallocable_voice_debt_shares = 22
     duty_zia_voiceunit = yao_gut.get_voice(zia_str)
-    duty_zia_voiceunit.add_irrational_voice_debt_points(
-        zia_irrational_voice_debt_points
+    duty_zia_voiceunit.add_irrational_voice_debt_shares(
+        zia_irrational_voice_debt_shares
     )
-    duty_zia_voiceunit.add_inallocable_voice_debt_points(
-        zia_inallocable_voice_debt_points
+    duty_zia_voiceunit.add_inallocable_voice_debt_shares(
+        zia_inallocable_voice_debt_shares
     )
     zia_voiceunit = yao_gut.get_voice(zia_str)
     zia_voiceunit.add_membership(f"{slash_str}swimmers")
@@ -65,19 +65,19 @@ def test_create_listen_basis_ReturnsObj():
     yao_duty = beliefunit_shop(yao_str, knot=slash_str)
     yao_duty.set_l1_plan(planunit_shop("Iowa"))
     zia_str = "Zia"
-    zia_voice_cred_points = 47
-    zia_voice_debt_points = 41
+    zia_voice_cred_shares = 47
+    zia_voice_debt_shares = 41
     zia_credor_pool = 8700
     zia_debtor_pool = 8100
-    yao_duty.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
-    zia_irrational_voice_debt_points = 11
-    zia_inallocable_voice_debt_points = 22
+    yao_duty.add_voiceunit(zia_str, zia_voice_cred_shares, zia_voice_debt_shares)
+    zia_irrational_voice_debt_shares = 11
+    zia_inallocable_voice_debt_shares = 22
     duty_zia_voiceunit = yao_duty.get_voice(zia_str)
-    duty_zia_voiceunit.add_irrational_voice_debt_points(
-        zia_irrational_voice_debt_points
+    duty_zia_voiceunit.add_irrational_voice_debt_shares(
+        zia_irrational_voice_debt_shares
     )
-    duty_zia_voiceunit.add_inallocable_voice_debt_points(
-        zia_inallocable_voice_debt_points
+    duty_zia_voiceunit.add_inallocable_voice_debt_shares(
+        zia_inallocable_voice_debt_shares
     )
     zia_voiceunit = yao_duty.get_voice(zia_str)
     zia_voiceunit.add_membership(f"{slash_str}swimmers")
@@ -106,8 +106,8 @@ def test_create_listen_basis_ReturnsObj():
         yao_basis_vision.get_voiceunits_dict().keys()
         == yao_duty.get_voiceunits_dict().keys()
     )
-    assert vision_zia_voiceunit.irrational_voice_debt_points == 0
-    assert vision_zia_voiceunit.inallocable_voice_debt_points == 0
+    assert vision_zia_voiceunit.irrational_voice_debt_shares == 0
+    assert vision_zia_voiceunit.inallocable_voice_debt_shares == 0
 
 
 def test_get_default_job_ReturnsObj():

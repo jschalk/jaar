@@ -220,9 +220,9 @@ def add_belief_voiceunit_insert_to_legible_list(
 ):
     for voiceunit_atom in voiceunit_dict.values():
         voice_name = voiceunit_atom.get_value("voice_name")
-        voice_cred_points_value = voiceunit_atom.get_value("voice_cred_points")
-        voice_debt_points_value = voiceunit_atom.get_value("voice_debt_points")
-        x_str = f"{voice_name} was added with {voice_cred_points_value} score credit and {voice_debt_points_value} score debt"
+        voice_cred_shares_value = voiceunit_atom.get_value("voice_cred_shares")
+        voice_debt_shares_value = voiceunit_atom.get_value("voice_debt_shares")
+        x_str = f"{voice_name} was added with {voice_cred_shares_value} score credit and {voice_debt_shares_value} score debt"
         legible_list.append(x_str)
 
 
@@ -231,14 +231,14 @@ def add_belief_voiceunit_update_to_legible_list(
 ):
     for voiceunit_atom in voiceunit_dict.values():
         voice_name = voiceunit_atom.get_value("voice_name")
-        voice_cred_points_value = voiceunit_atom.get_value("voice_cred_points")
-        voice_debt_points_value = voiceunit_atom.get_value("voice_debt_points")
-        if voice_cred_points_value is not None and voice_debt_points_value is not None:
-            x_str = f"{voice_name} now has {voice_cred_points_value} score credit and {voice_debt_points_value} score debt."
-        elif voice_cred_points_value is not None:
-            x_str = f"{voice_name} now has {voice_cred_points_value} score credit."
-        elif voice_debt_points_value is not None:
-            x_str = f"{voice_name} now has {voice_debt_points_value} score debt."
+        voice_cred_shares_value = voiceunit_atom.get_value("voice_cred_shares")
+        voice_debt_shares_value = voiceunit_atom.get_value("voice_debt_shares")
+        if voice_cred_shares_value is not None and voice_debt_shares_value is not None:
+            x_str = f"{voice_name} now has {voice_cred_shares_value} score credit and {voice_debt_shares_value} score debt."
+        elif voice_cred_shares_value is not None:
+            x_str = f"{voice_name} now has {voice_cred_shares_value} score credit."
+        elif voice_debt_shares_value is not None:
+            x_str = f"{voice_name} now has {voice_debt_shares_value} score debt."
         legible_list.append(x_str)
 
 
@@ -260,13 +260,13 @@ def add_belief_voice_membership_insert_to_legible_list(
         for voice_membership_atom in voice_membership_dict.values():
             group_title = voice_membership_atom.get_value("group_title")
             voice_name = voice_membership_atom.get_value("voice_name")
-            group_cred_points_value = voice_membership_atom.get_value(
-                "group_cred_points"
+            group_cred_shares_value = voice_membership_atom.get_value(
+                "group_cred_shares"
             )
-            group_debt_points_value = voice_membership_atom.get_value(
-                "group_debt_points"
+            group_debt_shares_value = voice_membership_atom.get_value(
+                "group_debt_shares"
             )
-            x_str = f"Group '{group_title}' has new membership {voice_name} with group_cred_points_value{group_cred_points_value} and group_debt_points_value={group_debt_points_value}."
+            x_str = f"Group '{group_title}' has new membership {voice_name} with group_cred_shares_value{group_cred_shares_value} and group_debt_shares_value={group_debt_shares_value}."
             legible_list.append(x_str)
 
 
@@ -279,21 +279,21 @@ def add_belief_voice_membership_update_to_legible_list(
         for voice_membership_atom in voice_membership_dict.values():
             group_title = voice_membership_atom.get_value("group_title")
             voice_name = voice_membership_atom.get_value("voice_name")
-            group_cred_points_value = voice_membership_atom.get_value(
-                "group_cred_points"
+            group_cred_shares_value = voice_membership_atom.get_value(
+                "group_cred_shares"
             )
-            group_debt_points_value = voice_membership_atom.get_value(
-                "group_debt_points"
+            group_debt_shares_value = voice_membership_atom.get_value(
+                "group_debt_shares"
             )
             if (
-                group_cred_points_value is not None
-                and group_debt_points_value is not None
+                group_cred_shares_value is not None
+                and group_debt_shares_value is not None
             ):
-                x_str = f"Group '{group_title}' membership {voice_name} has new group_cred_points_value{group_cred_points_value} and group_debt_points_value={group_debt_points_value}."
-            elif group_cred_points_value is not None:
-                x_str = f"Group '{group_title}' membership {voice_name} has new group_cred_points_value{group_cred_points_value}."
-            elif group_debt_points_value is not None:
-                x_str = f"Group '{group_title}' membership {voice_name} has new group_debt_points_value={group_debt_points_value}."
+                x_str = f"Group '{group_title}' membership {voice_name} has new group_cred_shares_value{group_cred_shares_value} and group_debt_shares_value={group_debt_shares_value}."
+            elif group_cred_shares_value is not None:
+                x_str = f"Group '{group_title}' membership {voice_name} has new group_cred_shares_value{group_cred_shares_value}."
+            elif group_debt_shares_value is not None:
+                x_str = f"Group '{group_title}' membership {voice_name} has new group_debt_shares_value={group_debt_shares_value}."
             legible_list.append(x_str)
 
 

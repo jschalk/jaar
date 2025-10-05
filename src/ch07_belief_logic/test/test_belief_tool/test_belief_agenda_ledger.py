@@ -375,12 +375,12 @@ def test_get_credit_ledger_ReturnsObj_Scenario1_voiceunits_Exist():
     bob_str = "Bob"
     xio_str = "Xio"
     zia_str = "Zia"
-    bob_voice_cred_points = 11
-    yao_voice_cred_points = 13
-    xio_voice_cred_points = 17
-    sue_belief.add_voiceunit(yao_str, yao_voice_cred_points)
-    sue_belief.add_voiceunit(bob_str, bob_voice_cred_points)
-    sue_belief.add_voiceunit(xio_str, xio_voice_cred_points)
+    bob_voice_cred_shares = 11
+    yao_voice_cred_shares = 13
+    xio_voice_cred_shares = 17
+    sue_belief.add_voiceunit(yao_str, yao_voice_cred_shares)
+    sue_belief.add_voiceunit(bob_str, bob_voice_cred_shares)
+    sue_belief.add_voiceunit(xio_str, xio_voice_cred_shares)
 
     # WHEN
     sue_credit_ledger = get_credit_ledger(sue_belief)
@@ -389,9 +389,9 @@ def test_get_credit_ledger_ReturnsObj_Scenario1_voiceunits_Exist():
     print(f"{sue_credit_ledger=}")
     print("")
     expected_sue_credit_ledger = {
-        bob_str: bob_voice_cred_points,
-        yao_str: yao_voice_cred_points,
-        xio_str: xio_voice_cred_points,
+        bob_str: bob_voice_cred_shares,
+        yao_str: yao_voice_cred_shares,
+        xio_str: xio_voice_cred_shares,
     }
     print(f"{expected_sue_credit_ledger=}")
     assert sue_credit_ledger.get(yao_str) != None

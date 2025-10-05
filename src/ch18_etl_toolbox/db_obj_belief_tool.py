@@ -22,8 +22,8 @@ def create_blrmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_name = values_dict.get("belief_name")
     voice_name = values_dict.get("voice_name")
     group_title = values_dict.get("group_title")
-    group_cred_points = values_dict.get("group_cred_points")
-    group_debt_points = values_dict.get("group_debt_points")
+    group_cred_shares = values_dict.get("group_cred_shares")
+    group_debt_shares = values_dict.get("group_debt_shares")
     credor_pool = values_dict.get("credor_pool")
     debtor_pool = values_dict.get("debtor_pool")
     fund_give = values_dict.get("fund_give")
@@ -33,14 +33,14 @@ def create_blrmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
     fund_agenda_ratio_give = values_dict.get("fund_agenda_ratio_give")
     fund_agenda_ratio_take = values_dict.get("fund_agenda_ratio_take")
     real_str = "REAL"
-    return f"""INSERT INTO belief_voice_membership_job (moment_label, belief_name, voice_name, group_title, group_cred_points, group_debt_points, credor_pool, debtor_pool, fund_give, fund_take, fund_agenda_give, fund_agenda_take, fund_agenda_ratio_give, fund_agenda_ratio_take)
+    return f"""INSERT INTO belief_voice_membership_job (moment_label, belief_name, voice_name, group_title, group_cred_shares, group_debt_shares, credor_pool, debtor_pool, fund_give, fund_take, fund_agenda_give, fund_agenda_take, fund_agenda_ratio_give, fund_agenda_ratio_take)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
 , {sqlite_obj_str(voice_name, "TEXT")}
 , {sqlite_obj_str(group_title, "TEXT")}
-, {sqlite_obj_str(group_cred_points, real_str)}
-, {sqlite_obj_str(group_debt_points, real_str)}
+, {sqlite_obj_str(group_cred_shares, real_str)}
+, {sqlite_obj_str(group_debt_shares, real_str)}
 , {sqlite_obj_str(credor_pool, real_str)}
 , {sqlite_obj_str(debtor_pool, real_str)}
 , {sqlite_obj_str(fund_give, real_str)}
@@ -58,8 +58,8 @@ def create_blrpern_metrics_insert_sqlstr(values_dict: dict[str,]):
     moment_label = values_dict.get("moment_label")
     belief_name = values_dict.get("belief_name")
     voice_name = values_dict.get("voice_name")
-    voice_cred_points = values_dict.get("voice_cred_points")
-    voice_debt_points = values_dict.get("voice_debt_points")
+    voice_cred_shares = values_dict.get("voice_cred_shares")
+    voice_debt_shares = values_dict.get("voice_debt_shares")
     credor_pool = values_dict.get("credor_pool")
     debtor_pool = values_dict.get("debtor_pool")
     fund_give = values_dict.get("fund_give")
@@ -68,16 +68,16 @@ def create_blrpern_metrics_insert_sqlstr(values_dict: dict[str,]):
     fund_agenda_take = values_dict.get("fund_agenda_take")
     fund_agenda_ratio_give = values_dict.get("fund_agenda_ratio_give")
     fund_agenda_ratio_take = values_dict.get("fund_agenda_ratio_take")
-    inallocable_voice_debt_points = values_dict.get("inallocable_voice_debt_points")
-    irrational_voice_debt_points = values_dict.get("irrational_voice_debt_points")
+    inallocable_voice_debt_shares = values_dict.get("inallocable_voice_debt_shares")
+    irrational_voice_debt_shares = values_dict.get("irrational_voice_debt_shares")
     real_str = "REAL"
-    return f"""INSERT INTO belief_voiceunit_job (moment_label, belief_name, voice_name, voice_cred_points, voice_debt_points, credor_pool, debtor_pool, fund_give, fund_take, fund_agenda_give, fund_agenda_take, fund_agenda_ratio_give, fund_agenda_ratio_take, inallocable_voice_debt_points, irrational_voice_debt_points)
+    return f"""INSERT INTO belief_voiceunit_job (moment_label, belief_name, voice_name, voice_cred_shares, voice_debt_shares, credor_pool, debtor_pool, fund_give, fund_take, fund_agenda_give, fund_agenda_take, fund_agenda_ratio_give, fund_agenda_ratio_take, inallocable_voice_debt_shares, irrational_voice_debt_shares)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
 , {sqlite_obj_str(voice_name, "TEXT")}
-, {sqlite_obj_str(voice_cred_points, real_str)}
-, {sqlite_obj_str(voice_debt_points, real_str)}
+, {sqlite_obj_str(voice_cred_shares, real_str)}
+, {sqlite_obj_str(voice_debt_shares, real_str)}
 , {sqlite_obj_str(credor_pool, real_str)}
 , {sqlite_obj_str(debtor_pool, real_str)}
 , {sqlite_obj_str(fund_give, real_str)}
@@ -86,8 +86,8 @@ VALUES (
 , {sqlite_obj_str(fund_agenda_take, real_str)}
 , {sqlite_obj_str(fund_agenda_ratio_give, real_str)}
 , {sqlite_obj_str(fund_agenda_ratio_take, real_str)}
-, {sqlite_obj_str(inallocable_voice_debt_points, real_str)}
-, {sqlite_obj_str(irrational_voice_debt_points, real_str)}
+, {sqlite_obj_str(inallocable_voice_debt_shares, real_str)}
+, {sqlite_obj_str(irrational_voice_debt_shares, real_str)}
 )
 ;
 """
@@ -334,7 +334,7 @@ def create_beliefunit_metrics_insert_sqlstr(values_dict: dict[str,]):
     keeps_justified = values_dict.get("keeps_justified")
     offtrack_fund = values_dict.get("offtrack_fund")
     rational = values_dict.get("rational")
-    sum_healerunit_share = values_dict.get("sum_healerunit_share")
+    sum_healerunit_plans_fund_total = values_dict.get("sum_healerunit_plans_fund_total")
     tree_traverse_count = values_dict.get("tree_traverse_count")
     credor_respect = values_dict.get("credor_respect")
     debtor_respect = values_dict.get("debtor_respect")
@@ -345,7 +345,7 @@ def create_beliefunit_metrics_insert_sqlstr(values_dict: dict[str,]):
     respect_grain = values_dict.get("respect_grain")
     tally = values_dict.get("tally")
 
-    return f"""INSERT INTO beliefunit_job (moment_label, belief_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_grain, money_grain, respect_grain, rational, keeps_justified, offtrack_fund, sum_healerunit_share, keeps_buildable, tree_traverse_count)
+    return f"""INSERT INTO beliefunit_job (moment_label, belief_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_grain, money_grain, respect_grain, rational, keeps_justified, offtrack_fund, sum_healerunit_plans_fund_total, keeps_buildable, tree_traverse_count)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -360,7 +360,7 @@ VALUES (
 , {sqlite_obj_str(rational, integer_str)}
 , {sqlite_obj_str(keeps_justified, integer_str)}
 , {sqlite_obj_str(offtrack_fund, real_str)}
-, {sqlite_obj_str(sum_healerunit_share, real_str)}
+, {sqlite_obj_str(sum_healerunit_plans_fund_total, real_str)}
 , {sqlite_obj_str(keeps_buildable, integer_str)}
 , {sqlite_obj_str(tree_traverse_count, integer_str)}
 )

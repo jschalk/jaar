@@ -1050,7 +1050,7 @@ def clear_all_voiceunits_groupunits_fund_agenda_give_take(x_belief: BeliefUnit):
     for x_groupunit in x_belief.groupunits.values():
         x_groupunit.clear_group_fund_give_take()
         # for membership_x in groupunit_x._voices.values():
-        #     print(f"{groupunit_x.} {membership_x.}  {membership_x.fund_give:.6f} {membership_x.voice_debt_points=} {membership_fund_take:t:.6f} {membership_x.} ")
+        #     print(f"{groupunit_x.} {membership_x.}  {membership_x.fund_give:.6f} {membership_x.voice_debt_shares=} {membership_fund_take:t:.6f} {membership_x.} ")
 
     # delete belief_agenda_debt and belief_agenda_cred
     for x_voiceunit in x_belief.voices.values():
@@ -1092,7 +1092,7 @@ class VoiceAgendaMetrics:
 
 @dataclass
 class AwardAgendaMetrics:
-    sum_belief_agenda_share = 0
+    sum_belief_agenda_plans_fund_total = 0
     agenda_no_count = 0
     agenda_yes_count = 0
     agenda_no_belief_i_sum = 0
@@ -1100,13 +1100,13 @@ class AwardAgendaMetrics:
 
     def set_awardagendametrics_sums(self, agenda_dict: dict[RopeTerm, PlanUnit]):
         for agenda_plan in agenda_dict.values():
-            self.sum_belief_agenda_share += agenda_plan.get_fund_share()
+            self.sum_belief_agenda_plans_fund_total += agenda_plan.get_plan_fund_total()
             if agenda_plan.awardlines == {}:
                 self.agenda_no_count += 1
-                self.agenda_no_belief_i_sum += agenda_plan.get_fund_share()
+                self.agenda_no_belief_i_sum += agenda_plan.get_plan_fund_total()
             else:
                 self.agenda_yes_count += 1
-                self.agenda_yes_belief_i_sum += agenda_plan.get_fund_share()
+                self.agenda_yes_belief_i_sum += agenda_plan.get_plan_fund_total()
 
 
 def test_BeliefUnit_agenda_cred_debt_SetAttrs():
@@ -1143,7 +1143,7 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
     assert len(agenda_dict) == 63
     x_awardagendametrics = AwardAgendaMetrics()
     x_awardagendametrics.set_awardagendametrics_sums(agenda_dict=agenda_dict)
-    # print(f"{sum_belief_agenda_share=}")
+    # print(f"{sum_belief_agenda_plans_fund_total=}")
     # assert x_awardagendametrics.agenda_no_count == 14
     assert x_awardagendametrics.agenda_yes_count == 49
     predicted_agenda_no_belief_i_sum = int(0.004107582 * default_pool_num())
@@ -1158,12 +1158,12 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
     assert are_equal(
         x_awardagendametrics.agenda_no_belief_i_sum
         + x_awardagendametrics.agenda_yes_belief_i_sum,
-        x_awardagendametrics.sum_belief_agenda_share,
+        x_awardagendametrics.sum_belief_agenda_plans_fund_total,
     )
-    predicted_sum_belief_agenda_share = 0.007172982 * default_pool_num()
+    predicted_sum_belief_agenda_plans_fund_total = 0.007172982 * default_pool_num()
     assert (
-        x_awardagendametrics.sum_belief_agenda_share
-        == predicted_sum_belief_agenda_share
+        x_awardagendametrics.sum_belief_agenda_plans_fund_total
+        == predicted_sum_belief_agenda_plans_fund_total
     )
 
     x_groupagendametrics = GroupAgendaMetrics()
@@ -1186,11 +1186,11 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
     x_voiceagendametrics.set_voiceagendametrics_sums(yao_belief)
     assert are_equal(
         x_voiceagendametrics.sum_agenda_cred,
-        x_awardagendametrics.sum_belief_agenda_share,
+        x_awardagendametrics.sum_belief_agenda_plans_fund_total,
     )
     assert are_equal(
         x_voiceagendametrics.sum_agenda_debt,
-        x_awardagendametrics.sum_belief_agenda_share,
+        x_awardagendametrics.sum_belief_agenda_plans_fund_total,
     )
     assert are_equal(x_voiceagendametrics.sum_agenda_ratio_cred, 1)
     assert are_equal(x_voiceagendametrics.sum_agenda_ratio_debt, 1)
@@ -1226,9 +1226,9 @@ def test_BeliefUnit_cashout_SetsAttrsWhenNoFactUnitsNoReasonUnitsEmpty_agenda_ra
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
-    sue_voiceunit = voiceunit_shop(sue_str, 0.5, voice_debt_points=2)
-    bob_voiceunit = voiceunit_shop(bob_str, 1.5, voice_debt_points=3)
-    zia_voiceunit = voiceunit_shop(zia_str, 8, voice_debt_points=5)
+    sue_voiceunit = voiceunit_shop(sue_str, 0.5, voice_debt_shares=2)
+    bob_voiceunit = voiceunit_shop(bob_str, 1.5, voice_debt_shares=3)
+    zia_voiceunit = voiceunit_shop(zia_str, 8, voice_debt_shares=5)
     yao_belief.set_voiceunit(sue_voiceunit)
     yao_belief.set_voiceunit(bob_voiceunit)
     yao_belief.set_voiceunit(zia_voiceunit)

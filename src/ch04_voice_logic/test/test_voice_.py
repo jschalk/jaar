@@ -17,14 +17,14 @@ def test_VoiceUnit_Exists():
     assert bob_voiceunit
     assert bob_voiceunit.voice_name
     assert bob_voiceunit.voice_name == bob_str
-    assert not bob_voiceunit.voice_cred_points
-    assert not bob_voiceunit.voice_debt_points
+    assert not bob_voiceunit.voice_cred_shares
+    assert not bob_voiceunit.voice_debt_shares
     # calculated fields
     assert not bob_voiceunit.credor_pool
     assert not bob_voiceunit.debtor_pool
     assert not bob_voiceunit.memberships
-    assert not bob_voiceunit.irrational_voice_debt_points
-    assert not bob_voiceunit.inallocable_voice_debt_points
+    assert not bob_voiceunit.irrational_voice_debt_shares
+    assert not bob_voiceunit.inallocable_voice_debt_shares
     assert not bob_voiceunit.fund_give
     assert not bob_voiceunit.fund_take
     assert not bob_voiceunit.fund_agenda_give
@@ -42,14 +42,14 @@ def test_VoiceUnit_Exists():
         wx.fund_agenda_take,
         wx.fund_give,
         wx.fund_take,
-        wx.inallocable_voice_debt_points,
-        wx.irrational_voice_debt_points,
+        wx.inallocable_voice_debt_shares,
+        wx.irrational_voice_debt_shares,
         wx.memberships,
         wx.respect_grain,
         wx.voice_name,
         wx.knot,
-        wx.voice_cred_points,
-        wx.voice_debt_points,
+        wx.voice_cred_shares,
+        wx.voice_debt_shares,
     }
 
 
@@ -88,14 +88,14 @@ def test_voiceunit_shop_SetsAttributes():
 
     # THEN
     assert yao_voiceunit.voice_name == yao_str
-    assert yao_voiceunit.voice_cred_points == 1
-    assert yao_voiceunit.voice_debt_points == 1
+    assert yao_voiceunit.voice_cred_shares == 1
+    assert yao_voiceunit.voice_debt_shares == 1
     # calculated fields
     assert yao_voiceunit.credor_pool == 0
     assert yao_voiceunit.debtor_pool == 0
     assert yao_voiceunit.memberships == {}
-    assert yao_voiceunit.irrational_voice_debt_points == 0
-    assert yao_voiceunit.inallocable_voice_debt_points == 0
+    assert yao_voiceunit.irrational_voice_debt_shares == 0
+    assert yao_voiceunit.inallocable_voice_debt_shares == 0
     assert yao_voiceunit.fund_give == 0
     assert yao_voiceunit.fund_take == 0
     assert yao_voiceunit.fund_agenda_give == 0
@@ -141,116 +141,116 @@ def test_VoiceUnit_set_respect_grain_SetsAttribute():
     assert bob_voiceunit.respect_grain == x_respect_grain
 
 
-def test_VoiceUnit_set_voice_cred_points_SetsAttribute():
+def test_VoiceUnit_set_voice_cred_shares_SetsAttribute():
     # ESTABLISH
     bob_voiceunit = voiceunit_shop("Bob")
 
     # WHEN
-    x_voice_cred_points = 23
-    bob_voiceunit.set_voice_cred_points(x_voice_cred_points)
+    x_voice_cred_shares = 23
+    bob_voiceunit.set_voice_cred_shares(x_voice_cred_shares)
 
     # THEN
-    assert bob_voiceunit.voice_cred_points == x_voice_cred_points
+    assert bob_voiceunit.voice_cred_shares == x_voice_cred_shares
 
 
-def test_VoiceUnit_set_voice_debt_points_SetsAttribute():
+def test_VoiceUnit_set_voice_debt_shares_SetsAttribute():
     # ESTABLISH
     bob_voiceunit = voiceunit_shop("Bob")
 
     # WHEN
-    x_voice_debt_points = 23
-    bob_voiceunit.set_voice_debt_points(x_voice_debt_points)
+    x_voice_debt_shares = 23
+    bob_voiceunit.set_voice_debt_shares(x_voice_debt_shares)
 
     # THEN
-    assert bob_voiceunit.voice_debt_points == x_voice_debt_points
+    assert bob_voiceunit.voice_debt_shares == x_voice_debt_shares
 
 
-def test_VoiceUnit_set_credor_voice_debt_points_SetsAttr_Scenario0():
+def test_VoiceUnit_set_credor_voice_debt_shares_SetsAttr_Scenario0():
     # ESTABLISH
     bob_voiceunit = voiceunit_shop("Bob")
-    assert bob_voiceunit.voice_cred_points == 1
-    assert bob_voiceunit.voice_debt_points == 1
+    assert bob_voiceunit.voice_cred_shares == 1
+    assert bob_voiceunit.voice_debt_shares == 1
 
     # WHEN
-    bob_voiceunit.set_credor_voice_debt_points(
-        voice_cred_points=23, voice_debt_points=34
+    bob_voiceunit.set_credor_voice_debt_shares(
+        voice_cred_shares=23, voice_debt_shares=34
     )
 
     # THEN
-    assert bob_voiceunit.voice_cred_points == 23
-    assert bob_voiceunit.voice_debt_points == 34
+    assert bob_voiceunit.voice_cred_shares == 23
+    assert bob_voiceunit.voice_debt_shares == 34
 
 
-def test_VoiceUnit_set_credor_voice_debt_points_IgnoresNoneArgs_Scenario0():
+def test_VoiceUnit_set_credor_voice_debt_shares_IgnoresNoneArgs_Scenario0():
     # ESTABLISH
-    bob_voiceunit = voiceunit_shop("Bob", voice_cred_points=45, voice_debt_points=56)
-    assert bob_voiceunit.voice_cred_points == 45
-    assert bob_voiceunit.voice_debt_points == 56
+    bob_voiceunit = voiceunit_shop("Bob", voice_cred_shares=45, voice_debt_shares=56)
+    assert bob_voiceunit.voice_cred_shares == 45
+    assert bob_voiceunit.voice_debt_shares == 56
 
     # WHEN
-    bob_voiceunit.set_credor_voice_debt_points(
-        voice_cred_points=None, voice_debt_points=None
+    bob_voiceunit.set_credor_voice_debt_shares(
+        voice_cred_shares=None, voice_debt_shares=None
     )
 
     # THEN
-    assert bob_voiceunit.voice_cred_points == 45
-    assert bob_voiceunit.voice_debt_points == 56
+    assert bob_voiceunit.voice_cred_shares == 45
+    assert bob_voiceunit.voice_debt_shares == 56
 
 
-def test_VoiceUnit_set_credor_voice_debt_points_IgnoresNoneArgs_Scenario1():
+def test_VoiceUnit_set_credor_voice_debt_shares_IgnoresNoneArgs_Scenario1():
     # ESTABLISH
     bob_voiceunit = voiceunit_shop("Bob")
-    assert bob_voiceunit.voice_cred_points == 1
-    assert bob_voiceunit.voice_debt_points == 1
+    assert bob_voiceunit.voice_cred_shares == 1
+    assert bob_voiceunit.voice_debt_shares == 1
 
     # WHEN
-    bob_voiceunit.set_credor_voice_debt_points(
-        voice_cred_points=None, voice_debt_points=None
+    bob_voiceunit.set_credor_voice_debt_shares(
+        voice_cred_shares=None, voice_debt_shares=None
     )
 
     # THEN
-    assert bob_voiceunit.voice_cred_points == 1
-    assert bob_voiceunit.voice_debt_points == 1
+    assert bob_voiceunit.voice_cred_shares == 1
+    assert bob_voiceunit.voice_debt_shares == 1
 
 
-def test_VoiceUnit_add_irrational_voice_debt_points_SetsAttr():
+def test_VoiceUnit_add_irrational_voice_debt_shares_SetsAttr():
     # ESTABLISH
     bob_voiceunit = voiceunit_shop("Bob")
-    assert bob_voiceunit.irrational_voice_debt_points == 0
+    assert bob_voiceunit.irrational_voice_debt_shares == 0
 
     # WHEN
     bob_int1 = 11
-    bob_voiceunit.add_irrational_voice_debt_points(bob_int1)
+    bob_voiceunit.add_irrational_voice_debt_shares(bob_int1)
 
     # THEN
-    assert bob_voiceunit.irrational_voice_debt_points == bob_int1
+    assert bob_voiceunit.irrational_voice_debt_shares == bob_int1
 
     # WHEN
     bob_int2 = 22
-    bob_voiceunit.add_irrational_voice_debt_points(bob_int2)
+    bob_voiceunit.add_irrational_voice_debt_shares(bob_int2)
 
     # THEN
-    assert bob_voiceunit.irrational_voice_debt_points == bob_int1 + bob_int2
+    assert bob_voiceunit.irrational_voice_debt_shares == bob_int1 + bob_int2
 
 
-def test_VoiceUnit_add_inallocable_voice_debt_points_SetsAttr():
+def test_VoiceUnit_add_inallocable_voice_debt_shares_SetsAttr():
     # ESTABLISH
     bob_voiceunit = voiceunit_shop("Bob")
-    assert bob_voiceunit.inallocable_voice_debt_points == 0
+    assert bob_voiceunit.inallocable_voice_debt_shares == 0
 
     # WHEN
     bob_int1 = 11
-    bob_voiceunit.add_inallocable_voice_debt_points(bob_int1)
+    bob_voiceunit.add_inallocable_voice_debt_shares(bob_int1)
 
     # THEN
-    assert bob_voiceunit.inallocable_voice_debt_points == bob_int1
+    assert bob_voiceunit.inallocable_voice_debt_shares == bob_int1
 
     # WHEN
     bob_int2 = 22
-    bob_voiceunit.add_inallocable_voice_debt_points(bob_int2)
+    bob_voiceunit.add_inallocable_voice_debt_shares(bob_int2)
 
     # THEN
-    assert bob_voiceunit.inallocable_voice_debt_points == bob_int1 + bob_int2
+    assert bob_voiceunit.inallocable_voice_debt_shares == bob_int1 + bob_int2
 
 
 def test_VoiceUnit_reset_listen_calculated_attrs_SetsAttr():
@@ -258,17 +258,17 @@ def test_VoiceUnit_reset_listen_calculated_attrs_SetsAttr():
     bob_voiceunit = voiceunit_shop("Bob")
     bob_int1 = 11
     bob_int2 = 22
-    bob_voiceunit.add_irrational_voice_debt_points(bob_int1)
-    bob_voiceunit.add_inallocable_voice_debt_points(bob_int2)
-    assert bob_voiceunit.irrational_voice_debt_points == bob_int1
-    assert bob_voiceunit.inallocable_voice_debt_points == bob_int2
+    bob_voiceunit.add_irrational_voice_debt_shares(bob_int1)
+    bob_voiceunit.add_inallocable_voice_debt_shares(bob_int2)
+    assert bob_voiceunit.irrational_voice_debt_shares == bob_int1
+    assert bob_voiceunit.inallocable_voice_debt_shares == bob_int2
 
     # WHEN
     bob_voiceunit.reset_listen_calculated_attrs()
 
     # THEN
-    assert bob_voiceunit.irrational_voice_debt_points == 0
-    assert bob_voiceunit.inallocable_voice_debt_points == 0
+    assert bob_voiceunit.irrational_voice_debt_shares == 0
+    assert bob_voiceunit.inallocable_voice_debt_shares == 0
 
 
 def test_VoiceUnit_clear_fund_give_take_SetsAttr():
@@ -352,7 +352,7 @@ def test_VoiceUnit_add_fund_give_take_SetsAttr():
 
 def test_VoiceUnit_set_voiceunits_fund_agenda_ratios_SetsAttr():
     # ESTABLISH
-    bob_voiceunit = voiceunit_shop("Bob", voice_cred_points=15, voice_debt_points=7)
+    bob_voiceunit = voiceunit_shop("Bob", voice_cred_shares=15, voice_debt_shares=7)
     bob_voiceunit.fund_give = 0.4106
     bob_voiceunit.fund_take = 0.1106
     bob_voiceunit.fund_agenda_give = 0.041
@@ -366,8 +366,8 @@ def test_VoiceUnit_set_voiceunits_fund_agenda_ratios_SetsAttr():
     bob_voiceunit.set_fund_agenda_ratio_give_take(
         fund_agenda_ratio_give_sum=0.2,
         fund_agenda_ratio_take_sum=0.5,
-        voiceunits_voice_cred_points_sum=20,
-        voiceunits_voice_debt_points_sum=14,
+        voiceunits_voice_cred_shares_sum=20,
+        voiceunits_voice_debt_shares_sum=14,
     )
 
     # THEN
@@ -378,8 +378,8 @@ def test_VoiceUnit_set_voiceunits_fund_agenda_ratios_SetsAttr():
     bob_voiceunit.set_fund_agenda_ratio_give_take(
         fund_agenda_ratio_give_sum=0,
         fund_agenda_ratio_take_sum=0,
-        voiceunits_voice_cred_points_sum=20,
-        voiceunits_voice_debt_points_sum=14,
+        voiceunits_voice_cred_shares_sum=20,
+        voiceunits_voice_debt_shares_sum=14,
     )
 
     # THEN

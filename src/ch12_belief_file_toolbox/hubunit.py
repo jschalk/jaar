@@ -39,6 +39,7 @@ from src.ch11_bud_logic._ref.ch11_semantic_types import (
 )
 from src.ch12_belief_file_toolbox.ch12_path import (
     create_atoms_dir_path,
+    create_keep_grade_path,
     create_keep_grades_path,
     create_keep_visions_path,
     create_keeps_dir_path,
@@ -305,45 +306,61 @@ class HubUnit:
 
     def grade_path(self, belief_name: BeliefName) -> str:
         "Returns path: grades_path/belief_name.json"
-
-        return create_path(self.grades_path(), get_json_filename(belief_name))
-
-    def visions_path(self) -> str:
-        return create_keep_visions_path(
+        return create_keep_grade_path(
             moment_mstr_dir=self.moment_mstr_dir,
             belief_name=self.belief_name,
             moment_label=self.moment_label,
             keep_rope=self.keep_rope,
             knot=self.knot,
-        )
-
-    def grades_path(self) -> str:
-        return create_keep_grades_path(
-            moment_mstr_dir=self.moment_mstr_dir,
-            belief_name=self.belief_name,
-            moment_label=self.moment_label,
-            keep_rope=self.keep_rope,
-            knot=self.knot,
+            grade_belief_name=belief_name,
         )
 
     def get_visions_path_filenames_list(self) -> list[str]:
+        keep_visions_path = create_keep_visions_path(
+            self.moment_mstr_dir,
+            self.belief_name,
+            self.moment_label,
+            self.keep_rope,
+            self.knot,
+        )
         try:
-            return list(get_dir_file_strs(self.visions_path(), True).keys())
+            return list(get_dir_file_strs(keep_visions_path, True).keys())
         except Exception:
             return []
 
     def save_vision_belief(self, x_belief: BeliefUnit) -> None:
         x_filename = get_json_filename(x_belief.belief_name)
-        save_file(self.visions_path(), x_filename, x_belief.get_json())
+        keep_visions_path = create_keep_visions_path(
+            self.moment_mstr_dir,
+            self.belief_name,
+            self.moment_label,
+            self.keep_rope,
+            self.knot,
+        )
+        save_file(keep_visions_path, x_filename, x_belief.get_json())
 
     def vision_file_exists(self, belief_name: BeliefName) -> bool:
-        file_path = create_path(self.visions_path(), get_json_filename(belief_name))
+        keep_visions_path = create_keep_visions_path(
+            self.moment_mstr_dir,
+            self.belief_name,
+            self.moment_label,
+            self.keep_rope,
+            self.knot,
+        )
+        file_path = create_path(keep_visions_path, get_json_filename(belief_name))
         return os_path_exists(file_path)
 
     def get_vision_belief(self, belief_name: BeliefName) -> BeliefUnit:
+        keep_visions_path = create_keep_visions_path(
+            self.moment_mstr_dir,
+            self.belief_name,
+            self.moment_label,
+            self.keep_rope,
+            self.knot,
+        )
         if self.vision_file_exists(belief_name) is False:
             return None
-        file_content = open_file(self.visions_path(), get_json_filename(belief_name))
+        file_content = open_file(keep_visions_path, get_json_filename(belief_name))
         return get_beliefunit_from_json(file_content)
 
     def get_dw_perspective_belief(self, speaker_id: BeliefName) -> BeliefUnit:

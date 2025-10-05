@@ -27,12 +27,12 @@ def get_belief_viewer_template() -> str:
         
         <div class="voices_controls">
             <input type="checkbox" id="show_voices"><label for="show_voices">voices</label>
-            <input type="checkbox" id="show_voice_cred_points"><label for="show_voice_cred_points">cred_points</label>
-            <input type="checkbox" id="show_voice_debt_points"><label for="show_voice_debt_points">debt_points</label>
+            <input type="checkbox" id="show_voice_cred_shares"><label for="show_voice_cred_shares">cred_shares</label>
+            <input type="checkbox" id="show_voice_debt_shares"><label for="show_voice_debt_shares">debt_shares</label>
             <input type="checkbox" id="show_voice_credor_pool"><label for="show_voice_credor_pool">credor_pool</label>
             <input type="checkbox" id="show_voice_debtor_pool"><label for="show_voice_debtor_pool">debtor_pool</label>
-            <input type="checkbox" id="show_voice_irrational_voice_debt_points"><label for="show_voice_irrational_voice_debt_points">irrational_voice_debt_points</label>
-            <input type="checkbox" id="show_voice_inallocable_voice_debt_points"><label for="show_voice_inallocable_voice_debt_points">inallocable_voice_debt_points</label>
+            <input type="checkbox" id="show_voice_irrational_voice_debt_shares"><label for="show_voice_irrational_voice_debt_shares">irrational_voice_debt_shares</label>
+            <input type="checkbox" id="show_voice_inallocable_voice_debt_shares"><label for="show_voice_inallocable_voice_debt_shares">inallocable_voice_debt_shares</label>
             <input type="checkbox" id="show_voice_fund_give"><label for="show_voice_fund_give">fund_give</label>
             <input type="checkbox" id="show_voice_fund_take"><label for="show_voice_fund_take">fund_take</label>
             <input type="checkbox" id="show_voice_fund_agenda_give"><label for="show_voice_fund_agenda_give">fund_agenda_give</label>
@@ -41,8 +41,8 @@ def get_belief_viewer_template() -> str:
             <input type="checkbox" id="show_voice_fund_agenda_ratio_take"><label for="show_voice_fund_agenda_ratio_take">fund_agenda_ratio_take</label>
             <br>
             <input type="checkbox" id="show_voice_membership_group_title"><label for="show_voice_membership_group_title">membership_group_title</label>
-            <input type="checkbox" id="show_voice_membership_group_cred_points"><label for="show_voice_membership_group_cred_points">membership_group_cred_points</label>
-            <input type="checkbox" id="show_voice_membership_group_debt_points"><label for="show_voice_membership_group_debt_points">membership_group_debt_points</label>
+            <input type="checkbox" id="show_voice_membership_group_cred_shares"><label for="show_voice_membership_group_cred_shares">membership_group_cred_shares</label>
+            <input type="checkbox" id="show_voice_membership_group_debt_shares"><label for="show_voice_membership_group_debt_shares">membership_group_debt_shares</label>
             <input type="checkbox" id="show_voice_membership_credor_pool"><label for="show_voice_membership_credor_pool">membership_credor_pool</label>
             <input type="checkbox" id="show_voice_membership_debtor_pool"><label for="show_voice_membership_debtor_pool">membership_debtor_pool</label>
             <input type="checkbox" id="show_voice_membership_fund_agenda_give"><label for="show_voice_membership_fund_agenda_give">membership_fund_agenda_give</label>
@@ -63,7 +63,7 @@ def get_belief_viewer_template() -> str:
             <input type="checkbox" id="show_active"><label for="show_active">active</label>
             <input type="checkbox" id="show_task"><label for="show_task">task</label>
             <input type="checkbox" id="show_star"><label for="show_star">star</label>
-            <input type="checkbox" id="show_fund_share"><label for="show_fund_share">fund_share</label>
+            <input type="checkbox" id="show_plan_fund_total"><label for="show_plan_fund_total">plan_fund_total</label>
             <input type="checkbox" id="show_fund_onset"><label for="show_fund_onset">fund_onset</label>
             <input type="checkbox" id="show_fund_cease"><label for="show_fund_cease">fund_cease</label>
             <input type="checkbox" id="show_fund_grain"><label for="show_fund_grain">fund_grain</label>

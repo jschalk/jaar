@@ -112,7 +112,7 @@ def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_belief: BeliefUnit):
     if mode == "task":
         fig_label = "Plan Tree with task plans in Red."
     fig_label += f" (Plans: {len(x_belief._plan_dict)})"
-    fig_label += f" (sum_healerunit_share: {x_belief.sum_healerunit_share})"
+    fig_label += f" (sum_healerunit_plans_fund_total: {x_belief.sum_healerunit_plans_fund_total})"
     fig_label += f" (keeps_justified: {x_belief.keeps_justified})"
     x_fig.update_layout(title_text=fig_label, font_size=12)
 
@@ -150,9 +150,9 @@ def get_belief_voices_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     column_header_list = [
         "voice_name",
         "_credor_respect",
-        "voice_cred_points",
+        "voice_cred_shares",
         "_debtor_respect",
-        "voice_debt_points",
+        "voice_debt_shares",
         "fund_give",
         "fund_take",
         "fund_agenda_give",
@@ -170,9 +170,9 @@ def get_belief_voices_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
             values=[
                 df.voice_name,
                 df._credor_respect,
-                df.voice_cred_points,
+                df.voice_cred_shares,
                 df._debtor_respect,
-                df.voice_debt_points,
+                df.voice_debt_shares,
                 df.fund_give,
                 df.fund_take,
                 df.fund_agenda_give,

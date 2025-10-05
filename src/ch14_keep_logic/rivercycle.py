@@ -12,17 +12,17 @@ from src.ch12_belief_file_toolbox.hubunit import HubUnit
 
 def get_credorledger(x_belief: BeliefUnit) -> dict[VoiceName, float]:
     return {
-        voiceunit.voice_name: voiceunit.voice_cred_points
+        voiceunit.voice_name: voiceunit.voice_cred_shares
         for voiceunit in x_belief.voices.values()
-        if voiceunit.voice_cred_points > 0
+        if voiceunit.voice_cred_shares > 0
     }
 
 
 def get_debtorledger(x_belief: BeliefUnit) -> dict[VoiceName, float]:
     return {
-        voiceunit.voice_name: voiceunit.voice_debt_points
+        voiceunit.voice_name: voiceunit.voice_debt_shares
         for voiceunit in x_belief.voices.values()
-        if voiceunit.voice_debt_points > 0
+        if voiceunit.voice_debt_shares > 0
     }
 
 

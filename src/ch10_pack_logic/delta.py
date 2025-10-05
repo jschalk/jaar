@@ -180,13 +180,13 @@ class BeliefDelta:
             insert_voiceunit = after_belief.get_voice(insert_voice_name)
             x_beliefatom = beliefatom_shop("belief_voiceunit", "INSERT")
             x_beliefatom.set_jkey("voice_name", insert_voiceunit.voice_name)
-            if insert_voiceunit.voice_cred_points is not None:
+            if insert_voiceunit.voice_cred_shares is not None:
                 x_beliefatom.set_jvalue(
-                    "voice_cred_points", insert_voiceunit.voice_cred_points
+                    "voice_cred_shares", insert_voiceunit.voice_cred_shares
                 )
-            if insert_voiceunit.voice_debt_points is not None:
+            if insert_voiceunit.voice_debt_shares is not None:
                 x_beliefatom.set_jvalue(
-                    "voice_debt_points", insert_voiceunit.voice_debt_points
+                    "voice_debt_shares", insert_voiceunit.voice_debt_shares
                 )
             self.set_beliefatom(x_beliefatom)
             all_group_titles = set(insert_voiceunit.memberships.keys())
@@ -208,18 +208,18 @@ class BeliefDelta:
                 x_beliefatom = beliefatom_shop("belief_voiceunit", "UPDATE")
                 x_beliefatom.set_jkey("voice_name", after_voiceunit.voice_name)
                 if (
-                    before_voiceunit.voice_cred_points
-                    != after_voiceunit.voice_cred_points
+                    before_voiceunit.voice_cred_shares
+                    != after_voiceunit.voice_cred_shares
                 ):
                     x_beliefatom.set_jvalue(
-                        "voice_cred_points", after_voiceunit.voice_cred_points
+                        "voice_cred_shares", after_voiceunit.voice_cred_shares
                     )
                 if (
-                    before_voiceunit.voice_debt_points
-                    != after_voiceunit.voice_debt_points
+                    before_voiceunit.voice_debt_shares
+                    != after_voiceunit.voice_debt_shares
                 ):
                     x_beliefatom.set_jvalue(
-                        "voice_debt_points", after_voiceunit.voice_debt_points
+                        "voice_debt_shares", after_voiceunit.voice_debt_shares
                     )
                 self.set_beliefatom(x_beliefatom)
             self.add_beliefatom_voiceunit_update_memberships(
@@ -296,13 +296,13 @@ class BeliefDelta:
             x_beliefatom = beliefatom_shop("belief_voice_membership", "INSERT")
             x_beliefatom.set_jkey("voice_name", after_voice_name)
             x_beliefatom.set_jkey("group_title", after_membership.group_title)
-            if after_membership.group_cred_points is not None:
+            if after_membership.group_cred_shares is not None:
                 x_beliefatom.set_jvalue(
-                    "group_cred_points", after_membership.group_cred_points
+                    "group_cred_shares", after_membership.group_cred_shares
                 )
-            if after_membership.group_debt_points is not None:
+            if after_membership.group_debt_shares is not None:
                 x_beliefatom.set_jvalue(
-                    "group_debt_points", after_membership.group_debt_points
+                    "group_debt_shares", after_membership.group_debt_shares
                 )
             self.set_beliefatom(x_beliefatom)
 
@@ -315,13 +315,13 @@ class BeliefDelta:
         x_beliefatom = beliefatom_shop("belief_voice_membership", "UPDATE")
         x_beliefatom.set_jkey("voice_name", voice_name)
         x_beliefatom.set_jkey("group_title", after_membership.group_title)
-        if after_membership.group_cred_points != before_membership.group_cred_points:
+        if after_membership.group_cred_shares != before_membership.group_cred_shares:
             x_beliefatom.set_jvalue(
-                "group_cred_points", after_membership.group_cred_points
+                "group_cred_shares", after_membership.group_cred_shares
             )
-        if after_membership.group_debt_points != before_membership.group_debt_points:
+        if after_membership.group_debt_shares != before_membership.group_debt_shares:
             x_beliefatom.set_jvalue(
-                "group_debt_points", after_membership.group_debt_points
+                "group_debt_shares", after_membership.group_debt_shares
             )
         self.set_beliefatom(x_beliefatom)
 

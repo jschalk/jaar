@@ -8,13 +8,13 @@ def test_RiverGrade_Exists():
     x_rivergrade = RiverGrade()
 
     # THEN
-    #: Healer gut get_voice._voice_debt_points (SELECT tax_due_amount FROM voice WHERE voice_name = bob_str)
+    #: Healer gut get_voice._voice_debt_shares (SELECT tax_due_amount FROM voice WHERE voice_name = bob_str)
     assert x_rivergrade.hubunit is None
     assert x_rivergrade.voice_name is None
     assert x_rivergrade.number is None
-    #: Healer gut get_voice._voice_debt_points (SELECT tax_due_amount FROM voice WHERE voice_name = bob_str)
+    #: Healer gut get_voice._voice_debt_shares (SELECT tax_due_amount FROM voice WHERE voice_name = bob_str)
     assert x_rivergrade.tax_bill_amount is None
-    #: Healer gut get_voice._voice_cred_points (SELECT grant_amount FROM voice WHERE voice_name = bob_str)
+    #: Healer gut get_voice._voice_cred_shares (SELECT grant_amount FROM voice WHERE voice_name = bob_str)
     assert x_rivergrade.grant_amount is None
     #: SELECT COUNT(*) FROM voice WHERE tax_due_amount > (SELECT tax_due_amount FROM voice WHERE voice_name = bob_str)
     assert x_rivergrade.debtor_rank_num is None

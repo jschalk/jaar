@@ -111,7 +111,7 @@ def set_readable_plan_values(x_plan: PlanUnit, result: dict):
         if result.get("parent_rope") != ""
         else add_small_dot("Root Plan parent_rope is empty str")
     )
-    result["fund_share"] = x_plan.get_fund_share()
+    result["plan_fund_total"] = x_plan.get_plan_fund_total()
     all_voice_cred_str = f"all_voice_cred = {x_plan.all_voice_cred}"
     all_voice_debt_str = f"all_voice_debt = {x_plan.all_voice_debt}"
     all_voice_cred_str = add_small_dot(all_voice_cred_str)
@@ -153,16 +153,16 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
     voices_dict = {}
     for voice in belief.voices.values():
 
-        voice_cred_points_readable = f"voice_cred_points: {voice.voice_cred_points}"
-        voice_debt_points_readable = f"voice_debt_points: {voice.voice_debt_points}"
+        voice_cred_shares_readable = f"voice_cred_shares: {voice.voice_cred_shares}"
+        voice_debt_shares_readable = f"voice_debt_shares: {voice.voice_debt_shares}"
         memberships_readable = f"memberships: {voice.memberships}"
         credor_pool_readable = f"credor_pool: {voice.credor_pool}"
         debtor_pool_readable = f"debtor_pool: {voice.debtor_pool}"
-        irrational_voice_debt_points_readable = (
-            f"irrational_voice_debt_points: {voice.irrational_voice_debt_points}"
+        irrational_voice_debt_shares_readable = (
+            f"irrational_voice_debt_shares: {voice.irrational_voice_debt_shares}"
         )
-        inallocable_voice_debt_points_readable = (
-            f"inallocable_voice_debt_points: {voice.inallocable_voice_debt_points}"
+        inallocable_voice_debt_shares_readable = (
+            f"inallocable_voice_debt_shares: {voice.inallocable_voice_debt_shares}"
         )
         fund_give_readable = f"fund_give: {voice.fund_give}"
         fund_take_readable = f"fund_take: {voice.fund_take}"
@@ -178,8 +178,8 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
             x_membership.group_title: {
                 "voice_name": x_membership.voice_name,
                 "group_title": x_membership.group_title,
-                "group_cred_points": x_membership.group_cred_points,
-                "group_debt_points": x_membership.group_debt_points,
+                "group_cred_shares": x_membership.group_cred_shares,
+                "group_debt_shares": x_membership.group_debt_shares,
                 "credor_pool": x_membership.credor_pool,
                 "debtor_pool": x_membership.debtor_pool,
                 "fund_agenda_give": x_membership.fund_agenda_give,
@@ -191,11 +191,11 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
                 "group_title_readable": add_small_dot(
                     f"group_title: {x_membership.group_title}"
                 ),
-                "group_cred_points_readable": add_small_dot(
-                    f"group_cred_points: {x_membership.group_cred_points}"
+                "group_cred_shares_readable": add_small_dot(
+                    f"group_cred_shares: {x_membership.group_cred_shares}"
                 ),
-                "group_debt_points_readable": add_small_dot(
-                    f"group_debt_points: {x_membership.group_debt_points}"
+                "group_debt_shares_readable": add_small_dot(
+                    f"group_debt_shares: {x_membership.group_debt_shares}"
                 ),
                 "credor_pool_readable": add_small_dot(
                     f"credor_pool: {x_membership.credor_pool}"
@@ -226,26 +226,26 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
         }
         voice_dict = {
             "voice_name": voice.voice_name,
-            "voice_cred_points": voice.voice_cred_points,
-            "voice_debt_points": voice.voice_debt_points,
+            "voice_cred_shares": voice.voice_cred_shares,
+            "voice_debt_shares": voice.voice_debt_shares,
             "memberships": x_members_dict,
             "credor_pool": voice.credor_pool,
             "debtor_pool": voice.debtor_pool,
-            "irrational_voice_debt_points": voice.irrational_voice_debt_points,
-            "inallocable_voice_debt_points": voice.inallocable_voice_debt_points,
+            "irrational_voice_debt_shares": voice.irrational_voice_debt_shares,
+            "inallocable_voice_debt_shares": voice.inallocable_voice_debt_shares,
             "fund_give": voice.fund_give,
             "fund_take": voice.fund_take,
             "fund_agenda_give": voice.fund_agenda_give,
             "fund_agenda_take": voice.fund_agenda_take,
             "fund_agenda_ratio_give": voice.fund_agenda_ratio_give,
             "fund_agenda_ratio_take": voice.fund_agenda_ratio_take,
-            "voice_cred_points_readable": voice_cred_points_readable,
-            "voice_debt_points_readable": voice_debt_points_readable,
+            "voice_cred_shares_readable": voice_cred_shares_readable,
+            "voice_debt_shares_readable": voice_debt_shares_readable,
             "memberships_readable": memberships_readable,
             "credor_pool_readable": credor_pool_readable,
             "debtor_pool_readable": debtor_pool_readable,
-            "irrational_voice_debt_points_readable": irrational_voice_debt_points_readable,
-            "inallocable_voice_debt_points_readable": inallocable_voice_debt_points_readable,
+            "irrational_voice_debt_shares_readable": irrational_voice_debt_shares_readable,
+            "inallocable_voice_debt_shares_readable": inallocable_voice_debt_shares_readable,
             "fund_give_readable": fund_give_readable,
             "fund_take_readable": fund_take_readable,
             "fund_agenda_give_readable": fund_agenda_give_readable,
@@ -263,8 +263,8 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
     for group in belief.groupunits.values():
 
         group_title_readable_key = f"group_title_readable"
-        #     group_cred_points_readable_key = f"group_cred_points_readable"
-        #     group_debt_points_readable_key = f"group_debt_points_readable"
+        #     group_cred_shares_readable_key = f"group_cred_shares_readable"
+        #     group_debt_shares_readable_key = f"group_debt_shares_readable"
         #     credor_pool_readable_key = f"credor_pool_readable"
         #     debtor_pool_readable_key = f"debtor_pool_readable"
         #     fund_agenda_give_readable_key = f"fund_agenda_give_readable"
@@ -291,8 +291,8 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
         #         # x_membership.voice_name: {
         #         #     "voice_name": x_membership.voice_name,
         #         #     "group_title": x_membership.group_title,
-        #         #     "group_cred_points": x_membership.group_cred_points,
-        #         #     "group_debt_points": x_membership.group_debt_points,
+        #         #     "group_cred_shares": x_membership.group_cred_shares,
+        #         #     "group_debt_shares": x_membership.group_debt_shares,
         #         #     "credor_pool": x_membership.credor_pool,
         #         #     "debtor_pool": x_membership.debtor_pool,
         #         #     "fund_agenda_give": x_membership.fund_agenda_give,
@@ -304,11 +304,11 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
         #         #     "voice_name_readable": add_small_dot(
         #         #         f"voice name: {x_membership.voice_name}"
         #         #     ),
-        #         #     "group_cred_points_readable": add_small_dot(
-        #         #         f"group_cred_points: {x_membership.group_cred_points}"
+        #         #     "group_cred_shares_readable": add_small_dot(
+        #         #         f"group_cred_shares: {x_membership.group_cred_shares}"
         #         #     ),
-        #         #     "group_debt_points_readable": add_small_dot(
-        #         #         f"group_debt_points: {x_membership.group_debt_points}"
+        #         #     "group_debt_shares_readable": add_small_dot(
+        #         #         f"group_debt_shares: {x_membership.group_debt_shares}"
         #         #     ),
         #         #     "credor_pool_readable": add_small_dot(
         #         #         f"credor_pool: {x_membership.credor_pool}"
@@ -341,8 +341,8 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
             "group_title": group.group_title,
             #         "voice_name": 1,
             #         "group_title": 1,
-            #         "group_cred_points": 1,
-            #         "group_debt_points": 1,
+            #         "group_cred_shares": 1,
+            #         "group_debt_shares": 1,
             #         "credor_pool": 1,
             #         "debtor_pool": 1,
             "fund_agenda_give": 1,
@@ -352,8 +352,8 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
             #         "fund_give": 1,
             "fund_take": 1,
             #         group_title_readable_key: 1,
-            #         group_cred_points_readable_key: 1,
-            #         group_debt_points_readable_key: 1,
+            #         group_cred_shares_readable_key: 1,
+            #         group_debt_shares_readable_key: 1,
             #         credor_pool_readable_key: 1,
             #         debtor_pool_readable_key: 1,
             #         fund_agenda_give_readable_key: 1,

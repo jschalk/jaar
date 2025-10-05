@@ -38,8 +38,8 @@ def test_get_insert_into_heard_raw_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
 , {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
-, {wx.voice_cred_points}
-, {wx.voice_debt_points}
+, {wx.voice_cred_shares}
+, {wx.voice_debt_shares}
 )"""
         values_clause = f"""
 VALUES
@@ -65,8 +65,8 @@ VALUES
 , {wx.moment_label}_otx
 , {wx.belief_name}_otx
 , {wx.voice_name}_otx
-, {wx.voice_cred_points}
-, {wx.voice_debt_points}
+, {wx.voice_cred_shares}
+, {wx.voice_debt_shares}
 FROM {blrawar_h_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -107,8 +107,8 @@ def test_etl_sound_vld_tables_to_heard_raw_tables_Scenario0_AddRowsToTable():
 , {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
-, {wx.voice_cred_points}
-, {wx.voice_debt_points}
+, {wx.voice_cred_shares}
+, {wx.voice_debt_shares}
 )"""
         values_clause = f"""
 VALUES
@@ -133,8 +133,8 @@ VALUES
 , {wx.moment_label}_otx
 , {wx.belief_name}_otx
 , {wx.voice_name}_otx
-, {wx.voice_cred_points}
-, {wx.voice_debt_points}
+, {wx.voice_cred_shares}
+, {wx.voice_debt_shares}
 FROM {blrpern_h_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -174,8 +174,8 @@ def test_etl_sound_vld_tables_to_heard_raw_tables_Scenario1_Populates_inx_Column
 , {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
-, {wx.voice_cred_points}
-, {wx.voice_debt_points}
+, {wx.voice_cred_shares}
+, {wx.voice_debt_shares}
 )"""
         values_clause = f"""
 VALUES
@@ -200,8 +200,8 @@ VALUES
 , {wx.moment_label}_inx
 , {wx.belief_name}_inx
 , {wx.voice_name}_inx
-, {wx.voice_cred_points}
-, {wx.voice_debt_points}
+, {wx.voice_cred_shares}
+, {wx.voice_debt_shares}
 FROM {blrpern_h_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)

@@ -91,12 +91,12 @@ def test_BeliefUnit_create_symmetry_groupunit_ReturnsObj():
     yao_str = "Yao"
     yao_belief = beliefunit_shop(yao_str)
     zia_str = "Zia"
-    yao_group_cred_points = 3
-    yao_group_debt_points = 2
-    zia_group_cred_points = 4
-    zia_group_debt_points = 5
-    yao_belief.add_voiceunit(yao_str, yao_group_cred_points, yao_group_debt_points)
-    yao_belief.add_voiceunit(zia_str, zia_group_cred_points, zia_group_debt_points)
+    yao_group_cred_shares = 3
+    yao_group_debt_shares = 2
+    zia_group_cred_shares = 4
+    zia_group_debt_shares = 5
+    yao_belief.add_voiceunit(yao_str, yao_group_cred_shares, yao_group_debt_shares)
+    yao_belief.add_voiceunit(zia_str, zia_group_cred_shares, zia_group_debt_shares)
 
     # WHEN
     xio_str = "Xio"
@@ -109,7 +109,7 @@ def test_BeliefUnit_create_symmetry_groupunit_ReturnsObj():
     assert len(xio_groupunit.memberships) == 2
     yao_groupunit = xio_groupunit.get_voice_membership(yao_str)
     zia_groupunit = xio_groupunit.get_voice_membership(zia_str)
-    assert yao_groupunit.group_cred_points == yao_group_cred_points
-    assert zia_groupunit.group_cred_points == zia_group_cred_points
-    assert yao_groupunit.group_debt_points == yao_group_debt_points
-    assert zia_groupunit.group_debt_points == zia_group_debt_points
+    assert yao_groupunit.group_cred_shares == yao_group_cred_shares
+    assert zia_groupunit.group_cred_shares == zia_group_cred_shares
+    assert yao_groupunit.group_debt_shares == yao_group_debt_shares
+    assert zia_groupunit.group_debt_shares == zia_group_debt_shares

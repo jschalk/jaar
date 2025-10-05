@@ -1,12 +1,12 @@
 // Global state
 let planTreeData = null;
 let show_voices = true;
-let show_voice_cred_points = false;
-let show_voice_debt_points = false;
+let show_voice_cred_shares = false;
+let show_voice_debt_shares = false;
 let show_voice_credor_pool = false;
 let show_voice_debtor_pool = false;
-let show_voice_irrational_voice_debt_points = false;
-let show_voice_inallocable_voice_debt_points = false;
+let show_voice_irrational_voice_debt_shares = false;
+let show_voice_inallocable_voice_debt_shares = false;
 let show_voice_fund_give = false;
 let show_voice_fund_take = false;
 let show_voice_fund_agenda_give = false;
@@ -14,8 +14,8 @@ let show_voice_fund_agenda_take = false;
 let show_voice_fund_agenda_ratio_give = false;
 let show_voice_fund_agenda_ratio_take = false;
 let show_voice_membership_group_title = true;
-let show_voice_membership_group_cred_points = false;
-let show_voice_membership_group_debt_points = false;
+let show_voice_membership_group_cred_shares = false;
+let show_voice_membership_group_debt_shares = false;
 let show_voice_membership_credor_pool = false;
 let show_voice_membership_debtor_pool = false;
 let show_voice_membership_fund_agenda_give = false;
@@ -41,7 +41,7 @@ let show_reasonunits = false;
 let show_reasonheirs = false;
 let show_factunits = false;
 let show_factheirs = false;
-let show_fund_share = false;
+let show_plan_fund_total = false;
 let show_fund_onset = false;
 let show_fund_cease = false;
 let show_fund_grain = false;
@@ -66,12 +66,12 @@ let show_uid = false;
 // Initialize the app when DOM loads
 document.addEventListener('DOMContentLoaded', function () {
     const show_voicesCheckbox = document.getElementById('show_voices');
-    const show_voice_cred_pointsCheckbox = document.getElementById('show_voice_cred_points')
-    const show_voice_debt_pointsCheckbox = document.getElementById('show_voice_debt_points')
+    const show_voice_cred_sharesCheckbox = document.getElementById('show_voice_cred_shares')
+    const show_voice_debt_sharesCheckbox = document.getElementById('show_voice_debt_shares')
     const show_voice_credor_poolCheckbox = document.getElementById('show_voice_credor_pool')
     const show_voice_debtor_poolCheckbox = document.getElementById('show_voice_debtor_pool')
-    const show_voice_irrational_voice_debt_pointsCheckbox = document.getElementById('show_voice_irrational_voice_debt_points')
-    const show_voice_inallocable_voice_debt_pointsCheckbox = document.getElementById('show_voice_inallocable_voice_debt_points')
+    const show_voice_irrational_voice_debt_sharesCheckbox = document.getElementById('show_voice_irrational_voice_debt_shares')
+    const show_voice_inallocable_voice_debt_sharesCheckbox = document.getElementById('show_voice_inallocable_voice_debt_shares')
     const show_voice_fund_giveCheckbox = document.getElementById('show_voice_fund_give')
     const show_voice_fund_takeCheckbox = document.getElementById('show_voice_fund_take')
     const show_voice_fund_agenda_giveCheckbox = document.getElementById('show_voice_fund_agenda_give')
@@ -79,8 +79,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_voice_fund_agenda_ratio_giveCheckbox = document.getElementById('show_voice_fund_agenda_ratio_give')
     const show_voice_fund_agenda_ratio_takeCheckbox = document.getElementById('show_voice_fund_agenda_ratio_take')
     const show_voice_membership_group_titleCheckbox = document.getElementById('show_voice_membership_group_title')
-    const show_voice_membership_group_cred_pointsCheckbox = document.getElementById('show_voice_membership_group_cred_points')
-    const show_voice_membership_group_debt_pointsCheckbox = document.getElementById('show_voice_membership_group_debt_points')
+    const show_voice_membership_group_cred_sharesCheckbox = document.getElementById('show_voice_membership_group_cred_shares')
+    const show_voice_membership_group_debt_sharesCheckbox = document.getElementById('show_voice_membership_group_debt_shares')
     const show_voice_membership_credor_poolCheckbox = document.getElementById('show_voice_membership_credor_pool')
     const show_voice_membership_debtor_poolCheckbox = document.getElementById('show_voice_membership_debtor_pool')
     const show_voice_membership_fund_agenda_giveCheckbox = document.getElementById('show_voice_membership_fund_agenda_give')
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_reasonheirsCheckbox = document.getElementById('show_reasonheirs');
     const show_factunitsCheckbox = document.getElementById('show_factunits');
     const show_factheirsCheckbox = document.getElementById('show_factheirs');
-    const show_fund_shareCheckbox = document.getElementById('show_fund_share');
+    const show_plan_fund_totalCheckbox = document.getElementById('show_plan_fund_total');
     const show_fund_onsetCheckbox = document.getElementById('show_fund_onset');
     const show_fund_ceaseCheckbox = document.getElementById('show_fund_cease');
     const show_fund_grainCheckbox = document.getElementById('show_fund_grain');
@@ -130,12 +130,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Set up checkbox event listener
     show_voicesCheckbox.addEventListener('change', function () { show_voices = this.checked; renderVoicesData(); });
-    show_voice_cred_pointsCheckbox.addEventListener('change', function () { show_voice_cred_points = this.checked; renderVoicesData(); });
-    show_voice_debt_pointsCheckbox.addEventListener('change', function () { show_voice_debt_points = this.checked; renderVoicesData(); });
+    show_voice_cred_sharesCheckbox.addEventListener('change', function () { show_voice_cred_shares = this.checked; renderVoicesData(); });
+    show_voice_debt_sharesCheckbox.addEventListener('change', function () { show_voice_debt_shares = this.checked; renderVoicesData(); });
     show_voice_credor_poolCheckbox.addEventListener('change', function () { show_voice_credor_pool = this.checked; renderVoicesData(); });
     show_voice_debtor_poolCheckbox.addEventListener('change', function () { show_voice_debtor_pool = this.checked; renderVoicesData(); });
-    show_voice_irrational_voice_debt_pointsCheckbox.addEventListener('change', function () { show_voice_irrational_voice_debt_points = this.checked; renderVoicesData(); });
-    show_voice_inallocable_voice_debt_pointsCheckbox.addEventListener('change', function () { show_voice_inallocable_voice_debt_points = this.checked; renderVoicesData(); });
+    show_voice_irrational_voice_debt_sharesCheckbox.addEventListener('change', function () { show_voice_irrational_voice_debt_shares = this.checked; renderVoicesData(); });
+    show_voice_inallocable_voice_debt_sharesCheckbox.addEventListener('change', function () { show_voice_inallocable_voice_debt_shares = this.checked; renderVoicesData(); });
     show_voice_fund_giveCheckbox.addEventListener('change', function () { show_voice_fund_give = this.checked; renderVoicesData(); });
     show_voice_fund_takeCheckbox.addEventListener('change', function () { show_voice_fund_take = this.checked; renderVoicesData(); });
     show_voice_fund_agenda_giveCheckbox.addEventListener('change', function () { show_voice_fund_agenda_give = this.checked; renderVoicesData(); });
@@ -143,8 +143,8 @@ document.addEventListener('DOMContentLoaded', function () {
     show_voice_fund_agenda_ratio_giveCheckbox.addEventListener('change', function () { show_voice_fund_agenda_ratio_give = this.checked; renderVoicesData(); });
     show_voice_fund_agenda_ratio_takeCheckbox.addEventListener('change', function () { show_voice_fund_agenda_ratio_take = this.checked; renderVoicesData(); });
     show_voice_membership_group_titleCheckbox.addEventListener('change', function () { show_voice_membership_group_title = this.checked; renderVoicesData(); });
-    show_voice_membership_group_cred_pointsCheckbox.addEventListener('change', function () { show_voice_membership_group_cred_points = this.checked; renderVoicesData(); });
-    show_voice_membership_group_debt_pointsCheckbox.addEventListener('change', function () { show_voice_membership_group_debt_points = this.checked; renderVoicesData(); });
+    show_voice_membership_group_cred_sharesCheckbox.addEventListener('change', function () { show_voice_membership_group_cred_shares = this.checked; renderVoicesData(); });
+    show_voice_membership_group_debt_sharesCheckbox.addEventListener('change', function () { show_voice_membership_group_debt_shares = this.checked; renderVoicesData(); });
     show_voice_membership_credor_poolCheckbox.addEventListener('change', function () { show_voice_membership_credor_pool = this.checked; renderVoicesData(); });
     show_voice_membership_debtor_poolCheckbox.addEventListener('change', function () { show_voice_membership_debtor_pool = this.checked; renderVoicesData(); });
     show_voice_membership_fund_agenda_giveCheckbox.addEventListener('change', function () { show_voice_membership_fund_agenda_give = this.checked; renderVoicesData(); });
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
     show_reasonheirsCheckbox.addEventListener('change', function () { show_reasonheirs = this.checked; renderPlanTree(); });
     show_factunitsCheckbox.addEventListener('change', function () { show_factunits = this.checked; renderPlanTree(); });
     show_factheirsCheckbox.addEventListener('change', function () { show_factheirs = this.checked; renderPlanTree(); });
-    show_fund_shareCheckbox.addEventListener('change', function () { show_fund_share = this.checked; renderPlanTree(); });
+    show_plan_fund_totalCheckbox.addEventListener('change', function () { show_plan_fund_total = this.checked; renderPlanTree(); });
     show_fund_onsetCheckbox.addEventListener('change', function () { show_fund_onset = this.checked; renderPlanTree(); });
     show_fund_ceaseCheckbox.addEventListener('change', function () { show_fund_cease = this.checked; renderPlanTree(); });
     show_fund_grainCheckbox.addEventListener('change', function () { show_fund_grain = this.checked; renderPlanTree(); });
@@ -230,12 +230,12 @@ function buildVoicesHtml(voicesData) {
     let html = '';
     Object.values(voicesData).forEach(voice => {
         html += `<br>${voices_indent}${voice.voice_name}`;
-        if (show_voice_cred_points) { html += `<br>${voices_indent}    ${voice.voice_cred_points_readable}` };
-        if (show_voice_debt_points) { html += `<br>${voices_indent}    ${voice.voice_debt_points_readable}` };
+        if (show_voice_cred_shares) { html += `<br>${voices_indent}    ${voice.voice_cred_shares_readable}` };
+        if (show_voice_debt_shares) { html += `<br>${voices_indent}    ${voice.voice_debt_shares_readable}` };
         if (show_voice_credor_pool) { html += `<br>${voices_indent}    ${voice.credor_pool_readable}` };
         if (show_voice_debtor_pool) { html += `<br>${voices_indent}    ${voice.debtor_pool_readable}` };
-        if (show_voice_irrational_voice_debt_points) { html += `<br>${voices_indent}    ${voice.irrational_voice_debt_points_readable}` };
-        if (show_voice_inallocable_voice_debt_points) { html += `<br>${voices_indent}    ${voice.inallocable_voice_debt_points_readable}` };
+        if (show_voice_irrational_voice_debt_shares) { html += `<br>${voices_indent}    ${voice.irrational_voice_debt_shares_readable}` };
+        if (show_voice_inallocable_voice_debt_shares) { html += `<br>${voices_indent}    ${voice.inallocable_voice_debt_shares_readable}` };
         if (show_voice_fund_give) { html += `<br>${voices_indent}    ${voice.fund_give_readable}` };
         if (show_voice_fund_take) { html += `<br>${voices_indent}    ${voice.fund_take_readable}` };
         if (show_voice_fund_agenda_give) { html += `<br>${voices_indent}    ${voice.fund_agenda_give_readable}` };
@@ -245,8 +245,8 @@ function buildVoicesHtml(voicesData) {
         console.info(voice)
         Object.values(voice.memberships).forEach(membership => {
             if (show_voice_membership_group_title) { html += `<br><b>${member_title_indent}${membership.group_title_readable}</b>` };
-            if (show_voice_membership_group_cred_points) { html += `<br>${membership_indent}${membership.group_cred_points_readable}` };
-            if (show_voice_membership_group_debt_points) { html += `<br>${membership_indent}${membership.group_debt_points_readable}` };
+            if (show_voice_membership_group_cred_shares) { html += `<br>${membership_indent}${membership.group_cred_shares_readable}` };
+            if (show_voice_membership_group_debt_shares) { html += `<br>${membership_indent}${membership.group_debt_shares_readable}` };
             if (show_voice_membership_credor_pool) { html += `<br>${membership_indent}${membership.credor_pool_readable}` };
             if (show_voice_membership_debtor_pool) { html += `<br>${membership_indent}${membership.debtor_pool_readable}` };
             if (show_voice_membership_fund_agenda_give) { html += `<br>${membership_indent}${membership.fund_agenda_give_readable}` };
@@ -283,7 +283,7 @@ function renderPlanUnit(planUnit, level) {
     const activeIndicator = planUnit.active && show_active ? '-ACTIVE' : '';
     const taskIndicator = planUnit.task && show_task ? '-task' : '';
     const starIndicator = show_star ? ` star${planUnit.star}` : '';
-    const fund_shareIndicator = show_fund_share ? ` [${planUnit.fund_share}]` : '';
+    const plan_fund_totalIndicator = show_plan_fund_total ? ` [${planUnit.plan_fund_total}]` : '';
     const uidIndicator = planUnit.uid && show_uid ? ` uid${planUnit.uid}` : '';
 
     const fund_onsetIndicator = show_fund_onset ? ` onset-${planUnit.fund_onset}` : '';
@@ -306,7 +306,7 @@ function renderPlanUnit(planUnit, level) {
     ${uidIndicator}
     ${pledgeIndicator}
     ${descendant_pledge_countIndicator}
-    ${fund_shareIndicator}
+    ${plan_fund_totalIndicator}
     ${fund_onsetIndicator}
     ${fund_ceaseIndicator}
     ${fund_grainIndicator}

@@ -77,7 +77,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         wx.laborheir,
         wx.gogo_calc,
         wx.stop_calc,
-        wx.fund_share,
+        wx.plan_fund_total,
     }
     assert casa_dict.get("healerunit") == {"_healer_names": []}
 
@@ -156,7 +156,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
     casa_dict = get_plan_view_dict(casa_plan)
 
     # THEN
-    assert casa_dict.get(wx.fund_share) > 0
+    assert casa_dict.get(wx.plan_fund_total) > 0
     expected_parent_rope = add_small_dot(casa_plan.parent_rope)
     assert casa_dict.get(wx.parent_rope) == expected_parent_rope
     expected_all_voice_cred = f"all_voice_cred = {casa_plan.all_voice_cred}"

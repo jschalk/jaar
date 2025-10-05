@@ -24,8 +24,8 @@ class VoiceUnitTable(Base):
     __tablename__ = "voiceunit"
     uid = Column(Integer, primary_key=True)
     voice_name = Column(String)
-    voice_cred_points = Column(Float)
-    voice_debt_points = Column(Float)
+    voice_cred_shares = Column(Float)
+    voice_debt_shares = Column(Float)
 
 
 class MemberShipTable(Base):
@@ -33,8 +33,8 @@ class MemberShipTable(Base):
     uid = Column(Integer, primary_key=True)
     group_title = Column(String)
     voice_name = Column(String)
-    group_cred_points = Column(Float)
-    group_debt_points = Column(Float)
+    group_cred_shares = Column(Float)
+    group_debt_shares = Column(Float)
 
 
 class PlanTable(Base):

@@ -31,7 +31,7 @@ def test_create_beliefunit_metrics_insert_sqlstr_ReturnsObj():
     x_keeps_justified = False
     x_offtrack_fund = 55.5
     x_rational = True
-    x_sum_healerunit_share = 66.6
+    x_sum_healerunit_plans_fund_total = 66.6
     x_tree_traverse_count = 7
     x_credor_respect = 88.2
     x_debtor_respect = 88.4
@@ -48,7 +48,7 @@ def test_create_beliefunit_metrics_insert_sqlstr_ReturnsObj():
         "keeps_justified": x_keeps_justified,
         "offtrack_fund": x_offtrack_fund,
         "rational": x_rational,
-        "sum_healerunit_share": x_sum_healerunit_share,
+        "sum_healerunit_plans_fund_total": x_sum_healerunit_plans_fund_total,
         "tree_traverse_count": x_tree_traverse_count,
         "credor_respect": x_credor_respect,
         "debtor_respect": x_debtor_respect,
@@ -564,8 +564,8 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
     x_moment_label = "amy23"
     x_belief_name = "Sue"
     x_voice_name = 1
-    x_voice_cred_points = 2
-    x_voice_debt_points = 3
+    x_voice_cred_shares = 2
+    x_voice_debt_shares = 3
     x_credor_pool = 4
     x_debtor_pool = 5
     x_fund_give = 6
@@ -574,14 +574,14 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
     x_fund_agenda_take = 9
     x_fund_agenda_ratio_give = 10
     x_fund_agenda_ratio_take = 11
-    x_inallocable_voice_debt_points = 12
-    x_irrational_voice_debt_points = 13
+    x_inallocable_voice_debt_shares = 12
+    x_irrational_voice_debt_shares = 13
     values_dict = {
         "moment_label": x_moment_label,
         "belief_name": x_belief_name,
         "voice_name": x_voice_name,
-        "voice_cred_points": x_voice_cred_points,
-        "voice_debt_points": x_voice_debt_points,
+        "voice_cred_shares": x_voice_cred_shares,
+        "voice_debt_shares": x_voice_debt_shares,
         "credor_pool": x_credor_pool,
         "debtor_pool": x_debtor_pool,
         "fund_give": x_fund_give,
@@ -590,8 +590,8 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
         "fund_agenda_take": x_fund_agenda_take,
         "fund_agenda_ratio_give": x_fund_agenda_ratio_give,
         "fund_agenda_ratio_take": x_fund_agenda_ratio_take,
-        "inallocable_voice_debt_points": x_inallocable_voice_debt_points,
-        "irrational_voice_debt_points": x_irrational_voice_debt_points,
+        "inallocable_voice_debt_shares": x_inallocable_voice_debt_shares,
+        "irrational_voice_debt_shares": x_irrational_voice_debt_shares,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -642,8 +642,8 @@ def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
     x_belief_name = "Sue"
     x_voice_name = 1
     x_group_title = 2
-    x_group_cred_points = 3
-    x_group_debt_points = 4
+    x_group_cred_shares = 3
+    x_group_debt_shares = 4
     x_credor_pool = 5
     x_debtor_pool = 6
     x_fund_give = 7
@@ -657,8 +657,8 @@ def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
         "belief_name": x_belief_name,
         "voice_name": x_voice_name,
         "group_title": x_group_title,
-        "group_cred_points": x_group_cred_points,
-        "group_debt_points": x_group_debt_points,
+        "group_cred_shares": x_group_cred_shares,
+        "group_debt_shares": x_group_debt_shares,
         "credor_pool": x_credor_pool,
         "debtor_pool": x_debtor_pool,
         "fund_give": x_fund_give,

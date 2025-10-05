@@ -3,8 +3,8 @@
     "belief_name"      : { "otx_key": true  }, 
     "event_int"        : { "otx_key": true  }, 
     "face_name"        : { "otx_key": true  }, 
-    "group_cred_points": { "otx_key": false }, 
-    "group_debt_points": { "otx_key": false }, 
+    "group_cred_shares": { "otx_key": false }, 
+    "group_debt_shares": { "otx_key": false }, 
     "group_title"      : { "otx_key": true  }, 
     "moment_label"     : { "otx_key": true  }, 
     "voice_name"       : { "otx_key": true  }
