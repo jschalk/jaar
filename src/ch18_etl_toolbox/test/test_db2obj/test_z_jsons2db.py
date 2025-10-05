@@ -56,7 +56,7 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
     x_keeps_justified = 77
     x_offtrack_fund = 55.5
     x_rational = 92
-    x_sum_healerunit_share = 66.6
+    x_sum_healerunit_plans_fund_total = 66.6
     x_tree_traverse_count = 7
     x_credor_respect = 88.2
     x_debtor_respect = 88.4
@@ -77,7 +77,7 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
     sue_belief.keeps_justified = x_keeps_justified
     sue_belief.offtrack_fund = x_offtrack_fund
     sue_belief.rational = x_rational
-    sue_belief.sum_healerunit_share = x_sum_healerunit_share
+    sue_belief.sum_healerunit_plans_fund_total = x_sum_healerunit_plans_fund_total
     sue_belief.tree_traverse_count = x_tree_traverse_count
     sue_belief.credor_respect = x_credor_respect
     sue_belief.debtor_respect = x_debtor_respect
@@ -111,7 +111,7 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
             x_rational,
             x_keeps_justified,
             x_offtrack_fund,
-            x_sum_healerunit_share,
+            x_sum_healerunit_plans_fund_total,
             x_keeps_buildable,
             x_tree_traverse_count,
         )

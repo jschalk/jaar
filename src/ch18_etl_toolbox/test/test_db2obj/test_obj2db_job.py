@@ -31,7 +31,7 @@ def test_create_beliefunit_metrics_insert_sqlstr_ReturnsObj():
     x_keeps_justified = False
     x_offtrack_fund = 55.5
     x_rational = True
-    x_sum_healerunit_share = 66.6
+    x_sum_healerunit_plans_fund_total = 66.6
     x_tree_traverse_count = 7
     x_credor_respect = 88.2
     x_debtor_respect = 88.4
@@ -48,7 +48,7 @@ def test_create_beliefunit_metrics_insert_sqlstr_ReturnsObj():
         "keeps_justified": x_keeps_justified,
         "offtrack_fund": x_offtrack_fund,
         "rational": x_rational,
-        "sum_healerunit_share": x_sum_healerunit_share,
+        "sum_healerunit_plans_fund_total": x_sum_healerunit_plans_fund_total,
         "tree_traverse_count": x_tree_traverse_count,
         "credor_respect": x_credor_respect,
         "debtor_respect": x_debtor_respect,

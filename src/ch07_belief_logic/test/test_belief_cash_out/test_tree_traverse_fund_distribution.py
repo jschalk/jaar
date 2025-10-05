@@ -1092,7 +1092,7 @@ class VoiceAgendaMetrics:
 
 @dataclass
 class AwardAgendaMetrics:
-    sum_belief_agenda_share = 0
+    sum_belief_agenda_plans_fund_total = 0
     agenda_no_count = 0
     agenda_yes_count = 0
     agenda_no_belief_i_sum = 0
@@ -1100,13 +1100,13 @@ class AwardAgendaMetrics:
 
     def set_awardagendametrics_sums(self, agenda_dict: dict[RopeTerm, PlanUnit]):
         for agenda_plan in agenda_dict.values():
-            self.sum_belief_agenda_share += agenda_plan.get_fund_share()
+            self.sum_belief_agenda_plans_fund_total += agenda_plan.get_plan_fund_total()
             if agenda_plan.awardlines == {}:
                 self.agenda_no_count += 1
-                self.agenda_no_belief_i_sum += agenda_plan.get_fund_share()
+                self.agenda_no_belief_i_sum += agenda_plan.get_plan_fund_total()
             else:
                 self.agenda_yes_count += 1
-                self.agenda_yes_belief_i_sum += agenda_plan.get_fund_share()
+                self.agenda_yes_belief_i_sum += agenda_plan.get_plan_fund_total()
 
 
 def test_BeliefUnit_agenda_cred_debt_SetAttrs():
@@ -1143,7 +1143,7 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
     assert len(agenda_dict) == 63
     x_awardagendametrics = AwardAgendaMetrics()
     x_awardagendametrics.set_awardagendametrics_sums(agenda_dict=agenda_dict)
-    # print(f"{sum_belief_agenda_share=}")
+    # print(f"{sum_belief_agenda_plans_fund_total=}")
     # assert x_awardagendametrics.agenda_no_count == 14
     assert x_awardagendametrics.agenda_yes_count == 49
     predicted_agenda_no_belief_i_sum = int(0.004107582 * default_pool_num())
@@ -1158,12 +1158,12 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
     assert are_equal(
         x_awardagendametrics.agenda_no_belief_i_sum
         + x_awardagendametrics.agenda_yes_belief_i_sum,
-        x_awardagendametrics.sum_belief_agenda_share,
+        x_awardagendametrics.sum_belief_agenda_plans_fund_total,
     )
-    predicted_sum_belief_agenda_share = 0.007172982 * default_pool_num()
+    predicted_sum_belief_agenda_plans_fund_total = 0.007172982 * default_pool_num()
     assert (
-        x_awardagendametrics.sum_belief_agenda_share
-        == predicted_sum_belief_agenda_share
+        x_awardagendametrics.sum_belief_agenda_plans_fund_total
+        == predicted_sum_belief_agenda_plans_fund_total
     )
 
     x_groupagendametrics = GroupAgendaMetrics()
@@ -1186,11 +1186,11 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
     x_voiceagendametrics.set_voiceagendametrics_sums(yao_belief)
     assert are_equal(
         x_voiceagendametrics.sum_agenda_cred,
-        x_awardagendametrics.sum_belief_agenda_share,
+        x_awardagendametrics.sum_belief_agenda_plans_fund_total,
     )
     assert are_equal(
         x_voiceagendametrics.sum_agenda_debt,
-        x_awardagendametrics.sum_belief_agenda_share,
+        x_awardagendametrics.sum_belief_agenda_plans_fund_total,
     )
     assert are_equal(x_voiceagendametrics.sum_agenda_ratio_cred, 1)
     assert are_equal(x_voiceagendametrics.sum_agenda_ratio_debt, 1)

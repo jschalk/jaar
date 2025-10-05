@@ -111,7 +111,7 @@ def set_readable_plan_values(x_plan: PlanUnit, result: dict):
         if result.get("parent_rope") != ""
         else add_small_dot("Root Plan parent_rope is empty str")
     )
-    result["fund_share"] = x_plan.get_fund_share()
+    result["plan_fund_total"] = x_plan.get_plan_fund_total()
     all_voice_cred_str = f"all_voice_cred = {x_plan.all_voice_cred}"
     all_voice_debt_str = f"all_voice_debt = {x_plan.all_voice_debt}"
     all_voice_cred_str = add_small_dot(all_voice_cred_str)

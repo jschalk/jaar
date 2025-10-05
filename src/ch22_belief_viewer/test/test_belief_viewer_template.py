@@ -38,7 +38,7 @@ def test_get_belief_viewer_template_ReturnsObj():
         wx.denom,
         wx.factunits,
         wx.fund_grain,
-        wx.fund_share,
+        wx.plan_fund_total,
         wx.gogo_want,
         # wx.healerunit,
         # wx.knot,

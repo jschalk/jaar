@@ -41,7 +41,7 @@ let show_reasonunits = false;
 let show_reasonheirs = false;
 let show_factunits = false;
 let show_factheirs = false;
-let show_fund_share = false;
+let show_plan_fund_total = false;
 let show_fund_onset = false;
 let show_fund_cease = false;
 let show_fund_grain = false;
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_reasonheirsCheckbox = document.getElementById('show_reasonheirs');
     const show_factunitsCheckbox = document.getElementById('show_factunits');
     const show_factheirsCheckbox = document.getElementById('show_factheirs');
-    const show_fund_shareCheckbox = document.getElementById('show_fund_share');
+    const show_plan_fund_totalCheckbox = document.getElementById('show_plan_fund_total');
     const show_fund_onsetCheckbox = document.getElementById('show_fund_onset');
     const show_fund_ceaseCheckbox = document.getElementById('show_fund_cease');
     const show_fund_grainCheckbox = document.getElementById('show_fund_grain');
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
     show_reasonheirsCheckbox.addEventListener('change', function () { show_reasonheirs = this.checked; renderPlanTree(); });
     show_factunitsCheckbox.addEventListener('change', function () { show_factunits = this.checked; renderPlanTree(); });
     show_factheirsCheckbox.addEventListener('change', function () { show_factheirs = this.checked; renderPlanTree(); });
-    show_fund_shareCheckbox.addEventListener('change', function () { show_fund_share = this.checked; renderPlanTree(); });
+    show_plan_fund_totalCheckbox.addEventListener('change', function () { show_plan_fund_total = this.checked; renderPlanTree(); });
     show_fund_onsetCheckbox.addEventListener('change', function () { show_fund_onset = this.checked; renderPlanTree(); });
     show_fund_ceaseCheckbox.addEventListener('change', function () { show_fund_cease = this.checked; renderPlanTree(); });
     show_fund_grainCheckbox.addEventListener('change', function () { show_fund_grain = this.checked; renderPlanTree(); });
@@ -283,7 +283,7 @@ function renderPlanUnit(planUnit, level) {
     const activeIndicator = planUnit.active && show_active ? '-ACTIVE' : '';
     const taskIndicator = planUnit.task && show_task ? '-task' : '';
     const starIndicator = show_star ? ` star${planUnit.star}` : '';
-    const fund_shareIndicator = show_fund_share ? ` [${planUnit.fund_share}]` : '';
+    const plan_fund_totalIndicator = show_plan_fund_total ? ` [${planUnit.plan_fund_total}]` : '';
     const uidIndicator = planUnit.uid && show_uid ? ` uid${planUnit.uid}` : '';
 
     const fund_onsetIndicator = show_fund_onset ? ` onset-${planUnit.fund_onset}` : '';
@@ -306,7 +306,7 @@ function renderPlanUnit(planUnit, level) {
     ${uidIndicator}
     ${pledgeIndicator}
     ${descendant_pledge_countIndicator}
-    ${fund_shareIndicator}
+    ${plan_fund_totalIndicator}
     ${fund_onsetIndicator}
     ${fund_ceaseIndicator}
     ${fund_grainIndicator}

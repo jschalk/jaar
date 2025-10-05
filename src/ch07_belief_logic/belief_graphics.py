@@ -112,7 +112,7 @@ def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_belief: BeliefUnit):
     if mode == "task":
         fig_label = "Plan Tree with task plans in Red."
     fig_label += f" (Plans: {len(x_belief._plan_dict)})"
-    fig_label += f" (sum_healerunit_share: {x_belief.sum_healerunit_share})"
+    fig_label += f" (sum_healerunit_plans_fund_total: {x_belief.sum_healerunit_plans_fund_total})"
     fig_label += f" (keeps_justified: {x_belief.keeps_justified})"
     x_fig.update_layout(title_text=fig_label, font_size=12)
 

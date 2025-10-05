@@ -141,7 +141,7 @@ class BeliefUnit:
     rational: bool = None
     keeps_justified: bool = None
     keeps_buildable: bool = None
-    sum_healerunit_share: float = None
+    sum_healerunit_plans_fund_total: float = None
     groupunits: dict[GroupTitle, GroupUnit] = None
     offtrack_kids_star_set: set[RopeTerm] = None
     offtrack_fund: float = None
@@ -914,10 +914,14 @@ reason_case:    {reason_case}"""
             voiceunit.get_voice_debt_points() for voiceunit in self.voices.values()
         )
 
-    def _add_to_voiceunits_fund_give_take(self, plan_fund_share: float):
+    def _add_to_voiceunits_fund_give_take(self, plan_plan_fund_total: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debt_ledger()
-        fund_give_allot = allot_scale(credor_ledger, plan_fund_share, self.fund_grain)
-        fund_take_allot = allot_scale(debtor_ledger, plan_fund_share, self.fund_grain)
+        fund_give_allot = allot_scale(
+            credor_ledger, plan_plan_fund_total, self.fund_grain
+        )
+        fund_take_allot = allot_scale(
+            debtor_ledger, plan_plan_fund_total, self.fund_grain
+        )
         for x_voice_name, voice_fund_give in fund_give_allot.items():
             self.get_voice(x_voice_name).add_fund_give(voice_fund_give)
             # if there is no differentiated agenda (what factunits exist do not change agenda)
@@ -929,10 +933,14 @@ reason_case:    {reason_case}"""
             if not self.reason_contexts:
                 self.get_voice(x_voice_name).add_fund_agenda_take(voice_fund_take)
 
-    def _add_to_voiceunits_fund_agenda_give_take(self, plan_fund_share: float):
+    def _add_to_voiceunits_fund_agenda_give_take(self, plan_plan_fund_total: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debt_ledger()
-        fund_give_allot = allot_scale(credor_ledger, plan_fund_share, self.fund_grain)
-        fund_take_allot = allot_scale(debtor_ledger, plan_fund_share, self.fund_grain)
+        fund_give_allot = allot_scale(
+            credor_ledger, plan_plan_fund_total, self.fund_grain
+        )
+        fund_take_allot = allot_scale(
+            debtor_ledger, plan_plan_fund_total, self.fund_grain
+        )
         for x_voice_name, voice_fund_give in fund_give_allot.items():
             self.get_voice(x_voice_name).add_fund_agenda_give(voice_fund_give)
         for x_voice_name, voice_fund_take in fund_take_allot.items():
@@ -942,7 +950,7 @@ reason_case:    {reason_case}"""
         for groupunit_obj in self.groupunits.values():
             groupunit_obj.clear_group_fund_give_take()
 
-    def _set_groupunits_fund_share(self, awardheirs: dict[GroupTitle, AwardUnit]):
+    def _set_groupunits_plan_fund_total(self, awardheirs: dict[GroupTitle, AwardUnit]):
         for awardunit_obj in awardheirs.values():
             x_awardee_title = awardunit_obj.awardee_title
             if not self.groupunit_exists(x_awardee_title):
@@ -956,7 +964,7 @@ reason_case:    {reason_case}"""
     def _allot_fund_belief_agenda(self):
         for plan in self._plan_dict.values():
             # If there are no awardlines associated with plan
-            # allot fund_share via general voiceunit
+            # allot plan_fund_total via general voiceunit
             # cred ratio and debt ratio
             # if plan.is_agenda_plan() and plan.awardlines == {}:
             if plan.is_agenda_plan():
@@ -968,7 +976,9 @@ reason_case:    {reason_case}"""
                             awardline_fund_take=x_awardline.fund_take,
                         )
                 else:
-                    self._add_to_voiceunits_fund_agenda_give_take(plan.get_fund_share())
+                    self._add_to_voiceunits_fund_agenda_give_take(
+                        plan.get_plan_fund_total()
+                    )
 
     def _allot_groupunits_fund(self):
         for x_groupunit in self.groupunits.values():
@@ -1113,7 +1123,7 @@ reason_case:    {reason_case}"""
                 self._set_ancestors_pledge_fund_keep_attrs(
                     x_plan.get_plan_rope(), keep_exceptions
                 )
-                self._allot_fund_share(x_plan)
+                self._allot_plan_fund_total(x_plan)
 
     def _set_ancestors_pledge_fund_keep_attrs(
         self, rope: RopeTerm, keep_exceptions: bool = False
@@ -1157,7 +1167,7 @@ reason_case:    {reason_case}"""
             if x_plan_obj.healerunit.any_healer_name_exists():
                 keep_justified_by_problem = False
                 healerunit_count += 1
-                self.sum_healerunit_share += x_plan_obj.get_fund_share()
+                self.sum_healerunit_plans_fund_total += x_plan_obj.get_plan_fund_total()
             if x_plan_obj.problem_bool:
                 keep_justified_by_problem = True
 
@@ -1179,11 +1189,11 @@ reason_case:    {reason_case}"""
         tt_count = self.tree_traverse_count
         x_plan.set_active_attrs(tt_count, self.groupunits, self.belief_name)
 
-    def _allot_fund_share(self, plan: PlanUnit):
+    def _allot_plan_fund_total(self, plan: PlanUnit):
         if plan.awardheir_exists():
-            self._set_groupunits_fund_share(plan.awardheirs)
+            self._set_groupunits_plan_fund_total(plan.awardheirs)
         elif plan.awardheir_exists() is False:
-            self._add_to_voiceunits_fund_give_take(plan.get_fund_share())
+            self._add_to_voiceunits_fund_give_take(plan.get_plan_fund_total())
 
     def _create_groupunits_metrics(self):
         self.groupunits = {}
@@ -1223,7 +1233,7 @@ reason_case:    {reason_case}"""
         self._range_inheritors = {}
         self.keeps_justified = True
         self.keeps_buildable = False
-        self.sum_healerunit_share = 0
+        self.sum_healerunit_plans_fund_total = 0
         self._keep_dict = {}
         self._healers_dict = {}
 
@@ -1317,13 +1327,13 @@ reason_case:    {reason_case}"""
 
     def _set_keep_dict(self):
         if self.keeps_justified is False:
-            self.sum_healerunit_share = 0
+            self.sum_healerunit_plans_fund_total = 0
         for x_plan in self._plan_dict.values():
-            if self.sum_healerunit_share == 0:
+            if self.sum_healerunit_plans_fund_total == 0:
                 x_plan.healerunit_ratio = 0
             else:
-                x_sum = self.sum_healerunit_share
-                x_plan.healerunit_ratio = x_plan.get_fund_share() / x_sum
+                x_sum = self.sum_healerunit_plans_fund_total
+                x_plan.healerunit_ratio = x_plan.get_plan_fund_total() / x_sum
             if self.keeps_justified and x_plan.healerunit.any_healer_name_exists():
                 self._keep_dict[x_plan.get_plan_rope()] = x_plan
 
@@ -1432,7 +1442,7 @@ reason_case:    {reason_case}"""
     def set_offtrack_fund(self) -> float:
         star_set = self.offtrack_kids_star_set
         self.offtrack_fund = sum(
-            self.get_plan_obj(rope).get_fund_share() for rope in star_set
+            self.get_plan_obj(rope).get_plan_fund_total() for rope in star_set
         )
 
 
@@ -1466,7 +1476,7 @@ def beliefunit_shop(
         _healers_dict=get_empty_dict_if_None(),
         keeps_justified=get_False_if_None(),
         keeps_buildable=get_False_if_None(),
-        sum_healerunit_share=get_0_if_None(),
+        sum_healerunit_plans_fund_total=get_0_if_None(),
         offtrack_kids_star_set=set(),
         reason_contexts=set(),
         _range_inheritors={},

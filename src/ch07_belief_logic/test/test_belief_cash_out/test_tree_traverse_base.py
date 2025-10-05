@@ -50,15 +50,17 @@ def test_BeliefUnit_clear_plan_dict_and_belief_obj_settle_attrs_SetsAttrs_Scenar
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     x_keep_justifed = False
-    x_sum_healerunit_share = 140
+    x_sum_healerunit_plans_fund_total = 140
     sue_belief.keeps_justified = x_keep_justifed
     sue_belief.keeps_buildable = "swimmers"
-    sue_belief.sum_healerunit_share = x_sum_healerunit_share
+    sue_belief.sum_healerunit_plans_fund_total = x_sum_healerunit_plans_fund_total
     sue_belief._keep_dict = {"run": "run"}
     sue_belief._healers_dict = {"run": "run"}
     assert sue_belief.keeps_justified == x_keep_justifed
     assert sue_belief.keeps_buildable
-    assert sue_belief.sum_healerunit_share == x_sum_healerunit_share
+    assert (
+        sue_belief.sum_healerunit_plans_fund_total == x_sum_healerunit_plans_fund_total
+    )
     assert sue_belief._keep_dict != {}
     assert sue_belief._healers_dict != {}
 
@@ -69,7 +71,7 @@ def test_BeliefUnit_clear_plan_dict_and_belief_obj_settle_attrs_SetsAttrs_Scenar
     assert sue_belief.keeps_justified != x_keep_justifed
     assert sue_belief.keeps_justified
     assert sue_belief.keeps_buildable is False
-    assert sue_belief.sum_healerunit_share == 0
+    assert sue_belief.sum_healerunit_plans_fund_total == 0
     assert not sue_belief._keep_dict
     assert not sue_belief._healers_dict
 

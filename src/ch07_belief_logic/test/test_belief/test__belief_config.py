@@ -681,9 +681,11 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blfunit, jv, wx.rational) == "INTEGER"
     assert g_popcashout(cfig, blfunit, jv, wx.rational) == True
 
-    assert g_class_type(cfig, blfunit, jv, wx.sum_healerunit_share) == "float"
-    assert g_sqlitetype(cfig, blfunit, jv, wx.sum_healerunit_share) == "REAL"
-    assert g_popcashout(cfig, blfunit, jv, wx.sum_healerunit_share) == True
+    assert (
+        g_class_type(cfig, blfunit, jv, wx.sum_healerunit_plans_fund_total) == "float"
+    )
+    assert g_sqlitetype(cfig, blfunit, jv, wx.sum_healerunit_plans_fund_total) == "REAL"
+    assert g_popcashout(cfig, blfunit, jv, wx.sum_healerunit_plans_fund_total) == True
 
     assert g_class_type(cfig, blfunit, jv, wx.tree_traverse_count) == "int"
     assert g_sqlitetype(cfig, blfunit, jv, wx.tree_traverse_count) == "INTEGER"
@@ -852,7 +854,7 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(wx.keeps_justified) == "int"
     assert belief_calc_args_type_dict.get(wx.offtrack_fund) == "int"
     assert belief_calc_args_type_dict.get(wx.rational) == "bool"
-    assert belief_calc_args_type_dict.get(wx.sum_healerunit_share) == "float"
+    assert belief_calc_args_type_dict.get(wx.sum_healerunit_plans_fund_total) == "float"
     assert belief_calc_args_type_dict.get(wx.tree_traverse_count) == "int"
     assert belief_calc_args_type_dict.get(wx.credor_respect) == "float"
     assert belief_calc_args_type_dict.get(wx.debtor_respect) == "float"

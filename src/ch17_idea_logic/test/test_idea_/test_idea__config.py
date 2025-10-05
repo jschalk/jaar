@@ -249,7 +249,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[169] == "offtrack_fund"
     assert table_sorting_priority[170] == "_reason_active_heir"
     assert table_sorting_priority[171] == "irrational_voice_debt_points"
-    assert table_sorting_priority[172] == "sum_healerunit_share"
+    assert table_sorting_priority[172] == "sum_healerunit_plans_fund_total"
     assert table_sorting_priority[173] == "keeps_buildable"
     assert table_sorting_priority[174] == "all_voice_debt"
     assert table_sorting_priority[175] == "tree_traverse_count"

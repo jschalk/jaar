@@ -391,11 +391,11 @@ class PlanUnit:
     ):
         self.fund_onset = x_fund_onset
         self.fund_cease = x_fund_cease
-        self.fund_ratio = self.get_fund_share() / fund_pool
+        self.fund_ratio = self.get_plan_fund_total() / fund_pool
         self.set_awardheirs_fund_give_fund_take()
 
-    def get_fund_share(self) -> float:
-        """Return plan fund share from different of fund_cease and fund_onset"""
+    def get_plan_fund_total(self) -> float:
+        """Return plan fund plan total. Equal to difference of fund_cease and fund_onset"""
         if self.fund_onset is None or self.fund_cease is None:
             return 0
         else:
@@ -523,9 +523,9 @@ class PlanUnit:
         for x_awardee_title, x_awardheir in self.awardheirs.items():
             give_ledger[x_awardee_title] = x_awardheir.give_force
             take_ledger[x_awardee_title] = x_awardheir.take_force
-        x_fund_share = self.get_fund_share()
-        give_allot = allot_scale(give_ledger, x_fund_share, self.fund_grain)
-        take_allot = allot_scale(take_ledger, x_fund_share, self.fund_grain)
+        x_plan_fund_total = self.get_plan_fund_total()
+        give_allot = allot_scale(give_ledger, x_plan_fund_total, self.fund_grain)
+        take_allot = allot_scale(take_ledger, x_plan_fund_total, self.fund_grain)
         for x_awardee_title, x_awardheir in self.awardheirs.items():
             x_awardheir.fund_give = give_allot.get(x_awardee_title)
             x_awardheir.fund_take = take_allot.get(x_awardee_title)
