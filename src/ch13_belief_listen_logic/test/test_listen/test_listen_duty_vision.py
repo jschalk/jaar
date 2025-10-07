@@ -88,9 +88,9 @@ def get_example_yao_belief() -> BeliefUnit:
     bob_str = "Bob"
     yao_speaker = beliefunit_shop(yao_str, ch13_example_moment_label())
     yao_speaker.set_plan(planunit_shop(run_str()), casa_rope())
-    yao_speaker.add_voiceunit(yao_str, voice_debt_shares=10)
-    yao_speaker.add_voiceunit(zia_str, voice_debt_shares=30)
-    yao_speaker.add_voiceunit(bob_str, voice_debt_shares=40)
+    yao_speaker.add_voiceunit(yao_str, voice_debt_lumen=10)
+    yao_speaker.add_voiceunit(zia_str, voice_debt_lumen=30)
+    yao_speaker.add_voiceunit(bob_str, voice_debt_lumen=40)
     yao_speaker.set_voice_respect(80)
     return yao_speaker
 
@@ -259,7 +259,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
 ):
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
-    # yao0_gut with 3 debotors of different voice_cred_sharess
+    # yao0_gut with 3 debotors of different voice_cred_lumens
     # yao_vision1 with 1 task, fact that doesn't make that task active
     # yao_vision2 with 2 tasks, one is equal fact that makes task active
     # yao_vision3 with 1 new task, fact stays with it
@@ -312,7 +312,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
     yao_job = open_job_file(moment_mstr_dir, moment_label, yao_str)
     yao_job.cashout()
     assert yao_job.voices.keys() == yao_gut0.voices.keys()
-    assert yao_job.get_voice(yao_str).irrational_voice_debt_shares == 0
+    assert yao_job.get_voice(yao_str).irrational_voice_debt_lumen == 0
     yao_job_voices = yao_job.to_dict().get(wx.voices)
     yao_gut0_voices = yao_gut0.to_dict().get(wx.voices)
     yao_job_bob = yao_job_voices.get("Bob")

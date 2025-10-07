@@ -72,10 +72,10 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
     a23_bob_e3_dir = belief_event_dir(moment_mstr_dir, a23_str, bob_inx, event3)
     a23_bob_e7_dir = belief_event_dir(moment_mstr_dir, a23_str, bob_inx, event7)
-    e3_put_csv = f"""{wx.event_int},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_shares},{wx.voice_debt_shares}
+    e3_put_csv = f"""{wx.event_int},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_lumen},{wx.voice_debt_lumen}
 {event3},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
 """
-    e7_put_csv = f"""{wx.event_int},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_shares},{wx.voice_debt_shares}
+    e7_put_csv = f"""{wx.event_int},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_lumen},{wx.voice_debt_lumen}
 {event7},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
 {event7},{sue_inx},{a23_str},{bob_inx},{sue_inx},{credit88},{debt_empty}
 """
@@ -109,19 +109,19 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
         blrpern_dimen,
         wx.INSERT,
         jkeys={wx.voice_name: bob_inx},
-        jvalues={wx.voice_cred_shares: credit77, wx.voice_debt_shares: None},
+        jvalues={wx.voice_cred_lumen: credit77, wx.voice_debt_lumen: None},
     )
     expected_e7_pack._beliefdelta.add_beliefatom(
         blrpern_dimen,
         wx.INSERT,
         jkeys={wx.voice_name: bob_inx},
-        jvalues={wx.voice_cred_shares: credit77, wx.voice_debt_shares: None},
+        jvalues={wx.voice_cred_lumen: credit77, wx.voice_debt_lumen: None},
     )
     expected_e7_pack._beliefdelta.add_beliefatom(
         blrpern_dimen,
         wx.INSERT,
         jkeys={wx.voice_name: sue_inx},
-        jvalues={wx.voice_cred_shares: credit88, wx.voice_debt_shares: None},
+        jvalues={wx.voice_cred_lumen: credit88, wx.voice_debt_lumen: None},
     )
     e3_packunit = get_packunit_from_json(open_file(e3_all_pack_path))
     e7_packunit = get_packunit_from_json(open_file(e7_all_pack_path))

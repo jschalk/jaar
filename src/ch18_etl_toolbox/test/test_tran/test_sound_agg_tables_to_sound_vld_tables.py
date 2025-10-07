@@ -38,8 +38,8 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
 , {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
-, {wx.voice_cred_shares}
-, {wx.voice_debt_shares}
+, {wx.voice_cred_lumen}
+, {wx.voice_debt_lumen}
 )"""
         values_clause = f"""
 VALUES
@@ -66,8 +66,8 @@ VALUES
 , {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
-, {wx.voice_cred_shares}
-, {wx.voice_debt_shares}
+, {wx.voice_cred_lumen}
+, {wx.voice_debt_lumen}
 FROM {blrawar_h_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -108,8 +108,8 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario0_AddRowsToTable():
 , {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
-, {wx.voice_cred_shares}
-, {wx.voice_debt_shares}
+, {wx.voice_cred_lumen}
+, {wx.voice_debt_lumen}
 )"""
         values_clause = f"""
 VALUES
@@ -134,8 +134,8 @@ VALUES
 , {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
-, {wx.voice_cred_shares}
-, {wx.voice_debt_shares}
+, {wx.voice_cred_lumen}
+, {wx.voice_debt_lumen}
 FROM {blrpern_h_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -175,8 +175,8 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario1_Populates_Columns():
 , {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
-, {wx.voice_cred_shares}
-, {wx.voice_debt_shares}
+, {wx.voice_cred_lumen}
+, {wx.voice_debt_lumen}
 )"""
         values_clause = f"""
 VALUES
@@ -201,8 +201,8 @@ VALUES
 , {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
-, {wx.voice_cred_shares}
-, {wx.voice_debt_shares}
+, {wx.voice_cred_lumen}
+, {wx.voice_debt_lumen}
 FROM {blrpern_h_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -242,8 +242,8 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario2_DoesNotSelectWhere_e
 , {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
-, {wx.voice_cred_shares}
-, {wx.voice_debt_shares}
+, {wx.voice_cred_lumen}
+, {wx.voice_debt_lumen}
 , {wx.error_message}
 )"""
         values_clause = f"""
@@ -269,8 +269,8 @@ VALUES
 , {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
-, {wx.voice_cred_shares}
-, {wx.voice_debt_shares}
+, {wx.voice_cred_lumen}
+, {wx.voice_debt_lumen}
 FROM {blrpern_h_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)

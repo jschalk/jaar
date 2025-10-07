@@ -38,21 +38,21 @@ def _ingest_perspective_agenda(
     return listener
 
 
-def _allocate_irrational_voice_debt_shares(
+def _allocate_irrational_voice_debt_lumen(
     listener: BeliefUnit, speaker_belief_name: BeliefName
 ) -> BeliefUnit:
     speaker_voiceunit = listener.get_voice(speaker_belief_name)
-    speaker_voice_debt_shares = speaker_voiceunit.voice_debt_shares
-    speaker_voiceunit.add_irrational_voice_debt_shares(speaker_voice_debt_shares)
+    speaker_voice_debt_lumen = speaker_voiceunit.voice_debt_lumen
+    speaker_voiceunit.add_irrational_voice_debt_lumen(speaker_voice_debt_lumen)
     return listener
 
 
-def _allocate_inallocable_voice_debt_shares(
+def _allocate_inallocable_voice_debt_lumen(
     listener: BeliefUnit, speaker_belief_name: BeliefName
 ) -> BeliefUnit:
     speaker_voiceunit = listener.get_voice(speaker_belief_name)
-    speaker_voiceunit.add_inallocable_voice_debt_shares(
-        speaker_voiceunit.voice_debt_shares
+    speaker_voiceunit.add_inallocable_voice_debt_lumen(
+        speaker_voiceunit.voice_debt_lumen
     )
     return listener
 
@@ -120,14 +120,14 @@ def get_debtors_roll(x_duty: BeliefUnit) -> list[VoiceUnit]:
     return [
         x_voiceunit
         for x_voiceunit in x_duty.voices.values()
-        if x_voiceunit.voice_debt_shares != 0
+        if x_voiceunit.voice_debt_lumen != 0
     ]
 
 
 def get_ordered_debtors_roll(x_belief: BeliefUnit) -> list[VoiceUnit]:
     voices_ordered_list = get_debtors_roll(x_belief)
     voices_ordered_list.sort(
-        key=lambda x: (x.voice_debt_shares, x.voice_name), reverse=True
+        key=lambda x: (x.voice_debt_lumen, x.voice_name), reverse=True
     )
     return voices_ordered_list
 
@@ -171,15 +171,15 @@ def listen_to_speaker_agenda(listener: BeliefUnit, speaker: BeliefUnit) -> Belie
         )
     perspective_belief = get_perspective_belief(speaker, listener.belief_name)
     if perspective_belief.rational is False:
-        return _allocate_irrational_voice_debt_shares(listener, speaker.belief_name)
+        return _allocate_irrational_voice_debt_lumen(listener, speaker.belief_name)
     if listener.debtor_respect is None:
-        return _allocate_inallocable_voice_debt_shares(listener, speaker.belief_name)
+        return _allocate_inallocable_voice_debt_lumen(listener, speaker.belief_name)
     if listener.belief_name != speaker.belief_name:
         agenda = generate_perspective_agenda(perspective_belief)
     else:
         agenda = list(perspective_belief.get_all_pledges().values())
     if len(agenda) == 0:
-        return _allocate_inallocable_voice_debt_shares(listener, speaker.belief_name)
+        return _allocate_inallocable_voice_debt_lumen(listener, speaker.belief_name)
     return _ingest_perspective_agenda(listener, agenda)
 
 

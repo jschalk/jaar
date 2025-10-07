@@ -18,11 +18,11 @@ def test_AtomRow_Exists():
     assert x_atomrow.begin is None
     assert x_atomrow.respect_grain is None
     assert x_atomrow.close is None
-    assert x_atomrow.voice_cred_shares is None
-    assert x_atomrow.group_cred_shares is None
+    assert x_atomrow.voice_cred_lumen is None
+    assert x_atomrow.group_cred_lumen is None
     assert x_atomrow.credor_respect is None
-    assert x_atomrow.voice_debt_shares is None
-    assert x_atomrow.group_debt_shares is None
+    assert x_atomrow.voice_debt_lumen is None
+    assert x_atomrow.group_debt_lumen is None
     assert x_atomrow.debtor_respect is None
     assert x_atomrow.denom is None
     assert x_atomrow.reason_divisor is None
@@ -161,7 +161,7 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_voiceunit_str_INSERT_Scenario
     x_dimen = wx.belief_voiceunit
     x_atomrow = atomrow_shop({x_dimen}, wx.INSERT)
     x_atomrow.voice_name = "Bob"
-    x_atomrow.voice_cred_shares = 5
+    x_atomrow.voice_cred_lumen = 5
 
     # WHEN
     x_beliefatoms = x_atomrow.get_beliefatoms()
@@ -170,7 +170,7 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_voiceunit_str_INSERT_Scenario
     assert len(x_beliefatoms) == 1
     static_atom = beliefatom_shop(x_dimen, wx.INSERT)
     static_atom.set_arg(wx.voice_name, "Bob")
-    static_atom.set_arg("voice_cred_shares", 5)
+    static_atom.set_arg("voice_cred_lumen", 5)
     assert x_beliefatoms[0] == static_atom
 
 
@@ -192,7 +192,7 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_voiceunit_INSERT_Scenario2():
     x_atomrow = atomrow_shop({x_dimen}, wx.INSERT)
     x_atomrow.voice_name = "Bob"
     four_str = "4"
-    x_atomrow.voice_cred_shares = four_str
+    x_atomrow.voice_cred_lumen = four_str
 
     # WHEN
     x_beliefatoms = x_atomrow.get_beliefatoms()
@@ -202,7 +202,7 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_voiceunit_INSERT_Scenario2():
     static_atom = beliefatom_shop(x_dimen, wx.INSERT)
     static_atom.set_arg(wx.voice_name, "Bob")
     four_int = 4
-    static_atom.set_arg("voice_cred_shares", four_int)
+    static_atom.set_arg("voice_cred_lumen", four_int)
     assert x_beliefatoms[0] == static_atom
 
 
@@ -211,7 +211,7 @@ def test_AtomRow_get_beliefatoms_ReturnsObjIfDimenIsCorrect():
     x_atomrow = atomrow_shop(set(), wx.INSERT)
     x_atomrow.voice_name = "Bob"
     four_str = "4"
-    x_atomrow.voice_cred_shares = four_str
+    x_atomrow.voice_cred_lumen = four_str
     assert len(x_atomrow.get_beliefatoms()) == 0
 
     # WHEN / THEN

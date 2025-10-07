@@ -18,13 +18,11 @@ def test_BeliefAtom_Exists():
 def test_beliefatom_shop_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
-    bob_voice_cred_shares = 55
-    bob_voice_debt_shares = 66
-    bob_voiceunit = voiceunit_shop(
-        bob_str, bob_voice_cred_shares, bob_voice_debt_shares
-    )
-    cw_str = "_voice_cred_shares"
-    dw_str = "_voice_debt_shares"
+    bob_voice_cred_lumen = 55
+    bob_voice_debt_lumen = 66
+    bob_voiceunit = voiceunit_shop(bob_str, bob_voice_cred_lumen, bob_voice_debt_lumen)
+    cw_str = "_voice_cred_lumen"
+    dw_str = "_voice_debt_lumen"
     bob_required_dict = {wx.voice_name: "huh"}
     bob_optional_dict = {cw_str: bob_voiceunit.to_dict().get(cw_str)}
     bob_optional_dict[dw_str] = bob_voiceunit.to_dict().get(dw_str)
@@ -92,13 +90,13 @@ def test_BeliefAtom_is_jvalues_valid_ReturnsBoolean():
     assert bob_insert_beliefatom.is_jvalues_valid()
 
     # WHEN
-    bob_insert_beliefatom.set_jvalue(wx.voice_cred_shares, 55)
+    bob_insert_beliefatom.set_jvalue(wx.voice_cred_lumen, 55)
     # THEN
     assert len(bob_insert_beliefatom.jvalues) == 1
     assert bob_insert_beliefatom.is_jvalues_valid()
 
     # WHEN
-    bob_insert_beliefatom.set_jvalue(wx.voice_debt_shares, 66)
+    bob_insert_beliefatom.set_jvalue(wx.voice_debt_lumen, 66)
     # THEN
     assert len(bob_insert_beliefatom.jvalues) == 2
     assert bob_insert_beliefatom.is_jvalues_valid()
@@ -113,11 +111,9 @@ def test_BeliefAtom_is_jvalues_valid_ReturnsBoolean():
 def test_BeliefAtom_is_valid_ReturnsBoolean_VoiceUnit_INSERT():
     # ESTABLISH
     bob_str = "Bob"
-    bob_voice_cred_shares = 55
-    bob_voice_debt_shares = 66
-    bob_voiceunit = voiceunit_shop(
-        bob_str, bob_voice_cred_shares, bob_voice_debt_shares
-    )
+    bob_voice_cred_lumen = 55
+    bob_voice_debt_lumen = 66
+    bob_voiceunit = voiceunit_shop(bob_str, bob_voice_cred_lumen, bob_voice_debt_lumen)
     voiceunit_str = wx.belief_voiceunit
 
     # WHEN
@@ -146,8 +142,8 @@ def test_BeliefAtom_is_valid_ReturnsBoolean_VoiceUnit_INSERT():
 
     # WHEN
     bob_insert_beliefatom.jvalues = {}
-    cw_str = wx.voice_cred_shares
-    dw_str = wx.voice_debt_shares
+    cw_str = wx.voice_cred_lumen
+    dw_str = wx.voice_debt_lumen
     bob_insert_beliefatom.set_jvalue(cw_str, bob_voiceunit.to_dict().get(cw_str))
     bob_insert_beliefatom.set_jvalue(dw_str, bob_voiceunit.to_dict().get(dw_str))
 
@@ -174,15 +170,13 @@ def test_BeliefAtom_is_valid_ReturnsBoolean_VoiceUnit_INSERT():
 def test_BeliefAtom_get_value_ReturnsObj_Scenario1():
     # ESTABLISH
     bob_str = "Bob"
-    bob_voice_cred_shares = 55
-    bob_voice_debt_shares = 66
-    bob_voiceunit = voiceunit_shop(
-        bob_str, bob_voice_cred_shares, bob_voice_debt_shares
-    )
+    bob_voice_cred_lumen = 55
+    bob_voice_debt_lumen = 66
+    bob_voiceunit = voiceunit_shop(bob_str, bob_voice_cred_lumen, bob_voice_debt_lumen)
     voiceunit_str = wx.belief_voiceunit
     bob_insert_beliefatom = beliefatom_shop(voiceunit_str, wx.INSERT)
-    cw_str = wx.voice_cred_shares
-    dw_str = wx.voice_debt_shares
+    cw_str = wx.voice_cred_lumen
+    dw_str = wx.voice_debt_lumen
     print(f"{bob_voiceunit.to_dict()=}")
     # bob_voiceunit_dict = {wx.voice_name: bob_voiceunit.to_dict().get(wx.voice_name)}
     # print(f"{bob_voiceunit_dict=}")
@@ -192,8 +186,8 @@ def test_BeliefAtom_get_value_ReturnsObj_Scenario1():
     assert bob_insert_beliefatom.is_valid()
 
     # WHEN / THEN
-    assert bob_insert_beliefatom.get_value(cw_str) == bob_voice_cred_shares
-    assert bob_insert_beliefatom.get_value(dw_str) == bob_voice_debt_shares
+    assert bob_insert_beliefatom.get_value(cw_str) == bob_voice_cred_lumen
+    assert bob_insert_beliefatom.get_value(dw_str) == bob_voice_debt_lumen
 
 
 def test_BeliefAtom_is_valid_ReturnsBoolean_VoiceUnit_DELETE():
@@ -236,41 +230,41 @@ def test_BeliefAtom_is_valid_ReturnsBoolean_beliefunit():
 def test_BeliefAtom_set_atom_order_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
-    bob_voice_cred_shares = 55
-    bob_voice_debt_shares = 66
+    bob_voice_cred_lumen = 55
+    bob_voice_debt_lumen = 66
     voiceunit_str = wx.belief_voiceunit
     bob_insert_beliefatom = beliefatom_shop(voiceunit_str, wx.INSERT)
-    cw_str = wx.voice_cred_shares
-    dw_str = wx.voice_debt_shares
+    cw_str = wx.voice_cred_lumen
+    dw_str = wx.voice_debt_lumen
     bob_insert_beliefatom.set_jkey(wx.voice_name, bob_str)
-    bob_insert_beliefatom.set_jvalue(cw_str, bob_voice_cred_shares)
-    bob_insert_beliefatom.set_jvalue(dw_str, bob_voice_debt_shares)
+    bob_insert_beliefatom.set_jvalue(cw_str, bob_voice_cred_lumen)
+    bob_insert_beliefatom.set_jvalue(dw_str, bob_voice_debt_lumen)
     assert bob_insert_beliefatom.is_valid()
 
     # WHEN / THEN
-    assert bob_insert_beliefatom.get_value(cw_str) == bob_voice_cred_shares
-    assert bob_insert_beliefatom.get_value(dw_str) == bob_voice_debt_shares
+    assert bob_insert_beliefatom.get_value(cw_str) == bob_voice_cred_lumen
+    assert bob_insert_beliefatom.get_value(dw_str) == bob_voice_debt_lumen
 
 
 def test_BeliefAtom_set_arg_SetsAny_jkey_jvalue():
     # ESTABLISH
     bob_str = "Bob"
-    bob_voice_cred_shares = 55
-    bob_voice_debt_shares = 66
+    bob_voice_cred_lumen = 55
+    bob_voice_debt_lumen = 66
     voiceunit_str = wx.belief_voiceunit
     bob_insert_beliefatom = beliefatom_shop(voiceunit_str, wx.INSERT)
-    cw_str = wx.voice_cred_shares
-    dw_str = wx.voice_debt_shares
+    cw_str = wx.voice_cred_lumen
+    dw_str = wx.voice_debt_lumen
 
     # WHEN
     bob_insert_beliefatom.set_arg(wx.voice_name, bob_str)
-    bob_insert_beliefatom.set_arg(cw_str, bob_voice_cred_shares)
-    bob_insert_beliefatom.set_arg(dw_str, bob_voice_debt_shares)
+    bob_insert_beliefatom.set_arg(cw_str, bob_voice_cred_lumen)
+    bob_insert_beliefatom.set_arg(dw_str, bob_voice_debt_lumen)
 
     # THEN
     assert bob_insert_beliefatom.get_value(wx.voice_name) == bob_str
-    assert bob_insert_beliefatom.get_value(cw_str) == bob_voice_cred_shares
-    assert bob_insert_beliefatom.get_value(dw_str) == bob_voice_debt_shares
+    assert bob_insert_beliefatom.get_value(cw_str) == bob_voice_cred_lumen
+    assert bob_insert_beliefatom.get_value(dw_str) == bob_voice_debt_lumen
     assert bob_insert_beliefatom.get_value(wx.voice_name) == bob_str
     assert bob_insert_beliefatom.is_valid()
 

@@ -28,8 +28,8 @@ def get_moment_guts_voices_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
     column_header_list = [
         "belief_name",
         "voice_name",
-        "voice_cred_shares",
-        "voice_debt_shares",
+        "voice_cred_lumen",
+        "voice_debt_lumen",
         "fund_give",
         "fund_take",
         "fund_agenda_give",
@@ -45,8 +45,8 @@ def get_moment_guts_voices_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
             values=[
                 df.belief_name,
                 df.voice_name,
-                df.voice_cred_shares,
-                df.voice_debt_shares,
+                df.voice_cred_lumen,
+                df.voice_debt_lumen,
                 df.fund_give,
                 df.fund_take,
                 df.fund_agenda_give,
@@ -86,8 +86,8 @@ def get_moment_jobs_voices_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
     column_header_list = [
         "belief_name",
         "voice_name",
-        "voice_cred_shares",
-        "voice_debt_shares",
+        "voice_cred_lumen",
+        "voice_debt_lumen",
         "fund_give",
         "fund_take",
         "fund_agenda_give",
@@ -103,8 +103,8 @@ def get_moment_jobs_voices_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
             values=[
                 df.belief_name,
                 df.voice_name,
-                df.voice_cred_shares,
-                df.voice_debt_shares,
+                df.voice_cred_lumen,
+                df.voice_debt_lumen,
                 df.fund_give,
                 df.fund_take,
                 df.fund_agenda_give,

@@ -232,8 +232,8 @@ def add_belief_to_br00020_csv(
                 x_belief.belief_name,
                 voiceunit.voice_name,
                 membership.group_title,
-                if_none_str(membership.group_cred_shares),
-                if_none_str(membership.group_debt_shares),
+                if_none_str(membership.group_cred_lumen),
+                if_none_str(membership.group_debt_lumen),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -254,8 +254,8 @@ def add_belief_to_br00021_csv(
             x_belief.moment_label,
             x_belief.belief_name,
             voiceunit.voice_name,
-            if_none_str(voiceunit.voice_cred_shares),
-            if_none_str(voiceunit.voice_debt_shares),
+            if_none_str(voiceunit.voice_cred_lumen),
+            if_none_str(voiceunit.voice_debt_lumen),
         ]
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"
@@ -509,8 +509,8 @@ def add_pack_to_br00020_csv(
                 x_packunit.belief_name,
                 beliefatom.jkeys.get("voice_name"),
                 beliefatom.jkeys.get("group_title"),
-                if_none_str(beliefatom.jvalues.get("group_cred_shares")),
-                if_none_str(beliefatom.jvalues.get("group_debt_shares")),
+                if_none_str(beliefatom.jvalues.get("group_cred_lumen")),
+                if_none_str(beliefatom.jvalues.get("group_debt_lumen")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -528,8 +528,8 @@ def add_pack_to_br00021_csv(
                 x_packunit.moment_label,
                 x_packunit.belief_name,
                 beliefatom.jkeys.get("voice_name"),
-                if_none_str(beliefatom.jvalues.get("voice_cred_shares")),
-                if_none_str(beliefatom.jvalues.get("voice_debt_shares")),
+                if_none_str(beliefatom.jvalues.get("voice_cred_lumen")),
+                if_none_str(beliefatom.jvalues.get("voice_debt_lumen")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

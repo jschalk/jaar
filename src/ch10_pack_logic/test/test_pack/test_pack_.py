@@ -472,13 +472,11 @@ def test_PackUnit_add_p_beliefatom_Sets_BeliefUnit_voiceunits():
     # ESTABLISH
     bob_str = "Bob"
     bob_packunit = packunit_shop(bob_str)
-    bob_voice_cred_shares = 55
-    bob_voice_debt_shares = 66
-    bob_voiceunit = voiceunit_shop(
-        bob_str, bob_voice_cred_shares, bob_voice_debt_shares
-    )
-    cw_str = wx.voice_cred_shares
-    dw_str = wx.voice_debt_shares
+    bob_voice_cred_lumen = 55
+    bob_voice_debt_lumen = 66
+    bob_voiceunit = voiceunit_shop(bob_str, bob_voice_cred_lumen, bob_voice_debt_lumen)
+    cw_str = wx.voice_cred_lumen
+    dw_str = wx.voice_debt_lumen
     print(f"{bob_voiceunit.to_dict()=}")
     bob_required_dict = {wx.voice_name: bob_voiceunit.to_dict().get(wx.voice_name)}
     bob_optional_dict = {cw_str: bob_voiceunit.to_dict().get(cw_str)}
@@ -518,10 +516,10 @@ def test_PackUnit_get_edited_belief_ReturnsObj_BeliefUnit_insert_voice():
     dimen = wx.belief_voiceunit
     x_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     x_beliefatom.set_jkey(wx.voice_name, zia_str)
-    x_voice_cred_shares = 55
-    x_voice_debt_shares = 66
-    x_beliefatom.set_jvalue("voice_cred_shares", x_voice_cred_shares)
-    x_beliefatom.set_jvalue("voice_debt_shares", x_voice_debt_shares)
+    x_voice_cred_lumen = 55
+    x_voice_debt_lumen = 66
+    x_beliefatom.set_jvalue("voice_cred_lumen", x_voice_cred_lumen)
+    x_beliefatom.set_jvalue("voice_debt_lumen", x_voice_debt_lumen)
     sue_packunit._beliefdelta.set_beliefatom(x_beliefatom)
     print(f"{sue_packunit._beliefdelta.beliefatoms.keys()=}")
 
@@ -533,8 +531,8 @@ def test_PackUnit_get_edited_belief_ReturnsObj_BeliefUnit_insert_voice():
     zia_voiceunit = after_sue_beliefunit.get_voice(zia_str)
     assert yao_voiceunit is not None
     assert zia_voiceunit is not None
-    assert zia_voiceunit.voice_cred_shares == x_voice_cred_shares
-    assert zia_voiceunit.voice_debt_shares == x_voice_debt_shares
+    assert zia_voiceunit.voice_cred_lumen == x_voice_cred_lumen
+    assert zia_voiceunit.voice_debt_lumen == x_voice_debt_lumen
 
 
 def test_PackUnit_get_edited_belief_RaisesErrorWhenpackAttrsAndBeliefAttrsAreNotTheSame():
@@ -557,13 +555,11 @@ def test_PackUnit_is_empty_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     bob_packunit = packunit_shop(bob_str)
-    bob_voice_cred_shares = 55
-    bob_voice_debt_shares = 66
-    bob_voiceunit = voiceunit_shop(
-        bob_str, bob_voice_cred_shares, bob_voice_debt_shares
-    )
-    cw_str = wx.voice_cred_shares
-    dw_str = wx.voice_debt_shares
+    bob_voice_cred_lumen = 55
+    bob_voice_debt_lumen = 66
+    bob_voiceunit = voiceunit_shop(bob_str, bob_voice_cred_lumen, bob_voice_debt_lumen)
+    cw_str = wx.voice_cred_lumen
+    dw_str = wx.voice_debt_lumen
     print(f"{bob_voiceunit.to_dict()=}")
     bob_required_dict = {wx.voice_name: bob_voiceunit.to_dict().get(wx.voice_name)}
     bob_optional_dict = {cw_str: bob_voiceunit.to_dict().get(cw_str)}

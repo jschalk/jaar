@@ -31,8 +31,8 @@ def test_get_moment_guts_voices_dataframe_ReturnsObj(
     voiceunit_colums = {
         wx.belief_name,
         wx.voice_name,
-        wx.voice_cred_shares,
-        wx.voice_debt_shares,
+        wx.voice_cred_lumen,
+        wx.voice_debt_lumen,
         "memberships",
         "fund_give",
         "fund_take",
@@ -75,8 +75,8 @@ def test_get_moment_jobs_voices_dataframe_ReturnsObj(
     voiceunit_colums = {
         wx.belief_name,
         wx.voice_name,
-        wx.voice_cred_shares,
-        wx.voice_debt_shares,
+        wx.voice_cred_lumen,
+        wx.voice_debt_lumen,
         "memberships",
         "fund_give",
         "fund_take",
@@ -84,7 +84,7 @@ def test_get_moment_jobs_voices_dataframe_ReturnsObj(
         "fund_agenda_take",
         "fund_agenda_ratio_give",
         "fund_agenda_ratio_take",
-        "inallocable_voice_debt_shares",
+        "inallocable_voice_debt_lumen",
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)

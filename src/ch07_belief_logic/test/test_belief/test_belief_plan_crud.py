@@ -1129,8 +1129,8 @@ def test_BeliefUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     sue_str = "Sue"
     bob_beliefunit = beliefunit_shop(bob_str)
     bob_beliefunit.add_voiceunit(bob_str)
-    bob_beliefunit.add_voiceunit(yao_str, voice_cred_shares=2)
-    bob_beliefunit.add_voiceunit(sue_str, voice_debt_shares=2)
+    bob_beliefunit.add_voiceunit(yao_str, voice_cred_lumen=2)
+    bob_beliefunit.add_voiceunit(sue_str, voice_debt_lumen=2)
     bob_beliefunit.set_offtrack_fund()
     assert bob_beliefunit.offtrack_fund == 0
 

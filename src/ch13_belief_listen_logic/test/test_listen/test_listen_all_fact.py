@@ -13,9 +13,9 @@ def test_get_debtors_roll_ReturnsObj():
     yao_str = "Yao"
     yao_duty = beliefunit_shop(yao_str)
     zia_str = "Zia"
-    zia_voice_cred_shares = 47
-    zia_voice_debt_shares = 41
-    yao_duty.add_voiceunit(zia_str, zia_voice_cred_shares, zia_voice_debt_shares)
+    zia_voice_cred_lumen = 47
+    zia_voice_debt_lumen = 41
+    yao_duty.add_voiceunit(zia_str, zia_voice_cred_lumen, zia_voice_debt_lumen)
     yao_duty.cashout()
 
     # WHEN
@@ -26,18 +26,18 @@ def test_get_debtors_roll_ReturnsObj():
     assert yao_roll == [zia_voiceunit]
 
 
-def test_get_debtors_roll_ReturnsObjIgnoresZero_voice_debt_shares():
+def test_get_debtors_roll_ReturnsObjIgnoresZero_voice_debt_lumen():
     # ESTABLISH
     yao_str = "Yao"
     yao_duty = beliefunit_shop(yao_str)
     zia_str = "Zia"
-    zia_voice_cred_shares = 47
-    zia_voice_debt_shares = 41
+    zia_voice_cred_lumen = 47
+    zia_voice_debt_lumen = 41
     wei_str = "Wei"
-    wei_voice_cred_shares = 67
-    wei_voice_debt_shares = 0
-    yao_duty.add_voiceunit(zia_str, zia_voice_cred_shares, zia_voice_debt_shares)
-    yao_duty.add_voiceunit(wei_str, wei_voice_cred_shares, wei_voice_debt_shares)
+    wei_voice_cred_lumen = 67
+    wei_voice_debt_lumen = 0
+    yao_duty.add_voiceunit(zia_str, zia_voice_cred_lumen, zia_voice_debt_lumen)
+    yao_duty.add_voiceunit(wei_str, wei_voice_cred_lumen, wei_voice_debt_lumen)
     yao_duty.cashout()
 
     # WHEN
@@ -53,13 +53,13 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
     yao_str = "Yao"
     yao_belief = beliefunit_shop(yao_str)
     zia_str = "Zia"
-    zia_voice_cred_shares = 47
-    zia_voice_debt_shares = 41
+    zia_voice_cred_lumen = 47
+    zia_voice_debt_lumen = 41
     sue_str = "Sue"
-    sue_voice_cred_shares = 57
-    sue_voice_debt_shares = 51
-    yao_belief.add_voiceunit(zia_str, zia_voice_cred_shares, zia_voice_debt_shares)
-    yao_belief.add_voiceunit(sue_str, sue_voice_cred_shares, sue_voice_debt_shares)
+    sue_voice_cred_lumen = 57
+    sue_voice_debt_lumen = 51
+    yao_belief.add_voiceunit(zia_str, zia_voice_cred_lumen, zia_voice_debt_lumen)
+    yao_belief.add_voiceunit(sue_str, sue_voice_cred_lumen, sue_voice_debt_lumen)
     yao_pool = 92
     yao_belief.set_voice_respect(yao_pool)
 
@@ -74,8 +74,8 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
 
     # ESTABLISH
     bob_str = "Bob"
-    bob_voice_debt_shares = 75
-    yao_belief.add_voiceunit(bob_str, 0, bob_voice_debt_shares)
+    bob_voice_debt_lumen = 75
+    yao_belief.add_voiceunit(bob_str, 0, bob_voice_debt_lumen)
     bob_voice = yao_belief.get_voice(bob_str)
 
     # WHEN
@@ -86,22 +86,22 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
     assert ordered_voices2 == [bob_voice, sue_voice, zia_voice]
 
 
-def test_get_ordered_debtors_roll_DoesNotReturnZero_voice_debt_shares():
+def test_get_ordered_debtors_roll_DoesNotReturnZero_voice_debt_lumen():
     # ESTABLISH
     yao_str = "Yao"
     yao_belief = beliefunit_shop(yao_str)
     zia_str = "Zia"
-    zia_voice_debt_shares = 41
+    zia_voice_debt_lumen = 41
     sue_str = "Sue"
-    sue_voice_debt_shares = 51
+    sue_voice_debt_lumen = 51
     yao_pool = 92
     yao_belief.set_voice_respect(yao_pool)
     bob_str = "Bob"
-    bob_voice_debt_shares = 75
+    bob_voice_debt_lumen = 75
     xio_str = "Xio"
-    yao_belief.add_voiceunit(zia_str, 0, zia_voice_debt_shares)
-    yao_belief.add_voiceunit(sue_str, 0, sue_voice_debt_shares)
-    yao_belief.add_voiceunit(bob_str, 0, bob_voice_debt_shares)
+    yao_belief.add_voiceunit(zia_str, 0, zia_voice_debt_lumen)
+    yao_belief.add_voiceunit(sue_str, 0, sue_voice_debt_lumen)
+    yao_belief.add_voiceunit(bob_str, 0, bob_voice_debt_lumen)
     yao_belief.add_voiceunit(yao_str, 0, 0)
     yao_belief.add_voiceunit(xio_str, 0, 0)
 

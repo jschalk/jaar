@@ -24,14 +24,14 @@ def test_get_dataframe_translateable_columns_ReturnsObj():
     assert get_dataframe_translateable_columns(x_dt) == set()
     x_dt = DataFrame(columns=[wx.voice_name])
     assert get_dataframe_translateable_columns(x_dt) == {wx.voice_name}
-    x_dt = DataFrame(columns=[wx.voice_name, wx.voice_cred_shares])
+    x_dt = DataFrame(columns=[wx.voice_name, wx.voice_cred_lumen])
     assert get_dataframe_translateable_columns(x_dt) == {wx.voice_name}
-    x_dt = DataFrame(columns=[wx.reason_context, wx.voice_name, wx.voice_cred_shares])
+    x_dt = DataFrame(columns=[wx.reason_context, wx.voice_name, wx.voice_cred_lumen])
     assert get_dataframe_translateable_columns(x_dt) == {
         wx.voice_name,
         wx.reason_context,
     }
-    x_dt = DataFrame(columns=["calc_swim", wx.voice_name, wx.voice_cred_shares])
+    x_dt = DataFrame(columns=["calc_swim", wx.voice_name, wx.voice_cred_lumen])
     assert get_dataframe_translateable_columns(x_dt) == {wx.voice_name}
 
 
@@ -103,7 +103,7 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_VoiceNam
     voice_name_mapunit.set_otx2inx(xio_otx, xio_inx)
     voice_name_mapunit.set_otx2inx(sue_otx, sue_inx)
     voice_name_mapunit.set_otx2inx(bob_otx, bob_inx)
-    otx_dt = DataFrame(columns=[wx.moment_label, wx.voice_name, wx.voice_cred_shares])
+    otx_dt = DataFrame(columns=[wx.moment_label, wx.voice_name, wx.voice_cred_lumen])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
     otx_dt.loc[2] = ["ZZ", bob_otx, 12]
@@ -119,7 +119,7 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_VoiceNam
     assert otx_dt.iloc[0][wx.voice_name] == zia_otx
     assert otx_dt.iloc[1][wx.voice_name] == sue_inx
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
-    inx_dt = DataFrame(columns=[wx.moment_label, wx.voice_name, wx.voice_cred_shares])
+    inx_dt = DataFrame(columns=[wx.moment_label, wx.voice_name, wx.voice_cred_lumen])
     inx_dt.loc[0] = ["ZZ", zia_otx, 12]
     inx_dt.loc[1] = ["ZZ", sue_inx, 12]
     inx_dt.loc[2] = ["ZZ", bob_inx, 12]
@@ -137,7 +137,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_VoiceName(
     sue_otx = "Sue"
     bob_otx = "Bob"
     zia_otx = "Zia"
-    otx_dt = DataFrame(columns=[wx.moment_label, wx.voice_name, wx.voice_cred_shares])
+    otx_dt = DataFrame(columns=[wx.moment_label, wx.voice_name, wx.voice_cred_lumen])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
     otx_dt.loc[2] = ["ZZ", bob_otx, 12]
@@ -153,7 +153,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_VoiceName(
     assert otx_dt.iloc[0][wx.voice_name] == zia_otx
     assert otx_dt.iloc[1][wx.voice_name] == sue_otx
     pandas_assert_frame_equal(otx_dt, old_otx_dt)
-    inx_dt = DataFrame(columns=[wx.moment_label, wx.voice_name, wx.voice_cred_shares])
+    inx_dt = DataFrame(columns=[wx.moment_label, wx.voice_name, wx.voice_cred_lumen])
     inx_dt.loc[0] = ["ZZ", zia_otx, 12]
     inx_dt.loc[1] = ["ZZ", sue_otx, 12]
     inx_dt.loc[2] = ["ZZ", bob_otx, 12]
@@ -179,7 +179,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_VoiceName(
     yao_translateunit.set_otx2inx(wx.NameTerm, xio_otx, xio_inx)
     yao_translateunit.set_otx2inx(wx.NameTerm, sue_otx, sue_inx)
     yao_translateunit.set_otx2inx(wx.NameTerm, bob_otx, bob_inx)
-    otx_dt = DataFrame(columns=[wx.moment_label, wx.voice_name, wx.voice_cred_shares])
+    otx_dt = DataFrame(columns=[wx.moment_label, wx.voice_name, wx.voice_cred_lumen])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
     otx_dt.loc[2] = ["ZZ", bob_otx, 12]
@@ -195,7 +195,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_VoiceName(
     assert otx_dt.iloc[0][wx.voice_name] == zia_otx
     assert otx_dt.iloc[1][wx.voice_name] == sue_inx
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
-    inx_dt = DataFrame(columns=[wx.moment_label, wx.voice_name, wx.voice_cred_shares])
+    inx_dt = DataFrame(columns=[wx.moment_label, wx.voice_name, wx.voice_cred_lumen])
     inx_dt.loc[0] = ["ZZ", zia_otx, 12]
     inx_dt.loc[1] = ["ZZ", sue_inx, 12]
     inx_dt.loc[2] = ["ZZ", bob_inx, 12]

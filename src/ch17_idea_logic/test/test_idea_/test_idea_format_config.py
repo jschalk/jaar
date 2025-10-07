@@ -72,8 +72,8 @@ def test_get_headers_list_ReturnsObj():
         wx.moment_label,
         wx.belief_name,
         wx.voice_name,
-        wx.voice_cred_shares,
-        wx.voice_debt_shares,
+        wx.voice_cred_lumen,
+        wx.voice_debt_lumen,
     ]
 
 
@@ -98,7 +98,7 @@ def test_get_sorted_headers_str_ReturnsObj():
     )
     # THEN
     expected_br00021_headers_str = (
-        "moment_label,belief_name,voice_name,voice_cred_shares,voice_debt_shares"
+        "moment_label,belief_name,voice_name,voice_cred_lumen,voice_debt_lumen"
     )
     assert br00021_headers == expected_br00021_headers_str
 
@@ -187,8 +187,8 @@ def test_get_idearef_obj_HasAttrs_idea_format_00021_belief_voiceunit_v0_0_0():
     assert len(format_00001_idearef._attributes) == 7
     assert format_00001_idearef._attributes == {
         wx.voice_name: {wx.otx_key: True},
-        wx.voice_cred_shares: {wx.otx_key: False},
-        wx.voice_debt_shares: {wx.otx_key: False},
+        wx.voice_cred_lumen: {wx.otx_key: False},
+        wx.voice_debt_lumen: {wx.otx_key: False},
         wx.event_int: {wx.otx_key: True},
         wx.face_name: {wx.otx_key: True},
         wx.moment_label: {wx.otx_key: True},
@@ -200,8 +200,8 @@ def test_get_idearef_obj_HasAttrs_idea_format_00021_belief_voiceunit_v0_0_0():
     assert headers_list[2] == wx.moment_label
     assert headers_list[3] == wx.belief_name
     assert headers_list[4] == wx.voice_name
-    assert headers_list[5] == wx.voice_cred_shares
-    assert headers_list[6] == wx.voice_debt_shares
+    assert headers_list[5] == wx.voice_cred_lumen
+    assert headers_list[6] == wx.voice_debt_lumen
 
 
 def test_get_idearef_obj_HasAttrs_idea_format_00020_belief_voice_membership_v0_0_0():
@@ -220,8 +220,8 @@ def test_get_idearef_obj_HasAttrs_idea_format_00020_belief_voice_membership_v0_0
     assert headers_list[3] == wx.belief_name
     assert headers_list[4] == wx.voice_name
     assert headers_list[5] == wx.group_title
-    assert headers_list[6] == wx.group_cred_shares
-    assert headers_list[7] == wx.group_debt_shares
+    assert headers_list[6] == wx.group_cred_lumen
+    assert headers_list[7] == wx.group_debt_lumen
 
 
 def test_get_idearef_obj_HasAttrs_idea_format_00013_planunit_v0_0_0():

@@ -12,9 +12,9 @@ def test_RiverRun_save_rivergrade_file_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_texas_hubunit()
     yao_str = "Yao"
-    yao_voice_cred_shares = 500
+    yao_voice_cred_lumen = 500
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_voice_cred_shares)
+    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_voice_cred_lumen)
     x_riverrun.set_tax_dues({yao_str: 1})
     x_riverrun.calc_metrics()
     print(f"{x_riverrun.hubunit.grade_path(yao_str)=}")
@@ -36,12 +36,12 @@ def test_RiverRun_save_rivergrade_files_SavesFile(env_dir_setup_cleanup):
     yao_str = "Yao"
     bob_str = "Bob"
     sue_str = "Sue"
-    yao_voice_cred_shares = 500
+    yao_voice_cred_lumen = 500
     x_riverrun = riverrun_shop(yao_hubunit)
     assert os_path_exists(x_riverrun.hubunit.grade_path(yao_str)) is False
     assert os_path_exists(x_riverrun.hubunit.grade_path(bob_str)) is False
     assert os_path_exists(x_riverrun.hubunit.grade_path(sue_str)) is False
-    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_voice_cred_shares)
+    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_voice_cred_lumen)
     x_riverrun.set_keep_credorledger(yao_str, bob_str, 1)
     x_riverrun.set_tax_dues({yao_str: 1, sue_str: 1})
     x_riverrun.calc_metrics()

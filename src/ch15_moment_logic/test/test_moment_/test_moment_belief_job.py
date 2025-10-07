@@ -35,7 +35,7 @@ def test_MomentUnit_rotate_job_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     assert sue_job.belief_name == example_belief.belief_name
 
 
-def test_MomentUnit_rotate_job_ReturnsObj_Scenario2_EmptyVoicesCause_inallocable_voice_debt_shares(
+def test_MomentUnit_rotate_job_ReturnsObj_Scenario2_EmptyVoicesCause_inallocable_voice_debt_lumen(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -62,8 +62,8 @@ def test_MomentUnit_rotate_job_ReturnsObj_Scenario2_EmptyVoicesCause_inallocable
     # THEN method should wipe over job belief
     assert rotated_sue_job.voice_exists(bob_str)
     assert rotated_sue_job.to_dict() != init_sue_job.to_dict()
-    assert init_sue_job.get_voice(bob_str).inallocable_voice_debt_shares == 0
-    assert rotated_sue_job.get_voice(bob_str).inallocable_voice_debt_shares == 1
+    assert init_sue_job.get_voice(bob_str).inallocable_voice_debt_lumen == 0
+    assert rotated_sue_job.get_voice(bob_str).inallocable_voice_debt_lumen == 1
 
 
 def a23_job(belief_name: str) -> BeliefUnit:

@@ -172,8 +172,8 @@ def test_BeliefUnit_set_voiceunit_groupunit_respect_ledgers_ResetVoiceUnitsAttrs
     zia_voiceunit.set_fund_agenda_ratio_give_take(
         fund_agenda_ratio_give_sum=zia_1,
         fund_agenda_ratio_take_sum=zia_2,
-        voiceunits_voice_cred_shares_sum=zia_3,
-        voiceunits_voice_debt_shares_sum=zia_4,
+        voiceunits_voice_cred_lumen_sum=zia_3,
+        voiceunits_voice_debt_lumen_sum=zia_4,
     )
     yao_1 = 0.2
     yao_2 = 0.5
@@ -182,8 +182,8 @@ def test_BeliefUnit_set_voiceunit_groupunit_respect_ledgers_ResetVoiceUnitsAttrs
     yao_voiceunit.set_fund_agenda_ratio_give_take(
         fund_agenda_ratio_give_sum=yao_1,
         fund_agenda_ratio_take_sum=yao_2,
-        voiceunits_voice_cred_shares_sum=yao_3,
-        voiceunits_voice_debt_shares_sum=yao_4,
+        voiceunits_voice_cred_lumen_sum=yao_3,
+        voiceunits_voice_debt_lumen_sum=yao_4,
     )
     assert zia_voiceunit.fund_agenda_ratio_give == 0.125
     assert zia_voiceunit.fund_agenda_ratio_take == 0.44

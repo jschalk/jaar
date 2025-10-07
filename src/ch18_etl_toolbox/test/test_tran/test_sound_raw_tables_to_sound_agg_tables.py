@@ -246,8 +246,8 @@ VALUES
 , {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
-, {wx.voice_cred_shares}
-, {wx.voice_debt_shares}
+, {wx.voice_cred_lumen}
+, {wx.voice_debt_lumen}
 , {wx.error_message}
 )"""
         values_clause = f"""
@@ -414,8 +414,8 @@ VALUES
 , {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
-, {wx.voice_cred_shares}
-, {wx.voice_debt_shares}
+, {wx.voice_cred_lumen}
+, {wx.voice_debt_lumen}
 , {wx.error_message}
 )"""
         values_clause = f"""

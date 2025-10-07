@@ -31,13 +31,13 @@ def example_yao_credorledger() -> dict[str, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_voice_cred_shares = 7
-    bob_voice_cred_shares = 3
-    zia_voice_cred_shares = 10
+    yao_voice_cred_lumen = 7
+    bob_voice_cred_lumen = 3
+    zia_voice_cred_lumen = 10
     yao_belief = beliefunit_shop(yao_str)
-    yao_belief.add_voiceunit(yao_str, yao_voice_cred_shares)
-    yao_belief.add_voiceunit(bob_str, bob_voice_cred_shares)
-    yao_belief.add_voiceunit(zia_str, zia_voice_cred_shares)
+    yao_belief.add_voiceunit(yao_str, yao_voice_cred_lumen)
+    yao_belief.add_voiceunit(bob_str, bob_voice_cred_lumen)
+    yao_belief.add_voiceunit(zia_str, zia_voice_cred_lumen)
     return get_credorledger(yao_belief)
 
 
@@ -45,13 +45,13 @@ def example_bob_credorledger() -> dict[str, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_voice_cred_shares = 1
-    bob_voice_cred_shares = 7
-    zia_voice_cred_shares = 42
+    yao_voice_cred_lumen = 1
+    bob_voice_cred_lumen = 7
+    zia_voice_cred_lumen = 42
     bob_belief = beliefunit_shop(bob_str)
-    bob_belief.add_voiceunit(yao_str, yao_voice_cred_shares)
-    bob_belief.add_voiceunit(bob_str, bob_voice_cred_shares)
-    bob_belief.add_voiceunit(zia_str, zia_voice_cred_shares)
+    bob_belief.add_voiceunit(yao_str, yao_voice_cred_lumen)
+    bob_belief.add_voiceunit(bob_str, bob_voice_cred_lumen)
+    bob_belief.add_voiceunit(zia_str, zia_voice_cred_lumen)
     return get_credorledger(bob_belief)
 
 
@@ -59,13 +59,13 @@ def example_zia_credorledger() -> dict[str, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_voice_cred_shares = 89
-    bob_voice_cred_shares = 150
-    zia_voice_cred_shares = 61
+    yao_voice_cred_lumen = 89
+    bob_voice_cred_lumen = 150
+    zia_voice_cred_lumen = 61
     zia_belief = beliefunit_shop(zia_str)
-    zia_belief.add_voiceunit(yao_str, yao_voice_cred_shares)
-    zia_belief.add_voiceunit(bob_str, bob_voice_cred_shares)
-    zia_belief.add_voiceunit(zia_str, zia_voice_cred_shares)
+    zia_belief.add_voiceunit(yao_str, yao_voice_cred_lumen)
+    zia_belief.add_voiceunit(bob_str, bob_voice_cred_lumen)
+    zia_belief.add_voiceunit(zia_str, zia_voice_cred_lumen)
     return get_credorledger(zia_belief)
 
 

@@ -43,12 +43,12 @@ def get_sue_beliefunit() -> BeliefUnit:
     sue_belief = beliefunit_shop("Sue", "accord23")
     sue_str = "Sue"
     bob_str = "Bob"
-    sue_cred_shares = 11
-    sue_debt_shares = 13
-    bob_cred_shares = 23
-    bob_debt_shares = 29
-    sue_belief.add_voiceunit(sue_str, sue_cred_shares, sue_debt_shares)
-    sue_belief.add_voiceunit(bob_str, bob_cred_shares, bob_debt_shares)
+    sue_cred_lumen = 11
+    sue_debt_lumen = 13
+    bob_cred_lumen = 23
+    bob_debt_lumen = 29
+    sue_belief.add_voiceunit(sue_str, sue_cred_lumen, sue_debt_lumen)
+    sue_belief.add_voiceunit(bob_str, bob_cred_lumen, bob_debt_lumen)
     sue_voice = sue_belief.get_voice(sue_str)
     swim_str = ";swimmers"
     team_str = ";Team Manager"

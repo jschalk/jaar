@@ -19,17 +19,17 @@ def test_make_beliefdelta_Arg_idea_format_00021_belief_voiceunit_v0_0_0():
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    sue_voice_cred_shares = 11
-    bob_voice_cred_shares = 13
-    yao_voice_cred_shares = 41
-    sue_voice_debt_shares = 23
-    bob_voice_debt_shares = 29
-    yao_voice_debt_shares = 37
+    sue_voice_cred_lumen = 11
+    bob_voice_cred_lumen = 13
+    yao_voice_cred_lumen = 41
+    sue_voice_debt_lumen = 23
+    bob_voice_debt_lumen = 29
+    yao_voice_debt_lumen = 37
     amy_moment_label = "amy56"
     sue_beliefunit = beliefunit_shop(sue_str, amy_moment_label)
-    sue_beliefunit.add_voiceunit(sue_str, sue_voice_cred_shares, sue_voice_debt_shares)
-    sue_beliefunit.add_voiceunit(bob_str, bob_voice_cred_shares, bob_voice_debt_shares)
-    sue_beliefunit.add_voiceunit(yao_str, yao_voice_cred_shares, yao_voice_debt_shares)
+    sue_beliefunit.add_voiceunit(sue_str, sue_voice_cred_lumen, sue_voice_debt_lumen)
+    sue_beliefunit.add_voiceunit(bob_str, bob_voice_cred_lumen, bob_voice_debt_lumen)
+    sue_beliefunit.add_voiceunit(yao_str, yao_voice_cred_lumen, yao_voice_debt_lumen)
     x_idea_name = idea_format_00021_belief_voiceunit_v0_0_0()
     voice_dataframe = create_idea_df(sue_beliefunit, x_idea_name)
     print(f"{voice_dataframe.columns=}")
@@ -42,13 +42,13 @@ def test_make_beliefdelta_Arg_idea_format_00021_belief_voiceunit_v0_0_0():
     assert sue_voice_beliefdelta
     sue_beliefatom = beliefatom_shop(wx.belief_voiceunit, wx.INSERT)
     sue_beliefatom.set_arg(wx.voice_name, sue_str)
-    sue_beliefatom.set_arg(wx.voice_cred_shares, sue_voice_cred_shares)
-    sue_beliefatom.set_arg(wx.voice_debt_shares, sue_voice_debt_shares)
+    sue_beliefatom.set_arg(wx.voice_cred_lumen, sue_voice_cred_lumen)
+    sue_beliefatom.set_arg(wx.voice_debt_lumen, sue_voice_debt_lumen)
     sue_beliefatom.set_atom_order()
     bob_beliefatom = beliefatom_shop(wx.belief_voiceunit, wx.INSERT)
     bob_beliefatom.set_arg(wx.voice_name, bob_str)
-    bob_beliefatom.set_arg(wx.voice_cred_shares, bob_voice_cred_shares)
-    bob_beliefatom.set_arg(wx.voice_debt_shares, bob_voice_debt_shares)
+    bob_beliefatom.set_arg(wx.voice_cred_lumen, bob_voice_cred_lumen)
+    bob_beliefatom.set_arg(wx.voice_debt_lumen, bob_voice_debt_lumen)
     bob_beliefatom.set_atom_order()
     # print(f"{sue_voice_beliefdelta.get_ordered_dict()=}")
     # print(
@@ -71,22 +71,22 @@ def test_make_beliefdelta_Arg_idea_format_00021_belief_voiceunit_v0_0_0():
 #     sue_beliefunit.add_voiceunit(bob_str)
 #     sue_beliefunit.add_voiceunit(yao_str)
 #     iowa_str = ";Iowa"
-#     sue_iowa_group_cred_shares = 37
-#     bob_iowa_group_cred_shares = 43
-#     yao_iowa_group_cred_shares = 51
-#     sue_iowa_group_debt_shares = 57
-#     bob_iowa_group_debt_shares = 61
-#     yao_iowa_group_debt_shares = 67
+#     sue_iowa_group_cred_lumen = 37
+#     bob_iowa_group_cred_lumen = 43
+#     yao_iowa_group_cred_lumen = 51
+#     sue_iowa_group_debt_lumen = 57
+#     bob_iowa_group_debt_lumen = 61
+#     yao_iowa_group_debt_lumen = 67
 #     ohio_str = ";Ohio"
-#     yao_ohio_group_cred_shares = 73
-#     yao_ohio_group_debt_shares = 67
+#     yao_ohio_group_cred_lumen = 73
+#     yao_ohio_group_debt_lumen = 67
 #     sue_voiceunit = sue_beliefunit.get_voice(sue_str)
 #     bob_voiceunit = sue_beliefunit.get_voice(bob_str)
 #     yao_voiceunit = sue_beliefunit.get_voice(yao_str)
-#     sue_voiceunit.add_membership(iowa_str, sue_iowa_group_cred_shares, sue_iowa_group_debt_shares)
-#     bob_voiceunit.add_membership(iowa_str, bob_iowa_group_cred_shares, bob_iowa_group_debt_shares)
-#     yao_voiceunit.add_membership(iowa_str, yao_iowa_group_cred_shares, yao_iowa_group_debt_shares)
-#     yao_voiceunit.add_membership(ohio_str, yao_ohio_group_cred_shares, yao_ohio_group_debt_shares)
+#     sue_voiceunit.add_membership(iowa_str, sue_iowa_group_cred_lumen, sue_iowa_group_debt_lumen)
+#     bob_voiceunit.add_membership(iowa_str, bob_iowa_group_cred_lumen, bob_iowa_group_debt_lumen)
+#     yao_voiceunit.add_membership(iowa_str, yao_iowa_group_cred_lumen, yao_iowa_group_debt_lumen)
+#     yao_voiceunit.add_membership(ohio_str, yao_ohio_group_cred_lumen, yao_ohio_group_debt_lumen)
 #     x_idea_name = idea_format_00020_belief_voice_membership_v0_0_0()
 #     membership_dataframe = create_idea_df(sue_beliefunit, x_idea_name)
 #     assert len(membership_dataframe) == 10
@@ -111,14 +111,14 @@ def test_make_beliefdelta_Arg_idea_format_00021_belief_voiceunit_v0_0_0():
 #     bob_iowa_beliefatom.set_arg(wx.voice_name, bob_str)
 #     yao_iowa_beliefatom.set_arg(wx.voice_name, yao_str)
 #     yao_ohio_beliefatom.set_arg(wx.voice_name, yao_str)
-#     sue_iowa_beliefatom.set_arg(wx.group_cred_shares, sue_iowa_group_cred_shares)
-#     bob_iowa_beliefatom.set_arg(wx.group_cred_shares, bob_iowa_group_cred_shares)
-#     yao_iowa_beliefatom.set_arg(wx.group_cred_shares, yao_iowa_group_cred_shares)
-#     yao_ohio_beliefatom.set_arg(wx.group_cred_shares, yao_ohio_group_cred_shares)
-#     sue_iowa_beliefatom.set_arg(wx.group_debt_shares, sue_iowa_group_debt_shares)
-#     bob_iowa_beliefatom.set_arg(wx.group_debt_shares, bob_iowa_group_debt_shares)
-#     yao_iowa_beliefatom.set_arg(wx.group_debt_shares, yao_iowa_group_debt_shares)
-#     yao_ohio_beliefatom.set_arg(wx.group_debt_shares, yao_ohio_group_debt_shares)
+#     sue_iowa_beliefatom.set_arg(wx.group_cred_lumen, sue_iowa_group_cred_lumen)
+#     bob_iowa_beliefatom.set_arg(wx.group_cred_lumen, bob_iowa_group_cred_lumen)
+#     yao_iowa_beliefatom.set_arg(wx.group_cred_lumen, yao_iowa_group_cred_lumen)
+#     yao_ohio_beliefatom.set_arg(wx.group_cred_lumen, yao_ohio_group_cred_lumen)
+#     sue_iowa_beliefatom.set_arg(wx.group_debt_lumen, sue_iowa_group_debt_lumen)
+#     bob_iowa_beliefatom.set_arg(wx.group_debt_lumen, bob_iowa_group_debt_lumen)
+#     yao_iowa_beliefatom.set_arg(wx.group_debt_lumen, yao_iowa_group_debt_lumen)
+#     yao_ohio_beliefatom.set_arg(wx.group_debt_lumen, yao_ohio_group_debt_lumen)
 #     bob_iowa_beliefatom.set_atom_order()
 #     # print(f"{membership_changunit.get_ordered_beliefatoms()[2]=}")
 #     # print(f"{sue_iowa_beliefatom=}")

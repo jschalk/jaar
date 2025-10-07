@@ -72,13 +72,13 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_beliefunit():
 def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voiceunit():
     # ESTABLISH
     zia_str = "Zia"
-    zia_voice_debt_shares = 51
+    zia_voice_debt_lumen = 51
     sue_belief = beliefunit_shop("Sue")
     sue_belief.add_voiceunit(zia_str)
 
     zia_atom = beliefatom_shop(wx.belief_voiceunit, wx.INSERT)
     zia_atom.set_arg(wx.voice_name, zia_str)
-    zia_atom.set_arg(wx.voice_debt_shares, zia_voice_debt_shares)
+    zia_atom.set_arg(wx.voice_debt_lumen, zia_voice_debt_lumen)
 
     # WHEN
     new_zia_beliefatom = sift_beliefatom(sue_belief, zia_atom)
@@ -88,14 +88,14 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voiceunit():
     assert new_zia_beliefatom.crud_str == wx.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
-    assert zia_jvalues == {wx.voice_debt_shares: 51}
+    assert zia_jvalues == {wx.voice_debt_lumen: 51}
 
 
 def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voice_membership():
     # ESTABLISH
     zia_str = "Zia"
     run_str = ";run"
-    zia_run_group_debt_shares = 76
+    zia_run_group_debt_lumen = 76
     sue_belief = beliefunit_shop("Sue")
     sue_belief.add_voiceunit(zia_str)
     sue_belief.get_voice(zia_str).add_membership(run_str)
@@ -103,7 +103,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voice_membership():
     zia_atom = beliefatom_shop(wx.belief_voice_membership, wx.INSERT)
     zia_atom.set_arg(wx.voice_name, zia_str)
     zia_atom.set_arg(wx.group_title, run_str)
-    zia_atom.set_arg(wx.group_debt_shares, zia_run_group_debt_shares)
+    zia_atom.set_arg(wx.group_debt_lumen, zia_run_group_debt_lumen)
 
     # WHEN
     new_zia_beliefatom = sift_beliefatom(sue_belief, zia_atom)
@@ -113,7 +113,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voice_membership():
     assert new_zia_beliefatom.crud_str == wx.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
-    assert zia_jvalues == {wx.group_debt_shares: zia_run_group_debt_shares}
+    assert zia_jvalues == {wx.group_debt_lumen: zia_run_group_debt_lumen}
 
 
 def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_planunit():

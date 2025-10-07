@@ -265,7 +265,7 @@ def test_BeliefUnit_get_json_ReturnsJSON_BigExample():
 
     anna_str = "Anna"
     anna_voiceunit = yao_belief.get_voice(anna_str)
-    assert anna_voiceunit.get_membership(";Family").group_cred_shares == 6.2
+    assert anna_voiceunit.get_membership(";Family").group_cred_lumen == 6.2
     assert yao_belief.voices is not None
     assert len(yao_belief.voices) == 22
 
@@ -300,7 +300,7 @@ def test_get_beliefunit_from_json_ReturnsObjSimpleExample():
 
     sue_str = "Sue"
     zia_belief.add_voiceunit(
-        voice_name=sue_str, voice_cred_shares=199, voice_debt_shares=199
+        voice_name=sue_str, voice_cred_lumen=199, voice_debt_lumen=199
     )
     xio_str = "Xio"
     zia_belief.add_voiceunit(voice_name=xio_str)

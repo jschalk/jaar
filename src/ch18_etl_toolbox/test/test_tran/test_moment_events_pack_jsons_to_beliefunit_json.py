@@ -41,13 +41,13 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_belief_jso
     a23_bob_e7_pack = packunit_shop(bob_inx, None, a23_str, event_int=event7)
     blrpern_dimen = wx.belief_voiceunit
     bob_jkeys = {wx.voice_name: bob_inx}
-    bob_jvalues = {wx.voice_cred_shares: credit77, wx.voice_debt_shares: None}
+    bob_jvalues = {wx.voice_cred_lumen: credit77, wx.voice_debt_lumen: None}
     yao_jkeys = {wx.voice_name: yao_inx}
-    yao_jvalues = {wx.voice_cred_shares: credit44, wx.voice_debt_shares: None}
+    yao_jvalues = {wx.voice_cred_lumen: credit44, wx.voice_debt_lumen: None}
     a23_bob_e3_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
     a23_bob_e3_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, yao_jkeys, yao_jvalues)
     sue_jkeys = {wx.voice_name: sue_inx}
-    sue_jvalues = {wx.voice_cred_shares: credit88, wx.voice_debt_shares: None}
+    sue_jvalues = {wx.voice_cred_lumen: credit88, wx.voice_debt_lumen: None}
     a23_bob_e7_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
     a23_bob_e7_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, sue_jkeys, sue_jvalues)
     e3_all_pack_path = create_event_all_pack_path(
@@ -107,13 +107,13 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_expressed_
     a23_bob_e7_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)
     blrpern_dimen = wx.belief_voiceunit
     bob_jkeys = {wx.voice_name: bob_inx}
-    bob_jvalues = {wx.voice_cred_shares: credit77}
+    bob_jvalues = {wx.voice_cred_lumen: credit77}
     yao_jkeys = {wx.voice_name: yao_inx}
-    yao_jvalues = {wx.voice_cred_shares: credit44}
+    yao_jvalues = {wx.voice_cred_lumen: credit44}
     a23_bob_e3_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
     a23_bob_e3_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, yao_jkeys, yao_jvalues)
     sue_jkeys = {wx.voice_name: sue_inx}
-    sue_jvalues = {wx.voice_cred_shares: credit88}
+    sue_jvalues = {wx.voice_cred_lumen: credit88}
     a23_bob_e7_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
     a23_bob_e7_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, sue_jkeys, sue_jvalues)
     a23_bob_e3_all_pack_path = create_event_all_pack_path(
