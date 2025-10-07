@@ -5,9 +5,9 @@ def get_keywords_filename(chapter_desc_prefix: str) -> str:
     return f"{chapter_desc_prefix}_keywords.py"
 
 
-def create_keywords_class_file_path(chapter_dir: str, ch_num: int) -> str:
+def create_keywords_class_file_path(chapter_dir: str, chapter_prefix: str) -> str:
     """Returns path: src\\ref\\chXX_keywords.py"""
 
     # ref_dir = create_path(chapter_dir, "_ref")
-    keywords_filename = get_keywords_filename(f"ch{ch_num:02}")
+    keywords_filename = get_keywords_filename(chapter_prefix)
     return create_path(chapter_dir, keywords_filename)

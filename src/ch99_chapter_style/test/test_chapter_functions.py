@@ -169,8 +169,7 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
     # all_file_count = 0
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
-        chapter_num = int(get_chapter_desc_str_number(chapter_desc))
-        allowed_chapter_keywords = cumlative_ch_keywords_dict.get(chapter_num)
+        allowed_chapter_keywords = cumlative_ch_keywords_dict.get(chapter_prefix)
         not_allowed_keywords = all_keywords_set.difference(allowed_chapter_keywords)
         not_allowed_keywords = not_allowed_keywords.difference(excluded_strs)
         # print(f"{chapter_prefix} {len(not_allowed_keywords)=}")
@@ -189,9 +188,9 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
                 assert keyword not in file_str, notallowed_keyword_failure_str
             # print(f"{file_path=}")
             excessive_imports_str = f"{file_path} has too many Keywords class imports"
-            ch_class_name = f"Ch{chapter_num:02}Keywords"
+            ch_class_name = f"C{chapter_prefix[1:]}Keywords"
             is_doc_builder_file = "doc_builder.py" in file_path
-            if file_path.find(f"test_ch{chapter_num:02}_keywords.py") == -1:
+            if file_path.find(f"test_{chapter_prefix}_keywords.py") == -1:
                 assert file_str.count("Keywords") <= 1, excessive_imports_str
             elif not is_doc_builder_file:
                 assert file_str.count(ch_class_name) in {0, 4}, ""
@@ -199,7 +198,7 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
             if "Keywords" in file_str and not is_doc_builder_file:
                 assert ch_class_name in file_str, enum_x
 
-            is_ref_keywords_file = f"\\ch{chapter_num:02}_keywords.py" in file_path
+            is_ref_keywords_file = f"\\{chapter_prefix}_keywords.py" in file_path
             if is_ref_keywords_file:
                 # print(f"{file_path=}")
                 assert file_str.count("keywords import") == 0, "No imports"
@@ -259,15 +258,13 @@ def test_Chapters_KeywordEnumClassesAreCorrectlyTested():
     chXX_keyword_classes = get_chXX_keyword_classes(cumlative_ch_keywords_dict)
     chapter_num_descs = get_chapter_num_descs()
 
-    for chapter_num, ExpectedEnumClass in chXX_keyword_classes.items():
-        chapter_desc = chapter_num_descs.get(chapter_num)
-        chapter_prefix = get_chapter_desc_prefix(chapter_desc)
+    for chapter_prefix, ExpectedEnumClass in chXX_keyword_classes.items():
         chapter_ref_keywords_path = f"src.ref.{chapter_prefix}_keywords"
         print(f"{chapter_ref_keywords_path=}")
 
         # dynamically import the module
         mod = importlib_import_module(chapter_ref_keywords_path)
-        enum_class_name = f"Ch{chapter_num:02}Keywords"
+        enum_class_name = f"C{chapter_prefix[1:]}Keywords"
         # try:
         #     getattr(mod, enum_class_name)
         # except Exception:

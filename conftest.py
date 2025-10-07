@@ -1,6 +1,6 @@
 import pytest
 from src.ch98_docs_builder.doc_builder import (
-    get_chapter_desc_str_number,
+    get_chapter_desc_prefix,
     get_chapter_descs,
     get_cumlative_ch_keywords_dict,
     get_keywords_by_chapter,
@@ -46,6 +46,6 @@ def save_all_keyword_enum_class_python_files():
     cumlative_keywords = get_cumlative_ch_keywords_dict(keywords_by_chapter)
     dest_dir = "src/ref"
     for chapter_desc, chapter_dir in get_chapter_descs().items():
-        chapter_num = int(get_chapter_desc_str_number(chapter_desc))
-        chapter_keywords = cumlative_keywords.get(chapter_num)
-        save_keywords_enum_class_file(dest_dir, chapter_num, chapter_keywords)
+        chapter_prefix = get_chapter_desc_prefix(chapter_desc)
+        chapter_keywords = cumlative_keywords.get(chapter_prefix)
+        save_keywords_enum_class_file(dest_dir, chapter_prefix, chapter_keywords)

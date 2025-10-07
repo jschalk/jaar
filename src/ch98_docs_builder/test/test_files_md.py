@@ -23,7 +23,7 @@ def test_get_keywords_src_config_ReturnsObj():
     assert keywords_config
     assert keywords_config.get("fund_pool")
     for keyword, ref_dict in keywords_config.items():
-        assert set(ref_dict.keys()) == {"chapter_num"}
+        assert set(ref_dict.keys()) == {"init_chapter"}
         print(f"{keyword=} {ref_dict=}")
 
 

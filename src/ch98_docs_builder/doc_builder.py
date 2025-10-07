@@ -25,9 +25,11 @@ def get_keywords_src_config() -> dict[str, dict]:
 
 
 def get_keywords_by_chapter(keywords_dict: dict[str, dict[str]]) -> dict:
-    chapters_keywords = {ch_num: set() for ch_num in get_chapter_num_descs().keys()}
+    chapters_keywords = {
+        get_chapter_desc_prefix(chxx): set() for chxx in get_chapter_descs().keys()
+    }
     for x_keyword, ref_dict in keywords_dict.items():
-        keyworld_init_chapter_num = ref_dict.get("chapter_num")
+        keyworld_init_chapter_num = ref_dict.get("init_chapter")
         chapter_set = chapters_keywords.get(keyworld_init_chapter_num)
         chapter_set.add(x_keyword)
     return chapters_keywords
@@ -46,11 +48,11 @@ def get_cumlative_ch_keywords_dict(keywords_by_chapter: dict[int, set[str]]) -> 
 def get_chXX_keyword_classes(cumlative_ch_keywords_dict: dict) -> dict[int,]:
     chXX_keyword_classes = {}
     word_str = "word"
-    for chapter_num in sorted(list(cumlative_ch_keywords_dict.keys())):
-        ch_keywords = cumlative_ch_keywords_dict.get(chapter_num)
-        class_name = f"Ch{chapter_num:02}Key{word_str}s"
+    for chapter_prefix in sorted(list(cumlative_ch_keywords_dict.keys())):
+        ch_keywords = cumlative_ch_keywords_dict.get(chapter_prefix)
+        class_name = f"C{chapter_prefix[1:]}Key{word_str}s"
         ExpectedClass = Enum(class_name, {t: t for t in ch_keywords}, type=str)
-        chXX_keyword_classes[chapter_num] = ExpectedClass
+        chXX_keyword_classes[chapter_prefix] = ExpectedClass
     return chXX_keyword_classes
 
 
@@ -70,11 +72,11 @@ def get_chapter_descs() -> dict[str, str]:
 def get_chapter_num_descs() -> dict[int, str]:
     """Returns dict [Chapter_num as Int, chapter_desc]"""
     chapter_descs = get_chapter_descs()
-    chapter_num_descs = {}
+    chapter_prefix_descs = {}
     for chapter_desc in chapter_descs:
-        chapter_num = int(get_chapter_desc_str_number(chapter_desc))
-        chapter_num_descs[chapter_num] = chapter_desc
-    return chapter_num_descs
+        chapter_prefix = get_chapter_desc_prefix(chapter_desc)
+        chapter_prefix_descs[chapter_prefix] = chapter_desc
+    return chapter_prefix_descs
 
 
 def get_function_names_from_file(
@@ -123,8 +125,8 @@ def get_keywords_by_chapter_md() -> str:
     keywords_src_config = get_keywords_src_config()
     keywords_by_chapter = get_keywords_by_chapter(keywords_src_config)
     for chapter_desc in get_chapter_descs().keys():
-        chapter_num = int(get_chapter_desc_str_number(chapter_desc))
-        chapter_keywords = keywords_by_chapter.get(chapter_num)
+        chapter_prefix = get_chapter_desc_prefix(chapter_desc)
+        chapter_keywords = keywords_by_chapter.get(chapter_prefix)
         chapter_keywords = sorted(list(chapter_keywords))
         _line = f"- {chapter_desc}: " + ", ".join(chapter_keywords)
         func_lines.append(_line)
