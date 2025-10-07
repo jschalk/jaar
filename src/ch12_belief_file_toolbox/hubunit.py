@@ -304,17 +304,6 @@ class HubUnit:
         save_gut_file(self.moment_mstr_dir, gut_belief)
         return gut_belief
 
-    def grade_path(self, belief_name: BeliefName) -> str:
-        "Returns path: grades_path/belief_name.json"
-        return create_keep_grade_path(
-            moment_mstr_dir=self.moment_mstr_dir,
-            belief_name=self.belief_name,
-            moment_label=self.moment_label,
-            keep_rope=self.keep_rope,
-            knot=self.knot,
-            grade_belief_name=belief_name,
-        )
-
     def get_visions_path_filenames_list(self) -> list[str]:
         keep_visions_path = create_keep_visions_path(
             self.moment_mstr_dir,

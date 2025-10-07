@@ -8,7 +8,7 @@ from src.ch01_data_toolbox.dict_toolbox import (
 from src.ch01_data_toolbox.file_toolbox import save_file
 from src.ch03_allot_toolbox.allot import allot_scale
 from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, VoiceName
-from src.ch12_belief_file_toolbox.hubunit import HubUnit
+from src.ch12_belief_file_toolbox.hubunit import HubUnit, create_keep_grade_path
 from src.ch14_keep_logic.rivercycle import (
     RiverGrade,
     create_init_rivercycle,
@@ -214,7 +214,14 @@ class RiverRun:
 
     def _save_rivergrade_file(self, voice_name: VoiceName):
         rivergrade = self.get_rivergrade(voice_name)
-        grade_path = self.hubunit.grade_path(voice_name)
+        grade_path = create_keep_grade_path(
+            moment_mstr_dir=self.hubunit.moment_mstr_dir,
+            belief_name=self.hubunit.belief_name,
+            moment_label=self.hubunit.moment_label,
+            keep_rope=self.hubunit.keep_rope,
+            knot=self.hubunit.knot,
+            grade_belief_name=voice_name,
+        )
         save_file(grade_path, None, rivergrade.get_json())
 
     def save_rivergrade_files(self):
