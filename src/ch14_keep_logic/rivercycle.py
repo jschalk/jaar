@@ -12,11 +12,12 @@ from src.ch03_allot_toolbox.allot import (
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch11_bud_logic._ref.ch11_semantic_types import (
     BeliefName,
+    MomentLabel,
     MoneyGrain,
     MoneyNum,
+    RopeTerm,
     VoiceName,
 )
-from src.ch12_belief_file_toolbox.hubunit import HubUnit
 
 
 def get_credorledger(x_belief: BeliefUnit) -> dict[VoiceName, float]:
@@ -146,7 +147,9 @@ def create_next_rivercycle(
 
 @dataclass
 class RiverGrade:
-    hubunit: HubUnit = None
+    moment_label: MomentLabel = None
+    belief_name: BeliefName = None
+    keep_rope: RopeTerm = None
     voice_name: VoiceName = None
     number: int = None
     tax_bill_amount: float = None
@@ -180,9 +183,9 @@ class RiverGrade:
 
     def to_dict(self) -> dict:
         return {
-            "moment_label": self.hubunit.moment_label,
-            "healer_name": self.hubunit.belief_name,
-            "keep_rope": self.hubunit.keep_rope,
+            "moment_label": self.moment_label,
+            "healer_name": self.belief_name,
+            "keep_rope": self.keep_rope,
             "tax_bill_amount": self.tax_bill_amount,
             "grant_amount": self.grant_amount,
             "debtor_rank_num": self.debtor_rank_num,
@@ -204,14 +207,18 @@ class RiverGrade:
 
 
 def rivergrade_shop(
-    hubunit: HubUnit,
+    moment_label: MomentLabel,
+    belief_name: BeliefName,
+    keep_rope: RopeTerm,
     voice_name: VoiceName,
     number: float = None,
     debtor_count: int = None,
     credor_count: int = None,
 ):
     return RiverGrade(
-        hubunit=hubunit,
+        moment_label=moment_label,
+        belief_name=belief_name,
+        keep_rope=keep_rope,
         voice_name=voice_name,
         number=get_0_if_None(number),
         debtor_count=debtor_count,

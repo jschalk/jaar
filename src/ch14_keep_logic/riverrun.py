@@ -157,7 +157,13 @@ class RiverRun:
         return get_0_if_None(self._grants.get(voice_name))
 
     def set_initial_rivergrade(self, voice_name: VoiceName):
-        x_rivergrade = rivergrade_shop(self.hubunit, voice_name, self.number)
+        x_rivergrade = rivergrade_shop(
+            self.hubunit.moment_label,
+            self.hubunit.belief_name,
+            self.hubunit.keep_rope,
+            voice_name,
+            self.number,
+        )
         x_rivergrade.debtor_count = self._debtor_count
         x_rivergrade.credor_count = self._credor_count
         x_rivergrade.grant_amount = self._get_voice_grant(voice_name)

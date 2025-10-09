@@ -20,7 +20,13 @@ def test_RiverRun_set_initial_rivergrade_SetsAttr():
 
     # THEN
     bob_rivergrade = rivergrade_shop(
-        yao_hubunit, bob_str, yao_number, x_debtor_count, x_credor_count
+        yao_hubunit.moment_label,
+        yao_hubunit.belief_name,
+        yao_hubunit.keep_rope,
+        bob_str,
+        yao_number,
+        x_debtor_count,
+        x_credor_count,
     )
     bob_rivergrade.grant_amount = 0
     assert yao_riverrun._rivergrades.get(bob_str) is not None

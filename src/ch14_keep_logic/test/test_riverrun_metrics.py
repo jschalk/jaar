@@ -21,7 +21,9 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario01():
     assert x_riverrun._credor_count == 1
     yao_rivergrade = x_riverrun.get_rivergrade(yao_str)
     assert yao_rivergrade is not None
-    assert yao_rivergrade.hubunit == yao_hubunit
+    assert yao_rivergrade.moment_label == yao_hubunit.moment_label
+    assert yao_rivergrade.belief_name == yao_hubunit.belief_name
+    assert yao_rivergrade.keep_rope == yao_hubunit.keep_rope
     assert yao_rivergrade.number == 0
     assert yao_rivergrade.grant_amount == yao_hubunit.keep_point_magnitude
     assert yao_rivergrade.tax_bill_amount == 0
@@ -64,7 +66,9 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario02():
     assert x_riverrun._credor_count == 1
     yao_rivergrade = x_riverrun.get_rivergrade(yao_str)
     assert yao_rivergrade is not None
-    assert yao_rivergrade.hubunit == yao_hubunit
+    assert yao_rivergrade.moment_label == yao_hubunit.moment_label
+    assert yao_rivergrade.belief_name == yao_hubunit.belief_name
+    assert yao_rivergrade.keep_rope == yao_hubunit.keep_rope
     assert yao_rivergrade.number == 0
     assert yao_rivergrade.grant_amount == yao_hubunit.keep_point_magnitude
     assert yao_rivergrade.tax_bill_amount == 0
@@ -112,7 +116,9 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario03():
     assert x_riverrun._credor_count == 1
     yao_rivergrade = x_riverrun.get_rivergrade(yao_str)
     assert yao_rivergrade is not None
-    assert yao_rivergrade.hubunit == yao_hubunit
+    assert yao_rivergrade.moment_label == yao_hubunit.moment_label
+    assert yao_rivergrade.belief_name == yao_hubunit.belief_name
+    assert yao_rivergrade.keep_rope == yao_hubunit.keep_rope
     assert yao_rivergrade.number == 0
     assert yao_rivergrade.grant_amount == yao_hubunit.keep_point_magnitude
     assert yao_rivergrade.tax_bill_amount == 0
@@ -203,7 +209,9 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario05():
     assert x_riverrun._credor_count == 1
     yao_rivergrade = x_riverrun.get_rivergrade(yao_str)
     assert yao_rivergrade is not None
-    assert yao_rivergrade.hubunit == yao_hubunit
+    assert yao_rivergrade.moment_label == yao_hubunit.moment_label
+    assert yao_rivergrade.belief_name == yao_hubunit.belief_name
+    assert yao_rivergrade.keep_rope == yao_hubunit.keep_rope
     assert yao_rivergrade.number == 0
     assert yao_rivergrade.grant_amount == keep_money_amount
     assert yao_rivergrade.tax_bill_amount == keep_money_amount

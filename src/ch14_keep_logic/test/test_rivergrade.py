@@ -1,5 +1,5 @@
 from src.ch14_keep_logic.rivercycle import RiverGrade, rivergrade_shop
-from src.ch14_keep_logic.test._util.ch14_examples import example_yao_hubunit
+from src.ch14_keep_logic.test._util.ch14_examples import temp_moment_label
 from src.ref.ch14_keywords import Ch14Keywords as wx
 
 
@@ -9,9 +9,11 @@ def test_RiverGrade_Exists():
 
     # THEN
     #: Healer gut get_voice._voice_debt_lumen (SELECT tax_due_amount FROM voice WHERE voice_name = bob_str)
-    assert x_rivergrade.hubunit is None
-    assert x_rivergrade.voice_name is None
-    assert x_rivergrade.number is None
+    assert not x_rivergrade.moment_label
+    assert not x_rivergrade.belief_name
+    assert not x_rivergrade.keep_rope
+    assert not x_rivergrade.voice_name
+    assert not x_rivergrade.number
     #: Healer gut get_voice._voice_debt_lumen (SELECT tax_due_amount FROM voice WHERE voice_name = bob_str)
     assert x_rivergrade.tax_bill_amount is None
     #: Healer gut get_voice._voice_cred_lumen (SELECT grant_amount FROM voice WHERE voice_name = bob_str)
@@ -40,66 +42,118 @@ def test_RiverGrade_Exists():
     assert x_rivergrade.rewards_count is None
     # SELECT SUM(money_amount) FROM rewards WHERE dst_voice_name = bob_str
     assert x_rivergrade.rewards_magnitude is None
+    assert set(x_rivergrade.__dict__.keys()) == {
+        "moment_label",
+        "belief_name",
+        "keep_rope",
+        "voice_name",
+        "number",
+        "tax_bill_amount",
+        "grant_amount",
+        "debtor_rank_num",
+        "credor_rank_num",
+        "tax_paid_amount",
+        "tax_paid_bool",
+        "tax_paid_rank_num",
+        "tax_paid_rank_percent",
+        "debtor_count",
+        "credor_count",
+        "debtor_rank_percent",
+        "credor_rank_percent",
+        "rewards_count",
+        "rewards_magnitude",
+    }
+    # TODO replace above assert with below
+    # assert set(x_rivergrade.__dict__.keys()) == {
+    #     wx.moment_label,
+    #     wx.belief_name,
+    #     wx.keep_rope,
+    #     wx.voice_name,
+    #     wx.number,
+    #     wx.tax_bill_amount,
+    #     wx.grant_amount,
+    #     wx.debtor_rank_num,
+    #     wx.credor_rank_num,
+    #     wx.tax_paid_amount,
+    #     wx.tax_paid_bool,
+    #     wx.tax_paid_rank_num,
+    #     wx.tax_paid_rank_percent,
+    #     wx.debtor_count,
+    #     wx.credor_count,
+    #     wx.debtor_rank_percent,
+    #     wx.credor_rank_percent,
+    #     wx.rewards_count,
+    #     wx.rewards_magnitude,
+    # }
 
 
 def test_rivergrade_shop_ReturnsObjWithArg():
     # ESTABLISH
     bob_str = "Bob"
-    yao_hubunit = example_yao_hubunit()
+    yao_str = "Yao"
+    a23_str = temp_moment_label()
+    x_keep_rope = None
     ten_int = 10
     x_debtor_count = 7
     x_credor_count = 9
 
     # WHEN
     x_rivergrade = rivergrade_shop(
-        yao_hubunit, bob_str, ten_int, x_debtor_count, x_credor_count
+        a23_str, yao_str, x_keep_rope, bob_str, ten_int, x_debtor_count, x_credor_count
     )
 
     # THEN
-    assert x_rivergrade.hubunit == yao_hubunit
+    assert x_rivergrade.moment_label == a23_str
+    assert x_rivergrade.belief_name == yao_str
+    assert x_rivergrade.keep_rope == x_keep_rope
     assert x_rivergrade.voice_name == bob_str
     assert x_rivergrade.number == ten_int
-    assert x_rivergrade.tax_bill_amount is None
-    assert x_rivergrade.grant_amount is None
-    assert x_rivergrade.debtor_rank_num is None
-    assert x_rivergrade.credor_rank_num is None
-    assert x_rivergrade.tax_paid_amount is None
-    assert x_rivergrade.tax_paid_bool is None
-    assert x_rivergrade.tax_paid_rank_num is None
-    assert x_rivergrade.tax_paid_rank_percent is None
+    assert not x_rivergrade.tax_bill_amount
+    assert not x_rivergrade.grant_amount
+    assert not x_rivergrade.debtor_rank_num
+    assert not x_rivergrade.credor_rank_num
+    assert not x_rivergrade.tax_paid_amount
+    assert not x_rivergrade.tax_paid_bool
+    assert not x_rivergrade.tax_paid_rank_num
+    assert not x_rivergrade.tax_paid_rank_percent
     assert x_rivergrade.debtor_count == x_debtor_count
     assert x_rivergrade.credor_count == x_credor_count
-    assert x_rivergrade.debtor_rank_percent is None
-    assert x_rivergrade.credor_rank_percent is None
-    assert x_rivergrade.rewards_count is None
-    assert x_rivergrade.rewards_magnitude is None
+    assert not x_rivergrade.debtor_rank_percent
+    assert not x_rivergrade.credor_rank_percent
+    assert not x_rivergrade.rewards_count
+    assert not x_rivergrade.rewards_magnitude
 
 
 def test_rivergrade_shop_ReturnsObjWithoutArgs():
     # ESTABLISH
     bob_str = "Bob"
-    yao_hubunit = example_yao_hubunit()
+    yao_str = "Yao"
+    a23_str = temp_moment_label()
+    x_keep_rope = None
 
     # WHEN
-    x_rivergrade = rivergrade_shop(yao_hubunit, bob_str)
+    x_rivergrade = rivergrade_shop(a23_str, yao_str, x_keep_rope, bob_str)
 
     # THEN
-    assert x_rivergrade.hubunit == yao_hubunit
+    assert x_rivergrade.moment_label == a23_str
+    assert x_rivergrade.belief_name == yao_str
+    assert x_rivergrade.keep_rope == x_keep_rope
+    assert x_rivergrade.voice_name == bob_str
     assert x_rivergrade.number == 0
-    assert x_rivergrade.tax_bill_amount is None
-    assert x_rivergrade.grant_amount is None
-    assert x_rivergrade.debtor_rank_num is None
-    assert x_rivergrade.credor_rank_num is None
-    assert x_rivergrade.tax_paid_amount is None
-    assert x_rivergrade.tax_paid_bool is None
-    assert x_rivergrade.tax_paid_rank_num is None
-    assert x_rivergrade.tax_paid_rank_percent is None
-    assert x_rivergrade.debtor_count is None
-    assert x_rivergrade.credor_count is None
-    assert x_rivergrade.debtor_rank_percent is None
-    assert x_rivergrade.credor_rank_percent is None
-    assert x_rivergrade.rewards_count is None
-    assert x_rivergrade.rewards_magnitude is None
+    assert not x_rivergrade.tax_bill_amount
+    assert not x_rivergrade.grant_amount
+    assert not x_rivergrade.debtor_rank_num
+    assert not x_rivergrade.credor_rank_num
+    assert not x_rivergrade.tax_paid_amount
+    assert not x_rivergrade.tax_paid_bool
+    assert not x_rivergrade.tax_paid_rank_num
+    assert not x_rivergrade.tax_paid_rank_percent
+    assert not x_rivergrade.debtor_count
+    assert not x_rivergrade.credor_count
+    assert not x_rivergrade.debtor_rank_percent
+    assert not x_rivergrade.credor_rank_percent
+    assert not x_rivergrade.rewards_count
+    assert not x_rivergrade.rewards_magnitude
 
 
 def test_RiverGrade_set_tax_due_amount_SetsAttrs():
@@ -135,7 +189,9 @@ def test_RiverGrade_set_tax_due_amount_SetsAttrs():
 def test_RiverGrade_to_dict_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
-    yao_hubunit = example_yao_hubunit()
+    yao_str = "Yao"
+    a23_str = temp_moment_label()
+    x_keep_rope = None
     ten_int = 10
     x_tax_bill_amount = 90
     x_grant_amount = 91
@@ -152,7 +208,7 @@ def test_RiverGrade_to_dict_ReturnsObj():
     x_rewards_count = 108
     x_rewards_magnitude = 109
     x_rivergrade = rivergrade_shop(
-        yao_hubunit, bob_str, ten_int, x_debtor_count, x_credor_count
+        a23_str, yao_str, x_keep_rope, bob_str, ten_int, x_debtor_count, x_credor_count
     )
     x_rivergrade.tax_bill_amount = x_tax_bill_amount
     x_rivergrade.grant_amount = x_grant_amount
@@ -173,9 +229,9 @@ def test_RiverGrade_to_dict_ReturnsObj():
     rivergrade_dict = x_rivergrade.to_dict()
 
     # THEN
-    assert rivergrade_dict.get(wx.moment_label) == yao_hubunit.moment_label
-    assert rivergrade_dict.get("healer_name") == yao_hubunit.belief_name
-    assert rivergrade_dict.get("keep_rope") == yao_hubunit.keep_rope
+    assert rivergrade_dict.get(wx.moment_label) == a23_str
+    assert rivergrade_dict.get(wx.healer_name) == yao_str
+    assert rivergrade_dict.get("keep_rope") == x_keep_rope
     assert rivergrade_dict.get("tax_bill_amount") == x_tax_bill_amount
     assert rivergrade_dict.get("grant_amount") == x_grant_amount
     assert rivergrade_dict.get("debtor_rank_num") == x_debtor_rank_num
@@ -195,12 +251,15 @@ def test_RiverGrade_to_dict_ReturnsObj():
 def test_RiverGrade_get_json_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
-    yao_hubunit = example_yao_hubunit()
+    yao_str = "Yao"
+    a23_str = temp_moment_label()
+    x_keep_rope = None
     ten_int = 10
     x_debtor_count = 101
     x_credor_count = 103
+
     x_rivergrade = rivergrade_shop(
-        yao_hubunit, bob_str, ten_int, x_debtor_count, x_credor_count
+        a23_str, yao_str, x_keep_rope, bob_str, ten_int, x_debtor_count, x_credor_count
     )
 
     # WHEN
