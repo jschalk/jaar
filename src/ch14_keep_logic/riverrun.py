@@ -8,7 +8,8 @@ from src.ch01_data_toolbox.dict_toolbox import (
 from src.ch01_data_toolbox.file_toolbox import save_file
 from src.ch03_allot_toolbox.allot import allot_scale
 from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, VoiceName
-from src.ch12_belief_file_toolbox.hubunit import HubUnit, create_keep_grade_path
+from src.ch12_belief_file_toolbox.ch12_path import create_keep_grade_path
+from src.ch12_belief_file_toolbox.hubunit import HubUnit
 from src.ch14_keep_logic.rivercycle import (
     RiverGrade,
     create_init_rivercycle,

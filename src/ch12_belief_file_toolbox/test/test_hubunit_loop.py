@@ -1,7 +1,11 @@
 from src.ch02_rope_logic.rope import create_rope
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 from src.ch12_belief_file_toolbox.hub_tool import save_job_file
-from src.ch12_belief_file_toolbox.hubunit import get_perspective_belief, hubunit_shop
+from src.ch12_belief_file_toolbox.hubunit import (
+    get_perspective_belief,
+    hubunit_shop,
+    rj_perspective_belief,
+)
 from src.ch12_belief_file_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as env_dir,
@@ -50,7 +54,7 @@ def test_HubUnit_get_dw_perspective_belief_ReturnsBeliefWith_belief_nameSetToHub
     assert perspective_beliefunit.to_dict() == bob_beliefunit.to_dict()
 
 
-def test_HubUnit_rj_perspective_belief_ReturnsBeliefWith_belief_nameSetToHubUnit_belief_name(
+def test_rj_perspective_belief_ReturnsBeliefWith_belief_nameSetToHubUnit_belief_name(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -71,7 +75,7 @@ def test_HubUnit_rj_perspective_belief_ReturnsBeliefWith_belief_nameSetToHubUnit
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, iowa_rope)
 
     # WHEN
-    perspective_beliefunit = sue_hubunit.rj_perspective_belief(bob_str, yao_str)
+    perspective_beliefunit = rj_perspective_belief(bob_str, yao_str, sue_hubunit)
 
     # THEN
     assert perspective_beliefunit.belief_name == sue_str

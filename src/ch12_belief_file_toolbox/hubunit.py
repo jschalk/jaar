@@ -39,8 +39,6 @@ from src.ch11_bud_logic._ref.ch11_semantic_types import (
 )
 from src.ch12_belief_file_toolbox.ch12_path import (
     create_atoms_dir_path,
-    create_keep_grade_path,
-    create_keep_grades_path,
     create_keep_visions_path,
     create_keeps_dir_path,
     create_packs_dir_path,
@@ -51,10 +49,7 @@ from src.ch12_belief_file_toolbox.hub_tool import (
     open_job_file,
     save_gut_file,
 )
-from src.ch12_belief_file_toolbox.keep_tool import (
-    create_treasury_db_file,
-    save_duty_belief,
-)
+from src.ch12_belief_file_toolbox.keep_tool import save_duty_belief
 
 
 class SavePackFileException(Exception):
@@ -369,11 +364,12 @@ class HubUnit:
         )
         return speaker_hubunit.get_vision_belief(speaker_id)
 
-    def rj_perspective_belief(
-        self, healer_name: BeliefName, speaker_id: BeliefName
-    ) -> BeliefUnit:
-        speaker_vision = self.rj_speaker_belief(healer_name, speaker_id)
-        return get_perspective_belief(speaker_vision, self.belief_name)
+
+def rj_perspective_belief(
+    healer_name: BeliefName, speaker_id: BeliefName, hubunit: HubUnit
+) -> BeliefUnit:
+    speaker_vision = hubunit.rj_speaker_belief(healer_name, speaker_id)
+    return get_perspective_belief(speaker_vision, hubunit.belief_name)
 
 
 def get_perspective_belief(
