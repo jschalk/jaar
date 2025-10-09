@@ -15,7 +15,7 @@
 - ch11_bud_logic: EventInt, amount, beliefadjust, beliefevent_facts, boss_facts, bud_belief_name, bud_time, bud_voice_nets, celldepth, found_facts, magnitude, offi_time, quota, tran_time
 - ch12_belief_file_toolbox: gut, job, keep_point_magnitude, moment_mstr_dir
 - ch13_belief_listen_logic: 
-- ch14_keep_logic: 
+- ch14_keep_logic: _rivergrants
 - ch15_moment_logic: beliefbudhistorys, cumulative_minute, hour_label, job_listen_rotations, moment_budunit, moment_paybook, moment_timeline_hour, moment_timeline_month, moment_timeline_weekday, moment_timeoffi, momentunit, month_label, paybook, weekday_label, weekday_order
 - ch16_translate_logic: inx_knot, inx_label, inx_name, inx_rope, inx_title, otx2inx, otx_knot, otx_label, otx_name, otx_rope, otx_title, translate_core, translate_label, translate_name, translate_rope, translate_title, translateunit, unknown_str
 - ch17_idea_logic: allowed_crud, attributes, build_order, delete_insert, delete_insert_update, delete_update, error_message, idea_category, idea_number, insert_multiple, insert_one_time, insert_update, otx_key, world_name

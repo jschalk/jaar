@@ -4,9 +4,13 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_empty_dict_if_None,
     get_json_from_dict,
 )
-from src.ch03_allot_toolbox.allot import allot_scale
+from src.ch03_allot_toolbox.allot import allot_scale, default_grain_num_if_None
 from src.ch07_belief_logic.belief_main import BeliefUnit
-from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, VoiceName
+from src.ch11_bud_logic._ref.ch11_semantic_types import (
+    BeliefName,
+    MoneyGrain,
+    VoiceName,
+)
 from src.ch12_belief_file_toolbox.hubunit import HubUnit
 
 
@@ -28,28 +32,29 @@ def get_debtorledger(x_belief: BeliefUnit) -> dict[VoiceName, float]:
 
 @dataclass
 class RiverBook:
-    hubunit: HubUnit = None
     belief_name: BeliefName = None
     _rivergrants: dict[VoiceName, float] = None
+    money_grain: MoneyGrain = None
 
 
-def riverbook_shop(hubunit: HubUnit, belief_name: BeliefName):
-    x_riverbook = RiverBook(hubunit, belief_name)
+def riverbook_shop(belief_name: BeliefName, money_grain: MoneyGrain = None):
+    x_riverbook = RiverBook(belief_name)
     x_riverbook._rivergrants = {}
+    x_riverbook.money_grain = default_grain_num_if_None(money_grain)
     return x_riverbook
 
 
 def create_riverbook(
-    hubunit: HubUnit,
     belief_name: BeliefName,
     keep_credorledger: dict,
     book_point_amount: int,
+    money_grain: MoneyGrain = None,
 ) -> RiverBook:
-    x_riverbook = riverbook_shop(hubunit, belief_name)
+    x_riverbook = riverbook_shop(belief_name, money_grain)
     x_riverbook._rivergrants = allot_scale(
         ledger=keep_credorledger,
         scale_number=book_point_amount,
-        grain_unit=x_riverbook.hubunit.money_grain,
+        grain_unit=x_riverbook.money_grain,
     )
     return x_riverbook
 
@@ -68,10 +73,10 @@ class RiverCycle:
         belief_credorledger = self.keep_credorledgers.get(book_voice_name)
         if belief_credorledger is not None:
             x_riverbook = create_riverbook(
-                hubunit=self.hubunit,
                 belief_name=book_voice_name,
                 keep_credorledger=belief_credorledger,
                 book_point_amount=book_point_amount,
+                money_grain=default_grain_num_if_None(),
             )
             self._set_complete_riverbook(x_riverbook)
 

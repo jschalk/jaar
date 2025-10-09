@@ -31,6 +31,7 @@ class Ch20Keywords(str, Enum):
     UPDATE = "UPDATE"
     VoiceName = "VoiceName"
     WorldName = "WorldName"
+    _rivergrants = "_rivergrants"
     active = "active"
     active_hx = "active_hx"
     addin = "addin"

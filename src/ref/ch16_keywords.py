@@ -30,6 +30,7 @@ class Ch16Keywords(str, Enum):
     TitleTerm = "TitleTerm"
     UPDATE = "UPDATE"
     VoiceName = "VoiceName"
+    _rivergrants = "_rivergrants"
     active = "active"
     active_hx = "active_hx"
     addin = "addin"

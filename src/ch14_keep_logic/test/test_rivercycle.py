@@ -47,11 +47,12 @@ def test_RiverCylce_set_complete_riverbook_SetsAttr():
     # ESTABLISH
     one_int = 1
     x_moment_mstr_dir = temp_moment_mstr_dir()
-    yao_hubunit = hubunit_shop(x_moment_mstr_dir, None, "Yao")
+    yao_str = "Yao"
+    yao_hubunit = hubunit_shop(x_moment_mstr_dir, None, yao_str)
     one_rivercycle = rivercycle_shop(yao_hubunit, one_int)
     bob_book_point_amount = 555
     bob_str = "Bob"
-    bob_riverbook = create_riverbook(yao_hubunit, bob_str, {}, bob_book_point_amount)
+    bob_riverbook = create_riverbook(bob_str, {}, bob_book_point_amount)
     assert one_rivercycle.riverbooks == {}
 
     # WHEN
@@ -78,9 +79,7 @@ def test_RiverCylce_set_riverbook_SetsAttr():
 
     # THEN
     bob_credorledger = keep_credorledger.get(bob_str)
-    bob_riverbook = create_riverbook(
-        yao_hubunit, bob_str, bob_credorledger, bob_book_point_amount
-    )
+    bob_riverbook = create_riverbook(bob_str, bob_credorledger, bob_book_point_amount)
     assert one_rivercycle.riverbooks == {bob_str: bob_riverbook}
 
 
