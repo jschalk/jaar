@@ -182,7 +182,9 @@ class RiverRun:
         self.set_all_initial_rivergrades()
 
         self._cycle_count = 0
-        x_rivercyle = create_init_rivercycle(self.hubunit, self.keep_credorledgers)
+        x_rivercyle = create_init_rivercycle(
+            self.hubunit.belief_name, self.keep_credorledgers
+        )
         x_cyclelegder = x_rivercyle.create_cylceledger()
         self._cycle_chargeees_curr = set(x_cyclelegder.keys())
         x_cyclelegder, tax_got_curr = self.levy_tax_dues(x_cyclelegder)

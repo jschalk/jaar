@@ -4,11 +4,16 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_empty_dict_if_None,
     get_json_from_dict,
 )
-from src.ch03_allot_toolbox.allot import allot_scale, default_grain_num_if_None
+from src.ch03_allot_toolbox.allot import (
+    allot_scale,
+    default_grain_num_if_None,
+    validate_pool_num,
+)
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch11_bud_logic._ref.ch11_semantic_types import (
     BeliefName,
     MoneyGrain,
+    MoneyNum,
     VoiceName,
 )
 from src.ch12_belief_file_toolbox.hubunit import HubUnit
@@ -61,22 +66,27 @@ def create_riverbook(
 
 @dataclass
 class RiverCycle:
-    hubunit: HubUnit = None
+    healer_name: BeliefName = None
     number: int = None
     keep_credorledgers: dict[BeliefName : dict[VoiceName, float]] = None
     riverbooks: dict[VoiceName, RiverBook] = None
+    money_grain: MoneyGrain = None
 
     def _set_complete_riverbook(self, x_riverbook: RiverBook):
         self.riverbooks[x_riverbook.belief_name] = x_riverbook
 
-    def set_riverbook(self, book_voice_name: VoiceName, book_point_amount: float):
+    def set_riverbook(
+        self,
+        book_voice_name: VoiceName,
+        book_point_amount: float,
+    ):
         belief_credorledger = self.keep_credorledgers.get(book_voice_name)
         if belief_credorledger is not None:
             x_riverbook = create_riverbook(
                 belief_name=book_voice_name,
                 keep_credorledger=belief_credorledger,
                 book_point_amount=book_point_amount,
-                money_grain=default_grain_num_if_None(),
+                money_grain=default_grain_num_if_None(self.money_grain),
             )
             self._set_complete_riverbook(x_riverbook)
 
@@ -92,25 +102,30 @@ class RiverCycle:
 
 
 def rivercycle_shop(
-    hubunit: HubUnit,
+    healer_name: BeliefName,
     number: int,
     keep_credorledgers: dict[BeliefName : dict[VoiceName, float]] = None,
+    money_grain: MoneyGrain = None,
 ):
     return RiverCycle(
-        hubunit=hubunit,
+        healer_name=healer_name,
         number=number,
         keep_credorledgers=get_empty_dict_if_None(keep_credorledgers),
         riverbooks=get_empty_dict_if_None(),
+        money_grain=default_grain_num_if_None(money_grain),
     )
 
 
 def create_init_rivercycle(
-    healer_hubunit: HubUnit,
+    healer_name: BeliefName,
     keep_credorledgers: dict[BeliefName : dict[VoiceName, float]],
+    keep_point_magnitude: MoneyNum = None,
+    money_grain: MoneyGrain = None,
 ) -> RiverCycle:
-    x_rivercycle = rivercycle_shop(healer_hubunit, 0, keep_credorledgers)
-    init_amount = healer_hubunit.keep_point_magnitude
-    x_rivercycle.set_riverbook(healer_hubunit.belief_name, init_amount)
+    x_rivercycle = rivercycle_shop(
+        healer_name, 0, keep_credorledgers, money_grain=money_grain
+    )
+    x_rivercycle.set_riverbook(healer_name, validate_pool_num(keep_point_magnitude))
     return x_rivercycle
 
 
@@ -119,9 +134,10 @@ def create_next_rivercycle(
     prev_cycle_cycleledger_post_tax: dict[VoiceName, float],
 ) -> RiverCycle:
     next_rivercycle = rivercycle_shop(
-        hubunit=prev_rivercycle.hubunit,
+        healer_name=prev_rivercycle.healer_name,
         number=prev_rivercycle.number + 1,
         keep_credorledgers=prev_rivercycle.keep_credorledgers,
+        money_grain=prev_rivercycle.money_grain,
     )
     for chargeer_id, chargeing_amount in prev_cycle_cycleledger_post_tax.items():
         next_rivercycle.set_riverbook(chargeer_id, chargeing_amount)
