@@ -11,17 +11,17 @@ from src.ch12_belief_file_toolbox.hub_tool import (
     save_job_file,
 )
 from src.ch12_belief_file_toolbox.hubunit import HubUnit
-from src.ch12_belief_file_toolbox.keep_tool import (
+from src.ch13_belief_listen_logic.basis_beliefs import (
+    create_empty_belief_from_belief,
+    create_listen_basis,
+)
+from src.ch13_belief_listen_logic.keep_tool import (
     get_duty_belief,
     get_perspective_belief,
     get_vision_belief,
     rj_speaker_belief,
     save_vision_belief,
     vision_file_exists,
-)
-from src.ch13_belief_listen_logic.basis_beliefs import (
-    create_empty_belief_from_belief,
-    create_listen_basis,
 )
 
 
