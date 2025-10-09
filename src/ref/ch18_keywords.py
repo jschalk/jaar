@@ -153,6 +153,7 @@ class Ch18Keywords(str, Enum):
     job = "job"
     job_listen_rotations = "job_listen_rotations"
     jvalues = "jvalues"
+    keep_point_magnitude = "keep_point_magnitude"
     keeps_buildable = "keeps_buildable"
     keeps_justified = "keeps_justified"
     kids = "kids"

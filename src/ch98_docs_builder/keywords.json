@@ -155,6 +155,7 @@
   "jvalues"                        : { "init_chapter": "ch07"},
   "keeps_buildable"                : { "init_chapter": "ch07"},
   "keeps_justified"                : { "init_chapter": "ch07"},
+  "keep_point_magnitude"           : { "init_chapter": "ch12"},
   "kids"                           : { "init_chapter": "ch06"},
   "knot"                           : { "init_chapter": "ch02"},
   "laborheir"                      : { "init_chapter": "ch04"},

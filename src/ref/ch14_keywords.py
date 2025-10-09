@@ -124,6 +124,7 @@ class Ch14Keywords(str, Enum):
     jkeys = "jkeys"
     job = "job"
     jvalues = "jvalues"
+    keep_point_magnitude = "keep_point_magnitude"
     keeps_buildable = "keeps_buildable"
     keeps_justified = "keeps_justified"
     kids = "kids"
