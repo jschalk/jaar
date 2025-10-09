@@ -34,7 +34,6 @@ from src.ch11_bud_logic._ref.ch11_semantic_types import (
 )
 from src.ch12_belief_file_toolbox.ch12_path import (
     create_atoms_dir_path,
-    create_keep_visions_path,
     create_keeps_dir_path,
     create_packs_dir_path,
 )
