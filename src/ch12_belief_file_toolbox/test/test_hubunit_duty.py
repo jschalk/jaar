@@ -1,6 +1,11 @@
 from src.ch02_rope_logic.rope import create_rope
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 from src.ch12_belief_file_toolbox.hubunit import hubunit_shop
+from src.ch12_belief_file_toolbox.keep_tool import (
+    get_vision_belief,
+    save_vision_belief,
+    vision_file_exists,
+)
 from src.ch12_belief_file_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as env_dir,
@@ -10,7 +15,7 @@ from src.ch12_belief_file_toolbox.test._util.ch12_examples import (
 )
 
 
-def test_HubUnit_save_vision_belief_SavesFile(env_dir_setup_cleanup):
+def test_save_vision_belief_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -24,16 +29,40 @@ def test_HubUnit_save_vision_belief_SavesFile(env_dir_setup_cleanup):
     bob_str = "Bob"
     bob_belief = get_beliefunit_with_4_levels()
     bob_belief.set_belief_name(bob_str)
-    assert sue_hubunit.vision_file_exists(bob_str) is False
+    assert (
+        vision_file_exists(
+            sue_hubunit.moment_mstr_dir,
+            sue_hubunit.belief_name,
+            sue_hubunit.moment_label,
+            sue_hubunit.keep_rope,
+            sue_hubunit.knot,
+            bob_str,
+        )
+        is False
+    )
 
     # WHEN
-    sue_hubunit.save_vision_belief(bob_belief)
+    save_vision_belief(
+        sue_hubunit.moment_mstr_dir,
+        sue_hubunit.belief_name,
+        sue_hubunit.moment_label,
+        sue_hubunit.keep_rope,
+        sue_hubunit.knot,
+        bob_belief,
+    )
 
     # THEN
-    assert sue_hubunit.vision_file_exists(bob_str)
+    assert vision_file_exists(
+        sue_hubunit.moment_mstr_dir,
+        sue_hubunit.belief_name,
+        sue_hubunit.moment_label,
+        sue_hubunit.keep_rope,
+        sue_hubunit.knot,
+        bob_str,
+    )
 
 
-def test_HubUnit_vision_file_exists_ReturnsBool(env_dir_setup_cleanup):
+def test_vision_file_exists_ReturnsBool(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -47,16 +76,40 @@ def test_HubUnit_vision_file_exists_ReturnsBool(env_dir_setup_cleanup):
     bob_str = "Bob"
     bob_belief = get_beliefunit_with_4_levels()
     bob_belief.set_belief_name(bob_str)
-    assert sue_hubunit.vision_file_exists(bob_str) is False
+    assert (
+        vision_file_exists(
+            sue_hubunit.moment_mstr_dir,
+            sue_hubunit.belief_name,
+            sue_hubunit.moment_label,
+            sue_hubunit.keep_rope,
+            sue_hubunit.knot,
+            bob_str,
+        )
+        is False
+    )
 
     # WHEN
-    sue_hubunit.save_vision_belief(bob_belief)
+    save_vision_belief(
+        sue_hubunit.moment_mstr_dir,
+        sue_hubunit.belief_name,
+        sue_hubunit.moment_label,
+        sue_hubunit.keep_rope,
+        sue_hubunit.knot,
+        bob_belief,
+    )
 
     # THEN
-    assert sue_hubunit.vision_file_exists(bob_str)
+    assert vision_file_exists(
+        sue_hubunit.moment_mstr_dir,
+        sue_hubunit.belief_name,
+        sue_hubunit.moment_label,
+        sue_hubunit.keep_rope,
+        sue_hubunit.knot,
+        bob_str,
+    )
 
 
-def test_HubUnit_get_vision_belief_reason_lowersFile(env_dir_setup_cleanup):
+def test_get_vision_belief_reason_lowersFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -70,13 +123,30 @@ def test_HubUnit_get_vision_belief_reason_lowersFile(env_dir_setup_cleanup):
     bob_str = "Bob"
     bob_belief = get_beliefunit_with_4_levels()
     bob_belief.set_belief_name(bob_str)
-    sue_hubunit.save_vision_belief(bob_belief)
+    save_vision_belief(
+        sue_hubunit.moment_mstr_dir,
+        sue_hubunit.belief_name,
+        sue_hubunit.moment_label,
+        sue_hubunit.keep_rope,
+        sue_hubunit.knot,
+        bob_belief,
+    )
 
     # WHEN / THEN
-    assert sue_hubunit.get_vision_belief(bob_str).to_dict() == bob_belief.to_dict()
+    assert (
+        get_vision_belief(
+            sue_hubunit.moment_mstr_dir,
+            sue_hubunit.belief_name,
+            sue_hubunit.moment_label,
+            sue_hubunit.keep_rope,
+            sue_hubunit.knot,
+            bob_str,
+        ).to_dict()
+        == bob_belief.to_dict()
+    )
 
 
-def test_HubUnit_get_vision_belief_ReturnsNoneIfFileDoesNotExist(
+def test_get_vision_belief_ReturnsNoneIfFileDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -92,4 +162,14 @@ def test_HubUnit_get_vision_belief_ReturnsNoneIfFileDoesNotExist(
     bob_str = "Bob"
 
     # WHEN / THEN
-    assert sue_hubunit.get_vision_belief(bob_str) is None
+    assert (
+        get_vision_belief(
+            sue_hubunit.moment_mstr_dir,
+            sue_hubunit.belief_name,
+            sue_hubunit.moment_label,
+            sue_hubunit.keep_rope,
+            sue_hubunit.knot,
+            bob_str,
+        )
+        is None
+    )

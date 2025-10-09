@@ -1,7 +1,6 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
-from src.ch01_data_toolbox.dict_toolbox import get_empty_set_if_None
 from src.ch01_data_toolbox.file_toolbox import (
     create_path,
     delete_dir,
@@ -14,11 +13,7 @@ from src.ch01_data_toolbox.file_toolbox import (
 )
 from src.ch02_rope_logic.rope import validate_labelterm
 from src.ch03_allot_toolbox.allot import default_grain_num_if_None, validate_pool_num
-from src.ch07_belief_logic.belief_main import (
-    BeliefUnit,
-    beliefunit_shop,
-    get_beliefunit_from_json,
-)
+from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import (
     BeliefAtom,
     get_beliefatom_from_json,
@@ -46,10 +41,8 @@ from src.ch12_belief_file_toolbox.ch12_path import (
 from src.ch12_belief_file_toolbox.hub_tool import (
     gut_file_exists,
     open_gut_file,
-    open_job_file,
     save_gut_file,
 )
-from src.ch12_belief_file_toolbox.keep_tool import save_duty_belief
 
 
 class SavePackFileException(Exception):
@@ -57,10 +50,6 @@ class SavePackFileException(Exception):
 
 
 class PackFileMissingException(Exception):
-    pass
-
-
-class get_keep_ropesException(Exception):
     pass
 
 
@@ -298,123 +287,6 @@ class HubUnit:
         gut_belief = self._merge_any_packs(gut_belief)
         save_gut_file(self.moment_mstr_dir, gut_belief)
         return gut_belief
-
-    def get_visions_path_filenames_list(self) -> list[str]:
-        keep_visions_path = create_keep_visions_path(
-            self.moment_mstr_dir,
-            self.belief_name,
-            self.moment_label,
-            self.keep_rope,
-            self.knot,
-        )
-        try:
-            return list(get_dir_file_strs(keep_visions_path, True).keys())
-        except Exception:
-            return []
-
-    def save_vision_belief(self, x_belief: BeliefUnit) -> None:
-        x_filename = get_json_filename(x_belief.belief_name)
-        keep_visions_path = create_keep_visions_path(
-            self.moment_mstr_dir,
-            self.belief_name,
-            self.moment_label,
-            self.keep_rope,
-            self.knot,
-        )
-        save_file(keep_visions_path, x_filename, x_belief.get_json())
-
-    def vision_file_exists(self, belief_name: BeliefName) -> bool:
-        keep_visions_path = create_keep_visions_path(
-            self.moment_mstr_dir,
-            self.belief_name,
-            self.moment_label,
-            self.keep_rope,
-            self.knot,
-        )
-        file_path = create_path(keep_visions_path, get_json_filename(belief_name))
-        return os_path_exists(file_path)
-
-    def get_vision_belief(self, belief_name: BeliefName) -> BeliefUnit:
-        keep_visions_path = create_keep_visions_path(
-            self.moment_mstr_dir,
-            self.belief_name,
-            self.moment_label,
-            self.keep_rope,
-            self.knot,
-        )
-        if self.vision_file_exists(belief_name) is False:
-            return None
-        file_content = open_file(keep_visions_path, get_json_filename(belief_name))
-        return get_beliefunit_from_json(file_content)
-
-    def get_dw_perspective_belief(self, speaker_id: BeliefName) -> BeliefUnit:
-        speaker_job = open_job_file(self.moment_mstr_dir, self.moment_label, speaker_id)
-        return get_perspective_belief(speaker_job, self.belief_name)
-
-    def rj_speaker_belief(
-        self, healer_name: BeliefName, speaker_id: BeliefName
-    ) -> BeliefUnit:
-        speaker_hubunit = hubunit_shop(
-            moment_mstr_dir=self.moment_mstr_dir,
-            moment_label=self.moment_label,
-            belief_name=healer_name,
-            keep_rope=self.keep_rope,
-            knot=self.knot,
-            respect_grain=self.respect_grain,
-        )
-        return speaker_hubunit.get_vision_belief(speaker_id)
-
-
-def rj_perspective_belief(
-    healer_name: BeliefName, speaker_id: BeliefName, hubunit: HubUnit
-) -> BeliefUnit:
-    speaker_vision = hubunit.rj_speaker_belief(healer_name, speaker_id)
-    return get_perspective_belief(speaker_vision, hubunit.belief_name)
-
-
-def get_perspective_belief(
-    speaker: BeliefUnit, listener_name: BeliefName
-) -> BeliefUnit:
-    # get copy of belief without any metrics
-    perspective_belief = get_beliefunit_from_json(speaker.get_json())
-    perspective_belief.set_belief_name(listener_name)
-    perspective_belief.cashout()
-    return perspective_belief
-
-
-def get_keep_ropes(moment_mstr_dir, moment_label, belief_name) -> set[RopeTerm]:
-    x_gut_belief = open_gut_file(moment_mstr_dir, moment_label, belief_name)
-    x_gut_belief.cashout()
-    if x_gut_belief.keeps_justified is False:
-        x_str = f"Cannot get_keep_ropes from '{belief_name}' gut belief because 'BeliefUnit.keeps_justified' is False."
-        raise get_keep_ropesException(x_str)
-    if x_gut_belief.keeps_buildable is False:
-        x_str = f"Cannot get_keep_ropes from '{belief_name}' gut belief because 'BeliefUnit.keeps_buildable' is False."
-        raise get_keep_ropesException(x_str)
-    belief_healer_dict = x_gut_belief._healers_dict.get(belief_name)
-    if belief_healer_dict is None:
-        return get_empty_set_if_None()
-    keep_ropes = x_gut_belief._healers_dict.get(belief_name).keys()
-    return get_empty_set_if_None(keep_ropes)
-
-
-def save_all_gut_dutys(
-    moment_mstr_dir: str,
-    moment_label: MomentLabel,
-    belief_name: BeliefName,
-    keep_ropes: set[RopeTerm],
-    knot: str,
-):
-    gut = open_gut_file(moment_mstr_dir, moment_label, belief_name)
-    for x_keep_rope in keep_ropes:
-        save_duty_belief(
-            moment_mstr_dir=moment_mstr_dir,
-            belief_name=belief_name,
-            moment_label=moment_label,
-            keep_rope=x_keep_rope,
-            knot=knot,
-            duty_belief=gut,
-        )
 
 
 def hubunit_shop(

@@ -10,8 +10,15 @@ from src.ch12_belief_file_toolbox.hub_tool import (
     open_job_file,
     save_job_file,
 )
-from src.ch12_belief_file_toolbox.hubunit import HubUnit, get_perspective_belief
-from src.ch12_belief_file_toolbox.keep_tool import get_duty_belief
+from src.ch12_belief_file_toolbox.hubunit import HubUnit
+from src.ch12_belief_file_toolbox.keep_tool import (
+    get_duty_belief,
+    get_perspective_belief,
+    get_vision_belief,
+    rj_speaker_belief,
+    save_vision_belief,
+    vision_file_exists,
+)
 from src.ch13_belief_listen_logic.basis_beliefs import (
     create_empty_belief_from_belief,
     create_listen_basis,
@@ -222,7 +229,14 @@ def listen_to_agendas_duty_vision(listener_vision: BeliefUnit, healer_hubunit: H
         else:
             speaker_id = x_voiceunit.voice_name
             healer_name = healer_hubunit.belief_name
-            speaker_vision = healer_hubunit.rj_speaker_belief(healer_name, speaker_id)
+            speaker_vision = rj_speaker_belief(
+                healer_hubunit.moment_mstr_dir,
+                healer_hubunit.moment_label,
+                healer_hubunit.keep_rope,
+                healer_hubunit.knot,
+                healer_name,
+                speaker_id,
+            )
             if speaker_vision is None:
                 speaker_vision = create_empty_belief_from_belief(
                     listener_vision, speaker_id
@@ -242,7 +256,14 @@ def listen_to_facts_duty_vision(new_vision: BeliefUnit, healer_hubunit: HubUnit)
     migrate_all_facts(duty, new_vision)
     for x_voiceunit in get_ordered_debtors_roll(new_vision):
         if x_voiceunit.voice_name != new_vision.belief_name:
-            speaker_vision = healer_hubunit.get_vision_belief(x_voiceunit.voice_name)
+            speaker_vision = get_vision_belief(
+                healer_hubunit.moment_mstr_dir,
+                healer_hubunit.belief_name,
+                healer_hubunit.moment_label,
+                healer_hubunit.keep_rope,
+                healer_hubunit.knot,
+                x_voiceunit.voice_name,
+            )
             if speaker_vision is not None:
                 listen_to_speaker_fact(new_vision, speaker_vision)
 
@@ -330,8 +351,22 @@ def fact_state_keep_vision_and_listen(
     listener_belief_name: BeliefName, healer_hubunit: HubUnit, new_job: BeliefUnit
 ):
     listener_id = listener_belief_name
-    if healer_hubunit.vision_file_exists(listener_id):
-        keep_vision = healer_hubunit.get_vision_belief(listener_id)
+    if vision_file_exists(
+        healer_hubunit.moment_mstr_dir,
+        healer_hubunit.belief_name,
+        healer_hubunit.moment_label,
+        healer_hubunit.keep_rope,
+        healer_hubunit.knot,
+        listener_id,
+    ):
+        keep_vision = get_vision_belief(
+            healer_hubunit.moment_mstr_dir,
+            healer_hubunit.belief_name,
+            healer_hubunit.moment_label,
+            healer_hubunit.keep_rope,
+            healer_hubunit.knot,
+            listener_id,
+        )
     else:
         keep_vision = create_empty_belief_from_belief(new_job, new_job.belief_name)
     listen_to_vision_agenda(new_job, keep_vision)
@@ -352,4 +387,11 @@ def create_vision_file_from_duty_file(healer_hubunit: HubUnit, belief_name: Beli
     x_vision = listen_to_debtors_roll_duty_vision(
         healer_hubunit, listener_id=belief_name
     )
-    healer_hubunit.save_vision_belief(x_vision)
+    save_vision_belief(
+        healer_hubunit.moment_mstr_dir,
+        healer_hubunit.belief_name,
+        healer_hubunit.moment_label,
+        healer_hubunit.keep_rope,
+        healer_hubunit.knot,
+        x_vision,
+    )

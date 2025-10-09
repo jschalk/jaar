@@ -1,10 +1,12 @@
-from src.ch02_rope_logic.rope import create_rope
+from src.ch02_rope_logic.rope import create_rope, default_knot_if_None
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 from src.ch12_belief_file_toolbox.hub_tool import save_job_file
-from src.ch12_belief_file_toolbox.hubunit import (
+from src.ch12_belief_file_toolbox.hubunit import hubunit_shop
+from src.ch12_belief_file_toolbox.keep_tool import (
+    get_dw_perspective_belief,
     get_perspective_belief,
-    hubunit_shop,
     rj_perspective_belief,
+    save_vision_belief,
 )
 from src.ch12_belief_file_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
@@ -30,7 +32,7 @@ def test_get_perspective_belief_ReturnsBeliefWith_belief_nameSetToHubUnit_belief
     assert perspective_beliefunit.to_dict() == bob_beliefunit.to_dict()
 
 
-def test_HubUnit_get_dw_perspective_belief_ReturnsBeliefWith_belief_nameSetToHubUnit_belief_name(
+def test_get_dw_perspective_belief_ReturnsBeliefWith_belief_nameSetToHubUnit_belief_name(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -40,12 +42,12 @@ def test_HubUnit_get_dw_perspective_belief_ReturnsBeliefWith_belief_nameSetToHub
     bob_beliefunit.set_belief_name(bob_str)
     bob_hubunit = hubunit_shop(env_dir(), a23_str, bob_str)
     save_job_file(bob_hubunit.moment_mstr_dir, bob_beliefunit)
-
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
 
     # WHEN
-    perspective_beliefunit = sue_hubunit.get_dw_perspective_belief(bob_str)
+    perspective_beliefunit = get_dw_perspective_belief(
+        env_dir(), a23_str, bob_str, sue_str
+    )
 
     # THEN
     assert perspective_beliefunit.belief_name == sue_str
@@ -69,13 +71,27 @@ def test_rj_perspective_belief_ReturnsBeliefWith_belief_nameSetToHubUnit_belief_
     yao_beliefunit.set_belief_name(yao_str)
 
     bob_iowa_hubunit = hubunit_shop(env_dir(), a23_str, bob_str, iowa_rope)
-    bob_iowa_hubunit.save_vision_belief(yao_beliefunit)
+    save_vision_belief(
+        bob_iowa_hubunit.moment_mstr_dir,
+        bob_iowa_hubunit.belief_name,
+        bob_iowa_hubunit.moment_label,
+        bob_iowa_hubunit.keep_rope,
+        bob_iowa_hubunit.knot,
+        yao_beliefunit,
+    )
 
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, iowa_rope)
 
     # WHEN
-    perspective_beliefunit = rj_perspective_belief(bob_str, yao_str, sue_hubunit)
+    perspective_beliefunit = rj_perspective_belief(
+        env_dir(),
+        a23_str,
+        iowa_rope,
+        knot=default_knot_if_None(),
+        healer_name=bob_str,
+        speaker_id=yao_str,
+        perspective_id=sue_str,
+    )
 
     # THEN
     assert perspective_beliefunit.belief_name == sue_str

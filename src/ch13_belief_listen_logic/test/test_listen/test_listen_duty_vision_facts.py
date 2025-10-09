@@ -1,6 +1,6 @@
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch12_belief_file_toolbox.keep_tool import save_duty_belief
+from src.ch12_belief_file_toolbox.keep_tool import save_duty_belief, save_vision_belief
 from src.ch13_belief_listen_logic.listen_main import (
     create_listen_basis,
     listen_to_agendas_duty_vision,
@@ -43,7 +43,14 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(env_dir_setup_cleanup
     )
 
     zia_vision = get_example_zia_speaker()
-    sue_texas_hubunit.save_vision_belief(zia_vision)
+    save_vision_belief(
+        sue_texas_hubunit.moment_mstr_dir,
+        sue_texas_hubunit.belief_name,
+        sue_texas_hubunit.moment_label,
+        sue_texas_hubunit.keep_rope,
+        sue_texas_hubunit.knot,
+        zia_vision,
+    )
 
     new_yao_vision = create_listen_basis(yao_duty)
     assert new_yao_vision.get_missing_fact_reason_contexts().get(a23_eat_rope()) is None
@@ -87,7 +94,14 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferenttask(
     zia_vision.set_plan(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
     clean_planunit = zia_vision.get_plan_obj(a23_clean_rope())
     clean_planunit.laborunit.add_party(yao_str)
-    sue_texas_hubunit.save_vision_belief(zia_vision)
+    save_vision_belief(
+        sue_texas_hubunit.moment_mstr_dir,
+        sue_texas_hubunit.belief_name,
+        sue_texas_hubunit.moment_label,
+        sue_texas_hubunit.keep_rope,
+        sue_texas_hubunit.knot,
+        zia_vision,
+    )
 
     new_yao_vision = create_listen_basis(yao_duty)
     assert new_yao_vision.get_missing_fact_reason_contexts().get(a23_eat_rope()) is None
@@ -128,7 +142,14 @@ def test_listen_to_facts_duty_vision_GetsFactsFromSrcBeliefSelfNotSpeakerSelf(
 
     old_yao_vision = get_example_yao_speaker()
     assert old_yao_vision.get_fact(a23_eat_rope()).fact_state == a23_hungry_rope()
-    sue_texas_hubunit.save_vision_belief(old_yao_vision)
+    save_vision_belief(
+        sue_texas_hubunit.moment_mstr_dir,
+        sue_texas_hubunit.belief_name,
+        sue_texas_hubunit.moment_label,
+        sue_texas_hubunit.keep_rope,
+        sue_texas_hubunit.knot,
+        old_yao_vision,
+    )
 
     new_yao_vision = create_listen_basis(yao_duty)
     assert new_yao_vision.get_fact(a23_eat_rope()) is None
@@ -167,11 +188,25 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
     zia_vision = get_example_zia_speaker()
     zia_vision.add_fact(a23_eat_rope(), a23_eat_rope())
     assert zia_vision.get_fact(a23_eat_rope()).fact_state == a23_eat_rope()
-    sue_texas_hubunit.save_vision_belief(zia_vision)
+    save_vision_belief(
+        sue_texas_hubunit.moment_mstr_dir,
+        sue_texas_hubunit.belief_name,
+        sue_texas_hubunit.moment_label,
+        sue_texas_hubunit.keep_rope,
+        sue_texas_hubunit.knot,
+        zia_vision,
+    )
 
     old_yao_vision = get_example_yao_speaker()
     assert old_yao_vision.get_fact(a23_eat_rope()).fact_state == a23_hungry_rope()
-    sue_texas_hubunit.save_vision_belief(old_yao_vision)
+    save_vision_belief(
+        sue_texas_hubunit.moment_mstr_dir,
+        sue_texas_hubunit.belief_name,
+        sue_texas_hubunit.moment_label,
+        sue_texas_hubunit.keep_rope,
+        sue_texas_hubunit.knot,
+        old_yao_vision,
+    )
 
     new_yao_vision = create_listen_basis(yao_duty)
     assert new_yao_vision.get_fact(a23_eat_rope()) is None
@@ -214,7 +249,14 @@ def test_listen_to_facts_duty_vision_SetsPrioritizesSelfFactsOverSpeakers(
     zia_vision = get_example_zia_speaker()
     zia_vision.add_fact(a23_eat_rope(), a23_hungry_rope())
     assert zia_vision.get_fact(a23_eat_rope()).fact_state == a23_hungry_rope()
-    sue_texas_hubunit.save_vision_belief(zia_vision)
+    save_vision_belief(
+        sue_texas_hubunit.moment_mstr_dir,
+        sue_texas_hubunit.belief_name,
+        sue_texas_hubunit.moment_label,
+        sue_texas_hubunit.keep_rope,
+        sue_texas_hubunit.knot,
+        zia_vision,
+    )
 
     new_yao_vision = create_listen_basis(yao_duty)
     assert new_yao_vision.get_fact(a23_eat_rope()) is None
@@ -242,12 +284,26 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
     zia_vision.add_fact(a23_eat_rope(), a23_eat_rope())
     assert zia_vision.get_fact(a23_eat_rope()).fact_state == a23_eat_rope()
     sue_texas_hubunit = get_texas_hubunit()
-    sue_texas_hubunit.save_vision_belief(zia_vision)
+    save_vision_belief(
+        sue_texas_hubunit.moment_mstr_dir,
+        sue_texas_hubunit.belief_name,
+        sue_texas_hubunit.moment_label,
+        sue_texas_hubunit.keep_rope,
+        sue_texas_hubunit.knot,
+        zia_vision,
+    )
 
     bob_vision = get_example_bob_speaker()
     bob_str = bob_vision.belief_name
     assert bob_vision.get_fact(a23_eat_rope()).fact_state == a23_hungry_rope()
-    sue_texas_hubunit.save_vision_belief(bob_vision)
+    save_vision_belief(
+        sue_texas_hubunit.moment_mstr_dir,
+        sue_texas_hubunit.belief_name,
+        sue_texas_hubunit.moment_label,
+        sue_texas_hubunit.keep_rope,
+        sue_texas_hubunit.knot,
+        bob_vision,
+    )
 
     yao_duty = get_example_yao_speaker()
     yao_duty.del_fact(a23_eat_rope())
@@ -333,7 +389,7 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
 #     sweep_plan.laborunit.add_party(yao_str)
 
 #     sue_texas_hubunit = get_texas_hubunit()
-#     sue_texas_hubunit.save_vision_belief(sue_str, sue_speaker.get_json(), True)
+#     save_vision_belief(sue_texas_hubunit, sue_str, sue_speaker.get_json(), True)
 #     yao_duty = beliefunit_shop(yao_str)
 #     yao_duty.add_voiceunit(yao_str)
 #     yao_duty.add_voiceunit(sue_str)

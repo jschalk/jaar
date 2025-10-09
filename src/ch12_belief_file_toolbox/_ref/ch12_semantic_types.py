@@ -1,10 +1,12 @@
 from src.ch11_bud_logic._ref.ch11_semantic_types import (
+    BeliefName,
     FirstLabel,
     FundGrain,
     FundNum,
     GroupTitle,
     HealerName,
     LabelTerm,
+    MomentLabel,
     MoneyGrain,
     NameTerm,
     RespectGrain,

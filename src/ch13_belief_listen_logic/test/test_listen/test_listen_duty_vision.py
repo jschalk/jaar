@@ -7,7 +7,11 @@ from src.ch12_belief_file_toolbox.hub_tool import (
     save_gut_file,
 )
 from src.ch12_belief_file_toolbox.hubunit import HubUnit, hubunit_shop
-from src.ch12_belief_file_toolbox.keep_tool import save_duty_belief
+from src.ch12_belief_file_toolbox.keep_tool import (
+    get_vision_belief,
+    save_duty_belief,
+    vision_file_exists,
+)
 from src.ch13_belief_listen_logic.listen_main import (
     create_vision_file_from_duty_file,
     listen_to_belief_visions,
@@ -291,19 +295,76 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
     # delete_dir(yao_iowa_hubunit.beliefs_dir())
     assert gut_file_exists(moment_mstr_dir, moment_label, yao_str) is False
     assert job_file_exists(moment_mstr_dir, moment_label, yao_str) is False
-    assert yao_iowa_hubunit.vision_file_exists(yao_str) is False
-    assert yao_ohio_hubunit.vision_file_exists(yao_str) is False
-    assert zia_utah_hubunit.vision_file_exists(yao_str) is False
+    assert (
+        vision_file_exists(
+            yao_iowa_hubunit.moment_mstr_dir,
+            yao_iowa_hubunit.belief_name,
+            yao_iowa_hubunit.moment_label,
+            yao_iowa_hubunit.keep_rope,
+            yao_iowa_hubunit.knot,
+            yao_str,
+        )
+        is False
+    )
+    assert (
+        vision_file_exists(
+            yao_ohio_hubunit.moment_mstr_dir,
+            yao_ohio_hubunit.belief_name,
+            yao_ohio_hubunit.moment_label,
+            yao_ohio_hubunit.keep_rope,
+            yao_ohio_hubunit.knot,
+            yao_str,
+        )
+        is False
+    )
+    assert (
+        vision_file_exists(
+            zia_utah_hubunit.moment_mstr_dir,
+            zia_utah_hubunit.belief_name,
+            zia_utah_hubunit.moment_label,
+            zia_utah_hubunit.keep_rope,
+            zia_utah_hubunit.knot,
+            yao_str,
+        )
+        is False
+    )
+
     print(f"{yao_gut0.get_fact(get_location_rope())=}")
     save_gut_file(env_dir(), yao_gut0)
-    # yao_iowa_hubunit.save_vision_belief(yao_vision1)
-    # yao_ohio_hubunit.save_vision_belief(yao_vision2)
-    # zia_utah_hubunit.save_vision_belief(yao_vision3)
     assert gut_file_exists(moment_mstr_dir, moment_label, yao_str)
-    assert yao_iowa_hubunit.vision_file_exists(yao_str) is False
-    assert yao_ohio_hubunit.vision_file_exists(yao_str) is False
-    assert zia_utah_hubunit.vision_file_exists(yao_str) is False
-
+    assert (
+        vision_file_exists(
+            yao_iowa_hubunit.moment_mstr_dir,
+            yao_iowa_hubunit.belief_name,
+            yao_iowa_hubunit.moment_label,
+            yao_iowa_hubunit.keep_rope,
+            yao_iowa_hubunit.knot,
+            yao_str,
+        )
+        is False
+    )
+    assert (
+        vision_file_exists(
+            yao_ohio_hubunit.moment_mstr_dir,
+            yao_ohio_hubunit.belief_name,
+            yao_ohio_hubunit.moment_label,
+            yao_ohio_hubunit.keep_rope,
+            yao_ohio_hubunit.knot,
+            yao_str,
+        )
+        is False
+    )
+    assert (
+        vision_file_exists(
+            zia_utah_hubunit.moment_mstr_dir,
+            zia_utah_hubunit.belief_name,
+            zia_utah_hubunit.moment_label,
+            zia_utah_hubunit.keep_rope,
+            zia_utah_hubunit.knot,
+            yao_str,
+        )
+        is False
+    )
     # WHEN / THEN
     assert job_file_exists(moment_mstr_dir, moment_label, yao_str) is False
     listen_to_belief_visions(yao_iowa_hubunit)
@@ -353,14 +414,38 @@ def test_create_vision_file_from_duty_file_CreatesEmptyvision(env_dir_setup_clea
         duty_belief=yao_duty,
     )
 
-    assert sue_texas_hubunit.vision_file_exists(yao_str) is False
+    assert (
+        vision_file_exists(
+            sue_texas_hubunit.moment_mstr_dir,
+            sue_texas_hubunit.belief_name,
+            sue_texas_hubunit.moment_label,
+            sue_texas_hubunit.keep_rope,
+            sue_texas_hubunit.knot,
+            yao_str,
+        )
+        is False
+    )
 
     # WHEN
     create_vision_file_from_duty_file(sue_texas_hubunit, yao_str)
 
     # THEN
-    assert sue_texas_hubunit.vision_file_exists(yao_str)
-    yao_vision = sue_texas_hubunit.get_vision_belief(yao_str)
+    assert vision_file_exists(
+        sue_texas_hubunit.moment_mstr_dir,
+        sue_texas_hubunit.belief_name,
+        sue_texas_hubunit.moment_label,
+        sue_texas_hubunit.keep_rope,
+        sue_texas_hubunit.knot,
+        yao_str,
+    )
+    yao_vision = get_vision_belief(
+        sue_texas_hubunit.moment_mstr_dir,
+        sue_texas_hubunit.belief_name,
+        sue_texas_hubunit.moment_label,
+        sue_texas_hubunit.keep_rope,
+        sue_texas_hubunit.knot,
+        yao_str,
+    )
     assert yao_vision.belief_name is not None
     assert yao_vision.belief_name == yao_str
     assert yao_vision.to_dict() == yao_duty.to_dict()

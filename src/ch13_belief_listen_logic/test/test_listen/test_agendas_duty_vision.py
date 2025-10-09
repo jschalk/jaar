@@ -1,7 +1,7 @@
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch12_belief_file_toolbox.hubunit import hubunit_shop
-from src.ch12_belief_file_toolbox.keep_tool import save_duty_belief
+from src.ch12_belief_file_toolbox.keep_tool import save_duty_belief, save_vision_belief
 from src.ch13_belief_listen_logic.listen_main import (
     create_listen_basis,
     listen_to_agendas_duty_vision,
@@ -47,7 +47,14 @@ def test_listen_to_agenda_duty_vision_agenda_AddstasksTovision_BeliefWhenNo_part
     zia_vision.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
     zia_vision.add_voiceunit(yao_str, voice_debt_lumen=12)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
-    yao_dakota_hubunit.save_vision_belief(zia_vision)
+    save_vision_belief(
+        yao_dakota_hubunit.moment_mstr_dir,
+        yao_dakota_hubunit.belief_name,
+        yao_dakota_hubunit.moment_label,
+        yao_dakota_hubunit.keep_rope,
+        yao_dakota_hubunit.knot,
+        zia_vision,
+    )
     new_yao_vision = create_listen_basis(yao_duty)
     assert len(new_yao_vision.get_agenda_dict()) == 0
 
@@ -82,7 +89,14 @@ def test_listen_to_agenda_duty_vision_agenda_AddstasksTovision_Belief(
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
-    yao_dakota_hubunit.save_vision_belief(zia_vision)
+    save_vision_belief(
+        yao_dakota_hubunit.moment_mstr_dir,
+        yao_dakota_hubunit.belief_name,
+        yao_dakota_hubunit.moment_label,
+        yao_dakota_hubunit.keep_rope,
+        yao_dakota_hubunit.knot,
+        zia_vision,
+    )
 
     # zia_file_path = create_path(visions_path, zia_str}.json")
     # print(f"{os_path_exists(zia_file_path)=}")
@@ -117,8 +131,22 @@ def test_listen_to_agenda_duty_vision_agenda_AddstasksTovisionBeliefWithDetailsD
     zia_str = zia_vision.belief_name
     bob_str = bob_vision.belief_name
     sue_dakota_hubunit = get_dakota_hubunit()
-    sue_dakota_hubunit.save_vision_belief(zia_vision)
-    sue_dakota_hubunit.save_vision_belief(bob_vision)
+    save_vision_belief(
+        sue_dakota_hubunit.moment_mstr_dir,
+        sue_dakota_hubunit.belief_name,
+        sue_dakota_hubunit.moment_label,
+        sue_dakota_hubunit.keep_rope,
+        sue_dakota_hubunit.knot,
+        zia_vision,
+    )
+    save_vision_belief(
+        sue_dakota_hubunit.moment_mstr_dir,
+        sue_dakota_hubunit.belief_name,
+        sue_dakota_hubunit.moment_label,
+        sue_dakota_hubunit.keep_rope,
+        sue_dakota_hubunit.knot,
+        bob_vision,
+    )
 
     yao_duty = get_example_yao_speaker()
     save_duty_belief(
@@ -200,7 +228,14 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBelief(
     cook_planunit = zia_vision.get_plan_obj(a23_cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
-    yao_dakota_hubunit.save_vision_belief(zia_vision)
+    save_vision_belief(
+        yao_dakota_hubunit.moment_mstr_dir,
+        yao_dakota_hubunit.belief_name,
+        yao_dakota_hubunit.moment_label,
+        yao_dakota_hubunit.keep_rope,
+        yao_dakota_hubunit.knot,
+        zia_vision,
+    )
 
     sue_vision = beliefunit_shop(sue_str)
     sue_vision.set_max_tree_traverse(5)
@@ -231,7 +266,14 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBelief(
         reason_context=egg_rope,
         reason_plan_active_requisite=False,
     )
-    yao_dakota_hubunit.save_vision_belief(sue_vision)
+    save_vision_belief(
+        yao_dakota_hubunit.moment_mstr_dir,
+        yao_dakota_hubunit.belief_name,
+        yao_dakota_hubunit.moment_label,
+        yao_dakota_hubunit.keep_rope,
+        yao_dakota_hubunit.knot,
+        sue_vision,
+    )
 
     # WHEN
     new_yao_vision = create_listen_basis(yao_duty)
@@ -284,7 +326,14 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionBelief(
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
-    yao_dakota_hubunit.save_vision_belief(zia_vision)
+    save_vision_belief(
+        yao_dakota_hubunit.moment_mstr_dir,
+        yao_dakota_hubunit.belief_name,
+        yao_dakota_hubunit.moment_label,
+        yao_dakota_hubunit.keep_rope,
+        yao_dakota_hubunit.knot,
+        zia_vision,
+    )
 
     # WHEN
     new_yao_vision = create_listen_basis(yao_duty)
@@ -339,7 +388,14 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToBelief_duty_AndNotBelief_v
     cook_planunit = zia_vision.get_plan_obj(a23_cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
-    yao_dakota_hubunit.save_vision_belief(zia_vision)
+    save_vision_belief(
+        yao_dakota_hubunit.moment_mstr_dir,
+        yao_dakota_hubunit.belief_name,
+        yao_dakota_hubunit.moment_label,
+        yao_dakota_hubunit.keep_rope,
+        yao_dakota_hubunit.knot,
+        zia_vision,
+    )
 
     # save yao with task to visions
     yao_old_vision = beliefunit_shop(yao_str, a23_str)
@@ -348,7 +404,14 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToBelief_duty_AndNotBelief_v
     yao_old_vision.set_l1_plan(planunit_shop(vacuum_str, pledge=True))
     vacuum_planunit = yao_old_vision.get_plan_obj(vacuum_rope)
     vacuum_planunit.laborunit.add_party(yao_str)
-    yao_dakota_hubunit.save_vision_belief(yao_old_vision)
+    save_vision_belief(
+        yao_dakota_hubunit.moment_mstr_dir,
+        yao_dakota_hubunit.belief_name,
+        yao_dakota_hubunit.moment_label,
+        yao_dakota_hubunit.keep_rope,
+        yao_dakota_hubunit.knot,
+        yao_old_vision,
+    )
 
     # WHEN
     new_yao_vision = create_listen_basis(yao_duty)
@@ -383,7 +446,14 @@ def test_listen_to_agenda_duty_vision_agenda_GetsAgendaFromSrcBeliefNotSpeakerSe
     assert yao_old_vision.plan_exists(a23_run_rope()) is False
     assert yao_old_vision.plan_exists(a23_clean_rope()) is False
     yao_old_vision.set_plan(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
-    sue_dakota_hubunit.save_vision_belief(yao_old_vision)
+    save_vision_belief(
+        sue_dakota_hubunit.moment_mstr_dir,
+        sue_dakota_hubunit.belief_name,
+        sue_dakota_hubunit.moment_label,
+        sue_dakota_hubunit.keep_rope,
+        sue_dakota_hubunit.knot,
+        yao_old_vision,
+    )
 
     yao_new_vision = create_listen_basis(yao_duty)
     assert yao_new_vision.plan_exists(a23_run_rope()) is False
