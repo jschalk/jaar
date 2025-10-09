@@ -1,12 +1,7 @@
 from src.ch02_rope_logic.rope import RopeTerm, create_rope_from_labels
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, VoiceName
-from src.ch12_belief_file_toolbox.hubunit import HubUnit, hubunit_shop
 from src.ch14_keep_logic.rivercycle import get_credorledger
-from src.ch14_keep_logic.test._util.ch14_env import (
-    get_chapter_temp_dir,
-    temp_moment_label,
-)
 
 
 def get_nation_texas_rope() -> RopeTerm:
@@ -14,17 +9,6 @@ def get_nation_texas_rope() -> RopeTerm:
     usa_str = "usa"
     texas_str = "texas"
     return create_rope_from_labels([naton_str, usa_str, texas_str])
-
-
-def example_yao_hubunit() -> HubUnit:
-    return hubunit_shop(get_chapter_temp_dir(), temp_moment_label(), "Yao")
-
-
-def example_yao_texas_hubunit() -> HubUnit:
-    moment_mstr_dir = get_chapter_temp_dir()
-    return hubunit_shop(
-        moment_mstr_dir, temp_moment_label(), "Yao", get_nation_texas_rope()
-    )
 
 
 def example_yao_credorledger() -> dict[str, float]:

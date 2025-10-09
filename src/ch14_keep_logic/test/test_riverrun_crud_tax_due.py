@@ -1,9 +1,11 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch12_belief_file_toolbox.hubunit import hubunit_shop
 from src.ch14_keep_logic.rivercycle import get_credorledger, get_debtorledger
 from src.ch14_keep_logic.riverrun import riverrun_shop
-from src.ch14_keep_logic.test._util.ch14_env import temp_moment_mstr_dir
-from src.ch14_keep_logic.test._util.ch14_examples import example_yao_hubunit
+from src.ch14_keep_logic.test._util.ch14_env import (
+    get_chapter_temp_dir,
+    temp_moment_label,
+    temp_moment_mstr_dir,
+)
 
 
 def test_get_credorledger_ReturnsObj():
@@ -101,9 +103,9 @@ def test_get_debtorledger_ReturnsObjWithNoEmpty_voice_debt_lumen():
 def test_RiverRun_set_voice_tax_due_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
-    x_moment_mstr_dir = temp_moment_mstr_dir()
-    bob_hubunit = hubunit_shop(x_moment_mstr_dir, None, bob_str)
-    bob_riverrun = riverrun_shop(bob_hubunit)
+    mstr_dir = temp_moment_mstr_dir()
+    yao_str = "Yao"
+    bob_riverrun = riverrun_shop(mstr_dir, None, bob_str)
     yao_str = "Yao"
     assert bob_riverrun.tax_dues.get(yao_str) is None
 
@@ -117,12 +119,13 @@ def test_RiverRun_set_voice_tax_due_SetsAttr():
 
 def test_RiverRun_tax_dues_unpaid_ReturnsObj():
     # ESTABLISH
-    yao_hubunit = example_yao_hubunit()
-    x_riverrun = riverrun_shop(yao_hubunit)
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
+    yao_str = "Yao"
+    x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
     assert x_riverrun.tax_dues_unpaid() is False
 
     # WHEN
-    yao_str = "Yao"
     yao_tax_due = 500
     x_riverrun.set_voice_tax_due(yao_str, yao_tax_due)
     # THEN
@@ -134,7 +137,7 @@ def test_RiverRun_tax_dues_unpaid_ReturnsObj():
     assert x_riverrun.tax_dues_unpaid() is False
 
     # WHEN
-    bob_str = "Yao"
+    bob_str = "Bob"
     bob_tax_due = 300
     x_riverrun.set_voice_tax_due(bob_str, bob_tax_due)
     x_riverrun.set_voice_tax_due(yao_str, yao_tax_due)
@@ -144,7 +147,7 @@ def test_RiverRun_tax_dues_unpaid_ReturnsObj():
     # WHEN
     x_riverrun.delete_tax_due(yao_str)
     # THEN
-    assert x_riverrun.tax_dues_unpaid() is False
+    assert x_riverrun.tax_dues_unpaid()
 
 
 def test_RiverRun_set_tax_dues_SetsAttr():
@@ -152,14 +155,13 @@ def test_RiverRun_set_tax_dues_SetsAttr():
     bob_str = "Bob"
     bob_money_amount = 1000
     bob_money_grain = 1
-    bob_hubunit = hubunit_shop(
+    bob_riverrun = riverrun_shop(
         None,
         None,
-        bob_str,
-        money_grain=bob_money_grain,
+        belief_name=bob_str,
         keep_point_magnitude=bob_money_amount,
+        money_grain=bob_money_grain,
     )
-    bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
     yao_str = "Yao"
     bob_voice_debt_lumen = 38
@@ -188,14 +190,13 @@ def test_RiverRun_voice_has_tax_due_ReturnsBool():
     bob_str = "Bob"
     bob_money_amount = 1000
     bob_money_grain = 1
-    bob_hubunit = hubunit_shop(
+    bob_riverrun = riverrun_shop(
         None,
         None,
-        bob_str,
-        money_grain=bob_money_grain,
+        belief_name=bob_str,
         keep_point_magnitude=bob_money_amount,
+        money_grain=bob_money_grain,
     )
-    bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
     sue_str = "Sue"
     zia_str = "Zia"
@@ -227,14 +228,13 @@ def test_RiverRun_delete_tax_due_SetsAttr():
     bob_str = "Bob"
     bob_money_amount = 88
     bob_money_grain = 11
-    bob_hubunit = hubunit_shop(
+    bob_riverrun = riverrun_shop(
         None,
         None,
-        bob_str,
-        money_grain=bob_money_grain,
+        belief_name=bob_str,
         keep_point_magnitude=bob_money_amount,
+        money_grain=bob_money_grain,
     )
-    bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
     bob_riverrun.set_voice_tax_due(yao_str, 5)
     assert bob_riverrun.voice_has_tax_due(yao_str)
@@ -251,14 +251,13 @@ def test_RiverRun_get_voice_tax_due_ReturnsObj():
     bob_str = "Bob"
     bob_money_amount = 1000
     bob_money_grain = 1
-    bob_hubunit = hubunit_shop(
+    bob_riverrun = riverrun_shop(
         None,
         None,
-        bob_str,
-        money_grain=bob_money_grain,
+        belief_name=bob_str,
         keep_point_magnitude=bob_money_amount,
+        money_grain=bob_money_grain,
     )
-    bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
     yao_str = "Yao"
     zia_str = "Zia"
@@ -290,14 +289,13 @@ def test_RiverRun_levy_tax_due_SetsAttr_ScenarioX():
     bob_str = "Bob"
     bob_money_amount = 1000
     bob_money_grain = 1
-    bob_hubunit = hubunit_shop(
+    bob_riverrun = riverrun_shop(
         None,
         None,
-        bob_str,
-        money_grain=bob_money_grain,
+        belief_name=bob_str,
         keep_point_magnitude=bob_money_amount,
+        money_grain=bob_money_grain,
     )
-    bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
     yao_str = "Yao"
     bob_voice_debt_lumen = 38

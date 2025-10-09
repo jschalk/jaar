@@ -1,6 +1,5 @@
 from src.ch03_allot_toolbox.allot import default_grain_num_if_None
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch12_belief_file_toolbox.hubunit import hubunit_shop
 from src.ch14_keep_logic.rivercycle import (
     RiverBook,
     create_riverbook,
@@ -35,7 +34,6 @@ def test_riverbook_shop_ReturnsObj_Scenario0_money_grain_IsNone():
 
     # THEN
     assert bob_riverbook.belief_name == bob_str
-    # assert bob_riverbook.hubunit == yao_hubunit
     assert bob_riverbook._rivergrants == {}
     assert bob_riverbook.money_grain == default_grain_num_if_None()
 
@@ -51,7 +49,6 @@ def test_riverbook_shop_ReturnsObj_Scenario1_money_grain_Exists():
 
     # THEN
     assert bob_riverbook.belief_name == bob_str
-    # assert bob_riverbook.hubunit == yao_hubunit
     assert bob_riverbook._rivergrants == {}
     assert bob_riverbook.money_grain == bob_money_grain
 
@@ -70,7 +67,6 @@ def test_create_riverbook_ReturnsObj_Scenario0_money_grain_IsNone():
     yao_riverbook = create_riverbook(yao_str, yao_credorledger, yao_book_point_amount)
 
     # THEN
-    # assert yao_riverbook.hubunit == yao_hubunit
     assert yao_riverbook.belief_name == yao_str
     assert yao_riverbook._rivergrants == {yao_str: 250, sue_str: 250}
     assert sum(yao_riverbook._rivergrants.values()) == yao_book_point_amount
@@ -94,7 +90,6 @@ def test_create_riverbook_ReturnsObj_Scenario0_money_grain_ArgPassed():
     )
 
     # THEN
-    # assert yao_riverbook.hubunit == yao_hubunit
     assert yao_riverbook.belief_name == yao_str
     assert yao_riverbook._rivergrants == {yao_str: 248, sue_str: 252}
     assert sum(yao_riverbook._rivergrants.values()) == yao_book_point_amount

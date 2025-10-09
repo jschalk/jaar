@@ -1,13 +1,18 @@
 from src.ch14_keep_logic.rivercycle import rivergrade_shop
 from src.ch14_keep_logic.riverrun import riverrun_shop
-from src.ch14_keep_logic.test._util.ch14_examples import example_yao_hubunit
+from src.ch14_keep_logic.test._util.ch14_examples import (
+    get_chapter_temp_dir,
+    temp_moment_label,
+)
 
 
 def test_RiverRun_set_initial_rivergrade_SetsAttr():
     # ESTABLISH
-    yao_hubunit = example_yao_hubunit()
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
+    yao_str = "Yao"
     yao_number = 8
-    yao_riverrun = riverrun_shop(yao_hubunit, yao_number)
+    yao_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str, number=yao_number)
     x_debtor_count = 5
     x_credor_count = 8
     yao_riverrun._debtor_count = x_debtor_count
@@ -20,9 +25,9 @@ def test_RiverRun_set_initial_rivergrade_SetsAttr():
 
     # THEN
     bob_rivergrade = rivergrade_shop(
-        yao_hubunit.moment_label,
-        yao_hubunit.belief_name,
-        yao_hubunit.keep_rope,
+        a23_str,
+        yao_str,
+        None,
         bob_str,
         yao_number,
         x_debtor_count,
@@ -38,9 +43,11 @@ def test_RiverRun_set_initial_rivergrade_SetsAttr():
 
 def test_RiverRun_rivergrades_is_empty_ReturnsObj():
     # ESTABLISH
-    yao_hubunit = example_yao_hubunit()
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
+    yao_str = "Yao"
     yao_number = 8
-    yao_riverrun = riverrun_shop(yao_hubunit, yao_number)
+    yao_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str, number=yao_number)
 
     assert yao_riverrun._rivergrades_is_empty()
 
@@ -54,9 +61,11 @@ def test_RiverRun_rivergrades_is_empty_ReturnsObj():
 
 def test_RiverRun_rivergrade_exists_ReturnsObj():
     # ESTABLISH
-    yao_hubunit = example_yao_hubunit()
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
+    yao_str = "Yao"
     yao_number = 8
-    yao_riverrun = riverrun_shop(yao_hubunit, yao_number)
+    yao_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str, yao_number)
     yao_riverrun.set_initial_rivergrade("Yao")
 
     bob_str = "Bob"
@@ -73,13 +82,14 @@ def test_RiverRun_rivergrade_exists_ReturnsObj():
 
 def test_RiverRun_set_all_initial_rivergrades_SetsAttr():
     # ESTABLISH
-    yao_hubunit = example_yao_hubunit()
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
     yao_str = "Yao"
     bob_str = "Bob"
     sue_str = "Sue"
     zia_str = "Zia"
     xio_str = "Xio"
-    x_riverrun = riverrun_shop(yao_hubunit)
+    x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
     x_riverrun.set_keep_credorledger(yao_str, yao_str, 1)
     x_riverrun.set_keep_credorledger(yao_str, bob_str, 1)
     x_riverrun.set_keep_credorledger(zia_str, bob_str, 1)
@@ -104,13 +114,14 @@ def test_RiverRun_set_all_initial_rivergrades_SetsAttr():
 def test_RiverRun_set_all_initial_rivergrades_OverWritesPrevious():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
-    yao_hubunit = example_yao_hubunit()
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
     yao_str = "Yao"
     bob_str = "Bob"
     sue_str = "Sue"
     zia_str = "Zia"
     xio_str = "Xio"
-    x_riverrun = riverrun_shop(yao_hubunit)
+    x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
     x_riverrun.set_keep_credorledger(yao_str, yao_str, 1)
     x_riverrun.set_keep_credorledger(yao_str, bob_str, 1)
     x_riverrun.set_keep_credorledger(zia_str, bob_str, 1)

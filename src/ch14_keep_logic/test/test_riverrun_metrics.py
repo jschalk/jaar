@@ -1,13 +1,20 @@
 from src.ch14_keep_logic.riverrun import riverrun_shop
-from src.ch14_keep_logic.test._util.ch14_examples import example_yao_hubunit
+from src.ch14_keep_logic.test._util.ch14_examples import (
+    get_chapter_temp_dir,
+    temp_moment_label,
+)
 
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario01():
     # ESTABLISH / WHEN
-    yao_hubunit = example_yao_hubunit()
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_voice_cred_lumen = 500
-    x_riverrun = riverrun_shop(yao_hubunit)
+    x_keep_point_magnitude = 444
+    x_riverrun = riverrun_shop(
+        mstr_dir, a23_str, yao_str, keep_point_magnitude=x_keep_point_magnitude
+    )
     x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_voice_cred_lumen)
     assert x_riverrun.get_voice_tax_due(yao_str) == 0
 
@@ -21,11 +28,11 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario01():
     assert x_riverrun._credor_count == 1
     yao_rivergrade = x_riverrun.get_rivergrade(yao_str)
     assert yao_rivergrade is not None
-    assert yao_rivergrade.moment_label == yao_hubunit.moment_label
-    assert yao_rivergrade.belief_name == yao_hubunit.belief_name
-    assert yao_rivergrade.keep_rope == yao_hubunit.keep_rope
+    assert yao_rivergrade.moment_label == a23_str
+    assert yao_rivergrade.belief_name == yao_str
+    assert yao_rivergrade.keep_rope is None
     assert yao_rivergrade.number == 0
-    assert yao_rivergrade.grant_amount == yao_hubunit.keep_point_magnitude
+    assert yao_rivergrade.grant_amount == x_keep_point_magnitude
     assert yao_rivergrade.tax_bill_amount == 0
     assert yao_rivergrade.tax_paid_amount == 0
     assert yao_rivergrade.tax_paid_bool
@@ -43,16 +50,17 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario01():
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario02():
     # ESTABLISH / WHEN
-    yao_hubunit = example_yao_hubunit()
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_voice_cred_lumen = 500
     bob_str = "Bob"
     bob_voice_debt_lumen = 350
-    x_riverrun = riverrun_shop(yao_hubunit)
+    x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
     x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_voice_cred_lumen)
     x_riverrun.set_tax_dues({bob_str: bob_voice_debt_lumen})
     assert x_riverrun.get_voice_tax_due(yao_str) == 0
-    keep_money_amount = x_riverrun.hubunit.keep_point_magnitude
+    keep_money_amount = x_riverrun.keep_point_magnitude
     assert x_riverrun.get_voice_tax_due(bob_str) == keep_money_amount
 
     # WHEN
@@ -66,11 +74,11 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario02():
     assert x_riverrun._credor_count == 1
     yao_rivergrade = x_riverrun.get_rivergrade(yao_str)
     assert yao_rivergrade is not None
-    assert yao_rivergrade.moment_label == yao_hubunit.moment_label
-    assert yao_rivergrade.belief_name == yao_hubunit.belief_name
-    assert yao_rivergrade.keep_rope == yao_hubunit.keep_rope
+    assert yao_rivergrade.moment_label == a23_str
+    assert yao_rivergrade.belief_name == yao_str
+    assert yao_rivergrade.keep_rope is None
     assert yao_rivergrade.number == 0
-    assert yao_rivergrade.grant_amount == yao_hubunit.keep_point_magnitude
+    assert yao_rivergrade.grant_amount == keep_money_amount
     assert yao_rivergrade.tax_bill_amount == 0
     assert yao_rivergrade.tax_paid_amount == 0
     assert yao_rivergrade.tax_paid_bool
@@ -88,19 +96,20 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario02():
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario03():
     # ESTABLISH / WHEN
-    yao_hubunit = example_yao_hubunit()
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_voice_cred_lumen = 500
     bob_str = "Bob"
     bob_voice_debt_lumen = 25
     sue_str = "Sue"
     sue_voice_debt_lumen = 75
-    x_riverrun = riverrun_shop(yao_hubunit)
+    x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
     x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_voice_cred_lumen)
     debtorledger = {bob_str: bob_voice_debt_lumen, sue_str: sue_voice_debt_lumen}
     x_riverrun.set_tax_dues(debtorledger)
     assert x_riverrun.get_voice_tax_due(yao_str) == 0
-    keep_money_amount = x_riverrun.hubunit.keep_point_magnitude
+    keep_money_amount = x_riverrun.keep_point_magnitude
     assert x_riverrun.get_voice_tax_due(bob_str) == keep_money_amount * 0.25
     assert x_riverrun.get_voice_tax_due(sue_str) == keep_money_amount * 0.75
 
@@ -116,11 +125,11 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario03():
     assert x_riverrun._credor_count == 1
     yao_rivergrade = x_riverrun.get_rivergrade(yao_str)
     assert yao_rivergrade is not None
-    assert yao_rivergrade.moment_label == yao_hubunit.moment_label
-    assert yao_rivergrade.belief_name == yao_hubunit.belief_name
-    assert yao_rivergrade.keep_rope == yao_hubunit.keep_rope
+    assert yao_rivergrade.moment_label == a23_str
+    assert yao_rivergrade.belief_name == yao_str
+    assert yao_rivergrade.keep_rope is None
     assert yao_rivergrade.number == 0
-    assert yao_rivergrade.grant_amount == yao_hubunit.keep_point_magnitude
+    assert yao_rivergrade.grant_amount == keep_money_amount
     assert yao_rivergrade.tax_bill_amount == 0
     assert yao_rivergrade.tax_paid_amount == 0
     assert yao_rivergrade.tax_paid_bool
@@ -138,7 +147,8 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario03():
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario04():
     # ESTABLISH / WHEN
-    yao_hubunit = example_yao_hubunit()
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_yao_voice_cred_lumen = 500
     yao_sue_voice_cred_lumen = 2000
@@ -146,13 +156,13 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario04():
     bob_voice_debt_lumen = 25
     sue_str = "Sue"
     sue_voice_debt_lumen = 75
-    x_riverrun = riverrun_shop(yao_hubunit)
+    x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
     x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_yao_voice_cred_lumen)
     x_riverrun.set_keep_credorledger(yao_str, sue_str, yao_sue_voice_cred_lumen)
     debtorledger = {bob_str: bob_voice_debt_lumen, sue_str: sue_voice_debt_lumen}
     x_riverrun.set_tax_dues(debtorledger)
     assert x_riverrun.get_voice_tax_due(yao_str) == 0
-    keep_money_amount = x_riverrun.hubunit.keep_point_magnitude
+    keep_money_amount = x_riverrun.keep_point_magnitude
     assert x_riverrun.get_voice_tax_due(bob_str) == keep_money_amount * 0.25
     assert x_riverrun.get_voice_tax_due(sue_str) == keep_money_amount * 0.75
 
@@ -169,8 +179,8 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario04():
     assert x_riverrun._credor_count == 2
     yao_rivergrade = x_riverrun.get_rivergrade(yao_str)
     sue_rivergrade = x_riverrun.get_rivergrade(sue_str)
-    assert yao_rivergrade.grant_amount == yao_hubunit.keep_point_magnitude * 0.2
-    assert sue_rivergrade.grant_amount == yao_hubunit.keep_point_magnitude * 0.8
+    assert yao_rivergrade.grant_amount == keep_money_amount * 0.2
+    assert sue_rivergrade.grant_amount == keep_money_amount * 0.8
     assert yao_rivergrade.tax_bill_amount == 0
     assert yao_rivergrade.tax_paid_amount == 0
     assert yao_rivergrade.tax_paid_bool
@@ -188,13 +198,14 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario04():
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario05():
     # ESTABLISH / WHEN
-    yao_hubunit = example_yao_hubunit()
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_voice_cred_lumen = 500
-    x_riverrun = riverrun_shop(yao_hubunit)
+    x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
     x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_voice_cred_lumen)
     x_riverrun.set_tax_dues({yao_str: 1})
-    keep_money_amount = yao_hubunit.keep_point_magnitude
+    keep_money_amount = x_riverrun.keep_point_magnitude
     assert x_riverrun.get_voice_tax_due(yao_str) == keep_money_amount
     assert x_riverrun.get_voice_tax_yield(yao_str) == 0
 
@@ -209,9 +220,9 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario05():
     assert x_riverrun._credor_count == 1
     yao_rivergrade = x_riverrun.get_rivergrade(yao_str)
     assert yao_rivergrade is not None
-    assert yao_rivergrade.moment_label == yao_hubunit.moment_label
-    assert yao_rivergrade.belief_name == yao_hubunit.belief_name
-    assert yao_rivergrade.keep_rope == yao_hubunit.keep_rope
+    assert yao_rivergrade.moment_label == a23_str
+    assert yao_rivergrade.belief_name == yao_str
+    assert yao_rivergrade.keep_rope is None
     assert yao_rivergrade.number == 0
     assert yao_rivergrade.grant_amount == keep_money_amount
     assert yao_rivergrade.tax_bill_amount == keep_money_amount
@@ -221,13 +232,14 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario05():
 
 def test_RiverRun_calc_metrics_EachTimeResets_tax_yield():
     # ESTABLISH / WHEN
-    yao_hubunit = example_yao_hubunit()
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_voice_cred_lumen = 500
-    x_riverrun = riverrun_shop(yao_hubunit)
+    x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
     x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_voice_cred_lumen)
     x_riverrun.set_tax_dues({yao_str: 1})
-    keep_money_amount = yao_hubunit.keep_point_magnitude
+    keep_money_amount = x_riverrun.keep_point_magnitude
     x_riverrun.calc_metrics()
     assert x_riverrun.get_voice_tax_due(yao_str) == 0
     assert x_riverrun.get_voice_tax_yield(yao_str) == keep_money_amount
@@ -242,12 +254,14 @@ def test_RiverRun_calc_metrics_EachTimeResets_tax_yield():
 
 def test_RiverRun_calc_metrics_EndsRiverCycleLoopIfNoDifferencesBetweenCycles():
     # ESTABLISH / WHEN
-    x_riverrun = riverrun_shop(example_yao_hubunit())
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
     yao_str = "Yao"
+    x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
     bob_str = "Bob"
     x_riverrun.set_keep_credorledger(yao_str, yao_str, 1)
     x_riverrun.set_tax_dues({bob_str: 1})
-    keep_money_amount = x_riverrun.hubunit.keep_point_magnitude
+    keep_money_amount = x_riverrun.keep_point_magnitude
     assert x_riverrun.get_voice_tax_due(yao_str) == 0
     assert x_riverrun.get_voice_tax_due(bob_str) == keep_money_amount
     assert x_riverrun._cycle_count == 0

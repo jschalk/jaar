@@ -1,6 +1,5 @@
 from src.ch03_allot_toolbox.allot import default_grain_num_if_None
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch12_belief_file_toolbox.hubunit import hubunit_shop
 from src.ch14_keep_logic.rivercycle import (
     RiverCycle,
     create_init_rivercycle,
@@ -9,7 +8,6 @@ from src.ch14_keep_logic.rivercycle import (
     get_credorledger,
     rivercycle_shop,
 )
-from src.ch14_keep_logic.test._util.ch14_env import temp_moment_mstr_dir
 from src.ch14_keep_logic.test._util.ch14_examples import (
     example_bob_credorledger,
     example_yao_credorledger,
@@ -72,10 +70,8 @@ def test_rivercycle_shop_ReturnsObj_Scenario1_ParametersPassed():
 def test_RiverCylce_set_complete_riverbook_SetsAttr():
     # ESTABLISH
     one_int = 1
-    x_moment_mstr_dir = temp_moment_mstr_dir()
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(x_moment_mstr_dir, None, yao_str)
-    one_rivercycle = rivercycle_shop(yao_hubunit, one_int)
+    one_rivercycle = rivercycle_shop(yao_str, one_int)
     bob_book_point_amount = 555
     bob_str = "Bob"
     bob_riverbook = create_riverbook(bob_str, {}, bob_book_point_amount)
@@ -92,11 +88,9 @@ def test_RiverCylce_set_riverbook_SetsAttr():
     # ESTABLISH
     one_int = 1
     yao_str = "Yao"
-    x_moment_mstr_dir = temp_moment_mstr_dir()
-    yao_hubunit = hubunit_shop(x_moment_mstr_dir, None, yao_str)
     bob_str = "Bob"
     keep_credorledger = {bob_str: {yao_str: 75, bob_str: 25}}
-    one_rivercycle = rivercycle_shop(yao_hubunit, one_int, keep_credorledger)
+    one_rivercycle = rivercycle_shop(yao_str, one_int, keep_credorledger)
     bob_book_point_amount = 500
     assert one_rivercycle.riverbooks == {}
 
@@ -112,11 +106,9 @@ def test_RiverCylce_set_riverbook_SetsAttr():
 def test_RiverCylce_create_cylceledger_ReturnsObjOneRiverBook():
     # ESTABLISH
     yao_str = "Yao"
-    x_moment_mstr_dir = temp_moment_mstr_dir()
-    yao_hubunit = hubunit_shop(x_moment_mstr_dir, None, yao_str)
     one_int = 1
     yao_credorledger = {yao_str: {yao_str: 334.0}}
-    one_rivercycle = rivercycle_shop(yao_hubunit, one_int, yao_credorledger)
+    one_rivercycle = rivercycle_shop(yao_str, one_int, yao_credorledger)
     book_point_amount = 450
     one_rivercycle.set_riverbook(yao_str, book_point_amount)
 
@@ -131,14 +123,12 @@ def test_RiverCylce_create_cylceledger_ReturnsObjTwoRiverBooks():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"
-    x_moment_mstr_dir = temp_moment_mstr_dir()
-    yao_hubunit = hubunit_shop(x_moment_mstr_dir, None, yao_str)
     one_int = 1
     keep_credorledgers = {
         yao_str: {yao_str: 75, bob_str: 25},
         bob_str: {yao_str: 49, bob_str: 51},
     }
-    one_rivercycle = rivercycle_shop(yao_hubunit, one_int, keep_credorledgers)
+    one_rivercycle = rivercycle_shop(yao_str, one_int, keep_credorledgers)
     yao_book_point_amount = 500
     bob_book_point_amount = 100000
     one_rivercycle.set_riverbook(yao_str, yao_book_point_amount)
