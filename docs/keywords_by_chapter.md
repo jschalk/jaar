@@ -17,10 +17,10 @@
 - ch13_belief_listen_logic: 
 - ch14_keep_logic: _credor_count, _cycle_chargeees_curr, _cycle_chargeees_prev, _cycle_count, _debtor_count, _grants, _rivergrades, _rivergrants, _tax_got_curr, _tax_got_prev, _tax_yields, credor_count, credor_rank_num, credor_rank_percent, cycle_max, debtor_count, debtor_rank_num, debtor_rank_percent, grant_amount, keep_credorledgers, keep_point_magnitude, rewards_count, rewards_magnitude, riverbooks, tax_bill_amount, tax_dues, tax_paid_amount, tax_paid_bool, tax_paid_rank_num, tax_paid_rank_percent
 - ch15_moment_logic: beliefbudhistorys, cumulative_minute, hour_label, job_listen_rotations, moment_budunit, moment_paybook, moment_timeline_hour, moment_timeline_month, moment_timeline_weekday, moment_timeoffi, momentunit, month_label, paybook, weekday_label, weekday_order
-- ch16_translate_logic: inx_knot, inx_label, inx_name, inx_rope, inx_title, otx2inx, otx_knot, otx_label, otx_name, otx_rope, otx_title, translate_core, translate_label, translate_name, translate_rope, translate_title, translateunit, unknown_str
-- ch17_idea_logic: allowed_crud, attributes, build_order, delete_insert, delete_insert_update, delete_update, error_message, idea_category, idea_number, insert_multiple, insert_one_time, insert_update, otx_key, world_name
-- ch18_etl_toolbox: belief_net_amount, brick_agg, brick_raw, brick_valid, events_brick_agg, events_brick_valid, heard_agg, heard_raw, moment_event_time_agg, moment_ote1_agg, moment_voice_nets, sound_agg, sound_raw
-- ch19_kpi_toolbox: default_kpi_bundle, moment_kpi001_voice_nets, moment_kpi002_belief_pledges
+- ch16_translate: inx_knot, inx_label, inx_name, inx_rope, inx_title, otx2inx, otx_knot, otx_label, otx_name, otx_rope, otx_title, translate_core, translate_label, translate_name, translate_rope, translate_title, translateunit, unknown_str
+- ch17_idea: allowed_crud, attributes, build_order, delete_insert, delete_insert_update, delete_update, error_message, idea_category, idea_number, insert_multiple, insert_one_time, insert_update, otx_key, world_name
+- ch18_world_etl: belief_net_amount, brick_agg, brick_raw, brick_valid, events_brick_agg, events_brick_valid, heard_agg, heard_raw, moment_event_time_agg, moment_ote1_agg, moment_voice_nets, sound_agg, sound_raw
+- ch19_world_kpi: default_kpi_bundle, moment_kpi001_voice_nets, moment_kpi002_belief_pledges
 - ch20_world_logic: WorldName
 - ch21_lobby_logic: LobbyID, lobby_id, lobby_mstr_dir, lobbys
 - ch22_belief_viewer: 

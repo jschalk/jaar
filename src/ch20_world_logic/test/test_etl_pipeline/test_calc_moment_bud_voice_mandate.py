@@ -18,7 +18,7 @@ from src.ch15_moment_logic.moment_main import get_momentunit_from_dict, momentun
 from src.ch15_moment_logic.test._util.ch15_examples import (
     example_casa_floor_clean_factunit,
 )
-from src.ch18_etl_toolbox._ref.ch18_path import create_moment_ote1_json_path
+from src.ch18_world_etl._ref.ch18_path import create_moment_ote1_json_path
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as worlds_dir,

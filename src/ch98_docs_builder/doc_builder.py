@@ -14,10 +14,7 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_file,
 )
 from src.ch02_rope_logic._ref.ch02_doc_builder import get_ropeterm_explanation_md
-from src.ch17_idea_logic._ref.ch17_doc_builder import (
-    get_brick_formats_md,
-    get_idea_brick_mds,
-)
+from src.ch17_idea._ref.ch17_doc_builder import get_brick_formats_md, get_idea_brick_mds
 
 
 def get_keywords_src_config() -> dict[str, dict]:

@@ -6,13 +6,13 @@ from src.ch01_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
 from src.ch11_bud_logic._ref.ch11_semantic_types import EventInt, FaceName, MomentLabel
 from src.ch11_bud_logic.bud import TimeLinePoint
 from src.ch15_moment_logic.moment_main import MomentUnit
-from src.ch17_idea_logic.idea_db_tool import update_event_int_in_excel_files
-from src.ch18_etl_toolbox._ref.ch18_path import (
+from src.ch17_idea.idea_db_tool import update_event_int_in_excel_files
+from src.ch18_world_etl._ref.ch18_path import (
     create_moment_mstr_path,
     create_world_db_path,
 )
-from src.ch18_etl_toolbox.stance_tool import create_stance0001_file
-from src.ch18_etl_toolbox.transformers import (
+from src.ch18_world_etl.stance_tool import create_stance0001_file
+from src.ch18_world_etl.transformers import (
     add_moment_timeline_to_guts,
     create_last_run_metrics_json,
     etl_brick_agg_tables_to_brick_valid_tables,
@@ -45,7 +45,7 @@ from src.ch18_etl_toolbox.transformers import (
     etl_translate_sound_agg_tables_to_translate_sound_vld_tables,
     get_max_brick_agg_event_int,
 )
-from src.ch19_kpi_toolbox.kpi_mstr import (
+from src.ch19_world_kpi.kpi_mstr import (
     create_calendar_markdown_files,
     create_kpi_csvs,
     populate_kpi_bundle,
