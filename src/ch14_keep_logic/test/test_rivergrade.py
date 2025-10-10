@@ -1,5 +1,5 @@
 from src.ch14_keep_logic.rivercycle import RiverGrade, rivergrade_shop
-from src.ch14_keep_logic.test._util.ch14_examples import temp_moment_label
+from src.ch14_keep_logic.test._util.ch14_env import temp_moment_label
 from src.ref.ch14_keywords import Ch14Keywords as wx
 
 
@@ -43,48 +43,26 @@ def test_RiverGrade_Exists():
     # SELECT SUM(money_amount) FROM rewards WHERE dst_voice_name = bob_str
     assert x_rivergrade.rewards_magnitude is None
     assert set(x_rivergrade.__dict__.keys()) == {
-        "moment_label",
-        "belief_name",
-        "keep_rope",
-        "voice_name",
+        wx.moment_label,
+        wx.belief_name,
+        wx.keep_rope,
+        wx.voice_name,
         "number",
-        "tax_bill_amount",
-        "grant_amount",
-        "debtor_rank_num",
-        "credor_rank_num",
-        "tax_paid_amount",
-        "tax_paid_bool",
-        "tax_paid_rank_num",
-        "tax_paid_rank_percent",
-        "debtor_count",
-        "credor_count",
-        "debtor_rank_percent",
-        "credor_rank_percent",
-        "rewards_count",
-        "rewards_magnitude",
+        wx.tax_bill_amount,
+        wx.grant_amount,
+        wx.debtor_rank_num,
+        wx.credor_rank_num,
+        wx.tax_paid_amount,
+        wx.tax_paid_bool,
+        wx.tax_paid_rank_num,
+        wx.tax_paid_rank_percent,
+        wx.debtor_count,
+        wx.credor_count,
+        wx.debtor_rank_percent,
+        wx.credor_rank_percent,
+        wx.rewards_count,
+        wx.rewards_magnitude,
     }
-    # TODO replace above assert with below
-    # assert set(x_rivergrade.__dict__.keys()) == {
-    #     wx.moment_label,
-    #     wx.belief_name,
-    #     wx.keep_rope,
-    #     wx.voice_name,
-    #     wx.number,
-    #     wx.tax_bill_amount,
-    #     wx.grant_amount,
-    #     wx.debtor_rank_num,
-    #     wx.credor_rank_num,
-    #     wx.tax_paid_amount,
-    #     wx.tax_paid_bool,
-    #     wx.tax_paid_rank_num,
-    #     wx.tax_paid_rank_percent,
-    #     wx.debtor_count,
-    #     wx.credor_count,
-    #     wx.debtor_rank_percent,
-    #     wx.credor_rank_percent,
-    #     wx.rewards_count,
-    #     wx.rewards_magnitude,
-    # }
 
 
 def test_rivergrade_shop_ReturnsObjWithArg():

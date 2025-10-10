@@ -5,12 +5,9 @@ from src.ch14_keep_logic.riverrun import riverrun_shop
 from src.ch14_keep_logic.test._util.ch14_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
-)
-from src.ch14_keep_logic.test._util.ch14_examples import (
-    get_chapter_temp_dir,
-    get_nation_texas_rope,
     temp_moment_label,
 )
+from src.ch14_keep_logic.test._util.ch14_examples import get_nation_texas_rope
 
 
 def test_RiverRun_save_rivergrade_file_SavesFile(env_dir_setup_cleanup):

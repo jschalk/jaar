@@ -1,5 +1,5 @@
 from src.ch14_keep_logic.riverrun import riverrun_shop
-from src.ch14_keep_logic.test._util.ch14_examples import (
+from src.ch14_keep_logic.test._util.ch14_env import (
     get_chapter_temp_dir,
     temp_moment_label,
 )

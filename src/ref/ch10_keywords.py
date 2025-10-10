@@ -112,6 +112,7 @@ class Ch10Keywords(str, Enum):
     is_expanded = "is_expanded"
     jkeys = "jkeys"
     jvalues = "jvalues"
+    keep_rope = "keep_rope"
     keeps_buildable = "keeps_buildable"
     keeps_justified = "keeps_justified"
     kids = "kids"

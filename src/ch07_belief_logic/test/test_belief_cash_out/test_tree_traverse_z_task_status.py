@@ -831,10 +831,10 @@ def test_BeliefUnit_cashout_Sets_healers_dict():
     # ESTABLISH
     nation_rope = sue_beliefunit.make_l1_rope("nation")
     usa_rope = sue_beliefunit.make_rope(nation_rope, "USA")
-    oregon_rope = sue_beliefunit.make_rope(usa_rope, "Oregon")
+    oregon_keep_rope = sue_beliefunit.make_rope(usa_rope, "Oregon")
     sue_healerunit = healerunit_shop({sue_str})
     sue_beliefunit.edit_plan_attr(
-        oregon_rope, problem_bool=True, healerunit=sue_healerunit
+        oregon_keep_rope, problem_bool=True, healerunit=sue_healerunit
     )
 
     wk_rope = sue_beliefunit.make_l1_rope("sem_jours")
@@ -849,8 +849,8 @@ def test_BeliefUnit_cashout_Sets_healers_dict():
     assert len(sue_beliefunit._healers_dict) == 2
     wk_plan = sue_beliefunit.get_plan_obj(wk_rope)
     assert sue_beliefunit._healers_dict.get(bob_str) == {wk_rope: wk_plan}
-    oregon_plan = sue_beliefunit.get_plan_obj(oregon_rope)
-    assert sue_beliefunit._healers_dict.get(sue_str) == {oregon_rope: oregon_plan}
+    oregon_plan = sue_beliefunit.get_plan_obj(oregon_keep_rope)
+    assert sue_beliefunit._healers_dict.get(sue_str) == {oregon_keep_rope: oregon_plan}
 
 
 def test_BeliefUnit_cashout_Sets_keeps_buildable_True():
