@@ -28,7 +28,6 @@ def test_HubUnit_default_gut_belief_ReturnsObj():
         env_dir(),
         "amy23",
         sue_str,
-        keep_rope=None,
         knot=slash_str,
         fund_pool=x_fund_pool,
         fund_grain=pnine_float,

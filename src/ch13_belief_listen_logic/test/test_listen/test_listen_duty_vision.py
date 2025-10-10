@@ -28,6 +28,7 @@ from src.ch13_belief_listen_logic.test._util.ch13_examples import (
     eat_str,
     full_str,
     get_texas_hubunit,
+    get_texas_rope,
     hungry_str,
     run_str,
 )
@@ -213,8 +214,6 @@ def get_yao_ohio_hubunit() -> HubUnit:
         moment_mstr_dir=env_dir(),
         moment_label=yao_belief.moment_label,
         belief_name=yao_belief.belief_name,
-        keep_rope=get_ohio_rope(),
-        # pipeline_gut_job_str(),
     )
 
 
@@ -224,8 +223,6 @@ def get_yao_iowa_hubunit() -> HubUnit:
         moment_mstr_dir=env_dir(),
         moment_label=yao_belief.moment_label,
         belief_name=yao_belief.belief_name,
-        keep_rope=get_iowa_rope(),
-        # pipeline_gut_job_str(),
     )
 
 
@@ -235,8 +232,6 @@ def get_zia_utah_hubunit() -> HubUnit:
         moment_mstr_dir=env_dir(),
         moment_label=yao_belief.moment_label,
         belief_name="Zia",
-        keep_rope=get_utah_rope(),
-        # pipeline_gut_job_str(),
     )
 
 
@@ -300,7 +295,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
             yao_iowa_hubunit.moment_mstr_dir,
             yao_iowa_hubunit.belief_name,
             yao_iowa_hubunit.moment_label,
-            yao_iowa_hubunit.keep_rope,
+            get_iowa_rope(),
             yao_iowa_hubunit.knot,
             yao_str,
         )
@@ -311,7 +306,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
             yao_ohio_hubunit.moment_mstr_dir,
             yao_ohio_hubunit.belief_name,
             yao_ohio_hubunit.moment_label,
-            yao_ohio_hubunit.keep_rope,
+            get_ohio_rope(),
             yao_ohio_hubunit.knot,
             yao_str,
         )
@@ -322,7 +317,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
             zia_utah_hubunit.moment_mstr_dir,
             zia_utah_hubunit.belief_name,
             zia_utah_hubunit.moment_label,
-            zia_utah_hubunit.keep_rope,
+            get_utah_rope(),
             zia_utah_hubunit.knot,
             yao_str,
         )
@@ -337,7 +332,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
             yao_iowa_hubunit.moment_mstr_dir,
             yao_iowa_hubunit.belief_name,
             yao_iowa_hubunit.moment_label,
-            yao_iowa_hubunit.keep_rope,
+            get_iowa_rope(),
             yao_iowa_hubunit.knot,
             yao_str,
         )
@@ -348,7 +343,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
             yao_ohio_hubunit.moment_mstr_dir,
             yao_ohio_hubunit.belief_name,
             yao_ohio_hubunit.moment_label,
-            yao_ohio_hubunit.keep_rope,
+            get_ohio_rope(),
             yao_ohio_hubunit.knot,
             yao_str,
         )
@@ -359,7 +354,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
             zia_utah_hubunit.moment_mstr_dir,
             zia_utah_hubunit.belief_name,
             zia_utah_hubunit.moment_label,
-            zia_utah_hubunit.keep_rope,
+            get_utah_rope(),
             zia_utah_hubunit.knot,
             yao_str,
         )
@@ -367,7 +362,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
     )
     # WHEN / THEN
     assert job_file_exists(moment_mstr_dir, moment_label, yao_str) is False
-    listen_to_belief_visions(yao_iowa_hubunit)
+    listen_to_belief_visions(yao_iowa_hubunit, get_iowa_rope())
     assert job_file_exists(moment_mstr_dir, moment_label, yao_str)
 
     yao_job = open_job_file(moment_mstr_dir, moment_label, yao_str)
@@ -409,7 +404,7 @@ def test_create_vision_file_from_duty_file_CreatesEmptyvision(env_dir_setup_clea
         moment_mstr_dir=sue_texas_hubunit.moment_mstr_dir,
         belief_name=sue_texas_hubunit.belief_name,
         moment_label=sue_texas_hubunit.moment_label,
-        keep_rope=sue_texas_hubunit.keep_rope,
+        keep_rope=get_texas_rope(),
         knot=None,
         duty_belief=yao_duty,
     )
@@ -419,7 +414,7 @@ def test_create_vision_file_from_duty_file_CreatesEmptyvision(env_dir_setup_clea
             sue_texas_hubunit.moment_mstr_dir,
             sue_texas_hubunit.belief_name,
             sue_texas_hubunit.moment_label,
-            sue_texas_hubunit.keep_rope,
+            get_texas_rope(),
             sue_texas_hubunit.knot,
             yao_str,
         )
@@ -427,14 +422,14 @@ def test_create_vision_file_from_duty_file_CreatesEmptyvision(env_dir_setup_clea
     )
 
     # WHEN
-    create_vision_file_from_duty_file(sue_texas_hubunit, yao_str)
+    create_vision_file_from_duty_file(sue_texas_hubunit, yao_str, get_texas_rope())
 
     # THEN
     assert vision_file_exists(
         sue_texas_hubunit.moment_mstr_dir,
         sue_texas_hubunit.belief_name,
         sue_texas_hubunit.moment_label,
-        sue_texas_hubunit.keep_rope,
+        get_texas_rope(),
         sue_texas_hubunit.knot,
         yao_str,
     )
@@ -442,7 +437,7 @@ def test_create_vision_file_from_duty_file_CreatesEmptyvision(env_dir_setup_clea
         sue_texas_hubunit.moment_mstr_dir,
         sue_texas_hubunit.belief_name,
         sue_texas_hubunit.moment_label,
-        sue_texas_hubunit.keep_rope,
+        get_texas_rope(),
         sue_texas_hubunit.knot,
         yao_str,
     )

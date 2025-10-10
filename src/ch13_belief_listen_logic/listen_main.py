@@ -213,7 +213,9 @@ def listen_to_agendas_jobs_into_job(moment_mstr_dir: str, listener_job: BeliefUn
         listen_to_speaker_agenda(listener_job, speaker_job)
 
 
-def listen_to_agendas_duty_vision(listener_vision: BeliefUnit, healer_hubunit: HubUnit):
+def listen_to_agendas_duty_vision(
+    listener_vision: BeliefUnit, healer_hubunit: HubUnit, healer_keep_rope: RopeTerm
+):
     listener_id = listener_vision.belief_name
     for x_voiceunit in get_ordered_debtors_roll(listener_vision):
         if x_voiceunit.voice_name == listener_id:
@@ -221,7 +223,7 @@ def listen_to_agendas_duty_vision(listener_vision: BeliefUnit, healer_hubunit: H
                 moment_mstr_dir=healer_hubunit.moment_mstr_dir,
                 belief_name=healer_hubunit.belief_name,
                 moment_label=healer_hubunit.moment_label,
-                keep_rope=healer_hubunit.keep_rope,
+                keep_rope=healer_keep_rope,
                 knot=healer_hubunit.knot,
                 duty_belief_name=listener_id,
             )
@@ -232,7 +234,7 @@ def listen_to_agendas_duty_vision(listener_vision: BeliefUnit, healer_hubunit: H
             speaker_vision = rj_speaker_belief(
                 healer_hubunit.moment_mstr_dir,
                 healer_hubunit.moment_label,
-                healer_hubunit.keep_rope,
+                healer_keep_rope,
                 healer_hubunit.knot,
                 healer_name,
                 speaker_id,
@@ -244,12 +246,14 @@ def listen_to_agendas_duty_vision(listener_vision: BeliefUnit, healer_hubunit: H
             listen_to_speaker_agenda(listener_vision, speaker_vision)
 
 
-def listen_to_facts_duty_vision(new_vision: BeliefUnit, healer_hubunit: HubUnit):
+def listen_to_facts_duty_vision(
+    new_vision: BeliefUnit, healer_hubunit: HubUnit, healer_keep_rope: RopeTerm
+):
     duty = get_duty_belief(
         moment_mstr_dir=healer_hubunit.moment_mstr_dir,
         belief_name=healer_hubunit.belief_name,
         moment_label=healer_hubunit.moment_label,
-        keep_rope=healer_hubunit.keep_rope,
+        keep_rope=healer_keep_rope,
         knot=healer_hubunit.knot,
         duty_belief_name=new_vision.belief_name,
     )
@@ -260,7 +264,7 @@ def listen_to_facts_duty_vision(new_vision: BeliefUnit, healer_hubunit: HubUnit)
                 healer_hubunit.moment_mstr_dir,
                 healer_hubunit.belief_name,
                 healer_hubunit.moment_label,
-                healer_hubunit.keep_rope,
+                healer_keep_rope,
                 healer_hubunit.knot,
                 x_voiceunit.voice_name,
             )
@@ -291,25 +295,27 @@ def listen_to_debtors_roll_jobs_into_job(
 
 
 def listen_to_debtors_roll_duty_vision(
-    healer_hubunit: HubUnit, listener_id: BeliefName
+    healer_hubunit: HubUnit, listener_id: BeliefName, healer_keep_rope: RopeTerm
 ) -> BeliefUnit:
     duty = get_duty_belief(
         moment_mstr_dir=healer_hubunit.moment_mstr_dir,
         belief_name=healer_hubunit.belief_name,
         moment_label=healer_hubunit.moment_label,
-        keep_rope=healer_hubunit.keep_rope,
+        keep_rope=healer_keep_rope,
         knot=healer_hubunit.knot,
         duty_belief_name=listener_id,
     )
     new_duty = create_listen_basis(duty)
     if duty.debtor_respect is None:
         return new_duty
-    listen_to_agendas_duty_vision(new_duty, healer_hubunit)
-    listen_to_facts_duty_vision(new_duty, healer_hubunit)
+    listen_to_agendas_duty_vision(new_duty, healer_hubunit, healer_keep_rope)
+    listen_to_facts_duty_vision(new_duty, healer_hubunit, healer_keep_rope)
     return new_duty
 
 
-def listen_to_belief_visions(listener_hubunit: HubUnit) -> None:
+def listen_to_belief_visions(
+    listener_hubunit: HubUnit, healer_keep_rope: RopeTerm
+) -> None:
     gut = open_gut_file(
         listener_hubunit.moment_mstr_dir,
         listener_hubunit.moment_label,
@@ -325,7 +331,11 @@ def listen_to_belief_visions(listener_hubunit: HubUnit) -> None:
         healer_hubunit = copy_deepcopy(listener_hubunit)
         healer_hubunit.belief_name = x_healer_name
         fact_state_keep_visions_and_listen(
-            listener_id, keep_dict, healer_hubunit, new_job
+            listener_id,
+            keep_dict,
+            healer_hubunit,
+            new_job,
+            healer_keep_rope=healer_keep_rope,
         )
 
     if new_job.to_dict() == pre_job_dict:
@@ -341,21 +351,27 @@ def fact_state_keep_visions_and_listen(
     keep_dict: dict[RopeTerm],
     healer_hubunit: HubUnit,
     new_job: BeliefUnit,
+    healer_keep_rope: RopeTerm,
 ):
     for keep_path in keep_dict:
-        healer_hubunit.keep_rope = keep_path
-        fact_state_keep_vision_and_listen(listener_id, healer_hubunit, new_job)
+        healer_keep_rope = keep_path
+        fact_state_keep_vision_and_listen(
+            listener_id, healer_hubunit, new_job, healer_keep_rope
+        )
 
 
 def fact_state_keep_vision_and_listen(
-    listener_belief_name: BeliefName, healer_hubunit: HubUnit, new_job: BeliefUnit
+    listener_belief_name: BeliefName,
+    healer_hubunit: HubUnit,
+    new_job: BeliefUnit,
+    healer_keep_rope: RopeTerm,
 ):
     listener_id = listener_belief_name
     if vision_file_exists(
         healer_hubunit.moment_mstr_dir,
         healer_hubunit.belief_name,
         healer_hubunit.moment_label,
-        healer_hubunit.keep_rope,
+        healer_keep_rope,
         healer_hubunit.knot,
         listener_id,
     ):
@@ -363,7 +379,7 @@ def fact_state_keep_vision_and_listen(
             healer_hubunit.moment_mstr_dir,
             healer_hubunit.belief_name,
             healer_hubunit.moment_label,
-            healer_hubunit.keep_rope,
+            healer_keep_rope,
             healer_hubunit.knot,
             listener_id,
         )
@@ -383,15 +399,17 @@ def listen_to_vision_agenda(listener: BeliefUnit, vision: BeliefUnit):
     listener.cashout()
 
 
-def create_vision_file_from_duty_file(healer_hubunit: HubUnit, belief_name: BeliefName):
+def create_vision_file_from_duty_file(
+    healer_hubunit: HubUnit, belief_name: BeliefName, healer_keep_rope: RopeTerm
+):
     x_vision = listen_to_debtors_roll_duty_vision(
-        healer_hubunit, listener_id=belief_name
+        healer_hubunit, listener_id=belief_name, healer_keep_rope=healer_keep_rope
     )
     save_vision_belief(
         healer_hubunit.moment_mstr_dir,
         healer_hubunit.belief_name,
         healer_hubunit.moment_label,
-        healer_hubunit.keep_rope,
+        healer_keep_rope,
         healer_hubunit.knot,
         x_vision,
     )

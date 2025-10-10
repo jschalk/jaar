@@ -144,7 +144,6 @@ def test_save_all_gut_dutys_Setsdutys(env_dir_setup_cleanup, graphics_bool):
     sue_keep_ropes = get_keep_ropes(env_dir(), a23_str, belief_name=sue_str)
     assert os_path_exists(sue_dallas_duty_path) is False
     assert os_path_exists(sue_elpaso_duty_path) is False
-    assert not sue_hubunit.keep_rope
 
     # WHEN
     save_all_gut_dutys(
@@ -158,4 +157,3 @@ def test_save_all_gut_dutys_Setsdutys(env_dir_setup_cleanup, graphics_bool):
     # THEN
     assert os_path_exists(sue_dallas_duty_path)
     assert os_path_exists(sue_elpaso_duty_path)
-    assert not sue_hubunit.keep_rope

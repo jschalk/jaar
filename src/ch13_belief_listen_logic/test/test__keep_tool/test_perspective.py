@@ -70,23 +70,22 @@ def test_rj_perspective_belief_ReturnsBeliefWith_belief_nameSetToHubUnit_belief_
     yao_beliefunit = get_beliefunit_with_4_levels()
     yao_beliefunit.set_belief_name(yao_str)
 
-    bob_iowa_hubunit = hubunit_shop(env_dir(), a23_str, bob_str, iowa_rope)
     save_vision_belief(
-        bob_iowa_hubunit.moment_mstr_dir,
-        bob_iowa_hubunit.belief_name,
-        bob_iowa_hubunit.moment_label,
-        bob_iowa_hubunit.keep_rope,
-        bob_iowa_hubunit.knot,
-        yao_beliefunit,
+        moment_mstr_dir=env_dir(),
+        moment_label=a23_str,
+        healer_name=bob_str,
+        keep_rope=iowa_rope,
+        knot=default_knot_if_None(),
+        x_belief=yao_beliefunit,
     )
 
     sue_str = "Sue"
 
     # WHEN
     perspective_beliefunit = rj_perspective_belief(
-        env_dir(),
-        a23_str,
-        iowa_rope,
+        moment_mstr_dir=env_dir(),
+        moment_label=a23_str,
+        keep_rope=iowa_rope,
         knot=default_knot_if_None(),
         healer_name=bob_str,
         speaker_id=yao_str,

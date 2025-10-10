@@ -128,13 +128,7 @@ def get_example_yao_speaker() -> BeliefUnit:
 
 def get_texas_hubunit() -> HubUnit:
     moment_label = ch13_example_moment_label()
-    return hubunit_shop(
-        get_chapter_temp_dir(),
-        moment_label,
-        belief_name="Sue",
-        keep_rope=get_texas_rope(),
-        # pipeline_duty_vision_str(),
-    )
+    return hubunit_shop(get_chapter_temp_dir(), moment_label, belief_name="Sue")
 
 
 def get_dakota_rope() -> RopeTerm:
@@ -147,13 +141,7 @@ def get_dakota_rope() -> RopeTerm:
 
 def get_dakota_hubunit() -> HubUnit:
     moment_label = ch13_example_moment_label()
-    return hubunit_shop(
-        get_chapter_temp_dir(),
-        moment_label,
-        belief_name="Sue",
-        keep_rope=get_dakota_rope(),
-        # pipeline_duty_vision_str(),
-    )
+    return hubunit_shop(get_chapter_temp_dir(), moment_label, belief_name="Sue")
 
 
 def get_fund_breakdown_belief() -> BeliefUnit:

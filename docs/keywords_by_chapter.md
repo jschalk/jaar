@@ -13,9 +13,9 @@
 - ch09_belief_atom_logic: CRUD_command, DELETE, atom, atom_hx, column_order, crud, nesting_order, normal_specs, normal_table_name
 - ch10_pack_logic: FaceName, event_int, face_name
 - ch11_bud_logic: EventInt, amount, beliefadjust, beliefevent_facts, boss_facts, bud_belief_name, bud_time, bud_voice_nets, celldepth, found_facts, magnitude, offi_time, quota, tran_time
-- ch12_belief_file_toolbox: gut, job, keep_point_magnitude, moment_mstr_dir
+- ch12_belief_file_toolbox: gut, job, moment_mstr_dir
 - ch13_belief_listen_logic: 
-- ch14_keep_logic: _credor_count, _cycle_chargeees_curr, _cycle_chargeees_prev, _cycle_count, _debtor_count, _grants, _rivergrades, _rivergrants, _tax_got_curr, _tax_got_prev, _tax_yields, credor_count, credor_rank_num, credor_rank_percent, cycle_max, debtor_count, debtor_rank_num, debtor_rank_percent, grant_amount, keep_credorledgers, rewards_count, rewards_magnitude, riverbooks, tax_bill_amount, tax_dues, tax_paid_amount, tax_paid_bool, tax_paid_rank_num, tax_paid_rank_percent
+- ch14_keep_logic: _credor_count, _cycle_chargeees_curr, _cycle_chargeees_prev, _cycle_count, _debtor_count, _grants, _rivergrades, _rivergrants, _tax_got_curr, _tax_got_prev, _tax_yields, credor_count, credor_rank_num, credor_rank_percent, cycle_max, debtor_count, debtor_rank_num, debtor_rank_percent, grant_amount, keep_credorledgers, keep_point_magnitude, rewards_count, rewards_magnitude, riverbooks, tax_bill_amount, tax_dues, tax_paid_amount, tax_paid_bool, tax_paid_rank_num, tax_paid_rank_percent
 - ch15_moment_logic: beliefbudhistorys, cumulative_minute, hour_label, job_listen_rotations, moment_budunit, moment_paybook, moment_timeline_hour, moment_timeline_month, moment_timeline_weekday, moment_timeoffi, momentunit, month_label, paybook, weekday_label, weekday_order
 - ch16_translate_logic: inx_knot, inx_label, inx_name, inx_rope, inx_title, otx2inx, otx_knot, otx_label, otx_name, otx_rope, otx_title, translate_core, translate_label, translate_name, translate_rope, translate_title, translateunit, unknown_str
 - ch17_idea_logic: allowed_crud, attributes, build_order, delete_insert, delete_insert_update, delete_update, error_message, idea_category, idea_number, insert_multiple, insert_one_time, insert_update, otx_key, world_name
