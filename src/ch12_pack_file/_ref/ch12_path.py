@@ -1,6 +1,5 @@
 from src.ch01_data_toolbox.file_toolbox import create_path
-from src.ch11_bud_logic._ref.ch11_semantic_types import MomentLabel
-from src.ch12_pack_file._ref.ch12_semantic_types import BeliefName
+from src.ch12_pack_file._ref.ch12_semantic_types import BeliefName, MomentLabel
 
 MOMENT_FILENAME = "moment.json"
 BUDUNIT_FILENAME = "budunit.json"

@@ -10,7 +10,7 @@ from src.ch03_allot_toolbox.allot import (
     validate_pool_num,
 )
 from src.ch07_belief_logic.belief_main import BeliefUnit
-from src.ch11_bud_logic._ref.ch11_semantic_types import (
+from src.ch14_keep_logic._ref.ch14_semantic_types import (
     BeliefName,
     MomentLabel,
     MoneyGrain,

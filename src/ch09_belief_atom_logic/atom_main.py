@@ -13,14 +13,14 @@ from src.ch04_voice_logic.group import awardunit_shop
 from src.ch04_voice_logic.voice import voiceunit_shop
 from src.ch05_reason_logic.reason import factunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
-from src.ch07_belief_logic._ref.ch07_semantic_types import (
+from src.ch07_belief_logic.belief_main import BeliefUnit
+from src.ch07_belief_logic.belief_tool import belief_attr_exists, belief_get_obj
+from src.ch09_belief_atom_logic._ref.ch09_semantic_types import (
     LabelTerm,
     RopeTerm,
     TitleTerm,
     VoiceName,
 )
-from src.ch07_belief_logic.belief_main import BeliefUnit
-from src.ch07_belief_logic.belief_tool import belief_attr_exists, belief_get_obj
 from src.ch09_belief_atom_logic.atom_config import (
     CRUD_command,
     get_atom_args_class_types,

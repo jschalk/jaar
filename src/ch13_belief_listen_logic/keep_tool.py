@@ -9,12 +9,6 @@ from src.ch01_data_toolbox.file_toolbox import (
     set_dir,
 )
 from src.ch07_belief_logic.belief_main import BeliefUnit, get_beliefunit_from_json
-from src.ch12_pack_file._ref.ch12_semantic_types import (
-    BeliefName,
-    LabelTerm,
-    MomentLabel,
-    RopeTerm,
-)
 from src.ch12_pack_file.packfilehandler import (
     open_gut_file,
     open_job_file,
@@ -26,6 +20,12 @@ from src.ch13_belief_listen_logic._ref.ch13_path import (
     create_keep_visions_path,
     create_keeps_dir_path,
     create_treasury_db_path,
+)
+from src.ch13_belief_listen_logic._ref.ch13_semantic_types import (
+    BeliefName,
+    LabelTerm,
+    MomentLabel,
+    RopeTerm,
 )
 
 

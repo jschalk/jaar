@@ -27,7 +27,6 @@ from src.ch99_chapter_style.style import (
     get_chapters_func_class_metrics,
     get_docstring,
     get_json_files,
-    get_max_chapter_import_str,
     get_python_files_with_flag,
     get_semantic_types_filename,
     get_top_level_functions,
@@ -179,6 +178,7 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
         chapter_files = sorted(chapter_files)
         # chapter_file_count = 0
         for file_path in chapter_files:
+            # print(f"{chapter_prefix} {file_path=}")
             # chapter_file_count += 1
             # all_file_count += 1
             # print(f"{all_file_count} Chapter: {chapter_file_count} {file_path}")
@@ -197,6 +197,15 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
             enum_x = f"{file_path} Keywords Class Import is wrong, it should be {ch_class_name}"
             if "Keywords" in file_str and not is_doc_builder_file:
                 assert ch_class_name in file_str, enum_x
+                # print(f"{file_path=} {ch_class_name=}")
+
+            # check if semantic_types import is from current chapter
+            _semantic_types_import_count = file_str.count("_semantic_types import")
+            if "semantic_types" not in file_path and _semantic_types_import_count > 0:
+                chXX_semantic_types_str = f"{chapter_prefix}_semantic_types"
+                semantic_types_failure_str = f"{file_path=} {chXX_semantic_types_str=}"
+                assert _semantic_types_import_count == 1, semantic_types_failure_str
+                assert chXX_semantic_types_str in file_str, semantic_types_failure_str
 
             is_ref_keywords_file = f"\\{chapter_prefix}_keywords.py" in file_path
             if is_ref_keywords_file:

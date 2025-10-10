@@ -31,13 +31,13 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_file,
     set_dir,
 )
-from src.ch11_bud_logic._ref.ch11_semantic_types import EventInt, FaceName
 from src.ch16_translate.map import MapCore
 from src.ch16_translate.translate_config import (
     get_translate_args_class_types,
     get_translateable_args,
 )
 from src.ch16_translate.translate_main import TranslateUnit, get_translateunit_from_json
+from src.ch17_idea._ref.ch17_semantic_types import EventInt, FaceName
 from src.ch17_idea.idea_config import (
     get_default_sorted_list,
     get_idea_dimen_ref,

@@ -1,5 +1,7 @@
 from src.ch11_bud_logic._ref.ch11_semantic_types import (
     BeliefName,
+    EventInt,
+    FaceName,
     FirstLabel,
     FundGrain,
     FundNum,
@@ -8,6 +10,7 @@ from src.ch11_bud_logic._ref.ch11_semantic_types import (
     LabelTerm,
     MomentLabel,
     MoneyGrain,
+    MoneyNum,
     NameTerm,
     RespectGrain,
     RespectNum,

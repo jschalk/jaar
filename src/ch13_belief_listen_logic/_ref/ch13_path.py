@@ -4,7 +4,7 @@ from src.ch01_data_toolbox.file_toolbox import (
     get_json_filename,
 )
 from src.ch02_rope_logic.rope import get_all_rope_labels, rebuild_rope
-from src.ch11_bud_logic._ref.ch11_semantic_types import (
+from src.ch13_belief_listen_logic._ref.ch13_semantic_types import (
     BeliefName,
     LabelTerm,
     MomentLabel,

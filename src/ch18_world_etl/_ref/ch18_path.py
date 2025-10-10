@@ -1,5 +1,5 @@
 from src.ch01_data_toolbox.file_toolbox import create_path
-from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, LabelTerm
+from src.ch18_world_etl._ref.ch18_semantic_types import BeliefName, LabelTerm
 
 
 def create_moment_mstr_path(world_dir: str):

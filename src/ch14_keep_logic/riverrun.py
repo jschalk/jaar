@@ -11,7 +11,8 @@ from src.ch03_allot_toolbox.allot import (
     default_grain_num_if_None,
     validate_pool_num,
 )
-from src.ch11_bud_logic._ref.ch11_semantic_types import (
+from src.ch13_belief_listen_logic._ref.ch13_path import create_keep_grade_path
+from src.ch14_keep_logic._ref.ch14_semantic_types import (
     BeliefName,
     LabelTerm,
     MoneyGrain,
@@ -20,7 +21,6 @@ from src.ch11_bud_logic._ref.ch11_semantic_types import (
     VoiceName,
     default_knot_if_None,
 )
-from src.ch13_belief_listen_logic._ref.ch13_path import create_keep_grade_path
 from src.ch14_keep_logic.rivercycle import (
     RiverGrade,
     create_init_rivercycle,

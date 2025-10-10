@@ -4,7 +4,7 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_dict_from_json,
     get_json_from_dict,
 )
-from src.ch11_bud_logic._ref.ch11_semantic_types import (
+from src.ch16_translate._ref.ch16_semantic_types import (
     BeliefName,
     EventInt,
     default_knot_if_None,

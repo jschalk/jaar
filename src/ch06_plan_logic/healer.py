@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from src.ch01_data_toolbox.dict_toolbox import get_empty_set_if_None
-from src.ch04_voice_logic._ref.ch04_semantic_types import GroupTitle
+from src.ch06_plan_logic._ref.ch06_semantic_types import GroupTitle
 
 
 @dataclass

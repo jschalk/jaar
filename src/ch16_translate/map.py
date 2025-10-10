@@ -20,7 +20,7 @@ from src.ch02_rope_logic.rope import (
     get_tail_label,
     is_labelterm,
 )
-from src.ch11_bud_logic._ref.ch11_semantic_types import (
+from src.ch16_translate._ref.ch16_semantic_types import (
     EventInt,
     FaceName,
     LabelTerm,

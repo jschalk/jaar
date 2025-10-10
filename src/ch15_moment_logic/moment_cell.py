@@ -11,7 +11,6 @@ from src.ch01_data_toolbox.file_toolbox import (
 from src.ch03_allot_toolbox.allot import allot_nested_scale
 from src.ch05_reason_logic.reason import get_dict_from_factunits
 from src.ch08_epoch_logic.epoch_main import EpochPoint
-from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, LabelTerm
 from src.ch11_bud_logic.bud import MomentLabel
 from src.ch11_bud_logic.cell import CellUnit, cellunit_shop
 from src.ch11_bud_logic.weighted_facts_tool import get_nodes_with_weighted_facts
@@ -34,7 +33,11 @@ from src.ch12_pack_file.packfilehandler import (
     open_belief_file,
 )
 from src.ch15_moment_logic._ref.ch15_path import BUD_MANDATE_FILENAME
-from src.ch15_moment_logic._ref.ch15_semantic_types import FundNum
+from src.ch15_moment_logic._ref.ch15_semantic_types import (
+    BeliefName,
+    FundNum,
+    LabelTerm,
+)
 from src.ch15_moment_logic.moment_main import get_momentunit_from_dict
 
 

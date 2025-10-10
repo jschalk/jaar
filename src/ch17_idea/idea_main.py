@@ -15,8 +15,8 @@ from src.ch10_pack_logic.delta import (
     beliefdelta_shop,
     get_dimens_cruds_beliefdelta,
 )
-from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, MomentLabel
 from src.ch15_moment_logic.moment_main import MomentUnit, momentunit_shop
+from src.ch17_idea._ref.ch17_semantic_types import BeliefName, MomentLabel
 from src.ch17_idea.idea_config import get_idea_format_headers, get_idearef_from_file
 from src.ch17_idea.idea_db_tool import (
     get_default_sorted_list,

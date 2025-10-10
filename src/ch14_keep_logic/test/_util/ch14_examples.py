@@ -1,6 +1,6 @@
 from src.ch02_rope_logic.rope import RopeTerm, create_rope_from_labels
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, VoiceName
+from src.ch14_keep_logic._ref.ch14_semantic_types import BeliefName, VoiceName
 from src.ch14_keep_logic.rivercycle import get_credorledger
 
 

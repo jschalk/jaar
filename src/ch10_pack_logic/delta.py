@@ -12,7 +12,6 @@ from src.ch04_voice_logic.group import MemberShip
 from src.ch04_voice_logic.voice import MemberShip, VoiceName, VoiceUnit
 from src.ch05_reason_logic.reason import FactUnit, ReasonUnit
 from src.ch06_plan_logic.plan import PlanUnit
-from src.ch07_belief_logic._ref.ch07_semantic_types import RopeTerm, TitleTerm
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch09_belief_atom_logic.atom_config import CRUD_command
 from src.ch09_belief_atom_logic.atom_main import (
@@ -24,6 +23,7 @@ from src.ch09_belief_atom_logic.atom_main import (
     modify_belief_with_beliefatom,
     sift_beliefatom,
 )
+from src.ch10_pack_logic._ref.ch10_semantic_types import RopeTerm, TitleTerm
 
 
 @dataclass
