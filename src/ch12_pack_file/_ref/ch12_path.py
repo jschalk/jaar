@@ -85,8 +85,8 @@ def create_bud_dir_path(
     bud_time: int,
 ):
     """Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\buds\n\\bud_time"""
-    timeline_dir = create_buds_dir_path(moment_mstr_dir, moment_label, belief_name)
-    return create_path(timeline_dir, bud_time)
+    epoch_dir = create_buds_dir_path(moment_mstr_dir, moment_label, belief_name)
+    return create_path(epoch_dir, bud_time)
 
 
 def create_budunit_json_path(

@@ -10,7 +10,7 @@
     "money_grain"         : { "otx_key": false }, 
     "monthday_index"      : { "otx_key": false }, 
     "respect_grain"       : { "otx_key": false }, 
-    "timeline_label"      : { "otx_key": false }, 
+    "epoch_label"      : { "otx_key": false }, 
     "yr1_jan1_offset"     : { "otx_key": false }
   }, 
   "dimens": ["momentunit"], 

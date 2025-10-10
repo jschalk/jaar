@@ -1,0 +1,11 @@
+{
+  "attributes": {
+    "event_int"    : { "otx_key": true  }, 
+    "face_name"    : { "otx_key": true  }, 
+    "moment_label" : { "otx_key": true  }, 
+    "weekday_label": { "otx_key": false }, 
+    "weekday_order": { "otx_key": true  }
+  }, 
+  "dimens": ["momentunit", "moment_epoch_weekday"], 
+  "idea_number": "br00005"
+}

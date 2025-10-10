@@ -79,7 +79,7 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert translate_args_class_types.get("reason_state") == wx.RopeTerm
     assert translate_args_class_types.get("reason_upper") == "float"
     assert translate_args_class_types.get("numor") == "int"
-    assert translate_args_class_types.get("offi_time") == "TimeLinePoint"
+    assert translate_args_class_types.get("offi_time") == "EpochPoint"
     assert translate_args_class_types.get("belief_name") == wx.NameTerm
     assert translate_args_class_types.get("reason_lower") == "float"
     assert translate_args_class_types.get("money_grain") == "float"
@@ -94,9 +94,9 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert translate_args_class_types.get("take_force") == "float"
     assert translate_args_class_types.get("tally") == "int"
     assert translate_args_class_types.get("party_title") == wx.TitleTerm
-    assert translate_args_class_types.get("bud_time") == "TimeLinePoint"
-    assert translate_args_class_types.get("tran_time") == "TimeLinePoint"
-    assert translate_args_class_types.get("timeline_label") == wx.LabelTerm
+    assert translate_args_class_types.get("bud_time") == "EpochPoint"
+    assert translate_args_class_types.get("tran_time") == "EpochPoint"
+    assert translate_args_class_types.get("epoch_label") == wx.LabelTerm
     assert translate_args_class_types.get("weekday_label") == wx.LabelTerm
     assert translate_args_class_types.get("weekday_order") == "int"
     assert translate_args_class_types.get("knot") == "str"
@@ -190,7 +190,7 @@ def test_get_translateable_args_ReturnsObj():
         wx.belief_name,
         wx.plan_rope,
         wx.party_title,
-        wx.timeline_label,
+        wx.epoch_label,
         wx.weekday_label,
     }
 
@@ -315,7 +315,7 @@ def test_get_translate_LabelTerm_args_ReturnsObj():
         wx.moment_label,
         wx.hour_label,
         wx.month_label,
-        wx.timeline_label,
+        wx.epoch_label,
         wx.weekday_label,
     }
     expected_args = {

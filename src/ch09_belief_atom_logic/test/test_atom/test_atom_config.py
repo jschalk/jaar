@@ -554,7 +554,7 @@ def test_get_allowed_class_types_ReturnsObj():
         wx.RopeTerm,
         "float",
         "bool",
-        "TimeLinePoint",
+        "EpochPoint",
     }
 
     # WHEN / THEN

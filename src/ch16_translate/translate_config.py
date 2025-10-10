@@ -104,7 +104,7 @@ def get_translate_args_class_types() -> dict[str, str]:
         "monthday_index": "int",
         "morph": "bool",
         "numor": "int",
-        "offi_time": "TimeLinePoint",
+        "offi_time": "EpochPoint",
         "belief_name": "NameTerm",
         "money_grain": "float",
         "job_listen_rotations": "int",
@@ -123,9 +123,9 @@ def get_translate_args_class_types() -> dict[str, str]:
         "take_force": "float",
         "tally": "int",
         "party_title": "TitleTerm",
-        "tran_time": "TimeLinePoint",
-        "bud_time": "TimeLinePoint",
-        "timeline_label": "LabelTerm",
+        "tran_time": "EpochPoint",
+        "bud_time": "EpochPoint",
+        "epoch_label": "LabelTerm",
         "weekday_label": "LabelTerm",
         "weekday_order": "int",
         "knot": "str",
@@ -188,7 +188,7 @@ def get_translateable_args() -> set:
         "reason_state",
         "reason_context",
         "party_title",
-        "timeline_label",
+        "epoch_label",
         "weekday_label",
     }
 
@@ -229,7 +229,7 @@ def get_translate_LabelTerm_args() -> set[str]:
         "moment_label",
         "hour_label",
         "month_label",
-        "timeline_label",
+        "epoch_label",
         "weekday_label",
     }
 

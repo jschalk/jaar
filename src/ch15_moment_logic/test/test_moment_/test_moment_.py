@@ -5,7 +5,7 @@ from src.ch03_allot_toolbox.allot import default_grain_num_if_None
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_timeline_logic.timeline_main import timelineunit_shop
+from src.ch08_epoch_logic.epoch_main import epochunit_shop
 from src.ch11_bud_logic.bud import tranbook_shop
 from src.ch12_pack_file._ref.ch12_path import create_belief_dir_path
 from src.ch12_pack_file.packfilehandler import (
@@ -42,7 +42,7 @@ def test_MomentUnit_Exists():
     amy_moment = MomentUnit()
     # THEN
     assert not amy_moment.moment_label
-    assert not amy_moment.timeline
+    assert not amy_moment.epoch
     assert not amy_moment.beliefbudhistorys
     assert not amy_moment.paybook
     assert not amy_moment.offi_times
@@ -59,7 +59,7 @@ def test_MomentUnit_Exists():
     assert not amy_moment.all_tranbook
     assert set(amy_moment.__dict__) == {
         wx.moment_label,
-        wx.timeline,
+        wx.epoch,
         wx.beliefbudhistorys,
         wx.paybook,
         "offi_times",
@@ -86,7 +86,7 @@ def test_momentunit_shop_ReturnsMomentUnit():
 
     # THEN
     assert a23_moment.moment_label == a23_str
-    assert a23_moment.timeline == timelineunit_shop()
+    assert a23_moment.epoch == epochunit_shop()
     assert a23_moment.beliefbudhistorys == {}
     assert a23_moment.paybook == tranbook_shop(a23_str)
     assert a23_moment.offi_times == set()

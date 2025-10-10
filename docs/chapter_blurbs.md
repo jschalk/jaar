@@ -11,10 +11,10 @@ What does each one do?
 - **ch05_reason_logic**: Defines ReasonUnits, FactUnits, and Facts decide if a Reason status is True
 - **ch06_plan_logic**: Defines PlanUnits with sub-plans, Awardees, Labor, Reasons, Facts, etc.
 - **ch07_belief_logic**: Defines a BeliefUnit as a PlanUnit and VoiceUnits capable of producing an agenda.
-- **ch08_timeline_logic**: Defines how time is handled by BeliefUnits. Allows for arbitrary time structures.
+- **ch08_epoch_logic**: Defines how time is handled by BeliefUnits. Allows for arbitrary time structures.
 - **ch09_belief_atom_logic**: Defines BeliefAtoms: Irreducible units of change for a BeliefUnit.
 - **ch10_pack_logic**: Defines packs which are collections of BeliefAtoms by FaceName
-- **ch11_bud_logic**: Defines BeliefBudHistory: BeliefName, BudUnits (timelinepoint, quota, celldepth)
+- **ch11_bud_logic**: Defines BeliefBudHistory: BeliefName, BudUnits (epochpoint, quota, celldepth)
 - **ch12_pack_file**: Tools for handling complex operations. Should be distributed and deprecated.
 - **ch13_belief_listen_logic**: These tools describe how one BeliefUnit listens to another.
 - **ch14_keep_logic**: Builds a simulation that describes how much credit a healer has earned.

@@ -12,7 +12,7 @@ from src.ch01_data_toolbox.dict_toolbox import (
     set_in_nested_dict,
 )
 from src.ch03_allot_toolbox.allot import default_pool_num
-from src.ch08_timeline_logic.timeline_main import TimeLinePoint
+from src.ch08_epoch_logic.epoch_main import EpochPoint
 from src.ch11_bud_logic._ref.ch11_semantic_types import (
     BeliefName,
     FundNum,
@@ -36,12 +36,12 @@ DEFAULT_CELLDEPTH = 2
 class TranUnit:
     src: BeliefName = None
     dst: VoiceName = None
-    tran_time: TimeLinePoint = None
+    tran_time: EpochPoint = None
     amount: FundNum = None
 
 
 def tranunit_shop(
-    src: BeliefName, dst: VoiceName, tran_time: TimeLinePoint, amount: FundNum
+    src: BeliefName, dst: VoiceName, tran_time: EpochPoint, amount: FundNum
 ) -> TranUnit:
     return TranUnit(src=src, dst=dst, tran_time=tran_time, amount=amount)
 
@@ -49,14 +49,14 @@ def tranunit_shop(
 @dataclass
 class TranBook:
     moment_label: MomentLabel = None
-    tranunits: dict[BeliefName, dict[VoiceName, dict[TimeLinePoint, FundNum]]] = None
+    tranunits: dict[BeliefName, dict[VoiceName, dict[EpochPoint, FundNum]]] = None
     _voices_net: dict[BeliefName, dict[VoiceName, FundNum]] = None
 
     def set_tranunit(
         self,
         tranunit: TranUnit,
-        blocked_tran_times: set[TimeLinePoint] = None,
-        _offi_time_max: TimeLinePoint = None,
+        blocked_tran_times: set[EpochPoint] = None,
+        _offi_time_max: EpochPoint = None,
     ):
         self.add_tranunit(
             belief_name=tranunit.src,
@@ -71,45 +71,47 @@ class TranBook:
         self,
         belief_name: BeliefName,
         voice_name: VoiceName,
-        tran_time: TimeLinePoint,
+        tran_time: EpochPoint,
         amount: FundNum,
-        blocked_tran_times: set[TimeLinePoint] = None,
-        _offi_time_max: TimeLinePoint = None,
+        blocked_tran_times: set[EpochPoint] = None,
+        _offi_time_max: EpochPoint = None,
     ):
         if tran_time in get_empty_set_if_None(blocked_tran_times):
-            exception_str = f"Cannot set tranunit for tran_time={tran_time}, TimeLinePoint is blocked"
+            exception_str = (
+                f"Cannot set tranunit for tran_time={tran_time}, EpochPoint is blocked"
+            )
             raise tran_time_Exception(exception_str)
         if _offi_time_max != None and tran_time >= _offi_time_max:
-            exception_str = f"Cannot set tranunit for tran_time={tran_time}, TimeLinePoint is greater than current time={_offi_time_max}"
+            exception_str = f"Cannot set tranunit for tran_time={tran_time}, EpochPoint is greater than current time={_offi_time_max}"
             raise tran_time_Exception(exception_str)
         x_keylist = [belief_name, voice_name, tran_time]
         set_in_nested_dict(self.tranunits, x_keylist, amount)
 
     def tranunit_exists(
-        self, src: BeliefName, dst: VoiceName, tran_time: TimeLinePoint
+        self, src: BeliefName, dst: VoiceName, tran_time: EpochPoint
     ) -> bool:
         return get_from_nested_dict(self.tranunits, [src, dst, tran_time], True) != None
 
     def get_tranunit(
-        self, src: BeliefName, dst: VoiceName, tran_time: TimeLinePoint
+        self, src: BeliefName, dst: VoiceName, tran_time: EpochPoint
     ) -> TranUnit:
         x_amount = get_from_nested_dict(self.tranunits, [src, dst, tran_time], True)
         if x_amount != None:
             return tranunit_shop(src, dst, tran_time, x_amount)
 
     def get_amount(
-        self, src: BeliefName, dst: VoiceName, tran_time: TimeLinePoint
+        self, src: BeliefName, dst: VoiceName, tran_time: EpochPoint
     ) -> TranUnit:
         return get_from_nested_dict(self.tranunits, [src, dst, tran_time], True)
 
     def del_tranunit(
-        self, src: BeliefName, dst: VoiceName, tran_time: TimeLinePoint
+        self, src: BeliefName, dst: VoiceName, tran_time: EpochPoint
     ) -> TranUnit:
         x_keylist = [src, dst, tran_time]
         if exists_in_nested_dict(self.tranunits, x_keylist):
             del_in_nested_dict(self.tranunits, x_keylist)
 
-    def get_tran_times(self) -> set[TimeLinePoint]:
+    def get_tran_times(self) -> set[EpochPoint]:
         x_set = set()
         for dst_dict in self.tranunits.values():
             for tran_time_dict in dst_dict.values():
@@ -163,14 +165,14 @@ class TranBook:
     def to_dict(
         self,
     ) -> dict[
-        MomentLabel, dict[BeliefName, dict[VoiceName, dict[TimeLinePoint, FundNum]]]
+        MomentLabel, dict[BeliefName, dict[VoiceName, dict[EpochPoint, FundNum]]]
     ]:
         return {"moment_label": self.moment_label, "tranunits": self.tranunits}
 
 
 def tranbook_shop(
     x_moment_label: MomentLabel,
-    x_tranunits: dict[BeliefName, dict[VoiceName, dict[TimeLinePoint, FundNum]]] = None,
+    x_tranunits: dict[BeliefName, dict[VoiceName, dict[EpochPoint, FundNum]]] = None,
 ):
     return TranBook(
         moment_label=x_moment_label,
@@ -192,7 +194,7 @@ def get_tranbook_from_dict(x_dict: dict) -> TranBook:
 
 @dataclass
 class BudUnit:
-    bud_time: TimeLinePoint = None
+    bud_time: EpochPoint = None
     quota: FundNum = None
     celldepth: int = None  # non-negative
     _magnitude: FundNum = None  # how much of the actual quota is distributed
@@ -234,7 +236,7 @@ class BudUnit:
 
 
 def budunit_shop(
-    bud_time: TimeLinePoint,
+    bud_time: EpochPoint,
     quota: FundNum = None,
     bud_voice_nets: dict[VoiceName, FundNum] = None,
     magnitude: FundNum = None,
@@ -257,28 +259,26 @@ def budunit_shop(
 @dataclass
 class BeliefBudHistory:
     belief_name: BeliefName = None
-    buds: dict[TimeLinePoint, BudUnit] = None
+    buds: dict[EpochPoint, BudUnit] = None
     _sum_budunit_quota: FundNum = None
     _sum_voice_bud_nets: int = None
-    _bud_time_min: TimeLinePoint = None
-    _bud_time_max: TimeLinePoint = None
+    _bud_time_min: EpochPoint = None
+    _bud_time_max: EpochPoint = None
 
     def set_bud(self, x_bud: BudUnit):
         self.buds[x_bud.bud_time] = x_bud
 
-    def add_bud(
-        self, x_bud_time: TimeLinePoint, x_quota: FundNum, celldepth: int = None
-    ):
+    def add_bud(self, x_bud_time: EpochPoint, x_quota: FundNum, celldepth: int = None):
         budunit = budunit_shop(bud_time=x_bud_time, quota=x_quota, celldepth=celldepth)
         self.set_bud(budunit)
 
-    def bud_exists(self, x_bud_time: TimeLinePoint) -> bool:
+    def bud_exists(self, x_bud_time: EpochPoint) -> bool:
         return self.buds.get(x_bud_time) != None
 
-    def get_bud(self, x_bud_time: TimeLinePoint) -> BudUnit:
+    def get_bud(self, x_bud_time: EpochPoint) -> BudUnit:
         return self.buds.get(x_bud_time)
 
-    def del_bud(self, x_bud_time: TimeLinePoint):
+    def del_bud(self, x_bud_time: EpochPoint):
         self.buds.pop(x_bud_time)
 
     def get_2d_array(self) -> list[list]:
@@ -296,7 +296,7 @@ class BeliefBudHistory:
     def _get_buds_dict(self) -> dict:
         return {x_bud.bud_time: x_bud.to_dict() for x_bud in self.buds.values()}
 
-    def get_bud_times(self) -> set[TimeLinePoint]:
+    def get_bud_times(self) -> set[EpochPoint]:
         return set(self.buds.keys())
 
     def get_tranbook(self, moment_label: MomentLabel) -> TranBook:
@@ -338,7 +338,7 @@ def get_beliefbudhistory_from_dict(x_dict: dict) -> BeliefBudHistory:
     return x_beliefbudhistory
 
 
-def get_buds_from_dict(buds_dict: dict) -> dict[TimeLinePoint, BudUnit]:
+def get_buds_from_dict(buds_dict: dict) -> dict[EpochPoint, BudUnit]:
     x_dict = {}
     for x_bud_dict in buds_dict.values():
         x_budunit = get_budunit_from_dict(x_bud_dict)

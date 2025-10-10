@@ -88,9 +88,9 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[8] == "moment_label"
     assert table_sorting_priority[9] == "moment_label_otx"
     assert table_sorting_priority[10] == "moment_label_inx"
-    assert table_sorting_priority[11] == "timeline_label"
-    assert table_sorting_priority[12] == "timeline_label_otx"
-    assert table_sorting_priority[13] == "timeline_label_inx"
+    assert table_sorting_priority[11] == "epoch_label"
+    assert table_sorting_priority[12] == "epoch_label_otx"
+    assert table_sorting_priority[13] == "epoch_label_inx"
     assert table_sorting_priority[14] == "offi_time"
     assert table_sorting_priority[15] == "c400_number"
     assert table_sorting_priority[16] == "yr1_jan1_offset"
@@ -361,7 +361,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(wx.quota) == "REAL"
     assert sqlite_types.get(wx.celldepth) == "INTEGER"
     assert sqlite_types.get(wx.monthday_index) == "INTEGER"
-    assert sqlite_types.get(wx.timeline_label) == "TEXT"
+    assert sqlite_types.get(wx.epoch_label) == "TEXT"
     assert sqlite_types.get(wx.error_message) == "TEXT"
     assert sqlite_types.get(wx.solo) == "INTEGER"
 
@@ -405,9 +405,9 @@ def test_get_idea_config_dict_ReturnsObj():
     assert wx.momentunit in idea_config_dimens
     assert wx.moment_budunit in idea_config_dimens
     assert wx.moment_paybook in idea_config_dimens
-    assert wx.moment_timeline_hour in idea_config_dimens
-    assert wx.moment_timeline_month in idea_config_dimens
-    assert wx.moment_timeline_weekday in idea_config_dimens
+    assert wx.moment_epoch_hour in idea_config_dimens
+    assert wx.moment_epoch_month in idea_config_dimens
+    assert wx.moment_epoch_weekday in idea_config_dimens
     assert wx.moment_timeoffi in idea_config_dimens
     assert wx.belief_voice_membership in idea_config_dimens
     assert wx.belief_voiceunit in idea_config_dimens
@@ -459,9 +459,9 @@ def _validate_idea_config(x_idea_config: dict):
         assert idea_dict.get(wx.allowed_crud) in get_allowed_curds()
 
         if idea_dimen in {
-            wx.moment_timeline_hour,
-            wx.moment_timeline_month,
-            wx.moment_timeline_weekday,
+            wx.moment_epoch_hour,
+            wx.moment_epoch_month,
+            wx.moment_epoch_weekday,
             wx.momentunit,
             "map_otx2inx",
             wx.translate_title,
@@ -718,9 +718,9 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(wx.translate_label, 2)
     # set_idea_config_json(wx.translate_rope, 3)
     # set_idea_config_json(wx.momentunit, 5)
-    # set_idea_config_json(wx.moment_timeline_hour, 6)
-    # set_idea_config_json(wx.moment_timeline_month, 7)
-    # set_idea_config_json(wx.moment_timeline_weekday, 8)
+    # set_idea_config_json(wx.moment_epoch_hour, 6)
+    # set_idea_config_json(wx.moment_epoch_month, 7)
+    # set_idea_config_json(wx.moment_epoch_weekday, 8)
     # set_idea_config_json(wx.belief_voice_membership, 9)
     # set_idea_config_json(wx.belief_voiceunit, 10)
     # set_idea_config_json(wx.belief_plan_awardunit, 11)
@@ -742,9 +742,9 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(wx.translate_label).get(bo) == 2
     assert x_idea_config.get(wx.translate_rope).get(bo) == 3
     assert x_idea_config.get(wx.momentunit).get(bo) == 5
-    assert x_idea_config.get(wx.moment_timeline_hour).get(bo) == 6
-    assert x_idea_config.get(wx.moment_timeline_month).get(bo) == 7
-    assert x_idea_config.get(wx.moment_timeline_weekday).get(bo) == 8
+    assert x_idea_config.get(wx.moment_epoch_hour).get(bo) == 6
+    assert x_idea_config.get(wx.moment_epoch_month).get(bo) == 7
+    assert x_idea_config.get(wx.moment_epoch_weekday).get(bo) == 8
     assert x_idea_config.get(wx.belief_voice_membership).get(bo) == 9
     assert x_idea_config.get(wx.belief_voiceunit).get(bo) == 10
     assert x_idea_config.get(wx.belief_plan_awardunit).get(bo) == 11
@@ -775,7 +775,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         wx.money_grain,
         wx.respect_grain,
         wx.knot,
-        wx.timeline_label,
+        wx.epoch_label,
         wx.yr1_jan1_offset,
         wx.job_listen_rotations,
     }

@@ -2,7 +2,7 @@
   "moment_budunit": {
     "jkeys": {
       "belief_name" : { "class_type": "NameTerm"      }, 
-      "bud_time"    : { "class_type": "TimeLinePoint" }, 
+      "bud_time"    : { "class_type": "EpochPoint" }, 
       "moment_label": { "class_type": "LabelTerm"     }
     }, 
     "jvalues": { "celldepth": {"class_type": "int"}, "quota": {"class_type": "int"} }, 
@@ -12,13 +12,13 @@
     "jkeys": {
       "belief_name" : { "class_type": "NameTerm"      }, 
       "moment_label": { "class_type": "LabelTerm"     }, 
-      "tran_time"   : { "class_type": "TimeLinePoint" }, 
+      "tran_time"   : { "class_type": "EpochPoint" }, 
       "voice_name"  : { "class_type": "NameTerm"      }
     }, 
     "jvalues": { "amount": {"class_type": "float"} }, 
     "moment_static": "True"
   }, 
-  "moment_timeline_hour": {
+  "moment_epoch_hour": {
     "jkeys": {
       "cumulative_minute": { "class_type": "int"       }, 
       "moment_label"     : { "class_type": "LabelTerm" }
@@ -26,7 +26,7 @@
     "jvalues": { "hour_label": {"class_type": "LabelTerm"} }, 
     "moment_static": "True"
   }, 
-  "moment_timeline_month": {
+  "moment_epoch_month": {
     "jkeys": {
       "cumulative_day": { "class_type": "int"       }, 
       "moment_label"  : { "class_type": "LabelTerm" }
@@ -34,7 +34,7 @@
     "jvalues": { "month_label": {"class_type": "LabelTerm"} }, 
     "moment_static": "True"
   }, 
-  "moment_timeline_weekday": {
+  "moment_epoch_weekday": {
     "jkeys": {
       "moment_label" : { "class_type": "LabelTerm" }, 
       "weekday_order": { "class_type": "int"       }
@@ -45,7 +45,7 @@
   "moment_timeoffi": {
     "jkeys": {
       "moment_label": { "class_type": "LabelTerm"     }, 
-      "offi_time"   : { "class_type": "TimeLinePoint" }
+      "offi_time"   : { "class_type": "EpochPoint" }
     }, 
     "jvalues": {}, 
     "moment_static": "False"
@@ -60,7 +60,7 @@
       "money_grain"         : { "class_type": "float"     }, 
       "monthday_index"      : { "class_type": "int"       }, 
       "respect_grain"       : { "class_type": "float"     }, 
-      "timeline_label"      : { "class_type": "LabelTerm" }, 
+      "epoch_label"      : { "class_type": "LabelTerm" }, 
       "yr1_jan1_offset"     : { "class_type": "int"       }
     }, 
     "moment_static": "True"

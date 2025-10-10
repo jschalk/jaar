@@ -90,10 +90,10 @@ def _add_momentunit_to_br00000_csv(
         if_none_str(face_name),
         if_none_str(event_int),
         x_moment.moment_label,
-        x_moment.timeline.timeline_label,
-        str(x_moment.timeline.c400_number),
-        str(x_moment.timeline.yr1_jan1_offset),
-        str(x_moment.timeline.monthday_index),
+        x_moment.epoch.epoch_label,
+        str(x_moment.epoch.c400_number),
+        str(x_moment.epoch.yr1_jan1_offset),
+        str(x_moment.epoch.monthday_index),
         str(x_moment.fund_grain),
         str(x_moment.money_grain),
         str(x_moment.respect_grain),
@@ -160,7 +160,7 @@ def _add_hours_to_br00003_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for hour_plan in x_moment.timeline.hours_config:
+    for hour_plan in x_moment.epoch.hours_config:
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
@@ -180,7 +180,7 @@ def _add_months_to_br00004_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for month_plan in x_moment.timeline.months_config:
+    for month_plan in x_moment.epoch.months_config:
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
@@ -200,7 +200,7 @@ def _add_weekdays_to_br00005_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for count_x, weekday_label in enumerate(x_moment.timeline.weekdays_config):
+    for count_x, weekday_label in enumerate(x_moment.epoch.weekdays_config):
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),

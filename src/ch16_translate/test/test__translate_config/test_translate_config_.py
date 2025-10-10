@@ -50,9 +50,9 @@ def test_get_translate_config_dict_ReturnsObj():
     # assert len(translateunit_dict.get(wx.jvalues)) == 9
     # assert len(translate_budunit_dict.get(wx.jvalues)) == 1
     # assert len(translate_paybook_dict.get(wx.jvalues)) == 1
-    # assert len(translate_timeline_hour_dict.get(wx.jvalues)) == 0
-    # assert len(translate_timeline_month_dict.get(wx.jvalues)) == 0
-    # assert len(translate_timeline_weekday_dict.get(wx.jvalues)) == 0
+    # assert len(translate_epoch_hour_dict.get(wx.jvalues)) == 0
+    # assert len(translate_epoch_month_dict.get(wx.jvalues)) == 0
+    # assert len(translate_epoch_weekday_dict.get(wx.jvalues)) == 0
 
 
 def _validate_translate_config(translate_config: dict):

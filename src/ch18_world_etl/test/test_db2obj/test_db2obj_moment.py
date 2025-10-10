@@ -11,7 +11,7 @@ from src.ref.ch18_keywords import Ch18Keywords as wx
 def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scenario0():
     # ESTABLISH
     a23_str = "amy23"
-    a23_timeline_label = "timeline88"
+    a23_epoch_label = "epoch88"
     a23_c400_number = 3
     a23_yr1_jan1_offset = 7
     a23_monthday_index = 9
@@ -26,7 +26,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scen
         momentunit_h_agg_tablename = create_prime_tablename("momentunit", "h", "agg")
         momentunit_insert_sqlstr = f"""INSERT INTO {momentunit_h_agg_tablename} (
   moment_label
-, timeline_label
+, epoch_label
 , c400_number
 , yr1_jan1_offset
 , monthday_index
@@ -37,7 +37,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scen
 )
 VALUES (
   '{a23_str}'
-, '{a23_timeline_label}'
+, '{a23_epoch_label}'
 , {a23_c400_number}
 , {a23_yr1_jan1_offset}
 , {a23_monthday_index}
@@ -56,11 +56,11 @@ VALUES (
     assert a23_dict
     assert a23_dict.get("moment_label") == a23_str
     print(f"{a23_dict=}")
-    a23_timeline_dict = a23_dict.get("timeline")
-    assert a23_timeline_dict.get("timeline_label") == a23_timeline_label
-    assert a23_timeline_dict.get("c400_number") == a23_c400_number
-    assert a23_timeline_dict.get("yr1_jan1_offset") == a23_yr1_jan1_offset
-    assert a23_timeline_dict.get("monthday_index") == a23_monthday_index
+    a23_epoch_dict = a23_dict.get("epoch")
+    assert a23_epoch_dict.get("epoch_label") == a23_epoch_label
+    assert a23_epoch_dict.get("c400_number") == a23_c400_number
+    assert a23_epoch_dict.get("yr1_jan1_offset") == a23_yr1_jan1_offset
+    assert a23_epoch_dict.get("monthday_index") == a23_monthday_index
     assert a23_dict.get("fund_grain") == a23_fund_grain
     assert a23_dict.get("money_grain") == a23_money_grain
     assert a23_dict.get("respect_grain") == a23_respect_grain
@@ -84,7 +84,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scen
     # THEN
     assert a23_dict
     assert a23_dict.get("moment_label") == a23_str
-    assert "timeline" in set(a23_dict.keys())
+    assert "epoch" in set(a23_dict.keys())
     assert a23_dict.get("fund_grain") is None
     assert a23_dict.get("money_grain") is None
     assert a23_dict.get("respect_grain") is None
@@ -92,7 +92,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scen
     assert set(a23_dict.keys()) == {
         wx.moment_label,
         "offi_times",
-        wx.timeline,
+        wx.epoch,
         wx.paybook,
         wx.beliefbudhistorys,
     }
@@ -245,10 +245,10 @@ VALUES
         a23_dict = get_moment_dict_from_heard_tables(cursor, a23_str)
 
     # THEN
-    a23_timeline_dict = a23_dict.get("timeline")
-    print(f"{a23_timeline_dict=}")
-    assert a23_timeline_dict
-    a23_hours_config_dict = a23_timeline_dict.get("hours_config")
+    a23_epoch_dict = a23_dict.get("epoch")
+    print(f"{a23_epoch_dict=}")
+    assert a23_epoch_dict
+    a23_hours_config_dict = a23_epoch_dict.get("hours_config")
     print(f"{a23_hours_config_dict=}")
     assert a23_hours_config_dict == [[hour3_label, hour3_min], [hour4_label, hour4_min]]
 
@@ -279,9 +279,9 @@ VALUES
         a23_dict = get_moment_dict_from_heard_tables(cursor, a23_str)
 
     # THEN
-    a23_timeline_dict = a23_dict.get("timeline")
-    assert a23_timeline_dict
-    a23_months_config_dict = a23_timeline_dict.get("months_config")
+    a23_epoch_dict = a23_dict.get("epoch")
+    assert a23_epoch_dict
+    a23_months_config_dict = a23_epoch_dict.get("months_config")
     assert a23_months_config_dict == [
         [month111_label, day111_min],
         [month222_label, day222_min],
@@ -314,9 +314,9 @@ VALUES
         a23_dict = get_moment_dict_from_heard_tables(cursor, a23_str)
 
     # THEN
-    a23_timeline_dict = a23_dict.get("timeline")
-    assert a23_timeline_dict
-    a23_weekdays_config_dict = a23_timeline_dict.get("weekdays_config")
+    a23_epoch_dict = a23_dict.get("epoch")
+    assert a23_epoch_dict
+    a23_weekdays_config_dict = a23_epoch_dict.get("weekdays_config")
     assert a23_weekdays_config_dict == [ana_label, bee_label]
 
 
@@ -353,7 +353,7 @@ VALUES
 def test_get_moment_dict_from_heard_tables_ReturnsObj_IsFormatted_Scenario0_momentunit():
     # ESTABLISH
     a23_str = "amy23"
-    a23_timeline_label = "timeline88"
+    a23_epoch_label = "epoch88"
     a23_c400_number = 3
     a23_yr1_jan1_offset = 7
     a23_monthday_index = 9
@@ -368,7 +368,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_IsFormatted_Scenario0_mome
         momentunit_h_agg_tablename = create_prime_tablename("momentunit", "h", "agg")
         momentunit_insert_sqlstr = f"""INSERT INTO {momentunit_h_agg_tablename} (
   moment_label
-, timeline_label
+, epoch_label
 , c400_number
 , yr1_jan1_offset
 , monthday_index
@@ -379,7 +379,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_IsFormatted_Scenario0_mome
 )
 VALUES (
   '{a23_str}'
-, '{a23_timeline_label}'
+, '{a23_epoch_label}'
 , {a23_c400_number}
 , {a23_yr1_jan1_offset}
 , {a23_monthday_index}
@@ -397,10 +397,10 @@ VALUES (
 
     # THEN
     assert a23_momentunit.moment_label == a23_str
-    assert a23_momentunit.timeline.timeline_label == a23_timeline_label
-    assert a23_momentunit.timeline.c400_number == a23_c400_number
-    assert a23_momentunit.timeline.yr1_jan1_offset == a23_yr1_jan1_offset
-    assert a23_momentunit.timeline.monthday_index == a23_monthday_index
+    assert a23_momentunit.epoch.epoch_label == a23_epoch_label
+    assert a23_momentunit.epoch.c400_number == a23_c400_number
+    assert a23_momentunit.epoch.yr1_jan1_offset == a23_yr1_jan1_offset
+    assert a23_momentunit.epoch.monthday_index == a23_monthday_index
     assert a23_momentunit.fund_grain == a23_fund_grain
     assert a23_momentunit.money_grain == a23_money_grain
     assert a23_momentunit.respect_grain == a23_respect_grain
@@ -499,7 +499,7 @@ VALUES
     a23_momentunit = get_momentunit_from_dict(a23_dict)
 
     # THEN
-    a23_momentunit.timeline.hours_config == [
+    a23_momentunit.epoch.hours_config == [
         [hour3_label, hour3_min],
         [hour4_label, hour4_min],
     ]
@@ -532,7 +532,7 @@ VALUES
     a23_momentunit = get_momentunit_from_dict(a23_dict)
 
     # THEN
-    assert a23_momentunit.timeline.months_config == [
+    assert a23_momentunit.epoch.months_config == [
         [month111_label, day111_min],
         [month222_label, day222_min],
     ]
@@ -565,7 +565,7 @@ VALUES
     a23_momentunit = get_momentunit_from_dict(a23_dict)
 
     # THEN
-    assert a23_momentunit.timeline.weekdays_config == [ana_label, bee_label]
+    assert a23_momentunit.epoch.weekdays_config == [ana_label, bee_label]
 
 
 def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario5_blfoffi():

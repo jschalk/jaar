@@ -56,7 +56,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyMomentUnit(
 
     # THEN
     expected_stance_csv_strs = {
-        "br00000": "moment_label,timeline_label,c400_number,yr1_jan1_offset,monthday_index,fund_grain,money_grain,respect_grain,knot,job_listen_rotations\n",
+        "br00000": "moment_label,epoch_label,c400_number,yr1_jan1_offset,monthday_index,fund_grain,money_grain,respect_grain,knot,job_listen_rotations\n",
         "br00001": "moment_label,belief_name,bud_time,quota,celldepth\n",
         "br00002": "moment_label,belief_name,voice_name,tran_time,amount\n",
         "br00003": "moment_label,cumulative_minute,hour_label\n",

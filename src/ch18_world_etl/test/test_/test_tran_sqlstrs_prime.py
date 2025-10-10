@@ -625,7 +625,7 @@ WHERE inconsistency_rows.event_int = translate_title_s_raw.event_int
 def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario1_MomentDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = wx.moment_timeline_hour
+    dimen = wx.moment_epoch_hour
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_heard_tables(cursor)
@@ -658,15 +658,15 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
 SELECT moment_label, cumulative_minute
-FROM moment_timeline_hour_s_raw
+FROM moment_epoch_hour_s_raw
 GROUP BY moment_label, cumulative_minute
 HAVING MIN(hour_label) != MAX(hour_label)
 )
-UPDATE moment_timeline_hour_s_raw
+UPDATE moment_epoch_hour_s_raw
 SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.moment_label = moment_timeline_hour_s_raw.moment_label
-    AND inconsistency_rows.cumulative_minute = moment_timeline_hour_s_raw.cumulative_minute
+WHERE inconsistency_rows.moment_label = moment_epoch_hour_s_raw.moment_label
+    AND inconsistency_rows.cumulative_minute = moment_epoch_hour_s_raw.cumulative_minute
 ;
 """
         # print(update_sqlstr)
@@ -766,7 +766,7 @@ GROUP BY event_int, face_name, otx_title
 def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_MomentDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = wx.moment_timeline_hour
+    dimen = wx.moment_epoch_hour
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_heard_tables(cursor)
@@ -796,9 +796,9 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_MomentDimen():
         print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
 
-        static_example_sqlstr = """INSERT INTO moment_timeline_hour_s_agg (event_int, face_name, moment_label, cumulative_minute, hour_label)
+        static_example_sqlstr = """INSERT INTO moment_epoch_hour_s_agg (event_int, face_name, moment_label, cumulative_minute, hour_label)
 SELECT event_int, face_name, moment_label, cumulative_minute, MAX(hour_label)
-FROM moment_timeline_hour_s_raw
+FROM moment_epoch_hour_s_raw
 WHERE error_message IS NULL
 GROUP BY event_int, face_name, moment_label, cumulative_minute
 ;

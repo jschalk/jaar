@@ -6,9 +6,9 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_file,
     set_dir,
 )
-from src.ch08_timeline_logic.calendar_markdown import get_calendarmarkdown_str
+from src.ch08_epoch_logic.calendar_markdown import get_calendarmarkdown_str
+from src.ch15_moment_logic.moment_epoch import get_moment_beliefepochpoint
 from src.ch15_moment_logic.moment_main import get_default_path_momentunit
-from src.ch15_moment_logic.moment_timeline import get_moment_belieftimelinepoint
 from src.ch17_idea.idea_db_tool import save_table_to_csv
 from src.ch19_world_kpi.kpi_sqlstrs import (
     get_create_kpi001_sqlstr,
@@ -85,11 +85,11 @@ def create_calendar_markdown_files(moment_mstr_dir: str, output_dir: str):
     for moment_label in get_level1_dirs(moments_dir):
         moment_calendar_md_path = create_path(output_dir, f"{moment_label}_calendar.md")
         x_momentunit = get_default_path_momentunit(moment_mstr_dir, moment_label)
-        moment_belieftimelinepoint = get_moment_belieftimelinepoint(x_momentunit)
-        moment_year_num = moment_belieftimelinepoint._year_num
-        moment_timeline_config = x_momentunit.timeline.to_dict()
+        moment_beliefepochpoint = get_moment_beliefepochpoint(x_momentunit)
+        moment_year_num = moment_beliefepochpoint._year_num
+        moment_epoch_config = x_momentunit.epoch.to_dict()
         x_calendarmarkdown = get_calendarmarkdown_str(
-            moment_timeline_config, moment_year_num
+            moment_epoch_config, moment_year_num
         )
         save_file(moment_calendar_md_path, None, x_calendarmarkdown)
 

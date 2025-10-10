@@ -55,9 +55,9 @@ def test_create_prime_tablename_ReturnsObj():
     blfunit_dimen = wx.momentunit
     blfpayy_dimen = wx.moment_paybook
     blfbudd_dimen = wx.moment_budunit
-    blfhour_dimen = wx.moment_timeline_hour
-    blfmont_dimen = wx.moment_timeline_month
-    blfweek_dimen = wx.moment_timeline_weekday
+    blfhour_dimen = wx.moment_epoch_hour
+    blfmont_dimen = wx.moment_epoch_month
+    blfweek_dimen = wx.moment_epoch_weekday
     blfoffi_dimen = wx.moment_timeoffi
     trlname_dimen = wx.translate_name
     trllabe_dimen = wx.translate_label

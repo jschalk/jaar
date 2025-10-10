@@ -71,7 +71,7 @@ def test_get_idea_brick_md_ReturnsObj():
             wx.monthday_index: {wx.otx_key: False},
             wx.money_grain: {wx.otx_key: False},
             wx.respect_grain: {wx.otx_key: False},
-            wx.timeline_label: {wx.otx_key: False},
+            wx.epoch_label: {wx.otx_key: False},
             wx.yr1_jan1_offset: {wx.otx_key: False},
         },
         wx.idea_number: "br00000",
@@ -91,7 +91,7 @@ def test_get_idea_brick_md_ReturnsObj():
 - `{wx.event_int}`
 - `{wx.face_name}`
 - `{wx.moment_label}`
-- `{wx.timeline_label}`
+- `{wx.epoch_label}`
 - `{wx.c400_number}`
 - `{wx.yr1_jan1_offset}`
 - `{wx.monthday_index}`
@@ -120,7 +120,7 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
             wx.monthday_index: {wx.otx_key: False},
             wx.money_grain: {wx.otx_key: False},
             wx.respect_grain: {wx.otx_key: False},
-            wx.timeline_label: {wx.otx_key: False},
+            wx.epoch_label: {wx.otx_key: False},
             wx.yr1_jan1_offset: {wx.otx_key: False},
         },
         wx.idea_number: br00000_str,
@@ -140,7 +140,7 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
 - `{wx.event_int}`
 - `{wx.face_name}`
 - `{wx.moment_label}`
-- `{wx.timeline_label}`
+- `{wx.epoch_label}`
 - `{wx.c400_number}`
 - `{wx.yr1_jan1_offset}`
 - `{wx.monthday_index}`

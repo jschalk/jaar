@@ -11,7 +11,7 @@ from src.ch05_reason_logic.reason import (
 )
 from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit
-from src.ch08_timeline_logic.reason_str_func import (
+from src.ch08_epoch_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
@@ -87,7 +87,7 @@ def belief_objs_asdict(
             reason_case_readable_str = get_reason_case_readable_str(
                 reason_context=current_reason.reason_context,
                 caseunit=obj,
-                timeline_label=None,
+                epoch_label=None,
                 beliefunit=current_belief,
             )
             result["readable"] = f"  {add_small_dot(reason_case_readable_str)}"

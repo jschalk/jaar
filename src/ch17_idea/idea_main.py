@@ -8,7 +8,7 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_positional_dict,
 )
 from src.ch07_belief_logic.belief_main import BeliefUnit
-from src.ch08_timeline_logic.timeline_main import timelineunit_shop
+from src.ch08_epoch_logic.epoch_main import epochunit_shop
 from src.ch09_belief_atom_logic.atom_main import BeliefAtom, atomrow_shop
 from src.ch10_pack_logic.delta import (
     BeliefDelta,
@@ -222,20 +222,20 @@ def moment_build_from_df(
     momentunit_dict = {}
     for index, row in br00000_df.iterrows():
         x_moment_label = row["moment_label"]
-        x_timeline_config = {
+        x_epoch_config = {
             "c400_number": row["c400_number"],
             "hours_config": moment_hours_dict.get(x_moment_label),
             "months_config": moment_months_dict.get(x_moment_label),
             "monthday_index": row["monthday_index"],
-            "timeline_label": row["timeline_label"],
+            "epoch_label": row["epoch_label"],
             "weekdays_config": moment_weekdays_dict.get(x_moment_label),
             "yr1_jan1_offset": row["yr1_jan1_offset"],
         }
-        x_timeline = timelineunit_shop(x_timeline_config)
+        x_epoch = epochunit_shop(x_epoch_config)
         x_momentunit = momentunit_shop(
             moment_label=x_moment_label,
             moment_mstr_dir=x_moments_dir,
-            timeline=x_timeline,
+            epoch=x_epoch,
             knot=row["knot"],
             fund_grain=x_fund_grain,
             respect_grain=x_respect_grain,

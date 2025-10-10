@@ -43,7 +43,7 @@ from src.ch11_bud_logic._ref.ch11_semantic_types import (
     RopeTerm,
     default_knot_if_None,
 )
-from src.ch11_bud_logic.bud import BudUnit, TimeLinePoint, get_budunit_from_dict
+from src.ch11_bud_logic.bud import BudUnit, EpochPoint, get_budunit_from_dict
 from src.ch11_bud_logic.cell import CellUnit, cellunit_get_from_dict, cellunit_shop
 from src.ch12_pack_file._ref.ch12_path import (
     CELLNODE_FILENAME,
@@ -259,7 +259,7 @@ def bud_file_exists(
     moment_mstr_dir: str,
     moment_label: str,
     belief_name: BeliefName,
-    x_bud_time: TimeLinePoint = None,
+    x_bud_time: EpochPoint = None,
 ) -> bool:
     bud_json_path = create_budunit_json_path(
         moment_mstr_dir, moment_label, belief_name, x_bud_time
@@ -271,7 +271,7 @@ def open_bud_file(
     moment_mstr_dir: str,
     moment_label: str,
     belief_name: BeliefName,
-    x_bud_time: TimeLinePoint = None,
+    x_bud_time: EpochPoint = None,
 ) -> BudUnit:
     bud_json_path = create_budunit_json_path(
         moment_mstr_dir, moment_label, belief_name, x_bud_time
@@ -287,7 +287,7 @@ class _save_valid_beliefpoint_Exception(Exception):
 def save_beliefpoint_file(
     moment_mstr_dir: str,
     x_beliefpoint: BeliefUnit,
-    x_bud_time: TimeLinePoint = None,
+    x_bud_time: EpochPoint = None,
 ):
     x_beliefpoint.cashout()
     if x_beliefpoint.rational is False:
@@ -307,7 +307,7 @@ def beliefpoint_file_exists(
     moment_mstr_dir: str,
     moment_label: str,
     belief_name: BeliefName,
-    x_bud_time: TimeLinePoint = None,
+    x_bud_time: EpochPoint = None,
 ) -> bool:
     beliefpoint_json_path = create_beliefpoint_path(
         moment_mstr_dir, moment_label, belief_name, x_bud_time
@@ -319,7 +319,7 @@ def open_beliefpoint_file(
     moment_mstr_dir: str,
     moment_label: str,
     belief_name: BeliefName,
-    x_bud_time: TimeLinePoint = None,
+    x_bud_time: EpochPoint = None,
 ) -> bool:
     beliefpoint_json_path = create_beliefpoint_path(
         moment_mstr_dir, moment_label, belief_name, x_bud_time
@@ -330,7 +330,7 @@ def open_beliefpoint_file(
 
 def get_timepoint_dirs(
     moment_mstr_dir: str, moment_label: str, belief_name: BeliefName
-) -> list[TimeLinePoint]:
+) -> list[EpochPoint]:
     buds_dir = create_buds_dir_path(moment_mstr_dir, moment_label, belief_name)
     x_dict = get_dir_file_strs(buds_dir, include_dirs=True, include_files=False)
     return [int(x_timepoint) for x_timepoint in sorted(list(x_dict.keys()))]

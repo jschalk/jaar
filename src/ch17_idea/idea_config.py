@@ -49,9 +49,9 @@ def get_idea_elements_sort_order() -> list[str]:
         "moment_label",
         "moment_label_otx",
         "moment_label_inx",
-        "timeline_label",
-        "timeline_label_otx",
-        "timeline_label_inx",
+        "epoch_label",
+        "epoch_label_otx",
+        "epoch_label_inx",
         "offi_time",
         "c400_number",
         "yr1_jan1_offset",
@@ -371,9 +371,9 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "celldepth": "INTEGER",
         "monthday_index": "INTEGER",
         "job_listen_rotations": "INTEGER",
-        "timeline_label": "TEXT",
-        "timeline_label_otx": "TEXT",
-        "timeline_label_inx": "TEXT",
+        "epoch_label": "TEXT",
+        "epoch_label_otx": "TEXT",
+        "epoch_label_inx": "TEXT",
         "error_message": "TEXT",
         "credor_pool": "REAL",
         "debtor_pool": "REAL",
@@ -417,9 +417,9 @@ def get_idea_sqlite_types() -> dict[str, str]:
 # def idea_format_00000_momentunit_v0_0_0()->str: return "idea_format_00000_momentunit_v0_0_0"
 # def idea_format_00001_moment_budunit_v0_0_0()->str: return "idea_format_00001_moment_budunit_v0_0_0"
 # def idea_format_00002_moment_paybook_v0_0_0()->str: return "idea_format_00002_moment_paybook_v0_0_0"
-# def idea_format_00003_moment_timeline_hour_v0_0_0()->str: return "idea_format_00003_moment_timeline_hour_v0_0_0"
-# def idea_format_00004_moment_timeline_month_v0_0_0()->str: return "idea_format_00004_moment_timeline_month_v0_0_0"
-# def idea_format_00005_moment_timeline_weekday_v0_0_0()->str: return "idea_format_00005_moment_timeline_weekday_v0_0_0"
+# def idea_format_00003_moment_epoch_hour_v0_0_0()->str: return "idea_format_00003_moment_epoch_hour_v0_0_0"
+# def idea_format_00004_moment_epoch_month_v0_0_0()->str: return "idea_format_00004_moment_epoch_month_v0_0_0"
+# def idea_format_00005_moment_epoch_weekday_v0_0_0()->str: return "idea_format_00005_moment_epoch_weekday_v0_0_0"
 
 
 def idea_format_00000_momentunit_v0_0_0() -> str:
@@ -434,16 +434,16 @@ def idea_format_00002_moment_paybook_v0_0_0() -> str:
     return "idea_format_00002_moment_paybook_v0_0_0"
 
 
-def idea_format_00003_moment_timeline_hour_v0_0_0() -> str:
-    return "idea_format_00003_moment_timeline_hour_v0_0_0"
+def idea_format_00003_moment_epoch_hour_v0_0_0() -> str:
+    return "idea_format_00003_moment_epoch_hour_v0_0_0"
 
 
-def idea_format_00004_moment_timeline_month_v0_0_0() -> str:
-    return "idea_format_00004_moment_timeline_month_v0_0_0"
+def idea_format_00004_moment_epoch_month_v0_0_0() -> str:
+    return "idea_format_00004_moment_epoch_month_v0_0_0"
 
 
-def idea_format_00005_moment_timeline_weekday_v0_0_0() -> str:
-    return "idea_format_00005_moment_timeline_weekday_v0_0_0"
+def idea_format_00005_moment_epoch_weekday_v0_0_0() -> str:
+    return "idea_format_00005_moment_epoch_weekday_v0_0_0"
 
 
 def idea_format_00006_moment_timeoffi_v0_0_0() -> str:
@@ -603,9 +603,9 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00000_momentunit_v0_0_0(),
         idea_format_00001_moment_budunit_v0_0_0(),
         idea_format_00002_moment_paybook_v0_0_0(),
-        idea_format_00003_moment_timeline_hour_v0_0_0(),
-        idea_format_00004_moment_timeline_month_v0_0_0(),
-        idea_format_00005_moment_timeline_weekday_v0_0_0(),
+        idea_format_00003_moment_epoch_hour_v0_0_0(),
+        idea_format_00004_moment_epoch_month_v0_0_0(),
+        idea_format_00005_moment_epoch_weekday_v0_0_0(),
         idea_format_00006_moment_timeoffi_v0_0_0(),
         idea_format_00011_voice_v0_0_0(),
         idea_format_00012_membership_v0_0_0(),
@@ -697,12 +697,12 @@ def get_idea_format_filename(idea_number: str) -> str:
 
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
-        "moment_label,timeline_label,c400_number,yr1_jan1_offset,monthday_index,fund_grain,money_grain,respect_grain,knot,job_listen_rotations": idea_format_00000_momentunit_v0_0_0(),
+        "moment_label,epoch_label,c400_number,yr1_jan1_offset,monthday_index,fund_grain,money_grain,respect_grain,knot,job_listen_rotations": idea_format_00000_momentunit_v0_0_0(),
         "moment_label,belief_name,bud_time,quota,celldepth": idea_format_00001_moment_budunit_v0_0_0(),
         "moment_label,belief_name,voice_name,tran_time,amount": idea_format_00002_moment_paybook_v0_0_0(),
-        "moment_label,cumulative_minute,hour_label": idea_format_00003_moment_timeline_hour_v0_0_0(),
-        "moment_label,cumulative_day,month_label": idea_format_00004_moment_timeline_month_v0_0_0(),
-        "moment_label,weekday_order,weekday_label": idea_format_00005_moment_timeline_weekday_v0_0_0(),
+        "moment_label,cumulative_minute,hour_label": idea_format_00003_moment_epoch_hour_v0_0_0(),
+        "moment_label,cumulative_day,month_label": idea_format_00004_moment_epoch_month_v0_0_0(),
+        "moment_label,weekday_order,weekday_label": idea_format_00005_moment_epoch_weekday_v0_0_0(),
         "moment_label,offi_time": idea_format_00006_moment_timeoffi_v0_0_0(),
         "moment_label,belief_name,voice_name": idea_format_00011_voice_v0_0_0(),
         "moment_label,belief_name,voice_name,group_title": idea_format_00012_membership_v0_0_0(),
@@ -831,9 +831,9 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
         },
         "moment_paybook": {"br00002"},
         "moment_budunit": {"br00001"},
-        "moment_timeline_hour": {"br00003"},
-        "moment_timeline_month": {"br00004"},
-        "moment_timeline_weekday": {"br00005"},
+        "moment_epoch_hour": {"br00003"},
+        "moment_epoch_month": {"br00004"},
+        "moment_epoch_weekday": {"br00005"},
         "moment_timeoffi": {"br00006"},
         "momentunit": {
             "br00000",

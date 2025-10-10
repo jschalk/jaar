@@ -7,7 +7,7 @@ JEFFY45_STR = "jeffy45"
 
 def get_ex1_br00000_df() -> DataFrame:
     """idea_format_00000_momentunit_v0_0_0
-    c400_number,moment_label,fund_grain,monthday_index,money_grain,respect_grain,knot,timeline_label,yr1_jan1_offset
+    c400_number,moment_label,fund_grain,monthday_index,money_grain,respect_grain,knot,epoch_label,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
@@ -18,7 +18,7 @@ def get_ex1_br00000_df() -> DataFrame:
             wx.money_grain,
             wx.respect_grain,
             wx.knot,
-            wx.timeline_label,
+            wx.epoch_label,
             wx.yr1_jan1_offset,
             wx.job_listen_rotations,
         ]
@@ -54,7 +54,7 @@ def get_ex1_br00002_df() -> DataFrame:
 
 
 def get_ex1_br00003_df() -> DataFrame:
-    """idea_format_00003_moment_timeline_hour_v0_0_0
+    """idea_format_00003_moment_epoch_hour_v0_0_0
     cumulative_minute,moment_label,hour_label"""
     x_df = DataFrame(columns=["moment_label", "hour_label", "cumulative_minute"])
     x_df.loc[0] = [AMY23_STR, "12am", 60]
@@ -85,7 +85,7 @@ def get_ex1_br00003_df() -> DataFrame:
 
 
 def get_ex1_br00004_df() -> DataFrame:
-    """idea_format_00004_moment_timeline_month_v0_0_0
+    """idea_format_00004_moment_epoch_month_v0_0_0
     cumulative_day,moment_label,month_label"""
     x_df = DataFrame(columns=["moment_label", "month_label", "cumulative_day"])
     x_df.loc[0] = [AMY23_STR, "March", 31]
@@ -104,7 +104,7 @@ def get_ex1_br00004_df() -> DataFrame:
 
 
 def get_ex1_br00005_df() -> DataFrame:
-    """idea_format_00005_moment_timeline_weekday_v0_0_0
+    """idea_format_00005_moment_epoch_weekday_v0_0_0
     moment_label,weekday_label,weekday_order"""
     x_df = DataFrame(columns=[wx.moment_label, wx.weekday_label, wx.weekday_order])
     x_df.loc[0] = [AMY23_STR, "Wednesday", 0]
@@ -119,7 +119,7 @@ def get_ex1_br00005_df() -> DataFrame:
 
 def get_ex2_br00000_df() -> DataFrame:
     """idea_format_00000_momentunit_v0_0_0
-    c400_number,moment_label,fund_grain,monthday_index,money_grain,respect_grain,knot,timeline_label,yr1_jan1_offset,job_listen_rotations
+    c400_number,moment_label,fund_grain,monthday_index,money_grain,respect_grain,knot,epoch_label,yr1_jan1_offset,job_listen_rotations
     """
     x_df = DataFrame(
         columns=[
@@ -130,7 +130,7 @@ def get_ex2_br00000_df() -> DataFrame:
             wx.money_grain,
             wx.respect_grain,
             wx.knot,
-            wx.timeline_label,
+            wx.epoch_label,
             wx.yr1_jan1_offset,
             wx.job_listen_rotations,
         ]
@@ -181,7 +181,7 @@ def get_ex2_br00002_df() -> DataFrame:
 
 
 def get_ex2_br00003_df() -> DataFrame:
-    """idea_format_00003_moment_timeline_hour_v0_0_0
+    """idea_format_00003_moment_epoch_hour_v0_0_0
     cumulative_minute,moment_label,hour_label"""
     x_df = DataFrame(columns=["moment_label", "hour_label", "cumulative_minute"])
     x_df.loc[0] = [AMY23_STR, "12am", 60]
@@ -232,7 +232,7 @@ def get_ex2_br00003_df() -> DataFrame:
 
 
 def get_ex2_br00004_df() -> DataFrame:
-    """idea_format_00004_moment_timeline_month_v0_0_0
+    """idea_format_00004_moment_epoch_month_v0_0_0
     cumulative_day,moment_label,month_label"""
     x_df = DataFrame(columns=["moment_label", "month_label", "cumulative_day"])
     x_df.loc[0] = [AMY23_STR, "March", 31]
@@ -266,7 +266,7 @@ def get_ex2_br00004_df() -> DataFrame:
 
 
 def get_ex2_br00005_df() -> DataFrame:
-    """idea_format_00005_moment_timeline_weekday_v0_0_0
+    """idea_format_00005_moment_epoch_weekday_v0_0_0
     moment_label,weekday_label,weekday_order"""
     x_df = DataFrame(columns=["moment_label", "weekday_label", "weekday_order"])
     x_df.loc[0] = [AMY23_STR, "Wednesday", 0]

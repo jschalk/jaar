@@ -1,10 +1,10 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import count_files, create_path, save_json
-from src.ch08_timeline_logic.test._util.ch08_examples import (
+from src.ch08_epoch_logic.epoch_main import epochunit_shop
+from src.ch08_epoch_logic.test._util.ch08_examples import (
     get_creg_config,
     get_expected_creg_year0_markdown,
 )
-from src.ch08_timeline_logic.timeline_main import timelineunit_shop
 from src.ch12_pack_file._ref.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_main import momentunit_shop
 from src.ch19_world_kpi.kpi_mstr import create_calendar_markdown_files
@@ -42,7 +42,7 @@ def test_create_calendar_markdown_files_Senario1_CreatesFileFromMomentUnitJSON(
     a23_str = "amy23"
     a23_moment_path = create_moment_json_path(moment_mstr_dir, a23_str)
     a23_momentunit = momentunit_shop(a23_str, moment_mstr_dir)
-    assert a23_momentunit.timeline == timelineunit_shop(get_creg_config())
+    assert a23_momentunit.epoch == epochunit_shop(get_creg_config())
     save_json(a23_moment_path, None, a23_momentunit.to_dict())
     a23_calendar_md_path = create_path(output_dir, f"{a23_str}_calendar.md")
     print(f"{a23_calendar_md_path=}")

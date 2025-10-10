@@ -179,21 +179,21 @@
     }, 
     "jvalues": {"amount": {}}
   }, 
-  "moment_timeline_hour": {
+  "moment_epoch_hour": {
     "allowed_crud": "insert_one_time", 
     "build_order": 6, 
     "idea_category": "moment", 
     "jkeys": {"cumulative_minute": {}, "event_int": {}, "face_name": {}, "moment_label": {}}, 
     "jvalues": {"hour_label": {}}
   }, 
-  "moment_timeline_month": {
+  "moment_epoch_month": {
     "allowed_crud": "insert_one_time", 
     "build_order": 7, 
     "idea_category": "moment", 
     "jkeys": {"cumulative_day": {}, "event_int": {}, "face_name": {}, "moment_label": {}}, 
     "jvalues": {"month_label": {}}
   }, 
-  "moment_timeline_weekday": {
+  "moment_epoch_weekday": {
     "allowed_crud": "insert_one_time", 
     "build_order": 8, 
     "idea_category": "moment", 
@@ -220,7 +220,7 @@
       "money_grain": {}, 
       "monthday_index": {}, 
       "respect_grain": {}, 
-      "timeline_label": {}, 
+      "epoch_label": {}, 
       "yr1_jan1_offset": {}
     }
   }, 

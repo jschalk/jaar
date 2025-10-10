@@ -19,26 +19,26 @@ def get_moment_dict_from_sqlstrs(
     if not momentunit_row:
         return None  # momentunit not found
 
-    timeline_label = momentunit_row[1]
+    epoch_label = momentunit_row[1]
     c400_number = momentunit_row[2]
     yr1_jan1_offset = momentunit_row[3]
     monthday_index = momentunit_row[4]
 
-    moment_dict: dict[str, any] = {"moment_label": momentunit_row[0], "timeline": {}}
+    moment_dict: dict[str, any] = {"moment_label": momentunit_row[0], "epoch": {}}
     if (
-        timeline_label is not None
+        epoch_label is not None
         and c400_number is not None
         and yr1_jan1_offset is not None
         and monthday_index is not None
     ):
-        if timeline_label:
-            moment_dict["timeline"]["timeline_label"] = timeline_label
+        if epoch_label:
+            moment_dict["epoch"]["epoch_label"] = epoch_label
         if c400_number:
-            moment_dict["timeline"]["c400_number"] = c400_number
+            moment_dict["epoch"]["c400_number"] = c400_number
         if yr1_jan1_offset:
-            moment_dict["timeline"]["yr1_jan1_offset"] = yr1_jan1_offset
+            moment_dict["epoch"]["yr1_jan1_offset"] = yr1_jan1_offset
         if monthday_index:
-            moment_dict["timeline"]["monthday_index"] = monthday_index
+            moment_dict["epoch"]["monthday_index"] = monthday_index
 
     if fund_grain := momentunit_row[5]:
         moment_dict["fund_grain"] = fund_grain
@@ -55,13 +55,13 @@ def get_moment_dict_from_sqlstrs(
     cursor.execute(fu1_sqlstrs.get("moment_budunit"))
     _set_moment_dict_momentbud(cursor, moment_dict)
 
-    cursor.execute(fu1_sqlstrs.get("moment_timeline_hour"))
+    cursor.execute(fu1_sqlstrs.get("moment_epoch_hour"))
     _set_moment_dict_blfhour(cursor, moment_dict)
 
-    cursor.execute(fu1_sqlstrs.get("moment_timeline_month"))
+    cursor.execute(fu1_sqlstrs.get("moment_epoch_month"))
     _set_moment_dict_blfmont(cursor, moment_dict)
 
-    cursor.execute(fu1_sqlstrs.get("moment_timeline_weekday"))
+    cursor.execute(fu1_sqlstrs.get("moment_epoch_weekday"))
     _set_moment_dict_blfweek(cursor, moment_dict)
 
     cursor.execute(fu1_sqlstrs.get("moment_timeoffi"))
@@ -113,7 +113,7 @@ def _set_moment_dict_blfhour(cursor: sqlite3_Cursor, moment_dict: dict):
         row_hour_label = blfpayy_row[2]
         hours_config_list.append([row_hour_label, row_cumulative_minute])
     if hours_config_list:
-        moment_dict["timeline"]["hours_config"] = hours_config_list
+        moment_dict["epoch"]["hours_config"] = hours_config_list
 
 
 def _set_moment_dict_blfmont(cursor: sqlite3_Cursor, moment_dict: dict):
@@ -124,7 +124,7 @@ def _set_moment_dict_blfmont(cursor: sqlite3_Cursor, moment_dict: dict):
         row_month_label = blfpayy_row[2]
         months_config_list.append([row_month_label, row_cumulative_day])
     if months_config_list:
-        moment_dict["timeline"]["months_config"] = months_config_list
+        moment_dict["epoch"]["months_config"] = months_config_list
 
 
 def _set_moment_dict_blfweek(cursor: sqlite3_Cursor, moment_dict: dict):
@@ -136,7 +136,7 @@ def _set_moment_dict_blfweek(cursor: sqlite3_Cursor, moment_dict: dict):
         weekday_dict[row_weekday_order] = row_weekday_label
     weekday_config_list = [weekday_dict[key] for key in sorted(weekday_dict.keys())]
     if weekday_dict:
-        moment_dict["timeline"]["weekdays_config"] = weekday_config_list
+        moment_dict["epoch"]["weekdays_config"] = weekday_config_list
 
 
 def _set_moment_dict_timeoffi(cursor: sqlite3_Cursor, moment_dict: dict):

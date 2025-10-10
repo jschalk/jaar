@@ -49,9 +49,9 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj():
     # THEN
     gen_blfpayy_sqlstr = fu2_select_sqlstrs.get(wx.moment_paybook)
     gen_momentbud_sqlstr = fu2_select_sqlstrs.get(wx.moment_budunit)
-    gen_blfhour_sqlstr = fu2_select_sqlstrs.get(wx.moment_timeline_hour)
-    gen_blfmont_sqlstr = fu2_select_sqlstrs.get(wx.moment_timeline_month)
-    gen_blfweek_sqlstr = fu2_select_sqlstrs.get(wx.moment_timeline_weekday)
+    gen_blfhour_sqlstr = fu2_select_sqlstrs.get(wx.moment_epoch_hour)
+    gen_blfmont_sqlstr = fu2_select_sqlstrs.get(wx.moment_epoch_month)
+    gen_blfweek_sqlstr = fu2_select_sqlstrs.get(wx.moment_epoch_weekday)
     gen_blfoffi_sqlstr = fu2_select_sqlstrs.get(wx.moment_timeoffi)
     gen_momentunit_sqlstr = fu2_select_sqlstrs.get(wx.momentunit)
     with sqlite3_connect(":memory:") as moment_db_conn:
@@ -59,9 +59,9 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj():
         create_sound_and_heard_tables(cursor)
         blfpayy_abbv7 = get_dimen_abbv7(wx.moment_paybook)
         momentbud_abbv7 = get_dimen_abbv7(wx.moment_budunit)
-        blfhour_abbv7 = get_dimen_abbv7(wx.moment_timeline_hour)
-        blfmont_abbv7 = get_dimen_abbv7(wx.moment_timeline_month)
-        blfweek_abbv7 = get_dimen_abbv7(wx.moment_timeline_weekday)
+        blfhour_abbv7 = get_dimen_abbv7(wx.moment_epoch_hour)
+        blfmont_abbv7 = get_dimen_abbv7(wx.moment_epoch_month)
+        blfweek_abbv7 = get_dimen_abbv7(wx.moment_epoch_weekday)
         blfoffi_abbv7 = get_dimen_abbv7(wx.moment_timeoffi)
         momentunit_abbv7 = get_dimen_abbv7(wx.momentunit)
         blfpayy_h_agg = create_prime_tablename(blfpayy_abbv7, "h", "agg")
@@ -110,7 +110,7 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj():
         assert gen_blfweek_sqlstr == blfweek_sql
         assert gen_blfoffi_sqlstr == blfoffi_sql
         assert gen_momentunit_sqlstr == momentunit_sql
-        static_example_sqlstr = f"SELECT moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_index, fund_grain, money_grain, respect_grain, knot, job_listen_rotations FROM momentunit_h_agg WHERE moment_label = '{a23_str}'"
+        static_example_sqlstr = f"SELECT moment_label, epoch_label, c400_number, yr1_jan1_offset, monthday_index, fund_grain, money_grain, respect_grain, knot, job_listen_rotations FROM momentunit_h_agg WHERE moment_label = '{a23_str}'"
         assert gen_momentunit_sqlstr == static_example_sqlstr
 
 

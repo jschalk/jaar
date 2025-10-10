@@ -10,7 +10,7 @@ from src.ch01_data_toolbox.file_toolbox import (
 )
 from src.ch03_allot_toolbox.allot import allot_nested_scale
 from src.ch05_reason_logic.reason import get_dict_from_factunits
-from src.ch08_timeline_logic.timeline_main import TimeLinePoint
+from src.ch08_epoch_logic.epoch_main import EpochPoint
 from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, LabelTerm
 from src.ch11_bud_logic.bud import MomentLabel
 from src.ch11_bud_logic.cell import CellUnit, cellunit_shop
@@ -202,7 +202,7 @@ def set_cell_tree_decrees(
     mstr_dir: str,
     moment_label: MomentLabel,
     belief_name: BeliefName,
-    bud_time: TimeLinePoint,
+    bud_time: EpochPoint,
     bud_time_dir: str,
 ):
     # clear all current child directorys

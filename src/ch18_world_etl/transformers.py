@@ -889,11 +889,11 @@ def etl_event_inherited_beliefunits_to_moment_gut(moment_mstr_dir: str):
             save_file(gut_path, None, max_event_belief_json)
 
 
-def add_moment_timeline_to_guts(moment_mstr_dir: str):
+def add_moment_epoch_to_guts(moment_mstr_dir: str):
     moments_dir = create_path(moment_mstr_dir, "moments")
     for moment_label in get_level1_dirs(moments_dir):
         x_momentunit = get_default_path_momentunit(moment_mstr_dir, moment_label)
-        x_momentunit.add_timeline_to_guts()
+        x_momentunit.add_epoch_to_guts()
 
 
 def etl_moment_guts_to_moment_jobs(moment_mstr_dir: str):
