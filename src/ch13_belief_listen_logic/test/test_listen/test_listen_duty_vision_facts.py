@@ -17,7 +17,7 @@ from src.ch13_belief_listen_logic.test._util.ch13_examples import (
     get_example_bob_speaker,
     get_example_yao_speaker,
     get_example_zia_speaker,
-    get_texas_hubunit,
+    get_texas_packfilehandler,
     get_texas_rope,
 )
 
@@ -33,11 +33,11 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(env_dir_setup_cleanup
     zia_pool = 87
     yao_duty.add_voiceunit(zia_str, zia_voice_cred_lumen, zia_voice_debt_lumen)
     yao_duty.set_voice_respect(zia_pool)
-    sue_texas_hubunit = get_texas_hubunit()
+    sue_texas_packfilehandler = get_texas_packfilehandler()
     save_duty_belief(
-        moment_mstr_dir=sue_texas_hubunit.moment_mstr_dir,
-        belief_name=sue_texas_hubunit.belief_name,
-        moment_label=sue_texas_hubunit.moment_label,
+        moment_mstr_dir=sue_texas_packfilehandler.moment_mstr_dir,
+        belief_name=sue_texas_packfilehandler.belief_name,
+        moment_label=sue_texas_packfilehandler.moment_label,
         keep_rope=get_texas_rope(),
         knot=None,
         duty_belief=yao_duty,
@@ -45,24 +45,28 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(env_dir_setup_cleanup
 
     zia_vision = get_example_zia_speaker()
     save_vision_belief(
-        sue_texas_hubunit.moment_mstr_dir,
-        sue_texas_hubunit.belief_name,
-        sue_texas_hubunit.moment_label,
+        sue_texas_packfilehandler.moment_mstr_dir,
+        sue_texas_packfilehandler.belief_name,
+        sue_texas_packfilehandler.moment_label,
         get_texas_rope(),
-        sue_texas_hubunit.knot,
+        sue_texas_packfilehandler.knot,
         zia_vision,
     )
 
     new_yao_vision = create_listen_basis(yao_duty)
     assert new_yao_vision.get_missing_fact_reason_contexts().get(a23_eat_rope()) is None
-    listen_to_agendas_duty_vision(new_yao_vision, sue_texas_hubunit, get_texas_rope())
+    listen_to_agendas_duty_vision(
+        new_yao_vision, sue_texas_packfilehandler, get_texas_rope()
+    )
     assert (
         new_yao_vision.get_missing_fact_reason_contexts().get(a23_eat_rope())
         is not None
     )
 
     # WHEN
-    listen_to_facts_duty_vision(new_yao_vision, sue_texas_hubunit, get_texas_rope())
+    listen_to_facts_duty_vision(
+        new_yao_vision, sue_texas_packfilehandler, get_texas_rope()
+    )
 
     # THEN
     assert new_yao_vision.get_missing_fact_reason_contexts().get(a23_eat_rope()) is None
@@ -81,11 +85,11 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferenttask(
     zia_str = "Zia"
     yao_duty.add_voiceunit(zia_str, yao_voice_cred_lumen, yao_voice_debt_lumen)
     yao_duty.set_voice_respect(yao_pool)
-    sue_texas_hubunit = get_texas_hubunit()
+    sue_texas_packfilehandler = get_texas_packfilehandler()
     save_duty_belief(
-        moment_mstr_dir=sue_texas_hubunit.moment_mstr_dir,
-        belief_name=sue_texas_hubunit.belief_name,
-        moment_label=sue_texas_hubunit.moment_label,
+        moment_mstr_dir=sue_texas_packfilehandler.moment_mstr_dir,
+        belief_name=sue_texas_packfilehandler.belief_name,
+        moment_label=sue_texas_packfilehandler.moment_label,
         keep_rope=get_texas_rope(),
         knot=None,
         duty_belief=yao_duty,
@@ -96,17 +100,19 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferenttask(
     clean_planunit = zia_vision.get_plan_obj(a23_clean_rope())
     clean_planunit.laborunit.add_party(yao_str)
     save_vision_belief(
-        sue_texas_hubunit.moment_mstr_dir,
-        sue_texas_hubunit.belief_name,
-        sue_texas_hubunit.moment_label,
+        sue_texas_packfilehandler.moment_mstr_dir,
+        sue_texas_packfilehandler.belief_name,
+        sue_texas_packfilehandler.moment_label,
         get_texas_rope(),
-        sue_texas_hubunit.knot,
+        sue_texas_packfilehandler.knot,
         zia_vision,
     )
 
     new_yao_vision = create_listen_basis(yao_duty)
     assert new_yao_vision.get_missing_fact_reason_contexts().get(a23_eat_rope()) is None
-    listen_to_agendas_duty_vision(new_yao_vision, sue_texas_hubunit, get_texas_rope())
+    listen_to_agendas_duty_vision(
+        new_yao_vision, sue_texas_packfilehandler, get_texas_rope()
+    )
     assert (
         new_yao_vision.get_missing_fact_reason_contexts().get(a23_eat_rope())
         is not None
@@ -114,7 +120,9 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferenttask(
     assert new_yao_vision.get_fact(a23_eat_rope()) is None
 
     # WHEN
-    listen_to_facts_duty_vision(new_yao_vision, sue_texas_hubunit, get_texas_rope())
+    listen_to_facts_duty_vision(
+        new_yao_vision, sue_texas_packfilehandler, get_texas_rope()
+    )
 
     # THEN
     assert new_yao_vision.get_fact(a23_eat_rope()) is not None
@@ -129,11 +137,11 @@ def test_listen_to_facts_duty_vision_GetsFactsFromSrcBeliefSelfNotSpeakerSelf(
     # new_yao_vision fact_states yao_duty fact a23_eat_rope = full
     yao_duty = get_example_yao_speaker()
     yao_duty.add_fact(a23_eat_rope(), a23_full_rope())
-    sue_texas_hubunit = get_texas_hubunit()
+    sue_texas_packfilehandler = get_texas_packfilehandler()
     save_duty_belief(
-        moment_mstr_dir=sue_texas_hubunit.moment_mstr_dir,
-        belief_name=sue_texas_hubunit.belief_name,
-        moment_label=sue_texas_hubunit.moment_label,
+        moment_mstr_dir=sue_texas_packfilehandler.moment_mstr_dir,
+        belief_name=sue_texas_packfilehandler.belief_name,
+        moment_label=sue_texas_packfilehandler.moment_label,
         keep_rope=get_texas_rope(),
         knot=None,
         duty_belief=yao_duty,
@@ -144,25 +152,29 @@ def test_listen_to_facts_duty_vision_GetsFactsFromSrcBeliefSelfNotSpeakerSelf(
     old_yao_vision = get_example_yao_speaker()
     assert old_yao_vision.get_fact(a23_eat_rope()).fact_state == a23_hungry_rope()
     save_vision_belief(
-        sue_texas_hubunit.moment_mstr_dir,
-        sue_texas_hubunit.belief_name,
-        sue_texas_hubunit.moment_label,
+        sue_texas_packfilehandler.moment_mstr_dir,
+        sue_texas_packfilehandler.belief_name,
+        sue_texas_packfilehandler.moment_label,
         get_texas_rope(),
-        sue_texas_hubunit.knot,
+        sue_texas_packfilehandler.knot,
         old_yao_vision,
     )
 
     new_yao_vision = create_listen_basis(yao_duty)
     assert new_yao_vision.get_fact(a23_eat_rope()) is None
     assert new_yao_vision.get_missing_fact_reason_contexts().get(a23_eat_rope()) is None
-    listen_to_agendas_duty_vision(new_yao_vision, sue_texas_hubunit, get_texas_rope())
+    listen_to_agendas_duty_vision(
+        new_yao_vision, sue_texas_packfilehandler, get_texas_rope()
+    )
     assert (
         new_yao_vision.get_missing_fact_reason_contexts().get(a23_eat_rope())
         is not None
     )
 
     # WHEN
-    listen_to_facts_duty_vision(new_yao_vision, sue_texas_hubunit, get_texas_rope())
+    listen_to_facts_duty_vision(
+        new_yao_vision, sue_texas_packfilehandler, get_texas_rope()
+    )
 
     # THEN
     assert new_yao_vision.get_fact(a23_eat_rope()) is not None
@@ -176,11 +188,11 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
     yao_duty = get_example_yao_speaker()
     yao_duty.del_fact(a23_eat_rope())
     assert yao_duty.get_fact(a23_eat_rope()) is None
-    sue_texas_hubunit = get_texas_hubunit()
+    sue_texas_packfilehandler = get_texas_packfilehandler()
     save_duty_belief(
-        moment_mstr_dir=sue_texas_hubunit.moment_mstr_dir,
-        belief_name=sue_texas_hubunit.belief_name,
-        moment_label=sue_texas_hubunit.moment_label,
+        moment_mstr_dir=sue_texas_packfilehandler.moment_mstr_dir,
+        belief_name=sue_texas_packfilehandler.belief_name,
+        moment_label=sue_texas_packfilehandler.moment_label,
         keep_rope=get_texas_rope(),
         knot=None,
         duty_belief=yao_duty,
@@ -190,29 +202,31 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
     zia_vision.add_fact(a23_eat_rope(), a23_eat_rope())
     assert zia_vision.get_fact(a23_eat_rope()).fact_state == a23_eat_rope()
     save_vision_belief(
-        sue_texas_hubunit.moment_mstr_dir,
-        sue_texas_hubunit.belief_name,
-        sue_texas_hubunit.moment_label,
+        sue_texas_packfilehandler.moment_mstr_dir,
+        sue_texas_packfilehandler.belief_name,
+        sue_texas_packfilehandler.moment_label,
         get_texas_rope(),
-        sue_texas_hubunit.knot,
+        sue_texas_packfilehandler.knot,
         zia_vision,
     )
 
     old_yao_vision = get_example_yao_speaker()
     assert old_yao_vision.get_fact(a23_eat_rope()).fact_state == a23_hungry_rope()
     save_vision_belief(
-        sue_texas_hubunit.moment_mstr_dir,
-        sue_texas_hubunit.belief_name,
-        sue_texas_hubunit.moment_label,
+        sue_texas_packfilehandler.moment_mstr_dir,
+        sue_texas_packfilehandler.belief_name,
+        sue_texas_packfilehandler.moment_label,
         get_texas_rope(),
-        sue_texas_hubunit.knot,
+        sue_texas_packfilehandler.knot,
         old_yao_vision,
     )
 
     new_yao_vision = create_listen_basis(yao_duty)
     assert new_yao_vision.get_fact(a23_eat_rope()) is None
     assert new_yao_vision.get_missing_fact_reason_contexts().get(a23_eat_rope()) is None
-    listen_to_agendas_duty_vision(new_yao_vision, sue_texas_hubunit, get_texas_rope())
+    listen_to_agendas_duty_vision(
+        new_yao_vision, sue_texas_packfilehandler, get_texas_rope()
+    )
     print(f"{new_yao_vision.get_missing_fact_reason_contexts().keys()=}")
     print(f"{new_yao_vision.planroot.factunits.keys()=}")
     assert (
@@ -221,7 +235,9 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
     )
 
     # WHEN
-    listen_to_facts_duty_vision(new_yao_vision, sue_texas_hubunit, get_texas_rope())
+    listen_to_facts_duty_vision(
+        new_yao_vision, sue_texas_packfilehandler, get_texas_rope()
+    )
 
     # THEN
     assert yao_duty.get_fact(a23_eat_rope()) is None
@@ -237,11 +253,11 @@ def test_listen_to_facts_duty_vision_SetsPrioritizesSelfFactsOverSpeakers(
     yao_duty = get_example_yao_speaker()
     yao_duty.add_fact(a23_eat_rope(), a23_full_rope())
     assert yao_duty.get_fact(a23_eat_rope()).fact_state == a23_full_rope()
-    sue_texas_hubunit = get_texas_hubunit()
+    sue_texas_packfilehandler = get_texas_packfilehandler()
     save_duty_belief(
-        moment_mstr_dir=sue_texas_hubunit.moment_mstr_dir,
-        belief_name=sue_texas_hubunit.belief_name,
-        moment_label=sue_texas_hubunit.moment_label,
+        moment_mstr_dir=sue_texas_packfilehandler.moment_mstr_dir,
+        belief_name=sue_texas_packfilehandler.belief_name,
+        moment_label=sue_texas_packfilehandler.moment_label,
         keep_rope=get_texas_rope(),
         knot=None,
         duty_belief=yao_duty,
@@ -251,25 +267,29 @@ def test_listen_to_facts_duty_vision_SetsPrioritizesSelfFactsOverSpeakers(
     zia_vision.add_fact(a23_eat_rope(), a23_hungry_rope())
     assert zia_vision.get_fact(a23_eat_rope()).fact_state == a23_hungry_rope()
     save_vision_belief(
-        sue_texas_hubunit.moment_mstr_dir,
-        sue_texas_hubunit.belief_name,
-        sue_texas_hubunit.moment_label,
+        sue_texas_packfilehandler.moment_mstr_dir,
+        sue_texas_packfilehandler.belief_name,
+        sue_texas_packfilehandler.moment_label,
         get_texas_rope(),
-        sue_texas_hubunit.knot,
+        sue_texas_packfilehandler.knot,
         zia_vision,
     )
 
     new_yao_vision = create_listen_basis(yao_duty)
     assert new_yao_vision.get_fact(a23_eat_rope()) is None
     assert new_yao_vision.get_missing_fact_reason_contexts().get(a23_eat_rope()) is None
-    listen_to_agendas_duty_vision(new_yao_vision, sue_texas_hubunit, get_texas_rope())
+    listen_to_agendas_duty_vision(
+        new_yao_vision, sue_texas_packfilehandler, get_texas_rope()
+    )
     assert (
         new_yao_vision.get_missing_fact_reason_contexts().get(a23_eat_rope())
         is not None
     )
 
     # WHEN
-    listen_to_facts_duty_vision(new_yao_vision, sue_texas_hubunit, get_texas_rope())
+    listen_to_facts_duty_vision(
+        new_yao_vision, sue_texas_packfilehandler, get_texas_rope()
+    )
 
     # THEN
     assert new_yao_vision.get_fact(a23_eat_rope()) is not None
@@ -284,13 +304,13 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
     zia_str = zia_vision.belief_name
     zia_vision.add_fact(a23_eat_rope(), a23_eat_rope())
     assert zia_vision.get_fact(a23_eat_rope()).fact_state == a23_eat_rope()
-    sue_texas_hubunit = get_texas_hubunit()
+    sue_texas_packfilehandler = get_texas_packfilehandler()
     save_vision_belief(
-        sue_texas_hubunit.moment_mstr_dir,
-        sue_texas_hubunit.belief_name,
-        sue_texas_hubunit.moment_label,
+        sue_texas_packfilehandler.moment_mstr_dir,
+        sue_texas_packfilehandler.belief_name,
+        sue_texas_packfilehandler.moment_label,
         get_texas_rope(),
-        sue_texas_hubunit.knot,
+        sue_texas_packfilehandler.knot,
         zia_vision,
     )
 
@@ -298,11 +318,11 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
     bob_str = bob_vision.belief_name
     assert bob_vision.get_fact(a23_eat_rope()).fact_state == a23_hungry_rope()
     save_vision_belief(
-        sue_texas_hubunit.moment_mstr_dir,
-        sue_texas_hubunit.belief_name,
-        sue_texas_hubunit.moment_label,
+        sue_texas_packfilehandler.moment_mstr_dir,
+        sue_texas_packfilehandler.belief_name,
+        sue_texas_packfilehandler.moment_label,
         get_texas_rope(),
-        sue_texas_hubunit.knot,
+        sue_texas_packfilehandler.knot,
         bob_vision,
     )
 
@@ -310,9 +330,9 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
     yao_duty.del_fact(a23_eat_rope())
     assert yao_duty.get_fact(a23_eat_rope()) is None
     save_duty_belief(
-        moment_mstr_dir=sue_texas_hubunit.moment_mstr_dir,
-        belief_name=sue_texas_hubunit.belief_name,
-        moment_label=sue_texas_hubunit.moment_label,
+        moment_mstr_dir=sue_texas_packfilehandler.moment_mstr_dir,
+        belief_name=sue_texas_packfilehandler.belief_name,
+        moment_label=sue_texas_packfilehandler.moment_label,
         keep_rope=get_texas_rope(),
         knot=None,
         duty_belief=yao_duty,
@@ -323,7 +343,9 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
     assert (
         new_yao_vision1.get_missing_fact_reason_contexts().get(a23_eat_rope()) is None
     )
-    listen_to_agendas_duty_vision(new_yao_vision1, sue_texas_hubunit, get_texas_rope())
+    listen_to_agendas_duty_vision(
+        new_yao_vision1, sue_texas_packfilehandler, get_texas_rope()
+    )
     print(f"{new_yao_vision1.get_missing_fact_reason_contexts().keys()=}")
     print(f"{new_yao_vision1.planroot.factunits.keys()=}")
     assert (
@@ -332,7 +354,9 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
     )
 
     # WHEN
-    listen_to_facts_duty_vision(new_yao_vision1, sue_texas_hubunit, get_texas_rope())
+    listen_to_facts_duty_vision(
+        new_yao_vision1, sue_texas_packfilehandler, get_texas_rope()
+    )
 
     # THEN
     assert yao_duty.get_fact(a23_eat_rope()) is None
@@ -350,8 +374,12 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
     yao_duty.add_voiceunit(bob_str, None, yao_bob_voice_debt_lumen)
     yao_duty.set_voice_respect(100)
     new_yao_vision2 = create_listen_basis(yao_duty)
-    listen_to_agendas_duty_vision(new_yao_vision2, sue_texas_hubunit, get_texas_rope())
-    listen_to_facts_duty_vision(new_yao_vision2, sue_texas_hubunit, get_texas_rope())
+    listen_to_agendas_duty_vision(
+        new_yao_vision2, sue_texas_packfilehandler, get_texas_rope()
+    )
+    listen_to_facts_duty_vision(
+        new_yao_vision2, sue_texas_packfilehandler, get_texas_rope()
+    )
 
     # THEN
     zia_voiceunit = new_yao_vision2.get_voice(zia_str)
@@ -389,15 +417,15 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
 #     sweep_plan = sue_speaker.get_plan_obj(sweep_rope)
 #     sweep_plan.laborunit.add_party(yao_str)
 
-#     sue_texas_hubunit = get_texas_hubunit()
-#     save_vision_belief(sue_texas_hubunit, sue_str, sue_speaker.get_json(), True)
+#     sue_texas_packfilehandler = get_texas_packfilehandler()
+#     save_vision_belief(sue_texas_packfilehandler, sue_str, sue_speaker.get_json(), True)
 #     yao_duty = beliefunit_shop(yao_str)
 #     yao_duty.add_voiceunit(yao_str)
 #     yao_duty.add_voiceunit(sue_str)
 #     new_yao_vision = create_listen_basis(yao_duty)
 #     print(f"{new_yao_vision.get_plan_dict().keys()=}")
 #     # assert new_yao_vision.get_missing_fact_reason_contexts().get(status_rope) is None
-#     listen_to_agendas_duty_vision(new_yao_vision, texas_hubunit)
+#     listen_to_agendas_duty_vision(new_yao_vision, texas_packfilehandler)
 #     print(f"{new_yao_vision.get_plan_dict().keys()=}")
 #     assert new_yao_vision.get_missing_fact_reason_contexts().get(status_rope) is not None
 

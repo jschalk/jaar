@@ -4,7 +4,7 @@ from src.ch08_timeline_logic.timeline_main import (
     get_default_timeline_config_dict,
     timelineunit_shop,
 )
-from src.ch12_belief_file_toolbox.hub_tool import open_gut_file, save_gut_file
+from src.ch12_pack_file.packfilehandler import open_gut_file, save_gut_file
 from src.ch15_moment_logic.moment_main import momentunit_shop
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,

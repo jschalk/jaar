@@ -6,7 +6,7 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_json,
 )
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch12_belief_file_toolbox._ref.ch12_path import (
+from src.ch12_pack_file._ref.ch12_path import (
     create_beliefevent_path,
     create_moment_beliefs_dir_path,
     create_moment_json_path,

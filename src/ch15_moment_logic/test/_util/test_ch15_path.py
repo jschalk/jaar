@@ -1,7 +1,7 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from src.ch01_data_toolbox.file_toolbox import create_path
-from src.ch12_belief_file_toolbox.test._util.ch12_env import get_chapter_temp_dir
+from src.ch12_pack_file.test._util.ch12_env import get_chapter_temp_dir
 from src.ch15_moment_logic._ref.ch15_path import (
     BUD_MANDATE_FILENAME,
     create_bud_voice_mandate_ledger_path,
