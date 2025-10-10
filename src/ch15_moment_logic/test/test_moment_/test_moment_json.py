@@ -2,7 +2,7 @@ from src.ch01_data_toolbox.file_toolbox import create_path, save_file
 from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch03_allot_toolbox.allot import default_grain_num_if_None
 from src.ch08_timeline_logic.timeline_main import get_default_timeline_config_dict
-from src.ch12_belief_file_toolbox.ch12_path import create_moment_json_path
+from src.ch12_belief_file_toolbox._ref.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_main import (
     get_default_path_momentunit,
     get_momentunit_from_dict,

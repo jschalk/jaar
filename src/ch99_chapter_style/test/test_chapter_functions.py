@@ -384,7 +384,8 @@ def test_Chapters_path_FunctionStructureAndFormat():
         if len(filtered_chapters_path_funcs.get(chapter_desc)) > 0:
             chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
             path_func_filename = f"{chapter_desc_prefix}_path.py"
-            path_func_library = create_path(chapter_dir, path_func_filename)
+            _ref_dir = create_path(chapter_dir, "_ref")
+            path_func_library = create_path(_ref_dir, path_func_filename)
             path_funcs = filtered_chapters_path_funcs.get(chapter_desc)
             assert os_path_exists(path_func_library)
 

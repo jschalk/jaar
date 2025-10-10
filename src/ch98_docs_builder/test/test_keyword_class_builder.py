@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import open_file
-from src.ch98_docs_builder.ch98_path import create_keywords_class_file_path
+from src.ch98_docs_builder._ref.ch98_path import create_keywords_class_file_path
 from src.ch98_docs_builder.keyword_class_builder import (
     create_keywords_enum_class_file_str,
     save_keywords_enum_class_file,

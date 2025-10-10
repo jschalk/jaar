@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import open_file, save_file
 from src.ch10_pack_logic.pack import get_packunit_from_json, packunit_shop
-from src.ch12_belief_file_toolbox.ch12_path import (
+from src.ch12_belief_file_toolbox._ref.ch12_path import (
     create_belief_event_dir_path as belief_event_dir,
     create_event_all_pack_path as all_pack_path,
 )

@@ -34,7 +34,7 @@ from src.ch10_pack_logic.delta import get_minimal_beliefdelta
 from src.ch10_pack_logic.pack import PackUnit, get_packunit_from_json, packunit_shop
 from src.ch11_bud_logic._ref.ch11_semantic_types import EventInt, FaceName
 from src.ch11_bud_logic.bud import TranBook
-from src.ch12_belief_file_toolbox.ch12_path import (
+from src.ch12_belief_file_toolbox._ref.ch12_path import (
     create_belief_event_dir_path,
     create_beliefevent_path,
     create_event_all_pack_path,
@@ -80,7 +80,7 @@ from src.ch17_idea_logic.idea_db_tool import (
     split_excel_into_dirs,
 )
 from src.ch17_idea_logic.idea_main import get_idearef_obj
-from src.ch18_etl_toolbox.ch18_path import (
+from src.ch18_etl_toolbox._ref.ch18_path import (
     create_last_run_metrics_path,
     create_moment_ote1_csv_path,
     create_moment_ote1_json_path,

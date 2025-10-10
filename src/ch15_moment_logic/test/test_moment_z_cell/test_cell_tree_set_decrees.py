@@ -1,6 +1,6 @@
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch11_bud_logic.cell import cellunit_shop
-from src.ch12_belief_file_toolbox.ch12_path import (
+from src.ch12_belief_file_toolbox._ref.ch12_path import (
     create_beliefevent_path,
     create_cell_dir_path as cell_dir,
 )

@@ -1,5 +1,5 @@
 from src.ch01_data_toolbox.file_toolbox import save_file
-from src.ch98_docs_builder.ch98_path import create_keywords_class_file_path
+from src.ch98_docs_builder._ref.ch98_path import create_keywords_class_file_path
 
 
 def create_keywords_enum_class_file_str(chapter_prefix: str, keywords_set: set) -> str:

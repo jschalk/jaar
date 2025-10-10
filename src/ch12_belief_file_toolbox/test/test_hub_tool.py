@@ -13,7 +13,7 @@ from src.ch11_bud_logic.test._util.ch11_examples import (
     example_casa_dirty_factunit as dirty_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
-from src.ch12_belief_file_toolbox.ch12_path import (
+from src.ch12_belief_file_toolbox._ref.ch12_path import (
     create_belief_event_dir_path,
     create_beliefevent_path,
     create_beliefpoint_path,

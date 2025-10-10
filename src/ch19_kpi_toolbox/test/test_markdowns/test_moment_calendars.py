@@ -5,7 +5,7 @@ from src.ch08_timeline_logic.test._util.ch08_examples import (
     get_expected_creg_year0_markdown,
 )
 from src.ch08_timeline_logic.timeline_main import timelineunit_shop
-from src.ch12_belief_file_toolbox.ch12_path import create_moment_json_path
+from src.ch12_belief_file_toolbox._ref.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_main import momentunit_shop
 from src.ch19_kpi_toolbox.kpi_mstr import create_calendar_markdown_files
 from src.ch19_kpi_toolbox.test._util.ch19_env import (

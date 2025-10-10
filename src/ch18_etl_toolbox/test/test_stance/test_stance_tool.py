@@ -8,7 +8,7 @@ from src.ch01_data_toolbox.file_toolbox import (
     set_dir,
 )
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch12_belief_file_toolbox.ch12_path import (
+from src.ch12_belief_file_toolbox._ref.ch12_path import (
     create_gut_path,
     create_moment_json_path,
 )
@@ -19,7 +19,7 @@ from src.ch17_idea_logic.idea_csv_tool import (
     create_init_stance_idea_csv_strs,
 )
 from src.ch17_idea_logic.idea_db_tool import get_sheet_names
-from src.ch18_etl_toolbox.ch18_path import (
+from src.ch18_etl_toolbox._ref.ch18_path import (
     create_moment_mstr_path,
     create_stance0001_path,
     create_world_db_path,

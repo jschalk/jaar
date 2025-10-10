@@ -7,7 +7,7 @@ from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch08_timeline_logic.timeline_main import timelineunit_shop
 from src.ch11_bud_logic.bud import tranbook_shop
-from src.ch12_belief_file_toolbox.ch12_path import (
+from src.ch12_belief_file_toolbox._ref.ch12_path import (
     create_belief_dir_path,
     create_keep_dutys_path,
     create_path,

@@ -15,7 +15,7 @@ from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, LabelTerm
 from src.ch11_bud_logic.bud import MomentLabel
 from src.ch11_bud_logic.cell import CellUnit, cellunit_shop
 from src.ch11_bud_logic.weighted_facts_tool import get_nodes_with_weighted_facts
-from src.ch12_belief_file_toolbox.ch12_path import (
+from src.ch12_belief_file_toolbox._ref.ch12_path import (
     CELL_MANDATE_FILENAME,
     CELLNODE_FILENAME,
     create_beliefevent_path,
@@ -33,8 +33,8 @@ from src.ch12_belief_file_toolbox.hub_tool import (
     get_beliefs_downhill_event_ints,
     open_belief_file,
 )
+from src.ch15_moment_logic._ref.ch15_path import BUD_MANDATE_FILENAME
 from src.ch15_moment_logic._ref.ch15_semantic_types import FundNum
-from src.ch15_moment_logic.ch15_path import BUD_MANDATE_FILENAME
 from src.ch15_moment_logic.moment_main import get_momentunit_from_dict
 
 

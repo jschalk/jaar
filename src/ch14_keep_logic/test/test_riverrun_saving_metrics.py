@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import delete_dir
-from src.ch12_belief_file_toolbox.ch12_path import create_keep_grade_path
+from src.ch12_belief_file_toolbox._ref.ch12_path import create_keep_grade_path
 from src.ch14_keep_logic.riverrun import riverrun_shop
 from src.ch14_keep_logic.test._util.ch14_env import (
     env_dir_setup_cleanup,
