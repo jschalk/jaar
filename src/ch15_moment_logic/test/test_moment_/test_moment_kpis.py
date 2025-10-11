@@ -33,13 +33,13 @@ def test_get_moment_guts_voices_dataframe_ReturnsObj(
         wx.voice_name,
         wx.voice_cred_lumen,
         wx.voice_debt_lumen,
-        "memberships",
-        "fund_give",
-        "fund_take",
-        "fund_agenda_give",
-        "fund_agenda_take",
-        "fund_agenda_ratio_give",
-        "fund_agenda_ratio_take",
+        wx.memberships,
+        wx.fund_give,
+        wx.fund_take,
+        wx.fund_agenda_give,
+        wx.fund_agenda_take,
+        wx.fund_agenda_ratio_give,
+        wx.fund_agenda_ratio_take,
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
@@ -77,14 +77,14 @@ def test_get_moment_jobs_voices_dataframe_ReturnsObj(
         wx.voice_name,
         wx.voice_cred_lumen,
         wx.voice_debt_lumen,
-        "memberships",
-        "fund_give",
-        "fund_take",
-        "fund_agenda_give",
-        "fund_agenda_take",
-        "fund_agenda_ratio_give",
-        "fund_agenda_ratio_take",
-        "inallocable_voice_debt_lumen",
+        wx.memberships,
+        wx.fund_give,
+        wx.fund_take,
+        wx.fund_agenda_give,
+        wx.fund_agenda_take,
+        wx.fund_agenda_ratio_give,
+        wx.fund_agenda_ratio_take,
+        wx.inallocable_voice_debt_lumen,
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
@@ -119,7 +119,7 @@ def test_get_moment_guts_agenda_dataframe_ReturnsObj(
     # THEN
     agenda_colums = {
         wx.belief_name,
-        "fund_ratio",
+        wx.fund_ratio,
         wx.plan_label,
         wx.parent_rope,
         wx.begin,
@@ -160,8 +160,8 @@ def test_get_moment_jobs_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
     # THEN
     agenda_colums = {
         wx.belief_name,
-        "fund_ratio",
-        "plan_label",
+        wx.fund_ratio,
+        wx.plan_label,
         wx.parent_rope,
         wx.begin,
         wx.close,

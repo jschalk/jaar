@@ -25,6 +25,7 @@ from src.ch17_idea.test._util.ch17_env import (
     get_chapter_temp_dir,
     idea_moment_mstr_dir,
 )
+from src.ref.ch17_keywords import Ch17Keywords as wx
 
 
 def test_append_df_to_excel_CreatesSheet(env_dir_setup_cleanup):
@@ -391,7 +392,7 @@ def test_split_excel_into_dirs_SavesToCorrectFileNames(env_dir_setup_cleanup):
 
 def test_if_nan_return_None_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    ex1_df = DataFrame([["Yao", None]], columns=["face_name", "example_col"])
+    ex1_df = DataFrame([["Yao", None]], columns=[wx.face_name, "example_col"])
     ex1_sheet_name = "ex1"
     ex1_filename = "ex1.xlsx"
     ex1_path = create_path(idea_moment_mstr_dir(), ex1_filename)
@@ -437,12 +438,10 @@ def test_set_dataframe_first_two_columns_Scenario1_TwoColumns():
     updated_df = set_dataframe_first_two_columns(df, -1, -2)
 
     # THEN the first and second columns should reflect the new values
-    assert (
-        updated_df["A"] == -1
-    ).all(), "First column values are incorrect for two columns."
-    assert (
-        updated_df["B"] == -2
-    ).all(), "Second column values are incorrect for two columns."
+    first_column_failure_str = "First column values are incorrect for two columns."
+    assert (updated_df["A"] == -1).all(), first_column_failure_str
+    second_column_failure_str = "Second column values are incorrect for two columns."
+    assert (updated_df["B"] == -2).all(), second_column_failure_str
 
 
 def test_set_dataframe_first_two_columns_Scenario2_MoreThanTwoColumns():
@@ -453,12 +452,12 @@ def test_set_dataframe_first_two_columns_Scenario2_MoreThanTwoColumns():
     updated_df = set_dataframe_first_two_columns(df, 999, 888)
 
     # THEN the first and second columns should reflect the new values
-    assert (
-        updated_df["A"] == 999
-    ).all(), "First column values are incorrect for multiple columns."
-    assert (
-        updated_df["B"] == 888
-    ).all(), "Second column values are incorrect for multiple columns."
+    first_column_failure_str = "First column values are incorrect for multiple columns."
+    assert (updated_df["A"] == 999).all(), first_column_failure_str
+    second_column_failure_str = (
+        "Second column values are incorrect for multiple columns."
+    )
+    assert (updated_df["B"] == 888).all(), second_column_failure_str
 
 
 def test_set_dataframe_first_two_columns_Scenario3_EmptyDataframe():
@@ -540,7 +539,7 @@ def test_update_all_face_name_event_int_columns_Scenario0_UpdatesValidSheet(
     validsheet_str = "ValidSheet"
     invalidsheet_str = "InvalidSheet"
     ws1.title = validsheet_str
-    ws1.append(["event_int", "face_name", "other"])
+    ws1.append([wx.event_int, wx.face_name, "other"])
     for _ in range(5):
         ws1.append([event3, yao_str, "value4"])
 

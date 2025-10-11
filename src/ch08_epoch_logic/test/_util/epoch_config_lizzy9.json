@@ -1,5 +1,6 @@
 {
   "c999_config": 9, 
+  "epoch_label": "Lizzy9", 
   "hours_config": [
     [ "1st Loop day hour",  156 ], 
     [ "2nd Loop day hour",  312 ], 
@@ -23,7 +24,6 @@
     [ "Lilac"     , 140 ], 
     [ "White"     , 365 ]
   ], 
-  "epoch_label": "Lizzy9", 
   "weekdays_config": [
     "Red", "Orange", "Gold", "Green", "Light Blue", "Blue", "Purple", "Lilac", 
     "White"

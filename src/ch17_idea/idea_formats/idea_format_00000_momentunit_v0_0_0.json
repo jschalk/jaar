@@ -1,6 +1,7 @@
 {
   "attributes": {
     "c400_number"         : { "otx_key": false }, 
+    "epoch_label"         : { "otx_key": false }, 
     "event_int"           : { "otx_key": true  }, 
     "face_name"           : { "otx_key": true  }, 
     "fund_grain"          : { "otx_key": false }, 
@@ -10,7 +11,6 @@
     "money_grain"         : { "otx_key": false }, 
     "monthday_index"      : { "otx_key": false }, 
     "respect_grain"       : { "otx_key": false }, 
-    "epoch_label"      : { "otx_key": false }, 
     "yr1_jan1_offset"     : { "otx_key": false }
   }, 
   "dimens": ["momentunit"], 

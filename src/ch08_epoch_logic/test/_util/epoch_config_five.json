@@ -1,5 +1,6 @@
 {
   "c400_number": 25, 
+  "epoch_label": "five", 
   "hours_config": [
     [ "0hr" ,   72 ], 
     [ "1hr" ,  144 ], 
@@ -40,7 +41,6 @@
     [ "Simon"    , 350 ], 
     [ "Trump"    , 365 ]
   ], 
-  "epoch_label": "five", 
   "weekdays_config": ["Anaday", "Baileyday", "Chiday", "Danceday", "Eastday"], 
   "yr1_jan1_offset": 1683478080
 }

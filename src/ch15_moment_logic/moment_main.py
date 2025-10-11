@@ -106,7 +106,7 @@ class MomentUnit:
     respect_grain: RespectGrain = None
     money_grain: MoneyGrain = None
     job_listen_rotations: int = None
-    _offi_time_max: EpochPoint = None
+    offi_time_max: EpochPoint = None
     _moment_dir: str = None
     _beliefs_dir: str = None
     _packs_dir: str = None
@@ -218,9 +218,9 @@ class MomentUnit:
         allow_prev_to_offi_time_max_entry: bool = False,
         celldepth: int = None,
     ):
-        self._offi_time_max = get_0_if_None(self._offi_time_max)
-        if bud_time < self._offi_time_max and not allow_prev_to_offi_time_max_entry:
-            exception_str = f"Cannot set budunit because bud_time {bud_time} is less than MomentUnit._offi_time_max {self._offi_time_max}."
+        self.offi_time_max = get_0_if_None(self.offi_time_max)
+        if bud_time < self.offi_time_max and not allow_prev_to_offi_time_max_entry:
+            exception_str = f"Cannot set budunit because bud_time {bud_time} is less than MomentUnit.offi_time_max {self.offi_time_max}."
             raise budunit_Exception(exception_str)
         if self.beliefbudhistory_exists(belief_name) is False:
             self.set_beliefbudhistory(beliefbudhistory_shop(belief_name))
@@ -268,7 +268,7 @@ class MomentUnit:
         self.paybook.set_tranunit(
             tranunit=x_paypurchase,
             blocked_tran_times=self.get_beliefbudhistorys_bud_times(),
-            _offi_time_max=self._offi_time_max,
+            offi_time_max=self.offi_time_max,
         )
 
     def add_paypurchase(
@@ -278,7 +278,7 @@ class MomentUnit:
         tran_time: EpochPoint,
         amount: FundNum,
         blocked_tran_times: set[EpochPoint] = None,
-        _offi_time_max: EpochPoint = None,
+        offi_time_max: EpochPoint = None,
     ) -> None:
         self.paybook.add_tranunit(
             belief_name=belief_name,
@@ -286,7 +286,7 @@ class MomentUnit:
             tran_time=tran_time,
             amount=amount,
             blocked_tran_times=blocked_tran_times,
-            _offi_time_max=_offi_time_max,
+            offi_time_max=offi_time_max,
         )
 
     def paypurchase_exists(
@@ -306,21 +306,21 @@ class MomentUnit:
 
     # def set_offi_time(self, offi_time: EpochPoint):
     #     self.offi_time = offi_time
-    #     if self._offi_time_max < self.offi_time:
-    #         self._offi_time_max = self.offi_time
+    #     if self.offi_time_max < self.offi_time:
+    #         self.offi_time_max = self.offi_time
 
     def set_offi_time_max(self, x_offi_time_max: EpochPoint):
         x_tran_times = self.paybook.get_tran_times()
         if x_tran_times != set() and max(x_tran_times) >= x_offi_time_max:
-            exception_str = f"Cannot set _offi_time_max {x_offi_time_max}, paypurchase with greater tran_time exists"
+            exception_str = f"Cannot set offi_time_max {x_offi_time_max}, paypurchase with greater tran_time exists"
             raise set_offi_time_max_Exception(exception_str)
         # if self.offi_time > x_offi_time_max:
-        #     exception_str = f"Cannot set _offi_time_max={x_offi_time_max} because it is less than offi_time={self.offi_time}"
+        #     exception_str = f"Cannot set offi_time_max={x_offi_time_max} because it is less than offi_time={self.offi_time}"
         #     raise set_offi_time_max_Exception(exception_str)
-        self._offi_time_max = x_offi_time_max
+        self.offi_time_max = x_offi_time_max
 
     # def set_offi_time(
-    #     self, offi_time: EpochPoint, _offi_time_max: EpochPoint
+    #     self, offi_time: EpochPoint, offi_time_max: EpochPoint
     # ):
     #     self.set_offi_time(offi_time)
     #     self.set_offi_time_max(_offi_time_max)

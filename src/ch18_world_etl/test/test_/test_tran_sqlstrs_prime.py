@@ -23,7 +23,6 @@ from src.ch17_idea.idea_config import (
     get_idea_sqlite_types,
 )
 from src.ch18_world_etl.tran_sqlstrs import (
-    ALL_DIMEN_ABBV7,
     create_insert_into_translate_core_raw_sqlstr,
     create_insert_missing_face_name_into_translate_core_vld_sqlstr,
     create_insert_translate_core_agg_into_vld_sqlstr,
@@ -523,8 +522,8 @@ def test_create_sound_and_heard_tables_CreatesMomentRawTables():
         blrmemb_s_put_agg_table = prime_tbl("blrmemb", "s", agg_str, put_str)
         blrfact_s_del_agg_table = prime_tbl("blrfact", "s", agg_str, del_str)
         blrfact_s_del_vld_table = prime_tbl("blrfact", "s", vld_str, del_str)
-        momentunit_s_agg_table = prime_tbl("momentunit", "s", agg_str)
-        momentunit_s_vld_table = prime_tbl("momentunit", "s", vld_str)
+        momentunit_s_agg_table = prime_tbl(wx.momentunit, "s", agg_str)
+        momentunit_s_vld_table = prime_tbl(wx.momentunit, "s", vld_str)
         trltitl_s_agg_table = prime_tbl("trltitl", "s", agg_str)
         blfhour_h_agg_table = prime_tbl("blfhour", "h", agg_str)
         trltitl_s_raw_table = prime_tbl("trltitl", "s", raw_str)
@@ -641,8 +640,8 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
         exclude_cols = {
             wx.idea_number,
-            "event_int",
-            "face_name",
+            wx.event_int,
+            wx.face_name,
             wx.error_message,
         }
         expected_update_sqlstr = create_update_inconsistency_error_query(

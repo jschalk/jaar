@@ -66,7 +66,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     print(get_sheet_names(fay_stance0001_path))
     br00021_sheet_df = pandas_read_excel(fay_stance0001_path, "br00021")
     print(f"{br00021_sheet_df=}")
-    assert br00021_sheet_df.iloc[0]["face_name"] == "Fay"
+    assert br00021_sheet_df.iloc[0][wx.face_name] == "Fay"
 
 
 def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldUnit(

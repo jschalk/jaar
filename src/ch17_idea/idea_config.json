@@ -165,20 +165,6 @@
     }, 
     "jvalues": {"celldepth": {}, "quota": {}}
   }, 
-  "moment_paybook": {
-    "allowed_crud": "insert_multiple", 
-    "build_order": 21, 
-    "idea_category": "moment", 
-    "jkeys": {
-      "belief_name": {}, 
-      "event_int": {}, 
-      "face_name": {}, 
-      "moment_label": {}, 
-      "tran_time": {}, 
-      "voice_name": {}
-    }, 
-    "jvalues": {"amount": {}}
-  }, 
   "moment_epoch_hour": {
     "allowed_crud": "insert_one_time", 
     "build_order": 6, 
@@ -200,6 +186,20 @@
     "jkeys": {"event_int": {}, "face_name": {}, "moment_label": {}, "weekday_order": {}}, 
     "jvalues": {"weekday_label": {}}
   }, 
+  "moment_paybook": {
+    "allowed_crud": "insert_multiple", 
+    "build_order": 21, 
+    "idea_category": "moment", 
+    "jkeys": {
+      "belief_name": {}, 
+      "event_int": {}, 
+      "face_name": {}, 
+      "moment_label": {}, 
+      "tran_time": {}, 
+      "voice_name": {}
+    }, 
+    "jvalues": {"amount": {}}
+  }, 
   "moment_timeoffi": {
     "allowed_crud": "insert_multiple", 
     "build_order": 8, 
@@ -214,13 +214,13 @@
     "jkeys": {"event_int": {}, "face_name": {}, "moment_label": {}}, 
     "jvalues": {
       "c400_number": {}, 
+      "epoch_label": {}, 
       "fund_grain": {}, 
       "job_listen_rotations": {}, 
       "knot": {}, 
       "money_grain": {}, 
       "monthday_index": {}, 
       "respect_grain": {}, 
-      "epoch_label": {}, 
       "yr1_jan1_offset": {}
     }
   }, 

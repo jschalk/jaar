@@ -48,13 +48,12 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     x_dict = amy_moment.to_dict()
 
     # THEN
-    offi_times_str = f"{wx.offi_time}s"
     print(f"{ amy_moment._get_beliefbudhistorys_dict()=}")
     print(f"{ amy_moment.paybook.to_dict()=}")
     assert x_dict.get(wx.moment_label) == a45_str
     assert x_dict.get(wx.moment_mstr_dir) == moment_mstr_dir
     assert x_dict.get(wx.epoch) == get_default_epoch_config_dict()
-    assert x_dict.get(offi_times_str) == list(a45_offi_times)
+    assert x_dict.get(wx.offi_times) == list(a45_offi_times)
     assert x_dict.get(wx.knot) == default_knot_if_None()
     assert x_dict.get(wx.fund_grain) == default_grain_num_if_None()
     assert x_dict.get(wx.respect_grain) == default_grain_num_if_None()
@@ -65,7 +64,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
         wx.moment_label,
         wx.moment_mstr_dir,
         wx.epoch,
-        offi_times_str,
+        wx.offi_times,
         wx.beliefbudhistorys,
         wx.knot,
         wx.fund_grain,
@@ -176,7 +175,7 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     assert x_moment.paybook == amy_moment.paybook
     assert x_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
     assert x_moment != amy_moment
-    x_moment._offi_time_max = 0
+    x_moment.offi_time_max = 0
     assert x_moment == amy_moment
 
 
@@ -185,11 +184,11 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters(
     amy45_str = "amy45"
     amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
     x_dict = amy_moment.to_dict()
-    x_dict["epoch"] = {}
-    x_dict.pop("knot")
-    x_dict.pop("fund_grain")
-    x_dict.pop("respect_grain")
-    x_dict.pop("money_grain")
+    x_dict[wx.epoch] = {}
+    x_dict.pop(wx.knot)
+    x_dict.pop(wx.fund_grain)
+    x_dict.pop(wx.respect_grain)
+    x_dict.pop(wx.money_grain)
 
     # WHEN
     generated_moment = get_momentunit_from_dict(x_dict)
@@ -253,7 +252,7 @@ def test_get_momentunit_from_json_ReturnsMomentUnit():
     assert x_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert x_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
     assert x_moment != amy_moment
-    x_moment._offi_time_max = 0
+    x_moment.offi_time_max = 0
     assert x_moment == amy_moment
 
 

@@ -56,7 +56,7 @@ class TranBook:
         self,
         tranunit: TranUnit,
         blocked_tran_times: set[EpochPoint] = None,
-        _offi_time_max: EpochPoint = None,
+        offi_time_max: EpochPoint = None,
     ):
         self.add_tranunit(
             belief_name=tranunit.src,
@@ -64,7 +64,7 @@ class TranBook:
             tran_time=tranunit.tran_time,
             amount=tranunit.amount,
             blocked_tran_times=blocked_tran_times,
-            _offi_time_max=_offi_time_max,
+            offi_time_max=offi_time_max,
         )
 
     def add_tranunit(
@@ -74,15 +74,15 @@ class TranBook:
         tran_time: EpochPoint,
         amount: FundNum,
         blocked_tran_times: set[EpochPoint] = None,
-        _offi_time_max: EpochPoint = None,
+        offi_time_max: EpochPoint = None,
     ):
         if tran_time in get_empty_set_if_None(blocked_tran_times):
             exception_str = (
                 f"Cannot set tranunit for tran_time={tran_time}, EpochPoint is blocked"
             )
             raise tran_time_Exception(exception_str)
-        if _offi_time_max != None and tran_time >= _offi_time_max:
-            exception_str = f"Cannot set tranunit for tran_time={tran_time}, EpochPoint is greater than current time={_offi_time_max}"
+        if offi_time_max != None and tran_time >= offi_time_max:
+            exception_str = f"Cannot set tranunit for tran_time={tran_time}, EpochPoint is greater than current time={offi_time_max}"
             raise tran_time_Exception(exception_str)
         x_keylist = [belief_name, voice_name, tran_time]
         set_in_nested_dict(self.tranunits, x_keylist, amount)

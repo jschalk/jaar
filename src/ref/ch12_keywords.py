@@ -150,6 +150,7 @@ class Ch12Keywords(str, Enum):
     normal_table_name = "normal_table_name"
     numor = "numor"
     offi_time = "offi_time"
+    offi_time_max = "offi_time_max"
     offtrack_fund = "offtrack_fund"
     offtrack_kids_star_set = "offtrack_kids_star_set"
     parent_rope = "parent_rope"

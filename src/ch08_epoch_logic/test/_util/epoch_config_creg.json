@@ -1,5 +1,6 @@
 {
   "c400_number": 7, 
+  "epoch_label": "creg", 
   "hours_config": [
     [ "12am",   60 ], 
     [ "1am" ,  120 ], 
@@ -41,7 +42,6 @@
     [ "January"  , 337 ], 
     [ "February" , 365 ]
   ], 
-  "epoch_label": "creg", 
   "weekdays_config": ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday"], 
   "yr1_jan1_offset": 440640
 }

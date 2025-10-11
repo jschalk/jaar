@@ -6,7 +6,6 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_json,
 )
 from src.ch98_docs_builder.doc_builder import (
-    get_chapter_desc_prefix,
     get_chapter_descs,
     save_brick_formats_md,
     save_chapter_blurbs_md,

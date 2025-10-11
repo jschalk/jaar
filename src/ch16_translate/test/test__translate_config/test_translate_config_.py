@@ -123,8 +123,8 @@ def _get_all_translate_config_attrs() -> dict[str, set[str]]:
     print(f"{translate_config=}")
     x_translate_attrs = {}
     for translate_dimen, jkeys_jvalues_dict in translate_config.items():
-        attrs_set = set(jkeys_jvalues_dict.get("jkeys").keys())
-        attrs_set.update(set(jkeys_jvalues_dict.get("jvalues").keys()))
+        attrs_set = set(jkeys_jvalues_dict.get(wx.jkeys).keys())
+        attrs_set.update(set(jkeys_jvalues_dict.get(wx.jvalues).keys()))
         x_translate_attrs[translate_dimen] = attrs_set
     return x_translate_attrs
 

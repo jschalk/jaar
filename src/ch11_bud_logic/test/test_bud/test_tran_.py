@@ -202,7 +202,7 @@ def test_TranBook_set_tranunit_SetsAttrWithCurrenttran_time():
 
     # WHEN
     x_offi_time_max = 8808
-    x_tranbook.set_tranunit(sue_yao_t55_tranunit, _offi_time_max=x_offi_time_max)
+    x_tranbook.set_tranunit(sue_yao_t55_tranunit, offi_time_max=x_offi_time_max)
 
     # THEN
     assert x_tranbook.tranunits != {}
@@ -222,13 +222,13 @@ def test_TranBook_set_tranunit_SetsAttrWithCurrenttran_time_RaisesError():
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_tranbook.set_tranunit(sue_yao_t55_tranunit, _offi_time_max=t55_t)
+        x_tranbook.set_tranunit(sue_yao_t55_tranunit, offi_time_max=t55_t)
     exception_str = f"Cannot set tranunit for tran_time={t55_t}, EpochPoint is greater than current time={t55_t}"
     assert str(excinfo.value) == exception_str
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_tranbook.set_tranunit(sue_yao_t55_tranunit, _offi_time_max=33)
+        x_tranbook.set_tranunit(sue_yao_t55_tranunit, offi_time_max=33)
     exception_str = f"Cannot set tranunit for tran_time={t55_t}, EpochPoint is greater than current time=33"
     assert str(excinfo.value) == exception_str
 

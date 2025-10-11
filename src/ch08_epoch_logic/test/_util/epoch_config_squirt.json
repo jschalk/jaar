@@ -1,5 +1,6 @@
 {
   "c400_number": 9, 
+  "epoch_label": "squirt", 
   "hours_config": [
     [ "0hr" ,   40 ], 
     [ "1hr" ,   80 ], 
@@ -51,7 +52,6 @@
     [ "paw_paws"    , 360 ], 
     [ "a_claw"      , 365 ]
   ], 
-  "epoch_label": "squirt", 
   "weekdays_config": ["Oneday", "Twoday", "ThreeDay", "FourDay", "FiveDay"], 
   "yr1_jan1_offset": 1440000
 }

@@ -287,7 +287,7 @@ def get_ex2_br00005_df() -> DataFrame:
 # def get_ex2_br00006_df() -> DataFrame:
 #     """idea_format_00006_moment_timeoffi_v0_0_0
 #     moment_label,offi_time,_offi_time_maxt"""
-#     x_df = DataFrame(columns=["moment_label", "offi_time", "_offi_time_max"])
+#     x_df = DataFrame(columns=["moment_label", "offi_time", "offi_time_max"])
 #     x_df.loc[0] = [AMY23_STR, 100, 300]
 #     x_df.loc[1] = [AMY23_STR, 110, 320]
 #     x_df.loc[2] = [AMY23_STR, 120, 330]

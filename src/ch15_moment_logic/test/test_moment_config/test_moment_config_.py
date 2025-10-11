@@ -200,7 +200,7 @@ def test_get_moment_args_set_ReturnsObj():
         wx.month_label,
         wx.monthday_index,
         # wx.job_listen_rotations,
-        "job_listen_rotations",
+        wx.job_listen_rotations,
         wx.money_grain,
         wx.belief_name,
         wx.quota,

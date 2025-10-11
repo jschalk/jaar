@@ -25,7 +25,7 @@ def test_MomentUnit_get_epoch_config_ReturnsObj_Scenario0(env_dir_setup_cleanup)
     # THEN
     assert a23_epoch_config == a23_moment.epoch.to_dict()
     assert a23_epoch_config == get_default_epoch_config_dict()
-    assert a23_epoch_config.get("epoch_label") == "creg"
+    assert a23_epoch_config.get(wx.epoch_label) == "creg"
 
 
 def test_MomentUnit_get_epoch_config_ReturnsObj_Scenario1(env_dir_setup_cleanup):
@@ -41,7 +41,7 @@ def test_MomentUnit_get_epoch_config_ReturnsObj_Scenario1(env_dir_setup_cleanup)
     # THEN
     assert a23_epoch_config == a23_moment.epoch.to_dict()
     assert a23_epoch_config == get_five_config()
-    assert a23_epoch_config.get("epoch_label") == "five"
+    assert a23_epoch_config.get(wx.epoch_label) == "five"
 
 
 def test_MomentUnit_add_epoch_to_gut_SetsFile_Scenario0(env_dir_setup_cleanup):

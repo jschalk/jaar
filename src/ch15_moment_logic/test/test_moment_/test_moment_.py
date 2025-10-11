@@ -53,7 +53,7 @@ def test_MomentUnit_Exists():
     assert not amy_moment.job_listen_rotations
     assert not amy_moment.moment_mstr_dir
     # Calculated fields
-    assert not amy_moment._offi_time_max
+    assert not amy_moment.offi_time_max
     assert not amy_moment._beliefs_dir
     assert not amy_moment._packs_dir
     assert not amy_moment.all_tranbook
@@ -62,7 +62,6 @@ def test_MomentUnit_Exists():
         wx.epoch,
         wx.beliefbudhistorys,
         wx.paybook,
-        "offi_times",
         wx.knot,
         wx.fund_grain,
         wx.respect_grain,
@@ -70,8 +69,9 @@ def test_MomentUnit_Exists():
         wx.job_listen_rotations,
         "_moment_dir",
         "moment_mstr_dir",
-        "all_tranbook",
-        "_offi_time_max",
+        wx.offi_times,
+        wx.all_tranbook,
+        wx.offi_time_max,
         "_beliefs_dir",
         "_packs_dir",
     }
@@ -517,9 +517,9 @@ def test_MomentUnit__set_all_healer_dutys_Setsdutys(
 #     # ESTABLISH
 #     moment_mstr_dir = get_chapter_temp_dir()
 #     time56 = 56
-#     a23_moment = momentunit_shop("amy23", moment_mstr_dir, _offi_time_max=time56)
+#     a23_moment = momentunit_shop("amy23", moment_mstr_dir, offi_time_max=time56)
 #     assert a23_moment.offi_time == 0
-#     assert a23_moment._offi_time_max == time56
+#     assert a23_moment.offi_time_max == time56
 
 #     # WHEN
 #     time23 = 23
@@ -527,14 +527,14 @@ def test_MomentUnit__set_all_healer_dutys_Setsdutys(
 
 #     # THEN
 #     assert a23_moment.offi_time == time23
-#     assert a23_moment._offi_time_max == time56
+#     assert a23_moment.offi_time_max == time56
 
 
 # def test_MomentUnit_set_offi_time_Scenario1_SetsAttr():
 #     # ESTABLISH
 #     a23_moment = momentunit_shop("amy23", get_chapter_temp_dir())
 #     assert a23_moment.offi_time == 0
-#     assert a23_moment._offi_time_max == 0
+#     assert a23_moment.offi_time_max == 0
 
 #     # WHEN
 #     time23 = 23
@@ -542,7 +542,7 @@ def test_MomentUnit__set_all_healer_dutys_Setsdutys(
 
 #     # THEN
 #     assert a23_moment.offi_time == time23
-#     assert a23_moment._offi_time_max == time23
+#     assert a23_moment.offi_time_max == time23
 
 
 def test_MomentUnit_set_offi_time_max_Scenario0_SetsAttr():
@@ -550,9 +550,9 @@ def test_MomentUnit_set_offi_time_max_Scenario0_SetsAttr():
     moment_mstr_dir = get_chapter_temp_dir()
     time7 = 7
     a23_moment = momentunit_shop("amy23", moment_mstr_dir)
-    a23_moment._offi_time_max = time7
+    a23_moment.offi_time_max = time7
     # assert a23_moment.offi_time == 0
-    assert a23_moment._offi_time_max == time7
+    assert a23_moment.offi_time_max == time7
 
     # WHEN
     time23 = 23
@@ -560,7 +560,7 @@ def test_MomentUnit_set_offi_time_max_Scenario0_SetsAttr():
 
     # THEN
     # assert a23_moment.offi_time == 0
-    assert a23_moment._offi_time_max == time23
+    assert a23_moment.offi_time_max == time23
 
 
 # def test_MomentUnit_set_offi_time_max_Scenario1_SetsAttr():
@@ -569,16 +569,16 @@ def test_MomentUnit_set_offi_time_max_Scenario0_SetsAttr():
 #     time21 = 21
 #     time77 = 77
 #     a23_moment = momentunit_shop(
-#         "amy23", moment_mstr_dir, offi_time=time21, _offi_time_max=time77
+#         "amy23", moment_mstr_dir, offi_time=time21, offi_time_max=time77
 #     )
 #     assert a23_moment.offi_time == time21
-#     assert a23_moment._offi_time_max == time77
+#     assert a23_moment.offi_time_max == time77
 
 #     # WHEN / THEN
 #     time11 = 11
 #     with pytest_raises(Exception) as excinfo:
 #         a23_moment.set_offi_time_max(time11)
-#     exception_str = f"Cannot set _offi_time_max={time11} because it is less than offi_time={time21}"
+#     exception_str = f"Cannot set offi_time_max={time11} because it is less than offi_time={time21}"
 #     assert str(excinfo.value) == exception_str
 
 
@@ -586,7 +586,7 @@ def test_MomentUnit_set_offi_time_max_Scenario0_SetsAttr():
 #     # ESTABLISH
 #     a23_moment = momentunit_shop("amy23", get_chapter_temp_dir())
 #     assert a23_moment.offi_time == 0
-#     assert a23_moment._offi_time_max == 0
+#     assert a23_moment.offi_time_max == 0
 
 #     # WHEN
 #     time23 = 23
@@ -595,4 +595,4 @@ def test_MomentUnit_set_offi_time_max_Scenario0_SetsAttr():
 
 #     # THEN
 #     assert a23_moment.offi_time == time23
-#     assert a23_moment._offi_time_max == time55
+#     assert a23_moment.offi_time_max == time55

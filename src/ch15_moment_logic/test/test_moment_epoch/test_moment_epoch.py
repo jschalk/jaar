@@ -10,13 +10,13 @@ def test_get_moment_beliefepochpoint_ReturnsObj_Scenario0_Empty_offi_time():
     fay_str = "Fay"
     fay_momentunit = momentunit_shop(fay_str, get_chapter_temp_dir())
     assert fay_momentunit.epoch == epochunit_shop(get_creg_config())
-    assert not fay_momentunit._offi_time_max
+    assert not fay_momentunit.offi_time_max
 
     # WHEN
     fay_beliefepochpoint = get_moment_beliefepochpoint(fay_momentunit)
 
     # THEN
-    assert fay_momentunit._offi_time_max == 0
+    assert fay_momentunit.offi_time_max == 0
     assert fay_beliefepochpoint.x_min == 0
 
     assert fay_beliefepochpoint
@@ -52,13 +52,13 @@ def test_get_moment_beliefepochpoint_ReturnsObj_Scenario1_MomentUnit_NonDefaultA
         money_grain=fay_money_grain,
     )
     assert fay_momentunit.epoch == epochunit_shop(get_creg_config())
-    assert not fay_momentunit._offi_time_max
+    assert not fay_momentunit.offi_time_max
 
     # WHEN
     fay_beliefepochpoint = get_moment_beliefepochpoint(fay_momentunit)
 
     # THEN
-    assert fay_momentunit._offi_time_max == 0
+    assert fay_momentunit.offi_time_max == 0
     assert fay_beliefepochpoint.x_min == 0
 
     assert fay_beliefepochpoint

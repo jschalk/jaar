@@ -235,13 +235,13 @@ def get_casa_maison_rope_otx2inx_dt() -> DataFrame:
 
     inx_dt = DataFrame(
         columns=[
-            "face_name",
-            "event_int",
-            "otx_knot",
-            "inx_knot",
-            "unknown_str",
-            "otx_rope",
-            "inx_rope",
+            wx.face_name,
+            wx.event_int,
+            wx.otx_knot,
+            wx.inx_knot,
+            wx.unknown_str,
+            wx.otx_rope,
+            wx.inx_rope,
         ]
     )
     inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_amy45_rope, inx_amy87_rope]
@@ -266,13 +266,13 @@ def get_casa_maison_label_dt() -> DataFrame:
 
     inx_dt = DataFrame(
         columns=[
-            "face_name",
-            "event_int",
-            "otx_knot",
-            "inx_knot",
-            "unknown_str",
-            "otx_label",
-            "inx_label",
+            wx.face_name,
+            wx.event_int,
+            wx.otx_knot,
+            wx.inx_knot,
+            wx.unknown_str,
+            wx.otx_label,
+            wx.inx_label,
         ]
     )
     inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_amy45_str, inx_amy87_str]
