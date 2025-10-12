@@ -1,12 +1,11 @@
-from src.ch01_data_toolbox.file_toolbox import create_path, save_file
+from src.ch01_data_toolbox.file_toolbox import create_path, save_json
 from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch03_allot_toolbox.allot import default_grain_num_if_None
-from src.ch08_timeline_logic.timeline_main import get_default_timeline_config_dict
-from src.ch12_belief_file_toolbox.ch12_path import create_moment_json_path
+from src.ch08_epoch_logic.epoch_main import get_default_epoch_config_dict
+from src.ch12_pack_file._ref.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_main import (
     get_default_path_momentunit,
     get_momentunit_from_dict,
-    get_momentunit_from_json,
     momentunit_shop,
 )
 from src.ch15_moment_logic.test._util.ch15_env import (
@@ -48,13 +47,12 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     x_dict = amy_moment.to_dict()
 
     # THEN
-    offi_times_str = f"{wx.offi_time}s"
     print(f"{ amy_moment._get_beliefbudhistorys_dict()=}")
     print(f"{ amy_moment.paybook.to_dict()=}")
     assert x_dict.get(wx.moment_label) == a45_str
     assert x_dict.get(wx.moment_mstr_dir) == moment_mstr_dir
-    assert x_dict.get(wx.timeline) == get_default_timeline_config_dict()
-    assert x_dict.get(offi_times_str) == list(a45_offi_times)
+    assert x_dict.get(wx.epoch) == get_default_epoch_config_dict()
+    assert x_dict.get(wx.offi_times) == list(a45_offi_times)
     assert x_dict.get(wx.knot) == default_knot_if_None()
     assert x_dict.get(wx.fund_grain) == default_grain_num_if_None()
     assert x_dict.get(wx.respect_grain) == default_grain_num_if_None()
@@ -64,8 +62,8 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     assert set(x_dict.keys()) == {
         wx.moment_label,
         wx.moment_mstr_dir,
-        wx.timeline,
-        offi_times_str,
+        wx.epoch,
+        wx.offi_times,
         wx.beliefbudhistorys,
         wx.knot,
         wx.fund_grain,
@@ -88,7 +86,7 @@ def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
     assert set(x_dict.keys()) == {
         wx.moment_label,
         wx.moment_mstr_dir,
-        wx.timeline,
+        wx.epoch,
         f"{wx.offi_time}s",
         wx.beliefbudhistorys,
         wx.knot,
@@ -98,39 +96,14 @@ def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
     }
 
 
-def test_MomentUnit_get_json_ReturnsObj():
-    # ESTABLISH
-    amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
-    bob_str = "Bob"
-    bob_x0_bud_time = 702
-    bob_x0_quota = 33
-    sue_str = "Sue"
-    sue_x4_bud_time = 4
-    sue_x4_quota = 55
-    sue_x7_bud_time = 7
-    sue_x7_quota = 66
-    amy_moment.add_budunit(bob_str, bob_x0_bud_time, bob_x0_quota)
-    amy_moment.add_budunit(sue_str, sue_x4_bud_time, sue_x4_quota)
-    amy_moment.add_budunit(sue_str, sue_x7_bud_time, sue_x7_quota)
-
-    # WHEN
-    x_json = amy_moment.get_json()
-
-    # THEN
-    print(f"{x_json=}")
-    assert x_json
-    assert x_json.find(wx.moment_label) > 0
-
-
-def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
+def test_get_momentunit_from_dict_ReturnsObj_Scenario0_WithParameters():
     # ESTABLISH
     amy45_str = "amy45"
     moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp1")
     a45_offi_times = {17, 37}
     amy_moment = momentunit_shop(amy45_str, moment_mstr_dir, offi_times=a45_offi_times)
-    sue_timeline_label = "sue casa"
-    amy_moment.timeline.timeline_label = sue_timeline_label
+    sue_epoch_label = "sue casa"
+    amy_moment.epoch.epoch_label = sue_epoch_label
     sue_knot = "/"
     sue_fund_grain = 0.3
     sue_respect_grain = 2
@@ -166,7 +139,7 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     # THEN
     assert x_moment.moment_label == amy45_str
     assert x_moment.moment_mstr_dir == moment_mstr_dir
-    assert x_moment.timeline.timeline_label == sue_timeline_label
+    assert x_moment.epoch.epoch_label == sue_epoch_label
     assert x_moment.offi_times == a45_offi_times
     assert x_moment.knot == sue_knot
     assert x_moment.fund_grain == sue_fund_grain
@@ -176,29 +149,29 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     assert x_moment.paybook == amy_moment.paybook
     assert x_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
     assert x_moment != amy_moment
-    x_moment._offi_time_max = 0
+    x_moment.offi_time_max = 0
     assert x_moment == amy_moment
 
 
-def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters():
+def test_get_momentunit_from_dict_ReturnsObj_Scenario1_WithOutParameters():
     # ESTABLISH
     amy45_str = "amy45"
     amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
     x_dict = amy_moment.to_dict()
-    x_dict["timeline"] = {}
-    x_dict.pop("knot")
-    x_dict.pop("fund_grain")
-    x_dict.pop("respect_grain")
-    x_dict.pop("money_grain")
+    x_dict[wx.epoch] = {}
+    x_dict.pop(wx.knot)
+    x_dict.pop(wx.fund_grain)
+    x_dict.pop(wx.respect_grain)
+    x_dict.pop(wx.money_grain)
 
     # WHEN
     generated_moment = get_momentunit_from_dict(x_dict)
 
     # THEN
     assert generated_moment.moment_label == amy45_str
-    print(f"{generated_moment.timeline=}")
-    print(f"   {amy_moment.timeline=}")
-    assert generated_moment.timeline == amy_moment.timeline
+    print(f"{generated_moment.epoch=}")
+    print(f"   {amy_moment.epoch=}")
+    assert generated_moment.epoch == amy_moment.epoch
     assert generated_moment.offi_times == set()
     assert generated_moment.knot == default_knot_if_None()
     assert generated_moment.fund_grain == default_grain_num_if_None()
@@ -210,13 +183,13 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters(
     assert generated_moment == amy_moment
 
 
-def test_get_momentunit_from_json_ReturnsMomentUnit():
+def test_get_momentunit_from_dict_ReturnsObj_Scenario2():
     # ESTABLISH
     amy45_str = "amy45"
     temp_moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp")
     amy_moment = momentunit_shop(amy45_str, temp_moment_mstr_dir)
-    sue_timeline_label = "sue casa"
-    amy_moment.timeline.timeline_label = sue_timeline_label
+    sue_epoch_label = "sue casa"
+    amy_moment.epoch.epoch_label = sue_epoch_label
     sue_offi_time_max = 23
     sue_knot = "/"
     sue_fund_grain = 0.3
@@ -237,15 +210,15 @@ def test_get_momentunit_from_json_ReturnsMomentUnit():
     amy_moment.fund_grain = sue_fund_grain
     amy_moment.respect_grain = sue_respect_grain
     amy_moment.money_grain = sue_money_grain
-    amy_json = amy_moment.get_json()
+    amy_dict = amy_moment.to_dict()
 
     # WHEN
-    x_moment = get_momentunit_from_json(amy_json)
+    x_moment = get_momentunit_from_dict(amy_dict)
 
     # THEN
     assert x_moment.moment_label == amy45_str
     assert x_moment.moment_mstr_dir == temp_moment_mstr_dir
-    assert x_moment.timeline.timeline_label == sue_timeline_label
+    assert x_moment.epoch.epoch_label == sue_epoch_label
     assert x_moment.knot == sue_knot
     assert x_moment.fund_grain == sue_fund_grain
     assert x_moment.respect_grain == sue_respect_grain
@@ -253,7 +226,7 @@ def test_get_momentunit_from_json_ReturnsMomentUnit():
     assert x_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert x_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
     assert x_moment != amy_moment
-    x_moment._offi_time_max = 0
+    x_moment.offi_time_max = 0
     assert x_moment == amy_moment
 
 
@@ -261,13 +234,13 @@ def test_get_from_file_ReturnsMomentUnitWith_moment_mstr_dir(env_dir_setup_clean
     # ESTABLISH
     amy45_str = "amy45"
     amy45_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
-    sue_timeline_label = "sue casa"
-    amy45_moment.timeline.timeline_label = sue_timeline_label
+    sue_epoch_label = "sue casa"
+    amy45_moment.epoch.epoch_label = sue_epoch_label
     sue_respect_grain = 2
     amy45_moment.respect_grain = sue_respect_grain
     x_moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_bob")
     amy45_json_path = create_moment_json_path(x_moment_mstr_dir, amy45_str)
-    save_file(amy45_json_path, None, amy45_moment.get_json())
+    save_json(amy45_json_path, None, amy45_moment.to_dict())
     assert amy45_moment.moment_mstr_dir != x_moment_mstr_dir
 
     # WHEN
@@ -276,7 +249,7 @@ def test_get_from_file_ReturnsMomentUnitWith_moment_mstr_dir(env_dir_setup_clean
     # THEN
     assert generated_a45_moment.moment_mstr_dir == x_moment_mstr_dir
     assert generated_a45_moment.moment_label == amy45_str
-    assert generated_a45_moment.timeline.timeline_label == sue_timeline_label
+    assert generated_a45_moment.epoch.epoch_label == sue_epoch_label
     assert generated_a45_moment.respect_grain == sue_respect_grain
     x_moments_dir = create_path(x_moment_mstr_dir, "moments")
     expected_a45_moment_dir = create_path(x_moments_dir, amy45_str)

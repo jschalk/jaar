@@ -13,14 +13,14 @@ from src.ch04_voice_logic.group import awardunit_shop
 from src.ch04_voice_logic.voice import voiceunit_shop
 from src.ch05_reason_logic.reason import factunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
-from src.ch07_belief_logic._ref.ch07_semantic_types import (
+from src.ch07_belief_logic.belief_main import BeliefUnit
+from src.ch07_belief_logic.belief_tool import belief_attr_exists, belief_get_obj
+from src.ch09_belief_atom_logic._ref.ch09_semantic_types import (
     LabelTerm,
     RopeTerm,
     TitleTerm,
     VoiceName,
 )
-from src.ch07_belief_logic.belief_main import BeliefUnit
-from src.ch07_belief_logic.belief_tool import belief_attr_exists, belief_get_obj
 from src.ch09_belief_atom_logic.atom_config import (
     CRUD_command,
     get_atom_args_class_types,
@@ -141,6 +141,8 @@ class BeliefAtom:
         return dict(self.jvalues.items())
 
     def to_dict(self) -> dict[str, str]:
+        """Returns dict that is serializable to JSON."""
+
         jkeys_dict = self.get_jkeys_dict()
         jvalues_dict = self.get_jvalues_dict()
         return {
@@ -149,9 +151,6 @@ class BeliefAtom:
             "jkeys": jkeys_dict,
             "jvalues": jvalues_dict,
         }
-
-    def get_json(self) -> str:
-        return get_json_from_dict(self.to_dict())
 
 
 def beliefatom_shop(
@@ -176,10 +175,6 @@ def get_beliefatom_from_dict(x_dict: dict) -> BeliefAtom:
     for x_key, x_value in x_dict["jvalues"].items():
         x_atom.set_jvalue(x_key, x_value)
     return x_atom
-
-
-def get_beliefatom_from_json(x_str: str) -> BeliefAtom:
-    return get_beliefatom_from_dict(get_dict_from_json(x_str))
 
 
 def _modify_belief_update_beliefunit(x_belief: BeliefUnit, x_atom: BeliefAtom):
@@ -220,19 +215,19 @@ def _modify_belief_voice_membership_update(x_belief: BeliefUnit, x_atom: BeliefA
     x_group_title = x_atom.get_value("group_title")
     x_voiceunit = x_belief.get_voice(x_voice_name)
     x_membership = x_voiceunit.get_membership(x_group_title)
-    x_group_cred_shares = x_atom.get_value("group_cred_shares")
-    x_group_debt_shares = x_atom.get_value("group_debt_shares")
-    x_membership.set_group_cred_shares(x_group_cred_shares)
-    x_membership.set_group_debt_shares(x_group_debt_shares)
+    x_group_cred_lumen = x_atom.get_value("group_cred_lumen")
+    x_group_debt_lumen = x_atom.get_value("group_debt_lumen")
+    x_membership.set_group_cred_lumen(x_group_cred_lumen)
+    x_membership.set_group_debt_lumen(x_group_debt_lumen)
 
 
 def _modify_belief_voice_membership_insert(x_belief: BeliefUnit, x_atom: BeliefAtom):
     x_voice_name = x_atom.get_value("voice_name")
     x_group_title = x_atom.get_value("group_title")
-    x_group_cred_shares = x_atom.get_value("group_cred_shares")
-    x_group_debt_shares = x_atom.get_value("group_debt_shares")
+    x_group_cred_lumen = x_atom.get_value("group_cred_lumen")
+    x_group_debt_lumen = x_atom.get_value("group_debt_lumen")
     x_voiceunit = x_belief.get_voice(x_voice_name)
-    x_voiceunit.add_membership(x_group_title, x_group_cred_shares, x_group_debt_shares)
+    x_voiceunit.add_membership(x_group_title, x_group_cred_lumen, x_group_debt_lumen)
 
 
 def _modify_belief_planunit_delete(x_belief: BeliefUnit, x_atom: BeliefAtom):
@@ -419,8 +414,8 @@ def _modify_belief_voiceunit_delete(x_belief: BeliefUnit, x_atom: BeliefAtom):
 def _modify_belief_voiceunit_update(x_belief: BeliefUnit, x_atom: BeliefAtom):
     x_belief.edit_voiceunit(
         voice_name=x_atom.get_value("voice_name"),
-        voice_cred_shares=x_atom.get_value("voice_cred_shares"),
-        voice_debt_shares=x_atom.get_value("voice_debt_shares"),
+        voice_cred_lumen=x_atom.get_value("voice_cred_lumen"),
+        voice_debt_lumen=x_atom.get_value("voice_debt_lumen"),
     )
 
 
@@ -428,8 +423,8 @@ def _modify_belief_voiceunit_insert(x_belief: BeliefUnit, x_atom: BeliefAtom):
     x_belief.set_voiceunit(
         voiceunit_shop(
             voice_name=x_atom.get_value("voice_name"),
-            voice_cred_shares=x_atom.get_value("voice_cred_shares"),
-            voice_debt_shares=x_atom.get_value("voice_debt_shares"),
+            voice_cred_lumen=x_atom.get_value("voice_cred_lumen"),
+            voice_debt_lumen=x_atom.get_value("voice_debt_lumen"),
         )
     )
 
@@ -551,8 +546,8 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.fund_grain != y_obj.fund_grain
         )
     elif dimen in {"belief_voice_membership"}:
-        return (x_obj.group_cred_shares != y_obj.group_cred_shares) or (
-            x_obj.group_debt_shares != y_obj.group_debt_shares
+        return (x_obj.group_cred_lumen != y_obj.group_cred_lumen) or (
+            x_obj.group_debt_lumen != y_obj.group_debt_lumen
         )
     elif dimen in {"belief_plan_awardunit"}:
         return (x_obj.give_force != y_obj.give_force) or (
@@ -584,8 +579,8 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.reason_divisor != y_obj.reason_divisor
         )
     elif dimen == "belief_voiceunit":
-        return (x_obj.voice_cred_shares != y_obj.voice_cred_shares) or (
-            x_obj.voice_debt_shares != y_obj.voice_debt_shares
+        return (x_obj.voice_cred_lumen != y_obj.voice_cred_lumen) or (
+            x_obj.voice_debt_lumen != y_obj.voice_debt_lumen
         )
 
 
@@ -615,11 +610,11 @@ class AtomRow:
     begin: float = None
     respect_grain: float = None
     close: float = None
-    voice_cred_shares: int = None
-    group_cred_shares: int = None
+    voice_cred_lumen: int = None
+    group_cred_lumen: int = None
     credor_respect: int = None
-    voice_debt_shares: int = None
-    group_debt_shares: int = None
+    voice_debt_lumen: int = None
+    group_debt_lumen: int = None
     debtor_respect: int = None
     denom: int = None
     reason_divisor: int = None

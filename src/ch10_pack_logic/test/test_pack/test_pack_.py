@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch01_data_toolbox.dict_toolbox import x_is_json
+from src.ch01_data_toolbox.dict_toolbox import get_json_from_dict, x_is_json
 from src.ch04_voice_logic.voice import voiceunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_default_moment_label
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
@@ -8,7 +8,7 @@ from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.pack import (
     PackUnit,
     get_init_pack_id_if_None,
-    get_packunit_from_json,
+    get_packunit_from_dict,
     init_pack_id,
     packunit_shop,
 )
@@ -326,7 +326,7 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
     assert total_dict.get(delta_str) == {}
 
 
-def test_PackUnit_get_serializable_dict_ReturnsObj_WithBeliefDeltaPopulated():
+def test_PackUnit_get_serializable_dict_ReturnsObj_Scenario0_WithBeliefDeltaPopulated():
     # ESTABLISH
     bob_str = "Bob"
     sue_beliefdelta = get_beliefdelta_sue_example()
@@ -342,19 +342,19 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_WithBeliefDeltaPopulated():
     assert total_dict.get(delta_str) == sue_beliefdelta.get_ordered_dict()
 
 
-def test_PackUnit_get_json_ReturnsObj_WithBeliefDeltaPopulated():
+def test_PackUnit_get_serializable_dict_ReturnsObj_Scenario1_WithBeliefDeltaPopulated():
     # ESTABLISH
     bob_str = "Bob"
     sue_beliefdelta = get_beliefdelta_sue_example()
     bob_packunit = packunit_shop(bob_str, _beliefdelta=sue_beliefdelta)
 
     # WHEN
-    generated_json = bob_packunit.get_json()
+    generated_dict = bob_packunit.get_serializable_dict()
 
     # THEN
-    assert generated_json
+    assert generated_dict
     print("generated_json")
-    print(generated_json)
+    print(generated_dict)
     expected_json = """{
   "belief_name": "Bob", 
   "delta": {
@@ -375,17 +375,19 @@ def test_PackUnit_get_json_ReturnsObj_WithBeliefDeltaPopulated():
   "face_name": null, 
   "moment_label": "ZZ"
 }"""
-    assert generated_json == expected_json
+    assert get_json_from_dict(generated_dict) == expected_json
 
 
-def test_get_packunit_from_json_ReturnsObj_WithBeliefDeltaPopulated():
+def test_get_packunit_from_dict_ReturnsObj_WithBeliefDeltaPopulated():
     # ESTABLISH
     bob_str = "Bob"
     sue_beliefdelta = get_beliefdelta_sue_example()
     bob_packunit = packunit_shop(bob_str, _beliefdelta=sue_beliefdelta, event_int=778)
 
     # WHEN
-    generated_bob_packunit = get_packunit_from_json(bob_packunit.get_json())
+    generated_bob_packunit = get_packunit_from_dict(
+        bob_packunit.get_serializable_dict()
+    )
 
     # THEN
     assert generated_bob_packunit
@@ -472,13 +474,11 @@ def test_PackUnit_add_p_beliefatom_Sets_BeliefUnit_voiceunits():
     # ESTABLISH
     bob_str = "Bob"
     bob_packunit = packunit_shop(bob_str)
-    bob_voice_cred_shares = 55
-    bob_voice_debt_shares = 66
-    bob_voiceunit = voiceunit_shop(
-        bob_str, bob_voice_cred_shares, bob_voice_debt_shares
-    )
-    cw_str = wx.voice_cred_shares
-    dw_str = wx.voice_debt_shares
+    bob_voice_cred_lumen = 55
+    bob_voice_debt_lumen = 66
+    bob_voiceunit = voiceunit_shop(bob_str, bob_voice_cred_lumen, bob_voice_debt_lumen)
+    cw_str = wx.voice_cred_lumen
+    dw_str = wx.voice_debt_lumen
     print(f"{bob_voiceunit.to_dict()=}")
     bob_required_dict = {wx.voice_name: bob_voiceunit.to_dict().get(wx.voice_name)}
     bob_optional_dict = {cw_str: bob_voiceunit.to_dict().get(cw_str)}
@@ -518,10 +518,10 @@ def test_PackUnit_get_edited_belief_ReturnsObj_BeliefUnit_insert_voice():
     dimen = wx.belief_voiceunit
     x_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     x_beliefatom.set_jkey(wx.voice_name, zia_str)
-    x_voice_cred_shares = 55
-    x_voice_debt_shares = 66
-    x_beliefatom.set_jvalue("voice_cred_shares", x_voice_cred_shares)
-    x_beliefatom.set_jvalue("voice_debt_shares", x_voice_debt_shares)
+    x_voice_cred_lumen = 55
+    x_voice_debt_lumen = 66
+    x_beliefatom.set_jvalue("voice_cred_lumen", x_voice_cred_lumen)
+    x_beliefatom.set_jvalue("voice_debt_lumen", x_voice_debt_lumen)
     sue_packunit._beliefdelta.set_beliefatom(x_beliefatom)
     print(f"{sue_packunit._beliefdelta.beliefatoms.keys()=}")
 
@@ -533,8 +533,8 @@ def test_PackUnit_get_edited_belief_ReturnsObj_BeliefUnit_insert_voice():
     zia_voiceunit = after_sue_beliefunit.get_voice(zia_str)
     assert yao_voiceunit is not None
     assert zia_voiceunit is not None
-    assert zia_voiceunit.voice_cred_shares == x_voice_cred_shares
-    assert zia_voiceunit.voice_debt_shares == x_voice_debt_shares
+    assert zia_voiceunit.voice_cred_lumen == x_voice_cred_lumen
+    assert zia_voiceunit.voice_debt_lumen == x_voice_debt_lumen
 
 
 def test_PackUnit_get_edited_belief_RaisesErrorWhenpackAttrsAndBeliefAttrsAreNotTheSame():
@@ -557,13 +557,11 @@ def test_PackUnit_is_empty_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     bob_packunit = packunit_shop(bob_str)
-    bob_voice_cred_shares = 55
-    bob_voice_debt_shares = 66
-    bob_voiceunit = voiceunit_shop(
-        bob_str, bob_voice_cred_shares, bob_voice_debt_shares
-    )
-    cw_str = wx.voice_cred_shares
-    dw_str = wx.voice_debt_shares
+    bob_voice_cred_lumen = 55
+    bob_voice_debt_lumen = 66
+    bob_voiceunit = voiceunit_shop(bob_str, bob_voice_cred_lumen, bob_voice_debt_lumen)
+    cw_str = wx.voice_cred_lumen
+    dw_str = wx.voice_debt_lumen
     print(f"{bob_voiceunit.to_dict()=}")
     bob_required_dict = {wx.voice_name: bob_voiceunit.to_dict().get(wx.voice_name)}
     bob_optional_dict = {cw_str: bob_voiceunit.to_dict().get(cw_str)}

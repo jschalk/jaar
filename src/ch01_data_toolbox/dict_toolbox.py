@@ -198,6 +198,8 @@ def normalize_and_compact_json(data: dict) -> str:
 
 
 def get_json_from_dict(x_dict: dict) -> str:
+    """Given serializable dict return JSON."""
+
     return normalize_and_compact_json(x_dict)
 
 

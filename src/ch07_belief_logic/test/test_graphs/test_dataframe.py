@@ -15,13 +15,13 @@ def test_get_belief_voiceunits_dataframe_ReturnsDataFrame():
     luca_belief.set_credor_respect(500)
     luca_belief.set_debtor_respect(400)
     yao_str = "Yao"
-    yao_voice_cred_shares = 66
-    yao_voice_debt_shares = 77
-    luca_belief.add_voiceunit(yao_str, yao_voice_cred_shares, yao_voice_debt_shares)
+    yao_voice_cred_lumen = 66
+    yao_voice_debt_lumen = 77
+    luca_belief.add_voiceunit(yao_str, yao_voice_cred_lumen, yao_voice_debt_lumen)
     sue_str = "Sue"
-    sue_voice_cred_shares = 434
-    sue_voice_debt_shares = 323
-    luca_belief.add_voiceunit(sue_str, sue_voice_cred_shares, sue_voice_debt_shares)
+    sue_voice_cred_lumen = 434
+    sue_voice_debt_lumen = 323
+    luca_belief.add_voiceunit(sue_str, sue_voice_cred_lumen, sue_voice_debt_lumen)
 
     # WHEN
     x_df = get_belief_voiceunits_dataframe(luca_belief)
@@ -29,8 +29,8 @@ def test_get_belief_voiceunits_dataframe_ReturnsDataFrame():
     # THEN
     voiceunit_colums = {
         "voice_name",
-        "voice_cred_shares",
-        "voice_debt_shares",
+        "voice_cred_lumen",
+        "voice_debt_lumen",
         "memberships",
         "fund_give",
         "fund_take",
@@ -55,8 +55,8 @@ def test_get_belief_voiceunits_dataframe_ReturnsEmptyDataFrame():
     # THEN
     voiceunit_colums = {
         "voice_name",
-        "voice_cred_shares",
-        "voice_debt_shares",
+        "voice_cred_lumen",
+        "voice_debt_lumen",
         "fund_give",
         "fund_take",
         "fund_agenda_give",
@@ -81,7 +81,7 @@ def test_get_belief_agenda_dataframe_ReturnsDataFrame():
 
     # THEN
     voiceunit_colums = {
-        "belief_name",
+        wx.belief_name,
         "fund_ratio",
         wx.plan_label,
         wx.parent_rope,
@@ -109,7 +109,7 @@ def test_get_belief_agenda_dataframe_ReturnsEmptyDataFrame():
 
     # THEN
     voiceunit_colums = {
-        "belief_name",
+        wx.belief_name,
         "fund_ratio",
         wx.plan_label,
         wx.parent_rope,

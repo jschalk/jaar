@@ -3,9 +3,9 @@ from pandas import DataFrame
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import get_row_count
 from src.ch01_data_toolbox.file_toolbox import create_path
-from src.ch17_idea_logic.idea_db_tool import create_idea_sorted_table, upsert_sheet
-from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
-from src.ch18_etl_toolbox.transformers import get_max_brick_agg_event_int
+from src.ch17_idea.idea_db_tool import create_idea_sorted_table, upsert_sheet
+from src.ch18_world_etl.tran_sqlstrs import create_prime_tablename
+from src.ch18_world_etl.transformers import get_max_brick_agg_event_int
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as worlds_dir,

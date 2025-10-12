@@ -107,14 +107,14 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
         flyer_awardunit.awardee_title: flyer_awardunit,
     }
     biker_get_dict = {
-        "awardee_title": biker_awardunit.awardee_title,
-        "give_force": biker_awardunit.give_force,
-        "take_force": biker_awardunit.take_force,
+        wx.awardee_title: biker_awardunit.awardee_title,
+        wx.give_force: biker_awardunit.give_force,
+        wx.take_force: biker_awardunit.take_force,
     }
     flyer_get_dict = {
-        "awardee_title": flyer_awardunit.awardee_title,
-        "give_force": flyer_awardunit.give_force,
-        "take_force": flyer_awardunit.take_force,
+        wx.awardee_title: flyer_awardunit.awardee_title,
+        wx.give_force: flyer_awardunit.give_force,
+        wx.take_force: flyer_awardunit.take_force,
     }
     x1_awardunits = {
         biker_awardee_title: biker_get_dict,
@@ -172,13 +172,13 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
 
     # THEN
     assert casa_dict is not None
-    assert len(casa_dict["kids"]) == 1
-    assert casa_dict["kids"] == casa_plan.get_kids_dict()
+    assert len(casa_dict[wx.kids]) == 1
+    assert casa_dict[wx.kids] == casa_plan.get_kids_dict()
     assert casa_dict[wx.reasonunits] == casa_plan.get_reasonunits_dict()
     assert casa_dict[wx.awardunits] == casa_plan.get_awardunits_dict()
     assert casa_dict[wx.awardunits] == x1_awardunits
     assert casa_dict[wx.laborunit] == sue_laborunit.to_dict()
-    assert casa_dict["healerunit"] == yao_healerunit.to_dict()
+    assert casa_dict[wx.healerunit] == yao_healerunit.to_dict()
     assert casa_dict[wx.star] == casa_plan.star
     assert casa_dict[wx.plan_label] == casa_plan.plan_label
     assert casa_dict["uid"] == casa_plan.uid
@@ -193,7 +193,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     assert casa_dict[wx.problem_bool] == casa_plan.problem_bool
     assert casa_dict[wx.problem_bool] == x_problem_bool
     assert casa_plan.is_expanded
-    assert casa_dict.get("is_expanded") is None
+    assert casa_dict.get(wx.is_expanded) is None
     assert len(casa_dict[wx.factunits]) == len(casa_plan.get_factunits_dict())
 
 

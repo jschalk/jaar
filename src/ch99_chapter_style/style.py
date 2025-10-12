@@ -395,26 +395,6 @@ def check_all_test_functions_are_formatted(
         ), f"'ESTABLISH'/'WHEN'/'THEN' missing from {test_function_str[:300]}"
 
 
-def get_max_chapter_import_str() -> str:
-    max_chapter_int = 0
-    for chapter_desc in get_chapter_descs():
-        chapter_desc_str_number = get_chapter_desc_str_number(chapter_desc)
-        max_chapter_int = max(int(chapter_desc_str_number), max_chapter_int)
-
-    max_chapter_dir = ""
-    for chapter_desc, chapter_dir in get_chapter_descs().items():
-        chapter_desc_str_number = get_chapter_desc_str_number(chapter_desc)
-        if int(chapter_desc_str_number) == max_chapter_int:
-            max_chapter_dir = chapter_dir
-    max_chapter_int_str = str(max_chapter_int)
-    max_chapter_import_str = max_chapter_dir.replace("\\", ".")
-    max_chapter_import_str = max_chapter_import_str.replace("""src/""", """src.""")
-    max_chapter_import_str = (
-        f"{max_chapter_import_str}._ref.ch{max_chapter_int_str}_keywords"
-    )
-    return max_chapter_import_str
-
-
 _CH_PATTERN = re_compile(r"^src\.ch(\d+)(?:[._]|$)")
 _CH_STR_PATTERN = re_compile(r"ch(\d{2})_str(?:[._]|$)")
 
@@ -480,8 +460,8 @@ def find_incorrect_imports(
     py_file_path: str | pathlib_Path, min_number: int
 ) -> list[str]:
     p = pathlib_Path(py_file_path)
-    src = p.read_text(encoding="utf-8")
-    tree = ast_parse(src, filename=str(p))
+    file_text = p.read_text(encoding="utf-8")
+    tree = ast_parse(file_text, filename=str(p))
     collector = _ImportCollector(min_number)
     collector.visit(tree)
     return collector.matches

@@ -15,6 +15,8 @@ def default_pool_num() -> PoolNum:
 
 
 def validate_pool_num(x_pool_num: PoolNum = None) -> PoolNum:
+    """Return default_pool_num if None passed. Check if pool_num is valid given grain_num"""
+
     x_pool_num = default_pool_num() if x_pool_num is None else x_pool_num
     return max(get_1_if_None(x_pool_num), default_grain_num_if_None())
 

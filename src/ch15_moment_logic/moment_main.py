@@ -14,18 +14,11 @@ from src.ch01_data_toolbox.file_toolbox import (
 )
 from src.ch03_allot_toolbox.allot import default_grain_num_if_None
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.ch08_timeline_logic.timeline_main import (
-    TimeLinePoint,
-    TimeLineUnit,
-    add_newtimeline_planunit,
-    timelineunit_shop,
-)
-from src.ch11_bud_logic._ref.ch11_semantic_types import (
-    BeliefName,
-    EventInt,
-    MomentLabel,
-    VoiceName,
-    default_knot_if_None,
+from src.ch08_epoch_logic.epoch_main import (
+    EpochPoint,
+    EpochUnit,
+    add_newepoch_planunit,
+    epochunit_shop,
 )
 from src.ch11_bud_logic.bud import (
     BeliefBudHistory,
@@ -38,11 +31,11 @@ from src.ch11_bud_logic.bud import (
     tranbook_shop,
 )
 from src.ch11_bud_logic.cell import cellunit_shop
-from src.ch12_belief_file_toolbox.ch12_path import (
+from src.ch12_pack_file._ref.ch12_path import (
     create_cell_dir_path,
     create_moment_json_path,
 )
-from src.ch12_belief_file_toolbox.hub_tool import (
+from src.ch12_pack_file.packfilehandler import (
     cellunit_save_to_dir,
     gut_file_exists,
     open_gut_file,
@@ -50,20 +43,25 @@ from src.ch12_belief_file_toolbox.hub_tool import (
     save_gut_file,
     save_job_file,
 )
-from src.ch12_belief_file_toolbox.keep_tool import (
+from src.ch13_belief_listen_logic.basis_beliefs import create_listen_basis
+from src.ch13_belief_listen_logic.keep_tool import (
     create_treasury_db_file,
     save_duty_belief,
 )
-from src.ch13_belief_listen_logic._ref.ch13_semantic_types import (
-    FundGrain,
-    FundNum,
-    MoneyGrain,
-    RespectGrain,
-)
-from src.ch13_belief_listen_logic.basis_beliefs import create_listen_basis
 from src.ch13_belief_listen_logic.listen_main import (
     listen_to_agendas_create_init_job_from_guts,
     listen_to_debtors_roll_jobs_into_job,
+)
+from src.ch15_moment_logic._ref.ch15_semantic_types import (
+    BeliefName,
+    EventInt,
+    FundGrain,
+    FundNum,
+    MomentLabel,
+    MoneyGrain,
+    RespectGrain,
+    VoiceName,
+    default_knot_if_None,
 )
 
 
@@ -99,16 +97,16 @@ class MomentUnit:
 
     moment_label: MomentLabel = None
     moment_mstr_dir: str = None
-    timeline: TimeLineUnit = None
+    epoch: EpochUnit = None
     beliefbudhistorys: dict[BeliefName, BeliefBudHistory] = None
     paybook: TranBook = None
-    offi_times: set[TimeLinePoint] = None
+    offi_times: set[EpochPoint] = None
     knot: str = None
     fund_grain: FundGrain = None
     respect_grain: RespectGrain = None
     money_grain: MoneyGrain = None
     job_listen_rotations: int = None
-    _offi_time_max: TimeLinePoint = None
+    offi_time_max: EpochPoint = None
     _moment_dir: str = None
     _beliefs_dir: str = None
     _packs_dir: str = None
@@ -215,27 +213,29 @@ class MomentUnit:
     def add_budunit(
         self,
         belief_name: BeliefName,
-        bud_time: TimeLinePoint,
+        bud_time: EpochPoint,
         quota: int,
         allow_prev_to_offi_time_max_entry: bool = False,
         celldepth: int = None,
     ):
-        self._offi_time_max = get_0_if_None(self._offi_time_max)
-        if bud_time < self._offi_time_max and not allow_prev_to_offi_time_max_entry:
-            exception_str = f"Cannot set budunit because bud_time {bud_time} is less than MomentUnit._offi_time_max {self._offi_time_max}."
+        self.offi_time_max = get_0_if_None(self.offi_time_max)
+        if bud_time < self.offi_time_max and not allow_prev_to_offi_time_max_entry:
+            exception_str = f"Cannot set budunit because bud_time {bud_time} is less than MomentUnit.offi_time_max {self.offi_time_max}."
             raise budunit_Exception(exception_str)
         if self.beliefbudhistory_exists(belief_name) is False:
             self.set_beliefbudhistory(beliefbudhistory_shop(belief_name))
         x_beliefbudhistory = self.get_beliefbudhistory(belief_name)
         x_beliefbudhistory.add_bud(bud_time, quota, celldepth)
 
-    def get_budunit(self, belief_name: BeliefName, bud_time: TimeLinePoint) -> BudUnit:
+    def get_budunit(self, belief_name: BeliefName, bud_time: EpochPoint) -> BudUnit:
         if not self.get_beliefbudhistory(belief_name):
             return None
         x_beliefbudhistory = self.get_beliefbudhistory(belief_name)
         return x_beliefbudhistory.get_bud(bud_time)
 
     def to_dict(self, include_paybook: bool = True) -> dict:
+        """Returns dict that is serializable to JSON."""
+
         x_dict = {
             "moment_label": self.moment_label,
             "moment_mstr_dir": self.moment_mstr_dir,
@@ -244,15 +244,12 @@ class MomentUnit:
             "money_grain": self.money_grain,
             "beliefbudhistorys": self._get_beliefbudhistorys_dict(),
             "respect_grain": self.respect_grain,
-            "timeline": self.timeline.to_dict(),
+            "epoch": self.epoch.to_dict(),
             "offi_times": list(self.offi_times),
         }
         if include_paybook:
             x_dict["paybook"] = self.paybook.to_dict()
         return x_dict
-
-    def get_json(self) -> str:
-        return get_json_from_dict(self.to_dict())
 
     def _get_beliefbudhistorys_dict(self) -> dict[BeliefName, dict]:
         return {
@@ -260,7 +257,7 @@ class MomentUnit:
             for x_bud in self.beliefbudhistorys.values()
         }
 
-    def get_beliefbudhistorys_bud_times(self) -> set[TimeLinePoint]:
+    def get_beliefbudhistorys_bud_times(self) -> set[EpochPoint]:
         all_budunit_bud_times = set()
         for x_beliefbudhistory in self.beliefbudhistorys.values():
             all_budunit_bud_times.update(x_beliefbudhistory.get_bud_times())
@@ -270,17 +267,17 @@ class MomentUnit:
         self.paybook.set_tranunit(
             tranunit=x_paypurchase,
             blocked_tran_times=self.get_beliefbudhistorys_bud_times(),
-            _offi_time_max=self._offi_time_max,
+            offi_time_max=self.offi_time_max,
         )
 
     def add_paypurchase(
         self,
         belief_name: BeliefName,
         voice_name: VoiceName,
-        tran_time: TimeLinePoint,
+        tran_time: EpochPoint,
         amount: FundNum,
-        blocked_tran_times: set[TimeLinePoint] = None,
-        _offi_time_max: TimeLinePoint = None,
+        blocked_tran_times: set[EpochPoint] = None,
+        offi_time_max: EpochPoint = None,
     ) -> None:
         self.paybook.add_tranunit(
             belief_name=belief_name,
@@ -288,41 +285,41 @@ class MomentUnit:
             tran_time=tran_time,
             amount=amount,
             blocked_tran_times=blocked_tran_times,
-            _offi_time_max=_offi_time_max,
+            offi_time_max=offi_time_max,
         )
 
     def paypurchase_exists(
-        self, src: BeliefName, dst: VoiceName, x_tran_time: TimeLinePoint
+        self, src: BeliefName, dst: VoiceName, x_tran_time: EpochPoint
     ) -> bool:
         return self.paybook.tranunit_exists(src, dst, x_tran_time)
 
     def get_paypurchase(
-        self, src: BeliefName, dst: VoiceName, x_tran_time: TimeLinePoint
+        self, src: BeliefName, dst: VoiceName, x_tran_time: EpochPoint
     ) -> TranUnit:
         return self.paybook.get_tranunit(src, dst, x_tran_time)
 
     def del_paypurchase(
-        self, src: BeliefName, dst: VoiceName, x_tran_time: TimeLinePoint
+        self, src: BeliefName, dst: VoiceName, x_tran_time: EpochPoint
     ) -> TranUnit:
         return self.paybook.del_tranunit(src, dst, x_tran_time)
 
-    # def set_offi_time(self, offi_time: TimeLinePoint):
+    # def set_offi_time(self, offi_time: EpochPoint):
     #     self.offi_time = offi_time
-    #     if self._offi_time_max < self.offi_time:
-    #         self._offi_time_max = self.offi_time
+    #     if self.offi_time_max < self.offi_time:
+    #         self.offi_time_max = self.offi_time
 
-    def set_offi_time_max(self, x_offi_time_max: TimeLinePoint):
+    def set_offi_time_max(self, x_offi_time_max: EpochPoint):
         x_tran_times = self.paybook.get_tran_times()
         if x_tran_times != set() and max(x_tran_times) >= x_offi_time_max:
-            exception_str = f"Cannot set _offi_time_max {x_offi_time_max}, paypurchase with greater tran_time exists"
+            exception_str = f"Cannot set offi_time_max {x_offi_time_max}, paypurchase with greater tran_time exists"
             raise set_offi_time_max_Exception(exception_str)
         # if self.offi_time > x_offi_time_max:
-        #     exception_str = f"Cannot set _offi_time_max={x_offi_time_max} because it is less than offi_time={self.offi_time}"
+        #     exception_str = f"Cannot set offi_time_max={x_offi_time_max} because it is less than offi_time={self.offi_time}"
         #     raise set_offi_time_max_Exception(exception_str)
-        self._offi_time_max = x_offi_time_max
+        self.offi_time_max = x_offi_time_max
 
     # def set_offi_time(
-    #     self, offi_time: TimeLinePoint, _offi_time_max: TimeLinePoint
+    #     self, offi_time: EpochPoint, offi_time_max: EpochPoint
     # ):
     #     self.set_offi_time(offi_time)
     #     self.set_offi_time_max(_offi_time_max)
@@ -340,7 +337,7 @@ class MomentUnit:
 
     def create_buds_root_cells(
         self,
-        ote1_dict: dict[BeliefName, dict[TimeLinePoint, EventInt]],
+        ote1_dict: dict[BeliefName, dict[EpochPoint, EventInt]],
     ) -> None:
         for belief_name, beliefbudhistory in self.beliefbudhistorys.items():
             for bud_time in beliefbudhistory.buds.keys():
@@ -349,8 +346,8 @@ class MomentUnit:
     def _create_bud_root_cell(
         self,
         belief_name: BeliefName,
-        ote1_dict: dict[BeliefName, dict[TimeLinePoint, EventInt]],
-        bud_time: TimeLinePoint,
+        ote1_dict: dict[BeliefName, dict[EpochPoint, EventInt]],
+        bud_time: EpochPoint,
     ) -> None:
         past_event_int = _get_ote1_max_past_event_int(belief_name, ote1_dict, bud_time)
         budunit = self.get_budunit(belief_name, bud_time)
@@ -367,20 +364,20 @@ class MomentUnit:
         )
         cellunit_save_to_dir(root_cell_dir, cellunit)
 
-    def get_timeline_config(self) -> dict:
-        return self.timeline.to_dict()
+    def get_epoch_config(self) -> dict:
+        return self.epoch.to_dict()
 
-    def add_timeline_to_gut(self, belief_name: BeliefName) -> None:
-        """Adds the timeline to the gut file for the given belief."""
+    def add_epoch_to_gut(self, belief_name: BeliefName) -> None:
+        """Adds the epoch to the gut file for the given belief."""
         x_gut = open_gut_file(self.moment_mstr_dir, self.moment_label, belief_name)
-        add_newtimeline_planunit(x_gut, self.get_timeline_config())
+        add_newepoch_planunit(x_gut, self.get_epoch_config())
         save_gut_file(self.moment_mstr_dir, x_gut)
 
-    def add_timeline_to_guts(self) -> None:
-        """Adds the timeline to all gut files."""
+    def add_epoch_to_guts(self) -> None:
+        """Adds the epoch to all gut files."""
         belief_names = self._get_belief_folder_names()
         for belief_name in belief_names:
-            self.add_timeline_to_gut(belief_name)
+            self.add_epoch_to_gut(belief_name)
 
 
 def _get_ote1_max_past_event_int(
@@ -399,22 +396,22 @@ def _get_ote1_max_past_event_int(
 def momentunit_shop(
     moment_label: MomentLabel,
     moment_mstr_dir: str,
-    timeline: TimeLineUnit = None,
-    offi_times: set[TimeLinePoint] = None,
+    epoch: EpochUnit = None,
+    offi_times: set[EpochPoint] = None,
     knot: str = None,
     fund_grain: float = None,
     respect_grain: float = None,
     money_grain: float = None,
     job_listen_rotations: int = None,
 ) -> MomentUnit:
-    if timeline is None:
-        timeline = timelineunit_shop()
+    if epoch is None:
+        epoch = epochunit_shop()
     if not job_listen_rotations:
         job_listen_rotations = get_default_job_listen_count()
     x_momentunit = MomentUnit(
         moment_label=moment_label,
         moment_mstr_dir=moment_mstr_dir,
-        timeline=timeline,
+        epoch=epoch,
         beliefbudhistorys={},
         paybook=tranbook_shop(moment_label),
         offi_times=get_empty_set_if_None(offi_times),
@@ -450,11 +447,11 @@ def get_momentunit_from_dict(moment_dict: dict) -> MomentUnit:
         respect_grain=moment_dict.get("respect_grain"),
         money_grain=moment_dict.get("money_grain"),
     )
-    moment_dict_timeline_value = moment_dict.get("timeline")
-    if moment_dict_timeline_value:
-        x_moment.timeline = timelineunit_shop(moment_dict_timeline_value)
+    moment_dict_epoch_value = moment_dict.get("epoch")
+    if moment_dict_epoch_value:
+        x_moment.epoch = epochunit_shop(moment_dict_epoch_value)
     else:
-        x_moment.timeline = timelineunit_shop(None)
+        x_moment.epoch = epochunit_shop(None)
     x_moment.beliefbudhistorys = _get_beliefbudhistorys_from_dict(
         moment_dict.get("beliefbudhistorys")
     )

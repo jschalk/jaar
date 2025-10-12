@@ -34,30 +34,30 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnitSimpleAttrs():
     dimen = wx.beliefunit
     x_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     new1_value = 55
-    new1_arg = "tally"
+    new1_arg = wx.tally
     x_beliefatom.set_jvalue(new1_arg, new1_value)
     new2_value = 66
-    new2_arg = "max_tree_traverse"
+    new2_arg = wx.max_tree_traverse
     x_beliefatom.set_jvalue(new2_arg, new2_value)
     new3_value = 77
-    new3_arg = "credor_respect"
+    new3_arg = wx.credor_respect
     x_beliefatom.set_jvalue(new3_arg, new3_value)
     new4_value = 88
-    new4_arg = "debtor_respect"
+    new4_arg = wx.debtor_respect
     x_beliefatom.set_jvalue(new4_arg, new4_value)
     new9_value = 55550000
-    new9_arg = "fund_pool"
+    new9_arg = wx.fund_pool
     x_beliefatom.set_jvalue(new9_arg, new9_value)
     new8_value = 0.5555
-    new8_arg = "fund_grain"
+    new8_arg = wx.fund_grain
     x_beliefatom.set_jvalue(new8_arg, new8_value)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
     new6_value = 0.5
-    new6_arg = "respect_grain"
+    new6_arg = wx.respect_grain
     x_beliefatom.set_jvalue(new6_arg, new6_value)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
     new7_value = 0.025
-    new7_arg = "money_grain"
+    new7_arg = wx.money_grain
     x_beliefatom.set_jvalue(new7_arg, new7_value)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
 
@@ -123,10 +123,10 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_voice():
     dimen = wx.belief_voiceunit
     x_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     x_beliefatom.set_jkey(wx.voice_name, zia_str)
-    x_voice_cred_shares = 55
-    x_voice_debt_shares = 66
-    x_beliefatom.set_jvalue("voice_cred_shares", x_voice_cred_shares)
-    x_beliefatom.set_jvalue("voice_debt_shares", x_voice_debt_shares)
+    x_voice_cred_lumen = 55
+    x_voice_debt_lumen = 66
+    x_beliefatom.set_jvalue("voice_cred_lumen", x_voice_cred_lumen)
+    x_beliefatom.set_jvalue("voice_debt_lumen", x_voice_debt_lumen)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
     print(f"{sue_beliefdelta.beliefatoms.keys()=}")
     after_sue_beliefunit = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
@@ -136,8 +136,8 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_voice():
     zia_voiceunit = after_sue_beliefunit.get_voice(zia_str)
     assert yao_voiceunit is not None
     assert zia_voiceunit is not None
-    assert zia_voiceunit.voice_cred_shares == x_voice_cred_shares
-    assert zia_voiceunit.voice_debt_shares == x_voice_debt_shares
+    assert zia_voiceunit.voice_cred_lumen == x_voice_cred_lumen
+    assert zia_voiceunit.voice_debt_lumen == x_voice_debt_lumen
 
 
 def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_voice():
@@ -148,21 +148,21 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_voice():
     before_sue_beliefunit = beliefunit_shop(sue_str)
     yao_str = "Yao"
     before_sue_beliefunit.add_voiceunit(yao_str)
-    assert before_sue_beliefunit.get_voice(yao_str).voice_cred_shares == 1
+    assert before_sue_beliefunit.get_voice(yao_str).voice_cred_lumen == 1
 
     # WHEN
     dimen = wx.belief_voiceunit
     x_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     x_beliefatom.set_jkey(wx.voice_name, yao_str)
-    yao_voice_cred_shares = 55
-    x_beliefatom.set_jvalue("voice_cred_shares", yao_voice_cred_shares)
+    yao_voice_cred_lumen = 55
+    x_beliefatom.set_jvalue("voice_cred_lumen", yao_voice_cred_lumen)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
     print(f"{sue_beliefdelta.beliefatoms.keys()=}")
     after_sue_beliefunit = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
 
     # THEN
     yao_voice = after_sue_beliefunit.get_voice(yao_str)
-    assert yao_voice.voice_cred_shares == yao_voice_cred_shares
+    assert yao_voice.voice_cred_lumen == yao_voice_cred_lumen
 
 
 def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_membership():
@@ -230,8 +230,8 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_membership()
     yao_beliefatom = beliefatom_shop(wx.belief_voice_membership, wx.INSERT)
     yao_beliefatom.set_jkey(wx.group_title, run_str)
     yao_beliefatom.set_jkey(wx.voice_name, yao_str)
-    yao_run_group_cred_shares = 17
-    yao_beliefatom.set_jvalue("group_cred_shares", yao_run_group_cred_shares)
+    yao_run_group_cred_lumen = 17
+    yao_beliefatom.set_jvalue("group_cred_lumen", yao_run_group_cred_lumen)
     print(f"{yao_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(yao_beliefatom)
@@ -243,7 +243,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_membership()
     after_yao_voiceunit = after_sue_beliefunit.get_voice(yao_str)
     after_yao_run_membership = after_yao_voiceunit.get_membership(run_str)
     assert after_yao_run_membership is not None
-    assert after_yao_run_membership.group_cred_shares == yao_run_group_cred_shares
+    assert after_yao_run_membership.group_cred_lumen == yao_run_group_cred_lumen
 
 
 def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_membership():
@@ -255,20 +255,20 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_membership()
     before_sue_beliefunit.add_voiceunit(yao_str)
     before_yao_voiceunit = before_sue_beliefunit.get_voice(yao_str)
     run_str = ";runners"
-    old_yao_run_group_cred_shares = 3
-    before_yao_voiceunit.add_membership(run_str, old_yao_run_group_cred_shares)
+    old_yao_run_group_cred_lumen = 3
+    before_yao_voiceunit.add_membership(run_str, old_yao_run_group_cred_lumen)
     yao_run_membership = before_yao_voiceunit.get_membership(run_str)
-    assert yao_run_membership.group_cred_shares == old_yao_run_group_cred_shares
-    assert yao_run_membership.group_debt_shares == 1
+    assert yao_run_membership.group_cred_lumen == old_yao_run_group_cred_lumen
+    assert yao_run_membership.group_debt_lumen == 1
 
     # WHEN
     yao_beliefatom = beliefatom_shop(wx.belief_voice_membership, wx.UPDATE)
     yao_beliefatom.set_jkey(wx.group_title, run_str)
     yao_beliefatom.set_jkey(wx.voice_name, yao_str)
-    new_yao_run_group_cred_shares = 7
-    new_yao_run_group_debt_shares = 11
-    yao_beliefatom.set_jvalue(wx.group_cred_shares, new_yao_run_group_cred_shares)
-    yao_beliefatom.set_jvalue(wx.group_debt_shares, new_yao_run_group_debt_shares)
+    new_yao_run_group_cred_lumen = 7
+    new_yao_run_group_debt_lumen = 11
+    yao_beliefatom.set_jvalue(wx.group_cred_lumen, new_yao_run_group_cred_lumen)
+    yao_beliefatom.set_jvalue(wx.group_debt_lumen, new_yao_run_group_debt_lumen)
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(yao_beliefatom)
     after_sue_beliefunit = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
@@ -276,8 +276,8 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_membership()
     # THEN
     after_yao_voiceunit = after_sue_beliefunit.get_voice(yao_str)
     after_yao_run_membership = after_yao_voiceunit.get_membership(run_str)
-    assert after_yao_run_membership.group_cred_shares == new_yao_run_group_cred_shares
-    assert after_yao_run_membership.group_debt_shares == new_yao_run_group_debt_shares
+    assert after_yao_run_membership.group_cred_lumen == new_yao_run_group_cred_lumen
+    assert after_yao_run_membership.group_debt_lumen == new_yao_run_group_debt_lumen
 
 
 def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_planunit():

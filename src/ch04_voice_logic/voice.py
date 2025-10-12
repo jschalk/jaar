@@ -1,9 +1,5 @@
 from dataclasses import dataclass
-from src.ch01_data_toolbox.dict_toolbox import (
-    get_0_if_None,
-    get_1_if_None,
-    get_dict_from_json,
-)
+from src.ch01_data_toolbox.dict_toolbox import get_0_if_None, get_1_if_None
 from src.ch02_rope_logic.rope import (
     default_knot_if_None,
     is_labelterm,
@@ -31,22 +27,22 @@ class Bad_voice_nameMemberShipException(Exception):
 @dataclass
 class VoiceUnit:
     """This represents the belief_name's opinion of the VoiceUnit.voice_name
-    VoiceUnit.voice_cred_shares represents how much voice_cred_shares the _belief_name projects to the voice_name
-    VoiceUnit.voice_debt_shares represents how much voice_debt_shares the _belief_name projects to the voice_name
+    VoiceUnit.voice_cred_lumen represents how much voice_cred_lumen the _belief_name projects to the voice_name
+    VoiceUnit.voice_debt_lumen represents how much voice_debt_lumen the _belief_name projects to the voice_name
     """
 
     voice_name: VoiceName = None
     knot: str = None
     respect_grain: RespectGrain = None
-    voice_cred_shares: int = None
-    voice_debt_shares: int = None
+    voice_cred_lumen: int = None
+    voice_debt_lumen: int = None
     # special attribute: static in belief json, in memory it is deleted after loading and recalculated during saving.
     memberships: dict[VoiceName, MemberShip] = None
     # calculated fields
     credor_pool: RespectNum = None
     debtor_pool: RespectNum = None
-    irrational_voice_debt_shares: int = None  # set by listening process
-    inallocable_voice_debt_shares: int = None  # set by listening process
+    irrational_voice_debt_lumen: int = None  # set by listening process
+    inallocable_voice_debt_lumen: int = None  # set by listening process
     # set by Belief.cashout()
     fund_give: FundNum = None
     fund_take: FundNum = None
@@ -61,27 +57,27 @@ class VoiceUnit:
     def set_respect_grain(self, x_respect_grain: float):
         self.respect_grain = x_respect_grain
 
-    def set_credor_voice_debt_shares(
+    def set_credor_voice_debt_lumen(
         self,
-        voice_cred_shares: float = None,
-        voice_debt_shares: float = None,
+        voice_cred_lumen: float = None,
+        voice_debt_lumen: float = None,
     ):
-        if voice_cred_shares is not None:
-            self.set_voice_cred_shares(voice_cred_shares)
-        if voice_debt_shares is not None:
-            self.set_voice_debt_shares(voice_debt_shares)
+        if voice_cred_lumen is not None:
+            self.set_voice_cred_lumen(voice_cred_lumen)
+        if voice_debt_lumen is not None:
+            self.set_voice_debt_lumen(voice_debt_lumen)
 
-    def set_voice_cred_shares(self, voice_cred_shares: int):
-        self.voice_cred_shares = voice_cred_shares
+    def set_voice_cred_lumen(self, voice_cred_lumen: int):
+        self.voice_cred_lumen = voice_cred_lumen
 
-    def set_voice_debt_shares(self, voice_debt_shares: int):
-        self.voice_debt_shares = voice_debt_shares
+    def set_voice_debt_lumen(self, voice_debt_lumen: int):
+        self.voice_debt_lumen = voice_debt_lumen
 
-    def get_voice_cred_shares(self):
-        return get_1_if_None(self.voice_cred_shares)
+    def get_voice_cred_lumen(self):
+        return get_1_if_None(self.voice_cred_lumen)
 
-    def get_voice_debt_shares(self):
-        return get_1_if_None(self.voice_debt_shares)
+    def get_voice_debt_lumen(self):
+        return get_1_if_None(self.voice_debt_lumen)
 
     def clear_fund_give_take(self):
         self.fund_give = 0
@@ -91,15 +87,15 @@ class VoiceUnit:
         self.fund_agenda_ratio_give = 0
         self.fund_agenda_ratio_take = 0
 
-    def add_irrational_voice_debt_shares(self, x_irrational_voice_debt_shares: float):
-        self.irrational_voice_debt_shares += x_irrational_voice_debt_shares
+    def add_irrational_voice_debt_lumen(self, x_irrational_voice_debt_lumen: float):
+        self.irrational_voice_debt_lumen += x_irrational_voice_debt_lumen
 
-    def add_inallocable_voice_debt_shares(self, x_inallocable_voice_debt_shares: float):
-        self.inallocable_voice_debt_shares += x_inallocable_voice_debt_shares
+    def add_inallocable_voice_debt_lumen(self, x_inallocable_voice_debt_lumen: float):
+        self.inallocable_voice_debt_lumen += x_inallocable_voice_debt_lumen
 
     def reset_listen_calculated_attrs(self):
-        self.irrational_voice_debt_shares = 0
-        self.inallocable_voice_debt_shares = 0
+        self.irrational_voice_debt_lumen = 0
+        self.inallocable_voice_debt_lumen = 0
 
     def add_fund_give(self, fund_give: float):
         self.fund_give += fund_give
@@ -113,7 +109,7 @@ class VoiceUnit:
     def add_fund_agenda_take(self, fund_agenda_take: float):
         self.fund_agenda_take += fund_agenda_take
 
-    def add_fund_give_take(
+    def add_voice_fund_give_take(
         self,
         fund_give: float,
         fund_take,
@@ -129,20 +125,20 @@ class VoiceUnit:
         self,
         fund_agenda_ratio_give_sum: float,
         fund_agenda_ratio_take_sum: float,
-        voiceunits_voice_cred_shares_sum: float,
-        voiceunits_voice_debt_shares_sum: float,
+        voiceunits_voice_cred_lumen_sum: float,
+        voiceunits_voice_debt_lumen_sum: float,
     ):
-        total_voice_cred_shares = voiceunits_voice_cred_shares_sum
+        total_voice_cred_lumen = voiceunits_voice_cred_lumen_sum
         ratio_give_sum = fund_agenda_ratio_give_sum
         self.fund_agenda_ratio_give = (
-            self.get_voice_cred_shares() / total_voice_cred_shares
+            self.get_voice_cred_lumen() / total_voice_cred_lumen
             if fund_agenda_ratio_give_sum == 0
             else self.fund_agenda_give / ratio_give_sum
         )
         if fund_agenda_ratio_take_sum == 0:
-            total_voice_debt_shares = voiceunits_voice_debt_shares_sum
+            total_voice_debt_lumen = voiceunits_voice_debt_lumen_sum
             self.fund_agenda_ratio_take = (
-                self.get_voice_debt_shares() / total_voice_debt_shares
+                self.get_voice_debt_lumen() / total_voice_debt_lumen
             )
         else:
             ratio_take_sum = fund_agenda_ratio_take_sum
@@ -151,12 +147,10 @@ class VoiceUnit:
     def add_membership(
         self,
         group_title: GroupTitle,
-        group_cred_shares: float = None,
-        group_debt_shares: float = None,
+        group_cred_lumen: float = None,
+        group_debt_lumen: float = None,
     ):
-        x_membership = membership_shop(
-            group_title, group_cred_shares, group_debt_shares
-        )
+        x_membership = membership_shop(group_title, group_cred_lumen, group_debt_lumen)
         self.set_membership(x_membership)
 
     def set_membership(self, x_membership: MemberShip):
@@ -188,7 +182,7 @@ class VoiceUnit:
     def set_credor_pool(self, credor_pool: RespectNum):
         self.credor_pool = credor_pool
         ledger_dict = {
-            x_membership.group_title: x_membership.group_cred_shares
+            x_membership.group_title: x_membership.group_cred_lumen
             for x_membership in self.memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self.credor_pool, self.respect_grain)
@@ -198,7 +192,7 @@ class VoiceUnit:
     def set_debtor_pool(self, debtor_pool: RespectNum):
         self.debtor_pool = debtor_pool
         ledger_dict = {
-            x_membership.group_title: x_membership.group_debt_shares
+            x_membership.group_title: x_membership.group_debt_lumen
             for x_membership in self.memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self.debtor_pool, self.respect_grain)
@@ -212,16 +206,18 @@ class VoiceUnit:
         }
 
     def to_dict(self, all_attrs: bool = False) -> dict[str, str]:
+        """Returns dict that is serializable to JSON."""
+
         x_dict = {
             "voice_name": self.voice_name,
-            "voice_cred_shares": self.voice_cred_shares,
-            "voice_debt_shares": self.voice_debt_shares,
+            "voice_cred_lumen": self.voice_cred_lumen,
+            "voice_debt_lumen": self.voice_debt_lumen,
             "memberships": self.get_memberships_dict(),
         }
-        if self.irrational_voice_debt_shares not in [None, 0]:
-            x_dict["irrational_voice_debt_shares"] = self.irrational_voice_debt_shares
-        if self.inallocable_voice_debt_shares not in [None, 0]:
-            x_dict["inallocable_voice_debt_shares"] = self.inallocable_voice_debt_shares
+        if self.irrational_voice_debt_lumen not in [None, 0]:
+            x_dict["irrational_voice_debt_lumen"] = self.irrational_voice_debt_lumen
+        if self.inallocable_voice_debt_lumen not in [None, 0]:
+            x_dict["inallocable_voice_debt_lumen"] = self.inallocable_voice_debt_lumen
 
         if all_attrs:
             self.all_attrs_necessary_in_dict(x_dict)
@@ -236,11 +232,6 @@ class VoiceUnit:
         x_dict["fund_agenda_ratio_take"] = self.fund_agenda_ratio_take
 
 
-def voiceunits_get_from_json(voiceunits_json: str) -> dict[str, VoiceUnit]:
-    voiceunits_dict = get_dict_from_json(voiceunits_json)
-    return voiceunits_get_from_dict(x_dict=voiceunits_dict)
-
-
 def voiceunits_get_from_dict(x_dict: dict, _knot: str = None) -> dict[str, VoiceUnit]:
     voiceunits = {}
     for voiceunit_dict in x_dict.values():
@@ -251,24 +242,22 @@ def voiceunits_get_from_dict(x_dict: dict, _knot: str = None) -> dict[str, Voice
 
 def voiceunit_get_from_dict(voiceunit_dict: dict, _knot: str) -> VoiceUnit:
     x_voice_name = voiceunit_dict["voice_name"]
-    x_voice_cred_shares = voiceunit_dict["voice_cred_shares"]
-    x_voice_debt_shares = voiceunit_dict["voice_debt_shares"]
+    x_voice_cred_lumen = voiceunit_dict["voice_cred_lumen"]
+    x_voice_debt_lumen = voiceunit_dict["voice_debt_lumen"]
     x_memberships_dict = voiceunit_dict["memberships"]
     x_voiceunit = voiceunit_shop(
-        x_voice_name, x_voice_cred_shares, x_voice_debt_shares, _knot
+        x_voice_name, x_voice_cred_lumen, x_voice_debt_lumen, _knot
     )
     x_voiceunit.memberships = memberships_get_from_dict(
         x_memberships_dict, x_voice_name
     )
-    irrational_voice_debt_shares = voiceunit_dict.get("irrational_voice_debt_shares", 0)
-    inallocable_voice_debt_shares = voiceunit_dict.get(
-        "inallocable_voice_debt_shares", 0
+    irrational_voice_debt_lumen = voiceunit_dict.get("irrational_voice_debt_lumen", 0)
+    inallocable_voice_debt_lumen = voiceunit_dict.get("inallocable_voice_debt_lumen", 0)
+    x_voiceunit.add_irrational_voice_debt_lumen(
+        get_0_if_None(irrational_voice_debt_lumen)
     )
-    x_voiceunit.add_irrational_voice_debt_shares(
-        get_0_if_None(irrational_voice_debt_shares)
-    )
-    x_voiceunit.add_inallocable_voice_debt_shares(
-        get_0_if_None(inallocable_voice_debt_shares)
+    x_voiceunit.add_inallocable_voice_debt_lumen(
+        get_0_if_None(inallocable_voice_debt_lumen)
     )
 
     return x_voiceunit
@@ -276,19 +265,19 @@ def voiceunit_get_from_dict(voiceunit_dict: dict, _knot: str) -> VoiceUnit:
 
 def voiceunit_shop(
     voice_name: VoiceName,
-    voice_cred_shares: int = None,
-    voice_debt_shares: int = None,
+    voice_cred_lumen: int = None,
+    voice_debt_lumen: int = None,
     knot: str = None,
     respect_grain: float = None,
 ) -> VoiceUnit:
     x_voiceunit = VoiceUnit(
-        voice_cred_shares=get_1_if_None(voice_cred_shares),
-        voice_debt_shares=get_1_if_None(voice_debt_shares),
+        voice_cred_lumen=get_1_if_None(voice_cred_lumen),
+        voice_debt_lumen=get_1_if_None(voice_debt_lumen),
         memberships={},
         credor_pool=0,
         debtor_pool=0,
-        irrational_voice_debt_shares=0,
-        inallocable_voice_debt_shares=0,
+        irrational_voice_debt_lumen=0,
+        inallocable_voice_debt_lumen=0,
         fund_give=0,
         fund_take=0,
         fund_agenda_give=0,

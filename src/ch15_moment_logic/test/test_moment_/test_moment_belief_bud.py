@@ -185,7 +185,7 @@ def test_MomentUnit_add_budunit_RaisesErrorWhen_bud_time_IsLessThan_offi_time_ma
     amy45_str = "amy45"
     amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
     amy_offi_time_max = 606
-    amy_moment._offi_time_max = amy_offi_time_max
+    amy_moment.offi_time_max = amy_offi_time_max
     bob_str = "Bob"
     bob_x0_bud_time = 707
     bob_x0_quota = 33
@@ -201,7 +201,7 @@ def test_MomentUnit_add_budunit_RaisesErrorWhen_bud_time_IsLessThan_offi_time_ma
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         amy_moment.add_budunit(sue_str, sue_x4_bud_time, sue_x4_quota)
-    exception_str = f"Cannot set budunit because bud_time {sue_x4_bud_time} is less than MomentUnit._offi_time_max {amy_offi_time_max}."
+    exception_str = f"Cannot set budunit because bud_time {sue_x4_bud_time} is less than MomentUnit.offi_time_max {amy_offi_time_max}."
     assert str(excinfo.value) == exception_str
 
 
@@ -210,7 +210,7 @@ def test_MomentUnit_add_budunit_DoesNotRaiseError_allow_prev_to_offi_time_max_en
     amy45_str = "amy45"
     amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
     amy_offi_time_max = 606
-    amy_moment._offi_time_max = amy_offi_time_max
+    amy_moment.offi_time_max = amy_offi_time_max
     bob_str = "Bob"
     bob_x0_bud_time = 707
     bob_x0_quota = 33

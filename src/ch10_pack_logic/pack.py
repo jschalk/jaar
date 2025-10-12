@@ -7,9 +7,10 @@ from src.ch01_data_toolbox.file_toolbox import (
     open_file,
     open_json,
     save_file,
+    save_json,
 )
 from src.ch07_belief_logic.belief_main import BeliefUnit, get_default_moment_label
-from src.ch09_belief_atom_logic.atom_main import BeliefAtom, get_beliefatom_from_json
+from src.ch09_belief_atom_logic.atom_main import BeliefAtom, get_beliefatom_from_dict
 from src.ch10_pack_logic._ref.ch10_semantic_types import (
     BeliefName,
     FaceName,
@@ -79,9 +80,6 @@ class PackUnit:
         total_dict["delta"] = self._beliefdelta.get_ordered_dict()
         return total_dict
 
-    def get_json(self) -> str:
-        return get_json_from_dict(self.get_serializable_dict())
-
     def get_delta_atom_numbers(self, packunit_dict: list[str]) -> int:
         delta_dict = packunit_dict.get("delta")
         return list(delta_dict.keys())
@@ -103,15 +101,15 @@ class PackUnit:
 
     def _save_atom_file(self, atom_number: int, x_atom: BeliefAtom):
         x_filename = self._get_num_filename(atom_number)
-        save_file(self._atoms_dir, x_filename, x_atom.get_json())
+        save_json(self._atoms_dir, x_filename, x_atom.to_dict())
 
     def atom_file_exists(self, atom_number: int) -> bool:
         x_filename = self._get_num_filename(atom_number)
         return os_path_exists(create_path(self._atoms_dir, x_filename))
 
     def _open_atom_file(self, atom_number: int) -> BeliefAtom:
-        x_json = open_file(self._atoms_dir, self._get_num_filename(atom_number))
-        return get_beliefatom_from_json(x_json)
+        x_dict = open_json(self._atoms_dir, self._get_num_filename(atom_number))
+        return get_beliefatom_from_dict(x_dict)
 
     def _save_pack_file(self):
         x_filename = self._get_num_filename(self._pack_id)
@@ -212,8 +210,7 @@ def create_packunit_from_files(
     return x_packunit
 
 
-def get_packunit_from_json(x_json: str) -> PackUnit:
-    pack_dict = get_dict_from_json(x_json)
+def get_packunit_from_dict(pack_dict: dict) -> PackUnit:
     if pack_dict.get("event_int") is None:
         x_event_int = None
     else:

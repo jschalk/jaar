@@ -3,14 +3,16 @@ from os.path import exists as os_path_exists
 from sqlite3 import Cursor as sqlite3_Cursor, connect as sqlite3_connect
 from src.ch01_data_toolbox.dict_toolbox import get_0_if_None, get_empty_set_if_None
 from src.ch01_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
-from src.ch11_bud_logic._ref.ch11_semantic_types import EventInt, FaceName, MomentLabel
-from src.ch11_bud_logic.bud import TimeLinePoint
+from src.ch11_bud_logic.bud import EpochPoint
 from src.ch15_moment_logic.moment_main import MomentUnit
-from src.ch17_idea_logic.idea_db_tool import update_event_int_in_excel_files
-from src.ch18_etl_toolbox.ch18_path import create_moment_mstr_path, create_world_db_path
-from src.ch18_etl_toolbox.stance_tool import create_stance0001_file
-from src.ch18_etl_toolbox.transformers import (
-    add_moment_timeline_to_guts,
+from src.ch17_idea.idea_db_tool import update_event_int_in_excel_files
+from src.ch18_world_etl._ref.ch18_path import (
+    create_moment_mstr_path,
+    create_world_db_path,
+)
+from src.ch18_world_etl.stance_tool import create_stance0001_file
+from src.ch18_world_etl.transformers import (
+    add_moment_epoch_to_guts,
     create_last_run_metrics_json,
     etl_brick_agg_tables_to_brick_valid_tables,
     etl_brick_agg_tables_to_events_brick_agg_table,
@@ -42,12 +44,17 @@ from src.ch18_etl_toolbox.transformers import (
     etl_translate_sound_agg_tables_to_translate_sound_vld_tables,
     get_max_brick_agg_event_int,
 )
-from src.ch19_kpi_toolbox.kpi_mstr import (
+from src.ch19_world_kpi.kpi_mstr import (
     create_calendar_markdown_files,
     create_kpi_csvs,
     populate_kpi_bundle,
 )
-from src.ch20_world_logic._ref.ch20_semantic_types import WorldName
+from src.ch20_world_logic._ref.ch20_semantic_types import (
+    EventInt,
+    FaceName,
+    MomentLabel,
+    WorldName,
+)
 
 
 @dataclass
@@ -55,7 +62,7 @@ class WorldUnit:
     world_name: WorldName = None
     worlds_dir: str = None
     output_dir: str = None
-    world_time_reason_upper: TimeLinePoint = None
+    world_time_reason_upper: EpochPoint = None
     _world_dir: str = None
     _input_dir: str = None
     _brick_dir: str = None
@@ -144,7 +151,7 @@ class WorldUnit:
         etl_event_belief_csvs_to_pack_json(mstr_dir)
         etl_event_pack_json_to_event_inherited_beliefunits(mstr_dir)
         etl_event_inherited_beliefunits_to_moment_gut(mstr_dir)
-        add_moment_timeline_to_guts(mstr_dir)
+        add_moment_epoch_to_guts(mstr_dir)
         etl_moment_guts_to_moment_jobs(mstr_dir)
         etl_heard_raw_tables_to_moment_ote1_agg(cursor)
         etl_moment_ote1_agg_table_to_moment_ote1_agg_csvs(cursor, mstr_dir)
@@ -173,6 +180,8 @@ class WorldUnit:
         create_kpi_csvs(self.get_world_db_path(), self.output_dir)
 
     def to_dict(self) -> dict:
+        """Returns dict that is serializable to JSON."""
+
         return {
             "world_name": self.world_name,
             "world_time_reason_upper": self.world_time_reason_upper,
@@ -184,7 +193,7 @@ def worldunit_shop(
     worlds_dir: str,
     output_dir: str = None,
     input_dir: str = None,
-    world_time_reason_upper: TimeLinePoint = None,
+    world_time_reason_upper: EpochPoint = None,
     _momentunits: set[MomentLabel] = None,
 ) -> WorldUnit:
     x_worldunit = WorldUnit(

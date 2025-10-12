@@ -7,7 +7,7 @@ def test_MomentUnit_set_paypurchase_SetsAttr():
     # ESTABLISH
     t6606_offi_time_max = 6606
     x_moment = momentunit_shop("amy23", None)
-    x_moment._offi_time_max = t6606_offi_time_max
+    x_moment.offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
@@ -26,7 +26,7 @@ def test_MomentUnit_add_paypurchase_SetsAttr():
     # ESTABLISH
     t6606_offi_time_max = 6606
     x_moment = momentunit_shop("amy23", None)
-    x_moment._offi_time_max = t6606_offi_time_max
+    x_moment.offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
@@ -44,15 +44,15 @@ def test_MomentUnit_set_paypurchase_RaisesErrorWhen_tranunit_tran_time_GreaterTh
     # ESTABLISH
     t6606_offi_time_max = 6606
     x_moment = momentunit_shop("amy23", None)
-    x_moment._offi_time_max = t6606_offi_time_max
+    x_moment.offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
     t55_amount = 37
     sue_bob_t55_tranunit = tranunit_shop(sue_str, bob_str, t55_t, t55_amount)
-    assert x_moment._offi_time_max == t6606_offi_time_max
+    assert x_moment.offi_time_max == t6606_offi_time_max
     assert sue_bob_t55_tranunit.tran_time == t55_t
-    assert sue_bob_t55_tranunit.tran_time < x_moment._offi_time_max
+    assert sue_bob_t55_tranunit.tran_time < x_moment.offi_time_max
 
     # WHEN
     x_moment.set_paypurchase(sue_bob_t55_tranunit)
@@ -67,22 +67,22 @@ def test_MomentUnit_set_paypurchase_RaisesErrorWhen_tranunit_tran_time_GreaterTh
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         x_moment.set_paypurchase(sue_bob_t77_tranunit)
-    exception_str = f"Cannot set tranunit for tran_time={t77_t}, TimeLinePoint is greater than current time={t6606_offi_time_max}"
+    exception_str = f"Cannot set tranunit for tran_time={t77_t}, EpochPoint is greater than current time={t6606_offi_time_max}"
     assert str(excinfo.value) == exception_str
 
     # WHEN / THEN
     sue_bob_t6606 = tranunit_shop(sue_str, bob_str, t6606_offi_time_max, t77_amount)
     with pytest_raises(Exception) as excinfo:
         x_moment.set_paypurchase(sue_bob_t6606)
-    exception_str = f"Cannot set tranunit for tran_time={t6606_offi_time_max}, TimeLinePoint is greater than current time={t6606_offi_time_max}"
+    exception_str = f"Cannot set tranunit for tran_time={t6606_offi_time_max}, EpochPoint is greater than current time={t6606_offi_time_max}"
     assert str(excinfo.value) == exception_str
 
 
 def test_MomentUnit_set_paypurchase_RaisesErrorWhenBudUnitHas_tran_time():
     # ESTABLISH
     x_moment = momentunit_shop("amy23", None)
-    x_moment._offi_time_max = 0
-    x_moment._offi_time_max = 0
+    x_moment.offi_time_max = 0
+    x_moment.offi_time_max = 0
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
@@ -90,22 +90,20 @@ def test_MomentUnit_set_paypurchase_RaisesErrorWhenBudUnitHas_tran_time():
     x_moment.add_budunit("Yao", t55_t, t55_quota)
     t55_amount = 37
     t6606_offi_time_max = 6606
-    x_moment._offi_time_max = t6606_offi_time_max
+    x_moment.offi_time_max = t6606_offi_time_max
     sue_bob_t55_tranunit = tranunit_shop(sue_str, bob_str, t55_t, t55_amount)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         x_moment.set_paypurchase(sue_bob_t55_tranunit)
-    exception_str = (
-        f"Cannot set tranunit for tran_time={t55_t}, TimeLinePoint is blocked"
-    )
+    exception_str = f"Cannot set tranunit for tran_time={t55_t}, EpochPoint is blocked"
     assert str(excinfo.value) == exception_str
 
 
 def test_MomentUnit_paypurchase_exists_ReturnsObj():
     # ESTABLISH
     x_moment = momentunit_shop("amy23", None)
-    x_moment._offi_time_max = 6606
+    x_moment.offi_time_max = 6606
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
@@ -122,7 +120,7 @@ def test_MomentUnit_paypurchase_exists_ReturnsObj():
 def test_MomentUnit_get_paypurchase_ReturnsObj():
     # ESTABLISH
     x_moment = momentunit_shop("amy23", None)
-    x_moment._offi_time_max = 6606
+    x_moment.offi_time_max = 6606
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
@@ -142,7 +140,7 @@ def test_MomentUnit_get_paypurchase_ReturnsObj():
 def test_MomentUnit_del_paypurchase_SetsAttr():
     # ESTABLISH
     x_moment = momentunit_shop("amy23", None)
-    x_moment._offi_time_max = 6606
+    x_moment.offi_time_max = 6606
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
@@ -161,49 +159,49 @@ def test_MomentUnit_set_offi_time_max_SetsAttr():
     # ESTABLISH
     t6606_offi_time_max = 6606
     x_moment = momentunit_shop("amy23", None)
-    x_moment._offi_time_max = t6606_offi_time_max
+    x_moment.offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
     t22_t = 2202
     t22_amount = 27
     x_moment.set_paypurchase(tranunit_shop(sue_str, bob_str, t22_t, t22_amount))
-    assert x_moment._offi_time_max == t6606_offi_time_max
+    assert x_moment.offi_time_max == t6606_offi_time_max
 
     # WHEN
     t4404_offi_time_max = 4404
     x_moment.set_offi_time_max(t4404_offi_time_max)
 
     # THEN
-    assert x_moment._offi_time_max == t4404_offi_time_max
+    assert x_moment.offi_time_max == t4404_offi_time_max
 
 
 def test_MomentUnit_set_offi_time_max_RaisesErrorWhen_paypurchase_ExistsWithGreatertran_time():
     # ESTABLISH
     t6606_offi_time_max = 6606
     x_moment = momentunit_shop("amy23", None)
-    x_moment._offi_time_max = t6606_offi_time_max
+    x_moment.offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
     t55_amount = 37
     x_moment.set_paypurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
-    assert x_moment._offi_time_max == t6606_offi_time_max
+    assert x_moment.offi_time_max == t6606_offi_time_max
 
     # WHEN / THEN
     t4404_offi_time_max = 4404
     with pytest_raises(Exception) as excinfo:
         x_moment.set_offi_time_max(t4404_offi_time_max)
-    exception_str = f"Cannot set _offi_time_max {t4404_offi_time_max}, paypurchase with greater tran_time exists"
+    exception_str = f"Cannot set offi_time_max {t4404_offi_time_max}, paypurchase with greater tran_time exists"
     assert str(excinfo.value) == exception_str
 
     # THEN
-    assert x_moment._offi_time_max == t6606_offi_time_max
+    assert x_moment.offi_time_max == t6606_offi_time_max
 
 
 def test_MomentUnit_set_all_tranbook_SetsAttr():
     # ESTABLISH
     x_moment = momentunit_shop("amy23", None)
-    x_moment._offi_time_max = 10101
+    x_moment.offi_time_max = 10101
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"

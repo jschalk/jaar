@@ -195,8 +195,8 @@
       }
     }, 
     "jvalues": {
-      "group_cred_shares": { "class_type": "float", "column_order": 3, "sqlite_datatype": "REAL" }, 
-      "group_debt_shares": { "class_type": "float", "column_order": 2, "sqlite_datatype": "REAL" }
+      "group_cred_lumen": { "class_type": "float", "column_order": 3, "sqlite_datatype": "REAL" }, 
+      "group_debt_lumen": { "class_type": "float", "column_order": 2, "sqlite_datatype": "REAL" }
     }, 
     "normal_specs": {"normal_table_name": "membership"}
   }, 
@@ -208,8 +208,8 @@
       "voice_name": {"class_type": "NameTerm", "column_order": 0, "sqlite_datatype": "TEXT"}
     }, 
     "jvalues": {
-      "voice_cred_shares": { "class_type": "float", "column_order": 2, "sqlite_datatype": "REAL" }, 
-      "voice_debt_shares": { "class_type": "float", "column_order": 1, "sqlite_datatype": "REAL" }
+      "voice_cred_lumen": { "class_type": "float", "column_order": 2, "sqlite_datatype": "REAL" }, 
+      "voice_debt_lumen": { "class_type": "float", "column_order": 1, "sqlite_datatype": "REAL" }
     }, 
     "normal_specs": {"normal_table_name": "voiceunit"}
   }, 

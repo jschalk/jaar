@@ -1,9 +1,11 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch12_belief_file_toolbox.hubunit import hubunit_shop
 from src.ch14_keep_logic.rivercycle import get_credorledger, get_debtorledger
 from src.ch14_keep_logic.riverrun import riverrun_shop
-from src.ch14_keep_logic.test._util.ch14_env import temp_moment_mstr_dir
-from src.ch14_keep_logic.test._util.ch14_examples import example_yao_hubunit
+from src.ch14_keep_logic.test._util.ch14_env import (
+    get_chapter_temp_dir,
+    temp_moment_label,
+    temp_moment_mstr_dir,
+)
 
 
 def test_get_credorledger_ReturnsObj():
@@ -11,44 +13,44 @@ def test_get_credorledger_ReturnsObj():
     yao_str = "Yao"
     bob_str = "Bob"
     sue_str = "Sue"
-    yao_voice_cred_shares = 8
-    bob_voice_cred_shares = 48
-    sue_voice_cred_shares = 66
+    yao_voice_cred_lumen = 8
+    bob_voice_cred_lumen = 48
+    sue_voice_cred_lumen = 66
     yao_belief = beliefunit_shop(yao_str)
-    yao_belief.add_voiceunit(bob_str, yao_voice_cred_shares)
-    yao_belief.add_voiceunit(sue_str, bob_voice_cred_shares)
-    yao_belief.add_voiceunit(yao_str, sue_voice_cred_shares)
+    yao_belief.add_voiceunit(bob_str, yao_voice_cred_lumen)
+    yao_belief.add_voiceunit(sue_str, bob_voice_cred_lumen)
+    yao_belief.add_voiceunit(yao_str, sue_voice_cred_lumen)
 
     # WHEN
     yao_credorledger = get_credorledger(yao_belief)
 
     # THEN
     assert len(yao_credorledger) == 3
-    assert yao_credorledger.get(bob_str) == yao_voice_cred_shares
-    assert yao_credorledger.get(sue_str) == bob_voice_cred_shares
-    assert yao_credorledger.get(yao_str) == sue_voice_cred_shares
+    assert yao_credorledger.get(bob_str) == yao_voice_cred_lumen
+    assert yao_credorledger.get(sue_str) == bob_voice_cred_lumen
+    assert yao_credorledger.get(yao_str) == sue_voice_cred_lumen
 
 
-def test_get_credorledger_ReturnsObjWithNoEmpty_voice_cred_shares():
+def test_get_credorledger_ReturnsObjWithNoEmpty_voice_cred_lumen():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"
     sue_str = "Sue"
-    yao_voice_cred_shares = 8
-    bob_voice_cred_shares = 0
-    sue_voice_cred_shares = 66
+    yao_voice_cred_lumen = 8
+    bob_voice_cred_lumen = 0
+    sue_voice_cred_lumen = 66
     yao_belief = beliefunit_shop(yao_str)
-    yao_belief.add_voiceunit(bob_str, bob_voice_cred_shares)
-    yao_belief.add_voiceunit(sue_str, sue_voice_cred_shares)
-    yao_belief.add_voiceunit(yao_str, yao_voice_cred_shares)
+    yao_belief.add_voiceunit(bob_str, bob_voice_cred_lumen)
+    yao_belief.add_voiceunit(sue_str, sue_voice_cred_lumen)
+    yao_belief.add_voiceunit(yao_str, yao_voice_cred_lumen)
 
     # WHEN
     yao_credorledger = get_credorledger(yao_belief)
 
     # THEN
     assert yao_credorledger.get(bob_str) is None
-    assert yao_credorledger.get(sue_str) == sue_voice_cred_shares
-    assert yao_credorledger.get(yao_str) == yao_voice_cred_shares
+    assert yao_credorledger.get(sue_str) == sue_voice_cred_lumen
+    assert yao_credorledger.get(yao_str) == yao_voice_cred_lumen
     assert len(yao_credorledger) == 2
 
 
@@ -57,53 +59,53 @@ def test_get_debtorledger_ReturnsObj():
     yao_str = "Yao"
     bob_str = "Bob"
     sue_str = "Sue"
-    yao_voice_debt_shares = 8
-    bob_voice_debt_shares = 48
-    sue_voice_debt_shares = 66
+    yao_voice_debt_lumen = 8
+    bob_voice_debt_lumen = 48
+    sue_voice_debt_lumen = 66
     yao_belief = beliefunit_shop(yao_str)
-    yao_belief.add_voiceunit(bob_str, 2, bob_voice_debt_shares)
-    yao_belief.add_voiceunit(sue_str, 2, sue_voice_debt_shares)
-    yao_belief.add_voiceunit(yao_str, 2, yao_voice_debt_shares)
+    yao_belief.add_voiceunit(bob_str, 2, bob_voice_debt_lumen)
+    yao_belief.add_voiceunit(sue_str, 2, sue_voice_debt_lumen)
+    yao_belief.add_voiceunit(yao_str, 2, yao_voice_debt_lumen)
 
     # WHEN
     yao_debtorledger = get_debtorledger(yao_belief)
 
     # THEN
     assert len(yao_debtorledger) == 3
-    assert yao_debtorledger.get(bob_str) == bob_voice_debt_shares
-    assert yao_debtorledger.get(sue_str) == sue_voice_debt_shares
-    assert yao_debtorledger.get(yao_str) == yao_voice_debt_shares
+    assert yao_debtorledger.get(bob_str) == bob_voice_debt_lumen
+    assert yao_debtorledger.get(sue_str) == sue_voice_debt_lumen
+    assert yao_debtorledger.get(yao_str) == yao_voice_debt_lumen
 
 
-def test_get_debtorledger_ReturnsObjWithNoEmpty_voice_debt_shares():
+def test_get_debtorledger_ReturnsObjWithNoEmpty_voice_debt_lumen():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"
     sue_str = "Sue"
-    yao_voice_debt_shares = 8
-    bob_voice_debt_shares = 48
-    sue_voice_debt_shares = 0
+    yao_voice_debt_lumen = 8
+    bob_voice_debt_lumen = 48
+    sue_voice_debt_lumen = 0
     yao_belief = beliefunit_shop(yao_str)
-    yao_belief.add_voiceunit(bob_str, 2, bob_voice_debt_shares)
-    yao_belief.add_voiceunit(sue_str, 2, sue_voice_debt_shares)
-    yao_belief.add_voiceunit(yao_str, 2, yao_voice_debt_shares)
+    yao_belief.add_voiceunit(bob_str, 2, bob_voice_debt_lumen)
+    yao_belief.add_voiceunit(sue_str, 2, sue_voice_debt_lumen)
+    yao_belief.add_voiceunit(yao_str, 2, yao_voice_debt_lumen)
 
     # WHEN
     yao_debtorledger = get_debtorledger(yao_belief)
 
     # THEN
-    assert yao_debtorledger.get(bob_str) == bob_voice_debt_shares
+    assert yao_debtorledger.get(bob_str) == bob_voice_debt_lumen
     assert yao_debtorledger.get(sue_str) is None
-    assert yao_debtorledger.get(yao_str) == yao_voice_debt_shares
+    assert yao_debtorledger.get(yao_str) == yao_voice_debt_lumen
     assert len(yao_debtorledger) == 2
 
 
 def test_RiverRun_set_voice_tax_due_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
-    x_moment_mstr_dir = temp_moment_mstr_dir()
-    bob_hubunit = hubunit_shop(x_moment_mstr_dir, None, bob_str)
-    bob_riverrun = riverrun_shop(bob_hubunit)
+    mstr_dir = temp_moment_mstr_dir()
+    yao_str = "Yao"
+    bob_riverrun = riverrun_shop(mstr_dir, None, bob_str)
     yao_str = "Yao"
     assert bob_riverrun.tax_dues.get(yao_str) is None
 
@@ -117,12 +119,13 @@ def test_RiverRun_set_voice_tax_due_SetsAttr():
 
 def test_RiverRun_tax_dues_unpaid_ReturnsObj():
     # ESTABLISH
-    yao_hubunit = example_yao_hubunit()
-    x_riverrun = riverrun_shop(yao_hubunit)
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
+    yao_str = "Yao"
+    x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
     assert x_riverrun.tax_dues_unpaid() is False
 
     # WHEN
-    yao_str = "Yao"
     yao_tax_due = 500
     x_riverrun.set_voice_tax_due(yao_str, yao_tax_due)
     # THEN
@@ -134,7 +137,7 @@ def test_RiverRun_tax_dues_unpaid_ReturnsObj():
     assert x_riverrun.tax_dues_unpaid() is False
 
     # WHEN
-    bob_str = "Yao"
+    bob_str = "Bob"
     bob_tax_due = 300
     x_riverrun.set_voice_tax_due(bob_str, bob_tax_due)
     x_riverrun.set_voice_tax_due(yao_str, yao_tax_due)
@@ -144,7 +147,7 @@ def test_RiverRun_tax_dues_unpaid_ReturnsObj():
     # WHEN
     x_riverrun.delete_tax_due(yao_str)
     # THEN
-    assert x_riverrun.tax_dues_unpaid() is False
+    assert x_riverrun.tax_dues_unpaid()
 
 
 def test_RiverRun_set_tax_dues_SetsAttr():
@@ -152,23 +155,22 @@ def test_RiverRun_set_tax_dues_SetsAttr():
     bob_str = "Bob"
     bob_money_amount = 1000
     bob_money_grain = 1
-    bob_hubunit = hubunit_shop(
+    bob_riverrun = riverrun_shop(
         None,
         None,
-        bob_str,
-        money_grain=bob_money_grain,
+        belief_name=bob_str,
         keep_point_magnitude=bob_money_amount,
+        money_grain=bob_money_grain,
     )
-    bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
     yao_str = "Yao"
-    bob_voice_debt_shares = 38
-    sue_voice_debt_shares = 56
-    yao_voice_debt_shares = 6
+    bob_voice_debt_lumen = 38
+    sue_voice_debt_lumen = 56
+    yao_voice_debt_lumen = 6
     bob_belief = beliefunit_shop(bob_str)
-    bob_belief.add_voiceunit(bob_str, 2, bob_voice_debt_shares)
-    bob_belief.add_voiceunit(sue_str, 2, sue_voice_debt_shares)
-    bob_belief.add_voiceunit(yao_str, 2, yao_voice_debt_shares)
+    bob_belief.add_voiceunit(bob_str, 2, bob_voice_debt_lumen)
+    bob_belief.add_voiceunit(sue_str, 2, sue_voice_debt_lumen)
+    bob_belief.add_voiceunit(yao_str, 2, yao_voice_debt_lumen)
     bob_debtorledger = get_debtorledger(bob_belief)
     assert bob_riverrun.tax_dues_unpaid() is False
 
@@ -188,24 +190,23 @@ def test_RiverRun_voice_has_tax_due_ReturnsBool():
     bob_str = "Bob"
     bob_money_amount = 1000
     bob_money_grain = 1
-    bob_hubunit = hubunit_shop(
+    bob_riverrun = riverrun_shop(
         None,
         None,
-        bob_str,
-        money_grain=bob_money_grain,
+        belief_name=bob_str,
         keep_point_magnitude=bob_money_amount,
+        money_grain=bob_money_grain,
     )
-    bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
     sue_str = "Sue"
     zia_str = "Zia"
-    yao_voice_debt_shares = 6
-    bob_voice_debt_shares = 38
-    sue_voice_debt_shares = 56
+    yao_voice_debt_lumen = 6
+    bob_voice_debt_lumen = 38
+    sue_voice_debt_lumen = 56
     bob_belief = beliefunit_shop(bob_str)
-    bob_belief.add_voiceunit(bob_str, 2, bob_voice_debt_shares)
-    bob_belief.add_voiceunit(sue_str, 2, sue_voice_debt_shares)
-    bob_belief.add_voiceunit(yao_str, 2, yao_voice_debt_shares)
+    bob_belief.add_voiceunit(bob_str, 2, bob_voice_debt_lumen)
+    bob_belief.add_voiceunit(sue_str, 2, sue_voice_debt_lumen)
+    bob_belief.add_voiceunit(yao_str, 2, yao_voice_debt_lumen)
     bob_debtorledger = get_debtorledger(bob_belief)
     assert bob_riverrun.voice_has_tax_due(bob_str) is False
     assert bob_riverrun.voice_has_tax_due(sue_str) is False
@@ -227,14 +228,13 @@ def test_RiverRun_delete_tax_due_SetsAttr():
     bob_str = "Bob"
     bob_money_amount = 88
     bob_money_grain = 11
-    bob_hubunit = hubunit_shop(
+    bob_riverrun = riverrun_shop(
         None,
         None,
-        bob_str,
-        money_grain=bob_money_grain,
+        belief_name=bob_str,
         keep_point_magnitude=bob_money_amount,
+        money_grain=bob_money_grain,
     )
-    bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
     bob_riverrun.set_voice_tax_due(yao_str, 5)
     assert bob_riverrun.voice_has_tax_due(yao_str)
@@ -251,24 +251,23 @@ def test_RiverRun_get_voice_tax_due_ReturnsObj():
     bob_str = "Bob"
     bob_money_amount = 1000
     bob_money_grain = 1
-    bob_hubunit = hubunit_shop(
+    bob_riverrun = riverrun_shop(
         None,
         None,
-        bob_str,
-        money_grain=bob_money_grain,
+        belief_name=bob_str,
         keep_point_magnitude=bob_money_amount,
+        money_grain=bob_money_grain,
     )
-    bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
     yao_str = "Yao"
     zia_str = "Zia"
-    bob_voice_debt_shares = 38
-    sue_voice_debt_shares = 56
-    yao_voice_debt_shares = 6
+    bob_voice_debt_lumen = 38
+    sue_voice_debt_lumen = 56
+    yao_voice_debt_lumen = 6
     bob_belief = beliefunit_shop(bob_str)
-    bob_belief.add_voiceunit(bob_str, 2, bob_voice_debt_shares)
-    bob_belief.add_voiceunit(sue_str, 2, sue_voice_debt_shares)
-    bob_belief.add_voiceunit(yao_str, 2, yao_voice_debt_shares)
+    bob_belief.add_voiceunit(bob_str, 2, bob_voice_debt_lumen)
+    bob_belief.add_voiceunit(sue_str, 2, sue_voice_debt_lumen)
+    bob_belief.add_voiceunit(yao_str, 2, yao_voice_debt_lumen)
     bob_debtorledger = get_debtorledger(bob_belief)
     assert bob_riverrun.voice_has_tax_due(bob_str) is False
     assert bob_riverrun.get_voice_tax_due(bob_str) == 0
@@ -290,23 +289,22 @@ def test_RiverRun_levy_tax_due_SetsAttr_ScenarioX():
     bob_str = "Bob"
     bob_money_amount = 1000
     bob_money_grain = 1
-    bob_hubunit = hubunit_shop(
+    bob_riverrun = riverrun_shop(
         None,
         None,
-        bob_str,
-        money_grain=bob_money_grain,
+        belief_name=bob_str,
         keep_point_magnitude=bob_money_amount,
+        money_grain=bob_money_grain,
     )
-    bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
     yao_str = "Yao"
-    bob_voice_debt_shares = 38
-    sue_voice_debt_shares = 56
-    yao_voice_debt_shares = 6
+    bob_voice_debt_lumen = 38
+    sue_voice_debt_lumen = 56
+    yao_voice_debt_lumen = 6
     bob_belief = beliefunit_shop(bob_str)
-    bob_belief.add_voiceunit(bob_str, 2, bob_voice_debt_shares)
-    bob_belief.add_voiceunit(sue_str, 2, sue_voice_debt_shares)
-    bob_belief.add_voiceunit(yao_str, 2, yao_voice_debt_shares)
+    bob_belief.add_voiceunit(bob_str, 2, bob_voice_debt_lumen)
+    bob_belief.add_voiceunit(sue_str, 2, sue_voice_debt_lumen)
+    bob_belief.add_voiceunit(yao_str, 2, yao_voice_debt_lumen)
     bob_debtorledger = get_debtorledger(bob_belief)
     bob_riverrun.set_tax_dues(bob_debtorledger)
     assert bob_riverrun.get_voice_tax_due(bob_str) == 380, 0

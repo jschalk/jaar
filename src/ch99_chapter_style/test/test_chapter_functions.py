@@ -27,7 +27,6 @@ from src.ch99_chapter_style.style import (
     get_chapters_func_class_metrics,
     get_docstring,
     get_json_files,
-    get_max_chapter_import_str,
     get_python_files_with_flag,
     get_semantic_types_filename,
     get_top_level_functions,
@@ -58,8 +57,8 @@ def expected_semantic_types() -> set:
         "PoolNum",
         "RespectNum",
         "RopeTerm",
-        "TimeLineLabel",
-        "TimeLinePoint",
+        "EpochLabel",
+        "EpochPoint",
         "TitleTerm",
         "VoiceName",
         "WorldName",
@@ -76,12 +75,10 @@ def test_Chapters_CheckStringMetricsFromEveryFile():
         "_is_inx_knot_inclusion_correct",
         "_is_otx_knot_inclusion_correct",
         "_unknown_str_in_otx2inx",
-        "add_fund_give_take",
         "del_label",
         "del_otx2inx",
         "env_dir_setup_cleanup",
         "find_replace_rope",
-        "get_json",
         "get_chapter_temp_dir",
         "get_obj_key",
         "is_empty",
@@ -169,8 +166,7 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
     # all_file_count = 0
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
-        chapter_num = int(get_chapter_desc_str_number(chapter_desc))
-        allowed_chapter_keywords = cumlative_ch_keywords_dict.get(chapter_num)
+        allowed_chapter_keywords = cumlative_ch_keywords_dict.get(chapter_prefix)
         not_allowed_keywords = all_keywords_set.difference(allowed_chapter_keywords)
         not_allowed_keywords = not_allowed_keywords.difference(excluded_strs)
         # print(f"{chapter_prefix} {len(not_allowed_keywords)=}")
@@ -180,6 +176,7 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
         chapter_files = sorted(chapter_files)
         # chapter_file_count = 0
         for file_path in chapter_files:
+            # print(f"{chapter_prefix} {file_path=}")
             # chapter_file_count += 1
             # all_file_count += 1
             # print(f"{all_file_count} Chapter: {chapter_file_count} {file_path}")
@@ -189,17 +186,26 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
                 assert keyword not in file_str, notallowed_keyword_failure_str
             # print(f"{file_path=}")
             excessive_imports_str = f"{file_path} has too many Keywords class imports"
-            ch_class_name = f"Ch{chapter_num:02}Keywords"
+            ch_class_name = f"C{chapter_prefix[1:]}Keywords"
             is_doc_builder_file = "doc_builder.py" in file_path
-            if file_path.find(f"test_ch{chapter_num:02}_keywords.py") == -1:
+            if file_path.find(f"test_{chapter_prefix}_keywords.py") == -1:
                 assert file_str.count("Keywords") <= 1, excessive_imports_str
             elif not is_doc_builder_file:
                 assert file_str.count(ch_class_name) in {0, 4}, ""
             enum_x = f"{file_path} Keywords Class Import is wrong, it should be {ch_class_name}"
             if "Keywords" in file_str and not is_doc_builder_file:
                 assert ch_class_name in file_str, enum_x
+                # print(f"{file_path=} {ch_class_name=}")
 
-            is_ref_keywords_file = f"\\ch{chapter_num:02}_keywords.py" in file_path
+            # check if semantic_types import is from current chapter
+            _semantic_types_import_count = file_str.count("_semantic_types import")
+            if "semantic_types" not in file_path and _semantic_types_import_count > 0:
+                chXX_semantic_types_str = f"{chapter_prefix}_semantic_types"
+                semantic_types_failure_str = f"{file_path=} {chXX_semantic_types_str=}"
+                assert _semantic_types_import_count == 1, semantic_types_failure_str
+                assert chXX_semantic_types_str in file_str, semantic_types_failure_str
+
+            is_ref_keywords_file = f"\\{chapter_prefix}_keywords.py" in file_path
             if is_ref_keywords_file:
                 # print(f"{file_path=}")
                 assert file_str.count("keywords import") == 0, "No imports"
@@ -259,15 +265,13 @@ def test_Chapters_KeywordEnumClassesAreCorrectlyTested():
     chXX_keyword_classes = get_chXX_keyword_classes(cumlative_ch_keywords_dict)
     chapter_num_descs = get_chapter_num_descs()
 
-    for chapter_num, ExpectedEnumClass in chXX_keyword_classes.items():
-        chapter_desc = chapter_num_descs.get(chapter_num)
-        chapter_prefix = get_chapter_desc_prefix(chapter_desc)
+    for chapter_prefix, ExpectedEnumClass in chXX_keyword_classes.items():
         chapter_ref_keywords_path = f"src.ref.{chapter_prefix}_keywords"
         print(f"{chapter_ref_keywords_path=}")
 
         # dynamically import the module
         mod = importlib_import_module(chapter_ref_keywords_path)
-        enum_class_name = f"Ch{chapter_num:02}Keywords"
+        enum_class_name = f"C{chapter_prefix[1:]}Keywords"
         # try:
         #     getattr(mod, enum_class_name)
         # except Exception:
@@ -387,7 +391,8 @@ def test_Chapters_path_FunctionStructureAndFormat():
         if len(filtered_chapters_path_funcs.get(chapter_desc)) > 0:
             chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
             path_func_filename = f"{chapter_desc_prefix}_path.py"
-            path_func_library = create_path(chapter_dir, path_func_filename)
+            _ref_dir = create_path(chapter_dir, "_ref")
+            path_func_library = create_path(_ref_dir, path_func_filename)
             path_funcs = filtered_chapters_path_funcs.get(chapter_desc)
             assert os_path_exists(path_func_library)
 

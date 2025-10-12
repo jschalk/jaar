@@ -17,7 +17,7 @@ def test_create_legible_list_ReturnsObjEstablishWithEmptyBeliefDelta():
 def test_create_legible_list_ReturnsObjEstablishWithBeliefUpdate_tally():
     # ESTABLISH
     dimen = wx.beliefunit
-    tally_str = "tally"
+    tally_str = wx.tally
     tally_int = 55
     tally_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     tally_beliefatom.set_arg(tally_str, tally_int)
@@ -96,7 +96,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBeliefUpdate_credor_respect_
 def test_create_legible_list_ReturnsObjEstablishWithBeliefUpdate_max_tree_traverse():
     # ESTABLISH
     dimen = wx.beliefunit
-    max_tree_traverse_str = "max_tree_traverse"
+    max_tree_traverse_str = wx.max_tree_traverse
     max_tree_traverse_int = 71
     max_tree_traverse_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     max_tree_traverse_beliefatom.set_arg(max_tree_traverse_str, max_tree_traverse_int)

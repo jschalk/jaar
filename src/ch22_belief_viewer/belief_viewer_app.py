@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, render_template_string
-from src.ch08_timeline_logic.timeline_main import (
-    add_newtimeline_planunit,
-    get_default_timeline_config_dict,
+from src.ch08_epoch_logic.epoch_main import (
+    add_newepoch_planunit,
+    get_default_epoch_config_dict,
 )
 from src.ch22_belief_viewer.belief_viewer__tool import get_belief_view_dict
 from src.ch22_belief_viewer.example22_beliefs import (
@@ -27,12 +27,12 @@ def get_belief_viewer_template() -> str:
         
         <div class="voices_controls">
             <input type="checkbox" id="show_voices"><label for="show_voices">voices</label>
-            <input type="checkbox" id="show_voice_cred_shares"><label for="show_voice_cred_shares">cred_shares</label>
-            <input type="checkbox" id="show_voice_debt_shares"><label for="show_voice_debt_shares">debt_shares</label>
+            <input type="checkbox" id="show_voice_cred_lumen"><label for="show_voice_cred_lumen">cred_lumen</label>
+            <input type="checkbox" id="show_voice_debt_lumen"><label for="show_voice_debt_lumen">debt_lumen</label>
             <input type="checkbox" id="show_voice_credor_pool"><label for="show_voice_credor_pool">credor_pool</label>
             <input type="checkbox" id="show_voice_debtor_pool"><label for="show_voice_debtor_pool">debtor_pool</label>
-            <input type="checkbox" id="show_voice_irrational_voice_debt_shares"><label for="show_voice_irrational_voice_debt_shares">irrational_voice_debt_shares</label>
-            <input type="checkbox" id="show_voice_inallocable_voice_debt_shares"><label for="show_voice_inallocable_voice_debt_shares">inallocable_voice_debt_shares</label>
+            <input type="checkbox" id="show_voice_irrational_voice_debt_lumen"><label for="show_voice_irrational_voice_debt_lumen">irrational_voice_debt_lumen</label>
+            <input type="checkbox" id="show_voice_inallocable_voice_debt_lumen"><label for="show_voice_inallocable_voice_debt_lumen">inallocable_voice_debt_lumen</label>
             <input type="checkbox" id="show_voice_fund_give"><label for="show_voice_fund_give">fund_give</label>
             <input type="checkbox" id="show_voice_fund_take"><label for="show_voice_fund_take">fund_take</label>
             <input type="checkbox" id="show_voice_fund_agenda_give"><label for="show_voice_fund_agenda_give">fund_agenda_give</label>
@@ -41,8 +41,8 @@ def get_belief_viewer_template() -> str:
             <input type="checkbox" id="show_voice_fund_agenda_ratio_take"><label for="show_voice_fund_agenda_ratio_take">fund_agenda_ratio_take</label>
             <br>
             <input type="checkbox" id="show_voice_membership_group_title"><label for="show_voice_membership_group_title">membership_group_title</label>
-            <input type="checkbox" id="show_voice_membership_group_cred_shares"><label for="show_voice_membership_group_cred_shares">membership_group_cred_shares</label>
-            <input type="checkbox" id="show_voice_membership_group_debt_shares"><label for="show_voice_membership_group_debt_shares">membership_group_debt_shares</label>
+            <input type="checkbox" id="show_voice_membership_group_cred_lumen"><label for="show_voice_membership_group_cred_lumen">membership_group_cred_lumen</label>
+            <input type="checkbox" id="show_voice_membership_group_debt_lumen"><label for="show_voice_membership_group_debt_lumen">membership_group_debt_lumen</label>
             <input type="checkbox" id="show_voice_membership_credor_pool"><label for="show_voice_membership_credor_pool">membership_credor_pool</label>
             <input type="checkbox" id="show_voice_membership_debtor_pool"><label for="show_voice_membership_debtor_pool">membership_debtor_pool</label>
             <input type="checkbox" id="show_voice_membership_fund_agenda_give"><label for="show_voice_membership_fund_agenda_give">membership_fund_agenda_give</label>
@@ -114,7 +114,7 @@ def get_beliefunit_view():
     """API endpoint to get the BeliefUnit data with readable strings as JSON"""
     # return jsonify(root.to_dict())
     sue_belief = get_sue_belief_with_facts_and_reasons()
-    add_newtimeline_planunit(sue_belief, get_default_timeline_config_dict())
+    add_newepoch_planunit(sue_belief, get_default_epoch_config_dict())
     sue_belief.cashout()
     belief_view_dict = get_belief_view_dict(sue_belief)
     return jsonify(belief_view_dict)

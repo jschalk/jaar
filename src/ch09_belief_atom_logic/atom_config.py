@@ -54,7 +54,7 @@ def get_allowed_class_types() -> set[str]:
         "int",
         "LabelTerm",
         "RopeTerm",
-        "TimeLinePoint",
+        "EpochPoint",
     }
 
 
@@ -67,11 +67,11 @@ def get_atom_args_class_types() -> dict[str, str]:
         "reason_active_requisite": "bool",
         "begin": "float",
         "close": "float",
-        "voice_cred_shares": "float",
-        "group_cred_shares": "float",
+        "voice_cred_lumen": "float",
+        "group_cred_lumen": "float",
         "credor_respect": "float",
-        "voice_debt_shares": "float",
-        "group_debt_shares": "float",
+        "voice_debt_lumen": "float",
+        "group_debt_lumen": "float",
         "debtor_respect": "float",
         "denom": "int",
         "reason_divisor": "int",

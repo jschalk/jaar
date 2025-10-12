@@ -3,23 +3,23 @@ from pandas import DataFrame
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.ch01_data_toolbox.file_toolbox import count_dirs_files, create_path, save_file
-from src.ch12_belief_file_toolbox.ch12_path import (
+from src.ch12_pack_file._ref.ch12_path import (
     create_event_all_pack_path,
     create_event_expressed_pack_path as expressed_path,
     create_gut_path,
     create_job_path,
     create_moment_json_path,
 )
-from src.ch12_belief_file_toolbox.hub_tool import open_gut_file
-from src.ch15_moment_logic.ch15_path import (
+from src.ch12_pack_file.packfilehandler import open_gut_file
+from src.ch15_moment_logic._ref.ch15_path import (
     create_bud_voice_mandate_ledger_path as bud_mandate,
 )
-from src.ch17_idea_logic.idea_db_tool import upsert_sheet
-from src.ch18_etl_toolbox.ch18_path import (
+from src.ch17_idea.idea_db_tool import upsert_sheet
+from src.ch18_world_etl._ref.ch18_path import (
     create_last_run_metrics_path,
     create_moment_ote1_csv_path,
 )
-from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
+from src.ch18_world_etl.tran_sqlstrs import create_prime_tablename as prime_tbl
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as worlds_dir,

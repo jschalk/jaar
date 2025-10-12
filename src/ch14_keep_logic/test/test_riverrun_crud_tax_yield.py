@@ -1,17 +1,18 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch12_belief_file_toolbox.hubunit import hubunit_shop
 from src.ch14_keep_logic.rivercycle import get_debtorledger
 from src.ch14_keep_logic.riverrun import riverrun_shop
-from src.ch14_keep_logic.test._util.ch14_env import temp_moment_mstr_dir
-from src.ch14_keep_logic.test._util.ch14_examples import example_yao_hubunit
+from src.ch14_keep_logic.test._util.ch14_env import (
+    get_chapter_temp_dir,
+    temp_moment_label,
+)
 
 
 def test_RiverRun_set_voice_tax_yield_SetsAttr():
     # ESTABLISH
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
     bob_str = "Bob"
-    x_moment_mstr_dir = temp_moment_mstr_dir()
-    bob_hubunit = hubunit_shop(x_moment_mstr_dir, None, bob_str)
-    bob_riverrun = riverrun_shop(bob_hubunit)
+    bob_riverrun = riverrun_shop(mstr_dir, a23_str, bob_str)
     yao_str = "Yao"
     assert bob_riverrun._tax_yields.get(yao_str) is None
 
@@ -25,8 +26,10 @@ def test_RiverRun_set_voice_tax_yield_SetsAttr():
 
 def test_RiverRun_tax_yields_is_empty_ReturnsObj():
     # ESTABLISH
-    yao_hubunit = example_yao_hubunit()
-    x_riverrun = riverrun_shop(yao_hubunit)
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
+    yao_str = "Yao"
+    x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
     assert x_riverrun.tax_yields_is_empty()
 
     # WHEN
@@ -57,17 +60,18 @@ def test_RiverRun_tax_yields_is_empty_ReturnsObj():
 
 def test_RiverRun_reset_tax_yields_SetsAttr():
     # ESTABLISH
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
     bob_str = "Bob"
     bob_money_amount = 1000
     bob_money_grain = 1
-    bob_hubunit = hubunit_shop(
-        None,
-        None,
+    bob_riverrun = riverrun_shop(
+        mstr_dir,
+        a23_str,
         bob_str,
         money_grain=bob_money_grain,
         keep_point_magnitude=bob_money_amount,
     )
-    bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
     yao_str = "Yao"
     bob_tax_yield = 38
@@ -87,17 +91,18 @@ def test_RiverRun_reset_tax_yields_SetsAttr():
 
 def test_RiverRun_voice_has_tax_yield_ReturnsBool():
     # ESTABLISH
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
     bob_str = "Bob"
     bob_money_amount = 1000
     bob_money_grain = 1
-    bob_hubunit = hubunit_shop(
-        None,
-        None,
+    bob_riverrun = riverrun_shop(
+        mstr_dir,
+        a23_str,
         bob_str,
         money_grain=bob_money_grain,
         keep_point_magnitude=bob_money_amount,
     )
-    bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
     sue_str = "Sue"
     zia_str = "Zia"
@@ -124,17 +129,19 @@ def test_RiverRun_voice_has_tax_yield_ReturnsBool():
 
 def test_RiverRun_delete_tax_yield_SetsAttr():
     # ESTABLISH
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
     bob_str = "Bob"
     bob_money_amount = 88
     bob_money_grain = 11
-    bob_hubunit = hubunit_shop(
-        None,
-        None,
+
+    bob_riverrun = riverrun_shop(
+        mstr_dir,
+        a23_str,
         bob_str,
         money_grain=bob_money_grain,
         keep_point_magnitude=bob_money_amount,
     )
-    bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
     bob_riverrun.set_voice_tax_yield(yao_str, 5)
     assert bob_riverrun.voice_has_tax_yield(yao_str)
@@ -148,17 +155,19 @@ def test_RiverRun_delete_tax_yield_SetsAttr():
 
 def test_RiverRun_get_voice_tax_yield_ReturnsObj():
     # ESTABLISH
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
     bob_str = "Bob"
     bob_money_amount = 1000
     bob_money_grain = 1
-    bob_hubunit = hubunit_shop(
-        None,
-        None,
+
+    bob_riverrun = riverrun_shop(
+        mstr_dir,
+        a23_str,
         bob_str,
         money_grain=bob_money_grain,
         keep_point_magnitude=bob_money_amount,
     )
-    bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
     yao_str = "Yao"
     zia_str = "Zia"
@@ -185,17 +194,18 @@ def test_RiverRun_get_voice_tax_yield_ReturnsObj():
 
 def test_RiverRun_add_voice_tax_yield_ReturnsObj():
     # ESTABLISH
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
     bob_str = "Bob"
     bob_money_amount = 1000
     bob_money_grain = 1
-    bob_hubunit = hubunit_shop(
-        None,
-        None,
+    bob_riverrun = riverrun_shop(
+        mstr_dir,
+        a23_str,
         bob_str,
         money_grain=bob_money_grain,
         keep_point_magnitude=bob_money_amount,
     )
-    bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
     yao_str = "Yao"
     zia_str = "Zia"
@@ -221,17 +231,18 @@ def test_RiverRun_add_voice_tax_yield_ReturnsObj():
 
 def test_RiverRun_levy_tax_due_SetsAttr_ScenarioY():
     # ESTABLISH
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
     bob_str = "Bob"
     bob_money_amount = 1000
     bob_money_grain = 1
-    bob_hubunit = hubunit_shop(
-        None,
-        None,
+    bob_riverrun = riverrun_shop(
+        mstr_dir,
+        a23_str,
         bob_str,
         money_grain=bob_money_grain,
         keep_point_magnitude=bob_money_amount,
     )
-    bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
     yao_str = "Yao"
     bob_tax_yield = 38
@@ -294,9 +305,12 @@ def test_RiverRun_levy_tax_due_SetsAttr_ScenarioY():
 
 def test_RiverRun_set_tax_got_attrs_SetsAttrs():
     # ESTABLISH
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
+    yao_str = "Yao"
     six_tax_got = 6
     ten_tax_got = 10
-    x_riverrun = riverrun_shop(example_yao_hubunit())
+    x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
     assert x_riverrun._tax_got_curr == 0
     assert x_riverrun._tax_got_prev == 0
 
@@ -315,9 +329,12 @@ def test_RiverRun_set_tax_got_attrs_SetsAttrs():
 
 def test_RiverRun_tax_gotten_ReturnsObj():
     # ESTABLISH
+    mstr_dir = get_chapter_temp_dir()
+    a23_str = temp_moment_label()
+    yao_str = "Yao"
     six_tax_got = 6
     ten_tax_got = 10
-    x_riverrun = riverrun_shop(example_yao_hubunit())
+    x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
     assert x_riverrun._tax_got_prev == 0
     assert x_riverrun._tax_got_curr == 0
     assert x_riverrun._tax_gotten() is False

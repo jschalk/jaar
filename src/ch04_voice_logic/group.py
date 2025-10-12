@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from src.ch01_data_toolbox.dict_toolbox import get_1_if_None, get_dict_from_json
+from src.ch01_data_toolbox.dict_toolbox import get_1_if_None
 from src.ch03_allot_toolbox.allot import allot_scale, default_grain_num_if_None
 from src.ch04_voice_logic._ref.ch04_semantic_types import (
     FundGrain,
@@ -24,8 +24,8 @@ class GroupCore:
 
 @dataclass
 class MemberShip(GroupCore):
-    group_cred_shares: float = 1.0
-    group_debt_shares: float = 1.0
+    group_cred_lumen: float = 1.0
+    group_debt_lumen: float = 1.0
     # calculated fields
     credor_pool: float = None
     debtor_pool: float = None
@@ -37,19 +37,21 @@ class MemberShip(GroupCore):
     fund_agenda_ratio_take: float = None
     voice_name: VoiceName = None
 
-    def set_group_cred_shares(self, x_group_cred_shares: float):
-        if x_group_cred_shares is not None:
-            self.group_cred_shares = x_group_cred_shares
+    def set_group_cred_lumen(self, x_group_cred_lumen: float):
+        if x_group_cred_lumen is not None:
+            self.group_cred_lumen = x_group_cred_lumen
 
-    def set_group_debt_shares(self, x_group_debt_shares: float):
-        if x_group_debt_shares is not None:
-            self.group_debt_shares = x_group_debt_shares
+    def set_group_debt_lumen(self, x_group_debt_lumen: float):
+        if x_group_debt_lumen is not None:
+            self.group_debt_lumen = x_group_debt_lumen
 
     def to_dict(self) -> dict[str, str]:
+        """Returns dict that is serializable to JSON."""
+
         return {
             "group_title": self.group_title,
-            "group_cred_shares": self.group_cred_shares,
-            "group_debt_shares": self.group_debt_shares,
+            "group_cred_lumen": self.group_cred_lumen,
+            "group_debt_lumen": self.group_debt_lumen,
         }
 
     def clear_membership_fund_give_take(self):
@@ -63,14 +65,14 @@ class MemberShip(GroupCore):
 
 def membership_shop(
     group_title: GroupTitle,
-    group_cred_shares: float = None,
-    group_debt_shares: float = None,
+    group_cred_lumen: float = None,
+    group_debt_lumen: float = None,
     voice_name: VoiceName = None,
 ) -> MemberShip:
     return MemberShip(
         group_title=group_title,
-        group_cred_shares=get_1_if_None(group_cred_shares),
-        group_debt_shares=get_1_if_None(group_debt_shares),
+        group_cred_lumen=get_1_if_None(group_cred_lumen),
+        group_debt_lumen=get_1_if_None(group_debt_lumen),
         credor_pool=0,
         debtor_pool=0,
         voice_name=voice_name,
@@ -80,8 +82,8 @@ def membership_shop(
 def membership_get_from_dict(x_dict: dict, x_voice_name: VoiceName) -> MemberShip:
     return membership_shop(
         group_title=x_dict.get("group_title"),
-        group_cred_shares=x_dict.get("group_cred_shares"),
-        group_debt_shares=x_dict.get("group_debt_shares"),
+        group_cred_lumen=x_dict.get("group_cred_lumen"),
+        group_debt_lumen=x_dict.get("group_debt_lumen"),
         voice_name=x_voice_name,
     )
 
@@ -106,16 +108,13 @@ class AwardUnit(AwardCore):
     take_force: float = 1.0
 
     def to_dict(self) -> dict[str, str]:
+        """Returns dict that is serializable to JSON."""
+
         return {
             "awardee_title": self.awardee_title,
             "give_force": self.give_force,
             "take_force": self.take_force,
         }
-
-
-def awardunits_get_from_json(awardunits_json: str) -> dict[GroupTitle, AwardUnit]:
-    awardunits_dict = get_dict_from_json(awardunits_json)
-    return get_awardunits_from_dict(awardunits_dict)
 
 
 def get_awardunits_from_dict(x_dict: dict) -> dict[GroupTitle, AwardUnit]:
@@ -235,8 +234,8 @@ class GroupUnit(GroupCore):
         credit_ledger = {}
         debt_ledger = {}
         for x_voice_name, x_membership in self.memberships.items():
-            credit_ledger[x_voice_name] = x_membership.group_cred_shares
-            debt_ledger[x_voice_name] = x_membership.group_debt_shares
+            credit_ledger[x_voice_name] = x_membership.group_cred_lumen
+            debt_ledger[x_voice_name] = x_membership.group_debt_lumen
         fund_give_allot = allot_scale(credit_ledger, self.fund_give, self.fund_grain)
         fund_take_allot = allot_scale(debt_ledger, self.fund_take, self.fund_grain)
         for voice_name, x_membership in self.memberships.items():

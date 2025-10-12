@@ -522,12 +522,12 @@ def test_BeliefUnit_cashout_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     yao_str = "Yao"
     yao_belief = beliefunit_shop(yao_str)
     zia_str = "Zia"
-    yao_voice_cred_shares = 3
-    yao_voice_debt_shares = 2
-    zia_voice_cred_shares = 4
-    zia_voice_debt_shares = 5
-    yao_belief.add_voiceunit(yao_str, yao_voice_cred_shares, yao_voice_debt_shares)
-    yao_belief.add_voiceunit(zia_str, zia_voice_cred_shares, zia_voice_debt_shares)
+    yao_voice_cred_lumen = 3
+    yao_voice_debt_lumen = 2
+    zia_voice_cred_lumen = 4
+    zia_voice_debt_lumen = 5
+    yao_belief.add_voiceunit(yao_str, yao_voice_cred_lumen, yao_voice_debt_lumen)
+    yao_belief.add_voiceunit(zia_str, zia_voice_cred_lumen, zia_voice_debt_lumen)
     root_rope = to_rope(yao_belief.moment_label)
     x_planroot = yao_belief.get_plan_obj(root_rope)
     x_planroot.set_awardunit(awardunit_shop(yao_str))
@@ -559,10 +559,10 @@ def test_BeliefUnit_cashout_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     assert not xio_groupunit.group_membership_exists(xio_str)
     yao_membership = xio_groupunit.get_voice_membership(yao_str)
     zia_membership = xio_groupunit.get_voice_membership(zia_str)
-    assert yao_membership.group_cred_shares == yao_voice_cred_shares
-    assert zia_membership.group_cred_shares == zia_voice_cred_shares
-    assert yao_membership.group_debt_shares == yao_voice_debt_shares
-    assert zia_membership.group_debt_shares == zia_voice_debt_shares
+    assert yao_membership.group_cred_lumen == yao_voice_cred_lumen
+    assert zia_membership.group_cred_lumen == zia_voice_cred_lumen
+    assert yao_membership.group_debt_lumen == yao_voice_debt_lumen
+    assert zia_membership.group_debt_lumen == zia_voice_debt_lumen
 
 
 def test_BeliefUnit_cashout_CreatesNewGroupUnitsWhenNeeded_Scenario1():

@@ -1,5 +1,5 @@
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName
+from src.ch13_belief_listen_logic._ref.ch13_semantic_types import BeliefName
 
 
 def create_empty_belief_from_belief(

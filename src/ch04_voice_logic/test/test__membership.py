@@ -1,4 +1,3 @@
-from src.ch01_data_toolbox.dict_toolbox import get_json_from_dict, x_is_json
 from src.ch04_voice_logic.group import (
     AwardHeir,
     AwardLine,
@@ -9,7 +8,7 @@ from src.ch04_voice_logic.group import (
     awardheir_shop,
     awardline_shop,
     awardunit_shop,
-    awardunits_get_from_json,
+    get_awardunits_from_dict,
     membership_get_from_dict,
     membership_shop,
     memberships_get_from_dict,
@@ -36,8 +35,8 @@ def test_MemberShip_Exists():
 
     # THEN
     assert swim_membership.group_title == swim_str
-    assert swim_membership.group_cred_shares == 1.0
-    assert swim_membership.group_debt_shares == 1.0
+    assert swim_membership.group_cred_lumen == 1.0
+    assert swim_membership.group_debt_lumen == 1.0
     assert not swim_membership.credor_pool
     assert not swim_membership.debtor_pool
     assert not swim_membership.fund_give
@@ -52,8 +51,8 @@ def test_MemberShip_Exists():
     assert obj_attrs == {
         wx.voice_name,
         wx.group_title,
-        wx.group_cred_shares,
-        wx.group_debt_shares,
+        wx.group_cred_lumen,
+        wx.group_debt_lumen,
         wx.credor_pool,
         wx.debtor_pool,
         wx.fund_agenda_give,
@@ -68,19 +67,19 @@ def test_MemberShip_Exists():
 def test_membership_shop_ReturnsObj():
     # ESTABLISH
     swim_str = ",swim"
-    swim_group_cred_shares = 3.0
-    swim_group_debt_shares = 5.0
+    swim_group_cred_lumen = 3.0
+    swim_group_debt_lumen = 5.0
 
     # WHEN
     swim_membership = membership_shop(
         group_title=swim_str,
-        group_cred_shares=swim_group_cred_shares,
-        group_debt_shares=swim_group_debt_shares,
+        group_cred_lumen=swim_group_cred_lumen,
+        group_debt_lumen=swim_group_debt_lumen,
     )
 
     # THEN
-    assert swim_membership.group_cred_shares == swim_group_cred_shares
-    assert swim_membership.group_debt_shares == swim_group_debt_shares
+    assert swim_membership.group_cred_lumen == swim_group_cred_lumen
+    assert swim_membership.group_debt_lumen == swim_group_debt_lumen
     assert swim_membership.credor_pool == 0
     assert swim_membership.debtor_pool == 0
     assert not swim_membership.fund_give
@@ -121,93 +120,93 @@ def test_membership_shop_ReturnsObjAttr_voice_name():
 #     )
 
 
-def test_MemberShip_set_group_cred_shares_SetsAttr():
+def test_MemberShip_set_group_cred_lumen_SetsAttr():
     # ESTABLISH
     swim_str = ",swim"
-    old_group_cred_shares = 3.0
-    swim_group_debt_shares = 5.0
+    old_group_cred_lumen = 3.0
+    swim_group_debt_lumen = 5.0
     swim_membership = membership_shop(
-        swim_str, old_group_cred_shares, swim_group_debt_shares
+        swim_str, old_group_cred_lumen, swim_group_debt_lumen
     )
-    assert swim_membership.group_cred_shares == old_group_cred_shares
-    assert swim_membership.group_debt_shares == swim_group_debt_shares
+    assert swim_membership.group_cred_lumen == old_group_cred_lumen
+    assert swim_membership.group_debt_lumen == swim_group_debt_lumen
 
     # WHEN
-    new_swim_group_cred_shares = 44
-    swim_membership.set_group_cred_shares(new_swim_group_cred_shares)
+    new_swim_group_cred_lumen = 44
+    swim_membership.set_group_cred_lumen(new_swim_group_cred_lumen)
 
     # THEN
-    assert swim_membership.group_cred_shares == new_swim_group_cred_shares
-    assert swim_membership.group_debt_shares == swim_group_debt_shares
+    assert swim_membership.group_cred_lumen == new_swim_group_cred_lumen
+    assert swim_membership.group_debt_lumen == swim_group_debt_lumen
 
 
-def test_MemberShip_set_group_cred_shares_NoneParameter():
+def test_MemberShip_set_group_cred_lumen_NoneParameter():
     # ESTABLISH
     swim_str = ",swim"
-    old_group_cred_shares = 3.0
-    swim_group_debt_shares = 5.0
+    old_group_cred_lumen = 3.0
+    swim_group_debt_lumen = 5.0
     swim_membership = membership_shop(
-        swim_str, old_group_cred_shares, swim_group_debt_shares
+        swim_str, old_group_cred_lumen, swim_group_debt_lumen
     )
-    assert swim_membership.group_cred_shares == old_group_cred_shares
-    assert swim_membership.group_debt_shares == swim_group_debt_shares
+    assert swim_membership.group_cred_lumen == old_group_cred_lumen
+    assert swim_membership.group_debt_lumen == swim_group_debt_lumen
 
     # WHEN
-    swim_membership.set_group_cred_shares(None)
+    swim_membership.set_group_cred_lumen(None)
 
     # THEN
-    assert swim_membership.group_cred_shares == old_group_cred_shares
-    assert swim_membership.group_debt_shares == swim_group_debt_shares
+    assert swim_membership.group_cred_lumen == old_group_cred_lumen
+    assert swim_membership.group_debt_lumen == swim_group_debt_lumen
 
 
-def test_MemberShip_set_group_debt_shares_SetsAttr():
+def test_MemberShip_set_group_debt_lumen_SetsAttr():
     # ESTABLISH
     swim_str = ",swim"
-    swim_group_cred_shares = 3.0
-    old_group_debt_shares = 5.0
+    swim_group_cred_lumen = 3.0
+    old_group_debt_lumen = 5.0
     swim_membership = membership_shop(
-        swim_str, swim_group_cred_shares, old_group_debt_shares
+        swim_str, swim_group_cred_lumen, old_group_debt_lumen
     )
-    assert swim_membership.group_cred_shares == swim_group_cred_shares
-    assert swim_membership.group_debt_shares == old_group_debt_shares
+    assert swim_membership.group_cred_lumen == swim_group_cred_lumen
+    assert swim_membership.group_debt_lumen == old_group_debt_lumen
 
     # WHEN
-    new_group_debt_shares = 55
-    swim_membership.set_group_debt_shares(new_group_debt_shares)
+    new_group_debt_lumen = 55
+    swim_membership.set_group_debt_lumen(new_group_debt_lumen)
 
     # THEN
-    assert swim_membership.group_cred_shares == swim_group_cred_shares
-    assert swim_membership.group_debt_shares == new_group_debt_shares
+    assert swim_membership.group_cred_lumen == swim_group_cred_lumen
+    assert swim_membership.group_debt_lumen == new_group_debt_lumen
 
 
-def test_MemberShip_set_group_debt_shares_DoesNotSetsAttrNone():
+def test_MemberShip_set_group_debt_lumen_DoesNotSetsAttrNone():
     # ESTABLISH
     swim_str = ",swim"
-    swim_group_cred_shares = 3.0
-    old_group_debt_shares = 5.0
+    swim_group_cred_lumen = 3.0
+    old_group_debt_lumen = 5.0
     swim_membership = membership_shop(
-        swim_str, swim_group_cred_shares, old_group_debt_shares
+        swim_str, swim_group_cred_lumen, old_group_debt_lumen
     )
-    assert swim_membership.group_cred_shares == swim_group_cred_shares
-    assert swim_membership.group_debt_shares == old_group_debt_shares
+    assert swim_membership.group_cred_lumen == swim_group_cred_lumen
+    assert swim_membership.group_debt_lumen == old_group_debt_lumen
 
     # WHEN
-    swim_membership.set_group_debt_shares(None)
+    swim_membership.set_group_debt_lumen(None)
 
     # THEN
-    assert swim_membership.group_cred_shares == swim_group_cred_shares
-    assert swim_membership.group_debt_shares == old_group_debt_shares
+    assert swim_membership.group_cred_lumen == swim_group_cred_lumen
+    assert swim_membership.group_debt_lumen == old_group_debt_lumen
 
 
 def test_MemberShip_to_dict_ReturnsDictWithNecessaryDataForJSON():
     # ESTABLISH
     swim_str = ",swim"
-    swim_group_cred_shares = 3.0
-    swim_group_debt_shares = 5.0
+    swim_group_cred_lumen = 3.0
+    swim_group_debt_lumen = 5.0
     swim_membership = membership_shop(
         group_title=swim_str,
-        group_cred_shares=swim_group_cred_shares,
-        group_debt_shares=swim_group_debt_shares,
+        group_cred_lumen=swim_group_cred_lumen,
+        group_debt_lumen=swim_group_debt_lumen,
     )
 
     print(f"{swim_membership}")
@@ -219,21 +218,21 @@ def test_MemberShip_to_dict_ReturnsDictWithNecessaryDataForJSON():
     assert swim_dict is not None
     assert swim_dict == {
         "group_title": swim_membership.group_title,
-        "group_cred_shares": swim_membership.group_cred_shares,
-        "group_debt_shares": swim_membership.group_debt_shares,
+        "group_cred_lumen": swim_membership.group_cred_lumen,
+        "group_debt_lumen": swim_membership.group_debt_lumen,
     }
 
 
 def test_membership_to_dict_ReturnsObj():
     # ESTABLISH
     swim_str = ",swim"
-    swim_group_cred_shares = 3.0
-    swim_group_debt_shares = 5.0
+    swim_group_cred_lumen = 3.0
+    swim_group_debt_lumen = 5.0
     yao_str = "Yao"
     before_swim_membership = membership_shop(
         group_title=swim_str,
-        group_cred_shares=swim_group_cred_shares,
-        group_debt_shares=swim_group_debt_shares,
+        group_cred_lumen=swim_group_cred_lumen,
+        group_debt_lumen=swim_group_debt_lumen,
         voice_name=yao_str,
     )
     swim_membership_dict = before_swim_membership.to_dict()
@@ -249,13 +248,13 @@ def test_membership_to_dict_ReturnsObj():
 def test_memberships_get_from_dict_ReturnsObj():
     # ESTABLISH
     swim_str = ",swim"
-    swim_group_cred_shares = 3.0
-    swim_group_debt_shares = 5.0
+    swim_group_cred_lumen = 3.0
+    swim_group_debt_lumen = 5.0
     yao_str = "Yao"
     before_swim_membership = membership_shop(
         group_title=swim_str,
-        group_cred_shares=swim_group_cred_shares,
-        group_debt_shares=swim_group_debt_shares,
+        group_cred_lumen=swim_group_cred_lumen,
+        group_debt_lumen=swim_group_debt_lumen,
         voice_name=yao_str,
     )
     before_swim_memberships_objs = {swim_str: before_swim_membership}
@@ -380,34 +379,30 @@ def test_AwardUnit_to_dict_ReturnsDictWithNecessaryDataForJSON():
     # THEN
     assert biker_dict is not None
     assert biker_dict == {
-        "awardee_title": bikers_awardunit.awardee_title,
-        "give_force": bikers_awardunit.give_force,
-        "take_force": bikers_awardunit.take_force,
+        wx.awardee_title: bikers_awardunit.awardee_title,
+        wx.give_force: bikers_awardunit.give_force,
+        wx.take_force: bikers_awardunit.take_force,
     }
 
 
-def test_awardunits_get_from_JSON_ReturnsObj_SimpleExample():
+def test_get_awardunits_from_dict_ReturnsObj_SimpleExample():
     # ESTABLISH
     teacher_str = "teachers"
     teacher_awardunit = awardunit_shop(
         awardee_title=teacher_str, give_force=103, take_force=155
     )
     teacher_dict = teacher_awardunit.to_dict()
-    awardunits_dict = {teacher_awardunit.awardee_title: teacher_dict}
-
-    teachers_json = get_json_from_dict(awardunits_dict)
-    assert teachers_json is not None
-    assert x_is_json(teachers_json)
+    awards_dict = {teacher_awardunit.awardee_title: teacher_dict}
 
     # WHEN
-    awardunits_obj_dict = awardunits_get_from_json(awardunits_json=teachers_json)
+    awardunits_obj_dict = get_awardunits_from_dict(awards_dict)
 
     # THEN
     assert awardunits_obj_dict is not None
-    teachers_obj_check_dict = {teacher_awardunit.awardee_title: teacher_awardunit}
-    print(f"    {awardunits_obj_dict=}")
-    print(f"{teachers_obj_check_dict=}")
-    assert awardunits_obj_dict == teachers_obj_check_dict
+    expected_dict = {teacher_awardunit.awardee_title: teacher_awardunit}
+    print(f"{awardunits_obj_dict=}")
+    print(f"      {expected_dict=}")
+    assert awardunits_obj_dict == expected_dict
 
 
 def test_AwardLine_Exists():

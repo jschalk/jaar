@@ -1,5 +1,5 @@
 from src.ch06_plan_logic.plan import planunit_shop
-from src.ch08_timeline_logic.reason_str_func import (
+from src.ch08_epoch_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
@@ -79,7 +79,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         wx.stop_calc,
         wx.plan_fund_total,
     }
-    assert casa_dict.get("healerunit") == {"_healer_names": []}
+    assert casa_dict.get(wx.healerunit) == {"_healer_names": []}
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
@@ -140,7 +140,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario2_RootPlanUnit_attrs():
     # for dict_key, value in casa_dict.items():
     #     print(f"{dict_key=} \t\t {value=}")
     # expected_laborunit_dict = {
-    #     "_partys": {sue_str: {"party_title": sue_str, "solo": False}}
+    #     "_partys": {sue_str: {wx.party_title: sue_str, "solo": False}}
     # }
     expected_parent_rope = add_small_dot("Root Plan parent_rope is empty str")
     assert root_plan_view_dict.get(wx.parent_rope) == expected_parent_rope

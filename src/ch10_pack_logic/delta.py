@@ -12,7 +12,6 @@ from src.ch04_voice_logic.group import MemberShip
 from src.ch04_voice_logic.voice import MemberShip, VoiceName, VoiceUnit
 from src.ch05_reason_logic.reason import FactUnit, ReasonUnit
 from src.ch06_plan_logic.plan import PlanUnit
-from src.ch07_belief_logic._ref.ch07_semantic_types import RopeTerm, TitleTerm
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch09_belief_atom_logic.atom_config import CRUD_command
 from src.ch09_belief_atom_logic.atom_main import (
@@ -24,6 +23,7 @@ from src.ch09_belief_atom_logic.atom_main import (
     modify_belief_with_beliefatom,
     sift_beliefatom,
 )
+from src.ch10_pack_logic._ref.ch10_semantic_types import RopeTerm, TitleTerm
 
 
 @dataclass
@@ -180,13 +180,13 @@ class BeliefDelta:
             insert_voiceunit = after_belief.get_voice(insert_voice_name)
             x_beliefatom = beliefatom_shop("belief_voiceunit", "INSERT")
             x_beliefatom.set_jkey("voice_name", insert_voiceunit.voice_name)
-            if insert_voiceunit.voice_cred_shares is not None:
+            if insert_voiceunit.voice_cred_lumen is not None:
                 x_beliefatom.set_jvalue(
-                    "voice_cred_shares", insert_voiceunit.voice_cred_shares
+                    "voice_cred_lumen", insert_voiceunit.voice_cred_lumen
                 )
-            if insert_voiceunit.voice_debt_shares is not None:
+            if insert_voiceunit.voice_debt_lumen is not None:
                 x_beliefatom.set_jvalue(
-                    "voice_debt_shares", insert_voiceunit.voice_debt_shares
+                    "voice_debt_lumen", insert_voiceunit.voice_debt_lumen
                 )
             self.set_beliefatom(x_beliefatom)
             all_group_titles = set(insert_voiceunit.memberships.keys())
@@ -208,18 +208,18 @@ class BeliefDelta:
                 x_beliefatom = beliefatom_shop("belief_voiceunit", "UPDATE")
                 x_beliefatom.set_jkey("voice_name", after_voiceunit.voice_name)
                 if (
-                    before_voiceunit.voice_cred_shares
-                    != after_voiceunit.voice_cred_shares
+                    before_voiceunit.voice_cred_lumen
+                    != after_voiceunit.voice_cred_lumen
                 ):
                     x_beliefatom.set_jvalue(
-                        "voice_cred_shares", after_voiceunit.voice_cred_shares
+                        "voice_cred_lumen", after_voiceunit.voice_cred_lumen
                     )
                 if (
-                    before_voiceunit.voice_debt_shares
-                    != after_voiceunit.voice_debt_shares
+                    before_voiceunit.voice_debt_lumen
+                    != after_voiceunit.voice_debt_lumen
                 ):
                     x_beliefatom.set_jvalue(
-                        "voice_debt_shares", after_voiceunit.voice_debt_shares
+                        "voice_debt_lumen", after_voiceunit.voice_debt_lumen
                     )
                 self.set_beliefatom(x_beliefatom)
             self.add_beliefatom_voiceunit_update_memberships(
@@ -296,13 +296,13 @@ class BeliefDelta:
             x_beliefatom = beliefatom_shop("belief_voice_membership", "INSERT")
             x_beliefatom.set_jkey("voice_name", after_voice_name)
             x_beliefatom.set_jkey("group_title", after_membership.group_title)
-            if after_membership.group_cred_shares is not None:
+            if after_membership.group_cred_lumen is not None:
                 x_beliefatom.set_jvalue(
-                    "group_cred_shares", after_membership.group_cred_shares
+                    "group_cred_lumen", after_membership.group_cred_lumen
                 )
-            if after_membership.group_debt_shares is not None:
+            if after_membership.group_debt_lumen is not None:
                 x_beliefatom.set_jvalue(
-                    "group_debt_shares", after_membership.group_debt_shares
+                    "group_debt_lumen", after_membership.group_debt_lumen
                 )
             self.set_beliefatom(x_beliefatom)
 
@@ -315,13 +315,13 @@ class BeliefDelta:
         x_beliefatom = beliefatom_shop("belief_voice_membership", "UPDATE")
         x_beliefatom.set_jkey("voice_name", voice_name)
         x_beliefatom.set_jkey("group_title", after_membership.group_title)
-        if after_membership.group_cred_shares != before_membership.group_cred_shares:
+        if after_membership.group_cred_lumen != before_membership.group_cred_lumen:
             x_beliefatom.set_jvalue(
-                "group_cred_shares", after_membership.group_cred_shares
+                "group_cred_lumen", after_membership.group_cred_lumen
             )
-        if after_membership.group_debt_shares != before_membership.group_debt_shares:
+        if after_membership.group_debt_lumen != before_membership.group_debt_lumen:
             x_beliefatom.set_jvalue(
-                "group_debt_shares", after_membership.group_debt_shares
+                "group_debt_lumen", after_membership.group_debt_lumen
             )
         self.set_beliefatom(x_beliefatom)
 
@@ -871,10 +871,6 @@ class BeliefDelta:
     def get_ordered_dict(self, x_count: int = None) -> dict[int, str]:
         atom_tuples = self.get_ordered_beliefatoms(x_count).items()
         return {atom_num: atom_obj.to_dict() for atom_num, atom_obj in atom_tuples}
-
-    def get_json(self, x_count: int = None) -> str:
-        x_dict = self.get_ordered_dict(x_count)
-        return get_json_from_dict(x_dict)
 
 
 def beliefdelta_shop(beliefatoms: dict[str, BeliefAtom] = None) -> BeliefDelta:

@@ -168,7 +168,7 @@ def test_normalized_table_HealerUnitTable_healerunit_Exists():
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_dimen)
-    assert config_table_name == "healerunit"
+    assert config_table_name == wx.healerunit
     assert config_table_name == HealerUnitTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_dimen)
 

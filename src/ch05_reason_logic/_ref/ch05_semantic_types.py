@@ -5,6 +5,7 @@ from src.ch04_voice_logic._ref.ch04_semantic_types import (
     GroupTitle,
     HealerName,
     LabelTerm,
+    MoneyNum,
     NameTerm,
     RespectGrain,
     RespectNum,

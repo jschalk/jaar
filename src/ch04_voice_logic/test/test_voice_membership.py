@@ -7,22 +7,22 @@ def test_VoiceUnit_set_membership_SetsAttr_memberships():
     # ESTABLISH
     run_str = ";run"
     yao_str = "Yao"
-    run_group_cred_shares = 66
-    run_group_debt_shares = 85
+    run_group_cred_lumen = 66
+    run_group_debt_lumen = 85
     yao_voiceunit = voiceunit_shop(yao_str)
     assert yao_voiceunit.memberships == {}
 
     # WHEN
     yao_voiceunit.set_membership(
-        membership_shop(run_str, run_group_cred_shares, run_group_debt_shares)
+        membership_shop(run_str, run_group_cred_lumen, run_group_debt_lumen)
     )
 
     # THEN
     assert len(yao_voiceunit.memberships) == 1
     run_membership = yao_voiceunit.memberships.get(run_str)
     assert run_membership.group_title == run_str
-    assert run_membership.group_cred_shares == run_group_cred_shares
-    assert run_membership.group_debt_shares == run_group_debt_shares
+    assert run_membership.group_cred_lumen == run_group_cred_lumen
+    assert run_membership.group_debt_lumen == run_group_debt_lumen
     assert run_membership.voice_name == yao_str
 
 
@@ -30,8 +30,8 @@ def test_VoiceUnit_set_membership_SetsMultipleAttr():
     # ESTABLISH
     run_str = ";run"
     fly_str = ";fly"
-    run_membership = membership_shop(run_str, group_cred_shares=13, group_debt_shares=7)
-    fly_membership = membership_shop(fly_str, group_cred_shares=23, group_debt_shares=5)
+    run_membership = membership_shop(run_str, group_cred_lumen=13, group_debt_lumen=7)
+    fly_membership = membership_shop(fly_str, group_cred_lumen=23, group_debt_lumen=5)
     yao_voiceunit = voiceunit_shop("Yao")
     assert yao_voiceunit.memberships == {}
 
@@ -174,19 +174,19 @@ def test_VoiceUnit_clear_memberships_SetsAttr():
 def test_VoiceUnit_add_membership_SetsAttr():
     # ESTABLISH
     run_str = ";run"
-    run_group_cred_shares = 78
-    run_group_debt_shares = 99
+    run_group_cred_lumen = 78
+    run_group_debt_lumen = 99
     yao_voiceunit = voiceunit_shop("Yao")
     assert yao_voiceunit.get_membership(run_str) is None
 
     # WHEN
-    yao_voiceunit.add_membership(run_str, run_group_cred_shares, run_group_debt_shares)
+    yao_voiceunit.add_membership(run_str, run_group_cred_lumen, run_group_debt_lumen)
 
     # THEN
     assert yao_voiceunit.get_membership(run_str) is not None
     run_membership = yao_voiceunit.get_membership(run_str)
-    assert run_membership.group_cred_shares == run_group_cred_shares
-    assert run_membership.group_debt_shares == run_group_debt_shares
+    assert run_membership.group_cred_lumen == run_group_cred_lumen
+    assert run_membership.group_debt_lumen == run_group_debt_lumen
 
 
 def test_VoiceUnit_set_credor_pool_SetAttr():
@@ -219,11 +219,11 @@ def test_VoiceUnit_set_credor_pool_Sets_memberships():
     # ESTABLISH
     ohio_str = ";Ohio"
     iowa_str = ";Iowa"
-    sue_group_cred_shares = 1
-    yao_group_cred_shares = 4
+    sue_group_cred_lumen = 1
+    yao_group_cred_lumen = 4
     bob_voiceunit = voiceunit_shop("Bob")
-    bob_voiceunit.add_membership(ohio_str, sue_group_cred_shares)
-    bob_voiceunit.add_membership(iowa_str, yao_group_cred_shares)
+    bob_voiceunit.add_membership(ohio_str, sue_group_cred_lumen)
+    bob_voiceunit.add_membership(iowa_str, yao_group_cred_lumen)
     assert bob_voiceunit.credor_pool == 0
     sue_membership = bob_voiceunit.get_membership(ohio_str)
     yao_membership = bob_voiceunit.get_membership(iowa_str)
@@ -244,11 +244,11 @@ def test_VoiceUnit_set_debtor_pool_Sets_memberships():
     # ESTABLISH
     ohio_str = ";Ohio"
     iowa_str = ";Iowa"
-    sue_group_debt_shares = 1
-    yao_group_debt_shares = 4
+    sue_group_debt_lumen = 1
+    yao_group_debt_lumen = 4
     bob_voiceunit = voiceunit_shop("Bob")
-    bob_voiceunit.add_membership(ohio_str, 2, sue_group_debt_shares)
-    bob_voiceunit.add_membership(iowa_str, 2, yao_group_debt_shares)
+    bob_voiceunit.add_membership(ohio_str, 2, sue_group_debt_lumen)
+    bob_voiceunit.add_membership(iowa_str, 2, yao_group_debt_lumen)
     assert bob_voiceunit.debtor_pool == 0
     sue_membership = bob_voiceunit.get_membership(ohio_str)
     yao_membership = bob_voiceunit.get_membership(iowa_str)

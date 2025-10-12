@@ -1,13 +1,18 @@
 from src.ch02_rope_logic.rope import LabelTerm, RopeTerm, create_rope
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop, planunit_shop
-from src.ch12_belief_file_toolbox.hub_tool import (
+from src.ch12_pack_file.packfilehandler import (
+    PackFileHandler,
     gut_file_exists,
     job_file_exists,
     open_job_file,
+    packfilehandler_shop,
     save_gut_file,
 )
-from src.ch12_belief_file_toolbox.hubunit import HubUnit, hubunit_shop
-from src.ch12_belief_file_toolbox.keep_tool import save_duty_belief
+from src.ch13_belief_listen_logic.keep_tool import (
+    get_vision_belief,
+    save_duty_belief,
+    vision_file_exists,
+)
 from src.ch13_belief_listen_logic.listen_main import (
     create_vision_file_from_duty_file,
     listen_to_belief_visions,
@@ -23,7 +28,8 @@ from src.ch13_belief_listen_logic.test._util.ch13_examples import (
     cook_str,
     eat_str,
     full_str,
-    get_texas_hubunit,
+    get_texas_packfilehandler,
+    get_texas_rope,
     hungry_str,
     run_str,
 )
@@ -88,9 +94,9 @@ def get_example_yao_belief() -> BeliefUnit:
     bob_str = "Bob"
     yao_speaker = beliefunit_shop(yao_str, ch13_example_moment_label())
     yao_speaker.set_plan(planunit_shop(run_str()), casa_rope())
-    yao_speaker.add_voiceunit(yao_str, voice_debt_shares=10)
-    yao_speaker.add_voiceunit(zia_str, voice_debt_shares=30)
-    yao_speaker.add_voiceunit(bob_str, voice_debt_shares=40)
+    yao_speaker.add_voiceunit(yao_str, voice_debt_lumen=10)
+    yao_speaker.add_voiceunit(zia_str, voice_debt_lumen=30)
+    yao_speaker.add_voiceunit(bob_str, voice_debt_lumen=40)
     yao_speaker.set_voice_respect(80)
     return yao_speaker
 
@@ -203,36 +209,30 @@ def get_on_land_rope() -> RopeTerm:
     return create_rope(get_location_rope(), get_on_land_str())
 
 
-def get_yao_ohio_hubunit() -> HubUnit:
+def get_yao_ohio_packfilehandler() -> PackFileHandler:
     yao_belief = get_example_yao_belief()
-    return hubunit_shop(
+    return packfilehandler_shop(
         moment_mstr_dir=env_dir(),
         moment_label=yao_belief.moment_label,
         belief_name=yao_belief.belief_name,
-        keep_rope=get_ohio_rope(),
-        # pipeline_gut_job_str(),
     )
 
 
-def get_yao_iowa_hubunit() -> HubUnit:
+def get_yao_iowa_packfilehandler() -> PackFileHandler:
     yao_belief = get_example_yao_belief()
-    return hubunit_shop(
+    return packfilehandler_shop(
         moment_mstr_dir=env_dir(),
         moment_label=yao_belief.moment_label,
         belief_name=yao_belief.belief_name,
-        keep_rope=get_iowa_rope(),
-        # pipeline_gut_job_str(),
     )
 
 
-def get_zia_utah_hubunit() -> HubUnit:
+def get_zia_utah_packfilehandler() -> PackFileHandler:
     yao_belief = get_example_yao_belief()
-    return hubunit_shop(
+    return packfilehandler_shop(
         moment_mstr_dir=env_dir(),
         moment_label=yao_belief.moment_label,
         belief_name="Zia",
-        keep_rope=get_utah_rope(),
-        # pipeline_gut_job_str(),
     )
 
 
@@ -244,9 +244,9 @@ def get_example_yao_gut_with_3_healers():
     iowa_plan = planunit_shop(get_iowa_str(), problem_bool=True)
     ohio_plan = planunit_shop(get_ohio_str(), problem_bool=True)
     utah_plan = planunit_shop(get_utah_str(), problem_bool=True)
-    iowa_plan.healerunit.set_healer_name(get_yao_iowa_hubunit().belief_name)
-    ohio_plan.healerunit.set_healer_name(get_yao_ohio_hubunit().belief_name)
-    utah_plan.healerunit.set_healer_name(get_zia_utah_hubunit().belief_name)
+    iowa_plan.healerunit.set_healer_name(get_yao_iowa_packfilehandler().belief_name)
+    ohio_plan.healerunit.set_healer_name(get_yao_ohio_packfilehandler().belief_name)
+    utah_plan.healerunit.set_healer_name(get_zia_utah_packfilehandler().belief_name)
     yao_gut.set_plan(iowa_plan, get_usa_rope())
     yao_gut.set_plan(ohio_plan, get_usa_rope())
     yao_gut.set_plan(utah_plan, get_usa_rope())
@@ -259,7 +259,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
 ):
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
-    # yao0_gut with 3 debotors of different voice_cred_sharess
+    # yao0_gut with 3 debotors of different voice_cred_lumens
     # yao_vision1 with 1 task, fact that doesn't make that task active
     # yao_vision2 with 2 tasks, one is equal fact that makes task active
     # yao_vision3 with 1 new task, fact stays with it
@@ -285,34 +285,91 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
     yao_vision1 = get_example_yao_vision1_speaker()
     yao_vision2 = get_example_yao_vision2_speaker()
     yao_vision3 = get_example_yao_vision3_speaker()
-    yao_iowa_hubunit = get_yao_iowa_hubunit()
-    yao_ohio_hubunit = get_yao_ohio_hubunit()
-    zia_utah_hubunit = get_zia_utah_hubunit()
-    # delete_dir(yao_iowa_hubunit.beliefs_dir())
+    yao_iowa_packfilehandler = get_yao_iowa_packfilehandler()
+    yao_ohio_packfilehandler = get_yao_ohio_packfilehandler()
+    zia_utah_packfilehandler = get_zia_utah_packfilehandler()
+    # delete_dir(yao_iowa_packfilehandler.beliefs_dir())
     assert gut_file_exists(moment_mstr_dir, moment_label, yao_str) is False
     assert job_file_exists(moment_mstr_dir, moment_label, yao_str) is False
-    assert yao_iowa_hubunit.vision_file_exists(yao_str) is False
-    assert yao_ohio_hubunit.vision_file_exists(yao_str) is False
-    assert zia_utah_hubunit.vision_file_exists(yao_str) is False
+    assert (
+        vision_file_exists(
+            yao_iowa_packfilehandler.moment_mstr_dir,
+            yao_iowa_packfilehandler.belief_name,
+            yao_iowa_packfilehandler.moment_label,
+            get_iowa_rope(),
+            yao_iowa_packfilehandler.knot,
+            yao_str,
+        )
+        is False
+    )
+    assert (
+        vision_file_exists(
+            yao_ohio_packfilehandler.moment_mstr_dir,
+            yao_ohio_packfilehandler.belief_name,
+            yao_ohio_packfilehandler.moment_label,
+            get_ohio_rope(),
+            yao_ohio_packfilehandler.knot,
+            yao_str,
+        )
+        is False
+    )
+    assert (
+        vision_file_exists(
+            zia_utah_packfilehandler.moment_mstr_dir,
+            zia_utah_packfilehandler.belief_name,
+            zia_utah_packfilehandler.moment_label,
+            get_utah_rope(),
+            zia_utah_packfilehandler.knot,
+            yao_str,
+        )
+        is False
+    )
+
     print(f"{yao_gut0.get_fact(get_location_rope())=}")
     save_gut_file(env_dir(), yao_gut0)
-    # yao_iowa_hubunit.save_vision_belief(yao_vision1)
-    # yao_ohio_hubunit.save_vision_belief(yao_vision2)
-    # zia_utah_hubunit.save_vision_belief(yao_vision3)
     assert gut_file_exists(moment_mstr_dir, moment_label, yao_str)
-    assert yao_iowa_hubunit.vision_file_exists(yao_str) is False
-    assert yao_ohio_hubunit.vision_file_exists(yao_str) is False
-    assert zia_utah_hubunit.vision_file_exists(yao_str) is False
-
+    assert (
+        vision_file_exists(
+            yao_iowa_packfilehandler.moment_mstr_dir,
+            yao_iowa_packfilehandler.belief_name,
+            yao_iowa_packfilehandler.moment_label,
+            get_iowa_rope(),
+            yao_iowa_packfilehandler.knot,
+            yao_str,
+        )
+        is False
+    )
+    assert (
+        vision_file_exists(
+            yao_ohio_packfilehandler.moment_mstr_dir,
+            yao_ohio_packfilehandler.belief_name,
+            yao_ohio_packfilehandler.moment_label,
+            get_ohio_rope(),
+            yao_ohio_packfilehandler.knot,
+            yao_str,
+        )
+        is False
+    )
+    assert (
+        vision_file_exists(
+            zia_utah_packfilehandler.moment_mstr_dir,
+            zia_utah_packfilehandler.belief_name,
+            zia_utah_packfilehandler.moment_label,
+            get_utah_rope(),
+            zia_utah_packfilehandler.knot,
+            yao_str,
+        )
+        is False
+    )
     # WHEN / THEN
     assert job_file_exists(moment_mstr_dir, moment_label, yao_str) is False
-    listen_to_belief_visions(yao_iowa_hubunit)
+    listen_to_belief_visions(yao_iowa_packfilehandler, get_iowa_rope())
     assert job_file_exists(moment_mstr_dir, moment_label, yao_str)
 
     yao_job = open_job_file(moment_mstr_dir, moment_label, yao_str)
     yao_job.cashout()
     assert yao_job.voices.keys() == yao_gut0.voices.keys()
-    assert yao_job.get_voice(yao_str).irrational_voice_debt_shares == 0
+    assert yao_job.get_voice(yao_str).irrational_voice_debt_lumen == 0
     yao_job_voices = yao_job.to_dict().get(wx.voices)
     yao_gut0_voices = yao_gut0.to_dict().get(wx.voices)
     yao_job_bob = yao_job_voices.get("Bob")
@@ -343,24 +400,50 @@ def test_create_vision_file_from_duty_file_CreatesEmptyvision(env_dir_setup_clea
     # ESTABLISH
     yao_str = "Yao"
     yao_duty = beliefunit_shop(yao_str)
-    sue_texas_hubunit = get_texas_hubunit()
+    sue_texas_packfilehandler = get_texas_packfilehandler()
     save_duty_belief(
-        moment_mstr_dir=sue_texas_hubunit.moment_mstr_dir,
-        belief_name=sue_texas_hubunit.belief_name,
-        moment_label=sue_texas_hubunit.moment_label,
-        keep_rope=sue_texas_hubunit.keep_rope,
+        moment_mstr_dir=sue_texas_packfilehandler.moment_mstr_dir,
+        belief_name=sue_texas_packfilehandler.belief_name,
+        moment_label=sue_texas_packfilehandler.moment_label,
+        keep_rope=get_texas_rope(),
         knot=None,
         duty_belief=yao_duty,
     )
 
-    assert sue_texas_hubunit.vision_file_exists(yao_str) is False
+    assert (
+        vision_file_exists(
+            sue_texas_packfilehandler.moment_mstr_dir,
+            sue_texas_packfilehandler.belief_name,
+            sue_texas_packfilehandler.moment_label,
+            get_texas_rope(),
+            sue_texas_packfilehandler.knot,
+            yao_str,
+        )
+        is False
+    )
 
     # WHEN
-    create_vision_file_from_duty_file(sue_texas_hubunit, yao_str)
+    create_vision_file_from_duty_file(
+        sue_texas_packfilehandler, yao_str, get_texas_rope()
+    )
 
     # THEN
-    assert sue_texas_hubunit.vision_file_exists(yao_str)
-    yao_vision = sue_texas_hubunit.get_vision_belief(yao_str)
+    assert vision_file_exists(
+        sue_texas_packfilehandler.moment_mstr_dir,
+        sue_texas_packfilehandler.belief_name,
+        sue_texas_packfilehandler.moment_label,
+        get_texas_rope(),
+        sue_texas_packfilehandler.knot,
+        yao_str,
+    )
+    yao_vision = get_vision_belief(
+        sue_texas_packfilehandler.moment_mstr_dir,
+        sue_texas_packfilehandler.belief_name,
+        sue_texas_packfilehandler.moment_label,
+        get_texas_rope(),
+        sue_texas_packfilehandler.knot,
+        yao_str,
+    )
     assert yao_vision.belief_name is not None
     assert yao_vision.belief_name == yao_str
     assert yao_vision.to_dict() == yao_duty.to_dict()

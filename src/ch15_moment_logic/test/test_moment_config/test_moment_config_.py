@@ -29,25 +29,25 @@ def test_get_moment_config_dict_ReturnsObj():
     assert wx.momentunit in moment_config_dimens
     assert wx.moment_budunit in moment_config_dimens
     assert wx.moment_paybook in moment_config_dimens
-    assert wx.moment_timeline_hour in moment_config_dimens
-    assert wx.moment_timeline_month in moment_config_dimens
-    assert wx.moment_timeline_weekday in moment_config_dimens
+    assert wx.moment_epoch_hour in moment_config_dimens
+    assert wx.moment_epoch_month in moment_config_dimens
+    assert wx.moment_epoch_weekday in moment_config_dimens
     assert wx.moment_timeoffi in moment_config_dimens
     assert len(moment_config) == 7
     _validate_moment_config(moment_config)
     momentunit_dict = moment_config.get(wx.momentunit)
     moment_budunit_dict = moment_config.get(wx.moment_budunit)
     moment_paybook_dict = moment_config.get(wx.moment_paybook)
-    moment_timeline_hour_dict = moment_config.get(wx.moment_timeline_hour)
-    moment_timeline_month_dict = moment_config.get(wx.moment_timeline_month)
-    moment_timeline_weekday_dict = moment_config.get(wx.moment_timeline_weekday)
+    moment_epoch_hour_dict = moment_config.get(wx.moment_epoch_hour)
+    moment_epoch_month_dict = moment_config.get(wx.moment_epoch_month)
+    moment_epoch_weekday_dict = moment_config.get(wx.moment_epoch_weekday)
     # moment_timeoffi_dict = moment_config.get(wx.moment_timeoffi)
     assert len(momentunit_dict.get(wx.jkeys)) == 1
     assert len(moment_budunit_dict.get(wx.jkeys)) == 3
     assert len(moment_paybook_dict.get(wx.jkeys)) == 4
-    assert len(moment_timeline_hour_dict.get(wx.jkeys)) == 2
-    assert len(moment_timeline_month_dict.get(wx.jkeys)) == 2
-    assert len(moment_timeline_weekday_dict.get(wx.jkeys)) == 2
+    assert len(moment_epoch_hour_dict.get(wx.jkeys)) == 2
+    assert len(moment_epoch_month_dict.get(wx.jkeys)) == 2
+    assert len(moment_epoch_weekday_dict.get(wx.jkeys)) == 2
     # assert len(moment_timeoffi_dict.get(wx.jkeys)) == 2
 
     x_momentunit_jvalues = {
@@ -57,7 +57,7 @@ def test_get_moment_config_dict_ReturnsObj():
         wx.money_grain,
         wx.respect_grain,
         wx.knot,
-        wx.timeline_label,
+        wx.epoch_label,
         wx.yr1_jan1_offset,
         "job_listen_rotations",
         # wx.job_listen_rotations,
@@ -68,9 +68,9 @@ def test_get_moment_config_dict_ReturnsObj():
     assert len(momentunit_dict.get(wx.jvalues)) == 9
     assert len(moment_budunit_dict.get(wx.jvalues)) == 2
     assert len(moment_paybook_dict.get(wx.jvalues)) == 1
-    assert len(moment_timeline_hour_dict.get(wx.jvalues)) == 1
-    assert len(moment_timeline_month_dict.get(wx.jvalues)) == 1
-    assert len(moment_timeline_weekday_dict.get(wx.jvalues)) == 1
+    assert len(moment_epoch_hour_dict.get(wx.jvalues)) == 1
+    assert len(moment_epoch_month_dict.get(wx.jvalues)) == 1
+    assert len(moment_epoch_weekday_dict.get(wx.jvalues)) == 1
     # assert len(moment_timeoffi_dict.get(wx.jvalues)) == 1
 
 
@@ -114,9 +114,9 @@ def test_get_moment_dimens_ReturnsObj():
     assert wx.momentunit in moment_config_dimens
     assert wx.moment_budunit in moment_config_dimens
     assert wx.moment_paybook in moment_config_dimens
-    assert wx.moment_timeline_hour in moment_config_dimens
-    assert wx.moment_timeline_month in moment_config_dimens
-    assert wx.moment_timeline_weekday in moment_config_dimens
+    assert wx.moment_epoch_hour in moment_config_dimens
+    assert wx.moment_epoch_month in moment_config_dimens
+    assert wx.moment_epoch_weekday in moment_config_dimens
     assert wx.moment_timeoffi in moment_config_dimens
     assert len(moment_config_dimens) == 7
     assert moment_config_dimens == set(get_moment_config_dict().keys())
@@ -128,11 +128,11 @@ def test_get_moment_args_dimen_mapping_ReturnsObj():
 
     # THEN
     assert x_moment_args_dimen_mapping
-    x_hour = {wx.moment_timeline_hour}
+    x_hour = {wx.moment_epoch_hour}
     assert x_moment_args_dimen_mapping.get(wx.cumulative_minute) == x_hour
     assert x_moment_args_dimen_mapping.get(wx.fund_grain)
     moment_label_dimens = x_moment_args_dimen_mapping.get(wx.moment_label)
-    assert wx.moment_timeline_hour in moment_label_dimens
+    assert wx.moment_epoch_hour in moment_label_dimens
     assert wx.momentunit in moment_label_dimens
     assert len(moment_label_dimens) == 7
     assert len(x_moment_args_dimen_mapping) == 24
@@ -200,7 +200,7 @@ def test_get_moment_args_set_ReturnsObj():
         wx.month_label,
         wx.monthday_index,
         # wx.job_listen_rotations,
-        "job_listen_rotations",
+        wx.job_listen_rotations,
         wx.money_grain,
         wx.belief_name,
         wx.quota,
@@ -209,7 +209,7 @@ def test_get_moment_args_set_ReturnsObj():
         wx.bud_time,
         wx.tran_time,
         wx.offi_time,
-        wx.timeline_label,
+        wx.epoch_label,
         wx.weekday_label,
         wx.weekday_order,
         wx.yr1_jan1_offset,

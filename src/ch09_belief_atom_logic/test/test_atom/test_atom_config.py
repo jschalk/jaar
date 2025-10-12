@@ -45,7 +45,7 @@ def test_get_all_belief_dimen_keys_ReturnsObj():
     for belief_dimen in get_belief_dimens():
         expected_belief_keys.update(_get_atom_config_jkey_keys(belief_dimen))
 
-    expected_belief_keys.add("belief_name")
+    expected_belief_keys.add(wx.belief_name)
     print(f"{expected_belief_keys=}")
     assert all_belief_dimen_keys == expected_belief_keys
 
@@ -456,7 +456,7 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     assert table_name_reason == "reason"
     assert table_name_case == "case"
     assert table_name_partyunit == "partyunit"
-    assert table_name_healerunit == "healerunit"
+    assert table_name_healerunit == wx.healerunit
     assert table_name_fact == "fact"
 
     assert len(cat_beliefunit) == 2
@@ -465,31 +465,31 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     beliefunit_columns = cat_beliefunit.get(columns_str)
     assert len(beliefunit_columns) == 9
     assert beliefunit_columns.get("uid") is not None
-    assert beliefunit_columns.get("max_tree_traverse") is not None
+    assert beliefunit_columns.get(wx.max_tree_traverse) is not None
     assert beliefunit_columns.get(wx.credor_respect) is not None
     assert beliefunit_columns.get(wx.debtor_respect) is not None
-    assert beliefunit_columns.get("fund_pool") is not None
+    assert beliefunit_columns.get(wx.fund_pool) is not None
     assert beliefunit_columns.get(wx.fund_grain) is not None
     assert beliefunit_columns.get(wx.respect_grain) is not None
     assert beliefunit_columns.get(wx.money_grain) is not None
-    assert beliefunit_columns.get("tally") is not None
+    assert beliefunit_columns.get(wx.tally) is not None
 
     assert len(cat_voiceunit) == 2
     voiceunit_columns = cat_voiceunit.get(columns_str)
     assert len(voiceunit_columns) == 4
     assert voiceunit_columns.get("uid") is not None
     assert voiceunit_columns.get(wx.voice_name) is not None
-    assert voiceunit_columns.get(wx.voice_cred_shares) is not None
-    assert voiceunit_columns.get(wx.voice_debt_shares) is not None
+    assert voiceunit_columns.get(wx.voice_cred_lumen) is not None
+    assert voiceunit_columns.get(wx.voice_debt_lumen) is not None
 
     voice_name_dict = voiceunit_columns.get(wx.voice_name)
     assert len(voice_name_dict) == 2
     assert voice_name_dict.get(wx.sqlite_datatype) == "TEXT"
     assert voice_name_dict.get("nullable") is False
-    voice_debt_shares_dict = voiceunit_columns.get("voice_debt_shares")
+    voice_debt_lumen_dict = voiceunit_columns.get("voice_debt_lumen")
     assert len(voice_name_dict) == 2
-    assert voice_debt_shares_dict.get(wx.sqlite_datatype) == "REAL"
-    assert voice_debt_shares_dict.get("nullable") is True
+    assert voice_debt_lumen_dict.get(wx.sqlite_datatype) == "REAL"
+    assert voice_debt_lumen_dict.get("nullable") is True
 
     assert len(cat_plan) == 2
     plan_columns = cat_plan.get(columns_str)
@@ -554,7 +554,7 @@ def test_get_allowed_class_types_ReturnsObj():
         wx.RopeTerm,
         "float",
         "bool",
-        "TimeLinePoint",
+        "EpochPoint",
     }
 
     # WHEN / THEN
@@ -616,11 +616,11 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(wx.begin) == "float"
     assert x_class_types.get(wx.respect_grain) == "float"
     assert x_class_types.get(wx.close) == "float"
-    assert x_class_types.get(wx.voice_cred_shares) == "float"
-    assert x_class_types.get(wx.group_cred_shares) == "float"
+    assert x_class_types.get(wx.voice_cred_lumen) == "float"
+    assert x_class_types.get(wx.group_cred_lumen) == "float"
     assert x_class_types.get(wx.credor_respect) == "float"
-    assert x_class_types.get(wx.voice_debt_shares) == "float"
-    assert x_class_types.get(wx.group_debt_shares) == "float"
+    assert x_class_types.get(wx.voice_debt_lumen) == "float"
+    assert x_class_types.get(wx.group_debt_lumen) == "float"
     assert x_class_types.get(wx.debtor_respect) == "float"
     assert x_class_types.get(wx.denom) == "int"
     assert x_class_types.get("reason_divisor") == "int"
@@ -628,13 +628,13 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(wx.fact_upper) == "float"
     assert x_class_types.get(wx.fact_lower) == "float"
     assert x_class_types.get(wx.fund_grain) == "float"
-    assert x_class_types.get("fund_pool") == "float"
-    assert x_class_types.get("give_force") == "float"
+    assert x_class_types.get(wx.fund_pool) == "float"
+    assert x_class_types.get(wx.give_force) == "float"
     assert x_class_types.get(wx.gogo_want) == "float"
     assert x_class_types.get(wx.group_title) == wx.TitleTerm
     assert x_class_types.get(wx.healer_name) == wx.NameTerm
-    assert x_class_types.get("star") == "int"
-    assert x_class_types.get("max_tree_traverse") == "int"
+    assert x_class_types.get(wx.star) == "int"
+    assert x_class_types.get(wx.max_tree_traverse) == "int"
     assert x_class_types.get(wx.morph) == "bool"
     assert x_class_types.get(wx.reason_state) == wx.RopeTerm
     assert x_class_types.get("reason_upper") == "float"
@@ -647,8 +647,8 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(wx.plan_rope) == wx.RopeTerm
     assert x_class_types.get(wx.solo) == "int"
     assert x_class_types.get(wx.stop_want) == "float"
-    assert x_class_types.get("take_force") == "float"
-    assert x_class_types.get("tally") == "int"
+    assert x_class_types.get(wx.take_force) == "float"
+    assert x_class_types.get(wx.tally) == "int"
     assert x_class_types.get(wx.party_title) == wx.TitleTerm
     assert x_class_types.keys() == get_atom_args_dimen_mapping().keys()
     assert all_atom_args_class_types_are_correct(x_class_types)

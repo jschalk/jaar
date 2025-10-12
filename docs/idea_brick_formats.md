@@ -1,6 +1,6 @@
 # Idea Manifest
 
-- [`br00000`](ideas/br00000.md): event_int, face_name, moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_index, fund_grain, money_grain, respect_grain, knot, job_listen_rotations
+- [`br00000`](ideas/br00000.md): event_int, face_name, moment_label, epoch_label, c400_number, yr1_jan1_offset, monthday_index, fund_grain, money_grain, respect_grain, knot, job_listen_rotations
 - [`br00001`](ideas/br00001.md): event_int, face_name, moment_label, belief_name, bud_time, quota, celldepth
 - [`br00002`](ideas/br00002.md): event_int, face_name, moment_label, belief_name, voice_name, tran_time, amount
 - [`br00003`](ideas/br00003.md): event_int, face_name, moment_label, cumulative_minute, hour_label
@@ -11,8 +11,8 @@
 - [`br00012`](ideas/br00012.md): event_int, face_name, moment_label, belief_name, voice_name, group_title
 - [`br00013`](ideas/br00013.md): event_int, face_name, moment_label, belief_name, plan_rope, star, pledge
 - [`br00019`](ideas/br00019.md): event_int, face_name, moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want
-- [`br00020`](ideas/br00020.md): event_int, face_name, moment_label, belief_name, voice_name, group_title, group_cred_shares, group_debt_shares
-- [`br00021`](ideas/br00021.md): event_int, face_name, moment_label, belief_name, voice_name, voice_cred_shares, voice_debt_shares
+- [`br00020`](ideas/br00020.md): event_int, face_name, moment_label, belief_name, voice_name, group_title, group_cred_lumen, group_debt_lumen
+- [`br00021`](ideas/br00021.md): event_int, face_name, moment_label, belief_name, voice_name, voice_cred_lumen, voice_debt_lumen
 - [`br00022`](ideas/br00022.md): event_int, face_name, moment_label, belief_name, plan_rope, awardee_title, give_force, take_force
 - [`br00023`](ideas/br00023.md): event_int, face_name, moment_label, belief_name, plan_rope, fact_context, fact_state, fact_lower, fact_upper
 - [`br00024`](ideas/br00024.md): event_int, face_name, moment_label, belief_name, plan_rope, party_title, solo

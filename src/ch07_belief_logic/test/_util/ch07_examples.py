@@ -1,4 +1,4 @@
-from src.ch01_data_toolbox.file_toolbox import open_file
+from src.ch01_data_toolbox.file_toolbox import open_json
 from src.ch02_rope_logic.rope import RopeTerm
 from src.ch04_voice_logic.labor import laborunit_shop
 from src.ch05_reason_logic.reason import factunit_shop, reasonunit_shop
@@ -6,21 +6,20 @@ from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
-    get_beliefunit_from_json,
+    get_beliefunit_from_dict,
 )
 
 # from src.ch01_data_toolbox.file_toolbox import save_file
 # from src.ch07_belief_logic.test._util.ch07_env import get_belief_examples_dir as env_dir
 # from src.ch07_belief_logic.test._util.example_beliefs import beliefunit_v001, beliefunit_v002
 
-# save_file(env_dir(), "example_belief3.json", beliefunit_v001().get_json())
-# save_file(env_dir(), "example_belief4.json", beliefunit_v002().get_json())
+# save_json(env_dir(), "example_belief3.json", beliefunit_v001().to_dict())
+# save_json(env_dir(), "example_belief4.json", beliefunit_v002().to_dict())
 
 
 def beliefunit_v001() -> BeliefUnit:
     belief1_path = "src/ch07_belief_logic/test/_util/example_belief1.json"
-    belief1_json = open_file(belief1_path)
-    return get_beliefunit_from_json(belief1_json)
+    return get_beliefunit_from_dict(open_json(belief1_path))
 
 
 def beliefunit_v001_with_large_agenda() -> BeliefUnit:
@@ -54,7 +53,7 @@ def beliefunit_v001_with_large_agenda() -> BeliefUnit:
 
 def beliefunit_v002() -> BeliefUnit:
     belief2_path = "src/ch07_belief_logic/test/_util/example_belief2.json"
-    return get_beliefunit_from_json(open_file(belief2_path))
+    return get_beliefunit_from_dict(open_json(belief2_path))
 
 
 def get_beliefunit_with_4_levels() -> BeliefUnit:

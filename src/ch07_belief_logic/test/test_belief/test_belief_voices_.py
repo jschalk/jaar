@@ -49,8 +49,8 @@ def test_BeliefUnit_set_voice_DoesSet_voice_name_membership():
     # THEN
     zia_zia_membership = yao_belief.get_voice(zia_str).get_membership(zia_str)
     assert zia_zia_membership is not None
-    assert zia_zia_membership.group_cred_shares == 1
-    assert zia_zia_membership.group_debt_shares == 1
+    assert zia_zia_membership.group_cred_lumen == 1
+    assert zia_zia_membership.group_debt_lumen == 1
 
 
 def test_BeliefUnit_set_voice_DoesNotOverRide_voice_name_membership():
@@ -70,8 +70,8 @@ def test_BeliefUnit_set_voice_DoesNotOverRide_voice_name_membership():
     # THEN
     zia_ohio_membership = yao_belief.get_voice(zia_str).get_membership(ohio_str)
     assert zia_ohio_membership is not None
-    assert zia_ohio_membership.group_cred_shares == zia_ohio_credit_w
-    assert zia_ohio_membership.group_debt_shares == zia_ohio_debt_w
+    assert zia_ohio_membership.group_cred_lumen == zia_ohio_credit_w
+    assert zia_ohio_membership.group_debt_lumen == zia_ohio_debt_w
     zia_zia_membership = yao_belief.get_voice(zia_str).get_membership(zia_str)
     assert zia_zia_membership is None
 
@@ -85,15 +85,15 @@ def test_BeliefUnit_add_voiceunit_Sets_voices():
     xio_str = "Xio"
 
     # WHEN
-    yao_belief.add_voiceunit(zia_str, voice_cred_shares=13, voice_debt_shares=8)
-    yao_belief.add_voiceunit(sue_str, voice_debt_shares=5)
-    yao_belief.add_voiceunit(xio_str, voice_cred_shares=17)
+    yao_belief.add_voiceunit(zia_str, voice_cred_lumen=13, voice_debt_lumen=8)
+    yao_belief.add_voiceunit(sue_str, voice_debt_lumen=5)
+    yao_belief.add_voiceunit(xio_str, voice_cred_lumen=17)
 
     # THEN
     assert len(yao_belief.voices) == 3
     assert len(yao_belief.get_voiceunit_group_titles_dict()) == 3
-    assert yao_belief.voices.get(xio_str).voice_cred_shares == 17
-    assert yao_belief.voices.get(sue_str).voice_debt_shares == 5
+    assert yao_belief.voices.get(xio_str).voice_cred_lumen == 17
+    assert yao_belief.voices.get(sue_str).voice_debt_lumen == 5
     assert yao_belief.voices.get(xio_str).respect_grain == x_respect_grain
 
 
@@ -122,10 +122,10 @@ def test_BeliefUnit_set_voice_Creates_membership():
     yao_belief.add_voiceunit(zia_str, before_zia_credit, before_zia_debt)
     zia_voiceunit = yao_belief.get_voice(zia_str)
     zia_membership = zia_voiceunit.get_membership(zia_str)
-    assert zia_membership.group_cred_shares != before_zia_credit
-    assert zia_membership.group_debt_shares != before_zia_debt
-    assert zia_membership.group_cred_shares == 1
-    assert zia_membership.group_debt_shares == 1
+    assert zia_membership.group_cred_lumen != before_zia_credit
+    assert zia_membership.group_debt_lumen != before_zia_debt
+    assert zia_membership.group_cred_lumen == 1
+    assert zia_membership.group_debt_lumen == 1
 
     # WHEN
     after_zia_credit = 11
@@ -133,21 +133,21 @@ def test_BeliefUnit_set_voice_Creates_membership():
     yao_belief.set_voiceunit(voiceunit_shop(zia_str, after_zia_credit, after_zia_debt))
 
     # THEN
-    assert zia_membership.group_cred_shares != after_zia_credit
-    assert zia_membership.group_debt_shares != after_zia_debt
-    assert zia_membership.group_cred_shares == 1
-    assert zia_membership.group_debt_shares == 1
+    assert zia_membership.group_cred_lumen != after_zia_credit
+    assert zia_membership.group_debt_lumen != after_zia_debt
+    assert zia_membership.group_cred_lumen == 1
+    assert zia_membership.group_debt_lumen == 1
 
 
 def test_BeliefUnit_edit_voice_RaiseExceptionWhenVoiceDoesNotExist():
     # ESTABLISH
     yao_belief = beliefunit_shop("Yao")
     zia_str = "Zia"
-    zia_voice_cred_shares = 55
+    zia_voice_cred_lumen = 55
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        yao_belief.edit_voiceunit(zia_str, voice_cred_shares=zia_voice_cred_shares)
+        yao_belief.edit_voiceunit(zia_str, voice_cred_lumen=zia_voice_cred_lumen)
 
     # THEN
     assert str(excinfo.value) == f"VoiceUnit '{zia_str}' does not exist."
@@ -157,31 +157,31 @@ def test_BeliefUnit_edit_voice_UpdatesObj():
     # ESTABLISH
     yao_belief = beliefunit_shop("Yao")
     zia_str = "Zia"
-    old_zia_voice_cred_shares = 55
-    old_zia_voice_debt_shares = 66
+    old_zia_voice_cred_lumen = 55
+    old_zia_voice_debt_lumen = 66
     yao_belief.set_voiceunit(
         voiceunit_shop(
             zia_str,
-            old_zia_voice_cred_shares,
-            old_zia_voice_debt_shares,
+            old_zia_voice_cred_lumen,
+            old_zia_voice_debt_lumen,
         )
     )
     zia_voiceunit = yao_belief.get_voice(zia_str)
-    assert zia_voiceunit.voice_cred_shares == old_zia_voice_cred_shares
-    assert zia_voiceunit.voice_debt_shares == old_zia_voice_debt_shares
+    assert zia_voiceunit.voice_cred_lumen == old_zia_voice_cred_lumen
+    assert zia_voiceunit.voice_debt_lumen == old_zia_voice_debt_lumen
 
     # WHEN
-    new_zia_voice_cred_shares = 22
-    new_zia_voice_debt_shares = 33
+    new_zia_voice_cred_lumen = 22
+    new_zia_voice_debt_lumen = 33
     yao_belief.edit_voiceunit(
         voice_name=zia_str,
-        voice_cred_shares=new_zia_voice_cred_shares,
-        voice_debt_shares=new_zia_voice_debt_shares,
+        voice_cred_lumen=new_zia_voice_cred_lumen,
+        voice_debt_lumen=new_zia_voice_debt_lumen,
     )
 
     # THEN
-    assert zia_voiceunit.voice_cred_shares == new_zia_voice_cred_shares
-    assert zia_voiceunit.voice_debt_shares == new_zia_voice_debt_shares
+    assert zia_voiceunit.voice_cred_lumen == new_zia_voice_cred_lumen
+    assert zia_voiceunit.voice_debt_lumen == new_zia_voice_debt_lumen
 
 
 def test_BeliefUnit_get_voice_ReturnsObj():

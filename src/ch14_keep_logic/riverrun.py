@@ -5,10 +5,22 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_positive_int,
     set_in_nested_dict,
 )
-from src.ch01_data_toolbox.file_toolbox import save_file
-from src.ch03_allot_toolbox.allot import allot_scale
-from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, VoiceName
-from src.ch12_belief_file_toolbox.hubunit import HubUnit
+from src.ch01_data_toolbox.file_toolbox import save_json
+from src.ch03_allot_toolbox.allot import (
+    allot_scale,
+    default_grain_num_if_None,
+    validate_pool_num,
+)
+from src.ch13_belief_listen_logic._ref.ch13_path import create_keep_grade_path
+from src.ch14_keep_logic._ref.ch14_semantic_types import (
+    BeliefName,
+    LabelTerm,
+    MoneyGrain,
+    MoneyNum,
+    RopeTerm,
+    VoiceName,
+    default_knot_if_None,
+)
 from src.ch14_keep_logic.rivercycle import (
     RiverGrade,
     create_init_rivercycle,
@@ -19,7 +31,13 @@ from src.ch14_keep_logic.rivercycle import (
 
 @dataclass
 class RiverRun:
-    hubunit: HubUnit = None
+    moment_mstr_dir: str = None
+    moment_label: LabelTerm = None
+    belief_name: BeliefName = None
+    keep_rope: RopeTerm = None
+    knot: str = None
+    keep_point_magnitude: MoneyNum = None
+    money_grain: MoneyGrain = None
     number: int = None
     keep_credorledgers: dict[BeliefName : dict[VoiceName, float]] = None
     tax_dues: dict[VoiceName, float] = None
@@ -89,8 +107,8 @@ class RiverRun:
         return len(self.tax_dues) != 0
 
     def set_tax_dues(self, debtorledger: dict[VoiceName, float]):
-        x_amount = self.hubunit.keep_point_magnitude
-        self.tax_dues = allot_scale(debtorledger, x_amount, self.hubunit.money_grain)
+        x_amount = self.keep_point_magnitude
+        self.tax_dues = allot_scale(debtorledger, x_amount, self.money_grain)
 
     def voice_has_tax_due(self, x_voice_name: VoiceName) -> bool:
         return self.tax_dues.get(x_voice_name) is not None
@@ -156,7 +174,13 @@ class RiverRun:
         return get_0_if_None(self._grants.get(voice_name))
 
     def set_initial_rivergrade(self, voice_name: VoiceName):
-        x_rivergrade = rivergrade_shop(self.hubunit, voice_name, self.number)
+        x_rivergrade = rivergrade_shop(
+            self.moment_label,
+            self.belief_name,
+            self.keep_rope,
+            voice_name,
+            self.number,
+        )
         x_rivergrade.debtor_count = self._debtor_count
         x_rivergrade.credor_count = self._credor_count
         x_rivergrade.grant_amount = self._get_voice_grant(voice_name)
@@ -181,7 +205,7 @@ class RiverRun:
         self.set_all_initial_rivergrades()
 
         self._cycle_count = 0
-        x_rivercyle = create_init_rivercycle(self.hubunit, self.keep_credorledgers)
+        x_rivercyle = create_init_rivercycle(self.belief_name, self.keep_credorledgers)
         x_cyclelegder = x_rivercyle.create_cylceledger()
         self._cycle_chargeees_curr = set(x_cyclelegder.keys())
         x_cyclelegder, tax_got_curr = self.levy_tax_dues(x_cyclelegder)
@@ -202,20 +226,27 @@ class RiverRun:
         tax_dues_voices = set(self.tax_dues.keys())
         tax_yields_voices = set(self._tax_yields.keys())
         self._debtor_count = len(tax_dues_voices.union(tax_yields_voices))
-        self._credor_count = len(self.keep_credorledgers.get(self.hubunit.belief_name))
+        self._credor_count = len(self.keep_credorledgers.get(self.belief_name))
 
     def _set_grants(self):
-        grant_credorledger = self.keep_credorledgers.get(self.hubunit.belief_name)
+        grant_credorledger = self.keep_credorledgers.get(self.belief_name)
         self._grants = allot_scale(
             ledger=grant_credorledger,
-            scale_number=self.hubunit.keep_point_magnitude,
-            grain_unit=self.hubunit.money_grain,
+            scale_number=self.keep_point_magnitude,
+            grain_unit=self.money_grain,
         )
 
     def _save_rivergrade_file(self, voice_name: VoiceName):
         rivergrade = self.get_rivergrade(voice_name)
-        grade_path = self.hubunit.grade_path(voice_name)
-        save_file(grade_path, None, rivergrade.get_json())
+        grade_path = create_keep_grade_path(
+            moment_mstr_dir=self.moment_mstr_dir,
+            belief_name=self.belief_name,
+            moment_label=self.moment_label,
+            keep_rope=self.keep_rope,
+            knot=self.knot,
+            grade_belief_name=voice_name,
+        )
+        save_json(grade_path, None, rivergrade.to_dict())
 
     def save_rivergrade_files(self):
         for rivergrade_voice in self._rivergrades.keys():
@@ -236,14 +267,26 @@ class RiverRun:
 
 
 def riverrun_shop(
-    hubunit: HubUnit,
+    moment_mstr_dir: str,
+    moment_label: LabelTerm,
+    belief_name: BeliefName,
+    keep_rope: RopeTerm = None,
+    knot: str = None,
+    keep_point_magnitude: MoneyNum = None,
+    money_grain: MoneyGrain = None,
     number: int = None,
     keep_credorledgers: dict[BeliefName : dict[VoiceName, float]] = None,
     tax_dues: dict[VoiceName, float] = None,
     cycle_max: int = None,
 ):
     x_riverun = RiverRun(
-        hubunit=hubunit,
+        moment_mstr_dir=moment_mstr_dir,
+        moment_label=moment_label,
+        belief_name=belief_name,
+        keep_rope=keep_rope,
+        knot=default_knot_if_None(knot),
+        keep_point_magnitude=validate_pool_num(keep_point_magnitude),
+        money_grain=default_grain_num_if_None(money_grain),
         number=get_0_if_None(number),
         keep_credorledgers=get_empty_dict_if_None(keep_credorledgers),
         tax_dues=get_empty_dict_if_None(tax_dues),

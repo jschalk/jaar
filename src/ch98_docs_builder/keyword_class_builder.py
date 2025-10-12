@@ -1,8 +1,8 @@
 from src.ch01_data_toolbox.file_toolbox import save_file
-from src.ch98_docs_builder.ch98_path import create_keywords_class_file_path
+from src.ch98_docs_builder._ref.ch98_path import create_keywords_class_file_path
 
 
-def create_keywords_enum_class_file_str(chapter_num: int, keywords_set: set) -> str:
+def create_keywords_enum_class_file_str(chapter_prefix: str, keywords_set: set) -> str:
     keywords_str = ""
     if not keywords_set:
         keywords_str += "\n    pass"
@@ -10,7 +10,7 @@ def create_keywords_enum_class_file_str(chapter_num: int, keywords_set: set) -> 
         for keyword_str in sorted(keywords_set):
             keywords_str += f'\n    {keyword_str} = "{keyword_str}"'
 
-    chXX_str = f"{chapter_num:02}"
+    chXX_str = f"{chapter_prefix.upper()[:1]}{chapter_prefix.lower()[1:]}"
     key_str = "Key"
     dunder_str_func_str = """
     def __str__(self):
@@ -19,13 +19,13 @@ def create_keywords_enum_class_file_str(chapter_num: int, keywords_set: set) -> 
     return f"""from enum import Enum
 
 
-class Ch{chXX_str}{key_str}words(str, Enum):{keywords_str}
+class {chXX_str}{key_str}words(str, Enum):{keywords_str}
 {dunder_str_func_str}"""
 
 
 def save_keywords_enum_class_file(
-    chapter_dir: str, chapter_num: int, keywords_set: set
+    chapter_dir: str, chapter_prefix: int, keywords_set: set
 ):
-    file_path = create_keywords_class_file_path(chapter_dir, chapter_num)
-    file_str = create_keywords_enum_class_file_str(chapter_num, keywords_set)
+    file_path = create_keywords_class_file_path(chapter_dir, chapter_prefix)
+    file_str = create_keywords_enum_class_file_str(chapter_prefix, keywords_set)
     save_file(file_path, None, file_str)

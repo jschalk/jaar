@@ -6,7 +6,6 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_dict_from_json,
     get_empty_dict_if_None,
     get_False_if_None,
-    get_json_from_dict,
 )
 from src.ch02_rope_logic.rope import (
     all_ropes_between,
@@ -328,7 +327,7 @@ class BeliefUnit:
         fund_agenda_take: float,
     ):
         x_voiceunit = self.get_voice(voiceunit_voice_name)
-        x_voiceunit.add_fund_give_take(
+        x_voiceunit.add_voice_fund_give_take(
             fund_give=fund_give,
             fund_take=fund_take,
             fund_agenda_give=fund_agenda_give,
@@ -341,12 +340,12 @@ class BeliefUnit:
     def add_voiceunit(
         self,
         voice_name: VoiceName,
-        voice_cred_shares: int = None,
-        voice_debt_shares: int = None,
+        voice_cred_lumen: int = None,
+        voice_debt_lumen: int = None,
     ):
         x_knot = self.knot
         voiceunit = voiceunit_shop(
-            voice_name, voice_cred_shares, voice_debt_shares, x_knot
+            voice_name, voice_cred_lumen, voice_debt_lumen, x_knot
         )
         self.set_voiceunit(voiceunit)
 
@@ -365,16 +364,16 @@ class BeliefUnit:
     def edit_voiceunit(
         self,
         voice_name: VoiceName,
-        voice_cred_shares: int = None,
-        voice_debt_shares: int = None,
+        voice_cred_lumen: int = None,
+        voice_debt_lumen: int = None,
     ):
         if self.voices.get(voice_name) is None:
             raise VoiceMissingException(f"VoiceUnit '{voice_name}' does not exist.")
         x_voiceunit = self.get_voice(voice_name)
-        if voice_cred_shares is not None:
-            x_voiceunit.set_voice_cred_shares(voice_cred_shares)
-        if voice_debt_shares is not None:
-            x_voiceunit.set_voice_debt_shares(voice_debt_shares)
+        if voice_cred_lumen is not None:
+            x_voiceunit.set_voice_cred_lumen(voice_cred_lumen)
+        if voice_debt_lumen is not None:
+            x_voiceunit.set_voice_debt_lumen(voice_debt_lumen)
         self.set_voiceunit(x_voiceunit)
 
     def clear_voiceunits_memberships(self):
@@ -411,8 +410,8 @@ class BeliefUnit:
         for x_voiceunit in self.voices.values():
             x_membership = membership_shop(
                 group_title=x_group_title,
-                group_cred_shares=x_voiceunit.voice_cred_shares,
-                group_debt_shares=x_voiceunit.voice_debt_shares,
+                group_cred_lumen=x_voiceunit.voice_cred_lumen,
+                group_debt_lumen=x_voiceunit.voice_debt_lumen,
                 voice_name=x_voiceunit.voice_name,
             )
             x_groupunit.set_g_membership(x_membership)
@@ -897,21 +896,21 @@ reason_case:    {reason_case}"""
         credit_ledger = {}
         debt_ledger = {}
         for x_voiceunit in self.voices.values():
-            credit_ledger[x_voiceunit.voice_name] = x_voiceunit.voice_cred_shares
-            debt_ledger[x_voiceunit.voice_name] = x_voiceunit.voice_debt_shares
+            credit_ledger[x_voiceunit.voice_name] = x_voiceunit.voice_cred_lumen
+            debt_ledger[x_voiceunit.voice_name] = x_voiceunit.voice_debt_lumen
         return credit_ledger, debt_ledger
 
     def _allot_offtrack_fund(self):
         self._add_to_voiceunits_fund_give_take(self.offtrack_fund)
 
-    def get_voiceunits_voice_cred_shares_sum(self) -> float:
+    def get_voiceunits_voice_cred_lumen_sum(self) -> float:
         return sum(
-            voiceunit.get_voice_cred_shares() for voiceunit in self.voices.values()
+            voiceunit.get_voice_cred_lumen() for voiceunit in self.voices.values()
         )
 
-    def get_voiceunits_voice_debt_shares_sum(self) -> float:
+    def get_voiceunits_voice_debt_lumen_sum(self) -> float:
         return sum(
-            voiceunit.get_voice_debt_shares() for voiceunit in self.voices.values()
+            voiceunit.get_voice_debt_lumen() for voiceunit in self.voices.values()
         )
 
     def _add_to_voiceunits_fund_give_take(self, plan_plan_fund_total: float):
@@ -999,14 +998,14 @@ reason_case:    {reason_case}"""
         fund_agenda_ratio_take_sum = sum(
             x_voiceunit.fund_agenda_take for x_voiceunit in self.voices.values()
         )
-        x_voiceunits_voice_cred_shares_sum = self.get_voiceunits_voice_cred_shares_sum()
-        x_voiceunits_voice_debt_shares_sum = self.get_voiceunits_voice_debt_shares_sum()
+        x_voiceunits_voice_cred_lumen_sum = self.get_voiceunits_voice_cred_lumen_sum()
+        x_voiceunits_voice_debt_lumen_sum = self.get_voiceunits_voice_debt_lumen_sum()
         for x_voiceunit in self.voices.values():
             x_voiceunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
                 fund_agenda_ratio_take_sum=fund_agenda_ratio_take_sum,
-                voiceunits_voice_cred_shares_sum=x_voiceunits_voice_cred_shares_sum,
-                voiceunits_voice_debt_shares_sum=x_voiceunits_voice_debt_shares_sum,
+                voiceunits_voice_cred_lumen_sum=x_voiceunits_voice_cred_lumen_sum,
+                voiceunits_voice_debt_lumen_sum=x_voiceunits_voice_debt_lumen_sum,
             )
 
     def _reset_voiceunit_fund_give_take(self):
@@ -1405,6 +1404,8 @@ reason_case:    {reason_case}"""
         return x_dict
 
     def to_dict(self) -> dict[str, str]:
+        """Returns dict that is serializable to JSON."""
+
         x_dict = {
             "voices": self.get_voiceunits_dict(),
             "tally": self.tally,
@@ -1426,9 +1427,6 @@ reason_case:    {reason_case}"""
             x_dict["last_pack_id"] = self.last_pack_id
 
         return x_dict
-
-    def get_json(self) -> str:
-        return get_json_from_dict(self.to_dict())
 
     def set_dominate_pledge_plan(self, plan_kid: PlanUnit):
         plan_kid.pledge = True
@@ -1492,10 +1490,6 @@ def beliefunit_shop(
     x_belief.set_max_tree_traverse(3)
     x_belief.rational = False
     return x_belief
-
-
-def get_beliefunit_from_json(x_belief_json: str) -> BeliefUnit:
-    return get_beliefunit_from_dict(get_dict_from_json(x_belief_json))
 
 
 def get_beliefunit_from_dict(belief_dict: dict) -> BeliefUnit:

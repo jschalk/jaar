@@ -34,7 +34,7 @@ def test_BeliefAtom_get_insert_sqlstr_ReturnsObj_BeliefUnitSimpleAttrs():
     # ESTABLISH
     new2_value = 66
     dimen = wx.beliefunit
-    opt_arg2 = "max_tree_traverse"
+    opt_arg2 = wx.max_tree_traverse
     x_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     x_beliefatom.set_jvalue(opt_arg2, new2_value)
     x_table = "atom_hx"

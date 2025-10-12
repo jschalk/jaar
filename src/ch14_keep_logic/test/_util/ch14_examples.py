@@ -1,12 +1,7 @@
 from src.ch02_rope_logic.rope import RopeTerm, create_rope_from_labels
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, VoiceName
-from src.ch12_belief_file_toolbox.hubunit import HubUnit, hubunit_shop
+from src.ch14_keep_logic._ref.ch14_semantic_types import BeliefName, VoiceName
 from src.ch14_keep_logic.rivercycle import get_credorledger
-from src.ch14_keep_logic.test._util.ch14_env import (
-    get_chapter_temp_dir,
-    temp_moment_label,
-)
 
 
 def get_nation_texas_rope() -> RopeTerm:
@@ -16,28 +11,17 @@ def get_nation_texas_rope() -> RopeTerm:
     return create_rope_from_labels([naton_str, usa_str, texas_str])
 
 
-def example_yao_hubunit() -> HubUnit:
-    return hubunit_shop(get_chapter_temp_dir(), temp_moment_label(), "Yao")
-
-
-def example_yao_texas_hubunit() -> HubUnit:
-    moment_mstr_dir = get_chapter_temp_dir()
-    return hubunit_shop(
-        moment_mstr_dir, temp_moment_label(), "Yao", get_nation_texas_rope()
-    )
-
-
 def example_yao_credorledger() -> dict[str, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_voice_cred_shares = 7
-    bob_voice_cred_shares = 3
-    zia_voice_cred_shares = 10
+    yao_voice_cred_lumen = 7
+    bob_voice_cred_lumen = 3
+    zia_voice_cred_lumen = 10
     yao_belief = beliefunit_shop(yao_str)
-    yao_belief.add_voiceunit(yao_str, yao_voice_cred_shares)
-    yao_belief.add_voiceunit(bob_str, bob_voice_cred_shares)
-    yao_belief.add_voiceunit(zia_str, zia_voice_cred_shares)
+    yao_belief.add_voiceunit(yao_str, yao_voice_cred_lumen)
+    yao_belief.add_voiceunit(bob_str, bob_voice_cred_lumen)
+    yao_belief.add_voiceunit(zia_str, zia_voice_cred_lumen)
     return get_credorledger(yao_belief)
 
 
@@ -45,13 +29,13 @@ def example_bob_credorledger() -> dict[str, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_voice_cred_shares = 1
-    bob_voice_cred_shares = 7
-    zia_voice_cred_shares = 42
+    yao_voice_cred_lumen = 1
+    bob_voice_cred_lumen = 7
+    zia_voice_cred_lumen = 42
     bob_belief = beliefunit_shop(bob_str)
-    bob_belief.add_voiceunit(yao_str, yao_voice_cred_shares)
-    bob_belief.add_voiceunit(bob_str, bob_voice_cred_shares)
-    bob_belief.add_voiceunit(zia_str, zia_voice_cred_shares)
+    bob_belief.add_voiceunit(yao_str, yao_voice_cred_lumen)
+    bob_belief.add_voiceunit(bob_str, bob_voice_cred_lumen)
+    bob_belief.add_voiceunit(zia_str, zia_voice_cred_lumen)
     return get_credorledger(bob_belief)
 
 
@@ -59,13 +43,13 @@ def example_zia_credorledger() -> dict[str, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_voice_cred_shares = 89
-    bob_voice_cred_shares = 150
-    zia_voice_cred_shares = 61
+    yao_voice_cred_lumen = 89
+    bob_voice_cred_lumen = 150
+    zia_voice_cred_lumen = 61
     zia_belief = beliefunit_shop(zia_str)
-    zia_belief.add_voiceunit(yao_str, yao_voice_cred_shares)
-    zia_belief.add_voiceunit(bob_str, bob_voice_cred_shares)
-    zia_belief.add_voiceunit(zia_str, zia_voice_cred_shares)
+    zia_belief.add_voiceunit(yao_str, yao_voice_cred_lumen)
+    zia_belief.add_voiceunit(bob_str, bob_voice_cred_lumen)
+    zia_belief.add_voiceunit(zia_str, zia_voice_cred_lumen)
     return get_credorledger(zia_belief)
 
 

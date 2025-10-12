@@ -4,17 +4,24 @@ from src.ch02_rope_logic.rope import get_ancestor_ropes, get_first_label_from_ro
 from src.ch03_allot_toolbox.allot import allot_scale
 from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, VoiceUnit
-from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, RopeTerm
-from src.ch12_belief_file_toolbox.hub_tool import (
+from src.ch12_pack_file.packfilehandler import (
+    PackFileHandler,
     open_gut_file,
     open_job_file,
     save_job_file,
 )
-from src.ch12_belief_file_toolbox.hubunit import HubUnit, get_perspective_belief
-from src.ch12_belief_file_toolbox.keep_tool import get_duty_belief
+from src.ch13_belief_listen_logic._ref.ch13_semantic_types import BeliefName, RopeTerm
 from src.ch13_belief_listen_logic.basis_beliefs import (
     create_empty_belief_from_belief,
     create_listen_basis,
+)
+from src.ch13_belief_listen_logic.keep_tool import (
+    get_duty_belief,
+    get_perspective_belief,
+    get_vision_belief,
+    rj_speaker_belief,
+    save_vision_belief,
+    vision_file_exists,
 )
 
 
@@ -38,21 +45,21 @@ def _ingest_perspective_agenda(
     return listener
 
 
-def _allocate_irrational_voice_debt_shares(
+def _allocate_irrational_voice_debt_lumen(
     listener: BeliefUnit, speaker_belief_name: BeliefName
 ) -> BeliefUnit:
     speaker_voiceunit = listener.get_voice(speaker_belief_name)
-    speaker_voice_debt_shares = speaker_voiceunit.voice_debt_shares
-    speaker_voiceunit.add_irrational_voice_debt_shares(speaker_voice_debt_shares)
+    speaker_voice_debt_lumen = speaker_voiceunit.voice_debt_lumen
+    speaker_voiceunit.add_irrational_voice_debt_lumen(speaker_voice_debt_lumen)
     return listener
 
 
-def _allocate_inallocable_voice_debt_shares(
+def _allocate_inallocable_voice_debt_lumen(
     listener: BeliefUnit, speaker_belief_name: BeliefName
 ) -> BeliefUnit:
     speaker_voiceunit = listener.get_voice(speaker_belief_name)
-    speaker_voiceunit.add_inallocable_voice_debt_shares(
-        speaker_voiceunit.voice_debt_shares
+    speaker_voiceunit.add_inallocable_voice_debt_lumen(
+        speaker_voiceunit.voice_debt_lumen
     )
     return listener
 
@@ -120,14 +127,14 @@ def get_debtors_roll(x_duty: BeliefUnit) -> list[VoiceUnit]:
     return [
         x_voiceunit
         for x_voiceunit in x_duty.voices.values()
-        if x_voiceunit.voice_debt_shares != 0
+        if x_voiceunit.voice_debt_lumen != 0
     ]
 
 
 def get_ordered_debtors_roll(x_belief: BeliefUnit) -> list[VoiceUnit]:
     voices_ordered_list = get_debtors_roll(x_belief)
     voices_ordered_list.sort(
-        key=lambda x: (x.voice_debt_shares, x.voice_name), reverse=True
+        key=lambda x: (x.voice_debt_lumen, x.voice_name), reverse=True
     )
     return voices_ordered_list
 
@@ -171,15 +178,15 @@ def listen_to_speaker_agenda(listener: BeliefUnit, speaker: BeliefUnit) -> Belie
         )
     perspective_belief = get_perspective_belief(speaker, listener.belief_name)
     if perspective_belief.rational is False:
-        return _allocate_irrational_voice_debt_shares(listener, speaker.belief_name)
+        return _allocate_irrational_voice_debt_lumen(listener, speaker.belief_name)
     if listener.debtor_respect is None:
-        return _allocate_inallocable_voice_debt_shares(listener, speaker.belief_name)
+        return _allocate_inallocable_voice_debt_lumen(listener, speaker.belief_name)
     if listener.belief_name != speaker.belief_name:
         agenda = generate_perspective_agenda(perspective_belief)
     else:
         agenda = list(perspective_belief.get_all_pledges().values())
     if len(agenda) == 0:
-        return _allocate_inallocable_voice_debt_shares(listener, speaker.belief_name)
+        return _allocate_inallocable_voice_debt_lumen(listener, speaker.belief_name)
     return _ingest_perspective_agenda(listener, agenda)
 
 
@@ -206,23 +213,34 @@ def listen_to_agendas_jobs_into_job(moment_mstr_dir: str, listener_job: BeliefUn
         listen_to_speaker_agenda(listener_job, speaker_job)
 
 
-def listen_to_agendas_duty_vision(listener_vision: BeliefUnit, healer_hubunit: HubUnit):
+def listen_to_agendas_duty_vision(
+    listener_vision: BeliefUnit,
+    healer_packfilehandler: PackFileHandler,
+    healer_keep_rope: RopeTerm,
+):
     listener_id = listener_vision.belief_name
     for x_voiceunit in get_ordered_debtors_roll(listener_vision):
         if x_voiceunit.voice_name == listener_id:
             listener_duty = get_duty_belief(
-                moment_mstr_dir=healer_hubunit.moment_mstr_dir,
-                belief_name=healer_hubunit.belief_name,
-                moment_label=healer_hubunit.moment_label,
-                keep_rope=healer_hubunit.keep_rope,
-                knot=healer_hubunit.knot,
+                moment_mstr_dir=healer_packfilehandler.moment_mstr_dir,
+                belief_name=healer_packfilehandler.belief_name,
+                moment_label=healer_packfilehandler.moment_label,
+                keep_rope=healer_keep_rope,
+                knot=healer_packfilehandler.knot,
                 duty_belief_name=listener_id,
             )
             listen_to_speaker_agenda(listener_vision, listener_duty)
         else:
             speaker_id = x_voiceunit.voice_name
-            healer_name = healer_hubunit.belief_name
-            speaker_vision = healer_hubunit.rj_speaker_belief(healer_name, speaker_id)
+            healer_name = healer_packfilehandler.belief_name
+            speaker_vision = rj_speaker_belief(
+                healer_packfilehandler.moment_mstr_dir,
+                healer_packfilehandler.moment_label,
+                healer_keep_rope,
+                healer_packfilehandler.knot,
+                healer_name,
+                speaker_id,
+            )
             if speaker_vision is None:
                 speaker_vision = create_empty_belief_from_belief(
                     listener_vision, speaker_id
@@ -230,19 +248,30 @@ def listen_to_agendas_duty_vision(listener_vision: BeliefUnit, healer_hubunit: H
             listen_to_speaker_agenda(listener_vision, speaker_vision)
 
 
-def listen_to_facts_duty_vision(new_vision: BeliefUnit, healer_hubunit: HubUnit):
+def listen_to_facts_duty_vision(
+    new_vision: BeliefUnit,
+    healer_packfilehandler: PackFileHandler,
+    healer_keep_rope: RopeTerm,
+):
     duty = get_duty_belief(
-        moment_mstr_dir=healer_hubunit.moment_mstr_dir,
-        belief_name=healer_hubunit.belief_name,
-        moment_label=healer_hubunit.moment_label,
-        keep_rope=healer_hubunit.keep_rope,
-        knot=healer_hubunit.knot,
+        moment_mstr_dir=healer_packfilehandler.moment_mstr_dir,
+        belief_name=healer_packfilehandler.belief_name,
+        moment_label=healer_packfilehandler.moment_label,
+        keep_rope=healer_keep_rope,
+        knot=healer_packfilehandler.knot,
         duty_belief_name=new_vision.belief_name,
     )
     migrate_all_facts(duty, new_vision)
     for x_voiceunit in get_ordered_debtors_roll(new_vision):
         if x_voiceunit.voice_name != new_vision.belief_name:
-            speaker_vision = healer_hubunit.get_vision_belief(x_voiceunit.voice_name)
+            speaker_vision = get_vision_belief(
+                healer_packfilehandler.moment_mstr_dir,
+                healer_packfilehandler.belief_name,
+                healer_packfilehandler.moment_label,
+                healer_keep_rope,
+                healer_packfilehandler.knot,
+                x_voiceunit.voice_name,
+            )
             if speaker_vision is not None:
                 listen_to_speaker_fact(new_vision, speaker_vision)
 
@@ -270,29 +299,33 @@ def listen_to_debtors_roll_jobs_into_job(
 
 
 def listen_to_debtors_roll_duty_vision(
-    healer_hubunit: HubUnit, listener_id: BeliefName
+    healer_packfilehandler: PackFileHandler,
+    listener_id: BeliefName,
+    healer_keep_rope: RopeTerm,
 ) -> BeliefUnit:
     duty = get_duty_belief(
-        moment_mstr_dir=healer_hubunit.moment_mstr_dir,
-        belief_name=healer_hubunit.belief_name,
-        moment_label=healer_hubunit.moment_label,
-        keep_rope=healer_hubunit.keep_rope,
-        knot=healer_hubunit.knot,
+        moment_mstr_dir=healer_packfilehandler.moment_mstr_dir,
+        belief_name=healer_packfilehandler.belief_name,
+        moment_label=healer_packfilehandler.moment_label,
+        keep_rope=healer_keep_rope,
+        knot=healer_packfilehandler.knot,
         duty_belief_name=listener_id,
     )
     new_duty = create_listen_basis(duty)
     if duty.debtor_respect is None:
         return new_duty
-    listen_to_agendas_duty_vision(new_duty, healer_hubunit)
-    listen_to_facts_duty_vision(new_duty, healer_hubunit)
+    listen_to_agendas_duty_vision(new_duty, healer_packfilehandler, healer_keep_rope)
+    listen_to_facts_duty_vision(new_duty, healer_packfilehandler, healer_keep_rope)
     return new_duty
 
 
-def listen_to_belief_visions(listener_hubunit: HubUnit) -> None:
+def listen_to_belief_visions(
+    listener_packfilehandler: PackFileHandler, healer_keep_rope: RopeTerm
+) -> None:
     gut = open_gut_file(
-        listener_hubunit.moment_mstr_dir,
-        listener_hubunit.moment_label,
-        listener_hubunit.belief_name,
+        listener_packfilehandler.moment_mstr_dir,
+        listener_packfilehandler.moment_label,
+        listener_packfilehandler.belief_name,
     )
     new_job = create_listen_basis(gut)
     pre_job_dict = new_job.to_dict()
@@ -300,11 +333,15 @@ def listen_to_belief_visions(listener_hubunit: HubUnit) -> None:
     new_job.cashout()
 
     for x_healer_name, keep_dict in gut._healers_dict.items():
-        listener_id = listener_hubunit.belief_name
-        healer_hubunit = copy_deepcopy(listener_hubunit)
-        healer_hubunit.belief_name = x_healer_name
+        listener_id = listener_packfilehandler.belief_name
+        healer_packfilehandler = copy_deepcopy(listener_packfilehandler)
+        healer_packfilehandler.belief_name = x_healer_name
         fact_state_keep_visions_and_listen(
-            listener_id, keep_dict, healer_hubunit, new_job
+            listener_id,
+            keep_dict,
+            healer_packfilehandler,
+            new_job,
+            healer_keep_rope=healer_keep_rope,
         )
 
     if new_job.to_dict() == pre_job_dict:
@@ -312,26 +349,46 @@ def listen_to_belief_visions(listener_hubunit: HubUnit) -> None:
         _ingest_perspective_agenda(new_job, agenda)
         listen_to_speaker_fact(new_job, gut)
 
-    save_job_file(listener_hubunit.moment_mstr_dir, new_job)
+    save_job_file(listener_packfilehandler.moment_mstr_dir, new_job)
 
 
 def fact_state_keep_visions_and_listen(
     listener_id: BeliefName,
     keep_dict: dict[RopeTerm],
-    healer_hubunit: HubUnit,
+    healer_packfilehandler: PackFileHandler,
     new_job: BeliefUnit,
+    healer_keep_rope: RopeTerm,
 ):
     for keep_path in keep_dict:
-        healer_hubunit.keep_rope = keep_path
-        fact_state_keep_vision_and_listen(listener_id, healer_hubunit, new_job)
+        healer_keep_rope = keep_path
+        fact_state_keep_vision_and_listen(
+            listener_id, healer_packfilehandler, new_job, healer_keep_rope
+        )
 
 
 def fact_state_keep_vision_and_listen(
-    listener_belief_name: BeliefName, healer_hubunit: HubUnit, new_job: BeliefUnit
+    listener_belief_name: BeliefName,
+    healer_packfilehandler: PackFileHandler,
+    new_job: BeliefUnit,
+    healer_keep_rope: RopeTerm,
 ):
     listener_id = listener_belief_name
-    if healer_hubunit.vision_file_exists(listener_id):
-        keep_vision = healer_hubunit.get_vision_belief(listener_id)
+    if vision_file_exists(
+        healer_packfilehandler.moment_mstr_dir,
+        healer_packfilehandler.belief_name,
+        healer_packfilehandler.moment_label,
+        healer_keep_rope,
+        healer_packfilehandler.knot,
+        listener_id,
+    ):
+        keep_vision = get_vision_belief(
+            healer_packfilehandler.moment_mstr_dir,
+            healer_packfilehandler.belief_name,
+            healer_packfilehandler.moment_label,
+            healer_keep_rope,
+            healer_packfilehandler.knot,
+            listener_id,
+        )
     else:
         keep_vision = create_empty_belief_from_belief(new_job, new_job.belief_name)
     listen_to_vision_agenda(new_job, keep_vision)
@@ -348,8 +405,21 @@ def listen_to_vision_agenda(listener: BeliefUnit, vision: BeliefUnit):
     listener.cashout()
 
 
-def create_vision_file_from_duty_file(healer_hubunit: HubUnit, belief_name: BeliefName):
+def create_vision_file_from_duty_file(
+    healer_packfilehandler: PackFileHandler,
+    belief_name: BeliefName,
+    healer_keep_rope: RopeTerm,
+):
     x_vision = listen_to_debtors_roll_duty_vision(
-        healer_hubunit, listener_id=belief_name
+        healer_packfilehandler,
+        listener_id=belief_name,
+        healer_keep_rope=healer_keep_rope,
     )
-    healer_hubunit.save_vision_belief(x_vision)
+    save_vision_belief(
+        healer_packfilehandler.moment_mstr_dir,
+        healer_packfilehandler.belief_name,
+        healer_packfilehandler.moment_label,
+        healer_keep_rope,
+        healer_packfilehandler.knot,
+        x_vision,
+    )

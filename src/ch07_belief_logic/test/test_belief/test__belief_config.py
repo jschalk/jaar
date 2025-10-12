@@ -193,16 +193,16 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         wx.fund_agenda_give,
         wx.credor_pool,
         wx.fund_give,
-        wx.voice_cred_shares,
+        wx.voice_cred_lumen,
         wx.voice_name,
-        wx.voice_debt_shares,
+        wx.voice_debt_lumen,
         wx.fund_agenda_ratio_take,
-        wx.inallocable_voice_debt_shares,
+        wx.inallocable_voice_debt_lumen,
         wx.fund_agenda_ratio_give,
         wx.fund_agenda_take,
         wx.fund_take,
         wx.debtor_pool,
-        wx.irrational_voice_debt_shares,
+        wx.irrational_voice_debt_lumen,
     }
     assert belief_planunit_args == {
         wx.moment_label,
@@ -349,13 +349,13 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrmemb, jv, wx.fund_take) == "REAL"
     assert g_popcashout(cfig, blrmemb, jv, wx.fund_take) == True
 
-    assert g_class_type(cfig, blrmemb, jv, wx.group_cred_shares) == "float"
-    assert g_sqlitetype(cfig, blrmemb, jv, wx.group_cred_shares) == "REAL"
-    assert g_popcashout(cfig, blrmemb, jv, wx.group_cred_shares) == False
+    assert g_class_type(cfig, blrmemb, jv, wx.group_cred_lumen) == "float"
+    assert g_sqlitetype(cfig, blrmemb, jv, wx.group_cred_lumen) == "REAL"
+    assert g_popcashout(cfig, blrmemb, jv, wx.group_cred_lumen) == False
 
-    assert g_class_type(cfig, blrmemb, jv, wx.group_debt_shares) == "float"
-    assert g_sqlitetype(cfig, blrmemb, jv, wx.group_debt_shares) == "REAL"
-    assert g_popcashout(cfig, blrmemb, jv, wx.group_debt_shares) == False
+    assert g_class_type(cfig, blrmemb, jv, wx.group_debt_lumen) == "float"
+    assert g_sqlitetype(cfig, blrmemb, jv, wx.group_debt_lumen) == "REAL"
+    assert g_popcashout(cfig, blrmemb, jv, wx.group_debt_lumen) == False
 
     assert g_class_type(cfig, blrpern, jk, wx.voice_name) == wx.NameTerm
     assert g_sqlitetype(cfig, blrpern, jk, wx.voice_name) == "TEXT"
@@ -393,21 +393,21 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrpern, jv, wx.fund_take) == "REAL"
     assert g_popcashout(cfig, blrpern, jv, wx.fund_take) == True
 
-    assert g_class_type(cfig, blrpern, jv, wx.inallocable_voice_debt_shares) == "float"
-    assert g_sqlitetype(cfig, blrpern, jv, wx.inallocable_voice_debt_shares) == "REAL"
-    assert g_popcashout(cfig, blrpern, jv, wx.inallocable_voice_debt_shares) == True
+    assert g_class_type(cfig, blrpern, jv, wx.inallocable_voice_debt_lumen) == "float"
+    assert g_sqlitetype(cfig, blrpern, jv, wx.inallocable_voice_debt_lumen) == "REAL"
+    assert g_popcashout(cfig, blrpern, jv, wx.inallocable_voice_debt_lumen) == True
 
-    assert g_class_type(cfig, blrpern, jv, wx.irrational_voice_debt_shares) == "float"
-    assert g_sqlitetype(cfig, blrpern, jv, wx.irrational_voice_debt_shares) == "REAL"
-    assert g_popcashout(cfig, blrpern, jv, wx.irrational_voice_debt_shares) == True
+    assert g_class_type(cfig, blrpern, jv, wx.irrational_voice_debt_lumen) == "float"
+    assert g_sqlitetype(cfig, blrpern, jv, wx.irrational_voice_debt_lumen) == "REAL"
+    assert g_popcashout(cfig, blrpern, jv, wx.irrational_voice_debt_lumen) == True
 
-    assert g_class_type(cfig, blrpern, jv, wx.voice_cred_shares) == "float"
-    assert g_sqlitetype(cfig, blrpern, jv, wx.voice_cred_shares) == "REAL"
-    assert g_popcashout(cfig, blrpern, jv, wx.voice_cred_shares) == False
+    assert g_class_type(cfig, blrpern, jv, wx.voice_cred_lumen) == "float"
+    assert g_sqlitetype(cfig, blrpern, jv, wx.voice_cred_lumen) == "REAL"
+    assert g_popcashout(cfig, blrpern, jv, wx.voice_cred_lumen) == False
 
-    assert g_class_type(cfig, blrpern, jv, wx.voice_debt_shares) == "float"
-    assert g_sqlitetype(cfig, blrpern, jv, wx.voice_debt_shares) == "REAL"
-    assert g_popcashout(cfig, blrpern, jv, wx.voice_debt_shares) == False
+    assert g_class_type(cfig, blrpern, jv, wx.voice_debt_lumen) == "float"
+    assert g_sqlitetype(cfig, blrpern, jv, wx.voice_debt_lumen) == "REAL"
+    assert g_popcashout(cfig, blrpern, jv, wx.voice_debt_lumen) == False
 
     assert g_class_type(cfig, blrgrou, jk, wx.group_title) == "TitleTerm"
     assert g_sqlitetype(cfig, blrgrou, jk, wx.group_title) == "TEXT"
@@ -802,12 +802,12 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(wx.fund_agenda_take) == "float"
     assert belief_calc_args_type_dict.get(wx.fund_give) == "float"
     assert belief_calc_args_type_dict.get(wx.fund_take) == "float"
-    assert belief_calc_args_type_dict.get(wx.group_cred_shares) == "int"
-    assert belief_calc_args_type_dict.get(wx.group_debt_shares) == "int"
-    assert belief_calc_args_type_dict.get(wx.inallocable_voice_debt_shares) == "float"
-    assert belief_calc_args_type_dict.get(wx.irrational_voice_debt_shares) == "float"
-    assert belief_calc_args_type_dict.get(wx.voice_cred_shares) == "float"
-    assert belief_calc_args_type_dict.get(wx.voice_debt_shares) == "float"
+    assert belief_calc_args_type_dict.get(wx.group_cred_lumen) == "int"
+    assert belief_calc_args_type_dict.get(wx.group_debt_lumen) == "int"
+    assert belief_calc_args_type_dict.get(wx.inallocable_voice_debt_lumen) == "float"
+    assert belief_calc_args_type_dict.get(wx.irrational_voice_debt_lumen) == "float"
+    assert belief_calc_args_type_dict.get(wx.voice_cred_lumen) == "float"
+    assert belief_calc_args_type_dict.get(wx.voice_debt_lumen) == "float"
     assert belief_calc_args_type_dict.get(wx.addin) == "float"
     assert belief_calc_args_type_dict.get(wx.begin) == "float"
     assert belief_calc_args_type_dict.get(wx.close) == "float"
