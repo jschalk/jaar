@@ -312,7 +312,7 @@ def test_rope_get_parent_rope_ReturnsObj_Scenario1():
 
 
 @dataclass
-class TempTestingObj:
+class TempFindReplaceRopeObj:
     x_rope: RopeTerm = ""
 
     def find_replace_rope(self, old_rope, new_rope):
@@ -326,7 +326,7 @@ def test_rope_find_replace_rope_key_dict_ReturnsDict_Scenario1():
     # ESTABLISH
     x_s = default_knot_if_None()
     old_seasons_rope = f"{root_rope()}{x_s}casa{x_s}seasons"
-    old_dict_x = {old_seasons_rope: TempTestingObj(old_seasons_rope)}
+    old_dict_x = {old_seasons_rope: TempFindReplaceRopeObj(old_seasons_rope)}
     assert old_dict_x.get(old_seasons_rope) is not None
 
     # WHEN

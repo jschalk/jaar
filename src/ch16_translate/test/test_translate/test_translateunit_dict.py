@@ -7,20 +7,11 @@ from src.ch16_translate.test._util.ch16_examples import (
 )
 from src.ch16_translate.translate_config import default_unknown_str_if_None
 from src.ch16_translate.translate_main import (
+    _get_rid_of_translate_core_keys,
     get_translateunit_from_dict,
-    get_translateunit_from_json,
     translateunit_shop,
 )
 from src.ref.ch16_keywords import Ch16Keywords as wx
-
-
-def _get_rid_of_translate_core_keys(map_dict: dict) -> dict:
-    map_dict.pop(wx.event_int)
-    map_dict.pop(wx.face_name)
-    map_dict.pop(wx.otx_knot)
-    map_dict.pop(wx.inx_knot)
-    map_dict.pop(wx.unknown_str)
-    return map_dict
 
 
 def test_TranslateUnit_to_dict_ReturnsObj_Scenario0():

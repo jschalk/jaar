@@ -71,10 +71,9 @@ def test_Chapters_CheckStringMetricsFromEveryFile():
     excluded_functions = {
         "_get_inx_label",
         "_get_inx_value",
-        "_get_rid_of_translate_core_keys",
         "_is_inx_knot_inclusion_correct",
         "_is_otx_knot_inclusion_correct",
-        "_unknown_str_in_otx2inx",
+        "_unknown_str_in_otx2inx",  # RopeMap method overrides MapCore method
         "del_label",
         "del_otx2inx",
         "env_dir_setup_cleanup",
@@ -87,7 +86,7 @@ def test_Chapters_CheckStringMetricsFromEveryFile():
         "otx_exists",
         "otx2inx_exists",
         "reveal_inx",
-        "set_all_otx2inx",
+        "set_all_otx2inx",  # RopeMap method overrides MapCore method
         "set_knot",
         "set_label",
         "set_otx2inx",
