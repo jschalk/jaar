@@ -6,13 +6,12 @@ from src.ch01_data_toolbox.dict_toolbox import get_empty_list_if_None
 from src.ch01_data_toolbox.file_toolbox import (
     create_path,
     delete_dir,
+    get_dict_from_json,
     get_dir_file_strs,
     get_integer_filenames,
     get_json_filename,
     get_max_file_number,
-    open_file,
     open_json,
-    save_file,
     save_json,
     set_dir,
 )
@@ -21,11 +20,11 @@ from src.ch03_allot_toolbox.allot import default_grain_num_if_None, validate_poo
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
-    get_beliefunit_from_json,
+    get_beliefunit_from_dict,
 )
 from src.ch09_belief_atom_logic.atom_main import (
     BeliefAtom,
-    get_beliefatom_from_json,
+    get_beliefatom_from_dict,
     modify_belief_with_beliefatom,
 )
 from src.ch10_pack_logic.pack import (
@@ -63,12 +62,12 @@ from src.ch12_pack_file._ref.ch12_semantic_types import (
 def save_belief_file(
     dest_dir: str, filename: str = None, beliefunit: BeliefUnit = None
 ):
-    save_file(dest_dir, filename, beliefunit.get_json())
+    save_json(dest_dir, filename, beliefunit.to_dict())
 
 
 def open_belief_file(dest_dir: str, filename: str = None) -> BeliefUnit:
     if os_path_exists(create_path(dest_dir, filename)):
-        return get_beliefunit_from_json(open_file(dest_dir, filename))
+        return get_beliefunit_from_dict(open_json(dest_dir, filename))
 
 
 def save_gut_file(moment_mstr_dir: str, beliefunit: BeliefUnit):
@@ -202,7 +201,7 @@ def save_arbitrary_beliefevent(
     x_beliefevent_path = create_beliefevent_path(
         moment_mstr_dir, moment_label, belief_name, event_int
     )
-    save_file(x_beliefevent_path, None, x_beliefunit.get_json())
+    save_json(x_beliefevent_path, None, x_beliefunit.to_dict())
     return x_beliefevent_path
 
 
@@ -393,10 +392,10 @@ class PackFileHandler:
         return create_path(self._atoms_dir, self.atom_filename(atom_number))
 
     def _save_valid_atom_file(self, x_atom: BeliefAtom, file_number: int):
-        save_file(
+        save_json(
             self._atoms_dir,
             self.atom_filename(file_number),
-            x_atom.get_json(),
+            x_atom.to_dict(),
             replace=False,
         )
         return file_number
@@ -418,8 +417,9 @@ class PackFileHandler:
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
 
             for x_atom_filename in sorted_atom_filenames:
-                x_file_str = x_atom_files.get(x_atom_filename)
-                x_atom = get_beliefatom_from_json(x_file_str)
+                x_json_str = x_atom_files.get(x_atom_filename)
+                x_dict = get_dict_from_json(x_json_str)
+                x_atom = get_beliefatom_from_dict(x_dict)
                 modify_belief_with_beliefatom(x_belief, x_atom)
         return x_belief
 

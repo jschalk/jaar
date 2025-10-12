@@ -6,7 +6,6 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_dict_from_json,
     get_empty_dict_if_None,
     get_False_if_None,
-    get_json_from_dict,
 )
 from src.ch02_rope_logic.rope import (
     all_ropes_between,
@@ -328,7 +327,7 @@ class BeliefUnit:
         fund_agenda_take: float,
     ):
         x_voiceunit = self.get_voice(voiceunit_voice_name)
-        x_voiceunit.add_fund_give_take(
+        x_voiceunit.add_voice_fund_give_take(
             fund_give=fund_give,
             fund_take=fund_take,
             fund_agenda_give=fund_agenda_give,
@@ -1405,6 +1404,8 @@ reason_case:    {reason_case}"""
         return x_dict
 
     def to_dict(self) -> dict[str, str]:
+        """Returns dict that is serializable to JSON."""
+
         x_dict = {
             "voices": self.get_voiceunits_dict(),
             "tally": self.tally,
@@ -1426,9 +1427,6 @@ reason_case:    {reason_case}"""
             x_dict["last_pack_id"] = self.last_pack_id
 
         return x_dict
-
-    def get_json(self) -> str:
-        return get_json_from_dict(self.to_dict())
 
     def set_dominate_pledge_plan(self, plan_kid: PlanUnit):
         plan_kid.pledge = True
@@ -1492,10 +1490,6 @@ def beliefunit_shop(
     x_belief.set_max_tree_traverse(3)
     x_belief.rational = False
     return x_belief
-
-
-def get_beliefunit_from_json(x_belief_json: str) -> BeliefUnit:
-    return get_beliefunit_from_dict(get_dict_from_json(x_belief_json))
 
 
 def get_beliefunit_from_dict(belief_dict: dict) -> BeliefUnit:

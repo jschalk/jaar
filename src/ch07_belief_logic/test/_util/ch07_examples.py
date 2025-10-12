@@ -13,8 +13,8 @@ from src.ch07_belief_logic.belief_main import (
 # from src.ch07_belief_logic.test._util.ch07_env import get_belief_examples_dir as env_dir
 # from src.ch07_belief_logic.test._util.example_beliefs import beliefunit_v001, beliefunit_v002
 
-# save_file(env_dir(), "example_belief3.json", beliefunit_v001().get_json())
-# save_file(env_dir(), "example_belief4.json", beliefunit_v002().get_json())
+# save_json(env_dir(), "example_belief3.json", beliefunit_v001().to_dict())
+# save_json(env_dir(), "example_belief4.json", beliefunit_v002().to_dict())
 
 
 def beliefunit_v001() -> BeliefUnit:

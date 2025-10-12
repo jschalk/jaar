@@ -3,7 +3,6 @@ from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch16_translate.map import (
     TitleMap,
     get_titlemap_from_dict,
-    get_titlemap_from_json,
     inherit_titlemap,
     titlemap_shop,
 )
@@ -329,46 +328,6 @@ def test_TitleMap_to_dict_ReturnsObj():
     assert x_titlemap.to_dict() == x2_rope_map_dict
 
 
-def test_TitleMap_get_json_ReturnsObj():
-    # ESTABLISH
-    sue_str = "Sue"
-    clean_otx = "clean"
-    clean_inx = "propre"
-    casa_otx = "casa1"
-    casa_inx = "casa2"
-    event7 = 7
-    slash_otx_knot = "/"
-    x_titlemap = titlemap_shop(sue_str, otx_knot=slash_otx_knot)
-    x1_rope_map_json = f"""{{
-  "{wx.event_int}": 0, 
-  "{wx.face_name}": "{sue_str}", 
-  "{wx.inx_knot}": "{x_titlemap.inx_knot}", 
-  "{wx.otx2inx}": {{}}, 
-  "{wx.otx_knot}": "{x_titlemap.otx_knot}", 
-  "{wx.unknown_str}": "{x_titlemap.unknown_str}"
-}}"""
-    # print(x1_rope_map_json)
-    # print(x_titlemap.get_json())
-    assert x_titlemap.get_json() == x1_rope_map_json
-
-    # WHEN
-    x_titlemap.set_otx2inx(clean_otx, clean_inx)
-    x_titlemap.event_int = event7
-    # THEN
-    x2_rope_map_json = f"""{{
-  "{wx.event_int}": {event7}, 
-  "{wx.face_name}": "{sue_str}", 
-  "{wx.inx_knot}": "{x_titlemap.inx_knot}", 
-  "{wx.otx2inx}": {{"{clean_otx}": "{clean_inx}"}}, 
-  "{wx.otx_knot}": "{x_titlemap.otx_knot}", 
-  "{wx.unknown_str}": "{x_titlemap.unknown_str}"
-}}"""
-    print(x2_rope_map_json)
-    print("")
-    print(x_titlemap.get_json())
-    assert x_titlemap.get_json() == x2_rope_map_json
-
-
 def test_get_titlemap_from_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
@@ -387,21 +346,6 @@ def test_get_titlemap_from_dict_ReturnsObj():
     assert gen_titlemap.event_int == x_titlemap.event_int
     assert gen_titlemap.event_int == event7
     assert gen_titlemap == x_titlemap
-
-
-def test_get_titlemap_from_json_ReturnsObj():
-    # ESTABLISH
-    clean_otx = "clean"
-    clean_inx = "propre"
-    slash_otx_knot = "/"
-    x_titlemap = titlemap_shop(slash_otx_knot)
-    x_titlemap.set_otx2inx(clean_otx, clean_inx)
-
-    # WHEN
-    x_titlemap = get_titlemap_from_json(x_titlemap.get_json())
-
-    # THEN
-    assert x_titlemap == x_titlemap
 
 
 def test_TitleMap_is_inx_knot_inclusion_correct_ReturnsObj():

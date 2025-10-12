@@ -209,59 +209,18 @@ def test_RiverGrade_to_dict_ReturnsObj():
     # THEN
     assert rivergrade_dict.get(wx.moment_label) == a23_str
     assert rivergrade_dict.get(wx.healer_name) == yao_str
-    assert rivergrade_dict.get("keep_rope") == x_keep_rope
-    assert rivergrade_dict.get("tax_bill_amount") == x_tax_bill_amount
-    assert rivergrade_dict.get("grant_amount") == x_grant_amount
-    assert rivergrade_dict.get("debtor_rank_num") == x_debtor_rank_num
-    assert rivergrade_dict.get("credor_rank_num") == x_credor_rank_num
-    assert rivergrade_dict.get("tax_paid_amount") == x_tax_paid_amount
-    assert rivergrade_dict.get("tax_paid_bool") == x_tax_paid_bool
-    assert rivergrade_dict.get("tax_paid_rank_num") == x_tax_paid_rank_num
-    assert rivergrade_dict.get("tax_paid_rank_percent") == x_tax_paid_rank_percent
-    assert rivergrade_dict.get("debtor_count") == x_debtor_count
-    assert rivergrade_dict.get("credor_count") == x_credor_count
-    assert rivergrade_dict.get("debtor_rank_percent") == x_debtor_rank_percent
-    assert rivergrade_dict.get("credor_rank_percent") == x_credor_rank_percent
-    assert rivergrade_dict.get("rewards_count") == x_rewards_count
-    assert rivergrade_dict.get("rewards_magnitude") == x_rewards_magnitude
-
-
-def test_RiverGrade_get_json_ReturnsObj():
-    # ESTABLISH
-    bob_str = "Bob"
-    yao_str = "Yao"
-    a23_str = temp_moment_label()
-    x_keep_rope = None
-    ten_int = 10
-    x_debtor_count = 101
-    x_credor_count = 103
-
-    x_rivergrade = rivergrade_shop(
-        a23_str, yao_str, x_keep_rope, bob_str, ten_int, x_debtor_count, x_credor_count
-    )
-
-    # WHEN
-    rivergrade_json = x_rivergrade.get_json()
-
-    # THEN
-    static_json = """{
-  "credor_count": 103, 
-  "credor_rank_num": null, 
-  "credor_rank_percent": null, 
-  "debtor_count": 101, 
-  "debtor_rank_num": null, 
-  "debtor_rank_percent": null, 
-  "grant_amount": null, 
-  "healer_name": "Yao", 
-  "keep_rope": null, 
-  "moment_label": "ex_keep04", 
-  "rewards_count": null, 
-  "rewards_magnitude": null, 
-  "tax_bill_amount": null, 
-  "tax_paid_amount": null, 
-  "tax_paid_bool": null, 
-  "tax_paid_rank_num": null, 
-  "tax_paid_rank_percent": null
-}"""
-
-    assert rivergrade_json == static_json
+    assert rivergrade_dict.get(wx.keep_rope) == x_keep_rope
+    assert rivergrade_dict.get(wx.tax_bill_amount) == x_tax_bill_amount
+    assert rivergrade_dict.get(wx.grant_amount) == x_grant_amount
+    assert rivergrade_dict.get(wx.debtor_rank_num) == x_debtor_rank_num
+    assert rivergrade_dict.get(wx.credor_rank_num) == x_credor_rank_num
+    assert rivergrade_dict.get(wx.tax_paid_amount) == x_tax_paid_amount
+    assert rivergrade_dict.get(wx.tax_paid_bool) == x_tax_paid_bool
+    assert rivergrade_dict.get(wx.tax_paid_rank_num) == x_tax_paid_rank_num
+    assert rivergrade_dict.get(wx.tax_paid_rank_percent) == x_tax_paid_rank_percent
+    assert rivergrade_dict.get(wx.debtor_count) == x_debtor_count
+    assert rivergrade_dict.get(wx.credor_count) == x_credor_count
+    assert rivergrade_dict.get(wx.debtor_rank_percent) == x_debtor_rank_percent
+    assert rivergrade_dict.get(wx.credor_rank_percent) == x_credor_rank_percent
+    assert rivergrade_dict.get(wx.rewards_count) == x_rewards_count
+    assert rivergrade_dict.get(wx.rewards_magnitude) == x_rewards_magnitude

@@ -14,6 +14,8 @@ class PartyUnit:
     solo: bool = None
 
     def to_dict(self) -> dict[str,]:
+        """Returns dict that is serializable to JSON."""
+
         x_dict = {"party_title": self.party_title}
         if self.solo is True:
             x_dict["solo"] = self.solo
@@ -44,6 +46,8 @@ class LaborUnit:
     _partys: dict[GroupTitle, PartyUnit] = None
 
     def to_dict(self) -> dict[str, str]:
+        """Returns dict that is serializable to JSON."""
+
         partys_dict = {
             party_title: partyunit.to_dict()
             for party_title, partyunit in self._partys.items()

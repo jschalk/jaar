@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
-from src.ch01_data_toolbox.file_toolbox import create_path, open_file, save_file
-from src.ch07_belief_logic.belief_main import beliefunit_shop, get_beliefunit_from_json
-from src.ch10_pack_logic.pack import get_packunit_from_json, packunit_shop
+from src.ch01_data_toolbox.file_toolbox import create_path, open_json, save_json
+from src.ch07_belief_logic.belief_main import beliefunit_shop, get_beliefunit_from_dict
+from src.ch10_pack_logic.pack import get_packunit_from_dict, packunit_shop
 from src.ch12_pack_file._ref.ch12_path import (
     create_belief_event_dir_path,
     create_event_all_pack_path,
@@ -56,8 +56,8 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_belief_jso
     e7_all_pack_path = create_event_all_pack_path(
         moment_mstr_dir, a23_str, bob_inx, event7
     )
-    save_file(e3_all_pack_path, None, a23_bob_e3_pack.get_json())
-    save_file(e7_all_pack_path, None, a23_bob_e7_pack.get_json())
+    save_json(e3_all_pack_path, None, a23_bob_e3_pack.get_serializable_dict())
+    save_json(e7_all_pack_path, None, a23_bob_e7_pack.get_serializable_dict())
     assert os_path_exists(e3_all_pack_path)
     assert os_path_exists(e7_all_pack_path)
     belief_filename = "belief.json"
@@ -79,8 +79,8 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_belief_jso
     expected_e7_bob_belief.add_voiceunit(bob_inx, credit77)
     expected_e7_bob_belief.add_voiceunit(sue_inx, credit88)
     expected_e7_bob_belief.add_voiceunit(yao_inx, credit44)
-    generated_e3_belief = get_beliefunit_from_json(open_file(e3_belief_path))
-    generated_e7_belief = get_beliefunit_from_json(open_file(e7_belief_path))
+    generated_e3_belief = get_beliefunit_from_dict(open_json(e3_belief_path))
+    generated_e7_belief = get_beliefunit_from_dict(open_json(e7_belief_path))
     assert generated_e3_belief.voices == expected_e3_bob_belief.voices
     assert generated_e3_belief == expected_e3_bob_belief
     assert generated_e3_belief.to_dict() == expected_e3_bob_belief.to_dict()
@@ -122,8 +122,8 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_expressed_
     a23_bob_e7_all_pack_path = create_event_all_pack_path(
         moment_mstr_dir, a23_str, bob_inx, event7
     )
-    save_file(a23_bob_e3_all_pack_path, None, a23_bob_e3_pack.get_json())
-    save_file(a23_bob_e7_all_pack_path, None, a23_bob_e7_pack.get_json())
+    save_json(a23_bob_e3_all_pack_path, None, a23_bob_e3_pack.get_serializable_dict())
+    save_json(a23_bob_e7_all_pack_path, None, a23_bob_e7_pack.get_serializable_dict())
     e3_expressed_pack_path = create_event_expressed_pack_path(
         moment_mstr_dir, a23_str, bob_inx, event3
     )
@@ -141,8 +141,8 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_expressed_
     # THEN
     assert os_path_exists(e3_expressed_pack_path)
     assert os_path_exists(e7_expressed_pack_path)
-    gen_e3_express_pack = get_packunit_from_json(open_file(e3_expressed_pack_path))
-    gen_e7_express_pack = get_packunit_from_json(open_file(e7_expressed_pack_path))
+    gen_e3_express_pack = get_packunit_from_dict(open_json(e3_expressed_pack_path))
+    gen_e7_express_pack = get_packunit_from_dict(open_json(e7_expressed_pack_path))
     expected_e3_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
     expected_e7_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)
     expected_e3_bob_pack.add_p_beliefatom(

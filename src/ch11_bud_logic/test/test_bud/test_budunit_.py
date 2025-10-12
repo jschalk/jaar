@@ -226,32 +226,6 @@ def test_BudUnit_to_dict_ReturnsObjWith_bud_voice_net():
     }
 
 
-def test_BudUnit_get_json_ReturnsObj():
-    # ESTABLISH
-    t4_bud_time = 4
-    t4_quota = 55
-    t4_celldepth = 11
-    t4_bud_voice_nets = {"Sue": -77}
-    t4_budunit = budunit_shop(
-        t4_bud_time, t4_quota, t4_bud_voice_nets, celldepth=t4_celldepth
-    )
-    t4_budunit._magnitude = 67
-
-    # WHEN
-    t4_json = t4_budunit.get_json()
-
-    # THEN
-    static_t4_json = """{
-  "bud_time": 4, 
-  "bud_voice_nets": {"Sue": -77}, 
-  "celldepth": 11, 
-  "magnitude": 67, 
-  "quota": 55
-}"""
-    print(f"{t4_json=}")
-    assert t4_json == static_t4_json
-
-
 def test_get_budunit_from_dict_ReturnsObj_Sccenario0():
     # ESTABLISH
     t4_bud_time = 4
@@ -297,23 +271,4 @@ def test_get_budunit_from_dict_ReturnsObj_Scenario1():
     assert x_budunit._magnitude == t4_magnitude
     assert x_budunit._bud_voice_nets == t4_bud_voice_nets
     assert x_budunit.celldepth == t4_celldepth
-    assert x_budunit == t4_budunit
-
-
-def test_get_budunit_from_json_ReturnsObj():
-    # ESTABLISH
-    t4_bud_time = 4
-    t4_quota = 55
-    t4_bud_voice_nets = {"Sue": -57}
-    t4_budunit = budunit_shop(t4_bud_time, t4_quota, t4_bud_voice_nets)
-    t4_json = t4_budunit.get_json()
-
-    # WHEN
-    x_budunit = get_budunit_from_json(t4_json)
-
-    # THEN
-    assert x_budunit
-    assert x_budunit.bud_time == t4_bud_time
-    assert x_budunit.quota == t4_quota
-    assert x_budunit._bud_voice_nets == t4_bud_voice_nets
     assert x_budunit == t4_budunit

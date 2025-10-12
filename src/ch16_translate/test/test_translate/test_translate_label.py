@@ -331,45 +331,6 @@ def test_LabelMap_to_dict_ReturnsObj():
     assert x_labelmap.to_dict() == x2_rope_map_dict
 
 
-def test_LabelMap_get_json_ReturnsObj():
-    # ESTABLISH
-    sue_str = "Sue"
-    clean_otx = "clean"
-    clean_inx = "propre"
-    casa_otx = "casa1"
-    casa_inx = "casa2"
-    slash_otx_knot = "/"
-    x_labelmap = labelmap_shop(sue_str, otx_knot=slash_otx_knot)
-    x1_rope_map_json = f"""{{
-  "{wx.event_int}": 0, 
-  "{wx.face_name}": "{sue_str}", 
-  "{wx.inx_knot}": "{x_labelmap.inx_knot}", 
-  "{wx.otx2inx}": {{}}, 
-  "{wx.otx_knot}": "{x_labelmap.otx_knot}", 
-  "{wx.unknown_str}": "{x_labelmap.unknown_str}"
-}}"""
-    # print(f"           {x1_rope_map_json=}")
-    # print(f"{x_labelmap.get_json()=}")
-    assert x_labelmap.get_json() == x1_rope_map_json
-
-    # WHEN
-    event7 = 7
-    x_labelmap.set_otx2inx(clean_otx, clean_inx)
-    x_labelmap.event_int = event7
-    # THEN
-    x2_rope_map_json = f"""{{
-  "{wx.event_int}": {event7}, 
-  "{wx.face_name}": "{sue_str}", 
-  "{wx.inx_knot}": "{x_labelmap.inx_knot}", 
-  "{wx.otx2inx}": {{"{clean_otx}": "{clean_inx}"}}, 
-  "{wx.otx_knot}": "{x_labelmap.otx_knot}", 
-  "{wx.unknown_str}": "{x_labelmap.unknown_str}"
-}}"""
-    print(f"           {x2_rope_map_json=}")
-    print(f"{x_labelmap.get_json()=}")
-    assert x_labelmap.get_json() == x2_rope_map_json
-
-
 def test_get_labelmap_from_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
@@ -388,21 +349,6 @@ def test_get_labelmap_from_dict_ReturnsObj():
     assert gen_labelmap.event_int == x_labelmap.event_int
     assert gen_labelmap.event_int == event7
     assert gen_labelmap == x_labelmap
-
-
-def test_get_labelmap_from_json_ReturnsObj():
-    # ESTABLISH
-    clean_otx = "clean"
-    clean_inx = "propre"
-    slash_otx_knot = "/"
-    x_labelmap = labelmap_shop(slash_otx_knot)
-    x_labelmap.set_otx2inx(clean_otx, clean_inx)
-
-    # WHEN
-    x_labelmap = get_labelmap_from_json(x_labelmap.get_json())
-
-    # THEN
-    assert x_labelmap == x_labelmap
 
 
 def test_LabelMap_is_inx_knot_inclusion_correct_ReturnsObj():

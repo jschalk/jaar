@@ -180,6 +180,8 @@ class WorldUnit:
         create_kpi_csvs(self.get_world_db_path(), self.output_dir)
 
     def to_dict(self) -> dict:
+        """Returns dict that is serializable to JSON."""
+
         return {
             "world_name": self.world_name,
             "world_time_reason_upper": self.world_time_reason_upper,

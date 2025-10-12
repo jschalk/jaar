@@ -4,7 +4,6 @@ from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch16_translate.map import (
     NameMap,
     get_namemap_from_dict,
-    get_namemap_from_json,
     inherit_namemap,
     namemap_shop,
 )
@@ -334,45 +333,6 @@ def test_NameMap_to_dict_ReturnsObj():
     assert x_namemap.to_dict() == x2_rope_map_dict
 
 
-def test_NameMap_get_json_ReturnsObj():
-    # ESTABLISH
-    sue_str = "Sue"
-    clean_otx = "clean"
-    clean_inx = "propre"
-    casa_otx = "casa1"
-    casa_inx = "casa2"
-    event7 = 7
-    slash_otx_knot = "/"
-    x_namemap = namemap_shop(sue_str, otx_knot=slash_otx_knot)
-    x1_rope_map_json = f"""{{
-  "{wx.event_int}": 0, 
-  "{wx.face_name}": "{sue_str}", 
-  "{wx.inx_knot}": "{x_namemap.inx_knot}", 
-  "{wx.otx2inx}": {{}}, 
-  "{wx.otx_knot}": "{x_namemap.otx_knot}", 
-  "{wx.unknown_str}": "{x_namemap.unknown_str}"
-}}"""
-    # print(f"           {x1_rope_map_json=}")
-    # print(f"{x_namemap.get_json()=}")
-    assert x_namemap.get_json() == x1_rope_map_json
-
-    # WHEN
-    x_namemap.set_otx2inx(clean_otx, clean_inx)
-    x_namemap.event_int = event7
-    # THEN
-    x2_rope_map_json = f"""{{
-  "{wx.event_int}": {event7}, 
-  "{wx.face_name}": "{sue_str}", 
-  "{wx.inx_knot}": "{x_namemap.inx_knot}", 
-  "{wx.otx2inx}": {{"{clean_otx}": "{clean_inx}"}}, 
-  "{wx.otx_knot}": "{x_namemap.otx_knot}", 
-  "{wx.unknown_str}": "{x_namemap.unknown_str}"
-}}"""
-    print(f"           {x2_rope_map_json=}")
-    print(f"{x_namemap.get_json()=}")
-    assert x_namemap.get_json() == x2_rope_map_json
-
-
 def test_get_namemap_from_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
@@ -391,21 +351,6 @@ def test_get_namemap_from_dict_ReturnsObj():
     assert gen_namemap.event_int == x_namemap.event_int
     assert gen_namemap.event_int == event7
     assert gen_namemap == x_namemap
-
-
-def test_get_namemap_from_json_ReturnsObj():
-    # ESTABLISH
-    clean_otx = "clean"
-    clean_inx = "propre"
-    slash_otx_knot = "/"
-    x_namemap = namemap_shop(slash_otx_knot)
-    x_namemap.set_otx2inx(clean_otx, clean_inx)
-
-    # WHEN
-    x_namemap = get_namemap_from_json(x_namemap.get_json())
-
-    # THEN
-    assert x_namemap == x_namemap
 
 
 def test_NameMap_is_inx_knot_inclusion_correct_ReturnsObj():

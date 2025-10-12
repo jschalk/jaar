@@ -183,46 +183,6 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_WithMoreParameters():
     assert len(x_cell_dict) == 11
 
 
-def test_CellUnit_get_json_ReturnsObj():
-    # ESTABLISH
-    yao_str = "Yao"
-    bob_str = "Bob"
-    sue_str = "Sue"
-    bob_sue_ancestors = [bob_str, sue_str]
-    bob_sue_event7 = 7
-    bob_sue_bud_belief = yao_str
-    bob_sue_celldepth3 = 3
-    bob_sue_money_grain2 = 2
-    bob_sue_quota300 = 300
-    clean_fact = clean_factunit()
-    dirty_fact = dirty_factunit()
-    sky_blue_fact = sky_blue_factunit()
-    bob_sue_beliefevent_factunits = {clean_fact.fact_context: clean_fact}
-    bob_sue_found_factunits = {dirty_fact.fact_context: dirty_fact}
-    bob_sue_boss_factunits = {sky_blue_fact.fact_context: sky_blue_fact}
-    bob_sue_belief = beliefunit_shop(bob_sue_bud_belief)
-    bob_sue_belief.add_voiceunit(sue_str)
-    x_cellunit = cellunit_shop(
-        bob_sue_bud_belief,
-        bob_sue_ancestors,
-        bob_sue_event7,
-        bob_sue_celldepth3,
-        bob_sue_money_grain2,
-        bob_sue_quota300,
-        bob_sue_belief,
-        bob_sue_beliefevent_factunits,
-        bob_sue_found_factunits,
-        bob_sue_boss_factunits,
-    )
-
-    # WHEN
-    x_cell_json = x_cellunit.get_json()
-
-    # THEN
-    # sanity check with brittle test that is changed often.
-    assert len(x_cell_json) == 1141
-
-
 def test_cellunit_get_from_dict_ReturnsObj_Scenario0_NoParameters():
     # ESTABLISH
     yao_str = "Yao"

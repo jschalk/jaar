@@ -4,11 +4,11 @@ from src.ch01_data_toolbox.dict_toolbox import get_empty_set_if_None
 from src.ch01_data_toolbox.file_toolbox import (
     create_path,
     get_json_filename,
-    open_file,
+    open_json,
     save_json,
     set_dir,
 )
-from src.ch07_belief_logic.belief_main import BeliefUnit, get_beliefunit_from_json
+from src.ch07_belief_logic.belief_main import BeliefUnit, get_beliefunit_from_dict
 from src.ch12_pack_file.packfilehandler import (
     open_gut_file,
     open_job_file,
@@ -18,7 +18,6 @@ from src.ch13_belief_listen_logic._ref.ch13_path import (
     create_keep_duty_path,
     create_keep_rope_path,
     create_keep_visions_path,
-    create_keeps_dir_path,
     create_treasury_db_path,
 )
 from src.ch13_belief_listen_logic._ref.ch13_semantic_types import (
@@ -125,8 +124,7 @@ def get_duty_belief(
     )
     if os_path_exists(keep_duty_path) is False:
         return None
-    file_content = open_file(keep_duty_path)
-    return get_beliefunit_from_json(file_content)
+    return get_beliefunit_from_dict(open_json(keep_duty_path))
 
 
 def save_all_gut_dutys(
@@ -172,7 +170,7 @@ def get_perspective_belief(
     speaker: BeliefUnit, listener_name: BeliefName
 ) -> BeliefUnit:
     # get copy of belief without any metrics
-    perspective_belief = get_beliefunit_from_json(speaker.get_json())
+    perspective_belief = get_beliefunit_from_dict(speaker.to_dict())
     perspective_belief.set_belief_name(listener_name)
     perspective_belief.cashout()
     return perspective_belief
@@ -211,8 +209,8 @@ def get_vision_belief(
         is False
     ):
         return None
-    file_content = open_file(keep_visions_path, get_json_filename(speaker_id))
-    return get_beliefunit_from_json(file_content)
+    belief_dict = open_json(keep_visions_path, get_json_filename(speaker_id))
+    return get_beliefunit_from_dict(belief_dict)
 
 
 def get_dw_perspective_belief(

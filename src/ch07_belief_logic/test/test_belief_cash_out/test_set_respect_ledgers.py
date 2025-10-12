@@ -163,8 +163,8 @@ def test_BeliefUnit_set_voiceunit_groupunit_respect_ledgers_ResetVoiceUnitsAttrs
     sue_beliefunit.add_voiceunit(zia_str, 55, 55)
     yao_voiceunit = sue_beliefunit.get_voice(yao_str)
     zia_voiceunit = sue_beliefunit.get_voice(zia_str)
-    yao_voiceunit.add_fund_give_take(0.5, 0.6, 0.1, 0.22)
-    zia_voiceunit.add_fund_give_take(0.2, 0.1, 0.1, 0.22)
+    yao_voiceunit.add_voice_fund_give_take(0.5, 0.6, 0.1, 0.22)
+    zia_voiceunit.add_voice_fund_give_take(0.2, 0.1, 0.1, 0.22)
     zia_1 = 0.8
     zia_2 = 0.5
     zia_3 = 200

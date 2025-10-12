@@ -141,6 +141,8 @@ class BeliefAtom:
         return dict(self.jvalues.items())
 
     def to_dict(self) -> dict[str, str]:
+        """Returns dict that is serializable to JSON."""
+
         jkeys_dict = self.get_jkeys_dict()
         jvalues_dict = self.get_jvalues_dict()
         return {
@@ -149,9 +151,6 @@ class BeliefAtom:
             "jkeys": jkeys_dict,
             "jvalues": jvalues_dict,
         }
-
-    def get_json(self) -> str:
-        return get_json_from_dict(self.to_dict())
 
 
 def beliefatom_shop(
@@ -176,10 +175,6 @@ def get_beliefatom_from_dict(x_dict: dict) -> BeliefAtom:
     for x_key, x_value in x_dict["jvalues"].items():
         x_atom.set_jvalue(x_key, x_value)
     return x_atom
-
-
-def get_beliefatom_from_json(x_str: str) -> BeliefAtom:
-    return get_beliefatom_from_dict(get_dict_from_json(x_str))
 
 
 def _modify_belief_update_beliefunit(x_belief: BeliefUnit, x_atom: BeliefAtom):

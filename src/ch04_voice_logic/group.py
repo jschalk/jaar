@@ -46,6 +46,8 @@ class MemberShip(GroupCore):
             self.group_debt_lumen = x_group_debt_lumen
 
     def to_dict(self) -> dict[str, str]:
+        """Returns dict that is serializable to JSON."""
+
         return {
             "group_title": self.group_title,
             "group_cred_lumen": self.group_cred_lumen,
@@ -106,6 +108,8 @@ class AwardUnit(AwardCore):
     take_force: float = 1.0
 
     def to_dict(self) -> dict[str, str]:
+        """Returns dict that is serializable to JSON."""
+
         return {
             "awardee_title": self.awardee_title,
             "give_force": self.give_force,

@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import db_table_exists, get_row_count
-from src.ch01_data_toolbox.file_toolbox import save_file
+from src.ch01_data_toolbox.file_toolbox import save_json
 from src.ch04_voice_logic.group import awardunit_shop
 from src.ch04_voice_logic.labor import laborunit_shop
 from src.ch06_plan_logic.healer import healerunit_shop
@@ -114,9 +114,8 @@ def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario1(
     bob_job.add_voiceunit(yao_inx, credit44)
     save_job_file(moment_mstr_dir, bob_job)
     moment_json_path = create_moment_json_path(moment_mstr_dir, a23_str)
-    save_file(
-        moment_json_path, None, momentunit_shop(a23_str, moment_mstr_dir).get_json()
-    )
+    moment_dict = momentunit_shop(a23_str, moment_mstr_dir).to_dict()
+    save_json(moment_json_path, None, moment_dict)
     a23_bob_job_path = create_job_path(moment_mstr_dir, a23_str, bob_inx)
     assert os_path_exists(moment_json_path)
     assert os_path_exists(a23_bob_job_path)

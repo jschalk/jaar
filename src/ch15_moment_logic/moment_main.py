@@ -234,6 +234,8 @@ class MomentUnit:
         return x_beliefbudhistory.get_bud(bud_time)
 
     def to_dict(self, include_paybook: bool = True) -> dict:
+        """Returns dict that is serializable to JSON."""
+
         x_dict = {
             "moment_label": self.moment_label,
             "moment_mstr_dir": self.moment_mstr_dir,
@@ -248,9 +250,6 @@ class MomentUnit:
         if include_paybook:
             x_dict["paybook"] = self.paybook.to_dict()
         return x_dict
-
-    def get_json(self) -> str:
-        return get_json_from_dict(self.to_dict())
 
     def _get_beliefbudhistorys_dict(self) -> dict[BeliefName, dict]:
         return {

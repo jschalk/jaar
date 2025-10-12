@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
-from src.ch01_data_toolbox.file_toolbox import open_file, save_file
-from src.ch10_pack_logic.pack import get_packunit_from_json, packunit_shop
+from src.ch01_data_toolbox.file_toolbox import open_file, open_json, save_file
+from src.ch10_pack_logic.pack import get_packunit_from_dict, packunit_shop
 from src.ch12_pack_file._ref.ch12_path import (
     create_belief_event_dir_path as belief_event_dir,
     create_event_all_pack_path as all_pack_path,
@@ -42,7 +42,7 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_be
     # THEN
     assert os_path_exists(e3_all_pack_path)
     expected_e3_pack = packunit_shop(bob_inx, None, a23_str, event_int=event3)
-    e3_packunit = get_packunit_from_json(open_file(e3_all_pack_path))
+    e3_packunit = get_packunit_from_dict(open_json(e3_all_pack_path))
     assert e3_packunit.event_int == expected_e3_pack.event_int
     expected_beliefdelta = expected_e3_pack._beliefdelta
     generated_e3_beliefdelta = e3_packunit._beliefdelta
@@ -123,8 +123,8 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
         jkeys={wx.voice_name: sue_inx},
         jvalues={wx.voice_cred_lumen: credit88, wx.voice_debt_lumen: None},
     )
-    e3_packunit = get_packunit_from_json(open_file(e3_all_pack_path))
-    e7_packunit = get_packunit_from_json(open_file(e7_all_pack_path))
+    e3_packunit = get_packunit_from_dict(open_json(e3_all_pack_path))
+    e7_packunit = get_packunit_from_dict(open_json(e7_all_pack_path))
     # print(f"{e7_packunit=}")
     assert e3_packunit.event_int == expected_e3_pack.event_int
     expected_beliefdelta = expected_e3_pack._beliefdelta

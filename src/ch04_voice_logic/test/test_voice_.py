@@ -323,7 +323,7 @@ def test_VoiceUnit_add_fund_agenda_take_SetsAttr():
     assert bob_voiceunit.fund_agenda_take == 0.71
 
 
-def test_VoiceUnit_add_fund_give_take_SetsAttr():
+def test_VoiceUnit_add_voice_fund_give_take_SetsAttr():
     # ESTABLISH
     bob_voiceunit = voiceunit_shop("Bob")
     bob_voiceunit.fund_give = 0.4106
@@ -334,7 +334,7 @@ def test_VoiceUnit_add_fund_give_take_SetsAttr():
     assert bob_voiceunit.fund_agenda_take == 0.51
 
     # WHEN
-    bob_voiceunit.add_fund_give_take(
+    bob_voiceunit.add_voice_fund_give_take(
         fund_give=0.33,
         fund_take=0.055,
         fund_agenda_give=0.3,

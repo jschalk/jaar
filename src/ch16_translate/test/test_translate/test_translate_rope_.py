@@ -3,7 +3,6 @@ from src.ch02_rope_logic.rope import create_rope, default_knot_if_None, to_rope
 from src.ch16_translate.map import (
     RopeMap,
     get_ropemap_from_dict,
-    get_ropemap_from_json,
     inherit_ropemap,
     labelmap_shop,
     ropemap_shop,
@@ -453,7 +452,7 @@ def test_RopeMap_set_label_Edits_otx2inx():
     assert x_ropemap.otx2inx_exists(sweep_otx_rope, sweep_menage_inx_rope)
 
 
-def test_RopeMap_get_json_ReturnsObj():
+def test_RopeMap_to_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     clean_otx = "clean"
@@ -462,34 +461,33 @@ def test_RopeMap_get_json_ReturnsObj():
     casa_inx = "casa2"
     slash_otx_knot = "/"
     x_ropemap = ropemap_shop(sue_str, otx_knot=slash_otx_knot)
-    x1_rope_map_json = f"""{{
-  "{wx.event_int}": 0, 
-  "{wx.face_name}": "{sue_str}", 
-  "{wx.inx_knot}": "{x_ropemap.inx_knot}", 
-  "{wx.otx2inx}": {{}}, 
-  "{wx.otx_knot}": "{x_ropemap.otx_knot}", 
-  "{wx.unknown_str}": "{x_ropemap.unknown_str}"
-}}"""
+    x1_rope_map_dict = {
+        wx.event_int: 0,
+        wx.face_name: sue_str,
+        wx.inx_knot: x_ropemap.inx_knot,
+        wx.otx2inx: {},
+        wx.otx_knot: x_ropemap.otx_knot,
+        wx.unknown_str: x_ropemap.unknown_str,
+    }
     # print(f"           {x1_rope_map_json=}")
-    # print(f"{x_ropemap.get_json()=}")
-    assert x_ropemap.get_json() == x1_rope_map_json
+    assert x_ropemap.to_dict() == x1_rope_map_dict
 
     # WHEN
     event7 = 7
     x_ropemap.set_otx2inx(clean_otx, clean_inx)
     x_ropemap.event_int = event7
     # THEN
-    x2_rope_map_json = f"""{{
-  "{wx.event_int}": {event7}, 
-  "{wx.face_name}": "{sue_str}", 
-  "{wx.inx_knot}": "{x_ropemap.inx_knot}", 
-  "{wx.otx2inx}": {{"{clean_otx}": "{clean_inx}"}}, 
-  "{wx.otx_knot}": "{x_ropemap.otx_knot}", 
-  "{wx.unknown_str}": "{x_ropemap.unknown_str}"
-}}"""
-    print(f"           {x2_rope_map_json=}")
-    print(f"{x_ropemap.get_json()=}")
-    assert x_ropemap.get_json() == x2_rope_map_json
+    x2_rope_map_dict = {
+        wx.event_int: event7,
+        wx.face_name: sue_str,
+        wx.inx_knot: x_ropemap.inx_knot,
+        wx.otx2inx: {clean_otx: clean_inx},
+        wx.otx_knot: x_ropemap.otx_knot,
+        wx.unknown_str: x_ropemap.unknown_str,
+    }
+    print(f"           {x2_rope_map_dict=}")
+    print(f"{x_ropemap.to_dict()=}")
+    assert x_ropemap.to_dict() == x2_rope_map_dict
 
 
 def test_get_ropemap_from_dict_ReturnsObj():
@@ -517,22 +515,6 @@ def test_get_ropemap_from_dict_ReturnsObj():
     assert gen_ropemap.otx_knot == x_ropemap.otx_knot
     assert gen_ropemap.inx_knot == x_ropemap.inx_knot
     assert gen_ropemap.unknown_str == x_ropemap.unknown_str
-
-
-def test_get_ropemap_from_json_ReturnsObj():
-    # ESTABLISH
-    clean_otx = "clean"
-    clean_inx = "propre"
-    slash_otx_knot = "/"
-    x_ropemap = ropemap_shop(slash_otx_knot)
-    x_ropemap.set_otx2inx(clean_otx, clean_inx)
-    x_ropemap.set_label("bob", "bobito")
-
-    # WHEN
-    x_ropemap = get_ropemap_from_json(x_ropemap.get_json())
-
-    # THEN
-    assert x_ropemap == x_ropemap
 
 
 def test_RopeMap_all_otx_parent_ropes_exist_ReturnsObj_RopeTerm():

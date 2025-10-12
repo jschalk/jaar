@@ -109,7 +109,7 @@ class VoiceUnit:
     def add_fund_agenda_take(self, fund_agenda_take: float):
         self.fund_agenda_take += fund_agenda_take
 
-    def add_fund_give_take(
+    def add_voice_fund_give_take(
         self,
         fund_give: float,
         fund_take,
@@ -206,6 +206,8 @@ class VoiceUnit:
         }
 
     def to_dict(self, all_attrs: bool = False) -> dict[str, str]:
+        """Returns dict that is serializable to JSON."""
+
         x_dict = {
             "voice_name": self.voice_name,
             "voice_cred_lumen": self.voice_cred_lumen,

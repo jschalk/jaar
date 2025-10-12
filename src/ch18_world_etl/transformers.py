@@ -31,7 +31,7 @@ from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch09_belief_atom_logic.atom_config import get_belief_dimens
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic.delta import get_minimal_beliefdelta
-from src.ch10_pack_logic.pack import PackUnit, get_packunit_from_json, packunit_shop
+from src.ch10_pack_logic.pack import PackUnit, get_packunit_from_dict, packunit_shop
 from src.ch11_bud_logic.bud import TranBook
 from src.ch12_pack_file._ref.ch12_path import (
     create_belief_event_dir_path,
@@ -780,7 +780,7 @@ def etl_event_belief_csvs_to_pack_json(moment_mstr_dir: str):
                 event_all_pack_path = create_event_all_pack_path(
                     moment_mstr_dir, moment_label, belief_name, event_int
                 )
-                save_file(event_all_pack_path, None, event_pack.get_json())
+                save_json(event_all_pack_path, None, event_pack.get_serializable_dict())
 
 
 def add_beliefatoms_from_csv(event_pack: PackUnit, event_dir: str):
@@ -852,15 +852,19 @@ def etl_event_pack_json_to_event_inherited_beliefunits(moment_mstr_dir: str):
                 event_all_pack_path = create_event_all_pack_path(
                     moment_mstr_dir, moment_label, belief_name, event_int
                 )
-                event_pack = get_packunit_from_json(open_file(event_all_pack_path))
+                event_pack = get_packunit_from_dict(open_json(event_all_pack_path))
                 sift_delta = get_minimal_beliefdelta(
                     event_pack._beliefdelta, prev_belief
                 )
                 curr_belief = event_pack.get_pack_edited_belief(prev_belief)
-                save_file(beliefevent_path, None, curr_belief.get_json())
+                save_json(beliefevent_path, None, curr_belief.to_dict())
                 expressed_pack = copy_deepcopy(event_pack)
                 expressed_pack.set_beliefdelta(sift_delta)
-                save_file(event_dir, "expressed_pack.json", expressed_pack.get_json())
+                save_json(
+                    event_dir,
+                    "expressed_pack.json",
+                    expressed_pack.get_serializable_dict(),
+                )
                 prev_event_int = event_int
 
 

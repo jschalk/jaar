@@ -149,6 +149,8 @@ class CellUnit:
         self._set_voice_mandate_ledger()
 
     def to_dict(self) -> dict[str, str | dict]:
+        """Returns dict that is serializable to JSON."""
+
         if not self.beliefadjust:
             self.beliefadjust = beliefunit_shop(self.get_cell_belief_name())
         return {
@@ -164,9 +166,6 @@ class CellUnit:
             "found_facts": get_dict_from_factunits(self.found_facts),
             "boss_facts": get_dict_from_factunits(self.boss_facts),
         }
-
-    def get_json(self) -> str:
-        return get_json_from_dict(self.to_dict())
 
 
 def cellunit_shop(

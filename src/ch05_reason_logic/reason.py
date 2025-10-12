@@ -23,6 +23,7 @@ class FactCore:
     fact_upper: float = None
 
     def to_dict(self) -> dict[str,]:
+        """Returns dict that is serializable to JSON."""
         x_dict = {
             "fact_context": self.fact_context,
             "fact_state": self.fact_state,
@@ -322,6 +323,8 @@ class CaseUnit:
         return self.reason_state
 
     def to_dict(self) -> dict[str, str]:
+        """Returns dict that is serializable to JSON."""
+
         x_dict = {"reason_state": self.reason_state}
         if self.reason_lower is not None:
             x_dict["reason_lower"] = self.reason_lower
@@ -566,6 +569,8 @@ def reasoncore_shop(
 @dataclass
 class ReasonUnit(ReasonCore):
     def to_dict(self) -> dict[str, str]:
+        """Returns dict that is serializable to JSON."""
+
         cases_dict = {
             case_rope: case.to_dict() for case_rope, case in self.cases.items()
         }

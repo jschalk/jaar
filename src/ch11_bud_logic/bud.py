@@ -167,6 +167,8 @@ class TranBook:
     ) -> dict[
         MomentLabel, dict[BeliefName, dict[VoiceName, dict[EpochPoint, FundNum]]]
     ]:
+        """Returns dict that is serializable to JSON."""
+
         return {"moment_label": self.moment_label, "tranunits": self.tranunits}
 
 
@@ -222,6 +224,8 @@ class BudUnit:
         self._magnitude = x_cred_sum
 
     def to_dict(self) -> dict[str,]:
+        """Returns dict that is serializable to JSON."""
+
         x_dict = {"bud_time": self.bud_time, "quota": self.quota}
         if self._bud_voice_nets:
             x_dict["bud_voice_nets"] = self._bud_voice_nets
@@ -230,9 +234,6 @@ class BudUnit:
         if self.celldepth != DEFAULT_CELLDEPTH:
             x_dict["celldepth"] = self.celldepth
         return x_dict
-
-    def get_json(self) -> dict[str,]:
-        return get_json_from_dict(self.to_dict())
 
 
 def budunit_shop(
@@ -291,6 +292,8 @@ class BeliefBudHistory:
         return ["belief_name", "bud_time", "quota"]
 
     def to_dict(self) -> dict:
+        """Returns dict that is serializable to JSON."""
+
         return {"belief_name": self.belief_name, "buds": self._get_buds_dict()}
 
     def _get_buds_dict(self) -> dict:

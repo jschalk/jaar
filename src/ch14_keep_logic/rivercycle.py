@@ -182,6 +182,8 @@ class RiverGrade:
         )
 
     def to_dict(self) -> dict:
+        """Returns dict that is serializable to JSON."""
+
         return {
             "moment_label": self.moment_label,
             "healer_name": self.belief_name,
@@ -201,9 +203,6 @@ class RiverGrade:
             "rewards_count": self.rewards_count,
             "rewards_magnitude": self.rewards_magnitude,
         }
-
-    def get_json(self) -> str:
-        return get_json_from_dict(self.to_dict())
 
 
 def rivergrade_shop(

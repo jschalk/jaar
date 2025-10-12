@@ -1,4 +1,4 @@
-from src.ch01_data_toolbox.file_toolbox import create_path, save_file
+from src.ch01_data_toolbox.file_toolbox import create_path, save_json
 from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch03_allot_toolbox.allot import default_grain_num_if_None
 from src.ch08_epoch_logic.epoch_main import get_default_epoch_config_dict
@@ -6,7 +6,6 @@ from src.ch12_pack_file._ref.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_main import (
     get_default_path_momentunit,
     get_momentunit_from_dict,
-    get_momentunit_from_json,
     momentunit_shop,
 )
 from src.ch15_moment_logic.test._util.ch15_env import (
@@ -97,32 +96,7 @@ def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
     }
 
 
-def test_MomentUnit_get_json_ReturnsObj():
-    # ESTABLISH
-    amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
-    bob_str = "Bob"
-    bob_x0_bud_time = 702
-    bob_x0_quota = 33
-    sue_str = "Sue"
-    sue_x4_bud_time = 4
-    sue_x4_quota = 55
-    sue_x7_bud_time = 7
-    sue_x7_quota = 66
-    amy_moment.add_budunit(bob_str, bob_x0_bud_time, bob_x0_quota)
-    amy_moment.add_budunit(sue_str, sue_x4_bud_time, sue_x4_quota)
-    amy_moment.add_budunit(sue_str, sue_x7_bud_time, sue_x7_quota)
-
-    # WHEN
-    x_json = amy_moment.get_json()
-
-    # THEN
-    print(f"{x_json=}")
-    assert x_json
-    assert x_json.find(wx.moment_label) > 0
-
-
-def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
+def test_get_momentunit_from_dict_ReturnsObj_Scenario0_WithParameters():
     # ESTABLISH
     amy45_str = "amy45"
     moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp1")
@@ -179,7 +153,7 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     assert x_moment == amy_moment
 
 
-def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters():
+def test_get_momentunit_from_dict_ReturnsObj_Scenario1_WithOutParameters():
     # ESTABLISH
     amy45_str = "amy45"
     amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
@@ -209,7 +183,7 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters(
     assert generated_moment == amy_moment
 
 
-def test_get_momentunit_from_json_ReturnsMomentUnit():
+def test_get_momentunit_from_dict_ReturnsObj_Scenario2():
     # ESTABLISH
     amy45_str = "amy45"
     temp_moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp")
@@ -236,10 +210,10 @@ def test_get_momentunit_from_json_ReturnsMomentUnit():
     amy_moment.fund_grain = sue_fund_grain
     amy_moment.respect_grain = sue_respect_grain
     amy_moment.money_grain = sue_money_grain
-    amy_json = amy_moment.get_json()
+    amy_dict = amy_moment.to_dict()
 
     # WHEN
-    x_moment = get_momentunit_from_json(amy_json)
+    x_moment = get_momentunit_from_dict(amy_dict)
 
     # THEN
     assert x_moment.moment_label == amy45_str
@@ -266,7 +240,7 @@ def test_get_from_file_ReturnsMomentUnitWith_moment_mstr_dir(env_dir_setup_clean
     amy45_moment.respect_grain = sue_respect_grain
     x_moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_bob")
     amy45_json_path = create_moment_json_path(x_moment_mstr_dir, amy45_str)
-    save_file(amy45_json_path, None, amy45_moment.get_json())
+    save_json(amy45_json_path, None, amy45_moment.to_dict())
     assert amy45_moment.moment_mstr_dir != x_moment_mstr_dir
 
     # WHEN

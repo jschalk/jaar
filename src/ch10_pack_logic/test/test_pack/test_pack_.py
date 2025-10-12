@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch01_data_toolbox.dict_toolbox import x_is_json
+from src.ch01_data_toolbox.dict_toolbox import get_json_from_dict, x_is_json
 from src.ch04_voice_logic.voice import voiceunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_default_moment_label
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
@@ -8,7 +8,7 @@ from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.pack import (
     PackUnit,
     get_init_pack_id_if_None,
-    get_packunit_from_json,
+    get_packunit_from_dict,
     init_pack_id,
     packunit_shop,
 )
@@ -326,7 +326,7 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
     assert total_dict.get(delta_str) == {}
 
 
-def test_PackUnit_get_serializable_dict_ReturnsObj_WithBeliefDeltaPopulated():
+def test_PackUnit_get_serializable_dict_ReturnsObj_Scenario0_WithBeliefDeltaPopulated():
     # ESTABLISH
     bob_str = "Bob"
     sue_beliefdelta = get_beliefdelta_sue_example()
@@ -342,19 +342,19 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_WithBeliefDeltaPopulated():
     assert total_dict.get(delta_str) == sue_beliefdelta.get_ordered_dict()
 
 
-def test_PackUnit_get_json_ReturnsObj_WithBeliefDeltaPopulated():
+def test_PackUnit_get_serializable_dict_ReturnsObj_Scenario1_WithBeliefDeltaPopulated():
     # ESTABLISH
     bob_str = "Bob"
     sue_beliefdelta = get_beliefdelta_sue_example()
     bob_packunit = packunit_shop(bob_str, _beliefdelta=sue_beliefdelta)
 
     # WHEN
-    generated_json = bob_packunit.get_json()
+    generated_dict = bob_packunit.get_serializable_dict()
 
     # THEN
-    assert generated_json
+    assert generated_dict
     print("generated_json")
-    print(generated_json)
+    print(generated_dict)
     expected_json = """{
   "belief_name": "Bob", 
   "delta": {
@@ -375,17 +375,19 @@ def test_PackUnit_get_json_ReturnsObj_WithBeliefDeltaPopulated():
   "face_name": null, 
   "moment_label": "ZZ"
 }"""
-    assert generated_json == expected_json
+    assert get_json_from_dict(generated_dict) == expected_json
 
 
-def test_get_packunit_from_json_ReturnsObj_WithBeliefDeltaPopulated():
+def test_get_packunit_from_dict_ReturnsObj_WithBeliefDeltaPopulated():
     # ESTABLISH
     bob_str = "Bob"
     sue_beliefdelta = get_beliefdelta_sue_example()
     bob_packunit = packunit_shop(bob_str, _beliefdelta=sue_beliefdelta, event_int=778)
 
     # WHEN
-    generated_bob_packunit = get_packunit_from_json(bob_packunit.get_json())
+    generated_bob_packunit = get_packunit_from_dict(
+        bob_packunit.get_serializable_dict()
+    )
 
     # THEN
     assert generated_bob_packunit

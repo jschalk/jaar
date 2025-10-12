@@ -594,6 +594,8 @@ class EpochUnit:
     yr1_jan1_offset: int = None
 
     def to_dict(self) -> dict:
+        """Returns dict that is serializable to JSON."""
+
         return {
             "c400_number": self.c400_number,
             "hours_config": self.hours_config,

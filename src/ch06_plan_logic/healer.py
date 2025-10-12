@@ -20,6 +20,8 @@ class HealerUnit:
         self._healer_names.remove(x_healer_name)
 
     def to_dict(self) -> dict[str, list[GroupTitle]]:
+        """Returns dict that is serializable to JSON."""
+
         return {"healerunit_healer_names": list(self._healer_names)}
 
 

@@ -872,10 +872,6 @@ class BeliefDelta:
         atom_tuples = self.get_ordered_beliefatoms(x_count).items()
         return {atom_num: atom_obj.to_dict() for atom_num, atom_obj in atom_tuples}
 
-    def get_json(self, x_count: int = None) -> str:
-        x_dict = self.get_ordered_dict(x_count)
-        return get_json_from_dict(x_dict)
-
 
 def beliefdelta_shop(beliefatoms: dict[str, BeliefAtom] = None) -> BeliefDelta:
     return BeliefDelta(

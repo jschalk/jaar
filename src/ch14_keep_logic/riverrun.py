@@ -5,7 +5,7 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_positive_int,
     set_in_nested_dict,
 )
-from src.ch01_data_toolbox.file_toolbox import save_file
+from src.ch01_data_toolbox.file_toolbox import save_json
 from src.ch03_allot_toolbox.allot import (
     allot_scale,
     default_grain_num_if_None,
@@ -246,7 +246,7 @@ class RiverRun:
             knot=self.knot,
             grade_belief_name=voice_name,
         )
-        save_file(grade_path, None, rivergrade.get_json())
+        save_json(grade_path, None, rivergrade.to_dict())
 
     def save_rivergrade_files(self):
         for rivergrade_voice in self._rivergrades.keys():

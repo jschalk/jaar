@@ -9,7 +9,6 @@ from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import (
     beliefunit_shop,
     get_beliefunit_from_dict,
-    get_beliefunit_from_json,
     get_dict_of_belief_from_dict,
 )
 from src.ch07_belief_logic.test._util.ch07_examples import (
@@ -137,7 +136,7 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario3_plankid_LaborUnit():
     assert labor_dict_x == {"_partys": {run_str: run_partyunit.to_dict()}}
 
 
-def test_BeliefUnit_get_json_ReturnsJSON_SimpleExample():
+def test_BeliefUnit_to_dict_ReturnsObj_Scenario4_planunit_WithLevels():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     zia_belief = get_beliefunit_x1_3levels_1reason_1facts()
@@ -161,13 +160,10 @@ def test_BeliefUnit_get_json_ReturnsJSON_SimpleExample():
     zia_belief.edit_plan_attr(root_rope, problem_bool=True)
 
     # WHEN
-    x_json = zia_belief.get_json()
+    belief_dict = zia_belief.to_dict()
 
     # THEN
-    assert x_json is not None
-    assert True == x_is_json(x_json)
-    belief_dict = get_dict_from_json(x_json)
-
+    assert belief_dict is not None
     assert belief_dict[wx.belief_name] == zia_belief.belief_name
     assert belief_dict[wx.moment_label] == zia_belief.moment_label
     assert belief_dict[wx.tally] == zia_belief.tally
@@ -204,7 +200,7 @@ def test_BeliefUnit_get_json_ReturnsJSON_SimpleExample():
     assert x_planroot.problem_bool
 
 
-def test_BeliefUnit_get_json_ReturnsJSON_BigExample():
+def test_BeliefUnit_to_dict_ReturnsJSON_Scenario5_BigExample():
     # ESTABLISH
     yao_belief = beliefunit_v001()
     hr_number_str = "hr_number"
@@ -226,10 +222,9 @@ def test_BeliefUnit_get_json_ReturnsJSON_BigExample():
     x_factunit = factunit_shop(jour_min_rope, jour_min_rope, 5, 59)
     yao_belief.edit_plan_attr(x_factunit.fact_context, factunit=x_factunit)
     yao_belief.set_max_tree_traverse(2)
-    yao_str = "Yao"
 
     # WHEN
-    belief_dict = get_dict_from_json(yao_belief.get_json())
+    belief_dict = yao_belief.to_dict()
 
     # THEN
     assert belief_dict[wx.belief_name] == yao_belief.belief_name
@@ -269,133 +264,7 @@ def test_BeliefUnit_get_json_ReturnsJSON_BigExample():
     assert len(yao_belief.voices) == 22
 
 
-def test_get_beliefunit_from_json_ReturnsObjSimpleExample():
-    # ESTABLISH
-    zia_belief = get_beliefunit_x1_3levels_1reason_1facts()
-    zia_belief.set_max_tree_traverse(23)
-    tiger_moment_label = "tiger"
-    zia_belief.set_moment_label(tiger_moment_label)
-    zia_fund_pool = 80000
-    zia_belief.fund_pool = zia_fund_pool
-    zia_fund_grain = 8
-    zia_belief.fund_grain = zia_fund_grain
-    zia_resepect_bit = 5
-    zia_belief.respect_grain = zia_resepect_bit
-    zia_money_grain = 2
-    zia_belief.money_grain = zia_money_grain
-    zia_credor_respect = 200
-    zia_debtor_respect = 200
-    zia_belief.set_credor_respect(zia_credor_respect)
-    zia_belief.set_debtor_respect(zia_debtor_respect)
-    zia_last_pack_id = 73
-    zia_belief.set_last_pack_id(zia_last_pack_id)
-
-    shave_str = "shave"
-    shave_rope = zia_belief.make_l1_rope(shave_str)
-    shave_plan_y1 = zia_belief.get_plan_obj(shave_rope)
-    shave_plan_y1.problem_bool = True
-    # print(f"{shave_rope=}")
-    # print(f"{json_shave_plan.plan_label=} {json_shave_plan.parent_rope=}")
-
-    sue_str = "Sue"
-    zia_belief.add_voiceunit(
-        voice_name=sue_str, voice_cred_lumen=199, voice_debt_lumen=199
-    )
-    xio_str = "Xio"
-    zia_belief.add_voiceunit(voice_name=xio_str)
-    run_str = ";runners"
-    sue_voiceunit = zia_belief.get_voice(sue_str)
-    xio_voiceunit = zia_belief.get_voice(xio_str)
-    sue_voiceunit.add_membership(run_str)
-    xio_voiceunit.add_membership(run_str)
-    run_laborunit = laborunit_shop()
-    run_laborunit.add_party(party_title=run_str)
-    root_rope = to_rope(zia_belief.moment_label)
-    zia_belief.edit_plan_attr(root_rope, laborunit=run_laborunit)
-    xio_laborunit = laborunit_shop()
-    xio_laborunit.add_party(party_title=xio_str)
-    zia_belief.edit_plan_attr(shave_rope, laborunit=xio_laborunit)
-    zia_belief.edit_plan_attr(shave_rope, awardunit=awardunit_shop(xio_str))
-    zia_belief.edit_plan_attr(shave_rope, awardunit=awardunit_shop(sue_str))
-    zia_belief.edit_plan_attr(root_rope, awardunit=awardunit_shop(sue_str))
-    # add healerunit to shave planunit
-    run_healerunit = healerunit_shop({run_str})
-    zia_belief.edit_plan_attr(shave_rope, healerunit=run_healerunit)
-    shave_plan = zia_belief.get_plan_obj(shave_rope)
-    zia_gogo_want = 75
-    zia_stop_want = 77
-    shave_plan.gogo_want = zia_gogo_want
-    shave_plan.stop_want = zia_stop_want
-
-    override_str = "override"
-
-    # WHEN
-    x_json = zia_belief.get_json()
-    assert x_is_json(x_json) is True
-    json_belief = get_beliefunit_from_json(x_belief_json=x_json)
-
-    # THEN
-    assert str(type(json_belief)).find(".belief_main.BeliefUnit'>") > 0
-    assert json_belief.belief_name is not None
-    assert json_belief.belief_name == zia_belief.belief_name
-    assert json_belief.moment_label == zia_belief.moment_label
-    assert json_belief.fund_pool == zia_fund_pool
-    assert json_belief.fund_pool == zia_belief.fund_pool
-    assert json_belief.fund_grain == zia_fund_grain
-    assert json_belief.fund_grain == zia_belief.fund_grain
-    assert json_belief.respect_grain == zia_resepect_bit
-    assert json_belief.respect_grain == zia_belief.respect_grain
-    assert json_belief.money_grain == zia_money_grain
-    assert json_belief.money_grain == zia_belief.money_grain
-    assert json_belief.max_tree_traverse == 23
-    assert json_belief.max_tree_traverse == zia_belief.max_tree_traverse
-    assert json_belief.knot == zia_belief.knot
-    assert json_belief.credor_respect == zia_belief.credor_respect
-    assert json_belief.debtor_respect == zia_belief.debtor_respect
-    assert json_belief.credor_respect == zia_credor_respect
-    assert json_belief.debtor_respect == zia_debtor_respect
-    assert json_belief.last_pack_id == zia_belief.last_pack_id
-    assert json_belief.last_pack_id == zia_last_pack_id
-
-    json_planroot = json_belief.planroot
-    assert json_planroot.parent_rope == ""
-    assert json_planroot.parent_rope == zia_belief.planroot.parent_rope
-    assert json_planroot.reasonunits == {}
-    assert json_planroot.laborunit == zia_belief.planroot.laborunit
-    assert json_planroot.laborunit == run_laborunit
-    assert json_planroot.fund_grain == 8
-    assert json_planroot.fund_grain == zia_fund_grain
-    assert len(json_planroot.factunits) == 1
-    assert len(json_planroot.awardunits) == 1
-
-    assert len(json_belief.planroot.kids) == 2
-
-    sem_jour_str = "sem_jours"
-    sem_jour_rope = json_belief.make_l1_rope(sem_jour_str)
-    sem_jour_plan_x = json_belief.get_plan_obj(sem_jour_rope)
-    assert len(sem_jour_plan_x.kids) == 2
-
-    sun_str = "Sun"
-    sun_rope = json_belief.make_rope(sem_jour_rope, sun_str)
-    sun_plan = json_belief.get_plan_obj(sun_rope)
-    assert sun_plan.star == 20
-
-    json_shave_plan = json_belief.get_plan_obj(shave_rope)
-    zia_shave_plan = zia_belief.get_plan_obj(shave_rope)
-    assert len(json_shave_plan.reasonunits) == 1
-    assert json_shave_plan.laborunit == zia_shave_plan.laborunit
-    assert json_shave_plan.laborunit == xio_laborunit
-    print(f"{json_shave_plan.healerunit=}")
-    assert json_shave_plan.healerunit == zia_shave_plan.healerunit
-    assert len(json_shave_plan.awardunits) == 2
-    assert len(json_shave_plan.factunits) == 1
-    assert zia_shave_plan.problem_bool
-    assert json_shave_plan.problem_bool == zia_shave_plan.problem_bool
-    assert json_shave_plan.gogo_want == zia_shave_plan.gogo_want
-    assert json_shave_plan.stop_want == zia_shave_plan.stop_want
-
-
-def test_get_beliefunit_from_json_ReturnsPlanRoot():
+def test_get_beliefunit_from_dict_ReturnsPlanRoot():
     # ESTABLISH
     zia_belief = get_beliefunit_x1_3levels_1reason_1facts()
     zia_belief.set_max_tree_traverse(23)
@@ -407,9 +276,7 @@ def test_get_beliefunit_from_json_ReturnsPlanRoot():
     root_plan.stop_want = zia_stop_want
 
     # WHEN
-    x_json = zia_belief.get_json()
-    assert x_is_json(x_json) is True
-    json_belief = get_beliefunit_from_json(x_belief_json=x_json)
+    json_belief = get_beliefunit_from_dict(zia_belief.to_dict())
 
     # THEN
     json_planroot = json_belief.get_plan_obj(to_rope(zia_belief.moment_label))
@@ -417,15 +284,14 @@ def test_get_beliefunit_from_json_ReturnsPlanRoot():
     assert json_planroot.stop_want == zia_stop_want
 
 
-def test_get_beliefunit_from_json_ReturnsObj_knot_Example():
+def test_get_beliefunit_from_dict_ReturnsObj_knot_Example():
     # ESTABLISH
     slash_knot = "/"
     before_bob_belief = beliefunit_shop("Bob", knot=slash_knot)
     assert before_bob_belief.knot != default_knot_if_None()
 
     # WHEN
-    bob_json = before_bob_belief.get_json()
-    after_bob_belief = get_beliefunit_from_json(bob_json)
+    after_bob_belief = get_beliefunit_from_dict(before_bob_belief.to_dict())
 
     # THEN
     assert after_bob_belief.knot != default_knot_if_None()
@@ -433,7 +299,7 @@ def test_get_beliefunit_from_json_ReturnsObj_knot_Example():
     assert after_bob_belief.knot == before_bob_belief.knot
 
 
-def test_get_beliefunit_from_json_ReturnsObj_knot_VoiceExample():
+def test_get_beliefunit_from_dict_ReturnsObj_knot_VoiceExample():
     # ESTABLISH
     slash_knot = "/"
     before_bob_belief = beliefunit_shop("Bob", knot=slash_knot)
@@ -442,15 +308,14 @@ def test_get_beliefunit_from_json_ReturnsObj_knot_VoiceExample():
     assert before_bob_belief.voice_exists(bob_str)
 
     # WHEN
-    bob_json = before_bob_belief.get_json()
-    after_bob_belief = get_beliefunit_from_json(bob_json)
+    after_bob_belief = get_beliefunit_from_dict(before_bob_belief.to_dict())
 
     # THEN
     after_bob_voiceunit = after_bob_belief.get_voice(bob_str)
     assert after_bob_voiceunit.knot == slash_knot
 
 
-def test_get_beliefunit_from_json_ReturnsObj_knot_GroupExample():
+def test_get_beliefunit_from_dict_ReturnsObj_knot_GroupExample():
     # ESTABLISH
     slash_knot = "/"
     before_bob_belief = beliefunit_shop("Bob", knot=slash_knot)
@@ -461,15 +326,14 @@ def test_get_beliefunit_from_json_ReturnsObj_knot_GroupExample():
     yao_voiceunit.add_membership(swim_str)
 
     # WHEN
-    bob_json = before_bob_belief.get_json()
-    after_bob_belief = get_beliefunit_from_json(bob_json)
+    after_bob_belief = get_beliefunit_from_dict(before_bob_belief.to_dict())
 
     # THEN
     after_yao_voiceunit = after_bob_belief.get_voice(yao_str)
     assert after_yao_voiceunit.knot == slash_knot
 
 
-def test_get_beliefunit_from_json_ReturnsObj_Scenario7_planroot_knot_IsApplied():
+def test_get_beliefunit_from_dict_ReturnsObj_Scenario7_planroot_knot_IsApplied():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     slash_str = "/"
@@ -484,7 +348,7 @@ def test_get_beliefunit_from_json_ReturnsObj_Scenario7_planroot_knot_IsApplied()
     assert sue_belief.get_plan_obj(hr_number_rope).knot == slash_str
 
     # WHEN
-    after_bob_belief = get_beliefunit_from_json(sue_belief.get_json())
+    after_bob_belief = get_beliefunit_from_dict(sue_belief.to_dict())
 
     # THEN
     assert after_bob_belief.knot == slash_str
@@ -492,7 +356,7 @@ def test_get_beliefunit_from_json_ReturnsObj_Scenario7_planroot_knot_IsApplied()
     assert after_bob_belief.get_plan_obj(hr_number_rope).knot == slash_str
 
 
-def test_get_beliefunit_from_json_ExportsBeliefUnit_star():
+def test_get_beliefunit_from_dict_ExportsBeliefUnit_star():
     # ESTABLISH
     x1_belief = beliefunit_v001()
     x1_belief.tally = 15
@@ -501,7 +365,7 @@ def test_get_beliefunit_from_json_ExportsBeliefUnit_star():
     assert x1_belief.planroot.star == 1
 
     # WHEN
-    x2_belief = get_beliefunit_from_json(x1_belief.get_json())
+    x2_belief = get_beliefunit_from_dict(x1_belief.to_dict())
 
     # THEN
     assert x1_belief.tally == 15

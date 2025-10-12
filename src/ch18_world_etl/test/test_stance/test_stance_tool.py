@@ -1,12 +1,7 @@
 from os.path import exists as os_path_exists
 from pandas import read_excel as pandas_read_excel
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.file_toolbox import (
-    create_path,
-    open_file,
-    save_file,
-    set_dir,
-)
+from src.ch01_data_toolbox.file_toolbox import create_path, save_json, set_dir
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch12_pack_file._ref.ch12_path import create_gut_path, create_moment_json_path
 from src.ch15_moment_logic.moment_main import momentunit_shop
@@ -60,7 +55,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleMomentUnit_NoBeliefU
     a23_str = "amy23"
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     moment_json_path = create_moment_json_path(moment_mstr_dir, a23_str)
-    save_file(moment_json_path, None, a23_moment.get_json())
+    save_json(moment_json_path, None, a23_moment.to_dict())
 
     # WHEN
     gen_stance_csv_strs = collect_stance_csv_strs(world_dir)
@@ -81,12 +76,12 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BeliefUnits(
     a23_str = "amy23"
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     moment_json_path = create_moment_json_path(moment_mstr_dir, a23_str)
-    save_file(moment_json_path, None, a23_moment.get_json())
+    save_json(moment_json_path, None, a23_moment.to_dict())
     # create belief gut file
     bob_gut = beliefunit_shop(bob_str, a23_str)
     bob_gut.add_voiceunit("Yao", 44, 55)
     a23_bob_gut_path = create_gut_path(moment_mstr_dir, a23_str, bob_str)
-    save_file(a23_bob_gut_path, None, bob_gut.get_json())
+    save_json(a23_bob_gut_path, None, bob_gut.to_dict())
 
     # WHEN
     gen_stance_csv_strs = collect_stance_csv_strs(world_dir)

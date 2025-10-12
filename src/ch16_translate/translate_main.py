@@ -217,6 +217,8 @@ class TranslateUnit:
         self.ropemap.del_label(x_otx)
 
     def to_dict(self) -> dict:
+        """Returns dict that is serializable to JSON."""
+
         x_namemap = _get_rid_of_translate_core_keys(self.namemap.to_dict())
         x_titlemap = _get_rid_of_translate_core_keys(self.titlemap.to_dict())
         x_labelmap = _get_rid_of_translate_core_keys(self.labelmap.to_dict())
@@ -233,9 +235,6 @@ class TranslateUnit:
             "titlemap": x_titlemap,
             "ropemap": x_ropemap,
         }
-
-    def get_json(self) -> str:
-        return get_json_from_dict(self.to_dict())
 
 
 def translateunit_shop(

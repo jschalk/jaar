@@ -60,6 +60,8 @@ class MapCore:
         self.otx2inx = x_otx2inx
 
     def to_dict(self) -> dict:
+        """Returns dict that is serializable to JSON."""
+
         return {
             "face_name": self.face_name,
             "event_int": self.event_int,
@@ -68,9 +70,6 @@ class MapCore:
             "unknown_str": self.unknown_str,
             "otx2inx": self.otx2inx,
         }
-
-    def get_json(self) -> str:
-        return get_json_from_dict(self.to_dict())
 
 
 class NameMap(MapCore):
@@ -147,10 +146,6 @@ def get_namemap_from_dict(x_dict: dict) -> NameMap:
     )
 
 
-def get_namemap_from_json(x_json: str) -> NameMap:
-    return get_namemap_from_dict(get_dict_from_json(x_json))
-
-
 class TitleMap(MapCore):
     def set_otx2inx(self, otx_title: str, inx_title: str):
         self.otx2inx[otx_title] = inx_title
@@ -223,10 +218,6 @@ def get_titlemap_from_dict(x_dict: dict) -> TitleMap:
         otx2inx=x_dict.get("otx2inx"),
         unknown_str=x_dict.get("unknown_str"),
     )
-
-
-def get_titlemap_from_json(x_json: str) -> TitleMap:
-    return get_titlemap_from_dict(get_dict_from_json(x_json))
 
 
 class LabelMap(MapCore):
@@ -412,6 +403,8 @@ class RopeMap:
         return self.all_otx_parent_ropes_exist()
 
     def to_dict(self) -> dict:
+        """Returns dict that is serializable to JSON."""
+
         return {
             "face_name": self.face_name,
             "event_int": self.event_int,
@@ -420,9 +413,6 @@ class RopeMap:
             "unknown_str": self.unknown_str,
             "otx2inx": self.otx2inx,
         }
-
-    def get_json(self) -> str:
-        return get_json_from_dict(self.to_dict())
 
 
 def ropemap_shop(
@@ -467,10 +457,6 @@ def get_ropemap_from_dict(x_dict: dict) -> RopeMap:
         otx2inx=x_dict.get("otx2inx"),
         unknown_str=x_dict.get("unknown_str"),
     )
-
-
-def get_ropemap_from_json(x_json: str) -> RopeMap:
-    return get_ropemap_from_dict(get_dict_from_json(x_json))
 
 
 class MapCoreAttrConflictException(Exception):

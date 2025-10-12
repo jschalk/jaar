@@ -926,6 +926,8 @@ class PlanUnit:
         return self.awardheirs != {}
 
     def to_dict(self) -> dict[str, str]:
+        """Returns dict that is serializable to JSON."""
+
         x_dict = {"star": self.star}
 
         if self.plan_label is not None:

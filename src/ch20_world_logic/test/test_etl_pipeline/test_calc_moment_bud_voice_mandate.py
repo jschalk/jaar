@@ -38,7 +38,7 @@ def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro0_BudEmpty(
     moment_mstr_dir = fay_world._moment_mstr_dir
     amy23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     a23_json_path = create_moment_json_path(fay_world._moment_mstr_dir, a23_str)
-    save_file(a23_json_path, None, amy23_moment.get_json())
+    save_json(a23_json_path, None, amy23_moment.to_dict())
     print(f"{a23_json_path=}")
     a23_beliefs_path = create_moment_beliefs_dir_path(
         fay_world._moment_mstr_dir, a23_str
@@ -66,7 +66,7 @@ def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro1_SimpleBud(
     x_celldepth = 2
     amy23_moment.add_budunit(bob_str, tp37, bud1_quota, celldepth=x_celldepth)
     a23_json_path = create_moment_json_path(mstr_dir, a23_str)
-    save_file(a23_json_path, None, amy23_moment.get_json())
+    save_json(a23_json_path, None, amy23_moment.to_dict())
     # Create empty ote1 file
     a23_ote1_json_path = create_moment_ote1_json_path(mstr_dir, a23_str)
     save_json(a23_ote1_json_path, None, {})
@@ -105,7 +105,7 @@ def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro2_BudExists(
     x_celldepth = 2
     amy23_moment.add_budunit(bob_str, tp37, bud1_quota, celldepth=x_celldepth)
     a23_json_path = create_moment_json_path(mstr_dir, a23_str)
-    save_file(a23_json_path, None, amy23_moment.get_json())
+    save_json(a23_json_path, None, amy23_moment.to_dict())
 
     # Create event time mapping belief_time_agg for time 37
     event33 = 33

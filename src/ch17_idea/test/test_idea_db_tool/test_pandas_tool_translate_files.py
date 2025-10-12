@@ -1,17 +1,14 @@
 from os.path import exists as os_path_exists
 from pandas import DataFrame
-from src.ch01_data_toolbox.file_toolbox import create_path, save_file
+from src.ch01_data_toolbox.file_toolbox import create_path, open_json, save_json
 from src.ch02_rope_logic.rope import create_rope, to_rope
 from src.ch16_translate.test._util.ch16_examples import (
     get_casa_maison_rope_inx_dt,
     get_casa_maison_rope_otx_dt,
     get_casa_maison_translateunit_set_by_label,
-    get_clean_ropemap,
-    get_sue_translateunit,
     get_suita_namemap,
     get_suita_voice_name_inx_dt,
     get_suita_voice_name_otx_dt,
-    get_swim_titlemap,
 )
 from src.ch16_translate.translate_config import get_translate_filename
 from src.ch16_translate.translate_main import translateunit_shop
@@ -44,7 +41,7 @@ def test_move_otx_csvs_to_translate_inx_CreatesTranslateedFiles_Scenario0_Single
     sue_dir = create_path(get_example_face_dir(), sue_otx)
     translateunit_file_path = create_path(sue_dir, get_translate_filename())
     print(f"{sue_dir=}")
-    save_file(sue_dir, get_translate_filename(), sue_translateunit.get_json())
+    save_json(sue_dir, get_translate_filename(), sue_translateunit.to_dict())
     sue_otx_dt = get_suita_voice_name_otx_dt()
     sue_inx_dt = get_suita_voice_name_inx_dt()
     otz_dir = create_path(sue_dir, "otz")
@@ -108,7 +105,7 @@ def test_move_otx_csvs_to_translate_inx_CreatesTranslateedFiles_Scenario1_Single
 
     sue_translateunit = get_casa_maison_translateunit_set_by_label()
     sue_dir = create_path(get_example_face_dir(), sue_translateunit.face_name)
-    save_file(sue_dir, get_translate_filename(), sue_translateunit.get_json())
+    save_json(sue_dir, get_translate_filename(), sue_translateunit.to_dict())
     sue_otx_dt = get_casa_maison_rope_otx_dt()
     sue_inx_dt = get_casa_maison_rope_inx_dt()
     otz_dir = create_path(sue_dir, "otz")
@@ -162,7 +159,7 @@ def test_move_otx_csvs_to_translate_inx_CreatesTranslateedFiles_Scenario2_TwoFil
     sue_dir = create_path(get_example_face_dir(), sue_translateunit.face_name)
     translateunit_file_path = create_path(sue_dir, get_translate_filename())
     print(f"{sue_dir=}")
-    save_file(sue_dir, get_translate_filename(), sue_translateunit.get_json())
+    save_json(sue_dir, get_translate_filename(), sue_translateunit.to_dict())
     sue_otx_dt = get_suita_voice_name_otx_dt()
     otz_dir = create_path(sue_dir, "otz")
     inz_dir = create_path(sue_dir, "inz")
