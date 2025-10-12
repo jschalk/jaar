@@ -123,10 +123,8 @@ def test_PackFileHandler_save_pack_file_RaisesErrorIfPackUnit_atoms_dir_IsWrong(
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_packfilehandler.save_pack_file(sue_packunit, correct_invalid_attrs=False)
-    assert (
-        str(excinfo.value)
-        == f"PackUnit file cannot be saved because packunit._atoms_dir is incorrect: {sue_packunit._atoms_dir}. It must be {sue_packfilehandler._atoms_dir}."
-    )
+    expected_exception_str = f"PackUnit file cannot be saved because packunit._atoms_dir is incorrect: {sue_packunit._atoms_dir}. It must be {sue_packfilehandler._atoms_dir}."
+    assert str(excinfo.value) == expected_exception_str
 
 
 def test_PackFileHandler_save_pack_file_RaisesErrorIfPackUnit_packs_dir_IsWrong(
@@ -149,10 +147,8 @@ def test_PackFileHandler_save_pack_file_RaisesErrorIfPackUnit_packs_dir_IsWrong(
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_packfilehandler.save_pack_file(sue_packunit, correct_invalid_attrs=False)
-    assert (
-        str(excinfo.value)
-        == f"PackUnit file cannot be saved because packunit._packs_dir is incorrect: {sue_packunit._packs_dir}. It must be {sue_packfilehandler._packs_dir}."
-    )
+    expected_exception_str = f"PackUnit file cannot be saved because packunit._packs_dir is incorrect: {sue_packunit._packs_dir}. It must be {sue_packfilehandler._packs_dir}."
+    assert str(excinfo.value) == expected_exception_str
 
 
 def test_PackFileHandler_save_pack_file_RaisesErrorIfPackUnit_belief_name_IsWrong(
@@ -176,10 +172,8 @@ def test_PackFileHandler_save_pack_file_RaisesErrorIfPackUnit_belief_name_IsWron
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_packfilehandler.save_pack_file(sue_packunit, correct_invalid_attrs=False)
-    assert (
-        str(excinfo.value)
-        == f"PackUnit file cannot be saved because packunit.belief_name is incorrect: {sue_packunit.belief_name}. It must be {sue_str}."
-    )
+    expected_exception_str = f"PackUnit file cannot be saved because packunit.belief_name is incorrect: {sue_packunit.belief_name}. It must be {sue_str}."
+    assert str(excinfo.value) == expected_exception_str
 
 
 def test_PackFileHandler_save_pack_file_RaisesErrorIf_replace_IsFalse(
@@ -206,10 +200,10 @@ def test_PackFileHandler_save_pack_file_RaisesErrorIf_replace_IsFalse(
         sue_packfilehandler.save_pack_file(
             saved_packunit, replace=False, correct_invalid_attrs=False
         )
-    assert (
-        str(excinfo.value)
-        == f"PackUnit file {six_filename} exists and cannot be saved over."
+    expected_exception_str = (
+        f"PackUnit file {six_filename} exists and cannot be saved over."
     )
+    assert str(excinfo.value) == expected_exception_str
 
 
 def test_PackFileHandler_validate_packunit_ReturnsObjWithAttributesFixed(
