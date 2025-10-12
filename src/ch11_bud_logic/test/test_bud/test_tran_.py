@@ -685,7 +685,7 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
     amy23_tranbook.add_tranunit(yao_str, yao_str, t77_tran_time, t77_yao_amount)
 
     str_tran_time_amy23_dict = {
-        "moment_label": amy23_str,
+        wx.moment_label: amy23_str,
         "tranunits": {
             sue_str: {
                 yao_str: {

@@ -220,7 +220,7 @@ def test_BeliefAtom_is_valid_ReturnsBoolean_beliefunit():
     assert bob_update_beliefatom.is_valid() is False
 
     # WHEN
-    bob_update_beliefatom.set_jvalue("max_tree_traverse", 14)
+    bob_update_beliefatom.set_jvalue(wx.max_tree_traverse, 14)
 
     # THEN
     assert bob_update_beliefatom.is_jkeys_valid()

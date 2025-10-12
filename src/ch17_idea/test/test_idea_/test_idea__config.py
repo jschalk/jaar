@@ -84,7 +84,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[5] == wx.face_name
     assert table_sorting_priority[6] == "face_name_otx"
     assert table_sorting_priority[7] == "face_name_inx"
-    assert table_sorting_priority[8] == "moment_label"
+    assert table_sorting_priority[8] == wx.moment_label
     assert table_sorting_priority[9] == "moment_label_otx"
     assert table_sorting_priority[10] == "moment_label_inx"
     assert table_sorting_priority[11] == "epoch_label"
@@ -106,7 +106,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[27] == "weekday_label"
     assert table_sorting_priority[28] == "weekday_label_otx"
     assert table_sorting_priority[29] == "weekday_label_inx"
-    assert table_sorting_priority[30] == "belief_name"
+    assert table_sorting_priority[30] == wx.belief_name
     assert table_sorting_priority[31] == "belief_name_otx"
     assert table_sorting_priority[32] == "belief_name_inx"
     assert table_sorting_priority[33] == "belief_name_ERASE"
@@ -151,7 +151,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[72] == "fact_state"
     assert table_sorting_priority[73] == "fact_state_otx"
     assert table_sorting_priority[74] == "fact_state_inx"
-    assert table_sorting_priority[75] == "party_title"
+    assert table_sorting_priority[75] == wx.party_title
     assert table_sorting_priority[76] == "party_title_otx"
     assert table_sorting_priority[77] == "party_title_inx"
     assert table_sorting_priority[78] == "party_title_ERASE"

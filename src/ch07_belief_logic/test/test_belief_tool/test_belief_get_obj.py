@@ -66,7 +66,7 @@ def test_belief_plan_awardunit_get_obj_ReturnsObj():
     swim_str = "swim"
     casa_rope = sue_belief.make_l1_rope(casa_str)
     sue_belief.add_plan(casa_rope)
-    jkeys = {wx.plan_rope: casa_rope, "awardee_title": swim_str}
+    jkeys = {wx.plan_rope: casa_rope, wx.awardee_title: swim_str}
     sue_belief.add_plan(casa_rope)
     sue_belief.get_plan_obj(casa_rope).set_awardunit(awardunit_shop(swim_str))
 
@@ -209,7 +209,7 @@ def test_belief_get_obj_ReturnsObj_belief_plan_awardunit_get_obj():
     swim_str = "swim"
     casa_rope = sue_belief.make_l1_rope(casa_str)
     sue_belief.add_plan(casa_rope)
-    jkeys = {wx.plan_rope: casa_rope, "awardee_title": swim_str}
+    jkeys = {wx.plan_rope: casa_rope, wx.awardee_title: swim_str}
     sue_belief.add_plan(casa_rope)
     sue_belief.get_plan_obj(casa_rope).set_awardunit(awardunit_shop(swim_str))
 

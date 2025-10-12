@@ -47,7 +47,7 @@ def get_ex1_br00002_df() -> DataFrame:
     """idea_format_00002_moment_paybook_v0_0_0
     voice_name,amount,moment_label,belief_name,tran_time"""
     x_df = DataFrame(
-        columns=["voice_name", "amount", "moment_label", "belief_name", "tran_time"]
+        columns=["voice_name", "amount", wx.moment_label, wx.belief_name, "tran_time"]
     )
     x_df.loc[0] = ["Bob", 888, AMY23_STR, "Zia", 777]
     return x_df
@@ -56,7 +56,7 @@ def get_ex1_br00002_df() -> DataFrame:
 def get_ex1_br00003_df() -> DataFrame:
     """idea_format_00003_moment_epoch_hour_v0_0_0
     cumulative_minute,moment_label,hour_label"""
-    x_df = DataFrame(columns=["moment_label", "hour_label", "cumulative_minute"])
+    x_df = DataFrame(columns=[wx.moment_label, "hour_label", "cumulative_minute"])
     x_df.loc[0] = [AMY23_STR, "12am", 60]
     x_df.loc[1] = [AMY23_STR, "1am", 120]
     x_df.loc[2] = [AMY23_STR, "2am", 180]
@@ -87,7 +87,7 @@ def get_ex1_br00003_df() -> DataFrame:
 def get_ex1_br00004_df() -> DataFrame:
     """idea_format_00004_moment_epoch_month_v0_0_0
     cumulative_day,moment_label,month_label"""
-    x_df = DataFrame(columns=["moment_label", "month_label", "cumulative_day"])
+    x_df = DataFrame(columns=[wx.moment_label, "month_label", "cumulative_day"])
     x_df.loc[0] = [AMY23_STR, "March", 31]
     x_df.loc[1] = [AMY23_STR, "April", 61]
     x_df.loc[2] = [AMY23_STR, "May", 92]
@@ -183,7 +183,7 @@ def get_ex2_br00002_df() -> DataFrame:
 def get_ex2_br00003_df() -> DataFrame:
     """idea_format_00003_moment_epoch_hour_v0_0_0
     cumulative_minute,moment_label,hour_label"""
-    x_df = DataFrame(columns=["moment_label", "hour_label", "cumulative_minute"])
+    x_df = DataFrame(columns=[wx.moment_label, "hour_label", "cumulative_minute"])
     x_df.loc[0] = [AMY23_STR, "12am", 60]
     x_df.loc[1] = [AMY23_STR, "1am", 120]
     x_df.loc[2] = [AMY23_STR, "2am", 180]
@@ -234,7 +234,7 @@ def get_ex2_br00003_df() -> DataFrame:
 def get_ex2_br00004_df() -> DataFrame:
     """idea_format_00004_moment_epoch_month_v0_0_0
     cumulative_day,moment_label,month_label"""
-    x_df = DataFrame(columns=["moment_label", "month_label", "cumulative_day"])
+    x_df = DataFrame(columns=[wx.moment_label, "month_label", "cumulative_day"])
     x_df.loc[0] = [AMY23_STR, "March", 31]
     x_df.loc[1] = [AMY23_STR, "April", 61]
     x_df.loc[2] = [AMY23_STR, "May", 92]
@@ -268,7 +268,7 @@ def get_ex2_br00004_df() -> DataFrame:
 def get_ex2_br00005_df() -> DataFrame:
     """idea_format_00005_moment_epoch_weekday_v0_0_0
     moment_label,weekday_label,weekday_order"""
-    x_df = DataFrame(columns=["moment_label", "weekday_label", "weekday_order"])
+    x_df = DataFrame(columns=[wx.moment_label, "weekday_label", "weekday_order"])
     x_df.loc[0] = [AMY23_STR, "Wednesday", 0]
     x_df.loc[1] = [AMY23_STR, "Thursday", 1]
     x_df.loc[2] = [AMY23_STR, "Friday", 2]
@@ -287,7 +287,7 @@ def get_ex2_br00005_df() -> DataFrame:
 # def get_ex2_br00006_df() -> DataFrame:
 #     """idea_format_00006_moment_timeoffi_v0_0_0
 #     moment_label,offi_time,_offi_time_maxt"""
-#     x_df = DataFrame(columns=["moment_label", "offi_time", "offi_time_max"])
+#     x_df = DataFrame(columns=[wx.moment_label, "offi_time", "offi_time_max"])
 #     x_df.loc[0] = [AMY23_STR, 100, 300]
 #     x_df.loc[1] = [AMY23_STR, 110, 320]
 #     x_df.loc[2] = [AMY23_STR, 120, 330]
@@ -377,8 +377,8 @@ def get_ex02_atom_dataframe() -> DataFrame:
         "healer_name",
         "voice_name",
         "group_title",
-        "party_title",
-        "awardee_title",
+        wx.party_title,
+        wx.awardee_title,
         "plan_rope",
     ]
     x_dt = DataFrame(columns=ex02_columns)

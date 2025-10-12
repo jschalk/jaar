@@ -34,30 +34,30 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnitSimpleAttrs():
     dimen = wx.beliefunit
     x_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     new1_value = 55
-    new1_arg = "tally"
+    new1_arg = wx.tally
     x_beliefatom.set_jvalue(new1_arg, new1_value)
     new2_value = 66
-    new2_arg = "max_tree_traverse"
+    new2_arg = wx.max_tree_traverse
     x_beliefatom.set_jvalue(new2_arg, new2_value)
     new3_value = 77
-    new3_arg = "credor_respect"
+    new3_arg = wx.credor_respect
     x_beliefatom.set_jvalue(new3_arg, new3_value)
     new4_value = 88
-    new4_arg = "debtor_respect"
+    new4_arg = wx.debtor_respect
     x_beliefatom.set_jvalue(new4_arg, new4_value)
     new9_value = 55550000
-    new9_arg = "fund_pool"
+    new9_arg = wx.fund_pool
     x_beliefatom.set_jvalue(new9_arg, new9_value)
     new8_value = 0.5555
-    new8_arg = "fund_grain"
+    new8_arg = wx.fund_grain
     x_beliefatom.set_jvalue(new8_arg, new8_value)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
     new6_value = 0.5
-    new6_arg = "respect_grain"
+    new6_arg = wx.respect_grain
     x_beliefatom.set_jvalue(new6_arg, new6_value)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
     new7_value = 0.025
-    new7_arg = "money_grain"
+    new7_arg = wx.money_grain
     x_beliefatom.set_jvalue(new7_arg, new7_value)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
 

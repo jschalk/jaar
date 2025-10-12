@@ -9,7 +9,7 @@ from src.ch04_voice_logic.group import (
     awardheir_shop,
     awardline_shop,
     awardunit_shop,
-    awardunits_get_from_json,
+    get_awardunits_from_dict,
     membership_get_from_dict,
     membership_shop,
     memberships_get_from_dict,
@@ -380,34 +380,30 @@ def test_AwardUnit_to_dict_ReturnsDictWithNecessaryDataForJSON():
     # THEN
     assert biker_dict is not None
     assert biker_dict == {
-        "awardee_title": bikers_awardunit.awardee_title,
-        "give_force": bikers_awardunit.give_force,
-        "take_force": bikers_awardunit.take_force,
+        wx.awardee_title: bikers_awardunit.awardee_title,
+        wx.give_force: bikers_awardunit.give_force,
+        wx.take_force: bikers_awardunit.take_force,
     }
 
 
-def test_awardunits_get_from_JSON_ReturnsObj_SimpleExample():
+def test_get_awardunits_from_dict_ReturnsObj_SimpleExample():
     # ESTABLISH
     teacher_str = "teachers"
     teacher_awardunit = awardunit_shop(
         awardee_title=teacher_str, give_force=103, take_force=155
     )
     teacher_dict = teacher_awardunit.to_dict()
-    awardunits_dict = {teacher_awardunit.awardee_title: teacher_dict}
-
-    teachers_json = get_json_from_dict(awardunits_dict)
-    assert teachers_json is not None
-    assert x_is_json(teachers_json)
+    awards_dict = {teacher_awardunit.awardee_title: teacher_dict}
 
     # WHEN
-    awardunits_obj_dict = awardunits_get_from_json(awardunits_json=teachers_json)
+    awardunits_obj_dict = get_awardunits_from_dict(awards_dict)
 
     # THEN
     assert awardunits_obj_dict is not None
-    teachers_obj_check_dict = {teacher_awardunit.awardee_title: teacher_awardunit}
-    print(f"    {awardunits_obj_dict=}")
-    print(f"{teachers_obj_check_dict=}")
-    assert awardunits_obj_dict == teachers_obj_check_dict
+    expected_dict = {teacher_awardunit.awardee_title: teacher_awardunit}
+    print(f"{awardunits_obj_dict=}")
+    print(f"      {expected_dict=}")
+    assert awardunits_obj_dict == expected_dict
 
 
 def test_AwardLine_Exists():

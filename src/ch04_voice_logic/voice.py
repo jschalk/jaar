@@ -1,9 +1,5 @@
 from dataclasses import dataclass
-from src.ch01_data_toolbox.dict_toolbox import (
-    get_0_if_None,
-    get_1_if_None,
-    get_dict_from_json,
-)
+from src.ch01_data_toolbox.dict_toolbox import get_0_if_None, get_1_if_None
 from src.ch02_rope_logic.rope import (
     default_knot_if_None,
     is_labelterm,
@@ -232,11 +228,6 @@ class VoiceUnit:
         x_dict["fund_agenda_take"] = self.fund_agenda_take
         x_dict["fund_agenda_ratio_give"] = self.fund_agenda_ratio_give
         x_dict["fund_agenda_ratio_take"] = self.fund_agenda_ratio_take
-
-
-def voiceunits_get_from_json(voiceunits_json: str) -> dict[str, VoiceUnit]:
-    voiceunits_dict = get_dict_from_json(voiceunits_json)
-    return voiceunits_get_from_dict(x_dict=voiceunits_dict)
 
 
 def voiceunits_get_from_dict(x_dict: dict, _knot: str = None) -> dict[str, VoiceUnit]:

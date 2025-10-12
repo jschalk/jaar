@@ -1,11 +1,10 @@
-from src.ch01_data_toolbox.dict_toolbox import get_json_from_dict, x_is_json
 from src.ch04_voice_logic.group import membership_shop
 from src.ch04_voice_logic.voice import (
     voiceunit_get_from_dict,
     voiceunit_shop,
     voiceunits_get_from_dict,
-    voiceunits_get_from_json,
 )
+from src.ref.ch04_keywords import Ch04Keywords as wx
 
 
 def test_VoiceUnit_get_memberships_dict_ReturnsObj():
@@ -35,14 +34,14 @@ def test_VoiceUnit_get_memberships_dict_ReturnsObj():
     sue_membership_dict = sue_memberships_dict.get(sue_str)
     run_membership_dict = sue_memberships_dict.get(run_str)
     assert sue_membership_dict == {
-        "group_title": sue_str,
-        "group_cred_lumen": sue_group_cred_lumen,
-        "group_debt_lumen": sue_group_debt_lumen,
+        wx.group_title: sue_str,
+        wx.group_cred_lumen: sue_group_cred_lumen,
+        wx.group_debt_lumen: sue_group_debt_lumen,
     }
     assert run_membership_dict == {
-        "group_title": run_str,
-        "group_cred_lumen": run_group_cred_lumen,
-        "group_debt_lumen": run_group_debt_lumen,
+        wx.group_title: run_str,
+        wx.group_cred_lumen: run_group_cred_lumen,
+        wx.group_debt_lumen: run_group_debt_lumen,
     }
 
 
@@ -70,19 +69,19 @@ def test_VoiceUnit_to_dict_ReturnsDictWithNecessaryDataForJSON():
     print(f"{bl_dict=}")
     assert x_dict is not None
     assert x_dict == {
-        "voice_name": bob_str,
-        "voice_cred_lumen": bob_voice_cred_lumen,
-        "voice_debt_lumen": bob_voice_debt_lumen,
-        "memberships": {
+        wx.voice_name: bob_str,
+        wx.voice_cred_lumen: bob_voice_cred_lumen,
+        wx.voice_debt_lumen: bob_voice_debt_lumen,
+        wx.memberships: {
             bob_str: {
-                "group_title": bob_str,
-                "group_cred_lumen": 1,
-                "group_debt_lumen": 1,
+                wx.group_title: bob_str,
+                wx.group_cred_lumen: 1,
+                wx.group_debt_lumen: 1,
             },
             run_str: {
-                "group_title": run_str,
-                "group_cred_lumen": 1,
-                "group_debt_lumen": 1,
+                wx.group_title: run_str,
+                wx.group_cred_lumen: 1,
+                wx.group_debt_lumen: 1,
             },
         },
     }
@@ -129,18 +128,18 @@ def test_VoiceUnit_to_dict_ReturnsDictWithAllAttrDataForJSON():
     print(f"{x_dict=}")
     assert x_dict is not None
     assert x_dict == {
-        "voice_name": bob_str,
-        "voice_cred_lumen": bob_voice_cred_lumen,
-        "voice_debt_lumen": bob_voice_debt_lumen,
-        "memberships": bob_voiceunit.get_memberships_dict(),
-        "irrational_voice_debt_lumen": bob_irrational_voice_debt_lumen,
-        "inallocable_voice_debt_lumen": bob_inallocable_voice_debt_lumen,
-        "fund_give": bob_fund_give,
-        "fund_take": bob_fund_take,
-        "fund_agenda_give": bob_fund_agenda_give,
-        "fund_agenda_take": bob_fund_agenda_take,
-        "fund_agenda_ratio_give": bob_fund_agenda_ratio_give,
-        "fund_agenda_ratio_take": bob_fund_agenda_ratio_take,
+        wx.voice_name: bob_str,
+        wx.voice_cred_lumen: bob_voice_cred_lumen,
+        wx.voice_debt_lumen: bob_voice_debt_lumen,
+        wx.memberships: bob_voiceunit.get_memberships_dict(),
+        wx.irrational_voice_debt_lumen: bob_irrational_voice_debt_lumen,
+        wx.inallocable_voice_debt_lumen: bob_inallocable_voice_debt_lumen,
+        wx.fund_give: bob_fund_give,
+        wx.fund_take: bob_fund_take,
+        wx.fund_agenda_give: bob_fund_agenda_give,
+        wx.fund_agenda_take: bob_fund_agenda_take,
+        wx.fund_agenda_ratio_give: bob_fund_agenda_ratio_give,
+        wx.fund_agenda_ratio_take: bob_fund_agenda_ratio_take,
     }
 
 
@@ -155,10 +154,8 @@ def test_VoiceUnit_to_dict_ReturnsDictWith_irrational_voice_debt_lumen_ValuesIsZ
     x_dict = bob_voiceunit.to_dict(all_attrs=True)
 
     # THEN
-    x_irrational_voice_debt_lumen = "irrational_voice_debt_lumen"
-    x_inallocable_voice_debt_lumen = "inallocable_voice_debt_lumen"
-    assert x_dict.get(x_irrational_voice_debt_lumen) is None
-    assert x_dict.get(x_inallocable_voice_debt_lumen) is None
+    assert x_dict.get(wx.irrational_voice_debt_lumen) is None
+    assert x_dict.get(wx.inallocable_voice_debt_lumen) is None
     assert len(x_dict.keys()) == 10
 
 
@@ -175,11 +172,9 @@ def test_VoiceUnit_to_dict_ReturnsDictWith_irrational_voice_debt_lumen_ValuesIsN
     x_dict = bob_voiceunit.to_dict(all_attrs=True)
 
     # THEN
-    x_irrational_voice_debt_lumen = "irrational_voice_debt_lumen"
-    x_inallocable_voice_debt_lumen = "inallocable_voice_debt_lumen"
-    assert x_dict.get(x_irrational_voice_debt_lumen) == bob_irrational_voice_debt_lumen
+    assert x_dict.get(wx.irrational_voice_debt_lumen) == bob_irrational_voice_debt_lumen
     assert (
-        x_dict.get(x_inallocable_voice_debt_lumen) == bob_inallocable_voice_debt_lumen
+        x_dict.get(wx.inallocable_voice_debt_lumen) == bob_inallocable_voice_debt_lumen
     )
     assert len(x_dict.keys()) == 12
 
@@ -195,10 +190,8 @@ def test_VoiceUnit_to_dict_ReturnsDictWith_irrational_voice_debt_lumen_ValuesIsN
     x_dict = bob_voiceunit.to_dict(all_attrs=True)
 
     # THEN
-    x_irrational_voice_debt_lumen = "irrational_voice_debt_lumen"
-    x_inallocable_voice_debt_lumen = "inallocable_voice_debt_lumen"
-    assert x_dict.get(x_irrational_voice_debt_lumen) is None
-    assert x_dict.get(x_inallocable_voice_debt_lumen) is None
+    assert x_dict.get(wx.irrational_voice_debt_lumen) is None
+    assert x_dict.get(wx.inallocable_voice_debt_lumen) is None
     assert len(x_dict.keys()) == 10
 
 
@@ -247,7 +240,7 @@ def test_voiceunit_get_from_dict_Returns_memberships():
     assert after_yao_voiceunit.knot == slash_str
 
 
-def test_voiceunits_get_from_dict_ReturnsObjWith_knot():
+def test_voiceunits_get_from_dict_ReturnsObj_Scenario0_With_knot():
     # ESTABLISH
     yao_str = ",Yao"
     slash_str = "/"
@@ -263,28 +256,26 @@ def test_voiceunits_get_from_dict_ReturnsObjWith_knot():
     assert x_voiceunits_objs.get(yao_str).knot == slash_str
 
 
-def test_voiceunits_get_from_json_ReturnsObj_SimpleExampleWith_IncompleteData():
+def test_voiceunits_get_from_dict_ReturnsObj_Scenario1_SimpleExampleWith_IncompleteData():
     # ESTABLISH
     yao_str = "Yao"
     yao_voice_cred_lumen = 13
     yao_voice_debt_lumen = 17
     yao_irrational_voice_debt_lumen = 87
     yao_inallocable_voice_debt_lumen = 97
-    yao_json_dict = {
+    yao_voiceunits_dict = {
         yao_str: {
-            "voice_name": yao_str,
-            "voice_cred_lumen": yao_voice_cred_lumen,
-            "voice_debt_lumen": yao_voice_debt_lumen,
-            "memberships": {},
-            "irrational_voice_debt_lumen": yao_irrational_voice_debt_lumen,
-            "inallocable_voice_debt_lumen": yao_inallocable_voice_debt_lumen,
+            wx.voice_name: yao_str,
+            wx.voice_cred_lumen: yao_voice_cred_lumen,
+            wx.voice_debt_lumen: yao_voice_debt_lumen,
+            wx.memberships: {},
+            wx.irrational_voice_debt_lumen: yao_irrational_voice_debt_lumen,
+            wx.inallocable_voice_debt_lumen: yao_inallocable_voice_debt_lumen,
         }
     }
-    yao_json_str = get_json_from_dict(yao_json_dict)
-    assert x_is_json(yao_json_str)
 
     # WHEN
-    yao_obj_dict = voiceunits_get_from_json(voiceunits_json=yao_json_str)
+    yao_obj_dict = voiceunits_get_from_dict(yao_voiceunits_dict)
 
     # THEN
     assert yao_obj_dict[yao_str] is not None

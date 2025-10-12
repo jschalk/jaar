@@ -40,14 +40,14 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_beliefunit():
     sue_money_grain = 2
     sue_tally = 100
     zia_atom = beliefatom_shop(wx.beliefunit, wx.INSERT)
-    zia_atom.set_arg("respect_grain", sue_bit)
-    zia_atom.set_arg("credor_respect", sue_credor_respect)
-    zia_atom.set_arg("debtor_respect", sue_debtor_respect)
-    zia_atom.set_arg("fund_grain", sue_fund_grain)
-    zia_atom.set_arg("fund_pool", sue_fund_pool)
-    zia_atom.set_arg("max_tree_traverse", sue_max_tree_traverse)
-    zia_atom.set_arg("money_grain", sue_money_grain)
-    zia_atom.set_arg("tally", sue_tally)
+    zia_atom.set_arg(wx.respect_grain, sue_bit)
+    zia_atom.set_arg(wx.credor_respect, sue_credor_respect)
+    zia_atom.set_arg(wx.debtor_respect, sue_debtor_respect)
+    zia_atom.set_arg(wx.fund_grain, sue_fund_grain)
+    zia_atom.set_arg(wx.fund_pool, sue_fund_pool)
+    zia_atom.set_arg(wx.max_tree_traverse, sue_max_tree_traverse)
+    zia_atom.set_arg(wx.money_grain, sue_money_grain)
+    zia_atom.set_arg(wx.tally, sue_tally)
 
     # WHEN
     new_zia_beliefatom = sift_beliefatom(sue_belief, zia_atom)
@@ -58,14 +58,14 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_beliefunit():
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
     assert zia_jvalues == {
-        "respect_grain": sue_bit,
-        "credor_respect": sue_credor_respect,
-        "debtor_respect": sue_debtor_respect,
-        "fund_grain": sue_fund_grain,
-        "fund_pool": sue_fund_pool,
-        "max_tree_traverse": sue_max_tree_traverse,
-        "money_grain": sue_money_grain,
-        "tally": sue_tally,
+        wx.respect_grain: sue_bit,
+        wx.credor_respect: sue_credor_respect,
+        wx.debtor_respect: sue_debtor_respect,
+        wx.fund_grain: sue_fund_grain,
+        wx.fund_pool: sue_fund_pool,
+        wx.max_tree_traverse: sue_max_tree_traverse,
+        wx.money_grain: sue_money_grain,
+        wx.tally: sue_tally,
     }
 
 

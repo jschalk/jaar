@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from src.ch01_data_toolbox.dict_toolbox import get_1_if_None, get_dict_from_json
+from src.ch01_data_toolbox.dict_toolbox import get_1_if_None
 from src.ch03_allot_toolbox.allot import allot_scale, default_grain_num_if_None
 from src.ch04_voice_logic._ref.ch04_semantic_types import (
     FundGrain,
@@ -111,11 +111,6 @@ class AwardUnit(AwardCore):
             "give_force": self.give_force,
             "take_force": self.take_force,
         }
-
-
-def awardunits_get_from_json(awardunits_json: str) -> dict[GroupTitle, AwardUnit]:
-    awardunits_dict = get_dict_from_json(awardunits_json)
-    return get_awardunits_from_dict(awardunits_dict)
 
 
 def get_awardunits_from_dict(x_dict: dict) -> dict[GroupTitle, AwardUnit]:

@@ -81,7 +81,7 @@ def test_get_belief_agenda_dataframe_ReturnsDataFrame():
 
     # THEN
     voiceunit_colums = {
-        "belief_name",
+        wx.belief_name,
         "fund_ratio",
         wx.plan_label,
         wx.parent_rope,
@@ -109,7 +109,7 @@ def test_get_belief_agenda_dataframe_ReturnsEmptyDataFrame():
 
     # THEN
     voiceunit_colums = {
-        "belief_name",
+        wx.belief_name,
         "fund_ratio",
         wx.plan_label,
         wx.parent_rope,

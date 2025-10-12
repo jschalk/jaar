@@ -54,17 +54,17 @@ VALUES (
 
     # THEN
     assert a23_dict
-    assert a23_dict.get("moment_label") == a23_str
+    assert a23_dict.get(wx.moment_label) == a23_str
     print(f"{a23_dict=}")
     a23_epoch_dict = a23_dict.get("epoch")
     assert a23_epoch_dict.get("epoch_label") == a23_epoch_label
     assert a23_epoch_dict.get("c400_number") == a23_c400_number
     assert a23_epoch_dict.get("yr1_jan1_offset") == a23_yr1_jan1_offset
     assert a23_epoch_dict.get("monthday_index") == a23_monthday_index
-    assert a23_dict.get("fund_grain") == a23_fund_grain
-    assert a23_dict.get("money_grain") == a23_money_grain
-    assert a23_dict.get("respect_grain") == a23_respect_grain
-    assert a23_dict.get("knot") == a23_knot
+    assert a23_dict.get(wx.fund_grain) == a23_fund_grain
+    assert a23_dict.get(wx.money_grain) == a23_money_grain
+    assert a23_dict.get(wx.respect_grain) == a23_respect_grain
+    assert a23_dict.get(wx.knot) == a23_knot
 
 
 def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scenario1():
@@ -83,12 +83,12 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scen
 
     # THEN
     assert a23_dict
-    assert a23_dict.get("moment_label") == a23_str
+    assert a23_dict.get(wx.moment_label) == a23_str
     assert "epoch" in set(a23_dict.keys())
-    assert a23_dict.get("fund_grain") is None
-    assert a23_dict.get("money_grain") is None
-    assert a23_dict.get("respect_grain") is None
-    assert a23_dict.get("knot") is None
+    assert a23_dict.get(wx.fund_grain) is None
+    assert a23_dict.get(wx.money_grain) is None
+    assert a23_dict.get(wx.respect_grain) is None
+    assert a23_dict.get(wx.knot) is None
     assert set(a23_dict.keys()) == {
         wx.moment_label,
         "offi_times",
@@ -125,7 +125,7 @@ VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
     # THEN
     a23_paybook_dict = a23_dict.get("paybook")
     assert a23_paybook_dict
-    assert a23_paybook_dict.get("moment_label") == a23_str
+    assert a23_paybook_dict.get(wx.moment_label) == a23_str
     a23_tranunits_dict = a23_paybook_dict.get("tranunits")
     assert a23_tranunits_dict
     a23_trans_bob_dict = a23_tranunits_dict.get(bob_str)
@@ -165,7 +165,7 @@ VALUES
     # THEN
     a23_paybook_dict = a23_dict.get("paybook")
     assert a23_paybook_dict
-    assert a23_paybook_dict.get("moment_label") == a23_str
+    assert a23_paybook_dict.get(wx.moment_label) == a23_str
     a23_tranunits_dict = a23_paybook_dict.get("tranunits")
     assert a23_tranunits_dict
     a23_trans_bob_dict = a23_tranunits_dict.get(bob_str)

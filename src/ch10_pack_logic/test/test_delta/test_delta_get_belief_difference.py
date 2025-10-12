@@ -171,13 +171,13 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_BeliefUnit
     # THEN
     x_keylist = [wx.UPDATE, wx.beliefunit]
     xio_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert xio_beliefatom.get_value("max_tree_traverse") == x_max_tree_traverse
-    assert xio_beliefatom.get_value("credor_respect") == x_credor_respect
-    assert xio_beliefatom.get_value("debtor_respect") == x_debtor_respect
-    assert xio_beliefatom.get_value("tally") == x_beliefunit_tally
-    assert xio_beliefatom.get_value("fund_pool") == x_fund_pool
-    assert xio_beliefatom.get_value("fund_grain") == x_fund_grain
-    assert xio_beliefatom.get_value("respect_grain") == x_respect_grain
+    assert xio_beliefatom.get_value(wx.max_tree_traverse) == x_max_tree_traverse
+    assert xio_beliefatom.get_value(wx.credor_respect) == x_credor_respect
+    assert xio_beliefatom.get_value(wx.debtor_respect) == x_debtor_respect
+    assert xio_beliefatom.get_value(wx.tally) == x_beliefunit_tally
+    assert xio_beliefatom.get_value(wx.fund_pool) == x_fund_pool
+    assert xio_beliefatom.get_value(wx.fund_grain) == x_fund_grain
+    assert xio_beliefatom.get_value(wx.respect_grain) == x_respect_grain
 
     print(f"{get_beliefatom_total_count(sue_beliefdelta)=}")
     assert get_beliefatom_total_count(sue_beliefdelta) == 1

@@ -56,7 +56,7 @@ def test_PlanAttrHolder_Exists():
         "factunit",
         "awardunit",
         "awardunit_del",
-        "is_expanded",
+        wx.is_expanded,
         wx.problem_bool,
         wx.stop_want,
         wx.gogo_want,
