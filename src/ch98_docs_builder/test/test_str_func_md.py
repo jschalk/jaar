@@ -68,6 +68,6 @@ def test_create_all_enum_keyword_classes_str_ReturnsObj():
     two_line_spacing_str = """from enum import Enum
 
 
-class Ch00Keywords"""
+class Ch00Key"""
     print(classes_str[:100])
     assert classes_str.find(two_line_spacing_str) == 0
