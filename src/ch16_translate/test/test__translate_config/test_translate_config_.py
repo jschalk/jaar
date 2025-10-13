@@ -1,5 +1,5 @@
 from os import getcwd as os_getcwd
-from src.ch01_data_toolbox.file_toolbox import create_path
+from src.ch01_py.file_toolbox import create_path
 from src.ch16_translate.translate_config import (
     default_unknown_str,
     default_unknown_str_if_None,
@@ -10,7 +10,7 @@ from src.ch16_translate.translate_config import (
     get_translate_filename,
     translate_config_path,
 )
-from src.ref.ch16_keywords import Ch16Keywords as wx
+from src.ref.keywords import Ch16Keywords as wx
 
 
 def test_get_translate_filename_ReturnsObj():

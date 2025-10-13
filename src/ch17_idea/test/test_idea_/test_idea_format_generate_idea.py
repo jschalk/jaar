@@ -1,13 +1,13 @@
-from src.ch06_plan_logic.plan import planunit_shop
+from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.test._util.ch07_examples import beliefunit_v001
-from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
+from src.ch09_belief_atom.atom_main import beliefatom_shop
 from src.ch17_idea.idea_config import (
     idea_format_00013_planunit_v0_0_0,
     idea_format_00021_belief_voiceunit_v0_0_0,
 )
 from src.ch17_idea.idea_main import create_idea_df, get_idearef_obj, make_beliefdelta
-from src.ref.ch17_keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as wx
 
 
 def test_make_beliefdelta_Arg_idea_format_00021_belief_voiceunit_v0_0_0():

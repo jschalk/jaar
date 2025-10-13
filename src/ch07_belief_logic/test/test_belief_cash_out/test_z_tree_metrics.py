@@ -1,7 +1,7 @@
-from src.ch02_rope_logic.rope import create_rope_from_labels
-from src.ch04_voice_logic.group import awardunit_shop
-from src.ch04_voice_logic.voice import voiceunit_shop
-from src.ch06_plan_logic.plan import planunit_shop
+from src.ch02_rope.rope import create_rope_from_labels
+from src.ch04_voice.group import awardunit_shop
+from src.ch04_voice.voice import voiceunit_shop
+from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.test._util.ch07_examples import beliefunit_v001
 

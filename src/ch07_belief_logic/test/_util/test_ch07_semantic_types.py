@@ -5,7 +5,7 @@ from src.ch07_belief_logic._ref.ch07_semantic_types import (
     MoneyGrain,
     NexusLabel,
 )
-from src.ref.ch07_keywords import Ch07Keywords as wx
+from src.ref.keywords import Ch07Keywords as wx
 
 
 def test_BeliefName_Exists():

@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch02_rope_logic.rope import create_rope, default_knot_if_None, to_rope
+from src.ch02_rope.rope import create_rope, default_knot_if_None, to_rope
 from src.ch16_translate.map import (
     RopeMap,
     get_ropemap_from_dict,
@@ -8,7 +8,7 @@ from src.ch16_translate.map import (
     ropemap_shop,
 )
 from src.ch16_translate.translate_config import default_unknown_str_if_None
-from src.ref.ch16_keywords import Ch16Keywords as wx
+from src.ref.keywords import Ch16Keywords as wx
 
 
 def test_RopeMap_Exists():

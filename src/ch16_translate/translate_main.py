@@ -1,9 +1,5 @@
 from dataclasses import dataclass
-from src.ch01_data_toolbox.dict_toolbox import (
-    get_0_if_None,
-    get_dict_from_json,
-    get_json_from_dict,
-)
+from src.ch01_py.dict_toolbox import get_0_if_None
 from src.ch16_translate._ref.ch16_semantic_types import (
     BeliefName,
     EventInt,
@@ -349,10 +345,6 @@ def get_translateunit_from_dict(x_dict: dict) -> TranslateUnit:
         labelmap=x_labelmap,
         ropemap=x_ropemap,
     )
-
-
-def get_translateunit_from_json(x_json: str) -> TranslateUnit:
-    return get_translateunit_from_dict(get_dict_from_json(x_json))
 
 
 def _get_rid_of_translate_core_keys(map_dict: dict) -> dict:

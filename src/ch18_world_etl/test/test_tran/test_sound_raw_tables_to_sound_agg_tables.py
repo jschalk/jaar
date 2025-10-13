@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.db_toolbox import get_row_count, get_table_columns
+from src.ch01_py.db_toolbox import get_row_count, get_table_columns
 from src.ch18_world_etl.tran_sqlstrs import (
     CREATE_TRLROPE_SOUND_RAW_SQLSTR,
     create_prime_tablename,
@@ -11,7 +11,7 @@ from src.ch18_world_etl.transformers import (
     insert_sound_raw_selects_into_sound_agg_tables,
     set_sound_raw_tables_error_message,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_create_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdatesTable_Scenario0():

@@ -1,5 +1,5 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_epoch_logic.reason_str_func import (
+from src.ch08_epoch.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
@@ -9,7 +9,7 @@ from src.ch22_belief_viewer.belief_viewer__tool import (
     get_plan_view_dict,
     get_voices_view_dict,
 )
-from src.ref.ch22_keywords import Ch22Keywords as wx
+from src.ref.keywords import Ch22Keywords as wx
 
 
 def test_get_belief_view_dict_ReturnsObj_Scenario0_Empty():

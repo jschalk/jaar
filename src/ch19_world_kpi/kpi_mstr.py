@@ -1,14 +1,9 @@
 from sqlite3 import Cursor as sqlite3_Cursor, connect as sqlite3_connect
-from src.ch01_data_toolbox.db_toolbox import db_table_exists, get_db_tables
-from src.ch01_data_toolbox.file_toolbox import (
-    create_path,
-    get_level1_dirs,
-    save_file,
-    set_dir,
-)
-from src.ch08_epoch_logic.calendar_markdown import get_calendarmarkdown_str
-from src.ch15_moment_logic.moment_epoch import get_moment_beliefepochpoint
-from src.ch15_moment_logic.moment_main import get_default_path_momentunit
+from src.ch01_py.db_toolbox import db_table_exists, get_db_tables
+from src.ch01_py.file_toolbox import create_path, get_level1_dirs, save_file, set_dir
+from src.ch08_epoch.calendar_markdown import get_calendarmarkdown_str
+from src.ch15_moment.moment_epoch import get_moment_beliefepochpoint
+from src.ch15_moment.moment_main import get_default_path_momentunit
 from src.ch17_idea.idea_db_tool import save_table_to_csv
 from src.ch19_world_kpi.kpi_sqlstrs import (
     get_create_kpi001_sqlstr,

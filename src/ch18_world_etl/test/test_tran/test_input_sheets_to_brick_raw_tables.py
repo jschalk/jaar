@@ -1,18 +1,14 @@
 from pandas import DataFrame
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.db_toolbox import (
-    db_table_exists,
-    get_row_count,
-    get_table_columns,
-)
-from src.ch01_data_toolbox.file_toolbox import create_path
+from src.ch01_py.db_toolbox import db_table_exists, get_row_count, get_table_columns
+from src.ch01_py.file_toolbox import create_path
 from src.ch17_idea.idea_db_tool import upsert_sheet
 from src.ch18_world_etl.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
 from src.ch18_world_etl.transformers import etl_input_dfs_to_brick_raw_tables
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(

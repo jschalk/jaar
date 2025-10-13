@@ -1,5 +1,5 @@
 from os.path import exists as os_path_exists
-from src.ch01_data_toolbox.file_toolbox import open_json, save_file
+from src.ch01_py.file_toolbox import open_json, save_file
 from src.ch18_world_etl._ref.ch18_path import (
     create_moment_ote1_csv_path,
     create_moment_ote1_json_path,
@@ -9,7 +9,7 @@ from src.ch18_world_etl.test._util.ch18_env import (
     get_chapter_temp_dir,
 )
 from src.ch18_world_etl.transformers import etl_moment_ote1_agg_csvs_to_jsons
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_etl_moment_ote1_agg_csvs_to_jsons_CreatesFile_Scenaro0(

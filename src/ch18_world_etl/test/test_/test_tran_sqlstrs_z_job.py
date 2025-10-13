@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.db_toolbox import db_table_exists, get_create_table_sqlstr
+from src.ch01_py.db_toolbox import db_table_exists, get_create_table_sqlstr
 from src.ch07_belief_logic.belief_config import get_belief_config_dict
 from src.ch17_idea.idea_config import get_idea_sqlite_types
 from src.ch17_idea.idea_db_tool import get_default_sorted_list
@@ -8,7 +8,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     create_prime_tablename as prime_table,
     get_job_create_table_sqlstrs,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_get_job_create_table_sqlstrs_ReturnsObj():

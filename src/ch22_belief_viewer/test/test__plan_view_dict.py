@@ -1,5 +1,5 @@
-from src.ch06_plan_logic.plan import planunit_shop
-from src.ch08_epoch_logic.reason_str_func import (
+from src.ch06_plan.plan import planunit_shop
+from src.ch08_epoch.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
@@ -17,7 +17,7 @@ from src.ch22_belief_viewer.example22_beliefs import (
     play_str,
     play_swim_str,
 )
-from src.ref.ch22_keywords import Ch22Keywords as wx
+from src.ref.keywords import Ch22Keywords as wx
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():

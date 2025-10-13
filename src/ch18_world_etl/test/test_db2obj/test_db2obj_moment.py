@@ -1,11 +1,11 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch15_moment_logic.moment_main import get_momentunit_from_dict
+from src.ch15_moment.moment_main import get_momentunit_from_dict
 from src.ch18_world_etl.db_obj_moment_tool import get_moment_dict_from_heard_tables
 from src.ch18_world_etl.tran_sqlstrs import (
     create_prime_tablename,
     create_sound_and_heard_tables,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scenario0():

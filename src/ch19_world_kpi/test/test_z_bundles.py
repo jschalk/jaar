@@ -1,16 +1,12 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.db_toolbox import (
-    db_table_exists,
-    get_db_tables,
-    get_row_count,
-)
+from src.ch01_py.db_toolbox import db_table_exists, get_db_tables, get_row_count
 from src.ch18_world_etl.tran_sqlstrs import (
     CREATE_JOB_BLRPLAN_SQLSTR,
     CREATE_MOMENT_VOICE_NETS_SQLSTR,
     create_prime_tablename,
 )
 from src.ch19_world_kpi.kpi_mstr import populate_kpi_bundle
-from src.ref.ch19_keywords import Ch19Keywords as wx
+from src.ref.keywords import Ch19Keywords as wx
 
 
 def test_populate_kpi_bundle_PopulatesTable_Scenario0_WithDefaultBundleID():

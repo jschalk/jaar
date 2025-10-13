@@ -1,5 +1,5 @@
 from os.path import exists as os_path_exists
-from src.ch01_data_toolbox.file_toolbox import create_path, get_dir_file_strs
+from src.ch01_py.file_toolbox import create_path, get_dir_file_strs
 from src.ch16_translate.test._util.ch16_examples import (
     get_casa_maison_label_dt,
     get_casa_maison_rope_otx2inx_dt,
@@ -36,7 +36,7 @@ from src.ch17_idea.translate_toolbox import (
     init_translateunit_from_dir,
     save_all_csvs_from_translateunit,
 )
-from src.ref.ch17_keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as wx
 
 
 def test_get_translate_name_dt_columns_ReturnsObj():

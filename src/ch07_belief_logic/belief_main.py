@@ -1,13 +1,12 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
-from src.ch01_data_toolbox.dict_toolbox import (
+from src.ch01_py.dict_toolbox import (
     get_0_if_None,
     get_1_if_None,
-    get_dict_from_json,
     get_empty_dict_if_None,
     get_False_if_None,
 )
-from src.ch02_rope_logic.rope import (
+from src.ch02_rope.rope import (
     all_ropes_between,
     create_rope,
     default_knot_if_None,
@@ -23,27 +22,18 @@ from src.ch02_rope_logic.rope import (
     rope_is_valid_dir_path,
     to_rope,
 )
-from src.ch03_allot_toolbox.allot import (
+from src.ch03_allot.allot import (
     allot_scale,
     default_grain_num_if_None,
     valid_allotment_ratio,
     validate_pool_num,
 )
-from src.ch04_voice_logic.group import (
-    AwardUnit,
-    GroupUnit,
-    groupunit_shop,
-    membership_shop,
-)
-from src.ch04_voice_logic.labor import LaborUnit
-from src.ch04_voice_logic.voice import (
-    VoiceUnit,
-    voiceunit_shop,
-    voiceunits_get_from_dict,
-)
-from src.ch05_reason_logic.reason import FactUnit, ReasonUnit, RopeTerm, factunit_shop
-from src.ch06_plan_logic.healer import HealerUnit
-from src.ch06_plan_logic.plan import (
+from src.ch04_voice.group import AwardUnit, GroupUnit, groupunit_shop, membership_shop
+from src.ch04_voice.labor import LaborUnit
+from src.ch04_voice.voice import VoiceUnit, voiceunit_shop, voiceunits_get_from_dict
+from src.ch05_reason.reason import FactUnit, ReasonUnit, RopeTerm, factunit_shop
+from src.ch06_plan.healer import HealerUnit
+from src.ch06_plan.plan import (
     PlanAttrHolder,
     PlanUnit,
     get_obj_from_plan_dict,

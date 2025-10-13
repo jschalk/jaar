@@ -2,14 +2,14 @@ from os.path import exists as os_path_exists
 from pandas import DataFrame
 from pandas.testing import assert_frame_equal
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.file_toolbox import count_files, create_path, set_dir
+from src.ch01_py.file_toolbox import count_files, create_path, set_dir
 from src.ch17_idea.idea_db_tool import open_csv
 from src.ch19_world_kpi.kpi_mstr import create_kpi_csvs
 from src.ch19_world_kpi.test._util.ch19_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ref.ch19_keywords import Ch19Keywords as wx
+from src.ref.keywords import Ch19Keywords as wx
 
 
 def test_create_kpi_csvs_Scenario0_NotCreateFileWhenNoKPITables(env_dir_setup_cleanup):

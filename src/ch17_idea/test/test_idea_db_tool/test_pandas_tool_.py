@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from pandas import DataFrame
-from src.ch01_data_toolbox.file_toolbox import create_path, open_file
+from src.ch01_py.file_toolbox import create_path, open_file
 from src.ch17_idea.idea_db_tool import (
     get_ordered_csv,
     get_relevant_columns_dataframe,
@@ -23,7 +23,7 @@ from src.ch17_idea.test._util.ch17_examples import (
     get_small_example01_csv,
     get_small_example01_dataframe,
 )
-from src.ref.ch17_keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as wx
 
 
 def test_get_ordered_csv_ReturnsObj():

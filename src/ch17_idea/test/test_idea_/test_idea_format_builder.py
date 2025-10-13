@@ -1,5 +1,5 @@
-from src.ch01_data_toolbox.file_toolbox import save_json
-from src.ch09_belief_atom_logic.atom_config import get_atom_config_args
+from src.ch01_py.file_toolbox import save_json
+from src.ch09_belief_atom.atom_config import get_atom_config_args
 from src.ch17_idea._ref.ch17_doc_builder import (
     get_brick_formats_md,
     get_idea_brick_md,
@@ -10,7 +10,7 @@ from src.ch17_idea.test._util.ch17_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ref.ch17_keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as wx
 
 
 def create_dimens_idea_format_dict() -> dict:

@@ -1,21 +1,21 @@
 from csv import reader as csv_reader
 from dataclasses import dataclass
 from pandas import DataFrame
-from src.ch01_data_toolbox.dict_toolbox import (
+from src.ch01_py.dict_toolbox import (
     create_l2nested_csv_dict,
     extract_csv_headers,
     get_csv_column1_column2_metrics,
     get_positional_dict,
 )
 from src.ch07_belief_logic.belief_main import BeliefUnit
-from src.ch08_epoch_logic.epoch_main import epochunit_shop
-from src.ch09_belief_atom_logic.atom_main import BeliefAtom, atomrow_shop
-from src.ch10_pack_logic.delta import (
+from src.ch08_epoch.epoch_main import epochunit_shop
+from src.ch09_belief_atom.atom_main import BeliefAtom, atomrow_shop
+from src.ch10_pack.delta import (
     BeliefDelta,
     beliefdelta_shop,
     get_dimens_cruds_beliefdelta,
 )
-from src.ch15_moment_logic.moment_main import MomentUnit, momentunit_shop
+from src.ch15_moment.moment_main import MomentUnit, momentunit_shop
 from src.ch17_idea._ref.ch17_semantic_types import BeliefName, MomentLabel
 from src.ch17_idea.idea_config import get_idea_format_headers, get_idearef_from_file
 from src.ch17_idea.idea_db_tool import (

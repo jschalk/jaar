@@ -1,6 +1,6 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
-from src.ch01_data_toolbox.file_toolbox import create_path
+from src.ch01_py.file_toolbox import create_path
 from src.ch18_world_etl._ref.ch18_path import (
     create_last_run_metrics_path,
     create_moment_mstr_path,
@@ -15,7 +15,7 @@ from src.ch18_world_etl.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 STANCE0001_FILENAME = "stance0001.xlsx"
 MOMENT_OTE1_AGG_CSV_FILENAME = "moment_ote1_agg.csv"

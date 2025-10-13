@@ -1,10 +1,10 @@
 from pytest import raises as pytest_raises
-from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch09_belief_atom_logic.atom_config import (
+from src.ch02_rope.rope import default_knot_if_None
+from src.ch09_belief_atom.atom_config import (
     get_all_belief_dimen_delete_keys,
     get_atom_args_class_types,
 )
-from src.ch15_moment_logic.moment_config import get_moment_args_class_types
+from src.ch15_moment.moment_config import get_moment_args_class_types
 from src.ch16_translate.map import (
     labelmap_shop,
     namemap_shop,
@@ -32,7 +32,7 @@ from src.ch16_translate.translate_config import (
     translateable_class_types,
 )
 from src.ch16_translate.translate_main import TranslateUnit, translateunit_shop
-from src.ref.ch16_keywords import Ch16Keywords as wx
+from src.ref.keywords import Ch16Keywords as wx
 
 
 def test_get_translate_args_class_types_ReturnsObj():

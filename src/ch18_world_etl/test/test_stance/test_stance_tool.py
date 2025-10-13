@@ -1,10 +1,10 @@
 from os.path import exists as os_path_exists
 from pandas import read_excel as pandas_read_excel
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.file_toolbox import create_path, save_json, set_dir
+from src.ch01_py.file_toolbox import create_path, save_json, set_dir
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch12_pack_file._ref.ch12_path import create_gut_path, create_moment_json_path
-from src.ch15_moment_logic.moment_main import momentunit_shop
+from src.ch10_pack._ref.ch10_path import create_gut_path, create_moment_json_path
+from src.ch15_moment.moment_main import momentunit_shop
 from src.ch17_idea.idea_csv_tool import (
     add_beliefunit_to_stance_csv_strs,
     add_momentunit_to_stance_csv_strs,
@@ -28,7 +28,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_heard_tables,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoMomentUnits(

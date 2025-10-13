@@ -1,10 +1,7 @@
-from src.ch01_data_toolbox.file_toolbox import create_path
-from src.ch08_epoch_logic.epoch_main import (
-    epochunit_shop,
-    get_default_epoch_config_dict,
-)
-from src.ch08_epoch_logic.test._util.ch08_examples import get_five_config
-from src.ch15_moment_logic.moment_main import momentunit_shop
+from src.ch01_py.file_toolbox import create_path
+from src.ch08_epoch.epoch_main import epochunit_shop, get_default_epoch_config_dict
+from src.ch08_epoch.test._util.ch08_examples import get_five_config
+from src.ch15_moment.moment_main import momentunit_shop
 from src.ch17_idea.idea_main import moment_build_from_df
 from src.ch17_idea.test._util.ch17_env import env_dir_setup_cleanup, idea_moments_dir
 from src.ch17_idea.test._util.ch17_examples import (

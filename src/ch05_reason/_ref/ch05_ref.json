@@ -1,0 +1,6 @@
+{
+  "chapter_blurb": "Defines ReasonUnits, FactUnits, and Facts decide if a Reason status is True", 
+  "chapter_content": "Describes what a reason and a fact is; if the reasons match the facts, the Reason.status = True", 
+  "chapter_description": "ch05_reason", 
+  "chapter_number": 5
+}

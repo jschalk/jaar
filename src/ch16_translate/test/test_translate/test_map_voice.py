@@ -1,6 +1,6 @@
 from numpy import int64 as numpy_int64
 from pytest import raises as pytest_raises
-from src.ch02_rope_logic.rope import default_knot_if_None
+from src.ch02_rope.rope import default_knot_if_None
 from src.ch16_translate.map import (
     NameMap,
     get_namemap_from_dict,
@@ -8,7 +8,7 @@ from src.ch16_translate.map import (
     namemap_shop,
 )
 from src.ch16_translate.translate_config import default_unknown_str_if_None
-from src.ref.ch16_keywords import Ch16Keywords as wx
+from src.ref.keywords import Ch16Keywords as wx
 
 
 def test_NameMap_Exists():

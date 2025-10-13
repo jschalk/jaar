@@ -1,7 +1,7 @@
 from importlib import import_module as importlib_import_module
 from inspect import getsource as inspect_getsource
 from os.path import exists as os_path_exists
-from src.ch01_data_toolbox.file_toolbox import (
+from src.ch01_py.file_toolbox import (
     create_path,
     get_dir_file_strs,
     get_dir_filenames,
@@ -71,10 +71,9 @@ def test_Chapters_CheckStringMetricsFromEveryFile():
     excluded_functions = {
         "_get_inx_label",
         "_get_inx_value",
-        "_get_rid_of_translate_core_keys",
         "_is_inx_knot_inclusion_correct",
         "_is_otx_knot_inclusion_correct",
-        "_unknown_str_in_otx2inx",
+        "_unknown_str_in_otx2inx",  # RopeMap method overrides MapCore method
         "del_label",
         "del_otx2inx",
         "env_dir_setup_cleanup",
@@ -87,7 +86,7 @@ def test_Chapters_CheckStringMetricsFromEveryFile():
         "otx_exists",
         "otx2inx_exists",
         "reveal_inx",
-        "set_all_otx2inx",
+        "set_all_otx2inx",  # RopeMap method overrides MapCore method
         "set_knot",
         "set_label",
         "set_otx2inx",
@@ -263,10 +262,8 @@ def test_Chapters_KeywordEnumClassesAreCorrectlyTested():
     cumlative_ch_keywords_dict = get_cumlative_ch_keywords_dict(keywords_by_chapter)
 
     chXX_keyword_classes = get_chXX_keyword_classes(cumlative_ch_keywords_dict)
-    chapter_num_descs = get_chapter_num_descs()
-
     for chapter_prefix, ExpectedEnumClass in chXX_keyword_classes.items():
-        chapter_ref_keywords_path = f"src.ref.{chapter_prefix}_keywords"
+        chapter_ref_keywords_path = f"src.ref.keywords"
         print(f"{chapter_ref_keywords_path=}")
 
         # dynamically import the module

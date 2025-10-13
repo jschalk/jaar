@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.db_toolbox import (
+from src.ch01_py.db_toolbox import (
     create_insert_into_clause_str as get_insert_sql,
     create_select_query as get_select_sql,
     create_table2table_agg_insert_query,
@@ -8,11 +8,8 @@ from src.ch01_data_toolbox.db_toolbox import (
     get_create_table_sqlstr,
     get_table_columns,
 )
-from src.ch09_belief_atom_logic.atom_config import (
-    get_belief_dimens,
-    get_delete_key_name,
-)
-from src.ch15_moment_logic.moment_config import get_moment_dimens
+from src.ch09_belief_atom.atom_config import get_belief_dimens, get_delete_key_name
+from src.ch15_moment.moment_config import get_moment_dimens
 from src.ch16_translate.translate_config import (
     find_set_otx_inx_args,
     get_translate_dimens,
@@ -38,7 +35,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     get_moment_belief_sound_agg_tablenames,
     get_prime_create_table_sqlstrs,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 BELIEF_PRIME_TABLENAMES = {
     f"{wx.belief_voice_membership}_sound_put_agg": "BLRMEMB_PUT_AGG",

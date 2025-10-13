@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.db_toolbox import get_row_count
+from src.ch01_py.db_toolbox import get_row_count
 from src.ch16_translate.translate_main import (
     default_knot_if_None,
     default_unknown_str_if_None,
@@ -33,7 +33,7 @@ from src.ch18_world_etl.transformers import (
     update_translate_sound_agg_inconsist_errors,
     update_translate_sound_agg_knot_errors,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_create_insert_into_translate_core_raw_sqlstr_ReturnsObj_PopulatesTable_Scenario0():

@@ -1,4 +1,4 @@
-from src.ch01_data_toolbox.plotly_toolbox import conditional_fig_show
+from src.ch01_py.plotly_toolbox import conditional_fig_show
 from src.ch07_belief_logic.belief_graphics import (
     display_plantree,
     fund_graph0,

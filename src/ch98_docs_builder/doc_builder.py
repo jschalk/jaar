@@ -7,13 +7,8 @@ from ast import (
 )
 from copy import copy as copy_copy
 from enum import Enum
-from src.ch01_data_toolbox.file_toolbox import (
-    create_path,
-    get_level1_dirs,
-    open_json,
-    save_file,
-)
-from src.ch02_rope_logic._ref.ch02_doc_builder import get_ropeterm_explanation_md
+from src.ch01_py.file_toolbox import create_path, get_level1_dirs, open_json, save_file
+from src.ch02_rope._ref.ch02_doc_builder import get_ropeterm_explanation_md
 from src.ch17_idea._ref.ch17_doc_builder import get_brick_formats_md, get_idea_brick_mds
 
 

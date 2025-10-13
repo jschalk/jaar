@@ -1,8 +1,8 @@
 from os.path import exists as os_path_exists
-from src.ch01_data_toolbox.file_toolbox import create_path, open_json, save_json
+from src.ch01_py.file_toolbox import create_path, open_json, save_json
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_beliefunit_from_dict
-from src.ch10_pack_logic.pack import get_packunit_from_dict, packunit_shop
-from src.ch12_pack_file._ref.ch12_path import (
+from src.ch10_pack.pack_main import get_packunit_from_dict, packunit_shop
+from src.ch11_bud._ref.ch11_path import (
     create_belief_event_dir_path,
     create_event_all_pack_path,
     create_event_expressed_pack_path,
@@ -14,7 +14,7 @@ from src.ch18_world_etl.test._util.ch18_env import (
 from src.ch18_world_etl.transformers import (
     etl_event_pack_json_to_event_inherited_beliefunits,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_belief_json(

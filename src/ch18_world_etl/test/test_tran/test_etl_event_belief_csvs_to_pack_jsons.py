@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
-from src.ch01_data_toolbox.file_toolbox import open_file, open_json, save_file
-from src.ch10_pack_logic.pack import get_packunit_from_dict, packunit_shop
-from src.ch12_pack_file._ref.ch12_path import (
+from src.ch01_py.file_toolbox import open_file, open_json, save_file
+from src.ch10_pack.pack_main import get_packunit_from_dict, packunit_shop
+from src.ch11_bud._ref.ch11_path import (
     create_belief_event_dir_path as belief_event_dir,
     create_event_all_pack_path as all_pack_path,
 )
@@ -11,7 +11,7 @@ from src.ch18_world_etl.test._util.ch18_env import (
 )
 from src.ch18_world_etl.tran_sqlstrs import create_prime_tablename
 from src.ch18_world_etl.transformers import etl_event_belief_csvs_to_pack_json
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_beliefunit(

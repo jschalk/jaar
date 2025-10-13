@@ -1,12 +1,12 @@
 from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.file_toolbox import open_json
+from src.ch01_py.file_toolbox import open_json
 from src.ch17_idea.idea_db_tool import create_idea_sorted_table
 from src.ch18_world_etl._ref.ch18_path import create_last_run_metrics_path
 from src.ch18_world_etl.test._util.ch18_env import get_chapter_temp_dir
 from src.ch18_world_etl.tran_sqlstrs import create_sound_and_heard_tables
 from src.ch18_world_etl.transformers import create_last_run_metrics_json
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_create_last_run_metrics_json_CreatesFile():

@@ -1,5 +1,5 @@
 from random import random as random_random
-from src.ch01_data_toolbox.file_toolbox import (
+from src.ch01_py.file_toolbox import (
     create_path,
     get_dir_filenames,
     open_json,

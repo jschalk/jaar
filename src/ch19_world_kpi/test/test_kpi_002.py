@@ -1,16 +1,12 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.db_toolbox import (
-    db_table_exists,
-    get_row_count,
-    get_table_columns,
-)
-from src.ch02_rope_logic.rope import create_rope
+from src.ch01_py.db_toolbox import db_table_exists, get_row_count, get_table_columns
+from src.ch02_rope.rope import create_rope
 from src.ch18_world_etl.tran_sqlstrs import (
     CREATE_JOB_BLRPLAN_SQLSTR,
     create_prime_tablename,
 )
 from src.ch19_world_kpi.kpi_mstr import create_populate_kpi002_table
-from src.ref.ch19_keywords import Ch19Keywords as wx
+from src.ref.keywords import Ch19Keywords as wx
 
 
 def test_create_populate_kpi002_table_PopulatesTable_Scenario0_NoPledges():

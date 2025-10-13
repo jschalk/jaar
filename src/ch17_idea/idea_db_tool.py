@@ -15,19 +15,19 @@ from pandas import (
 )
 from pandas.api.types import is_numeric_dtype as pandas_api_types_is_numeric_dtype
 from sqlite3 import Connection as sqlite3_Connection
-from src.ch01_data_toolbox.db_toolbox import (
+from src.ch01_py.db_toolbox import (
     create_table_from_columns,
     create_table_from_csv,
     db_table_exists,
     get_table_columns,
     insert_csv,
 )
-from src.ch01_data_toolbox.dict_toolbox import set_in_nested_dict
-from src.ch01_data_toolbox.file_toolbox import (
+from src.ch01_py.dict_toolbox import set_in_nested_dict
+from src.ch01_py.file_toolbox import (
     create_path,
     get_dir_file_strs,
     get_dir_filenames,
-    open_file,
+    open_json,
     save_file,
     set_dir,
 )
@@ -36,7 +36,7 @@ from src.ch16_translate.translate_config import (
     get_translate_args_class_types,
     get_translateable_args,
 )
-from src.ch16_translate.translate_main import TranslateUnit, get_translateunit_from_json
+from src.ch16_translate.translate_main import TranslateUnit, get_translateunit_from_dict
 from src.ch17_idea._ref.ch17_semantic_types import EventInt, FaceName
 from src.ch17_idea.idea_config import (
     get_default_sorted_list,
@@ -138,8 +138,8 @@ def move_otx_csvs_to_translate_inx(face_dir: str):
     otz_dir = create_path(face_dir, "otz")
     inz_dir = create_path(face_dir, "inz")
     translate_filename = "translate.json"
-    translateunit_json = open_file(face_dir, translate_filename)
-    face_translateunit = get_translateunit_from_json(translateunit_json)
+    translate_dict = open_json(face_dir, translate_filename)
+    face_translateunit = get_translateunit_from_dict(translate_dict)
     otz_dir_files = get_dir_file_strs(otz_dir, delete_extensions=False)
     for x_filename in otz_dir_files.keys():
         x_df = open_csv(otz_dir, x_filename)

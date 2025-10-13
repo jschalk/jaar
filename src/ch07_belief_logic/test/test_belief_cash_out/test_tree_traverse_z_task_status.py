@@ -1,8 +1,8 @@
-from src.ch02_rope_logic.rope import to_rope
-from src.ch03_allot_toolbox.allot import default_pool_num
-from src.ch05_reason_logic.reason import caseunit_shop, reasonheir_shop, reasonunit_shop
-from src.ch06_plan_logic.healer import healerunit_shop
-from src.ch06_plan_logic.plan import planunit_shop
+from src.ch02_rope.rope import to_rope
+from src.ch03_allot.allot import default_pool_num
+from src.ch05_reason.reason import caseunit_shop, reasonheir_shop, reasonunit_shop
+from src.ch06_plan.healer import healerunit_shop
+from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_graphics import display_plantree
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.test._util.ch07_examples import (

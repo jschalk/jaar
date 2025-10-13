@@ -1,12 +1,12 @@
 from os.path import exists as os_path_exists
 from sqlite3 import Cursor as sqlite3_Cursor, connect as sqlite3_connect
-from src.ch01_data_toolbox.csv_toolbox import (
+from src.ch01_py.csv_toolbox import (
     delete_column_from_csv_string,
     replace_csv_column_from_string,
 )
-from src.ch01_data_toolbox.file_toolbox import create_path, get_level1_dirs
-from src.ch12_pack_file.packfilehandler import open_belief_file
-from src.ch15_moment_logic.moment_main import get_default_path_momentunit
+from src.ch01_py.file_toolbox import create_path, get_level1_dirs
+from src.ch11_bud.bud_filehandler import open_belief_file
+from src.ch15_moment.moment_main import get_default_path_momentunit
 from src.ch17_idea.idea_csv_tool import (
     add_beliefunit_to_stance_csv_strs,
     add_momentunit_to_stance_csv_strs,

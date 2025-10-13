@@ -1,0 +1,6 @@
+{
+  "chapter_blurb": "Defines packs which are collections of BeliefAtoms by FaceName", 
+  "chapter_content": "Manages the creation and organization of packs, which are collections of beliefunit atoms for building complex beliefunits.", 
+  "chapter_description": "ch10_pack", 
+  "chapter_number": 10
+}

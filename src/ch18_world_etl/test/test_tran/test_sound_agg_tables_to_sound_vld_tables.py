@@ -1,12 +1,12 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.db_toolbox import get_row_count, get_table_columns
+from src.ch01_py.db_toolbox import get_row_count, get_table_columns
 from src.ch18_world_etl.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_heard_tables,
     get_insert_into_sound_vld_sqlstrs,
 )
 from src.ch18_world_etl.transformers import etl_sound_agg_tables_to_sound_vld_tables
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():

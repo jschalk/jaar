@@ -1,16 +1,12 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.db_toolbox import (
-    db_table_exists,
-    get_row_count,
-    get_table_columns,
-)
+from src.ch01_py.db_toolbox import db_table_exists, get_row_count, get_table_columns
 from src.ch17_idea.idea_db_tool import create_idea_sorted_table
 from src.ch18_world_etl.transformers import (
     etl_brick_agg_tables_to_events_brick_agg_table,
     etl_events_brick_agg_db_to_event_dict,
     etl_events_brick_agg_table_to_events_brick_valid_table,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_etl_brick_agg_tables_to_events_brick_agg_table_PopulatesTables_Scenario0():
