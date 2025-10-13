@@ -44,7 +44,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
         wx.face_name,
-        wx.event_int,
+        wx.event_num,
         wx.moment_label,
         wx.belief_name,
         wx.voice_name,
@@ -207,7 +207,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
         wx.face_name,
-        wx.event_int,
+        wx.event_num,
         wx.moment_label,
         wx.belief_name,
         wx.voice_name,
@@ -223,7 +223,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     upsert_sheet(input_file_path, br00113_ex0_str, br00113_df)
 
     br00001_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,
@@ -363,7 +363,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateMomentT
     ex_filename = "Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00002_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,
@@ -403,7 +403,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoMomentIde
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     amy23_str = "amy23"
     br00011_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,
@@ -471,14 +471,14 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
     ex_filename = "Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00003_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.cumulative_minute,
         wx.moment_label,
         wx.hour_label,
     ]
     br00001_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,
@@ -505,7 +505,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
     upsert_sheet(input_file_path, br00003_ex1_str, br00003_1df)
     upsert_sheet(input_file_path, br00003_ex3_str, br00003_3df)
     br00011_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,
@@ -557,7 +557,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
         wx.face_name,
-        wx.event_int,
+        wx.event_num,
         wx.moment_label,
         wx.belief_name,
         wx.voice_name,
@@ -573,7 +573,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     upsert_sheet(input_file_path, br00113_ex0_str, br00113_df)
 
     br00001_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,

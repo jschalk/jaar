@@ -155,7 +155,7 @@ def get_csv_idearef(header_row: list[str]) -> IdeaRef:
     headers_str = "".join(f",{x_header}" for x_header in header_row)
     headers_str = headers_str[1:]
     headers_str = headers_str.replace("face_name,", "")
-    headers_str = headers_str.replace("event_int,", "")
+    headers_str = headers_str.replace("event_num,", "")
     x_ideaname = get_idea_format_headers().get(headers_str)
     return get_idearef_obj(x_ideaname)
 

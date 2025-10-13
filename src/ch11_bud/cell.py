@@ -37,7 +37,7 @@ CELLNODE_QUOTA_DEFAULT = 1000
 @dataclass
 class CellUnit:
     ancestors: list[BeliefName] = None
-    event_int: EventInt = None
+    event_num: EventInt = None
     celldepth: int = None
     bud_belief_name: BeliefName = None
     money_grain: MoneyGrain = None
@@ -154,7 +154,7 @@ class CellUnit:
             self.beliefadjust = beliefunit_shop(self.get_cell_belief_name())
         return {
             "ancestors": self.ancestors,
-            "event_int": self.event_int,
+            "event_num": self.event_num,
             "celldepth": self.celldepth,
             "bud_belief_name": self.bud_belief_name,
             "money_grain": self.money_grain,
@@ -170,7 +170,7 @@ class CellUnit:
 def cellunit_shop(
     bud_belief_name: BeliefName,
     ancestors: list[BeliefName] = None,
-    event_int: EventInt = None,
+    event_num: EventInt = None,
     celldepth: int = None,
     money_grain: MoneyGrain = None,
     quota: float = None,
@@ -193,7 +193,7 @@ def cellunit_shop(
 
     return CellUnit(
         ancestors=get_empty_list_if_None(ancestors),
-        event_int=event_int,
+        event_num=event_num,
         celldepth=get_0_if_None(celldepth),
         bud_belief_name=bud_belief_name,
         money_grain=get_1_if_None(money_grain),
@@ -211,7 +211,7 @@ def cellunit_shop(
 def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
     bud_belief_name = x_dict.get("bud_belief_name")
     ancestors = x_dict.get("ancestors")
-    event_int = x_dict.get("event_int")
+    event_num = x_dict.get("event_num")
     celldepth = x_dict.get("celldepth")
     money_grain = x_dict.get("money_grain")
     quota = x_dict.get("quota")
@@ -230,7 +230,7 @@ def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
     return cellunit_shop(
         bud_belief_name=bud_belief_name,
         ancestors=ancestors,
-        event_int=event_int,
+        event_num=event_num,
         celldepth=celldepth,
         money_grain=money_grain,
         quota=quota,
@@ -256,7 +256,7 @@ def create_child_cellunits(parent_cell: CellUnit) -> list[CellUnit]:
             child_cell = cellunit_shop(
                 bud_belief_name=parent_cell.bud_belief_name,
                 ancestors=child_ancestors,
-                event_int=parent_cell.event_int,
+                event_num=parent_cell.event_num,
                 celldepth=parent_cell.celldepth - 1,
                 money_grain=parent_cell.money_grain,
                 mandate=child_mandate,

@@ -118,7 +118,7 @@
   "epoch"                          : { "init_chapter": "ch08" }, 
   "epoch_label"                    : { "init_chapter": "ch08" }, 
   "error_message"                  : { "init_chapter": "ch17" }, 
-  "event_int"                      : { "init_chapter": "ch10" }, 
+  "event_num"                      : { "init_chapter": "ch10" }, 
   "events_brick_agg"               : { "init_chapter": "ch18" }, 
   "events_brick_valid"             : { "init_chapter": "ch18" }, 
   "face_name"                      : { "init_chapter": "ch10" }, 

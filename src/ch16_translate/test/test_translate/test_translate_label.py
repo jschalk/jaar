@@ -16,7 +16,7 @@ def test_LabelMap_Exists():
 
     # WHEN / THEN
     assert not x_labelmap.face_name
-    assert not x_labelmap.event_int
+    assert not x_labelmap.event_num
     assert not x_labelmap.otx2inx
     assert not x_labelmap.unknown_str
     assert not x_labelmap.otx_knot
@@ -29,7 +29,7 @@ def test_labelmap_shop_ReturnsObj_scenario0_WithoutParameters():
 
     # THEN
     assert not x_labelmap.face_name
-    assert x_labelmap.event_int == 0
+    assert x_labelmap.event_num == 0
     assert x_labelmap.otx2inx == {}
     assert x_labelmap.unknown_str == default_unknown_str_if_None()
     assert x_labelmap.otx_knot == default_knot_if_None()
@@ -50,7 +50,7 @@ def test_labelmap_shop_ReturnsObj_scenario1_WithParameters():
     # WHEN
     x_labelmap = labelmap_shop(
         face_name=bob_str,
-        event_int=event7,
+        event_num=event7,
         otx2inx=otx2inx,
         unknown_str=x_unknown_str,
         otx_knot=slash_otx_knot,
@@ -59,7 +59,7 @@ def test_labelmap_shop_ReturnsObj_scenario1_WithParameters():
 
     # THEN
     assert x_labelmap.face_name == bob_str
-    assert x_labelmap.event_int == event7
+    assert x_labelmap.event_num == event7
     assert x_labelmap.otx2inx == otx2inx
     assert x_labelmap.unknown_str == x_unknown_str
     assert x_labelmap.otx_knot == slash_otx_knot
@@ -78,7 +78,7 @@ def test_labelmap_shop_ReturnsObj_scenario2_TranslateCoreAttrAreDefaultWhenGiven
     # WHEN
     x_labelmap = labelmap_shop(
         face_name=bob_str,
-        event_int=event7,
+        event_num=event7,
         otx2inx=otx2inx,
         unknown_str=x_nan,
         otx_knot=x_nan,
@@ -87,7 +87,7 @@ def test_labelmap_shop_ReturnsObj_scenario2_TranslateCoreAttrAreDefaultWhenGiven
 
     # THEN
     assert x_labelmap.face_name == bob_str
-    assert x_labelmap.event_int == event7
+    assert x_labelmap.event_num == event7
     assert x_labelmap.otx2inx == otx2inx
     assert x_labelmap.unknown_str == default_unknown_str_if_None()
     assert x_labelmap.otx_knot == default_knot_if_None()
@@ -311,13 +311,13 @@ def test_LabelMap_to_dict_ReturnsObj():
         wx.unknown_str: x_labelmap.unknown_str,
         wx.otx2inx: {},
         wx.face_name: x_labelmap.face_name,
-        wx.event_int: x_labelmap.event_int,
+        wx.event_num: x_labelmap.event_num,
     }
     assert x_labelmap.to_dict() == x1_rope_map_dict
 
     # WHEN
     x_labelmap.set_otx2inx(clean_otx, clean_inx)
-    x_labelmap.event_int = event7
+    x_labelmap.event_num = event7
     # THEN
     x2_rope_map_dict = {
         wx.otx_knot: x_labelmap.otx_knot,
@@ -325,7 +325,7 @@ def test_LabelMap_to_dict_ReturnsObj():
         wx.unknown_str: x_labelmap.unknown_str,
         wx.otx2inx: {clean_otx: clean_inx},
         wx.face_name: sue_str,
-        wx.event_int: event7,
+        wx.event_num: event7,
     }
     assert x_labelmap.to_dict() == x2_rope_map_dict
 
@@ -345,8 +345,8 @@ def test_get_labelmap_from_dict_ReturnsObj():
 
     # THEN
     assert gen_labelmap.face_name == x_labelmap.face_name
-    assert gen_labelmap.event_int == x_labelmap.event_int
-    assert gen_labelmap.event_int == event7
+    assert gen_labelmap.event_num == x_labelmap.event_num
+    assert gen_labelmap.event_num == event7
     assert gen_labelmap == x_labelmap
 
 

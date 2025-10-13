@@ -11,7 +11,7 @@
 - ch07_belief_logic: BeliefName, MomentLabel, NexusLabel, ancestors, belief_groupunit, belief_plan_awardunit, belief_plan_factunit, belief_plan_healerunit, belief_plan_partyunit, belief_plan_reason_caseunit, belief_plan_reasonunit, belief_planunit, belief_voice_membership, belief_voiceunit, beliefunit, class_type, credor_respect, debtor_respect, dimen, dimens, jkeys, jvalues, keep_rope, keeps_buildable, keeps_justified, last_pack_id, mandate, max_tree_traverse, moment_label, nexus, offtrack_fund, offtrack_kids_star_set, planroot, reason_contexts, sum_healerunit_plans_fund_total, tally, voice_pool, voices
 - ch08_epoch: EpochLabel, EpochPoint, c100, c400_clean, c400_leap, c400_number, creg, cumulative_day, day, days, epoch, epoch_label, five, hour, hours_config, monthday_index, months_config, readable, time, week, weekdays_config, weeks, year, yr1_jan1_offset, yr4_clean, yr4_leap
 - ch09_belief_atom: CRUD_command, DELETE, atom, atom_hx, column_order, crud, nesting_order, normal_specs, normal_table_name
-- ch10_pack: FaceName, event_int, face_name, gut, job, moment_mstr_dir
+- ch10_pack: FaceName, event_num, face_name, gut, job, moment_mstr_dir
 - ch11_bud: EventInt, amount, beliefadjust, beliefevent_facts, boss_facts, bud_belief_name, bud_time, bud_voice_nets, celldepth, found_facts, magnitude, offi_time, offi_time_max, quota, tran_time
 - ch12_belief_viewer: 
 - ch13_belief_listen: 

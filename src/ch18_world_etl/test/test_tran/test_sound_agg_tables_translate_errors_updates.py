@@ -27,7 +27,7 @@ def test_create_knot_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTabl
         blrpern_dimen = wx.belief_voiceunit
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
-  {wx.event_int}, {wx.face_name}, {wx.moment_label}, {wx.belief_name}, {wx.voice_name})
+  {wx.event_num}, {wx.face_name}, {wx.moment_label}, {wx.belief_name}, {wx.voice_name})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
@@ -83,7 +83,7 @@ def test_create_knot_exists_in_label_error_update_sqlstr_ReturnsObj_PopulatesTab
         blrpern_dimen = wx.belief_voiceunit
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
-  {wx.event_int}, {wx.face_name}, {wx.moment_label}, {wx.belief_name}, {wx.voice_name})
+  {wx.event_num}, {wx.face_name}, {wx.moment_label}, {wx.belief_name}, {wx.voice_name})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
@@ -142,7 +142,7 @@ def test_set_moment_belief_sound_agg_knot_errors_PopulatesTable_Scenario0():
         blrpern_dimen = wx.belief_voiceunit
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
-  {wx.event_int}, {wx.face_name}, {wx.moment_label}, {wx.belief_name}, {wx.voice_name})
+  {wx.event_num}, {wx.face_name}, {wx.moment_label}, {wx.belief_name}, {wx.voice_name})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')

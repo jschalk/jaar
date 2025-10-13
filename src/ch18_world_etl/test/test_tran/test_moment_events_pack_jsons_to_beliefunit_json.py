@@ -37,8 +37,8 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_belief_jso
     a23_bob_e7_dir = create_belief_event_dir_path(
         moment_mstr_dir, a23_str, bob_inx, event7
     )
-    a23_bob_e3_pack = packunit_shop(bob_inx, None, a23_str, event_int=event3)
-    a23_bob_e7_pack = packunit_shop(bob_inx, None, a23_str, event_int=event7)
+    a23_bob_e3_pack = packunit_shop(bob_inx, None, a23_str, event_num=event3)
+    a23_bob_e7_pack = packunit_shop(bob_inx, None, a23_str, event_num=event7)
     blrpern_dimen = wx.belief_voiceunit
     bob_jkeys = {wx.voice_name: bob_inx}
     bob_jvalues = {wx.voice_cred_lumen: credit77, wx.voice_debt_lumen: None}
@@ -103,8 +103,8 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_expressed_
     credit88 = 88
     a23_str = "amy23"
     moment_mstr_dir = get_chapter_temp_dir()
-    a23_bob_e3_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
-    a23_bob_e7_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)
+    a23_bob_e3_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_num=event3)
+    a23_bob_e7_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_num=event7)
     blrpern_dimen = wx.belief_voiceunit
     bob_jkeys = {wx.voice_name: bob_inx}
     bob_jvalues = {wx.voice_cred_lumen: credit77}
@@ -143,8 +143,8 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_expressed_
     assert os_path_exists(e7_expressed_pack_path)
     gen_e3_express_pack = get_packunit_from_dict(open_json(e3_expressed_pack_path))
     gen_e7_express_pack = get_packunit_from_dict(open_json(e7_expressed_pack_path))
-    expected_e3_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
-    expected_e7_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)
+    expected_e3_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_num=event3)
+    expected_e7_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_num=event7)
     expected_e3_bob_pack.add_p_beliefatom(
         blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues
     )

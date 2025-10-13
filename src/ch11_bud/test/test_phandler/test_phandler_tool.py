@@ -25,7 +25,7 @@ from src.ch11_bud.bud_filehandler import (
     collect_belief_event_dir_sets,
     create_cell_voice_mandate_ledger_json,
     get_beliefevent_obj,
-    get_beliefs_downhill_event_ints,
+    get_beliefs_downhill_event_nums,
     get_timepoint_dirs,
     job_file_exists,
     open_belief_file,
@@ -249,25 +249,25 @@ def test_collect_belief_event_dir_sets_ReturnsObj_Scenario2_DirsExist(
     }
 
 
-def test_get_beliefs_downhill_event_ints_ReturnsObj_Scenario0_Empty():
+def test_get_beliefs_downhill_event_nums_ReturnsObj_Scenario0_Empty():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
     event2 = 2
     belief_events_sets = {}
-    downhill_event_int = event2
+    downhill_event_num = event2
     downhill_beliefs = {bob_str, sue_str}
 
     # WHEN
-    beliefs_downhill_event_ints = get_beliefs_downhill_event_ints(
-        belief_events_sets, downhill_beliefs, downhill_event_int
+    beliefs_downhill_event_nums = get_beliefs_downhill_event_nums(
+        belief_events_sets, downhill_beliefs, downhill_event_num
     )
 
     # THEN
-    assert beliefs_downhill_event_ints == {}
+    assert beliefs_downhill_event_nums == {}
 
 
-def test_get_beliefs_downhill_event_ints_ReturnsObj_Scenario1_simple():
+def test_get_beliefs_downhill_event_nums_ReturnsObj_Scenario1_simple():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -275,19 +275,19 @@ def test_get_beliefs_downhill_event_ints_ReturnsObj_Scenario1_simple():
     event2 = 2
     event7 = 7
     belief_events_sets = {bob_str: {event1, event2}, sue_str: {event2, event7}}
-    downhill_event_int = event2
+    downhill_event_num = event2
     downhill_beliefs = {bob_str, sue_str}
 
     # WHEN
-    beliefs_downhill_event_ints = get_beliefs_downhill_event_ints(
-        belief_events_sets, downhill_beliefs, downhill_event_int
+    beliefs_downhill_event_nums = get_beliefs_downhill_event_nums(
+        belief_events_sets, downhill_beliefs, downhill_event_num
     )
 
     # THEN
-    assert beliefs_downhill_event_ints == {bob_str: event2, sue_str: event2}
+    assert beliefs_downhill_event_nums == {bob_str: event2, sue_str: event2}
 
 
-def test_get_beliefs_downhill_event_ints_ReturnsObj_Scenario2Empty_downhill_event_int():
+def test_get_beliefs_downhill_event_nums_ReturnsObj_Scenario2Empty_downhill_event_num():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -303,15 +303,15 @@ def test_get_beliefs_downhill_event_ints_ReturnsObj_Scenario2Empty_downhill_even
     downhill_beliefs = {bob_str, sue_str}
 
     # WHEN
-    beliefs_downhill_event_ints = get_beliefs_downhill_event_ints(
+    beliefs_downhill_event_nums = get_beliefs_downhill_event_nums(
         belief_events_sets, downhill_beliefs
     )
 
     # THEN
-    assert beliefs_downhill_event_ints == {bob_str: event2, sue_str: event7}
+    assert beliefs_downhill_event_nums == {bob_str: event2, sue_str: event7}
 
 
-def test_get_beliefs_downhill_event_ints_ReturnsObj_Scenario3Empty_downhill_beliefs():
+def test_get_beliefs_downhill_event_nums_ReturnsObj_Scenario3Empty_downhill_beliefs():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -326,17 +326,17 @@ def test_get_beliefs_downhill_event_ints_ReturnsObj_Scenario3Empty_downhill_beli
     }
 
     # WHEN
-    beliefs_downhill_event_ints = get_beliefs_downhill_event_ints(belief_events_sets)
+    beliefs_downhill_event_nums = get_beliefs_downhill_event_nums(belief_events_sets)
 
     # THEN
-    assert beliefs_downhill_event_ints == {
+    assert beliefs_downhill_event_nums == {
         bob_str: event2,
         sue_str: event7,
         yao_str: event7,
     }
 
 
-def test_get_beliefs_downhill_event_ints_ReturnsObj_Scenario4Empty_downhill_beliefs_Withdownhill_event_int():
+def test_get_beliefs_downhill_event_nums_ReturnsObj_Scenario4Empty_downhill_beliefs_Withdownhill_event_num():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -349,15 +349,15 @@ def test_get_beliefs_downhill_event_ints_ReturnsObj_Scenario4Empty_downhill_beli
         sue_str: {event2, event7},
         yao_str: {event7},
     }
-    downhill_event_int = 2
+    downhill_event_num = 2
 
     # WHEN
-    beliefs_downhill_event_ints = get_beliefs_downhill_event_ints(
-        belief_events_sets, ref_event_int=downhill_event_int
+    beliefs_downhill_event_nums = get_beliefs_downhill_event_nums(
+        belief_events_sets, ref_event_num=downhill_event_num
     )
 
     # THEN
-    assert beliefs_downhill_event_ints == {bob_str: event2, sue_str: event2}
+    assert beliefs_downhill_event_nums == {bob_str: event2, sue_str: event2}
 
 
 def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
@@ -381,7 +381,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
         time_belief_name=sue_str,
         bud_time=time7,
         quota=quota500,
-        event_int=event3,
+        event_num=event3,
         celldepth=celldepth4,
         money_grain=money_grain6,
         bud_ancestors=das,
@@ -392,7 +392,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     assert os_path_exists(sue7_cell_path)
     generated_cell_dict = open_json(sue7_cell_path)
     assert generated_cell_dict.get(wx.ancestors) == das
-    assert generated_cell_dict.get(wx.event_int) == event3
+    assert generated_cell_dict.get(wx.event_num) == event3
     assert generated_cell_dict.get(wx.celldepth) == celldepth4
     assert generated_cell_dict.get(wx.bud_belief_name) == sue_str
     assert generated_cell_dict.get(wx.money_grain) == money_grain6
@@ -423,7 +423,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
     assert os_path_exists(sue7_cell_path)
     generated_cell_dict = open_json(sue7_cell_path)
     assert generated_cell_dict.get(wx.ancestors) == das
-    assert generated_cell_dict.get(wx.event_int) == event3
+    assert generated_cell_dict.get(wx.event_num) == event3
     assert generated_cell_dict.get(wx.celldepth) == 0
     assert generated_cell_dict.get(wx.bud_belief_name) == sue_str
     assert generated_cell_dict.get(wx.money_grain) == 1
@@ -471,7 +471,7 @@ def test_cellunit_get_from_dir_ReturnsObj_Scenario1_FileExists(env_dir_setup_cle
     gen_cellunit = cellunit_get_from_dir(cell_dir)
 
     # THEN
-    expected_cellunit = cellunit_shop(sue_str, ancestors=das, event_int=event3)
+    expected_cellunit = cellunit_shop(sue_str, ancestors=das, event_num=event3)
     assert gen_cellunit == expected_cellunit
 
 
@@ -485,7 +485,7 @@ def test_cellunit_save_to_dir_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     das = [bob_str, sue_str]
     sue7_cell_path = node_path(moment_mstr_dir, a23_str, sue_str, time7, das)
     event3 = 3
-    sue_cell = cellunit_shop(sue_str, ancestors=das, event_int=event3)
+    sue_cell = cellunit_shop(sue_str, ancestors=das, event_num=event3)
     cell_dir = create_cell_dir_path(moment_mstr_dir, a23_str, sue_str, time7, das)
     assert os_path_exists(sue7_cell_path) is False
 
@@ -555,7 +555,7 @@ def test_create_cell_voice_mandate_ledger_json_CreatesFile_Scenario1(
     sue_cell = cellunit_shop(
         bud_belief_name=yao_str,
         ancestors=sue_ancestors,
-        event_int=sue_event7,
+        event_num=sue_event7,
         celldepth=sue_celldepth3,
         money_grain=sue_money_grain2,
         quota=sue_quota300,

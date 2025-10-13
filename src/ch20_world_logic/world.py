@@ -5,7 +5,7 @@ from src.ch01_py.dict_toolbox import get_0_if_None, get_empty_set_if_None
 from src.ch01_py.file_toolbox import create_path, delete_dir, set_dir
 from src.ch11_bud.bud_main import EpochPoint
 from src.ch15_moment.moment_main import MomentUnit
-from src.ch17_idea.idea_db_tool import update_event_int_in_excel_files
+from src.ch17_idea.idea_db_tool import update_event_num_in_excel_files
 from src.ch18_world_etl._ref.ch18_path import (
     create_moment_mstr_path,
     create_world_db_path,
@@ -42,7 +42,7 @@ from src.ch18_world_etl.transformers import (
     etl_sound_raw_tables_to_sound_agg_tables,
     etl_sound_vld_tables_to_heard_raw_tables,
     etl_translate_sound_agg_tables_to_translate_sound_vld_tables,
-    get_max_brick_agg_event_int,
+    get_max_brick_agg_event_num,
 )
 from src.ch19_world_kpi.kpi_mstr import (
     create_calendar_markdown_files,
@@ -78,14 +78,14 @@ class WorldUnit:
     def delete_world_db(self):
         delete_dir(self.get_world_db_path())
 
-    def set_event(self, event_int: EventInt, face_name: FaceName):
-        self._events[event_int] = face_name
+    def set_event(self, event_num: EventInt, face_name: FaceName):
+        self._events[event_num] = face_name
 
-    def event_exists(self, event_int: EventInt) -> bool:
-        return self._events.get(event_int) != None
+    def event_exists(self, event_num: EventInt) -> bool:
+        return self._events.get(event_num) != None
 
-    def get_event(self, event_int: EventInt) -> FaceName:
-        return self._events.get(event_int)
+    def get_event(self, event_num: EventInt) -> FaceName:
+        return self._events.get(event_num)
 
     def set_input_dir(self, x_dir: str):
         self._input_dir = x_dir
@@ -116,14 +116,14 @@ class WorldUnit:
         db_conn.close()
 
     def stance_sheets_to_clarity_mstr(self):
-        max_brick_agg_event_int = 0
+        max_brick_agg_event_num = 0
         if os_path_exists(self.get_world_db_path()):
             with sqlite3_connect(self.get_world_db_path()) as db_conn0:
                 cursor0 = db_conn0.cursor()
-                max_brick_agg_event_int = get_max_brick_agg_event_int(cursor0)
+                max_brick_agg_event_num = get_max_brick_agg_event_num(cursor0)
             db_conn0.close()
-        next_event_int = max_brick_agg_event_int + 1
-        update_event_int_in_excel_files(self._input_dir, next_event_int)
+        next_event_num = max_brick_agg_event_num + 1
+        update_event_num_in_excel_files(self._input_dir, next_event_num)
         self.sheets_input_to_clarity_mstr()
         delete_dir(self._input_dir)
 
@@ -133,7 +133,7 @@ class WorldUnit:
         set_dir(mstr_dir)
         # collect excel file data into central location
         etl_input_dfs_to_brick_raw_tables(cursor, self._input_dir)
-        # brick raw to sound raw, check by event_ints
+        # brick raw to sound raw, check by event_nums
         etl_brick_raw_tables_to_brick_agg_tables(cursor)
         etl_brick_agg_tables_to_events_brick_agg_table(cursor)
         etl_events_brick_agg_table_to_events_brick_valid_table(cursor)

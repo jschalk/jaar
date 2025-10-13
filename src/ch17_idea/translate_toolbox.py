@@ -14,7 +14,7 @@ from src.ch17_idea.idea_db_tool import get_ordered_csv, open_csv
 
 def get_translate_name_dt_columns() -> list[str]:
     return [
-        "event_int",
+        "event_num",
         "face_name",
         "otx_knot",
         "inx_knot",
@@ -26,7 +26,7 @@ def get_translate_name_dt_columns() -> list[str]:
 
 def get_translate_title_dt_columns() -> list[str]:
     return [
-        "event_int",
+        "event_num",
         "face_name",
         "otx_knot",
         "inx_knot",
@@ -38,7 +38,7 @@ def get_translate_title_dt_columns() -> list[str]:
 
 def get_translate_label_dt_columns() -> list[str]:
     return [
-        "event_int",
+        "event_num",
         "face_name",
         "otx_knot",
         "inx_knot",
@@ -50,7 +50,7 @@ def get_translate_label_dt_columns() -> list[str]:
 
 def get_translate_rope_dt_columns() -> list[str]:
     return [
-        "event_int",
+        "event_num",
         "face_name",
         "otx_knot",
         "inx_knot",
@@ -63,7 +63,7 @@ def get_translate_rope_dt_columns() -> list[str]:
 def create_translate_name_dt(x_map: NameMap) -> DataFrame:
     x_rows_list = [
         {
-            "event_int": x_map.event_int,
+            "event_num": x_map.event_num,
             "face_name": x_map.face_name,
             "otx_knot": x_map.otx_knot,
             "inx_knot": x_map.inx_knot,
@@ -79,7 +79,7 @@ def create_translate_name_dt(x_map: NameMap) -> DataFrame:
 def create_translate_title_dt(x_map: TitleMap) -> DataFrame:
     x_rows_list = [
         {
-            "event_int": x_map.event_int,
+            "event_num": x_map.event_num,
             "face_name": x_map.face_name,
             "otx_knot": x_map.otx_knot,
             "inx_knot": x_map.inx_knot,
@@ -95,7 +95,7 @@ def create_translate_title_dt(x_map: TitleMap) -> DataFrame:
 def create_translate_label_dt(x_map: LabelMap) -> DataFrame:
     x_rows_list = [
         {
-            "event_int": x_map.event_int,
+            "event_num": x_map.event_num,
             "face_name": x_map.face_name,
             "otx_knot": x_map.otx_knot,
             "inx_knot": x_map.inx_knot,
@@ -111,7 +111,7 @@ def create_translate_label_dt(x_map: LabelMap) -> DataFrame:
 def create_translate_rope_dt(x_map: RopeMap) -> DataFrame:
     x_rows_list = [
         {
-            "event_int": x_map.event_int,
+            "event_num": x_map.event_num,
             "face_name": x_map.face_name,
             "otx_knot": x_map.otx_knot,
             "inx_knot": x_map.inx_knot,
@@ -201,22 +201,22 @@ def _load_ropemap_from_csv(x_dir, x_ropemap: RopeMap) -> RopeMap:
 
 def create_dir_valid_empty_translateunit(x_dir: str) -> TranslateUnit:
     face_name_set = set()
-    event_int_set = set()
+    event_num_set = set()
     unknown_str_set = set()
     otx_knot_set = set()
     inx_knot_set = set()
     for x_filename in get_dir_file_strs(x_dir).keys():
         x_dt = open_csv(x_dir, x_filename)
         face_name_set.update(x_dt.face_name.unique())
-        event_int_set.update(x_dt.event_int.unique())
+        event_num_set.update(x_dt.event_num.unique())
         unknown_str_set.update(x_dt.unknown_str.unique())
         otx_knot_set.update(x_dt.otx_knot.unique())
         inx_knot_set.update(x_dt.inx_knot.unique())
 
     if len(face_name_set) == 1:
         face_name = face_name_set.pop()
-    if len(event_int_set) == 1:
-        event_int = event_int_set.pop()
+    if len(event_num_set) == 1:
+        event_num = event_num_set.pop()
     if len(unknown_str_set) == 1:
         unknown_str = unknown_str_set.pop()
     if len(otx_knot_set) == 1:
@@ -226,7 +226,7 @@ def create_dir_valid_empty_translateunit(x_dir: str) -> TranslateUnit:
 
     return translateunit_shop(
         face_name=face_name,
-        event_int=event_int,
+        event_num=event_num,
         otx_knot=otx_knot,
         inx_knot=inx_knot,
         unknown_str=unknown_str,

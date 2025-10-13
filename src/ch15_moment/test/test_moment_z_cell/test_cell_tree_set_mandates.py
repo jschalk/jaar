@@ -122,10 +122,10 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bob_sue_beliefadjust = beliefunit_shop(sue_str, a23_str)
 #     # create cell file
 #     bob_cell = cellunit_shop(
-#         bob_str, bob_ancs, event_int=e7, celldepth=2, beliefadjust=bob_beliefadjust
+#         bob_str, bob_ancs, event_num=e7, celldepth=2, beliefadjust=bob_beliefadjust
 #     )
 #     bob_sue_cell = cellunit_shop(
-#         bob_str, bob_sue_ancs, event_int=e7, celldepth=0, beliefadjust=bob_sue_beliefadjust
+#         bob_str, bob_sue_ancs, event_num=e7, celldepth=0, beliefadjust=bob_sue_beliefadjust
 #     )
 #     bob_root_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, bob_ancs)
 #     bob_sue_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, bob_sue_ancs)
@@ -164,13 +164,13 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bob_cell = cellunit_shop(
 #         bob_str,
 #         bob_ancs,
-#         event_int=e7,
+#         event_num=e7,
 #         celldepth=2,
 #         beliefadjust=bob_beliefadjust,
 #         beliefevent_facts=dirty_facts,
 #     )
 #     bob_sue_cell = cellunit_shop(
-#         bob_str, bob_sue_ancs, event_int=e7, celldepth=0, beliefadjust=bob_sue_beliefadjust
+#         bob_str, bob_sue_ancs, event_num=e7, celldepth=0, beliefadjust=bob_sue_beliefadjust
 #     )
 #     bob_root_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, bob_ancs)
 #     bob_sue_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, bob_sue_ancs)
@@ -219,7 +219,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bob_cell = cellunit_shop(
 #         bob_str,
 #         bob_ancs,
-#         event_int=e7,
+#         event_num=e7,
 #         celldepth=4,
 #         beliefadjust=bob_beliefadjust,
 #         beliefevent_facts=dirty_facts,
@@ -282,7 +282,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bob_cell = cellunit_shop(
 #         bob_str,
 #         bob_ancs,
-#         event_int=e7,
+#         event_num=e7,
 #         celldepth=2,
 #         beliefadjust=bob_beliefadjust,
 #         beliefevent_facts=dirty_facts,
@@ -347,7 +347,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bob_cell = cellunit_shop(
 #         bob_str,
 #         bob_ancs,
-#         event_int=e7,
+#         event_num=e7,
 #         celldepth=3,
 #         beliefadjust=bob_beliefadjust,
 #         beliefevent_facts=dirty_facts,
@@ -412,7 +412,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bob_cell = cellunit_shop(
 #         bob_str,
 #         bob_ancs,
-#         event_int=e7,
+#         event_num=e7,
 #         celldepth=4,
 #         beliefadjust=bob_beliefadjust,
 #         beliefevent_facts=dirty_facts,

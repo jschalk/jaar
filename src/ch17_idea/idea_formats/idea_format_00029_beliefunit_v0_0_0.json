@@ -3,7 +3,7 @@
     "belief_name"      : { "otx_key": true  }, 
     "credor_respect"   : { "otx_key": false }, 
     "debtor_respect"   : { "otx_key": false }, 
-    "event_int"        : { "otx_key": true  }, 
+    "event_num"        : { "otx_key": true  }, 
     "face_name"        : { "otx_key": true  }, 
     "fund_grain"       : { "otx_key": false }, 
     "fund_pool"        : { "otx_key": false }, 

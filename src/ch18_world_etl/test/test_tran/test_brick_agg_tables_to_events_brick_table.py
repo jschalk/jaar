@@ -23,7 +23,7 @@ def test_etl_brick_agg_tables_to_events_brick_agg_table_PopulatesTables_Scenario
     hour7am = "7am"
     agg_br00003_tablename = f"br00003_{wx.brick_agg}"
     agg_br00003_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.cumulative_minute,
@@ -33,7 +33,7 @@ def test_etl_brick_agg_tables_to_events_brick_agg_table_PopulatesTables_Scenario
         cursor = db_conn.cursor()
         create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
-  {wx.event_int}
+  {wx.event_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.cumulative_minute}
@@ -62,13 +62,13 @@ VALUES
         assert len(brick_events_table_cols) == 4
         assert wx.idea_number in brick_events_table_cols
         assert wx.face_name in brick_events_table_cols
-        assert wx.event_int in brick_events_table_cols
+        assert wx.event_num in brick_events_table_cols
         assert wx.error_message in brick_events_table_cols
         assert get_row_count(cursor, brick_events_tablename) == 3
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {brick_events_tablename} 
-ORDER BY {wx.event_int}, {wx.face_name};"""
+ORDER BY {wx.event_num}, {wx.face_name};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
@@ -97,7 +97,7 @@ def test_etl_brick_agg_tables_to_events_brick_agg_table_PopulatesTables_Scenario
     hour7am = "7am"
     agg_br00003_tablename = f"br00003_{wx.brick_agg}"
     agg_br00003_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.cumulative_minute,
@@ -107,7 +107,7 @@ def test_etl_brick_agg_tables_to_events_brick_agg_table_PopulatesTables_Scenario
         cursor = db_conn.cursor()
         create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
-  {wx.event_int}
+  {wx.event_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.cumulative_minute}
@@ -137,12 +137,12 @@ VALUES
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {brick_events_tablename} 
-ORDER BY {wx.event_int}, {wx.face_name};"""
+ORDER BY {wx.event_num}, {wx.face_name};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
         assert len(rows) == 4
-        invalid_str = "invalid because of conflicting event_int"
+        invalid_str = "invalid because of conflicting event_num"
         bob_row = ("br00003", event3, bob_str, None)
         sue_row = ("br00003", event1, sue_str, invalid_str)
         yao1_row = ("br00003", event1, yao_str, invalid_str)
@@ -167,18 +167,18 @@ def test_etl_events_brick_agg_table_to_events_brick_valid_table_PopulatesTables_
         agg_events_tablename = wx.events_brick_agg
         agg_events_columns = [
             wx.idea_number,
-            wx.event_int,
+            wx.event_num,
             wx.face_name,
             wx.error_message,
         ]
         create_idea_sorted_table(cursor, agg_events_tablename, agg_events_columns)
         insert_into_clause = f"""INSERT INTO {agg_events_tablename} (
   {wx.idea_number}
-, {wx.event_int}
+, {wx.event_num}
 , {wx.face_name}
 , {wx.error_message}
 )"""
-        invalid_str = "invalid because of conflicting event_int"
+        invalid_str = "invalid because of conflicting event_num"
         values_clause = f"""
 VALUES
   ('br00003', {event3}, '{bob_str}', NULL)
@@ -202,7 +202,7 @@ VALUES
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {valid_events_tablename} 
-ORDER BY {wx.event_int}, {wx.face_name};"""
+ORDER BY {wx.event_num}, {wx.face_name};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
@@ -222,17 +222,17 @@ def test_etl_events_brick_agg_db_to_event_dict_ReturnsObj_Scenario0():
     event1 = 1
     event3 = 3
     event9 = 9
-    agg_columns = [wx.face_name, wx.event_int, wx.error_message]
+    agg_columns = [wx.face_name, wx.event_num, wx.error_message]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         agg_events_tablename = wx.events_brick_agg
         create_idea_sorted_table(cursor, agg_events_tablename, agg_columns)
         insert_into_clause = f"""
-INSERT INTO {agg_events_tablename} ({wx.event_int}, {wx.face_name}, {wx.error_message})
+INSERT INTO {agg_events_tablename} ({wx.event_num}, {wx.face_name}, {wx.error_message})
 VALUES     
   ('{event3}', '{bob_str}', NULL)
-, ('{event1}', '{sue_str}', 'invalid because of conflicting event_int')
-, ('{event1}', '{yao_str}', 'invalid because of conflicting event_int')
+, ('{event1}', '{sue_str}', 'invalid because of conflicting event_num')
+, ('{event1}', '{yao_str}', 'invalid because of conflicting event_num')
 , ('{event9}', '{yao_str}', NULL)
 , ('{event9}', '{yao_str}', NULL)
 , ('{event9}', '{yao_str}', NULL)

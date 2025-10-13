@@ -4,7 +4,7 @@ from src.ch17_idea.idea_db_tool import create_idea_sorted_table
 from src.ch18_world_etl.tran_sqlstrs import create_sound_and_heard_tables
 from src.ch18_world_etl.transformers import (
     etl_brick_raw_tables_to_brick_agg_tables,
-    get_max_brick_agg_event_int,
+    get_max_brick_agg_event_num,
 )
 from src.ref.keywords import Ch18Keywords as wx
 
@@ -20,7 +20,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
     hour7am = "7am"
     raw_br00003_tablename = f"br00003_{wx.brick_raw}"
     raw_br00003_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.cumulative_minute,
@@ -31,7 +31,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
         cursor = db_conn.cursor()
         create_idea_sorted_table(cursor, raw_br00003_tablename, raw_br00003_columns)
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
-  {wx.event_int}
+  {wx.event_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.cumulative_minute}
@@ -68,7 +68,7 @@ VALUES
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {agg_br00003_tablename} 
-ORDER BY {wx.event_int}, {wx.cumulative_minute};"""
+ORDER BY {wx.event_num}, {wx.cumulative_minute};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
@@ -97,7 +97,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
 
     raw_br00003_tablename = f"br00003_{wx.brick_raw}"
     raw_br00003_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.cumulative_minute,
@@ -108,7 +108,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
         cursor = db_conn.cursor()
         create_idea_sorted_table(cursor, raw_br00003_tablename, raw_br00003_columns)
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
-  {wx.event_int}
+  {wx.event_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.cumulative_minute}
@@ -168,7 +168,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario2_Gr
     hour8am = "8am"
     raw_br00003_tablename = f"br00003_{wx.brick_raw}"
     raw_br00003_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.cumulative_minute,
@@ -179,7 +179,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario2_Gr
         cursor = db_conn.cursor()
         create_idea_sorted_table(cursor, raw_br00003_tablename, raw_br00003_columns)
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
-  {wx.event_int}
+  {wx.event_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.cumulative_minute}
@@ -207,7 +207,7 @@ VALUES
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {agg_br00003_tablename} 
-ORDER BY {wx.event_int}, {wx.cumulative_minute};"""
+ORDER BY {wx.event_num}, {wx.cumulative_minute};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
@@ -220,11 +220,11 @@ ORDER BY {wx.event_int}, {wx.cumulative_minute};"""
         assert rows[1] == row1
 
 
-def test_get_max_brick_events_event_int_ReturnsObj_Scenario0_NoTables():
+def test_get_max_brick_events_event_num_ReturnsObj_Scenario0_NoTables():
     # ESTABLISH
     agg_br00003_tablename = f"br00003_{wx.brick_agg}"
     agg_br00003_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.cumulative_minute,
@@ -235,10 +235,10 @@ def test_get_max_brick_events_event_int_ReturnsObj_Scenario0_NoTables():
         create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
 
         # WHEN / THEN
-        assert get_max_brick_agg_event_int(cursor) == 1
+        assert get_max_brick_agg_event_num(cursor) == 1
 
 
-def test_get_max_brick_events_event_int_ReturnsObj_Scenario1_OneTable():
+def test_get_max_brick_events_event_num_ReturnsObj_Scenario1_OneTable():
     # ESTABLISH
     a23_str = "amy23"
     sue_str = "Sue"
@@ -252,7 +252,7 @@ def test_get_max_brick_events_event_int_ReturnsObj_Scenario1_OneTable():
     hour7am = "7am"
     agg_br00003_tablename = f"br00003_{wx.brick_agg}"
     agg_br00003_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.cumulative_minute,
@@ -262,7 +262,7 @@ def test_get_max_brick_events_event_int_ReturnsObj_Scenario1_OneTable():
         cursor = db_conn.cursor()
         create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
-  {wx.event_int}
+  {wx.event_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.cumulative_minute}
@@ -280,14 +280,14 @@ VALUES
         cursor.execute(insert_sqlstr)
 
         # WHEN
-        max_event_int = get_max_brick_agg_event_int(cursor)
+        max_event_num = get_max_brick_agg_event_num(cursor)
 
         # THEN
-        assert max_event_int
-        assert max_event_int == event9
+        assert max_event_num
+        assert max_event_num == event9
 
 
-def test_get_max_brick_events_event_int_ReturnsObj_Scenario2_MultipleTable():
+def test_get_max_brick_events_event_num_ReturnsObj_Scenario2_MultipleTable():
     # sourcery skip: extract-duplicate-method, extract-method
     # ESTABLISH
     event1 = 1
@@ -297,24 +297,24 @@ def test_get_max_brick_events_event_int_ReturnsObj_Scenario2_MultipleTable():
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
         agg_br00003_tablename = f"br00003_{wx.brick_agg}"
-        agg_br00003_columns = [wx.event_int]
+        agg_br00003_columns = [wx.event_num]
         create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         agg_br00003_insert_sqlstr = f"""
-INSERT INTO {agg_br00003_tablename} ({wx.event_int})
+INSERT INTO {agg_br00003_tablename} ({wx.event_num})
 VALUES ('{event1}'), ('{event1}'), ('{event9}');"""
         cursor.execute(agg_br00003_insert_sqlstr)
 
         agg_br00044_tablename = f"br00044_{wx.brick_agg}"
-        agg_br00044_columns = [wx.event_int]
+        agg_br00044_columns = [wx.event_num]
         create_idea_sorted_table(cursor, agg_br00044_tablename, agg_br00044_columns)
         agg_br00044_insert_sqlstr = f"""
-INSERT INTO {agg_br00044_tablename} ({wx.event_int})
+INSERT INTO {agg_br00044_tablename} ({wx.event_num})
 VALUES ('{event3}');"""
         cursor.execute(agg_br00044_insert_sqlstr)
 
         # WHEN
-        max_event_int = get_max_brick_agg_event_int(cursor)
+        max_event_num = get_max_brick_agg_event_num(cursor)
 
         # THEN
-        assert max_event_int
-        assert max_event_int == event9
+        assert max_event_num
+        assert max_event_num == event9

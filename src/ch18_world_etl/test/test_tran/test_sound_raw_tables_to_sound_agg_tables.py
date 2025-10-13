@@ -36,7 +36,7 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdat
         trlrope_s_raw_tablename = create_prime_tablename(trlrope_str, "s", "raw")
         insert_into_clause = f"""INSERT INTO {trlrope_s_raw_tablename} (
   {wx.idea_number}
-, {wx.event_int}
+, {wx.event_num}
 , {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
@@ -93,7 +93,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario0():
         trlrope_s_raw_tablename = create_prime_tablename(wx.translate_rope, "s", "raw")
         insert_into_clause = f"""INSERT INTO {trlrope_s_raw_tablename} (
   {wx.idea_number}
-, {wx.event_int}
+, {wx.event_num}
 , {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
@@ -124,7 +124,7 @@ VALUES
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
-        error_select_sqlstr = f"SELECT idea_number, event_int FROM {trlrope_s_raw_tablename} WHERE {wx.error_message} IS NOT NULL"
+        error_select_sqlstr = f"SELECT idea_number, event_num FROM {trlrope_s_raw_tablename} WHERE {wx.error_message} IS NOT NULL"
         cursor.execute(error_select_sqlstr)
         assert cursor.fetchall() == [("br00117", 1), ("br00077", 1)]
 
@@ -152,7 +152,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario1_belief_raw_de
         )
         insert_into_clause = f"""INSERT INTO {beliefa_s_raw_del} (
   {wx.idea_number}
-, {wx.event_int}
+, {wx.event_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -213,7 +213,7 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
         trlrope_s_raw_tablename = create_prime_tablename("TRLROPE", "s", "raw")
         insert_into_clause = f"""INSERT INTO {trlrope_s_raw_tablename} (
   {wx.idea_number}
-, {wx.event_int}
+, {wx.event_num}
 , {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
@@ -241,7 +241,7 @@ VALUES
         blrpern_s_put_raw_tblname = create_prime_tablename("BLRPERN", "s", "raw", "put")
         insert_into_clause = f"""INSERT INTO {blrpern_s_put_raw_tblname} (
   {wx.idea_number}
-, {wx.event_int}
+, {wx.event_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -321,7 +321,7 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
         blrpern_s_del_raw_tblname = create_prime_tablename("BLRPERN", "s", "raw", "del")
         insert_into_clause = f"""INSERT INTO {blrpern_s_del_raw_tblname} (
   {wx.idea_number}
-, {wx.event_int}
+, {wx.event_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -380,7 +380,7 @@ def test_etl_sound_raw_tables_to_sound_agg_tables_PopulatesValidTable_Scenario0(
         trlrope_s_raw_tablename = create_prime_tablename("TRLROPE", "s", "raw")
         insert_into_clause = f"""INSERT INTO {trlrope_s_raw_tablename} (
   {wx.idea_number}
-, {wx.event_int}
+, {wx.event_num}
 , {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
@@ -409,7 +409,7 @@ VALUES
         blrpern_s_put_raw_tblname = create_prime_tablename("BLRPERN", "s", "raw", "put")
         insert_into_clause = f"""INSERT INTO {blrpern_s_put_raw_tblname} (
   {wx.idea_number}
-, {wx.event_int}
+, {wx.event_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}

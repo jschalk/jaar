@@ -2,7 +2,7 @@
   "attributes": {
     "awardee_title": { "otx_key": true  }, 
     "belief_name"  : { "otx_key": true  }, 
-    "event_int"    : { "otx_key": true  }, 
+    "event_num"    : { "otx_key": true  }, 
     "face_name"    : { "otx_key": true  }, 
     "give_force"   : { "otx_key": false }, 
     "moment_label" : { "otx_key": true  }, 

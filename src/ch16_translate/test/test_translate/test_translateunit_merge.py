@@ -115,16 +115,16 @@ def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario6_namemap_Inheri
     # THEN
     assert merged_translateunit
     merged_voicebrigde = get_suita_namemap()
-    merged_voicebrigde.event_int = event1
+    merged_voicebrigde.event_num = event1
     assert merged_translateunit.namemap == merged_voicebrigde
     merged_groupbrigde = get_swim_titlemap()
-    merged_groupbrigde.event_int = event1
+    merged_groupbrigde.event_num = event1
     assert merged_translateunit.titlemap == merged_groupbrigde
     merged_labelbrigde = get_clean_labelmap()
-    merged_labelbrigde.event_int = event1
+    merged_labelbrigde.event_num = event1
     assert merged_translateunit.labelmap == merged_labelbrigde
     merged_ropebrigde = get_clean_ropemap()
-    merged_ropebrigde.event_int = event1
+    merged_ropebrigde.event_num = event1
     merged_ropebrigde.labelmap = merged_labelbrigde
     assert merged_translateunit.ropemap == merged_ropebrigde
 
@@ -150,9 +150,9 @@ def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario7_namemap_Inheri
     assert merged_translateunit
     assert new_translateunit.nameterm_exists(bob_otx, bob_inx)
     merged_voicebrigde = get_suita_namemap()
-    merged_voicebrigde.event_int = event1
+    merged_voicebrigde.event_num = event1
     merged_voicebrigde.set_otx2inx(bob_otx, bob_inx)
     assert merged_translateunit.namemap == merged_voicebrigde
     merged_groupbrigde = get_swim_titlemap()
-    merged_groupbrigde.event_int = event1
+    merged_groupbrigde.event_num = event1
     assert merged_translateunit.titlemap == merged_groupbrigde

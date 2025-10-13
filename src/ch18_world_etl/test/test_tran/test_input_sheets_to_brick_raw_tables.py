@@ -27,7 +27,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
     input_dir = create_path(get_chapter_temp_dir(), "input")
     input_file_path = create_path(input_dir, ex_filename)
     br3_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.cumulative_minute,
         wx.moment_label,
@@ -65,7 +65,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {br00003_tablename} 
-ORDER BY sheet_name, {wx.event_int}, {wx.cumulative_minute};"""
+ORDER BY sheet_name, {wx.event_num}, {wx.cumulative_minute};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
@@ -80,7 +80,7 @@ ORDER BY sheet_name, {wx.event_int}, {wx.cumulative_minute};"""
         br3_ex1_str = br00003_ex1_str
         err4 = f"Conversion errors: {wx.cumulative_minute}: num55"
         err0 = (
-            f"Conversion errors: {wx.event_int}: event3, {wx.cumulative_minute}: num55"
+            f"Conversion errors: {wx.event_num}: event3, {wx.cumulative_minute}: num55"
         )
         row0 = (s_dir, file, br3_ex1_str, None, sue_str, a23_str, None, hour7am, err0)
         row1 = (s_dir, file, br3_ex1_str, e1, sue_str, a23_str, m_360, hour6am, None)
@@ -111,7 +111,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
     input_dir = create_path(get_chapter_temp_dir(), "input")
     input_file_path = create_path(input_dir, ex_filename)
     idea_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.cumulative_minute,
         wx.moment_label,
@@ -122,7 +122,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
     row2 = [event1, sue_str, minute_420, a23_str, hour7am]
     row3 = [event2, sue_str, minute_420, a23_str, hour7am]
     incomplete_idea_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.cumulative_minute,
         wx.moment_label,
@@ -161,7 +161,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {br00003_tablename} 
-ORDER BY sheet_name, {wx.event_int}, {wx.cumulative_minute};"""
+ORDER BY sheet_name, {wx.event_num}, {wx.cumulative_minute};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
@@ -203,7 +203,7 @@ ORDER BY sheet_name, {wx.event_int}, {wx.cumulative_minute};"""
 #     input_dir = create_path(get_chapter_temp_dir(), "input")
 #     input_file_path = create_path(input_dir, ex_filename)
 #     idea_columns = [
-#         wx.event_int,
+#         wx.event_num,
 #         wx.face_name,
 #         wx.cumulative_minute,
 #         wx.moment_label,
@@ -239,7 +239,7 @@ ORDER BY sheet_name, {wx.event_int}, {wx.cumulative_minute};"""
 #         select_agg_sqlstr = f"""
 # SELECT *
 # FROM {br00003_tablename}
-# ORDER BY sheet_name, {wx.event_int}, {wx.cumulative_minute};"""
+# ORDER BY sheet_name, {wx.event_num}, {wx.cumulative_minute};"""
 #         cursor.execute(select_agg_sqlstr)
 
 #         br3rows = cursor.fetchall()

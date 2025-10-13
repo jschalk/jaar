@@ -120,25 +120,25 @@ def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     bob37_yao_cell = cellunit_get_from_dir(bob37_yao_dir)
     bob37_zia_cell = cellunit_get_from_dir(bob37_zia_dir)
     assert bob37_cell.ancestors == []
-    assert bob37_cell.event_int == 56
+    assert bob37_cell.event_num == 56
     assert bob37_cell.celldepth == 1
     assert bob37_cell.bud_belief_name == bob_str
     assert bob37_cell.money_grain == 1
     assert bob37_cell.quota == 450
     assert bob37_bob_cell.ancestors == [bob_str]
-    assert bob37_bob_cell.event_int == 56
+    assert bob37_bob_cell.event_num == 56
     assert bob37_bob_cell.celldepth == 0
     assert bob37_bob_cell.bud_belief_name == bob_str
     assert bob37_bob_cell.money_grain == 1
     assert bob37_bob_cell.quota == 150
     assert bob37_yao_cell.ancestors == [yao_str]
-    assert bob37_yao_cell.event_int == 56
+    assert bob37_yao_cell.event_num == 56
     assert bob37_yao_cell.celldepth == 0
     assert bob37_yao_cell.bud_belief_name == bob_str
     assert bob37_yao_cell.money_grain == 1
     assert bob37_yao_cell.quota == 150
     assert bob37_zia_cell.ancestors == [zia_str]
-    assert bob37_zia_cell.event_int == 56
+    assert bob37_zia_cell.event_num == 56
     assert bob37_zia_cell.celldepth == 0
     assert bob37_zia_cell.bud_belief_name == bob_str
     assert bob37_zia_cell.money_grain == 1
@@ -215,25 +215,25 @@ def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cl
     bob37_yao_cell = cellunit_get_from_dir(bob37_yao_dir)
     bob37_zia_cell = cellunit_get_from_dir(bob37_zia_dir)
     assert bob37_cell.ancestors == []
-    assert bob37_cell.event_int == 55
+    assert bob37_cell.event_num == 55
     assert bob37_cell.celldepth == 1
     assert bob37_cell.bud_belief_name == bob_str
     assert bob37_cell.money_grain == 1
     assert bob37_cell.quota == 450
     assert bob37_bob_cell.ancestors == [bob_str]
-    assert bob37_bob_cell.event_int == 55
+    assert bob37_bob_cell.event_num == 55
     assert bob37_bob_cell.celldepth == 0
     assert bob37_bob_cell.bud_belief_name == bob_str
     assert bob37_bob_cell.money_grain == 1
     assert bob37_bob_cell.quota == 150
     assert bob37_yao_cell.ancestors == [yao_str]
-    assert bob37_yao_cell.event_int == 44
+    assert bob37_yao_cell.event_num == 44
     assert bob37_yao_cell.celldepth == 0
     assert bob37_yao_cell.bud_belief_name == bob_str
     assert bob37_yao_cell.money_grain == 1
     assert bob37_yao_cell.quota == 150
     assert bob37_zia_cell.ancestors == [zia_str]
-    assert bob37_zia_cell.event_int == 33
+    assert bob37_zia_cell.event_num == 33
     assert bob37_zia_cell.celldepth == 0
     assert bob37_zia_cell.bud_belief_name == bob_str
     assert bob37_zia_cell.money_grain == 1
@@ -312,13 +312,13 @@ def test_create_cell_tree_Scenaro4_LedgerDepth1_OneBeliefHasNoPast_beliefevent(
     bob37_bob_cell = cellunit_get_from_dir(bob37_bob_dir)
     bob37_yao_cell = cellunit_get_from_dir(bob37_yao_dir)
     assert bob37_bob_cell.ancestors == [bob_str]
-    assert bob37_bob_cell.event_int == 55
+    assert bob37_bob_cell.event_num == 55
     assert bob37_bob_cell.celldepth == 0
     assert bob37_bob_cell.bud_belief_name == bob_str
     assert bob37_bob_cell.money_grain == 1
     assert bob37_bob_cell.quota == 150
     assert bob37_yao_cell.ancestors == [yao_str]
-    assert bob37_yao_cell.event_int == 44
+    assert bob37_yao_cell.event_num == 44
     assert bob37_yao_cell.celldepth == 0
     assert bob37_yao_cell.bud_belief_name == bob_str
     assert bob37_yao_cell.money_grain == 1

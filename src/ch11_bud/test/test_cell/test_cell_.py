@@ -26,7 +26,7 @@ def test_CellUnit_Exists():
     x_cellunit = CellUnit()
     # THEN
     assert not x_cellunit.ancestors
-    assert not x_cellunit.event_int
+    assert not x_cellunit.event_num
     assert not x_cellunit.celldepth
     assert not x_cellunit.bud_belief_name
     assert not x_cellunit.money_grain
@@ -48,7 +48,7 @@ def test_cellunit_shop_ReturnsObj_Scenario0_WithoutParameters():
     # THEN
     assert x_cellunit.bud_belief_name == bob_str
     assert x_cellunit.ancestors == []
-    assert not x_cellunit.event_int
+    assert not x_cellunit.event_num
     assert x_cellunit.celldepth == 0
     assert x_cellunit.money_grain == 1
     assert x_cellunit.quota == CELLNODE_QUOTA_DEFAULT
@@ -99,7 +99,7 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
 
     # THEN
     assert x_cellunit.ancestors == bob_sue_ancestors
-    assert x_cellunit.event_int == bob_sue_event7
+    assert x_cellunit.event_num == bob_sue_event7
     assert x_cellunit.celldepth == bob_sue_celldepth3
     assert x_cellunit.bud_belief_name == bob_sue_bud_belief
     assert x_cellunit.money_grain == bob_sue_money_grain2
@@ -913,7 +913,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
     sue_sue_cell = sue_child_cellunits[0]
     assert sue_sue_cell.bud_belief_name == yao_str
     assert sue_sue_cell.ancestors == [sue_str, sue_str]
-    assert sue_sue_cell.event_int == sue_event7
+    assert sue_sue_cell.event_num == sue_event7
     assert sue_sue_cell.celldepth == sue_celldepth3 - 1
     assert sue_sue_cell.money_grain == sue_money_grain2
     assert sue_sue_cell.mandate == 133
@@ -925,7 +925,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
     sue_yao_cell = sue_child_cellunits[1]
     assert sue_yao_cell.bud_belief_name == yao_str
     assert sue_yao_cell.ancestors == [sue_str, yao_str]
-    assert sue_yao_cell.event_int == sue_event7
+    assert sue_yao_cell.event_num == sue_event7
     assert sue_yao_cell.celldepth == sue_celldepth3 - 1
     assert sue_yao_cell.money_grain == sue_money_grain2
     assert sue_yao_cell.mandate == 311

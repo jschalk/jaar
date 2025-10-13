@@ -215,7 +215,7 @@ def test_save_idea_csv_Arg_idea_format_00021_belief_voiceunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue1_name_example_csv = """event_int,face_name,moment_label,belief_name,voice_name,voice_cred_lumen,voice_debt_lumen
+    sue1_name_example_csv = """event_num,face_name,moment_label,belief_name,voice_name,voice_cred_lumen,voice_debt_lumen
 ,,amy56,Sue,Bob,13,29
 ,,amy56,Sue,Sue,11,23
 ,,amy56,Sue,Yao,41,37
@@ -232,7 +232,7 @@ def test_save_idea_csv_Arg_idea_format_00021_belief_voiceunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue2_voice_example_csv = """event_int,face_name,moment_label,belief_name,voice_name,voice_cred_lumen,voice_debt_lumen
+    sue2_voice_example_csv = """event_num,face_name,moment_label,belief_name,voice_name,voice_cred_lumen,voice_debt_lumen
 ,,amy56,Sue,Bob,13,29
 ,,amy56,Sue,Sue,11,23
 ,,amy56,Sue,Yao,41,37

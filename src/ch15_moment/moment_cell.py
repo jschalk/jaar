@@ -21,7 +21,7 @@ from src.ch11_bud.bud_filehandler import (
     collect_belief_event_dir_sets,
     create_cell_voice_mandate_ledger_json,
     get_beliefevent_obj,
-    get_beliefs_downhill_event_ints,
+    get_beliefs_downhill_event_nums,
     open_belief_file,
 )
 from src.ch11_bud.bud_main import MomentLabel
@@ -62,7 +62,7 @@ def _exists_create_cell_tree(moment_mstr_dir, moment_label, bud_belief_name, bud
     while cells_to_evaluate != []:
         parent_cell = cells_to_evaluate.pop()
         cell_belief_name = parent_cell.get_cell_belief_name()
-        e_int = parent_cell.event_int
+        e_int = parent_cell.event_num
         beliefevent = get_beliefevent_obj(
             moment_mstr_dir, moment_label, cell_belief_name, e_int
         )
@@ -79,17 +79,17 @@ def _exists_create_cell_tree(moment_mstr_dir, moment_label, bud_belief_name, bud
         if parent_cell.celldepth > 0:
             child_celldepth = parent_cell.celldepth - 1
             parent_quota_beliefs = set(parent_quota_ledger.keys())
-            beliefs_downhill_events_ints = get_beliefs_downhill_event_ints(
-                belief_events_sets, parent_quota_beliefs, parent_cell.event_int
+            beliefs_downhill_events_ints = get_beliefs_downhill_event_nums(
+                belief_events_sets, parent_quota_beliefs, parent_cell.event_num
             )
             for quota_belief, quota_amount in parent_quota_ledger.items():
-                if downhill_event_int := beliefs_downhill_events_ints.get(quota_belief):
+                if downhill_event_num := beliefs_downhill_events_ints.get(quota_belief):
                     if quota_amount > 0:
                         child_ancestors = list(copy_copy(parent_cell.ancestors))
                         child_ancestors.append(quota_belief)
                         child_cellunit = cellunit_shop(
                             ancestors=child_ancestors,
-                            event_int=downhill_event_int,
+                            event_num=downhill_event_num,
                             celldepth=child_celldepth,
                             bud_belief_name=bud_belief_name,
                             money_grain=parent_cell.money_grain,
@@ -115,9 +115,9 @@ def load_cells_beliefevent(moment_mstr_dir: str, moment_label: LabelTerm):
 def _load_cell_beliefevent(moment_mstr_dir, moment_label, dirpath):
     x_cellunit = cellunit_get_from_dir(dirpath)
     cell_belief_name = x_cellunit.get_cell_belief_name()
-    event_int = x_cellunit.event_int
+    event_num = x_cellunit.event_num
     beliefevent = get_beliefevent_obj(
-        moment_mstr_dir, moment_label, cell_belief_name, event_int
+        moment_mstr_dir, moment_label, cell_belief_name, event_num
     )
     x_cellunit.eval_beliefevent(beliefevent)
     cellunit_save_to_dir(dirpath, x_cellunit)
@@ -184,7 +184,7 @@ class DecreeUnit:
     cell_mandate: dict[BeliefName, FundNum] = None
     cell_celldepth: int = None
     root_cell_bool: bool = None
-    event_int: int = None
+    event_num: int = None
 
     def get_child_cell_ancestors(self, child_belief_name: BeliefName):
         child_cell_ancestors = copy_copy(self.cell_ancestors)
@@ -221,7 +221,7 @@ def set_cell_tree_decrees(
         cell_mandate=root_cell.quota,
         cell_celldepth=root_cell.celldepth,
         root_cell_bool=True,
-        event_int=root_cell.event_int,
+        event_num=root_cell.event_num,
     )
     to_evaluate_decreeunits = [root_decree]
     while to_evaluate_decreeunits != []:
@@ -267,7 +267,7 @@ def _add_child_decrees(
             cell_belief_name=child_belief_name,
             cell_mandate=child_mandate,
             cell_celldepth=x_decree.cell_celldepth - 1,
-            event_int=x_cell.event_int,
+            event_num=x_cell.event_num,
         )
         to_evaluate_decreeunits.append(child_decreeunit)
 
@@ -284,20 +284,20 @@ def generate_cell_from_decree(
     x_decree: DecreeUnit, mstr_dir: str, moment_label: str, belief_name: BeliefName
 ) -> CellUnit:
     cell_belief_name = x_decree.cell_belief_name
-    beliefs_downhill_events_ints = get_beliefs_downhill_event_ints(
+    beliefs_downhill_events_ints = get_beliefs_downhill_event_nums(
         belief_events_sets=collect_belief_event_dir_sets(mstr_dir, moment_label),
         downhill_beliefs={cell_belief_name},
-        ref_event_int=x_decree.event_int,
+        ref_event_num=x_decree.event_num,
     )
-    if downhill_event_int := beliefs_downhill_events_ints.get(cell_belief_name):
+    if downhill_event_num := beliefs_downhill_events_ints.get(cell_belief_name):
         beliefevent_path = create_beliefevent_path(
-            mstr_dir, moment_label, cell_belief_name, downhill_event_int
+            mstr_dir, moment_label, cell_belief_name, downhill_event_num
         )
         beliefevent = open_belief_file(beliefevent_path)
         x_cell = cellunit_shop(
             bud_belief_name=belief_name,
             ancestors=x_decree.get_child_cell_ancestors(cell_belief_name),
-            event_int=downhill_event_int,
+            event_num=downhill_event_num,
             celldepth=x_decree.cell_celldepth,
             money_grain=beliefevent.money_grain,
             quota=None,

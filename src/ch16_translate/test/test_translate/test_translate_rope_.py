@@ -17,7 +17,7 @@ def test_RopeMap_Exists():
 
     # WHEN / THEN
     assert not x_ropemap.face_name
-    assert not x_ropemap.event_int
+    assert not x_ropemap.event_num
     assert not x_ropemap.otx2inx
     assert not x_ropemap.unknown_str
     assert not x_ropemap.otx_knot
@@ -39,7 +39,7 @@ def test_ropemap_shop_ReturnsObj_scenario0():
     # WHEN
     e7_ropemap = ropemap_shop(
         face_name=bob_str,
-        event_int=event7,
+        event_num=event7,
         otx2inx=otx2inx,
         unknown_str=x_unknown_str,
         otx_knot=slash_otx_knot,
@@ -48,14 +48,14 @@ def test_ropemap_shop_ReturnsObj_scenario0():
 
     # THEN
     assert e7_ropemap.face_name == bob_str
-    assert e7_ropemap.event_int == event7
+    assert e7_ropemap.event_num == event7
     assert e7_ropemap.otx2inx == otx2inx
     assert e7_ropemap.unknown_str == x_unknown_str
     assert e7_ropemap.otx_knot == slash_otx_knot
     assert e7_ropemap.inx_knot == colon_inx_knot
     assert e7_ropemap.labelmap == labelmap_shop(
         face_name=bob_str,
-        event_int=event7,
+        event_num=event7,
         unknown_str=x_unknown_str,
         otx_knot=slash_otx_knot,
         inx_knot=colon_inx_knot,
@@ -72,9 +72,9 @@ def test_ropemap_shop_ReturnsObj_Scenario2():
     assert x_ropemap.otx_knot == default_knot_if_None()
     assert x_ropemap.inx_knot == default_knot_if_None()
     assert x_ropemap.face_name is None
-    assert x_ropemap.event_int == 0
+    assert x_ropemap.event_num == 0
     assert x_ropemap.labelmap == labelmap_shop(
-        event_int=0,
+        event_num=0,
         unknown_str=default_unknown_str_if_None(),
         otx_knot=default_knot_if_None(),
         inx_knot=default_knot_if_None(),
@@ -93,7 +93,7 @@ def test_ropemap_shop_ReturnsObj_scenario3_TranslateCoreAttrAreDefaultWhenGiven_
     # WHEN
     x_ropemap = ropemap_shop(
         face_name=bob_str,
-        event_int=event7,
+        event_num=event7,
         otx2inx=otx2inx,
         unknown_str=x_nan,
         otx_knot=x_nan,
@@ -102,7 +102,7 @@ def test_ropemap_shop_ReturnsObj_scenario3_TranslateCoreAttrAreDefaultWhenGiven_
 
     # THEN
     assert x_ropemap.face_name == bob_str
-    assert x_ropemap.event_int == event7
+    assert x_ropemap.event_num == event7
     assert x_ropemap.otx2inx == otx2inx
     assert x_ropemap.unknown_str == default_unknown_str_if_None()
     assert x_ropemap.otx_knot == default_knot_if_None()
@@ -462,7 +462,7 @@ def test_RopeMap_to_dict_ReturnsObj():
     slash_otx_knot = "/"
     x_ropemap = ropemap_shop(sue_str, otx_knot=slash_otx_knot)
     x1_rope_map_dict = {
-        wx.event_int: 0,
+        wx.event_num: 0,
         wx.face_name: sue_str,
         wx.inx_knot: x_ropemap.inx_knot,
         wx.otx2inx: {},
@@ -475,10 +475,10 @@ def test_RopeMap_to_dict_ReturnsObj():
     # WHEN
     event7 = 7
     x_ropemap.set_otx2inx(clean_otx, clean_inx)
-    x_ropemap.event_int = event7
+    x_ropemap.event_num = event7
     # THEN
     x2_rope_map_dict = {
-        wx.event_int: event7,
+        wx.event_num: event7,
         wx.face_name: sue_str,
         wx.inx_knot: x_ropemap.inx_knot,
         wx.otx2inx: {clean_otx: clean_inx},
@@ -506,8 +506,8 @@ def test_get_ropemap_from_dict_ReturnsObj():
 
     # THEN
     assert gen_ropemap.face_name == x_ropemap.face_name
-    assert gen_ropemap.event_int == x_ropemap.event_int
-    assert gen_ropemap.event_int == event7
+    assert gen_ropemap.event_num == x_ropemap.event_num
+    assert gen_ropemap.event_num == event7
     assert gen_ropemap.labelmap.face_name == x_ropemap.labelmap.face_name
     assert gen_ropemap.labelmap.otx2inx != x_ropemap.labelmap.otx2inx
     assert gen_ropemap.labelmap != x_ropemap.labelmap

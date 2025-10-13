@@ -40,7 +40,7 @@ from src.ch11_bud._ref.ch11_path import (
 )
 from src.ch11_bud.bud_filehandler import (
     collect_belief_event_dir_sets,
-    get_beliefs_downhill_event_ints,
+    get_beliefs_downhill_event_nums,
     open_belief_file,
     open_job_file,
 )
@@ -164,16 +164,16 @@ def etl_input_dfs_to_brick_raw_tables(cursor: sqlite3_Cursor, input_dir: str):
             cursor.execute(insert_sqlstr)
 
 
-def get_max_brick_agg_event_int(cursor: sqlite3_Cursor) -> int:
+def get_max_brick_agg_event_num(cursor: sqlite3_Cursor) -> int:
     agg_tables = get_db_tables(cursor, "brick_agg")
-    brick_aggs_max_event_int = 0
+    brick_aggs_max_event_num = 0
     for agg_table in agg_tables:
         if agg_table.startswith("br") and agg_table.endswith("brick_agg"):
-            sqlstr = f"SELECT MAX(event_int) FROM {agg_table}"
-            table_max_event_int = cursor.execute(sqlstr).fetchone()[0] or 1
-            if table_max_event_int > brick_aggs_max_event_int:
-                brick_aggs_max_event_int = table_max_event_int
-    return brick_aggs_max_event_int
+            sqlstr = f"SELECT MAX(event_num) FROM {agg_table}"
+            table_max_event_num = cursor.execute(sqlstr).fetchone()[0] or 1
+            if table_max_event_num > brick_aggs_max_event_num:
+                brick_aggs_max_event_num = table_max_event_num
+    return brick_aggs_max_event_num
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
@@ -247,10 +247,10 @@ def etl_brick_agg_tables_to_brick_valid_tables(conn_or_cursor: sqlite3_Connectio
             select_sqlstr = create_select_query(
                 conn_or_cursor, x_tablename, agg_columns
             )
-            select_sqlstr = select_sqlstr.replace("event_int", "agg.event_int")
+            select_sqlstr = select_sqlstr.replace("event_num", "agg.event_num")
             select_sqlstr = select_sqlstr.replace("face_name", "agg.face_name")
             select_sqlstr = select_sqlstr.replace(x_tablename, f"{x_tablename} agg")
-            join_clause_str = """JOIN events_brick_valid valid_events ON valid_events.event_int = agg.event_int"""
+            join_clause_str = """JOIN events_brick_valid valid_events ON valid_events.event_num = agg.event_num"""
             insert_select_into_sqlstr = f"""
 {insert_clause_str}
 {select_sqlstr}{join_clause_str}
@@ -264,7 +264,7 @@ def etl_brick_agg_tables_to_events_brick_agg_table(conn_or_cursor: sqlite3_Curso
         brick_events_columns = [
             "idea_number",
             "face_name",
-            "event_int",
+            "event_num",
             "error_message",
         ]
         create_idea_sorted_table(
@@ -276,21 +276,21 @@ def etl_brick_agg_tables_to_events_brick_agg_table(conn_or_cursor: sqlite3_Curso
         if agg_tablename in brick_agg_tables:
             idea_number = brick_agg_tables.get(agg_tablename)
             insert_from_select_sqlstr = f"""
-INSERT INTO {brick_events_tablename} (idea_number, event_int, face_name)
-SELECT '{idea_number}', event_int, face_name 
+INSERT INTO {brick_events_tablename} (idea_number, event_num, face_name)
+SELECT '{idea_number}', event_num, face_name 
 FROM {agg_tablename}
-GROUP BY event_int, face_name
+GROUP BY event_num, face_name
 ;
 """
             conn_or_cursor.execute(insert_from_select_sqlstr)
 
     update_error_message_sqlstr = f"""
 UPDATE {brick_events_tablename}
-SET error_message = 'invalid because of conflicting event_int'
-WHERE event_int IN (
-    SELECT event_int 
+SET error_message = 'invalid because of conflicting event_num'
+WHERE event_num IN (
+    SELECT event_num 
     FROM {brick_events_tablename} 
-    GROUP BY event_int 
+    GROUP BY event_num 
     HAVING MAX(face_name) <> MIN(face_name)
 )
 ;
@@ -303,13 +303,13 @@ def etl_events_brick_agg_table_to_events_brick_valid_table(
 ):
     valid_events_tablename = "events_brick_valid"
     if not db_table_exists(conn_or_cursor, valid_events_tablename):
-        brick_events_columns = ["event_int", "face_name"]
+        brick_events_columns = ["event_num", "face_name"]
         create_idea_sorted_table(
             conn_or_cursor, valid_events_tablename, brick_events_columns
         )
     insert_select_sqlstr = f"""
-INSERT INTO {valid_events_tablename} (event_int, face_name)
-SELECT event_int, face_name 
+INSERT INTO {valid_events_tablename} (event_num, face_name)
+SELECT event_num, face_name 
 FROM events_brick_agg
 WHERE error_message IS NULL
 ;
@@ -321,7 +321,7 @@ def etl_events_brick_agg_db_to_event_dict(
     conn_or_cursor: sqlite3_Cursor,
 ) -> dict[EventInt, FaceName]:
     select_sqlstr = """
-SELECT event_int, face_name 
+SELECT event_num, face_name 
 FROM events_brick_valid
 ;
 """
@@ -653,15 +653,15 @@ def etl_brick_valid_table_into_old_prime_table(
 
 def split_excel_into_events_dirs(translate_file: str, face_dir: str, sheet_name: str):
     split_excel_into_dirs(
-        translate_file, face_dir, "event_int", "translate", sheet_name
+        translate_file, face_dir, "event_num", "translate", sheet_name
     )
 
 
-def get_most_recent_event_int(
-    event_set: set[EventInt], max_event_int: EventInt
+def get_most_recent_event_num(
+    event_set: set[EventInt], max_event_num: EventInt
 ) -> EventInt:
-    recent_event_ints = [e_id for e_id in event_set if e_id <= max_event_int]
-    return max(recent_event_ints, default=None)
+    recent_event_nums = [e_id for e_id in event_set if e_id <= max_event_num]
+    return max(recent_event_nums, default=None)
 
 
 def etl_heard_raw_tables_to_moment_ote1_agg(conn_or_cursor: sqlite3_Connection):
@@ -672,7 +672,7 @@ def etl_heard_raw_tables_to_moment_ote1_agg(conn_or_cursor: sqlite3_Connection):
 def etl_moment_ote1_agg_table_to_moment_ote1_agg_csvs(
     conn_or_cursor: sqlite3_Connection, moment_mstr_dir: str
 ):
-    empty_ote1_csv_str = """moment_label,belief_name,event_int,bud_time,error_message
+    empty_ote1_csv_str = """moment_label,belief_name,event_num,bud_time,error_message
 """
     moments_dir = create_path(moment_mstr_dir, "moments")
     for moment_label in get_level1_dirs(moments_dir):
@@ -692,12 +692,12 @@ def etl_moment_ote1_agg_csvs_to_jsons(moment_mstr_dir: str):
         header_row = csv_arrays.pop(0)
         for row in csv_arrays:
             belief_name = row[1]
-            event_int = row[2]
+            event_num = row[2]
             bud_time = row[3]
             if x_dict.get(belief_name) is None:
                 x_dict[belief_name] = {}
             belief_dict = x_dict.get(belief_name)
-            belief_dict[int(bud_time)] = event_int
+            belief_dict[int(bud_time)] = event_num
         json_path = create_moment_ote1_json_path(moment_mstr_dir, moment_label)
         save_json(json_path, None, x_dict)
 
@@ -752,7 +752,7 @@ def etl_heard_agg_to_event_belief_csvs(
             save_to_split_csvs(
                 conn_or_cursor=conn_or_cursor,
                 tablename=belief_table,
-                key_columns=["moment_label", "belief_name", "event_int"],
+                key_columns=["moment_label", "belief_name", "event_num"],
                 dst_dir=moments_dir,
                 col1_prefix="beliefs",
                 col2_prefix="events",
@@ -767,17 +767,17 @@ def etl_event_belief_csvs_to_pack_json(moment_mstr_dir: str):
         for belief_name in get_level1_dirs(beliefs_path):
             belief_path = create_path(beliefs_path, belief_name)
             events_path = create_path(belief_path, "events")
-            for event_int in get_level1_dirs(events_path):
+            for event_num in get_level1_dirs(events_path):
                 event_pack = packunit_shop(
                     belief_name=belief_name,
                     face_name=None,
                     moment_label=moment_label,
-                    event_int=event_int,
+                    event_num=event_num,
                 )
-                event_dir = create_path(events_path, event_int)
+                event_dir = create_path(events_path, event_num)
                 add_beliefatoms_from_csv(event_pack, event_dir)
                 event_all_pack_path = create_event_all_pack_path(
-                    moment_mstr_dir, moment_label, belief_name, event_int
+                    moment_mstr_dir, moment_label, belief_name, event_num
                 )
                 save_json(event_all_pack_path, None, event_pack.get_serializable_dict())
 
@@ -805,7 +805,7 @@ def add_beliefatoms_from_csv(event_pack: PackUnit, event_dir: str):
                 for col_name, row_value in zip(headers, put_row):
                     if col_name not in {
                         "face_name",
-                        "event_int",
+                        "event_num",
                         "moment_label",
                         "belief_name",
                     }:
@@ -820,7 +820,7 @@ def add_beliefatoms_from_csv(event_pack: PackUnit, event_dir: str):
                 for col_name, row_value in zip(headers, del_row):
                     if col_name not in {
                         "face_name",
-                        "event_int",
+                        "event_num",
                         "moment_label",
                         "belief_name",
                     }:
@@ -836,20 +836,20 @@ def etl_event_pack_json_to_event_inherited_beliefunits(moment_mstr_dir: str):
         for belief_name in get_level1_dirs(beliefs_dir):
             belief_dir = create_path(beliefs_dir, belief_name)
             events_dir = create_path(belief_dir, "events")
-            prev_event_int = None
-            for event_int in get_level1_dirs(events_dir):
-                prev_belief = _get_prev_event_int_beliefunit(
-                    moment_mstr_dir, moment_label, belief_name, prev_event_int
+            prev_event_num = None
+            for event_num in get_level1_dirs(events_dir):
+                prev_belief = _get_prev_event_num_beliefunit(
+                    moment_mstr_dir, moment_label, belief_name, prev_event_num
                 )
                 beliefevent_path = create_beliefevent_path(
-                    moment_mstr_dir, moment_label, belief_name, event_int
+                    moment_mstr_dir, moment_label, belief_name, event_num
                 )
                 event_dir = create_belief_event_dir_path(
-                    moment_mstr_dir, moment_label, belief_name, event_int
+                    moment_mstr_dir, moment_label, belief_name, event_num
                 )
 
                 event_all_pack_path = create_event_all_pack_path(
-                    moment_mstr_dir, moment_label, belief_name, event_int
+                    moment_mstr_dir, moment_label, belief_name, event_num
                 )
                 event_pack = get_packunit_from_dict(open_json(event_all_pack_path))
                 sift_delta = get_minimal_beliefdelta(
@@ -864,16 +864,16 @@ def etl_event_pack_json_to_event_inherited_beliefunits(moment_mstr_dir: str):
                     "expressed_pack.json",
                     expressed_pack.get_serializable_dict(),
                 )
-                prev_event_int = event_int
+                prev_event_num = event_num
 
 
-def _get_prev_event_int_beliefunit(
-    moment_mstr_dir, moment_label, belief_name, prev_event_int
+def _get_prev_event_num_beliefunit(
+    moment_mstr_dir, moment_label, belief_name, prev_event_num
 ) -> BeliefUnit:
-    if prev_event_int is None:
+    if prev_event_num is None:
         return beliefunit_shop(belief_name, moment_label)
     prev_beliefevent_path = create_beliefevent_path(
-        moment_mstr_dir, moment_label, belief_name, prev_event_int
+        moment_mstr_dir, moment_label, belief_name, prev_event_num
     )
     return open_belief_file(prev_beliefevent_path)
 
@@ -882,10 +882,10 @@ def etl_event_inherited_beliefunits_to_moment_gut(moment_mstr_dir: str):
     moments_dir = create_path(moment_mstr_dir, "moments")
     for moment_label in get_level1_dirs(moments_dir):
         belief_events = collect_belief_event_dir_sets(moment_mstr_dir, moment_label)
-        beliefs_max_event_int_dict = get_beliefs_downhill_event_ints(belief_events)
-        for belief_name, max_event_int in beliefs_max_event_int_dict.items():
+        beliefs_max_event_num_dict = get_beliefs_downhill_event_nums(belief_events)
+        for belief_name, max_event_num in beliefs_max_event_num_dict.items():
             max_beliefevent_path = create_beliefevent_path(
-                moment_mstr_dir, moment_label, belief_name, max_event_int
+                moment_mstr_dir, moment_label, belief_name, max_event_num
             )
             max_event_belief_json = open_file(max_beliefevent_path)
             gut_path = create_gut_path(moment_mstr_dir, moment_label, belief_name)
@@ -944,7 +944,7 @@ def etl_moment_json_voice_nets_to_moment_voice_nets_table(
 
 
 def create_last_run_metrics_json(cursor: sqlite3_Cursor, moment_mstr_dir: str):
-    max_brick_agg_event_int = get_max_brick_agg_event_int(cursor)
+    max_brick_agg_event_num = get_max_brick_agg_event_num(cursor)
     last_run_metrics_path = create_last_run_metrics_path(moment_mstr_dir)
-    last_run_metrics_dict = {"max_brick_agg_event_int": max_brick_agg_event_int}
+    last_run_metrics_dict = {"max_brick_agg_event_num": max_brick_agg_event_num}
     save_json(last_run_metrics_path, None, last_run_metrics_dict)

@@ -28,9 +28,9 @@ def test_get_keywords_by_chapter_md_SetsFile_CheckMarkdownHasAllStrFunctions():
     assert keywords_by_chapter_md.find("words by Chapter") > 0
     ch10_pack_index = keywords_by_chapter_md.find("ch10_pack")
     assert ch10_pack_index > 0
-    event_int_index = keywords_by_chapter_md.find("event_int")
-    assert event_int_index > 0
-    assert ch10_pack_index < event_int_index
+    event_num_index = keywords_by_chapter_md.find("event_num")
+    assert event_num_index > 0
+    assert ch10_pack_index < event_num_index
 
 
 def test_save_keywords_by_chapter_md_SavesFile_get_keywords_by_chapter_md_ToGivenDirectory(

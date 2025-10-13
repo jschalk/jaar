@@ -29,7 +29,7 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_be
     # a23_bob_e3_dir = create_path(a23_bob_dir, event3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
     a23_bob_e3_dir = belief_event_dir(moment_mstr_dir, a23_str, bob_inx, event3)
-    e3_put_csv = f"""{wx.event_int},{wx.face_name},moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_grain,money_grain,respect_grain
+    e3_put_csv = f"""{wx.event_num},{wx.face_name},moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_grain,money_grain,respect_grain
 {event3},{sue_inx},{a23_str},{bob_inx},,,,,,,,
 """
     save_file(a23_bob_e3_dir, put_agg_csv_filename, e3_put_csv)
@@ -41,9 +41,9 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_be
 
     # THEN
     assert os_path_exists(e3_all_pack_path)
-    expected_e3_pack = packunit_shop(bob_inx, None, a23_str, event_int=event3)
+    expected_e3_pack = packunit_shop(bob_inx, None, a23_str, event_num=event3)
     e3_packunit = get_packunit_from_dict(open_json(e3_all_pack_path))
-    assert e3_packunit.event_int == expected_e3_pack.event_int
+    assert e3_packunit.event_num == expected_e3_pack.event_num
     expected_beliefdelta = expected_e3_pack._beliefdelta
     generated_e3_beliefdelta = e3_packunit._beliefdelta
     assert generated_e3_beliefdelta.beliefatoms == expected_beliefdelta.beliefatoms
@@ -72,10 +72,10 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
     a23_bob_e3_dir = belief_event_dir(moment_mstr_dir, a23_str, bob_inx, event3)
     a23_bob_e7_dir = belief_event_dir(moment_mstr_dir, a23_str, bob_inx, event7)
-    e3_put_csv = f"""{wx.event_int},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_lumen},{wx.voice_debt_lumen}
+    e3_put_csv = f"""{wx.event_num},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_lumen},{wx.voice_debt_lumen}
 {event3},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
 """
-    e7_put_csv = f"""{wx.event_int},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_lumen},{wx.voice_debt_lumen}
+    e7_put_csv = f"""{wx.event_num},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_lumen},{wx.voice_debt_lumen}
 {event7},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
 {event7},{sue_inx},{a23_str},{bob_inx},{sue_inx},{credit88},{debt_empty}
 """
@@ -102,8 +102,8 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     # atoms_dir = create_path(fay_world._moment_mstr_dir, "atoms")
     # e3_pack = packunit_shop(bob_inx, sue_inx, a23_str, packs_dir, atoms_dir, event3)
     # e7_pack = packunit_shop(bob_inx, sue_inx, a23_str, packs_dir, atoms_dir, event7)
-    expected_e3_pack = packunit_shop(bob_inx, None, a23_str, event_int=event3)
-    expected_e7_pack = packunit_shop(bob_inx, None, a23_str, event_int=event7)
+    expected_e3_pack = packunit_shop(bob_inx, None, a23_str, event_num=event3)
+    expected_e7_pack = packunit_shop(bob_inx, None, a23_str, event_num=event7)
     blrpern_dimen = wx.belief_voiceunit
     expected_e3_pack._beliefdelta.add_beliefatom(
         blrpern_dimen,
@@ -126,7 +126,7 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     e3_packunit = get_packunit_from_dict(open_json(e3_all_pack_path))
     e7_packunit = get_packunit_from_dict(open_json(e7_all_pack_path))
     # print(f"{e7_packunit=}")
-    assert e3_packunit.event_int == expected_e3_pack.event_int
+    assert e3_packunit.event_num == expected_e3_pack.event_num
     expected_beliefdelta = expected_e3_pack._beliefdelta
     generated_e3_beliefdelta = e3_packunit._beliefdelta
     assert generated_e3_beliefdelta.beliefatoms == expected_beliefdelta.beliefatoms

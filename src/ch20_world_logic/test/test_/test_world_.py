@@ -172,41 +172,41 @@ def test_WorldUnit_set_event_SetsAttr_Scenario0(env_dir_setup_cleanup):
     assert x_world._events == {}
 
     # WHEN
-    e5_event_int = 5
+    e5_event_num = 5
     e5_face_name = "Sue"
-    x_world.set_event(e5_event_int, e5_face_name)
+    x_world.set_event(e5_event_num, e5_face_name)
 
     # THEN
     assert x_world._events != {}
-    assert x_world._events == {e5_event_int: e5_face_name}
+    assert x_world._events == {e5_event_num: e5_face_name}
 
 
 def test_WorldUnit_event_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop("amy23", worlds_dir())
-    e5_event_int = 5
+    e5_event_num = 5
     e5_face_name = "Sue"
-    assert x_world.event_exists(e5_event_int) is False
+    assert x_world.event_exists(e5_event_num) is False
 
     # WHEN
-    x_world.set_event(e5_event_int, e5_face_name)
+    x_world.set_event(e5_event_num, e5_face_name)
 
     # THEN
-    assert x_world.event_exists(e5_event_int)
+    assert x_world.event_exists(e5_event_num)
 
 
 def test_WorldUnit_get_event_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop("amy23", worlds_dir())
-    e5_event_int = 5
+    e5_event_num = 5
     e5_face_name = "Sue"
-    assert x_world.get_event(e5_event_int) is None
+    assert x_world.get_event(e5_event_num) is None
 
     # WHEN
-    x_world.set_event(e5_event_int, e5_face_name)
+    x_world.set_event(e5_event_num, e5_face_name)
 
     # THEN
-    assert x_world.get_event(e5_event_int) == e5_face_name
+    assert x_world.get_event(e5_event_num) == e5_face_name
 
 
 def test_WorldUnit_get_world_db_path_ReturnsObj(env_dir_setup_cleanup):
