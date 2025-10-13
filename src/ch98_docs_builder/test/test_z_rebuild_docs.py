@@ -53,7 +53,7 @@ def test_SpecialTestThatBuildsDocs():
     keywords_classes_file_path = create_keywords_classes_file_path("src")
     enum_classes_str = create_all_enum_keyword_classes_str()
     current_classes_file_str = open_file(keywords_classes_file_path)
-    enum_classes_str = create_all_enum_keyword_classes_str()
+    print(enum_classes_str[:100])
     save_file(keywords_classes_file_path, None, enum_classes_str)
     assertion_failure_str = (
         "Special case: keywords.py file was rebuilt, run test again."
