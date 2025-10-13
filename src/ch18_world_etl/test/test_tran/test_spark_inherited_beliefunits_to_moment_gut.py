@@ -2,39 +2,39 @@ from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import create_path, open_json, save_json
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_beliefunit_from_dict
 from src.ch10_pack._ref.ch10_path import create_gut_path
-from src.ch11_bud._ref.ch11_path import create_belief_event_dir_path
+from src.ch11_bud._ref.ch11_path import create_belief_spark_dir_path
 from src.ch18_world_etl.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
 from src.ch18_world_etl.transformers import (
-    etl_event_inherited_beliefunits_to_moment_gut,
+    etl_spark_inherited_beliefunits_to_moment_gut,
 )
 
-# create test where event create_belief_event_dir_path()
+# create test where spark create_belief_spark_dir_path()
 # test that budunit with depth 0 is able to create
-# test that budunit with depth 1 is able to create nested beliefunits directories and populate with event relevant
+# test that budunit with depth 1 is able to create nested beliefunits directories and populate with spark relevant
 
 
-def test_etl_event_inherited_beliefunits_to_moment_gut_SetsFiles_Scenario0(
+def test_etl_spark_inherited_beliefunits_to_moment_gut_SetsFiles_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     sue_inx = "Suzy"
     bob_inx = "Bobby"
     yao_inx = "Yaoe"
-    event3 = 3
-    event7 = 7
+    spark3 = 3
+    spark7 = 7
     credit44 = 44
     credit77 = 77
     credit88 = 88
     a23_str = "amy23"
     moment_mstr_dir = get_chapter_temp_dir()
-    a23_bob_e3_dir = create_belief_event_dir_path(
-        moment_mstr_dir, a23_str, bob_inx, event3
+    a23_bob_e3_dir = create_belief_spark_dir_path(
+        moment_mstr_dir, a23_str, bob_inx, spark3
     )
-    a23_bob_e7_dir = create_belief_event_dir_path(
-        moment_mstr_dir, a23_str, bob_inx, event7
+    a23_bob_e7_dir = create_belief_spark_dir_path(
+        moment_mstr_dir, a23_str, bob_inx, spark7
     )
     belief_filename = "belief.json"
     e3_bob_belief = beliefunit_shop(bob_inx, a23_str)
@@ -56,7 +56,7 @@ def test_etl_event_inherited_beliefunits_to_moment_gut_SetsFiles_Scenario0(
     assert os_path_exists(a23_bob_gut_path) is False
 
     # WHEN
-    etl_event_inherited_beliefunits_to_moment_gut(moment_mstr_dir)
+    etl_spark_inherited_beliefunits_to_moment_gut(moment_mstr_dir)
 
     # THEN
     assert os_path_exists(a23_bob_gut_path)

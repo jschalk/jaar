@@ -30,7 +30,7 @@ def add_to_br00042_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -
 
     select_sqlstr = f"""
 SELECT
-  "" event_num
+  "" spark_num
 , trltitl.face_name
 , trltitl.otx_title
 , trltitl.inx_title
@@ -40,7 +40,7 @@ SELECT
 FROM {trltitl_s_vld_tablename} trltitl
 JOIN {trlcore_s_vld_tablename} trlcore ON trlcore.face_name = trltitl.face_name
 ORDER BY 
-  event_num
+  spark_num
 , trltitl.face_name
 , trltitl.otx_title
 , trltitl.inx_title
@@ -61,7 +61,7 @@ def add_to_br00043_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -
     trlcore_s_vld_tablename = prime_tbl("TRLCORE", "s", "vld")
     select_sqlstr = f"""
 SELECT
-  "" event_num
+  "" spark_num
 , trlname.face_name
 , trlname.otx_name
 , trlname.inx_name
@@ -92,7 +92,7 @@ def add_to_br00044_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -
 
     select_sqlstr = f"""
 SELECT
-  "" event_num
+  "" spark_num
 , trllabe.face_name
 , trllabe.otx_label
 , trllabe.inx_label
@@ -123,7 +123,7 @@ def add_to_br00045_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -
 
     select_sqlstr = f"""
 SELECT
-  "" event_num
+  "" spark_num
 , trlrope.face_name
 , trlrope.otx_rope
 , trlrope.inx_rope
@@ -201,7 +201,7 @@ def create_stance0001_file(
     with_face_name_csvs = {}
     for csv_key, csv_str in stance_csv_strs.items():
         csv_str = replace_csv_column_from_string(csv_str, "face_name", world_name)
-        csv_str = delete_column_from_csv_string(csv_str, "event_num")
+        csv_str = delete_column_from_csv_string(csv_str, "spark_num")
         with_face_name_csvs[csv_key] = csv_str
 
     csv_dict_to_excel(with_face_name_csvs, output_dir, "stance0001.xlsx")

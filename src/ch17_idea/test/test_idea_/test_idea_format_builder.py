@@ -63,7 +63,7 @@ def test_get_idea_brick_md_ReturnsObj():
         "attributes": {
             wx.knot: {wx.otx_key: False},
             wx.c400_number: {wx.otx_key: False},
-            wx.event_num: {wx.otx_key: True},
+            wx.spark_num: {wx.otx_key: True},
             wx.face_name: {wx.otx_key: True},
             wx.moment_label: {wx.otx_key: True},
             wx.fund_grain: {wx.otx_key: False},
@@ -88,7 +88,7 @@ def test_get_idea_brick_md_ReturnsObj():
 ## Dimens `['momentunit']`
 
 ## Attributes
-- `{wx.event_num}`
+- `{wx.spark_num}`
 - `{wx.face_name}`
 - `{wx.moment_label}`
 - `{wx.epoch_label}`
@@ -112,7 +112,7 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
         "attributes": {
             wx.knot: {wx.otx_key: False},
             wx.c400_number: {wx.otx_key: False},
-            wx.event_num: {wx.otx_key: True},
+            wx.spark_num: {wx.otx_key: True},
             wx.face_name: {wx.otx_key: True},
             wx.moment_label: {wx.otx_key: True},
             wx.fund_grain: {wx.otx_key: False},
@@ -137,7 +137,7 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
 ## Dimens `['momentunit']`
 
 ## Attributes
-- `{wx.event_num}`
+- `{wx.spark_num}`
 - `{wx.face_name}`
 - `{wx.moment_label}`
 - `{wx.epoch_label}`

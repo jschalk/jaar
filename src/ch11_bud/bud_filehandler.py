@@ -38,18 +38,18 @@ from src.ch10_pack.pack_main import (
 )
 from src.ch11_bud._ref.ch11_path import (
     CELLNODE_FILENAME,
-    create_beliefevent_path,
     create_beliefpoint_path,
+    create_beliefspark_path,
     create_buds_dir_path,
     create_budunit_json_path,
     create_cell_dir_path,
 )
 from src.ch11_bud._ref.ch11_semantic_types import (
     BeliefName,
-    EventInt,
     LabelTerm,
     MomentLabel,
     RopeTerm,
+    SparkInt,
     default_knot_if_None,
 )
 from src.ch11_bud.bud_main import BudUnit, EpochPoint, get_budunit_from_dict
@@ -77,72 +77,72 @@ def open_job_file(
     return open_belief_file(job_path)
 
 
-def get_beliefevent_obj(
+def get_beliefspark_obj(
     moment_mstr_dir: str,
     moment_label: LabelTerm,
     belief_name: BeliefName,
-    event_num: int,
+    spark_num: int,
 ) -> BeliefUnit:
-    beliefevent_json_path = create_beliefevent_path(
-        moment_mstr_dir, moment_label, belief_name, event_num
+    beliefspark_json_path = create_beliefspark_path(
+        moment_mstr_dir, moment_label, belief_name, spark_num
     )
-    return open_belief_file(beliefevent_json_path)
+    return open_belief_file(beliefspark_json_path)
 
 
-def collect_belief_event_dir_sets(
+def collect_belief_spark_dir_sets(
     moment_mstr_dir: str, moment_label: LabelTerm
-) -> dict[BeliefName, set[EventInt]]:
+) -> dict[BeliefName, set[SparkInt]]:
     x_dict = {}
     beliefs_dir = create_moment_beliefs_dir_path(moment_mstr_dir, moment_label)
     set_dir(beliefs_dir)
     for belief_name in os_listdir(beliefs_dir):
         belief_dir = create_path(beliefs_dir, belief_name)
-        events_dir = create_path(belief_dir, "events")
-        set_dir(events_dir)
-        belief_events_dirs = {
-            int(event_num_folder)
-            for event_num_folder in os_listdir(events_dir)
-            if os_path_isdir(create_path(events_dir, event_num_folder))
+        sparks_dir = create_path(belief_dir, "sparks")
+        set_dir(sparks_dir)
+        belief_sparks_dirs = {
+            int(spark_num_folder)
+            for spark_num_folder in os_listdir(sparks_dir)
+            if os_path_isdir(create_path(sparks_dir, spark_num_folder))
         }
-        x_dict[belief_name] = belief_events_dirs
+        x_dict[belief_name] = belief_sparks_dirs
     return x_dict
 
 
-def get_beliefs_downhill_event_nums(
-    belief_events_sets: dict[BeliefName, set[EventInt]],
+def get_beliefs_downhill_spark_nums(
+    belief_sparks_sets: dict[BeliefName, set[SparkInt]],
     downhill_beliefs: set[BeliefName] = None,
-    ref_event_num: EventInt = None,
-) -> dict[BeliefName, EventInt]:
+    ref_spark_num: SparkInt = None,
+) -> dict[BeliefName, SparkInt]:
     x_dict = {}
     if downhill_beliefs:
         for belief_name in downhill_beliefs:
-            if event_set := belief_events_sets.get(belief_name):
-                _add_downhill_event_num(x_dict, event_set, ref_event_num, belief_name)
+            if spark_set := belief_sparks_sets.get(belief_name):
+                _add_downhill_spark_num(x_dict, spark_set, ref_spark_num, belief_name)
     else:
-        for belief_name, event_set in belief_events_sets.items():
-            _add_downhill_event_num(x_dict, event_set, ref_event_num, belief_name)
+        for belief_name, spark_set in belief_sparks_sets.items():
+            _add_downhill_spark_num(x_dict, spark_set, ref_spark_num, belief_name)
     return x_dict
 
 
-def _add_downhill_event_num(
-    x_dict: dict[BeliefName, EventInt],
-    event_set: set[EventInt],
-    ref_event_num: EventInt,
+def _add_downhill_spark_num(
+    x_dict: dict[BeliefName, SparkInt],
+    spark_set: set[SparkInt],
+    ref_spark_num: SparkInt,
     downhill_belief: BeliefName,
 ):
-    if event_set:
-        if ref_event_num:
-            if downhill_event_nums := {ei for ei in event_set if ei <= ref_event_num}:
-                x_dict[downhill_belief] = max(downhill_event_nums)
+    if spark_set:
+        if ref_spark_num:
+            if downhill_spark_nums := {ei for ei in spark_set if ei <= ref_spark_num}:
+                x_dict[downhill_belief] = max(downhill_spark_nums)
         else:
-            x_dict[downhill_belief] = max(event_set)
+            x_dict[downhill_belief] = max(spark_set)
 
 
-def save_arbitrary_beliefevent(
+def save_arbitrary_beliefspark(
     moment_mstr_dir: str,
     moment_label: str,
     belief_name: str,
-    event_num: int,
+    spark_num: int,
     voices: list[list] = None,
     facts: list[tuple[RopeTerm, RopeTerm, float, float]] = None,
 ) -> str:
@@ -163,11 +163,11 @@ def save_arbitrary_beliefevent(
         x_beliefunit.add_fact(
             x_reason_context, x_fact_state, x_fact_lower, x_fact_upper, True
         )
-    x_beliefevent_path = create_beliefevent_path(
-        moment_mstr_dir, moment_label, belief_name, event_num
+    x_beliefspark_path = create_beliefspark_path(
+        moment_mstr_dir, moment_label, belief_name, spark_num
     )
-    save_json(x_beliefevent_path, None, x_beliefunit.to_dict())
-    return x_beliefevent_path
+    save_json(x_beliefspark_path, None, x_beliefunit.to_dict())
+    return x_beliefspark_path
 
 
 def cellunit_add_json_file(
@@ -175,7 +175,7 @@ def cellunit_add_json_file(
     moment_label: str,
     time_belief_name: str,
     bud_time: int,
-    event_num: int,
+    spark_num: int,
     bud_ancestors: list[BeliefName] = None,
     quota: int = None,
     celldepth: int = None,
@@ -185,7 +185,7 @@ def cellunit_add_json_file(
         moment_mstr_dir, moment_label, time_belief_name, bud_time, bud_ancestors
     )
     x_cell = cellunit_shop(
-        time_belief_name, bud_ancestors, event_num, celldepth, money_grain, quota
+        time_belief_name, bud_ancestors, spark_num, celldepth, money_grain, quota
     )
     cellunit_save_to_dir(cell_dir, x_cell)
 

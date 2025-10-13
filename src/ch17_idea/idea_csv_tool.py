@@ -38,7 +38,7 @@ def create_init_stance_idea_csv_strs() -> dict[str, str]:
         idea_format_filename = get_idea_format_filename(idea_number)
         for idea_columns, idea_file_name in idea_format_headers.items():
             if idea_file_name == idea_format_filename:
-                moment_csv_strs[idea_number] = f"event_num,face_name,{idea_columns}\n"
+                moment_csv_strs[idea_number] = f"spark_num,face_name,{idea_columns}\n"
     return moment_csv_strs
 
 
@@ -79,7 +79,7 @@ def _add_momentunit_to_br00000_csv(
     x_moment: MomentUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> str:
     if x_moment.knot == csv_delimiter:
         x_knot = f"""\"{str(x_moment.knot)}\""""
@@ -88,7 +88,7 @@ def _add_momentunit_to_br00000_csv(
 
     x_row = [
         if_none_str(face_name),
-        if_none_str(event_num),
+        if_none_str(spark_num),
         x_moment.moment_label,
         x_moment.epoch.epoch_label,
         str(x_moment.epoch.c400_number),
@@ -110,13 +110,13 @@ def _add_budunit_to_br00001_csv(
     x_moment: MomentUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> str:
     for broker_belief_name, beliefbudhistorys in x_moment.beliefbudhistorys.items():
         for bud_time, budunit in beliefbudhistorys.buds.items():
             x_row = [
                 if_none_str(face_name),
-                if_none_str(event_num),
+                if_none_str(spark_num),
                 x_moment.moment_label,
                 broker_belief_name,
                 str(bud_time),
@@ -133,7 +133,7 @@ def _add_paybook_to_br00002_csv(
     x_moment: MomentUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> str:
     for belief_name, tranunit in x_moment.paybook.tranunits.items():
         for voice_name, time_dict in tranunit.items():
@@ -141,7 +141,7 @@ def _add_paybook_to_br00002_csv(
                 moment_label = x_moment.moment_label
                 x_row = [
                     if_none_str(face_name),
-                    if_none_str(event_num),
+                    if_none_str(spark_num),
                     moment_label,
                     belief_name,
                     voice_name,
@@ -158,12 +158,12 @@ def _add_hours_to_br00003_csv(
     x_moment: MomentUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> str:
     for hour_plan in x_moment.epoch.hours_config:
         x_row = [
             if_none_str(face_name),
-            if_none_str(event_num),
+            if_none_str(spark_num),
             x_moment.moment_label,
             str(hour_plan[1]),
             hour_plan[0],
@@ -178,12 +178,12 @@ def _add_months_to_br00004_csv(
     x_moment: MomentUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> str:
     for month_plan in x_moment.epoch.months_config:
         x_row = [
             if_none_str(face_name),
-            if_none_str(event_num),
+            if_none_str(spark_num),
             x_moment.moment_label,
             str(month_plan[1]),
             month_plan[0],
@@ -198,12 +198,12 @@ def _add_weekdays_to_br00005_csv(
     x_moment: MomentUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> str:
     for count_x, weekday_label in enumerate(x_moment.epoch.weekdays_config):
         x_row = [
             if_none_str(face_name),
-            if_none_str(event_num),
+            if_none_str(spark_num),
             x_moment.moment_label,
             str(count_x),
             weekday_label,
@@ -218,13 +218,13 @@ def add_belief_to_br00020_csv(
     x_belief: BeliefUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> str:
     for voiceunit in x_belief.voices.values():
         for membership in voiceunit.memberships.values():
             x_row = [
                 if_none_str(face_name),
-                if_none_str(event_num),
+                if_none_str(spark_num),
                 x_belief.moment_label,
                 x_belief.belief_name,
                 voiceunit.voice_name,
@@ -242,12 +242,12 @@ def add_belief_to_br00021_csv(
     x_belief: BeliefUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> str:
     for voiceunit in x_belief.voices.values():
         x_row = [
             if_none_str(face_name),
-            if_none_str(event_num),
+            if_none_str(spark_num),
             x_belief.moment_label,
             x_belief.belief_name,
             voiceunit.voice_name,
@@ -264,13 +264,13 @@ def add_belief_to_br00022_csv(
     x_belief: BeliefUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> str:
     for planunit in x_belief._plan_dict.values():
         for awardunit in planunit.awardunits.values():
             x_row = [
                 if_none_str(face_name),
-                if_none_str(event_num),
+                if_none_str(spark_num),
                 x_belief.moment_label,
                 x_belief.belief_name,
                 planunit.get_plan_rope(),
@@ -288,12 +288,12 @@ def add_belief_to_br00023_csv(
     x_belief: BeliefUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> str:
     for factunit in x_belief.planroot.factunits.values():
         x_row = [
             if_none_str(face_name),
-            if_none_str(event_num),
+            if_none_str(spark_num),
             x_belief.moment_label,
             x_belief.belief_name,
             x_belief.planroot.get_plan_rope(),
@@ -312,13 +312,13 @@ def add_belief_to_br00024_csv(
     x_belief: BeliefUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> str:
     for planunit in x_belief._plan_dict.values():
         for group_title in planunit.laborunit._partys:
             x_row = [
                 if_none_str(face_name),
-                if_none_str(event_num),
+                if_none_str(spark_num),
                 x_belief.moment_label,
                 x_belief.belief_name,
                 planunit.get_plan_rope(),
@@ -334,13 +334,13 @@ def add_belief_to_br00025_csv(
     x_belief: BeliefUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> str:
     for planunit in x_belief._plan_dict.values():
         for group_title in planunit.healerunit._healer_names:
             x_row = [
                 if_none_str(face_name),
-                if_none_str(event_num),
+                if_none_str(spark_num),
                 x_belief.moment_label,
                 x_belief.belief_name,
                 planunit.get_plan_rope(),
@@ -356,14 +356,14 @@ def add_belief_to_br00026_csv(
     x_belief: BeliefUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> str:
     for planunit in x_belief._plan_dict.values():
         for reasonunit in planunit.reasonunits.values():
             for caseunit in reasonunit.cases.values():
                 x_row = [
                     if_none_str(face_name),
-                    if_none_str(event_num),
+                    if_none_str(spark_num),
                     x_belief.moment_label,
                     x_belief.belief_name,
                     planunit.get_plan_rope(),
@@ -383,13 +383,13 @@ def add_belief_to_br00027_csv(
     x_belief: BeliefUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> str:
     for planunit in x_belief._plan_dict.values():
         for reasonunit in planunit.reasonunits.values():
             x_row = [
                 if_none_str(face_name),
-                if_none_str(event_num),
+                if_none_str(spark_num),
                 x_belief.moment_label,
                 x_belief.belief_name,
                 planunit.get_plan_rope(),
@@ -406,13 +406,13 @@ def add_belief_to_br00028_csv(
     x_belief: BeliefUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> str:
     for planunit in x_belief._plan_dict.values():
         if planunit != x_belief.planroot:
             x_row = [
                 if_none_str(face_name),
-                if_none_str(event_num),
+                if_none_str(spark_num),
                 x_belief.moment_label,
                 x_belief.belief_name,
                 planunit.get_plan_rope(),
@@ -438,11 +438,11 @@ def add_belief_to_br00029_csv(
     x_belief: BeliefUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> str:
     x_row = [
         if_none_str(face_name),
-        if_none_str(event_num),
+        if_none_str(spark_num),
         x_belief.moment_label,
         x_belief.belief_name,
         if_none_str(x_belief.credor_respect),
@@ -501,7 +501,7 @@ def add_pack_to_br00020_csv(
         if beliefatom.dimen == "belief_voice_membership":
             x_row = [
                 x_packunit.face_name,
-                str(x_packunit.event_num),
+                str(x_packunit.spark_num),
                 x_packunit.moment_label,
                 x_packunit.belief_name,
                 beliefatom.jkeys.get("voice_name"),
@@ -521,7 +521,7 @@ def add_pack_to_br00021_csv(
         if beliefatom.dimen == "belief_voiceunit":
             x_row = [
                 x_packunit.face_name,
-                str(x_packunit.event_num),
+                str(x_packunit.spark_num),
                 x_packunit.moment_label,
                 x_packunit.belief_name,
                 beliefatom.jkeys.get("voice_name"),
@@ -540,7 +540,7 @@ def add_pack_to_br00022_csv(
         if beliefatom.dimen == "belief_plan_awardunit":
             x_row = [
                 x_packunit.face_name,
-                str(x_packunit.event_num),
+                str(x_packunit.spark_num),
                 x_packunit.moment_label,
                 x_packunit.belief_name,
                 beliefatom.jkeys.get("plan_rope"),
@@ -560,7 +560,7 @@ def add_pack_to_br00023_csv(
         if beliefatom.dimen == "belief_plan_factunit":
             x_row = [
                 x_packunit.face_name,
-                str(x_packunit.event_num),
+                str(x_packunit.spark_num),
                 x_packunit.moment_label,
                 x_packunit.belief_name,
                 beliefatom.jkeys.get("plan_rope"),
@@ -581,7 +581,7 @@ def add_pack_to_br00024_csv(
         if beliefatom.dimen == "belief_plan_partyunit":
             x_row = [
                 x_packunit.face_name,
-                str(x_packunit.event_num),
+                str(x_packunit.spark_num),
                 x_packunit.moment_label,
                 x_packunit.belief_name,
                 beliefatom.jkeys.get("plan_rope"),
@@ -599,7 +599,7 @@ def add_pack_to_br00025_csv(
         if beliefatom.dimen == "belief_plan_healerunit":
             x_row = [
                 x_packunit.face_name,
-                str(x_packunit.event_num),
+                str(x_packunit.spark_num),
                 x_packunit.moment_label,
                 x_packunit.belief_name,
                 beliefatom.jkeys.get("plan_rope"),
@@ -617,7 +617,7 @@ def add_pack_to_br00026_csv(
         if beliefatom.dimen == "belief_plan_reason_caseunit":
             x_row = [
                 x_packunit.face_name,
-                str(x_packunit.event_num),
+                str(x_packunit.spark_num),
                 x_packunit.moment_label,
                 x_packunit.belief_name,
                 beliefatom.jkeys.get("plan_rope"),
@@ -639,7 +639,7 @@ def add_pack_to_br00027_csv(
         if beliefatom.dimen == "belief_plan_reasonunit":
             x_row = [
                 x_packunit.face_name,
-                str(x_packunit.event_num),
+                str(x_packunit.spark_num),
                 x_packunit.moment_label,
                 x_packunit.belief_name,
                 beliefatom.jkeys.get("plan_rope"),
@@ -658,7 +658,7 @@ def add_pack_to_br00028_csv(
         if beliefatom.dimen == "belief_planunit":
             x_row = [
                 x_packunit.face_name,
-                str(x_packunit.event_num),
+                str(x_packunit.spark_num),
                 x_packunit.moment_label,
                 x_packunit.belief_name,
                 beliefatom.jkeys.get("plan_rope"),
@@ -686,7 +686,7 @@ def add_pack_to_br00029_csv(
         if beliefatom.dimen == "beliefunit":
             x_row = [
                 x_packunit.face_name,
-                str(x_packunit.event_num),
+                str(x_packunit.spark_num),
                 x_packunit.moment_label,
                 x_packunit.belief_name,
                 if_none_str(beliefatom.jvalues.get("credor_respect")),

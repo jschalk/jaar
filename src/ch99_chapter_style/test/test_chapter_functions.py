@@ -40,7 +40,7 @@ def expected_semantic_types() -> set:
         "CRUD_command",
         "FirstLabel",
         "NexusLabel",
-        "EventInt",
+        "SparkInt",
         "FaceName",
         "FundGrain",
         "FundNum",

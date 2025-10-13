@@ -6,7 +6,7 @@
     "jkeys": {
       "awardee_title": {}, 
       "belief_name": {}, 
-      "event_num": {}, 
+      "spark_num": {}, 
       "face_name": {}, 
       "moment_label": {}, 
       "plan_rope": {}
@@ -19,7 +19,7 @@
     "idea_category": "belief", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
+      "spark_num": {}, 
       "face_name": {}, 
       "fact_context": {}, 
       "moment_label": {}, 
@@ -33,7 +33,7 @@
     "idea_category": "belief", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
+      "spark_num": {}, 
       "face_name": {}, 
       "healer_name": {}, 
       "moment_label": {}, 
@@ -47,7 +47,7 @@
     "idea_category": "belief", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
+      "spark_num": {}, 
       "face_name": {}, 
       "moment_label": {}, 
       "party_title": {}, 
@@ -61,7 +61,7 @@
     "idea_category": "belief", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
+      "spark_num": {}, 
       "face_name": {}, 
       "moment_label": {}, 
       "plan_rope": {}, 
@@ -76,7 +76,7 @@
     "idea_category": "belief", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
+      "spark_num": {}, 
       "face_name": {}, 
       "moment_label": {}, 
       "plan_rope": {}, 
@@ -90,7 +90,7 @@
     "idea_category": "belief", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
+      "spark_num": {}, 
       "face_name": {}, 
       "moment_label": {}, 
       "plan_rope": {}
@@ -115,7 +115,7 @@
     "idea_category": "belief", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
+      "spark_num": {}, 
       "face_name": {}, 
       "group_title": {}, 
       "moment_label": {}, 
@@ -129,7 +129,7 @@
     "idea_category": "belief", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
+      "spark_num": {}, 
       "face_name": {}, 
       "moment_label": {}, 
       "voice_name": {}
@@ -140,7 +140,7 @@
     "allowed_crud": "UPDATE", 
     "build_order": 19, 
     "idea_category": "belief", 
-    "jkeys": {"belief_name": {}, "event_num": {}, "face_name": {}, "moment_label": {}}, 
+    "jkeys": {"belief_name": {}, "spark_num": {}, "face_name": {}, "moment_label": {}}, 
     "jvalues": {
       "credor_respect": {}, 
       "debtor_respect": {}, 
@@ -159,7 +159,7 @@
     "jkeys": {
       "belief_name": {}, 
       "bud_time": {}, 
-      "event_num": {}, 
+      "spark_num": {}, 
       "face_name": {}, 
       "moment_label": {}
     }, 
@@ -169,21 +169,21 @@
     "allowed_crud": "insert_one_time", 
     "build_order": 6, 
     "idea_category": "moment", 
-    "jkeys": {"cumulative_minute": {}, "event_num": {}, "face_name": {}, "moment_label": {}}, 
+    "jkeys": {"cumulative_minute": {}, "spark_num": {}, "face_name": {}, "moment_label": {}}, 
     "jvalues": {"hour_label": {}}
   }, 
   "moment_epoch_month": {
     "allowed_crud": "insert_one_time", 
     "build_order": 7, 
     "idea_category": "moment", 
-    "jkeys": {"cumulative_day": {}, "event_num": {}, "face_name": {}, "moment_label": {}}, 
+    "jkeys": {"cumulative_day": {}, "spark_num": {}, "face_name": {}, "moment_label": {}}, 
     "jvalues": {"month_label": {}}
   }, 
   "moment_epoch_weekday": {
     "allowed_crud": "insert_one_time", 
     "build_order": 8, 
     "idea_category": "moment", 
-    "jkeys": {"event_num": {}, "face_name": {}, "moment_label": {}, "weekday_order": {}}, 
+    "jkeys": {"spark_num": {}, "face_name": {}, "moment_label": {}, "weekday_order": {}}, 
     "jvalues": {"weekday_label": {}}
   }, 
   "moment_paybook": {
@@ -192,7 +192,7 @@
     "idea_category": "moment", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
+      "spark_num": {}, 
       "face_name": {}, 
       "moment_label": {}, 
       "tran_time": {}, 
@@ -204,14 +204,14 @@
     "allowed_crud": "insert_multiple", 
     "build_order": 8, 
     "idea_category": "moment", 
-    "jkeys": {"event_num": {}, "face_name": {}, "moment_label": {}, "offi_time": {}}, 
+    "jkeys": {"spark_num": {}, "face_name": {}, "moment_label": {}, "offi_time": {}}, 
     "jvalues": {}
   }, 
   "momentunit": {
     "allowed_crud": "insert_one_time", 
     "build_order": 5, 
     "idea_category": "moment", 
-    "jkeys": {"event_num": {}, "face_name": {}, "moment_label": {}}, 
+    "jkeys": {"spark_num": {}, "face_name": {}, "moment_label": {}}, 
     "jvalues": {
       "c400_number": {}, 
       "epoch_label": {}, 
@@ -228,28 +228,28 @@
     "allowed_crud": "insert_one_time", 
     "build_order": 2, 
     "idea_category": "translate", 
-    "jkeys": {"event_num": {}, "face_name": {}, "otx_label": {}}, 
+    "jkeys": {"spark_num": {}, "face_name": {}, "otx_label": {}}, 
     "jvalues": {"inx_knot": {}, "inx_label": {}, "otx_knot": {}, "unknown_str": {}}
   }, 
   "translate_name": {
     "allowed_crud": "insert_one_time", 
     "build_order": 0, 
     "idea_category": "translate", 
-    "jkeys": {"event_num": {}, "face_name": {}, "otx_name": {}}, 
+    "jkeys": {"spark_num": {}, "face_name": {}, "otx_name": {}}, 
     "jvalues": {"inx_knot": {}, "inx_name": {}, "otx_knot": {}, "unknown_str": {}}
   }, 
   "translate_rope": {
     "allowed_crud": "insert_one_time", 
     "build_order": 3, 
     "idea_category": "translate", 
-    "jkeys": {"event_num": {}, "face_name": {}, "otx_rope": {}}, 
+    "jkeys": {"spark_num": {}, "face_name": {}, "otx_rope": {}}, 
     "jvalues": {"inx_knot": {}, "inx_rope": {}, "otx_knot": {}, "unknown_str": {}}
   }, 
   "translate_title": {
     "allowed_crud": "insert_one_time", 
     "build_order": 1, 
     "idea_category": "translate", 
-    "jkeys": {"event_num": {}, "face_name": {}, "otx_title": {}}, 
+    "jkeys": {"spark_num": {}, "face_name": {}, "otx_title": {}}, 
     "jvalues": {"inx_knot": {}, "inx_title": {}, "otx_knot": {}, "unknown_str": {}}
   }
 }

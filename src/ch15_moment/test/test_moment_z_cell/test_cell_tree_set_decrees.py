@@ -1,6 +1,6 @@
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch11_bud._ref.ch11_path import (
-    create_beliefevent_path,
+    create_beliefspark_path,
     create_cell_dir_path as cell_dir,
 )
 from src.ch11_bud.bud_filehandler import (
@@ -33,7 +33,7 @@ def test_DecreeUnit_Exists():
     assert not x_decreeunit.cell_celldepth
     assert not x_decreeunit.root_cell_bool
     assert not x_decreeunit.cell_belief_name
-    assert not x_decreeunit.event_num
+    assert not x_decreeunit.spark_num
 
 
 def test_DecreeUnit_get_child_cell_ancestors_ReturnsObj_Scenario0():
@@ -51,8 +51,8 @@ def test_DecreeUnit_get_child_cell_ancestors_ReturnsObj_Scenario0():
     assert x_decreeunit.cell_ancestors != child_cell_ancestors
 
 
-# create a world with, cell.json, found facts and belief events
-# for every found_fact change beliefevent to that fact
+# create a world with, cell.json, found facts and belief sparks
+# for every found_fact change beliefspark to that fact
 # create agenda (different than if found_fact was not applied)
 def test_set_cell_trees_decrees_SetsRootAttr_Scenario0_Depth0NoFacts(
     env_dir_setup_cleanup,
@@ -63,9 +63,9 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario0_Depth0NoFacts(
     tp5 = 5
     bob_str = "Bob"
     das = []
-    event7 = 7
+    spark7 = 7
     # create cell file
-    bob_cell = cellunit_shop(bob_str, [], event7, celldepth=0)
+    bob_cell = cellunit_shop(bob_str, [], spark7, celldepth=0)
     bob_root_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, [])
     bob_bob_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, [bob_str])
     cellunit_save_to_dir(bob_root_dir, bob_cell)
@@ -79,7 +79,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario0_Depth0NoFacts(
     assert cellunit_get_from_dir(bob_root_dir).boss_facts == {}
 
 
-def test_set_cell_trees_decrees_SetsRootAttr_Scenario1_Depth0AndOne_beliefevent_fact(
+def test_set_cell_trees_decrees_SetsRootAttr_Scenario1_Depth0AndOne_beliefspark_fact(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -88,7 +88,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario1_Depth0AndOne_beliefevent_
     tp5 = 5
     bob_str = "Bob"
     das = []
-    event7 = 7
+    spark7 = 7
     bob_beliefadjust = get_bob_mop_with_reason_beliefunit_example()
     # create cell file
     clean_fact = example_casa_floor_clean_factunit()
@@ -96,10 +96,10 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario1_Depth0AndOne_beliefevent_
     bob_cell = cellunit_shop(
         bob_str,
         [],
-        event7,
+        spark7,
         0,
         beliefadjust=bob_beliefadjust,
-        beliefevent_facts=clean_facts,
+        beliefspark_facts=clean_facts,
     )
     bob_root_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, [])
     cellunit_save_to_dir(bob_root_dir, bob_cell)
@@ -121,7 +121,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
     tp5 = 5
     bob_str = "Bob"
     das = []
-    event7 = 7
+    spark7 = 7
     bob_beliefadjust = get_bob_mop_with_reason_beliefunit_example()
     # create cell file
     clean_fact = example_casa_floor_clean_factunit()
@@ -129,7 +129,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
     bob_cell = cellunit_shop(
         bob_str,
         [],
-        event7,
+        spark7,
         celldepth=0,
         beliefadjust=bob_beliefadjust,
         found_facts=clean_facts,
@@ -162,12 +162,12 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1AndZero_boss_fact
     bob_sue_beliefadjust = beliefunit_shop(sue_str, a23_str)
     # create cell file
     bob_cell = cellunit_shop(
-        bob_str, bob_ancs, event_num=e7, celldepth=2, beliefadjust=bob_beliefadjust
+        bob_str, bob_ancs, spark_num=e7, celldepth=2, beliefadjust=bob_beliefadjust
     )
     bob_sue_cell = cellunit_shop(
         bob_str,
         bob_sue_ancs,
-        event_num=e7,
+        spark_num=e7,
         celldepth=0,
         beliefadjust=bob_sue_beliefadjust,
     )
@@ -208,15 +208,15 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1And_boss_facts(
     bob_cell = cellunit_shop(
         bob_str,
         bob_ancs,
-        event_num=e7,
+        spark_num=e7,
         celldepth=2,
         beliefadjust=bob_beliefadjust,
-        beliefevent_facts=dirty_facts,
+        beliefspark_facts=dirty_facts,
     )
     bob_sue_cell = cellunit_shop(
         bob_str,
         bob_sue_ancs,
-        event_num=e7,
+        spark_num=e7,
         celldepth=0,
         beliefadjust=bob_sue_beliefadjust,
     )
@@ -267,10 +267,10 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario4_Depth3And_boss_facts(
     bob_cell = cellunit_shop(
         bob_str,
         bob_ancs,
-        event_num=e7,
+        spark_num=e7,
         celldepth=4,
         beliefadjust=bob_beliefadjust,
-        beliefevent_facts=dirty_facts,
+        beliefspark_facts=dirty_facts,
     )
     b_sue_cell = cellunit_shop(bob_str, b_sue_ancs, e7, 0, beliefadjust=b_sue_ba)
     bs_yao_cell = cellunit_shop(bob_str, bs_yao_ancs, e7, 0, beliefadjust=bs_yao_ba)
@@ -330,10 +330,10 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario5_Depth2And_boss_facts(
     bob_cell = cellunit_shop(
         bob_str,
         bob_ancs,
-        event_num=e7,
+        spark_num=e7,
         celldepth=2,
         beliefadjust=bob_beliefadjust,
-        beliefevent_facts=dirty_facts,
+        beliefspark_facts=dirty_facts,
     )
     b_sue_cell = cellunit_shop(bob_str, b_sue_ancs, e7, 0, beliefadjust=b_sue_ba)
     bs_yao_cell = cellunit_shop(bob_str, bs_yao_ancs, e7, 0, beliefadjust=bs_yao_ba)
@@ -395,14 +395,14 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachC
     bob_cell = cellunit_shop(
         bob_str,
         bob_ancs,
-        event_num=e7,
+        spark_num=e7,
         celldepth=3,
         beliefadjust=bob_beliefadjust,
-        beliefevent_facts=dirty_facts,
+        beliefspark_facts=dirty_facts,
     )
     b_sue_cell = cellunit_shop(bob_str, b_sue_ancs, e7, 0, beliefadjust=b_sue_ba)
     bs_yao_cell = cellunit_shop(bob_str, bs_yao_ancs, e7, 0)
-    bs_yao_cell.eval_beliefevent(bs_yao_ba)
+    bs_yao_cell.eval_beliefspark(bs_yao_ba)
     bsy_zia_cell = cellunit_shop(bob_str, bsy_zia_ancs, e7, 0, beliefadjust=bsy_zia_ba)
     bob_root_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, bob_ancs)
     bob_sue_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, b_sue_ancs)
@@ -428,7 +428,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachC
     assert cellunit_get_from_dir(bob_sue_yao_zia_dir).boss_facts == clean_facts
 
 
-def test_set_cell_trees_decrees_SetsChildCells_Scenario7_NoCell_GetBeliefEvent(
+def test_set_cell_trees_decrees_SetsChildCells_Scenario7_NoCell_GetBeliefSpark(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -460,10 +460,10 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario7_NoCell_GetBeliefEvent(
     bob_cell = cellunit_shop(
         bob_str,
         bob_ancs,
-        event_num=e7,
+        spark_num=e7,
         celldepth=4,
         beliefadjust=bob_beliefadjust,
-        beliefevent_facts=dirty_facts,
+        beliefspark_facts=dirty_facts,
     )
     b_sue_cell = cellunit_shop(bob_str, b_sue_ancs, e7, 0, beliefadjust=b_sue_ba)
     # bs_yao_cell = cellunit_shop(bob_str, bs_yao_ancs, e7, 0, beliefadjust=bs_yao_ba)
@@ -474,8 +474,8 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario7_NoCell_GetBeliefEvent(
     bob_sue_yao_zia_dir = cell_dir(mstr_dir, a23_str, bob_str, tp5, bsy_zia_ancs)
     cellunit_save_to_dir(bob_root_dir, bob_cell)
     cellunit_save_to_dir(bob_sue_dir, b_sue_cell)
-    beliefevent_path = create_beliefevent_path(mstr_dir, a23_str, yao_str, e7)
-    save_belief_file(beliefevent_path, None, bs_yao_ba)
+    beliefspark_path = create_beliefspark_path(mstr_dir, a23_str, yao_str, e7)
+    save_belief_file(beliefspark_path, None, bs_yao_ba)
     # cellunit_save_to_dir(bob_sue_yao_dir, bs_yao_cell)
     cellunit_save_to_dir(bob_sue_yao_zia_dir, bsy_zia_cell)
     assert cellunit_get_from_dir(bob_root_dir).boss_facts == {}

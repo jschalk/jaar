@@ -102,8 +102,8 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_TranslateRowsInDB(
     bob_inx = "Bobby"
     sue_otx = "Sue"
     sue_inx = "Suzy"
-    event1 = 1
-    event7 = 7
+    spark1 = 1
+    spark7 = 7
     slash_str = "/"
     colon_str = ":"
     sue_unknown_str = "SueUnknown"
@@ -121,10 +121,10 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_TranslateRowsInDB(
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
-        ({wx.event_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
+        ({wx.spark_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
         VALUES
-          ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
-        , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
+          ({spark1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
+        , ({spark7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
         ;
         """
         cursor.execute(insert_trlname_sqlstr)
@@ -159,17 +159,17 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_TranslateRowsInDB(
     br00045_csv = gen_stance_csv_strs.get(br00045_str)
 
     expected_br00042_csv = (
-        "event_num,face_name,otx_title,inx_title,otx_knot,inx_knot,unknown_str\n"
+        "spark_num,face_name,otx_title,inx_title,otx_knot,inx_knot,unknown_str\n"
     )
-    expected_br00043_csv = f"""event_num,face_name,otx_name,inx_name,otx_knot,inx_knot,unknown_str
+    expected_br00043_csv = f"""spark_num,face_name,otx_name,inx_name,otx_knot,inx_knot,unknown_str
 ,{bob_otx},{bob_otx},{bob_inx},{slash_str},{colon_str},{bob_unknown_str}
 ,{sue_otx},{sue_otx},{sue_inx},{slash_str},{colon_str},{sue_unknown_str}
 """
     expected_br00044_csv = (
-        "event_num,face_name,otx_label,inx_label,otx_knot,inx_knot,unknown_str\n"
+        "spark_num,face_name,otx_label,inx_label,otx_knot,inx_knot,unknown_str\n"
     )
     expected_br00045_csv = (
-        "event_num,face_name,otx_rope,inx_rope,otx_knot,inx_knot,unknown_str\n"
+        "spark_num,face_name,otx_rope,inx_rope,otx_knot,inx_knot,unknown_str\n"
     )
     assert br00042_csv == expected_br00042_csv
     assert br00043_csv == expected_br00043_csv
@@ -206,8 +206,8 @@ def test_create_stance0001_file_CreatesFile_Scenario1_TranslateRowsInDB(
     bob_inx = "Bobby"
     sue_otx = "Sue"
     sue_inx = "Suzy"
-    event1 = 1
-    event7 = 7
+    spark1 = 1
+    spark7 = 7
     slash_str = "/"
     colon_str = ":"
     sue_unknown_str = "SueUnknown"
@@ -225,10 +225,10 @@ def test_create_stance0001_file_CreatesFile_Scenario1_TranslateRowsInDB(
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
-        ({wx.event_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
+        ({wx.spark_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
         VALUES
-          ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
-        , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
+          ({spark1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
+        , ({spark7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
         ;
         """
         cursor.execute(insert_trlname_sqlstr)

@@ -25,10 +25,10 @@ from src.ch07_belief_logic.belief_tool import (
 )
 from src.ch11_bud._ref.ch11_semantic_types import (
     BeliefName,
-    EventInt,
     FundNum,
     MoneyGrain,
     RopeTerm,
+    SparkInt,
 )
 
 CELLNODE_QUOTA_DEFAULT = 1000
@@ -37,14 +37,14 @@ CELLNODE_QUOTA_DEFAULT = 1000
 @dataclass
 class CellUnit:
     ancestors: list[BeliefName] = None
-    event_num: EventInt = None
+    spark_num: SparkInt = None
     celldepth: int = None
     bud_belief_name: BeliefName = None
     money_grain: MoneyGrain = None
     quota: float = None
     mandate: float = None
     beliefadjust: BeliefUnit = None
-    beliefevent_facts: dict[RopeTerm, FactUnit] = None
+    beliefspark_facts: dict[RopeTerm, FactUnit] = None
     found_facts: dict[RopeTerm, FactUnit] = None
     boss_facts: dict[RopeTerm, FactUnit] = None
     reason_contexts: set[RopeTerm] = None
@@ -53,39 +53,39 @@ class CellUnit:
     def get_cell_belief_name(self) -> BeliefName:
         return self.bud_belief_name if self.ancestors == [] else self.ancestors[-1]
 
-    def eval_beliefevent(self, x_belief: BeliefUnit):
+    def eval_beliefspark(self, x_belief: BeliefUnit):
         if not x_belief:
             self.beliefadjust = None
-            self.beliefevent_facts = {}
+            self.beliefspark_facts = {}
             self.reason_contexts = set()
         else:
-            self._load_existing_beliefevent(x_belief)
+            self._load_existing_beliefspark(x_belief)
 
-    def _load_existing_beliefevent(self, x_belief: BeliefUnit):
+    def _load_existing_beliefspark(self, x_belief: BeliefUnit):
         self.reason_contexts = x_belief.get_reason_contexts()
-        self.beliefevent_facts = get_factunits_from_dict(get_facts_dict(x_belief))
+        self.beliefspark_facts = get_factunits_from_dict(get_facts_dict(x_belief))
         y_belief = copy_deepcopy(x_belief)
         clear_factunits_from_belief(y_belief)
         y_belief.cashout()
         self.beliefadjust = y_belief
 
-    def get_beliefevents_credit_ledger(self) -> dict[BeliefName, float]:
+    def get_beliefsparks_credit_ledger(self) -> dict[BeliefName, float]:
         return {} if self.beliefadjust is None else get_credit_ledger(self.beliefadjust)
 
-    def get_beliefevents_quota_ledger(self) -> dict[BeliefName, float]:
+    def get_beliefsparks_quota_ledger(self) -> dict[BeliefName, float]:
         if not self.beliefadjust:
             return None
-        credit_ledger = self.get_beliefevents_credit_ledger()
+        credit_ledger = self.get_beliefsparks_credit_ledger()
         return allot_scale(credit_ledger, self.quota, self.money_grain)
 
-    def set_beliefevent_facts_from_dict(self, fact_dict: dict[RopeTerm, dict]):
-        self.beliefevent_facts = get_factunits_from_dict(fact_dict)
+    def set_beliefspark_facts_from_dict(self, fact_dict: dict[RopeTerm, dict]):
+        self.beliefspark_facts = get_factunits_from_dict(fact_dict)
 
     def set_found_facts_from_dict(self, fact_dict: dict[RopeTerm, dict]):
         self.found_facts = get_factunits_from_dict(fact_dict)
 
     def set_boss_facts_from_other_facts(self):
-        self.boss_facts = copy_deepcopy(self.beliefevent_facts)
+        self.boss_facts = copy_deepcopy(self.beliefspark_facts)
         for x_fact in self.found_facts.values():
             self.boss_facts[x_fact.fact_context] = copy_deepcopy(x_fact)
 
@@ -93,26 +93,26 @@ class CellUnit:
         for x_fact in self.found_facts.values():
             if not self.boss_facts.get(x_fact.fact_context):
                 self.boss_facts[x_fact.fact_context] = copy_deepcopy(x_fact)
-        for x_fact in self.beliefevent_facts.values():
+        for x_fact in self.beliefspark_facts.values():
             if not self.boss_facts.get(x_fact.fact_context):
                 self.boss_facts[x_fact.fact_context] = copy_deepcopy(x_fact)
 
     def filter_facts_by_reason_contexts(self):
-        to_delete_beliefevent_fact_keys = set(self.beliefevent_facts.keys())
+        to_delete_beliefspark_fact_keys = set(self.beliefspark_facts.keys())
         to_delete_found_fact_keys = set(self.found_facts.keys())
         to_delete_boss_fact_keys = set(self.boss_facts.keys())
-        to_delete_beliefevent_fact_keys.difference_update(self.reason_contexts)
+        to_delete_beliefspark_fact_keys.difference_update(self.reason_contexts)
         to_delete_found_fact_keys.difference_update(self.reason_contexts)
         to_delete_boss_fact_keys.difference_update(self.reason_contexts)
-        for beliefevent_fact_key in to_delete_beliefevent_fact_keys:
-            self.beliefevent_facts.pop(beliefevent_fact_key)
+        for beliefspark_fact_key in to_delete_beliefspark_fact_keys:
+            self.beliefspark_facts.pop(beliefspark_fact_key)
         for found_fact_key in to_delete_found_fact_keys:
             self.found_facts.pop(found_fact_key)
         for boss_fact_key in to_delete_boss_fact_keys:
             self.boss_facts.pop(boss_fact_key)
 
     def set_beliefadjust_facts(self):
-        for fact in self.beliefevent_facts.values():
+        for fact in self.beliefspark_facts.values():
             self.beliefadjust.add_fact(
                 fact.fact_context,
                 fact.fact_state,
@@ -154,14 +154,14 @@ class CellUnit:
             self.beliefadjust = beliefunit_shop(self.get_cell_belief_name())
         return {
             "ancestors": self.ancestors,
-            "event_num": self.event_num,
+            "spark_num": self.spark_num,
             "celldepth": self.celldepth,
             "bud_belief_name": self.bud_belief_name,
             "money_grain": self.money_grain,
             "quota": self.quota,
             "mandate": self.mandate,
             "beliefadjust": self.beliefadjust.to_dict(),
-            "beliefevent_facts": get_dict_from_factunits(self.beliefevent_facts),
+            "beliefspark_facts": get_dict_from_factunits(self.beliefspark_facts),
             "found_facts": get_dict_from_factunits(self.found_facts),
             "boss_facts": get_dict_from_factunits(self.boss_facts),
         }
@@ -170,12 +170,12 @@ class CellUnit:
 def cellunit_shop(
     bud_belief_name: BeliefName,
     ancestors: list[BeliefName] = None,
-    event_num: EventInt = None,
+    spark_num: SparkInt = None,
     celldepth: int = None,
     money_grain: MoneyGrain = None,
     quota: float = None,
     beliefadjust: BeliefUnit = None,
-    beliefevent_facts: dict[RopeTerm, FactUnit] = None,
+    beliefspark_facts: dict[RopeTerm, FactUnit] = None,
     found_facts: dict[RopeTerm, FactUnit] = None,
     boss_facts: dict[RopeTerm, FactUnit] = None,
     mandate: float = None,
@@ -193,14 +193,14 @@ def cellunit_shop(
 
     return CellUnit(
         ancestors=get_empty_list_if_None(ancestors),
-        event_num=event_num,
+        spark_num=spark_num,
         celldepth=get_0_if_None(celldepth),
         bud_belief_name=bud_belief_name,
         money_grain=get_1_if_None(money_grain),
         quota=quota,
         mandate=mandate,
         beliefadjust=beliefadjust,
-        beliefevent_facts=get_empty_dict_if_None(beliefevent_facts),
+        beliefspark_facts=get_empty_dict_if_None(beliefspark_facts),
         found_facts=get_empty_dict_if_None(found_facts),
         boss_facts=get_empty_dict_if_None(boss_facts),
         reason_contexts=reason_contexts,
@@ -211,7 +211,7 @@ def cellunit_shop(
 def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
     bud_belief_name = x_dict.get("bud_belief_name")
     ancestors = x_dict.get("ancestors")
-    event_num = x_dict.get("event_num")
+    spark_num = x_dict.get("spark_num")
     celldepth = x_dict.get("celldepth")
     money_grain = x_dict.get("money_grain")
     quota = x_dict.get("quota")
@@ -221,21 +221,21 @@ def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
         beliefadjust_obj = get_beliefunit_from_dict(beliefadjust_dict)
     else:
         beliefadjust_obj = None
-    beliefevent_fact_dict = get_empty_dict_if_None(x_dict.get("beliefevent_facts"))
+    beliefspark_fact_dict = get_empty_dict_if_None(x_dict.get("beliefspark_facts"))
     found_fact_dict = get_empty_dict_if_None(x_dict.get("found_facts"))
     boss_fact_dict = get_empty_dict_if_None(x_dict.get("boss_facts"))
-    beliefevent_facts = get_factunits_from_dict(beliefevent_fact_dict)
+    beliefspark_facts = get_factunits_from_dict(beliefspark_fact_dict)
     found_facts = get_factunits_from_dict(found_fact_dict)
     boss_facts = get_factunits_from_dict(boss_fact_dict)
     return cellunit_shop(
         bud_belief_name=bud_belief_name,
         ancestors=ancestors,
-        event_num=event_num,
+        spark_num=spark_num,
         celldepth=celldepth,
         money_grain=money_grain,
         quota=quota,
         beliefadjust=beliefadjust_obj,
-        beliefevent_facts=beliefevent_facts,
+        beliefspark_facts=beliefspark_facts,
         found_facts=found_facts,
         boss_facts=boss_facts,
         mandate=mandate,
@@ -256,7 +256,7 @@ def create_child_cellunits(parent_cell: CellUnit) -> list[CellUnit]:
             child_cell = cellunit_shop(
                 bud_belief_name=parent_cell.bud_belief_name,
                 ancestors=child_ancestors,
-                event_num=parent_cell.event_num,
+                spark_num=parent_cell.spark_num,
                 celldepth=parent_cell.celldepth - 1,
                 money_grain=parent_cell.money_grain,
                 mandate=child_mandate,

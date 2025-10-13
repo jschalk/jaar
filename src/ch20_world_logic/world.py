@@ -5,7 +5,7 @@ from src.ch01_py.dict_toolbox import get_0_if_None, get_empty_set_if_None
 from src.ch01_py.file_toolbox import create_path, delete_dir, set_dir
 from src.ch11_bud.bud_main import EpochPoint
 from src.ch15_moment.moment_main import MomentUnit
-from src.ch17_idea.idea_db_tool import update_event_num_in_excel_files
+from src.ch17_idea.idea_db_tool import update_spark_num_in_excel_files
 from src.ch18_world_etl._ref.ch18_path import (
     create_moment_mstr_path,
     create_world_db_path,
@@ -15,18 +15,14 @@ from src.ch18_world_etl.transformers import (
     add_moment_epoch_to_guts,
     create_last_run_metrics_json,
     etl_brick_agg_tables_to_brick_valid_tables,
-    etl_brick_agg_tables_to_events_brick_agg_table,
+    etl_brick_agg_tables_to_sparks_brick_agg_table,
     etl_brick_raw_tables_to_brick_agg_tables,
     etl_brick_valid_tables_to_sound_raw_tables,
     etl_create_bud_mandate_ledgers,
     etl_create_buds_root_cells,
     etl_create_moment_cell_trees,
-    etl_event_belief_csvs_to_pack_json,
-    etl_event_inherited_beliefunits_to_moment_gut,
-    etl_event_pack_json_to_event_inherited_beliefunits,
-    etl_events_brick_agg_table_to_events_brick_valid_table,
     etl_heard_agg_tables_to_moment_jsons,
-    etl_heard_agg_to_event_belief_csvs,
+    etl_heard_agg_to_spark_belief_csvs,
     etl_heard_raw_tables_to_heard_agg_tables,
     etl_heard_raw_tables_to_moment_ote1_agg,
     etl_input_dfs_to_brick_raw_tables,
@@ -41,8 +37,12 @@ from src.ch18_world_etl.transformers import (
     etl_sound_agg_tables_to_sound_vld_tables,
     etl_sound_raw_tables_to_sound_agg_tables,
     etl_sound_vld_tables_to_heard_raw_tables,
+    etl_spark_belief_csvs_to_pack_json,
+    etl_spark_inherited_beliefunits_to_moment_gut,
+    etl_spark_pack_json_to_spark_inherited_beliefunits,
+    etl_sparks_brick_agg_table_to_sparks_brick_valid_table,
     etl_translate_sound_agg_tables_to_translate_sound_vld_tables,
-    get_max_brick_agg_event_num,
+    get_max_brick_agg_spark_num,
 )
 from src.ch19_world_kpi.kpi_mstr import (
     create_calendar_markdown_files,
@@ -50,9 +50,9 @@ from src.ch19_world_kpi.kpi_mstr import (
     populate_kpi_bundle,
 )
 from src.ch20_world_logic._ref.ch20_semantic_types import (
-    EventInt,
     FaceName,
     MomentLabel,
+    SparkInt,
     WorldName,
 )
 
@@ -68,8 +68,8 @@ class WorldUnit:
     _brick_dir: str = None
     _moment_mstr_dir: str = None
     _momentunits: set[MomentLabel] = None
-    _events: dict[EventInt, FaceName] = None
-    _translate_events: dict[FaceName, set[EventInt]] = None
+    _sparks: dict[SparkInt, FaceName] = None
+    _translate_sparks: dict[FaceName, set[SparkInt]] = None
 
     def get_world_db_path(self) -> str:
         "Returns path: world_dir/world.db"
@@ -78,14 +78,14 @@ class WorldUnit:
     def delete_world_db(self):
         delete_dir(self.get_world_db_path())
 
-    def set_event(self, event_num: EventInt, face_name: FaceName):
-        self._events[event_num] = face_name
+    def set_spark(self, spark_num: SparkInt, face_name: FaceName):
+        self._sparks[spark_num] = face_name
 
-    def event_exists(self, event_num: EventInt) -> bool:
-        return self._events.get(event_num) != None
+    def spark_exists(self, spark_num: SparkInt) -> bool:
+        return self._sparks.get(spark_num) != None
 
-    def get_event(self, event_num: EventInt) -> FaceName:
-        return self._events.get(event_num)
+    def get_spark(self, spark_num: SparkInt) -> FaceName:
+        return self._sparks.get(spark_num)
 
     def set_input_dir(self, x_dir: str):
         self._input_dir = x_dir
@@ -116,14 +116,14 @@ class WorldUnit:
         db_conn.close()
 
     def stance_sheets_to_clarity_mstr(self):
-        max_brick_agg_event_num = 0
+        max_brick_agg_spark_num = 0
         if os_path_exists(self.get_world_db_path()):
             with sqlite3_connect(self.get_world_db_path()) as db_conn0:
                 cursor0 = db_conn0.cursor()
-                max_brick_agg_event_num = get_max_brick_agg_event_num(cursor0)
+                max_brick_agg_spark_num = get_max_brick_agg_spark_num(cursor0)
             db_conn0.close()
-        next_event_num = max_brick_agg_event_num + 1
-        update_event_num_in_excel_files(self._input_dir, next_event_num)
+        next_spark_num = max_brick_agg_spark_num + 1
+        update_spark_num_in_excel_files(self._input_dir, next_spark_num)
         self.sheets_input_to_clarity_mstr()
         delete_dir(self._input_dir)
 
@@ -133,10 +133,10 @@ class WorldUnit:
         set_dir(mstr_dir)
         # collect excel file data into central location
         etl_input_dfs_to_brick_raw_tables(cursor, self._input_dir)
-        # brick raw to sound raw, check by event_nums
+        # brick raw to sound raw, check by spark_nums
         etl_brick_raw_tables_to_brick_agg_tables(cursor)
-        etl_brick_agg_tables_to_events_brick_agg_table(cursor)
-        etl_events_brick_agg_table_to_events_brick_valid_table(cursor)
+        etl_brick_agg_tables_to_sparks_brick_agg_table(cursor)
+        etl_sparks_brick_agg_table_to_sparks_brick_valid_table(cursor)
         etl_brick_agg_tables_to_brick_valid_tables(cursor)
         etl_brick_valid_tables_to_sound_raw_tables(cursor)
         # sound raw to heard raw, filter through translates
@@ -147,10 +147,10 @@ class WorldUnit:
         # heard raw to moment/belief jsons
         etl_heard_raw_tables_to_heard_agg_tables(cursor)
         etl_heard_agg_tables_to_moment_jsons(cursor, mstr_dir)
-        etl_heard_agg_to_event_belief_csvs(cursor, mstr_dir)
-        etl_event_belief_csvs_to_pack_json(mstr_dir)
-        etl_event_pack_json_to_event_inherited_beliefunits(mstr_dir)
-        etl_event_inherited_beliefunits_to_moment_gut(mstr_dir)
+        etl_heard_agg_to_spark_belief_csvs(cursor, mstr_dir)
+        etl_spark_belief_csvs_to_pack_json(mstr_dir)
+        etl_spark_pack_json_to_spark_inherited_beliefunits(mstr_dir)
+        etl_spark_inherited_beliefunits_to_moment_gut(mstr_dir)
         add_moment_epoch_to_guts(mstr_dir)
         etl_moment_guts_to_moment_jobs(mstr_dir)
         etl_heard_raw_tables_to_moment_ote1_agg(cursor)
@@ -201,10 +201,10 @@ def worldunit_shop(
         worlds_dir=worlds_dir,
         output_dir=output_dir,
         world_time_reason_upper=get_0_if_None(world_time_reason_upper),
-        _events={},
+        _sparks={},
         _momentunits=get_empty_set_if_None(_momentunits),
         _input_dir=input_dir,
-        _translate_events={},
+        _translate_sparks={},
     )
     x_worldunit._set_world_dirs()
     if not x_worldunit._input_dir:

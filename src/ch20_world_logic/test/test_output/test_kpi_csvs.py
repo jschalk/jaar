@@ -34,18 +34,18 @@ def test_WorldUnit_create_kpi_csvs_Senario1_Add_CreatesFile(env_dir_setup_cleanu
     output_dir = create_path(worlds_dir(), "output")
     fay_world = worldunit_shop(fay_str, worlds_dir(), output_dir)
     sue_str = "Sue"
-    event2 = 2
+    spark2 = 2
     ex_filename = "Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     amy23_str = "amy23"
     br00011_columns = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,
         wx.voice_name,
     ]
-    br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
+    br00011_rows = [[spark2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
     fay_world.sheets_input_to_clarity_mstr()

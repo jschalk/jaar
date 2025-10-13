@@ -17,13 +17,13 @@ from src.ch17_idea.idea_db_tool import (
 )
 from src.ch18_world_etl.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
-    CREATE_MOMENT_EVENT_TIME_AGG_SQLSTR,
     CREATE_MOMENT_OTE1_AGG_SQLSTR,
+    CREATE_MOMENT_SPARK_TIME_AGG_SQLSTR,
     CREATE_MOMENT_VOICE_NETS_SQLSTR,
     IDEA_STAGEBLE_DEL_DIMENS,
-    INSERT_MOMENT_EVENT_TIME_AGG_SQLSTR,
     INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR,
-    UPDATE_ERROR_MESSAGE_MOMENT_EVENT_TIME_AGG_SQLSTR,
+    INSERT_MOMENT_SPARK_TIME_AGG_SQLSTR,
+    UPDATE_ERROR_MESSAGE_MOMENT_SPARK_TIME_AGG_SQLSTR,
     create_all_idea_tables,
     create_prime_tablename,
     create_sound_and_heard_tables,
@@ -281,64 +281,64 @@ def test_IDEA_STAGEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
     assert IDEA_STAGEBLE_DEL_DIMENS == expected_idea_slabelable_dimens
 
 
-def test_CREATE_MOMENT_EVENT_TIME_AGG_SQLSTR_Exists():
+def test_CREATE_MOMENT_SPARK_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
-CREATE TABLE IF NOT EXISTS {wx.moment_event_time_agg} (
+CREATE TABLE IF NOT EXISTS {wx.moment_spark_time_agg} (
   {wx.moment_label} TEXT
-, {wx.event_num} INTEGER
+, {wx.spark_num} INTEGER
 , agg_time INTEGER
 , {wx.error_message} TEXT
 )
 ;
 """
     # WHEN / THEN
-    assert CREATE_MOMENT_EVENT_TIME_AGG_SQLSTR == expected_create_table_sqlstr
+    assert CREATE_MOMENT_SPARK_TIME_AGG_SQLSTR == expected_create_table_sqlstr
 
 
-def test_INSERT_MOMENT_EVENT_TIME_AGG_SQLSTR_Exists():
+def test_INSERT_MOMENT_SPARK_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = f"""
-INSERT INTO {wx.moment_event_time_agg} ({wx.moment_label}, {wx.event_num}, agg_time)
-SELECT {wx.moment_label}, {wx.event_num}, agg_time
+INSERT INTO {wx.moment_spark_time_agg} ({wx.moment_label}, {wx.spark_num}, agg_time)
+SELECT {wx.moment_label}, {wx.spark_num}, agg_time
 FROM (
-    SELECT {wx.moment_label}, {wx.event_num}, {wx.tran_time} as agg_time
+    SELECT {wx.moment_label}, {wx.spark_num}, {wx.tran_time} as agg_time
     FROM moment_paybook_raw
-    GROUP BY {wx.moment_label}, {wx.event_num}, {wx.tran_time}
+    GROUP BY {wx.moment_label}, {wx.spark_num}, {wx.tran_time}
     UNION 
-    SELECT {wx.moment_label}, {wx.event_num}, {wx.bud_time} as agg_time
+    SELECT {wx.moment_label}, {wx.spark_num}, {wx.bud_time} as agg_time
     FROM moment_budunit_raw
-    GROUP BY {wx.moment_label}, {wx.event_num}, {wx.bud_time}
+    GROUP BY {wx.moment_label}, {wx.spark_num}, {wx.bud_time}
 )
-ORDER BY {wx.moment_label}, {wx.event_num}, agg_time
+ORDER BY {wx.moment_label}, {wx.spark_num}, agg_time
 ;
 """
     # WHEN / THEN
-    assert INSERT_MOMENT_EVENT_TIME_AGG_SQLSTR == expected_INSERT_sqlstr
+    assert INSERT_MOMENT_SPARK_TIME_AGG_SQLSTR == expected_INSERT_sqlstr
 
 
-def test_UPDATE_ERROR_MESSAGE_MOMENT_EVENT_TIME_AGG_SQLSTR_Exists():
+def test_UPDATE_ERROR_MESSAGE_MOMENT_SPARK_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_UPDATE_sqlstr = f"""
-WITH EventTimeOrdered AS (
-    SELECT {wx.moment_label}, {wx.event_num}, agg_time,
-           LAG(agg_time) OVER (PARTITION BY {wx.moment_label} ORDER BY {wx.event_num}) AS prev_agg_time
-    FROM {wx.moment_event_time_agg}
+WITH SparkTimeOrdered AS (
+    SELECT {wx.moment_label}, {wx.spark_num}, agg_time,
+           LAG(agg_time) OVER (PARTITION BY {wx.moment_label} ORDER BY {wx.spark_num}) AS prev_agg_time
+    FROM {wx.moment_spark_time_agg}
 )
-UPDATE {wx.moment_event_time_agg}
+UPDATE {wx.moment_spark_time_agg}
 SET {wx.error_message} = CASE 
-         WHEN EventTimeOrdered.prev_agg_time > EventTimeOrdered.agg_time
+         WHEN SparkTimeOrdered.prev_agg_time > SparkTimeOrdered.agg_time
          THEN 'not sorted'
          ELSE 'sorted'
        END 
-FROM EventTimeOrdered
-WHERE EventTimeOrdered.{wx.event_num} = {wx.moment_event_time_agg}.{wx.event_num}
-    AND EventTimeOrdered.{wx.moment_label} = {wx.moment_event_time_agg}.{wx.moment_label}
-    AND EventTimeOrdered.agg_time = {wx.moment_event_time_agg}.agg_time
+FROM SparkTimeOrdered
+WHERE SparkTimeOrdered.{wx.spark_num} = {wx.moment_spark_time_agg}.{wx.spark_num}
+    AND SparkTimeOrdered.{wx.moment_label} = {wx.moment_spark_time_agg}.{wx.moment_label}
+    AND SparkTimeOrdered.agg_time = {wx.moment_spark_time_agg}.agg_time
 ;
 """
     # WHEN / THEN
-    assert UPDATE_ERROR_MESSAGE_MOMENT_EVENT_TIME_AGG_SQLSTR == expected_UPDATE_sqlstr
+    assert UPDATE_ERROR_MESSAGE_MOMENT_SPARK_TIME_AGG_SQLSTR == expected_UPDATE_sqlstr
 
 
 def test_CREATE_MOMENT_OTE1_AGG_SQLSTR_Exists():
@@ -347,7 +347,7 @@ def test_CREATE_MOMENT_OTE1_AGG_SQLSTR_Exists():
 CREATE TABLE IF NOT EXISTS {wx.moment_ote1_agg} (
   {wx.moment_label} TEXT
 , {wx.belief_name} TEXT
-, {wx.event_num} INTEGER
+, {wx.spark_num} INTEGER
 , {wx.bud_time} INTEGER
 , error_message TEXT
 )
@@ -357,24 +357,24 @@ CREATE TABLE IF NOT EXISTS {wx.moment_ote1_agg} (
     assert CREATE_MOMENT_OTE1_AGG_SQLSTR == expected_create_table_sqlstr
 
 
-# TODO create test to prove this insert should grab minimun event_num instead of just event_num
+# TODO create test to prove this insert should grab minimun spark_num instead of just spark_num
 # TODO create test to prove this insert should never grab when error message is not null in source table
 def test_INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR_Exists():
     # ESTABLISH
     momentbud_h_raw_tablename = create_prime_tablename(wx.moment_budunit, "h", "raw")
     expected_INSERT_sqlstr = f"""
-INSERT INTO {wx.moment_ote1_agg} ({wx.moment_label}, {wx.belief_name}, {wx.event_num}, {wx.bud_time})
-SELECT {wx.moment_label}, {wx.belief_name}, {wx.event_num}, {wx.bud_time}
+INSERT INTO {wx.moment_ote1_agg} ({wx.moment_label}, {wx.belief_name}, {wx.spark_num}, {wx.bud_time})
+SELECT {wx.moment_label}, {wx.belief_name}, {wx.spark_num}, {wx.bud_time}
 FROM (
     SELECT 
       {wx.moment_label}_inx {wx.moment_label}
     , {wx.belief_name}_inx {wx.belief_name}
-    , {wx.event_num}
+    , {wx.spark_num}
     , {wx.bud_time}
     FROM {momentbud_h_raw_tablename}
-    GROUP BY {wx.moment_label}_inx, {wx.belief_name}_inx, {wx.event_num}, {wx.bud_time}
+    GROUP BY {wx.moment_label}_inx, {wx.belief_name}_inx, {wx.spark_num}, {wx.bud_time}
 )
-ORDER BY {wx.moment_label}, {wx.belief_name}, {wx.event_num}, {wx.bud_time}
+ORDER BY {wx.moment_label}, {wx.belief_name}, {wx.spark_num}, {wx.bud_time}
 ;
 """
     # WHEN / THEN

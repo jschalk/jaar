@@ -51,7 +51,7 @@ def test_PackUnit_Exists():
     assert not x_packunit._delta_start
     assert not x_packunit._packs_dir
     assert not x_packunit._atoms_dir
-    assert not x_packunit.event_num
+    assert not x_packunit.spark_num
 
 
 def test_packunit_shop_ReturnsObjEstablishWithEmptyArgs():
@@ -70,7 +70,7 @@ def test_packunit_shop_ReturnsObjEstablishWithEmptyArgs():
     assert bob_packunit._delta_start == 0
     assert not bob_packunit._packs_dir
     assert not bob_packunit._atoms_dir
-    assert not bob_packunit.event_num
+    assert not bob_packunit.spark_num
 
 
 def test_packunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
@@ -83,7 +83,7 @@ def test_packunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
     bob_packs_dir = "exampletext7"
     bob_atoms_dir = "exampletext9"
     amy45_str = "amy45"
-    amy45_e5_event_num = 5
+    amy45_e5_spark_num = 5
 
     # WHEN
     bob_packunit = packunit_shop(
@@ -95,7 +95,7 @@ def test_packunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
         _delta_start=bob_delta_start,
         _packs_dir=bob_packs_dir,
         _atoms_dir=bob_atoms_dir,
-        event_num=amy45_e5_event_num,
+        spark_num=amy45_e5_spark_num,
     )
 
     # THEN
@@ -107,7 +107,7 @@ def test_packunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
     assert bob_packunit._delta_start == bob_delta_start
     assert bob_packunit._packs_dir == bob_packs_dir
     assert bob_packunit._atoms_dir == bob_atoms_dir
-    assert bob_packunit.event_num == amy45_e5_event_num
+    assert bob_packunit.spark_num == amy45_e5_spark_num
 
 
 def test_packunit_shop_ReturnsObjEstablishWithSomeArgs_v1():
@@ -227,7 +227,7 @@ def test_PackUnit_get_step_dict_ReturnsObj_Simple():
     amy45_str = "amy45"
     amy45_e5_int = 5
     bob_packunit = packunit_shop(
-        moment_label=amy45_str, belief_name=bob_str, event_num=amy45_e5_int
+        moment_label=amy45_str, belief_name=bob_str, spark_num=amy45_e5_int
     )
     bob_packunit.set_face(sue_str)
 
@@ -241,8 +241,8 @@ def test_PackUnit_get_step_dict_ReturnsObj_Simple():
     assert x_dict.get(wx.belief_name) == bob_str
     assert x_dict.get(wx.face_name) is not None
     assert x_dict.get(wx.face_name) == sue_str
-    assert x_dict.get(wx.event_num) is not None
-    assert x_dict.get(wx.event_num) == amy45_e5_int
+    assert x_dict.get(wx.spark_num) is not None
+    assert x_dict.get(wx.spark_num) == amy45_e5_int
 
     delta_str = "delta"
     assert x_dict.get(delta_str) is not None
@@ -306,7 +306,7 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
     amy45_str = "amy45"
     amy45_e5_int = 5
     bob_packunit = packunit_shop(
-        moment_label=amy45_str, belief_name=bob_str, event_num=amy45_e5_int
+        moment_label=amy45_str, belief_name=bob_str, spark_num=amy45_e5_int
     )
     bob_packunit.set_face(sue_str)
 
@@ -320,8 +320,8 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
     assert total_dict.get(wx.belief_name) == bob_str
     assert total_dict.get(wx.face_name) is not None
     assert total_dict.get(wx.face_name) == sue_str
-    assert total_dict.get(wx.event_num) is not None
-    assert total_dict.get(wx.event_num) == amy45_e5_int
+    assert total_dict.get(wx.spark_num) is not None
+    assert total_dict.get(wx.spark_num) == amy45_e5_int
     delta_str = "delta"
     assert total_dict.get(delta_str) == {}
 
@@ -371,9 +371,9 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Scenario1_WithBeliefDeltaPopu
       "jvalues": {"credor_respect": 77}
     }
   }, 
-  "event_num": null, 
   "face_name": null, 
-  "moment_label": "ZZ"
+  "moment_label": "ZZ", 
+  "spark_num": null
 }"""
     assert get_json_from_dict(generated_dict) == expected_json
 
@@ -382,7 +382,7 @@ def test_get_packunit_from_dict_ReturnsObj_WithBeliefDeltaPopulated():
     # ESTABLISH
     bob_str = "Bob"
     sue_beliefdelta = get_beliefdelta_sue_example()
-    bob_packunit = packunit_shop(bob_str, _beliefdelta=sue_beliefdelta, event_num=778)
+    bob_packunit = packunit_shop(bob_str, _beliefdelta=sue_beliefdelta, spark_num=778)
 
     # WHEN
     generated_bob_packunit = get_packunit_from_dict(
@@ -392,7 +392,7 @@ def test_get_packunit_from_dict_ReturnsObj_WithBeliefDeltaPopulated():
     # THEN
     assert generated_bob_packunit
     assert generated_bob_packunit.face_name == bob_packunit.face_name
-    assert generated_bob_packunit.event_num == bob_packunit.event_num
+    assert generated_bob_packunit.spark_num == bob_packunit.spark_num
     assert generated_bob_packunit.moment_label == bob_packunit.moment_label
     assert generated_bob_packunit._beliefdelta == bob_packunit._beliefdelta
     assert generated_bob_packunit == bob_packunit
@@ -420,14 +420,14 @@ def test_PackUnit_get_deltametric_dict_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
-    event5_int = 5550
+    spark5_int = 5550
     sue_beliefdelta = get_beliefdelta_sue_example()
     x_delta_start = 7
     bob_packunit = packunit_shop(bob_str)
     bob_packunit.set_beliefdelta(sue_beliefdelta)
     bob_packunit.set_delta_start(x_delta_start)
     bob_packunit.set_face(yao_str)
-    bob_packunit.event_num = event5_int
+    bob_packunit.spark_num = spark5_int
 
     # WHEN
     x_dict = bob_packunit.get_deltametric_dict()
@@ -437,8 +437,8 @@ def test_PackUnit_get_deltametric_dict_ReturnsObj():
     assert x_dict.get(wx.belief_name) == bob_str
     assert x_dict.get(wx.face_name) is not None
     assert x_dict.get(wx.face_name) == yao_str
-    assert x_dict.get(wx.event_num) is not None
-    assert x_dict.get(wx.event_num) == event5_int
+    assert x_dict.get(wx.spark_num) is not None
+    assert x_dict.get(wx.spark_num) == spark5_int
 
     delta_atom_numbers_str = "delta_atom_numbers"
     assert x_dict.get(delta_atom_numbers_str) is not None

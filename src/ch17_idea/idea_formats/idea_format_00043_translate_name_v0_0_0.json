@@ -1,6 +1,6 @@
 {
   "attributes": {
-    "event_num"  : { "otx_key": true  }, 
+    "spark_num"  : { "otx_key": true  }, 
     "face_name"  : { "otx_key": true  }, 
     "inx_knot"   : { "otx_key": false }, 
     "inx_name"   : { "otx_key": false }, 

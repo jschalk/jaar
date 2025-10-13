@@ -27,13 +27,13 @@ def test_WorldUnit_Exists():
     assert not x_world.worlds_dir
     assert not x_world.output_dir
     assert not x_world.world_time_reason_upper
-    assert not x_world._events
+    assert not x_world._sparks
     assert not x_world._world_dir
     assert not x_world._input_dir
     assert not x_world._brick_dir
     assert not x_world._moment_mstr_dir
     assert not x_world._momentunits
-    assert not x_world._translate_events
+    assert not x_world._translate_sparks
 
 
 def test_WorldUnit_set_input_dir_SetsDirsAndFiles(env_dir_setup_cleanup):
@@ -116,9 +116,9 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
     assert x_world.output_dir == output_dir
     assert x_world._input_dir == example_input_dir
     assert x_world.world_time_reason_upper == world2_time_reason_upper
-    assert x_world._events == {}
+    assert x_world._sparks == {}
     assert x_world._momentunits == world2_momentunits
-    assert x_world._translate_events == {}
+    assert x_world._translate_sparks == {}
 
 
 def test_worldunit_shop_ReturnsObj_Scenario1_WithoutParameters(env_dir_setup_cleanup):
@@ -134,7 +134,7 @@ def test_worldunit_shop_ReturnsObj_Scenario1_WithoutParameters(env_dir_setup_cle
     assert x_world.worlds_dir == worlds_dir()
     assert not x_world.output_dir
     assert x_world.world_time_reason_upper == 0
-    assert x_world._events == {}
+    assert x_world._sparks == {}
     assert x_world._input_dir == create_path(x_world._world_dir, "input")
     assert x_world._momentunits == set()
 
@@ -166,47 +166,47 @@ def test_init_momentunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     assert x_momentunits == []
 
 
-def test_WorldUnit_set_event_SetsAttr_Scenario0(env_dir_setup_cleanup):
+def test_WorldUnit_set_spark_SetsAttr_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop("amy23", worlds_dir())
-    assert x_world._events == {}
+    assert x_world._sparks == {}
 
     # WHEN
-    e5_event_num = 5
+    e5_spark_num = 5
     e5_face_name = "Sue"
-    x_world.set_event(e5_event_num, e5_face_name)
+    x_world.set_spark(e5_spark_num, e5_face_name)
 
     # THEN
-    assert x_world._events != {}
-    assert x_world._events == {e5_event_num: e5_face_name}
+    assert x_world._sparks != {}
+    assert x_world._sparks == {e5_spark_num: e5_face_name}
 
 
-def test_WorldUnit_event_exists_ReturnsObj(env_dir_setup_cleanup):
+def test_WorldUnit_spark_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop("amy23", worlds_dir())
-    e5_event_num = 5
+    e5_spark_num = 5
     e5_face_name = "Sue"
-    assert x_world.event_exists(e5_event_num) is False
+    assert x_world.spark_exists(e5_spark_num) is False
 
     # WHEN
-    x_world.set_event(e5_event_num, e5_face_name)
+    x_world.set_spark(e5_spark_num, e5_face_name)
 
     # THEN
-    assert x_world.event_exists(e5_event_num)
+    assert x_world.spark_exists(e5_spark_num)
 
 
-def test_WorldUnit_get_event_ReturnsObj(env_dir_setup_cleanup):
+def test_WorldUnit_get_spark_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     x_world = worldunit_shop("amy23", worlds_dir())
-    e5_event_num = 5
+    e5_spark_num = 5
     e5_face_name = "Sue"
-    assert x_world.get_event(e5_event_num) is None
+    assert x_world.get_spark(e5_spark_num) is None
 
     # WHEN
-    x_world.set_event(e5_event_num, e5_face_name)
+    x_world.set_spark(e5_spark_num, e5_face_name)
 
     # THEN
-    assert x_world.get_event(e5_event_num) == e5_face_name
+    assert x_world.get_spark(e5_spark_num) == e5_face_name
 
 
 def test_WorldUnit_get_world_db_path_ReturnsObj(env_dir_setup_cleanup):

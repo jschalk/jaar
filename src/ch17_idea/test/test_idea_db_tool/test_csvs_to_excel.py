@@ -10,7 +10,7 @@ from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equ
 from src.ch17_idea.idea_db_tool import (
     csv_dict_to_excel,
     prettify_excel,
-    update_event_num_in_excel_files,
+    update_spark_num_in_excel_files,
 )
 from src.ch17_idea.test._util.ch17_env import (
     env_dir_setup_cleanup,
@@ -90,7 +90,7 @@ def test_prettify_excel(env_dir_setup_cleanup):
         )  # default width is ~8.43
 
 
-def test_update_event_num_in_excel_files(env_dir_setup_cleanup):
+def test_update_spark_num_in_excel_files(env_dir_setup_cleanup):
     # ESTABLISH
     # Setup: Create test directory and Excel file
     temp_dir = get_chapter_temp_dir()
@@ -105,12 +105,12 @@ def test_update_event_num_in_excel_files(env_dir_setup_cleanup):
 
     # WHEN
     # Apply function
-    update_event_num_in_excel_files(temp_dir, 42)
+    update_spark_num_in_excel_files(temp_dir, 42)
 
     # THEN
-    # Reload the file and verify that event_num column exists and is correct
+    # Reload the file and verify that spark_num column exists and is correct
     result = pandas_read_excel(file_path, sheet_name=None)
 
     for sheet_df in result.values():
-        assert wx.event_num in sheet_df.columns
-        assert all(sheet_df[wx.event_num] == 42)
+        assert wx.spark_num in sheet_df.columns
+        assert all(sheet_df[wx.spark_num] == 42)

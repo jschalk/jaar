@@ -8,9 +8,9 @@ from src.ch07_belief_logic.test._util.ch07_examples import (
     get_beliefunit_with_4_levels,
 )
 from src.ch11_bud._ref.ch11_path import (
-    create_belief_event_dir_path,
-    create_beliefevent_path,
+    create_belief_spark_dir_path,
     create_beliefpoint_path,
+    create_beliefspark_path,
     create_budunit_json_path,
     create_cell_dir_path,
     create_cell_json_path as node_path,
@@ -22,17 +22,17 @@ from src.ch11_bud.bud_filehandler import (
     cellunit_add_json_file,
     cellunit_get_from_dir,
     cellunit_save_to_dir,
-    collect_belief_event_dir_sets,
+    collect_belief_spark_dir_sets,
     create_cell_voice_mandate_ledger_json,
-    get_beliefevent_obj,
-    get_beliefs_downhill_event_nums,
+    get_beliefs_downhill_spark_nums,
+    get_beliefspark_obj,
     get_timepoint_dirs,
     job_file_exists,
     open_belief_file,
     open_beliefpoint_file,
     open_bud_file,
     open_job_file,
-    save_arbitrary_beliefevent,
+    save_arbitrary_beliefspark,
     save_belief_file,
     save_beliefpoint_file,
     save_bud_file,
@@ -97,54 +97,54 @@ def test_open_belief_file_ReturnsObj_Scenario1_FileExists():
     assert gen_sue_belief == expected_sue_belief
 
 
-def test_save_arbitrary_beliefevent_SetsFile_Scenario0(env_dir_setup_cleanup):
+def test_save_arbitrary_beliefspark_SetsFile_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
-    event5 = 5
+    spark5 = 5
     sue_str = "Sue"
-    beliefevent_path = create_beliefevent_path(
-        moment_mstr_dir, a23_str, sue_str, event5
+    beliefspark_path = create_beliefspark_path(
+        moment_mstr_dir, a23_str, sue_str, spark5
     )
-    assert os_path_exists(beliefevent_path) is False
+    assert os_path_exists(beliefspark_path) is False
 
     # WHEN
-    save_arbitrary_beliefevent(moment_mstr_dir, a23_str, sue_str, event5)
+    save_arbitrary_beliefspark(moment_mstr_dir, a23_str, sue_str, spark5)
 
     # THEN
-    assert os_path_exists(beliefevent_path)
+    assert os_path_exists(beliefspark_path)
     expected_sue_belief = beliefunit_shop(sue_str, a23_str)
-    assert open_belief_file(beliefevent_path).to_dict() == expected_sue_belief.to_dict()
+    assert open_belief_file(beliefspark_path).to_dict() == expected_sue_belief.to_dict()
 
 
-def test_save_arbitrary_beliefevent_SetsFile_Scenario1_includes_facts(
+def test_save_arbitrary_beliefspark_SetsFile_Scenario1_includes_facts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
-    event5 = 5
+    spark5 = 5
     sue_str = "Sue"
-    beliefevent_path = create_beliefevent_path(
-        moment_mstr_dir, a23_str, sue_str, event5
+    beliefspark_path = create_beliefspark_path(
+        moment_mstr_dir, a23_str, sue_str, spark5
     )
     casa_rope = create_rope(a23_str, "casa")
     clean_rope = create_rope(casa_rope, "clean")
     clean_fact_lower = 11
     clean_fact_upper = 16
     x_facts = [(casa_rope, clean_rope, clean_fact_lower, clean_fact_upper)]
-    assert os_path_exists(beliefevent_path) is False
+    assert os_path_exists(beliefspark_path) is False
 
     # WHEN
-    save_arbitrary_beliefevent(moment_mstr_dir, a23_str, sue_str, event5, facts=x_facts)
+    save_arbitrary_beliefspark(moment_mstr_dir, a23_str, sue_str, spark5, facts=x_facts)
 
     # THEN
-    assert os_path_exists(beliefevent_path)
+    assert os_path_exists(beliefspark_path)
     expected_sue_belief = beliefunit_shop(sue_str, a23_str)
     expected_sue_belief.add_fact(
         casa_rope, clean_rope, clean_fact_lower, clean_fact_upper, True
     )
-    gen_sue_belief = open_belief_file(beliefevent_path)
+    gen_sue_belief = open_belief_file(beliefspark_path)
     assert (
         gen_sue_belief.get_planroot_factunits_dict()
         == expected_sue_belief.get_planroot_factunits_dict()
@@ -152,7 +152,7 @@ def test_save_arbitrary_beliefevent_SetsFile_Scenario1_includes_facts(
     assert gen_sue_belief.to_dict() == expected_sue_belief.to_dict()
 
 
-def test_get_beliefevent_obj_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):
+def test_get_beliefspark_obj_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):
     # ESTABLISH
     moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy"
@@ -160,16 +160,16 @@ def test_get_beliefevent_obj_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):
     t3 = 3
 
     # WHEN / THEN
-    assert get_beliefevent_obj(moment_mstr_dir, a23_str, sue_str, t3) is None
+    assert get_beliefspark_obj(moment_mstr_dir, a23_str, sue_str, t3) is None
 
 
-def test_get_beliefevent_obj_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
+def test_get_beliefspark_obj_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
     # ESTABLISH
     moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy"
     sue_str = "Sue"
     t3 = 3
-    t3_json_path = create_beliefevent_path(moment_mstr_dir, a23_str, sue_str, t3)
+    t3_json_path = create_beliefspark_path(moment_mstr_dir, a23_str, sue_str, t3)
     sue_belief = beliefunit_shop(sue_str, a23_str)
     casa_rope = sue_belief.make_l1_rope("casa")
     clean_rope = sue_belief.make_l1_rope("clean")
@@ -178,48 +178,48 @@ def test_get_beliefevent_obj_ReturnsObj_Scenario1_FileExists(env_dir_setup_clean
     save_belief_file(t3_json_path, None, sue_belief)
 
     # WHEN
-    gen_a3_beliefevent = get_beliefevent_obj(moment_mstr_dir, a23_str, sue_str, t3)
+    gen_a3_beliefspark = get_beliefspark_obj(moment_mstr_dir, a23_str, sue_str, t3)
 
     # THEN
-    assert gen_a3_beliefevent == sue_belief
+    assert gen_a3_beliefspark == sue_belief
 
 
-def test_collect_belief_event_dir_sets_ReturnsObj_Scenario0_none(
+def test_collect_belief_spark_dir_sets_ReturnsObj_Scenario0_none(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     # WHEN
-    belief_events_sets = collect_belief_event_dir_sets(moment_mstr_dir, a23_str)
+    belief_sparks_sets = collect_belief_spark_dir_sets(moment_mstr_dir, a23_str)
     # THEN
-    assert belief_events_sets == {}
+    assert belief_sparks_sets == {}
 
 
-def test_collect_belief_event_dir_sets_ReturnsObj_Scenario1_DirsExist(
+def test_collect_belief_spark_dir_sets_ReturnsObj_Scenario1_DirsExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     bob_str = "Bob"
-    event1 = 1
-    event2 = 2
-    bob1_dir = create_belief_event_dir_path(moment_mstr_dir, a23_str, bob_str, event1)
-    bob2_dir = create_belief_event_dir_path(moment_mstr_dir, a23_str, bob_str, event2)
+    spark1 = 1
+    spark2 = 2
+    bob1_dir = create_belief_spark_dir_path(moment_mstr_dir, a23_str, bob_str, spark1)
+    bob2_dir = create_belief_spark_dir_path(moment_mstr_dir, a23_str, bob_str, spark2)
     print(f"  {bob1_dir=}")
     print(f"  {bob2_dir=}")
     set_dir(bob1_dir)
     set_dir(bob2_dir)
 
     # WHEN
-    belief_events_sets = collect_belief_event_dir_sets(moment_mstr_dir, a23_str)
+    belief_sparks_sets = collect_belief_spark_dir_sets(moment_mstr_dir, a23_str)
 
     # THEN
-    assert belief_events_sets == {bob_str: {event1, event2}}
+    assert belief_sparks_sets == {bob_str: {spark1, spark2}}
 
 
-def test_collect_belief_event_dir_sets_ReturnsObj_Scenario2_DirsExist(
+def test_collect_belief_spark_dir_sets_ReturnsObj_Scenario2_DirsExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -227,137 +227,137 @@ def test_collect_belief_event_dir_sets_ReturnsObj_Scenario2_DirsExist(
     a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
-    event1 = 1
-    event2 = 2
-    event7 = 7
-    bob1_dir = create_belief_event_dir_path(moment_mstr_dir, a23_str, bob_str, event1)
-    bob2_dir = create_belief_event_dir_path(moment_mstr_dir, a23_str, bob_str, event2)
-    sue2_dir = create_belief_event_dir_path(moment_mstr_dir, a23_str, sue_str, event2)
-    sue7_dir = create_belief_event_dir_path(moment_mstr_dir, a23_str, sue_str, event7)
+    spark1 = 1
+    spark2 = 2
+    spark7 = 7
+    bob1_dir = create_belief_spark_dir_path(moment_mstr_dir, a23_str, bob_str, spark1)
+    bob2_dir = create_belief_spark_dir_path(moment_mstr_dir, a23_str, bob_str, spark2)
+    sue2_dir = create_belief_spark_dir_path(moment_mstr_dir, a23_str, sue_str, spark2)
+    sue7_dir = create_belief_spark_dir_path(moment_mstr_dir, a23_str, sue_str, spark7)
     set_dir(bob1_dir)
     set_dir(bob2_dir)
     set_dir(sue2_dir)
     set_dir(sue7_dir)
 
     # WHEN
-    belief_events_sets = collect_belief_event_dir_sets(moment_mstr_dir, a23_str)
+    belief_sparks_sets = collect_belief_spark_dir_sets(moment_mstr_dir, a23_str)
 
     # THEN
-    assert belief_events_sets == {
-        bob_str: {event1, event2},
-        sue_str: {event2, event7},
+    assert belief_sparks_sets == {
+        bob_str: {spark1, spark2},
+        sue_str: {spark2, spark7},
     }
 
 
-def test_get_beliefs_downhill_event_nums_ReturnsObj_Scenario0_Empty():
+def test_get_beliefs_downhill_spark_nums_ReturnsObj_Scenario0_Empty():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
-    event2 = 2
-    belief_events_sets = {}
-    downhill_event_num = event2
+    spark2 = 2
+    belief_sparks_sets = {}
+    downhill_spark_num = spark2
     downhill_beliefs = {bob_str, sue_str}
 
     # WHEN
-    beliefs_downhill_event_nums = get_beliefs_downhill_event_nums(
-        belief_events_sets, downhill_beliefs, downhill_event_num
+    beliefs_downhill_spark_nums = get_beliefs_downhill_spark_nums(
+        belief_sparks_sets, downhill_beliefs, downhill_spark_num
     )
 
     # THEN
-    assert beliefs_downhill_event_nums == {}
+    assert beliefs_downhill_spark_nums == {}
 
 
-def test_get_beliefs_downhill_event_nums_ReturnsObj_Scenario1_simple():
+def test_get_beliefs_downhill_spark_nums_ReturnsObj_Scenario1_simple():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
-    event1 = 1
-    event2 = 2
-    event7 = 7
-    belief_events_sets = {bob_str: {event1, event2}, sue_str: {event2, event7}}
-    downhill_event_num = event2
+    spark1 = 1
+    spark2 = 2
+    spark7 = 7
+    belief_sparks_sets = {bob_str: {spark1, spark2}, sue_str: {spark2, spark7}}
+    downhill_spark_num = spark2
     downhill_beliefs = {bob_str, sue_str}
 
     # WHEN
-    beliefs_downhill_event_nums = get_beliefs_downhill_event_nums(
-        belief_events_sets, downhill_beliefs, downhill_event_num
+    beliefs_downhill_spark_nums = get_beliefs_downhill_spark_nums(
+        belief_sparks_sets, downhill_beliefs, downhill_spark_num
     )
 
     # THEN
-    assert beliefs_downhill_event_nums == {bob_str: event2, sue_str: event2}
+    assert beliefs_downhill_spark_nums == {bob_str: spark2, sue_str: spark2}
 
 
-def test_get_beliefs_downhill_event_nums_ReturnsObj_Scenario2Empty_downhill_event_num():
+def test_get_beliefs_downhill_spark_nums_ReturnsObj_Scenario2Empty_downhill_spark_num():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
-    event1 = 1
-    event2 = 2
-    event7 = 7
-    belief_events_sets = {
-        bob_str: {event1, event2},
-        sue_str: {event2, event7},
-        yao_str: {event1, event2, event7},
+    spark1 = 1
+    spark2 = 2
+    spark7 = 7
+    belief_sparks_sets = {
+        bob_str: {spark1, spark2},
+        sue_str: {spark2, spark7},
+        yao_str: {spark1, spark2, spark7},
     }
     downhill_beliefs = {bob_str, sue_str}
 
     # WHEN
-    beliefs_downhill_event_nums = get_beliefs_downhill_event_nums(
-        belief_events_sets, downhill_beliefs
+    beliefs_downhill_spark_nums = get_beliefs_downhill_spark_nums(
+        belief_sparks_sets, downhill_beliefs
     )
 
     # THEN
-    assert beliefs_downhill_event_nums == {bob_str: event2, sue_str: event7}
+    assert beliefs_downhill_spark_nums == {bob_str: spark2, sue_str: spark7}
 
 
-def test_get_beliefs_downhill_event_nums_ReturnsObj_Scenario3Empty_downhill_beliefs():
+def test_get_beliefs_downhill_spark_nums_ReturnsObj_Scenario3Empty_downhill_beliefs():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
-    event1 = 1
-    event2 = 2
-    event7 = 7
-    belief_events_sets = {
-        bob_str: {event1, event2},
-        sue_str: {event2, event7},
-        yao_str: {event1, event2, event7},
+    spark1 = 1
+    spark2 = 2
+    spark7 = 7
+    belief_sparks_sets = {
+        bob_str: {spark1, spark2},
+        sue_str: {spark2, spark7},
+        yao_str: {spark1, spark2, spark7},
     }
 
     # WHEN
-    beliefs_downhill_event_nums = get_beliefs_downhill_event_nums(belief_events_sets)
+    beliefs_downhill_spark_nums = get_beliefs_downhill_spark_nums(belief_sparks_sets)
 
     # THEN
-    assert beliefs_downhill_event_nums == {
-        bob_str: event2,
-        sue_str: event7,
-        yao_str: event7,
+    assert beliefs_downhill_spark_nums == {
+        bob_str: spark2,
+        sue_str: spark7,
+        yao_str: spark7,
     }
 
 
-def test_get_beliefs_downhill_event_nums_ReturnsObj_Scenario4Empty_downhill_beliefs_Withdownhill_event_num():
+def test_get_beliefs_downhill_spark_nums_ReturnsObj_Scenario4Empty_downhill_beliefs_Withdownhill_spark_num():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
-    event1 = 1
-    event2 = 2
-    event7 = 7
-    belief_events_sets = {
-        bob_str: {event1, event2},
-        sue_str: {event2, event7},
-        yao_str: {event7},
+    spark1 = 1
+    spark2 = 2
+    spark7 = 7
+    belief_sparks_sets = {
+        bob_str: {spark1, spark2},
+        sue_str: {spark2, spark7},
+        yao_str: {spark7},
     }
-    downhill_event_num = 2
+    downhill_spark_num = 2
 
     # WHEN
-    beliefs_downhill_event_nums = get_beliefs_downhill_event_nums(
-        belief_events_sets, ref_event_num=downhill_event_num
+    beliefs_downhill_spark_nums = get_beliefs_downhill_spark_nums(
+        belief_sparks_sets, ref_spark_num=downhill_spark_num
     )
 
     # THEN
-    assert beliefs_downhill_event_nums == {bob_str: event2, sue_str: event2}
+    assert beliefs_downhill_spark_nums == {bob_str: spark2, sue_str: spark2}
 
 
 def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
@@ -367,7 +367,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     time7 = 777000
     sue_str = "Sue"
     sue7_cell_path = node_path(moment_mstr_dir, a23_str, sue_str, time7)
-    event3 = 3
+    spark3 = 3
     das = []
     quota500 = 500
     celldepth4 = 4
@@ -381,7 +381,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
         time_belief_name=sue_str,
         bud_time=time7,
         quota=quota500,
-        event_num=event3,
+        spark_num=spark3,
         celldepth=celldepth4,
         money_grain=money_grain6,
         bud_ancestors=das,
@@ -392,7 +392,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     assert os_path_exists(sue7_cell_path)
     generated_cell_dict = open_json(sue7_cell_path)
     assert generated_cell_dict.get(wx.ancestors) == das
-    assert generated_cell_dict.get(wx.event_num) == event3
+    assert generated_cell_dict.get(wx.spark_num) == spark3
     assert generated_cell_dict.get(wx.celldepth) == celldepth4
     assert generated_cell_dict.get(wx.bud_belief_name) == sue_str
     assert generated_cell_dict.get(wx.money_grain) == money_grain6
@@ -410,12 +410,12 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
     bob_str = "Bob"
     das = [bob_str, sue_str]
     sue7_cell_path = node_path(moment_mstr_dir, a23_str, sue_str, time7, das)
-    event3 = 3
+    spark3 = 3
     assert os_path_exists(sue7_cell_path) is False
 
     # WHEN
     cellunit_add_json_file(
-        moment_mstr_dir, a23_str, sue_str, time7, event3, bud_ancestors=das
+        moment_mstr_dir, a23_str, sue_str, time7, spark3, bud_ancestors=das
     )
 
     # THEN
@@ -423,7 +423,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
     assert os_path_exists(sue7_cell_path)
     generated_cell_dict = open_json(sue7_cell_path)
     assert generated_cell_dict.get(wx.ancestors) == das
-    assert generated_cell_dict.get(wx.event_num) == event3
+    assert generated_cell_dict.get(wx.spark_num) == spark3
     assert generated_cell_dict.get(wx.celldepth) == 0
     assert generated_cell_dict.get(wx.bud_belief_name) == sue_str
     assert generated_cell_dict.get(wx.money_grain) == 1
@@ -439,7 +439,7 @@ def test_cellunit_get_from_dir_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_c
     bob_str = "Bob"
     das = [bob_str, sue_str]
     sue7_cell_path = node_path(moment_mstr_dir, a23_str, sue_str, time7, das)
-    event3 = 3
+    spark3 = 3
     assert os_path_exists(sue7_cell_path) is False
     cell_dir = create_cell_dir_path(
         moment_mstr_dir, a23_str, sue_str, time7, bud_ancestors=das
@@ -458,10 +458,10 @@ def test_cellunit_get_from_dir_ReturnsObj_Scenario1_FileExists(env_dir_setup_cle
     bob_str = "Bob"
     das = [bob_str, sue_str]
     sue7_cell_path = node_path(moment_mstr_dir, a23_str, sue_str, time7, das)
-    event3 = 3
+    spark3 = 3
     assert os_path_exists(sue7_cell_path) is False
     cellunit_add_json_file(
-        moment_mstr_dir, a23_str, sue_str, time7, event3, bud_ancestors=das
+        moment_mstr_dir, a23_str, sue_str, time7, spark3, bud_ancestors=das
     )
     cell_dir = create_cell_dir_path(
         moment_mstr_dir, a23_str, sue_str, time7, bud_ancestors=das
@@ -471,7 +471,7 @@ def test_cellunit_get_from_dir_ReturnsObj_Scenario1_FileExists(env_dir_setup_cle
     gen_cellunit = cellunit_get_from_dir(cell_dir)
 
     # THEN
-    expected_cellunit = cellunit_shop(sue_str, ancestors=das, event_num=event3)
+    expected_cellunit = cellunit_shop(sue_str, ancestors=das, spark_num=spark3)
     assert gen_cellunit == expected_cellunit
 
 
@@ -484,8 +484,8 @@ def test_cellunit_save_to_dir_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     bob_str = "Bob"
     das = [bob_str, sue_str]
     sue7_cell_path = node_path(moment_mstr_dir, a23_str, sue_str, time7, das)
-    event3 = 3
-    sue_cell = cellunit_shop(sue_str, ancestors=das, event_num=event3)
+    spark3 = 3
+    sue_cell = cellunit_shop(sue_str, ancestors=das, spark_num=spark3)
     cell_dir = create_cell_dir_path(moment_mstr_dir, a23_str, sue_str, time7, das)
     assert os_path_exists(sue7_cell_path) is False
 
@@ -528,7 +528,7 @@ def test_create_cell_voice_mandate_ledger_json_CreatesFile_Scenario1(
     yao_str = "Yao"
     sue_str = "Sue"
     sue_ancestors = [sue_str]
-    sue_event7 = 7
+    sue_spark7 = 7
     sue_celldepth3 = 3
     sue_money_grain2 = 2
     sue_quota300 = 300
@@ -549,18 +549,18 @@ def test_create_cell_voice_mandate_ledger_json_CreatesFile_Scenario1(
         dirty_fact.fact_context, dirty_fact.fact_state, create_missing_plans=True
     )
     sky_blue_fact = sky_blue_factunit()
-    sue_beliefevent_factunits = {clean_fact.fact_context: clean_fact}
+    sue_beliefspark_factunits = {clean_fact.fact_context: clean_fact}
     sue_found_factunits = {dirty_fact.fact_context: dirty_fact}
     sue_boss_factunits = {sky_blue_fact.fact_context: sky_blue_fact}
     sue_cell = cellunit_shop(
         bud_belief_name=yao_str,
         ancestors=sue_ancestors,
-        event_num=sue_event7,
+        spark_num=sue_spark7,
         celldepth=sue_celldepth3,
         money_grain=sue_money_grain2,
         quota=sue_quota300,
         beliefadjust=sue_belief,
-        beliefevent_facts=sue_beliefevent_factunits,
+        beliefspark_facts=sue_beliefspark_factunits,
         found_facts=sue_found_factunits,
         boss_facts=sue_boss_factunits,
         mandate=sue_mandate,

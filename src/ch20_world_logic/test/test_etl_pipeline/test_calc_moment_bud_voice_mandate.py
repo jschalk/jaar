@@ -5,7 +5,7 @@ from src.ch10_pack._ref.ch10_path import (
     create_moment_beliefs_dir_path,
     create_moment_json_path,
 )
-from src.ch11_bud._ref.ch11_path import create_beliefevent_path
+from src.ch11_bud._ref.ch11_path import create_beliefspark_path
 from src.ch15_moment._ref.ch15_path import (
     create_bud_voice_mandate_ledger_path as bud_mandate_path,
 )
@@ -100,37 +100,37 @@ def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro2_BudExists(
     a23_json_path = create_moment_json_path(mstr_dir, a23_str)
     save_json(a23_json_path, None, amy23_moment.to_dict())
 
-    # Create event time mapping belief_time_agg for time 37
-    event33 = 33
-    event44 = 44
-    event55 = 55
-    bob55_beliefevent = get_bob_mop_reason_beliefunit_example()
-    bob55_beliefevent.add_voiceunit(sue_str, 1)
-    sue44_beliefevent = beliefunit_shop(sue_str, a23_str)
-    sue44_beliefevent.set_belief_name(sue_str)
-    sue44_beliefevent.add_voiceunit(yao_str, 1)
-    yao44_beliefevent = get_bob_mop_reason_beliefunit_example()
-    yao44_beliefevent.set_belief_name(yao_str)
-    yao44_beliefevent.add_voiceunit(zia_str, 1)
+    # Create spark time mapping belief_time_agg for time 37
+    spark33 = 33
+    spark44 = 44
+    spark55 = 55
+    bob55_beliefspark = get_bob_mop_reason_beliefunit_example()
+    bob55_beliefspark.add_voiceunit(sue_str, 1)
+    sue44_beliefspark = beliefunit_shop(sue_str, a23_str)
+    sue44_beliefspark.set_belief_name(sue_str)
+    sue44_beliefspark.add_voiceunit(yao_str, 1)
+    yao44_beliefspark = get_bob_mop_reason_beliefunit_example()
+    yao44_beliefspark.set_belief_name(yao_str)
+    yao44_beliefspark.add_voiceunit(zia_str, 1)
     clean_fact = example_casa_floor_clean_factunit()
-    yao44_beliefevent.add_fact(clean_fact.fact_context, clean_fact.fact_state)
-    zia33_beliefevent = get_bob_mop_reason_beliefunit_example()
-    zia33_beliefevent.set_belief_name(zia_str)
-    bob55_path = create_beliefevent_path(mstr_dir, a23_str, bob_str, event55)
-    sue44_path = create_beliefevent_path(mstr_dir, a23_str, sue_str, event44)
-    yao44_path = create_beliefevent_path(mstr_dir, a23_str, yao_str, event44)
-    zia33_path = create_beliefevent_path(mstr_dir, a23_str, zia_str, event33)
-    save_json(bob55_path, None, bob55_beliefevent.to_dict())
-    save_json(sue44_path, None, sue44_beliefevent.to_dict())
-    save_json(yao44_path, None, yao44_beliefevent.to_dict())
-    save_json(zia33_path, None, zia33_beliefevent.to_dict())
+    yao44_beliefspark.add_fact(clean_fact.fact_context, clean_fact.fact_state)
+    zia33_beliefspark = get_bob_mop_reason_beliefunit_example()
+    zia33_beliefspark.set_belief_name(zia_str)
+    bob55_path = create_beliefspark_path(mstr_dir, a23_str, bob_str, spark55)
+    sue44_path = create_beliefspark_path(mstr_dir, a23_str, sue_str, spark44)
+    yao44_path = create_beliefspark_path(mstr_dir, a23_str, yao_str, spark44)
+    zia33_path = create_beliefspark_path(mstr_dir, a23_str, zia_str, spark33)
+    save_json(bob55_path, None, bob55_beliefspark.to_dict())
+    save_json(sue44_path, None, sue44_beliefspark.to_dict())
+    save_json(yao44_path, None, yao44_beliefspark.to_dict())
+    save_json(zia33_path, None, zia33_beliefspark.to_dict())
 
     # Create empty ote1 file
     a23_ote1_dict = {
-        bob_str: {str(tp37): event55},
-        sue_str: {str(tp37): event44},
-        yao_str: {str(tp37): event44},
-        zia_str: {str(tp37): event33},
+        bob_str: {str(tp37): spark55},
+        sue_str: {str(tp37): spark44},
+        yao_str: {str(tp37): spark44},
+        zia_str: {str(tp37): spark33},
     }
     a23_ote1_json_path = create_moment_ote1_json_path(mstr_dir, a23_str)
     save_json(a23_ote1_json_path, None, a23_ote1_dict)

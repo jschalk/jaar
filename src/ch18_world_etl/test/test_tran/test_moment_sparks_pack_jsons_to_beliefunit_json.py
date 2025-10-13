@@ -3,42 +3,42 @@ from src.ch01_py.file_toolbox import create_path, open_json, save_json
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_beliefunit_from_dict
 from src.ch10_pack.pack_main import get_packunit_from_dict, packunit_shop
 from src.ch11_bud._ref.ch11_path import (
-    create_belief_event_dir_path,
-    create_event_all_pack_path,
-    create_event_expressed_pack_path,
+    create_belief_spark_dir_path,
+    create_spark_all_pack_path,
+    create_spark_expressed_pack_path,
 )
 from src.ch18_world_etl.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
 from src.ch18_world_etl.transformers import (
-    etl_event_pack_json_to_event_inherited_beliefunits,
+    etl_spark_pack_json_to_spark_inherited_beliefunits,
 )
 from src.ref.keywords import Ch18Keywords as wx
 
 
-def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_belief_json(
+def test_etl_spark_pack_json_to_spark_inherited_beliefunits_SetsFiles_belief_json(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     sue_inx = "Suzy"
     bob_inx = "Bobby"
     yao_inx = "Yaoe"
-    event3 = 3
-    event7 = 7
+    spark3 = 3
+    spark7 = 7
     credit44 = 44
     credit77 = 77
     credit88 = 88
     a23_str = "amy23"
     moment_mstr_dir = get_chapter_temp_dir()
-    a23_bob_e3_dir = create_belief_event_dir_path(
-        moment_mstr_dir, a23_str, bob_inx, event3
+    a23_bob_e3_dir = create_belief_spark_dir_path(
+        moment_mstr_dir, a23_str, bob_inx, spark3
     )
-    a23_bob_e7_dir = create_belief_event_dir_path(
-        moment_mstr_dir, a23_str, bob_inx, event7
+    a23_bob_e7_dir = create_belief_spark_dir_path(
+        moment_mstr_dir, a23_str, bob_inx, spark7
     )
-    a23_bob_e3_pack = packunit_shop(bob_inx, None, a23_str, event_num=event3)
-    a23_bob_e7_pack = packunit_shop(bob_inx, None, a23_str, event_num=event7)
+    a23_bob_e3_pack = packunit_shop(bob_inx, None, a23_str, spark_num=spark3)
+    a23_bob_e7_pack = packunit_shop(bob_inx, None, a23_str, spark_num=spark7)
     blrpern_dimen = wx.belief_voiceunit
     bob_jkeys = {wx.voice_name: bob_inx}
     bob_jvalues = {wx.voice_cred_lumen: credit77, wx.voice_debt_lumen: None}
@@ -50,11 +50,11 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_belief_jso
     sue_jvalues = {wx.voice_cred_lumen: credit88, wx.voice_debt_lumen: None}
     a23_bob_e7_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
     a23_bob_e7_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, sue_jkeys, sue_jvalues)
-    e3_all_pack_path = create_event_all_pack_path(
-        moment_mstr_dir, a23_str, bob_inx, event3
+    e3_all_pack_path = create_spark_all_pack_path(
+        moment_mstr_dir, a23_str, bob_inx, spark3
     )
-    e7_all_pack_path = create_event_all_pack_path(
-        moment_mstr_dir, a23_str, bob_inx, event7
+    e7_all_pack_path = create_spark_all_pack_path(
+        moment_mstr_dir, a23_str, bob_inx, spark7
     )
     save_json(e3_all_pack_path, None, a23_bob_e3_pack.get_serializable_dict())
     save_json(e7_all_pack_path, None, a23_bob_e7_pack.get_serializable_dict())
@@ -67,7 +67,7 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_belief_jso
     assert os_path_exists(e7_belief_path) is False
 
     # WHEN
-    etl_event_pack_json_to_event_inherited_beliefunits(moment_mstr_dir)
+    etl_spark_pack_json_to_spark_inherited_beliefunits(moment_mstr_dir)
 
     # THEN
     assert os_path_exists(e3_belief_path)
@@ -88,7 +88,7 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_belief_jso
     assert generated_e7_belief.to_dict() == expected_e7_bob_belief.to_dict()
 
 
-def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_expressed_pack(
+def test_etl_spark_pack_json_to_spark_inherited_beliefunits_SetsFiles_expressed_pack(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -96,15 +96,15 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_expressed_
     bob_inx = "Bobby"
     yao_inx = "Yaoe"
     xia_inx = "Xia"
-    event3 = 3
-    event7 = 7
+    spark3 = 3
+    spark7 = 7
     credit44 = 44
     credit77 = 77
     credit88 = 88
     a23_str = "amy23"
     moment_mstr_dir = get_chapter_temp_dir()
-    a23_bob_e3_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_num=event3)
-    a23_bob_e7_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_num=event7)
+    a23_bob_e3_pack = packunit_shop(bob_inx, xia_inx, a23_str, spark_num=spark3)
+    a23_bob_e7_pack = packunit_shop(bob_inx, xia_inx, a23_str, spark_num=spark7)
     blrpern_dimen = wx.belief_voiceunit
     bob_jkeys = {wx.voice_name: bob_inx}
     bob_jvalues = {wx.voice_cred_lumen: credit77}
@@ -116,19 +116,19 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_expressed_
     sue_jvalues = {wx.voice_cred_lumen: credit88}
     a23_bob_e7_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
     a23_bob_e7_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, sue_jkeys, sue_jvalues)
-    a23_bob_e3_all_pack_path = create_event_all_pack_path(
-        moment_mstr_dir, a23_str, bob_inx, event3
+    a23_bob_e3_all_pack_path = create_spark_all_pack_path(
+        moment_mstr_dir, a23_str, bob_inx, spark3
     )
-    a23_bob_e7_all_pack_path = create_event_all_pack_path(
-        moment_mstr_dir, a23_str, bob_inx, event7
+    a23_bob_e7_all_pack_path = create_spark_all_pack_path(
+        moment_mstr_dir, a23_str, bob_inx, spark7
     )
     save_json(a23_bob_e3_all_pack_path, None, a23_bob_e3_pack.get_serializable_dict())
     save_json(a23_bob_e7_all_pack_path, None, a23_bob_e7_pack.get_serializable_dict())
-    e3_expressed_pack_path = create_event_expressed_pack_path(
-        moment_mstr_dir, a23_str, bob_inx, event3
+    e3_expressed_pack_path = create_spark_expressed_pack_path(
+        moment_mstr_dir, a23_str, bob_inx, spark3
     )
-    e7_expressed_pack_path = create_event_expressed_pack_path(
-        moment_mstr_dir, a23_str, bob_inx, event7
+    e7_expressed_pack_path = create_spark_expressed_pack_path(
+        moment_mstr_dir, a23_str, bob_inx, spark7
     )
     assert os_path_exists(a23_bob_e3_all_pack_path)
     assert os_path_exists(a23_bob_e7_all_pack_path)
@@ -136,15 +136,15 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_expressed_
     assert os_path_exists(e7_expressed_pack_path) is False
 
     # WHEN
-    etl_event_pack_json_to_event_inherited_beliefunits(moment_mstr_dir)
+    etl_spark_pack_json_to_spark_inherited_beliefunits(moment_mstr_dir)
 
     # THEN
     assert os_path_exists(e3_expressed_pack_path)
     assert os_path_exists(e7_expressed_pack_path)
     gen_e3_express_pack = get_packunit_from_dict(open_json(e3_expressed_pack_path))
     gen_e7_express_pack = get_packunit_from_dict(open_json(e7_expressed_pack_path))
-    expected_e3_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_num=event3)
-    expected_e7_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_num=event7)
+    expected_e3_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, spark_num=spark3)
+    expected_e7_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, spark_num=spark7)
     expected_e3_bob_pack.add_p_beliefatom(
         blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues
     )

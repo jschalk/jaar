@@ -38,8 +38,8 @@ class PackUnit:
     _delta_start: int = None
     _packs_dir: str = None
     _atoms_dir: str = None
-    event_num: int = None
-    """Represents a per moment_label/event_num BeliefDelta for a belief_name"""
+    spark_num: int = None
+    """Represents a per moment_label/spark_num BeliefDelta for a belief_name"""
 
     def set_face(self, x_face_name: FaceName):
         self.face_name = x_face_name
@@ -64,7 +64,7 @@ class PackUnit:
             "face_name": self.face_name,
             "moment_label": self.moment_label,
             "belief_name": self.belief_name,
-            "event_num": self.event_num,
+            "spark_num": self.spark_num,
             "delta": self._beliefdelta.get_ordered_beliefatoms(self._delta_start),
         }
 
@@ -82,7 +82,7 @@ class PackUnit:
         return {
             "belief_name": x_dict.get("belief_name"),
             "face_name": x_dict.get("face_name"),
-            "event_num": x_dict.get("event_num"),
+            "spark_num": x_dict.get("spark_num"),
             "delta_atom_numbers": self.get_delta_atom_numbers(x_dict),
         }
 
@@ -160,7 +160,7 @@ def packunit_shop(
     _delta_start: int = None,
     _packs_dir: str = None,
     _atoms_dir: str = None,
-    event_num: int = None,
+    spark_num: int = None,
 ) -> PackUnit:
     _beliefdelta = beliefdelta_shop() if _beliefdelta is None else _beliefdelta
     moment_label = get_default_moment_label() if moment_label is None else moment_label
@@ -172,7 +172,7 @@ def packunit_shop(
         _beliefdelta=_beliefdelta,
         _packs_dir=_packs_dir,
         _atoms_dir=_atoms_dir,
-        event_num=event_num,
+        spark_num=spark_num,
     )
     x_packunit.set_delta_start(_delta_start)
     return x_packunit
@@ -201,17 +201,17 @@ def create_packunit_from_files(
 
 
 def get_packunit_from_dict(pack_dict: dict) -> PackUnit:
-    if pack_dict.get("event_num") is None:
-        x_event_num = None
+    if pack_dict.get("spark_num") is None:
+        x_spark_num = None
     else:
-        x_event_num = int(pack_dict.get("event_num"))
+        x_spark_num = int(pack_dict.get("spark_num"))
     x_packunit = packunit_shop(
         face_name=pack_dict.get("face_name"),
         belief_name=pack_dict.get("belief_name"),
         moment_label=pack_dict.get("moment_label"),
         _pack_id=pack_dict.get("pack_id"),
         _atoms_dir=pack_dict.get("atoms_dir"),
-        event_num=x_event_num,
+        spark_num=x_spark_num,
     )
     x_beliefdelta = get_beliefdelta_from_ordered_dict(pack_dict.get("delta"))
     x_packunit.set_beliefdelta(x_beliefdelta)

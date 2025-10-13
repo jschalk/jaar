@@ -2,48 +2,48 @@ from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import open_file, open_json, save_file
 from src.ch10_pack.pack_main import get_packunit_from_dict, packunit_shop
 from src.ch11_bud._ref.ch11_path import (
-    create_belief_event_dir_path as belief_event_dir,
-    create_event_all_pack_path as all_pack_path,
+    create_belief_spark_dir_path as belief_spark_dir,
+    create_spark_all_pack_path as all_pack_path,
 )
 from src.ch18_world_etl.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
 from src.ch18_world_etl.tran_sqlstrs import create_prime_tablename
-from src.ch18_world_etl.transformers import etl_event_belief_csvs_to_pack_json
+from src.ch18_world_etl.transformers import etl_spark_belief_csvs_to_pack_json
 from src.ref.keywords import Ch18Keywords as wx
 
 
-def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_beliefunit(
+def test_etl_spark_belief_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_beliefunit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     sue_inx = "Suzy"
     bob_inx = "Bobby"
-    event3 = 3
+    spark3 = 3
     a23_str = "amy23"
     put_agg_tablename = create_prime_tablename(wx.beliefunit, "h", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     moment_mstr_dir = get_chapter_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
-    # a23_bob_e3_dir = create_path(a23_bob_dir, event3)
-    # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
-    a23_bob_e3_dir = belief_event_dir(moment_mstr_dir, a23_str, bob_inx, event3)
-    e3_put_csv = f"""{wx.event_num},{wx.face_name},moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_grain,money_grain,respect_grain
-{event3},{sue_inx},{a23_str},{bob_inx},,,,,,,,
+    # a23_bob_e3_dir = create_path(a23_bob_dir, spark3)
+    # a23_bob_e7_dir = create_path(a23_bob_dir, spark7)
+    a23_bob_e3_dir = belief_spark_dir(moment_mstr_dir, a23_str, bob_inx, spark3)
+    e3_put_csv = f"""{wx.spark_num},{wx.face_name},moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_grain,money_grain,respect_grain
+{spark3},{sue_inx},{a23_str},{bob_inx},,,,,,,,
 """
     save_file(a23_bob_e3_dir, put_agg_csv_filename, e3_put_csv)
-    e3_all_pack_path = all_pack_path(moment_mstr_dir, a23_str, bob_inx, event3)
+    e3_all_pack_path = all_pack_path(moment_mstr_dir, a23_str, bob_inx, spark3)
     assert os_path_exists(e3_all_pack_path) is False
 
     # WHEN
-    etl_event_belief_csvs_to_pack_json(moment_mstr_dir)
+    etl_spark_belief_csvs_to_pack_json(moment_mstr_dir)
 
     # THEN
     assert os_path_exists(e3_all_pack_path)
-    expected_e3_pack = packunit_shop(bob_inx, None, a23_str, event_num=event3)
+    expected_e3_pack = packunit_shop(bob_inx, None, a23_str, spark_num=spark3)
     e3_packunit = get_packunit_from_dict(open_json(e3_all_pack_path))
-    assert e3_packunit.event_num == expected_e3_pack.event_num
+    assert e3_packunit.spark_num == expected_e3_pack.spark_num
     expected_beliefdelta = expected_e3_pack._beliefdelta
     generated_e3_beliefdelta = e3_packunit._beliefdelta
     assert generated_e3_beliefdelta.beliefatoms == expected_beliefdelta.beliefatoms
@@ -51,14 +51,14 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_be
     assert e3_packunit == expected_e3_pack
 
 
-def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
+def test_etl_spark_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     sue_inx = "Suzy"
     bob_inx = "Bobby"
-    event3 = 3
-    event7 = 7
+    spark3 = 3
+    spark7 = 7
     credit77 = 77
     credit88 = 88
     debt_empty = ""
@@ -68,30 +68,30 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     moment_mstr_dir = get_chapter_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
-    # a23_bob_e3_dir = create_path(a23_bob_dir, event3)
-    # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
-    a23_bob_e3_dir = belief_event_dir(moment_mstr_dir, a23_str, bob_inx, event3)
-    a23_bob_e7_dir = belief_event_dir(moment_mstr_dir, a23_str, bob_inx, event7)
-    e3_put_csv = f"""{wx.event_num},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_lumen},{wx.voice_debt_lumen}
-{event3},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
+    # a23_bob_e3_dir = create_path(a23_bob_dir, spark3)
+    # a23_bob_e7_dir = create_path(a23_bob_dir, spark7)
+    a23_bob_e3_dir = belief_spark_dir(moment_mstr_dir, a23_str, bob_inx, spark3)
+    a23_bob_e7_dir = belief_spark_dir(moment_mstr_dir, a23_str, bob_inx, spark7)
+    e3_put_csv = f"""{wx.spark_num},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_lumen},{wx.voice_debt_lumen}
+{spark3},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
 """
-    e7_put_csv = f"""{wx.event_num},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_lumen},{wx.voice_debt_lumen}
-{event7},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
-{event7},{sue_inx},{a23_str},{bob_inx},{sue_inx},{credit88},{debt_empty}
+    e7_put_csv = f"""{wx.spark_num},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_lumen},{wx.voice_debt_lumen}
+{spark7},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
+{spark7},{sue_inx},{a23_str},{bob_inx},{sue_inx},{credit88},{debt_empty}
 """
     print(f"     {a23_bob_e3_dir=}  {put_agg_csv_filename}")
     print(f"     {a23_bob_e7_dir=}  {put_agg_csv_filename}")
     save_file(a23_bob_e3_dir, put_agg_csv_filename, e3_put_csv)
     save_file(a23_bob_e7_dir, put_agg_csv_filename, e7_put_csv)
-    e3_all_pack_path = all_pack_path(moment_mstr_dir, a23_str, bob_inx, event3)
-    e7_all_pack_path = all_pack_path(moment_mstr_dir, a23_str, bob_inx, event7)
+    e3_all_pack_path = all_pack_path(moment_mstr_dir, a23_str, bob_inx, spark3)
+    e7_all_pack_path = all_pack_path(moment_mstr_dir, a23_str, bob_inx, spark7)
     print(f"   {e3_all_pack_path=}")
     print(f"   {e7_all_pack_path=}")
     assert os_path_exists(e3_all_pack_path) is False
     assert os_path_exists(e7_all_pack_path) is False
 
     # WHEN
-    etl_event_belief_csvs_to_pack_json(moment_mstr_dir)
+    etl_spark_belief_csvs_to_pack_json(moment_mstr_dir)
 
     # THEN
     assert os_path_exists(e3_all_pack_path)
@@ -100,10 +100,10 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     # print(f"{open_file(e7_pack_path)=}")
     # packs_dir = create_path(fay_world._moment_mstr_dir, "packs")
     # atoms_dir = create_path(fay_world._moment_mstr_dir, "atoms")
-    # e3_pack = packunit_shop(bob_inx, sue_inx, a23_str, packs_dir, atoms_dir, event3)
-    # e7_pack = packunit_shop(bob_inx, sue_inx, a23_str, packs_dir, atoms_dir, event7)
-    expected_e3_pack = packunit_shop(bob_inx, None, a23_str, event_num=event3)
-    expected_e7_pack = packunit_shop(bob_inx, None, a23_str, event_num=event7)
+    # e3_pack = packunit_shop(bob_inx, sue_inx, a23_str, packs_dir, atoms_dir, spark3)
+    # e7_pack = packunit_shop(bob_inx, sue_inx, a23_str, packs_dir, atoms_dir, spark7)
+    expected_e3_pack = packunit_shop(bob_inx, None, a23_str, spark_num=spark3)
+    expected_e7_pack = packunit_shop(bob_inx, None, a23_str, spark_num=spark7)
     blrpern_dimen = wx.belief_voiceunit
     expected_e3_pack._beliefdelta.add_beliefatom(
         blrpern_dimen,
@@ -126,7 +126,7 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     e3_packunit = get_packunit_from_dict(open_json(e3_all_pack_path))
     e7_packunit = get_packunit_from_dict(open_json(e7_all_pack_path))
     # print(f"{e7_packunit=}")
-    assert e3_packunit.event_num == expected_e3_pack.event_num
+    assert e3_packunit.spark_num == expected_e3_pack.spark_num
     expected_beliefdelta = expected_e3_pack._beliefdelta
     generated_e3_beliefdelta = e3_packunit._beliefdelta
     assert generated_e3_beliefdelta.beliefatoms == expected_beliefdelta.beliefatoms

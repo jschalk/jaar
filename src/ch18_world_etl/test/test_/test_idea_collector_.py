@@ -78,7 +78,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_TranslateSheetNames(
     env_dir = get_chapter_temp_dir()
     x_dir = create_path(env_dir, "examples_folder")
     sue_str = "Sue"
-    event1 = 1
+    spark1 = 1
     minute_360 = 360
     minute_420 = 420
     amy23_str = "amy23"
@@ -87,14 +87,14 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_TranslateSheetNames(
     ex_filename = "Faybob.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
     idea_columns = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.cumulative_minute,
         wx.moment_label,
         wx.hour_label,
     ]
-    row1 = [event1, sue_str, minute_360, amy23_str, hour6am]
-    row2 = [event1, sue_str, minute_420, amy23_str, hour7am]
+    row1 = [spark1, sue_str, minute_360, amy23_str, hour6am]
+    row2 = [spark1, sue_str, minute_420, amy23_str, hour7am]
 
     df1 = DataFrame([row1, row2], columns=idea_columns)
     br00003_str = "example_br00003"
@@ -117,7 +117,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     env_dir = get_chapter_temp_dir()
     x_dir = create_path(env_dir, "examples_folder")
     sue_str = "Sue"
-    event1 = 1
+    spark1 = 1
     minute_360 = 360
     minute_420 = 420
     amy23_str = "amy23"
@@ -126,22 +126,22 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     ex_filename = "Faybob.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
     idea_columns = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.cumulative_minute,
         wx.moment_label,
         wx.hour_label,
     ]
-    row1 = [event1, sue_str, minute_360, amy23_str, hour6am]
-    row2 = [event1, sue_str, minute_420, amy23_str, hour7am]
+    row1 = [spark1, sue_str, minute_360, amy23_str, hour6am]
+    row2 = [spark1, sue_str, minute_420, amy23_str, hour7am]
     incomplete_idea_columns = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.cumulative_minute,
         wx.moment_label,
     ]
-    incom_row1 = [event1, sue_str, minute_360, amy23_str]
-    incom_row2 = [event1, sue_str, minute_420, amy23_str]
+    incom_row1 = [spark1, sue_str, minute_360, amy23_str]
+    incom_row2 = [spark1, sue_str, minute_420, amy23_str]
 
     df1 = DataFrame([row1, row2], columns=idea_columns)
     df2 = DataFrame([incom_row1, incom_row2], columns=incomplete_idea_columns)

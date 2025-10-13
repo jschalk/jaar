@@ -31,7 +31,7 @@ def test_moment_label_belief_name_nested_csv_dict_ReturnsObj_Scenario0():
     amy_moment_label = "amy56"
     sue_str = "Sue"
     bob_str = "Bob"
-    headerless_csv = f"""face_x,event_x,{amy_moment_label},{sue_str},Bob,13,29
+    headerless_csv = f"""face_x,spark_x,{amy_moment_label},{sue_str},Bob,13,29
 ,,{amy_moment_label},{sue_str},Sue,11,23
 ,,{amy_moment_label},{sue_str},Yao,41,37
 ,,{amy_moment_label},{sue_str},Zia,41,37
@@ -43,7 +43,7 @@ def test_moment_label_belief_name_nested_csv_dict_ReturnsObj_Scenario0():
 
     # THEN
     # print(f"{u_dict=}")
-    static_sue_csv = f"""face_x,event_x,{amy_moment_label},{sue_str},Bob,13,29
+    static_sue_csv = f"""face_x,spark_x,{amy_moment_label},{sue_str},Bob,13,29
 ,,{amy_moment_label},{sue_str},Sue,11,23
 ,,{amy_moment_label},{sue_str},Yao,41,37
 ,,{amy_moment_label},{sue_str},Zia,41,37

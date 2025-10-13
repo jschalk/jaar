@@ -84,7 +84,7 @@ BELIEF_PRIME_TABLENAMES = {
 def get_all_dimen_columns_set(x_dimen: str) -> set[str]:
     if x_dimen == wx.translate_core:
         return {
-            wx.event_num,
+            wx.spark_num,
             wx.face_name,
             wx.otx_knot,
             wx.inx_knot,
@@ -149,7 +149,7 @@ def create_translate_sound_vld_table_sqlstr(x_dimen):
 def create_translate_core_raw_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw")
     columns = get_all_dimen_columns_set(x_dimen)
-    columns.remove(wx.event_num)
+    columns.remove(wx.spark_num)
     columns.add("source_dimen")
     columns.add(wx.error_message)
     columns = get_default_sorted_list(columns)
@@ -159,7 +159,7 @@ def create_translate_core_raw_table_sqlstr(x_dimen):
 def create_translate_core_agg_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
     columns = get_all_dimen_columns_set(x_dimen)
-    columns.remove(wx.event_num)
+    columns.remove(wx.spark_num)
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -184,7 +184,7 @@ def create_moment_heard_raw_table_sqlstr(x_dimen):
 def create_moment_heard_agg_table_sqlstr(x_dimen: str):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "h", "agg")
     columns = get_all_dimen_columns_set(x_dimen)
-    columns.remove(wx.event_num)
+    columns.remove(wx.spark_num)
     columns.remove(wx.face_name)
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
@@ -242,7 +242,7 @@ def create_belief_heard_put_raw_table_sqlstr(x_dimen: str) -> str:
     columns = set()
     columns = get_all_dimen_columns_set(x_dimen)
     columns = find_set_otx_inx_args(columns)
-    columns.add("translate_event_num")
+    columns.add("translate_spark_num")
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -258,7 +258,7 @@ def create_belief_heard_del_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "h", "raw", "del")
     columns = get_del_dimen_columns_set(x_dimen)
     columns = find_set_otx_inx_args(columns)
-    columns.add("translate_event_num")
+    columns.add("translate_spark_num")
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -598,9 +598,9 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT event_num, face_name, otx_title
+SELECT spark_num, face_name, otx_title
 FROM translate_title_s_raw
-GROUP BY event_num, face_name, otx_title
+GROUP BY spark_num, face_name, otx_title
 HAVING MIN(inx_title) != MAX(inx_title)
     OR MIN(otx_knot) != MAX(otx_knot)
     OR MIN(inx_knot) != MAX(inx_knot)
@@ -609,7 +609,7 @@ HAVING MIN(inx_title) != MAX(inx_title)
 UPDATE translate_title_s_raw
 SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.event_num = translate_title_s_raw.event_num
+WHERE inconsistency_rows.spark_num = translate_title_s_raw.spark_num
     AND inconsistency_rows.face_name = translate_title_s_raw.face_name
     AND inconsistency_rows.otx_title = translate_title_s_raw.otx_title
 ;
@@ -637,7 +637,7 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
         exclude_cols = {
             wx.idea_number,
-            wx.event_num,
+            wx.spark_num,
             wx.face_name,
             wx.error_message,
         }
@@ -699,16 +699,16 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT event_num, face_name, moment_label, belief_name, plan_rope, awardee_title
+SELECT spark_num, face_name, moment_label, belief_name, plan_rope, awardee_title
 FROM belief_plan_awardunit_s_put_raw
-GROUP BY event_num, face_name, moment_label, belief_name, plan_rope, awardee_title
+GROUP BY spark_num, face_name, moment_label, belief_name, plan_rope, awardee_title
 HAVING MIN(give_force) != MAX(give_force)
     OR MIN(take_force) != MAX(take_force)
 )
 UPDATE belief_plan_awardunit_s_put_raw
 SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.event_num = belief_plan_awardunit_s_put_raw.event_num
+WHERE inconsistency_rows.spark_num = belief_plan_awardunit_s_put_raw.spark_num
     AND inconsistency_rows.face_name = belief_plan_awardunit_s_put_raw.face_name
     AND inconsistency_rows.moment_label = belief_plan_awardunit_s_put_raw.moment_label
     AND inconsistency_rows.belief_name = belief_plan_awardunit_s_put_raw.belief_name
@@ -748,11 +748,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario0_TranslateDimen():
         # print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
 
-        static_example_sqlstr = """INSERT INTO translate_title_s_agg (event_num, face_name, otx_title, inx_title, otx_knot, inx_knot, unknown_str)
-SELECT event_num, face_name, otx_title, MAX(inx_title), MAX(otx_knot), MAX(inx_knot), MAX(unknown_str)
+        static_example_sqlstr = """INSERT INTO translate_title_s_agg (spark_num, face_name, otx_title, inx_title, otx_knot, inx_knot, unknown_str)
+SELECT spark_num, face_name, otx_title, MAX(inx_title), MAX(otx_knot), MAX(inx_knot), MAX(unknown_str)
 FROM translate_title_s_raw
 WHERE error_message IS NULL
-GROUP BY event_num, face_name, otx_title
+GROUP BY spark_num, face_name, otx_title
 ;
 """
         print(update_sqlstrs[0])
@@ -792,11 +792,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_MomentDimen():
         print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
 
-        static_example_sqlstr = """INSERT INTO moment_epoch_hour_s_agg (event_num, face_name, moment_label, cumulative_minute, hour_label)
-SELECT event_num, face_name, moment_label, cumulative_minute, MAX(hour_label)
+        static_example_sqlstr = """INSERT INTO moment_epoch_hour_s_agg (spark_num, face_name, moment_label, cumulative_minute, hour_label)
+SELECT spark_num, face_name, moment_label, cumulative_minute, MAX(hour_label)
 FROM moment_epoch_hour_s_raw
 WHERE error_message IS NULL
-GROUP BY event_num, face_name, moment_label, cumulative_minute
+GROUP BY spark_num, face_name, moment_label, cumulative_minute
 ;
 """
         print(update_sqlstrs[0])
@@ -831,11 +831,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BeliefDimen():
         # print(put_expected_insert_sqlstr)
         assert update_sqlstrs[0] == put_expected_insert_sqlstr
 
-        static_example_put_sqlstr = """INSERT INTO belief_plan_awardunit_s_put_agg (event_num, face_name, moment_label, belief_name, plan_rope, awardee_title, give_force, take_force)
-SELECT event_num, face_name, moment_label, belief_name, plan_rope, awardee_title, MAX(give_force), MAX(take_force)
+        static_example_put_sqlstr = """INSERT INTO belief_plan_awardunit_s_put_agg (spark_num, face_name, moment_label, belief_name, plan_rope, awardee_title, give_force, take_force)
+SELECT spark_num, face_name, moment_label, belief_name, plan_rope, awardee_title, MAX(give_force), MAX(take_force)
 FROM belief_plan_awardunit_s_put_raw
 WHERE error_message IS NULL
-GROUP BY event_num, face_name, moment_label, belief_name, plan_rope, awardee_title
+GROUP BY spark_num, face_name, moment_label, belief_name, plan_rope, awardee_title
 ;
 """
         # print(update_sqlstrs[0])
@@ -862,10 +862,10 @@ GROUP BY event_num, face_name, moment_label, belief_name, plan_rope, awardee_tit
         print(update_sqlstrs[1])
         assert update_sqlstrs[1] == del_expected_insert_sqlstr
 
-        static_example_del_sqlstr = """INSERT INTO belief_plan_awardunit_s_del_agg (event_num, face_name, moment_label, belief_name, plan_rope, awardee_title_ERASE)
-SELECT event_num, face_name, moment_label, belief_name, plan_rope, awardee_title_ERASE
+        static_example_del_sqlstr = """INSERT INTO belief_plan_awardunit_s_del_agg (spark_num, face_name, moment_label, belief_name, plan_rope, awardee_title_ERASE)
+SELECT spark_num, face_name, moment_label, belief_name, plan_rope, awardee_title_ERASE
 FROM belief_plan_awardunit_s_del_raw
-GROUP BY event_num, face_name, moment_label, belief_name, plan_rope, awardee_title_ERASE
+GROUP BY spark_num, face_name, moment_label, belief_name, plan_rope, awardee_title_ERASE
 ;
 """
         assert update_sqlstrs[1] == static_example_del_sqlstr
@@ -956,11 +956,11 @@ def test_create_insert_translate_sound_vld_table_sqlstr_ReturnsObj_translate_rop
     translate_dimen_s_agg_tablename = prime_tbl(dimen, "s", "agg")
     translate_dimen_s_vld_tablename = prime_tbl(dimen, "s", "vld")
     expected_rope_sqlstr = f"""
-INSERT INTO {translate_dimen_s_vld_tablename} (event_num, face_name, otx_rope, inx_rope)
-SELECT event_num, face_name, MAX(otx_rope), MAX(inx_rope)
+INSERT INTO {translate_dimen_s_vld_tablename} (spark_num, face_name, otx_rope, inx_rope)
+SELECT spark_num, face_name, MAX(otx_rope), MAX(inx_rope)
 FROM {translate_dimen_s_agg_tablename}
 WHERE error_message IS NULL
-GROUP BY event_num, face_name
+GROUP BY spark_num, face_name
 ;
 """
     print(expected_rope_sqlstr)
@@ -977,11 +977,11 @@ def test_create_insert_translate_sound_vld_table_sqlstr_ReturnsObj_translate_lab
     translate_label_s_agg_tablename = prime_tbl(dimen, "s", "agg")
     translate_label_s_vld_tablename = prime_tbl(dimen, "s", "vld")
     expected_label_sqlstr = f"""
-INSERT INTO {translate_label_s_vld_tablename} (event_num, face_name, otx_label, inx_label)
-SELECT event_num, face_name, MAX(otx_label), MAX(inx_label)
+INSERT INTO {translate_label_s_vld_tablename} (spark_num, face_name, otx_label, inx_label)
+SELECT spark_num, face_name, MAX(otx_label), MAX(inx_label)
 FROM {translate_label_s_agg_tablename}
 WHERE error_message IS NULL
-GROUP BY event_num, face_name
+GROUP BY spark_num, face_name
 ;
 """
     assert label_sqlstr == expected_label_sqlstr
@@ -1124,8 +1124,8 @@ def test_get_insert_into_heard_raw_sqlstrs_ReturnsObj_BeliefDimens():
             v_del_raw_cols = set(get_table_columns(cursor, v_del_raw_tablename))
             v_put_cols = find_set_otx_inx_args(v_put_raw_cols)
             v_del_cols = find_set_otx_inx_args(v_del_raw_cols)
-            v_put_cols.remove("translate_event_num")
-            v_del_cols.remove("translate_event_num")
+            v_put_cols.remove("translate_spark_num")
+            v_del_cols.remove("translate_spark_num")
             v_put_cols = {col for col in v_put_cols if col[-3:] != "inx"}
             v_del_cols = {col for col in v_del_cols if col[-3:] != "inx"}
             v_put_raw_tbl = v_put_raw_tablename

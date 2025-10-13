@@ -20,5 +20,5 @@ from src.ch10_pack._ref.ch10_semantic_types import (
 )
 
 
-class EventInt(int):
+class SparkInt(int):
     pass

@@ -37,12 +37,12 @@ from src.ch13_belief_listen.listen_main import (
 )
 from src.ch15_moment._ref.ch15_semantic_types import (
     BeliefName,
-    EventInt,
     FundGrain,
     FundNum,
     MomentLabel,
     MoneyGrain,
     RespectGrain,
+    SparkInt,
     VoiceName,
     default_knot_if_None,
 )
@@ -320,7 +320,7 @@ class MomentUnit:
 
     def create_buds_root_cells(
         self,
-        ote1_dict: dict[BeliefName, dict[EpochPoint, EventInt]],
+        ote1_dict: dict[BeliefName, dict[EpochPoint, SparkInt]],
     ) -> None:
         for belief_name, beliefbudhistory in self.beliefbudhistorys.items():
             for bud_time in beliefbudhistory.buds.keys():
@@ -329,15 +329,15 @@ class MomentUnit:
     def _create_bud_root_cell(
         self,
         belief_name: BeliefName,
-        ote1_dict: dict[BeliefName, dict[EpochPoint, EventInt]],
+        ote1_dict: dict[BeliefName, dict[EpochPoint, SparkInt]],
         bud_time: EpochPoint,
     ) -> None:
-        past_event_num = _get_ote1_max_past_event_num(belief_name, ote1_dict, bud_time)
+        past_spark_num = _get_ote1_max_past_spark_num(belief_name, ote1_dict, bud_time)
         budunit = self.get_budunit(belief_name, bud_time)
         cellunit = cellunit_shop(
             bud_belief_name=belief_name,
             ancestors=[],
-            event_num=past_event_num,
+            spark_num=past_spark_num,
             celldepth=budunit.celldepth,
             quota=budunit.quota,
             money_grain=self.money_grain,
@@ -363,15 +363,15 @@ class MomentUnit:
             self.add_epoch_to_gut(belief_name)
 
 
-def _get_ote1_max_past_event_num(
+def _get_ote1_max_past_spark_num(
     belief_name: str, ote1_dict: dict[str, dict[str, int]], bud_time: int
-) -> EventInt:
-    """Using the grab most recent ote1 event int before a given bud_time"""
+) -> SparkInt:
+    """Using the grab most recent ote1 spark int before a given bud_time"""
     ote1_belief_dict = ote1_dict.get(belief_name)
     if not ote1_belief_dict:
         return None
-    event_timepoints = set(ote1_belief_dict.keys())
-    if past_timepoints := {tp for tp in event_timepoints if int(tp) <= bud_time}:
+    spark_timepoints = set(ote1_belief_dict.keys())
+    if past_timepoints := {tp for tp in spark_timepoints if int(tp) <= bud_time}:
         max_past_timepoint = max(past_timepoints)
         return ote1_belief_dict.get(max_past_timepoint)
 

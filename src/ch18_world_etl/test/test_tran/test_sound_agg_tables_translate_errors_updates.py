@@ -19,7 +19,7 @@ def test_create_knot_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTabl
     bob_str = f"{colon}Bob"
     comma = ","
     ukx = "Unknown"
-    event1 = 1
+    spark1 = 1
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -27,10 +27,10 @@ def test_create_knot_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTabl
         blrpern_dimen = wx.belief_voiceunit
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
-  {wx.event_num}, {wx.face_name}, {wx.moment_label}, {wx.belief_name}, {wx.voice_name})
+  {wx.spark_num}, {wx.face_name}, {wx.moment_label}, {wx.belief_name}, {wx.voice_name})
 VALUES
-  ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
-, ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
+  ({spark1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
+, ({spark1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
 ;
 """
         cursor.execute(insert_blrpern_sqlstr)
@@ -60,8 +60,8 @@ VALUES
         cursor.execute(select_core_raw_sqlstr)
         name_knot_str = f"Knot cannot exist in NameTerm column {wx.voice_name}"
         assert cursor.fetchall() == [
-            (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
-            (event1, sue_str, a23_str, yao_str, bob_str, None, None, name_knot_str),
+            (spark1, sue_str, a23_str, yao_str, yao_str, None, None, None),
+            (spark1, sue_str, a23_str, yao_str, bob_str, None, None, name_knot_str),
         ]
 
 
@@ -75,7 +75,7 @@ def test_create_knot_exists_in_label_error_update_sqlstr_ReturnsObj_PopulatesTab
     a45_str = f"{colon}amy45"
     comma = ","
     ukx = "Unknown"
-    event1 = 1
+    spark1 = 1
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -83,11 +83,11 @@ def test_create_knot_exists_in_label_error_update_sqlstr_ReturnsObj_PopulatesTab
         blrpern_dimen = wx.belief_voiceunit
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
-  {wx.event_num}, {wx.face_name}, {wx.moment_label}, {wx.belief_name}, {wx.voice_name})
+  {wx.spark_num}, {wx.face_name}, {wx.moment_label}, {wx.belief_name}, {wx.voice_name})
 VALUES
-  ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
-, ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
-, ({event1}, '{sue_str}', '{a45_str}', '{yao_str}', '{bob_str}')
+  ({spark1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
+, ({spark1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
+, ({spark1}, '{sue_str}', '{a45_str}', '{yao_str}', '{bob_str}')
 ;
 """
         cursor.execute(insert_blrpern_sqlstr)
@@ -117,9 +117,9 @@ VALUES
         cursor.execute(select_core_raw_sqlstr)
         label_knot_str = f"Knot cannot exist in LabelTerm column {wx.moment_label}"
         assert cursor.fetchall() == [
-            (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
-            (event1, sue_str, a23_str, yao_str, bob_str, None, None, None),
-            (event1, sue_str, a45_str, yao_str, bob_str, None, None, label_knot_str),
+            (spark1, sue_str, a23_str, yao_str, yao_str, None, None, None),
+            (spark1, sue_str, a23_str, yao_str, bob_str, None, None, None),
+            (spark1, sue_str, a45_str, yao_str, bob_str, None, None, label_knot_str),
         ]
 
 
@@ -133,8 +133,8 @@ def test_set_moment_belief_sound_agg_knot_errors_PopulatesTable_Scenario0():
     a45_str = f"{colon}amy45"
     comma = ","
     ukx = "Unknown"
-    event1 = 1
-    event7 = 7
+    spark1 = 1
+    spark7 = 7
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -142,11 +142,11 @@ def test_set_moment_belief_sound_agg_knot_errors_PopulatesTable_Scenario0():
         blrpern_dimen = wx.belief_voiceunit
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
-  {wx.event_num}, {wx.face_name}, {wx.moment_label}, {wx.belief_name}, {wx.voice_name})
+  {wx.spark_num}, {wx.face_name}, {wx.moment_label}, {wx.belief_name}, {wx.voice_name})
 VALUES
-  ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
-, ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
-, ({event1}, '{sue_str}', '{a45_str}', '{yao_str}', '{yao_str}')
+  ({spark1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
+, ({spark1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
+, ({spark1}, '{sue_str}', '{a45_str}', '{yao_str}', '{yao_str}')
 ;
 """
         cursor.execute(insert_blrpern_sqlstr)
@@ -175,7 +175,7 @@ VALUES
         rows = cursor.fetchall()
         print(f"{rows=}")
         assert rows == [
-            (event1, sue_str, a45_str, yao_str, yao_str, None, None, label_knot_str),
-            (event1, sue_str, a23_str, yao_str, bob_str, None, None, name_knot_str),
-            (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
+            (spark1, sue_str, a45_str, yao_str, yao_str, None, None, label_knot_str),
+            (spark1, sue_str, a23_str, yao_str, bob_str, None, None, name_knot_str),
+            (spark1, sue_str, a23_str, yao_str, yao_str, None, None, None),
         ]
