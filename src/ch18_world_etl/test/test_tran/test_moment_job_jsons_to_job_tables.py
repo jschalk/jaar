@@ -20,7 +20,7 @@ from src.ref.ch18_keywords import Ch18Keywords as wx
 
 def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario0(
     env_dir_setup_cleanup,
-):
+):  # sourcery skip: extract-method
     # ESTABLISH
     m23_moment_mstr_dir = get_chapter_temp_dir()
     m23_str = "music23"
@@ -96,7 +96,7 @@ def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario0(
 
 def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario1(
     env_dir_setup_cleanup,
-):
+):  # sourcery skip: extract-method
     # ESTABLISH
     sue_inx = "Suzy"
     bob_inx = "Bobby"
