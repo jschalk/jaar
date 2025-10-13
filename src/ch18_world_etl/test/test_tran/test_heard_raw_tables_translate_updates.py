@@ -29,7 +29,7 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_
         blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
         # print(f"{get_table_columns(cursor, blrawar_h_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename} 
-        ({wx.event_int}, {wx.face_name}_otx, {wx.face_name}_inx)
+        ({wx.event_num}, {wx.face_name}_otx, {wx.face_name}_inx)
         VALUES
           ({event1}, '{sue_otx}', NULL)
         , ({event2}, '{yao_otx}', NULL)
@@ -43,7 +43,7 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename} 
-        ({wx.event_int}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
+        ({wx.event_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
         VALUES
           ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
         , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
@@ -63,7 +63,7 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_
 
         # THEN
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 3
-        select_face_name_only_sqlstr = f"""SELECT {wx.event_int}, {wx.face_name}_otx, {wx.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {wx.event_num}, {wx.face_name}_otx, {wx.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -93,7 +93,7 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
         blrawar_dimen = wx.belief_plan_awardunit
         blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
         insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename}
-        ({wx.event_int}, {wx.face_name}_otx, {wx.face_name}_inx)
+        ({wx.event_num}, {wx.face_name}_otx, {wx.face_name}_inx)
         VALUES
           ({event1}, '{sue_otx}', NULL)
         , ({event2}, '{yao_otx}', NULL)
@@ -105,7 +105,7 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
-        ({wx.event_int}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
+        ({wx.event_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
         VALUES
           ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
         , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
@@ -124,7 +124,7 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
         cursor.execute(update_sqlstr)
 
         # THEN
-        select_face_name_only_sqlstr = f"""SELECT {wx.event_int}, {wx.face_name}_otx, {wx.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {wx.event_num}, {wx.face_name}_otx, {wx.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -136,7 +136,7 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
         ]
 
 
-def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_Different_event_int_TranslateMappings():
+def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_Different_event_num_TranslateMappings():
     # ESTABLISH
     sue_otx = "Sue"
     sue_inx = "Suzy"
@@ -161,7 +161,7 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_
         blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrawar_h_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename}
-        ({wx.event_int}, {wx.face_name}_otx, {wx.face_name}_inx)
+        ({wx.event_num}, {wx.face_name}_otx, {wx.face_name}_inx)
         VALUES
           ({event0}, '{bob_otx}', NULL)
         , ({event1}, '{bob_otx}', NULL)
@@ -177,7 +177,7 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
-        ({wx.event_int}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
+        ({wx.event_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
         VALUES
           ({event1}, '{bob_otx}', '{bob_otx}', '{bob_inx0}')
         , ({event2}, '{yao_otx}', '{yao_otx}', '{yao_inx}')
@@ -199,7 +199,7 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_
         cursor.execute(update_sqlstr)
 
         # THEN
-        select_face_name_only_sqlstr = f"""SELECT {wx.event_int}, {wx.face_name}_otx, {wx.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {wx.event_num}, {wx.face_name}_otx, {wx.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -236,7 +236,7 @@ def test_create_update_heard_raw_empty_inx_col_sqlstr_UpdatesTable_Scenario0_Emp
         blrawar_dimen = wx.belief_plan_awardunit
         blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrawar_h_raw_put_tablename)=}")
-        insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename} ({wx.event_int}, {wx.face_name}_otx, {wx.face_name}_inx)
+        insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename} ({wx.event_num}, {wx.face_name}_otx, {wx.face_name}_inx)
 VALUES
   ({event1}, '{sue_otx}', '{sue_inx}')
 , ({event2}, '{yao_otx}', NULL)
@@ -257,7 +257,7 @@ VALUES
 
         # THEN
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 4
-        select_face_name_only_sqlstr = f"""SELECT {wx.event_int}, {wx.face_name}_otx, {wx.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {wx.event_num}, {wx.face_name}_otx, {wx.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -294,7 +294,7 @@ def test_set_all_heard_raw_inx_columns_Scenario0_empty_tables():
         blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrawar_h_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename}
-        ({wx.event_int}, {wx.face_name}_otx, {wx.face_name}_inx)
+        ({wx.event_num}, {wx.face_name}_otx, {wx.face_name}_inx)
         VALUES
           ({event0}, '{bob_otx}', NULL)
         , ({event1}, '{bob_otx}', NULL)
@@ -310,7 +310,7 @@ def test_set_all_heard_raw_inx_columns_Scenario0_empty_tables():
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
-        ({wx.event_int}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
+        ({wx.event_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
         VALUES
           ({event1}, '{bob_otx}', '{bob_otx}', '{bob_inx0}')
         , ({event2}, '{yao_otx}', '{yao_otx}', '{yao_inx}')
@@ -328,7 +328,7 @@ def test_set_all_heard_raw_inx_columns_Scenario0_empty_tables():
         set_all_heard_raw_inx_columns(cursor)
 
         # THEN
-        select_face_name_only_sqlstr = f"""SELECT {wx.event_int}, {wx.face_name}_otx, {wx.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {wx.event_num}, {wx.face_name}_otx, {wx.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)

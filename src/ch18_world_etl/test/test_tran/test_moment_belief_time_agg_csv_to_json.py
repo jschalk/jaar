@@ -27,10 +27,10 @@ def test_etl_moment_ote1_agg_csvs_to_jsons_CreatesFile_Scenaro0(
     moment_mstr_dir = get_chapter_temp_dir()
     a23_event_time_p = create_moment_ote1_csv_path(moment_mstr_dir, amy23_str)
     a45_event_time_p = create_moment_ote1_csv_path(moment_mstr_dir, amy45_str)
-    a23_event_time_csv = f"""{wx.moment_label},{wx.belief_name},{wx.event_int},{wx.bud_time},{wx.error_message}
+    a23_event_time_csv = f"""{wx.moment_label},{wx.belief_name},{wx.event_num},{wx.bud_time},{wx.error_message}
 {amy23_str},{bob_str},{event3},{timepoint55},
 """
-    a45_event_time_csv = f"""{wx.moment_label},{wx.belief_name},{wx.event_int},{wx.bud_time},{wx.error_message}
+    a45_event_time_csv = f"""{wx.moment_label},{wx.belief_name},{wx.event_num},{wx.bud_time},{wx.error_message}
 {amy45_str},{sue_str},{event3},{timepoint55},
 {amy45_str},{sue_str},{event7},{timepoint66},
 """

@@ -1,7 +1,7 @@
 {
   "attributes": {
     "belief_name"      : { "otx_key": true }, 
-    "event_int"        : { "otx_key": true }, 
+    "event_num"        : { "otx_key": true }, 
     "face_name"        : { "otx_key": true }, 
     "group_title_ERASE": { "otx_key": true }, 
     "moment_label"     : { "otx_key": true }, 

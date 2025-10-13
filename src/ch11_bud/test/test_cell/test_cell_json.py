@@ -36,7 +36,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario0():
     # THEN
     assert list(x_cell_dict.keys()) == [
         wx.ancestors,
-        wx.event_int,
+        wx.event_num,
         wx.celldepth,
         wx.bud_belief_name,
         wx.money_grain,
@@ -48,7 +48,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario0():
         wx.boss_facts,
     ]
     assert x_cell_dict.get(wx.ancestors) == bob_sue_ancestors
-    assert x_cell_dict.get(wx.event_int) == bob_sue_event7
+    assert x_cell_dict.get(wx.event_num) == bob_sue_event7
     assert x_cell_dict.get(wx.celldepth) == bob_sue_celldepth3
     assert x_cell_dict.get(wx.bud_belief_name) == bob_sue_bud_belief
     assert x_cell_dict.get(wx.money_grain) == bob_sue_money_grain2
@@ -89,7 +89,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_EmptyBeliefAdjust():
     # THEN
     assert list(x_cell_dict.keys()) == [
         wx.ancestors,
-        wx.event_int,
+        wx.event_num,
         wx.celldepth,
         wx.bud_belief_name,
         wx.money_grain,
@@ -101,7 +101,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_EmptyBeliefAdjust():
         wx.boss_facts,
     ]
     assert x_cell_dict.get(wx.ancestors) == bob_sue_ancestors
-    assert x_cell_dict.get(wx.event_int) == bob_sue_event7
+    assert x_cell_dict.get(wx.event_num) == bob_sue_event7
     assert x_cell_dict.get(wx.celldepth) == bob_sue_celldepth3
     assert x_cell_dict.get(wx.bud_belief_name) == yao_str
     assert x_cell_dict.get(wx.money_grain) == bob_sue_money_grain2
@@ -152,7 +152,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_WithMoreParameters():
     # THEN
     assert list(x_cell_dict.keys()) == [
         wx.ancestors,
-        wx.event_int,
+        wx.event_num,
         wx.celldepth,
         wx.bud_belief_name,
         wx.money_grain,
@@ -164,7 +164,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_WithMoreParameters():
         wx.boss_facts,
     ]
     assert x_cell_dict.get(wx.ancestors) == bob_sue_ancestors
-    assert x_cell_dict.get(wx.event_int) == bob_sue_event7
+    assert x_cell_dict.get(wx.event_num) == bob_sue_event7
     assert x_cell_dict.get(wx.celldepth) == bob_sue_celldepth3
     assert x_cell_dict.get(wx.bud_belief_name) == bob_sue_bud_belief
     assert x_cell_dict.get(wx.money_grain) == bob_sue_money_grain2

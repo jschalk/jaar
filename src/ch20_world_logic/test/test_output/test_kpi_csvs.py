@@ -39,7 +39,7 @@ def test_WorldUnit_create_kpi_csvs_Senario1_Add_CreatesFile(env_dir_setup_cleanu
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     amy23_str = "amy23"
     br00011_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,

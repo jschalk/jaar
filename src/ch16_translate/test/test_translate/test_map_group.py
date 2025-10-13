@@ -16,7 +16,7 @@ def test_TitleMap_Exists():
 
     # WHEN / THEN
     assert not x_titlemap.face_name
-    assert not x_titlemap.event_int
+    assert not x_titlemap.event_num
     assert not x_titlemap.otx2inx
     assert not x_titlemap.unknown_str
     assert not x_titlemap.otx_knot
@@ -29,7 +29,7 @@ def test_titlemap_shop_ReturnsObj_scenario0_NoParameters():
 
     # THEN
     assert not x_titlemap.face_name
-    assert x_titlemap.event_int == 0
+    assert x_titlemap.event_num == 0
     assert x_titlemap.otx2inx == {}
     assert x_titlemap.unknown_str == default_unknown_str_if_None()
     assert x_titlemap.otx_knot == default_knot_if_None()
@@ -50,7 +50,7 @@ def test_titlemap_shop_ReturnsObj_scenario1_WithParameters():
     # WHEN
     x_titlemap = titlemap_shop(
         face_name=bob_str,
-        event_int=event7,
+        event_num=event7,
         otx2inx=otx2inx,
         unknown_str=x_unknown_str,
         otx_knot=slash_otx_knot,
@@ -59,7 +59,7 @@ def test_titlemap_shop_ReturnsObj_scenario1_WithParameters():
 
     # THEN
     assert x_titlemap.face_name == bob_str
-    assert x_titlemap.event_int == event7
+    assert x_titlemap.event_num == event7
     assert x_titlemap.otx2inx == otx2inx
     assert x_titlemap.unknown_str == x_unknown_str
     assert x_titlemap.otx_knot == slash_otx_knot
@@ -78,7 +78,7 @@ def test_titlemap_shop_ReturnsObj_scenario2_TranslateCoreAttrAreDefaultWhenGiven
     # WHEN
     x_titlemap = titlemap_shop(
         face_name=bob_str,
-        event_int=event7,
+        event_num=event7,
         otx2inx=otx2inx,
         unknown_str=x_nan,
         otx_knot=x_nan,
@@ -87,7 +87,7 @@ def test_titlemap_shop_ReturnsObj_scenario2_TranslateCoreAttrAreDefaultWhenGiven
 
     # THEN
     assert x_titlemap.face_name == bob_str
-    assert x_titlemap.event_int == event7
+    assert x_titlemap.event_num == event7
     assert x_titlemap.otx2inx == otx2inx
     assert x_titlemap.unknown_str == default_unknown_str_if_None()
     assert x_titlemap.otx_knot == default_knot_if_None()
@@ -309,7 +309,7 @@ def test_TitleMap_to_dict_ReturnsObj():
         wx.inx_knot: x_titlemap.inx_knot,
         wx.unknown_str: x_titlemap.unknown_str,
         wx.otx2inx: {},
-        wx.event_int: x_titlemap.event_int,
+        wx.event_num: x_titlemap.event_num,
         wx.face_name: x_titlemap.face_name,
     }
     assert x_titlemap.to_dict() == x1_rope_map_dict
@@ -322,7 +322,7 @@ def test_TitleMap_to_dict_ReturnsObj():
         wx.inx_knot: x_titlemap.inx_knot,
         wx.unknown_str: x_titlemap.unknown_str,
         wx.otx2inx: {clean_otx: clean_inx},
-        wx.event_int: x_titlemap.event_int,
+        wx.event_num: x_titlemap.event_num,
         wx.face_name: sue_str,
     }
     assert x_titlemap.to_dict() == x2_rope_map_dict
@@ -343,8 +343,8 @@ def test_get_titlemap_from_dict_ReturnsObj():
 
     # THEN
     assert gen_titlemap.face_name == x_titlemap.face_name
-    assert gen_titlemap.event_int == x_titlemap.event_int
-    assert gen_titlemap.event_int == event7
+    assert gen_titlemap.event_num == x_titlemap.event_num
+    assert gen_titlemap.event_num == event7
     assert gen_titlemap == x_titlemap
 
 

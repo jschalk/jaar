@@ -39,7 +39,7 @@ class TranslateUnit:
     Contains a mapunit for each translatable type: RopeTerm, NameTerm, TitleTerm...
     """
 
-    event_int: EventInt = None
+    event_num: EventInt = None
     face_name: BeliefName = None
     titlemap: TitleMap = None
     namemap: NameMap = None
@@ -222,7 +222,7 @@ class TranslateUnit:
 
         return {
             "face_name": self.face_name,
-            "event_int": self.event_int,
+            "event_num": self.event_num,
             "otx_knot": self.otx_knot,
             "inx_knot": self.inx_knot,
             "unknown_str": self.unknown_str,
@@ -235,7 +235,7 @@ class TranslateUnit:
 
 def translateunit_shop(
     face_name: BeliefName,
-    event_int: EventInt = None,
+    event_num: EventInt = None,
     otx_knot: str = None,
     inx_knot: str = None,
     unknown_str: str = None,
@@ -246,28 +246,28 @@ def translateunit_shop(
 
     x_namemap = namemap_shop(
         face_name=face_name,
-        event_int=event_int,
+        event_num=event_num,
         otx_knot=otx_knot,
         inx_knot=inx_knot,
         unknown_str=unknown_str,
     )
     x_titlemap = titlemap_shop(
         face_name=face_name,
-        event_int=event_int,
+        event_num=event_num,
         otx_knot=otx_knot,
         inx_knot=inx_knot,
         unknown_str=unknown_str,
     )
     x_labelmap = labelmap_shop(
         face_name=face_name,
-        event_int=event_int,
+        event_num=event_num,
         otx_knot=otx_knot,
         inx_knot=inx_knot,
         unknown_str=unknown_str,
     )
     x_ropemap = ropemap_shop(
         face_name=face_name,
-        event_int=event_int,
+        event_num=event_num,
         otx_knot=otx_knot,
         inx_knot=inx_knot,
         unknown_str=unknown_str,
@@ -276,7 +276,7 @@ def translateunit_shop(
 
     return TranslateUnit(
         face_name=face_name,
-        event_int=get_0_if_None(event_int),
+        event_num=get_0_if_None(event_num),
         unknown_str=unknown_str,
         otx_knot=otx_knot,
         inx_knot=inx_knot,
@@ -288,7 +288,7 @@ def translateunit_shop(
 
 
 def get_translateunit_from_dict(x_dict: dict) -> TranslateUnit:
-    x_event_int = x_dict.get("event_int")
+    x_event_num = x_dict.get("event_num")
     x_face_name = x_dict.get("face_name")
     x_otx_knot = x_dict.get("otx_knot")
     x_inx_knot = x_dict.get("inx_knot")
@@ -299,7 +299,7 @@ def get_translateunit_from_dict(x_dict: dict) -> TranslateUnit:
     ropemap_dict = x_dict.get("ropemap")
     namemap_dict = _add_translate_core_keys(
         namemap_dict,
-        x_event_int,
+        x_event_num,
         x_face_name,
         x_otx_knot,
         x_inx_knot,
@@ -307,7 +307,7 @@ def get_translateunit_from_dict(x_dict: dict) -> TranslateUnit:
     )
     titlemap_dict = _add_translate_core_keys(
         titlemap_dict,
-        x_event_int,
+        x_event_num,
         x_face_name,
         x_otx_knot,
         x_inx_knot,
@@ -315,7 +315,7 @@ def get_translateunit_from_dict(x_dict: dict) -> TranslateUnit:
     )
     labelmap_dict = _add_translate_core_keys(
         labelmap_dict,
-        x_event_int,
+        x_event_num,
         x_face_name,
         x_otx_knot,
         x_inx_knot,
@@ -323,7 +323,7 @@ def get_translateunit_from_dict(x_dict: dict) -> TranslateUnit:
     )
     ropemap_dict = _add_translate_core_keys(
         ropemap_dict,
-        x_event_int,
+        x_event_num,
         x_face_name,
         x_otx_knot,
         x_inx_knot,
@@ -336,7 +336,7 @@ def get_translateunit_from_dict(x_dict: dict) -> TranslateUnit:
     x_ropemap.labelmap = x_labelmap
     return TranslateUnit(
         face_name=x_face_name,
-        event_int=x_event_int,
+        event_num=x_event_num,
         otx_knot=x_otx_knot,
         inx_knot=x_inx_knot,
         unknown_str=x_unknown_str,
@@ -348,7 +348,7 @@ def get_translateunit_from_dict(x_dict: dict) -> TranslateUnit:
 
 
 def _get_rid_of_translate_core_keys(map_dict: dict) -> dict:
-    map_dict.pop("event_int")
+    map_dict.pop("event_num")
     map_dict.pop("face_name")
     map_dict.pop("otx_knot")
     map_dict.pop("inx_knot")
@@ -358,13 +358,13 @@ def _get_rid_of_translate_core_keys(map_dict: dict) -> dict:
 
 def _add_translate_core_keys(
     map_dict: dict,
-    event_int: int,
+    event_num: int,
     face_name: str,
     otx_knot: str,
     inx_knot: str,
     unknown_str: str,
 ) -> dict:
-    map_dict["event_int"] = event_int
+    map_dict["event_num"] = event_num
     map_dict["face_name"] = face_name
     map_dict["otx_knot"] = otx_knot
     map_dict["inx_knot"] = inx_knot
@@ -384,7 +384,7 @@ def inherit_translateunit(older: TranslateUnit, newer: TranslateUnit) -> Transla
         or older.unknown_str != newer.unknown_str
     ):
         raise TranslateCoreAttrConflictException("Core attrs in conflict")
-    if older.event_int >= newer.event_int:
+    if older.event_num >= newer.event_num:
         raise TranslateCoreAttrConflictException("older translateunit is not older")
     newer.set_namemap(inherit_namemap(newer.namemap, older.namemap))
     newer.set_titlemap(inherit_titlemap(newer.titlemap, older.titlemap))

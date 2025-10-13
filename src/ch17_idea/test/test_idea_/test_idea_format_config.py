@@ -67,7 +67,7 @@ def test_get_headers_list_ReturnsObj():
     # THEN
     # print(f"{format_00001_headers=}")
     assert format_00021_headers == [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,
@@ -81,7 +81,7 @@ def get_sorted_headers_str(idea_filename):
     x_idearef = get_idearef_from_file(idea_filename)
     idea_attributes = set(x_idearef.get(wx.attributes).keys())
     idea_attributes.remove(wx.face_name)
-    idea_attributes.remove(wx.event_int)
+    idea_attributes.remove(wx.event_num)
     print(f"{idea_attributes=}")
     attr_sort = get_idea_elements_sort_order()
     idea_attributes = get_default_sorted_list(idea_attributes, attr_sort)
@@ -189,13 +189,13 @@ def test_get_idearef_obj_HasAttrs_idea_format_00021_belief_voiceunit_v0_0_0():
         wx.voice_name: {wx.otx_key: True},
         wx.voice_cred_lumen: {wx.otx_key: False},
         wx.voice_debt_lumen: {wx.otx_key: False},
-        wx.event_int: {wx.otx_key: True},
+        wx.event_num: {wx.otx_key: True},
         wx.face_name: {wx.otx_key: True},
         wx.moment_label: {wx.otx_key: True},
         wx.belief_name: {wx.otx_key: True},
     }
     headers_list = format_00001_idearef.get_headers_list()
-    assert headers_list[0] == wx.event_int
+    assert headers_list[0] == wx.event_num
     assert headers_list[1] == wx.face_name
     assert headers_list[2] == wx.moment_label
     assert headers_list[3] == wx.belief_name
@@ -214,7 +214,7 @@ def test_get_idearef_obj_HasAttrs_idea_format_00020_belief_voice_membership_v0_0
     # THEN
     assert len(format_00021_idearef._attributes) == 8
     headers_list = format_00021_idearef.get_headers_list()
-    assert headers_list[0] == wx.event_int
+    assert headers_list[0] == wx.event_num
     assert headers_list[1] == wx.face_name
     assert headers_list[2] == wx.moment_label
     assert headers_list[3] == wx.belief_name
@@ -234,7 +234,7 @@ def test_get_idearef_obj_HasAttrs_idea_format_00013_planunit_v0_0_0():
     # THEN
     assert len(format_00003_idearef._attributes) == 7
     headers_list = format_00003_idearef.get_headers_list()
-    assert headers_list[0] == wx.event_int
+    assert headers_list[0] == wx.event_num
     assert headers_list[1] == wx.face_name
     assert headers_list[2] == wx.moment_label
     assert headers_list[3] == wx.belief_name
@@ -253,7 +253,7 @@ def test_get_idearef_obj_HasAttrs_idea_format_00019_planunit_v0_0_0():
     # THEN
     assert len(format_00019_idearef._attributes) == 13
     headers_list = format_00019_idearef.get_headers_list()
-    assert headers_list[0] == wx.event_int
+    assert headers_list[0] == wx.event_num
     assert headers_list[1] == wx.face_name
     assert headers_list[2] == wx.moment_label
     assert headers_list[3] == wx.belief_name

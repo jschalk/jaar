@@ -101,7 +101,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyMomentUnit(
     expected_br00045_csv = expected_stance_csv_strs.get("br00045")
     print(f"{expected_br00001_csv=}")
 
-    face_event_str = "event_int,face_name,"
+    face_event_str = "event_num,face_name,"
     assert x_ideas.get("br00000") == f"{face_event_str}{expected_br00000_csv}"
     assert x_ideas.get("br00001") == f"{face_event_str}{expected_br00001_csv}"
     assert x_ideas.get("br00002") == f"{face_event_str}{expected_br00002_csv}"
@@ -239,12 +239,12 @@ def test_add_momentunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoMomentUnits(
     expected_br00003_csv = get_ordered_csv(get_ex2_br00003_df())
     expected_br00004_csv = get_ordered_csv(get_ex2_br00004_df())
     expected_br00005_csv = get_ordered_csv(get_ex2_br00005_df())
-    expected_br00000_csv = f"event_int,face_name,{expected_br00000_csv}"
-    expected_br00001_csv = f"event_int,face_name,{expected_br00001_csv}"
-    expected_br00002_csv = f"event_int,face_name,{expected_br00002_csv}"
-    expected_br00003_csv = f"event_int,face_name,{expected_br00003_csv}"
-    expected_br00004_csv = f"event_int,face_name,{expected_br00004_csv}"
-    expected_br00005_csv = f"event_int,face_name,{expected_br00005_csv}"
+    expected_br00000_csv = f"event_num,face_name,{expected_br00000_csv}"
+    expected_br00001_csv = f"event_num,face_name,{expected_br00001_csv}"
+    expected_br00002_csv = f"event_num,face_name,{expected_br00002_csv}"
+    expected_br00003_csv = f"event_num,face_name,{expected_br00003_csv}"
+    expected_br00004_csv = f"event_num,face_name,{expected_br00004_csv}"
+    expected_br00005_csv = f"event_num,face_name,{expected_br00005_csv}"
     expected_br00000_csv = expected_br00000_csv.replace("amy", ",,amy")
     expected_br00001_csv = expected_br00001_csv.replace("amy", ",,amy")
     expected_br00002_csv = expected_br00002_csv.replace("amy", ",,amy")
@@ -634,7 +634,7 @@ def test_add_pack_to_br00020_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_num=event7)
     sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00020")
 
@@ -665,7 +665,7 @@ def test_add_pack_to_br00021_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_num=event7)
     sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00021")
 
@@ -697,7 +697,7 @@ def test_add_pack_to_br00022_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_num=event7)
     sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00022")
     print(f"{csv_header=}")
@@ -729,7 +729,7 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_num=event7)
     sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00023")
     print(f"{csv_header=}")
@@ -761,7 +761,7 @@ def test_add_pack_to_br00024_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_num=event7)
     sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00024")
     print(f"{csv_header=}")
@@ -795,7 +795,7 @@ def test_add_pack_to_br00025_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_num=event7)
     sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00025")
     print(f"{csv_header=}")
@@ -838,7 +838,7 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_num=event7)
     sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00026")
     print(f"{csv_header=}")
@@ -871,7 +871,7 @@ def test_add_pack_to_br00027_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_num=event7)
     sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00027")
     print(f"{csv_header=}")
@@ -925,7 +925,7 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_num=event7)
     sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00028")
     print(f"{csv_header=}")
@@ -966,7 +966,7 @@ def test_add_pack_to_br00029_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_num=event7)
     sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00029")
     print(f"{csv_header=}")
@@ -1012,7 +1012,7 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
+    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_num=event7)
     sue7_pack.set_beliefdelta(bob_beliefdelta)
 
     br00020_header = x_ideas.get("br00020")

@@ -1,4 +1,3 @@
-from src.ch01_py.dict_toolbox import x_is_json
 from src.ch02_rope.rope import create_rope
 from src.ch09_belief_atom.atom_main import beliefatom_shop, get_beliefatom_from_dict
 from src.ref.keywords import Ch09Keywords as wx

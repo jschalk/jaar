@@ -17,7 +17,7 @@ from src.ch17_idea.idea_db_tool import (
     set_dataframe_first_two_columns,
     sheet_exists,
     split_excel_into_dirs,
-    update_all_face_name_event_int_columns,
+    update_all_face_name_event_num_columns,
     upsert_sheet,
 )
 from src.ch17_idea.test._util.ch17_env import (
@@ -524,7 +524,7 @@ def test_check_dataframe_column_names_ScenarioLessThanTwoColumns():
         check_dataframe_column_names(df, "A", "B")
 
 
-def test_update_all_face_name_event_int_columns_Scenario0_UpdatesValidSheet(
+def test_update_all_face_name_event_num_columns_Scenario0_UpdatesValidSheet(
     env_dir_setup_cleanup,
 ):
     # sourcery skip: no-loop-in-tests
@@ -539,7 +539,7 @@ def test_update_all_face_name_event_int_columns_Scenario0_UpdatesValidSheet(
     validsheet_str = "ValidSheet"
     invalidsheet_str = "InvalidSheet"
     ws1.title = validsheet_str
-    ws1.append([wx.event_int, wx.face_name, "other"])
+    ws1.append([wx.event_num, wx.face_name, "other"])
     for _ in range(5):
         ws1.append([event3, yao_str, "value4"])
 
@@ -562,7 +562,7 @@ def test_update_all_face_name_event_int_columns_Scenario0_UpdatesValidSheet(
         assert ws2.cell(row=row, column=2).value == yao_str
 
     # WHEN: We update the workbook
-    update_all_face_name_event_int_columns(excel_path, bob_str, event7)
+    update_all_face_name_event_num_columns(excel_path, bob_str, event7)
 
     # THEN: Only the valid sheet should be updated
     workbook = openpyxl_load_workbook(excel_path)
@@ -576,7 +576,7 @@ def test_update_all_face_name_event_int_columns_Scenario0_UpdatesValidSheet(
         assert ws2.cell(row=row, column=2).value == yao_str
 
 
-def test_update_all_face_name_event_int_columns_Scenario1_NoMatchingSheets(
+def test_update_all_face_name_event_num_columns_Scenario1_NoMatchingSheets(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH: A workbook with no matching headers
@@ -593,7 +593,7 @@ def test_update_all_face_name_event_int_columns_Scenario1_NoMatchingSheets(
     assert ws.cell(row=1, column=2).value == "bar"
 
     # WHEN: We attempt to update the workbook
-    update_all_face_name_event_int_columns(excel_path, "Bob", 7)
+    update_all_face_name_event_num_columns(excel_path, "Bob", 7)
 
     # THEN: No updates should be made
     workbook = openpyxl_load_workbook(excel_path)

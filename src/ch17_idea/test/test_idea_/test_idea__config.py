@@ -79,8 +79,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[0] == "world_name"
     assert table_sorting_priority[1] == "idea_number"
     assert table_sorting_priority[2] == "source_dimen"
-    assert table_sorting_priority[3] == "translate_event_int"
-    assert table_sorting_priority[4] == wx.event_int
+    assert table_sorting_priority[3] == "translate_event_num"
+    assert table_sorting_priority[4] == wx.event_num
     assert table_sorting_priority[5] == wx.face_name
     assert table_sorting_priority[6] == "face_name_otx"
     assert table_sorting_priority[7] == "face_name_inx"
@@ -267,10 +267,10 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_args.update(translateable_delete_otx_cols)
     all_args.update(translateable_delete_inx_cols)
     all_args.add(wx.idea_number)
-    all_args.add(wx.event_int)
+    all_args.add(wx.event_num)
     all_args.add(wx.face_name)
     all_args.add("source_dimen")
-    all_args.add("translate_event_int")
+    all_args.add("translate_event_num")
     all_args.add(wx.error_message)
     all_args.add(wx.world_name)
     all_args.add("funds")  # kpi columns
@@ -297,8 +297,8 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert set(sqlite_types.keys()) == set(get_idea_elements_sort_order())
     assert sqlite_types.get(wx.idea_number) == "TEXT"
     assert sqlite_types.get(wx.face_name) == "TEXT"
-    assert sqlite_types.get("translate_event_int") == "INTEGER"
-    assert sqlite_types.get(wx.event_int) == "INTEGER"
+    assert sqlite_types.get("translate_event_num") == "INTEGER"
+    assert sqlite_types.get(wx.event_num) == "INTEGER"
     assert sqlite_types.get(wx.moment_label) == "TEXT"
     assert sqlite_types.get(wx.belief_name) == "TEXT"
     assert sqlite_types.get(wx.voice_name) == "TEXT"
@@ -526,14 +526,14 @@ def _validate_idea_config(x_idea_config: dict):
         # print(f"    {sub_jkeys_keys=}")
         # print(f"  {idea_jkeys_keys=}")
         assert wx.face_name in idea_jkeys_keys
-        assert wx.event_int in idea_jkeys_keys
+        assert wx.event_num in idea_jkeys_keys
         if idea_dict.get(wx.idea_category) != "translate":
             assert wx.moment_label in idea_jkeys_keys
         if idea_dict.get(wx.idea_category) == "belief":
             idea_jkeys_keys.remove(wx.moment_label)
             idea_jkeys_keys.remove(wx.belief_name)
         idea_jkeys_keys.remove(wx.face_name)
-        idea_jkeys_keys.remove(wx.event_int)
+        idea_jkeys_keys.remove(wx.event_num)
         assert sub_jkeys_keys == idea_jkeys_keys
 
         sub_jvalues_keys = set(sub_dimen.get(wx.jvalues).keys())
@@ -672,7 +672,7 @@ def _validate_idea_format_files(idea_filenames: set[str]):
                 assert x_dimen not in format_dimens
 
     # assert wx.face_name in idea_format_attributes
-    # assert wx.event_int in idea_format_attributes
+    # assert wx.event_num in idea_format_attributes
 
     # confirm every ideanumber is unique
     assert len(idea_numbers_set) == len(idea_filenames)
@@ -765,7 +765,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
     # THEN
     assert len(x_idea_quick_column_ref) == len(get_idea_numbers())
     assert x_idea_quick_column_ref.get("br00000") == {
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.c400_number,
         wx.moment_label,

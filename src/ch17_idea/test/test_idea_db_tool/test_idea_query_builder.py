@@ -13,7 +13,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_belief_plan_partyuni
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
         idea_cols = [
-            wx.event_int,
+            wx.event_num,
             wx.face_name,
             wx.moment_label,
             wx.plan_rope,
@@ -45,12 +45,12 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_belief_plan_partyuni
 
         # THEN
         columns_str = (
-            "event_int, face_name, moment_label, belief_name, plan_rope, party_title"
+            "event_num, face_name, moment_label, belief_name, plan_rope, party_title"
         )
         expected_sqlstr = f"""INSERT INTO {blrlabo_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND moment_label IS NOT NULL AND belief_name IS NOT NULL AND plan_rope IS NOT NULL AND party_title IS NOT NULL
+WHERE event_num IS NOT NULL AND face_name IS NOT NULL AND moment_label IS NOT NULL AND belief_name IS NOT NULL AND plan_rope IS NOT NULL AND party_title IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -65,7 +65,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_voiceunit():
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
         idea_cols = [
-            wx.event_int,
+            wx.event_num,
             wx.face_name,
             wx.moment_label,
             wx.plan_rope,
@@ -95,11 +95,11 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_voiceunit():
         )
 
         # THEN
-        columns_str = "event_int, face_name, moment_label, belief_name, voice_name, voice_cred_lumen, voice_debt_lumen"
+        columns_str = "event_num, face_name, moment_label, belief_name, voice_name, voice_cred_lumen, voice_debt_lumen"
         expected_sqlstr = f"""INSERT INTO {blrpern_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND moment_label IS NOT NULL AND belief_name IS NOT NULL AND voice_name IS NOT NULL
+WHERE event_num IS NOT NULL AND face_name IS NOT NULL AND moment_label IS NOT NULL AND belief_name IS NOT NULL AND voice_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -115,7 +115,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_belief_voiceunit():
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
         idea_cols = [
-            wx.event_int,
+            wx.event_num,
             wx.face_name,
             wx.moment_label,
             wx.plan_rope,
@@ -144,11 +144,11 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_belief_voiceunit():
         )
 
         # THEN
-        columns_str = "event_int, face_name, moment_label, belief_name, voice_name, voice_cred_lumen"
+        columns_str = "event_num, face_name, moment_label, belief_name, voice_name, voice_cred_lumen"
         expected_sqlstr = f"""INSERT INTO {blrpern_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND moment_label IS NOT NULL AND belief_name IS NOT NULL AND voice_name IS NOT NULL
+WHERE event_num IS NOT NULL AND face_name IS NOT NULL AND moment_label IS NOT NULL AND belief_name IS NOT NULL AND voice_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """

@@ -446,7 +446,7 @@ def test_create_belief_event_dir_path_HasDocString():
         moment_mstr_dir="moment_mstr_dir",
         moment_label=wx.moment_label,
         belief_name=wx.belief_name,
-        event_int=wx.event_int,
+        event_num=wx.event_num,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -459,7 +459,7 @@ def test_create_beliefevent_path_HasDocString():
         moment_mstr_dir="moment_mstr_dir",
         moment_label=wx.moment_label,
         belief_name=wx.belief_name,
-        event_int=wx.event_int,
+        event_num=wx.event_num,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -472,7 +472,7 @@ def test_create_event_all_pack_path_HasDocString():
         moment_mstr_dir="moment_mstr_dir",
         moment_label=wx.moment_label,
         belief_name=wx.belief_name,
-        event_int=wx.event_int,
+        event_num=wx.event_num,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -485,7 +485,7 @@ def test_create_event_expressed_pack_path_HasDocString():
         moment_mstr_dir="moment_mstr_dir",
         moment_label=wx.moment_label,
         belief_name=wx.belief_name,
-        event_int=wx.event_int,
+        event_num=wx.event_num,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN

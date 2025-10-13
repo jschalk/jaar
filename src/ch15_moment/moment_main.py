@@ -332,12 +332,12 @@ class MomentUnit:
         ote1_dict: dict[BeliefName, dict[EpochPoint, EventInt]],
         bud_time: EpochPoint,
     ) -> None:
-        past_event_int = _get_ote1_max_past_event_int(belief_name, ote1_dict, bud_time)
+        past_event_num = _get_ote1_max_past_event_num(belief_name, ote1_dict, bud_time)
         budunit = self.get_budunit(belief_name, bud_time)
         cellunit = cellunit_shop(
             bud_belief_name=belief_name,
             ancestors=[],
-            event_int=past_event_int,
+            event_num=past_event_num,
             celldepth=budunit.celldepth,
             quota=budunit.quota,
             money_grain=self.money_grain,
@@ -363,7 +363,7 @@ class MomentUnit:
             self.add_epoch_to_gut(belief_name)
 
 
-def _get_ote1_max_past_event_int(
+def _get_ote1_max_past_event_num(
     belief_name: str, ote1_dict: dict[str, dict[str, int]], bud_time: int
 ) -> EventInt:
     """Using the grab most recent ote1 event int before a given bud_time"""

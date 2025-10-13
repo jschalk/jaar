@@ -5,7 +5,7 @@ from src.ch01_py.db_toolbox import get_row_count
 from src.ch01_py.file_toolbox import create_path
 from src.ch17_idea.idea_db_tool import create_idea_sorted_table, upsert_sheet
 from src.ch18_world_etl.tran_sqlstrs import create_prime_tablename
-from src.ch18_world_etl.transformers import get_max_brick_agg_event_int
+from src.ch18_world_etl.transformers import get_max_brick_agg_event_num
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as worlds_dir,
@@ -116,13 +116,13 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     db_conn.close()
 
 
-def create_brick_agg_record(world: WorldUnit, event_int: int):
+def create_brick_agg_record(world: WorldUnit, event_num: int):
     sue_str = "Sue"
     minute_360 = 360
     hour6am = "6am"
     agg_br00003_tablename = f"br00003_{wx.brick_agg}"
     agg_br00003_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.cumulative_minute,
@@ -132,13 +132,13 @@ def create_brick_agg_record(world: WorldUnit, event_int: int):
         cursor = db_conn.cursor()
         create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
-  {wx.event_int}
+  {wx.event_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.cumulative_minute}
 , {wx.hour_label}
 )"""
-        values_clause = f"""VALUES ('{event_int}', '{sue_str}', '{world.world_name}', '{minute_360}', '{hour6am}');"""
+        values_clause = f"""VALUES ('{event_num}', '{sue_str}', '{world.world_name}', '{minute_360}', '{hour6am}');"""
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
     db_conn.close()
@@ -175,7 +175,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario1_DatabaseFileExists(
     assert os_path_exists(fay_db_path)
     with sqlite3_connect(fay_db_path) as db_conn0:
         cursor0 = db_conn0.cursor()
-        assert get_max_brick_agg_event_int(cursor0) == event5
+        assert get_max_brick_agg_event_num(cursor0) == event5
     db_conn0.close()
     assert os_path_exists(input_file_path)
 
@@ -186,8 +186,8 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario1_DatabaseFileExists(
     assert os_path_exists(fay_db_path)
     with sqlite3_connect(fay_db_path) as db_conn1:
         cursor1 = db_conn1.cursor()
-        assert get_max_brick_agg_event_int(cursor1) != event5
-        assert get_max_brick_agg_event_int(cursor1) == event5 + 1
+        assert get_max_brick_agg_event_num(cursor1) != event5
+        assert get_max_brick_agg_event_num(cursor1) == event5 + 1
         select_sqlstr = f"SELECT * FROM {wx.events_brick_agg}"
         cursor1.execute(select_sqlstr)
         rows = cursor1.fetchall()

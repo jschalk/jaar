@@ -45,7 +45,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     amy23_str = "amy23"
     br00011_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,
@@ -83,7 +83,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     amy23_str = "amy23"
     br00011_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,
@@ -137,7 +137,7 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     a23_str = "amy23"
     br00011_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,
@@ -175,14 +175,14 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #     input_file_path = create_path(fay_world._input_dir, ex_filename)
 #     br00003_columns = [
 #         wx.face_name,
-#         wx.event_int,
+#         wx.event_num,
 #         wx.cumulative_minute,
 #         wx.moment_label,
 #         wx.hour_label,
 #     ]
 #     br00001_columns = [
 #         wx.face_name,
-#         wx.event_int,
+#         wx.event_num,
 #         wx.moment_label,
 #         wx.belief_name,
 #         bud_time(),
@@ -209,7 +209,7 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #     upsert_sheet(input_file_path, br00003_ex3_str, br00003_3df)
 #     br00011_columns = [
 #         wx.face_name,
-#         wx.event_int,
+#         wx.event_num,
 #         wx.moment_label,
 #         wx.belief_name,
 #         wx.voice_name,

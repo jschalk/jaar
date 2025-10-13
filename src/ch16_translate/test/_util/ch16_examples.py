@@ -236,7 +236,7 @@ def get_casa_maison_rope_otx2inx_dt() -> DataFrame:
     inx_dt = DataFrame(
         columns=[
             wx.face_name,
-            wx.event_int,
+            wx.event_num,
             wx.otx_knot,
             wx.inx_knot,
             wx.unknown_str,
@@ -267,7 +267,7 @@ def get_casa_maison_label_dt() -> DataFrame:
     inx_dt = DataFrame(
         columns=[
             wx.face_name,
-            wx.event_int,
+            wx.event_num,
             wx.otx_knot,
             wx.inx_knot,
             wx.unknown_str,
@@ -328,7 +328,7 @@ def get_slash_labelmap() -> LabelMap:
         inx_knot=colon_inx_knot,
         unknown_str=x_unknown_str,
         face_name="Sue",
-        event_int=7,
+        event_num=7,
     )
     x_labelmap.set_otx2inx(otx_amy45_str, inx_amy87_str)
     x_labelmap.set_otx2inx(clean_otx_str, clean_inx_str)
@@ -353,7 +353,7 @@ def get_slash_ropemap() -> RopeMap:
         inx_knot=colon_inx_knot,
         unknown_str=x_unknown_str,
         face_name="Sue",
-        event_int=7,
+        event_num=7,
         x_labelmap=get_slash_labelmap(),
     )
     x_ropemap.set_label(clean_otx_str, clean_inx_str)
@@ -375,7 +375,7 @@ def get_slash_titlemap() -> TitleMap:
         inx_knot=colon_inx_knot,
         unknown_str=x_unknown_str,
         face_name="Sue",
-        event_int=7,
+        event_num=7,
     )
     x_titlemap.set_otx2inx(swim_otx, swim_inx)
     x_titlemap.set_otx2inx(climb_otx, climb_inx)
@@ -398,7 +398,7 @@ def get_slash_namemap() -> NameMap:
         inx_knot=colon_inx_knot,
         unknown_str=x_unknown_str,
         face_name="Sue",
-        event_int=7,
+        event_num=7,
     )
     x_namemap.set_otx2inx(xio_otx, xio_inx)
     x_namemap.set_otx2inx(sue_otx, sue_inx)
@@ -416,7 +416,7 @@ def get_translate_core_attrs_are_none_namemap() -> NameMap:
     x_nan = float("nan")
     x_namemap = namemap_shop(
         face_name="Sue",
-        event_int=7,
+        event_num=7,
         otx_knot=x_nan,
         inx_knot=x_nan,
         unknown_str=x_nan,

@@ -1,5 +1,11 @@
-from src.ch01_py.file_toolbox import save_file
-from src.ch98_docs_builder._ref.ch98_path import create_keywords_class_file_path
+from copy import copy as copy_copy
+from src.ch98_docs_builder.doc_builder import (
+    get_chapter_desc_prefix,
+    get_chapter_descs,
+    get_cumlative_ch_keywords_dict,
+    get_keywords_by_chapter,
+    get_keywords_src_config,
+)
 
 
 def create_keywords_enum_class_file_str(chapter_prefix: str, keywords_set: set) -> str:
@@ -20,3 +26,17 @@ def create_keywords_enum_class_file_str(chapter_prefix: str, keywords_set: set) 
 
 class {chXX_str}{key_str}words(str, Enum):{keywords_str}
 {dunder_str_func_str}"""
+
+
+def create_all_enum_keyword_classes_str() -> str:
+    keywords_by_chapter = get_keywords_by_chapter(get_keywords_src_config())
+    cumlative_keywords = get_cumlative_ch_keywords_dict(keywords_by_chapter)
+    import_enum_line = """from enum import Enum
+"""
+    classes_str = copy_copy(import_enum_line)
+    for chapter_desc, chapter_dir in get_chapter_descs().items():
+        ch_prefix = get_chapter_desc_prefix(chapter_desc)
+        ch_keywords = cumlative_keywords.get(ch_prefix)
+        enum_class_str = create_keywords_enum_class_file_str(ch_prefix, ch_keywords)
+        classes_str += enum_class_str
+    return classes_str

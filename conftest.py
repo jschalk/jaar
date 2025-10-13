@@ -1,18 +1,3 @@
-import pytest
-from src.ch01_py.file_toolbox import save_file
-from src.ch98_docs_builder._ref.ch98_path import create_keywords_classes_file_path
-from src.ch98_docs_builder.doc_builder import (
-    get_chapter_desc_prefix,
-    get_chapter_descs,
-    get_cumlative_ch_keywords_dict,
-    get_keywords_by_chapter,
-    get_keywords_src_config,
-)
-from src.ch98_docs_builder.keyword_class_builder import (
-    create_keywords_enum_class_file_str,
-)
-
-
 def pytest_addoption(parser):
     parser.addoption("--graphics_bool", action="store", default=False)
     parser.addoption("--run_big_tests", action="store", default=False)
@@ -34,26 +19,3 @@ def pytest_generate_tests(metafunc):
     rebuild_bool_value = rebuild_bool_value == "True"
     if "rebuild_bool" in metafunc.fixturenames and rebuild_bool_value is not None:
         metafunc.parametrize("rebuild_bool", [rebuild_bool_value])
-
-
-@pytest.fixture(scope="session", autouse=True)
-def rewrite_files_before_tests():
-    # This runs before any tests
-    print("Rewriting keyword enum class defintions...")
-    save_all_keyword_enum_class_python_files()
-    print("Rewriting keyword enum class successful...")
-    # No yield needed if you don't need teardown
-
-
-def save_all_keyword_enum_class_python_files():
-    keywords_by_chapter = get_keywords_by_chapter(get_keywords_src_config())
-    cumlative_keywords = get_cumlative_ch_keywords_dict(keywords_by_chapter)
-    keywords_classes_path = create_keywords_classes_file_path()
-    classes_str = "from enum import Enum"
-    for chapter_desc, chapter_dir in get_chapter_descs().items():
-        ch_prefix = get_chapter_desc_prefix(chapter_desc)
-        ch_keywords = cumlative_keywords.get(ch_prefix)
-        enum_class_str = create_keywords_enum_class_file_str(ch_prefix, ch_keywords)
-        classes_str += enum_class_str
-
-    save_file(keywords_classes_path, None, classes_str)

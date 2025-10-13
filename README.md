@@ -20,9 +20,9 @@ So how do I listen? jaar has an engine for converting the declarations (as data)
 # 0.0.1 "Moments" The foundation of jaar
 For Levinas all of reality is born from the face to face encounter. The same (me) welcomes the Other through the Face. The Face of the other tells me it's suffering and it's suffering becomes my suffering. I then MOMENT to change who I am to ease that suffering. The suffering is infinitely deep and beyond my complete understanding so when I moment to respond to that suffering I am acting with confidence that I understand what the suffering is and that I know how to respond. That confidence stops the listening process, the Moment cuts the infinite into the finite and is the foundation for a world. When that Moment is created it can create a world. Worlds can hold a infinite amount of human experience. A small subset of that is logical systems. jaar is uses computers to build logic.
 
-A Moment can create a world or change a current world. Each belief can only make one moment at a time so a world that has been built by multiple moments implies each moment is from a different time. jaar describes the passage of time by *event_ints*. *event_int* is alropes an integer. 
+A Moment can create a world or change a current world. Each belief can only make one moment at a time so a world that has been built by multiple moments implies each moment is from a different time. jaar describes the passage of time by *event_nums*. *event_num* is alropes an integer. 
 
-For jaar all data must have *event_int*, *face_name*, *moment_label*. These are the required keys.
+For jaar all data must have *event_num*, *face_name*, *moment_label*. These are the required keys.
 
   
 ## 0.1 Short introduction to jaar excel sheets
@@ -30,7 +30,7 @@ For jaar all data must have *event_int*, *face_name*, *moment_label*. These are 
 `jaar` is a python library for listening to the needs of my neighbors and in turn letting them know what I need. Needs can be expressed in Excel sheets that range in complexity from a simple five column single row (example below) to 10+ columns that include configuration options that are usually set to defaults. Each row is translated and used to build the "clarity" data set. Even sheet with a single row like the example 0.1.0 below can be processed by jaar. 
 
 # Input Example Excel file 0.1.0: fizz0.xlsx with sheet "br00000_buzz" 
-| event_int | face_name | moment_label | belief_name | voice_name | tran_time | amount |
+| event_num | face_name | moment_label | belief_name | voice_name | tran_time | amount |
 |-----------|-----------|-----------|------------|-----------|-----------|--------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |    891    |  7000  |
 
@@ -42,13 +42,13 @@ When jaar processes example 0.1.0 it creates a Moment labeled "OxboxDean" that c
 
 
 Output stance: emmanuel_stance.xlsx, sheet "br00000"
-| event_int | face_name | moment_label | belief_name | voice_name | tran_time | amount |
+| event_num | face_name | moment_label | belief_name | voice_name | tran_time | amount |
 |-----------|-----------|--------------|---------------|-----------|-----------|--------|
 |    77     | Emmanuel  |   OxboxDean  |    Emmanuel   |    Dean   |    891    |  7000  |
 
 
 <!-- # Input Example Excel file 0.1.2: fizz2.xlsx with sheet "br00000_buzz2" 
-| event_int | face_name | moment_label | belief_name | voice_name | voice_cred_points | voice_debt_points |
+| event_num | face_name | moment_label | belief_name | voice_name | voice_cred_points | voice_debt_points |
 |-----------|-----------|-----------|------------|-----------|---------------|---------------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |      100      |      15       |
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |  Emmanuel |       50      |      75       |

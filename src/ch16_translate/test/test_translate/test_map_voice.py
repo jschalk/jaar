@@ -17,7 +17,7 @@ def test_NameMap_Exists():
 
     # WHEN / THEN
     assert not x_namemap.face_name
-    assert not x_namemap.event_int
+    assert not x_namemap.event_num
     assert not x_namemap.otx2inx
     assert not x_namemap.unknown_str
     assert not x_namemap.otx_knot
@@ -30,7 +30,7 @@ def test_namemap_shop_ReturnsObj_scenario0():
 
     # THEN
     assert not x_namemap.face_name
-    assert x_namemap.event_int == 0
+    assert x_namemap.event_num == 0
     assert x_namemap.otx2inx == {}
     assert x_namemap.unknown_str == default_unknown_str_if_None()
     assert x_namemap.otx_knot == default_knot_if_None()
@@ -51,7 +51,7 @@ def test_namemap_shop_ReturnsObj_scenario1_WithParameters():
     # WHEN
     x_namemap = namemap_shop(
         face_name=bob_str,
-        event_int=event7,
+        event_num=event7,
         otx2inx=otx2inx,
         unknown_str=x_unknown_str,
         otx_knot=slash_otx_knot,
@@ -60,7 +60,7 @@ def test_namemap_shop_ReturnsObj_scenario1_WithParameters():
 
     # THEN
     assert x_namemap.face_name == bob_str
-    assert x_namemap.event_int == event7
+    assert x_namemap.event_num == event7
     assert x_namemap.otx2inx == otx2inx
     assert x_namemap.unknown_str == x_unknown_str
     assert x_namemap.otx_knot == slash_otx_knot
@@ -79,7 +79,7 @@ def test_namemap_shop_ReturnsObj_scenario2_TranslateCoreAttrAreDefaultWhenGiven_
     # WHEN
     x_namemap = namemap_shop(
         face_name=bob_str,
-        event_int=numpy_int64(event7),
+        event_num=numpy_int64(event7),
         otx2inx=otx2inx,
         unknown_str=x_nan,
         otx_knot=x_nan,
@@ -88,9 +88,9 @@ def test_namemap_shop_ReturnsObj_scenario2_TranslateCoreAttrAreDefaultWhenGiven_
 
     # THEN
     assert x_namemap.face_name == bob_str
-    assert x_namemap.event_int == event7
-    assert str(type(x_namemap.event_int)) != "<class 'numpy.int64'>"
-    assert str(type(x_namemap.event_int)) == "<class 'int'>"
+    assert x_namemap.event_num == event7
+    assert str(type(x_namemap.event_num)) != "<class 'numpy.int64'>"
+    assert str(type(x_namemap.event_num)) == "<class 'int'>"
     assert x_namemap.otx2inx == otx2inx
     assert x_namemap.unknown_str == default_unknown_str_if_None()
     assert x_namemap.otx_knot == default_knot_if_None()
@@ -307,7 +307,7 @@ def test_NameMap_to_dict_ReturnsObj():
         otx_knot=slash_otx_knot,
         inx_knot=colon_inx_knot,
         face_name=sue_str,
-        event_int=event7,
+        event_num=event7,
     )
     x1_rope_map_dict = {
         wx.otx_knot: x_namemap.otx_knot,
@@ -315,7 +315,7 @@ def test_NameMap_to_dict_ReturnsObj():
         wx.unknown_str: x_namemap.unknown_str,
         wx.otx2inx: {},
         wx.face_name: x_namemap.face_name,
-        wx.event_int: x_namemap.event_int,
+        wx.event_num: x_namemap.event_num,
     }
     assert x_namemap.to_dict() == x1_rope_map_dict
 
@@ -328,7 +328,7 @@ def test_NameMap_to_dict_ReturnsObj():
         wx.unknown_str: x_namemap.unknown_str,
         wx.otx2inx: {clean_otx: clean_inx},
         wx.face_name: sue_str,
-        wx.event_int: event7,
+        wx.event_num: event7,
     }
     assert x_namemap.to_dict() == x2_rope_map_dict
 
@@ -348,8 +348,8 @@ def test_get_namemap_from_dict_ReturnsObj():
 
     # THEN
     assert gen_namemap.face_name == x_namemap.face_name
-    assert gen_namemap.event_int == x_namemap.event_int
-    assert gen_namemap.event_int == event7
+    assert gen_namemap.event_num == x_namemap.event_num
+    assert gen_namemap.event_num == event7
     assert gen_namemap == x_namemap
 
 

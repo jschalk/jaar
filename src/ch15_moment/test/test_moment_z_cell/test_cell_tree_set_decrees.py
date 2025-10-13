@@ -33,7 +33,7 @@ def test_DecreeUnit_Exists():
     assert not x_decreeunit.cell_celldepth
     assert not x_decreeunit.root_cell_bool
     assert not x_decreeunit.cell_belief_name
-    assert not x_decreeunit.event_int
+    assert not x_decreeunit.event_num
 
 
 def test_DecreeUnit_get_child_cell_ancestors_ReturnsObj_Scenario0():
@@ -162,12 +162,12 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1AndZero_boss_fact
     bob_sue_beliefadjust = beliefunit_shop(sue_str, a23_str)
     # create cell file
     bob_cell = cellunit_shop(
-        bob_str, bob_ancs, event_int=e7, celldepth=2, beliefadjust=bob_beliefadjust
+        bob_str, bob_ancs, event_num=e7, celldepth=2, beliefadjust=bob_beliefadjust
     )
     bob_sue_cell = cellunit_shop(
         bob_str,
         bob_sue_ancs,
-        event_int=e7,
+        event_num=e7,
         celldepth=0,
         beliefadjust=bob_sue_beliefadjust,
     )
@@ -208,7 +208,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1And_boss_facts(
     bob_cell = cellunit_shop(
         bob_str,
         bob_ancs,
-        event_int=e7,
+        event_num=e7,
         celldepth=2,
         beliefadjust=bob_beliefadjust,
         beliefevent_facts=dirty_facts,
@@ -216,7 +216,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1And_boss_facts(
     bob_sue_cell = cellunit_shop(
         bob_str,
         bob_sue_ancs,
-        event_int=e7,
+        event_num=e7,
         celldepth=0,
         beliefadjust=bob_sue_beliefadjust,
     )
@@ -267,7 +267,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario4_Depth3And_boss_facts(
     bob_cell = cellunit_shop(
         bob_str,
         bob_ancs,
-        event_int=e7,
+        event_num=e7,
         celldepth=4,
         beliefadjust=bob_beliefadjust,
         beliefevent_facts=dirty_facts,
@@ -330,7 +330,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario5_Depth2And_boss_facts(
     bob_cell = cellunit_shop(
         bob_str,
         bob_ancs,
-        event_int=e7,
+        event_num=e7,
         celldepth=2,
         beliefadjust=bob_beliefadjust,
         beliefevent_facts=dirty_facts,
@@ -395,7 +395,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachC
     bob_cell = cellunit_shop(
         bob_str,
         bob_ancs,
-        event_int=e7,
+        event_num=e7,
         celldepth=3,
         beliefadjust=bob_beliefadjust,
         beliefevent_facts=dirty_facts,
@@ -460,7 +460,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario7_NoCell_GetBeliefEvent(
     bob_cell = cellunit_shop(
         bob_str,
         bob_ancs,
-        event_int=e7,
+        event_num=e7,
         celldepth=4,
         beliefadjust=bob_beliefadjust,
         beliefevent_facts=dirty_facts,

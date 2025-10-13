@@ -81,10 +81,10 @@ def get_beliefevent_obj(
     moment_mstr_dir: str,
     moment_label: LabelTerm,
     belief_name: BeliefName,
-    event_int: int,
+    event_num: int,
 ) -> BeliefUnit:
     beliefevent_json_path = create_beliefevent_path(
-        moment_mstr_dir, moment_label, belief_name, event_int
+        moment_mstr_dir, moment_label, belief_name, event_num
     )
     return open_belief_file(beliefevent_json_path)
 
@@ -100,40 +100,40 @@ def collect_belief_event_dir_sets(
         events_dir = create_path(belief_dir, "events")
         set_dir(events_dir)
         belief_events_dirs = {
-            int(event_int_folder)
-            for event_int_folder in os_listdir(events_dir)
-            if os_path_isdir(create_path(events_dir, event_int_folder))
+            int(event_num_folder)
+            for event_num_folder in os_listdir(events_dir)
+            if os_path_isdir(create_path(events_dir, event_num_folder))
         }
         x_dict[belief_name] = belief_events_dirs
     return x_dict
 
 
-def get_beliefs_downhill_event_ints(
+def get_beliefs_downhill_event_nums(
     belief_events_sets: dict[BeliefName, set[EventInt]],
     downhill_beliefs: set[BeliefName] = None,
-    ref_event_int: EventInt = None,
+    ref_event_num: EventInt = None,
 ) -> dict[BeliefName, EventInt]:
     x_dict = {}
     if downhill_beliefs:
         for belief_name in downhill_beliefs:
             if event_set := belief_events_sets.get(belief_name):
-                _add_downhill_event_int(x_dict, event_set, ref_event_int, belief_name)
+                _add_downhill_event_num(x_dict, event_set, ref_event_num, belief_name)
     else:
         for belief_name, event_set in belief_events_sets.items():
-            _add_downhill_event_int(x_dict, event_set, ref_event_int, belief_name)
+            _add_downhill_event_num(x_dict, event_set, ref_event_num, belief_name)
     return x_dict
 
 
-def _add_downhill_event_int(
+def _add_downhill_event_num(
     x_dict: dict[BeliefName, EventInt],
     event_set: set[EventInt],
-    ref_event_int: EventInt,
+    ref_event_num: EventInt,
     downhill_belief: BeliefName,
 ):
     if event_set:
-        if ref_event_int:
-            if downhill_event_ints := {ei for ei in event_set if ei <= ref_event_int}:
-                x_dict[downhill_belief] = max(downhill_event_ints)
+        if ref_event_num:
+            if downhill_event_nums := {ei for ei in event_set if ei <= ref_event_num}:
+                x_dict[downhill_belief] = max(downhill_event_nums)
         else:
             x_dict[downhill_belief] = max(event_set)
 
@@ -142,7 +142,7 @@ def save_arbitrary_beliefevent(
     moment_mstr_dir: str,
     moment_label: str,
     belief_name: str,
-    event_int: int,
+    event_num: int,
     voices: list[list] = None,
     facts: list[tuple[RopeTerm, RopeTerm, float, float]] = None,
 ) -> str:
@@ -164,7 +164,7 @@ def save_arbitrary_beliefevent(
             x_reason_context, x_fact_state, x_fact_lower, x_fact_upper, True
         )
     x_beliefevent_path = create_beliefevent_path(
-        moment_mstr_dir, moment_label, belief_name, event_int
+        moment_mstr_dir, moment_label, belief_name, event_num
     )
     save_json(x_beliefevent_path, None, x_beliefunit.to_dict())
     return x_beliefevent_path
@@ -175,7 +175,7 @@ def cellunit_add_json_file(
     moment_label: str,
     time_belief_name: str,
     bud_time: int,
-    event_int: int,
+    event_num: int,
     bud_ancestors: list[BeliefName] = None,
     quota: int = None,
     celldepth: int = None,
@@ -185,7 +185,7 @@ def cellunit_add_json_file(
         moment_mstr_dir, moment_label, time_belief_name, bud_time, bud_ancestors
     )
     x_cell = cellunit_shop(
-        time_belief_name, bud_ancestors, event_int, celldepth, money_grain, quota
+        time_belief_name, bud_ancestors, event_num, celldepth, money_grain, quota
     )
     cellunit_save_to_dir(cell_dir, x_cell)
 

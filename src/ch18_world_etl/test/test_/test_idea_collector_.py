@@ -87,7 +87,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_TranslateSheetNames(
     ex_filename = "Faybob.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
     idea_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.cumulative_minute,
         wx.moment_label,
@@ -126,7 +126,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     ex_filename = "Faybob.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
     idea_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.cumulative_minute,
         wx.moment_label,
@@ -135,7 +135,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     row1 = [event1, sue_str, minute_360, amy23_str, hour6am]
     row2 = [event1, sue_str, minute_420, amy23_str, hour7am]
     incomplete_idea_columns = [
-        wx.event_int,
+        wx.event_num,
         wx.face_name,
         wx.cumulative_minute,
         wx.moment_label,

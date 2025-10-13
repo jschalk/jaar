@@ -37,7 +37,7 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_CheckMomentDimen():
             agg_columns = get_table_columns(cursor, agg_tablename)
             raw_columns = {raw_col for raw_col in raw_columns if raw_col[-3:] != "otx"}
             raw_columns.remove(f"{wx.face_name}_inx")
-            raw_columns.remove(wx.event_int)
+            raw_columns.remove(wx.event_num)
             raw_columns.remove(wx.error_message)
             raw_columns = get_default_sorted_list(raw_columns)
 
@@ -93,8 +93,8 @@ def test_get_insert_into_heard_raw_sqlstrs_ReturnsObj_BeliefDimensNeeded():
             v_raw_put_cols = get_default_sorted_list(v_raw_put_cols)
             v_raw_del_cols = get_default_sorted_list(v_raw_del_cols)
             v_raw_put_columns_str = ", ".join(v_raw_put_cols)
-            v_raw_put_cols.remove("translate_event_int")
-            v_raw_del_cols.remove("translate_event_int")
+            v_raw_put_cols.remove("translate_event_num")
+            v_raw_del_cols.remove("translate_event_num")
             v_raw_put_columns_str = ", ".join(v_raw_put_cols)
             v_raw_del_columns_str = ", ".join(v_raw_del_cols)
             v_agg_put_columns_str = ", ".join(v_agg_put_cols)
@@ -146,7 +146,7 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
         blrpern_h_raw_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrpern_h_raw_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_h_raw_put_tablename} (
-  {wx.event_int}
+  {wx.event_num}
 , {wx.face_name}_inx
 , {wx.moment_label}_inx
 , {wx.belief_name}_inx
@@ -174,7 +174,7 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 4
-        select_sqlstr = f"""SELECT {wx.event_int}
+        select_sqlstr = f"""SELECT {wx.event_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -216,7 +216,7 @@ def test_etl_heard_raw_tables_to_heard_agg_tables_PopulatesTable_Scenario0():
         blrpern_h_raw_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrpern_h_raw_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_h_raw_put_tablename} (
-  {wx.event_int}
+  {wx.event_num}
 , {wx.face_name}_inx
 , {wx.moment_label}_inx
 , {wx.belief_name}_inx
@@ -242,7 +242,7 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 4
-        select_sqlstr = f"""SELECT {wx.event_int}
+        select_sqlstr = f"""SELECT {wx.event_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}

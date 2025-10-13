@@ -26,7 +26,7 @@ def test_TranslateUnit_to_dict_ReturnsObj_Scenario0():
     print(sue_dict)
     assert sue_dict
     assert sue_dict.get(wx.face_name) == sue_str
-    assert sue_dict.get(wx.event_int) == sue_translateunit.event_int
+    assert sue_dict.get(wx.event_num) == sue_translateunit.event_num
     assert sue_dict.get(wx.otx_knot) == default_knot_if_None()
     assert sue_dict.get(wx.inx_knot) == default_knot_if_None()
     assert sue_dict.get(wx.unknown_str) == default_unknown_str_if_None()
@@ -75,13 +75,13 @@ def test_TranslateUnit_to_dict_ReturnsObj_Scenario1():
 def test_get_translateunit_from_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
-    sue_event_int = 7
+    sue_event_num = 7
     x_unknown_str = "UnknownTerm"
     slash_otx_knot = "/"
     colon_inx_knot = ":"
     sue_translateunit = translateunit_shop(
         sue_str,
-        sue_event_int,
+        sue_event_num,
         slash_otx_knot,
         colon_inx_knot,
         x_unknown_str,
@@ -97,7 +97,7 @@ def test_get_translateunit_from_dict_ReturnsObj():
     # THEN
     assert gen_translateunit
     assert gen_translateunit.face_name == sue_str
-    assert gen_translateunit.event_int == sue_event_int
+    assert gen_translateunit.event_num == sue_event_num
     assert gen_translateunit.otx_knot == slash_otx_knot
     assert gen_translateunit.inx_knot == colon_inx_knot
     assert gen_translateunit.unknown_str == x_unknown_str

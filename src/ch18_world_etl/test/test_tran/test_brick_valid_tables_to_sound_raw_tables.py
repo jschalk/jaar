@@ -31,7 +31,7 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
 
         br00117_valid_tablename = f"br00117_{wx.brick_valid}"
         br00117_columns = [
-            wx.event_int,
+            wx.event_num,
             wx.face_name,
             wx.moment_label,
             wx.belief_name,
@@ -41,7 +41,7 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
         ]
         create_idea_sorted_table(cursor, br00117_valid_tablename, set(br00117_columns))
         insert_into_clause = f"""INSERT INTO {br00117_valid_tablename} (
-  {wx.event_int}
+  {wx.event_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -59,7 +59,7 @@ VALUES
 
         br00045_valid_tablename = f"br00045_{wx.brick_valid}"
         br00045_columns = [
-            wx.event_int,
+            wx.event_num,
             wx.face_name,
             wx.otx_rope,
             wx.inx_rope,
@@ -69,7 +69,7 @@ VALUES
         ]
         create_idea_sorted_table(cursor, br00045_valid_tablename, br00045_columns)
         insert_into_clause = f"""INSERT INTO {br00045_valid_tablename} (
-  {wx.event_int}
+  {wx.event_num}
 , {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
