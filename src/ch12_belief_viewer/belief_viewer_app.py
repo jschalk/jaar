@@ -3,8 +3,8 @@ from src.ch08_epoch.epoch_main import (
     add_newepoch_planunit,
     get_default_epoch_config_dict,
 )
-from src.ch22_belief_viewer.belief_viewer__tool import get_belief_view_dict
-from src.ch22_belief_viewer.example22_beliefs import (
+from src.ch12_belief_viewer.belief_viewer__tool import get_belief_view_dict
+from src.ch12_belief_viewer.example22_beliefs import (
     get_beliefunit_irrational_example,
     get_sue_belief_with_facts_and_reasons,
     get_sue_beliefunit,

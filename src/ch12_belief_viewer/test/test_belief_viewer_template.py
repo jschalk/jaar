@@ -1,5 +1,5 @@
-from src.ch22_belief_viewer.belief_viewer_app import get_belief_viewer_template
-from src.ref.keywords import Ch22Keywords as wx
+from src.ch12_belief_viewer.belief_viewer_app import get_belief_viewer_template
+from src.ref.keywords import Ch12Keywords as wx
 
 
 def test_get_belief_viewer_template_ReturnsObj():

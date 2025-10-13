@@ -15,6 +15,7 @@ What does each one do?
 - **ch09_belief_atom**: Defines BeliefAtoms: Irreducible units of change for a BeliefUnit.
 - **ch10_pack**: Defines packs which are collections of BeliefAtoms by FaceName
 - **ch11_bud**: Defines BeliefBudHistory: BeliefName, BudUnits (epochpoint, quota, celldepth)
+- **ch12_belief_viewer**: Tools for Visualizing BeliefUnits
 - **ch13_belief_listen**: These tools describe how one BeliefUnit listens to another.
 - **ch14_keep**: Builds a simulation that describes how much credit a healer has earned.
 - **ch15_moment**: Defines MomentUnits: common time tech, ledger, VoiceNames, history of BeliefUnits.
@@ -24,5 +25,4 @@ What does each one do?
 - **ch19_world_kpi**: Defines the analytics outcomes of completed MomentUnits.
 - **ch20_world_logic**: Defines WorldUnits that admin MomentUnits input data and outcomes
 - **ch21_lobby**: Defines Lobby Tools for gifts, World Scenarios.
-- **ch22_belief_viewer**: Tools for Visualizing BeliefUnits
 - **ch98_docs_builder**: Defines Tools that create Jaar documentation.
