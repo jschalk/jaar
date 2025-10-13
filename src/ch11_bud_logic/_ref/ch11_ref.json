@@ -1,6 +1,0 @@
-{
-  "chapter_blurb": "Defines BeliefBudHistory: BeliefName, BudUnits (epochpoint, quota, celldepth)", 
-  "chapter_content": "Defines a budget and the tools necessary to create one. Budgets are created when a beliefunit is empowered with funds that must be distributed", 
-  "chapter_description": "ch11_bud_logic", 
-  "chapter_number": 11
-}

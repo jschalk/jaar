@@ -1,14 +1,10 @@
 from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.db_toolbox import (
-    create_select_query,
-    db_table_exists,
-    get_row_count,
-)
-from src.ch01_data_toolbox.file_toolbox import open_json
+from src.ch01_py.db_toolbox import create_select_query, db_table_exists, get_row_count
+from src.ch01_py.file_toolbox import open_json
 from src.ch12_pack_file._ref.ch12_path import create_moment_json_path
-from src.ch15_moment_logic.moment_config import get_moment_dimens
-from src.ch15_moment_logic.moment_main import get_momentunit_from_dict
+from src.ch15_moment.moment_config import get_moment_dimens
+from src.ch15_moment.moment_main import get_momentunit_from_dict
 from src.ch18_world_etl.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,

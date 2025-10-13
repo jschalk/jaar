@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template_string
-from src.ch08_epoch_logic.epoch_main import (
+from src.ch08_epoch.epoch_main import (
     add_newepoch_planunit,
     get_default_epoch_config_dict,
 )

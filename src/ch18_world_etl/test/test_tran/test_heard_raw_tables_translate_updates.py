@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.db_toolbox import get_table_columns
+from src.ch01_py.db_toolbox import get_table_columns
 from src.ch18_world_etl.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_heard_tables,

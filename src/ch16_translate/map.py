@@ -1,6 +1,6 @@
 from copy import copy as copy_copy
 from dataclasses import dataclass
-from src.ch01_data_toolbox.dict_toolbox import (
+from src.ch01_py.dict_toolbox import (
     get_0_if_None,
     get_empty_dict_if_None,
     get_str_in_sub_dict,
@@ -10,7 +10,7 @@ from src.ch01_data_toolbox.dict_toolbox import (
     str_in_dict_keys,
     str_in_dict_values,
 )
-from src.ch02_rope_logic.rope import (
+from src.ch02_rope.rope import (
     create_rope,
     create_rope_from_labels,
     get_all_rope_labels,

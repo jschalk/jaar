@@ -1,12 +1,12 @@
 from os.path import exists as os_path_exists
-from src.ch01_data_toolbox.file_toolbox import count_files, create_path, save_json
-from src.ch08_epoch_logic.epoch_main import epochunit_shop
-from src.ch08_epoch_logic.test._util.ch08_examples import (
+from src.ch01_py.file_toolbox import count_files, create_path, save_json
+from src.ch08_epoch.epoch_main import epochunit_shop
+from src.ch08_epoch.test._util.ch08_examples import (
     get_creg_config,
     get_expected_creg_year0_markdown,
 )
 from src.ch12_pack_file._ref.ch12_path import create_moment_json_path
-from src.ch15_moment_logic.moment_main import momentunit_shop
+from src.ch15_moment.moment_main import momentunit_shop
 from src.ch19_world_kpi.kpi_mstr import create_calendar_markdown_files
 from src.ch19_world_kpi.test._util.ch19_env import (
     env_dir_setup_cleanup,

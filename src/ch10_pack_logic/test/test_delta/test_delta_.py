@@ -1,9 +1,9 @@
 from pytest import raises as pytest_raises
-from src.ch01_data_toolbox.dict_toolbox import x_is_json
-from src.ch02_rope_logic.rope import create_rope, to_rope
-from src.ch04_voice_logic.voice import voiceunit_shop
+from src.ch01_py.dict_toolbox import x_is_json
+from src.ch02_rope.rope import create_rope, to_rope
+from src.ch04_voice.voice import voiceunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
+from src.ch09_belief_atom.atom_main import beliefatom_shop
 from src.ch10_pack_logic.delta import (
     BeliefDelta,
     belief_built_from_delta_is_valid,

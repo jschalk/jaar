@@ -1,15 +1,16 @@
 from copy import deepcopy as copy_deepcopy
 from pytest import raises as pytest_raises
-from src.ch01_data_toolbox.file_toolbox import (
+from src.ch01_py.file_toolbox import (
     create_path,
     delete_dir,
     get_dir_file_strs,
     get_json_filename,
     open_file,
+    open_json,
     save_file,
     set_dir,
 )
-from src.ch10_pack_logic.pack import init_pack_id, packunit_shop
+from src.ch10_pack_logic.pack_main import init_pack_id, packunit_shop
 from src.ch12_pack_file.packfilehandler import (
     open_gut_file,
     packfilehandler_shop,
@@ -99,8 +100,8 @@ def test_PackFileHandler_save_pack_file_SaveCorrectObj(env_dir_setup_cleanup):
     # THEN
     assert sue_packfilehandler.hub_pack_file_exists(two_int)
     assert sue_packfilehandler.hub_pack_file_exists(six_int) is False
-    two_file_json = open_file(sue_packfilehandler._packs_dir, two_filename)
-    assert two_file_json == sue_packunit.get_deltametric_json()
+    two_file_dict = open_json(sue_packfilehandler._packs_dir, two_filename)
+    assert two_file_dict == sue_packunit.get_deltametric_dict()
 
 
 def test_PackFileHandler_save_pack_file_RaisesErrorIfPackUnit_atoms_dir_IsWrong(

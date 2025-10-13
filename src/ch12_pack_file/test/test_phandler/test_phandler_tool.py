@@ -1,14 +1,14 @@
 from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
-from src.ch01_data_toolbox.file_toolbox import create_path, open_json, set_dir
-from src.ch02_rope_logic.rope import create_rope
+from src.ch01_py.file_toolbox import create_path, open_json, set_dir
+from src.ch02_rope.rope import create_rope
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.test._util.ch07_examples import (
     get_beliefunit_irrational_example,
     get_beliefunit_with_4_levels,
 )
-from src.ch11_bud_logic.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
-from src.ch11_bud_logic.test._util.ch11_examples import (
+from src.ch11_bud.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
+from src.ch11_bud.test._util.ch11_examples import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
     example_sky_blue_factunit as sky_blue_factunit,

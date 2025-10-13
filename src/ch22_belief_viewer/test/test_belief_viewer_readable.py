@@ -1,5 +1,5 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_epoch_logic.reason_str_func import (
+from src.ch08_epoch.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )

@@ -1,4 +1,4 @@
-from src.ch04_voice_logic.group import groupunit_shop
+from src.ch04_voice.group import groupunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 
 

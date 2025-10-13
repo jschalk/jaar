@@ -1,4 +1,4 @@
-from src.ch06_plan_logic._ref.ch06_semantic_types import (
+from src.ch06_plan._ref.ch06_semantic_types import (
     FirstLabel,
     FundGrain,
     FundNum,

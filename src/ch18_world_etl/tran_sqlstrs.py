@@ -1,5 +1,5 @@
 from sqlite3 import Connection as sqlite3_Connection
-from src.ch01_data_toolbox.db_toolbox import (
+from src.ch01_py.db_toolbox import (
     create_table2table_agg_insert_query,
     create_update_inconsistency_error_query,
 )

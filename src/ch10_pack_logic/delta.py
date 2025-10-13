@@ -1,20 +1,19 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
-from src.ch01_data_toolbox.dict_toolbox import (
+from src.ch01_py.dict_toolbox import (
     get_0_if_None,
     get_all_nondictionary_objs,
     get_empty_dict_if_None,
     get_from_nested_dict,
-    get_json_from_dict,
     set_in_nested_dict,
 )
-from src.ch04_voice_logic.group import MemberShip
-from src.ch04_voice_logic.voice import MemberShip, VoiceName, VoiceUnit
-from src.ch05_reason_logic.reason import FactUnit, ReasonUnit
-from src.ch06_plan_logic.plan import PlanUnit
+from src.ch04_voice.group import MemberShip
+from src.ch04_voice.voice import MemberShip, VoiceName, VoiceUnit
+from src.ch05_reason.reason import FactUnit, ReasonUnit
+from src.ch06_plan.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.ch09_belief_atom_logic.atom_config import CRUD_command
-from src.ch09_belief_atom_logic.atom_main import (
+from src.ch09_belief_atom.atom_config import CRUD_command
+from src.ch09_belief_atom.atom_main import (
     BeliefAtom,
     InvalidBeliefAtomException,
     beliefatom_shop,

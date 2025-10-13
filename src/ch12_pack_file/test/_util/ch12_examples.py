@@ -1,12 +1,12 @@
-from src.ch02_rope_logic.rope import RopeTerm, create_rope, create_rope_from_labels
-from src.ch09_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
-from src.ch10_pack_logic.pack import PackUnit, packunit_shop
+from src.ch02_rope.rope import RopeTerm, create_rope, create_rope_from_labels
+from src.ch09_belief_atom.atom_main import BeliefAtom, beliefatom_shop
+from src.ch10_pack_logic.pack_main import PackUnit, packunit_shop
 from src.ch10_pack_logic.test._util.ch10_examples import (
     get_atom_example_planunit_ball,
     get_atom_example_planunit_knee,
     get_atom_example_planunit_sports,
 )
-from src.ch11_bud_logic.bud import BudUnit, budunit_shop
+from src.ch11_bud.bud_main import BudUnit, budunit_shop
 from src.ch12_pack_file._ref.ch12_semantic_types import LabelTerm
 from src.ref.ch12_keywords import Ch12Keywords as wx
 

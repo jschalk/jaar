@@ -2,8 +2,8 @@ from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from os import listdir as os_listdir
 from os.path import exists as os_path_exists, isdir as os_path_isdir
-from src.ch01_data_toolbox.dict_toolbox import get_empty_list_if_None
-from src.ch01_data_toolbox.file_toolbox import (
+from src.ch01_py.dict_toolbox import get_empty_list_if_None
+from src.ch01_py.file_toolbox import (
     create_path,
     delete_dir,
     get_dict_from_json,
@@ -15,27 +15,27 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_json,
     set_dir,
 )
-from src.ch02_rope_logic.rope import validate_labelterm
-from src.ch03_allot_toolbox.allot import default_grain_num_if_None, validate_pool_num
+from src.ch02_rope.rope import validate_labelterm
+from src.ch03_allot.allot import default_grain_num_if_None, validate_pool_num
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
     get_beliefunit_from_dict,
 )
-from src.ch09_belief_atom_logic.atom_main import (
+from src.ch09_belief_atom.atom_main import (
     BeliefAtom,
     get_beliefatom_from_dict,
     modify_belief_with_beliefatom,
 )
-from src.ch10_pack_logic.pack import (
+from src.ch10_pack_logic.pack_main import (
     PackUnit,
     create_packunit_from_files,
     get_init_pack_id_if_None,
     init_pack_id,
     packunit_shop,
 )
-from src.ch11_bud_logic.bud import BudUnit, EpochPoint, get_budunit_from_dict
-from src.ch11_bud_logic.cell import CellUnit, cellunit_get_from_dict, cellunit_shop
+from src.ch11_bud.bud_main import BudUnit, EpochPoint, get_budunit_from_dict
+from src.ch11_bud.cell import CellUnit, cellunit_get_from_dict, cellunit_shop
 from src.ch12_pack_file._ref.ch12_path import (
     CELLNODE_FILENAME,
     create_atoms_dir_path,

@@ -1,6 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.db_toolbox import get_row_count, get_table_columns
-from src.ch15_moment_logic.moment_config import get_moment_dimens
+from src.ch01_py.db_toolbox import get_row_count, get_table_columns
+from src.ch15_moment.moment_config import get_moment_dimens
 from src.ch17_idea.idea_config import get_default_sorted_list, get_idea_config_dict
 from src.ch18_world_etl.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,

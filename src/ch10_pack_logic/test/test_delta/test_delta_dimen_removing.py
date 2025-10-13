@@ -1,4 +1,4 @@
-from src.ch06_plan_logic.plan import planunit_shop
+from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch10_pack_logic.delta import beliefdelta_shop, get_dimens_cruds_beliefdelta
 from src.ref.ch10_keywords import Ch10Keywords as wx

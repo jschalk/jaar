@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
-from src.ch01_data_toolbox.file_toolbox import create_path
-from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch03_allot_toolbox.allot import default_grain_num_if_None, validate_pool_num
+from src.ch01_py.file_toolbox import create_path
+from src.ch02_rope.rope import default_knot_if_None
+from src.ch03_allot.allot import default_grain_num_if_None, validate_pool_num
 from src.ch12_pack_file._ref.ch12_path import create_belief_dir_path
 from src.ch12_pack_file.packfilehandler import PackFileHandler, packfilehandler_shop
 from src.ch12_pack_file.test._util.ch12_env import get_chapter_temp_dir
@@ -26,7 +26,7 @@ def test_PackFileHandler_Exists():
 
 def test_packfilehandler_shop_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = "src/ch15_moment_logic/test/_util"
+    x_moment_mstr_dir = "src/ch15_moment/test/_util"
     x_moment_label = "amy45"
     sue_str = "Sue"
     x_knot = "/"

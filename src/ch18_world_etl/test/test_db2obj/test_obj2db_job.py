@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch01_data_toolbox.db_toolbox import create_insert_query
+from src.ch01_py.db_toolbox import create_insert_query
 from src.ch07_belief_logic.belief_config import get_belief_calc_dimen_args
 from src.ch18_world_etl.db_obj_belief_tool import (
     create_beliefunit_metrics_insert_sqlstr,

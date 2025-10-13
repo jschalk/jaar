@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch15_moment_logic.moment_main import get_momentunit_from_dict
+from src.ch15_moment.moment_main import get_momentunit_from_dict
 from src.ch18_world_etl.db_obj_moment_tool import get_moment_dict_from_heard_tables
 from src.ch18_world_etl.tran_sqlstrs import (
     create_prime_tablename,

@@ -1,5 +1,5 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
+from src.ch09_belief_atom.atom_main import beliefatom_shop
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.legible import create_legible_list
 from src.ref.ch10_keywords import Ch10Keywords as wx

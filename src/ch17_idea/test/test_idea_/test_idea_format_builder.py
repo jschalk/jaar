@@ -1,5 +1,5 @@
-from src.ch01_data_toolbox.file_toolbox import save_json
-from src.ch09_belief_atom_logic.atom_config import get_atom_config_args
+from src.ch01_py.file_toolbox import save_json
+from src.ch09_belief_atom.atom_config import get_atom_config_args
 from src.ch17_idea._ref.ch17_doc_builder import (
     get_brick_formats_md,
     get_idea_brick_md,

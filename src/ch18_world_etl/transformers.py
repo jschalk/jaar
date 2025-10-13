@@ -2,8 +2,8 @@ from copy import copy as copy_copy, deepcopy as copy_deepcopy
 from os.path import exists as os_path_exists
 from pandas import read_excel as pandas_read_excel
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
-from src.ch01_data_toolbox.csv_toolbox import open_csv_with_types
-from src.ch01_data_toolbox.db_toolbox import (
+from src.ch01_py.csv_toolbox import open_csv_with_types
+from src.ch01_py.db_toolbox import (
     _get_grouping_groupby_clause,
     create_insert_into_clause_str,
     create_select_query,
@@ -19,7 +19,7 @@ from src.ch01_data_toolbox.db_toolbox import (
     get_table_columns,
     save_to_split_csvs,
 )
-from src.ch01_data_toolbox.file_toolbox import (
+from src.ch01_py.file_toolbox import (
     create_path,
     get_level1_dirs,
     open_file,
@@ -28,11 +28,15 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_json,
 )
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.ch09_belief_atom_logic.atom_config import get_belief_dimens
-from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
+from src.ch09_belief_atom.atom_config import get_belief_dimens
+from src.ch09_belief_atom.atom_main import beliefatom_shop
 from src.ch10_pack_logic.delta import get_minimal_beliefdelta
-from src.ch10_pack_logic.pack import PackUnit, get_packunit_from_dict, packunit_shop
-from src.ch11_bud_logic.bud import TranBook
+from src.ch10_pack_logic.pack_main import (
+    PackUnit,
+    get_packunit_from_dict,
+    packunit_shop,
+)
+from src.ch11_bud.bud_main import TranBook
 from src.ch12_pack_file._ref.ch12_path import (
     create_belief_event_dir_path,
     create_beliefevent_path,
@@ -46,14 +50,14 @@ from src.ch12_pack_file.packfilehandler import (
     open_belief_file,
     open_job_file,
 )
-from src.ch15_moment_logic.moment_cell import (
+from src.ch15_moment.moment_cell import (
     create_bud_mandate_ledgers,
     create_moment_beliefs_cell_trees,
     set_cell_tree_cell_mandates,
     set_cell_trees_decrees,
     set_cell_trees_found_facts,
 )
-from src.ch15_moment_logic.moment_main import get_default_path_momentunit
+from src.ch15_moment.moment_main import get_default_path_momentunit
 from src.ch16_translate.translate_config import (
     get_quick_translates_column_ref,
     get_translate_args_class_types,

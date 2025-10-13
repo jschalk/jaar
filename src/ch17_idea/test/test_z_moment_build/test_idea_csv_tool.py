@@ -1,10 +1,10 @@
 from copy import deepcopy as copy_deepcopy
-from src.ch01_data_toolbox.file_toolbox import create_path
-from src.ch02_rope_logic.rope import to_rope
-from src.ch04_voice_logic.group import awardunit_shop
+from src.ch01_py.file_toolbox import create_path
+from src.ch02_rope.rope import to_rope
+from src.ch04_voice.group import awardunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch10_pack_logic.delta import beliefdelta_shop
-from src.ch10_pack_logic.pack import packunit_shop
+from src.ch10_pack_logic.pack_main import packunit_shop
 from src.ch17_idea.idea_csv_tool import (
     add_belief_to_br00020_csv,
     add_belief_to_br00021_csv,

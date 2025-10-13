@@ -1,14 +1,14 @@
-from src.ch01_data_toolbox.dict_toolbox import create_csv
-from src.ch03_allot_toolbox.allot import allot_scale
-from src.ch04_voice_logic.group import AwardUnit, MemberShip
-from src.ch04_voice_logic.voice import VoiceUnit, calc_give_take_net
-from src.ch05_reason_logic.reason import (
+from src.ch01_py.dict_toolbox import create_csv
+from src.ch03_allot.allot import allot_scale
+from src.ch04_voice.group import AwardUnit, MemberShip
+from src.ch04_voice.voice import VoiceUnit, calc_give_take_net
+from src.ch05_reason.reason import (
     CaseUnit,
     FactUnit,
     ReasonUnit,
     get_factunits_from_dict,
 )
-from src.ch06_plan_logic.plan import PlanUnit
+from src.ch06_plan.plan import PlanUnit
 from src.ch07_belief_logic._ref.ch07_semantic_types import (
     FundNum,
     RespectNum,

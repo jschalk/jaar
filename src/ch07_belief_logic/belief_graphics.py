@@ -3,14 +3,14 @@ from plotly.graph_objects import (
     Scatter as plotly_Scatter,
     Table as plotly_Table,
 )
-from src.ch01_data_toolbox.plotly_toolbox import (
+from src.ch01_py.plotly_toolbox import (
     add_keep__rect,
     add_rect_arrow,
     add_simp_rect,
     conditional_fig_show,
 )
-from src.ch02_rope_logic.rope import RopeTerm, get_parent_rope, is_sub_rope
-from src.ch06_plan_logic.plan import PlanUnit
+from src.ch02_rope.rope import RopeTerm, get_parent_rope, is_sub_rope
+from src.ch06_plan.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch07_belief_logic.belief_report import (
     get_belief_agenda_dataframe,

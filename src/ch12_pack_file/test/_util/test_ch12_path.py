@@ -1,8 +1,6 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
-from pytest import raises as pytest_raises
-from src.ch01_data_toolbox.file_toolbox import create_path, get_json_filename
-from src.ch02_rope_logic.rope import create_rope, create_rope_from_labels
+from src.ch01_py.file_toolbox import create_path
 from src.ch12_pack_file._ref.ch12_path import (
     BELIEFEVENT_FILENAME,
     BELIEFPOINT_FILENAME,

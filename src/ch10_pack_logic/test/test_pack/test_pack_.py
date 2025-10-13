@@ -1,11 +1,11 @@
 from pytest import raises as pytest_raises
-from src.ch01_data_toolbox.dict_toolbox import get_json_from_dict, x_is_json
-from src.ch04_voice_logic.voice import voiceunit_shop
+from src.ch01_py.dict_toolbox import get_json_from_dict
+from src.ch04_voice.voice import voiceunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_default_moment_label
-from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
+from src.ch09_belief_atom.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_semantic_types import FaceName, default_knot_if_None
 from src.ch10_pack_logic.delta import beliefdelta_shop
-from src.ch10_pack_logic.pack import (
+from src.ch10_pack_logic.pack_main import (
     PackUnit,
     get_init_pack_id_if_None,
     get_packunit_from_dict,
@@ -448,26 +448,6 @@ def test_PackUnit_get_deltametric_dict_ReturnsObj():
     assert x_dict.get(delta_min_str) is None
     delta_max_str = "delta_max"
     assert x_dict.get(delta_max_str) is None
-
-
-def test_PackUnit_get_deltametric_json_ReturnsObj():
-    # ESTABLISH
-    bob_str = "Bob"
-    sue_str = "Sue"
-    yao_str = "Yao"
-    sue_beliefdelta = get_beliefdelta_sue_example()
-    x_delta_start = 7
-    bob_packunit = packunit_shop(bob_str)
-    bob_packunit.set_beliefdelta(sue_beliefdelta)
-    bob_packunit.set_delta_start(x_delta_start)
-    bob_packunit.set_face(sue_str)
-    bob_packunit.set_face(yao_str)
-
-    # WHEN
-    delta_json = bob_packunit.get_deltametric_json()
-
-    # THEN
-    assert x_is_json(delta_json)
 
 
 def test_PackUnit_add_p_beliefatom_Sets_BeliefUnit_voiceunits():

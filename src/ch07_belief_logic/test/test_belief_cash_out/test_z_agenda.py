@@ -1,7 +1,6 @@
-from src.ch01_data_toolbox.file_toolbox import get_json_from_dict
-from src.ch02_rope_logic.rope import RopeTerm
-from src.ch04_voice_logic.labor import laborunit_shop
-from src.ch06_plan_logic.plan import PlanUnit, planunit_shop
+from src.ch02_rope.rope import RopeTerm
+from src.ch04_voice.labor import laborunit_shop
+from src.ch06_plan.plan import PlanUnit, planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_beliefunit_from_dict
 from src.ch07_belief_logic.test._util.ch07_examples import (
     beliefunit_v001,

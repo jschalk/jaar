@@ -1,4 +1,4 @@
-from src.ch01_data_toolbox.file_toolbox import create_path
+from src.ch01_py.file_toolbox import create_path
 from src.ch17_idea.test._util.ch17_env import (
     get_chapter_temp_dir,
     idea_moments_dir,

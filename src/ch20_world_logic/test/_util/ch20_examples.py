@@ -1,5 +1,5 @@
 from src.ch07_belief_logic.belief_main import BeliefUnit
-from src.ch15_moment_logic.test._util.ch15_examples import _example_empty_bob_beliefunit
+from src.ch15_moment.test._util.ch15_examples import _example_empty_bob_beliefunit
 
 
 def get_mop_with_no_reason_beliefunit_example() -> BeliefUnit:
