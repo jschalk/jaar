@@ -59,14 +59,6 @@ def set_in_nested_dict(x_dict: dict, x_keylist: list[any], x_obj: any):
     last_dict[last_key] = x_obj
 
 
-def x_is_json(x_json: str) -> bool:
-    try:
-        get_dict_from_json(x_json)
-    except ValueError as e:
-        return False
-    return True
-
-
 class NestedValueException(Exception):
     pass
 

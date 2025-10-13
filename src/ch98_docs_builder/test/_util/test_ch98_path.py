@@ -38,11 +38,12 @@ def test_create_keywords_class_file_path_HasDocString():
 
 def test_create_keywords_classes_file_path_ReturnsObj():
     # ESTABLISH
-    ref_dir = create_path("src", "ref")
+    src_dir = "src"
+    ref_dir = create_path(src_dir, "ref")
     expected_keywords_file_path = create_path(ref_dir, "keywords.py")
 
     # WHEN
-    keywords_class_file_path = create_keywords_classes_file_path()
+    keywords_class_file_path = create_keywords_classes_file_path(src_dir)
 
     # THEN
     assert keywords_class_file_path
@@ -52,7 +53,7 @@ def test_create_keywords_classes_file_path_ReturnsObj():
 
 def test_create_keywords_classes_file_path_HasDocString():
     # ESTABLISH
-    doc_str = create_keywords_classes_file_path()
+    doc_str = create_keywords_classes_file_path("src")
     doc_str = f"Returns path: {doc_str}"
     print(f"{doc_str=}")
     # WHEN / THEN

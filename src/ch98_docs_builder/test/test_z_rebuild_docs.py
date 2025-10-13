@@ -2,9 +2,12 @@ from random import random as random_random
 from src.ch01_py.file_toolbox import (
     create_path,
     get_dir_filenames,
+    open_file,
     open_json,
+    save_file,
     save_json,
 )
+from src.ch98_docs_builder._ref.ch98_path import create_keywords_classes_file_path
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_descs,
     save_brick_formats_md,
@@ -12,6 +15,9 @@ from src.ch98_docs_builder.doc_builder import (
     save_idea_brick_mds,
     save_keywords_by_chapter_md,
     save_ropeterm_explanation_md,
+)
+from src.ch98_docs_builder.keyword_class_builder import (
+    create_all_enum_keyword_classes_str,
 )
 
 
@@ -42,3 +48,14 @@ def test_SpecialTestThatBuildsDocs():
                 print(f"{x_dir} {x_filename=}")
                 json_dir = create_path(chapter_dir, x_dir)
                 save_json(json_dir, x_filename, open_json(json_dir, x_filename))
+
+    # save file for all Enum class references
+    keywords_classes_file_path = create_keywords_classes_file_path("src")
+    enum_classes_str = create_all_enum_keyword_classes_str()
+    current_classes_file_str = open_file(keywords_classes_file_path)
+    enum_classes_str = create_all_enum_keyword_classes_str()
+    save_file(keywords_classes_file_path, None, enum_classes_str)
+    assertion_failure_str = (
+        "Special case: keywords.py file was rebuilt, run test again."
+    )
+    assert enum_classes_str == current_classes_file_str, assertion_failure_str
