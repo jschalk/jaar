@@ -10,17 +10,17 @@ from src.ch01_py.file_toolbox import (
     save_file,
     set_dir,
 )
-from src.ch10_pack_logic.pack_main import init_pack_id, packunit_shop
-from src.ch12_pack_file.packfilehandler import (
+from src.ch10_pack_logic.pack_filehandler import (
     open_gut_file,
     packfilehandler_shop,
     save_gut_file,
 )
-from src.ch12_pack_file.test._util.ch12_env import (
+from src.ch10_pack_logic.pack_main import init_pack_id, packunit_shop
+from src.ch10_pack_logic.test._util.ch10_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as env_dir,
 )
-from src.ch12_pack_file.test._util.ch12_examples import (
+from src.ch10_pack_logic.test._util.ch10_examples import (
     get_atom_example_planunit_knee,
     get_sue_packunit,
     sue_1beliefatoms_packunit,

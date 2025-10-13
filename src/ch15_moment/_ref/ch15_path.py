@@ -1,5 +1,5 @@
 from src.ch01_py.file_toolbox import create_path
-from src.ch12_pack_file._ref.ch12_path import create_bud_dir_path
+from src.ch11_bud._ref.ch11_path import create_bud_dir_path
 from src.ch15_moment._ref.ch15_semantic_types import BeliefName, LabelTerm
 
 BUD_MANDATE_FILENAME = "bud_voice_mandate_ledger.json"

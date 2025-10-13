@@ -1,25 +1,23 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import create_path, get_dir_file_strs
-from src.ch12_pack_file.packfilehandler import packfilehandler_shop
-from src.ch12_pack_file.test._util.ch12_env import (
+from src.ch10_pack_logic.pack_filehandler import packfilehandler_shop
+from src.ch10_pack_logic.test._util.ch10_env import (
     env_dir_setup_cleanup,
-    get_chapter_temp_dir as moment_mstr_dir,
+    get_chapter_temp_dir as env_dir,
 )
-from src.ch12_pack_file.test._util.ch12_examples import (
+from src.ch10_pack_logic.test._util.ch10_examples import (
     get_atom_example_factunit_knee,
     get_atom_example_planunit_ball,
     get_atom_example_planunit_knee,
     get_atom_example_planunit_sports,
-    get_ch12_example_moment_label as moment_label,
+    get_ch10_example_moment_label as moment_label,
 )
 
 
 def test_PackFileHandler_atom_filename_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    yao_packfilehandler = packfilehandler_shop(
-        moment_mstr_dir(), moment_label(), yao_str
-    )
+    yao_packfilehandler = packfilehandler_shop(env_dir(), moment_label(), yao_str)
     one_int = 1
 
     # WHEN
@@ -32,9 +30,7 @@ def test_PackFileHandler_atom_filename_ReturnsObj():
 def test_PackFileHandler_atom_file_path_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    yao_packfilehandler = packfilehandler_shop(
-        moment_mstr_dir(), moment_label(), yao_str
-    )
+    yao_packfilehandler = packfilehandler_shop(env_dir(), moment_label(), yao_str)
     one_int = 1
 
     # WHEN
@@ -49,9 +45,7 @@ def test_PackFileHandler_atom_file_path_ReturnsObj():
 def test_PackFileHandler_save_valid_atom_file_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_packfilehandler = packfilehandler_shop(
-        moment_mstr_dir(), moment_label(), yao_str
-    )
+    yao_packfilehandler = packfilehandler_shop(env_dir(), moment_label(), yao_str)
     one_int = 1
     assert os_path_exists(yao_packfilehandler.atom_file_path(one_int)) is False
 
@@ -67,9 +61,7 @@ def test_PackFileHandler_save_valid_atom_file_SavesFile(env_dir_setup_cleanup):
 def test_PackFileHandler_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_packfilehandler = packfilehandler_shop(
-        moment_mstr_dir(), moment_label(), yao_str
-    )
+    yao_packfilehandler = packfilehandler_shop(env_dir(), moment_label(), yao_str)
     four_int = 4
     assert os_path_exists(yao_packfilehandler.atom_file_path(four_int)) is False
     assert yao_packfilehandler.h_atom_file_exists(four_int) is False
@@ -87,9 +79,7 @@ def test_PackFileHandler_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
 def test_PackFileHandler_delete_atom_file_DeletesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_packfilehandler = packfilehandler_shop(
-        moment_mstr_dir(), moment_label(), yao_str
-    )
+    yao_packfilehandler = packfilehandler_shop(env_dir(), moment_label(), yao_str)
     ten_int = 10
     yao_packfilehandler._save_valid_atom_file(get_atom_example_factunit_knee(), ten_int)
     assert yao_packfilehandler.h_atom_file_exists(ten_int)
@@ -104,9 +94,7 @@ def test_PackFileHandler_delete_atom_file_DeletesFile(env_dir_setup_cleanup):
 def test_PackFileHandler_get_max_atom_file_number_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_packfilehandler = packfilehandler_shop(
-        moment_mstr_dir(), moment_label(), yao_str
-    )
+    yao_packfilehandler = packfilehandler_shop(env_dir(), moment_label(), yao_str)
     ten_int = 10
     yao_packfilehandler._save_valid_atom_file(get_atom_example_factunit_knee(), ten_int)
     assert yao_packfilehandler.h_atom_file_exists(ten_int)
@@ -120,9 +108,7 @@ def test_PackFileHandler_get_max_atom_file_number_ReturnsObjWhenDirIsEmpty(
 ):
     # ESTABLISH
     yao_str = "Yao"
-    yao_packfilehandler = packfilehandler_shop(
-        moment_mstr_dir(), moment_label(), yao_str
-    )
+    yao_packfilehandler = packfilehandler_shop(env_dir(), moment_label(), yao_str)
 
     # WHEN / THEN
     assert yao_packfilehandler.get_max_atom_file_number() is None
@@ -131,9 +117,7 @@ def test_PackFileHandler_get_max_atom_file_number_ReturnsObjWhenDirIsEmpty(
 def test_PackFileHandler_get_next_atom_file_number_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_packfilehandler = packfilehandler_shop(
-        moment_mstr_dir(), moment_label(), yao_str
-    )
+    yao_packfilehandler = packfilehandler_shop(env_dir(), moment_label(), yao_str)
     # WHEN / THEN
     assert yao_packfilehandler._get_next_atom_file_number() == 0
 
@@ -148,9 +132,7 @@ def test_PackFileHandler_get_next_atom_file_number_ReturnsObj(env_dir_setup_clea
 def test_PackFileHandler_save_atom_file_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_packfilehandler = packfilehandler_shop(
-        moment_mstr_dir(), moment_label(), yao_str
-    )
+    yao_packfilehandler = packfilehandler_shop(env_dir(), moment_label(), yao_str)
     ten_int = 10
     yao_packfilehandler._save_valid_atom_file(get_atom_example_factunit_knee(), ten_int)
     assert yao_packfilehandler.get_max_atom_file_number() == ten_int
@@ -174,9 +156,7 @@ def test_PackFileHandler_get_belief_from_atom_files_ReturnsFileWithZeroAtoms(
 ):
     # ESTABLISH
     yao_str = "Yao"
-    yao_packfilehandler = packfilehandler_shop(
-        moment_mstr_dir(), moment_label(), yao_str
-    )
+    yao_packfilehandler = packfilehandler_shop(env_dir(), moment_label(), yao_str)
 
     # WHEN
     yao_belief = yao_packfilehandler._get_belief_from_atom_files()
@@ -195,9 +175,7 @@ def test_PackFileHandler_get_belief_from_atom_files_ReturnsFile_SimplePlan(
 ):
     # ESTABLISH
     yao_str = "Yao"
-    yao_packfilehandler = packfilehandler_shop(
-        moment_mstr_dir(), moment_label(), yao_str
-    )
+    yao_packfilehandler = packfilehandler_shop(env_dir(), moment_label(), yao_str)
 
     # save atom files
     sports_atom = get_atom_example_planunit_sports(yao_packfilehandler.moment_label)
@@ -221,9 +199,7 @@ def test_PackFileHandler_get_belief_from_atom_files_ReturnsFile_WithFactUnit(
 ):
     # ESTABLISH
     yao_str = "Yao"
-    yao_packfilehandler = packfilehandler_shop(
-        moment_mstr_dir(), moment_label(), yao_str
-    )
+    yao_packfilehandler = packfilehandler_shop(env_dir(), moment_label(), yao_str)
 
     # save atom files
     x_moment_label = yao_packfilehandler.moment_label

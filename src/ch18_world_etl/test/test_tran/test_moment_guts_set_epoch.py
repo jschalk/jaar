@@ -3,8 +3,8 @@ from src.ch01_py.file_toolbox import save_json
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch08_epoch.epoch_main import epochunit_shop
 from src.ch08_epoch.test._util.ch08_examples import get_five_config
-from src.ch12_pack_file._ref.ch12_path import create_moment_json_path
-from src.ch12_pack_file.packfilehandler import open_gut_file, save_gut_file
+from src.ch10_pack_logic._ref.ch10_path import create_moment_json_path
+from src.ch10_pack_logic.pack_filehandler import open_gut_file, save_gut_file
 from src.ch15_moment.moment_main import momentunit_shop
 from src.ch18_world_etl.test._util.ch18_env import (
     env_dir_setup_cleanup,

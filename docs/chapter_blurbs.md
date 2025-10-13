@@ -15,7 +15,6 @@ What does each one do?
 - **ch09_belief_atom**: Defines BeliefAtoms: Irreducible units of change for a BeliefUnit.
 - **ch10_pack_logic**: Defines packs which are collections of BeliefAtoms by FaceName
 - **ch11_bud**: Defines BeliefBudHistory: BeliefName, BudUnits (epochpoint, quota, celldepth)
-- **ch12_pack_file**: Tools for handling complex operations. Should be distributed and deprecated.
 - **ch13_belief_listen**: These tools describe how one BeliefUnit listens to another.
 - **ch14_keep**: Builds a simulation that describes how much credit a healer has earned.
 - **ch15_moment**: Defines MomentUnits: common time tech, ledger, VoiceNames, history of BeliefUnits.

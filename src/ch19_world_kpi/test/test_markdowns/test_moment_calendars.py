@@ -5,7 +5,7 @@ from src.ch08_epoch.test._util.ch08_examples import (
     get_creg_config,
     get_expected_creg_year0_markdown,
 )
-from src.ch12_pack_file._ref.ch12_path import create_moment_json_path
+from src.ch10_pack_logic._ref.ch10_path import create_moment_json_path
 from src.ch15_moment.moment_main import momentunit_shop
 from src.ch19_world_kpi.kpi_mstr import create_calendar_markdown_files
 from src.ch19_world_kpi.test._util.ch19_env import (

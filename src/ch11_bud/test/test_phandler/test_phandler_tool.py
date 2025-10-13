@@ -7,13 +7,7 @@ from src.ch07_belief_logic.test._util.ch07_examples import (
     get_beliefunit_irrational_example,
     get_beliefunit_with_4_levels,
 )
-from src.ch11_bud.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
-from src.ch11_bud.test._util.ch11_examples import (
-    example_casa_clean_factunit as clean_factunit,
-    example_casa_dirty_factunit as dirty_factunit,
-    example_sky_blue_factunit as sky_blue_factunit,
-)
-from src.ch12_pack_file._ref.ch12_path import (
+from src.ch11_bud._ref.ch11_path import (
     create_belief_event_dir_path,
     create_beliefevent_path,
     create_beliefpoint_path,
@@ -21,10 +15,8 @@ from src.ch12_pack_file._ref.ch12_path import (
     create_cell_dir_path,
     create_cell_json_path as node_path,
     create_cell_voice_mandate_ledger_path,
-    create_gut_path,
-    create_job_path,
 )
-from src.ch12_pack_file.packfilehandler import (
+from src.ch11_bud.bud_filehandler import (
     beliefpoint_file_exists,
     bud_file_exists,
     cellunit_add_json_file,
@@ -35,29 +27,27 @@ from src.ch12_pack_file.packfilehandler import (
     get_beliefevent_obj,
     get_beliefs_downhill_event_ints,
     get_timepoint_dirs,
-    gut_file_exists,
     job_file_exists,
     open_belief_file,
     open_beliefpoint_file,
     open_bud_file,
-    open_gut_file,
     open_job_file,
     save_arbitrary_beliefevent,
     save_belief_file,
     save_beliefpoint_file,
     save_bud_file,
-    save_gut_file,
     save_job_file,
 )
-from src.ch12_pack_file.test._util.ch12_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
-from src.ch12_pack_file.test._util.ch12_examples import (
+from src.ch11_bud.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
+from src.ch11_bud.test._util.ch11_env import env_dir_setup_cleanup, get_chapter_temp_dir
+from src.ch11_bud.test._util.ch11_examples import (
+    example_casa_clean_factunit as clean_factunit,
+    example_casa_dirty_factunit as dirty_factunit,
+    example_sky_blue_factunit as sky_blue_factunit,
     get_budunit_55_example,
     get_budunit_invalid_example,
 )
-from src.ref.ch12_keywords import Ch12Keywords as wx
+from src.ref.ch11_keywords import Ch11Keywords as wx
 
 
 def test_save_belief_file_SetsFile(env_dir_setup_cleanup):
@@ -105,120 +95,6 @@ def test_open_belief_file_ReturnsObj_Scenario1_FileExists():
 
     # THEN
     assert gen_sue_belief == expected_sue_belief
-
-
-def test_save_gut_file_SetsFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
-    a23_str = "amy23"
-    sue_str = "Sue"
-    sue_gut_path = create_gut_path(moment_mstr_dir, a23_str, sue_str)
-    sue_belief = beliefunit_shop(sue_str, a23_str)
-    assert os_path_exists(sue_gut_path) is False
-
-    # WHEN
-    save_gut_file(moment_mstr_dir, sue_belief)
-
-    # THEN
-    assert os_path_exists(sue_gut_path)
-
-
-def test_gut_file_exists_ReturnsObj(env_dir_setup_cleanup):
-    # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
-    a23_str = "amy23"
-    sue_str = "Sue"
-    sue_belief = beliefunit_shop(sue_str, a23_str)
-    assert gut_file_exists(moment_mstr_dir, a23_str, sue_str) is False
-
-    # WHEN
-    save_gut_file(moment_mstr_dir, sue_belief)
-
-    # THEN
-    assert gut_file_exists(moment_mstr_dir, a23_str, sue_str)
-
-
-def test_open_gut_file_ReturnsObj_Scenario0_noFile():
-    # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
-    a23_str = "amy23"
-    sue_str = "Sue"
-    sue_gut_path = create_gut_path(moment_mstr_dir, a23_str, sue_str)
-    assert os_path_exists(sue_gut_path) is False
-
-    # WHEN / THEN
-    assert not open_gut_file(moment_mstr_dir, a23_str, sue_str)
-
-
-def test_open_gut_file_ReturnsObj_Scenario1_FileExists():
-    # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
-    a23_str = "amy23"
-    sue_str = "Sue"
-    sue_gut_path = create_gut_path(moment_mstr_dir, a23_str, sue_str)
-    sue_belief = beliefunit_shop(sue_str, a23_str)
-    save_gut_file(moment_mstr_dir, sue_belief)
-    assert os_path_exists(sue_gut_path)
-
-    # WHEN / THEN
-    assert sue_belief == open_gut_file(moment_mstr_dir, a23_str, sue_str)
-
-
-def test_save_job_file_SetsFile(env_dir_setup_cleanup):
-    # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
-    a23_str = "amy23"
-    sue_str = "Sue"
-    sue_job_path = create_job_path(moment_mstr_dir, a23_str, sue_str)
-    sue_belief = beliefunit_shop(sue_str, a23_str)
-    assert os_path_exists(sue_job_path) is False
-
-    # WHEN
-    save_job_file(moment_mstr_dir, sue_belief)
-
-    # THEN
-    assert os_path_exists(sue_job_path)
-
-
-def test_job_file_exists_ReturnsObj(env_dir_setup_cleanup):
-    # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
-    a23_str = "amy23"
-    sue_str = "Sue"
-    sue_belief = beliefunit_shop(sue_str, a23_str)
-    assert job_file_exists(moment_mstr_dir, a23_str, sue_str) is False
-
-    # WHEN
-    save_job_file(moment_mstr_dir, sue_belief)
-
-    # THEN
-    assert job_file_exists(moment_mstr_dir, a23_str, sue_str)
-
-
-def test_open_job_file_ReturnsObj_Scenario0_noFile():
-    # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
-    a23_str = "amy23"
-    sue_str = "Sue"
-    sue_job_path = create_job_path(moment_mstr_dir, a23_str, sue_str)
-    assert os_path_exists(sue_job_path) is False
-
-    # WHEN / THEN
-    assert not open_job_file(moment_mstr_dir, a23_str, sue_str)
-
-
-def test_open_job_file_ReturnsObj_Scenario1_FileExists():
-    # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
-    a23_str = "amy23"
-    sue_str = "Sue"
-    sue_job_path = create_job_path(moment_mstr_dir, a23_str, sue_str)
-    sue_belief = beliefunit_shop(sue_str, a23_str)
-    save_job_file(moment_mstr_dir, sue_belief)
-    assert os_path_exists(sue_job_path)
-
-    # WHEN / THEN
-    assert sue_belief == open_job_file(moment_mstr_dir, a23_str, sue_str)
 
 
 def test_save_arbitrary_beliefevent_SetsFile_Scenario0(env_dir_setup_cleanup):

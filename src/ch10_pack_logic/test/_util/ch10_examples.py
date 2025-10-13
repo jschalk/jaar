@@ -1,8 +1,41 @@
-from src.ch02_rope.rope import create_rope
+from src.ch02_rope.rope import RopeTerm, create_rope, create_rope_from_labels
 from src.ch09_belief_atom.atom_main import BeliefAtom, beliefatom_shop
-from src.ch10_pack_logic._ref.ch10_semantic_types import MomentLabel
+from src.ch10_pack_logic._ref.ch10_semantic_types import LabelTerm, MomentLabel
 from src.ch10_pack_logic.delta import BeliefDelta, beliefdelta_shop
+from src.ch10_pack_logic.pack_main import PackUnit, packunit_shop
 from src.ref.ch10_keywords import Ch10Keywords as wx
+
+
+def get_ch10_example_moment_label() -> str:
+    return "FizzBuzz2"
+
+
+def get_texas_rope() -> RopeTerm:
+    moment_label = get_ch10_example_moment_label()
+    nation_str = "nation"
+    usa_str = "USA"
+    texas_str = "Texas"
+    return create_rope_from_labels([moment_label, nation_str, usa_str, texas_str])
+
+
+def get_atom_example_factunit_knee(first_label: LabelTerm = None) -> BeliefAtom:
+    if not first_label:
+        first_label = "amy23"
+    sports_str = "sports"
+    sports_rope = create_rope(first_label, sports_str)
+    ball_str = "basketball"
+    ball_rope = create_rope(sports_rope, ball_str)
+    knee_str = "knee"
+    knee_rope = create_rope(first_label, knee_str)
+    knee_fact_lower = 7
+    knee_fact_upper = 23
+    x_dimen = wx.belief_plan_factunit
+    insert_factunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
+    insert_factunit_beliefatom.set_jkey(wx.plan_rope, ball_rope)
+    insert_factunit_beliefatom.set_jkey(wx.fact_context, knee_rope)
+    insert_factunit_beliefatom.set_jvalue(wx.fact_lower, knee_fact_lower)
+    insert_factunit_beliefatom.set_jvalue(wx.fact_upper, knee_fact_upper)
+    return insert_factunit_beliefatom
 
 
 def get_atom_example_planunit_sports(moment_label: MomentLabel = None) -> BeliefAtom:
@@ -76,3 +109,37 @@ def get_beliefdelta_example1() -> BeliefDelta:
     x_beliefatom.set_jkey(wx.voice_name, zia_str)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
     return sue_beliefdelta
+
+
+def get_sue_packunit() -> PackUnit:
+    return packunit_shop(belief_name="Sue", _pack_id=37, face_name="Yao")
+
+
+def sue_1beliefatoms_packunit() -> PackUnit:
+    x_packunit = packunit_shop(belief_name="Sue", _pack_id=53, face_name="Yao")
+    x_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_sports())
+    return x_packunit
+
+
+def sue_2beliefatoms_packunit() -> PackUnit:
+    x_packunit = packunit_shop(belief_name="Sue", _pack_id=53, face_name="Yao")
+    x_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_knee())
+    x_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_sports())
+    return x_packunit
+
+
+def sue_3beliefatoms_packunit() -> PackUnit:
+    x_packunit = packunit_shop(belief_name="Sue", _pack_id=37, face_name="Yao")
+    x_packunit._beliefdelta.set_beliefatom(get_atom_example_factunit_knee())
+    x_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_ball())
+    x_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_knee())
+    return x_packunit
+
+
+def sue_4beliefatoms_packunit() -> PackUnit:
+    x_packunit = packunit_shop(belief_name="Sue", _pack_id=47, face_name="Yao")
+    x_packunit._beliefdelta.set_beliefatom(get_atom_example_factunit_knee())
+    x_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_ball())
+    x_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_knee())
+    x_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_sports())
+    return x_packunit

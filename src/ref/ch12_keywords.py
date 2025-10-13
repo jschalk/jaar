@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class Ch12Keywords(str, Enum):
+class Ch11Keywords(str, Enum):
     BeliefName = "BeliefName"
     CRUD_command = "CRUD_command"
     DELETE = "DELETE"
