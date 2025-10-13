@@ -17,4 +17,5 @@ def create_keywords_classes_file_path() -> str:
     """Returns path: src\\ref\\keywords.py"""
 
     # ref_dir = create_path(chapter_dir, "_ref")
-    return create_path("src\\ref", "keywords.py")
+    ref_dir = create_path("src", "ref")
+    return create_path(ref_dir, "keywords.py")
