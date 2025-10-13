@@ -2,9 +2,7 @@ from copy import copy as copy_copy
 from dataclasses import dataclass
 from src.ch01_data_toolbox.dict_toolbox import (
     get_0_if_None,
-    get_dict_from_json,
     get_empty_dict_if_None,
-    get_json_from_dict,
     get_str_in_sub_dict,
     str_in_all_dict_keys,
     str_in_all_dict_values,
@@ -18,7 +16,6 @@ from src.ch02_rope_logic.rope import (
     get_all_rope_labels,
     get_parent_rope,
     get_tail_label,
-    is_labelterm,
 )
 from src.ch16_translate._ref.ch16_semantic_types import (
     EventInt,
@@ -292,10 +289,6 @@ def get_labelmap_from_dict(x_dict: dict) -> LabelMap:
         otx2inx=x_dict.get("otx2inx"),
         unknown_str=x_dict.get("unknown_str"),
     )
-
-
-def get_labelmap_from_json(x_json: str) -> LabelMap:
-    return get_labelmap_from_dict(get_dict_from_json(x_json))
 
 
 @dataclass

@@ -3,7 +3,6 @@ from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch16_translate.map import (
     LabelMap,
     get_labelmap_from_dict,
-    get_labelmap_from_json,
     inherit_labelmap,
     labelmap_shop,
 )

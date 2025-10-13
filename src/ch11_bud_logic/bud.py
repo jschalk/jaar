@@ -4,11 +4,9 @@ from src.ch01_data_toolbox.dict_toolbox import (
     del_in_nested_dict,
     exists_in_nested_dict,
     get_0_if_None,
-    get_dict_from_json,
     get_empty_dict_if_None,
     get_empty_set_if_None,
     get_from_nested_dict,
-    get_json_from_dict,
     set_in_nested_dict,
 )
 from src.ch03_allot_toolbox.allot import default_pool_num
@@ -328,10 +326,6 @@ def get_budunit_from_dict(x_dict: dict) -> BudUnit:
     return budunit_shop(
         x_bud_time, x_quota, x_bud_net, x_magnitude, celldepth=x_celldepth
     )
-
-
-def get_budunit_from_json(x_json: str) -> BudUnit:
-    return get_budunit_from_dict(get_dict_from_json(x_json))
 
 
 def get_beliefbudhistory_from_dict(x_dict: dict) -> BeliefBudHistory:

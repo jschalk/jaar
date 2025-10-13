@@ -3,11 +3,7 @@ from src.ch01_data_toolbox.db_toolbox import (
     RowData,
     create_type_reference_insert_sqlstr,
 )
-from src.ch01_data_toolbox.dict_toolbox import (
-    get_dict_from_json,
-    get_empty_dict_if_None,
-    get_json_from_dict,
-)
+from src.ch01_data_toolbox.dict_toolbox import get_empty_dict_if_None
 from src.ch02_rope_logic.rope import create_rope, get_parent_rope, get_tail_label
 from src.ch04_voice_logic.group import awardunit_shop
 from src.ch04_voice_logic.voice import voiceunit_shop

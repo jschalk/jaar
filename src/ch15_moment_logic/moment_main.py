@@ -1,15 +1,10 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
-from src.ch01_data_toolbox.dict_toolbox import (
-    get_0_if_None,
-    get_dict_from_json,
-    get_empty_set_if_None,
-    get_json_from_dict,
-)
+from src.ch01_data_toolbox.dict_toolbox import get_0_if_None, get_empty_set_if_None
 from src.ch01_data_toolbox.file_toolbox import (
     create_path,
     get_dir_file_strs,
-    open_file,
+    open_json,
     set_dir,
 )
 from src.ch03_allot_toolbox.allot import default_grain_num_if_None
@@ -459,15 +454,11 @@ def get_momentunit_from_dict(moment_dict: dict) -> MomentUnit:
     return x_moment
 
 
-def get_momentunit_from_json(x_moment_json: str) -> MomentUnit:
-    return get_momentunit_from_dict(get_dict_from_json(x_moment_json))
-
-
 def get_default_path_momentunit(
     moment_mstr_dir: str, moment_label: MomentLabel
 ) -> MomentUnit:
     moment_json_path = create_moment_json_path(moment_mstr_dir, moment_label)
-    x_momentunit = get_momentunit_from_json(open_file(moment_json_path))
+    x_momentunit = get_momentunit_from_dict(open_json(moment_json_path))
     x_momentunit.moment_mstr_dir = moment_mstr_dir
     x_momentunit._set_moment_dirs()
     return x_momentunit
