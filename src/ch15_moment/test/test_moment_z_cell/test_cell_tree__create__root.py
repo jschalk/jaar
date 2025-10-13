@@ -11,7 +11,7 @@ from src.ch15_moment.test._util.ch15_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ref.ch15_keywords import Ch15Keywords as wx
+from src.ref.keywords import Ch15Keywords as wx
 
 
 def test_get_ote1_max_past_event_int_ReturnsObj_Scenaro0(

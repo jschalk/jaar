@@ -23,7 +23,7 @@ from src.ch11_bud._ref.ch11_path import (
     create_event_expressed_pack_path,
 )
 from src.ch11_bud.test._util.ch11_env import get_chapter_temp_dir
-from src.ref.ch11_keywords import Ch11Keywords as wx
+from src.ref.keywords import Ch11Keywords as wx
 
 
 def test_create_buds_dir_path_ReturnsObj():

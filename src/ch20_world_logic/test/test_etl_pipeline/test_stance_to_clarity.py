@@ -11,7 +11,7 @@ from src.ch20_world_logic.test._util.ch20_env import (
     get_chapter_temp_dir as worlds_dir,
 )
 from src.ch20_world_logic.world import WorldUnit, worldunit_shop
-from src.ref.ch20_keywords import Ch20Keywords as wx
+from src.ref.keywords import Ch20Keywords as wx
 
 
 def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(

@@ -1,6 +1,6 @@
 from src.ch06_plan.healer import healerunit_shop
 from src.ch06_plan.plan import PlanAttrHolder, planattrholder_shop
-from src.ref.ch06_keywords import Ch06Keywords as wx
+from src.ref.keywords import Ch06Keywords as wx
 
 
 def test_PlanAttrHolder_Exists():

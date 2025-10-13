@@ -39,7 +39,7 @@ from src.ch17_idea.idea_config import (
     idea_format_00020_belief_voice_membership_v0_0_0,
     idea_format_00021_belief_voiceunit_v0_0_0,
 )
-from src.ref.ch17_keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as wx
 
 
 def test_get_idea_elements_sort_order_ReturnsObj():

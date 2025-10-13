@@ -5,7 +5,7 @@ from src.ch18_world_etl.transformers import (
     create_sound_and_heard_tables,
     etl_heard_raw_tables_to_moment_ote1_agg,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_etl_heard_raw_tables_to_moment_ote1_agg_SetsTableAttr():

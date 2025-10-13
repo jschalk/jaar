@@ -7,7 +7,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     create_update_heard_raw_existing_inx_col_sqlstr,
 )
 from src.ch18_world_etl.transformers import set_all_heard_raw_inx_columns
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_FullTranslateTables():

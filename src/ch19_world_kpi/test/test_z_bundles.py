@@ -6,7 +6,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     create_prime_tablename,
 )
 from src.ch19_world_kpi.kpi_mstr import populate_kpi_bundle
-from src.ref.ch19_keywords import Ch19Keywords as wx
+from src.ref.keywords import Ch19Keywords as wx
 
 
 def test_populate_kpi_bundle_PopulatesTable_Scenario0_WithDefaultBundleID():

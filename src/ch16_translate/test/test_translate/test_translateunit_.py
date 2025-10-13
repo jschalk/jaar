@@ -32,7 +32,7 @@ from src.ch16_translate.translate_config import (
     translateable_class_types,
 )
 from src.ch16_translate.translate_main import TranslateUnit, translateunit_shop
-from src.ref.ch16_keywords import Ch16Keywords as wx
+from src.ref.keywords import Ch16Keywords as wx
 
 
 def test_get_translate_args_class_types_ReturnsObj():

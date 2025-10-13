@@ -9,7 +9,7 @@ from src.ch05_reason.reason import (
 )
 from src.ch06_plan.healer import healerunit_shop
 from src.ch06_plan.plan import get_obj_from_plan_dict, planunit_shop
-from src.ref.ch06_keywords import Ch06Keywords as wx
+from src.ref.keywords import Ch06Keywords as wx
 
 
 def test_get_obj_from_plan_dict_ReturnsObj():

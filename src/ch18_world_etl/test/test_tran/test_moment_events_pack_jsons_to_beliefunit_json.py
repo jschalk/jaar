@@ -14,7 +14,7 @@ from src.ch18_world_etl.test._util.ch18_env import (
 from src.ch18_world_etl.transformers import (
     etl_event_pack_json_to_event_inherited_beliefunits,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_belief_json(

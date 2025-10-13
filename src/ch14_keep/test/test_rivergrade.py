@@ -1,6 +1,6 @@
 from src.ch14_keep.rivercycle import RiverGrade, rivergrade_shop
 from src.ch14_keep.test._util.ch14_env import temp_moment_label
-from src.ref.ch14_keywords import Ch14Keywords as wx
+from src.ref.keywords import Ch14Keywords as wx
 
 
 def test_RiverGrade_Exists():

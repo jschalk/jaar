@@ -25,7 +25,7 @@ from src.ch17_idea.test._util.ch17_env import (
     get_chapter_temp_dir,
     idea_moment_mstr_dir,
 )
-from src.ref.ch17_keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as wx
 
 
 def test_append_df_to_excel_CreatesSheet(env_dir_setup_cleanup):

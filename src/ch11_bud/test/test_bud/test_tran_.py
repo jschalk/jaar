@@ -6,7 +6,7 @@ from src.ch11_bud.bud_main import (
     tranbook_shop,
     tranunit_shop,
 )
-from src.ref.ch11_keywords import Ch11Keywords as wx
+from src.ref.keywords import Ch11Keywords as wx
 
 
 def test_TranUnit_Exists():

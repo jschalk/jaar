@@ -4,7 +4,7 @@ from src.ch04_voice.voice import (
     voiceunit_shop,
     voiceunits_get_from_dict,
 )
-from src.ref.ch04_keywords import Ch04Keywords as wx
+from src.ref.keywords import Ch04Keywords as wx
 
 
 def test_VoiceUnit_get_memberships_dict_ReturnsObj():

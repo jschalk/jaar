@@ -11,7 +11,7 @@ from src.ch10_pack.delta import (
     get_beliefdelta_from_ordered_dict,
 )
 from src.ch10_pack.test._util.ch10_examples import get_beliefdelta_example1
-from src.ref.ch10_keywords import Ch10Keywords as wx
+from src.ref.keywords import Ch10Keywords as wx
 
 
 def test_BeliefDelta_Exists():

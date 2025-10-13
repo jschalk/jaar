@@ -5,7 +5,7 @@ from src.ch17_idea.idea_db_tool import (
     get_default_sorted_list,
     get_idea_into_dimen_raw_query,
 )
-from src.ref.ch17_keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as wx
 
 
 def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_belief_plan_partyunit():

@@ -8,7 +8,7 @@ from src.ch07_belief_logic.belief_main import (
     beliefunit_shop,
     get_default_moment_label,
 )
-from src.ref.ch07_keywords import Ch07Keywords as wx
+from src.ref.keywords import Ch07Keywords as wx
 
 
 def test_BeliefUnit_Exists():

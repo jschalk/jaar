@@ -31,7 +31,7 @@ from src.ch08_epoch.test._util.ch08_examples import (
     get_tue,
     get_wed,
 )
-from src.ref.ch08_keywords import Ch08Keywords as wx
+from src.ref.keywords import Ch08Keywords as wx
 
 
 def test_get_creg_config_ReturnsObj():

@@ -29,7 +29,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     create_sound_and_heard_tables,
     get_idea_stageble_put_dimens,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_ALL_DIMEN_ABBV7_has_all_dimens():

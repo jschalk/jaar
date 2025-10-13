@@ -11,7 +11,7 @@ from src.ch18_world_etl.test._util.ch18_env import (
 )
 from src.ch18_world_etl.tran_sqlstrs import create_prime_tablename
 from src.ch18_world_etl.transformers import etl_event_belief_csvs_to_pack_json
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_beliefunit(

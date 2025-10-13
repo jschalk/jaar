@@ -5,7 +5,7 @@ from src.ch11_bud.test._util.ch11_examples import (
     example_casa_dirty_factunit as dirty_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
-from src.ref.ch11_keywords import Ch11Keywords as wx
+from src.ref.keywords import Ch11Keywords as wx
 
 
 def test_CellUnit_to_dict_ReturnsObj_Scenario0():

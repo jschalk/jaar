@@ -9,7 +9,7 @@ from src.ch19_world_kpi.test._util.ch19_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ref.ch19_keywords import Ch19Keywords as wx
+from src.ref.keywords import Ch19Keywords as wx
 
 
 def test_create_kpi_csvs_Scenario0_NotCreateFileWhenNoKPITables(env_dir_setup_cleanup):

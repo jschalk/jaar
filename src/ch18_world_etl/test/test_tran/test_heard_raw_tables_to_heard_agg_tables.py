@@ -9,7 +9,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     get_insert_heard_agg_sqlstrs,
 )
 from src.ch18_world_etl.transformers import etl_heard_raw_tables_to_heard_agg_tables
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_get_insert_heard_agg_sqlstrs_ReturnsObj_CheckMomentDimen():

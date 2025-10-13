@@ -10,7 +10,7 @@ from src.ch16_translate.translate_config import (
     get_translate_filename,
     translate_config_path,
 )
-from src.ref.ch16_keywords import Ch16Keywords as wx
+from src.ref.keywords import Ch16Keywords as wx
 
 
 def test_get_translate_filename_ReturnsObj():

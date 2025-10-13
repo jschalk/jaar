@@ -2,7 +2,7 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom.atom_main import beliefatom_shop
 from src.ch10_pack.delta import beliefdelta_shop
 from src.ch10_pack.legible import create_legible_list
-from src.ref.ch10_keywords import Ch10Keywords as wx
+from src.ref.keywords import Ch10Keywords as wx
 
 
 def test_create_legible_list_ReturnsObjEstablishWithEmptyBeliefDelta():

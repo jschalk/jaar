@@ -15,7 +15,7 @@ from src.ch07_belief_logic.test._util.ch07_examples import (
     get_beliefunit_reason_context_ziet_example,
     get_beliefunit_x1_3levels_1reason_1facts,
 )
-from src.ref.ch07_keywords import Ch07Keywords as wx
+from src.ref.keywords import Ch07Keywords as wx
 
 
 def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():

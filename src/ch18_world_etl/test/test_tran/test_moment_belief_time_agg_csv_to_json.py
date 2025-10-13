@@ -9,7 +9,7 @@ from src.ch18_world_etl.test._util.ch18_env import (
     get_chapter_temp_dir,
 )
 from src.ch18_world_etl.transformers import etl_moment_ote1_agg_csvs_to_jsons
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_etl_moment_ote1_agg_csvs_to_jsons_CreatesFile_Scenaro0(

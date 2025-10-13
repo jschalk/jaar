@@ -6,7 +6,7 @@ from src.ch18_world_etl.transformers import (
     etl_brick_raw_tables_to_brick_agg_tables,
     get_max_brick_agg_event_int,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_GroupByWorks():

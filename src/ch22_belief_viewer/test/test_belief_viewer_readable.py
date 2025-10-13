@@ -9,7 +9,7 @@ from src.ch22_belief_viewer.belief_viewer__tool import (
     get_plan_view_dict,
     get_voices_view_dict,
 )
-from src.ref.ch22_keywords import Ch22Keywords as wx
+from src.ref.keywords import Ch22Keywords as wx
 
 
 def test_get_belief_view_dict_ReturnsObj_Scenario0_Empty():

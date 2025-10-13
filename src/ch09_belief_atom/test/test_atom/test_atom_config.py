@@ -17,7 +17,7 @@ from src.ch09_belief_atom.atom_config import (
     is_belief_dimen,
     set_mog,
 )
-from src.ref.ch09_keywords import Ch09Keywords as wx
+from src.ref.keywords import Ch09Keywords as wx
 
 
 def test_CRUD_command_Exists():

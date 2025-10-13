@@ -11,7 +11,7 @@ from src.ch16_translate.translate_main import (
     get_translateunit_from_dict,
     translateunit_shop,
 )
-from src.ref.ch16_keywords import Ch16Keywords as wx
+from src.ref.keywords import Ch16Keywords as wx
 
 
 def test_TranslateUnit_to_dict_ReturnsObj_Scenario0():

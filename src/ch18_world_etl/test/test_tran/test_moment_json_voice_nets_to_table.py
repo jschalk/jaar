@@ -13,7 +13,7 @@ from src.ch18_world_etl.transformers import (
     etl_moment_json_voice_nets_to_moment_voice_nets_table,
     insert_tranunit_voices_net,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_insert_tranunit_voices_net_PopulatesDatabase():

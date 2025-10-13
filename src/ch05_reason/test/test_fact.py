@@ -7,7 +7,7 @@ from src.ch05_reason.reason import (
     get_factunit_from_tuple,
     get_factunits_from_dict,
 )
-from src.ref.ch05_keywords import Ch05Keywords as wx
+from src.ref.keywords import Ch05Keywords as wx
 
 
 def test_FactUnit_Exists():

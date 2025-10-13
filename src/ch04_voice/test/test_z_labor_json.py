@@ -5,7 +5,7 @@ from src.ch04_voice.labor import (
     partyunit_get_from_dict,
     partyunit_shop,
 )
-from src.ref.ch04_keywords import Ch04Keywords as wx
+from src.ref.keywords import Ch04Keywords as wx
 
 
 def test_PartyUnit_to_dict_ReturnsObj_Scenario0_solo_IsTrue():

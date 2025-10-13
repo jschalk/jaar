@@ -262,10 +262,8 @@ def test_Chapters_KeywordEnumClassesAreCorrectlyTested():
     cumlative_ch_keywords_dict = get_cumlative_ch_keywords_dict(keywords_by_chapter)
 
     chXX_keyword_classes = get_chXX_keyword_classes(cumlative_ch_keywords_dict)
-    chapter_num_descs = get_chapter_num_descs()
-
     for chapter_prefix, ExpectedEnumClass in chXX_keyword_classes.items():
-        chapter_ref_keywords_path = f"src.ref.{chapter_prefix}_keywords"
+        chapter_ref_keywords_path = f"src.ref.keywords"
         print(f"{chapter_ref_keywords_path=}")
 
         # dynamically import the module

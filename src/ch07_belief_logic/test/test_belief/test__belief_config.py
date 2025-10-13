@@ -12,7 +12,7 @@ from src.ch07_belief_logic.belief_config import (
     get_belief_config_dict,
     max_tree_traverse_default,
 )
-from src.ref.ch07_keywords import Ch07Keywords as wx
+from src.ref.keywords import Ch07Keywords as wx
 
 
 def test_max_tree_traverse_default_ReturnsObj() -> str:

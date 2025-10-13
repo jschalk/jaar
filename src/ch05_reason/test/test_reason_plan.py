@@ -8,7 +8,7 @@ from src.ch05_reason.reason import (
     reasonheir_shop,
     reasonunit_shop,
 )
-from src.ref.ch05_keywords import Ch05Keywords as wx
+from src.ref.keywords import Ch05Keywords as wx
 
 
 def test_ReasonCore_Exists():

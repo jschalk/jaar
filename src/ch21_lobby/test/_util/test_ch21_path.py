@@ -8,7 +8,7 @@ from src.ch21_lobby._ref.ch21_path import (
     create_world_dir_path,
 )
 from src.ch21_lobby.test._util.ch21_env import get_chapter_temp_dir
-from src.ref.ch21_keywords import Ch21Keywords as wx
+from src.ref.keywords import Ch21Keywords as wx
 
 
 def test_LobbyID_Exists():

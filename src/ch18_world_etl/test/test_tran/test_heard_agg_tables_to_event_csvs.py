@@ -11,7 +11,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     create_sound_and_heard_tables,
 )
 from src.ch18_world_etl.transformers import etl_heard_agg_to_event_belief_csvs
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_etl_heard_agg_to_event_belief_csvs_PopulatesBeliefPulabelTables(

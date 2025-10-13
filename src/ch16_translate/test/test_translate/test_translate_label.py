@@ -7,7 +7,7 @@ from src.ch16_translate.map import (
     labelmap_shop,
 )
 from src.ch16_translate.translate_config import default_unknown_str_if_None
-from src.ref.ch16_keywords import Ch16Keywords as wx
+from src.ref.keywords import Ch16Keywords as wx
 
 
 def test_LabelMap_Exists():

@@ -11,7 +11,7 @@ from src.ch15_moment.test._util.ch15_env import (
     get_chapter_temp_dir,
 )
 from src.ch15_moment.test._util.ch15_examples import example_casa_floor_clean_factunit
-from src.ref.ch15_keywords import Ch15Keywords as wx
+from src.ref.keywords import Ch15Keywords as wx
 
 
 def test_load_cells_beliefevent_SetsFiles_Scenario0_NoFacts(

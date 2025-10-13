@@ -11,7 +11,7 @@ from src.ch08_epoch.epoch_main import (
     get_min_from_dt_offset,
     new_epoch_planunit,
 )
-from src.ref.ch08_keywords import Ch08Keywords as wx
+from src.ref.keywords import Ch08Keywords as wx
 
 
 def get_five_config() -> dict:

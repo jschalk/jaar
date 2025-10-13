@@ -3,7 +3,7 @@ from src.ch09_belief_atom.atom_main import BeliefAtom, beliefatom_shop
 from src.ch10_pack._ref.ch10_semantic_types import LabelTerm, MomentLabel
 from src.ch10_pack.delta import BeliefDelta, beliefdelta_shop
 from src.ch10_pack.pack_main import PackUnit, packunit_shop
-from src.ref.ch10_keywords import Ch10Keywords as wx
+from src.ref.keywords import Ch10Keywords as wx
 
 
 def get_ch10_example_moment_label() -> str:

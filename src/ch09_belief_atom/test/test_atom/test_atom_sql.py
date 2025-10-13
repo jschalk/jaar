@@ -3,7 +3,7 @@ from sqlite3 import connect as sqlite3_connect
 from src.ch01_py.db_toolbox import get_rowdata
 from src.ch02_rope.rope import create_rope
 from src.ch09_belief_atom.atom_main import beliefatom_shop, get_beliefatom_from_rowdata
-from src.ref.ch09_keywords import Ch09Keywords as wx
+from src.ref.keywords import Ch09Keywords as wx
 
 
 def test_BeliefAtom_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():

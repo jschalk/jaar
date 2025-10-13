@@ -15,7 +15,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_voiceunit_exists,
     beliefunit_exists,
 )
-from src.ref.ch07_keywords import Ch07Keywords as wx
+from src.ref.keywords import Ch07Keywords as wx
 
 
 def test_beliefunit_exists_ReturnsObj():

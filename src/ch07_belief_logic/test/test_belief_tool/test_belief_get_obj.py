@@ -11,7 +11,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_voice_membership_get_obj,
     belief_voiceunit_get_obj,
 )
-from src.ref.ch07_keywords import Ch07Keywords as wx
+from src.ref.keywords import Ch07Keywords as wx
 
 
 def test_belief_voiceunit_get_obj_ReturnsObj():

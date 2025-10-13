@@ -14,7 +14,7 @@ from src.ch17_idea.idea_config import (
 )
 from src.ch17_idea.idea_main import create_idea_df, get_idearef_obj, save_idea_csv
 from src.ch17_idea.test._util.ch17_env import env_dir_setup_cleanup, idea_moments_dir
-from src.ref.ch17_keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as wx
 
 
 def test_create_idea_df_Arg_idea_format_00021_belief_voiceunit_v0_0_0():

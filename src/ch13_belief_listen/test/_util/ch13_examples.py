@@ -3,7 +3,7 @@ from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop, planu
 from src.ch10_pack.pack_filehandler import PackFileHandler, packfilehandler_shop
 from src.ch10_pack.test._util.ch10_examples import get_texas_rope
 from src.ch13_belief_listen.test._util.ch13_env import get_chapter_temp_dir
-from src.ref.ch13_keywords import Ch13Keywords as wx
+from src.ref.keywords import Ch13Keywords as wx
 
 
 def ch13_example_moment_label() -> str:

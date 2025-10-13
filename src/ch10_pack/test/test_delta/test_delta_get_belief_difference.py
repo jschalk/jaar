@@ -7,7 +7,7 @@ from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 from src.ch10_pack.delta import BeliefDelta, beliefdelta_shop
-from src.ref.ch10_keywords import Ch10Keywords as wx
+from src.ref.keywords import Ch10Keywords as wx
 
 
 def print_beliefatom_keys(x_beliefdelta: BeliefDelta):

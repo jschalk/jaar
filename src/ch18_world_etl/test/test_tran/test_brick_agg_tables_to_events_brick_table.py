@@ -6,7 +6,7 @@ from src.ch18_world_etl.transformers import (
     etl_events_brick_agg_db_to_event_dict,
     etl_events_brick_agg_table_to_events_brick_valid_table,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_etl_brick_agg_tables_to_events_brick_agg_table_PopulatesTables_Scenario0():

@@ -3,7 +3,7 @@ from src.ch04_voice.group import awardunit_shop
 from src.ch05_reason.reason import factunit_shop, reasonunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom.atom_main import beliefatom_shop, sift_beliefatom
-from src.ref.ch09_keywords import Ch09Keywords as wx
+from src.ref.keywords import Ch09Keywords as wx
 
 
 def test_sift_atom_ReturnsObj_BeliefAtom_DELETE_belief_voiceunit():

@@ -9,7 +9,7 @@ from src.ch15_moment.moment_config import (
     get_moment_dimens,
     moment_config_path,
 )
-from src.ref.ch15_keywords import Ch15Keywords as wx
+from src.ref.keywords import Ch15Keywords as wx
 
 
 def test_moment_config_path_ReturnsObj_Moment() -> str:

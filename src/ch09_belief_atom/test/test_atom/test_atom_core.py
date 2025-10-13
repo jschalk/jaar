@@ -1,6 +1,6 @@
 from src.ch04_voice.voice import voiceunit_shop
 from src.ch09_belief_atom.atom_main import BeliefAtom, beliefatom_shop
-from src.ref.ch09_keywords import Ch09Keywords as wx
+from src.ref.keywords import Ch09Keywords as wx
 
 
 def test_BeliefAtom_Exists():

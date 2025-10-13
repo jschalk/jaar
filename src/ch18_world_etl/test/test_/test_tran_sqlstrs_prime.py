@@ -35,7 +35,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     get_moment_belief_sound_agg_tablenames,
     get_prime_create_table_sqlstrs,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 BELIEF_PRIME_TABLENAMES = {
     f"{wx.belief_voice_membership}_sound_put_agg": "BLRMEMB_PUT_AGG",

@@ -47,7 +47,7 @@ from src.ch11_bud.test._util.ch11_examples import (
     get_budunit_55_example,
     get_budunit_invalid_example,
 )
-from src.ref.ch11_keywords import Ch11Keywords as wx
+from src.ref.keywords import Ch11Keywords as wx
 
 
 def test_save_belief_file_SetsFile(env_dir_setup_cleanup):

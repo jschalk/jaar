@@ -5,7 +5,7 @@ from src.ch05_reason.reason import (
     caseunit_shop,
     factheir_shop,
 )
-from src.ref.ch05_keywords import Ch05Keywords as wx
+from src.ref.keywords import Ch05Keywords as wx
 
 
 def test_CaseUnit_Exists():

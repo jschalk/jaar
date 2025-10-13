@@ -15,7 +15,7 @@ from src.ch18_world_etl.test._util.ch18_env import (
 )
 from src.ch18_world_etl.tran_sqlstrs import create_prime_tablename as prime_table
 from src.ch18_world_etl.transformers import etl_moment_job_jsons_to_job_tables
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario0(

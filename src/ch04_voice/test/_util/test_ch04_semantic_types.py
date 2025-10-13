@@ -9,7 +9,7 @@ from src.ch04_voice._ref.ch04_semantic_types import (
     VoiceName,
     default_knot_if_None,
 )
-from src.ref.ch04_keywords import Ch04Keywords as wx
+from src.ref.keywords import Ch04Keywords as wx
 
 
 def test_NameTerm_Exists():

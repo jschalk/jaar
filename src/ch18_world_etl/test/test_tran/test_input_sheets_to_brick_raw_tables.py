@@ -8,7 +8,7 @@ from src.ch18_world_etl.test._util.ch18_env import (
     get_chapter_temp_dir,
 )
 from src.ch18_world_etl.transformers import etl_input_dfs_to_brick_raw_tables
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(

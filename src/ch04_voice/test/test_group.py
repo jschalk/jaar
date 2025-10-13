@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.ch02_rope.rope import default_knot_if_None
 from src.ch03_allot.allot import default_grain_num_if_None
 from src.ch04_voice.group import GroupUnit, groupunit_shop, membership_shop
-from src.ref.ch04_keywords import Ch04Keywords as wx
+from src.ref.keywords import Ch04Keywords as wx
 
 
 def test_GroupUnit_Exists():

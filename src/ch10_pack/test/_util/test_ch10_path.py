@@ -13,7 +13,7 @@ from src.ch10_pack._ref.ch10_path import (
     create_packs_dir_path,
 )
 from src.ch10_pack.test._util.ch10_env import get_chapter_temp_dir
-from src.ref.ch10_keywords import Ch10Keywords as wx
+from src.ref.keywords import Ch10Keywords as wx
 
 
 def test_create_moment_dir_path_ReturnsObj():

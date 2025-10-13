@@ -18,7 +18,7 @@ from src.ch18_world_etl.transformers import (
     create_sound_and_heard_tables,
     etl_heard_agg_tables_to_moment_jsons,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_get_moment_heard_select1_sqlstrs_ReturnsObj_HasAllNeededKeys():

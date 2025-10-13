@@ -13,7 +13,7 @@ from src.ch04_voice.group import (
     membership_shop,
     memberships_get_from_dict,
 )
-from src.ref.ch04_keywords import Ch04Keywords as wx
+from src.ref.keywords import Ch04Keywords as wx
 
 
 def test_GroupCore_Exists():

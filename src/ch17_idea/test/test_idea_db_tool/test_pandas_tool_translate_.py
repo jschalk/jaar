@@ -15,7 +15,7 @@ from src.ch17_idea.idea_db_tool import (
     translate_all_columns_dataframe,
     translate_single_column_dataframe,
 )
-from src.ref.ch17_keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as wx
 
 
 def test_get_dataframe_translateable_columns_ReturnsObj():

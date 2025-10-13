@@ -16,16 +16,7 @@ def create_keywords_enum_class_file_str(chapter_prefix: str, keywords_set: set) 
     def __str__(self):
         return self.value
 """
-    return f"""from enum import Enum
-
+    return f"""
 
 class {chXX_str}{key_str}words(str, Enum):{keywords_str}
 {dunder_str_func_str}"""
-
-
-def save_keywords_enum_class_file(
-    chapter_dir: str, chapter_prefix: int, keywords_set: set
-):
-    file_path = create_keywords_class_file_path(chapter_dir, chapter_prefix)
-    file_str = create_keywords_enum_class_file_str(chapter_prefix, keywords_set)
-    save_file(file_path, None, file_str)

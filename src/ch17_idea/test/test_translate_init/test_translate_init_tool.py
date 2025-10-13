@@ -36,7 +36,7 @@ from src.ch17_idea.translate_toolbox import (
     init_translateunit_from_dir,
     save_all_csvs_from_translateunit,
 )
-from src.ref.ch17_keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as wx
 
 
 def test_get_translate_name_dt_columns_ReturnsObj():

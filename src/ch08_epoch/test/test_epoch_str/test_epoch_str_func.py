@@ -7,7 +7,7 @@ from src.ch08_epoch.reason_str_func import (
     get_reason_case_readable_str,
 )
 from src.ch08_epoch.test._util.ch08_examples import get_creg_config, get_thu
-from src.ref.ch08_keywords import Ch08Keywords as wx
+from src.ref.keywords import Ch08Keywords as wx
 
 
 def test_get_reason_case_readable_str_ReturnsObj_Scenario0_Level1():

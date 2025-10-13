@@ -11,7 +11,7 @@ from src.ch10_pack.test._util.ch10_examples import (
     get_atom_example_planunit_knee,
     get_atom_example_planunit_sports,
 )
-from src.ref.ch10_keywords import Ch10Keywords as wx
+from src.ref.keywords import Ch10Keywords as wx
 
 
 def test_PackUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):

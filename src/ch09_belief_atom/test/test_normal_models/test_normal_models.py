@@ -12,7 +12,7 @@ from src.ch09_belief_atom.normal_models import (
     ReasonTable,
     VoiceUnitTable,
 )
-from src.ref.ch09_keywords import Ch09Keywords as wx
+from src.ref.keywords import Ch09Keywords as wx
 
 
 def get_config_table_name(config_dimen) -> str:

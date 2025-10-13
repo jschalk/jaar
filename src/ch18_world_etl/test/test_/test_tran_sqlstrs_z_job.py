@@ -8,7 +8,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     create_prime_tablename as prime_table,
     get_job_create_table_sqlstrs,
 )
-from src.ref.ch18_keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as wx
 
 
 def test_get_job_create_table_sqlstrs_ReturnsObj():

@@ -6,7 +6,7 @@ from src.ch15_moment._ref.ch15_path import (
     BUD_MANDATE_FILENAME,
     create_bud_voice_mandate_ledger_path,
 )
-from src.ref.ch15_keywords import Ch15Keywords as wx
+from src.ref.keywords import Ch15Keywords as wx
 
 
 def test_create_bud_voice_mandate_ledger_path_ReturnsObj():

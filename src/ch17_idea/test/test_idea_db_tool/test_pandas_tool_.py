@@ -23,7 +23,7 @@ from src.ch17_idea.test._util.ch17_examples import (
     get_small_example01_csv,
     get_small_example01_dataframe,
 )
-from src.ref.ch17_keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as wx
 
 
 def test_get_ordered_csv_ReturnsObj():

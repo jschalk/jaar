@@ -16,7 +16,7 @@ from src.ch10_pack.test._util.ch10_examples import (
     get_atom_example_planunit_sports,
     get_beliefdelta_sue_example,
 )
-from src.ref.ch10_keywords import Ch10Keywords as wx
+from src.ref.keywords import Ch10Keywords as wx
 
 
 def test_FaceName_Exists():

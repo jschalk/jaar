@@ -15,7 +15,7 @@ from src.ch15_moment.test._util.ch15_examples import (
     create_example_moment3,
     create_example_moment4,
 )
-from src.ref.ch15_keywords import Ch15Keywords as wx
+from src.ref.keywords import Ch15Keywords as wx
 
 
 def test_get_moment_guts_voices_dataframe_ReturnsObj(

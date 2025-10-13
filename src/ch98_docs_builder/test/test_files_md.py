@@ -13,7 +13,7 @@ from src.ch98_docs_builder.test._util.ch98_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ref.ch98_keywords import Ch98Keywords as wx
+from src.ref.keywords import Ch98Keywords as wx
 
 
 def test_get_keywords_src_config_ReturnsObj():
