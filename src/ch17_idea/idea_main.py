@@ -10,7 +10,7 @@ from src.ch01_py.dict_toolbox import (
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch08_epoch.epoch_main import epochunit_shop
 from src.ch09_belief_atom.atom_main import BeliefAtom, atomrow_shop
-from src.ch10_pack_logic.delta import (
+from src.ch10_pack.delta import (
     BeliefDelta,
     beliefdelta_shop,
     get_dimens_cruds_beliefdelta,

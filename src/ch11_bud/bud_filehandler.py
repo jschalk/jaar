@@ -27,12 +27,9 @@ from src.ch09_belief_atom.atom_main import (
     get_beliefatom_from_dict,
     modify_belief_with_beliefatom,
 )
-from src.ch10_pack_logic._ref.ch10_path import (
-    create_job_path,
-    create_moment_beliefs_dir_path,
-)
-from src.ch10_pack_logic.pack_filehandler import open_belief_file, save_belief_file
-from src.ch10_pack_logic.pack_main import (
+from src.ch10_pack._ref.ch10_path import create_job_path, create_moment_beliefs_dir_path
+from src.ch10_pack.pack_filehandler import open_belief_file, save_belief_file
+from src.ch10_pack.pack_main import (
     PackUnit,
     create_packunit_from_files,
     get_init_pack_id_if_None,

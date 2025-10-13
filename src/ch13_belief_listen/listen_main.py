@@ -4,7 +4,7 @@ from src.ch02_rope.rope import get_ancestor_ropes, get_first_label_from_rope
 from src.ch03_allot.allot import allot_scale
 from src.ch06_plan.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, VoiceUnit
-from src.ch10_pack_logic.pack_filehandler import PackFileHandler, open_gut_file
+from src.ch10_pack.pack_filehandler import PackFileHandler, open_gut_file
 from src.ch11_bud.bud_filehandler import open_job_file, save_job_file
 from src.ch13_belief_listen._ref.ch13_semantic_types import BeliefName, RopeTerm
 from src.ch13_belief_listen.basis_beliefs import (

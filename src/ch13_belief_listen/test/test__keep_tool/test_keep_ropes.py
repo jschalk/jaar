@@ -3,7 +3,7 @@ from pytest import raises as pytest_raises
 from src.ch06_plan.healer import healerunit_shop
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_graphics import display_plantree
-from src.ch10_pack_logic.pack_filehandler import (
+from src.ch10_pack.pack_filehandler import (
     open_gut_file,
     packfilehandler_shop,
     save_gut_file,

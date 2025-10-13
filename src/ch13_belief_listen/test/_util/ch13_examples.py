@@ -1,7 +1,7 @@
 from src.ch02_rope.rope import RopeTerm, create_rope, create_rope_from_labels
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop, planunit_shop
-from src.ch10_pack_logic.pack_filehandler import PackFileHandler, packfilehandler_shop
-from src.ch10_pack_logic.test._util.ch10_examples import get_texas_rope
+from src.ch10_pack.pack_filehandler import PackFileHandler, packfilehandler_shop
+from src.ch10_pack.test._util.ch10_examples import get_texas_rope
 from src.ch13_belief_listen.test._util.ch13_env import get_chapter_temp_dir
 from src.ref.ch13_keywords import Ch13Keywords as wx
 

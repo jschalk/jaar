@@ -6,7 +6,7 @@ from src.ch01_py.file_toolbox import create_path, get_level1_dirs, open_json, sa
 from src.ch03_allot.allot import allot_nested_scale
 from src.ch05_reason.reason import get_dict_from_factunits
 from src.ch08_epoch.epoch_main import EpochPoint
-from src.ch10_pack_logic._ref.ch10_path import create_moment_json_path
+from src.ch10_pack._ref.ch10_path import create_moment_json_path
 from src.ch11_bud._ref.ch11_path import (
     CELL_MANDATE_FILENAME,
     CELLNODE_FILENAME,

@@ -1,6 +1,6 @@
 from src.ch02_rope.rope import LabelTerm, RopeTerm, create_rope
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop, planunit_shop
-from src.ch10_pack_logic.pack_filehandler import (
+from src.ch10_pack.pack_filehandler import (
     PackFileHandler,
     gut_file_exists,
     packfilehandler_shop,

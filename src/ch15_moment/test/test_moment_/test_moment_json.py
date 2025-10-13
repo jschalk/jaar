@@ -2,7 +2,7 @@ from src.ch01_py.file_toolbox import create_path, save_json
 from src.ch02_rope.rope import default_knot_if_None
 from src.ch03_allot.allot import default_grain_num_if_None
 from src.ch08_epoch.epoch_main import get_default_epoch_config_dict
-from src.ch10_pack_logic._ref.ch10_path import create_moment_json_path
+from src.ch10_pack._ref.ch10_path import create_moment_json_path
 from src.ch15_moment.moment_main import (
     get_default_path_momentunit,
     get_momentunit_from_dict,

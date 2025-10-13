@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import open_file, open_json, save_file
-from src.ch10_pack_logic.pack_main import get_packunit_from_dict, packunit_shop
+from src.ch10_pack.pack_main import get_packunit_from_dict, packunit_shop
 from src.ch11_bud._ref.ch11_path import (
     create_belief_event_dir_path as belief_event_dir,
     create_event_all_pack_path as all_pack_path,

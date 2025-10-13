@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import open_json, save_json
-from src.ch10_pack_logic._ref.ch10_path import create_moment_json_path
+from src.ch10_pack._ref.ch10_path import create_moment_json_path
 from src.ch11_bud._ref.ch11_path import (
     create_cell_voice_mandate_ledger_path as cell_mandate_path,
 )

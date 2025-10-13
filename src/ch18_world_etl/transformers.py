@@ -30,13 +30,9 @@ from src.ch01_py.file_toolbox import (
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch09_belief_atom.atom_config import get_belief_dimens
 from src.ch09_belief_atom.atom_main import beliefatom_shop
-from src.ch10_pack_logic._ref.ch10_path import create_gut_path, create_moment_json_path
-from src.ch10_pack_logic.delta import get_minimal_beliefdelta
-from src.ch10_pack_logic.pack_main import (
-    PackUnit,
-    get_packunit_from_dict,
-    packunit_shop,
-)
+from src.ch10_pack._ref.ch10_path import create_gut_path, create_moment_json_path
+from src.ch10_pack.delta import get_minimal_beliefdelta
+from src.ch10_pack.pack_main import PackUnit, get_packunit_from_dict, packunit_shop
 from src.ch11_bud._ref.ch11_path import (
     create_belief_event_dir_path,
     create_beliefevent_path,
