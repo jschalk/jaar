@@ -1,9 +1,9 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch22_belief_viewer.belief_viewer__tool import (
+from src.ch12_belief_viewer.belief_viewer__tool import (
     add_small_dot,
     get_groups_view_dict,
 )
-from src.ch22_belief_viewer.example22_beliefs import (
+from src.ch12_belief_viewer.example22_beliefs import (
     best_run_str,
     best_soccer_str,
     best_sport_str,
@@ -16,8 +16,8 @@ from src.ch22_belief_viewer.example22_beliefs import (
     play_str,
     play_swim_str,
 )
-from src.ch22_belief_viewer.test.test__voices_view_dict import add_readable
-from src.ref.keywords import Ch22Keywords as wx
+from src.ch12_belief_viewer.test.test__voices_view_dict import add_readable
+from src.ref.keywords import Ch12Keywords as wx
 
 
 def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():

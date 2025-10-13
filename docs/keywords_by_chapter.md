@@ -13,6 +13,7 @@
 - ch09_belief_atom: CRUD_command, DELETE, atom, atom_hx, column_order, crud, nesting_order, normal_specs, normal_table_name
 - ch10_pack: FaceName, event_int, face_name, gut, job, moment_mstr_dir
 - ch11_bud: EventInt, amount, beliefadjust, beliefevent_facts, boss_facts, bud_belief_name, bud_time, bud_voice_nets, celldepth, found_facts, magnitude, offi_time, offi_time_max, quota, tran_time
+- ch12_belief_viewer: 
 - ch13_belief_listen: 
 - ch14_keep: _credor_count, _cycle_chargeees_curr, _cycle_chargeees_prev, _cycle_count, _debtor_count, _grants, _rivergrades, _rivergrants, _tax_got_curr, _tax_got_prev, _tax_yields, credor_count, credor_rank_num, credor_rank_percent, cycle_max, debtor_count, debtor_rank_num, debtor_rank_percent, grant_amount, keep_credorledgers, keep_point_magnitude, rewards_count, rewards_magnitude, riverbooks, tax_bill_amount, tax_dues, tax_paid_amount, tax_paid_bool, tax_paid_rank_num, tax_paid_rank_percent
 - ch15_moment: all_tranbook, beliefbudhistorys, cumulative_minute, hour_label, job_listen_rotations, moment_budunit, moment_epoch_hour, moment_epoch_month, moment_epoch_weekday, moment_paybook, moment_timeoffi, momentunit, month_label, offi_times, paybook, weekday_label, weekday_order
@@ -22,5 +23,4 @@
 - ch19_world_kpi: default_kpi_bundle, moment_kpi001_voice_nets, moment_kpi002_belief_pledges
 - ch20_world_logic: WorldName
 - ch21_lobby: LobbyID, lobby_id, lobby_mstr_dir, lobbys
-- ch22_belief_viewer: 
 - ch98_docs_builder: 
