@@ -15,7 +15,7 @@ def test_get_ropeterm_explanation_md_ReturnsObj():
 # Introduction
 Imagine all the things in the world and how they are related. Most things are not related to other things. But we as humans can create those connections. For example an apple that I eat and the moon seem completely seperate but we can create the connection arbitrarily: the apple is in an orchard, the orchard is loved by Sue, Sue loves the moon: "apple-orchard-things Sue loves-moon".
 
-There are infinitely many connections that can be possibly experienced. When we're living the infinite is open to us but only some connections are actually experienced. In jaar I define terms that are connections "Ropes". Imagine there is a rope connecting all things that are related to each other. Examples:
+There are infinitely many connections that can be possibly experienced. When we're living the infinite is open to us but only some connections are actually experienced. In beto I define terms that are connections "Ropes". Imagine there is a rope connecting all things that are related to each other. Examples:
 1. My cat and her food bowl. 
 2. A mountain as a concept and Wy'East (an actual mountain).
 3. My cat and a cat you know.

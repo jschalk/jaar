@@ -700,7 +700,7 @@ def test_BeliefUnit_create_agenda_plan_CreatesAllBeliefAttributes():
     assert len(sue_belief.planroot.kids) == 3
 
 
-def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError():  # https://github.com/jschalk/jaar/issues/69
+def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError():  # https://github.com/jschalk/beto/issues/69
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     add_time_creg_planunit(sue_belief)

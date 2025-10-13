@@ -6,9 +6,9 @@ from sys import argv as sys_argv
 if __name__ == "__main__":
     arg0 = sys_argv[1] if len(sys_argv) > 1 else None
     # Define the old and new strings in names
-    default_output_dir = "C:/dev/jaar_output"
-    default_input_dir = "C:/dev/jaar_input"
-    default_working_dir = "C:/dev/jaar_worlds"
+    default_output_dir = "C:/dev/beto_output"
+    default_input_dir = "C:/dev/beto_input"
+    default_working_dir = "C:/dev/beto_worlds"
 
     input_directory = ""
     output_directory = ""

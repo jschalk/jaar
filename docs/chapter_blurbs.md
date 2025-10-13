@@ -3,7 +3,7 @@
 What does each one do?
 
 
-- **ch00_intro**: Introduces why Jaar has been created.
+- **ch00_intro**: Introduces why Beto has been created.
 - **ch01_py**: Creates boring tools for computer data manipulation.
 - **ch02_rope**: Defines Term Classes: Knots, Labels, RopeTerms, FirstLabels
 - **ch03_allot**: Defines tools for financial allotment to ledgers.
@@ -25,4 +25,4 @@ What does each one do?
 - **ch19_world_kpi**: Defines the analytics outcomes of completed MomentUnits.
 - **ch20_world_logic**: Defines WorldUnits that admin MomentUnits input data and outcomes
 - **ch21_lobby**: Defines Lobby Tools for gifts, World Scenarios.
-- **ch98_docs_builder**: Defines Tools that create Jaar documentation.
+- **ch98_docs_builder**: Defines Tools that create Beto documentation.

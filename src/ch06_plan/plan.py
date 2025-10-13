@@ -185,7 +185,7 @@ def planattrholder_shop(
 @dataclass
 class PlanUnit:
     """
-    Represents a planual unit within jaar. Can represent a pledge, a task, a different plan's
+    Represents a planual unit within beto. Can represent a pledge, a task, a different plan's
     reason or fact, a parent plan of other plans.
     Funds: Funds come from the parent plan and go to the child plans.
     Awards: Desribes whom the funding comes from and whome it goes to.
