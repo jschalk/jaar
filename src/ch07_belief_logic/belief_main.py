@@ -1227,7 +1227,7 @@ reason_case:    {reason_case}"""
         self._healers_dict = {}
 
     def _set_plantree_factheirs_laborheir_awardheirs(self):
-        for x_plan in get_sorted_plan_list(list(self._plan_dict.values())):
+        for x_plan in get_sorted_plan_list(self._plan_dict):
             if x_plan == self.planroot:
                 x_plan.set_factheirs(x_plan.factunits)
                 x_plan.set_root_plan_reasonheirs()
@@ -1261,7 +1261,7 @@ reason_case:    {reason_case}"""
         self._set_belief_keep_attrs()
 
     def _set_plantree_active_status_attrs(self):
-        for x_plan in get_sorted_plan_list(list(self._plan_dict.values())):
+        for x_plan in get_sorted_plan_list(self._plan_dict):
             if x_plan == self.planroot:
                 tt_count = self.tree_traverse_count
                 root_plan = self.planroot
@@ -1606,6 +1606,12 @@ def get_dict_of_belief_from_dict(x_dict: dict[str, dict]) -> dict[str, BeliefUni
     return beliefunits
 
 
-def get_sorted_plan_list(x_list: list[PlanUnit]) -> list[PlanUnit]:
-    x_list.sort(key=lambda x: x.get_plan_rope(), reverse=False)
+def get_sorted_plan_list(
+    x_dict: dict[RopeTerm, PlanUnit], key: str = None
+) -> list[PlanUnit]:
+    x_list = list(x_dict.values())
+    if key in {"fund_ratio"}:
+        x_list.sort(key=lambda x: x.fund_ratio, reverse=True)
+    else:
+        x_list.sort(key=lambda x: x.get_plan_rope(), reverse=False)
     return x_list

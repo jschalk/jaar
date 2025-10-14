@@ -89,6 +89,8 @@
   "cases"                          : { "init_chapter": "ch05" }, 
   "celldepth"                      : { "init_chapter": "ch11" }, 
   "class_type"                     : { "init_chapter": "ch07" }, 
+  "gcal"                     : { "init_chapter": "ch12" }, 
+  "Event"                     : { "init_chapter": "ch12" }, 
   "close"                          : { "init_chapter": "ch06" }, 
   "column_order"                   : { "init_chapter": "ch09" }, 
   "credor_count"                   : { "init_chapter": "ch14" }, 
