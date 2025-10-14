@@ -52,9 +52,7 @@ def beliefunit_v001_with_large_agenda() -> BeliefUnit:
 
     yao_belief.add_fact(aaron_rope, aaron_rope)
     yao_belief.add_fact(ced_wk_rope, ced_wk_rope, fact_lower=0, fact_upper=53)
-    yao_belief.add_fact(
-        jour_minute_rope, jour_minute_rope, fact_lower=0, fact_upper=1399
-    )
+    yao_belief.add_fact(jour_minute_rope, jour_minute_rope, 0, 1399)
     # yao_belief.add_fact(websites, websites)
     yao_belief.add_fact(month_wk_rope, month_wk_rope, fact_lower=0, fact_upper=5)
     yao_belief.add_fact(mood_rope, mood_rope)
