@@ -162,6 +162,8 @@ def belief_plan_reasonunit_get_obj(
 def belief_plan_reason_caseunit_get_obj(
     x_belief: BeliefUnit, jkeys: dict[str, any]
 ) -> CaseUnit:
+    """jkeys: plan_rope, reason_context, reason_state"""
+
     x_rope = jkeys.get("plan_rope")
     x_reason_context = jkeys.get("reason_context")
     x_reason_state = jkeys.get("reason_state")
@@ -315,13 +317,16 @@ def set_caseunit_to_belief(
     plan_rope: RopeTerm,
     reason_context: RopeTerm,
     reason_case: RopeTerm,
+    reason_lower: float = None,
+    reason_upper: float = None,
+    reason_divisor: float = None,
 ):
     """Wrapper for method that edit beliefunit plan nodes reasonunits."""
     belief.edit_plan_attr(
         plan_rope=plan_rope,
         reason_context=reason_context,
         reason_case=reason_case,
-        reason_lower=None,
-        reason_upper=None,
-        reason_divisor=None,
+        reason_lower=reason_lower,
+        reason_upper=reason_upper,
+        reason_divisor=reason_divisor,
     )

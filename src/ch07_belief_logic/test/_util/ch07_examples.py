@@ -1,3 +1,4 @@
+from enum import Enum
 from src.ch01_py.file_toolbox import open_json
 from src.ch02_rope.rope import RopeTerm
 from src.ch04_voice.labor import laborunit_shop
@@ -8,6 +9,21 @@ from src.ch07_belief_logic.belief_main import (
     beliefunit_shop,
     get_beliefunit_from_dict,
 )
+
+
+class ChExampleStrsSlashknot(str, Enum):
+    Bob = "Bob"
+    casa_str = "casa"
+    clean_str = "clean"
+    dirtyness_str = "dirtyness"
+    mop_str = "mop"
+    slash_str = "/"
+    wk_str = "wk"
+    wed_str = "Wed"
+
+    def __str__(self):
+        return self.value
+
 
 # from src.ch01_py.file_toolbox import save_file
 # from src.ch07_belief_logic.test._util.ch07_env import get_belief_examples_dir as env_dir
