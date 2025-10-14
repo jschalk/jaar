@@ -6,11 +6,11 @@ from src.ch05_reason.reason import caseunit_shop, factunit_shop, reasonunit_shop
 from src.ch06_plan.healer import healerunit_shop
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch07_belief_logic.belief_tool import set_case_attr
+from src.ch07_belief_logic.belief_tool import set_caseunit_to_belief
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 
 
-def test_set_case_attr_SetNestedPlanUnitAttr_reason_context():
+def test_set_caseunit_to_belief_SetAttr_Scenario0_Pass_reason_case():
     # ESTABLISH
     slash_str = "/"
     bob_belief = beliefunit_shop("Bob", knot=slash_str)
@@ -27,7 +27,39 @@ def test_set_case_attr_SetNestedPlanUnitAttr_reason_context():
     assert not casa_plan.reasonunits.get(wk_rope)
 
     # WHEN
-    set_case_attr(bob_belief, casa_rope, reason_context=wk_rope, reason_case=wed_rope)
+    set_caseunit_to_belief(
+        bob_belief, casa_rope, reason_context=wk_rope, reason_case=wed_rope
+    )
 
     # THEN
     assert casa_plan.reasonunits.get(wk_rope)
+
+
+# def test_set_caseunit_to_belief_SetAttr_Scenario1_Pass_reason_lower_reason_upper():
+#     # ESTABLISH
+#     slash_str = "/"
+#     bob_belief = beliefunit_shop("Bob", knot=slash_str)
+#     casa_str = "casa"
+#     wk_str = "wk"
+#     wed_str = "Wed"
+#     casa_rope = bob_belief.make_l1_rope(casa_str)
+#     wk_rope = bob_belief.make_l1_rope(wk_str)
+#     wed_rope = bob_belief.make_rope(wk_rope, wed_str)
+#     bob_belief.set_l1_plan(planunit_shop(casa_str))
+#     bob_belief.set_l1_plan(planunit_shop(wk_str))
+#     bob_belief.set_plan(planunit_shop(wed_str), wk_rope)
+#     casa_plan = bob_belief.get_plan_obj(casa_rope)
+#     assert not casa_plan.reasonunits.get(wk_rope)
+
+#     # WHEN
+#     set_caseunit_to_belief(
+#         bob_belief,
+#         casa_rope,
+#         reason_context=wk_rope,
+#         reason_case=wed_rope,
+#         reason_lower=None,
+#         reason_upper=None,
+#     )
+
+#     # THEN
+#     assert casa_plan.reasonunits.get(wk_rope)

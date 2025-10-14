@@ -310,7 +310,7 @@ def clear_factunits_from_belief(x_belief: BeliefUnit):
         x_belief.del_fact(fact_reason_context)
 
 
-def set_case_attr(
+def set_caseunit_to_belief(
     belief: BeliefUnit,
     plan_rope: RopeTerm,
     reason_context: RopeTerm,
@@ -318,5 +318,10 @@ def set_case_attr(
 ):
     """Wrapper for method that edit beliefunit plan nodes reasonunits."""
     belief.edit_plan_attr(
-        plan_rope=plan_rope, reason_context=reason_context, reason_case=reason_case
+        plan_rope=plan_rope,
+        reason_context=reason_context,
+        reason_case=reason_case,
+        reason_lower=None,
+        reason_upper=None,
+        reason_divisor=None,
     )

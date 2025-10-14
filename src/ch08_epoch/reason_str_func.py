@@ -67,7 +67,9 @@ def get_fact_state_readable_str(
     return x_str
 
 
-def get_epochpoint_blurb(beliefunit, epoch_rope, arg2):
-    lower_btlp = beliefepochpoint_shop(beliefunit, epoch_rope, arg2)
+def get_epochpoint_blurb(
+    beliefunit: BeliefUnit, epoch_rope: RopeTerm, x_min: int
+) -> str:
+    lower_btlp = beliefepochpoint_shop(beliefunit, epoch_rope, x_min)
     lower_btlp.calc_epoch()
     return lower_btlp.get_blurb()

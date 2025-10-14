@@ -1,7 +1,7 @@
 from src.ch04_voice.group import awardunit_shop
 from src.ch04_voice.labor import laborunit_shop
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.ch07_belief_logic.belief_tool import set_case_attr
+from src.ch07_belief_logic.belief_tool import set_caseunit_to_belief
 from src.ch07_belief_logic.test._util.ch07_examples import (
     get_beliefunit_irrational_example,
 )
@@ -132,13 +132,13 @@ def get_sue_belief_with_facts_and_reasons() -> BeliefUnit:
     mop_laborunit.add_party(bob_str, True)
     sue_belief.edit_plan_attr(mop_rope, laborunit=mop_laborunit)
     # add reasons to mop_plan, sweep_plan, play_soccer_plan, plan_swim_plan, play_run_plan
-    set_case_attr(sue_belief, mop_rope, tidi_rope, dirty_rope)
-    set_case_attr(sue_belief, sweep_rope, tidi_rope, dirty_rope)
-    set_case_attr(sue_belief, play_soccer_rope, best_rope, best_soccer_rope)
-    set_case_attr(sue_belief, play_soccer_rope, best_rope, best_run_rope)
-    set_case_attr(sue_belief, play_soccer_rope, tidi_rope, tidy_rope)
-    set_case_attr(sue_belief, play_swim_rope, best_rope, best_swim_rope)
-    set_case_attr(sue_belief, play_swim_rope, tidi_rope, tidy_rope)
-    set_case_attr(sue_belief, play_run_rope, best_rope, best_run_rope)
+    set_caseunit_to_belief(sue_belief, mop_rope, tidi_rope, dirty_rope)
+    set_caseunit_to_belief(sue_belief, sweep_rope, tidi_rope, dirty_rope)
+    set_caseunit_to_belief(sue_belief, play_soccer_rope, best_rope, best_soccer_rope)
+    set_caseunit_to_belief(sue_belief, play_soccer_rope, best_rope, best_run_rope)
+    set_caseunit_to_belief(sue_belief, play_soccer_rope, tidi_rope, tidy_rope)
+    set_caseunit_to_belief(sue_belief, play_swim_rope, best_rope, best_swim_rope)
+    set_caseunit_to_belief(sue_belief, play_swim_rope, tidi_rope, tidy_rope)
+    set_caseunit_to_belief(sue_belief, play_run_rope, best_rope, best_run_rope)
     sue_belief.cashout()
     return sue_belief

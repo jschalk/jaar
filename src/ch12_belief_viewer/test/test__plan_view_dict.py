@@ -4,7 +4,7 @@ from src.ch08_epoch.reason_str_func import (
     get_reason_case_readable_str,
 )
 from src.ch12_belief_viewer.belief_viewer__tool import add_small_dot, get_plan_view_dict
-from src.ch12_belief_viewer.example22_beliefs import (
+from src.ch12_belief_viewer.belief_viewer_examples import (
     best_run_str,
     best_soccer_str,
     best_sport_str,
