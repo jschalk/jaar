@@ -1,9 +1,3 @@
-from pytest import raises as pytest_raises
-from src.ch02_rope.rope import create_rope, default_knot_if_None, to_rope
-from src.ch04_voice.group import awardunit_shop
-from src.ch04_voice.labor import laborunit_shop
-from src.ch05_reason.reason import caseunit_shop, factunit_shop, reasonunit_shop
-from src.ch06_plan.healer import healerunit_shop
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.belief_tool import (
@@ -11,10 +5,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_plan_reason_caseunit_get_obj,
     belief_plan_reason_caseunit_set_obj,
 )
-from src.ch07_belief_logic.test._util.ch07_examples import (
-    ChExampleStrsSlashknot as exx,
-    get_beliefunit_with_4_levels,
-)
+from src.ch07_belief_logic.test._util.ch07_examples import ChExampleStrsSlashknot as exx
 from src.ref.keywords import Ch07Keywords as wx
 
 
