@@ -62,6 +62,7 @@ def expected_semantic_types() -> set:
         "TitleTerm",
         "VoiceName",
         "WorldName",
+        "WeightNum",
     }
 
 

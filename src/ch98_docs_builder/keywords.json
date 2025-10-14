@@ -27,6 +27,7 @@
   "RopeTerm"                       : { "init_chapter": "ch02" }, 
   "TitleTerm"                      : { "init_chapter": "ch04" }, 
   "UPDATE"                         : { "init_chapter": "ch01" }, 
+  "WeightNum"                         : { "init_chapter": "ch03" }, 
   "VoiceName"                      : { "init_chapter": "ch04" }, 
   "WorldName"                      : { "init_chapter": "ch20" }, 
   "_credor_count"                  : { "init_chapter": "ch14" }, 

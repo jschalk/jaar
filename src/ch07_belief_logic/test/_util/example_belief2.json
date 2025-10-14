@@ -1485,7 +1485,7 @@
       "casa": {
         "is_expanded": false, 
         "kids": {
-          "Financial Ops": {
+          "Boring Ops": {
             "is_expanded": false, 
             "kids": {
               "be reponsible for rent": {
@@ -1567,7 +1567,7 @@
                 "uid": 75
               }
             }, 
-            "plan_label": "Financial Ops", 
+            "plan_label": "Boring Ops", 
             "star": 1, 
             "uid": 148
           }, 

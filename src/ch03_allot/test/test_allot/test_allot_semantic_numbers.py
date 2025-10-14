@@ -26,19 +26,6 @@ def test_default_grain_num_if_None_ReturnsObj():
     assert default_grain_num_if_None(0.03) == 0.03
 
 
-def test_PoolNum_Exists():
-    # ESTABLISH
-    x_float = 0.045
-    # WHEN
-    y_PoolNum = PoolNum(x_float)
-    # THEN
-    assert y_PoolNum == x_float
-    inspect_str = (
-        """PoolNum represents any possible Subset of the sum of numbers in the pool."""
-    )
-    assert inspect_getdoc(y_PoolNum) == inspect_str
-
-
 def test_default_pool_num_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert default_pool_num() == 1000000000
