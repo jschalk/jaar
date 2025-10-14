@@ -1,4 +1,4 @@
-from src.ch01_py.dict_toolbox import create_csv
+from src.ch01_py.dict_toolbox import create_csv, get_empty_dict_if_None
 from src.ch03_allot.allot import allot_scale
 from src.ch04_voice.group import AwardUnit, MemberShip
 from src.ch04_voice.voice import VoiceUnit, calc_give_take_net
@@ -312,20 +312,26 @@ def clear_factunits_from_belief(x_belief: BeliefUnit):
         x_belief.del_fact(fact_reason_context)
 
 
-def set_caseunit_to_belief(
-    belief: BeliefUnit,
-    plan_rope: RopeTerm,
-    reason_context: RopeTerm,
-    reason_case: RopeTerm,
-    reason_lower: float = None,
-    reason_upper: float = None,
-    reason_divisor: float = None,
-):
-    """Wrapper for method that edit beliefunit plan nodes reasonunits."""
+def belief_plan_reason_caseunit_set_obj(belief: BeliefUnit, args: dict[str,]):
+    """Wrapper for method that edit beliefunit plan nodes reasonunits.
+    plan_rope: required jkeys
+    reason_context: required jkeys
+    reason_state: required jkeys
+    reason_lower: optional jvalues
+    reason_upper: optional jvalues
+    reason_divisor: optional jvalues
+    """
+    plan_rope = args.get("plan_rope")
+    reason_context = args.get("reason_context")
+    reason_state = args.get("reason_state")
+    reason_lower = args.get("reason_lower")
+    reason_upper = args.get("reason_upper")
+    reason_divisor = args.get("reason_divisor")
+
     belief.edit_plan_attr(
         plan_rope=plan_rope,
         reason_context=reason_context,
-        reason_case=reason_case,
+        reason_case=reason_state,
         reason_lower=reason_lower,
         reason_upper=reason_upper,
         reason_divisor=reason_divisor,

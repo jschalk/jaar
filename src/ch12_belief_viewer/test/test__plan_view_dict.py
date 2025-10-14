@@ -314,6 +314,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario6_PlanUnit_ReasonUnit():
     # THEN
     # reasonunits
     play_soccer_reasonunits_dict = play_soccer_dict.get(wx.reasonunits)
+    print(f"{play_soccer_reasonunits_dict.keys()=}")
     assert len(play_soccer_reasonunits_dict) == 2
     # print(f"{len(play_soccer_reasonunits_dict)=}")
     best_reasonunit_dict = play_soccer_reasonunits_dict.get(best_rope)
