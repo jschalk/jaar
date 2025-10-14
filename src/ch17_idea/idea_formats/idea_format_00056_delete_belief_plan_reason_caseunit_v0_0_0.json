@@ -1,12 +1,12 @@
 {
   "attributes": {
     "belief_name"       : { "otx_key": true }, 
-    "spark_num"         : { "otx_key": true }, 
     "face_name"         : { "otx_key": true }, 
     "moment_label"      : { "otx_key": true }, 
     "plan_rope"         : { "otx_key": true }, 
     "reason_context"    : { "otx_key": true }, 
-    "reason_state_ERASE": { "otx_key": true }
+    "reason_state_ERASE": { "otx_key": true }, 
+    "spark_num"         : { "otx_key": true }
   }, 
   "dimens": [
     "momentunit", "beliefunit", "belief_planunit", "belief_plan_reasonunit", 

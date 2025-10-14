@@ -3,7 +3,6 @@
     "belief_name"      : { "otx_key": true  }, 
     "credor_respect"   : { "otx_key": false }, 
     "debtor_respect"   : { "otx_key": false }, 
-    "spark_num"        : { "otx_key": true  }, 
     "face_name"        : { "otx_key": true  }, 
     "fund_grain"       : { "otx_key": false }, 
     "fund_pool"        : { "otx_key": false }, 
@@ -11,6 +10,7 @@
     "moment_label"     : { "otx_key": true  }, 
     "money_grain"      : { "otx_key": false }, 
     "respect_grain"    : { "otx_key": false }, 
+    "spark_num"        : { "otx_key": true  }, 
     "tally"            : { "otx_key": false }
   }, 
   "dimens": ["momentunit", "beliefunit"], 

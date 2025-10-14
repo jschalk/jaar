@@ -1,10 +1,10 @@
 {
   "attributes": {
     "belief_name" : { "otx_key": true }, 
-    "spark_num"   : { "otx_key": true }, 
     "face_name"   : { "otx_key": true }, 
     "group_title" : { "otx_key": true }, 
     "moment_label": { "otx_key": true }, 
+    "spark_num"   : { "otx_key": true }, 
     "voice_name"  : { "otx_key": true }
   }, 
   "dimens": ["beliefunit", "belief_voiceunit", "belief_voice_membership", "momentunit"], 
