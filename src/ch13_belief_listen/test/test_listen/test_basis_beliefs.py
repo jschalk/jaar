@@ -41,7 +41,7 @@ def test_create_empty_belief_from_belief_ReturnsObj():
     assert yao_empty_vision.belief_name != yao_gut.belief_name
     assert yao_empty_vision.belief_name == zia_str
     assert yao_empty_vision.moment_label == yao_gut.moment_label
-    assert yao_empty_vision.last_pack_id is None
+    assert yao_empty_vision.last_lesson_id is None
     assert yao_empty_vision.get_voiceunits_dict() == {}
     assert yao_empty_vision.knot == yao_gut.knot
     assert yao_empty_vision.fund_pool == yao_gut.fund_pool
@@ -86,7 +86,7 @@ def test_create_listen_basis_ReturnsObj():
     # THEN
     assert yao_basis_vision.belief_name == yao_duty.belief_name
     assert yao_basis_vision.moment_label == yao_duty.moment_label
-    assert yao_basis_vision.last_pack_id == yao_duty.last_pack_id
+    assert yao_basis_vision.last_lesson_id == yao_duty.last_lesson_id
     assert yao_basis_vision.get_voiceunits_dict() == yao_duty.get_voiceunits_dict()
     assert yao_basis_vision.knot == yao_duty.knot
     assert yao_basis_vision.fund_pool == yao_duty.fund_pool
@@ -117,12 +117,12 @@ def test_get_default_job_ReturnsObj():
     sue_voice_pool = 800
     casa_str = "casa"
     bob_str = "Bob"
-    last_pack_id = 7
+    last_lesson_id = 7
     sue_max_tree_traverse = 9
     sue_beliefunit = beliefunit_shop(
         sue_str, blue_str, slash_str, x_fund_pool, x_fund_grain, x_respect_grain
     )
-    sue_beliefunit.set_last_pack_id(last_pack_id)
+    sue_beliefunit.set_last_lesson_id(last_lesson_id)
     sue_beliefunit.add_voiceunit(bob_str, 3, 4)
     bob_voiceunit = sue_beliefunit.get_voice(bob_str)
     bob_voiceunit.add_membership(f"{slash_str}swimmers")

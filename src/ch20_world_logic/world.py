@@ -37,9 +37,9 @@ from src.ch18_world_etl.transformers import (
     etl_sound_agg_tables_to_sound_vld_tables,
     etl_sound_raw_tables_to_sound_agg_tables,
     etl_sound_vld_tables_to_heard_raw_tables,
-    etl_spark_belief_csvs_to_pack_json,
+    etl_spark_belief_csvs_to_lesson_json,
     etl_spark_inherited_beliefunits_to_moment_gut,
-    etl_spark_pack_json_to_spark_inherited_beliefunits,
+    etl_spark_lesson_json_to_spark_inherited_beliefunits,
     etl_sparks_brick_agg_table_to_sparks_brick_valid_table,
     etl_translate_sound_agg_tables_to_translate_sound_vld_tables,
     get_max_brick_agg_spark_num,
@@ -148,8 +148,8 @@ class WorldUnit:
         etl_heard_raw_tables_to_heard_agg_tables(cursor)
         etl_heard_agg_tables_to_moment_jsons(cursor, mstr_dir)
         etl_heard_agg_to_spark_belief_csvs(cursor, mstr_dir)
-        etl_spark_belief_csvs_to_pack_json(mstr_dir)
-        etl_spark_pack_json_to_spark_inherited_beliefunits(mstr_dir)
+        etl_spark_belief_csvs_to_lesson_json(mstr_dir)
+        etl_spark_lesson_json_to_spark_inherited_beliefunits(mstr_dir)
         etl_spark_inherited_beliefunits_to_moment_gut(mstr_dir)
         add_moment_epoch_to_guts(mstr_dir)
         etl_moment_guts_to_moment_jobs(mstr_dir)

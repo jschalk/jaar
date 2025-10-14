@@ -7,8 +7,8 @@ CELLNODE_FILENAME = "cell.json"
 CELL_MANDATE_FILENAME = "cell_voice_mandate_ledger.json"
 BELIEFPOINT_FILENAME = "beliefpoint.json"
 BELIEFSPARK_FILENAME = "belief.json"
-SPARK_ALL_PACK_FILENAME = "all_pack.json"
-SPARK_EXPRESSED_PACK_FILENAME = "expressed_pack.json"
+SPARK_ALL_LESSON_FILENAME = "all_lesson.json"
+SPARK_EXPRESSED_LESSON_FILENAME = "expressed_lesson.json"
 
 
 def create_buds_dir_path(
@@ -134,29 +134,29 @@ def create_beliefspark_path(
     return create_path(belief_spark_dir_path, belief_filename)
 
 
-def create_spark_all_pack_path(
+def create_spark_all_lesson_path(
     moment_mstr_dir: str,
     moment_label: MomentLabel,
     belief_name: BeliefName,
     spark_num: int,
 ):
-    """Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\sparks\\spark_num\\all_pack.json"""
+    """Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\sparks\\spark_num\\all_lesson.json"""
     belief_spark_dir_path = create_belief_spark_dir_path(
         moment_mstr_dir, moment_label, belief_name, spark_num
     )
-    all_pack_filename = "all_pack.json"
-    return create_path(belief_spark_dir_path, all_pack_filename)
+    all_lesson_filename = "all_lesson.json"
+    return create_path(belief_spark_dir_path, all_lesson_filename)
 
 
-def create_spark_expressed_pack_path(
+def create_spark_expressed_lesson_path(
     moment_mstr_dir: str,
     moment_label: MomentLabel,
     belief_name: BeliefName,
     spark_num: int,
 ):
-    """Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\sparks\\spark_num\\expressed_pack.json"""
+    """Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\sparks\\spark_num\\expressed_lesson.json"""
     belief_spark_dir_path = create_belief_spark_dir_path(
         moment_mstr_dir, moment_label, belief_name, spark_num
     )
-    expressed_pack_filename = "expressed_pack.json"
-    return create_path(belief_spark_dir_path, expressed_pack_filename)
+    expressed_lesson_filename = "expressed_lesson.json"
+    return create_path(belief_spark_dir_path, expressed_lesson_filename)

@@ -1,6 +1,6 @@
 from src.ch01_py.dict_toolbox import get_empty_str_if_None as if_none_str
 from src.ch07_belief_logic.belief_main import BeliefUnit
-from src.ch10_pack.pack_main import PackUnit
+from src.ch10_lesson.lesson_main import LessonUnit
 from src.ch15_moment.moment_main import MomentUnit
 from src.ch17_idea._ref.ch17_semantic_types import FaceName, MomentLabel
 from src.ch17_idea.idea_config import get_idea_format_filename, get_idea_format_headers
@@ -494,16 +494,16 @@ def add_beliefunit_to_stance_csv_strs(
     moment_csv_strs["br00029"] = br00029_csv
 
 
-def add_pack_to_br00020_csv(
-    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
+def add_lesson_to_br00020_csv(
+    x_csv: str, x_lessonunit: LessonUnit, csv_delimiter: str
 ) -> str:
-    for beliefatom in x_packunit._beliefdelta.get_ordered_beliefatoms().values():
+    for beliefatom in x_lessonunit._beliefdelta.get_ordered_beliefatoms().values():
         if beliefatom.dimen == "belief_voice_membership":
             x_row = [
-                x_packunit.face_name,
-                str(x_packunit.spark_num),
-                x_packunit.moment_label,
-                x_packunit.belief_name,
+                x_lessonunit.face_name,
+                str(x_lessonunit.spark_num),
+                x_lessonunit.moment_label,
+                x_lessonunit.belief_name,
                 beliefatom.jkeys.get("voice_name"),
                 beliefatom.jkeys.get("group_title"),
                 if_none_str(beliefatom.jvalues.get("group_cred_lumen")),
@@ -514,16 +514,16 @@ def add_pack_to_br00020_csv(
     return x_csv
 
 
-def add_pack_to_br00021_csv(
-    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
+def add_lesson_to_br00021_csv(
+    x_csv: str, x_lessonunit: LessonUnit, csv_delimiter: str
 ) -> str:
-    for beliefatom in x_packunit._beliefdelta.get_ordered_beliefatoms().values():
+    for beliefatom in x_lessonunit._beliefdelta.get_ordered_beliefatoms().values():
         if beliefatom.dimen == "belief_voiceunit":
             x_row = [
-                x_packunit.face_name,
-                str(x_packunit.spark_num),
-                x_packunit.moment_label,
-                x_packunit.belief_name,
+                x_lessonunit.face_name,
+                str(x_lessonunit.spark_num),
+                x_lessonunit.moment_label,
+                x_lessonunit.belief_name,
                 beliefatom.jkeys.get("voice_name"),
                 if_none_str(beliefatom.jvalues.get("voice_cred_lumen")),
                 if_none_str(beliefatom.jvalues.get("voice_debt_lumen")),
@@ -533,16 +533,16 @@ def add_pack_to_br00021_csv(
     return x_csv
 
 
-def add_pack_to_br00022_csv(
-    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
+def add_lesson_to_br00022_csv(
+    x_csv: str, x_lessonunit: LessonUnit, csv_delimiter: str
 ) -> str:
-    for beliefatom in x_packunit._beliefdelta.get_ordered_beliefatoms().values():
+    for beliefatom in x_lessonunit._beliefdelta.get_ordered_beliefatoms().values():
         if beliefatom.dimen == "belief_plan_awardunit":
             x_row = [
-                x_packunit.face_name,
-                str(x_packunit.spark_num),
-                x_packunit.moment_label,
-                x_packunit.belief_name,
+                x_lessonunit.face_name,
+                str(x_lessonunit.spark_num),
+                x_lessonunit.moment_label,
+                x_lessonunit.belief_name,
                 beliefatom.jkeys.get("plan_rope"),
                 beliefatom.jkeys.get("awardee_title"),
                 if_none_str(beliefatom.jvalues.get("give_force")),
@@ -553,16 +553,16 @@ def add_pack_to_br00022_csv(
     return x_csv
 
 
-def add_pack_to_br00023_csv(
-    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
+def add_lesson_to_br00023_csv(
+    x_csv: str, x_lessonunit: LessonUnit, csv_delimiter: str
 ) -> str:
-    for beliefatom in x_packunit._beliefdelta.get_ordered_beliefatoms().values():
+    for beliefatom in x_lessonunit._beliefdelta.get_ordered_beliefatoms().values():
         if beliefatom.dimen == "belief_plan_factunit":
             x_row = [
-                x_packunit.face_name,
-                str(x_packunit.spark_num),
-                x_packunit.moment_label,
-                x_packunit.belief_name,
+                x_lessonunit.face_name,
+                str(x_lessonunit.spark_num),
+                x_lessonunit.moment_label,
+                x_lessonunit.belief_name,
                 beliefatom.jkeys.get("plan_rope"),
                 beliefatom.jkeys.get("fact_context"),
                 if_none_str(beliefatom.jvalues.get("fact_state")),
@@ -574,16 +574,16 @@ def add_pack_to_br00023_csv(
     return x_csv
 
 
-def add_pack_to_br00024_csv(
-    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
+def add_lesson_to_br00024_csv(
+    x_csv: str, x_lessonunit: LessonUnit, csv_delimiter: str
 ) -> str:
-    for beliefatom in x_packunit._beliefdelta.get_ordered_beliefatoms().values():
+    for beliefatom in x_lessonunit._beliefdelta.get_ordered_beliefatoms().values():
         if beliefatom.dimen == "belief_plan_partyunit":
             x_row = [
-                x_packunit.face_name,
-                str(x_packunit.spark_num),
-                x_packunit.moment_label,
-                x_packunit.belief_name,
+                x_lessonunit.face_name,
+                str(x_lessonunit.spark_num),
+                x_lessonunit.moment_label,
+                x_lessonunit.belief_name,
                 beliefatom.jkeys.get("plan_rope"),
                 beliefatom.jkeys.get("party_title"),
             ]
@@ -592,16 +592,16 @@ def add_pack_to_br00024_csv(
     return x_csv
 
 
-def add_pack_to_br00025_csv(
-    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
+def add_lesson_to_br00025_csv(
+    x_csv: str, x_lessonunit: LessonUnit, csv_delimiter: str
 ) -> str:
-    for beliefatom in x_packunit._beliefdelta.get_ordered_beliefatoms().values():
+    for beliefatom in x_lessonunit._beliefdelta.get_ordered_beliefatoms().values():
         if beliefatom.dimen == "belief_plan_healerunit":
             x_row = [
-                x_packunit.face_name,
-                str(x_packunit.spark_num),
-                x_packunit.moment_label,
-                x_packunit.belief_name,
+                x_lessonunit.face_name,
+                str(x_lessonunit.spark_num),
+                x_lessonunit.moment_label,
+                x_lessonunit.belief_name,
                 beliefatom.jkeys.get("plan_rope"),
                 beliefatom.jkeys.get("healer_name"),
             ]
@@ -610,16 +610,16 @@ def add_pack_to_br00025_csv(
     return x_csv
 
 
-def add_pack_to_br00026_csv(
-    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
+def add_lesson_to_br00026_csv(
+    x_csv: str, x_lessonunit: LessonUnit, csv_delimiter: str
 ) -> str:
-    for beliefatom in x_packunit._beliefdelta.get_ordered_beliefatoms().values():
+    for beliefatom in x_lessonunit._beliefdelta.get_ordered_beliefatoms().values():
         if beliefatom.dimen == "belief_plan_reason_caseunit":
             x_row = [
-                x_packunit.face_name,
-                str(x_packunit.spark_num),
-                x_packunit.moment_label,
-                x_packunit.belief_name,
+                x_lessonunit.face_name,
+                str(x_lessonunit.spark_num),
+                x_lessonunit.moment_label,
+                x_lessonunit.belief_name,
                 beliefatom.jkeys.get("plan_rope"),
                 beliefatom.jkeys.get("reason_context"),
                 beliefatom.jkeys.get("reason_state"),
@@ -632,16 +632,16 @@ def add_pack_to_br00026_csv(
     return x_csv
 
 
-def add_pack_to_br00027_csv(
-    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
+def add_lesson_to_br00027_csv(
+    x_csv: str, x_lessonunit: LessonUnit, csv_delimiter: str
 ) -> str:
-    for beliefatom in x_packunit._beliefdelta.get_ordered_beliefatoms().values():
+    for beliefatom in x_lessonunit._beliefdelta.get_ordered_beliefatoms().values():
         if beliefatom.dimen == "belief_plan_reasonunit":
             x_row = [
-                x_packunit.face_name,
-                str(x_packunit.spark_num),
-                x_packunit.moment_label,
-                x_packunit.belief_name,
+                x_lessonunit.face_name,
+                str(x_lessonunit.spark_num),
+                x_lessonunit.moment_label,
+                x_lessonunit.belief_name,
                 beliefatom.jkeys.get("plan_rope"),
                 beliefatom.jkeys.get("reason_context"),
                 if_none_str(beliefatom.jvalues.get("reason_active_requisite")),
@@ -651,16 +651,16 @@ def add_pack_to_br00027_csv(
     return x_csv
 
 
-def add_pack_to_br00028_csv(
-    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
+def add_lesson_to_br00028_csv(
+    x_csv: str, x_lessonunit: LessonUnit, csv_delimiter: str
 ) -> str:
-    for beliefatom in x_packunit._beliefdelta.get_ordered_beliefatoms().values():
+    for beliefatom in x_lessonunit._beliefdelta.get_ordered_beliefatoms().values():
         if beliefatom.dimen == "belief_planunit":
             x_row = [
-                x_packunit.face_name,
-                str(x_packunit.spark_num),
-                x_packunit.moment_label,
-                x_packunit.belief_name,
+                x_lessonunit.face_name,
+                str(x_lessonunit.spark_num),
+                x_lessonunit.moment_label,
+                x_lessonunit.belief_name,
                 beliefatom.jkeys.get("plan_rope"),
                 if_none_str(beliefatom.jvalues.get("begin")),
                 if_none_str(beliefatom.jvalues.get("close")),
@@ -679,16 +679,16 @@ def add_pack_to_br00028_csv(
     return x_csv
 
 
-def add_pack_to_br00029_csv(
-    x_csv: str, x_packunit: PackUnit, csv_delimiter: str
+def add_lesson_to_br00029_csv(
+    x_csv: str, x_lessonunit: LessonUnit, csv_delimiter: str
 ) -> str:
-    for beliefatom in x_packunit._beliefdelta.get_ordered_beliefatoms().values():
+    for beliefatom in x_lessonunit._beliefdelta.get_ordered_beliefatoms().values():
         if beliefatom.dimen == "beliefunit":
             x_row = [
-                x_packunit.face_name,
-                str(x_packunit.spark_num),
-                x_packunit.moment_label,
-                x_packunit.belief_name,
+                x_lessonunit.face_name,
+                str(x_lessonunit.spark_num),
+                x_lessonunit.moment_label,
+                x_lessonunit.belief_name,
                 if_none_str(beliefatom.jvalues.get("credor_respect")),
                 if_none_str(beliefatom.jvalues.get("debtor_respect")),
                 if_none_str(beliefatom.jvalues.get("fund_pool")),
@@ -703,8 +703,8 @@ def add_pack_to_br00029_csv(
     return x_csv
 
 
-def add_packunit_to_stance_csv_strs(
-    x_pack: PackUnit, moment_csv_strs: dict[str, str], csv_delimiter: str
+def add_lessonunit_to_stance_csv_strs(
+    x_lesson: LessonUnit, moment_csv_strs: dict[str, str], csv_delimiter: str
 ):
     br00020_csv = moment_csv_strs.get("br00020")
     br00021_csv = moment_csv_strs.get("br00021")
@@ -716,16 +716,16 @@ def add_packunit_to_stance_csv_strs(
     br00027_csv = moment_csv_strs.get("br00027")
     br00028_csv = moment_csv_strs.get("br00028")
     br00029_csv = moment_csv_strs.get("br00029")
-    br00020_csv = add_pack_to_br00020_csv(br00020_csv, x_pack, csv_delimiter)
-    br00021_csv = add_pack_to_br00021_csv(br00021_csv, x_pack, csv_delimiter)
-    br00022_csv = add_pack_to_br00022_csv(br00022_csv, x_pack, csv_delimiter)
-    br00023_csv = add_pack_to_br00023_csv(br00023_csv, x_pack, csv_delimiter)
-    br00024_csv = add_pack_to_br00024_csv(br00024_csv, x_pack, csv_delimiter)
-    br00025_csv = add_pack_to_br00025_csv(br00025_csv, x_pack, csv_delimiter)
-    br00026_csv = add_pack_to_br00026_csv(br00026_csv, x_pack, csv_delimiter)
-    br00027_csv = add_pack_to_br00027_csv(br00027_csv, x_pack, csv_delimiter)
-    br00028_csv = add_pack_to_br00028_csv(br00028_csv, x_pack, csv_delimiter)
-    br00029_csv = add_pack_to_br00029_csv(br00029_csv, x_pack, csv_delimiter)
+    br00020_csv = add_lesson_to_br00020_csv(br00020_csv, x_lesson, csv_delimiter)
+    br00021_csv = add_lesson_to_br00021_csv(br00021_csv, x_lesson, csv_delimiter)
+    br00022_csv = add_lesson_to_br00022_csv(br00022_csv, x_lesson, csv_delimiter)
+    br00023_csv = add_lesson_to_br00023_csv(br00023_csv, x_lesson, csv_delimiter)
+    br00024_csv = add_lesson_to_br00024_csv(br00024_csv, x_lesson, csv_delimiter)
+    br00025_csv = add_lesson_to_br00025_csv(br00025_csv, x_lesson, csv_delimiter)
+    br00026_csv = add_lesson_to_br00026_csv(br00026_csv, x_lesson, csv_delimiter)
+    br00027_csv = add_lesson_to_br00027_csv(br00027_csv, x_lesson, csv_delimiter)
+    br00028_csv = add_lesson_to_br00028_csv(br00028_csv, x_lesson, csv_delimiter)
+    br00029_csv = add_lesson_to_br00029_csv(br00029_csv, x_lesson, csv_delimiter)
     moment_csv_strs["br00020"] = br00020_csv
     moment_csv_strs["br00021"] = br00021_csv
     moment_csv_strs["br00022"] = br00022_csv

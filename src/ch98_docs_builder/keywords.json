@@ -184,7 +184,7 @@
   "knot"                           : { "init_chapter": "ch02" }, 
   "laborheir"                      : { "init_chapter": "ch04" }, 
   "laborunit"                      : { "init_chapter": "ch04" }, 
-  "last_pack_id"                   : { "init_chapter": "ch07" }, 
+  "last_lesson_id"                   : { "init_chapter": "ch07" }, 
   "lobby_id"                       : { "init_chapter": "ch21" }, 
   "lobby_mstr_dir"                 : { "init_chapter": "ch21" }, 
   "lobbys"                         : { "init_chapter": "ch21" }, 

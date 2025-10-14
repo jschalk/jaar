@@ -7,8 +7,8 @@ def test_LobbyUnit_Exists():
 
     # THEN
     assert not x_lobbyunit.lobby_id
-    assert not x_lobbyunit.option_packs
-    assert not x_lobbyunit.selected_pack
+    assert not x_lobbyunit.option_lessons
+    assert not x_lobbyunit.selected_lesson
     assert not x_lobbyunit.worlds
 
 
@@ -21,9 +21,9 @@ def test_lobbyunit_shop_ReturnsObj():
 
     # THEN
     assert d456_lobbyunit.lobby_id
-    assert not d456_lobbyunit.option_packs
-    assert not d456_lobbyunit.selected_pack
+    assert not d456_lobbyunit.option_lessons
+    assert not d456_lobbyunit.selected_lesson
     assert not d456_lobbyunit.worlds
 
 
-# def test_LobbyUnit_CreateOptionPacks():
+# def test_LobbyUnit_CreateOptionLessons():

@@ -3,8 +3,8 @@ from src.ch01_py.file_toolbox import create_path
 from src.ch02_rope.rope import to_rope
 from src.ch04_voice.group import awardunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch10_pack.delta import beliefdelta_shop
-from src.ch10_pack.pack_main import packunit_shop
+from src.ch10_lesson.delta import beliefdelta_shop
+from src.ch10_lesson.lesson_main import lessonunit_shop
 from src.ch17_idea.idea_csv_tool import (
     add_belief_to_br00020_csv,
     add_belief_to_br00021_csv,
@@ -17,19 +17,19 @@ from src.ch17_idea.idea_csv_tool import (
     add_belief_to_br00028_csv,
     add_belief_to_br00029_csv,
     add_beliefunit_to_stance_csv_strs,
+    add_lesson_to_br00020_csv,
+    add_lesson_to_br00021_csv,
+    add_lesson_to_br00022_csv,
+    add_lesson_to_br00023_csv,
+    add_lesson_to_br00024_csv,
+    add_lesson_to_br00025_csv,
+    add_lesson_to_br00026_csv,
+    add_lesson_to_br00027_csv,
+    add_lesson_to_br00028_csv,
+    add_lesson_to_br00029_csv,
+    add_lessonunit_to_stance_csv_strs,
     add_momentunit_to_stance_csv_strs,
     add_momentunits_to_stance_csv_strs,
-    add_pack_to_br00020_csv,
-    add_pack_to_br00021_csv,
-    add_pack_to_br00022_csv,
-    add_pack_to_br00023_csv,
-    add_pack_to_br00024_csv,
-    add_pack_to_br00025_csv,
-    add_pack_to_br00026_csv,
-    add_pack_to_br00027_csv,
-    add_pack_to_br00028_csv,
-    add_pack_to_br00029_csv,
-    add_packunit_to_stance_csv_strs,
     create_init_stance_idea_csv_strs,
 )
 from src.ch17_idea.idea_db_tool import get_ordered_csv
@@ -617,7 +617,7 @@ def test_add_beliefunit_to_stance_csv_strs_ReturnsObj():
     assert x_ideas.get("br00029") != br00029_header
 
 
-def test_add_pack_to_br00020_csv_ReturnsObj():
+def test_add_lesson_to_br00020_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
@@ -634,12 +634,12 @@ def test_add_pack_to_br00020_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     spark7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
-    sue7_pack.set_beliefdelta(bob_beliefdelta)
+    sue7_lesson = lessonunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
+    sue7_lesson.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00020")
 
     # WHEN
-    x_csv = add_pack_to_br00020_csv(csv_header, sue7_pack, csv_delimiter)
+    x_csv = add_lesson_to_br00020_csv(csv_header, sue7_lesson, csv_delimiter)
 
     # THEN
     yao_yao_row = f"{sue_str},{spark7},{a23_str},{bob_str},{yao_str},{yao_str},1,1\n"
@@ -650,7 +650,7 @@ def test_add_pack_to_br00020_csv_ReturnsObj():
     assert len(x_csv) == len(f"{csv_header}{yao_run_row}{yao_yao_row}")
 
 
-def test_add_pack_to_br00021_csv_ReturnsObj():
+def test_add_lesson_to_br00021_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
@@ -665,12 +665,12 @@ def test_add_pack_to_br00021_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     spark7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
-    sue7_pack.set_beliefdelta(bob_beliefdelta)
+    sue7_lesson = lessonunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
+    sue7_lesson.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00021")
 
     # WHEN
-    x_csv = add_pack_to_br00021_csv(csv_header, sue7_pack, csv_delimiter)
+    x_csv = add_lesson_to_br00021_csv(csv_header, sue7_lesson, csv_delimiter)
 
     # THEN
     yao_row = (
@@ -679,7 +679,7 @@ def test_add_pack_to_br00021_csv_ReturnsObj():
     assert x_csv == f"{csv_header}{yao_row}"
 
 
-def test_add_pack_to_br00022_csv_ReturnsObj():
+def test_add_lesson_to_br00022_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
@@ -697,20 +697,20 @@ def test_add_pack_to_br00022_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     spark7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
-    sue7_pack.set_beliefdelta(bob_beliefdelta)
+    sue7_lesson = lessonunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
+    sue7_lesson.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00022")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_pack_to_br00022_csv(csv_header, sue7_pack, csv_delimiter)
+    x_csv = add_lesson_to_br00022_csv(csv_header, sue7_lesson, csv_delimiter)
 
     # THEN
     yao_award_row = f"{sue_str},{spark7},{a23_str},{bob_str},{casa_rope},{yao_str},{yao_give_force},{yao_take_force}\n"
     assert x_csv == f"{csv_header}{yao_award_row}"
 
 
-def test_add_pack_to_br00023_csv_ReturnsObj():
+def test_add_lesson_to_br00023_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
@@ -729,13 +729,13 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     spark7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
-    sue7_pack.set_beliefdelta(bob_beliefdelta)
+    sue7_lesson = lessonunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
+    sue7_lesson.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00023")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_pack_to_br00023_csv(csv_header, sue7_pack, csv_delimiter)
+    x_csv = add_lesson_to_br00023_csv(csv_header, sue7_lesson, csv_delimiter)
 
     # THEN
     clean_row = f"{sue_str},{spark7},{a23_str},{bob_str},{a23_rope},{casa_rope},{clean_rope},{clean_fact_lower},{clean_fact_upper}\n"
@@ -745,7 +745,7 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     assert x_csv == expected_csv
 
 
-def test_add_pack_to_br00024_csv_ReturnsObj():
+def test_add_lesson_to_br00024_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
@@ -761,13 +761,13 @@ def test_add_pack_to_br00024_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     spark7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
-    sue7_pack.set_beliefdelta(bob_beliefdelta)
+    sue7_lesson = lessonunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
+    sue7_lesson.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00024")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_pack_to_br00024_csv(csv_header, sue7_pack, csv_delimiter)
+    x_csv = add_lesson_to_br00024_csv(csv_header, sue7_lesson, csv_delimiter)
 
     # THEN
     cleaners_row = (
@@ -779,7 +779,7 @@ def test_add_pack_to_br00024_csv_ReturnsObj():
     assert x_csv == f"{csv_header}{cleaners_row}"
 
 
-def test_add_pack_to_br00025_csv_ReturnsObj():
+def test_add_lesson_to_br00025_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
@@ -795,13 +795,13 @@ def test_add_pack_to_br00025_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     spark7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
-    sue7_pack.set_beliefdelta(bob_beliefdelta)
+    sue7_lesson = lessonunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
+    sue7_lesson.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00025")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_pack_to_br00025_csv(csv_header, sue7_pack, csv_delimiter)
+    x_csv = add_lesson_to_br00025_csv(csv_header, sue7_lesson, csv_delimiter)
 
     # THEN
     cleaners_row = (
@@ -810,7 +810,7 @@ def test_add_pack_to_br00025_csv_ReturnsObj():
     assert x_csv == f"{csv_header}{cleaners_row}"
 
 
-def test_add_pack_to_br00026_csv_ReturnsObj():
+def test_add_lesson_to_br00026_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
@@ -838,20 +838,20 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     spark7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
-    sue7_pack.set_beliefdelta(bob_beliefdelta)
+    sue7_lesson = lessonunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
+    sue7_lesson.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00026")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_pack_to_br00026_csv(csv_header, sue7_pack, csv_delimiter)
+    x_csv = add_lesson_to_br00026_csv(csv_header, sue7_lesson, csv_delimiter)
 
     # THEN
     mop_row = f"{sue_str},{spark7},{a23_str},{bob_str},{mop_rope},{casa_rope},{clean_rope},{clean_reason_lower},{clean_reason_upper},{clean_reason_divisor}\n"
     assert x_csv == f"{csv_header}{mop_row}"
 
 
-def test_add_pack_to_br00027_csv_ReturnsObj():
+def test_add_lesson_to_br00027_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
@@ -871,20 +871,20 @@ def test_add_pack_to_br00027_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     spark7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
-    sue7_pack.set_beliefdelta(bob_beliefdelta)
+    sue7_lesson = lessonunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
+    sue7_lesson.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00027")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_pack_to_br00027_csv(csv_header, sue7_pack, csv_delimiter)
+    x_csv = add_lesson_to_br00027_csv(csv_header, sue7_lesson, csv_delimiter)
 
     # THEN
     casa_row = f"{sue_str},{spark7},{a23_str},{bob_str},{mop_rope},{casa_rope},True\n"
     assert x_csv == f"{csv_header}{casa_row}"
 
 
-def test_add_pack_to_br00028_csv_ReturnsObj():
+def test_add_lesson_to_br00028_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
@@ -925,13 +925,13 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     spark7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
-    sue7_pack.set_beliefdelta(bob_beliefdelta)
+    sue7_lesson = lessonunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
+    sue7_lesson.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00028")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_pack_to_br00028_csv(csv_header, sue7_pack, csv_delimiter)
+    x_csv = add_lesson_to_br00028_csv(csv_header, sue7_lesson, csv_delimiter)
 
     # THEN
     # root_row = f"{sue_str},{spark7},{a23_str},{bob_str},,{bob_belief.moment_label},,,,,,,,,1,False,False\n"
@@ -947,7 +947,7 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     assert len(x_csv) == len(expected_csv)
 
 
-def test_add_pack_to_br00029_csv_ReturnsObj():
+def test_add_lesson_to_br00029_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
@@ -966,20 +966,20 @@ def test_add_pack_to_br00029_csv_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     spark7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
-    sue7_pack.set_beliefdelta(bob_beliefdelta)
+    sue7_lesson = lessonunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
+    sue7_lesson.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00029")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_pack_to_br00029_csv(csv_header, sue7_pack, csv_delimiter)
+    x_csv = add_lesson_to_br00029_csv(csv_header, sue7_lesson, csv_delimiter)
 
     # THEN
     belief_row = f"{sue_str},{spark7},{a23_str},{bob_str},{bob_belief.credor_respect},{bob_belief.debtor_respect},{bob_belief.fund_pool},,{bob_belief.tally},{bob_belief.fund_grain},,{bob_belief.respect_grain}\n"
     assert x_csv == f"{csv_header}{belief_row}"
 
 
-def test_add_packunit_to_stance_csv_strs_ReturnsObj():
+def test_add_lessonunit_to_stance_csv_strs_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
@@ -1012,8 +1012,8 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     spark7 = 7
-    sue7_pack = packunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
-    sue7_pack.set_beliefdelta(bob_beliefdelta)
+    sue7_lesson = lessonunit_shop(bob_str, sue_str, a23_str, spark_num=spark7)
+    sue7_lesson.set_beliefdelta(bob_beliefdelta)
 
     br00020_header = x_ideas.get("br00020")
     br00021_header = x_ideas.get("br00021")
@@ -1027,7 +1027,7 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
     br00029_header = x_ideas.get("br00029")
 
     # WHEN
-    add_packunit_to_stance_csv_strs(sue7_pack, x_ideas, csv_delimiter)
+    add_lessonunit_to_stance_csv_strs(sue7_lesson, x_ideas, csv_delimiter)
 
     # THEN
     assert x_ideas.get("br00020") != br00020_header

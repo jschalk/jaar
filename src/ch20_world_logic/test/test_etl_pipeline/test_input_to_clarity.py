@@ -3,15 +3,15 @@ from pandas import DataFrame
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_py.db_toolbox import db_table_exists, get_row_count
 from src.ch01_py.file_toolbox import count_dirs_files, create_path, save_file
-from src.ch10_pack._ref.ch10_path import (
+from src.ch10_lesson._ref.ch10_path import (
     create_gut_path,
     create_job_path,
     create_moment_json_path,
 )
-from src.ch10_pack.pack_filehandler import open_gut_file
+from src.ch10_lesson.lesson_filehandler import open_gut_file
 from src.ch11_bud._ref.ch11_path import (
-    create_spark_all_pack_path,
-    create_spark_expressed_pack_path as expressed_path,
+    create_spark_all_lesson_path,
+    create_spark_expressed_lesson_path as expressed_path,
 )
 from src.ch15_moment._ref.ch15_path import (
     create_bud_voice_mandate_ledger_path as bud_mandate,
@@ -84,8 +84,10 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
     blrpern_heard_put_agg = prime_tbl("blrpern", "h", "agg", "put")
     mstr_dir = fay_world._moment_mstr_dir
     a23_json_path = create_moment_json_path(mstr_dir, a23_str)
-    a23_e1_all_pack_path = create_spark_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
-    a23_e1_expressed_pack_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
+    a23_e1_all_lesson_path = create_spark_all_lesson_path(
+        mstr_dir, a23_str, sue_inx, e3
+    )
+    a23_e1_expressed_lesson_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
     a23_sue_gut_path = create_gut_path(mstr_dir, a23_str, sue_inx)
     a23_sue_job_path = create_job_path(mstr_dir, a23_str, sue_inx)
     blrpern_job = prime_tbl("blrpern", "job", None)
@@ -117,8 +119,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert not db_table_exists(cursor, blrpern_heard_put_raw)
         assert not db_table_exists(cursor, blrpern_heard_put_agg)
         assert not os_path_exists(a23_json_path)
-        assert not os_path_exists(a23_e1_all_pack_path)
-        assert not os_path_exists(a23_e1_expressed_pack_path)
+        assert not os_path_exists(a23_e1_all_lesson_path)
+        assert not os_path_exists(a23_e1_expressed_lesson_path)
         assert not os_path_exists(a23_sue_gut_path)
         assert not os_path_exists(a23_sue_job_path)
         assert not db_table_exists(cursor, wx.moment_spark_time_agg)
@@ -176,9 +178,9 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert get_row_count(cursor, blrunit_heard_put_agg) == 1
         assert get_row_count(cursor, blrpern_heard_put_agg) == 1
         assert os_path_exists(a23_json_path)
-        print(f"{a23_e1_all_pack_path=}")
-        assert os_path_exists(a23_e1_all_pack_path)
-        assert os_path_exists(a23_e1_expressed_pack_path)
+        print(f"{a23_e1_all_lesson_path=}")
+        assert os_path_exists(a23_e1_all_lesson_path)
+        assert os_path_exists(a23_e1_expressed_lesson_path)
         assert os_path_exists(a23_sue_gut_path)
         sue_gut = open_gut_file(mstr_dir, a23_str, sue_inx)
         time_rope = sue_gut.make_l1_rope(wx.time)
@@ -264,8 +266,10 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     blrpern_heard_put_agg = prime_tbl("blrpern", "h", "agg", "put")
     mstr_dir = fay_world._moment_mstr_dir
     a23_json_path = create_moment_json_path(mstr_dir, a23_str)
-    a23_e1_all_pack_path = create_spark_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
-    a23_e1_expressed_pack_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
+    a23_e1_all_lesson_path = create_spark_all_lesson_path(
+        mstr_dir, a23_str, sue_inx, e3
+    )
+    a23_e1_expressed_lesson_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
     a23_sue_gut_path = create_gut_path(mstr_dir, a23_str, sue_inx)
     a23_sue_job_path = create_job_path(mstr_dir, a23_str, sue_inx)
     sue37_mandate_path = bud_mandate(mstr_dir, a23_str, sue_inx, tp37)
@@ -294,8 +298,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert not db_table_exists(cursor, blrpern_heard_put_raw)
         assert not db_table_exists(cursor, blrpern_heard_put_agg)
         assert not os_path_exists(a23_json_path)
-        assert not os_path_exists(a23_e1_all_pack_path)
-        assert not os_path_exists(a23_e1_expressed_pack_path)
+        assert not os_path_exists(a23_e1_all_lesson_path)
+        assert not os_path_exists(a23_e1_expressed_lesson_path)
         assert not os_path_exists(a23_sue_gut_path)
         assert not os_path_exists(a23_sue_job_path)
         assert not db_table_exists(cursor, wx.moment_ote1_agg)
@@ -339,8 +343,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert get_row_count(cursor, blrunit_heard_put_agg) == 1
         assert get_row_count(cursor, blrpern_heard_put_agg) == 1
         assert os_path_exists(a23_json_path)
-        assert os_path_exists(a23_e1_all_pack_path)
-        assert os_path_exists(a23_e1_expressed_pack_path)
+        assert os_path_exists(a23_e1_all_lesson_path)
+        assert os_path_exists(a23_e1_expressed_lesson_path)
         assert os_path_exists(a23_sue_gut_path)
         assert os_path_exists(a23_sue_job_path)
         assert get_row_count(cursor, wx.moment_ote1_agg) == 1

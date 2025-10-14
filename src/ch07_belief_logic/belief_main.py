@@ -90,7 +90,7 @@ class _bit_RatioException(Exception):
     pass
 
 
-class _last_pack_idException(Exception):
+class _last_lesson_idException(Exception):
     pass
 
 
@@ -121,7 +121,7 @@ class BeliefUnit:
     credor_respect: RespectNum = None
     debtor_respect: RespectNum = None
     max_tree_traverse: int = None
-    last_pack_id: int = None
+    last_lesson_id: int = None
     # cashout Calculated field begin
     _plan_dict: dict[RopeTerm, PlanUnit] = None
     _keep_dict: dict[RopeTerm, PlanUnit] = None
@@ -143,14 +143,14 @@ class BeliefUnit:
             rope=self.planroot.get_plan_rope(), knot=self.knot
         )
 
-    def del_last_pack_id(self):
-        self.last_pack_id = None
+    def del_last_lesson_id(self):
+        self.last_lesson_id = None
 
-    def set_last_pack_id(self, x_last_pack_id: int):
-        if self.last_pack_id is not None and x_last_pack_id < self.last_pack_id:
-            exception_str = f"Cannot set _last_pack_id to {x_last_pack_id} because it is less than {self.last_pack_id}."
-            raise _last_pack_idException(exception_str)
-        self.last_pack_id = x_last_pack_id
+    def set_last_lesson_id(self, x_last_lesson_id: int):
+        if self.last_lesson_id is not None and x_last_lesson_id < self.last_lesson_id:
+            exception_str = f"Cannot set _last_lesson_id to {x_last_lesson_id} because it is less than {self.last_lesson_id}."
+            raise _last_lesson_idException(exception_str)
+        self.last_lesson_id = x_last_lesson_id
 
     def set_fund_pool(self, x_fund_pool):
         if valid_allotment_ratio(x_fund_pool, self.fund_grain) is False:
@@ -1413,8 +1413,8 @@ reason_case:    {reason_case}"""
             x_dict["credor_respect"] = self.credor_respect
         if self.debtor_respect is not None:
             x_dict["debtor_respect"] = self.debtor_respect
-        if self.last_pack_id is not None:
-            x_dict["last_pack_id"] = self.last_pack_id
+        if self.last_lesson_id is not None:
+            x_dict["last_lesson_id"] = self.last_lesson_id
 
         return x_dict
 
@@ -1507,7 +1507,7 @@ def get_beliefunit_from_dict(belief_dict: dict) -> BeliefUnit:
     )
     x_belief.credor_respect = obj_from_belief_dict(belief_dict, "credor_respect")
     x_belief.debtor_respect = obj_from_belief_dict(belief_dict, "debtor_respect")
-    x_belief.last_pack_id = obj_from_belief_dict(belief_dict, "last_pack_id")
+    x_belief.last_lesson_id = obj_from_belief_dict(belief_dict, "last_lesson_id")
     x_knot = x_belief.knot
     x_voices = obj_from_belief_dict(belief_dict, "voices", x_knot).values()
     for x_voiceunit in x_voices:

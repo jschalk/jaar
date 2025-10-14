@@ -8,8 +8,8 @@ from src.ch11_bud._ref.ch11_path import (
     CELL_MANDATE_FILENAME,
     CELLNODE_FILENAME,
     MOMENT_FILENAME,
-    SPARK_ALL_PACK_FILENAME,
-    SPARK_EXPRESSED_PACK_FILENAME,
+    SPARK_ALL_LESSON_FILENAME,
+    SPARK_EXPRESSED_LESSON_FILENAME,
     create_belief_spark_dir_path,
     create_beliefpoint_path,
     create_beliefspark_path,
@@ -19,8 +19,8 @@ from src.ch11_bud._ref.ch11_path import (
     create_cell_dir_path,
     create_cell_json_path,
     create_cell_voice_mandate_ledger_path,
-    create_spark_all_pack_path,
-    create_spark_expressed_pack_path,
+    create_spark_all_lesson_path,
+    create_spark_expressed_lesson_path,
 )
 from src.ch11_bud.test._util.ch11_env import get_chapter_temp_dir
 from src.ref.keywords import Ch11Keywords as wx
@@ -285,7 +285,7 @@ def test_create_beliefspark_path_ReturnsObj():
     assert gen_a23_e3_belief_path == expected_a23_bob_e3_belief_path
 
 
-def test_create_spark_all_pack_path_ReturnsObj():
+def test_create_spark_all_lesson_path_ReturnsObj():
     # ESTABLISH
     x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
@@ -293,7 +293,7 @@ def test_create_spark_all_pack_path_ReturnsObj():
     spark3 = 3
 
     # WHEN
-    gen_a23_e3_belief_path = create_spark_all_pack_path(
+    gen_a23_e3_belief_path = create_spark_all_lesson_path(
         x_moment_mstr_dir, amy23_str, bob_str, spark3
     )
 
@@ -304,13 +304,13 @@ def test_create_spark_all_pack_path_ReturnsObj():
     a23_bob_dir = create_path(a23_beliefs_dir, bob_str)
     a23_sparks_dir = create_path(a23_bob_dir, "sparks")
     a23_bob_e3_dir = create_path(a23_sparks_dir, spark3)
-    expected_a23_bob_e3_all_pack_path = create_path(
-        a23_bob_e3_dir, SPARK_ALL_PACK_FILENAME
+    expected_a23_bob_e3_all_lesson_path = create_path(
+        a23_bob_e3_dir, SPARK_ALL_LESSON_FILENAME
     )
-    assert gen_a23_e3_belief_path == expected_a23_bob_e3_all_pack_path
+    assert gen_a23_e3_belief_path == expected_a23_bob_e3_all_lesson_path
 
 
-def test_create_spark_expressed_pack_path_ReturnsObj():
+def test_create_spark_expressed_lesson_path_ReturnsObj():
     # ESTABLISH
     x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
@@ -318,7 +318,7 @@ def test_create_spark_expressed_pack_path_ReturnsObj():
     spark3 = 3
 
     # WHEN
-    gen_a23_e3_belief_path = create_spark_expressed_pack_path(
+    gen_a23_e3_belief_path = create_spark_expressed_lesson_path(
         x_moment_mstr_dir, amy23_str, bob_str, spark3
     )
 
@@ -329,10 +329,10 @@ def test_create_spark_expressed_pack_path_ReturnsObj():
     a23_bob_dir = create_path(a23_beliefs_dir, bob_str)
     a23_sparks_dir = create_path(a23_bob_dir, "sparks")
     a23_bob_e3_dir = create_path(a23_sparks_dir, spark3)
-    expected_a23_bob_e3_expressed_pack_path = create_path(
-        a23_bob_e3_dir, SPARK_EXPRESSED_PACK_FILENAME
+    expected_a23_bob_e3_expressed_lesson_path = create_path(
+        a23_bob_e3_dir, SPARK_EXPRESSED_LESSON_FILENAME
     )
-    assert gen_a23_e3_belief_path == expected_a23_bob_e3_expressed_pack_path
+    assert gen_a23_e3_belief_path == expected_a23_bob_e3_expressed_lesson_path
 
 
 LINUX_OS = platform_system() == "Linux"
@@ -466,9 +466,9 @@ def test_create_beliefspark_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_beliefspark_path) == doc_str
 
 
-def test_create_spark_all_pack_path_HasDocString():
+def test_create_spark_all_lesson_path_HasDocString():
     # ESTABLISH
-    doc_str = create_spark_all_pack_path(
+    doc_str = create_spark_all_lesson_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=wx.moment_label,
         belief_name=wx.belief_name,
@@ -476,12 +476,12 @@ def test_create_spark_all_pack_path_HasDocString():
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_spark_all_pack_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_spark_all_lesson_path) == doc_str
 
 
-def test_create_spark_expressed_pack_path_HasDocString():
+def test_create_spark_expressed_lesson_path_HasDocString():
     # ESTABLISH
-    doc_str = create_spark_expressed_pack_path(
+    doc_str = create_spark_expressed_lesson_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=wx.moment_label,
         belief_name=wx.belief_name,
@@ -489,4 +489,4 @@ def test_create_spark_expressed_pack_path_HasDocString():
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_spark_expressed_pack_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_spark_expressed_lesson_path) == doc_str

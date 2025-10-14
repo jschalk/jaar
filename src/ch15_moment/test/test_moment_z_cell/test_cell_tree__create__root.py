@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import count_dirs_files, open_json, save_json
-from src.ch10_pack._ref.ch10_path import (
+from src.ch10_lesson._ref.ch10_path import (
     create_moment_beliefs_dir_path,
     create_moment_json_path,
 )

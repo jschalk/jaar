@@ -2,8 +2,8 @@ from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import delete_dir
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch10_pack._ref.ch10_path import create_gut_path
-from src.ch10_pack.pack_filehandler import packfilehandler_shop, save_gut_file
+from src.ch10_lesson._ref.ch10_path import create_gut_path
+from src.ch10_lesson.lesson_filehandler import lessonfilehandler_shop, save_gut_file
 from src.ch13_belief_listen.listen_main import (
     create_listen_basis,
     listen_to_agendas_create_init_job_from_guts,
@@ -126,7 +126,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddstasksToBeliefWithDetail
     assert new_yao_gut1.plan_exists(a23_cook_rope()) is False
 
     # WHEN
-    yao_packfilehandler = packfilehandler_shop(moment_mstr_dir, a23_str, yao_str)
+    yao_lessonfilehandler = lessonfilehandler_shop(moment_mstr_dir, a23_str, yao_str)
     listen_to_agendas_create_init_job_from_guts(moment_mstr_dir, new_yao_gut1)
 
     # THEN

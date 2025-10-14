@@ -3,7 +3,7 @@ from pandas import read_excel as pandas_read_excel
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_py.file_toolbox import create_path, save_json, set_dir
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch10_pack._ref.ch10_path import create_gut_path, create_moment_json_path
+from src.ch10_lesson._ref.ch10_path import create_gut_path, create_moment_json_path
 from src.ch15_moment.moment_main import momentunit_shop
 from src.ch17_idea.idea_csv_tool import (
     add_beliefunit_to_stance_csv_strs,

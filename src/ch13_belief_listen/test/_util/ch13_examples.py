@@ -1,7 +1,7 @@
 from src.ch02_rope.rope import RopeTerm, create_rope, create_rope_from_labels
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop, planunit_shop
-from src.ch10_pack.pack_filehandler import PackFileHandler, packfilehandler_shop
-from src.ch10_pack.test._util.ch10_examples import get_texas_rope
+from src.ch10_lesson.lesson_filehandler import LessonFileHandler, lessonfilehandler_shop
+from src.ch10_lesson.test._util.ch10_examples import get_texas_rope
 from src.ch13_belief_listen.test._util.ch13_env import get_chapter_temp_dir
 from src.ref.keywords import Ch13Keywords as wx
 
@@ -126,9 +126,11 @@ def get_example_yao_speaker() -> BeliefUnit:
     return yao_speaker
 
 
-def get_texas_packfilehandler() -> PackFileHandler:
+def get_texas_lessonfilehandler() -> LessonFileHandler:
     moment_label = ch13_example_moment_label()
-    return packfilehandler_shop(get_chapter_temp_dir(), moment_label, belief_name="Sue")
+    return lessonfilehandler_shop(
+        get_chapter_temp_dir(), moment_label, belief_name="Sue"
+    )
 
 
 def get_dakota_rope() -> RopeTerm:
@@ -139,9 +141,11 @@ def get_dakota_rope() -> RopeTerm:
     return create_rope_from_labels([moment_label, nation_str, usa_str, dakota_str])
 
 
-def get_dakota_packfilehandler() -> PackFileHandler:
+def get_dakota_lessonfilehandler() -> LessonFileHandler:
     moment_label = ch13_example_moment_label()
-    return packfilehandler_shop(get_chapter_temp_dir(), moment_label, belief_name="Sue")
+    return lessonfilehandler_shop(
+        get_chapter_temp_dir(), moment_label, belief_name="Sue"
+    )
 
 
 def get_fund_breakdown_belief() -> BeliefUnit:

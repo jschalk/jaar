@@ -12,7 +12,7 @@ from src.ch07_belief_logic.belief_graphics import display_plantree
 from src.ch07_belief_logic.belief_main import BeliefUnit
 
 
-def get_packfilehandler_base_fig() -> plotly_Figure:
+def get_lessonfilehandler_base_fig() -> plotly_Figure:
     fig = plotly_Figure()
     fig.update_xaxes(range=[0, 10])
     fig.update_yaxes(range=[0, 10])
@@ -24,7 +24,7 @@ def get_listen_structures0_fig(graphics_bool: bool = False) -> plotly_Figure:
         sue_str = "Sue"
         bob_str = "Bob"
         yao_str = "Yao"
-        fig = get_packfilehandler_base_fig()
+        fig = get_lessonfilehandler_base_fig()
         sue_gut_str = f"{sue_str}.gut"
         sue_job_str = f"{sue_str}.job"
         yao_job_str = f"{yao_str}.job"
@@ -63,7 +63,7 @@ def get_listen_structures0_fig(graphics_bool: bool = False) -> plotly_Figure:
 
 def get_listen_structures1_fig(graphics_bool: bool = False) -> plotly_Figure:
     if graphics_bool:
-        fig = get_packfilehandler_base_fig()
+        fig = get_lessonfilehandler_base_fig()
         sue_str = "Sue"
         bob_str = "Bob"
         sue_gut_str = f"{sue_str}.gut"
@@ -127,7 +127,7 @@ def get_listen_structures1_fig(graphics_bool: bool = False) -> plotly_Figure:
 
 def get_listen_structures2_fig(graphics_bool: bool = False) -> plotly_Figure:
     if graphics_bool:
-        fig = get_packfilehandler_base_fig()
+        fig = get_lessonfilehandler_base_fig()
         fig.update_yaxes(range=[-4, 10])
         sue_str = "Sue"
         bob_str = "Bob"
@@ -205,7 +205,7 @@ def get_listen_structures2_fig(graphics_bool: bool = False) -> plotly_Figure:
 
 def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
     if graphics_bool:
-        fig = get_packfilehandler_base_fig()
+        fig = get_lessonfilehandler_base_fig()
         fig.update_yaxes(range=[-4, 10])
         sue_str = "Sue"
         bob_str = "Bob"

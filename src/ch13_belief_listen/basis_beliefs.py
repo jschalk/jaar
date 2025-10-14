@@ -37,7 +37,7 @@ def create_listen_basis(x_belief: BeliefUnit) -> BeliefUnit:
 
 def get_default_job(gut: BeliefUnit) -> BeliefUnit:
     default_job = create_listen_basis(gut)
-    default_job.last_pack_id = gut.last_pack_id
+    default_job.last_lesson_id = gut.last_lesson_id
     default_job.credor_respect = None
     default_job.debtor_respect = None
     return default_job

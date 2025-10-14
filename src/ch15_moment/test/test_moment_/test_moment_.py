@@ -6,8 +6,12 @@ from src.ch06_plan.healer import healerunit_shop
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch08_epoch.epoch_main import epochunit_shop
-from src.ch10_pack._ref.ch10_path import create_belief_dir_path
-from src.ch10_pack.pack_filehandler import gut_file_exists, open_gut_file, save_gut_file
+from src.ch10_lesson._ref.ch10_path import create_belief_dir_path
+from src.ch10_lesson.lesson_filehandler import (
+    gut_file_exists,
+    open_gut_file,
+    save_gut_file,
+)
 from src.ch11_bud.bud_filehandler import job_file_exists, open_job_file, save_job_file
 from src.ch11_bud.bud_main import tranbook_shop
 from src.ch13_belief_listen._ref.ch13_path import create_keep_dutys_path, create_path
@@ -46,7 +50,7 @@ def test_MomentUnit_Exists():
     # Calculated fields
     assert not amy_moment.offi_time_max
     assert not amy_moment._beliefs_dir
-    assert not amy_moment._packs_dir
+    assert not amy_moment._lessons_dir
     assert not amy_moment.all_tranbook
     assert set(amy_moment.__dict__) == {
         wx.moment_label,
@@ -64,7 +68,7 @@ def test_MomentUnit_Exists():
         wx.all_tranbook,
         wx.offi_time_max,
         "_beliefs_dir",
-        "_packs_dir",
+        "_lessons_dir",
     }
 
 
@@ -89,7 +93,7 @@ def test_momentunit_shop_ReturnsMomentUnit():
     assert a23_moment.job_listen_rotations == get_default_job_listen_count()
     # Calculated fields
     assert a23_moment._beliefs_dir != None
-    assert a23_moment._packs_dir != None
+    assert a23_moment._lessons_dir != None
     assert a23_moment.all_tranbook == tranbook_shop(a23_str)
 
 
@@ -104,7 +108,7 @@ def test_momentunit_shop_ReturnsMomentUnitWith_moments_dir(env_dir_setup_cleanup
     assert a23_moment.moment_label == a23_str
     assert a23_moment.moment_mstr_dir == get_chapter_temp_dir()
     assert a23_moment._beliefs_dir is not None
-    assert a23_moment._packs_dir is not None
+    assert a23_moment._lessons_dir is not None
 
 
 def test_momentunit_shop_ReturnsMomentUnitWith_knot(env_dir_setup_cleanup):
@@ -145,15 +149,15 @@ def test_MomentUnit_set_moment_dirs_SetsDirsAndFiles(env_dir_setup_cleanup):
     x_moments_dir = create_path(get_chapter_temp_dir(), "moments")
     x_moment_dir = create_path(x_moments_dir, a23_str)
     x_beliefs_dir = create_path(x_moment_dir, "beliefs")
-    x_packs_dir = create_path(x_moment_dir, "packs")
+    x_lessons_dir = create_path(x_moment_dir, "lessons")
 
     assert not amy_moment._moment_dir
     assert not amy_moment._beliefs_dir
-    assert not amy_moment._packs_dir
+    assert not amy_moment._lessons_dir
     assert os_path_exists(x_moment_dir) is False
     assert os_path_isdir(x_moment_dir) is False
     assert os_path_exists(x_beliefs_dir) is False
-    assert os_path_exists(x_packs_dir) is False
+    assert os_path_exists(x_lessons_dir) is False
 
     # WHEN
     amy_moment._set_moment_dirs()
@@ -161,11 +165,11 @@ def test_MomentUnit_set_moment_dirs_SetsDirsAndFiles(env_dir_setup_cleanup):
     # THEN
     assert amy_moment._moment_dir == x_moment_dir
     assert amy_moment._beliefs_dir == x_beliefs_dir
-    assert amy_moment._packs_dir == x_packs_dir
+    assert amy_moment._lessons_dir == x_lessons_dir
     assert os_path_exists(x_moment_dir)
     assert os_path_isdir(x_moment_dir)
     assert os_path_exists(x_beliefs_dir)
-    assert os_path_exists(x_packs_dir)
+    assert os_path_exists(x_lessons_dir)
 
 
 def test_momentunit_shop_SetsmomentsDirs(env_dir_setup_cleanup):

@@ -1,8 +1,8 @@
 from src.ch02_rope.rope import RopeTerm, create_rope, create_rope_from_labels
 from src.ch05_reason.reason import FactUnit, factunit_shop
 from src.ch09_belief_atom.atom_main import BeliefAtom, beliefatom_shop
-from src.ch10_pack.pack_main import PackUnit, packunit_shop
-from src.ch10_pack.test._util.ch10_examples import (
+from src.ch10_lesson.lesson_main import LessonUnit, lessonunit_shop
+from src.ch10_lesson.test._util.ch10_examples import (
     get_atom_example_factunit_knee,
     get_atom_example_planunit_ball,
     get_atom_example_planunit_knee,

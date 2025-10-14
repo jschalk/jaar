@@ -10,8 +10,12 @@ from src.ch08_epoch.epoch_main import (
     add_newepoch_planunit,
     epochunit_shop,
 )
-from src.ch10_pack._ref.ch10_path import create_moment_json_path
-from src.ch10_pack.pack_filehandler import gut_file_exists, open_gut_file, save_gut_file
+from src.ch10_lesson._ref.ch10_path import create_moment_json_path
+from src.ch10_lesson.lesson_filehandler import (
+    gut_file_exists,
+    open_gut_file,
+    save_gut_file,
+)
 from src.ch11_bud._ref.ch11_path import create_cell_dir_path
 from src.ch11_bud.bud_filehandler import (
     cellunit_save_to_dir,
@@ -67,13 +71,13 @@ class set_offi_time_max_Exception(Exception):
 @dataclass
 class MomentUnit:
     """Data pipelines:
-    pipeline1: packs->gut
+    pipeline1: lessons->gut
     pipeline2: gut->dutys
     pipeline3: duty->vision
     pipeline4: vision->job
     pipeline5: gut->job (direct)
     pipeline6: gut->vision->job (through visions)
-    pipeline7: packs->job (could be 5 of 6)
+    pipeline7: lessons->job (could be 5 of 6)
     """
 
     # TODO extraction pipelines into standalone functions
@@ -92,7 +96,7 @@ class MomentUnit:
     offi_time_max: EpochPoint = None
     _moment_dir: str = None
     _beliefs_dir: str = None
-    _packs_dir: str = None
+    _lessons_dir: str = None
     all_tranbook: TranBook = None
 
     # directory setup
@@ -100,10 +104,10 @@ class MomentUnit:
         moments_dir = create_path(self.moment_mstr_dir, "moments")
         self._moment_dir = create_path(moments_dir, self.moment_label)
         self._beliefs_dir = create_path(self._moment_dir, "beliefs")
-        self._packs_dir = create_path(self._moment_dir, "packs")
+        self._lessons_dir = create_path(self._moment_dir, "lessons")
         set_dir(x_path=self._moment_dir)
         set_dir(x_path=self._beliefs_dir)
-        set_dir(x_path=self._packs_dir)
+        set_dir(x_path=self._lessons_dir)
 
     def _get_belief_dir(self, belief_name) -> str:
         return create_path(self._beliefs_dir, belief_name)

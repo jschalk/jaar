@@ -207,7 +207,7 @@ def test_insert_idea_csv_ChangesDBState_CanCreateTable(
         os_remove(zia_csv_filepath)
 
 
-def test_create_idea_table_from_csv_NopackableExists(
+def test_create_idea_table_from_csv_NolessonableExists(
     setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     # ESTABLISH

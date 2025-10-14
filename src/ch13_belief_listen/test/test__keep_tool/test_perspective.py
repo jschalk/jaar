@@ -1,6 +1,6 @@
 from src.ch02_rope.rope import create_rope, default_knot_if_None
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
-from src.ch10_pack.pack_filehandler import packfilehandler_shop
+from src.ch10_lesson.lesson_filehandler import lessonfilehandler_shop
 from src.ch11_bud.bud_filehandler import save_job_file
 from src.ch11_bud.test._util.ch11_env import (
     env_dir_setup_cleanup,
@@ -14,7 +14,7 @@ from src.ch13_belief_listen.keep_tool import (
 )
 
 
-def test_get_perspective_belief_ReturnsBeliefWith_belief_nameSetToPackFileHandler_belief_name():
+def test_get_perspective_belief_ReturnsBeliefWith_belief_nameSetToLessonFileHandler_belief_name():
     # ESTABLISH
     bob_str = "Bob"
     bob_beliefunit = get_beliefunit_with_4_levels()
@@ -32,7 +32,7 @@ def test_get_perspective_belief_ReturnsBeliefWith_belief_nameSetToPackFileHandle
     assert perspective_beliefunit.to_dict() == bob_beliefunit.to_dict()
 
 
-def test_get_dw_perspective_belief_ReturnsBeliefWith_belief_nameSetToPackFileHandler_belief_name(
+def test_get_dw_perspective_belief_ReturnsBeliefWith_belief_nameSetToLessonFileHandler_belief_name(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -40,8 +40,8 @@ def test_get_dw_perspective_belief_ReturnsBeliefWith_belief_nameSetToPackFileHan
     a23_str = "amy23"
     bob_beliefunit = get_beliefunit_with_4_levels()
     bob_beliefunit.set_belief_name(bob_str)
-    bob_packfilehandler = packfilehandler_shop(env_dir(), a23_str, bob_str)
-    save_job_file(bob_packfilehandler.moment_mstr_dir, bob_beliefunit)
+    bob_lessonfilehandler = lessonfilehandler_shop(env_dir(), a23_str, bob_str)
+    save_job_file(bob_lessonfilehandler.moment_mstr_dir, bob_beliefunit)
     sue_str = "Sue"
 
     # WHEN
@@ -56,7 +56,7 @@ def test_get_dw_perspective_belief_ReturnsBeliefWith_belief_nameSetToPackFileHan
     assert perspective_beliefunit.to_dict() == bob_beliefunit.to_dict()
 
 
-def test_rj_perspective_belief_ReturnsBeliefWith_belief_nameSetToPackFileHandler_belief_name(
+def test_rj_perspective_belief_ReturnsBeliefWith_belief_nameSetToLessonFileHandler_belief_name(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

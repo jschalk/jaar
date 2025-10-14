@@ -30,13 +30,17 @@ from src.ch01_py.file_toolbox import (
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch09_belief_atom.atom_config import get_belief_dimens
 from src.ch09_belief_atom.atom_main import beliefatom_shop
-from src.ch10_pack._ref.ch10_path import create_gut_path, create_moment_json_path
-from src.ch10_pack.delta import get_minimal_beliefdelta
-from src.ch10_pack.pack_main import PackUnit, get_packunit_from_dict, packunit_shop
+from src.ch10_lesson._ref.ch10_path import create_gut_path, create_moment_json_path
+from src.ch10_lesson.delta import get_minimal_beliefdelta
+from src.ch10_lesson.lesson_main import (
+    LessonUnit,
+    get_lessonunit_from_dict,
+    lessonunit_shop,
+)
 from src.ch11_bud._ref.ch11_path import (
     create_belief_spark_dir_path,
     create_beliefspark_path,
-    create_spark_all_pack_path,
+    create_spark_all_lesson_path,
 )
 from src.ch11_bud.bud_filehandler import (
     collect_belief_spark_dir_sets,
@@ -759,7 +763,7 @@ def etl_heard_agg_to_spark_belief_csvs(
             )
 
 
-def etl_spark_belief_csvs_to_pack_json(moment_mstr_dir: str):
+def etl_spark_belief_csvs_to_lesson_json(moment_mstr_dir: str):
     moments_dir = create_path(moment_mstr_dir, "moments")
     for moment_label in get_level1_dirs(moments_dir):
         moment_path = create_path(moments_dir, moment_label)
@@ -768,21 +772,23 @@ def etl_spark_belief_csvs_to_pack_json(moment_mstr_dir: str):
             belief_path = create_path(beliefs_path, belief_name)
             sparks_path = create_path(belief_path, "sparks")
             for spark_num in get_level1_dirs(sparks_path):
-                spark_pack = packunit_shop(
+                spark_lesson = lessonunit_shop(
                     belief_name=belief_name,
                     face_name=None,
                     moment_label=moment_label,
                     spark_num=spark_num,
                 )
                 spark_dir = create_path(sparks_path, spark_num)
-                add_beliefatoms_from_csv(spark_pack, spark_dir)
-                spark_all_pack_path = create_spark_all_pack_path(
+                add_beliefatoms_from_csv(spark_lesson, spark_dir)
+                spark_all_lesson_path = create_spark_all_lesson_path(
                     moment_mstr_dir, moment_label, belief_name, spark_num
                 )
-                save_json(spark_all_pack_path, None, spark_pack.get_serializable_dict())
+                save_json(
+                    spark_all_lesson_path, None, spark_lesson.get_serializable_dict()
+                )
 
 
-def add_beliefatoms_from_csv(spark_pack: PackUnit, spark_dir: str):
+def add_beliefatoms_from_csv(spark_lesson: LessonUnit, spark_dir: str):
     idea_sqlite_types = get_idea_sqlite_types()
     belief_dimens = get_belief_dimens()
     belief_dimens.remove("beliefunit")
@@ -810,7 +816,7 @@ def add_beliefatoms_from_csv(spark_pack: PackUnit, spark_dir: str):
                         "belief_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                spark_pack._beliefdelta.set_beliefatom(x_atom)
+                spark_lesson._beliefdelta.set_beliefatom(x_atom)
 
         if os_path_exists(del_path):
             del_rows = open_csv_with_types(del_path, idea_sqlite_types)
@@ -825,10 +831,10 @@ def add_beliefatoms_from_csv(spark_pack: PackUnit, spark_dir: str):
                         "belief_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                spark_pack._beliefdelta.set_beliefatom(x_atom)
+                spark_lesson._beliefdelta.set_beliefatom(x_atom)
 
 
-def etl_spark_pack_json_to_spark_inherited_beliefunits(moment_mstr_dir: str):
+def etl_spark_lesson_json_to_spark_inherited_beliefunits(moment_mstr_dir: str):
     moments_dir = create_path(moment_mstr_dir, "moments")
     for moment_label in get_level1_dirs(moments_dir):
         moment_path = create_path(moments_dir, moment_label)
@@ -848,21 +854,23 @@ def etl_spark_pack_json_to_spark_inherited_beliefunits(moment_mstr_dir: str):
                     moment_mstr_dir, moment_label, belief_name, spark_num
                 )
 
-                spark_all_pack_path = create_spark_all_pack_path(
+                spark_all_lesson_path = create_spark_all_lesson_path(
                     moment_mstr_dir, moment_label, belief_name, spark_num
                 )
-                spark_pack = get_packunit_from_dict(open_json(spark_all_pack_path))
-                sift_delta = get_minimal_beliefdelta(
-                    spark_pack._beliefdelta, prev_belief
+                spark_lesson = get_lessonunit_from_dict(
+                    open_json(spark_all_lesson_path)
                 )
-                curr_belief = spark_pack.get_pack_edited_belief(prev_belief)
+                sift_delta = get_minimal_beliefdelta(
+                    spark_lesson._beliefdelta, prev_belief
+                )
+                curr_belief = spark_lesson.get_lesson_edited_belief(prev_belief)
                 save_json(beliefspark_path, None, curr_belief.to_dict())
-                expressed_pack = copy_deepcopy(spark_pack)
-                expressed_pack.set_beliefdelta(sift_delta)
+                expressed_lesson = copy_deepcopy(spark_lesson)
+                expressed_lesson.set_beliefdelta(sift_delta)
                 save_json(
                     spark_dir,
-                    "expressed_pack.json",
-                    expressed_pack.get_serializable_dict(),
+                    "expressed_lesson.json",
+                    expressed_lesson.get_serializable_dict(),
                 )
                 prev_spark_num = spark_num
 
