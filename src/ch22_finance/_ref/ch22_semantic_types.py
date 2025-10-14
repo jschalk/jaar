@@ -1,4 +1,4 @@
-from src.ch20_world_logic._ref.ch20_semantic_types import (
+from src.ch21_lobby._ref.ch21_semantic_types import (
     BeliefName,
     FaceName,
     FirstLabel,
@@ -7,6 +7,7 @@ from src.ch20_world_logic._ref.ch20_semantic_types import (
     GroupTitle,
     HealerName,
     LabelTerm,
+    LobbyID,
     MomentLabel,
     MoneyGrain,
     MoneyNum,
@@ -20,7 +21,3 @@ from src.ch20_world_logic._ref.ch20_semantic_types import (
     WorldName,
     default_knot_if_None,
 )
-
-
-class LobbyID(str):
-    pass

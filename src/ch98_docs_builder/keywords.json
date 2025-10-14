@@ -100,6 +100,8 @@
   "crud"                           : { "init_chapter": "ch09" }, 
   "cumulative_day"                 : { "init_chapter": "ch08" }, 
   "cumulative_minute"              : { "init_chapter": "ch15" }, 
+  "finance"              : { "init_chapter": "ch22" }, 
+  "financial"              : { "init_chapter": "ch22" }, 
   "cycle_max"                      : { "init_chapter": "ch14" }, 
   "day"                            : { "init_chapter": "ch08" }, 
   "days"                           : { "init_chapter": "ch08" }, 

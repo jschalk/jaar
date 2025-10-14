@@ -23,4 +23,5 @@
 - ch19_world_kpi: default_kpi_bundle, moment_kpi001_voice_nets, moment_kpi002_belief_pledges
 - ch20_world_logic: WorldName
 - ch21_lobby: LobbyID, lobby_id, lobby_mstr_dir, lobbys
+- ch22_finance: finance, financial
 - ch98_docs_builder: 
