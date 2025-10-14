@@ -571,6 +571,7 @@ class BeliefUnit:
     def add_plan(
         self, plan_rope: RopeTerm, star: float = None, pledge: bool = None
     ) -> PlanUnit:
+        """default star is 0, pledges will have weight of 0 if star is not passed"""
         x_plan_label = get_tail_label(plan_rope, self.knot)
         x_parent_rope = get_parent_rope(plan_rope, self.knot)
         x_planunit = planunit_shop(x_plan_label, star=star)

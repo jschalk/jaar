@@ -5,8 +5,8 @@ from src.ch01_py.plotly_toolbox import conditional_fig_show
 from src.ch06_plan.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch08_epoch.epoch_main import (
-    add_newepoch_planunit,
     beliefepochpoint_shop,
+    create_epoch_plan,
     create_weekday_planunits,
     get_min_from_dt_offset,
     new_epoch_planunit,
@@ -87,17 +87,20 @@ def creg_hour_int_label(x_int: int) -> str:
 
 def add_time_creg_planunit(x_beliefunit: BeliefUnit) -> BeliefUnit:
     """Add creg epoch planunit to beliefunit"""
-    return add_newepoch_planunit(x_beliefunit, get_creg_config())
+    create_epoch_plan(x_beliefunit, get_creg_config())
+    return x_beliefunit
 
 
 def add_time_five_planunit(x_beliefunit: BeliefUnit) -> BeliefUnit:
     """Add five epoch planunit to beliefunit"""
-    return add_newepoch_planunit(x_beliefunit, get_five_config())
+    create_epoch_plan(x_beliefunit, get_five_config())
+    return x_beliefunit
 
 
 def add_time_squirt_planunit(x_beliefunit: BeliefUnit) -> BeliefUnit:
     """Add squirt epoch planunit to beliefunit"""
-    return add_newepoch_planunit(x_beliefunit, get_squirt_config())
+    create_epoch_plan(x_beliefunit, get_squirt_config())
+    return x_beliefunit
 
 
 def get_creg_min_from_dt(dt: datetime) -> int:

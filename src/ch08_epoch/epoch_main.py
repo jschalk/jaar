@@ -151,7 +151,8 @@ def get_epoch_rope(nexus_label: str, epoch_label: str, knot: str) -> RopeTerm:
     return create_rope(time_rope, epoch_label, knot)
 
 
-def add_newepoch_planunit(x_beliefunit: BeliefUnit, epoch_config: dict):
+def create_epoch_plan(x_beliefunit: BeliefUnit, epoch_config: dict):
+    """ "Add epoch to BeliefUnit given epoch_config"""
     x_plan_label = epoch_config.get("epoch_label")
     x_c400_number = epoch_config.get("c400_number")
     x_months = epoch_config.get("months_config")
@@ -179,7 +180,6 @@ def add_newepoch_planunit(x_beliefunit: BeliefUnit, epoch_config: dict):
     add_planunits(x_beliefunit, year_rope, create_month_planunits(x_months, x_mday))
     offset_plan = planunit_shop("yr1_jan1_offset", addin=x_yr1_jan1_offset)
     x_beliefunit.set_plan(offset_plan, epoch_rope)
-    return x_beliefunit
 
 
 def add_planunits(

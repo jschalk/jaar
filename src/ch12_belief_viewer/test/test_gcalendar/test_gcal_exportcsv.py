@@ -1,8 +1,8 @@
 from csv import DictReader as csv_DictReader
 from datetime import datetime
-from enum import Enum
 from io import StringIO as io_StringIO
 from src.ch07_belief_logic.belief_main import beliefunit_shop
+from src.ch08_epoch.epoch_main import create_epoch_plan, get_default_epoch_config_dict
 from src.ch12_belief_viewer.gcalendar import (
     create_gcalendar_csv,
     create_gcalendar_events_list,
@@ -41,6 +41,9 @@ def test_gcal_readble_percent_ReturnsObj():
     """Ensure custom precision works correctly."""
     assert gcal_readble_percent(0.123456, precision=1) == "12.3%"
     assert gcal_readble_percent(0.123456, precision=4) == "12.3456%"
+    assert gcal_readble_percent(0.00123456, precision=4) == "0.1235%"
+    assert gcal_readble_percent(0.0000123456, precision=4) == "1.23e-03%"
+    assert gcal_readble_percent(0.000123456) == "0.01%"
 
 
 def test_create_gcalendar_events_list_ReturnsObj_Scenario0_Empty():
@@ -56,32 +59,58 @@ def test_create_gcalendar_events_list_ReturnsObj_Scenario0_Empty():
     assert sue_gcal_events == []
 
 
-# # TODO figure out why this calculates fund_ratio = 0.0 instead of 1,0
-# def test_create_gcalendar_events_list_ReturnsObj_Scenario1_1AllDayPledge():
-#     # ESTABLISH
-#     sue_belief = beliefunit_shop(exx.sue, exx.a23)
-#     sue_belief.add_plan(exx.mop_rope, pledge=True)
-#     print(f"{exx.apr7=}")
+def test_BeliefUnit_cashout_SetsAttr_ScenarioX_SingleBranch_fund_ratio():
+    # ESTABLISH
+    sue_belief = beliefunit_shop(exx.sue, exx.a23)
+    sue_belief.add_plan(exx.mop_rope, pledge=True, star=1)
+    mop_plan = sue_belief.get_plan_obj(exx.mop_rope)
+    assert not sue_belief.planroot.fund_onset
+    assert not sue_belief.planroot.fund_cease
+    assert not sue_belief.planroot.fund_ratio
+    assert not mop_plan.fund_onset
+    assert not mop_plan.fund_cease
+    assert not mop_plan.fund_ratio
 
-#     # WHEN
-#     sue_gcal_events = create_gcalendar_events_list(sue_belief, exx.apr7)
+    # WHEN
+    sue_belief.cashout()
 
-#     # THEN
-#     gcal_tobe_description = f"""1. {exx.mop_str} (100%)
-# """
-#     description_str = "Description"
-#     expected_event_dict = {
-#         "Subject": "To Be and Do List",
-#         "Start Date": "10/10/2025",
-#         "End Date": "10/10/2025",
-#         "All Day Event": "True",
-#         description_str: gcal_tobe_description,
-#     }
-#     init_gcal_event = sue_gcal_events[0]
-#     assert len(sue_gcal_events) == 1
-#     assert init_gcal_event.keys() == expected_event_dict.keys()
-#     assert init_gcal_event.get(description_str) == gcal_tobe_description
-#     assert sue_gcal_events == [expected_event_dict]
+    # THEN
+    assert sue_belief.planroot.fund_onset == 0
+    assert sue_belief.planroot.fund_cease == 1000000000.0
+    assert sue_belief.planroot.fund_ratio == 1.0
+    assert mop_plan.fund_onset == 0
+    assert mop_plan.fund_cease == sue_belief.fund_pool
+    assert mop_plan.fund_ratio
+    assert mop_plan.fund_ratio == 1.0
+
+
+def test_create_gcalendar_events_list_ReturnsObj_Scenario1_1AllDayPledge():
+    # ESTABLISH
+    sue_belief = beliefunit_shop(exx.sue, exx.a23)
+    sue_belief.add_plan(exx.mop_rope, pledge=True, star=1)
+    apr7 = datetime(2010, 5, 7, 9)
+    print(f"{apr7=}")
+
+    # WHEN
+    sue_gcal_events = create_gcalendar_events_list(sue_belief, apr7)
+
+    # THEN
+    gcal_tobe_description = f"""1. {exx.mop_str} (100%)
+"""
+    description_str = "Description"
+    expected_apr7str = "05/07/2010"
+    expected_event_dict = {
+        "Subject": "Pledges",
+        "Start Date": expected_apr7str,
+        "End Date": expected_apr7str,
+        "All Day Event": "True",
+        description_str: gcal_tobe_description,
+    }
+    init_gcal_event = sue_gcal_events[0]
+    assert len(sue_gcal_events) == 1
+    assert init_gcal_event.keys() == expected_event_dict.keys()
+    assert init_gcal_event.get(description_str) == gcal_tobe_description
+    assert sue_gcal_events == [expected_event_dict]
 
 
 def test_create_gcalendar_events_list_ReturnsObj_Scenario2_3AllDayPledge():
@@ -119,6 +148,44 @@ def test_create_gcalendar_events_list_ReturnsObj_Scenario2_3AllDayPledge():
     print(sue_gcal_events)
     print([expected_event_dict])
     assert sue_gcal_events == [expected_event_dict]
+
+
+# def test_create_gcalendar_events_list_ReturnsObj_Scenario3_OneEpoch_pledge():
+#     # ESTABLISH
+#     sue_belief = beliefunit_shop(exx.sue, exx.a23)
+#     sue_belief.add_plan(exx.mop_rope, pledge=True, star=2)
+#     default_epoch_config = get_default_epoch_config_dict()
+#     create_epoch_plan(sue_belief, default_epoch_config)
+#     sue_belief.edit_reason(exx.mop_rope, reason_context=, reason_case=)
+#     apr7 = datetime(2010, 5, 7, 9)
+#     print(f"{apr7=}")
+
+#     # WHEN
+#     sue_gcal_events = create_gcalendar_events_list(sue_belief, apr7)
+
+#     # THEN
+#     gcal_tobe_description = f"""1. {exx.mop_str} (50%)
+# 2. {exx.scrub_str} (25%)
+# 3. {exx.sweep_str} (25%)
+# """
+#     description_str = "Description"
+#     start_date_str = "Start Date"
+#     expected_apr7str = "05/07/2010"
+#     expected_event_dict = {
+#         "Subject": "Pledges",
+#         start_date_str: expected_apr7str,
+#         "End Date": expected_apr7str,
+#         "All Day Event": "True",
+#         description_str: gcal_tobe_description,
+#     }
+#     init_gcal_event = sue_gcal_events[0]
+#     assert len(sue_gcal_events) == 1
+#     assert init_gcal_event.keys() == expected_event_dict.keys()
+#     assert init_gcal_event.get(description_str) == gcal_tobe_description
+#     assert init_gcal_event.get(start_date_str) == expected_apr7str
+#     print(sue_gcal_events)
+#     print([expected_event_dict])
+#     assert sue_gcal_events == [expected_event_dict]
 
 
 def test_create_gcalendar_csv_ReturnsObj():
