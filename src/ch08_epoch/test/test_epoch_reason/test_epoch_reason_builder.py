@@ -10,6 +10,7 @@ from src.ch08_epoch.epoch_main import add_epoch_planunit
 from src.ch08_epoch.epoch_reason_builder import (
     del_epoch_reason,
     set_epoch_case_daily,
+    set_epoch_case_once,
     set_epoch_case_weekly,
 )
 from src.ch08_epoch.test._util.ch08_examples import (
@@ -160,7 +161,7 @@ def test_set_epoch_case_daily_SetsAttr_Scenario1_WarpAround():
     #     print(f"{x_plan.get_plan_rope()=}")
 
 
-def test_set_epoch_daily_weekly_SetsAttr_Scenario0_Simple():
+def test_set_epoch_case_weekly_SetsAttr_Scenario0_Simple():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
@@ -200,7 +201,7 @@ def test_set_epoch_daily_weekly_SetsAttr_Scenario0_Simple():
     assert day_case.reason_divisor == 7200
 
 
-def test_set_epoch_daily_weekly_SetsAttr_Scenario1_Wrap_upper():
+def test_set_epoch_case_weekly_SetsAttr_Scenario1_Wrap_upper():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
@@ -240,7 +241,85 @@ def test_set_epoch_daily_weekly_SetsAttr_Scenario1_Wrap_upper():
     assert day_case.reason_divisor == 7200
 
 
-# create function del_plan_reason_daily given BeliefUnit, plan_rope,beginning time, duration
+def test_set_epoch_case_once_SetsAttr_Scenario0_Simple():
+    # ESTABLISH
+    bob_belief = beliefunit_shop(exx.Bob)
+    bob_belief.add_plan(exx.mop_rope)
+    five_config = get_five_config()
+    five_label = five_config.get(wx.epoch_label)
+    add_epoch_planunit(bob_belief, five_config)
+    time_rope = bob_belief.make_l1_rope(wx.time)
+    five_rope = bob_belief.make_rope(time_rope, five_label)
+    mop_once_args = {
+        wx.plan_rope: exx.mop_rope,
+        wx.reason_context: five_rope,
+        wx.reason_state: five_rope,
+    }
+    mop_once_lower_min = 600
+    mop_once_duration = 90
+    assert bob_belief.plan_exists(five_rope)
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_once_args)
+
+    # WHEN
+    set_epoch_case_once(
+        x_belief=bob_belief,
+        plan_rope=exx.mop_rope,
+        epoch_label=five_label,
+        lower_min=mop_once_lower_min,
+        duration=mop_once_duration,
+    )
+
+    # THEN
+    print(f"{five_rope=}")
+    assert belief_plan_reason_caseunit_exists(bob_belief, mop_once_args)
+    day_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_once_args)
+    assert day_case.reason_state == five_rope
+    assert day_case.reason_lower == mop_once_lower_min
+    assert day_case.reason_lower == 600
+    assert day_case.reason_upper == 690
+    assert day_case.reason_divisor == 5259492000
+    assert day_case.reason_divisor == bob_belief.get_plan_obj(five_rope).close
+
+
+def test_set_epoch_case_once_SetsAttr_Scenario1_Wrap_upper():
+    # ESTABLISH
+    bob_belief = beliefunit_shop(exx.Bob)
+    bob_belief.add_plan(exx.mop_rope)
+    five_config = get_five_config()
+    five_label = five_config.get(wx.epoch_label)
+    add_epoch_planunit(bob_belief, five_config)
+    time_rope = bob_belief.make_l1_rope(wx.time)
+    five_rope = bob_belief.make_rope(time_rope, five_label)
+    week_rope = bob_belief.make_rope(five_rope, wx.week)
+    mop_once_args = {
+        wx.plan_rope: exx.mop_rope,
+        wx.reason_context: five_rope,
+        wx.reason_state: five_rope,
+    }
+    mop_once_lower_min = 5259490000
+    mop_once_duration = 8000
+    assert bob_belief.plan_exists(five_rope)
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_once_args)
+
+    # WHEN
+    set_epoch_case_once(
+        x_belief=bob_belief,
+        plan_rope=exx.mop_rope,
+        epoch_label=five_label,
+        lower_min=mop_once_lower_min,
+        duration=mop_once_duration,
+    )
+
+    # THEN
+    print(f"{week_rope=}")
+    assert belief_plan_reason_caseunit_exists(bob_belief, mop_once_args)
+    day_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_once_args)
+    assert day_case.reason_state == five_rope
+    assert day_case.reason_lower == mop_once_lower_min
+    assert day_case.reason_lower == 5259490000
+    assert day_case.reason_upper == 6000
+    assert day_case.reason_divisor == 5259492000
+
 
 # create test with multiple set_epoch_case_daily added to single plan
 

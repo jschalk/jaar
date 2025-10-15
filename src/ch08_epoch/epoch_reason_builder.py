@@ -79,3 +79,32 @@ def set_epoch_case_weekly(
         "reason_divisor": week_plan.denom,
     }
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
+
+
+def set_epoch_case_once(
+    x_belief: BeliefUnit,
+    plan_rope: RopeTerm,
+    epoch_label: LabelTerm,
+    lower_min: int,
+    duration: int,
+):
+    """Given an epoch_label set reason for a plan that would make it a weekly occurance
+    Example:
+    Given: sue_beliefunit, plan_rope=;amy23;casa;mop;, epoch_label=lizzy9, lower_min=600, duration=90
+    Add a reason to mop_plan that indicates it's to be active between minute 600 and minute 690 of the week
+    """
+    time_rope = x_belief.make_l1_rope("time")
+    epoch_rope = x_belief.make_rope(time_rope, epoch_label)
+    epoch_plan = x_belief.get_plan_obj(epoch_rope)
+    print(f"{epoch_plan.begin=}")
+    print(f"{epoch_plan.close=}")
+
+    case_args = {
+        "plan_rope": plan_rope,
+        "reason_context": epoch_rope,
+        "reason_state": epoch_rope,
+        "reason_lower": lower_min,
+        "reason_upper": (lower_min + duration) % epoch_plan.close,
+        "reason_divisor": epoch_plan.close,
+    }
+    belief_plan_reason_caseunit_set_obj(x_belief, case_args)
