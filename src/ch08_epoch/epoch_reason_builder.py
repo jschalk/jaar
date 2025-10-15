@@ -24,12 +24,13 @@ def set_plan_reason_daily(
     time_rope = x_belief.make_l1_rope("time")
     epoch_rope = x_belief.make_rope(time_rope, epoch_label)
     day_rope = x_belief.make_rope(epoch_rope, "day")
+    day_plan = x_belief.get_plan_obj(day_rope)
     case_args = {
         "plan_rope": plan_rope,
         "reason_context": epoch_rope,
-        "reason_state": day_rope,
+        "reason_state": epoch_rope,
         "reason_lower": lower_min,
-        "reason_upper": (lower_min + duration) % 1440,
-        # "reason_divisor": plan_rope,
+        "reason_upper": (lower_min + duration) % day_plan.denom,
+        "reason_divisor": day_plan.denom,
     }
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)

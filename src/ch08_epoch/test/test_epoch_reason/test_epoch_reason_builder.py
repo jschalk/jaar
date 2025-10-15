@@ -31,7 +31,7 @@ def test_set_plan_reason_daily_SetsAttr_Scenario0_Simple():
     mop_daily_args = {
         wx.plan_rope: exx.mop_rope,
         wx.reason_context: epoch_five_rope,
-        wx.reason_state: epoch_day_rope,
+        wx.reason_state: epoch_five_rope,
     }
     mop_day_lower_min = 600
     mop_day_duration = 90
@@ -51,7 +51,7 @@ def test_set_plan_reason_daily_SetsAttr_Scenario0_Simple():
     print(f"{epoch_day_rope=}")
     assert belief_plan_reason_caseunit_exists(bob_belief, mop_daily_args)
     day_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_daily_args)
-    assert day_case.reason_state == epoch_day_rope
+    assert day_case.reason_state == epoch_five_rope
     assert day_case.reason_lower == mop_day_lower_min
     assert day_case.reason_lower == 600
     assert day_case.reason_upper == 690
@@ -72,7 +72,7 @@ def test_set_plan_reason_daily_SetsAttr_Scenario1_WarpAround():
     mop_daily_args = {
         wx.plan_rope: exx.mop_rope,
         wx.reason_context: epoch_five_rope,
-        wx.reason_state: epoch_day_rope,
+        wx.reason_state: epoch_five_rope,
     }
     mop_day_lower_min = 1400
     mop_day_duration = 95
@@ -92,7 +92,7 @@ def test_set_plan_reason_daily_SetsAttr_Scenario1_WarpAround():
     print(f"{epoch_day_rope=}")
     assert belief_plan_reason_caseunit_exists(bob_belief, mop_daily_args)
     day_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_daily_args)
-    assert day_case.reason_state == epoch_day_rope
+    assert day_case.reason_state == epoch_five_rope
     assert day_case.reason_lower == mop_day_lower_min
     assert day_case.reason_lower == 1400
     assert day_case.reason_upper == 55

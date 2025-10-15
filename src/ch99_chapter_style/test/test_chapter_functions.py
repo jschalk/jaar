@@ -157,9 +157,7 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
     keywords_dict = get_keywords_src_config()
     keywords_by_chapter = get_keywords_by_chapter(keywords_dict)
     all_keywords_set = set(keywords_dict.keys())
-    keywords_in_ch_count = {}
-    for keyword in keywords_dict.keys():
-        keywords_in_ch_count[keyword] = {}
+    keywords_in_ch_count = {keyword: {} for keyword in keywords_dict.keys()}
     cumlative_ch_keywords_dict = get_cumlative_ch_keywords_dict(keywords_by_chapter)
 
     # WHEN / THEN
