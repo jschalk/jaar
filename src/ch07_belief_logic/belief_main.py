@@ -413,13 +413,9 @@ class BeliefUnit:
         return all_group_titles.difference(x_voiceunit_group_titles)
 
     def _is_plan_rangeroot(self, plan_rope: RopeTerm) -> bool:
-        if self.moment_label == plan_rope:
-            raise InvalidBeliefException(
-                "its difficult to foresee a scenario where planroot is rangeroot"
-            )
         parent_rope = get_parent_rope(plan_rope)
         parent_plan = self.get_plan_obj(parent_rope)
-        return not parent_plan.is_math()
+        return not parent_plan.has_begin_close()
 
     def _get_rangeroot_factunits(self) -> list[FactUnit]:
         return [
@@ -463,20 +459,22 @@ class BeliefUnit:
             fact_upper=x_fact_upper,
         )
 
-        if fact_context_plan.is_math() is False:
+        if fact_context_plan.has_begin_close() is False:
             x_planroot.set_factunit(x_factunit)
-        # if fact's plan no range or is a "range-root" then allow fact to be set
+        # if fact's plan no range or is a "rangeroot" then allow fact to be set
         elif (
-            fact_context_plan.is_math()
+            fact_context_plan.has_begin_close()
             and self._is_plan_rangeroot(fact_context) is False
         ):
             raise InvalidBeliefException(
-                f"Non range-root fact:{fact_context} can only be set by range-root fact"
+                f"Non rangeroot fact:{fact_context} can only be set by rangeroot fact"
             )
-        elif fact_context_plan.is_math() and self._is_plan_rangeroot(fact_context):
-            # WHEN plan is "range-root" identify any reason.reason_contexts that are descendants
+        elif fact_context_plan.has_begin_close() and self._is_plan_rangeroot(
+            fact_context
+        ):
+            # WHEN plan is "rangeroot" identify any reason.reason_contexts that are descendants
             # calculate and set those descendant facts
-            # example: zietline range (0-, 1.5e9) is range-root
+            # example: zietline range (0-, 1.5e9) is rangeroot
             # example: "zietline,wks" (spllt 10080) is range-descendant
             # there exists a reason reason_context "zietline,wks" with case.reason_state = "zietline,wks"
             # and (1,2) reason_divisor=2 (every other wk)
@@ -1079,7 +1077,7 @@ reason_case:    {reason_case}"""
             r_plan = single_range_plan_list.pop()
             if r_plan.range_evaluated:
                 self._raise_gogo_calc_stop_calc_exception(r_plan.get_plan_rope())
-            if r_plan.is_math():
+            if r_plan.has_begin_close():
                 r_plan.gogo_calc = r_plan.begin
                 r_plan.stop_calc = r_plan.close
             else:
@@ -1097,7 +1095,7 @@ reason_case:    {reason_case}"""
 
     def _set_plantree_range_attrs(self):
         for x_plan in self._plan_dict.values():
-            if x_plan.is_math():
+            if x_plan.has_begin_close():
                 self._distribute_math_attrs(x_plan)
 
             if (

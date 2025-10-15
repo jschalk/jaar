@@ -5,6 +5,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_plan_reason_caseunit_set_obj,
     belief_plan_reasonunit_exists,
     belief_plan_reasonunit_get_obj,
+    get_belief_root_facts_dict,
     set_factunits_to_belief,
 )
 from src.ch08_epoch.epoch_main import add_epoch_planunit
@@ -29,6 +30,7 @@ def test_set_epoch_case_daily_ChangesBeliefUnit_agenda():
     bob_belief.cashout()
     time_rope = bob_belief.make_l1_rope(wx.time)
     five_rope = bob_belief.make_rope(time_rope, five_label)
+    day_rope = bob_belief.make_rope(five_rope, "day")
     mop_day_lower_min = 600
     mop_day_duration = 90
     bob_belief.add_fact(five_rope, five_rope, 500, 500)
@@ -49,6 +51,14 @@ def test_set_epoch_case_daily_ChangesBeliefUnit_agenda():
     bob_belief.add_fact(five_rope, five_rope, 500, 1000)
 
     # THEN
+    bob_belief.cashout()
+    print(f"{bob_belief.planroot.factheirs.keys()=}")
+    mop_plan = bob_belief.get_plan_obj(exx.mop_rope)
+    day_factheir = mop_plan.factheirs.get(day_rope)
+    day_reasonheir = mop_plan.reasonheirs.get(day_rope)
+    day_heir_case = day_reasonheir.cases.get(day_rope)
+    print(f" {day_factheir=}")
+    print(f"{day_heir_case=}")
     assert len(bob_belief.get_agenda_dict()) == 1
 
 

@@ -114,7 +114,7 @@ def test_BeliefUnit_set_fact_FailsToCreateWhenreason_contextAndFactAreDifferenct
         bob_belief.add_fact(
             fact_context=a1e1_rope, fact_state=a1e1_rope, fact_lower=20, fact_upper=23
         )
-    x_str = f"Non range-root fact:{a1e1_rope} can only be set by range-root fact"
+    x_str = f"Non rangeroot fact:{a1e1_rope} can only be set by rangeroot fact"
     assert str(excinfo.value) == x_str
 
 
@@ -204,7 +204,7 @@ def test_BeliefUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
 
 
 def test_BeliefUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
-    # ESTABLISH a two ranged facts where one is "range-root" get_root_ranged_facts returns one "range-root" fact
+    # ESTABLISH a two ranged facts where one is "rangeroot" get_root_ranged_facts returns one "rangeroot" fact
     sue_belief = beliefunit_shop("Sue")
     ziet_str = "ziet"
     sue_belief.set_l1_plan(planunit_shop(ziet_str, begin=0, close=140))

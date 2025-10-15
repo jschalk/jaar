@@ -216,8 +216,8 @@ class PlanUnit:
     denom : int that describes denominator to parent range calculations
     numor : int that describes numerator to parent range calculations
     morph : bool that describes how to change parent range in calculations.
-    gogo_want : bool
-    stop_want : bool
+    gogo_want : float
+    stop_want : float
     pledge : bool that describes if the plan is a pledge.
     problem_bool : bool that describes if the plan is a problem.
     is_expanded : bool flag for whether the plan is expanded.
@@ -827,18 +827,18 @@ class PlanUnit:
         range_inheritors: dict[RopeTerm, RopeTerm],
     ):
         for reason_context in self.reasonheirs.keys():
-            if range_root_rope := range_inheritors.get(reason_context):
+            if rangeroot_rope := range_inheritors.get(reason_context):
                 all_plans = all_plans_between(
-                    belief_plan_dict, range_root_rope, reason_context, self.knot
+                    belief_plan_dict, rangeroot_rope, reason_context, self.knot
                 )
-                self._create_factheir(all_plans, range_root_rope, reason_context)
+                self._create_factheir(all_plans, rangeroot_rope, reason_context)
 
     def _create_factheir(
-        self, all_plans: list, range_root_rope: RopeTerm, reason_context: RopeTerm
+        self, all_plans: list, rangeroot_rope: RopeTerm, reason_context: RopeTerm
     ):
-        range_root_factheir = self.factheirs.get(range_root_rope)
-        old_reason_lower = range_root_factheir.fact_lower
-        old_reason_upper = range_root_factheir.fact_upper
+        rangeroot_factheir = self.factheirs.get(rangeroot_rope)
+        old_reason_lower = rangeroot_factheir.fact_lower
+        old_reason_upper = rangeroot_factheir.fact_upper
         x_rangeunit = plans_calculated_range(
             all_plans, old_reason_lower, old_reason_upper
         )
@@ -915,7 +915,7 @@ class PlanUnit:
     def is_kidless(self) -> bool:
         return self.kids == {}
 
-    def is_math(self) -> bool:
+    def has_begin_close(self) -> bool:
         return self.begin is not None and self.close is not None
 
     def awardheir_exists(self) -> bool:

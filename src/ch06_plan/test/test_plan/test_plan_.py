@@ -360,23 +360,23 @@ def test_PlanUnit_add_to_descendant_pledge_count_AddsToCount():
     assert ball_plan.descendant_pledge_count == 77
 
 
-def test_PlanUnit_is_math_ReturnsObj():
+def test_PlanUnit_has_begin_close_ReturnsObj():
     # ESTABLISH
     swim_str = "swim"
     swim_plan = planunit_shop(swim_str)
-    assert not swim_plan.is_math()
+    assert not swim_plan.has_begin_close()
     # WHEN
     swim_plan.begin = 9
     # THEN
-    assert not swim_plan.is_math()
+    assert not swim_plan.has_begin_close()
     # WHEN
     swim_plan.close = 10
     # THEN
-    assert swim_plan.is_math()
+    assert swim_plan.has_begin_close()
     # WHEN
     swim_plan.begin = None
     # THEN
-    assert not swim_plan.is_math()
+    assert not swim_plan.has_begin_close()
 
 
 def test_PlanUnit_clear_gogo_calc_stop_calc_SetsAttr():

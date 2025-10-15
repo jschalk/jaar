@@ -1,3 +1,4 @@
+from src.ch02_rope.rope import is_sub_rope
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch07_belief_logic.belief_tool import (
     belief_plan_reason_caseunit_exists,
@@ -5,6 +6,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_plan_reason_caseunit_set_obj,
     belief_plan_reasonunit_exists,
     belief_plan_reasonunit_get_obj,
+    belief_planunit_exists,
     belief_planunit_get_obj,
 )
 from src.ch08_epoch._ref.ch08_semantic_types import LabelTerm, RopeTerm
@@ -17,13 +19,13 @@ def del_epoch_reason(
 ):
     time_rope = x_belief.make_l1_rope("time")
     epoch_rope = x_belief.make_rope(time_rope, epoch_label)
-    reason_args = {
-        "plan_rope": plan_rope,
-        "reason_context": epoch_rope,
-    }
-    if belief_plan_reasonunit_exists(x_belief, reason_args):
-        x_plan = belief_planunit_get_obj(x_belief, reason_args)
-        x_plan.del_reasonunit_reason_context(epoch_rope)
+    plan_args = {"plan_rope": plan_rope}
+    if belief_planunit_exists(x_belief, plan_args):
+        x_plan = belief_planunit_get_obj(x_belief, plan_args)
+        reason_contexts = set(x_plan.reasonunits.keys())
+        for reason_context in reason_contexts:
+            if is_sub_rope(reason_context, epoch_rope):
+                x_plan.del_reasonunit_reason_context(reason_context)
 
 
 def set_epoch_case_daily(
@@ -44,8 +46,8 @@ def set_epoch_case_daily(
     day_plan = x_belief.get_plan_obj(day_rope)
     case_args = {
         "plan_rope": plan_rope,
-        "reason_context": epoch_rope,
-        "reason_state": epoch_rope,
+        "reason_context": day_rope,
+        "reason_state": day_rope,
         "reason_lower": lower_min,
         "reason_upper": (lower_min + duration) % day_plan.denom,
         "reason_divisor": day_plan.denom,
@@ -72,8 +74,8 @@ def set_epoch_case_weekly(
 
     case_args = {
         "plan_rope": plan_rope,
-        "reason_context": epoch_rope,
-        "reason_state": epoch_rope,
+        "reason_context": week_rope,
+        "reason_state": week_rope,
         "reason_lower": lower_min,
         "reason_upper": (lower_min + duration) % week_plan.denom,
         "reason_divisor": week_plan.denom,
@@ -96,8 +98,6 @@ def set_epoch_case_once(
     time_rope = x_belief.make_l1_rope("time")
     epoch_rope = x_belief.make_rope(time_rope, epoch_label)
     epoch_plan = x_belief.get_plan_obj(epoch_rope)
-    print(f"{epoch_plan.begin=}")
-    print(f"{epoch_plan.close=}")
 
     case_args = {
         "plan_rope": plan_rope,

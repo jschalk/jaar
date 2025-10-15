@@ -135,7 +135,7 @@ class FactHeir(FactCore):
         ):
             self.fact_lower = factunit.fact_lower
 
-    def is_range(self):
+    def is_range(self) -> bool:
         return self.fact_lower is not None and self.fact_upper is not None
 
 

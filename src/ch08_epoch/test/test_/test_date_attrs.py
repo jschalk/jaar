@@ -27,7 +27,7 @@ def test_BeliefEpochPoint_Exists():
 
     # THEN
     assert not x_epochpoint.x_beliefunit
-    assert not x_epochpoint.time_range_root_rope
+    assert not x_epochpoint.time_rangeroot_rope
     assert not x_epochpoint.x_min
     assert not x_epochpoint._epoch_plan
     assert not x_epochpoint._weekday
@@ -44,20 +44,20 @@ def test_BeliefEpochPoint_Exists():
 
 def test_BeliefEpochPoint_shop_ReturnsObj():
     # ESTABLISH
-    x_time_range_root_rope = "Fay07"
+    x_time_rangeroot_rope = "Fay07"
     x_epoch_min = 890000
     sue_belief = beliefunit_shop("Sue")
 
     # WHEN
     x_epochpoint = beliefepochpoint_shop(
         x_beliefunit=sue_belief,
-        time_range_root_rope=x_time_range_root_rope,
+        time_rangeroot_rope=x_time_rangeroot_rope,
         x_min=x_epoch_min,
     )
 
     # THEN
     assert x_epochpoint.x_beliefunit == sue_belief
-    assert x_epochpoint.time_range_root_rope == x_time_range_root_rope
+    assert x_epochpoint.time_rangeroot_rope == x_time_rangeroot_rope
     assert x_epochpoint.x_min == x_epoch_min
 
 
