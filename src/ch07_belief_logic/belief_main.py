@@ -1608,10 +1608,10 @@ def get_dict_of_belief_from_dict(x_dict: dict[str, dict]) -> dict[str, BeliefUni
 
 
 def get_sorted_plan_list(
-    x_dict: dict[RopeTerm, PlanUnit], key: str = None
+    x_dict: dict[RopeTerm, PlanUnit], sorting_key: str = None
 ) -> list[PlanUnit]:
     x_list = list(x_dict.values())
-    if key in {"fund_ratio"}:
+    if sorting_key in {"fund_ratio"}:
         x_list.sort(key=lambda x: x.fund_ratio, reverse=True)
     else:
         x_list.sort(key=lambda x: x.get_plan_rope(), reverse=False)

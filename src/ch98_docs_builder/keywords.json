@@ -1,4 +1,5 @@
 {
+  "duration"                     : { "init_chapter": "ch08" }, 
   "BeliefName"                     : { "init_chapter": "ch07" }, 
   "CRUD_command"                   : { "init_chapter": "ch09" }, 
   "DELETE"                         : { "init_chapter": "ch09" }, 

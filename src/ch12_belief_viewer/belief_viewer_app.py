@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template_string
-from src.ch08_epoch.epoch_main import create_epoch_plan, get_default_epoch_config_dict
+from src.ch08_epoch.epoch_main import add_epoch_planunit, get_default_epoch_config_dict
 from src.ch12_belief_viewer.belief_viewer__tool import get_belief_view_dict
 from src.ch12_belief_viewer.belief_viewer_examples import (
     get_beliefunit_irrational_example,
@@ -111,7 +111,7 @@ def get_beliefunit_view():
     """API endpoint to get the BeliefUnit data with readable strings as JSON"""
     # return jsonify(root.to_dict())
     sue_belief = get_sue_belief_with_facts_and_reasons()
-    create_epoch_plan(sue_belief, get_default_epoch_config_dict())
+    add_epoch_planunit(sue_belief, get_default_epoch_config_dict())
     sue_belief.cashout()
     belief_view_dict = get_belief_view_dict(sue_belief)
     return jsonify(belief_view_dict)

@@ -7,7 +7,7 @@ from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch08_epoch.epoch_main import (
     EpochPoint,
     EpochUnit,
-    create_epoch_plan,
+    add_epoch_planunit,
     epochunit_shop,
 )
 from src.ch10_lesson._ref.ch10_path import create_moment_json_path
@@ -357,7 +357,7 @@ class MomentUnit:
     def add_epoch_to_gut(self, belief_name: BeliefName) -> None:
         """Adds the epoch to the gut file for the given belief."""
         x_gut = open_gut_file(self.moment_mstr_dir, self.moment_label, belief_name)
-        create_epoch_plan(x_gut, self.get_epoch_config())
+        add_epoch_planunit(x_gut, self.get_epoch_config())
         save_gut_file(self.moment_mstr_dir, x_gut)
 
     def add_epoch_to_guts(self) -> None:

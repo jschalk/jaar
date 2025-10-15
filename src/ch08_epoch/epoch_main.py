@@ -151,7 +151,7 @@ def get_epoch_rope(nexus_label: str, epoch_label: str, knot: str) -> RopeTerm:
     return create_rope(time_rope, epoch_label, knot)
 
 
-def create_epoch_plan(x_beliefunit: BeliefUnit, epoch_config: dict):
+def add_epoch_planunit(x_beliefunit: BeliefUnit, epoch_config: dict):
     """ "Add epoch to BeliefUnit given epoch_config"""
     x_plan_label = epoch_config.get("epoch_label")
     x_c400_number = epoch_config.get("c400_number")

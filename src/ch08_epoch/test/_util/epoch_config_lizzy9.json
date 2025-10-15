@@ -1,6 +1,7 @@
 {
   "c999_config": 9, 
   "epoch_label": "Lizzy9", 
+  "c400_number": 10, 
   "hours_config": [
     [ "1st Loop day hour",  156 ], 
     [ "2nd Loop day hour",  312 ], 

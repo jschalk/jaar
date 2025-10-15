@@ -1,17 +1,53 @@
 from datetime import datetime
+from enum import Enum
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 from src.ch01_py.file_toolbox import open_json
 from src.ch01_py.plotly_toolbox import conditional_fig_show
 from src.ch06_plan.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch08_epoch.epoch_main import (
+    add_epoch_planunit,
     beliefepochpoint_shop,
-    create_epoch_plan,
     create_weekday_planunits,
     get_min_from_dt_offset,
     new_epoch_planunit,
 )
 from src.ref.keywords import Ch08Keywords as wx
+
+BOB_STR = "BOB"
+CASA_STR = "casa"
+CLEAN_STR = "clean"
+DIRTYNESS_STR = "dirtyness"
+MOP_STR = "mop"
+WK_STR = "wk"
+WED_STR = "Wed"
+
+BOB_BELIEF = beliefunit_shop(BOB_STR)
+MOP_ROPE = BOB_BELIEF.make_l1_rope(MOP_STR)
+CLEAN_ROPE = BOB_BELIEF.make_l1_rope(CLEAN_STR)
+DIRTYNESS_ROPE = BOB_BELIEF.make_rope(CLEAN_ROPE, DIRTYNESS_STR)
+
+
+class Ch08ExampleStrs(str, Enum):
+    Bob = BOB_STR
+    casa_str = CASA_STR
+    clean_str = CLEAN_STR
+    dirtyness_str = DIRTYNESS_STR
+    mop_str = MOP_STR
+    wk_str = WK_STR
+    wed_str = WED_STR
+    mop_rope = MOP_ROPE
+    clean_rope = CLEAN_ROPE
+    dirtyness_rope = DIRTYNESS_ROPE
+
+    def __str__(self):
+        return self.value
+
+
+def get_example_epoch_config(epoch_label: str) -> dict:
+    x_dir = "src/ch08_epoch/test/_util"
+    x_filename = f"epoch_config_{epoch_label}.json"
+    return open_json(x_dir, x_filename)
 
 
 def get_five_config() -> dict:
@@ -26,10 +62,8 @@ def get_squirt_config() -> dict:
     return get_example_epoch_config("squirt")
 
 
-def get_example_epoch_config(epoch_label: str) -> dict:
-    x_dir = "src/ch08_epoch/test/_util"
-    x_filename = f"epoch_config_{epoch_label}.json"
-    return open_json(x_dir, x_filename)
+def get_lizzy9_config() -> dict:
+    return get_example_epoch_config("lizzy9")
 
 
 def cregtime_planunit() -> PlanUnit:
@@ -87,19 +121,19 @@ def creg_hour_int_label(x_int: int) -> str:
 
 def add_time_creg_planunit(x_beliefunit: BeliefUnit) -> BeliefUnit:
     """Add creg epoch planunit to beliefunit"""
-    create_epoch_plan(x_beliefunit, get_creg_config())
+    add_epoch_planunit(x_beliefunit, get_creg_config())
     return x_beliefunit
 
 
 def add_time_five_planunit(x_beliefunit: BeliefUnit) -> BeliefUnit:
     """Add five epoch planunit to beliefunit"""
-    create_epoch_plan(x_beliefunit, get_five_config())
+    add_epoch_planunit(x_beliefunit, get_five_config())
     return x_beliefunit
 
 
 def add_time_squirt_planunit(x_beliefunit: BeliefUnit) -> BeliefUnit:
     """Add squirt epoch planunit to beliefunit"""
-    create_epoch_plan(x_beliefunit, get_squirt_config())
+    add_epoch_planunit(x_beliefunit, get_squirt_config())
     return x_beliefunit
 
 

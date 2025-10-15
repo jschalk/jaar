@@ -371,6 +371,7 @@ def test_Chapters_path_FunctionStructureAndFormat():
                     all_test_functions[function_name] = function_str
 
     print(f"Total path functions found: {len(path_functions)}")
+    # THEN
     for function_name, file_path in path_functions.items():
         func_docstring = get_docstring(file_path, function_name)
         # if not func_docstring:

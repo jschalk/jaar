@@ -1,7 +1,7 @@
 from src.ch02_rope.rope import create_rope, default_knot_if_None
 from src.ch05_reason.reason import factunit_shop, reasonunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_epoch.epoch_main import create_epoch_plan
+from src.ch08_epoch.epoch_main import add_epoch_planunit
 from src.ch08_epoch.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
@@ -130,7 +130,7 @@ def test_get_reason_case_readable_str_ReturnsObj_Scenario3_CaseRangeAnd_reason_d
 def test_get_reason_case_readable_str_ReturnsObj_Scenario4_Time_creg():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    create_epoch_plan(sue_belief, get_creg_config())
+    add_epoch_planunit(sue_belief, get_creg_config())
     time_rope = sue_belief.make_l1_rope(wx.time)
     creg_rope = sue_belief.make_rope(time_rope, wx.creg)
     week_rope = sue_belief.make_rope(creg_rope, wx.week)
@@ -242,7 +242,7 @@ def test_get_fact_state_readable_str_ReturnsObj_Scenario3_Time_creg():
     sue_belief = beliefunit_shop("Sue")
     time_rope = sue_belief.make_l1_rope(wx.time)
     creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-    create_epoch_plan(sue_belief, get_creg_config())
+    add_epoch_planunit(sue_belief, get_creg_config())
     sue_belief.add_fact(creg_rope, creg_rope, 1234567890, 1334567890)
     root_creg_fact = sue_belief.planroot.factunits.get(creg_rope)
     print(f"{root_creg_fact=}")

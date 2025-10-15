@@ -5,7 +5,7 @@ from src.ch05_reason.reason import reasonunit_shop
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch08_epoch.epoch_main import (
-    create_epoch_plan,
+    add_epoch_planunit,
     get_c400_constants,
     get_epoch_min_difference,
     get_min_from_dt,
@@ -522,7 +522,7 @@ def test_add_time_creg_planunit_ReturnsObjWith_offset_PlanUnits():
     assert five_yr1_offset_plan.addin == get_five_config().get(wx.yr1_jan1_offset)
 
 
-def test_create_epoch_plan_SetsAttr_Scenario0():
+def test_add_epoch_planunit_SetsAttr_Scenario0():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief.cashout()
@@ -538,7 +538,7 @@ def test_create_epoch_plan_SetsAttr_Scenario0():
     assert not sue_belief.plan_exists(creg_yr1_jan1_offset_rope)
 
     # WHEN
-    create_epoch_plan(sue_belief, creg_config)
+    add_epoch_planunit(sue_belief, creg_config)
 
     # THEN
     assert sue_belief.plan_exists(creg_year_rope)

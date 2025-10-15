@@ -2,7 +2,7 @@ from csv import DictReader as csv_DictReader
 from datetime import datetime
 from io import StringIO as io_StringIO
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_epoch.epoch_main import create_epoch_plan, get_default_epoch_config_dict
+from src.ch08_epoch.epoch_main import add_epoch_planunit, get_default_epoch_config_dict
 from src.ch12_belief_viewer.gcalendar import (
     create_gcalendar_csv,
     create_gcalendar_events_list,
@@ -155,7 +155,7 @@ def test_create_gcalendar_events_list_ReturnsObj_Scenario2_3AllDayPledge():
 #     sue_belief = beliefunit_shop(exx.sue, exx.a23)
 #     sue_belief.add_plan(exx.mop_rope, pledge=True, star=2)
 #     default_epoch_config = get_default_epoch_config_dict()
-#     create_epoch_plan(sue_belief, default_epoch_config)
+#     add_epoch_planunit(sue_belief, default_epoch_config)
 #     sue_belief.edit_reason(exx.mop_rope, reason_context=, reason_case=)
 #     apr7 = datetime(2010, 5, 7, 9)
 #     print(f"{apr7=}")

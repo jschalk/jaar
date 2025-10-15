@@ -236,7 +236,7 @@ def test_get_sorted_plan_list_ReturnsObj_Scenario1_SortBy_fund_ratio():
     }
 
     # WHEN
-    x_sorted_plan_list = get_sorted_plan_list(example_dict, key=wx.fund_ratio)
+    x_sorted_plan_list = get_sorted_plan_list(example_dict, sorting_key=wx.fund_ratio)
 
     # THEN
     assert x_sorted_plan_list is not None
