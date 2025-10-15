@@ -5,11 +5,28 @@ from src.ch07_belief_logic.belief_tool import (
     belief_plan_reason_caseunit_set_obj,
     belief_plan_reasonunit_exists,
     belief_plan_reasonunit_get_obj,
+    belief_planunit_get_obj,
 )
 from src.ch08_epoch._ref.ch08_semantic_types import LabelTerm, RopeTerm
 
 
-def set_plan_reason_daily(
+def del_epoch_reason(
+    x_belief: BeliefUnit,
+    plan_rope: RopeTerm,
+    epoch_label: LabelTerm,
+):
+    time_rope = x_belief.make_l1_rope("time")
+    epoch_rope = x_belief.make_rope(time_rope, epoch_label)
+    reason_args = {
+        "plan_rope": plan_rope,
+        "reason_context": epoch_rope,
+    }
+    if belief_plan_reasonunit_exists(x_belief, reason_args):
+        x_plan = belief_planunit_get_obj(x_belief, reason_args)
+        x_plan.del_reasonunit_reason_context(epoch_rope)
+
+
+def set_epoch_case_daily(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
     epoch_label: LabelTerm,
@@ -32,5 +49,33 @@ def set_plan_reason_daily(
         "reason_lower": lower_min,
         "reason_upper": (lower_min + duration) % day_plan.denom,
         "reason_divisor": day_plan.denom,
+    }
+    belief_plan_reason_caseunit_set_obj(x_belief, case_args)
+
+
+def set_epoch_case_weekly(
+    x_belief: BeliefUnit,
+    plan_rope: RopeTerm,
+    epoch_label: LabelTerm,
+    lower_min: int,
+    duration: int,
+):
+    """Given an epoch_label set reason for a plan that would make it a weekly occurance
+    Example:
+    Given: sue_beliefunit, plan_rope=;amy23;casa;mop;, epoch_label=lizzy9, lower_min=600, duration=90
+    Add a reason to mop_plan that indicates it's to be active between minute 600 and minute 690 of the week
+    """
+    time_rope = x_belief.make_l1_rope("time")
+    epoch_rope = x_belief.make_rope(time_rope, epoch_label)
+    week_rope = x_belief.make_rope(epoch_rope, "week")
+    week_plan = x_belief.get_plan_obj(week_rope)
+
+    case_args = {
+        "plan_rope": plan_rope,
+        "reason_context": epoch_rope,
+        "reason_state": epoch_rope,
+        "reason_lower": lower_min,
+        "reason_upper": (lower_min + duration) % week_plan.denom,
+        "reason_divisor": week_plan.denom,
     }
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)

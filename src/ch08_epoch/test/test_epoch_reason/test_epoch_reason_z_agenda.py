@@ -8,7 +8,7 @@ from src.ch07_belief_logic.belief_tool import (
     set_factunits_to_belief,
 )
 from src.ch08_epoch.epoch_main import add_epoch_planunit
-from src.ch08_epoch.epoch_reason_builder import set_plan_reason_daily
+from src.ch08_epoch.epoch_reason_builder import set_epoch_case_daily
 from src.ch08_epoch.test._util.ch08_examples import (
     Ch08ExampleStrs as exx,
     get_five_config,
@@ -16,14 +16,14 @@ from src.ch08_epoch.test._util.ch08_examples import (
 from src.ref.keywords import Ch08Keywords as wx
 
 
-def test_set_plan_reason_daily_ChangesBeliefUnit_agenda():
+def test_set_epoch_case_daily_ChangesBeliefUnit_agenda():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope, pledge=True)
     assert len(bob_belief.get_agenda_dict()) == 1
     five_config = get_five_config()
     five_label = five_config.get(wx.epoch_label)
-    # beliefunit with pledge planunit that has reason set by set_plan_reason_daily
+    # beliefunit with pledge planunit that has reason set by set_epoch_case_daily
     # confirm different idearoot facts produce different outcomes
     add_epoch_planunit(bob_belief, five_config)
     bob_belief.cashout()
@@ -35,7 +35,7 @@ def test_set_plan_reason_daily_ChangesBeliefUnit_agenda():
     assert len(bob_belief.get_agenda_dict()) == 1
 
     # WHEN
-    set_plan_reason_daily(
+    set_epoch_case_daily(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
         epoch_label=five_label,
@@ -52,7 +52,7 @@ def test_set_plan_reason_daily_ChangesBeliefUnit_agenda():
     assert len(bob_belief.get_agenda_dict()) == 1
 
 
-# def test_set_plan_reason_daily_SetsAttr_Scenario1_WarpAround():
+# def test_set_epoch_case_daily_SetsAttr_Scenario1_WarpAround():
 #     # ESTABLISH
 #     bob_belief = beliefunit_shop(exx.Bob)
 #     bob_belief.add_plan(exx.mop_rope)
@@ -74,7 +74,7 @@ def test_set_plan_reason_daily_ChangesBeliefUnit_agenda():
 #     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_daily_args)
 
 #     # WHEN
-#     set_plan_reason_daily(
+#     set_epoch_case_daily(
 #         x_belief=bob_belief,
 #         plan_rope=exx.mop_rope,
 #         epoch_label=five_label,
@@ -95,10 +95,10 @@ def test_set_plan_reason_daily_ChangesBeliefUnit_agenda():
 #     #     print(f"{x_plan.get_plan_rope()=}")
 
 
-# # create exception if set_plan_reason_daily plan_rope,beginning time + duration is greater then 1440 (must stay within day)
+# # create exception if set_epoch_case_daily plan_rope,beginning time + duration is greater then 1440 (must stay within day)
 
 # # create function del_plan_reason_daily given BeliefUnit, plan_rope,beginning time, duration
 
-# # create test with multiple set_plan_reason_daily added to single plan
+# # create test with multiple set_epoch_case_daily added to single plan
 
 # # create test with multiple daily reasons added and del_plan_reason_daily only deletes the correct one

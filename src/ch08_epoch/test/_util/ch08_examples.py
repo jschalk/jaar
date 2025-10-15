@@ -33,6 +33,7 @@ class Ch08ExampleStrs(str, Enum):
     casa_str = CASA_STR
     clean_str = CLEAN_STR
     dirtyness_str = DIRTYNESS_STR
+    five_str = "five"
     mop_str = MOP_STR
     wk_str = WK_STR
     wed_str = WED_STR
