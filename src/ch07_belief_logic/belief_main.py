@@ -438,12 +438,13 @@ class BeliefUnit:
         fact_upper: float = None,
         create_missing_plans: bool = None,
     ):
+        """Sets planroot factunit"""
         fact_state = fact_context if fact_state is None else fact_state
         if create_missing_plans:
             self._create_plankid_if_empty(rope=fact_context)
             self._create_plankid_if_empty(rope=fact_state)
 
-        fact_fact_context_plan = self.get_plan_obj(fact_context)
+        fact_context_plan = self.get_plan_obj(fact_context)
         x_planroot = self.get_plan_obj(to_rope(self.moment_label))
         x_fact_lower = None
         if fact_upper is not None and fact_lower is None:
@@ -462,17 +463,17 @@ class BeliefUnit:
             fact_upper=x_fact_upper,
         )
 
-        if fact_fact_context_plan.is_math() is False:
+        if fact_context_plan.is_math() is False:
             x_planroot.set_factunit(x_factunit)
         # if fact's plan no range or is a "range-root" then allow fact to be set
         elif (
-            fact_fact_context_plan.is_math()
+            fact_context_plan.is_math()
             and self._is_plan_rangeroot(fact_context) is False
         ):
             raise InvalidBeliefException(
                 f"Non range-root fact:{fact_context} can only be set by range-root fact"
             )
-        elif fact_fact_context_plan.is_math() and self._is_plan_rangeroot(fact_context):
+        elif fact_context_plan.is_math() and self._is_plan_rangeroot(fact_context):
             # WHEN plan is "range-root" identify any reason.reason_contexts that are descendants
             # calculate and set those descendant facts
             # example: zietline range (0-, 1.5e9) is range-root

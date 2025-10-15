@@ -641,7 +641,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(wx.numor) == "int"
     assert x_class_types.get("reason_lower") == "float"
     assert x_class_types.get(wx.money_grain) == "float"
-    assert x_class_types.get("fact_state") == wx.RopeTerm
+    assert x_class_types.get(wx.fact_state) == wx.RopeTerm
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
     assert x_class_types.get(wx.plan_rope) == wx.RopeTerm

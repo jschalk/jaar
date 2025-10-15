@@ -8,7 +8,7 @@ from src.ch08_epoch.epoch_main import (
     add_epoch_planunit,
     get_c400_constants,
     get_epoch_min_difference,
-    get_min_from_dt,
+    get_epoch_min_from_dt,
     get_year_rope,
 )
 from src.ch08_epoch.test._util.ch08_examples import (
@@ -829,7 +829,7 @@ def test_get_creg_min_from_dt_ReturnsObj():
     assert get_creg_min_from_dt(datetime(2022, 10, 30, 0, 0)) == x_next_day
 
 
-def test_get_min_from_dt_ReturnsObj():
+def test_get_epoch_min_from_dt_ReturnsObj():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
@@ -839,7 +839,7 @@ def test_get_min_from_dt_ReturnsObj():
     creg_rope = sue_belief.make_rope(time_rope, wx.creg)
 
     # WHEN
-    creg_min = get_min_from_dt(sue_belief, creg_rope, x_datetime)
+    creg_min = get_epoch_min_from_dt(sue_belief, creg_rope, x_datetime)
 
     # THEN
     print(f"                        {creg_min=}")

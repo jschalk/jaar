@@ -1,5 +1,4 @@
 {
-  "duration"                     : { "init_chapter": "ch08" }, 
   "BeliefName"                     : { "init_chapter": "ch07" }, 
   "CRUD_command"                   : { "init_chapter": "ch09" }, 
   "DELETE"                         : { "init_chapter": "ch09" }, 
@@ -118,6 +117,7 @@
   "descendant_pledge_count"        : { "init_chapter": "ch06" }, 
   "dimen"                          : { "init_chapter": "ch07" }, 
   "dimens"                         : { "init_chapter": "ch07" }, 
+  "duration"                       : { "init_chapter": "ch08" }, 
   "epoch"                          : { "init_chapter": "ch08" }, 
   "epoch_label"                    : { "init_chapter": "ch08" }, 
   "error_message"                  : { "init_chapter": "ch17" }, 

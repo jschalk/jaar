@@ -136,7 +136,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[57] == "reason_context_ERASE"
     assert table_sorting_priority[58] == "reason_context_ERASE_otx"
     assert table_sorting_priority[59] == "reason_context_ERASE_inx"
-    assert table_sorting_priority[60] == "fact_context"
+    assert table_sorting_priority[60] == wx.fact_context
     assert table_sorting_priority[61] == "fact_context_otx"
     assert table_sorting_priority[62] == "fact_context_inx"
     assert table_sorting_priority[63] == "fact_context_ERASE"
@@ -148,7 +148,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[69] == "reason_state_ERASE"
     assert table_sorting_priority[70] == "reason_state_ERASE_otx"
     assert table_sorting_priority[71] == "reason_state_ERASE_inx"
-    assert table_sorting_priority[72] == "fact_state"
+    assert table_sorting_priority[72] == wx.fact_state
     assert table_sorting_priority[73] == "fact_state_otx"
     assert table_sorting_priority[74] == "fact_state_inx"
     assert table_sorting_priority[75] == wx.party_title

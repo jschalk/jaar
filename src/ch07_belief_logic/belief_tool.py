@@ -286,6 +286,7 @@ def get_belief_root_facts_dict(
 
 
 def set_factunits_to_belief(x_belief: BeliefUnit, x_facts_dict: dict[RopeTerm, dict]):
+    """Sets dict of FactUnits to BeliefUnit planroot"""
     factunits_dict = get_factunits_from_dict(x_facts_dict)
     missing_fact_reason_contexts = set(
         x_belief.get_missing_fact_reason_contexts().keys()
@@ -308,6 +309,7 @@ def set_factunits_to_belief(x_belief: BeliefUnit, x_facts_dict: dict[RopeTerm, d
 
 
 def clear_factunits_from_belief(x_belief: BeliefUnit):
+    """Deletes all BeliefUnit planroot FactUnits"""
     for fact_reason_context in get_belief_root_facts_dict(x_belief).keys():
         x_belief.del_fact(fact_reason_context)
 

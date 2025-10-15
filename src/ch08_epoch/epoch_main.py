@@ -412,7 +412,7 @@ def get_min_from_dt_offset(dt: datetime, yr1_jan1_offset: int) -> int:
     return round(min_time_difference.total_seconds() / 60) + yr1_jan1_offset
 
 
-def get_min_from_dt(
+def get_epoch_min_from_dt(
     x_belief: BeliefUnit, epoch_rope: RopeTerm, x_datetime: datetime
 ) -> int:
     offset_rope = x_belief.make_rope(epoch_rope, "yr1_jan1_offset")

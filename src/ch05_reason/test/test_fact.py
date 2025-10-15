@@ -148,8 +148,8 @@ def test_FactUnit_to_dict_ReturnsDict():
     # THEN
     assert fact_dict is not None
     static_dict = {
-        "fact_context": wk_rope,
-        "fact_state": sun_rope,
+        wx.fact_context: wk_rope,
+        wx.fact_state: sun_rope,
         "fact_lower": x_fact_lower,
         "fact_upper": x_fact_upper,
     }
@@ -171,8 +171,8 @@ def test_FactUnit_to_dict_ReturnsPartialDict():
     # THEN
     assert fact_dict is not None
     static_dict = {
-        "fact_context": wk_rope,
-        "fact_state": sun_rope,
+        wx.fact_context: wk_rope,
+        wx.fact_state: sun_rope,
     }
     assert fact_dict == static_dict
 
@@ -374,8 +374,8 @@ def test_get_factunits_from_dict_BuildsObj():
     sun_rope = create_rope(wk_rope, sun_str)
     static_dict = {
         wk_rope: {
-            "fact_context": wk_rope,
-            "fact_state": sun_rope,
+            wx.fact_context: wk_rope,
+            wx.fact_state: sun_rope,
             "fact_lower": None,
             "fact_upper": None,
         }
@@ -398,8 +398,8 @@ def test_get_factunits_from_dict_BuildsObjFromIncompleteDict():
     sun_rope = create_rope(wk_rope, sun_str)
     static_dict = {
         wk_rope: {
-            "fact_context": wk_rope,
-            "fact_state": sun_rope,
+            wx.fact_context: wk_rope,
+            wx.fact_state: sun_rope,
         }
     }
 

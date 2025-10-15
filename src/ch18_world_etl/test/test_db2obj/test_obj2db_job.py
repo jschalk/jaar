@@ -396,8 +396,8 @@ def test_create_blrfact_metrics_insert_sqlstr_ReturnsObj():
         wx.moment_label: x_moment_label,
         wx.belief_name: x_belief_name,
         "plan_rope": x_rope,
-        "fact_context": x_fact_context,
-        "fact_state": x_fact_state,
+        wx.fact_context: x_fact_context,
+        wx.fact_state: x_fact_state,
         "fact_lower": x_fact_lower,
         "fact_upper": x_fact_upper,
     }

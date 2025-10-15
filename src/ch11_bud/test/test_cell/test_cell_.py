@@ -14,6 +14,7 @@ from src.ch11_bud.test._util.ch11_examples import (
     example_casa_grimy_factunit as grimy_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
+from src.ref.keywords import Ch11Keywords as wx
 
 
 def test_CELLNODE_QUOTA_DEFAULT_value():
@@ -653,7 +654,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario1():
     a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
     sue_belief_casa_fact_dict = sue_belief_facts.get(casa_rope)
-    assert sue_belief_casa_fact_dict.get("fact_state") == casa_clean_fact.fact_state
+    assert sue_belief_casa_fact_dict.get(wx.fact_state) == casa_clean_fact.fact_state
 
 
 def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario2():
@@ -695,7 +696,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario2():
     a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
     sue_belief_casa_fact_dict = sue_belief_facts.get(casa_rope)
-    assert sue_belief_casa_fact_dict.get("fact_state") == casa_dirty_fact.fact_state
+    assert sue_belief_casa_fact_dict.get(wx.fact_state) == casa_dirty_fact.fact_state
 
 
 def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario3():
@@ -741,7 +742,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario3():
     a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
     sue_belief_casa_fact_dict = sue_belief_facts.get(casa_rope)
-    assert sue_belief_casa_fact_dict.get("fact_state") == casa_grimy_fact.fact_state
+    assert sue_belief_casa_fact_dict.get(wx.fact_state) == casa_grimy_fact.fact_state
 
 
 def test_CellUnit_set_voice_mandate_ledger_ReturnsObj_Scenario0():
