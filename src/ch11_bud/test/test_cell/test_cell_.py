@@ -9,6 +9,7 @@ from src.ch11_bud.cell import (
     create_child_cellunits,
 )
 from src.ch11_bud.test._util.ch11_examples import (
+    Ch11ExampleStrs as exx,
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
     example_casa_grimy_factunit as grimy_factunit,
@@ -42,19 +43,17 @@ def test_CellUnit_Exists():
 
 
 def test_cellunit_shop_ReturnsObj_Scenario0_WithoutParameters():
-    # ESTABLISH
-    bob_str = "Bob"
-    # WHEN
-    x_cellunit = cellunit_shop(bob_str)
+    # ESTABLISH / WHEN
+    x_cellunit = cellunit_shop(exx.bob)
     # THEN
-    assert x_cellunit.bud_belief_name == bob_str
+    assert x_cellunit.bud_belief_name == exx.bob
     assert x_cellunit.ancestors == []
     assert not x_cellunit.spark_num
     assert x_cellunit.celldepth == 0
     assert x_cellunit.money_grain == 1
     assert x_cellunit.quota == CELLNODE_QUOTA_DEFAULT
     assert x_cellunit.mandate == CELLNODE_QUOTA_DEFAULT
-    assert x_cellunit.beliefadjust.to_dict() == beliefunit_shop(bob_str).to_dict()
+    assert x_cellunit.beliefadjust.to_dict() == beliefunit_shop(exx.bob).to_dict()
     assert x_cellunit.beliefspark_facts == {}
     assert x_cellunit.reason_contexts == set()
     assert x_cellunit._voice_mandate_ledger == {}
@@ -64,18 +63,15 @@ def test_cellunit_shop_ReturnsObj_Scenario0_WithoutParameters():
 
 def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
     # ESTABLISH
-    yao_str = "Yao"
-    bob_str = "Bob"
-    sue_str = "Sue"
-    bob_sue_ancestors = [bob_str, sue_str]
+    bob_sue_ancestors = [exx.bob, exx.sue]
     bob_sue_spark7 = 7
-    bob_sue_bud_belief = yao_str
+    bob_sue_bud_belief = exx.yao
     bob_sue_celldepth3 = 3
     bob_sue_money_grain2 = 2
     bob_sue_quota300 = 300
     bob_sue_mandate = 444
-    bob_sue_belief = beliefunit_shop(sue_str)
-    bob_sue_belief.add_voiceunit(bob_str, 7, 13)
+    bob_sue_belief = beliefunit_shop(exx.sue)
+    bob_sue_belief.add_voiceunit(exx.bob, 7, 13)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
     sky_blue_fact = sky_blue_factunit()
@@ -115,21 +111,17 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
 
 def test_cellunit_shop_ReturnsObj_Scenario2_Withreason_contexts():
     # ESTABLISH
-    bob_str = "Bob"
-    sue_str = "Sue"
-    sue_belief = beliefunit_shop(sue_str, "amy23")
-    casa_rope = sue_belief.make_l1_rope("casa")
-    mop_rope = sue_belief.make_rope(casa_rope, "mop")
+    sue_belief = beliefunit_shop(exx.sue, exx.a23)
     clean_fact = clean_factunit()
     sue_belief.add_plan(clean_factunit().fact_state)
-    sue_belief.add_plan(mop_rope, pledge=True)
-    sue_belief.edit_reason(mop_rope, clean_fact.fact_context, clean_fact.fact_state)
+    sue_belief.add_plan(exx.mop_rope, pledge=True)
+    sue_belief.edit_reason(exx.mop_rope, clean_fact.fact_context, clean_fact.fact_state)
 
     # WHEN
-    x_cellunit = cellunit_shop(sue_str, beliefadjust=sue_belief)
+    x_cellunit = cellunit_shop(exx.sue, beliefadjust=sue_belief)
 
     # THEN
-    assert x_cellunit.bud_belief_name == sue_str
+    assert x_cellunit.bud_belief_name == exx.sue
     assert x_cellunit.beliefadjust == sue_belief
     assert x_cellunit.reason_contexts == sue_belief.get_reason_contexts()
     assert len(x_cellunit.reason_contexts) == 1
@@ -137,19 +129,16 @@ def test_cellunit_shop_ReturnsObj_Scenario2_Withreason_contexts():
 
 def test_cellunit_shop_ReturnsObj_Scenario3_clear_facts():
     # ESTABLISH
-    sue_str = "Sue"
-    sue_belief = beliefunit_shop(sue_str, "amy23")
-    casa_rope = sue_belief.make_l1_rope("casa")
-    mop_rope = sue_belief.make_rope(casa_rope, "mop")
+    sue_belief = beliefunit_shop(exx.sue, exx.a23)
     clean_fact = clean_factunit()
     sue_belief.add_plan(clean_factunit().fact_state)
-    sue_belief.add_plan(mop_rope, pledge=True)
-    sue_belief.edit_reason(mop_rope, clean_fact.fact_context, clean_fact.fact_state)
+    sue_belief.add_plan(exx.mop_rope, pledge=True)
+    sue_belief.edit_reason(exx.mop_rope, clean_fact.fact_context, clean_fact.fact_state)
     sue_belief.add_fact(clean_fact.fact_context, clean_fact.fact_state)
     assert len(sue_belief.get_planroot_factunits_dict()) == 1
 
     # WHEN
-    x_cellunit = cellunit_shop(sue_str, beliefadjust=sue_belief)
+    x_cellunit = cellunit_shop(exx.sue, beliefadjust=sue_belief)
 
     # THEN
     assert len(x_cellunit.beliefadjust.get_planroot_factunits_dict()) == 0
@@ -158,33 +147,28 @@ def test_cellunit_shop_ReturnsObj_Scenario3_clear_facts():
 
 def test_Cellunit_get_cell_belief_name_ReturnsObj_Scenario0_NoAncestors():
     # ESTABLISH
-    yao_str = "Yao"
-    root_cellunit = cellunit_shop(yao_str, [])
+    root_cellunit = cellunit_shop(exx.yao, [])
 
     # WHEN / THEN
-    assert root_cellunit.get_cell_belief_name() == yao_str
+    assert root_cellunit.get_cell_belief_name() == exx.yao
 
 
 def test_Cellunit_get_cell_belief_name_ReturnsObj_Scenario1_WithAncestors():
     # ESTABLISH
-    yao_str = "Yao"
-    bob_str = "Bob"
-    sue_str = "Sue"
-    bob_sue_ancestors = [bob_str, sue_str]
-    bob_sue_bud_belief = yao_str
+    bob_sue_ancestors = [exx.bob, exx.sue]
+    bob_sue_bud_belief = exx.yao
     bob_sue_cellunit = cellunit_shop(bob_sue_bud_belief, bob_sue_ancestors)
 
     # WHEN
     bob_sue_cell_belief_name = bob_sue_cellunit.get_cell_belief_name()
 
     # THEN
-    assert bob_sue_cell_belief_name == sue_str
+    assert bob_sue_cell_belief_name == exx.sue
 
 
 def test_CellUnit_eval_beliefspark_SetsAttr_Scenario0_ParameterIsNone():
     # ESTABLISH
-    yao_str = "Yao"
-    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit = cellunit_shop(exx.yao)
     yao_cellunit.beliefadjust = "testing_place_holder"
     yao_cellunit.beliefspark_facts = "testing_place_holder"
     yao_cellunit.reason_contexts = "testing_place_holder"
@@ -203,19 +187,16 @@ def test_CellUnit_eval_beliefspark_SetsAttr_Scenario0_ParameterIsNone():
 
 def test_CellUnit_eval_beliefspark_SetsAttr_Scenario1():
     # ESTABLISH
-    yao_str = "Yao"
     clean_fact = clean_factunit()
-    yao_belief = beliefunit_shop(yao_str, "amy23")
-    casa_rope = yao_belief.make_l1_rope("casa")
-    mop_rope = yao_belief.make_rope(casa_rope, "mop")
+    yao_belief = beliefunit_shop(exx.yao, exx.a23)
     clean_fact = clean_factunit()
     yao_belief.add_plan(clean_fact.fact_state)
-    yao_belief.add_plan(mop_rope, pledge=True)
-    yao_belief.edit_reason(mop_rope, clean_fact.fact_context, clean_fact.fact_state)
+    yao_belief.add_plan(exx.mop_rope, pledge=True)
+    yao_belief.edit_reason(exx.mop_rope, clean_fact.fact_context, clean_fact.fact_state)
     yao_belief.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
     )
-    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit = cellunit_shop(exx.yao)
     assert yao_cellunit.beliefspark_facts == {}
     assert yao_cellunit.reason_contexts == set()
 
@@ -239,8 +220,7 @@ def test_CellUnit_eval_beliefspark_SetsAttr_Scenario1():
 
 def test_CellUnit_get_beliefsparks_credit_ledger_ReturnsObj_Scenario0_NoBelief():
     # ESTABLISH
-    yao_str = "Yao"
-    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit = cellunit_shop(exx.yao)
 
     # WHEN
     gen_credit_ledger = yao_cellunit.get_beliefsparks_credit_ledger()
@@ -251,25 +231,22 @@ def test_CellUnit_get_beliefsparks_credit_ledger_ReturnsObj_Scenario0_NoBelief()
 
 def test_get_beliefsparks_credit_ledger_ReturnsObj_Scenario1_FileExists():
     # ESTABLISH
-    sue_str = "Sue"
-    yao_str = "Yao"
-    sue_belief = beliefunit_shop(sue_str, "amy23")
-    sue_belief.add_voiceunit(sue_str, 3, 5)
-    sue_belief.add_voiceunit(yao_str, 7, 2)
-    sue_cell = cellunit_shop(yao_str, beliefadjust=sue_belief)
+    sue_belief = beliefunit_shop(exx.sue, exx.a23)
+    sue_belief.add_voiceunit(exx.sue, 3, 5)
+    sue_belief.add_voiceunit(exx.yao, 7, 2)
+    sue_cell = cellunit_shop(exx.yao, beliefadjust=sue_belief)
 
     # WHEN
     gen_credit_ledger = sue_cell.get_beliefsparks_credit_ledger()
 
     # THEN
-    expected_credit_ledger = {sue_str: 3, yao_str: 7}
+    expected_credit_ledger = {exx.sue: 3, exx.yao: 7}
     assert gen_credit_ledger == expected_credit_ledger
 
 
 def test_CellUnit_get_beliefsparks_quota_ledger_ReturnsObj_Scenario0_NoBelief():
     # ESTABLISH
-    yao_str = "Yao"
-    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit = cellunit_shop(exx.yao)
 
     # WHEN
     gen_credit_ledger = yao_cellunit.get_beliefsparks_quota_ledger()
@@ -280,31 +257,28 @@ def test_CellUnit_get_beliefsparks_quota_ledger_ReturnsObj_Scenario0_NoBelief():
 
 def test_get_beliefsparks_quota_ledger_ReturnsObj_Scenario1_FileExists():
     # ESTABLISH
-    sue_str = "Sue"
-    yao_str = "Yao"
-    sue_belief = beliefunit_shop(sue_str, "amy23")
-    sue_belief.add_voiceunit(sue_str, 3, 5)
-    sue_belief.add_voiceunit(yao_str, 7, 2)
-    sue_cell = cellunit_shop(yao_str, quota=55, beliefadjust=sue_belief)
+    sue_belief = beliefunit_shop(exx.sue, exx.a23)
+    sue_belief.add_voiceunit(exx.sue, 3, 5)
+    sue_belief.add_voiceunit(exx.yao, 7, 2)
+    sue_cell = cellunit_shop(exx.yao, quota=55, beliefadjust=sue_belief)
 
     # WHEN
     gen_credit_ledger = sue_cell.get_beliefsparks_quota_ledger()
 
     # THEN
-    expected_credit_ledger = {sue_str: 16, yao_str: 39}
+    expected_credit_ledger = {exx.sue: 16, exx.yao: 39}
     assert gen_credit_ledger == expected_credit_ledger
 
 
 def test_CellUnit_set_found_facts_from_dict_SetsAttr():
     # ESTABLISH
-    yao_str = "Yao"
     clean_fact = clean_factunit()
-    yao_belief = beliefunit_shop(yao_str, "amy23")
+    yao_belief = beliefunit_shop(exx.yao, exx.a23)
     yao_belief.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
     )
     yao_found_fact_dict = {clean_fact.fact_context: clean_fact.to_dict()}
-    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit = cellunit_shop(exx.yao)
     assert yao_cellunit.found_facts == {}
 
     # WHEN
@@ -317,14 +291,13 @@ def test_CellUnit_set_found_facts_from_dict_SetsAttr():
 
 def test_CellUnit_set_beliefspark_facts_from_dict_SetsAttr():
     # ESTABLISH
-    yao_str = "Yao"
     clean_fact = clean_factunit()
-    yao_belief = beliefunit_shop(yao_str, "amy23")
+    yao_belief = beliefunit_shop(exx.yao, exx.a23)
     yao_belief.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
     )
     yao_found_fact_dict = {clean_fact.fact_context: clean_fact.to_dict()}
-    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit = cellunit_shop(exx.yao)
     assert yao_cellunit.beliefspark_facts == {}
 
     # WHEN
@@ -337,14 +310,13 @@ def test_CellUnit_set_beliefspark_facts_from_dict_SetsAttr():
 
 def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario0_found_facts_only():
     # ESTABLISH
-    yao_str = "Yao"
     clean_fact = clean_factunit()
-    yao_belief = beliefunit_shop(yao_str, "amy23")
+    yao_belief = beliefunit_shop(exx.yao, exx.a23)
     yao_belief.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
     )
     yao_found_fact_dict = {clean_fact.fact_context: clean_fact.to_dict()}
-    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit = cellunit_shop(exx.yao)
     yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
     yao_cellunit.boss_facts = "testing_str"
     assert len(yao_cellunit.found_facts) == 1
@@ -362,14 +334,13 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario0_found_facts
 
 def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario1_beliefspark_facts_only():
     # ESTABLISH
-    yao_str = "Yao"
     clean_fact = clean_factunit()
-    yao_belief = beliefunit_shop(yao_str, "amy23")
+    yao_belief = beliefunit_shop(exx.yao, exx.a23)
     yao_belief.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
     )
     yao_found_fact_dict = {clean_fact.fact_context: clean_fact.to_dict()}
-    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit = cellunit_shop(exx.yao)
     yao_cellunit.set_beliefspark_facts_from_dict(yao_found_fact_dict)
     assert len(yao_cellunit.beliefspark_facts) == 1
     assert yao_cellunit.found_facts == {}
@@ -387,16 +358,15 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario1_beliefspark
 
 def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario2_beliefspark_facts_And_found_facts():
     # ESTABLISH
-    yao_str = "Yao"
     clean_fact = clean_factunit()
     sky_fact = sky_blue_factunit()
-    yao_belief = beliefunit_shop(yao_str, "amy23")
+    yao_belief = beliefunit_shop(exx.yao, exx.a23)
     yao_belief.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
     )
     yao_beliefspark_fact_dict = {sky_fact.fact_context: sky_fact.to_dict()}
     yao_found_fact_dict = {clean_fact.fact_context: clean_fact.to_dict()}
-    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit = cellunit_shop(exx.yao)
     yao_cellunit.set_beliefspark_facts_from_dict(yao_beliefspark_fact_dict)
     yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
     assert len(yao_cellunit.found_facts) == 1
@@ -417,14 +387,13 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario2_beliefspark
 
 def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario0_found_facts_only():
     # ESTABLISH
-    yao_str = "Yao"
     clean_fact = clean_factunit()
-    yao_belief = beliefunit_shop(yao_str, "amy23")
+    yao_belief = beliefunit_shop(exx.yao, exx.a23)
     yao_belief.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
     )
     yao_found_fact_dict = {clean_fact.fact_context: clean_fact.to_dict()}
-    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit = cellunit_shop(exx.yao)
     yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
     assert len(yao_cellunit.found_facts) == 1
     assert yao_cellunit.boss_facts == {}
@@ -441,14 +410,13 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario0_found_facts_o
 
 def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario1_beliefspark_facts_only():
     # ESTABLISH
-    yao_str = "Yao"
     clean_fact = clean_factunit()
-    yao_belief = beliefunit_shop(yao_str, "amy23")
+    yao_belief = beliefunit_shop(exx.yao, exx.a23)
     yao_belief.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
     )
     yao_found_fact_dict = {clean_fact.fact_context: clean_fact.to_dict()}
-    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit = cellunit_shop(exx.yao)
     yao_cellunit.set_beliefspark_facts_from_dict(yao_found_fact_dict)
     assert len(yao_cellunit.beliefspark_facts) == 1
     assert yao_cellunit.found_facts == {}
@@ -466,10 +434,9 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario1_beliefspark_f
 
 def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario2_beliefspark_facts_And_found_facts():
     # ESTABLISH
-    yao_str = "Yao"
     clean_fact = clean_factunit()
     sky_fact = sky_blue_factunit()
-    yao_belief = beliefunit_shop(yao_str, "amy23")
+    yao_belief = beliefunit_shop(exx.yao, exx.a23)
     yao_belief.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
     )
@@ -478,7 +445,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario2_beliefspark_f
     run_facts = {run_fact.fact_context: run_fact}
     yao_beliefspark_fact_dict = {sky_fact.fact_context: sky_fact.to_dict()}
     yao_found_fact_dict = {clean_fact.fact_context: clean_fact.to_dict()}
-    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit = cellunit_shop(exx.yao)
     yao_cellunit.set_beliefspark_facts_from_dict(yao_beliefspark_fact_dict)
     yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
     yao_cellunit.boss_facts = run_facts
@@ -502,8 +469,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario2_beliefspark_f
 
 def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario3_boss_facts_AreNotOverwritten():
     # ESTABLISH
-    yao_str = "Yao"
-    yao_belief = beliefunit_shop(yao_str, "amy23")
+    yao_belief = beliefunit_shop(exx.yao, exx.a23)
     run_rope = yao_belief.make_l1_rope("run")
     fast_rope = yao_belief.make_rope(run_rope, "fast")
     run_fact = factunit_shop(run_rope, run_rope)
@@ -512,7 +478,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario3_boss_facts_Ar
 
     yao_beliefspark_fact_dict = {fast_fact.fact_context: fast_fact.to_dict()}
     yao_found_fact_dict = {fast_fact.fact_context: fast_fact.to_dict()}
-    yao_cellunit = cellunit_shop(yao_str)
+    yao_cellunit = cellunit_shop(exx.yao)
     yao_cellunit.set_beliefspark_facts_from_dict(yao_beliefspark_fact_dict)
     yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
     yao_cellunit.boss_facts = run_facts
@@ -532,11 +498,9 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario3_boss_facts_Ar
 
 def test_CellUnit_filter_facts_by_reason_contexts_ReturnsObj_Scenario1():
     # ESTABLISH
-    yao_str = "Yao"
-    sue_str = "Sue"
-    sue_ancestors = [sue_str]
+    sue_ancestors = [exx.sue]
     sue_spark7 = 7
-    sue_bud_belief = yao_str
+    sue_bud_belief = exx.yao
     sue_celldepth3 = 3
     sue_money_grain2 = 2
     sue_quota300 = 300
@@ -592,15 +556,13 @@ def test_CellUnit_filter_facts_by_reason_contexts_ReturnsObj_Scenario1():
 
 def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario0():
     # ESTABLISH
-    yao_str = "Yao"
-    sue_str = "Sue"
-    sue_ancestors = [sue_str]
+    sue_ancestors = [exx.sue]
     sue_spark7 = 7
-    sue_bud_belief = yao_str
+    sue_bud_belief = exx.yao
     sue_celldepth3 = 3
     sue_money_grain2 = 2
     sue_quota300 = 300
-    sue_belief = beliefunit_shop(sue_str, "amy23")
+    sue_belief = beliefunit_shop(exx.sue, exx.a23)
     sue_cell = cellunit_shop(
         sue_bud_belief,
         sue_ancestors,
@@ -621,17 +583,15 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario0():
 
 def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario1():
     # ESTABLISH
-    yao_str = "Yao"
-    sue_str = "Sue"
-    sue_ancestors = [sue_str]
+    sue_ancestors = [exx.sue]
     sue_spark7 = 7
-    sue_bud_belief = yao_str
+    sue_bud_belief = exx.yao
     sue_celldepth3 = 3
     sue_money_grain2 = 2
     sue_quota300 = 300
     casa_clean_fact = clean_factunit()
     clean_facts = {casa_clean_fact.fact_context: casa_clean_fact}
-    sue_belief = beliefunit_shop(sue_str, "amy23")
+    sue_belief = beliefunit_shop(exx.sue, exx.a23)
     sue_belief.add_plan(casa_clean_fact.fact_state)
     sue_cell = cellunit_shop(
         sue_bud_belief,
@@ -651,19 +611,15 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario1():
     # THEN
     assert sue_cell.beliefadjust.get_planroot_factunits_dict() != {}
     sue_belief_facts = sue_cell.beliefadjust.get_planroot_factunits_dict()
-    a23_str = "amy23"
-    casa_rope = create_rope(a23_str, "casa")
-    sue_belief_casa_fact_dict = sue_belief_facts.get(casa_rope)
+    sue_belief_casa_fact_dict = sue_belief_facts.get(exx.casa_rope)
     assert sue_belief_casa_fact_dict.get(wx.fact_state) == casa_clean_fact.fact_state
 
 
 def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario2():
     # ESTABLISH
-    yao_str = "Yao"
-    sue_str = "Sue"
-    sue_ancestors = [sue_str]
+    sue_ancestors = [exx.sue]
     sue_spark7 = 7
-    sue_bud_belief = yao_str
+    sue_bud_belief = exx.yao
     sue_celldepth3 = 3
     sue_money_grain2 = 2
     sue_quota300 = 300
@@ -671,7 +627,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario2():
     casa_dirty_fact = dirty_factunit()
     clean_facts = {casa_clean_fact.fact_context: casa_clean_fact}
     dirty_facts = {casa_dirty_fact.fact_context: casa_dirty_fact}
-    sue_belief = beliefunit_shop(sue_str, "amy23")
+    sue_belief = beliefunit_shop(exx.sue, exx.a23)
     sue_belief.add_plan(casa_clean_fact.fact_state)
     sue_belief.add_plan(casa_dirty_fact.fact_state)
     sue_cell = cellunit_shop(
@@ -693,19 +649,15 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario2():
     # THEN
     assert sue_cell.beliefadjust.get_planroot_factunits_dict() != {}
     sue_belief_facts = sue_cell.beliefadjust.get_planroot_factunits_dict()
-    a23_str = "amy23"
-    casa_rope = create_rope(a23_str, "casa")
-    sue_belief_casa_fact_dict = sue_belief_facts.get(casa_rope)
+    sue_belief_casa_fact_dict = sue_belief_facts.get(exx.casa_rope)
     assert sue_belief_casa_fact_dict.get(wx.fact_state) == casa_dirty_fact.fact_state
 
 
 def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario3():
     # ESTABLISH
-    yao_str = "Yao"
-    sue_str = "Sue"
-    sue_ancestors = [sue_str]
+    sue_ancestors = [exx.sue]
     sue_spark7 = 7
-    sue_bud_belief = yao_str
+    sue_bud_belief = exx.yao
     sue_celldepth3 = 3
     sue_money_grain2 = 2
     sue_quota300 = 300
@@ -715,7 +667,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario3():
     clean_facts = {casa_clean_fact.fact_context: casa_clean_fact}
     dirty_facts = {casa_dirty_fact.fact_context: casa_dirty_fact}
     grimy_facts = {casa_grimy_fact.fact_context: casa_grimy_fact}
-    sue_belief = beliefunit_shop(sue_str, "amy23")
+    sue_belief = beliefunit_shop(exx.sue, exx.a23)
     sue_belief.add_plan(casa_clean_fact.fact_state)
     sue_belief.add_plan(casa_dirty_fact.fact_state)
     sue_belief.add_plan(casa_grimy_fact.fact_state)
@@ -739,25 +691,21 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario3():
     # THEN
     assert sue_cell.beliefadjust.get_planroot_factunits_dict() != {}
     sue_belief_facts = sue_cell.beliefadjust.get_planroot_factunits_dict()
-    a23_str = "amy23"
-    casa_rope = create_rope(a23_str, "casa")
-    sue_belief_casa_fact_dict = sue_belief_facts.get(casa_rope)
+    sue_belief_casa_fact_dict = sue_belief_facts.get(exx.casa_rope)
     assert sue_belief_casa_fact_dict.get(wx.fact_state) == casa_grimy_fact.fact_state
 
 
 def test_CellUnit_set_voice_mandate_ledger_ReturnsObj_Scenario0():
     # ESTABLISH
-    yao_str = "Yao"
-    sue_str = "Sue"
-    sue_ancestors = [sue_str]
+    sue_ancestors = [exx.sue]
     sue_spark7 = 7
     sue_celldepth3 = 3
     sue_money_grain2 = 2
     sue_quota300 = 300
     sue_mandate = 444
-    sue_belief = beliefunit_shop(sue_str, "amy23")
+    sue_belief = beliefunit_shop(exx.sue, exx.a23)
     sue_cell = cellunit_shop(
-        yao_str,
+        exx.yao,
         sue_ancestors,
         sue_spark7,
         sue_celldepth3,
@@ -776,24 +724,22 @@ def test_CellUnit_set_voice_mandate_ledger_ReturnsObj_Scenario0():
     # THEN
     assert sue_cell.beliefadjust.fund_pool != sue_quota300
     assert sue_cell.beliefadjust.fund_pool == sue_mandate
-    assert sue_cell._voice_mandate_ledger == {sue_str: sue_mandate}
+    assert sue_cell._voice_mandate_ledger == {exx.sue: sue_mandate}
 
 
 def test_CellUnit_set_voice_mandate_ledger_ReturnsObj_Scenario1():
     # ESTABLISH
-    yao_str = "Yao"
-    sue_str = "Sue"
-    sue_ancestors = [sue_str]
+    sue_ancestors = [exx.sue]
     sue_spark7 = 7
     sue_celldepth3 = 3
     sue_money_grain2 = 2
     sue_quota300 = 300
     sue_mandate = 444
-    sue_belief = beliefunit_shop(sue_str, "amy23")
-    sue_belief.add_voiceunit(sue_str, 3, 5)
-    sue_belief.add_voiceunit(yao_str, 7, 2)
+    sue_belief = beliefunit_shop(exx.sue, exx.a23)
+    sue_belief.add_voiceunit(exx.sue, 3, 5)
+    sue_belief.add_voiceunit(exx.yao, 7, 2)
     sue_cell = cellunit_shop(
-        yao_str,
+        exx.yao,
         sue_ancestors,
         sue_spark7,
         sue_celldepth3,
@@ -813,30 +759,26 @@ def test_CellUnit_set_voice_mandate_ledger_ReturnsObj_Scenario1():
     assert sue_cell.beliefadjust.fund_pool != sue_quota300
     assert sue_cell.beliefadjust.fund_pool == sue_mandate
     assert sue_cell._voice_mandate_ledger != {}
-    assert sue_cell._voice_mandate_ledger == {yao_str: 311, sue_str: 133}
+    assert sue_cell._voice_mandate_ledger == {exx.yao: 311, exx.sue: 133}
 
 
 def test_CellUnit_calc_voice_mandate_ledger_ReturnsObj_Scenario0():
     # ESTABLISH
-    yao_str = "Yao"
-    sue_str = "Sue"
-    sue_ancestors = [sue_str]
+    sue_ancestors = [exx.sue]
     sue_spark7 = 7
     sue_celldepth3 = 3
     sue_money_grain2 = 2
     sue_quota300 = 300
     sue_mandate = 444
-    sue_belief = beliefunit_shop(sue_str, "amy23")
-    sue_belief.add_voiceunit(sue_str, 3, 5)
-    sue_belief.add_voiceunit(yao_str, 7, 2)
+    sue_belief = beliefunit_shop(exx.sue, exx.a23)
+    sue_belief.add_voiceunit(exx.sue, 3, 5)
+    sue_belief.add_voiceunit(exx.yao, 7, 2)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
     sue_belief.add_plan(clean_fact.fact_state)
     sue_belief.add_plan(dirty_fact.fact_state)
-    casa_rope = sue_belief.make_l1_rope("casa")
-    mop_rope = sue_belief.make_rope(casa_rope, "mop")
-    sue_belief.add_plan(mop_rope, 1, pledge=True)
-    sue_belief.edit_reason(mop_rope, dirty_fact.fact_context, dirty_fact.fact_state)
+    sue_belief.add_plan(exx.mop_rope, 1, pledge=True)
+    sue_belief.edit_reason(exx.mop_rope, dirty_fact.fact_context, dirty_fact.fact_state)
     sue_belief.add_fact(
         dirty_fact.fact_context, dirty_fact.fact_state, create_missing_plans=True
     )
@@ -845,7 +787,7 @@ def test_CellUnit_calc_voice_mandate_ledger_ReturnsObj_Scenario0():
     sue_found_factunits = {dirty_fact.fact_context: dirty_fact}
     sue_boss_factunits = {sky_blue_fact.fact_context: sky_blue_fact}
     sue_cell = cellunit_shop(
-        yao_str,
+        exx.yao,
         sue_ancestors,
         sue_spark7,
         sue_celldepth3,
@@ -877,26 +819,23 @@ def test_CellUnit_calc_voice_mandate_ledger_ReturnsObj_Scenario0():
     # for plan_rope, plan_obj in plan_dict.items():
     #     print(f"{plan_rope=} {plan_obj.fund_onset=} {plan_obj.fund_cease}")
     assert sue_cell._voice_mandate_ledger != {}
-    assert sue_cell._voice_mandate_ledger == {yao_str: 311, sue_str: 133}
+    assert sue_cell._voice_mandate_ledger == {exx.yao: 311, exx.sue: 133}
 
 
 def test_create_child_cellunits_ReturnsObj_Scenario0():
     # ESTABLISH
-    yao_str = "Yao"
-    sue_str = "Sue"
-    bob_str = "Bob"
-    sue_ancestors = [sue_str]
+    sue_ancestors = [exx.sue]
     sue_spark7 = 7
     sue_celldepth3 = 3
     sue_money_grain2 = 2
     sue_quota300 = 300
     sue_mandate = 444
-    sue_belief = beliefunit_shop(sue_str, "amy23")
-    sue_belief.add_voiceunit(sue_str, 3, 5)
-    sue_belief.add_voiceunit(yao_str, 7, 2)
-    sue_belief.add_voiceunit(bob_str, 0, 2)
+    sue_belief = beliefunit_shop(exx.sue, exx.a23)
+    sue_belief.add_voiceunit(exx.sue, 3, 5)
+    sue_belief.add_voiceunit(exx.yao, 7, 2)
+    sue_belief.add_voiceunit(exx.bob, 0, 2)
     sue_cell = cellunit_shop(
-        yao_str,
+        exx.yao,
         sue_ancestors,
         sue_spark7,
         sue_celldepth3,
@@ -912,8 +851,8 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
     # THEN
     assert len(sue_child_cellunits) == 2
     sue_sue_cell = sue_child_cellunits[0]
-    assert sue_sue_cell.bud_belief_name == yao_str
-    assert sue_sue_cell.ancestors == [sue_str, sue_str]
+    assert sue_sue_cell.bud_belief_name == exx.yao
+    assert sue_sue_cell.ancestors == [exx.sue, exx.sue]
     assert sue_sue_cell.spark_num == sue_spark7
     assert sue_sue_cell.celldepth == sue_celldepth3 - 1
     assert sue_sue_cell.money_grain == sue_money_grain2
@@ -924,8 +863,8 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
     assert sue_sue_cell.boss_facts == {}
 
     sue_yao_cell = sue_child_cellunits[1]
-    assert sue_yao_cell.bud_belief_name == yao_str
-    assert sue_yao_cell.ancestors == [sue_str, yao_str]
+    assert sue_yao_cell.bud_belief_name == exx.yao
+    assert sue_yao_cell.ancestors == [exx.sue, exx.yao]
     assert sue_yao_cell.spark_num == sue_spark7
     assert sue_yao_cell.celldepth == sue_celldepth3 - 1
     assert sue_yao_cell.money_grain == sue_money_grain2
@@ -939,20 +878,17 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
 def test_create_child_cellunits_ReturnsObj_Scenario1_BudDepth0():
     # ESTABLISH
     # ESTABLISH
-    yao_str = "Yao"
-    sue_str = "Sue"
-    bob_str = "Bob"
-    sue_ancestors = [sue_str]
+    sue_ancestors = [exx.sue]
     sue_spark7 = 7
     sue_celldepth = 0
     sue_money_grain2 = 2
     sue_quota300 = 300
-    sue_belief = beliefunit_shop(sue_str, "amy23")
-    sue_belief.add_voiceunit(sue_str, 3, 5)
-    sue_belief.add_voiceunit(yao_str, 7, 2)
-    sue_belief.add_voiceunit(bob_str, 0, 2)
+    sue_belief = beliefunit_shop(exx.sue, exx.a23)
+    sue_belief.add_voiceunit(exx.sue, 3, 5)
+    sue_belief.add_voiceunit(exx.yao, 7, 2)
+    sue_belief.add_voiceunit(exx.bob, 0, 2)
     sue_cell = cellunit_shop(
-        yao_str,
+        exx.yao,
         sue_ancestors,
         sue_spark7,
         sue_celldepth,
@@ -970,31 +906,25 @@ def test_create_child_cellunits_ReturnsObj_Scenario1_BudDepth0():
 
 def test_create_child_cellunits_ReturnsObj_Scenario2_boss_facts():
     # ESTABLISH
-    yao_str = "Yao"
-    sue_str = "Sue"
-    bob_str = "Bob"
-    yao_str = "Yao"
     yao_celldepth = 3
     yao_quota = 320
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
-    yao_belief = beliefunit_shop(yao_str, "amy23")
-    yao_belief.add_voiceunit(sue_str, 3, 5)
-    yao_belief.add_voiceunit(yao_str, 7, 2)
-    yao_belief.add_voiceunit(bob_str, 0, 2)
-    casa_rope = yao_belief.make_l1_rope("casa")
-    mop_rope = yao_belief.make_rope(casa_rope, "mop")
+    yao_belief = beliefunit_shop(exx.yao, exx.a23)
+    yao_belief.add_voiceunit(exx.sue, 3, 5)
+    yao_belief.add_voiceunit(exx.yao, 7, 2)
+    yao_belief.add_voiceunit(exx.bob, 0, 2)
     clean_fact = clean_factunit()
-    yao_belief.add_plan(casa_rope, 1)
-    yao_belief.add_plan(mop_rope, 1, pledge=True)
+    yao_belief.add_plan(exx.casa_rope, 1)
+    yao_belief.add_plan(exx.mop_rope, 1, pledge=True)
     yao_belief.add_plan(clean_fact.fact_state)
     yao_belief.add_plan(dirty_fact.fact_state)
-    yao_belief.edit_reason(mop_rope, dirty_fact.fact_context, dirty_fact.fact_state)
+    yao_belief.edit_reason(exx.mop_rope, dirty_fact.fact_context, dirty_fact.fact_state)
     yao_cell = cellunit_shop(
-        yao_str, celldepth=yao_celldepth, quota=yao_quota, beliefadjust=yao_belief
+        exx.yao, celldepth=yao_celldepth, quota=yao_quota, beliefadjust=yao_belief
     )
     yao_cell.beliefspark_facts = {dirty_fact.fact_context: dirty_fact}
-    # sue_cell._voice_mandate_ledger = {yao_str: 210, sue_str: 90, bob_str: 0}
+    # sue_cell._voice_mandate_ledger = {exx.yao: 210, exx.sue: 90, exx.bob: 0}
 
     # WHEN
     sue_child_cellunits = create_child_cellunits(yao_cell)
@@ -1014,24 +944,20 @@ def test_create_child_cellunits_ReturnsObj_Scenario2_boss_facts():
 
 def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     # ESTABLISH
-    yao_str = "Yao"
-    sue_str = "Sue"
-    sue_ancestors = [sue_str]
+    sue_ancestors = [exx.sue]
     sue_spark7 = 7
     sue_celldepth3 = 3
     sue_money_grain2 = 2
     sue_mandate = 444
-    sue_belief = beliefunit_shop(sue_str, "amy23")
-    sue_belief.add_voiceunit(sue_str, 3, 5)
-    sue_belief.add_voiceunit(yao_str, 7, 2)
+    sue_belief = beliefunit_shop(exx.sue, exx.a23)
+    sue_belief.add_voiceunit(exx.sue, 3, 5)
+    sue_belief.add_voiceunit(exx.yao, 7, 2)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
     sue_belief.add_plan(clean_fact.fact_state)
     sue_belief.add_plan(dirty_fact.fact_state)
-    casa_rope = sue_belief.make_l1_rope("casa")
-    mop_rope = sue_belief.make_rope(casa_rope, "mop")
-    sue_belief.add_plan(mop_rope, 1, pledge=True)
-    sue_belief.edit_reason(mop_rope, dirty_fact.fact_context, dirty_fact.fact_state)
+    sue_belief.add_plan(exx.mop_rope, 1, pledge=True)
+    sue_belief.edit_reason(exx.mop_rope, dirty_fact.fact_context, dirty_fact.fact_state)
     sue_belief.add_fact(
         dirty_fact.fact_context, dirty_fact.fact_state, create_missing_plans=True
     )
@@ -1040,7 +966,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     sue_found_factunits = {dirty_fact.fact_context: dirty_fact}
     sue_boss_factunits = {sky_blue_fact.fact_context: sky_blue_fact}
     sue_cell = cellunit_shop(
-        yao_str,
+        exx.yao,
         sue_ancestors,
         sue_spark7,
         sue_celldepth3,
@@ -1074,7 +1000,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     # for plan_rope, plan_obj in plan_dict.items():
     #     print(f"{plan_rope=} {plan_obj.fund_onset=} {plan_obj.fund_cease}")
     assert sue_cell._voice_mandate_ledger != {}
-    assert sue_cell._voice_mandate_ledger == {yao_str: 311, sue_str: 133}
+    assert sue_cell._voice_mandate_ledger == {exx.yao: 311, exx.sue: 133}
 
     # THEN
     assert len(sue_child_cellunits) == 2
