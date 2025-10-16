@@ -28,14 +28,14 @@ def del_epoch_reason(
                 x_plan.del_reasonunit_reason_context(reason_context)
 
 
-def set_epoch_case_daily(
+def set_epoch_base_case_dayly(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
     epoch_label: LabelTerm,
     lower_min: int,
     duration: int,
 ):
-    """Given an epoch_label set reason for a plan that would make it a daily occurance
+    """Given an epoch_label set reason for a plan that would make it a dayly occurance
     Example:
     Given: sue_beliefunit, plan_rope=;amy23;casa;mop;, epoch_label=lizzy9, lower_min=600, duration=90
     Add a reason to mop_plan that indicates it's to be active between 10am and 11:30am in lizzy9 epoch
@@ -55,7 +55,7 @@ def set_epoch_case_daily(
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
 
 
-def set_epoch_case_weekly(
+def set_epoch_base_case_weekly(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
     epoch_label: LabelTerm,
@@ -83,7 +83,7 @@ def set_epoch_case_weekly(
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
 
 
-def set_epoch_case_once(
+def set_epoch_base_case_once(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
     epoch_label: LabelTerm,
@@ -110,7 +110,7 @@ def set_epoch_case_once(
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
 
 
-def set_epoch_case_xweeks(
+def set_epoch_base_case_xweeks(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
     epoch_label: LabelTerm,
@@ -133,7 +133,7 @@ def set_epoch_case_xweeks(
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
 
 
-def set_epoch_case_xdays(
+def set_epoch_base_case_xdays(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
     epoch_label: LabelTerm,
@@ -163,7 +163,7 @@ def set_epoch_case_xdays(
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
 
 
-def set_epoch_case_monthday(
+def set_epoch_base_case_monthday(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
     epoch_label: LabelTerm,
@@ -200,3 +200,39 @@ def set_epoch_case_monthday(
         "reason_upper": year_upper_min,
     }
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
+
+
+def set_epoch_cases_for_dayly(
+    x_belief: BeliefUnit,
+    plan_rope: RopeTerm,
+    epoch_label: LabelTerm,
+    lower_min: int,
+    duration: int,
+    day_lower: int,
+    day_upper: int,
+    every_x_days: int,
+):
+    set_epoch_base_case_dayly(x_belief, plan_rope, epoch_label, lower_min, duration)
+    set_epoch_base_case_xdays(
+        x_belief, plan_rope, epoch_label, day_lower, day_upper, every_x_days
+    )
+
+
+def set_epoch_cases_for_weekly(
+    x_belief: BeliefUnit,
+    plan_rope: RopeTerm,
+    epoch_label: LabelTerm,
+    lower_min: int,
+    duration: int,
+    week_lower: int,
+    week_upper: int,
+    every_x_weeks: int,
+):
+    set_epoch_base_case_weekly(x_belief, plan_rope, epoch_label, lower_min, duration)
+    set_epoch_base_case_xweeks(
+        x_belief, plan_rope, epoch_label, week_lower, week_upper, every_x_weeks
+    )
+
+
+def set_epoch_case_monthday(x_belief: BeliefUnit):
+    pass

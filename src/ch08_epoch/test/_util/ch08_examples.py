@@ -29,6 +29,11 @@ CLEAN_ROPE = BOB_BELIEF.make_l1_rope(CLEAN_STR)
 DIRTYNESS_ROPE = BOB_BELIEF.make_rope(CLEAN_ROPE, DIRTYNESS_STR)
 TIME_ROPE = BOB_BELIEF.make_l1_rope(wx.time)
 FIVE_ROPE = BOB_BELIEF.make_rope(TIME_ROPE, FIVE_STR)
+FIVE_DAY_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, wx.day)
+FIVE_DAYS_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, wx.days)
+FIVE_WEEK_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, wx.week)
+FIVE_WEEKS_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, wx.weeks)
+
 FIVE_C400_LEAP_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, wx.c400_leap)
 FIVE_C400_CLEAN_ROPE = BOB_BELIEF.make_rope(FIVE_C400_LEAP_ROPE, wx.c400_clean)
 FIVE_C100_ROPE = BOB_BELIEF.make_rope(FIVE_C400_CLEAN_ROPE, wx.c100)
@@ -49,6 +54,12 @@ class Ch08ExampleStrs(str, Enum):
     mop_rope = MOP_ROPE
     clean_rope = CLEAN_ROPE
     dirtyness_rope = DIRTYNESS_ROPE
+    time_rope = TIME_ROPE
+    five_rope = FIVE_ROPE
+    day_rope = FIVE_DAY_ROPE
+    days_rope = FIVE_DAYS_ROPE
+    week_rope = FIVE_WEEK_ROPE
+    weeks_rope = FIVE_WEEKS_ROPE
     five_year_rope = FIVE_YEAR_ROPE
     Fredrick = "Fredrick"
     Geo = "Geo"
