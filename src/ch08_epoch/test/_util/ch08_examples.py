@@ -18,6 +18,7 @@ BOB_STR = "BOB"
 CASA_STR = "casa"
 CLEAN_STR = "clean"
 DIRTYNESS_STR = "dirtyness"
+FIVE_STR = "five"
 MOP_STR = "mop"
 WK_STR = "wk"
 WED_STR = "Wed"
@@ -26,6 +27,14 @@ BOB_BELIEF = beliefunit_shop(BOB_STR)
 MOP_ROPE = BOB_BELIEF.make_l1_rope(MOP_STR)
 CLEAN_ROPE = BOB_BELIEF.make_l1_rope(CLEAN_STR)
 DIRTYNESS_ROPE = BOB_BELIEF.make_rope(CLEAN_ROPE, DIRTYNESS_STR)
+TIME_ROPE = BOB_BELIEF.make_l1_rope(wx.time)
+FIVE_ROPE = BOB_BELIEF.make_rope(TIME_ROPE, FIVE_STR)
+FIVE_C400_LEAP_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, wx.c400_leap)
+FIVE_C400_CLEAN_ROPE = BOB_BELIEF.make_rope(FIVE_C400_LEAP_ROPE, wx.c400_clean)
+FIVE_C100_ROPE = BOB_BELIEF.make_rope(FIVE_C400_CLEAN_ROPE, wx.c100)
+FIVE_YR4_LEAP_ROPE = BOB_BELIEF.make_rope(FIVE_C100_ROPE, wx.yr4_leap)
+FIVE_YR4_CLEAN_ROPE = BOB_BELIEF.make_rope(FIVE_YR4_LEAP_ROPE, wx.yr4_clean)
+FIVE_YEAR_ROPE = BOB_BELIEF.make_rope(FIVE_YR4_CLEAN_ROPE, wx.year)
 
 
 class Ch08ExampleStrs(str, Enum):
@@ -40,6 +49,22 @@ class Ch08ExampleStrs(str, Enum):
     mop_rope = MOP_ROPE
     clean_rope = CLEAN_ROPE
     dirtyness_rope = DIRTYNESS_ROPE
+    five_year_rope = FIVE_YEAR_ROPE
+    Fredrick = "Fredrick"
+    Geo = "Geo"
+    Holocene = "Holocene"
+    Iguana = "Iguana"
+    Jesus = "Jesus"
+    Keel = "Keel"
+    LeBron = "LeBron"
+    Mikayla = "Mikayla"
+    Ninon = "Ninon"
+    Obama = "Obama"
+    Preston = "Preston"
+    Quorum = "Quorum"
+    RioGrande = "RioGrande"
+    Simon = "Simon"
+    Trump = "Trump"
 
     def __str__(self):
         return self.value

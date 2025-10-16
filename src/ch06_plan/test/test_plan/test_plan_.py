@@ -1,4 +1,3 @@
-from inspect import getdoc as inspect_getdoc
 from src.ch02_rope.rope import create_rope, default_knot_if_None
 from src.ch03_allot.allot import default_grain_num_if_None
 from src.ch04_voice.group import awardunit_shop

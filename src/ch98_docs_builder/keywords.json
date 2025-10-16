@@ -210,7 +210,7 @@
   "moment_voice_nets"              : { "init_chapter": "ch18" }, 
   "momentunit"                     : { "init_chapter": "ch15" }, 
   "money_grain"                    : { "init_chapter": "ch03" }, 
-  "month_label"                    : { "init_chapter": "ch15" }, 
+  "month_label"                    : { "init_chapter": "ch08" }, 
   "monthday_index"                 : { "init_chapter": "ch08" }, 
   "months_config"                  : { "init_chapter": "ch08" }, 
   "morph"                          : { "init_chapter": "ch06" }, 

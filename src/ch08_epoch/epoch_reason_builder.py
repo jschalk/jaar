@@ -161,3 +161,42 @@ def set_epoch_case_xdays(
         "reason_divisor": every_x_days,
     }
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
+
+
+def set_epoch_case_monthday(
+    x_belief: BeliefUnit,
+    plan_rope: RopeTerm,
+    epoch_label: LabelTerm,
+    month_label: LabelTerm,
+    monthday: int,
+    length_days: int,
+):
+    """Given an epoch_label set reason for a plan that would make it a occurance across entire week(s)
+    Example:
+    Given: sue_beliefunit, plan_rope=;amy23;casa;mop;, epoch_label=lizzy9, every_x_days=5, days_duration=3
+    Add a reason to mop_plan that indicates it's to be active between every 5 days for a length of 3 days
+    """
+    time_rope = x_belief.make_l1_rope("time")
+    epoch_rope = x_belief.make_rope(time_rope, epoch_label)
+    c400_leap_rope = x_belief.make_rope(epoch_rope, "c400_leap")
+    c400_clean_rope = x_belief.make_rope(c400_leap_rope, "c400_clean")
+    c100_rope = x_belief.make_rope(c400_clean_rope, "c100")
+    yr4_leap_rope = x_belief.make_rope(c100_rope, "yr4_leap")
+    yr4_clean_rope = x_belief.make_rope(yr4_leap_rope, "yr4_clean")
+    year_rope = x_belief.make_rope(yr4_clean_rope, "year")
+    month_rope = x_belief.make_rope(year_rope, month_label)
+    month_plan = x_belief.get_plan_obj(month_rope)
+    year_lower_min = (monthday * 1440) + month_plan.gogo_want
+    year_upper_min = year_lower_min + (length_days * 1440)
+    year_plan = x_belief.get_plan_obj(year_rope)
+    year_lower_min = year_lower_min % year_plan.denom
+    year_upper_min = year_upper_min % year_plan.denom
+
+    case_args = {
+        "plan_rope": plan_rope,
+        "reason_context": month_rope,
+        "reason_state": month_rope,
+        "reason_lower": year_lower_min,
+        "reason_upper": year_upper_min,
+    }
+    belief_plan_reason_caseunit_set_obj(x_belief, case_args)
