@@ -1,14 +1,9 @@
-from src.ch06_plan.test._util.ch06_examples import get_range_attrs
-from src.ch07_belief_logic.belief_main import beliefunit_shop, get_sorted_plan_list
 from src.ch07_belief_logic.belief_tool import (
     belief_plan_reason_caseunit_exists,
     belief_plan_reason_caseunit_get_obj,
-    belief_plan_reason_caseunit_set_obj,
     belief_plan_reasonunit_exists,
     belief_plan_reasonunit_get_obj,
-    get_belief_root_facts_dict,
 )
-from src.ch08_epoch.epoch_main import add_epoch_planunit
 from src.ch08_epoch.epoch_reason_builder import (
     del_epoch_reason,
     set_epoch_base_case_datetime_range,
@@ -19,6 +14,7 @@ from src.ch08_epoch.epoch_reason_builder import (
 )
 from src.ch08_epoch.test._util.ch08_examples import (
     Ch08ExampleStrs as exx,
+    get_bob_five_belief,
     get_creg_config,
     get_five_config,
     get_lizzy9_config,
@@ -28,9 +24,7 @@ from src.ref.keywords import Ch08Keywords as wx
 
 def test_set_epoch_cases_for_dayly_SetsAttr_Scenario0_MiddleDayEvery3Days():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     mop_dayly_args = {
         wx.plan_rope: exx.mop_rope,
         wx.reason_context: exx.day_rope,
@@ -75,9 +69,7 @@ def test_set_epoch_cases_for_dayly_SetsAttr_Scenario0_MiddleDayEvery3Days():
 
 def test_set_epoch_cases_for_weekly_SetsAttr_Scenario0_ThirdDayEvery7Weeks():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     mop_weekly_args = {
         wx.plan_rope: exx.mop_rope,
         wx.reason_context: exx.week_rope,
@@ -122,9 +114,7 @@ def test_set_epoch_cases_for_weekly_SetsAttr_Scenario0_ThirdDayEvery7Weeks():
 
 def test_set_epoch_cases_for_yearly_monthday_SetsAttr_Scenario0():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
     mop_monthday_args = {
         wx.plan_rope: exx.mop_rope,
@@ -163,9 +153,7 @@ def test_set_epoch_cases_for_yearly_monthday_SetsAttr_Scenario0():
 
 def test_set_epoch_cases_for_monthly_SetsAttr_Scenario0_AllDays_within_month_range():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     mop_year_args = {wx.plan_rope: exx.mop_rope, wx.reason_context: exx.five_year_rope}
     mop_dayly_args = {
         wx.plan_rope: exx.mop_rope,
@@ -205,9 +193,7 @@ def test_set_epoch_cases_for_monthly_SetsAttr_Scenario0_AllDays_within_month_ran
 
 def test_set_epoch_cases_for_monthly_SetsAttr_Scenario1_OneDayNot_within_month_range():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     mop_year_args = {wx.plan_rope: exx.mop_rope, wx.reason_context: exx.five_year_rope}
     mop_dayly_args = {
         wx.plan_rope: exx.mop_rope,

@@ -82,6 +82,14 @@ class Ch08ExampleStrs(str, Enum):
         return self.value
 
 
+def get_bob_five_belief() -> BeliefUnit:
+    """Returns BeliefUnit with belief_label=Bob, mop as pledge plan, and five_epoch"""
+    bob_belief = beliefunit_shop(BOB_STR)
+    bob_belief.add_plan(MOP_ROPE, pledge=True)
+    add_epoch_planunit(bob_belief, get_five_config())
+    return bob_belief
+
+
 def get_example_epoch_config(epoch_label: LabelTerm) -> dict:
     x_dir = "src/ch08_epoch/test/_util"
     x_filename = f"epoch_config_{epoch_label}.json"

@@ -1,7 +1,7 @@
 from src.ch01_py.dict_toolbox import get_False_if_None
 from src.ch02_rope.rope import is_sub_rope
 from src.ch06_plan.plan import PlanUnit
-from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch07_belief_logic.belief_tool import (
     belief_plan_reason_caseunit_exists,
     belief_plan_reason_caseunit_get_obj,
@@ -298,8 +298,7 @@ def set_epoch_cases_for_monthly(
         year_lower_min, year_upper_min = get_calc_year_lower_upper(
             month_plan, monthday, length_days, True, year_plan.denom
         )
-        if year_lower_min:
-            # print(f"{month_rope=} {month_plan.gogo_want} {year_lower_min=}")
+        if year_lower_min and year_upper_min:
             case_args = {
                 "plan_rope": plan_rope,
                 "reason_context": year_rope,

@@ -17,16 +17,14 @@ from src.ch08_epoch.epoch_reason_builder import (
 )
 from src.ch08_epoch.test._util.ch08_examples import (
     Ch08ExampleStrs as exx,
-    get_five_config,
+    get_bob_five_belief,
 )
 from src.ref.keywords import Ch08Keywords as wx
 
 
 def test_set_epoch_base_case_dayly_SetsAttr_Scenario0_NoWarppingParameters():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     mop_dayly_args = {
         wx.plan_rope: exx.mop_rope,
         wx.reason_context: exx.day_rope,
@@ -59,9 +57,7 @@ def test_set_epoch_base_case_dayly_SetsAttr_Scenario0_NoWarppingParameters():
 
 def test_set_epoch_base_case_dayly_SetsAttr_Scenario1_WarppingParameters():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     bob_belief.cashout()
     mop_dayly_args = {
         wx.plan_rope: exx.mop_rope,
@@ -97,9 +93,7 @@ def test_set_epoch_base_case_dayly_SetsAttr_Scenario1_WarppingParameters():
 
 def test_set_epoch_base_case_xdays_SetsAttr_Scenario0_NoWarppingParameters():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     days_rope = bob_belief.make_rope(exx.five_rope, wx.days)
     mop_xdays_args = {
         wx.plan_rope: exx.mop_rope,
@@ -137,9 +131,7 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario0_NoWarppingParameters():
 
 def test_set_epoch_base_case_xdays_SetsAttr_Scenario1_WarppingParameters():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     days_rope = bob_belief.make_rope(exx.five_rope, wx.days)
     mop_xdays_args = {
         wx.plan_rope: exx.mop_rope,
@@ -174,9 +166,7 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario1_WarppingParameters():
 
 def test_set_epoch_base_case_weekly_SetsAttr_Scenario0_NoWrapingParameters():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     week_rope = bob_belief.make_rope(exx.five_rope, wx.week)
     mop_weekly_args = {
         wx.plan_rope: exx.mop_rope,
@@ -210,9 +200,7 @@ def test_set_epoch_base_case_weekly_SetsAttr_Scenario0_NoWrapingParameters():
 
 def test_set_epoch_base_case_weekly_SetsAttr_Scenario1_WrapingParameters():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     week_rope = bob_belief.make_rope(exx.five_rope, wx.week)
     mop_weekly_args = {
         wx.plan_rope: exx.mop_rope,
@@ -246,9 +234,7 @@ def test_set_epoch_base_case_weekly_SetsAttr_Scenario1_WrapingParameters():
 
 def test_set_epoch_base_case_xweeks_SetsAttr_Scenario0_NoWrapingParameters():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     weeks_rope = bob_belief.make_rope(exx.five_rope, wx.weeks)
     mop_xweeks_args = {
         wx.plan_rope: exx.mop_rope,
@@ -283,9 +269,7 @@ def test_set_epoch_base_case_xweeks_SetsAttr_Scenario0_NoWrapingParameters():
 
 def test_set_epoch_base_case_xweeks_SetsAttr_Scenario1_WrapingParameters():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     weeks_rope = bob_belief.make_rope(exx.five_rope, wx.weeks)
     mop_xweeks_args = {
         wx.plan_rope: exx.mop_rope,
@@ -320,9 +304,7 @@ def test_set_epoch_base_case_xweeks_SetsAttr_Scenario1_WrapingParameters():
 
 def test_set_epoch_base_case_datetime_range_SetsAttr_Scenario0_NoWrapingParameters():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     mop_range_args = {
         wx.plan_rope: exx.mop_rope,
         wx.reason_context: exx.five_rope,
@@ -356,9 +338,7 @@ def test_set_epoch_base_case_datetime_range_SetsAttr_Scenario0_NoWrapingParamete
 
 def test_set_epoch_base_case_datetime_range_SetsAttr_Scenario1_WrapingParameters():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     week_rope = bob_belief.make_rope(exx.five_rope, wx.week)
     mop_range_args = {
         wx.plan_rope: exx.mop_rope,
@@ -392,9 +372,7 @@ def test_set_epoch_base_case_datetime_range_SetsAttr_Scenario1_WrapingParameters
 
 def test_set_epoch_base_case_monthday_SetsAttr_Scenario0_NoWrapingParameters():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     month_fred_rope = bob_belief.make_rope(exx.five_year_rope, exx.Fredrick)
     month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
     mop_monthday_args = {
@@ -437,9 +415,7 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario0_NoWrapingParameters():
 
 def test_set_epoch_base_case_monthday_SetsAttr_Scenario1_WrapingParameters():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     month_trump_rope = bob_belief.make_rope(exx.five_year_rope, exx.Trump)
     mop_monthday_args = {
         wx.plan_rope: exx.mop_rope,
@@ -486,9 +462,7 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario1_WrapingParameters():
 
 def test_set_epoch_base_case_monthday_SetsAttr_Scenario2_monthday_MustBeWithinMonth():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
     mop_monthday_args = {
         wx.plan_rope: exx.mop_rope,
@@ -520,9 +494,7 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario2_monthday_MustBeWithinMo
 
 def test_set_epoch_base_case_monthday_SetsAttr_Scenario3_monthday_Reduce_length_days_ToBeWithinMonth():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
     mop_monthday_args = {
         wx.plan_rope: exx.mop_rope,
@@ -593,9 +565,7 @@ def test_del_epoch_reason_SetsAttr_Scenario0_NoReasonUnitExists():
 
 def test_del_epoch_reason_SetsAttr_Scenario1_ReasonUnitExists():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob)
-    bob_belief.add_plan(exx.mop_rope)
-    add_epoch_planunit(bob_belief, get_five_config())
+    bob_belief = get_bob_five_belief()
     bob_belief.cashout()
     mop_dayly_args = {
         wx.plan_rope: exx.mop_rope,
