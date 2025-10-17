@@ -26,36 +26,31 @@ def test_set_epoch_base_case_dayly_SetsAttr_Scenario0_NoWarppingParameters():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    five_label = five_config.get(wx.epoch_label)
-    add_epoch_planunit(bob_belief, five_config)
-    time_rope = bob_belief.make_l1_rope(wx.time)
-    five_rope = bob_belief.make_rope(time_rope, five_label)
-    day_rope = bob_belief.make_rope(five_rope, wx.day)
+    add_epoch_planunit(bob_belief, get_five_config())
     mop_dayly_args = {
         wx.plan_rope: exx.mop_rope,
-        wx.reason_context: day_rope,
-        wx.reason_state: day_rope,
+        wx.reason_context: exx.day_rope,
+        wx.reason_state: exx.day_rope,
     }
     mop_day_lower_min = 600
     mop_day_duration = 90
-    assert bob_belief.plan_exists(five_rope)
+    assert bob_belief.plan_exists(exx.five_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_dayly_args)
 
     # WHEN
     set_epoch_base_case_dayly(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
-        lower_min=mop_day_lower_min,
-        duration=mop_day_duration,
+        epoch_label=exx.five_str,
+        day_lower_min=mop_day_lower_min,
+        day_duration_min=mop_day_duration,
     )
 
     # THEN
     print(f"{get_belief_root_facts_dict(bob_belief)=}")
     assert belief_plan_reason_caseunit_exists(bob_belief, mop_dayly_args)
     day_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_dayly_args)
-    assert day_case.reason_state == day_rope
+    assert day_case.reason_state == exx.day_rope
     assert day_case.reason_lower == mop_day_lower_min
     assert day_case.reason_lower == 600
     assert day_case.reason_upper == 690
@@ -66,37 +61,32 @@ def test_set_epoch_base_case_dayly_SetsAttr_Scenario1_WarppingParameters():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    five_label = five_config.get(wx.epoch_label)
-    add_epoch_planunit(bob_belief, five_config)
+    add_epoch_planunit(bob_belief, get_five_config())
     bob_belief.cashout()
-    time_rope = bob_belief.make_l1_rope(wx.time)
-    five_rope = bob_belief.make_rope(time_rope, five_label)
-    day_rope = bob_belief.make_rope(five_rope, wx.day)
     mop_dayly_args = {
         wx.plan_rope: exx.mop_rope,
-        wx.reason_context: day_rope,
-        wx.reason_state: day_rope,
+        wx.reason_context: exx.day_rope,
+        wx.reason_state: exx.day_rope,
     }
     mop_day_lower_min = 2000
     mop_day_duration = 95
-    assert bob_belief.plan_exists(day_rope)
+    assert bob_belief.plan_exists(exx.day_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_dayly_args)
 
     # WHEN
     set_epoch_base_case_dayly(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
-        lower_min=mop_day_lower_min,
-        duration=mop_day_duration,
+        epoch_label=exx.five_str,
+        day_lower_min=mop_day_lower_min,
+        day_duration_min=mop_day_duration,
     )
 
     # THEN
-    print(f"{day_rope=}")
+    print(f"{exx.day_rope=}")
     assert belief_plan_reason_caseunit_exists(bob_belief, mop_dayly_args)
     day_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_dayly_args)
-    assert day_case.reason_state == day_rope
+    assert day_case.reason_state == exx.day_rope
     assert day_case.reason_lower == mop_day_lower_min % 1440
     assert day_case.reason_lower == 560
     assert day_case.reason_upper == 655
@@ -109,12 +99,8 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario0_NoWarppingParameters():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    five_label = five_config.get(wx.epoch_label)
-    add_epoch_planunit(bob_belief, five_config)
-    time_rope = bob_belief.make_l1_rope(wx.time)
-    five_rope = bob_belief.make_rope(time_rope, five_label)
-    days_rope = bob_belief.make_rope(five_rope, wx.days)
+    add_epoch_planunit(bob_belief, get_five_config())
+    days_rope = bob_belief.make_rope(exx.five_rope, wx.days)
     mop_xdays_args = {
         wx.plan_rope: exx.mop_rope,
         wx.reason_context: days_rope,
@@ -123,7 +109,7 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario0_NoWarppingParameters():
     mop_every_xdays = 7
     mop_day_lower = 3
     mop_day_upper = 5
-    assert bob_belief.plan_exists(five_rope)
+    assert bob_belief.plan_exists(exx.five_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_xdays_args)
     bob_belief.cashout()
     for x_plan in get_sorted_plan_list(bob_belief._plan_dict):
@@ -133,7 +119,7 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario0_NoWarppingParameters():
     set_epoch_base_case_xdays(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
+        epoch_label=exx.five_str,
         day_lower=mop_day_lower,
         day_upper=mop_day_upper,
         every_x_days=mop_every_xdays,
@@ -153,12 +139,8 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario1_WarppingParameters():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    five_label = five_config.get(wx.epoch_label)
-    add_epoch_planunit(bob_belief, five_config)
-    time_rope = bob_belief.make_l1_rope(wx.time)
-    five_rope = bob_belief.make_rope(time_rope, five_label)
-    days_rope = bob_belief.make_rope(five_rope, wx.days)
+    add_epoch_planunit(bob_belief, get_five_config())
+    days_rope = bob_belief.make_rope(exx.five_rope, wx.days)
     mop_xdays_args = {
         wx.plan_rope: exx.mop_rope,
         wx.reason_context: days_rope,
@@ -167,14 +149,14 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario1_WarppingParameters():
     mop_every_xdays = 7
     mop_day_lower = 30
     mop_day_upper = 56
-    assert bob_belief.plan_exists(five_rope)
+    assert bob_belief.plan_exists(exx.five_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_xdays_args)
 
     # WHEN
     set_epoch_base_case_xdays(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
+        epoch_label=exx.five_str,
         day_lower=mop_day_lower,
         day_upper=mop_day_upper,
         every_x_days=mop_every_xdays,
@@ -194,12 +176,8 @@ def test_set_epoch_base_case_weekly_SetsAttr_Scenario0_NoWrapingParameters():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    five_label = five_config.get(wx.epoch_label)
-    add_epoch_planunit(bob_belief, five_config)
-    time_rope = bob_belief.make_l1_rope(wx.time)
-    five_rope = bob_belief.make_rope(time_rope, five_label)
-    week_rope = bob_belief.make_rope(five_rope, wx.week)
+    add_epoch_planunit(bob_belief, get_five_config())
+    week_rope = bob_belief.make_rope(exx.five_rope, wx.week)
     mop_weekly_args = {
         wx.plan_rope: exx.mop_rope,
         wx.reason_context: week_rope,
@@ -207,16 +185,16 @@ def test_set_epoch_base_case_weekly_SetsAttr_Scenario0_NoWrapingParameters():
     }
     mop_weekly_lower_min = 600
     mop_weekly_duration = 90
-    assert bob_belief.plan_exists(five_rope)
+    assert bob_belief.plan_exists(exx.five_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_weekly_args)
 
     # WHEN
     set_epoch_base_case_weekly(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
-        lower_min=mop_weekly_lower_min,
-        duration=mop_weekly_duration,
+        epoch_label=exx.five_str,
+        week_lower_min=mop_weekly_lower_min,
+        week_duration_min=mop_weekly_duration,
     )
 
     # THEN
@@ -234,12 +212,8 @@ def test_set_epoch_base_case_weekly_SetsAttr_Scenario1_WrapingParameters():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    five_label = five_config.get(wx.epoch_label)
-    add_epoch_planunit(bob_belief, five_config)
-    time_rope = bob_belief.make_l1_rope(wx.time)
-    five_rope = bob_belief.make_rope(time_rope, five_label)
-    week_rope = bob_belief.make_rope(five_rope, wx.week)
+    add_epoch_planunit(bob_belief, get_five_config())
+    week_rope = bob_belief.make_rope(exx.five_rope, wx.week)
     mop_weekly_args = {
         wx.plan_rope: exx.mop_rope,
         wx.reason_context: week_rope,
@@ -247,16 +221,16 @@ def test_set_epoch_base_case_weekly_SetsAttr_Scenario1_WrapingParameters():
     }
     mop_weekly_lower_min = 7000
     mop_weekly_duration = 800
-    assert bob_belief.plan_exists(five_rope)
+    assert bob_belief.plan_exists(exx.five_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_weekly_args)
 
     # WHEN
     set_epoch_base_case_weekly(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
-        lower_min=mop_weekly_lower_min,
-        duration=mop_weekly_duration,
+        epoch_label=exx.five_str,
+        week_lower_min=mop_weekly_lower_min,
+        week_duration_min=mop_weekly_duration,
     )
 
     # THEN
@@ -274,12 +248,8 @@ def test_set_epoch_base_case_xweeks_SetsAttr_Scenario0_NoWrapingParameters():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    five_label = five_config.get(wx.epoch_label)
-    add_epoch_planunit(bob_belief, five_config)
-    time_rope = bob_belief.make_l1_rope(wx.time)
-    five_rope = bob_belief.make_rope(time_rope, five_label)
-    weeks_rope = bob_belief.make_rope(five_rope, wx.weeks)
+    add_epoch_planunit(bob_belief, get_five_config())
+    weeks_rope = bob_belief.make_rope(exx.five_rope, wx.weeks)
     mop_xweeks_args = {
         wx.plan_rope: exx.mop_rope,
         wx.reason_context: weeks_rope,
@@ -288,16 +258,16 @@ def test_set_epoch_base_case_xweeks_SetsAttr_Scenario0_NoWrapingParameters():
     mop_every_xweeks = 7
     mop_week_lower = 3
     mop_week_upper = 5
-    assert bob_belief.plan_exists(five_rope)
+    assert bob_belief.plan_exists(exx.five_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_xweeks_args)
 
     # WHEN
     set_epoch_base_case_xweeks(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
-        week_lower=mop_week_lower,
-        week_upper=mop_week_upper,
+        epoch_label=exx.five_str,
+        weeks_lower=mop_week_lower,
+        weeks_upper=mop_week_upper,
         every_x_weeks=mop_every_xweeks,
     )
 
@@ -315,12 +285,8 @@ def test_set_epoch_base_case_xweeks_SetsAttr_Scenario1_WrapingParameters():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    five_label = five_config.get(wx.epoch_label)
-    add_epoch_planunit(bob_belief, five_config)
-    time_rope = bob_belief.make_l1_rope(wx.time)
-    five_rope = bob_belief.make_rope(time_rope, five_label)
-    weeks_rope = bob_belief.make_rope(five_rope, wx.weeks)
+    add_epoch_planunit(bob_belief, get_five_config())
+    weeks_rope = bob_belief.make_rope(exx.five_rope, wx.weeks)
     mop_xweeks_args = {
         wx.plan_rope: exx.mop_rope,
         wx.reason_context: weeks_rope,
@@ -329,16 +295,16 @@ def test_set_epoch_base_case_xweeks_SetsAttr_Scenario1_WrapingParameters():
     mop_every_xweeks = 7
     mop_week_lower = 30
     mop_week_upper = 56
-    assert bob_belief.plan_exists(five_rope)
+    assert bob_belief.plan_exists(exx.five_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_xweeks_args)
 
     # WHEN
     set_epoch_base_case_xweeks(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
-        week_lower=mop_week_lower,
-        week_upper=mop_week_upper,
+        epoch_label=exx.five_str,
+        weeks_lower=mop_week_lower,
+        weeks_upper=mop_week_upper,
         every_x_weeks=mop_every_xweeks,
     )
 
@@ -356,77 +322,69 @@ def test_set_epoch_base_case_datetime_range_SetsAttr_Scenario0_NoWrapingParamete
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    five_label = five_config.get(wx.epoch_label)
-    add_epoch_planunit(bob_belief, five_config)
-    time_rope = bob_belief.make_l1_rope(wx.time)
-    five_rope = bob_belief.make_rope(time_rope, five_label)
-    mop_once_args = {
+    add_epoch_planunit(bob_belief, get_five_config())
+    mop_range_args = {
         wx.plan_rope: exx.mop_rope,
-        wx.reason_context: five_rope,
-        wx.reason_state: five_rope,
+        wx.reason_context: exx.five_rope,
+        wx.reason_state: exx.five_rope,
     }
-    mop_once_lower_min = 600
-    mop_once_duration = 90
-    assert bob_belief.plan_exists(five_rope)
-    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_once_args)
+    mop_range_lower_min = 600
+    mop_range_duration = 90
+    assert bob_belief.plan_exists(exx.five_rope)
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_range_args)
 
     # WHEN
     set_epoch_base_case_datetime_range(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
-        lower_min=mop_once_lower_min,
-        duration=mop_once_duration,
+        epoch_label=exx.five_str,
+        range_lower_min=mop_range_lower_min,
+        range_duration_min=mop_range_duration,
     )
 
     # THEN
-    print(f"{five_rope=}")
-    assert belief_plan_reason_caseunit_exists(bob_belief, mop_once_args)
-    day_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_once_args)
-    assert day_case.reason_state == five_rope
-    assert day_case.reason_lower == mop_once_lower_min
+    print(f"{exx.five_rope=}")
+    assert belief_plan_reason_caseunit_exists(bob_belief, mop_range_args)
+    day_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_range_args)
+    assert day_case.reason_state == exx.five_rope
+    assert day_case.reason_lower == mop_range_lower_min
     assert day_case.reason_lower == 600
     assert day_case.reason_upper == 690
     assert day_case.reason_divisor == 5259492000
-    assert day_case.reason_divisor == bob_belief.get_plan_obj(five_rope).close
+    assert day_case.reason_divisor == bob_belief.get_plan_obj(exx.five_rope).close
 
 
 def test_set_epoch_base_case_datetime_range_SetsAttr_Scenario1_WrapingParameters():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    five_label = five_config.get(wx.epoch_label)
-    add_epoch_planunit(bob_belief, five_config)
-    time_rope = bob_belief.make_l1_rope(wx.time)
-    five_rope = bob_belief.make_rope(time_rope, five_label)
-    week_rope = bob_belief.make_rope(five_rope, wx.week)
-    mop_once_args = {
+    add_epoch_planunit(bob_belief, get_five_config())
+    week_rope = bob_belief.make_rope(exx.five_rope, wx.week)
+    mop_range_args = {
         wx.plan_rope: exx.mop_rope,
-        wx.reason_context: five_rope,
-        wx.reason_state: five_rope,
+        wx.reason_context: exx.five_rope,
+        wx.reason_state: exx.five_rope,
     }
-    mop_once_lower_min = 5259490000
-    mop_once_duration = 8000
-    assert bob_belief.plan_exists(five_rope)
-    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_once_args)
+    mop_range_lower_min = 5259490000
+    mop_range_duration = 8000
+    assert bob_belief.plan_exists(exx.five_rope)
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_range_args)
 
     # WHEN
     set_epoch_base_case_datetime_range(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
-        lower_min=mop_once_lower_min,
-        duration=mop_once_duration,
+        epoch_label=exx.five_str,
+        range_lower_min=mop_range_lower_min,
+        range_duration_min=mop_range_duration,
     )
 
     # THEN
     print(f"{week_rope=}")
-    assert belief_plan_reason_caseunit_exists(bob_belief, mop_once_args)
-    day_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_once_args)
-    assert day_case.reason_state == five_rope
-    assert day_case.reason_lower == mop_once_lower_min
+    assert belief_plan_reason_caseunit_exists(bob_belief, mop_range_args)
+    day_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_range_args)
+    assert day_case.reason_state == exx.five_rope
+    assert day_case.reason_lower == mop_range_lower_min
     assert day_case.reason_lower == 5259490000
     assert day_case.reason_upper == 6000
     assert day_case.reason_divisor == 5259492000
@@ -436,11 +394,7 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario0_NoWrapingParameters():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    five_label = five_config.get(wx.epoch_label)
-    add_epoch_planunit(bob_belief, five_config)
-    time_rope = bob_belief.make_l1_rope(wx.time)
-    five_rope = bob_belief.make_rope(time_rope, five_label)
+    add_epoch_planunit(bob_belief, get_five_config())
     month_fred_rope = bob_belief.make_rope(exx.five_year_rope, exx.Fredrick)
     month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
     mop_monthday_args = {
@@ -454,14 +408,14 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario0_NoWrapingParameters():
     # bob_belief.cashout()
     # for x_plan in get_sorted_plan_list(bob_belief._plan_dict):
     #     print(f"{x_plan.get_plan_rope()=}")
-    assert bob_belief.plan_exists(five_rope)
+    assert bob_belief.plan_exists(exx.five_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_monthday_args)
 
     # WHEN
     set_epoch_base_case_monthday(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
+        epoch_label=exx.five_str,
         month_label=exx.Geo,
         monthday=mop_monthday,
         length_days=mop_length_days,
@@ -485,11 +439,7 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario1_WrapingParameters():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    five_label = five_config.get(wx.epoch_label)
-    add_epoch_planunit(bob_belief, five_config)
-    time_rope = bob_belief.make_l1_rope(wx.time)
-    five_rope = bob_belief.make_rope(time_rope, five_label)
+    add_epoch_planunit(bob_belief, get_five_config())
     month_trump_rope = bob_belief.make_rope(exx.five_year_rope, exx.Trump)
     mop_monthday_args = {
         wx.plan_rope: exx.mop_rope,
@@ -498,14 +448,14 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario1_WrapingParameters():
     }
     mop_monthday = 40
     mop_length_days = 3
-    assert bob_belief.plan_exists(five_rope)
+    assert bob_belief.plan_exists(exx.five_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_monthday_args)
 
     # WHEN
     set_epoch_base_case_monthday(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
+        epoch_label=exx.five_str,
         month_label=exx.Trump,
         monthday=mop_monthday,
         length_days=mop_length_days,
@@ -538,11 +488,7 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario2_monthday_MustBeWithinMo
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    five_label = five_config.get(wx.epoch_label)
-    add_epoch_planunit(bob_belief, five_config)
-    time_rope = bob_belief.make_l1_rope(wx.time)
-    five_rope = bob_belief.make_rope(time_rope, five_label)
+    add_epoch_planunit(bob_belief, get_five_config())
     month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
     mop_monthday_args = {
         wx.plan_rope: exx.mop_rope,
@@ -551,14 +497,14 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario2_monthday_MustBeWithinMo
     }
     mop_monthday = 40
     mop_length_days = 3
-    assert bob_belief.plan_exists(five_rope)
+    assert bob_belief.plan_exists(exx.five_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_monthday_args)
 
     # WHEN
     set_epoch_base_case_monthday(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
+        epoch_label=exx.five_str,
         month_label=exx.Geo,
         monthday=mop_monthday,
         length_days=mop_length_days,
@@ -576,11 +522,7 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario3_monthday_Reduce_length_
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    five_label = five_config.get(wx.epoch_label)
-    add_epoch_planunit(bob_belief, five_config)
-    time_rope = bob_belief.make_l1_rope(wx.time)
-    five_rope = bob_belief.make_rope(time_rope, five_label)
+    add_epoch_planunit(bob_belief, get_five_config())
     month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
     mop_monthday_args = {
         wx.plan_rope: exx.mop_rope,
@@ -589,14 +531,14 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario3_monthday_Reduce_length_
     }
     mop_monthday = 20
     mop_length_days = 40
-    assert bob_belief.plan_exists(five_rope)
+    assert bob_belief.plan_exists(exx.five_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_monthday_args)
 
     # WHEN
     set_epoch_base_case_monthday(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
+        epoch_label=exx.five_str,
         month_label=exx.Geo,
         monthday=mop_monthday,
         length_days=mop_length_days,
@@ -634,13 +576,10 @@ def test_del_epoch_reason_SetsAttr_Scenario0_NoReasonUnitExists():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    time_rope = bob_belief.make_l1_rope(wx.time)
-    five_rope = bob_belief.make_rope(time_rope, exx.five_str)
-    day_rope = bob_belief.make_rope(five_rope, wx.day)
     mop_dayly_args = {
         wx.plan_rope: exx.mop_rope,
-        wx.reason_context: day_rope,
-        wx.reason_state: day_rope,
+        wx.reason_context: exx.day_rope,
+        wx.reason_state: exx.day_rope,
     }
     assert bob_belief.plan_exists(exx.mop_rope)
     assert not belief_plan_reasonunit_exists(bob_belief, mop_dayly_args)
@@ -656,17 +595,12 @@ def test_del_epoch_reason_SetsAttr_Scenario1_ReasonUnitExists():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    add_epoch_planunit(bob_belief, five_config)
+    add_epoch_planunit(bob_belief, get_five_config())
     bob_belief.cashout()
-    time_rope = bob_belief.make_l1_rope(wx.time)
-    five_label = five_config.get(wx.epoch_label)
-    five_rope = bob_belief.make_rope(time_rope, five_label)
-    day_rope = bob_belief.make_rope(five_rope, wx.day)
     mop_dayly_args = {
         wx.plan_rope: exx.mop_rope,
-        wx.reason_context: day_rope,
-        wx.reason_state: day_rope,
+        wx.reason_context: exx.day_rope,
+        wx.reason_state: exx.day_rope,
     }
     mop_day_lower_min = 600
     mop_day_duration = 90
@@ -674,9 +608,9 @@ def test_del_epoch_reason_SetsAttr_Scenario1_ReasonUnitExists():
     set_epoch_base_case_dayly(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
-        lower_min=mop_day_lower_min,
-        duration=mop_day_duration,
+        epoch_label=exx.five_str,
+        day_lower_min=mop_day_lower_min,
+        day_duration_min=mop_day_duration,
     )
     assert belief_plan_reasonunit_exists(bob_belief, mop_dayly_args)
 

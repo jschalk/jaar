@@ -38,8 +38,8 @@ def test_set_epoch_base_case_dayly_ChangesBeliefUnit_agenda():
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
         epoch_label=five_label,
-        lower_min=mop_day_lower_min,
-        duration=mop_day_duration,
+        day_lower_min=mop_day_lower_min,
+        day_duration_min=mop_day_duration,
     )
 
     # THEN
@@ -79,8 +79,8 @@ def test_set_epoch_cases_for_yearly_monthday_ChangesBeliefUnit_agenda():
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
         epoch_label=five_label,
-        lower_min=mop_day_lower_min,
-        duration=mop_day_duration,
+        day_lower_min=mop_day_lower_min,
+        day_duration_min=mop_day_duration,
         month_label=exx.Geo,
         monthday=mop_monthday,
         length_days=mop_length_days,

@@ -1,5 +1,6 @@
 from src.ch01_py.dict_toolbox import get_False_if_None
 from src.ch02_rope.rope import is_sub_rope
+from src.ch06_plan.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch07_belief_logic.belief_tool import (
     belief_plan_reason_caseunit_exists,
@@ -11,7 +12,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_planunit_get_obj,
 )
 from src.ch08_epoch._ref.ch08_semantic_types import LabelTerm, RopeTerm
-from src.ch08_epoch.epoch_main import get_day_rope, get_week_rope
+from src.ch08_epoch.epoch_main import get_day_rope, get_week_rope, get_year_rope
 
 
 def del_epoch_reason(
@@ -30,12 +31,22 @@ def del_epoch_reason(
                 x_plan.del_reasonunit_reason_context(reason_context)
 
 
+def calculate_day_lower_min(day_lower_min: int, day_plan_denom: int) -> int:
+    return day_lower_min % day_plan_denom
+
+
+def calculate_day_upper_min(
+    day_lower_min: int, day_duration_min: int, day_plan_denom: int
+) -> int:
+    return (day_lower_min + day_duration_min) % day_plan_denom
+
+
 def set_epoch_base_case_dayly(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
     epoch_label: LabelTerm,
-    lower_min: int,
-    duration: int,
+    day_lower_min: int,
+    day_duration_min: int,
 ):
     """Given an epoch_label set reason for a plan that would make it a dayly occurance
     Example:
@@ -44,12 +55,16 @@ def set_epoch_base_case_dayly(
     """
     day_rope = get_day_rope(x_belief, epoch_label)
     day_plan = x_belief.get_plan_obj(day_rope)
+    calc_day_lower_min = calculate_day_lower_min(day_lower_min, day_plan.denom)
+    calc_day_upper_min = calculate_day_upper_min(
+        day_lower_min, day_duration_min, day_plan.denom
+    )
     case_args = {
         "plan_rope": plan_rope,
         "reason_context": day_rope,
         "reason_state": day_rope,
-        "reason_lower": lower_min % day_plan.denom,
-        "reason_upper": (lower_min + duration) % day_plan.denom,
+        "reason_lower": calc_day_lower_min,
+        "reason_upper": calc_day_upper_min,
     }
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
 
@@ -58,8 +73,8 @@ def set_epoch_base_case_weekly(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
     epoch_label: LabelTerm,
-    lower_min: int,
-    duration: int,
+    week_lower_min: int,
+    week_duration_min: int,
 ):
     """Given an epoch_label set reason for a plan that would make it a weekly occurance
     Example:
@@ -73,8 +88,8 @@ def set_epoch_base_case_weekly(
         "plan_rope": plan_rope,
         "reason_context": week_rope,
         "reason_state": week_rope,
-        "reason_lower": lower_min,
-        "reason_upper": (lower_min + duration) % week_plan.denom,
+        "reason_lower": week_lower_min,
+        "reason_upper": (week_lower_min + week_duration_min) % week_plan.denom,
     }
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
 
@@ -83,8 +98,8 @@ def set_epoch_base_case_datetime_range(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
     epoch_label: LabelTerm,
-    lower_min: int,
-    duration: int,
+    range_lower_min: int,
+    range_duration_min: int,
 ):
     """Given an epoch_label set reason for a plan that would make it a weekly occurance
     Example:
@@ -99,8 +114,8 @@ def set_epoch_base_case_datetime_range(
         "plan_rope": plan_rope,
         "reason_context": epoch_rope,
         "reason_state": epoch_rope,
-        "reason_lower": lower_min,
-        "reason_upper": (lower_min + duration) % epoch_plan.close,
+        "reason_lower": range_lower_min,
+        "reason_upper": (range_lower_min + range_duration_min) % epoch_plan.close,
         "reason_divisor": epoch_plan.close,
     }
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
@@ -110,8 +125,8 @@ def set_epoch_base_case_xweeks(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
     epoch_label: LabelTerm,
-    week_lower: int,
-    week_upper: int,
+    weeks_lower: int,
+    weeks_upper: int,
     every_x_weeks: int,
 ):
     time_rope = x_belief.make_l1_rope("time")
@@ -122,8 +137,8 @@ def set_epoch_base_case_xweeks(
         "plan_rope": plan_rope,
         "reason_context": weeks_rope,
         "reason_state": weeks_rope,
-        "reason_lower": week_lower % every_x_weeks,
-        "reason_upper": week_upper % every_x_weeks,
+        "reason_lower": weeks_lower % every_x_weeks,
+        "reason_upper": weeks_upper % every_x_weeks,
         "reason_divisor": every_x_weeks,
     }
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
@@ -159,6 +174,27 @@ def set_epoch_base_case_xdays(
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
 
 
+def get_calc_year_lower_upper(
+    month_plan: PlanUnit,
+    monthday: int,
+    length_days,
+    range_must_be_within_month: bool,
+    year_plan_denom: int,
+):
+    month_minutes = month_plan.stop_want - month_plan.gogo_want
+    monthday_lower_minutes = monthday * 1440
+    if range_must_be_within_month and month_minutes < monthday_lower_minutes:
+        return None, None
+    year_lower_min = monthday_lower_minutes + month_plan.gogo_want
+    length_minutes = length_days * 1440
+    year_upper_min = year_lower_min + length_minutes
+    if range_must_be_within_month and year_upper_min > month_plan.stop_want:
+        year_upper_min = month_plan.stop_want
+    year_lower_min = year_lower_min % year_plan_denom
+    year_upper_min = year_upper_min % year_plan_denom
+    return year_lower_min, year_upper_min
+
+
 def set_epoch_base_case_monthday(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
@@ -174,28 +210,15 @@ def set_epoch_base_case_monthday(
     Add a reason to mop_plan that indicates it's to be active between every 5 days for a length of 3 days
     """
     range_must_be_within_month = get_False_if_None(range_must_be_within_month)
-    time_rope = x_belief.make_l1_rope("time")
-    epoch_rope = x_belief.make_rope(time_rope, epoch_label)
-    c400_leap_rope = x_belief.make_rope(epoch_rope, "c400_leap")
-    c400_clean_rope = x_belief.make_rope(c400_leap_rope, "c400_clean")
-    c100_rope = x_belief.make_rope(c400_clean_rope, "c100")
-    yr4_leap_rope = x_belief.make_rope(c100_rope, "yr4_leap")
-    yr4_clean_rope = x_belief.make_rope(yr4_leap_rope, "yr4_clean")
-    year_rope = x_belief.make_rope(yr4_clean_rope, "year")
+    year_rope = get_year_rope(x_belief, epoch_label)
     month_rope = x_belief.make_rope(year_rope, month_label)
     month_plan = x_belief.get_plan_obj(month_rope)
-    month_minutes = month_plan.stop_want - month_plan.gogo_want
-    monthday_lower_minutes = monthday * 1440
-    if range_must_be_within_month and month_minutes < monthday_lower_minutes:
-        return
-    year_lower_min = monthday_lower_minutes + month_plan.gogo_want
-    length_minutes = length_days * 1440
-    year_upper_min = year_lower_min + length_minutes
-    if range_must_be_within_month and year_upper_min > month_plan.stop_want:
-        year_upper_min = month_plan.stop_want
     year_plan = x_belief.get_plan_obj(year_rope)
-    year_lower_min = year_lower_min % year_plan.denom
-    year_upper_min = year_upper_min % year_plan.denom
+    year_lower_min, year_upper_min = get_calc_year_lower_upper(
+        month_plan, monthday, length_days, range_must_be_within_month, year_plan.denom
+    )
+    if year_lower_min is None:
+        return
 
     case_args = {
         "plan_rope": plan_rope,
@@ -211,13 +234,15 @@ def set_epoch_cases_for_dayly(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
     epoch_label: LabelTerm,
-    lower_min: int,
-    duration: int,
+    day_lower_min: int,
+    day_duration_min: int,
     day_lower: int,
     day_upper: int,
     every_x_days: int,
 ):
-    set_epoch_base_case_dayly(x_belief, plan_rope, epoch_label, lower_min, duration)
+    set_epoch_base_case_dayly(
+        x_belief, plan_rope, epoch_label, day_lower_min, day_duration_min
+    )
     set_epoch_base_case_xdays(
         x_belief, plan_rope, epoch_label, day_lower, day_upper, every_x_days
     )
@@ -229,13 +254,13 @@ def set_epoch_cases_for_weekly(
     epoch_label: LabelTerm,
     lower_min: int,
     duration: int,
-    week_lower: int,
-    week_upper: int,
+    weeks_lower: int,
+    weeks_upper: int,
     every_x_weeks: int,
 ):
     set_epoch_base_case_weekly(x_belief, plan_rope, epoch_label, lower_min, duration)
     set_epoch_base_case_xweeks(
-        x_belief, plan_rope, epoch_label, week_lower, week_upper, every_x_weeks
+        x_belief, plan_rope, epoch_label, weeks_lower, weeks_upper, every_x_weeks
     )
 
 
@@ -243,13 +268,46 @@ def set_epoch_cases_for_yearly_monthday(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
     epoch_label: LabelTerm,
-    lower_min: int,
-    duration: int,
+    day_lower_min: int,
+    day_duration_min: int,
     month_label: LabelTerm,
     monthday: int,
     length_days: int,
 ):
-    set_epoch_base_case_dayly(x_belief, plan_rope, epoch_label, lower_min, duration)
+    set_epoch_base_case_dayly(
+        x_belief, plan_rope, epoch_label, day_lower_min, day_duration_min
+    )
     set_epoch_base_case_monthday(
         x_belief, plan_rope, epoch_label, month_label, monthday, length_days
+    )
+
+
+def set_epoch_cases_for_monthly(
+    x_belief: BeliefUnit,
+    plan_rope: RopeTerm,
+    epoch_label: LabelTerm,
+    day_lower_min: int,
+    day_duration_min: int,
+    monthday: int,
+    length_days: int,
+):
+    year_rope = get_year_rope(x_belief, epoch_label)
+    year_plan = x_belief.get_plan_obj(year_rope)
+    for month_label, month_plan in year_plan.kids.items():
+        month_rope = x_belief.make_rope(year_rope, month_label)
+        year_lower_min, year_upper_min = get_calc_year_lower_upper(
+            month_plan, monthday, length_days, True, year_plan.denom
+        )
+        if year_lower_min:
+            # print(f"{month_rope=} {month_plan.gogo_want} {year_lower_min=}")
+            case_args = {
+                "plan_rope": plan_rope,
+                "reason_context": year_rope,
+                "reason_state": month_rope,
+                "reason_lower": year_lower_min,
+                "reason_upper": year_upper_min,
+            }
+            belief_plan_reason_caseunit_set_obj(x_belief, case_args)
+    set_epoch_base_case_dayly(
+        x_belief, plan_rope, epoch_label, day_lower_min, day_duration_min
     )
