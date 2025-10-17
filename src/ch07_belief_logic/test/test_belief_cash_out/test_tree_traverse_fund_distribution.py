@@ -1140,13 +1140,13 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
 
     # THEN
     print(f"{yao_belief.get_reason_contexts()=}")
-    assert len(agenda_dict) == 63
+    assert len(agenda_dict) == 69
     x_awardagendametrics = AwardAgendaMetrics()
     x_awardagendametrics.set_awardagendametrics_sums(agenda_dict=agenda_dict)
     # print(f"{sum_belief_agenda_plans_fund_total=}")
     # assert x_awardagendametrics.agenda_no_count == 14
     assert x_awardagendametrics.agenda_yes_count == 49
-    predicted_agenda_no_belief_i_sum = int(0.004107582 * default_pool_num())
+    predicted_agenda_no_belief_i_sum = int(0.004908864 * default_pool_num())
     assert (
         x_awardagendametrics.agenda_no_belief_i_sum == predicted_agenda_no_belief_i_sum
     )
@@ -1160,7 +1160,7 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
         + x_awardagendametrics.agenda_yes_belief_i_sum,
         x_awardagendametrics.sum_belief_agenda_plans_fund_total,
     )
-    predicted_sum_belief_agenda_plans_fund_total = 0.007172982 * default_pool_num()
+    predicted_sum_belief_agenda_plans_fund_total = 0.007974264 * default_pool_num()
     assert (
         x_awardagendametrics.sum_belief_agenda_plans_fund_total
         == predicted_sum_belief_agenda_plans_fund_total

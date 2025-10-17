@@ -329,7 +329,6 @@ def belief_plan_reason_caseunit_set_obj(belief: BeliefUnit, args: dict[str,]):
     reason_lower = args.get("reason_lower")
     reason_upper = args.get("reason_upper")
     reason_divisor = args.get("reason_divisor")
-
     belief.edit_plan_attr(
         plan_rope=plan_rope,
         reason_context=reason_context,

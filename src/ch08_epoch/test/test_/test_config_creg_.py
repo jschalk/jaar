@@ -595,36 +595,50 @@ def test_BeliefUnit_get_agenda_dict_DoesNotReturnPledgePlansOutsideRange():
     )
 
     # WHEN
-    x_reason_lower = 2063971110
-    x_reason_upper1 = 2063971523
+    x_fact_lower1 = 2063971110
+    x_fact_upper1 = 2063971110
     sue_belief.add_fact(
         cregtime_rope,
         fact_state=cregtime_rope,
-        fact_lower=x_reason_lower,
-        fact_upper=x_reason_upper1,
+        fact_lower=x_fact_lower1,
+        fact_upper=x_fact_upper1,
     )
 
     # THEN
     agenda_dict = sue_belief.get_agenda_dict()
-    print(f"{agenda_dict.keys()=}")
+    clean_plan = agenda_dict.get(clean_rope)
+    day_factheir = clean_plan.factheirs.get(day_rope)
+    day_reasonheir = clean_plan.reasonheirs.get(day_rope)
+    day_heir_case = day_reasonheir.cases.get(day_rope)
+    print(
+        f"{day_factheir.fact_context=} {day_factheir.fact_lower} {day_factheir.fact_upper}"
+    )
+    print(f"{day_heir_case=}")
     assert len(agenda_dict) == 1
     assert clean_rope in agenda_dict.keys()
 
     # WHEN
-    # x_reason_upper2 = 1063971923
-    x_reason_lower2 = 0
-    x_reason_upper2 = 0
+    x_fact_lower2 = 500
+    x_fact_upper2 = 500
     sue_belief.add_fact(
         cregtime_rope,
         fact_state=cregtime_rope,
-        fact_lower=x_reason_lower2,
-        fact_upper=x_reason_upper2,
+        fact_lower=x_fact_lower2,
+        fact_upper=x_fact_upper2,
     )
-    print(f"{sue_belief.planroot.factunits=}")
+    # print(f"{sue_belief.planroot.factunits=}")
 
     # THEN
-    agenda_dict = sue_belief.get_agenda_dict()
-    assert len(agenda_dict) == 0
+    clean_plan = sue_belief.get_plan_obj(clean_rope)
+    day_factheir = clean_plan.factheirs.get(day_rope)
+    day_reasonheir = clean_plan.reasonheirs.get(day_rope)
+    day_heir_case = day_reasonheir.cases.get(day_rope)
+    print(
+        f"{day_factheir.fact_context=} {day_factheir.fact_lower} {day_factheir.fact_upper}"
+    )
+    print(f"{day_heir_case=}")
+    agenda2_dict = sue_belief.get_agenda_dict()
+    assert len(agenda2_dict) == 0
 
 
 def test_BeliefUnit_create_agenda_plan_CreatesAllBeliefAttributes():

@@ -9,7 +9,10 @@ from src.ch07_belief_logic.belief_tool import (
     set_factunits_to_belief,
 )
 from src.ch08_epoch.epoch_main import add_epoch_planunit
-from src.ch08_epoch.epoch_reason_builder import set_epoch_base_case_dayly
+from src.ch08_epoch.epoch_reason_builder import (
+    set_epoch_base_case_dayly,
+    set_epoch_cases_for_monthday,
+)
 from src.ch08_epoch.test._util.ch08_examples import (
     Ch08ExampleStrs as exx,
     get_five_config,
@@ -56,53 +59,52 @@ def test_set_epoch_base_case_dayly_ChangesBeliefUnit_agenda():
     assert len(bob_belief.get_agenda_dict()) == 1
 
 
-# def test_set_epoch_base_case_dayly_SetsAttr_Scenario1_WarpAround():
-#     # ESTABLISH
-#     bob_belief = beliefunit_shop(exx.Bob)
-#     bob_belief.add_plan(exx.mop_rope)
-#     five_config = get_five_config()
-#     five_label = five_config.get(wx.epoch_label)
-#     add_epoch_planunit(bob_belief, five_config)
-#     bob_belief.cashout()
-#     time_rope = bob_belief.make_l1_rope(wx.time)
-#     epoch_five_rope = bob_belief.make_rope(time_rope, five_label)
-#     epoch_day_rope = bob_belief.make_rope(epoch_five_rope, wx.day)
-#     mop_dayly_args = {
-#         wx.plan_rope: exx.mop_rope,
-#         wx.reason_context: epoch_five_rope,
-#         wx.reason_state: epoch_day_rope,
-#     }
-#     mop_day_lower_min = 1400
-#     mop_day_duration = 95
-#     assert bob_belief.plan_exists(epoch_five_rope)
-#     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_dayly_args)
+def test_set_epoch_cases_for_monthday_ChangesBeliefUnit_agenda():
+    # ESTABLISH
+    bob_belief = beliefunit_shop(exx.Bob)
+    bob_belief.add_plan(exx.mop_rope, pledge=True)
+    five_config = get_five_config()
+    five_label = five_config.get(wx.epoch_label)
+    add_epoch_planunit(bob_belief, five_config)
+    month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
+    mop_monthday = 3
+    mop_length_days = 4
+    mop_day_lower_min = 600
+    mop_day_duration = 90
+    bob_belief.add_fact(exx.five_rope, exx.five_rope, 400, 440)
+    assert len(bob_belief.get_agenda_dict()) == 1
 
-#     # WHEN
-#     set_epoch_base_case_dayly(
-#         x_belief=bob_belief,
-#         plan_rope=exx.mop_rope,
-#         epoch_label=five_label,
-#         lower_min=mop_day_lower_min,
-#         duration=mop_day_duration,
-#     )
+    # WHEN 1
+    set_epoch_cases_for_monthday(
+        x_belief=bob_belief,
+        plan_rope=exx.mop_rope,
+        epoch_label=five_label,
+        lower_min=mop_day_lower_min,
+        duration=mop_day_duration,
+        month_label=exx.Geo,
+        monthday=mop_monthday,
+        length_days=mop_length_days,
+    )
 
-#     # THEN
-#     print(f"{epoch_day_rope=}")
-#     assert belief_plan_reason_caseunit_exists(bob_belief, mop_dayly_args)
-#     day_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_dayly_args)
-#     assert day_case.reason_state == epoch_day_rope
-#     assert day_case.reason_lower == mop_day_lower_min
-#     assert day_case.reason_lower == 1400
-#     assert day_case.reason_upper == 55
-#     assert day_case.reason_divisor == 1440
-#     # for x_plan in get_sorted_plan_list(bob_belief._plan_dict):
-#     #     print(f"{x_plan.get_plan_rope()=}")
+    # THEN 1
+    assert len(bob_belief.get_agenda_dict()) == 0
 
+    # WHEN 2
+    bob_belief.add_fact(exx.five_rope, exx.five_rope, 400, 100000)
 
-# # create exception if set_epoch_base_case_dayly plan_rope,beginning time + duration is greater then 1440 (must stay within day)
-
-# # create function del_plan_reason_dayly given BeliefUnit, plan_rope,beginning time, duration
-
-# # create test with multiple set_epoch_base_case_dayly added to single plan
-
-# # create test with multiple dayly reasons added and del_plan_reason_dayly only deletes the correct one
+    # THEN 2
+    print("epoch fact changed")
+    bob_belief.cashout()
+    mop_plan = bob_belief.get_plan_obj(exx.mop_rope)
+    day_reasonheir = mop_plan.reasonheirs.get(exx.day_rope)
+    day_caseunit = day_reasonheir.cases.get(exx.day_rope)
+    day_factheir = mop_plan.factheirs.get(exx.day_rope)
+    print(f"{day_factheir=}")
+    print(f"{day_caseunit=}")
+    assert len(bob_belief.get_agenda_dict()) == 1
+    # geo_reasonheir = mop_plan.reasonheirs.get(month_geo_rope)
+    # geo_factheir = mop_plan.factheirs.get(month_geo_rope)
+    # print(f"{geo_factheir=}")
+    # print(f"{day_reasonheir=}")
+    # print(f"{geo_reasonheir.status=}")
+    # print(f"{mop_plan.factheirs.keys()=}")

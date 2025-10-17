@@ -3,7 +3,7 @@ from pytest import raises as pytest_raises
 from src.ch17_idea.idea_db_tool import is_column_type_valid
 
 
-def test_is_column_type_valid_ReturnsObjs():
+def test_is_column_type_valid_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert is_column_type_valid(DataFrame({"ID": [1, 2, 3]}), "ID", "INT")
     assert is_column_type_valid(DataFrame({"Age": [1.5, 2.5, 3.0]}), "Age", "REAL")

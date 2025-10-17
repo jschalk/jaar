@@ -73,7 +73,7 @@ def test_get_belief_voiceunits_dataframe_ReturnsEmptyDataFrame():
 def test_get_belief_agenda_dataframe_ReturnsDataFrame():
     # ESTABLISH
     yao_belief = beliefunit_v001_with_large_agenda()
-    assert len(yao_belief.get_agenda_dict()) == 63
+    assert len(yao_belief.get_agenda_dict()) == 69
 
     # WHEN
     x_df = get_belief_agenda_dataframe(yao_belief)
@@ -95,7 +95,7 @@ def test_get_belief_agenda_dataframe_ReturnsDataFrame():
     print(f"{set(x_df.columns)=}")
 
     assert set(x_df.columns) == voiceunit_colums
-    assert x_df.shape[0] == 63
+    assert x_df.shape[0] == 69
 
 
 def test_get_belief_agenda_dataframe_ReturnsEmptyDataFrame():

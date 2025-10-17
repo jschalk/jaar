@@ -32,7 +32,7 @@ def test_get_level1_dirs_NonExistentDirectory():
     assert result == expected_dirs, assert_fail_str
 
 
-def test_get_level1_dirs_ReturnsObjSorted():
+def test_get_level1_dirs_ReturnsObj_Sorted():
     # ESTABLISH
     test_dir = get_chapter_temp_dir()
     # Create a temporary directory structure

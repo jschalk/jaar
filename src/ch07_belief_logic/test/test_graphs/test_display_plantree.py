@@ -71,7 +71,7 @@ def test_get_belief_voices_plotly_fig_DisplaysInfo(graphics_bool):
 def test_get_belief_agenda_plotly_fig_DisplaysInfo(graphics_bool):
     # ESTABLISH
     yao_belief = beliefunit_v001_with_large_agenda()
-    assert len(yao_belief.get_agenda_dict()) == 63
+    assert len(yao_belief.get_agenda_dict()) == 69
 
     # WHEN
     x_fig = get_belief_agenda_plotly_fig(yao_belief)

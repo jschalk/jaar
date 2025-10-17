@@ -195,26 +195,20 @@ class CaseStatusFinder:
                 f"{self.reason_upper=} cannot be less than zero or greater than {self.reason_divisor=}"
             )
 
-    def bo(self) -> float:
+    def get_fact_lower_remainder(self) -> float:
         return self.fact_lower_full % self.reason_divisor
 
-    def bn(self) -> float:
+    def get_fact_upper_remainder(self) -> float:
         return self.fact_upper_full % self.reason_divisor
 
-    def po(self) -> float:
-        return self.reason_lower
-
-    def pn(self) -> float:
-        return self.reason_upper
-
-    def pd(self) -> float:
-        return self.reason_divisor
-
     def get_active(self) -> bool:
-        if self.fact_upper_full - self.fact_lower_full > self.reason_divisor:
+        if self.fact_upper_full - self.fact_lower_full >= self.reason_divisor:
             return True
         elif get_range_less_than_reason_divisor_active(
-            bo=self.bo(), bn=self.bn(), po=self.po(), pn=self.pn()
+            bo=self.get_fact_lower_remainder(),
+            bn=self.get_fact_upper_remainder(),
+            po=self.reason_lower,
+            pn=self.reason_upper,
         ):
             return True
 
@@ -346,28 +340,28 @@ class CaseUnit:
             rope=self.reason_state, old_knot=old_knot, new_knot=self.knot
         )
 
-    def is_in_lineage(self, fact_fact_state: RopeTerm):
+    def is_in_lineage(self, fact_state: RopeTerm):
         return is_heir_rope(
-            src=self.reason_state, heir=fact_fact_state, knot=self.knot
-        ) or is_heir_rope(src=fact_fact_state, heir=self.reason_state, knot=self.knot)
+            src=self.reason_state, heir=fact_state, knot=self.knot
+        ) or is_heir_rope(src=fact_state, heir=self.reason_state, knot=self.knot)
 
     def set_case_status(self, x_factheir: FactHeir):
         self.status = self._get_active(factheir=x_factheir)
         self.task = self._get_task_status(factheir=x_factheir)
 
-    def _get_active(self, factheir: FactHeir):
+    def _get_active(self, factheir: FactHeir) -> bool:
         x_status = None
         # status might be true if case is in lineage of fact
         if factheir is None:
             x_status = False
-        elif self.is_in_lineage(fact_fact_state=factheir.fact_state):
+        elif self.is_in_lineage(fact_state=factheir.fact_state):
             if self._is_range_or_segregate() is False:
                 x_status = True
             elif self._is_range_or_segregate() and factheir.is_range() is False:
                 x_status = False
             elif self._is_range_or_segregate() and factheir.is_range():
                 x_status = self._get_range_segregate_status(factheir=factheir)
-        elif self.is_in_lineage(fact_fact_state=factheir.fact_state) is False:
+        elif self.is_in_lineage(fact_state=factheir.fact_state) is False:
             x_status = False
 
         return x_status

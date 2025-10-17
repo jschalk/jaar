@@ -48,9 +48,8 @@ def set_epoch_base_case_dayly(
         "plan_rope": plan_rope,
         "reason_context": day_rope,
         "reason_state": day_rope,
-        "reason_lower": lower_min,
+        "reason_lower": lower_min % day_plan.denom,
         "reason_upper": (lower_min + duration) % day_plan.denom,
-        "reason_divisor": day_plan.denom,
     }
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
 
@@ -78,7 +77,6 @@ def set_epoch_base_case_weekly(
         "reason_state": week_rope,
         "reason_lower": lower_min,
         "reason_upper": (lower_min + duration) % week_plan.denom,
-        "reason_divisor": week_plan.denom,
     }
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
 
@@ -234,5 +232,17 @@ def set_epoch_cases_for_weekly(
     )
 
 
-def set_epoch_case_monthday(x_belief: BeliefUnit):
-    pass
+def set_epoch_cases_for_monthday(
+    x_belief: BeliefUnit,
+    plan_rope: RopeTerm,
+    epoch_label: LabelTerm,
+    lower_min: int,
+    duration: int,
+    month_label: LabelTerm,
+    monthday: int,
+    length_days: int,
+):
+    set_epoch_base_case_dayly(x_belief, plan_rope, epoch_label, lower_min, duration)
+    set_epoch_base_case_monthday(
+        x_belief, plan_rope, epoch_label, month_label, monthday, length_days
+    )

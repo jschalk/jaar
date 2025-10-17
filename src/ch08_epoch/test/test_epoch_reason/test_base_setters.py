@@ -78,7 +78,7 @@ def test_set_epoch_base_case_dayly_SetsAttr_Scenario1_WarppingParameters():
         wx.reason_context: day_rope,
         wx.reason_state: day_rope,
     }
-    mop_day_lower_min = 1400
+    mop_day_lower_min = 2000
     mop_day_duration = 95
     assert bob_belief.plan_exists(day_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_dayly_args)
@@ -97,9 +97,9 @@ def test_set_epoch_base_case_dayly_SetsAttr_Scenario1_WarppingParameters():
     assert belief_plan_reason_caseunit_exists(bob_belief, mop_dayly_args)
     day_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_dayly_args)
     assert day_case.reason_state == day_rope
-    assert day_case.reason_lower == mop_day_lower_min
-    assert day_case.reason_lower == 1400
-    assert day_case.reason_upper == 55
+    assert day_case.reason_lower == mop_day_lower_min % 1440
+    assert day_case.reason_lower == 560
+    assert day_case.reason_upper == 655
     assert day_case.reason_divisor == 1440
     # for x_plan in get_sorted_plan_list(bob_belief._plan_dict):
     #     print(f"{x_plan.get_plan_rope()=}")

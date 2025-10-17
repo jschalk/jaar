@@ -20,7 +20,7 @@ from src.ch17_idea.test._util.ch17_env import src_chapter_dir
 from src.ref.keywords import Ch17Keywords as wx
 
 
-def test_config_str_functions_ReturnsObjs():
+def test_config_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     x00021_idea = "idea_format_00021_belief_voiceunit_v0_0_0"
     assert idea_format_00021_belief_voiceunit_v0_0_0() == x00021_idea

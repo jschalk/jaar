@@ -154,7 +154,7 @@ def test_BeliefUnit_get_fact_ReturnsFactUnit():
     assert generated_situations_reason_context == static_situations_reason_context
 
 
-def test_BeliefUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
+def test_BeliefUnit_get_rangeroot_factunits_ReturnsObj_Scenario0():
     # ESTABLISH a single ranged fact
     sue_belief = beliefunit_shop("Sue")
     ziet_str = "ziet"
@@ -203,7 +203,7 @@ def test_BeliefUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     assert len(sue_belief._get_rangeroot_factunits()) == 2
 
 
-def test_BeliefUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
+def test_BeliefUnit_get_rangeroot_factunits_ReturnsObj_Scenario1():
     # ESTABLISH a two ranged facts where one is "rangeroot" get_root_ranged_facts returns one "rangeroot" fact
     sue_belief = beliefunit_shop("Sue")
     ziet_str = "ziet"

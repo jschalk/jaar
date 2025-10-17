@@ -248,13 +248,13 @@ def test_BeliefUnit_get_agenda_dict_BeliefUnitCanCleanOn_reason_context_beliefun
     #             print(f"         {sem_jours}")
 
     # this list went from 68 to 63 when the method of identifying activees was improved.
-    assert len(yao_belief.get_agenda_dict()) == 63
+    assert len(yao_belief.get_agenda_dict()) == 69
 
     # WHEN
     pledge_list = yao_belief.get_agenda_dict(necessary_reason_context=wk_rope)
 
     # THEN
-    assert len(pledge_list) != 63
+    assert len(pledge_list) != 69
     # this list went from 28 to 29 when the method of identifying activees was improved.
     assert len(pledge_list) == 29
 

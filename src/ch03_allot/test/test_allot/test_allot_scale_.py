@@ -7,7 +7,7 @@ from src.ch03_allot.allot import (
 )
 
 
-def test_create_missing_distribution_list_ReturnsObjScenario00():
+def test_create_missing_distribution_list_ReturnsObj_Scenario00():
     # ESTABLISH
     x_missing_scale = 0
     x_grain = 0
@@ -22,7 +22,7 @@ def test_create_missing_distribution_list_ReturnsObjScenario00():
     assert missing_scale_list == []
 
 
-def test_create_missing_distribution_list_ReturnsObjScenario01():
+def test_create_missing_distribution_list_ReturnsObj_Scenario01():
     # ESTABLISH
     x_missing_scale = 0
     x_grain = 5
@@ -37,7 +37,7 @@ def test_create_missing_distribution_list_ReturnsObjScenario01():
     assert missing_scale_list == []
 
 
-def test_create_missing_distribution_list_ReturnsObjScenario02():
+def test_create_missing_distribution_list_ReturnsObj_Scenario02():
     # ESTABLISH
     x_missing = 60
     x_grain = 5
@@ -50,7 +50,7 @@ def test_create_missing_distribution_list_ReturnsObjScenario02():
     assert missing_scale_list == [20, 20, 20]
 
 
-def test_create_missing_distribution_list_ReturnsObjScenario03():
+def test_create_missing_distribution_list_ReturnsObj_Scenario03():
     # ESTABLISH
     x_missing_scale = 40
     x_grain = 5
@@ -65,7 +65,7 @@ def test_create_missing_distribution_list_ReturnsObjScenario03():
     assert missing_scale_list == [15, 15, 10]
 
 
-def test_create_missing_distribution_list_ReturnsObjScenario04():
+def test_create_missing_distribution_list_ReturnsObj_Scenario04():
     # ESTABLISH
     x_missing_scale = -20
     x_grain = 5
@@ -80,7 +80,7 @@ def test_create_missing_distribution_list_ReturnsObjScenario04():
     assert missing_scale_list == [-5, -5, -5, -5]
 
 
-def test_create_missing_distribution_list_ReturnsObjScenario05():
+def test_create_missing_distribution_list_ReturnsObj_Scenario05():
     # ESTABLISH
     x_missing_scale = -35
     x_grain = 5

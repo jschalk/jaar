@@ -11,8 +11,8 @@ from src.ch07_belief_logic.belief_tool import (
 from src.ch08_epoch.epoch_main import add_epoch_planunit
 from src.ch08_epoch.epoch_reason_builder import (
     del_epoch_reason,
-    set_epoch_case_monthday,
     set_epoch_cases_for_dayly,
+    set_epoch_cases_for_monthday,
     set_epoch_cases_for_weekly,
 )
 from src.ch08_epoch.test._util.ch08_examples import (
@@ -28,9 +28,7 @@ def test_set_epoch_cases_for_dayly_SetsAttr_Scenario0_MiddleDayEvery3Days():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    five_label = five_config.get(wx.epoch_label)
-    add_epoch_planunit(bob_belief, five_config)
+    add_epoch_planunit(bob_belief, get_five_config())
     mop_dayly_args = {
         wx.plan_rope: exx.mop_rope,
         wx.reason_context: exx.day_rope,
@@ -46,7 +44,6 @@ def test_set_epoch_cases_for_dayly_SetsAttr_Scenario0_MiddleDayEvery3Days():
     mop_day_lower = 1
     mop_day_upper = 2
     mop_every_xdays = 3
-    assert bob_belief.plan_exists(exx.five_rope)
     assert not belief_plan_reasonunit_exists(bob_belief, mop_dayly_args)
     assert not belief_plan_reasonunit_exists(bob_belief, mop_xdays_args)
 
@@ -54,7 +51,7 @@ def test_set_epoch_cases_for_dayly_SetsAttr_Scenario0_MiddleDayEvery3Days():
     set_epoch_cases_for_dayly(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
+        epoch_label=exx.five_str,
         lower_min=mop_day_lower_min,
         duration=mop_day_duration,
         day_lower=mop_day_lower,
@@ -78,9 +75,7 @@ def test_set_epoch_cases_for_weekly_SetsAttr_Scenario0_ThirdDayEvery7Weeks():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
-    five_config = get_five_config()
-    five_label = five_config.get(wx.epoch_label)
-    add_epoch_planunit(bob_belief, five_config)
+    add_epoch_planunit(bob_belief, get_five_config())
     mop_weekly_args = {
         wx.plan_rope: exx.mop_rope,
         wx.reason_context: exx.week_rope,
@@ -96,7 +91,6 @@ def test_set_epoch_cases_for_weekly_SetsAttr_Scenario0_ThirdDayEvery7Weeks():
     mop_week_lower = 2
     mop_week_upper = 3
     mop_every_xweeks = 7
-    assert bob_belief.plan_exists(exx.five_rope)
     assert not belief_plan_reasonunit_exists(bob_belief, mop_weekly_args)
     assert not belief_plan_reasonunit_exists(bob_belief, mop_xweeks_args)
 
@@ -104,7 +98,7 @@ def test_set_epoch_cases_for_weekly_SetsAttr_Scenario0_ThirdDayEvery7Weeks():
     set_epoch_cases_for_weekly(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
-        epoch_label=five_label,
+        epoch_label=exx.five_str,
         lower_min=mop_week_lower_min,
         duration=mop_week_duration,
         week_lower=mop_week_lower,
@@ -124,50 +118,44 @@ def test_set_epoch_cases_for_weekly_SetsAttr_Scenario0_ThirdDayEvery7Weeks():
     assert week_case.reason_divisor == 7200
 
 
-# def test_set_epoch_base_case_monthday_SetsAttr_Scenario0_NoWrapingParameters():
-#     # ESTABLISH
-#     bob_belief = beliefunit_shop(exx.Bob)
-#     bob_belief.add_plan(exx.mop_rope)
-#     five_config = get_five_config()
-#     five_label = five_config.get(wx.epoch_label)
-#     add_epoch_planunit(bob_belief, five_config)
-#     time_rope = bob_belief.make_l1_rope(wx.time)
-#     five_rope = bob_belief.make_rope(time_rope, five_label)
-#     month_fred_rope = bob_belief.make_rope(exx.five_year_rope, exx.Fredrick)
-#     month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
-#     mop_monthday_args = {
-#         wx.plan_rope: exx.mop_rope,
-#         wx.reason_context: month_geo_rope,
-#         wx.reason_state: month_geo_rope,
-#     }
-#     mop_monthday = 3
-#     mop_length_days = 4
-#     print(f"geo rope  ='{month_geo_rope}")
-#     # bob_belief.cashout()
-#     # for x_plan in get_sorted_plan_list(bob_belief._plan_dict):
-#     #     print(f"{x_plan.get_plan_rope()=}")
-#     assert bob_belief.plan_exists(five_rope)
-#     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_monthday_args)
+def test_set_epoch_cases_for_monthday_SetsAttr_Scenario0():
+    # ESTABLISH
+    bob_belief = beliefunit_shop(exx.Bob)
+    bob_belief.add_plan(exx.mop_rope)
+    five_config = get_five_config()
+    five_label = five_config.get(wx.epoch_label)
+    add_epoch_planunit(bob_belief, five_config)
+    month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
+    mop_monthday_args = {
+        wx.plan_rope: exx.mop_rope,
+        wx.reason_context: month_geo_rope,
+        wx.reason_state: month_geo_rope,
+    }
+    mop_dayly_args = {
+        wx.plan_rope: exx.mop_rope,
+        wx.reason_context: exx.day_rope,
+        wx.reason_state: exx.day_rope,
+    }
+    mop_monthday = 3
+    mop_length_days = 4
+    mop_day_lower_min = 600
+    mop_day_duration = 90
+    assert not belief_plan_reasonunit_exists(bob_belief, mop_monthday_args)
+    assert not belief_plan_reasonunit_exists(bob_belief, mop_dayly_args)
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_monthday_args)
 
-#     # WHEN
-#     set_epoch_base_case_monthday(
-#         x_belief=bob_belief,
-#         plan_rope=exx.mop_rope,
-#         epoch_label=five_label,
-#         month_label=exx.Geo,
-#         monthday=mop_monthday,
-#         length_days=mop_length_days,
-#     )
+    # WHEN
+    set_epoch_cases_for_monthday(
+        x_belief=bob_belief,
+        plan_rope=exx.mop_rope,
+        epoch_label=five_label,
+        lower_min=mop_day_lower_min,
+        duration=mop_day_duration,
+        month_label=exx.Geo,
+        monthday=mop_monthday,
+        length_days=mop_length_days,
+    )
 
-#     # THEN
-#     assert belief_plan_reason_caseunit_exists(bob_belief, mop_monthday_args)
-#     day_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_monthday_args)
-#     assert day_case.reason_state == month_geo_rope
-#     month_geo_plan = bob_belief.get_plan_obj(month_geo_rope)
-#     print(f"{month_geo_plan.gogo_want=} {month_geo_plan.stop_want=}")
-#     expected_monthday_lower_min = mop_monthday * 1440 + month_geo_plan.gogo_want
-#     expected_monthday_upper_min = day_case.reason_lower + (mop_length_days * 1440)
-#     assert day_case.reason_lower == expected_monthday_lower_min
-#     assert day_case.reason_lower == 40320
-#     assert day_case.reason_upper == expected_monthday_upper_min
-#     assert day_case.reason_divisor is None
+    # THEN
+    assert belief_plan_reasonunit_exists(bob_belief, mop_monthday_args)
+    assert belief_plan_reasonunit_exists(bob_belief, mop_dayly_args)

@@ -48,7 +48,7 @@ def test_get_debtors_roll_ReturnsObjIgnoresZero_voice_debt_lumen():
     assert yao_roll == [zia_voiceunit]
 
 
-def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
+def test_get_ordered_debtors_roll_ReturnsObj_InOrder():
     # ESTABLISH
     yao_str = "Yao"
     yao_belief = beliefunit_shop(yao_str)
