@@ -284,7 +284,7 @@ def test_BeliefUnit_set_agenda_task_as_complete_SetsAttr_Range():
     zia_belief.get_agenda_dict()
     run_reasonunits = zia_belief.planroot.kids[run_str].reasonunits[jour_rope]
     print(f"{run_reasonunits=}")
-    print(f"{run_reasonunits.cases[jour_rope].status=}")
+    print(f"{run_reasonunits.cases[jour_rope].case_active=}")
     print(f"{run_reasonunits.cases[jour_rope].task=}")
     print(f"{zia_belief.get_reason_contexts()=}")
     assert len(zia_belief.get_plan_dict()) == 4
@@ -443,24 +443,11 @@ def test_BeliefUnit_set_fact_Isue116Resolved_SetstaskAsTrue():
 
     caseunit = reasonheir_gregziet.cases.get(gregziet_rope)
     print(f"----\n {caseunit=}")
-    print(f" {caseunit._get_task_status(factheir=factheir_gregziet)=}")
-    print(f" {caseunit.status=} , {caseunit._is_range()=} caseunit fails")
-    print(f" {caseunit.status=} , {caseunit._is_segregate()=} caseunit passes")
-    # segr_obj = casestatusfinder_shop(
-    #     reason_lower=caseunit.reason_lower,
-    #     reason_upper=caseunit.reason_upper,
-    #     reason_divisor=caseunit.reason_divisor,
-    #     fact_lower_full=factheir_gregziet.reason_lower,
-    #     fact_upper_full=factheir_gregziet.reason_upper,
-    # )
-    # print(
-    #     f"----\n  {segr_obj.reason_lower=}  {segr_obj.reason_upper=}  {segr_obj.reason_divisor=}"
-    # )
-    # print(
-    #     f"       {segr_obj.fact_lower_full=}         {segr_obj.fact_upper_full=} \tdifference:{segr_obj.fact_upper_full-segr_obj.fact_lower_full}"
-    # )
+    print(f" {caseunit._get_task_bool(factheir=factheir_gregziet)=}")
+    print(f" {caseunit.case_active=} , {caseunit._is_range()=} caseunit fails")
+    print(f" {caseunit.case_active=} , {caseunit._is_segregate()=} caseunit passes")
 
-    # print(f"  {segr_obj.get_active()=}  {segr_obj.get_task_status()=}")
+    # print(f"  {segr_obj.get_active_bool()=}  {segr_obj.get_task_bool()=}")
     assert get_tasks_count(pledge_plan_list) == 64
 
 

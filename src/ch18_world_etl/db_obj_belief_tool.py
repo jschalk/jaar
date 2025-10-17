@@ -196,8 +196,8 @@ def create_blrprem_metrics_insert_sqlstr(values_dict: dict[str,]):
     reason_lower = values_dict.get("reason_lower")
     reason_divisor = values_dict.get("reason_divisor")
     task = values_dict.get("task")
-    status = values_dict.get("status")
-    return f"""INSERT INTO belief_plan_reason_caseunit_job (moment_label, belief_name, plan_rope, reason_context, reason_state, reason_upper, reason_lower, reason_divisor, task, status)
+    case_active = values_dict.get("case_active")
+    return f"""INSERT INTO belief_plan_reason_caseunit_job (moment_label, belief_name, plan_rope, reason_context, reason_state, reason_upper, reason_lower, reason_divisor, task, case_active)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -208,7 +208,7 @@ VALUES (
 , {sqlite_obj_str(reason_lower, "REAL")}
 , {sqlite_obj_str(reason_divisor, "REAL")}
 , {sqlite_obj_str(task, "INTEGER")}
-, {sqlite_obj_str(status, "INTEGER")}
+, {sqlite_obj_str(case_active, "INTEGER")}
 )
 ;
 """

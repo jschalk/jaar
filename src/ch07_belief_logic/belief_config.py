@@ -40,6 +40,7 @@ def get_all_belief_calc_args() -> dict[str, set[str]]:
 
 def get_belief_calc_args_type_dict() -> dict[str, str]:
     return {
+        "case_active": "int",
         "voice_name": "NameTerm",
         "group_title": "TitleTerm",
         "credor_pool": "float",
@@ -117,6 +118,7 @@ def get_belief_calc_args_type_dict() -> dict[str, str]:
 
 def get_belief_calc_args_sqlite_datatype_dict() -> dict[str, str]:
     return {
+        "case_active": "INTEGER",
         "voice_name": "TEXT",
         "group_title": "TEXT",
         "credor_pool": "REAL",

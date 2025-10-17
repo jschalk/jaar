@@ -115,10 +115,10 @@ def test_BeliefUnit_cashout_Sets_plan_dict():
     oregon_rope = sue_beliefunit.make_rope(usa_rope, oregon_str)
 
     wed = caseunit_shop(reason_state=wed_rope)
-    wed.status = True
+    wed.case_active = True
     wed.task = False
     usa = caseunit_shop(reason_state=usa_rope)
-    usa.status = True
+    usa.case_active = True
     usa.task = False
 
     wed_lu = reasonunit_shop(wk_rope, cases={wed.reason_state: wed})
@@ -179,7 +179,7 @@ def test_BeliefUnit_cashout_Sets_plan_dict():
     # w_state = usa_case.cases[wed_rope].reason_state
     # print(f"      {w_state=}")
     # assert usa_case.task == w_state.task
-    # assert usa_case.status == w_state.status
+    # assert usa_case.case_active == w_state.status
     # assert wk_reasonheir.cases == wk_reasonheir.cases
 
     # assert casa_plan.reasonunits == x1_reasonunits
@@ -408,10 +408,10 @@ def test_BeliefUnit_cashout_OptionWeekJoursReturnsObj_beliefunit_v001():
     tue_str = "Tue"
     tue_rope = yao_beliefunit.make_rope(wk_rope, tue_str)
     mon_case_x = caseunit_shop(reason_state=mon_rope)
-    mon_case_x.status = False
+    mon_case_x.case_active = False
     mon_case_x.task = False
     tue_case_x = caseunit_shop(reason_state=tue_rope)
-    tue_case_x.status = False
+    tue_case_x.case_active = False
     tue_case_x.task = False
     mt_cases = {
         mon_case_x.reason_state: mon_case_x,
@@ -440,7 +440,7 @@ def test_BeliefUnit_cashout_OptionWeekJoursReturnsObj_beliefunit_v001():
     # THEN
     gen_wk_reasonheir = x_planroot.get_reasonheir(wk_rope)
     gen_mon_case = gen_wk_reasonheir.cases.get(mon_rope)
-    assert gen_mon_case.status == mt_reasonheir.cases.get(mon_rope).status
+    assert gen_mon_case.case_active == mt_reasonheir.cases.get(mon_rope).case_active
     assert gen_mon_case == mt_reasonheir.cases.get(mon_rope)
     assert gen_wk_reasonheir.cases == mt_reasonheir.cases
     assert gen_wk_reasonheir == mt_reasonheir

@@ -224,39 +224,40 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[145] == wx.active
     assert table_sorting_priority[146] == wx.task
     assert table_sorting_priority[147] == wx.status
-    assert table_sorting_priority[148] == wx.credor_pool
-    assert table_sorting_priority[149] == wx.debtor_pool
-    assert table_sorting_priority[150] == wx.rational
-    assert table_sorting_priority[151] == wx.fund_give
-    assert table_sorting_priority[152] == wx.fund_take
-    assert table_sorting_priority[153] == wx.fund_onset
-    assert table_sorting_priority[154] == wx.fund_cease
-    assert table_sorting_priority[155] == wx.fund_ratio
-    assert table_sorting_priority[156] == wx.fund_agenda_give
-    assert table_sorting_priority[157] == wx.fund_agenda_take
-    assert table_sorting_priority[158] == wx.fund_agenda_ratio_give
-    assert table_sorting_priority[159] == wx.fund_agenda_ratio_take
-    assert table_sorting_priority[160] == wx.inallocable_voice_debt_lumen
-    assert table_sorting_priority[161] == wx.gogo_calc
-    assert table_sorting_priority[162] == wx.stop_calc
-    assert table_sorting_priority[163] == wx.tree_level
-    assert table_sorting_priority[164] == wx.range_evaluated
-    assert table_sorting_priority[165] == wx.descendant_pledge_count
-    assert table_sorting_priority[166] == wx.healerunit_ratio
-    assert table_sorting_priority[167] == wx.all_voice_cred
-    assert table_sorting_priority[168] == wx.keeps_justified
-    assert table_sorting_priority[169] == wx.offtrack_fund
-    assert table_sorting_priority[170] == "_reason_active_heir"
-    assert table_sorting_priority[171] == "irrational_voice_debt_lumen"
-    assert table_sorting_priority[172] == wx.sum_healerunit_plans_fund_total
-    assert table_sorting_priority[173] == wx.keeps_buildable
-    assert table_sorting_priority[174] == wx.all_voice_debt
-    assert table_sorting_priority[175] == wx.tree_traverse_count
-    assert table_sorting_priority[176] == "funds"
-    assert table_sorting_priority[177] == "fund_rank"
-    assert table_sorting_priority[178] == "pledges_count"
+    assert table_sorting_priority[148] == wx.case_active
+    assert table_sorting_priority[149] == wx.credor_pool
+    assert table_sorting_priority[150] == wx.debtor_pool
+    assert table_sorting_priority[151] == wx.rational
+    assert table_sorting_priority[152] == wx.fund_give
+    assert table_sorting_priority[153] == wx.fund_take
+    assert table_sorting_priority[154] == wx.fund_onset
+    assert table_sorting_priority[155] == wx.fund_cease
+    assert table_sorting_priority[156] == wx.fund_ratio
+    assert table_sorting_priority[157] == wx.fund_agenda_give
+    assert table_sorting_priority[158] == wx.fund_agenda_take
+    assert table_sorting_priority[159] == wx.fund_agenda_ratio_give
+    assert table_sorting_priority[160] == wx.fund_agenda_ratio_take
+    assert table_sorting_priority[161] == wx.inallocable_voice_debt_lumen
+    assert table_sorting_priority[162] == wx.gogo_calc
+    assert table_sorting_priority[163] == wx.stop_calc
+    assert table_sorting_priority[164] == wx.tree_level
+    assert table_sorting_priority[165] == wx.range_evaluated
+    assert table_sorting_priority[166] == wx.descendant_pledge_count
+    assert table_sorting_priority[167] == wx.healerunit_ratio
+    assert table_sorting_priority[168] == wx.all_voice_cred
+    assert table_sorting_priority[169] == wx.keeps_justified
+    assert table_sorting_priority[170] == wx.offtrack_fund
+    assert table_sorting_priority[171] == "_reason_active_heir"
+    assert table_sorting_priority[172] == "irrational_voice_debt_lumen"
+    assert table_sorting_priority[173] == wx.sum_healerunit_plans_fund_total
+    assert table_sorting_priority[174] == wx.keeps_buildable
+    assert table_sorting_priority[175] == wx.all_voice_debt
+    assert table_sorting_priority[176] == wx.tree_traverse_count
+    assert table_sorting_priority[177] == "funds"
+    assert table_sorting_priority[178] == "fund_rank"
+    assert table_sorting_priority[179] == "pledges_count"
 
-    assert len(table_sorting_priority) == 179
+    assert len(table_sorting_priority) == 180
     all_args = copy_copy(atom_args)
     all_args.update(all_belief_dimen_delete_keys)
     all_args.update(moment_args)

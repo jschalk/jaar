@@ -74,9 +74,9 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     usa_rope = create_rope(nation_rope, usa_str)
 
     wed_case = caseunit_shop(reason_state=wed_rope)
-    wed_case.status = True
+    wed_case.case_active = True
     usa_case = caseunit_shop(reason_state=usa_rope)
-    usa_case.status = False
+    usa_case.case_active = False
 
     x1_reasonunits = {
         wk_rope: reasonunit_shop(wk_rope, cases={wed_case.reason_state: wed_case}),

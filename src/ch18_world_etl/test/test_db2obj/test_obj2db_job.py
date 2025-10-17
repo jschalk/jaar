@@ -264,7 +264,7 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     x_reason_lower = 5
     x_reason_divisor = 6
     x_task = 7
-    x_status = 8
+    x_case_active = 8
     values_dict = {
         wx.moment_label: x_moment_label,
         wx.belief_name: x_belief_name,
@@ -275,7 +275,7 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
         wx.reason_lower: x_reason_lower,
         wx.reason_divisor: x_reason_divisor,
         wx.task: x_task,
-        wx.status: x_status,
+        wx.case_active: x_case_active,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())

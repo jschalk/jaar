@@ -127,7 +127,7 @@ def expected_ag_count_fact_set(
         print(f"{five_factheir.fact_lower=} {five_factheir.fact_upper}")
         for month_case in year_reasonheir.cases.values():
             print(
-                f"{get_tail_label(month_case.reason_state):10} {month_case.reason_lower=} {month_case.reason_upper=} {month_case.status}"
+                f"{get_tail_label(month_case.reason_state):10} {month_case.reason_lower=} {month_case.reason_upper=} {month_case.case_active}"
             )
     return is_as_expected
 

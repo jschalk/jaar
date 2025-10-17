@@ -183,6 +183,7 @@
       }
     }, 
     "jvalues": {
+      "case_active": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
       "reason_divisor": {
         "class_type": "int", 
         "populate_by_cashout": false, 
@@ -190,7 +191,6 @@
       }, 
       "reason_lower": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
       "reason_upper": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
-      "status": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
       "task": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}
     }
   }, 

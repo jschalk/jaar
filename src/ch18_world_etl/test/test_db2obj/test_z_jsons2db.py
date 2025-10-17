@@ -353,14 +353,14 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
     x_reason_lower = 7.0
     x_reason_divisor = 8
     x_task = 9
-    x_status = 10
+    x_case_active = 10
     x_caseunit = caseunit_shop(reason_state=x_reason_state)
     x_caseunit.reason_state = x_reason_state
     x_caseunit.reason_upper = x_reason_upper
     x_caseunit.reason_lower = x_reason_lower
     x_caseunit.reason_divisor = x_reason_divisor
     x_caseunit.task = x_task
-    x_caseunit.status = x_status
+    x_caseunit.case_active = x_case_active
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -389,7 +389,7 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
             x_reason_lower,
             x_reason_divisor,
             x_task,
-            x_status,
+            x_case_active,
         )
         expected_data = [expected_row1]
         assert rows == expected_data

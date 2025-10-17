@@ -87,6 +87,7 @@
   "c400_clean"                     : { "init_chapter": "ch08" }, 
   "c400_leap"                      : { "init_chapter": "ch08" }, 
   "c400_number"                    : { "init_chapter": "ch08" }, 
+  "case_active"                    : { "init_chapter": "ch05" }, 
   "cases"                          : { "init_chapter": "ch05" }, 
   "celldepth"                      : { "init_chapter": "ch11" }, 
   "class_type"                     : { "init_chapter": "ch07" }, 

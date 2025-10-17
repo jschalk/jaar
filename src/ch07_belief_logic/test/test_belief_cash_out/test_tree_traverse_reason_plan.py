@@ -45,7 +45,7 @@ def test_BeliefUnit_reasonheirs_AreInherited_v1():
     assert casa_plan.get_reasonheir(wk_rope).get_case(tue_rope)
     case_tue = casa_plan.get_reasonheir(wk_rope).get_case(tue_rope)
     tue_case = caseunit_shop(reason_state=tue_rope)
-    tue_case.status = False
+    tue_case.case_active = False
     tue_case.task = False
     cases = {tue_case.reason_state: tue_case}
     built_wk_reasonheir = reasonheir_shop(
@@ -74,7 +74,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromRoot():
     wed_rope = a4_belief.make_rope(wk_rope, wed_str)
 
     wed_case = caseunit_shop(reason_state=wed_rope)
-    wed_case.status = False
+    wed_case.case_active = False
     wed_case.task = False
 
     cases_x = {wed_case.reason_state: wed_case}
@@ -144,7 +144,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromLevel2():
     wed_rope = a4_belief.make_rope(wk_rope, wed_str)
 
     wed_case = caseunit_shop(reason_state=wed_rope)
-    wed_case.status = False
+    wed_case.case_active = False
     wed_case.task = False
     cases = {wed_case.reason_state: wed_case}
     casa_wk_build_reasonunit = reasonunit_shop(wk_rope, cases=cases)
