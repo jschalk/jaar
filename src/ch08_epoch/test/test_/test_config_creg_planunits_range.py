@@ -1,7 +1,6 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch08_epoch.test._util.ch08_examples import (
     add_time_creg_planunit,
-    get_cregtime_str,
     get_fri,
     get_mon,
     get_sat,
@@ -17,7 +16,7 @@ def test_BeliefUnit_set_plan_dict_SetsAll_range_inheritors():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
+    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
     weeks_rope = sue_beliefunit.make_rope(creg_rope, wx.weeks)
     week_rope = sue_beliefunit.make_rope(creg_rope, wx.week)
     sun_rope = sue_beliefunit.make_rope(week_rope, get_sun())
@@ -57,7 +56,7 @@ def test_BeliefUnit_set_plantree_range_attrs_Sets_day_plan_gogo_calc_stop_calc()
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
+    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
     day_rope = sue_beliefunit.make_rope(creg_rope, wx.day)
     sue_beliefunit = add_time_creg_planunit(sue_beliefunit)
     sue_beliefunit._set_plan_dict()
@@ -84,7 +83,7 @@ def test_BeliefUnit_set_plantree_range_attrs_Sets_days_plan_gogo_calc_stop_calc(
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
+    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
     days_rope = sue_beliefunit.make_rope(creg_rope, wx.days)
     sue_beliefunit = add_time_creg_planunit(sue_beliefunit)
     sue_beliefunit._set_plan_dict()
@@ -107,7 +106,7 @@ def test_BeliefUnit_set_plantree_range_attrs_Sets_weeks_plan_gogo_calc_stop_calc
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
+    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
     weeks_rope = sue_beliefunit.make_rope(creg_rope, wx.weeks)
     week_rope = sue_beliefunit.make_rope(creg_rope, wx.week)
     sun_rope = sue_beliefunit.make_rope(week_rope, get_sun())
@@ -166,7 +165,7 @@ def test_BeliefUnit_set_plantree_range_attrs_Sets_c400_plan_gogo_calc_stop_calc(
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
+    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
     c400_leap_rope = sue_beliefunit.make_rope(creg_rope, wx.c400_leap)
     # c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, wx.c400_clean)
     # c100_clean_rope = sue_beliefunit.make_rope(c400_clean_rope, wx.c100)
@@ -199,7 +198,7 @@ def test_BeliefUnit_set_plantree_range_attrs_Sets_years_plan_gogo_calc_stop_calc
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
+    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
     c400_leap_rope = sue_beliefunit.make_rope(creg_rope, wx.c400_leap)
     c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, wx.c400_clean)
     c100_clean_rope = sue_beliefunit.make_rope(c400_clean_rope, wx.c100)

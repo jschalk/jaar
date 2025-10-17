@@ -11,9 +11,10 @@ from src.ch07_belief_logic.belief_tool import (
 from src.ch08_epoch.epoch_main import add_epoch_planunit
 from src.ch08_epoch.epoch_reason_builder import (
     del_epoch_reason,
+    set_epoch_base_case_datetime_range,
     set_epoch_cases_for_dayly,
-    set_epoch_cases_for_monthday,
     set_epoch_cases_for_weekly,
+    set_epoch_cases_for_yearly_monthday,
 )
 from src.ch08_epoch.test._util.ch08_examples import (
     Ch08ExampleStrs as exx,
@@ -118,7 +119,7 @@ def test_set_epoch_cases_for_weekly_SetsAttr_Scenario0_ThirdDayEvery7Weeks():
     assert week_case.reason_divisor == 7200
 
 
-def test_set_epoch_cases_for_monthday_SetsAttr_Scenario0():
+def test_set_epoch_cases_for_yearly_monthday_SetsAttr_Scenario0():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
@@ -145,7 +146,7 @@ def test_set_epoch_cases_for_monthday_SetsAttr_Scenario0():
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_monthday_args)
 
     # WHEN
-    set_epoch_cases_for_monthday(
+    set_epoch_cases_for_yearly_monthday(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
         epoch_label=five_label,

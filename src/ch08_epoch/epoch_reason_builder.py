@@ -1,3 +1,4 @@
+from src.ch01_py.dict_toolbox import get_False_if_None
 from src.ch02_rope.rope import is_sub_rope
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch07_belief_logic.belief_tool import (
@@ -10,6 +11,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_planunit_get_obj,
 )
 from src.ch08_epoch._ref.ch08_semantic_types import LabelTerm, RopeTerm
+from src.ch08_epoch.epoch_main import get_day_rope, get_week_rope
 
 
 def del_epoch_reason(
@@ -40,9 +42,7 @@ def set_epoch_base_case_dayly(
     Given: sue_beliefunit, plan_rope=;amy23;casa;mop;, epoch_label=lizzy9, lower_min=600, duration=90
     Add a reason to mop_plan that indicates it's to be active between 10am and 11:30am in lizzy9 epoch
     """
-    time_rope = x_belief.make_l1_rope("time")
-    epoch_rope = x_belief.make_rope(time_rope, epoch_label)
-    day_rope = x_belief.make_rope(epoch_rope, "day")
+    day_rope = get_day_rope(x_belief, epoch_label)
     day_plan = x_belief.get_plan_obj(day_rope)
     case_args = {
         "plan_rope": plan_rope,
@@ -66,9 +66,7 @@ def set_epoch_base_case_weekly(
     Given: sue_beliefunit, plan_rope=;amy23;casa;mop;, epoch_label=lizzy9, lower_min=600, duration=90
     Add a reason to mop_plan that indicates it's to be active between minute 600 and minute 690 of the week
     """
-    time_rope = x_belief.make_l1_rope("time")
-    epoch_rope = x_belief.make_rope(time_rope, epoch_label)
-    week_rope = x_belief.make_rope(epoch_rope, "week")
+    week_rope = get_week_rope(x_belief, epoch_label)
     week_plan = x_belief.get_plan_obj(week_rope)
 
     case_args = {
@@ -81,7 +79,7 @@ def set_epoch_base_case_weekly(
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
 
 
-def set_epoch_base_case_once(
+def set_epoch_base_case_datetime_range(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
     epoch_label: LabelTerm,
@@ -168,12 +166,14 @@ def set_epoch_base_case_monthday(
     month_label: LabelTerm,
     monthday: int,
     length_days: int,
+    range_must_be_within_month: bool = None,
 ):
     """Given an epoch_label set reason for a plan that would make it a occurance across entire week(s)
     Example:
     Given: sue_beliefunit, plan_rope=;amy23;casa;mop;, epoch_label=lizzy9, every_x_days=5, days_duration=3
     Add a reason to mop_plan that indicates it's to be active between every 5 days for a length of 3 days
     """
+    range_must_be_within_month = get_False_if_None(range_must_be_within_month)
     time_rope = x_belief.make_l1_rope("time")
     epoch_rope = x_belief.make_rope(time_rope, epoch_label)
     c400_leap_rope = x_belief.make_rope(epoch_rope, "c400_leap")
@@ -184,8 +184,15 @@ def set_epoch_base_case_monthday(
     year_rope = x_belief.make_rope(yr4_clean_rope, "year")
     month_rope = x_belief.make_rope(year_rope, month_label)
     month_plan = x_belief.get_plan_obj(month_rope)
-    year_lower_min = (monthday * 1440) + month_plan.gogo_want
-    year_upper_min = year_lower_min + (length_days * 1440)
+    month_minutes = month_plan.stop_want - month_plan.gogo_want
+    monthday_lower_minutes = monthday * 1440
+    if range_must_be_within_month and month_minutes < monthday_lower_minutes:
+        return
+    year_lower_min = monthday_lower_minutes + month_plan.gogo_want
+    length_minutes = length_days * 1440
+    year_upper_min = year_lower_min + length_minutes
+    if range_must_be_within_month and year_upper_min > month_plan.stop_want:
+        year_upper_min = month_plan.stop_want
     year_plan = x_belief.get_plan_obj(year_rope)
     year_lower_min = year_lower_min % year_plan.denom
     year_upper_min = year_upper_min % year_plan.denom
@@ -232,7 +239,7 @@ def set_epoch_cases_for_weekly(
     )
 
 
-def set_epoch_cases_for_monthday(
+def set_epoch_cases_for_yearly_monthday(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
     epoch_label: LabelTerm,

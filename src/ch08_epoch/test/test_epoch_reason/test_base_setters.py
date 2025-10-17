@@ -8,9 +8,9 @@ from src.ch07_belief_logic.belief_tool import (
 from src.ch08_epoch.epoch_main import add_epoch_planunit
 from src.ch08_epoch.epoch_reason_builder import (
     del_epoch_reason,
+    set_epoch_base_case_datetime_range,
     set_epoch_base_case_dayly,
     set_epoch_base_case_monthday,
-    set_epoch_base_case_once,
     set_epoch_base_case_weekly,
     set_epoch_base_case_xdays,
     set_epoch_base_case_xweeks,
@@ -352,7 +352,7 @@ def test_set_epoch_base_case_xweeks_SetsAttr_Scenario1_WrapingParameters():
     assert xweeks_case.reason_divisor == mop_every_xweeks
 
 
-def test_set_epoch_base_case_once_SetsAttr_Scenario0_NoWrapingParameters():
+def test_set_epoch_base_case_datetime_range_SetsAttr_Scenario0_NoWrapingParameters():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
@@ -372,7 +372,7 @@ def test_set_epoch_base_case_once_SetsAttr_Scenario0_NoWrapingParameters():
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_once_args)
 
     # WHEN
-    set_epoch_base_case_once(
+    set_epoch_base_case_datetime_range(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
         epoch_label=five_label,
@@ -392,7 +392,7 @@ def test_set_epoch_base_case_once_SetsAttr_Scenario0_NoWrapingParameters():
     assert day_case.reason_divisor == bob_belief.get_plan_obj(five_rope).close
 
 
-def test_set_epoch_base_case_once_SetsAttr_Scenario1_WrapingParameters():
+def test_set_epoch_base_case_datetime_range_SetsAttr_Scenario1_WrapingParameters():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
@@ -413,7 +413,7 @@ def test_set_epoch_base_case_once_SetsAttr_Scenario1_WrapingParameters():
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_once_args)
 
     # WHEN
-    set_epoch_base_case_once(
+    set_epoch_base_case_datetime_range(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
         epoch_label=five_label,
@@ -531,6 +531,102 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario1_WrapingParameters():
     assert monthday_case.reason_lower == 36000
     assert monthday_case.reason_upper == expected_upper
     assert monthday_case.reason_upper == 40320
+    assert monthday_case.reason_divisor is None
+
+
+def test_set_epoch_base_case_monthday_SetsAttr_Scenario2_monthday_MustBeWithinMonth():
+    # ESTABLISH
+    bob_belief = beliefunit_shop(exx.Bob)
+    bob_belief.add_plan(exx.mop_rope)
+    five_config = get_five_config()
+    five_label = five_config.get(wx.epoch_label)
+    add_epoch_planunit(bob_belief, five_config)
+    time_rope = bob_belief.make_l1_rope(wx.time)
+    five_rope = bob_belief.make_rope(time_rope, five_label)
+    month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
+    mop_monthday_args = {
+        wx.plan_rope: exx.mop_rope,
+        wx.reason_context: month_geo_rope,
+        wx.reason_state: month_geo_rope,
+    }
+    mop_monthday = 40
+    mop_length_days = 3
+    assert bob_belief.plan_exists(five_rope)
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_monthday_args)
+
+    # WHEN
+    set_epoch_base_case_monthday(
+        x_belief=bob_belief,
+        plan_rope=exx.mop_rope,
+        epoch_label=five_label,
+        month_label=exx.Geo,
+        monthday=mop_monthday,
+        length_days=mop_length_days,
+        range_must_be_within_month=True,
+    )
+
+    # THEN
+    month_geo_plan = bob_belief.get_plan_obj(month_geo_rope)
+    month_geo_minutes = month_geo_plan.stop_want - month_geo_plan.gogo_want
+    print(f"{month_geo_minutes=} {mop_monthday*1440=}")
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_monthday_args)
+
+
+def test_set_epoch_base_case_monthday_SetsAttr_Scenario3_monthday_Reduce_length_days_ToBeWithinMonth():
+    # ESTABLISH
+    bob_belief = beliefunit_shop(exx.Bob)
+    bob_belief.add_plan(exx.mop_rope)
+    five_config = get_five_config()
+    five_label = five_config.get(wx.epoch_label)
+    add_epoch_planunit(bob_belief, five_config)
+    time_rope = bob_belief.make_l1_rope(wx.time)
+    five_rope = bob_belief.make_rope(time_rope, five_label)
+    month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
+    mop_monthday_args = {
+        wx.plan_rope: exx.mop_rope,
+        wx.reason_context: month_geo_rope,
+        wx.reason_state: month_geo_rope,
+    }
+    mop_monthday = 20
+    mop_length_days = 40
+    assert bob_belief.plan_exists(five_rope)
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_monthday_args)
+
+    # WHEN
+    set_epoch_base_case_monthday(
+        x_belief=bob_belief,
+        plan_rope=exx.mop_rope,
+        epoch_label=five_label,
+        month_label=exx.Geo,
+        monthday=mop_monthday,
+        length_days=mop_length_days,
+        range_must_be_within_month=True,
+    )
+
+    # THEN
+    month_geo_plan = bob_belief.get_plan_obj(month_geo_rope)
+    month_geo_minutes = month_geo_plan.stop_want - month_geo_plan.gogo_want
+    print(f"{month_geo_minutes=} {mop_monthday*1440=}")
+    assert belief_plan_reason_caseunit_exists(bob_belief, mop_monthday_args)
+    monthday_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_monthday_args)
+    month_geo_plan = bob_belief.get_plan_obj(month_geo_rope)
+    year_plan = bob_belief.get_plan_obj(exx.five_year_rope)
+    expected_lower = month_geo_plan.gogo_want + (mop_monthday * 1440)
+    not_expected_upper = monthday_case.reason_lower + (mop_length_days * 1440)
+    expected_lower = expected_lower % year_plan.denom
+    not_expected_upper = not_expected_upper % year_plan.denom
+
+    print(f"{month_geo_plan.gogo_want=} {month_geo_plan.stop_want=}")
+    print(f"{monthday_case.reason_lower=} {monthday_case.reason_upper=}")
+    print(f"            {expected_lower=}         {not_expected_upper=}")
+    # print(f"{get_range_attrs(year_plan)=}")
+    print(f"{year_plan.denom=}")
+    assert monthday_case.reason_state == month_geo_rope
+    assert monthday_case.reason_lower == expected_lower
+    assert monthday_case.reason_lower == 64800
+    assert monthday_case.reason_upper == month_geo_plan.stop_want
+    assert monthday_case.reason_upper == 72000
+    assert monthday_case.reason_upper != not_expected_upper
     assert monthday_case.reason_divisor is None
 
 

@@ -27,7 +27,7 @@ def test_BeliefEpochPoint_Exists():
 
     # THEN
     assert not x_epochpoint.x_beliefunit
-    assert not x_epochpoint.time_rangeroot_rope
+    assert not x_epochpoint.epoch_label
     assert not x_epochpoint.x_min
     assert not x_epochpoint._epoch_plan
     assert not x_epochpoint._weekday
@@ -44,20 +44,20 @@ def test_BeliefEpochPoint_Exists():
 
 def test_BeliefEpochPoint_shop_ReturnsObj():
     # ESTABLISH
-    x_time_rangeroot_rope = "Fay07"
+    x_epoch_label = "Fay07"
     x_epoch_min = 890000
     sue_belief = beliefunit_shop("Sue")
 
     # WHEN
     x_epochpoint = beliefepochpoint_shop(
         x_beliefunit=sue_belief,
-        time_rangeroot_rope=x_time_rangeroot_rope,
+        epoch_label=x_epoch_label,
         x_min=x_epoch_min,
     )
 
     # THEN
     assert x_epochpoint.x_beliefunit == sue_belief
-    assert x_epochpoint.time_rangeroot_rope == x_time_rangeroot_rope
+    assert x_epochpoint.epoch_label == x_epoch_label
     assert x_epochpoint.x_min == x_epoch_min
 
 
@@ -66,9 +66,7 @@ def test_BeliefEpochPoint_set_epoch_plan_SetsAttr():
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
-    time_rope = sue_belief.make_l1_rope("time")
-    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-    x_epochpoint = beliefepochpoint_shop(sue_belief, creg_rope, 10000000)
+    x_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, 10000000)
     assert not x_epochpoint._epoch_plan
 
     # WHEN
@@ -83,9 +81,7 @@ def test_BeliefEpochPoint_set_weekday_SetsAttr():
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
-    time_rope = sue_belief.make_l1_rope("time")
-    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-    x_epochpoint = beliefepochpoint_shop(sue_belief, creg_rope, 10001440)
+    x_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, 10001440)
     x_epochpoint._set_epoch_plan()
     assert not x_epochpoint._weekday
 
@@ -101,9 +97,7 @@ def test_BeliefEpochPoint_set_month_SetsAttr():
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
-    time_rope = sue_belief.make_l1_rope("time")
-    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-    x_epochpoint = beliefepochpoint_shop(sue_belief, creg_rope, 10060000)
+    x_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, 10060000)
     x_epochpoint._set_epoch_plan()
     assert not x_epochpoint._month
     assert not x_epochpoint._monthday
@@ -122,9 +116,7 @@ def test_BeliefEpochPoint_set_hour_SetsAttr():
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
-    time_rope = sue_belief.make_l1_rope("time")
-    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-    x_epochpoint = beliefepochpoint_shop(sue_belief, creg_rope, 10000001)
+    x_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, 10000001)
     x_epochpoint._set_epoch_plan()
     assert not x_epochpoint._hour
     assert not x_epochpoint._hour
@@ -143,9 +135,7 @@ def test_BeliefEpochPoint_set_year_SetsAttr():
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
-    time_rope = sue_belief.make_l1_rope("time")
-    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-    x_epochpoint = beliefepochpoint_shop(sue_belief, creg_rope, 1030600100)
+    x_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, 1030600100)
     x_epochpoint._set_epoch_plan()
     assert not x_epochpoint._c400_number
     assert not x_epochpoint._c100_count
@@ -169,9 +159,7 @@ def test_BeliefEpochPoint_calc_epoch_SetsAttrs():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
-    time_rope = sue_belief.make_l1_rope("time")
-    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-    x_epochpoint = beliefepochpoint_shop(sue_belief, creg_rope, 1030600102)
+    x_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, 1030600102)
     assert not x_epochpoint._epoch_plan
     assert not x_epochpoint._weekday
     assert not x_epochpoint._monthday
@@ -197,9 +185,7 @@ def test_BeliefEpochPoint_get_blurb_ReturnsObj():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
-    time_rope = sue_belief.make_l1_rope("time")
-    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-    x_epochpoint = beliefepochpoint_shop(sue_belief, creg_rope, 1030600102)
+    x_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, 1030600102)
     x_epochpoint.calc_epoch()
     assert x_epochpoint._epoch_plan
     assert x_epochpoint._weekday
@@ -227,14 +213,11 @@ def test_calc_epoch_SetsAttrFiveEpoch(graphics_bool):
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief = add_time_five_planunit(sue_belief)
-    time_rope = sue_belief.make_l1_rope("time")
-    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-    five_rope = sue_belief.make_rope(time_rope, wx.five)
     mar1_2000_datetime = datetime(2000, 3, 1)
     creg_min = get_creg_min_from_dt(mar1_2000_datetime)
     five_min = get_five_min_from_dt(mar1_2000_datetime)
-    creg_epochpoint = beliefepochpoint_shop(sue_belief, creg_rope, creg_min)
-    five_epochpoint = beliefepochpoint_shop(sue_belief, five_rope, five_min)
+    creg_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, creg_min)
+    five_epochpoint = beliefepochpoint_shop(sue_belief, wx.five, five_min)
     assert not creg_epochpoint._weekday
     assert not creg_epochpoint._monthday
     assert not creg_epochpoint._month
@@ -271,10 +254,8 @@ def test_calc_epoch_SetsAttrFiveEpoch(graphics_bool):
 
 
 def check_creg_epoch_attr(x_belief: BeliefUnit, x_datetime: datetime):
-    time_rope = x_belief.make_l1_rope("time")
-    creg_rope = x_belief.make_rope(time_rope, wx.creg)
     creg_min = get_creg_min_from_dt(x_datetime)
-    creg_epochpoint = beliefepochpoint_shop(x_belief, creg_rope, creg_min)
+    creg_epochpoint = beliefepochpoint_shop(x_belief, wx.creg, creg_min)
     creg_epochpoint.calc_epoch()
     dt_hour = x_datetime.strftime("%H")
     dt_minute = x_datetime.strftime("%M")

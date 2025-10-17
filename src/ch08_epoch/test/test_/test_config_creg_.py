@@ -20,7 +20,6 @@ from src.ch08_epoch.test._util.ch08_examples import (
     display_current_creg_five_min,
     get_creg_config,
     get_creg_min_from_dt,
-    get_cregtime_str,
     get_five_config,
     get_five_min_from_dt,
     get_fri,
@@ -81,7 +80,7 @@ def test_add_time_creg_planunit_ReturnsObjWith_days():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
+    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
     day_rope = sue_beliefunit.make_rope(creg_rope, wx.day)
     days_rope = sue_beliefunit.make_rope(creg_rope, wx.days)
     print(f"{time_rope=}")
@@ -112,7 +111,7 @@ def test_add_time_creg_planunit_ReturnsObjWith_weeks():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
+    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
     week_rope = sue_beliefunit.make_rope(creg_rope, wx.week)
     sun_rope = sue_beliefunit.make_rope(week_rope, get_sun())
     mon_rope = sue_beliefunit.make_rope(week_rope, get_mon())
@@ -159,7 +158,7 @@ def test_add_time_creg_planunit_ReturnsObjWith_c400_leap_rope():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
+    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
     c400_leap_rope = sue_beliefunit.make_rope(creg_rope, wx.c400_leap)
     c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, wx.c400_clean)
     c100_rope = sue_beliefunit.make_rope(c400_clean_rope, wx.c100)
@@ -220,8 +219,8 @@ def test_add_time_creg_planunit_ReturnsObjWith_years():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
-    year_rope = get_year_rope(sue_beliefunit, creg_rope)
+    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
+    year_rope = get_year_rope(sue_beliefunit, wx.creg)
 
     assert not sue_beliefunit.plan_exists(creg_rope)
     assert not sue_beliefunit.plan_exists(year_rope)
@@ -317,7 +316,7 @@ def test_add_time_creg_planunit_ReturnsObjWith_c400_leap():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
+    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
     day_rope = sue_beliefunit.make_rope(creg_rope, wx.day)
     days_rope = sue_beliefunit.make_rope(creg_rope, wx.days)
     print(f"{time_rope=}")
@@ -351,7 +350,7 @@ def test_add_time_creg_planunit_ReturnsObjWith_hours():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
+    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
     day_rope = sue_beliefunit.make_rope(creg_rope, wx.day)
     hour_rope = sue_beliefunit.make_rope(day_rope, wx.hour)
     hr_00_rope = sue_beliefunit.make_rope(day_rope, creg_hour_int_label(0))
@@ -529,7 +528,7 @@ def test_add_epoch_planunit_SetsAttr_Scenario0():
     time_rope = sue_belief.make_l1_rope(wx.time)
     creg_rope = sue_belief.make_rope(time_rope, wx.creg)
     creg_yr1_jan1_offset_rope = sue_belief.make_rope(creg_rope, wx.yr1_jan1_offset)
-    creg_year_rope = get_year_rope(sue_belief, creg_rope)
+    creg_year_rope = get_year_rope(sue_belief, wx.creg)
     print(f"{creg_year_rope=}")
     # print(f"{sue_belief._plan_dict.keys()=}")
     creg_config = get_creg_config()
@@ -798,8 +797,8 @@ def test_add_time_five_planunit_SetsAttr_Scenario0_AddsMultiple_epochs():
     five_rope = sue_belief.make_rope(time_rope, wx.five)
     creg_yr1_jan1_offset_rope = sue_belief.make_rope(creg_rope, wx.yr1_jan1_offset)
     five_yr1_jan1_offset_rope = sue_belief.make_rope(five_rope, wx.yr1_jan1_offset)
-    creg_year_rope = get_year_rope(sue_belief, creg_rope)
-    five_year_rope = get_year_rope(sue_belief, five_rope)
+    creg_year_rope = get_year_rope(sue_belief, wx.creg)
+    five_year_rope = get_year_rope(sue_belief, wx.five)
     print(f"{creg_year_rope=}")
     print(f"{five_year_rope=}")
     # print(f"{sue_belief._plan_dict.keys()=}")

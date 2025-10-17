@@ -5,6 +5,7 @@ from src.ch01_py.file_toolbox import open_json
 from src.ch01_py.plotly_toolbox import conditional_fig_show
 from src.ch06_plan.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.ch08_epoch._ref.ch08_semantic_types import LabelTerm
 from src.ch08_epoch.epoch_main import (
     add_epoch_planunit,
     beliefepochpoint_shop,
@@ -81,7 +82,7 @@ class Ch08ExampleStrs(str, Enum):
         return self.value
 
 
-def get_example_epoch_config(epoch_label: str) -> dict:
+def get_example_epoch_config(epoch_label: LabelTerm) -> dict:
     x_dir = "src/ch08_epoch/test/_util"
     x_filename = f"epoch_config_{epoch_label}.json"
     return open_json(x_dir, x_filename)
@@ -105,7 +106,7 @@ def get_lizzy9_config() -> dict:
 
 def cregtime_planunit() -> PlanUnit:
     c400_number = get_creg_config().get(wx.c400_number)
-    return new_epoch_planunit(get_cregtime_str(), c400_number)
+    return new_epoch_planunit(wx.creg, c400_number)
 
 
 def get_wed():
@@ -146,10 +147,6 @@ def creg_weekdays_list() -> list[str]:
 
 def creg_weekday_planunits() -> dict[str, PlanUnit]:
     return create_weekday_planunits(creg_weekdays_list())
-
-
-def get_cregtime_str() -> str:
-    return get_creg_config().get(wx.epoch_label)
 
 
 def creg_hour_int_label(x_int: int) -> str:
@@ -220,13 +217,10 @@ def display_current_creg_five_time_attrs(graphics_bool: bool):
         sue_belief = beliefunit_shop("Sue")
         sue_belief = add_time_creg_planunit(sue_belief)
         sue_belief = add_time_five_planunit(sue_belief)
-        time_rope = sue_belief.make_l1_rope(wx.time)
-        creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-        five_rope = sue_belief.make_rope(time_rope, wx.five)
         creg_min = get_creg_min_from_dt(current_datetime)
         five_min = get_five_min_from_dt(current_datetime)
-        creg_epochpoint = beliefepochpoint_shop(sue_belief, creg_rope, creg_min)
-        five_epochpoint = beliefepochpoint_shop(sue_belief, five_rope, five_min)
+        creg_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, creg_min)
+        five_epochpoint = beliefepochpoint_shop(sue_belief, wx.five, five_min)
         creg_epochpoint.calc_epoch()
         five_epochpoint.calc_epoch()
         creg_blurb = f"<b>{creg_epochpoint.get_blurb()}</b>"
@@ -259,14 +253,12 @@ def display_creg_five_squirt_time_attrs(graphics_bool: bool):
         sue_belief = add_time_five_planunit(sue_belief)
         sue_belief = add_time_squirt_planunit(sue_belief)
         time_rope = sue_belief.make_l1_rope(wx.time)
-        creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-        five_rope = sue_belief.make_rope(time_rope, wx.five)
         squirt_rope = sue_belief.make_rope(time_rope, "squirt")
         creg_min = get_creg_min_from_dt(current_datetime)
         five_min = get_five_min_from_dt(current_datetime)
         squirt_min = get_squirt_min_from_dt(current_datetime)
-        creg_epochpoint = beliefepochpoint_shop(sue_belief, creg_rope, creg_min)
-        five_epochpoint = beliefepochpoint_shop(sue_belief, five_rope, five_min)
+        creg_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, creg_min)
+        five_epochpoint = beliefepochpoint_shop(sue_belief, wx.five, five_min)
         squirt_epochpoint = beliefepochpoint_shop(sue_belief, squirt_rope, squirt_min)
         creg_epochpoint.calc_epoch()
         five_epochpoint.calc_epoch()

@@ -357,10 +357,10 @@ def test_epoch_config_shop_ReturnsObj_NoParameters():
 
 def test_get_year_rope_ReturnsObj():
     # ESTABLISH
-    fay_str = "Fay34"
+    epoch_fay_str = "Fay34"
     sue_beliefunit = beliefunit_shop("Sue")
     time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    fay_rope = sue_beliefunit.make_rope(time_rope, fay_str)
+    fay_rope = sue_beliefunit.make_rope(time_rope, epoch_fay_str)
     c400_leap_rope = sue_beliefunit.make_rope(fay_rope, wx.c400_leap)
     c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, wx.c400_clean)
     c100_rope = sue_beliefunit.make_rope(c400_clean_rope, wx.c100)
@@ -369,31 +369,31 @@ def test_get_year_rope_ReturnsObj():
     year_rope = sue_beliefunit.make_rope(yr4_clean_rope, wx.year)
 
     # WHEN / THEN
-    assert year_rope == get_year_rope(sue_beliefunit, fay_rope)
+    assert year_rope == get_year_rope(sue_beliefunit, epoch_fay_str)
 
 
 def test_get_week_rope_ReturnsObj():
     # ESTABLISH
-    fay_str = "Fay34"
+    epoch_fay_str = "Fay34"
     sue_beliefunit = beliefunit_shop("Sue")
     time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    fay_rope = sue_beliefunit.make_rope(time_rope, fay_str)
+    fay_rope = sue_beliefunit.make_rope(time_rope, epoch_fay_str)
     week_rope = sue_beliefunit.make_rope(fay_rope, wx.week)
 
     # WHEN / THEN
-    assert week_rope == get_week_rope(sue_beliefunit, fay_rope)
+    assert week_rope == get_week_rope(sue_beliefunit, epoch_fay_str)
 
 
 def test_get_day_rope_ReturnsObj():
     # ESTABLISH
-    fay_str = "Fay34"
+    epoch_fay_str = "Fay34"
     sue_beliefunit = beliefunit_shop("Sue")
     time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    fay_rope = sue_beliefunit.make_rope(time_rope, fay_str)
+    fay_rope = sue_beliefunit.make_rope(time_rope, epoch_fay_str)
     day_rope = sue_beliefunit.make_rope(fay_rope, wx.day)
 
     # WHEN / THEN
-    assert day_rope == get_day_rope(sue_beliefunit, fay_rope)
+    assert day_rope == get_day_rope(sue_beliefunit, epoch_fay_str)
 
 
 def test_EpochUnit_Exists():

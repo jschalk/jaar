@@ -599,23 +599,20 @@ def test_CaseStatusFinder_get_active_get_task_status_ReturnsObj_Scenari0_fact_ra
 
     # Scenario B5
     linel -= 0.1
-    caseb1_11 = casestatusfinder_shop(0.3, 0.7, pd, 0.0, 1.0)
-    caseb1_12 = casestatusfinder_shop(0.0, 1.0, pd, 0.0, 1.0)
+    caseb5_0 = casestatusfinder_shop(0.3, 0.7, pd, 0.0, 1.0)
+    caseb5_1 = casestatusfinder_shop(0.0, 1.0, pd, 0.0, 1.0)
     linel -= 0.1
     exp_active = True
     exp_task = True
-    show_x(exp_active, exp_task, caseb1_11, fig, linel, "caseb1_11", False, graph_b)
-    print("huh2")
-    assert caseb1_11.get_active() == exp_active
-    print("huh1")
-    assert caseb1_11.get_task_status() == exp_task
+    show_x(exp_active, exp_task, caseb5_0, fig, linel, "caseb1_11", False, graph_b)
+    assert caseb5_0.get_active() == exp_active
+    assert caseb5_0.get_task_status() == exp_task
     linel -= 0.1
     exp_active = True
     exp_task = False
-    print("huh")
-    show_x(exp_active, exp_task, caseb1_12, fig, linel, "caseb1_12", False, graph_b)
-    assert caseb1_12.get_active() == exp_active
-    assert caseb1_12.get_task_status() == exp_task
+    show_x(exp_active, exp_task, caseb5_1, fig, linel, "caseb1_12", False, graph_b)
+    assert caseb5_1.get_active() == exp_active
+    assert caseb5_1.get_task_status() == exp_task
 
     # Bottom reason_divisor line
     _add_last_trace_and_show(fig, pd, linel, graph_b)

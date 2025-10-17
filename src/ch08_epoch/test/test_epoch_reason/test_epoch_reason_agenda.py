@@ -11,7 +11,7 @@ from src.ch07_belief_logic.belief_tool import (
 from src.ch08_epoch.epoch_main import add_epoch_planunit
 from src.ch08_epoch.epoch_reason_builder import (
     set_epoch_base_case_dayly,
-    set_epoch_cases_for_monthday,
+    set_epoch_cases_for_yearly_monthday,
 )
 from src.ch08_epoch.test._util.ch08_examples import (
     Ch08ExampleStrs as exx,
@@ -59,7 +59,7 @@ def test_set_epoch_base_case_dayly_ChangesBeliefUnit_agenda():
     assert len(bob_belief.get_agenda_dict()) == 1
 
 
-def test_set_epoch_cases_for_monthday_ChangesBeliefUnit_agenda():
+def test_set_epoch_cases_for_yearly_monthday_ChangesBeliefUnit_agenda():
     # ESTABLISH
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope, pledge=True)
@@ -75,7 +75,7 @@ def test_set_epoch_cases_for_monthday_ChangesBeliefUnit_agenda():
     assert len(bob_belief.get_agenda_dict()) == 1
 
     # WHEN 1
-    set_epoch_cases_for_monthday(
+    set_epoch_cases_for_yearly_monthday(
         x_belief=bob_belief,
         plan_rope=exx.mop_rope,
         epoch_label=five_label,
