@@ -1,17 +1,99 @@
 from datetime import datetime
+from enum import Enum
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 from src.ch01_py.file_toolbox import open_json
 from src.ch01_py.plotly_toolbox import conditional_fig_show
 from src.ch06_plan.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.ch08_epoch._ref.ch08_semantic_types import LabelTerm
 from src.ch08_epoch.epoch_main import (
-    add_newepoch_planunit,
+    add_epoch_planunit,
     beliefepochpoint_shop,
     create_weekday_planunits,
     get_min_from_dt_offset,
     new_epoch_planunit,
 )
 from src.ref.keywords import Ch08Keywords as wx
+
+BOB_STR = "BOB"
+CASA_STR = "casa"
+CLEAN_STR = "clean"
+DIRTYNESS_STR = "dirtyness"
+FIVE_STR = "five"
+MOP_STR = "mop"
+WK_STR = "wk"
+WED_STR = "Wed"
+
+BOB_BELIEF = beliefunit_shop(BOB_STR)
+MOP_ROPE = BOB_BELIEF.make_l1_rope(MOP_STR)
+CLEAN_ROPE = BOB_BELIEF.make_l1_rope(CLEAN_STR)
+DIRTYNESS_ROPE = BOB_BELIEF.make_rope(CLEAN_ROPE, DIRTYNESS_STR)
+TIME_ROPE = BOB_BELIEF.make_l1_rope(wx.time)
+FIVE_ROPE = BOB_BELIEF.make_rope(TIME_ROPE, FIVE_STR)
+FIVE_DAY_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, wx.day)
+FIVE_DAYS_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, wx.days)
+FIVE_WEEK_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, wx.week)
+FIVE_WEEKS_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, wx.weeks)
+
+FIVE_C400_LEAP_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, wx.c400_leap)
+FIVE_C400_CLEAN_ROPE = BOB_BELIEF.make_rope(FIVE_C400_LEAP_ROPE, wx.c400_clean)
+FIVE_C100_ROPE = BOB_BELIEF.make_rope(FIVE_C400_CLEAN_ROPE, wx.c100)
+FIVE_YR4_LEAP_ROPE = BOB_BELIEF.make_rope(FIVE_C100_ROPE, wx.yr4_leap)
+FIVE_YR4_CLEAN_ROPE = BOB_BELIEF.make_rope(FIVE_YR4_LEAP_ROPE, wx.yr4_clean)
+FIVE_YEAR_ROPE = BOB_BELIEF.make_rope(FIVE_YR4_CLEAN_ROPE, wx.year)
+
+
+class Ch08ExampleStrs(str, Enum):
+    Bob = BOB_STR
+    casa_str = CASA_STR
+    clean_str = CLEAN_STR
+    dirtyness_str = DIRTYNESS_STR
+    five_str = "five"
+    mop_str = MOP_STR
+    wk_str = WK_STR
+    wed_str = WED_STR
+    mop_rope = MOP_ROPE
+    clean_rope = CLEAN_ROPE
+    dirtyness_rope = DIRTYNESS_ROPE
+    time_rope = TIME_ROPE
+    five_rope = FIVE_ROPE
+    day_rope = FIVE_DAY_ROPE
+    days_rope = FIVE_DAYS_ROPE
+    week_rope = FIVE_WEEK_ROPE
+    weeks_rope = FIVE_WEEKS_ROPE
+    five_year_rope = FIVE_YEAR_ROPE
+    Fredrick = "Fredrick"
+    Geo = "Geo"
+    Holocene = "Holocene"
+    Iguana = "Iguana"
+    Jesus = "Jesus"
+    Keel = "Keel"
+    LeBron = "LeBron"
+    Mikayla = "Mikayla"
+    Ninon = "Ninon"
+    Obama = "Obama"
+    Preston = "Preston"
+    Quorum = "Quorum"
+    RioGrande = "RioGrande"
+    Simon = "Simon"
+    Trump = "Trump"
+
+    def __str__(self):
+        return self.value
+
+
+def get_bob_five_belief() -> BeliefUnit:
+    """Returns BeliefUnit with belief_label=Bob, mop as pledge plan, and five_epoch"""
+    bob_belief = beliefunit_shop(BOB_STR)
+    bob_belief.add_plan(MOP_ROPE, pledge=True)
+    add_epoch_planunit(bob_belief, get_five_config())
+    return bob_belief
+
+
+def get_example_epoch_config(epoch_label: LabelTerm) -> dict:
+    x_dir = "src/ch08_epoch/test/_util"
+    x_filename = f"epoch_config_{epoch_label}.json"
+    return open_json(x_dir, x_filename)
 
 
 def get_five_config() -> dict:
@@ -26,15 +108,13 @@ def get_squirt_config() -> dict:
     return get_example_epoch_config("squirt")
 
 
-def get_example_epoch_config(epoch_label: str) -> dict:
-    x_dir = "src/ch08_epoch/test/_util"
-    x_filename = f"epoch_config_{epoch_label}.json"
-    return open_json(x_dir, x_filename)
+def get_lizzy9_config() -> dict:
+    return get_example_epoch_config("lizzy9")
 
 
 def cregtime_planunit() -> PlanUnit:
     c400_number = get_creg_config().get(wx.c400_number)
-    return new_epoch_planunit(get_cregtime_str(), c400_number)
+    return new_epoch_planunit(wx.creg, c400_number)
 
 
 def get_wed():
@@ -77,27 +157,26 @@ def creg_weekday_planunits() -> dict[str, PlanUnit]:
     return create_weekday_planunits(creg_weekdays_list())
 
 
-def get_cregtime_str() -> str:
-    return get_creg_config().get(wx.epoch_label)
-
-
 def creg_hour_int_label(x_int: int) -> str:
     return creg_hours_list()[x_int][0]
 
 
 def add_time_creg_planunit(x_beliefunit: BeliefUnit) -> BeliefUnit:
     """Add creg epoch planunit to beliefunit"""
-    return add_newepoch_planunit(x_beliefunit, get_creg_config())
+    add_epoch_planunit(x_beliefunit, get_creg_config())
+    return x_beliefunit
 
 
 def add_time_five_planunit(x_beliefunit: BeliefUnit) -> BeliefUnit:
     """Add five epoch planunit to beliefunit"""
-    return add_newepoch_planunit(x_beliefunit, get_five_config())
+    add_epoch_planunit(x_beliefunit, get_five_config())
+    return x_beliefunit
 
 
 def add_time_squirt_planunit(x_beliefunit: BeliefUnit) -> BeliefUnit:
     """Add squirt epoch planunit to beliefunit"""
-    return add_newepoch_planunit(x_beliefunit, get_squirt_config())
+    add_epoch_planunit(x_beliefunit, get_squirt_config())
+    return x_beliefunit
 
 
 def get_creg_min_from_dt(dt: datetime) -> int:
@@ -146,13 +225,10 @@ def display_current_creg_five_time_attrs(graphics_bool: bool):
         sue_belief = beliefunit_shop("Sue")
         sue_belief = add_time_creg_planunit(sue_belief)
         sue_belief = add_time_five_planunit(sue_belief)
-        time_rope = sue_belief.make_l1_rope("time")
-        creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-        five_rope = sue_belief.make_rope(time_rope, wx.five)
         creg_min = get_creg_min_from_dt(current_datetime)
         five_min = get_five_min_from_dt(current_datetime)
-        creg_epochpoint = beliefepochpoint_shop(sue_belief, creg_rope, creg_min)
-        five_epochpoint = beliefepochpoint_shop(sue_belief, five_rope, five_min)
+        creg_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, creg_min)
+        five_epochpoint = beliefepochpoint_shop(sue_belief, wx.five, five_min)
         creg_epochpoint.calc_epoch()
         five_epochpoint.calc_epoch()
         creg_blurb = f"<b>{creg_epochpoint.get_blurb()}</b>"
@@ -184,15 +260,13 @@ def display_creg_five_squirt_time_attrs(graphics_bool: bool):
         sue_belief = add_time_creg_planunit(sue_belief)
         sue_belief = add_time_five_planunit(sue_belief)
         sue_belief = add_time_squirt_planunit(sue_belief)
-        time_rope = sue_belief.make_l1_rope("time")
-        creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-        five_rope = sue_belief.make_rope(time_rope, wx.five)
+        time_rope = sue_belief.make_l1_rope(wx.time)
         squirt_rope = sue_belief.make_rope(time_rope, "squirt")
         creg_min = get_creg_min_from_dt(current_datetime)
         five_min = get_five_min_from_dt(current_datetime)
         squirt_min = get_squirt_min_from_dt(current_datetime)
-        creg_epochpoint = beliefepochpoint_shop(sue_belief, creg_rope, creg_min)
-        five_epochpoint = beliefepochpoint_shop(sue_belief, five_rope, five_min)
+        creg_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, creg_min)
+        five_epochpoint = beliefepochpoint_shop(sue_belief, wx.five, five_min)
         squirt_epochpoint = beliefepochpoint_shop(sue_belief, squirt_rope, squirt_min)
         creg_epochpoint.calc_epoch()
         five_epochpoint.calc_epoch()

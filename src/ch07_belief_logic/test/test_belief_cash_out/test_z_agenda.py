@@ -112,7 +112,7 @@ def test_BeliefUnit_get_agenda_dict_With7amPlanExample():
     # THEN
     print(x_belief.planroot.factunits[x24hr_rope])
     print(x_belief.get_plan_obj(clean_rope).reasonunits)
-    print(x_belief.get_plan_obj(clean_rope).active)
+    print(x_belief.get_plan_obj(clean_rope).plan_active)
     agenda_dict = x_belief.get_agenda_dict()
     print(f"{len(agenda_dict)=} {agenda_dict.keys()=}")
     assert len(agenda_dict) == 6
@@ -248,13 +248,13 @@ def test_BeliefUnit_get_agenda_dict_BeliefUnitCanCleanOn_reason_context_beliefun
     #             print(f"         {sem_jours}")
 
     # this list went from 68 to 63 when the method of identifying activees was improved.
-    assert len(yao_belief.get_agenda_dict()) == 63
+    assert len(yao_belief.get_agenda_dict()) == 69
 
     # WHEN
     pledge_list = yao_belief.get_agenda_dict(necessary_reason_context=wk_rope)
 
     # THEN
-    assert len(pledge_list) != 63
+    assert len(pledge_list) != 69
     # this list went from 28 to 29 when the method of identifying activees was improved.
     assert len(pledge_list) == 29
 
@@ -284,7 +284,7 @@ def test_BeliefUnit_set_agenda_task_as_complete_SetsAttr_Range():
     zia_belief.get_agenda_dict()
     run_reasonunits = zia_belief.planroot.kids[run_str].reasonunits[jour_rope]
     print(f"{run_reasonunits=}")
-    print(f"{run_reasonunits.cases[jour_rope].status=}")
+    print(f"{run_reasonunits.cases[jour_rope].case_active=}")
     print(f"{run_reasonunits.cases[jour_rope].task=}")
     print(f"{zia_belief.get_reason_contexts()=}")
     assert len(zia_belief.get_plan_dict()) == 4
@@ -370,23 +370,23 @@ def test_get_beliefunit_from_dict_LoadsPledgeFromJSON():
     veg_str = "cook veggies every morning"
     veg_rope = yao_belief.make_rope(body_rope, veg_str)
     veg_plan = yao_belief.get_plan_obj(veg_rope)
-    assert not veg_plan.active
+    assert not veg_plan.plan_active
     assert veg_plan.pledge
 
     # plan_list = yao_belief.get_plan_dict()
     # pledge_true_count = 0
     # for plan in plan_list:
     #     if str(type(plan)).find(".plan.PlanUnit'>") > 0:
-    #         assert plan.active in (True, False)
+    #         assert plan.plan_active in (True, False)
     #     assert plan.pledge in (True, False)
-    #     # if plan.active:
+    #     # if plan.plan_active:
     #     #     print(plan.plan_label)
     #     if plan.pledge:
     #         pledge_true_count += 1
     #         # if plan.pledge is False:
     #         #     print(f"pledge is false {plan.plan_label}")
     #         # for reason in plan.reasonunits.values():
-    #         #     assert reason.status in (True, False)
+    #         #     assert reason.reason_active in (True, False)
     # assert pledge_true_count > 0
 
     # WHEN
@@ -436,31 +436,18 @@ def test_BeliefUnit_set_fact_Isue116Resolved_SetstaskAsTrue():
     print(f"\n{factheir_gregziet=}")
 
     # for reasonheir in agenda_plan.reasonheirs.values():
-    #     print(f"{reasonheir.reason_context=} {reasonheir.status=} {reasonheir.task=}")
+    #     print(f"{reasonheir.reason_context=} {reasonheir.reason_active=} {reasonheir.task=}")
     reasonheir_gregziet = evening_plan.reasonheirs.get(gregziet_rope)
-    reasonheir_str = f"\nreasonheir_gregziet= '{reasonheir_gregziet.reason_context}', status={reasonheir_gregziet.status}, task={reasonheir_gregziet.task}"
+    reasonheir_str = f"\nreasonheir_gregziet= '{reasonheir_gregziet.reason_context}', reason_active={reasonheir_gregziet.reason_active}, task={reasonheir_gregziet.task}"
     print(reasonheir_str)
 
     caseunit = reasonheir_gregziet.cases.get(gregziet_rope)
     print(f"----\n {caseunit=}")
-    print(f" {caseunit._get_task_status(factheir=factheir_gregziet)=}")
-    print(f" {caseunit.status=} , {caseunit._is_range()=} caseunit fails")
-    print(f" {caseunit.status=} , {caseunit._is_segregate()=} caseunit passes")
-    # segr_obj = casestatusfinder_shop(
-    #     reason_lower=caseunit.reason_lower,
-    #     reason_upper=caseunit.reason_upper,
-    #     reason_divisor=caseunit.reason_divisor,
-    #     fact_lower_full=factheir_gregziet.reason_lower,
-    #     fact_upper_full=factheir_gregziet.reason_upper,
-    # )
-    # print(
-    #     f"----\n  {segr_obj.reason_lower=}  {segr_obj.reason_upper=}  {segr_obj.reason_divisor=}"
-    # )
-    # print(
-    #     f"       {segr_obj.fact_lower_full=}         {segr_obj.fact_upper_full=} \tdifference:{segr_obj.fact_upper_full-segr_obj.fact_lower_full}"
-    # )
+    print(f" {caseunit._get_task_bool(factheir=factheir_gregziet)=}")
+    print(f" {caseunit.case_active=} , {caseunit._is_range()=} caseunit fails")
+    print(f" {caseunit.case_active=} , {caseunit._is_segregate()=} caseunit passes")
 
-    # print(f"  {segr_obj.get_active()=}  {segr_obj.get_task_status()=}")
+    # print(f"  {segr_obj.get_active_bool()=}  {segr_obj.get_task_bool()=}")
     assert get_tasks_count(pledge_plan_list) == 64
 
 

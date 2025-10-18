@@ -68,7 +68,7 @@ class ReasonTable(Base):
     uid = Column(Integer, primary_key=True)
     reason_context = Column(String)
     plan_rope = Column(String)
-    reason_active_requisite = Column(Integer)
+    active_requisite = Column(Integer)
 
 
 class CaseTable(Base):

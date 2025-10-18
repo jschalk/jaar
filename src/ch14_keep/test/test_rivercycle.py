@@ -143,7 +143,7 @@ def test_RiverCylce_create_cylceledger_ReturnsObjTwoRiverBooks():
     assert one_cylceledger == {yao_str: yao_money, bob_str: bob_money}
 
 
-def test_create_init_rivercycle_ReturnsObjScenario1_voiceunit():
+def test_create_init_rivercycle_ReturnsObj_Scenario1_voiceunit():
     # ESTABLISH
     yao_str = "Yao"
     yao_belief = beliefunit_shop(yao_str)
@@ -226,7 +226,7 @@ def test_create_init_rivercycle_ReturnsObj_Scenario3_voiceunit():
     assert yao_riverbook._rivergrants.get(zia_str) == 501
 
 
-def test_create_next_rivercycle_ReturnsObjScenarioThree_voiceunit():
+def test_create_next_rivercycle_ReturnsObj_ScenarioThree_voiceunit():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"

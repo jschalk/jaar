@@ -1,10 +1,7 @@
 from flask import Flask, jsonify, render_template_string
-from src.ch08_epoch.epoch_main import (
-    add_newepoch_planunit,
-    get_default_epoch_config_dict,
-)
+from src.ch08_epoch.epoch_main import add_epoch_planunit, get_default_epoch_config_dict
 from src.ch12_belief_viewer.belief_viewer__tool import get_belief_view_dict
-from src.ch12_belief_viewer.example22_beliefs import (
+from src.ch12_belief_viewer.belief_viewer_examples import (
     get_beliefunit_irrational_example,
     get_sue_belief_with_facts_and_reasons,
     get_sue_beliefunit,
@@ -60,7 +57,7 @@ def get_belief_viewer_template() -> str:
             <input type="checkbox" id="show_moment_label"><label for="show_moment_label">moment_label</label>
             <input type="checkbox" id="show_pledge"><label for="show_pledge">pledge</label>
             <input type="checkbox" id="show_descendant_pledge_count"><label for="show_descendant_pledge_count">descendant_pledge_count</label>
-            <input type="checkbox" id="show_active"><label for="show_active">active</label>
+            <input type="checkbox" id="show_plan_active"><label for="show_plan_active">plan_active</label>
             <input type="checkbox" id="show_task"><label for="show_task">task</label>
             <input type="checkbox" id="show_star"><label for="show_star">star</label>
             <input type="checkbox" id="show_plan_fund_total"><label for="show_plan_fund_total">plan_fund_total</label>
@@ -92,7 +89,7 @@ def get_belief_viewer_template() -> str:
             <input type="checkbox" id="show_denom"><label for="show_denom">denom</label>
             <input type="checkbox" id="show_morph"><label for="show_morph">morph</label>
             <input type="checkbox" id="show_numor"><label for="show_numor">numor</label>
-            <input type="checkbox" id="show_active_hx"><label for="show_active_hx">active_hx</label>
+            <input type="checkbox" id="show_plan_active_hx"><label for="show_plan_active_hx">plan_active_hx</label>
         </div>
         
         <div id="planTreeContainer" class="plan_tree_display"></div>
@@ -114,7 +111,7 @@ def get_beliefunit_view():
     """API endpoint to get the BeliefUnit data with readable strings as JSON"""
     # return jsonify(root.to_dict())
     sue_belief = get_sue_belief_with_facts_and_reasons()
-    add_newepoch_planunit(sue_belief, get_default_epoch_config_dict())
+    add_epoch_planunit(sue_belief, get_default_epoch_config_dict())
     sue_belief.cashout()
     belief_view_dict = get_belief_view_dict(sue_belief)
     return jsonify(belief_view_dict)

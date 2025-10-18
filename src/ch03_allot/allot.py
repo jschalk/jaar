@@ -3,7 +3,7 @@ from os.path import exists as os_path_exists
 from pathlib import Path
 from src.ch01_py.dict_toolbox import get_0_if_None, get_1_if_None
 from src.ch01_py.file_toolbox import create_path, open_json, save_json
-from src.ch03_allot._ref.ch03_semantic_types import GrainNum, PoolNum
+from src.ch03_allot._ref.ch03_semantic_types import GrainNum, PoolNum, WeightNum
 
 
 def default_grain_num_if_None(grain_num: GrainNum = None) -> GrainNum:
@@ -67,7 +67,7 @@ def _get_missing_scale_list(
 
 
 def _allot_missing_scale(
-    ledger: dict[str, PoolNum],
+    ledger: dict[str, WeightNum],
     scale_number: PoolNum,
     grain_unit: GrainNum,
     missing_scale: PoolNum,
@@ -107,8 +107,8 @@ def _calc_allot_value(
 
 
 def _create_allot_dict(
-    ledger: dict[str, float], scale_number: GrainNum, grain_unit: float
-) -> dict[str, GrainNum]:
+    ledger: dict[str, WeightNum], scale_number: GrainNum, grain_unit: float
+) -> dict[str, PoolNum]:
     # Calculate the total sum of ledger allots
     ledger_value_total = sum(ledger.values())
     return {
@@ -118,7 +118,7 @@ def _create_allot_dict(
 
 
 def allot_scale(
-    ledger: dict[str, float], scale_number: PoolNum, grain_unit: GrainNum
+    ledger: dict[str, WeightNum], scale_number: PoolNum, grain_unit: GrainNum
 ) -> dict[str, PoolNum]:
     """
     allots the scale_number among ledger as float values with a resolution of the grain_unit.
@@ -156,7 +156,7 @@ def allot_nested_scale(
     grain_unit: float,
     depth: int,
     dst_filename: str = None,
-) -> dict[str, GrainNum]:
+) -> dict[str, PoolNum]:
     root_file_path = create_path(x_dir, src_filename)
     root_ledger = open_json(root_file_path)
     root_allot = allot_scale(root_ledger, scale_number, grain_unit)
@@ -184,7 +184,7 @@ def allot_nested_scale(
     return _calc_final_allot(final_allots)
 
 
-def _calc_final_allot(final_allots: dict[str, dict]) -> dict[str, float]:
+def _calc_final_allot(final_allots: dict[str, dict]) -> dict[str, PoolNum]:
     final_allot_keys = list(final_allots.keys())
     x_count = 0
     while final_allot_keys != [] and x_count < 1000:

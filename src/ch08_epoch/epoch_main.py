@@ -11,7 +11,12 @@ from src.ch06_plan.plan import (
     planunit_shop,
 )
 from src.ch07_belief_logic.belief_main import BeliefUnit
-from src.ch08_epoch._ref.ch08_semantic_types import EpochLabel, EpochPoint, RopeTerm
+from src.ch08_epoch._ref.ch08_semantic_types import (
+    EpochLabel,
+    EpochPoint,
+    LabelTerm,
+    RopeTerm,
+)
 
 
 @dataclass
@@ -146,12 +151,13 @@ def new_epoch_planunit(epoch_label: EpochLabel, c400_number: int) -> PlanUnit:
     return planunit_shop(epoch_label, begin=0, close=epoch_length)
 
 
-def get_epoch_rope(nexus_label: str, epoch_label: str, knot: str) -> RopeTerm:
+def get_epoch_rope(nexus_label: str, epoch_label: LabelTerm, knot: str) -> RopeTerm:
     time_rope = create_rope(nexus_label, "time", knot)
     return create_rope(time_rope, epoch_label, knot)
 
 
-def add_newepoch_planunit(x_beliefunit: BeliefUnit, epoch_config: dict):
+def add_epoch_planunit(x_beliefunit: BeliefUnit, epoch_config: dict):
+    """ "Add epoch to BeliefUnit given epoch_config"""
     x_plan_label = epoch_config.get("epoch_label")
     x_c400_number = epoch_config.get("c400_number")
     x_months = epoch_config.get("months_config")
@@ -170,7 +176,7 @@ def add_newepoch_planunit(x_beliefunit: BeliefUnit, epoch_config: dict):
     )
     day_rope = x_beliefunit.make_rope(epoch_rope, "day")
     week_rope = x_beliefunit.make_rope(epoch_rope, "week")
-    year_rope = get_year_rope(x_beliefunit, epoch_rope)
+    year_rope = get_year_rope(x_beliefunit, x_plan_label)
 
     add_stan_planunits(x_beliefunit, x_plan_label, x_c400_number)
     add_planunits(x_beliefunit, day_rope, create_hour_planunits(x_hours_list))
@@ -179,7 +185,6 @@ def add_newepoch_planunit(x_beliefunit: BeliefUnit, epoch_config: dict):
     add_planunits(x_beliefunit, year_rope, create_month_planunits(x_months, x_mday))
     offset_plan = planunit_shop("yr1_jan1_offset", addin=x_yr1_jan1_offset)
     x_beliefunit.set_plan(offset_plan, epoch_rope)
-    return x_beliefunit
 
 
 def add_planunits(
@@ -225,37 +230,39 @@ def add_stan_planunits(
     x_beliefunit.set_plan(stan_days_planunit(), epoch_rope)
 
 
-def get_c400_clean_rope(
-    x_beliefunit: BeliefUnit, time_range_root_rope: RopeTerm
-) -> RopeTerm:
-    c400_leap_rope = x_beliefunit.make_rope(time_range_root_rope, "c400_leap")
+def get_c400_clean_rope(x_beliefunit: BeliefUnit, epoch_label: LabelTerm) -> RopeTerm:
+    nexus_rope = x_beliefunit.planroot.get_plan_rope()
+    epoch_rope = get_epoch_rope(nexus_rope, epoch_label, x_beliefunit.knot)
+    c400_leap_rope = x_beliefunit.make_rope(epoch_rope, "c400_leap")
     return x_beliefunit.make_rope(c400_leap_rope, "c400_clean")
 
 
-def get_c100_rope(x_beliefunit: BeliefUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
-    c400_clean_rope = get_c400_clean_rope(x_beliefunit, time_range_root_rope)
+def get_c100_rope(x_beliefunit: BeliefUnit, epoch_label: LabelTerm) -> RopeTerm:
+    c400_clean_rope = get_c400_clean_rope(x_beliefunit, epoch_label)
     return x_beliefunit.make_rope(c400_clean_rope, "c100")
 
 
-def get_yr4_clean_rope(
-    x_beliefunit: BeliefUnit, time_range_root_rope: RopeTerm
-) -> RopeTerm:
-    c100_rope = get_c100_rope(x_beliefunit, time_range_root_rope)
+def get_yr4_clean_rope(x_beliefunit: BeliefUnit, epoch_label: LabelTerm) -> RopeTerm:
+    c100_rope = get_c100_rope(x_beliefunit, epoch_label)
     yr4_leap_rope = x_beliefunit.make_rope(c100_rope, "yr4_leap")
     return x_beliefunit.make_rope(yr4_leap_rope, "yr4_clean")
 
 
-def get_year_rope(x_beliefunit: BeliefUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
-    yr4_clean_rope = get_yr4_clean_rope(x_beliefunit, time_range_root_rope)
+def get_year_rope(x_beliefunit: BeliefUnit, epoch_label: LabelTerm) -> RopeTerm:
+    yr4_clean_rope = get_yr4_clean_rope(x_beliefunit, epoch_label)
     return x_beliefunit.make_rope(yr4_clean_rope, "year")
 
 
-def get_week_rope(x_beliefunit: BeliefUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
-    return x_beliefunit.make_rope(time_range_root_rope, "week")
+def get_week_rope(x_beliefunit: BeliefUnit, epoch_label: LabelTerm) -> RopeTerm:
+    nexus_rope = x_beliefunit.planroot.get_plan_rope()
+    epoch_rope = get_epoch_rope(nexus_rope, epoch_label, x_beliefunit.knot)
+    return x_beliefunit.make_rope(epoch_rope, "week")
 
 
-def get_day_rope(x_beliefunit: BeliefUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
-    return x_beliefunit.make_rope(time_range_root_rope, "day")
+def get_day_rope(x_beliefunit: BeliefUnit, epoch_label: LabelTerm) -> RopeTerm:
+    nexus_rope = x_beliefunit.planroot.get_plan_rope()
+    epoch_rope = get_epoch_rope(nexus_rope, epoch_label, x_beliefunit.knot)
+    return x_beliefunit.make_rope(epoch_rope, "day")
 
 
 def validate_epoch_config(config_dict: dict) -> bool:
@@ -412,7 +419,7 @@ def get_min_from_dt_offset(dt: datetime, yr1_jan1_offset: int) -> int:
     return round(min_time_difference.total_seconds() / 60) + yr1_jan1_offset
 
 
-def get_min_from_dt(
+def get_epoch_min_from_dt(
     x_belief: BeliefUnit, epoch_rope: RopeTerm, x_datetime: datetime
 ) -> int:
     offset_rope = x_belief.make_rope(epoch_rope, "yr1_jan1_offset")
@@ -441,10 +448,10 @@ class BeliefEpochPoint:
     _year_num: calculated year from c400, c100, yr4, year_count
     _weekday
     _epoch_plan PlanUnit
-    readable time blurb from BeliefUnit, time_range_root_rope, and minute integer."""
+    readable time blurb from BeliefUnit, epoch_label, and minute integer."""
 
     x_beliefunit: BeliefUnit = None
-    time_range_root_rope: RopeTerm = None
+    epoch_label: LabelTerm = None
     x_min: EpochPoint = None
     # calculated fields
     _epoch_plan: PlanUnit = None
@@ -460,10 +467,15 @@ class BeliefEpochPoint:
     _year_num: str = None
 
     def _set_epoch_plan(self):
-        self._epoch_plan = self.x_beliefunit.get_plan_obj(self.time_range_root_rope)
+        epoch_rope = get_epoch_rope(
+            self.x_beliefunit.get_nexus_label(),
+            self.epoch_label,
+            self.x_beliefunit.knot,
+        )
+        self._epoch_plan = self.x_beliefunit.get_plan_obj(epoch_rope)
 
     def _set_weekday(self):
-        week_rope = get_week_rope(self.x_beliefunit, self.time_range_root_rope)
+        week_rope = get_week_rope(self.x_beliefunit, self.epoch_label)
         week_plan = self.x_beliefunit.get_plan_obj(week_rope)
         x_plan_list = [self._epoch_plan, week_plan]
         reason_lower_rangeunit = calc_range(x_plan_list, self.x_min, self.x_min)
@@ -474,15 +486,13 @@ class BeliefEpochPoint:
             self._weekday = x_weekday
 
     def _set_month(self):
-        year_rope = get_year_rope(self.x_beliefunit, self.time_range_root_rope)
+        year_rope = get_year_rope(self.x_beliefunit, self.epoch_label)
         year_plan = self.x_beliefunit.get_plan_obj(year_rope)
+        nexus_label = self.x_beliefunit.get_nexus_label()
+        x_knot = self.x_beliefunit.knot
+        epoch_rope = get_epoch_rope(nexus_label, self.epoch_label, x_knot)
         x_plan_dict = self.x_beliefunit._plan_dict
-        plan_list = all_plans_between(
-            x_plan_dict,
-            self.time_range_root_rope,
-            year_rope,
-            knot=self.x_beliefunit.knot,
-        )
+        plan_list = all_plans_between(x_plan_dict, epoch_rope, year_rope, x_knot)
         reason_lower_rangeunit = calc_range(plan_list, self.x_min, self.x_min)
         gogo_month_dict = year_plan.get_kids_in_range(reason_lower_rangeunit.gogo)
         month_plan = None
@@ -496,7 +506,7 @@ class BeliefEpochPoint:
         self._monthday = self._monthday // 1440
 
     def _set_hour(self):
-        day_rope = get_day_rope(self.x_beliefunit, self.time_range_root_rope)
+        day_rope = get_day_rope(self.x_beliefunit, self.epoch_label)
         day_plan = self.x_beliefunit.get_plan_obj(day_rope)
         x_plan_list = [self._epoch_plan, day_plan]
         rangeunit = calc_range(x_plan_list, self.x_min, self.x_min)
@@ -509,21 +519,20 @@ class BeliefEpochPoint:
 
     def _set_year(self):
         c400_constants = get_c400_constants()
-        x_time_rope = self.time_range_root_rope
+        x_time_rope = self.x_beliefunit.make_l1_rope("time")
         x_plan_dict = self.x_beliefunit._plan_dict
         # count 400 year blocks
         self._c400_number = self.x_min // c400_constants.c400_leap_length
 
         # count 100 year blocks
-        c400_clean_rope = get_c400_clean_rope(self.x_beliefunit, x_time_rope)
+        c400_clean_rope = get_c400_clean_rope(self.x_beliefunit, self.epoch_label)
         c400_clean_plan_list = all_plans_between(
             x_plan_dict, x_time_rope, c400_clean_rope, knot=self.x_beliefunit.knot
         )
         c400_clean_range = calc_range(c400_clean_plan_list, self.x_min, self.x_min)
         self._c100_count = c400_clean_range.gogo // c400_constants.c100_length
-
         # count 4 year blocks
-        c100_rope = get_c100_rope(self.x_beliefunit, x_time_rope)
+        c100_rope = get_c100_rope(self.x_beliefunit, self.epoch_label)
         c100_plan_list = all_plans_between(
             x_plan_dict, x_time_rope, c100_rope, knot=self.x_beliefunit.knot
         )
@@ -531,7 +540,7 @@ class BeliefEpochPoint:
         self._yr4_count = c100_range.gogo // c400_constants.yr4_leap_length
 
         # count 1 year blocks
-        yr4_clean_rope = get_yr4_clean_rope(self.x_beliefunit, x_time_rope)
+        yr4_clean_rope = get_yr4_clean_rope(self.x_beliefunit, self.epoch_label)
         yr4_clean_plans = all_plans_between(
             x_plan_dict, x_time_rope, yr4_clean_rope, knot=self.x_beliefunit.knot
         )
@@ -561,10 +570,8 @@ class BeliefEpochPoint:
         return x_str
 
 
-def beliefepochpoint_shop(
-    x_beliefunit: BeliefUnit, time_range_root_rope: str, x_min: int
-):
-    return BeliefEpochPoint(x_beliefunit, time_range_root_rope, x_min=x_min)
+def beliefepochpoint_shop(x_beliefunit: BeliefUnit, epoch_label: LabelTerm, x_min: int):
+    return BeliefEpochPoint(x_beliefunit, epoch_label, x_min=x_min)
 
 
 def epoch_config_path() -> str:

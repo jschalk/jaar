@@ -55,10 +55,9 @@ def get_fact_state_readable_str(
     x_str = f"({context_tail}) fact: {state_trailing}"
     nexus_label = get_first_label_from_rope(context_rope)
     time_rope = create_rope(nexus_label, "time")
-    epoch_rope = create_rope(time_rope, epoch_label)
-    if factunit.fact_context == epoch_rope:
-        lower_blurb = get_epochpoint_blurb(beliefunit, epoch_rope, lower_float)
-        upper_blurb = get_epochpoint_blurb(beliefunit, epoch_rope, upper_float)
+    if factunit.fact_context == create_rope(time_rope, epoch_label):
+        lower_blurb = get_epochpoint_blurb(beliefunit, epoch_label, lower_float)
+        upper_blurb = get_epochpoint_blurb(beliefunit, epoch_label, upper_float)
         return f"from {lower_blurb} to {upper_blurb}"
 
     if lower_float is not None and upper_float is not None:
@@ -67,7 +66,9 @@ def get_fact_state_readable_str(
     return x_str
 
 
-def get_epochpoint_blurb(beliefunit, epoch_rope, arg2):
-    lower_btlp = beliefepochpoint_shop(beliefunit, epoch_rope, arg2)
+def get_epochpoint_blurb(
+    beliefunit: BeliefUnit, epoch_rope: RopeTerm, x_min: int
+) -> str:
+    lower_btlp = beliefepochpoint_shop(beliefunit, epoch_rope, x_min)
     lower_btlp.calc_epoch()
     return lower_btlp.get_blurb()

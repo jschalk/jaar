@@ -1,5 +1,5 @@
 """
-Jaar
+Beto
 
 A Python package for communiticating across cultures.
 """

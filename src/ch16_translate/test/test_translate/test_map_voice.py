@@ -17,7 +17,7 @@ def test_NameMap_Exists():
 
     # WHEN / THEN
     assert not x_namemap.face_name
-    assert not x_namemap.event_num
+    assert not x_namemap.spark_num
     assert not x_namemap.otx2inx
     assert not x_namemap.unknown_str
     assert not x_namemap.otx_knot
@@ -30,7 +30,7 @@ def test_namemap_shop_ReturnsObj_scenario0():
 
     # THEN
     assert not x_namemap.face_name
-    assert x_namemap.event_num == 0
+    assert x_namemap.spark_num == 0
     assert x_namemap.otx2inx == {}
     assert x_namemap.unknown_str == default_unknown_str_if_None()
     assert x_namemap.otx_knot == default_knot_if_None()
@@ -42,7 +42,7 @@ def test_namemap_shop_ReturnsObj_scenario1_WithParameters():
     xio_str = "Xio"
     sue_str = "Sue"
     bob_str = "Bob"
-    event7 = 7
+    spark7 = 7
     otx2inx = {xio_str: sue_str}
     x_unknown_str = "UnknownTerm"
     slash_otx_knot = "/"
@@ -51,7 +51,7 @@ def test_namemap_shop_ReturnsObj_scenario1_WithParameters():
     # WHEN
     x_namemap = namemap_shop(
         face_name=bob_str,
-        event_num=event7,
+        spark_num=spark7,
         otx2inx=otx2inx,
         unknown_str=x_unknown_str,
         otx_knot=slash_otx_knot,
@@ -60,7 +60,7 @@ def test_namemap_shop_ReturnsObj_scenario1_WithParameters():
 
     # THEN
     assert x_namemap.face_name == bob_str
-    assert x_namemap.event_num == event7
+    assert x_namemap.spark_num == spark7
     assert x_namemap.otx2inx == otx2inx
     assert x_namemap.unknown_str == x_unknown_str
     assert x_namemap.otx_knot == slash_otx_knot
@@ -72,14 +72,14 @@ def test_namemap_shop_ReturnsObj_scenario2_TranslateCoreAttrAreDefaultWhenGiven_
     xio_str = "Xio"
     sue_str = "Sue"
     bob_str = "Bob"
-    event7 = numpy_int64(7)
+    spark7 = numpy_int64(7)
     otx2inx = {xio_str: sue_str}
     x_nan = float("nan")
 
     # WHEN
     x_namemap = namemap_shop(
         face_name=bob_str,
-        event_num=numpy_int64(event7),
+        spark_num=numpy_int64(spark7),
         otx2inx=otx2inx,
         unknown_str=x_nan,
         otx_knot=x_nan,
@@ -88,9 +88,9 @@ def test_namemap_shop_ReturnsObj_scenario2_TranslateCoreAttrAreDefaultWhenGiven_
 
     # THEN
     assert x_namemap.face_name == bob_str
-    assert x_namemap.event_num == event7
-    assert str(type(x_namemap.event_num)) != "<class 'numpy.int64'>"
-    assert str(type(x_namemap.event_num)) == "<class 'int'>"
+    assert x_namemap.spark_num == spark7
+    assert str(type(x_namemap.spark_num)) != "<class 'numpy.int64'>"
+    assert str(type(x_namemap.spark_num)) == "<class 'int'>"
     assert x_namemap.otx2inx == otx2inx
     assert x_namemap.unknown_str == default_unknown_str_if_None()
     assert x_namemap.otx_knot == default_knot_if_None()
@@ -300,14 +300,14 @@ def test_NameMap_to_dict_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "propre"
     sue_str = "Sue"
-    event7 = 7
+    spark7 = 7
     slash_otx_knot = "/"
     colon_inx_knot = ":"
     x_namemap = namemap_shop(
         otx_knot=slash_otx_knot,
         inx_knot=colon_inx_knot,
         face_name=sue_str,
-        event_num=event7,
+        spark_num=spark7,
     )
     x1_rope_map_dict = {
         wx.otx_knot: x_namemap.otx_knot,
@@ -315,7 +315,7 @@ def test_NameMap_to_dict_ReturnsObj():
         wx.unknown_str: x_namemap.unknown_str,
         wx.otx2inx: {},
         wx.face_name: x_namemap.face_name,
-        wx.event_num: x_namemap.event_num,
+        wx.spark_num: x_namemap.spark_num,
     }
     assert x_namemap.to_dict() == x1_rope_map_dict
 
@@ -328,7 +328,7 @@ def test_NameMap_to_dict_ReturnsObj():
         wx.unknown_str: x_namemap.unknown_str,
         wx.otx2inx: {clean_otx: clean_inx},
         wx.face_name: sue_str,
-        wx.event_num: event7,
+        wx.spark_num: spark7,
     }
     assert x_namemap.to_dict() == x2_rope_map_dict
 
@@ -339,8 +339,8 @@ def test_get_namemap_from_dict_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "propre"
     slash_otx_knot = "/"
-    event7 = 7
-    x_namemap = namemap_shop(sue_str, event7, otx_knot=slash_otx_knot)
+    spark7 = 7
+    x_namemap = namemap_shop(sue_str, spark7, otx_knot=slash_otx_knot)
     x_namemap.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
@@ -348,8 +348,8 @@ def test_get_namemap_from_dict_ReturnsObj():
 
     # THEN
     assert gen_namemap.face_name == x_namemap.face_name
-    assert gen_namemap.event_num == x_namemap.event_num
-    assert gen_namemap.event_num == event7
+    assert gen_namemap.spark_num == x_namemap.spark_num
+    assert gen_namemap.spark_num == spark7
     assert gen_namemap == x_namemap
 
 
@@ -496,7 +496,7 @@ def test_inherit_namemap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_nam
     assert str(excinfo.value) == "Core attrs in conflict"
 
 
-def test_inherit_namemap_ReturnsObj_Scenario5_RaiseErrorWhenEventIntsOutOfOrder():
+def test_inherit_namemap_ReturnsObj_Scenario5_RaiseErrorWhenSparkIntsOutOfOrder():
     # ESTABLISH
     sue_str = "Sue"
     old_namemap = namemap_shop(sue_str, 5)

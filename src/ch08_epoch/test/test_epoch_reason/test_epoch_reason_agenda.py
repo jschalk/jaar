@@ -1,0 +1,167 @@
+from src.ch02_rope.rope import get_tail_label
+from src.ch06_plan.test._util.ch06_examples import get_range_attrs
+from src.ch07_belief_logic.belief_main import (
+    BeliefUnit,
+    PlanUnit,
+    RopeTerm,
+    beliefunit_shop,
+    get_sorted_plan_list,
+)
+from src.ch07_belief_logic.belief_tool import (
+    belief_plan_reason_caseunit_exists,
+    belief_plan_reason_caseunit_get_obj,
+    belief_plan_reason_caseunit_set_obj,
+    belief_plan_reasonunit_exists,
+    belief_plan_reasonunit_get_obj,
+    get_belief_root_facts_dict,
+    set_factunits_to_belief,
+)
+from src.ch08_epoch.epoch_main import add_epoch_planunit
+from src.ch08_epoch.epoch_reason_builder import (
+    set_epoch_base_case_dayly,
+    set_epoch_cases_for_monthly,
+    set_epoch_cases_for_yearly_monthday,
+)
+from src.ch08_epoch.test._util.ch08_examples import (
+    Ch08ExampleStrs as exx,
+    get_bob_five_belief,
+    get_five_config,
+)
+from src.ref.keywords import Ch08Keywords as wx
+
+
+def test_set_epoch_base_case_dayly_ChangesBeliefUnit_agenda():
+    # ESTABLISH
+    bob_belief = get_bob_five_belief()
+    mop_day_lower_min = 600
+    mop_day_duration = 90
+    bob_belief.add_fact(exx.five_rope, exx.five_rope, 500, 500)
+    assert len(bob_belief.get_agenda_dict()) == 1
+
+    # WHEN
+    set_epoch_base_case_dayly(
+        x_belief=bob_belief,
+        plan_rope=exx.mop_rope,
+        epoch_label=exx.five_str,
+        day_lower_min=mop_day_lower_min,
+        day_duration_min=mop_day_duration,
+    )
+
+    # THEN
+    assert len(bob_belief.get_agenda_dict()) == 0
+    # WHEN
+    bob_belief.add_fact(exx.five_rope, exx.five_rope, 500, 1000)
+
+    # THEN
+    bob_belief.cashout()
+    print(f"{bob_belief.planroot.factheirs.keys()=}")
+    mop_plan = bob_belief.get_plan_obj(exx.mop_rope)
+    day_factheir = mop_plan.factheirs.get(exx.day_rope)
+    day_reasonheir = mop_plan.reasonheirs.get(exx.day_rope)
+    day_heir_case = day_reasonheir.cases.get(exx.day_rope)
+    print(f" {day_factheir=}")
+    print(f"{day_heir_case=}")
+    assert len(bob_belief.get_agenda_dict()) == 1
+
+
+def test_set_epoch_cases_for_yearly_monthday_ChangesBeliefUnit_agenda():
+    # ESTABLISH
+    bob_belief = get_bob_five_belief()
+    month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
+    mop_monthday = 3
+    mop_length_days = 4
+    mop_day_lower_min = 600
+    mop_day_duration = 90
+    bob_belief.add_fact(exx.five_rope, exx.five_rope, 400, 440)
+    assert len(bob_belief.get_agenda_dict()) == 1
+
+    # WHEN 1
+    set_epoch_cases_for_yearly_monthday(
+        x_belief=bob_belief,
+        plan_rope=exx.mop_rope,
+        epoch_label=exx.five_str,
+        day_lower_min=mop_day_lower_min,
+        day_duration_min=mop_day_duration,
+        month_label=exx.Geo,
+        monthday=mop_monthday,
+        length_days=mop_length_days,
+    )
+
+    # THEN 1
+    assert len(bob_belief.get_agenda_dict()) == 0
+
+    # WHEN 2
+    bob_belief.add_fact(exx.five_rope, exx.five_rope, 400, 100000)
+
+    # THEN 2
+    print("epoch fact changed")
+    bob_belief.cashout()
+    mop_plan = bob_belief.get_plan_obj(exx.mop_rope)
+    day_reasonheir = mop_plan.reasonheirs.get(exx.day_rope)
+    day_caseunit = day_reasonheir.cases.get(exx.day_rope)
+    day_factheir = mop_plan.factheirs.get(exx.day_rope)
+    print(f"{day_factheir=}")
+    print(f"{day_caseunit=}")
+    assert len(bob_belief.get_agenda_dict()) == 1
+    # geo_reasonheir = mop_plan.reasonheirs.get(month_geo_rope)
+    # geo_factheir = mop_plan.factheirs.get(month_geo_rope)
+    # print(f"{geo_factheir=}")
+    # print(f"{day_reasonheir=}")
+    # print(f"{geo_reasonheir.reason_active=}")
+    # print(f"{mop_plan.factheirs.keys()=}")
+
+
+def expected_ag_count_fact_set(
+    mop_plan: PlanUnit,
+    x_belief: BeliefUnit,
+    fact_lower: float,
+    fact_upper: float,
+    expected: int,
+) -> dict[RopeTerm, PlanUnit]:
+    x_belief.add_fact(exx.five_rope, exx.five_rope, fact_lower, fact_upper)
+    x_belief.cashout()
+    five_factheir = x_belief.planroot.factheirs.get(exx.five_rope)
+    is_as_expected = expected == len(x_belief.get_agenda_dict())
+    if not is_as_expected:
+        year_reasonheir = mop_plan.get_reasonheir(exx.five_year_rope)
+        print(f"{five_factheir.fact_lower=} {five_factheir.fact_upper}")
+        for month_case in year_reasonheir.cases.values():
+            print(
+                f"{get_tail_label(month_case.reason_state):10} {month_case.reason_lower=} {month_case.reason_upper=} {month_case.case_active}"
+            )
+    return is_as_expected
+
+
+def test_set_epoch_cases_for_monthly_SetsAttr_Scenario1_ChangesBeliefUnit_agenda():
+    # ESTABLISH
+    bob_belief = get_bob_five_belief()
+    mop_monthday = 5
+    mop_length_days = 1
+    mop_day_lower_min = 600
+    mop_day_duration = 90
+    set_epoch_cases_for_monthly(
+        x_belief=bob_belief,
+        plan_rope=exx.mop_rope,
+        epoch_label=exx.five_str,
+        monthday=mop_monthday,
+        length_days=mop_length_days,
+        day_lower_min=mop_day_lower_min,
+        day_duration_min=mop_day_duration,
+    )
+    mop_plan = bob_belief.get_plan_obj(exx.mop_rope)
+
+    # WHEN / THEN
+    # TODO figure out why given Fact Upper and Lower of zero always returns true
+    # assert expected_ag_count_fact_set(mop_plan, bob_belief, 0, 0, 0)
+    # TODO figure out why given Fact Upper and Lower of Max always returns true
+    # year_plan = bob_belief.get_plan_obj(exx.five_year_rope)
+    # print(f"{get_range_attrs(year_plan)=}")
+    # assert expected_ag_count_fact_set(mop_plan, bob_belief, 525600, 525600, 0)
+    assert expected_ag_count_fact_set(mop_plan, bob_belief, 0, 1, expected=0)
+    assert expected_ag_count_fact_set(mop_plan, bob_belief, 7200, 30240, expected=1)
+    assert expected_ag_count_fact_set(mop_plan, bob_belief, 30240, 30240, expected=0)
+    assert expected_ag_count_fact_set(mop_plan, bob_belief, 187200, 187520, expected=0)
+    assert expected_ag_count_fact_set(mop_plan, bob_belief, 189820, 189820, expected=0)
+    assert expected_ag_count_fact_set(mop_plan, bob_belief, 246240, 280800, expected=1)
+    assert expected_ag_count_fact_set(mop_plan, bob_belief, 7200, 30240, expected=1)
+    assert expected_ag_count_fact_set(mop_plan, bob_belief, 525599, 525599, expected=0)

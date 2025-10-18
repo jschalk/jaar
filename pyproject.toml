@@ -13,7 +13,7 @@ dependencies = [
 ]
 description = ""
 license = {text = "MIT"}
-name = "jaar"
+name = "beto"
 readme = "README.md"
 requires-python = ">=3.7"
 
@@ -43,7 +43,7 @@ test = [
 # ]
 # tag_format = "v{version}"
 # upload_to_pypi = false
-# version_variable = "jaar/__init__.py:__version__"
+# version_variable = "beto/__init__.py:__version__"
 
 [tool.commitizen]
 name = "cz_conventional_commits"

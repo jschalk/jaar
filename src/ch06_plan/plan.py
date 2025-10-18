@@ -89,7 +89,7 @@ class PlanAttrHolder:
     reason_divisor: int = None
     reason_del_case_reason_context: RopeTerm = None
     reason_del_case_reason_state: RopeTerm = None
-    reason_plan_active_requisite: str = None
+    reason_requisite_active: str = None
     laborunit: LaborUnit = None
     healerunit: HealerUnit = None
     begin: float = None
@@ -133,7 +133,7 @@ def planattrholder_shop(
     reason_divisor: int = None,
     reason_del_case_reason_context: RopeTerm = None,
     reason_del_case_reason_state: RopeTerm = None,
-    reason_plan_active_requisite: str = None,
+    reason_requisite_active: str = None,
     laborunit: LaborUnit = None,
     healerunit: HealerUnit = None,
     begin: float = None,
@@ -162,7 +162,7 @@ def planattrholder_shop(
         reason_divisor=reason_divisor,
         reason_del_case_reason_context=reason_del_case_reason_context,
         reason_del_case_reason_state=reason_del_case_reason_state,
-        reason_plan_active_requisite=reason_plan_active_requisite,
+        reason_requisite_active=reason_requisite_active,
         laborunit=laborunit,
         healerunit=healerunit,
         begin=begin,
@@ -185,7 +185,7 @@ def planattrholder_shop(
 @dataclass
 class PlanUnit:
     """
-    Represents a planual unit within jaar. Can represent a pledge, a task, a different plan's
+    Represents a planual unit within beto. Can represent a pledge, a task, a different plan's
     reason or fact, a parent plan of other plans.
     Funds: Funds come from the parent plan and go to the child plans.
     Awards: Desribes whom the funding comes from and whome it goes to.
@@ -216,13 +216,13 @@ class PlanUnit:
     denom : int that describes denominator to parent range calculations
     numor : int that describes numerator to parent range calculations
     morph : bool that describes how to change parent range in calculations.
-    gogo_want : bool
-    stop_want : bool
+    gogo_want : float
+    stop_want : float
     pledge : bool that describes if the plan is a pledge.
     problem_bool : bool that describes if the plan is a problem.
     is_expanded : bool flag for whether the plan is expanded.
 
-    active : bool that describes if the plan pledge is active, calculated by BeliefUnit.
+    active : bool that describes if the plan pledge is plan_active, calculated by BeliefUnit.
     active_hx : dict[int, bool] Historical record of active state, used to calcualte if changes have occured
     all_voice_cred : bool Flag indicating there are not explicitley defined awardunits
     all_voice_debt : bool Flag indicating there are not explicitley defined awardunits
@@ -267,8 +267,8 @@ class PlanUnit:
     problem_bool: bool = None
     is_expanded: bool = None
     # Calculated fields
-    active: bool = None
-    active_hx: dict[int, bool] = None
+    plan_active: bool = None
+    plan_active_hx: dict[int, bool] = None
     all_voice_cred: bool = None
     all_voice_debt: bool = None
     awardheirs: dict[GroupTitle, AwardHeir] = None
@@ -292,7 +292,7 @@ class PlanUnit:
         reason_context_reasonunit_exists = self.reason_context_reasonunit_exists(
             necessary_reason_context
         )
-        return self.pledge and self.active and reason_context_reasonunit_exists
+        return self.pledge and self.plan_active and reason_context_reasonunit_exists
 
     def reason_context_reasonunit_exists(
         self, necessary_reason_context: RopeTerm = None
@@ -303,13 +303,13 @@ class PlanUnit:
             reason.reason_context == x_reason_context for reason in x_reasons
         )
 
-    def record_active_hx(
-        self, tree_traverse_count: int, prev_active: bool, now_active: bool
+    def record_plan_active_hx(
+        self, tree_traverse_count: int, prev_plan_active: bool, now_plan_active: bool
     ):
         if tree_traverse_count == 0:
-            self.active_hx = {0: now_active}
-        elif prev_active != now_active:
-            self.active_hx[tree_traverse_count] = now_active
+            self.plan_active_hx = {0: now_plan_active}
+        elif prev_plan_active != now_plan_active:
+            self.plan_active_hx[tree_traverse_count] = now_plan_active
 
     def set_factheirs(self, facts: dict[RopeTerm, FactCore]):
         facts_dict = get_empty_dict_if_None(facts)
@@ -592,11 +592,11 @@ class PlanUnit:
             )
         if (
             plan_attr.reason_context is not None
-            and plan_attr.reason_plan_active_requisite is not None
+            and plan_attr.reason_requisite_active is not None
         ):
-            self.set_reason_plan_active_requisite(
+            self.set_reason_requisite_active(
                 reason_context=plan_attr.reason_context,
-                reason_active_requisite=plan_attr.reason_plan_active_requisite,
+                active_requisite=plan_attr.reason_requisite_active,
             )
         if plan_attr.laborunit is not None:
             self.laborunit = plan_attr.laborunit
@@ -686,16 +686,16 @@ class PlanUnit:
             if len(self.reasonunits[reason_context].cases) == 0:
                 self.del_reasonunit_reason_context(reason_context=reason_context)
 
-    def set_reason_plan_active_requisite(
-        self, reason_context: RopeTerm, reason_active_requisite: str
+    def set_reason_requisite_active(
+        self, reason_context: RopeTerm, active_requisite: str
     ):
         x_reasonunit = self._get_or_create_reasonunit(reason_context=reason_context)
-        if reason_active_requisite is False:
-            x_reasonunit.reason_active_requisite = False
-        elif reason_active_requisite == "Set to Ignore":
-            x_reasonunit.reason_active_requisite = None
-        elif reason_active_requisite:
-            x_reasonunit.reason_active_requisite = True
+        if active_requisite is False:
+            x_reasonunit.active_requisite = False
+        elif active_requisite == "Set to Ignore":
+            x_reasonunit.active_requisite = None
+        elif active_requisite:
+            x_reasonunit.active_requisite = True
 
     def _get_or_create_reasonunit(self, reason_context: RopeTerm) -> ReasonUnit:
         x_reasonunit = None
@@ -781,25 +781,27 @@ class PlanUnit:
     def get_reasonunit(self, reason_context: RopeTerm) -> ReasonUnit:
         return self.reasonunits.get(reason_context)
 
-    def set_reasonheirs_status(self):
-        self.clear_reasonheirs_status()
+    def set_reasonheirs_reason_active(self):
+        self.clear_reasonheirs_reason_active()
         for x_reasonheir in self.reasonheirs.values():
-            x_reasonheir.set_status(factheirs=self.factheirs)
+            x_reasonheir.set_reason_active(factheirs=self.factheirs)
 
-    def set_active_attrs(
+    def set_plan_active(
         self,
         tree_traverse_count: int,
         groupunits: dict[GroupTitle, GroupUnit] = None,
         belief_name: VoiceName = None,
     ):
-        prev_to_now_active = deepcopy(self.active)
-        self.active = self._create_active_bool(groupunits, belief_name)
+        prev_to_now_active = deepcopy(self.plan_active)
+        self.plan_active = self._create_active_bool(groupunits, belief_name)
         self._set_plan_task()
-        self.record_active_hx(tree_traverse_count, prev_to_now_active, self.active)
+        self.record_plan_active_hx(
+            tree_traverse_count, prev_to_now_active, self.plan_active
+        )
 
     def _set_plan_task(self):
         self.task = False
-        if self.pledge and self.active and self.reasonheirs_satisfied():
+        if self.pledge and self.plan_active and self.reasonheirs_satisfied():
             self.task = True
 
     def reasonheirs_satisfied(self) -> bool:
@@ -813,8 +815,8 @@ class PlanUnit:
         groupunits: dict[GroupTitle, GroupUnit],
         belief_name: VoiceName,
     ) -> bool:
-        self.set_reasonheirs_status()
-        active_bool = self._are_all_reasonheir_active_true()
+        self.set_reasonheirs_reason_active()
+        active_bool = self.all_reasonheirs_are_active()
         if active_bool and groupunits != {} and belief_name is not None:
             self.laborheir.set_belief_name_is_labor(groupunits, belief_name)
             if self.laborheir._belief_name_is_labor is False:
@@ -827,18 +829,18 @@ class PlanUnit:
         range_inheritors: dict[RopeTerm, RopeTerm],
     ):
         for reason_context in self.reasonheirs.keys():
-            if range_root_rope := range_inheritors.get(reason_context):
+            if rangeroot_rope := range_inheritors.get(reason_context):
                 all_plans = all_plans_between(
-                    belief_plan_dict, range_root_rope, reason_context, self.knot
+                    belief_plan_dict, rangeroot_rope, reason_context, self.knot
                 )
-                self._create_factheir(all_plans, range_root_rope, reason_context)
+                self._create_factheir(all_plans, rangeroot_rope, reason_context)
 
     def _create_factheir(
-        self, all_plans: list, range_root_rope: RopeTerm, reason_context: RopeTerm
+        self, all_plans: list, rangeroot_rope: RopeTerm, reason_context: RopeTerm
     ):
-        range_root_factheir = self.factheirs.get(range_root_rope)
-        old_reason_lower = range_root_factheir.fact_lower
-        old_reason_upper = range_root_factheir.fact_upper
+        rangeroot_factheir = self.factheirs.get(rangeroot_rope)
+        old_reason_lower = rangeroot_factheir.fact_lower
+        old_reason_upper = rangeroot_factheir.fact_upper
         x_rangeunit = plans_calculated_range(
             all_plans, old_reason_lower, old_reason_upper
         )
@@ -850,13 +852,15 @@ class PlanUnit:
         )
         self._set_factheir(new_factheir_obj)
 
-    def _are_all_reasonheir_active_true(self) -> bool:
+    def all_reasonheirs_are_active(self) -> bool:
         x_reasonheirs = self.reasonheirs.values()
-        return all(x_reasonheir.status != False for x_reasonheir in x_reasonheirs)
+        return all(
+            x_reasonheir.reason_active != False for x_reasonheir in x_reasonheirs
+        )
 
-    def clear_reasonheirs_status(self):
+    def clear_reasonheirs_reason_active(self):
         for reason in self.reasonheirs.values():
-            reason.clear_status()
+            reason.clear_reason_active()
 
     def _coalesce_with_reasonunits(
         self, reasonheirs: dict[RopeTerm, ReasonHeir]
@@ -874,7 +878,7 @@ class PlanUnit:
         self.reasonheirs = {}
         for old_reasonheir in coalesced_reasons.values():
             old_reason_context = old_reasonheir.reason_context
-            old_active_requisite = old_reasonheir.reason_active_requisite
+            old_active_requisite = old_reasonheir.active_requisite
             new_reasonheir = reasonheir_shop(
                 old_reason_context, None, old_active_requisite
             )
@@ -883,7 +887,7 @@ class PlanUnit:
             if reason_context_plan := belief_plan_dict.get(
                 old_reasonheir.reason_context
             ):
-                new_reasonheir.set_reason_active_heir(reason_context_plan.active)
+                new_reasonheir.set_heir_active(reason_context_plan.plan_active)
             self.reasonheirs[new_reasonheir.reason_context] = new_reasonheir
 
     def set_root_plan_reasonheirs(self):
@@ -915,7 +919,7 @@ class PlanUnit:
     def is_kidless(self) -> bool:
         return self.kids == {}
 
-    def is_math(self) -> bool:
+    def has_begin_close(self) -> bool:
         return self.begin is not None and self.close is not None
 
     def awardheir_exists(self) -> bool:
@@ -1032,12 +1036,12 @@ def planunit_shop(
     fund_onset: FundNum = None,
     fund_cease: FundNum = None,
     task: bool = None,
-    active: bool = None,
+    plan_active: bool = None,
     descendant_pledge_count: int = None,
     all_voice_cred: bool = None,
     all_voice_debt: bool = None,
     is_expanded: bool = True,
-    active_hx: dict[int, bool] = None,
+    plan_active_hx: dict[int, bool] = None,
     knot: str = None,
     healerunit_ratio: float = None,
 ) -> PlanUnit:
@@ -1076,12 +1080,12 @@ def planunit_shop(
         fund_onset=fund_onset,
         fund_cease=fund_cease,
         task=task,
-        active=active,
+        plan_active=plan_active,
         descendant_pledge_count=descendant_pledge_count,
         all_voice_cred=all_voice_cred,
         all_voice_debt=all_voice_debt,
         is_expanded=is_expanded,
-        active_hx=get_empty_dict_if_None(active_hx),
+        plan_active_hx=get_empty_dict_if_None(plan_active_hx),
         knot=default_knot_if_None(knot),
         healerunit_ratio=get_0_if_None(healerunit_ratio),
     )

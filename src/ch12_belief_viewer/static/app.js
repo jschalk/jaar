@@ -64,7 +64,7 @@ let show_root_boolean = false;
 let show_uid = false;
 
 // Initialize the app when DOM loads
-document.addEventListener('DOMContentLoaded', function () {
+document.addSparkListener('DOMContentLoaded', function () {
     const show_voicesCheckbox = document.getElementById('show_voices');
     const show_voice_cred_lumenCheckbox = document.getElementById('show_voice_cred_lumen')
     const show_voice_debt_lumenCheckbox = document.getElementById('show_voice_debt_lumen')
@@ -128,69 +128,69 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_root_booleanCheckbox = document.getElementById('show_root_boolean');
     const show_uidCheckbox = document.getElementById('show_uid');
 
-    // Set up checkbox event listener
-    show_voicesCheckbox.addEventListener('change', function () { show_voices = this.checked; renderVoicesData(); });
-    show_voice_cred_lumenCheckbox.addEventListener('change', function () { show_voice_cred_lumen = this.checked; renderVoicesData(); });
-    show_voice_debt_lumenCheckbox.addEventListener('change', function () { show_voice_debt_lumen = this.checked; renderVoicesData(); });
-    show_voice_credor_poolCheckbox.addEventListener('change', function () { show_voice_credor_pool = this.checked; renderVoicesData(); });
-    show_voice_debtor_poolCheckbox.addEventListener('change', function () { show_voice_debtor_pool = this.checked; renderVoicesData(); });
-    show_voice_irrational_voice_debt_lumenCheckbox.addEventListener('change', function () { show_voice_irrational_voice_debt_lumen = this.checked; renderVoicesData(); });
-    show_voice_inallocable_voice_debt_lumenCheckbox.addEventListener('change', function () { show_voice_inallocable_voice_debt_lumen = this.checked; renderVoicesData(); });
-    show_voice_fund_giveCheckbox.addEventListener('change', function () { show_voice_fund_give = this.checked; renderVoicesData(); });
-    show_voice_fund_takeCheckbox.addEventListener('change', function () { show_voice_fund_take = this.checked; renderVoicesData(); });
-    show_voice_fund_agenda_giveCheckbox.addEventListener('change', function () { show_voice_fund_agenda_give = this.checked; renderVoicesData(); });
-    show_voice_fund_agenda_takeCheckbox.addEventListener('change', function () { show_voice_fund_agenda_take = this.checked; renderVoicesData(); });
-    show_voice_fund_agenda_ratio_giveCheckbox.addEventListener('change', function () { show_voice_fund_agenda_ratio_give = this.checked; renderVoicesData(); });
-    show_voice_fund_agenda_ratio_takeCheckbox.addEventListener('change', function () { show_voice_fund_agenda_ratio_take = this.checked; renderVoicesData(); });
-    show_voice_membership_group_titleCheckbox.addEventListener('change', function () { show_voice_membership_group_title = this.checked; renderVoicesData(); });
-    show_voice_membership_group_cred_lumenCheckbox.addEventListener('change', function () { show_voice_membership_group_cred_lumen = this.checked; renderVoicesData(); });
-    show_voice_membership_group_debt_lumenCheckbox.addEventListener('change', function () { show_voice_membership_group_debt_lumen = this.checked; renderVoicesData(); });
-    show_voice_membership_credor_poolCheckbox.addEventListener('change', function () { show_voice_membership_credor_pool = this.checked; renderVoicesData(); });
-    show_voice_membership_debtor_poolCheckbox.addEventListener('change', function () { show_voice_membership_debtor_pool = this.checked; renderVoicesData(); });
-    show_voice_membership_fund_agenda_giveCheckbox.addEventListener('change', function () { show_voice_membership_fund_agenda_give = this.checked; renderVoicesData(); });
-    show_voice_membership_fund_agenda_ratio_giveCheckbox.addEventListener('change', function () { show_voice_membership_fund_agenda_ratio_give = this.checked; renderVoicesData(); });
-    show_voice_membership_fund_agenda_ratio_takeCheckbox.addEventListener('change', function () { show_voice_membership_fund_agenda_ratio_take = this.checked; renderVoicesData(); });
-    show_voice_membership_fund_agenda_takeCheckbox.addEventListener('change', function () { show_voice_membership_fund_agenda_take = this.checked; renderVoicesData(); });
-    show_voice_membership_fund_giveCheckbox.addEventListener('change', function () { show_voice_membership_fund_give = this.checked; renderVoicesData(); });
-    show_voice_membership_fund_takeCheckbox.addEventListener('change', function () { show_voice_membership_fund_take = this.checked; renderVoicesData(); });
-    show_planrootCheckbox.addEventListener('change', function () { show_planroot = this.checked; renderPlanTree(); });
-    show_awardunitsCheckbox.addEventListener('change', function () { show_awardunits = this.checked; renderPlanTree(); });
-    show_awardheirsCheckbox.addEventListener('change', function () { show_awardheirs = this.checked; renderPlanTree(); });
-    show_awardlinesCheckbox.addEventListener('change', function () { show_awardlines = this.checked; renderPlanTree(); });
-    show_laborunitCheckbox.addEventListener('change', function () { show_laborunit = this.checked; renderPlanTree(); });
-    show_laborheirCheckbox.addEventListener('change', function () { show_laborheir = this.checked; renderPlanTree(); });
-    show_levelCheckbox.addEventListener('change', function () { show_level = this.checked; renderPlanTree(); });
-    show_moment_labelCheckbox.addEventListener('change', function () { show_moment_label = this.checked; renderPlanTree(); });
-    show_pledgeCheckbox.addEventListener('change', function () { show_pledge = this.checked; renderPlanTree(); });
-    show_descendant_pledge_countCheckbox.addEventListener('change', function () { show_descendant_pledge_count = this.checked; renderPlanTree(); });
-    show_activeCheckbox.addEventListener('change', function () { show_active = this.checked; renderPlanTree(); });
-    show_taskCheckbox.addEventListener('change', function () { show_task = this.checked; renderPlanTree(); });
-    show_starCheckbox.addEventListener('change', function () { show_star = this.checked; renderPlanTree(); });
-    show_reasonunitsCheckbox.addEventListener('change', function () { show_reasonunits = this.checked; renderPlanTree(); });
-    show_reasonheirsCheckbox.addEventListener('change', function () { show_reasonheirs = this.checked; renderPlanTree(); });
-    show_factunitsCheckbox.addEventListener('change', function () { show_factunits = this.checked; renderPlanTree(); });
-    show_factheirsCheckbox.addEventListener('change', function () { show_factheirs = this.checked; renderPlanTree(); });
-    show_plan_fund_totalCheckbox.addEventListener('change', function () { show_plan_fund_total = this.checked; renderPlanTree(); });
-    show_fund_onsetCheckbox.addEventListener('change', function () { show_fund_onset = this.checked; renderPlanTree(); });
-    show_fund_ceaseCheckbox.addEventListener('change', function () { show_fund_cease = this.checked; renderPlanTree(); });
-    show_fund_grainCheckbox.addEventListener('change', function () { show_fund_grain = this.checked; renderPlanTree(); });
-    show_fund_ratioCheckbox.addEventListener('change', function () { show_fund_ratio = this.checked; renderPlanTree(); });
-    show_all_voice_credCheckbox.addEventListener('change', function () { show_all_voice_cred = this.checked; renderPlanTree(); });
-    show_all_voice_debtCheckbox.addEventListener('change', function () { show_all_voice_debt = this.checked; renderPlanTree(); });
-    show_gogo_wantCheckbox.addEventListener('change', function () { show_gogo_want = this.checked; renderPlanTree(); });
-    show_stop_wantCheckbox.addEventListener('change', function () { show_stop_want = this.checked; renderPlanTree(); });
-    show_gogo_calcCheckbox.addEventListener('change', function () { show_gogo_calc = this.checked; renderPlanTree(); });
-    show_stop_calcCheckbox.addEventListener('change', function () { show_stop_calc = this.checked; renderPlanTree(); });
-    show_addinCheckbox.addEventListener('change', function () { show_addin = this.checked; renderPlanTree(); });
-    show_beginCheckbox.addEventListener('change', function () { show_begin = this.checked; renderPlanTree(); });
-    show_closeCheckbox.addEventListener('change', function () { show_close = this.checked; renderPlanTree(); });
-    show_denomCheckbox.addEventListener('change', function () { show_denom = this.checked; renderPlanTree(); });
-    show_morphCheckbox.addEventListener('change', function () { show_morph = this.checked; renderPlanTree(); });
-    show_numorCheckbox.addEventListener('change', function () { show_numor = this.checked; renderPlanTree(); });
-    show_active_hxCheckbox.addEventListener('change', function () { show_active_hx = this.checked; renderPlanTree(); });
-    show_parent_ropeCheckbox.addEventListener('change', function () { show_parent_rope = this.checked; renderPlanTree(); });
-    show_root_booleanCheckbox.addEventListener('change', function () { show_root_boolean = this.checked; renderPlanTree(); });
-    show_uidCheckbox.addEventListener('change', function () { show_uid = this.checked; renderPlanTree(); });
+    // Set up checkbox spark listener
+    show_voicesCheckbox.addSparkListener('change', function () { show_voices = this.checked; renderVoicesData(); });
+    show_voice_cred_lumenCheckbox.addSparkListener('change', function () { show_voice_cred_lumen = this.checked; renderVoicesData(); });
+    show_voice_debt_lumenCheckbox.addSparkListener('change', function () { show_voice_debt_lumen = this.checked; renderVoicesData(); });
+    show_voice_credor_poolCheckbox.addSparkListener('change', function () { show_voice_credor_pool = this.checked; renderVoicesData(); });
+    show_voice_debtor_poolCheckbox.addSparkListener('change', function () { show_voice_debtor_pool = this.checked; renderVoicesData(); });
+    show_voice_irrational_voice_debt_lumenCheckbox.addSparkListener('change', function () { show_voice_irrational_voice_debt_lumen = this.checked; renderVoicesData(); });
+    show_voice_inallocable_voice_debt_lumenCheckbox.addSparkListener('change', function () { show_voice_inallocable_voice_debt_lumen = this.checked; renderVoicesData(); });
+    show_voice_fund_giveCheckbox.addSparkListener('change', function () { show_voice_fund_give = this.checked; renderVoicesData(); });
+    show_voice_fund_takeCheckbox.addSparkListener('change', function () { show_voice_fund_take = this.checked; renderVoicesData(); });
+    show_voice_fund_agenda_giveCheckbox.addSparkListener('change', function () { show_voice_fund_agenda_give = this.checked; renderVoicesData(); });
+    show_voice_fund_agenda_takeCheckbox.addSparkListener('change', function () { show_voice_fund_agenda_take = this.checked; renderVoicesData(); });
+    show_voice_fund_agenda_ratio_giveCheckbox.addSparkListener('change', function () { show_voice_fund_agenda_ratio_give = this.checked; renderVoicesData(); });
+    show_voice_fund_agenda_ratio_takeCheckbox.addSparkListener('change', function () { show_voice_fund_agenda_ratio_take = this.checked; renderVoicesData(); });
+    show_voice_membership_group_titleCheckbox.addSparkListener('change', function () { show_voice_membership_group_title = this.checked; renderVoicesData(); });
+    show_voice_membership_group_cred_lumenCheckbox.addSparkListener('change', function () { show_voice_membership_group_cred_lumen = this.checked; renderVoicesData(); });
+    show_voice_membership_group_debt_lumenCheckbox.addSparkListener('change', function () { show_voice_membership_group_debt_lumen = this.checked; renderVoicesData(); });
+    show_voice_membership_credor_poolCheckbox.addSparkListener('change', function () { show_voice_membership_credor_pool = this.checked; renderVoicesData(); });
+    show_voice_membership_debtor_poolCheckbox.addSparkListener('change', function () { show_voice_membership_debtor_pool = this.checked; renderVoicesData(); });
+    show_voice_membership_fund_agenda_giveCheckbox.addSparkListener('change', function () { show_voice_membership_fund_agenda_give = this.checked; renderVoicesData(); });
+    show_voice_membership_fund_agenda_ratio_giveCheckbox.addSparkListener('change', function () { show_voice_membership_fund_agenda_ratio_give = this.checked; renderVoicesData(); });
+    show_voice_membership_fund_agenda_ratio_takeCheckbox.addSparkListener('change', function () { show_voice_membership_fund_agenda_ratio_take = this.checked; renderVoicesData(); });
+    show_voice_membership_fund_agenda_takeCheckbox.addSparkListener('change', function () { show_voice_membership_fund_agenda_take = this.checked; renderVoicesData(); });
+    show_voice_membership_fund_giveCheckbox.addSparkListener('change', function () { show_voice_membership_fund_give = this.checked; renderVoicesData(); });
+    show_voice_membership_fund_takeCheckbox.addSparkListener('change', function () { show_voice_membership_fund_take = this.checked; renderVoicesData(); });
+    show_planrootCheckbox.addSparkListener('change', function () { show_planroot = this.checked; renderPlanTree(); });
+    show_awardunitsCheckbox.addSparkListener('change', function () { show_awardunits = this.checked; renderPlanTree(); });
+    show_awardheirsCheckbox.addSparkListener('change', function () { show_awardheirs = this.checked; renderPlanTree(); });
+    show_awardlinesCheckbox.addSparkListener('change', function () { show_awardlines = this.checked; renderPlanTree(); });
+    show_laborunitCheckbox.addSparkListener('change', function () { show_laborunit = this.checked; renderPlanTree(); });
+    show_laborheirCheckbox.addSparkListener('change', function () { show_laborheir = this.checked; renderPlanTree(); });
+    show_levelCheckbox.addSparkListener('change', function () { show_level = this.checked; renderPlanTree(); });
+    show_moment_labelCheckbox.addSparkListener('change', function () { show_moment_label = this.checked; renderPlanTree(); });
+    show_pledgeCheckbox.addSparkListener('change', function () { show_pledge = this.checked; renderPlanTree(); });
+    show_descendant_pledge_countCheckbox.addSparkListener('change', function () { show_descendant_pledge_count = this.checked; renderPlanTree(); });
+    show_activeCheckbox.addSparkListener('change', function () { show_active = this.checked; renderPlanTree(); });
+    show_taskCheckbox.addSparkListener('change', function () { show_task = this.checked; renderPlanTree(); });
+    show_starCheckbox.addSparkListener('change', function () { show_star = this.checked; renderPlanTree(); });
+    show_reasonunitsCheckbox.addSparkListener('change', function () { show_reasonunits = this.checked; renderPlanTree(); });
+    show_reasonheirsCheckbox.addSparkListener('change', function () { show_reasonheirs = this.checked; renderPlanTree(); });
+    show_factunitsCheckbox.addSparkListener('change', function () { show_factunits = this.checked; renderPlanTree(); });
+    show_factheirsCheckbox.addSparkListener('change', function () { show_factheirs = this.checked; renderPlanTree(); });
+    show_plan_fund_totalCheckbox.addSparkListener('change', function () { show_plan_fund_total = this.checked; renderPlanTree(); });
+    show_fund_onsetCheckbox.addSparkListener('change', function () { show_fund_onset = this.checked; renderPlanTree(); });
+    show_fund_ceaseCheckbox.addSparkListener('change', function () { show_fund_cease = this.checked; renderPlanTree(); });
+    show_fund_grainCheckbox.addSparkListener('change', function () { show_fund_grain = this.checked; renderPlanTree(); });
+    show_fund_ratioCheckbox.addSparkListener('change', function () { show_fund_ratio = this.checked; renderPlanTree(); });
+    show_all_voice_credCheckbox.addSparkListener('change', function () { show_all_voice_cred = this.checked; renderPlanTree(); });
+    show_all_voice_debtCheckbox.addSparkListener('change', function () { show_all_voice_debt = this.checked; renderPlanTree(); });
+    show_gogo_wantCheckbox.addSparkListener('change', function () { show_gogo_want = this.checked; renderPlanTree(); });
+    show_stop_wantCheckbox.addSparkListener('change', function () { show_stop_want = this.checked; renderPlanTree(); });
+    show_gogo_calcCheckbox.addSparkListener('change', function () { show_gogo_calc = this.checked; renderPlanTree(); });
+    show_stop_calcCheckbox.addSparkListener('change', function () { show_stop_calc = this.checked; renderPlanTree(); });
+    show_addinCheckbox.addSparkListener('change', function () { show_addin = this.checked; renderPlanTree(); });
+    show_beginCheckbox.addSparkListener('change', function () { show_begin = this.checked; renderPlanTree(); });
+    show_closeCheckbox.addSparkListener('change', function () { show_close = this.checked; renderPlanTree(); });
+    show_denomCheckbox.addSparkListener('change', function () { show_denom = this.checked; renderPlanTree(); });
+    show_morphCheckbox.addSparkListener('change', function () { show_morph = this.checked; renderPlanTree(); });
+    show_numorCheckbox.addSparkListener('change', function () { show_numor = this.checked; renderPlanTree(); });
+    show_active_hxCheckbox.addSparkListener('change', function () { show_active_hx = this.checked; renderPlanTree(); });
+    show_parent_ropeCheckbox.addSparkListener('change', function () { show_parent_rope = this.checked; renderPlanTree(); });
+    show_root_booleanCheckbox.addSparkListener('change', function () { show_root_boolean = this.checked; renderPlanTree(); });
+    show_uidCheckbox.addSparkListener('change', function () { show_uid = this.checked; renderPlanTree(); });
 
     // Load initial tree data
     loadBeliefData();
@@ -280,7 +280,7 @@ function renderPlanUnit(planUnit, level) {
     const levelIndicator = show_level ? ` level${planUnit.tree_level}` : '';
     const pledgeIndicator = planUnit.pledge && show_pledge ? ' PLEDGE' : '';
     const descendant_pledge_countIndicator = show_descendant_pledge_count ? ` pledges: ${planUnit.descendant_pledge_count}` : '';
-    const activeIndicator = planUnit.active && show_active ? '-ACTIVE' : '';
+    const activeIndicator = planUnit.plan_active && show_active ? '-ACTIVE' : '';
     const taskIndicator = planUnit.task && show_task ? '-task' : '';
     const starIndicator = show_star ? ` star${planUnit.star}` : '';
     const plan_fund_totalIndicator = show_plan_fund_total ? ` [${planUnit.plan_fund_total}]` : '';
@@ -337,7 +337,7 @@ function renderPlanUnit(planUnit, level) {
     ${render_with_indent(planUnit.denom, indent, show_denom)}
     ${render_with_indent(planUnit.morph, indent, show_morph)}
     ${render_with_indent(planUnit.numor, indent, show_numor)}
-    ${render_with_indent(planUnit.active_hx, indent, show_active_hx)}
+    ${render_with_indent(planUnit.plan_active_hx, indent, show_active_hx)}
   </div>\n
 `;
     // Add children

@@ -7,7 +7,7 @@ from src.ch11_bud._ref.ch11_path import (
 from src.ch11_bud.bud_filehandler import (
     cellunit_get_from_dir,
     cellunit_save_to_dir,
-    save_arbitrary_beliefevent as save_beliefevent,
+    save_arbitrary_beliefspark as save_beliefspark,
 )
 from src.ch11_bud.cell import cellunit_shop
 from src.ch15_moment.moment_cell import create_cell_tree
@@ -44,13 +44,13 @@ def test_create_cell_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
     tp37 = 37  # timepoint
     bud1_quota = 450
     bud1_celldepth = 0
-    event56 = 56
-    x_cell = cellunit_shop(bob_str, [], event56, bud1_celldepth, quota=bud1_quota)
+    spark56 = 56
+    x_cell = cellunit_shop(bob_str, [], spark56, bud1_celldepth, quota=bud1_quota)
     bob37_root_cell_dir = cell_dir(moment_mstr_dir, a23_str, bob_str, tp37, [])
     cellunit_save_to_dir(bob37_root_cell_dir, x_cell)
-    save_beliefevent(moment_mstr_dir, a23_str, bob_str, event56, [[yao_str], [bob_str]])
+    save_beliefspark(moment_mstr_dir, a23_str, bob_str, spark56, [[yao_str], [bob_str]])
     assert (
-        cellunit_get_from_dir(bob37_root_cell_dir).get_beliefevents_quota_ledger() == {}
+        cellunit_get_from_dir(bob37_root_cell_dir).get_beliefsparks_quota_ledger() == {}
     )
 
     # WHEN
@@ -58,7 +58,7 @@ def test_create_cell_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
 
     # THEN
     bob37_root_cell = cellunit_get_from_dir(bob37_root_cell_dir)
-    generated_bob37_quota_ledger = bob37_root_cell.get_beliefevents_quota_ledger()
+    generated_bob37_quota_ledger = bob37_root_cell.get_beliefsparks_quota_ledger()
     assert generated_bob37_quota_ledger == {"Bob": 225, yao_str: 225}
 
 
@@ -72,21 +72,21 @@ def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     tp37 = 37  # timepoint
     x_quota = 450
     x_celldepth = 1
-    event56 = 56
-    x_cell = cellunit_shop(bob_str, [], event56, x_celldepth, quota=x_quota)
+    spark56 = 56
+    x_cell = cellunit_shop(bob_str, [], spark56, x_celldepth, quota=x_quota)
     bob37_dir = cell_dir(moment_mstr_dir, a23_str, bob_str, tp37, [])
     cellunit_save_to_dir(bob37_dir, x_cell)
     bob_voices = [[yao_str], [bob_str], [zia_str]]
     yao_voices = [[zia_str]]
     zia_voices = [[bob_str], [yao_str]]
-    bob_e56_path = save_beliefevent(
-        moment_mstr_dir, a23_str, bob_str, event56, bob_voices
+    bob_e56_path = save_beliefspark(
+        moment_mstr_dir, a23_str, bob_str, spark56, bob_voices
     )
-    yao_e56_path = save_beliefevent(
-        moment_mstr_dir, a23_str, yao_str, event56, yao_voices
+    yao_e56_path = save_beliefspark(
+        moment_mstr_dir, a23_str, yao_str, spark56, yao_voices
     )
-    zia_e56_path = save_beliefevent(
-        moment_mstr_dir, a23_str, zia_str, event56, zia_voices
+    zia_e56_path = save_beliefspark(
+        moment_mstr_dir, a23_str, zia_str, spark56, zia_voices
     )
     assert os_path_exists(bob_e56_path)
     assert os_path_exists(yao_e56_path)
@@ -99,7 +99,7 @@ def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     assert os_path_exists(bob37_bob_node_path) is False
     assert os_path_exists(bob37_yao_node_path) is False
     assert os_path_exists(bob37_zia_node_path) is False
-    assert cellunit_get_from_dir(bob37_dir).get_beliefevents_quota_ledger() == {}
+    assert cellunit_get_from_dir(bob37_dir).get_beliefsparks_quota_ledger() == {}
 
     # WHEN
     create_cell_tree(moment_mstr_dir, a23_str, bob_str, tp37)
@@ -120,40 +120,40 @@ def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     bob37_yao_cell = cellunit_get_from_dir(bob37_yao_dir)
     bob37_zia_cell = cellunit_get_from_dir(bob37_zia_dir)
     assert bob37_cell.ancestors == []
-    assert bob37_cell.event_num == 56
+    assert bob37_cell.spark_num == 56
     assert bob37_cell.celldepth == 1
     assert bob37_cell.bud_belief_name == bob_str
     assert bob37_cell.money_grain == 1
     assert bob37_cell.quota == 450
     assert bob37_bob_cell.ancestors == [bob_str]
-    assert bob37_bob_cell.event_num == 56
+    assert bob37_bob_cell.spark_num == 56
     assert bob37_bob_cell.celldepth == 0
     assert bob37_bob_cell.bud_belief_name == bob_str
     assert bob37_bob_cell.money_grain == 1
     assert bob37_bob_cell.quota == 150
     assert bob37_yao_cell.ancestors == [yao_str]
-    assert bob37_yao_cell.event_num == 56
+    assert bob37_yao_cell.spark_num == 56
     assert bob37_yao_cell.celldepth == 0
     assert bob37_yao_cell.bud_belief_name == bob_str
     assert bob37_yao_cell.money_grain == 1
     assert bob37_yao_cell.quota == 150
     assert bob37_zia_cell.ancestors == [zia_str]
-    assert bob37_zia_cell.event_num == 56
+    assert bob37_zia_cell.spark_num == 56
     assert bob37_zia_cell.celldepth == 0
     assert bob37_zia_cell.bud_belief_name == bob_str
     assert bob37_zia_cell.money_grain == 1
     assert bob37_zia_cell.quota == 150
-    gen_bob37_quota_ledger = bob37_cell.get_beliefevents_quota_ledger()
-    gen_bob37_bob_quota_ledger = bob37_bob_cell.get_beliefevents_quota_ledger()
-    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_beliefevents_quota_ledger()
-    gen_bob37_zia_quota_ledger = bob37_zia_cell.get_beliefevents_quota_ledger()
+    gen_bob37_quota_ledger = bob37_cell.get_beliefsparks_quota_ledger()
+    gen_bob37_bob_quota_ledger = bob37_bob_cell.get_beliefsparks_quota_ledger()
+    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_beliefsparks_quota_ledger()
+    gen_bob37_zia_quota_ledger = bob37_zia_cell.get_beliefsparks_quota_ledger()
     assert gen_bob37_quota_ledger == {bob_str: 150, yao_str: 150, zia_str: 150}
     assert gen_bob37_bob_quota_ledger == {bob_str: 50, yao_str: 50, zia_str: 50}
     assert gen_bob37_yao_quota_ledger == {zia_str: 150}
     assert gen_bob37_zia_quota_ledger == {bob_str: 75, yao_str: 75}
 
 
-def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cleanup):
+def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentSpark(env_dir_setup_cleanup):
     # ESTABLISH
     moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
@@ -163,26 +163,26 @@ def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cl
     tp37 = 37  # timepoint
     x_quota = 450
     x_celldepth = 1
-    event33 = 33
-    event44 = 44
-    event55 = 55
-    x_cell = cellunit_shop(bob_str, [], event55, x_celldepth, quota=x_quota)
+    spark33 = 33
+    spark44 = 44
+    spark55 = 55
+    x_cell = cellunit_shop(bob_str, [], spark55, x_celldepth, quota=x_quota)
     bob37_dir = cell_dir(moment_mstr_dir, a23_str, bob_str, tp37, [])
     cellunit_save_to_dir(bob37_dir, x_cell)
     bob_voices = [[yao_str], [bob_str], [zia_str]]
     yao_voices = [[zia_str]]
     zia_voices = [[bob_str], [yao_str]]
-    bob_e55_path = save_beliefevent(
-        moment_mstr_dir, a23_str, bob_str, event55, bob_voices
+    bob_e55_path = save_beliefspark(
+        moment_mstr_dir, a23_str, bob_str, spark55, bob_voices
     )
-    yao_e44_path = save_beliefevent(
-        moment_mstr_dir, a23_str, yao_str, event44, yao_voices
+    yao_e44_path = save_beliefspark(
+        moment_mstr_dir, a23_str, yao_str, spark44, yao_voices
     )
-    yao_e33_path = save_beliefevent(
-        moment_mstr_dir, a23_str, yao_str, event33, yao_voices
+    yao_e33_path = save_beliefspark(
+        moment_mstr_dir, a23_str, yao_str, spark33, yao_voices
     )
-    zia_e33_path = save_beliefevent(
-        moment_mstr_dir, a23_str, zia_str, event33, zia_voices
+    zia_e33_path = save_beliefspark(
+        moment_mstr_dir, a23_str, zia_str, spark33, zia_voices
     )
     assert os_path_exists(bob_e55_path)
     assert os_path_exists(yao_e44_path)
@@ -215,40 +215,40 @@ def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cl
     bob37_yao_cell = cellunit_get_from_dir(bob37_yao_dir)
     bob37_zia_cell = cellunit_get_from_dir(bob37_zia_dir)
     assert bob37_cell.ancestors == []
-    assert bob37_cell.event_num == 55
+    assert bob37_cell.spark_num == 55
     assert bob37_cell.celldepth == 1
     assert bob37_cell.bud_belief_name == bob_str
     assert bob37_cell.money_grain == 1
     assert bob37_cell.quota == 450
     assert bob37_bob_cell.ancestors == [bob_str]
-    assert bob37_bob_cell.event_num == 55
+    assert bob37_bob_cell.spark_num == 55
     assert bob37_bob_cell.celldepth == 0
     assert bob37_bob_cell.bud_belief_name == bob_str
     assert bob37_bob_cell.money_grain == 1
     assert bob37_bob_cell.quota == 150
     assert bob37_yao_cell.ancestors == [yao_str]
-    assert bob37_yao_cell.event_num == 44
+    assert bob37_yao_cell.spark_num == 44
     assert bob37_yao_cell.celldepth == 0
     assert bob37_yao_cell.bud_belief_name == bob_str
     assert bob37_yao_cell.money_grain == 1
     assert bob37_yao_cell.quota == 150
     assert bob37_zia_cell.ancestors == [zia_str]
-    assert bob37_zia_cell.event_num == 33
+    assert bob37_zia_cell.spark_num == 33
     assert bob37_zia_cell.celldepth == 0
     assert bob37_zia_cell.bud_belief_name == bob_str
     assert bob37_zia_cell.money_grain == 1
     assert bob37_zia_cell.quota == 150
-    gen_bob37_quota_ledger = bob37_cell.get_beliefevents_quota_ledger()
-    gen_bob37_bob_quota_ledger = bob37_bob_cell.get_beliefevents_quota_ledger()
-    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_beliefevents_quota_ledger()
-    gen_bob37_zia_quota_ledger = bob37_zia_cell.get_beliefevents_quota_ledger()
+    gen_bob37_quota_ledger = bob37_cell.get_beliefsparks_quota_ledger()
+    gen_bob37_bob_quota_ledger = bob37_bob_cell.get_beliefsparks_quota_ledger()
+    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_beliefsparks_quota_ledger()
+    gen_bob37_zia_quota_ledger = bob37_zia_cell.get_beliefsparks_quota_ledger()
     assert gen_bob37_quota_ledger == {bob_str: 150, yao_str: 150, zia_str: 150}
     assert gen_bob37_bob_quota_ledger == {bob_str: 50, yao_str: 50, zia_str: 50}
     assert gen_bob37_yao_quota_ledger == {zia_str: 150}
     assert gen_bob37_zia_quota_ledger == {bob_str: 75, yao_str: 75}
 
 
-def test_create_cell_tree_Scenaro4_LedgerDepth1_OneBeliefHasNoPast_beliefevent(
+def test_create_cell_tree_Scenaro4_LedgerDepth1_OneBeliefHasNoPast_beliefspark(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -260,27 +260,27 @@ def test_create_cell_tree_Scenaro4_LedgerDepth1_OneBeliefHasNoPast_beliefevent(
     tp37 = 37  # timepoint
     x_quota = 450
     x_celldepth = 1
-    event33 = 33
-    event44 = 44
-    event55 = 55
-    event66 = 66
-    x_cell = cellunit_shop(bob_str, [], event55, x_celldepth, quota=x_quota)
+    spark33 = 33
+    spark44 = 44
+    spark55 = 55
+    spark66 = 66
+    x_cell = cellunit_shop(bob_str, [], spark55, x_celldepth, quota=x_quota)
     bob37_dir = cell_dir(moment_mstr_dir, a23_str, bob_str, tp37, [])
     cellunit_save_to_dir(bob37_dir, x_cell)
     bob_voices = [[yao_str], [bob_str], [zia_str]]
     yao_voices = [[zia_str]]
     zia_voices = [[bob_str], [yao_str]]
-    bob_e55_path = save_beliefevent(
-        moment_mstr_dir, a23_str, bob_str, event55, bob_voices
+    bob_e55_path = save_beliefspark(
+        moment_mstr_dir, a23_str, bob_str, spark55, bob_voices
     )
-    yao_e44_path = save_beliefevent(
-        moment_mstr_dir, a23_str, yao_str, event44, yao_voices
+    yao_e44_path = save_beliefspark(
+        moment_mstr_dir, a23_str, yao_str, spark44, yao_voices
     )
-    yao_e33_path = save_beliefevent(
-        moment_mstr_dir, a23_str, yao_str, event33, yao_voices
+    yao_e33_path = save_beliefspark(
+        moment_mstr_dir, a23_str, yao_str, spark33, yao_voices
     )
-    zia_e66_path = save_beliefevent(
-        moment_mstr_dir, a23_str, zia_str, event66, zia_voices
+    zia_e66_path = save_beliefspark(
+        moment_mstr_dir, a23_str, zia_str, spark66, zia_voices
     )
     assert os_path_exists(bob_e55_path)
     assert os_path_exists(yao_e44_path)
@@ -312,20 +312,20 @@ def test_create_cell_tree_Scenaro4_LedgerDepth1_OneBeliefHasNoPast_beliefevent(
     bob37_bob_cell = cellunit_get_from_dir(bob37_bob_dir)
     bob37_yao_cell = cellunit_get_from_dir(bob37_yao_dir)
     assert bob37_bob_cell.ancestors == [bob_str]
-    assert bob37_bob_cell.event_num == 55
+    assert bob37_bob_cell.spark_num == 55
     assert bob37_bob_cell.celldepth == 0
     assert bob37_bob_cell.bud_belief_name == bob_str
     assert bob37_bob_cell.money_grain == 1
     assert bob37_bob_cell.quota == 150
     assert bob37_yao_cell.ancestors == [yao_str]
-    assert bob37_yao_cell.event_num == 44
+    assert bob37_yao_cell.spark_num == 44
     assert bob37_yao_cell.celldepth == 0
     assert bob37_yao_cell.bud_belief_name == bob_str
     assert bob37_yao_cell.money_grain == 1
     assert bob37_yao_cell.quota == 150
-    gen_bob37_quota_ledger = bob37_cell.get_beliefevents_quota_ledger()
-    gen_bob37_bob_quota_ledger = bob37_bob_cell.get_beliefevents_quota_ledger()
-    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_beliefevents_quota_ledger()
+    gen_bob37_quota_ledger = bob37_cell.get_beliefsparks_quota_ledger()
+    gen_bob37_bob_quota_ledger = bob37_bob_cell.get_beliefsparks_quota_ledger()
+    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_beliefsparks_quota_ledger()
     assert gen_bob37_quota_ledger == {bob_str: 150, yao_str: 150, zia_str: 150}
     assert gen_bob37_bob_quota_ledger == {bob_str: 50, yao_str: 50, zia_str: 50}
     assert gen_bob37_yao_quota_ledger == {zia_str: 150}
@@ -343,26 +343,26 @@ def test_create_cell_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
     tp37 = 37  # timepoint
     x_quota = 2
     x_celldepth = 1
-    event33 = 33
-    event44 = 44
-    event55 = 55
-    x_cell = cellunit_shop(bob_str, [], event55, x_celldepth, quota=x_quota)
+    spark33 = 33
+    spark44 = 44
+    spark55 = 55
+    x_cell = cellunit_shop(bob_str, [], spark55, x_celldepth, quota=x_quota)
     bob37_dir = cell_dir(moment_mstr_dir, a23_str, bob_str, tp37, [])
     cellunit_save_to_dir(bob37_dir, x_cell)
     bob_voices = [[yao_str], [bob_str], [zia_str]]
     yao_voices = [[zia_str]]
     zia_voices = [[bob_str], [yao_str]]
-    bob_e55_path = save_beliefevent(
-        moment_mstr_dir, a23_str, bob_str, event55, bob_voices
+    bob_e55_path = save_beliefspark(
+        moment_mstr_dir, a23_str, bob_str, spark55, bob_voices
     )
-    yao_e44_path = save_beliefevent(
-        moment_mstr_dir, a23_str, yao_str, event44, yao_voices
+    yao_e44_path = save_beliefspark(
+        moment_mstr_dir, a23_str, yao_str, spark44, yao_voices
     )
-    yao_e33_path = save_beliefevent(
-        moment_mstr_dir, a23_str, yao_str, event33, yao_voices
+    yao_e33_path = save_beliefspark(
+        moment_mstr_dir, a23_str, yao_str, spark33, yao_voices
     )
-    zia_e33_path = save_beliefevent(
-        moment_mstr_dir, a23_str, zia_str, event33, zia_voices
+    zia_e33_path = save_beliefspark(
+        moment_mstr_dir, a23_str, zia_str, spark33, zia_voices
     )
     assert os_path_exists(bob_e55_path)
     assert os_path_exists(yao_e44_path)
@@ -394,9 +394,9 @@ def test_create_cell_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
     bob37_cell = cellunit_get_from_dir(bob37_dir)
     bob37_yao_cell = cellunit_get_from_dir(bob37_yao_dir)
     bob37_zia_cell = cellunit_get_from_dir(bob37_zia_dir)
-    gen_bob37_quota_ledger = bob37_cell.get_beliefevents_quota_ledger()
-    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_beliefevents_quota_ledger()
-    gen_bob37_zia_quota_ledger = bob37_zia_cell.get_beliefevents_quota_ledger()
+    gen_bob37_quota_ledger = bob37_cell.get_beliefsparks_quota_ledger()
+    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_beliefsparks_quota_ledger()
+    gen_bob37_zia_quota_ledger = bob37_zia_cell.get_beliefsparks_quota_ledger()
     assert gen_bob37_quota_ledger == {bob_str: 0, yao_str: 1, zia_str: 1}
     assert gen_bob37_yao_quota_ledger == {zia_str: 1}
     assert gen_bob37_zia_quota_ledger == {bob_str: 1, yao_str: 0}

@@ -612,7 +612,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(wx.addin) == "float"
     assert x_class_types.get(wx.awardee_title) == wx.TitleTerm
     assert x_class_types.get(wx.reason_context) == wx.RopeTerm
-    assert x_class_types.get("reason_active_requisite") == "bool"
+    assert x_class_types.get("active_requisite") == "bool"
     assert x_class_types.get(wx.begin) == "float"
     assert x_class_types.get(wx.respect_grain) == "float"
     assert x_class_types.get(wx.close) == "float"
@@ -641,7 +641,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(wx.numor) == "int"
     assert x_class_types.get("reason_lower") == "float"
     assert x_class_types.get(wx.money_grain) == "float"
-    assert x_class_types.get("fact_state") == wx.RopeTerm
+    assert x_class_types.get(wx.fact_state) == wx.RopeTerm
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
     assert x_class_types.get(wx.plan_rope) == wx.RopeTerm

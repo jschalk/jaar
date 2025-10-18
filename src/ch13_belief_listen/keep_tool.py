@@ -9,7 +9,7 @@ from src.ch01_py.file_toolbox import (
     set_dir,
 )
 from src.ch07_belief_logic.belief_main import BeliefUnit, get_beliefunit_from_dict
-from src.ch10_pack.pack_filehandler import open_gut_file
+from src.ch10_lesson.lesson_filehandler import open_gut_file
 from src.ch11_bud.bud_filehandler import open_job_file, save_belief_file
 from src.ch13_belief_listen._ref.ch13_path import (
     create_keep_duty_path,

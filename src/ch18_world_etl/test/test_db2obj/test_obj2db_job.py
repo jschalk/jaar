@@ -123,7 +123,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         wx.moment_label: x_moment_label,
         wx.belief_name: x_belief_name,
-        "active": x_active,
+        "plan_active": x_active,
         "all_voice_cred": x_all_voice_cred,
         "all_voice_debt": x_all_voice_debt,
         "descendant_pledge_count": x_descendant_pledge_count,
@@ -196,19 +196,19 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
     x_belief_name = "Sue"
     x_rope = 1
     x_reason_context = 2
-    x_reason_active_requisite = 3
+    x_active_requisite = 3
     x_task = 4
-    x_status = 5
-    x__reason_active_heir = 6
+    x_reason_active = 5
+    x__heir_active = 6
     values_dict = {
         wx.moment_label: x_moment_label,
         wx.belief_name: x_belief_name,
         "plan_rope": x_rope,
         wx.reason_context: x_reason_context,
-        wx.reason_active_requisite: x_reason_active_requisite,
+        wx.active_requisite: x_active_requisite,
         "task": x_task,
-        "status": x_status,
-        "_reason_active_heir": x__reason_active_heir,
+        "reason_active": x_reason_active,
+        "parent_heir_active": x__heir_active,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -264,7 +264,7 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     x_reason_lower = 5
     x_reason_divisor = 6
     x_task = 7
-    x_status = 8
+    x_case_active = 8
     values_dict = {
         wx.moment_label: x_moment_label,
         wx.belief_name: x_belief_name,
@@ -275,7 +275,7 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
         wx.reason_lower: x_reason_lower,
         wx.reason_divisor: x_reason_divisor,
         wx.task: x_task,
-        wx.status: x_status,
+        wx.case_active: x_case_active,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -396,8 +396,8 @@ def test_create_blrfact_metrics_insert_sqlstr_ReturnsObj():
         wx.moment_label: x_moment_label,
         wx.belief_name: x_belief_name,
         "plan_rope": x_rope,
-        "fact_context": x_fact_context,
-        "fact_state": x_fact_state,
+        wx.fact_context: x_fact_context,
+        wx.fact_state: x_fact_state,
         "fact_lower": x_fact_lower,
         "fact_upper": x_fact_upper,
     }

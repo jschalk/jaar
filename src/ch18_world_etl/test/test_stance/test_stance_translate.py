@@ -16,7 +16,7 @@ from src.ref.keywords import Ch18Keywords as wx
 
 def test_add_to_br00042_csv_ReturnsObj():
     # ESTABLISH database with translate data
-    # - [`br00042`](ideas/br00042.md): event_num, face_name, otx_title, inx_title, otx_knot, inx_knot, unknown_str
+    # - [`br00042`](ideas/br00042.md): spark_num, face_name, otx_title, inx_title, otx_knot, inx_knot, unknown_str
     bob_otx = "Bob"
     bob_inx = "Bobby"
     sue_otx = "Sue"
@@ -27,8 +27,8 @@ def test_add_to_br00042_csv_ReturnsObj():
     sue_inx_knot = "."
     sue_unknown_str = "Unknown3"
     bob_unknown_str = "UNKNOWN4"
-    event1 = 1
-    event7 = 7
+    spark1 = 1
+    spark7 = 7
 
     # Create database with manually entered translate data in the validated tables
     with sqlite3_connect(":memory:") as db_conn:
@@ -37,10 +37,10 @@ def test_add_to_br00042_csv_ReturnsObj():
         trltitl_dimen = wx.translate_title
         trltitl_s_vld_tablename = prime_tbl(trltitl_dimen, "s", "vld")
         insert_trltitl_sqlstr = f"""INSERT INTO {trltitl_s_vld_tablename}
-        ({wx.event_num}, {wx.face_name}, {wx.otx_title}, {wx.inx_title})
+        ({wx.spark_num}, {wx.face_name}, {wx.otx_title}, {wx.inx_title})
         VALUES
-          ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
-        , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
+          ({spark1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
+        , ({spark7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
         ;
         """
         cursor.execute(insert_trltitl_sqlstr)
@@ -59,7 +59,7 @@ def test_add_to_br00042_csv_ReturnsObj():
         x_ideas = create_init_stance_idea_csv_strs()
         header_only_csv = x_ideas.get("br00042")
         print(f"{header_only_csv=}")
-        expected_header_only_csv = f"{wx.event_num},{wx.face_name},{wx.otx_title},{wx.inx_title},{wx.otx_knot},{wx.inx_knot},{wx.unknown_str}\n"
+        expected_header_only_csv = f"{wx.spark_num},{wx.face_name},{wx.otx_title},{wx.inx_title},{wx.otx_knot},{wx.inx_knot},{wx.unknown_str}\n"
         assert header_only_csv == expected_header_only_csv
 
         # WHEN
@@ -76,7 +76,7 @@ def test_add_to_br00042_csv_ReturnsObj():
 
 def test_add_to_br00043_csv_ReturnsObj():
     # ESTABLISH database with translate data
-    # - [`br00043`](ideas/br00043.md): event_num, face_name, otx_name, inx_name, otx_knot, inx_knot, unknown_str
+    # - [`br00043`](ideas/br00043.md): spark_num, face_name, otx_name, inx_name, otx_knot, inx_knot, unknown_str
     bob_otx = "Bob"
     bob_inx = "Bobby"
     sue_otx = "Sue"
@@ -87,8 +87,8 @@ def test_add_to_br00043_csv_ReturnsObj():
     sue_inx_knot = "."
     sue_unknown_str = "Unknown3"
     bob_unknown_str = "UNKNOWN4"
-    event1 = 1
-    event7 = 7
+    spark1 = 1
+    spark7 = 7
 
     # Create database with manually entered translate data in the validated tables
     with sqlite3_connect(":memory:") as db_conn:
@@ -98,10 +98,10 @@ def test_add_to_br00043_csv_ReturnsObj():
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         insert_trlname_sqlstr = f"""
 INSERT INTO {trlname_s_vld_tablename}
-({wx.event_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
+({wx.spark_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
 VALUES
-  ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
-, ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
+  ({spark1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
+, ({spark7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
 ;
 """
         cursor.execute(insert_trlname_sqlstr)
@@ -121,7 +121,7 @@ VALUES
         x_ideas = create_init_stance_idea_csv_strs()
         header_only_csv = x_ideas.get("br00043")
         print(f"{header_only_csv=}")
-        expected_header_only_csv = f"{wx.event_num},{wx.face_name},{wx.otx_name},{wx.inx_name},{wx.otx_knot},{wx.inx_knot},{wx.unknown_str}\n"
+        expected_header_only_csv = f"{wx.spark_num},{wx.face_name},{wx.otx_name},{wx.inx_name},{wx.otx_knot},{wx.inx_knot},{wx.unknown_str}\n"
         assert header_only_csv == expected_header_only_csv
 
         # WHEN
@@ -138,7 +138,7 @@ VALUES
 
 def test_add_to_br00044_csv_ReturnsObj():
     # ESTABLISH database with translate data
-    # - [`br00044`](ideas/br00044.md): event_num, face_name, otx_label, inx_label, otx_knot, inx_knot, unknown_str
+    # - [`br00044`](ideas/br00044.md): spark_num, face_name, otx_label, inx_label, otx_knot, inx_knot, unknown_str
     bob_str = "Bob"
     sue_str = "Sue"
     bob_otx_knot = ";"
@@ -151,8 +151,8 @@ def test_add_to_br00044_csv_ReturnsObj():
     bob_clean_inx = "very limpia"
     sue_unknown_str = "Unknown3"
     bob_unknown_str = "UNKNOWN4"
-    event1 = 1
-    event7 = 7
+    spark1 = 1
+    spark7 = 7
 
     # Create database with manually entered translate data in the validated tables
     with sqlite3_connect(":memory:") as db_conn:
@@ -162,10 +162,10 @@ def test_add_to_br00044_csv_ReturnsObj():
         trllabe_s_vld_tablename = prime_tbl(trllabe_dimen, "s", "vld")
         insert_trllabe_sqlstr = f"""
 INSERT INTO {trllabe_s_vld_tablename}
-({wx.event_num}, {wx.face_name}, {wx.otx_label}, {wx.inx_label})
+({wx.spark_num}, {wx.face_name}, {wx.otx_label}, {wx.inx_label})
 VALUES
-  ({event1}, '{sue_str}', '{sue_clean_otx}', '{sue_clean_inx}')
-, ({event7}, '{bob_str}', '{bob_clean_otx}', '{bob_clean_inx}')
+  ({spark1}, '{sue_str}', '{sue_clean_otx}', '{sue_clean_inx}')
+, ({spark7}, '{bob_str}', '{bob_clean_otx}', '{bob_clean_inx}')
 ;
 """
         cursor.execute(insert_trllabe_sqlstr)
@@ -185,7 +185,7 @@ VALUES
         x_ideas = create_init_stance_idea_csv_strs()
         header_only_csv = x_ideas.get("br00044")
         print(f"{header_only_csv=}")
-        expected_header_only_csv = f"{wx.event_num},{wx.face_name},{wx.otx_label},{wx.inx_label},{wx.otx_knot},{wx.inx_knot},{wx.unknown_str}\n"
+        expected_header_only_csv = f"{wx.spark_num},{wx.face_name},{wx.otx_label},{wx.inx_label},{wx.otx_knot},{wx.inx_knot},{wx.unknown_str}\n"
         assert header_only_csv == expected_header_only_csv
 
         # WHEN
@@ -202,7 +202,7 @@ VALUES
 
 def test_add_to_br00045_csv_ReturnsObj():
     # ESTABLISH database with translate data
-    # - [`br00045`](ideas/br00045.md): event_num, face_name, otx_rope, inx_rope, otx_knot, inx_knot, unknown_str
+    # - [`br00045`](ideas/br00045.md): spark_num, face_name, otx_rope, inx_rope, otx_knot, inx_knot, unknown_str
     bob_str = "Bob"
     sue_str = "Sue"
     bob_otx_knot = ";"
@@ -215,8 +215,8 @@ def test_add_to_br00045_csv_ReturnsObj():
     bob_clean_inx = "/casa/very limpia/"
     sue_unknown_str = "Unknown3"
     bob_unknown_str = "UNKNOWN4"
-    event1 = 1
-    event7 = 7
+    spark1 = 1
+    spark7 = 7
 
     # Create database with manually entered translate data in the validated tables
     with sqlite3_connect(":memory:") as db_conn:
@@ -226,10 +226,10 @@ def test_add_to_br00045_csv_ReturnsObj():
         trlrope_s_vld_tablename = prime_tbl(trlrope_dimen, "s", "vld")
         insert_trlrope_sqlstr = f"""
 INSERT INTO {trlrope_s_vld_tablename}
-({wx.event_num}, {wx.face_name}, {wx.otx_rope}, {wx.inx_rope})
+({wx.spark_num}, {wx.face_name}, {wx.otx_rope}, {wx.inx_rope})
 VALUES
-  ({event1}, '{sue_str}', '{sue_clean_otx}', '{sue_clean_inx}')
-, ({event7}, '{bob_str}', '{bob_clean_otx}', '{bob_clean_inx}')
+  ({spark1}, '{sue_str}', '{sue_clean_otx}', '{sue_clean_inx}')
+, ({spark7}, '{bob_str}', '{bob_clean_otx}', '{bob_clean_inx}')
 ;
 """
         cursor.execute(insert_trlrope_sqlstr)
@@ -249,7 +249,7 @@ VALUES
         x_ideas = create_init_stance_idea_csv_strs()
         header_only_csv = x_ideas.get("br00045")
         print(f"{header_only_csv=}")
-        expected_header_only_csv = f"{wx.event_num},{wx.face_name},{wx.otx_rope},{wx.inx_rope},{wx.otx_knot},{wx.inx_knot},{wx.unknown_str}\n"
+        expected_header_only_csv = f"{wx.spark_num},{wx.face_name},{wx.otx_rope},{wx.inx_rope},{wx.otx_knot},{wx.inx_knot},{wx.unknown_str}\n"
         assert header_only_csv == expected_header_only_csv
 
         # WHEN
@@ -266,7 +266,7 @@ VALUES
 
 def test_add_translate_rows_to_stance_csv_strs_ReturnsObj():
     # ESTABLISH database with translate data
-    # - [`br00042`](ideas/br00042.md): event_num, face_name, otx_title, inx_title, otx_knot, inx_knot, unknown_str
+    # - [`br00042`](ideas/br00042.md): spark_num, face_name, otx_title, inx_title, otx_knot, inx_knot, unknown_str
     bob_otx = "Bob"
     bob_inx = "Bobby"
     sue_otx = "Sue"
@@ -277,8 +277,8 @@ def test_add_translate_rows_to_stance_csv_strs_ReturnsObj():
     sue_inx_knot = "."
     sue_unknown_str = "Unknown3"
     bob_unknown_str = "UNKNOWN4"
-    event1 = 1
-    event7 = 7
+    spark1 = 1
+    spark7 = 7
 
     # Create database with manually entered translate data in the validated tables
     with sqlite3_connect(":memory:") as db_conn:
@@ -289,10 +289,10 @@ def test_add_translate_rows_to_stance_csv_strs_ReturnsObj():
         trltitl_dimen = wx.translate_title
         trltitl_s_vld_tablename = prime_tbl(trltitl_dimen, "s", "vld")
         insert_trltitl_sqlstr = f"""INSERT INTO {trltitl_s_vld_tablename}
-        ({wx.event_num}, {wx.face_name}, {wx.otx_title}, {wx.inx_title})
+        ({wx.spark_num}, {wx.face_name}, {wx.otx_title}, {wx.inx_title})
         VALUES
-          ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
-        , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
+          ({spark1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
+        , ({spark7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
         ;
         """
         cursor.execute(insert_trltitl_sqlstr)
@@ -302,10 +302,10 @@ def test_add_translate_rows_to_stance_csv_strs_ReturnsObj():
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         insert_trlname_sqlstr = f"""
 INSERT INTO {trlname_s_vld_tablename}
-({wx.event_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
+({wx.spark_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
 VALUES
-  ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
-, ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
+  ({spark1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
+, ({spark7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
 ;
 """
         cursor.execute(insert_trlname_sqlstr)
@@ -321,10 +321,10 @@ VALUES
         trllabe_s_vld_tablename = prime_tbl(trllabe_dimen, "s", "vld")
         insert_trllabe_sqlstr = f"""
 INSERT INTO {trllabe_s_vld_tablename}
-({wx.event_num}, {wx.face_name}, {wx.otx_label}, {wx.inx_label})
+({wx.spark_num}, {wx.face_name}, {wx.otx_label}, {wx.inx_label})
 VALUES
-  ({event1}, '{sue_str}', '{sue_clean_otx}', '{sue_clean_inx}')
-, ({event7}, '{bob_str}', '{bob_clean_otx}', '{bob_clean_inx}')
+  ({spark1}, '{sue_str}', '{sue_clean_otx}', '{sue_clean_inx}')
+, ({spark7}, '{bob_str}', '{bob_clean_otx}', '{bob_clean_inx}')
 ;
 """
         cursor.execute(insert_trllabe_sqlstr)
@@ -338,10 +338,10 @@ VALUES
         trlrope_s_vld_tablename = prime_tbl(trlrope_dimen, "s", "vld")
         insert_trlrope_sqlstr = f"""
 INSERT INTO {trlrope_s_vld_tablename}
-({wx.event_num}, {wx.face_name}, {wx.otx_rope}, {wx.inx_rope})
+({wx.spark_num}, {wx.face_name}, {wx.otx_rope}, {wx.inx_rope})
 VALUES
-  ({event1}, '{sue_str}', '{sue_clean_otx}', '{sue_clean_inx}')
-, ({event7}, '{bob_str}', '{bob_clean_otx}', '{bob_clean_inx}')
+  ({spark1}, '{sue_str}', '{sue_clean_otx}', '{sue_clean_inx}')
+, ({spark7}, '{bob_str}', '{bob_clean_otx}', '{bob_clean_inx}')
 ;
 """
         cursor.execute(insert_trlrope_sqlstr)

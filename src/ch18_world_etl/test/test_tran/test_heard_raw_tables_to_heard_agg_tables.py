@@ -37,7 +37,7 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_CheckMomentDimen():
             agg_columns = get_table_columns(cursor, agg_tablename)
             raw_columns = {raw_col for raw_col in raw_columns if raw_col[-3:] != "otx"}
             raw_columns.remove(f"{wx.face_name}_inx")
-            raw_columns.remove(wx.event_num)
+            raw_columns.remove(wx.spark_num)
             raw_columns.remove(wx.error_message)
             raw_columns = get_default_sorted_list(raw_columns)
 
@@ -93,8 +93,8 @@ def test_get_insert_into_heard_raw_sqlstrs_ReturnsObj_BeliefDimensNeeded():
             v_raw_put_cols = get_default_sorted_list(v_raw_put_cols)
             v_raw_del_cols = get_default_sorted_list(v_raw_del_cols)
             v_raw_put_columns_str = ", ".join(v_raw_put_cols)
-            v_raw_put_cols.remove("translate_event_num")
-            v_raw_del_cols.remove("translate_event_num")
+            v_raw_put_cols.remove("translate_spark_num")
+            v_raw_del_cols.remove("translate_spark_num")
             v_raw_put_columns_str = ", ".join(v_raw_put_cols)
             v_raw_del_columns_str = ", ".join(v_raw_del_cols)
             v_agg_put_columns_str = ", ".join(v_agg_put_cols)
@@ -131,10 +131,10 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
     sue_str = "Sue"
     yao_str = "Yao"
     yao_inx = "Yaoito"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
     x44_credit = 44
     x55_credit = 55
     x22_debt = 22
@@ -146,7 +146,7 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
         blrpern_h_raw_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrpern_h_raw_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_h_raw_put_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}_inx
 , {wx.moment_label}_inx
 , {wx.belief_name}_inx
@@ -155,11 +155,11 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
 , {wx.voice_debt_lumen}
 )
 VALUES
-  ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debt})
-, ({event2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
-, ({event5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
-, ({event7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
-, ({event7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
+  ({spark1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debt})
+, ({spark2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
+, ({spark5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
+, ({spark7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
+, ({spark7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
 ;
 """
         cursor.execute(insert_into_clause)
@@ -174,7 +174,7 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 4
-        select_sqlstr = f"""SELECT {wx.event_num}
+        select_sqlstr = f"""SELECT {wx.spark_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -187,10 +187,10 @@ FROM {blrpern_h_agg_put_tablename}
         rows = cursor.fetchall()
         print(rows)
         assert rows == [
-            (event1, sue_str, a23_str, yao_str, yao_inx, 44.0, 22.0),
-            (event2, yao_str, a23_str, bob_str, bob_str, 55.0, 22.0),
-            (event5, sue_str, a23_str, bob_str, bob_str, 55.0, 22.0),
-            (event7, bob_str, a23_str, bob_str, bob_str, 55.0, 66.0),
+            (spark1, sue_str, a23_str, yao_str, yao_inx, 44.0, 22.0),
+            (spark2, yao_str, a23_str, bob_str, bob_str, 55.0, 22.0),
+            (spark5, sue_str, a23_str, bob_str, bob_str, 55.0, 22.0),
+            (spark7, bob_str, a23_str, bob_str, bob_str, 55.0, 66.0),
         ]
 
 
@@ -201,10 +201,10 @@ def test_etl_heard_raw_tables_to_heard_agg_tables_PopulatesTable_Scenario0():
     sue_str = "Sue"
     yao_str = "Yao"
     yao_inx = "Yaoito"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
     x44_credit = 44
     x55_credit = 55
     x22_debt = 22
@@ -216,7 +216,7 @@ def test_etl_heard_raw_tables_to_heard_agg_tables_PopulatesTable_Scenario0():
         blrpern_h_raw_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrpern_h_raw_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_h_raw_put_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}_inx
 , {wx.moment_label}_inx
 , {wx.belief_name}_inx
@@ -225,11 +225,11 @@ def test_etl_heard_raw_tables_to_heard_agg_tables_PopulatesTable_Scenario0():
 , {wx.voice_debt_lumen}
 )
 VALUES
-  ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debt})
-, ({event2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
-, ({event5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
-, ({event7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
-, ({event7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
+  ({spark1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debt})
+, ({spark2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
+, ({spark5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
+, ({spark7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
+, ({spark7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
 ;
 """
         cursor.execute(insert_into_clause)
@@ -242,7 +242,7 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 4
-        select_sqlstr = f"""SELECT {wx.event_num}
+        select_sqlstr = f"""SELECT {wx.spark_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -255,8 +255,8 @@ FROM {blrpern_h_agg_put_tablename}
         rows = cursor.fetchall()
         print(rows)
         assert rows == [
-            (event1, sue_str, a23_str, yao_str, yao_inx, 44.0, 22.0),
-            (event2, yao_str, a23_str, bob_str, bob_str, 55.0, 22.0),
-            (event5, sue_str, a23_str, bob_str, bob_str, 55.0, 22.0),
-            (event7, bob_str, a23_str, bob_str, bob_str, 55.0, 66.0),
+            (spark1, sue_str, a23_str, yao_str, yao_inx, 44.0, 22.0),
+            (spark2, yao_str, a23_str, bob_str, bob_str, 55.0, 22.0),
+            (spark5, sue_str, a23_str, bob_str, bob_str, 55.0, 22.0),
+            (spark7, bob_str, a23_str, bob_str, bob_str, 55.0, 66.0),
         ]

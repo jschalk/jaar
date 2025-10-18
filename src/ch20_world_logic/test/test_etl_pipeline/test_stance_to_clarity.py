@@ -5,7 +5,7 @@ from src.ch01_py.db_toolbox import get_row_count
 from src.ch01_py.file_toolbox import create_path
 from src.ch17_idea.idea_db_tool import create_idea_sorted_table, upsert_sheet
 from src.ch18_world_etl.tran_sqlstrs import create_prime_tablename
-from src.ch18_world_etl.transformers import get_max_brick_agg_event_num
+from src.ch18_world_etl.transformers import get_max_brick_agg_spark_num
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as worlds_dir,
@@ -68,7 +68,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         br00113_raw = f"{br00113_str}_brick_raw"
         br00113_agg = f"{br00113_str}_brick_agg"
         br00113_valid = f"{br00113_str}_brick_valid"
-        events_brick_valid_tablename = wx.events_brick_valid
+        sparks_brick_valid_tablename = wx.sparks_brick_valid
         trlname_sound_raw = create_prime_tablename("trlname", "s", "raw")
         trlname_sound_agg = create_prime_tablename("trlname", "s", "agg")
         trlname_sound_vld = create_prime_tablename("trlname", "s", "vld")
@@ -91,8 +91,8 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         cursor = db_conn.cursor()
         assert get_row_count(cursor, br00113_raw) == 1
         assert get_row_count(cursor, br00113_agg) == 1
-        assert get_row_count(cursor, wx.events_brick_agg) == 2
-        assert get_row_count(cursor, events_brick_valid_tablename) == 2
+        assert get_row_count(cursor, wx.sparks_brick_agg) == 2
+        assert get_row_count(cursor, sparks_brick_valid_tablename) == 2
         assert get_row_count(cursor, br00113_valid) == 2
         assert get_row_count(cursor, trlname_sound_raw) == 2
         assert get_row_count(cursor, momentunit_sound_raw) == 4
@@ -116,13 +116,13 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     db_conn.close()
 
 
-def create_brick_agg_record(world: WorldUnit, event_num: int):
+def create_brick_agg_record(world: WorldUnit, spark_num: int):
     sue_str = "Sue"
     minute_360 = 360
     hour6am = "6am"
     agg_br00003_tablename = f"br00003_{wx.brick_agg}"
     agg_br00003_columns = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.moment_label,
         wx.cumulative_minute,
@@ -132,13 +132,13 @@ def create_brick_agg_record(world: WorldUnit, event_num: int):
         cursor = db_conn.cursor()
         create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.cumulative_minute}
 , {wx.hour_label}
 )"""
-        values_clause = f"""VALUES ('{event_num}', '{sue_str}', '{world.world_name}', '{minute_360}', '{hour6am}');"""
+        values_clause = f"""VALUES ('{spark_num}', '{sue_str}', '{world.world_name}', '{minute_360}', '{hour6am}');"""
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
     db_conn.close()
@@ -150,8 +150,8 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario1_DatabaseFileExists(
     # ESTABLISH:
     fay_str = "Fay34"
     fay_world = worldunit_shop(fay_str, worlds_dir())
-    event5 = 5
-    create_brick_agg_record(fay_world, event5)
+    spark5 = 5
+    create_brick_agg_record(fay_world, spark5)
     # delete_dir(fay_world.worlds_dir)
     sue_str = "Sue"
     sue_inx = "Suzy"
@@ -175,7 +175,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario1_DatabaseFileExists(
     assert os_path_exists(fay_db_path)
     with sqlite3_connect(fay_db_path) as db_conn0:
         cursor0 = db_conn0.cursor()
-        assert get_max_brick_agg_event_num(cursor0) == event5
+        assert get_max_brick_agg_spark_num(cursor0) == spark5
     db_conn0.close()
     assert os_path_exists(input_file_path)
 
@@ -186,9 +186,9 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario1_DatabaseFileExists(
     assert os_path_exists(fay_db_path)
     with sqlite3_connect(fay_db_path) as db_conn1:
         cursor1 = db_conn1.cursor()
-        assert get_max_brick_agg_event_num(cursor1) != event5
-        assert get_max_brick_agg_event_num(cursor1) == event5 + 1
-        select_sqlstr = f"SELECT * FROM {wx.events_brick_agg}"
+        assert get_max_brick_agg_spark_num(cursor1) != spark5
+        assert get_max_brick_agg_spark_num(cursor1) == spark5 + 1
+        select_sqlstr = f"SELECT * FROM {wx.sparks_brick_agg}"
         cursor1.execute(select_sqlstr)
         rows = cursor1.fetchall()
         assert len(rows) == 2

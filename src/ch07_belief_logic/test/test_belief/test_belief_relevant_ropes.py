@@ -70,12 +70,12 @@ def test_BeliefUnit_get_relevant_ropes_ReturnsSimpleReasonUnitreason_context():
     unim_plan = planunit_shop(unim_str)
     sue_belief.set_plan(unim_plan, parent_rope=sue_belief.moment_label)
 
-    status_str = "cleaniness status"
-    status_rope = sue_belief.make_rope(casa_rope, status_str)
-    status_plan = planunit_shop(status_str)
-    sue_belief.set_plan(status_plan, parent_rope=casa_rope)
-    floor_reason = reasonunit_shop(reason_context=status_rope)
-    floor_reason.set_case(case=status_rope)
+    situation_str = "cleaniness situation"
+    situation_rope = sue_belief.make_rope(casa_rope, situation_str)
+    situation_plan = planunit_shop(situation_str)
+    sue_belief.set_plan(situation_plan, parent_rope=casa_rope)
+    floor_reason = reasonunit_shop(reason_context=situation_rope)
+    floor_reason.set_case(case=situation_rope)
     sue_belief.edit_plan_attr(floor_rope, reason=floor_reason)
 
     # WHEN
@@ -86,7 +86,7 @@ def test_BeliefUnit_get_relevant_ropes_ReturnsSimpleReasonUnitreason_context():
     print(f"{relevant_ropes=}")
     assert len(relevant_ropes) == 4
     root_rope = sue_belief.planroot.get_plan_rope()
-    assert relevant_ropes == {root_rope, casa_rope, status_rope, floor_rope}
+    assert relevant_ropes == {root_rope, casa_rope, situation_rope, floor_rope}
     assert unim_rope not in relevant_ropes
 
 
@@ -102,11 +102,11 @@ def test_BeliefUnit_get_relevant_ropes_ReturnsReasonUnitreason_contextAndDescend
     unim_str = "unimportant"
     unim_rope = x_belief.make_l1_rope(unim_str)
 
-    status_str = "cleaniness status"
-    status_rope = x_belief.make_rope(casa_rope, status_str)
+    situation_str = "cleaniness situation"
+    situation_rope = x_belief.make_rope(casa_rope, situation_str)
 
     clean_str = "clean"
-    clean_rope = x_belief.make_rope(status_rope, clean_str)
+    clean_rope = x_belief.make_rope(situation_rope, clean_str)
 
     very_much_str = "very_much"
     very_much_rope = x_belief.make_rope(clean_rope, very_much_str)
@@ -115,7 +115,7 @@ def test_BeliefUnit_get_relevant_ropes_ReturnsReasonUnitreason_contextAndDescend
     moderately_rope = x_belief.make_rope(clean_rope, moderately_str)
 
     dirty_str = "dirty"
-    dirty_rope = x_belief.make_rope(status_rope, dirty_str)
+    dirty_rope = x_belief.make_rope(situation_rope, dirty_str)
 
     # WHEN
     floor_dict = {floor_rope}
@@ -131,7 +131,7 @@ def test_BeliefUnit_get_relevant_ropes_ReturnsReasonUnitreason_contextAndDescend
     assert relevant_ropes == {
         root_rope,
         casa_rope,
-        status_rope,
+        situation_rope,
         floor_rope,
         clean_rope,
         dirty_rope,

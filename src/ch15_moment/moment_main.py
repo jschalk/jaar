@@ -7,11 +7,15 @@ from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch08_epoch.epoch_main import (
     EpochPoint,
     EpochUnit,
-    add_newepoch_planunit,
+    add_epoch_planunit,
     epochunit_shop,
 )
-from src.ch10_pack._ref.ch10_path import create_moment_json_path
-from src.ch10_pack.pack_filehandler import gut_file_exists, open_gut_file, save_gut_file
+from src.ch10_lesson._ref.ch10_path import create_moment_json_path
+from src.ch10_lesson.lesson_filehandler import (
+    gut_file_exists,
+    open_gut_file,
+    save_gut_file,
+)
 from src.ch11_bud._ref.ch11_path import create_cell_dir_path
 from src.ch11_bud.bud_filehandler import (
     cellunit_save_to_dir,
@@ -37,12 +41,12 @@ from src.ch13_belief_listen.listen_main import (
 )
 from src.ch15_moment._ref.ch15_semantic_types import (
     BeliefName,
-    EventInt,
     FundGrain,
     FundNum,
     MomentLabel,
     MoneyGrain,
     RespectGrain,
+    SparkInt,
     VoiceName,
     default_knot_if_None,
 )
@@ -67,13 +71,13 @@ class set_offi_time_max_Exception(Exception):
 @dataclass
 class MomentUnit:
     """Data pipelines:
-    pipeline1: packs->gut
+    pipeline1: lessons->gut
     pipeline2: gut->dutys
     pipeline3: duty->vision
     pipeline4: vision->job
     pipeline5: gut->job (direct)
     pipeline6: gut->vision->job (through visions)
-    pipeline7: packs->job (could be 5 of 6)
+    pipeline7: lessons->job (could be 5 of 6)
     """
 
     # TODO extraction pipelines into standalone functions
@@ -92,7 +96,7 @@ class MomentUnit:
     offi_time_max: EpochPoint = None
     _moment_dir: str = None
     _beliefs_dir: str = None
-    _packs_dir: str = None
+    _lessons_dir: str = None
     all_tranbook: TranBook = None
 
     # directory setup
@@ -100,10 +104,10 @@ class MomentUnit:
         moments_dir = create_path(self.moment_mstr_dir, "moments")
         self._moment_dir = create_path(moments_dir, self.moment_label)
         self._beliefs_dir = create_path(self._moment_dir, "beliefs")
-        self._packs_dir = create_path(self._moment_dir, "packs")
+        self._lessons_dir = create_path(self._moment_dir, "lessons")
         set_dir(x_path=self._moment_dir)
         set_dir(x_path=self._beliefs_dir)
-        set_dir(x_path=self._packs_dir)
+        set_dir(x_path=self._lessons_dir)
 
     def _get_belief_dir(self, belief_name) -> str:
         return create_path(self._beliefs_dir, belief_name)
@@ -320,7 +324,7 @@ class MomentUnit:
 
     def create_buds_root_cells(
         self,
-        ote1_dict: dict[BeliefName, dict[EpochPoint, EventInt]],
+        ote1_dict: dict[BeliefName, dict[EpochPoint, SparkInt]],
     ) -> None:
         for belief_name, beliefbudhistory in self.beliefbudhistorys.items():
             for bud_time in beliefbudhistory.buds.keys():
@@ -329,15 +333,15 @@ class MomentUnit:
     def _create_bud_root_cell(
         self,
         belief_name: BeliefName,
-        ote1_dict: dict[BeliefName, dict[EpochPoint, EventInt]],
+        ote1_dict: dict[BeliefName, dict[EpochPoint, SparkInt]],
         bud_time: EpochPoint,
     ) -> None:
-        past_event_num = _get_ote1_max_past_event_num(belief_name, ote1_dict, bud_time)
+        past_spark_num = _get_ote1_max_past_spark_num(belief_name, ote1_dict, bud_time)
         budunit = self.get_budunit(belief_name, bud_time)
         cellunit = cellunit_shop(
             bud_belief_name=belief_name,
             ancestors=[],
-            event_num=past_event_num,
+            spark_num=past_spark_num,
             celldepth=budunit.celldepth,
             quota=budunit.quota,
             money_grain=self.money_grain,
@@ -353,7 +357,7 @@ class MomentUnit:
     def add_epoch_to_gut(self, belief_name: BeliefName) -> None:
         """Adds the epoch to the gut file for the given belief."""
         x_gut = open_gut_file(self.moment_mstr_dir, self.moment_label, belief_name)
-        add_newepoch_planunit(x_gut, self.get_epoch_config())
+        add_epoch_planunit(x_gut, self.get_epoch_config())
         save_gut_file(self.moment_mstr_dir, x_gut)
 
     def add_epoch_to_guts(self) -> None:
@@ -363,15 +367,15 @@ class MomentUnit:
             self.add_epoch_to_gut(belief_name)
 
 
-def _get_ote1_max_past_event_num(
+def _get_ote1_max_past_spark_num(
     belief_name: str, ote1_dict: dict[str, dict[str, int]], bud_time: int
-) -> EventInt:
-    """Using the grab most recent ote1 event int before a given bud_time"""
+) -> SparkInt:
+    """Using the grab most recent ote1 spark int before a given bud_time"""
     ote1_belief_dict = ote1_dict.get(belief_name)
     if not ote1_belief_dict:
         return None
-    event_timepoints = set(ote1_belief_dict.keys())
-    if past_timepoints := {tp for tp in event_timepoints if int(tp) <= bud_time}:
+    spark_timepoints = set(ote1_belief_dict.keys())
+    if past_timepoints := {tp for tp in spark_timepoints if int(tp) <= bud_time}:
         max_past_timepoint = max(past_timepoints)
         return ote1_belief_dict.get(max_past_timepoint)
 

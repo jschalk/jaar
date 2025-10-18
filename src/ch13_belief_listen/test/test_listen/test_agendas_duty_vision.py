@@ -1,6 +1,6 @@
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch10_pack.pack_filehandler import packfilehandler_shop
+from src.ch10_lesson.lesson_filehandler import lessonfilehandler_shop
 from src.ch13_belief_listen.keep_tool import save_duty_belief, save_vision_belief
 from src.ch13_belief_listen.listen_main import (
     create_listen_basis,
@@ -19,7 +19,7 @@ from src.ch13_belief_listen.test._util.ch13_examples import (
     a23_run_rope,
     clean_str,
     cook_str,
-    get_dakota_packfilehandler,
+    get_dakota_lessonfilehandler,
     get_dakota_rope,
     get_example_bob_speaker,
     get_example_yao_speaker,
@@ -46,13 +46,13 @@ def test_listen_to_agenda_duty_vision_agenda_AddstasksTovision_BeliefWhenNo_part
     zia_vision.set_plan(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
     zia_vision.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
     zia_vision.add_voiceunit(yao_str, voice_debt_lumen=12)
-    yao_dakota_packfilehandler = packfilehandler_shop(env_dir(), a23_str, yao_str)
+    yao_dakota_lessonfilehandler = lessonfilehandler_shop(env_dir(), a23_str, yao_str)
     save_vision_belief(
-        yao_dakota_packfilehandler.moment_mstr_dir,
-        yao_dakota_packfilehandler.belief_name,
-        yao_dakota_packfilehandler.moment_label,
+        yao_dakota_lessonfilehandler.moment_mstr_dir,
+        yao_dakota_lessonfilehandler.belief_name,
+        yao_dakota_lessonfilehandler.moment_label,
         get_dakota_rope(),
-        yao_dakota_packfilehandler.knot,
+        yao_dakota_lessonfilehandler.knot,
         zia_vision,
     )
     new_yao_vision = create_listen_basis(yao_duty)
@@ -61,7 +61,7 @@ def test_listen_to_agenda_duty_vision_agenda_AddstasksTovision_BeliefWhenNo_part
     # WHEN
     print(f"{len(new_yao_vision.get_plan_dict())=}")
     listen_to_agendas_duty_vision(
-        new_yao_vision, yao_dakota_packfilehandler, get_dakota_rope()
+        new_yao_vision, yao_dakota_lessonfilehandler, get_dakota_rope()
     )
 
     # THEN
@@ -90,13 +90,13 @@ def test_listen_to_agenda_duty_vision_agenda_AddstasksTovision_Belief(
     cook_planunit = zia_vision.get_plan_obj(a23_cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
-    yao_dakota_packfilehandler = packfilehandler_shop(env_dir(), a23_str, yao_str)
+    yao_dakota_lessonfilehandler = lessonfilehandler_shop(env_dir(), a23_str, yao_str)
     save_vision_belief(
-        yao_dakota_packfilehandler.moment_mstr_dir,
-        yao_dakota_packfilehandler.belief_name,
-        yao_dakota_packfilehandler.moment_label,
+        yao_dakota_lessonfilehandler.moment_mstr_dir,
+        yao_dakota_lessonfilehandler.belief_name,
+        yao_dakota_lessonfilehandler.moment_label,
         get_dakota_rope(),
-        yao_dakota_packfilehandler.knot,
+        yao_dakota_lessonfilehandler.knot,
         zia_vision,
     )
 
@@ -108,7 +108,7 @@ def test_listen_to_agenda_duty_vision_agenda_AddstasksTovision_Belief(
     # WHEN
     print(f"{len(new_yao_vision.get_plan_dict())=}")
     listen_to_agendas_duty_vision(
-        new_yao_vision, yao_dakota_packfilehandler, get_dakota_rope()
+        new_yao_vision, yao_dakota_lessonfilehandler, get_dakota_rope()
     )
 
     # THEN
@@ -134,29 +134,29 @@ def test_listen_to_agenda_duty_vision_agenda_AddstasksTovisionBeliefWithDetailsD
     assert len(bob_cook_planunit.reasonunits) == 0
     zia_str = zia_vision.belief_name
     bob_str = bob_vision.belief_name
-    sue_dakota_packfilehandler = get_dakota_packfilehandler()
+    sue_dakota_lessonfilehandler = get_dakota_lessonfilehandler()
     save_vision_belief(
-        sue_dakota_packfilehandler.moment_mstr_dir,
-        sue_dakota_packfilehandler.belief_name,
-        sue_dakota_packfilehandler.moment_label,
+        sue_dakota_lessonfilehandler.moment_mstr_dir,
+        sue_dakota_lessonfilehandler.belief_name,
+        sue_dakota_lessonfilehandler.moment_label,
         get_dakota_rope(),
-        sue_dakota_packfilehandler.knot,
+        sue_dakota_lessonfilehandler.knot,
         zia_vision,
     )
     save_vision_belief(
-        sue_dakota_packfilehandler.moment_mstr_dir,
-        sue_dakota_packfilehandler.belief_name,
-        sue_dakota_packfilehandler.moment_label,
+        sue_dakota_lessonfilehandler.moment_mstr_dir,
+        sue_dakota_lessonfilehandler.belief_name,
+        sue_dakota_lessonfilehandler.moment_label,
         get_dakota_rope(),
-        sue_dakota_packfilehandler.knot,
+        sue_dakota_lessonfilehandler.knot,
         bob_vision,
     )
 
     yao_duty = get_example_yao_speaker()
     save_duty_belief(
-        moment_mstr_dir=sue_dakota_packfilehandler.moment_mstr_dir,
-        belief_name=sue_dakota_packfilehandler.belief_name,
-        moment_label=sue_dakota_packfilehandler.moment_label,
+        moment_mstr_dir=sue_dakota_lessonfilehandler.moment_mstr_dir,
+        belief_name=sue_dakota_lessonfilehandler.belief_name,
+        moment_label=sue_dakota_lessonfilehandler.moment_label,
         keep_rope=get_dakota_rope(),
         knot=None,
         duty_belief=yao_duty,
@@ -166,7 +166,7 @@ def test_listen_to_agenda_duty_vision_agenda_AddstasksTovisionBeliefWithDetailsD
 
     # WHEN
     listen_to_agendas_duty_vision(
-        new_yao_job1, sue_dakota_packfilehandler, get_dakota_rope()
+        new_yao_job1, sue_dakota_lessonfilehandler, get_dakota_rope()
     )
 
     # THEN
@@ -187,7 +187,7 @@ def test_listen_to_agenda_duty_vision_agenda_AddstasksTovisionBeliefWithDetailsD
 
     # WHEN
     listen_to_agendas_duty_vision(
-        new_yao_job2, sue_dakota_packfilehandler, get_dakota_rope()
+        new_yao_job2, sue_dakota_lessonfilehandler, get_dakota_rope()
     )
 
     # THEN
@@ -217,11 +217,11 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBelief(
     yao_duty.add_voiceunit(sue_str, sue_voice_cred_lumen, sue_voice_debt_lumen)
     yao_pool = 92
     yao_duty.set_voice_respect(yao_pool)
-    yao_dakota_packfilehandler = packfilehandler_shop(env_dir(), a23_str, yao_str)
+    yao_dakota_lessonfilehandler = lessonfilehandler_shop(env_dir(), a23_str, yao_str)
     save_duty_belief(
-        moment_mstr_dir=yao_dakota_packfilehandler.moment_mstr_dir,
-        belief_name=yao_dakota_packfilehandler.belief_name,
-        moment_label=yao_dakota_packfilehandler.moment_label,
+        moment_mstr_dir=yao_dakota_lessonfilehandler.moment_mstr_dir,
+        belief_name=yao_dakota_lessonfilehandler.belief_name,
+        moment_label=yao_dakota_lessonfilehandler.moment_label,
         keep_rope=get_dakota_rope(),
         knot=None,
         duty_belief=yao_duty,
@@ -237,11 +237,11 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBelief(
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
     save_vision_belief(
-        yao_dakota_packfilehandler.moment_mstr_dir,
-        yao_dakota_packfilehandler.belief_name,
-        yao_dakota_packfilehandler.moment_label,
+        yao_dakota_lessonfilehandler.moment_mstr_dir,
+        yao_dakota_lessonfilehandler.belief_name,
+        yao_dakota_lessonfilehandler.moment_label,
         get_dakota_rope(),
-        yao_dakota_packfilehandler.knot,
+        yao_dakota_lessonfilehandler.knot,
         zia_vision,
     )
 
@@ -265,28 +265,28 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBelief(
         egg_rope,
         pledge=True,
         reason_context=chicken_rope,
-        reason_plan_active_requisite=True,
+        reason_requisite_active=True,
     )
     # set chick pledge is True when egg first is False
     sue_vision.edit_plan_attr(
         chicken_rope,
         pledge=True,
         reason_context=egg_rope,
-        reason_plan_active_requisite=False,
+        reason_requisite_active=False,
     )
     save_vision_belief(
-        yao_dakota_packfilehandler.moment_mstr_dir,
-        yao_dakota_packfilehandler.belief_name,
-        yao_dakota_packfilehandler.moment_label,
+        yao_dakota_lessonfilehandler.moment_mstr_dir,
+        yao_dakota_lessonfilehandler.belief_name,
+        yao_dakota_lessonfilehandler.moment_label,
         get_dakota_rope(),
-        yao_dakota_packfilehandler.knot,
+        yao_dakota_lessonfilehandler.knot,
         sue_vision,
     )
 
     # WHEN
     new_yao_vision = create_listen_basis(yao_duty)
     listen_to_agendas_duty_vision(
-        new_yao_vision, yao_dakota_packfilehandler, get_dakota_rope()
+        new_yao_vision, yao_dakota_lessonfilehandler, get_dakota_rope()
     )
 
     # THEN irrational belief is ignored
@@ -317,11 +317,11 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionBelief(
     yao_duty.add_voiceunit(sue_str, sue_voice_cred_lumen, sue_voice_debt_lumen)
     yao_pool = 92
     yao_duty.set_voice_respect(yao_pool)
-    yao_dakota_packfilehandler = packfilehandler_shop(env_dir(), a23_str, yao_str)
+    yao_dakota_lessonfilehandler = lessonfilehandler_shop(env_dir(), a23_str, yao_str)
     save_duty_belief(
-        moment_mstr_dir=yao_dakota_packfilehandler.moment_mstr_dir,
-        belief_name=yao_dakota_packfilehandler.belief_name,
-        moment_label=yao_dakota_packfilehandler.moment_label,
+        moment_mstr_dir=yao_dakota_lessonfilehandler.moment_mstr_dir,
+        belief_name=yao_dakota_lessonfilehandler.belief_name,
+        moment_label=yao_dakota_lessonfilehandler.moment_label,
         keep_rope=get_dakota_rope(),
         knot=None,
         duty_belief=yao_duty,
@@ -335,20 +335,20 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionBelief(
     cook_planunit = zia_vision.get_plan_obj(a23_cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
-    yao_dakota_packfilehandler = packfilehandler_shop(env_dir(), a23_str, yao_str)
+    yao_dakota_lessonfilehandler = lessonfilehandler_shop(env_dir(), a23_str, yao_str)
     save_vision_belief(
-        yao_dakota_packfilehandler.moment_mstr_dir,
-        yao_dakota_packfilehandler.belief_name,
-        yao_dakota_packfilehandler.moment_label,
+        yao_dakota_lessonfilehandler.moment_mstr_dir,
+        yao_dakota_lessonfilehandler.belief_name,
+        yao_dakota_lessonfilehandler.moment_label,
         get_dakota_rope(),
-        yao_dakota_packfilehandler.knot,
+        yao_dakota_lessonfilehandler.knot,
         zia_vision,
     )
 
     # WHEN
     new_yao_vision = create_listen_basis(yao_duty)
     listen_to_agendas_duty_vision(
-        new_yao_vision, yao_dakota_packfilehandler, get_dakota_rope()
+        new_yao_vision, yao_dakota_lessonfilehandler, get_dakota_rope()
     )
 
     # THEN irrational belief is ignored
@@ -380,11 +380,11 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToBelief_duty_AndNotBelief_v
     yao_pool = 87
     yao_duty.set_voice_respect(yao_pool)
     # save yao without task to dutys
-    yao_dakota_packfilehandler = packfilehandler_shop(env_dir(), a23_str, yao_str)
+    yao_dakota_lessonfilehandler = lessonfilehandler_shop(env_dir(), a23_str, yao_str)
     save_duty_belief(
-        moment_mstr_dir=yao_dakota_packfilehandler.moment_mstr_dir,
-        belief_name=yao_dakota_packfilehandler.belief_name,
-        moment_label=yao_dakota_packfilehandler.moment_label,
+        moment_mstr_dir=yao_dakota_lessonfilehandler.moment_mstr_dir,
+        belief_name=yao_dakota_lessonfilehandler.belief_name,
+        moment_label=yao_dakota_lessonfilehandler.moment_label,
         keep_rope=get_dakota_rope(),
         knot=None,
         duty_belief=yao_duty,
@@ -401,11 +401,11 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToBelief_duty_AndNotBelief_v
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
     save_vision_belief(
-        yao_dakota_packfilehandler.moment_mstr_dir,
-        yao_dakota_packfilehandler.belief_name,
-        yao_dakota_packfilehandler.moment_label,
+        yao_dakota_lessonfilehandler.moment_mstr_dir,
+        yao_dakota_lessonfilehandler.belief_name,
+        yao_dakota_lessonfilehandler.moment_label,
         get_dakota_rope(),
-        yao_dakota_packfilehandler.knot,
+        yao_dakota_lessonfilehandler.knot,
         zia_vision,
     )
 
@@ -417,18 +417,18 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToBelief_duty_AndNotBelief_v
     vacuum_planunit = yao_old_vision.get_plan_obj(vacuum_rope)
     vacuum_planunit.laborunit.add_party(yao_str)
     save_vision_belief(
-        yao_dakota_packfilehandler.moment_mstr_dir,
-        yao_dakota_packfilehandler.belief_name,
-        yao_dakota_packfilehandler.moment_label,
+        yao_dakota_lessonfilehandler.moment_mstr_dir,
+        yao_dakota_lessonfilehandler.belief_name,
+        yao_dakota_lessonfilehandler.moment_label,
         get_dakota_rope(),
-        yao_dakota_packfilehandler.knot,
+        yao_dakota_lessonfilehandler.knot,
         yao_old_vision,
     )
 
     # WHEN
     new_yao_vision = create_listen_basis(yao_duty)
     listen_to_agendas_duty_vision(
-        new_yao_vision, yao_dakota_packfilehandler, get_dakota_rope()
+        new_yao_vision, yao_dakota_lessonfilehandler, get_dakota_rope()
     )
 
     # THEN irrational belief is ignored
@@ -447,11 +447,11 @@ def test_listen_to_agenda_duty_vision_agenda_GetsAgendaFromSrcBeliefNotSpeakerSe
     assert yao_duty.plan_exists(a23_run_rope()) is False
     assert yao_duty.plan_exists(a23_clean_rope()) is False
     yao_duty.set_plan(planunit_shop(run_str(), pledge=True), a23_casa_rope())
-    sue_dakota_packfilehandler = get_dakota_packfilehandler()
+    sue_dakota_lessonfilehandler = get_dakota_lessonfilehandler()
     save_duty_belief(
-        moment_mstr_dir=sue_dakota_packfilehandler.moment_mstr_dir,
-        belief_name=sue_dakota_packfilehandler.belief_name,
-        moment_label=sue_dakota_packfilehandler.moment_label,
+        moment_mstr_dir=sue_dakota_lessonfilehandler.moment_mstr_dir,
+        belief_name=sue_dakota_lessonfilehandler.belief_name,
+        moment_label=sue_dakota_lessonfilehandler.moment_label,
         keep_rope=get_dakota_rope(),
         knot=None,
         duty_belief=yao_duty,
@@ -461,11 +461,11 @@ def test_listen_to_agenda_duty_vision_agenda_GetsAgendaFromSrcBeliefNotSpeakerSe
     assert yao_old_vision.plan_exists(a23_clean_rope()) is False
     yao_old_vision.set_plan(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
     save_vision_belief(
-        sue_dakota_packfilehandler.moment_mstr_dir,
-        sue_dakota_packfilehandler.belief_name,
-        sue_dakota_packfilehandler.moment_label,
+        sue_dakota_lessonfilehandler.moment_mstr_dir,
+        sue_dakota_lessonfilehandler.belief_name,
+        sue_dakota_lessonfilehandler.moment_label,
         get_dakota_rope(),
-        sue_dakota_packfilehandler.knot,
+        sue_dakota_lessonfilehandler.knot,
         yao_old_vision,
     )
 
@@ -475,7 +475,7 @@ def test_listen_to_agenda_duty_vision_agenda_GetsAgendaFromSrcBeliefNotSpeakerSe
 
     # WHEN
     listen_to_agendas_duty_vision(
-        yao_new_vision, sue_dakota_packfilehandler, get_dakota_rope()
+        yao_new_vision, sue_dakota_lessonfilehandler, get_dakota_rope()
     )
 
     # THEN

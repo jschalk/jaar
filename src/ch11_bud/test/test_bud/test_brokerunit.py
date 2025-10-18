@@ -1,4 +1,4 @@
-from src.ch11_bud._ref.ch11_semantic_types import EventInt
+from src.ch11_bud._ref.ch11_semantic_types import SparkInt
 from src.ch11_bud.bud_main import (
     BeliefBudHistory,
     beliefbudhistory_shop,
@@ -8,10 +8,10 @@ from src.ch11_bud.bud_main import (
 from src.ref.keywords import Ch11Keywords as wx
 
 
-def test_EventInt_Exists():
+def test_SparkInt_Exists():
     # ESTABLISH / WHEN / THEN
-    assert EventInt(13) == 13
-    assert EventInt(13.5) == 13
+    assert SparkInt(13) == 13
+    assert SparkInt(13.5) == 13
 
 
 def test_BeliefBudHistory_Exists():

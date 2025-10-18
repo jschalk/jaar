@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import open_json, save_json
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_beliefunit_from_dict
-from src.ch10_pack._ref.ch10_path import (
+from src.ch10_lesson._ref.ch10_path import (
     create_gut_path,
     create_job_path,
     create_moment_json_path,

@@ -28,7 +28,7 @@ def test_create_populate_kpi002_table_PopulatesTable_Scenario0_NoPledges():
 , {wx.belief_name}
 , {wx.plan_rope}
 , {wx.pledge}
-, {wx.active}
+, {wx.plan_active}
 , {wx.task}
 )
 VALUES 
@@ -50,7 +50,7 @@ VALUES
             wx.belief_name,
             wx.plan_rope,
             wx.pledge,
-            wx.active,
+            wx.plan_active,
             wx.task,
         ]
         assert get_row_count(cursor, moment_kpi002_belief_pledges_tablename) == 0
@@ -79,7 +79,7 @@ def test_create_populate_kpi002_table_PopulatesTable_Scenario1_TwoPledges():
 , {wx.belief_name}
 , {wx.plan_rope}
 , {wx.pledge}
-, {wx.active}
+, {wx.plan_active}
 , {wx.task}
 )
 VALUES 
@@ -103,7 +103,7 @@ VALUES
             wx.belief_name,
             wx.plan_rope,
             wx.pledge,
-            wx.active,
+            wx.plan_active,
             wx.task,
         ]
         assert get_row_count(cursor, moment_kpi002_belief_pledges_tablename) == 2

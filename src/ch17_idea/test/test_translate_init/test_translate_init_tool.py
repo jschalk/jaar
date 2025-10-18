@@ -44,7 +44,7 @@ def test_get_translate_name_dt_columns_ReturnsObj():
     assert get_translate_name_dt_columns()
     assert len(get_translate_name_dt_columns()) == 7
     static_list = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.otx_knot,
         wx.inx_knot,
@@ -61,7 +61,7 @@ def test_get_translate_title_dt_columns_ReturnsObj():
     assert get_translate_title_dt_columns()
     assert len(get_translate_title_dt_columns()) == 7
     static_list = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.otx_knot,
         wx.inx_knot,
@@ -78,7 +78,7 @@ def test_get_translate_label_dt_columns_ReturnsObj():
     assert get_translate_label_dt_columns()
     assert len(get_translate_label_dt_columns()) == 7
     static_list = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.otx_knot,
         wx.inx_knot,
@@ -95,7 +95,7 @@ def test_get_translate_rope_dt_columns_ReturnsObj():
     assert get_translate_rope_dt_columns()
     assert len(get_translate_rope_dt_columns()) == 7
     static_list = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.otx_knot,
         wx.inx_knot,
@@ -328,7 +328,7 @@ def test_load_ropemap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     # THEN
     assert len(sue_ropemap.otx2inx) == 2
     ex_ropemap = sue_translateunit.get_mapunit(wx.RopeTerm)
-    assert ex_ropemap.event_num == sue_ropemap.event_num
+    assert ex_ropemap.spark_num == sue_ropemap.spark_num
     assert ex_ropemap.face_name == sue_ropemap.face_name
     assert ex_ropemap.otx2inx == sue_ropemap.otx2inx
     assert ex_ropemap.labelmap != sue_ropemap.labelmap
@@ -386,7 +386,7 @@ def test_create_dir_valid_empty_translateunit_Sets_otx_knot_inx_knot(
     assert gen_mapunit.inx_knot == colon_inx_knot
 
 
-def test_create_dir_valid_empty_translateunit_Returns_event_num(
+def test_create_dir_valid_empty_translateunit_Returns_spark_num(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -394,10 +394,10 @@ def test_create_dir_valid_empty_translateunit_Returns_event_num(
     x_unknown_str = "UnknownTerm"
     slash_otx_knot = "/"
     colon_inx_knot = ":"
-    event7 = 7
+    spark7 = 7
     sue_translateunit = translateunit_shop(
         face_name=sue_str,
-        event_num=event7,
+        spark_num=spark7,
         otx_knot=slash_otx_knot,
         inx_knot=colon_inx_knot,
         unknown_str=x_unknown_str,
@@ -411,7 +411,7 @@ def test_create_dir_valid_empty_translateunit_Returns_event_num(
 
     # THEN
     assert gen_translateunit.face_name == sue_str
-    assert gen_translateunit.event_num == event7
+    assert gen_translateunit.spark_num == spark7
     assert gen_translateunit.unknown_str == x_unknown_str
     assert gen_translateunit.otx_knot == slash_otx_knot
     assert gen_translateunit.inx_knot == colon_inx_knot

@@ -15,7 +15,7 @@ def get_mop_with_no_reason_beliefunit_example() -> BeliefUnit:
 def get_bob_mop_reason_beliefunit_example() -> BeliefUnit:
     bob_belief = _example_empty_bob_beliefunit()
     casa_str = "casa"
-    floor_str = "floor status"
+    floor_str = "floor situation"
     clean_str = "clean"
     dirty_str = "dirty"
     mop_str = "mop"

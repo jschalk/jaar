@@ -116,7 +116,7 @@ def get_translate_args_class_types() -> dict[str, str]:
         "reason_lower": "float",
         "reason_upper": "float",
         "reason_context": "RopeTerm",
-        "reason_active_requisite": "bool",
+        "active_requisite": "bool",
         "respect_grain": "float",
         "solo": "int",
         "stop_want": "float",

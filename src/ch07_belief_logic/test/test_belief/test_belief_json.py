@@ -27,8 +27,8 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():
     yao_belief.fund_grain = yao_fund_grain
     belief_tally = 23
     yao_belief.tally = belief_tally
-    x_last_pack_id = 77
-    yao_belief.set_last_pack_id(x_last_pack_id)
+    x_last_lesson_id = 77
+    yao_belief.set_last_lesson_id(x_last_lesson_id)
 
     # WHEN
     belief_dict = yao_belief.to_dict()
@@ -46,7 +46,7 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():
     assert belief_dict[wx.knot] == yao_belief.knot
     assert belief_dict[wx.credor_respect] == yao_belief.credor_respect
     assert belief_dict[wx.debtor_respect] == yao_belief.debtor_respect
-    assert belief_dict[wx.last_pack_id] == yao_belief.last_pack_id
+    assert belief_dict[wx.last_lesson_id] == yao_belief.last_lesson_id
     assert len(belief_dict[wx.voices]) == len(yao_belief.voices)
     assert len(belief_dict[wx.voices]) != 12
 
@@ -178,7 +178,7 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario4_planunit_WithLevels():
     #     belief_dict["_debtor_respect"]
     # assert str(excinfo.value) == "'_debtor_respect'"
     with pytest_raises(Exception) as excinfo:
-        belief_dict[wx.last_pack_id]
+        belief_dict[wx.last_lesson_id]
 
     x_planroot = zia_belief.planroot
     planroot_dict = belief_dict.get(wx.planroot)

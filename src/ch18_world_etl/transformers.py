@@ -30,17 +30,21 @@ from src.ch01_py.file_toolbox import (
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch09_belief_atom.atom_config import get_belief_dimens
 from src.ch09_belief_atom.atom_main import beliefatom_shop
-from src.ch10_pack._ref.ch10_path import create_gut_path, create_moment_json_path
-from src.ch10_pack.delta import get_minimal_beliefdelta
-from src.ch10_pack.pack_main import PackUnit, get_packunit_from_dict, packunit_shop
+from src.ch10_lesson._ref.ch10_path import create_gut_path, create_moment_json_path
+from src.ch10_lesson.delta import get_minimal_beliefdelta
+from src.ch10_lesson.lesson_main import (
+    LessonUnit,
+    get_lessonunit_from_dict,
+    lessonunit_shop,
+)
 from src.ch11_bud._ref.ch11_path import (
-    create_belief_event_dir_path,
-    create_beliefevent_path,
-    create_event_all_pack_path,
+    create_belief_spark_dir_path,
+    create_beliefspark_path,
+    create_spark_all_lesson_path,
 )
 from src.ch11_bud.bud_filehandler import (
-    collect_belief_event_dir_sets,
-    get_beliefs_downhill_event_nums,
+    collect_belief_spark_dir_sets,
+    get_beliefs_downhill_spark_nums,
     open_belief_file,
     open_job_file,
 )
@@ -83,7 +87,7 @@ from src.ch18_world_etl._ref.ch18_path import (
     create_moment_ote1_csv_path,
     create_moment_ote1_json_path,
 )
-from src.ch18_world_etl._ref.ch18_semantic_types import EventInt, FaceName
+from src.ch18_world_etl._ref.ch18_semantic_types import FaceName, SparkInt
 from src.ch18_world_etl.db_obj_belief_tool import insert_job_obj
 from src.ch18_world_etl.db_obj_moment_tool import get_moment_dict_from_heard_tables
 from src.ch18_world_etl.idea_collector import IdeaFileRef, get_all_idea_dataframes
@@ -164,16 +168,16 @@ def etl_input_dfs_to_brick_raw_tables(cursor: sqlite3_Cursor, input_dir: str):
             cursor.execute(insert_sqlstr)
 
 
-def get_max_brick_agg_event_num(cursor: sqlite3_Cursor) -> int:
+def get_max_brick_agg_spark_num(cursor: sqlite3_Cursor) -> int:
     agg_tables = get_db_tables(cursor, "brick_agg")
-    brick_aggs_max_event_num = 0
+    brick_aggs_max_spark_num = 0
     for agg_table in agg_tables:
         if agg_table.startswith("br") and agg_table.endswith("brick_agg"):
-            sqlstr = f"SELECT MAX(event_num) FROM {agg_table}"
-            table_max_event_num = cursor.execute(sqlstr).fetchone()[0] or 1
-            if table_max_event_num > brick_aggs_max_event_num:
-                brick_aggs_max_event_num = table_max_event_num
-    return brick_aggs_max_event_num
+            sqlstr = f"SELECT MAX(spark_num) FROM {agg_table}"
+            table_max_spark_num = cursor.execute(sqlstr).fetchone()[0] or 1
+            if table_max_spark_num > brick_aggs_max_spark_num:
+                brick_aggs_max_spark_num = table_max_spark_num
+    return brick_aggs_max_spark_num
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
@@ -247,10 +251,10 @@ def etl_brick_agg_tables_to_brick_valid_tables(conn_or_cursor: sqlite3_Connectio
             select_sqlstr = create_select_query(
                 conn_or_cursor, x_tablename, agg_columns
             )
-            select_sqlstr = select_sqlstr.replace("event_num", "agg.event_num")
+            select_sqlstr = select_sqlstr.replace("spark_num", "agg.spark_num")
             select_sqlstr = select_sqlstr.replace("face_name", "agg.face_name")
             select_sqlstr = select_sqlstr.replace(x_tablename, f"{x_tablename} agg")
-            join_clause_str = """JOIN events_brick_valid valid_events ON valid_events.event_num = agg.event_num"""
+            join_clause_str = """JOIN sparks_brick_valid valid_sparks ON valid_sparks.spark_num = agg.spark_num"""
             insert_select_into_sqlstr = f"""
 {insert_clause_str}
 {select_sqlstr}{join_clause_str}
@@ -258,17 +262,17 @@ def etl_brick_agg_tables_to_brick_valid_tables(conn_or_cursor: sqlite3_Connectio
             conn_or_cursor.execute(insert_select_into_sqlstr)
 
 
-def etl_brick_agg_tables_to_events_brick_agg_table(conn_or_cursor: sqlite3_Cursor):
-    brick_events_tablename = "events_brick_agg"
-    if not db_table_exists(conn_or_cursor, brick_events_tablename):
-        brick_events_columns = [
+def etl_brick_agg_tables_to_sparks_brick_agg_table(conn_or_cursor: sqlite3_Cursor):
+    brick_sparks_tablename = "sparks_brick_agg"
+    if not db_table_exists(conn_or_cursor, brick_sparks_tablename):
+        brick_sparks_columns = [
             "idea_number",
             "face_name",
-            "event_num",
+            "spark_num",
             "error_message",
         ]
         create_idea_sorted_table(
-            conn_or_cursor, brick_events_tablename, brick_events_columns
+            conn_or_cursor, brick_sparks_tablename, brick_sparks_columns
         )
 
     brick_agg_tables = {f"{idea}_brick_agg": idea for idea in get_idea_numbers()}
@@ -276,21 +280,21 @@ def etl_brick_agg_tables_to_events_brick_agg_table(conn_or_cursor: sqlite3_Curso
         if agg_tablename in brick_agg_tables:
             idea_number = brick_agg_tables.get(agg_tablename)
             insert_from_select_sqlstr = f"""
-INSERT INTO {brick_events_tablename} (idea_number, event_num, face_name)
-SELECT '{idea_number}', event_num, face_name 
+INSERT INTO {brick_sparks_tablename} (idea_number, spark_num, face_name)
+SELECT '{idea_number}', spark_num, face_name 
 FROM {agg_tablename}
-GROUP BY event_num, face_name
+GROUP BY spark_num, face_name
 ;
 """
             conn_or_cursor.execute(insert_from_select_sqlstr)
 
     update_error_message_sqlstr = f"""
-UPDATE {brick_events_tablename}
-SET error_message = 'invalid because of conflicting event_num'
-WHERE event_num IN (
-    SELECT event_num 
-    FROM {brick_events_tablename} 
-    GROUP BY event_num 
+UPDATE {brick_sparks_tablename}
+SET error_message = 'invalid because of conflicting spark_num'
+WHERE spark_num IN (
+    SELECT spark_num 
+    FROM {brick_sparks_tablename} 
+    GROUP BY spark_num 
     HAVING MAX(face_name) <> MIN(face_name)
 )
 ;
@@ -298,31 +302,31 @@ WHERE event_num IN (
     conn_or_cursor.execute(update_error_message_sqlstr)
 
 
-def etl_events_brick_agg_table_to_events_brick_valid_table(
+def etl_sparks_brick_agg_table_to_sparks_brick_valid_table(
     conn_or_cursor: sqlite3_Cursor,
 ):
-    valid_events_tablename = "events_brick_valid"
-    if not db_table_exists(conn_or_cursor, valid_events_tablename):
-        brick_events_columns = ["event_num", "face_name"]
+    valid_sparks_tablename = "sparks_brick_valid"
+    if not db_table_exists(conn_or_cursor, valid_sparks_tablename):
+        brick_sparks_columns = ["spark_num", "face_name"]
         create_idea_sorted_table(
-            conn_or_cursor, valid_events_tablename, brick_events_columns
+            conn_or_cursor, valid_sparks_tablename, brick_sparks_columns
         )
     insert_select_sqlstr = f"""
-INSERT INTO {valid_events_tablename} (event_num, face_name)
-SELECT event_num, face_name 
-FROM events_brick_agg
+INSERT INTO {valid_sparks_tablename} (spark_num, face_name)
+SELECT spark_num, face_name 
+FROM sparks_brick_agg
 WHERE error_message IS NULL
 ;
 """
     conn_or_cursor.execute(insert_select_sqlstr)
 
 
-def etl_events_brick_agg_db_to_event_dict(
+def etl_sparks_brick_agg_db_to_spark_dict(
     conn_or_cursor: sqlite3_Cursor,
-) -> dict[EventInt, FaceName]:
+) -> dict[SparkInt, FaceName]:
     select_sqlstr = """
-SELECT event_num, face_name 
-FROM events_brick_valid
+SELECT spark_num, face_name 
+FROM sparks_brick_valid
 ;
 """
     conn_or_cursor.execute(select_sqlstr)
@@ -651,17 +655,17 @@ def etl_brick_valid_table_into_old_prime_table(
     cursor.execute(insert_select_sqlstr)
 
 
-def split_excel_into_events_dirs(translate_file: str, face_dir: str, sheet_name: str):
+def split_excel_into_sparks_dirs(translate_file: str, face_dir: str, sheet_name: str):
     split_excel_into_dirs(
-        translate_file, face_dir, "event_num", "translate", sheet_name
+        translate_file, face_dir, "spark_num", "translate", sheet_name
     )
 
 
-def get_most_recent_event_num(
-    event_set: set[EventInt], max_event_num: EventInt
-) -> EventInt:
-    recent_event_nums = [e_id for e_id in event_set if e_id <= max_event_num]
-    return max(recent_event_nums, default=None)
+def get_most_recent_spark_num(
+    spark_set: set[SparkInt], max_spark_num: SparkInt
+) -> SparkInt:
+    recent_spark_nums = [e_id for e_id in spark_set if e_id <= max_spark_num]
+    return max(recent_spark_nums, default=None)
 
 
 def etl_heard_raw_tables_to_moment_ote1_agg(conn_or_cursor: sqlite3_Connection):
@@ -672,7 +676,7 @@ def etl_heard_raw_tables_to_moment_ote1_agg(conn_or_cursor: sqlite3_Connection):
 def etl_moment_ote1_agg_table_to_moment_ote1_agg_csvs(
     conn_or_cursor: sqlite3_Connection, moment_mstr_dir: str
 ):
-    empty_ote1_csv_str = """moment_label,belief_name,event_num,bud_time,error_message
+    empty_ote1_csv_str = """moment_label,belief_name,spark_num,bud_time,error_message
 """
     moments_dir = create_path(moment_mstr_dir, "moments")
     for moment_label in get_level1_dirs(moments_dir):
@@ -692,12 +696,12 @@ def etl_moment_ote1_agg_csvs_to_jsons(moment_mstr_dir: str):
         header_row = csv_arrays.pop(0)
         for row in csv_arrays:
             belief_name = row[1]
-            event_num = row[2]
+            spark_num = row[2]
             bud_time = row[3]
             if x_dict.get(belief_name) is None:
                 x_dict[belief_name] = {}
             belief_dict = x_dict.get(belief_name)
-            belief_dict[int(bud_time)] = event_num
+            belief_dict[int(bud_time)] = spark_num
         json_path = create_moment_ote1_json_path(moment_mstr_dir, moment_label)
         save_json(json_path, None, x_dict)
 
@@ -743,7 +747,7 @@ def etl_create_bud_mandate_ledgers(moment_mstr_dir: str):
         create_bud_mandate_ledgers(moment_mstr_dir, moment_label)
 
 
-def etl_heard_agg_to_event_belief_csvs(
+def etl_heard_agg_to_spark_belief_csvs(
     conn_or_cursor: sqlite3_Connection, moment_mstr_dir: str
 ):
     moments_dir = create_path(moment_mstr_dir, "moments")
@@ -752,37 +756,39 @@ def etl_heard_agg_to_event_belief_csvs(
             save_to_split_csvs(
                 conn_or_cursor=conn_or_cursor,
                 tablename=belief_table,
-                key_columns=["moment_label", "belief_name", "event_num"],
+                key_columns=["moment_label", "belief_name", "spark_num"],
                 dst_dir=moments_dir,
                 col1_prefix="beliefs",
-                col2_prefix="events",
+                col2_prefix="sparks",
             )
 
 
-def etl_event_belief_csvs_to_pack_json(moment_mstr_dir: str):
+def etl_spark_belief_csvs_to_lesson_json(moment_mstr_dir: str):
     moments_dir = create_path(moment_mstr_dir, "moments")
     for moment_label in get_level1_dirs(moments_dir):
         moment_path = create_path(moments_dir, moment_label)
         beliefs_path = create_path(moment_path, "beliefs")
         for belief_name in get_level1_dirs(beliefs_path):
             belief_path = create_path(beliefs_path, belief_name)
-            events_path = create_path(belief_path, "events")
-            for event_num in get_level1_dirs(events_path):
-                event_pack = packunit_shop(
+            sparks_path = create_path(belief_path, "sparks")
+            for spark_num in get_level1_dirs(sparks_path):
+                spark_lesson = lessonunit_shop(
                     belief_name=belief_name,
                     face_name=None,
                     moment_label=moment_label,
-                    event_num=event_num,
+                    spark_num=spark_num,
                 )
-                event_dir = create_path(events_path, event_num)
-                add_beliefatoms_from_csv(event_pack, event_dir)
-                event_all_pack_path = create_event_all_pack_path(
-                    moment_mstr_dir, moment_label, belief_name, event_num
+                spark_dir = create_path(sparks_path, spark_num)
+                add_beliefatoms_from_csv(spark_lesson, spark_dir)
+                spark_all_lesson_path = create_spark_all_lesson_path(
+                    moment_mstr_dir, moment_label, belief_name, spark_num
                 )
-                save_json(event_all_pack_path, None, event_pack.get_serializable_dict())
+                save_json(
+                    spark_all_lesson_path, None, spark_lesson.get_serializable_dict()
+                )
 
 
-def add_beliefatoms_from_csv(event_pack: PackUnit, event_dir: str):
+def add_beliefatoms_from_csv(spark_lesson: LessonUnit, spark_dir: str):
     idea_sqlite_types = get_idea_sqlite_types()
     belief_dimens = get_belief_dimens()
     belief_dimens.remove("beliefunit")
@@ -795,8 +801,8 @@ def add_beliefatoms_from_csv(event_pack: PackUnit, event_dir: str):
         )
         belief_dimen_put_csv = f"{belief_dimen_put_tablename}.csv"
         belief_dimen_del_csv = f"{belief_dimen_del_tablename}.csv"
-        put_path = create_path(event_dir, belief_dimen_put_csv)
-        del_path = create_path(event_dir, belief_dimen_del_csv)
+        put_path = create_path(spark_dir, belief_dimen_put_csv)
+        del_path = create_path(spark_dir, belief_dimen_del_csv)
         if os_path_exists(put_path):
             put_rows = open_csv_with_types(put_path, idea_sqlite_types)
             headers = put_rows.pop(0)
@@ -805,12 +811,12 @@ def add_beliefatoms_from_csv(event_pack: PackUnit, event_dir: str):
                 for col_name, row_value in zip(headers, put_row):
                     if col_name not in {
                         "face_name",
-                        "event_num",
+                        "spark_num",
                         "moment_label",
                         "belief_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                event_pack._beliefdelta.set_beliefatom(x_atom)
+                spark_lesson._beliefdelta.set_beliefatom(x_atom)
 
         if os_path_exists(del_path):
             del_rows = open_csv_with_types(del_path, idea_sqlite_types)
@@ -820,76 +826,78 @@ def add_beliefatoms_from_csv(event_pack: PackUnit, event_dir: str):
                 for col_name, row_value in zip(headers, del_row):
                     if col_name not in {
                         "face_name",
-                        "event_num",
+                        "spark_num",
                         "moment_label",
                         "belief_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                event_pack._beliefdelta.set_beliefatom(x_atom)
+                spark_lesson._beliefdelta.set_beliefatom(x_atom)
 
 
-def etl_event_pack_json_to_event_inherited_beliefunits(moment_mstr_dir: str):
+def etl_spark_lesson_json_to_spark_inherited_beliefunits(moment_mstr_dir: str):
     moments_dir = create_path(moment_mstr_dir, "moments")
     for moment_label in get_level1_dirs(moments_dir):
         moment_path = create_path(moments_dir, moment_label)
         beliefs_dir = create_path(moment_path, "beliefs")
         for belief_name in get_level1_dirs(beliefs_dir):
             belief_dir = create_path(beliefs_dir, belief_name)
-            events_dir = create_path(belief_dir, "events")
-            prev_event_num = None
-            for event_num in get_level1_dirs(events_dir):
-                prev_belief = _get_prev_event_num_beliefunit(
-                    moment_mstr_dir, moment_label, belief_name, prev_event_num
+            sparks_dir = create_path(belief_dir, "sparks")
+            prev_spark_num = None
+            for spark_num in get_level1_dirs(sparks_dir):
+                prev_belief = _get_prev_spark_num_beliefunit(
+                    moment_mstr_dir, moment_label, belief_name, prev_spark_num
                 )
-                beliefevent_path = create_beliefevent_path(
-                    moment_mstr_dir, moment_label, belief_name, event_num
+                beliefspark_path = create_beliefspark_path(
+                    moment_mstr_dir, moment_label, belief_name, spark_num
                 )
-                event_dir = create_belief_event_dir_path(
-                    moment_mstr_dir, moment_label, belief_name, event_num
+                spark_dir = create_belief_spark_dir_path(
+                    moment_mstr_dir, moment_label, belief_name, spark_num
                 )
 
-                event_all_pack_path = create_event_all_pack_path(
-                    moment_mstr_dir, moment_label, belief_name, event_num
+                spark_all_lesson_path = create_spark_all_lesson_path(
+                    moment_mstr_dir, moment_label, belief_name, spark_num
                 )
-                event_pack = get_packunit_from_dict(open_json(event_all_pack_path))
+                spark_lesson = get_lessonunit_from_dict(
+                    open_json(spark_all_lesson_path)
+                )
                 sift_delta = get_minimal_beliefdelta(
-                    event_pack._beliefdelta, prev_belief
+                    spark_lesson._beliefdelta, prev_belief
                 )
-                curr_belief = event_pack.get_pack_edited_belief(prev_belief)
-                save_json(beliefevent_path, None, curr_belief.to_dict())
-                expressed_pack = copy_deepcopy(event_pack)
-                expressed_pack.set_beliefdelta(sift_delta)
+                curr_belief = spark_lesson.get_lesson_edited_belief(prev_belief)
+                save_json(beliefspark_path, None, curr_belief.to_dict())
+                expressed_lesson = copy_deepcopy(spark_lesson)
+                expressed_lesson.set_beliefdelta(sift_delta)
                 save_json(
-                    event_dir,
-                    "expressed_pack.json",
-                    expressed_pack.get_serializable_dict(),
+                    spark_dir,
+                    "expressed_lesson.json",
+                    expressed_lesson.get_serializable_dict(),
                 )
-                prev_event_num = event_num
+                prev_spark_num = spark_num
 
 
-def _get_prev_event_num_beliefunit(
-    moment_mstr_dir, moment_label, belief_name, prev_event_num
+def _get_prev_spark_num_beliefunit(
+    moment_mstr_dir, moment_label, belief_name, prev_spark_num
 ) -> BeliefUnit:
-    if prev_event_num is None:
+    if prev_spark_num is None:
         return beliefunit_shop(belief_name, moment_label)
-    prev_beliefevent_path = create_beliefevent_path(
-        moment_mstr_dir, moment_label, belief_name, prev_event_num
+    prev_beliefspark_path = create_beliefspark_path(
+        moment_mstr_dir, moment_label, belief_name, prev_spark_num
     )
-    return open_belief_file(prev_beliefevent_path)
+    return open_belief_file(prev_beliefspark_path)
 
 
-def etl_event_inherited_beliefunits_to_moment_gut(moment_mstr_dir: str):
+def etl_spark_inherited_beliefunits_to_moment_gut(moment_mstr_dir: str):
     moments_dir = create_path(moment_mstr_dir, "moments")
     for moment_label in get_level1_dirs(moments_dir):
-        belief_events = collect_belief_event_dir_sets(moment_mstr_dir, moment_label)
-        beliefs_max_event_num_dict = get_beliefs_downhill_event_nums(belief_events)
-        for belief_name, max_event_num in beliefs_max_event_num_dict.items():
-            max_beliefevent_path = create_beliefevent_path(
-                moment_mstr_dir, moment_label, belief_name, max_event_num
+        belief_sparks = collect_belief_spark_dir_sets(moment_mstr_dir, moment_label)
+        beliefs_max_spark_num_dict = get_beliefs_downhill_spark_nums(belief_sparks)
+        for belief_name, max_spark_num in beliefs_max_spark_num_dict.items():
+            max_beliefspark_path = create_beliefspark_path(
+                moment_mstr_dir, moment_label, belief_name, max_spark_num
             )
-            max_event_belief_json = open_file(max_beliefevent_path)
+            max_spark_belief_json = open_file(max_beliefspark_path)
             gut_path = create_gut_path(moment_mstr_dir, moment_label, belief_name)
-            save_file(gut_path, None, max_event_belief_json)
+            save_file(gut_path, None, max_spark_belief_json)
 
 
 def add_moment_epoch_to_guts(moment_mstr_dir: str):
@@ -944,7 +952,7 @@ def etl_moment_json_voice_nets_to_moment_voice_nets_table(
 
 
 def create_last_run_metrics_json(cursor: sqlite3_Cursor, moment_mstr_dir: str):
-    max_brick_agg_event_num = get_max_brick_agg_event_num(cursor)
+    max_brick_agg_spark_num = get_max_brick_agg_spark_num(cursor)
     last_run_metrics_path = create_last_run_metrics_path(moment_mstr_dir)
-    last_run_metrics_dict = {"max_brick_agg_event_num": max_brick_agg_event_num}
+    last_run_metrics_dict = {"max_brick_agg_spark_num": max_brick_agg_spark_num}
     save_json(last_run_metrics_path, None, last_run_metrics_dict)

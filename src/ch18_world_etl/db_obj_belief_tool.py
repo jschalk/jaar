@@ -196,8 +196,8 @@ def create_blrprem_metrics_insert_sqlstr(values_dict: dict[str,]):
     reason_lower = values_dict.get("reason_lower")
     reason_divisor = values_dict.get("reason_divisor")
     task = values_dict.get("task")
-    status = values_dict.get("status")
-    return f"""INSERT INTO belief_plan_reason_caseunit_job (moment_label, belief_name, plan_rope, reason_context, reason_state, reason_upper, reason_lower, reason_divisor, task, status)
+    case_active = values_dict.get("case_active")
+    return f"""INSERT INTO belief_plan_reason_caseunit_job (moment_label, belief_name, plan_rope, reason_context, reason_state, reason_upper, reason_lower, reason_divisor, task, case_active)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -208,7 +208,7 @@ VALUES (
 , {sqlite_obj_str(reason_lower, "REAL")}
 , {sqlite_obj_str(reason_divisor, "REAL")}
 , {sqlite_obj_str(task, "INTEGER")}
-, {sqlite_obj_str(status, "INTEGER")}
+, {sqlite_obj_str(case_active, "INTEGER")}
 )
 ;
 """
@@ -219,20 +219,20 @@ def create_blrreas_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_name = values_dict.get("belief_name")
     rope = values_dict.get("plan_rope")
     reason_context = values_dict.get("reason_context")
-    reason_active_requisite = values_dict.get("reason_active_requisite")
+    active_requisite = values_dict.get("active_requisite")
     task = values_dict.get("task")
-    status = values_dict.get("status")
-    _reason_active_heir = values_dict.get("_reason_active_heir")
-    return f"""INSERT INTO belief_plan_reasonunit_job (moment_label, belief_name, plan_rope, reason_context, reason_active_requisite, task, status, _reason_active_heir)
+    reason_active = values_dict.get("reason_active")
+    parent_heir_active = values_dict.get("parent_heir_active")
+    return f"""INSERT INTO belief_plan_reasonunit_job (moment_label, belief_name, plan_rope, reason_context, active_requisite, task, reason_active, parent_heir_active)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
 , {sqlite_obj_str(rope, "TEXT")}
 , {sqlite_obj_str(reason_context, "TEXT")}
-, {sqlite_obj_str(reason_active_requisite, "INTEGER")}
+, {sqlite_obj_str(active_requisite, "INTEGER")}
 , {sqlite_obj_str(task, "INTEGER")}
-, {sqlite_obj_str(status, "INTEGER")}
-, {sqlite_obj_str(_reason_active_heir, "INTEGER")}
+, {sqlite_obj_str(reason_active, "INTEGER")}
+, {sqlite_obj_str(parent_heir_active, "INTEGER")}
 )
 ;
 """
@@ -273,7 +273,7 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     star = values_dict.get("star")
     pledge = values_dict.get("pledge")
     problem_bool = values_dict.get("problem_bool")
-    active = values_dict.get("active")
+    active = values_dict.get("plan_active")
     task = values_dict.get("task")
     fund_grain = values_dict.get("fund_grain")
     fund_onset = values_dict.get("fund_onset")
@@ -290,7 +290,7 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO belief_planunit_job (moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, pledge, problem_bool, fund_grain, active, task, fund_onset, fund_cease, fund_ratio, gogo_calc, stop_calc, tree_level, range_evaluated, descendant_pledge_count, healerunit_ratio, all_voice_cred, all_voice_debt)
+    return f"""INSERT INTO belief_planunit_job (moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, pledge, problem_bool, fund_grain, plan_active, task, fund_onset, fund_cease, fund_ratio, gogo_calc, stop_calc, tree_level, range_evaluated, descendant_pledge_count, healerunit_ratio, all_voice_cred, all_voice_debt)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}

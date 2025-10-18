@@ -46,10 +46,10 @@ def test_create_insert_into_translate_core_raw_sqlstr_ReturnsObj_PopulatesTable_
     bob_inx = "Bobito"
     rdx = ":"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -59,7 +59,7 @@ def test_create_insert_into_translate_core_raw_sqlstr_ReturnsObj_PopulatesTable_
             trlrope_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_rope_s_agg_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
@@ -69,12 +69,12 @@ def test_create_insert_into_translate_core_raw_sqlstr_ReturnsObj_PopulatesTable_
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
-, ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
-, ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ({event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+  ({spark1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+, ({spark1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
+, ({spark1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
+, ({spark2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ({spark5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ({spark7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -108,10 +108,10 @@ def test_insert_translate_sound_agg_into_translate_core_raw_table_PopulatesTable
     bob_inx = "Bobito"
     rdx = ":"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -121,7 +121,7 @@ def test_insert_translate_sound_agg_into_translate_core_raw_table_PopulatesTable
             trlrope_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_rope_s_agg_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
@@ -131,9 +131,9 @@ def test_insert_translate_sound_agg_into_translate_core_raw_table_PopulatesTable
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
-, ({event7}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
-, ({event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+  ({spark1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+, ({spark7}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+, ({spark7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -144,7 +144,7 @@ VALUES
             trlname_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_name_s_agg_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.otx_name}
 , {wx.inx_name}
@@ -154,8 +154,8 @@ VALUES
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
-, ({event7}, '{bob_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+  ({spark1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+, ({spark7}, '{bob_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -382,10 +382,10 @@ def test_create_update_translate_sound_agg_inconsist_sqlstr_PopulatesTable_Scena
     rdx = ":"
     other_knot = "/"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
     error_translate_str = "Inconsistent translate core data"
 
     with sqlite3_connect(":memory:") as db_conn:
@@ -396,7 +396,7 @@ def test_create_update_translate_sound_agg_inconsist_sqlstr_PopulatesTable_Scena
             trlrope_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_rope_s_agg_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
@@ -406,12 +406,12 @@ def test_create_update_translate_sound_agg_inconsist_sqlstr_PopulatesTable_Scena
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL)
-, ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
-, ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ({event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+  ({spark1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+, ({spark1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
+, ({spark1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL)
+, ({spark2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ({spark5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ({spark7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -464,10 +464,10 @@ def test_update_translate_sound_agg_inconsist_errors_PopulatesTable_Scenario1():
     rdx = ":"
     other_knot = "/"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
     error_translate_str = "Inconsistent translate core data"
 
     with sqlite3_connect(":memory:") as db_conn:
@@ -478,7 +478,7 @@ def test_update_translate_sound_agg_inconsist_errors_PopulatesTable_Scenario1():
             trlrope_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_rope_s_agg_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
@@ -488,12 +488,12 @@ def test_update_translate_sound_agg_inconsist_errors_PopulatesTable_Scenario1():
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL)
-, ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
-, ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ({event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+  ({spark1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+, ({spark1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
+, ({spark1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL)
+, ({spark2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ({spark5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ({spark7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -544,11 +544,11 @@ def test_create_update_trllabe_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
     rdx = ":"
     run_rdx_run = f"{run_str}{rdx}{run_str}"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
-    event9 = 9
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
+    spark9 = 9
     error_label_str = "Knot cannot exist in LabelTerm"
 
     with sqlite3_connect(":memory:") as db_conn:
@@ -557,18 +557,18 @@ def test_create_update_trllabe_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
         trllabe_dimen = wx.translate_label
         trllabe_s_agg_tablename = create_prime_tablename(trllabe_dimen, "s", "agg")
         insert_into_clause = f"""INSERT INTO {trllabe_s_agg_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.otx_label}
 , {wx.inx_label}
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{bob_str}', '{fly_str}', '{fly_inx}')
-, ({event1}, '{bob_str}', '{ski_str}{rdx}', '{ski_str}')
-, ({event2}, '{bob_str}', '{run_rdx_run}', '{run_str}')
-, ({event5}, '{yao_str}', '{ski_str}', '{ski_inx}{rdx}')
-, ({event7}, '{yao_str}', '{fly_str}', '{fly_inx}')
+  ({spark1}, '{bob_str}', '{fly_str}', '{fly_inx}')
+, ({spark1}, '{bob_str}', '{ski_str}{rdx}', '{ski_str}')
+, ({spark2}, '{bob_str}', '{run_rdx_run}', '{run_str}')
+, ({spark5}, '{yao_str}', '{ski_str}', '{ski_inx}{rdx}')
+, ({spark7}, '{yao_str}', '{fly_str}', '{fly_inx}')
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -636,11 +636,11 @@ def test_create_update_trlrope_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
     bad_ski_str = "Skiito"
     bad_run_str = f"run{rdx}run"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
-    event9 = 9
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
+    spark9 = 9
     error_rope_str = "Knot must exist in RopeTerm"
 
     with sqlite3_connect(":memory:") as db_conn:
@@ -649,18 +649,18 @@ def test_create_update_trlrope_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
         trlrope_dimen = wx.translate_rope
         trlrope_s_agg_tablename = create_prime_tablename(trlrope_dimen, "s", "agg")
         insert_into_clause = f"""INSERT INTO {trlrope_s_agg_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{bob_str}', '{spt_run_str}', '{spt_run_str}')
-, ({event1}, '{bob_str}', '{spt_fly_str}', '{bad_fly_str}')
-, ({event2}, '{bob_str}', '{bad_fly_str}', '{spt_fly_str}')
-, ({event5}, '{yao_str}', '{bad_ski_str}', '{bad_ski_str}')
-, ({event7}, '{yao_str}', '{spt_run_str}', '{bad_run_str}')
+  ({spark1}, '{bob_str}', '{spt_run_str}', '{spt_run_str}')
+, ({spark1}, '{bob_str}', '{spt_fly_str}', '{bad_fly_str}')
+, ({spark2}, '{bob_str}', '{bad_fly_str}', '{spt_fly_str}')
+, ({spark5}, '{yao_str}', '{bad_ski_str}', '{bad_ski_str}')
+, ({spark7}, '{yao_str}', '{spt_run_str}', '{bad_run_str}')
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -730,11 +730,11 @@ def test_create_update_trlname_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
     zia_inx = "Ziaita"
     bad_zia_inx = f"Zia{rdx}"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
-    event9 = 9
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
+    spark9 = 9
     error_name_str = "Knot cannot exist in NameTerm"
 
     with sqlite3_connect(":memory:") as db_conn:
@@ -743,18 +743,18 @@ def test_create_update_trlname_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
         trlname_dimen = wx.translate_name
         trlname_s_agg_tablename = create_prime_tablename(trlname_dimen, "s", "agg")
         insert_into_clause = f"""INSERT INTO {trlname_s_agg_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.otx_name}
 , {wx.inx_name}
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{bob_str}', '{sue_otx}', '{sue_inx}')
-, ({event1}, '{bob_str}', '{sue_otx}', '{bad_sue_inx}')
-, ({event2}, '{bob_str}', '{zia_otx}', '{bad_zia_inx}')
-, ({event5}, '{yao_str}', '{bad_zia_otx}', '{bad_zia_inx}')
-, ({event7}, '{yao_str}', '{bad_zia_otx}', '{zia_inx}')
+  ({spark1}, '{bob_str}', '{sue_otx}', '{sue_inx}')
+, ({spark1}, '{bob_str}', '{sue_otx}', '{bad_sue_inx}')
+, ({spark2}, '{bob_str}', '{zia_otx}', '{bad_zia_inx}')
+, ({spark5}, '{yao_str}', '{bad_zia_otx}', '{bad_zia_inx}')
+, ({spark7}, '{yao_str}', '{bad_zia_otx}', '{zia_inx}')
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -825,11 +825,11 @@ def test_create_update_trltitl_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
     bad_swim_otx = "swimmers"
     bad_swim_inx = "swimmers"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
-    event9 = 9
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
+    spark9 = 9
     error_title_str = "Otx and inx titles must match knot."
 
     with sqlite3_connect(":memory:") as db_conn:
@@ -838,7 +838,7 @@ def test_create_update_trltitl_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
         trltitl_dimen = wx.translate_title
         trltitl_s_agg_tablename = create_prime_tablename(trltitl_dimen, "s", "agg")
         insert_into_clause = f"""INSERT INTO {trltitl_s_agg_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.otx_title}
 , {wx.inx_title}
@@ -846,11 +846,11 @@ def test_create_update_trltitl_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
         # TODO create values where errors will appear: groups should map to groups,
         values_clause = f"""
 VALUES
-  ({event1}, '{bob_str}', '{sue_otx}', '{sue_inx}')
-, ({event1}, '{yao_str}', '{bad_sue_otx}', '{sue_inx}')
-, ({event2}, '{bob_str}', '{swim_otx}', '{swim_inx}')
-, ({event5}, '{yao_str}', '{swim_otx}', '{bad_swim_inx}')
-, ({event7}, '{yao_str}', '{bad_swim_otx}', '{swim_inx}')
+  ({spark1}, '{bob_str}', '{sue_otx}', '{sue_inx}')
+, ({spark1}, '{yao_str}', '{bad_sue_otx}', '{sue_inx}')
+, ({spark2}, '{bob_str}', '{swim_otx}', '{swim_inx}')
+, ({spark5}, '{yao_str}', '{swim_otx}', '{bad_swim_inx}')
+, ({spark7}, '{yao_str}', '{bad_swim_otx}', '{swim_inx}')
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -922,7 +922,7 @@ def test_update_translate_sound_agg_knot_errors_UpdatesTables_Scenario0():
     ukx = "Unknown"
     sue_inx = "Sue"
     bad_sue_otx = f"{rdx}Suzy"
-    event1 = 1
+    spark1 = 1
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -935,17 +935,17 @@ def test_update_translate_sound_agg_knot_errors_UpdatesTables_Scenario0():
         trlname_s_agg_tablename = create_prime_tablename(wx.translate_name, "s", "agg")
         trltitl_s_agg_tablename = create_prime_tablename(wx.translate_title, "s", "agg")
         insert_trllabe_sqlstr = f"""
-INSERT INTO {trllabe_s_agg_tablename} ({wx.event_num}, {wx.face_name}, {wx.otx_label}, {wx.inx_label})
-VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
+INSERT INTO {trllabe_s_agg_tablename} ({wx.spark_num}, {wx.face_name}, {wx.otx_label}, {wx.inx_label})
+VALUES ({spark1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
         insert_trlrope_sqlstr = f"""
-INSERT INTO {trlrope_s_agg_tablename} ({wx.event_num}, {wx.face_name}, {wx.otx_rope}, {wx.inx_rope})
-VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
+INSERT INTO {trlrope_s_agg_tablename} ({wx.spark_num}, {wx.face_name}, {wx.otx_rope}, {wx.inx_rope})
+VALUES ({spark1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
         insert_trlname_sqlstr = f"""
-INSERT INTO {trlname_s_agg_tablename} ({wx.event_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
-VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
+INSERT INTO {trlname_s_agg_tablename} ({wx.spark_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
+VALUES ({spark1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
         insert_trltitl_sqlstr = f"""
-INSERT INTO {trltitl_s_agg_tablename} ({wx.event_num}, {wx.face_name}, {wx.otx_title}, {wx.inx_title})
-VALUES ({event1}, '{bob_str}', '{bad_sue_otx}', '{sue_inx}');"""
+INSERT INTO {trltitl_s_agg_tablename} ({wx.spark_num}, {wx.face_name}, {wx.otx_title}, {wx.inx_title})
+VALUES ({spark1}, '{bob_str}', '{bad_sue_otx}', '{sue_inx}');"""
         cursor.execute(insert_trllabe_sqlstr)
         cursor.execute(insert_trlrope_sqlstr)
         cursor.execute(insert_trlname_sqlstr)
@@ -975,7 +975,7 @@ VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         assert cursor.execute(trlname_error_count_sqlstr).fetchone()[0] == 1
         assert cursor.execute(trltitl_error_count_sqlstr).fetchone()[0] == 1
         assert get_row_count(cursor, trltitl_s_agg_tablename) == 1
-        select_core_raw_sqlstr = f"SELECT {wx.event_num}, {wx.face_name}, {wx.otx_label}, {wx.inx_label} FROM {trllabe_s_agg_tablename}"
+        select_core_raw_sqlstr = f"SELECT {wx.spark_num}, {wx.face_name}, {wx.otx_label}, {wx.inx_label} FROM {trllabe_s_agg_tablename}"
         cursor.execute(select_core_raw_sqlstr)
         rows = cursor.fetchall()
         exp_row0 = (1, bob_str, f"{casa_str}{rdx}", casa_str)
@@ -993,10 +993,10 @@ def test_create_insert_translate_sound_vld_table_sqlstr_ReturnsObj_PopulatesTabl
     rdx = ":"
     other_knot = "/"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
     error_translate_str = "Inconsistent translate core data"
 
     with sqlite3_connect(":memory:") as db_conn:
@@ -1007,7 +1007,7 @@ def test_create_insert_translate_sound_vld_table_sqlstr_ReturnsObj_PopulatesTabl
             trlrope_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_rope_s_agg_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
@@ -1018,14 +1018,14 @@ def test_create_insert_translate_sound_vld_table_sqlstr_ReturnsObj_PopulatesTabl
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, '{error_translate_str}')
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, '{error_translate_str}')
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL, '{error_translate_str}')
-, ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', '{error_translate_str}')
-, ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', '{error_translate_str}')
-, ({event1}, '{yao_str}', '{yao_str}', '{yao_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
-, ({event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
-, ({event7}, '{bob_str}', '{bob_str}', '{bob_inx}', NULL, NULL, '{ukx}', NULL)
+  ({spark1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, '{error_translate_str}')
+, ({spark1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, '{error_translate_str}')
+, ({spark1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL, '{error_translate_str}')
+, ({spark2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', '{error_translate_str}')
+, ({spark5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', '{error_translate_str}')
+, ({spark1}, '{yao_str}', '{yao_str}', '{yao_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
+, ({spark7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
+, ({spark7}, '{bob_str}', '{bob_str}', '{bob_inx}', NULL, NULL, '{ukx}', NULL)
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -1047,9 +1047,9 @@ VALUES
         rows = cursor.fetchall()
         print(rows)
         assert rows == [
-            (event1, yao_str, yao_str, yao_str),
-            (event7, bob_str, bob_str, bob_inx),
-            (event7, yao_str, yao_str, yao_inx),
+            (spark1, yao_str, yao_str, yao_str),
+            (spark7, bob_str, bob_str, bob_inx),
+            (spark7, yao_str, yao_str, yao_inx),
         ]
 
 
@@ -1063,10 +1063,10 @@ def test_insert_translate_sound_agg_tables_to_translate_sound_vld_table_Populate
     rdx = ":"
     other_knot = "/"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
     error_translate_str = "Inconsistent translate core data"
 
     with sqlite3_connect(":memory:") as db_conn:
@@ -1077,7 +1077,7 @@ def test_insert_translate_sound_agg_tables_to_translate_sound_vld_table_Populate
             trlrope_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_rope_s_agg_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
@@ -1088,14 +1088,14 @@ def test_insert_translate_sound_agg_tables_to_translate_sound_vld_table_Populate
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, '{error_translate_str}')
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, '{error_translate_str}')
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL, '{error_translate_str}')
-, ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', '{error_translate_str}')
-, ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', '{error_translate_str}')
-, ({event1}, '{yao_str}', '{yao_str}', '{yao_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
-, ({event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
-, ({event7}, '{bob_str}', '{bob_str}', '{bob_inx}', NULL, NULL, '{ukx}', NULL)
+  ({spark1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, '{error_translate_str}')
+, ({spark1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, '{error_translate_str}')
+, ({spark1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL, '{error_translate_str}')
+, ({spark2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', '{error_translate_str}')
+, ({spark5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', '{error_translate_str}')
+, ({spark1}, '{yao_str}', '{yao_str}', '{yao_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
+, ({spark7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
+, ({spark7}, '{bob_str}', '{bob_str}', '{bob_inx}', NULL, NULL, '{ukx}', NULL)
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -1115,9 +1115,9 @@ VALUES
         rows = cursor.fetchall()
         print(rows)
         assert rows == [
-            (event1, yao_str, yao_str, yao_str),
-            (event7, bob_str, bob_str, bob_inx),
-            (event7, yao_str, yao_str, yao_inx),
+            (spark1, yao_str, yao_str, yao_str),
+            (spark7, bob_str, bob_str, bob_inx),
+            (spark7, yao_str, yao_str, yao_inx),
         ]
 
 
@@ -1131,10 +1131,10 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario0_
     rdx = ":"
     other_knot = "/"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -1144,7 +1144,7 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario0_
             trlname_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_name_s_agg_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.otx_name}
 , {wx.inx_name}
@@ -1154,16 +1154,16 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario0_
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL)
-, ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
-, ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ({event1}, '{yao_str}', '{yao_str}', '{yao_str}', '{rdx}', '{rdx}', '{ukx}')
-, ({event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', NULL)
-, ({event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
-, ({event7}, '{bob_str}', '{bob_str}', '{bob_inx}', NULL, NULL, '{ukx}')
-, ({event7}, '{bob_str}', '{bob_str}', '{bob_inx}', NULL, NULL, '{ukx}')
+  ({spark1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
+, ({spark1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
+, ({spark1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL)
+, ({spark2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
+, ({spark5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ({spark1}, '{yao_str}', '{yao_str}', '{yao_str}', '{rdx}', '{rdx}', '{ukx}')
+, ({spark7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', NULL)
+, ({spark7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
+, ({spark7}, '{bob_str}', '{bob_str}', '{bob_inx}', NULL, NULL, '{ukx}')
+, ({spark7}, '{bob_str}', '{bob_str}', '{bob_inx}', NULL, NULL, '{ukx}')
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -1198,9 +1198,9 @@ VALUES
         rows = cursor.fetchall()
         print(rows)
         assert rows == [
-            (event1, yao_str, yao_str, yao_str),
-            (event7, bob_str, bob_str, bob_inx),
-            (event7, yao_str, yao_str, yao_inx),
+            (spark1, yao_str, yao_str, yao_str),
+            (spark7, bob_str, bob_str, bob_inx),
+            (spark7, yao_str, yao_str, yao_inx),
         ]
 
 
@@ -1210,7 +1210,7 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario1_
     casa_str = "Casa"
     rdx = ":"
     ukx = "Unknown"
-    event1 = 1
+    spark1 = 1
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -1219,14 +1219,14 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario1_
         trlrope_s_agg_tablename = create_prime_tablename(wx.translate_rope, "s", "agg")
         trlname_s_agg_tablename = create_prime_tablename(wx.translate_name, "s", "agg")
         insert_trllabe_sqlstr = f"""
-INSERT INTO {trllabe_s_agg_tablename} ({wx.event_num}, {wx.face_name}, {wx.otx_label}, {wx.inx_label})
-VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
+INSERT INTO {trllabe_s_agg_tablename} ({wx.spark_num}, {wx.face_name}, {wx.otx_label}, {wx.inx_label})
+VALUES ({spark1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
         insert_trlrope_sqlstr = f"""
-INSERT INTO {trlrope_s_agg_tablename} ({wx.event_num}, {wx.face_name}, {wx.otx_rope}, {wx.inx_rope})
-VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
+INSERT INTO {trlrope_s_agg_tablename} ({wx.spark_num}, {wx.face_name}, {wx.otx_rope}, {wx.inx_rope})
+VALUES ({spark1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
         insert_trlname_sqlstr = f"""
-INSERT INTO {trlname_s_agg_tablename} ({wx.event_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
-VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
+INSERT INTO {trlname_s_agg_tablename} ({wx.spark_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
+VALUES ({spark1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
         cursor.execute(insert_trllabe_sqlstr)
         cursor.execute(insert_trlrope_sqlstr)
         cursor.execute(insert_trlname_sqlstr)
@@ -1250,7 +1250,7 @@ VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         assert cursor.execute(trllabe_error_count_sqlstr).fetchone()[0] == 1
         assert cursor.execute(trlrope_error_count_sqlstr).fetchone()[0] == 1
         assert cursor.execute(trlname_error_count_sqlstr).fetchone()[0] == 1
-        select_core_raw_sqlstr = f"SELECT {wx.event_num}, {wx.face_name}, {wx.otx_label}, {wx.inx_label} FROM {trllabe_s_agg_tablename}"
+        select_core_raw_sqlstr = f"SELECT {wx.spark_num}, {wx.face_name}, {wx.otx_label}, {wx.inx_label} FROM {trllabe_s_agg_tablename}"
         cursor.execute(select_core_raw_sqlstr)
         rows = cursor.fetchall()
         exp_row0 = (1, bob_str, f"{casa_str}{rdx}", casa_str)
@@ -1265,7 +1265,7 @@ def test_populate_translate_core_vld_with_missing_face_names_Scenario0_Populates
     casa_str = "Casa"
     rdx = ":"
     ukx = "Unknown"
-    event1 = 1
+    spark1 = 1
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -1273,8 +1273,8 @@ def test_populate_translate_core_vld_with_missing_face_names_Scenario0_Populates
         blrpern_str = wx.belief_voiceunit
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
-INSERT INTO {blrpern_s_agg_tablename} ({wx.event_num}, {wx.face_name}, {wx.belief_name}, {wx.voice_name})
-VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
+INSERT INTO {blrpern_s_agg_tablename} ({wx.spark_num}, {wx.face_name}, {wx.belief_name}, {wx.voice_name})
+VALUES ({spark1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
         cursor.execute(insert_blrpern_sqlstr)
 
         trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
@@ -1300,7 +1300,7 @@ def test_populate_translate_core_vld_with_missing_face_names_Scenario1_Populates
     yao_str = "Yao"
     rdx = ":"
     ukx = "Unknown"
-    event1 = 1
+    spark1 = 1
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -1308,8 +1308,8 @@ def test_populate_translate_core_vld_with_missing_face_names_Scenario1_Populates
         blrpern_str = wx.belief_voiceunit
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
-INSERT INTO {blrpern_s_agg_tablename} ({wx.event_num}, {wx.face_name}, {wx.belief_name}, {wx.voice_name})
-VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({event1}, '{yao_str}', '{yao_str}', '{yao_str}');"""
+INSERT INTO {blrpern_s_agg_tablename} ({wx.spark_num}, {wx.face_name}, {wx.belief_name}, {wx.voice_name})
+VALUES ({spark1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({spark1}, '{yao_str}', '{yao_str}', '{yao_str}');"""
         cursor.execute(insert_blrpern_sqlstr)
 
         trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
@@ -1343,7 +1343,7 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario2_
     casa_str = "Casa"
     rdx = ":"
     ukx = "Unknown"
-    event1 = 1
+    spark1 = 1
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -1351,8 +1351,8 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario2_
         blrpern_str = wx.belief_voiceunit
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
-INSERT INTO {blrpern_s_agg_tablename} ({wx.event_num}, {wx.face_name}, {wx.belief_name}, {wx.voice_name})
-VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
+INSERT INTO {blrpern_s_agg_tablename} ({wx.spark_num}, {wx.face_name}, {wx.belief_name}, {wx.voice_name})
+VALUES ({spark1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
         cursor.execute(insert_blrpern_sqlstr)
 
         trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
@@ -1378,7 +1378,7 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario3_
     yao_str = "Yao"
     rdx = ":"
     ukx = "Unknown"
-    event1 = 1
+    spark1 = 1
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -1386,8 +1386,8 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario3_
         blrpern_str = wx.belief_voiceunit
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
-INSERT INTO {blrpern_s_agg_tablename} ({wx.event_num}, {wx.face_name}, {wx.belief_name}, {wx.voice_name})
-VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({event1}, '{yao_str}', '{yao_str}', '{yao_str}');"""
+INSERT INTO {blrpern_s_agg_tablename} ({wx.spark_num}, {wx.face_name}, {wx.belief_name}, {wx.voice_name})
+VALUES ({spark1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({spark1}, '{yao_str}', '{yao_str}', '{yao_str}');"""
         cursor.execute(insert_blrpern_sqlstr)
 
         trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")

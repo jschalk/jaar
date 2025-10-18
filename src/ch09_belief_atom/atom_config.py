@@ -64,7 +64,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "addin": "float",
         "awardee_title": "TitleTerm",
         "reason_context": "RopeTerm",
-        "reason_active_requisite": "bool",
+        "active_requisite": "bool",
         "begin": "float",
         "close": "float",
         "voice_cred_lumen": "float",

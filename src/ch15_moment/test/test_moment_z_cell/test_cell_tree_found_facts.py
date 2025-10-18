@@ -20,9 +20,9 @@ def test_set_cell_trees_found_facts_Scenario0_RootOnly_NoFacts(
     time5 = 5
     das = []
     bob5_dir = cell_dir(moment_mstr_dir, a23_str, bob_str, time5, das)
-    bob5_cell = cellunit_shop(bob_str, beliefevent_facts={})
+    bob5_cell = cellunit_shop(bob_str, beliefspark_facts={})
     cellunit_save_to_dir(bob5_dir, bob5_cell)
-    assert bob5_cell.get_beliefevents_quota_ledger() == {}
+    assert bob5_cell.get_beliefsparks_quota_ledger() == {}
     assert cellunit_get_from_dir(bob5_dir).found_facts == {}
 
     # WHEN
@@ -51,9 +51,9 @@ def test_set_cell_trees_found_facts_Scenario1_ChildNode_NoFacts(
     cellunit_save_to_dir(bob5_dir, cellunit_shop(bob_str, das))
     cellunit_save_to_dir(bob5_yao_dir, cellunit_shop(bob_str, das_y))
     cellunit_save_to_dir(bob5_yao_sue_dir, cellunit_shop(bob_str, das_ys))
-    cellunit_get_from_dir(bob5_dir).get_beliefevents_quota_ledger() == {}
-    cellunit_get_from_dir(bob5_yao_dir).get_beliefevents_quota_ledger() == {}
-    cellunit_get_from_dir(bob5_yao_sue_dir).get_beliefevents_quota_ledger() == {}
+    cellunit_get_from_dir(bob5_dir).get_beliefsparks_quota_ledger() == {}
+    cellunit_get_from_dir(bob5_yao_dir).get_beliefsparks_quota_ledger() == {}
+    cellunit_get_from_dir(bob5_yao_sue_dir).get_beliefsparks_quota_ledger() == {}
     assert cellunit_get_from_dir(bob5_dir).found_facts == {}
 
     # WHEN
@@ -80,29 +80,29 @@ def test_set_cell_trees_found_facts_Scenario2_ChildNodeWithOneFactIsAssignedToAn
     bob5_dir = cell_dir(mstr_dir, a23_str, bob_str, time5, das)
     bob5_yao_dir = cell_dir(mstr_dir, a23_str, bob_str, time5, das_y)
     bob5_yao_sue_dir = cell_dir(mstr_dir, a23_str, bob_str, time5, das_ys)
-    bob5_beliefevent = beliefunit_shop(bob_str, a23_str)
-    bob5_yao_beliefevent = beliefunit_shop(yao_str, a23_str)
-    bob5_yao_sue_beliefevent = beliefunit_shop(sue_str, a23_str)
-    bob5_beliefevent.add_voiceunit(yao_str)
-    bob5_yao_beliefevent.add_voiceunit(sue_str)
-    bob5_yao_sue_beliefevent.add_voiceunit(bob_str)
-    bob5_yao_sue_beliefevent.add_plan(clean_fact.fact_state, 1)
-    bob5_yao_sue_beliefevent.add_fact(clean_fact.fact_context, clean_fact.fact_state)
-    bob5_cell = cellunit_shop(bob_str, das, beliefadjust=bob5_beliefevent)
-    bob5_yao_cell = cellunit_shop(bob_str, das_y, beliefadjust=bob5_yao_beliefevent)
+    bob5_beliefspark = beliefunit_shop(bob_str, a23_str)
+    bob5_yao_beliefspark = beliefunit_shop(yao_str, a23_str)
+    bob5_yao_sue_beliefspark = beliefunit_shop(sue_str, a23_str)
+    bob5_beliefspark.add_voiceunit(yao_str)
+    bob5_yao_beliefspark.add_voiceunit(sue_str)
+    bob5_yao_sue_beliefspark.add_voiceunit(bob_str)
+    bob5_yao_sue_beliefspark.add_plan(clean_fact.fact_state, 1)
+    bob5_yao_sue_beliefspark.add_fact(clean_fact.fact_context, clean_fact.fact_state)
+    bob5_cell = cellunit_shop(bob_str, das, beliefadjust=bob5_beliefspark)
+    bob5_yao_cell = cellunit_shop(bob_str, das_y, beliefadjust=bob5_yao_beliefspark)
     clean_facts = {clean_fact.fact_context: clean_fact}
     bob5_yao_sue_cell = cellunit_shop(
         bob_str,
         das_ys,
-        beliefadjust=bob5_yao_sue_beliefevent,
-        beliefevent_facts=clean_facts,
+        beliefadjust=bob5_yao_sue_beliefspark,
+        beliefspark_facts=clean_facts,
     )
-    assert bob5_cell.get_beliefevents_quota_ledger() == {yao_str: 1000}
-    assert bob5_yao_cell.get_beliefevents_quota_ledger() == {sue_str: 1000}
-    assert bob5_yao_sue_cell.get_beliefevents_quota_ledger() == {bob_str: 1000}
-    assert bob5_cell.beliefevent_facts == {}
-    assert bob5_yao_cell.beliefevent_facts == {}
-    assert bob5_yao_sue_cell.beliefevent_facts == clean_facts
+    assert bob5_cell.get_beliefsparks_quota_ledger() == {yao_str: 1000}
+    assert bob5_yao_cell.get_beliefsparks_quota_ledger() == {sue_str: 1000}
+    assert bob5_yao_sue_cell.get_beliefsparks_quota_ledger() == {bob_str: 1000}
+    assert bob5_cell.beliefspark_facts == {}
+    assert bob5_yao_cell.beliefspark_facts == {}
+    assert bob5_yao_sue_cell.beliefspark_facts == clean_facts
     cellunit_save_to_dir(bob5_dir, bob5_cell)
     cellunit_save_to_dir(bob5_yao_dir, bob5_yao_cell)
     cellunit_save_to_dir(bob5_yao_sue_dir, bob5_yao_sue_cell)

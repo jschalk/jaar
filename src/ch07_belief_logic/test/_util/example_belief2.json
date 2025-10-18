@@ -16,9 +16,9 @@
       "A;Seasons;": {"fact_context": ";A;Seasons;", "fact_state": ";A;Seasons;"}, 
       "A;WaterExistence;": {"fact_context": ";A;WaterExistence;", "fact_state": ";A;WaterExistence;"}, 
       "A;Websites;": {"fact_context": ";A;Websites;", "fact_state": ";A;Websites;"}, 
-      "A;casa;cleaning;laundry basket status;": {
-        "fact_context": ";A;casa;cleaning;laundry basket status;", 
-        "fact_state": ";A;casa;cleaning;laundry basket status;not full"
+      "A;casa;cleaning;laundry basket situation;": {
+        "fact_context": ";A;casa;cleaning;laundry basket situation;", 
+        "fact_state": ";A;casa;cleaning;laundry basket situation;not full"
       }, 
       "A;ziet;gregziet;": {
         "fact_context": ";A;ziet;gregziet;", 
@@ -1290,13 +1290,13 @@
         "star": 1, 
         "uid": 275
       }, 
-      "Tired Status": {
+      "Tired Situation": {
         "is_expanded": false, 
         "kids": {
           "Not tired": { "plan_label": "Not tired", "star": 1, "uid": 278 }, 
           "Tired"    : { "plan_label": "Tired"    , "star": 1, "uid": 279 }
         }, 
-        "plan_label": "Tired Status", 
+        "plan_label": "Tired Situation", 
         "star": 1, 
         "uid": 277
       }, 
@@ -1485,7 +1485,7 @@
       "casa": {
         "is_expanded": false, 
         "kids": {
-          "Financial Ops": {
+          "Boring Ops": {
             "is_expanded": false, 
             "kids": {
               "be reponsible for rent": {
@@ -1567,7 +1567,7 @@
                 "uid": 75
               }
             }, 
-            "plan_label": "Financial Ops", 
+            "plan_label": "Boring Ops", 
             "star": 1, 
             "uid": 148
           }, 
@@ -1891,13 +1891,13 @@
                 "star": 1, 
                 "uid": 13
               }, 
-              "laundry basket status": {
+              "laundry basket situation": {
                 "kids": {
                   "full"    : { "morph": false, "plan_label": "full"    , "star": 1.0 }, 
                   "not full": { "morph": false, "plan_label": "not full", "star": 1.0 }
                 }, 
                 "morph": false, 
-                "plan_label": "laundry basket status", 
+                "plan_label": "laundry basket situation", 
                 "star": 1.0
               }, 
               "laundry mon": {
@@ -1905,11 +1905,11 @@
                 "plan_label": "laundry mon", 
                 "pledge": true, 
                 "reasonunits": {
-                  "A;casa;cleaning;laundry basket status;": {
+                  "A;casa;cleaning;laundry basket situation;": {
                     "cases": {
-                      "A;casa;cleaning;laundry basket status;full": {"reason_state": ";A;casa;cleaning;laundry basket status;full"}
+                      "A;casa;cleaning;laundry basket situation;full": {"reason_state": ";A;casa;cleaning;laundry basket situation;full"}
                     }, 
-                    "reason_context": ";A;casa;cleaning;laundry basket status;"
+                    "reason_context": ";A;casa;cleaning;laundry basket situation;"
                   }, 
                   "A;ziet;gregziet;": {
                     "cases": {
@@ -1933,11 +1933,11 @@
                 "plan_label": "laundry sat", 
                 "pledge": true, 
                 "reasonunits": {
-                  "A;casa;cleaning;laundry basket status;": {
+                  "A;casa;cleaning;laundry basket situation;": {
                     "cases": {
-                      "A;casa;cleaning;laundry basket status;full": {"reason_state": ";A;casa;cleaning;laundry basket status;full"}
+                      "A;casa;cleaning;laundry basket situation;full": {"reason_state": ";A;casa;cleaning;laundry basket situation;full"}
                     }, 
-                    "reason_context": ";A;casa;cleaning;laundry basket status;"
+                    "reason_context": ";A;casa;cleaning;laundry basket situation;"
                   }, 
                   "A;ziet;gregziet;": {
                     "cases": {
@@ -1959,11 +1959,11 @@
                 "plan_label": "laundry thur", 
                 "pledge": true, 
                 "reasonunits": {
-                  "A;casa;cleaning;laundry basket status;": {
+                  "A;casa;cleaning;laundry basket situation;": {
                     "cases": {
-                      "A;casa;cleaning;laundry basket status;full": {"reason_state": ";A;casa;cleaning;laundry basket status;full"}
+                      "A;casa;cleaning;laundry basket situation;full": {"reason_state": ";A;casa;cleaning;laundry basket situation;full"}
                     }, 
-                    "reason_context": ";A;casa;cleaning;laundry basket status;"
+                    "reason_context": ";A;casa;cleaning;laundry basket situation;"
                   }, 
                   "A;ziet;gregziet;": {
                     "cases": {
@@ -1984,11 +1984,11 @@
                 "plan_label": "laundry wed", 
                 "pledge": true, 
                 "reasonunits": {
-                  "A;casa;cleaning;laundry basket status;": {
+                  "A;casa;cleaning;laundry basket situation;": {
                     "cases": {
-                      "A;casa;cleaning;laundry basket status;full": {"reason_state": ";A;casa;cleaning;laundry basket status;full"}
+                      "A;casa;cleaning;laundry basket situation;full": {"reason_state": ";A;casa;cleaning;laundry basket situation;full"}
                     }, 
-                    "reason_context": ";A;casa;cleaning;laundry basket status;"
+                    "reason_context": ";A;casa;cleaning;laundry basket situation;"
                   }, 
                   "A;ziet;gregziet;": {
                     "cases": {

@@ -30,7 +30,7 @@ def test_BeliefUnit_Exists():
     assert x_belief.fund_grain is None
     assert x_belief.respect_grain is None
     assert x_belief.money_grain is None
-    assert x_belief.last_pack_id is None
+    assert x_belief.last_lesson_id is None
     # calculated attr
     assert x_belief._plan_dict is None
     assert x_belief._keep_dict is None
@@ -69,7 +69,7 @@ def test_BeliefUnit_Exists():
         wx.moment_label,
         wx.fund_grain,
         wx.fund_pool,
-        wx.last_pack_id,
+        wx.last_lesson_id,
         wx.max_tree_traverse,
         wx.belief_name,
         wx.money_grain,
@@ -150,7 +150,7 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     assert x_belief.money_grain == x_money_grain
     assert x_belief.credor_respect == RespectNum(validate_pool_num())
     assert x_belief.debtor_respect == RespectNum(validate_pool_num())
-    assert not x_belief.last_pack_id
+    assert not x_belief.last_lesson_id
     # calculated attr
     assert x_belief._plan_dict == {}
     assert x_belief._keep_dict == {}
@@ -249,48 +249,48 @@ def test_BeliefUnit_make_rope_ReturnsObj():
     assert v1_casa_rope == v2_casa_rope
 
 
-def test_BeliefUnit_set_last_pack_id_SetsAttr():
+def test_BeliefUnit_set_last_lesson_id_SetsAttr():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue", "Texas")
-    assert sue_belief.last_pack_id is None
+    assert sue_belief.last_lesson_id is None
 
     # WHEN
-    x_last_pack_id = 89
-    sue_belief.set_last_pack_id(x_last_pack_id)
+    x_last_lesson_id = 89
+    sue_belief.set_last_lesson_id(x_last_lesson_id)
 
     # THEN
-    assert sue_belief.last_pack_id == x_last_pack_id
+    assert sue_belief.last_lesson_id == x_last_lesson_id
 
 
-def test_BeliefUnit_set_last_pack_id_RaisesError():
+def test_BeliefUnit_set_last_lesson_id_RaisesError():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue", "Texas")
-    old_last_pack_id = 89
-    sue_belief.set_last_pack_id(old_last_pack_id)
+    old_last_lesson_id = 89
+    sue_belief.set_last_lesson_id(old_last_lesson_id)
 
     # WHEN / THEN
-    new_last_pack_id = 72
-    assert new_last_pack_id < old_last_pack_id
+    new_last_lesson_id = 72
+    assert new_last_lesson_id < old_last_lesson_id
     with pytest_raises(Exception) as excinfo:
-        sue_belief.set_last_pack_id(new_last_pack_id)
+        sue_belief.set_last_lesson_id(new_last_lesson_id)
     assert (
         str(excinfo.value)
-        == f"Cannot set _last_pack_id to {new_last_pack_id} because it is less than {old_last_pack_id}."
+        == f"Cannot set _last_lesson_id to {new_last_lesson_id} because it is less than {old_last_lesson_id}."
     )
 
 
-def test_BeliefUnit_del_last_pack_id_SetsAttr():
+def test_BeliefUnit_del_last_lesson_id_SetsAttr():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue", "Texas")
-    old_last_pack_id = 89
-    sue_belief.set_last_pack_id(old_last_pack_id)
-    assert sue_belief.last_pack_id is not None
+    old_last_lesson_id = 89
+    sue_belief.set_last_lesson_id(old_last_lesson_id)
+    assert sue_belief.last_lesson_id is not None
 
     # WHEN
-    sue_belief.del_last_pack_id()
+    sue_belief.del_last_lesson_id()
 
     # THEN
-    assert sue_belief.last_pack_id is None
+    assert sue_belief.last_lesson_id is None
 
 
 def test_BeliefUnit_set_fund_pool_SetsAttr():

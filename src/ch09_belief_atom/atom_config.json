@@ -145,7 +145,7 @@
       }
     }, 
     "jvalues": {
-      "reason_active_requisite": {"class_type": "bool", "column_order": 2, "sqlite_datatype": "INTEGER"}
+      "active_requisite": {"class_type": "bool", "column_order": 2, "sqlite_datatype": "INTEGER"}
     }, 
     "normal_specs": {"normal_table_name": "reason"}
   }, 

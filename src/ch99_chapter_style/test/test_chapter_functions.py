@@ -40,7 +40,7 @@ def expected_semantic_types() -> set:
         "CRUD_command",
         "FirstLabel",
         "NexusLabel",
-        "EventInt",
+        "SparkInt",
         "FaceName",
         "FundGrain",
         "FundNum",
@@ -62,6 +62,7 @@ def expected_semantic_types() -> set:
         "TitleTerm",
         "VoiceName",
         "WorldName",
+        "WeightNum",
     }
 
 
@@ -156,9 +157,7 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
     keywords_dict = get_keywords_src_config()
     keywords_by_chapter = get_keywords_by_chapter(keywords_dict)
     all_keywords_set = set(keywords_dict.keys())
-    keywords_in_ch_count = {}
-    for keyword in keywords_dict.keys():
-        keywords_in_ch_count[keyword] = {}
+    keywords_in_ch_count = {keyword: {} for keyword in keywords_dict.keys()}
     cumlative_ch_keywords_dict = get_cumlative_ch_keywords_dict(keywords_by_chapter)
 
     # WHEN / THEN
@@ -370,6 +369,7 @@ def test_Chapters_path_FunctionStructureAndFormat():
                     all_test_functions[function_name] = function_str
 
     print(f"Total path functions found: {len(path_functions)}")
+    # THEN
     for function_name, file_path in path_functions.items():
         func_docstring = get_docstring(file_path, function_name)
         # if not func_docstring:

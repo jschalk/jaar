@@ -3,9 +3,9 @@ from pytest import raises as pytest_raises
 from src.ch06_plan.healer import healerunit_shop
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_graphics import display_plantree
-from src.ch10_pack.pack_filehandler import (
+from src.ch10_lesson.lesson_filehandler import (
+    lessonfilehandler_shop,
     open_gut_file,
-    packfilehandler_shop,
     save_gut_file,
 )
 from src.ch11_bud.test._util.ch11_env import (
@@ -22,8 +22,8 @@ def test_get_keep_ropes_RaisesErrorWhen_keeps_justified_IsFalse(
     # ESTABLISH
     sue_str = "Sue"
     a23_str = "amy23"
-    sue_packfilehandler = packfilehandler_shop(env_dir(), a23_str, sue_str, None)
-    save_gut_file(env_dir(), sue_packfilehandler.default_gut_belief())
+    sue_lessonfilehandler = lessonfilehandler_shop(env_dir(), a23_str, sue_str, None)
+    save_gut_file(env_dir(), sue_lessonfilehandler.default_gut_belief())
     sue_gut_belief = open_gut_file(env_dir(), a23_str, sue_str)
     sue_gut_belief.add_voiceunit(sue_str)
     texas_str = "Texas"
@@ -51,8 +51,8 @@ def test_get_keep_ropes_RaisesErrorWhen_keeps_buildable_IsFalse(
     # ESTABLISH
     sue_str = "Sue"
     a23_str = "amy23"
-    sue_packfilehandler = packfilehandler_shop(env_dir(), a23_str, sue_str, None)
-    save_gut_file(env_dir(), sue_packfilehandler.default_gut_belief())
+    sue_lessonfilehandler = lessonfilehandler_shop(env_dir(), a23_str, sue_str, None)
+    save_gut_file(env_dir(), sue_lessonfilehandler.default_gut_belief())
     sue_gut_belief = open_gut_file(env_dir(), a23_str, sue_str)
     sue_gut_belief.add_voiceunit(sue_str)
     texas_str = "Tex/as"
@@ -75,8 +75,8 @@ def test_get_keep_ropes_ReturnsObj(env_dir_setup_cleanup, graphics_bool):
     # ESTABLISH
     sue_str = "Sue"
     a23_str = "amy23"
-    sue_packfilehandler = packfilehandler_shop(env_dir(), a23_str, sue_str, None)
-    save_gut_file(env_dir(), sue_packfilehandler.default_gut_belief())
+    sue_lessonfilehandler = lessonfilehandler_shop(env_dir(), a23_str, sue_str, None)
+    save_gut_file(env_dir(), sue_lessonfilehandler.default_gut_belief())
     sue_gut_belief = open_gut_file(env_dir(), a23_str, sue_str)
     sue_gut_belief.add_voiceunit(sue_str)
     texas_str = "Texas"
@@ -109,8 +109,8 @@ def test_save_all_gut_dutys_Setsdutys(env_dir_setup_cleanup, graphics_bool):
     sue_str = "Sue"
     a23_str = "amy23"
     mstr_dir = env_dir()
-    sue_packfilehandler = packfilehandler_shop(mstr_dir, a23_str, sue_str, None)
-    save_gut_file(mstr_dir, sue_packfilehandler.default_gut_belief())
+    sue_lessonfilehandler = lessonfilehandler_shop(mstr_dir, a23_str, sue_str, None)
+    save_gut_file(mstr_dir, sue_lessonfilehandler.default_gut_belief())
     sue_gut_belief = open_gut_file(mstr_dir, a23_str, sue_str)
     sue_gut_belief.add_voiceunit(sue_str)
     bob_str = "Bob"
@@ -154,7 +154,7 @@ def test_save_all_gut_dutys_Setsdutys(env_dir_setup_cleanup, graphics_bool):
         moment_label=a23_str,
         belief_name=sue_str,
         keep_ropes=sue_keep_ropes,
-        knot=sue_packfilehandler.knot,
+        knot=sue_lessonfilehandler.knot,
     )
 
     # THEN

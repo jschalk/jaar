@@ -79,8 +79,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[0] == "world_name"
     assert table_sorting_priority[1] == "idea_number"
     assert table_sorting_priority[2] == "source_dimen"
-    assert table_sorting_priority[3] == "translate_event_num"
-    assert table_sorting_priority[4] == wx.event_num
+    assert table_sorting_priority[3] == "translate_spark_num"
+    assert table_sorting_priority[4] == wx.spark_num
     assert table_sorting_priority[5] == wx.face_name
     assert table_sorting_priority[6] == "face_name_otx"
     assert table_sorting_priority[7] == "face_name_inx"
@@ -136,7 +136,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[57] == "reason_context_ERASE"
     assert table_sorting_priority[58] == "reason_context_ERASE_otx"
     assert table_sorting_priority[59] == "reason_context_ERASE_inx"
-    assert table_sorting_priority[60] == "fact_context"
+    assert table_sorting_priority[60] == wx.fact_context
     assert table_sorting_priority[61] == "fact_context_otx"
     assert table_sorting_priority[62] == "fact_context_inx"
     assert table_sorting_priority[63] == "fact_context_ERASE"
@@ -148,7 +148,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[69] == "reason_state_ERASE"
     assert table_sorting_priority[70] == "reason_state_ERASE_otx"
     assert table_sorting_priority[71] == "reason_state_ERASE_inx"
-    assert table_sorting_priority[72] == "fact_state"
+    assert table_sorting_priority[72] == wx.fact_state
     assert table_sorting_priority[73] == "fact_state_otx"
     assert table_sorting_priority[74] == "fact_state_inx"
     assert table_sorting_priority[75] == wx.party_title
@@ -180,7 +180,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[101] == wx.morph
     assert table_sorting_priority[102] == wx.gogo_want
     assert table_sorting_priority[103] == wx.stop_want
-    assert table_sorting_priority[104] == wx.reason_active_requisite
+    assert table_sorting_priority[104] == wx.active_requisite
     assert table_sorting_priority[105] == wx.voice_cred_lumen
     assert table_sorting_priority[106] == wx.voice_debt_lumen
     assert table_sorting_priority[107] == wx.group_cred_lumen
@@ -221,42 +221,43 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[142] == wx.job_listen_rotations
     assert table_sorting_priority[143] == wx.error_message
     assert table_sorting_priority[144] == "_belief_name_is_labor"
-    assert table_sorting_priority[145] == wx.active
+    assert table_sorting_priority[145] == wx.plan_active
     assert table_sorting_priority[146] == wx.task
-    assert table_sorting_priority[147] == wx.status
-    assert table_sorting_priority[148] == wx.credor_pool
-    assert table_sorting_priority[149] == wx.debtor_pool
-    assert table_sorting_priority[150] == wx.rational
-    assert table_sorting_priority[151] == wx.fund_give
-    assert table_sorting_priority[152] == wx.fund_take
-    assert table_sorting_priority[153] == wx.fund_onset
-    assert table_sorting_priority[154] == wx.fund_cease
-    assert table_sorting_priority[155] == wx.fund_ratio
-    assert table_sorting_priority[156] == wx.fund_agenda_give
-    assert table_sorting_priority[157] == wx.fund_agenda_take
-    assert table_sorting_priority[158] == wx.fund_agenda_ratio_give
-    assert table_sorting_priority[159] == wx.fund_agenda_ratio_take
-    assert table_sorting_priority[160] == wx.inallocable_voice_debt_lumen
-    assert table_sorting_priority[161] == wx.gogo_calc
-    assert table_sorting_priority[162] == wx.stop_calc
-    assert table_sorting_priority[163] == wx.tree_level
-    assert table_sorting_priority[164] == wx.range_evaluated
-    assert table_sorting_priority[165] == wx.descendant_pledge_count
-    assert table_sorting_priority[166] == wx.healerunit_ratio
-    assert table_sorting_priority[167] == wx.all_voice_cred
-    assert table_sorting_priority[168] == wx.keeps_justified
-    assert table_sorting_priority[169] == wx.offtrack_fund
-    assert table_sorting_priority[170] == "_reason_active_heir"
-    assert table_sorting_priority[171] == "irrational_voice_debt_lumen"
-    assert table_sorting_priority[172] == wx.sum_healerunit_plans_fund_total
-    assert table_sorting_priority[173] == wx.keeps_buildable
-    assert table_sorting_priority[174] == wx.all_voice_debt
-    assert table_sorting_priority[175] == wx.tree_traverse_count
-    assert table_sorting_priority[176] == "funds"
-    assert table_sorting_priority[177] == "fund_rank"
-    assert table_sorting_priority[178] == "pledges_count"
+    assert table_sorting_priority[147] == wx.reason_active
+    assert table_sorting_priority[148] == wx.case_active
+    assert table_sorting_priority[149] == wx.credor_pool
+    assert table_sorting_priority[150] == wx.debtor_pool
+    assert table_sorting_priority[151] == wx.rational
+    assert table_sorting_priority[152] == wx.fund_give
+    assert table_sorting_priority[153] == wx.fund_take
+    assert table_sorting_priority[154] == wx.fund_onset
+    assert table_sorting_priority[155] == wx.fund_cease
+    assert table_sorting_priority[156] == wx.fund_ratio
+    assert table_sorting_priority[157] == wx.fund_agenda_give
+    assert table_sorting_priority[158] == wx.fund_agenda_take
+    assert table_sorting_priority[159] == wx.fund_agenda_ratio_give
+    assert table_sorting_priority[160] == wx.fund_agenda_ratio_take
+    assert table_sorting_priority[161] == wx.inallocable_voice_debt_lumen
+    assert table_sorting_priority[162] == wx.gogo_calc
+    assert table_sorting_priority[163] == wx.stop_calc
+    assert table_sorting_priority[164] == wx.tree_level
+    assert table_sorting_priority[165] == wx.range_evaluated
+    assert table_sorting_priority[166] == wx.descendant_pledge_count
+    assert table_sorting_priority[167] == wx.healerunit_ratio
+    assert table_sorting_priority[168] == wx.all_voice_cred
+    assert table_sorting_priority[169] == wx.keeps_justified
+    assert table_sorting_priority[170] == wx.offtrack_fund
+    assert table_sorting_priority[171] == "parent_heir_active"
+    assert table_sorting_priority[172] == "irrational_voice_debt_lumen"
+    assert table_sorting_priority[173] == wx.sum_healerunit_plans_fund_total
+    assert table_sorting_priority[174] == wx.keeps_buildable
+    assert table_sorting_priority[175] == wx.all_voice_debt
+    assert table_sorting_priority[176] == wx.tree_traverse_count
+    assert table_sorting_priority[177] == "funds"
+    assert table_sorting_priority[178] == "fund_rank"
+    assert table_sorting_priority[179] == "pledges_count"
 
-    assert len(table_sorting_priority) == 179
+    assert len(table_sorting_priority) == 180
     all_args = copy_copy(atom_args)
     all_args.update(all_belief_dimen_delete_keys)
     all_args.update(moment_args)
@@ -267,10 +268,10 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_args.update(translateable_delete_otx_cols)
     all_args.update(translateable_delete_inx_cols)
     all_args.add(wx.idea_number)
-    all_args.add(wx.event_num)
+    all_args.add(wx.spark_num)
     all_args.add(wx.face_name)
     all_args.add("source_dimen")
-    all_args.add("translate_event_num")
+    all_args.add("translate_spark_num")
     all_args.add(wx.error_message)
     all_args.add(wx.world_name)
     all_args.add("funds")  # kpi columns
@@ -297,8 +298,8 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert set(sqlite_types.keys()) == set(get_idea_elements_sort_order())
     assert sqlite_types.get(wx.idea_number) == "TEXT"
     assert sqlite_types.get(wx.face_name) == "TEXT"
-    assert sqlite_types.get("translate_event_num") == "INTEGER"
-    assert sqlite_types.get(wx.event_num) == "INTEGER"
+    assert sqlite_types.get("translate_spark_num") == "INTEGER"
+    assert sqlite_types.get(wx.spark_num) == "INTEGER"
     assert sqlite_types.get(wx.moment_label) == "TEXT"
     assert sqlite_types.get(wx.belief_name) == "TEXT"
     assert sqlite_types.get(wx.voice_name) == "TEXT"
@@ -321,7 +322,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(wx.morph) == "INTEGER"
     assert sqlite_types.get(wx.gogo_want) == "REAL"
     assert sqlite_types.get(wx.stop_want) == "REAL"
-    assert sqlite_types.get(wx.reason_active_requisite) == "INTEGER"
+    assert sqlite_types.get(wx.active_requisite) == "INTEGER"
     assert sqlite_types.get(wx.voice_cred_lumen) == "REAL"
     assert sqlite_types.get(wx.voice_debt_lumen) == "REAL"
     assert sqlite_types.get(wx.group_cred_lumen) == "REAL"
@@ -526,14 +527,14 @@ def _validate_idea_config(x_idea_config: dict):
         # print(f"    {sub_jkeys_keys=}")
         # print(f"  {idea_jkeys_keys=}")
         assert wx.face_name in idea_jkeys_keys
-        assert wx.event_num in idea_jkeys_keys
+        assert wx.spark_num in idea_jkeys_keys
         if idea_dict.get(wx.idea_category) != "translate":
             assert wx.moment_label in idea_jkeys_keys
         if idea_dict.get(wx.idea_category) == "belief":
             idea_jkeys_keys.remove(wx.moment_label)
             idea_jkeys_keys.remove(wx.belief_name)
         idea_jkeys_keys.remove(wx.face_name)
-        idea_jkeys_keys.remove(wx.event_num)
+        idea_jkeys_keys.remove(wx.spark_num)
         assert sub_jkeys_keys == idea_jkeys_keys
 
         sub_jvalues_keys = set(sub_dimen.get(wx.jvalues).keys())
@@ -672,7 +673,7 @@ def _validate_idea_format_files(idea_filenames: set[str]):
                 assert x_dimen not in format_dimens
 
     # assert wx.face_name in idea_format_attributes
-    # assert wx.event_num in idea_format_attributes
+    # assert wx.spark_num in idea_format_attributes
 
     # confirm every ideanumber is unique
     assert len(idea_numbers_set) == len(idea_filenames)
@@ -765,7 +766,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
     # THEN
     assert len(x_idea_quick_column_ref) == len(get_idea_numbers())
     assert x_idea_quick_column_ref.get("br00000") == {
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.c400_number,
         wx.moment_label,

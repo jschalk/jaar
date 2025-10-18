@@ -135,7 +135,7 @@ class FactHeir(FactCore):
         ):
             self.fact_lower = factunit.fact_lower
 
-    def is_range(self):
+    def is_range(self) -> bool:
         return self.fact_lower is not None and self.fact_upper is not None
 
 
@@ -153,17 +153,17 @@ def factheir_shop(
     )
 
 
-class CaseStatusFinderException(Exception):
+class CaseActiveFinderException(Exception):
     pass
 
 
 @dataclass
-class CaseStatusFinder:
+class CaseActiveFinder:
     reason_lower: float  # between 0 and reason_divisor, can be more than reason_upper
     reason_upper: float  # between 0 and reason_divisor, can be less than reason_lower
     reason_divisor: float  # greater than zero
     fact_lower_full: float  # less than fact_upper
-    fact_upper_full: float  # less than fact_upper
+    fact_upper_full: float
 
     def check_attr(self):
         if None in (
@@ -173,102 +173,84 @@ class CaseStatusFinder:
             self.fact_lower_full,
             self.fact_upper_full,
         ):
-            raise CaseStatusFinderException("No parameter can be None")
+            raise CaseActiveFinderException("No parameter can be None")
 
         if self.fact_lower_full > self.fact_upper_full:
-            raise CaseStatusFinderException(
+            raise CaseActiveFinderException(
                 f"{self.fact_lower_full=} cannot be greater than {self.fact_upper_full=}"
             )
 
         if self.reason_divisor <= 0:
-            raise CaseStatusFinderException(
+            raise CaseActiveFinderException(
                 f"{self.reason_divisor=} cannot be less/equal to zero"
             )
 
         if self.reason_lower < 0 or self.reason_lower > self.reason_divisor:
-            raise CaseStatusFinderException(
+            raise CaseActiveFinderException(
                 f"{self.reason_lower=} cannot be less than zero or greater than {self.reason_divisor=}"
             )
 
         if self.reason_upper < 0 or self.reason_upper > self.reason_divisor:
-            raise CaseStatusFinderException(
+            raise CaseActiveFinderException(
                 f"{self.reason_upper=} cannot be less than zero or greater than {self.reason_divisor=}"
             )
 
-    def bo(self) -> float:
+    def get_fact_lower_remainder(self) -> float:
         return self.fact_lower_full % self.reason_divisor
 
-    def bn(self) -> float:
+    def get_fact_upper_remainder(self) -> float:
         return self.fact_upper_full % self.reason_divisor
 
-    def po(self) -> float:
-        return self.reason_lower
-
-    def pn(self) -> float:
-        return self.reason_upper
-
-    def pd(self) -> float:
-        return self.reason_divisor
-
-    def get_active(self) -> bool:
-        if self.fact_upper_full - self.fact_lower_full > self.reason_divisor:
+    def get_active_bool(self) -> bool:
+        if self.fact_upper_full - self.fact_lower_full >= self.reason_divisor:
             return True
         elif get_range_less_than_reason_divisor_active(
-            bo=self.bo(), bn=self.bn(), po=self.po(), pn=self.pn()
+            fact_lower_remainder=self.get_fact_lower_remainder(),
+            fact_upper_remainder=self.get_fact_upper_remainder(),
+            reason_lower=self.reason_lower,
+            reason_upper=self.reason_upper,
         ):
             return True
-
         return False
 
-    def get_task_status(self) -> bool:
-        return bool(
-            (
-                self.get_active()
-                and get_collasped_fact_range_active(
-                    self.reason_lower,
-                    self.reason_upper,
-                    self.reason_divisor,
-                    self.fact_upper_full,
-                )
-                is False
+    def get_task_bool(self) -> bool:
+        if self.get_active_bool():
+            x_collasped_fact_range_active = get_collasped_fact_range_active(
+                self.reason_lower,
+                self.reason_upper,
+                self.reason_divisor,
+                self.fact_upper_full,
             )
-        )
+        return self.get_active_bool() and not x_collasped_fact_range_active
 
 
-def get_range_less_than_reason_divisor_active(bo, bn, po, pn):
-    # x_bool = False
-    # if bo <= bn and po <= pn:
-    #     if (
-    #         (bo >= po and bo < pn)
-    #         or (bn > po and bn < pn)
-    #         or (bo < po and bn > pn)
-    #         or (bo == po)
-    #     ):
-    #         x_bool = True
-    # elif bo > bn and po <= pn:
-    #     if (bn > po) or (bo < pn) or (bo == po):
-    #         x_bool = True
-    # elif bo <= bn and po > pn:
-    #     if (bo < pn) or (bn > po) or (bo == po):
-    #         x_bool = True
-    # elif bo > bn and po > pn:
-    #     if (bn <= pn) or (bn > pn):
-    #         x_bool = True
-    # return x_bool
+def get_range_less_than_reason_divisor_active(
+    fact_lower_remainder, fact_upper_remainder, reason_lower, reason_upper
+) -> bool:
+    fact_lower = fact_lower_remainder
+    fact_upper = fact_upper_remainder
     x_bool = False
-    if bo <= bn and po <= pn:
+    if fact_lower <= fact_upper and reason_lower <= reason_upper:
         if (
-            (bo >= po and bo < pn)
-            or (bn > po and bn < pn)
-            or (bo < po and bn > pn)
-            or (bo == po)
+            (fact_lower >= reason_lower and fact_lower < reason_upper)
+            or (fact_upper > reason_lower and fact_upper < reason_upper)
+            or (fact_lower < reason_lower and fact_upper > reason_upper)
+            or (fact_lower == reason_lower)
         ):
             x_bool = True
-    elif bo > bn and po <= pn:
-        if (bn > po) or (bo < pn) or (bo == po):
+    elif fact_lower > fact_upper and reason_lower <= reason_upper:
+        if (
+            (fact_upper > reason_lower)
+            or (fact_lower < reason_upper)
+            or (fact_lower == reason_lower)
+        ):
             x_bool = True
-    elif bo <= bn:
-        if (bo < pn) or (bn > po) or (bo == po):
+    elif fact_lower <= fact_upper:
+        if (
+            (fact_lower < reason_upper)
+            or (fact_upper > reason_lower)
+            or (fact_lower == reason_lower)
+        ):
             x_bool = True
     else:
         x_bool = True
@@ -281,32 +263,32 @@ def get_collasped_fact_range_active(
     reason_divisor: float,
     fact_upper_full: float,
 ) -> bool:
-    x_pbsd = casestatusfinder_shop(
+    x_caseactivefinder = caseactivefinder_shop(
         reason_lower=reason_lower,
         reason_upper=reason_upper,
         reason_divisor=reason_divisor,
         fact_lower_full=fact_upper_full,
         fact_upper_full=fact_upper_full,
     )
-    return x_pbsd.get_active()
+    return x_caseactivefinder.get_active_bool()
 
 
-def casestatusfinder_shop(
+def caseactivefinder_shop(
     reason_lower: float,
     reason_upper: float,
     reason_divisor: float,
     fact_lower_full: float,
     fact_upper_full: float,
 ):
-    x_casestatusfinder = CaseStatusFinder(
+    x_caseactivefinder = CaseActiveFinder(
         reason_lower,
         reason_upper,
         reason_divisor,
         fact_lower_full,
         fact_upper_full,
     )
-    x_casestatusfinder.check_attr()
-    return x_casestatusfinder
+    x_caseactivefinder.check_attr()
+    return x_caseactivefinder
 
 
 @dataclass
@@ -315,7 +297,7 @@ class CaseUnit:
     reason_lower: float = None
     reason_upper: float = None
     reason_divisor: int = None
-    status: bool = None
+    case_active: bool = None
     task: bool = None
     knot: str = None
 
@@ -336,8 +318,8 @@ class CaseUnit:
 
         return x_dict
 
-    def clear_case_status(self):
-        self.status = None
+    def clear_case_active(self):
+        self.case_active = None
 
     def set_knot(self, new_knot: str):
         old_knot = copy_deepcopy(self.knot)
@@ -346,31 +328,31 @@ class CaseUnit:
             rope=self.reason_state, old_knot=old_knot, new_knot=self.knot
         )
 
-    def is_in_lineage(self, fact_fact_state: RopeTerm):
+    def is_in_lineage(self, fact_state: RopeTerm):
         return is_heir_rope(
-            src=self.reason_state, heir=fact_fact_state, knot=self.knot
-        ) or is_heir_rope(src=fact_fact_state, heir=self.reason_state, knot=self.knot)
+            src=self.reason_state, heir=fact_state, knot=self.knot
+        ) or is_heir_rope(src=fact_state, heir=self.reason_state, knot=self.knot)
 
-    def set_case_status(self, x_factheir: FactHeir):
-        self.status = self._get_active(factheir=x_factheir)
-        self.task = self._get_task_status(factheir=x_factheir)
+    def set_case_active(self, x_factheir: FactHeir):
+        self.case_active = self._get_active(factheir=x_factheir)
+        self.task = self._get_task_bool(factheir=x_factheir)
 
-    def _get_active(self, factheir: FactHeir):
-        x_status = None
-        # status might be true if case is in lineage of fact
+    def _get_active(self, factheir: FactHeir) -> bool:
+        x_case_active = None
+        # case_active might be true if case is in lineage of fact
         if factheir is None:
-            x_status = False
-        elif self.is_in_lineage(fact_fact_state=factheir.fact_state):
+            x_case_active = False
+        elif self.is_in_lineage(fact_state=factheir.fact_state):
             if self._is_range_or_segregate() is False:
-                x_status = True
+                x_case_active = True
             elif self._is_range_or_segregate() and factheir.is_range() is False:
-                x_status = False
+                x_case_active = False
             elif self._is_range_or_segregate() and factheir.is_range():
-                x_status = self._get_range_segregate_status(factheir=factheir)
-        elif self.is_in_lineage(fact_fact_state=factheir.fact_state) is False:
-            x_status = False
+                x_case_active = self._get_range_segregate_case_active(factheir=factheir)
+        elif self.is_in_lineage(fact_state=factheir.fact_state) is False:
+            x_case_active = False
 
-        return x_status
+        return x_case_active
 
     def _is_range_or_segregate(self):
         return self._is_range() or self._is_segregate()
@@ -389,44 +371,44 @@ class CaseUnit:
             and self.reason_upper is not None
         )
 
-    def _get_task_status(self, factheir: FactHeir) -> bool:
+    def _get_task_bool(self, factheir: FactHeir) -> bool:
         x_task = None
-        if self.status and self._is_range():
+        if self.case_active and self._is_range():
             x_task = factheir.fact_upper > self.reason_upper
-        elif self.status and self._is_segregate():
-            segr_obj = casestatusfinder_shop(
+        elif self.case_active and self._is_segregate():
+            segr_obj = caseactivefinder_shop(
                 reason_lower=self.reason_lower,
                 reason_upper=self.reason_upper,
                 reason_divisor=self.reason_divisor,
                 fact_lower_full=factheir.fact_lower,
                 fact_upper_full=factheir.fact_upper,
             )
-            x_task = segr_obj.get_task_status()
-        elif self.status in [True, False]:
+            x_task = segr_obj.get_task_bool()
+        elif self.case_active in [True, False]:
             x_task = False
 
         return x_task
 
-    def _get_range_segregate_status(self, factheir: FactHeir) -> bool:
-        x_status = None
+    def _get_range_segregate_case_active(self, factheir: FactHeir) -> bool:
+        x_case_active = None
         if self._is_range():
-            x_status = self._get_range_status(factheir=factheir)
+            x_case_active = self._get_range_case_active(factheir=factheir)
         elif self._is_segregate():
-            x_status = self._get_segregate_status(factheir=factheir)
+            x_case_active = self._get_segregate_case_active(factheir=factheir)
 
-        return x_status
+        return x_case_active
 
-    def _get_segregate_status(self, factheir: FactHeir) -> bool:
-        segr_obj = casestatusfinder_shop(
+    def _get_segregate_case_active(self, factheir: FactHeir) -> bool:
+        segr_obj = caseactivefinder_shop(
             reason_lower=self.reason_lower,
             reason_upper=self.reason_upper,
             reason_divisor=self.reason_divisor,
             fact_lower_full=factheir.fact_lower,
             fact_upper_full=factheir.fact_upper,
         )
-        return segr_obj.get_active()
+        return segr_obj.get_active_bool()
 
-    def _get_range_status(self, factheir: FactHeir) -> bool:
+    def _get_range_case_active(self, factheir: FactHeir) -> bool:
         return (
             (
                 self.reason_lower <= factheir.fact_lower
@@ -493,7 +475,7 @@ def cases_get_from_dict(x_dict: dict) -> dict[str, CaseUnit]:
 class ReasonCore:
     reason_context: RopeTerm
     cases: dict[RopeTerm, CaseUnit]
-    reason_active_requisite: bool = None
+    active_requisite: bool = None
     knot: str = None
 
     def set_knot(self, new_knot: str):
@@ -555,13 +537,13 @@ class ReasonCore:
 def reasoncore_shop(
     reason_context: RopeTerm,
     cases: dict[RopeTerm, CaseUnit] = None,
-    reason_active_requisite: bool = None,
+    active_requisite: bool = None,
     knot: str = None,
 ):
     return ReasonCore(
         reason_context=reason_context,
         cases=get_empty_dict_if_None(cases),
-        reason_active_requisite=reason_active_requisite,
+        active_requisite=active_requisite,
         knot=default_knot_if_None(knot),
     )
 
@@ -577,30 +559,30 @@ class ReasonUnit(ReasonCore):
         x_dict = {"reason_context": self.reason_context}
         if cases_dict != {}:
             x_dict["cases"] = cases_dict
-        if self.reason_active_requisite is not None:
-            x_dict["reason_active_requisite"] = self.reason_active_requisite
+        if self.active_requisite is not None:
+            x_dict["active_requisite"] = self.active_requisite
         return x_dict
 
 
 def reasonunit_shop(
     reason_context: RopeTerm,
     cases: dict[RopeTerm, CaseUnit] = None,
-    reason_active_requisite: bool = None,
+    active_requisite: bool = None,
     knot: str = None,
 ):
     return ReasonUnit(
         reason_context=reason_context,
         cases=get_empty_dict_if_None(cases),
-        reason_active_requisite=reason_active_requisite,
+        active_requisite=active_requisite,
         knot=default_knot_if_None(knot),
     )
 
 
 @dataclass
 class ReasonHeir(ReasonCore):
-    status: bool = None
+    reason_active: bool = None
     task: bool = None
-    _reason_active_heir: bool = None
+    parent_heir_active: bool = None
 
     def inherit_from_reasonheir(self, x_reasonunit: ReasonUnit):
         x_cases = {}
@@ -614,14 +596,14 @@ class ReasonHeir(ReasonCore):
             x_cases[case_x.reason_state] = case_x
         self.cases = x_cases
 
-    def clear_status(self):
-        self.status = None
+    def clear_reason_active(self):
+        self.reason_active = None
         for case in self.cases.values():
-            case.clear_case_status()
+            case.clear_case_active()
 
-    def _set_case_status(self, factheir: FactHeir):
+    def set_cases_case_active(self, factheir: FactHeir):
         for case in self.cases.values():
-            case.set_case_status(factheir)
+            case.set_case_active(factheir)
 
     def _get_fact_context(self, factheirs: dict[RopeTerm, FactHeir]) -> FactHeir:
         fact_context = None
@@ -631,57 +613,57 @@ class ReasonHeir(ReasonCore):
                 fact_context = y_factheir
         return fact_context
 
-    def set_reason_active_heir(self, bool_x: bool):
-        self._reason_active_heir = bool_x
+    def set_heir_active(self, bool_x: bool):
+        self.parent_heir_active = bool_x
 
-    def is_reason_active_requisite_operational(self) -> bool:
+    def is_active_requisite_operational(self) -> bool:
         return (
-            self._reason_active_heir is not None
-            and self._reason_active_heir == self.reason_active_requisite
+            self.parent_heir_active is not None
+            and self.parent_heir_active == self.active_requisite
         )
 
     def is_any_case_true(self) -> tuple[bool, bool]:
         any_case_true = False
         any_task_true = False
         for x_caseunit in self.cases.values():
-            if x_caseunit.status:
+            if x_caseunit.case_active:
                 any_case_true = True
                 if x_caseunit.task:
                     any_task_true = True
         return any_case_true, any_task_true
 
-    def _set_attr_status(self, any_case_true: bool):
-        self.status = any_case_true or self.is_reason_active_requisite_operational()
+    def _set_attr_reason_active(self, any_case_true: bool):
+        self.reason_active = any_case_true or self.is_active_requisite_operational()
 
     def _set_attr_task(self, any_task_true: bool):
         self.task = True if any_task_true else None
-        if self.status and self.task is None:
+        if self.reason_active and self.task is None:
             self.task = False
 
-    def set_status(self, factheirs: dict[RopeTerm, FactHeir]):
-        self.clear_status()
-        self._set_case_status(self._get_fact_context(factheirs))
+    def set_reason_active(self, factheirs: dict[RopeTerm, FactHeir]):
+        self.clear_reason_active()
+        self.set_cases_case_active(self._get_fact_context(factheirs))
         any_case_true, any_task_true = self.is_any_case_true()
-        self._set_attr_status(any_case_true)
+        self._set_attr_reason_active(any_case_true)
         self._set_attr_task(any_task_true)
 
 
 def reasonheir_shop(
     reason_context: RopeTerm,
     cases: dict[RopeTerm, CaseUnit] = None,
-    reason_active_requisite: bool = None,
-    status: bool = None,
+    active_requisite: bool = None,
+    reason_active: bool = None,
     task: bool = None,
-    _reason_active_heir: bool = None,
+    parent_heir_active: bool = None,
     knot: str = None,
 ):
     return ReasonHeir(
         reason_context=reason_context,
         cases=get_empty_dict_if_None(cases),
-        reason_active_requisite=reason_active_requisite,
-        status=status,
+        active_requisite=active_requisite,
+        reason_active=reason_active,
         task=task,
-        _reason_active_heir=_reason_active_heir,
+        parent_heir_active=parent_heir_active,
         knot=default_knot_if_None(knot),
     )
 
@@ -693,9 +675,7 @@ def get_reasonunits_from_dict(reasons_dict: dict) -> dict[RopeTerm, ReasonUnit]:
         x_reasonunit = reasonunit_shop(reason_context=reason_dict["reason_context"])
         if reason_dict.get("cases") is not None:
             x_reasonunit.cases = cases_get_from_dict(x_dict=reason_dict["cases"])
-        if reason_dict.get("reason_active_requisite") is not None:
-            x_reasonunit.reason_active_requisite = reason_dict.get(
-                "reason_active_requisite"
-            )
+        if reason_dict.get("active_requisite") is not None:
+            x_reasonunit.active_requisite = reason_dict.get("active_requisite")
         x_dict[x_reasonunit.reason_context] = x_reasonunit
     return x_dict

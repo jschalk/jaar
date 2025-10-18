@@ -1,3 +1,4 @@
+from enum import Enum
 from src.ch01_py.file_toolbox import open_json
 from src.ch02_rope.rope import RopeTerm
 from src.ch04_voice.labor import laborunit_shop
@@ -8,6 +9,21 @@ from src.ch07_belief_logic.belief_main import (
     beliefunit_shop,
     get_beliefunit_from_dict,
 )
+
+
+class ChExampleStrsSlashknot(str, Enum):
+    Bob = "Bob"
+    casa_str = "casa"
+    clean_str = "clean"
+    dirtyness_str = "dirtyness"
+    mop_str = "mop"
+    slash_str = "/"
+    wk_str = "wk"
+    wed_str = "Wed"
+
+    def __str__(self):
+        return self.value
+
 
 # from src.ch01_py.file_toolbox import save_file
 # from src.ch07_belief_logic.test._util.ch07_env import get_belief_examples_dir as env_dir
@@ -36,9 +52,7 @@ def beliefunit_v001_with_large_agenda() -> BeliefUnit:
 
     yao_belief.add_fact(aaron_rope, aaron_rope)
     yao_belief.add_fact(ced_wk_rope, ced_wk_rope, fact_lower=0, fact_upper=53)
-    yao_belief.add_fact(
-        jour_minute_rope, jour_minute_rope, fact_lower=0, fact_upper=1399
-    )
+    yao_belief.add_fact(jour_minute_rope, jour_minute_rope, 0, 1399)
     # yao_belief.add_fact(websites, websites)
     yao_belief.add_fact(month_wk_rope, month_wk_rope, fact_lower=0, fact_upper=5)
     yao_belief.add_fact(mood_rope, mood_rope)
@@ -276,10 +290,10 @@ def get_beliefunit_irrational_example() -> BeliefUnit:
     # this belief has no definitive agenda because 2 pledge plans are in contradiction
     # "egg first" is true when "chicken first" is false
     # "chicken first" is true when "egg first" is true
-    # Step 0: if chicken.active is True, egg.active is set to False
-    # Step 1: if egg.active is False, chicken.active is set to False
-    # Step 2: if chicken.active is False, egg.active is set to True
-    # Step 3: if egg.active is True, chicken.active is set to True
+    # Step 0: if chicken.plan_active is True, egg.plan_active is set to False
+    # Step 1: if egg.plan_active is False, chicken.plan_active is set to False
+    # Step 2: if chicken.plan_active is False, egg.plan_active is set to True
+    # Step 3: if egg.plan_active is True, chicken.plan_active is set to True
     # Step 4: back to step 0.
     # after hatter_belief.cashout these should be true:
     # 1. hatter_belief._irrational is True
@@ -301,7 +315,7 @@ def get_beliefunit_irrational_example() -> BeliefUnit:
         egg_rope,
         pledge=True,
         reason_context=chicken_rope,
-        reason_plan_active_requisite=True,
+        reason_requisite_active=True,
     )
 
     # set chick pledge is True when egg first is False
@@ -309,7 +323,7 @@ def get_beliefunit_irrational_example() -> BeliefUnit:
         chicken_rope,
         pledge=True,
         reason_context=egg_rope,
-        reason_plan_active_requisite=False,
+        reason_requisite_active=False,
     )
 
     return hatter_belief
@@ -325,19 +339,19 @@ def get_mop_with_reason_beliefunit_example1():
     sue_belief.set_plan(floor_plan, casa_rope)
     sue_belief.set_l1_plan(planunit_shop("unimportant"))
 
-    status_str = "cleaniness status"
-    status_rope = sue_belief.make_rope(casa_rope, status_str)
-    sue_belief.set_plan(planunit_shop(status_str), casa_rope)
+    situation_str = "cleaniness situation"
+    situation_rope = sue_belief.make_rope(casa_rope, situation_str)
+    sue_belief.set_plan(planunit_shop(situation_str), casa_rope)
 
     clean_str = "clean"
-    clean_rope = sue_belief.make_rope(status_rope, clean_str)
-    sue_belief.set_plan(planunit_shop(clean_str), status_rope)
+    clean_rope = sue_belief.make_rope(situation_rope, clean_str)
+    sue_belief.set_plan(planunit_shop(clean_str), situation_rope)
     sue_belief.set_plan(planunit_shop("very_much"), clean_rope)
     sue_belief.set_plan(planunit_shop("moderately"), clean_rope)
-    sue_belief.set_plan(planunit_shop("dirty"), status_rope)
+    sue_belief.set_plan(planunit_shop("dirty"), situation_rope)
 
-    floor_reason = reasonunit_shop(status_rope)
-    floor_reason.set_case(case=status_rope)
+    floor_reason = reasonunit_shop(situation_rope)
+    floor_reason.set_case(case=situation_rope)
     sue_belief.edit_plan_attr(floor_rope, reason=floor_reason)
     return sue_belief
 
@@ -350,7 +364,7 @@ def get_beliefunit_laundry_example1() -> BeliefUnit:
     yao_belief.add_voiceunit(cali_str)
 
     casa_str = "casa"
-    basket_str = "laundry basket status"
+    basket_str = "laundry basket situation"
     b_full_str = "full"
     b_smel_str = "smelly"
     b_bare_str = "bare"
@@ -398,14 +412,16 @@ def from_list_get_active(
     for plan in plan_dict.values():
         if plan.get_plan_rope() == rope:
             temp_plan = plan
-            print(f"s for PlanUnit {temp_plan.get_plan_rope()}  {temp_plan.active=}")
+            print(
+                f"s for PlanUnit {temp_plan.get_plan_rope()}  {temp_plan.plan_active=}"
+            )
 
-        if plan.active:
+        if plan.plan_active:
             active_true_count += 1
-        elif plan.active is False:
+        elif plan.plan_active is False:
             active_false_count += 1
 
-    active = temp_plan.active
+    active = temp_plan.plan_active
     print(
         f"Set active: {plan.plan_label=} {active} {active_true_count=} {active_false_count=}"
     )

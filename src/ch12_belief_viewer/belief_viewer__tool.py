@@ -133,7 +133,7 @@ def set_readable_plan_values(x_plan: PlanUnit, result: dict):
     result["denom"] = add_small_dot(f"denom: {result_denom}")
     result["morph"] = add_small_dot(f"morph: {result_morph}")
     result["numor"] = add_small_dot(f"numor: {result_numor}")
-    result["active_hx"] = add_small_dot(f"active_hx: {x_plan.active_hx}")
+    result["plan_active_hx"] = add_small_dot(f"plan_active_hx: {x_plan.plan_active_hx}")
 
 
 def get_plan_view_dict(x_plan: PlanUnit) -> dict[str,]:

@@ -18,10 +18,10 @@ from src.ch02_rope.rope import (
     get_tail_label,
 )
 from src.ch16_translate._ref.ch16_semantic_types import (
-    EventInt,
     FaceName,
     LabelTerm,
     RopeTerm,
+    SparkInt,
     default_knot_if_None,
 )
 from src.ch16_translate.translate_config import default_unknown_str_if_None
@@ -38,7 +38,7 @@ class set_label_Exception(Exception):
 @dataclass
 class MapCore:
     face_name: FaceName = None
-    event_num: EventInt = None
+    spark_num: SparkInt = None
     otx2inx: dict = None
     unknown_str: str = None
     otx_knot: str = None
@@ -61,7 +61,7 @@ class MapCore:
 
         return {
             "face_name": self.face_name,
-            "event_num": self.event_num,
+            "spark_num": self.spark_num,
             "otx_knot": self.otx_knot,
             "inx_knot": self.inx_knot,
             "unknown_str": self.unknown_str,
@@ -112,7 +112,7 @@ class NameMap(MapCore):
 
 def namemap_shop(
     face_name: FaceName = None,
-    event_num: EventInt = None,
+    spark_num: SparkInt = None,
     otx_knot: str = None,
     inx_knot: str = None,
     otx2inx: dict = None,
@@ -124,7 +124,7 @@ def namemap_shop(
 
     return NameMap(
         face_name=face_name,
-        event_num=get_0_if_None(event_num),
+        spark_num=get_0_if_None(spark_num),
         otx_knot=otx_knot,
         inx_knot=inx_knot,
         unknown_str=unknown_str,
@@ -135,7 +135,7 @@ def namemap_shop(
 def get_namemap_from_dict(x_dict: dict) -> NameMap:
     return namemap_shop(
         face_name=x_dict.get("face_name"),
-        event_num=x_dict.get("event_num"),
+        spark_num=x_dict.get("spark_num"),
         otx_knot=x_dict.get("otx_knot"),
         inx_knot=x_dict.get("inx_knot"),
         otx2inx=x_dict.get("otx2inx"),
@@ -186,7 +186,7 @@ class TitleMap(MapCore):
 
 def titlemap_shop(
     face_name: FaceName = None,
-    event_num: EventInt = None,
+    spark_num: SparkInt = None,
     otx_knot: str = None,
     inx_knot: str = None,
     otx2inx: dict = None,
@@ -198,7 +198,7 @@ def titlemap_shop(
 
     return TitleMap(
         face_name=face_name,
-        event_num=get_0_if_None(event_num),
+        spark_num=get_0_if_None(spark_num),
         otx_knot=otx_knot,
         inx_knot=inx_knot,
         unknown_str=unknown_str,
@@ -209,7 +209,7 @@ def titlemap_shop(
 def get_titlemap_from_dict(x_dict: dict) -> TitleMap:
     return titlemap_shop(
         face_name=x_dict.get("face_name"),
-        event_num=x_dict.get("event_num"),
+        spark_num=x_dict.get("spark_num"),
         otx_knot=x_dict.get("otx_knot"),
         inx_knot=x_dict.get("inx_knot"),
         otx2inx=x_dict.get("otx2inx"),
@@ -260,7 +260,7 @@ class LabelMap(MapCore):
 
 def labelmap_shop(
     face_name: FaceName = None,
-    event_num: EventInt = None,
+    spark_num: SparkInt = None,
     otx_knot: str = None,
     inx_knot: str = None,
     otx2inx: dict = None,
@@ -272,7 +272,7 @@ def labelmap_shop(
 
     return LabelMap(
         face_name=face_name,
-        event_num=get_0_if_None(event_num),
+        spark_num=get_0_if_None(spark_num),
         otx_knot=otx_knot,
         inx_knot=inx_knot,
         unknown_str=unknown_str,
@@ -283,7 +283,7 @@ def labelmap_shop(
 def get_labelmap_from_dict(x_dict: dict) -> LabelMap:
     return labelmap_shop(
         face_name=x_dict.get("face_name"),
-        event_num=x_dict.get("event_num"),
+        spark_num=x_dict.get("spark_num"),
         otx_knot=x_dict.get("otx_knot"),
         inx_knot=x_dict.get("inx_knot"),
         otx2inx=x_dict.get("otx2inx"),
@@ -294,7 +294,7 @@ def get_labelmap_from_dict(x_dict: dict) -> LabelMap:
 @dataclass
 class RopeMap:
     face_name: FaceName = None
-    event_num: EventInt = None
+    spark_num: SparkInt = None
     otx2inx: dict = None
     unknown_str: str = None
     otx_knot: str = None
@@ -400,7 +400,7 @@ class RopeMap:
 
         return {
             "face_name": self.face_name,
-            "event_num": self.event_num,
+            "spark_num": self.spark_num,
             "otx_knot": self.otx_knot,
             "inx_knot": self.inx_knot,
             "unknown_str": self.unknown_str,
@@ -410,7 +410,7 @@ class RopeMap:
 
 def ropemap_shop(
     face_name: FaceName = None,
-    event_num: EventInt = None,
+    spark_num: SparkInt = None,
     otx_knot: str = None,
     inx_knot: str = None,
     x_labelmap: LabelMap = None,
@@ -427,7 +427,7 @@ def ropemap_shop(
             inx_knot=inx_knot,
             unknown_str=unknown_str,
             face_name=face_name,
-            event_num=event_num,
+            spark_num=spark_num,
         )
 
     return RopeMap(
@@ -437,14 +437,14 @@ def ropemap_shop(
         inx_knot=inx_knot,
         labelmap=x_labelmap,
         face_name=face_name,
-        event_num=get_0_if_None(event_num),
+        spark_num=get_0_if_None(spark_num),
     )
 
 
 def get_ropemap_from_dict(x_dict: dict) -> RopeMap:
     return ropemap_shop(
         face_name=x_dict.get("face_name"),
-        event_num=x_dict.get("event_num"),
+        spark_num=x_dict.get("spark_num"),
         otx_knot=x_dict.get("otx_knot"),
         inx_knot=x_dict.get("inx_knot"),
         otx2inx=x_dict.get("otx2inx"),
@@ -464,7 +464,7 @@ def _check_core_attrs_match(new_obj: MapCore, old_obj: MapCore):
         or old_obj.unknown_str != new_obj.unknown_str
     ):
         raise MapCoreAttrConflictException("Core attrs in conflict")
-    if old_obj.event_num >= new_obj.event_num:
+    if old_obj.spark_num >= new_obj.spark_num:
         raise MapCoreAttrConflictException("older mapunit is not older")
 
 

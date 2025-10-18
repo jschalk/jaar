@@ -74,9 +74,9 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     usa_rope = create_rope(nation_rope, usa_str)
 
     wed_case = caseunit_shop(reason_state=wed_rope)
-    wed_case.status = True
+    wed_case.case_active = True
     usa_case = caseunit_shop(reason_state=usa_rope)
-    usa_case.status = False
+    usa_case.case_active = False
 
     x1_reasonunits = {
         wk_rope: reasonunit_shop(wk_rope, cases={wed_case.reason_state: wed_case}),
@@ -85,8 +85,8 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     wed_cases = {wed_case.reason_state: wed_case}
     usa_cases = {usa_case.reason_state: usa_case}
     x1_reasonheirs = {
-        wk_rope: reasonheir_shop(wk_rope, wed_cases, status=True),
-        nation_rope: reasonheir_shop(nation_rope, usa_cases, status=False),
+        wk_rope: reasonheir_shop(wk_rope, wed_cases, reason_active=True),
+        nation_rope: reasonheir_shop(nation_rope, usa_cases, reason_active=False),
     }
     biker_awardee_title = "bikers"
     biker_give_force = 3.0
@@ -140,7 +140,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
         reasonheirs=x1_reasonheirs,
         laborunit=sue_laborunit,
         healerunit=yao_healerunit,
-        active=True,
+        plan_active=True,
         pledge=True,
         problem_bool=x_problem_bool,
     )

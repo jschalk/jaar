@@ -3,15 +3,15 @@ from pandas import DataFrame
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_py.db_toolbox import db_table_exists, get_row_count
 from src.ch01_py.file_toolbox import count_dirs_files, create_path, save_file
-from src.ch10_pack._ref.ch10_path import (
+from src.ch10_lesson._ref.ch10_path import (
     create_gut_path,
     create_job_path,
     create_moment_json_path,
 )
-from src.ch10_pack.pack_filehandler import open_gut_file
+from src.ch10_lesson.lesson_filehandler import open_gut_file
 from src.ch11_bud._ref.ch11_path import (
-    create_event_all_pack_path,
-    create_event_expressed_pack_path as expressed_path,
+    create_spark_all_lesson_path,
+    create_spark_expressed_lesson_path as expressed_path,
 )
 from src.ch15_moment._ref.ch15_path import (
     create_bud_voice_mandate_ledger_path as bud_mandate,
@@ -44,7 +44,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
         wx.face_name,
-        wx.event_num,
+        wx.spark_num,
         wx.moment_label,
         wx.belief_name,
         wx.voice_name,
@@ -60,7 +60,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
     br00113_raw = f"{br00113_str}_brick_raw"
     br00113_agg = f"{br00113_str}_brick_agg"
     br00113_valid = f"{br00113_str}_brick_valid"
-    events_brick_valid_tablename = wx.events_brick_valid
+    sparks_brick_valid_tablename = wx.sparks_brick_valid
     trlname_sound_raw = prime_tbl("trlname", "s", "raw")
     trlname_sound_agg = prime_tbl("trlname", "s", "agg")
     trlname_sound_vld = prime_tbl("trlname", "s", "vld")
@@ -84,8 +84,10 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
     blrpern_heard_put_agg = prime_tbl("blrpern", "h", "agg", "put")
     mstr_dir = fay_world._moment_mstr_dir
     a23_json_path = create_moment_json_path(mstr_dir, a23_str)
-    a23_e1_all_pack_path = create_event_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
-    a23_e1_expressed_pack_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
+    a23_e1_all_lesson_path = create_spark_all_lesson_path(
+        mstr_dir, a23_str, sue_inx, e3
+    )
+    a23_e1_expressed_lesson_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
     a23_sue_gut_path = create_gut_path(mstr_dir, a23_str, sue_inx)
     a23_sue_job_path = create_job_path(mstr_dir, a23_str, sue_inx)
     blrpern_job = prime_tbl("blrpern", "job", None)
@@ -95,8 +97,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         cursor = db_conn.cursor()
         assert not db_table_exists(cursor, br00113_raw)
         assert not db_table_exists(cursor, br00113_agg)
-        assert not db_table_exists(cursor, wx.events_brick_agg)
-        assert not db_table_exists(cursor, events_brick_valid_tablename)
+        assert not db_table_exists(cursor, wx.sparks_brick_agg)
+        assert not db_table_exists(cursor, sparks_brick_valid_tablename)
         assert not db_table_exists(cursor, br00113_valid)
         assert not db_table_exists(cursor, trlname_sound_raw)
         assert not db_table_exists(cursor, trlname_sound_agg)
@@ -117,11 +119,11 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert not db_table_exists(cursor, blrpern_heard_put_raw)
         assert not db_table_exists(cursor, blrpern_heard_put_agg)
         assert not os_path_exists(a23_json_path)
-        assert not os_path_exists(a23_e1_all_pack_path)
-        assert not os_path_exists(a23_e1_expressed_pack_path)
+        assert not os_path_exists(a23_e1_all_lesson_path)
+        assert not os_path_exists(a23_e1_expressed_lesson_path)
         assert not os_path_exists(a23_sue_gut_path)
         assert not os_path_exists(a23_sue_job_path)
-        assert not db_table_exists(cursor, wx.moment_event_time_agg)
+        assert not db_table_exists(cursor, wx.moment_spark_time_agg)
         assert not db_table_exists(cursor, wx.moment_ote1_agg)
         assert not db_table_exists(cursor, blrpern_job)
         assert not db_table_exists(cursor, wx.moment_voice_nets)
@@ -129,7 +131,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert not os_path_exists(last_run_metrics_path)
 
         # # create beliefunits
-        # self.belief_tables_to_event_belief_csvs(cursor)
+        # self.belief_tables_to_spark_belief_csvs(cursor)
 
         # # create all moment_job and mandate reports
         # self.calc_moment_bud_voice_mandate_net_ledgers()
@@ -151,8 +153,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
 
         assert get_row_count(cursor, br00113_raw) == 1
         assert get_row_count(cursor, br00113_agg) == 1
-        assert get_row_count(cursor, wx.events_brick_agg) == 1
-        assert get_row_count(cursor, events_brick_valid_tablename) == 1
+        assert get_row_count(cursor, wx.sparks_brick_agg) == 1
+        assert get_row_count(cursor, sparks_brick_valid_tablename) == 1
         assert get_row_count(cursor, br00113_valid) == 1
         assert get_row_count(cursor, trlname_sound_raw) == 1
         assert get_row_count(cursor, momentunit_sound_raw) == 1
@@ -176,9 +178,9 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert get_row_count(cursor, blrunit_heard_put_agg) == 1
         assert get_row_count(cursor, blrpern_heard_put_agg) == 1
         assert os_path_exists(a23_json_path)
-        print(f"{a23_e1_all_pack_path=}")
-        assert os_path_exists(a23_e1_all_pack_path)
-        assert os_path_exists(a23_e1_expressed_pack_path)
+        print(f"{a23_e1_all_lesson_path=}")
+        assert os_path_exists(a23_e1_all_lesson_path)
+        assert os_path_exists(a23_e1_expressed_lesson_path)
         assert os_path_exists(a23_sue_gut_path)
         sue_gut = open_gut_file(mstr_dir, a23_str, sue_inx)
         time_rope = sue_gut.make_l1_rope(wx.time)
@@ -187,7 +189,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert os_path_exists(a23_sue_job_path)
         assert get_row_count(cursor, blrpern_job) == 1
         assert get_row_count(cursor, wx.moment_voice_nets) == 0
-        # assert get_row_count(cursor, wx.moment_event_time_agg) == 0
+        # assert get_row_count(cursor, wx.moment_spark_time_agg) == 0
         # assert get_row_count(cursor, moment_ote1_agg_tablename) == 0
         assert get_row_count(cursor, wx.moment_kpi001_voice_nets) == 0
         assert os_path_exists(last_run_metrics_path)
@@ -207,7 +209,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
         wx.face_name,
-        wx.event_num,
+        wx.spark_num,
         wx.moment_label,
         wx.belief_name,
         wx.voice_name,
@@ -223,7 +225,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     upsert_sheet(input_file_path, br00113_ex0_str, br00113_df)
 
     br00001_columns = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,
@@ -243,7 +245,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     br00113_raw = f"{br00113_str}_brick_raw"
     br00113_agg = f"{br00113_str}_brick_agg"
     br00113_valid = f"{br00113_str}_brick_valid"
-    events_brick_valid_tablename = wx.events_brick_valid
+    sparks_brick_valid_tablename = wx.sparks_brick_valid
     trlname_sound_raw = prime_tbl("trlname", "s", "raw")
     trlname_sound_agg = prime_tbl("trlname", "s", "agg")
     trlname_sound_vld = prime_tbl("trlname", "s", "vld")
@@ -264,8 +266,10 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     blrpern_heard_put_agg = prime_tbl("blrpern", "h", "agg", "put")
     mstr_dir = fay_world._moment_mstr_dir
     a23_json_path = create_moment_json_path(mstr_dir, a23_str)
-    a23_e1_all_pack_path = create_event_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
-    a23_e1_expressed_pack_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
+    a23_e1_all_lesson_path = create_spark_all_lesson_path(
+        mstr_dir, a23_str, sue_inx, e3
+    )
+    a23_e1_expressed_lesson_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
     a23_sue_gut_path = create_gut_path(mstr_dir, a23_str, sue_inx)
     a23_sue_job_path = create_job_path(mstr_dir, a23_str, sue_inx)
     sue37_mandate_path = bud_mandate(mstr_dir, a23_str, sue_inx, tp37)
@@ -274,8 +278,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         cursor = db_conn.cursor()
         assert not db_table_exists(cursor, br00113_raw)
         assert not db_table_exists(cursor, br00113_agg)
-        assert not db_table_exists(cursor, wx.events_brick_agg)
-        assert not db_table_exists(cursor, events_brick_valid_tablename)
+        assert not db_table_exists(cursor, wx.sparks_brick_agg)
+        assert not db_table_exists(cursor, sparks_brick_valid_tablename)
         assert not db_table_exists(cursor, br00113_valid)
         assert not db_table_exists(cursor, trlname_sound_raw)
         assert not db_table_exists(cursor, trlname_sound_agg)
@@ -294,8 +298,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert not db_table_exists(cursor, blrpern_heard_put_raw)
         assert not db_table_exists(cursor, blrpern_heard_put_agg)
         assert not os_path_exists(a23_json_path)
-        assert not os_path_exists(a23_e1_all_pack_path)
-        assert not os_path_exists(a23_e1_expressed_pack_path)
+        assert not os_path_exists(a23_e1_all_lesson_path)
+        assert not os_path_exists(a23_e1_expressed_lesson_path)
         assert not os_path_exists(a23_sue_gut_path)
         assert not os_path_exists(a23_sue_job_path)
         assert not db_table_exists(cursor, wx.moment_ote1_agg)
@@ -305,7 +309,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         # self.moment_agg_tables_to_moment_ote1_agg(cursor)
 
         # # create beliefunits
-        # self.belief_tables_to_event_belief_csvs(cursor)
+        # self.belief_tables_to_spark_belief_csvs(cursor)
 
         # # create all moment_job and mandate reports
         # self.calc_moment_bud_voice_mandate_net_ledgers()
@@ -316,9 +320,9 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         # THEN
         assert get_row_count(cursor, br00113_raw) == 1
         assert get_row_count(cursor, br00113_agg) == 1
-        print(cursor.execute(f"SELECT * FROM {wx.events_brick_agg}").fetchall())
-        assert get_row_count(cursor, wx.events_brick_agg) == 2
-        assert get_row_count(cursor, events_brick_valid_tablename) == 2
+        print(cursor.execute(f"SELECT * FROM {wx.sparks_brick_agg}").fetchall())
+        assert get_row_count(cursor, wx.sparks_brick_agg) == 2
+        assert get_row_count(cursor, sparks_brick_valid_tablename) == 2
         assert get_row_count(cursor, br00113_valid) == 2
         assert get_row_count(cursor, trlname_sound_raw) == 2
         assert get_row_count(cursor, momentunit_sound_raw) == 4
@@ -339,8 +343,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert get_row_count(cursor, blrunit_heard_put_agg) == 1
         assert get_row_count(cursor, blrpern_heard_put_agg) == 1
         assert os_path_exists(a23_json_path)
-        assert os_path_exists(a23_e1_all_pack_path)
-        assert os_path_exists(a23_e1_expressed_pack_path)
+        assert os_path_exists(a23_e1_all_lesson_path)
+        assert os_path_exists(a23_e1_expressed_lesson_path)
         assert os_path_exists(a23_sue_gut_path)
         assert os_path_exists(a23_sue_job_path)
         assert get_row_count(cursor, wx.moment_ote1_agg) == 1
@@ -363,7 +367,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateMomentT
     ex_filename = "Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00002_columns = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,
@@ -398,18 +402,18 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoMomentIde
     fay_str = "Fay"
     fay_world = worldunit_shop(fay_str, worlds_dir())
     sue_str = "Sue"
-    event2 = 2
+    spark2 = 2
     ex_filename = "Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     amy23_str = "amy23"
     br00011_columns = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,
         wx.voice_name,
     ]
-    br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
+    br00011_rows = [[spark2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
     moment_mstr = fay_world._moment_mstr_dir
@@ -462,8 +466,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
     fay_world = worldunit_shop(fay_str, worlds_dir())
     # delete_dir(fay_world.worlds_dir)
     sue_str = "Sue"
-    event1 = 1
-    event2 = 2
+    spark1 = 1
+    spark2 = 2
     minute_360 = 360
     minute_420 = 420
     hour6am = "6am"
@@ -471,14 +475,14 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
     ex_filename = "Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00003_columns = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.cumulative_minute,
         wx.moment_label,
         wx.hour_label,
     ]
     br00001_columns = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,
@@ -490,14 +494,14 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
     tp37 = 37
     sue_quota = 235
     sue_celldepth = 3
-    br1row0 = [event2, sue_str, amy23_str, sue_str, tp37, sue_quota, sue_celldepth]
+    br1row0 = [spark2, sue_str, amy23_str, sue_str, tp37, sue_quota, sue_celldepth]
     br00001_1df = DataFrame([br1row0], columns=br00001_columns)
     br00001_ex0_str = "example0_br00001"
     upsert_sheet(input_file_path, br00001_ex0_str, br00001_1df)
 
-    br3row0 = [event1, sue_str, minute_360, amy23_str, hour6am]
-    br3row1 = [event1, sue_str, minute_420, amy23_str, hour7am]
-    br3row2 = [event2, sue_str, minute_420, amy23_str, hour7am]
+    br3row0 = [spark1, sue_str, minute_360, amy23_str, hour6am]
+    br3row1 = [spark1, sue_str, minute_420, amy23_str, hour7am]
+    br3row2 = [spark2, sue_str, minute_420, amy23_str, hour7am]
     br00003_1df = DataFrame([br3row0, br3row1], columns=br00003_columns)
     br00003_3df = DataFrame([br3row1, br3row0, br3row2], columns=br00003_columns)
     br00003_ex1_str = "example1_br00003"
@@ -505,13 +509,13 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
     upsert_sheet(input_file_path, br00003_ex1_str, br00003_1df)
     upsert_sheet(input_file_path, br00003_ex3_str, br00003_3df)
     br00011_columns = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,
         wx.voice_name,
     ]
-    br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
+    br00011_rows = [[spark2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
     mstr_dir = fay_world._moment_mstr_dir
@@ -557,7 +561,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
         wx.face_name,
-        wx.event_num,
+        wx.spark_num,
         wx.moment_label,
         wx.belief_name,
         wx.voice_name,
@@ -573,7 +577,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     upsert_sheet(input_file_path, br00113_ex0_str, br00113_df)
 
     br00001_columns = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.moment_label,
         wx.belief_name,
@@ -600,7 +604,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         br00113_raw = f"{br00113_str}_brick_raw"
         br00113_agg = f"{br00113_str}_brick_agg"
         br00113_valid = f"{br00113_str}_brick_valid"
-        events_brick_valid_tablename = wx.events_brick_valid
+        sparks_brick_valid_tablename = wx.sparks_brick_valid
         trlname_sound_raw = prime_tbl("trlname", "s", "raw")
         trlname_sound_agg = prime_tbl("trlname", "s", "agg")
         trlname_sound_vld = prime_tbl("trlname", "s", "vld")
@@ -623,8 +627,8 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         cursor = db_conn.cursor()
         assert get_row_count(cursor, br00113_raw) == 1
         assert get_row_count(cursor, br00113_agg) == 1
-        assert get_row_count(cursor, wx.events_brick_agg) == 2
-        assert get_row_count(cursor, events_brick_valid_tablename) == 2
+        assert get_row_count(cursor, wx.sparks_brick_agg) == 2
+        assert get_row_count(cursor, sparks_brick_valid_tablename) == 2
         assert get_row_count(cursor, br00113_valid) == 2
         assert get_row_count(cursor, trlname_sound_raw) == 2
         assert get_row_count(cursor, momentunit_sound_raw) == 4

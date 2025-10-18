@@ -37,7 +37,7 @@ from src.ch16_translate.translate_config import (
     get_translateable_args,
 )
 from src.ch16_translate.translate_main import TranslateUnit, get_translateunit_from_dict
-from src.ch17_idea._ref.ch17_semantic_types import EventInt, FaceName
+from src.ch17_idea._ref.ch17_semantic_types import FaceName, SparkInt
 from src.ch17_idea.idea_config import (
     get_default_sorted_list,
     get_idea_dimen_ref,
@@ -441,16 +441,16 @@ def check_dataframe_column_names(df: DataFrame, name_col1: str, name_col2: str) 
     return df.columns[0] == name_col1 and df.columns[1] == name_col2
 
 
-def update_all_face_name_event_num_columns(
-    excel_file_path: str, face_name: FaceName, event_num: EventInt
+def update_all_face_name_spark_num_columns(
+    excel_file_path: str, face_name: FaceName, spark_num: SparkInt
 ):
     workbook = openpyxl_load_workbook(excel_file_path)
     # Loop through all sheets in the workbook
     for sheet in workbook.sheetnames:
         ws = workbook[sheet]
-        if ws["A1"].value == "event_num" and ws["B1"].value == "face_name":
+        if ws["A1"].value == "spark_num" and ws["B1"].value == "face_name":
             for row in range(2, ws.max_row + 1):
-                ws.cell(row=row, column=1, value=event_num)
+                ws.cell(row=row, column=1, value=spark_num)
                 ws.cell(row=row, column=2, value=face_name)
 
             # Save the updated sheet
@@ -547,14 +547,14 @@ def prettify_excel(input_file: str, zoom: int = 120) -> None:
                 )
 
 
-def update_event_num_in_excel_files(directory: str, value) -> None:
+def update_spark_num_in_excel_files(directory: str, value) -> None:
     """
-    Adds or updates the 'event_num' column with a given value
+    Adds or updates the 'spark_num' column with a given value
     in all Excel files in the directory that contain 'stance' in the filename.
 
     Args:
         directory (str): Path to the directory containing Excel files.
-        value: The value to set in the 'event_num' column.
+        value: The value to set in the 'spark_num' column.
     """
     for filename in os_listdir(directory):
         if (
@@ -569,7 +569,7 @@ def update_event_num_in_excel_files(directory: str, value) -> None:
             # Modify each sheet
             updated_sheets = {}
             for sheet_name, df in sheets.items():
-                df["event_num"] = value  # Add or overwrite
+                df["spark_num"] = value  # Add or overwrite
                 updated_sheets[sheet_name] = df
 
             # Write all sheets back to the same file

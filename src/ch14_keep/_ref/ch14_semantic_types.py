@@ -1,6 +1,5 @@
 from src.ch13_belief_listen._ref.ch13_semantic_types import (
     BeliefName,
-    EventInt,
     FaceName,
     FirstLabel,
     FundGrain,
@@ -15,6 +14,7 @@ from src.ch13_belief_listen._ref.ch13_semantic_types import (
     RespectGrain,
     RespectNum,
     RopeTerm,
+    SparkInt,
     TitleTerm,
     VoiceName,
     default_knot_if_None,

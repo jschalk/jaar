@@ -1,4 +1,4 @@
-from src.ch10_pack._ref.ch10_semantic_types import (
+from src.ch10_lesson._ref.ch10_semantic_types import (
     BeliefName,
     FaceName,
     FirstLabel,
@@ -20,5 +20,5 @@ from src.ch10_pack._ref.ch10_semantic_types import (
 )
 
 
-class EventInt(int):
+class SparkInt(int):
     pass

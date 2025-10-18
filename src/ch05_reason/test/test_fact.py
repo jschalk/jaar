@@ -148,8 +148,8 @@ def test_FactUnit_to_dict_ReturnsDict():
     # THEN
     assert fact_dict is not None
     static_dict = {
-        "fact_context": wk_rope,
-        "fact_state": sun_rope,
+        wx.fact_context: wk_rope,
+        wx.fact_state: sun_rope,
         "fact_lower": x_fact_lower,
         "fact_upper": x_fact_upper,
     }
@@ -171,8 +171,8 @@ def test_FactUnit_to_dict_ReturnsPartialDict():
     # THEN
     assert fact_dict is not None
     static_dict = {
-        "fact_context": wk_rope,
-        "fact_state": sun_rope,
+        wx.fact_context: wk_rope,
+        wx.fact_state: sun_rope,
     }
     assert fact_dict == static_dict
 
@@ -316,23 +316,7 @@ def test_FactHeir_IsModifiedByFactUnit():
     assert ced_factheir.fact_lower == 10
 
 
-def test_FactHeir_is_range_Returns_is_range_Status():
-    # ESTABLISH
-    ced_min_str = "ced_minute"
-    min_rope = create_rope("Amy23", ced_min_str)
-
-    # WHEN
-    x_factheir = factheir_shop(fact_context=min_rope, fact_state=min_rope)
-    assert x_factheir.is_range() is False
-
-    # THEN
-    x_factheir = factheir_shop(
-        min_rope, fact_state=min_rope, fact_lower=10.0, fact_upper=30.0
-    )
-    assert x_factheir.is_range() is True
-
-
-def test_factheir_is_range_Returns_is_range_Status():
+def test_FactHeir_is_range_ReturnsObj():
     # ESTABLISH
     ced_min_str = "ced_minute"
     min_rope = create_rope("Amy23", ced_min_str)
@@ -374,10 +358,10 @@ def test_get_factunits_from_dict_BuildsObj():
     sun_rope = create_rope(wk_rope, sun_str)
     static_dict = {
         wk_rope: {
-            "fact_context": wk_rope,
-            "fact_state": sun_rope,
-            "fact_lower": None,
-            "fact_upper": None,
+            wx.fact_context: wk_rope,
+            wx.fact_state: sun_rope,
+            wx.fact_lower: None,
+            wx.fact_upper: None,
         }
     }
 
@@ -398,8 +382,8 @@ def test_get_factunits_from_dict_BuildsObjFromIncompleteDict():
     sun_rope = create_rope(wk_rope, sun_str)
     static_dict = {
         wk_rope: {
-            "fact_context": wk_rope,
-            "fact_state": sun_rope,
+            wx.fact_context: wk_rope,
+            wx.fact_state: sun_rope,
         }
     }
 

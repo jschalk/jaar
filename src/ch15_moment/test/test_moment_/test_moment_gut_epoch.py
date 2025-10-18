@@ -1,7 +1,7 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch08_epoch.epoch_main import epochunit_shop, get_default_epoch_config_dict
 from src.ch08_epoch.test._util.ch08_examples import get_five_config
-from src.ch10_pack.pack_filehandler import open_gut_file, save_gut_file
+from src.ch10_lesson.lesson_filehandler import open_gut_file, save_gut_file
 from src.ch15_moment.moment_main import momentunit_shop
 from src.ch15_moment.test._util.ch15_env import (
     env_dir_setup_cleanup,

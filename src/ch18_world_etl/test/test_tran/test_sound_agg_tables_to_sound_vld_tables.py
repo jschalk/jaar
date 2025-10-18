@@ -16,10 +16,10 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
     sue_str = "Sue"
     yao_str = "Yao"
     yao = "Yaoito"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
     x44_credit = 44
     x55_credit = 55
     x22_debt = 22
@@ -33,7 +33,7 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
         )
         print(f"{get_table_columns(cursor, beliefavoice_s_agg_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {beliefavoice_s_agg_put_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -43,10 +43,10 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao}', {x44_credit}, {x22_debt})
-, ({event2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
-, ({event5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
-, ({event7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
+  ({spark1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao}', {x44_credit}, {x22_debt})
+, ({spark2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
+, ({spark5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
+, ({spark7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -61,7 +61,7 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrawar_h_vld_put_tablename) == 4
-        select_sqlstr = f"""SELECT {wx.event_num}
+        select_sqlstr = f"""SELECT {wx.spark_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -88,10 +88,10 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario0_AddRowsToTable():
     sue_str = "Sue"
     yao_str = "Yao"
     yao = "Yaoito"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
     x44_credit = 44
     x55_credit = 55
     x22_debt = 22
@@ -103,7 +103,7 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario0_AddRowsToTable():
         blrpern_s_agg_put_tablename = prime_tbl(wx.belief_voiceunit, "s", "agg", "put")
         print(f"{get_table_columns(cursor, blrpern_s_agg_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_s_agg_put_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -113,10 +113,10 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario0_AddRowsToTable():
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao}', {x44_credit}, {x22_debt})
-, ({event2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
-, ({event5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
-, ({event7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
+  ({spark1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao}', {x44_credit}, {x22_debt})
+, ({spark2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
+, ({spark5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
+, ({spark7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -129,7 +129,7 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 4
-        select_sqlstr = f"""SELECT {wx.event_num}
+        select_sqlstr = f"""SELECT {wx.spark_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -155,10 +155,10 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario1_Populates_Columns():
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
     x44_credit = 44
     x55_credit = 55
     x22_debt = 22
@@ -170,7 +170,7 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario1_Populates_Columns():
         blrpern_s_agg_put_tablename = prime_tbl(wx.belief_voiceunit, "s", "agg", "put")
         print(f"{get_table_columns(cursor, blrpern_s_agg_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_s_agg_put_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -180,10 +180,10 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario1_Populates_Columns():
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_str}', {x44_credit}, {x22_debt})
-, ({event2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
-, ({event5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
-, ({event7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
+  ({spark1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_str}', {x44_credit}, {x22_debt})
+, ({spark2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
+, ({spark5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
+, ({spark7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -196,7 +196,7 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 4
-        select_sqlstr = f"""SELECT {wx.event_num}
+        select_sqlstr = f"""SELECT {wx.spark_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -222,10 +222,10 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario2_DoesNotSelectWhere_e
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
     x44_credit = 44
     x55_credit = 55
     x22_debt = 22
@@ -237,7 +237,7 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario2_DoesNotSelectWhere_e
         blrpern_s_agg_put_tablename = prime_tbl(wx.belief_voiceunit, "s", "agg", "put")
         print(f"{get_table_columns(cursor, blrpern_s_agg_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_s_agg_put_tablename} (
-  {wx.event_num}
+  {wx.spark_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -248,10 +248,10 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario2_DoesNotSelectWhere_e
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_str}', {x44_credit}, {x22_debt}, NULL)
-, ({event2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt}, 'Data is not correct')
-, ({event5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt}, NULL)
-, ({event7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt}, NULL)
+  ({spark1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_str}', {x44_credit}, {x22_debt}, NULL)
+, ({spark2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt}, 'Data is not correct')
+, ({spark5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt}, NULL)
+, ({spark7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt}, NULL)
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -264,7 +264,7 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 3
-        select_sqlstr = f"""SELECT {wx.event_num}
+        select_sqlstr = f"""SELECT {wx.spark_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}

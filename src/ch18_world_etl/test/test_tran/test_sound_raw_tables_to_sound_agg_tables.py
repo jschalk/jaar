@@ -24,10 +24,10 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdat
     bob_inx = "Bobito"
     rdx = ":"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -36,7 +36,7 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdat
         trlrope_s_raw_tablename = create_prime_tablename(trlrope_str, "s", "raw")
         insert_into_clause = f"""INSERT INTO {trlrope_s_raw_tablename} (
   {wx.idea_number}
-, {wx.event_num}
+, {wx.spark_num}
 , {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
@@ -50,12 +50,12 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdat
         b077 = "br00077"
         values_clause = f"""
 VALUES
-  ('{b117}', {event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, NULL)
-, ('{b117}', {event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, NULL)
-, ('{b077}', {event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL, NULL)
-, ('{b045}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
-, ('{b045}', {event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
-, ('{b045}', {event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
+  ('{b117}', {spark1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, NULL)
+, ('{b117}', {spark1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, NULL)
+, ('{b077}', {spark1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL, NULL)
+, ('{b045}', {spark2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
+, ('{b045}', {spark5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
+, ('{b045}', {spark7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -82,10 +82,10 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario0():
     bob_inx = "Bobito"
     rdx = ":"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -93,7 +93,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario0():
         trlrope_s_raw_tablename = create_prime_tablename(wx.translate_rope, "s", "raw")
         insert_into_clause = f"""INSERT INTO {trlrope_s_raw_tablename} (
   {wx.idea_number}
-, {wx.event_num}
+, {wx.spark_num}
 , {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
@@ -107,12 +107,12 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario0():
         b077 = "br00077"
         values_clause = f"""
 VALUES
-  ('{b117}', {event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, NULL)
-, ('{b117}', {event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, NULL)
-, ('{b077}', {event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL, NULL)
-, ('{b045}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
-, ('{b045}', {event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
-, ('{b045}', {event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
+  ('{b117}', {spark1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, NULL)
+, ('{b117}', {spark1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, NULL)
+, ('{b077}', {spark1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL, NULL)
+, ('{b045}', {spark2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
+, ('{b045}', {spark5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
+, ('{b045}', {spark7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -124,7 +124,7 @@ VALUES
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
-        error_select_sqlstr = f"SELECT idea_number, event_num FROM {trlrope_s_raw_tablename} WHERE {wx.error_message} IS NOT NULL"
+        error_select_sqlstr = f"SELECT idea_number, spark_num FROM {trlrope_s_raw_tablename} WHERE {wx.error_message} IS NOT NULL"
         cursor.execute(error_select_sqlstr)
         assert cursor.fetchall() == [("br00117", 1), ("br00077", 1)]
 
@@ -139,10 +139,10 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario1_belief_raw_de
     bob_inx = "Bobito"
     rdx = ":"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -152,7 +152,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario1_belief_raw_de
         )
         insert_into_clause = f"""INSERT INTO {beliefa_s_raw_del} (
   {wx.idea_number}
-, {wx.event_num}
+, {wx.spark_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -163,10 +163,10 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario1_belief_raw_de
         b077 = "br00077"
         values_clause = f"""
 VALUES
-  ('{b117}', {event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}')
-, ('{b117}', {event1}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_inx}')
-, ('{b117}', {event1}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_inx}')
-, ('{b077}', {event1}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}')
+  ('{b117}', {spark1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}')
+, ('{b117}', {spark1}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_inx}')
+, ('{b117}', {spark1}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_inx}')
+, ('{b077}', {spark1}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}')
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -202,10 +202,10 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
     bob_inx = "Bobito"
     rdx = ":"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -213,7 +213,7 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
         trlrope_s_raw_tablename = create_prime_tablename("TRLROPE", "s", "raw")
         insert_into_clause = f"""INSERT INTO {trlrope_s_raw_tablename} (
   {wx.idea_number}
-, {wx.event_num}
+, {wx.spark_num}
 , {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
@@ -228,20 +228,20 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
         inconsistent_data_str = "Inconsistent data"
         values_clause = f"""
 VALUES
-  ('{b117}', {event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, '{inconsistent_data_str}')
-, ('{b117}', {event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, NULL)
-, ('{b117}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
-, ('{b117}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
-, ('{b045}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
-, ('{b045}', {event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', '{inconsistent_data_str}')
-, ('{b045}', {event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}', '{inconsistent_data_str}')
+  ('{b117}', {spark1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, '{inconsistent_data_str}')
+, ('{b117}', {spark1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, NULL)
+, ('{b117}', {spark2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
+, ('{b117}', {spark2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
+, ('{b045}', {spark2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
+, ('{b045}', {spark5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', '{inconsistent_data_str}')
+, ('{b045}', {spark7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}', '{inconsistent_data_str}')
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         blrpern_s_put_raw_tblname = create_prime_tablename("BLRPERN", "s", "raw", "put")
         insert_into_clause = f"""INSERT INTO {blrpern_s_put_raw_tblname} (
   {wx.idea_number}
-, {wx.event_num}
+, {wx.spark_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -252,12 +252,12 @@ VALUES
 )"""
         values_clause = f"""
 VALUES
-  ('{b117}', {event1}, '{sue_str}', '{a23_str}', '{bob_str}', '{yao_str}', NULL, NULL, '{inconsistent_data_str}')
-, ('{b117}', {event1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
-, ('{b117}', {event1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
-, ('{b117}', {event1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
-, ('{b020}', {event1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
-, ('{b020}', {event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}', NULL, NULL, NULL)
+  ('{b117}', {spark1}, '{sue_str}', '{a23_str}', '{bob_str}', '{yao_str}', NULL, NULL, '{inconsistent_data_str}')
+, ('{b117}', {spark1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
+, ('{b117}', {spark1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
+, ('{b117}', {spark1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
+, ('{b020}', {spark1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
+, ('{b020}', {spark1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}', NULL, NULL, NULL)
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -281,8 +281,8 @@ VALUES
         print(rows)
         assert len(rows) == 2
         assert rows == [
-            (event1, sue_str, bob_str, bob_inx, None, None, None, None),
-            (event2, sue_str, sue_str, sue_str, rdx, rdx, ukx, None),
+            (spark1, sue_str, bob_str, bob_inx, None, None, None, None),
+            (spark2, sue_str, sue_str, sue_str, rdx, rdx, ukx, None),
         ]
 
         select_agg_sqlstr = f"""SELECT * FROM {blrpern_s_put_agg_tblname};"""
@@ -291,8 +291,8 @@ VALUES
         print(rows)
         assert len(rows) == 2
         assert rows == [
-            (event1, sue_str, a23_str, bob_str, bob_str, None, None, None),
-            (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
+            (spark1, sue_str, a23_str, bob_str, bob_str, None, None, None),
+            (spark1, sue_str, a23_str, yao_str, yao_str, None, None, None),
         ]
 
 
@@ -306,10 +306,10 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
     bob_inx = "Bobito"
     rdx = ":"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
     b117 = "br00117"
     b020 = "br00020"
     b045 = "br00045"
@@ -321,7 +321,7 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
         blrpern_s_del_raw_tblname = create_prime_tablename("BLRPERN", "s", "raw", "del")
         insert_into_clause = f"""INSERT INTO {blrpern_s_del_raw_tblname} (
   {wx.idea_number}
-, {wx.event_num}
+, {wx.spark_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -329,12 +329,12 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
 )"""
         values_clause = f"""
 VALUES
-  ('{b117}', {event1}, '{sue_str}', '{a23_str}', '{bob_str}', '{yao_str}')
-, ('{b117}', {event1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}')
-, ('{b117}', {event1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}')
-, ('{b117}', {event1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}')
-, ('{b020}', {event1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}')
-, ('{b020}', {event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
+  ('{b117}', {spark1}, '{sue_str}', '{a23_str}', '{bob_str}', '{yao_str}')
+, ('{b117}', {spark1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}')
+, ('{b117}', {spark1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}')
+, ('{b117}', {spark1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}')
+, ('{b020}', {spark1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}')
+, ('{b020}', {spark1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -353,9 +353,9 @@ VALUES
         rows = cursor.fetchall()
         print(rows)
         assert rows == [
-            (event1, sue_str, a23_str, bob_str, bob_str, None),
-            (event1, sue_str, a23_str, bob_str, yao_str, None),
-            (event1, sue_str, a23_str, yao_str, yao_str, None),
+            (spark1, sue_str, a23_str, bob_str, bob_str, None),
+            (spark1, sue_str, a23_str, bob_str, yao_str, None),
+            (spark1, sue_str, a23_str, yao_str, yao_str, None),
         ]
 
 
@@ -369,10 +369,10 @@ def test_etl_sound_raw_tables_to_sound_agg_tables_PopulatesValidTable_Scenario0(
     bob_inx = "Bobito"
     rdx = ":"
     ukx = "Unknown"
-    event1 = 1
-    event2 = 2
-    event5 = 5
-    event7 = 7
+    spark1 = 1
+    spark2 = 2
+    spark5 = 5
+    spark7 = 7
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -380,7 +380,7 @@ def test_etl_sound_raw_tables_to_sound_agg_tables_PopulatesValidTable_Scenario0(
         trlrope_s_raw_tablename = create_prime_tablename("TRLROPE", "s", "raw")
         insert_into_clause = f"""INSERT INTO {trlrope_s_raw_tablename} (
   {wx.idea_number}
-, {wx.event_num}
+, {wx.spark_num}
 , {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
@@ -395,21 +395,21 @@ def test_etl_sound_raw_tables_to_sound_agg_tables_PopulatesValidTable_Scenario0(
         inconsistent_data_str = "Inconsistent data"
         values_clause = f"""
 VALUES
-  ('{b117}', {event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, NULL)
-, ('{b117}', {event1}, '{sue_str}', '{yao_str}', '{yao_str}', NULL, NULL, NULL, NULL)
-, ('{b117}', {event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, NULL)
-, ('{b117}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
-, ('{b117}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
-, ('{b045}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
-, ('{b045}', {event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
-, ('{b045}', {event7}, '{yao_str}', '{bob_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
+  ('{b117}', {spark1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, NULL)
+, ('{b117}', {spark1}, '{sue_str}', '{yao_str}', '{yao_str}', NULL, NULL, NULL, NULL)
+, ('{b117}', {spark1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, NULL)
+, ('{b117}', {spark2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
+, ('{b117}', {spark2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
+, ('{b045}', {spark2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
+, ('{b045}', {spark5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
+, ('{b045}', {spark7}, '{yao_str}', '{bob_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         blrpern_s_put_raw_tblname = create_prime_tablename("BLRPERN", "s", "raw", "put")
         insert_into_clause = f"""INSERT INTO {blrpern_s_put_raw_tblname} (
   {wx.idea_number}
-, {wx.event_num}
+, {wx.spark_num}
 , {wx.face_name}
 , {wx.moment_label}
 , {wx.belief_name}
@@ -420,13 +420,13 @@ VALUES
 )"""
         values_clause = f"""
 VALUES
-  ('{b117}', {event1}, '{sue_str}', '{a23_str}', '{bob_str}', '{yao_str}', NULL, NULL, NULL)
-, ('{b117}', {event1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
-, ('{b117}', {event1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
-, ('{b117}', {event1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
-, ('{b117}', {event1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
-, ('{b020}', {event1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
-, ('{b020}', {event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}', NULL, NULL, NULL)
+  ('{b117}', {spark1}, '{sue_str}', '{a23_str}', '{bob_str}', '{yao_str}', NULL, NULL, NULL)
+, ('{b117}', {spark1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
+, ('{b117}', {spark1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
+, ('{b117}', {spark1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
+, ('{b117}', {spark1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
+, ('{b020}', {spark1}, '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', NULL, NULL, NULL)
+, ('{b020}', {spark1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}', NULL, NULL, NULL)
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -449,10 +449,10 @@ VALUES
         rows = cursor.fetchall()
         print(rows)
         assert rows == [
-            (event1, sue_str, bob_str, bob_inx, None, None, None, None),
-            (event2, sue_str, sue_str, sue_str, rdx, rdx, ukx, None),
-            (event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx, None),
-            (event7, yao_str, bob_str, yao_inx, rdx, rdx, ukx, None),
+            (spark1, sue_str, bob_str, bob_inx, None, None, None, None),
+            (spark2, sue_str, sue_str, sue_str, rdx, rdx, ukx, None),
+            (spark5, sue_str, bob_str, bob_inx, rdx, rdx, ukx, None),
+            (spark7, yao_str, bob_str, yao_inx, rdx, rdx, ukx, None),
         ]
 
         select_agg_sqlstr = f"""SELECT * FROM {blrpern_s_put_agg_tblname};"""
@@ -460,7 +460,7 @@ VALUES
         rows = cursor.fetchall()
         print(rows)
         assert rows == [
-            (event1, sue_str, a23_str, bob_str, bob_str, None, None, None),
-            (event1, sue_str, a23_str, bob_str, yao_str, None, None, None),
-            (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
+            (spark1, sue_str, a23_str, bob_str, bob_str, None, None, None),
+            (spark1, sue_str, a23_str, bob_str, yao_str, None, None, None),
+            (spark1, sue_str, a23_str, yao_str, yao_str, None, None, None),
         ]

@@ -4,7 +4,7 @@ from src.ch08_epoch.reason_str_func import (
     get_reason_case_readable_str,
 )
 from src.ch12_belief_viewer.belief_viewer__tool import add_small_dot, get_plan_view_dict
-from src.ch12_belief_viewer.example22_beliefs import (
+from src.ch12_belief_viewer.belief_viewer_examples import (
     best_run_str,
     best_soccer_str,
     best_sport_str,
@@ -57,8 +57,8 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         wx.problem_bool,
         wx.knot,
         wx.is_expanded,
-        wx.active,
-        wx.active_hx,
+        wx.plan_active,
+        wx.plan_active_hx,
         wx.all_voice_cred,
         wx.all_voice_debt,
         wx.awardheirs,
@@ -314,6 +314,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario6_PlanUnit_ReasonUnit():
     # THEN
     # reasonunits
     play_soccer_reasonunits_dict = play_soccer_dict.get(wx.reasonunits)
+    print(f"{play_soccer_reasonunits_dict.keys()=}")
     assert len(play_soccer_reasonunits_dict) == 2
     # print(f"{len(play_soccer_reasonunits_dict)=}")
     best_reasonunit_dict = play_soccer_reasonunits_dict.get(best_rope)
@@ -532,9 +533,9 @@ def test_get_plan_view_dict_ReturnsObj_Scenario10_active_hx():
     chicken_dict = get_plan_view_dict(chicken_plan)
 
     # THEN
-    print(f"{chicken_plan.active_hx=}")
+    print(f"{chicken_plan.plan_active_hx=}")
     # sports ropes
-    chicken_active_hx_str = chicken_dict.get(wx.active_hx)
-    expected_chicken_active_hx_str = f"active_hx: {chicken_plan.active_hx}"
+    chicken_active_hx_str = chicken_dict.get(wx.plan_active_hx)
+    expected_chicken_active_hx_str = f"plan_active_hx: {chicken_plan.plan_active_hx}"
     expected_chicken_active_hx_str = add_small_dot(expected_chicken_active_hx_str)
     assert expected_chicken_active_hx_str == chicken_active_hx_str

@@ -332,7 +332,7 @@ def _modify_belief_plan_reasonunit_update(x_belief: BeliefUnit, x_atom: BeliefAt
     x_belief.edit_plan_attr(
         x_atom.get_value("plan_rope"),
         reason_context=x_atom.get_value("reason_context"),
-        reason_plan_active_requisite=x_atom.get_value("reason_active_requisite"),
+        reason_requisite_active=x_atom.get_value("active_requisite"),
     )
 
 
@@ -340,7 +340,7 @@ def _modify_belief_plan_reasonunit_insert(x_belief: BeliefUnit, x_atom: BeliefAt
     x_belief.edit_plan_attr(
         x_atom.get_value("plan_rope"),
         reason_context=x_atom.get_value("reason_context"),
-        reason_plan_active_requisite=x_atom.get_value("reason_active_requisite"),
+        reason_requisite_active=x_atom.get_value("active_requisite"),
     )
 
 
@@ -564,7 +564,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or (x_obj.reason_upper != y_obj.reason_upper)
         )
     elif dimen == "belief_plan_reasonunit":
-        return x_obj.reason_active_requisite != y_obj.reason_active_requisite
+        return x_obj.active_requisite != y_obj.active_requisite
     elif dimen == "belief_plan_reason_caseunit":
         return (
             x_obj.reason_lower != y_obj.reason_lower
@@ -599,7 +599,7 @@ class AtomRow:
     addin: float = None
     awardee_title: TitleTerm = None
     reason_context: RopeTerm = None
-    reason_active_requisite: bool = None
+    active_requisite: bool = None
     begin: float = None
     respect_grain: float = None
     close: float = None

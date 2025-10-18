@@ -2,10 +2,10 @@
   "attributes": {
     "awardee_title_ERASE": { "otx_key": true }, 
     "belief_name"        : { "otx_key": true }, 
-    "event_num"          : { "otx_key": true }, 
     "face_name"          : { "otx_key": true }, 
     "moment_label"       : { "otx_key": true }, 
-    "plan_rope"          : { "otx_key": true }
+    "plan_rope"          : { "otx_key": true }, 
+    "spark_num"          : { "otx_key": true }
   }, 
   "dimens": ["beliefunit", "momentunit", "belief_planunit", "belief_plan_awardunit"], 
   "idea_number": "br00052"

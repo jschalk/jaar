@@ -1,5 +1,11 @@
 from src.ch06_plan.healer import healerunit_shop
-from src.ch06_plan.plan import PlanAttrHolder, planattrholder_shop
+from src.ch06_plan.plan import (
+    PlanAttrHolder,
+    PlanUnit,
+    planattrholder_shop,
+    planunit_shop,
+)
+from src.ch06_plan.test._util.ch06_examples import RangeAttrHolder, get_range_attrs
 from src.ref.keywords import Ch06Keywords as wx
 
 
@@ -18,7 +24,7 @@ def test_PlanAttrHolder_Exists():
     assert new_obj.reason_divisor is None
     assert new_obj.reason_del_case_reason_context is None
     assert new_obj.reason_del_case_reason_state is None
-    assert new_obj.reason_plan_active_requisite is None
+    assert new_obj.reason_requisite_active is None
     assert new_obj.laborunit is None
     assert new_obj.healerunit is None
     assert new_obj.begin is None
@@ -43,7 +49,7 @@ def test_PlanAttrHolder_Exists():
         "reason_divisor",
         "reason_del_case_reason_context",
         "reason_del_case_reason_state",
-        "reason_plan_active_requisite",
+        "reason_requisite_active",
         wx.laborunit,
         wx.healerunit,
         wx.begin,
@@ -98,3 +104,49 @@ def test_planattrholder_shop_ReturnsObj():
 
     # THEN
     assert x_planattrholder.healerunit == sue_healerunit
+
+
+def test_RangeAttrHolder_Exists():
+    # ESTABLISH / WHEN
+    x_rangeattrholder = RangeAttrHolder()
+    # THEN
+    assert not x_rangeattrholder.begin
+    assert not x_rangeattrholder.close
+    assert not x_rangeattrholder.addin
+    assert not x_rangeattrholder.numor
+    assert not x_rangeattrholder.denom
+    assert not x_rangeattrholder.morph
+    assert not x_rangeattrholder.gogo_want
+    assert not x_rangeattrholder.stop_want
+    assert not x_rangeattrholder.gogo_calc
+    assert not x_rangeattrholder.stop_calc
+
+
+def test_get_range_attrs_ReturnsObj():
+    # ESTABLISH
+    mop_plan = planunit_shop("mop")
+    mop_plan.begin = "arg_begin"
+    mop_plan.close = "arg_close"
+    mop_plan.addin = "arg_addin"
+    mop_plan.numor = "arg_numor"
+    mop_plan.denom = "arg_denom"
+    mop_plan.morph = "arg_morph"
+    mop_plan.gogo_want = "arg_gogo_want"
+    mop_plan.stop_want = "arg_stop_want"
+    mop_plan.gogo_calc = "arg_gogo_calc"
+    mop_plan.stop_calc = "arg_stop_calc"
+
+    # WHEN
+    mop_range_attrs = get_range_attrs(mop_plan)
+
+    # THEN
+    assert mop_range_attrs.begin == "arg_begin"
+    assert mop_range_attrs.close == "arg_close"
+    assert mop_range_attrs.addin == "arg_addin"
+    assert mop_range_attrs.numor == "arg_numor"
+    assert mop_range_attrs.denom == "arg_denom"
+    assert mop_range_attrs.morph == "arg_morph"
+    assert mop_range_attrs.gogo_want == "arg_gogo_want"
+    assert mop_range_attrs.stop_want == "arg_stop_want"
+    assert mop_range_attrs.gogo_calc == "arg_gogo_calc"
+    assert mop_range_attrs.stop_calc == "arg_stop_calc"

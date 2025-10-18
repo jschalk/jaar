@@ -1375,12 +1375,12 @@
         "star": 1, 
         "uid": 275
       }, 
-      "Tired Status": {
+      "Tired Situation": {
         "kids": {
           "Not tired": { "plan_label": "Not tired", "star": 1, "uid": 278 }, 
           "Tired"    : { "plan_label": "Tired"    , "star": 1, "uid": 279 }
         }, 
-        "plan_label": "Tired Status", 
+        "plan_label": "Tired Situation", 
         "star": 1, 
         "uid": 277
       }, 
@@ -1568,7 +1568,7 @@
       "casa": {
         "is_expanded": false, 
         "kids": {
-          "Financial Ops": {
+          "Boring Ops": {
             "is_expanded": false, 
             "kids": {
               "be reponsible for rent": {
@@ -1672,7 +1672,7 @@
                 "uid": 75
               }
             }, 
-            "plan_label": "Financial Ops", 
+            "plan_label": "Boring Ops", 
             "star": 1, 
             "uid": 148
           }, 

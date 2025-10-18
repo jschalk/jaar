@@ -191,21 +191,21 @@ def test_BeliefUnit_cashout_Sets_fund_ratio_WithSomePlansOfZero_starScenario0():
     sue_belief.set_plan(floor_plan, casa_rope)
     sue_belief.set_l1_plan(planunit_shop("unimportant"))
 
-    status_str = "cleaniness status"
-    status_rope = sue_belief.make_rope(casa_rope, status_str)
-    sue_belief.set_plan(planunit_shop(status_str, star=0), casa_rope)
+    situation_str = "cleaniness situation"
+    situation_rope = sue_belief.make_rope(casa_rope, situation_str)
+    sue_belief.set_plan(planunit_shop(situation_str, star=0), casa_rope)
 
     non_str = "not clean"
     yes_str = "yes clean"
-    non_rope = sue_belief.make_rope(status_rope, non_str)
-    yes_rope = sue_belief.make_rope(status_rope, yes_str)
-    sue_belief.set_plan(planunit_shop(non_str), status_rope)
-    sue_belief.set_plan(planunit_shop(yes_str, star=2), status_rope)
+    non_rope = sue_belief.make_rope(situation_rope, non_str)
+    yes_rope = sue_belief.make_rope(situation_rope, yes_str)
+    sue_belief.set_plan(planunit_shop(non_str), situation_rope)
+    sue_belief.set_plan(planunit_shop(yes_str, star=2), situation_rope)
 
     assert sue_belief.planroot.fund_ratio is None
     assert sue_belief.get_plan_obj(casa_rope).fund_ratio is None
     assert sue_belief.get_plan_obj(floor_rope).fund_ratio is None
-    assert sue_belief.get_plan_obj(status_rope).fund_ratio is None
+    assert sue_belief.get_plan_obj(situation_rope).fund_ratio is None
     assert sue_belief.get_plan_obj(non_rope).fund_ratio is None
     assert sue_belief.get_plan_obj(yes_rope).fund_ratio is None
 
@@ -217,7 +217,7 @@ def test_BeliefUnit_cashout_Sets_fund_ratio_WithSomePlansOfZero_starScenario0():
     assert sue_belief.planroot.fund_ratio == 1
     assert sue_belief.get_plan_obj(casa_rope).fund_ratio == 0.5
     assert sue_belief.get_plan_obj(floor_rope).fund_ratio == 0.5
-    assert sue_belief.get_plan_obj(status_rope).fund_ratio == 0.0
+    assert sue_belief.get_plan_obj(situation_rope).fund_ratio == 0.0
     assert sue_belief.get_plan_obj(non_rope).fund_ratio == 0.0
     assert sue_belief.get_plan_obj(yes_rope).fund_ratio == 0.0
 
@@ -233,21 +233,21 @@ def test_BeliefUnit_cashout_Sets_fund_ratio_WithSomePlansOfZero_starScenario1():
     sue_belief.set_plan(floor_plan, casa_rope)
     sue_belief.set_l1_plan(planunit_shop("unimportant"))
 
-    status_str = "cleaniness status"
-    status_rope = sue_belief.make_rope(casa_rope, status_str)
-    sue_belief.set_plan(planunit_shop(status_str), casa_rope)
+    situation_str = "cleaniness situation"
+    situation_rope = sue_belief.make_rope(casa_rope, situation_str)
+    sue_belief.set_plan(planunit_shop(situation_str), casa_rope)
 
-    status_plan = sue_belief.get_plan_obj(status_rope)
-    print(f"{status_plan.star=}")
+    situation_plan = sue_belief.get_plan_obj(situation_rope)
+    print(f"{situation_plan.star=}")
     print("This should raise error: 'Planunit._'")
 
     clean_str = "clean"
-    clean_rope = sue_belief.make_rope(status_rope, clean_str)
+    clean_rope = sue_belief.make_rope(situation_rope, clean_str)
     very_str = "very_much"
     mod_str = "moderately"
     dirty_str = "dirty"
 
-    sue_belief.set_plan(planunit_shop(clean_str, star=0), status_rope)
+    sue_belief.set_plan(planunit_shop(clean_str, star=0), situation_rope)
     sue_belief.set_plan(planunit_shop(very_str), clean_rope)
     sue_belief.set_plan(planunit_shop(mod_str, star=2), clean_rope)
     sue_belief.set_plan(planunit_shop(dirty_str), clean_rope)
@@ -257,7 +257,7 @@ def test_BeliefUnit_cashout_Sets_fund_ratio_WithSomePlansOfZero_starScenario1():
     dirty_rope = sue_belief.make_rope(clean_rope, dirty_str)
     assert sue_belief.get_plan_obj(casa_rope).fund_ratio is None
     assert sue_belief.get_plan_obj(floor_rope).fund_ratio is None
-    assert sue_belief.get_plan_obj(status_rope).fund_ratio is None
+    assert sue_belief.get_plan_obj(situation_rope).fund_ratio is None
     assert sue_belief.get_plan_obj(clean_rope).fund_ratio is None
     assert sue_belief.get_plan_obj(very_rope).fund_ratio is None
     assert sue_belief.get_plan_obj(mod_rope).fund_ratio is None
@@ -270,7 +270,7 @@ def test_BeliefUnit_cashout_Sets_fund_ratio_WithSomePlansOfZero_starScenario1():
     print(f"{sue_belief.fund_pool=}")
     assert sue_belief.get_plan_obj(casa_rope).fund_ratio == 0.5
     assert sue_belief.get_plan_obj(floor_rope).fund_ratio == 0.25
-    assert sue_belief.get_plan_obj(status_rope).fund_ratio == 0.25
+    assert sue_belief.get_plan_obj(situation_rope).fund_ratio == 0.25
     assert sue_belief.get_plan_obj(clean_rope).fund_ratio == 0
     assert sue_belief.get_plan_obj(very_rope).fund_ratio == 0
     assert sue_belief.get_plan_obj(mod_rope).fund_ratio == 0
@@ -1140,13 +1140,13 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
 
     # THEN
     print(f"{yao_belief.get_reason_contexts()=}")
-    assert len(agenda_dict) == 63
+    assert len(agenda_dict) == 69
     x_awardagendametrics = AwardAgendaMetrics()
     x_awardagendametrics.set_awardagendametrics_sums(agenda_dict=agenda_dict)
     # print(f"{sum_belief_agenda_plans_fund_total=}")
     # assert x_awardagendametrics.agenda_no_count == 14
     assert x_awardagendametrics.agenda_yes_count == 49
-    predicted_agenda_no_belief_i_sum = int(0.004107582 * default_pool_num())
+    predicted_agenda_no_belief_i_sum = int(0.004908864 * default_pool_num())
     assert (
         x_awardagendametrics.agenda_no_belief_i_sum == predicted_agenda_no_belief_i_sum
     )
@@ -1160,7 +1160,7 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
         + x_awardagendametrics.agenda_yes_belief_i_sum,
         x_awardagendametrics.sum_belief_agenda_plans_fund_total,
     )
-    predicted_sum_belief_agenda_plans_fund_total = 0.007172982 * default_pool_num()
+    predicted_sum_belief_agenda_plans_fund_total = 0.007974264 * default_pool_num()
     assert (
         x_awardagendametrics.sum_belief_agenda_plans_fund_total
         == predicted_sum_belief_agenda_plans_fund_total

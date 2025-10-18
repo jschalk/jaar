@@ -1,10 +1,10 @@
 {
   "attributes": {
     "belief_name"    : { "otx_key": true }, 
-    "event_num"      : { "otx_key": true }, 
     "face_name"      : { "otx_key": true }, 
     "moment_label"   : { "otx_key": true }, 
-    "plan_rope_ERASE": { "otx_key": true }
+    "plan_rope_ERASE": { "otx_key": true }, 
+    "spark_num"      : { "otx_key": true }
   }, 
   "dimens": ["belief_planunit", "beliefunit", "momentunit"], 
   "idea_number": "br00058"

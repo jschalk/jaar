@@ -19,3 +19,6 @@ def pytest_generate_tests(metafunc):
     rebuild_bool_value = rebuild_bool_value == "True"
     if "rebuild_bool" in metafunc.fixturenames and rebuild_bool_value is not None:
         metafunc.parametrize("rebuild_bool", [rebuild_bool_value])
+
+
+# TODO Consider pre testing file setup for keywords

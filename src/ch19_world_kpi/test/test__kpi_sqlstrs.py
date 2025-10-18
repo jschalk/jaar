@@ -49,10 +49,10 @@ SELECT
 , {wx.belief_name}
 , {wx.plan_rope}
 , {wx.pledge}
-, {wx.active}
+, {wx.plan_active}
 , {wx.task}
 FROM {blrplan_job}
-WHERE {wx.pledge} == 1 AND {wx.active} == 1
+WHERE {wx.pledge} == 1 AND {wx.plan_active} == 1
 ;
 """
     print(expected_kpi002_sqlstr)

@@ -16,9 +16,9 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    event1 = 1
-    event2 = 2
-    event3 = 3
+    spark1 = 1
+    spark2 = 2
+    spark3 = 3
     minute_360 = 360
     minute_420 = 420
     hour6am = "6am"
@@ -27,18 +27,18 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
     input_dir = create_path(get_chapter_temp_dir(), "input")
     input_file_path = create_path(input_dir, ex_filename)
     br3_columns = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.cumulative_minute,
         wx.moment_label,
         wx.hour_label,
     ]
     a23_str = "amy23"
-    row0 = [event1, sue_str, minute_360, a23_str, hour6am]
-    row1 = [event1, sue_str, minute_420, a23_str, hour7am]
-    row2 = [event2, sue_str, minute_420, a23_str, hour7am]
-    row3 = [event3, sue_str, "num55", a23_str, hour7am]
-    row4 = ["event3", sue_str, "num55", a23_str, hour7am]
+    row0 = [spark1, sue_str, minute_360, a23_str, hour6am]
+    row1 = [spark1, sue_str, minute_420, a23_str, hour7am]
+    row2 = [spark2, sue_str, minute_420, a23_str, hour7am]
+    row3 = [spark3, sue_str, "num55", a23_str, hour7am]
+    row4 = ["spark3", sue_str, "num55", a23_str, hour7am]
 
     df1 = DataFrame([row0, row1, row2, row3, row4], columns=br3_columns)
     br00003_ex1_str = "example1_br00003"
@@ -65,22 +65,22 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {br00003_tablename} 
-ORDER BY sheet_name, {wx.event_num}, {wx.cumulative_minute};"""
+ORDER BY sheet_name, {wx.spark_num}, {wx.cumulative_minute};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
         assert len(rows) == 5
         file = ex_filename
-        e1 = event1
-        e2 = event2
-        e3 = event3
+        e1 = spark1
+        e2 = spark2
+        e3 = spark3
         s_dir = create_path(input_dir, ".")
         m_360 = minute_360
         m_420 = minute_420
         br3_ex1_str = br00003_ex1_str
         err4 = f"Conversion errors: {wx.cumulative_minute}: num55"
         err0 = (
-            f"Conversion errors: {wx.event_num}: event3, {wx.cumulative_minute}: num55"
+            f"Conversion errors: {wx.spark_num}: spark3, {wx.cumulative_minute}: num55"
         )
         row0 = (s_dir, file, br3_ex1_str, None, sue_str, a23_str, None, hour7am, err0)
         row1 = (s_dir, file, br3_ex1_str, e1, sue_str, a23_str, m_360, hour6am, None)
@@ -101,8 +101,8 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    event1 = 1
-    event2 = 2
+    spark1 = 1
+    spark2 = 2
     minute_360 = 360
     minute_420 = 420
     hour6am = "6am"
@@ -111,24 +111,24 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
     input_dir = create_path(get_chapter_temp_dir(), "input")
     input_file_path = create_path(input_dir, ex_filename)
     idea_columns = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.cumulative_minute,
         wx.moment_label,
         wx.hour_label,
     ]
     a23_str = "amy23"
-    row1 = [event1, sue_str, minute_360, a23_str, hour6am]
-    row2 = [event1, sue_str, minute_420, a23_str, hour7am]
-    row3 = [event2, sue_str, minute_420, a23_str, hour7am]
+    row1 = [spark1, sue_str, minute_360, a23_str, hour6am]
+    row2 = [spark1, sue_str, minute_420, a23_str, hour7am]
+    row3 = [spark2, sue_str, minute_420, a23_str, hour7am]
     incomplete_idea_columns = [
-        wx.event_num,
+        wx.spark_num,
         wx.face_name,
         wx.cumulative_minute,
         wx.moment_label,
     ]
-    incom_row1 = [event1, sue_str, minute_360, a23_str]
-    incom_row2 = [event1, sue_str, minute_420, a23_str]
+    incom_row1 = [spark1, sue_str, minute_360, a23_str]
+    incom_row2 = [spark1, sue_str, minute_420, a23_str]
 
     df1 = DataFrame([row1, row2], columns=idea_columns)
     df2 = DataFrame([incom_row1, incom_row2], columns=incomplete_idea_columns)
@@ -161,14 +161,14 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {br00003_tablename} 
-ORDER BY sheet_name, {wx.event_num}, {wx.cumulative_minute};"""
+ORDER BY sheet_name, {wx.spark_num}, {wx.cumulative_minute};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
         assert len(rows) == 5
         file = ex_filename
-        e1 = event1
-        e2 = event2
+        e1 = spark1
+        e2 = spark2
         s_dir = create_path(input_dir, ".")
         m_360 = minute_360
         m_420 = minute_420
@@ -193,8 +193,8 @@ ORDER BY sheet_name, {wx.event_num}, {wx.cumulative_minute};"""
 # ):
 #     # ESTABLISH
 #     sue_str = "Sue"
-#     event1 = 1
-#     event2 = 2
+#     spark1 = 1
+#     spark2 = 2
 #     minute_360 = 360
 #     minute_420 = 420
 #     hour6am = "6am"
@@ -203,16 +203,16 @@ ORDER BY sheet_name, {wx.event_num}, {wx.cumulative_minute};"""
 #     input_dir = create_path(get_chapter_temp_dir(), "input")
 #     input_file_path = create_path(input_dir, ex_filename)
 #     idea_columns = [
-#         wx.event_num,
+#         wx.spark_num,
 #         wx.face_name,
 #         wx.cumulative_minute,
 #         wx.moment_label,
 #         wx.hour_label,
 #     ]
 #     a23_str = "amy23"
-#     df_row0 = [event1, sue_str, minute_360, a23_str, hour6am]
-#     df_row1 = [event1, sue_str, minute_420, a23_str, hour7am]
-#     df_row2 = [event2, sue_str, minute_420, a23_str, hour7am]
+#     df_row0 = [spark1, sue_str, minute_360, a23_str, hour6am]
+#     df_row1 = [spark1, sue_str, minute_420, a23_str, hour7am]
+#     df_row2 = [spark2, sue_str, minute_420, a23_str, hour7am]
 
 #     df1 = DataFrame([df_row0, df_row1, df_row2], columns=idea_columns)
 #     br00003_ex1_str = "example1_br00003"
@@ -239,14 +239,14 @@ ORDER BY sheet_name, {wx.event_num}, {wx.cumulative_minute};"""
 #         select_agg_sqlstr = f"""
 # SELECT *
 # FROM {br00003_tablename}
-# ORDER BY sheet_name, {wx.event_num}, {wx.cumulative_minute};"""
+# ORDER BY sheet_name, {wx.spark_num}, {wx.cumulative_minute};"""
 #         cursor.execute(select_agg_sqlstr)
 
 #         br3rows = cursor.fetchall()
 #         assert len(br3rows) == 5
 #         file = ex_filename
-#         e1 = event1
-#         e2 = event2
+#         e1 = spark1
+#         e2 = spark2
 #         s_dir = create_path(input_dir, ".")
 #         m_360 = minute_360
 #         m_420 = minute_420

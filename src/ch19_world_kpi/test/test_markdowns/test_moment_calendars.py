@@ -5,7 +5,7 @@ from src.ch08_epoch.test._util.ch08_examples import (
     get_creg_config,
     get_expected_creg_year0_markdown,
 )
-from src.ch10_pack._ref.ch10_path import create_moment_json_path
+from src.ch10_lesson._ref.ch10_path import create_moment_json_path
 from src.ch15_moment.moment_main import momentunit_shop
 from src.ch19_world_kpi.kpi_mstr import create_calendar_markdown_files
 from src.ch19_world_kpi.test._util.ch19_env import (
@@ -65,18 +65,18 @@ def test_create_calendar_markdown_files_Senario1_CreatesFileFromMomentUnitJSON(
 #     output_dir = create_path(worlds_dir(), "output")
 #     fay_world = shop(fay_str, worlds_dir(), output_dir)
 #     sue_str = "Sue"
-#     event2 = 2
+#     spark2 = 2
 #     ex_filename = "Faybob.xlsx"
 #     input_file_path = create_path(fay_world._input_dir, ex_filename)
 #     a23_str = "amy23"
 #     br00011_columns = [
-#         wx.event_num,
+#         wx.spark_num,
 #         wx.face_name,
 #         wx.moment_label,
 #         wx.belief_name,
 #         wx.voice_name
 #     ]
-#     br00011_rows = [[event2, sue_str, a23_str, sue_str, sue_str]]
+#     br00011_rows = [[spark2, sue_str, a23_str, sue_str, sue_str]]
 #     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
 #     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
 #     fay_world.sheets_input_to_clarity_mstr()

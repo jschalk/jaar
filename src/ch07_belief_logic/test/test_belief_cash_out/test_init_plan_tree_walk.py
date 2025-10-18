@@ -4,6 +4,7 @@ from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_sorted_plan_list
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 from src.ch07_belief_logic.tree_metrics import TreeMetrics, treemetrics_shop
+from src.ref.keywords import Ch07Keywords as wx
 
 
 def test_TreeMetrics_Exists():
@@ -174,7 +175,7 @@ def test_BeliefUnit_set_plan_CreatesPlanUnitsUsedBy_reasonunits():
     assert sue_belief.plan_exists(buildings_rope)
 
 
-def test_get_sorted_plan_list_ReturnsObj():
+def test_get_sorted_plan_list_ReturnsObj_Scenario0_DefaultOrder_plan_plan_rope():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
     casa_rope = sue_belief.make_l1_rope("casa")
@@ -196,7 +197,7 @@ def test_get_sorted_plan_list_ReturnsObj():
     sue_belief._set_plan_dict()
 
     # WHEN
-    x_sorted_plan_list = get_sorted_plan_list(list(sue_belief._plan_dict.values()))
+    x_sorted_plan_list = get_sorted_plan_list(sue_belief._plan_dict)
 
     # THEN
     assert x_sorted_plan_list is not None
@@ -204,3 +205,46 @@ def test_get_sorted_plan_list_ReturnsObj():
     assert x_sorted_plan_list[0] == sue_belief.planroot
     assert x_sorted_plan_list[1] == sue_belief.get_plan_obj(casa_rope)
     assert x_sorted_plan_list[11] == sue_belief.get_plan_obj(mon_rope)
+
+
+def test_get_sorted_plan_list_ReturnsObj_Scenario1_SortBy_fund_ratio():
+    # ESTABLISH
+    sue_belief = beliefunit_shop("Sue", "Amy23")
+    sem_jours_rope = sue_belief.make_l1_rope("sem_jours")
+    sun_plan = planunit_shop("Sun", parent_rope=sem_jours_rope)
+    mon_plan = planunit_shop("Mon", parent_rope=sem_jours_rope)
+    tue_plan = planunit_shop("Tue", parent_rope=sem_jours_rope)
+    wed_plan = planunit_shop("Wed", parent_rope=sem_jours_rope)
+    thu_plan = planunit_shop("Thur", parent_rope=sem_jours_rope)
+    fri_plan = planunit_shop("Fri", parent_rope=sem_jours_rope)
+    sat_plan = planunit_shop("Sat", parent_rope=sem_jours_rope)
+    sun_plan.fund_ratio = 0.33
+    mon_plan.fund_ratio = 0.033
+    tue_plan.fund_ratio = 0.0033
+    thu_plan.fund_ratio = 0.0022
+    wed_plan.fund_ratio = 0.00033
+    fri_plan.fund_ratio = 0.0000044
+    sat_plan.fund_ratio = 0.00000055
+    example_dict = {
+        sun_plan.get_plan_rope(): sun_plan,
+        mon_plan.get_plan_rope(): mon_plan,
+        tue_plan.get_plan_rope(): tue_plan,
+        wed_plan.get_plan_rope(): wed_plan,
+        thu_plan.get_plan_rope(): thu_plan,
+        fri_plan.get_plan_rope(): fri_plan,
+        sat_plan.get_plan_rope(): sat_plan,
+    }
+
+    # WHEN
+    x_sorted_plan_list = get_sorted_plan_list(example_dict, sorting_key=wx.fund_ratio)
+
+    # THEN
+    assert x_sorted_plan_list is not None
+    assert len(x_sorted_plan_list) == 7
+    assert x_sorted_plan_list[0] == sun_plan
+    assert x_sorted_plan_list[1] == mon_plan
+    assert x_sorted_plan_list[2] == tue_plan
+    assert x_sorted_plan_list[3] == thu_plan
+    assert x_sorted_plan_list[4] == wed_plan
+    assert x_sorted_plan_list[5] == fri_plan
+    assert x_sorted_plan_list[6] == sat_plan

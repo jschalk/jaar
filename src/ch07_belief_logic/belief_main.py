@@ -90,7 +90,7 @@ class _bit_RatioException(Exception):
     pass
 
 
-class _last_pack_idException(Exception):
+class _last_lesson_idException(Exception):
     pass
 
 
@@ -121,7 +121,7 @@ class BeliefUnit:
     credor_respect: RespectNum = None
     debtor_respect: RespectNum = None
     max_tree_traverse: int = None
-    last_pack_id: int = None
+    last_lesson_id: int = None
     # cashout Calculated field begin
     _plan_dict: dict[RopeTerm, PlanUnit] = None
     _keep_dict: dict[RopeTerm, PlanUnit] = None
@@ -143,14 +143,14 @@ class BeliefUnit:
             rope=self.planroot.get_plan_rope(), knot=self.knot
         )
 
-    def del_last_pack_id(self):
-        self.last_pack_id = None
+    def del_last_lesson_id(self):
+        self.last_lesson_id = None
 
-    def set_last_pack_id(self, x_last_pack_id: int):
-        if self.last_pack_id is not None and x_last_pack_id < self.last_pack_id:
-            exception_str = f"Cannot set _last_pack_id to {x_last_pack_id} because it is less than {self.last_pack_id}."
-            raise _last_pack_idException(exception_str)
-        self.last_pack_id = x_last_pack_id
+    def set_last_lesson_id(self, x_last_lesson_id: int):
+        if self.last_lesson_id is not None and x_last_lesson_id < self.last_lesson_id:
+            exception_str = f"Cannot set _last_lesson_id to {x_last_lesson_id} because it is less than {self.last_lesson_id}."
+            raise _last_lesson_idException(exception_str)
+        self.last_lesson_id = x_last_lesson_id
 
     def set_fund_pool(self, x_fund_pool):
         if valid_allotment_ratio(x_fund_pool, self.fund_grain) is False:
@@ -413,13 +413,9 @@ class BeliefUnit:
         return all_group_titles.difference(x_voiceunit_group_titles)
 
     def _is_plan_rangeroot(self, plan_rope: RopeTerm) -> bool:
-        if self.moment_label == plan_rope:
-            raise InvalidBeliefException(
-                "its difficult to foresee a scenario where planroot is rangeroot"
-            )
         parent_rope = get_parent_rope(plan_rope)
         parent_plan = self.get_plan_obj(parent_rope)
-        return not parent_plan.is_math()
+        return not parent_plan.has_begin_close()
 
     def _get_rangeroot_factunits(self) -> list[FactUnit]:
         return [
@@ -438,12 +434,13 @@ class BeliefUnit:
         fact_upper: float = None,
         create_missing_plans: bool = None,
     ):
+        """Sets planroot factunit"""
         fact_state = fact_context if fact_state is None else fact_state
         if create_missing_plans:
             self._create_plankid_if_empty(rope=fact_context)
             self._create_plankid_if_empty(rope=fact_state)
 
-        fact_fact_context_plan = self.get_plan_obj(fact_context)
+        fact_context_plan = self.get_plan_obj(fact_context)
         x_planroot = self.get_plan_obj(to_rope(self.moment_label))
         x_fact_lower = None
         if fact_upper is not None and fact_lower is None:
@@ -462,20 +459,22 @@ class BeliefUnit:
             fact_upper=x_fact_upper,
         )
 
-        if fact_fact_context_plan.is_math() is False:
+        if fact_context_plan.has_begin_close() is False:
             x_planroot.set_factunit(x_factunit)
-        # if fact's plan no range or is a "range-root" then allow fact to be set
+        # if fact's plan no range or is a "rangeroot" then allow fact to be set
         elif (
-            fact_fact_context_plan.is_math()
+            fact_context_plan.has_begin_close()
             and self._is_plan_rangeroot(fact_context) is False
         ):
             raise InvalidBeliefException(
-                f"Non range-root fact:{fact_context} can only be set by range-root fact"
+                f"Non rangeroot fact:{fact_context} can only be set by rangeroot fact"
             )
-        elif fact_fact_context_plan.is_math() and self._is_plan_rangeroot(fact_context):
-            # WHEN plan is "range-root" identify any reason.reason_contexts that are descendants
+        elif fact_context_plan.has_begin_close() and self._is_plan_rangeroot(
+            fact_context
+        ):
+            # WHEN plan is "rangeroot" identify any reason.reason_contexts that are descendants
             # calculate and set those descendant facts
-            # example: zietline range (0-, 1.5e9) is range-root
+            # example: zietline range (0-, 1.5e9) is rangeroot
             # example: "zietline,wks" (spllt 10080) is range-descendant
             # there exists a reason reason_context "zietline,wks" with case.reason_state = "zietline,wks"
             # and (1,2) reason_divisor=2 (every other wk)
@@ -571,6 +570,7 @@ class BeliefUnit:
     def add_plan(
         self, plan_rope: RopeTerm, star: float = None, pledge: bool = None
     ) -> PlanUnit:
+        """default star is 0, pledges will have weight of 0 if star is not passed"""
         x_plan_label = get_tail_label(plan_rope, self.knot)
         x_parent_rope = get_parent_rope(plan_rope, self.knot)
         x_planunit = planunit_shop(x_plan_label, star=star)
@@ -792,7 +792,7 @@ class BeliefUnit:
         reason_divisor: int = None,
         reason_del_case_reason_context: RopeTerm = None,
         reason_del_case_reason_state: RopeTerm = None,
-        reason_plan_active_requisite: str = None,
+        reason_requisite_active: str = None,
         laborunit: LaborUnit = None,
         healerunit: HealerUnit = None,
         begin: float = None,
@@ -838,7 +838,7 @@ reason_case:    {reason_case}"""
             reason_divisor=reason_divisor,
             reason_del_case_reason_context=reason_del_case_reason_context,
             reason_del_case_reason_state=reason_del_case_reason_state,
-            reason_plan_active_requisite=reason_plan_active_requisite,
+            reason_requisite_active=reason_requisite_active,
             laborunit=laborunit,
             healerunit=healerunit,
             begin=begin,
@@ -1077,7 +1077,7 @@ reason_case:    {reason_case}"""
             r_plan = single_range_plan_list.pop()
             if r_plan.range_evaluated:
                 self._raise_gogo_calc_stop_calc_exception(r_plan.get_plan_rope())
-            if r_plan.is_math():
+            if r_plan.has_begin_close():
                 r_plan.gogo_calc = r_plan.begin
                 r_plan.stop_calc = r_plan.close
             else:
@@ -1095,7 +1095,7 @@ reason_case:    {reason_case}"""
 
     def _set_plantree_range_attrs(self):
         for x_plan in self._plan_dict.values():
-            if x_plan.is_math():
+            if x_plan.has_begin_close():
                 self._distribute_math_attrs(x_plan)
 
             if (
@@ -1166,17 +1166,17 @@ reason_case:    {reason_case}"""
                 raise keeps_justException(exception_str)
             self.keeps_justified = False
 
-    def _clear_plantree_fund_and_active_status_attrs(self):
+    def _clear_plantree_fund_and_plan_active(self):
         for x_plan in self._plan_dict.values():
             x_plan.clear_awardlines()
             x_plan.clear_descendant_pledge_count()
             x_plan.clear_all_voice_cred_debt()
 
-    def _set_kids_active_status_attrs(self, x_plan: PlanUnit, parent_plan: PlanUnit):
+    def _set_kids_plan_active(self, x_plan: PlanUnit, parent_plan: PlanUnit):
         x_plan.set_reasonheirs(self._plan_dict, parent_plan.reasonheirs)
         x_plan.set_range_factheirs(self._plan_dict, self._range_inheritors)
         tt_count = self.tree_traverse_count
-        x_plan.set_active_attrs(tt_count, self.groupunits, self.belief_name)
+        x_plan.set_plan_active(tt_count, self.groupunits, self.belief_name)
 
     def _allot_plan_fund_total(self, plan: PlanUnit):
         if plan.awardheir_exists():
@@ -1227,7 +1227,7 @@ reason_case:    {reason_case}"""
         self._healers_dict = {}
 
     def _set_plantree_factheirs_laborheir_awardheirs(self):
-        for x_plan in get_sorted_plan_list(list(self._plan_dict.values())):
+        for x_plan in get_sorted_plan_list(self._plan_dict):
             if x_plan == self.planroot:
                 x_plan.set_factheirs(x_plan.factunits)
                 x_plan.set_root_plan_reasonheirs()
@@ -1246,12 +1246,12 @@ reason_case:    {reason_case}"""
         self._set_plantree_range_attrs()
         self._set_voiceunit_groupunit_respect_ledgers()
         self._clear_voiceunit_fund_attrs()
-        self._clear_plantree_fund_and_active_status_attrs()
+        self._clear_plantree_fund_and_plan_active()
         self._set_plantree_factheirs_laborheir_awardheirs()
 
         max_count = self.max_tree_traverse
         while not self.rational and self.tree_traverse_count < max_count:
-            self._set_plantree_active_status_attrs()
+            self._set_plantree_plan_active()
             self._set_rational_attr()
             self.tree_traverse_count += 1
 
@@ -1260,15 +1260,15 @@ reason_case:    {reason_case}"""
         self._set_voiceunit_fund_related_attrs()
         self._set_belief_keep_attrs()
 
-    def _set_plantree_active_status_attrs(self):
-        for x_plan in get_sorted_plan_list(list(self._plan_dict.values())):
+    def _set_plantree_plan_active(self):
+        for x_plan in get_sorted_plan_list(self._plan_dict):
             if x_plan == self.planroot:
                 tt_count = self.tree_traverse_count
                 root_plan = self.planroot
-                root_plan.set_active_attrs(tt_count, self.groupunits, self.belief_name)
+                root_plan.set_plan_active(tt_count, self.groupunits, self.belief_name)
             else:
                 parent_plan = self.get_plan_obj(x_plan.parent_rope)
-                self._set_kids_active_status_attrs(x_plan, parent_plan)
+                self._set_kids_plan_active(x_plan, parent_plan)
 
     def _set_plantree_fund_attrs(self, root_plan: PlanUnit):
         root_plan.set_fund_attr(0, self.fund_pool, self.fund_pool)
@@ -1294,12 +1294,12 @@ reason_case:    {reason_case}"""
                 cache_plan_list.append(x_plan)
 
     def _set_rational_attr(self):
-        any_plan_active_status_has_altered = False
+        any_plan_active_has_altered = False
         for plan in self._plan_dict.values():
-            if plan.active_hx.get(self.tree_traverse_count) is not None:
-                any_plan_active_status_has_altered = True
+            if plan.plan_active_hx.get(self.tree_traverse_count) is not None:
+                any_plan_active_has_altered = True
 
-        if any_plan_active_status_has_altered is False:
+        if any_plan_active_has_altered is False:
             self.rational = True
 
     def _set_voiceunit_fund_related_attrs(self):
@@ -1413,8 +1413,8 @@ reason_case:    {reason_case}"""
             x_dict["credor_respect"] = self.credor_respect
         if self.debtor_respect is not None:
             x_dict["debtor_respect"] = self.debtor_respect
-        if self.last_pack_id is not None:
-            x_dict["last_pack_id"] = self.last_pack_id
+        if self.last_lesson_id is not None:
+            x_dict["last_lesson_id"] = self.last_lesson_id
 
         return x_dict
 
@@ -1507,7 +1507,7 @@ def get_beliefunit_from_dict(belief_dict: dict) -> BeliefUnit:
     )
     x_belief.credor_respect = obj_from_belief_dict(belief_dict, "credor_respect")
     x_belief.debtor_respect = obj_from_belief_dict(belief_dict, "debtor_respect")
-    x_belief.last_pack_id = obj_from_belief_dict(belief_dict, "last_pack_id")
+    x_belief.last_lesson_id = obj_from_belief_dict(belief_dict, "last_lesson_id")
     x_knot = x_belief.knot
     x_voices = obj_from_belief_dict(belief_dict, "voices", x_knot).values()
     for x_voiceunit in x_voices:
@@ -1606,6 +1606,12 @@ def get_dict_of_belief_from_dict(x_dict: dict[str, dict]) -> dict[str, BeliefUni
     return beliefunits
 
 
-def get_sorted_plan_list(x_list: list[PlanUnit]) -> list[PlanUnit]:
-    x_list.sort(key=lambda x: x.get_plan_rope(), reverse=False)
+def get_sorted_plan_list(
+    x_dict: dict[RopeTerm, PlanUnit], sorting_key: str = None
+) -> list[PlanUnit]:
+    x_list = list(x_dict.values())
+    if sorting_key in {"fund_ratio"}:
+        x_list.sort(key=lambda x: x.fund_ratio, reverse=True)
+    else:
+        x_list.sort(key=lambda x: x.get_plan_rope(), reverse=False)
     return x_list

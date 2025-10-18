@@ -6,7 +6,7 @@ from src.ch04_voice.group import awardunit_shop
 from src.ch04_voice.labor import laborunit_shop
 from src.ch06_plan.healer import healerunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch10_pack._ref.ch10_path import create_job_path, create_moment_json_path
+from src.ch10_lesson._ref.ch10_path import create_job_path, create_moment_json_path
 from src.ch11_bud.bud_filehandler import save_job_file
 from src.ch15_moment.moment_main import momentunit_shop
 from src.ch18_world_etl.test._util.ch18_env import (
@@ -33,21 +33,21 @@ def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario0(
     sue_belief.add_voiceunit(bob_str)
     sue_belief.get_voice(bob_str).add_membership(run_str)
     casa_rope = sue_belief.make_l1_rope("casa")
-    status_rope = sue_belief.make_l1_rope("status")
-    clean_rope = sue_belief.make_rope(status_rope, "clean")
-    dirty_rope = sue_belief.make_rope(status_rope, "dirty")
+    situation_rope = sue_belief.make_l1_rope("reason_active")
+    clean_rope = sue_belief.make_rope(situation_rope, "clean")
+    dirty_rope = sue_belief.make_rope(situation_rope, "dirty")
     sue_belief.add_plan(casa_rope)
     sue_belief.add_plan(clean_rope)
     sue_belief.add_plan(dirty_rope)
     sue_belief.edit_plan_attr(
-        casa_rope, reason_context=status_rope, reason_case=dirty_rope
+        casa_rope, reason_context=situation_rope, reason_case=dirty_rope
     )
     sue_belief.edit_plan_attr(casa_rope, awardunit=awardunit_shop(run_str))
     sue_belief.edit_plan_attr(casa_rope, healerunit=healerunit_shop({bob_str}))
     sue_laborunit = laborunit_shop()
     sue_laborunit.add_party(sue_str)
     sue_belief.edit_plan_attr(casa_rope, laborunit=sue_laborunit)
-    sue_belief.add_fact(status_rope, clean_rope)
+    sue_belief.add_fact(situation_rope, clean_rope)
     print(f"{sue_belief.get_plan_obj(casa_rope).laborunit=}")
     print(f"{sue_belief.get_plan_obj(casa_rope).to_dict()=}")
     save_job_file(m23_moment_mstr_dir, sue_belief)

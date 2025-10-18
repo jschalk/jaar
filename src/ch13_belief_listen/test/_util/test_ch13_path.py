@@ -78,7 +78,7 @@ def test_create_keep_rope_path_ReturnsObj_Scenario1_MoreTestsForRopePathCreation
     kern_rope = create_rope_from_labels([peru_str, texas_str, elpaso_str, kern_str])
 
     # WHEN
-    # texas_path = create_keep_rope_path(sue_packfilehandler, texas_rope)
+    # texas_path = create_keep_rope_path(sue_lessonfilehandler, texas_rope)
     texas_path = create_keep_rope_path(
         moment_mstr_dir,
         belief_name=sue_str,
@@ -86,7 +86,7 @@ def test_create_keep_rope_path_ReturnsObj_Scenario1_MoreTestsForRopePathCreation
         keep_rope=texas_rope,
         knot=None,
     )
-    # dallas_path = createdallas_path_keep_rope_path(sue_packfilehandler, dallas_rope)
+    # dallas_path = createdallas_path_keep_rope_path(sue_lessonfilehandler, dallas_rope)
     dallas_path = create_keep_rope_path(
         moment_mstr_dir,
         belief_name=sue_str,
@@ -94,7 +94,7 @@ def test_create_keep_rope_path_ReturnsObj_Scenario1_MoreTestsForRopePathCreation
         keep_rope=dallas_rope,
         knot=None,
     )
-    # elpaso_path = create_keep_rope_path(sue_packfilehandler, elpaso_rope)
+    # elpaso_path = create_keep_rope_path(sue_lessonfilehandler, elpaso_rope)
     elpaso_path = create_keep_rope_path(
         moment_mstr_dir,
         belief_name=sue_str,
@@ -102,7 +102,7 @@ def test_create_keep_rope_path_ReturnsObj_Scenario1_MoreTestsForRopePathCreation
         keep_rope=elpaso_rope,
         knot=None,
     )
-    # kern_path = create_keep_rope_path(sue_packfilehandler, kern_rope)
+    # kern_path = create_keep_rope_path(sue_lessonfilehandler, kern_rope)
     kern_path = create_keep_rope_path(
         moment_mstr_dir,
         belief_name=sue_str,

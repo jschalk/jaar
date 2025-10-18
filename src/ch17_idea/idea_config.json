@@ -6,10 +6,10 @@
     "jkeys": {
       "awardee_title": {}, 
       "belief_name": {}, 
-      "event_num": {}, 
       "face_name": {}, 
       "moment_label": {}, 
-      "plan_rope": {}
+      "plan_rope": {}, 
+      "spark_num": {}
     }, 
     "jvalues": {"give_force": {}, "take_force": {}}
   }, 
@@ -19,11 +19,11 @@
     "idea_category": "belief", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
       "face_name": {}, 
       "fact_context": {}, 
       "moment_label": {}, 
-      "plan_rope": {}
+      "plan_rope": {}, 
+      "spark_num": {}
     }, 
     "jvalues": {"fact_lower": {}, "fact_state": {}, "fact_upper": {}}
   }, 
@@ -33,11 +33,11 @@
     "idea_category": "belief", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
       "face_name": {}, 
       "healer_name": {}, 
       "moment_label": {}, 
-      "plan_rope": {}
+      "plan_rope": {}, 
+      "spark_num": {}
     }, 
     "jvalues": {}
   }, 
@@ -47,11 +47,11 @@
     "idea_category": "belief", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
       "face_name": {}, 
       "moment_label": {}, 
       "party_title": {}, 
-      "plan_rope": {}
+      "plan_rope": {}, 
+      "spark_num": {}
     }, 
     "jvalues": {"solo": {}}
   }, 
@@ -61,12 +61,12 @@
     "idea_category": "belief", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
       "face_name": {}, 
       "moment_label": {}, 
       "plan_rope": {}, 
       "reason_context": {}, 
-      "reason_state": {}
+      "reason_state": {}, 
+      "spark_num": {}
     }, 
     "jvalues": {"reason_divisor": {}, "reason_lower": {}, "reason_upper": {}}
   }, 
@@ -76,13 +76,13 @@
     "idea_category": "belief", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
       "face_name": {}, 
       "moment_label": {}, 
       "plan_rope": {}, 
-      "reason_context": {}
+      "reason_context": {}, 
+      "spark_num": {}
     }, 
-    "jvalues": {"reason_active_requisite": {}}
+    "jvalues": {"active_requisite": {}}
   }, 
   "belief_planunit": {
     "allowed_crud": "delete_insert_update", 
@@ -90,10 +90,10 @@
     "idea_category": "belief", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
       "face_name": {}, 
       "moment_label": {}, 
-      "plan_rope": {}
+      "plan_rope": {}, 
+      "spark_num": {}
     }, 
     "jvalues": {
       "addin": {}, 
@@ -115,10 +115,10 @@
     "idea_category": "belief", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
       "face_name": {}, 
       "group_title": {}, 
       "moment_label": {}, 
+      "spark_num": {}, 
       "voice_name": {}
     }, 
     "jvalues": {"group_cred_lumen": {}, "group_debt_lumen": {}}
@@ -129,9 +129,9 @@
     "idea_category": "belief", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
       "face_name": {}, 
       "moment_label": {}, 
+      "spark_num": {}, 
       "voice_name": {}
     }, 
     "jvalues": {"voice_cred_lumen": {}, "voice_debt_lumen": {}}
@@ -140,7 +140,7 @@
     "allowed_crud": "UPDATE", 
     "build_order": 19, 
     "idea_category": "belief", 
-    "jkeys": {"belief_name": {}, "event_num": {}, "face_name": {}, "moment_label": {}}, 
+    "jkeys": {"belief_name": {}, "face_name": {}, "moment_label": {}, "spark_num": {}}, 
     "jvalues": {
       "credor_respect": {}, 
       "debtor_respect": {}, 
@@ -159,9 +159,9 @@
     "jkeys": {
       "belief_name": {}, 
       "bud_time": {}, 
-      "event_num": {}, 
       "face_name": {}, 
-      "moment_label": {}
+      "moment_label": {}, 
+      "spark_num": {}
     }, 
     "jvalues": {"celldepth": {}, "quota": {}}
   }, 
@@ -169,21 +169,21 @@
     "allowed_crud": "insert_one_time", 
     "build_order": 6, 
     "idea_category": "moment", 
-    "jkeys": {"cumulative_minute": {}, "event_num": {}, "face_name": {}, "moment_label": {}}, 
+    "jkeys": {"cumulative_minute": {}, "face_name": {}, "moment_label": {}, "spark_num": {}}, 
     "jvalues": {"hour_label": {}}
   }, 
   "moment_epoch_month": {
     "allowed_crud": "insert_one_time", 
     "build_order": 7, 
     "idea_category": "moment", 
-    "jkeys": {"cumulative_day": {}, "event_num": {}, "face_name": {}, "moment_label": {}}, 
+    "jkeys": {"cumulative_day": {}, "face_name": {}, "moment_label": {}, "spark_num": {}}, 
     "jvalues": {"month_label": {}}
   }, 
   "moment_epoch_weekday": {
     "allowed_crud": "insert_one_time", 
     "build_order": 8, 
     "idea_category": "moment", 
-    "jkeys": {"event_num": {}, "face_name": {}, "moment_label": {}, "weekday_order": {}}, 
+    "jkeys": {"face_name": {}, "moment_label": {}, "spark_num": {}, "weekday_order": {}}, 
     "jvalues": {"weekday_label": {}}
   }, 
   "moment_paybook": {
@@ -192,9 +192,9 @@
     "idea_category": "moment", 
     "jkeys": {
       "belief_name": {}, 
-      "event_num": {}, 
       "face_name": {}, 
       "moment_label": {}, 
+      "spark_num": {}, 
       "tran_time": {}, 
       "voice_name": {}
     }, 
@@ -204,14 +204,14 @@
     "allowed_crud": "insert_multiple", 
     "build_order": 8, 
     "idea_category": "moment", 
-    "jkeys": {"event_num": {}, "face_name": {}, "moment_label": {}, "offi_time": {}}, 
+    "jkeys": {"face_name": {}, "moment_label": {}, "offi_time": {}, "spark_num": {}}, 
     "jvalues": {}
   }, 
   "momentunit": {
     "allowed_crud": "insert_one_time", 
     "build_order": 5, 
     "idea_category": "moment", 
-    "jkeys": {"event_num": {}, "face_name": {}, "moment_label": {}}, 
+    "jkeys": {"face_name": {}, "moment_label": {}, "spark_num": {}}, 
     "jvalues": {
       "c400_number": {}, 
       "epoch_label": {}, 
@@ -228,28 +228,28 @@
     "allowed_crud": "insert_one_time", 
     "build_order": 2, 
     "idea_category": "translate", 
-    "jkeys": {"event_num": {}, "face_name": {}, "otx_label": {}}, 
+    "jkeys": {"face_name": {}, "otx_label": {}, "spark_num": {}}, 
     "jvalues": {"inx_knot": {}, "inx_label": {}, "otx_knot": {}, "unknown_str": {}}
   }, 
   "translate_name": {
     "allowed_crud": "insert_one_time", 
     "build_order": 0, 
     "idea_category": "translate", 
-    "jkeys": {"event_num": {}, "face_name": {}, "otx_name": {}}, 
+    "jkeys": {"face_name": {}, "otx_name": {}, "spark_num": {}}, 
     "jvalues": {"inx_knot": {}, "inx_name": {}, "otx_knot": {}, "unknown_str": {}}
   }, 
   "translate_rope": {
     "allowed_crud": "insert_one_time", 
     "build_order": 3, 
     "idea_category": "translate", 
-    "jkeys": {"event_num": {}, "face_name": {}, "otx_rope": {}}, 
+    "jkeys": {"face_name": {}, "otx_rope": {}, "spark_num": {}}, 
     "jvalues": {"inx_knot": {}, "inx_rope": {}, "otx_knot": {}, "unknown_str": {}}
   }, 
   "translate_title": {
     "allowed_crud": "insert_one_time", 
     "build_order": 1, 
     "idea_category": "translate", 
-    "jkeys": {"event_num": {}, "face_name": {}, "otx_title": {}}, 
+    "jkeys": {"face_name": {}, "otx_title": {}, "spark_num": {}}, 
     "jvalues": {"inx_knot": {}, "inx_title": {}, "otx_knot": {}, "unknown_str": {}}
   }
 }

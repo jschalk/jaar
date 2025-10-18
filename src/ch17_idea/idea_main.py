@@ -10,7 +10,7 @@ from src.ch01_py.dict_toolbox import (
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch08_epoch.epoch_main import epochunit_shop
 from src.ch09_belief_atom.atom_main import BeliefAtom, atomrow_shop
-from src.ch10_pack.delta import (
+from src.ch10_lesson.delta import (
     BeliefDelta,
     beliefdelta_shop,
     get_dimens_cruds_beliefdelta,
@@ -155,7 +155,7 @@ def get_csv_idearef(header_row: list[str]) -> IdeaRef:
     headers_str = "".join(f",{x_header}" for x_header in header_row)
     headers_str = headers_str[1:]
     headers_str = headers_str.replace("face_name,", "")
-    headers_str = headers_str.replace("event_num,", "")
+    headers_str = headers_str.replace("spark_num,", "")
     x_ideaname = get_idea_format_headers().get(headers_str)
     return get_idearef_obj(x_ideaname)
 

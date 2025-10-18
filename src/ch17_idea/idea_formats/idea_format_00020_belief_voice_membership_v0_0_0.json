@@ -1,12 +1,12 @@
 {
   "attributes": {
     "belief_name"     : { "otx_key": true  }, 
-    "event_num"       : { "otx_key": true  }, 
     "face_name"       : { "otx_key": true  }, 
     "group_cred_lumen": { "otx_key": false }, 
     "group_debt_lumen": { "otx_key": false }, 
     "group_title"     : { "otx_key": true  }, 
     "moment_label"    : { "otx_key": true  }, 
+    "spark_num"       : { "otx_key": true  }, 
     "voice_name"      : { "otx_key": true  }
   }, 
   "dimens": ["belief_voiceunit", "belief_voice_membership", "beliefunit", "momentunit"], 
