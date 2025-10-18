@@ -5,19 +5,19 @@ from src.ch07_belief_logic.belief_tool import (
     belief_plan_reason_caseunit_get_obj,
     belief_plan_reason_caseunit_set_obj,
 )
-from src.ch07_belief_logic.test._util.ch07_examples import ChExampleStrsSlashknot as exx
+from src.ch07_belief_logic.test._util.ch07_examples import ChExampleStrsSlashknot as wx
 from src.ref.keywords import Ch07Keywords as kw
 
 
 def test_belief_plan_reason_caseunit_set_obj_SetAttr_Scenario0_Pass_reason_case():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob, knot=exx.slash_str)
-    casa_rope = bob_belief.make_l1_rope(exx.casa_str)
-    wk_rope = bob_belief.make_l1_rope(exx.wk_str)
-    wed_rope = bob_belief.make_rope(wk_rope, exx.wed_str)
-    bob_belief.set_l1_plan(planunit_shop(exx.casa_str))
-    bob_belief.set_l1_plan(planunit_shop(exx.wk_str))
-    bob_belief.set_plan(planunit_shop(exx.wed_str), wk_rope)
+    bob_belief = beliefunit_shop(wx.Bob, knot=wx.slash_str)
+    casa_rope = bob_belief.make_l1_rope(wx.casa_str)
+    wk_rope = bob_belief.make_l1_rope(wx.wk_str)
+    wed_rope = bob_belief.make_rope(wk_rope, wx.wed_str)
+    bob_belief.set_l1_plan(planunit_shop(wx.casa_str))
+    bob_belief.set_l1_plan(planunit_shop(wx.wk_str))
+    bob_belief.set_plan(planunit_shop(wx.wed_str), wk_rope)
     wed_jkeys = {
         kw.plan_rope: casa_rope,
         kw.reason_context: wk_rope,
@@ -34,10 +34,10 @@ def test_belief_plan_reason_caseunit_set_obj_SetAttr_Scenario0_Pass_reason_case(
 
 def test_belief_plan_reason_caseunit_set_obj_SetAttr_Scenario1_Pass_reason_lower_reason_upper():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob, knot=exx.slash_str)
-    mop_rope = bob_belief.make_l1_rope(exx.mop_str)
-    clean_rope = bob_belief.make_l1_rope(exx.clean_str)
-    dirtyness_rope = bob_belief.make_rope(clean_rope, exx.dirtyness_str)
+    bob_belief = beliefunit_shop(wx.Bob, knot=wx.slash_str)
+    mop_rope = bob_belief.make_l1_rope(wx.mop_str)
+    clean_rope = bob_belief.make_l1_rope(wx.clean_str)
+    dirtyness_rope = bob_belief.make_rope(clean_rope, wx.dirtyness_str)
     bob_belief.add_plan(dirtyness_rope)
     bob_belief.add_plan(mop_rope)
     dirtyness_reason_lower = 5
@@ -64,10 +64,10 @@ def test_belief_plan_reason_caseunit_set_obj_SetAttr_Scenario1_Pass_reason_lower
 
 def test_belief_plan_reason_caseunit_set_obj_SetAttr_Scenario2_Pass_reason_divisor():
     # ESTABLISH
-    bob_belief = beliefunit_shop(exx.Bob, knot=exx.slash_str)
-    mop_rope = bob_belief.make_l1_rope(exx.mop_str)
-    clean_rope = bob_belief.make_l1_rope(exx.clean_str)
-    dirtyness_rope = bob_belief.make_rope(clean_rope, exx.dirtyness_str)
+    bob_belief = beliefunit_shop(wx.Bob, knot=wx.slash_str)
+    mop_rope = bob_belief.make_l1_rope(wx.mop_str)
+    clean_rope = bob_belief.make_l1_rope(wx.clean_str)
+    dirtyness_rope = bob_belief.make_rope(clean_rope, wx.dirtyness_str)
     bob_belief.add_plan(dirtyness_rope)
     bob_belief.add_plan(mop_rope)
     dirtyness_reason_lower = 5

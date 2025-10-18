@@ -8,7 +8,7 @@ from src.ch12_belief_viewer.gcalendar import (
     create_gcalendar_events_list,
     gcal_readble_percent,
 )
-from src.ch12_belief_viewer.test._util.ch12_examples import ExampleValuesRef as exx
+from src.ch12_belief_viewer.test._util.ch12_examples import ExampleValuesRef as wx
 from src.ref.keywords import Ch12Keywords as kw
 
 # @pytest.mark.parametrize(
@@ -48,7 +48,7 @@ def test_gcal_readble_percent_ReturnsObj():
 
 def test_create_gcalendar_events_list_ReturnsObj_Scenario0_Empty():
     # ESTABLISH
-    sue_belief = beliefunit_shop(exx.sue, exx.a23)
+    sue_belief = beliefunit_shop(wx.sue, wx.a23)
     apr7 = datetime(2010, 5, 7, 9)
     print(f"{apr7=}")
 
@@ -61,9 +61,9 @@ def test_create_gcalendar_events_list_ReturnsObj_Scenario0_Empty():
 
 def test_BeliefUnit_cashout_SetsAttr_ScenarioX_SingleBranch_fund_ratio():
     # ESTABLISH
-    sue_belief = beliefunit_shop(exx.sue, exx.a23)
-    sue_belief.add_plan(exx.mop_rope, pledge=True, star=1)
-    mop_plan = sue_belief.get_plan_obj(exx.mop_rope)
+    sue_belief = beliefunit_shop(wx.sue, wx.a23)
+    sue_belief.add_plan(wx.mop_rope, pledge=True, star=1)
+    mop_plan = sue_belief.get_plan_obj(wx.mop_rope)
     assert not sue_belief.planroot.fund_onset
     assert not sue_belief.planroot.fund_cease
     assert not sue_belief.planroot.fund_ratio
@@ -86,8 +86,8 @@ def test_BeliefUnit_cashout_SetsAttr_ScenarioX_SingleBranch_fund_ratio():
 
 def test_create_gcalendar_events_list_ReturnsObj_Scenario1_1AllDayPledge():
     # ESTABLISH
-    sue_belief = beliefunit_shop(exx.sue, exx.a23)
-    sue_belief.add_plan(exx.mop_rope, pledge=True, star=1)
+    sue_belief = beliefunit_shop(wx.sue, wx.a23)
+    sue_belief.add_plan(wx.mop_rope, pledge=True, star=1)
     apr7 = datetime(2010, 5, 7, 9)
     print(f"{apr7=}")
 
@@ -95,7 +95,7 @@ def test_create_gcalendar_events_list_ReturnsObj_Scenario1_1AllDayPledge():
     sue_gcal_events = create_gcalendar_events_list(sue_belief, apr7)
 
     # THEN
-    gcal_tobe_description = f"""1. {exx.mop_str} (100%)
+    gcal_tobe_description = f"""1. {wx.mop_str} (100%)
 """
     description_str = "Description"
     expected_apr7str = "05/07/2010"
@@ -115,10 +115,10 @@ def test_create_gcalendar_events_list_ReturnsObj_Scenario1_1AllDayPledge():
 
 def test_create_gcalendar_events_list_ReturnsObj_Scenario2_3AllDayPledge():
     # ESTABLISH
-    sue_belief = beliefunit_shop(exx.sue, exx.a23)
-    sue_belief.add_plan(exx.mop_rope, pledge=True, star=2)
-    sue_belief.add_plan(exx.sweep_rope, pledge=True, star=1)
-    sue_belief.add_plan(exx.scrub_rope, pledge=True, star=1)
+    sue_belief = beliefunit_shop(wx.sue, wx.a23)
+    sue_belief.add_plan(wx.mop_rope, pledge=True, star=2)
+    sue_belief.add_plan(wx.sweep_rope, pledge=True, star=1)
+    sue_belief.add_plan(wx.scrub_rope, pledge=True, star=1)
     apr7 = datetime(2010, 5, 7, 9)
     print(f"{apr7=}")
 
@@ -126,9 +126,9 @@ def test_create_gcalendar_events_list_ReturnsObj_Scenario2_3AllDayPledge():
     sue_gcal_events = create_gcalendar_events_list(sue_belief, apr7)
 
     # THEN
-    gcal_tobe_description = f"""1. {exx.mop_str} (50%)
-2. {exx.scrub_str} (25%)
-3. {exx.sweep_str} (25%)
+    gcal_tobe_description = f"""1. {wx.mop_str} (50%)
+2. {wx.scrub_str} (25%)
+3. {wx.sweep_str} (25%)
 """
     description_str = "Description"
     start_date_str = "Start Date"
@@ -152,11 +152,11 @@ def test_create_gcalendar_events_list_ReturnsObj_Scenario2_3AllDayPledge():
 
 # def test_create_gcalendar_events_list_ReturnsObj_Scenario3_OneEpoch_pledge():
 #     # ESTABLISH
-#     sue_belief = beliefunit_shop(exx.sue, exx.a23)
-#     sue_belief.add_plan(exx.mop_rope, pledge=True, star=2)
+#     sue_belief = beliefunit_shop(wx.sue, wx.a23)
+#     sue_belief.add_plan(wx.mop_rope, pledge=True, star=2)
 #     default_epoch_config = get_default_epoch_config_dict()
 #     add_epoch_planunit(sue_belief, default_epoch_config)
-#     sue_belief.edit_reason(exx.mop_rope, reason_context=, reason_case=)
+#     sue_belief.edit_reason(wx.mop_rope, reason_context=, reason_case=)
 #     apr7 = datetime(2010, 5, 7, 9)
 #     print(f"{apr7=}")
 
@@ -164,9 +164,9 @@ def test_create_gcalendar_events_list_ReturnsObj_Scenario2_3AllDayPledge():
 #     sue_gcal_events = create_gcalendar_events_list(sue_belief, apr7)
 
 #     # THEN
-#     gcal_tobe_description = f"""1. {exx.mop_str} (50%)
-# 2. {exx.scrub_str} (25%)
-# 3. {exx.sweep_str} (25%)
+#     gcal_tobe_description = f"""1. {wx.mop_str} (50%)
+# 2. {wx.scrub_str} (25%)
+# 3. {wx.sweep_str} (25%)
 # """
 #     description_str = "Description"
 #     start_date_str = "Start Date"

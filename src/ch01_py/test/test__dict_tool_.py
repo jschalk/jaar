@@ -36,6 +36,7 @@ from src.ch01_py.dict_toolbox import (
     str_in_dict_keys,
     str_in_dict_values,
 )
+from src.ch01_py.test._util.ch01_examples import CommonExampleStrs as wx
 
 
 def test_get_1_if_None():
@@ -285,22 +286,19 @@ def test_get_from_nested_dict_RaisesNestedException():
     assert get_from_nested_dict(y_dict, _2pm_list) == _2pm_obj
 
     # WHEN / THEN
-    swim_str = "swim"
     with pytest_raises(Exception) as excinfo:
-        get_from_nested_dict(y_dict, [swim_str])
-    assert str(excinfo.value) == f"'{swim_str}' failed at level 0."
+        get_from_nested_dict(y_dict, [wx.swim])
+    assert str(excinfo.value) == f"'{wx.swim}' failed at level 0."
 
     # WHEN / THEN
-    swim_str = "swim"
     with pytest_raises(Exception) as excinfo:
-        get_from_nested_dict(y_dict, [sports_str, swim_str])
-    assert str(excinfo.value) == f"'{swim_str}' failed at level 1."
+        get_from_nested_dict(y_dict, [sports_str, wx.swim])
+    assert str(excinfo.value) == f"'{wx.swim}' failed at level 1."
 
     # WHEN / THEN
-    swim_str = "swim"
     with pytest_raises(Exception) as excinfo:
-        get_from_nested_dict(y_dict, [sports_str, swim_str, _2pm_str])
-    assert str(excinfo.value) == f"'{swim_str}' failed at level 1."
+        get_from_nested_dict(y_dict, [sports_str, wx.swim, _2pm_str])
+    assert str(excinfo.value) == f"'{wx.swim}' failed at level 1."
 
 
 def test_get_from_nested_dict_ReturnsNoneWhen_if_missing_return_None_True():
@@ -334,20 +332,17 @@ def test_get_from_nested_dict_ReturnsNoneWhen_if_missing_return_None_True():
     )
 
     # WHEN / THEN
-    swim_str = "swim"
-    assert get_from_nested_dict(y_dict, [swim_str], if_missing_return_None=True) is None
+    assert get_from_nested_dict(y_dict, [wx.swim], if_missing_return_None=True) is None
 
     # WHEN / THEN
-    swim_str = "swim"
     x_value = get_from_nested_dict(
-        y_dict, [sports_str, swim_str], if_missing_return_None=True
+        y_dict, [sports_str, wx.swim], if_missing_return_None=True
     )
     assert x_value is None
 
     # WHEN / THEN
-    swim_str = "swim"
     x_value = get_from_nested_dict(
-        y_dict, [sports_str, swim_str, _2pm_str], if_missing_return_None=True
+        y_dict, [sports_str, wx.swim, _2pm_str], if_missing_return_None=True
     )
     assert x_value is None
 
@@ -434,7 +429,7 @@ def test_get_csv_column1_column2_metrics_ReturnsObj_empty_dict():
 def test_get_csv_column1_column2_metrics_ReturnsObj_Scenario1():
     # ESTABLISH
     x_id = "amy56"
-    y_id = "Yao"
+    y_id = wx.Yao
     headerless_csv = f"""{x_id},{y_id},Bob,13,29
 """
 
@@ -448,13 +443,11 @@ def test_get_csv_column1_column2_metrics_ReturnsObj_Scenario1():
 def test_get_csv_column1_column2_metrics_ReturnsObj_Scenario2():
     # ESTABLISH
     x_id = "amy56"
-    sue_str = "Sue"
-    bob_str = "Bob"
-    headerless_csv = f"""{x_id},{sue_str},Bob,13,29
-{x_id},{sue_str},Sue,11,23
-{x_id},{sue_str},Yao,41,37
-{x_id},{sue_str},Zia,41,37
-{x_id},{bob_str},Yao,41,37
+    headerless_csv = f"""{x_id},{wx.Sue},Bob,13,29
+{x_id},{wx.Sue},Sue,11,23
+{x_id},{wx.Sue},Yao,41,37
+{x_id},{wx.Sue},Zia,41,37
+{x_id},{wx.Bob},Yao,41,37
 """
 
     # WHEN
@@ -463,20 +456,19 @@ def test_get_csv_column1_column2_metrics_ReturnsObj_Scenario2():
     # THEN
     # print(f"{u_dict=}")
 
-    assert u_dict != {x_id: {sue_str: 1}}
-    assert u_dict == {x_id: {sue_str: 4, bob_str: 1}}
+    assert u_dict != {x_id: {wx.Sue: 1}}
+    assert u_dict == {x_id: {wx.Sue: 4, wx.Bob: 1}}
 
 
 def test_create_l2nested_csv_dict_ReturnsObj_Scenario0():
     # ESTABLISH
     x_id = "amy56"
-    sue_str = "Sue"
-    bob_str = "Bob"
-    headerless_csv = f""",,{x_id},{sue_str},Bob,13,29
-,,{x_id},{sue_str},Sue,11,23
-,,{x_id},{sue_str},Yao,41,37
-,,{x_id},{sue_str},Zia,41,37
-,,{x_id},{bob_str},Yao,41,37
+
+    headerless_csv = f""",,{x_id},{wx.Sue},Bob,13,29
+,,{x_id},{wx.Sue},Sue,11,23
+,,{x_id},{wx.Sue},Yao,41,37
+,,{x_id},{wx.Sue},Zia,41,37
+,,{x_id},{wx.Bob},Yao,41,37
 """
 
     # WHEN
@@ -484,21 +476,21 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario0():
 
     # THEN
     # print(f"{u_dict=}")
-    static_sue_csv = f""",,{x_id},{sue_str},Bob,13,29
-,,{x_id},{sue_str},Sue,11,23
-,,{x_id},{sue_str},Yao,41,37
-,,{x_id},{sue_str},Zia,41,37
+    static_sue_csv = f""",,{x_id},{wx.Sue},Bob,13,29
+,,{x_id},{wx.Sue},Sue,11,23
+,,{x_id},{wx.Sue},Yao,41,37
+,,{x_id},{wx.Sue},Zia,41,37
 """
-    static_bob_csv = f""",,{x_id},{bob_str},Yao,41,37
+    static_bob_csv = f""",,{x_id},{wx.Bob},Yao,41,37
 """
     generated_sue_bob_dict = u_dict.get(x_id)
     assert generated_sue_bob_dict
-    assert list(generated_sue_bob_dict.keys()) == [sue_str, bob_str]
-    generated_bob_csv = generated_sue_bob_dict.get(bob_str)
+    assert list(generated_sue_bob_dict.keys()) == [wx.Sue, wx.Bob]
+    generated_bob_csv = generated_sue_bob_dict.get(wx.Bob)
     assert generated_bob_csv == static_bob_csv
-    generated_sue_csv = generated_sue_bob_dict.get(sue_str)
+    generated_sue_csv = generated_sue_bob_dict.get(wx.Sue)
     assert generated_sue_csv == static_sue_csv
-    sue_bob_csv_dict = {sue_str: static_sue_csv, bob_str: static_bob_csv}
+    sue_bob_csv_dict = {wx.Sue: static_sue_csv, wx.Bob: static_bob_csv}
     assert u_dict == {x_id: sue_bob_csv_dict}
 
 
@@ -506,13 +498,12 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
     # ESTABLISH
     amy3_id = "amy3"
     amy4_id = "amy4"
-    sue_str = "Sue"
-    bob_str = "Bob"
-    headerless_csv = f""",,{amy3_id},{sue_str},Bob,13,29
-,,{amy4_id},{sue_str},Sue,11,23
-,,{amy4_id},{sue_str},Yao,41,37
-,,{amy4_id},{sue_str},Zia,41,37
-,,{amy4_id},{bob_str},Yao,41,37
+
+    headerless_csv = f""",,{amy3_id},{wx.Sue},Bob,13,29
+,,{amy4_id},{wx.Sue},Sue,11,23
+,,{amy4_id},{wx.Sue},Yao,41,37
+,,{amy4_id},{wx.Sue},Zia,41,37
+,,{amy4_id},{wx.Bob},Yao,41,37
 """
 
     # WHEN
@@ -520,30 +511,30 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
 
     # THEN
     # print(f"{u_dict=}")
-    amy3_sue_csv = f""",,{amy3_id},{sue_str},Bob,13,29
+    amy3_sue_csv = f""",,{amy3_id},{wx.Sue},Bob,13,29
 """
-    amy4_sue_csv = f""",,{amy4_id},{sue_str},Sue,11,23
-,,{amy4_id},{sue_str},Yao,41,37
-,,{amy4_id},{sue_str},Zia,41,37
+    amy4_sue_csv = f""",,{amy4_id},{wx.Sue},Sue,11,23
+,,{amy4_id},{wx.Sue},Yao,41,37
+,,{amy4_id},{wx.Sue},Zia,41,37
 """
-    static_bob_csv = f""",,{amy4_id},{bob_str},Yao,41,37
+    static_bob_csv = f""",,{amy4_id},{wx.Bob},Yao,41,37
 """
     amy3_dict = tiered_dict.get(amy3_id)
     amy4_dict = tiered_dict.get(amy4_id)
     assert amy3_dict
     assert amy4_dict
-    assert list(amy3_dict.keys()) == [sue_str]
-    assert list(amy4_dict.keys()) == [sue_str, bob_str]
-    generated_bob_csv = amy4_dict.get(bob_str)
+    assert list(amy3_dict.keys()) == [wx.Sue]
+    assert list(amy4_dict.keys()) == [wx.Sue, wx.Bob]
+    generated_bob_csv = amy4_dict.get(wx.Bob)
     assert generated_bob_csv == static_bob_csv
-    generated3_sue_csv = amy3_dict.get(sue_str)
-    generated4_sue_csv = amy4_dict.get(sue_str)
+    generated3_sue_csv = amy3_dict.get(wx.Sue)
+    generated4_sue_csv = amy4_dict.get(wx.Sue)
     print(f"{generated3_sue_csv=}")
     print(f"{generated4_sue_csv=}")
     assert generated3_sue_csv == amy3_sue_csv
     assert generated4_sue_csv == amy4_sue_csv
-    people3_csv_dict = {sue_str: amy3_sue_csv}
-    people4_csv_dict = {sue_str: amy4_sue_csv, bob_str: static_bob_csv}
+    people3_csv_dict = {wx.Sue: amy3_sue_csv}
+    people4_csv_dict = {wx.Sue: amy4_sue_csv, wx.Bob: static_bob_csv}
     assert tiered_dict == {
         amy3_id: people3_csv_dict,
         amy4_id: people4_csv_dict,
@@ -552,23 +543,20 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
 
 def test_get_positional_dict_ReturnsObj():
     # ESTABLISH
-    bob_str = "Bob"
-    sue_str = "Sue"
-    yao_str = "Yao"
-    x_list = [bob_str, sue_str, yao_str]
+
+    x_list = [wx.Bob, wx.Sue, wx.Yao]
 
     # WHEN / THEN
     assert get_positional_dict([]) == {}
-    assert get_positional_dict([bob_str]) == {bob_str: 0}
-    assert get_positional_dict(x_list) == {bob_str: 0, sue_str: 1, yao_str: 2}
+    assert get_positional_dict([wx.Bob]) == {wx.Bob: 0}
+    assert get_positional_dict(x_list) == {wx.Bob: 0, wx.Sue: 1, wx.Yao: 2}
 
 
 def test_add_headers_to_csv_ReturnsObj():
     # ESTABLISH
-    swim_str = "swim"
     six_str = "six"
     seven_str = "seven"
-    headers = [swim_str, six_str, seven_str]
+    headers = [wx.swim, six_str, seven_str]
     headerless_csv = """Bob,13,29
 Sue,11,23
 Yao,41,37
@@ -583,7 +571,7 @@ Yao,41,37
     assert gen_csv
     assert (
         gen_csv
-        == f"""{swim_str},{six_str},{seven_str}
+        == f"""{wx.swim},{six_str},{seven_str}
 {headerless_csv}"""
     )
 
@@ -591,30 +579,29 @@ Yao,41,37
 def test_is_2d_with_unique_keys_ReturnsObj():
     # ESTABLISH
     casa_str = "casa"
-    sue_str = "Sue"
 
     # WHEN / THEN
     assert is_2d_with_unique_keys({})
-    assert is_2d_with_unique_keys({sue_str: {}})
-    assert is_2d_with_unique_keys({sue_str: {}, "Bob": {}}) is False
-    assert is_2d_with_unique_keys({"swim": 155, sue_str: {}, "Bob": {}}) is False
-    assert is_2d_with_unique_keys({"swim": 155, sue_str: {}})
-    assert is_2d_with_unique_keys({casa_str: {"clean": "Bob"}})
-    assert is_2d_with_unique_keys({casa_str: {"clean": {"Bob": 13}}})
+    assert is_2d_with_unique_keys({wx.Sue: {}})
+    assert is_2d_with_unique_keys({wx.Sue: {}, wx.Bob: {}}) is False
+    assert is_2d_with_unique_keys({"swim": 155, wx.Sue: {}, wx.Bob: {}}) is False
+    assert is_2d_with_unique_keys({"swim": 155, wx.Sue: {}})
+    assert is_2d_with_unique_keys({casa_str: {"clean": wx.Bob}})
+    assert is_2d_with_unique_keys({casa_str: {"clean": {wx.Bob: 13}}})
     assert (
-        is_2d_with_unique_keys({casa_str: {"clean": {"Bob": 13}, "swim": {}}}) is False
+        is_2d_with_unique_keys({casa_str: {"clean": {wx.Bob: 13}, "swim": {}}}) is False
     )
-    assert is_2d_with_unique_keys({casa_str: {"clean": {"Bob": 13}}, "school": 14})
+    assert is_2d_with_unique_keys({casa_str: {"clean": {wx.Bob: 13}}, "school": 14})
     assert (
         is_2d_with_unique_keys(
-            {casa_str: {"clean": {"Bob": 3}}, "school": {"clean": 1}}
+            {casa_str: {"clean": {wx.Bob: 3}}, "school": {"clean": 1}}
         )
         is False
     )
-    assert is_2d_with_unique_keys({casa_str: {"school": {sue_str: {1: {}}}}})
+    assert is_2d_with_unique_keys({casa_str: {"school": {wx.Sue: {1: {}}}}})
     assert (
         is_2d_with_unique_keys(
-            {casa_str: {"clean": {"Bob": 13}, "school": {"swim": 14}}}
+            {casa_str: {"clean": {wx.Bob: 13}, "school": {"swim": 14}}}
         )
         is False
     )
@@ -628,255 +615,240 @@ def test_is_2d_with_unique_keys_ReturnsObj():
 
 
 def test_get_nested_dict_keys_by_level_ReturnsObj():
-    # ESTABLISH
-    sue_str = "Sue"
-    bob_str = "Bob"
-
-    #  WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     assert get_nested_dict_keys_by_level({}) == {}
-    assert get_nested_dict_keys_by_level({sue_str: {}}) == {0: {sue_str}}
-    x2_dict = {sue_str: {}, bob_str: {}}
-    assert get_nested_dict_keys_by_level(x2_dict) == {0: {sue_str, bob_str}}
-    x3_dict = {"swim": 155, sue_str: {}, bob_str: {}}
-    assert get_nested_dict_keys_by_level(x3_dict) == {0: {sue_str, bob_str}}
-    x4_dict = {"swim": 155, sue_str: {"zia": {}}, bob_str: {"Yao": {}}}
+    assert get_nested_dict_keys_by_level({wx.Sue: {}}) == {0: {wx.Sue}}
+    x2_dict = {wx.Sue: {}, wx.Bob: {}}
+    assert get_nested_dict_keys_by_level(x2_dict) == {0: {wx.Sue, wx.Bob}}
+    x3_dict = {"swim": 155, wx.Sue: {}, wx.Bob: {}}
+    assert get_nested_dict_keys_by_level(x3_dict) == {0: {wx.Sue, wx.Bob}}
+    x4_dict = {"swim": 155, wx.Sue: {wx.Zia: {}}, wx.Bob: {"Yao": {}}}
     assert get_nested_dict_keys_by_level(x4_dict) == {
-        0: {sue_str, bob_str},
-        1: {"zia", "Yao"},
+        0: {wx.Sue, wx.Bob},
+        1: {wx.Zia, "Yao"},
     }
 
 
 def test_get_nested_keys_by_level_ReturnsObj():
     # ESTABLISH
-    sue_str = "Sue"
-    bob_str = "Bob"
-    yao_str = "Yao"
-    swim_str = "Swim"
 
     #  WHEN / THEN
     assert get_nested_keys_by_level({}) == {}
-    assert get_nested_keys_by_level({sue_str: 1}) == {0: {sue_str}}
-    assert get_nested_keys_by_level({sue_str: {}}) == {0: {sue_str}}
-    x2_dict = {sue_str: {}, bob_str: {}}
-    assert get_nested_keys_by_level(x2_dict) == {0: {sue_str, bob_str}}
-    x3_dict = {swim_str: 155, sue_str: {}, bob_str: {}}
-    assert get_nested_keys_by_level(x3_dict) == {0: {swim_str, sue_str, bob_str}}
-    x4_dict = {swim_str: 155, sue_str: {"zia": {}}, bob_str: {yao_str: {swim_str: 1}}}
+    assert get_nested_keys_by_level({wx.Sue: 1}) == {0: {wx.Sue}}
+    assert get_nested_keys_by_level({wx.Sue: {}}) == {0: {wx.Sue}}
+    x2_dict = {wx.Sue: {}, wx.Bob: {}}
+    assert get_nested_keys_by_level(x2_dict) == {0: {wx.Sue, wx.Bob}}
+    x3_dict = {wx.swim: 155, wx.Sue: {}, wx.Bob: {}}
+    assert get_nested_keys_by_level(x3_dict) == {0: {wx.swim, wx.Sue, wx.Bob}}
+    x4_dict = {wx.swim: 155, wx.Sue: {wx.Zia: {}}, wx.Bob: {wx.Yao: {wx.swim: 1}}}
     assert get_nested_keys_by_level(x4_dict) == {
-        0: {sue_str, bob_str, swim_str},
-        1: {"zia", yao_str},
-        2: {swim_str},
+        0: {wx.Sue, wx.Bob, wx.swim},
+        1: {wx.Zia, wx.Yao},
+        2: {wx.swim},
     }
 
 
 def test_get_nested_non_dict_keys_by_level_ReturnsObj():
     # ESTABLISH
-    sue_str = "Sue"
-    bob_str = "Bob"
-    yao_str = "Yao"
-    swim_str = "Swim"
 
     #  WHEN / THEN
     assert get_nested_non_dict_keys_by_level({}) == {}
-    assert get_nested_non_dict_keys_by_level({sue_str: 1}) == {0: {sue_str}}
-    assert get_nested_non_dict_keys_by_level({sue_str: {}}) == {0: set()}
-    x2_dict = {sue_str: {}, bob_str: {}}
+    assert get_nested_non_dict_keys_by_level({wx.Sue: 1}) == {0: {wx.Sue}}
+    assert get_nested_non_dict_keys_by_level({wx.Sue: {}}) == {0: set()}
+    x2_dict = {wx.Sue: {}, wx.Bob: {}}
     assert get_nested_non_dict_keys_by_level(x2_dict) == {0: set()}
-    x3_dict = {swim_str: 155, sue_str: {}, bob_str: {}}
-    assert get_nested_non_dict_keys_by_level(x3_dict) == {0: {swim_str}}
-    x4_dict = {swim_str: 155, sue_str: {"zia": {}}, bob_str: {yao_str: {swim_str: 1}}}
+    x3_dict = {wx.swim: 155, wx.Sue: {}, wx.Bob: {}}
+    assert get_nested_non_dict_keys_by_level(x3_dict) == {0: {wx.swim}}
+    x4_dict = {wx.swim: 155, wx.Sue: {wx.Zia: {}}, wx.Bob: {wx.Yao: {wx.swim: 1}}}
     assert get_nested_non_dict_keys_by_level(x4_dict) == {
-        0: {swim_str},
+        0: {wx.swim},
         1: set(),
-        2: {swim_str},
+        2: {wx.swim},
     }
 
 
 def test_get_nested_non_dict_keys_list_ReturnsObj():
     # ESTABLISH
-    sue_str = "Sue"
-    bob_str = "Bob"
-    yao_str = "Yao"
-    swim_str = "Swim"
     run_str = "Run"
 
     #  WHEN / THEN
     assert get_nested_non_dict_keys_list({}) == []
-    assert get_nested_non_dict_keys_list({sue_str: 1}) == [sue_str]
-    assert get_nested_non_dict_keys_list({sue_str: {}}) == []
-    x2_dict = {sue_str: {}, bob_str: {}}
+    assert get_nested_non_dict_keys_list({wx.Sue: 1}) == [wx.Sue]
+    assert get_nested_non_dict_keys_list({wx.Sue: {}}) == []
+    x2_dict = {wx.Sue: {}, wx.Bob: {}}
     assert get_nested_non_dict_keys_list(x2_dict) == []
-    x3_dict = {swim_str: 155, sue_str: {}, bob_str: {}}
-    assert get_nested_non_dict_keys_list(x3_dict) == [swim_str]
-    x4_dict = {swim_str: 155, sue_str: {"zia": {}}, bob_str: {yao_str: {run_str: 1}}}
-    assert get_nested_non_dict_keys_list(x4_dict) == [swim_str, run_str]
-    x5_dict = {"casa": {"clean": {"Bob": 13}}, "school": 14}
-    assert get_nested_non_dict_keys_list(x5_dict) == ["school", "Bob"]
+    x3_dict = {wx.swim: 155, wx.Sue: {}, wx.Bob: {}}
+    assert get_nested_non_dict_keys_list(x3_dict) == [wx.swim]
+    x4_dict = {wx.swim: 155, wx.Sue: {wx.Zia: {}}, wx.Bob: {wx.Yao: {run_str: 1}}}
+    assert get_nested_non_dict_keys_list(x4_dict) == [wx.swim, run_str]
+    x5_dict = {"casa": {"clean": {wx.Bob: 13}}, "school": 14}
+    assert get_nested_non_dict_keys_list(x5_dict) == ["school", wx.Bob]
 
 
 def test_get_nested_dict_key_by_level_RaisesError_is_2d_with_unique_keys_IsFalse():
     # ESTABLISH / WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        get_nested_dict_key_by_level({"Sue": {}, "Bob": {}})
+        get_nested_dict_key_by_level({wx.Sue: {}, wx.Bob: {}})
     exception_str = "dictionary is not 2d_with_unique_keys."
     assert str(excinfo.value) == exception_str
 
 
 def test_get_nested_dict_key_by_level_ReturnsObj():
-    # ESTABLISH
-    sue_str = "Sue"
-    bob_str = "Bob"
-
-    #  WHEN / THEN
+    # ESTABLISH /  WHEN / THEN
     assert get_nested_dict_key_by_level({}) == []
-    assert get_nested_dict_key_by_level({"Sue": {}}) == [sue_str]
-    x4_dict = {"swim": 155, sue_str: {bob_str: {"Yao": {}}}}
-    assert get_nested_dict_key_by_level(x4_dict) == [sue_str, bob_str, "Yao"]
+    assert get_nested_dict_key_by_level({wx.Sue: {}}) == [wx.Sue]
+    x4_dict = {"swim": 155, wx.Sue: {wx.Bob: {"Yao": {}}}}
+    assert get_nested_dict_key_by_level(x4_dict) == [wx.Sue, wx.Bob, "Yao"]
 
 
 def test_create_2d_array_from_dict_RaisesError_is_2d_with_unique_keys_IsFalse():
     # ESTABLISH / WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        create_2d_array_from_dict({"Sue": {}, "Bob": {}})
+        create_2d_array_from_dict({wx.Sue: {}, wx.Bob: {}})
     exception_str = "dictionary is not 2d_with_unique_keys."
     assert str(excinfo.value) == exception_str
 
 
 def test_create_2d_array_from_dict_ReturnsObj_Scenario0_Simple():
     # ESTABLISH
-    sue_str = "Sue"
     x1_int = 1
 
     # WHEN / THEN
     assert create_2d_array_from_dict({}) == [[], []]
-    assert create_2d_array_from_dict({sue_str: x1_int}) == [[sue_str], [x1_int]]
-    assert create_2d_array_from_dict({sue_str: {}}) == [[], []]
+    assert create_2d_array_from_dict({wx.Sue: x1_int}) == [[wx.Sue], [x1_int]]
+    assert create_2d_array_from_dict({wx.Sue: {}}) == [[], []]
     x0_2d_array = [["swim"], [155]]
-    assert create_2d_array_from_dict({"swim": 155, sue_str: {}}) == x0_2d_array
-    x1_2d_array = [["clean"], ["Bob"]]
-    assert create_2d_array_from_dict({"casa": {"clean": "Bob"}}) == x1_2d_array
-    x2_2d_array = [["Bob"], [13]]
-    assert create_2d_array_from_dict({"casa": {"clean": {"Bob": 13}}}) == x2_2d_array
-    x2_2d_dict = {"casa": {"clean": {"Bob": 13}}, "school": 14}
-    x2_2d_array = [["school", "Bob"], [14, 13]]
+    assert create_2d_array_from_dict({"swim": 155, wx.Sue: {}}) == x0_2d_array
+    x1_2d_array = [["clean"], [wx.Bob]]
+    assert create_2d_array_from_dict({"casa": {"clean": wx.Bob}}) == x1_2d_array
+    x2_2d_array = [[wx.Bob], [13]]
+    assert create_2d_array_from_dict({"casa": {"clean": {wx.Bob: 13}}}) == x2_2d_array
+    x2_2d_dict = {"casa": {"clean": {wx.Bob: 13}}, "school": 14}
+    x2_2d_array = [["school", wx.Bob], [14, 13]]
     assert create_2d_array_from_dict(x2_2d_dict) == x2_2d_array
 
 
 def test_str_in_dict_keys_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert str_in_dict_keys("", {}) is False
-    assert str_in_dict_keys("", {"": "Sue"})
-    assert str_in_dict_keys("", {"Sue": "Sue"})
-    assert str_in_dict_keys("Sue", {"Sue": "Bob"})
-    assert str_in_dict_keys("Sue", {"Zia": "Bob"}) is False
-    assert str_in_dict_keys("Sue", {"SueAndZia": "Bob"})
-    assert str_in_dict_keys("Sue", {"Zia": "Bob"}) is False
-    assert str_in_dict_keys("Sue", {"Bob": "SueAndZia"}) is False
-    assert str_in_dict_keys("Sue", {"Bob": "Zia"}) is False
+    assert str_in_dict_keys("", {"": wx.Sue})
+    assert str_in_dict_keys("", {wx.Sue: wx.Sue})
+    assert str_in_dict_keys(wx.Sue, {wx.Sue: wx.Bob})
+    assert str_in_dict_keys(wx.Sue, {wx.Zia: wx.Bob}) is False
+    assert str_in_dict_keys(wx.Sue, {wx.SueAndZia: wx.Bob})
+    assert str_in_dict_keys(wx.Sue, {wx.Zia: wx.Bob}) is False
+    assert str_in_dict_keys(wx.Sue, {wx.Bob: wx.SueAndZia}) is False
+    assert str_in_dict_keys(wx.Sue, {wx.Bob: wx.Zia}) is False
 
 
 def test_str_in_dict_values_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert str_in_dict_values("", {}) is False
-    assert str_in_dict_values("", {"": "Sue"})
-    assert str_in_dict_values("", {"Sue": "Sue"})
-    assert str_in_dict_values("Sue", {"Sue": "Bob"}) is False
-    assert str_in_dict_values("Sue", {"Zia": "Bob"}) is False
-    assert str_in_dict_values("Sue", {"SueAndZia": "Bob"}) is False
-    assert str_in_dict_values("Sue", {"Zia": "Bob"}) is False
-    assert str_in_dict_values("Sue", {"Bob": "SueAndZia"})
-    assert str_in_dict_values("Sue", {"Bob": "Zia"}) is False
+    assert str_in_dict_values("", {"": wx.Sue})
+    assert str_in_dict_values("", {wx.Sue: wx.Sue})
+    assert str_in_dict_values(wx.Sue, {wx.Sue: wx.Bob}) is False
+    assert str_in_dict_values(wx.Sue, {wx.Zia: wx.Bob}) is False
+    assert str_in_dict_values(wx.Sue, {wx.SueAndZia: wx.Bob}) is False
+    assert str_in_dict_values(wx.Sue, {wx.Zia: wx.Bob}) is False
+    assert str_in_dict_values(wx.Sue, {wx.Bob: wx.SueAndZia})
+    assert str_in_dict_values(wx.Sue, {wx.Bob: wx.Zia}) is False
 
 
 def test_str_in_dict_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert str_in_dict("", {}) is False
-    assert str_in_dict("", {"": "Sue"})
-    assert str_in_dict("", {"Sue": "Sue"})
-    assert str_in_dict("Sue", {"Sue": "Bob"})
-    assert str_in_dict("Sue", {"Zia": "Bob"}) is False
-    assert str_in_dict("Sue", {"SueAndZia": "Bob"})
-    assert str_in_dict("Sue", {"Zia": "Bob"}) is False
-    assert str_in_dict("Sue", {"Bob": "SueAndZia"})
-    assert str_in_dict("Sue", {"Bob": "Zia"}) is False
+    assert str_in_dict("", {"": wx.Sue})
+    assert str_in_dict("", {wx.Sue: wx.Sue})
+    assert str_in_dict(wx.Sue, {wx.Sue: wx.Bob})
+    assert str_in_dict(wx.Sue, {wx.Zia: wx.Bob}) is False
+    assert str_in_dict(wx.Sue, {wx.SueAndZia: wx.Bob})
+    assert str_in_dict(wx.Sue, {wx.Zia: wx.Bob}) is False
+    assert str_in_dict(wx.Sue, {wx.Bob: wx.SueAndZia})
+    assert str_in_dict(wx.Sue, {wx.Bob: wx.Zia}) is False
 
 
 def test_get_str_in_sub_dict_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_str_in_sub_dict("", {}) == {}
-    assert get_str_in_sub_dict("", {"": "Sue"}) == {"": "Sue"}
-    assert get_str_in_sub_dict("", {"Sue": "Sue"}) == {"Sue": "Sue"}
-    assert get_str_in_sub_dict("Sue", {"Sue": "Bob"}) == {"Sue": "Bob"}
-    assert get_str_in_sub_dict("Sue", {"Zia": "Bob"}) == {}
-    assert get_str_in_sub_dict("Sue", {"SueAndZia": "Bob"}) == {"SueAndZia": "Bob"}
-    assert get_str_in_sub_dict("Sue", {"Zia": "Bob"}) == {}
-    assert get_str_in_sub_dict("Sue", {"Bob": "SueAndZia"}) == {"Bob": "SueAndZia"}
-    assert get_str_in_sub_dict("Sue", {"Bob": "Zia"}) == {}
+    assert get_str_in_sub_dict("", {"": wx.Sue}) == {"": wx.Sue}
+    assert get_str_in_sub_dict("", {wx.Sue: wx.Sue}) == {wx.Sue: wx.Sue}
+    assert get_str_in_sub_dict(wx.Sue, {wx.Sue: wx.Bob}) == {wx.Sue: wx.Bob}
+    assert get_str_in_sub_dict(wx.Sue, {wx.Zia: wx.Bob}) == {}
+    assert get_str_in_sub_dict(wx.Sue, {wx.SueAndZia: wx.Bob}) == {wx.SueAndZia: wx.Bob}
+    assert get_str_in_sub_dict(wx.Sue, {wx.Zia: wx.Bob}) == {}
+    assert get_str_in_sub_dict(wx.Sue, {wx.Bob: wx.SueAndZia}) == {wx.Bob: wx.SueAndZia}
+    assert get_str_in_sub_dict(wx.Sue, {wx.Bob: wx.Zia}) == {}
 
-    xio_sue_dict = {"Xio": "Xio", "Sue": "Bob"}
-    assert get_str_in_sub_dict("Sue", xio_sue_dict) == {"Sue": "Bob"}
-    xio_sueandzia_dict = {"Xio": "Xio", "SueAndZia": "Bob"}
-    assert get_str_in_sub_dict("Sue", xio_sueandzia_dict) == {"SueAndZia": "Bob"}
-    xio_bob_dict = {"Xio": "Xio", "Bob": "SueAndZia"}
-    assert get_str_in_sub_dict("Sue", xio_bob_dict) == {"Bob": "SueAndZia"}
+    xio_sue_dict = {wx.Xio: wx.Xio, wx.Sue: wx.Bob}
+    assert get_str_in_sub_dict(wx.Sue, xio_sue_dict) == {wx.Sue: wx.Bob}
+    xio_sueandzia_dict = {wx.Xio: wx.Xio, wx.SueAndZia: wx.Bob}
+    assert get_str_in_sub_dict(wx.Sue, xio_sueandzia_dict) == {wx.SueAndZia: wx.Bob}
+    xio_bob_dict = {wx.Xio: wx.Xio, wx.Bob: wx.SueAndZia}
+    assert get_str_in_sub_dict(wx.Sue, xio_bob_dict) == {wx.Bob: wx.SueAndZia}
 
 
 def test_str_in_all_dict_keys_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert str_in_all_dict_keys("", {})
-    assert str_in_all_dict_keys("", {"": "Sue"})
-    assert str_in_all_dict_keys("", {"Sue": "Sue"})
-    assert str_in_all_dict_keys("Sue", {"Bob": "Sue"}) is False
-    assert str_in_all_dict_keys("Sue", {"Sue": "Zia", "Bob": "Bob"}) is False
-    assert str_in_all_dict_keys("Sue", {"Zia": "Bob", "SueAndZia": "Bob"}) is False
-    assert str_in_all_dict_keys("Sue", {"Sue": "Bob", "SueAndZia": ""})
-    assert str_in_all_dict_keys("Sue", {"Bob": "Zia"}) is False
+    assert str_in_all_dict_keys("", {"": wx.Sue})
+    assert str_in_all_dict_keys("", {wx.Sue: wx.Sue})
+    assert str_in_all_dict_keys(wx.Sue, {wx.Bob: wx.Sue}) is False
+    assert str_in_all_dict_keys(wx.Sue, {wx.Sue: wx.Zia, wx.Bob: wx.Bob}) is False
+    assert str_in_all_dict_keys(wx.Sue, {wx.Zia: wx.Bob, wx.SueAndZia: wx.Bob}) is False
+    assert str_in_all_dict_keys(wx.Sue, {wx.Sue: wx.Bob, wx.SueAndZia: ""})
+    assert str_in_all_dict_keys(wx.Sue, {wx.Bob: wx.Zia}) is False
 
 
 def test_str_in_all_dict_values_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert str_in_all_dict_values("", {})
-    assert str_in_all_dict_values("", {"": "Sue"})
-    assert str_in_all_dict_values("", {"Sue": "Sue"})
-    assert str_in_all_dict_values("Sue", {"Bob": "Sue"})
-    assert str_in_all_dict_values("Sue", {"Zia": "Sue", "Sue": "Bob"}) is False
-    assert str_in_all_dict_values("Sue", {"Zia": "Sue", "SueAndZia": "Bob"}) is False
-    assert str_in_all_dict_values("Sue", {"Zia": "Sue", "Bob": "SueAndZia"})
-    assert str_in_all_dict_values("Sue", {"Bob": "Zia"}) is False
+    assert str_in_all_dict_values("", {"": wx.Sue})
+    assert str_in_all_dict_values("", {wx.Sue: wx.Sue})
+    assert str_in_all_dict_values(wx.Sue, {wx.Bob: wx.Sue})
+    assert str_in_all_dict_values(wx.Sue, {wx.Zia: wx.Sue, wx.Sue: wx.Bob}) is False
+    assert (
+        str_in_all_dict_values(wx.Sue, {wx.Zia: wx.Sue, wx.SueAndZia: wx.Bob}) is False
+    )
+    assert str_in_all_dict_values(wx.Sue, {wx.Zia: wx.Sue, wx.Bob: wx.SueAndZia})
+    assert str_in_all_dict_values(wx.Sue, {wx.Bob: wx.Zia}) is False
 
 
 def test_str_in_all_dict_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert str_in_all_dict("", {})
-    assert str_in_all_dict("", {"": "Sue"})
-    assert str_in_all_dict("", {"Sue": "Sue"})
-    assert str_in_all_dict("Sue", {"Sue": "Bob"}) is False
-    assert str_in_all_dict("Sue", {"Zia": "Sue", "Sue": "Bob"}) is False
-    assert str_in_all_dict("Sue", {"Sue": "Sue", "SueZia": "SueBob"})
-    assert str_in_all_dict("Sue", {"Zia": "Sue", "SueZia": "SueZia"}) is False
-    assert str_in_all_dict("Sue", {"Bob": "Zia"}) is False
+    assert str_in_all_dict("", {"": wx.Sue})
+    assert str_in_all_dict("", {wx.Sue: wx.Sue})
+    assert str_in_all_dict(wx.Sue, {wx.Sue: wx.Bob}) is False
+    assert str_in_all_dict(wx.Sue, {wx.Zia: wx.Sue, wx.Sue: wx.Bob}) is False
+    assert str_in_all_dict(wx.Sue, {wx.Sue: wx.Sue, "SueZia": "SueBob"})
+    assert str_in_all_dict(wx.Sue, {wx.Zia: wx.Sue, "SueZia": "SueZia"}) is False
+    assert str_in_all_dict(wx.Sue, {wx.Bob: wx.Zia}) is False
 
 
 def test_get_str_not_in_sub_dict_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_str_in_all_sub_dict("", {}) == {}
-    assert get_str_in_all_sub_dict("", {"": "Sue"}) == {}
-    assert get_str_in_all_sub_dict("", {"Sue": "Sue"}) == {}
-    assert get_str_in_all_sub_dict("Sue", {"Sue": "Bob"}) == {"Sue": "Bob"}
-    assert get_str_in_all_sub_dict("Sue", {"Zia": "Bob"}) == {"Zia": "Bob"}
-    assert get_str_in_all_sub_dict("Sue", {"Sue": "SueAndZia"}) == {}
-    assert get_str_in_all_sub_dict("Sue", {"SueAndZia": "Bob"}) == {"SueAndZia": "Bob"}
-    assert get_str_in_all_sub_dict("Sue", {"Zia": "Bob"}) == {"Zia": "Bob"}
-    x_dict = {"Bob": "SueZia", "Sue": "Sue"}
-    assert get_str_in_all_sub_dict("Sue", x_dict) == {"Bob": "SueZia"}
-    assert get_str_in_all_sub_dict("Sue", {"Bob": "Zia"}) == {"Bob": "Zia"}
+    assert get_str_in_all_sub_dict("", {"": wx.Sue}) == {}
+    assert get_str_in_all_sub_dict("", {wx.Sue: wx.Sue}) == {}
+    assert get_str_in_all_sub_dict(wx.Sue, {wx.Sue: wx.Bob}) == {wx.Sue: wx.Bob}
+    assert get_str_in_all_sub_dict(wx.Sue, {wx.Zia: wx.Bob}) == {wx.Zia: wx.Bob}
+    assert get_str_in_all_sub_dict(wx.Sue, {wx.Sue: wx.SueAndZia}) == {}
+    assert get_str_in_all_sub_dict(wx.Sue, {wx.SueAndZia: wx.Bob}) == {
+        wx.SueAndZia: wx.Bob
+    }
+    assert get_str_in_all_sub_dict(wx.Sue, {wx.Zia: wx.Bob}) == {wx.Zia: wx.Bob}
+    x_dict = {wx.Bob: "SueZia", wx.Sue: wx.Sue}
+    assert get_str_in_all_sub_dict(wx.Sue, x_dict) == {wx.Bob: "SueZia"}
+    assert get_str_in_all_sub_dict(wx.Sue, {wx.Bob: wx.Zia}) == {wx.Bob: wx.Zia}
 
-    suezia_sue_dict = {"SueZia": "SueZia", "Sue": "Bob"}
-    assert get_str_in_all_sub_dict("Sue", suezia_sue_dict) == {"Sue": "Bob"}
-    suezia_sueandzia_dict = {"SueZia": "SueZia", "SueAndZia": "Bob"}
-    assert get_str_in_all_sub_dict("Sue", suezia_sueandzia_dict) == {"SueAndZia": "Bob"}
-    suezia_bob_dict = {"SueZia": "SueZia", "Bob": "SueAndZia"}
-    assert get_str_in_all_sub_dict("Sue", suezia_bob_dict) == {"Bob": "SueAndZia"}
+    suezia_sue_dict = {"SueZia": "SueZia", wx.Sue: wx.Bob}
+    assert get_str_in_all_sub_dict(wx.Sue, suezia_sue_dict) == {wx.Sue: wx.Bob}
+    suezia_sueandzia_dict = {"SueZia": "SueZia", wx.SueAndZia: wx.Bob}
+    assert get_str_in_all_sub_dict(wx.Sue, suezia_sueandzia_dict) == {
+        wx.SueAndZia: wx.Bob
+    }
+    suezia_bob_dict = {"SueZia": "SueZia", wx.Bob: wx.SueAndZia}
+    assert get_str_in_all_sub_dict(wx.Sue, suezia_bob_dict) == {wx.Bob: wx.SueAndZia}
 
 
 def test_get_sorted_list_of_dict_keys_ReturnsObj_WhenEmptyDict():
@@ -887,8 +859,8 @@ def test_get_sorted_list_of_dict_keys_ReturnsObj_WhenEmptyDict():
 def test_get_sorted_list_of_dict_keys_ReturnsObj_WhenValues():
     # ESTABLISH
     x_dict = {
-        "Sue": {"name": "Sue", "age": 55, "city": "NYC"},
-        "Bob": {"name": "Bob", "age": 30, "city": "Dallas"},
+        wx.Sue: {"name": wx.Sue, "age": 55, "city": "NYC"},
+        wx.Bob: {"name": wx.Bob, "age": 30, "city": "Dallas"},
         "Yao": {"name": "Yao", "age": 35, "city": "Paris"},
     }
 
@@ -896,14 +868,14 @@ def test_get_sorted_list_of_dict_keys_ReturnsObj_WhenValues():
     x_list = get_sorted_list_of_dict_keys(x_dict, "age")
 
     # THEN
-    assert x_list == ["Bob", "Yao", "Sue"]
+    assert x_list == [wx.Bob, "Yao", wx.Sue]
 
 
 def test_get_sorted_list_of_dict_keys_ReturnsObj_WithValues():
     # ESTABLISH
     x_dict = {
-        "Sue": {"name": "Sue", "age": 55, "city": "NYC"},
-        "Bob": {"name": "Bob", "age": 30, "city": "Dallas"},
+        wx.Sue: {"name": wx.Sue, "age": 55, "city": "NYC"},
+        wx.Bob: {"name": wx.Bob, "age": 30, "city": "Dallas"},
         "Yao": {"name": "Yao", "age": 35, "city": "Paris"},
     }
 
@@ -911,7 +883,7 @@ def test_get_sorted_list_of_dict_keys_ReturnsObj_WithValues():
     x_list = get_sorted_list_of_dict_keys(x_dict, "age", include_sort_values=True)
 
     # THEN
-    assert x_list == [["Bob", 30], ["Yao", 35], ["Sue", 55]]
+    assert x_list == [[wx.Bob, 30], ["Yao", 35], [wx.Sue, 55]]
 
 
 def test_get_max_key_ReturnsObj_Scenario0_Empty():
