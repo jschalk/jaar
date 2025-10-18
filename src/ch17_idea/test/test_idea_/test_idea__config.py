@@ -247,7 +247,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[168] == wx.all_voice_cred
     assert table_sorting_priority[169] == wx.keeps_justified
     assert table_sorting_priority[170] == wx.offtrack_fund
-    assert table_sorting_priority[171] == "_reason_active_heir"
+    assert table_sorting_priority[171] == "parent_heir_active"
     assert table_sorting_priority[172] == "irrational_voice_debt_lumen"
     assert table_sorting_priority[173] == wx.sum_healerunit_plans_fund_total
     assert table_sorting_priority[174] == wx.keeps_buildable

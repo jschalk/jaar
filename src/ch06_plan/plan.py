@@ -814,7 +814,7 @@ class PlanUnit:
         belief_name: VoiceName,
     ) -> bool:
         self.set_reasonheirs_status()
-        active_bool = self._are_all_reasonheir_active_true()
+        active_bool = self.all_reasonheirs_are_active()
         if active_bool and groupunits != {} and belief_name is not None:
             self.laborheir.set_belief_name_is_labor(groupunits, belief_name)
             if self.laborheir._belief_name_is_labor is False:
@@ -850,7 +850,7 @@ class PlanUnit:
         )
         self._set_factheir(new_factheir_obj)
 
-    def _are_all_reasonheir_active_true(self) -> bool:
+    def all_reasonheirs_are_active(self) -> bool:
         x_reasonheirs = self.reasonheirs.values()
         return all(x_reasonheir.status != False for x_reasonheir in x_reasonheirs)
 
@@ -883,7 +883,7 @@ class PlanUnit:
             if reason_context_plan := belief_plan_dict.get(
                 old_reasonheir.reason_context
             ):
-                new_reasonheir.set_reason_active_heir(reason_context_plan.active)
+                new_reasonheir.set_heir_active(reason_context_plan.active)
             self.reasonheirs[new_reasonheir.reason_context] = new_reasonheir
 
     def set_root_plan_reasonheirs(self):

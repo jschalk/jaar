@@ -222,8 +222,8 @@ def create_blrreas_metrics_insert_sqlstr(values_dict: dict[str,]):
     active_requisite = values_dict.get("active_requisite")
     task = values_dict.get("task")
     status = values_dict.get("status")
-    _reason_active_heir = values_dict.get("_reason_active_heir")
-    return f"""INSERT INTO belief_plan_reasonunit_job (moment_label, belief_name, plan_rope, reason_context, active_requisite, task, status, _reason_active_heir)
+    parent_heir_active = values_dict.get("parent_heir_active")
+    return f"""INSERT INTO belief_plan_reasonunit_job (moment_label, belief_name, plan_rope, reason_context, active_requisite, task, status, parent_heir_active)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -232,7 +232,7 @@ VALUES (
 , {sqlite_obj_str(active_requisite, "INTEGER")}
 , {sqlite_obj_str(task, "INTEGER")}
 , {sqlite_obj_str(status, "INTEGER")}
-, {sqlite_obj_str(_reason_active_heir, "INTEGER")}
+, {sqlite_obj_str(parent_heir_active, "INTEGER")}
 )
 ;
 """

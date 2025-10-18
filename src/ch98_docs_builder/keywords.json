@@ -201,6 +201,7 @@
   "moment_epoch_month"             : { "init_chapter": "ch15" }, 
   "moment_epoch_weekday"           : { "init_chapter": "ch15" }, 
   "moment_kpi001_voice_nets"       : { "init_chapter": "ch19" }, 
+  "parent_heir_active"   : { "init_chapter": "ch05" }, 
   "moment_kpi002_belief_pledges"   : { "init_chapter": "ch19" }, 
   "moment_label"                   : { "init_chapter": "ch07" }, 
   "moment_mstr_dir"                : { "init_chapter": "ch10" }, 

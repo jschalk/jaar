@@ -128,14 +128,14 @@ def test_BeliefUnit_cashout_Sets_plan_dict():
         cases={wed.reason_state: wed},
         status=True,
         task=False,
-        _reason_active_heir=True,
+        parent_heir_active=True,
     )
     sta_lh = reasonheir_shop(
         reason_context=nation_rope,
         cases={usa.reason_state: usa},
         status=True,
         task=False,
-        _reason_active_heir=True,
+        parent_heir_active=True,
     )
 
     x1_reasonunits = {

@@ -1,6 +1,8 @@
 from src.ch02_rope.rope import create_rope, default_knot_if_None
 from src.ch05_reason.reason import (
     ReasonCore,
+    ReasonHeir,
+    ReasonUnit,
     caseunit_shop,
     factheir_shop,
     get_reasonunits_from_dict,
@@ -52,6 +54,36 @@ def test_reasoncore_shop_ReturnsAttrWith_knot():
     assert casa_reason.knot == slash_str
 
 
+def test_ReasonHeir_Exists():
+    # ESTABLISH
+    wk_str = "wk"
+    wk_rope = create_rope("Amy23", wk_str)
+    wed_str = "wed"
+    wed_rope = create_rope(wk_rope, wed_str)
+    wed_case = caseunit_shop(reason_state=wed_rope)
+    cases = {wed_case.reason_state: wed_case}
+
+    # WHEN
+    wk_reason = ReasonHeir(wk_rope, cases=cases, active_requisite=False)
+
+    # THEN
+    assert wk_reason.reason_context == wk_rope
+    assert wk_reason.cases == cases
+    assert wk_reason.active_requisite is False
+    assert wk_reason.knot is None
+    obj_attrs = set(wk_reason.__dict__.keys())
+    print(sorted(list(obj_attrs)))
+    assert obj_attrs == {
+        wx.knot,
+        wx.cases,
+        wx.active_requisite,
+        wx.reason_context,
+        wx.status,
+        wx.parent_heir_active,
+        wx.task,
+    }
+
+
 def test_reasonheir_shop_ReturnsObj():
     # ESTABLISH
     casa_str = "casa"
@@ -86,7 +118,7 @@ def test_ReasonHeir_clear_SetsAttrs():
     casa_reason.clear_status()
     # THEN
     assert casa_reason.status is None
-    assert casa_reason._reason_active_heir is None
+    assert casa_reason.parent_heir_active is None
 
 
 def test_ReasonHeir_set_status_SetsStatus():
@@ -154,18 +186,18 @@ def test_ReasonHeir_set_status_EmptyFactSetsStatus():
     assert wk_reason.status is False
 
 
-def test_ReasonHeir_set_reason_active_heir_SetsAttr():
+def test_ReasonHeir_set_heir_active_SetsAttr():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
     wk_reason = reasonheir_shop(reason_context=wk_rope)
-    assert wk_reason._reason_active_heir is None
+    assert wk_reason.parent_heir_active is None
 
     # WHEN
-    wk_reason.set_reason_active_heir(bool_x=True)
+    wk_reason.set_heir_active(bool_x=True)
 
     # THEN
-    assert wk_reason._reason_active_heir
+    assert wk_reason.parent_heir_active
 
 
 def test_ReasonHeir_set_status_BeliefTrueSetsStatusTrue():
@@ -173,7 +205,7 @@ def test_ReasonHeir_set_status_BeliefTrueSetsStatusTrue():
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
     wk_reason = reasonheir_shop(reason_context=wk_rope, active_requisite=True)
-    wk_reason.set_reason_active_heir(bool_x=True)
+    wk_reason.set_heir_active(bool_x=True)
     assert wk_reason.status is None
 
     # WHEN
@@ -188,7 +220,7 @@ def test_ReasonHeir_set_status_BeliefFalseSetsStatusTrue():
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
     wk_reason = reasonheir_shop(wk_rope, active_requisite=False)
-    wk_reason.set_reason_active_heir(bool_x=False)
+    wk_reason.set_heir_active(bool_x=False)
     assert wk_reason.status is None
 
     # WHEN
@@ -203,7 +235,7 @@ def test_ReasonHeir_set_status_BeliefTrueSetsStatusFalse():
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
     wk_reason = reasonheir_shop(wk_rope, active_requisite=True)
-    wk_reason.set_reason_active_heir(bool_x=False)
+    wk_reason.set_heir_active(bool_x=False)
     assert wk_reason.status is None
 
     # WHEN
@@ -218,7 +250,7 @@ def test_ReasonHeir_set_status_BeliefNoneSetsStatusFalse():
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
     wk_reason = reasonheir_shop(wk_rope, active_requisite=True)
-    wk_reason.set_reason_active_heir(bool_x=None)
+    wk_reason.set_heir_active(bool_x=None)
     assert wk_reason.status is None
 
     # WHEN
@@ -226,6 +258,33 @@ def test_ReasonHeir_set_status_BeliefNoneSetsStatusFalse():
 
     # THEN
     assert wk_reason.status is False
+
+
+def test_ReasonUnit_Exists():
+    # ESTABLISH
+    wk_str = "wk"
+    wk_rope = create_rope("Amy23", wk_str)
+    wed_str = "wed"
+    wed_rope = create_rope(wk_rope, wed_str)
+    wed_case = caseunit_shop(reason_state=wed_rope)
+    cases = {wed_case.reason_state: wed_case}
+
+    # WHEN
+    wk_reason = ReasonUnit(wk_rope, cases=cases, active_requisite=False)
+
+    # THEN
+    assert wk_reason.reason_context == wk_rope
+    assert wk_reason.cases == cases
+    assert wk_reason.active_requisite is False
+    assert wk_reason.knot is None
+    obj_attrs = set(wk_reason.__dict__.keys())
+    print(sorted(list(obj_attrs)))
+    assert obj_attrs == {
+        wx.knot,
+        wx.cases,
+        wx.active_requisite,
+        wx.reason_context,
+    }
 
 
 def test_reasonunit_shop_ReturnsObj():

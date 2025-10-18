@@ -219,7 +219,7 @@
       }
     }, 
     "jvalues": {
-      "_reason_active_heir": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
+      "parent_heir_active": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
       "active_requisite": {
         "class_type": "bool", 
         "populate_by_cashout": false, 

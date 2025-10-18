@@ -292,13 +292,13 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
     x_active_requisite = 5
     x_task = 6
     x_status = 7
-    x__reason_active_heir = 8
+    x__heir_active = 8
     x_reasonheir = reasonheir_shop(reason_context=x_reason_context)
     x_reasonheir.reason_context = x_reason_context
     x_reasonheir.active_requisite = x_active_requisite
     x_reasonheir.task = x_task
     x_reasonheir.status = x_status
-    x_reasonheir._reason_active_heir = x__reason_active_heir
+    x_reasonheir.parent_heir_active = x__heir_active
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -323,7 +323,7 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
             x_active_requisite,
             x_task,
             x_status,
-            x__reason_active_heir,
+            x__heir_active,
         )
         expected_data = [expected_row1]
         assert rows == expected_data
