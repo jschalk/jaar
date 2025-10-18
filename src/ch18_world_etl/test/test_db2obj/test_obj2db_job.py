@@ -198,7 +198,7 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
     x_reason_context = 2
     x_active_requisite = 3
     x_task = 4
-    x_status = 5
+    x_reason_active = 5
     x__heir_active = 6
     values_dict = {
         wx.moment_label: x_moment_label,
@@ -207,7 +207,7 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
         wx.reason_context: x_reason_context,
         wx.active_requisite: x_active_requisite,
         "task": x_task,
-        "status": x_status,
+        "reason_active": x_reason_active,
         "parent_heir_active": x__heir_active,
     }
     # all args included in values dict

@@ -33,21 +33,21 @@ def test_generate_perspective_agenda_GrabsAgendatasks():
     yao_speaker.set_voice_respect(20)
     casa_str = "casa"
     casa_rope = yao_speaker.make_l1_rope(casa_str)
-    status_str = "status"
-    status_rope = yao_speaker.make_rope(casa_rope, status_str)
+    situation_str = "situation"
+    situation_rope = yao_speaker.make_rope(casa_rope, situation_str)
     clean_str = "clean"
-    clean_rope = yao_speaker.make_rope(status_rope, clean_str)
+    clean_rope = yao_speaker.make_rope(situation_rope, clean_str)
     dirty_str = "dirty"
-    dirty_rope = yao_speaker.make_rope(status_rope, dirty_str)
+    dirty_rope = yao_speaker.make_rope(situation_rope, dirty_str)
     sweep_str = "sweep"
     sweep_rope = yao_speaker.make_rope(casa_rope, sweep_str)
-    yao_speaker.set_plan(planunit_shop(clean_str), status_rope)
-    yao_speaker.set_plan(planunit_shop(dirty_str), status_rope)
+    yao_speaker.set_plan(planunit_shop(clean_str), situation_rope)
+    yao_speaker.set_plan(planunit_shop(dirty_str), situation_rope)
     yao_speaker.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
     yao_speaker.edit_plan_attr(
-        sweep_rope, reason_context=status_rope, reason_case=dirty_rope
+        sweep_rope, reason_context=situation_rope, reason_case=dirty_rope
     )
-    yao_speaker.add_fact(status_rope, clean_rope)
+    yao_speaker.add_fact(situation_rope, clean_rope)
     assert len(yao_speaker.get_agenda_dict()) == 0
 
     # WHEN

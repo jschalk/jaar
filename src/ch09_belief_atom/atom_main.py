@@ -332,7 +332,7 @@ def _modify_belief_plan_reasonunit_update(x_belief: BeliefUnit, x_atom: BeliefAt
     x_belief.edit_plan_attr(
         x_atom.get_value("plan_rope"),
         reason_context=x_atom.get_value("reason_context"),
-        plan_active_requisite=x_atom.get_value("active_requisite"),
+        reason_requisite_active=x_atom.get_value("active_requisite"),
     )
 
 
@@ -340,7 +340,7 @@ def _modify_belief_plan_reasonunit_insert(x_belief: BeliefUnit, x_atom: BeliefAt
     x_belief.edit_plan_attr(
         x_atom.get_value("plan_rope"),
         reason_context=x_atom.get_value("reason_context"),
-        plan_active_requisite=x_atom.get_value("active_requisite"),
+        reason_requisite_active=x_atom.get_value("active_requisite"),
     )
 
 

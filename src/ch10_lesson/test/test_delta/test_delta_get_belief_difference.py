@@ -971,7 +971,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     after_sue_belief.edit_plan_attr(
         ball_rope,
         reason_context=medical_rope,
-        plan_active_requisite=after_medical_active_requisite,
+        reason_requisite_active=after_medical_active_requisite,
     )
 
     # WHEN
@@ -1015,7 +1015,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     before_sue_belief.edit_plan_attr(
         ball_rope,
         reason_context=medical_rope,
-        plan_active_requisite=before_medical_active_requisite,
+        reason_requisite_active=before_medical_active_requisite,
     )
 
     after_sue_belief = copy_deepcopy(before_sue_belief)
@@ -1023,7 +1023,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     after_sue_belief.edit_plan_attr(
         ball_rope,
         reason_context=medical_rope,
-        plan_active_requisite=after_medical_active_requisite,
+        reason_requisite_active=after_medical_active_requisite,
     )
 
     # WHEN
@@ -1066,7 +1066,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     before_sue_belief.edit_plan_attr(
         ball_rope,
         reason_context=medical_rope,
-        plan_active_requisite=before_medical_active_requisite,
+        reason_requisite_active=before_medical_active_requisite,
     )
 
     after_sue_belief = copy_deepcopy(before_sue_belief)

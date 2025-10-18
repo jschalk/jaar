@@ -431,16 +431,16 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_
     sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(year_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(year_rope).fact_upper=}")
-    print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
+    print(f"{clean_plan.get_reasonheir(year_rope).reason_active=} \n")
 
     # WHEN / THEN
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar6day, yr2000_mar7day)
     sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
-    print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
+    print(f"{clean_plan.get_reasonheir(wed_rope).reason_active=}")
     print(f"{len(sue_beliefunit.get_agenda_dict())=} {yr2000_mar6day=}")
-    print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
+    print(f"{clean_plan.get_reasonheir(year_rope).reason_active=} \n")
     assert len(sue_beliefunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
@@ -448,9 +448,9 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_
     sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
-    print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
+    print(f"{clean_plan.get_reasonheir(wed_rope).reason_active=}")
     print(f"{len(sue_beliefunit.get_agenda_dict())=} {yr2000_mar7day=}")
-    print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
+    print(f"{clean_plan.get_reasonheir(year_rope).reason_active=} \n")
     assert len(sue_beliefunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
@@ -458,9 +458,9 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_
     sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
-    print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
+    print(f"{clean_plan.get_reasonheir(wed_rope).reason_active=}")
     print(f"{len(sue_beliefunit.get_agenda_dict())=} {yr2000_mar1day=}")
-    print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
+    print(f"{clean_plan.get_reasonheir(year_rope).reason_active=} \n")
     assert len(sue_beliefunit.get_agenda_dict()) == 1
 
     # WHEN / THEN
@@ -468,9 +468,9 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_
     sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
-    print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
+    print(f"{clean_plan.get_reasonheir(wed_rope).reason_active=}")
     print(f"{len(sue_beliefunit.get_agenda_dict())=} {yr2000_mar2day=}")
-    print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
+    print(f"{clean_plan.get_reasonheir(year_rope).reason_active=} \n")
     assert len(sue_beliefunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
@@ -478,9 +478,9 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_
     sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
-    print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
+    print(f"{clean_plan.get_reasonheir(wed_rope).reason_active=}")
     print(f"{len(sue_beliefunit.get_agenda_dict())=} {yr2000_mar3day=}")
-    print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
+    print(f"{clean_plan.get_reasonheir(year_rope).reason_active=} \n")
     assert len(sue_beliefunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
@@ -488,9 +488,9 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_
     sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
-    print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
+    print(f"{clean_plan.get_reasonheir(wed_rope).reason_active=}")
     print(f"{len(sue_beliefunit.get_agenda_dict())=} {yr2000_mar4day=}")
-    print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
+    print(f"{clean_plan.get_reasonheir(year_rope).reason_active=} \n")
     assert len(sue_beliefunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
@@ -498,9 +498,9 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_
     sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
-    print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
+    print(f"{clean_plan.get_reasonheir(wed_rope).reason_active=}")
     print(f"{len(sue_beliefunit.get_agenda_dict())=} {yr2000_mar5day=}")
-    print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
+    print(f"{clean_plan.get_reasonheir(year_rope).reason_active=} \n")
     assert len(sue_beliefunit.get_agenda_dict()) == 0
 
 
@@ -558,16 +558,16 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2
     sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(year_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(year_rope).fact_upper=}")
-    print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
+    print(f"{clean_plan.get_reasonheir(year_rope).reason_active=} \n")
 
     # WHEN / THEN
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar6day, yr2000_mar7day)
     sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
-    print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
+    print(f"{clean_plan.get_reasonheir(wed_rope).reason_active=}")
     print(f"{len(sue_beliefunit.get_agenda_dict())=} {yr2000_mar6day=}")
-    print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
+    print(f"{clean_plan.get_reasonheir(year_rope).reason_active=} \n")
     assert len(sue_beliefunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
@@ -575,9 +575,9 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2
     sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
-    print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
+    print(f"{clean_plan.get_reasonheir(wed_rope).reason_active=}")
     print(f"{len(sue_beliefunit.get_agenda_dict())=} {yr2000_mar7day=}")
-    print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
+    print(f"{clean_plan.get_reasonheir(year_rope).reason_active=} \n")
     assert len(sue_beliefunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
@@ -585,9 +585,9 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2
     sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
-    print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
+    print(f"{clean_plan.get_reasonheir(wed_rope).reason_active=}")
     print(f"{len(sue_beliefunit.get_agenda_dict())=} {yr2000_mar1day=}")
-    print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
+    print(f"{clean_plan.get_reasonheir(year_rope).reason_active=} \n")
     # TODO This should be zero but it comes back as 1
     print(f"{sue_beliefunit.get_agenda_dict().keys()=}") == 1
     assert len(sue_beliefunit.get_agenda_dict()) == 1
@@ -597,9 +597,9 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2
     sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
-    print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
+    print(f"{clean_plan.get_reasonheir(wed_rope).reason_active=}")
     print(f"{len(sue_beliefunit.get_agenda_dict())=} {yr2000_mar2day=}")
-    print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
+    print(f"{clean_plan.get_reasonheir(year_rope).reason_active=} \n")
     assert len(sue_beliefunit.get_agenda_dict()) == 1
 
     # WHEN / THEN
@@ -607,9 +607,9 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2
     sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
-    print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
+    print(f"{clean_plan.get_reasonheir(wed_rope).reason_active=}")
     print(f"{len(sue_beliefunit.get_agenda_dict())=} {yr2000_mar3day=}")
-    print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
+    print(f"{clean_plan.get_reasonheir(year_rope).reason_active=} \n")
     assert len(sue_beliefunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
@@ -617,9 +617,9 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2
     sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
-    print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
+    print(f"{clean_plan.get_reasonheir(wed_rope).reason_active=}")
     print(f"{len(sue_beliefunit.get_agenda_dict())=} {yr2000_mar4day=}")
-    print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
+    print(f"{clean_plan.get_reasonheir(year_rope).reason_active=} \n")
     assert len(sue_beliefunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
@@ -627,7 +627,7 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2
     sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
-    print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
+    print(f"{clean_plan.get_reasonheir(wed_rope).reason_active=}")
     print(f"{len(sue_beliefunit.get_agenda_dict())=} {yr2000_mar5day=}")
-    print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
+    print(f"{clean_plan.get_reasonheir(year_rope).reason_active=} \n")
     assert len(sue_beliefunit.get_agenda_dict()) == 0

@@ -792,7 +792,7 @@ class BeliefUnit:
         reason_divisor: int = None,
         reason_del_case_reason_context: RopeTerm = None,
         reason_del_case_reason_state: RopeTerm = None,
-        plan_active_requisite: str = None,
+        reason_requisite_active: str = None,
         laborunit: LaborUnit = None,
         healerunit: HealerUnit = None,
         begin: float = None,
@@ -838,7 +838,7 @@ reason_case:    {reason_case}"""
             reason_divisor=reason_divisor,
             reason_del_case_reason_context=reason_del_case_reason_context,
             reason_del_case_reason_state=reason_del_case_reason_state,
-            plan_active_requisite=plan_active_requisite,
+            reason_requisite_active=reason_requisite_active,
             laborunit=laborunit,
             healerunit=healerunit,
             begin=begin,
@@ -1166,13 +1166,13 @@ reason_case:    {reason_case}"""
                 raise keeps_justException(exception_str)
             self.keeps_justified = False
 
-    def _clear_plantree_fund_and_active_status_attrs(self):
+    def _clear_plantree_fund_and_active_attrs(self):
         for x_plan in self._plan_dict.values():
             x_plan.clear_awardlines()
             x_plan.clear_descendant_pledge_count()
             x_plan.clear_all_voice_cred_debt()
 
-    def _set_kids_active_status_attrs(self, x_plan: PlanUnit, parent_plan: PlanUnit):
+    def _set_kids_active_attrs(self, x_plan: PlanUnit, parent_plan: PlanUnit):
         x_plan.set_reasonheirs(self._plan_dict, parent_plan.reasonheirs)
         x_plan.set_range_factheirs(self._plan_dict, self._range_inheritors)
         tt_count = self.tree_traverse_count
@@ -1246,12 +1246,12 @@ reason_case:    {reason_case}"""
         self._set_plantree_range_attrs()
         self._set_voiceunit_groupunit_respect_ledgers()
         self._clear_voiceunit_fund_attrs()
-        self._clear_plantree_fund_and_active_status_attrs()
+        self._clear_plantree_fund_and_active_attrs()
         self._set_plantree_factheirs_laborheir_awardheirs()
 
         max_count = self.max_tree_traverse
         while not self.rational and self.tree_traverse_count < max_count:
-            self._set_plantree_active_status_attrs()
+            self._set_plantree_active_attrs()
             self._set_rational_attr()
             self.tree_traverse_count += 1
 
@@ -1260,7 +1260,7 @@ reason_case:    {reason_case}"""
         self._set_voiceunit_fund_related_attrs()
         self._set_belief_keep_attrs()
 
-    def _set_plantree_active_status_attrs(self):
+    def _set_plantree_active_attrs(self):
         for x_plan in get_sorted_plan_list(self._plan_dict):
             if x_plan == self.planroot:
                 tt_count = self.tree_traverse_count
@@ -1268,7 +1268,7 @@ reason_case:    {reason_case}"""
                 root_plan.set_active_attrs(tt_count, self.groupunits, self.belief_name)
             else:
                 parent_plan = self.get_plan_obj(x_plan.parent_rope)
-                self._set_kids_active_status_attrs(x_plan, parent_plan)
+                self._set_kids_active_attrs(x_plan, parent_plan)
 
     def _set_plantree_fund_attrs(self, root_plan: PlanUnit):
         root_plan.set_fund_attr(0, self.fund_pool, self.fund_pool)
@@ -1294,12 +1294,12 @@ reason_case:    {reason_case}"""
                 cache_plan_list.append(x_plan)
 
     def _set_rational_attr(self):
-        any_plan_active_status_has_altered = False
+        any_plan_active_has_altered = False
         for plan in self._plan_dict.values():
             if plan.active_hx.get(self.tree_traverse_count) is not None:
-                any_plan_active_status_has_altered = True
+                any_plan_active_has_altered = True
 
-        if any_plan_active_status_has_altered is False:
+        if any_plan_active_has_altered is False:
             self.rational = True
 
     def _set_voiceunit_fund_related_attrs(self):

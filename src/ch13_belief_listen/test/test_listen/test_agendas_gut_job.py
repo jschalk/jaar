@@ -210,14 +210,14 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBelief(
         egg_rope,
         pledge=True,
         reason_context=chicken_rope,
-        plan_active_requisite=True,
+        reason_requisite_active=True,
     )
     # set chick pledge is True when egg first is False
     sue_job.edit_plan_attr(
         chicken_rope,
         pledge=True,
         reason_context=egg_rope,
-        plan_active_requisite=False,
+        reason_requisite_active=False,
     )
     save_job_file(moment_mstr_dir, sue_job)
 

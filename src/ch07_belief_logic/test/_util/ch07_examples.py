@@ -315,7 +315,7 @@ def get_beliefunit_irrational_example() -> BeliefUnit:
         egg_rope,
         pledge=True,
         reason_context=chicken_rope,
-        plan_active_requisite=True,
+        reason_requisite_active=True,
     )
 
     # set chick pledge is True when egg first is False
@@ -323,7 +323,7 @@ def get_beliefunit_irrational_example() -> BeliefUnit:
         chicken_rope,
         pledge=True,
         reason_context=egg_rope,
-        plan_active_requisite=False,
+        reason_requisite_active=False,
     )
 
     return hatter_belief
@@ -339,19 +339,19 @@ def get_mop_with_reason_beliefunit_example1():
     sue_belief.set_plan(floor_plan, casa_rope)
     sue_belief.set_l1_plan(planunit_shop("unimportant"))
 
-    status_str = "cleaniness status"
-    status_rope = sue_belief.make_rope(casa_rope, status_str)
-    sue_belief.set_plan(planunit_shop(status_str), casa_rope)
+    situation_str = "cleaniness situation"
+    situation_rope = sue_belief.make_rope(casa_rope, situation_str)
+    sue_belief.set_plan(planunit_shop(situation_str), casa_rope)
 
     clean_str = "clean"
-    clean_rope = sue_belief.make_rope(status_rope, clean_str)
-    sue_belief.set_plan(planunit_shop(clean_str), status_rope)
+    clean_rope = sue_belief.make_rope(situation_rope, clean_str)
+    sue_belief.set_plan(planunit_shop(clean_str), situation_rope)
     sue_belief.set_plan(planunit_shop("very_much"), clean_rope)
     sue_belief.set_plan(planunit_shop("moderately"), clean_rope)
-    sue_belief.set_plan(planunit_shop("dirty"), status_rope)
+    sue_belief.set_plan(planunit_shop("dirty"), situation_rope)
 
-    floor_reason = reasonunit_shop(status_rope)
-    floor_reason.set_case(case=status_rope)
+    floor_reason = reasonunit_shop(situation_rope)
+    floor_reason.set_case(case=situation_rope)
     sue_belief.edit_plan_attr(floor_rope, reason=floor_reason)
     return sue_belief
 
@@ -364,7 +364,7 @@ def get_beliefunit_laundry_example1() -> BeliefUnit:
     yao_belief.add_voiceunit(cali_str)
 
     casa_str = "casa"
-    basket_str = "laundry basket status"
+    basket_str = "laundry basket situation"
     b_full_str = "full"
     b_smel_str = "smelly"
     b_bare_str = "bare"

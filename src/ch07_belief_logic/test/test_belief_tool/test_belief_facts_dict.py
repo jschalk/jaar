@@ -100,7 +100,7 @@ def test_set_factunits_to_belief_ReturnsObj_Scenario1_Belief1FactsChanged():
     # ESTABLISH
     bob_belief = beliefunit_shop("Bob", "amy23")
     casa_str = "casa"
-    floor_str = "floor status"
+    floor_str = "floor situation"
     clean_str = "clean"
     dirty_str = "dirty"
     mop_str = "mop"
@@ -136,7 +136,7 @@ def test_set_factunits_to_belief_ReturnsObj_Scenario2_FactUnit_reason_context_Do
     # ESTABLISH
     bob_belief = beliefunit_shop("Bob", "amy23")
     casa_str = "casa"
-    floor_str = "floor status"
+    floor_str = "floor situation"
     clean_str = "clean"
     dirty_str = "dirty"
     mop_str = "mop"
@@ -173,7 +173,7 @@ def test_set_factunits_to_belief_ReturnsObj_Scenario3_FactUnit_reason_context_Wi
     # ESTABLISH
     bob_belief = beliefunit_shop("Bob", "amy23")
     casa_str = "casa"
-    floor_str = "floor status"
+    floor_str = "floor situation"
     clean_str = "clean"
     dirty_str = "dirty"
     mop_str = "mop"
@@ -217,7 +217,7 @@ def test_clear_factunits_from_belief_ReturnsObj_Scenario1_FactUnit_Exist():
     # ESTABLISH
     bob_belief = beliefunit_shop("Bob", "amy23")
     casa_str = "casa"
-    floor_str = "floor status"
+    floor_str = "floor situation"
     clean_str = "clean"
     dirty_str = "dirty"
     mop_str = "mop"

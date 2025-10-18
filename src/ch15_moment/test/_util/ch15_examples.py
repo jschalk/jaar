@@ -177,7 +177,7 @@ def create_example_moment4() -> MomentUnit:
 def example_casa_floor_clean_factunit() -> FactUnit:
     a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
-    floor_rope = create_rope(casa_rope, "floor status")
+    floor_rope = create_rope(casa_rope, "floor situation")
     clean_rope = create_rope(floor_rope, "clean")
     return factunit_shop(floor_rope, clean_rope)
 
@@ -185,7 +185,7 @@ def example_casa_floor_clean_factunit() -> FactUnit:
 def example_casa_floor_dirty_factunit() -> FactUnit:
     a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
-    floor_rope = create_rope(casa_rope, "floor status")
+    floor_rope = create_rope(casa_rope, "floor situation")
     dirty_rope = create_rope(floor_rope, "dirty")
     return factunit_shop(floor_rope, dirty_rope)
 
@@ -198,7 +198,7 @@ def _example_empty_bob_beliefunit() -> BeliefUnit:
 def get_bob_mop_without_reason_beliefunit_example() -> BeliefUnit:
     bob_belief = _example_empty_bob_beliefunit()
     casa_str = "casa"
-    floor_str = "floor status"
+    floor_str = "floor situation"
     clean_str = "clean"
     dirty_str = "dirty"
     mop_str = "mop"
@@ -219,7 +219,7 @@ def get_bob_mop_with_reason_beliefunit_example() -> BeliefUnit:
     """belief_name: bob, moment_label: amy23"""
     bob_belief = get_bob_mop_without_reason_beliefunit_example()
     casa_str = "casa"
-    floor_str = "floor status"
+    floor_str = "floor situation"
     dirty_str = "dirty"
     mop_str = "mop"
     casa_rope = bob_belief.make_l1_rope(casa_str)
@@ -236,7 +236,7 @@ def get_bob_mop_fact_clean_beliefunit_example() -> BeliefUnit:
     bob_belief = get_bob_mop_with_reason_beliefunit_example()
     bob_belief.add_voiceunit("Bob")
     casa_rope = bob_belief.make_l1_rope("casa")
-    floor_rope = bob_belief.make_rope(casa_rope, "floor status")
+    floor_rope = bob_belief.make_rope(casa_rope, "floor situation")
     clean_rope = bob_belief.make_rope(floor_rope, "clean")
     bob_belief.add_fact(floor_rope, clean_rope)
     return bob_belief

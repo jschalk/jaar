@@ -12,7 +12,7 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithOutNumbe
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_belief.make_l1_rope("casa")
-    reason_context_value = sue_belief.make_rope(casa_rope, "fridge status")
+    reason_context_value = sue_belief.make_rope(casa_rope, "fridge situation")
     reason_state_value = sue_belief.make_rope(reason_context_value, "dirty")
     swim_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     swim_beliefatom.set_arg(wx.plan_rope, rope_value)
@@ -38,7 +38,7 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithNumberAr
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_belief.make_l1_rope("casa")
-    reason_context_value = sue_belief.make_rope(casa_rope, "fridge status")
+    reason_context_value = sue_belief.make_rope(casa_rope, "fridge situation")
     reason_state_value = sue_belief.make_rope(reason_context_value, "dirty")
     reason_divisor_value = 7
     reason_upper_value = 13
@@ -70,7 +70,7 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithOutNumbe
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_belief.make_l1_rope("casa")
-    reason_context_value = sue_belief.make_rope(casa_rope, "fridge status")
+    reason_context_value = sue_belief.make_rope(casa_rope, "fridge situation")
     reason_state_value = sue_belief.make_rope(reason_context_value, "dirty")
     swim_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     swim_beliefatom.set_arg(wx.plan_rope, rope_value)
@@ -96,7 +96,7 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithNumberAr
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_belief.make_l1_rope("casa")
-    reason_context_value = sue_belief.make_rope(casa_rope, "fridge status")
+    reason_context_value = sue_belief.make_rope(casa_rope, "fridge situation")
     reason_state_value = sue_belief.make_rope(reason_context_value, "dirty")
     reason_divisor_value = 7
     reason_upper_value = 13
@@ -128,7 +128,7 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_DELETE():
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_belief.make_l1_rope("casa")
-    reason_context_value = sue_belief.make_rope(casa_rope, "fridge status")
+    reason_context_value = sue_belief.make_rope(casa_rope, "fridge situation")
     reason_state_value = sue_belief.make_rope(reason_context_value, "dirty")
     swim_beliefatom = beliefatom_shop(dimen, wx.DELETE)
     swim_beliefatom.set_arg(wx.plan_rope, rope_value)

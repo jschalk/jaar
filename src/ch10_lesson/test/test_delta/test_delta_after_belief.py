@@ -881,7 +881,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_reasonu
     before_sue_au.edit_plan_attr(
         ball_rope,
         reason_context=knee_rope,
-        plan_active_requisite=before_medical_active_requisite,
+        reason_requisite_active=before_medical_active_requisite,
     )
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
     before_ball_reasonunit = before_ball_plan.get_reasonunit(knee_rope)
@@ -926,7 +926,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_reasonu
     before_sue_au.edit_plan_attr(
         ball_rope,
         reason_context=knee_rope,
-        plan_active_requisite=medical_active_requisite,
+        reason_requisite_active=medical_active_requisite,
     )
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
     assert before_ball_plan.get_reasonunit(knee_rope) is not None

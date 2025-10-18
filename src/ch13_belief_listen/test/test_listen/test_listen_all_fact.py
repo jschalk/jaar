@@ -123,30 +123,30 @@ def test_set_listen_to_speaker_fact_SetsFact():
     yao_listener = beliefunit_shop(yao_str)
     casa_str = "casa"
     casa_rope = yao_listener.make_l1_rope(casa_str)
-    status_str = "status"
-    status_rope = yao_listener.make_rope(casa_rope, status_str)
+    situation_str = "situation"
+    situation_rope = yao_listener.make_rope(casa_rope, situation_str)
     clean_str = "clean"
-    clean_rope = yao_listener.make_rope(status_rope, clean_str)
+    clean_rope = yao_listener.make_rope(situation_rope, clean_str)
     dirty_str = "dirty"
-    dirty_rope = yao_listener.make_rope(status_rope, dirty_str)
+    dirty_rope = yao_listener.make_rope(situation_rope, dirty_str)
     sweep_str = "sweep"
     sweep_rope = yao_listener.make_rope(casa_rope, sweep_str)
 
     yao_listener.add_voiceunit(yao_str)
     yao_listener.set_voice_respect(20)
-    yao_listener.set_plan(planunit_shop(clean_str), status_rope)
-    yao_listener.set_plan(planunit_shop(dirty_str), status_rope)
+    yao_listener.set_plan(planunit_shop(clean_str), situation_rope)
+    yao_listener.set_plan(planunit_shop(dirty_str), situation_rope)
     yao_listener.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
     yao_listener.edit_plan_attr(
-        sweep_rope, reason_context=status_rope, reason_case=dirty_rope
+        sweep_rope, reason_context=situation_rope, reason_case=dirty_rope
     )
     missing_fact_fact_contexts = list(
         yao_listener.get_missing_fact_reason_contexts().keys()
     )
 
     yao_speaker = beliefunit_shop(yao_str)
-    yao_speaker.add_fact(status_rope, clean_rope, create_missing_plans=True)
-    assert yao_listener.get_missing_fact_reason_contexts().keys() == {status_rope}
+    yao_speaker.add_fact(situation_rope, clean_rope, create_missing_plans=True)
+    assert yao_listener.get_missing_fact_reason_contexts().keys() == {situation_rope}
 
     # WHEN
     listen_to_speaker_fact(yao_listener, yao_speaker, missing_fact_fact_contexts)
@@ -163,12 +163,12 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     yao_listener.set_voice_respect(20)
     casa_str = "casa"
     casa_rope = yao_listener.make_l1_rope(casa_str)
-    status_str = "status"
-    status_rope = yao_listener.make_rope(casa_rope, status_str)
+    situation_str = "situation"
+    situation_rope = yao_listener.make_rope(casa_rope, situation_str)
     clean_str = "clean"
-    clean_rope = yao_listener.make_rope(status_rope, clean_str)
+    clean_rope = yao_listener.make_rope(situation_rope, clean_str)
     dirty_str = "dirty"
-    dirty_rope = yao_listener.make_rope(status_rope, dirty_str)
+    dirty_rope = yao_listener.make_rope(situation_rope, dirty_str)
     sweep_str = "sweep"
     sweep_rope = yao_listener.make_rope(casa_rope, sweep_str)
     fridge_str = "fridge"
@@ -177,23 +177,23 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     running_rope = yao_listener.make_rope(fridge_rope, running_str)
 
     yao_listener.set_plan(planunit_shop(running_str), fridge_rope)
-    yao_listener.set_plan(planunit_shop(clean_str), status_rope)
-    yao_listener.set_plan(planunit_shop(dirty_str), status_rope)
+    yao_listener.set_plan(planunit_shop(clean_str), situation_rope)
+    yao_listener.set_plan(planunit_shop(dirty_str), situation_rope)
     yao_listener.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
     yao_listener.edit_plan_attr(
-        sweep_rope, reason_context=status_rope, reason_case=dirty_rope
+        sweep_rope, reason_context=situation_rope, reason_case=dirty_rope
     )
     yao_listener.edit_plan_attr(
         sweep_rope, reason_context=fridge_rope, reason_case=running_rope
     )
     assert len(yao_listener.get_missing_fact_reason_contexts()) == 2
-    yao_listener.add_fact(status_rope, dirty_rope)
+    yao_listener.add_fact(situation_rope, dirty_rope)
     assert len(yao_listener.get_missing_fact_reason_contexts()) == 1
-    assert yao_listener.get_fact(status_rope).fact_state == dirty_rope
+    assert yao_listener.get_fact(situation_rope).fact_state == dirty_rope
 
     # WHEN
     yao_speaker = beliefunit_shop(yao_str)
-    yao_speaker.add_fact(status_rope, clean_rope, create_missing_plans=True)
+    yao_speaker.add_fact(situation_rope, clean_rope, create_missing_plans=True)
     yao_speaker.add_fact(fridge_rope, running_rope, create_missing_plans=True)
     missing_fact_fact_contexts = list(
         yao_listener.get_missing_fact_reason_contexts().keys()
@@ -203,7 +203,7 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     # THEN
     assert len(yao_listener.get_missing_fact_reason_contexts()) == 0
     # did not grab speaker's factunit
-    assert yao_listener.get_fact(status_rope).fact_state == dirty_rope
+    assert yao_listener.get_fact(situation_rope).fact_state == dirty_rope
     # grabed speaker's factunit
     assert yao_listener.get_fact(fridge_rope).fact_state == running_rope
 
@@ -214,12 +214,12 @@ def test_migrate_all_facts_AddsPlanUnitsAndSetsFactUnits():
     yao_src = beliefunit_shop(yao_str)
     casa_str = "casa"
     casa_rope = yao_src.make_l1_rope(casa_str)
-    status_str = "status"
-    status_rope = yao_src.make_rope(casa_rope, status_str)
+    situation_str = "situation"
+    situation_rope = yao_src.make_rope(casa_rope, situation_str)
     clean_str = "clean"
-    clean_rope = yao_src.make_rope(status_rope, clean_str)
+    clean_rope = yao_src.make_rope(situation_rope, clean_str)
     dirty_str = "dirty"
-    dirty_rope = yao_src.make_rope(status_rope, dirty_str)
+    dirty_rope = yao_src.make_rope(situation_rope, dirty_str)
     sweep_str = "sweep"
     sweep_rope = yao_src.make_rope(casa_rope, sweep_str)
     weather_str = "weather"
@@ -231,15 +231,15 @@ def test_migrate_all_facts_AddsPlanUnitsAndSetsFactUnits():
 
     yao_src.add_voiceunit(yao_str)
     yao_src.set_voice_respect(20)
-    yao_src.set_plan(planunit_shop(clean_str), status_rope)
-    yao_src.set_plan(planunit_shop(dirty_str), status_rope)
+    yao_src.set_plan(planunit_shop(clean_str), situation_rope)
+    yao_src.set_plan(planunit_shop(dirty_str), situation_rope)
     yao_src.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
-    yao_src.edit_reason(sweep_rope, status_rope, dirty_rope)
+    yao_src.edit_reason(sweep_rope, situation_rope, dirty_rope)
     # missing_fact_fact_contexts = list(yao_src.get_missing_fact_reason_contexts().keys())
     yao_src.set_plan(planunit_shop(rain_str), weather_rope)
     yao_src.set_plan(planunit_shop(snow_str), weather_rope)
     yao_src.add_fact(weather_rope, rain_rope)
-    yao_src.add_fact(status_rope, clean_rope)
+    yao_src.add_fact(situation_rope, clean_rope)
     yao_src.cashout()
 
     yao_dst = beliefunit_shop(yao_str)
@@ -248,7 +248,7 @@ def test_migrate_all_facts_AddsPlanUnitsAndSetsFactUnits():
     assert yao_dst.plan_exists(rain_rope) is False
     assert yao_dst.plan_exists(snow_rope) is False
     assert yao_dst.get_fact(weather_rope) is None
-    assert yao_dst.get_fact(status_rope) is None
+    assert yao_dst.get_fact(situation_rope) is None
 
     # WHEN
     migrate_all_facts(yao_src, yao_dst)
@@ -259,6 +259,6 @@ def test_migrate_all_facts_AddsPlanUnitsAndSetsFactUnits():
     assert yao_dst.plan_exists(rain_rope)
     assert yao_dst.plan_exists(snow_rope)
     assert yao_dst.get_fact(weather_rope) is not None
-    assert yao_dst.get_fact(status_rope) is not None
+    assert yao_dst.get_fact(situation_rope) is not None
     assert yao_dst.get_fact(weather_rope).fact_state == rain_rope
-    assert yao_dst.get_fact(status_rope).fact_state == clean_rope
+    assert yao_dst.get_fact(situation_rope).fact_state == clean_rope

@@ -472,7 +472,7 @@ def test_add_belief_to_br00027_csv_ReturnsObj():
     bob_belief.edit_plan_attr(
         mop_rope,
         reason_context=casa_rope,
-        plan_active_requisite=True,
+        reason_requisite_active=True,
     )
     csv_header = x_ideas.get("br00027")
     print(f"{csv_header=}")
@@ -865,7 +865,7 @@ def test_add_lesson_to_br00027_csv_ReturnsObj():
     bob_belief.edit_plan_attr(
         mop_rope,
         reason_context=casa_rope,
-        plan_active_requisite=True,
+        reason_requisite_active=True,
     )
     bob_beliefdelta = beliefdelta_shop()
     bob_beliefdelta.add_all_beliefatoms(bob_belief)

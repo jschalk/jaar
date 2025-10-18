@@ -85,7 +85,7 @@ def test_BeliefUnit_fund_flow(graphics_bool):
     sue_belief = beliefunit_shop(belief_name="Sue")
     casa_str = "casa"
     casa_rope = sue_belief.make_l1_rope(casa_str)
-    cat_str = "cat status"
+    cat_str = "cat situation"
     cat_rope = sue_belief.make_rope(casa_rope, cat_str)
     hun_n_str = "not hungry"
     hun_n_rope = sue_belief.make_rope(cat_rope, hun_n_str)

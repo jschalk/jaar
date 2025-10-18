@@ -265,14 +265,14 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBelief(
         egg_rope,
         pledge=True,
         reason_context=chicken_rope,
-        plan_active_requisite=True,
+        reason_requisite_active=True,
     )
     # set chick pledge is True when egg first is False
     sue_vision.edit_plan_attr(
         chicken_rope,
         pledge=True,
         reason_context=egg_rope,
-        plan_active_requisite=False,
+        reason_requisite_active=False,
     )
     save_vision_belief(
         yao_dakota_lessonfilehandler.moment_mstr_dir,

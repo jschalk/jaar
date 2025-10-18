@@ -153,7 +153,7 @@ def get_fund_breakdown_belief() -> BeliefUnit:
 
     casa_str = "casa"
     casa_rope = sue_belief.make_l1_rope(casa_str)
-    cat_str = "cat status"
+    cat_str = "cat situation"
     cat_rope = sue_belief.make_rope(casa_rope, cat_str)
     hun_n_str = "not hungry"
     hun_y_str = "hungry"

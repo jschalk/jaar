@@ -397,22 +397,22 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
 #     sue_speaker = beliefunit_shop(yao_str)
 #     casa_str = "casa"
 #     casa_rope = sue_speaker.make_l1_rope(casa_str)
-#     status_str = "status"
-#     status_rope = sue_speaker.make_rope(casa_rope, status_str)
+#     situation_str = "situation"
+#     situation_rope = sue_speaker.make_rope(casa_rope, situation_str)
 #     clean_str = "clean"
-#     a23_clean_rope = sue_speaker.make_rope(status_rope, clean_str)
+#     a23_clean_rope = sue_speaker.make_rope(situation_rope, clean_str)
 #     dirty_str = "dirty"
-#     dirty_rope = sue_speaker.make_rope(status_rope, dirty_str)
+#     dirty_rope = sue_speaker.make_rope(situation_rope, dirty_str)
 #     sweep_str = "sweep"
 #     sweep_rope = sue_speaker.make_rope(casa_rope, sweep_str)
 
 #     sue_speaker.add_voiceunit(yao_str)
 #     sue_speaker.set_voice_respect(20)
-#     sue_speaker.set_plan(planunit_shop(clean_str), status_rope)
-#     sue_speaker.set_plan(planunit_shop(dirty_str), status_rope)
+#     sue_speaker.set_plan(planunit_shop(clean_str), situation_rope)
+#     sue_speaker.set_plan(planunit_shop(dirty_str), situation_rope)
 #     sue_speaker.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
 #     sue_speaker.edit_plan_attr(
-#         sweep_rope, reason_context=status_rope, reason_case=dirty_rope
+#         sweep_rope, reason_context=situation_rope, reason_case=dirty_rope
 #     )
 #     sweep_plan = sue_speaker.get_plan_obj(sweep_rope)
 #     sweep_plan.laborunit.add_party(yao_str)
@@ -424,13 +424,13 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
 #     yao_duty.add_voiceunit(sue_str)
 #     new_yao_vision = create_listen_basis(yao_duty)
 #     print(f"{new_yao_vision.get_plan_dict().keys()=}")
-#     # assert new_yao_vision.get_missing_fact_reason_contexts().get(status_rope) is None
+#     # assert new_yao_vision.get_missing_fact_reason_contexts().get(situation_rope) is None
 #     listen_to_agendas_duty_vision(new_yao_vision, texas_lessonfilehandler)
 #     print(f"{new_yao_vision.get_plan_dict().keys()=}")
-#     assert new_yao_vision.get_missing_fact_reason_contexts().get(status_rope) is not None
+#     assert new_yao_vision.get_missing_fact_reason_contexts().get(situation_rope) is not None
 
-#     # assert new_yao_vision.get_missing_fact_reason_contexts().keys() == {status_rope}
-#     # sue_speaker.add_fact(status_rope, a23_clean_rope, create_missing_plans=True)
+#     # assert new_yao_vision.get_missing_fact_reason_contexts().keys() == {situation_rope}
+#     # sue_speaker.add_fact(situation_rope, a23_clean_rope, create_missing_plans=True)
 
 #     # # WHEN
 #     # listen_to_facts_duty_vision(yao_duty, yao_vision, missing_fact_fact_contexts)
@@ -448,12 +448,12 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
 #     yao_duty.set_voice_respect(20)
 #     casa_str = "casa"
 #     casa_rope = yao_duty.make_l1_rope(casa_str)
-#     status_str = "status"
-#     status_rope = yao_duty.make_rope(casa_rope, status_str)
+#     situation_str = "situation"
+#     situation_rope = yao_duty.make_rope(casa_rope, situation_str)
 #     clean_str = "clean"
-#     a23_clean_rope = yao_duty.make_rope(status_rope, clean_str)
+#     a23_clean_rope = yao_duty.make_rope(situation_rope, clean_str)
 #     dirty_str = "dirty"
-#     dirty_rope = yao_duty.make_rope(status_rope, dirty_str)
+#     dirty_rope = yao_duty.make_rope(situation_rope, dirty_str)
 #     sweep_str = "sweep"
 #     sweep_rope = yao_duty.make_rope(casa_rope, sweep_str)
 #     fridge_str = "fridge"
@@ -462,23 +462,23 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
 #     running_rope = yao_duty.make_rope(fridge_rope, running_str)
 
 #     yao_duty.set_plan(planunit_shop(running_str), fridge_rope)
-#     yao_duty.set_plan(planunit_shop(clean_str), status_rope)
-#     yao_duty.set_plan(planunit_shop(dirty_str), status_rope)
+#     yao_duty.set_plan(planunit_shop(clean_str), situation_rope)
+#     yao_duty.set_plan(planunit_shop(dirty_str), situation_rope)
 #     yao_duty.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
 #     yao_duty.edit_plan_attr(
-#         sweep_rope, reason_context=status_rope, reason_case=dirty_rope
+#         sweep_rope, reason_context=situation_rope, reason_case=dirty_rope
 #     )
 #     yao_duty.edit_plan_attr(
 #         sweep_rope, reason_context=fridge_rope, reason_case=running_rope
 #     )
 #     assert len(yao_duty.get_missing_fact_reason_contexts()) == 2
-#     yao_duty.add_fact(status_rope, dirty_rope)
+#     yao_duty.add_fact(situation_rope, dirty_rope)
 #     assert len(yao_duty.get_missing_fact_reason_contexts()) == 1
-#     assert yao_duty.get_fact(status_rope).fact_state == dirty_rope
+#     assert yao_duty.get_fact(situation_rope).fact_state == dirty_rope
 
 #     # WHEN
 #     yao_vision = beliefunit_shop(yao_str)
-#     yao_vision.add_fact(status_rope, a23_clean_rope, create_missing_plans=True)
+#     yao_vision.add_fact(situation_rope, a23_clean_rope, create_missing_plans=True)
 #     yao_vision.add_fact(fridge_rope, running_rope, create_missing_plans=True)
 #     missing_fact_fact_contexts = list(yao_duty.get_missing_fact_reason_contexts().keys())
 #     listen_to_facts_duty_vision(yao_duty, yao_vision, missing_fact_fact_contexts)
@@ -486,6 +486,6 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
 #     # THEN
 #     assert len(yao_duty.get_missing_fact_reason_contexts()) == 0
 #     # did not grab speaker's factunit
-#     assert yao_duty.get_fact(status_rope).fact_state == dirty_rope
+#     assert yao_duty.get_fact(situation_rope).fact_state == dirty_rope
 #     # grabed speaker's factunit
 #     assert yao_duty.get_fact(fridge_rope).fact_state == running_rope

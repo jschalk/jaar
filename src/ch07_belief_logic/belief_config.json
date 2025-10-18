@@ -225,7 +225,7 @@
         "populate_by_cashout": false, 
         "sqlite_datatype": "INTEGER"
       }, 
-      "status": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
+      "reason_active": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
       "task": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}
     }
   }, 

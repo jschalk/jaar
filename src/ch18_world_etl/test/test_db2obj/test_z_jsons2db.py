@@ -291,13 +291,13 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
     x_reason_context = 4
     x_active_requisite = 5
     x_task = 6
-    x_status = 7
+    x_reason_active = 7
     x__heir_active = 8
     x_reasonheir = reasonheir_shop(reason_context=x_reason_context)
     x_reasonheir.reason_context = x_reason_context
     x_reasonheir.active_requisite = x_active_requisite
     x_reasonheir.task = x_task
-    x_reasonheir.status = x_status
+    x_reasonheir.reason_active = x_reason_active
     x_reasonheir.parent_heir_active = x__heir_active
 
     with sqlite3_connect(":memory:") as conn:
@@ -322,7 +322,7 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
             str(x_reason_context),
             x_active_requisite,
             x_task,
-            x_status,
+            x_reason_active,
             x__heir_active,
         )
         expected_data = [expected_row1]
@@ -868,21 +868,21 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     sue_belief.add_voiceunit(bob_str)
     sue_belief.get_voice(bob_str).add_membership(run_str)
     casa_rope = sue_belief.make_l1_rope("casa")
-    status_rope = sue_belief.make_l1_rope("status")
-    clean_rope = sue_belief.make_rope(status_rope, "clean")
-    dirty_rope = sue_belief.make_rope(status_rope, "dirty")
+    situation_rope = sue_belief.make_l1_rope("reason_active")
+    clean_rope = sue_belief.make_rope(situation_rope, "clean")
+    dirty_rope = sue_belief.make_rope(situation_rope, "dirty")
     sue_belief.add_plan(casa_rope)
     sue_belief.add_plan(clean_rope)
     sue_belief.add_plan(dirty_rope)
     sue_belief.edit_plan_attr(
-        casa_rope, reason_context=status_rope, reason_case=dirty_rope
+        casa_rope, reason_context=situation_rope, reason_case=dirty_rope
     )
     sue_belief.edit_plan_attr(casa_rope, awardunit=awardunit_shop(run_str))
     sue_belief.edit_plan_attr(casa_rope, healerunit=healerunit_shop({bob_str}))
     casa_laborunit = laborunit_shop()
     casa_laborunit.add_party(sue_str, True)
     sue_belief.edit_plan_attr(casa_rope, laborunit=casa_laborunit)
-    sue_belief.add_fact(status_rope, clean_rope)
+    sue_belief.add_fact(situation_rope, clean_rope)
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()

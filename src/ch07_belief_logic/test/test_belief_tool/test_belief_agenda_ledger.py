@@ -269,7 +269,7 @@ def test_get_voice_mandate_ledger_ReturnsObj_Scenario5_Zero_fund_agenda_give():
     sue_fund_pool = 800
     sue_belief.set_fund_pool(sue_fund_pool)
     casa_str = "casa"
-    floor_str = "floor status"
+    floor_str = "floor situation"
     clean_str = "clean"
     dirty_str = "dirty"
     mop_str = "mop"

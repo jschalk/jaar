@@ -107,7 +107,7 @@ def test_set_epoch_cases_for_yearly_monthday_ChangesBeliefUnit_agenda():
     # geo_factheir = mop_plan.factheirs.get(month_geo_rope)
     # print(f"{geo_factheir=}")
     # print(f"{day_reasonheir=}")
-    # print(f"{geo_reasonheir.status=}")
+    # print(f"{geo_reasonheir.reason_active=}")
     # print(f"{mop_plan.factheirs.keys()=}")
 
 

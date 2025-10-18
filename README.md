@@ -34,7 +34,7 @@ For beto all data must have *spark_num*, *face_name*, *moment_label*. These are 
 |-----------|-----------|-----------|------------|-----------|-----------|--------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |    891    |  7000  |
 
-When beto processes example 0.1.0 it creates a Moment labeled "OxboxDean" that contains beliefs Emmanuel and Dean and a single transaction of 7000 OxboxDean from Emmanuel to Dean. Here's the status metrics:
+When beto processes example 0.1.0 it creates a Moment labeled "OxboxDean" that contains beliefs Emmanuel and Dean and a single transaction of 7000 OxboxDean from Emmanuel to Dean. Here's a metric:
 | moment_label | belief_name | moment_fund_amount | moment_fund_rank | moment_pledges |
 |--------------|---------------|--------------------|------------------|--------------|
 |  OxboxDean   |    Emmanuel   |       -7000        |         2        |       0      |

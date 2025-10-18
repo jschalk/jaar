@@ -24,7 +24,7 @@ def test_PlanAttrHolder_Exists():
     assert new_obj.reason_divisor is None
     assert new_obj.reason_del_case_reason_context is None
     assert new_obj.reason_del_case_reason_state is None
-    assert new_obj.plan_active_requisite is None
+    assert new_obj.reason_requisite_active is None
     assert new_obj.laborunit is None
     assert new_obj.healerunit is None
     assert new_obj.begin is None
@@ -49,7 +49,7 @@ def test_PlanAttrHolder_Exists():
         "reason_divisor",
         "reason_del_case_reason_context",
         "reason_del_case_reason_state",
-        "plan_active_requisite",
+        "reason_requisite_active",
         wx.laborunit,
         wx.healerunit,
         wx.begin,

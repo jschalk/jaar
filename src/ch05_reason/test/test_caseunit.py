@@ -288,7 +288,7 @@ def test_CaseUnit_is_range_or_segregate_ReturnsObj():
     assert wk_case._is_range_or_segregate()
 
 
-def test_CaseUnit_get_case_status_ReturnsObj():
+def test_CaseUnit_get_active_ReturnsObj_Scenario0():
     # ESTABLISH / WHEN assumes fact is in lineage
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
@@ -302,7 +302,7 @@ def test_CaseUnit_get_case_status_ReturnsObj():
     assert wk_case._get_active(factheir=wk_fact)
 
 
-def test_CaseUnit_get_active_ReturnsObj_ChecksIf_is_range_IsActive():
+def test_CaseUnit_get_active_ReturnsObj_Scenario1_ChecksIf_is_range_IsActive():
     # ESTABLISH assumes fact is in lineage
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
@@ -332,7 +332,7 @@ def test_CaseUnit_set_case_active_SetsAttr_Scenario0_WhenFactUnitIsNull():
     assert x_caseunit.case_active is False
 
 
-def test_CaseUnit_set_case_active_SetsAttr_Scenario1_status_OfSimple():
+def test_CaseUnit_set_case_active_SetsAttr_Scenario1_case_active_OfSimple():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
@@ -447,7 +447,7 @@ def test_CaseUnit_set_case_active_SetsAttr_Scenario6_Clock():
     assert hr24_case.case_active
 
 
-def test_CaseUnit_get_task_bool_ReturnsObj_Scenario0_When_status_IsFalse():
+def test_CaseUnit_get_task_bool_ReturnsObj_Scenario0_When_case_active_IsFalse():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_rope = create_rope("Amy23", hr24_str)
@@ -631,7 +631,7 @@ def test_CaseUnit_set_case_active_SetAttrs_Scenario03():
     assert hr24_case.case_active is False
 
 
-def test_CaseUnit_set_case_active_SetAttrs_Scenario4_CEDWeekStatusFalse():
+def test_CaseUnit_set_case_active_SetAttrs_Scenario4_CEDWeek_case_active_False():
     # ESTABLISH
     clock_str = "clock"
     clock_rope = create_rope("Amy23", clock_str)
@@ -650,7 +650,7 @@ def test_CaseUnit_set_case_active_SetAttrs_Scenario4_CEDWeekStatusFalse():
     assert o1_n1_d6_case.case_active is False
 
 
-def test_CaseUnit_set_case_active_SetAttrs_Scenario5_CEDWeekStatusTrue():
+def test_CaseUnit_set_case_active_SetAttrs_Scenario5_CEDWeek_case_active_True():
     # ESTABLISH
     clock_str = "clock"
     clock_rope = create_rope("Amy23", clock_str)

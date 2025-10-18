@@ -79,7 +79,6 @@ def test_BeliefUnit_clear_plan_dict_and_belief_obj_settle_attrs_SetsAttrs_Scenar
 def test_BeliefUnit_cashout_ClearsDescendantAttributes():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
-    # test root status:
     casa_str = "casa"
     casa_rope = sue_belief.make_l1_rope(casa_str)
     casa_plan = sue_belief.get_plan_obj(casa_rope)
@@ -167,7 +166,6 @@ def test_BeliefUnit_cashout_NLevelSetsDescendantAttributes_1():
     email_plan = planunit_shop(email_str, pledge=True)
     sue_belief.set_plan(email_plan, parent_rope=casa_rope)
 
-    # test root status:
     root_rope = sue_belief.planroot.get_plan_rope()
     x_planroot = sue_belief.get_plan_obj(root_rope)
     assert x_planroot.descendant_pledge_count is None

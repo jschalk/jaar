@@ -89,7 +89,7 @@ class PlanAttrHolder:
     reason_divisor: int = None
     reason_del_case_reason_context: RopeTerm = None
     reason_del_case_reason_state: RopeTerm = None
-    plan_active_requisite: str = None
+    reason_requisite_active: str = None
     laborunit: LaborUnit = None
     healerunit: HealerUnit = None
     begin: float = None
@@ -133,7 +133,7 @@ def planattrholder_shop(
     reason_divisor: int = None,
     reason_del_case_reason_context: RopeTerm = None,
     reason_del_case_reason_state: RopeTerm = None,
-    plan_active_requisite: str = None,
+    reason_requisite_active: str = None,
     laborunit: LaborUnit = None,
     healerunit: HealerUnit = None,
     begin: float = None,
@@ -162,7 +162,7 @@ def planattrholder_shop(
         reason_divisor=reason_divisor,
         reason_del_case_reason_context=reason_del_case_reason_context,
         reason_del_case_reason_state=reason_del_case_reason_state,
-        plan_active_requisite=plan_active_requisite,
+        reason_requisite_active=reason_requisite_active,
         laborunit=laborunit,
         healerunit=healerunit,
         begin=begin,
@@ -592,11 +592,11 @@ class PlanUnit:
             )
         if (
             plan_attr.reason_context is not None
-            and plan_attr.plan_active_requisite is not None
+            and plan_attr.reason_requisite_active is not None
         ):
-            self.set_plan_active_requisite(
+            self.set_reason_requisite_active(
                 reason_context=plan_attr.reason_context,
-                active_requisite=plan_attr.plan_active_requisite,
+                active_requisite=plan_attr.reason_requisite_active,
             )
         if plan_attr.laborunit is not None:
             self.laborunit = plan_attr.laborunit
@@ -686,7 +686,7 @@ class PlanUnit:
             if len(self.reasonunits[reason_context].cases) == 0:
                 self.del_reasonunit_reason_context(reason_context=reason_context)
 
-    def set_plan_active_requisite(
+    def set_reason_requisite_active(
         self, reason_context: RopeTerm, active_requisite: str
     ):
         x_reasonunit = self._get_or_create_reasonunit(reason_context=reason_context)
@@ -781,10 +781,10 @@ class PlanUnit:
     def get_reasonunit(self, reason_context: RopeTerm) -> ReasonUnit:
         return self.reasonunits.get(reason_context)
 
-    def set_reasonheirs_status(self):
-        self.clear_reasonheirs_status()
+    def set_reasonheirs_reason_active(self):
+        self.clear_reasonheirs_reason_active()
         for x_reasonheir in self.reasonheirs.values():
-            x_reasonheir.set_status(factheirs=self.factheirs)
+            x_reasonheir.set_reason_active(factheirs=self.factheirs)
 
     def set_active_attrs(
         self,
@@ -813,7 +813,7 @@ class PlanUnit:
         groupunits: dict[GroupTitle, GroupUnit],
         belief_name: VoiceName,
     ) -> bool:
-        self.set_reasonheirs_status()
+        self.set_reasonheirs_reason_active()
         active_bool = self.all_reasonheirs_are_active()
         if active_bool and groupunits != {} and belief_name is not None:
             self.laborheir.set_belief_name_is_labor(groupunits, belief_name)
@@ -852,11 +852,13 @@ class PlanUnit:
 
     def all_reasonheirs_are_active(self) -> bool:
         x_reasonheirs = self.reasonheirs.values()
-        return all(x_reasonheir.status != False for x_reasonheir in x_reasonheirs)
+        return all(
+            x_reasonheir.reason_active != False for x_reasonheir in x_reasonheirs
+        )
 
-    def clear_reasonheirs_status(self):
+    def clear_reasonheirs_reason_active(self):
         for reason in self.reasonheirs.values():
-            reason.clear_status()
+            reason.clear_reason_active()
 
     def _coalesce_with_reasonunits(
         self, reasonheirs: dict[RopeTerm, ReasonHeir]

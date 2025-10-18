@@ -580,7 +580,7 @@ def reasonunit_shop(
 
 @dataclass
 class ReasonHeir(ReasonCore):
-    status: bool = None
+    reason_active: bool = None
     task: bool = None
     parent_heir_active: bool = None
 
@@ -596,8 +596,8 @@ class ReasonHeir(ReasonCore):
             x_cases[case_x.reason_state] = case_x
         self.cases = x_cases
 
-    def clear_status(self):
-        self.status = None
+    def clear_reason_active(self):
+        self.reason_active = None
         for case in self.cases.values():
             case.clear_case_active()
 
@@ -632,19 +632,19 @@ class ReasonHeir(ReasonCore):
                     any_task_true = True
         return any_case_true, any_task_true
 
-    def _set_attr_status(self, any_case_true: bool):
-        self.status = any_case_true or self.is_active_requisite_operational()
+    def _set_attr_reason_active(self, any_case_true: bool):
+        self.reason_active = any_case_true or self.is_active_requisite_operational()
 
     def _set_attr_task(self, any_task_true: bool):
         self.task = True if any_task_true else None
-        if self.status and self.task is None:
+        if self.reason_active and self.task is None:
             self.task = False
 
-    def set_status(self, factheirs: dict[RopeTerm, FactHeir]):
-        self.clear_status()
+    def set_reason_active(self, factheirs: dict[RopeTerm, FactHeir]):
+        self.clear_reason_active()
         self.set_cases_case_active(self._get_fact_context(factheirs))
         any_case_true, any_task_true = self.is_any_case_true()
-        self._set_attr_status(any_case_true)
+        self._set_attr_reason_active(any_case_true)
         self._set_attr_task(any_task_true)
 
 
@@ -652,7 +652,7 @@ def reasonheir_shop(
     reason_context: RopeTerm,
     cases: dict[RopeTerm, CaseUnit] = None,
     active_requisite: bool = None,
-    status: bool = None,
+    reason_active: bool = None,
     task: bool = None,
     parent_heir_active: bool = None,
     knot: str = None,
@@ -661,7 +661,7 @@ def reasonheir_shop(
         reason_context=reason_context,
         cases=get_empty_dict_if_None(cases),
         active_requisite=active_requisite,
-        status=status,
+        reason_active=reason_active,
         task=task,
         parent_heir_active=parent_heir_active,
         knot=default_knot_if_None(knot),

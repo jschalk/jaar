@@ -386,7 +386,7 @@ def test_get_beliefunit_from_dict_LoadsPledgeFromJSON():
     #         # if plan.pledge is False:
     #         #     print(f"pledge is false {plan.plan_label}")
     #         # for reason in plan.reasonunits.values():
-    #         #     assert reason.status in (True, False)
+    #         #     assert reason.reason_active in (True, False)
     # assert pledge_true_count > 0
 
     # WHEN
@@ -436,9 +436,9 @@ def test_BeliefUnit_set_fact_Isue116Resolved_SetstaskAsTrue():
     print(f"\n{factheir_gregziet=}")
 
     # for reasonheir in agenda_plan.reasonheirs.values():
-    #     print(f"{reasonheir.reason_context=} {reasonheir.status=} {reasonheir.task=}")
+    #     print(f"{reasonheir.reason_context=} {reasonheir.reason_active=} {reasonheir.task=}")
     reasonheir_gregziet = evening_plan.reasonheirs.get(gregziet_rope)
-    reasonheir_str = f"\nreasonheir_gregziet= '{reasonheir_gregziet.reason_context}', status={reasonheir_gregziet.status}, task={reasonheir_gregziet.task}"
+    reasonheir_str = f"\nreasonheir_gregziet= '{reasonheir_gregziet.reason_context}', reason_active={reasonheir_gregziet.reason_active}, task={reasonheir_gregziet.task}"
     print(reasonheir_str)
 
     caseunit = reasonheir_gregziet.cases.get(gregziet_rope)

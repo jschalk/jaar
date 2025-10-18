@@ -541,9 +541,9 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrreas, jv, "parent_heir_active") == "INTEGER"
     assert g_popcashout(cfig, blrreas, jv, "parent_heir_active") == True
 
-    assert g_class_type(cfig, blrreas, jv, wx.status) == "int"
-    assert g_sqlitetype(cfig, blrreas, jv, wx.status) == "INTEGER"
-    assert g_popcashout(cfig, blrreas, jv, wx.status) == True
+    assert g_class_type(cfig, blrreas, jv, wx.reason_active) == "int"
+    assert g_sqlitetype(cfig, blrreas, jv, wx.reason_active) == "INTEGER"
+    assert g_popcashout(cfig, blrreas, jv, wx.reason_active) == True
 
     assert g_class_type(cfig, blrreas, jv, wx.task) == "int"
     assert g_sqlitetype(cfig, blrreas, jv, wx.task) == "INTEGER"
@@ -833,7 +833,7 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(wx.fact_state) == wx.RopeTerm
     assert belief_calc_args_type_dict.get(wx.healer_name) == wx.NameTerm
     assert belief_calc_args_type_dict.get(wx.reason_state) == wx.RopeTerm
-    assert belief_calc_args_type_dict.get(wx.status) == "int"
+    assert belief_calc_args_type_dict.get(wx.reason_active) == "int"
     assert belief_calc_args_type_dict.get(wx.task) == "int"
     assert belief_calc_args_type_dict.get(wx.reason_divisor) == "int"
     assert belief_calc_args_type_dict.get(wx.reason_upper) == "float"
