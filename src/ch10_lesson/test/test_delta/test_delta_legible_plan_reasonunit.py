@@ -5,18 +5,18 @@ from src.ch10_lesson.legible import create_legible_list
 from src.ref.keywords import Ch10Keywords as wx
 
 
-def test_create_legible_list_ReturnsObj_plan_reasonunit_INSERT_With_reason_active_requisite():
+def test_create_legible_list_ReturnsObj_plan_reasonunit_INSERT_With_active_requisite():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     dimen = wx.belief_plan_reasonunit
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     reason_context_value = f"{sue_belief.knot}Swimmers"
-    reason_active_requisite_value = True
+    active_requisite_value = True
     swim_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     swim_beliefatom.set_arg(wx.plan_rope, rope_value)
     swim_beliefatom.set_arg(wx.reason_context, reason_context_value)
-    swim_beliefatom.set_arg(wx.reason_active_requisite, reason_active_requisite_value)
+    swim_beliefatom.set_arg(wx.active_requisite, active_requisite_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)
@@ -25,12 +25,12 @@ def test_create_legible_list_ReturnsObj_plan_reasonunit_INSERT_With_reason_activ
     legible_list = create_legible_list(x_beliefdelta, sue_belief)
 
     # THEN
-    x_str = f"ReasonUnit created for plan '{rope_value}' with reason_context '{reason_context_value}'. reason_active_requisite={reason_active_requisite_value}."
+    x_str = f"ReasonUnit created for plan '{rope_value}' with reason_context '{reason_context_value}'. active_requisite={active_requisite_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_plan_reasonunit_INSERT_Without_reason_active_requisite():
+def test_create_legible_list_ReturnsObj_plan_reasonunit_INSERT_Without_active_requisite():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     dimen = wx.belief_plan_reasonunit
@@ -53,18 +53,18 @@ def test_create_legible_list_ReturnsObj_plan_reasonunit_INSERT_Without_reason_ac
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_plan_reasonunit_UPDATE_reason_active_requisite_IsTrue():
+def test_create_legible_list_ReturnsObj_plan_reasonunit_UPDATE_active_requisite_IsTrue():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     dimen = wx.belief_plan_reasonunit
     reason_context_value = f"{sue_belief.knot}Swimmers"
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
-    reason_active_requisite_value = True
+    active_requisite_value = True
     swim_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     swim_beliefatom.set_arg(wx.plan_rope, rope_value)
     swim_beliefatom.set_arg(wx.reason_context, reason_context_value)
-    swim_beliefatom.set_arg(wx.reason_active_requisite, reason_active_requisite_value)
+    swim_beliefatom.set_arg(wx.active_requisite, active_requisite_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)
@@ -73,12 +73,12 @@ def test_create_legible_list_ReturnsObj_plan_reasonunit_UPDATE_reason_active_req
     legible_list = create_legible_list(x_beliefdelta, sue_belief)
 
     # THEN
-    x_str = f"ReasonUnit reason_context='{reason_context_value}' for plan '{rope_value}' set with reason_active_requisite={reason_active_requisite_value}."
+    x_str = f"ReasonUnit reason_context='{reason_context_value}' for plan '{rope_value}' set with active_requisite={active_requisite_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_plan_reasonunit_UPDATE_reason_active_requisite_IsNone():
+def test_create_legible_list_ReturnsObj_plan_reasonunit_UPDATE_active_requisite_IsNone():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     dimen = wx.belief_plan_reasonunit

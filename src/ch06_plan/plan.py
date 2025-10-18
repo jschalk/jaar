@@ -89,7 +89,7 @@ class PlanAttrHolder:
     reason_divisor: int = None
     reason_del_case_reason_context: RopeTerm = None
     reason_del_case_reason_state: RopeTerm = None
-    reason_plan_active_requisite: str = None
+    plan_active_requisite: str = None
     laborunit: LaborUnit = None
     healerunit: HealerUnit = None
     begin: float = None
@@ -133,7 +133,7 @@ def planattrholder_shop(
     reason_divisor: int = None,
     reason_del_case_reason_context: RopeTerm = None,
     reason_del_case_reason_state: RopeTerm = None,
-    reason_plan_active_requisite: str = None,
+    plan_active_requisite: str = None,
     laborunit: LaborUnit = None,
     healerunit: HealerUnit = None,
     begin: float = None,
@@ -162,7 +162,7 @@ def planattrholder_shop(
         reason_divisor=reason_divisor,
         reason_del_case_reason_context=reason_del_case_reason_context,
         reason_del_case_reason_state=reason_del_case_reason_state,
-        reason_plan_active_requisite=reason_plan_active_requisite,
+        plan_active_requisite=plan_active_requisite,
         laborunit=laborunit,
         healerunit=healerunit,
         begin=begin,
@@ -592,11 +592,11 @@ class PlanUnit:
             )
         if (
             plan_attr.reason_context is not None
-            and plan_attr.reason_plan_active_requisite is not None
+            and plan_attr.plan_active_requisite is not None
         ):
-            self.set_reason_plan_active_requisite(
+            self.set_plan_active_requisite(
                 reason_context=plan_attr.reason_context,
-                reason_active_requisite=plan_attr.reason_plan_active_requisite,
+                active_requisite=plan_attr.plan_active_requisite,
             )
         if plan_attr.laborunit is not None:
             self.laborunit = plan_attr.laborunit
@@ -686,16 +686,16 @@ class PlanUnit:
             if len(self.reasonunits[reason_context].cases) == 0:
                 self.del_reasonunit_reason_context(reason_context=reason_context)
 
-    def set_reason_plan_active_requisite(
-        self, reason_context: RopeTerm, reason_active_requisite: str
+    def set_plan_active_requisite(
+        self, reason_context: RopeTerm, active_requisite: str
     ):
         x_reasonunit = self._get_or_create_reasonunit(reason_context=reason_context)
-        if reason_active_requisite is False:
-            x_reasonunit.reason_active_requisite = False
-        elif reason_active_requisite == "Set to Ignore":
-            x_reasonunit.reason_active_requisite = None
-        elif reason_active_requisite:
-            x_reasonunit.reason_active_requisite = True
+        if active_requisite is False:
+            x_reasonunit.active_requisite = False
+        elif active_requisite == "Set to Ignore":
+            x_reasonunit.active_requisite = None
+        elif active_requisite:
+            x_reasonunit.active_requisite = True
 
     def _get_or_create_reasonunit(self, reason_context: RopeTerm) -> ReasonUnit:
         x_reasonunit = None
@@ -874,7 +874,7 @@ class PlanUnit:
         self.reasonheirs = {}
         for old_reasonheir in coalesced_reasons.values():
             old_reason_context = old_reasonheir.reason_context
-            old_active_requisite = old_reasonheir.reason_active_requisite
+            old_active_requisite = old_reasonheir.active_requisite
             new_reasonheir = reasonheir_shop(
                 old_reason_context, None, old_active_requisite
             )

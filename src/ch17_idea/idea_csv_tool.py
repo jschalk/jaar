@@ -394,7 +394,7 @@ def add_belief_to_br00027_csv(
                 x_belief.belief_name,
                 planunit.get_plan_rope(),
                 reasonunit.reason_context,
-                if_none_str(reasonunit.reason_active_requisite),
+                if_none_str(reasonunit.active_requisite),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -644,7 +644,7 @@ def add_lesson_to_br00027_csv(
                 x_lessonunit.belief_name,
                 beliefatom.jkeys.get("plan_rope"),
                 beliefatom.jkeys.get("reason_context"),
-                if_none_str(beliefatom.jvalues.get("reason_active_requisite")),
+                if_none_str(beliefatom.jvalues.get("active_requisite")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

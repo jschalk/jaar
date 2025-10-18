@@ -246,7 +246,7 @@
   "range_evaluated"                : { "init_chapter": "ch06" }, 
   "rational"                       : { "init_chapter": "ch04" }, 
   "readable"                       : { "init_chapter": "ch08" }, 
-  "reason_active_requisite"        : { "init_chapter": "ch05" }, 
+  "active_requisite"        : { "init_chapter": "ch05" }, 
   "reason_context"                 : { "init_chapter": "ch05" }, 
   "reason_contexts"                : { "init_chapter": "ch07" }, 
   "reason_divisor"                 : { "init_chapter": "ch05" }, 

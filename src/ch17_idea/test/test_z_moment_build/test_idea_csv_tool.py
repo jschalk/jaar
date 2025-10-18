@@ -70,7 +70,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyMomentUnit(
         "br00024": "moment_label,belief_name,plan_rope,party_title,solo\n",
         "br00025": "moment_label,belief_name,plan_rope,healer_name\n",
         "br00026": "moment_label,belief_name,plan_rope,reason_context,reason_state,reason_upper,reason_lower,reason_divisor\n",
-        "br00027": "moment_label,belief_name,plan_rope,reason_context,reason_active_requisite\n",
+        "br00027": "moment_label,belief_name,plan_rope,reason_context,active_requisite\n",
         "br00028": "moment_label,belief_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,star,pledge,problem_bool\n",
         "br00029": "moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_grain,money_grain,respect_grain\n",
         "br00042": "otx_title,inx_title,otx_knot,inx_knot,unknown_str\n",
@@ -472,7 +472,7 @@ def test_add_belief_to_br00027_csv_ReturnsObj():
     bob_belief.edit_plan_attr(
         mop_rope,
         reason_context=casa_rope,
-        reason_plan_active_requisite=True,
+        plan_active_requisite=True,
     )
     csv_header = x_ideas.get("br00027")
     print(f"{csv_header=}")
@@ -865,7 +865,7 @@ def test_add_lesson_to_br00027_csv_ReturnsObj():
     bob_belief.edit_plan_attr(
         mop_rope,
         reason_context=casa_rope,
-        reason_plan_active_requisite=True,
+        plan_active_requisite=True,
     )
     bob_beliefdelta = beliefdelta_shop()
     bob_beliefdelta.add_all_beliefatoms(bob_belief)

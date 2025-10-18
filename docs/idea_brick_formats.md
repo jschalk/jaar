@@ -18,7 +18,7 @@
 - [`br00024`](ideas/br00024.md): spark_num, face_name, moment_label, belief_name, plan_rope, party_title, solo
 - [`br00025`](ideas/br00025.md): spark_num, face_name, moment_label, belief_name, plan_rope, healer_name
 - [`br00026`](ideas/br00026.md): spark_num, face_name, moment_label, belief_name, plan_rope, reason_context, reason_state, reason_upper, reason_lower, reason_divisor
-- [`br00027`](ideas/br00027.md): spark_num, face_name, moment_label, belief_name, plan_rope, reason_context, reason_active_requisite
+- [`br00027`](ideas/br00027.md): spark_num, face_name, moment_label, belief_name, plan_rope, reason_context, active_requisite
 - [`br00028`](ideas/br00028.md): spark_num, face_name, moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, pledge, problem_bool
 - [`br00029`](ideas/br00029.md): spark_num, face_name, moment_label, belief_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_grain, money_grain, respect_grain
 - [`br00036`](ideas/br00036.md): spark_num, face_name, moment_label, belief_name, plan_rope, healer_name, problem_bool

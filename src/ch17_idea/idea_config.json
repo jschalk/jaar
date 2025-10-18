@@ -82,7 +82,7 @@
       "reason_context": {}, 
       "spark_num": {}
     }, 
-    "jvalues": {"reason_active_requisite": {}}
+    "jvalues": {"active_requisite": {}}
   }, 
   "belief_planunit": {
     "allowed_crud": "delete_insert_update", 

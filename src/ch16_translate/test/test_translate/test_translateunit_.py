@@ -45,7 +45,7 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert translate_args_class_types.get(wx.amount) == "float"
     assert translate_args_class_types.get(wx.awardee_title) == wx.TitleTerm
     assert translate_args_class_types.get(wx.reason_context) == wx.RopeTerm
-    assert translate_args_class_types.get(wx.reason_active_requisite) == "bool"
+    assert translate_args_class_types.get(wx.active_requisite) == "bool"
     assert translate_args_class_types.get(wx.begin) == "float"
     assert translate_args_class_types.get(wx.c400_number) == "int"
     assert translate_args_class_types.get(wx.close) == "float"

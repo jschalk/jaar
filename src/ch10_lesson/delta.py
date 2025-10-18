@@ -572,10 +572,10 @@ class BeliefDelta:
             x_beliefatom = beliefatom_shop("belief_plan_reasonunit", "INSERT")
             x_beliefatom.set_jkey("plan_rope", after_planunit.get_plan_rope())
             x_beliefatom.set_jkey("reason_context", after_reasonunit.reason_context)
-            if after_reasonunit.reason_active_requisite is not None:
+            if after_reasonunit.active_requisite is not None:
                 x_beliefatom.set_jvalue(
-                    "reason_active_requisite",
-                    after_reasonunit.reason_active_requisite,
+                    "active_requisite",
+                    after_reasonunit.active_requisite,
                 )
             self.set_beliefatom(x_beliefatom)
 
@@ -605,12 +605,12 @@ class BeliefDelta:
                 x_beliefatom.set_jkey("plan_rope", before_planunit.get_plan_rope())
                 x_beliefatom.set_jkey("reason_context", after_reasonunit.reason_context)
                 if (
-                    before_reasonunit.reason_active_requisite
-                    != after_reasonunit.reason_active_requisite
+                    before_reasonunit.active_requisite
+                    != after_reasonunit.active_requisite
                 ):
                     x_beliefatom.set_jvalue(
-                        "reason_active_requisite",
-                        after_reasonunit.reason_active_requisite,
+                        "active_requisite",
+                        after_reasonunit.active_requisite,
                     )
                 self.set_beliefatom(x_beliefatom)
 

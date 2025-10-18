@@ -53,7 +53,7 @@ def test_caseunit_shop_ReturnsObj():
     assert email_case.reason_state == email_rope
 
 
-def test_CaseUnit_clear_case_status_SetAttrs():
+def test_CaseUnit_clear_case_active_SetAttrs():
     # WHEN
     casa_str = "casa"
     casa_rope = create_rope("Amy23", casa_str)
@@ -66,7 +66,7 @@ def test_CaseUnit_clear_case_status_SetAttrs():
     assert casaunit.case_active
 
     # WHEN
-    casaunit.clear_case_status()
+    casaunit.clear_case_active()
 
     # THEN
     assert casaunit.case_active is None
@@ -190,7 +190,7 @@ def test_CaseUnit_is_in_lineage_ReturnsObj_WithNonDefault_knot():
     assert sea_case.is_in_lineage(seaside_fact.fact_state) is False
 
 
-def test_CaseUnit_get_range_segregate_status_ReturnsObj_Scenario0_When_is_range_IsTrue():
+def test_CaseUnit_get_range_segregate_case_active_ReturnsObj_Scenario0_When_is_range_IsTrue():
     # ESTABLISH
     yr_str = "ced_yr"
     yr_rope = create_rope("Amy23", yr_str)
@@ -198,44 +198,44 @@ def test_CaseUnit_get_range_segregate_status_ReturnsObj_Scenario0_When_is_range_
 
     # WHEN / THEN
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=5, fact_upper=11)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact)
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact)
 
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=1, fact_upper=11)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact)
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact)
 
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=8, fact_upper=17)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact)
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact)
 
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=0, fact_upper=2)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact) is False
 
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=15, fact_upper=19)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact) is False
 
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=1, fact_upper=19)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact)
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact)
 
     # boundary tests
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=13, fact_upper=19)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact) is False
 
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=0, fact_upper=3)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact)
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact)
 
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=0, fact_upper=0)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact) is False
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=3, fact_upper=3)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact)
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact)
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=13, fact_upper=13)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact) is False
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=17, fact_upper=17)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact) is False
 
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=20, fact_upper=17)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact) is False
 
 
-def test_CaseUnit_get_range_segregate_status_ReturnsObj_Scenario1_When_is_segregate_IsTrue():
+def test_CaseUnit_get_range_segregate_case_active_ReturnsObj_Scenario1_When_is_segregate_IsTrue():
     # ESTABLISH
     yr_str = "ced_yr"
     yr_rope = create_rope("Amy23", yr_str)
@@ -243,16 +243,16 @@ def test_CaseUnit_get_range_segregate_status_ReturnsObj_Scenario1_When_is_segreg
 
     # WHEN / THEN
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=5, fact_upper=5)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact)
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact)
 
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=6, fact_upper=6)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact) is False
 
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=4, fact_upper=6)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact)
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact)
 
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=3, fact_upper=4)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact) is False
 
     # ESTABLISH
     yr_case = caseunit_shop(
@@ -261,13 +261,13 @@ def test_CaseUnit_get_range_segregate_status_ReturnsObj_Scenario1_When_is_segreg
 
     # WHEN / THEN
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=2, fact_upper=2)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact) is False
 
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=102, fact_upper=102)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact) is False
 
     yr_fact = factheir_shop(yr_rope, yr_rope, fact_lower=1, fact_upper=4)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact)
+    assert yr_case._get_range_segregate_case_active(factheir=yr_fact)
 
 
 def test_CaseUnit_is_range_or_segregate_ReturnsObj():

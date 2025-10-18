@@ -220,7 +220,7 @@
     }, 
     "jvalues": {
       "_reason_active_heir": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
-      "reason_active_requisite": {
+      "active_requisite": {
         "class_type": "bool", 
         "populate_by_cashout": false, 
         "sqlite_datatype": "INTEGER"

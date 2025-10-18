@@ -21,19 +21,19 @@ def test_ReasonCore_Exists():
     cases = {wed_case.reason_state: wed_case}
 
     # WHEN
-    wk_reason = ReasonCore(wk_rope, cases=cases, reason_active_requisite=False)
+    wk_reason = ReasonCore(wk_rope, cases=cases, active_requisite=False)
 
     # THEN
     assert wk_reason.reason_context == wk_rope
     assert wk_reason.cases == cases
-    assert wk_reason.reason_active_requisite is False
+    assert wk_reason.active_requisite is False
     assert wk_reason.knot is None
     obj_attrs = set(wk_reason.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
         wx.knot,
         wx.cases,
-        wx.reason_active_requisite,
+        wx.active_requisite,
         wx.reason_context,
     }
 
@@ -172,7 +172,7 @@ def test_ReasonHeir_set_status_BeliefTrueSetsStatusTrue():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
-    wk_reason = reasonheir_shop(reason_context=wk_rope, reason_active_requisite=True)
+    wk_reason = reasonheir_shop(reason_context=wk_rope, active_requisite=True)
     wk_reason.set_reason_active_heir(bool_x=True)
     assert wk_reason.status is None
 
@@ -187,7 +187,7 @@ def test_ReasonHeir_set_status_BeliefFalseSetsStatusTrue():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
-    wk_reason = reasonheir_shop(wk_rope, reason_active_requisite=False)
+    wk_reason = reasonheir_shop(wk_rope, active_requisite=False)
     wk_reason.set_reason_active_heir(bool_x=False)
     assert wk_reason.status is None
 
@@ -202,7 +202,7 @@ def test_ReasonHeir_set_status_BeliefTrueSetsStatusFalse():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
-    wk_reason = reasonheir_shop(wk_rope, reason_active_requisite=True)
+    wk_reason = reasonheir_shop(wk_rope, active_requisite=True)
     wk_reason.set_reason_active_heir(bool_x=False)
     assert wk_reason.status is None
 
@@ -217,7 +217,7 @@ def test_ReasonHeir_set_status_BeliefNoneSetsStatusFalse():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
-    wk_reason = reasonheir_shop(wk_rope, reason_active_requisite=True)
+    wk_reason = reasonheir_shop(wk_rope, active_requisite=True)
     wk_reason.set_reason_active_heir(bool_x=None)
     assert wk_reason.status is None
 
@@ -264,14 +264,14 @@ def test_ReasonUnit_to_dict_ReturnsDictWithSinglethu_caseequireds():
     assert wk_reason_dict == static_wk_reason_dict
 
 
-def test_ReasonUnit_to_dict_ReturnsDictWith_reason_active_requisite():
+def test_ReasonUnit_to_dict_ReturnsDictWith_active_requisite():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
-    wk_reason_active_requisite = True
+    wk_active_requisite = True
     wk_reason = reasonunit_shop(
         wk_rope,
-        reason_active_requisite=wk_reason_active_requisite,
+        active_requisite=wk_active_requisite,
     )
 
     # WHEN
@@ -281,7 +281,7 @@ def test_ReasonUnit_to_dict_ReturnsDictWith_reason_active_requisite():
     assert wk_reason_dict is not None
     static_wk_reason_dict = {
         "reason_context": wk_rope,
-        "reason_active_requisite": wk_reason_active_requisite,
+        "active_requisite": wk_active_requisite,
     }
     print(wk_reason_dict)
     assert wk_reason_dict == static_wk_reason_dict
@@ -320,17 +320,17 @@ def test_get_reasonunits_from_dict_ReturnsObj():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
-    wk_reason_active_requisite = False
+    wk_active_requisite = False
     wk_reasonunit = reasonunit_shop(
         wk_rope,
-        reason_active_requisite=wk_reason_active_requisite,
+        active_requisite=wk_active_requisite,
     )
     x_wk_reasonunits_dict = {wk_reasonunit.reason_context: wk_reasonunit.to_dict()}
     assert x_wk_reasonunits_dict is not None
     static_wk_reason_dict = {
         wk_rope: {
             "reason_context": wk_rope,
-            "reason_active_requisite": wk_reason_active_requisite,
+            "active_requisite": wk_active_requisite,
         }
     }
     assert x_wk_reasonunits_dict == static_wk_reason_dict

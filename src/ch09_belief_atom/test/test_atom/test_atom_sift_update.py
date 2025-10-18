@@ -207,15 +207,15 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reasonunit():
     sue_belief.add_plan(casa_rope)
     sue_belief.get_plan_obj(casa_rope).set_reasonunit(reasonunit_shop(week_rope))
 
-    new_reason_active_requisite = True
+    new_active_requisite = True
     casa_atom = beliefatom_shop(wx.belief_plan_reasonunit, wx.INSERT)
     casa_atom.set_arg(wx.plan_rope, casa_rope)
     casa_atom.set_arg(wx.reason_context, week_rope)
-    casa_atom.set_arg(wx.reason_active_requisite, new_reason_active_requisite)
+    casa_atom.set_arg(wx.active_requisite, new_active_requisite)
     casa_jkeys = casa_atom.get_jkeys_dict()
     casa_reasonunit = belief_plan_reasonunit_get_obj(sue_belief, casa_jkeys)
-    assert casa_reasonunit.reason_active_requisite != new_reason_active_requisite
-    assert casa_reasonunit.reason_active_requisite is None
+    assert casa_reasonunit.active_requisite != new_active_requisite
+    assert casa_reasonunit.active_requisite is None
 
     # WHEN
     new_zia_beliefatom = sift_beliefatom(sue_belief, casa_atom)
@@ -225,8 +225,8 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reasonunit():
     assert new_zia_beliefatom.crud_str == wx.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
-    zia_requisite_value = zia_jvalues.get(wx.reason_active_requisite)
-    assert zia_requisite_value == new_reason_active_requisite
+    zia_requisite_value = zia_jvalues.get(wx.active_requisite)
+    assert zia_requisite_value == new_active_requisite
 
 
 def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reason_caseunit():

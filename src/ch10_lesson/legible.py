@@ -436,12 +436,10 @@ def add_belief_plan_reasonunit_insert_to_legible_list(
         for plan_reasonunit_atom in rope_dict.values():
             rope_value = plan_reasonunit_atom.get_value("plan_rope")
             reason_context_value = plan_reasonunit_atom.get_value("reason_context")
-            reason_active_requisite_value = plan_reasonunit_atom.get_value(
-                "reason_active_requisite"
-            )
+            active_requisite_value = plan_reasonunit_atom.get_value("active_requisite")
             x_str = f"ReasonUnit created for plan '{rope_value}' with reason_context '{reason_context_value}'."
-            if reason_active_requisite_value is not None:
-                x_str += f" reason_active_requisite={reason_active_requisite_value}."
+            if active_requisite_value is not None:
+                x_str += f" active_requisite={active_requisite_value}."
             legible_list.append(x_str)
 
 
@@ -452,11 +450,9 @@ def add_belief_plan_reasonunit_update_to_legible_list(
         for plan_reasonunit_atom in rope_dict.values():
             rope_value = plan_reasonunit_atom.get_value("plan_rope")
             reason_context_value = plan_reasonunit_atom.get_value("reason_context")
-            reason_active_requisite_value = plan_reasonunit_atom.get_value(
-                "reason_active_requisite"
-            )
-            if reason_active_requisite_value is not None:
-                x_str = f"ReasonUnit reason_context='{reason_context_value}' for plan '{rope_value}' set with reason_active_requisite={reason_active_requisite_value}."
+            active_requisite_value = plan_reasonunit_atom.get_value("active_requisite")
+            if active_requisite_value is not None:
+                x_str = f"ReasonUnit reason_context='{reason_context_value}' for plan '{rope_value}' set with active_requisite={active_requisite_value}."
             else:
                 x_str = f"ReasonUnit reason_context='{reason_context_value}' for plan '{rope_value}' and no longer checks reason_context active mode."
             legible_list.append(x_str)

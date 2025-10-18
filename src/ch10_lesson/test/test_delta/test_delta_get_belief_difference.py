@@ -967,11 +967,11 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     before_sue_belief.set_plan(planunit_shop(medical_str), knee_rope)
 
     after_sue_belief = copy_deepcopy(before_sue_belief)
-    after_medical_reason_active_requisite = False
+    after_medical_active_requisite = False
     after_sue_belief.edit_plan_attr(
         ball_rope,
         reason_context=medical_rope,
-        reason_plan_active_requisite=after_medical_reason_active_requisite,
+        plan_active_requisite=after_medical_active_requisite,
     )
 
     # WHEN
@@ -991,8 +991,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
     assert ball_beliefatom.get_value("reason_context") == medical_rope
     assert (
-        ball_beliefatom.get_value(wx.reason_active_requisite)
-        == after_medical_reason_active_requisite
+        ball_beliefatom.get_value(wx.active_requisite) == after_medical_active_requisite
     )
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
@@ -1012,19 +1011,19 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     medical_rope = before_sue_belief.make_rope(knee_rope, medical_str)
     before_sue_belief.set_l1_plan(planunit_shop(knee_str))
     before_sue_belief.set_plan(planunit_shop(medical_str), knee_rope)
-    before_medical_reason_active_requisite = True
+    before_medical_active_requisite = True
     before_sue_belief.edit_plan_attr(
         ball_rope,
         reason_context=medical_rope,
-        reason_plan_active_requisite=before_medical_reason_active_requisite,
+        plan_active_requisite=before_medical_active_requisite,
     )
 
     after_sue_belief = copy_deepcopy(before_sue_belief)
-    after_medical_reason_active_requisite = False
+    after_medical_active_requisite = False
     after_sue_belief.edit_plan_attr(
         ball_rope,
         reason_context=medical_rope,
-        reason_plan_active_requisite=after_medical_reason_active_requisite,
+        plan_active_requisite=after_medical_active_requisite,
     )
 
     # WHEN
@@ -1043,8 +1042,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
     assert ball_beliefatom.get_value("reason_context") == medical_rope
     assert (
-        ball_beliefatom.get_value(wx.reason_active_requisite)
-        == after_medical_reason_active_requisite
+        ball_beliefatom.get_value(wx.active_requisite) == after_medical_active_requisite
     )
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
@@ -1064,11 +1062,11 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     medical_rope = before_sue_belief.make_rope(knee_rope, medical_str)
     before_sue_belief.set_l1_plan(planunit_shop(knee_str))
     before_sue_belief.set_plan(planunit_shop(medical_str), knee_rope)
-    before_medical_reason_active_requisite = True
+    before_medical_active_requisite = True
     before_sue_belief.edit_plan_attr(
         ball_rope,
         reason_context=medical_rope,
-        reason_plan_active_requisite=before_medical_reason_active_requisite,
+        plan_active_requisite=before_medical_active_requisite,
     )
 
     after_sue_belief = copy_deepcopy(before_sue_belief)

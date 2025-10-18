@@ -549,9 +549,9 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrreas, jv, wx.task) == "INTEGER"
     assert g_popcashout(cfig, blrreas, jv, wx.task) == True
 
-    assert g_class_type(cfig, blrreas, jv, wx.reason_active_requisite) == "bool"
-    assert g_sqlitetype(cfig, blrreas, jv, wx.reason_active_requisite) == "INTEGER"
-    assert g_popcashout(cfig, blrreas, jv, wx.reason_active_requisite) == False
+    assert g_class_type(cfig, blrreas, jv, wx.active_requisite) == "bool"
+    assert g_sqlitetype(cfig, blrreas, jv, wx.active_requisite) == "INTEGER"
+    assert g_popcashout(cfig, blrreas, jv, wx.active_requisite) == False
 
     assert g_class_type(cfig, blrlabo, jk, wx.plan_rope) == wx.RopeTerm
     assert g_sqlitetype(cfig, blrlabo, jk, wx.plan_rope) == "TEXT"
@@ -839,7 +839,7 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(wx.reason_upper) == "float"
     assert belief_calc_args_type_dict.get(wx.reason_lower) == "float"
     assert belief_calc_args_type_dict.get("_reason_active_heir") == "int"
-    assert belief_calc_args_type_dict.get(wx.reason_active_requisite) == "bool"
+    assert belief_calc_args_type_dict.get(wx.active_requisite) == "bool"
     assert belief_calc_args_type_dict.get(wx.party_title) == wx.TitleTerm
     assert belief_calc_args_type_dict.get("_belief_name_is_labor") == "int"
     assert belief_calc_args_type_dict.get(wx.active) == "int"

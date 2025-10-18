@@ -110,8 +110,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromRoot():
     assert rla_wk_reasonheir.reason_context == casa_wk_built_reasonheir.reason_context
     assert rla_wk_reasonheir.cases == casa_wk_built_reasonheir.cases
     assert (
-        rla_wk_reasonheir.reason_active_requisite
-        == casa_wk_built_reasonheir.reason_active_requisite
+        rla_wk_reasonheir.active_requisite == casa_wk_built_reasonheir.active_requisite
     )
     assert rla_wk_reasonheir.status == casa_wk_built_reasonheir.status
     assert rla_wk_reasonheir.task == casa_wk_built_reasonheir.task
@@ -123,8 +122,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromRoot():
     assert cost_wk_reasonheir.reason_context == casa_wk_built_reasonheir.reason_context
     assert cost_wk_reasonheir.cases == casa_wk_built_reasonheir.cases
     assert (
-        cost_wk_reasonheir.reason_active_requisite
-        == casa_wk_built_reasonheir.reason_active_requisite
+        cost_wk_reasonheir.active_requisite == casa_wk_built_reasonheir.active_requisite
     )
     assert cost_wk_reasonheir.status == casa_wk_built_reasonheir.status
     assert cost_wk_reasonheir.task == casa_wk_built_reasonheir.task
@@ -185,8 +183,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromLevel2():
     assert rla_wk_reasonheir.reason_context == casa_wk_built_reasonheir.reason_context
     assert rla_wk_reasonheir.cases == casa_wk_built_reasonheir.cases
     assert (
-        rla_wk_reasonheir.reason_active_requisite
-        == casa_wk_built_reasonheir.reason_active_requisite
+        rla_wk_reasonheir.active_requisite == casa_wk_built_reasonheir.active_requisite
     )
     assert rla_wk_reasonheir.status == casa_wk_built_reasonheir.status
     assert rla_wk_reasonheir.task == casa_wk_built_reasonheir.task
@@ -198,8 +195,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromLevel2():
     assert cost_wk_reasonheir.reason_context == casa_wk_built_reasonheir.reason_context
     assert cost_wk_reasonheir.cases == casa_wk_built_reasonheir.cases
     assert (
-        cost_wk_reasonheir.reason_active_requisite
-        == casa_wk_built_reasonheir.reason_active_requisite
+        cost_wk_reasonheir.active_requisite == casa_wk_built_reasonheir.active_requisite
     )
     assert cost_wk_reasonheir.status == casa_wk_built_reasonheir.status
     assert cost_wk_reasonheir.task == casa_wk_built_reasonheir.task
@@ -403,8 +399,8 @@ def test_BeliefUnit_ReasonUnits_del_reason_case_UncoupledMethod2():
     assert str(excinfo.value) == f"No ReasonUnit at '{sem_jours_rope}'"
 
 
-def test_BeliefUnit_edit_plan_attr_beliefIsAbleToEdit_reason_active_requisite_AnyPlanIfInvaildThrowsError():
-    # _reason_active_requisite: str = None
+def test_BeliefUnit_edit_plan_attr_beliefIsAbleToEdit_active_requisite_AnyPlanIfInvaildThrowsError():
+    # _active_requisite: str = None
     # must be 1 of 3: bool: True, bool: False, str="Set to Ignore"
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
@@ -422,7 +418,7 @@ def test_BeliefUnit_edit_plan_attr_beliefIsAbleToEdit_reason_active_requisite_An
     sue_belief.edit_plan_attr(
         run_rope,
         reason_context=casa_rope,
-        reason_plan_active_requisite=True,
+        plan_active_requisite=True,
     )
 
     # THEN
@@ -430,13 +426,13 @@ def test_BeliefUnit_edit_plan_attr_beliefIsAbleToEdit_reason_active_requisite_An
     reasonunit_casa = run_plan.reasonunits.get(casa_rope)
     assert reasonunit_casa.reason_context == casa_rope
     assert len(reasonunit_casa.cases) == 0
-    assert reasonunit_casa.reason_active_requisite is True
+    assert reasonunit_casa.active_requisite is True
 
     # WHEN
     sue_belief.edit_plan_attr(
         run_rope,
         reason_context=casa_rope,
-        reason_plan_active_requisite=False,
+        plan_active_requisite=False,
     )
 
     # THEN
@@ -444,13 +440,13 @@ def test_BeliefUnit_edit_plan_attr_beliefIsAbleToEdit_reason_active_requisite_An
     reasonunit_casa = run_plan.reasonunits.get(casa_rope)
     assert reasonunit_casa.reason_context == casa_rope
     assert len(reasonunit_casa.cases) == 0
-    assert reasonunit_casa.reason_active_requisite is False
+    assert reasonunit_casa.active_requisite is False
 
     # WHEN
     sue_belief.edit_plan_attr(
         run_rope,
         reason_context=casa_rope,
-        reason_plan_active_requisite="Set to Ignore",
+        plan_active_requisite="Set to Ignore",
     )
 
     # THEN
@@ -458,7 +454,7 @@ def test_BeliefUnit_edit_plan_attr_beliefIsAbleToEdit_reason_active_requisite_An
     reasonunit_casa = run_plan.reasonunits.get(casa_rope)
     assert reasonunit_casa.reason_context == casa_rope
     assert len(reasonunit_casa.cases) == 0
-    assert reasonunit_casa.reason_active_requisite is None
+    assert reasonunit_casa.active_requisite is None
 
 
 def test_BeliefUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnitStatus():
@@ -490,7 +486,7 @@ def test_BeliefUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnitStatus():
     assert casa_plan.active is False
 
     # 5. plan(...,run to casa) with
-    # 5.1. ReasonUnit: plan(reason_context=...,casa) has .reason_active_requisite = True
+    # 5.1. ReasonUnit: plan(reason_context=...,casa) has .active_requisite = True
     # 5.2. plan(...,casa).active = False
     run_str = "run to casa"
     run_rope = sue_belief.make_l1_rope(run_str)
@@ -498,7 +494,7 @@ def test_BeliefUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnitStatus():
     sue_belief.edit_plan_attr(
         run_rope,
         reason_context=casa_rope,
-        reason_plan_active_requisite=True,
+        plan_active_requisite=True,
     )
     run_plan = sue_belief.get_plan_obj(run_rope)
     sue_belief.cashout()

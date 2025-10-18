@@ -315,7 +315,7 @@ def get_beliefunit_irrational_example() -> BeliefUnit:
         egg_rope,
         pledge=True,
         reason_context=chicken_rope,
-        reason_plan_active_requisite=True,
+        plan_active_requisite=True,
     )
 
     # set chick pledge is True when egg first is False
@@ -323,7 +323,7 @@ def get_beliefunit_irrational_example() -> BeliefUnit:
         chicken_rope,
         pledge=True,
         reason_context=egg_rope,
-        reason_plan_active_requisite=False,
+        plan_active_requisite=False,
     )
 
     return hatter_belief

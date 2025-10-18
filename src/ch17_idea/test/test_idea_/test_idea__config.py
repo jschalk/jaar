@@ -180,7 +180,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[101] == wx.morph
     assert table_sorting_priority[102] == wx.gogo_want
     assert table_sorting_priority[103] == wx.stop_want
-    assert table_sorting_priority[104] == wx.reason_active_requisite
+    assert table_sorting_priority[104] == wx.active_requisite
     assert table_sorting_priority[105] == wx.voice_cred_lumen
     assert table_sorting_priority[106] == wx.voice_debt_lumen
     assert table_sorting_priority[107] == wx.group_cred_lumen
@@ -322,7 +322,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(wx.morph) == "INTEGER"
     assert sqlite_types.get(wx.gogo_want) == "REAL"
     assert sqlite_types.get(wx.stop_want) == "REAL"
-    assert sqlite_types.get(wx.reason_active_requisite) == "INTEGER"
+    assert sqlite_types.get(wx.active_requisite) == "INTEGER"
     assert sqlite_types.get(wx.voice_cred_lumen) == "REAL"
     assert sqlite_types.get(wx.voice_debt_lumen) == "REAL"
     assert sqlite_types.get(wx.group_cred_lumen) == "REAL"

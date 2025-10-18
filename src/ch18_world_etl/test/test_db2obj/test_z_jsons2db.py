@@ -289,13 +289,13 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
     x_belief_name = 2
     x_rope = 3
     x_reason_context = 4
-    x_reason_active_requisite = 5
+    x_active_requisite = 5
     x_task = 6
     x_status = 7
     x__reason_active_heir = 8
     x_reasonheir = reasonheir_shop(reason_context=x_reason_context)
     x_reasonheir.reason_context = x_reason_context
-    x_reasonheir.reason_active_requisite = x_reason_active_requisite
+    x_reasonheir.active_requisite = x_active_requisite
     x_reasonheir.task = x_task
     x_reasonheir.status = x_status
     x_reasonheir._reason_active_heir = x__reason_active_heir
@@ -320,7 +320,7 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
             str(x_belief_name),
             str(x_rope),
             str(x_reason_context),
-            x_reason_active_requisite,
+            x_active_requisite,
             x_task,
             x_status,
             x__reason_active_heir,

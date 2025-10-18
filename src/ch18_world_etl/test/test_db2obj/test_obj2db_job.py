@@ -196,7 +196,7 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
     x_belief_name = "Sue"
     x_rope = 1
     x_reason_context = 2
-    x_reason_active_requisite = 3
+    x_active_requisite = 3
     x_task = 4
     x_status = 5
     x__reason_active_heir = 6
@@ -205,7 +205,7 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
         wx.belief_name: x_belief_name,
         "plan_rope": x_rope,
         wx.reason_context: x_reason_context,
-        wx.reason_active_requisite: x_reason_active_requisite,
+        wx.active_requisite: x_active_requisite,
         "task": x_task,
         "status": x_status,
         "_reason_active_heir": x__reason_active_heir,

@@ -840,13 +840,13 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_reasonu
     assert before_ball_plan.get_reasonunit(knee_rope) is None
 
     # WHEN
-    medical_reason_active_requisite = True
+    medical_active_requisite = True
     update_disc_beliefatom = beliefatom_shop(wx.belief_plan_reasonunit, wx.INSERT)
     update_disc_beliefatom.set_jkey(wx.plan_rope, ball_rope)
     update_disc_beliefatom.set_jkey("reason_context", knee_rope)
     update_disc_beliefatom.set_jvalue(
-        wx.reason_active_requisite,
-        medical_reason_active_requisite,
+        wx.active_requisite,
+        medical_active_requisite,
     )
     # print(f"{update_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
@@ -858,9 +858,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_reasonu
     after_knee_reasonunit = after_ball_plan.get_reasonunit(knee_rope)
     assert after_knee_reasonunit is not None
     assert after_knee_reasonunit.get_case(medical_rope) is None
-    assert (
-        after_knee_reasonunit.reason_active_requisite == medical_reason_active_requisite
-    )
+    assert after_knee_reasonunit.active_requisite == medical_active_requisite
 
 
 def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_reasonunit():
@@ -877,30 +875,27 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_reasonu
     knee_rope = before_sue_au.make_l1_rope(knee_str)
     medical_str = "get medical attention"
     medical_rope = before_sue_au.make_rope(knee_rope, medical_str)
-    before_medical_reason_active_requisite = False
+    before_medical_active_requisite = False
     before_sue_au.set_l1_plan(planunit_shop(knee_str))
     before_sue_au.set_plan(planunit_shop(medical_str), knee_rope)
     before_sue_au.edit_plan_attr(
         ball_rope,
         reason_context=knee_rope,
-        reason_plan_active_requisite=before_medical_reason_active_requisite,
+        plan_active_requisite=before_medical_active_requisite,
     )
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
     before_ball_reasonunit = before_ball_plan.get_reasonunit(knee_rope)
     assert before_ball_reasonunit is not None
-    assert (
-        before_ball_reasonunit.reason_active_requisite
-        == before_medical_reason_active_requisite
-    )
+    assert before_ball_reasonunit.active_requisite == before_medical_active_requisite
 
     # WHEN
-    after_medical_reason_active_requisite = True
+    after_medical_active_requisite = True
     update_disc_beliefatom = beliefatom_shop(wx.belief_plan_reasonunit, wx.UPDATE)
     update_disc_beliefatom.set_jkey(wx.plan_rope, ball_rope)
     update_disc_beliefatom.set_jkey("reason_context", knee_rope)
     update_disc_beliefatom.set_jvalue(
-        wx.reason_active_requisite,
-        after_medical_reason_active_requisite,
+        wx.active_requisite,
+        after_medical_active_requisite,
     )
     # print(f"{update_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
@@ -912,10 +907,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_reasonu
     after_knee_reasonunit = after_ball_plan.get_reasonunit(knee_rope)
     assert after_knee_reasonunit is not None
     assert after_knee_reasonunit.get_case(medical_rope) is None
-    assert (
-        after_knee_reasonunit.reason_active_requisite
-        == after_medical_reason_active_requisite
-    )
+    assert after_knee_reasonunit.active_requisite == after_medical_active_requisite
 
 
 def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_reasonunit():
@@ -929,12 +921,12 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_reasonu
     before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_au.make_l1_rope(knee_str)
-    medical_reason_active_requisite = False
+    medical_active_requisite = False
     before_sue_au.set_l1_plan(planunit_shop(knee_str))
     before_sue_au.edit_plan_attr(
         ball_rope,
         reason_context=knee_rope,
-        reason_plan_active_requisite=medical_reason_active_requisite,
+        plan_active_requisite=medical_active_requisite,
     )
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
     assert before_ball_plan.get_reasonunit(knee_rope) is not None

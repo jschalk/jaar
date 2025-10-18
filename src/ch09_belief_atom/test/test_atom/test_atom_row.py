@@ -14,7 +14,7 @@ def test_AtomRow_Exists():
     assert x_atomrow.voice_name is None
     assert x_atomrow.addin is None
     assert x_atomrow.reason_context is None
-    assert x_atomrow.reason_active_requisite is None
+    assert x_atomrow.active_requisite is None
     assert x_atomrow.begin is None
     assert x_atomrow.respect_grain is None
     assert x_atomrow.close is None

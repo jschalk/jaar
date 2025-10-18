@@ -210,14 +210,14 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBelief(
         egg_rope,
         pledge=True,
         reason_context=chicken_rope,
-        reason_plan_active_requisite=True,
+        plan_active_requisite=True,
     )
     # set chick pledge is True when egg first is False
     sue_gut.edit_plan_attr(
         chicken_rope,
         pledge=True,
         reason_context=egg_rope,
-        reason_plan_active_requisite=False,
+        plan_active_requisite=False,
     )
     save_gut_file(moment_mstr_dir, sue_gut)
 

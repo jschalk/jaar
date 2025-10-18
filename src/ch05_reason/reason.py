@@ -318,7 +318,7 @@ class CaseUnit:
 
         return x_dict
 
-    def clear_case_status(self):
+    def clear_case_active(self):
         self.case_active = None
 
     def set_knot(self, new_knot: str):
@@ -338,21 +338,21 @@ class CaseUnit:
         self.task = self._get_task_bool(factheir=x_factheir)
 
     def _get_active(self, factheir: FactHeir) -> bool:
-        x_status = None
-        # status might be true if case is in lineage of fact
+        x_case_active = None
+        # case_active might be true if case is in lineage of fact
         if factheir is None:
-            x_status = False
+            x_case_active = False
         elif self.is_in_lineage(fact_state=factheir.fact_state):
             if self._is_range_or_segregate() is False:
-                x_status = True
+                x_case_active = True
             elif self._is_range_or_segregate() and factheir.is_range() is False:
-                x_status = False
+                x_case_active = False
             elif self._is_range_or_segregate() and factheir.is_range():
-                x_status = self._get_range_segregate_status(factheir=factheir)
+                x_case_active = self._get_range_segregate_case_active(factheir=factheir)
         elif self.is_in_lineage(fact_state=factheir.fact_state) is False:
-            x_status = False
+            x_case_active = False
 
-        return x_status
+        return x_case_active
 
     def _is_range_or_segregate(self):
         return self._is_range() or self._is_segregate()
@@ -389,16 +389,16 @@ class CaseUnit:
 
         return x_task
 
-    def _get_range_segregate_status(self, factheir: FactHeir) -> bool:
-        x_status = None
+    def _get_range_segregate_case_active(self, factheir: FactHeir) -> bool:
+        x_case_active = None
         if self._is_range():
-            x_status = self._get_range_status(factheir=factheir)
+            x_case_active = self._get_range_case_active(factheir=factheir)
         elif self._is_segregate():
-            x_status = self._get_segregate_status(factheir=factheir)
+            x_case_active = self._get_segregate_case_active(factheir=factheir)
 
-        return x_status
+        return x_case_active
 
-    def _get_segregate_status(self, factheir: FactHeir) -> bool:
+    def _get_segregate_case_active(self, factheir: FactHeir) -> bool:
         segr_obj = caseactivefinder_shop(
             reason_lower=self.reason_lower,
             reason_upper=self.reason_upper,
@@ -408,7 +408,7 @@ class CaseUnit:
         )
         return segr_obj.get_active_bool()
 
-    def _get_range_status(self, factheir: FactHeir) -> bool:
+    def _get_range_case_active(self, factheir: FactHeir) -> bool:
         return (
             (
                 self.reason_lower <= factheir.fact_lower
@@ -475,7 +475,7 @@ def cases_get_from_dict(x_dict: dict) -> dict[str, CaseUnit]:
 class ReasonCore:
     reason_context: RopeTerm
     cases: dict[RopeTerm, CaseUnit]
-    reason_active_requisite: bool = None
+    active_requisite: bool = None
     knot: str = None
 
     def set_knot(self, new_knot: str):
@@ -537,13 +537,13 @@ class ReasonCore:
 def reasoncore_shop(
     reason_context: RopeTerm,
     cases: dict[RopeTerm, CaseUnit] = None,
-    reason_active_requisite: bool = None,
+    active_requisite: bool = None,
     knot: str = None,
 ):
     return ReasonCore(
         reason_context=reason_context,
         cases=get_empty_dict_if_None(cases),
-        reason_active_requisite=reason_active_requisite,
+        active_requisite=active_requisite,
         knot=default_knot_if_None(knot),
     )
 
@@ -559,21 +559,21 @@ class ReasonUnit(ReasonCore):
         x_dict = {"reason_context": self.reason_context}
         if cases_dict != {}:
             x_dict["cases"] = cases_dict
-        if self.reason_active_requisite is not None:
-            x_dict["reason_active_requisite"] = self.reason_active_requisite
+        if self.active_requisite is not None:
+            x_dict["active_requisite"] = self.active_requisite
         return x_dict
 
 
 def reasonunit_shop(
     reason_context: RopeTerm,
     cases: dict[RopeTerm, CaseUnit] = None,
-    reason_active_requisite: bool = None,
+    active_requisite: bool = None,
     knot: str = None,
 ):
     return ReasonUnit(
         reason_context=reason_context,
         cases=get_empty_dict_if_None(cases),
-        reason_active_requisite=reason_active_requisite,
+        active_requisite=active_requisite,
         knot=default_knot_if_None(knot),
     )
 
@@ -599,9 +599,9 @@ class ReasonHeir(ReasonCore):
     def clear_status(self):
         self.status = None
         for case in self.cases.values():
-            case.clear_case_status()
+            case.clear_case_active()
 
-    def _set_case_active(self, factheir: FactHeir):
+    def set_cases_case_active(self, factheir: FactHeir):
         for case in self.cases.values():
             case.set_case_active(factheir)
 
@@ -616,10 +616,10 @@ class ReasonHeir(ReasonCore):
     def set_reason_active_heir(self, bool_x: bool):
         self._reason_active_heir = bool_x
 
-    def is_reason_active_requisite_operational(self) -> bool:
+    def is_active_requisite_operational(self) -> bool:
         return (
             self._reason_active_heir is not None
-            and self._reason_active_heir == self.reason_active_requisite
+            and self._reason_active_heir == self.active_requisite
         )
 
     def is_any_case_true(self) -> tuple[bool, bool]:
@@ -633,7 +633,7 @@ class ReasonHeir(ReasonCore):
         return any_case_true, any_task_true
 
     def _set_attr_status(self, any_case_true: bool):
-        self.status = any_case_true or self.is_reason_active_requisite_operational()
+        self.status = any_case_true or self.is_active_requisite_operational()
 
     def _set_attr_task(self, any_task_true: bool):
         self.task = True if any_task_true else None
@@ -642,7 +642,7 @@ class ReasonHeir(ReasonCore):
 
     def set_status(self, factheirs: dict[RopeTerm, FactHeir]):
         self.clear_status()
-        self._set_case_active(self._get_fact_context(factheirs))
+        self.set_cases_case_active(self._get_fact_context(factheirs))
         any_case_true, any_task_true = self.is_any_case_true()
         self._set_attr_status(any_case_true)
         self._set_attr_task(any_task_true)
@@ -651,7 +651,7 @@ class ReasonHeir(ReasonCore):
 def reasonheir_shop(
     reason_context: RopeTerm,
     cases: dict[RopeTerm, CaseUnit] = None,
-    reason_active_requisite: bool = None,
+    active_requisite: bool = None,
     status: bool = None,
     task: bool = None,
     _reason_active_heir: bool = None,
@@ -660,7 +660,7 @@ def reasonheir_shop(
     return ReasonHeir(
         reason_context=reason_context,
         cases=get_empty_dict_if_None(cases),
-        reason_active_requisite=reason_active_requisite,
+        active_requisite=active_requisite,
         status=status,
         task=task,
         _reason_active_heir=_reason_active_heir,
@@ -675,9 +675,7 @@ def get_reasonunits_from_dict(reasons_dict: dict) -> dict[RopeTerm, ReasonUnit]:
         x_reasonunit = reasonunit_shop(reason_context=reason_dict["reason_context"])
         if reason_dict.get("cases") is not None:
             x_reasonunit.cases = cases_get_from_dict(x_dict=reason_dict["cases"])
-        if reason_dict.get("reason_active_requisite") is not None:
-            x_reasonunit.reason_active_requisite = reason_dict.get(
-                "reason_active_requisite"
-            )
+        if reason_dict.get("active_requisite") is not None:
+            x_reasonunit.active_requisite = reason_dict.get("active_requisite")
         x_dict[x_reasonunit.reason_context] = x_reasonunit
     return x_dict
