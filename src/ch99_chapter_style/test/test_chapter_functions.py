@@ -7,15 +7,17 @@ from src.ch01_py.file_toolbox import (
     get_dir_filenames,
     open_file,
 )
+from src.ch01_py.keyword_class_builder import (
+    get_chXX_keyword_classes,
+    get_cumlative_ch_keywords_dict,
+    get_keywords_by_chapter,
+    get_keywords_src_config,
+)
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
     get_chapter_descs,
     get_chapter_num_descs,
-    get_chXX_keyword_classes,
-    get_cumlative_ch_keywords_dict,
-    get_keywords_by_chapter,
-    get_keywords_src_config,
 )
 from src.ch99_chapter_style.style import (
     check_all_test_functions_are_formatted,

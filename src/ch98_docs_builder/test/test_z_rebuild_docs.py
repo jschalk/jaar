@@ -7,17 +7,17 @@ from src.ch01_py.file_toolbox import (
     save_file,
     save_json,
 )
+from src.ch01_py.keyword_class_builder import (
+    create_all_enum_keyword_classes_str,
+    save_keywords_by_chapter_md,
+)
 from src.ch98_docs_builder._ref.ch98_path import create_keywords_classes_file_path
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_descs,
     save_brick_formats_md,
     save_chapter_blurbs_md,
     save_idea_brick_mds,
-    save_keywords_by_chapter_md,
     save_ropeterm_explanation_md,
-)
-from src.ch98_docs_builder.keyword_class_builder import (
-    create_all_enum_keyword_classes_str,
 )
 
 

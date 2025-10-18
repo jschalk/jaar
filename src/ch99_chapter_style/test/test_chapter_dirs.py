@@ -14,8 +14,6 @@ from src.ch98_docs_builder._ref.ch98_path import (
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
-    get_keywords_by_chapter,
-    get_keywords_src_config,
 )
 from src.ch99_chapter_style.style import (
     check_if_chapter_keywords_by_chapter_is_sorted,
