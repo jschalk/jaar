@@ -7,10 +7,6 @@ from src.ch01_py.file_toolbox import (
     get_level1_dirs,
     open_json,
 )
-from src.ch98_docs_builder._ref.ch98_path import (
-    create_keywords_class_file_path,
-    get_keywords_filename,
-)
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,

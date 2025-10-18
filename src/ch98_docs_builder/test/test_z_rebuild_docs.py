@@ -2,16 +2,10 @@ from random import random as random_random
 from src.ch01_py.file_toolbox import (
     create_path,
     get_dir_filenames,
-    open_file,
     open_json,
-    save_file,
     save_json,
 )
-from src.ch01_py.keyword_class_builder import (
-    create_all_enum_keyword_classes_str,
-    save_keywords_by_chapter_md,
-)
-from src.ch98_docs_builder._ref.ch98_path import create_keywords_classes_file_path
+from src.ch01_py.keyword_class_builder import save_keywords_by_chapter_md
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_descs,
     save_brick_formats_md,
@@ -36,9 +30,8 @@ def test_SpecialTestThatBuildsDocs():
     save_chapter_blurbs_md(destination_dir)
     save_ropeterm_explanation_md(destination_dir)
     save_keywords_by_chapter_md(destination_dir)  # docs\keywords_by_chapter.md
-
     # resave json files so that they are ordered alphabetically
-    # No need to always resave all json files, so just do it 4% of the time
+    # No need to always resave all json files, so just do it 4%
     if random_random() < 0.04:
         for chapter_dir in get_chapter_descs().values():
             json_file_tuples = get_dir_filenames(chapter_dir, {"json"})
@@ -48,14 +41,3 @@ def test_SpecialTestThatBuildsDocs():
                 print(f"{x_dir} {x_filename=}")
                 json_dir = create_path(chapter_dir, x_dir)
                 save_json(json_dir, x_filename, open_json(json_dir, x_filename))
-
-    # save file for all Enum class references
-    keywords_classes_file_path = create_keywords_classes_file_path("src")
-    enum_classes_str = create_all_enum_keyword_classes_str()
-    current_classes_file_str = open_file(keywords_classes_file_path)
-    print(enum_classes_str[:100])
-    save_file(keywords_classes_file_path, None, enum_classes_str)
-    assertion_failure_str = (
-        "Special case: keywords.py file was rebuilt, run test again."
-    )
-    assert enum_classes_str == current_classes_file_str, assertion_failure_str

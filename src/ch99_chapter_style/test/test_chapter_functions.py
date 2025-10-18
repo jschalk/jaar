@@ -219,7 +219,7 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
     for keyword, chapters_dict in keywords_in_ch_count.items():
         # for chapter_prefix in sorted(chapters_dict.keys()):
         #     chapter_count = chapters_dict.get(chapter_prefix)
-        #     # print(f"{keyword=} {chapter_prefix} {chapter_count=}")
+        print(f"{keyword=} {chapter_prefix=} ")
         min_chapter_prefix = min(chapters_dict.keys())
         min_chapter_count = chapters_dict.get(min_chapter_prefix)
         if min_chapter_count <= 2:
