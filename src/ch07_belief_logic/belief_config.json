@@ -249,7 +249,7 @@
       }
     }, 
     "jvalues": {
-      "active": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
+      "plan_active": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
       "addin": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
       "all_voice_cred": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
       "all_voice_debt": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 

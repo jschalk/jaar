@@ -123,7 +123,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         wx.moment_label: x_moment_label,
         wx.belief_name: x_belief_name,
-        "active": x_active,
+        "plan_active": x_active,
         "all_voice_cred": x_all_voice_cred,
         "all_voice_debt": x_all_voice_debt,
         "descendant_pledge_count": x_descendant_pledge_count,

@@ -280,7 +280,7 @@ function renderPlanUnit(planUnit, level) {
     const levelIndicator = show_level ? ` level${planUnit.tree_level}` : '';
     const pledgeIndicator = planUnit.pledge && show_pledge ? ' PLEDGE' : '';
     const descendant_pledge_countIndicator = show_descendant_pledge_count ? ` pledges: ${planUnit.descendant_pledge_count}` : '';
-    const activeIndicator = planUnit.active && show_active ? '-ACTIVE' : '';
+    const activeIndicator = planUnit.plan_active && show_active ? '-ACTIVE' : '';
     const taskIndicator = planUnit.task && show_task ? '-task' : '';
     const starIndicator = show_star ? ` star${planUnit.star}` : '';
     const plan_fund_totalIndicator = show_plan_fund_total ? ` [${planUnit.plan_fund_total}]` : '';
@@ -337,7 +337,7 @@ function renderPlanUnit(planUnit, level) {
     ${render_with_indent(planUnit.denom, indent, show_denom)}
     ${render_with_indent(planUnit.morph, indent, show_morph)}
     ${render_with_indent(planUnit.numor, indent, show_numor)}
-    ${render_with_indent(planUnit.active_hx, indent, show_active_hx)}
+    ${render_with_indent(planUnit.plan_active_hx, indent, show_active_hx)}
   </div>\n
 `;
     // Add children

@@ -47,7 +47,7 @@ def test_PlanUnit_Exists():
     assert x_planunit.all_voice_cred is None
     assert x_planunit.all_voice_debt is None
     assert x_planunit.tree_level is None
-    assert x_planunit.active_hx is None
+    assert x_planunit.plan_active_hx is None
     assert x_planunit.fund_ratio is None
     assert x_planunit.fund_grain is None
     assert x_planunit.fund_onset is None
@@ -56,8 +56,8 @@ def test_PlanUnit_Exists():
     obj_attrs = set(x_planunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        wx.active,
-        wx.active_hx,
+        wx.plan_active,
+        wx.plan_active_hx,
         wx.all_voice_cred,
         wx.all_voice_debt,
         wx.awardheirs,
@@ -162,7 +162,7 @@ def test_planunit_shop_ReturnsObj_WithOneParameter():
     assert x_planunit.gogo_calc is None
     assert x_planunit.stop_calc is None
     assert x_planunit.tree_level is None
-    assert x_planunit.active_hx == {}
+    assert x_planunit.plan_active_hx == {}
     assert x_planunit.fund_ratio is None
     assert x_planunit.fund_grain == default_grain_num_if_None()
     assert x_planunit.fund_onset is None

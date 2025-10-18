@@ -747,10 +747,10 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     laundry_case = laundry_reasonheir.get_case(cregtime_rope)
     laundry_factheir = laundry_plan.factheirs.get(cregtime_rope)
     # print(
-    #     f"{laundry_plan.active=} {laundry_case.reason_lower=} {laundry_factheir.fact_lower % 10080=}"
+    #     f"{laundry_plan.plan_active=} {laundry_case.reason_lower=} {laundry_factheir.fact_lower % 10080=}"
     # )
     # print(
-    #     f"{laundry_plan.active=} {laundry_case.reason_upper=} {laundry_factheir.fact_upper % 10080=}"
+    #     f"{laundry_plan.plan_active=} {laundry_case.reason_upper=} {laundry_factheir.fact_upper % 10080=}"
     # )
     # print(f"{laundry_reasonheir.reason_context=} {laundry_case=}")
     # for x_planunit in sue_belief._plan_dict.values():
@@ -770,10 +770,10 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     laundry_case = laundry_reasonheir.get_case(cregtime_rope)
     laundry_factheir = laundry_plan.factheirs.get(cregtime_rope)
     # print(
-    #     f"{laundry_plan.active=} {laundry_case.reason_lower=} {laundry_factheir.fact_lower % 10080=}"
+    #     f"{laundry_plan.plan_active=} {laundry_case.reason_lower=} {laundry_factheir.fact_lower % 10080=}"
     # )
     # print(
-    #     f"{laundry_plan.active=} {laundry_case.reason_upper=} {laundry_factheir.fact_upper % 10080=}"
+    #     f"{laundry_plan.plan_active=} {laundry_case.reason_upper=} {laundry_factheir.fact_upper % 10080=}"
     # )
     # for x_planunit in sue_belief._plan_dict.values():
     #     if x_planunit.plan_label in [laundry_str]:

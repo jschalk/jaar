@@ -57,8 +57,8 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         wx.problem_bool,
         wx.knot,
         wx.is_expanded,
-        wx.active,
-        wx.active_hx,
+        wx.plan_active,
+        wx.plan_active_hx,
         wx.all_voice_cred,
         wx.all_voice_debt,
         wx.awardheirs,
@@ -533,9 +533,9 @@ def test_get_plan_view_dict_ReturnsObj_Scenario10_active_hx():
     chicken_dict = get_plan_view_dict(chicken_plan)
 
     # THEN
-    print(f"{chicken_plan.active_hx=}")
+    print(f"{chicken_plan.plan_active_hx=}")
     # sports ropes
-    chicken_active_hx_str = chicken_dict.get(wx.active_hx)
-    expected_chicken_active_hx_str = f"active_hx: {chicken_plan.active_hx}"
+    chicken_active_hx_str = chicken_dict.get(wx.plan_active_hx)
+    expected_chicken_active_hx_str = f"plan_active_hx: {chicken_plan.plan_active_hx}"
     expected_chicken_active_hx_str = add_small_dot(expected_chicken_active_hx_str)
     assert expected_chicken_active_hx_str == chicken_active_hx_str

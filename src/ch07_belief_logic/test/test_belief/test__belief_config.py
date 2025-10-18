@@ -217,7 +217,7 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         wx.stop_want,
         wx.gogo_calc,
         wx.stop_calc,
-        wx.active,
+        wx.plan_active,
         wx.fund_onset,
         wx.fund_cease,
         wx.descendant_pledge_count,
@@ -565,9 +565,9 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrlabo, jv, "_belief_name_is_labor") == "INTEGER"
     assert g_popcashout(cfig, blrlabo, jv, "_belief_name_is_labor") == True
 
-    assert g_class_type(cfig, blrplan, jv, "active") == "int"
-    assert g_sqlitetype(cfig, blrplan, jv, "active") == "INTEGER"
-    assert g_popcashout(cfig, blrplan, jv, "active") == True
+    assert g_class_type(cfig, blrplan, jv, "plan_active") == "int"
+    assert g_sqlitetype(cfig, blrplan, jv, "plan_active") == "INTEGER"
+    assert g_popcashout(cfig, blrplan, jv, "plan_active") == True
 
     assert g_class_type(cfig, blrplan, jv, wx.all_voice_cred) == "int"
     assert g_sqlitetype(cfig, blrplan, jv, wx.all_voice_cred) == "INTEGER"
@@ -842,7 +842,7 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(wx.active_requisite) == "bool"
     assert belief_calc_args_type_dict.get(wx.party_title) == wx.TitleTerm
     assert belief_calc_args_type_dict.get("_belief_name_is_labor") == "int"
-    assert belief_calc_args_type_dict.get(wx.active) == "int"
+    assert belief_calc_args_type_dict.get(wx.plan_active) == "int"
     assert belief_calc_args_type_dict.get(wx.all_voice_cred) == "int"
     assert belief_calc_args_type_dict.get(wx.all_voice_debt) == "int"
     assert belief_calc_args_type_dict.get(wx.descendant_pledge_count) == "int"

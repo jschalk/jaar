@@ -221,7 +221,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[142] == wx.job_listen_rotations
     assert table_sorting_priority[143] == wx.error_message
     assert table_sorting_priority[144] == "_belief_name_is_labor"
-    assert table_sorting_priority[145] == wx.active
+    assert table_sorting_priority[145] == wx.plan_active
     assert table_sorting_priority[146] == wx.task
     assert table_sorting_priority[147] == wx.reason_active
     assert table_sorting_priority[148] == wx.case_active

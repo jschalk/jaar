@@ -112,7 +112,7 @@ def test_BeliefUnit_get_agenda_dict_With7amPlanExample():
     # THEN
     print(x_belief.planroot.factunits[x24hr_rope])
     print(x_belief.get_plan_obj(clean_rope).reasonunits)
-    print(x_belief.get_plan_obj(clean_rope).active)
+    print(x_belief.get_plan_obj(clean_rope).plan_active)
     agenda_dict = x_belief.get_agenda_dict()
     print(f"{len(agenda_dict)=} {agenda_dict.keys()=}")
     assert len(agenda_dict) == 6
@@ -370,16 +370,16 @@ def test_get_beliefunit_from_dict_LoadsPledgeFromJSON():
     veg_str = "cook veggies every morning"
     veg_rope = yao_belief.make_rope(body_rope, veg_str)
     veg_plan = yao_belief.get_plan_obj(veg_rope)
-    assert not veg_plan.active
+    assert not veg_plan.plan_active
     assert veg_plan.pledge
 
     # plan_list = yao_belief.get_plan_dict()
     # pledge_true_count = 0
     # for plan in plan_list:
     #     if str(type(plan)).find(".plan.PlanUnit'>") > 0:
-    #         assert plan.active in (True, False)
+    #         assert plan.plan_active in (True, False)
     #     assert plan.pledge in (True, False)
-    #     # if plan.active:
+    #     # if plan.plan_active:
     #     #     print(plan.plan_label)
     #     if plan.pledge:
     #         pledge_true_count += 1

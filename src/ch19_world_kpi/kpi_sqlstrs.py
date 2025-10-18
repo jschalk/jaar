@@ -27,9 +27,9 @@ SELECT
 , belief_name
 , plan_rope
 , pledge
-, active
+, plan_active
 , task
 FROM belief_planunit_job
-WHERE pledge == 1 AND active == 1
+WHERE pledge == 1 AND plan_active == 1
 ;
 """

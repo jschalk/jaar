@@ -140,7 +140,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
         reasonheirs=x1_reasonheirs,
         laborunit=sue_laborunit,
         healerunit=yao_healerunit,
-        active=True,
+        plan_active=True,
         pledge=True,
         problem_bool=x_problem_bool,
     )

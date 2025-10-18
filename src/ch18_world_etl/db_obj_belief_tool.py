@@ -273,7 +273,7 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     star = values_dict.get("star")
     pledge = values_dict.get("pledge")
     problem_bool = values_dict.get("problem_bool")
-    active = values_dict.get("active")
+    active = values_dict.get("plan_active")
     task = values_dict.get("task")
     fund_grain = values_dict.get("fund_grain")
     fund_onset = values_dict.get("fund_onset")
@@ -290,7 +290,7 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO belief_planunit_job (moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, pledge, problem_bool, fund_grain, active, task, fund_onset, fund_cease, fund_ratio, gogo_calc, stop_calc, tree_level, range_evaluated, descendant_pledge_count, healerunit_ratio, all_voice_cred, all_voice_debt)
+    return f"""INSERT INTO belief_planunit_job (moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, pledge, problem_bool, fund_grain, plan_active, task, fund_onset, fund_cease, fund_ratio, gogo_calc, stop_calc, tree_level, range_evaluated, descendant_pledge_count, healerunit_ratio, all_voice_cred, all_voice_debt)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}

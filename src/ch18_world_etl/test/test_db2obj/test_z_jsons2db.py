@@ -179,7 +179,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan.star = x_star
     x_plan.pledge = x_pledge
     x_plan.problem_bool = x_problem_bool
-    x_plan.active = x_active
+    x_plan.plan_active = x_active
     x_plan.task = x_task
     x_plan.fund_grain = x_fund_grain
     x_plan.fund_onset = x_fund_onset
@@ -204,7 +204,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan.star = x_star
     x_plan.pledge = x_pledge
     x_plan.problem_bool = x_problem_bool
-    x_plan.active = x_active
+    x_plan.plan_active = x_active
     x_plan.task = x_task
     x_plan.fund_grain = x_fund_grain
     x_plan.fund_onset = x_fund_onset

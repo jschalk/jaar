@@ -475,7 +475,7 @@ def test_BeliefUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnit_reason_acti
 
     # 4. plan(...,casa) with
     # 4.1 ReasonUnit: reason_context=sem_jours_rope, reason_state=thu_rope
-    # 4.2 .active = False
+    # 4.2 .plan_active = False
     sue_belief.edit_plan_attr(
         casa_rope,
         reason_context=sem_jours_rope,
@@ -483,11 +483,11 @@ def test_BeliefUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnit_reason_acti
     )
     sue_belief.cashout()  # set tree metrics
     casa_plan = sue_belief.get_plan_obj(casa_rope)
-    assert casa_plan.active is False
+    assert casa_plan.plan_active is False
 
     # 5. plan(...,run to casa) with
     # 5.1. ReasonUnit: plan(reason_context=...,casa) has .active_requisite = True
-    # 5.2. plan(...,casa).active = False
+    # 5.2. plan(...,casa).plan_active = False
     run_str = "run to casa"
     run_rope = sue_belief.make_l1_rope(run_str)
     sue_belief.set_plan(planunit_shop(run_str), sue_belief.moment_label)
@@ -498,24 +498,24 @@ def test_BeliefUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnit_reason_acti
     )
     run_plan = sue_belief.get_plan_obj(run_rope)
     sue_belief.cashout()
-    assert run_plan.active is False
+    assert run_plan.plan_active is False
 
     # Fact: reason_context: (...,sem_jours) fact_state: (...,sem_jours,wed)
     sue_belief.add_fact(fact_context=sem_jours_rope, fact_state=wed_rope)
     sue_belief.cashout()
 
-    assert casa_plan.active is False
-    assert run_plan.active is False
+    assert casa_plan.plan_active is False
+    assert run_plan.plan_active is False
 
     # WHEN
     print("before changing fact")
     sue_belief.add_fact(fact_context=sem_jours_rope, fact_state=thu_rope)
     print("after changing fact")
     sue_belief.cashout()
-    assert casa_plan.active is True
+    assert casa_plan.plan_active is True
 
     # THEN
-    assert run_plan.active is True
+    assert run_plan.plan_active is True
 
 
 def test_BeliefUnit_cashout_SetsRationalAttrToFalseWhen_max_tree_traverse_Is1():

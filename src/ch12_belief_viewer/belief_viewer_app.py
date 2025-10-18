@@ -57,7 +57,7 @@ def get_belief_viewer_template() -> str:
             <input type="checkbox" id="show_moment_label"><label for="show_moment_label">moment_label</label>
             <input type="checkbox" id="show_pledge"><label for="show_pledge">pledge</label>
             <input type="checkbox" id="show_descendant_pledge_count"><label for="show_descendant_pledge_count">descendant_pledge_count</label>
-            <input type="checkbox" id="show_active"><label for="show_active">active</label>
+            <input type="checkbox" id="show_plan_active"><label for="show_plan_active">plan_active</label>
             <input type="checkbox" id="show_task"><label for="show_task">task</label>
             <input type="checkbox" id="show_star"><label for="show_star">star</label>
             <input type="checkbox" id="show_plan_fund_total"><label for="show_plan_fund_total">plan_fund_total</label>
@@ -89,7 +89,7 @@ def get_belief_viewer_template() -> str:
             <input type="checkbox" id="show_denom"><label for="show_denom">denom</label>
             <input type="checkbox" id="show_morph"><label for="show_morph">morph</label>
             <input type="checkbox" id="show_numor"><label for="show_numor">numor</label>
-            <input type="checkbox" id="show_active_hx"><label for="show_active_hx">active_hx</label>
+            <input type="checkbox" id="show_plan_active_hx"><label for="show_plan_active_hx">plan_active_hx</label>
         </div>
         
         <div id="planTreeContainer" class="plan_tree_display"></div>

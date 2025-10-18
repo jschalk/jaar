@@ -329,13 +329,11 @@ def get_fig(pd: float, graphics_bool: bool) -> plotly_figure:
         x_color=None,
         showlegend=True,
         case_str="Scenario",
-        expect_str="active",
+        expect_str="case_active",
         expect_task_str="task Bool",
         reason_divisor=pd,
     )
-    fig_label = (
-        "Given Fact Range and Case Range assert expected Case.active, Case.Task Bools."
-    )
+    fig_label = "Given Fact Range and Case Range assert expected Case.case_active, Case.Task Bools."
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_label, title_font_size=20)

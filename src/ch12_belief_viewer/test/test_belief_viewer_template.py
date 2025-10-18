@@ -9,8 +9,8 @@ def test_get_belief_viewer_template_ReturnsObj():
     # THEN
     assert template_str
     expected_strs_in_template = {
-        wx.active_hx,
-        wx.active,
+        wx.plan_active_hx,
+        wx.plan_active,
         wx.all_voice_cred,
         wx.all_voice_debt,
         wx.awardheirs,
