@@ -9,7 +9,7 @@ from src.ch19_world_kpi.test._util.ch19_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ref.keywords import Ch19Keywords as wx
+from src.ref.keywords import Ch19Keywords as kw
 
 
 def test_create_kpi_csvs_Scenario0_NotCreateFileWhenNoKPITables(env_dir_setup_cleanup):
@@ -51,6 +51,6 @@ def test_create_kpi_csvs_Scenario1_CreateFile(env_dir_setup_cleanup):
 
     # THEN
     assert os_path_exists(kpi_csv_path)
-    expected_df = DataFrame(["Fay"], columns=[wx.moment_label])
+    expected_df = DataFrame(["Fay"], columns=[kw.moment_label])
     assert_frame_equal(open_csv(kpi_csv_path), expected_df)
     db_conn.close()

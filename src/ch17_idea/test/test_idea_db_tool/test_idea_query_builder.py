@@ -5,7 +5,7 @@ from src.ch17_idea.idea_db_tool import (
     get_default_sorted_list,
     get_idea_into_dimen_raw_query,
 )
-from src.ref.keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as kw
 
 
 def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_belief_plan_partyunit():
@@ -13,14 +13,14 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_belief_plan_partyuni
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
         idea_cols = [
-            wx.spark_num,
-            wx.face_name,
-            wx.moment_label,
-            wx.plan_rope,
-            wx.party_title,
-            wx.belief_name,
-            wx.voice_name,
-            wx.amount,
+            kw.spark_num,
+            kw.face_name,
+            kw.moment_label,
+            kw.plan_rope,
+            kw.party_title,
+            kw.belief_name,
+            kw.voice_name,
+            kw.amount,
         ]
         blrlabo_cat = "belief_plan_partyunit"
         src_table = f"{idea_number}_raw"
@@ -65,16 +65,16 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_voiceunit():
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
         idea_cols = [
-            wx.spark_num,
-            wx.face_name,
-            wx.moment_label,
-            wx.plan_rope,
-            wx.party_title,
-            wx.belief_name,
-            wx.voice_name,
-            wx.voice_cred_lumen,
-            wx.voice_debt_lumen,
-            wx.amount,
+            kw.spark_num,
+            kw.face_name,
+            kw.moment_label,
+            kw.plan_rope,
+            kw.party_title,
+            kw.belief_name,
+            kw.voice_name,
+            kw.voice_cred_lumen,
+            kw.voice_debt_lumen,
+            kw.amount,
         ]
         blrpern_cat = "belief_voiceunit"
         src_table = f"{idea_number}_raw"
@@ -115,15 +115,15 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_belief_voiceunit():
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
         idea_cols = [
-            wx.spark_num,
-            wx.face_name,
-            wx.moment_label,
-            wx.plan_rope,
-            wx.party_title,
-            wx.belief_name,
-            wx.voice_name,
-            wx.voice_cred_lumen,
-            wx.amount,
+            kw.spark_num,
+            kw.face_name,
+            kw.moment_label,
+            kw.plan_rope,
+            kw.party_title,
+            kw.belief_name,
+            kw.voice_name,
+            kw.voice_cred_lumen,
+            kw.amount,
         ]
         blrpern_cat = "belief_voiceunit"
         src_table = f"{idea_number}_raw"

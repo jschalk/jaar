@@ -10,7 +10,7 @@ from src.ch18_world_etl.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_get_all_excel_ideasheets_ReturnsObj_Scenario0_SheetNames(
@@ -87,11 +87,11 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_TranslateSheetNames(
     ex_filename = "Faybob.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
     idea_columns = [
-        wx.spark_num,
-        wx.face_name,
-        wx.cumulative_minute,
-        wx.moment_label,
-        wx.hour_label,
+        kw.spark_num,
+        kw.face_name,
+        kw.cumulative_minute,
+        kw.moment_label,
+        kw.hour_label,
     ]
     row1 = [spark1, sue_str, minute_360, amy23_str, hour6am]
     row2 = [spark1, sue_str, minute_420, amy23_str, hour7am]
@@ -126,19 +126,19 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     ex_filename = "Faybob.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
     idea_columns = [
-        wx.spark_num,
-        wx.face_name,
-        wx.cumulative_minute,
-        wx.moment_label,
-        wx.hour_label,
+        kw.spark_num,
+        kw.face_name,
+        kw.cumulative_minute,
+        kw.moment_label,
+        kw.hour_label,
     ]
     row1 = [spark1, sue_str, minute_360, amy23_str, hour6am]
     row2 = [spark1, sue_str, minute_420, amy23_str, hour7am]
     incomplete_idea_columns = [
-        wx.spark_num,
-        wx.face_name,
-        wx.cumulative_minute,
-        wx.moment_label,
+        kw.spark_num,
+        kw.face_name,
+        kw.cumulative_minute,
+        kw.moment_label,
     ]
     incom_row1 = [spark1, sue_str, minute_360, amy23_str]
     incom_row2 = [spark1, sue_str, minute_420, amy23_str]

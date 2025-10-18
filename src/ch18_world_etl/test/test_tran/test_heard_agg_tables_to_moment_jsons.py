@@ -18,7 +18,7 @@ from src.ch18_world_etl.transformers import (
     create_sound_and_heard_tables,
     etl_heard_agg_tables_to_moment_jsons,
 )
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_get_moment_heard_select1_sqlstrs_ReturnsObj_HasAllNeededKeys():
@@ -43,23 +43,23 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj():
     fu2_select_sqlstrs = get_moment_heard_select1_sqlstrs(moment_label=a23_str)
 
     # THEN
-    gen_blfpayy_sqlstr = fu2_select_sqlstrs.get(wx.moment_paybook)
-    gen_momentbud_sqlstr = fu2_select_sqlstrs.get(wx.moment_budunit)
-    gen_blfhour_sqlstr = fu2_select_sqlstrs.get(wx.moment_epoch_hour)
-    gen_blfmont_sqlstr = fu2_select_sqlstrs.get(wx.moment_epoch_month)
-    gen_blfweek_sqlstr = fu2_select_sqlstrs.get(wx.moment_epoch_weekday)
-    gen_blfoffi_sqlstr = fu2_select_sqlstrs.get(wx.moment_timeoffi)
-    gen_momentunit_sqlstr = fu2_select_sqlstrs.get(wx.momentunit)
+    gen_blfpayy_sqlstr = fu2_select_sqlstrs.get(kw.moment_paybook)
+    gen_momentbud_sqlstr = fu2_select_sqlstrs.get(kw.moment_budunit)
+    gen_blfhour_sqlstr = fu2_select_sqlstrs.get(kw.moment_epoch_hour)
+    gen_blfmont_sqlstr = fu2_select_sqlstrs.get(kw.moment_epoch_month)
+    gen_blfweek_sqlstr = fu2_select_sqlstrs.get(kw.moment_epoch_weekday)
+    gen_blfoffi_sqlstr = fu2_select_sqlstrs.get(kw.moment_timeoffi)
+    gen_momentunit_sqlstr = fu2_select_sqlstrs.get(kw.momentunit)
     with sqlite3_connect(":memory:") as moment_db_conn:
         cursor = moment_db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blfpayy_abbv7 = get_dimen_abbv7(wx.moment_paybook)
-        momentbud_abbv7 = get_dimen_abbv7(wx.moment_budunit)
-        blfhour_abbv7 = get_dimen_abbv7(wx.moment_epoch_hour)
-        blfmont_abbv7 = get_dimen_abbv7(wx.moment_epoch_month)
-        blfweek_abbv7 = get_dimen_abbv7(wx.moment_epoch_weekday)
-        blfoffi_abbv7 = get_dimen_abbv7(wx.moment_timeoffi)
-        momentunit_abbv7 = get_dimen_abbv7(wx.momentunit)
+        blfpayy_abbv7 = get_dimen_abbv7(kw.moment_paybook)
+        momentbud_abbv7 = get_dimen_abbv7(kw.moment_budunit)
+        blfhour_abbv7 = get_dimen_abbv7(kw.moment_epoch_hour)
+        blfmont_abbv7 = get_dimen_abbv7(kw.moment_epoch_month)
+        blfweek_abbv7 = get_dimen_abbv7(kw.moment_epoch_weekday)
+        blfoffi_abbv7 = get_dimen_abbv7(kw.moment_timeoffi)
+        momentunit_abbv7 = get_dimen_abbv7(kw.momentunit)
         blfpayy_h_agg = create_prime_tablename(blfpayy_abbv7, "h", "agg")
         momentbud_h_agg = create_prime_tablename(momentbud_abbv7, "h", "agg")
         blfhour_h_agg = create_prime_tablename(blfhour_abbv7, "h", "agg")
@@ -67,7 +67,7 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj():
         blfweek_h_agg = create_prime_tablename(blfweek_abbv7, "h", "agg")
         blfoffi_h_agg = create_prime_tablename(blfoffi_abbv7, "h", "agg")
         momentunit_h_agg = create_prime_tablename(momentunit_abbv7, "h", "agg")
-        where_dict = {wx.moment_label: a23_str}
+        where_dict = {kw.moment_label: a23_str}
         blfpayy_sql = create_select_query(cursor, blfpayy_h_agg, [], where_dict, True)
         momentbud_sql = create_select_query(
             cursor, momentbud_h_agg, [], where_dict, True
@@ -106,7 +106,7 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj():
         assert gen_blfweek_sqlstr == blfweek_sql
         assert gen_blfoffi_sqlstr == blfoffi_sql
         assert gen_momentunit_sqlstr == momentunit_sql
-        static_example_sqlstr = f"SELECT {wx.moment_label}, {wx.epoch_label}, {wx.c400_number}, {wx.yr1_jan1_offset}, {wx.monthday_index}, {wx.fund_grain}, {wx.money_grain}, {wx.respect_grain}, {wx.knot}, {wx.job_listen_rotations} FROM momentunit_h_agg WHERE moment_label = '{a23_str}'"
+        static_example_sqlstr = f"SELECT {kw.moment_label}, {kw.epoch_label}, {kw.c400_number}, {kw.yr1_jan1_offset}, {kw.monthday_index}, {kw.fund_grain}, {kw.money_grain}, {kw.respect_grain}, {kw.knot}, {kw.job_listen_rotations} FROM momentunit_h_agg WHERE moment_label = '{a23_str}'"
         assert gen_momentunit_sqlstr == static_example_sqlstr
 
 
@@ -117,7 +117,7 @@ def test_etl_heard_agg_tables_to_moment_jsons_Scenario0_CreateFilesWithOnlyMomen
     amy23_str = "amy23"
     amy45_str = "amy45"
     moment_mstr_dir = get_chapter_temp_dir()
-    momentunit_h_agg_tablename = create_prime_tablename(wx.momentunit, "h", "agg")
+    momentunit_h_agg_tablename = create_prime_tablename(kw.momentunit, "h", "agg")
     print(f"{momentunit_h_agg_tablename=}")
 
     with sqlite3_connect(":memory:") as moment_db_conn:
@@ -125,13 +125,13 @@ def test_etl_heard_agg_tables_to_moment_jsons_Scenario0_CreateFilesWithOnlyMomen
         create_sound_and_heard_tables(cursor)
 
         insert_raw_sqlstr = f"""
-INSERT INTO {momentunit_h_agg_tablename} ({wx.moment_label})
+INSERT INTO {momentunit_h_agg_tablename} ({kw.moment_label})
 VALUES ('{amy23_str}'), ('{amy45_str}')
 ;
 """
         cursor.execute(insert_raw_sqlstr)
         assert get_row_count(cursor, momentunit_h_agg_tablename) == 2
-        assert db_table_exists(cursor, wx.moment_spark_time_agg) is False
+        assert db_table_exists(cursor, kw.moment_spark_time_agg) is False
 
         amy23_json_path = create_moment_json_path(moment_mstr_dir, amy23_str)
         amy45_json_path = create_moment_json_path(moment_mstr_dir, amy45_str)

@@ -10,7 +10,7 @@ from src.ch16_translate.translate_config import (
     get_translate_filename,
     translate_config_path,
 )
-from src.ref.keywords import Ch16Keywords as wx
+from src.ref.keywords import Ch16Keywords as kw
 
 
 def test_get_translate_filename_ReturnsObj():
@@ -32,59 +32,59 @@ def test_get_translate_config_dict_ReturnsObj():
     # THEN
     assert translate_config
     translate_config_dimens = set(translate_config.keys())
-    assert wx.translate_name in translate_config_dimens
-    assert wx.translate_title in translate_config_dimens
-    assert wx.translate_label in translate_config_dimens
-    assert wx.translate_rope in translate_config_dimens
+    assert kw.translate_name in translate_config_dimens
+    assert kw.translate_title in translate_config_dimens
+    assert kw.translate_label in translate_config_dimens
+    assert kw.translate_rope in translate_config_dimens
     assert len(translate_config) == 4
 
     _validate_translate_config(translate_config)
-    translate_rope_dict = translate_config.get(wx.translate_rope)
-    translate_label_dict = translate_config.get(wx.translate_label)
-    assert len(translate_rope_dict.get(wx.jkeys)) == 1
-    assert len(translate_label_dict.get(wx.jkeys)) == 1
-    assert len(translate_rope_dict.get(wx.jvalues)) == 4
-    assert len(translate_label_dict.get(wx.jvalues)) == 4
+    translate_rope_dict = translate_config.get(kw.translate_rope)
+    translate_label_dict = translate_config.get(kw.translate_label)
+    assert len(translate_rope_dict.get(kw.jkeys)) == 1
+    assert len(translate_label_dict.get(kw.jkeys)) == 1
+    assert len(translate_rope_dict.get(kw.jvalues)) == 4
+    assert len(translate_label_dict.get(kw.jvalues)) == 4
 
     # assert gen_jvalues == x_translateunit_jvalues
-    # assert len(translateunit_dict.get(wx.jvalues)) == 9
-    # assert len(translate_budunit_dict.get(wx.jvalues)) == 1
-    # assert len(translate_paybook_dict.get(wx.jvalues)) == 1
-    # assert len(translate_epoch_hour_dict.get(wx.jvalues)) == 0
-    # assert len(translate_epoch_month_dict.get(wx.jvalues)) == 0
-    # assert len(translate_epoch_weekday_dict.get(wx.jvalues)) == 0
+    # assert len(translateunit_dict.get(kw.jvalues)) == 9
+    # assert len(translate_budunit_dict.get(kw.jvalues)) == 1
+    # assert len(translate_paybook_dict.get(kw.jvalues)) == 1
+    # assert len(translate_epoch_hour_dict.get(kw.jvalues)) == 0
+    # assert len(translate_epoch_month_dict.get(kw.jvalues)) == 0
+    # assert len(translate_epoch_weekday_dict.get(kw.jvalues)) == 0
 
 
 def _validate_translate_config(translate_config: dict):
     x_possible_args = {
-        wx.inx_knot,
-        wx.otx_knot,
-        wx.inx_title,
-        wx.otx_title,
-        wx.inx_name,
-        wx.otx_name,
-        wx.inx_label,
-        wx.otx_label,
-        wx.inx_rope,
-        wx.otx_rope,
-        wx.unknown_str,
+        kw.inx_knot,
+        kw.otx_knot,
+        kw.inx_title,
+        kw.otx_title,
+        kw.inx_name,
+        kw.otx_name,
+        kw.inx_label,
+        kw.otx_label,
+        kw.inx_rope,
+        kw.otx_rope,
+        kw.unknown_str,
     }
 
     # for every translate_format file there exists a unique translate_number with leading zeros to make 5 digits
     for translate_dimens, dimen_dict in translate_config.items():
         print(f"_validate_translate_config {translate_dimens=}")
-        assert dimen_dict.get(wx.jkeys) is not None
-        assert dimen_dict.get(wx.jvalues) is not None
-        assert dimen_dict.get(wx.UPDATE) is None
-        assert dimen_dict.get(wx.INSERT) is None
-        assert dimen_dict.get(wx.DELETE) is None
-        assert dimen_dict.get(wx.normal_specs) is None
+        assert dimen_dict.get(kw.jkeys) is not None
+        assert dimen_dict.get(kw.jvalues) is not None
+        assert dimen_dict.get(kw.UPDATE) is None
+        assert dimen_dict.get(kw.INSERT) is None
+        assert dimen_dict.get(kw.DELETE) is None
+        assert dimen_dict.get(kw.normal_specs) is None
 
-        translate_jkeys_keys = set(dimen_dict.get(wx.jkeys).keys())
+        translate_jkeys_keys = set(dimen_dict.get(kw.jkeys).keys())
         for jkey_key in translate_jkeys_keys:
             print(f"_validate_translate_config {translate_dimens=} {jkey_key=} ")
             assert jkey_key in x_possible_args
-        translate_jvalues_keys = set(dimen_dict.get(wx.jvalues).keys())
+        translate_jvalues_keys = set(dimen_dict.get(kw.jvalues).keys())
         for jvalue_key in translate_jvalues_keys:
             print(f"_validate_translate_config {translate_dimens=} {jvalue_key=} ")
             assert jvalue_key in x_possible_args
@@ -95,10 +95,10 @@ def test_get_translate_dimens_ReturnsObj():
     translate_config_dimens = get_translate_dimens()
 
     # THEN
-    assert wx.translate_name in translate_config_dimens
-    assert wx.translate_title in translate_config_dimens
-    assert wx.translate_label in translate_config_dimens
-    assert wx.translate_rope in translate_config_dimens
+    assert kw.translate_name in translate_config_dimens
+    assert kw.translate_title in translate_config_dimens
+    assert kw.translate_label in translate_config_dimens
+    assert kw.translate_rope in translate_config_dimens
     assert len(translate_config_dimens) == 4
 
 
@@ -109,11 +109,11 @@ def test_get_translate_args_dimen_mapping_ReturnsObj():
 
     # THEN
     assert x_translate_args_dimen_mapping
-    assert x_translate_args_dimen_mapping.get(wx.otx_rope)
-    x_dimens = {wx.translate_rope}
-    assert x_translate_args_dimen_mapping.get(wx.otx_rope) == x_dimens
-    assert x_translate_args_dimen_mapping.get(wx.inx_knot)
-    translate_id_dimens = x_translate_args_dimen_mapping.get(wx.inx_knot)
+    assert x_translate_args_dimen_mapping.get(kw.otx_rope)
+    x_dimens = {kw.translate_rope}
+    assert x_translate_args_dimen_mapping.get(kw.otx_rope) == x_dimens
+    assert x_translate_args_dimen_mapping.get(kw.inx_knot)
+    translate_id_dimens = x_translate_args_dimen_mapping.get(kw.inx_knot)
     assert len(translate_id_dimens) == 4
     assert len(x_translate_args_dimen_mapping) == 11
 
@@ -123,8 +123,8 @@ def _get_all_translate_config_attrs() -> dict[str, set[str]]:
     print(f"{translate_config=}")
     x_translate_attrs = {}
     for translate_dimen, jkeys_jvalues_dict in translate_config.items():
-        attrs_set = set(jkeys_jvalues_dict.get(wx.jkeys).keys())
-        attrs_set.update(set(jkeys_jvalues_dict.get(wx.jvalues).keys()))
+        attrs_set = set(jkeys_jvalues_dict.get(kw.jkeys).keys())
+        attrs_set.update(set(jkeys_jvalues_dict.get(kw.jvalues).keys()))
         x_translate_attrs[translate_dimen] = attrs_set
     return x_translate_attrs
 
@@ -135,7 +135,7 @@ def test_get_quick_translates_column_ref_ReturnsObj():
     # print(f"{all_translate_config_attrs=}")
 
     # WHEN / THEN
-    assert wx.translate_rope in set(get_quick_translates_column_ref().keys())
+    assert kw.translate_rope in set(get_quick_translates_column_ref().keys())
     assert len(get_quick_translates_column_ref().keys()) == 4
     assert get_quick_translates_column_ref() == all_translate_config_attrs
 

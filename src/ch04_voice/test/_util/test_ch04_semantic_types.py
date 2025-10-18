@@ -9,7 +9,7 @@ from src.ch04_voice._ref.ch04_semantic_types import (
     VoiceName,
     default_knot_if_None,
 )
-from src.ref.keywords import Ch04Keywords as wx
+from src.ref.keywords import Ch04Keywords as kw
 
 
 def test_NameTerm_Exists():
@@ -71,7 +71,7 @@ def test_TitleTerm_Exists():
     bob_nameterm = TitleTerm(bob_str)
     # THEN
     assert bob_nameterm == bob_str
-    doc_str = f"""If a TitleTerm contains {wx.knot}s it represents a group otherwise its a single member group of an VoiceName."""
+    doc_str = f"""If a TitleTerm contains {kw.knot}s it represents a group otherwise its a single member group of an VoiceName."""
     assert inspect_getdoc(bob_nameterm) == doc_str
 
 

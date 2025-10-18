@@ -19,21 +19,21 @@ from src.ch08_epoch.test._util.ch08_examples import (
     get_five_config,
     get_lizzy9_config,
 )
-from src.ref.keywords import Ch08Keywords as wx
+from src.ref.keywords import Ch08Keywords as kw
 
 
 def test_set_epoch_cases_for_dayly_SetsAttr_Scenario0_MiddleDayEvery3Days():
     # ESTABLISH
     bob_belief = get_bob_five_belief()
     mop_dayly_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: exx.day_rope,
-        wx.reason_state: exx.day_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: exx.day_rope,
+        kw.reason_state: exx.day_rope,
     }
     mop_xdays_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: exx.days_rope,
-        wx.reason_state: exx.days_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: exx.days_rope,
+        kw.reason_state: exx.days_rope,
     }
     mop_day_lower_min = 600
     mop_day_duration = 90
@@ -71,14 +71,14 @@ def test_set_epoch_cases_for_weekly_SetsAttr_Scenario0_ThirdDayEvery7Weeks():
     # ESTABLISH
     bob_belief = get_bob_five_belief()
     mop_weekly_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: exx.week_rope,
-        wx.reason_state: exx.week_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: exx.week_rope,
+        kw.reason_state: exx.week_rope,
     }
     mop_xweeks_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: exx.weeks_rope,
-        wx.reason_state: exx.weeks_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: exx.weeks_rope,
+        kw.reason_state: exx.weeks_rope,
     }
     mop_week_lower_min = 600
     mop_week_duration = 90
@@ -117,14 +117,14 @@ def test_set_epoch_cases_for_yearly_monthday_SetsAttr_Scenario0():
     bob_belief = get_bob_five_belief()
     month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
     mop_monthday_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: month_geo_rope,
-        wx.reason_state: month_geo_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: month_geo_rope,
+        kw.reason_state: month_geo_rope,
     }
     mop_dayly_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: exx.day_rope,
-        wx.reason_state: exx.day_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: exx.day_rope,
+        kw.reason_state: exx.day_rope,
     }
     mop_monthday = 3
     mop_length_days = 4
@@ -154,11 +154,11 @@ def test_set_epoch_cases_for_yearly_monthday_SetsAttr_Scenario0():
 def test_set_epoch_cases_for_monthly_SetsAttr_Scenario0_AllDays_within_month_range():
     # ESTABLISH
     bob_belief = get_bob_five_belief()
-    mop_year_args = {wx.plan_rope: exx.mop_rope, wx.reason_context: exx.five_year_rope}
+    mop_year_args = {kw.plan_rope: exx.mop_rope, kw.reason_context: exx.five_year_rope}
     mop_dayly_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: exx.day_rope,
-        wx.reason_state: exx.day_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: exx.day_rope,
+        kw.reason_state: exx.day_rope,
     }
     mop_monthday = 3
     mop_length_days = 4
@@ -194,11 +194,11 @@ def test_set_epoch_cases_for_monthly_SetsAttr_Scenario0_AllDays_within_month_ran
 def test_set_epoch_cases_for_monthly_SetsAttr_Scenario1_OneDayNot_within_month_range():
     # ESTABLISH
     bob_belief = get_bob_five_belief()
-    mop_year_args = {wx.plan_rope: exx.mop_rope, wx.reason_context: exx.five_year_rope}
+    mop_year_args = {kw.plan_rope: exx.mop_rope, kw.reason_context: exx.five_year_rope}
     mop_dayly_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: exx.day_rope,
-        wx.reason_state: exx.day_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: exx.day_rope,
+        kw.reason_state: exx.day_rope,
     }
     mop_monthday = 20
     mop_length_days = 4

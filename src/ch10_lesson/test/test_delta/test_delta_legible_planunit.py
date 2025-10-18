@@ -2,13 +2,13 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom.atom_main import beliefatom_shop
 from src.ch10_lesson.delta import beliefdelta_shop
 from src.ch10_lesson.legible import create_legible_list
-from src.ref.keywords import Ch10Keywords as wx
+from src.ref.keywords import Ch10Keywords as kw
 
 
 def test_create_legible_list_ReturnsObj_planunit_INSERT():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = wx.belief_planunit
+    dimen = kw.belief_planunit
     _problem_bool_str = "problem_bool"
     clean_label = "clean fridge"
     casa_rope = sue_belief.make_l1_rope("casa")
@@ -22,17 +22,17 @@ def test_create_legible_list_ReturnsObj_planunit_INSERT():
     morph_value = 37
     star_value = 43
     pledge_value = False
-    clean_beliefatom = beliefatom_shop(dimen, wx.INSERT)
-    clean_beliefatom.set_arg(wx.plan_rope, clean_rope)
-    clean_beliefatom.set_arg(wx.addin, addin_value)
-    clean_beliefatom.set_arg(wx.begin, begin_value)
-    clean_beliefatom.set_arg(wx.close, close_value)
-    clean_beliefatom.set_arg(wx.denom, denom_value)
-    clean_beliefatom.set_arg(wx.numor, numor_value)
+    clean_beliefatom = beliefatom_shop(dimen, kw.INSERT)
+    clean_beliefatom.set_arg(kw.plan_rope, clean_rope)
+    clean_beliefatom.set_arg(kw.addin, addin_value)
+    clean_beliefatom.set_arg(kw.begin, begin_value)
+    clean_beliefatom.set_arg(kw.close, close_value)
+    clean_beliefatom.set_arg(kw.denom, denom_value)
+    clean_beliefatom.set_arg(kw.numor, numor_value)
     clean_beliefatom.set_arg(_problem_bool_str, problem_bool_value)
-    clean_beliefatom.set_arg(wx.morph, morph_value)
-    clean_beliefatom.set_arg(wx.star, star_value)
-    clean_beliefatom.set_arg(wx.pledge, pledge_value)
+    clean_beliefatom.set_arg(kw.morph, morph_value)
+    clean_beliefatom.set_arg(kw.star, star_value)
+    clean_beliefatom.set_arg(kw.pledge, pledge_value)
 
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(clean_beliefatom)
@@ -49,7 +49,7 @@ def test_create_legible_list_ReturnsObj_planunit_INSERT():
 def test_create_legible_list_ReturnsObj_planunit_UPDATE():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = wx.belief_planunit
+    dimen = kw.belief_planunit
     _problem_bool_str = "problem_bool"
     clean_label = "clean fridge"
     casa_rope = sue_belief.make_l1_rope("casa")
@@ -63,17 +63,17 @@ def test_create_legible_list_ReturnsObj_planunit_UPDATE():
     morph_value = 37
     star_value = 43
     pledge_value = False
-    clean_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
-    clean_beliefatom.set_arg(wx.plan_rope, clean_rope)
-    clean_beliefatom.set_arg(wx.addin, addin_value)
-    clean_beliefatom.set_arg(wx.begin, begin_value)
-    clean_beliefatom.set_arg(wx.close, close_value)
-    clean_beliefatom.set_arg(wx.denom, denom_value)
-    clean_beliefatom.set_arg(wx.numor, numor_value)
+    clean_beliefatom = beliefatom_shop(dimen, kw.UPDATE)
+    clean_beliefatom.set_arg(kw.plan_rope, clean_rope)
+    clean_beliefatom.set_arg(kw.addin, addin_value)
+    clean_beliefatom.set_arg(kw.begin, begin_value)
+    clean_beliefatom.set_arg(kw.close, close_value)
+    clean_beliefatom.set_arg(kw.denom, denom_value)
+    clean_beliefatom.set_arg(kw.numor, numor_value)
     clean_beliefatom.set_arg(_problem_bool_str, problem_bool_value)
-    clean_beliefatom.set_arg(wx.morph, morph_value)
-    clean_beliefatom.set_arg(wx.star, star_value)
-    clean_beliefatom.set_arg(wx.pledge, pledge_value)
+    clean_beliefatom.set_arg(kw.morph, morph_value)
+    clean_beliefatom.set_arg(kw.star, star_value)
+    clean_beliefatom.set_arg(kw.pledge, pledge_value)
 
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(clean_beliefatom)
@@ -90,12 +90,12 @@ def test_create_legible_list_ReturnsObj_planunit_UPDATE():
 def test_create_legible_list_ReturnsObj_planunit_DELETE():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = wx.belief_planunit
+    dimen = kw.belief_planunit
     clean_label = "clean fridge"
     casa_rope = sue_belief.make_l1_rope("casa")
     clean_rope = sue_belief.make_rope(casa_rope, clean_label)
-    clean_beliefatom = beliefatom_shop(dimen, wx.DELETE)
-    clean_beliefatom.set_arg(wx.plan_rope, clean_rope)
+    clean_beliefatom = beliefatom_shop(dimen, kw.DELETE)
+    clean_beliefatom.set_arg(kw.plan_rope, clean_rope)
 
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(clean_beliefatom)

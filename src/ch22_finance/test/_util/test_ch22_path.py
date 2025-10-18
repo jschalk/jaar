@@ -8,6 +8,6 @@ from src.ch21_lobby._ref.ch21_path import (
     create_world_dir_path,
 )
 from src.ch21_lobby.test._util.ch21_env import get_chapter_temp_dir
-from src.ref.keywords import Ch22Keywords as wx
+from src.ref.keywords import Ch22Keywords as kw
 
 # financial tooling

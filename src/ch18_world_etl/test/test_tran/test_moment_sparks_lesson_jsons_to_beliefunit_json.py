@@ -14,7 +14,7 @@ from src.ch18_world_etl.test._util.ch18_env import (
 from src.ch18_world_etl.transformers import (
     etl_spark_lesson_json_to_spark_inherited_beliefunits,
 )
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_etl_spark_lesson_json_to_spark_inherited_beliefunits_SetsFiles_belief_json(
@@ -39,17 +39,17 @@ def test_etl_spark_lesson_json_to_spark_inherited_beliefunits_SetsFiles_belief_j
     )
     a23_bob_e3_lesson = lessonunit_shop(bob_inx, None, a23_str, spark_num=spark3)
     a23_bob_e7_lesson = lessonunit_shop(bob_inx, None, a23_str, spark_num=spark7)
-    blrpern_dimen = wx.belief_voiceunit
-    bob_jkeys = {wx.voice_name: bob_inx}
-    bob_jvalues = {wx.voice_cred_lumen: credit77, wx.voice_debt_lumen: None}
-    yao_jkeys = {wx.voice_name: yao_inx}
-    yao_jvalues = {wx.voice_cred_lumen: credit44, wx.voice_debt_lumen: None}
-    a23_bob_e3_lesson.add_p_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
-    a23_bob_e3_lesson.add_p_beliefatom(blrpern_dimen, wx.INSERT, yao_jkeys, yao_jvalues)
-    sue_jkeys = {wx.voice_name: sue_inx}
-    sue_jvalues = {wx.voice_cred_lumen: credit88, wx.voice_debt_lumen: None}
-    a23_bob_e7_lesson.add_p_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
-    a23_bob_e7_lesson.add_p_beliefatom(blrpern_dimen, wx.INSERT, sue_jkeys, sue_jvalues)
+    blrpern_dimen = kw.belief_voiceunit
+    bob_jkeys = {kw.voice_name: bob_inx}
+    bob_jvalues = {kw.voice_cred_lumen: credit77, kw.voice_debt_lumen: None}
+    yao_jkeys = {kw.voice_name: yao_inx}
+    yao_jvalues = {kw.voice_cred_lumen: credit44, kw.voice_debt_lumen: None}
+    a23_bob_e3_lesson.add_p_beliefatom(blrpern_dimen, kw.INSERT, bob_jkeys, bob_jvalues)
+    a23_bob_e3_lesson.add_p_beliefatom(blrpern_dimen, kw.INSERT, yao_jkeys, yao_jvalues)
+    sue_jkeys = {kw.voice_name: sue_inx}
+    sue_jvalues = {kw.voice_cred_lumen: credit88, kw.voice_debt_lumen: None}
+    a23_bob_e7_lesson.add_p_beliefatom(blrpern_dimen, kw.INSERT, bob_jkeys, bob_jvalues)
+    a23_bob_e7_lesson.add_p_beliefatom(blrpern_dimen, kw.INSERT, sue_jkeys, sue_jvalues)
     e3_all_lesson_path = create_spark_all_lesson_path(
         moment_mstr_dir, a23_str, bob_inx, spark3
     )
@@ -105,17 +105,17 @@ def test_etl_spark_lesson_json_to_spark_inherited_beliefunits_SetsFiles_expresse
     moment_mstr_dir = get_chapter_temp_dir()
     a23_bob_e3_lesson = lessonunit_shop(bob_inx, xia_inx, a23_str, spark_num=spark3)
     a23_bob_e7_lesson = lessonunit_shop(bob_inx, xia_inx, a23_str, spark_num=spark7)
-    blrpern_dimen = wx.belief_voiceunit
-    bob_jkeys = {wx.voice_name: bob_inx}
-    bob_jvalues = {wx.voice_cred_lumen: credit77}
-    yao_jkeys = {wx.voice_name: yao_inx}
-    yao_jvalues = {wx.voice_cred_lumen: credit44}
-    a23_bob_e3_lesson.add_p_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
-    a23_bob_e3_lesson.add_p_beliefatom(blrpern_dimen, wx.INSERT, yao_jkeys, yao_jvalues)
-    sue_jkeys = {wx.voice_name: sue_inx}
-    sue_jvalues = {wx.voice_cred_lumen: credit88}
-    a23_bob_e7_lesson.add_p_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
-    a23_bob_e7_lesson.add_p_beliefatom(blrpern_dimen, wx.INSERT, sue_jkeys, sue_jvalues)
+    blrpern_dimen = kw.belief_voiceunit
+    bob_jkeys = {kw.voice_name: bob_inx}
+    bob_jvalues = {kw.voice_cred_lumen: credit77}
+    yao_jkeys = {kw.voice_name: yao_inx}
+    yao_jvalues = {kw.voice_cred_lumen: credit44}
+    a23_bob_e3_lesson.add_p_beliefatom(blrpern_dimen, kw.INSERT, bob_jkeys, bob_jvalues)
+    a23_bob_e3_lesson.add_p_beliefatom(blrpern_dimen, kw.INSERT, yao_jkeys, yao_jvalues)
+    sue_jkeys = {kw.voice_name: sue_inx}
+    sue_jvalues = {kw.voice_cred_lumen: credit88}
+    a23_bob_e7_lesson.add_p_beliefatom(blrpern_dimen, kw.INSERT, bob_jkeys, bob_jvalues)
+    a23_bob_e7_lesson.add_p_beliefatom(blrpern_dimen, kw.INSERT, sue_jkeys, sue_jvalues)
     a23_bob_e3_all_lesson_path = create_spark_all_lesson_path(
         moment_mstr_dir, a23_str, bob_inx, spark3
     )
@@ -158,13 +158,13 @@ def test_etl_spark_lesson_json_to_spark_inherited_beliefunits_SetsFiles_expresse
         bob_inx, xia_inx, a23_str, spark_num=spark7
     )
     expected_e3_bob_lesson.add_p_beliefatom(
-        blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues
+        blrpern_dimen, kw.INSERT, bob_jkeys, bob_jvalues
     )
     expected_e3_bob_lesson.add_p_beliefatom(
-        blrpern_dimen, wx.INSERT, yao_jkeys, yao_jvalues
+        blrpern_dimen, kw.INSERT, yao_jkeys, yao_jvalues
     )
     expected_e7_bob_lesson.add_p_beliefatom(
-        blrpern_dimen, wx.INSERT, sue_jkeys, sue_jvalues
+        blrpern_dimen, kw.INSERT, sue_jkeys, sue_jvalues
     )
     assert expected_e3_bob_lesson == a23_bob_e3_lesson
     assert expected_e7_bob_lesson._beliefdelta != a23_bob_e7_lesson._beliefdelta

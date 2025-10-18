@@ -13,7 +13,7 @@ from src.ch10_lesson._ref.ch10_path import (
     create_moment_json_path,
 )
 from src.ch10_lesson.test._util.ch10_env import get_chapter_temp_dir
-from src.ref.keywords import Ch10Keywords as wx
+from src.ref.keywords import Ch10Keywords as kw
 
 
 def test_create_moment_dir_path_ReturnsObj():
@@ -127,7 +127,7 @@ def test_create_gut_path_ReturnsObj():
     a23_dir = create_path(x_moments_dir, a23_str)
     a23_beliefs_dir = create_path(a23_dir, "beliefs")
     a23_bob_dir = create_path(a23_beliefs_dir, bob_str)
-    a23_bob_gut_dir = create_path(a23_bob_dir, wx.gut)
+    a23_bob_gut_dir = create_path(a23_bob_dir, kw.gut)
     expected_a23_bob_gut_json_path = create_path(a23_bob_gut_dir, f"{bob_str}.json")
     # belief_filename = "belief.json"
     # expected_a23_e3_belief_path = create_path(a23_bob_e3_dir, belief_filename)
@@ -148,7 +148,7 @@ def test_create_job_path_ReturnsObj():
     a23_dir = create_path(x_moments_dir, a23_str)
     a23_beliefs_dir = create_path(a23_dir, "beliefs")
     a23_bob_dir = create_path(a23_beliefs_dir, bob_str)
-    a23_bob_job_dir = create_path(a23_bob_dir, wx.job)
+    a23_bob_job_dir = create_path(a23_bob_dir, kw.job)
     expected_a23_bob_job_json_path = create_path(a23_bob_job_dir, f"{bob_str}.json")
     # belief_filename = "belief.json"
     # expected_a23_e3_belief_path = create_path(a23_bob_e3_dir, belief_filename)
@@ -160,7 +160,7 @@ LINUX_OS = platform_system() == "Linux"
 
 def test_create_moment_dir_path_HasDocString():
     # ESTABLISH
-    doc_str = create_moment_dir_path("moment_mstr_dir", wx.moment_label)
+    doc_str = create_moment_dir_path("moment_mstr_dir", kw.moment_label)
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_moment_dir_path) == doc_str
@@ -168,7 +168,7 @@ def test_create_moment_dir_path_HasDocString():
 
 def test_create_moment_json_path_HasDocString():
     # ESTABLISH
-    doc_str = create_moment_json_path("moment_mstr_dir", moment_label=wx.moment_label)
+    doc_str = create_moment_json_path("moment_mstr_dir", moment_label=kw.moment_label)
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_moment_json_path) == doc_str
@@ -177,7 +177,7 @@ def test_create_moment_json_path_HasDocString():
 def test_create_moment_beliefs_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_moment_beliefs_dir_path(
-        "moment_mstr_dir", moment_label=wx.moment_label
+        "moment_mstr_dir", moment_label=kw.moment_label
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -188,8 +188,8 @@ def test_create_belief_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_belief_dir_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -200,8 +200,8 @@ def test_create_atoms_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_atoms_dir_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -212,8 +212,8 @@ def test_create_lessons_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_lessons_dir_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -224,8 +224,8 @@ def test_create_gut_path_HasDocString():
     # ESTABLISH
     doc_str = create_gut_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -239,8 +239,8 @@ def test_create_job_path_HasDocString():
     # ESTABLISH
     doc_str = create_job_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN

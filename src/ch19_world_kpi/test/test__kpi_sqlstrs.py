@@ -3,12 +3,12 @@ from src.ch19_world_kpi.kpi_sqlstrs import (
     get_create_kpi001_sqlstr,
     get_create_kpi002_sqlstr,
 )
-from src.ref.keywords import Ch19Keywords as wx
+from src.ref.keywords import Ch19Keywords as kw
 
 
 def test_get_create_kpi001_sqlstr_ReturnsObj():
     # ESTABLISH
-    blrplan_str = wx.belief_planunit
+    blrplan_str = kw.belief_planunit
     blrplan_job = create_prime_tablename(blrplan_str, "job", None)
 
     # WHEN
@@ -16,18 +16,18 @@ def test_get_create_kpi001_sqlstr_ReturnsObj():
 
     # THEN
     expected_kpi001_sqlstr = f"""
-CREATE TABLE {wx.moment_kpi001_voice_nets} AS
+CREATE TABLE {kw.moment_kpi001_voice_nets} AS
 SELECT
-  {wx.moment_voice_nets}.{wx.moment_label}
-, {wx.moment_voice_nets}.{wx.belief_name}
-, {wx.belief_net_amount} AS funds
-, RANK() OVER (ORDER BY {wx.belief_net_amount} DESC) AS fund_rank
-, IFNULL(SUM({blrplan_job}.{wx.pledge}), 0) AS pledges_count
-FROM {wx.moment_voice_nets}
+  {kw.moment_voice_nets}.{kw.moment_label}
+, {kw.moment_voice_nets}.{kw.belief_name}
+, {kw.belief_net_amount} AS funds
+, RANK() OVER (ORDER BY {kw.belief_net_amount} DESC) AS fund_rank
+, IFNULL(SUM({blrplan_job}.{kw.pledge}), 0) AS pledges_count
+FROM {kw.moment_voice_nets}
 LEFT JOIN {blrplan_job} ON
-  {blrplan_job}.{wx.moment_label} = {wx.moment_voice_nets}.{wx.moment_label}
-  AND {blrplan_job}.{wx.belief_name} = {wx.moment_voice_nets}.{wx.belief_name}
-GROUP BY {wx.moment_voice_nets}.{wx.moment_label}, {wx.moment_voice_nets}.{wx.belief_name}
+  {blrplan_job}.{kw.moment_label} = {kw.moment_voice_nets}.{kw.moment_label}
+  AND {blrplan_job}.{kw.belief_name} = {kw.moment_voice_nets}.{kw.belief_name}
+GROUP BY {kw.moment_voice_nets}.{kw.moment_label}, {kw.moment_voice_nets}.{kw.belief_name}
 ;
 """
     assert kpi001_sqlstr == expected_kpi001_sqlstr
@@ -35,7 +35,7 @@ GROUP BY {wx.moment_voice_nets}.{wx.moment_label}, {wx.moment_voice_nets}.{wx.be
 
 def test_get_create_kpi002_sqlstr_ReturnsObj():
     # ESTABLISH
-    blrplan_str = wx.belief_planunit
+    blrplan_str = kw.belief_planunit
     blrplan_job = create_prime_tablename(blrplan_str, "job", None)
 
     # WHEN
@@ -43,16 +43,16 @@ def test_get_create_kpi002_sqlstr_ReturnsObj():
 
     # THEN
     expected_kpi002_sqlstr = f"""
-CREATE TABLE {wx.moment_kpi002_belief_pledges} AS
+CREATE TABLE {kw.moment_kpi002_belief_pledges} AS
 SELECT
-  {wx.moment_label}
-, {wx.belief_name}
-, {wx.plan_rope}
-, {wx.pledge}
-, {wx.plan_active}
-, {wx.task}
+  {kw.moment_label}
+, {kw.belief_name}
+, {kw.plan_rope}
+, {kw.pledge}
+, {kw.plan_active}
+, {kw.task}
 FROM {blrplan_job}
-WHERE {wx.pledge} == 1 AND {wx.plan_active} == 1
+WHERE {kw.pledge} == 1 AND {kw.plan_active} == 1
 ;
 """
     print(expected_kpi002_sqlstr)

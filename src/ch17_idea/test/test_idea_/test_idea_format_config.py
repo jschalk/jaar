@@ -17,7 +17,7 @@ from src.ch17_idea.idea_main import (
     get_idearef_obj,
 )
 from src.ch17_idea.test._util.ch17_env import src_chapter_dir
-from src.ref.keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as kw
 
 
 def test_config_str_functions_ReturnsObj():
@@ -50,9 +50,9 @@ def test_get_idearef_obj_ReturnsObj():
     # THEN
     assert x_idearef.idea_name == idea_name_00021
     assert set(x_idearef.dimens) == {
-        wx.belief_voiceunit,
-        wx.beliefunit,
-        wx.momentunit,
+        kw.belief_voiceunit,
+        kw.beliefunit,
+        kw.momentunit,
     }
     assert x_idearef._attributes != {}
     assert len(x_idearef._attributes) == 7
@@ -67,21 +67,21 @@ def test_get_headers_list_ReturnsObj():
     # THEN
     # print(f"{format_00001_headers=}")
     assert format_00021_headers == [
-        wx.spark_num,
-        wx.face_name,
-        wx.moment_label,
-        wx.belief_name,
-        wx.voice_name,
-        wx.voice_cred_lumen,
-        wx.voice_debt_lumen,
+        kw.spark_num,
+        kw.face_name,
+        kw.moment_label,
+        kw.belief_name,
+        kw.voice_name,
+        kw.voice_cred_lumen,
+        kw.voice_debt_lumen,
     ]
 
 
 def get_sorted_headers_str(idea_filename):
     x_idearef = get_idearef_from_file(idea_filename)
-    idea_attributes = set(x_idearef.get(wx.attributes).keys())
-    idea_attributes.remove(wx.face_name)
-    idea_attributes.remove(wx.spark_num)
+    idea_attributes = set(x_idearef.get(kw.attributes).keys())
+    idea_attributes.remove(kw.face_name)
+    idea_attributes.remove(kw.spark_num)
     print(f"{idea_attributes=}")
     attr_sort = get_idea_elements_sort_order()
     idea_attributes = get_default_sorted_list(idea_attributes, attr_sort)
@@ -186,22 +186,22 @@ def test_get_idearef_obj_HasAttrs_idea_format_00021_belief_voiceunit_v0_0_0():
     # THEN
     assert len(format_00001_idearef._attributes) == 7
     assert format_00001_idearef._attributes == {
-        wx.voice_name: {wx.otx_key: True},
-        wx.voice_cred_lumen: {wx.otx_key: False},
-        wx.voice_debt_lumen: {wx.otx_key: False},
-        wx.spark_num: {wx.otx_key: True},
-        wx.face_name: {wx.otx_key: True},
-        wx.moment_label: {wx.otx_key: True},
-        wx.belief_name: {wx.otx_key: True},
+        kw.voice_name: {kw.otx_key: True},
+        kw.voice_cred_lumen: {kw.otx_key: False},
+        kw.voice_debt_lumen: {kw.otx_key: False},
+        kw.spark_num: {kw.otx_key: True},
+        kw.face_name: {kw.otx_key: True},
+        kw.moment_label: {kw.otx_key: True},
+        kw.belief_name: {kw.otx_key: True},
     }
     headers_list = format_00001_idearef.get_headers_list()
-    assert headers_list[0] == wx.spark_num
-    assert headers_list[1] == wx.face_name
-    assert headers_list[2] == wx.moment_label
-    assert headers_list[3] == wx.belief_name
-    assert headers_list[4] == wx.voice_name
-    assert headers_list[5] == wx.voice_cred_lumen
-    assert headers_list[6] == wx.voice_debt_lumen
+    assert headers_list[0] == kw.spark_num
+    assert headers_list[1] == kw.face_name
+    assert headers_list[2] == kw.moment_label
+    assert headers_list[3] == kw.belief_name
+    assert headers_list[4] == kw.voice_name
+    assert headers_list[5] == kw.voice_cred_lumen
+    assert headers_list[6] == kw.voice_debt_lumen
 
 
 def test_get_idearef_obj_HasAttrs_idea_format_00020_belief_voice_membership_v0_0_0():
@@ -214,14 +214,14 @@ def test_get_idearef_obj_HasAttrs_idea_format_00020_belief_voice_membership_v0_0
     # THEN
     assert len(format_00021_idearef._attributes) == 8
     headers_list = format_00021_idearef.get_headers_list()
-    assert headers_list[0] == wx.spark_num
-    assert headers_list[1] == wx.face_name
-    assert headers_list[2] == wx.moment_label
-    assert headers_list[3] == wx.belief_name
-    assert headers_list[4] == wx.voice_name
-    assert headers_list[5] == wx.group_title
-    assert headers_list[6] == wx.group_cred_lumen
-    assert headers_list[7] == wx.group_debt_lumen
+    assert headers_list[0] == kw.spark_num
+    assert headers_list[1] == kw.face_name
+    assert headers_list[2] == kw.moment_label
+    assert headers_list[3] == kw.belief_name
+    assert headers_list[4] == kw.voice_name
+    assert headers_list[5] == kw.group_title
+    assert headers_list[6] == kw.group_cred_lumen
+    assert headers_list[7] == kw.group_debt_lumen
 
 
 def test_get_idearef_obj_HasAttrs_idea_format_00013_planunit_v0_0_0():
@@ -234,13 +234,13 @@ def test_get_idearef_obj_HasAttrs_idea_format_00013_planunit_v0_0_0():
     # THEN
     assert len(format_00003_idearef._attributes) == 7
     headers_list = format_00003_idearef.get_headers_list()
-    assert headers_list[0] == wx.spark_num
-    assert headers_list[1] == wx.face_name
-    assert headers_list[2] == wx.moment_label
-    assert headers_list[3] == wx.belief_name
-    assert headers_list[4] == wx.plan_rope
-    assert headers_list[5] == wx.star
-    assert headers_list[6] == wx.pledge
+    assert headers_list[0] == kw.spark_num
+    assert headers_list[1] == kw.face_name
+    assert headers_list[2] == kw.moment_label
+    assert headers_list[3] == kw.belief_name
+    assert headers_list[4] == kw.plan_rope
+    assert headers_list[5] == kw.star
+    assert headers_list[6] == kw.pledge
 
 
 def test_get_idearef_obj_HasAttrs_idea_format_00019_planunit_v0_0_0():
@@ -253,16 +253,16 @@ def test_get_idearef_obj_HasAttrs_idea_format_00019_planunit_v0_0_0():
     # THEN
     assert len(format_00019_idearef._attributes) == 13
     headers_list = format_00019_idearef.get_headers_list()
-    assert headers_list[0] == wx.spark_num
-    assert headers_list[1] == wx.face_name
-    assert headers_list[2] == wx.moment_label
-    assert headers_list[3] == wx.belief_name
-    assert headers_list[4] == wx.plan_rope
-    assert headers_list[5] == wx.begin
-    assert headers_list[6] == wx.close
-    assert headers_list[7] == wx.addin
-    assert headers_list[8] == wx.numor
-    assert headers_list[9] == wx.denom
-    assert headers_list[10] == wx.morph
-    assert headers_list[11] == wx.gogo_want
-    assert headers_list[12] == wx.stop_want
+    assert headers_list[0] == kw.spark_num
+    assert headers_list[1] == kw.face_name
+    assert headers_list[2] == kw.moment_label
+    assert headers_list[3] == kw.belief_name
+    assert headers_list[4] == kw.plan_rope
+    assert headers_list[5] == kw.begin
+    assert headers_list[6] == kw.close
+    assert headers_list[7] == kw.addin
+    assert headers_list[8] == kw.numor
+    assert headers_list[9] == kw.denom
+    assert headers_list[10] == kw.morph
+    assert headers_list[11] == kw.gogo_want
+    assert headers_list[12] == kw.stop_want

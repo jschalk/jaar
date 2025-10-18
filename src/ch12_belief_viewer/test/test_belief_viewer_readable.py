@@ -9,7 +9,7 @@ from src.ch12_belief_viewer.belief_viewer__tool import (
     get_plan_view_dict,
     get_voices_view_dict,
 )
-from src.ref.keywords import Ch12Keywords as wx
+from src.ref.keywords import Ch12Keywords as kw
 
 
 def test_get_belief_view_dict_ReturnsObj_Scenario0_Empty():
@@ -23,10 +23,10 @@ def test_get_belief_view_dict_ReturnsObj_Scenario0_Empty():
 
     # THEN
     assert set(sue_belief_view_dict.keys()) == {
-        # wx.groupunits,
-        wx.voices,
-        wx.planroot,
+        # kw.groupunits,
+        kw.voices,
+        kw.planroot,
     }
-    sue_plan_view_dict = sue_belief_view_dict.get(wx.planroot)
+    sue_plan_view_dict = sue_belief_view_dict.get(kw.planroot)
     expected_sue_plan_view_dict = get_plan_view_dict(sue_believer.planroot)
     assert sue_plan_view_dict == expected_sue_plan_view_dict

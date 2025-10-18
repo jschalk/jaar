@@ -23,7 +23,7 @@ from src.ch11_bud._ref.ch11_path import (
     create_spark_expressed_lesson_path,
 )
 from src.ch11_bud.test._util.ch11_env import get_chapter_temp_dir
-from src.ref.keywords import Ch11Keywords as wx
+from src.ref.keywords import Ch11Keywords as kw
 
 
 def test_create_buds_dir_path_ReturnsObj():
@@ -342,8 +342,8 @@ def test_create_buds_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_buds_dir_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -354,9 +354,9 @@ def test_create_bud_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_bud_dir_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
-        bud_time=wx.bud_time,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
+        bud_time=kw.bud_time,
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
     doc_str = f"Returns path: {doc_str}"
@@ -368,9 +368,9 @@ def test_create_cell_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_cell_dir_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
-        bud_time=wx.bud_time,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
+        bud_time=kw.bud_time,
         bud_ancestors=["ledger_belief1", "ledger_belief2", "ledger_belief3"],
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
@@ -384,9 +384,9 @@ def test_create_cell_json_path_HasDocString():
     # ESTABLISH
     doc_str = create_cell_json_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
-        bud_time=wx.bud_time,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
+        bud_time=kw.bud_time,
         bud_ancestors=["ledger_belief1", "ledger_belief2", "ledger_belief3"],
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
@@ -400,9 +400,9 @@ def test_create_cell_voice_mandate_ledger_path_HasDocString():
     # ESTABLISH
     doc_str = create_cell_voice_mandate_ledger_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
-        bud_time=wx.bud_time,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
+        bud_time=kw.bud_time,
         bud_ancestors=["ledger_belief1", "ledger_belief2", "ledger_belief3"],
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
@@ -416,9 +416,9 @@ def test_create_budunit_json_path_HasDocString():
     # ESTABLISH
     doc_str = create_budunit_json_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
-        bud_time=wx.bud_time,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
+        bud_time=kw.bud_time,
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
     doc_str = f"Returns path: {doc_str}"
@@ -430,9 +430,9 @@ def test_create_beliefpoint_path_HasDocString():
     # ESTABLISH
     doc_str = create_beliefpoint_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
-        bud_time=wx.bud_time,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
+        bud_time=kw.bud_time,
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
     doc_str = f"Returns path: {doc_str}"
@@ -444,9 +444,9 @@ def test_create_belief_spark_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_belief_spark_dir_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
-        spark_num=wx.spark_num,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
+        spark_num=kw.spark_num,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -457,9 +457,9 @@ def test_create_beliefspark_path_HasDocString():
     # ESTABLISH
     doc_str = create_beliefspark_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
-        spark_num=wx.spark_num,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
+        spark_num=kw.spark_num,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -470,9 +470,9 @@ def test_create_spark_all_lesson_path_HasDocString():
     # ESTABLISH
     doc_str = create_spark_all_lesson_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
-        spark_num=wx.spark_num,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
+        spark_num=kw.spark_num,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -483,9 +483,9 @@ def test_create_spark_expressed_lesson_path_HasDocString():
     # ESTABLISH
     doc_str = create_spark_expressed_lesson_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
-        spark_num=wx.spark_num,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
+        spark_num=kw.spark_num,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN

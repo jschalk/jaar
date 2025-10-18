@@ -32,7 +32,7 @@ from src.ch16_translate.translate_config import (
     translateable_class_types,
 )
 from src.ch16_translate.translate_main import TranslateUnit, translateunit_shop
-from src.ref.keywords import Ch16Keywords as wx
+from src.ref.keywords import Ch16Keywords as kw
 
 
 def test_get_translate_args_class_types_ReturnsObj():
@@ -40,68 +40,68 @@ def test_get_translate_args_class_types_ReturnsObj():
     translate_args_class_types = get_translate_args_class_types()
 
     # THEN
-    assert translate_args_class_types.get(wx.voice_name) == wx.NameTerm
-    assert translate_args_class_types.get(wx.addin) == "float"
-    assert translate_args_class_types.get(wx.amount) == "float"
-    assert translate_args_class_types.get(wx.awardee_title) == wx.TitleTerm
-    assert translate_args_class_types.get(wx.reason_context) == wx.RopeTerm
-    assert translate_args_class_types.get(wx.active_requisite) == "bool"
-    assert translate_args_class_types.get(wx.begin) == "float"
-    assert translate_args_class_types.get(wx.c400_number) == "int"
-    assert translate_args_class_types.get(wx.close) == "float"
-    assert translate_args_class_types.get(wx.voice_cred_lumen) == "float"
-    assert translate_args_class_types.get(wx.group_cred_lumen) == "float"
-    assert translate_args_class_types.get(wx.credor_respect) == "float"
-    assert translate_args_class_types.get(wx.cumulative_day) == "int"
-    assert translate_args_class_types.get(wx.cumulative_minute) == "int"
-    assert translate_args_class_types.get(wx.voice_debt_lumen) == "float"
-    assert translate_args_class_types.get(wx.group_debt_lumen) == "float"
-    assert translate_args_class_types.get(wx.debtor_respect) == "float"
-    assert translate_args_class_types.get(wx.denom) == "int"
-    assert translate_args_class_types.get(wx.reason_divisor) == "int"
-    assert translate_args_class_types.get(wx.face_name) == wx.NameTerm
-    assert translate_args_class_types.get(wx.fact_context) == wx.RopeTerm
-    assert translate_args_class_types.get(wx.moment_label) == wx.LabelTerm
-    assert translate_args_class_types.get(wx.fact_upper) == "float"
-    assert translate_args_class_types.get(wx.fact_lower) == "float"
-    assert translate_args_class_types.get(wx.fund_grain) == "float"
-    assert translate_args_class_types.get(wx.fund_pool) == "float"
-    assert translate_args_class_types.get(wx.give_force) == "float"
-    assert translate_args_class_types.get(wx.gogo_want) == "float"
-    assert translate_args_class_types.get(wx.group_title) == wx.TitleTerm
-    assert translate_args_class_types.get(wx.healer_name) == wx.NameTerm
-    assert translate_args_class_types.get(wx.hour_label) == wx.LabelTerm
-    assert translate_args_class_types.get(wx.star) == "int"
-    assert translate_args_class_types.get(wx.max_tree_traverse) == "int"
-    assert translate_args_class_types.get(wx.month_label) == wx.LabelTerm
-    assert translate_args_class_types.get(wx.monthday_index) == "int"
-    assert translate_args_class_types.get(wx.morph) == "bool"
-    assert translate_args_class_types.get(wx.reason_state) == wx.RopeTerm
-    assert translate_args_class_types.get(wx.reason_upper) == "float"
-    assert translate_args_class_types.get(wx.numor) == "int"
-    assert translate_args_class_types.get(wx.offi_time) == "EpochPoint"
-    assert translate_args_class_types.get(wx.belief_name) == wx.NameTerm
-    assert translate_args_class_types.get(wx.reason_lower) == "float"
-    assert translate_args_class_types.get(wx.money_grain) == "float"
-    assert translate_args_class_types.get(wx.fact_state) == wx.RopeTerm
-    assert translate_args_class_types.get(wx.pledge) == "bool"
-    assert translate_args_class_types.get(wx.problem_bool) == "bool"
-    assert translate_args_class_types.get(wx.quota) == "int"
-    assert translate_args_class_types.get(wx.respect_grain) == "float"
-    assert translate_args_class_types.get(wx.plan_rope) == wx.RopeTerm
-    assert translate_args_class_types.get(wx.celldepth) == "int"
-    assert translate_args_class_types.get(wx.stop_want) == "float"
-    assert translate_args_class_types.get(wx.take_force) == "float"
-    assert translate_args_class_types.get(wx.tally) == "int"
-    assert translate_args_class_types.get(wx.party_title) == wx.TitleTerm
-    assert translate_args_class_types.get(wx.bud_time) == "EpochPoint"
-    assert translate_args_class_types.get(wx.tran_time) == "EpochPoint"
-    assert translate_args_class_types.get(wx.epoch_label) == wx.LabelTerm
-    assert translate_args_class_types.get(wx.weekday_label) == wx.LabelTerm
-    assert translate_args_class_types.get(wx.weekday_order) == "int"
-    assert translate_args_class_types.get(wx.knot) == "str"
-    assert translate_args_class_types.get(wx.yr1_jan1_offset) == "int"
-    assert translate_args_class_types.get(wx.solo) == "int"
+    assert translate_args_class_types.get(kw.voice_name) == kw.NameTerm
+    assert translate_args_class_types.get(kw.addin) == "float"
+    assert translate_args_class_types.get(kw.amount) == "float"
+    assert translate_args_class_types.get(kw.awardee_title) == kw.TitleTerm
+    assert translate_args_class_types.get(kw.reason_context) == kw.RopeTerm
+    assert translate_args_class_types.get(kw.active_requisite) == "bool"
+    assert translate_args_class_types.get(kw.begin) == "float"
+    assert translate_args_class_types.get(kw.c400_number) == "int"
+    assert translate_args_class_types.get(kw.close) == "float"
+    assert translate_args_class_types.get(kw.voice_cred_lumen) == "float"
+    assert translate_args_class_types.get(kw.group_cred_lumen) == "float"
+    assert translate_args_class_types.get(kw.credor_respect) == "float"
+    assert translate_args_class_types.get(kw.cumulative_day) == "int"
+    assert translate_args_class_types.get(kw.cumulative_minute) == "int"
+    assert translate_args_class_types.get(kw.voice_debt_lumen) == "float"
+    assert translate_args_class_types.get(kw.group_debt_lumen) == "float"
+    assert translate_args_class_types.get(kw.debtor_respect) == "float"
+    assert translate_args_class_types.get(kw.denom) == "int"
+    assert translate_args_class_types.get(kw.reason_divisor) == "int"
+    assert translate_args_class_types.get(kw.face_name) == kw.NameTerm
+    assert translate_args_class_types.get(kw.fact_context) == kw.RopeTerm
+    assert translate_args_class_types.get(kw.moment_label) == kw.LabelTerm
+    assert translate_args_class_types.get(kw.fact_upper) == "float"
+    assert translate_args_class_types.get(kw.fact_lower) == "float"
+    assert translate_args_class_types.get(kw.fund_grain) == "float"
+    assert translate_args_class_types.get(kw.fund_pool) == "float"
+    assert translate_args_class_types.get(kw.give_force) == "float"
+    assert translate_args_class_types.get(kw.gogo_want) == "float"
+    assert translate_args_class_types.get(kw.group_title) == kw.TitleTerm
+    assert translate_args_class_types.get(kw.healer_name) == kw.NameTerm
+    assert translate_args_class_types.get(kw.hour_label) == kw.LabelTerm
+    assert translate_args_class_types.get(kw.star) == "int"
+    assert translate_args_class_types.get(kw.max_tree_traverse) == "int"
+    assert translate_args_class_types.get(kw.month_label) == kw.LabelTerm
+    assert translate_args_class_types.get(kw.monthday_index) == "int"
+    assert translate_args_class_types.get(kw.morph) == "bool"
+    assert translate_args_class_types.get(kw.reason_state) == kw.RopeTerm
+    assert translate_args_class_types.get(kw.reason_upper) == "float"
+    assert translate_args_class_types.get(kw.numor) == "int"
+    assert translate_args_class_types.get(kw.offi_time) == "EpochPoint"
+    assert translate_args_class_types.get(kw.belief_name) == kw.NameTerm
+    assert translate_args_class_types.get(kw.reason_lower) == "float"
+    assert translate_args_class_types.get(kw.money_grain) == "float"
+    assert translate_args_class_types.get(kw.fact_state) == kw.RopeTerm
+    assert translate_args_class_types.get(kw.pledge) == "bool"
+    assert translate_args_class_types.get(kw.problem_bool) == "bool"
+    assert translate_args_class_types.get(kw.quota) == "int"
+    assert translate_args_class_types.get(kw.respect_grain) == "float"
+    assert translate_args_class_types.get(kw.plan_rope) == kw.RopeTerm
+    assert translate_args_class_types.get(kw.celldepth) == "int"
+    assert translate_args_class_types.get(kw.stop_want) == "float"
+    assert translate_args_class_types.get(kw.take_force) == "float"
+    assert translate_args_class_types.get(kw.tally) == "int"
+    assert translate_args_class_types.get(kw.party_title) == kw.TitleTerm
+    assert translate_args_class_types.get(kw.bud_time) == "EpochPoint"
+    assert translate_args_class_types.get(kw.tran_time) == "EpochPoint"
+    assert translate_args_class_types.get(kw.epoch_label) == kw.LabelTerm
+    assert translate_args_class_types.get(kw.weekday_label) == kw.LabelTerm
+    assert translate_args_class_types.get(kw.weekday_order) == "int"
+    assert translate_args_class_types.get(kw.knot) == "str"
+    assert translate_args_class_types.get(kw.yr1_jan1_offset) == "int"
+    assert translate_args_class_types.get(kw.solo) == "int"
 
     # make sure it translate_arg_class_types has all moment and all atom args
     translate_args = set(translate_args_class_types.keys())
@@ -110,13 +110,13 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert atom_args.issubset(translate_args)
     assert moment_args.issubset(translate_args)
     assert atom_args & (moment_args) == {
-        wx.voice_name,
-        wx.fund_grain,
-        wx.money_grain,
-        wx.respect_grain,
+        kw.voice_name,
+        kw.fund_grain,
+        kw.money_grain,
+        kw.respect_grain,
     }
     assert atom_args.union(moment_args) != translate_args
-    assert atom_args.union(moment_args).union({wx.face_name}) == translate_args
+    assert atom_args.union(moment_args).union({kw.face_name}) == translate_args
     assert check_class_types_are_correct()
     # assert translate_args_class_types.keys() == get_atom_args_dimen_mapping().keys()
     # assert all_atom_args_class_types_are_correct(x_class_types)
@@ -148,14 +148,14 @@ def test_translateable_class_types_ReturnsObj():
     # THEN
     assert len(x_translateable_class_types) == 4
     assert x_translateable_class_types == {
-        wx.NameTerm,
-        wx.TitleTerm,
-        wx.LabelTerm,
-        wx.RopeTerm,
+        kw.NameTerm,
+        kw.TitleTerm,
+        kw.LabelTerm,
+        kw.RopeTerm,
     }
     print(f"{set(get_atom_args_class_types().values())=}")
     all_atom_class_types = set(get_atom_args_class_types().values())
-    all_atom_class_types.add(wx.LabelTerm)
+    all_atom_class_types.add(kw.LabelTerm)
     x_cL_tyep = set(all_atom_class_types) & (x_translateable_class_types)
     assert x_cL_tyep == x_translateable_class_types
 
@@ -175,23 +175,23 @@ def test_get_translateable_args_ReturnsObj():
 
     assert len(get_translateable_args()) == 17
     assert get_translateable_args() == {
-        wx.voice_name,
-        wx.awardee_title,
-        wx.reason_context,
-        wx.face_name,
-        wx.fact_context,
-        wx.moment_label,
-        wx.fact_state,
-        wx.group_title,
-        wx.healer_name,
-        wx.hour_label,
-        wx.month_label,
-        wx.reason_state,
-        wx.belief_name,
-        wx.plan_rope,
-        wx.party_title,
-        wx.epoch_label,
-        wx.weekday_label,
+        kw.voice_name,
+        kw.awardee_title,
+        kw.reason_context,
+        kw.face_name,
+        kw.fact_context,
+        kw.moment_label,
+        kw.fact_state,
+        kw.group_title,
+        kw.healer_name,
+        kw.hour_label,
+        kw.month_label,
+        kw.reason_state,
+        kw.belief_name,
+        kw.plan_rope,
+        kw.party_title,
+        kw.epoch_label,
+        kw.weekday_label,
     }
 
 
@@ -251,7 +251,7 @@ def test_find_set_otx_inx_args_ReturnsObj_Scenario2_OtherArgsAreUntouched():
 
 def test_find_set_otx_inx_args_ReturnsObj_Scenario3_PartialSets():
     # ESTABLISH
-    healer_name_ERASE_str = f"{wx.healer_name}_ERASE"
+    healer_name_ERASE_str = f"{kw.healer_name}_ERASE"
     run_str = "run"
     given_belief_dimen_delete_keys = {run_str, healer_name_ERASE_str}
 
@@ -259,7 +259,7 @@ def test_find_set_otx_inx_args_ReturnsObj_Scenario3_PartialSets():
     otx_inx_args = find_set_otx_inx_args(given_belief_dimen_delete_keys)
 
     # THEN
-    healer_name_ERASE_str = f"{wx.healer_name}_ERASE"
+    healer_name_ERASE_str = f"{kw.healer_name}_ERASE"
     expected_otx_inx_args = {
         f"{healer_name_ERASE_str}_otx",
         f"{healer_name_ERASE_str}_inx",
@@ -275,15 +275,15 @@ def test_get_translate_NameTerm_args_ReturnsObj():
 
     # THEN
     assert translate_NameTerm_args == {
-        wx.voice_name,
-        wx.face_name,
-        wx.healer_name,
-        wx.belief_name,
+        kw.voice_name,
+        kw.face_name,
+        kw.healer_name,
+        kw.belief_name,
     }
     expected_args = {
         x_arg
         for x_arg, class_type in get_translate_args_class_types().items()
-        if class_type == wx.NameTerm
+        if class_type == kw.NameTerm
     }
     assert translate_NameTerm_args == expected_args
 
@@ -294,14 +294,14 @@ def test_get_translate_TitleTerm_args_ReturnsObj():
 
     # THEN
     assert translate_TitleTerm_args == {
-        wx.awardee_title,
-        wx.group_title,
-        wx.party_title,
+        kw.awardee_title,
+        kw.group_title,
+        kw.party_title,
     }
     expected_args = {
         x_arg
         for x_arg, class_type in get_translate_args_class_types().items()
-        if class_type == wx.TitleTerm
+        if class_type == kw.TitleTerm
     }
     assert translate_TitleTerm_args == expected_args
 
@@ -312,16 +312,16 @@ def test_get_translate_LabelTerm_args_ReturnsObj():
 
     # THEN
     assert translate_LabelTerm_args == {
-        wx.moment_label,
-        wx.hour_label,
-        wx.month_label,
-        wx.epoch_label,
-        wx.weekday_label,
+        kw.moment_label,
+        kw.hour_label,
+        kw.month_label,
+        kw.epoch_label,
+        kw.weekday_label,
     }
     expected_args = {
         x_arg
         for x_arg, class_type in get_translate_args_class_types().items()
-        if class_type == wx.LabelTerm
+        if class_type == kw.LabelTerm
     }
     assert translate_LabelTerm_args == expected_args
 
@@ -332,16 +332,16 @@ def test_get_translate_RopeTerm_args_ReturnsObj():
 
     # THEN
     assert translate_RopeTerm_args == {
-        wx.fact_state,
-        wx.fact_context,
-        wx.plan_rope,
-        wx.reason_context,
-        wx.reason_state,
+        kw.fact_state,
+        kw.fact_context,
+        kw.plan_rope,
+        kw.reason_context,
+        kw.reason_state,
     }
     expected_args = {
         x_arg
         for x_arg, class_type in get_translate_args_class_types().items()
-        if class_type == wx.RopeTerm
+        if class_type == kw.RopeTerm
     }
     assert translate_RopeTerm_args == expected_args
 
@@ -580,14 +580,14 @@ def test_TranslateUnit_get_mapunit_ReturnsObj():
     sue_pu.set_namemap(static_namemap)
 
     # WHEN / THEN
-    assert sue_pu.get_mapunit(wx.NameTerm) == sue_pu.namemap
-    assert sue_pu.get_mapunit(wx.TitleTerm) == sue_pu.titlemap
-    assert sue_pu.get_mapunit(wx.LabelTerm) == sue_pu.labelmap
-    assert sue_pu.get_mapunit(wx.RopeTerm) == sue_pu.ropemap
+    assert sue_pu.get_mapunit(kw.NameTerm) == sue_pu.namemap
+    assert sue_pu.get_mapunit(kw.TitleTerm) == sue_pu.titlemap
+    assert sue_pu.get_mapunit(kw.LabelTerm) == sue_pu.labelmap
+    assert sue_pu.get_mapunit(kw.RopeTerm) == sue_pu.ropemap
 
-    assert sue_pu.get_mapunit(wx.NameTerm) != sue_pu.ropemap
-    assert sue_pu.get_mapunit(wx.TitleTerm) != sue_pu.ropemap
-    assert sue_pu.get_mapunit(wx.LabelTerm) != sue_pu.ropemap
+    assert sue_pu.get_mapunit(kw.NameTerm) != sue_pu.ropemap
+    assert sue_pu.get_mapunit(kw.TitleTerm) != sue_pu.ropemap
+    assert sue_pu.get_mapunit(kw.LabelTerm) != sue_pu.ropemap
 
 
 def test_TranslateUnit_is_valid_ReturnsObj():
@@ -642,7 +642,7 @@ def test_TranslateUnit_set_otx2inx_SetsAttr_Scenario0_NameTerm():
     assert namemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_translateunit.set_otx2inx(wx.NameTerm, sue_otx, sue_inx)
+    zia_translateunit.set_otx2inx(kw.NameTerm, sue_otx, sue_inx)
 
     # THEN
     assert namemap.otx2inx_exists(sue_otx, sue_inx)
@@ -658,7 +658,7 @@ def test_TranslateUnit_set_otx2inx_SetsAttr_Scenario1_RopeTerm():
     assert ropemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_translateunit.set_otx2inx(wx.RopeTerm, sue_otx, sue_inx)
+    zia_translateunit.set_otx2inx(kw.RopeTerm, sue_otx, sue_inx)
 
     # THEN
     assert ropemap.otx2inx_exists(sue_otx, sue_inx)
@@ -674,7 +674,7 @@ def test_TranslateUnit_set_otx2inx_SetsAttr_Scenario2_LabelTerm():
     assert ropemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_translateunit.set_otx2inx(wx.LabelTerm, sue_otx, sue_inx)
+    zia_translateunit.set_otx2inx(kw.LabelTerm, sue_otx, sue_inx)
 
     # THEN
     assert ropemap.otx2inx_exists(sue_otx, sue_inx)
@@ -686,11 +686,11 @@ def test_TranslateUnit_otx2inx_exists_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_translateunit = translateunit_shop(zia_str)
-    rope_type = wx.LabelTerm
+    rope_type = kw.LabelTerm
     assert zia_translateunit.otx2inx_exists(rope_type, sue_otx, sue_inx) is False
 
     # WHEN
-    zia_translateunit.set_otx2inx(wx.LabelTerm, sue_otx, sue_inx)
+    zia_translateunit.set_otx2inx(kw.LabelTerm, sue_otx, sue_inx)
 
     # THEN
     assert zia_translateunit.otx2inx_exists(rope_type, sue_otx, sue_inx)
@@ -702,13 +702,13 @@ def test_TranslateUnit_get_inx_value_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_translateunit = translateunit_shop(zia_str)
-    assert zia_translateunit._get_inx_value(wx.NameTerm, sue_otx) != sue_inx
+    assert zia_translateunit._get_inx_value(kw.NameTerm, sue_otx) != sue_inx
 
     # WHEN
-    zia_translateunit.set_otx2inx(wx.NameTerm, sue_otx, sue_inx)
+    zia_translateunit.set_otx2inx(kw.NameTerm, sue_otx, sue_inx)
 
     # THEN
-    assert zia_translateunit._get_inx_value(wx.NameTerm, sue_otx) == sue_inx
+    assert zia_translateunit._get_inx_value(kw.NameTerm, sue_otx) == sue_inx
 
 
 def test_TranslateUnit_del_otx2inx_ReturnsObj():
@@ -717,9 +717,9 @@ def test_TranslateUnit_del_otx2inx_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_translateunit = translateunit_shop(zia_str)
-    rope_type = wx.LabelTerm
-    zia_translateunit.set_otx2inx(wx.LabelTerm, sue_otx, sue_inx)
-    zia_translateunit.set_otx2inx(wx.LabelTerm, zia_str, zia_str)
+    rope_type = kw.LabelTerm
+    zia_translateunit.set_otx2inx(kw.LabelTerm, sue_otx, sue_inx)
+    zia_translateunit.set_otx2inx(kw.LabelTerm, zia_str, zia_str)
     assert zia_translateunit.otx2inx_exists(rope_type, sue_otx, sue_inx)
     assert zia_translateunit.otx2inx_exists(rope_type, zia_str, zia_str)
 

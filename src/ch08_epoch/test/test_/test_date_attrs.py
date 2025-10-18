@@ -13,7 +13,7 @@ from src.ch08_epoch.test._util.ch08_examples import (
     get_creg_min_from_dt,
     get_five_min_from_dt,
 )
-from src.ref.keywords import Ch08Keywords as wx
+from src.ref.keywords import Ch08Keywords as kw
 
 
 def test_EpochPoint_Exists():
@@ -66,7 +66,7 @@ def test_BeliefEpochPoint_set_epoch_plan_SetsAttr():
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
-    x_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, 10000000)
+    x_epochpoint = beliefepochpoint_shop(sue_belief, kw.creg, 10000000)
     assert not x_epochpoint._epoch_plan
 
     # WHEN
@@ -81,7 +81,7 @@ def test_BeliefEpochPoint_set_weekday_SetsAttr():
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
-    x_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, 10001440)
+    x_epochpoint = beliefepochpoint_shop(sue_belief, kw.creg, 10001440)
     x_epochpoint._set_epoch_plan()
     assert not x_epochpoint._weekday
 
@@ -97,7 +97,7 @@ def test_BeliefEpochPoint_set_month_SetsAttr():
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
-    x_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, 10060000)
+    x_epochpoint = beliefepochpoint_shop(sue_belief, kw.creg, 10060000)
     x_epochpoint._set_epoch_plan()
     assert not x_epochpoint._month
     assert not x_epochpoint._monthday
@@ -116,7 +116,7 @@ def test_BeliefEpochPoint_set_hour_SetsAttr():
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
-    x_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, 10000001)
+    x_epochpoint = beliefepochpoint_shop(sue_belief, kw.creg, 10000001)
     x_epochpoint._set_epoch_plan()
     assert not x_epochpoint._hour
     assert not x_epochpoint._hour
@@ -135,7 +135,7 @@ def test_BeliefEpochPoint_set_year_SetsAttr():
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
-    x_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, 1030600100)
+    x_epochpoint = beliefepochpoint_shop(sue_belief, kw.creg, 1030600100)
     x_epochpoint._set_epoch_plan()
     assert not x_epochpoint._c400_number
     assert not x_epochpoint._c100_count
@@ -159,7 +159,7 @@ def test_BeliefEpochPoint_calc_epoch_SetsAttrs():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
-    x_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, 1030600102)
+    x_epochpoint = beliefepochpoint_shop(sue_belief, kw.creg, 1030600102)
     assert not x_epochpoint._epoch_plan
     assert not x_epochpoint._weekday
     assert not x_epochpoint._monthday
@@ -185,7 +185,7 @@ def test_BeliefEpochPoint_get_blurb_ReturnsObj():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
-    x_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, 1030600102)
+    x_epochpoint = beliefepochpoint_shop(sue_belief, kw.creg, 1030600102)
     x_epochpoint.calc_epoch()
     assert x_epochpoint._epoch_plan
     assert x_epochpoint._weekday
@@ -216,8 +216,8 @@ def test_calc_epoch_SetsAttrFiveEpoch(graphics_bool):
     mar1_2000_datetime = datetime(2000, 3, 1)
     creg_min = get_creg_min_from_dt(mar1_2000_datetime)
     five_min = get_five_min_from_dt(mar1_2000_datetime)
-    creg_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, creg_min)
-    five_epochpoint = beliefepochpoint_shop(sue_belief, wx.five, five_min)
+    creg_epochpoint = beliefepochpoint_shop(sue_belief, kw.creg, creg_min)
+    five_epochpoint = beliefepochpoint_shop(sue_belief, kw.five, five_min)
     assert not creg_epochpoint._weekday
     assert not creg_epochpoint._monthday
     assert not creg_epochpoint._month
@@ -255,7 +255,7 @@ def test_calc_epoch_SetsAttrFiveEpoch(graphics_bool):
 
 def check_creg_epoch_attr(x_belief: BeliefUnit, x_datetime: datetime):
     creg_min = get_creg_min_from_dt(x_datetime)
-    creg_epochpoint = beliefepochpoint_shop(x_belief, wx.creg, creg_min)
+    creg_epochpoint = beliefepochpoint_shop(x_belief, kw.creg, creg_min)
     creg_epochpoint.calc_epoch()
     dt_hour = x_datetime.strftime("%H")
     dt_minute = x_datetime.strftime("%M")

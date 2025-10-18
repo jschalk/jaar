@@ -7,7 +7,7 @@ from src.ch16_translate.map import (
     titlemap_shop,
 )
 from src.ch16_translate.translate_config import default_unknown_str_if_None
-from src.ref.keywords import Ch16Keywords as wx
+from src.ref.keywords import Ch16Keywords as kw
 
 
 def test_TitleMap_Exists():
@@ -305,12 +305,12 @@ def test_TitleMap_to_dict_ReturnsObj():
         face_name=sue_str,
     )
     x1_rope_map_dict = {
-        wx.otx_knot: x_titlemap.otx_knot,
-        wx.inx_knot: x_titlemap.inx_knot,
-        wx.unknown_str: x_titlemap.unknown_str,
-        wx.otx2inx: {},
-        wx.spark_num: x_titlemap.spark_num,
-        wx.face_name: x_titlemap.face_name,
+        kw.otx_knot: x_titlemap.otx_knot,
+        kw.inx_knot: x_titlemap.inx_knot,
+        kw.unknown_str: x_titlemap.unknown_str,
+        kw.otx2inx: {},
+        kw.spark_num: x_titlemap.spark_num,
+        kw.face_name: x_titlemap.face_name,
     }
     assert x_titlemap.to_dict() == x1_rope_map_dict
 
@@ -318,12 +318,12 @@ def test_TitleMap_to_dict_ReturnsObj():
     x_titlemap.set_otx2inx(clean_otx, clean_inx)
     # THEN
     x2_rope_map_dict = {
-        wx.otx_knot: x_titlemap.otx_knot,
-        wx.inx_knot: x_titlemap.inx_knot,
-        wx.unknown_str: x_titlemap.unknown_str,
-        wx.otx2inx: {clean_otx: clean_inx},
-        wx.spark_num: x_titlemap.spark_num,
-        wx.face_name: sue_str,
+        kw.otx_knot: x_titlemap.otx_knot,
+        kw.inx_knot: x_titlemap.inx_knot,
+        kw.unknown_str: x_titlemap.unknown_str,
+        kw.otx2inx: {clean_otx: clean_inx},
+        kw.spark_num: x_titlemap.spark_num,
+        kw.face_name: sue_str,
     }
     assert x_titlemap.to_dict() == x2_rope_map_dict
 

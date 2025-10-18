@@ -9,7 +9,7 @@ from src.ch12_belief_viewer.gcalendar import (
     gcal_readble_percent,
 )
 from src.ch12_belief_viewer.test._util.ch12_examples import ExampleValuesRef as exx
-from src.ref.keywords import Ch12Keywords as wx
+from src.ref.keywords import Ch12Keywords as kw
 
 # @pytest.mark.parametrize(
 #     "value,expected",

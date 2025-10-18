@@ -7,7 +7,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_plan_reasonunit_get_obj,
 )
 from src.ch09_belief_atom.atom_main import beliefatom_shop, sift_beliefatom
-from src.ref.keywords import Ch09Keywords as wx
+from src.ref.keywords import Ch09Keywords as kw
 
 
 def test_sift_atom_ReturnsNoneIfGivenBeliefAtomIsUPDATE():
@@ -16,10 +16,10 @@ def test_sift_atom_ReturnsNoneIfGivenBeliefAtomIsUPDATE():
     casa_str = "casa"
     casa_rope = sue_belief.make_l1_rope(casa_str)
     sue_belief.add_plan(casa_rope)
-    casa_atom = beliefatom_shop(wx.belief_planunit, wx.UPDATE)
-    casa_atom.set_arg(wx.parent_rope, sue_belief.get_nexus_label())
-    casa_atom.set_arg(wx.plan_label, casa_str)
-    casa_atom.set_arg(wx.star, 8)
+    casa_atom = beliefatom_shop(kw.belief_planunit, kw.UPDATE)
+    casa_atom.set_arg(kw.parent_rope, sue_belief.get_nexus_label())
+    casa_atom.set_arg(kw.plan_label, casa_str)
+    casa_atom.set_arg(kw.star, 8)
 
     # WHEN
     new_casa_atom = sift_beliefatom(sue_belief, casa_atom)
@@ -39,33 +39,33 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_beliefunit():
     sue_max_tree_traverse = 72
     sue_money_grain = 2
     sue_tally = 100
-    zia_atom = beliefatom_shop(wx.beliefunit, wx.INSERT)
-    zia_atom.set_arg(wx.respect_grain, sue_bit)
-    zia_atom.set_arg(wx.credor_respect, sue_credor_respect)
-    zia_atom.set_arg(wx.debtor_respect, sue_debtor_respect)
-    zia_atom.set_arg(wx.fund_grain, sue_fund_grain)
-    zia_atom.set_arg(wx.fund_pool, sue_fund_pool)
-    zia_atom.set_arg(wx.max_tree_traverse, sue_max_tree_traverse)
-    zia_atom.set_arg(wx.money_grain, sue_money_grain)
-    zia_atom.set_arg(wx.tally, sue_tally)
+    zia_atom = beliefatom_shop(kw.beliefunit, kw.INSERT)
+    zia_atom.set_arg(kw.respect_grain, sue_bit)
+    zia_atom.set_arg(kw.credor_respect, sue_credor_respect)
+    zia_atom.set_arg(kw.debtor_respect, sue_debtor_respect)
+    zia_atom.set_arg(kw.fund_grain, sue_fund_grain)
+    zia_atom.set_arg(kw.fund_pool, sue_fund_pool)
+    zia_atom.set_arg(kw.max_tree_traverse, sue_max_tree_traverse)
+    zia_atom.set_arg(kw.money_grain, sue_money_grain)
+    zia_atom.set_arg(kw.tally, sue_tally)
 
     # WHEN
     new_zia_beliefatom = sift_beliefatom(sue_belief, zia_atom)
 
     # THEN
     assert new_zia_beliefatom
-    assert new_zia_beliefatom.crud_str == wx.UPDATE
+    assert new_zia_beliefatom.crud_str == kw.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
     assert zia_jvalues == {
-        wx.respect_grain: sue_bit,
-        wx.credor_respect: sue_credor_respect,
-        wx.debtor_respect: sue_debtor_respect,
-        wx.fund_grain: sue_fund_grain,
-        wx.fund_pool: sue_fund_pool,
-        wx.max_tree_traverse: sue_max_tree_traverse,
-        wx.money_grain: sue_money_grain,
-        wx.tally: sue_tally,
+        kw.respect_grain: sue_bit,
+        kw.credor_respect: sue_credor_respect,
+        kw.debtor_respect: sue_debtor_respect,
+        kw.fund_grain: sue_fund_grain,
+        kw.fund_pool: sue_fund_pool,
+        kw.max_tree_traverse: sue_max_tree_traverse,
+        kw.money_grain: sue_money_grain,
+        kw.tally: sue_tally,
     }
 
 
@@ -76,19 +76,19 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voiceunit():
     sue_belief = beliefunit_shop("Sue")
     sue_belief.add_voiceunit(zia_str)
 
-    zia_atom = beliefatom_shop(wx.belief_voiceunit, wx.INSERT)
-    zia_atom.set_arg(wx.voice_name, zia_str)
-    zia_atom.set_arg(wx.voice_debt_lumen, zia_voice_debt_lumen)
+    zia_atom = beliefatom_shop(kw.belief_voiceunit, kw.INSERT)
+    zia_atom.set_arg(kw.voice_name, zia_str)
+    zia_atom.set_arg(kw.voice_debt_lumen, zia_voice_debt_lumen)
 
     # WHEN
     new_zia_beliefatom = sift_beliefatom(sue_belief, zia_atom)
 
     # THEN
     assert new_zia_beliefatom
-    assert new_zia_beliefatom.crud_str == wx.UPDATE
+    assert new_zia_beliefatom.crud_str == kw.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
-    assert zia_jvalues == {wx.voice_debt_lumen: 51}
+    assert zia_jvalues == {kw.voice_debt_lumen: 51}
 
 
 def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voice_membership():
@@ -100,20 +100,20 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voice_membership():
     sue_belief.add_voiceunit(zia_str)
     sue_belief.get_voice(zia_str).add_membership(run_str)
 
-    zia_atom = beliefatom_shop(wx.belief_voice_membership, wx.INSERT)
-    zia_atom.set_arg(wx.voice_name, zia_str)
-    zia_atom.set_arg(wx.group_title, run_str)
-    zia_atom.set_arg(wx.group_debt_lumen, zia_run_group_debt_lumen)
+    zia_atom = beliefatom_shop(kw.belief_voice_membership, kw.INSERT)
+    zia_atom.set_arg(kw.voice_name, zia_str)
+    zia_atom.set_arg(kw.group_title, run_str)
+    zia_atom.set_arg(kw.group_debt_lumen, zia_run_group_debt_lumen)
 
     # WHEN
     new_zia_beliefatom = sift_beliefatom(sue_belief, zia_atom)
 
     # THEN
     assert new_zia_beliefatom
-    assert new_zia_beliefatom.crud_str == wx.UPDATE
+    assert new_zia_beliefatom.crud_str == kw.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
-    assert zia_jvalues == {wx.group_debt_lumen: zia_run_group_debt_lumen}
+    assert zia_jvalues == {kw.group_debt_lumen: zia_run_group_debt_lumen}
 
 
 def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_planunit():
@@ -134,39 +134,39 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_planunit():
     sue_pledge = 97
     sue_problem_bool = True
     sue_stop_want = 107
-    old_casa_atom = beliefatom_shop(wx.belief_planunit, wx.INSERT)
-    old_casa_atom.set_arg(wx.plan_rope, casa_rope)
-    old_casa_atom.set_arg(wx.addin, sue_addin)
-    old_casa_atom.set_arg(wx.begin, sue_begin)
-    old_casa_atom.set_arg(wx.close, sue_close)
-    old_casa_atom.set_arg(wx.denom, sue_denom)
-    old_casa_atom.set_arg(wx.gogo_want, sue_gogo_want)
-    old_casa_atom.set_arg(wx.star, sue_star)
-    old_casa_atom.set_arg(wx.morph, sue_morph)
-    old_casa_atom.set_arg(wx.numor, sue_numor)
-    old_casa_atom.set_arg(wx.pledge, sue_pledge)
+    old_casa_atom = beliefatom_shop(kw.belief_planunit, kw.INSERT)
+    old_casa_atom.set_arg(kw.plan_rope, casa_rope)
+    old_casa_atom.set_arg(kw.addin, sue_addin)
+    old_casa_atom.set_arg(kw.begin, sue_begin)
+    old_casa_atom.set_arg(kw.close, sue_close)
+    old_casa_atom.set_arg(kw.denom, sue_denom)
+    old_casa_atom.set_arg(kw.gogo_want, sue_gogo_want)
+    old_casa_atom.set_arg(kw.star, sue_star)
+    old_casa_atom.set_arg(kw.morph, sue_morph)
+    old_casa_atom.set_arg(kw.numor, sue_numor)
+    old_casa_atom.set_arg(kw.pledge, sue_pledge)
     old_casa_atom.set_arg("problem_bool", sue_problem_bool)
-    old_casa_atom.set_arg(wx.stop_want, sue_stop_want)
+    old_casa_atom.set_arg(kw.stop_want, sue_stop_want)
 
     # WHEN
     new_casa_atom = sift_beliefatom(sue_belief, old_casa_atom)
 
     # THEN
     assert new_casa_atom
-    assert new_casa_atom.crud_str == wx.UPDATE
+    assert new_casa_atom.crud_str == kw.UPDATE
     assert new_casa_atom.get_jvalues_dict()
     zia_jvalues = new_casa_atom.get_jvalues_dict()
-    assert zia_jvalues.get(wx.addin) == sue_addin
-    assert zia_jvalues.get(wx.begin) == sue_begin
-    assert zia_jvalues.get(wx.close) == sue_close
-    assert zia_jvalues.get(wx.denom) == sue_denom
-    assert zia_jvalues.get(wx.gogo_want) == sue_gogo_want
-    assert zia_jvalues.get(wx.star) == sue_star
-    assert zia_jvalues.get(wx.morph) == sue_morph
-    assert zia_jvalues.get(wx.numor) == sue_numor
-    assert zia_jvalues.get(wx.pledge) == sue_pledge
+    assert zia_jvalues.get(kw.addin) == sue_addin
+    assert zia_jvalues.get(kw.begin) == sue_begin
+    assert zia_jvalues.get(kw.close) == sue_close
+    assert zia_jvalues.get(kw.denom) == sue_denom
+    assert zia_jvalues.get(kw.gogo_want) == sue_gogo_want
+    assert zia_jvalues.get(kw.star) == sue_star
+    assert zia_jvalues.get(kw.morph) == sue_morph
+    assert zia_jvalues.get(kw.numor) == sue_numor
+    assert zia_jvalues.get(kw.pledge) == sue_pledge
     assert zia_jvalues.get("problem_bool") == sue_problem_bool
-    assert zia_jvalues.get(wx.stop_want) == sue_stop_want
+    assert zia_jvalues.get(kw.stop_want) == sue_stop_want
 
 
 def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_awardunit():
@@ -180,22 +180,22 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_awardunit():
     zia_run_take_force = 76
     sue_belief.get_plan_obj(casa_rope).set_awardunit(awardunit_shop(run_str, 2, 3))
 
-    zia_atom = beliefatom_shop(wx.belief_plan_awardunit, wx.INSERT)
-    zia_atom.set_arg(wx.plan_rope, casa_rope)
-    zia_atom.set_arg(wx.awardee_title, run_str)
-    zia_atom.set_arg(wx.give_force, zia_run_give_force)
-    zia_atom.set_arg(wx.take_force, zia_run_take_force)
+    zia_atom = beliefatom_shop(kw.belief_plan_awardunit, kw.INSERT)
+    zia_atom.set_arg(kw.plan_rope, casa_rope)
+    zia_atom.set_arg(kw.awardee_title, run_str)
+    zia_atom.set_arg(kw.give_force, zia_run_give_force)
+    zia_atom.set_arg(kw.take_force, zia_run_take_force)
 
     # WHEN
     new_zia_beliefatom = sift_beliefatom(sue_belief, zia_atom)
 
     # THEN
     assert new_zia_beliefatom
-    assert new_zia_beliefatom.crud_str == wx.UPDATE
+    assert new_zia_beliefatom.crud_str == kw.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
-    assert zia_jvalues.get(wx.give_force) == zia_run_give_force
-    assert zia_jvalues.get(wx.take_force) == zia_run_take_force
+    assert zia_jvalues.get(kw.give_force) == zia_run_give_force
+    assert zia_jvalues.get(kw.take_force) == zia_run_take_force
 
 
 def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reasonunit():
@@ -208,10 +208,10 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reasonunit():
     sue_belief.get_plan_obj(casa_rope).set_reasonunit(reasonunit_shop(week_rope))
 
     new_active_requisite = True
-    casa_atom = beliefatom_shop(wx.belief_plan_reasonunit, wx.INSERT)
-    casa_atom.set_arg(wx.plan_rope, casa_rope)
-    casa_atom.set_arg(wx.reason_context, week_rope)
-    casa_atom.set_arg(wx.active_requisite, new_active_requisite)
+    casa_atom = beliefatom_shop(kw.belief_plan_reasonunit, kw.INSERT)
+    casa_atom.set_arg(kw.plan_rope, casa_rope)
+    casa_atom.set_arg(kw.reason_context, week_rope)
+    casa_atom.set_arg(kw.active_requisite, new_active_requisite)
     casa_jkeys = casa_atom.get_jkeys_dict()
     casa_reasonunit = belief_plan_reasonunit_get_obj(sue_belief, casa_jkeys)
     assert casa_reasonunit.active_requisite != new_active_requisite
@@ -222,10 +222,10 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reasonunit():
 
     # THEN
     assert new_zia_beliefatom
-    assert new_zia_beliefatom.crud_str == wx.UPDATE
+    assert new_zia_beliefatom.crud_str == kw.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
-    zia_requisite_value = zia_jvalues.get(wx.active_requisite)
+    zia_requisite_value = zia_jvalues.get(kw.active_requisite)
     assert zia_requisite_value == new_active_requisite
 
 
@@ -236,7 +236,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reason_caseunit():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    week_rope = sue_belief.make_l1_rope(wx.week)
+    week_rope = sue_belief.make_l1_rope(kw.week)
     thur_str = "thur"
     thur_rope = sue_belief.make_rope(week_rope, thur_str)
     sue_belief.add_plan(clean_rope)
@@ -246,10 +246,10 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reason_caseunit():
     clean_plan.get_reasonunit(week_rope).set_case(thur_rope)
 
     thur_reason_divisor = 39
-    thur_atom = beliefatom_shop(wx.belief_plan_reason_caseunit, wx.INSERT)
-    thur_atom.set_arg(wx.plan_rope, clean_rope)
-    thur_atom.set_arg(wx.reason_context, week_rope)
-    thur_atom.set_arg(wx.reason_state, thur_rope)
+    thur_atom = beliefatom_shop(kw.belief_plan_reason_caseunit, kw.INSERT)
+    thur_atom.set_arg(kw.plan_rope, clean_rope)
+    thur_atom.set_arg(kw.reason_context, week_rope)
+    thur_atom.set_arg(kw.reason_state, thur_rope)
     assert thur_atom.is_valid()
     thur_atom.set_arg("reason_divisor", thur_reason_divisor)
     thur_jkeys = thur_atom.get_jkeys_dict()
@@ -262,7 +262,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reason_caseunit():
 
     # THEN
     assert new_zia_beliefatom
-    assert new_zia_beliefatom.crud_str == wx.UPDATE
+    assert new_zia_beliefatom.crud_str == kw.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
     assert zia_jvalues.get("reason_divisor") == thur_reason_divisor
@@ -273,15 +273,15 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_factunit():
     sue_belief = beliefunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_belief.make_l1_rope(casa_str)
-    week_rope = sue_belief.make_l1_rope(wx.week)
+    week_rope = sue_belief.make_l1_rope(kw.week)
     sue_belief.add_plan(casa_rope)
     sue_belief.get_plan_obj(casa_rope).set_factunit(factunit_shop(week_rope))
 
     casa_fact_lower = 32
-    casa_atom = beliefatom_shop(wx.belief_plan_factunit, wx.INSERT)
-    casa_atom.set_arg(wx.plan_rope, casa_rope)
-    casa_atom.set_arg(wx.fact_context, week_rope)
-    casa_atom.set_arg(wx.fact_lower, casa_fact_lower)
+    casa_atom = beliefatom_shop(kw.belief_plan_factunit, kw.INSERT)
+    casa_atom.set_arg(kw.plan_rope, casa_rope)
+    casa_atom.set_arg(kw.fact_context, week_rope)
+    casa_atom.set_arg(kw.fact_lower, casa_fact_lower)
     casa_jkeys = casa_atom.get_jkeys_dict()
     casa_factunit = belief_plan_factunit_get_obj(sue_belief, casa_jkeys)
     assert casa_factunit.fact_lower != casa_fact_lower
@@ -292,7 +292,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_factunit():
 
     # THEN
     assert new_zia_beliefatom
-    assert new_zia_beliefatom.crud_str == wx.UPDATE
+    assert new_zia_beliefatom.crud_str == kw.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
-    assert zia_jvalues.get(wx.fact_lower) == casa_fact_lower
+    assert zia_jvalues.get(kw.fact_lower) == casa_fact_lower

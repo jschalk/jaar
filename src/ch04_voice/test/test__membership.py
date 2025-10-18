@@ -13,7 +13,7 @@ from src.ch04_voice.group import (
     membership_shop,
     memberships_get_from_dict,
 )
-from src.ref.keywords import Ch04Keywords as wx
+from src.ref.keywords import Ch04Keywords as kw
 
 
 def test_GroupCore_Exists():
@@ -49,18 +49,18 @@ def test_MemberShip_Exists():
     obj_attrs = set(swim_membership.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        wx.voice_name,
-        wx.group_title,
-        wx.group_cred_lumen,
-        wx.group_debt_lumen,
-        wx.credor_pool,
-        wx.debtor_pool,
-        wx.fund_agenda_give,
-        wx.fund_agenda_ratio_give,
-        wx.fund_agenda_ratio_take,
-        wx.fund_agenda_take,
-        wx.fund_give,
-        wx.fund_take,
+        kw.voice_name,
+        kw.group_title,
+        kw.group_cred_lumen,
+        kw.group_debt_lumen,
+        kw.credor_pool,
+        kw.debtor_pool,
+        kw.fund_agenda_give,
+        kw.fund_agenda_ratio_give,
+        kw.fund_agenda_ratio_take,
+        kw.fund_agenda_take,
+        kw.fund_give,
+        kw.fund_take,
     }
 
 
@@ -379,9 +379,9 @@ def test_AwardUnit_to_dict_ReturnsDictWithNecessaryDataForJSON():
     # THEN
     assert biker_dict is not None
     assert biker_dict == {
-        wx.awardee_title: bikers_awardunit.awardee_title,
-        wx.give_force: bikers_awardunit.give_force,
-        wx.take_force: bikers_awardunit.take_force,
+        kw.awardee_title: bikers_awardunit.awardee_title,
+        kw.give_force: bikers_awardunit.give_force,
+        kw.take_force: bikers_awardunit.take_force,
     }
 
 

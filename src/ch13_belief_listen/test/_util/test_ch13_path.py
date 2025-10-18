@@ -15,7 +15,7 @@ from src.ch13_belief_listen._ref.ch13_path import (
     create_treasury_db_path,
     treasury_filename,
 )
-from src.ref.keywords import Ch13Keywords as wx
+from src.ref.keywords import Ch13Keywords as kw
 
 LINUX_OS = platform_system() == "Linux"
 
@@ -320,8 +320,8 @@ def test_create_keeps_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_keeps_dir_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -331,11 +331,11 @@ def test_create_keeps_dir_path_HasDocString():
 def test_create_keep_rope_path_HasDocString() -> None:
     # ESTABLISH
     level1_label_str = "level1_label"
-    level1_rope = create_rope(wx.planroot, level1_label_str)
+    level1_rope = create_rope(kw.planroot, level1_label_str)
     doc_str = create_keep_rope_path(
         moment_mstr_dir="moment_mstr_dir",
-        belief_name=wx.belief_name,
-        moment_label=wx.moment_label,
+        belief_name=kw.belief_name,
+        moment_label=kw.moment_label,
         keep_rope=level1_rope,
         knot=None,
     )
@@ -348,8 +348,8 @@ def test_create_keep_dutys_path_HasDocString() -> None:
     # ESTABLISH
     expected_doc_str = create_keep_dutys_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
         keep_rope="planroot;level1;leveln",
         knot=None,
     )
@@ -364,8 +364,8 @@ def test_create_keep_duty_path_HasDocString() -> None:
     duty_belief_str = "duty_belief"
     expected_doc_str = create_keep_duty_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
         keep_rope="planroot;level1;leveln",
         knot=None,
         duty_belief=duty_belief_str,
@@ -380,8 +380,8 @@ def test_create_keep_grades_path_HasDocString() -> None:
     # ESTABLISH
     doc_str = create_keep_grades_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
         keep_rope="planroot;level1;leveln",
         knot=None,
     )
@@ -396,8 +396,8 @@ def test_create_keep_grade_path_HasDocString() -> None:
     # ESTABLISH
     doc_str = create_keep_grade_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
         keep_rope="planroot;level1;leveln",
         knot=None,
         grade_belief_name="grade_belief_name",
@@ -413,8 +413,8 @@ def test_create_keep_visions_path_HasDocString() -> None:
     # ESTABLISH
     doc_str = create_keep_visions_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
         keep_rope="planroot;level1;leveln",
         knot=None,
     )
@@ -428,8 +428,8 @@ def test_create_treasury_db_path_HasDocString() -> None:
     # ESTABLISH
     doc_str = create_treasury_db_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
         keep_rope="planroot;level1;leveln",
         knot=None,
     )

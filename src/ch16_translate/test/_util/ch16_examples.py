@@ -12,7 +12,7 @@ from src.ch16_translate.map import (
 )
 from src.ch16_translate.translate_config import default_unknown_str_if_None
 from src.ch16_translate.translate_main import TranslateUnit, translateunit_shop
-from src.ref.keywords import Ch16Keywords as wx
+from src.ref.keywords import Ch16Keywords as kw
 
 
 def get_clean_labelmap() -> LabelMap:
@@ -75,7 +75,7 @@ def get_suita_namemap() -> NameMap:
 #     sue_inx = "Sue"
 #     zia_otx = "Zia"
 #     zia_inx = "Zia"
-#     x_titlemap = mapunit_shop(wx.NameTerm, face_name="Sue")
+#     x_titlemap = mapunit_shop(kw.NameTerm, face_name="Sue")
 #     x_titlemap.set_otx2inx(sue_otx, sue_inx)
 #     x_titlemap.set_otx2inx(zia_otx, zia_inx)
 #     return x_titlemap
@@ -86,7 +86,7 @@ def get_suita_namemap() -> NameMap:
 #     sue_inx = f"Sue{default_knot_if_None()}"
 #     zia_otx = "Zia"
 #     zia_inx = f"Zia{default_knot_if_None()}"
-#     x_titlemap = mapunit_shop(wx.TitleTerm, face_name="Sue")
+#     x_titlemap = mapunit_shop(kw.TitleTerm, face_name="Sue")
 #     x_titlemap.set_otx2inx(sue_otx, sue_inx)
 #     x_titlemap.set_otx2inx(zia_otx, zia_inx)
 #     return x_titlemap
@@ -97,7 +97,7 @@ def get_suita_namemap() -> NameMap:
 #     clean_inx = "propre"
 #     casa_otx = f"casa{default_knot_if_None()}"
 #     casa_inx = "casa"
-#     labelmap = mapunit_shop(wx.LabelTerm, face_name="Sue")
+#     labelmap = mapunit_shop(kw.LabelTerm, face_name="Sue")
 #     labelmap.set_otx2inx(clean_str, clean_inx)
 #     labelmap.set_otx2inx(casa_otx, casa_inx)
 #     return labelmap
@@ -118,11 +118,11 @@ def get_suita_voice_name_otx_dt() -> DataFrame:
     sue_otx = "Sue"
     bob_otx = "Bob"
     zia_otx = "Zia"
-    otx_dt = DataFrame(columns=[wx.voice_name])
-    otx_dt.loc[0, wx.voice_name] = zia_otx
-    otx_dt.loc[1, wx.voice_name] = sue_otx
-    otx_dt.loc[2, wx.voice_name] = bob_otx
-    otx_dt.loc[3, wx.voice_name] = xio_otx
+    otx_dt = DataFrame(columns=[kw.voice_name])
+    otx_dt.loc[0, kw.voice_name] = zia_otx
+    otx_dt.loc[1, kw.voice_name] = sue_otx
+    otx_dt.loc[2, kw.voice_name] = bob_otx
+    otx_dt.loc[3, kw.voice_name] = xio_otx
     return otx_dt
 
 
@@ -131,11 +131,11 @@ def get_suita_voice_name_inx_dt() -> DataFrame:
     sue_inx = "Suita"
     bob_inx = "Bobita"
     zia_otx = "Zia"
-    inx_dt = DataFrame(columns=[wx.voice_name])
-    inx_dt.loc[0, wx.voice_name] = xio_inx
-    inx_dt.loc[1, wx.voice_name] = sue_inx
-    inx_dt.loc[2, wx.voice_name] = bob_inx
-    inx_dt.loc[3, wx.voice_name] = zia_otx
+    inx_dt = DataFrame(columns=[kw.voice_name])
+    inx_dt.loc[0, kw.voice_name] = xio_inx
+    inx_dt.loc[1, kw.voice_name] = sue_inx
+    inx_dt.loc[2, kw.voice_name] = bob_inx
+    inx_dt.loc[3, kw.voice_name] = zia_otx
     return inx_dt
 
 
@@ -157,7 +157,7 @@ def get_casa_maison_translateunit_set_by_otx2inx() -> TranslateUnit:
     sweep_inx_rope = create_rope(clean_inx_rope, sweep_str)
 
     sue_translateunit = translateunit_shop("Sue", 7)
-    rx = wx.RopeTerm
+    rx = kw.RopeTerm
     sue_translateunit.set_otx2inx(rx, otx_amy45_rope, inx_amy87_rope)
     sue_translateunit.set_otx2inx(rx, casa_otx_rope, casa_inx_rope)
     sue_translateunit.set_otx2inx(rx, clean_otx_rope, clean_inx_rope)
@@ -196,11 +196,11 @@ def get_casa_maison_rope_otx_dt() -> DataFrame:
     clean_otx_rope = create_rope(casa_otx_rope, clean_otx_str)
     sweep_str = "sweep"
     sweep_otx_rope = create_rope(clean_otx_rope, sweep_str)
-    otx_dt = DataFrame(columns=[wx.reason_context])
-    otx_dt.loc[0, wx.reason_context] = otx_amy45_rope
-    otx_dt.loc[1, wx.reason_context] = casa_otx_rope
-    otx_dt.loc[2, wx.reason_context] = clean_otx_rope
-    otx_dt.loc[3, wx.reason_context] = sweep_otx_rope
+    otx_dt = DataFrame(columns=[kw.reason_context])
+    otx_dt.loc[0, kw.reason_context] = otx_amy45_rope
+    otx_dt.loc[1, kw.reason_context] = casa_otx_rope
+    otx_dt.loc[2, kw.reason_context] = clean_otx_rope
+    otx_dt.loc[3, kw.reason_context] = sweep_otx_rope
     return otx_dt
 
 
@@ -210,11 +210,11 @@ def get_casa_maison_rope_inx_dt() -> DataFrame:
     casa_inx_rope = create_rope(inx_amy87_rope, "maison")
     clean_inx_rope = create_rope(casa_inx_rope, "propre")
     sweep_inx_rope = create_rope(clean_inx_rope, "sweep")
-    inx_dt = DataFrame(columns=[wx.reason_context])
-    inx_dt.loc[0, wx.reason_context] = inx_amy87_rope
-    inx_dt.loc[1, wx.reason_context] = casa_inx_rope
-    inx_dt.loc[2, wx.reason_context] = clean_inx_rope
-    inx_dt.loc[3, wx.reason_context] = sweep_inx_rope
+    inx_dt = DataFrame(columns=[kw.reason_context])
+    inx_dt.loc[0, kw.reason_context] = inx_amy87_rope
+    inx_dt.loc[1, kw.reason_context] = casa_inx_rope
+    inx_dt.loc[2, kw.reason_context] = clean_inx_rope
+    inx_dt.loc[3, kw.reason_context] = sweep_inx_rope
     return inx_dt
 
 
@@ -235,13 +235,13 @@ def get_casa_maison_rope_otx2inx_dt() -> DataFrame:
 
     inx_dt = DataFrame(
         columns=[
-            wx.face_name,
-            wx.spark_num,
-            wx.otx_knot,
-            wx.inx_knot,
-            wx.unknown_str,
-            wx.otx_rope,
-            wx.inx_rope,
+            kw.face_name,
+            kw.spark_num,
+            kw.otx_knot,
+            kw.inx_knot,
+            kw.unknown_str,
+            kw.otx_rope,
+            kw.inx_rope,
         ]
     )
     inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_amy45_rope, inx_amy87_rope]
@@ -266,13 +266,13 @@ def get_casa_maison_label_dt() -> DataFrame:
 
     inx_dt = DataFrame(
         columns=[
-            wx.face_name,
-            wx.spark_num,
-            wx.otx_knot,
-            wx.inx_knot,
-            wx.unknown_str,
-            wx.otx_label,
-            wx.inx_label,
+            kw.face_name,
+            kw.spark_num,
+            kw.otx_knot,
+            kw.inx_knot,
+            kw.unknown_str,
+            kw.otx_label,
+            kw.inx_label,
         ]
     )
     inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_amy45_str, inx_amy87_str]

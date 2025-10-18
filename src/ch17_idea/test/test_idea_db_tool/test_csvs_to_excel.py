@@ -16,7 +16,7 @@ from src.ch17_idea.test._util.ch17_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ref.keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as kw
 
 
 def test_csv_dict_to_excel_SavesFile(env_dir_setup_cleanup):
@@ -112,5 +112,5 @@ def test_update_spark_num_in_excel_files(env_dir_setup_cleanup):
     result = pandas_read_excel(file_path, sheet_name=None)
 
     for sheet_df in result.values():
-        assert wx.spark_num in sheet_df.columns
-        assert all(sheet_df[wx.spark_num] == 42)
+        assert kw.spark_num in sheet_df.columns
+        assert all(sheet_df[kw.spark_num] == 42)

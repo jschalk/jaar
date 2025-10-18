@@ -6,7 +6,7 @@ from src.ch18_world_etl.transformers import (
     etl_brick_raw_tables_to_brick_agg_tables,
     get_max_brick_agg_spark_num,
 )
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_GroupByWorks():
@@ -18,25 +18,25 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
-    raw_br00003_tablename = f"br00003_{wx.brick_raw}"
+    raw_br00003_tablename = f"br00003_{kw.brick_raw}"
     raw_br00003_columns = [
-        wx.spark_num,
-        wx.face_name,
-        wx.moment_label,
-        wx.cumulative_minute,
-        wx.hour_label,
-        wx.error_message,
+        kw.spark_num,
+        kw.face_name,
+        kw.moment_label,
+        kw.cumulative_minute,
+        kw.hour_label,
+        kw.error_message,
     ]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_idea_sorted_table(cursor, raw_br00003_tablename, raw_br00003_columns)
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
-  {wx.spark_num}
-, {wx.face_name}
-, {wx.moment_label}
-, {wx.cumulative_minute}
-, {wx.hour_label}
-, {wx.error_message}
+  {kw.spark_num}
+, {kw.face_name}
+, {kw.moment_label}
+, {kw.cumulative_minute}
+, {kw.hour_label}
+, {kw.error_message}
 )"""
         values_clause = f"""
 VALUES     
@@ -47,7 +47,7 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        agg_br00003_tablename = f"br00003_{wx.brick_agg}"
+        agg_br00003_tablename = f"br00003_{kw.brick_agg}"
         assert get_row_count(cursor, raw_br00003_tablename) == 3
         assert not db_table_exists(cursor, agg_br00003_tablename)
 
@@ -68,7 +68,7 @@ VALUES
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {agg_br00003_tablename} 
-ORDER BY {wx.spark_num}, {wx.cumulative_minute};"""
+ORDER BY {kw.spark_num}, {kw.cumulative_minute};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
@@ -95,25 +95,25 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
     hour7am = "7am"
     hour8am = "8am"
 
-    raw_br00003_tablename = f"br00003_{wx.brick_raw}"
+    raw_br00003_tablename = f"br00003_{kw.brick_raw}"
     raw_br00003_columns = [
-        wx.spark_num,
-        wx.face_name,
-        wx.moment_label,
-        wx.cumulative_minute,
-        wx.hour_label,
-        wx.error_message,
+        kw.spark_num,
+        kw.face_name,
+        kw.moment_label,
+        kw.cumulative_minute,
+        kw.hour_label,
+        kw.error_message,
     ]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_idea_sorted_table(cursor, raw_br00003_tablename, raw_br00003_columns)
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
-  {wx.spark_num}
-, {wx.face_name}
-, {wx.moment_label}
-, {wx.cumulative_minute}
-, {wx.hour_label}
-, {wx.error_message}
+  {kw.spark_num}
+, {kw.face_name}
+, {kw.moment_label}
+, {kw.cumulative_minute}
+, {kw.hour_label}
+, {kw.error_message}
 )"""
         values_clause = f"""
 VALUES     
@@ -124,7 +124,7 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        agg_br00003_tablename = f"br00003_{wx.brick_agg}"
+        agg_br00003_tablename = f"br00003_{kw.brick_agg}"
         assert get_row_count(cursor, raw_br00003_tablename) == 3
         assert not db_table_exists(cursor, agg_br00003_tablename)
 
@@ -166,25 +166,25 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario2_Gr
     hour6am = "6am"
     hour7am = "7am"
     hour8am = "8am"
-    raw_br00003_tablename = f"br00003_{wx.brick_raw}"
+    raw_br00003_tablename = f"br00003_{kw.brick_raw}"
     raw_br00003_columns = [
-        wx.spark_num,
-        wx.face_name,
-        wx.moment_label,
-        wx.cumulative_minute,
-        wx.hour_label,
-        wx.error_message,
+        kw.spark_num,
+        kw.face_name,
+        kw.moment_label,
+        kw.cumulative_minute,
+        kw.hour_label,
+        kw.error_message,
     ]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_idea_sorted_table(cursor, raw_br00003_tablename, raw_br00003_columns)
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
-  {wx.spark_num}
-, {wx.face_name}
-, {wx.moment_label}
-, {wx.cumulative_minute}
-, {wx.hour_label}
-, {wx.error_message}
+  {kw.spark_num}
+, {kw.face_name}
+, {kw.moment_label}
+, {kw.cumulative_minute}
+, {kw.hour_label}
+, {kw.error_message}
 )"""
         values_clause = f"""
 VALUES     
@@ -196,7 +196,7 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        agg_br00003_tablename = f"br00003_{wx.brick_agg}"
+        agg_br00003_tablename = f"br00003_{kw.brick_agg}"
         assert get_row_count(cursor, raw_br00003_tablename) == 4
         assert not db_table_exists(cursor, agg_br00003_tablename)
 
@@ -207,7 +207,7 @@ VALUES
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {agg_br00003_tablename} 
-ORDER BY {wx.spark_num}, {wx.cumulative_minute};"""
+ORDER BY {kw.spark_num}, {kw.cumulative_minute};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
@@ -222,13 +222,13 @@ ORDER BY {wx.spark_num}, {wx.cumulative_minute};"""
 
 def test_get_max_brick_sparks_spark_num_ReturnsObj_Scenario0_NoTables():
     # ESTABLISH
-    agg_br00003_tablename = f"br00003_{wx.brick_agg}"
+    agg_br00003_tablename = f"br00003_{kw.brick_agg}"
     agg_br00003_columns = [
-        wx.spark_num,
-        wx.face_name,
-        wx.moment_label,
-        wx.cumulative_minute,
-        wx.hour_label,
+        kw.spark_num,
+        kw.face_name,
+        kw.moment_label,
+        kw.cumulative_minute,
+        kw.hour_label,
     ]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -250,23 +250,23 @@ def test_get_max_brick_sparks_spark_num_ReturnsObj_Scenario1_OneTable():
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
-    agg_br00003_tablename = f"br00003_{wx.brick_agg}"
+    agg_br00003_tablename = f"br00003_{kw.brick_agg}"
     agg_br00003_columns = [
-        wx.spark_num,
-        wx.face_name,
-        wx.moment_label,
-        wx.cumulative_minute,
-        wx.hour_label,
+        kw.spark_num,
+        kw.face_name,
+        kw.moment_label,
+        kw.cumulative_minute,
+        kw.hour_label,
     ]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
-  {wx.spark_num}
-, {wx.face_name}
-, {wx.moment_label}
-, {wx.cumulative_minute}
-, {wx.hour_label}
+  {kw.spark_num}
+, {kw.face_name}
+, {kw.moment_label}
+, {kw.cumulative_minute}
+, {kw.hour_label}
 )"""
         values_clause = f"""
 VALUES     
@@ -296,19 +296,19 @@ def test_get_max_brick_sparks_spark_num_ReturnsObj_Scenario2_MultipleTable():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        agg_br00003_tablename = f"br00003_{wx.brick_agg}"
-        agg_br00003_columns = [wx.spark_num]
+        agg_br00003_tablename = f"br00003_{kw.brick_agg}"
+        agg_br00003_columns = [kw.spark_num]
         create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         agg_br00003_insert_sqlstr = f"""
-INSERT INTO {agg_br00003_tablename} ({wx.spark_num})
+INSERT INTO {agg_br00003_tablename} ({kw.spark_num})
 VALUES ('{spark1}'), ('{spark1}'), ('{spark9}');"""
         cursor.execute(agg_br00003_insert_sqlstr)
 
-        agg_br00044_tablename = f"br00044_{wx.brick_agg}"
-        agg_br00044_columns = [wx.spark_num]
+        agg_br00044_tablename = f"br00044_{kw.brick_agg}"
+        agg_br00044_columns = [kw.spark_num]
         create_idea_sorted_table(cursor, agg_br00044_tablename, agg_br00044_columns)
         agg_br00044_insert_sqlstr = f"""
-INSERT INTO {agg_br00044_tablename} ({wx.spark_num})
+INSERT INTO {agg_br00044_tablename} ({kw.spark_num})
 VALUES ('{spark3}');"""
         cursor.execute(agg_br00044_insert_sqlstr)
 

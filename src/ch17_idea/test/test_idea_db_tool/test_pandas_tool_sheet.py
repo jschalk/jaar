@@ -25,7 +25,7 @@ from src.ch17_idea.test._util.ch17_env import (
     get_chapter_temp_dir,
     idea_moment_mstr_dir,
 )
-from src.ref.keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as kw
 
 
 def test_append_df_to_excel_CreatesSheet(env_dir_setup_cleanup):
@@ -392,7 +392,7 @@ def test_split_excel_into_dirs_SavesToCorrectFileNames(env_dir_setup_cleanup):
 
 def test_if_nan_return_None_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    ex1_df = DataFrame([["Yao", None]], columns=[wx.face_name, "example_col"])
+    ex1_df = DataFrame([["Yao", None]], columns=[kw.face_name, "example_col"])
     ex1_sheet_name = "ex1"
     ex1_filename = "ex1.xlsx"
     ex1_path = create_path(idea_moment_mstr_dir(), ex1_filename)
@@ -539,7 +539,7 @@ def test_update_all_face_name_spark_num_columns_Scenario0_UpdatesValidSheet(
     validsheet_str = "ValidSheet"
     invalidsheet_str = "InvalidSheet"
     ws1.title = validsheet_str
-    ws1.append([wx.spark_num, wx.face_name, "other"])
+    ws1.append([kw.spark_num, kw.face_name, "other"])
     for _ in range(5):
         ws1.append([spark3, yao_str, "value4"])
 

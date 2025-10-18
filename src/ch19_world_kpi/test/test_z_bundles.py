@@ -6,7 +6,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     create_prime_tablename,
 )
 from src.ch19_world_kpi.kpi_mstr import populate_kpi_bundle
-from src.ref.keywords import Ch19Keywords as wx
+from src.ref.keywords import Ch19Keywords as kw
 
 
 def test_populate_kpi_bundle_PopulatesTable_Scenario0_WithDefaultBundleID():
@@ -21,9 +21,9 @@ def test_populate_kpi_bundle_PopulatesTable_Scenario0_WithDefaultBundleID():
         cursor = db_conn.cursor()
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
-        moment_voice_nets_tablename = wx.moment_voice_nets
+        moment_voice_nets_tablename = kw.moment_voice_nets
         blrplan_job_tablename = create_prime_tablename("BLRPLAN", "job", None)
-        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({wx.moment_label}, {wx.belief_name}, {wx.belief_net_amount})
+        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({kw.moment_label}, {kw.belief_name}, {kw.belief_net_amount})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_voice_net})
 , ('{a23_str}', '{yao_str}', {yao_voice_net})
@@ -31,13 +31,13 @@ VALUES
         cursor.execute(insert_sqlstr)
         assert db_table_exists(cursor, blrplan_job_tablename)
         assert get_row_count(cursor, moment_voice_nets_tablename) == 2
-        moment_kpi001_tablename = wx.moment_kpi001_voice_nets
-        moment_kpi002_tablename = wx.moment_kpi002_belief_pledges
+        moment_kpi001_tablename = kw.moment_kpi001_voice_nets
+        moment_kpi002_tablename = kw.moment_kpi002_belief_pledges
         assert not db_table_exists(cursor, moment_kpi001_tablename)
         assert not db_table_exists(cursor, moment_kpi002_tablename)
 
         # WHEN
-        populate_kpi_bundle(cursor, wx.default_kpi_bundle)
+        populate_kpi_bundle(cursor, kw.default_kpi_bundle)
 
         # THEN
         assert db_table_exists(cursor, moment_kpi001_tablename)
@@ -45,8 +45,8 @@ VALUES
         assert get_row_count(cursor, moment_kpi001_tablename) == 2
         assert get_row_count(cursor, moment_kpi002_tablename) == 0
         assert set(get_db_tables(db_conn).keys()) == {
-            wx.moment_kpi001_voice_nets,
-            wx.moment_kpi002_belief_pledges,
+            kw.moment_kpi001_voice_nets,
+            kw.moment_kpi002_belief_pledges,
             moment_voice_nets_tablename,
             blrplan_job_tablename,
         }
@@ -64,15 +64,15 @@ def test_populate_kpi_bundle_PopulatesTable_Scenario1_WithNoBundleID():
         cursor = db_conn.cursor()
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
-        moment_voice_nets_tablename = wx.moment_voice_nets
-        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({wx.moment_label}, {wx.belief_name}, {wx.belief_net_amount})
+        moment_voice_nets_tablename = kw.moment_voice_nets
+        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({kw.moment_label}, {kw.belief_name}, {kw.belief_net_amount})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_voice_net})
 , ('{a23_str}', '{yao_str}', {yao_voice_net})
 """
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, moment_voice_nets_tablename) == 2
-        moment_kpi001_voice_nets_tablename = wx.moment_kpi001_voice_nets
+        moment_kpi001_voice_nets_tablename = kw.moment_kpi001_voice_nets
         assert not db_table_exists(cursor, moment_kpi001_voice_nets_tablename)
 
         # WHEN
@@ -82,8 +82,8 @@ VALUES
         assert get_row_count(cursor, moment_kpi001_voice_nets_tablename) == 2
         blrplan_job_tablename = create_prime_tablename("BLRPLAN", "job", None)
         assert set(get_db_tables(db_conn).keys()) == {
-            wx.moment_kpi001_voice_nets,
-            wx.moment_kpi002_belief_pledges,
+            kw.moment_kpi001_voice_nets,
+            kw.moment_kpi002_belief_pledges,
             moment_voice_nets_tablename,
             blrplan_job_tablename,
         }

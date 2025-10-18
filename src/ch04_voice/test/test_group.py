@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.ch02_rope.rope import default_knot_if_None
 from src.ch03_allot.allot import default_grain_num_if_None
 from src.ch04_voice.group import GroupUnit, groupunit_shop, membership_shop
-from src.ref.keywords import Ch04Keywords as wx
+from src.ref.keywords import Ch04Keywords as kw
 
 
 def test_GroupUnit_Exists():
@@ -22,16 +22,16 @@ def test_GroupUnit_Exists():
     assert not x_groupunit.fund_grain
     print(f"{x_groupunit.__dict__=}")
     assert set(x_groupunit.__dict__.keys()) == {
-        wx.group_title,
-        wx.memberships,
-        wx.fund_give,
-        wx.fund_take,
-        wx.fund_agenda_give,
-        wx.fund_agenda_take,
-        wx.credor_pool,
-        wx.debtor_pool,
-        wx.knot,
-        wx.fund_grain,
+        kw.group_title,
+        kw.memberships,
+        kw.fund_give,
+        kw.fund_take,
+        kw.fund_agenda_give,
+        kw.fund_agenda_take,
+        kw.credor_pool,
+        kw.debtor_pool,
+        kw.knot,
+        kw.fund_grain,
     }
 
 

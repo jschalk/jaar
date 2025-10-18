@@ -70,11 +70,11 @@ def test_create_calendar_markdown_files_Senario1_CreatesFileFromMomentUnitJSON(
 #     input_file_path = create_path(fay_world._input_dir, ex_filename)
 #     a23_str = "amy23"
 #     br00011_columns = [
-#         wx.spark_num,
-#         wx.face_name,
-#         wx.moment_label,
-#         wx.belief_name,
-#         wx.voice_name
+#         kw.spark_num,
+#         kw.face_name,
+#         kw.moment_label,
+#         kw.belief_name,
+#         kw.voice_name
 #     ]
 #     br00011_rows = [[spark2, sue_str, a23_str, sue_str, sue_str]]
 #     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)

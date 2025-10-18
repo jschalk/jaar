@@ -1,6 +1,6 @@
 from src.ch14_keep.rivercycle import RiverGrade, rivergrade_shop
 from src.ch14_keep.test._util.ch14_env import temp_moment_label
-from src.ref.keywords import Ch14Keywords as wx
+from src.ref.keywords import Ch14Keywords as kw
 
 
 def test_RiverGrade_Exists():
@@ -43,25 +43,25 @@ def test_RiverGrade_Exists():
     # SELECT SUM(money_amount) FROM rewards WHERE dst_voice_name = bob_str
     assert x_rivergrade.rewards_magnitude is None
     assert set(x_rivergrade.__dict__.keys()) == {
-        wx.moment_label,
-        wx.belief_name,
-        wx.keep_rope,
-        wx.voice_name,
+        kw.moment_label,
+        kw.belief_name,
+        kw.keep_rope,
+        kw.voice_name,
         "number",
-        wx.tax_bill_amount,
-        wx.grant_amount,
-        wx.debtor_rank_num,
-        wx.credor_rank_num,
-        wx.tax_paid_amount,
-        wx.tax_paid_bool,
-        wx.tax_paid_rank_num,
-        wx.tax_paid_rank_percent,
-        wx.debtor_count,
-        wx.credor_count,
-        wx.debtor_rank_percent,
-        wx.credor_rank_percent,
-        wx.rewards_count,
-        wx.rewards_magnitude,
+        kw.tax_bill_amount,
+        kw.grant_amount,
+        kw.debtor_rank_num,
+        kw.credor_rank_num,
+        kw.tax_paid_amount,
+        kw.tax_paid_bool,
+        kw.tax_paid_rank_num,
+        kw.tax_paid_rank_percent,
+        kw.debtor_count,
+        kw.credor_count,
+        kw.debtor_rank_percent,
+        kw.credor_rank_percent,
+        kw.rewards_count,
+        kw.rewards_magnitude,
     }
 
 
@@ -207,20 +207,20 @@ def test_RiverGrade_to_dict_ReturnsObj():
     rivergrade_dict = x_rivergrade.to_dict()
 
     # THEN
-    assert rivergrade_dict.get(wx.moment_label) == a23_str
-    assert rivergrade_dict.get(wx.healer_name) == yao_str
-    assert rivergrade_dict.get(wx.keep_rope) == x_keep_rope
-    assert rivergrade_dict.get(wx.tax_bill_amount) == x_tax_bill_amount
-    assert rivergrade_dict.get(wx.grant_amount) == x_grant_amount
-    assert rivergrade_dict.get(wx.debtor_rank_num) == x_debtor_rank_num
-    assert rivergrade_dict.get(wx.credor_rank_num) == x_credor_rank_num
-    assert rivergrade_dict.get(wx.tax_paid_amount) == x_tax_paid_amount
-    assert rivergrade_dict.get(wx.tax_paid_bool) == x_tax_paid_bool
-    assert rivergrade_dict.get(wx.tax_paid_rank_num) == x_tax_paid_rank_num
-    assert rivergrade_dict.get(wx.tax_paid_rank_percent) == x_tax_paid_rank_percent
-    assert rivergrade_dict.get(wx.debtor_count) == x_debtor_count
-    assert rivergrade_dict.get(wx.credor_count) == x_credor_count
-    assert rivergrade_dict.get(wx.debtor_rank_percent) == x_debtor_rank_percent
-    assert rivergrade_dict.get(wx.credor_rank_percent) == x_credor_rank_percent
-    assert rivergrade_dict.get(wx.rewards_count) == x_rewards_count
-    assert rivergrade_dict.get(wx.rewards_magnitude) == x_rewards_magnitude
+    assert rivergrade_dict.get(kw.moment_label) == a23_str
+    assert rivergrade_dict.get(kw.healer_name) == yao_str
+    assert rivergrade_dict.get(kw.keep_rope) == x_keep_rope
+    assert rivergrade_dict.get(kw.tax_bill_amount) == x_tax_bill_amount
+    assert rivergrade_dict.get(kw.grant_amount) == x_grant_amount
+    assert rivergrade_dict.get(kw.debtor_rank_num) == x_debtor_rank_num
+    assert rivergrade_dict.get(kw.credor_rank_num) == x_credor_rank_num
+    assert rivergrade_dict.get(kw.tax_paid_amount) == x_tax_paid_amount
+    assert rivergrade_dict.get(kw.tax_paid_bool) == x_tax_paid_bool
+    assert rivergrade_dict.get(kw.tax_paid_rank_num) == x_tax_paid_rank_num
+    assert rivergrade_dict.get(kw.tax_paid_rank_percent) == x_tax_paid_rank_percent
+    assert rivergrade_dict.get(kw.debtor_count) == x_debtor_count
+    assert rivergrade_dict.get(kw.credor_count) == x_credor_count
+    assert rivergrade_dict.get(kw.debtor_rank_percent) == x_debtor_rank_percent
+    assert rivergrade_dict.get(kw.credor_rank_percent) == x_credor_rank_percent
+    assert rivergrade_dict.get(kw.rewards_count) == x_rewards_count
+    assert rivergrade_dict.get(kw.rewards_magnitude) == x_rewards_magnitude

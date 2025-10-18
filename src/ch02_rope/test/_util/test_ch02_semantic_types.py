@@ -6,7 +6,7 @@ from src.ch02_rope._ref.ch02_semantic_types import (
     RopeTerm,
     default_knot_if_None,
 )
-from src.ref.keywords import Ch02Keywords as wx
+from src.ref.keywords import Ch02Keywords as kw
 
 
 def test_KnotTerm_Exists():
@@ -44,7 +44,7 @@ def test_LabelTerm_Exists():
     x_rope = LabelTerm(empty_str)
     # THEN
     assert x_rope == empty_str
-    doc_str = f"A string representation of a tree node. Nodes cannot contain RopeTerm {wx.knot}"
+    doc_str = f"A string representation of a tree node. Nodes cannot contain RopeTerm {kw.knot}"
     assert inspect_getdoc(x_rope) == doc_str
 
 
@@ -74,7 +74,7 @@ def test_FirstLabel_Exists():
     x_first = FirstLabel(empty_str)
     # THEN
     assert x_first == empty_str
-    doc_str = f"The first LabelTerm in a RopeTerm. FirstLabel cannot contain {wx.knot}."
+    doc_str = f"The first LabelTerm in a RopeTerm. FirstLabel cannot contain {kw.knot}."
     assert inspect_getdoc(x_first) == doc_str
 
 
@@ -85,5 +85,5 @@ def test_RopeTerm_Exists():
     x_rope = RopeTerm(empty_str)
     # THEN
     assert x_rope == empty_str
-    doc_str = f"A string representation of a tree path. LabelTerms are seperated by {wx.knot}s."
+    doc_str = f"A string representation of a tree path. LabelTerms are seperated by {kw.knot}s."
     assert inspect_getdoc(x_rope) == doc_str

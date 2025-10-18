@@ -6,7 +6,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     get_insert_into_sound_vld_sqlstrs,
 )
 from src.ch18_world_etl.transformers import etl_sound_agg_tables_to_sound_vld_tables
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
@@ -29,17 +29,17 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
         beliefavoice_s_agg_put_tablename = prime_tbl(
-            wx.belief_voiceunit, "s", "agg", "put"
+            kw.belief_voiceunit, "s", "agg", "put"
         )
         print(f"{get_table_columns(cursor, beliefavoice_s_agg_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {beliefavoice_s_agg_put_tablename} (
-  {wx.spark_num}
-, {wx.face_name}
-, {wx.moment_label}
-, {wx.belief_name}
-, {wx.voice_name}
-, {wx.voice_cred_lumen}
-, {wx.voice_debt_lumen}
+  {kw.spark_num}
+, {kw.face_name}
+, {kw.moment_label}
+, {kw.belief_name}
+, {kw.voice_name}
+, {kw.voice_cred_lumen}
+, {kw.voice_debt_lumen}
 )"""
         values_clause = f"""
 VALUES
@@ -51,7 +51,7 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, beliefavoice_s_agg_put_tablename) == 4
-        blrawar_h_vld_put_tablename = prime_tbl(wx.belief_voiceunit, "s", "vld", "put")
+        blrawar_h_vld_put_tablename = prime_tbl(kw.belief_voiceunit, "s", "vld", "put")
         assert get_row_count(cursor, blrawar_h_vld_put_tablename) == 0
 
         # WHEN
@@ -61,13 +61,13 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrawar_h_vld_put_tablename) == 4
-        select_sqlstr = f"""SELECT {wx.spark_num}
-, {wx.face_name}
-, {wx.moment_label}
-, {wx.belief_name}
-, {wx.voice_name}
-, {wx.voice_cred_lumen}
-, {wx.voice_debt_lumen}
+        select_sqlstr = f"""SELECT {kw.spark_num}
+, {kw.face_name}
+, {kw.moment_label}
+, {kw.belief_name}
+, {kw.voice_name}
+, {kw.voice_cred_lumen}
+, {kw.voice_debt_lumen}
 FROM {blrawar_h_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -100,16 +100,16 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario0_AddRowsToTable():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_s_agg_put_tablename = prime_tbl(wx.belief_voiceunit, "s", "agg", "put")
+        blrpern_s_agg_put_tablename = prime_tbl(kw.belief_voiceunit, "s", "agg", "put")
         print(f"{get_table_columns(cursor, blrpern_s_agg_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_s_agg_put_tablename} (
-  {wx.spark_num}
-, {wx.face_name}
-, {wx.moment_label}
-, {wx.belief_name}
-, {wx.voice_name}
-, {wx.voice_cred_lumen}
-, {wx.voice_debt_lumen}
+  {kw.spark_num}
+, {kw.face_name}
+, {kw.moment_label}
+, {kw.belief_name}
+, {kw.voice_name}
+, {kw.voice_cred_lumen}
+, {kw.voice_debt_lumen}
 )"""
         values_clause = f"""
 VALUES
@@ -121,7 +121,7 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, blrpern_s_agg_put_tablename) == 4
-        blrpern_h_vld_put_tablename = prime_tbl(wx.belief_voiceunit, "s", "vld", "put")
+        blrpern_h_vld_put_tablename = prime_tbl(kw.belief_voiceunit, "s", "vld", "put")
         assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 0
 
         # WHEN
@@ -129,13 +129,13 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 4
-        select_sqlstr = f"""SELECT {wx.spark_num}
-, {wx.face_name}
-, {wx.moment_label}
-, {wx.belief_name}
-, {wx.voice_name}
-, {wx.voice_cred_lumen}
-, {wx.voice_debt_lumen}
+        select_sqlstr = f"""SELECT {kw.spark_num}
+, {kw.face_name}
+, {kw.moment_label}
+, {kw.belief_name}
+, {kw.voice_name}
+, {kw.voice_cred_lumen}
+, {kw.voice_debt_lumen}
 FROM {blrpern_h_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -167,16 +167,16 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario1_Populates_Columns():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_s_agg_put_tablename = prime_tbl(wx.belief_voiceunit, "s", "agg", "put")
+        blrpern_s_agg_put_tablename = prime_tbl(kw.belief_voiceunit, "s", "agg", "put")
         print(f"{get_table_columns(cursor, blrpern_s_agg_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_s_agg_put_tablename} (
-  {wx.spark_num}
-, {wx.face_name}
-, {wx.moment_label}
-, {wx.belief_name}
-, {wx.voice_name}
-, {wx.voice_cred_lumen}
-, {wx.voice_debt_lumen}
+  {kw.spark_num}
+, {kw.face_name}
+, {kw.moment_label}
+, {kw.belief_name}
+, {kw.voice_name}
+, {kw.voice_cred_lumen}
+, {kw.voice_debt_lumen}
 )"""
         values_clause = f"""
 VALUES
@@ -188,7 +188,7 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, blrpern_s_agg_put_tablename) == 4
-        blrpern_h_vld_put_tablename = prime_tbl(wx.belief_voiceunit, "s", "vld", "put")
+        blrpern_h_vld_put_tablename = prime_tbl(kw.belief_voiceunit, "s", "vld", "put")
         assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 0
 
         # WHEN
@@ -196,13 +196,13 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 4
-        select_sqlstr = f"""SELECT {wx.spark_num}
-, {wx.face_name}
-, {wx.moment_label}
-, {wx.belief_name}
-, {wx.voice_name}
-, {wx.voice_cred_lumen}
-, {wx.voice_debt_lumen}
+        select_sqlstr = f"""SELECT {kw.spark_num}
+, {kw.face_name}
+, {kw.moment_label}
+, {kw.belief_name}
+, {kw.voice_name}
+, {kw.voice_cred_lumen}
+, {kw.voice_debt_lumen}
 FROM {blrpern_h_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -234,17 +234,17 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario2_DoesNotSelectWhere_e
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_s_agg_put_tablename = prime_tbl(wx.belief_voiceunit, "s", "agg", "put")
+        blrpern_s_agg_put_tablename = prime_tbl(kw.belief_voiceunit, "s", "agg", "put")
         print(f"{get_table_columns(cursor, blrpern_s_agg_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_s_agg_put_tablename} (
-  {wx.spark_num}
-, {wx.face_name}
-, {wx.moment_label}
-, {wx.belief_name}
-, {wx.voice_name}
-, {wx.voice_cred_lumen}
-, {wx.voice_debt_lumen}
-, {wx.error_message}
+  {kw.spark_num}
+, {kw.face_name}
+, {kw.moment_label}
+, {kw.belief_name}
+, {kw.voice_name}
+, {kw.voice_cred_lumen}
+, {kw.voice_debt_lumen}
+, {kw.error_message}
 )"""
         values_clause = f"""
 VALUES
@@ -256,7 +256,7 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, blrpern_s_agg_put_tablename) == 4
-        blrpern_h_vld_put_tablename = prime_tbl(wx.belief_voiceunit, "s", "vld", "put")
+        blrpern_h_vld_put_tablename = prime_tbl(kw.belief_voiceunit, "s", "vld", "put")
         assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 0
 
         # WHEN
@@ -264,13 +264,13 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 3
-        select_sqlstr = f"""SELECT {wx.spark_num}
-, {wx.face_name}
-, {wx.moment_label}
-, {wx.belief_name}
-, {wx.voice_name}
-, {wx.voice_cred_lumen}
-, {wx.voice_debt_lumen}
+        select_sqlstr = f"""SELECT {kw.spark_num}
+, {kw.face_name}
+, {kw.moment_label}
+, {kw.belief_name}
+, {kw.voice_name}
+, {kw.voice_cred_lumen}
+, {kw.voice_debt_lumen}
 FROM {blrpern_h_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)

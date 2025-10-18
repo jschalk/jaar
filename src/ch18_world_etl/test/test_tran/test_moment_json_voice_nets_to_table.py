@@ -13,7 +13,7 @@ from src.ch18_world_etl.transformers import (
     etl_moment_json_voice_nets_to_moment_voice_nets_table,
     insert_tranunit_voices_net,
 )
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_insert_tranunit_voices_net_PopulatesDatabase():
@@ -36,7 +36,7 @@ def test_insert_tranunit_voices_net_PopulatesDatabase():
     a23_tranbook.add_tranunit(yao_str, yao_str, t77_tran_time, t77_yao_amount)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        moment_voice_nets_tablename = wx.moment_voice_nets
+        moment_voice_nets_tablename = kw.moment_voice_nets
         cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
         assert get_row_count(cursor, moment_voice_nets_tablename) == 0
 
@@ -45,7 +45,7 @@ def test_insert_tranunit_voices_net_PopulatesDatabase():
 
         # THEN
         assert get_row_count(cursor, moment_voice_nets_tablename) == 2
-        select_sqlstr = f"SELECT moment_label, belief_name, {wx.belief_net_amount} FROM {moment_voice_nets_tablename}"
+        select_sqlstr = f"SELECT moment_label, belief_name, {kw.belief_net_amount} FROM {moment_voice_nets_tablename}"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         assert rows == [
@@ -80,7 +80,7 @@ def test_etl_moment_json_voice_nets_to_moment_voice_nets_table_PopulatesDatabase
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        moment_voice_nets_tablename = wx.moment_voice_nets
+        moment_voice_nets_tablename = kw.moment_voice_nets
         assert not db_table_exists(cursor, moment_voice_nets_tablename)
 
         # WHEN
@@ -88,7 +88,7 @@ def test_etl_moment_json_voice_nets_to_moment_voice_nets_table_PopulatesDatabase
 
         # THEN
         assert get_row_count(cursor, moment_voice_nets_tablename) == 2
-        select_sqlstr = f"SELECT moment_label, belief_name, {wx.belief_net_amount} FROM {moment_voice_nets_tablename}"
+        select_sqlstr = f"SELECT moment_label, belief_name, {kw.belief_net_amount} FROM {moment_voice_nets_tablename}"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         assert rows == [

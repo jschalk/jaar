@@ -8,7 +8,7 @@ from src.ch18_world_etl.test._util.ch18_env import (
     get_chapter_temp_dir,
 )
 from src.ch18_world_etl.transformers import etl_input_dfs_to_brick_raw_tables
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
@@ -27,11 +27,11 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
     input_dir = create_path(get_chapter_temp_dir(), "input")
     input_file_path = create_path(input_dir, ex_filename)
     br3_columns = [
-        wx.spark_num,
-        wx.face_name,
-        wx.cumulative_minute,
-        wx.moment_label,
-        wx.hour_label,
+        kw.spark_num,
+        kw.face_name,
+        kw.cumulative_minute,
+        kw.moment_label,
+        kw.hour_label,
     ]
     a23_str = "amy23"
     row0 = [spark1, sue_str, minute_360, a23_str, hour6am]
@@ -45,7 +45,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
     upsert_sheet(input_file_path, br00003_ex1_str, df1)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        br00003_tablename = f"br00003_{wx.brick_raw}"
+        br00003_tablename = f"br00003_{kw.brick_raw}"
         assert not db_table_exists(cursor, br00003_tablename)
 
         # WHEN
@@ -60,12 +60,12 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
         assert file_dir_str == br00003_table_cols[0]
         assert filename_str == br00003_table_cols[1]
         assert sheet_name_str == br00003_table_cols[2]
-        assert wx.error_message == br00003_table_cols[-1]
+        assert kw.error_message == br00003_table_cols[-1]
         assert get_row_count(cursor, br00003_tablename) == 5
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {br00003_tablename} 
-ORDER BY sheet_name, {wx.spark_num}, {wx.cumulative_minute};"""
+ORDER BY sheet_name, {kw.spark_num}, {kw.cumulative_minute};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
@@ -78,9 +78,9 @@ ORDER BY sheet_name, {wx.spark_num}, {wx.cumulative_minute};"""
         m_360 = minute_360
         m_420 = minute_420
         br3_ex1_str = br00003_ex1_str
-        err4 = f"Conversion errors: {wx.cumulative_minute}: num55"
+        err4 = f"Conversion errors: {kw.cumulative_minute}: num55"
         err0 = (
-            f"Conversion errors: {wx.spark_num}: spark3, {wx.cumulative_minute}: num55"
+            f"Conversion errors: {kw.spark_num}: spark3, {kw.cumulative_minute}: num55"
         )
         row0 = (s_dir, file, br3_ex1_str, None, sue_str, a23_str, None, hour7am, err0)
         row1 = (s_dir, file, br3_ex1_str, e1, sue_str, a23_str, m_360, hour6am, None)
@@ -111,21 +111,21 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
     input_dir = create_path(get_chapter_temp_dir(), "input")
     input_file_path = create_path(input_dir, ex_filename)
     idea_columns = [
-        wx.spark_num,
-        wx.face_name,
-        wx.cumulative_minute,
-        wx.moment_label,
-        wx.hour_label,
+        kw.spark_num,
+        kw.face_name,
+        kw.cumulative_minute,
+        kw.moment_label,
+        kw.hour_label,
     ]
     a23_str = "amy23"
     row1 = [spark1, sue_str, minute_360, a23_str, hour6am]
     row2 = [spark1, sue_str, minute_420, a23_str, hour7am]
     row3 = [spark2, sue_str, minute_420, a23_str, hour7am]
     incomplete_idea_columns = [
-        wx.spark_num,
-        wx.face_name,
-        wx.cumulative_minute,
-        wx.moment_label,
+        kw.spark_num,
+        kw.face_name,
+        kw.cumulative_minute,
+        kw.moment_label,
     ]
     incom_row1 = [spark1, sue_str, minute_360, a23_str]
     incom_row2 = [spark1, sue_str, minute_420, a23_str]
@@ -141,7 +141,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
     upsert_sheet(input_file_path, br00003_ex3_str, df3)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        br00003_tablename = f"br00003_{wx.brick_raw}"
+        br00003_tablename = f"br00003_{kw.brick_raw}"
         assert not db_table_exists(cursor, br00003_tablename)
 
         # WHEN
@@ -157,11 +157,11 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
         assert file_dir_str == br00003_table_cols[0]
         assert filename_str == br00003_table_cols[1]
         assert sheet_name_str == br00003_table_cols[2]
-        assert wx.error_message == br00003_table_cols[-1]
+        assert kw.error_message == br00003_table_cols[-1]
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {br00003_tablename} 
-ORDER BY sheet_name, {wx.spark_num}, {wx.cumulative_minute};"""
+ORDER BY sheet_name, {kw.spark_num}, {kw.cumulative_minute};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
@@ -203,11 +203,11 @@ ORDER BY sheet_name, {wx.spark_num}, {wx.cumulative_minute};"""
 #     input_dir = create_path(get_chapter_temp_dir(), "input")
 #     input_file_path = create_path(input_dir, ex_filename)
 #     idea_columns = [
-#         wx.spark_num,
-#         wx.face_name,
-#         wx.cumulative_minute,
-#         wx.moment_label,
-#         wx.hour_label,
+#         kw.spark_num,
+#         kw.face_name,
+#         kw.cumulative_minute,
+#         kw.moment_label,
+#         kw.hour_label,
 #     ]
 #     a23_str = "amy23"
 #     df_row0 = [spark1, sue_str, minute_360, a23_str, hour6am]
@@ -219,7 +219,7 @@ ORDER BY sheet_name, {wx.spark_num}, {wx.cumulative_minute};"""
 #     upsert_sheet(input_file_path, br00003_ex1_str, df1)
 #     with sqlite3_connect(":memory:") as db_conn:
 #         cursor = db_conn.cursor()
-#         br00003_tablename = f"br00003_{wx.brick_raw}"
+#         br00003_tablename = f"br00003_{kw.brick_raw}"
 #         assert not db_table_exists(cursor, br00003_tablename)
 
 #         # WHEN
@@ -235,11 +235,11 @@ ORDER BY sheet_name, {wx.spark_num}, {wx.cumulative_minute};"""
 #         assert file_dir_str == br00003_table_cols[0]
 #         assert filename_str == br00003_table_cols[1]
 #         assert sheet_name_str == br00003_table_cols[2]
-#         assert wx.error_message != br00003_table_cols[-1]
+#         assert kw.error_message != br00003_table_cols[-1]
 #         select_agg_sqlstr = f"""
 # SELECT *
 # FROM {br00003_tablename}
-# ORDER BY sheet_name, {wx.spark_num}, {wx.cumulative_minute};"""
+# ORDER BY sheet_name, {kw.spark_num}, {kw.cumulative_minute};"""
 #         cursor.execute(select_agg_sqlstr)
 
 #         br3rows = cursor.fetchall()

@@ -6,7 +6,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_plan_reason_caseunit_set_obj,
 )
 from src.ch07_belief_logic.test._util.ch07_examples import ChExampleStrsSlashknot as exx
-from src.ref.keywords import Ch07Keywords as wx
+from src.ref.keywords import Ch07Keywords as kw
 
 
 def test_belief_plan_reason_caseunit_set_obj_SetAttr_Scenario0_Pass_reason_case():
@@ -19,9 +19,9 @@ def test_belief_plan_reason_caseunit_set_obj_SetAttr_Scenario0_Pass_reason_case(
     bob_belief.set_l1_plan(planunit_shop(exx.wk_str))
     bob_belief.set_plan(planunit_shop(exx.wed_str), wk_rope)
     wed_jkeys = {
-        wx.plan_rope: casa_rope,
-        wx.reason_context: wk_rope,
-        wx.reason_state: wed_rope,
+        kw.plan_rope: casa_rope,
+        kw.reason_context: wk_rope,
+        kw.reason_state: wed_rope,
     }
     assert not belief_plan_reason_caseunit_exists(bob_belief, wed_jkeys)
 
@@ -43,11 +43,11 @@ def test_belief_plan_reason_caseunit_set_obj_SetAttr_Scenario1_Pass_reason_lower
     dirtyness_reason_lower = 5
     dirtyness_reason_upper = 7
     dirtyness_args = {
-        wx.plan_rope: mop_rope,
-        wx.reason_context: dirtyness_rope,
-        wx.reason_state: dirtyness_rope,
-        wx.reason_lower: dirtyness_reason_lower,
-        wx.reason_upper: dirtyness_reason_upper,
+        kw.plan_rope: mop_rope,
+        kw.reason_context: dirtyness_rope,
+        kw.reason_state: dirtyness_rope,
+        kw.reason_lower: dirtyness_reason_lower,
+        kw.reason_upper: dirtyness_reason_upper,
     }
     assert not belief_plan_reason_caseunit_exists(bob_belief, dirtyness_args)
 
@@ -74,12 +74,12 @@ def test_belief_plan_reason_caseunit_set_obj_SetAttr_Scenario2_Pass_reason_divis
     dirtyness_reason_upper = 7
     dirtyness_reason_divisor = 11
     dirtyness_args = {
-        wx.plan_rope: mop_rope,
-        wx.reason_context: dirtyness_rope,
-        wx.reason_state: dirtyness_rope,
-        wx.reason_lower: dirtyness_reason_lower,
-        wx.reason_upper: dirtyness_reason_upper,
-        wx.reason_divisor: dirtyness_reason_divisor,
+        kw.plan_rope: mop_rope,
+        kw.reason_context: dirtyness_rope,
+        kw.reason_state: dirtyness_rope,
+        kw.reason_lower: dirtyness_reason_lower,
+        kw.reason_upper: dirtyness_reason_upper,
+        kw.reason_divisor: dirtyness_reason_divisor,
     }
     assert not belief_plan_reason_caseunit_exists(bob_belief, dirtyness_args)
 

@@ -30,7 +30,7 @@ from src.ch08_epoch.test._util.ch08_examples import (
     get_tue,
     get_wed,
 )
-from src.ref.keywords import Ch08Keywords as wx
+from src.ref.keywords import Ch08Keywords as kw
 
 
 def test_get_creg_config_ReturnsObj():
@@ -39,16 +39,16 @@ def test_get_creg_config_ReturnsObj():
     five_config = get_five_config()
 
     # WHEN
-    creg_offset = creg_config.get(wx.yr1_jan1_offset)
-    five_offset = five_config.get(wx.yr1_jan1_offset)
+    creg_offset = creg_config.get(kw.yr1_jan1_offset)
+    five_offset = five_config.get(kw.yr1_jan1_offset)
 
     # THEN
     assert creg_offset == 440640
     assert five_offset == 1683478080
     c400_len = get_c400_constants().c400_leap_length
     assert five_offset == (c400_len * 8) + 440640
-    assert creg_config.get(wx.monthday_index) == 1
-    assert five_config.get(wx.monthday_index) == 0
+    assert creg_config.get(kw.monthday_index) == 1
+    assert five_config.get(kw.monthday_index) == 0
 
 
 def test_cregtime_planunit_ReturnsObj():
@@ -79,10 +79,10 @@ def test_creg_weekday_planunits_ReturnsObj():
 def test_add_time_creg_planunit_ReturnsObjWith_days():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
-    day_rope = sue_beliefunit.make_rope(creg_rope, wx.day)
-    days_rope = sue_beliefunit.make_rope(creg_rope, wx.days)
+    time_rope = sue_beliefunit.make_l1_rope(kw.time)
+    creg_rope = sue_beliefunit.make_rope(time_rope, kw.creg)
+    day_rope = sue_beliefunit.make_rope(creg_rope, kw.day)
+    days_rope = sue_beliefunit.make_rope(creg_rope, kw.days)
     print(f"{time_rope=}")
     print(f"{creg_rope=}")
     print(f"{day_rope=}")
@@ -110,9 +110,9 @@ def test_add_time_creg_planunit_ReturnsObjWith_days():
 def test_add_time_creg_planunit_ReturnsObjWith_weeks():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
-    week_rope = sue_beliefunit.make_rope(creg_rope, wx.week)
+    time_rope = sue_beliefunit.make_l1_rope(kw.time)
+    creg_rope = sue_beliefunit.make_rope(time_rope, kw.creg)
+    week_rope = sue_beliefunit.make_rope(creg_rope, kw.week)
     sun_rope = sue_beliefunit.make_rope(week_rope, get_sun())
     mon_rope = sue_beliefunit.make_rope(week_rope, get_mon())
     tue_rope = sue_beliefunit.make_rope(week_rope, get_tue())
@@ -120,7 +120,7 @@ def test_add_time_creg_planunit_ReturnsObjWith_weeks():
     thu_rope = sue_beliefunit.make_rope(week_rope, get_thu())
     fri_rope = sue_beliefunit.make_rope(week_rope, get_fri())
     sat_rope = sue_beliefunit.make_rope(week_rope, get_sat())
-    weeks_rope = sue_beliefunit.make_rope(creg_rope, wx.weeks)
+    weeks_rope = sue_beliefunit.make_rope(creg_rope, kw.weeks)
 
     assert not sue_beliefunit.plan_exists(week_rope)
     assert not sue_beliefunit.plan_exists(sun_rope)
@@ -157,14 +157,14 @@ def test_add_time_creg_planunit_ReturnsObjWith_c400_leap_rope():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
-    c400_leap_rope = sue_beliefunit.make_rope(creg_rope, wx.c400_leap)
-    c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, wx.c400_clean)
-    c100_rope = sue_beliefunit.make_rope(c400_clean_rope, wx.c100)
-    yr4_leap_rope = sue_beliefunit.make_rope(c100_rope, wx.yr4_leap)
-    yr4_clean_rope = sue_beliefunit.make_rope(yr4_leap_rope, wx.yr4_clean)
-    year_rope = sue_beliefunit.make_rope(yr4_clean_rope, wx.year)
+    time_rope = sue_beliefunit.make_l1_rope(kw.time)
+    creg_rope = sue_beliefunit.make_rope(time_rope, kw.creg)
+    c400_leap_rope = sue_beliefunit.make_rope(creg_rope, kw.c400_leap)
+    c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, kw.c400_clean)
+    c100_rope = sue_beliefunit.make_rope(c400_clean_rope, kw.c100)
+    yr4_leap_rope = sue_beliefunit.make_rope(c100_rope, kw.yr4_leap)
+    yr4_clean_rope = sue_beliefunit.make_rope(yr4_leap_rope, kw.yr4_clean)
+    year_rope = sue_beliefunit.make_rope(yr4_clean_rope, kw.year)
 
     assert not sue_beliefunit.plan_exists(c400_leap_rope)
 
@@ -218,9 +218,9 @@ def test_add_time_creg_planunit_ReturnsObjWith_c400_leap_rope():
 def test_add_time_creg_planunit_ReturnsObjWith_years():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
-    year_rope = get_year_rope(sue_beliefunit, wx.creg)
+    time_rope = sue_beliefunit.make_l1_rope(kw.time)
+    creg_rope = sue_beliefunit.make_rope(time_rope, kw.creg)
+    year_rope = get_year_rope(sue_beliefunit, kw.creg)
 
     assert not sue_beliefunit.plan_exists(creg_rope)
     assert not sue_beliefunit.plan_exists(year_rope)
@@ -315,10 +315,10 @@ def test_add_time_creg_planunit_ReturnsObjWith_years():
 def test_add_time_creg_planunit_ReturnsObjWith_c400_leap():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
-    day_rope = sue_beliefunit.make_rope(creg_rope, wx.day)
-    days_rope = sue_beliefunit.make_rope(creg_rope, wx.days)
+    time_rope = sue_beliefunit.make_l1_rope(kw.time)
+    creg_rope = sue_beliefunit.make_rope(time_rope, kw.creg)
+    day_rope = sue_beliefunit.make_rope(creg_rope, kw.day)
+    days_rope = sue_beliefunit.make_rope(creg_rope, kw.days)
     print(f"{time_rope=}")
     print(f"{creg_rope=}")
     print(f"{day_rope=}")
@@ -349,10 +349,10 @@ def test_add_time_creg_planunit_ReturnsObjWith_c400_leap():
 def test_add_time_creg_planunit_ReturnsObjWith_hours():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
-    day_rope = sue_beliefunit.make_rope(creg_rope, wx.day)
-    hour_rope = sue_beliefunit.make_rope(day_rope, wx.hour)
+    time_rope = sue_beliefunit.make_l1_rope(kw.time)
+    creg_rope = sue_beliefunit.make_rope(time_rope, kw.creg)
+    day_rope = sue_beliefunit.make_rope(creg_rope, kw.day)
+    hour_rope = sue_beliefunit.make_rope(day_rope, kw.hour)
     hr_00_rope = sue_beliefunit.make_rope(day_rope, creg_hour_int_label(0))
     hr_01_rope = sue_beliefunit.make_rope(day_rope, creg_hour_int_label(1))
     hr_02_rope = sue_beliefunit.make_rope(day_rope, creg_hour_int_label(2))
@@ -500,15 +500,15 @@ def test_add_time_creg_planunit_ReturnsObjWith_offset_PlanUnits():
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
-    time_rope = sue_belief.make_l1_rope(wx.time)
-    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-    five_rope = sue_belief.make_rope(time_rope, wx.five)
-    creg_yr1_jan1_offset_rope = sue_belief.make_rope(creg_rope, wx.yr1_jan1_offset)
-    five_yr1_jan1_offset_rope = sue_belief.make_rope(five_rope, wx.yr1_jan1_offset)
+    time_rope = sue_belief.make_l1_rope(kw.time)
+    creg_rope = sue_belief.make_rope(time_rope, kw.creg)
+    five_rope = sue_belief.make_rope(time_rope, kw.five)
+    creg_yr1_jan1_offset_rope = sue_belief.make_rope(creg_rope, kw.yr1_jan1_offset)
+    five_yr1_jan1_offset_rope = sue_belief.make_rope(five_rope, kw.yr1_jan1_offset)
 
     assert sue_belief.plan_exists(creg_yr1_jan1_offset_rope)
     creg_yr1_offset_plan = sue_belief.get_plan_obj(creg_yr1_jan1_offset_rope)
-    assert creg_yr1_offset_plan.addin == get_creg_config().get(wx.yr1_jan1_offset)
+    assert creg_yr1_offset_plan.addin == get_creg_config().get(kw.yr1_jan1_offset)
     assert not sue_belief.plan_exists(five_yr1_jan1_offset_rope)
 
     # WHEN
@@ -518,17 +518,17 @@ def test_add_time_creg_planunit_ReturnsObjWith_offset_PlanUnits():
     assert sue_belief.plan_exists(creg_yr1_jan1_offset_rope)
     assert sue_belief.plan_exists(five_yr1_jan1_offset_rope)
     five_yr1_offset_plan = sue_belief.get_plan_obj(five_yr1_jan1_offset_rope)
-    assert five_yr1_offset_plan.addin == get_five_config().get(wx.yr1_jan1_offset)
+    assert five_yr1_offset_plan.addin == get_five_config().get(kw.yr1_jan1_offset)
 
 
 def test_add_epoch_planunit_SetsAttr_Scenario0():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief.cashout()
-    time_rope = sue_belief.make_l1_rope(wx.time)
-    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-    creg_yr1_jan1_offset_rope = sue_belief.make_rope(creg_rope, wx.yr1_jan1_offset)
-    creg_year_rope = get_year_rope(sue_belief, wx.creg)
+    time_rope = sue_belief.make_l1_rope(kw.time)
+    creg_rope = sue_belief.make_rope(time_rope, kw.creg)
+    creg_yr1_jan1_offset_rope = sue_belief.make_rope(creg_rope, kw.yr1_jan1_offset)
+    creg_year_rope = get_year_rope(sue_belief, kw.creg)
     print(f"{creg_year_rope=}")
     # print(f"{sue_belief._plan_dict.keys()=}")
     creg_config = get_creg_config()
@@ -543,7 +543,7 @@ def test_add_epoch_planunit_SetsAttr_Scenario0():
     assert sue_belief.plan_exists(creg_year_rope)
     assert sue_belief.plan_exists(creg_yr1_jan1_offset_rope)
     creg_offset_plan = sue_belief.get_plan_obj(creg_yr1_jan1_offset_rope)
-    assert creg_offset_plan.addin == creg_config.get(wx.yr1_jan1_offset)
+    assert creg_offset_plan.addin == creg_config.get(kw.yr1_jan1_offset)
 
 
 # def test_BeliefUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario2():
@@ -582,7 +582,7 @@ def test_BeliefUnit_get_agenda_dict_DoesNotReturnPledgePlansOutsideRange():
     clean_rope = sue_belief.make_l1_rope(clean_str)
     sue_belief.set_l1_plan(planunit_shop(clean_str, pledge=True))
     time_rope = sue_belief.make_l1_rope("time")
-    cregtime_rope = sue_belief.make_rope(time_rope, wx.creg)
+    cregtime_rope = sue_belief.make_rope(time_rope, kw.creg)
     day_rope = sue_belief.make_rope(cregtime_rope, "day")
 
     sue_belief.edit_plan_attr(
@@ -664,7 +664,7 @@ def test_BeliefUnit_create_agenda_plan_CreatesAllBeliefAttributes():
     # create gregorian epoch
     add_time_creg_planunit(sue_belief)
     time_rope = sue_belief.make_l1_rope("time")
-    cregtime_rope = sue_belief.make_rope(time_rope, wx.creg)
+    cregtime_rope = sue_belief.make_rope(time_rope, kw.creg)
     creg_plan = sue_belief.get_plan_obj(cregtime_rope)
     print(f"{creg_plan.kids.keys()=}")
     daytime_rope = sue_belief.make_rope(cregtime_rope, "day")
@@ -725,7 +725,7 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     sue_belief.set_l1_plan(planunit_shop(casa_str))
     sue_belief.set_plan(planunit_shop(laundry_str, pledge=True), casa_rope)
     time_rope = sue_belief.make_l1_rope("time")
-    cregtime_rope = sue_belief.make_rope(time_rope, wx.creg)
+    cregtime_rope = sue_belief.make_rope(time_rope, kw.creg)
     sue_belief.edit_plan_attr(
         laundry_rope,
         reason_context=cregtime_rope,
@@ -792,13 +792,13 @@ def test_add_time_five_planunit_SetsAttr_Scenario0_AddsMultiple_epochs():
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
-    time_rope = sue_belief.make_l1_rope(wx.time)
-    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-    five_rope = sue_belief.make_rope(time_rope, wx.five)
-    creg_yr1_jan1_offset_rope = sue_belief.make_rope(creg_rope, wx.yr1_jan1_offset)
-    five_yr1_jan1_offset_rope = sue_belief.make_rope(five_rope, wx.yr1_jan1_offset)
-    creg_year_rope = get_year_rope(sue_belief, wx.creg)
-    five_year_rope = get_year_rope(sue_belief, wx.five)
+    time_rope = sue_belief.make_l1_rope(kw.time)
+    creg_rope = sue_belief.make_rope(time_rope, kw.creg)
+    five_rope = sue_belief.make_rope(time_rope, kw.five)
+    creg_yr1_jan1_offset_rope = sue_belief.make_rope(creg_rope, kw.yr1_jan1_offset)
+    five_yr1_jan1_offset_rope = sue_belief.make_rope(five_rope, kw.yr1_jan1_offset)
+    creg_year_rope = get_year_rope(sue_belief, kw.creg)
+    five_year_rope = get_year_rope(sue_belief, kw.five)
     print(f"{creg_year_rope=}")
     print(f"{five_year_rope=}")
     # print(f"{sue_belief._plan_dict.keys()=}")
@@ -807,7 +807,7 @@ def test_add_time_five_planunit_SetsAttr_Scenario0_AddsMultiple_epochs():
     assert sue_belief.plan_exists(creg_year_rope)
     assert sue_belief.plan_exists(creg_yr1_jan1_offset_rope)
     creg_offset_plan = sue_belief.get_plan_obj(creg_yr1_jan1_offset_rope)
-    assert creg_offset_plan.addin == get_creg_config().get(wx.yr1_jan1_offset)
+    assert creg_offset_plan.addin == get_creg_config().get(kw.yr1_jan1_offset)
     assert not sue_belief.plan_exists(five_yr1_jan1_offset_rope)
 
     # WHEN
@@ -819,7 +819,7 @@ def test_add_time_five_planunit_SetsAttr_Scenario0_AddsMultiple_epochs():
     assert sue_belief.plan_exists(creg_yr1_jan1_offset_rope)
     assert sue_belief.plan_exists(five_yr1_jan1_offset_rope)
     five_offset_plan = sue_belief.get_plan_obj(five_yr1_jan1_offset_rope)
-    assert five_offset_plan.addin == get_five_config().get(wx.yr1_jan1_offset)
+    assert five_offset_plan.addin == get_five_config().get(kw.yr1_jan1_offset)
 
 
 def test_get_creg_min_from_dt_ReturnsObj():
@@ -848,8 +848,8 @@ def test_get_epoch_min_from_dt_ReturnsObj():
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
     x_datetime = datetime(2022, 10, 30, 0, 0)
-    time_rope = sue_belief.make_l1_rope(wx.time)
-    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
+    time_rope = sue_belief.make_l1_rope(kw.time)
+    creg_rope = sue_belief.make_rope(time_rope, kw.creg)
 
     # WHEN
     creg_min = get_epoch_min_from_dt(sue_belief, creg_rope, x_datetime)

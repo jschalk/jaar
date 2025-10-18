@@ -6,7 +6,7 @@ from src.ch06_plan.plan import (
     planunit_shop,
 )
 from src.ch06_plan.test._util.ch06_examples import RangeAttrHolder, get_range_attrs
-from src.ref.keywords import Ch06Keywords as wx
+from src.ref.keywords import Ch06Keywords as kw
 
 
 def test_PlanAttrHolder_Exists():
@@ -39,7 +39,7 @@ def test_PlanAttrHolder_Exists():
     assert new_obj.awardunit_del is None
     assert new_obj.is_expanded is None
     assert set(new_obj.__dict__.keys()) == {
-        wx.star,
+        kw.star,
         "uid",
         "reason",
         "reason_context",
@@ -50,22 +50,22 @@ def test_PlanAttrHolder_Exists():
         "reason_del_case_reason_context",
         "reason_del_case_reason_state",
         "reason_requisite_active",
-        wx.laborunit,
-        wx.healerunit,
-        wx.begin,
-        wx.close,
-        wx.addin,
-        wx.numor,
-        wx.denom,
-        wx.morph,
-        wx.pledge,
+        kw.laborunit,
+        kw.healerunit,
+        kw.begin,
+        kw.close,
+        kw.addin,
+        kw.numor,
+        kw.denom,
+        kw.morph,
+        kw.pledge,
         "factunit",
         "awardunit",
         "awardunit_del",
-        wx.is_expanded,
-        wx.problem_bool,
-        wx.stop_want,
-        wx.gogo_want,
+        kw.is_expanded,
+        kw.problem_bool,
+        kw.stop_want,
+        kw.gogo_want,
     }
 
 

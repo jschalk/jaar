@@ -7,7 +7,7 @@ from src.ch05_reason.reason import (
     get_factunit_from_tuple,
     get_factunits_from_dict,
 )
-from src.ref.keywords import Ch05Keywords as wx
+from src.ref.keywords import Ch05Keywords as kw
 
 
 def test_FactUnit_Exists():
@@ -22,10 +22,10 @@ def test_FactUnit_Exists():
     obj_attrs = set(x_fact.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        wx.fact_context,
-        wx.fact_upper,
-        wx.fact_lower,
-        wx.fact_state,
+        kw.fact_context,
+        kw.fact_upper,
+        kw.fact_lower,
+        kw.fact_state,
     }
 
 
@@ -148,8 +148,8 @@ def test_FactUnit_to_dict_ReturnsDict():
     # THEN
     assert fact_dict is not None
     static_dict = {
-        wx.fact_context: wk_rope,
-        wx.fact_state: sun_rope,
+        kw.fact_context: wk_rope,
+        kw.fact_state: sun_rope,
         "fact_lower": x_fact_lower,
         "fact_upper": x_fact_upper,
     }
@@ -171,8 +171,8 @@ def test_FactUnit_to_dict_ReturnsPartialDict():
     # THEN
     assert fact_dict is not None
     static_dict = {
-        wx.fact_context: wk_rope,
-        wx.fact_state: sun_rope,
+        kw.fact_context: wk_rope,
+        kw.fact_state: sun_rope,
     }
     assert fact_dict == static_dict
 
@@ -358,10 +358,10 @@ def test_get_factunits_from_dict_BuildsObj():
     sun_rope = create_rope(wk_rope, sun_str)
     static_dict = {
         wk_rope: {
-            wx.fact_context: wk_rope,
-            wx.fact_state: sun_rope,
-            wx.fact_lower: None,
-            wx.fact_upper: None,
+            kw.fact_context: wk_rope,
+            kw.fact_state: sun_rope,
+            kw.fact_lower: None,
+            kw.fact_upper: None,
         }
     }
 
@@ -382,8 +382,8 @@ def test_get_factunits_from_dict_BuildsObjFromIncompleteDict():
     sun_rope = create_rope(wk_rope, sun_str)
     static_dict = {
         wk_rope: {
-            wx.fact_context: wk_rope,
-            wx.fact_state: sun_rope,
+            kw.fact_context: wk_rope,
+            kw.fact_state: sun_rope,
         }
     }
 

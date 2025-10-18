@@ -6,7 +6,7 @@ from src.ch17_idea.test._util.ch17_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ref.keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as kw
 
 
 def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
@@ -36,23 +36,23 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     array_headers = list(voice_dataframe.columns)
     voice_idearef = get_idearef_obj(j1_ideaname)
     assert array_headers == voice_idearef.get_headers_list()
-    assert voice_dataframe.loc[0, wx.moment_label] == amy_moment_label
-    assert voice_dataframe.loc[0, wx.belief_name] == sue_beliefunit.belief_name
-    assert voice_dataframe.loc[0, wx.voice_name] == bob_str
-    assert voice_dataframe.loc[0, wx.voice_cred_lumen] == bob_voice_cred_lumen
-    assert voice_dataframe.loc[0, wx.voice_debt_lumen] == bob_voice_debt_lumen
+    assert voice_dataframe.loc[0, kw.moment_label] == amy_moment_label
+    assert voice_dataframe.loc[0, kw.belief_name] == sue_beliefunit.belief_name
+    assert voice_dataframe.loc[0, kw.voice_name] == bob_str
+    assert voice_dataframe.loc[0, kw.voice_cred_lumen] == bob_voice_cred_lumen
+    assert voice_dataframe.loc[0, kw.voice_debt_lumen] == bob_voice_debt_lumen
 
-    assert voice_dataframe.loc[1, wx.moment_label] == amy_moment_label
-    assert voice_dataframe.loc[1, wx.belief_name] == sue_beliefunit.belief_name
-    assert voice_dataframe.loc[1, wx.voice_name] == sue_str
-    assert voice_dataframe.loc[1, wx.voice_cred_lumen] == sue_voice_cred_lumen
-    assert voice_dataframe.loc[1, wx.voice_debt_lumen] == sue_voice_debt_lumen
+    assert voice_dataframe.loc[1, kw.moment_label] == amy_moment_label
+    assert voice_dataframe.loc[1, kw.belief_name] == sue_beliefunit.belief_name
+    assert voice_dataframe.loc[1, kw.voice_name] == sue_str
+    assert voice_dataframe.loc[1, kw.voice_cred_lumen] == sue_voice_cred_lumen
+    assert voice_dataframe.loc[1, kw.voice_debt_lumen] == sue_voice_debt_lumen
 
-    assert voice_dataframe.loc[2, wx.moment_label] == amy_moment_label
-    assert voice_dataframe.loc[2, wx.belief_name] == sue_beliefunit.belief_name
-    assert voice_dataframe.loc[2, wx.voice_name] == yao_str
-    assert voice_dataframe.loc[2, wx.voice_cred_lumen] == yao_voice_cred_lumen
-    assert voice_dataframe.loc[2, wx.voice_debt_lumen] == yao_voice_debt_lumen
+    assert voice_dataframe.loc[2, kw.moment_label] == amy_moment_label
+    assert voice_dataframe.loc[2, kw.belief_name] == sue_beliefunit.belief_name
+    assert voice_dataframe.loc[2, kw.voice_name] == yao_str
+    assert voice_dataframe.loc[2, kw.voice_cred_lumen] == yao_voice_cred_lumen
+    assert voice_dataframe.loc[2, kw.voice_debt_lumen] == yao_voice_debt_lumen
 
     assert len(voice_dataframe) == 3
 

@@ -5,7 +5,7 @@ from src.ch19_world_kpi.kpi_mstr import (
     get_bundles_config,
     get_kpi_set_from_bundle,
 )
-from src.ref.keywords import Ch19Keywords as wx
+from src.ref.keywords import Ch19Keywords as kw
 
 
 def test_get_all_kpi_functions_ReturnsObj():
@@ -13,8 +13,8 @@ def test_get_all_kpi_functions_ReturnsObj():
     assert get_all_kpi_functions() is not None, "all_kpi_set should be defined"
     assert len(get_all_kpi_functions()) == 2
     assert get_all_kpi_functions() == {
-        wx.moment_kpi001_voice_nets: create_populate_kpi001_table,
-        wx.moment_kpi002_belief_pledges: create_populate_kpi002_table,
+        kw.moment_kpi001_voice_nets: create_populate_kpi001_table,
+        kw.moment_kpi002_belief_pledges: create_populate_kpi002_table,
     }
 
 
@@ -23,9 +23,9 @@ def test_get_bundles_config_ReturnsObj():
     assert get_bundles_config() is not None, "bundles_config should be defined"
     assert len(get_bundles_config()) == 1
     assert get_bundles_config() == {
-        wx.default_kpi_bundle: {
-            wx.moment_kpi001_voice_nets,
-            wx.moment_kpi002_belief_pledges,
+        kw.default_kpi_bundle: {
+            kw.moment_kpi001_voice_nets,
+            kw.moment_kpi002_belief_pledges,
         }
     }
 
@@ -40,7 +40,7 @@ def test_get_kpi_set_from_bundle_ReturnsObj_Scenario0_WithBundle():
 
 def test_get_kpi_set_from_bundle_ReturnsObj_Scenario1_WithNoBundle():
     # ESTABLISH
-    default_kpi_set = get_kpi_set_from_bundle(wx.default_kpi_bundle)
+    default_kpi_set = get_kpi_set_from_bundle(kw.default_kpi_bundle)
 
     # WHEN
     kpi_set = get_kpi_set_from_bundle()

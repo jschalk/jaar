@@ -5,7 +5,7 @@ from sqlite3 import Connection as sqlite3_Connection, connect as sqlite3_connect
 from src.ch17_idea.idea_config import get_idea_sqlite_types
 from src.ch17_idea.idea_db_tool import create_idea_table_from_csv, insert_idea_csv
 from src.ch17_idea.test._util.ch17_env import env_dir_setup_cleanup
-from src.ref.keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as kw
 
 
 @pytest_fixture
@@ -41,7 +41,7 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
     # Create a test CSV file
     with open(test_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{wx.spark_num},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.group_title},{wx.gogo_want}\n"
+            f"{kw.spark_num},{kw.face_name},{kw.moment_label},{kw.belief_name},{kw.voice_name},{kw.group_title},{kw.gogo_want}\n"
         )
         csv_file.write("3,Sue,Amy43,Bob,Bob,;runners,6.5\n")
         csv_file.write("3,Sue,Amy43,Yao,Bob,;runners,7.5\n")
@@ -79,24 +79,24 @@ def test_create_idea_table_from_csv_ChangesDBState(
 
     # Expected column definitions
     expected_columns = [
-        (0, wx.spark_num, "INTEGER", 0, None, 0),
-        (1, wx.face_name, "TEXT", 0, None, 0),
-        (2, wx.moment_label, "TEXT", 0, None, 0),
-        (3, wx.belief_name, "TEXT", 0, None, 0),
-        (4, wx.voice_name, "TEXT", 0, None, 0),
-        (5, wx.group_title, "TEXT", 0, None, 0),
-        (6, wx.gogo_want, "REAL", 0, None, 0),
+        (0, kw.spark_num, "INTEGER", 0, None, 0),
+        (1, kw.face_name, "TEXT", 0, None, 0),
+        (2, kw.moment_label, "TEXT", 0, None, 0),
+        (3, kw.belief_name, "TEXT", 0, None, 0),
+        (4, kw.voice_name, "TEXT", 0, None, 0),
+        (5, kw.group_title, "TEXT", 0, None, 0),
+        (6, kw.gogo_want, "REAL", 0, None, 0),
     ]
     assert columns == expected_columns
     column_types = get_idea_sqlite_types()
     get_idea_sqlite_types_columns = [
-        (0, wx.spark_num, column_types.get(wx.spark_num), 0, None, 0),
-        (1, wx.face_name, column_types.get(wx.face_name), 0, None, 0),
-        (2, wx.moment_label, column_types.get(wx.moment_label), 0, None, 0),
-        (3, wx.belief_name, column_types.get(wx.belief_name), 0, None, 0),
-        (4, wx.voice_name, column_types.get(wx.voice_name), 0, None, 0),
-        (5, wx.group_title, column_types.get(wx.group_title), 0, None, 0),
-        (6, wx.gogo_want, column_types.get(wx.gogo_want), 0, None, 0),
+        (0, kw.spark_num, column_types.get(kw.spark_num), 0, None, 0),
+        (1, kw.face_name, column_types.get(kw.face_name), 0, None, 0),
+        (2, kw.moment_label, column_types.get(kw.moment_label), 0, None, 0),
+        (3, kw.belief_name, column_types.get(kw.belief_name), 0, None, 0),
+        (4, kw.voice_name, column_types.get(kw.voice_name), 0, None, 0),
+        (5, kw.group_title, column_types.get(kw.group_title), 0, None, 0),
+        (6, kw.gogo_want, column_types.get(kw.gogo_want), 0, None, 0),
     ]
     assert columns == get_idea_sqlite_types_columns
 
@@ -136,7 +136,7 @@ def test_insert_idea_csv_ChangesDBState_Inserts(
     zia_csv_filepath = "zia_brXXXXX.csv"
     with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{wx.spark_num},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.group_title},{wx.gogo_want}\n"
+            f"{kw.spark_num},{kw.face_name},{kw.moment_label},{kw.belief_name},{kw.voice_name},{kw.group_title},{kw.gogo_want}\n"
         )
         csv_file.write("7,Zia,Amy55,Yao,Zia,;swimmers,10.2\n")
         csv_file.write("8,Zia,Amy43,Zia,Bob,;runners,11.1\n")
@@ -180,7 +180,7 @@ def test_insert_idea_csv_ChangesDBState_CanCreateTable(
     zia_csv_filepath = "zia_brXXXXX.csv"
     with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{wx.spark_num},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.group_title},{wx.gogo_want}\n"
+            f"{kw.spark_num},{kw.face_name},{kw.moment_label},{kw.belief_name},{kw.voice_name},{kw.group_title},{kw.gogo_want}\n"
         )
         csv_file.write("7,Zia,Amy55,Yao,Zia,;swimmers,10.2\n")
         csv_file.write("8,Zia,Amy43,Zia,Bob,;runners,11.1\n")

@@ -22,7 +22,7 @@ from src.ch17_idea.test._util.ch17_env import (
     env_dir_setup_cleanup,
     idea_moments_dir as get_example_face_dir,
 )
-from src.ref.keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as kw
 
 
 def test_move_otx_csvs_to_translate_inx_CreatesTranslateedFiles_Scenario0_SingleFile(
@@ -63,21 +63,21 @@ def test_move_otx_csvs_to_translate_inx_CreatesTranslateedFiles_Scenario0_Single
     assert os_path_exists(otx_file_path)
     assert os_path_exists(inx_file_path)
     gen_inx_dt = open_csv(inz_dir, example_filename)
-    assert gen_inx_dt.iloc[0][wx.voice_name] == bob_inx
-    assert gen_inx_dt.iloc[3][wx.voice_name] == zia_otx
+    assert gen_inx_dt.iloc[0][kw.voice_name] == bob_inx
+    assert gen_inx_dt.iloc[3][kw.voice_name] == zia_otx
     assert gen_inx_dt.to_csv() != sue_otx_dt.to_csv()
-    static_inx_dt = DataFrame(columns=[wx.voice_name])
-    static_inx_dt.loc[0, wx.voice_name] = bob_inx
-    static_inx_dt.loc[1, wx.voice_name] = sue_inx
-    static_inx_dt.loc[2, wx.voice_name] = xio_inx
-    static_inx_dt.loc[3, wx.voice_name] = zia_otx
-    assert gen_inx_dt.iloc[0][wx.voice_name] == static_inx_dt.iloc[0][wx.voice_name]
-    assert gen_inx_dt.iloc[1][wx.voice_name] == static_inx_dt.iloc[1][wx.voice_name]
-    assert gen_inx_dt.iloc[2][wx.voice_name] == static_inx_dt.iloc[2][wx.voice_name]
-    assert gen_inx_dt.iloc[3][wx.voice_name] == static_inx_dt.iloc[3][wx.voice_name]
+    static_inx_dt = DataFrame(columns=[kw.voice_name])
+    static_inx_dt.loc[0, kw.voice_name] = bob_inx
+    static_inx_dt.loc[1, kw.voice_name] = sue_inx
+    static_inx_dt.loc[2, kw.voice_name] = xio_inx
+    static_inx_dt.loc[3, kw.voice_name] = zia_otx
+    assert gen_inx_dt.iloc[0][kw.voice_name] == static_inx_dt.iloc[0][kw.voice_name]
+    assert gen_inx_dt.iloc[1][kw.voice_name] == static_inx_dt.iloc[1][kw.voice_name]
+    assert gen_inx_dt.iloc[2][kw.voice_name] == static_inx_dt.iloc[2][kw.voice_name]
+    assert gen_inx_dt.iloc[3][kw.voice_name] == static_inx_dt.iloc[3][kw.voice_name]
     print(f"{gen_inx_dt.to_csv(index=False)=}")
-    gen_csv = gen_inx_dt.sort_values(wx.voice_name).to_csv(index=False)
-    sue_inx_csv = sue_inx_dt.sort_values(wx.voice_name).to_csv(index=False)
+    gen_csv = gen_inx_dt.sort_values(kw.voice_name).to_csv(index=False)
+    sue_inx_csv = sue_inx_dt.sort_values(kw.voice_name).to_csv(index=False)
     assert gen_csv == sue_inx_csv
     assert gen_inx_dt.to_csv() == static_inx_dt.to_csv()
 
@@ -127,24 +127,24 @@ def test_move_otx_csvs_to_translate_inx_CreatesTranslateedFiles_Scenario1_Single
     print(f"{sue_otx_dt=} \n")
     print(f"{sue_inx_dt=} \n")
     gen_inx_dt = open_csv(inz_dir, example_filename)
-    assert gen_inx_dt.iloc[0][wx.reason_context] == inx_amy87_rope
-    assert gen_inx_dt.iloc[1][wx.reason_context] == casa_inx_rope
+    assert gen_inx_dt.iloc[0][kw.reason_context] == inx_amy87_rope
+    assert gen_inx_dt.iloc[1][kw.reason_context] == casa_inx_rope
     assert gen_inx_dt.to_csv() != sue_otx_dt.to_csv()
     assert (
-        gen_inx_dt.iloc[0][wx.reason_context] == sue_inx_dt.iloc[0][wx.reason_context]
+        gen_inx_dt.iloc[0][kw.reason_context] == sue_inx_dt.iloc[0][kw.reason_context]
     )
     assert (
-        gen_inx_dt.iloc[1][wx.reason_context] == sue_inx_dt.iloc[1][wx.reason_context]
+        gen_inx_dt.iloc[1][kw.reason_context] == sue_inx_dt.iloc[1][kw.reason_context]
     )
     assert (
-        gen_inx_dt.iloc[2][wx.reason_context] == sue_inx_dt.iloc[2][wx.reason_context]
+        gen_inx_dt.iloc[2][kw.reason_context] == sue_inx_dt.iloc[2][kw.reason_context]
     )
     assert (
-        gen_inx_dt.iloc[3][wx.reason_context] == sue_inx_dt.iloc[3][wx.reason_context]
+        gen_inx_dt.iloc[3][kw.reason_context] == sue_inx_dt.iloc[3][kw.reason_context]
     )
     print(f"{gen_inx_dt.to_csv(index=False)=}")
-    gen_csv = gen_inx_dt.sort_values(wx.reason_context).to_csv(index=False)
-    sue_inx_csv = sue_inx_dt.sort_values(wx.reason_context).to_csv(index=False)
+    gen_csv = gen_inx_dt.sort_values(kw.reason_context).to_csv(index=False)
+    sue_inx_csv = sue_inx_dt.sort_values(kw.reason_context).to_csv(index=False)
     assert gen_csv == sue_inx_csv
     assert gen_inx_dt.to_csv() == sue_inx_dt.to_csv()
 
@@ -189,9 +189,9 @@ def test_move_otx_csvs_to_translate_inx_CreatesTranslateedFiles_Scenario2_TwoFil
     assert os_path_exists(voice_name_otx_file_path)
     assert os_path_exists(voice_name_inx_file_path)
     voice_inx_dt = open_csv(inz_dir, voice_name_filename)
-    gen_csv = voice_inx_dt.sort_values(wx.voice_name).to_csv(index=False)
+    gen_csv = voice_inx_dt.sort_values(kw.voice_name).to_csv(index=False)
     sue_inx_dt = get_suita_voice_name_inx_dt()
-    assert gen_csv == sue_inx_dt.sort_values(wx.voice_name).to_csv(index=False)
+    assert gen_csv == sue_inx_dt.sort_values(kw.voice_name).to_csv(index=False)
 
     gen_rope1_inx_dt = open_csv(inz_dir, rope1_filename)
     rope1_inx_dt = get_casa_maison_rope_inx_dt()

@@ -10,7 +10,7 @@ from src.ch04_voice.labor import (
     partyheir_shop,
     partyunit_shop,
 )
-from src.ref.keywords import Ch04Keywords as wx
+from src.ref.keywords import Ch04Keywords as kw
 
 
 def test_PartyUnit_Exists():
@@ -22,7 +22,7 @@ def test_PartyUnit_Exists():
     assert not x_partyunit.solo
     obj_attrs = set(x_partyunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
-    assert obj_attrs == {wx.party_title, wx.solo}
+    assert obj_attrs == {kw.party_title, kw.solo}
 
 
 def test_partyunit_shop_ReturnsObj_Scenario0_WithParameters():
@@ -60,7 +60,7 @@ def test_PartyHeir_Exists():
     assert not x_partyheir.parent_solo
     obj_attrs = set(x_partyheir.__dict__.keys())
     print(sorted(list(obj_attrs)))
-    assert obj_attrs == {wx.party_title, wx.solo, wx.parent_solo}
+    assert obj_attrs == {kw.party_title, kw.solo, kw.parent_solo}
 
 
 def test_partyheir_shop_ReturnsObj():

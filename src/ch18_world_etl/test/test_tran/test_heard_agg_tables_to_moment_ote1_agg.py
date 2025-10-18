@@ -5,7 +5,7 @@ from src.ch18_world_etl.transformers import (
     create_sound_and_heard_tables,
     etl_heard_raw_tables_to_moment_ote1_agg,
 )
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_etl_heard_raw_tables_to_moment_ote1_agg_SetsTableAttr():
@@ -23,9 +23,9 @@ def test_etl_heard_raw_tables_to_moment_ote1_agg_SetsTableAttr():
     with sqlite3_connect(":memory:") as moment_db_conn:
         cursor = moment_db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        momentbud_h_raw_table = create_prime_tablename(wx.moment_budunit, "h", "raw")
+        momentbud_h_raw_table = create_prime_tablename(kw.moment_budunit, "h", "raw")
         insert_raw_sqlstr = f"""
-INSERT INTO {momentbud_h_raw_table} ({wx.spark_num}, {wx.moment_label}_inx, {wx.belief_name}_inx, {wx.bud_time})
+INSERT INTO {momentbud_h_raw_table} ({kw.spark_num}, {kw.moment_label}_inx, {kw.belief_name}_inx, {kw.bud_time})
 VALUES
   ({spark3}, '{amy23_str}', '{bob_str}', {timepoint55})
 , ({spark3}, '{amy23_str}', '{bob_str}', {timepoint55})
@@ -35,15 +35,15 @@ VALUES
 """
         cursor.execute(insert_raw_sqlstr)
         assert get_row_count(cursor, momentbud_h_raw_table) == 4
-        assert db_table_exists(cursor, wx.moment_ote1_agg) is False
+        assert db_table_exists(cursor, kw.moment_ote1_agg) is False
 
         # WHEN
         etl_heard_raw_tables_to_moment_ote1_agg(cursor)
 
         # THEN
-        assert db_table_exists(cursor, wx.moment_ote1_agg)
-        assert get_row_count(cursor, wx.moment_ote1_agg) == 3
-        cursor.execute(f"SELECT * FROM {wx.moment_ote1_agg};")
+        assert db_table_exists(cursor, kw.moment_ote1_agg)
+        assert get_row_count(cursor, kw.moment_ote1_agg) == 3
+        cursor.execute(f"SELECT * FROM {kw.moment_ote1_agg};")
         momentunit_agg_rows = cursor.fetchall()
         ex_row0 = (amy23_str, bob_str, spark3, timepoint55, None)
         ex_row1 = (amy45_str, sue_str, spark3, timepoint55, None)

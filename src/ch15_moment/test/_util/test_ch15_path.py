@@ -6,7 +6,7 @@ from src.ch15_moment._ref.ch15_path import (
     BUD_MANDATE_FILENAME,
     create_bud_voice_mandate_ledger_path,
 )
-from src.ref.keywords import Ch15Keywords as wx
+from src.ref.keywords import Ch15Keywords as kw
 
 
 def test_create_bud_voice_mandate_ledger_path_ReturnsObj():
@@ -39,9 +39,9 @@ def test_create_bud_voice_mandate_ledger_path_HasDocString():
     # ESTABLISH
     doc_str = create_bud_voice_mandate_ledger_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=wx.moment_label,
-        belief_name=wx.belief_name,
-        bud_time=wx.bud_time,
+        moment_label=kw.moment_label,
+        belief_name=kw.belief_name,
+        bud_time=kw.bud_time,
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
     doc_str = f"Returns path: {doc_str}"

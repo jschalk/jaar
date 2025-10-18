@@ -27,7 +27,7 @@ from src.ch08_epoch.test._util.ch08_examples import (
     get_bob_five_belief,
     get_five_config,
 )
-from src.ref.keywords import Ch08Keywords as wx
+from src.ref.keywords import Ch08Keywords as kw
 
 
 def test_set_epoch_base_case_dayly_ChangesBeliefUnit_agenda():

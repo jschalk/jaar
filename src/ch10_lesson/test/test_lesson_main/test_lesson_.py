@@ -16,7 +16,7 @@ from src.ch10_lesson.test._util.ch10_examples import (
     get_atom_example_planunit_sports,
     get_beliefdelta_sue_example,
 )
-from src.ref.keywords import Ch10Keywords as wx
+from src.ref.keywords import Ch10Keywords as kw
 
 
 def test_FaceName_Exists():
@@ -235,14 +235,14 @@ def test_LessonUnit_get_step_dict_ReturnsObj_Simple():
     x_dict = bob_lessonunit.get_step_dict()
 
     # THEN
-    assert x_dict.get(wx.moment_label) is not None
-    assert x_dict.get(wx.moment_label) == amy45_str
-    assert x_dict.get(wx.belief_name) is not None
-    assert x_dict.get(wx.belief_name) == bob_str
-    assert x_dict.get(wx.face_name) is not None
-    assert x_dict.get(wx.face_name) == sue_str
-    assert x_dict.get(wx.spark_num) is not None
-    assert x_dict.get(wx.spark_num) == amy45_e5_int
+    assert x_dict.get(kw.moment_label) is not None
+    assert x_dict.get(kw.moment_label) == amy45_str
+    assert x_dict.get(kw.belief_name) is not None
+    assert x_dict.get(kw.belief_name) == bob_str
+    assert x_dict.get(kw.face_name) is not None
+    assert x_dict.get(kw.face_name) == sue_str
+    assert x_dict.get(kw.spark_num) is not None
+    assert x_dict.get(kw.spark_num) == amy45_e5_int
 
     delta_str = "delta"
     assert x_dict.get(delta_str) is not None
@@ -314,14 +314,14 @@ def test_LessonUnit_get_serializable_dict_ReturnsObj_Simple():
     total_dict = bob_lessonunit.get_serializable_dict()
 
     # THEN
-    assert total_dict.get(wx.moment_label) is not None
-    assert total_dict.get(wx.moment_label) == amy45_str
-    assert total_dict.get(wx.belief_name) is not None
-    assert total_dict.get(wx.belief_name) == bob_str
-    assert total_dict.get(wx.face_name) is not None
-    assert total_dict.get(wx.face_name) == sue_str
-    assert total_dict.get(wx.spark_num) is not None
-    assert total_dict.get(wx.spark_num) == amy45_e5_int
+    assert total_dict.get(kw.moment_label) is not None
+    assert total_dict.get(kw.moment_label) == amy45_str
+    assert total_dict.get(kw.belief_name) is not None
+    assert total_dict.get(kw.belief_name) == bob_str
+    assert total_dict.get(kw.face_name) is not None
+    assert total_dict.get(kw.face_name) == sue_str
+    assert total_dict.get(kw.spark_num) is not None
+    assert total_dict.get(kw.spark_num) == amy45_e5_int
     delta_str = "delta"
     assert total_dict.get(delta_str) == {}
 
@@ -435,12 +435,12 @@ def test_LessonUnit_get_deltametric_dict_ReturnsObj():
     x_dict = bob_lessonunit.get_deltametric_dict()
 
     # THEN
-    assert x_dict.get(wx.belief_name) is not None
-    assert x_dict.get(wx.belief_name) == bob_str
-    assert x_dict.get(wx.face_name) is not None
-    assert x_dict.get(wx.face_name) == yao_str
-    assert x_dict.get(wx.spark_num) is not None
-    assert x_dict.get(wx.spark_num) == spark5_int
+    assert x_dict.get(kw.belief_name) is not None
+    assert x_dict.get(kw.belief_name) == bob_str
+    assert x_dict.get(kw.face_name) is not None
+    assert x_dict.get(kw.face_name) == yao_str
+    assert x_dict.get(kw.spark_num) is not None
+    assert x_dict.get(kw.spark_num) == spark5_int
 
     delta_atom_numbers_str = "delta_atom_numbers"
     assert x_dict.get(delta_atom_numbers_str) is not None
@@ -459,10 +459,10 @@ def test_LessonUnit_add_p_beliefatom_Sets_BeliefUnit_voiceunits():
     bob_voice_cred_lumen = 55
     bob_voice_debt_lumen = 66
     bob_voiceunit = voiceunit_shop(bob_str, bob_voice_cred_lumen, bob_voice_debt_lumen)
-    cw_str = wx.voice_cred_lumen
-    dw_str = wx.voice_debt_lumen
+    cw_str = kw.voice_cred_lumen
+    dw_str = kw.voice_debt_lumen
     print(f"{bob_voiceunit.to_dict()=}")
-    bob_required_dict = {wx.voice_name: bob_voiceunit.to_dict().get(wx.voice_name)}
+    bob_required_dict = {kw.voice_name: bob_voiceunit.to_dict().get(kw.voice_name)}
     bob_optional_dict = {cw_str: bob_voiceunit.to_dict().get(cw_str)}
     bob_optional_dict[dw_str] = bob_voiceunit.to_dict().get(dw_str)
     print(f"{bob_required_dict=}")
@@ -470,8 +470,8 @@ def test_LessonUnit_add_p_beliefatom_Sets_BeliefUnit_voiceunits():
 
     # WHEN
     bob_lessonunit.add_p_beliefatom(
-        dimen=wx.belief_voiceunit,
-        crud_str=wx.INSERT,
+        dimen=kw.belief_voiceunit,
+        crud_str=kw.INSERT,
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
@@ -479,8 +479,8 @@ def test_LessonUnit_add_p_beliefatom_Sets_BeliefUnit_voiceunits():
     # THEN
     assert len(bob_lessonunit._beliefdelta.beliefatoms) == 1
     assert (
-        bob_lessonunit._beliefdelta.beliefatoms.get(wx.INSERT)
-        .get(wx.belief_voiceunit)
+        bob_lessonunit._beliefdelta.beliefatoms.get(kw.INSERT)
+        .get(kw.belief_voiceunit)
         .get(bob_str)
         is not None
     )
@@ -497,9 +497,9 @@ def test_LessonUnit_get_edited_belief_ReturnsObj_BeliefUnit_insert_voice():
     before_sue_beliefunit.add_voiceunit(yao_str)
     assert before_sue_beliefunit.voice_exists(yao_str)
     assert before_sue_beliefunit.voice_exists(zia_str) is False
-    dimen = wx.belief_voiceunit
-    x_beliefatom = beliefatom_shop(dimen, wx.INSERT)
-    x_beliefatom.set_jkey(wx.voice_name, zia_str)
+    dimen = kw.belief_voiceunit
+    x_beliefatom = beliefatom_shop(dimen, kw.INSERT)
+    x_beliefatom.set_jkey(kw.voice_name, zia_str)
     x_voice_cred_lumen = 55
     x_voice_debt_lumen = 66
     x_beliefatom.set_jvalue("voice_cred_lumen", x_voice_cred_lumen)
@@ -544,10 +544,10 @@ def test_LessonUnit_is_empty_ReturnsObj():
     bob_voice_cred_lumen = 55
     bob_voice_debt_lumen = 66
     bob_voiceunit = voiceunit_shop(bob_str, bob_voice_cred_lumen, bob_voice_debt_lumen)
-    cw_str = wx.voice_cred_lumen
-    dw_str = wx.voice_debt_lumen
+    cw_str = kw.voice_cred_lumen
+    dw_str = kw.voice_debt_lumen
     print(f"{bob_voiceunit.to_dict()=}")
-    bob_required_dict = {wx.voice_name: bob_voiceunit.to_dict().get(wx.voice_name)}
+    bob_required_dict = {kw.voice_name: bob_voiceunit.to_dict().get(kw.voice_name)}
     bob_optional_dict = {cw_str: bob_voiceunit.to_dict().get(cw_str)}
     bob_optional_dict[dw_str] = bob_voiceunit.to_dict().get(dw_str)
     print(f"{bob_required_dict=}")
@@ -556,8 +556,8 @@ def test_LessonUnit_is_empty_ReturnsObj():
 
     # WHEN
     bob_lessonunit.add_p_beliefatom(
-        dimen=wx.belief_voiceunit,
-        crud_str=wx.INSERT,
+        dimen=kw.belief_voiceunit,
+        crud_str=kw.INSERT,
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
@@ -575,8 +575,8 @@ def test_LessonUnit_is_empty_ReturnsObj():
     # Test for UPDATE_str operation
     bob_lessonunit_update = lessonunit_shop(bob_str)
     bob_lessonunit_update.add_p_beliefatom(
-        dimen=wx.belief_voiceunit,
-        crud_str=wx.UPDATE,
+        dimen=kw.belief_voiceunit,
+        crud_str=kw.UPDATE,
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
@@ -586,8 +586,8 @@ def test_LessonUnit_is_empty_ReturnsObj():
     # Test for DELETE_str operation
     bob_lessonunit_delete = lessonunit_shop(bob_str)
     bob_lessonunit_delete.add_p_beliefatom(
-        dimen=wx.belief_voiceunit,
-        crud_str=wx.DELETE,
+        dimen=kw.belief_voiceunit,
+        crud_str=kw.DELETE,
         jkeys=bob_required_dict,
         jvalues={},
     )

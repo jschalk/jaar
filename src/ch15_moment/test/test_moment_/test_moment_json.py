@@ -12,7 +12,7 @@ from src.ch15_moment.test._util.ch15_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ref.keywords import Ch15Keywords as wx
+from src.ref.keywords import Ch15Keywords as kw
 
 
 def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
@@ -49,27 +49,27 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     # THEN
     print(f"{ amy_moment._get_beliefbudhistorys_dict()=}")
     print(f"{ amy_moment.paybook.to_dict()=}")
-    assert x_dict.get(wx.moment_label) == a45_str
-    assert x_dict.get(wx.moment_mstr_dir) == moment_mstr_dir
-    assert x_dict.get(wx.epoch) == get_default_epoch_config_dict()
-    assert x_dict.get(wx.offi_times) == list(a45_offi_times)
-    assert x_dict.get(wx.knot) == default_knot_if_None()
-    assert x_dict.get(wx.fund_grain) == default_grain_num_if_None()
-    assert x_dict.get(wx.respect_grain) == default_grain_num_if_None()
-    assert x_dict.get(wx.money_grain) == default_grain_num_if_None()
-    assert x_dict.get(wx.beliefbudhistorys) == amy_moment._get_beliefbudhistorys_dict()
-    assert x_dict.get(wx.paybook) == amy_moment.paybook.to_dict()
+    assert x_dict.get(kw.moment_label) == a45_str
+    assert x_dict.get(kw.moment_mstr_dir) == moment_mstr_dir
+    assert x_dict.get(kw.epoch) == get_default_epoch_config_dict()
+    assert x_dict.get(kw.offi_times) == list(a45_offi_times)
+    assert x_dict.get(kw.knot) == default_knot_if_None()
+    assert x_dict.get(kw.fund_grain) == default_grain_num_if_None()
+    assert x_dict.get(kw.respect_grain) == default_grain_num_if_None()
+    assert x_dict.get(kw.money_grain) == default_grain_num_if_None()
+    assert x_dict.get(kw.beliefbudhistorys) == amy_moment._get_beliefbudhistorys_dict()
+    assert x_dict.get(kw.paybook) == amy_moment.paybook.to_dict()
     assert set(x_dict.keys()) == {
-        wx.moment_label,
-        wx.moment_mstr_dir,
-        wx.epoch,
-        wx.offi_times,
-        wx.beliefbudhistorys,
-        wx.knot,
-        wx.fund_grain,
-        wx.respect_grain,
-        wx.money_grain,
-        wx.paybook,
+        kw.moment_label,
+        kw.moment_mstr_dir,
+        kw.epoch,
+        kw.offi_times,
+        kw.beliefbudhistorys,
+        kw.knot,
+        kw.fund_grain,
+        kw.respect_grain,
+        kw.money_grain,
+        kw.paybook,
     }
 
 
@@ -82,17 +82,17 @@ def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
     x_dict = amy_moment.to_dict(include_paybook=False)
 
     # THEN
-    assert not x_dict.get(wx.paybook)
+    assert not x_dict.get(kw.paybook)
     assert set(x_dict.keys()) == {
-        wx.moment_label,
-        wx.moment_mstr_dir,
-        wx.epoch,
-        f"{wx.offi_time}s",
-        wx.beliefbudhistorys,
-        wx.knot,
-        wx.fund_grain,
-        wx.respect_grain,
-        wx.money_grain,
+        kw.moment_label,
+        kw.moment_mstr_dir,
+        kw.epoch,
+        f"{kw.offi_time}s",
+        kw.beliefbudhistorys,
+        kw.knot,
+        kw.fund_grain,
+        kw.respect_grain,
+        kw.money_grain,
     }
 
 
@@ -158,11 +158,11 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario1_WithOutParameters():
     amy45_str = "amy45"
     amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
     x_dict = amy_moment.to_dict()
-    x_dict[wx.epoch] = {}
-    x_dict.pop(wx.knot)
-    x_dict.pop(wx.fund_grain)
-    x_dict.pop(wx.respect_grain)
-    x_dict.pop(wx.money_grain)
+    x_dict[kw.epoch] = {}
+    x_dict.pop(kw.knot)
+    x_dict.pop(kw.fund_grain)
+    x_dict.pop(kw.respect_grain)
+    x_dict.pop(kw.money_grain)
 
     # WHEN
     generated_moment = get_momentunit_from_dict(x_dict)

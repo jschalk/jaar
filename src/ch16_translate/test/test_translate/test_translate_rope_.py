@@ -8,7 +8,7 @@ from src.ch16_translate.map import (
     ropemap_shop,
 )
 from src.ch16_translate.translate_config import default_unknown_str_if_None
-from src.ref.keywords import Ch16Keywords as wx
+from src.ref.keywords import Ch16Keywords as kw
 
 
 def test_RopeMap_Exists():
@@ -462,12 +462,12 @@ def test_RopeMap_to_dict_ReturnsObj():
     slash_otx_knot = "/"
     x_ropemap = ropemap_shop(sue_str, otx_knot=slash_otx_knot)
     x1_rope_map_dict = {
-        wx.spark_num: 0,
-        wx.face_name: sue_str,
-        wx.inx_knot: x_ropemap.inx_knot,
-        wx.otx2inx: {},
-        wx.otx_knot: x_ropemap.otx_knot,
-        wx.unknown_str: x_ropemap.unknown_str,
+        kw.spark_num: 0,
+        kw.face_name: sue_str,
+        kw.inx_knot: x_ropemap.inx_knot,
+        kw.otx2inx: {},
+        kw.otx_knot: x_ropemap.otx_knot,
+        kw.unknown_str: x_ropemap.unknown_str,
     }
     # print(f"           {x1_rope_map_json=}")
     assert x_ropemap.to_dict() == x1_rope_map_dict
@@ -478,12 +478,12 @@ def test_RopeMap_to_dict_ReturnsObj():
     x_ropemap.spark_num = spark7
     # THEN
     x2_rope_map_dict = {
-        wx.spark_num: spark7,
-        wx.face_name: sue_str,
-        wx.inx_knot: x_ropemap.inx_knot,
-        wx.otx2inx: {clean_otx: clean_inx},
-        wx.otx_knot: x_ropemap.otx_knot,
-        wx.unknown_str: x_ropemap.unknown_str,
+        kw.spark_num: spark7,
+        kw.face_name: sue_str,
+        kw.inx_knot: x_ropemap.inx_knot,
+        kw.otx2inx: {clean_otx: clean_inx},
+        kw.otx_knot: x_ropemap.otx_knot,
+        kw.unknown_str: x_ropemap.unknown_str,
     }
     print(f"           {x2_rope_map_dict=}")
     print(f"{x_ropemap.to_dict()=}")

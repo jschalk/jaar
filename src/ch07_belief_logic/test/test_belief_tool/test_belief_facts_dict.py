@@ -6,7 +6,7 @@ from src.ch07_belief_logic.belief_tool import (
     get_belief_root_facts_dict,
     set_factunits_to_belief,
 )
-from src.ref.keywords import Ch07Keywords as wx
+from src.ref.keywords import Ch07Keywords as kw
 
 
 def test_get_belief_root_facts_dict_ReturnsObj_Scenario0_No_factunits():
@@ -36,10 +36,10 @@ def test_get_belief_root_facts_dict_ReturnsObj_Scenario1_factunits_Exist():
     # THEN
     assert sue_fact_dict.get(casa_rope) != None
     casa_fact_dict = sue_fact_dict.get(casa_rope)
-    assert casa_fact_dict.get(wx.fact_context) == casa_rope
-    assert casa_fact_dict.get(wx.fact_state) == dirty_rope
+    assert casa_fact_dict.get(kw.fact_context) == casa_rope
+    assert casa_fact_dict.get(kw.fact_state) == dirty_rope
     expected_sue_fact_dict = {
-        casa_rope: {wx.fact_context: casa_rope, wx.fact_state: dirty_rope}
+        casa_rope: {kw.fact_context: casa_rope, kw.fact_state: dirty_rope}
     }
     print(f"{sue_fact_dict=}")
     print(f"{expected_sue_fact_dict=}")
@@ -65,14 +65,14 @@ def test_get_belief_root_facts_dict_ReturnsObj_Scenario2_factunits_Exist():
     # THEN
     assert sue_fact_dict.get(casa_rope) != None
     casa_fact_dict = sue_fact_dict.get(casa_rope)
-    assert casa_fact_dict.get(wx.fact_context) == casa_rope
-    assert casa_fact_dict.get(wx.fact_state) == dirty_rope
+    assert casa_fact_dict.get(kw.fact_context) == casa_rope
+    assert casa_fact_dict.get(kw.fact_state) == dirty_rope
     assert casa_fact_dict.get("fact_lower") == dirty_reason_lower
     assert casa_fact_dict.get("fact_upper") == dirty_reason_upper
     expected_sue_fact_dict = {
         casa_rope: {
-            wx.fact_context: casa_rope,
-            wx.fact_state: dirty_rope,
+            kw.fact_context: casa_rope,
+            kw.fact_state: dirty_rope,
             "fact_lower": dirty_reason_lower,
             "fact_upper": dirty_reason_upper,
         }
@@ -117,7 +117,7 @@ def test_set_factunits_to_belief_ReturnsObj_Scenario1_Belief1FactsChanged():
         mop_rope, reason_context=floor_rope, reason_case=dirty_rope
     )
     dirty_facts_dict = {
-        floor_rope: {wx.fact_context: floor_rope, wx.fact_state: dirty_rope}
+        floor_rope: {kw.fact_context: floor_rope, kw.fact_state: dirty_rope}
     }
     before_bob_belief = copy_deepcopy(bob_belief)
     assert bob_belief.get_planroot_factunits_dict() != dirty_facts_dict
@@ -153,7 +153,7 @@ def test_set_factunits_to_belief_ReturnsObj_Scenario2_FactUnit_reason_context_Do
         mop_rope, reason_context=floor_rope, reason_case=dirty_rope
     )
     clean_facts_dict = {
-        floor_rope: {wx.fact_context: floor_rope, wx.fact_state: clean_rope}
+        floor_rope: {kw.fact_context: floor_rope, kw.fact_state: clean_rope}
     }
     before_bob_belief = copy_deepcopy(bob_belief)
     assert bob_belief.get_planroot_factunits_dict() != clean_facts_dict
@@ -196,8 +196,8 @@ def test_set_factunits_to_belief_ReturnsObj_Scenario3_FactUnit_reason_context_Wi
     rain_rope = bob_belief.make_rope(weather_rope, raining_str)
 
     two_facts_dict = {
-        floor_rope: {wx.fact_context: floor_rope, wx.fact_state: clean_rope},
-        weather_rope: {wx.fact_context: weather_rope, wx.fact_state: rain_rope},
+        floor_rope: {kw.fact_context: floor_rope, kw.fact_state: clean_rope},
+        weather_rope: {kw.fact_context: weather_rope, kw.fact_state: rain_rope},
     }
     before_bob_belief = copy_deepcopy(bob_belief)
     assert bob_belief.get_planroot_factunits_dict() != two_facts_dict
@@ -235,7 +235,7 @@ def test_clear_factunits_from_belief_ReturnsObj_Scenario1_FactUnit_Exist():
     )
     bob_belief.add_fact(floor_rope, dirty_rope)
     floor_facts_dict = {
-        floor_rope: {wx.fact_context: floor_rope, wx.fact_state: dirty_rope}
+        floor_rope: {kw.fact_context: floor_rope, kw.fact_state: dirty_rope}
     }
     assert bob_belief.get_planroot_factunits_dict() == floor_facts_dict
     assert bob_belief.get_planroot_factunits_dict() != {}

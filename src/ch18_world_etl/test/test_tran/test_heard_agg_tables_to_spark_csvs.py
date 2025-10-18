@@ -11,7 +11,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     create_sound_and_heard_tables,
 )
 from src.ch18_world_etl.transformers import etl_heard_agg_to_spark_belief_csvs
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_etl_heard_agg_to_spark_belief_csvs_PopulatesBeliefPulabelTables(
@@ -26,7 +26,7 @@ def test_etl_heard_agg_to_spark_belief_csvs_PopulatesBeliefPulabelTables(
     amy23_str = "amy23"
     yao_voice_cred_lumen5 = 5
     sue_voice_cred_lumen7 = 7
-    put_agg_tablename = create_prime_tablename(wx.belief_voiceunit, "h", "agg", "put")
+    put_agg_tablename = create_prime_tablename(kw.belief_voiceunit, "h", "agg", "put")
     put_agg_csv = f"{put_agg_tablename}.csv"
     x_moment_mstr_dir = get_chapter_temp_dir()
     a23_bob_e3_dir = create_belief_spark_dir_path(
@@ -42,7 +42,7 @@ def test_etl_heard_agg_to_spark_belief_csvs_PopulatesBeliefPulabelTables(
         cursor = belief_db_conn.cursor()
         create_sound_and_heard_tables(cursor)
         insert_raw_sqlstr = f"""
-INSERT INTO {put_agg_tablename} ({wx.spark_num},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_lumen})
+INSERT INTO {put_agg_tablename} ({kw.spark_num},{kw.face_name},{kw.moment_label},{kw.belief_name},{kw.voice_name},{kw.voice_cred_lumen})
 VALUES
   ({spark3},'{sue_inx}','{amy23_str}','{bob_inx}','{yao_inx}',{yao_voice_cred_lumen5})
 , ({spark7},'{sue_inx}','{amy23_str}','{bob_inx}','{yao_inx}',{yao_voice_cred_lumen5})

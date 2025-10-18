@@ -6,7 +6,7 @@ from src.ch11_bud.bud_main import (
     budunit_shop,
     get_budunit_from_dict,
 )
-from src.ref.keywords import Ch11Keywords as wx
+from src.ref.keywords import Ch11Keywords as kw
 
 
 def test_DEFAULT_CELLDEPTH():
@@ -135,7 +135,7 @@ def test_BudUnit_to_dict_ReturnsObj():
     t4_dict = t4_budunit.to_dict()
 
     # THEN
-    assert t4_dict == {wx.bud_time: t4_bud_time, wx.quota: t4_quota}
+    assert t4_dict == {kw.bud_time: t4_bud_time, kw.quota: t4_quota}
 
 
 def test_BudUnit_calc_magnitude_SetsAttr_Scenario0():
@@ -217,11 +217,11 @@ def test_BudUnit_to_dict_ReturnsObjWith_bud_voice_net():
 
     # THEN
     assert t4_dict == {
-        wx.bud_time: t4_bud_time,
-        wx.quota: t4_quota,
-        wx.magnitude: t4_magnitude,
-        wx.bud_voice_nets: t4_bud_voice_nets,
-        wx.celldepth: t4_celldepth,
+        kw.bud_time: t4_bud_time,
+        kw.quota: t4_quota,
+        kw.magnitude: t4_magnitude,
+        kw.bud_voice_nets: t4_bud_voice_nets,
+        kw.celldepth: t4_celldepth,
     }
 
 
@@ -231,7 +231,7 @@ def test_get_budunit_from_dict_ReturnsObj_Sccenario0():
     t4_quota = 55
     t4_budunit = budunit_shop(t4_bud_time, t4_quota)
     t4_dict = t4_budunit.to_dict()
-    assert t4_dict == {wx.bud_time: t4_bud_time, wx.quota: t4_quota}
+    assert t4_dict == {kw.bud_time: t4_bud_time, kw.quota: t4_quota}
 
     # WHEN
     x_budunit = get_budunit_from_dict(t4_dict)

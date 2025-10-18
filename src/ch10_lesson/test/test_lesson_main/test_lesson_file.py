@@ -11,7 +11,7 @@ from src.ch10_lesson.test._util.ch10_examples import (
     get_atom_example_planunit_knee,
     get_atom_example_planunit_sports,
 )
-from src.ref.keywords import Ch10Keywords as wx
+from src.ref.keywords import Ch10Keywords as kw
 
 
 def test_LessonUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
@@ -129,8 +129,8 @@ def test_LessonUnit_save_lesson_file_SavesCorrectFile(env_dir_setup_cleanup):
     lesson_file_dict = open_json(sue_lessons_dir, two_filename)
     print(f"{lesson_file_dict=}")
     assert lesson_file_dict.get("delta_atom_numbers") == []
-    assert lesson_file_dict.get(wx.belief_name) == sue_str
-    assert lesson_file_dict.get(wx.face_name) is None
+    assert lesson_file_dict.get(kw.belief_name) == sue_str
+    assert lesson_file_dict.get(kw.face_name) is None
     print(f"{lesson_file_dict.keys()=}")
 
 

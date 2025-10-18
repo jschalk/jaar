@@ -32,7 +32,7 @@ from src.ch13_belief_listen.test._util.ch13_examples import (
     hungry_str,
     run_str,
 )
-from src.ref.keywords import Ch13Keywords as wx
+from src.ref.keywords import Ch13Keywords as kw
 
 
 def sanitation_str() -> str:
@@ -369,8 +369,8 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
     yao_job.cashout()
     assert yao_job.voices.keys() == yao_gut0.voices.keys()
     assert yao_job.get_voice(yao_str).irrational_voice_debt_lumen == 0
-    yao_job_voices = yao_job.to_dict().get(wx.voices)
-    yao_gut0_voices = yao_gut0.to_dict().get(wx.voices)
+    yao_job_voices = yao_job.to_dict().get(kw.voices)
+    yao_gut0_voices = yao_gut0.to_dict().get(kw.voices)
     yao_job_bob = yao_job_voices.get("Bob")
     yao_gut0_bob = yao_gut0_voices.get("Bob")
     print(f"{yao_job_bob=}")
@@ -378,7 +378,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
     assert yao_job_bob == yao_gut0_bob
     assert yao_job_voices.keys() == yao_gut0_voices.keys()
     assert yao_job_voices == yao_gut0_voices
-    assert len(yao_job.to_dict().get(wx.voices)) == 3
+    assert len(yao_job.to_dict().get(kw.voices)) == 3
     assert len(yao_job._plan_dict) == 4
     print(f"{yao_job._plan_dict.keys()=}")
     print(f"{yao_job.get_planroot_factunits_dict().keys()=}")

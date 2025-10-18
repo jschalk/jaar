@@ -19,16 +19,16 @@ from src.ch08_epoch.test._util.ch08_examples import (
     Ch08ExampleStrs as exx,
     get_bob_five_belief,
 )
-from src.ref.keywords import Ch08Keywords as wx
+from src.ref.keywords import Ch08Keywords as kw
 
 
 def test_set_epoch_base_case_dayly_SetsAttr_Scenario0_NoWarppingParameters():
     # ESTABLISH
     bob_belief = get_bob_five_belief()
     mop_dayly_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: exx.day_rope,
-        wx.reason_state: exx.day_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: exx.day_rope,
+        kw.reason_state: exx.day_rope,
     }
     mop_day_lower_min = 600
     mop_day_duration = 90
@@ -60,9 +60,9 @@ def test_set_epoch_base_case_dayly_SetsAttr_Scenario1_WarppingParameters():
     bob_belief = get_bob_five_belief()
     bob_belief.cashout()
     mop_dayly_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: exx.day_rope,
-        wx.reason_state: exx.day_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: exx.day_rope,
+        kw.reason_state: exx.day_rope,
     }
     mop_day_lower_min = 2000
     mop_day_duration = 95
@@ -94,11 +94,11 @@ def test_set_epoch_base_case_dayly_SetsAttr_Scenario1_WarppingParameters():
 def test_set_epoch_base_case_xdays_SetsAttr_Scenario0_NoWarppingParameters():
     # ESTABLISH
     bob_belief = get_bob_five_belief()
-    days_rope = bob_belief.make_rope(exx.five_rope, wx.days)
+    days_rope = bob_belief.make_rope(exx.five_rope, kw.days)
     mop_xdays_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: days_rope,
-        wx.reason_state: days_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: days_rope,
+        kw.reason_state: days_rope,
     }
     mop_every_xdays = 7
     mop_day_lower = 3
@@ -132,11 +132,11 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario0_NoWarppingParameters():
 def test_set_epoch_base_case_xdays_SetsAttr_Scenario1_WarppingParameters():
     # ESTABLISH
     bob_belief = get_bob_five_belief()
-    days_rope = bob_belief.make_rope(exx.five_rope, wx.days)
+    days_rope = bob_belief.make_rope(exx.five_rope, kw.days)
     mop_xdays_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: days_rope,
-        wx.reason_state: days_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: days_rope,
+        kw.reason_state: days_rope,
     }
     mop_every_xdays = 7
     mop_day_lower = 30
@@ -167,11 +167,11 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario1_WarppingParameters():
 def test_set_epoch_base_case_weekly_SetsAttr_Scenario0_NoWrapingParameters():
     # ESTABLISH
     bob_belief = get_bob_five_belief()
-    week_rope = bob_belief.make_rope(exx.five_rope, wx.week)
+    week_rope = bob_belief.make_rope(exx.five_rope, kw.week)
     mop_weekly_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: week_rope,
-        wx.reason_state: week_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: week_rope,
+        kw.reason_state: week_rope,
     }
     mop_weekly_lower_min = 600
     mop_weekly_duration = 90
@@ -201,11 +201,11 @@ def test_set_epoch_base_case_weekly_SetsAttr_Scenario0_NoWrapingParameters():
 def test_set_epoch_base_case_weekly_SetsAttr_Scenario1_WrapingParameters():
     # ESTABLISH
     bob_belief = get_bob_five_belief()
-    week_rope = bob_belief.make_rope(exx.five_rope, wx.week)
+    week_rope = bob_belief.make_rope(exx.five_rope, kw.week)
     mop_weekly_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: week_rope,
-        wx.reason_state: week_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: week_rope,
+        kw.reason_state: week_rope,
     }
     mop_weekly_lower_min = 7000
     mop_weekly_duration = 800
@@ -235,11 +235,11 @@ def test_set_epoch_base_case_weekly_SetsAttr_Scenario1_WrapingParameters():
 def test_set_epoch_base_case_xweeks_SetsAttr_Scenario0_NoWrapingParameters():
     # ESTABLISH
     bob_belief = get_bob_five_belief()
-    weeks_rope = bob_belief.make_rope(exx.five_rope, wx.weeks)
+    weeks_rope = bob_belief.make_rope(exx.five_rope, kw.weeks)
     mop_xweeks_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: weeks_rope,
-        wx.reason_state: weeks_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: weeks_rope,
+        kw.reason_state: weeks_rope,
     }
     mop_every_xweeks = 7
     mop_week_lower = 3
@@ -270,11 +270,11 @@ def test_set_epoch_base_case_xweeks_SetsAttr_Scenario0_NoWrapingParameters():
 def test_set_epoch_base_case_xweeks_SetsAttr_Scenario1_WrapingParameters():
     # ESTABLISH
     bob_belief = get_bob_five_belief()
-    weeks_rope = bob_belief.make_rope(exx.five_rope, wx.weeks)
+    weeks_rope = bob_belief.make_rope(exx.five_rope, kw.weeks)
     mop_xweeks_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: weeks_rope,
-        wx.reason_state: weeks_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: weeks_rope,
+        kw.reason_state: weeks_rope,
     }
     mop_every_xweeks = 7
     mop_week_lower = 30
@@ -306,9 +306,9 @@ def test_set_epoch_base_case_datetime_range_SetsAttr_Scenario0_NoWrapingParamete
     # ESTABLISH
     bob_belief = get_bob_five_belief()
     mop_range_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: exx.five_rope,
-        wx.reason_state: exx.five_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: exx.five_rope,
+        kw.reason_state: exx.five_rope,
     }
     mop_range_lower_min = 600
     mop_range_duration = 90
@@ -339,11 +339,11 @@ def test_set_epoch_base_case_datetime_range_SetsAttr_Scenario0_NoWrapingParamete
 def test_set_epoch_base_case_datetime_range_SetsAttr_Scenario1_WrapingParameters():
     # ESTABLISH
     bob_belief = get_bob_five_belief()
-    week_rope = bob_belief.make_rope(exx.five_rope, wx.week)
+    week_rope = bob_belief.make_rope(exx.five_rope, kw.week)
     mop_range_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: exx.five_rope,
-        wx.reason_state: exx.five_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: exx.five_rope,
+        kw.reason_state: exx.five_rope,
     }
     mop_range_lower_min = 5259490000
     mop_range_duration = 8000
@@ -376,9 +376,9 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario0_NoWrapingParameters():
     month_fred_rope = bob_belief.make_rope(exx.five_year_rope, exx.Fredrick)
     month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
     mop_monthday_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: month_geo_rope,
-        wx.reason_state: month_geo_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: month_geo_rope,
+        kw.reason_state: month_geo_rope,
     }
     mop_monthday = 3
     mop_length_days = 4
@@ -418,9 +418,9 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario1_WrapingParameters():
     bob_belief = get_bob_five_belief()
     month_trump_rope = bob_belief.make_rope(exx.five_year_rope, exx.Trump)
     mop_monthday_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: month_trump_rope,
-        wx.reason_state: month_trump_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: month_trump_rope,
+        kw.reason_state: month_trump_rope,
     }
     mop_monthday = 40
     mop_length_days = 3
@@ -465,9 +465,9 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario2_monthday_MustBeWithinMo
     bob_belief = get_bob_five_belief()
     month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
     mop_monthday_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: month_geo_rope,
-        wx.reason_state: month_geo_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: month_geo_rope,
+        kw.reason_state: month_geo_rope,
     }
     mop_monthday = 40
     mop_length_days = 3
@@ -497,9 +497,9 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario3_monthday_Reduce_length_
     bob_belief = get_bob_five_belief()
     month_geo_rope = bob_belief.make_rope(exx.five_year_rope, exx.Geo)
     mop_monthday_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: month_geo_rope,
-        wx.reason_state: month_geo_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: month_geo_rope,
+        kw.reason_state: month_geo_rope,
     }
     mop_monthday = 20
     mop_length_days = 40
@@ -549,9 +549,9 @@ def test_del_epoch_reason_SetsAttr_Scenario0_NoReasonUnitExists():
     bob_belief = beliefunit_shop(exx.Bob)
     bob_belief.add_plan(exx.mop_rope)
     mop_dayly_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: exx.day_rope,
-        wx.reason_state: exx.day_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: exx.day_rope,
+        kw.reason_state: exx.day_rope,
     }
     assert bob_belief.plan_exists(exx.mop_rope)
     assert not belief_plan_reasonunit_exists(bob_belief, mop_dayly_args)
@@ -568,9 +568,9 @@ def test_del_epoch_reason_SetsAttr_Scenario1_ReasonUnitExists():
     bob_belief = get_bob_five_belief()
     bob_belief.cashout()
     mop_dayly_args = {
-        wx.plan_rope: exx.mop_rope,
-        wx.reason_context: exx.day_rope,
-        wx.reason_state: exx.day_rope,
+        kw.plan_rope: exx.mop_rope,
+        kw.reason_context: exx.day_rope,
+        kw.reason_state: exx.day_rope,
     }
     mop_day_lower_min = 600
     mop_day_duration = 90
