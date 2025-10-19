@@ -21,53 +21,6 @@ from src.ch99_chapter_style.style import (
     get_semantic_types_filename,
 )
 
-# def test_Chapter_ref_util_FilesExist():
-#     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-#     # ESTABLISH
-
-#     # WHEN / THEN
-#     # previous_chapter_number = -1
-#     for chapter_desc, chapter_dir in get_chapter_descs().items():
-#         print(f"Evaluating {chapter_desc=} {chapter_dir=}")
-#         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
-#         # assert chapter_number == previous_chapter_number + 1
-#         # print(f"{chapter_desc=} {chapter_number=}")
-#         chapter_desc_str_number = get_chapter_desc_str_number(chapter_desc)
-#         ch_num = int(chapter_desc_str_number)
-#         keywords_class_file_path = create_keywords_class_file_path(chapter_dir, ch_num)
-#         assert os_path_exists(keywords_class_file_path)
-#         test_dir = create_path(chapter_dir, "test")
-#         util_dir = create_path(test_dir, "_util")
-#         assert os_path_exists(util_dir)
-#         # keywords_class__test_path = create_path(utils_dir, f"test_{chapter_prefix}_keywords.py")
-#         # assert os_path_exists(keywords_class__test_path)
-#         env_files = get_python_files_with_flag(util_dir, "env")
-#         if len(env_files) > 0:
-#             assert len(env_files) == 1
-#             env_filename = str(list(env_files.keys())[0])
-#             check_env_file_has_necessary_elements(env_filename, chapter_prefix, ch_num)
-#         util_files = get_dir_file_strs(util_dir, include_dirs=False)
-#         for util_file in util_files.keys():
-#             is_test_file = util_file[:4] == "test"
-#             is_json_file = util_file.endswith("json")
-#             is_env_file = util_file == f"{chapter_prefix}_env.py"
-#             is_example_file = util_file == f"{chapter_prefix}_examples.py"
-#             is_keywords_file = util_file == get_keywords_filename(chapter_prefix)
-#             assert_fail_str = f"{util_file} should not be in {util_dir=}"
-#             # print(f"{util_file=}")
-#             # print(f"{is_json_file=} {util_file.endswith("json")=}")
-#             # print(f"{is_test_file=} {util_file[:4]=}")
-#             # print(f"{is_example_file=}")
-#             # print(f"{is_keywords_file=}")
-#             acceptable_filename = (
-#                 is_test_file
-#                 or is_example_file
-#                 or is_env_file
-#                 or is_keywords_file
-#                 or is_json_file
-#             )
-#             assert acceptable_filename, assert_fail_str
-
 
 def check_env_file_has_necessary_elements(
     env_filename: str, chapter_prefix: str, chapter_number: int

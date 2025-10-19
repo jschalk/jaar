@@ -5,7 +5,10 @@ from src.ch01_py.file_toolbox import (
     open_json,
     save_json,
 )
-from src.ch01_py.keyword_class_builder import save_keywords_by_chapter_md
+from src.ch01_py.keyword_class_builder import (
+    create_src_keywords_path,
+    save_keywords_by_chapter_md,
+)
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_descs,
     save_brick_formats_md,
@@ -37,7 +40,9 @@ def test_SpecialTestThatBuildsDocs():
             json_file_tuples = get_dir_filenames(chapter_dir, {"json"})
             for x_dir, x_filename in json_file_tuples:
                 json_filepath = create_path(x_dir, x_filename)
-                print(f"{json_filepath=}")
-                print(f"{x_dir} {x_filename=}")
+                # print(f"{json_filepath=}")
+                # print(f"{x_dir} {x_filename=}")
                 json_dir = create_path(chapter_dir, x_dir)
                 save_json(json_dir, x_filename, open_json(json_dir, x_filename))
+        keywords_json_path = create_src_keywords_path("src")
+        save_json(keywords_json_path, None, open_json(keywords_json_path))

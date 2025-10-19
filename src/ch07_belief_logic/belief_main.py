@@ -122,7 +122,7 @@ class BeliefUnit:
     debtor_respect: RespectNum = None
     max_tree_traverse: int = None
     last_lesson_id: int = None
-    # cashout Calculated field begin
+    # fields calculated by cashout
     _plan_dict: dict[RopeTerm, PlanUnit] = None
     _keep_dict: dict[RopeTerm, PlanUnit] = None
     _healers_dict: dict[HealerName, dict[RopeTerm, PlanUnit]] = None
@@ -136,7 +136,6 @@ class BeliefUnit:
     offtrack_fund: float = None
     reason_contexts: set[RopeTerm] = None
     range_inheritors: dict[RopeTerm, RopeTerm] = None
-    # cashout Calculated field end
 
     def get_nexus_label(self) -> LabelTerm:
         return get_first_label_from_rope(

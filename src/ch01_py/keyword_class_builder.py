@@ -1,11 +1,12 @@
 from copy import copy as copy_copy
 from enum import Enum
+from src.ch01_py._ref.ch01_path import create_src_keywords_path
 from src.ch01_py.chapter_desc_tools import get_chapter_desc_prefix, get_chapter_descs
 from src.ch01_py.file_toolbox import create_path, open_json, save_file
 
 
 def get_keywords_src_config() -> dict[str, dict]:
-    return open_json("src/ref/keywords.json")
+    return open_json(create_src_keywords_path("src"))
 
 
 def get_keywords_by_chapter(keywords_dict: dict[str, dict[str]]) -> dict:
