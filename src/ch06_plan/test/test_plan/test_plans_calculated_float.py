@@ -1,16 +1,19 @@
-from src.ch06_plan.plan import plans_calculated_range, planunit_shop
+from src.ch06_plan.plan import get_rangeunit_from_lineage_of_plans, planunit_shop
 from src.ch06_plan.range_toolbox import RangeUnit
 
 
-def test_plans_calculated_range_ReturnsObj_EmptyList():
+def test_get_rangeunit_from_lineage_of_plans_ReturnsObj_Scenario0_EmptyList():
     # ESTABLISH
     x_rangeunit = RangeUnit(3, 8)
 
     # WHEN / THEN
-    assert plans_calculated_range([], x_rangeunit.gogo, x_rangeunit.stop) == x_rangeunit
+    assert (
+        get_rangeunit_from_lineage_of_plans([], x_rangeunit.gogo, x_rangeunit.stop)
+        == x_rangeunit
+    )
 
 
-def test_plans_calculated_range_ReturnsObj_EmptyPlanUnit():
+def test_get_rangeunit_from_lineage_of_plans_ReturnsObj_Scenario1_EmptyPlanUnit():
     # ESTABLISH
     wk_str = "wk"
     wk_plan = planunit_shop(wk_str)
@@ -18,12 +21,14 @@ def test_plans_calculated_range_ReturnsObj_EmptyPlanUnit():
 
     # WHEN / THEN
     assert (
-        plans_calculated_range([wk_plan], x_rangeunit.gogo, x_rangeunit.stop)
+        get_rangeunit_from_lineage_of_plans(
+            [wk_plan], x_rangeunit.gogo, x_rangeunit.stop
+        )
         == x_rangeunit
     )
 
 
-def test_plans_calculated_range_ReturnsObj_1PlanUnit_addin():
+def test_get_rangeunit_from_lineage_of_plans_ReturnsObj_Scenario2_1PlanUnit_addin():
     # ESTABLISH
     wk_str = "wk"
     wk_addin = 5
@@ -33,7 +38,7 @@ def test_plans_calculated_range_ReturnsObj_1PlanUnit_addin():
     old_rangeunit = RangeUnit(old_gogo, old_stop)
 
     # WHEN
-    new_rangeunit = plans_calculated_range(
+    new_rangeunit = get_rangeunit_from_lineage_of_plans(
         [wk_plan], old_rangeunit.gogo, old_rangeunit.stop
     )
 
@@ -44,7 +49,7 @@ def test_plans_calculated_range_ReturnsObj_1PlanUnit_addin():
     assert new_rangeunit.stop == new_stop
 
 
-def test_plans_calculated_range_ReturnsObj_2PlanUnit_addin():
+def test_get_rangeunit_from_lineage_of_plans_ReturnsObj_Scenario3_2PlanUnit_addin():
     # ESTABLISH
     wk_str = "wk"
     wk_addin = 5
@@ -56,7 +61,7 @@ def test_plans_calculated_range_ReturnsObj_2PlanUnit_addin():
     old_rangeunit = RangeUnit(old_gogo, old_stop)
 
     # WHEN
-    new_rangeunit = plans_calculated_range(
+    new_rangeunit = get_rangeunit_from_lineage_of_plans(
         [wk_plan, tue_plan], old_rangeunit.gogo, old_rangeunit.stop
     )
 
@@ -67,7 +72,7 @@ def test_plans_calculated_range_ReturnsObj_2PlanUnit_addin():
     assert new_rangeunit.stop == new_stop
 
 
-def test_plans_calculated_range_ReturnsObj_2PlanUnit_numor():
+def test_get_rangeunit_from_lineage_of_plans_ReturnsObj_Scenario4_2PlanUnit_numor():
     # ESTABLISH
     wk_str = "wk"
     wk_numor = 5
@@ -80,7 +85,7 @@ def test_plans_calculated_range_ReturnsObj_2PlanUnit_numor():
     plan_list = [wk_plan, tue_plan]
 
     # WHEN
-    new_rangeunit = plans_calculated_range(
+    new_rangeunit = get_rangeunit_from_lineage_of_plans(
         plan_list, old_rangeunit.gogo, old_rangeunit.stop
     )
 
@@ -91,7 +96,7 @@ def test_plans_calculated_range_ReturnsObj_2PlanUnit_numor():
     assert new_rangeunit.stop == new_stop
 
 
-def test_plans_calculated_range_ReturnsObj_2PlanUnit_denom():
+def test_get_rangeunit_from_lineage_of_plans_ReturnsObj_Scenario5_2PlanUnit_denom():
     # ESTABLISH
     wk_str = "wk"
     wk_denom = 5
@@ -105,7 +110,7 @@ def test_plans_calculated_range_ReturnsObj_2PlanUnit_denom():
     plan_list = [wk_plan, tue_plan]
 
     # WHEN
-    new_rangeunit = plans_calculated_range(
+    new_rangeunit = get_rangeunit_from_lineage_of_plans(
         plan_list, old_rangeunit.gogo, old_rangeunit.stop
     )
 
@@ -118,7 +123,7 @@ def test_plans_calculated_range_ReturnsObj_2PlanUnit_denom():
     assert new_rangeunit.stop == 8
 
 
-def test_plans_calculated_range_ReturnsObj_2PlanUnit_denom_morph():
+def test_get_rangeunit_from_lineage_of_plans_ReturnsObj_Scenario6_2PlanUnit_denom_morph():
     # ESTABLISH
     wk_str = "wk"
     wk_denom = 50
@@ -131,7 +136,7 @@ def test_plans_calculated_range_ReturnsObj_2PlanUnit_denom_morph():
     plan_list = [wk_plan, tue_plan]
 
     # WHEN
-    new_rangeunit = plans_calculated_range(
+    new_rangeunit = get_rangeunit_from_lineage_of_plans(
         plan_list, old_rangeunit.gogo, old_rangeunit.stop
     )
 
@@ -142,3 +147,28 @@ def test_plans_calculated_range_ReturnsObj_2PlanUnit_denom_morph():
     assert new_rangeunit.stop == new_stop
     assert new_rangeunit.gogo == 5
     assert new_rangeunit.stop == 16
+
+
+def test_get_rangeunit_from_lineage_of_plans_ReturnsObj_Scenario7_Zero():
+    # ESTABLISH
+    wk_str = "wk"
+    wk_denom = 50
+    wk_plan = planunit_shop(wk_str, denom=wk_denom, morph=True)
+    tue_denom = 20
+    tue_plan = planunit_shop("Tue", denom=tue_denom, morph=True)
+    ancestor_gogo = 0
+    ancestor_stop = 0
+    plan_list = [wk_plan, tue_plan]
+
+    # WHEN
+    x_rangeunit = get_rangeunit_from_lineage_of_plans(
+        plan_list, ancestor_gogo, ancestor_stop
+    )
+
+    # THEN
+    expected_gogo = (ancestor_gogo % wk_denom) % tue_denom
+    expected_stop = (ancestor_stop % wk_denom) % tue_denom
+    assert x_rangeunit.gogo == expected_gogo
+    assert x_rangeunit.stop == expected_stop
+    assert x_rangeunit.gogo == 0
+    assert x_rangeunit.stop == 0

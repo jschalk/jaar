@@ -126,14 +126,14 @@ def expected_ag_count_fact_set(
         five_factheir = mop_plan.factheirs.get(wx.five_rope)
         year_factheir = mop_plan.factheirs.get(wx.five_year_rope)
         day_factheir = mop_plan.factheirs.get(wx.day_rope)
-        # print(f"{mop_plan.factheirs.keys()=}")
-        # print(
-        #     f"mop_plan factheir {five_factheir.fact_lower=} {five_factheir.fact_upper}"
-        # )
-        # print(
-        #     f"mop_plan factheir {year_factheir.fact_lower=} {year_factheir.fact_upper}"
-        # )
-        # print(f"mop_plan factheir {day_factheir.fact_lower=} {day_factheir.fact_upper}")
+        print(f"{mop_plan.factheirs.keys()=}")
+        print(
+            f"mop_plan factheir {five_factheir.fact_lower=} {five_factheir.fact_upper}"
+        )
+        print(
+            f"mop_plan factheir {year_factheir.fact_lower=} {year_factheir.fact_upper}"
+        )
+        print(f"mop_plan factheir {day_factheir.fact_lower=} {day_factheir.fact_upper}")
         # for month_case in year_reasonheir.cases.values():
         #     print(
         #         f"{get_tail_label(month_case.reason_state):10} {month_case.reason_lower=} {month_case.reason_upper=} {month_case.case_active=}"
@@ -160,12 +160,10 @@ def test_set_epoch_cases_for_monthly_SetsAttr_Scenario1_ChangesBeliefUnit_agenda
     mop_plan = bob_belief.get_plan_obj(wx.mop_rope)
 
     # WHEN / THEN
-    # TODO figure out why given Fact Upper and Lower of zero always returns true
-    # assert expected_ag_count_fact_set(mop_plan, bob_belief, 0, 0, 0)
-    # TODO figure out why given Fact Upper and Lower of Max always returns true
-    # year_plan = bob_belief.get_plan_obj(wx.five_year_rope)
-    # print(f"{get_range_attrs(year_plan)=}")
-    # assert expected_ag_count_fact_set(mop_plan, bob_belief, 525600, 525600, 0)
+    assert expected_ag_count_fact_set(mop_plan, bob_belief, 0, 0, 0)
+    year_plan = bob_belief.get_plan_obj(wx.five_year_rope)
+    print(f"{get_range_attrs(year_plan)=}")
+    assert expected_ag_count_fact_set(mop_plan, bob_belief, 525600, 525600, 0)
     assert expected_ag_count_fact_set(mop_plan, bob_belief, 0, 1, expected=0)
     assert expected_ag_count_fact_set(mop_plan, bob_belief, 7200, 30240, expected=1)
     assert expected_ag_count_fact_set(mop_plan, bob_belief, 30240, 30240, expected=0)

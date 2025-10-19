@@ -85,3 +85,29 @@ def test_get_morphed_rangeunit_ReturnsObj_Scenario0():
     # THEN
     assert x_rangeunit.gogo == 2
     assert x_rangeunit.stop == 5
+
+
+def test_get_morphed_rangeunit_ReturnsObj_Scenario1():
+    # ESTABLISH
+    x_gogo = 0
+    x_stop = 0
+    x_denom = 5
+
+    # WHEN
+    x_rangeunit = get_morphed_rangeunit(x_gogo, x_stop, x_denom)
+
+    # THEN
+    assert x_rangeunit.gogo == x_gogo
+    assert x_rangeunit.stop == x_stop
+
+
+def test_get_morphed_rangeunit_ReturnsObj_Scenario2():
+    # ESTABLISH
+    x_int = 7
+
+    # WHEN
+    x_rangeunit = get_morphed_rangeunit(x_int, x_int, x_int)
+
+    # THEN
+    assert x_rangeunit.gogo == x_int
+    assert x_rangeunit.stop == x_int

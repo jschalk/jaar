@@ -1071,26 +1071,24 @@ reason_case:    {reason_case}"""
         raise gogo_calc_stop_calc_Exception(exception_str)
 
     def _distribute_math_attrs(self, math_plan: PlanUnit):
+        """Populates BeliefUnit.range_inheritors, sets PlanUnit.gogo_calc, PlanUnit.stop_calc"""
         single_range_plan_list = [math_plan]
         while single_range_plan_list != []:
-            r_plan = single_range_plan_list.pop()
-            if r_plan.range_evaluated:
-                self._raise_gogo_calc_stop_calc_exception(r_plan.get_plan_rope())
-            if r_plan.has_begin_close():
-                r_plan.gogo_calc = r_plan.begin
-                r_plan.stop_calc = r_plan.close
+            x_planunit = single_range_plan_list.pop()
+            x_plan_rope = x_planunit.get_plan_rope()
+            if x_planunit.range_evaluated:
+                self._raise_gogo_calc_stop_calc_exception(x_plan_rope)
+            if x_planunit.has_begin_close():
+                x_planunit.gogo_calc = x_planunit.begin
+                x_planunit.stop_calc = x_planunit.close
             else:
-                parent_rope = get_parent_rope(
-                    rope=r_plan.get_plan_rope(), knot=r_plan.knot
-                )
+                parent_rope = get_parent_rope(x_plan_rope, x_planunit.knot)
                 parent_plan = self.get_plan_obj(parent_rope)
-                r_plan.gogo_calc = parent_plan.gogo_calc
-                r_plan.stop_calc = parent_plan.stop_calc
-                self.range_inheritors[r_plan.get_plan_rope()] = (
-                    math_plan.get_plan_rope()
-                )
-            r_plan._mold_gogo_calc_stop_calc()
-            single_range_plan_list.extend(iter(r_plan.kids.values()))
+                x_planunit.gogo_calc = parent_plan.gogo_calc
+                x_planunit.stop_calc = parent_plan.stop_calc
+                self.range_inheritors[x_plan_rope] = math_plan.get_plan_rope()
+            x_planunit._mold_gogo_calc_stop_calc()
+            single_range_plan_list.extend(iter(x_planunit.kids.values()))
 
     def _set_plantree_range_attrs(self):
         for x_plan in self._plan_dict.values():
@@ -1173,7 +1171,7 @@ reason_case:    {reason_case}"""
 
     def _set_kids_plan_active(self, x_plan: PlanUnit, parent_plan: PlanUnit):
         x_plan.set_reasonheirs(self._plan_dict, parent_plan.reasonheirs)
-        x_plan.set_range_factheirs(self._plan_dict, self.range_inheritors)
+        x_plan.set_range_inheritors_factheirs(self._plan_dict, self.range_inheritors)
         tt_count = self.tree_traverse_count
         x_plan.set_plan_active(tt_count, self.groupunits, self.belief_name)
 
