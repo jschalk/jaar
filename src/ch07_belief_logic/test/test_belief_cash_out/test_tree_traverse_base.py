@@ -21,13 +21,13 @@ def test_BeliefUnit_clear_plan_dict_and_belief_obj_settle_attrs_SetsAttrs_Scenar
     sue_belief._plan_dict = x_plan_dict
     sue_belief.offtrack_kids_star_set = "example"
     sue_belief.reason_contexts = {"example2"}
-    sue_belief._range_inheritors = {"example2": 1}
+    sue_belief.range_inheritors = {"example2": 1}
     assert sue_belief.rational == x_rational
     assert sue_belief.tree_traverse_count == x_tree_traverse_count
     assert sue_belief._plan_dict == x_plan_dict
     assert sue_belief.offtrack_kids_star_set != set()
     assert sue_belief.reason_contexts != set()
-    assert sue_belief._range_inheritors != {}
+    assert sue_belief.range_inheritors != {}
 
     # WHEN
     sue_belief._clear_plan_dict_and_belief_obj_settle_attrs()
@@ -43,7 +43,7 @@ def test_BeliefUnit_clear_plan_dict_and_belief_obj_settle_attrs_SetsAttrs_Scenar
     }
     assert sue_belief.offtrack_kids_star_set == set()
     assert not sue_belief.reason_contexts
-    assert not sue_belief._range_inheritors
+    assert not sue_belief.range_inheritors
 
 
 def test_BeliefUnit_clear_plan_dict_and_belief_obj_settle_attrs_SetsAttrs_Scenario1():

@@ -44,6 +44,7 @@
   "_tax_yields"                    : { "init_chapter": "ch14" }, 
   "plan_active"                         : { "init_chapter": "ch06" }, 
   "plan_active_hx"                      : { "init_chapter": "ch06" }, 
+  "range_inheritors"                      : { "init_chapter": "ch06" }, 
   "addin"                          : { "init_chapter": "ch06" }, 
   "all_tranbook"                   : { "init_chapter": "ch15" }, 
   "all_voice_cred"                 : { "init_chapter": "ch06" }, 

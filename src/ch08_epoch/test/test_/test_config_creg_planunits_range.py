@@ -30,26 +30,26 @@ def test_BeliefUnit_set_plan_dict_SetsAll_range_inheritors():
     jan_rope = sue_beliefunit.make_rope(year_rope, "January")
 
     sue_beliefunit = add_time_creg_planunit(sue_beliefunit)
-    assert sue_beliefunit._range_inheritors == {}
+    assert sue_beliefunit.range_inheritors == {}
 
     # WHEN
     sue_beliefunit._set_plan_dict()
     sue_beliefunit._set_plantree_range_attrs()
 
     # THEN
-    print(f"{sue_beliefunit._range_inheritors=}")
-    assert sue_beliefunit._range_inheritors != {}
-    assert day_rope in sue_beliefunit._range_inheritors
-    assert weeks_rope in sue_beliefunit._range_inheritors
-    assert week_rope in sue_beliefunit._range_inheritors
-    assert sun_rope in sue_beliefunit._range_inheritors
-    assert c400_leap_rope in sue_beliefunit._range_inheritors
-    assert c400_clean_rope in sue_beliefunit._range_inheritors
-    assert c100_clean_rope in sue_beliefunit._range_inheritors
-    assert yr4_leap_rope in sue_beliefunit._range_inheritors
-    assert yr4_clean_rope in sue_beliefunit._range_inheritors
-    assert year_rope in sue_beliefunit._range_inheritors
-    assert jan_rope in sue_beliefunit._range_inheritors
+    print(f"{sue_beliefunit.range_inheritors=}")
+    assert sue_beliefunit.range_inheritors != {}
+    assert day_rope in sue_beliefunit.range_inheritors
+    assert weeks_rope in sue_beliefunit.range_inheritors
+    assert week_rope in sue_beliefunit.range_inheritors
+    assert sun_rope in sue_beliefunit.range_inheritors
+    assert c400_leap_rope in sue_beliefunit.range_inheritors
+    assert c400_clean_rope in sue_beliefunit.range_inheritors
+    assert c100_clean_rope in sue_beliefunit.range_inheritors
+    assert yr4_leap_rope in sue_beliefunit.range_inheritors
+    assert yr4_clean_rope in sue_beliefunit.range_inheritors
+    assert year_rope in sue_beliefunit.range_inheritors
+    assert jan_rope in sue_beliefunit.range_inheritors
 
 
 def test_BeliefUnit_set_plantree_range_attrs_Sets_day_plan_gogo_calc_stop_calc():

@@ -43,7 +43,7 @@ def test_BeliefUnit_Exists():
     assert x_belief.offtrack_kids_star_set is None
     assert x_belief.offtrack_fund is None
     assert x_belief.reason_contexts is None
-    assert x_belief._range_inheritors is None
+    assert x_belief.range_inheritors is None
     assert str(type(x_belief.planroot)).find("None") == 8
     obj_attrs = set(x_belief.__dict__.keys())
     print(sorted(list(obj_attrs)))
@@ -55,7 +55,7 @@ def test_BeliefUnit_Exists():
         kw.keeps_justified,
         kw.offtrack_fund,
         kw.offtrack_kids_star_set,
-        "_range_inheritors",
+        kw.range_inheritors,
         kw.rational,
         kw.reason_contexts,
         kw.sum_healerunit_plans_fund_total,
@@ -163,7 +163,7 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     assert x_belief.offtrack_kids_star_set == set()
     assert not x_belief.offtrack_fund
     assert x_belief.reason_contexts == set()
-    assert x_belief._range_inheritors == {}
+    assert x_belief.range_inheritors == {}
     print(f"{type(x_belief.planroot)=}") == 0
     assert str(type(x_belief.planroot)).find(".plan.PlanUnit'>") > 0
 

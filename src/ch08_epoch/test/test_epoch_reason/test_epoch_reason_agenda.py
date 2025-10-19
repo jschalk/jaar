@@ -120,15 +120,24 @@ def expected_ag_count_fact_set(
 ) -> dict[RopeTerm, PlanUnit]:
     x_belief.add_fact(wx.five_rope, wx.five_rope, fact_lower, fact_upper)
     x_belief.cashout()
-    five_factheir = x_belief.planroot.factheirs.get(wx.five_rope)
     is_as_expected = expected == len(x_belief.get_agenda_dict())
     if not is_as_expected:
         year_reasonheir = mop_plan.get_reasonheir(wx.five_year_rope)
-        print(f"{five_factheir.fact_lower=} {five_factheir.fact_upper}")
-        for month_case in year_reasonheir.cases.values():
-            print(
-                f"{get_tail_label(month_case.reason_state):10} {month_case.reason_lower=} {month_case.reason_upper=} {month_case.case_active}"
-            )
+        five_factheir = mop_plan.factheirs.get(wx.five_rope)
+        year_factheir = mop_plan.factheirs.get(wx.five_year_rope)
+        day_factheir = mop_plan.factheirs.get(wx.day_rope)
+        # print(f"{mop_plan.factheirs.keys()=}")
+        # print(
+        #     f"mop_plan factheir {five_factheir.fact_lower=} {five_factheir.fact_upper}"
+        # )
+        # print(
+        #     f"mop_plan factheir {year_factheir.fact_lower=} {year_factheir.fact_upper}"
+        # )
+        # print(f"mop_plan factheir {day_factheir.fact_lower=} {day_factheir.fact_upper}")
+        # for month_case in year_reasonheir.cases.values():
+        #     print(
+        #         f"{get_tail_label(month_case.reason_state):10} {month_case.reason_lower=} {month_case.reason_upper=} {month_case.case_active=}"
+        #     )
     return is_as_expected
 
 

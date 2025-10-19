@@ -228,7 +228,7 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
     assert ziet1_plan.close != ziet0_close
     assert not ziet1_plan.gogo_calc
     assert not ziet1_plan.stop_calc
-    assert yao_belief._range_inheritors == {}
+    assert yao_belief.range_inheritors == {}
 
     # WHEN
     yao_belief._set_plantree_range_attrs()
@@ -240,7 +240,7 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
     assert not ziet1_plan.close
     assert ziet1_plan.gogo_calc == ziet0_begin
     assert ziet1_plan.stop_calc == ziet0_close
-    assert yao_belief._range_inheritors == {ziet1_rope: ziet0_rope}
+    assert yao_belief.range_inheritors == {ziet1_rope: ziet0_rope}
 
 
 def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_calc_LabelWith_denom():
@@ -395,7 +395,7 @@ def test_BeliefUnit_set_plantree_range_attrs_Sets2LevelsDescendentPlan_gogo_calc
     assert ziet2_plan.addin == ziet2_addin
     assert not ziet2_plan.gogo_calc
     assert not ziet2_plan.stop_calc
-    assert yao_belief._range_inheritors == {}
+    assert yao_belief.range_inheritors == {}
 
     # WHEN
     yao_belief._set_plantree_range_attrs()
@@ -407,7 +407,7 @@ def test_BeliefUnit_set_plantree_range_attrs_Sets2LevelsDescendentPlan_gogo_calc
     assert ziet2_plan.stop_calc == ziet0_plan.stop_calc + ziet2_addin
     assert ziet2_plan.gogo_calc == 8
     assert ziet2_plan.stop_calc == 12
-    assert yao_belief._range_inheritors == {
+    assert yao_belief.range_inheritors == {
         ziet1_rope: ziet0_rope,
         ziet2_rope: ziet0_rope,
     }
@@ -483,7 +483,7 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_When_knot_IsNonD
     assert ziet1_plan.close != ziet0_close
     assert not ziet1_plan.gogo_calc
     assert not ziet1_plan.stop_calc
-    assert yao_belief._range_inheritors == {}
+    assert yao_belief.range_inheritors == {}
 
     # WHEN
     yao_belief._set_plantree_range_attrs()
@@ -495,4 +495,4 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_When_knot_IsNonD
     assert not ziet1_plan.close
     assert ziet1_plan.gogo_calc == ziet0_begin
     assert ziet1_plan.stop_calc == ziet0_close
-    assert yao_belief._range_inheritors == {ziet1_rope: ziet0_rope}
+    assert yao_belief.range_inheritors == {ziet1_rope: ziet0_rope}
