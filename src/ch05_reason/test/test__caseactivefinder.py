@@ -340,11 +340,14 @@ def get_fig(pd: float, graphics_bool: bool) -> plotly_figure:
     return fig
 
 
-def test_CaseActiveFinder_get_active_get_task_bool_ReturnsObj_Scenari0_fact_range_LessThan_Divisor(
+def test_CaseActiveFinder_get_active_get_task_bool_ReturnsObj_Scenari0_fact_range(
     graphics_bool,
 ):
     # ESTABLISH / WHEN / THEN
     """Check scenarios CaseUnit.active. Plotly graph can be used to identify problems."""
+    # TODO refactor this test.
+    # It's currently a knucklehead way of creating asserting the expected booleans and creating a graph.
+    # Start with a test set, then do for loop through the test set to create the graph
     # # Scenario A
     assert caseactivefinder_shop(0.3, 0.7, 1, 0.1, 1.2).get_active_bool()
 
@@ -362,6 +365,7 @@ def test_CaseActiveFinder_get_active_get_task_bool_ReturnsObj_Scenari0_fact_rang
     caseb1_8 = caseactivefinder_shop(0.3, 0.3, pd, 0.1, 0.3)
     caseb1_9 = caseactivefinder_shop(0.3, 0.3, pd, 0.3, 0.3)
     caseb1_10 = caseactivefinder_shop(0.0, 0.0, pd, 0.0, 0.0)
+    caseb1_11 = caseactivefinder_shop(0.3, 0.7, pd, 0.0, 0.0)
 
     expect_active = True
     expect_task = True
@@ -421,8 +425,14 @@ def test_CaseActiveFinder_get_active_get_task_bool_ReturnsObj_Scenari0_fact_rang
     exp_active = True
     exp_task = False
     show_x(exp_active, exp_task, caseb1_10, fig, linel, "caseb1_10", False, graph_b)
-    assert caseb1_10.get_active_bool() == expect_active
-    assert caseb1_10.get_task_bool() == expect_task
+    assert caseb1_10.get_active_bool() == exp_active
+    assert caseb1_10.get_task_bool() == exp_task
+    linel -= 0.1
+    exp_active = False
+    exp_task = False
+    show_x(exp_active, exp_task, caseb1_11, fig, linel, "caseb1_11", False, graph_b)
+    assert caseb1_11.get_active_bool() == exp_active
+    assert caseb1_11.get_task_bool() == exp_task
 
     # Scenario B2
     linel -= 0.1
