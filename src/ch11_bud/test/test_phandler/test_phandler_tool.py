@@ -39,7 +39,7 @@ from src.ch11_bud.bud_filehandler import (
     save_job_file,
 )
 from src.ch11_bud.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
-from src.ch11_bud.test._util.ch11_env import env_dir_setup_cleanup, get_chapter_temp_dir
+from src.ch11_bud.test._util.ch11_env import get_temp_dir, temp_dir_setup
 from src.ch11_bud.test._util.ch11_examples import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
@@ -50,9 +50,9 @@ from src.ch11_bud.test._util.ch11_examples import (
 from src.ref.keywords import Ch11Keywords as kw
 
 
-def test_save_belief_file_SetsFile(env_dir_setup_cleanup):
+def test_save_belief_file_SetsFile(temp_dir_setup):
     # ESTABLISH
-    temp_dir = get_chapter_temp_dir()
+    temp_dir = get_temp_dir()
     belief_filename = "belief.json"
     belief_path = create_path(temp_dir, belief_filename)
     sue_str = "Sue"
@@ -68,7 +68,7 @@ def test_save_belief_file_SetsFile(env_dir_setup_cleanup):
 
 def test_open_belief_file_ReturnsObj_Scenario0_NoFile():
     # ESTABLISH
-    temp_dir = get_chapter_temp_dir()
+    temp_dir = get_temp_dir()
     belief_filename = "belief.json"
     belief_path = create_path(temp_dir, belief_filename)
     assert os_path_exists(belief_path) is False
@@ -82,7 +82,7 @@ def test_open_belief_file_ReturnsObj_Scenario0_NoFile():
 
 def test_open_belief_file_ReturnsObj_Scenario1_FileExists():
     # ESTABLISH
-    temp_dir = get_chapter_temp_dir()
+    temp_dir = get_temp_dir()
     belief_filename = "belief.json"
     belief_path = create_path(temp_dir, belief_filename)
     sue_str = "Sue"
@@ -97,9 +97,9 @@ def test_open_belief_file_ReturnsObj_Scenario1_FileExists():
     assert gen_sue_belief == expected_sue_belief
 
 
-def test_save_arbitrary_beliefspark_SetsFile_Scenario0(env_dir_setup_cleanup):
+def test_save_arbitrary_beliefspark_SetsFile_Scenario0(temp_dir_setup):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     spark5 = 5
     sue_str = "Sue"
@@ -118,10 +118,10 @@ def test_save_arbitrary_beliefspark_SetsFile_Scenario0(env_dir_setup_cleanup):
 
 
 def test_save_arbitrary_beliefspark_SetsFile_Scenario1_includes_facts(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     spark5 = 5
     sue_str = "Sue"
@@ -152,9 +152,9 @@ def test_save_arbitrary_beliefspark_SetsFile_Scenario1_includes_facts(
     assert gen_sue_belief.to_dict() == expected_sue_belief.to_dict()
 
 
-def test_get_beliefspark_obj_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):
+def test_get_beliefspark_obj_ReturnsObj_Scenario0_NoFile(temp_dir_setup):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy"
     sue_str = "Sue"
     t3 = 3
@@ -163,9 +163,9 @@ def test_get_beliefspark_obj_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):
     assert get_beliefspark_obj(moment_mstr_dir, a23_str, sue_str, t3) is None
 
 
-def test_get_beliefspark_obj_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
+def test_get_beliefspark_obj_ReturnsObj_Scenario1_FileExists(temp_dir_setup):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy"
     sue_str = "Sue"
     t3 = 3
@@ -185,10 +185,10 @@ def test_get_beliefspark_obj_ReturnsObj_Scenario1_FileExists(env_dir_setup_clean
 
 
 def test_collect_belief_spark_dir_sets_ReturnsObj_Scenario0_none(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     # WHEN
     belief_sparks_sets = collect_belief_spark_dir_sets(moment_mstr_dir, a23_str)
@@ -197,10 +197,10 @@ def test_collect_belief_spark_dir_sets_ReturnsObj_Scenario0_none(
 
 
 def test_collect_belief_spark_dir_sets_ReturnsObj_Scenario1_DirsExist(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     bob_str = "Bob"
     spark1 = 1
@@ -220,10 +220,10 @@ def test_collect_belief_spark_dir_sets_ReturnsObj_Scenario1_DirsExist(
 
 
 def test_collect_belief_spark_dir_sets_ReturnsObj_Scenario2_DirsExist(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
@@ -360,9 +360,9 @@ def test_get_beliefs_downhill_spark_nums_ReturnsObj_Scenario4Empty_downhill_beli
     assert beliefs_downhill_spark_nums == {bob_str: spark2, sue_str: spark2}
 
 
-def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
+def test_cellunit_add_json_file_SetsFile_Scenario0(temp_dir_setup):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     time7 = 777000
     sue_str = "Sue"
@@ -400,10 +400,10 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
 
 
 def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     time7 = 777000
     sue_str = "Sue"
@@ -430,9 +430,9 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
     assert generated_cell_dict.get(kw.quota) == CELLNODE_QUOTA_DEFAULT
 
 
-def test_cellunit_get_from_dir_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_cleanup):
+def test_cellunit_get_from_dir_ReturnsObj_Scenario0_NoFileExists(temp_dir_setup):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     time7 = 777000
     sue_str = "Sue"
@@ -449,9 +449,9 @@ def test_cellunit_get_from_dir_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_c
     assert cellunit_get_from_dir(cell_dir) is None
 
 
-def test_cellunit_get_from_dir_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
+def test_cellunit_get_from_dir_ReturnsObj_Scenario1_FileExists(temp_dir_setup):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     time7 = 777000
     sue_str = "Sue"
@@ -475,9 +475,9 @@ def test_cellunit_get_from_dir_ReturnsObj_Scenario1_FileExists(env_dir_setup_cle
     assert gen_cellunit == expected_cellunit
 
 
-def test_cellunit_save_to_dir_ReturnsObj_Scenario0(env_dir_setup_cleanup):
+def test_cellunit_save_to_dir_ReturnsObj_Scenario0(temp_dir_setup):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     time7 = 777000
     sue_str = "Sue"
@@ -498,10 +498,10 @@ def test_cellunit_save_to_dir_ReturnsObj_Scenario0(env_dir_setup_cleanup):
 
 
 def test_create_cell_voice_mandate_ledger_json_CreatesFile_Scenario0_NoCellFile(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     sue_str = "Sue"
     sue_ancestors = [sue_str]
     a23_str = "amy23"
@@ -521,10 +521,10 @@ def test_create_cell_voice_mandate_ledger_json_CreatesFile_Scenario0_NoCellFile(
 
 
 def test_create_cell_voice_mandate_ledger_json_CreatesFile_Scenario1(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     yao_str = "Yao"
     sue_str = "Sue"
     sue_ancestors = [sue_str]
@@ -583,9 +583,9 @@ def test_create_cell_voice_mandate_ledger_json_CreatesFile_Scenario1(
     assert open_json(sue_voice_mandate_ledger_path) == {yao_str: 311, sue_str: 133}
 
 
-def test_save_valid_bud_file_Scenario0_SavesFile(env_dir_setup_cleanup):
+def test_save_valid_bud_file_Scenario0_SavesFile(temp_dir_setup):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     yao_str = "Yao"
     t55_bud = get_budunit_55_example()
@@ -600,9 +600,9 @@ def test_save_valid_bud_file_Scenario0_SavesFile(env_dir_setup_cleanup):
     assert os_path_exists(t55_bud_path)
 
 
-def test_save_valid_bud_file_Scenario1_RaisesError(env_dir_setup_cleanup):
+def test_save_valid_bud_file_Scenario1_RaisesError(temp_dir_setup):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     yao_str = "Yao"
     invalid_bud = get_budunit_invalid_example()
@@ -616,9 +616,9 @@ def test_save_valid_bud_file_Scenario1_RaisesError(env_dir_setup_cleanup):
     assert str(excinfo.value) == exception_str
 
 
-def test_bud_file_exists_ReturnsObj(env_dir_setup_cleanup):
+def test_bud_file_exists_ReturnsObj(temp_dir_setup):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     yao_str = "Yao"
     t55_bud = get_budunit_55_example()
@@ -631,9 +631,9 @@ def test_bud_file_exists_ReturnsObj(env_dir_setup_cleanup):
     assert bud_file_exists(mstr_dir, a23_str, yao_str, t55_bud.bud_time)
 
 
-def test_open_bud_file_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_cleanup):
+def test_open_bud_file_ReturnsObj_Scenario0_NoFileExists(temp_dir_setup):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     yao_str = "Yao"
     t55_bud = get_budunit_55_example()
@@ -644,9 +644,9 @@ def test_open_bud_file_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_cleanup):
     assert not open_bud_file(mstr_dir, a23_str, yao_str, t55_bud_time)
 
 
-def test_open_bud_file_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
+def test_open_bud_file_ReturnsObj_Scenario1_FileExists(temp_dir_setup):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     yao_str = "Yao"
     t55_bud = get_budunit_55_example()
@@ -658,9 +658,9 @@ def test_open_bud_file_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
     assert open_bud_file(mstr_dir, a23_str, yao_str, t55_bud_time) == t55_bud
 
 
-def test_save_beliefpoint_file_SavesFile(env_dir_setup_cleanup):
+def test_save_beliefpoint_file_SavesFile(temp_dir_setup):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     t55_beliefpoint = get_beliefunit_with_4_levels()
@@ -680,9 +680,9 @@ def test_save_beliefpoint_file_SavesFile(env_dir_setup_cleanup):
     assert os_path_exists(t55_beliefpoint_path)
 
 
-def test_save_beliefpoint_file_RaisesError(env_dir_setup_cleanup):
+def test_save_beliefpoint_file_RaisesError(temp_dir_setup):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     irrational_beliefpoint = get_beliefunit_irrational_example()
     t55_bud_time = 55
 
@@ -693,9 +693,9 @@ def test_save_beliefpoint_file_RaisesError(env_dir_setup_cleanup):
     assert str(excinfo.value) == exception_str
 
 
-def test_beliefpoint_file_exists_ReturnsObj(env_dir_setup_cleanup):
+def test_beliefpoint_file_exists_ReturnsObj(temp_dir_setup):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     t55_bud_time = 55
@@ -710,10 +710,10 @@ def test_beliefpoint_file_exists_ReturnsObj(env_dir_setup_cleanup):
 
 
 def test_open_beliefpoint_file_ReturnsObj_Scenario0_NoFileExists(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     t55_bud_time = 55
@@ -723,9 +723,9 @@ def test_open_beliefpoint_file_ReturnsObj_Scenario0_NoFileExists(
     assert not open_beliefpoint_file(mstr_dir, a23_str, sue_str, t55_bud_time)
 
 
-def test_open_beliefpoint_file_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
+def test_open_beliefpoint_file_ReturnsObj_Scenario1_FileExists(temp_dir_setup):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     t55_bud_time = 55
@@ -740,9 +740,9 @@ def test_open_beliefpoint_file_ReturnsObj_Scenario1_FileExists(env_dir_setup_cle
     assert file_beliefpoint.to_dict() == t55_beliefpoint.to_dict()
 
 
-def test_get_timepoint_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
+def test_get_timepoint_dirs_ReturnsObj_Scenario0(temp_dir_setup):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     t55_bud_time = 55

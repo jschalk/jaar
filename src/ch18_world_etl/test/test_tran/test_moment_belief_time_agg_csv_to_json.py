@@ -4,16 +4,13 @@ from src.ch18_world_etl._ref.ch18_path import (
     create_moment_ote1_csv_path,
     create_moment_ote1_json_path,
 )
-from src.ch18_world_etl.test._util.ch18_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch18_world_etl.test._util.ch18_env import get_temp_dir, temp_dir_setup
 from src.ch18_world_etl.transformers import etl_moment_ote1_agg_csvs_to_jsons
 from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_etl_moment_ote1_agg_csvs_to_jsons_CreatesFile_Scenaro0(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     bob_str = "Bob"
@@ -24,7 +21,7 @@ def test_etl_moment_ote1_agg_csvs_to_jsons_CreatesFile_Scenaro0(
     amy45_str = "amy45"
     timepoint55 = 55
     timepoint66 = 66
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_spark_time_p = create_moment_ote1_csv_path(moment_mstr_dir, amy23_str)
     a45_spark_time_p = create_moment_ote1_csv_path(moment_mstr_dir, amy45_str)
     a23_spark_time_csv = f"""{kw.moment_label},{kw.belief_name},{kw.spark_num},{kw.bud_time},{kw.error_message}

@@ -10,10 +10,7 @@ from src.ch11_bud.bud_filehandler import (
 )
 from src.ch11_bud.cell import cellunit_shop
 from src.ch15_moment.moment_cell import DecreeUnit, set_cell_trees_decrees
-from src.ch15_moment.test._util.ch15_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch15_moment.test._util.ch15_env import get_temp_dir, temp_dir_setup
 from src.ch15_moment.test._util.ch15_examples import (
     example_casa_floor_clean_factunit,
     example_casa_floor_dirty_factunit,
@@ -55,10 +52,10 @@ def test_DecreeUnit_get_child_cell_ancestors_ReturnsObj_Scenario0():
 # for every found_fact change beliefspark to that fact
 # create agenda (different than if found_fact was not applied)
 def test_set_cell_trees_decrees_SetsRootAttr_Scenario0_Depth0NoFacts(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy"
     tp5 = 5
     bob_str = "Bob"
@@ -80,10 +77,10 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario0_Depth0NoFacts(
 
 
 def test_set_cell_trees_decrees_SetsRootAttr_Scenario1_Depth0AndOne_beliefspark_fact(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy"
     tp5 = 5
     bob_str = "Bob"
@@ -113,10 +110,10 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario1_Depth0AndOne_beliefspark_
 
 
 def test_set_cell_trees_decrees_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy"
     tp5 = 5
     bob_str = "Bob"
@@ -146,10 +143,10 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
 
 
 def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1AndZero_boss_facts(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"
@@ -187,10 +184,10 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1AndZero_boss_fact
 
 
 def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1And_boss_facts(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"
@@ -236,10 +233,10 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1And_boss_facts(
 
 
 def test_set_cell_trees_decrees_SetsChildCells_Scenario4_Depth3And_boss_facts(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"
@@ -299,10 +296,10 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario4_Depth3And_boss_facts(
 
 
 def test_set_cell_trees_decrees_SetsChildCells_Scenario5_Depth2And_boss_facts(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"
@@ -362,10 +359,10 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario5_Depth2And_boss_facts(
 
 
 def test_set_cell_trees_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachCell(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"
@@ -429,10 +426,10 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachC
 
 
 def test_set_cell_trees_decrees_SetsChildCells_Scenario7_NoCell_GetBeliefSpark(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"

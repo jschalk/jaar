@@ -6,19 +6,16 @@ from src.ch11_bud.bud_filehandler import (
     save_arbitrary_beliefspark,
 )
 from src.ch15_moment.moment_cell import load_cells_beliefspark
-from src.ch15_moment.test._util.ch15_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch15_moment.test._util.ch15_env import get_temp_dir, temp_dir_setup
 from src.ch15_moment.test._util.ch15_examples import example_casa_floor_clean_factunit
 from src.ref.keywords import Ch15Keywords as kw
 
 
 def test_load_cells_beliefspark_SetsFiles_Scenario0_NoFacts(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     bob_str = "Bob"
     a23_str = "amy23"
     spark300 = 300
@@ -41,10 +38,10 @@ def test_load_cells_beliefspark_SetsFiles_Scenario0_NoFacts(
 
 
 def test_load_cells_beliefspark_SetsFiles_Scenario1_WithFacts(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     bob_str = "Bob"
     a23_str = "amy23"
     spark300 = 300
@@ -74,10 +71,10 @@ def test_load_cells_beliefspark_SetsFiles_Scenario1_WithFacts(
 
 
 def test_load_cells_beliefspark_SetsFiles_Scenario2_WithFacts_NotAtRoot(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     bob_str = "Bob"
     a23_str = "amy23"
     spark300 = 300

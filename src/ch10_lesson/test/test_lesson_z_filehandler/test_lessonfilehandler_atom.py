@@ -1,10 +1,7 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import create_path, get_dir_file_strs
 from src.ch10_lesson.lesson_filehandler import lessonfilehandler_shop
-from src.ch10_lesson.test._util.ch10_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as env_dir,
-)
+from src.ch10_lesson.test._util.ch10_env import get_temp_dir as env_dir, temp_dir_setup
 from src.ch10_lesson.test._util.ch10_examples import (
     get_atom_example_factunit_knee,
     get_atom_example_planunit_ball,
@@ -42,7 +39,7 @@ def test_LessonFileHandler_atom_file_path_ReturnsObj():
     assert one_atom_file_path == expected_path
 
 
-def test_LessonFileHandler_save_valid_atom_file_SavesFile(env_dir_setup_cleanup):
+def test_LessonFileHandler_save_valid_atom_file_SavesFile(temp_dir_setup):
     # ESTABLISH
     yao_str = "Yao"
     yao_lessonfilehandler = lessonfilehandler_shop(env_dir(), moment_label(), yao_str)
@@ -58,7 +55,7 @@ def test_LessonFileHandler_save_valid_atom_file_SavesFile(env_dir_setup_cleanup)
     assert atom_num == one_int
 
 
-def test_LessonFileHandler_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
+def test_LessonFileHandler_atom_file_exists_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     yao_str = "Yao"
     yao_lessonfilehandler = lessonfilehandler_shop(env_dir(), moment_label(), yao_str)
@@ -76,7 +73,7 @@ def test_LessonFileHandler_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
     assert yao_lessonfilehandler.h_atom_file_exists(four_int)
 
 
-def test_LessonFileHandler_delete_atom_file_DeletesFile(env_dir_setup_cleanup):
+def test_LessonFileHandler_delete_atom_file_DeletesFile(temp_dir_setup):
     # ESTABLISH
     yao_str = "Yao"
     yao_lessonfilehandler = lessonfilehandler_shop(env_dir(), moment_label(), yao_str)
@@ -93,7 +90,7 @@ def test_LessonFileHandler_delete_atom_file_DeletesFile(env_dir_setup_cleanup):
     assert yao_lessonfilehandler.h_atom_file_exists(ten_int) is False
 
 
-def test_LessonFileHandler_get_max_atom_file_number_ReturnsObj(env_dir_setup_cleanup):
+def test_LessonFileHandler_get_max_atom_file_number_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     yao_str = "Yao"
     yao_lessonfilehandler = lessonfilehandler_shop(env_dir(), moment_label(), yao_str)
@@ -108,7 +105,7 @@ def test_LessonFileHandler_get_max_atom_file_number_ReturnsObj(env_dir_setup_cle
 
 
 def test_LessonFileHandler_get_max_atom_file_number_ReturnsObjWhenDirIsEmpty(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     yao_str = "Yao"
@@ -118,7 +115,7 @@ def test_LessonFileHandler_get_max_atom_file_number_ReturnsObjWhenDirIsEmpty(
     assert yao_lessonfilehandler.get_max_atom_file_number() is None
 
 
-def test_LessonFileHandler_get_next_atom_file_number_ReturnsObj(env_dir_setup_cleanup):
+def test_LessonFileHandler_get_next_atom_file_number_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     yao_str = "Yao"
     yao_lessonfilehandler = lessonfilehandler_shop(env_dir(), moment_label(), yao_str)
@@ -135,7 +132,7 @@ def test_LessonFileHandler_get_next_atom_file_number_ReturnsObj(env_dir_setup_cl
     assert yao_lessonfilehandler._get_next_atom_file_number() == 11
 
 
-def test_LessonFileHandler_save_atom_file_SavesFile(env_dir_setup_cleanup):
+def test_LessonFileHandler_save_atom_file_SavesFile(temp_dir_setup):
     # ESTABLISH
     yao_str = "Yao"
     yao_lessonfilehandler = lessonfilehandler_shop(env_dir(), moment_label(), yao_str)
@@ -160,7 +157,7 @@ def test_LessonFileHandler_save_atom_file_SavesFile(env_dir_setup_cleanup):
 
 
 def test_LessonFileHandler_get_belief_from_atom_files_ReturnsFileWithZeroAtoms(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     yao_str = "Yao"
@@ -179,7 +176,7 @@ def test_LessonFileHandler_get_belief_from_atom_files_ReturnsFileWithZeroAtoms(
 
 
 def test_LessonFileHandler_get_belief_from_atom_files_ReturnsFile_SimplePlan(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     yao_str = "Yao"
@@ -203,7 +200,7 @@ def test_LessonFileHandler_get_belief_from_atom_files_ReturnsFile_SimplePlan(
 
 
 def test_LessonFileHandler_get_belief_from_atom_files_ReturnsFile_WithFactUnit(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     yao_str = "Yao"

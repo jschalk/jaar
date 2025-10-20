@@ -13,8 +13,8 @@ from src.ch15_moment.moment_main import get_momentunit_from_dict, momentunit_sho
 from src.ch15_moment.test._util.ch15_examples import example_casa_floor_clean_factunit
 from src.ch18_world_etl._ref.ch18_path import create_moment_ote1_json_path
 from src.ch20_world_logic.test._util.ch20_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as worlds_dir,
+    get_temp_dir as worlds_dir,
+    temp_dir_setup,
 )
 from src.ch20_world_logic.test._util.ch20_examples import (
     get_bob_mop_reason_beliefunit_example,
@@ -23,7 +23,7 @@ from src.ch20_world_logic.world import worldunit_shop
 
 
 def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro0_BudEmpty(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     fay_world = worldunit_shop("Fay", worlds_dir())
@@ -46,7 +46,7 @@ def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro0_BudEmpty(
 
 
 def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro1_SimpleBud(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     fay_world = worldunit_shop("Fay", worlds_dir())
@@ -79,7 +79,7 @@ def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro1_SimpleBud(
 
 
 def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro2_BudExists(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     fay_world = worldunit_shop("Fay", worlds_dir())

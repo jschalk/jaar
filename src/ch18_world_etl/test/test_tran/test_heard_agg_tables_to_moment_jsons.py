@@ -5,10 +5,7 @@ from src.ch01_py.file_toolbox import open_json
 from src.ch10_lesson._ref.ch10_path import create_moment_json_path
 from src.ch15_moment.moment_config import get_moment_dimens
 from src.ch15_moment.moment_main import get_momentunit_from_dict
-from src.ch18_world_etl.test._util.ch18_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch18_world_etl.test._util.ch18_env import get_temp_dir, temp_dir_setup
 from src.ch18_world_etl.tran_sqlstrs import (
     create_prime_tablename,
     get_dimen_abbv7,
@@ -111,12 +108,12 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj():
 
 
 def test_etl_heard_agg_tables_to_moment_jsons_Scenario0_CreateFilesWithOnlyMomentLabel(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     amy23_str = "amy23"
     amy45_str = "amy45"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     momentunit_h_agg_tablename = create_prime_tablename(kw.momentunit, "h", "agg")
     print(f"{momentunit_h_agg_tablename=}")
 

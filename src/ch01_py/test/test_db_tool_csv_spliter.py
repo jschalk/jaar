@@ -3,10 +3,10 @@ from sqlite3 import connect as sqlite3_connect
 from src.ch01_py.csv_toolbox import open_csv_with_types
 from src.ch01_py.db_toolbox import save_to_split_csvs
 from src.ch01_py.file_toolbox import create_path
-from src.ch01_py.test._util.ch01_env import env_dir_setup_cleanup, get_chapter_temp_dir
+from src.ch01_py.test._util.ch01_env import get_temp_dir, temp_dir_setup
 
 
-def test_save_to_split_csvs_CreatesFiles_Scenario0(env_dir_setup_cleanup):
+def test_save_to_split_csvs_CreatesFiles_Scenario0(temp_dir_setup):
     # sourcery skip: extract-method
     # ESTABLISH
     x_tablename = "test_table56"
@@ -29,7 +29,7 @@ VALUES
 ;
 """
         )
-        x_dir = get_chapter_temp_dir()
+        x_dir = get_temp_dir()
         A_dir = create_path(x_dir, "A")
         B_dir = create_path(x_dir, "B")
         C_dir = create_path(x_dir, "C")
@@ -81,7 +81,7 @@ VALUES
 
 
 def test_save_to_split_csvs_CreatesFiles_Scenario1_add_col1_prefix(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # sourcery skip: extract-method
     # ESTABLISH
@@ -105,7 +105,7 @@ VALUES
 ;
 """
         )
-        x_dir = get_chapter_temp_dir()
+        x_dir = get_temp_dir()
         hairs_str = "hairs"
         A_dir = create_path(x_dir, "A")
         B_dir = create_path(x_dir, "B")
@@ -161,7 +161,7 @@ VALUES
 
 
 def test_save_to_split_csvs_CreatesFiles_Scenario1_add_col2_prefix(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # sourcery skip: extract-method
     # ESTABLISH
@@ -175,7 +175,7 @@ def test_save_to_split_csvs_CreatesFiles_Scenario1_add_col2_prefix(
         cursor.execute(
             f"""INSERT INTO {x_tablename} (hair, user, y_int, run) VALUES (1, "A", 200, "yes") ;"""
         )
-        x_dir = get_chapter_temp_dir()
+        x_dir = get_temp_dir()
         hairs_str = "hairs"
         y_ints_str = "y_ints"
         A_dir = create_path(x_dir, "A")

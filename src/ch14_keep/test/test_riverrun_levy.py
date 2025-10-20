@@ -1,6 +1,6 @@
 from src.ch14_keep.riverrun import riverrun_shop
 from src.ch14_keep.test._util.ch14_env import (
-    get_chapter_temp_dir,
+    get_temp_dir,
     temp_moment_label,
     temp_moment_mstr_dir,
 )
@@ -8,7 +8,7 @@ from src.ch14_keep.test._util.ch14_env import (
 
 def test_RiverRun_levy_tax_dues_Molds_cycleledger_Scenario01():
     # ESTABLISH / WHEN
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_tax_due = 222
@@ -31,7 +31,7 @@ def test_RiverRun_levy_tax_dues_Molds_cycleledger_Scenario01():
 
 def test_RiverRun_levy_tax_dues_Molds_cycleledger_Scenario02():
     # ESTABLISH / WHEN
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     bob_str = "Bob"
@@ -62,7 +62,7 @@ def test_RiverRun_levy_tax_dues_Molds_cycleledger_Scenario02():
 
 def test_RiverRun_cycle_chargeees_vary_ReturnsObj():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
@@ -79,7 +79,7 @@ def test_RiverRun_cycle_chargeees_vary_ReturnsObj():
 
 def test_RiverRun_cycles_vary_ReturnsObj():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_tax_got = 5

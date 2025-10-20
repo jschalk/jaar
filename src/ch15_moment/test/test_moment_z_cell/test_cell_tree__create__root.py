@@ -7,15 +7,12 @@ from src.ch10_lesson._ref.ch10_path import (
 from src.ch11_bud._ref.ch11_path import create_cell_json_path
 from src.ch11_bud.bud_main import DEFAULT_CELLDEPTH
 from src.ch15_moment.moment_main import _get_ote1_max_past_spark_num, momentunit_shop
-from src.ch15_moment.test._util.ch15_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch15_moment.test._util.ch15_env import get_temp_dir, temp_dir_setup
 from src.ref.keywords import Ch15Keywords as kw
 
 
 def test_get_ote1_max_past_spark_num_ReturnsObj_Scenaro0(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     bob_str = "Bob"
@@ -27,11 +24,11 @@ def test_get_ote1_max_past_spark_num_ReturnsObj_Scenaro0(
 
 
 def test_MomentUnit_create_buds_root_cells_Scenaro0_BudEmpty(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     amy23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     a23_json_path = create_moment_json_path(moment_mstr_dir, a23_str)
     save_json(a23_json_path, None, amy23_moment.to_dict())
@@ -47,10 +44,10 @@ def test_MomentUnit_create_buds_root_cells_Scenaro0_BudEmpty(
 
 
 def test_MomentUnit_create_buds_root_cells_Scenaro1_BudExists(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
 
     # Create MomentUnit with bob bud at time 37
@@ -87,10 +84,10 @@ def test_MomentUnit_create_buds_root_cells_Scenaro1_BudExists(
 
 
 def test_MomentUnit_create_buds_root_cells_Scenaro2_BudExistsButNoBeliefExistsInSparksPast(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
 
     # Create MomentUnit with bob bud at time 37
@@ -127,10 +124,10 @@ def test_MomentUnit_create_buds_root_cells_Scenaro2_BudExistsButNoBeliefExistsIn
 
 
 def test_MomentUnit_create_buds_root_cells_Scenaro3_BudExistsNotPerfectMatch_bud_time_spark_num(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = "amy23"
     a23_money_grain = 2
 

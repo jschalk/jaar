@@ -7,10 +7,7 @@ from src.ch11_bud._ref.ch11_path import (
     create_spark_all_lesson_path,
     create_spark_expressed_lesson_path,
 )
-from src.ch18_world_etl.test._util.ch18_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch18_world_etl.test._util.ch18_env import get_temp_dir, temp_dir_setup
 from src.ch18_world_etl.transformers import (
     etl_spark_lesson_json_to_spark_inherited_beliefunits,
 )
@@ -18,7 +15,7 @@ from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_etl_spark_lesson_json_to_spark_inherited_beliefunits_SetsFiles_belief_json(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_inx = "Suzy"
@@ -30,7 +27,7 @@ def test_etl_spark_lesson_json_to_spark_inherited_beliefunits_SetsFiles_belief_j
     credit77 = 77
     credit88 = 88
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_bob_e3_dir = create_belief_spark_dir_path(
         moment_mstr_dir, a23_str, bob_inx, spark3
     )
@@ -89,7 +86,7 @@ def test_etl_spark_lesson_json_to_spark_inherited_beliefunits_SetsFiles_belief_j
 
 
 def test_etl_spark_lesson_json_to_spark_inherited_beliefunits_SetsFiles_expressed_lesson(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_inx = "Suzy"
@@ -102,7 +99,7 @@ def test_etl_spark_lesson_json_to_spark_inherited_beliefunits_SetsFiles_expresse
     credit77 = 77
     credit88 = 88
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_bob_e3_lesson = lessonunit_shop(bob_inx, xia_inx, a23_str, spark_num=spark3)
     a23_bob_e7_lesson = lessonunit_shop(bob_inx, xia_inx, a23_str, spark_num=spark7)
     blrpern_dimen = kw.belief_voiceunit

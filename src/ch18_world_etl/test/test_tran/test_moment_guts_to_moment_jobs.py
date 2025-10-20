@@ -7,15 +7,12 @@ from src.ch10_lesson._ref.ch10_path import (
     create_moment_json_path,
 )
 from src.ch15_moment.moment_main import momentunit_shop
-from src.ch18_world_etl.test._util.ch18_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch18_world_etl.test._util.ch18_env import get_temp_dir, temp_dir_setup
 from src.ch18_world_etl.transformers import etl_moment_guts_to_moment_jobs
 
 
 def test_etl_moment_guts_to_moment_jobs_SetsFiles_Scenario0(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_inx = "Suzy"
@@ -25,7 +22,7 @@ def test_etl_moment_guts_to_moment_jobs_SetsFiles_Scenario0(
     credit77 = 77
     credit88 = 88
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     bob_gut = beliefunit_shop(bob_inx, a23_str)
     bob_gut.add_voiceunit(bob_inx, credit77)
     bob_gut.add_voiceunit(yao_inx, credit44)

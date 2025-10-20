@@ -9,15 +9,15 @@ from src.ch18_world_etl._ref.ch18_path import (
     create_stances_dir_path,
 )
 from src.ch20_world_logic.test._util.ch20_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as worlds_dir,
+    get_temp_dir as worlds_dir,
+    temp_dir_setup,
 )
 from src.ch20_world_logic.world import worldunit_shop
 from src.ref.keywords import Ch20Keywords as kw
 
 
 def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     fay_str = "Fay"
@@ -34,7 +34,7 @@ def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(
     assert os_path_exists(fay_stance0001_path)
 
 
-def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup):
+def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(temp_dir_setup):
     # ESTABLISH
     fay_str = "Fay"
     output_dir = create_path(worlds_dir(), "output")
@@ -70,7 +70,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
 
 
 def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldUnit(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
@@ -125,7 +125,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
 
 
 def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     fay_str = "Fay"
@@ -159,7 +159,7 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
     assert os_path_exists(a23_calendar_md_path)
 
 
-# def test_WorldUnit_sheets_input_to_clarity_CreatesFiles(env_dir_setup_cleanup):
+# def test_WorldUnit_sheets_input_to_clarity_CreatesFiles(temp_dir_setup):
 #     # ESTABLISH
 #     fay_str = "Fay"
 #     fay_world = worldunit_shop(fay_str, worlds_dir())

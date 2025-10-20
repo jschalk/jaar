@@ -8,16 +8,13 @@ from src.ch15_moment.moment_main import (
     get_momentunit_from_dict,
     momentunit_shop,
 )
-from src.ch15_moment.test._util.ch15_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch15_moment.test._util.ch15_env import get_temp_dir, temp_dir_setup
 from src.ref.keywords import Ch15Keywords as kw
 
 
 def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     # ESTABLISH
-    moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp1")
+    moment_mstr_dir = create_path(get_temp_dir(), "temp1")
     a45_str = "amy45"
     a45_offi_times = {17, 37}
     amy_moment = momentunit_shop(a45_str, moment_mstr_dir, offi_times=a45_offi_times)
@@ -76,7 +73,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
 def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_temp_dir())
 
     # WHEN
     x_dict = amy_moment.to_dict(include_paybook=False)
@@ -99,7 +96,7 @@ def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
 def test_get_momentunit_from_dict_ReturnsObj_Scenario0_WithParameters():
     # ESTABLISH
     amy45_str = "amy45"
-    moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp1")
+    moment_mstr_dir = create_path(get_temp_dir(), "temp1")
     a45_offi_times = {17, 37}
     amy_moment = momentunit_shop(amy45_str, moment_mstr_dir, offi_times=a45_offi_times)
     sue_epoch_label = "sue casa"
@@ -156,7 +153,7 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario0_WithParameters():
 def test_get_momentunit_from_dict_ReturnsObj_Scenario1_WithOutParameters():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_temp_dir())
     x_dict = amy_moment.to_dict()
     x_dict[kw.epoch] = {}
     x_dict.pop(kw.knot)
@@ -186,7 +183,7 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario1_WithOutParameters():
 def test_get_momentunit_from_dict_ReturnsObj_Scenario2():
     # ESTABLISH
     amy45_str = "amy45"
-    temp_moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp")
+    temp_moment_mstr_dir = create_path(get_temp_dir(), "temp")
     amy_moment = momentunit_shop(amy45_str, temp_moment_mstr_dir)
     sue_epoch_label = "sue casa"
     amy_moment.epoch.epoch_label = sue_epoch_label
@@ -230,15 +227,15 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario2():
     assert x_moment == amy_moment
 
 
-def test_get_from_file_ReturnsMomentUnitWith_moment_mstr_dir(env_dir_setup_cleanup):
+def test_get_from_file_ReturnsMomentUnitWith_moment_mstr_dir(temp_dir_setup):
     # ESTABLISH
     amy45_str = "amy45"
-    amy45_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy45_moment = momentunit_shop(amy45_str, get_temp_dir())
     sue_epoch_label = "sue casa"
     amy45_moment.epoch.epoch_label = sue_epoch_label
     sue_respect_grain = 2
     amy45_moment.respect_grain = sue_respect_grain
-    x_moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_bob")
+    x_moment_mstr_dir = create_path(get_temp_dir(), "Fay_bob")
     amy45_json_path = create_moment_json_path(x_moment_mstr_dir, amy45_str)
     save_json(amy45_json_path, None, amy45_moment.to_dict())
     assert amy45_moment.moment_mstr_dir != x_moment_mstr_dir

@@ -1,9 +1,6 @@
 from src.ch02_rope.rope import create_rope, default_knot_if_None
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
-from src.ch11_bud.test._util.ch11_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as env_dir,
-)
+from src.ch11_bud.test._util.ch11_env import get_temp_dir as env_dir, temp_dir_setup
 from src.ch11_bud.test._util.ch11_examples import get_ch11_example_moment_label
 from src.ch13_belief_listen.keep_tool import (
     get_vision_belief,
@@ -12,7 +9,7 @@ from src.ch13_belief_listen.keep_tool import (
 )
 
 
-def test_save_vision_belief_SavesFile(env_dir_setup_cleanup):
+def test_save_vision_belief_SavesFile(temp_dir_setup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -44,7 +41,7 @@ def test_save_vision_belief_SavesFile(env_dir_setup_cleanup):
     )
 
 
-def test_vision_file_exists_ReturnsBool(env_dir_setup_cleanup):
+def test_vision_file_exists_ReturnsBool(temp_dir_setup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -76,7 +73,7 @@ def test_vision_file_exists_ReturnsBool(env_dir_setup_cleanup):
     )
 
 
-def test_get_vision_belief_reason_lowersFile(env_dir_setup_cleanup):
+def test_get_vision_belief_reason_lowersFile(temp_dir_setup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -104,7 +101,7 @@ def test_get_vision_belief_reason_lowersFile(env_dir_setup_cleanup):
 
 
 def test_get_vision_belief_ReturnsNoneIfFileDoesNotExist(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"

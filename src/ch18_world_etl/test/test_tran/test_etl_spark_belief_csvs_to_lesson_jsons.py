@@ -5,17 +5,14 @@ from src.ch11_bud._ref.ch11_path import (
     create_belief_spark_dir_path as belief_spark_dir,
     create_spark_all_lesson_path as all_lesson_path,
 )
-from src.ch18_world_etl.test._util.ch18_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch18_world_etl.test._util.ch18_env import get_temp_dir, temp_dir_setup
 from src.ch18_world_etl.tran_sqlstrs import create_prime_tablename
 from src.ch18_world_etl.transformers import etl_spark_belief_csvs_to_lesson_json
 from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_etl_spark_belief_csvs_to_lesson_json_CreatesFiles_Scenario0_IgnoresCSV_beliefunit(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_inx = "Suzy"
@@ -24,7 +21,7 @@ def test_etl_spark_belief_csvs_to_lesson_json_CreatesFiles_Scenario0_IgnoresCSV_
     a23_str = "amy23"
     put_agg_tablename = create_prime_tablename(kw.beliefunit, "h", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
     # a23_bob_e3_dir = create_path(a23_bob_dir, spark3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, spark7)
@@ -52,7 +49,7 @@ def test_etl_spark_belief_csvs_to_lesson_json_CreatesFiles_Scenario0_IgnoresCSV_
 
 
 def test_etl_spark_belief_csvs_to_lesson_json_CreatesFiles_Scenario1(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_inx = "Suzy"
@@ -66,7 +63,7 @@ def test_etl_spark_belief_csvs_to_lesson_json_CreatesFiles_Scenario1(
     blrpern_str = kw.belief_voiceunit
     put_agg_tablename = create_prime_tablename(blrpern_str, "h", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
     # a23_bob_e3_dir = create_path(a23_bob_dir, spark3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, spark7)

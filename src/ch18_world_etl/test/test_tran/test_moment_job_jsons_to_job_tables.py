@@ -9,20 +9,17 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch10_lesson._ref.ch10_path import create_job_path, create_moment_json_path
 from src.ch11_bud.bud_filehandler import save_job_file
 from src.ch15_moment.moment_main import momentunit_shop
-from src.ch18_world_etl.test._util.ch18_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch18_world_etl.test._util.ch18_env import get_temp_dir, temp_dir_setup
 from src.ch18_world_etl.tran_sqlstrs import create_prime_tablename as prime_table
 from src.ch18_world_etl.transformers import etl_moment_job_jsons_to_job_tables
 from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario0(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):  # sourcery skip: extract-method
     # ESTABLISH
-    m23_moment_mstr_dir = get_chapter_temp_dir()
+    m23_moment_mstr_dir = get_temp_dir()
     m23_str = "music23"
     a23_str = "amy23"
     sue_str = "Sue"
@@ -95,7 +92,7 @@ def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario0(
 
 
 def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario1(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):  # sourcery skip: extract-method
     # ESTABLISH
     sue_inx = "Suzy"
@@ -105,7 +102,7 @@ def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario1(
     credit77 = 77
     credit88 = 88
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     bob_job = beliefunit_shop(bob_inx, a23_str)
     bob_job.add_voiceunit(bob_inx, credit77)
     bob_job.add_voiceunit(yao_inx, credit44)

@@ -6,11 +6,11 @@ from src.ch01_py.file_toolbox import (
     get_dir_filenames,
     get_level1_dirs,
 )
-from src.ch20_world_logic.test._util.ch20_env import env_dir_setup_cleanup
+from src.ch20_world_logic.test._util.ch20_env import temp_dir_setup
 from src.ch20_world_logic.world import worldunit_shop
 
 
-def test_sheets_input_to_clarity_mstr_Examples(env_dir_setup_cleanup, run_big_tests):
+def test_sheets_input_to_clarity_mstr_Examples(temp_dir_setup, run_big_tests):
     """Find examples in a example directory and run them through the pipeline."""
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH

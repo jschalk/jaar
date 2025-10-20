@@ -2,14 +2,11 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch17_idea.idea_config import idea_format_00021_belief_voiceunit_v0_0_0
 from src.ch17_idea.idea_db_tool import open_csv
 from src.ch17_idea.idea_main import get_idearef_obj, save_idea_csv
-from src.ch17_idea.test._util.ch17_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch17_idea.test._util.ch17_env import get_temp_dir, temp_dir_setup
 from src.ref.keywords import Ch17Keywords as kw
 
 
-def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
+def test_open_csv_ReturnsObjWhenFileExists(temp_dir_setup):
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -27,10 +24,10 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     sue_beliefunit.add_voiceunit(yao_str, yao_voice_cred_lumen, yao_voice_debt_lumen)
     j1_ideaname = idea_format_00021_belief_voiceunit_v0_0_0()
     name_filename = f"{sue_str}_voice_example_01.csv"
-    save_idea_csv(j1_ideaname, sue_beliefunit, get_chapter_temp_dir(), name_filename)
+    save_idea_csv(j1_ideaname, sue_beliefunit, get_temp_dir(), name_filename)
 
     # WHEN
-    voice_dataframe = open_csv(get_chapter_temp_dir(), name_filename)
+    voice_dataframe = open_csv(get_temp_dir(), name_filename)
 
     # THEN
     array_headers = list(voice_dataframe.columns)
@@ -57,13 +54,13 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     assert len(voice_dataframe) == 3
 
 
-def test_open_csv_ReturnsObjWhenNoFileExists(env_dir_setup_cleanup):
+def test_open_csv_ReturnsObjWhenNoFileExists(temp_dir_setup):
     # ESTABLISH
     sue_str = "Sue"
     name_filename = f"{sue_str}_voice_example_77.csv"
 
     # WHEN
-    voice_dataframe = open_csv(get_chapter_temp_dir(), name_filename)
+    voice_dataframe = open_csv(get_temp_dir(), name_filename)
 
     # THEN
     assert voice_dataframe is None

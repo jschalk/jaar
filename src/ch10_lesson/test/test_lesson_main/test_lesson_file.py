@@ -3,8 +3,8 @@ from src.ch01_py.file_toolbox import create_path, open_json
 from src.ch10_lesson.delta import beliefdelta_shop
 from src.ch10_lesson.lesson_main import create_lessonunit_from_files, lessonunit_shop
 from src.ch10_lesson.test._util.ch10_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as moments_dir,
+    get_temp_dir as moments_dir,
+    temp_dir_setup,
 )
 from src.ch10_lesson.test._util.ch10_examples import (
     get_atom_example_planunit_ball,
@@ -14,7 +14,7 @@ from src.ch10_lesson.test._util.ch10_examples import (
 from src.ref.keywords import Ch10Keywords as kw
 
 
-def test_LessonUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
+def test_LessonUnit_save_atom_file_SavesCorrectFile(temp_dir_setup):
     # ESTABLISH
     x_moment_dir = create_path(moments_dir(), "amy23")
     x_beliefs_dir = create_path(x_moment_dir, "beliefs")
@@ -44,7 +44,7 @@ def test_LessonUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
     assert two_file_dict == sports_atom.to_dict()
 
 
-def test_LessonUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
+def test_LessonUnit_atom_file_exists_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     x_moment_dir = create_path(moments_dir(), "amy23")
     x_beliefs_dir = create_path(x_moment_dir, "beliefs")
@@ -71,7 +71,7 @@ def test_LessonUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
     assert sue_lessonunit.atom_file_exists(two_int)
 
 
-def test_LessonUnit_open_atom_file_ReturnsObj(env_dir_setup_cleanup):
+def test_LessonUnit_open_atom_file_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     x_moment_dir = create_path(moments_dir(), "amy23")
     x_beliefs_dir = create_path(x_moment_dir, "beliefs")
@@ -98,7 +98,7 @@ def test_LessonUnit_open_atom_file_ReturnsObj(env_dir_setup_cleanup):
     assert file_atom == sports_atom
 
 
-def test_LessonUnit_save_lesson_file_SavesCorrectFile(env_dir_setup_cleanup):
+def test_LessonUnit_save_lesson_file_SavesCorrectFile(temp_dir_setup):
     # ESTABLISH
     x_moment_dir = create_path(moments_dir(), "amy23")
     x_beliefs_dir = create_path(x_moment_dir, "beliefs")
@@ -134,7 +134,7 @@ def test_LessonUnit_save_lesson_file_SavesCorrectFile(env_dir_setup_cleanup):
     print(f"{lesson_file_dict.keys()=}")
 
 
-def test_LessonUnit_lesson_file_exists_ReturnsObj(env_dir_setup_cleanup):
+def test_LessonUnit_lesson_file_exists_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     x_moment_dir = create_path(moments_dir(), "amy23")
     x_beliefs_dir = create_path(x_moment_dir, "beliefs")
@@ -160,7 +160,7 @@ def test_LessonUnit_lesson_file_exists_ReturnsObj(env_dir_setup_cleanup):
     assert sue_lessonunit.lesson_file_exists()
 
 
-def test_LessonUnit_save_files_SavesFiles(env_dir_setup_cleanup):
+def test_LessonUnit_save_files_SavesFiles(temp_dir_setup):
     # ESTABLISH
     x_moment_dir = create_path(moments_dir(), "amy23")
     x_beliefs_dir = create_path(x_moment_dir, "beliefs")
@@ -197,7 +197,7 @@ def test_LessonUnit_save_files_SavesFiles(env_dir_setup_cleanup):
     assert sue_lessonunit.atom_file_exists(int5)
 
 
-def test_LessonUnit_create_beliefdelta_from_atom_files_SetsAttr(env_dir_setup_cleanup):
+def test_LessonUnit_create_beliefdelta_from_atom_files_SetsAttr(temp_dir_setup):
     # ESTABLISH
     x_moment_dir = create_path(moments_dir(), "amy23")
     x_beliefs_dir = create_path(x_moment_dir, "beliefs")
@@ -230,7 +230,7 @@ def test_LessonUnit_create_beliefdelta_from_atom_files_SetsAttr(env_dir_setup_cl
     assert sue_lessonunit._beliefdelta == static_beliefdelta
 
 
-def test_create_lessonunit_from_files_ReturnsObj(env_dir_setup_cleanup):
+def test_create_lessonunit_from_files_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     x_moment_dir = create_path(moments_dir(), "amy23")
     x_beliefs_dir = create_path(x_moment_dir, "beliefs")

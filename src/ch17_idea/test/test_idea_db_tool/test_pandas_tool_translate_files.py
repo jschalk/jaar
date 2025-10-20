@@ -19,14 +19,14 @@ from src.ch17_idea.idea_db_tool import (
     save_dataframe_to_csv,
 )
 from src.ch17_idea.test._util.ch17_env import (
-    env_dir_setup_cleanup,
     idea_moments_dir as get_example_face_dir,
+    temp_dir_setup,
 )
 from src.ref.keywords import Ch17Keywords as kw
 
 
 def test_move_otx_csvs_to_translate_inx_CreatesTranslateedFiles_Scenario0_SingleFile(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     bob_otx = "Bob"
@@ -84,7 +84,7 @@ def test_move_otx_csvs_to_translate_inx_CreatesTranslateedFiles_Scenario0_Single
 
 # save two dataframes to be translateed: two files in otx, two files in inx
 def test_move_otx_csvs_to_translate_inx_CreatesTranslateedFiles_Scenario1_SingleFile_RopeTerm(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     otx_amy45_str = "amy45"
@@ -151,7 +151,7 @@ def test_move_otx_csvs_to_translate_inx_CreatesTranslateedFiles_Scenario1_Single
 
 # save two dataframes to be translateed: two files in otx, two files in inx
 def test_move_otx_csvs_to_translate_inx_CreatesTranslateedFiles_Scenario2_TwoFile(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_translateunit = get_casa_maison_translateunit_set_by_label()

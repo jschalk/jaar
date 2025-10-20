@@ -1,17 +1,14 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import create_path, open_json, save_json
 from src.ch03_allot.allot import allot_nested_scale
-from src.ch03_allot.test._util.ch03_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch03_allot.test._util.ch03_env import get_temp_dir, temp_dir_setup
 
 
 def test_allot_nested_scale_ReturnsObj_Scenari0_depth0(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    x_dir = get_chapter_temp_dir()
+    x_dir = get_temp_dir()
     bob_str = "Bob"
     sue_str = "Sue"
     root_ledger = {bob_str: 10, sue_str: 40}
@@ -34,10 +31,10 @@ def test_allot_nested_scale_ReturnsObj_Scenari0_depth0(
 
 
 def test_allot_nested_scale_ReturnsObj_Scenari1_depth0_NestedFilesExist(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    x_dir = get_chapter_temp_dir()
+    x_dir = get_temp_dir()
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -67,10 +64,10 @@ def test_allot_nested_scale_ReturnsObj_Scenari1_depth0_NestedFilesExist(
 
 
 def test_allot_nested_scale_ReturnsObj_Scenari2_depth1_NestedFilesExist(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    x_dir = get_chapter_temp_dir()
+    x_dir = get_temp_dir()
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -102,10 +99,10 @@ def test_allot_nested_scale_ReturnsObj_Scenari2_depth1_NestedFilesExist(
 
 
 def test_allot_nested_scale_ReturnsObj_Scenari3_depth1_NoNestedFiles(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    x_dir = get_chapter_temp_dir()
+    x_dir = get_temp_dir()
     bob_str = "Bob"
     sue_str = "Sue"
     root_ledger = {bob_str: 10, sue_str: 40}
@@ -128,10 +125,10 @@ def test_allot_nested_scale_ReturnsObj_Scenari3_depth1_NoNestedFiles(
 
 
 def test_allot_nested_scale_ReturnsObj_Scenari4_depth1_NestedFilesExist(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    x_dir = get_chapter_temp_dir()
+    x_dir = get_temp_dir()
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -170,9 +167,9 @@ def test_allot_nested_scale_ReturnsObj_Scenari4_depth1_NestedFilesExist(
     assert nested_allot_scale == {sue_str: 88, yao_str: 28, xio_str: 72, zia_str: 12}
 
 
-def test_allot_nested_scale_SetsFiles_Scenario0(env_dir_setup_cleanup):
+def test_allot_nested_scale_SetsFiles_Scenario0(temp_dir_setup):
     # ESTABLISH
-    x_dir = get_chapter_temp_dir()
+    x_dir = get_temp_dir()
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -235,10 +232,10 @@ def test_allot_nested_scale_SetsFiles_Scenario0(env_dir_setup_cleanup):
 
 
 def test_allot_nested_scale_SetsFiles_Scenario1_Custom_dst_filename(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    x_dir = get_chapter_temp_dir()
+    x_dir = get_temp_dir()
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"

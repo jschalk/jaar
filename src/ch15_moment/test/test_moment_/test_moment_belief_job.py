@@ -4,16 +4,13 @@ from src.ch10_lesson._ref.ch10_path import create_belief_dir_path
 from src.ch10_lesson.lesson_filehandler import gut_file_exists, save_gut_file
 from src.ch11_bud.bud_filehandler import job_file_exists, open_job_file, save_job_file
 from src.ch15_moment.moment_main import momentunit_shop
-from src.ch15_moment.test._util.ch15_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch15_moment.test._util.ch15_env import get_temp_dir, temp_dir_setup
 
 
-def test_MomentUnit_rotate_job_ReturnsObj_Scenario1(env_dir_setup_cleanup):
+def test_MomentUnit_rotate_job_ReturnsObj_Scenario1(temp_dir_setup):
     # ESTABLISH
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     sue_str = "Sue"
     assert not job_file_exists(moment_mstr_dir, a23_str, sue_str)
@@ -30,10 +27,10 @@ def test_MomentUnit_rotate_job_ReturnsObj_Scenario1(env_dir_setup_cleanup):
 
 
 def test_MomentUnit_rotate_job_ReturnsObj_Scenario2_EmptyVoicesCause_inallocable_voice_debt_lumen(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     sue_str = "Sue"
@@ -61,15 +58,15 @@ def test_MomentUnit_rotate_job_ReturnsObj_Scenario2_EmptyVoicesCause_inallocable
 
 
 def a23_job(belief_name: str) -> BeliefUnit:
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     return open_job_file(moment_mstr_dir, "amy23", belief_name)
 
 
 def test_MomentUnit_rotate_job_ReturnsObj_Scenario3_job_ChangesFromRotation(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     sue_str = "Sue"
@@ -97,10 +94,10 @@ def test_MomentUnit_rotate_job_ReturnsObj_Scenario3_job_ChangesFromRotation(
 
 
 def test_MomentUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     bob_str = "Bob"
@@ -129,11 +126,11 @@ def test_MomentUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
 
 
 def test_MomentUnit_generate_all_jobs_Scenario0_init_job_IsCreated(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     bob_str = "Bob"
     sue_str = "Sue"
@@ -157,10 +154,10 @@ def test_MomentUnit_generate_all_jobs_Scenario0_init_job_IsCreated(
 
 
 def test_MomentUnit_generate_all_jobs_Scenario1_jobs_rotated(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir, job_listen_rotations=1)
     bob_str = "Bob"
@@ -195,10 +192,10 @@ def test_MomentUnit_generate_all_jobs_Scenario1_jobs_rotated(
 
 
 def test_MomentUnit_generate_all_jobs_Scenario2_jobs_rotated_InSortedOrder(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir, job_listen_rotations=1)
     bob_str = "Bob"
@@ -244,10 +241,10 @@ def test_MomentUnit_generate_all_jobs_Scenario2_jobs_rotated_InSortedOrder(
 
 
 def test_MomentUnit_generate_all_jobs_Scenario3_job_listen_rotation_AffectsJobs(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir, job_listen_rotations=1)
     bob_str = "Bob"

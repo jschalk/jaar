@@ -1,7 +1,7 @@
 from src.ch03_allot.allot import default_grain_num_if_None, validate_pool_num
 from src.ch14_keep._ref.ch14_semantic_types import default_knot_if_None
 from src.ch14_keep.riverrun import RiverRun, riverrun_shop
-from src.ch14_keep.test._util.ch14_env import get_chapter_temp_dir, temp_moment_label
+from src.ch14_keep.test._util.ch14_env import get_temp_dir, temp_moment_label
 from src.ch14_keep.test._util.ch14_examples import (
     example_yao_bob_zia_credorledgers,
     example_yao_bob_zia_tax_dues,
@@ -86,7 +86,7 @@ def test_RiverRun_set_cycle_max_SetsAttr():
 def test_riverrun_shop_ReturnsObj_Scenario0_WithArgs():
     # ESTABLISH
     ten_int = 10
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     x_keep_rope = ";fizz;"
@@ -136,7 +136,7 @@ def test_riverrun_shop_ReturnsObj_Scenario0_WithArgs():
 
 def test_riverrun_shop_ReturnsObj_Scenario1_WithoutArgs():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
 
@@ -167,7 +167,7 @@ def test_riverrun_shop_ReturnsObj_Scenario1_WithoutArgs():
 
 def test_RiverRun_set_keep_credorledger_SetsAttr():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_voice_cred_lumen = 500
@@ -187,7 +187,7 @@ def test_RiverRun_set_keep_credorledger_SetsAttr():
 
 def test_RiverRun_delete_keep_credorledgers_belief_SetsAttr():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     bob_str = "Bob"
@@ -210,7 +210,7 @@ def test_RiverRun_delete_keep_credorledgers_belief_SetsAttr():
 
 def test_RiverRun_get_all_keep_credorledger_voice_names_ReturnsObj():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     bob_str = "Bob"

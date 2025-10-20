@@ -31,8 +31,8 @@ def check_env_file_has_necessary_elements(
     file_funcs, class_bases = get_function_names_from_file(env_filename)
     assertion_fail_str = f"{chapter_number=} {file_funcs}"
     env_functions = set(file_funcs)
-    assert "env_dir_setup_cleanup" in env_functions, assertion_fail_str
-    assert "get_chapter_temp_dir" in env_functions, assertion_fail_str
+    assert "temp_dir_setup" in env_functions, assertion_fail_str
+    assert "get_temp_dir" in env_functions, assertion_fail_str
 
 
 def path_contains_subpath(full_path: str, sub_path: str):

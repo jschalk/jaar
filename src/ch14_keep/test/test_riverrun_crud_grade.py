@@ -1,11 +1,11 @@
 from src.ch14_keep.rivercycle import rivergrade_shop
 from src.ch14_keep.riverrun import riverrun_shop
-from src.ch14_keep.test._util.ch14_env import get_chapter_temp_dir, temp_moment_label
+from src.ch14_keep.test._util.ch14_env import get_temp_dir, temp_moment_label
 
 
 def test_RiverRun_set_initial_rivergrade_SetsAttr():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_number = 8
@@ -40,7 +40,7 @@ def test_RiverRun_set_initial_rivergrade_SetsAttr():
 
 def test_RiverRun_rivergrades_is_empty_ReturnsObj():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_number = 8
@@ -58,7 +58,7 @@ def test_RiverRun_rivergrades_is_empty_ReturnsObj():
 
 def test_RiverRun_rivergrade_exists_ReturnsObj():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_number = 8
@@ -79,7 +79,7 @@ def test_RiverRun_rivergrade_exists_ReturnsObj():
 
 def test_RiverRun_set_all_initial_rivergrades_SetsAttr():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     bob_str = "Bob"
@@ -111,7 +111,7 @@ def test_RiverRun_set_all_initial_rivergrades_SetsAttr():
 def test_RiverRun_set_all_initial_rivergrades_OverWritesPrevious():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     bob_str = "Bob"

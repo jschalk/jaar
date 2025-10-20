@@ -2,7 +2,7 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch14_keep.rivercycle import get_credorledger, get_debtorledger
 from src.ch14_keep.riverrun import riverrun_shop
 from src.ch14_keep.test._util.ch14_env import (
-    get_chapter_temp_dir,
+    get_temp_dir,
     temp_moment_label,
     temp_moment_mstr_dir,
 )
@@ -119,7 +119,7 @@ def test_RiverRun_set_voice_tax_due_SetsAttr():
 
 def test_RiverRun_tax_dues_unpaid_ReturnsObj():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)

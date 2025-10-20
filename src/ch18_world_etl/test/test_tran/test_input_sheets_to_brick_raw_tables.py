@@ -3,16 +3,13 @@ from sqlite3 import connect as sqlite3_connect
 from src.ch01_py.db_toolbox import db_table_exists, get_row_count, get_table_columns
 from src.ch01_py.file_toolbox import create_path
 from src.ch17_idea.idea_db_tool import upsert_sheet
-from src.ch18_world_etl.test._util.ch18_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch18_world_etl.test._util.ch18_env import get_temp_dir, temp_dir_setup
 from src.ch18_world_etl.transformers import etl_input_dfs_to_brick_raw_tables
 from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -24,7 +21,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "Faybob.xlsx"
-    input_dir = create_path(get_chapter_temp_dir(), "input")
+    input_dir = create_path(get_temp_dir(), "input")
     input_file_path = create_path(input_dir, ex_filename)
     br3_columns = [
         kw.spark_num,
@@ -97,7 +94,7 @@ ORDER BY sheet_name, {kw.spark_num}, {kw.cumulative_minute};"""
 
 
 def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -108,7 +105,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "Faybob.xlsx"
-    input_dir = create_path(get_chapter_temp_dir(), "input")
+    input_dir = create_path(get_temp_dir(), "input")
     input_file_path = create_path(input_dir, ex_filename)
     idea_columns = [
         kw.spark_num,
@@ -189,7 +186,7 @@ ORDER BY sheet_name, {kw.spark_num}, {kw.cumulative_minute};"""
 
 
 # def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario2(
-#     env_dir_setup_cleanup,
+#     temp_dir_setup,
 # ):
 #     # ESTABLISH
 #     sue_str = "Sue"
@@ -200,7 +197,7 @@ ORDER BY sheet_name, {kw.spark_num}, {kw.cumulative_minute};"""
 #     hour6am = "6am"
 #     hour7am = "7am"
 #     ex_filename = "Faybob.xlsx"
-#     input_dir = create_path(get_chapter_temp_dir(), "input")
+#     input_dir = create_path(get_temp_dir(), "input")
 #     input_file_path = create_path(input_dir, ex_filename)
 #     idea_columns = [
 #         kw.spark_num,

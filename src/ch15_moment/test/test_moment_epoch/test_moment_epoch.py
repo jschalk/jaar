@@ -2,13 +2,13 @@ from src.ch08_epoch.epoch_main import epochunit_shop
 from src.ch08_epoch.test._util.ch08_examples import get_creg_config
 from src.ch15_moment.moment_epoch import get_moment_beliefepochpoint
 from src.ch15_moment.moment_main import momentunit_shop
-from src.ch15_moment.test._util.ch15_env import get_chapter_temp_dir
+from src.ch15_moment.test._util.ch15_env import get_temp_dir
 
 
 def test_get_moment_beliefepochpoint_ReturnsObj_Scenario0_Empty_offi_time():
     # ESTABLISH
     fay_str = "Fay"
-    fay_momentunit = momentunit_shop(fay_str, get_chapter_temp_dir())
+    fay_momentunit = momentunit_shop(fay_str, get_temp_dir())
     assert fay_momentunit.epoch == epochunit_shop(get_creg_config())
     assert not fay_momentunit.offi_time_max
 
@@ -45,7 +45,7 @@ def test_get_moment_beliefepochpoint_ReturnsObj_Scenario1_MomentUnit_NonDefaultA
     fay_money_grain = 7
     fay_momentunit = momentunit_shop(
         fay_str,
-        get_chapter_temp_dir(),
+        get_temp_dir(),
         knot=slash_str,
         fund_grain=fay_fund_grain,
         respect_grain=fay_respect_grain,

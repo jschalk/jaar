@@ -3,18 +3,15 @@ from src.ch11_bud._ref.ch11_path import create_cell_dir_path as cell_dir
 from src.ch11_bud.bud_filehandler import cellunit_get_from_dir, cellunit_save_to_dir
 from src.ch11_bud.cell import cellunit_shop
 from src.ch15_moment.moment_cell import set_cell_trees_found_facts
-from src.ch15_moment.test._util.ch15_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch15_moment.test._util.ch15_env import get_temp_dir, temp_dir_setup
 from src.ch15_moment.test._util.ch15_examples import example_casa_floor_clean_factunit
 
 
 def test_set_cell_trees_found_facts_Scenario0_RootOnly_NoFacts(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     bob_str = "Bob"
     a23_str = "amy23"
     time5 = 5
@@ -33,10 +30,10 @@ def test_set_cell_trees_found_facts_Scenario0_RootOnly_NoFacts(
 
 
 def test_set_cell_trees_found_facts_Scenario1_ChildNode_NoFacts(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     bob_str = "Bob"
     yao_str = "Yao"
     sue_str = "Sue"
@@ -64,10 +61,10 @@ def test_set_cell_trees_found_facts_Scenario1_ChildNode_NoFacts(
 
 
 def test_set_cell_trees_found_facts_Scenario2_ChildNodeWithOneFactIsAssignedToAncestors(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     bob_str = "Bob"
     yao_str = "Yao"
     sue_str = "Sue"

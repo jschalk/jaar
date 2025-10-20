@@ -5,12 +5,12 @@ from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch10_lesson.lesson_filehandler import open_gut_file, save_gut_file
 from src.ch15_moment.moment_main import MomentUnit, momentunit_shop
-from src.ch15_moment.test._util.ch15_env import get_chapter_temp_dir
+from src.ch15_moment.test._util.ch15_env import get_temp_dir
 
 
 def create_example_moment2() -> MomentUnit:
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a45_str = "amy45"
     amy_moment = momentunit_shop(a45_str, x_moment_mstr_dir)
     yao_str = "Yao"
@@ -71,7 +71,7 @@ def create_example_moment2() -> MomentUnit:
 def create_example_moment3() -> MomentUnit:
     # ESTABLISH
     a45_str = "amy45"
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy_moment = momentunit_shop(a45_str, x_moment_mstr_dir)
     yao_str = "Yao"
     wei_str = "Wei"
@@ -113,7 +113,7 @@ def create_example_moment3() -> MomentUnit:
 
 def create_example_moment4() -> MomentUnit:
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a45_str = "amy45"
     amy_moment = momentunit_shop(a45_str, x_moment_mstr_dir)
     yao_str = "Yao"

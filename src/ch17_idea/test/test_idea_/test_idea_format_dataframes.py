@@ -13,7 +13,7 @@ from src.ch17_idea.idea_config import (
     idea_format_00021_belief_voiceunit_v0_0_0,
 )
 from src.ch17_idea.idea_main import create_idea_df, get_idearef_obj, save_idea_csv
-from src.ch17_idea.test._util.ch17_env import env_dir_setup_cleanup, idea_moments_dir
+from src.ch17_idea.test._util.ch17_env import idea_moments_dir, temp_dir_setup
 from src.ref.keywords import Ch17Keywords as kw
 
 
@@ -176,7 +176,7 @@ def test_save_idea_csv_Arg_idea_format_00019_planunit_v0_0_0():
     # WHEN
     # name_filename = f"{sue_str}_planunit_example_00019.csv"
     # csv_example_path = create_path(idea_moments_dir(), name_filename)
-    # save_idea_csv(x_idea_name, sue_beliefunit, get_chapter_temp_dir(), name_filename)
+    # save_idea_csv(x_idea_name, sue_beliefunit, get_temp_dir(), name_filename)
     idea_df = create_idea_df(sue_beliefunit, x_idea_name)
 
     # THEN
@@ -187,7 +187,7 @@ def test_save_idea_csv_Arg_idea_format_00019_planunit_v0_0_0():
 
 
 def test_save_idea_csv_Arg_idea_format_00021_belief_voiceunit_v0_0_0_SaveToCSV(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -242,7 +242,7 @@ def test_save_idea_csv_Arg_idea_format_00021_belief_voiceunit_v0_0_0_SaveToCSV(
 
 
 def test_save_idea_csv_Arg_idea_format_00013_planunit_v0_0_0(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"

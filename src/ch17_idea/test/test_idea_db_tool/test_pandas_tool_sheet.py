@@ -21,14 +21,14 @@ from src.ch17_idea.idea_db_tool import (
     upsert_sheet,
 )
 from src.ch17_idea.test._util.ch17_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
+    get_temp_dir,
     idea_moment_mstr_dir,
+    temp_dir_setup,
 )
 from src.ref.keywords import Ch17Keywords as kw
 
 
-def test_append_df_to_excel_CreatesSheet(env_dir_setup_cleanup):
+def test_append_df_to_excel_CreatesSheet(temp_dir_setup):
     # ESTABLISH
     test_file = create_path(idea_moment_mstr_dir(), "test.xlsx")
     append_data = {
@@ -56,7 +56,7 @@ def test_append_df_to_excel_CreatesSheet(env_dir_setup_cleanup):
     assert rows == expected_rows
 
 
-def test_append_df_to_excel_AppendsToSheet(env_dir_setup_cleanup):
+def test_append_df_to_excel_AppendsToSheet(temp_dir_setup):
     # ESTABLISH
     set_dir(idea_moment_mstr_dir())
     test_file = create_path(idea_moment_mstr_dir(), "test.xlsx")
@@ -105,7 +105,7 @@ def sample_dataframe():
 @pytest_fixture
 def temp_excel_file() -> Path:
     """Fixture to provide a temporary Excel file path."""
-    temp_dir = get_chapter_temp_dir()
+    temp_dir = get_temp_dir()
     temp_excel_path = create_path(temp_dir, "test_excel.xlsx")
     return Path(temp_excel_path)
 
@@ -157,7 +157,7 @@ def test_upsert_sheet_AddNewSheetToExistingFile(temp_excel_file, sample_datafram
 
 
 def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoTranslate(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     env_dir = idea_moment_mstr_dir()
@@ -182,7 +182,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoTranslate(
 
 
 def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_TranslateSheetNames(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     env_dir = idea_moment_mstr_dir()
@@ -210,7 +210,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_TranslateSheetNames(
     assert len(x_sheet_names) == 2
 
 
-def test_sheet_exists_ReturnsObj_Scenario1(env_dir_setup_cleanup):
+def test_sheet_exists_ReturnsObj_Scenario1(temp_dir_setup):
     # ESTABLISH
     env_dir = idea_moment_mstr_dir()
     x_dir = create_path(env_dir, "examples_folder")
@@ -246,7 +246,7 @@ def test_sheet_exists_ReturnsObj_Scenario1(env_dir_setup_cleanup):
 
 @pytest_fixture
 def sample_excel_file():
-    temp_dir = get_chapter_temp_dir()
+    temp_dir = get_temp_dir()
     set_dir(temp_dir)
     temp_excel_file_path = Path(create_path(temp_dir, "sample.xlsx"))
     """Fixture to create a sample Excel file for testing."""
@@ -269,7 +269,7 @@ def dst_dir(tmp_path):
 def test_split_excel_into_dirs_RaisesErrorWhenColumnIsInvalid(sample_excel_file):
     """Test handling of an invalid column."""
     # ESTABLISH
-    dst_dir = create_path(get_chapter_temp_dir(), "dst")
+    dst_dir = create_path(get_temp_dir(), "dst")
     # WHEN / THEN
     with pytest_raises(ValueError, match="Column 'InvalidColumn' does not exist"):
         split_excel_into_dirs(
@@ -278,11 +278,11 @@ def test_split_excel_into_dirs_RaisesErrorWhenColumnIsInvalid(sample_excel_file)
 
 
 def test_split_excel_into_dirs_CreatesFilesWhenColumnIsValid(
-    env_dir_setup_cleanup, sample_excel_file
+    temp_dir_setup, sample_excel_file
 ):
     """Test splitting an Excel file by a valid column."""
     # ESTABLISH
-    dst_dir = create_path(get_chapter_temp_dir(), "dst")
+    dst_dir = create_path(get_temp_dir(), "dst")
     x_filename = "Fay"
     a_dir = create_path(dst_dir, "A")
     b_dir = create_path(dst_dir, "B")
@@ -317,10 +317,10 @@ def test_split_excel_into_dirs_CreatesFilesWhenColumnIsValid(
     pandas_testing_assert_frame_equal(c_df, c_expected)
 
 
-def test_split_excel_into_dirs_DoesNotChangeIfColumnIsEmpty(env_dir_setup_cleanup):
+def test_split_excel_into_dirs_DoesNotChangeIfColumnIsEmpty(temp_dir_setup):
     """Test handling of an empty column."""
     # ESTABLISH Create an Excel file with an empty column
-    temp_dir = get_chapter_temp_dir()
+    temp_dir = get_temp_dir()
     dst_dir = create_path(temp_dir, "dst")
     set_dir(dst_dir)
     set_dir(temp_dir)
@@ -330,7 +330,7 @@ def test_split_excel_into_dirs_DoesNotChangeIfColumnIsEmpty(env_dir_setup_cleanu
         "Value": [100, 200, 300],
     }
     df = DataFrame(data)
-    file_path = create_path(get_chapter_temp_dir(), "empty_column.xlsx")
+    file_path = create_path(get_temp_dir(), "empty_column.xlsx")
     df.to_excel(file_path, index=False, sheet_name="sheet5")
 
     # WHEN
@@ -347,7 +347,7 @@ def test_split_excel_into_dirs_DoesNotChangeIfColumnIsEmpty(env_dir_setup_cleanu
 def test_split_excel_into_dirs_DoesCreateDirectoryIfColumnEmpty(sample_excel_file):
     """Test if the destination directory is created automatically."""
     # ESTABLISH
-    nonexistent_dir = create_path(get_chapter_temp_dir(), "nonexistent_destination")
+    nonexistent_dir = create_path(get_temp_dir(), "nonexistent_destination")
     x_filename = "Fay"
 
     # WHEN
@@ -362,9 +362,9 @@ def test_split_excel_into_dirs_DoesCreateDirectoryIfColumnEmpty(sample_excel_fil
     assert list(nonexistent_dir.iterdir())
 
 
-def test_split_excel_into_dirs_SavesToCorrectFileNames(env_dir_setup_cleanup):
+def test_split_excel_into_dirs_SavesToCorrectFileNames(temp_dir_setup):
     """Test handling of invalid characters in unique values for filenames."""
-    dst_dir = create_path(get_chapter_temp_dir(), "dst")
+    dst_dir = create_path(get_temp_dir(), "dst")
     # ESTABLISH Create a DataFrame with special characters in the splitting column
     data = {
         "ID": [1, 2],
@@ -372,7 +372,7 @@ def test_split_excel_into_dirs_SavesToCorrectFileNames(env_dir_setup_cleanup):
         "Value": [100, 200],
     }
     df = DataFrame(data)
-    file_path = create_path(get_chapter_temp_dir(), "special_chars.xlsx")
+    file_path = create_path(get_temp_dir(), "special_chars.xlsx")
     df.to_excel(file_path, index=False, sheet_name="sheet5")
     x_filename = "Fay"
     ab_dir = create_path(dst_dir, "A_B")
@@ -390,7 +390,7 @@ def test_split_excel_into_dirs_SavesToCorrectFileNames(env_dir_setup_cleanup):
     assert os_path_exists(c_file_path)
 
 
-def test_if_nan_return_None_ReturnsObj(env_dir_setup_cleanup):
+def test_if_nan_return_None_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     ex1_df = DataFrame([["Yao", None]], columns=[kw.face_name, "example_col"])
     ex1_sheet_name = "ex1"
@@ -525,7 +525,7 @@ def test_check_dataframe_column_names_ScenarioLessThanTwoColumns():
 
 
 def test_update_all_face_name_spark_num_columns_Scenario0_UpdatesValidSheet(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
@@ -577,7 +577,7 @@ def test_update_all_face_name_spark_num_columns_Scenario0_UpdatesValidSheet(
 
 
 def test_update_all_face_name_spark_num_columns_Scenario1_NoMatchingSheets(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH: A workbook with no matching headers
     excel_path = create_path(idea_moment_mstr_dir(), "test_excel.xlsx")

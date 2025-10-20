@@ -1,12 +1,12 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch14_keep.rivercycle import get_debtorledger
 from src.ch14_keep.riverrun import riverrun_shop
-from src.ch14_keep.test._util.ch14_env import get_chapter_temp_dir, temp_moment_label
+from src.ch14_keep.test._util.ch14_env import get_temp_dir, temp_moment_label
 
 
 def test_RiverRun_set_voice_tax_yield_SetsAttr():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     bob_str = "Bob"
     bob_riverrun = riverrun_shop(mstr_dir, a23_str, bob_str)
@@ -23,7 +23,7 @@ def test_RiverRun_set_voice_tax_yield_SetsAttr():
 
 def test_RiverRun_tax_yields_is_empty_ReturnsObj():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
@@ -57,7 +57,7 @@ def test_RiverRun_tax_yields_is_empty_ReturnsObj():
 
 def test_RiverRun_reset_tax_yields_SetsAttr():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     bob_str = "Bob"
     bob_money_amount = 1000
@@ -88,7 +88,7 @@ def test_RiverRun_reset_tax_yields_SetsAttr():
 
 def test_RiverRun_voice_has_tax_yield_ReturnsBool():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     bob_str = "Bob"
     bob_money_amount = 1000
@@ -126,7 +126,7 @@ def test_RiverRun_voice_has_tax_yield_ReturnsBool():
 
 def test_RiverRun_delete_tax_yield_SetsAttr():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     bob_str = "Bob"
     bob_money_amount = 88
@@ -152,7 +152,7 @@ def test_RiverRun_delete_tax_yield_SetsAttr():
 
 def test_RiverRun_get_voice_tax_yield_ReturnsObj():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     bob_str = "Bob"
     bob_money_amount = 1000
@@ -191,7 +191,7 @@ def test_RiverRun_get_voice_tax_yield_ReturnsObj():
 
 def test_RiverRun_add_voice_tax_yield_ReturnsObj():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     bob_str = "Bob"
     bob_money_amount = 1000
@@ -228,7 +228,7 @@ def test_RiverRun_add_voice_tax_yield_ReturnsObj():
 
 def test_RiverRun_levy_tax_due_SetsAttr_ScenarioY():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     bob_str = "Bob"
     bob_money_amount = 1000
@@ -302,7 +302,7 @@ def test_RiverRun_levy_tax_due_SetsAttr_ScenarioY():
 
 def test_RiverRun_set_tax_got_attrs_SetsAttrs():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     six_tax_got = 6
@@ -326,7 +326,7 @@ def test_RiverRun_set_tax_got_attrs_SetsAttrs():
 
 def test_RiverRun_tax_gotten_ReturnsObj():
     # ESTABLISH
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     six_tax_got = 6

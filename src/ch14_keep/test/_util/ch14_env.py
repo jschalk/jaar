@@ -10,12 +10,12 @@ def temp_moment_mstr_dir():
     return "src\\ch14_keep\\test\\_util\\moment_mstr"
 
 
-def get_chapter_temp_dir():
+def get_temp_dir():
     return "src\\ch14_keep\\test\\_util\\moment_mstr\\moments"
 
 
 @pytest_fixture()
-def env_dir_setup_cleanup():
+def temp_dir_setup():
     env_dir = temp_moment_mstr_dir()
     delete_dir(env_dir)
     yield env_dir

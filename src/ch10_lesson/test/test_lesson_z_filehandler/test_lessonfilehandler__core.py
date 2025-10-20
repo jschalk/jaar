@@ -4,7 +4,7 @@ from src.ch02_rope.rope import default_knot_if_None
 from src.ch03_allot.allot import default_grain_num_if_None, validate_pool_num
 from src.ch10_lesson._ref.ch10_path import create_belief_dir_path
 from src.ch10_lesson.lesson_filehandler import LessonFileHandler, lessonfilehandler_shop
-from src.ch10_lesson.test._util.ch10_env import get_chapter_temp_dir
+from src.ch10_lesson.test._util.ch10_env import get_temp_dir
 
 
 def test_LessonFileHandler_Exists():
@@ -64,7 +64,7 @@ def test_lessonfilehandler_shop_ReturnsObj():
 def test_lessonfilehandler_shop_ReturnsObjWhenEmpty():
     # ESTABLISH
     sue_str = "Sue"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
 
     # WHEN

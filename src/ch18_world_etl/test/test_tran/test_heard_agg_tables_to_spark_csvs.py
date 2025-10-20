@@ -2,10 +2,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_py.file_toolbox import create_path, open_file
 from src.ch11_bud._ref.ch11_path import create_belief_spark_dir_path
-from src.ch18_world_etl.test._util.ch18_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch18_world_etl.test._util.ch18_env import get_temp_dir, temp_dir_setup
 from src.ch18_world_etl.tran_sqlstrs import (
     create_prime_tablename,
     create_sound_and_heard_tables,
@@ -15,7 +12,7 @@ from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_etl_heard_agg_to_spark_belief_csvs_PopulatesBeliefPulabelTables(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_inx = "Suzy"
@@ -28,7 +25,7 @@ def test_etl_heard_agg_to_spark_belief_csvs_PopulatesBeliefPulabelTables(
     sue_voice_cred_lumen7 = 7
     put_agg_tablename = create_prime_tablename(kw.belief_voiceunit, "h", "agg", "put")
     put_agg_csv = f"{put_agg_tablename}.csv"
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a23_bob_e3_dir = create_belief_spark_dir_path(
         x_moment_mstr_dir, amy23_str, bob_inx, spark3
     )

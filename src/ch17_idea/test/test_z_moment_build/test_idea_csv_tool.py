@@ -34,7 +34,7 @@ from src.ch17_idea.idea_csv_tool import (
 )
 from src.ch17_idea.idea_db_tool import get_ordered_csv
 from src.ch17_idea.idea_main import moment_build_from_df
-from src.ch17_idea.test._util.ch17_env import env_dir_setup_cleanup, idea_moments_dir
+from src.ch17_idea.test._util.ch17_env import idea_moments_dir, temp_dir_setup
 from src.ch17_idea.test._util.ch17_examples import (  # get_ex2_br00006_df,
     get_ex2_br00000_df,
     get_ex2_br00001_df,
@@ -46,7 +46,7 @@ from src.ch17_idea.test._util.ch17_examples import (  # get_ex2_br00006_df,
 
 
 def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyMomentUnit(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     csv_delimiter = ","
@@ -129,7 +129,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyMomentUnit(
 
 
 def test_add_momentunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneMomentUnit(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     br00000_df = get_ex2_br00000_df()
@@ -201,7 +201,7 @@ def test_add_momentunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneMomentUnit(
 
 
 def test_add_momentunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoMomentUnits(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     br00000_df = get_ex2_br00000_df()

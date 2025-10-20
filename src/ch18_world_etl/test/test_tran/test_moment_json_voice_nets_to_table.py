@@ -4,10 +4,7 @@ from src.ch01_py.file_toolbox import save_json
 from src.ch10_lesson._ref.ch10_path import create_moment_json_path
 from src.ch11_bud.bud_main import tranbook_shop
 from src.ch15_moment.moment_main import momentunit_shop
-from src.ch18_world_etl.test._util.ch18_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch18_world_etl.test._util.ch18_env import get_temp_dir, temp_dir_setup
 from src.ch18_world_etl.tran_sqlstrs import CREATE_MOMENT_VOICE_NETS_SQLSTR
 from src.ch18_world_etl.transformers import (
     etl_moment_json_voice_nets_to_moment_voice_nets_table,
@@ -55,11 +52,11 @@ def test_insert_tranunit_voices_net_PopulatesDatabase():
 
 
 def test_etl_moment_json_voice_nets_to_moment_voice_nets_table_PopulatesDatabase(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     a23_str = "amy23"
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_moment = momentunit_shop(a23_str, mstr_dir)
     sue_str = "Sue"
     yao_str = "Yao"

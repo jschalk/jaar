@@ -11,15 +11,12 @@ from src.ch11_bud.bud_filehandler import (
 )
 from src.ch11_bud.cell import cellunit_shop
 from src.ch15_moment.moment_cell import create_cell_tree
-from src.ch15_moment.test._util.ch15_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch15_moment.test._util.ch15_env import get_temp_dir, temp_dir_setup
 
 
-def test_create_cell_tree_Scenaro0_timepoint_Empty(env_dir_setup_cleanup):
+def test_create_cell_tree_Scenaro0_timepoint_Empty(temp_dir_setup):
     # ESTABLISH
-    moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_mstr")
+    moment_mstr_dir = create_path(get_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     tp37 = 37
@@ -35,9 +32,9 @@ def test_create_cell_tree_Scenaro0_timepoint_Empty(env_dir_setup_cleanup):
     assert os_path_exists(a23_bob_tp37_path) is False
 
 
-def test_create_cell_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
+def test_create_cell_tree_Scenaro1_LedgerDepth0(temp_dir_setup):
     # ESTABLISH
-    moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_mstr")
+    moment_mstr_dir = create_path(get_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -62,9 +59,9 @@ def test_create_cell_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
     assert generated_bob37_quota_ledger == {"Bob": 225, yao_str: 225}
 
 
-def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
+def test_create_cell_tree_Scenaro2_LedgerDepth1(temp_dir_setup):
     # ESTABLISH
-    moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_mstr")
+    moment_mstr_dir = create_path(get_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -153,9 +150,9 @@ def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     assert gen_bob37_zia_quota_ledger == {bob_str: 75, yao_str: 75}
 
 
-def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentSpark(env_dir_setup_cleanup):
+def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentSpark(temp_dir_setup):
     # ESTABLISH
-    moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_mstr")
+    moment_mstr_dir = create_path(get_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -249,10 +246,10 @@ def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentSpark(env_dir_setup_cl
 
 
 def test_create_cell_tree_Scenaro4_LedgerDepth1_OneBeliefHasNoPast_beliefspark(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_mstr")
+    moment_mstr_dir = create_path(get_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -332,10 +329,10 @@ def test_create_cell_tree_Scenaro4_LedgerDepth1_OneBeliefHasNoPast_beliefspark(
 
 
 def test_create_cell_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_mstr")
+    moment_mstr_dir = create_path(get_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     yao_str = "Yao"

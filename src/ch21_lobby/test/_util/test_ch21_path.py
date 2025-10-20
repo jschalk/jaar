@@ -7,7 +7,7 @@ from src.ch21_lobby._ref.ch21_path import (
     create_moment_mstr_dir_path,
     create_world_dir_path,
 )
-from src.ch21_lobby.test._util.ch21_env import get_chapter_temp_dir
+from src.ch21_lobby.test._util.ch21_env import get_temp_dir
 from src.ref.keywords import Ch21Keywords as kw
 
 
@@ -18,7 +18,7 @@ def test_LobbyID_Exists():
 
 def test_create_lobby_dir_path_ReturnsObj():
     # ESTABLISH
-    x_lobby_mstr_dir = get_chapter_temp_dir()
+    x_lobby_mstr_dir = get_temp_dir()
     c23_str = "chat23"
 
     # WHEN
@@ -32,7 +32,7 @@ def test_create_lobby_dir_path_ReturnsObj():
 
 def test_create_world_dir_path_ReturnsObj():
     # ESTABLISH
-    x_lobby_mstr_dir = get_chapter_temp_dir()
+    x_lobby_mstr_dir = get_temp_dir()
     c23_str = "chat23"
     m23_str = "music23"
 
@@ -49,7 +49,7 @@ def test_create_world_dir_path_ReturnsObj():
 
 def test_create_moment_mstr_dir_path_ReturnsObj():
     # ESTABLISH
-    x_lobby_mstr_dir = get_chapter_temp_dir()
+    x_lobby_mstr_dir = get_temp_dir()
     c23_str = "chat23"
     m23_str = "music23"
 

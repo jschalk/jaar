@@ -3,7 +3,7 @@ from src.ch08_epoch.epoch_main import epochunit_shop, get_default_epoch_config_d
 from src.ch08_epoch.test._util.ch08_examples import get_five_config
 from src.ch15_moment.moment_main import momentunit_shop
 from src.ch17_idea.idea_main import moment_build_from_df
-from src.ch17_idea.test._util.ch17_env import env_dir_setup_cleanup, idea_moments_dir
+from src.ch17_idea.test._util.ch17_env import idea_moments_dir, temp_dir_setup
 from src.ch17_idea.test._util.ch17_examples import (
     get_ex1_br00000_df,
     get_ex1_br00001_df,
@@ -22,7 +22,7 @@ from src.ch17_idea.test._util.ch17_examples import (
 
 # ESTABLISH a dataframe, build a moment unit
 def test_moment_build_from_df_ReturnsObj_Scenario0_OneMomentLabel(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     br00000_df = get_ex1_br00000_df()
@@ -100,7 +100,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario0_OneMomentLabel(
 
 # ESTABLISH a dataframe, build a moment unit
 def test_moment_build_from_df_ReturnsObj_Scenario1_TwoMomentLabels(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     br00000_df = get_ex2_br00000_df()

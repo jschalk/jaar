@@ -74,9 +74,9 @@ def test_Chapters_CheckStringMetricsFromEveryFile():
         "_unknown_str_in_otx2inx",  # RopeMap method overrides MapCore method
         "del_label",
         "del_otx2inx",
-        "env_dir_setup_cleanup",
+        "temp_dir_setup",
         "find_replace_rope",
-        "get_chapter_temp_dir",
+        "get_temp_dir",
         "get_obj_key",
         "is_empty",
         "is_valid",
@@ -116,7 +116,6 @@ def test_Chapters_CheckStringMetricsFromEveryFile():
         expected_semantic_type_exists_test_str = f"test_{semantic_type}_Exists"
         # print(expected_semantic_type_exists_test_str)
         assert expected_semantic_type_exists_test_str in all_functions
-    assert 1 == 2
 
 
 def test_Chapters_Semantic_Types_HasCorrectFormating():

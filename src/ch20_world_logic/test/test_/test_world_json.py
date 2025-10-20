@@ -1,14 +1,11 @@
 from src.ch01_py.file_toolbox import create_path
-from src.ch20_world_logic.test._util.ch20_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch20_world_logic.test._util.ch20_env import get_temp_dir, temp_dir_setup
 from src.ch20_world_logic.world import worldunit_shop
 
 
 def test_WorldUnit_to_dict_ReturnsObj_Scenario0MinimalParameters():
     # ESTABLISH
-    worlds2_dir = create_path(get_chapter_temp_dir(), "worlds2")
+    worlds2_dir = create_path(get_temp_dir(), "worlds2")
     five_world_name = "five"
     x_world = worldunit_shop(five_world_name, worlds2_dir)
 
@@ -27,7 +24,7 @@ def test_WorldUnit_to_dict_ReturnsObj_Scenario0MinimalParameters():
 
 def test_WorldUnit_to_dict_ReturnsObj_Scenario1():
     # ESTABLISH
-    worlds2_dir = create_path(get_chapter_temp_dir(), "worlds2")
+    worlds2_dir = create_path(get_temp_dir(), "worlds2")
     five_world_name = "five"
     world2_time_reason_upper = 55
     amy45_str = "amy45"

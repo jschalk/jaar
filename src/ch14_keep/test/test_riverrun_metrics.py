@@ -1,10 +1,10 @@
 from src.ch14_keep.riverrun import riverrun_shop
-from src.ch14_keep.test._util.ch14_env import get_chapter_temp_dir, temp_moment_label
+from src.ch14_keep.test._util.ch14_env import get_temp_dir, temp_moment_label
 
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario01():
     # ESTABLISH / WHEN
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_voice_cred_lumen = 500
@@ -47,7 +47,7 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario01():
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario02():
     # ESTABLISH / WHEN
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_voice_cred_lumen = 500
@@ -93,7 +93,7 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario02():
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario03():
     # ESTABLISH / WHEN
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_voice_cred_lumen = 500
@@ -144,7 +144,7 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario03():
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario04():
     # ESTABLISH / WHEN
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_yao_voice_cred_lumen = 500
@@ -195,7 +195,7 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario04():
 
 def test_RiverRun_calc_metrics_SetsAttrsScenario05():
     # ESTABLISH / WHEN
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_voice_cred_lumen = 500
@@ -229,7 +229,7 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario05():
 
 def test_RiverRun_calc_metrics_EachTimeResets_tax_yield():
     # ESTABLISH / WHEN
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     yao_voice_cred_lumen = 500
@@ -251,7 +251,7 @@ def test_RiverRun_calc_metrics_EachTimeResets_tax_yield():
 
 def test_RiverRun_calc_metrics_EndsRiverCycleLoopIfNoDifferencesBetweenCycles():
     # ESTABLISH / WHEN
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     yao_str = "Yao"
     x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)

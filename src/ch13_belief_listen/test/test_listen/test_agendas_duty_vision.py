@@ -7,8 +7,8 @@ from src.ch13_belief_listen.listen_main import (
     listen_to_agendas_duty_vision,
 )
 from src.ch13_belief_listen.test._util.ch13_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as env_dir,
+    get_temp_dir as env_dir,
+    temp_dir_setup,
 )
 from src.ch13_belief_listen.test._util.ch13_examples import (
     a23_casa_rope,
@@ -29,7 +29,7 @@ from src.ch13_belief_listen.test._util.ch13_examples import (
 
 
 def test_listen_to_agenda_duty_vision_agenda_AddstasksTovision_BeliefWhenNo_partyunitIsSet(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     a23_str = "amy23"
@@ -69,7 +69,7 @@ def test_listen_to_agenda_duty_vision_agenda_AddstasksTovision_BeliefWhenNo_part
 
 
 def test_listen_to_agenda_duty_vision_agenda_AddstasksTovision_Belief(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     a23_str = "amy23"
@@ -116,7 +116,7 @@ def test_listen_to_agenda_duty_vision_agenda_AddstasksTovision_Belief(
 
 
 def test_listen_to_agenda_duty_vision_agenda_AddstasksTovisionBeliefWithDetailsDecidedBy_voice_debt_lumen(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     a23_str = "amy23"
@@ -201,7 +201,7 @@ def test_listen_to_agenda_duty_vision_agenda_AddstasksTovisionBeliefWithDetailsD
 
 
 def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBelief(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     a23_str = "amy23"
@@ -301,7 +301,7 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBelief(
 
 
 def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionBelief(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     a23_str = "amy23"
@@ -363,7 +363,7 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionBelief(
 
 
 def test_listen_to_agenda_duty_vision_agenda_ListensToBelief_duty_AndNotBelief_vision(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     a23_str = "amy23"
@@ -437,7 +437,7 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToBelief_duty_AndNotBelief_v
 
 
 def test_listen_to_agenda_duty_vision_agenda_GetsAgendaFromSrcBeliefNotSpeakerSelf(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     # yao_duty has task run_rope

@@ -2,10 +2,7 @@ from src.ch02_rope.rope import create_rope, default_knot_if_None
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 from src.ch10_lesson.lesson_filehandler import lessonfilehandler_shop
 from src.ch11_bud.bud_filehandler import save_job_file
-from src.ch11_bud.test._util.ch11_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as env_dir,
-)
+from src.ch11_bud.test._util.ch11_env import get_temp_dir as env_dir, temp_dir_setup
 from src.ch13_belief_listen.keep_tool import (
     get_dw_perspective_belief,
     get_perspective_belief,
@@ -33,7 +30,7 @@ def test_get_perspective_belief_ReturnsBeliefWith_belief_nameSetToLessonFileHand
 
 
 def test_get_dw_perspective_belief_ReturnsBeliefWith_belief_nameSetToLessonFileHandler_belief_name(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     bob_str = "Bob"
@@ -57,7 +54,7 @@ def test_get_dw_perspective_belief_ReturnsBeliefWith_belief_nameSetToLessonFileH
 
 
 def test_rj_perspective_belief_ReturnsBeliefWith_belief_nameSetToLessonFileHandler_belief_name(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     nation_str = "nation"

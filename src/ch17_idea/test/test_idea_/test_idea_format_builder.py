@@ -6,10 +6,7 @@ from src.ch17_idea._ref.ch17_doc_builder import (
     get_idea_brick_mds,
 )
 from src.ch17_idea.idea_config import get_idea_config_dict, get_idea_formats_dir
-from src.ch17_idea.test._util.ch17_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch17_idea.test._util.ch17_env import get_temp_dir, temp_dir_setup
 from src.ref.keywords import Ch17Keywords as kw
 
 
@@ -104,9 +101,9 @@ def test_get_idea_brick_md_ReturnsObj():
     assert (idea_brick_md) == expected_idea_brick_md
 
 
-def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
+def test_get_idea_brick_mds_ReturnsObj(temp_dir_setup):
     # ESTABLISH
-    temp_dir = get_chapter_temp_dir()
+    temp_dir = get_temp_dir()
     br00000_str = "br00000"
     idea_brick_config = {
         "attributes": {

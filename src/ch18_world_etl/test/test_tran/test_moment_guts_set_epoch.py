@@ -6,18 +6,15 @@ from src.ch08_epoch.test._util.ch08_examples import get_five_config
 from src.ch10_lesson._ref.ch10_path import create_moment_json_path
 from src.ch10_lesson.lesson_filehandler import open_gut_file, save_gut_file
 from src.ch15_moment.moment_main import momentunit_shop
-from src.ch18_world_etl.test._util.ch18_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch18_world_etl.test._util.ch18_env import get_temp_dir, temp_dir_setup
 from src.ch18_world_etl.transformers import add_moment_epoch_to_guts
 from src.ref.keywords import Ch18Keywords as kw
 
 
-def test_add_moment_epoch_to_guts_SetsFiles_Scenario0(env_dir_setup_cleanup):
+def test_add_moment_epoch_to_guts_SetsFiles_Scenario0(temp_dir_setup):
     # ESTABLISH
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     a23_moment.epoch = epochunit_shop(get_five_config())
     moment_json_path = create_moment_json_path(moment_mstr_dir, a23_str)
