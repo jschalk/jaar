@@ -13,8 +13,8 @@ def test_create_empty_belief_from_belief_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     slash_str = "/"
-    money_grain_float = 0.7
-    yao_gut = beliefunit_shop(yao_str, knot=slash_str, money_grain=money_grain_float)
+    mana_grain_float = 0.7
+    yao_gut = beliefunit_shop(yao_str, knot=slash_str, mana_grain=mana_grain_float)
     yao_gut.set_l1_plan(planunit_shop("Iowa"))
     zia_str = "Zia"
     zia_voice_cred_lumen = 47
@@ -47,7 +47,7 @@ def test_create_empty_belief_from_belief_ReturnsObj():
     assert yao_empty_vision.fund_pool == yao_gut.fund_pool
     assert yao_empty_vision.fund_grain == yao_gut.fund_grain
     assert yao_empty_vision.respect_grain == yao_gut.respect_grain
-    assert yao_empty_vision.money_grain == yao_gut.money_grain
+    assert yao_empty_vision.mana_grain == yao_gut.mana_grain
     assert yao_empty_vision.credor_respect != yao_gut.credor_respect
     assert yao_empty_vision.credor_respect == RespectNum(validate_pool_num())
     assert yao_empty_vision.debtor_respect != yao_gut.debtor_respect

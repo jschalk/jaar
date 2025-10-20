@@ -16,7 +16,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scen
     a23_yr1_jan1_offset = 7
     a23_monthday_index = 9
     a23_fund_grain = 13
-    a23_money_grain = 17
+    a23_mana_grain = 17
     a23_respect_grain = 23
     a23_knot = "."
 
@@ -31,7 +31,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scen
 , yr1_jan1_offset
 , monthday_index
 , fund_grain
-, money_grain
+, mana_grain
 , respect_grain
 , knot
 )
@@ -42,7 +42,7 @@ VALUES (
 , {a23_yr1_jan1_offset}
 , {a23_monthday_index}
 , {a23_fund_grain}
-, {a23_money_grain}
+, {a23_mana_grain}
 , {a23_respect_grain}
 , '{a23_knot}'
 )
@@ -62,7 +62,7 @@ VALUES (
     assert a23_epoch_dict.get("yr1_jan1_offset") == a23_yr1_jan1_offset
     assert a23_epoch_dict.get("monthday_index") == a23_monthday_index
     assert a23_dict.get(kw.fund_grain) == a23_fund_grain
-    assert a23_dict.get(kw.money_grain) == a23_money_grain
+    assert a23_dict.get(kw.mana_grain) == a23_mana_grain
     assert a23_dict.get(kw.respect_grain) == a23_respect_grain
     assert a23_dict.get(kw.knot) == a23_knot
 
@@ -86,7 +86,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scen
     assert a23_dict.get(kw.moment_label) == a23_str
     assert "epoch" in set(a23_dict.keys())
     assert a23_dict.get(kw.fund_grain) is None
-    assert a23_dict.get(kw.money_grain) is None
+    assert a23_dict.get(kw.mana_grain) is None
     assert a23_dict.get(kw.respect_grain) is None
     assert a23_dict.get(kw.knot) is None
     assert set(a23_dict.keys()) == {
@@ -358,7 +358,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_IsFormatted_Scenario0_mome
     a23_yr1_jan1_offset = 7
     a23_monthday_index = 9
     a23_fund_grain = 13
-    a23_money_grain = 17
+    a23_mana_grain = 17
     a23_respect_grain = 23
     a23_knot = "."
 
@@ -373,7 +373,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_IsFormatted_Scenario0_mome
 , yr1_jan1_offset
 , monthday_index
 , fund_grain
-, money_grain
+, mana_grain
 , respect_grain
 , knot
 )
@@ -384,7 +384,7 @@ VALUES (
 , {a23_yr1_jan1_offset}
 , {a23_monthday_index}
 , {a23_fund_grain}
-, {a23_money_grain}
+, {a23_mana_grain}
 , {a23_respect_grain}
 , '{a23_knot}'
 )
@@ -402,7 +402,7 @@ VALUES (
     assert a23_momentunit.epoch.yr1_jan1_offset == a23_yr1_jan1_offset
     assert a23_momentunit.epoch.monthday_index == a23_monthday_index
     assert a23_momentunit.fund_grain == a23_fund_grain
-    assert a23_momentunit.money_grain == a23_money_grain
+    assert a23_momentunit.mana_grain == a23_mana_grain
     assert a23_momentunit.respect_grain == a23_respect_grain
     assert a23_momentunit.knot == a23_knot
 

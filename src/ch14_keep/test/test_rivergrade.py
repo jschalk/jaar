@@ -40,7 +40,7 @@ def test_RiverGrade_Exists():
     assert x_rivergrade.credor_rank_percent is None
     # SELECT COUNT(*) FROM rewards WHERE dst_voice_name = bob_str
     assert x_rivergrade.rewards_count is None
-    # SELECT SUM(money_amount) FROM rewards WHERE dst_voice_name = bob_str
+    # SELECT SUM(mana_amount) FROM rewards WHERE dst_voice_name = bob_str
     assert x_rivergrade.rewards_magnitude is None
     assert set(x_rivergrade.__dict__.keys()) == {
         kw.moment_label,

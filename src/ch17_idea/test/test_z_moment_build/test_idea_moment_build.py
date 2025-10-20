@@ -33,7 +33,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario0_OneMomentLabel(
     br00005_df = get_ex1_br00005_df()
     x_fund_grain = 55
     x_respect_grain = 66
-    x_money_grain = 77
+    x_mana_grain = 77
     x_job_listen_rotations = 7
     x_moments_dir = create_path(idea_moments_dir(), "Fay")
     amy23_str = "amy23"
@@ -49,7 +49,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario0_OneMomentLabel(
         br00005_df,
         x_fund_grain,
         x_respect_grain,
-        x_money_grain,
+        x_mana_grain,
         x_moments_dir,
     )
 
@@ -61,7 +61,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario0_OneMomentLabel(
         moment_label=amy23_str,
         moment_mstr_dir=x_moments_dir,
         fund_grain=x_fund_grain,
-        money_grain=x_money_grain,
+        mana_grain=x_mana_grain,
         respect_grain=x_respect_grain,
         knot=slash_str,
         epoch=creg_epochunit,
@@ -83,7 +83,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario0_OneMomentLabel(
     gen_momentunit = x_momentunits.get(amy23_str)
     assert gen_momentunit.fund_grain == x_fund_grain
     assert gen_momentunit.respect_grain == x_respect_grain
-    assert gen_momentunit.money_grain == x_money_grain
+    assert gen_momentunit.mana_grain == x_mana_grain
     assert gen_momentunit.moment_label == amy23_str
     assert gen_momentunit.moment_mstr_dir == x_moments_dir
     assert gen_momentunit.epoch == expected_amy23_momentunit.epoch
@@ -111,7 +111,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario1_TwoMomentLabels(
     br00005_df = get_ex2_br00005_df()
     x_fund_grain = 55
     x_respect_grain = 66
-    x_money_grain = 77
+    x_mana_grain = 77
     x_moments_dir = create_path(idea_moments_dir(), "Fay")
     amy23_str = "amy23"
     slash_str = "/"
@@ -126,7 +126,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario1_TwoMomentLabels(
         br00005_df,
         x_fund_grain,
         x_respect_grain,
-        x_money_grain,
+        x_mana_grain,
         x_moments_dir,
     )
 
@@ -136,7 +136,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario1_TwoMomentLabels(
         moment_label=amy23_str,
         moment_mstr_dir=x_moments_dir,
         fund_grain=x_fund_grain,
-        money_grain=x_money_grain,
+        mana_grain=x_mana_grain,
         respect_grain=x_respect_grain,
         knot=slash_str,
         epoch=creg_epochunit,
@@ -146,7 +146,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario1_TwoMomentLabels(
         moment_label="jeffy45",
         moment_mstr_dir=x_moments_dir,
         fund_grain=x_fund_grain,
-        money_grain=x_money_grain,
+        mana_grain=x_mana_grain,
         respect_grain=x_respect_grain,
         knot=",",
         epoch=five_epochunit,
@@ -156,7 +156,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario1_TwoMomentLabels(
     creg_momentunit = x_momentunits.get(amy23_str)
     assert creg_momentunit.fund_grain == x_fund_grain
     assert creg_momentunit.respect_grain == x_respect_grain
-    assert creg_momentunit.money_grain == x_money_grain
+    assert creg_momentunit.mana_grain == x_mana_grain
     assert creg_momentunit.moment_label == amy23_str
     assert creg_momentunit.moment_mstr_dir == x_moments_dir
     assert creg_momentunit.epoch == amy23_momentunit.epoch
@@ -167,7 +167,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario1_TwoMomentLabels(
     five_momentunit = x_momentunits.get("jeffy45")
     assert five_momentunit.fund_grain == x_fund_grain
     assert five_momentunit.respect_grain == x_respect_grain
-    assert five_momentunit.money_grain == x_money_grain
+    assert five_momentunit.mana_grain == x_mana_grain
     assert five_momentunit.moment_label == "jeffy45"
     assert five_momentunit.moment_mstr_dir == x_moments_dir
     assert len(five_momentunit.beliefbudhistorys) == 2

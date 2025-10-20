@@ -392,12 +392,12 @@
       "fund_pool": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
       "keeps_buildable": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
       "keeps_justified": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
+      "mana_grain": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
       "max_tree_traverse": {
         "class_type": "int", 
         "populate_by_cashout": false, 
         "sqlite_datatype": "INTEGER"
       }, 
-      "money_grain": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
       "offtrack_fund": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
       "rational": {
         "class_type": "bool", 

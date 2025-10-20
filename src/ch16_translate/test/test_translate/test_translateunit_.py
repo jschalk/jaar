@@ -82,7 +82,7 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert translate_args_class_types.get(kw.offi_time) == "EpochPoint"
     assert translate_args_class_types.get(kw.belief_name) == kw.NameTerm
     assert translate_args_class_types.get(kw.reason_lower) == "float"
-    assert translate_args_class_types.get(kw.money_grain) == "float"
+    assert translate_args_class_types.get(kw.mana_grain) == "float"
     assert translate_args_class_types.get(kw.fact_state) == kw.RopeTerm
     assert translate_args_class_types.get(kw.pledge) == "bool"
     assert translate_args_class_types.get(kw.problem_bool) == "bool"
@@ -112,7 +112,7 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert atom_args & (moment_args) == {
         kw.voice_name,
         kw.fund_grain,
-        kw.money_grain,
+        kw.mana_grain,
         kw.respect_grain,
     }
     assert atom_args.union(moment_args) != translate_args

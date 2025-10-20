@@ -27,7 +27,7 @@ def test_get_moment_beliefepochpoint_ReturnsObj_Scenario0_Empty_offi_time():
     assert fay_beliefunit.knot == fay_momentunit.knot
     assert fay_beliefunit.fund_grain == fay_momentunit.fund_grain
     assert fay_beliefunit.respect_grain == fay_momentunit.respect_grain
-    assert fay_beliefunit.money_grain == fay_momentunit.money_grain
+    assert fay_beliefunit.mana_grain == fay_momentunit.mana_grain
     assert fay_beliefepochpoint._month == "March"
     assert fay_beliefepochpoint._hour == "12am"
     assert fay_beliefepochpoint._minute == 0
@@ -42,14 +42,14 @@ def test_get_moment_beliefepochpoint_ReturnsObj_Scenario1_MomentUnit_NonDefaultA
     slash_str = "/"
     fay_fund_grain = 5
     fay_respect_grain = 4
-    fay_money_grain = 7
+    fay_mana_grain = 7
     fay_momentunit = momentunit_shop(
         fay_str,
         get_temp_dir(),
         knot=slash_str,
         fund_grain=fay_fund_grain,
         respect_grain=fay_respect_grain,
-        money_grain=fay_money_grain,
+        mana_grain=fay_mana_grain,
     )
     assert fay_momentunit.epoch == epochunit_shop(get_creg_config())
     assert not fay_momentunit.offi_time_max
@@ -69,7 +69,7 @@ def test_get_moment_beliefepochpoint_ReturnsObj_Scenario1_MomentUnit_NonDefaultA
     assert fay_beliefunit.knot == fay_momentunit.knot
     assert fay_beliefunit.fund_grain == fay_momentunit.fund_grain
     assert fay_beliefunit.respect_grain == fay_momentunit.respect_grain
-    assert fay_beliefunit.money_grain == fay_momentunit.money_grain
+    assert fay_beliefunit.mana_grain == fay_momentunit.mana_grain
     assert fay_beliefepochpoint._month == "March"
     assert fay_beliefepochpoint._hour == "12am"
     assert fay_beliefepochpoint._minute == 0

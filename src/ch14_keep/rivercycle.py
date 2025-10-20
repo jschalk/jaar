@@ -8,9 +8,9 @@ from src.ch02_allot.allot import (
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch14_keep._ref.ch14_semantic_types import (
     BeliefName,
+    ManaGrain,
+    ManaNum,
     MomentLabel,
-    MoneyGrain,
-    MoneyNum,
     RopeTerm,
     VoiceName,
 )
@@ -36,13 +36,13 @@ def get_debtorledger(x_belief: BeliefUnit) -> dict[VoiceName, float]:
 class RiverBook:
     belief_name: BeliefName = None
     _rivergrants: dict[VoiceName, float] = None
-    money_grain: MoneyGrain = None
+    mana_grain: ManaGrain = None
 
 
-def riverbook_shop(belief_name: BeliefName, money_grain: MoneyGrain = None):
+def riverbook_shop(belief_name: BeliefName, mana_grain: ManaGrain = None):
     x_riverbook = RiverBook(belief_name)
     x_riverbook._rivergrants = {}
-    x_riverbook.money_grain = default_grain_num_if_None(money_grain)
+    x_riverbook.mana_grain = default_grain_num_if_None(mana_grain)
     return x_riverbook
 
 
@@ -50,13 +50,13 @@ def create_riverbook(
     belief_name: BeliefName,
     keep_credorledger: dict,
     book_point_amount: int,
-    money_grain: MoneyGrain = None,
+    mana_grain: ManaGrain = None,
 ) -> RiverBook:
-    x_riverbook = riverbook_shop(belief_name, money_grain)
+    x_riverbook = riverbook_shop(belief_name, mana_grain)
     x_riverbook._rivergrants = allot_scale(
         ledger=keep_credorledger,
         scale_number=book_point_amount,
-        grain_unit=x_riverbook.money_grain,
+        grain_unit=x_riverbook.mana_grain,
     )
     return x_riverbook
 
@@ -67,7 +67,7 @@ class RiverCycle:
     number: int = None
     keep_credorledgers: dict[BeliefName : dict[VoiceName, float]] = None
     riverbooks: dict[VoiceName, RiverBook] = None
-    money_grain: MoneyGrain = None
+    mana_grain: ManaGrain = None
 
     def _set_complete_riverbook(self, x_riverbook: RiverBook):
         self.riverbooks[x_riverbook.belief_name] = x_riverbook
@@ -83,7 +83,7 @@ class RiverCycle:
                 belief_name=book_voice_name,
                 keep_credorledger=belief_credorledger,
                 book_point_amount=book_point_amount,
-                money_grain=default_grain_num_if_None(self.money_grain),
+                mana_grain=default_grain_num_if_None(self.mana_grain),
             )
             self._set_complete_riverbook(x_riverbook)
 
@@ -102,25 +102,25 @@ def rivercycle_shop(
     healer_name: BeliefName,
     number: int,
     keep_credorledgers: dict[BeliefName : dict[VoiceName, float]] = None,
-    money_grain: MoneyGrain = None,
+    mana_grain: ManaGrain = None,
 ):
     return RiverCycle(
         healer_name=healer_name,
         number=number,
         keep_credorledgers=get_empty_dict_if_None(keep_credorledgers),
         riverbooks=get_empty_dict_if_None(),
-        money_grain=default_grain_num_if_None(money_grain),
+        mana_grain=default_grain_num_if_None(mana_grain),
     )
 
 
 def create_init_rivercycle(
     healer_name: BeliefName,
     keep_credorledgers: dict[BeliefName : dict[VoiceName, float]],
-    keep_point_magnitude: MoneyNum = None,
-    money_grain: MoneyGrain = None,
+    keep_point_magnitude: ManaNum = None,
+    mana_grain: ManaGrain = None,
 ) -> RiverCycle:
     x_rivercycle = rivercycle_shop(
-        healer_name, 0, keep_credorledgers, money_grain=money_grain
+        healer_name, 0, keep_credorledgers, mana_grain=mana_grain
     )
     x_rivercycle.set_riverbook(healer_name, validate_pool_num(keep_point_magnitude))
     return x_rivercycle
@@ -134,7 +134,7 @@ def create_next_rivercycle(
         healer_name=prev_rivercycle.healer_name,
         number=prev_rivercycle.number + 1,
         keep_credorledgers=prev_rivercycle.keep_credorledgers,
-        money_grain=prev_rivercycle.money_grain,
+        mana_grain=prev_rivercycle.mana_grain,
     )
     for chargeer_id, chargeing_amount in prev_cycle_cycleledger_post_tax.items():
         next_rivercycle.set_riverbook(chargeer_id, chargeing_amount)

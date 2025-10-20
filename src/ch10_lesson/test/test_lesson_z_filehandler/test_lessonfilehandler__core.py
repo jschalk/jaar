@@ -19,7 +19,7 @@ def test_LessonFileHandler_Exists():
     assert not x_lessonfilehandler.fund_pool
     assert not x_lessonfilehandler.fund_grain
     assert not x_lessonfilehandler.respect_grain
-    assert not x_lessonfilehandler.money_grain
+    assert not x_lessonfilehandler.mana_grain
     assert not x_lessonfilehandler._atoms_dir
     assert not x_lessonfilehandler._lessons_dir
 
@@ -33,7 +33,7 @@ def test_lessonfilehandler_shop_ReturnsObj():
     x_fund_pool = 13000
     x_fund_grain = 13
     x_respect_grain = 9
-    x_money_grain = 3
+    x_mana_grain = 3
 
     # WHEN
     x_lessonfilehandler = lessonfilehandler_shop(
@@ -44,7 +44,7 @@ def test_lessonfilehandler_shop_ReturnsObj():
         fund_pool=x_fund_pool,
         fund_grain=x_fund_grain,
         respect_grain=x_respect_grain,
-        money_grain=x_money_grain,
+        mana_grain=x_mana_grain,
     )
 
     # THEN
@@ -55,7 +55,7 @@ def test_lessonfilehandler_shop_ReturnsObj():
     assert x_lessonfilehandler.fund_pool == x_fund_pool
     assert x_lessonfilehandler.fund_grain == x_fund_grain
     assert x_lessonfilehandler.respect_grain == x_respect_grain
-    assert x_lessonfilehandler.money_grain == x_money_grain
+    assert x_lessonfilehandler.mana_grain == x_mana_grain
     sue_dir = create_belief_dir_path(x_moment_mstr_dir, x_moment_label, sue_str)
     assert x_lessonfilehandler._atoms_dir == create_path(sue_dir, "atoms")
     assert x_lessonfilehandler._lessons_dir == create_path(sue_dir, "lessons")
@@ -78,7 +78,7 @@ def test_lessonfilehandler_shop_ReturnsObjWhenEmpty():
     assert sue_lessonfilehandler.fund_pool == validate_pool_num()
     assert sue_lessonfilehandler.fund_grain == default_grain_num_if_None()
     assert sue_lessonfilehandler.respect_grain == default_grain_num_if_None()
-    assert sue_lessonfilehandler.money_grain == default_grain_num_if_None()
+    assert sue_lessonfilehandler.mana_grain == default_grain_num_if_None()
 
 
 def test_lessonfilehandler_shop_RaisesErrorIf_belief_name_Contains_knot():

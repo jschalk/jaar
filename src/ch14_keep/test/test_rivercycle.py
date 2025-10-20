@@ -30,7 +30,7 @@ def test_RiverCylce_Exists():
         "number",
         wv.keep_credorledgers,
         wv.riverbooks,
-        wv.money_grain,
+        wv.mana_grain,
     }
 
 
@@ -47,24 +47,24 @@ def test_rivercycle_shop_ReturnsObj_Scenario0_SomeParametersNotPassed():
     assert one_rivercycle.number == 1
     assert one_rivercycle.keep_credorledgers == {}
     assert one_rivercycle.riverbooks == {}
-    assert one_rivercycle.money_grain == default_grain_num_if_None()
+    assert one_rivercycle.mana_grain == default_grain_num_if_None()
 
 
 def test_rivercycle_shop_ReturnsObj_Scenario1_ParametersPassed():
     # ESTABLISH
     one_int = 1
     yao_str = "Yao"
-    yao_money_grain = 4
+    yao_mana_grain = 4
 
     # WHEN
-    one_rivercycle = rivercycle_shop(yao_str, one_int, money_grain=yao_money_grain)
+    one_rivercycle = rivercycle_shop(yao_str, one_int, mana_grain=yao_mana_grain)
 
     # THEN
     assert one_rivercycle.healer_name == yao_str
     assert one_rivercycle.number == 1
     assert one_rivercycle.keep_credorledgers == {}
     assert one_rivercycle.riverbooks == {}
-    assert one_rivercycle.money_grain == yao_money_grain
+    assert one_rivercycle.mana_grain == yao_mana_grain
 
 
 def test_RiverCylce_set_complete_riverbook_SetsAttr():
@@ -138,9 +138,9 @@ def test_RiverCylce_create_cylceledger_ReturnsObjTwoRiverBooks():
     one_cylceledger = one_rivercycle.create_cylceledger()
 
     # THEN
-    yao_money = (yao_book_point_amount * 0.75) + (bob_book_point_amount * 0.49)
-    bob_money = (yao_book_point_amount * 0.25) + (bob_book_point_amount * 0.51)
-    assert one_cylceledger == {yao_str: yao_money, bob_str: bob_money}
+    yao_mana = (yao_book_point_amount * 0.75) + (bob_book_point_amount * 0.49)
+    bob_mana = (yao_book_point_amount * 0.25) + (bob_book_point_amount * 0.51)
+    assert one_cylceledger == {yao_str: yao_mana, bob_str: bob_mana}
 
 
 def test_create_init_rivercycle_ReturnsObj_Scenario1_voiceunit():

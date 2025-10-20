@@ -60,14 +60,14 @@ def test_RiverRun_reset_tax_yields_SetsAttr():
     mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     bob_str = "Bob"
-    bob_money_amount = 1000
-    bob_money_grain = 1
+    bob_mana_amount = 1000
+    bob_mana_grain = 1
     bob_riverrun = riverrun_shop(
         mstr_dir,
         a23_str,
         bob_str,
-        money_grain=bob_money_grain,
-        keep_point_magnitude=bob_money_amount,
+        mana_grain=bob_mana_grain,
+        keep_point_magnitude=bob_mana_amount,
     )
     sue_str = "Sue"
     yao_str = "Yao"
@@ -91,14 +91,14 @@ def test_RiverRun_voice_has_tax_yield_ReturnsBool():
     mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     bob_str = "Bob"
-    bob_money_amount = 1000
-    bob_money_grain = 1
+    bob_mana_amount = 1000
+    bob_mana_grain = 1
     bob_riverrun = riverrun_shop(
         mstr_dir,
         a23_str,
         bob_str,
-        money_grain=bob_money_grain,
-        keep_point_magnitude=bob_money_amount,
+        mana_grain=bob_mana_grain,
+        keep_point_magnitude=bob_mana_amount,
     )
     yao_str = "Yao"
     sue_str = "Sue"
@@ -129,15 +129,15 @@ def test_RiverRun_delete_tax_yield_SetsAttr():
     mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     bob_str = "Bob"
-    bob_money_amount = 88
-    bob_money_grain = 11
+    bob_mana_amount = 88
+    bob_mana_grain = 11
 
     bob_riverrun = riverrun_shop(
         mstr_dir,
         a23_str,
         bob_str,
-        money_grain=bob_money_grain,
-        keep_point_magnitude=bob_money_amount,
+        mana_grain=bob_mana_grain,
+        keep_point_magnitude=bob_mana_amount,
     )
     yao_str = "Yao"
     bob_riverrun.set_voice_tax_yield(yao_str, 5)
@@ -155,15 +155,15 @@ def test_RiverRun_get_voice_tax_yield_ReturnsObj():
     mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     bob_str = "Bob"
-    bob_money_amount = 1000
-    bob_money_grain = 1
+    bob_mana_amount = 1000
+    bob_mana_grain = 1
 
     bob_riverrun = riverrun_shop(
         mstr_dir,
         a23_str,
         bob_str,
-        money_grain=bob_money_grain,
-        keep_point_magnitude=bob_money_amount,
+        mana_grain=bob_mana_grain,
+        keep_point_magnitude=bob_mana_amount,
     )
     sue_str = "Sue"
     yao_str = "Yao"
@@ -194,14 +194,14 @@ def test_RiverRun_add_voice_tax_yield_ReturnsObj():
     mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     bob_str = "Bob"
-    bob_money_amount = 1000
-    bob_money_grain = 1
+    bob_mana_amount = 1000
+    bob_mana_grain = 1
     bob_riverrun = riverrun_shop(
         mstr_dir,
         a23_str,
         bob_str,
-        money_grain=bob_money_grain,
-        keep_point_magnitude=bob_money_amount,
+        mana_grain=bob_mana_grain,
+        keep_point_magnitude=bob_mana_amount,
     )
     sue_str = "Sue"
     yao_str = "Yao"
@@ -231,14 +231,14 @@ def test_RiverRun_levy_tax_due_SetsAttr_ScenarioY():
     mstr_dir = get_temp_dir()
     a23_str = temp_moment_label()
     bob_str = "Bob"
-    bob_money_amount = 1000
-    bob_money_grain = 1
+    bob_mana_amount = 1000
+    bob_mana_grain = 1
     bob_riverrun = riverrun_shop(
         mstr_dir,
         a23_str,
         bob_str,
-        money_grain=bob_money_grain,
-        keep_point_magnitude=bob_money_amount,
+        mana_grain=bob_mana_grain,
+        keep_point_magnitude=bob_mana_amount,
     )
     sue_str = "Sue"
     yao_str = "Yao"

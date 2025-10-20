@@ -371,7 +371,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(temp_dir_setup):
     das = []
     quota500 = 500
     celldepth4 = 4
-    money_grain6 = 6
+    mana_grain6 = 6
     assert os_path_exists(sue7_cell_path) is False
 
     # WHEN
@@ -383,7 +383,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(temp_dir_setup):
         quota=quota500,
         spark_num=spark3,
         celldepth=celldepth4,
-        money_grain=money_grain6,
+        mana_grain=mana_grain6,
         bud_ancestors=das,
     )
 
@@ -395,7 +395,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(temp_dir_setup):
     assert generated_cell_dict.get(kw.spark_num) == spark3
     assert generated_cell_dict.get(kw.celldepth) == celldepth4
     assert generated_cell_dict.get(kw.bud_belief_name) == sue_str
-    assert generated_cell_dict.get(kw.money_grain) == money_grain6
+    assert generated_cell_dict.get(kw.mana_grain) == mana_grain6
     assert generated_cell_dict.get(kw.quota) == quota500
 
 
@@ -426,7 +426,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
     assert generated_cell_dict.get(kw.spark_num) == spark3
     assert generated_cell_dict.get(kw.celldepth) == 0
     assert generated_cell_dict.get(kw.bud_belief_name) == sue_str
-    assert generated_cell_dict.get(kw.money_grain) == 1
+    assert generated_cell_dict.get(kw.mana_grain) == 1
     assert generated_cell_dict.get(kw.quota) == CELLNODE_QUOTA_DEFAULT
 
 
@@ -530,7 +530,7 @@ def test_create_cell_voice_mandate_ledger_json_CreatesFile_Scenario1(
     sue_ancestors = [sue_str]
     sue_spark7 = 7
     sue_celldepth3 = 3
-    sue_money_grain2 = 2
+    sue_mana_grain2 = 2
     sue_quota300 = 300
     sue_mandate = 444
     a23_str = "amy23"
@@ -557,7 +557,7 @@ def test_create_cell_voice_mandate_ledger_json_CreatesFile_Scenario1(
         ancestors=sue_ancestors,
         spark_num=sue_spark7,
         celldepth=sue_celldepth3,
-        money_grain=sue_money_grain2,
+        mana_grain=sue_mana_grain2,
         quota=sue_quota300,
         beliefadjust=sue_belief,
         beliefspark_facts=sue_beliefspark_factunits,

@@ -192,9 +192,9 @@ def _modify_belief_update_beliefunit(x_belief: BeliefUnit, x_atom: BeliefAtom):
     x_arg = "respect_grain"
     if x_atom.get_value(x_arg) is not None:
         x_belief.respect_grain = x_atom.get_value(x_arg)
-    x_arg = "money_grain"
+    x_arg = "mana_grain"
     if x_atom.get_value(x_arg) is not None:
-        x_belief.money_grain = x_atom.get_value(x_arg)
+        x_belief.mana_grain = x_atom.get_value(x_arg)
 
 
 def _modify_belief_voice_membership_delete(x_belief: BeliefUnit, x_atom: BeliefAtom):
@@ -627,7 +627,7 @@ class AtomRow:
     reason_upper: float = None
     numor: int = None
     reason_lower: float = None
-    money_grain: float = None
+    mana_grain: float = None
     fact_state: RopeTerm = None
     pledge: bool = None
     problem_bool: bool = None

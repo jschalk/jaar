@@ -7,8 +7,8 @@ from src.ch13_belief_listen._ref.ch13_semantic_types import (
     GroupTitle,
     HealerName,
     LabelTerm,
+    ManaGrain,
     MomentLabel,
-    MoneyGrain,
     NameTerm,
     RespectGrain,
     RespectNum,
@@ -20,7 +20,7 @@ from src.ch13_belief_listen._ref.ch13_semantic_types import (
 )
 
 
-class MoneyNum(float):
-    """MoneyNum inherits from float class"""
+class ManaNum(float):
+    """ManaNum inherits from float class"""
 
     pass

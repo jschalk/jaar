@@ -15,8 +15,8 @@ from src.ch13_belief_listen._ref.ch13_path import create_keep_grade_path
 from src.ch14_keep._ref.ch14_semantic_types import (
     BeliefName,
     LabelTerm,
-    MoneyGrain,
-    MoneyNum,
+    ManaGrain,
+    ManaNum,
     RopeTerm,
     VoiceName,
     default_knot_if_None,
@@ -36,8 +36,8 @@ class RiverRun:
     belief_name: BeliefName = None
     keep_rope: RopeTerm = None
     knot: str = None
-    keep_point_magnitude: MoneyNum = None
-    money_grain: MoneyGrain = None
+    keep_point_magnitude: ManaNum = None
+    mana_grain: ManaGrain = None
     number: int = None
     keep_credorledgers: dict[BeliefName : dict[VoiceName, float]] = None
     tax_dues: dict[VoiceName, float] = None
@@ -108,7 +108,7 @@ class RiverRun:
 
     def set_tax_dues(self, debtorledger: dict[VoiceName, float]):
         x_amount = self.keep_point_magnitude
-        self.tax_dues = allot_scale(debtorledger, x_amount, self.money_grain)
+        self.tax_dues = allot_scale(debtorledger, x_amount, self.mana_grain)
 
     def voice_has_tax_due(self, x_voice_name: VoiceName) -> bool:
         return self.tax_dues.get(x_voice_name) is not None
@@ -233,7 +233,7 @@ class RiverRun:
         self._grants = allot_scale(
             ledger=grant_credorledger,
             scale_number=self.keep_point_magnitude,
-            grain_unit=self.money_grain,
+            grain_unit=self.mana_grain,
         )
 
     def _save_rivergrade_file(self, voice_name: VoiceName):
@@ -272,8 +272,8 @@ def riverrun_shop(
     belief_name: BeliefName,
     keep_rope: RopeTerm = None,
     knot: str = None,
-    keep_point_magnitude: MoneyNum = None,
-    money_grain: MoneyGrain = None,
+    keep_point_magnitude: ManaNum = None,
+    mana_grain: ManaGrain = None,
     number: int = None,
     keep_credorledgers: dict[BeliefName : dict[VoiceName, float]] = None,
     tax_dues: dict[VoiceName, float] = None,
@@ -286,7 +286,7 @@ def riverrun_shop(
         keep_rope=keep_rope,
         knot=default_knot_if_None(knot),
         keep_point_magnitude=validate_pool_num(keep_point_magnitude),
-        money_grain=default_grain_num_if_None(money_grain),
+        mana_grain=default_grain_num_if_None(mana_grain),
         number=get_0_if_None(number),
         keep_credorledgers=get_empty_dict_if_None(keep_credorledgers),
         tax_dues=get_empty_dict_if_None(tax_dues),

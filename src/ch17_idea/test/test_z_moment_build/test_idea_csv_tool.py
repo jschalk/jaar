@@ -56,7 +56,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyMomentUnit(
 
     # THEN
     expected_stance_csv_strs = {
-        "br00000": "moment_label,epoch_label,c400_number,yr1_jan1_offset,monthday_index,fund_grain,money_grain,respect_grain,knot,job_listen_rotations\n",
+        "br00000": "moment_label,epoch_label,c400_number,yr1_jan1_offset,monthday_index,fund_grain,mana_grain,respect_grain,knot,job_listen_rotations\n",
         "br00001": "moment_label,belief_name,bud_time,quota,celldepth\n",
         "br00002": "moment_label,belief_name,voice_name,tran_time,amount\n",
         "br00003": "moment_label,cumulative_minute,hour_label\n",
@@ -72,7 +72,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyMomentUnit(
         "br00026": "moment_label,belief_name,plan_rope,reason_context,reason_state,reason_upper,reason_lower,reason_divisor\n",
         "br00027": "moment_label,belief_name,plan_rope,reason_context,active_requisite\n",
         "br00028": "moment_label,belief_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,star,pledge,problem_bool\n",
-        "br00029": "moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_grain,money_grain,respect_grain\n",
+        "br00029": "moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_grain,mana_grain,respect_grain\n",
         "br00042": "otx_title,inx_title,otx_knot,inx_knot,unknown_str\n",
         "br00043": "otx_name,inx_name,otx_knot,inx_knot,unknown_str\n",
         "br00044": "otx_label,inx_label,otx_knot,inx_knot,unknown_str\n",
@@ -142,7 +142,7 @@ def test_add_momentunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneMomentUnit(
     # br00006_df = get_ex2_br00006_df()
     x_fund_grain = 1
     x_respect_grain = 1
-    x_money_grain = 1
+    x_mana_grain = 1
     x_moments_dir = create_path(idea_moments_dir(), "Fay")
     x_momentunits = moment_build_from_df(
         br00000_df,
@@ -153,7 +153,7 @@ def test_add_momentunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneMomentUnit(
         br00005_df,
         x_fund_grain,
         x_respect_grain,
-        x_money_grain,
+        x_mana_grain,
         x_moments_dir,
     )
     csv_delimiter = ","
@@ -212,7 +212,7 @@ def test_add_momentunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoMomentUnits(
     br00005_df = get_ex2_br00005_df()
     x_fund_grain = 1
     x_respect_grain = 1
-    x_money_grain = 1
+    x_mana_grain = 1
     x_moments_dir = create_path(idea_moments_dir(), "Fay")
     x_momentunits = moment_build_from_df(
         br00000_df,
@@ -223,7 +223,7 @@ def test_add_momentunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoMomentUnits(
         br00005_df,
         x_fund_grain,
         x_respect_grain,
-        x_money_grain,
+        x_mana_grain,
         x_moments_dir,
     )
     csv_delimiter = ","
@@ -554,7 +554,7 @@ def test_add_belief_to_br00029_csv_ReturnsObj():
     bob_belief.max_tree_traverse = 3
     bob_belief.tally = 10
     bob_belief.fund_grain = 12
-    bob_belief.money_grain = 13
+    bob_belief.mana_grain = 13
     bob_belief.respect_grain = 15
     csv_header = x_ideas.get("br00029")
     print(f"{csv_header=}")
@@ -563,7 +563,7 @@ def test_add_belief_to_br00029_csv_ReturnsObj():
     x_csv = add_belief_to_br00029_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
-    belief_row = f",,{a23_str},{bob_str},{bob_belief.credor_respect},{bob_belief.debtor_respect},{bob_belief.fund_pool},{bob_belief.max_tree_traverse},{bob_belief.tally},{bob_belief.fund_grain},{bob_belief.money_grain},{bob_belief.respect_grain}\n"
+    belief_row = f",,{a23_str},{bob_str},{bob_belief.credor_respect},{bob_belief.debtor_respect},{bob_belief.fund_pool},{bob_belief.max_tree_traverse},{bob_belief.tally},{bob_belief.fund_grain},{bob_belief.mana_grain},{bob_belief.respect_grain}\n"
     assert x_csv == f"{csv_header}{belief_row}"
 
 
@@ -960,7 +960,7 @@ def test_add_lesson_to_br00029_csv_ReturnsObj():
     bob_belief.max_tree_traverse = 3
     bob_belief.tally = 10
     bob_belief.fund_grain = 3
-    bob_belief.money_grain = 13
+    bob_belief.mana_grain = 13
     bob_belief.respect_grain = 2
     bob_beliefdelta = beliefdelta_shop()
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
@@ -1006,7 +1006,7 @@ def test_add_lessonunit_to_stance_csv_strs_ReturnsObj():
     bob_belief.max_tree_traverse = 3
     bob_belief.tally = 10
     bob_belief.fund_grain = 3
-    bob_belief.money_grain = 13
+    bob_belief.mana_grain = 13
     bob_belief.respect_grain = 2
     bob_beliefdelta = beliefdelta_shop()
     bob_beliefdelta.add_all_beliefatoms(bob_belief)

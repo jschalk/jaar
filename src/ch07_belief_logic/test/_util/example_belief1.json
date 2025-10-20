@@ -1,9 +1,9 @@
 {
   "belief_name": "Yao", 
   "knot": ";", 
+  "mana_grain": 1, 
   "max_tree_traverse": 2, 
   "moment_label": "amy45", 
-  "money_grain": 1, 
   "planroot": {
     "factunits": {
       ";amy45;hr_number": {

@@ -92,7 +92,7 @@ def _exists_create_cell_tree(moment_mstr_dir, moment_label, bud_belief_name, bud
                             spark_num=downhill_spark_num,
                             celldepth=child_celldepth,
                             bud_belief_name=bud_belief_name,
-                            money_grain=parent_cell.money_grain,
+                            mana_grain=parent_cell.mana_grain,
                             quota=quota_amount,
                         )
                         cells_to_evaluate.append(child_cellunit)
@@ -299,7 +299,7 @@ def generate_cell_from_decree(
             ancestors=x_decree.get_child_cell_ancestors(cell_belief_name),
             spark_num=downhill_spark_num,
             celldepth=x_decree.cell_celldepth,
-            money_grain=beliefspark.money_grain,
+            mana_grain=beliefspark.mana_grain,
             quota=None,
             mandate=x_decree.cell_mandate,
         )
@@ -336,7 +336,7 @@ def create_bud_mandate_ledgers(moment_mstr_dir: str, moment_label: str):
                 bud_root_dir,
                 src_filename=CELL_MANDATE_FILENAME,
                 scale_number=budunit.quota,
-                grain_unit=momentunit.money_grain,
+                grain_unit=momentunit.mana_grain,
                 depth=budunit.celldepth,
                 dst_filename=BUD_MANDATE_FILENAME,
             )

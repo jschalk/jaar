@@ -27,7 +27,7 @@ def test_LessonFileHandler_default_gut_belief_ReturnsObj():
         fund_pool=x_fund_pool,
         fund_grain=pnine_float,
         respect_grain=pnine_float,
-        money_grain=pfour_float,
+        mana_grain=pfour_float,
     )
 
     # WHEN
@@ -40,7 +40,7 @@ def test_LessonFileHandler_default_gut_belief_ReturnsObj():
     assert sue_default_gut.fund_pool == sue_lessonfilehandler.fund_pool
     assert sue_default_gut.fund_grain == sue_lessonfilehandler.fund_grain
     assert sue_default_gut.respect_grain == sue_lessonfilehandler.respect_grain
-    assert sue_default_gut.money_grain == sue_lessonfilehandler.money_grain
+    assert sue_default_gut.mana_grain == sue_lessonfilehandler.mana_grain
     assert sue_default_gut.last_lesson_id == init_lesson_id()
 
 

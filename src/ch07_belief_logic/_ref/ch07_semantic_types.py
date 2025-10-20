@@ -33,7 +33,7 @@ class BeliefName(NameTerm):
     pass
 
 
-class MoneyGrain(float):
-    """Smallest Unit of Money Num"""
+class ManaGrain(float):
+    """Smallest Unit of Mana Num"""
 
     pass

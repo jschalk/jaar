@@ -95,7 +95,7 @@ def _add_momentunit_to_br00000_csv(
         str(x_moment.epoch.yr1_jan1_offset),
         str(x_moment.epoch.monthday_index),
         str(x_moment.fund_grain),
-        str(x_moment.money_grain),
+        str(x_moment.mana_grain),
         str(x_moment.respect_grain),
         x_knot,
         str(x_moment.job_listen_rotations),
@@ -451,7 +451,7 @@ def add_belief_to_br00029_csv(
         if_none_str(x_belief.max_tree_traverse),
         if_none_str(x_belief.tally),
         if_none_str(x_belief.fund_grain),
-        if_none_str(x_belief.money_grain),
+        if_none_str(x_belief.mana_grain),
         if_none_str(x_belief.respect_grain),
     ]
     x_csv += csv_delimiter.join(x_row)
@@ -695,7 +695,7 @@ def add_lesson_to_br00029_csv(
                 if_none_str(beliefatom.jvalues.get("max_tree_traverse")),
                 if_none_str(beliefatom.jvalues.get("tally")),
                 if_none_str(beliefatom.jvalues.get("fund_grain")),
-                if_none_str(beliefatom.jvalues.get("money_grain")),
+                if_none_str(beliefatom.jvalues.get("mana_grain")),
                 if_none_str(beliefatom.jvalues.get("respect_grain")),
             ]
             x_csv += csv_delimiter.join(x_row)

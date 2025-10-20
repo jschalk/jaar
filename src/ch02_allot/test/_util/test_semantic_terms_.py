@@ -19,8 +19,8 @@ def test_WeightNum_Exists():
     # ESTABLISH
     x_float = 0.045
     # WHEN
-    y_moneyunit = WeightNum(x_float)
+    y_manaunit = WeightNum(x_float)
     # THEN
-    assert y_moneyunit == x_float
+    assert y_manaunit == x_float
     doc_str = """WeightNum represents the unnormalized value of a ledger key. The sum of all WeightNum values in a ledger is not defined."""
-    assert inspect_getdoc(y_moneyunit) == doc_str
+    assert inspect_getdoc(y_manaunit) == doc_str

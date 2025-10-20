@@ -99,7 +99,7 @@ class LessonFileHandler:
     fund_pool: float = None
     fund_grain: float = None
     respect_grain: float = None
-    money_grain: float = None
+    mana_grain: float = None
     _atoms_dir: str = None
     _lessons_dir: str = None
 
@@ -118,7 +118,7 @@ class LessonFileHandler:
             fund_pool=self.fund_pool,
             fund_grain=self.fund_grain,
             respect_grain=self.respect_grain,
-            money_grain=self.money_grain,
+            mana_grain=self.mana_grain,
         )
         x_beliefunit.last_lesson_id = init_lesson_id()
         return x_beliefunit
@@ -331,7 +331,7 @@ def lessonfilehandler_shop(
     fund_pool: float = None,
     fund_grain: float = None,
     respect_grain: float = None,
-    money_grain: float = None,
+    mana_grain: float = None,
 ) -> LessonFileHandler:
     x_lessonfilehandler = LessonFileHandler(
         moment_mstr_dir=moment_mstr_dir,
@@ -341,7 +341,7 @@ def lessonfilehandler_shop(
         fund_pool=validate_pool_num(fund_pool),
         fund_grain=default_grain_num_if_None(fund_grain),
         respect_grain=default_grain_num_if_None(respect_grain),
-        money_grain=default_grain_num_if_None(money_grain),
+        mana_grain=default_grain_num_if_None(mana_grain),
     )
     x_lessonfilehandler.set_dir_attrs()
     return x_lessonfilehandler

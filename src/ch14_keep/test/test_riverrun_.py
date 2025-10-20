@@ -20,7 +20,7 @@ def test_RiverRun_Exists():
     assert not x_riverrun.keep_rope
     assert not x_riverrun.knot
     assert not x_riverrun.keep_point_magnitude
-    assert not x_riverrun.money_grain
+    assert not x_riverrun.mana_grain
     assert not x_riverrun.number
     assert not x_riverrun.keep_credorledgers
     assert not x_riverrun.tax_dues
@@ -43,7 +43,7 @@ def test_RiverRun_Exists():
         kw.keep_rope,
         kw.knot,
         kw.keep_point_magnitude,
-        kw.money_grain,
+        kw.mana_grain,
         "number",
         kw.keep_credorledgers,
         kw.tax_dues,
@@ -92,7 +92,7 @@ def test_riverrun_shop_ReturnsObj_Scenario0_WithArgs():
     x_keep_rope = ";fizz;"
     x_knot = ";"
     x_keep_point_magnitude = 333
-    x_money_grain = 3
+    x_mana_grain = 3
     keep_credorledgers = example_yao_bob_zia_credorledgers()
     x_cycle_max = 10
     x_tax_dues = example_yao_bob_zia_tax_dues()
@@ -105,7 +105,7 @@ def test_riverrun_shop_ReturnsObj_Scenario0_WithArgs():
         keep_rope=x_keep_rope,
         knot=x_knot,
         keep_point_magnitude=x_keep_point_magnitude,
-        money_grain=x_money_grain,
+        mana_grain=x_mana_grain,
         number=ten_int,
         keep_credorledgers=keep_credorledgers,
         tax_dues=x_tax_dues,
@@ -119,7 +119,7 @@ def test_riverrun_shop_ReturnsObj_Scenario0_WithArgs():
     assert x_riverrun.keep_rope == x_keep_rope
     assert x_riverrun.knot == x_knot
     assert x_riverrun.keep_point_magnitude == x_keep_point_magnitude
-    assert x_riverrun.money_grain == x_money_grain
+    assert x_riverrun.mana_grain == x_mana_grain
     assert x_riverrun.number == ten_int
     assert x_riverrun.keep_credorledgers == keep_credorledgers
     assert x_riverrun.tax_dues == x_tax_dues
@@ -154,7 +154,7 @@ def test_riverrun_shop_ReturnsObj_Scenario1_WithoutArgs():
     assert x_riverrun.keep_rope == None
     assert x_riverrun.knot == default_knot_if_None()
     assert x_riverrun.keep_point_magnitude == validate_pool_num()
-    assert x_riverrun.money_grain == default_grain_num_if_None()
+    assert x_riverrun.mana_grain == default_grain_num_if_None()
     assert x_riverrun.number == 0
     assert x_riverrun.keep_credorledgers == {}
     assert x_riverrun.tax_dues == {}

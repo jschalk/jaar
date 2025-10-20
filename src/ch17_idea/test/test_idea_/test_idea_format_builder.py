@@ -66,7 +66,7 @@ def test_get_idea_brick_md_ReturnsObj():
             kw.fund_grain: {kw.otx_key: False},
             kw.job_listen_rotations: {kw.otx_key: False},
             kw.monthday_index: {kw.otx_key: False},
-            kw.money_grain: {kw.otx_key: False},
+            kw.mana_grain: {kw.otx_key: False},
             kw.respect_grain: {kw.otx_key: False},
             kw.epoch_label: {kw.otx_key: False},
             kw.yr1_jan1_offset: {kw.otx_key: False},
@@ -93,7 +93,7 @@ def test_get_idea_brick_md_ReturnsObj():
 - `{kw.yr1_jan1_offset}`
 - `{kw.monthday_index}`
 - `{kw.fund_grain}`
-- `{kw.money_grain}`
+- `{kw.mana_grain}`
 - `{kw.respect_grain}`
 - `{kw.knot}`
 - `{kw.job_listen_rotations}`
@@ -115,7 +115,7 @@ def test_get_idea_brick_mds_ReturnsObj(temp_dir_setup):
             kw.fund_grain: {kw.otx_key: False},
             kw.job_listen_rotations: {kw.otx_key: False},
             kw.monthday_index: {kw.otx_key: False},
-            kw.money_grain: {kw.otx_key: False},
+            kw.mana_grain: {kw.otx_key: False},
             kw.respect_grain: {kw.otx_key: False},
             kw.epoch_label: {kw.otx_key: False},
             kw.yr1_jan1_offset: {kw.otx_key: False},
@@ -142,7 +142,7 @@ def test_get_idea_brick_mds_ReturnsObj(temp_dir_setup):
 - `{kw.yr1_jan1_offset}`
 - `{kw.monthday_index}`
 - `{kw.fund_grain}`
-- `{kw.money_grain}`
+- `{kw.mana_grain}`
 - `{kw.respect_grain}`
 - `{kw.knot}`
 - `{kw.job_listen_rotations}`

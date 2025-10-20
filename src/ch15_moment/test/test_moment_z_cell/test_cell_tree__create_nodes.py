@@ -120,25 +120,25 @@ def test_create_cell_tree_Scenaro2_LedgerDepth1(temp_dir_setup):
     assert bob37_cell.spark_num == 56
     assert bob37_cell.celldepth == 1
     assert bob37_cell.bud_belief_name == bob_str
-    assert bob37_cell.money_grain == 1
+    assert bob37_cell.mana_grain == 1
     assert bob37_cell.quota == 450
     assert bob37_bob_cell.ancestors == [bob_str]
     assert bob37_bob_cell.spark_num == 56
     assert bob37_bob_cell.celldepth == 0
     assert bob37_bob_cell.bud_belief_name == bob_str
-    assert bob37_bob_cell.money_grain == 1
+    assert bob37_bob_cell.mana_grain == 1
     assert bob37_bob_cell.quota == 150
     assert bob37_yao_cell.ancestors == [yao_str]
     assert bob37_yao_cell.spark_num == 56
     assert bob37_yao_cell.celldepth == 0
     assert bob37_yao_cell.bud_belief_name == bob_str
-    assert bob37_yao_cell.money_grain == 1
+    assert bob37_yao_cell.mana_grain == 1
     assert bob37_yao_cell.quota == 150
     assert bob37_zia_cell.ancestors == [zia_str]
     assert bob37_zia_cell.spark_num == 56
     assert bob37_zia_cell.celldepth == 0
     assert bob37_zia_cell.bud_belief_name == bob_str
-    assert bob37_zia_cell.money_grain == 1
+    assert bob37_zia_cell.mana_grain == 1
     assert bob37_zia_cell.quota == 150
     gen_bob37_quota_ledger = bob37_cell.get_beliefsparks_quota_ledger()
     gen_bob37_bob_quota_ledger = bob37_bob_cell.get_beliefsparks_quota_ledger()
@@ -215,25 +215,25 @@ def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentSpark(temp_dir_setup):
     assert bob37_cell.spark_num == 55
     assert bob37_cell.celldepth == 1
     assert bob37_cell.bud_belief_name == bob_str
-    assert bob37_cell.money_grain == 1
+    assert bob37_cell.mana_grain == 1
     assert bob37_cell.quota == 450
     assert bob37_bob_cell.ancestors == [bob_str]
     assert bob37_bob_cell.spark_num == 55
     assert bob37_bob_cell.celldepth == 0
     assert bob37_bob_cell.bud_belief_name == bob_str
-    assert bob37_bob_cell.money_grain == 1
+    assert bob37_bob_cell.mana_grain == 1
     assert bob37_bob_cell.quota == 150
     assert bob37_yao_cell.ancestors == [yao_str]
     assert bob37_yao_cell.spark_num == 44
     assert bob37_yao_cell.celldepth == 0
     assert bob37_yao_cell.bud_belief_name == bob_str
-    assert bob37_yao_cell.money_grain == 1
+    assert bob37_yao_cell.mana_grain == 1
     assert bob37_yao_cell.quota == 150
     assert bob37_zia_cell.ancestors == [zia_str]
     assert bob37_zia_cell.spark_num == 33
     assert bob37_zia_cell.celldepth == 0
     assert bob37_zia_cell.bud_belief_name == bob_str
-    assert bob37_zia_cell.money_grain == 1
+    assert bob37_zia_cell.mana_grain == 1
     assert bob37_zia_cell.quota == 150
     gen_bob37_quota_ledger = bob37_cell.get_beliefsparks_quota_ledger()
     gen_bob37_bob_quota_ledger = bob37_bob_cell.get_beliefsparks_quota_ledger()
@@ -312,13 +312,13 @@ def test_create_cell_tree_Scenaro4_LedgerDepth1_OneBeliefHasNoPast_beliefspark(
     assert bob37_bob_cell.spark_num == 55
     assert bob37_bob_cell.celldepth == 0
     assert bob37_bob_cell.bud_belief_name == bob_str
-    assert bob37_bob_cell.money_grain == 1
+    assert bob37_bob_cell.mana_grain == 1
     assert bob37_bob_cell.quota == 150
     assert bob37_yao_cell.ancestors == [yao_str]
     assert bob37_yao_cell.spark_num == 44
     assert bob37_yao_cell.celldepth == 0
     assert bob37_yao_cell.bud_belief_name == bob_str
-    assert bob37_yao_cell.money_grain == 1
+    assert bob37_yao_cell.mana_grain == 1
     assert bob37_yao_cell.quota == 150
     gen_bob37_quota_ledger = bob37_cell.get_beliefsparks_quota_ledger()
     gen_bob37_bob_quota_ledger = bob37_bob_cell.get_beliefsparks_quota_ledger()

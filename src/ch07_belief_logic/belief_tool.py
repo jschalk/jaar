@@ -241,20 +241,20 @@ def get_voice_mandate_ledger(
     }
     mandate_sum = sum(mandates.values())
     if mandate_sum == 0:
-        mandates = reset_mandates_to_minimum(mandates, x_belief.money_grain)
+        mandates = reset_mandates_to_minimum(mandates, x_belief.mana_grain)
     if mandate_sum != x_belief.fund_pool:
         mandates = allot_scale(mandates, x_belief.fund_pool, x_belief.fund_grain)
     return mandates
 
 
 def reset_mandates_to_minimum(
-    mandates: dict[VoiceName, FundNum], money_grain: FundNum
+    mandates: dict[VoiceName, FundNum], mana_grain: FundNum
 ) -> dict[VoiceName, FundNum]:
-    """Reset all mandates to the minimum value (money_grain)."""
+    """Reset all mandates to the minimum value (mana_grain)."""
 
     voice_names = set(mandates.keys())
     for voice_name in voice_names:
-        mandates[voice_name] = money_grain
+        mandates[voice_name] = mana_grain
     return mandates
 
 

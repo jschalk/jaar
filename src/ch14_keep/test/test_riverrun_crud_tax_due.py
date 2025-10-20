@@ -153,14 +153,14 @@ def test_RiverRun_tax_dues_unpaid_ReturnsObj():
 def test_RiverRun_set_tax_dues_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
-    bob_money_amount = 1000
-    bob_money_grain = 1
+    bob_mana_amount = 1000
+    bob_mana_grain = 1
     bob_riverrun = riverrun_shop(
         None,
         None,
         belief_name=bob_str,
-        keep_point_magnitude=bob_money_amount,
-        money_grain=bob_money_grain,
+        keep_point_magnitude=bob_mana_amount,
+        mana_grain=bob_mana_grain,
     )
     sue_str = "Sue"
     yao_str = "Yao"
@@ -188,14 +188,14 @@ def test_RiverRun_set_tax_dues_SetsAttr():
 def test_RiverRun_voice_has_tax_due_ReturnsBool():
     # ESTABLISH
     bob_str = "Bob"
-    bob_money_amount = 1000
-    bob_money_grain = 1
+    bob_mana_amount = 1000
+    bob_mana_grain = 1
     bob_riverrun = riverrun_shop(
         None,
         None,
         belief_name=bob_str,
-        keep_point_magnitude=bob_money_amount,
-        money_grain=bob_money_grain,
+        keep_point_magnitude=bob_mana_amount,
+        mana_grain=bob_mana_grain,
     )
     yao_str = "Yao"
     sue_str = "Sue"
@@ -226,14 +226,14 @@ def test_RiverRun_voice_has_tax_due_ReturnsBool():
 def test_RiverRun_delete_tax_due_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
-    bob_money_amount = 88
-    bob_money_grain = 11
+    bob_mana_amount = 88
+    bob_mana_grain = 11
     bob_riverrun = riverrun_shop(
         None,
         None,
         belief_name=bob_str,
-        keep_point_magnitude=bob_money_amount,
-        money_grain=bob_money_grain,
+        keep_point_magnitude=bob_mana_amount,
+        mana_grain=bob_mana_grain,
     )
     yao_str = "Yao"
     bob_riverrun.set_voice_tax_due(yao_str, 5)
@@ -249,14 +249,14 @@ def test_RiverRun_delete_tax_due_SetsAttr():
 def test_RiverRun_get_voice_tax_due_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
-    bob_money_amount = 1000
-    bob_money_grain = 1
+    bob_mana_amount = 1000
+    bob_mana_grain = 1
     bob_riverrun = riverrun_shop(
         None,
         None,
         belief_name=bob_str,
-        keep_point_magnitude=bob_money_amount,
-        money_grain=bob_money_grain,
+        keep_point_magnitude=bob_mana_amount,
+        mana_grain=bob_mana_grain,
     )
     sue_str = "Sue"
     yao_str = "Yao"
@@ -287,14 +287,14 @@ def test_RiverRun_get_voice_tax_due_ReturnsObj():
 def test_RiverRun_levy_tax_due_SetsAttr_ScenarioX():
     # ESTABLISH
     bob_str = "Bob"
-    bob_money_amount = 1000
-    bob_money_grain = 1
+    bob_mana_amount = 1000
+    bob_mana_grain = 1
     bob_riverrun = riverrun_shop(
         None,
         None,
         belief_name=bob_str,
-        keep_point_magnitude=bob_money_amount,
-        money_grain=bob_money_grain,
+        keep_point_magnitude=bob_mana_amount,
+        mana_grain=bob_mana_grain,
     )
     sue_str = "Sue"
     yao_str = "Yao"

@@ -17,7 +17,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario0():
     bob_sue_spark7 = 7
     bob_sue_bud_belief = yao_str
     bob_sue_celldepth3 = 3
-    bob_sue_money_grain2 = 2
+    bob_sue_mana_grain2 = 2
     bob_sue_quota300 = 300
     bob_sue_mandate444 = 444
     x_cellunit = cellunit_shop(
@@ -25,7 +25,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario0():
         bob_sue_ancestors,
         bob_sue_spark7,
         bob_sue_celldepth3,
-        bob_sue_money_grain2,
+        bob_sue_mana_grain2,
         bob_sue_quota300,
         mandate=bob_sue_mandate444,
     )
@@ -39,7 +39,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario0():
         kw.spark_num,
         kw.celldepth,
         kw.bud_belief_name,
-        kw.money_grain,
+        kw.mana_grain,
         kw.quota,
         kw.mandate,
         kw.beliefadjust,
@@ -51,7 +51,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario0():
     assert x_cell_dict.get(kw.spark_num) == bob_sue_spark7
     assert x_cell_dict.get(kw.celldepth) == bob_sue_celldepth3
     assert x_cell_dict.get(kw.bud_belief_name) == bob_sue_bud_belief
-    assert x_cell_dict.get(kw.money_grain) == bob_sue_money_grain2
+    assert x_cell_dict.get(kw.mana_grain) == bob_sue_mana_grain2
     assert x_cell_dict.get(kw.quota) == bob_sue_quota300
     assert x_cell_dict.get(kw.mandate) == bob_sue_mandate444
     bob_sue_belief = beliefunit_shop(bob_sue_bud_belief)
@@ -69,7 +69,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_EmptyBeliefAdjust():
     bob_sue_ancestors = [bob_str, sue_str]
     bob_sue_spark7 = 7
     bob_sue_celldepth3 = 3
-    bob_sue_money_grain2 = 2
+    bob_sue_mana_grain2 = 2
     bob_sue_quota300 = 300
     bob_sue_mandate444 = 444
     x_cellunit = cellunit_shop(
@@ -77,7 +77,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_EmptyBeliefAdjust():
         bob_sue_ancestors,
         bob_sue_spark7,
         bob_sue_celldepth3,
-        bob_sue_money_grain2,
+        bob_sue_mana_grain2,
         bob_sue_quota300,
         mandate=bob_sue_mandate444,
     )
@@ -92,7 +92,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_EmptyBeliefAdjust():
         kw.spark_num,
         kw.celldepth,
         kw.bud_belief_name,
-        kw.money_grain,
+        kw.mana_grain,
         kw.quota,
         kw.mandate,
         kw.beliefadjust,
@@ -104,7 +104,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_EmptyBeliefAdjust():
     assert x_cell_dict.get(kw.spark_num) == bob_sue_spark7
     assert x_cell_dict.get(kw.celldepth) == bob_sue_celldepth3
     assert x_cell_dict.get(kw.bud_belief_name) == yao_str
-    assert x_cell_dict.get(kw.money_grain) == bob_sue_money_grain2
+    assert x_cell_dict.get(kw.mana_grain) == bob_sue_mana_grain2
     assert x_cell_dict.get(kw.quota) == bob_sue_quota300
     assert x_cell_dict.get(kw.mandate) == bob_sue_mandate444
     bob_sue_belief = beliefunit_shop(sue_str)
@@ -123,7 +123,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_WithMoreParameters():
     bob_sue_spark7 = 7
     bob_sue_bud_belief = yao_str
     bob_sue_celldepth3 = 3
-    bob_sue_money_grain2 = 2
+    bob_sue_mana_grain2 = 2
     bob_sue_quota300 = 300
     bob_sue_mandate444 = 444
     clean_fact = clean_factunit()
@@ -137,7 +137,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_WithMoreParameters():
         bob_sue_ancestors,
         bob_sue_spark7,
         bob_sue_celldepth3,
-        bob_sue_money_grain2,
+        bob_sue_mana_grain2,
         bob_sue_quota300,
         None,
         bob_sue_beliefspark_factunits,
@@ -155,7 +155,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_WithMoreParameters():
         kw.spark_num,
         kw.celldepth,
         kw.bud_belief_name,
-        kw.money_grain,
+        kw.mana_grain,
         kw.quota,
         kw.mandate,
         kw.beliefadjust,
@@ -167,7 +167,7 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_WithMoreParameters():
     assert x_cell_dict.get(kw.spark_num) == bob_sue_spark7
     assert x_cell_dict.get(kw.celldepth) == bob_sue_celldepth3
     assert x_cell_dict.get(kw.bud_belief_name) == bob_sue_bud_belief
-    assert x_cell_dict.get(kw.money_grain) == bob_sue_money_grain2
+    assert x_cell_dict.get(kw.mana_grain) == bob_sue_mana_grain2
     assert x_cell_dict.get(kw.quota) == bob_sue_quota300
     assert x_cell_dict.get(kw.mandate) == bob_sue_mandate444
     assert (
@@ -204,7 +204,7 @@ def test_cellunit_get_from_dict_ReturnsObj_Scenario1():
     bob_sue_spark7 = 7
     bob_sue_bud_belief = yao_str
     bob_sue_celldepth3 = 3
-    bob_sue_money_grain2 = 2
+    bob_sue_mana_grain2 = 2
     bob_sue_quota300 = 300
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
@@ -219,7 +219,7 @@ def test_cellunit_get_from_dict_ReturnsObj_Scenario1():
         bob_sue_ancestors,
         bob_sue_spark7,
         bob_sue_celldepth3,
-        bob_sue_money_grain2,
+        bob_sue_mana_grain2,
         bob_sue_quota300,
         bob_sue_belief,
         bob_sue_beliefspark_factunits,

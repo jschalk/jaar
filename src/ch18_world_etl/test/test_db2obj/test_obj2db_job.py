@@ -38,7 +38,7 @@ def test_create_beliefunit_metrics_insert_sqlstr_ReturnsObj():
     x_fund_grain = 3
     x_fund_pool = 3000
     x_max_tree_traverse = 22
-    x_money_grain = 4
+    x_mana_grain = 4
     x_respect_grain = 0.2
     x_tally = 6
     values_dict = {
@@ -55,7 +55,7 @@ def test_create_beliefunit_metrics_insert_sqlstr_ReturnsObj():
         kw.fund_grain: x_fund_grain,
         kw.fund_pool: x_fund_pool,
         kw.max_tree_traverse: x_max_tree_traverse,
-        kw.money_grain: x_money_grain,
+        kw.mana_grain: x_mana_grain,
         kw.respect_grain: x_respect_grain,
         kw.tally: x_tally,
     }

@@ -63,13 +63,13 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
     x_fund_grain = 3.0
     x_fund_pool = 3000.0
     x_max_tree_traverse = 22
-    x_money_grain = 4.0
+    x_mana_grain = 4.0
     x_respect_grain = 0.2
     x_tally = 6
     sue_belief = beliefunit_shop(belief_name=x_belief_name, moment_label=x_moment_label)
     sue_belief.fund_pool = x_fund_pool
     sue_belief.fund_grain = x_fund_grain
-    sue_belief.money_grain = x_money_grain
+    sue_belief.mana_grain = x_mana_grain
     sue_belief.tally = x_tally
     sue_belief.respect_grain = x_respect_grain
     sue_belief.max_tree_traverse = x_max_tree_traverse
@@ -106,7 +106,7 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
             x_max_tree_traverse,
             x_tally,
             x_fund_grain,
-            x_money_grain,
+            x_mana_grain,
             x_respect_grain,
             x_rational,
             x_keeps_justified,

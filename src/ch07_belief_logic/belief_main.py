@@ -47,8 +47,8 @@ from src.ch07_belief_logic._ref.ch07_semantic_types import (
     GroupTitle,
     HealerName,
     LabelTerm,
+    ManaGrain,
     MomentLabel,
-    MoneyGrain,
     RespectGrain,
     RespectNum,
     RopeTerm,
@@ -114,7 +114,7 @@ class BeliefUnit:
     fund_pool: FundNum = None
     fund_grain: FundGrain = None
     respect_grain: RespectGrain = None
-    money_grain: MoneyGrain = None
+    mana_grain: ManaGrain = None
     tally: float = None
     voices: dict[VoiceName, VoiceUnit] = None
     planroot: PlanUnit = None
@@ -1404,7 +1404,7 @@ reason_case:    {reason_case}"""
             "fund_pool": self.fund_pool,
             "fund_grain": self.fund_grain,
             "respect_grain": self.respect_grain,
-            "money_grain": self.money_grain,
+            "mana_grain": self.mana_grain,
             "belief_name": self.belief_name,
             "moment_label": self.moment_label,
             "max_tree_traverse": self.max_tree_traverse,
@@ -1443,7 +1443,7 @@ def beliefunit_shop(
     fund_pool: FundNum = None,
     fund_grain: FundGrain = None,
     respect_grain: RespectGrain = None,
-    money_grain: MoneyGrain = None,
+    mana_grain: ManaGrain = None,
     tally: float = None,
 ) -> BeliefUnit:
     belief_name = "" if belief_name is None else belief_name
@@ -1460,7 +1460,7 @@ def beliefunit_shop(
         fund_pool=validate_pool_num(fund_pool),
         fund_grain=default_grain_num_if_None(fund_grain),
         respect_grain=default_grain_num_if_None(respect_grain),
-        money_grain=default_grain_num_if_None(money_grain),
+        mana_grain=default_grain_num_if_None(mana_grain),
         _plan_dict=get_empty_dict_if_None(),
         _keep_dict=get_empty_dict_if_None(),
         _healers_dict=get_empty_dict_if_None(),
@@ -1504,8 +1504,8 @@ def get_beliefunit_from_dict(belief_dict: dict) -> BeliefUnit:
     x_belief.respect_grain = default_grain_num_if_None(
         obj_from_belief_dict(belief_dict, "respect_grain")
     )
-    x_belief.money_grain = default_grain_num_if_None(
-        obj_from_belief_dict(belief_dict, "money_grain")
+    x_belief.mana_grain = default_grain_num_if_None(
+        obj_from_belief_dict(belief_dict, "mana_grain")
     )
     x_belief.credor_respect = obj_from_belief_dict(belief_dict, "credor_respect")
     x_belief.debtor_respect = obj_from_belief_dict(belief_dict, "debtor_respect")
