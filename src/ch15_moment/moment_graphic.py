@@ -48,9 +48,9 @@ def add_river_mana_col(fig, num_dict: dict, mana_amt, x0, y0, c_len):
     ratio_dict = {
         voice_name: voicex / num_sum for voice_name, voicex in num_dict.items()
     }
-    for grantee in num_dict:
-        new_y1 = row_y0 + row_len * ratio_dict.get(grantee)
-        add_col_rect(fig, x0, row_y0, x0 + 1, new_y1, grantee, None, mana_amt)
+    for careee in num_dict:
+        new_y1 = row_y0 + row_len * ratio_dict.get(careee)
+        add_col_rect(fig, x0, row_y0, x0 + 1, new_y1, careee, None, mana_amt)
         row_y0 = new_y1
 
 

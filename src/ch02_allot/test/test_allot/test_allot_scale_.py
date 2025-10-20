@@ -435,7 +435,7 @@ def test_allot_scale_v08():
     #     allot_scale(unalloted_ledger, scale_number, grain_unit)
     # assert (
     #     str(excinfo.value)
-    #     == f"If the summation of ledger values is zero the scale_number '{scale_number}' needs to be zero."
+    #     == f"If the summation of ledger values is zero the scale_number '{scale_number}' must to be zero."
     # )
 
     # WHEN

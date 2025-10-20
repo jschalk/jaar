@@ -566,7 +566,7 @@ def test_validate_labelterm_RaisesErrorWhenNotLabelTerm():
     # THEN
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to be a LabelTerm. Cannot contain knot: '{comma_str}'"
+        == f"'{bob_str}' must be a LabelTerm. Cannot contain knot: '{comma_str}'"
     )
 
 
@@ -588,7 +588,7 @@ def test_validate_labelterm_RaisesErrorWhenLabelTerm():
     # THEN
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to not be a LabelTerm. Must contain knot: '{comma_str}'"
+        == f"'{bob_str}' must not be a LabelTerm. Must contain knot: '{comma_str}'"
     )
 
 

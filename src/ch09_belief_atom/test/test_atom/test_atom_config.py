@@ -278,7 +278,7 @@ def check_necessary_nesting_order_exists() -> bool:
     return True
 
 
-def test_atom_config_NestingOrderExistsWhenNeeded():
+def test_atom_config_NestingOrderExists():
     # When ChangUnit places an BeliefAtom in a nested dictionary ChangUnit.beliefatoms
     # the order of required argments decides the location. The order must be
     # the same. All atom_config elements with two or more required args

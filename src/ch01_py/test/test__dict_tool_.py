@@ -128,7 +128,7 @@ def test_del_in_nested_dict_SetsDict():
 
     # # Usage
     # my_dict = nested_dict()
-    # my_dict['a']['b']['c'] = 1  # No need for explicit nested creation
+    # my_dict['a']['b']['c'] = 1  # explicit nested creation not required
     # Simplify del_in_nested_dict by using a recursive approach:
     # def del_in_nested_dict(d, keys):
     #     if len(keys) == 1:
@@ -146,7 +146,10 @@ def test_del_in_nested_dict_SetsDict():
     #         return reduce(operator.get, keys, d)
     #     except (KeyError, TypeError):
     #         return default
-    # These changes maintain the consistent styles while reducing code complexity and improving efficiency. The defaultdict approach eliminates the need for explicit nested dictionary creation, the simplified del_in_nested_dict is easier to read and efficient, and the reduce-based get_from_nested_dict is more con_cise.
+    # These changes maintain the consistent styles while reducing code complexity and
+    # improving efficiency. The defaultdict approach eliminates explicit
+    # nested dictionary creation, the simplified del_in_nested_dict is easier to read
+    # and efficient, and the reduce-based get_from_nested_dict is more con_cise.
     # ESTABLISH
     y_dict = {}
     y_key1 = "sports"

@@ -93,4 +93,5 @@ def test_SpecialTestThatBuildsKeywordEnumClasses():
     )
 
     # WHEN / THEN
-    assert enum_classes_str == current_classes_file_str, assertion_failure_str
+    prev_and_curr_classes_file_are_same = enum_classes_str == current_classes_file_str
+    assert prev_and_curr_classes_file_are_same, assertion_failure_str

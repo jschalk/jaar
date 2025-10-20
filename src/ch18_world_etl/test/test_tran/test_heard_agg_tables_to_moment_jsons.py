@@ -18,7 +18,7 @@ from src.ch18_world_etl.transformers import (
 from src.ref.keywords import Ch18Keywords as kw
 
 
-def test_get_moment_heard_select1_sqlstrs_ReturnsObj_HasAllNeededKeys():
+def test_get_moment_heard_select1_sqlstrs_ReturnsObj_HasAllKeys():
     # ESTABLISH
     a23_str = "amy23"
 

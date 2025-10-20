@@ -203,11 +203,11 @@ def validate_labelterm(
 ) -> LabelTerm:
     if is_labelterm(x_labelterm, x_knot) and not_labelterm_required:
         raise ValidateLabelTermException(
-            f"'{x_labelterm}' needs to not be a LabelTerm. Must contain knot: '{x_knot}'"
+            f"'{x_labelterm}' must not be a LabelTerm. Must contain knot: '{x_knot}'"
         )
     elif is_labelterm(x_labelterm, x_knot) is False and not not_labelterm_required:
         raise ValidateLabelTermException(
-            f"'{x_labelterm}' needs to be a LabelTerm. Cannot contain knot: '{x_knot}'"
+            f"'{x_labelterm}' must be a LabelTerm. Cannot contain knot: '{x_knot}'"
         )
     return x_labelterm
 

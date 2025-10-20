@@ -18,8 +18,8 @@ def test_RiverRun_save_rivergrade_file_SavesFile(temp_dir_setup):
     yao_str = "Yao"
     yao_voice_cred_lumen = 500
     x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str, texas_rope)
-    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_voice_cred_lumen)
-    x_riverrun.set_tax_dues({yao_str: 1})
+    x_riverrun.set_keep_patientledger(yao_str, yao_str, yao_voice_cred_lumen)
+    x_riverrun.set_need_dues({yao_str: 1})
     x_riverrun.calc_metrics()
     yao_keep_grade_path = create_keep_grade_path(
         moment_mstr_dir=x_riverrun.moment_mstr_dir,
@@ -79,9 +79,9 @@ def test_RiverRun_save_rivergrade_files_SavesFile(temp_dir_setup):
     assert os_path_exists(yao_keep_grade_path) is False
     assert os_path_exists(bob_keep_grade_path) is False
     assert os_path_exists(sue_keep_grade_path) is False
-    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_voice_cred_lumen)
-    x_riverrun.set_keep_credorledger(yao_str, bob_str, 1)
-    x_riverrun.set_tax_dues({yao_str: 1, sue_str: 1})
+    x_riverrun.set_keep_patientledger(yao_str, yao_str, yao_voice_cred_lumen)
+    x_riverrun.set_keep_patientledger(yao_str, bob_str, 1)
+    x_riverrun.set_need_dues({yao_str: 1, sue_str: 1})
     x_riverrun.calc_metrics()
     assert os_path_exists(yao_keep_grade_path) is False
     assert os_path_exists(bob_keep_grade_path) is False

@@ -90,6 +90,6 @@ def test_lessonfilehandler_shop_RaisesErrorIf_belief_name_Contains_knot():
     with pytest_raises(Exception) as excinfo:
         lessonfilehandler_shop(None, None, belief_name=bob_str, knot=slash_str)
     assertion_fail_str = (
-        f"'{bob_str}' needs to be a LabelTerm. Cannot contain knot: '{slash_str}'"
+        f"'{bob_str}' must be a LabelTerm. Cannot contain knot: '{slash_str}'"
     )
     assert str(excinfo.value) == assertion_fail_str

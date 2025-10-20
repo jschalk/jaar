@@ -193,7 +193,7 @@ def get_chapters_obj_metrics(excluded_functions) -> dict:
                 file_path
             )
             for x_class, x_bases in class_bases.items():
-                add_classes_where_needed(
+                evaluate_and_add_classes(
                     x_bases,
                     filenames[1],
                     all_classes,
@@ -226,7 +226,7 @@ def get_chapters_obj_metrics(excluded_functions) -> dict:
     }
 
 
-def add_classes_where_needed(
+def evaluate_and_add_classes(
     x_bases, filename, all_classes: dict, x_class, semantic_type_candidates: dict
 ):
     if len(x_bases) > 1:

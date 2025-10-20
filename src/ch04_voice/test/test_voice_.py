@@ -75,7 +75,7 @@ def test_VoiceUnit_set_nameterm_RaisesErrorIfParameterContains_knot():
         voiceunit_shop(voice_name=texas_str, knot=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{texas_str}' needs to be a LabelTerm. Cannot contain {kw.knot}: '{slash_str}'"
+        == f"'{texas_str}' must be a LabelTerm. Cannot contain {kw.knot}: '{slash_str}'"
     )
 
 

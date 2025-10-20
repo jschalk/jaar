@@ -185,7 +185,7 @@ def normalize_and_compact_json(data: dict) -> str:
     normalized = json_loads(json_dumps(data, sort_keys=True))
     formatter = compact_json_Formatter()
     formatter.indent_spaces = 2
-    formatter.max_inline_complexity = 10  # Adjust as needed
+    formatter.max_inline_complexity = 10  # Can be adjusted
     return formatter.serialize(normalized)
 
 

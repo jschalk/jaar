@@ -34,7 +34,7 @@ def test_SpecialTestThatBuildsDocs():
     save_ropeterm_explanation_md(destination_dir)
     save_keywords_by_chapter_md(destination_dir)  # docs\keywords_by_chapter.md
     # resave json files so that they are ordered alphabetically
-    # No need to always resave all json files, so just do it 4%
+    # 4% of instances resave all json files
     if random_random() < 0.04:
         for chapter_dir in get_chapter_descs().values():
             json_file_tuples = get_dir_filenames(chapter_dir, {"json"})
