@@ -15,7 +15,7 @@ from src.ch99_chapter_style.style import (
     check_if_chapter_keywords_by_chapter_is_sorted,
     check_keywords_by_chapter_are_not_duplicated,
     get_chapter_descs,
-    get_function_names_from_file,
+    get_func_names_and_class_bases_from_file,
     get_imports_from_file,
     get_python_files_with_flag,
     get_semantic_types_filename,
@@ -28,7 +28,7 @@ def check_env_file_has_necessary_elements(
     # print(f"{env_files=}")
     # print(f"{env_filename=}")
     assert env_filename.endswith(f"{chapter_prefix}_env.py")
-    file_funcs, class_bases = get_function_names_from_file(env_filename)
+    file_funcs, class_bases = get_func_names_and_class_bases_from_file(env_filename)
     assertion_fail_str = f"{chapter_number=} {file_funcs}"
     env_functions = set(file_funcs)
     assert "temp_dir_setup" in env_functions, assertion_fail_str

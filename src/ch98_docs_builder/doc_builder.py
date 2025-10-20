@@ -21,7 +21,7 @@ def get_chapter_num_descs() -> dict[int, str]:
     return chapter_prefix_descs
 
 
-def get_function_names_from_file(
+def get_func_names_and_class_bases_from_file(
     file_path: str, suffix: str = None
 ) -> tuple[list, dict[str, bool]]:
     """

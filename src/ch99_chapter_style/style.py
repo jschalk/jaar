@@ -17,7 +17,7 @@ from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
     get_chapter_descs,
-    get_function_names_from_file,
+    get_func_names_and_class_bases_from_file,
 )
 from textwrap import dedent as textwrap_dedent
 
@@ -162,7 +162,7 @@ def get_all_semantic_types_from_ref_files() -> set[str]:
         ref_dir = create_path(chapter_dir, "_ref")
         semantic_types_filename = get_semantic_types_filename(chapter_prefix)
         str_util_path = create_path(ref_dir, semantic_types_filename)
-        functions, class_bases = get_function_names_from_file(str_util_path)
+        functions, class_bases = get_func_names_and_class_bases_from_file(str_util_path)
         print(f"{chapter_desc} {class_bases=}")
         all_ref_files_semantic_types.update(class_bases)
     print(all_ref_files_semantic_types)
@@ -176,7 +176,8 @@ def add_or_count_function_name_occurance(all_functions: dict, function_name: str
         all_functions[function_name] = 1
 
 
-def get_chapters_func_class_metrics(excluded_functions) -> dict:
+def get_chapters_obj_metrics(excluded_functions) -> dict:
+    """Reads every python file to track all functions and classes."""
     x_count = 0
     duplicate_func_names = set()
     non_excluded_functions = set()
@@ -188,7 +189,9 @@ def get_chapters_func_class_metrics(excluded_functions) -> dict:
         for filenames in filenames_set:
             file_dir = create_path(chapter_dir, filenames[0])
             file_path = create_path(file_dir, filenames[1])
-            file_functions, class_bases = get_function_names_from_file(file_path)
+            file_functions, class_bases = get_func_names_and_class_bases_from_file(
+                file_path
+            )
             for x_class, x_bases in class_bases.items():
                 add_classes_where_needed(
                     x_bases,
@@ -263,25 +266,25 @@ def get_unnecessarily_excluded_funcs(
 
 
 def get_semantic_types(semantic_type_candidates) -> set:
-    semantic_type_confirmed = set()
+    confirmed_semantic_types = {}
     base_types = (int, float, bool, str, list, tuple, range, dict, set)
     # Check if any base is in base_types by name
     candidates_list = list(semantic_type_candidates.keys())
 
     while candidates_list != []:
         x_class = candidates_list.pop()
-        bases = semantic_type_candidates.get(x_class)
-        is_subclass = any(base in [t.__name__ for t in base_types] for base in bases)
+        x_bases = semantic_type_candidates.get(x_class)
+        is_subclass = any(base in [t.__name__ for t in base_types] for base in x_bases)
         if is_subclass:
-            semantic_type_confirmed.add(x_class)
+            confirmed_semantic_types[x_class] = x_bases[0]
         else:
-            x_base = bases[0]
+            x_base = x_bases[0]
             if new_bases := semantic_type_candidates.get(x_base):
                 # if x_base exists in semantic_type_candidates change classes bases reference to parent class
                 semantic_type_candidates[x_class] = new_bases
                 candidates_list.append(x_class)
-    # print(f"{sorted(list(semantic_type_confirmed))=}")
-    return semantic_type_confirmed
+    # print(f"{sorted(list(confirmed_semantic_types))=}")
+    return confirmed_semantic_types
 
 
 def check_if_chapter_keywords_by_chapter_is_sorted(
