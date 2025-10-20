@@ -118,7 +118,7 @@ class MomentUnit:
         )
         return sorted(list(beliefs.keys()))
 
-    # belief management
+    # belief administration
     def _set_all_healer_dutys(self, belief_name: BeliefName):
         x_gut = open_gut_file(self.moment_mstr_dir, self.moment_label, belief_name)
         x_gut.cashout()
@@ -140,7 +140,7 @@ class MomentUnit:
                     duty_belief=x_gut,
                 )
 
-    # job belief management
+    # job belief administration
     def create_empty_belief_from_moment(self, belief_name: BeliefName) -> BeliefUnit:
         return beliefunit_shop(
             belief_name,

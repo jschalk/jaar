@@ -51,7 +51,7 @@ def get_sue_beliefunit() -> BeliefUnit:
     sue_belief.add_voiceunit(bob_str, bob_cred_lumen, bob_debt_lumen)
     sue_voice = sue_belief.get_voice(sue_str)
     swim_str = ";swimmers"
-    team_str = ";Team Manager"
+    team_str = ";Team Administrator"
     sue_voice.add_membership(swim_str, 77, 51)
     bob_voice = sue_belief.get_voice(bob_str)
     bob_voice.add_membership(swim_str, 12, 37)
@@ -92,12 +92,12 @@ def get_sue_beliefunit() -> BeliefUnit:
     sue_belief.add_plan(play_run_rope, 22, pledge=True)
 
     # Add some award links
-    casa_manager_awardunit = awardunit_shop("Manager", 0.5, 0.2)
+    casa_administrator_awardunit = awardunit_shop("Administrator", 0.5, 0.2)
     casa_team_awardunit = awardunit_shop(team_str, 0.3, 0.1)
     casa_devloper_awardunit = awardunit_shop("Sue", 1, 0.8)
     casa_jundevloper_awardunit = awardunit_shop("Bob", 0.7, 0.9)
     root_rope = sue_belief.planroot.get_plan_rope()
-    sue_belief.edit_plan_attr(root_rope, awardunit=casa_manager_awardunit)
+    sue_belief.edit_plan_attr(root_rope, awardunit=casa_administrator_awardunit)
     sue_belief.edit_plan_attr(root_rope, awardunit=casa_team_awardunit)
     sue_belief.edit_plan_attr(casa_rope, awardunit=casa_devloper_awardunit)
     sue_belief.edit_plan_attr(casa_rope, awardunit=casa_jundevloper_awardunit)

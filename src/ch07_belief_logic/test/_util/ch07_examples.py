@@ -191,7 +191,7 @@ def get_beliefunit_with7amCleanTableReason() -> BeliefUnit:
     sue_belief.set_plan(n2_plan, am_rope)  # plan_am
     sue_belief.set_plan(n3_plan, am_rope)  # plan_am
 
-    house_str = "housemanagement"
+    house_str = "houseadministration"
     house_rope = sue_belief.make_l1_rope(house_str)
     clean_str = "clean table"
     clean_rope = sue_belief.make_rope(house_rope, clean_str)

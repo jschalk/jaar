@@ -166,7 +166,7 @@
                 "star": 1, 
                 "uid": 109
               }, 
-              "PC1026 Rick Management and Hazard Analysis": {
+              "PC1026 Rick administration and Hazard Analysis": {
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
                     "is_expanded": false, 
@@ -175,7 +175,7 @@
                     "uid": 122
                   }
                 }, 
-                "plan_label": "PC1026 Rick Management and Hazard Analysis", 
+                "plan_label": "PC1026 Rick administration and Hazard Analysis", 
                 "star": 1, 
                 "uid": 112
               }, 
@@ -607,8 +607,8 @@
                     "star": 1, 
                     "uid": 140
                   }, 
-                  "consider management perspective": {
-                    "plan_label": "consider management perspective", 
+                  "consider administration perspective": {
+                    "plan_label": "consider administration perspective", 
                     "pledge": true, 
                     "reasonunits": {
                       ";amy45;jour_minute;": {
@@ -675,7 +675,7 @@
         "star": 1, 
         "uid": 261
       }, 
-      "Asset management": {
+      "Asset administration": {
         "is_expanded": false, 
         "kids": {
           "American sovereignty": {
@@ -904,7 +904,7 @@
             "uid": 203
           }
         }, 
-        "plan_label": "Asset management", 
+        "plan_label": "Asset administration", 
         "star": 1, 
         "uid": 199
       }, 
