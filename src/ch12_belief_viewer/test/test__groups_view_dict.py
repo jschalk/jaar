@@ -1,8 +1,4 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch12_belief_viewer.belief_viewer__tool import (
-    add_small_dot,
-    get_groups_view_dict,
-)
 from src.ch12_belief_viewer.belief_viewer_examples import (
     best_run_str,
     best_soccer_str,
@@ -15,6 +11,10 @@ from src.ch12_belief_viewer.belief_viewer_examples import (
     play_soccer_str,
     play_str,
     play_swim_str,
+)
+from src.ch12_belief_viewer.belief_viewer_tool import (
+    add_small_dot,
+    get_groups_view_dict,
 )
 from src.ch12_belief_viewer.test.test__voices_view_dict import add_readable
 from src.ref.keywords import Ch12Keywords as kw

@@ -1,13 +1,7 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_epoch.reason_str_func import (
-    get_fact_state_readable_str,
-    get_reason_case_readable_str,
-)
-from src.ch12_belief_viewer.belief_viewer__tool import (
-    add_small_dot,
+from src.ch12_belief_viewer.belief_viewer_tool import (
     get_belief_view_dict,
     get_plan_view_dict,
-    get_voices_view_dict,
 )
 from src.ref.keywords import Ch12Keywords as kw
 

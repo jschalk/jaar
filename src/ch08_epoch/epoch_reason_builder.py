@@ -3,11 +3,7 @@ from src.ch03_rope.rope import is_sub_rope
 from src.ch06_plan.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch07_belief_logic.belief_tool import (
-    belief_plan_reason_caseunit_exists,
-    belief_plan_reason_caseunit_get_obj,
     belief_plan_reason_caseunit_set_obj,
-    belief_plan_reasonunit_exists,
-    belief_plan_reasonunit_get_obj,
     belief_planunit_exists,
     belief_planunit_get_obj,
 )

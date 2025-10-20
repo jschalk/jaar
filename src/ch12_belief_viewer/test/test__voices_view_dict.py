@@ -1,5 +1,5 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch12_belief_viewer.belief_viewer__tool import (
+from src.ch12_belief_viewer.belief_viewer_tool import (
     add_small_dot,
     get_voices_view_dict,
 )

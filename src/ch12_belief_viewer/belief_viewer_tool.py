@@ -5,7 +5,7 @@ from src.ch04_voice.labor import PartyHeir, PartyUnit
 from src.ch05_reason.reason import CaseUnit, FactHeir, FactUnit, ReasonHeir, ReasonUnit
 from src.ch06_plan.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit
-from src.ch08_epoch.reason_str_func import (
+from src.ch08_epoch.epoch_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
