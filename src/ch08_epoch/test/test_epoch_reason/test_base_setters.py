@@ -8,9 +8,9 @@ from src.ch07_belief_logic.belief_tool import (
 from src.ch08_epoch.epoch_main import add_epoch_planunit
 from src.ch08_epoch.epoch_reason_builder import (
     del_epoch_reason,
-    set_epoch_base_case_datetime_range,
     set_epoch_base_case_dayly,
     set_epoch_base_case_monthday,
+    set_epoch_base_case_range,
     set_epoch_base_case_weekly,
     set_epoch_base_case_xdays,
     set_epoch_base_case_xweeks,
@@ -302,7 +302,7 @@ def test_set_epoch_base_case_xweeks_SetsAttr_Scenario1_WrapingParameters():
     assert xweeks_case.reason_divisor == mop_every_xweeks
 
 
-def test_set_epoch_base_case_datetime_range_SetsAttr_Scenario0_NoWrapingParameters():
+def test_set_epoch_base_case_range_SetsAttr_Scenario0_NoWrapingParameters():
     # ESTABLISH
     bob_belief = get_bob_five_belief()
     mop_range_args = {
@@ -316,7 +316,7 @@ def test_set_epoch_base_case_datetime_range_SetsAttr_Scenario0_NoWrapingParamete
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_range_args)
 
     # WHEN
-    set_epoch_base_case_datetime_range(
+    set_epoch_base_case_range(
         x_belief=bob_belief,
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
@@ -336,7 +336,7 @@ def test_set_epoch_base_case_datetime_range_SetsAttr_Scenario0_NoWrapingParamete
     assert day_case.reason_divisor == bob_belief.get_plan_obj(wx.five_rope).close
 
 
-def test_set_epoch_base_case_datetime_range_SetsAttr_Scenario1_WrapingParameters():
+def test_set_epoch_base_case_range_SetsAttr_Scenario1_WrapingParameters():
     # ESTABLISH
     bob_belief = get_bob_five_belief()
     week_rope = bob_belief.make_rope(wx.five_rope, kw.week)
@@ -351,7 +351,7 @@ def test_set_epoch_base_case_datetime_range_SetsAttr_Scenario1_WrapingParameters
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_range_args)
 
     # WHEN
-    set_epoch_base_case_datetime_range(
+    set_epoch_base_case_range(
         x_belief=bob_belief,
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,

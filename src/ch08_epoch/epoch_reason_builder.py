@@ -94,7 +94,7 @@ def set_epoch_base_case_weekly(
     belief_plan_reason_caseunit_set_obj(x_belief, case_args)
 
 
-def set_epoch_base_case_datetime_range(
+def set_epoch_base_case_range(
     x_belief: BeliefUnit,
     plan_rope: RopeTerm,
     epoch_label: LabelTerm,
@@ -239,6 +239,8 @@ def set_epoch_cases_for_dayly(
     day_lower: int,
     day_upper: int,
     every_x_days: int,
+    range_lower_min: int = None,
+    range_duration: int = None,
 ):
     set_epoch_base_case_dayly(
         x_belief, plan_rope, epoch_label, day_lower_min, day_duration_min
@@ -246,6 +248,10 @@ def set_epoch_cases_for_dayly(
     set_epoch_base_case_xdays(
         x_belief, plan_rope, epoch_label, day_lower, day_upper, every_x_days
     )
+    if range_lower_min and range_duration:
+        set_epoch_base_case_range(
+            x_belief, plan_rope, epoch_label, range_lower_min, range_duration
+        )
 
 
 def set_epoch_cases_for_weekly(
@@ -257,11 +263,17 @@ def set_epoch_cases_for_weekly(
     weeks_lower: int,
     weeks_upper: int,
     every_x_weeks: int,
+    range_lower_min: int = None,
+    range_duration: int = None,
 ):
     set_epoch_base_case_weekly(x_belief, plan_rope, epoch_label, lower_min, duration)
     set_epoch_base_case_xweeks(
         x_belief, plan_rope, epoch_label, weeks_lower, weeks_upper, every_x_weeks
     )
+    if range_lower_min and range_duration:
+        set_epoch_base_case_range(
+            x_belief, plan_rope, epoch_label, range_lower_min, range_duration
+        )
 
 
 def set_epoch_cases_for_yearly_monthday(
@@ -273,6 +285,8 @@ def set_epoch_cases_for_yearly_monthday(
     month_label: LabelTerm,
     monthday: int,
     length_days: int,
+    range_lower_min: int = None,
+    range_duration: int = None,
 ):
     set_epoch_base_case_dayly(
         x_belief, plan_rope, epoch_label, day_lower_min, day_duration_min
@@ -280,6 +294,10 @@ def set_epoch_cases_for_yearly_monthday(
     set_epoch_base_case_monthday(
         x_belief, plan_rope, epoch_label, month_label, monthday, length_days
     )
+    if range_lower_min and range_duration:
+        set_epoch_base_case_range(
+            x_belief, plan_rope, epoch_label, range_lower_min, range_duration
+        )
 
 
 def set_epoch_cases_for_monthly(
@@ -290,6 +308,8 @@ def set_epoch_cases_for_monthly(
     day_duration_min: int,
     monthday: int,
     length_days: int,
+    range_lower_min: int = None,
+    range_duration: int = None,
 ):
     year_rope = get_year_rope(x_belief, epoch_label)
     year_plan = x_belief.get_plan_obj(year_rope)
@@ -310,3 +330,7 @@ def set_epoch_cases_for_monthly(
     set_epoch_base_case_dayly(
         x_belief, plan_rope, epoch_label, day_lower_min, day_duration_min
     )
+    if range_lower_min and range_duration:
+        set_epoch_base_case_range(
+            x_belief, plan_rope, epoch_label, range_lower_min, range_duration
+        )
