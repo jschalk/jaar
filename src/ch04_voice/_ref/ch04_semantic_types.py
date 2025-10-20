@@ -13,17 +13,17 @@ class NameTerm(LabelTerm):
         return self.is_label(knot)
 
 
-class VoiceName(NameTerm):  # Created to help track the object class relations
+class VoiceName(NameTerm):
     """Every VoiceName object is NameTerm, must follow NameTerm format."""
 
     pass
 
 
 class TitleTerm(str):
-    """If a TitleTerm contains knots it represents a group otherwise its a single member group of an VoiceName."""
+    """If a TitleTerm contains knot(s) it represents a group otherwise its a single member group of an VoiceName."""
 
 
-class GroupTitle(TitleTerm):  # Created to help track the object class relations
+class GroupTitle(TitleTerm):
     pass
 
 
