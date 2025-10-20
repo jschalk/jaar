@@ -9,7 +9,6 @@ from src.ch13_belief_listen._ref.ch13_semantic_types import (
     LabelTerm,
     MomentLabel,
     MoneyGrain,
-    MoneyNum,
     NameTerm,
     RespectGrain,
     RespectNum,
@@ -19,3 +18,9 @@ from src.ch13_belief_listen._ref.ch13_semantic_types import (
     VoiceName,
     default_knot_if_None,
 )
+
+
+class MoneyNum(float):
+    """MoneyNum inherits from float class"""
+
+    pass

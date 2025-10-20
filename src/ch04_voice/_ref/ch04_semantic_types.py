@@ -1,9 +1,6 @@
 from src.ch03_allot._ref.ch03_semantic_types import (
     FirstLabel,
     LabelTerm,
-    MoneyNum,
-    RespectGrain,
-    RespectNum,
     RopeTerm,
     default_knot_if_None,
 )
@@ -44,5 +41,17 @@ class FundNum(float):
 
 class FundGrain(float):
     """Smallest Unit of fund_num"""
+
+    pass
+
+
+class RespectNum(float):
+    """RespectNum inherits from float class"""
+
+    pass
+
+
+class RespectGrain(float):
+    """Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!'"""
 
     pass

@@ -5,6 +5,8 @@ from src.ch04_voice._ref.ch04_semantic_types import (
     GroupTitle,
     HealerName,
     NameTerm,
+    RespectGrain,
+    RespectNum,
     TitleTerm,
     VoiceName,
     default_knot_if_None,
@@ -103,3 +105,26 @@ def test_FundGrain_Exists():
     assert y_fund_grainnum == x_float
     inspect_str = "Smallest Unit of fund_num"
     assert inspect_getdoc(y_fund_grainnum) == inspect_str
+
+
+def test_RespectGrain_Exists():
+    # ESTABLISH
+    x_float = 0.045
+    # WHEN
+    y_RespectGrain = RespectGrain(x_float)
+    # THEN
+    assert y_RespectGrain == x_float
+    inspect_str = (
+        "Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!'"
+    )
+    assert inspect_getdoc(y_RespectGrain) == inspect_str
+
+
+def test_RespectNum_Exists():
+    # ESTABLISH
+    x_float = 0.045
+    # WHEN
+    y_RespectNum = RespectNum(x_float)
+    # THEN
+    assert y_RespectNum == x_float
+    assert inspect_getdoc(y_RespectNum) == "RespectNum inherits from float class"

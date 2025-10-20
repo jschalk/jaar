@@ -9,7 +9,6 @@ from src.ch11_bud._ref.ch11_semantic_types import (
     LabelTerm,
     MomentLabel,
     MoneyGrain,
-    MoneyNum,
     NameTerm,
     RespectGrain,
     RespectNum,

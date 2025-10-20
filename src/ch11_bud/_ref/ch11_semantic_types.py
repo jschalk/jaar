@@ -9,7 +9,6 @@ from src.ch10_lesson._ref.ch10_semantic_types import (
     LabelTerm,
     MomentLabel,
     MoneyGrain,
-    MoneyNum,
     NameTerm,
     RespectGrain,
     RespectNum,

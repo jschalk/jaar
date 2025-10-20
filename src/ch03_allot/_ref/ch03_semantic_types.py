@@ -21,20 +21,4 @@ class PoolNum(float):
 class WeightNum(float):
     """WeightNum represents the unnormalized value of a ledger key. The sum of all WeightNum values in a ledger is not defined."""
 
-
-class MoneyNum(float):
-    """MoneyNum inherits from float class"""
-
-    pass
-
-
-class RespectNum(float):
-    """RespectNum inherits from float class"""
-
-    pass
-
-
-class RespectGrain(float):
-    """Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!'"""
-
     pass

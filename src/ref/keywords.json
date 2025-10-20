@@ -18,7 +18,7 @@
   "LobbyID": {"init_chapter": "ch21", "semantic_type": "str"}, 
   "MomentLabel": {"init_chapter": "ch07", "semantic_type": "str"}, 
   "MoneyGrain": {"init_chapter": "ch03", "semantic_type": "float"}, 
-  "MoneyNum": {"init_chapter": "ch03", "semantic_type": "float"}, 
+  "MoneyNum": {"init_chapter": "ch14", "semantic_type": "float"}, 
   "NameTerm": {"init_chapter": "ch04", "semantic_type": "str"}, 
   "NexusLabel": {"init_chapter": "ch07", "semantic_type": "str"}, 
   "PoolNum": {"init_chapter": "ch03", "semantic_type": "float"}, 

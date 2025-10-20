@@ -48,4 +48,4 @@ def test_MoneyGrain_Exists():
     y_money_grain = MoneyGrain(x_float)
     # THEN
     assert y_money_grain == x_float
-    assert inspect_getdoc(y_money_grain) == "Smallest Unit of MoneyNum"
+    assert inspect_getdoc(y_money_grain) == "Smallest Unit of Money Num"
