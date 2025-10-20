@@ -178,7 +178,7 @@ def add_or_count_function_name_occurance(all_functions: dict, function_name: str
 
 def get_chapters_func_class_metrics(excluded_functions) -> dict:
     x_count = 0
-    duplicate_functions = set()
+    duplicate_func_names = set()
     non_excluded_functions = set()
     all_functions = {}
     all_classes = {}
@@ -204,10 +204,11 @@ def get_chapters_func_class_metrics(excluded_functions) -> dict:
                     print(
                         f"Function #{x_count}: Duplicate function {function_name} in {file_path}"
                     )
-                    duplicate_functions.add(function_name)
+                    duplicate_func_names.add(function_name)
                 if function_name not in excluded_functions:
                     non_excluded_functions.add(function_name)
-    # print(f"{duplicate_functions=}")
+    print(f"{duplicate_func_names=}")
+    # print(f"{duplicate_func_names=}")
     # print(f"{len(non_excluded_functions)=}")
     # print(f"{len(all_functions)=}")
     unnecessarily_excluded_funcs = get_unnecessarily_excluded_funcs(
@@ -216,7 +217,7 @@ def get_chapters_func_class_metrics(excluded_functions) -> dict:
     semantic_types = get_semantic_types(semantic_type_candidates)
     return {
         "all_functions": all_functions,
-        "duplicate_functions": duplicate_functions,
+        "duplicate_func_names": duplicate_func_names,
         "unnecessarily_excluded_funcs": unnecessarily_excluded_funcs,
         "semantic_types": semantic_types,
     }

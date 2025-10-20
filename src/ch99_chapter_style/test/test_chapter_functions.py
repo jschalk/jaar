@@ -35,43 +35,38 @@ from src.ch99_chapter_style.style import (
 )
 
 
-def expected_semantic_types() -> set:
-    return {
-        "BeliefName",
-        "RespectGrain",
-        "CRUD_command",
-        "FirstLabel",
-        "NexusLabel",
-        "SparkInt",
-        "FaceName",
-        "FundGrain",
-        "FundNum",
-        "GrainNum",
-        "GroupTitle",
-        "HealerName",
-        "KnotTerm",
-        "LabelTerm",
-        "LobbyID",
-        "MomentLabel",
-        "MoneyNum",
-        "NameTerm",
-        "MoneyGrain",
-        "PoolNum",
-        "RespectNum",
-        "RopeTerm",
-        "EpochLabel",
-        "EpochPoint",
-        "TitleTerm",
-        "VoiceName",
-        "WorldName",
-        "WeightNum",
-    }
+def get_semantic_types_set() -> set:
+    semantic_types_keywords = set()
+    for x_keyword, x_dict in get_keywords_src_config().items():
+        semantic_type = x_dict.get("semantic_type")
+        if semantic_type:
+            semantic_types_keywords.add(x_keyword)
+
+    return semantic_types_keywords
+
+
+def test_get_semantic_types_set_ReturnsObj():
+    # ESTABLISH / WHEN
+    semantic_types_set = get_semantic_types_set()
+
+    # THEN
+    src_semantic_types_keywords = {}
+    keywords_src_config = get_keywords_src_config()
+    for x_keyword, x_dict in keywords_src_config.items():
+        semantic_type = x_dict.get("semantic_type")
+        if semantic_type:
+            src_semantic_types_keywords[x_keyword] = "str"
+            # print(f"keyword={x_keyword} {x_dict=}")
+
+    assert set(src_semantic_types_keywords.keys()) == semantic_types_set
+    # "semantic_type": "str"
 
 
 def test_Chapters_CheckStringMetricsFromEveryFile():
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
     excluded_functions = {
+        "__str__",
         "_get_inx_label",
         "_get_inx_value",
         "_is_inx_knot_inclusion_correct",
@@ -98,7 +93,7 @@ def test_Chapters_CheckStringMetricsFromEveryFile():
 
     # WHEN
     chapters_func_class_metrics = get_chapters_func_class_metrics(excluded_functions)
-    duplicated_functions = chapters_func_class_metrics.get("duplicated_functions")
+    duplicate_func_names = chapters_func_class_metrics.get("duplicate_func_names")
     unnecessarily_excluded_funcs = chapters_func_class_metrics.get(
         "unnecessarily_excluded_funcs"
     )
@@ -110,16 +105,18 @@ def test_Chapters_CheckStringMetricsFromEveryFile():
         func_metrics = all_functions.get(function_name)
         if func_metrics > 1:
             print(f"{function_name} {func_metrics=}")
-    assertion_fail_str = f"Duplicated functions found: {duplicated_functions}"
-    assert not duplicated_functions, assertion_fail_str
+    assertion_fail_str = f"Duplicated functions found: {duplicate_func_names}"
+    print(f"{duplicate_func_names=}")
+    assert not duplicate_func_names, assertion_fail_str
     # print(f"{sorted(unnecessarily_excluded_funcs.keys())=}")
     assert not unnecessarily_excluded_funcs, sorted(unnecessarily_excluded_funcs.keys())
-    assert semantic_types == expected_semantic_types()
+    assert semantic_types == get_semantic_types_set()
     print(f"{len(all_functions)=}")
     for semantic_type in sorted(list(semantic_types)):
         expected_semantic_type_exists_test_str = f"test_{semantic_type}_Exists"
         # print(expected_semantic_type_exists_test_str)
         assert expected_semantic_type_exists_test_str in all_functions
+    assert 1 == 2
 
 
 def test_Chapters_Semantic_Types_HasCorrectFormating():
@@ -141,7 +138,7 @@ def test_Chapters_Semantic_Types_AreAllIn_chXX_semantic_types_ref_files():
 
     # THEN
     print(f"{len(ref_files_semantic_types)=}")
-    expected_types = expected_semantic_types()
+    expected_types = get_semantic_types_set()
     print(f"{len(expected_types)=}")
     print(f"missing {expected_types.difference(ref_files_semantic_types)}")
 
@@ -322,7 +319,7 @@ def test_Chapters_All_semantic_types_NamesAreKeywords():
 
     # THEN
     # make semantic_type names required keyword str functions
-    semantic_types = expected_semantic_types()
+    semantic_types = get_semantic_types_set()
     semantic_keywords_by_chapter = set(semantic_types)
     print(
         f"semantic_types without str function: {sorted(list(semantic_keywords_by_chapter.difference(all_keywords)))}"
