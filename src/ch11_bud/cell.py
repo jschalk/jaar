@@ -6,7 +6,7 @@ from src.ch01_py.dict_toolbox import (
     get_empty_dict_if_None,
     get_empty_list_if_None,
 )
-from src.ch03_allot.allot import allot_scale
+from src.ch02_allot.allot import allot_scale
 from src.ch05_reason.reason import (
     FactUnit,
     get_dict_from_factunits,

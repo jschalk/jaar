@@ -103,23 +103,6 @@ def test_membership_shop_ReturnsObjAttr_voice_name():
     assert swim_membership.voice_name == yao_str
 
 
-# def test_MemberShip_set_group_title_RaisesErrorIf_group_title_IsNotVoiceNameAndIsLabelTerm():
-#     # ESTABLISH
-#     slash_str = "/"
-#     # bob_str = f"Bob{slash_str}Texas"
-#     bob_str = "Bob"
-#     # swim_str = f"{slash_str}swim"
-#     swim_str = ",swim"
-
-#     # WHEN / THEN
-#     with pytest_raises(Exception) as excinfo:
-#         membership_shop(swim_str, voice_name=bob_str, knot=slash_str)
-#     assert (
-#         str(excinfo.value)
-#         == f"'{swim_str}' needs to not be a LabelTerm. Must contain knot: '{slash_str}'"
-#     )
-
-
 def test_MemberShip_set_group_cred_lumen_SetsAttr():
     # ESTABLISH
     swim_str = ",swim"

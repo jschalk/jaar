@@ -1,4 +1,4 @@
-from src.ch02_rope.rope import create_rope_from_labels
+from src.ch03_rope.rope import create_rope_from_labels
 from src.ch04_voice.group import awardunit_shop
 from src.ch04_voice.voice import voiceunit_shop
 from src.ch06_plan.plan import planunit_shop

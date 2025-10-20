@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.ch01_py.file_toolbox import create_path
-from src.ch02_rope.rope import default_knot_if_None
-from src.ch03_allot.allot import default_grain_num_if_None, validate_pool_num
+from src.ch02_allot.allot import default_grain_num_if_None, validate_pool_num
+from src.ch03_rope.rope import default_knot_if_None
 from src.ch10_lesson._ref.ch10_path import create_belief_dir_path
 from src.ch10_lesson.lesson_filehandler import LessonFileHandler, lessonfilehandler_shop
 from src.ch10_lesson.test._util.ch10_env import get_temp_dir

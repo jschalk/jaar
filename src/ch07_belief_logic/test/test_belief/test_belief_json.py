@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch02_rope.rope import default_knot_if_None, to_rope
+from src.ch03_rope.rope import default_knot_if_None, to_rope
 from src.ch04_voice.labor import laborunit_shop, partyunit_shop
 from src.ch05_reason.reason import factunit_shop
 from src.ch06_plan.healer import healerunit_shop

@@ -3,8 +3,8 @@
 ## Keywords by Chapter
 - ch00_intro: 
 - ch01_py: INSERT, UPDATE, sqlite_datatype
-- ch02_rope: FirstLabel, KnotTerm, LabelTerm, RopeTerm, knot, parent_rope
-- ch03_allot: GrainNum, MoneyGrain, PoolNum, RespectGrain, RespectNum, WeightNum, money_grain, respect_grain
+- ch02_allot: FirstLabel, GrainNum, KnotTerm, LabelTerm, PoolNum, RopeTerm, WeightNum, knot, parent_rope
+- ch03_rope: MoneyGrain, RespectGrain, RespectNum, cashout, money_grain, respect_grain
 - ch04_voice: FundGrain, FundNum, GroupTitle, HealerName, NameTerm, TitleTerm, VoiceName, awardee_title, awardunits, belief_name, credor_pool, debtor_pool, fund_agenda_give, fund_agenda_ratio_give, fund_agenda_ratio_take, fund_agenda_take, fund_give, fund_grain, fund_take, give_force, group_cred_lumen, group_debt_lumen, group_title, groupunits, inallocable_voice_debt_lumen, irrational_voice_debt_lumen, laborheir, laborunit, memberships, parent_solo, party_title, rational, solo, take_force, voice_cred_lumen, voice_debt_lumen, voice_name
 - ch05_reason: active_requisite, case_active, cases, fact_context, fact_lower, fact_state, fact_upper, factheirs, factunits, parent_heir_active, reason_active, reason_context, reason_divisor, reason_lower, reason_state, reason_upper, reasonunits, task
 - ch06_plan: addin, all_voice_cred, all_voice_debt, awardheirs, awardlines, begin, close, denom, descendant_pledge_count, fund_cease, fund_onset, fund_pool, fund_ratio, gogo_calc, gogo_want, healer_name, healerunit, healerunit_ratio, is_expanded, kids, morph, numor, plan_active, plan_active_hx, plan_fund_total, plan_label, plan_rope, pledge, problem_bool, range_evaluated, range_inheritors, reasonheirs, star, stop_calc, stop_want, tree_level, tree_traverse_count, uid

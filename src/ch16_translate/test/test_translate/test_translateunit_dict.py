@@ -1,4 +1,4 @@
-from src.ch02_rope.rope import default_knot_if_None
+from src.ch03_rope.rope import default_knot_if_None
 from src.ch16_translate.test._util.ch16_examples import (
     get_slash_labelmap,
     get_slash_namemap,

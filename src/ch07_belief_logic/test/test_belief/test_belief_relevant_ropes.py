@@ -1,4 +1,4 @@
-from src.ch02_rope.rope import to_rope
+from src.ch03_rope.rope import to_rope
 from src.ch05_reason.reason import reasonunit_shop
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop

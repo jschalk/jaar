@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from src.ch01_py.dict_toolbox import get_0_if_None, get_1_if_None
-from src.ch02_rope.rope import default_knot_if_None, is_labelterm, validate_labelterm
-from src.ch03_allot.allot import allot_scale, default_grain_num_if_None
+from src.ch02_allot.allot import allot_scale, default_grain_num_if_None
+from src.ch03_rope.rope import default_knot_if_None, is_labelterm, validate_labelterm
 from src.ch04_voice._ref.ch04_semantic_types import (
     FundNum,
     RespectGrain,

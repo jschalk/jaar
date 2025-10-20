@@ -1,6 +1,6 @@
 from copy import deepcopy as copy_deepcopy
 from inspect import getdoc as inspect_getdoc
-from src.ch02_rope.rope import create_rope, default_knot_if_None
+from src.ch03_rope.rope import create_rope, default_knot_if_None
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch08_epoch._ref.ch08_semantic_types import EpochLabel
 from src.ch08_epoch.epoch_main import (

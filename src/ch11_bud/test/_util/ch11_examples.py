@@ -1,5 +1,5 @@
 from enum import Enum
-from src.ch02_rope.rope import RopeTerm, create_rope, create_rope_from_labels
+from src.ch03_rope.rope import RopeTerm, create_rope, create_rope_from_labels
 from src.ch05_reason.reason import FactUnit, factunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom.atom_main import BeliefAtom, beliefatom_shop

@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch03_allot.allot import (
+from src.ch02_allot.allot import (
     _allot_missing_scale,
     _create_allot_dict,
     _get_missing_scale_list,

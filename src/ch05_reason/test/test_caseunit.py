@@ -1,4 +1,4 @@
-from src.ch02_rope.rope import create_rope, find_replace_rope_key_dict
+from src.ch03_rope.rope import create_rope, find_replace_rope_key_dict
 from src.ch05_reason.reason import (
     CaseUnit,
     cases_get_from_dict,

@@ -1,5 +1,5 @@
 from src.ch01_py.dict_toolbox import create_csv
-from src.ch03_allot.allot import allot_scale
+from src.ch02_allot.allot import allot_scale
 from src.ch04_voice.group import AwardUnit, MemberShip
 from src.ch04_voice.voice import VoiceUnit, calc_give_take_net
 from src.ch05_reason.reason import (

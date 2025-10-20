@@ -1,6 +1,6 @@
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 from src.ch01_py.plotly_toolbox import add_2_curve, conditional_fig_show
-from src.ch03_allot.allot import default_pool_num as default_point_magnitude
+from src.ch02_allot.allot import default_pool_num as default_point_magnitude
 
 
 def green_str() -> str:

@@ -1,11 +1,3 @@
-from src.ch02_rope._ref.ch02_semantic_types import (
-    FirstLabel,
-    LabelTerm,
-    RopeTerm,
-    default_knot_if_None,
-)
-
-
 class GrainNum(float):
     """GrainNum represents the smallest fraction allowed"""
 

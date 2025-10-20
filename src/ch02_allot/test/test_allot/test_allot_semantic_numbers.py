@@ -1,6 +1,6 @@
 from inspect import getdoc as inspect_getdoc
-from src.ch03_allot._ref.ch03_semantic_types import GrainNum, PoolNum
-from src.ch03_allot.allot import (
+from src.ch02_allot._ref.ch02_semantic_types import GrainNum, PoolNum
+from src.ch02_allot.allot import (
     default_grain_num_if_None,
     default_pool_num,
     valid_allotment_ratio,

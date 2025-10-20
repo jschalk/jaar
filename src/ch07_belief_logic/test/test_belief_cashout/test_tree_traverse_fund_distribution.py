@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from pytest import raises as pytest_raises
-from src.ch02_rope.rope import RopeTerm, to_rope
-from src.ch03_allot.allot import default_pool_num
+from src.ch02_allot.allot import default_pool_num
+from src.ch03_rope.rope import RopeTerm, to_rope
 from src.ch04_voice.group import awardline_shop, awardunit_shop
 from src.ch04_voice.voice import voiceunit_shop
 from src.ch06_plan.plan import PlanUnit, planunit_shop

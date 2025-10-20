@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch02_rope.rope import create_rope, to_rope
+from src.ch03_rope.rope import create_rope, to_rope
 from src.ch04_voice.voice import voiceunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom.atom_main import beliefatom_shop

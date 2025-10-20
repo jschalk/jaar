@@ -2,7 +2,7 @@ from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from src.ch01_py.dict_toolbox import get_0_if_None, get_empty_set_if_None
 from src.ch01_py.file_toolbox import create_path, get_dir_file_strs, open_json, set_dir
-from src.ch03_allot.allot import default_grain_num_if_None
+from src.ch02_allot.allot import default_grain_num_if_None
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch08_epoch.epoch_main import (
     EpochPoint,

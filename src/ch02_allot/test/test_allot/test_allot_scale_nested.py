@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import create_path, open_json, save_json
-from src.ch03_allot.allot import allot_nested_scale
-from src.ch03_allot.test._util.ch03_env import get_temp_dir, temp_dir_setup
+from src.ch02_allot.allot import allot_nested_scale
+from src.ch02_allot.test._util.ch02_env import get_temp_dir, temp_dir_setup
 
 
 def test_allot_nested_scale_ReturnsObj_Scenari0_depth0(

@@ -1,4 +1,4 @@
-from src.ch03_allot.allot import default_grain_num_if_None
+from src.ch02_allot.allot import default_grain_num_if_None
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch14_keep.rivercycle import (
     RiverCycle,

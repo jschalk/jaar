@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
-from src.ch02_rope.rope import default_knot_if_None
-from src.ch03_allot.allot import default_grain_num_if_None
+from src.ch02_allot.allot import default_grain_num_if_None
+from src.ch03_rope.rope import default_knot_if_None
 from src.ch04_voice.voice import VoiceUnit, voiceunit_shop
 from src.ref.keywords import Ch04Keywords as kw
 

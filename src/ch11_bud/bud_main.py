@@ -9,7 +9,7 @@ from src.ch01_py.dict_toolbox import (
     get_from_nested_dict,
     set_in_nested_dict,
 )
-from src.ch03_allot.allot import default_pool_num
+from src.ch02_allot.allot import default_pool_num
 from src.ch08_epoch.epoch_main import EpochPoint
 from src.ch11_bud._ref.ch11_semantic_types import (
     BeliefName,

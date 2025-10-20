@@ -1,4 +1,4 @@
-from src.ch02_rope.rope import create_rope, default_knot_if_None
+from src.ch03_rope.rope import create_rope, default_knot_if_None
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 from src.ch10_lesson.lesson_filehandler import lessonfilehandler_shop
 from src.ch11_bud.bud_filehandler import save_job_file

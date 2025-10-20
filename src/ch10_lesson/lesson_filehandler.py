@@ -15,8 +15,8 @@ from src.ch01_py.file_toolbox import (
     save_json,
     set_dir,
 )
-from src.ch02_rope.rope import validate_labelterm
-from src.ch03_allot.allot import default_grain_num_if_None, validate_pool_num
+from src.ch02_allot.allot import default_grain_num_if_None, validate_pool_num
+from src.ch03_rope.rope import validate_labelterm
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,

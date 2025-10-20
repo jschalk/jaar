@@ -6,7 +6,13 @@ from src.ch01_py.dict_toolbox import (
     get_empty_dict_if_None,
     get_False_if_None,
 )
-from src.ch02_rope.rope import (
+from src.ch02_allot.allot import (
+    allot_scale,
+    default_grain_num_if_None,
+    valid_allotment_ratio,
+    validate_pool_num,
+)
+from src.ch03_rope.rope import (
     all_ropes_between,
     create_rope,
     default_knot_if_None,
@@ -21,12 +27,6 @@ from src.ch02_rope.rope import (
     rebuild_rope,
     rope_is_valid_dir_path,
     to_rope,
-)
-from src.ch03_allot.allot import (
-    allot_scale,
-    default_grain_num_if_None,
-    valid_allotment_ratio,
-    validate_pool_num,
 )
 from src.ch04_voice.group import AwardUnit, GroupUnit, groupunit_shop, membership_shop
 from src.ch04_voice.labor import LaborUnit
@@ -1187,7 +1187,7 @@ reason_case:    {reason_case}"""
             group_title,
             voice_name_set,
         ) in self.get_voiceunit_group_titles_dict().items():
-            x_groupunit = groupunit_shop(group_title, knot=self.knot)
+            x_groupunit = groupunit_shop(group_title)
             for x_voice_name in voice_name_set:
                 x_membership = self.get_voice(x_voice_name).get_membership(group_title)
                 x_groupunit.set_g_membership(x_membership)

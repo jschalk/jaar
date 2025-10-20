@@ -1,6 +1,6 @@
 from enum import Enum
 from src.ch01_py.file_toolbox import open_json
-from src.ch02_rope.rope import RopeTerm
+from src.ch03_rope.rope import RopeTerm
 from src.ch04_voice.labor import laborunit_shop
 from src.ch05_reason.reason import factunit_shop, reasonunit_shop
 from src.ch06_plan.plan import planunit_shop

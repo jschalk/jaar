@@ -7,7 +7,8 @@ from src.ch01_py.dict_toolbox import (
     get_False_if_None,
     get_positive_int,
 )
-from src.ch02_rope.rope import (
+from src.ch02_allot.allot import allot_scale, default_grain_num_if_None
+from src.ch03_rope.rope import (
     all_ropes_between,
     create_rope,
     find_replace_rope_key_dict,
@@ -16,7 +17,6 @@ from src.ch02_rope.rope import (
     rebuild_rope,
     replace_knot,
 )
-from src.ch03_allot.allot import allot_scale, default_grain_num_if_None
 from src.ch04_voice.group import (
     AwardHeir,
     AwardLine,

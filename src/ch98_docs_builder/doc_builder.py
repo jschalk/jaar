@@ -7,7 +7,7 @@ from ast import (
 )
 from src.ch01_py.chapter_desc_tools import get_chapter_desc_prefix, get_chapter_descs
 from src.ch01_py.file_toolbox import create_path, open_json, save_file
-from src.ch02_rope._ref.ch02_doc_builder import get_ropeterm_explanation_md
+from src.ch03_rope._ref.ch03_doc_builder import get_ropeterm_explanation_md
 from src.ch17_idea._ref.ch17_doc_builder import get_brick_formats_md, get_idea_brick_mds
 
 

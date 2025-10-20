@@ -1,3 +1,6 @@
+from src.ch02_allot._ref.ch02_semantic_types import GrainNum, PoolNum, WeightNum
+
+
 class KnotTerm(str):
     """A string to used as a delimiter in RopeTerms."""
 

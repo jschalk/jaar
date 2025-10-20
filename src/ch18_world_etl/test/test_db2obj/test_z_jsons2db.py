@@ -1,6 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_py.db_toolbox import get_row_count
-from src.ch02_rope.rope import create_rope
+from src.ch03_rope.rope import create_rope
 from src.ch04_voice.group import (
     awardheir_shop,
     awardunit_shop,

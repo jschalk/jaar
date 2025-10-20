@@ -2,7 +2,7 @@ from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from pytest import raises as pytest_raises
 from src.ch01_py.file_toolbox import create_path, get_json_filename
-from src.ch02_rope.rope import create_rope, create_rope_from_labels
+from src.ch03_rope.rope import create_rope, create_rope_from_labels
 from src.ch11_bud.test._util.ch11_env import get_temp_dir
 from src.ch13_belief_listen._ref.ch13_path import (
     create_keep_duty_path,

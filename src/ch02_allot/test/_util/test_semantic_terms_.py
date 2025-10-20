@@ -1,5 +1,5 @@
 from inspect import getdoc as inspect_getdoc
-from src.ch03_allot._ref.ch03_semantic_types import PoolNum, WeightNum
+from src.ch02_allot._ref.ch02_semantic_types import PoolNum, WeightNum
 
 
 def test_PoolNum_Exists():

@@ -3,7 +3,7 @@ from src.ch01_py.file_toolbox import (
     create_path,
     get_json_filename,
 )
-from src.ch02_rope.rope import get_all_rope_labels, rebuild_rope
+from src.ch03_rope.rope import get_all_rope_labels, rebuild_rope
 from src.ch13_belief_listen._ref.ch13_semantic_types import (
     BeliefName,
     LabelTerm,

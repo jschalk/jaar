@@ -9,7 +9,6 @@ from src.ch04_voice._ref.ch04_semantic_types import (
     RespectNum,
     TitleTerm,
     VoiceName,
-    default_knot_if_None,
 )
 from src.ref.keywords import Ch04Keywords as kw
 
@@ -23,25 +22,6 @@ def test_NameTerm_Exists():
     assert bob_nameterm == bob_str
     doc_str = "All Name string classes should inherit from this class"
     assert inspect_getdoc(bob_nameterm) == doc_str
-
-
-def test_NameTerm_is_name_ReturnsObj_Scenario0():
-    # ESTABLISH / WHEN / THEN
-    assert NameTerm("").is_name() is False
-    assert NameTerm("A").is_name()
-
-    # WHEN / THEN
-    x_s = default_knot_if_None()
-    x_nameterm = NameTerm(f"casa{x_s}kitchen")
-    assert x_nameterm.is_name() is False
-
-
-def test_NameTerm_is_name_ReturnsObj_Scenario1():
-    # ESTABLISH / WHEN / THEN
-    slash_str = "/"
-    x_nameterm = NameTerm(f"casa{slash_str}kitchen")
-    assert x_nameterm.is_name()
-    assert x_nameterm.is_name(slash_str) is False
 
 
 def test_HealerName_Exists():
@@ -73,7 +53,7 @@ def test_TitleTerm_Exists():
     bob_nameterm = TitleTerm(bob_str)
     # THEN
     assert bob_nameterm == bob_str
-    doc_str = f"""If a TitleTerm contains {kw.knot}(s) it represents a group otherwise its a single member group of an VoiceName."""
+    doc_str = f"""If a TitleTerm contains SepartorTerms(s) it represents a group otherwise its a single member group of an VoiceName."""
     assert inspect_getdoc(bob_nameterm) == doc_str
 
 

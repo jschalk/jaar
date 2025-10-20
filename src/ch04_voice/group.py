@@ -1,12 +1,7 @@
 from dataclasses import dataclass
 from src.ch01_py.dict_toolbox import get_1_if_None
-from src.ch03_allot.allot import allot_scale, default_grain_num_if_None
-from src.ch04_voice._ref.ch04_semantic_types import (
-    FundGrain,
-    GroupTitle,
-    VoiceName,
-    default_knot_if_None,
-)
+from src.ch02_allot.allot import allot_scale, default_grain_num_if_None
+from src.ch04_voice._ref.ch04_semantic_types import FundGrain, GroupTitle, VoiceName
 
 
 class InvalidGroupException(Exception):
@@ -183,7 +178,6 @@ def awardline_shop(awardee_title: GroupTitle, fund_give: float, fund_take: float
 @dataclass
 class GroupUnit(GroupCore):
     memberships: dict[VoiceName, MemberShip] = None  # set by BeliefUnit.set_voiceunit()
-    knot: str = None  # calculated by BeliefUnit
     # calculated by BeliefUnit.cashout()
     fund_give: float = None
     fund_take: float = None
@@ -250,9 +244,7 @@ class GroupUnit(GroupCore):
             x_membership.fund_agenda_take = fund_agenda_take_allot.get(voice_name)
 
 
-def groupunit_shop(
-    group_title: GroupTitle, knot: str = None, fund_grain: FundGrain = None
-) -> GroupUnit:
+def groupunit_shop(group_title: GroupTitle, fund_grain: FundGrain = None) -> GroupUnit:
     return GroupUnit(
         group_title=group_title,
         memberships={},
@@ -262,7 +254,6 @@ def groupunit_shop(
         fund_agenda_take=0,
         credor_pool=0,
         debtor_pool=0,
-        knot=default_knot_if_None(knot),
         fund_grain=default_grain_num_if_None(fund_grain),
     )
     # x_groupunit.set_group_title(group_title=group_title)

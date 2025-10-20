@@ -1,4 +1,4 @@
-from src.ch03_allot.allot import default_grain_num_if_None, validate_pool_num
+from src.ch02_allot.allot import default_grain_num_if_None, validate_pool_num
 from src.ch14_keep._ref.ch14_semantic_types import default_knot_if_None
 from src.ch14_keep.riverrun import RiverRun, riverrun_shop
 from src.ch14_keep.test._util.ch14_env import get_temp_dir, temp_moment_label

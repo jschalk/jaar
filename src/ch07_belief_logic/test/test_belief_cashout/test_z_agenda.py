@@ -1,4 +1,4 @@
-from src.ch02_rope.rope import RopeTerm
+from src.ch03_rope.rope import RopeTerm
 from src.ch04_voice.labor import laborunit_shop
 from src.ch06_plan.plan import PlanUnit, planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_beliefunit_from_dict

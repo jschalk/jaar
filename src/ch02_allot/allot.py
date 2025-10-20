@@ -3,7 +3,7 @@ from os.path import exists as os_path_exists
 from pathlib import Path
 from src.ch01_py.dict_toolbox import get_0_if_None, get_1_if_None
 from src.ch01_py.file_toolbox import create_path, open_json, save_json
-from src.ch03_allot._ref.ch03_semantic_types import GrainNum, PoolNum, WeightNum
+from src.ch02_allot._ref.ch02_semantic_types import GrainNum, PoolNum, WeightNum
 
 
 def default_grain_num_if_None(grain_num: GrainNum = None) -> GrainNum:

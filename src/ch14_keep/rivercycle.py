@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from src.ch01_py.dict_toolbox import get_0_if_None, get_empty_dict_if_None
-from src.ch03_allot.allot import (
+from src.ch02_allot.allot import (
     allot_scale,
     default_grain_num_if_None,
     validate_pool_num,

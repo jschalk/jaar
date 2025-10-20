@@ -1,16 +1,16 @@
-from src.ch03_allot._ref.ch03_semantic_types import (
+from src.ch03_rope._ref.ch03_semantic_types import (
     FirstLabel,
+    GrainNum,
     LabelTerm,
+    PoolNum,
     RopeTerm,
+    WeightNum,
     default_knot_if_None,
 )
 
 
 class NameTerm(LabelTerm):
     """All Name string classes should inherit from this class"""
-
-    def is_name(self, knot: str = None) -> bool:
-        return self.is_label(knot)
 
 
 class VoiceName(NameTerm):
@@ -20,7 +20,7 @@ class VoiceName(NameTerm):
 
 
 class TitleTerm(str):
-    """If a TitleTerm contains knot(s) it represents a group otherwise its a single member group of an VoiceName."""
+    """If a TitleTerm contains SepartorTerms(s) it represents a group otherwise its a single member group of an VoiceName."""
 
 
 class GroupTitle(TitleTerm):

@@ -1,6 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch02_rope.rope import default_knot_if_None
-from src.ch03_allot.allot import default_grain_num_if_None
+from src.ch02_allot.allot import default_grain_num_if_None
 from src.ch04_voice.group import GroupUnit, groupunit_shop, membership_shop
 from src.ref.keywords import Ch04Keywords as kw
 
@@ -18,7 +17,6 @@ def test_GroupUnit_Exists():
     assert not x_groupunit.fund_agenda_take
     assert not x_groupunit.credor_pool
     assert not x_groupunit.debtor_pool
-    assert not x_groupunit.knot
     assert not x_groupunit.fund_grain
     print(f"{x_groupunit.__dict__=}")
     assert set(x_groupunit.__dict__.keys()) == {
@@ -30,7 +28,6 @@ def test_GroupUnit_Exists():
         kw.fund_agenda_take,
         kw.credor_pool,
         kw.debtor_pool,
-        kw.knot,
         kw.fund_grain,
     }
 
@@ -54,38 +51,19 @@ def test_groupunit_shop_ReturnsObj():
     assert swim_groupunit.fund_agenda_take == 0
     assert swim_groupunit.credor_pool == 0
     assert swim_groupunit.debtor_pool == 0
-    assert swim_groupunit.knot == default_knot_if_None()
     assert swim_groupunit.fund_grain == default_grain_num_if_None()
 
 
-def test_groupunit_shop_ReturnsObj_knot():
+def test_groupunit_shop_ReturnsObj_Scenario1_DefaultsPopulated():
     # ESTABLISH
     swim_str = "/swimmers"
-    slash_str = "/"
     x_fund_grain = 7
 
     # WHEN
-    swim_groupunit = groupunit_shop(
-        group_title=swim_str, knot=slash_str, fund_grain=x_fund_grain
-    )
+    swim_groupunit = groupunit_shop(group_title=swim_str, fund_grain=x_fund_grain)
 
     # THEN
-    assert swim_groupunit.knot == slash_str
     assert swim_groupunit.fund_grain == x_fund_grain
-
-
-# def test_GroupUnit_set_group_title_RaisesErrorIfParameterContains_knot_And_voice_mirror_True():
-#     # ESTABLISH
-#     slash_str = "/"
-#     bob_str = f"Bob{slash_str}Texas"
-
-#     # WHEN / THEN
-#     with pytest_raises(Exception) as excinfo:
-#         groupunit_shop(bob_str, _voice_mirror=True, knot=slash_str)
-#     assert (
-#         str(excinfo.value)
-#         == f"'{bob_str}' needs to be a LabelTerm. Cannot contain knot: '{slash_str}'"
-#     )
 
 
 def test_GroupUnit_set_membership_SetsAttr():
