@@ -7,7 +7,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     create_update_heard_raw_existing_inx_col_sqlstr,
 )
 from src.ch18_world_etl.transformers import set_all_heard_raw_inx_columns
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_FullTranslateTables():
@@ -25,11 +25,11 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrawar_dimen = wx.belief_plan_awardunit
+        blrawar_dimen = kw.belief_plan_awardunit
         blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
         # print(f"{get_table_columns(cursor, blrawar_h_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename} 
-        ({wx.spark_num}, {wx.face_name}_otx, {wx.face_name}_inx)
+        ({kw.spark_num}, {kw.face_name}_otx, {kw.face_name}_inx)
         VALUES
           ({spark1}, '{sue_otx}', NULL)
         , ({spark2}, '{yao_otx}', NULL)
@@ -39,11 +39,11 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_
         """
         cursor.execute(insert_face_name_only_sqlstr)
 
-        trlname_dimen = wx.translate_name
+        trlname_dimen = kw.translate_name
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename} 
-        ({wx.spark_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
+        ({kw.spark_num}, {kw.face_name}, {kw.otx_name}, {kw.inx_name})
         VALUES
           ({spark1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
         , ({spark7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
@@ -51,19 +51,19 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_
         """
         cursor.execute(insert_trlname_sqlstr)
 
-        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_h_raw_put_tablename} WHERE {wx.face_name}_inx IS NOT NULL"
+        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_h_raw_put_tablename} WHERE {kw.face_name}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
         update_sqlstr = create_update_heard_raw_existing_inx_col_sqlstr(
-            "name", blrawar_h_raw_put_tablename, wx.face_name
+            "name", blrawar_h_raw_put_tablename, kw.face_name
         )
         print(update_sqlstr)
         cursor.execute(update_sqlstr)
 
         # THEN
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 3
-        select_face_name_only_sqlstr = f"""SELECT {wx.spark_num}, {wx.face_name}_otx, {wx.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {kw.spark_num}, {kw.face_name}_otx, {kw.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -90,10 +90,10 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrawar_dimen = wx.belief_plan_awardunit
+        blrawar_dimen = kw.belief_plan_awardunit
         blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
         insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename}
-        ({wx.spark_num}, {wx.face_name}_otx, {wx.face_name}_inx)
+        ({kw.spark_num}, {kw.face_name}_otx, {kw.face_name}_inx)
         VALUES
           ({spark1}, '{sue_otx}', NULL)
         , ({spark2}, '{yao_otx}', NULL)
@@ -101,11 +101,11 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
         ;
         """
         cursor.execute(insert_face_name_only_sqlstr)
-        trlname_dimen = wx.translate_name
+        trlname_dimen = kw.translate_name
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
-        ({wx.spark_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
+        ({kw.spark_num}, {kw.face_name}, {kw.otx_name}, {kw.inx_name})
         VALUES
           ({spark1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
         , ({spark7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
@@ -113,18 +113,18 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
         """
         cursor.execute(insert_trlname_sqlstr)
 
-        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_h_raw_put_tablename} WHERE {wx.face_name}_inx IS NOT NULL"
+        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_h_raw_put_tablename} WHERE {kw.face_name}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
         update_sqlstr = create_update_heard_raw_existing_inx_col_sqlstr(
-            "name", blrawar_h_raw_put_tablename, wx.face_name
+            "name", blrawar_h_raw_put_tablename, kw.face_name
         )
         print(update_sqlstr)
         cursor.execute(update_sqlstr)
 
         # THEN
-        select_face_name_only_sqlstr = f"""SELECT {wx.spark_num}, {wx.face_name}_otx, {wx.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {kw.spark_num}, {kw.face_name}_otx, {kw.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -157,11 +157,11 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrawar_dimen = wx.belief_plan_awardunit
+        blrawar_dimen = kw.belief_plan_awardunit
         blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrawar_h_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename}
-        ({wx.spark_num}, {wx.face_name}_otx, {wx.face_name}_inx)
+        ({kw.spark_num}, {kw.face_name}_otx, {kw.face_name}_inx)
         VALUES
           ({spark0}, '{bob_otx}', NULL)
         , ({spark1}, '{bob_otx}', NULL)
@@ -173,11 +173,11 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_
         """
         cursor.execute(insert_face_name_only_sqlstr)
 
-        trlname_dimen = wx.translate_name
+        trlname_dimen = kw.translate_name
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
-        ({wx.spark_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
+        ({kw.spark_num}, {kw.face_name}, {kw.otx_name}, {kw.inx_name})
         VALUES
           ({spark1}, '{bob_otx}', '{bob_otx}', '{bob_inx0}')
         , ({spark2}, '{yao_otx}', '{yao_otx}', '{yao_inx}')
@@ -188,18 +188,18 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_
         """
         cursor.execute(insert_trlname_sqlstr)
 
-        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_h_raw_put_tablename} WHERE {wx.face_name}_inx IS NOT NULL"
+        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_h_raw_put_tablename} WHERE {kw.face_name}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
         update_sqlstr = create_update_heard_raw_existing_inx_col_sqlstr(
-            "name", blrawar_h_raw_put_tablename, wx.face_name
+            "name", blrawar_h_raw_put_tablename, kw.face_name
         )
         print(update_sqlstr)
         cursor.execute(update_sqlstr)
 
         # THEN
-        select_face_name_only_sqlstr = f"""SELECT {wx.spark_num}, {wx.face_name}_otx, {wx.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {kw.spark_num}, {kw.face_name}_otx, {kw.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -229,14 +229,14 @@ def test_create_update_heard_raw_empty_inx_col_sqlstr_UpdatesTable_Scenario0_Emp
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        trlname_s_vld_tablename = prime_tbl(wx.translate_name, "s", "vld")
+        trlname_s_vld_tablename = prime_tbl(kw.translate_name, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         print(f"{get_table_columns(cursor, trlname_s_vld_tablename)=}")
 
-        blrawar_dimen = wx.belief_plan_awardunit
+        blrawar_dimen = kw.belief_plan_awardunit
         blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrawar_h_raw_put_tablename)=}")
-        insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename} ({wx.spark_num}, {wx.face_name}_otx, {wx.face_name}_inx)
+        insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename} ({kw.spark_num}, {kw.face_name}_otx, {kw.face_name}_inx)
 VALUES
   ({spark1}, '{sue_otx}', '{sue_inx}')
 , ({spark2}, '{yao_otx}', NULL)
@@ -245,19 +245,19 @@ VALUES
 ;
 """
         cursor.execute(insert_face_name_only_sqlstr)
-        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_h_raw_put_tablename} WHERE {wx.face_name}_inx IS NOT NULL"
+        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_h_raw_put_tablename} WHERE {kw.face_name}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 2
 
         # WHEN
         update_sqlstr = create_update_heard_raw_empty_inx_col_sqlstr(
-            blrawar_h_raw_put_tablename, wx.face_name
+            blrawar_h_raw_put_tablename, kw.face_name
         )
         print(update_sqlstr)
         cursor.execute(update_sqlstr)
 
         # THEN
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 4
-        select_face_name_only_sqlstr = f"""SELECT {wx.spark_num}, {wx.face_name}_otx, {wx.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {kw.spark_num}, {kw.face_name}_otx, {kw.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -290,11 +290,11 @@ def test_set_all_heard_raw_inx_columns_Scenario0_empty_tables():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrawar_dimen = wx.belief_plan_awardunit
+        blrawar_dimen = kw.belief_plan_awardunit
         blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrawar_h_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename}
-        ({wx.spark_num}, {wx.face_name}_otx, {wx.face_name}_inx)
+        ({kw.spark_num}, {kw.face_name}_otx, {kw.face_name}_inx)
         VALUES
           ({spark0}, '{bob_otx}', NULL)
         , ({spark1}, '{bob_otx}', NULL)
@@ -306,11 +306,11 @@ def test_set_all_heard_raw_inx_columns_Scenario0_empty_tables():
         """
         cursor.execute(insert_face_name_only_sqlstr)
 
-        trlname_dimen = wx.translate_name
+        trlname_dimen = kw.translate_name
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
-        ({wx.spark_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
+        ({kw.spark_num}, {kw.face_name}, {kw.otx_name}, {kw.inx_name})
         VALUES
           ({spark1}, '{bob_otx}', '{bob_otx}', '{bob_inx0}')
         , ({spark2}, '{yao_otx}', '{yao_otx}', '{yao_inx}')
@@ -321,14 +321,14 @@ def test_set_all_heard_raw_inx_columns_Scenario0_empty_tables():
         """
         cursor.execute(insert_trlname_sqlstr)
 
-        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_h_raw_put_tablename} WHERE {wx.face_name}_inx IS NOT NULL"
+        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_h_raw_put_tablename} WHERE {kw.face_name}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
         set_all_heard_raw_inx_columns(cursor)
 
         # THEN
-        select_face_name_only_sqlstr = f"""SELECT {wx.spark_num}, {wx.face_name}_otx, {wx.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {kw.spark_num}, {kw.face_name}_otx, {kw.face_name}_inx FROM {blrawar_h_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)

@@ -22,7 +22,7 @@ from src.ch08_epoch.test._util.ch08_examples import (
     get_example_epoch_config,
     get_squirt_config,
 )
-from src.ref.keywords import Ch08Keywords as wx
+from src.ref.keywords import Ch08Keywords as kw
 
 
 def test_EpochLabel_Exists():
@@ -32,7 +32,7 @@ def test_EpochLabel_Exists():
     x_epochlabel = EpochLabel(empty_str)
     # THEN
     assert x_epochlabel == empty_str
-    doc_str = f"{wx.EpochLabel} is required for every EpochUnit. It is a LabelTerm that must not contain the {wx.knot}."
+    doc_str = f"{kw.EpochLabel} is required for every EpochUnit. It is a LabelTerm that must not contain the {kw.knot}."
     assert inspect_getdoc(x_epochlabel) == doc_str
 
 
@@ -116,59 +116,59 @@ def test_validate_epoch_config_ReturnsObj_CheckEachElementIsNecessary():
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
     assert validate_epoch_config(creg_config)
-    creg_config.pop(wx.hours_config)
+    creg_config.pop(kw.hours_config)
     assert not validate_epoch_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(wx.weekdays_config)
+    creg_config.pop(kw.weekdays_config)
     assert not validate_epoch_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(wx.months_config)
+    creg_config.pop(kw.months_config)
     assert not validate_epoch_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(wx.monthday_index)
+    creg_config.pop(kw.monthday_index)
     assert not validate_epoch_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(wx.epoch_label)
+    creg_config.pop(kw.epoch_label)
     assert not validate_epoch_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(wx.c400_number)
+    creg_config.pop(kw.c400_number)
     assert not validate_epoch_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(wx.yr1_jan1_offset)
+    creg_config.pop(kw.yr1_jan1_offset)
     assert not validate_epoch_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[wx.hours_config] = []
+    creg_config[kw.hours_config] = []
     assert not validate_epoch_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[wx.months_config] = []
+    creg_config[kw.months_config] = []
     assert not validate_epoch_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[wx.weekdays_config] = []
+    creg_config[kw.weekdays_config] = []
     assert not validate_epoch_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[wx.yr1_jan1_offset] = None
+    creg_config[kw.yr1_jan1_offset] = None
     assert not validate_epoch_config(creg_config)
-    creg_config[wx.yr1_jan1_offset] = 0
+    creg_config[kw.yr1_jan1_offset] = 0
     assert validate_epoch_config(creg_config)
 
 
@@ -186,23 +186,23 @@ def test_is_epoch_config_valid_ReturnsObj_CheckObjsRepeat():
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[wx.months_config] = [["x_str", 30], ["y_str", 180], ["x_str", 365]]
+    creg_config[kw.months_config] = [["x_str", 30], ["y_str", 180], ["x_str", 365]]
     assert not validate_epoch_config(creg_config)
-    creg_config[wx.months_config] = [["x_str", 30], ["y_str", 180], ["z_str", 365]]
+    creg_config[kw.months_config] = [["x_str", 30], ["y_str", 180], ["z_str", 365]]
     assert validate_epoch_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[wx.hours_config] = [["x_str", 30], ["y_str", 180], ["x_str", 1440]]
+    creg_config[kw.hours_config] = [["x_str", 30], ["y_str", 180], ["x_str", 1440]]
     assert not validate_epoch_config(creg_config)
-    creg_config[wx.hours_config] = [["x_str", 30], ["y_str", 180], ["z_str", 1440]]
+    creg_config[kw.hours_config] = [["x_str", 30], ["y_str", 180], ["z_str", 1440]]
     assert validate_epoch_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[wx.weekdays_config] = ["x_str", "y_str", "x_str"]
+    creg_config[kw.weekdays_config] = ["x_str", "y_str", "x_str"]
     assert not validate_epoch_config(creg_config)
-    creg_config[wx.weekdays_config] = ["x_str", "y_str", "z_str"]
+    creg_config[kw.weekdays_config] = ["x_str", "y_str", "z_str"]
     assert validate_epoch_config(creg_config)
 
 
@@ -239,7 +239,7 @@ def test_epoch_config_shop_ReturnsObj_AllParameters():
 
     # WHEN
     five_dict = epoch_config_shop(
-        epoch_label=wx.five,
+        epoch_label=kw.five,
         c400_number=five_c400_number,
         hour_length=five_hour_length,
         month_length=five_month_length,
@@ -251,10 +251,10 @@ def test_epoch_config_shop_ReturnsObj_AllParameters():
 
     # THEN
     assert validate_epoch_config(five_dict)
-    assert five_dict.get(wx.epoch_label) == wx.five
-    assert five_dict.get(wx.c400_number) == five_c400_number
-    assert five_dict.get(wx.weekdays_config) == five_weekday_list
-    x_months_config = five_dict.get(wx.months_config)
+    assert five_dict.get(kw.epoch_label) == kw.five
+    assert five_dict.get(kw.c400_number) == five_c400_number
+    assert five_dict.get(kw.weekdays_config) == five_weekday_list
+    x_months_config = five_dict.get(kw.months_config)
     gen_months = [mon_config[0] for mon_config in x_months_config]
     assert gen_months == five_months_list
     assert x_months_config[0][0] == "Fredrick"
@@ -265,16 +265,16 @@ def test_epoch_config_shop_ReturnsObj_AllParameters():
     assert x_months_config[13][1] == 350
     assert x_months_config[14][0] == "Trump"
     assert x_months_config[14][1] == 365
-    x_hours_config = five_dict.get(wx.hours_config)
+    x_hours_config = five_dict.get(kw.hours_config)
     assert len(x_hours_config) == 20
     assert x_hours_config[0] == ["0hr", 72]
     assert x_hours_config[4] == ["4hr", 360]
-    assert five_dict.get(wx.yr1_jan1_offset) == five_yr1_jan1_offset
+    assert five_dict.get(kw.yr1_jan1_offset) == five_yr1_jan1_offset
 
-    # five_filename = f"epoch_config_{wx.five}.json"
-    expected_config = get_example_epoch_config(wx.five)
+    # five_filename = f"epoch_config_{kw.five}.json"
+    expected_config = get_example_epoch_config(kw.five)
     assert validate_epoch_config(expected_config)
-    assert expected_config.get(wx.hours_config) == x_hours_config
+    assert expected_config.get(kw.hours_config) == x_hours_config
     assert expected_config == five_dict
 
 
@@ -340,18 +340,18 @@ def test_epoch_config_shop_ReturnsObj_NoParameters():
     # THEN
     print(f"{generated_dict=}")
     print(f"{set(generated_dict.keys())=}")
-    print(f"{wx.epoch_label=}")
-    print(f"{generated_dict.get(wx.epoch_label)=}")
-    assert generated_dict.get(wx.c400_number) == h_c400_number
+    print(f"{kw.epoch_label=}")
+    print(f"{generated_dict.get(kw.epoch_label)=}")
+    assert generated_dict.get(kw.c400_number) == h_c400_number
 
-    assert generated_dict.get(wx.epoch_label) == h_epoch_label
-    assert generated_dict.get(wx.c400_number) == h_c400_number
-    assert generated_dict.get(wx.hours_config) == h_hours_config
-    assert generated_dict.get(wx.months_config) == h_months_config
-    assert generated_dict.get(wx.monthday_index) == h_monthday_index
-    assert generated_dict.get(wx.epoch_label) == h_epoch_label
-    assert generated_dict.get(wx.weekdays_config) == h_weekdays_config
-    assert generated_dict.get(wx.yr1_jan1_offset) == h_yr1_jan1_offset
+    assert generated_dict.get(kw.epoch_label) == h_epoch_label
+    assert generated_dict.get(kw.c400_number) == h_c400_number
+    assert generated_dict.get(kw.hours_config) == h_hours_config
+    assert generated_dict.get(kw.months_config) == h_months_config
+    assert generated_dict.get(kw.monthday_index) == h_monthday_index
+    assert generated_dict.get(kw.epoch_label) == h_epoch_label
+    assert generated_dict.get(kw.weekdays_config) == h_weekdays_config
+    assert generated_dict.get(kw.yr1_jan1_offset) == h_yr1_jan1_offset
     assert validate_epoch_config(generated_dict)
 
 
@@ -359,14 +359,14 @@ def test_get_year_rope_ReturnsObj():
     # ESTABLISH
     epoch_fay_str = "Fay34"
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(wx.time)
+    time_rope = sue_beliefunit.make_l1_rope(kw.time)
     fay_rope = sue_beliefunit.make_rope(time_rope, epoch_fay_str)
-    c400_leap_rope = sue_beliefunit.make_rope(fay_rope, wx.c400_leap)
-    c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, wx.c400_clean)
-    c100_rope = sue_beliefunit.make_rope(c400_clean_rope, wx.c100)
-    yr4_leap_rope = sue_beliefunit.make_rope(c100_rope, wx.yr4_leap)
-    yr4_clean_rope = sue_beliefunit.make_rope(yr4_leap_rope, wx.yr4_clean)
-    year_rope = sue_beliefunit.make_rope(yr4_clean_rope, wx.year)
+    c400_leap_rope = sue_beliefunit.make_rope(fay_rope, kw.c400_leap)
+    c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, kw.c400_clean)
+    c100_rope = sue_beliefunit.make_rope(c400_clean_rope, kw.c100)
+    yr4_leap_rope = sue_beliefunit.make_rope(c100_rope, kw.yr4_leap)
+    yr4_clean_rope = sue_beliefunit.make_rope(yr4_leap_rope, kw.yr4_clean)
+    year_rope = sue_beliefunit.make_rope(yr4_clean_rope, kw.year)
 
     # WHEN / THEN
     assert year_rope == get_year_rope(sue_beliefunit, epoch_fay_str)
@@ -376,9 +376,9 @@ def test_get_week_rope_ReturnsObj():
     # ESTABLISH
     epoch_fay_str = "Fay34"
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(wx.time)
+    time_rope = sue_beliefunit.make_l1_rope(kw.time)
     fay_rope = sue_beliefunit.make_rope(time_rope, epoch_fay_str)
-    week_rope = sue_beliefunit.make_rope(fay_rope, wx.week)
+    week_rope = sue_beliefunit.make_rope(fay_rope, kw.week)
 
     # WHEN / THEN
     assert week_rope == get_week_rope(sue_beliefunit, epoch_fay_str)
@@ -388,9 +388,9 @@ def test_get_day_rope_ReturnsObj():
     # ESTABLISH
     epoch_fay_str = "Fay34"
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(wx.time)
+    time_rope = sue_beliefunit.make_l1_rope(kw.time)
     fay_rope = sue_beliefunit.make_rope(time_rope, epoch_fay_str)
-    day_rope = sue_beliefunit.make_rope(fay_rope, wx.day)
+    day_rope = sue_beliefunit.make_rope(fay_rope, kw.day)
 
     # WHEN / THEN
     assert day_rope == get_day_rope(sue_beliefunit, epoch_fay_str)
@@ -419,13 +419,13 @@ def test_epochunit_shop_ReturnsObj_Scenario0_Default():
     x_epochunit = epochunit_shop()
 
     # THEN
-    creg_c400_number = creg_config.get(wx.c400_number)
-    creg_hours_config = creg_config.get(wx.hours_config)
-    creg_months_config = creg_config.get(wx.months_config)
-    creg_epoch_label = creg_config.get(wx.epoch_label)
-    creg_weekdays_config = creg_config.get(wx.weekdays_config)
-    creg_monthday_index = creg_config.get(wx.monthday_index)
-    creg_yr1_jan1_offset = creg_config.get(wx.yr1_jan1_offset)
+    creg_c400_number = creg_config.get(kw.c400_number)
+    creg_hours_config = creg_config.get(kw.hours_config)
+    creg_months_config = creg_config.get(kw.months_config)
+    creg_epoch_label = creg_config.get(kw.epoch_label)
+    creg_weekdays_config = creg_config.get(kw.weekdays_config)
+    creg_monthday_index = creg_config.get(kw.monthday_index)
+    creg_yr1_jan1_offset = creg_config.get(kw.yr1_jan1_offset)
 
     assert x_epochunit
     assert x_epochunit.c400_number == creg_c400_number
@@ -440,12 +440,12 @@ def test_epochunit_shop_ReturnsObj_Scenario0_Default():
 def test_epochunit_shop_ReturnsObj_Scenario1_WhenEpochUnitAttributesAreNone():
     # ESTABLISH
     incomplete_creg_config = get_creg_config()
-    incomplete_creg_config.pop(wx.c400_number)
-    incomplete_creg_config.pop(wx.hours_config)
-    incomplete_creg_config.pop(wx.months_config)
-    incomplete_creg_config.pop(wx.monthday_index)
-    incomplete_creg_config.pop(wx.weekdays_config)
-    incomplete_creg_config.pop(wx.yr1_jan1_offset)
+    incomplete_creg_config.pop(kw.c400_number)
+    incomplete_creg_config.pop(kw.hours_config)
+    incomplete_creg_config.pop(kw.months_config)
+    incomplete_creg_config.pop(kw.monthday_index)
+    incomplete_creg_config.pop(kw.weekdays_config)
+    incomplete_creg_config.pop(kw.yr1_jan1_offset)
     assert incomplete_creg_config
 
     # WHEN
@@ -453,13 +453,13 @@ def test_epochunit_shop_ReturnsObj_Scenario1_WhenEpochUnitAttributesAreNone():
 
     # THEN
     creg_config = get_creg_config()
-    creg_c400_number = creg_config.get(wx.c400_number)
-    creg_hours_config = creg_config.get(wx.hours_config)
-    creg_months_config = creg_config.get(wx.months_config)
-    creg_epoch_label = creg_config.get(wx.epoch_label)
-    creg_weekdays_config = creg_config.get(wx.weekdays_config)
-    creg_monthday_index = creg_config.get(wx.monthday_index)
-    creg_yr1_jan1_offset = creg_config.get(wx.yr1_jan1_offset)
+    creg_c400_number = creg_config.get(kw.c400_number)
+    creg_hours_config = creg_config.get(kw.hours_config)
+    creg_months_config = creg_config.get(kw.months_config)
+    creg_epoch_label = creg_config.get(kw.epoch_label)
+    creg_weekdays_config = creg_config.get(kw.weekdays_config)
+    creg_monthday_index = creg_config.get(kw.monthday_index)
+    creg_yr1_jan1_offset = creg_config.get(kw.yr1_jan1_offset)
 
     assert x_epochunit
     assert x_epochunit.c400_number == creg_c400_number
@@ -474,8 +474,8 @@ def test_epochunit_shop_ReturnsObj_Scenario1_WhenEpochUnitAttributesAreNone():
 def test_epochunit_shop_ReturnsObj_Scenario2_epoch_label_Missing():
     # ESTABLISH
     incomplete_creg_config = get_creg_config()
-    incomplete_creg_config.pop(wx.epoch_label)
-    incomplete_creg_config.pop(wx.hours_config)
+    incomplete_creg_config.pop(kw.epoch_label)
+    incomplete_creg_config.pop(kw.hours_config)
     assert incomplete_creg_config
 
     # WHEN
@@ -483,13 +483,13 @@ def test_epochunit_shop_ReturnsObj_Scenario2_epoch_label_Missing():
 
     # THEN
     creg_config = get_creg_config()
-    creg_c400_number = creg_config.get(wx.c400_number)
-    creg_hours_config = creg_config.get(wx.hours_config)
-    creg_months_config = creg_config.get(wx.months_config)
-    creg_epoch_label = creg_config.get(wx.epoch_label)
-    creg_weekdays_config = creg_config.get(wx.weekdays_config)
-    creg_monthday_index = creg_config.get(wx.monthday_index)
-    creg_yr1_jan1_offset = creg_config.get(wx.yr1_jan1_offset)
+    creg_c400_number = creg_config.get(kw.c400_number)
+    creg_hours_config = creg_config.get(kw.hours_config)
+    creg_months_config = creg_config.get(kw.months_config)
+    creg_epoch_label = creg_config.get(kw.epoch_label)
+    creg_weekdays_config = creg_config.get(kw.weekdays_config)
+    creg_monthday_index = creg_config.get(kw.monthday_index)
+    creg_yr1_jan1_offset = creg_config.get(kw.yr1_jan1_offset)
 
     assert x_epochunit
     assert x_epochunit.c400_number == creg_c400_number

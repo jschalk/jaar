@@ -28,7 +28,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_heard_tables,
 )
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoMomentUnits(
@@ -117,11 +117,11 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_TranslateRowsInDB(
     with sqlite3_connect(world_db_path) as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        trlname_dimen = wx.translate_name
+        trlname_dimen = kw.translate_name
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
-        ({wx.spark_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
+        ({kw.spark_num}, {kw.face_name}, {kw.otx_name}, {kw.inx_name})
         VALUES
           ({spark1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
         , ({spark7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
@@ -131,7 +131,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_TranslateRowsInDB(
 
         trlcore_s_vld_tablename = prime_tbl("trlcore", "s", "vld")
         insert_trlcore_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename}
-        ({wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
+        ({kw.face_name}, {kw.otx_knot}, {kw.inx_knot}, {kw.unknown_str})
         VALUES
           ('{sue_otx}', '{slash_str}', '{colon_str}', '{sue_unknown_str}')
         , ('{bob_otx}', '{slash_str}', '{colon_str}', '{bob_unknown_str}')
@@ -221,11 +221,11 @@ def test_create_stance0001_file_CreatesFile_Scenario1_TranslateRowsInDB(
     with sqlite3_connect(world_db_path) as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        trlname_dimen = wx.translate_name
+        trlname_dimen = kw.translate_name
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
-        ({wx.spark_num}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
+        ({kw.spark_num}, {kw.face_name}, {kw.otx_name}, {kw.inx_name})
         VALUES
           ({spark1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
         , ({spark7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
@@ -235,7 +235,7 @@ def test_create_stance0001_file_CreatesFile_Scenario1_TranslateRowsInDB(
 
         trlcore_s_vld_tablename = prime_tbl("trlcore", "s", "vld")
         insert_trlcore_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename}
-        ({wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
+        ({kw.face_name}, {kw.otx_knot}, {kw.inx_knot}, {kw.unknown_str})
         VALUES
           ('{sue_otx}', '{slash_str}', '{colon_str}', '{sue_unknown_str}')
         , ('{bob_otx}', '{slash_str}', '{colon_str}', '{bob_unknown_str}')

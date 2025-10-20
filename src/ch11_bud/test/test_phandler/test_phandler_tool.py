@@ -47,7 +47,7 @@ from src.ch11_bud.test._util.ch11_examples import (
     get_budunit_55_example,
     get_budunit_invalid_example,
 )
-from src.ref.keywords import Ch11Keywords as wx
+from src.ref.keywords import Ch11Keywords as kw
 
 
 def test_save_belief_file_SetsFile(env_dir_setup_cleanup):
@@ -391,12 +391,12 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     print(f"{sue7_cell_path=}")
     assert os_path_exists(sue7_cell_path)
     generated_cell_dict = open_json(sue7_cell_path)
-    assert generated_cell_dict.get(wx.ancestors) == das
-    assert generated_cell_dict.get(wx.spark_num) == spark3
-    assert generated_cell_dict.get(wx.celldepth) == celldepth4
-    assert generated_cell_dict.get(wx.bud_belief_name) == sue_str
-    assert generated_cell_dict.get(wx.money_grain) == money_grain6
-    assert generated_cell_dict.get(wx.quota) == quota500
+    assert generated_cell_dict.get(kw.ancestors) == das
+    assert generated_cell_dict.get(kw.spark_num) == spark3
+    assert generated_cell_dict.get(kw.celldepth) == celldepth4
+    assert generated_cell_dict.get(kw.bud_belief_name) == sue_str
+    assert generated_cell_dict.get(kw.money_grain) == money_grain6
+    assert generated_cell_dict.get(kw.quota) == quota500
 
 
 def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
@@ -422,12 +422,12 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
     print(f"{sue7_cell_path=}")
     assert os_path_exists(sue7_cell_path)
     generated_cell_dict = open_json(sue7_cell_path)
-    assert generated_cell_dict.get(wx.ancestors) == das
-    assert generated_cell_dict.get(wx.spark_num) == spark3
-    assert generated_cell_dict.get(wx.celldepth) == 0
-    assert generated_cell_dict.get(wx.bud_belief_name) == sue_str
-    assert generated_cell_dict.get(wx.money_grain) == 1
-    assert generated_cell_dict.get(wx.quota) == CELLNODE_QUOTA_DEFAULT
+    assert generated_cell_dict.get(kw.ancestors) == das
+    assert generated_cell_dict.get(kw.spark_num) == spark3
+    assert generated_cell_dict.get(kw.celldepth) == 0
+    assert generated_cell_dict.get(kw.bud_belief_name) == sue_str
+    assert generated_cell_dict.get(kw.money_grain) == 1
+    assert generated_cell_dict.get(kw.quota) == CELLNODE_QUOTA_DEFAULT
 
 
 def test_cellunit_get_from_dir_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_cleanup):

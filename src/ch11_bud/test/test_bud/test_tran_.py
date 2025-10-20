@@ -6,7 +6,7 @@ from src.ch11_bud.bud_main import (
     tranbook_shop,
     tranunit_shop,
 )
-from src.ref.keywords import Ch11Keywords as wx
+from src.ref.keywords import Ch11Keywords as kw
 
 
 def test_TranUnit_Exists():
@@ -617,8 +617,8 @@ def test_TranBook_to_dict_ReturnsObj():
     # THEN
     tranunits_str = "tranunits"
     assert x_dict
-    assert wx.moment_label in x_dict.keys()
-    assert x_dict.get(wx.moment_label) == amy23_str
+    assert kw.moment_label in x_dict.keys()
+    assert x_dict.get(kw.moment_label) == amy23_str
     assert tranunits_str in x_dict.keys()
     tranunits_dict = x_dict.get(tranunits_str)
     assert tranunits_dict.get(sue_str)
@@ -685,7 +685,7 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
     amy23_tranbook.add_tranunit(yao_str, yao_str, t77_tran_time, t77_yao_amount)
 
     str_tran_time_amy23_dict = {
-        wx.moment_label: amy23_str,
+        kw.moment_label: amy23_str,
         "tranunits": {
             sue_str: {
                 yao_str: {

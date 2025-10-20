@@ -6,7 +6,7 @@ from src.ch07_belief_logic.belief_report import (
 from src.ch07_belief_logic.test._util.ch07_examples import (
     beliefunit_v001_with_large_agenda,
 )
-from src.ref.keywords import Ch07Keywords as wx
+from src.ref.keywords import Ch07Keywords as kw
 
 
 def test_get_belief_voiceunits_dataframe_ReturnsDataFrame():
@@ -81,16 +81,16 @@ def test_get_belief_agenda_dataframe_ReturnsDataFrame():
 
     # THEN
     voiceunit_colums = {
-        wx.belief_name,
+        kw.belief_name,
         "fund_ratio",
-        wx.plan_label,
-        wx.parent_rope,
-        wx.begin,
-        wx.close,
-        wx.addin,
-        wx.denom,
-        wx.numor,
-        wx.morph,
+        kw.plan_label,
+        kw.parent_rope,
+        kw.begin,
+        kw.close,
+        kw.addin,
+        kw.denom,
+        kw.numor,
+        kw.morph,
     }
     print(f"{set(x_df.columns)=}")
 
@@ -109,16 +109,16 @@ def test_get_belief_agenda_dataframe_ReturnsEmptyDataFrame():
 
     # THEN
     voiceunit_colums = {
-        wx.belief_name,
+        kw.belief_name,
         "fund_ratio",
-        wx.plan_label,
-        wx.parent_rope,
-        wx.begin,
-        wx.close,
-        wx.addin,
-        wx.denom,
-        wx.numor,
-        wx.morph,
+        kw.plan_label,
+        kw.parent_rope,
+        kw.begin,
+        kw.close,
+        kw.addin,
+        kw.denom,
+        kw.numor,
+        kw.morph,
     }
     print(f"{set(x_df.columns)=}")
 

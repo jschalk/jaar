@@ -11,7 +11,7 @@ from src.ch18_world_etl.test._util.ch18_env import (
 )
 from src.ch18_world_etl.tran_sqlstrs import create_prime_tablename
 from src.ch18_world_etl.transformers import etl_spark_belief_csvs_to_lesson_json
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_etl_spark_belief_csvs_to_lesson_json_CreatesFiles_Scenario0_IgnoresCSV_beliefunit(
@@ -22,14 +22,14 @@ def test_etl_spark_belief_csvs_to_lesson_json_CreatesFiles_Scenario0_IgnoresCSV_
     bob_inx = "Bobby"
     spark3 = 3
     a23_str = "amy23"
-    put_agg_tablename = create_prime_tablename(wx.beliefunit, "h", "agg", "put")
+    put_agg_tablename = create_prime_tablename(kw.beliefunit, "h", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     moment_mstr_dir = get_chapter_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
     # a23_bob_e3_dir = create_path(a23_bob_dir, spark3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, spark7)
     a23_bob_e3_dir = belief_spark_dir(moment_mstr_dir, a23_str, bob_inx, spark3)
-    e3_put_csv = f"""{wx.spark_num},{wx.face_name},moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_grain,money_grain,respect_grain
+    e3_put_csv = f"""{kw.spark_num},{kw.face_name},moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_grain,money_grain,respect_grain
 {spark3},{sue_inx},{a23_str},{bob_inx},,,,,,,,
 """
     save_file(a23_bob_e3_dir, put_agg_csv_filename, e3_put_csv)
@@ -63,7 +63,7 @@ def test_etl_spark_belief_csvs_to_lesson_json_CreatesFiles_Scenario1(
     credit88 = 88
     debt_empty = ""
     a23_str = "amy23"
-    blrpern_str = wx.belief_voiceunit
+    blrpern_str = kw.belief_voiceunit
     put_agg_tablename = create_prime_tablename(blrpern_str, "h", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     moment_mstr_dir = get_chapter_temp_dir()
@@ -72,10 +72,10 @@ def test_etl_spark_belief_csvs_to_lesson_json_CreatesFiles_Scenario1(
     # a23_bob_e7_dir = create_path(a23_bob_dir, spark7)
     a23_bob_e3_dir = belief_spark_dir(moment_mstr_dir, a23_str, bob_inx, spark3)
     a23_bob_e7_dir = belief_spark_dir(moment_mstr_dir, a23_str, bob_inx, spark7)
-    e3_put_csv = f"""{wx.spark_num},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_lumen},{wx.voice_debt_lumen}
+    e3_put_csv = f"""{kw.spark_num},{kw.face_name},{kw.moment_label},{kw.belief_name},{kw.voice_name},{kw.voice_cred_lumen},{kw.voice_debt_lumen}
 {spark3},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
 """
-    e7_put_csv = f"""{wx.spark_num},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_lumen},{wx.voice_debt_lumen}
+    e7_put_csv = f"""{kw.spark_num},{kw.face_name},{kw.moment_label},{kw.belief_name},{kw.voice_name},{kw.voice_cred_lumen},{kw.voice_debt_lumen}
 {spark7},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
 {spark7},{sue_inx},{a23_str},{bob_inx},{sue_inx},{credit88},{debt_empty}
 """
@@ -104,24 +104,24 @@ def test_etl_spark_belief_csvs_to_lesson_json_CreatesFiles_Scenario1(
     # e7_lesson = lessonunit_shop(bob_inx, sue_inx, a23_str, lessons_dir, atoms_dir, spark7)
     expected_e3_lesson = lessonunit_shop(bob_inx, None, a23_str, spark_num=spark3)
     expected_e7_lesson = lessonunit_shop(bob_inx, None, a23_str, spark_num=spark7)
-    blrpern_dimen = wx.belief_voiceunit
+    blrpern_dimen = kw.belief_voiceunit
     expected_e3_lesson._beliefdelta.add_beliefatom(
         blrpern_dimen,
-        wx.INSERT,
-        jkeys={wx.voice_name: bob_inx},
-        jvalues={wx.voice_cred_lumen: credit77, wx.voice_debt_lumen: None},
+        kw.INSERT,
+        jkeys={kw.voice_name: bob_inx},
+        jvalues={kw.voice_cred_lumen: credit77, kw.voice_debt_lumen: None},
     )
     expected_e7_lesson._beliefdelta.add_beliefatom(
         blrpern_dimen,
-        wx.INSERT,
-        jkeys={wx.voice_name: bob_inx},
-        jvalues={wx.voice_cred_lumen: credit77, wx.voice_debt_lumen: None},
+        kw.INSERT,
+        jkeys={kw.voice_name: bob_inx},
+        jvalues={kw.voice_cred_lumen: credit77, kw.voice_debt_lumen: None},
     )
     expected_e7_lesson._beliefdelta.add_beliefatom(
         blrpern_dimen,
-        wx.INSERT,
-        jkeys={wx.voice_name: sue_inx},
-        jvalues={wx.voice_cred_lumen: credit88, wx.voice_debt_lumen: None},
+        kw.INSERT,
+        jkeys={kw.voice_name: sue_inx},
+        jvalues={kw.voice_cred_lumen: credit88, kw.voice_debt_lumen: None},
     )
     e3_lessonunit = get_lessonunit_from_dict(open_json(e3_all_lesson_path))
     e7_lessonunit = get_lessonunit_from_dict(open_json(e7_all_lesson_path))

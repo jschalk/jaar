@@ -219,12 +219,12 @@
       }
     }, 
     "jvalues": {
-      "parent_heir_active": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
       "active_requisite": {
         "class_type": "bool", 
         "populate_by_cashout": false, 
         "sqlite_datatype": "INTEGER"
       }, 
+      "parent_heir_active": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
       "reason_active": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
       "task": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}
     }
@@ -249,7 +249,6 @@
       }
     }, 
     "jvalues": {
-      "plan_active": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
       "addin": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
       "all_voice_cred": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
       "all_voice_debt": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
@@ -278,6 +277,7 @@
         "populate_by_cashout": false, 
         "sqlite_datatype": "INTEGER"
       }, 
+      "plan_active": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}, 
       "pledge": {
         "class_type": "bool", 
         "populate_by_cashout": false, 

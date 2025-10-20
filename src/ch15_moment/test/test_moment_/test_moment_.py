@@ -24,7 +24,7 @@ from src.ch15_moment.test._util.ch15_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ref.keywords import Ch15Keywords as wx
+from src.ref.keywords import Ch15Keywords as kw
 
 
 def test_get_default_job_listen_count_ReturnsObj():
@@ -53,20 +53,20 @@ def test_MomentUnit_Exists():
     assert not amy_moment._lessons_dir
     assert not amy_moment.all_tranbook
     assert set(amy_moment.__dict__) == {
-        wx.moment_label,
-        wx.epoch,
-        wx.beliefbudhistorys,
-        wx.paybook,
-        wx.knot,
-        wx.fund_grain,
-        wx.respect_grain,
-        wx.money_grain,
-        wx.job_listen_rotations,
+        kw.moment_label,
+        kw.epoch,
+        kw.beliefbudhistorys,
+        kw.paybook,
+        kw.knot,
+        kw.fund_grain,
+        kw.respect_grain,
+        kw.money_grain,
+        kw.job_listen_rotations,
         "_moment_dir",
         "moment_mstr_dir",
-        wx.offi_times,
-        wx.all_tranbook,
-        wx.offi_time_max,
+        kw.offi_times,
+        kw.all_tranbook,
+        kw.offi_time_max,
         "_beliefs_dir",
         "_lessons_dir",
     }

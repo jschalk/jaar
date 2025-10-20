@@ -11,7 +11,7 @@ from src.ch15_moment.test._util.ch15_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ref.keywords import Ch15Keywords as wx
+from src.ref.keywords import Ch15Keywords as kw
 
 
 def test_get_ote1_max_past_spark_num_ReturnsObj_Scenaro0(
@@ -80,10 +80,10 @@ def test_MomentUnit_create_buds_root_cells_Scenaro1_BudExists(
     assert os_path_exists(tp37_cell_json_path)
     cell_dict = open_json(tp37_cell_json_path)
     print(f"{cell_dict=}")
-    assert cell_dict.get(wx.celldepth) == DEFAULT_CELLDEPTH
-    assert cell_dict.get(wx.bud_belief_name) == bob_str
-    assert cell_dict.get(wx.quota) == bud1_quota
-    assert cell_dict.get(wx.spark_num) == spark3
+    assert cell_dict.get(kw.celldepth) == DEFAULT_CELLDEPTH
+    assert cell_dict.get(kw.bud_belief_name) == bob_str
+    assert cell_dict.get(kw.quota) == bud1_quota
+    assert cell_dict.get(kw.spark_num) == spark3
 
 
 def test_MomentUnit_create_buds_root_cells_Scenaro2_BudExistsButNoBeliefExistsInSparksPast(
@@ -119,11 +119,11 @@ def test_MomentUnit_create_buds_root_cells_Scenaro2_BudExistsButNoBeliefExistsIn
     assert os_path_exists(tp37_cell_json_path)
     cell_dict = open_json(tp37_cell_json_path)
     print(f"{cell_dict=}")
-    assert cell_dict.get(wx.ancestors) == []
-    assert not cell_dict.get(wx.spark_num)
-    assert cell_dict.get(wx.celldepth) == DEFAULT_CELLDEPTH
-    assert cell_dict.get(wx.bud_belief_name) == bob_str
-    assert cell_dict.get(wx.quota) == bud1_quota
+    assert cell_dict.get(kw.ancestors) == []
+    assert not cell_dict.get(kw.spark_num)
+    assert cell_dict.get(kw.celldepth) == DEFAULT_CELLDEPTH
+    assert cell_dict.get(kw.bud_belief_name) == bob_str
+    assert cell_dict.get(kw.quota) == bud1_quota
 
 
 def test_MomentUnit_create_buds_root_cells_Scenaro3_BudExistsNotPerfectMatch_bud_time_spark_num(
@@ -163,9 +163,9 @@ def test_MomentUnit_create_buds_root_cells_Scenaro3_BudExistsNotPerfectMatch_bud
     # THEN
     assert os_path_exists(tp37_cell_json_path)
     cell_dict = open_json(tp37_cell_json_path)
-    assert cell_dict.get(wx.ancestors) == []
-    assert cell_dict.get(wx.spark_num) == spark3
-    assert cell_dict.get(wx.celldepth) == bud1_celldepth
-    assert cell_dict.get(wx.bud_belief_name) == bob_str
-    assert cell_dict.get(wx.money_grain) == a23_money_grain
-    assert cell_dict.get(wx.quota) == bud1_quota
+    assert cell_dict.get(kw.ancestors) == []
+    assert cell_dict.get(kw.spark_num) == spark3
+    assert cell_dict.get(kw.celldepth) == bud1_celldepth
+    assert cell_dict.get(kw.bud_belief_name) == bob_str
+    assert cell_dict.get(kw.money_grain) == a23_money_grain
+    assert cell_dict.get(kw.quota) == bud1_quota

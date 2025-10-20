@@ -2,19 +2,19 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom.atom_main import beliefatom_shop
 from src.ch10_lesson.delta import beliefdelta_shop
 from src.ch10_lesson.legible import create_legible_list
-from src.ref.keywords import Ch10Keywords as wx
+from src.ref.keywords import Ch10Keywords as kw
 
 
 def test_create_legible_list_ReturnsObj_voiceunit_INSERT():
     # ESTABLISH
-    dimen = wx.belief_voiceunit
+    dimen = kw.belief_voiceunit
     voice_cred_lumen_value = 81
     voice_debt_lumen_value = 43
     yao_str = "Yao"
-    yao_beliefatom = beliefatom_shop(dimen, wx.INSERT)
-    yao_beliefatom.set_arg(wx.voice_name, yao_str)
-    yao_beliefatom.set_arg(wx.voice_cred_lumen, voice_cred_lumen_value)
-    yao_beliefatom.set_arg(wx.voice_debt_lumen, voice_debt_lumen_value)
+    yao_beliefatom = beliefatom_shop(dimen, kw.INSERT)
+    yao_beliefatom.set_arg(kw.voice_name, yao_str)
+    yao_beliefatom.set_arg(kw.voice_cred_lumen, voice_cred_lumen_value)
+    yao_beliefatom.set_arg(kw.voice_debt_lumen, voice_debt_lumen_value)
     # print(f"{yao_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(yao_beliefatom)
@@ -31,14 +31,14 @@ def test_create_legible_list_ReturnsObj_voiceunit_INSERT():
 
 def test_create_legible_list_ReturnsObj_voiceunit_INSERT_score():
     # ESTABLISH
-    dimen = wx.belief_voiceunit
+    dimen = kw.belief_voiceunit
     voice_cred_lumen_value = 81
     voice_debt_lumen_value = 43
     yao_str = "Yao"
-    yao_beliefatom = beliefatom_shop(dimen, wx.INSERT)
-    yao_beliefatom.set_arg(wx.voice_name, yao_str)
-    yao_beliefatom.set_arg(wx.voice_cred_lumen, voice_cred_lumen_value)
-    yao_beliefatom.set_arg(wx.voice_debt_lumen, voice_debt_lumen_value)
+    yao_beliefatom = beliefatom_shop(dimen, kw.INSERT)
+    yao_beliefatom.set_arg(kw.voice_name, yao_str)
+    yao_beliefatom.set_arg(kw.voice_cred_lumen, voice_cred_lumen_value)
+    yao_beliefatom.set_arg(kw.voice_debt_lumen, voice_debt_lumen_value)
     # print(f"{yao_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(yao_beliefatom)
@@ -55,14 +55,14 @@ def test_create_legible_list_ReturnsObj_voiceunit_INSERT_score():
 
 def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_cred_lumen_voice_debt_lumen():
     # ESTABLISH
-    dimen = wx.belief_voiceunit
+    dimen = kw.belief_voiceunit
     voice_cred_lumen_value = 81
     voice_debt_lumen_value = 43
     yao_str = "Yao"
-    yao_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
-    yao_beliefatom.set_arg(wx.voice_name, yao_str)
-    yao_beliefatom.set_arg(wx.voice_cred_lumen, voice_cred_lumen_value)
-    yao_beliefatom.set_arg(wx.voice_debt_lumen, voice_debt_lumen_value)
+    yao_beliefatom = beliefatom_shop(dimen, kw.UPDATE)
+    yao_beliefatom.set_arg(kw.voice_name, yao_str)
+    yao_beliefatom.set_arg(kw.voice_cred_lumen, voice_cred_lumen_value)
+    yao_beliefatom.set_arg(kw.voice_debt_lumen, voice_debt_lumen_value)
     # print(f"{yao_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(yao_beliefatom)
@@ -79,12 +79,12 @@ def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_cred_lumen_voice_
 
 def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_cred_lumen():
     # ESTABLISH
-    dimen = wx.belief_voiceunit
+    dimen = kw.belief_voiceunit
     voice_cred_lumen_value = 81
     yao_str = "Yao"
-    yao_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
-    yao_beliefatom.set_arg(wx.voice_name, yao_str)
-    yao_beliefatom.set_arg(wx.voice_cred_lumen, voice_cred_lumen_value)
+    yao_beliefatom = beliefatom_shop(dimen, kw.UPDATE)
+    yao_beliefatom.set_arg(kw.voice_name, yao_str)
+    yao_beliefatom.set_arg(kw.voice_cred_lumen, voice_cred_lumen_value)
     # print(f"{yao_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(yao_beliefatom)
@@ -101,12 +101,12 @@ def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_cred_lumen():
 
 def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_debt_lumen():
     # ESTABLISH
-    dimen = wx.belief_voiceunit
+    dimen = kw.belief_voiceunit
     voice_debt_lumen_value = 43
     yao_str = "Yao"
-    yao_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
-    yao_beliefatom.set_arg(wx.voice_name, yao_str)
-    yao_beliefatom.set_arg(wx.voice_debt_lumen, voice_debt_lumen_value)
+    yao_beliefatom = beliefatom_shop(dimen, kw.UPDATE)
+    yao_beliefatom.set_arg(kw.voice_name, yao_str)
+    yao_beliefatom.set_arg(kw.voice_debt_lumen, voice_debt_lumen_value)
     # print(f"{yao_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(yao_beliefatom)
@@ -123,10 +123,10 @@ def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_debt_lumen():
 
 def test_create_legible_list_ReturnsObj_voiceunit_DELETE():
     # ESTABLISH
-    dimen = wx.belief_voiceunit
+    dimen = kw.belief_voiceunit
     yao_str = "Yao"
-    yao_beliefatom = beliefatom_shop(dimen, wx.DELETE)
-    yao_beliefatom.set_arg(wx.voice_name, yao_str)
+    yao_beliefatom = beliefatom_shop(dimen, kw.DELETE)
+    yao_beliefatom.set_arg(kw.voice_name, yao_str)
     # print(f"{yao_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(yao_beliefatom)

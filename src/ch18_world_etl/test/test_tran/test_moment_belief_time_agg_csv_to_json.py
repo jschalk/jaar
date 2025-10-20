@@ -9,7 +9,7 @@ from src.ch18_world_etl.test._util.ch18_env import (
     get_chapter_temp_dir,
 )
 from src.ch18_world_etl.transformers import etl_moment_ote1_agg_csvs_to_jsons
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_etl_moment_ote1_agg_csvs_to_jsons_CreatesFile_Scenaro0(
@@ -27,10 +27,10 @@ def test_etl_moment_ote1_agg_csvs_to_jsons_CreatesFile_Scenaro0(
     moment_mstr_dir = get_chapter_temp_dir()
     a23_spark_time_p = create_moment_ote1_csv_path(moment_mstr_dir, amy23_str)
     a45_spark_time_p = create_moment_ote1_csv_path(moment_mstr_dir, amy45_str)
-    a23_spark_time_csv = f"""{wx.moment_label},{wx.belief_name},{wx.spark_num},{wx.bud_time},{wx.error_message}
+    a23_spark_time_csv = f"""{kw.moment_label},{kw.belief_name},{kw.spark_num},{kw.bud_time},{kw.error_message}
 {amy23_str},{bob_str},{spark3},{timepoint55},
 """
-    a45_spark_time_csv = f"""{wx.moment_label},{wx.belief_name},{wx.spark_num},{wx.bud_time},{wx.error_message}
+    a45_spark_time_csv = f"""{kw.moment_label},{kw.belief_name},{kw.spark_num},{kw.bud_time},{kw.error_message}
 {amy45_str},{sue_str},{spark3},{timepoint55},
 {amy45_str},{sue_str},{spark7},{timepoint66},
 """

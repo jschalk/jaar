@@ -11,6 +11,7 @@ from src.ch02_rope.rope import (
     all_ropes_between,
     create_rope,
     find_replace_rope_key_dict,
+    get_tail_label,
     is_sub_rope,
     rebuild_rope,
     replace_knot,
@@ -823,7 +824,7 @@ class PlanUnit:
                 active_bool = False
         return active_bool
 
-    def set_range_factheirs(
+    def set_range_inheritors_factheirs(
         self,
         belief_plan_dict: dict[RopeTerm,],
         range_inheritors: dict[RopeTerm, RopeTerm],
@@ -831,24 +832,24 @@ class PlanUnit:
         for reason_context in self.reasonheirs.keys():
             if rangeroot_rope := range_inheritors.get(reason_context):
                 all_plans = all_plans_between(
-                    belief_plan_dict, rangeroot_rope, reason_context, self.knot
+                    belief_plan_dict=belief_plan_dict,
+                    src_rope=rangeroot_rope,
+                    dst_reason_context=reason_context,
+                    knot=self.knot,
                 )
-                self._create_factheir(all_plans, rangeroot_rope, reason_context)
+                self._set_range_inheritor_factheir(
+                    all_plans=all_plans,
+                    rangeroot_rope=rangeroot_rope,
+                    fact_context=reason_context,
+                )
 
-    def _create_factheir(
-        self, all_plans: list, rangeroot_rope: RopeTerm, reason_context: RopeTerm
+    def _set_range_inheritor_factheir(
+        self, all_plans: list, rangeroot_rope: RopeTerm, fact_context: RopeTerm
     ):
-        rangeroot_factheir = self.factheirs.get(rangeroot_rope)
-        old_reason_lower = rangeroot_factheir.fact_lower
-        old_reason_upper = rangeroot_factheir.fact_upper
-        x_rangeunit = plans_calculated_range(
-            all_plans, old_reason_lower, old_reason_upper
-        )
-        new_factheir_reason_lower = x_rangeunit.gogo
-        new_factheir_reason_upper = x_rangeunit.stop
-        new_factheir_obj = factheir_shop(reason_context)
-        new_factheir_obj.set_attr(
-            reason_context, new_factheir_reason_lower, new_factheir_reason_upper
+        new_factheir_obj = create_range_inheritor_factheir(
+            rangeroot_factheir=self.factheirs.get(rangeroot_rope),
+            all_plans=all_plans,
+            fact_context=fact_context,
         )
         self._set_factheir(new_factheir_obj)
 
@@ -1142,7 +1143,7 @@ def all_plans_between(
     return [belief_plan_dict.get(x_rope) for x_rope in all_ropes]
 
 
-def plans_calculated_range(
+def get_rangeunit_from_lineage_of_plans(
     plan_list: list[PlanUnit], x_gogo: float, x_stop: float
 ) -> RangeUnit:
     for x_plan in plan_list:
@@ -1157,3 +1158,19 @@ def plans_calculated_range(
             x_gogo = x_rangeunit.gogo
             x_stop = x_rangeunit.stop
     return RangeUnit(x_gogo, x_stop)
+
+
+def create_range_inheritor_factheir(
+    rangeroot_factheir: FactHeir, all_plans: list[PlanUnit], fact_context: RopeTerm
+) -> FactHeir:
+    x_rangeunit = get_rangeunit_from_lineage_of_plans(
+        plan_list=all_plans,
+        x_gogo=rangeroot_factheir.fact_lower,
+        x_stop=rangeroot_factheir.fact_upper,
+    )
+    return factheir_shop(
+        fact_context=fact_context,
+        fact_state=fact_context,
+        fact_lower=x_rangeunit.gogo,
+        fact_upper=x_rangeunit.stop,
+    )

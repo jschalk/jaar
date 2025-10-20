@@ -9,7 +9,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     get_insert_heard_agg_sqlstrs,
 )
 from src.ch18_world_etl.transformers import etl_heard_raw_tables_to_heard_agg_tables
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_get_insert_heard_agg_sqlstrs_ReturnsObj_CheckMomentDimen():
@@ -23,7 +23,7 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_CheckMomentDimen():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(wx.idea_category) == "moment"
+        if dimen_config.get(kw.idea_category) == "moment"
     }
     with sqlite3_connect(":memory:") as moment_db_conn:
         cursor = moment_db_conn.cursor()
@@ -36,9 +36,9 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_CheckMomentDimen():
             raw_columns = get_table_columns(cursor, raw_tablename)
             agg_columns = get_table_columns(cursor, agg_tablename)
             raw_columns = {raw_col for raw_col in raw_columns if raw_col[-3:] != "otx"}
-            raw_columns.remove(f"{wx.face_name}_inx")
-            raw_columns.remove(wx.spark_num)
-            raw_columns.remove(wx.error_message)
+            raw_columns.remove(f"{kw.face_name}_inx")
+            raw_columns.remove(kw.spark_num)
+            raw_columns.remove(kw.error_message)
             raw_columns = get_default_sorted_list(raw_columns)
 
             raw_columns_str = ", ".join(raw_columns)
@@ -67,7 +67,7 @@ def test_get_insert_into_heard_raw_sqlstrs_ReturnsObj_BeliefDimensNeeded():
     belief_dimens_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(wx.idea_category) == "belief"
+        if dimen_config.get(kw.idea_category) == "belief"
     }
 
     # WHEN
@@ -143,16 +143,16 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_h_raw_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "raw", "put")
+        blrpern_h_raw_put_tablename = prime_tbl(kw.belief_voiceunit, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrpern_h_raw_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_h_raw_put_tablename} (
-  {wx.spark_num}
-, {wx.face_name}_inx
-, {wx.moment_label}_inx
-, {wx.belief_name}_inx
-, {wx.voice_name}_inx
-, {wx.voice_cred_lumen}
-, {wx.voice_debt_lumen}
+  {kw.spark_num}
+, {kw.face_name}_inx
+, {kw.moment_label}_inx
+, {kw.belief_name}_inx
+, {kw.voice_name}_inx
+, {kw.voice_cred_lumen}
+, {kw.voice_debt_lumen}
 )
 VALUES
   ({spark1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debt})
@@ -164,7 +164,7 @@ VALUES
 """
         cursor.execute(insert_into_clause)
         assert get_row_count(cursor, blrpern_h_raw_put_tablename) == 5
-        blrpern_h_agg_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "agg", "put")
+        blrpern_h_agg_put_tablename = prime_tbl(kw.belief_voiceunit, "h", "agg", "put")
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 0
 
         # WHEN
@@ -174,13 +174,13 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 4
-        select_sqlstr = f"""SELECT {wx.spark_num}
-, {wx.face_name}
-, {wx.moment_label}
-, {wx.belief_name}
-, {wx.voice_name}
-, {wx.voice_cred_lumen}
-, {wx.voice_debt_lumen}
+        select_sqlstr = f"""SELECT {kw.spark_num}
+, {kw.face_name}
+, {kw.moment_label}
+, {kw.belief_name}
+, {kw.voice_name}
+, {kw.voice_cred_lumen}
+, {kw.voice_debt_lumen}
 FROM {blrpern_h_agg_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -213,16 +213,16 @@ def test_etl_heard_raw_tables_to_heard_agg_tables_PopulatesTable_Scenario0():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_h_raw_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "raw", "put")
+        blrpern_h_raw_put_tablename = prime_tbl(kw.belief_voiceunit, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrpern_h_raw_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_h_raw_put_tablename} (
-  {wx.spark_num}
-, {wx.face_name}_inx
-, {wx.moment_label}_inx
-, {wx.belief_name}_inx
-, {wx.voice_name}_inx
-, {wx.voice_cred_lumen}
-, {wx.voice_debt_lumen}
+  {kw.spark_num}
+, {kw.face_name}_inx
+, {kw.moment_label}_inx
+, {kw.belief_name}_inx
+, {kw.voice_name}_inx
+, {kw.voice_cred_lumen}
+, {kw.voice_debt_lumen}
 )
 VALUES
   ({spark1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debt})
@@ -234,7 +234,7 @@ VALUES
 """
         cursor.execute(insert_into_clause)
         assert get_row_count(cursor, blrpern_h_raw_put_tablename) == 5
-        blrpern_h_agg_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "agg", "put")
+        blrpern_h_agg_put_tablename = prime_tbl(kw.belief_voiceunit, "h", "agg", "put")
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 0
 
         # WHEN
@@ -242,13 +242,13 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 4
-        select_sqlstr = f"""SELECT {wx.spark_num}
-, {wx.face_name}
-, {wx.moment_label}
-, {wx.belief_name}
-, {wx.voice_name}
-, {wx.voice_cred_lumen}
-, {wx.voice_debt_lumen}
+        select_sqlstr = f"""SELECT {kw.spark_num}
+, {kw.face_name}
+, {kw.moment_label}
+, {kw.belief_name}
+, {kw.voice_name}
+, {kw.voice_cred_lumen}
+, {kw.voice_debt_lumen}
 FROM {blrpern_h_agg_put_tablename}
 """
         cursor.execute(select_sqlstr)

@@ -6,7 +6,7 @@ from src.ch14_keep.test._util.ch14_examples import (
     example_yao_bob_zia_credorledgers,
     example_yao_bob_zia_tax_dues,
 )
-from src.ref.keywords import Ch14Keywords as wx
+from src.ref.keywords import Ch14Keywords as kw
 
 
 def test_RiverRun_Exists():
@@ -37,27 +37,27 @@ def test_RiverRun_Exists():
     assert not x_riverrun._debtor_count
     assert not x_riverrun._credor_count
     assert set(x_riverrun.__dict__.keys()) == {
-        wx.moment_mstr_dir,
-        wx.moment_label,
-        wx.belief_name,
-        wx.keep_rope,
-        wx.knot,
-        wx.keep_point_magnitude,
-        wx.money_grain,
+        kw.moment_mstr_dir,
+        kw.moment_label,
+        kw.belief_name,
+        kw.keep_rope,
+        kw.knot,
+        kw.keep_point_magnitude,
+        kw.money_grain,
         "number",
-        wx.keep_credorledgers,
-        wx.tax_dues,
-        wx.cycle_max,
-        wx._rivergrades,
-        wx._grants,
-        wx._tax_yields,
-        wx._tax_got_prev,
-        wx._tax_got_curr,
-        wx._cycle_count,
-        wx._cycle_chargeees_prev,
-        wx._cycle_chargeees_curr,
-        wx._debtor_count,
-        wx._credor_count,
+        kw.keep_credorledgers,
+        kw.tax_dues,
+        kw.cycle_max,
+        kw._rivergrades,
+        kw._grants,
+        kw._tax_yields,
+        kw._tax_got_prev,
+        kw._tax_got_curr,
+        kw._cycle_count,
+        kw._cycle_chargeees_prev,
+        kw._cycle_chargeees_curr,
+        kw._debtor_count,
+        kw._credor_count,
     }
 
 

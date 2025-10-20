@@ -10,16 +10,16 @@ from src.ch17_idea.test._util.ch17_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ref.keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as kw
 
 
 def create_dimens_idea_format_dict() -> dict:
     idea_format_files_dict = {}
     x_count = 20
     for idea_dimen, dimen_dict in get_idea_config_dict().items():
-        if dimen_dict.get(wx.idea_category) == "belief":
+        if dimen_dict.get(kw.idea_category) == "belief":
             idea_filename = f"idea_format_{x_count:05}_{idea_dimen}_v0_0_0.json"
-            attributes_set = {wx.moment_label, wx.belief_name}
+            attributes_set = {kw.moment_label, kw.belief_name}
             args_dict = get_atom_config_args(idea_dimen)
             attributes_set.update(set(args_dict.keys()))
 
@@ -37,16 +37,16 @@ def test_create_dimens_idea_format_dict_ReturnsObj(rebuild_bool):
 
     # THEN
     assert len(dimens_idea_format_dict) == 10
-    belief_planunit_filename = f"idea_format_00026_{wx.belief_planunit}_v0_0_0.json"
+    belief_planunit_filename = f"idea_format_00026_{kw.belief_planunit}_v0_0_0.json"
     assert dimens_idea_format_dict.get(belief_planunit_filename)
     belief_planunit_dict = dimens_idea_format_dict.get(belief_planunit_filename)
-    assert belief_planunit_dict.get(wx.dimens) == [wx.belief_planunit]
-    assert belief_planunit_dict.get(wx.attributes)
-    belief_planunit_attributes = belief_planunit_dict.get(wx.attributes)
-    assert wx.moment_label in belief_planunit_attributes
-    assert wx.belief_name in belief_planunit_attributes
-    assert wx.plan_rope in belief_planunit_attributes
-    assert wx.gogo_want in belief_planunit_attributes
+    assert belief_planunit_dict.get(kw.dimens) == [kw.belief_planunit]
+    assert belief_planunit_dict.get(kw.attributes)
+    belief_planunit_attributes = belief_planunit_dict.get(kw.attributes)
+    assert kw.moment_label in belief_planunit_attributes
+    assert kw.belief_name in belief_planunit_attributes
+    assert kw.plan_rope in belief_planunit_attributes
+    assert kw.gogo_want in belief_planunit_attributes
 
     rebuild_format_jsons(rebuild_bool)
 
@@ -61,21 +61,21 @@ def test_get_idea_brick_md_ReturnsObj():
     # ESTABLISH
     idea_brick_config = {
         "attributes": {
-            wx.knot: {wx.otx_key: False},
-            wx.c400_number: {wx.otx_key: False},
-            wx.spark_num: {wx.otx_key: True},
-            wx.face_name: {wx.otx_key: True},
-            wx.moment_label: {wx.otx_key: True},
-            wx.fund_grain: {wx.otx_key: False},
-            wx.job_listen_rotations: {wx.otx_key: False},
-            wx.monthday_index: {wx.otx_key: False},
-            wx.money_grain: {wx.otx_key: False},
-            wx.respect_grain: {wx.otx_key: False},
-            wx.epoch_label: {wx.otx_key: False},
-            wx.yr1_jan1_offset: {wx.otx_key: False},
+            kw.knot: {kw.otx_key: False},
+            kw.c400_number: {kw.otx_key: False},
+            kw.spark_num: {kw.otx_key: True},
+            kw.face_name: {kw.otx_key: True},
+            kw.moment_label: {kw.otx_key: True},
+            kw.fund_grain: {kw.otx_key: False},
+            kw.job_listen_rotations: {kw.otx_key: False},
+            kw.monthday_index: {kw.otx_key: False},
+            kw.money_grain: {kw.otx_key: False},
+            kw.respect_grain: {kw.otx_key: False},
+            kw.epoch_label: {kw.otx_key: False},
+            kw.yr1_jan1_offset: {kw.otx_key: False},
         },
-        wx.idea_number: "br00000",
-        wx.dimens: ["momentunit"],
+        kw.idea_number: "br00000",
+        kw.dimens: ["momentunit"],
     }
 
     # WHEN
@@ -88,18 +88,18 @@ def test_get_idea_brick_md_ReturnsObj():
 ## Dimens `['momentunit']`
 
 ## Attributes
-- `{wx.spark_num}`
-- `{wx.face_name}`
-- `{wx.moment_label}`
-- `{wx.epoch_label}`
-- `{wx.c400_number}`
-- `{wx.yr1_jan1_offset}`
-- `{wx.monthday_index}`
-- `{wx.fund_grain}`
-- `{wx.money_grain}`
-- `{wx.respect_grain}`
-- `{wx.knot}`
-- `{wx.job_listen_rotations}`
+- `{kw.spark_num}`
+- `{kw.face_name}`
+- `{kw.moment_label}`
+- `{kw.epoch_label}`
+- `{kw.c400_number}`
+- `{kw.yr1_jan1_offset}`
+- `{kw.monthday_index}`
+- `{kw.fund_grain}`
+- `{kw.money_grain}`
+- `{kw.respect_grain}`
+- `{kw.knot}`
+- `{kw.job_listen_rotations}`
 """
     assert (idea_brick_md) == expected_idea_brick_md
 
@@ -110,21 +110,21 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
     br00000_str = "br00000"
     idea_brick_config = {
         "attributes": {
-            wx.knot: {wx.otx_key: False},
-            wx.c400_number: {wx.otx_key: False},
-            wx.spark_num: {wx.otx_key: True},
-            wx.face_name: {wx.otx_key: True},
-            wx.moment_label: {wx.otx_key: True},
-            wx.fund_grain: {wx.otx_key: False},
-            wx.job_listen_rotations: {wx.otx_key: False},
-            wx.monthday_index: {wx.otx_key: False},
-            wx.money_grain: {wx.otx_key: False},
-            wx.respect_grain: {wx.otx_key: False},
-            wx.epoch_label: {wx.otx_key: False},
-            wx.yr1_jan1_offset: {wx.otx_key: False},
+            kw.knot: {kw.otx_key: False},
+            kw.c400_number: {kw.otx_key: False},
+            kw.spark_num: {kw.otx_key: True},
+            kw.face_name: {kw.otx_key: True},
+            kw.moment_label: {kw.otx_key: True},
+            kw.fund_grain: {kw.otx_key: False},
+            kw.job_listen_rotations: {kw.otx_key: False},
+            kw.monthday_index: {kw.otx_key: False},
+            kw.money_grain: {kw.otx_key: False},
+            kw.respect_grain: {kw.otx_key: False},
+            kw.epoch_label: {kw.otx_key: False},
+            kw.yr1_jan1_offset: {kw.otx_key: False},
         },
-        wx.idea_number: br00000_str,
-        wx.dimens: ["momentunit"],
+        kw.idea_number: br00000_str,
+        kw.dimens: ["momentunit"],
     }
     save_json(temp_dir, f"{br00000_str}.json", idea_brick_config)
 
@@ -137,18 +137,18 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
 ## Dimens `['momentunit']`
 
 ## Attributes
-- `{wx.spark_num}`
-- `{wx.face_name}`
-- `{wx.moment_label}`
-- `{wx.epoch_label}`
-- `{wx.c400_number}`
-- `{wx.yr1_jan1_offset}`
-- `{wx.monthday_index}`
-- `{wx.fund_grain}`
-- `{wx.money_grain}`
-- `{wx.respect_grain}`
-- `{wx.knot}`
-- `{wx.job_listen_rotations}`
+- `{kw.spark_num}`
+- `{kw.face_name}`
+- `{kw.moment_label}`
+- `{kw.epoch_label}`
+- `{kw.c400_number}`
+- `{kw.yr1_jan1_offset}`
+- `{kw.monthday_index}`
+- `{kw.fund_grain}`
+- `{kw.money_grain}`
+- `{kw.respect_grain}`
+- `{kw.knot}`
+- `{kw.job_listen_rotations}`
 """
     assert set(idea_brick_mds.keys()) == {br00000_str}
     assert idea_brick_mds == {br00000_str: expected_idea_brick_md}

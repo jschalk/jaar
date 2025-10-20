@@ -23,7 +23,7 @@ from src.ch17_idea.test._util.ch17_examples import (
     get_small_example01_csv,
     get_small_example01_dataframe,
 )
-from src.ref.keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as kw
 
 
 def test_get_ordered_csv_ReturnsObj():
@@ -158,7 +158,7 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario3_ColumnOrderCorrect(
 
 def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect():
     # ESTABLISH
-    df1 = DataFrame([["AAA", "BBB"]], columns=[wx.group_title, wx.voice_name])
+    df1 = DataFrame([["AAA", "BBB"]], columns=[kw.group_title, kw.voice_name])
 
     # WHEN
     relevant_dataframe = get_relevant_columns_dataframe(df1)
@@ -166,8 +166,8 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect(
     # THEN
     assert relevant_dataframe is not None
     print(f"{relevant_dataframe.columns=}")
-    assert relevant_dataframe.columns.to_list()[0] == wx.voice_name
+    assert relevant_dataframe.columns.to_list()[0] == kw.voice_name
     assert relevant_dataframe.columns.to_list() == [
-        wx.voice_name,
-        wx.group_title,
+        kw.voice_name,
+        kw.group_title,
     ]

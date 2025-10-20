@@ -10,7 +10,7 @@ from src.ch05_reason.reason import (
     reasonheir_shop,
     reasonunit_shop,
 )
-from src.ref.keywords import Ch05Keywords as wx
+from src.ref.keywords import Ch05Keywords as kw
 
 
 def test_ReasonCore_Exists():
@@ -33,10 +33,10 @@ def test_ReasonCore_Exists():
     obj_attrs = set(wk_reason.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        wx.knot,
-        wx.cases,
-        wx.active_requisite,
-        wx.reason_context,
+        kw.knot,
+        kw.cases,
+        kw.active_requisite,
+        kw.reason_context,
     }
 
 
@@ -74,13 +74,13 @@ def test_ReasonHeir_Exists():
     obj_attrs = set(wk_reason.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        wx.knot,
-        wx.cases,
-        wx.active_requisite,
-        wx.reason_context,
-        wx.reason_active,
-        wx.parent_heir_active,
-        wx.task,
+        kw.knot,
+        kw.cases,
+        kw.active_requisite,
+        kw.reason_context,
+        kw.reason_active,
+        kw.parent_heir_active,
+        kw.task,
     }
 
 
@@ -280,10 +280,10 @@ def test_ReasonUnit_Exists():
     obj_attrs = set(wk_reason.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        wx.knot,
-        wx.cases,
-        wx.active_requisite,
-        wx.reason_context,
+        kw.knot,
+        kw.cases,
+        kw.active_requisite,
+        kw.reason_context,
     }
 
 
@@ -317,7 +317,7 @@ def test_ReasonUnit_to_dict_ReturnsDictWithSinglethu_caseequireds():
     assert wk_reason_dict is not None
     static_wk_reason_dict = {
         "reason_context": wk_rope,
-        wx.cases: {wed_rope: {wx.reason_state: wed_rope}},
+        kw.cases: {wed_rope: {kw.reason_state: wed_rope}},
     }
     print(wk_reason_dict)
     assert wk_reason_dict == static_wk_reason_dict
@@ -366,9 +366,9 @@ def test_ReasonUnit_to_dict_ReturnsDictWithTwoCasesReasons():
     assert wk_reason_dict is not None
     static_wk_reason_dict = {
         "reason_context": wk_rope,
-        wx.cases: {
-            wed_rope: {wx.reason_state: wed_rope},
-            thu_rope: {wx.reason_state: thu_rope},
+        kw.cases: {
+            wed_rope: {kw.reason_state: wed_rope},
+            thu_rope: {kw.reason_state: thu_rope},
         },
     }
     print(wk_reason_dict)

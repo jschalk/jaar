@@ -15,7 +15,7 @@ from src.ch07_belief_logic.test._util.ch07_examples import (
     get_beliefunit_reason_context_ziet_example,
     get_beliefunit_x1_3levels_1reason_1facts,
 )
-from src.ref.keywords import Ch07Keywords as wx
+from src.ref.keywords import Ch07Keywords as kw
 
 
 def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():
@@ -36,26 +36,26 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():
     # THEN
     assert belief_dict is not None
     assert str(type(belief_dict)) == "<class 'dict'>"
-    assert belief_dict[wx.belief_name] == yao_belief.belief_name
-    assert belief_dict[wx.moment_label] == yao_belief.moment_label
-    assert belief_dict[wx.tally] == yao_belief.tally
-    assert belief_dict[wx.tally] == belief_tally
-    assert belief_dict[wx.fund_pool] == yao_fund_pool
-    assert belief_dict[wx.fund_grain] == yao_fund_grain
-    assert belief_dict[wx.max_tree_traverse] == yao_belief.max_tree_traverse
-    assert belief_dict[wx.knot] == yao_belief.knot
-    assert belief_dict[wx.credor_respect] == yao_belief.credor_respect
-    assert belief_dict[wx.debtor_respect] == yao_belief.debtor_respect
-    assert belief_dict[wx.last_lesson_id] == yao_belief.last_lesson_id
-    assert len(belief_dict[wx.voices]) == len(yao_belief.voices)
-    assert len(belief_dict[wx.voices]) != 12
+    assert belief_dict[kw.belief_name] == yao_belief.belief_name
+    assert belief_dict[kw.moment_label] == yao_belief.moment_label
+    assert belief_dict[kw.tally] == yao_belief.tally
+    assert belief_dict[kw.tally] == belief_tally
+    assert belief_dict[kw.fund_pool] == yao_fund_pool
+    assert belief_dict[kw.fund_grain] == yao_fund_grain
+    assert belief_dict[kw.max_tree_traverse] == yao_belief.max_tree_traverse
+    assert belief_dict[kw.knot] == yao_belief.knot
+    assert belief_dict[kw.credor_respect] == yao_belief.credor_respect
+    assert belief_dict[kw.debtor_respect] == yao_belief.debtor_respect
+    assert belief_dict[kw.last_lesson_id] == yao_belief.last_lesson_id
+    assert len(belief_dict[kw.voices]) == len(yao_belief.voices)
+    assert len(belief_dict[kw.voices]) != 12
 
     x_planroot = yao_belief.planroot
-    planroot_dict = belief_dict[wx.planroot]
+    planroot_dict = belief_dict[kw.planroot]
     assert x_planroot.plan_label == yao_belief.moment_label
-    assert planroot_dict[wx.plan_label] == x_planroot.plan_label
-    assert planroot_dict[wx.star] == x_planroot.star
-    assert len(planroot_dict[wx.kids]) == len(x_planroot.kids)
+    assert planroot_dict[kw.plan_label] == x_planroot.plan_label
+    assert planroot_dict[kw.star] == x_planroot.star
+    assert len(planroot_dict[kw.kids]) == len(x_planroot.kids)
 
 
 def test_BeliefUnit_to_dict_ReturnsObj_Scenario1_planroot_laborunit():
@@ -74,16 +74,16 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario1_planroot_laborunit():
 
     # WHEN
     belief_dict = sue_belief.to_dict()
-    planroot_dict = belief_dict.get(wx.planroot)
+    planroot_dict = belief_dict.get(kw.planroot)
 
     # THEN
-    assert planroot_dict[wx.laborunit] == x_laborunit.to_dict()
+    assert planroot_dict[kw.laborunit] == x_laborunit.to_dict()
     run_partyunit = partyunit_shop(run_str)
-    assert planroot_dict[wx.laborunit] == {
+    assert planroot_dict[kw.laborunit] == {
         "_partys": {run_str: run_partyunit.to_dict()}
     }
-    assert planroot_dict.get(wx.gogo_want) == x_gogo_want
-    assert planroot_dict.get(wx.stop_want) == x_stop_want
+    assert planroot_dict.get(kw.gogo_want) == x_gogo_want
+    assert planroot_dict.get(kw.stop_want) == x_stop_want
 
 
 def test_BeliefUnit_to_dict_ReturnsObj_Scenario2_With_planroot_healerunit():
@@ -101,10 +101,10 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario2_With_planroot_healerunit():
 
     # WHEN
     belief_dict = sue_belief.to_dict()
-    planroot_dict = belief_dict.get(wx.planroot)
+    planroot_dict = belief_dict.get(kw.planroot)
 
     # THEN
-    assert planroot_dict[wx.healerunit] == run_healerunit.to_dict()
+    assert planroot_dict[kw.healerunit] == run_healerunit.to_dict()
 
 
 def test_BeliefUnit_to_dict_ReturnsObj_Scenario3_plankid_LaborUnit():
@@ -125,10 +125,10 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario3_plankid_LaborUnit():
 
     # WHEN
     belief_dict = sue_belief.to_dict()
-    planroot_dict = belief_dict.get(wx.planroot)
+    planroot_dict = belief_dict.get(kw.planroot)
 
     # THEN
-    labor_dict_x = planroot_dict[wx.kids][morn_str][wx.laborunit]
+    labor_dict_x = planroot_dict[kw.kids][morn_str][kw.laborunit]
     assert labor_dict_x == x_laborunit.to_dict()
     run_partyunit = partyunit_shop(run_str)
     assert labor_dict_x == {"_partys": {run_str: run_partyunit.to_dict()}}
@@ -162,15 +162,15 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario4_planunit_WithLevels():
 
     # THEN
     assert belief_dict is not None
-    assert belief_dict[wx.belief_name] == zia_belief.belief_name
-    assert belief_dict[wx.moment_label] == zia_belief.moment_label
-    assert belief_dict[wx.tally] == zia_belief.tally
-    assert belief_dict[wx.fund_pool] == zia_belief.fund_pool
-    assert belief_dict[wx.fund_grain] == zia_belief.fund_grain
-    assert belief_dict[wx.respect_grain] == zia_belief.respect_grain
-    assert belief_dict[wx.money_grain] == zia_belief.money_grain
-    assert belief_dict[wx.credor_respect] == zia_belief.credor_respect
-    assert belief_dict[wx.debtor_respect] == zia_belief.debtor_respect
+    assert belief_dict[kw.belief_name] == zia_belief.belief_name
+    assert belief_dict[kw.moment_label] == zia_belief.moment_label
+    assert belief_dict[kw.tally] == zia_belief.tally
+    assert belief_dict[kw.fund_pool] == zia_belief.fund_pool
+    assert belief_dict[kw.fund_grain] == zia_belief.fund_grain
+    assert belief_dict[kw.respect_grain] == zia_belief.respect_grain
+    assert belief_dict[kw.money_grain] == zia_belief.money_grain
+    assert belief_dict[kw.credor_respect] == zia_belief.credor_respect
+    assert belief_dict[kw.debtor_respect] == zia_belief.debtor_respect
     # with pytest_raises(Exception) as excinfo:
     #     belief_dict["_credor_respect"]
     # assert str(excinfo.value) == "'_credor_respect'"
@@ -178,20 +178,20 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario4_planunit_WithLevels():
     #     belief_dict["_debtor_respect"]
     # assert str(excinfo.value) == "'_debtor_respect'"
     with pytest_raises(Exception) as excinfo:
-        belief_dict[wx.last_lesson_id]
+        belief_dict[kw.last_lesson_id]
 
     x_planroot = zia_belief.planroot
-    planroot_dict = belief_dict.get(wx.planroot)
+    planroot_dict = belief_dict.get(kw.planroot)
 
-    assert len(planroot_dict[wx.kids]) == len(x_planroot.kids)
+    assert len(planroot_dict[kw.kids]) == len(x_planroot.kids)
 
     shave_str = "shave"
-    shave_dict = planroot_dict[wx.kids][shave_str]
-    shave_factunits = shave_dict[wx.factunits]
+    shave_dict = planroot_dict[kw.kids][shave_str]
+    shave_factunits = shave_dict[kw.factunits]
     print(f"{shave_factunits=}")
     assert len(shave_factunits) == 1
     assert len(shave_factunits) == len(x_planroot.kids[shave_str].factunits)
-    planroot_healerunit = planroot_dict[wx.healerunit]
+    planroot_healerunit = planroot_dict[kw.healerunit]
     print(f"{planroot_healerunit=}")
     assert len(planroot_healerunit) == 1
     assert x_planroot.healerunit.any_healer_name_exists()
@@ -225,20 +225,20 @@ def test_BeliefUnit_to_dict_ReturnsJSON_Scenario5_BigExample():
     belief_dict = yao_belief.to_dict()
 
     # THEN
-    assert belief_dict[wx.belief_name] == yao_belief.belief_name
-    assert belief_dict[wx.moment_label] == yao_belief.moment_label
-    assert belief_dict[wx.tally] == yao_belief.tally
-    assert belief_dict[wx.max_tree_traverse] == 2
-    assert belief_dict[wx.max_tree_traverse] == yao_belief.max_tree_traverse
-    assert belief_dict[wx.knot] == yao_belief.knot
+    assert belief_dict[kw.belief_name] == yao_belief.belief_name
+    assert belief_dict[kw.moment_label] == yao_belief.moment_label
+    assert belief_dict[kw.tally] == yao_belief.tally
+    assert belief_dict[kw.max_tree_traverse] == 2
+    assert belief_dict[kw.max_tree_traverse] == yao_belief.max_tree_traverse
+    assert belief_dict[kw.knot] == yao_belief.knot
 
     x_planroot = yao_belief.planroot
-    planroot_dict = belief_dict.get(wx.planroot)
-    assert len(planroot_dict[wx.kids]) == len(x_planroot.kids)
+    planroot_dict = belief_dict.get(kw.planroot)
+    assert len(planroot_dict[kw.kids]) == len(x_planroot.kids)
 
-    kids_dict = planroot_dict[wx.kids]
+    kids_dict = planroot_dict[kw.kids]
     jour_min_dict = kids_dict[jour_min_str]
-    jour_min_factunits_dict = jour_min_dict[wx.factunits]
+    jour_min_factunits_dict = jour_min_dict[kw.factunits]
     jour_min_plan_x = yao_belief.get_plan_obj(jour_min_rope)
     print(f"{jour_min_factunits_dict=}")
     assert len(jour_min_factunits_dict) == 1
@@ -250,8 +250,8 @@ def test_BeliefUnit_to_dict_ReturnsJSON_Scenario5_BigExample():
     ulti_rope = yao_belief.make_l1_rope(ulti_str)
     cont_plan = yao_belief.get_plan_obj(cont_rope)
     ulti_plan = yao_belief.get_plan_obj(ulti_rope)
-    cont_reasonunits_dict = planroot_dict[wx.kids][cont_str][wx.reasonunits]
-    ulti_reasonunits_dict = planroot_dict[wx.kids][ulti_str][wx.reasonunits]
+    cont_reasonunits_dict = planroot_dict[kw.kids][cont_str][kw.reasonunits]
+    ulti_reasonunits_dict = planroot_dict[kw.kids][ulti_str][kw.reasonunits]
     assert len(cont_reasonunits_dict) == len(cont_plan.reasonunits)
     assert len(ulti_reasonunits_dict) == len(ulti_plan.reasonunits)
 

@@ -6,7 +6,7 @@ from src.ch16_translate.test._util.ch16_examples import (
     get_swim_titlemap,
 )
 from src.ch16_translate.translate_main import inherit_translateunit, translateunit_shop
-from src.ref.keywords import Ch16Keywords as wx
+from src.ref.keywords import Ch16Keywords as kw
 
 
 def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario0_EmptyTranslateUnits():
@@ -139,7 +139,7 @@ def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario7_namemap_Inheri
     new_translateunit = translateunit_shop(sue_str, spark1)
     bob_otx = "Bob"
     bob_inx = "Bobby"
-    new_translateunit.set_otx2inx(wx.NameTerm, bob_otx, bob_inx)
+    new_translateunit.set_otx2inx(kw.NameTerm, bob_otx, bob_inx)
     assert new_translateunit.namemap != get_suita_namemap()
     assert new_translateunit.nameterm_exists(bob_otx, bob_inx)
 

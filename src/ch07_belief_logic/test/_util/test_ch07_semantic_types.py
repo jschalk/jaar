@@ -5,7 +5,7 @@ from src.ch07_belief_logic._ref.ch07_semantic_types import (
     MoneyGrain,
     NexusLabel,
 )
-from src.ref.keywords import Ch07Keywords as wx
+from src.ref.keywords import Ch07Keywords as kw
 
 
 def test_BeliefName_Exists():
@@ -26,7 +26,7 @@ def test_NexusLabel_Exists():
     x_nexus = NexusLabel(empty_str)
     # THEN
     assert x_nexus == empty_str
-    doc_str = f"The Nexus is the FirstLabel of all RopeTerms in a BeliefUnit. NexusLabel cannot contain a {wx.knot}."
+    doc_str = f"The Nexus is the FirstLabel of all RopeTerms in a BeliefUnit. NexusLabel cannot contain a {kw.knot}."
     assert inspect_getdoc(x_nexus) == doc_str
 
 

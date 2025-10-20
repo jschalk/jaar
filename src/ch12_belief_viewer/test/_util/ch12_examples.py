@@ -1,7 +1,7 @@
 from datetime import datetime
 from enum import Enum
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ref.keywords import Ch12Keywords as wx
+from src.ref.keywords import Ch12Keywords as kw
 
 SUE_STR = "Sue"
 A23_STR = "Amy23"

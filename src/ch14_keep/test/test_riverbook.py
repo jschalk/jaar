@@ -7,7 +7,7 @@ from src.ch14_keep.rivercycle import (
     riverbook_shop,
 )
 from src.ch14_keep.test._util.ch14_env import temp_moment_mstr_dir
-from src.ref.keywords import Ch14Keywords as wx
+from src.ref.keywords import Ch14Keywords as kw
 
 
 def test_RiverBook_Exists():
@@ -19,9 +19,9 @@ def test_RiverBook_Exists():
     assert not x_riverbook._rivergrants
     assert not x_riverbook.money_grain
     assert set(x_riverbook.__dict__.keys()) == {
-        wx.belief_name,
-        wx._rivergrants,
-        wx.money_grain,
+        kw.belief_name,
+        kw._rivergrants,
+        kw.money_grain,
     }
 
 

@@ -13,7 +13,7 @@ from src.ch20_world_logic.test._util.ch20_env import (
     get_chapter_temp_dir as worlds_dir,
 )
 from src.ch20_world_logic.world import worldunit_shop
-from src.ref.keywords import Ch20Keywords as wx
+from src.ref.keywords import Ch20Keywords as kw
 
 
 def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(
@@ -45,11 +45,11 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     amy23_str = "amy23"
     br00011_columns = [
-        wx.spark_num,
-        wx.face_name,
-        wx.moment_label,
-        wx.belief_name,
-        wx.voice_name,
+        kw.spark_num,
+        kw.face_name,
+        kw.moment_label,
+        kw.belief_name,
+        kw.voice_name,
     ]
     br00011_rows = [[spark2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
@@ -66,7 +66,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     print(get_sheet_names(fay_stance0001_path))
     br00021_sheet_df = pandas_read_excel(fay_stance0001_path, "br00021")
     print(f"{br00021_sheet_df=}")
-    assert br00021_sheet_df.iloc[0][wx.face_name] == "Fay"
+    assert br00021_sheet_df.iloc[0][kw.face_name] == "Fay"
 
 
 def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldUnit(
@@ -83,11 +83,11 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     amy23_str = "amy23"
     br00011_columns = [
-        wx.spark_num,
-        wx.face_name,
-        wx.moment_label,
-        wx.belief_name,
-        wx.voice_name,
+        kw.spark_num,
+        kw.face_name,
+        kw.moment_label,
+        kw.belief_name,
+        kw.voice_name,
     ]
     br00011_rows = [[spark2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
@@ -137,11 +137,11 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     a23_str = "amy23"
     br00011_columns = [
-        wx.spark_num,
-        wx.face_name,
-        wx.moment_label,
-        wx.belief_name,
-        wx.voice_name,
+        kw.spark_num,
+        kw.face_name,
+        kw.moment_label,
+        kw.belief_name,
+        kw.voice_name,
     ]
     br00011_rows = [[spark2, sue_str, a23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
@@ -174,20 +174,20 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #     ex_filename = "Faybob.xlsx"
 #     input_file_path = create_path(fay_world._input_dir, ex_filename)
 #     br00003_columns = [
-#         wx.face_name,
-#         wx.spark_num,
-#         wx.cumulative_minute,
-#         wx.moment_label,
-#         wx.hour_label,
+#         kw.face_name,
+#         kw.spark_num,
+#         kw.cumulative_minute,
+#         kw.moment_label,
+#         kw.hour_label,
 #     ]
 #     br00001_columns = [
-#         wx.face_name,
-#         wx.spark_num,
-#         wx.moment_label,
-#         wx.belief_name,
+#         kw.face_name,
+#         kw.spark_num,
+#         kw.moment_label,
+#         kw.belief_name,
 #         bud_time(),
-#         wx.quota,
-#         wx.celldepth,
+#         kw.quota,
+#         kw.celldepth,
 #     ]
 #     amy23_str = "amy23"
 #     tp37 = 37
@@ -208,11 +208,11 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #     upsert_sheet(input_file_path, br00003_ex1_str, br00003_1df)
 #     upsert_sheet(input_file_path, br00003_ex3_str, br00003_3df)
 #     br00011_columns = [
-#         wx.face_name,
-#         wx.spark_num,
-#         wx.moment_label,
-#         wx.belief_name,
-#         wx.voice_name,
+#         kw.face_name,
+#         kw.spark_num,
+#         kw.moment_label,
+#         kw.belief_name,
+#         kw.voice_name,
 #     ]
 #     br00011_rows = [[spark2, sue_str, amy23_str, sue_str, sue_str]]
 #     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)

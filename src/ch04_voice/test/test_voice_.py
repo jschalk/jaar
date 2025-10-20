@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.ch02_rope.rope import default_knot_if_None
 from src.ch03_allot.allot import default_grain_num_if_None
 from src.ch04_voice.voice import VoiceUnit, voiceunit_shop
-from src.ref.keywords import Ch04Keywords as wx
+from src.ref.keywords import Ch04Keywords as kw
 
 
 def test_VoiceUnit_Exists():
@@ -34,22 +34,22 @@ def test_VoiceUnit_Exists():
     obj_attrs = set(bob_voiceunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        wx.credor_pool,
-        wx.debtor_pool,
-        wx.fund_agenda_give,
-        wx.fund_agenda_ratio_give,
-        wx.fund_agenda_ratio_take,
-        wx.fund_agenda_take,
-        wx.fund_give,
-        wx.fund_take,
-        wx.inallocable_voice_debt_lumen,
-        wx.irrational_voice_debt_lumen,
-        wx.memberships,
-        wx.respect_grain,
-        wx.voice_name,
-        wx.knot,
-        wx.voice_cred_lumen,
-        wx.voice_debt_lumen,
+        kw.credor_pool,
+        kw.debtor_pool,
+        kw.fund_agenda_give,
+        kw.fund_agenda_ratio_give,
+        kw.fund_agenda_ratio_take,
+        kw.fund_agenda_take,
+        kw.fund_give,
+        kw.fund_take,
+        kw.inallocable_voice_debt_lumen,
+        kw.irrational_voice_debt_lumen,
+        kw.memberships,
+        kw.respect_grain,
+        kw.voice_name,
+        kw.knot,
+        kw.voice_cred_lumen,
+        kw.voice_debt_lumen,
     }
 
 
@@ -75,7 +75,7 @@ def test_VoiceUnit_set_nameterm_RaisesErrorIfParameterContains_knot():
         voiceunit_shop(voice_name=texas_str, knot=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{texas_str}' needs to be a LabelTerm. Cannot contain {wx.knot}: '{slash_str}'"
+        == f"'{texas_str}' needs to be a LabelTerm. Cannot contain {kw.knot}: '{slash_str}'"
     )
 
 

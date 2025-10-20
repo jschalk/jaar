@@ -122,7 +122,7 @@ class BeliefUnit:
     debtor_respect: RespectNum = None
     max_tree_traverse: int = None
     last_lesson_id: int = None
-    # cashout Calculated field begin
+    # fields calculated by cashout
     _plan_dict: dict[RopeTerm, PlanUnit] = None
     _keep_dict: dict[RopeTerm, PlanUnit] = None
     _healers_dict: dict[HealerName, dict[RopeTerm, PlanUnit]] = None
@@ -135,8 +135,7 @@ class BeliefUnit:
     offtrack_kids_star_set: set[RopeTerm] = None
     offtrack_fund: float = None
     reason_contexts: set[RopeTerm] = None
-    _range_inheritors: dict[RopeTerm, RopeTerm] = None
-    # cashout Calculated field end
+    range_inheritors: dict[RopeTerm, RopeTerm] = None
 
     def get_nexus_label(self) -> LabelTerm:
         return get_first_label_from_rope(
@@ -1072,26 +1071,24 @@ reason_case:    {reason_case}"""
         raise gogo_calc_stop_calc_Exception(exception_str)
 
     def _distribute_math_attrs(self, math_plan: PlanUnit):
+        """Populates BeliefUnit.range_inheritors, sets PlanUnit.gogo_calc, PlanUnit.stop_calc"""
         single_range_plan_list = [math_plan]
         while single_range_plan_list != []:
-            r_plan = single_range_plan_list.pop()
-            if r_plan.range_evaluated:
-                self._raise_gogo_calc_stop_calc_exception(r_plan.get_plan_rope())
-            if r_plan.has_begin_close():
-                r_plan.gogo_calc = r_plan.begin
-                r_plan.stop_calc = r_plan.close
+            x_planunit = single_range_plan_list.pop()
+            x_plan_rope = x_planunit.get_plan_rope()
+            if x_planunit.range_evaluated:
+                self._raise_gogo_calc_stop_calc_exception(x_plan_rope)
+            if x_planunit.has_begin_close():
+                x_planunit.gogo_calc = x_planunit.begin
+                x_planunit.stop_calc = x_planunit.close
             else:
-                parent_rope = get_parent_rope(
-                    rope=r_plan.get_plan_rope(), knot=r_plan.knot
-                )
+                parent_rope = get_parent_rope(x_plan_rope, x_planunit.knot)
                 parent_plan = self.get_plan_obj(parent_rope)
-                r_plan.gogo_calc = parent_plan.gogo_calc
-                r_plan.stop_calc = parent_plan.stop_calc
-                self._range_inheritors[r_plan.get_plan_rope()] = (
-                    math_plan.get_plan_rope()
-                )
-            r_plan._mold_gogo_calc_stop_calc()
-            single_range_plan_list.extend(iter(r_plan.kids.values()))
+                x_planunit.gogo_calc = parent_plan.gogo_calc
+                x_planunit.stop_calc = parent_plan.stop_calc
+                self.range_inheritors[x_plan_rope] = math_plan.get_plan_rope()
+            x_planunit._mold_gogo_calc_stop_calc()
+            single_range_plan_list.extend(iter(x_planunit.kids.values()))
 
     def _set_plantree_range_attrs(self):
         for x_plan in self._plan_dict.values():
@@ -1174,7 +1171,7 @@ reason_case:    {reason_case}"""
 
     def _set_kids_plan_active(self, x_plan: PlanUnit, parent_plan: PlanUnit):
         x_plan.set_reasonheirs(self._plan_dict, parent_plan.reasonheirs)
-        x_plan.set_range_factheirs(self._plan_dict, self._range_inheritors)
+        x_plan.set_range_inheritors_factheirs(self._plan_dict, self.range_inheritors)
         tt_count = self.tree_traverse_count
         x_plan.set_plan_active(tt_count, self.groupunits, self.belief_name)
 
@@ -1219,7 +1216,7 @@ reason_case:    {reason_case}"""
         self.tree_traverse_count = 0
         self.offtrack_kids_star_set = set()
         self.reason_contexts = set()
-        self._range_inheritors = {}
+        self.range_inheritors = {}
         self.keeps_justified = True
         self.keeps_buildable = False
         self.sum_healerunit_plans_fund_total = 0
@@ -1261,6 +1258,11 @@ reason_case:    {reason_case}"""
         self._set_belief_keep_attrs()
 
     def _set_plantree_plan_active(self):
+        """For every planunit in the PlanTree set plan_active to True or False.
+        Assumes self.range_inheritors is set with set of ropes for all PlanUnits that
+        inherit from a ranged PlanUnit.
+        """
+
         for x_plan in get_sorted_plan_list(self._plan_dict):
             if x_plan == self.planroot:
                 tt_count = self.tree_traverse_count
@@ -1467,7 +1469,7 @@ def beliefunit_shop(
         sum_healerunit_plans_fund_total=get_0_if_None(),
         offtrack_kids_star_set=set(),
         reason_contexts=set(),
-        _range_inheritors={},
+        range_inheritors={},
     )
     x_belief.planroot = planunit_shop(
         plan_label=x_belief.moment_label,

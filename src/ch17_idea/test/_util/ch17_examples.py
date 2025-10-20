@@ -1,5 +1,5 @@
 from pandas import DataFrame
-from src.ref.keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as kw
 
 AMY23_STR = "amy23"
 JEFFY45_STR = "jeffy45"
@@ -11,16 +11,16 @@ def get_ex1_br00000_df() -> DataFrame:
     """
     x_df = DataFrame(
         columns=[
-            wx.c400_number,
-            wx.moment_label,
-            wx.fund_grain,
-            wx.monthday_index,
-            wx.money_grain,
-            wx.respect_grain,
-            wx.knot,
-            wx.epoch_label,
-            wx.yr1_jan1_offset,
-            wx.job_listen_rotations,
+            kw.c400_number,
+            kw.moment_label,
+            kw.fund_grain,
+            kw.monthday_index,
+            kw.money_grain,
+            kw.respect_grain,
+            kw.knot,
+            kw.epoch_label,
+            kw.yr1_jan1_offset,
+            kw.job_listen_rotations,
         ]
     )
     x_df.loc[0] = [7, AMY23_STR, 1, 1, 1, 1, "/", "creg", 440640, 7]
@@ -32,11 +32,11 @@ def get_ex1_br00001_df() -> DataFrame:
     moment_label,belief_name,quota,bud_time,celldepth"""
     x_df = DataFrame(
         columns=[
-            wx.moment_label,
-            wx.belief_name,
-            wx.quota,
-            wx.bud_time,
-            wx.celldepth,
+            kw.moment_label,
+            kw.belief_name,
+            kw.quota,
+            kw.bud_time,
+            kw.celldepth,
         ]
     )
     x_df.loc[0] = [AMY23_STR, "Sue", 445, 777, 5]
@@ -47,7 +47,7 @@ def get_ex1_br00002_df() -> DataFrame:
     """idea_format_00002_moment_paybook_v0_0_0
     voice_name,amount,moment_label,belief_name,tran_time"""
     x_df = DataFrame(
-        columns=["voice_name", "amount", wx.moment_label, wx.belief_name, "tran_time"]
+        columns=["voice_name", "amount", kw.moment_label, kw.belief_name, "tran_time"]
     )
     x_df.loc[0] = ["Bob", 888, AMY23_STR, "Zia", 777]
     return x_df
@@ -56,7 +56,7 @@ def get_ex1_br00002_df() -> DataFrame:
 def get_ex1_br00003_df() -> DataFrame:
     """idea_format_00003_moment_epoch_hour_v0_0_0
     cumulative_minute,moment_label,hour_label"""
-    x_df = DataFrame(columns=[wx.moment_label, "hour_label", "cumulative_minute"])
+    x_df = DataFrame(columns=[kw.moment_label, "hour_label", "cumulative_minute"])
     x_df.loc[0] = [AMY23_STR, "12am", 60]
     x_df.loc[1] = [AMY23_STR, "1am", 120]
     x_df.loc[2] = [AMY23_STR, "2am", 180]
@@ -87,7 +87,7 @@ def get_ex1_br00003_df() -> DataFrame:
 def get_ex1_br00004_df() -> DataFrame:
     """idea_format_00004_moment_epoch_month_v0_0_0
     cumulative_day,moment_label,month_label"""
-    x_df = DataFrame(columns=[wx.moment_label, "month_label", "cumulative_day"])
+    x_df = DataFrame(columns=[kw.moment_label, "month_label", "cumulative_day"])
     x_df.loc[0] = [AMY23_STR, "March", 31]
     x_df.loc[1] = [AMY23_STR, "April", 61]
     x_df.loc[2] = [AMY23_STR, "May", 92]
@@ -106,7 +106,7 @@ def get_ex1_br00004_df() -> DataFrame:
 def get_ex1_br00005_df() -> DataFrame:
     """idea_format_00005_moment_epoch_weekday_v0_0_0
     moment_label,weekday_label,weekday_order"""
-    x_df = DataFrame(columns=[wx.moment_label, wx.weekday_label, wx.weekday_order])
+    x_df = DataFrame(columns=[kw.moment_label, kw.weekday_label, kw.weekday_order])
     x_df.loc[0] = [AMY23_STR, "Wednesday", 0]
     x_df.loc[1] = [AMY23_STR, "Thursday", 1]
     x_df.loc[2] = [AMY23_STR, "Friday", 2]
@@ -123,16 +123,16 @@ def get_ex2_br00000_df() -> DataFrame:
     """
     x_df = DataFrame(
         columns=[
-            wx.c400_number,
-            wx.moment_label,
-            wx.fund_grain,
-            wx.monthday_index,
-            wx.money_grain,
-            wx.respect_grain,
-            wx.knot,
-            wx.epoch_label,
-            wx.yr1_jan1_offset,
-            wx.job_listen_rotations,
+            kw.c400_number,
+            kw.moment_label,
+            kw.fund_grain,
+            kw.monthday_index,
+            kw.money_grain,
+            kw.respect_grain,
+            kw.knot,
+            kw.epoch_label,
+            kw.yr1_jan1_offset,
+            kw.job_listen_rotations,
         ]
     )
     x_df.loc[0] = [7, AMY23_STR, 1, 1, 1, 1, "/", "creg", 440640, 4]
@@ -145,11 +145,11 @@ def get_ex2_br00001_df() -> DataFrame:
     moment_label,belief_name,quota,bud_time"""
     x_df = DataFrame(
         columns=[
-            wx.moment_label,
-            wx.belief_name,
-            wx.quota,
-            wx.bud_time,
-            wx.celldepth,
+            kw.moment_label,
+            kw.belief_name,
+            kw.quota,
+            kw.bud_time,
+            kw.celldepth,
         ]
     )
     x_df.loc[0] = [AMY23_STR, "Bob", 332, 999, 3]
@@ -165,11 +165,11 @@ def get_ex2_br00002_df() -> DataFrame:
     voice_name,amount,moment_label,belief_name,tran_time"""
     x_df = DataFrame(
         columns=[
-            wx.voice_name,
-            wx.amount,
-            wx.moment_label,
-            wx.belief_name,
-            wx.tran_time,
+            kw.voice_name,
+            kw.amount,
+            kw.moment_label,
+            kw.belief_name,
+            kw.tran_time,
         ]
     )
     x_df.loc[0] = ["Zia", 888, AMY23_STR, "Bob", 777]
@@ -183,7 +183,7 @@ def get_ex2_br00002_df() -> DataFrame:
 def get_ex2_br00003_df() -> DataFrame:
     """idea_format_00003_moment_epoch_hour_v0_0_0
     cumulative_minute,moment_label,hour_label"""
-    x_df = DataFrame(columns=[wx.moment_label, "hour_label", "cumulative_minute"])
+    x_df = DataFrame(columns=[kw.moment_label, "hour_label", "cumulative_minute"])
     x_df.loc[0] = [AMY23_STR, "12am", 60]
     x_df.loc[1] = [AMY23_STR, "1am", 120]
     x_df.loc[2] = [AMY23_STR, "2am", 180]
@@ -234,7 +234,7 @@ def get_ex2_br00003_df() -> DataFrame:
 def get_ex2_br00004_df() -> DataFrame:
     """idea_format_00004_moment_epoch_month_v0_0_0
     cumulative_day,moment_label,month_label"""
-    x_df = DataFrame(columns=[wx.moment_label, "month_label", "cumulative_day"])
+    x_df = DataFrame(columns=[kw.moment_label, "month_label", "cumulative_day"])
     x_df.loc[0] = [AMY23_STR, "March", 31]
     x_df.loc[1] = [AMY23_STR, "April", 61]
     x_df.loc[2] = [AMY23_STR, "May", 92]
@@ -268,7 +268,7 @@ def get_ex2_br00004_df() -> DataFrame:
 def get_ex2_br00005_df() -> DataFrame:
     """idea_format_00005_moment_epoch_weekday_v0_0_0
     moment_label,weekday_label,weekday_order"""
-    x_df = DataFrame(columns=[wx.moment_label, "weekday_label", "weekday_order"])
+    x_df = DataFrame(columns=[kw.moment_label, "weekday_label", "weekday_order"])
     x_df.loc[0] = [AMY23_STR, "Wednesday", 0]
     x_df.loc[1] = [AMY23_STR, "Thursday", 1]
     x_df.loc[2] = [AMY23_STR, "Friday", 2]
@@ -287,7 +287,7 @@ def get_ex2_br00005_df() -> DataFrame:
 # def get_ex2_br00006_df() -> DataFrame:
 #     """idea_format_00006_moment_timeoffi_v0_0_0
 #     moment_label,offi_time,_offi_time_maxt"""
-#     x_df = DataFrame(columns=[wx.moment_label, "offi_time", "offi_time_max"])
+#     x_df = DataFrame(columns=[kw.moment_label, "offi_time", "offi_time_max"])
 #     x_df.loc[0] = [AMY23_STR, 100, 300]
 #     x_df.loc[1] = [AMY23_STR, 110, 320]
 #     x_df.loc[2] = [AMY23_STR, 120, 330]
@@ -377,8 +377,8 @@ def get_ex02_atom_dataframe() -> DataFrame:
         "healer_name",
         "voice_name",
         "group_title",
-        wx.party_title,
-        wx.awardee_title,
+        kw.party_title,
+        kw.awardee_title,
         "plan_rope",
     ]
     x_dt = DataFrame(columns=ex02_columns)

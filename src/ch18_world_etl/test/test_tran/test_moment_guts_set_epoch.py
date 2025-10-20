@@ -11,7 +11,7 @@ from src.ch18_world_etl.test._util.ch18_env import (
     get_chapter_temp_dir,
 )
 from src.ch18_world_etl.transformers import add_moment_epoch_to_guts
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_add_moment_epoch_to_guts_SetsFiles_Scenario0(env_dir_setup_cleanup):
@@ -25,8 +25,8 @@ def test_add_moment_epoch_to_guts_SetsFiles_Scenario0(env_dir_setup_cleanup):
     assert os_path_exists(moment_json_path)
     sue_str = "Sue"
     init_sue_gut = beliefunit_shop(sue_str, a23_str)
-    time_rope = init_sue_gut.make_l1_rope(wx.time)
-    five_rope = init_sue_gut.make_rope(time_rope, wx.five)
+    time_rope = init_sue_gut.make_l1_rope(kw.time)
+    five_rope = init_sue_gut.make_rope(time_rope, kw.five)
     save_gut_file(moment_mstr_dir, init_sue_gut)
     assert not init_sue_gut.plan_exists(five_rope)
 

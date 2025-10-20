@@ -8,7 +8,7 @@ from src.ch07_belief_logic.belief_main import (
     beliefunit_shop,
     get_default_moment_label,
 )
-from src.ref.keywords import Ch07Keywords as wx
+from src.ref.keywords import Ch07Keywords as kw
 
 
 def test_BeliefUnit_Exists():
@@ -43,7 +43,7 @@ def test_BeliefUnit_Exists():
     assert x_belief.offtrack_kids_star_set is None
     assert x_belief.offtrack_fund is None
     assert x_belief.reason_contexts is None
-    assert x_belief._range_inheritors is None
+    assert x_belief.range_inheritors is None
     assert str(type(x_belief.planroot)).find("None") == 8
     obj_attrs = set(x_belief.__dict__.keys())
     print(sorted(list(obj_attrs)))
@@ -51,30 +51,30 @@ def test_BeliefUnit_Exists():
         "_plan_dict",
         "_healers_dict",
         "_keep_dict",
-        wx.keeps_buildable,
-        wx.keeps_justified,
-        wx.offtrack_fund,
-        wx.offtrack_kids_star_set,
-        "_range_inheritors",
-        wx.rational,
-        wx.reason_contexts,
-        wx.sum_healerunit_plans_fund_total,
-        wx.tree_traverse_count,
-        wx.voices,
-        wx.knot,
-        wx.planroot,
-        wx.credor_respect,
-        wx.debtor_respect,
-        wx.groupunits,
-        wx.moment_label,
-        wx.fund_grain,
-        wx.fund_pool,
-        wx.last_lesson_id,
-        wx.max_tree_traverse,
-        wx.belief_name,
-        wx.money_grain,
-        wx.respect_grain,
-        wx.tally,
+        kw.keeps_buildable,
+        kw.keeps_justified,
+        kw.offtrack_fund,
+        kw.offtrack_kids_star_set,
+        kw.range_inheritors,
+        kw.rational,
+        kw.reason_contexts,
+        kw.sum_healerunit_plans_fund_total,
+        kw.tree_traverse_count,
+        kw.voices,
+        kw.knot,
+        kw.planroot,
+        kw.credor_respect,
+        kw.debtor_respect,
+        kw.groupunits,
+        kw.moment_label,
+        kw.fund_grain,
+        kw.fund_pool,
+        kw.last_lesson_id,
+        kw.max_tree_traverse,
+        kw.belief_name,
+        kw.money_grain,
+        kw.respect_grain,
+        kw.tally,
     }
 
 
@@ -163,7 +163,7 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     assert x_belief.offtrack_kids_star_set == set()
     assert not x_belief.offtrack_fund
     assert x_belief.reason_contexts == set()
-    assert x_belief._range_inheritors == {}
+    assert x_belief.range_inheritors == {}
     print(f"{type(x_belief.planroot)=}") == 0
     assert str(type(x_belief.planroot)).find(".plan.PlanUnit'>") > 0
 

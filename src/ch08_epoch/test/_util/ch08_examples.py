@@ -13,7 +13,7 @@ from src.ch08_epoch.epoch_main import (
     get_min_from_dt_offset,
     new_epoch_planunit,
 )
-from src.ref.keywords import Ch08Keywords as wx
+from src.ref.keywords import Ch08Keywords as kw
 
 BOB_STR = "BOB"
 CASA_STR = "casa"
@@ -28,19 +28,19 @@ BOB_BELIEF = beliefunit_shop(BOB_STR)
 MOP_ROPE = BOB_BELIEF.make_l1_rope(MOP_STR)
 CLEAN_ROPE = BOB_BELIEF.make_l1_rope(CLEAN_STR)
 DIRTYNESS_ROPE = BOB_BELIEF.make_rope(CLEAN_ROPE, DIRTYNESS_STR)
-TIME_ROPE = BOB_BELIEF.make_l1_rope(wx.time)
+TIME_ROPE = BOB_BELIEF.make_l1_rope(kw.time)
 FIVE_ROPE = BOB_BELIEF.make_rope(TIME_ROPE, FIVE_STR)
-FIVE_DAY_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, wx.day)
-FIVE_DAYS_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, wx.days)
-FIVE_WEEK_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, wx.week)
-FIVE_WEEKS_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, wx.weeks)
+FIVE_DAY_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, kw.day)
+FIVE_DAYS_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, kw.days)
+FIVE_WEEK_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, kw.week)
+FIVE_WEEKS_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, kw.weeks)
 
-FIVE_C400_LEAP_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, wx.c400_leap)
-FIVE_C400_CLEAN_ROPE = BOB_BELIEF.make_rope(FIVE_C400_LEAP_ROPE, wx.c400_clean)
-FIVE_C100_ROPE = BOB_BELIEF.make_rope(FIVE_C400_CLEAN_ROPE, wx.c100)
-FIVE_YR4_LEAP_ROPE = BOB_BELIEF.make_rope(FIVE_C100_ROPE, wx.yr4_leap)
-FIVE_YR4_CLEAN_ROPE = BOB_BELIEF.make_rope(FIVE_YR4_LEAP_ROPE, wx.yr4_clean)
-FIVE_YEAR_ROPE = BOB_BELIEF.make_rope(FIVE_YR4_CLEAN_ROPE, wx.year)
+FIVE_C400_LEAP_ROPE = BOB_BELIEF.make_rope(FIVE_ROPE, kw.c400_leap)
+FIVE_C400_CLEAN_ROPE = BOB_BELIEF.make_rope(FIVE_C400_LEAP_ROPE, kw.c400_clean)
+FIVE_C100_ROPE = BOB_BELIEF.make_rope(FIVE_C400_CLEAN_ROPE, kw.c100)
+FIVE_YR4_LEAP_ROPE = BOB_BELIEF.make_rope(FIVE_C100_ROPE, kw.yr4_leap)
+FIVE_YR4_CLEAN_ROPE = BOB_BELIEF.make_rope(FIVE_YR4_LEAP_ROPE, kw.yr4_clean)
+FIVE_YEAR_ROPE = BOB_BELIEF.make_rope(FIVE_YR4_CLEAN_ROPE, kw.year)
 
 
 class Ch08ExampleStrs(str, Enum):
@@ -97,11 +97,11 @@ def get_example_epoch_config(epoch_label: LabelTerm) -> dict:
 
 
 def get_five_config() -> dict:
-    return get_example_epoch_config(wx.five)
+    return get_example_epoch_config(kw.five)
 
 
 def get_creg_config() -> dict:
-    return get_example_epoch_config(wx.creg)
+    return get_example_epoch_config(kw.creg)
 
 
 def get_squirt_config() -> dict:
@@ -113,8 +113,8 @@ def get_lizzy9_config() -> dict:
 
 
 def cregtime_planunit() -> PlanUnit:
-    c400_number = get_creg_config().get(wx.c400_number)
-    return new_epoch_planunit(wx.creg, c400_number)
+    c400_number = get_creg_config().get(kw.c400_number)
+    return new_epoch_planunit(kw.creg, c400_number)
 
 
 def get_wed():
@@ -146,11 +146,11 @@ def get_tue():
 
 
 def creg_hours_list() -> list[list[str, int]]:
-    return get_creg_config().get(wx.hours_config)
+    return get_creg_config().get(kw.hours_config)
 
 
 def creg_weekdays_list() -> list[str]:
-    return get_creg_config().get(wx.weekdays_config)
+    return get_creg_config().get(kw.weekdays_config)
 
 
 def creg_weekday_planunits() -> dict[str, PlanUnit]:
@@ -180,15 +180,15 @@ def add_time_squirt_planunit(x_beliefunit: BeliefUnit) -> BeliefUnit:
 
 
 def get_creg_min_from_dt(dt: datetime) -> int:
-    return get_min_from_dt_offset(dt, get_creg_config().get(wx.yr1_jan1_offset))
+    return get_min_from_dt_offset(dt, get_creg_config().get(kw.yr1_jan1_offset))
 
 
 def get_five_min_from_dt(dt: datetime) -> int:
-    return get_min_from_dt_offset(dt, get_five_config().get(wx.yr1_jan1_offset))
+    return get_min_from_dt_offset(dt, get_five_config().get(kw.yr1_jan1_offset))
 
 
 def get_squirt_min_from_dt(dt: datetime) -> int:
-    return get_min_from_dt_offset(dt, get_squirt_config().get(wx.yr1_jan1_offset))
+    return get_min_from_dt_offset(dt, get_squirt_config().get(kw.yr1_jan1_offset))
 
 
 def display_current_creg_five_min(graphics_bool: bool):
@@ -227,8 +227,8 @@ def display_current_creg_five_time_attrs(graphics_bool: bool):
         sue_belief = add_time_five_planunit(sue_belief)
         creg_min = get_creg_min_from_dt(current_datetime)
         five_min = get_five_min_from_dt(current_datetime)
-        creg_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, creg_min)
-        five_epochpoint = beliefepochpoint_shop(sue_belief, wx.five, five_min)
+        creg_epochpoint = beliefepochpoint_shop(sue_belief, kw.creg, creg_min)
+        five_epochpoint = beliefepochpoint_shop(sue_belief, kw.five, five_min)
         creg_epochpoint.calc_epoch()
         five_epochpoint.calc_epoch()
         creg_blurb = f"<b>{creg_epochpoint.get_blurb()}</b>"
@@ -260,13 +260,13 @@ def display_creg_five_squirt_time_attrs(graphics_bool: bool):
         sue_belief = add_time_creg_planunit(sue_belief)
         sue_belief = add_time_five_planunit(sue_belief)
         sue_belief = add_time_squirt_planunit(sue_belief)
-        time_rope = sue_belief.make_l1_rope(wx.time)
+        time_rope = sue_belief.make_l1_rope(kw.time)
         squirt_rope = sue_belief.make_rope(time_rope, "squirt")
         creg_min = get_creg_min_from_dt(current_datetime)
         five_min = get_five_min_from_dt(current_datetime)
         squirt_min = get_squirt_min_from_dt(current_datetime)
-        creg_epochpoint = beliefepochpoint_shop(sue_belief, wx.creg, creg_min)
-        five_epochpoint = beliefepochpoint_shop(sue_belief, wx.five, five_min)
+        creg_epochpoint = beliefepochpoint_shop(sue_belief, kw.creg, creg_min)
+        five_epochpoint = beliefepochpoint_shop(sue_belief, kw.five, five_min)
         squirt_epochpoint = beliefepochpoint_shop(sue_belief, squirt_rope, squirt_min)
         creg_epochpoint.calc_epoch()
         five_epochpoint.calc_epoch()

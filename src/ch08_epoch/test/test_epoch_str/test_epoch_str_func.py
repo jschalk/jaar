@@ -7,7 +7,7 @@ from src.ch08_epoch.reason_str_func import (
     get_reason_case_readable_str,
 )
 from src.ch08_epoch.test._util.ch08_examples import get_creg_config, get_thu
-from src.ref.keywords import Ch08Keywords as wx
+from src.ref.keywords import Ch08Keywords as kw
 
 
 def test_get_reason_case_readable_str_ReturnsObj_Scenario0_Level1():
@@ -131,9 +131,9 @@ def test_get_reason_case_readable_str_ReturnsObj_Scenario4_Time_creg():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     add_epoch_planunit(sue_belief, get_creg_config())
-    time_rope = sue_belief.make_l1_rope(wx.time)
-    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
-    week_rope = sue_belief.make_rope(creg_rope, wx.week)
+    time_rope = sue_belief.make_l1_rope(kw.time)
+    creg_rope = sue_belief.make_rope(time_rope, kw.creg)
+    week_rope = sue_belief.make_rope(creg_rope, kw.week)
     thu_rope = sue_belief.make_rope(week_rope, get_thu())
     thu_plan = sue_belief.get_plan_obj(thu_rope)
 
@@ -155,7 +155,7 @@ def test_get_reason_case_readable_str_ReturnsObj_Scenario4_Time_creg():
 
     # WHEN
     display_str = get_reason_case_readable_str(
-        week_rope, week_case, wx.creg, sue_belief
+        week_rope, week_case, kw.creg, sue_belief
     )
 
     # THEN
@@ -240,15 +240,15 @@ def test_get_fact_state_readable_str_ReturnsObj_Scenario2_CaseRange():
 def test_get_fact_state_readable_str_ReturnsObj_Scenario3_Time_creg():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    time_rope = sue_belief.make_l1_rope(wx.time)
-    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
+    time_rope = sue_belief.make_l1_rope(kw.time)
+    creg_rope = sue_belief.make_rope(time_rope, kw.creg)
     add_epoch_planunit(sue_belief, get_creg_config())
     sue_belief.add_fact(creg_rope, creg_rope, 1234567890, 1334567890)
     root_creg_fact = sue_belief.planroot.factunits.get(creg_rope)
     print(f"{root_creg_fact=}")
 
     # WHEN
-    epoch_fact_str = get_fact_state_readable_str(root_creg_fact, wx.creg, sue_belief)
+    epoch_fact_str = get_fact_state_readable_str(root_creg_fact, kw.creg, sue_belief)
 
     # THEN
     assert epoch_fact_str

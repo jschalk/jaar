@@ -5,7 +5,7 @@ from src.ch05_reason.reason import (
     caseunit_shop,
     factheir_shop,
 )
-from src.ref.keywords import Ch05Keywords as wx
+from src.ref.keywords import Ch05Keywords as kw
 
 
 def test_CaseUnit_Exists():
@@ -29,13 +29,13 @@ def test_CaseUnit_Exists():
     obj_attrs = set(email_case.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        wx.case_active,
-        wx.task,
-        wx.knot,
-        wx.reason_divisor,
-        wx.reason_upper,
-        wx.reason_lower,
-        wx.reason_state,
+        kw.case_active,
+        kw.task,
+        kw.knot,
+        kw.reason_divisor,
+        kw.reason_upper,
+        kw.reason_lower,
+        kw.reason_state,
     }
 
 
@@ -685,10 +685,10 @@ def test_CaseUnit_to_dict_ReturnsObj_Scenario0_With_divisor_reason_lower_reason_
     # THEN
     assert case_dict is not None
     static_dict = {
-        wx.reason_state: wk_rope,
-        wx.reason_lower: 1,
-        wx.reason_upper: 1,
-        wx.reason_divisor: 6,
+        kw.reason_state: wk_rope,
+        kw.reason_lower: 1,
+        kw.reason_upper: 1,
+        kw.reason_divisor: 6,
     }
     assert case_dict == static_dict
 
@@ -706,7 +706,7 @@ def test_CaseUnit_to_dict_ReturnsObj_Scenario1_With_reason_lower_reason_upper_Wi
 
     # THEN
     assert case_dict is not None
-    static_dict = {wx.reason_state: wk_rope, "reason_lower": 1, "reason_upper": 4}
+    static_dict = {kw.reason_state: wk_rope, "reason_lower": 1, "reason_upper": 4}
     assert case_dict == static_dict
 
 
@@ -723,7 +723,7 @@ def test_CaseUnit_to_dict_ReturnsObj_Scenario2_WithOnlyRopeTerms():
 
     # THEN
     assert case_dict is not None
-    static_dict = {wx.reason_state: wk_rope}
+    static_dict = {kw.reason_state: wk_rope}
     assert case_dict == static_dict
 
 
@@ -766,10 +766,10 @@ def test_cases_get_from_dict_ReturnsObj_Scenario0_FromCompleteDict():
     wk_rope = create_rope("Amy23", wk_str)
     static_dict = {
         wk_rope: {
-            wx.reason_state: wk_rope,
-            wx.reason_lower: 1,
-            wx.reason_upper: 30,
-            wx.reason_divisor: 5,
+            kw.reason_state: wk_rope,
+            kw.reason_lower: 1,
+            kw.reason_upper: 30,
+            kw.reason_divisor: 5,
         }
     }
 
@@ -786,7 +786,7 @@ def test_cases_get_from_dict_ReturnsObj_Scenario1_FromIncompleteDict():
     # ESTABLISH
     wk_str = "wks"
     wk_rope = create_rope("Amy23", wk_str)
-    static_dict = {wk_rope: {wx.reason_state: wk_rope}}
+    static_dict = {wk_rope: {kw.reason_state: wk_rope}}
 
     # WHEN
     cases_dict = cases_get_from_dict(static_dict)

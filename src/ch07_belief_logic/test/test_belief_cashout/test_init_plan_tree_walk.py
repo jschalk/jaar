@@ -4,7 +4,7 @@ from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_sorted_plan_list
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 from src.ch07_belief_logic.tree_metrics import TreeMetrics, treemetrics_shop
-from src.ref.keywords import Ch07Keywords as wx
+from src.ref.keywords import Ch07Keywords as kw
 
 
 def test_TreeMetrics_Exists():
@@ -236,7 +236,7 @@ def test_get_sorted_plan_list_ReturnsObj_Scenario1_SortBy_fund_ratio():
     }
 
     # WHEN
-    x_sorted_plan_list = get_sorted_plan_list(example_dict, sorting_key=wx.fund_ratio)
+    x_sorted_plan_list = get_sorted_plan_list(example_dict, sorting_key=kw.fund_ratio)
 
     # THEN
     assert x_sorted_plan_list is not None

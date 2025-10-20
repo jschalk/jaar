@@ -14,7 +14,7 @@ from src.ch17_idea.idea_config import (
 )
 from src.ch17_idea.idea_main import create_idea_df, get_idearef_obj, save_idea_csv
 from src.ch17_idea.test._util.ch17_env import env_dir_setup_cleanup, idea_moments_dir
-from src.ref.keywords import Ch17Keywords as wx
+from src.ref.keywords import Ch17Keywords as kw
 
 
 def test_create_idea_df_Arg_idea_format_00021_belief_voiceunit_v0_0_0():
@@ -42,23 +42,23 @@ def test_create_idea_df_Arg_idea_format_00021_belief_voiceunit_v0_0_0():
     array_headers = list(voice_dataframe.columns)
     voice_idearef = get_idearef_obj(x_idea_name)
     assert array_headers == voice_idearef.get_headers_list()
-    assert voice_dataframe.loc[0, wx.moment_label] == amy_moment_label
-    assert voice_dataframe.loc[0, wx.belief_name] == sue_beliefunit.belief_name
-    assert voice_dataframe.loc[0, wx.voice_name] == bob_str
-    assert voice_dataframe.loc[0, wx.voice_debt_lumen] == bob_voice_debt_lumen
-    assert voice_dataframe.loc[0, wx.voice_cred_lumen] == bob_voice_cred_lumen
+    assert voice_dataframe.loc[0, kw.moment_label] == amy_moment_label
+    assert voice_dataframe.loc[0, kw.belief_name] == sue_beliefunit.belief_name
+    assert voice_dataframe.loc[0, kw.voice_name] == bob_str
+    assert voice_dataframe.loc[0, kw.voice_debt_lumen] == bob_voice_debt_lumen
+    assert voice_dataframe.loc[0, kw.voice_cred_lumen] == bob_voice_cred_lumen
 
-    assert voice_dataframe.loc[1, wx.moment_label] == amy_moment_label
-    assert voice_dataframe.loc[1, wx.belief_name] == sue_beliefunit.belief_name
-    assert voice_dataframe.loc[1, wx.voice_name] == sue_str
-    assert voice_dataframe.loc[1, wx.voice_debt_lumen] == sue_voice_debt_lumen
-    assert voice_dataframe.loc[1, wx.voice_cred_lumen] == sue_voice_cred_lumen
+    assert voice_dataframe.loc[1, kw.moment_label] == amy_moment_label
+    assert voice_dataframe.loc[1, kw.belief_name] == sue_beliefunit.belief_name
+    assert voice_dataframe.loc[1, kw.voice_name] == sue_str
+    assert voice_dataframe.loc[1, kw.voice_debt_lumen] == sue_voice_debt_lumen
+    assert voice_dataframe.loc[1, kw.voice_cred_lumen] == sue_voice_cred_lumen
 
-    assert voice_dataframe.loc[2, wx.moment_label] == amy_moment_label
-    assert voice_dataframe.loc[2, wx.belief_name] == sue_beliefunit.belief_name
-    assert voice_dataframe.loc[2, wx.voice_name] == yao_str
-    assert voice_dataframe.loc[2, wx.voice_debt_lumen] == yao_voice_debt_lumen
-    assert voice_dataframe.loc[2, wx.voice_cred_lumen] == yao_voice_cred_lumen
+    assert voice_dataframe.loc[2, kw.moment_label] == amy_moment_label
+    assert voice_dataframe.loc[2, kw.belief_name] == sue_beliefunit.belief_name
+    assert voice_dataframe.loc[2, kw.voice_name] == yao_str
+    assert voice_dataframe.loc[2, kw.voice_debt_lumen] == yao_voice_debt_lumen
+    assert voice_dataframe.loc[2, kw.voice_cred_lumen] == yao_voice_cred_lumen
 
     assert len(voice_dataframe) == 3
 
@@ -101,33 +101,33 @@ def test_create_idea_df_Arg_idea_format_00020_belief_voice_membership_v0_0_0():
     print(f"{len(membership_dataframe)=}")
     assert len(membership_dataframe) == 10
     assert array_headers == voice_idearef.get_headers_list()
-    assert membership_dataframe.loc[0, wx.moment_label] == amy_moment_label
-    assert membership_dataframe.loc[0, wx.belief_name] == sue_beliefunit.belief_name
-    assert membership_dataframe.loc[0, wx.voice_name] == bob_str
-    assert membership_dataframe.loc[0, wx.group_title] == iowa_str
-    assert membership_dataframe.loc[0, wx.group_cred_lumen] == bob_iowa_credit_w
-    assert membership_dataframe.loc[0, wx.group_debt_lumen] == bob_iowa_debt_w
+    assert membership_dataframe.loc[0, kw.moment_label] == amy_moment_label
+    assert membership_dataframe.loc[0, kw.belief_name] == sue_beliefunit.belief_name
+    assert membership_dataframe.loc[0, kw.voice_name] == bob_str
+    assert membership_dataframe.loc[0, kw.group_title] == iowa_str
+    assert membership_dataframe.loc[0, kw.group_cred_lumen] == bob_iowa_credit_w
+    assert membership_dataframe.loc[0, kw.group_debt_lumen] == bob_iowa_debt_w
 
-    assert membership_dataframe.loc[3, wx.moment_label] == amy_moment_label
-    assert membership_dataframe.loc[3, wx.belief_name] == sue_beliefunit.belief_name
-    assert membership_dataframe.loc[3, wx.voice_name] == sue_str
-    assert membership_dataframe.loc[3, wx.group_title] == iowa_str
-    assert membership_dataframe.loc[3, wx.group_cred_lumen] == sue_iowa_credit_w
-    assert membership_dataframe.loc[3, wx.group_debt_lumen] == sue_iowa_debt_w
+    assert membership_dataframe.loc[3, kw.moment_label] == amy_moment_label
+    assert membership_dataframe.loc[3, kw.belief_name] == sue_beliefunit.belief_name
+    assert membership_dataframe.loc[3, kw.voice_name] == sue_str
+    assert membership_dataframe.loc[3, kw.group_title] == iowa_str
+    assert membership_dataframe.loc[3, kw.group_cred_lumen] == sue_iowa_credit_w
+    assert membership_dataframe.loc[3, kw.group_debt_lumen] == sue_iowa_debt_w
 
-    assert membership_dataframe.loc[4, wx.moment_label] == amy_moment_label
-    assert membership_dataframe.loc[4, wx.belief_name] == sue_beliefunit.belief_name
-    assert membership_dataframe.loc[4, wx.voice_name] == sue_str
-    assert membership_dataframe.loc[4, wx.group_title] == sue_str
-    assert membership_dataframe.loc[4, wx.group_cred_lumen] == 1
-    assert membership_dataframe.loc[4, wx.group_debt_lumen] == 1
+    assert membership_dataframe.loc[4, kw.moment_label] == amy_moment_label
+    assert membership_dataframe.loc[4, kw.belief_name] == sue_beliefunit.belief_name
+    assert membership_dataframe.loc[4, kw.voice_name] == sue_str
+    assert membership_dataframe.loc[4, kw.group_title] == sue_str
+    assert membership_dataframe.loc[4, kw.group_cred_lumen] == 1
+    assert membership_dataframe.loc[4, kw.group_debt_lumen] == 1
 
-    assert membership_dataframe.loc[7, wx.moment_label] == amy_moment_label
-    assert membership_dataframe.loc[7, wx.belief_name] == sue_beliefunit.belief_name
-    assert membership_dataframe.loc[7, wx.voice_name] == yao_str
-    assert membership_dataframe.loc[7, wx.group_title] == ohio_str
-    assert membership_dataframe.loc[7, wx.group_cred_lumen] == yao_ohio_credit_w
-    assert membership_dataframe.loc[7, wx.group_debt_lumen] == yao_ohio_debt_w
+    assert membership_dataframe.loc[7, kw.moment_label] == amy_moment_label
+    assert membership_dataframe.loc[7, kw.belief_name] == sue_beliefunit.belief_name
+    assert membership_dataframe.loc[7, kw.voice_name] == yao_str
+    assert membership_dataframe.loc[7, kw.group_title] == ohio_str
+    assert membership_dataframe.loc[7, kw.group_cred_lumen] == yao_ohio_credit_w
+    assert membership_dataframe.loc[7, kw.group_debt_lumen] == yao_ohio_debt_w
     assert len(membership_dataframe) == 10
 
 
@@ -152,17 +152,17 @@ def test_create_idea_df_Arg_idea_format_00013_planunit_v0_0_0():
     array_headers = list(planunit_format.columns)
     assert array_headers == get_idearef_obj(x_idea_name).get_headers_list()
 
-    assert planunit_format.loc[0, wx.belief_name] == sue_beliefunit.belief_name
-    assert planunit_format.loc[0, wx.pledge] == ""
-    assert planunit_format.loc[0, wx.moment_label] == amy_moment_label
-    assert planunit_format.loc[0, wx.plan_rope] == casa_rope
-    assert planunit_format.loc[0, wx.star] == casa_star
+    assert planunit_format.loc[0, kw.belief_name] == sue_beliefunit.belief_name
+    assert planunit_format.loc[0, kw.pledge] == ""
+    assert planunit_format.loc[0, kw.moment_label] == amy_moment_label
+    assert planunit_format.loc[0, kw.plan_rope] == casa_rope
+    assert planunit_format.loc[0, kw.star] == casa_star
 
-    assert planunit_format.loc[1, wx.belief_name] == sue_beliefunit.belief_name
-    assert planunit_format.loc[1, wx.pledge] == "Yes"
-    assert planunit_format.loc[1, wx.moment_label] == amy_moment_label
-    assert planunit_format.loc[1, wx.plan_rope] == clean_rope
-    assert planunit_format.loc[1, wx.star] == 1
+    assert planunit_format.loc[1, kw.belief_name] == sue_beliefunit.belief_name
+    assert planunit_format.loc[1, kw.pledge] == "Yes"
+    assert planunit_format.loc[1, kw.moment_label] == amy_moment_label
+    assert planunit_format.loc[1, kw.plan_rope] == clean_rope
+    assert planunit_format.loc[1, kw.star] == 1
     assert len(planunit_format) == 2
 
 

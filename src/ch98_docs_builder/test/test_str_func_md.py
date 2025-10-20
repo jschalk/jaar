@@ -1,18 +1,15 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import create_path, open_file
-from src.ch98_docs_builder.doc_builder import (
-    get_chapter_desc_prefix,
-    get_chapter_descs,
+from src.ch01_py.keyword_class_builder import (
+    create_all_enum_keyword_classes_str,
+    create_keywords_enum_class_file_str,
     get_cumlative_ch_keywords_dict,
     get_keywords_by_chapter,
     get_keywords_by_chapter_md,
     get_keywords_src_config,
     save_keywords_by_chapter_md,
 )
-from src.ch98_docs_builder.keyword_class_builder import (
-    create_all_enum_keyword_classes_str,
-    create_keywords_enum_class_file_str,
-)
+from src.ch98_docs_builder.doc_builder import get_chapter_desc_prefix, get_chapter_descs
 from src.ch98_docs_builder.test._util.ch98_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,

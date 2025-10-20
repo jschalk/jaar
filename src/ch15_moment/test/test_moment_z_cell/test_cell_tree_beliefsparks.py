@@ -11,7 +11,7 @@ from src.ch15_moment.test._util.ch15_env import (
     get_chapter_temp_dir,
 )
 from src.ch15_moment.test._util.ch15_examples import example_casa_floor_clean_factunit
-from src.ref.keywords import Ch15Keywords as wx
+from src.ref.keywords import Ch15Keywords as kw
 
 
 def test_load_cells_beliefspark_SetsFiles_Scenario0_NoFacts(
@@ -30,14 +30,14 @@ def test_load_cells_beliefspark_SetsFiles_Scenario0_NoFacts(
     print(f"{bob3_beliefspark_path=}")
     cellunit_add_json_file(moment_mstr_dir, a23_str, bob_str, time5, spark300, [])
     bob5_cell_path = create_cell_json_path(moment_mstr_dir, a23_str, bob_str, time5)
-    assert open_json(bob5_cell_path).get(wx.beliefspark_facts) == {}
+    assert open_json(bob5_cell_path).get(kw.beliefspark_facts) == {}
 
     # WHEN
     load_cells_beliefspark(moment_mstr_dir, a23_str)
 
     # THEN
     assert os_path_exists(bob5_cell_path)
-    assert open_json(bob5_cell_path).get(wx.beliefspark_facts) == {}
+    assert open_json(bob5_cell_path).get(kw.beliefspark_facts) == {}
 
 
 def test_load_cells_beliefspark_SetsFiles_Scenario1_WithFacts(
@@ -60,7 +60,7 @@ def test_load_cells_beliefspark_SetsFiles_Scenario1_WithFacts(
     print(f"{bob3_beliefspark_path=}")
     cellunit_add_json_file(moment_mstr_dir, a23_str, bob_str, time5, spark300, [])
     bob5_cell_path = create_cell_json_path(moment_mstr_dir, a23_str, bob_str, time5)
-    assert open_json(bob5_cell_path).get(wx.beliefspark_facts) == {}
+    assert open_json(bob5_cell_path).get(kw.beliefspark_facts) == {}
 
     # WHEN
     load_cells_beliefspark(moment_mstr_dir, a23_str)
@@ -68,7 +68,7 @@ def test_load_cells_beliefspark_SetsFiles_Scenario1_WithFacts(
     # THEN
     expected_beliefspark_facts = {clean_fact.fact_context: clean_fact.to_dict()}
     assert (
-        open_json(bob5_cell_path).get(wx.beliefspark_facts)
+        open_json(bob5_cell_path).get(kw.beliefspark_facts)
         == expected_beliefspark_facts
     )
 
@@ -93,7 +93,7 @@ def test_load_cells_beliefspark_SetsFiles_Scenario2_WithFacts_NotAtRoot(
     bob5_cell_path = create_cell_json_path(
         moment_mstr_dir, a23_str, bob_str, time5, das
     )
-    assert open_json(bob5_cell_path).get(wx.beliefspark_facts) == {}
+    assert open_json(bob5_cell_path).get(kw.beliefspark_facts) == {}
 
     # WHEN
     load_cells_beliefspark(moment_mstr_dir, a23_str)
@@ -101,6 +101,6 @@ def test_load_cells_beliefspark_SetsFiles_Scenario2_WithFacts_NotAtRoot(
     # THEN
     expected_beliefspark_facts = {clean_fact.fact_context: clean_fact.to_dict()}
     assert (
-        open_json(bob5_cell_path).get(wx.beliefspark_facts)
+        open_json(bob5_cell_path).get(kw.beliefspark_facts)
         == expected_beliefspark_facts
     )

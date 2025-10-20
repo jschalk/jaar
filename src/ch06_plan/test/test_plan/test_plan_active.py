@@ -229,19 +229,19 @@ def test_PlanUnit_set_reasonheirsRefusesNewValues():
     assert ball_plan.reasonheirs == reasonheirs
 
 
-def test_PlanUnit_set_range_factheirs_SetsAttrNoParameters():
+def test_PlanUnit_set_range_inheritors_factheirs_SetsAttrNoParameters():
     # ESTABLISH
     ball_plan = planunit_shop("ball")
     assert ball_plan.factheirs == {}
 
     # WHEN
-    ball_plan.set_range_factheirs(belief_plan_dict={}, range_inheritors={})
+    ball_plan.set_range_inheritors_factheirs(belief_plan_dict={}, range_inheritors={})
 
     # THEN
     assert ball_plan.factheirs == {}
 
 
-def test_PlanUnit_set_range_factheirs_SetsAttrNewFactHeir():
+def test_PlanUnit_set_range_inheritors_factheirs_SetsAttrNewFactHeir():
     # ESTABLISH
     wk_str = "wk"
     amy_str = "Amy23"
@@ -274,7 +274,7 @@ def test_PlanUnit_set_range_factheirs_SetsAttrNewFactHeir():
     assert ball_plan.factheirs.get(tue_rope) is None
 
     # WHEN
-    ball_plan.set_range_factheirs(x_belief_plan_dict, x_range_inheritors)
+    ball_plan.set_range_inheritors_factheirs(x_belief_plan_dict, x_range_inheritors)
 
     # THEN
     tue_reason_lower = 113

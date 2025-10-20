@@ -6,7 +6,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     create_prime_tablename,
 )
 from src.ch19_world_kpi.kpi_mstr import create_populate_kpi002_table
-from src.ref.keywords import Ch19Keywords as wx
+from src.ref.keywords import Ch19Keywords as kw
 
 
 def test_create_populate_kpi002_table_PopulatesTable_Scenario0_NoPledges():
@@ -24,12 +24,12 @@ def test_create_populate_kpi002_table_PopulatesTable_Scenario0_NoPledges():
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         job_blrplan_tablename = create_prime_tablename("BLRPLAN", "job", None)
         insert_sqlstr = f"""INSERT INTO {job_blrplan_tablename} (
-  {wx.moment_label}
-, {wx.belief_name}
-, {wx.plan_rope}
-, {wx.pledge}
-, {wx.plan_active}
-, {wx.task}
+  {kw.moment_label}
+, {kw.belief_name}
+, {kw.plan_rope}
+, {kw.pledge}
+, {kw.plan_active}
+, {kw.task}
 )
 VALUES 
   ('{a23_str}', '{bob_str}', '{casa_rope}', {casa_pledge}, {casa_active}, {casa_task})
@@ -37,7 +37,7 @@ VALUES
 """
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, job_blrplan_tablename) == 2
-        moment_kpi002_belief_pledges_tablename = wx.moment_kpi002_belief_pledges
+        moment_kpi002_belief_pledges_tablename = kw.moment_kpi002_belief_pledges
         assert not db_table_exists(cursor, moment_kpi002_belief_pledges_tablename)
 
         # WHEN
@@ -46,12 +46,12 @@ VALUES
         # THEN
         assert db_table_exists(cursor, moment_kpi002_belief_pledges_tablename)
         assert get_table_columns(cursor, moment_kpi002_belief_pledges_tablename) == [
-            wx.moment_label,
-            wx.belief_name,
-            wx.plan_rope,
-            wx.pledge,
-            wx.plan_active,
-            wx.task,
+            kw.moment_label,
+            kw.belief_name,
+            kw.plan_rope,
+            kw.pledge,
+            kw.plan_active,
+            kw.task,
         ]
         assert get_row_count(cursor, moment_kpi002_belief_pledges_tablename) == 0
 
@@ -75,12 +75,12 @@ def test_create_populate_kpi002_table_PopulatesTable_Scenario1_TwoPledges():
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         job_blrplan_tablename = create_prime_tablename("BLRPLAN", "job", None)
         insert_sqlstr = f"""INSERT INTO {job_blrplan_tablename} (
-  {wx.moment_label}
-, {wx.belief_name}
-, {wx.plan_rope}
-, {wx.pledge}
-, {wx.plan_active}
-, {wx.task}
+  {kw.moment_label}
+, {kw.belief_name}
+, {kw.plan_rope}
+, {kw.pledge}
+, {kw.plan_active}
+, {kw.task}
 )
 VALUES 
   ('{a23_str}', '{bob_str}', '{casa_rope}', {casa_pledge}, {casa_active}, {casa_task})
@@ -90,7 +90,7 @@ VALUES
 """
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, job_blrplan_tablename) == 4
-        moment_kpi002_belief_pledges_tablename = wx.moment_kpi002_belief_pledges
+        moment_kpi002_belief_pledges_tablename = kw.moment_kpi002_belief_pledges
         assert not db_table_exists(cursor, moment_kpi002_belief_pledges_tablename)
 
         # WHEN
@@ -99,11 +99,11 @@ VALUES
         # THEN
         assert db_table_exists(cursor, moment_kpi002_belief_pledges_tablename)
         assert get_table_columns(cursor, moment_kpi002_belief_pledges_tablename) == [
-            wx.moment_label,
-            wx.belief_name,
-            wx.plan_rope,
-            wx.pledge,
-            wx.plan_active,
-            wx.task,
+            kw.moment_label,
+            kw.belief_name,
+            kw.plan_rope,
+            kw.pledge,
+            kw.plan_active,
+            kw.task,
         ]
         assert get_row_count(cursor, moment_kpi002_belief_pledges_tablename) == 2

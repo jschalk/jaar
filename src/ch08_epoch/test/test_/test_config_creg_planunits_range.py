@@ -9,55 +9,55 @@ from src.ch08_epoch.test._util.ch08_examples import (
     get_tue,
     get_wed,
 )
-from src.ref.keywords import Ch08Keywords as wx
+from src.ref.keywords import Ch08Keywords as kw
 
 
 def test_BeliefUnit_set_plan_dict_SetsAll_range_inheritors():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
-    weeks_rope = sue_beliefunit.make_rope(creg_rope, wx.weeks)
-    week_rope = sue_beliefunit.make_rope(creg_rope, wx.week)
+    time_rope = sue_beliefunit.make_l1_rope(kw.time)
+    creg_rope = sue_beliefunit.make_rope(time_rope, kw.creg)
+    weeks_rope = sue_beliefunit.make_rope(creg_rope, kw.weeks)
+    week_rope = sue_beliefunit.make_rope(creg_rope, kw.week)
     sun_rope = sue_beliefunit.make_rope(week_rope, get_sun())
-    day_rope = sue_beliefunit.make_rope(creg_rope, wx.day)
-    c400_leap_rope = sue_beliefunit.make_rope(creg_rope, wx.c400_leap)
-    c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, wx.c400_clean)
-    c100_clean_rope = sue_beliefunit.make_rope(c400_clean_rope, wx.c100)
-    yr4_leap_rope = sue_beliefunit.make_rope(c100_clean_rope, wx.yr4_leap)
-    yr4_clean_rope = sue_beliefunit.make_rope(yr4_leap_rope, wx.yr4_clean)
-    year_rope = sue_beliefunit.make_rope(yr4_clean_rope, wx.year)
+    day_rope = sue_beliefunit.make_rope(creg_rope, kw.day)
+    c400_leap_rope = sue_beliefunit.make_rope(creg_rope, kw.c400_leap)
+    c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, kw.c400_clean)
+    c100_clean_rope = sue_beliefunit.make_rope(c400_clean_rope, kw.c100)
+    yr4_leap_rope = sue_beliefunit.make_rope(c100_clean_rope, kw.yr4_leap)
+    yr4_clean_rope = sue_beliefunit.make_rope(yr4_leap_rope, kw.yr4_clean)
+    year_rope = sue_beliefunit.make_rope(yr4_clean_rope, kw.year)
     jan_rope = sue_beliefunit.make_rope(year_rope, "January")
 
     sue_beliefunit = add_time_creg_planunit(sue_beliefunit)
-    assert sue_beliefunit._range_inheritors == {}
+    assert sue_beliefunit.range_inheritors == {}
 
     # WHEN
     sue_beliefunit._set_plan_dict()
     sue_beliefunit._set_plantree_range_attrs()
 
     # THEN
-    print(f"{sue_beliefunit._range_inheritors=}")
-    assert sue_beliefunit._range_inheritors != {}
-    assert day_rope in sue_beliefunit._range_inheritors
-    assert weeks_rope in sue_beliefunit._range_inheritors
-    assert week_rope in sue_beliefunit._range_inheritors
-    assert sun_rope in sue_beliefunit._range_inheritors
-    assert c400_leap_rope in sue_beliefunit._range_inheritors
-    assert c400_clean_rope in sue_beliefunit._range_inheritors
-    assert c100_clean_rope in sue_beliefunit._range_inheritors
-    assert yr4_leap_rope in sue_beliefunit._range_inheritors
-    assert yr4_clean_rope in sue_beliefunit._range_inheritors
-    assert year_rope in sue_beliefunit._range_inheritors
-    assert jan_rope in sue_beliefunit._range_inheritors
+    print(f"{sue_beliefunit.range_inheritors=}")
+    assert sue_beliefunit.range_inheritors != {}
+    assert day_rope in sue_beliefunit.range_inheritors
+    assert weeks_rope in sue_beliefunit.range_inheritors
+    assert week_rope in sue_beliefunit.range_inheritors
+    assert sun_rope in sue_beliefunit.range_inheritors
+    assert c400_leap_rope in sue_beliefunit.range_inheritors
+    assert c400_clean_rope in sue_beliefunit.range_inheritors
+    assert c100_clean_rope in sue_beliefunit.range_inheritors
+    assert yr4_leap_rope in sue_beliefunit.range_inheritors
+    assert yr4_clean_rope in sue_beliefunit.range_inheritors
+    assert year_rope in sue_beliefunit.range_inheritors
+    assert jan_rope in sue_beliefunit.range_inheritors
 
 
 def test_BeliefUnit_set_plantree_range_attrs_Sets_day_plan_gogo_calc_stop_calc():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
-    day_rope = sue_beliefunit.make_rope(creg_rope, wx.day)
+    time_rope = sue_beliefunit.make_l1_rope(kw.time)
+    creg_rope = sue_beliefunit.make_rope(time_rope, kw.creg)
+    day_rope = sue_beliefunit.make_rope(creg_rope, kw.day)
     sue_beliefunit = add_time_creg_planunit(sue_beliefunit)
     sue_beliefunit._set_plan_dict()
     assert sue_beliefunit.plan_exists(time_rope)
@@ -82,9 +82,9 @@ def test_BeliefUnit_set_plantree_range_attrs_Sets_day_plan_gogo_calc_stop_calc()
 def test_BeliefUnit_set_plantree_range_attrs_Sets_days_plan_gogo_calc_stop_calc():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
-    days_rope = sue_beliefunit.make_rope(creg_rope, wx.days)
+    time_rope = sue_beliefunit.make_l1_rope(kw.time)
+    creg_rope = sue_beliefunit.make_rope(time_rope, kw.creg)
+    days_rope = sue_beliefunit.make_rope(creg_rope, kw.days)
     sue_beliefunit = add_time_creg_planunit(sue_beliefunit)
     sue_beliefunit._set_plan_dict()
     assert sue_beliefunit.plan_exists(days_rope)
@@ -105,10 +105,10 @@ def test_BeliefUnit_set_plantree_range_attrs_Sets_days_plan_gogo_calc_stop_calc(
 def test_BeliefUnit_set_plantree_range_attrs_Sets_weeks_plan_gogo_calc_stop_calc():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
-    weeks_rope = sue_beliefunit.make_rope(creg_rope, wx.weeks)
-    week_rope = sue_beliefunit.make_rope(creg_rope, wx.week)
+    time_rope = sue_beliefunit.make_l1_rope(kw.time)
+    creg_rope = sue_beliefunit.make_rope(time_rope, kw.creg)
+    weeks_rope = sue_beliefunit.make_rope(creg_rope, kw.weeks)
+    week_rope = sue_beliefunit.make_rope(creg_rope, kw.week)
     sun_rope = sue_beliefunit.make_rope(week_rope, get_sun())
     mon_rope = sue_beliefunit.make_rope(week_rope, get_mon())
     tue_rope = sue_beliefunit.make_rope(week_rope, get_tue())
@@ -164,14 +164,14 @@ def test_BeliefUnit_set_plantree_range_attrs_Sets_weeks_plan_gogo_calc_stop_calc
 def test_BeliefUnit_set_plantree_range_attrs_Sets_c400_plan_gogo_calc_stop_calc():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
-    c400_leap_rope = sue_beliefunit.make_rope(creg_rope, wx.c400_leap)
-    # c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, wx.c400_clean)
-    # c100_clean_rope = sue_beliefunit.make_rope(c400_clean_rope, wx.c100)
-    # yr4_leap_rope = sue_beliefunit.make_rope(c100_clean_rope, wx.yr4_leap)
-    # yr4_clean_rope = sue_beliefunit.make_rope(yr4_leap_rope, wx.yr4_clean)
-    # year_rope = sue_beliefunit.make_rope(yr4_clean_rope, wx.year)
+    time_rope = sue_beliefunit.make_l1_rope(kw.time)
+    creg_rope = sue_beliefunit.make_rope(time_rope, kw.creg)
+    c400_leap_rope = sue_beliefunit.make_rope(creg_rope, kw.c400_leap)
+    # c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, kw.c400_clean)
+    # c100_clean_rope = sue_beliefunit.make_rope(c400_clean_rope, kw.c100)
+    # yr4_leap_rope = sue_beliefunit.make_rope(c100_clean_rope, kw.yr4_leap)
+    # yr4_clean_rope = sue_beliefunit.make_rope(yr4_leap_rope, kw.yr4_clean)
+    # year_rope = sue_beliefunit.make_rope(yr4_clean_rope, kw.year)
     sue_beliefunit = add_time_creg_planunit(sue_beliefunit)
     sue_beliefunit._set_plan_dict()
     print(f"    {c400_leap_rope=}")
@@ -197,14 +197,14 @@ def test_BeliefUnit_set_plantree_range_attrs_Sets_c400_plan_gogo_calc_stop_calc(
 def test_BeliefUnit_set_plantree_range_attrs_Sets_years_plan_gogo_calc_stop_calc():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(wx.time)
-    creg_rope = sue_beliefunit.make_rope(time_rope, wx.creg)
-    c400_leap_rope = sue_beliefunit.make_rope(creg_rope, wx.c400_leap)
-    c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, wx.c400_clean)
-    c100_clean_rope = sue_beliefunit.make_rope(c400_clean_rope, wx.c100)
-    yr4_leap_rope = sue_beliefunit.make_rope(c100_clean_rope, wx.yr4_leap)
-    yr4_clean_rope = sue_beliefunit.make_rope(yr4_leap_rope, wx.yr4_clean)
-    year_rope = sue_beliefunit.make_rope(yr4_clean_rope, wx.year)
+    time_rope = sue_beliefunit.make_l1_rope(kw.time)
+    creg_rope = sue_beliefunit.make_rope(time_rope, kw.creg)
+    c400_leap_rope = sue_beliefunit.make_rope(creg_rope, kw.c400_leap)
+    c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, kw.c400_clean)
+    c100_clean_rope = sue_beliefunit.make_rope(c400_clean_rope, kw.c100)
+    yr4_leap_rope = sue_beliefunit.make_rope(c100_clean_rope, kw.yr4_leap)
+    yr4_clean_rope = sue_beliefunit.make_rope(yr4_leap_rope, kw.yr4_clean)
+    year_rope = sue_beliefunit.make_rope(yr4_clean_rope, kw.year)
     sue_beliefunit = add_time_creg_planunit(sue_beliefunit)
     sue_beliefunit._set_plan_dict()
     print(f"    {year_rope=}")

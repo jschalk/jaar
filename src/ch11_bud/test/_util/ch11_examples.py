@@ -11,7 +11,7 @@ from src.ch10_lesson.test._util.ch10_examples import (
     get_atom_example_planunit_sports,
 )
 from src.ch11_bud.bud_main import BudUnit, budunit_shop
-from src.ref.keywords import Ch11Keywords as wx
+from src.ref.keywords import Ch11Keywords as kw
 
 A23_STR = "amy23"
 CASA_STR = "casa"

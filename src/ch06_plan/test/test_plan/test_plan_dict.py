@@ -9,33 +9,33 @@ from src.ch05_reason.reason import (
 )
 from src.ch06_plan.healer import healerunit_shop
 from src.ch06_plan.plan import get_obj_from_plan_dict, planunit_shop
-from src.ref.keywords import Ch06Keywords as wx
+from src.ref.keywords import Ch06Keywords as kw
 
 
 def test_get_obj_from_plan_dict_ReturnsObj():
     # ESTABLISH
-    field_str = wx.is_expanded
+    field_str = kw.is_expanded
     # WHEN / THEN
     assert get_obj_from_plan_dict({field_str: True}, field_str)
     assert get_obj_from_plan_dict({}, field_str)
     assert get_obj_from_plan_dict({field_str: False}, field_str) is False
 
     # ESTABLISH
-    field_str = wx.pledge
+    field_str = kw.pledge
     # WHEN / THEN
     assert get_obj_from_plan_dict({field_str: True}, field_str)
     assert get_obj_from_plan_dict({}, field_str) is False
     assert get_obj_from_plan_dict({field_str: False}, field_str) is False
 
     # ESTABLISH
-    field_str = wx.problem_bool
+    field_str = kw.problem_bool
     # WHEN / THEN
     assert get_obj_from_plan_dict({field_str: True}, field_str)
     assert get_obj_from_plan_dict({}, field_str) is False
     assert get_obj_from_plan_dict({field_str: False}, field_str) is False
 
     # ESTABLISH
-    field_str = wx.kids
+    field_str = kw.kids
     # WHEN / THEN
     assert get_obj_from_plan_dict({field_str: {}}, field_str) == {}
     assert get_obj_from_plan_dict({}, field_str) == {}
@@ -44,7 +44,7 @@ def test_get_obj_from_plan_dict_ReturnsObj():
 def test_get_obj_from_plan_dict_Returns_HealerUnit():
     # ESTABLISH
     # WHEN / THEN
-    healerunit_key = wx.healerunit
+    healerunit_key = kw.healerunit
     assert get_obj_from_plan_dict({}, healerunit_key) == healerunit_shop()
 
     # WHEN
@@ -107,14 +107,14 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
         flyer_awardunit.awardee_title: flyer_awardunit,
     }
     biker_get_dict = {
-        wx.awardee_title: biker_awardunit.awardee_title,
-        wx.give_force: biker_awardunit.give_force,
-        wx.take_force: biker_awardunit.take_force,
+        kw.awardee_title: biker_awardunit.awardee_title,
+        kw.give_force: biker_awardunit.give_force,
+        kw.take_force: biker_awardunit.take_force,
     }
     flyer_get_dict = {
-        wx.awardee_title: flyer_awardunit.awardee_title,
-        wx.give_force: flyer_awardunit.give_force,
-        wx.take_force: flyer_awardunit.take_force,
+        kw.awardee_title: flyer_awardunit.awardee_title,
+        kw.give_force: flyer_awardunit.give_force,
+        kw.take_force: flyer_awardunit.take_force,
     }
     x1_awardunits = {
         biker_awardee_title: biker_get_dict,
@@ -172,29 +172,29 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
 
     # THEN
     assert casa_dict is not None
-    assert len(casa_dict[wx.kids]) == 1
-    assert casa_dict[wx.kids] == casa_plan.get_kids_dict()
-    assert casa_dict[wx.reasonunits] == casa_plan.get_reasonunits_dict()
-    assert casa_dict[wx.awardunits] == casa_plan.get_awardunits_dict()
-    assert casa_dict[wx.awardunits] == x1_awardunits
-    assert casa_dict[wx.laborunit] == sue_laborunit.to_dict()
-    assert casa_dict[wx.healerunit] == yao_healerunit.to_dict()
-    assert casa_dict[wx.star] == casa_plan.star
-    assert casa_dict[wx.plan_label] == casa_plan.plan_label
+    assert len(casa_dict[kw.kids]) == 1
+    assert casa_dict[kw.kids] == casa_plan.get_kids_dict()
+    assert casa_dict[kw.reasonunits] == casa_plan.get_reasonunits_dict()
+    assert casa_dict[kw.awardunits] == casa_plan.get_awardunits_dict()
+    assert casa_dict[kw.awardunits] == x1_awardunits
+    assert casa_dict[kw.laborunit] == sue_laborunit.to_dict()
+    assert casa_dict[kw.healerunit] == yao_healerunit.to_dict()
+    assert casa_dict[kw.star] == casa_plan.star
+    assert casa_dict[kw.plan_label] == casa_plan.plan_label
     assert casa_dict["uid"] == casa_plan.uid
-    assert casa_dict[wx.begin] == casa_plan.begin
-    assert casa_dict[wx.close] == casa_plan.close
-    assert casa_dict[wx.numor] == casa_plan.numor
-    assert casa_dict[wx.denom] == casa_plan.denom
-    assert casa_dict[wx.morph] == casa_plan.morph
-    assert casa_dict[wx.gogo_want] == casa_plan.gogo_want
-    assert casa_dict[wx.stop_want] == casa_plan.stop_want
-    assert casa_dict[wx.pledge] == casa_plan.pledge
-    assert casa_dict[wx.problem_bool] == casa_plan.problem_bool
-    assert casa_dict[wx.problem_bool] == x_problem_bool
+    assert casa_dict[kw.begin] == casa_plan.begin
+    assert casa_dict[kw.close] == casa_plan.close
+    assert casa_dict[kw.numor] == casa_plan.numor
+    assert casa_dict[kw.denom] == casa_plan.denom
+    assert casa_dict[kw.morph] == casa_plan.morph
+    assert casa_dict[kw.gogo_want] == casa_plan.gogo_want
+    assert casa_dict[kw.stop_want] == casa_plan.stop_want
+    assert casa_dict[kw.pledge] == casa_plan.pledge
+    assert casa_dict[kw.problem_bool] == casa_plan.problem_bool
+    assert casa_dict[kw.problem_bool] == x_problem_bool
     assert casa_plan.is_expanded
-    assert casa_dict.get(wx.is_expanded) is None
-    assert len(casa_dict[wx.factunits]) == len(casa_plan.get_factunits_dict())
+    assert casa_dict.get(kw.is_expanded) is None
+    assert len(casa_dict[kw.factunits]) == len(casa_plan.get_factunits_dict())
 
 
 def test_PlanUnit_to_dict_ReturnsObj_WithoutEmptyAttributes():
@@ -207,7 +207,7 @@ def test_PlanUnit_to_dict_ReturnsObj_WithoutEmptyAttributes():
 
     # THEN
     assert casa_dict is not None
-    assert casa_dict == {wx.plan_label: casa_str, wx.star: 1}
+    assert casa_dict == {kw.plan_label: casa_str, kw.star: 1}
 
 
 def test_PlanUnit_to_dict_ReturnsObj_DictWith_attrs_SetToTrue():
@@ -243,12 +243,12 @@ def test_PlanUnit_to_dict_ReturnsObj_DictWith_attrs_SetToTrue():
     casa_dict = casa_plan.to_dict()
 
     # THEN
-    assert casa_dict.get(wx.is_expanded) is False
-    assert casa_dict.get(wx.pledge)
-    assert casa_dict.get(wx.factunits) is not None
-    assert casa_dict.get(wx.awardunits) is not None
-    assert casa_dict.get(wx.laborunit) is not None
-    assert casa_dict.get(wx.kids) is not None
+    assert casa_dict.get(kw.is_expanded) is False
+    assert casa_dict.get(kw.pledge)
+    assert casa_dict.get(kw.factunits) is not None
+    assert casa_dict.get(kw.awardunits) is not None
+    assert casa_dict.get(kw.laborunit) is not None
+    assert casa_dict.get(kw.kids) is not None
 
 
 def test_PlanUnit_to_dict_ReturnsDictWithAttrsEmpty():
@@ -267,10 +267,10 @@ def test_PlanUnit_to_dict_ReturnsDictWithAttrsEmpty():
     casa_dict = casa_plan.to_dict()
 
     # THEN
-    assert casa_dict.get(wx.is_expanded) is None
-    assert casa_dict.get(wx.pledge) is None
-    assert casa_dict.get(wx.factunits) is None
-    assert casa_dict.get(wx.awardunits) is None
-    assert casa_dict.get(wx.laborunit) is None
-    assert casa_dict.get(wx.healerunit) is None
-    assert casa_dict.get(wx.kids) is None
+    assert casa_dict.get(kw.is_expanded) is None
+    assert casa_dict.get(kw.pledge) is None
+    assert casa_dict.get(kw.factunits) is None
+    assert casa_dict.get(kw.awardunits) is None
+    assert casa_dict.get(kw.laborunit) is None
+    assert casa_dict.get(kw.healerunit) is None
+    assert casa_dict.get(kw.kids) is None

@@ -72,13 +72,11 @@ def test_create_rope_Scenario0_RaisesErrorIfKnotNotAtPostionZeroOf_parent_rope()
     # ESTABLISH
     rose_str = "rose"
     semicolon_knot = ";"
-    semicolon_knot_rose_rope = f"{semicolon_knot}{rose_str}"
+    knot_rose_rope = f"{semicolon_knot}{rose_str}"
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        create_rope(
-            "ZZ", rose_str, auto_add_first_knot=False
-        ) == semicolon_knot_rose_rope
+        create_rope("ZZ", rose_str, auto_add_first_knot=False) == knot_rose_rope
     exception_str = (
         f"Parent rope must have knot '{semicolon_knot}' at position 0 in string"
     )

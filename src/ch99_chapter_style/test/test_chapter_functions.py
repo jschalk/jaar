@@ -7,15 +7,17 @@ from src.ch01_py.file_toolbox import (
     get_dir_filenames,
     open_file,
 )
+from src.ch01_py.keyword_class_builder import (
+    get_chXX_keyword_classes,
+    get_cumlative_ch_keywords_dict,
+    get_keywords_by_chapter,
+    get_keywords_src_config,
+)
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
     get_chapter_descs,
     get_chapter_num_descs,
-    get_chXX_keyword_classes,
-    get_cumlative_ch_keywords_dict,
-    get_keywords_by_chapter,
-    get_keywords_src_config,
 )
 from src.ch99_chapter_style.style import (
     check_all_test_functions_are_formatted,
@@ -217,7 +219,7 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
     for keyword, chapters_dict in keywords_in_ch_count.items():
         # for chapter_prefix in sorted(chapters_dict.keys()):
         #     chapter_count = chapters_dict.get(chapter_prefix)
-        #     # print(f"{keyword=} {chapter_prefix} {chapter_count=}")
+        print(f"{keyword=} {chapter_prefix=} ")
         min_chapter_prefix = min(chapters_dict.keys())
         min_chapter_count = chapters_dict.get(min_chapter_prefix)
         if min_chapter_count <= 2:

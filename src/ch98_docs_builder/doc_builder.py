@@ -5,60 +5,10 @@ from ast import (
     parse as ast_parse,
     walk as ast_walk,
 )
-from copy import copy as copy_copy
-from enum import Enum
-from src.ch01_py.file_toolbox import create_path, get_level1_dirs, open_json, save_file
+from src.ch01_py.chapter_desc_tools import get_chapter_desc_prefix, get_chapter_descs
+from src.ch01_py.file_toolbox import create_path, open_json, save_file
 from src.ch02_rope._ref.ch02_doc_builder import get_ropeterm_explanation_md
 from src.ch17_idea._ref.ch17_doc_builder import get_brick_formats_md, get_idea_brick_mds
-
-
-def get_keywords_src_config() -> dict[str, dict]:
-    return open_json("src/ch98_docs_builder/keywords.json")
-
-
-def get_keywords_by_chapter(keywords_dict: dict[str, dict[str]]) -> dict:
-    chapters_keywords = {
-        get_chapter_desc_prefix(chxx): set() for chxx in get_chapter_descs().keys()
-    }
-    for x_keyword, ref_dict in keywords_dict.items():
-        keyworld_init_chapter_num = ref_dict.get("init_chapter")
-        chapter_set = chapters_keywords.get(keyworld_init_chapter_num)
-        chapter_set.add(x_keyword)
-    return chapters_keywords
-
-
-def get_cumlative_ch_keywords_dict(keywords_by_chapter: dict[int, set[str]]) -> dict:
-    allowed_keywords_set = set()
-    cumlative_ch_keywords_dict = {}
-    for chapter_num in sorted(list(keywords_by_chapter.keys())):
-        ch_keywords_set = keywords_by_chapter.get(chapter_num)
-        allowed_keywords_set.update(ch_keywords_set)
-        cumlative_ch_keywords_dict[chapter_num] = copy_copy(allowed_keywords_set)
-    return cumlative_ch_keywords_dict
-
-
-def get_chXX_keyword_classes(cumlative_ch_keywords_dict: dict) -> dict[int,]:
-    chXX_keyword_classes = {}
-    word_str = "word"
-    for chapter_prefix in sorted(list(cumlative_ch_keywords_dict.keys())):
-        ch_keywords = cumlative_ch_keywords_dict.get(chapter_prefix)
-        class_name = f"C{chapter_prefix[1:]}Key{word_str}s"
-        ExpectedClass = Enum(class_name, {t: t for t in ch_keywords}, type=str)
-        chXX_keyword_classes[chapter_prefix] = ExpectedClass
-    return chXX_keyword_classes
-
-
-def get_chapter_descs() -> dict[str, str]:
-    """Returns chapter_desc, chapter_dir for all Chapters"""
-    src_dir = "src"
-    chapter_descs = get_level1_dirs(src_dir)
-    """ch99_chapter_style is not evaluated"""
-    chapter_descs.remove("ch99_chapter_style")
-    chapter_descs.remove("ref")
-    return {
-        chapter_desc: create_path(src_dir, chapter_desc)
-        for chapter_desc in chapter_descs
-    }
 
 
 def get_chapter_num_descs() -> dict[int, str]:
@@ -100,34 +50,6 @@ def get_chapter_desc_str_number(chapter_desc: str) -> str:
         return chapter_desc[1:3]
     elif chapter_desc.startswith("ch"):
         return chapter_desc[2:4]
-
-
-def get_chapter_desc_prefix(chapter_desc: str) -> str:
-    """Returns chapter number in 2 character string."""
-    if chapter_desc.startswith("a"):
-        return chapter_desc[:3]
-    elif chapter_desc.startswith("ch"):
-        return chapter_desc[:4]
-
-
-def get_keywords_by_chapter_md() -> str:
-    words_str = "words"
-    keywords_title_str = f"Key{words_str} by Chapter"
-    func_lines = [f"## {keywords_title_str}"]
-    keywords_src_config = get_keywords_src_config()
-    keywords_by_chapter = get_keywords_by_chapter(keywords_src_config)
-    for chapter_desc in get_chapter_descs().keys():
-        chapter_prefix = get_chapter_desc_prefix(chapter_desc)
-        chapter_keywords = keywords_by_chapter.get(chapter_prefix)
-        chapter_keywords = sorted(list(chapter_keywords))
-        _line = f"- {chapter_desc}: " + ", ".join(chapter_keywords)
-        func_lines.append(_line)
-    return f"# {keywords_title_str}\n\n" + "\n".join(func_lines)
-
-
-def save_keywords_by_chapter_md(x_dir: str):
-    keywords_by_chapter_md_path = create_path(x_dir, "keywords_by_chapter.md")
-    save_file(keywords_by_chapter_md_path, None, get_keywords_by_chapter_md())
 
 
 def get_chapter_blurbs_md() -> str:

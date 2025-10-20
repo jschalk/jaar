@@ -15,7 +15,7 @@ from src.ch18_world_etl.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 STANCE0001_FILENAME = "stance0001.xlsx"
 MOMENT_OTE1_AGG_CSV_FILENAME = "moment_ote1_agg.csv"
@@ -125,7 +125,7 @@ def test_create_stances_dir_path_HasDocString():
 def test_create_stances_belief_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_stances_belief_dir_path(
-        moment_mstr_dir="moment_mstr_dir", belief_name=wx.belief_name
+        moment_mstr_dir="moment_mstr_dir", belief_name=kw.belief_name
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -185,7 +185,7 @@ def test_create_world_db_path_ReturnsObj():
 
 def test_create_moment_ote1_csv_path_HasDocString():
     # ESTABLISH
-    doc_str = create_moment_ote1_csv_path("moment_mstr_dir", wx.moment_label)
+    doc_str = create_moment_ote1_csv_path("moment_mstr_dir", kw.moment_label)
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_moment_ote1_csv_path) == doc_str
@@ -193,7 +193,7 @@ def test_create_moment_ote1_csv_path_HasDocString():
 
 def test_create_moment_ote1_json_path_HasDocString():
     # ESTABLISH
-    doc_str = create_moment_ote1_json_path("moment_mstr_dir", wx.moment_label)
+    doc_str = create_moment_ote1_json_path("moment_mstr_dir", kw.moment_label)
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_moment_ote1_json_path) == doc_str

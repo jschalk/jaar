@@ -5,7 +5,7 @@ from src.ch11_bud.test._util.ch11_examples import (
     example_casa_dirty_factunit as dirty_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
-from src.ref.keywords import Ch11Keywords as wx
+from src.ref.keywords import Ch11Keywords as kw
 
 
 def test_CellUnit_to_dict_ReturnsObj_Scenario0():
@@ -35,30 +35,30 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario0():
 
     # THEN
     assert list(x_cell_dict.keys()) == [
-        wx.ancestors,
-        wx.spark_num,
-        wx.celldepth,
-        wx.bud_belief_name,
-        wx.money_grain,
-        wx.quota,
-        wx.mandate,
-        wx.beliefadjust,
-        wx.beliefspark_facts,
-        wx.found_facts,
-        wx.boss_facts,
+        kw.ancestors,
+        kw.spark_num,
+        kw.celldepth,
+        kw.bud_belief_name,
+        kw.money_grain,
+        kw.quota,
+        kw.mandate,
+        kw.beliefadjust,
+        kw.beliefspark_facts,
+        kw.found_facts,
+        kw.boss_facts,
     ]
-    assert x_cell_dict.get(wx.ancestors) == bob_sue_ancestors
-    assert x_cell_dict.get(wx.spark_num) == bob_sue_spark7
-    assert x_cell_dict.get(wx.celldepth) == bob_sue_celldepth3
-    assert x_cell_dict.get(wx.bud_belief_name) == bob_sue_bud_belief
-    assert x_cell_dict.get(wx.money_grain) == bob_sue_money_grain2
-    assert x_cell_dict.get(wx.quota) == bob_sue_quota300
-    assert x_cell_dict.get(wx.mandate) == bob_sue_mandate444
+    assert x_cell_dict.get(kw.ancestors) == bob_sue_ancestors
+    assert x_cell_dict.get(kw.spark_num) == bob_sue_spark7
+    assert x_cell_dict.get(kw.celldepth) == bob_sue_celldepth3
+    assert x_cell_dict.get(kw.bud_belief_name) == bob_sue_bud_belief
+    assert x_cell_dict.get(kw.money_grain) == bob_sue_money_grain2
+    assert x_cell_dict.get(kw.quota) == bob_sue_quota300
+    assert x_cell_dict.get(kw.mandate) == bob_sue_mandate444
     bob_sue_belief = beliefunit_shop(bob_sue_bud_belief)
-    assert x_cell_dict.get(wx.beliefadjust) == bob_sue_belief.to_dict()
-    assert x_cell_dict.get(wx.beliefspark_facts) == {}
-    assert x_cell_dict.get(wx.found_facts) == {}
-    assert x_cell_dict.get(wx.boss_facts) == {}
+    assert x_cell_dict.get(kw.beliefadjust) == bob_sue_belief.to_dict()
+    assert x_cell_dict.get(kw.beliefspark_facts) == {}
+    assert x_cell_dict.get(kw.found_facts) == {}
+    assert x_cell_dict.get(kw.boss_facts) == {}
 
 
 def test_CellUnit_to_dict_ReturnsObj_Scenario1_EmptyBeliefAdjust():
@@ -88,30 +88,30 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_EmptyBeliefAdjust():
 
     # THEN
     assert list(x_cell_dict.keys()) == [
-        wx.ancestors,
-        wx.spark_num,
-        wx.celldepth,
-        wx.bud_belief_name,
-        wx.money_grain,
-        wx.quota,
-        wx.mandate,
-        wx.beliefadjust,
-        wx.beliefspark_facts,
-        wx.found_facts,
-        wx.boss_facts,
+        kw.ancestors,
+        kw.spark_num,
+        kw.celldepth,
+        kw.bud_belief_name,
+        kw.money_grain,
+        kw.quota,
+        kw.mandate,
+        kw.beliefadjust,
+        kw.beliefspark_facts,
+        kw.found_facts,
+        kw.boss_facts,
     ]
-    assert x_cell_dict.get(wx.ancestors) == bob_sue_ancestors
-    assert x_cell_dict.get(wx.spark_num) == bob_sue_spark7
-    assert x_cell_dict.get(wx.celldepth) == bob_sue_celldepth3
-    assert x_cell_dict.get(wx.bud_belief_name) == yao_str
-    assert x_cell_dict.get(wx.money_grain) == bob_sue_money_grain2
-    assert x_cell_dict.get(wx.quota) == bob_sue_quota300
-    assert x_cell_dict.get(wx.mandate) == bob_sue_mandate444
+    assert x_cell_dict.get(kw.ancestors) == bob_sue_ancestors
+    assert x_cell_dict.get(kw.spark_num) == bob_sue_spark7
+    assert x_cell_dict.get(kw.celldepth) == bob_sue_celldepth3
+    assert x_cell_dict.get(kw.bud_belief_name) == yao_str
+    assert x_cell_dict.get(kw.money_grain) == bob_sue_money_grain2
+    assert x_cell_dict.get(kw.quota) == bob_sue_quota300
+    assert x_cell_dict.get(kw.mandate) == bob_sue_mandate444
     bob_sue_belief = beliefunit_shop(sue_str)
-    assert x_cell_dict.get(wx.beliefadjust) == bob_sue_belief.to_dict()
-    assert x_cell_dict.get(wx.beliefspark_facts) == {}
-    assert x_cell_dict.get(wx.found_facts) == {}
-    assert x_cell_dict.get(wx.boss_facts) == {}
+    assert x_cell_dict.get(kw.beliefadjust) == bob_sue_belief.to_dict()
+    assert x_cell_dict.get(kw.beliefspark_facts) == {}
+    assert x_cell_dict.get(kw.found_facts) == {}
+    assert x_cell_dict.get(kw.boss_facts) == {}
 
 
 def test_CellUnit_to_dict_ReturnsObj_Scenario1_WithMoreParameters():
@@ -151,42 +151,42 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_WithMoreParameters():
 
     # THEN
     assert list(x_cell_dict.keys()) == [
-        wx.ancestors,
-        wx.spark_num,
-        wx.celldepth,
-        wx.bud_belief_name,
-        wx.money_grain,
-        wx.quota,
-        wx.mandate,
-        wx.beliefadjust,
-        wx.beliefspark_facts,
-        wx.found_facts,
-        wx.boss_facts,
+        kw.ancestors,
+        kw.spark_num,
+        kw.celldepth,
+        kw.bud_belief_name,
+        kw.money_grain,
+        kw.quota,
+        kw.mandate,
+        kw.beliefadjust,
+        kw.beliefspark_facts,
+        kw.found_facts,
+        kw.boss_facts,
     ]
-    assert x_cell_dict.get(wx.ancestors) == bob_sue_ancestors
-    assert x_cell_dict.get(wx.spark_num) == bob_sue_spark7
-    assert x_cell_dict.get(wx.celldepth) == bob_sue_celldepth3
-    assert x_cell_dict.get(wx.bud_belief_name) == bob_sue_bud_belief
-    assert x_cell_dict.get(wx.money_grain) == bob_sue_money_grain2
-    assert x_cell_dict.get(wx.quota) == bob_sue_quota300
-    assert x_cell_dict.get(wx.mandate) == bob_sue_mandate444
+    assert x_cell_dict.get(kw.ancestors) == bob_sue_ancestors
+    assert x_cell_dict.get(kw.spark_num) == bob_sue_spark7
+    assert x_cell_dict.get(kw.celldepth) == bob_sue_celldepth3
+    assert x_cell_dict.get(kw.bud_belief_name) == bob_sue_bud_belief
+    assert x_cell_dict.get(kw.money_grain) == bob_sue_money_grain2
+    assert x_cell_dict.get(kw.quota) == bob_sue_quota300
+    assert x_cell_dict.get(kw.mandate) == bob_sue_mandate444
     assert (
-        x_cell_dict.get(wx.beliefadjust)
+        x_cell_dict.get(kw.beliefadjust)
         == beliefunit_shop(bob_sue_bud_belief).to_dict()
     )
     bob_sue_beliefspark_fact_dicts = {clean_fact.fact_context: clean_fact.to_dict()}
     bob_sue_found_fact_dicts = {dirty_fact.fact_context: dirty_fact.to_dict()}
     bob_sue_boss_fact_dicts = {sky_blue_fact.fact_context: sky_blue_fact.to_dict()}
-    assert x_cell_dict.get(wx.beliefspark_facts) == bob_sue_beliefspark_fact_dicts
-    assert x_cell_dict.get(wx.found_facts) == bob_sue_found_fact_dicts
-    assert x_cell_dict.get(wx.boss_facts) == bob_sue_boss_fact_dicts
+    assert x_cell_dict.get(kw.beliefspark_facts) == bob_sue_beliefspark_fact_dicts
+    assert x_cell_dict.get(kw.found_facts) == bob_sue_found_fact_dicts
+    assert x_cell_dict.get(kw.boss_facts) == bob_sue_boss_fact_dicts
     assert len(x_cell_dict) == 11
 
 
 def test_cellunit_get_from_dict_ReturnsObj_Scenario0_NoParameters():
     # ESTABLISH
     yao_str = "Yao"
-    x_dict = {wx.bud_belief_name: yao_str}
+    x_dict = {kw.bud_belief_name: yao_str}
 
     # WHEN
     gen_cellunit = cellunit_get_from_dict(x_dict)

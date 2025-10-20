@@ -11,7 +11,7 @@ from src.ch16_translate.translate_main import (
     get_translateunit_from_dict,
     translateunit_shop,
 )
-from src.ref.keywords import Ch16Keywords as wx
+from src.ref.keywords import Ch16Keywords as kw
 
 
 def test_TranslateUnit_to_dict_ReturnsObj_Scenario0():
@@ -25,11 +25,11 @@ def test_TranslateUnit_to_dict_ReturnsObj_Scenario0():
     # THEN
     print(sue_dict)
     assert sue_dict
-    assert sue_dict.get(wx.face_name) == sue_str
-    assert sue_dict.get(wx.spark_num) == sue_translateunit.spark_num
-    assert sue_dict.get(wx.otx_knot) == default_knot_if_None()
-    assert sue_dict.get(wx.inx_knot) == default_knot_if_None()
-    assert sue_dict.get(wx.unknown_str) == default_unknown_str_if_None()
+    assert sue_dict.get(kw.face_name) == sue_str
+    assert sue_dict.get(kw.spark_num) == sue_translateunit.spark_num
+    assert sue_dict.get(kw.otx_knot) == default_knot_if_None()
+    assert sue_dict.get(kw.inx_knot) == default_knot_if_None()
+    assert sue_dict.get(kw.unknown_str) == default_unknown_str_if_None()
     sue_namemap = sue_translateunit.namemap.to_dict()
     sue_titlemap = sue_translateunit.titlemap.to_dict()
     sue_labelmap = sue_translateunit.labelmap.to_dict()
@@ -58,10 +58,10 @@ def test_TranslateUnit_to_dict_ReturnsObj_Scenario1():
     sue_dict = sue_translateunit.to_dict()
 
     # THEN
-    assert sue_dict.get(wx.face_name) == sue_str
-    assert sue_dict.get(wx.otx_knot) == slash_otx_knot
-    assert sue_dict.get(wx.inx_knot) == colon_inx_knot
-    assert sue_dict.get(wx.unknown_str) == x_unknown_str
+    assert sue_dict.get(kw.face_name) == sue_str
+    assert sue_dict.get(kw.otx_knot) == slash_otx_knot
+    assert sue_dict.get(kw.inx_knot) == colon_inx_knot
+    assert sue_dict.get(kw.unknown_str) == x_unknown_str
     sue_namemap = sue_translateunit.namemap.to_dict()
     sue_titlemap = sue_translateunit.titlemap.to_dict()
     sue_labelmap = sue_translateunit.labelmap.to_dict()

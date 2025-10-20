@@ -5,7 +5,7 @@ from src.ch11_bud.bud_main import (
     budunit_shop,
     get_beliefbudhistory_from_dict,
 )
-from src.ref.keywords import Ch11Keywords as wx
+from src.ref.keywords import Ch11Keywords as kw
 
 
 def test_SparkInt_Exists():
@@ -203,7 +203,7 @@ def test_BeliefBudHistory_get_headers_ReturnsObj():
     sue_headers_list = sue_beliefbudhistory.get_headers()
 
     # THEN
-    assert sue_headers_list == [wx.belief_name, wx.bud_time, wx.quota]
+    assert sue_headers_list == [kw.belief_name, kw.bud_time, kw.quota]
 
 
 def test_BeliefBudHistory_to_dict_ReturnsObj_Scenario0():
@@ -223,13 +223,13 @@ def test_BeliefBudHistory_to_dict_ReturnsObj_Scenario0():
 
     # THEN
     assert sue_buds_dict == {
-        wx.belief_name: sue_str,
+        kw.belief_name: sue_str,
         "buds": {
-            x4_bud_time: {wx.quota: x4_quota, wx.bud_time: x4_bud_time},
+            x4_bud_time: {kw.quota: x4_quota, kw.bud_time: x4_bud_time},
             x7_bud_time: {
-                wx.quota: x7_quota,
-                wx.bud_time: x7_bud_time,
-                wx.celldepth: x7_celldepth,
+                kw.quota: x7_quota,
+                kw.bud_time: x7_bud_time,
+                kw.celldepth: x7_celldepth,
             },
         },
     }
@@ -240,7 +240,7 @@ def test_get_beliefbudhistory_from_dict_ReturnsObj_Scenario0():
     sue_str = "Sue"
     sue_beliefbudhistory = beliefbudhistory_shop(sue_str)
     sue_buds_dict = sue_beliefbudhistory.to_dict()
-    assert sue_buds_dict == {wx.belief_name: sue_str, "buds": {}}
+    assert sue_buds_dict == {kw.belief_name: sue_str, "buds": {}}
 
     # WHEN
     x_beliefbudhistory = get_beliefbudhistory_from_dict(sue_buds_dict)
@@ -265,10 +265,10 @@ def test_get_beliefbudhistory_from_dict_ReturnsObj_Scenario1():
     sue_beliefbudhistory.add_bud(x7_bud_time, x7_quota)
     sue_buds_dict = sue_beliefbudhistory.to_dict()
     assert sue_buds_dict == {
-        wx.belief_name: sue_str,
+        kw.belief_name: sue_str,
         "buds": {
-            x4_bud_time: {wx.bud_time: x4_bud_time, wx.quota: x4_quota},
-            x7_bud_time: {wx.bud_time: x7_bud_time, wx.quota: x7_quota},
+            x4_bud_time: {kw.bud_time: x4_bud_time, kw.quota: x4_quota},
+            x7_bud_time: {kw.bud_time: x7_bud_time, kw.quota: x7_quota},
         },
     }
 
@@ -305,13 +305,13 @@ def test_get_beliefbudhistory_from_dict_ReturnsObj_Scenario2():
     )
     sue_buds_dict = sue_beliefbudhistory.to_dict()
     assert sue_buds_dict == {
-        wx.belief_name: sue_str,
+        kw.belief_name: sue_str,
         "buds": {
-            x4_bud_time: {wx.bud_time: x4_bud_time, wx.quota: x4_quota},
+            x4_bud_time: {kw.bud_time: x4_bud_time, kw.quota: x4_quota},
             x7_bud_time: {
-                wx.bud_time: x7_bud_time,
-                wx.quota: x7_quota,
-                wx.bud_voice_nets: {
+                kw.bud_time: x7_bud_time,
+                kw.quota: x7_quota,
+                kw.bud_voice_nets: {
                     sue_str: sue_bud_voice_net,
                     zia_str: zia_bud_voice_net,
                 },
@@ -355,17 +355,17 @@ def test_BeliefBudHistory_get_tranbook_ReturnsObj():
     )
     sue_buds_dict = sue_beliefbudhistory.to_dict()
     assert sue_buds_dict == {
-        wx.belief_name: sue_str,
+        kw.belief_name: sue_str,
         "buds": {
             x4_bud_time: {
-                wx.bud_time: x4_bud_time,
-                wx.quota: x4_quota,
-                wx.bud_voice_nets: {bob_str: bob_bud_voice_net},
+                kw.bud_time: x4_bud_time,
+                kw.quota: x4_quota,
+                kw.bud_voice_nets: {bob_str: bob_bud_voice_net},
             },
             x7_bud_time: {
-                wx.bud_time: x7_bud_time,
-                wx.quota: x7_quota,
-                wx.bud_voice_nets: {zia_str: zia_bud_voice_net},
+                kw.bud_time: x7_bud_time,
+                kw.quota: x7_quota,
+                kw.bud_voice_nets: {zia_str: zia_bud_voice_net},
             },
         },
     }

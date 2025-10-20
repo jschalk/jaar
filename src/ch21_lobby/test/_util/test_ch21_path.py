@@ -8,7 +8,7 @@ from src.ch21_lobby._ref.ch21_path import (
     create_world_dir_path,
 )
 from src.ch21_lobby.test._util.ch21_env import get_chapter_temp_dir
-from src.ref.keywords import Ch21Keywords as wx
+from src.ref.keywords import Ch21Keywords as kw
 
 
 def test_LobbyID_Exists():
@@ -25,7 +25,7 @@ def test_create_lobby_dir_path_ReturnsObj():
     gen_c23_dir_path = create_lobby_dir_path(x_lobby_mstr_dir, c23_str)
 
     # THEN
-    lobbys_dir = create_path(x_lobby_mstr_dir, wx.lobbys)
+    lobbys_dir = create_path(x_lobby_mstr_dir, kw.lobbys)
     expected_c23_path = create_path(lobbys_dir, c23_str)
     assert gen_c23_dir_path == expected_c23_path
 
@@ -40,7 +40,7 @@ def test_create_world_dir_path_ReturnsObj():
     gen_m23_dir_path = create_world_dir_path(x_lobby_mstr_dir, c23_str, m23_str)
 
     # THEN
-    lobbys_dir = create_path(x_lobby_mstr_dir, wx.lobbys)
+    lobbys_dir = create_path(x_lobby_mstr_dir, kw.lobbys)
     c23_dir = create_path(lobbys_dir, c23_str)
     worlds_path = create_path(c23_dir, "worlds")
     expected_m23_path = create_path(worlds_path, m23_str)
@@ -57,7 +57,7 @@ def test_create_moment_mstr_dir_path_ReturnsObj():
     gen_m23_dir_path = create_moment_mstr_dir_path(x_lobby_mstr_dir, c23_str, m23_str)
 
     # THEN
-    lobbys_dir = create_path(x_lobby_mstr_dir, wx.lobbys)
+    lobbys_dir = create_path(x_lobby_mstr_dir, kw.lobbys)
     c23_dir = create_path(lobbys_dir, c23_str)
     worlds_dir = create_path(c23_dir, "worlds")
     m23_dir = create_path(worlds_dir, m23_str)
@@ -70,7 +70,7 @@ LINUX_OS = platform_system() == "Linux"
 
 def test_create_lobby_dir_path_HasDocString():
     # ESTABLISH
-    doc_str = create_lobby_dir_path(wx.lobby_mstr_dir, wx.lobby_id)
+    doc_str = create_lobby_dir_path(kw.lobby_mstr_dir, kw.lobby_id)
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_lobby_dir_path) == doc_str
@@ -78,7 +78,7 @@ def test_create_lobby_dir_path_HasDocString():
 
 def test_create_world_dir_path_HasDocString():
     # ESTABLISH
-    doc_str = create_world_dir_path(wx.lobby_mstr_dir, wx.lobby_id, wx.world_name)
+    doc_str = create_world_dir_path(kw.lobby_mstr_dir, kw.lobby_id, kw.world_name)
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_world_dir_path) == doc_str
@@ -86,7 +86,7 @@ def test_create_world_dir_path_HasDocString():
 
 def test_create_moment_mstr_dir_path_HasDocString():
     # ESTABLISH
-    doc_str = create_moment_mstr_dir_path(wx.lobby_mstr_dir, wx.lobby_id, wx.world_name)
+    doc_str = create_moment_mstr_dir_path(kw.lobby_mstr_dir, kw.lobby_id, kw.world_name)
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_moment_mstr_dir_path) == doc_str

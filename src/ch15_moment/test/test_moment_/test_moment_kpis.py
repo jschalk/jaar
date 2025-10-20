@@ -15,7 +15,7 @@ from src.ch15_moment.test._util.ch15_examples import (
     create_example_moment3,
     create_example_moment4,
 )
-from src.ref.keywords import Ch15Keywords as wx
+from src.ref.keywords import Ch15Keywords as kw
 
 
 def test_get_moment_guts_voices_dataframe_ReturnsObj(
@@ -29,17 +29,17 @@ def test_get_moment_guts_voices_dataframe_ReturnsObj(
 
     # THEN
     voiceunit_colums = {
-        wx.belief_name,
-        wx.voice_name,
-        wx.voice_cred_lumen,
-        wx.voice_debt_lumen,
-        wx.memberships,
-        wx.fund_give,
-        wx.fund_take,
-        wx.fund_agenda_give,
-        wx.fund_agenda_take,
-        wx.fund_agenda_ratio_give,
-        wx.fund_agenda_ratio_take,
+        kw.belief_name,
+        kw.voice_name,
+        kw.voice_cred_lumen,
+        kw.voice_debt_lumen,
+        kw.memberships,
+        kw.fund_give,
+        kw.fund_take,
+        kw.fund_agenda_give,
+        kw.fund_agenda_take,
+        kw.fund_agenda_ratio_give,
+        kw.fund_agenda_ratio_take,
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
@@ -73,18 +73,18 @@ def test_get_moment_jobs_voices_dataframe_ReturnsObj(
 
     # THEN
     voiceunit_colums = {
-        wx.belief_name,
-        wx.voice_name,
-        wx.voice_cred_lumen,
-        wx.voice_debt_lumen,
-        wx.memberships,
-        wx.fund_give,
-        wx.fund_take,
-        wx.fund_agenda_give,
-        wx.fund_agenda_take,
-        wx.fund_agenda_ratio_give,
-        wx.fund_agenda_ratio_take,
-        wx.inallocable_voice_debt_lumen,
+        kw.belief_name,
+        kw.voice_name,
+        kw.voice_cred_lumen,
+        kw.voice_debt_lumen,
+        kw.memberships,
+        kw.fund_give,
+        kw.fund_take,
+        kw.fund_agenda_give,
+        kw.fund_agenda_take,
+        kw.fund_agenda_ratio_give,
+        kw.fund_agenda_ratio_take,
+        kw.inallocable_voice_debt_lumen,
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
@@ -118,16 +118,16 @@ def test_get_moment_guts_agenda_dataframe_ReturnsObj(
 
     # THEN
     agenda_colums = {
-        wx.belief_name,
-        wx.fund_ratio,
-        wx.plan_label,
-        wx.parent_rope,
-        wx.begin,
-        wx.close,
-        wx.addin,
-        wx.denom,
-        wx.numor,
-        wx.morph,
+        kw.belief_name,
+        kw.fund_ratio,
+        kw.plan_label,
+        kw.parent_rope,
+        kw.begin,
+        kw.close,
+        kw.addin,
+        kw.denom,
+        kw.numor,
+        kw.morph,
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
@@ -159,16 +159,16 @@ def test_get_moment_jobs_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
 
     # THEN
     agenda_colums = {
-        wx.belief_name,
-        wx.fund_ratio,
-        wx.plan_label,
-        wx.parent_rope,
-        wx.begin,
-        wx.close,
-        wx.addin,
-        wx.denom,
-        wx.numor,
-        wx.morph,
+        kw.belief_name,
+        kw.fund_ratio,
+        kw.plan_label,
+        kw.parent_rope,
+        kw.begin,
+        kw.close,
+        kw.addin,
+        kw.denom,
+        kw.numor,
+        kw.morph,
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)

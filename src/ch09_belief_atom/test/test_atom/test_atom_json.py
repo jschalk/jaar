@@ -1,6 +1,6 @@
 from src.ch02_rope.rope import create_rope
 from src.ch09_belief_atom.atom_main import beliefatom_shop, get_beliefatom_from_dict
-from src.ref.keywords import Ch09Keywords as wx
+from src.ref.keywords import Ch09Keywords as kw
 
 
 def test_BeliefAtom_to_dict_ReturnsObj():
@@ -11,26 +11,26 @@ def test_BeliefAtom_to_dict_ReturnsObj():
     ball_rope = create_rope(sports_rope, ball_str)
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
-    x_dimen = wx.belief_plan_factunit
+    x_dimen = kw.belief_plan_factunit
     knee_reason_lower = 7
     knee_reason_upper = 13
-    insert_factunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
-    insert_factunit_beliefatom.set_jkey(wx.plan_rope, ball_rope)
-    insert_factunit_beliefatom.set_jkey(wx.fact_context, knee_rope)
-    insert_factunit_beliefatom.set_jvalue(wx.fact_lower, knee_reason_lower)
-    insert_factunit_beliefatom.set_jvalue(wx.fact_upper, knee_reason_upper)
+    insert_factunit_beliefatom = beliefatom_shop(x_dimen, kw.INSERT)
+    insert_factunit_beliefatom.set_jkey(kw.plan_rope, ball_rope)
+    insert_factunit_beliefatom.set_jkey(kw.fact_context, knee_rope)
+    insert_factunit_beliefatom.set_jvalue(kw.fact_lower, knee_reason_lower)
+    insert_factunit_beliefatom.set_jvalue(kw.fact_upper, knee_reason_upper)
 
     # WHEN
     atom_dict = insert_factunit_beliefatom.to_dict()
 
     # THEN
     assert atom_dict == {
-        wx.dimen: x_dimen,
-        wx.crud: wx.INSERT,
-        wx.jkeys: {wx.plan_rope: ball_rope, wx.fact_context: knee_rope},
-        wx.jvalues: {
-            wx.fact_lower: knee_reason_lower,
-            wx.fact_upper: knee_reason_upper,
+        kw.dimen: x_dimen,
+        kw.crud: kw.INSERT,
+        kw.jkeys: {kw.plan_rope: ball_rope, kw.fact_context: knee_rope},
+        kw.jvalues: {
+            kw.fact_lower: knee_reason_lower,
+            kw.fact_upper: knee_reason_upper,
         },
     }
 
@@ -43,14 +43,14 @@ def test_get_beliefatom_from_dict_ReturnsObj():
     ball_rope = create_rope(sports_rope, ball_str)
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
-    x_dimen = wx.belief_plan_factunit
+    x_dimen = kw.belief_plan_factunit
     knee_reason_lower = 7
     knee_reason_upper = 13
-    gen_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
-    gen_beliefatom.set_jkey(wx.plan_rope, ball_rope)
-    gen_beliefatom.set_jkey(wx.fact_context, knee_rope)
-    gen_beliefatom.set_jvalue(wx.fact_lower, knee_reason_lower)
-    gen_beliefatom.set_jvalue(wx.fact_upper, knee_reason_upper)
+    gen_beliefatom = beliefatom_shop(x_dimen, kw.INSERT)
+    gen_beliefatom.set_jkey(kw.plan_rope, ball_rope)
+    gen_beliefatom.set_jkey(kw.fact_context, knee_rope)
+    gen_beliefatom.set_jvalue(kw.fact_lower, knee_reason_lower)
+    gen_beliefatom.set_jvalue(kw.fact_upper, knee_reason_upper)
     atom_serializable_dict = gen_beliefatom.to_dict()
 
     # WHEN

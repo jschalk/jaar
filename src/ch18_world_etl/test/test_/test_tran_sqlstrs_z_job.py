@@ -8,7 +8,7 @@ from src.ch18_world_etl.tran_sqlstrs import (
     create_prime_tablename as prime_table,
     get_job_create_table_sqlstrs,
 )
-from src.ref.keywords import Ch18Keywords as wx
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_get_job_create_table_sqlstrs_ReturnsObj():
@@ -23,8 +23,8 @@ def test_get_job_create_table_sqlstrs_ReturnsObj():
         # print(f"{x_dimen} checking...")
         x_config = belief_config.get(x_dimen)
 
-        job_table = prime_table(x_dimen, wx.job, None)
-        job_cols = {wx.moment_label, wx.belief_name}
+        job_table = prime_table(x_dimen, kw.job, None)
+        job_cols = {kw.moment_label, kw.belief_name}
         job_cols.update(set(x_config.get("jkeys").keys()))
         job_cols.update(set(x_config.get("jvalues").keys()))
         job_cols = get_default_sorted_list(job_cols)
@@ -44,28 +44,28 @@ def test_create_job_tables_CreatesTables():
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 0
 
-        blrmemb_job_table = prime_table(wx.belief_voice_membership, wx.job, None)
-        blrpern_job_table = prime_table(wx.belief_voiceunit, wx.job, None)
-        blrgrou_job_table = prime_table(wx.belief_groupunit, wx.job, None)
-        blrawar_job_table = prime_table(wx.belief_plan_awardunit, wx.job, None)
-        blrfact_job_table = prime_table(wx.belief_plan_factunit, wx.job, None)
-        blrheal_job_table = prime_table(wx.belief_plan_healerunit, wx.job, None)
-        blrprem_job_table = prime_table(wx.belief_plan_reason_caseunit, wx.job, None)
-        beliefares_job_table = prime_table(wx.belief_plan_reasonunit, wx.job, None)
-        blrlabo_job_table = prime_table(wx.belief_plan_partyunit, wx.job, None)
-        blrplan_job_table = prime_table(wx.belief_planunit, wx.job, None)
-        blrunit_job_table = prime_table(wx.beliefunit, wx.job, None)
-        # blrmemb_job_table = f"{wx.belief_voice_membership}_job"
-        # blrpern_job_table = f"{wx.belief_voiceunit}_job"
-        # blrgrou_job_table = f"{wx.belief_groupunit}_job"
-        # blrawar_job_table = f"{wx.belief_plan_awardunit}_job"
-        # blrfact_job_table = f"{wx.belief_plan_factunit}_job"
-        # blrheal_job_table = f"{wx.belief_plan_healerunit}_job"
-        # blrprem_job_table = f"{wx.belief_plan_reason_caseunit}_job"
-        # beliefares_job_table = f"{wx.belief_plan_reasonunit}_job"
-        # blrlabo_job_table = f"{wx.belief_plan_partyunit}_job"
-        # blrplan_job_table = f"{wx.belief_planunit}_job"
-        # blrunit_job_table = f"{wx.beliefunit}_job"
+        blrmemb_job_table = prime_table(kw.belief_voice_membership, kw.job, None)
+        blrpern_job_table = prime_table(kw.belief_voiceunit, kw.job, None)
+        blrgrou_job_table = prime_table(kw.belief_groupunit, kw.job, None)
+        blrawar_job_table = prime_table(kw.belief_plan_awardunit, kw.job, None)
+        blrfact_job_table = prime_table(kw.belief_plan_factunit, kw.job, None)
+        blrheal_job_table = prime_table(kw.belief_plan_healerunit, kw.job, None)
+        blrprem_job_table = prime_table(kw.belief_plan_reason_caseunit, kw.job, None)
+        beliefares_job_table = prime_table(kw.belief_plan_reasonunit, kw.job, None)
+        blrlabo_job_table = prime_table(kw.belief_plan_partyunit, kw.job, None)
+        blrplan_job_table = prime_table(kw.belief_planunit, kw.job, None)
+        blrunit_job_table = prime_table(kw.beliefunit, kw.job, None)
+        # blrmemb_job_table = f"{kw.belief_voice_membership}_job"
+        # blrpern_job_table = f"{kw.belief_voiceunit}_job"
+        # blrgrou_job_table = f"{kw.belief_groupunit}_job"
+        # blrawar_job_table = f"{kw.belief_plan_awardunit}_job"
+        # blrfact_job_table = f"{kw.belief_plan_factunit}_job"
+        # blrheal_job_table = f"{kw.belief_plan_healerunit}_job"
+        # blrprem_job_table = f"{kw.belief_plan_reason_caseunit}_job"
+        # beliefares_job_table = f"{kw.belief_plan_reasonunit}_job"
+        # blrlabo_job_table = f"{kw.belief_plan_partyunit}_job"
+        # blrplan_job_table = f"{kw.belief_planunit}_job"
+        # blrunit_job_table = f"{kw.beliefunit}_job"
 
         assert db_table_exists(cursor, blrmemb_job_table) is False
         assert db_table_exists(cursor, blrpern_job_table) is False

@@ -7,7 +7,7 @@ from src.ch02_rope.rope import create_rope, get_first_label_from_rope
 from src.ch06_plan.plan import (
     PlanUnit,
     all_plans_between,
-    plans_calculated_range as calc_range,
+    get_rangeunit_from_lineage_of_plans as calc_range,
     planunit_shop,
 )
 from src.ch07_belief_logic.belief_main import BeliefUnit
