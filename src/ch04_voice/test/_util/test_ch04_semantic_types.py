@@ -2,6 +2,7 @@ from inspect import getdoc as inspect_getdoc
 from src.ch04_voice._ref.ch04_semantic_types import (
     FundGrain,
     FundNum,
+    GroupMark,
     GroupTitle,
     HealerName,
     NameTerm,
@@ -9,6 +10,7 @@ from src.ch04_voice._ref.ch04_semantic_types import (
     RespectNum,
     TitleTerm,
     VoiceName,
+    default_groupmark_if_None,
 )
 from src.ref.keywords import Ch04Keywords as kw
 
@@ -24,6 +26,17 @@ def test_NameTerm_Exists():
     assert inspect_getdoc(bob_nameterm) == doc_str
 
 
+def test_NameTerm_is_name_ReturnsObj_Scenario0():
+    # ESTABLISH / WHEN / THEN
+    assert NameTerm("").is_name() is False
+    assert NameTerm("A").is_name()
+
+    # WHEN / THEN
+    x_s = default_groupmark_if_None()
+    x_nameterm = NameTerm(f"casa{x_s}kitchen")
+    assert x_nameterm.is_name() is False
+
+
 def test_HealerName_Exists():
     # ESTABLISH
     bob_str = "Bob"
@@ -31,7 +44,7 @@ def test_HealerName_Exists():
     bob_healer_str = HealerName(bob_str)
     # THEN
     assert bob_healer_str == bob_str
-    doc_str = "A LabelTerm used to identify a Problem's Healer"
+    doc_str = "A NameTerm used to identify a Problem's Healer"
     assert inspect_getdoc(bob_healer_str) == doc_str
 
 
@@ -63,6 +76,24 @@ def test_GroupTitle_Exists():
 
     # THEN
     assert bikers_GroupTitle is not None
+
+
+def test_GroupMark_Exists():
+    # ESTABLISH / WHEN
+    slash_groupmark = GroupMark("/")
+
+    # THEN
+    assert slash_groupmark is not None
+    doc_str = f"""GroupMark(s) exist in TitleTerms to indicate its a group, no GroupMark indicates it is a VoiceName."""
+    assert inspect_getdoc(slash_groupmark) == doc_str
+
+
+def test_default_groupmark_if_None_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert default_groupmark_if_None()
+    assert default_groupmark_if_None() == ";"
+    assert default_groupmark_if_None(None) == ";"
+    assert default_groupmark_if_None("/") == "/"
 
 
 def test_FundNum_Exists():

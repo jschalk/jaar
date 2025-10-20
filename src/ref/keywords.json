@@ -11,6 +11,7 @@
   "FundNum": {"init_chapter": "ch04", "semantic_type": "float"}, 
   "GrainNum": {"init_chapter": "ch02", "semantic_type": "float"}, 
   "GroupTitle": {"init_chapter": "ch04", "semantic_type": "str"}, 
+  "GroupMark": {"init_chapter": "ch04", "semantic_type": "str"}, 
   "HealerName": {"init_chapter": "ch04", "semantic_type": "str"}, 
   "INSERT": {"init_chapter": "ch01"}, 
   "KnotTerm": {"init_chapter": "ch02", "semantic_type": "str"}, 

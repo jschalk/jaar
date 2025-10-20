@@ -1,8 +1,26 @@
 from pytest import raises as pytest_raises
 from src.ch02_allot.allot import default_grain_num_if_None
 from src.ch03_rope.rope import default_knot_if_None
-from src.ch04_voice.voice import VoiceUnit, voiceunit_shop
+from src.ch04_voice._ref.ch04_semantic_types import NameTerm
+from src.ch04_voice.voice import (
+    VoiceUnit,
+    default_groupmark_if_None,
+    is_nameterm,
+    voiceunit_shop,
+)
 from src.ref.keywords import Ch04Keywords as kw
+
+
+def test_is_nameterm_ReturnsObj():
+    # ESTABLISH
+    x_groupmark = default_groupmark_if_None()
+
+    # WHEN / THEN
+    assert is_nameterm("", groupmark=x_groupmark) is False
+    assert is_nameterm("casa", groupmark=x_groupmark)
+    assert not is_nameterm(f"ZZ{x_groupmark}casa", x_groupmark)
+    assert not is_nameterm(NameTerm(f"ZZ{x_groupmark}casa"), x_groupmark)
+    assert is_nameterm(NameTerm("ZZ"), x_groupmark)
 
 
 def test_VoiceUnit_Exists():

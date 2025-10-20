@@ -9,8 +9,26 @@ from src.ch03_rope._ref.ch03_semantic_types import (
 )
 
 
+class GroupMark(str):
+    """GroupMark(s) exist in TitleTerms to indicate its a group, no GroupMark indicates it is a VoiceName."""
+
+    pass
+
+
+def default_groupmark_if_None(groupmark: GroupMark = None) -> GroupMark:
+    if groupmark != groupmark:  # float("nan")
+        groupmark = None
+    return groupmark if groupmark is not None else ";"
+
+
 class NameTerm(LabelTerm):
     """All Name string classes should inherit from this class"""
+
+    def is_name(self, groupmark: GroupMark = None) -> bool:
+        return len(self) > 0 and self.contains_knot(groupmark)
+
+    # def contains_knot(self, knot: str = None) -> bool:
+    #     return self.find(default_knot_if_None(knot)) == -1
 
 
 class VoiceName(NameTerm):
@@ -28,7 +46,7 @@ class GroupTitle(TitleTerm):
 
 
 class HealerName(NameTerm):
-    """A LabelTerm used to identify a Problem's Healer"""
+    """A NameTerm used to identify a Problem's Healer"""
 
     pass
 

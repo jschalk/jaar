@@ -4,9 +4,12 @@ from src.ch02_allot.allot import allot_scale, default_grain_num_if_None
 from src.ch03_rope.rope import default_knot_if_None, is_labelterm, validate_labelterm
 from src.ch04_voice._ref.ch04_semantic_types import (
     FundNum,
+    GroupMark,
+    NameTerm,
     RespectGrain,
     RespectNum,
     VoiceName,
+    default_groupmark_if_None,
 )
 from src.ch04_voice.group import (
     GroupTitle,
@@ -14,6 +17,11 @@ from src.ch04_voice.group import (
     membership_shop,
     memberships_get_from_dict,
 )
+
+
+def is_nameterm(x_nameterm: NameTerm, groupmark: GroupMark):
+    x_nameterm = NameTerm(x_nameterm)
+    return x_nameterm.is_name(groupmark=groupmark)
 
 
 class Bad_voice_nameMemberShipException(Exception):
@@ -153,9 +161,8 @@ class VoiceUnit:
         x_group_title = x_membership.group_title
         group_title_is_voice_name = is_labelterm(x_group_title, self.knot)
         if group_title_is_voice_name and self.voice_name != x_group_title:
-            raise Bad_voice_nameMemberShipException(
-                f"VoiceUnit with voice_name='{self.voice_name}' cannot have link to '{x_group_title}'."
-            )
+            exception_str = f"VoiceUnit with voice_name='{self.voice_name}' cannot have link to '{x_group_title}'."
+            raise Bad_voice_nameMemberShipException(exception_str)
 
         x_membership.voice_name = self.voice_name
         self.memberships[x_membership.group_title] = x_membership
