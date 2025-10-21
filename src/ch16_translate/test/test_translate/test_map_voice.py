@@ -1,6 +1,6 @@
 from numpy import int64 as numpy_int64
 from pytest import raises as pytest_raises
-from src.ch03_rope.rope import default_knot_if_None
+from src.ch04_rope.rope import default_knot_if_None
 from src.ch16_translate.map import (
     NameMap,
     get_namemap_from_dict,

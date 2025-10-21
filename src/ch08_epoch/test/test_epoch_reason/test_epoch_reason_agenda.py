@@ -1,4 +1,4 @@
-from src.ch03_rope.rope import get_tail_label
+from src.ch04_rope.rope import get_tail_label
 from src.ch06_plan.test._util.ch06_examples import get_range_attrs
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,

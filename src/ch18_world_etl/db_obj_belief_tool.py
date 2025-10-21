@@ -2,9 +2,9 @@ from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from sqlite3 import Cursor as sqlite3_Cursor
 from src.ch01_py.db_toolbox import sqlite_obj_str
-from src.ch04_voice.group import AwardHeir, GroupUnit, MemberShip
-from src.ch04_voice.labor import LaborHeir
-from src.ch04_voice.voice import VoiceUnit
+from src.ch03_voice.group import AwardHeir, GroupUnit, MemberShip
+from src.ch03_voice.labor import LaborHeir
+from src.ch03_voice.voice import VoiceUnit
 from src.ch05_reason.reason import CaseUnit, FactHeir, ReasonHeir
 from src.ch06_plan.plan import HealerUnit, PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit

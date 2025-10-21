@@ -1,6 +1,6 @@
-from src.ch04_voice._ref.ch04_semantic_types import GroupTitle
-from src.ch04_voice.group import groupunit_shop, membership_shop
-from src.ch04_voice.labor import (
+from src.ch03_voice._ref.ch03_semantic_types import GroupTitle
+from src.ch03_voice.group import groupunit_shop, membership_shop
+from src.ch03_voice.labor import (
     LaborHeir,
     LaborUnit,
     PartyHeir,
@@ -10,7 +10,7 @@ from src.ch04_voice.labor import (
     partyheir_shop,
     partyunit_shop,
 )
-from src.ref.keywords import Ch04Keywords as kw
+from src.ref.keywords import Ch03Keywords as kw
 
 
 def test_PartyUnit_Exists():

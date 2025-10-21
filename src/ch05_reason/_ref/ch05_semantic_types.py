@@ -1,4 +1,4 @@
-from src.ch04_voice._ref.ch04_semantic_types import (
+from src.ch04_rope._ref.ch04_semantic_types import (
     FirstLabel,
     FundGrain,
     FundNum,

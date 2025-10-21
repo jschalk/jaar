@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch03_rope.rope import create_rope, default_knot_if_None, to_rope
+from src.ch04_rope.rope import create_rope, default_knot_if_None, to_rope
 from src.ch16_translate.map import (
     RopeMap,
     get_ropemap_from_dict,

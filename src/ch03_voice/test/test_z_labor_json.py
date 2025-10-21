@@ -1,11 +1,11 @@
-from src.ch04_voice._ref.ch04_semantic_types import GroupTitle
-from src.ch04_voice.labor import (
+from src.ch03_voice._ref.ch03_semantic_types import GroupTitle
+from src.ch03_voice.labor import (
     get_laborunit_from_dict,
     laborunit_shop,
     partyunit_get_from_dict,
     partyunit_shop,
 )
-from src.ref.keywords import Ch04Keywords as kw
+from src.ref.keywords import Ch03Keywords as kw
 
 
 def test_PartyUnit_to_dict_ReturnsObj_Scenario0_solo_IsTrue():

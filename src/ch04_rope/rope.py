@@ -1,6 +1,6 @@
 from pathlib import Path as pathlib_Path
 from src.ch01_py.file_toolbox import is_path_valid
-from src.ch03_rope._ref.ch03_semantic_types import (
+from src.ch04_rope._ref.ch04_semantic_types import (
     FirstLabel,
     LabelTerm,
     RopeTerm,

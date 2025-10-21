@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.ch02_allot.allot import default_grain_num_if_None, validate_pool_num
-from src.ch03_rope.rope import default_knot_if_None
+from src.ch04_rope.rope import default_knot_if_None
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic._ref.ch07_semantic_types import RespectNum
 from src.ch07_belief_logic.belief_main import (

@@ -1,4 +1,4 @@
-from src.ch03_rope.rope import LabelTerm, RopeTerm, create_rope
+from src.ch04_rope.rope import LabelTerm, RopeTerm, create_rope
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop, planunit_shop
 from src.ch10_lesson.lesson_filehandler import (
     LessonFileHandler,

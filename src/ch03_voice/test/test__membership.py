@@ -1,4 +1,4 @@
-from src.ch04_voice.group import (
+from src.ch03_voice.group import (
     AwardHeir,
     AwardLine,
     AwardUnit,
@@ -13,7 +13,7 @@ from src.ch04_voice.group import (
     membership_shop,
     memberships_get_from_dict,
 )
-from src.ref.keywords import Ch04Keywords as kw
+from src.ref.keywords import Ch03Keywords as kw
 
 
 def test_GroupCore_Exists():

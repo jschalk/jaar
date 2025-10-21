@@ -3,7 +3,7 @@ from datetime import datetime
 from os import getcwd as os_getcwd
 from src.ch01_py.dict_toolbox import get_1_if_None
 from src.ch01_py.file_toolbox import create_path, open_json
-from src.ch03_rope.rope import create_rope, get_first_label_from_rope
+from src.ch04_rope.rope import create_rope, get_first_label_from_rope
 from src.ch06_plan.plan import (
     PlanUnit,
     all_plans_between,

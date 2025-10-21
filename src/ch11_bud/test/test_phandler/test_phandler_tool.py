@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
 from src.ch01_py.file_toolbox import create_path, open_json, set_dir
-from src.ch03_rope.rope import create_rope
+from src.ch04_rope.rope import create_rope
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.test._util.ch07_examples import (
     get_beliefunit_irrational_example,

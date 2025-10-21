@@ -1,14 +1,14 @@
 from pytest import raises as pytest_raises
 from src.ch02_allot.allot import default_grain_num_if_None
-from src.ch04_voice._ref.ch04_semantic_types import NameTerm
-from src.ch04_voice.voice import (
+from src.ch03_voice._ref.ch03_semantic_types import NameTerm
+from src.ch03_voice.voice import (
     VoiceUnit,
     default_groupmark_if_None,
     is_nameterm,
     validate_nameterm,
     voiceunit_shop,
 )
-from src.ref.keywords import Ch04Keywords as kw
+from src.ref.keywords import Ch03Keywords as kw
 
 
 def test_is_nameterm_ReturnsObj():

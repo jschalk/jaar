@@ -8,16 +8,7 @@ from src.ch01_py.dict_toolbox import (
     get_positive_int,
 )
 from src.ch02_allot.allot import allot_scale, default_grain_num_if_None
-from src.ch03_rope.rope import (
-    all_ropes_between,
-    create_rope,
-    find_replace_rope_key_dict,
-    get_tail_label,
-    is_sub_rope,
-    rebuild_rope,
-    replace_knot,
-)
-from src.ch04_voice.group import (
+from src.ch03_voice.group import (
     AwardHeir,
     AwardLine,
     AwardUnit,
@@ -26,12 +17,21 @@ from src.ch04_voice.group import (
     awardline_shop,
     get_awardunits_from_dict,
 )
-from src.ch04_voice.labor import (
+from src.ch03_voice.labor import (
     LaborHeir,
     LaborUnit,
     get_laborunit_from_dict,
     laborheir_shop,
     laborunit_shop,
+)
+from src.ch04_rope.rope import (
+    all_ropes_between,
+    create_rope,
+    find_replace_rope_key_dict,
+    get_tail_label,
+    is_sub_rope,
+    rebuild_rope,
+    replace_knot,
 )
 from src.ch05_reason.reason import (
     FactCore,

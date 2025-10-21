@@ -1,5 +1,5 @@
 from src.ch02_allot.allot import default_pool_num, validate_pool_num
-from src.ch04_voice.voice import RespectNum
+from src.ch03_voice.voice import RespectNum
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch13_belief_listen.basis_beliefs import (

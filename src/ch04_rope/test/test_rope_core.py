@@ -1,12 +1,12 @@
 from dataclasses import dataclass
 from platform import system as platform_system
 from pytest import raises as pytest_raises
-from src.ch03_rope._ref.ch03_semantic_types import (
+from src.ch04_rope._ref.ch04_semantic_types import (
     FirstLabel,
     LabelTerm,
     default_knot_if_None,
 )
-from src.ch03_rope.rope import (
+from src.ch04_rope.rope import (
     RopeTerm,
     all_ropes_between,
     create_rope,

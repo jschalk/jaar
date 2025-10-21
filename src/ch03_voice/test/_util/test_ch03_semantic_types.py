@@ -1,5 +1,5 @@
 from inspect import getdoc as inspect_getdoc
-from src.ch04_voice._ref.ch04_semantic_types import (
+from src.ch03_voice._ref.ch03_semantic_types import (
     FundGrain,
     FundNum,
     GroupMark,
@@ -12,7 +12,7 @@ from src.ch04_voice._ref.ch04_semantic_types import (
     VoiceName,
     default_groupmark_if_None,
 )
-from src.ref.keywords import Ch04Keywords as kw
+from src.ref.keywords import Ch03Keywords as kw
 
 
 def test_NameTerm_Exists():

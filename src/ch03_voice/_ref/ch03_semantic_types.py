@@ -1,12 +1,4 @@
-from src.ch03_rope._ref.ch03_semantic_types import (
-    FirstLabel,
-    GrainNum,
-    LabelTerm,
-    PoolNum,
-    RopeTerm,
-    WeightNum,
-    default_knot_if_None,
-)
+from src.ch02_allot._ref.ch02_semantic_types import GrainNum, PoolNum, WeightNum
 
 
 class GroupMark(str):
@@ -21,7 +13,7 @@ def default_groupmark_if_None(groupmark: GroupMark = None) -> GroupMark:
     return groupmark if groupmark is not None else ";"
 
 
-class NameTerm(LabelTerm):
+class NameTerm(str):
     """All Name string classes should inherit from this class"""
 
     def is_name(self, groupmark: GroupMark = None) -> bool:

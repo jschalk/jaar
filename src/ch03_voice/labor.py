@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from src.ch01_py.dict_toolbox import get_empty_dict_if_None, get_False_if_None
-from src.ch04_voice.group import GroupTitle, GroupUnit
-from src.ch04_voice.voice import VoiceName
+from src.ch03_voice.group import GroupTitle, GroupUnit
+from src.ch03_voice.voice import VoiceName
 
 
 class InvalidLaborHeirPopulateException(Exception):

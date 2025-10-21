@@ -1,6 +1,6 @@
-from src.ch03_rope.rope import create_rope
-from src.ch04_voice.group import awardheir_shop, awardunit_shop
-from src.ch04_voice.labor import laborheir_shop, laborunit_shop
+from src.ch03_voice.group import awardheir_shop, awardunit_shop
+from src.ch03_voice.labor import laborheir_shop, laborunit_shop
+from src.ch04_rope.rope import create_rope
 from src.ch05_reason.reason import (
     caseunit_shop,
     factheir_shop,

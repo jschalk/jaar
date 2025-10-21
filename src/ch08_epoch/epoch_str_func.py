@@ -1,4 +1,4 @@
-from src.ch03_rope.rope import (
+from src.ch04_rope.rope import (
     LabelTerm,
     RopeTerm,
     create_rope,

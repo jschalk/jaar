@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.ch01_py.dict_toolbox import get_json_from_dict
-from src.ch04_voice.voice import voiceunit_shop
+from src.ch03_voice.voice import voiceunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_default_moment_label
 from src.ch09_belief_atom.atom_main import beliefatom_shop
 from src.ch10_lesson._ref.ch10_semantic_types import FaceName, default_knot_if_None

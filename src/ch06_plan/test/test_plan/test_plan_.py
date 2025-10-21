@@ -1,7 +1,7 @@
 from src.ch02_allot.allot import default_grain_num_if_None
-from src.ch03_rope.rope import create_rope, default_knot_if_None
-from src.ch04_voice.group import awardunit_shop
-from src.ch04_voice.labor import laborunit_shop
+from src.ch03_voice.group import awardunit_shop
+from src.ch03_voice.labor import laborunit_shop
+from src.ch04_rope.rope import create_rope, default_knot_if_None
 from src.ch06_plan.healer import healerunit_shop
 from src.ch06_plan.plan import PlanUnit, planunit_shop
 from src.ref.keywords import Ch06Keywords as kw

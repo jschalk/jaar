@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.ch02_allot.allot import default_grain_num_if_None
-from src.ch04_voice.group import GroupUnit, groupunit_shop, membership_shop
-from src.ref.keywords import Ch04Keywords as kw
+from src.ch03_voice.group import GroupUnit, groupunit_shop, membership_shop
+from src.ref.keywords import Ch03Keywords as kw
 
 
 def test_GroupUnit_Exists():

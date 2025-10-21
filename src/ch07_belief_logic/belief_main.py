@@ -12,7 +12,10 @@ from src.ch02_allot.allot import (
     valid_allotment_ratio,
     validate_pool_num,
 )
-from src.ch03_rope.rope import (
+from src.ch03_voice.group import AwardUnit, GroupUnit, groupunit_shop, membership_shop
+from src.ch03_voice.labor import LaborUnit
+from src.ch03_voice.voice import VoiceUnit, voiceunit_shop, voiceunits_get_from_dict
+from src.ch04_rope.rope import (
     all_ropes_between,
     create_rope,
     default_knot_if_None,
@@ -28,9 +31,6 @@ from src.ch03_rope.rope import (
     rope_is_valid_dir_path,
     to_rope,
 )
-from src.ch04_voice.group import AwardUnit, GroupUnit, groupunit_shop, membership_shop
-from src.ch04_voice.labor import LaborUnit
-from src.ch04_voice.voice import VoiceUnit, voiceunit_shop, voiceunits_get_from_dict
 from src.ch05_reason.reason import FactUnit, ReasonUnit, RopeTerm, factunit_shop
 from src.ch06_plan.healer import HealerUnit
 from src.ch06_plan.plan import (

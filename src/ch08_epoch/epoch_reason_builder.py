@@ -1,5 +1,5 @@
 from src.ch01_py.dict_toolbox import get_False_if_None
-from src.ch03_rope.rope import is_sub_rope
+from src.ch04_rope.rope import is_sub_rope
 from src.ch06_plan.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch07_belief_logic.belief_tool import (

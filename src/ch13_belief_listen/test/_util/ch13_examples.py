@@ -1,4 +1,4 @@
-from src.ch03_rope.rope import RopeTerm, create_rope, create_rope_from_labels
+from src.ch04_rope.rope import RopeTerm, create_rope, create_rope_from_labels
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop, planunit_shop
 from src.ch10_lesson.lesson_filehandler import LessonFileHandler, lessonfilehandler_shop
 from src.ch10_lesson.test._util.ch10_examples import get_texas_rope

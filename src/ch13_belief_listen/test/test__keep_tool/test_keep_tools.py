@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import delete_dir, open_file, save_file
-from src.ch03_rope.rope import create_rope
+from src.ch04_rope.rope import create_rope
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 from src.ch11_bud.test._util.ch11_env import get_temp_dir, temp_dir_setup
 from src.ch11_bud.test._util.ch11_examples import get_ch11_example_moment_label

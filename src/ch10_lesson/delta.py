@@ -7,8 +7,8 @@ from src.ch01_py.dict_toolbox import (
     get_from_nested_dict,
     set_in_nested_dict,
 )
-from src.ch04_voice.group import MemberShip
-from src.ch04_voice.voice import MemberShip, VoiceName, VoiceUnit
+from src.ch03_voice.group import MemberShip
+from src.ch03_voice.voice import MemberShip, VoiceName, VoiceUnit
 from src.ch05_reason.reason import FactUnit, ReasonUnit
 from src.ch06_plan.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop

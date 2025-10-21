@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from src.ch01_py.dict_toolbox import get_1_if_None
 from src.ch02_allot.allot import allot_scale, default_grain_num_if_None
-from src.ch04_voice._ref.ch04_semantic_types import FundGrain, GroupTitle, VoiceName
+from src.ch03_voice._ref.ch03_semantic_types import FundGrain, GroupTitle, VoiceName
 
 
 class InvalidGroupException(Exception):

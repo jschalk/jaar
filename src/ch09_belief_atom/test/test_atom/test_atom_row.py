@@ -1,4 +1,4 @@
-from src.ch03_rope.rope import create_rope, to_rope
+from src.ch04_rope.rope import create_rope, to_rope
 from src.ch09_belief_atom.atom_config import get_atom_args_class_types
 from src.ch09_belief_atom.atom_main import AtomRow, atomrow_shop, beliefatom_shop
 from src.ref.keywords import Ch09Keywords as kw

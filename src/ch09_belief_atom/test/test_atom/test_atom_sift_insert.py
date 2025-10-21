@@ -1,5 +1,5 @@
-from src.ch03_rope.rope import to_rope
-from src.ch04_voice.group import awardunit_shop
+from src.ch03_voice.group import awardunit_shop
+from src.ch04_rope.rope import to_rope
 from src.ch05_reason.reason import factunit_shop, reasonunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom.atom_main import beliefatom_shop, sift_beliefatom

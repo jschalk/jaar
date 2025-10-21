@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch03_rope.rope import default_knot_if_None
+from src.ch04_rope.rope import default_knot_if_None
 from src.ch09_belief_atom.atom_config import (
     get_all_belief_dimen_delete_keys,
     get_atom_args_class_types,

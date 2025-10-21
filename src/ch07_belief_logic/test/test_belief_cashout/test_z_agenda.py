@@ -1,5 +1,5 @@
-from src.ch03_rope.rope import RopeTerm
-from src.ch04_voice.labor import laborunit_shop
+from src.ch03_voice.labor import laborunit_shop
+from src.ch04_rope.rope import RopeTerm
 from src.ch06_plan.plan import PlanUnit, planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_beliefunit_from_dict
 from src.ch07_belief_logic.test._util.ch07_examples import (
