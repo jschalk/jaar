@@ -50,7 +50,7 @@ def print_out_expected_class_attribute_declarations(config_dimen):
             declare_type = "Integer"
         elif declare_type == "REAL":
             declare_type = "Float"
-        if config_column == "uid":
+        if config_column == kw.uid:
             declare_type = "Integer, primary_key=True"
         print(f"    {config_column} = Column({declare_type})")
 

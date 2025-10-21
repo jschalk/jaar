@@ -340,7 +340,7 @@ def test_ReasonUnit_to_dict_ReturnsDictWith_active_requisite():
     assert wk_reason_dict is not None
     static_wk_reason_dict = {
         "reason_context": wk_rope,
-        "active_requisite": wk_active_requisite,
+        kw.active_requisite: wk_active_requisite,
     }
     print(wk_reason_dict)
     assert wk_reason_dict == static_wk_reason_dict
@@ -389,7 +389,7 @@ def test_get_reasonunits_from_dict_ReturnsObj():
     static_wk_reason_dict = {
         wk_rope: {
             "reason_context": wk_rope,
-            "active_requisite": wk_active_requisite,
+            kw.active_requisite: wk_active_requisite,
         }
     }
     assert x_wk_reasonunits_dict == static_wk_reason_dict

@@ -40,13 +40,13 @@ def test_PlanAttrHolder_Exists():
     assert new_obj.is_expanded is None
     assert set(new_obj.__dict__.keys()) == {
         kw.star,
-        "uid",
+        kw.uid,
         "reason",
         "reason_context",
         "reason_case",
-        "reason_lower",
-        "reason_upper",
-        "reason_divisor",
+        kw.reason_lower,
+        kw.reason_upper,
+        kw.reason_divisor,
         "reason_del_case_reason_context",
         "reason_del_case_reason_state",
         "reason_requisite_active",

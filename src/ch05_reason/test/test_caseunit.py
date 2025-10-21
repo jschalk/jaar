@@ -706,7 +706,7 @@ def test_CaseUnit_to_dict_ReturnsObj_Scenario1_With_reason_lower_reason_upper_Wi
 
     # THEN
     assert case_dict is not None
-    static_dict = {kw.reason_state: wk_rope, "reason_lower": 1, "reason_upper": 4}
+    static_dict = {kw.reason_state: wk_rope, kw.reason_lower: 1, kw.reason_upper: 4}
     assert case_dict == static_dict
 
 

@@ -559,7 +559,7 @@ def test_TranBook_get_voices_headers_ReturnsObj():
     amy23_tranbook = tranbook_shop(amy23_str)
 
     # WHEN / THEN
-    assert amy23_tranbook._get_voices_headers() == ["voice_name", "net_amount"]
+    assert amy23_tranbook._get_voices_headers() == [kw.voice_name, "net_amount"]
 
 
 def test_TranBook_get_voices_csv_ReturnsObj():

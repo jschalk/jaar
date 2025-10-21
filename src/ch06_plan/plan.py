@@ -233,8 +233,8 @@ class PlanUnit:
     factheirs : dict[RopeTerm, FactHeir] parent plan provided facts.
     fund_ratio : float
     fund_grain : FundGrain Smallest indivisible funding component.
-    fund_onset : FundNum Point at which funding onsets inside BeliefUnit funding range
-    fund_cease : FundNum Point at which funding ceases inside BeliefUnit funding range
+    fund_onset : FundNum number at which funding onsets inside BeliefUnit funding range
+    fund_cease : FundNum number at which funding ceases inside BeliefUnit funding range
     healerunit_ratio : float
     tree_level : int that describes Depth tree_level in plan hierarchy.
     range_evaluated : bool Flag indicating whether range has been evaluated.

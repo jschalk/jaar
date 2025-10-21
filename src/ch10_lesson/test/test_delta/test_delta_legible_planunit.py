@@ -9,7 +9,7 @@ def test_create_legible_list_ReturnsObj_planunit_INSERT():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     dimen = kw.belief_planunit
-    _problem_bool_str = "problem_bool"
+    _problem_bool_str = kw.problem_bool
     clean_label = "clean fridge"
     casa_rope = sue_belief.make_l1_rope("casa")
     clean_rope = sue_belief.make_rope(casa_rope, clean_label)
@@ -50,7 +50,7 @@ def test_create_legible_list_ReturnsObj_planunit_UPDATE():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     dimen = kw.belief_planunit
-    _problem_bool_str = "problem_bool"
+    _problem_bool_str = kw.problem_bool
     clean_label = "clean fridge"
     casa_rope = sue_belief.make_l1_rope("casa")
     clean_rope = sue_belief.make_rope(casa_rope, clean_label)

@@ -28,7 +28,7 @@ def test_get_belief_voiceunits_dataframe_ReturnsDataFrame():
 
     # THEN
     voiceunit_colums = {
-        "voice_name",
+        kw.voice_name,
         "voice_cred_lumen",
         "voice_debt_lumen",
         "memberships",
@@ -54,7 +54,7 @@ def test_get_belief_voiceunits_dataframe_ReturnsEmptyDataFrame():
 
     # THEN
     voiceunit_colums = {
-        "voice_name",
+        kw.voice_name,
         "voice_cred_lumen",
         "voice_debt_lumen",
         "fund_give",

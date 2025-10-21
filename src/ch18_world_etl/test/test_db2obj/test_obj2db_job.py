@@ -146,8 +146,8 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
         "morph": x_morph,
         "numor": x_numor,
         kw.plan_rope: x_rope,
-        "pledge": x_pledge,
-        "problem_bool": x_problem_bool,
+        kw.pledge: x_pledge,
+        kw.problem_bool: x_problem_bool,
         kw.stop_want: x_stop_want,
     }
     # all args included in values dict
