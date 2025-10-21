@@ -6,6 +6,7 @@ from src.ch17_idea._ref.ch17_semantic_types import (
     FundNum,
     GroupTitle,
     HealerName,
+    KnotTerm,
     LabelTerm,
     ManaGrain,
     ManaNum,

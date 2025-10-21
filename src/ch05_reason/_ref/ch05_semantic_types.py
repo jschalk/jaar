@@ -4,6 +4,7 @@ from src.ch04_rope._ref.ch04_semantic_types import (
     FundNum,
     GroupTitle,
     HealerName,
+    KnotTerm,
     LabelTerm,
     NameTerm,
     RespectGrain,

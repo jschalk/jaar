@@ -6,6 +6,7 @@ from src.ch14_keep._ref.ch14_semantic_types import (
     FundNum,
     GroupTitle,
     HealerName,
+    KnotTerm,
     LabelTerm,
     ManaGrain,
     ManaNum,

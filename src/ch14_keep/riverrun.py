@@ -14,6 +14,7 @@ from src.ch02_allot.allot import (
 from src.ch13_belief_listen._ref.ch13_path import create_keep_grade_path
 from src.ch14_keep._ref.ch14_semantic_types import (
     BeliefName,
+    KnotTerm,
     LabelTerm,
     ManaGrain,
     ManaNum,
@@ -35,7 +36,7 @@ class RiverRun:
     moment_label: LabelTerm = None
     belief_name: BeliefName = None
     keep_rope: RopeTerm = None
-    knot: str = None
+    knot: KnotTerm = None
     keep_point_magnitude: ManaNum = None
     mana_grain: ManaGrain = None
     number: int = None
@@ -269,7 +270,7 @@ def riverrun_shop(
     moment_label: LabelTerm,
     belief_name: BeliefName,
     keep_rope: RopeTerm = None,
-    knot: str = None,
+    knot: KnotTerm = None,
     keep_point_magnitude: ManaNum = None,
     mana_grain: ManaGrain = None,
     number: int = None,

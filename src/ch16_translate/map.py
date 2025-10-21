@@ -19,6 +19,7 @@ from src.ch04_rope.rope import (
 )
 from src.ch16_translate._ref.ch16_semantic_types import (
     FaceName,
+    KnotTerm,
     LabelTerm,
     RopeTerm,
     SparkInt,
@@ -41,8 +42,8 @@ class MapCore:
     spark_num: SparkInt = None
     otx2inx: dict = None
     unknown_str: str = None
-    otx_knot: str = None
-    inx_knot: str = None
+    otx_knot: KnotTerm = None
+    inx_knot: KnotTerm = None
 
     def _unknown_str_in_otx2inx(self) -> bool:
         return str_in_dict(self.unknown_str, self.otx2inx)
@@ -113,8 +114,8 @@ class NameMap(MapCore):
 def namemap_shop(
     face_name: FaceName = None,
     spark_num: SparkInt = None,
-    otx_knot: str = None,
-    inx_knot: str = None,
+    otx_knot: KnotTerm = None,
+    inx_knot: KnotTerm = None,
     otx2inx: dict = None,
     unknown_str: str = None,
 ) -> NameMap:
@@ -187,8 +188,8 @@ class TitleMap(MapCore):
 def titlemap_shop(
     face_name: FaceName = None,
     spark_num: SparkInt = None,
-    otx_knot: str = None,
-    inx_knot: str = None,
+    otx_knot: KnotTerm = None,
+    inx_knot: KnotTerm = None,
     otx2inx: dict = None,
     unknown_str: str = None,
 ) -> TitleMap:
@@ -261,8 +262,8 @@ class LabelMap(MapCore):
 def labelmap_shop(
     face_name: FaceName = None,
     spark_num: SparkInt = None,
-    otx_knot: str = None,
-    inx_knot: str = None,
+    otx_knot: KnotTerm = None,
+    inx_knot: KnotTerm = None,
     otx2inx: dict = None,
     unknown_str: str = None,
 ) -> LabelMap:
@@ -297,8 +298,8 @@ class RopeMap:
     spark_num: SparkInt = None
     otx2inx: dict = None
     unknown_str: str = None
-    otx_knot: str = None
-    inx_knot: str = None
+    otx_knot: KnotTerm = None
+    inx_knot: KnotTerm = None
     labelmap: LabelMap = None
 
     def set_all_otx2inx(
@@ -411,8 +412,8 @@ class RopeMap:
 def ropemap_shop(
     face_name: FaceName = None,
     spark_num: SparkInt = None,
-    otx_knot: str = None,
-    inx_knot: str = None,
+    otx_knot: KnotTerm = None,
+    inx_knot: KnotTerm = None,
     x_labelmap: LabelMap = None,
     otx2inx: dict = None,
     unknown_str: str = None,

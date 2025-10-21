@@ -19,6 +19,7 @@ from src.ch13_belief_listen._ref.ch13_path import (
 )
 from src.ch13_belief_listen._ref.ch13_semantic_types import (
     BeliefName,
+    KnotTerm,
     LabelTerm,
     MomentLabel,
     RopeTerm,
@@ -30,7 +31,7 @@ def create_keep_path_dir_if_missing(
     belief_name: BeliefName,
     moment_label: MomentLabel,
     keep_rope: LabelTerm,
-    knot: str,
+    knot: KnotTerm,
 ):
     keep_path = create_keep_rope_path(
         moment_mstr_dir,
@@ -47,7 +48,7 @@ def treasury_db_file_exists(
     belief_name: BeliefName,
     moment_label: MomentLabel,
     keep_rope: LabelTerm,
-    knot: str,
+    knot: KnotTerm,
 ) -> bool:
     treasury_db_path = create_treasury_db_path(
         moment_mstr_dir=moment_mstr_dir,
@@ -64,7 +65,7 @@ def create_treasury_db_file(
     belief_name: BeliefName,
     moment_label: MomentLabel,
     keep_rope: LabelTerm,
-    knot: str,
+    knot: KnotTerm,
 ) -> None:
     create_keep_path_dir_if_missing(
         moment_mstr_dir=moment_mstr_dir,
@@ -89,7 +90,7 @@ def save_duty_belief(
     belief_name: BeliefName,
     moment_label: MomentLabel,
     keep_rope: LabelTerm,
-    knot: str,
+    knot: KnotTerm,
     duty_belief: BeliefUnit,
 ) -> None:
     duty_path = create_keep_duty_path(
@@ -108,7 +109,7 @@ def get_duty_belief(
     belief_name: BeliefName,
     moment_label: MomentLabel,
     keep_rope: LabelTerm,
-    knot: str,
+    knot: KnotTerm,
     duty_belief_name: BeliefName,
 ) -> BeliefUnit:
     keep_duty_path = create_keep_duty_path(
@@ -129,7 +130,7 @@ def save_all_gut_dutys(
     moment_label: MomentLabel,
     belief_name: BeliefName,
     keep_ropes: set[RopeTerm],
-    knot: str,
+    knot: KnotTerm,
 ):
     gut = open_gut_file(moment_mstr_dir, moment_label, belief_name)
     for x_keep_rope in keep_ropes:
@@ -178,7 +179,7 @@ def vision_file_exists(
     belief_name: BeliefName,
     moment_label: MomentLabel,
     keep_rope: RopeTerm,
-    knot: str,
+    knot: KnotTerm,
     speaker_id: BeliefName,
 ) -> bool:
     keep_visions_path = create_keep_visions_path(
@@ -193,7 +194,7 @@ def get_vision_belief(
     belief_name: BeliefName,
     moment_label: MomentLabel,
     keep_rope: RopeTerm,
-    knot: str,
+    knot: KnotTerm,
     speaker_id: BeliefName,
 ) -> BeliefUnit:
     keep_visions_path = create_keep_visions_path(
@@ -224,7 +225,7 @@ def rj_speaker_belief(
     moment_mstr_dir: str,
     moment_label: MomentLabel,
     keep_rope: RopeTerm,
-    knot: str,
+    knot: KnotTerm,
     healer_name: BeliefName,
     speaker_id: BeliefName,
 ) -> BeliefUnit:
@@ -242,7 +243,7 @@ def rj_perspective_belief(
     moment_mstr_dir: str,
     moment_label: MomentLabel,
     keep_rope: RopeTerm,
-    knot: str,
+    knot: KnotTerm,
     healer_name: BeliefName,
     speaker_id: BeliefName,
     perspective_id: BeliefName,
@@ -263,7 +264,7 @@ def save_vision_belief(
     healer_name: BeliefName,
     moment_label: MomentLabel,
     keep_rope: RopeTerm,
-    knot: str,
+    knot: KnotTerm,
     x_belief: BeliefUnit,
 ) -> None:
     x_filename = get_json_filename(x_belief.belief_name)

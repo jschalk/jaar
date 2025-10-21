@@ -6,6 +6,7 @@ from src.ch01_py.file_toolbox import (
 from src.ch04_rope.rope import get_all_rope_labels, rebuild_rope
 from src.ch13_belief_listen._ref.ch13_semantic_types import (
     BeliefName,
+    KnotTerm,
     LabelTerm,
     MomentLabel,
 )
@@ -35,7 +36,7 @@ def create_keep_rope_path(
     belief_name: BeliefName,
     moment_label: MomentLabel,
     keep_rope: LabelTerm,
-    knot: str,
+    knot: KnotTerm,
 ) -> str:
     """Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\keeps\\planroot\\level1_label"""
     if keep_rope is None:
@@ -56,7 +57,7 @@ def create_keep_dutys_path(
     belief_name: BeliefName,
     moment_label: MomentLabel,
     keep_rope: LabelTerm,
-    knot: str,
+    knot: KnotTerm,
 ) -> str:
     """Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\keeps\\level1\\dutys"""
     x_keep_path = create_keep_rope_path(
@@ -70,7 +71,7 @@ def create_keep_duty_path(
     belief_name: BeliefName,
     moment_label: MomentLabel,
     keep_rope: LabelTerm,
-    knot: str,
+    knot: KnotTerm,
     duty_belief: BeliefName,
 ) -> str:
     """Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\keeps\\level1\\dutys\\duty_belief.json"""
@@ -85,7 +86,7 @@ def create_keep_visions_path(
     belief_name: BeliefName,
     moment_label: MomentLabel,
     keep_rope: LabelTerm,
-    knot: str,
+    knot: KnotTerm,
 ) -> str:
     """Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\keeps\\level1\\visions"""
     x_keep_path = create_keep_rope_path(
@@ -99,7 +100,7 @@ def create_keep_grades_path(
     belief_name: BeliefName,
     moment_label: MomentLabel,
     keep_rope: LabelTerm,
-    knot: str,
+    knot: KnotTerm,
 ) -> str:
     """Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\keeps\\level1\\grades"""
     x_keep_path = create_keep_rope_path(
@@ -113,7 +114,7 @@ def create_keep_grade_path(
     belief_name: BeliefName,
     moment_label: MomentLabel,
     keep_rope: LabelTerm,
-    knot: str,
+    knot: KnotTerm,
     grade_belief_name: BeliefName,
 ) -> str:
     """Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\keeps\\level1\\grades\\grade_belief_name.json"""
@@ -128,7 +129,7 @@ def create_treasury_db_path(
     belief_name: BeliefName,
     moment_label: MomentLabel,
     keep_rope: LabelTerm,
-    knot: str,
+    knot: KnotTerm,
 ) -> str:
     "Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\keeps\\level1\\treasury.db"
     keep_path = create_keep_rope_path(

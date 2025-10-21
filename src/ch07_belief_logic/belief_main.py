@@ -46,6 +46,7 @@ from src.ch07_belief_logic._ref.ch07_semantic_types import (
     FundNum,
     GroupTitle,
     HealerName,
+    KnotTerm,
     LabelTerm,
     ManaGrain,
     MomentLabel,
@@ -110,7 +111,7 @@ def get_default_moment_label() -> str:
 class BeliefUnit:
     belief_name: BeliefName = None
     moment_label: MomentLabel = None
-    knot: str = None
+    knot: KnotTerm = None
     fund_pool: FundNum = None
     fund_grain: FundGrain = None
     respect_grain: RespectGrain = None
@@ -189,7 +190,7 @@ class BeliefUnit:
     def make_l1_rope(self, l1_label: LabelTerm):
         return self.make_rope(self.moment_label, l1_label)
 
-    def set_knot(self, new_knot: str):
+    def set_knot(self, new_knot: KnotTerm):
         self.cashout()
         if self.knot != new_knot:
             for x_plan_rope in self._plan_dict.keys():
@@ -1439,7 +1440,7 @@ reason_case:    {reason_case}"""
 def beliefunit_shop(
     belief_name: BeliefName = None,
     moment_label: MomentLabel = None,
-    knot: str = None,
+    knot: KnotTerm = None,
     fund_pool: FundNum = None,
     fund_grain: FundGrain = None,
     respect_grain: RespectGrain = None,
@@ -1586,7 +1587,7 @@ def create_planroot_kids_from_dict(x_belief: BeliefUnit, planroot_dict: dict):
 
 
 def obj_from_belief_dict(
-    x_dict: dict[str, dict], dict_key: str, _knot: str = None
+    x_dict: dict[str, dict], dict_key: str, _knot: KnotTerm = None
 ) -> any:
     if dict_key == "voices":
         return voiceunits_get_from_dict(x_dict[dict_key], _knot)

@@ -76,27 +76,27 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_voiceunit():
             kw.voice_debt_lumen,
             kw.amount,
         ]
-        blrpern_cat = "belief_voiceunit"
+        blfvoce_cat = "belief_voiceunit"
         src_table = f"{idea_number}_raw"
-        blrpern_table = f"{blrpern_cat}_raw"
+        blfvoce_table = f"{blfvoce_cat}_raw"
         idea_config = get_idea_config_dict()
-        blrpern_config = idea_config.get(blrpern_cat)
-        blrpern_jkeys = blrpern_config.get("jkeys")
-        blrpern_jvals = blrpern_config.get("jvalues")
-        blrpern_args = set(blrpern_jkeys.keys()).union(set(blrpern_jvals.keys()))
-        print(f"{blrpern_jkeys=}")
-        print(f"{blrpern_jvals=}")
+        blfvoce_config = idea_config.get(blfvoce_cat)
+        blfvoce_jkeys = blfvoce_config.get("jkeys")
+        blfvoce_jvals = blfvoce_config.get("jvalues")
+        blfvoce_args = set(blfvoce_jkeys.keys()).union(set(blfvoce_jvals.keys()))
+        print(f"{blfvoce_jkeys=}")
+        print(f"{blfvoce_jvals=}")
         create_idea_sorted_table(conn, src_table, idea_cols)
-        create_idea_sorted_table(conn, blrpern_table, list(blrpern_args))
+        create_idea_sorted_table(conn, blfvoce_table, list(blfvoce_args))
 
         # WHEN
         gen_sqlstr = get_idea_into_dimen_raw_query(
-            conn, idea_number, blrpern_cat, blrpern_jkeys
+            conn, idea_number, blfvoce_cat, blfvoce_jkeys
         )
 
         # THEN
         columns_str = "spark_num, face_name, moment_label, belief_name, voice_name, voice_cred_lumen, voice_debt_lumen"
-        expected_sqlstr = f"""INSERT INTO {blrpern_cat}_raw (idea_number, {columns_str})
+        expected_sqlstr = f"""INSERT INTO {blfvoce_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
 WHERE spark_num IS NOT NULL AND face_name IS NOT NULL AND moment_label IS NOT NULL AND belief_name IS NOT NULL AND voice_name IS NOT NULL
@@ -125,27 +125,27 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_belief_voiceunit():
             kw.voice_cred_lumen,
             kw.amount,
         ]
-        blrpern_cat = "belief_voiceunit"
+        blfvoce_cat = "belief_voiceunit"
         src_table = f"{idea_number}_raw"
-        blrpern_table = f"{blrpern_cat}_raw"
+        blfvoce_table = f"{blfvoce_cat}_raw"
         idea_config = get_idea_config_dict()
-        blrpern_config = idea_config.get(blrpern_cat)
-        blrpern_jkeys = blrpern_config.get("jkeys")
-        blrpern_jvals = blrpern_config.get("jvalues")
-        blrpern_args = set(blrpern_jkeys.keys()).union(set(blrpern_jvals.keys()))
-        print(f"{blrpern_jkeys=}")
-        print(f"{blrpern_jvals=}")
+        blfvoce_config = idea_config.get(blfvoce_cat)
+        blfvoce_jkeys = blfvoce_config.get("jkeys")
+        blfvoce_jvals = blfvoce_config.get("jvalues")
+        blfvoce_args = set(blfvoce_jkeys.keys()).union(set(blfvoce_jvals.keys()))
+        print(f"{blfvoce_jkeys=}")
+        print(f"{blfvoce_jvals=}")
         create_idea_sorted_table(conn, src_table, idea_cols)
-        create_idea_sorted_table(conn, blrpern_table, list(blrpern_args))
+        create_idea_sorted_table(conn, blfvoce_table, list(blfvoce_args))
 
         # WHEN
         gen_sqlstr = get_idea_into_dimen_raw_query(
-            conn, idea_number, blrpern_cat, blrpern_jkeys
+            conn, idea_number, blfvoce_cat, blfvoce_jkeys
         )
 
         # THEN
         columns_str = "spark_num, face_name, moment_label, belief_name, voice_name, voice_cred_lumen"
-        expected_sqlstr = f"""INSERT INTO {blrpern_cat}_raw (idea_number, {columns_str})
+        expected_sqlstr = f"""INSERT INTO {blfvoce_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
 WHERE spark_num IS NOT NULL AND face_name IS NOT NULL AND moment_label IS NOT NULL AND belief_name IS NOT NULL AND voice_name IS NOT NULL

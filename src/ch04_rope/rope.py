@@ -2,6 +2,7 @@ from pathlib import Path as pathlib_Path
 from src.ch01_py.file_toolbox import is_path_valid
 from src.ch04_rope._ref.ch04_semantic_types import (
     FirstLabel,
+    KnotTerm,
     LabelTerm,
     RopeTerm,
     default_knot_if_None,
@@ -12,7 +13,7 @@ class knot_not_in_parent_rope_Exception(Exception):
     pass
 
 
-def to_rope(label: LabelTerm, knot: str = None) -> LabelTerm:
+def to_rope(label: LabelTerm, knot: KnotTerm = None) -> LabelTerm:
     x_knot = default_knot_if_None(knot)
     if label is None:
         return x_knot
@@ -31,7 +32,7 @@ class knot_in_label_Exception(Exception):
 def create_rope(
     parent_rope: RopeTerm,
     tail_label: LabelTerm = None,
-    knot: str = None,
+    knot: KnotTerm = None,
     auto_add_first_knot: bool = True,
 ) -> RopeTerm:
     knot = default_knot_if_None(knot)
@@ -79,7 +80,7 @@ def is_sub_rope(ref_rope: RopeTerm, sub_rope: RopeTerm) -> bool:
     return ref_rope.find(sub_rope) == 0
 
 
-def is_heir_rope(src: RopeTerm, heir: RopeTerm, knot: str = None) -> bool:
+def is_heir_rope(src: RopeTerm, heir: RopeTerm, knot: KnotTerm = None) -> bool:
     return src == heir or heir.find(src) == 0
 
 
@@ -103,11 +104,11 @@ def find_replace_rope_key_dict(
     return dict_x
 
 
-def get_all_rope_labels(rope: RopeTerm, knot: str = None) -> list[LabelTerm]:
+def get_all_rope_labels(rope: RopeTerm, knot: KnotTerm = None) -> list[LabelTerm]:
     return rope.split(default_knot_if_None(knot))[1:-1]
 
 
-def get_tail_label(rope: RopeTerm, knot: str = None) -> LabelTerm:
+def get_tail_label(rope: RopeTerm, knot: KnotTerm = None) -> LabelTerm:
     knot = default_knot_if_None(knot)
     if rope in ["", knot]:
         return ""
@@ -116,17 +117,17 @@ def get_tail_label(rope: RopeTerm, knot: str = None) -> LabelTerm:
 
 
 def get_parent_rope(
-    rope: RopeTerm, knot: str = None
+    rope: RopeTerm, knot: KnotTerm = None
 ) -> RopeTerm:  # rope without tail label
     parent_labels = get_all_rope_labels(rope=rope, knot=knot)[:-1]
     return create_rope_from_labels(parent_labels, knot=knot)
 
 
-def get_first_label_from_rope(rope: RopeTerm, knot: str = None) -> FirstLabel:
+def get_first_label_from_rope(rope: RopeTerm, knot: KnotTerm = None) -> FirstLabel:
     return get_all_rope_labels(rope=rope, knot=knot)[0]
 
 
-def get_ancestor_ropes(rope: RopeTerm, knot: str = None) -> list[RopeTerm]:
+def get_ancestor_ropes(rope: RopeTerm, knot: KnotTerm = None) -> list[RopeTerm]:
     knot = default_knot_if_None(knot)
     if not rope:
         return []
@@ -145,7 +146,9 @@ def get_ancestor_ropes(rope: RopeTerm, knot: str = None) -> list[RopeTerm]:
     return x_ropes
 
 
-def all_ropes_between(src_rope: str, dst_rope: str, knot: str = None) -> list[RopeTerm]:
+def all_ropes_between(
+    src_rope: str, dst_rope: str, knot: KnotTerm = None
+) -> list[RopeTerm]:
     x_list = []
     anc_ropes = get_ancestor_ropes(dst_rope, knot)
     while anc_ropes != []:
@@ -169,7 +172,7 @@ def get_forefather_ropes(rope: RopeTerm) -> dict[RopeTerm]:
     return {a_rope: None for a_rope in ancestor_ropes}
 
 
-def create_rope_from_labels(labels: list[LabelTerm], knot: str = None) -> RopeTerm:
+def create_rope_from_labels(labels: list[LabelTerm], knot: KnotTerm = None) -> RopeTerm:
     return to_rope(default_knot_if_None(knot).join(labels), knot) if labels else ""
 
 
@@ -181,7 +184,7 @@ def is_string_in_rope(string: str, rope: RopeTerm) -> bool:
     return rope.find(string) >= 0
 
 
-def replace_knot(rope: RopeTerm, old_knot: str, new_knot: str) -> str:
+def replace_knot(rope: RopeTerm, old_knot: KnotTerm, new_knot: KnotTerm) -> str:
     if is_string_in_rope(string=new_knot, rope=rope):
         raise InvalidknotReplaceException(
             f"Cannot replace_knot '{old_knot}' with '{new_knot}' because the new one exists in rope '{rope}'."
@@ -193,13 +196,13 @@ class ValidateLabelTermException(Exception):
     pass
 
 
-def is_labelterm(x_labelterm: LabelTerm, x_knot: str) -> bool:
+def is_labelterm(x_labelterm: LabelTerm, x_knot: KnotTerm) -> bool:
     x_labelterm = LabelTerm(x_labelterm)
     return x_labelterm.is_label(knot=x_knot)
 
 
 def validate_labelterm(
-    x_labelterm: LabelTerm, x_knot: str, not_labelterm_required: bool = False
+    x_labelterm: LabelTerm, x_knot: KnotTerm, not_labelterm_required: bool = False
 ) -> LabelTerm:
     if is_labelterm(x_labelterm, x_knot) and not_labelterm_required:
         raise ValidateLabelTermException(
@@ -212,7 +215,7 @@ def validate_labelterm(
     return x_labelterm
 
 
-def rope_is_valid_dir_path(x_rope: RopeTerm, knot: str) -> bool:
+def rope_is_valid_dir_path(x_rope: RopeTerm, knot: KnotTerm) -> bool:
     """Returns path built from RopeTerm if it is a valid directory path."""
     x_rope_labels = get_all_rope_labels(x_rope, knot)
     slash_str = "/"

@@ -2,6 +2,7 @@ from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from src.ch01_py.dict_toolbox import get_empty_dict_if_None
 from src.ch04_rope.rope import (
+    KnotTerm,
     RopeTerm,
     default_knot_if_None,
     find_replace_rope_key_dict,
@@ -299,7 +300,7 @@ class CaseUnit:
     reason_divisor: int = None
     case_active: bool = None
     task: bool = None
-    knot: str = None
+    knot: KnotTerm = None
 
     def get_obj_key(self):
         return self.reason_state
@@ -321,7 +322,7 @@ class CaseUnit:
     def clear_case_active(self):
         self.case_active = None
 
-    def set_knot(self, new_knot: str):
+    def set_knot(self, new_knot: KnotTerm):
         old_knot = copy_deepcopy(self.knot)
         self.knot = new_knot
         self.reason_state = replace_knot(
@@ -434,7 +435,7 @@ def caseunit_shop(
     reason_lower: float = None,
     reason_upper: float = None,
     reason_divisor: float = None,
-    knot: str = None,
+    knot: KnotTerm = None,
 ) -> CaseUnit:
     return CaseUnit(
         reason_state=reason_state,
@@ -476,9 +477,9 @@ class ReasonCore:
     reason_context: RopeTerm
     cases: dict[RopeTerm, CaseUnit]
     active_requisite: bool = None
-    knot: str = None
+    knot: KnotTerm = None
 
-    def set_knot(self, new_knot: str):
+    def set_knot(self, new_knot: KnotTerm):
         old_knot = copy_deepcopy(self.knot)
         self.knot = new_knot
         self.reason_context = replace_knot(self.reason_context, old_knot, new_knot)
@@ -538,7 +539,7 @@ def reasoncore_shop(
     reason_context: RopeTerm,
     cases: dict[RopeTerm, CaseUnit] = None,
     active_requisite: bool = None,
-    knot: str = None,
+    knot: KnotTerm = None,
 ):
     return ReasonCore(
         reason_context=reason_context,
@@ -568,7 +569,7 @@ def reasonunit_shop(
     reason_context: RopeTerm,
     cases: dict[RopeTerm, CaseUnit] = None,
     active_requisite: bool = None,
-    knot: str = None,
+    knot: KnotTerm = None,
 ):
     return ReasonUnit(
         reason_context=reason_context,
@@ -655,7 +656,7 @@ def reasonheir_shop(
     reason_active: bool = None,
     task: bool = None,
     parent_heir_active: bool = None,
-    knot: str = None,
+    knot: KnotTerm = None,
 ):
     return ReasonHeir(
         reason_context=reason_context,

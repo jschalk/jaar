@@ -4,6 +4,7 @@ from src.ch06_plan._ref.ch06_semantic_types import (
     FundNum,
     GroupTitle,
     HealerName,
+    KnotTerm,
     LabelTerm,
     NameTerm,
     RespectGrain,

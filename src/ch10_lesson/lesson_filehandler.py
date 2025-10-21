@@ -31,6 +31,7 @@ from src.ch10_lesson._ref.ch10_path import (
 )
 from src.ch10_lesson._ref.ch10_semantic_types import (
     BeliefName,
+    KnotTerm,
     LabelTerm,
     MomentLabel,
     RopeTerm,
@@ -90,7 +91,7 @@ class LessonFileHandler:
     belief_name: BeliefName = None
     moment_mstr_dir: str = None
     moment_label: MomentLabel = None
-    knot: str = None
+    knot: KnotTerm = None
     fund_pool: float = None
     fund_grain: float = None
     respect_grain: float = None
@@ -322,7 +323,7 @@ def lessonfilehandler_shop(
     moment_mstr_dir: str,
     moment_label: MomentLabel,
     belief_name: BeliefName = None,
-    knot: str = None,
+    knot: KnotTerm = None,
     fund_pool: float = None,
     fund_grain: float = None,
     respect_grain: float = None,

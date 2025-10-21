@@ -131,6 +131,7 @@ def get_belief_calc_args_sqlite_datatype_dict() -> dict[str, str]:
         "fund_take": "REAL",
         "group_cred_lumen": "REAL",
         "group_debt_lumen": "REAL",
+        "groupmark": "TEXT",
         "inallocable_voice_debt_lumen": "REAL",
         "irrational_voice_debt_lumen": "REAL",
         "voice_cred_lumen": "REAL",

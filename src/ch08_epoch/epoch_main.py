@@ -14,6 +14,7 @@ from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch08_epoch._ref.ch08_semantic_types import (
     EpochLabel,
     EpochPoint,
+    KnotTerm,
     LabelTerm,
     RopeTerm,
 )
@@ -151,7 +152,9 @@ def new_epoch_planunit(epoch_label: EpochLabel, c400_number: int) -> PlanUnit:
     return planunit_shop(epoch_label, begin=0, close=epoch_length)
 
 
-def get_epoch_rope(nexus_label: str, epoch_label: LabelTerm, knot: str) -> RopeTerm:
+def get_epoch_rope(
+    nexus_label: str, epoch_label: LabelTerm, knot: KnotTerm
+) -> RopeTerm:
     time_rope = create_rope(nexus_label, "time", knot)
     return create_rope(time_rope, epoch_label, knot)
 

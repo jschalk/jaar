@@ -6,6 +6,7 @@ from src.ch21_lobby._ref.ch21_semantic_types import (
     FundNum,
     GroupTitle,
     HealerName,
+    KnotTerm,
     LabelTerm,
     LobbyID,
     ManaGrain,

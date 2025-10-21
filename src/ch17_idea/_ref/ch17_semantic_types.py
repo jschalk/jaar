@@ -6,6 +6,7 @@ from src.ch16_translate._ref.ch16_semantic_types import (
     FundNum,
     GroupTitle,
     HealerName,
+    KnotTerm,
     LabelTerm,
     ManaGrain,
     ManaNum,

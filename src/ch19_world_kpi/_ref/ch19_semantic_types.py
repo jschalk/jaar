@@ -6,6 +6,7 @@ from src.ch18_world_etl._ref.ch18_semantic_types import (
     FundNum,
     GroupTitle,
     HealerName,
+    KnotTerm,
     LabelTerm,
     ManaGrain,
     ManaNum,

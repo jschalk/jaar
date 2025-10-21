@@ -15,13 +15,13 @@ from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch18_world_etl.db_obj_belief_tool import (
     ObjKeysHolder,
+    insert_job_blfvoce,
     insert_job_blrawar,
     insert_job_blrfact,
     insert_job_blrgrou,
     insert_job_blrheal,
     insert_job_blrlabo,
     insert_job_blrmemb,
-    insert_job_blrpern,
     insert_job_blrplan,
     insert_job_blrprem,
     insert_job_blrreas,
@@ -30,6 +30,7 @@ from src.ch18_world_etl.db_obj_belief_tool import (
 )
 from src.ch18_world_etl.test._util.ch18_env import temp_dir_setup
 from src.ch18_world_etl.tran_sqlstrs import create_job_tables
+from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_ObjKeysHolder_Exists():
@@ -472,7 +473,7 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
         assert rows == expected_data
 
 
-def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
+def test_insert_job_blfvoce_CreatesTableRowsFor_blfvoce_job():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_belief_calc_dimen_args("belief_voiceunit")
@@ -502,6 +503,7 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     x_fund_agenda_ratio_take = 13
     x_inallocable_voice_debt_lumen = 14
     x_irrational_voice_debt_lumen = 15
+    x_groupmark = 16
     x_voice = voiceunit_shop(x_voice_name)
     x_voice.voice_name = x_voice_name
     x_voice.voice_cred_lumen = x_voice_cred_lumen
@@ -516,6 +518,7 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     x_voice.fund_agenda_ratio_take = x_fund_agenda_ratio_take
     x_voice.inallocable_voice_debt_lumen = x_inallocable_voice_debt_lumen
     x_voice.irrational_voice_debt_lumen = x_irrational_voice_debt_lumen
+    x_voice.groupmark = x_groupmark
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -525,7 +528,7 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
         x_objkeysholder = ObjKeysHolder(x_moment_label, x_belief_name)
 
         # WHEN
-        insert_job_blrpern(cursor, x_objkeysholder, x_voice)
+        insert_job_blfvoce(cursor, x_objkeysholder, x_voice)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -538,6 +541,7 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
             str(x_voice_name),
             x_voice_cred_lumen,
             x_voice_debt_lumen,
+            str(x_groupmark),
             x_credor_pool,
             x_debtor_pool,
             x_fund_give,
@@ -572,7 +576,6 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
     x_belief_name = 2
     x_group_title = 3
     x_fund_grain = 4
-    x_knot = 5
     x_credor_pool = 6
     x_debtor_pool = 7
     x_fund_give = 8
@@ -582,7 +585,6 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
     x_group = groupunit_shop(x_group_title)
     x_group.group_title = x_group_title
     x_group.fund_grain = x_fund_grain
-    x_group.knot = x_knot
     x_group.credor_pool = x_credor_pool
     x_group.debtor_pool = x_debtor_pool
     x_group.fund_give = x_fund_give
@@ -610,7 +612,6 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
             str(x_belief_name),
             str(x_group_title),
             x_fund_grain,
-            str(x_knot),
             x_credor_pool,
             x_debtor_pool,
             x_fund_give,
@@ -868,7 +869,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     sue_belief.add_voiceunit(bob_str)
     sue_belief.get_voice(bob_str).add_membership(run_str)
     casa_rope = sue_belief.make_l1_rope("casa")
-    situation_rope = sue_belief.make_l1_rope("reason_active")
+    situation_rope = sue_belief.make_l1_rope(kw.reason_active)
     clean_rope = sue_belief.make_rope(situation_rope, "clean")
     dirty_rope = sue_belief.make_rope(situation_rope, "dirty")
     sue_belief.add_plan(casa_rope)
@@ -887,20 +888,20 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        blrmemb_job_table = "belief_voice_membership_job"
-        blrpern_job_table = "belief_voiceunit_job"
-        blrgrou_job_table = "belief_groupunit_job"
-        blrawar_job_table = "belief_plan_awardunit_job"
-        blrfact_job_table = "belief_plan_factunit_job"
-        blrheal_job_table = "belief_plan_healerunit_job"
-        blrprem_job_table = "belief_plan_reason_caseunit_job"
-        blrreas_job_table = "belief_plan_reasonunit_job"
-        blrlabo_job_table = "belief_plan_partyunit_job"
-        blrplan_job_table = "belief_planunit_job"
-        blrunit_job_table = "beliefunit_job"
+        blrmemb_job_table = f"{kw.belief_voice_membership}_job"
+        blfvoce_job_table = f"{kw.belief_voiceunit}_job"
+        blrgrou_job_table = f"{kw.belief_groupunit}_job"
+        blrawar_job_table = f"{kw.belief_plan_awardunit}_job"
+        blrfact_job_table = f"{kw.belief_plan_factunit}_job"
+        blrheal_job_table = f"{kw.belief_plan_healerunit}_job"
+        blrprem_job_table = f"{kw.belief_plan_reason_caseunit}_job"
+        blrreas_job_table = f"{kw.belief_plan_reasonunit}_job"
+        blrlabo_job_table = f"{kw.belief_plan_partyunit}_job"
+        blrplan_job_table = f"{kw.belief_planunit}_job"
+        blrunit_job_table = f"{kw.beliefunit}_job"
         assert get_row_count(cursor, blrunit_job_table) == 0
         assert get_row_count(cursor, blrplan_job_table) == 0
-        assert get_row_count(cursor, blrpern_job_table) == 0
+        assert get_row_count(cursor, blfvoce_job_table) == 0
         assert get_row_count(cursor, blrmemb_job_table) == 0
         assert get_row_count(cursor, blrgrou_job_table) == 0
         assert get_row_count(cursor, blrawar_job_table) == 0
@@ -916,7 +917,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         # THEN
         assert get_row_count(cursor, blrunit_job_table) == 1
         assert get_row_count(cursor, blrplan_job_table) == 5
-        assert get_row_count(cursor, blrpern_job_table) == 2
+        assert get_row_count(cursor, blfvoce_job_table) == 2
         assert get_row_count(cursor, blrmemb_job_table) == 3
         assert get_row_count(cursor, blrgrou_job_table) == 3
         assert get_row_count(cursor, blrawar_job_table) == 1
