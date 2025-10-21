@@ -1,4 +1,4 @@
-from src.ch02_rope.rope import create_rope, to_rope
+from src.ch04_rope.rope import create_rope, to_rope
 from src.ch16_translate.map import ropemap_shop
 
 

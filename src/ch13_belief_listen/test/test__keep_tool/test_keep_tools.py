@@ -1,8 +1,8 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import delete_dir, open_file, save_file
-from src.ch02_rope.rope import create_rope
+from src.ch04_rope.rope import create_rope
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
-from src.ch11_bud.test._util.ch11_env import env_dir_setup_cleanup, get_chapter_temp_dir
+from src.ch11_bud.test._util.ch11_env import get_temp_dir, temp_dir_setup
 from src.ch11_bud.test._util.ch11_examples import get_ch11_example_moment_label
 from src.ch13_belief_listen._ref.ch13_path import (
     create_keep_duty_path,
@@ -19,7 +19,7 @@ from src.ch13_belief_listen.keep_tool import (
 
 
 def test_create_keep_path_dir_if_missing_CreatesDirectory(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -30,7 +30,7 @@ def test_create_keep_path_dir_if_missing_CreatesDirectory(
     texas_str = "Texas"
     texas_rope = create_rope(usa_rope, texas_str)
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     keep_path = create_keep_rope_path(
         moment_mstr_dir, sue_str, a23_str, texas_rope, None
     )
@@ -43,11 +43,11 @@ def test_create_keep_path_dir_if_missing_CreatesDirectory(
     assert os_path_exists(keep_path)
 
 
-def test_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
+def test_treasury_db_file_exists_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     sue_str = "Sue"
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     texas_rope = create_rope(get_ch11_example_moment_label(), "Texas")
     treasury_db_path = create_treasury_db_path(
         moment_mstr_dir,
@@ -81,12 +81,12 @@ def test_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
 
 
 def test_create_treasury_db_file_CreatesDatabase(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     texas_rope = create_rope(a23_str, "Texas")
     treasury_db_path = create_treasury_db_path(
         moment_mstr_dir=moment_mstr_dir,
@@ -111,12 +111,12 @@ def test_create_treasury_db_file_CreatesDatabase(
 
 
 def test_create_treasury_db_DoesNotOverWriteDBIfExists(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH create keep
     sue_str = "Sue"
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     texas_rope = create_rope(a23_str, "Texas")
     treasury_db_path = create_treasury_db_path(
         moment_mstr_dir=moment_mstr_dir,
@@ -157,7 +157,7 @@ def test_create_treasury_db_DoesNotOverWriteDBIfExists(
     assert open_file(treasury_db_path) == x_file_str
 
 
-def test_save_duty_belief_SavesFile(env_dir_setup_cleanup):
+def test_save_duty_belief_SavesFile(temp_dir_setup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -167,7 +167,7 @@ def test_save_duty_belief_SavesFile(env_dir_setup_cleanup):
     texas_str = "Texas"
     texas_rope = create_rope(usa_rope, texas_str)
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     bob_str = "Bob"
     bob_belief = get_beliefunit_with_4_levels()
     bob_belief.set_belief_name(bob_str)
@@ -195,7 +195,7 @@ def test_save_duty_belief_SavesFile(env_dir_setup_cleanup):
     assert os_path_exists(keep_duty_path)
 
 
-def test_get_duty_belief_reason_lowersFile(env_dir_setup_cleanup):
+def test_get_duty_belief_reason_lowersFile(temp_dir_setup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -205,7 +205,7 @@ def test_get_duty_belief_reason_lowersFile(env_dir_setup_cleanup):
     texas_str = "Texas"
     texas_rope = create_rope(usa_rope, texas_str)
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     bob_str = "Bob"
     bob_belief = get_beliefunit_with_4_levels()
     bob_belief.set_belief_name(bob_str)

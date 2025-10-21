@@ -5,7 +5,6 @@ from src.ch06_plan._ref.ch06_semantic_types import (
     GroupTitle,
     HealerName,
     LabelTerm,
-    MoneyNum,
     NameTerm,
     RespectGrain,
     RespectNum,
@@ -34,7 +33,7 @@ class BeliefName(NameTerm):
     pass
 
 
-class MoneyGrain(float):
-    """Smallest Unit of MoneyNum"""
+class ManaGrain(float):
+    """Smallest Unit of Mana Num"""
 
     pass

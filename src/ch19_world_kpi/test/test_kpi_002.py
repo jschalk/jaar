@@ -1,6 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_py.db_toolbox import db_table_exists, get_row_count, get_table_columns
-from src.ch02_rope.rope import create_rope
+from src.ch04_rope.rope import create_rope
 from src.ch18_world_etl.tran_sqlstrs import (
     CREATE_JOB_BLRPLAN_SQLSTR,
     create_prime_tablename,

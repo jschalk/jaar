@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import count_dirs_files, create_path, open_file
-from src.ch02_rope._ref.ch02_doc_builder import get_ropeterm_explanation_md
+from src.ch04_rope._ref.ch04_doc_builder import get_ropeterm_explanation_md
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_blurbs_md,
     save_brick_formats_md,
@@ -8,10 +8,7 @@ from src.ch98_docs_builder.doc_builder import (
     save_idea_brick_mds,
     save_ropeterm_explanation_md,
 )
-from src.ch98_docs_builder.test._util.ch98_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch98_docs_builder.test._util.ch98_env import get_temp_dir, temp_dir_setup
 from src.ref.keywords import Ch98Keywords as kw
 
 
@@ -21,12 +18,12 @@ def test_get_chapter_blurbs_md_ReturnsObj():
 
     # THEN
     assert chapter_blurbs_md
-    assert chapter_blurbs_md.find("ch04") > 0
+    assert chapter_blurbs_md.find("ch03") > 0
 
 
-def test_save_chapter_blurbs_md_CreatesFile(env_dir_setup_cleanup):
+def test_save_chapter_blurbs_md_CreatesFile(temp_dir_setup):
     # ESTABLISH
-    temp_dir = get_chapter_temp_dir()
+    temp_dir = get_temp_dir()
     chapter_blurbs_path = create_path(temp_dir, "chapter_blurbs.md")
     assert not os_path_exists(chapter_blurbs_path)
 
@@ -39,9 +36,9 @@ def test_save_chapter_blurbs_md_CreatesFile(env_dir_setup_cleanup):
     assert open_file(chapter_blurbs_path) == expected_chapter_blurbs_md
 
 
-def test_save_ropeterm_explanation_md_CreatesFile(env_dir_setup_cleanup):
+def test_save_ropeterm_explanation_md_CreatesFile(temp_dir_setup):
     # ESTABLISH
-    temp_dir = get_chapter_temp_dir()
+    temp_dir = get_temp_dir()
     file_path = create_path(temp_dir, "ropeterm_explanation.md")
     assert not os_path_exists(file_path)
 
@@ -53,9 +50,9 @@ def test_save_ropeterm_explanation_md_CreatesFile(env_dir_setup_cleanup):
     assert open_file(file_path) == get_ropeterm_explanation_md()
 
 
-def test_save_idea_brick_mds_CreatesFiles(env_dir_setup_cleanup):
+def test_save_idea_brick_mds_CreatesFiles(temp_dir_setup):
     # ESTABLISH
-    temp_dir = get_chapter_temp_dir()
+    temp_dir = get_temp_dir()
     assert count_dirs_files(temp_dir) == 0
 
     # WHEN
@@ -65,9 +62,9 @@ def test_save_idea_brick_mds_CreatesFiles(env_dir_setup_cleanup):
     assert count_dirs_files(temp_dir) == 41
 
 
-def test_save_idea_brick_formats_CreatesFile(env_dir_setup_cleanup):
+def test_save_idea_brick_formats_CreatesFile(temp_dir_setup):
     # ESTABLISH
-    doc_main_dir = get_chapter_temp_dir()
+    doc_main_dir = get_temp_dir()
     idea_brick_formats_path = create_path(doc_main_dir, "idea_brick_formats.md")
     assert not os_path_exists(idea_brick_formats_path)
 

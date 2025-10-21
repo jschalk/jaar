@@ -1,4 +1,4 @@
-from src.ch02_rope.rope import create_rope, to_rope
+from src.ch04_rope.rope import create_rope, to_rope
 from src.ch09_belief_atom.atom_config import get_atom_args_class_types
 from src.ch09_belief_atom.atom_main import AtomRow, atomrow_shop, beliefatom_shop
 from src.ref.keywords import Ch09Keywords as kw
@@ -43,7 +43,7 @@ def test_AtomRow_Exists():
     assert x_atomrow.reason_upper is None
     assert x_atomrow.numor is None
     assert x_atomrow.reason_lower is None
-    assert x_atomrow.money_grain is None
+    assert x_atomrow.mana_grain is None
     assert x_atomrow.fact_state is None
     assert x_atomrow.pledge is None
     assert x_atomrow.problem_bool is None

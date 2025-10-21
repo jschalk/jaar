@@ -25,22 +25,22 @@ def add_moment_river_rect(
 
 
 def add_col_rect(
-    fig: plotly_Figure, x0, y0, x1, y1, display_str, x_color=None, money_supply=None
+    fig: plotly_Figure, x0, y0, x1, y1, display_str, x_color=None, mana_supply=None
 ):
     if x_color is None:
         x_color = purple_str()
     line_dict = dict(color=x_color, width=4)
     fig.add_shape(type="rect", x0=x0, y0=y0, x1=x1, y1=y1, line=line_dict)
-    if money_supply is None:
+    if mana_supply is None:
         add_rect_str(fig, x0, y0, display_str)
-    if money_supply is not None:
-        money_percent = f"{display_str} {int(((y0 - y1) * 12.5))}%"
-        add_rect_str(fig, x0, y0, str(money_percent))
-        money_amt = round((((y0 - y1) * 12.5) / 100) * money_supply)
-        add_rect_str(fig, x0, y0 - 0.2, str(money_amt))
+    if mana_supply is not None:
+        mana_percent = f"{display_str} {int(((y0 - y1) * 12.5))}%"
+        add_rect_str(fig, x0, y0, str(mana_percent))
+        mana_amt = round((((y0 - y1) * 12.5) / 100) * mana_supply)
+        add_rect_str(fig, x0, y0 - 0.2, str(mana_amt))
 
 
-def add_river_money_col(fig, num_dict: dict, money_amt, x0, y0, c_len):
+def add_river_mana_col(fig, num_dict: dict, mana_amt, x0, y0, c_len):
     row_y0 = y0
     row_y1 = row_y0 - c_len
     row_len = row_y1 - row_y0
@@ -48,9 +48,9 @@ def add_river_money_col(fig, num_dict: dict, money_amt, x0, y0, c_len):
     ratio_dict = {
         voice_name: voicex / num_sum for voice_name, voicex in num_dict.items()
     }
-    for grantee in num_dict:
-        new_y1 = row_y0 + row_len * ratio_dict.get(grantee)
-        add_col_rect(fig, x0, row_y0, x0 + 1, new_y1, grantee, None, money_amt)
+    for careee in num_dict:
+        new_y1 = row_y0 + row_len * ratio_dict.get(careee)
+        add_col_rect(fig, x0, row_y0, x0 + 1, new_y1, careee, None, mana_amt)
         row_y0 = new_y1
 
 

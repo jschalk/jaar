@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from src.ch01_py.db_toolbox import RowData, create_type_reference_insert_sqlstr
 from src.ch01_py.dict_toolbox import get_empty_dict_if_None
-from src.ch02_rope.rope import create_rope, get_parent_rope, get_tail_label
-from src.ch04_voice.group import awardunit_shop
-from src.ch04_voice.voice import voiceunit_shop
+from src.ch03_voice.group import awardunit_shop
+from src.ch03_voice.voice import voiceunit_shop
+from src.ch04_rope.rope import create_rope, get_parent_rope, get_tail_label
 from src.ch05_reason.reason import factunit_shop
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import BeliefUnit
@@ -192,9 +192,9 @@ def _modify_belief_update_beliefunit(x_belief: BeliefUnit, x_atom: BeliefAtom):
     x_arg = "respect_grain"
     if x_atom.get_value(x_arg) is not None:
         x_belief.respect_grain = x_atom.get_value(x_arg)
-    x_arg = "money_grain"
+    x_arg = "mana_grain"
     if x_atom.get_value(x_arg) is not None:
-        x_belief.money_grain = x_atom.get_value(x_arg)
+        x_belief.mana_grain = x_atom.get_value(x_arg)
 
 
 def _modify_belief_voice_membership_delete(x_belief: BeliefUnit, x_atom: BeliefAtom):
@@ -627,7 +627,7 @@ class AtomRow:
     reason_upper: float = None
     numor: int = None
     reason_lower: float = None
-    money_grain: float = None
+    mana_grain: float = None
     fact_state: RopeTerm = None
     pledge: bool = None
     problem_bool: bool = None

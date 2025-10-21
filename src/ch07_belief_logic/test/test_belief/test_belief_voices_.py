@@ -1,6 +1,6 @@
 from copy import deepcopy as copy_deepcopy
 from pytest import raises as pytest_raises
-from src.ch04_voice.voice import voiceunit_shop
+from src.ch03_voice.voice import voiceunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 
 
@@ -17,10 +17,10 @@ def test_BeliefUnit_set_voiceunit_SetsAttr():
     bob_belief.set_voiceunit(yao_voiceunit)
 
     # THEN
-    assert bob_belief.voices.get(yao_str).knot == slash_str
+    assert bob_belief.voices.get(yao_str).groupmark == slash_str
     x_voices = {yao_voiceunit.voice_name: deepcopy_yao_voiceunit}
     assert bob_belief.voices != x_voices
-    deepcopy_yao_voiceunit.knot = bob_belief.knot
+    deepcopy_yao_voiceunit.groupmark = bob_belief.knot
     assert bob_belief.voices == x_voices
 
 

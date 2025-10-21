@@ -1,5 +1,5 @@
-from src.ch02_rope.rope import RopeTerm
-from src.ch04_voice.labor import laborunit_shop
+from src.ch03_voice.labor import laborunit_shop
+from src.ch04_rope.rope import RopeTerm
 from src.ch06_plan.plan import PlanUnit, planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_beliefunit_from_dict
 from src.ch07_belief_logic.test._util.ch07_examples import (
@@ -99,10 +99,10 @@ def test_BeliefUnit_get_agenda_dict_With7amPlanExample():
     x24hr_rope = x_belief.make_rope(ziettech_rope, "24hr")
     x24hr_reason_lower = 0.0
     x24hr_reason_upper = 8.0
-    housemanagement_str = "housemanagement"
-    housemanagement_rope = x_belief.make_l1_rope(housemanagement_str)
+    houseadministration_str = "houseadministration"
+    houseadministration_rope = x_belief.make_l1_rope(houseadministration_str)
     clean_str = "clean table"
-    clean_rope = x_belief.make_rope(housemanagement_rope, clean_str)
+    clean_rope = x_belief.make_rope(houseadministration_rope, clean_str)
 
     # WHEN
     x_belief.add_fact(

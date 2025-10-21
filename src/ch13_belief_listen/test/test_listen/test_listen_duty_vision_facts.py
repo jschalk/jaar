@@ -6,7 +6,7 @@ from src.ch13_belief_listen.listen_main import (
     listen_to_agendas_duty_vision,
     listen_to_facts_duty_vision,
 )
-from src.ch13_belief_listen.test._util.ch13_env import env_dir_setup_cleanup
+from src.ch13_belief_listen.test._util.ch13_env import temp_dir_setup
 from src.ch13_belief_listen.test._util.ch13_examples import (
     a23_casa_rope,
     a23_clean_rope,
@@ -22,7 +22,7 @@ from src.ch13_belief_listen.test._util.ch13_examples import (
 )
 
 
-def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(env_dir_setup_cleanup):
+def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(temp_dir_setup):
     # ESTABLISH
     a23_str = "amy23"
     yao_str = "Yao"
@@ -73,7 +73,7 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(env_dir_setup_cleanup
 
 
 def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferenttask(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     a23_str = "amy23"
@@ -129,7 +129,7 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferenttask(
 
 
 def test_listen_to_facts_duty_vision_GetsFactsFromSrcBeliefSelfNotSpeakerSelf(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     # yao_duty has fact a23_eat_rope = full
@@ -182,7 +182,7 @@ def test_listen_to_facts_duty_vision_GetsFactsFromSrcBeliefSelfNotSpeakerSelf(
 
 
 def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeakerDirBelief_v1(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     yao_duty = get_example_yao_speaker()
@@ -247,7 +247,7 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
 
 
 def test_listen_to_facts_duty_vision_SetsPrioritizesSelfFactsOverSpeakers(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     yao_duty = get_example_yao_speaker()
@@ -297,7 +297,7 @@ def test_listen_to_facts_duty_vision_SetsPrioritizesSelfFactsOverSpeakers(
 
 
 def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeakerDirBelief_v2(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     zia_vision = get_example_zia_speaker()
@@ -390,7 +390,7 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
     assert new_yao_vision2.get_fact(a23_eat_rope()).fact_state == a23_eat_rope()
 
 
-# def test_listen_to_facts_duty_vision_SetsFact(env_dir_setup_cleanup):
+# def test_listen_to_facts_duty_vision_SetsFact(temp_dir_setup):
 #     # ESTABLISH
 #     yao_str = "Yao"
 #     sue_str = "Sue"

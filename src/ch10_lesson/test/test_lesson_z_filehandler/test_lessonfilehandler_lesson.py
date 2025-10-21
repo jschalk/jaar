@@ -16,10 +16,7 @@ from src.ch10_lesson.lesson_filehandler import (
     save_gut_file,
 )
 from src.ch10_lesson.lesson_main import init_lesson_id, lessonunit_shop
-from src.ch10_lesson.test._util.ch10_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as env_dir,
-)
+from src.ch10_lesson.test._util.ch10_env import get_temp_dir as env_dir, temp_dir_setup
 from src.ch10_lesson.test._util.ch10_examples import (
     get_atom_example_planunit_knee,
     get_sue_lessonunit,
@@ -30,7 +27,7 @@ from src.ch10_lesson.test._util.ch10_examples import (
 )
 
 
-def test_LessonFileHandler_get_max_lesson_file_number_ReturnsObj(env_dir_setup_cleanup):
+def test_LessonFileHandler_get_max_lesson_file_number_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     sue_str = "Sue"
     sue_lessonfilehandler = lessonfilehandler_shop(env_dir(), "amy23", sue_str)
@@ -54,7 +51,7 @@ def test_LessonFileHandler_get_max_lesson_file_number_ReturnsObj(env_dir_setup_c
     assert sue_lessonfilehandler._get_next_lesson_file_number() == 7
 
 
-def test_LessonFileHandler_lesson_file_exists_ReturnsObj(env_dir_setup_cleanup):
+def test_LessonFileHandler_lesson_file_exists_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     sue_str = "Sue"
     sue_lessonfilehandler = lessonfilehandler_shop(env_dir(), "amy23", sue_str)
@@ -77,7 +74,7 @@ def test_LessonFileHandler_lesson_file_exists_ReturnsObj(env_dir_setup_cleanup):
     assert sue_lessonfilehandler.hub_lesson_file_exists(six_int)
 
 
-def test_LessonFileHandler_save_lesson_file_SaveCorrectObj(env_dir_setup_cleanup):
+def test_LessonFileHandler_save_lesson_file_SaveCorrectObj(temp_dir_setup):
     # ESTABLISH
     sue_str = "Sue"
     sue_lessonfilehandler = lessonfilehandler_shop(env_dir(), "amy23", sue_str)
@@ -109,7 +106,7 @@ def test_LessonFileHandler_save_lesson_file_SaveCorrectObj(env_dir_setup_cleanup
 
 
 def test_LessonFileHandler_save_lesson_file_RaisesErrorIfLessonUnit_atoms_dir_IsWrong(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -135,7 +132,7 @@ def test_LessonFileHandler_save_lesson_file_RaisesErrorIfLessonUnit_atoms_dir_Is
 
 
 def test_LessonFileHandler_save_lesson_file_RaisesErrorIfLessonUnit_lessons_dir_IsWrong(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -161,7 +158,7 @@ def test_LessonFileHandler_save_lesson_file_RaisesErrorIfLessonUnit_lessons_dir_
 
 
 def test_LessonFileHandler_save_lesson_file_RaisesErrorIfLessonUnit_belief_name_IsWrong(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -188,7 +185,7 @@ def test_LessonFileHandler_save_lesson_file_RaisesErrorIfLessonUnit_belief_name_
 
 
 def test_LessonFileHandler_save_lesson_file_RaisesErrorIf_replace_IsFalse(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -218,7 +215,7 @@ def test_LessonFileHandler_save_lesson_file_RaisesErrorIf_replace_IsFalse(
 
 
 def test_LessonFileHandler_validate_lessonunit_ReturnsObjWithAttributesFixed(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -254,7 +251,7 @@ def test_LessonFileHandler_validate_lessonunit_ReturnsObjWithAttributesFixed(
 
 
 def test_LessonFileHandler_save_lesson_file_SaveCorrectObj_correct_invalid_attrs_IsTrue(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -280,7 +277,7 @@ def test_LessonFileHandler_save_lesson_file_SaveCorrectObj_correct_invalid_attrs
 
 
 def test_LessonFileHandler_default_lessonunit_ReturnsObjWithCorrect_lesson_id_WhenNoLessonFilesExist(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -304,7 +301,7 @@ def test_LessonFileHandler_default_lessonunit_ReturnsObjWithCorrect_lesson_id_Wh
 
 
 def test_LessonFileHandler_default_lessonunit_ReturnsObjWithCorrect_lesson_id_WhenLessonFilesExist(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -334,7 +331,7 @@ def test_LessonFileHandler_default_lessonunit_ReturnsObjWithCorrect_lesson_id_Wh
 
 
 def test_LessonFileHandler_get_lessonunit_ReturnsObjWhenFilesDoesExist(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -361,7 +358,7 @@ def test_LessonFileHandler_get_lessonunit_ReturnsObjWhenFilesDoesExist(
 
 
 def test_LessonFileHandler_get_lessonunit_RaisesExceptionWhenFileDoesNotExist(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # sourcery skip: extract-duplicate-method, inline-variable, move-assign-in-block
     # ESTABLISH
@@ -385,7 +382,7 @@ def test_LessonFileHandler_get_lessonunit_RaisesExceptionWhenFileDoesNotExist(
 
 
 def test_LessonFileHandler_del_lesson_file_DeleteslessonjsonAndNotBeliefAtomjsons(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -418,7 +415,7 @@ def test_LessonFileHandler_del_lesson_file_DeleteslessonjsonAndNotBeliefAtomjson
 
 
 def test_LessonFileHandler_save_lesson_file_CanCreateAndModify3lessonunits(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -440,7 +437,7 @@ def test_LessonFileHandler_save_lesson_file_CanCreateAndModify3lessonunits(
     assert len(get_dir_file_strs(sue_lessonfilehandler._atoms_dir)) == 9
 
 
-def test_LessonFileHandler_save_lesson_file_ReturnsValidObj(env_dir_setup_cleanup):
+def test_LessonFileHandler_save_lesson_file_ReturnsValidObj(temp_dir_setup):
     # ESTABLISH
     sue_str = "Sue"
     sue_lessonfilehandler = lessonfilehandler_shop(env_dir(), "amy23", sue_str)
@@ -468,7 +465,7 @@ def test_LessonFileHandler_save_lesson_file_ReturnsValidObj(env_dir_setup_cleanu
 
 
 def test_LessonFileHandler_create_save_lesson_file_SaveCorrectObj(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -500,7 +497,7 @@ def test_LessonFileHandler_create_save_lesson_file_SaveCorrectObj(
 
 
 def test_LessonFileHandler_merge_any_lessons_ReturnsObjThatIsEqual(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -517,7 +514,7 @@ def test_LessonFileHandler_merge_any_lessons_ReturnsObjThatIsEqual(
 
 
 def test_LessonFileHandler_merge_any_lessons_ReturnsObj_WithSinglelessonModifies_1atom(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -542,7 +539,7 @@ def test_LessonFileHandler_merge_any_lessons_ReturnsObj_WithSinglelessonModifies
 
 
 def test_LessonFileHandler_merge_any_lessons_ReturnsObj_WithSinglelessonModifies_2atoms(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"

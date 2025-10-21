@@ -10,8 +10,8 @@ from src.ch13_belief_listen.listen_main import (
     listen_to_agendas_jobs_into_job,
 )
 from src.ch13_belief_listen.test._util.ch13_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as env_dir,
+    get_temp_dir as env_dir,
+    temp_dir_setup,
 )
 from src.ch13_belief_listen.test._util.ch13_examples import (
     a23_casa_rope,
@@ -28,7 +28,7 @@ from src.ch13_belief_listen.test._util.ch13_examples import (
 
 
 def test_listen_to_agendas_jobs_into_job_AddstasksToBeliefWhenNo_partyunitIsSet(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     moment_mstr_dir = env_dir()
@@ -60,7 +60,7 @@ def test_listen_to_agendas_jobs_into_job_AddstasksToBeliefWhenNo_partyunitIsSet(
     assert len(new_yao_job.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_jobs_into_job_AddstasksToBelief(env_dir_setup_cleanup):
+def test_listen_to_agendas_jobs_into_job_AddstasksToBelief(temp_dir_setup):
     # ESTABLISH
     moment_mstr_dir = env_dir()
     a23_str = "amy23"
@@ -96,7 +96,7 @@ def test_listen_to_agendas_jobs_into_job_AddstasksToBelief(env_dir_setup_cleanup
 
 
 def test_listen_to_agendas_jobs_into_job_AddstasksToBeliefWithDetailsDecidedBy_voice_debt_lumen(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     moment_mstr_dir = env_dir()
@@ -159,7 +159,7 @@ def test_listen_to_agendas_jobs_into_job_AddstasksToBeliefWithDetailsDecidedBy_v
 
 
 def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBelief(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     moment_mstr_dir = env_dir()
@@ -237,7 +237,7 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBelief(
 
 
 def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorBelief(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     moment_mstr_dir = env_dir()
@@ -285,7 +285,7 @@ def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorBelief(
 
 
 def test_listen_to_agendas_jobs_into_job_ListensToBelief_gut_AndNotBelief_job(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     moment_mstr_dir = env_dir()

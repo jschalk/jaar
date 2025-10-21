@@ -9,8 +9,8 @@ from src.ch13_belief_listen.listen_main import (
     listen_to_agendas_create_init_job_from_guts,
 )
 from src.ch13_belief_listen.test._util.ch13_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as env_dir,
+    get_temp_dir as env_dir,
+    temp_dir_setup,
 )
 from src.ch13_belief_listen.test._util.ch13_examples import (
     a23_casa_rope,
@@ -27,7 +27,7 @@ from src.ch13_belief_listen.test._util.ch13_examples import (
 
 
 def test_listen_to_agendas_create_init_job_from_guts_AddstasksToBeliefWhenNo_partyunitIsSet(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     moment_mstr_dir = env_dir()
@@ -60,7 +60,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddstasksToBeliefWhenNo_par
 
 
 def test_listen_to_agendas_create_init_job_from_guts_AddstasksToBelief(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     moment_mstr_dir = env_dir()
@@ -96,7 +96,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddstasksToBelief(
 
 
 def test_listen_to_agendas_create_init_job_from_guts_AddstasksToBeliefWithDetailsDecidedBy_voice_debt_lumen(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     moment_mstr_dir = env_dir()
@@ -159,7 +159,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddstasksToBeliefWithDetail
 
 
 def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBelief(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):  # sourcery skip: extract-duplicate-method
     # ESTABLISH
     moment_mstr_dir = env_dir()
@@ -237,7 +237,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBelief(
 
 
 def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorBelief(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     moment_mstr_dir = env_dir()

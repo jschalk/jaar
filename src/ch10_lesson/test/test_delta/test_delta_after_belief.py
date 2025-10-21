@@ -1,4 +1,4 @@
-from src.ch04_voice.group import awardunit_shop
+from src.ch03_voice.group import awardunit_shop
 from src.ch05_reason.reason import factunit_shop
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
@@ -57,7 +57,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnitSimpleAttrs():
     x_beliefatom.set_jvalue(new6_arg, new6_value)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
     new7_value = 0.025
-    new7_arg = kw.money_grain
+    new7_arg = kw.mana_grain
     x_beliefatom.set_jvalue(new7_arg, new7_value)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
 
@@ -77,8 +77,8 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnitSimpleAttrs():
     assert after_sue_beliefunit.fund_grain != before_sue_beliefunit.fund_grain
     assert after_sue_beliefunit.respect_grain == new6_value
     assert after_sue_beliefunit.respect_grain != before_sue_beliefunit.respect_grain
-    assert after_sue_beliefunit.money_grain == new7_value
-    assert after_sue_beliefunit.money_grain != before_sue_beliefunit.money_grain
+    assert after_sue_beliefunit.mana_grain == new7_value
+    assert after_sue_beliefunit.mana_grain != before_sue_beliefunit.mana_grain
 
 
 def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_voice():

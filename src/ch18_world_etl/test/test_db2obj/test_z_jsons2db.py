@@ -1,14 +1,14 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_py.db_toolbox import get_row_count
-from src.ch02_rope.rope import create_rope
-from src.ch04_voice.group import (
+from src.ch03_voice.group import (
     awardheir_shop,
     awardunit_shop,
     groupunit_shop,
     membership_shop,
 )
-from src.ch04_voice.labor import laborheir_shop, laborunit_shop, partyheir_shop
-from src.ch04_voice.voice import voiceunit_shop
+from src.ch03_voice.labor import laborheir_shop, laborunit_shop, partyheir_shop
+from src.ch03_voice.voice import voiceunit_shop
+from src.ch04_rope.rope import create_rope
 from src.ch05_reason.reason import caseunit_shop, factheir_shop, reasonheir_shop
 from src.ch06_plan.healer import healerunit_shop
 from src.ch06_plan.plan import planunit_shop
@@ -28,7 +28,7 @@ from src.ch18_world_etl.db_obj_belief_tool import (
     insert_job_blrunit,
     insert_job_obj,
 )
-from src.ch18_world_etl.test._util.ch18_env import env_dir_setup_cleanup
+from src.ch18_world_etl.test._util.ch18_env import temp_dir_setup
 from src.ch18_world_etl.tran_sqlstrs import create_job_tables
 
 
@@ -63,13 +63,13 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
     x_fund_grain = 3.0
     x_fund_pool = 3000.0
     x_max_tree_traverse = 22
-    x_money_grain = 4.0
+    x_mana_grain = 4.0
     x_respect_grain = 0.2
     x_tally = 6
     sue_belief = beliefunit_shop(belief_name=x_belief_name, moment_label=x_moment_label)
     sue_belief.fund_pool = x_fund_pool
     sue_belief.fund_grain = x_fund_grain
-    sue_belief.money_grain = x_money_grain
+    sue_belief.mana_grain = x_mana_grain
     sue_belief.tally = x_tally
     sue_belief.respect_grain = x_respect_grain
     sue_belief.max_tree_traverse = x_max_tree_traverse
@@ -106,7 +106,7 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
             x_max_tree_traverse,
             x_tally,
             x_fund_grain,
-            x_money_grain,
+            x_mana_grain,
             x_respect_grain,
             x_rational,
             x_keeps_justified,

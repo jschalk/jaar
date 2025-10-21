@@ -60,7 +60,7 @@ GROUP BY {raw_columns_str}
             assert gen_sqlstr == expected_table2table_agg_insert_sqlstr
 
 
-def test_get_insert_into_heard_raw_sqlstrs_ReturnsObj_BeliefDimensNeeded():
+def test_get_insert_into_heard_raw_sqlstrs_ReturnsObj_BeliefDimensRequired():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
     idea_config = get_idea_config_dict()

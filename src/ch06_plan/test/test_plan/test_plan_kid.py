@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch02_rope.rope import create_rope
+from src.ch04_rope.rope import create_rope
 from src.ch06_plan.plan import planunit_shop
 
 

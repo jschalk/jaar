@@ -6,7 +6,16 @@ from src.ch01_py.dict_toolbox import (
     get_empty_dict_if_None,
     get_False_if_None,
 )
-from src.ch02_rope.rope import (
+from src.ch02_allot.allot import (
+    allot_scale,
+    default_grain_num_if_None,
+    valid_allotment_ratio,
+    validate_pool_num,
+)
+from src.ch03_voice.group import AwardUnit, GroupUnit, groupunit_shop, membership_shop
+from src.ch03_voice.labor import LaborUnit
+from src.ch03_voice.voice import VoiceUnit, voiceunit_shop, voiceunits_get_from_dict
+from src.ch04_rope.rope import (
     all_ropes_between,
     create_rope,
     default_knot_if_None,
@@ -22,15 +31,6 @@ from src.ch02_rope.rope import (
     rope_is_valid_dir_path,
     to_rope,
 )
-from src.ch03_allot.allot import (
-    allot_scale,
-    default_grain_num_if_None,
-    valid_allotment_ratio,
-    validate_pool_num,
-)
-from src.ch04_voice.group import AwardUnit, GroupUnit, groupunit_shop, membership_shop
-from src.ch04_voice.labor import LaborUnit
-from src.ch04_voice.voice import VoiceUnit, voiceunit_shop, voiceunits_get_from_dict
 from src.ch05_reason.reason import FactUnit, ReasonUnit, RopeTerm, factunit_shop
 from src.ch06_plan.healer import HealerUnit
 from src.ch06_plan.plan import (
@@ -47,8 +47,8 @@ from src.ch07_belief_logic._ref.ch07_semantic_types import (
     GroupTitle,
     HealerName,
     LabelTerm,
+    ManaGrain,
     MomentLabel,
-    MoneyGrain,
     RespectGrain,
     RespectNum,
     RopeTerm,
@@ -114,7 +114,7 @@ class BeliefUnit:
     fund_pool: FundNum = None
     fund_grain: FundGrain = None
     respect_grain: RespectGrain = None
-    money_grain: MoneyGrain = None
+    mana_grain: ManaGrain = None
     tally: float = None
     voices: dict[VoiceName, VoiceUnit] = None
     planroot: PlanUnit = None
@@ -339,8 +339,8 @@ class BeliefUnit:
         self.set_voiceunit(voiceunit)
 
     def set_voiceunit(self, x_voiceunit: VoiceUnit, auto_set_membership: bool = True):
-        if x_voiceunit.knot != self.knot:
-            x_voiceunit.knot = self.knot
+        if x_voiceunit.groupmark != self.knot:
+            x_voiceunit.groupmark = self.knot
         if x_voiceunit.respect_grain != self.respect_grain:
             x_voiceunit.respect_grain = self.respect_grain
         if auto_set_membership and x_voiceunit.memberships_exist() is False:
@@ -1187,7 +1187,7 @@ reason_case:    {reason_case}"""
             group_title,
             voice_name_set,
         ) in self.get_voiceunit_group_titles_dict().items():
-            x_groupunit = groupunit_shop(group_title, knot=self.knot)
+            x_groupunit = groupunit_shop(group_title)
             for x_voice_name in voice_name_set:
                 x_membership = self.get_voice(x_voice_name).get_membership(group_title)
                 x_groupunit.set_g_membership(x_membership)
@@ -1404,7 +1404,7 @@ reason_case:    {reason_case}"""
             "fund_pool": self.fund_pool,
             "fund_grain": self.fund_grain,
             "respect_grain": self.respect_grain,
-            "money_grain": self.money_grain,
+            "mana_grain": self.mana_grain,
             "belief_name": self.belief_name,
             "moment_label": self.moment_label,
             "max_tree_traverse": self.max_tree_traverse,
@@ -1443,7 +1443,7 @@ def beliefunit_shop(
     fund_pool: FundNum = None,
     fund_grain: FundGrain = None,
     respect_grain: RespectGrain = None,
-    money_grain: MoneyGrain = None,
+    mana_grain: ManaGrain = None,
     tally: float = None,
 ) -> BeliefUnit:
     belief_name = "" if belief_name is None else belief_name
@@ -1460,7 +1460,7 @@ def beliefunit_shop(
         fund_pool=validate_pool_num(fund_pool),
         fund_grain=default_grain_num_if_None(fund_grain),
         respect_grain=default_grain_num_if_None(respect_grain),
-        money_grain=default_grain_num_if_None(money_grain),
+        mana_grain=default_grain_num_if_None(mana_grain),
         _plan_dict=get_empty_dict_if_None(),
         _keep_dict=get_empty_dict_if_None(),
         _healers_dict=get_empty_dict_if_None(),
@@ -1504,8 +1504,8 @@ def get_beliefunit_from_dict(belief_dict: dict) -> BeliefUnit:
     x_belief.respect_grain = default_grain_num_if_None(
         obj_from_belief_dict(belief_dict, "respect_grain")
     )
-    x_belief.money_grain = default_grain_num_if_None(
-        obj_from_belief_dict(belief_dict, "money_grain")
+    x_belief.mana_grain = default_grain_num_if_None(
+        obj_from_belief_dict(belief_dict, "mana_grain")
     )
     x_belief.credor_respect = obj_from_belief_dict(belief_dict, "credor_respect")
     x_belief.debtor_respect = obj_from_belief_dict(belief_dict, "debtor_respect")

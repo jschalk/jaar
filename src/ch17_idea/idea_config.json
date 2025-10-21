@@ -146,8 +146,8 @@
       "debtor_respect": {}, 
       "fund_grain": {}, 
       "fund_pool": {}, 
+      "mana_grain": {}, 
       "max_tree_traverse": {}, 
-      "money_grain": {}, 
       "respect_grain": {}, 
       "tally": {}
     }
@@ -218,7 +218,7 @@
       "fund_grain": {}, 
       "job_listen_rotations": {}, 
       "knot": {}, 
-      "money_grain": {}, 
+      "mana_grain": {}, 
       "monthday_index": {}, 
       "respect_grain": {}, 
       "yr1_jan1_offset": {}

@@ -1,7 +1,7 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from src.ch01_py.file_toolbox import create_path
-from src.ch11_bud.test._util.ch11_env import get_chapter_temp_dir
+from src.ch11_bud.test._util.ch11_env import get_temp_dir
 from src.ch15_moment._ref.ch15_path import (
     BUD_MANDATE_FILENAME,
     create_bud_voice_mandate_ledger_path,
@@ -11,7 +11,7 @@ from src.ref.keywords import Ch15Keywords as kw
 
 def test_create_bud_voice_mandate_ledger_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     timepoint7 = 7

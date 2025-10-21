@@ -10,7 +10,7 @@ from src.ch01_py.dict_toolbox import (
     str_in_dict_keys,
     str_in_dict_values,
 )
-from src.ch02_rope.rope import (
+from src.ch04_rope.rope import (
     create_rope,
     create_rope_from_labels,
     get_all_rope_labels,

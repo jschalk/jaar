@@ -1,5 +1,5 @@
 from pandas import DataFrame
-from src.ch02_rope.rope import create_rope, default_knot_if_None, to_rope
+from src.ch04_rope.rope import create_rope, default_knot_if_None, to_rope
 from src.ch16_translate.map import (
     LabelMap,
     NameMap,

@@ -8,17 +8,14 @@ from src.ch08_epoch.test._util.ch08_examples import (
 from src.ch10_lesson._ref.ch10_path import create_moment_json_path
 from src.ch15_moment.moment_main import momentunit_shop
 from src.ch19_world_kpi.kpi_mstr import create_calendar_markdown_files
-from src.ch19_world_kpi.test._util.ch19_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch19_world_kpi.test._util.ch19_env import get_temp_dir, temp_dir_setup
 
 
 def test_create_calendar_markdown_files_Senario0_NoFileIfWorldIsEmpty(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    temp_dir = get_chapter_temp_dir()
+    temp_dir = get_temp_dir()
     moment_mstr_dir = create_path(temp_dir, "moment_mstr")
     output_dir = create_path(temp_dir, "output")
     assert not os_path_exists(output_dir)
@@ -32,11 +29,11 @@ def test_create_calendar_markdown_files_Senario0_NoFileIfWorldIsEmpty(
 
 
 def test_create_calendar_markdown_files_Senario1_CreatesFileFromMomentUnitJSON(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     fay_str = "Fay"
-    temp_dir = get_chapter_temp_dir()
+    temp_dir = get_temp_dir()
     moment_mstr_dir = create_path(temp_dir, "moment_mstr")
     output_dir = create_path(temp_dir, "output")
     a23_str = "amy23"
@@ -58,7 +55,7 @@ def test_create_calendar_markdown_files_Senario1_CreatesFileFromMomentUnitJSON(
 
 
 # def test_create_calendar_markdown_files_Senario1_Add_CreatesFile(
-#     env_dir_setup_cleanup,
+#     temp_dir_setup,
 # ):
 #     # ESTABLISH
 #     fay_str = "Fay"

@@ -3,10 +3,7 @@ from src.ch01_py.file_toolbox import create_path, open_json, save_json
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_beliefunit_from_dict
 from src.ch10_lesson._ref.ch10_path import create_gut_path
 from src.ch11_bud._ref.ch11_path import create_belief_spark_dir_path
-from src.ch18_world_etl.test._util.ch18_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch18_world_etl.test._util.ch18_env import get_temp_dir, temp_dir_setup
 from src.ch18_world_etl.transformers import (
     etl_spark_inherited_beliefunits_to_moment_gut,
 )
@@ -17,7 +14,7 @@ from src.ch18_world_etl.transformers import (
 
 
 def test_etl_spark_inherited_beliefunits_to_moment_gut_SetsFiles_Scenario0(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_inx = "Suzy"
@@ -29,7 +26,7 @@ def test_etl_spark_inherited_beliefunits_to_moment_gut_SetsFiles_Scenario0(
     credit77 = 77
     credit88 = 88
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_bob_e3_dir = create_belief_spark_dir_path(
         moment_mstr_dir, a23_str, bob_inx, spark3
     )

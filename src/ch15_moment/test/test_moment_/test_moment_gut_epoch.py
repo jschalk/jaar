@@ -3,17 +3,14 @@ from src.ch08_epoch.epoch_main import epochunit_shop, get_default_epoch_config_d
 from src.ch08_epoch.test._util.ch08_examples import get_five_config
 from src.ch10_lesson.lesson_filehandler import open_gut_file, save_gut_file
 from src.ch15_moment.moment_main import momentunit_shop
-from src.ch15_moment.test._util.ch15_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch15_moment.test._util.ch15_env import get_temp_dir, temp_dir_setup
 from src.ref.keywords import Ch15Keywords as kw
 
 
-def test_MomentUnit_get_epoch_config_ReturnsObj_Scenario0(env_dir_setup_cleanup):
+def test_MomentUnit_get_epoch_config_ReturnsObj_Scenario0(temp_dir_setup):
     # ESTABLISH
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
 
     # WHEN
@@ -25,10 +22,10 @@ def test_MomentUnit_get_epoch_config_ReturnsObj_Scenario0(env_dir_setup_cleanup)
     assert a23_epoch_config.get(kw.epoch_label) == "creg"
 
 
-def test_MomentUnit_get_epoch_config_ReturnsObj_Scenario1(env_dir_setup_cleanup):
+def test_MomentUnit_get_epoch_config_ReturnsObj_Scenario1(temp_dir_setup):
     # ESTABLISH
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     a23_moment.epoch = epochunit_shop(get_five_config())
 
@@ -41,10 +38,10 @@ def test_MomentUnit_get_epoch_config_ReturnsObj_Scenario1(env_dir_setup_cleanup)
     assert a23_epoch_config.get(kw.epoch_label) == "five"
 
 
-def test_MomentUnit_add_epoch_to_gut_SetsFile_Scenario0(env_dir_setup_cleanup):
+def test_MomentUnit_add_epoch_to_gut_SetsFile_Scenario0(temp_dir_setup):
     # ESTABLISH
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     a23_moment.epoch = epochunit_shop(get_five_config())
     sue_str = "Sue"
@@ -62,10 +59,10 @@ def test_MomentUnit_add_epoch_to_gut_SetsFile_Scenario0(env_dir_setup_cleanup):
     assert post_sue_gut.plan_exists(five_rope)
 
 
-def test_MomentUnit_add_epoch_to_guts_SetsFiles_Scenario0(env_dir_setup_cleanup):
+def test_MomentUnit_add_epoch_to_guts_SetsFiles_Scenario0(temp_dir_setup):
     # ESTABLISH
     a23_str = "amy23"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     a23_moment.epoch = epochunit_shop(get_five_config())
     sue_str = "Sue"

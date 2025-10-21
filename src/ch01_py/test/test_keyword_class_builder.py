@@ -20,18 +20,18 @@ def test_get_keywords_src_config_ReturnsObj():
 
 def test_create_keywords_enum_class_file_str_ReturnsObj_Scenario0_Empty_keyword_set():
     # ESTABLISH
-    ch04_str = "ch04"
-    ch04_keywords = {}
+    ch03_str = "ch03"
+    ch03_keywords = {}
 
     # WHEN
-    file_str = create_keywords_enum_class_file_str(ch04_str, ch04_keywords)
+    file_str = create_keywords_enum_class_file_str(ch03_str, ch03_keywords)
 
     # THEN
     assert file_str
     key_str = "Key"
     expected_file_str = f"""
 
-class Ch04{key_str}words(str, Enum):
+class Ch03{key_str}words(str, Enum):
     pass
 
     def __str__(self):
@@ -44,24 +44,31 @@ class Ch04{key_str}words(str, Enum):
 
 def test_create_keywords_enum_class_file_str_ReturnsObj_Scenario1_NonEmpty_keyword_set():
     # ESTABLISH
-    ch04_str = "ch04"
+    ch03_str = "ch03"
     keywordF = f"Funny"
     keywordI = f"INSET"
     keywordf = f"funny"
     keywordG = f"Guppies"
     keywordH = f"Heath"
     keywordR = f"Risto"
-    ch04_keywords = {keywordF, keywordI, keywordf, keywordG, keywordH, keywordR}
+    ch03_keywords = {
+        keywordF,
+        keywordI,
+        keywordf,
+        keywordG,
+        keywordH,
+        keywordR,
+    }
 
     # WHEN
-    file_str = create_keywords_enum_class_file_str(ch04_str, ch04_keywords)
+    file_str = create_keywords_enum_class_file_str(ch03_str, ch03_keywords)
 
     # THEN
     assert file_str
     key_str = "Key"
     expected_file_str = f"""
 
-class Ch04{key_str}words(str, Enum):
+class Ch03{key_str}words(str, Enum):
     {keywordF} = "{keywordF}"
     {keywordG} = "{keywordG}"
     {keywordH} = "{keywordH}"
@@ -93,4 +100,5 @@ def test_SpecialTestThatBuildsKeywordEnumClasses():
     )
 
     # WHEN / THEN
-    assert enum_classes_str == current_classes_file_str, assertion_failure_str
+    prev_and_curr_classes_file_are_same = enum_classes_str == current_classes_file_str
+    assert prev_and_curr_classes_file_are_same, assertion_failure_str

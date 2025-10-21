@@ -1,5 +1,5 @@
-from src.ch02_rope.rope import to_rope
-from src.ch04_voice.labor import laborheir_shop, laborunit_shop
+from src.ch03_voice.labor import laborheir_shop, laborunit_shop
+from src.ch04_rope.rope import to_rope
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 

@@ -23,15 +23,15 @@ from src.ch18_world_etl._ref.ch18_path import (
 )
 from src.ch18_world_etl.tran_sqlstrs import create_prime_tablename as prime_tbl
 from src.ch20_world_logic.test._util.ch20_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as worlds_dir,
+    get_temp_dir as worlds_dir,
+    temp_dir_setup,
 )
 from src.ch20_world_logic.world import worldunit_shop
 from src.ref.keywords import Ch20Keywords as kw
 
 
 def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH:
     fay_str = "Fay"
@@ -196,7 +196,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
 
 
 def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH:
     fay_str = "Fay"
@@ -355,7 +355,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
 
 
 def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateMomentTranBook(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH:
     fay_str = "Fay"
@@ -396,7 +396,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateMomentT
 
 
 def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoMomentIdeas_ote1_IsStillCreated(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     fay_str = "Fay"
@@ -430,7 +430,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoMomentIde
 
 
 def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario4_DeletesPreviousFiles(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     fay_str = "Fay"
@@ -459,7 +459,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario4_DeletesPrevious
 
 
 def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     fay_str = "Fay"
@@ -548,7 +548,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
 
 
 def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):  # sourcery skip: extract-method
     # ESTABLISH:
     fay_str = "Fay"

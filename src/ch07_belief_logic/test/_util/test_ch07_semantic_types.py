@@ -1,8 +1,8 @@
 from inspect import getdoc as inspect_getdoc
 from src.ch07_belief_logic._ref.ch07_semantic_types import (
     BeliefName,
+    ManaGrain,
     MomentLabel,
-    MoneyGrain,
     NexusLabel,
 )
 from src.ref.keywords import Ch07Keywords as kw
@@ -41,11 +41,11 @@ def test_MomentLabel_Exists():
     assert inspect_getdoc(bob_MomentLabel_str) == doc_str
 
 
-def test_MoneyGrain_Exists():
+def test_ManaGrain_Exists():
     # ESTABLISH
     x_float = 0.045
     # WHEN
-    y_money_grain = MoneyGrain(x_float)
+    y_mana_grain = ManaGrain(x_float)
     # THEN
-    assert y_money_grain == x_float
-    assert inspect_getdoc(y_money_grain) == "Smallest Unit of MoneyNum"
+    assert y_mana_grain == x_float
+    assert inspect_getdoc(y_mana_grain) == "Smallest Unit of Mana Num"

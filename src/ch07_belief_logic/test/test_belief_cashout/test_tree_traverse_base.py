@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
-from src.ch02_rope.rope import to_rope
-from src.ch04_voice.group import awardunit_shop
+from src.ch03_voice.group import awardunit_shop
+from src.ch04_rope.rope import to_rope
 from src.ch05_reason.reason import factheir_shop
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
@@ -320,7 +320,7 @@ def test_BeliefUnit_cashout_TreeTraverseSetsClearsAwardLineestors():
     assert not sue_belief.planroot.kids[casa_str].awardlines
 
 
-def test_BeliefUnit_cashout_DoesNotKeepUnneeded_awardheirs():
+def test_BeliefUnit_cashout_DoesNotKeepNonRequired_awardheirs():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     yao_str = "Yao"
@@ -515,7 +515,7 @@ def test_BeliefUnit_cashout_WhenPlanUnitHas_starButAll_kidsHaveZero_starAddTo_of
     assert sue_beliefunit.offtrack_kids_star_set == {clean_rope}
 
 
-def test_BeliefUnit_cashout_CreatesNewGroupUnitsWhenNeeded_Scenario0():
+def test_BeliefUnit_cashout_CreatesNewGroupUnits_Scenario0():
     # ESTABLISH
     yao_str = "Yao"
     yao_belief = beliefunit_shop(yao_str)
@@ -563,7 +563,7 @@ def test_BeliefUnit_cashout_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     assert zia_membership.group_debt_lumen == zia_voice_debt_lumen
 
 
-def test_BeliefUnit_cashout_CreatesNewGroupUnitsWhenNeeded_Scenario1():
+def test_BeliefUnit_cashout_CreatesNewGroupUnits_Scenario1():
     # ESTABLISH
     yao_str = "Yao"
     yao_belief = beliefunit_shop(yao_str)

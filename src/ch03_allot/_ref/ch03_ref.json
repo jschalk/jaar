@@ -1,6 +1,0 @@
-{
-  "chapter_blurb": "Defines how to allot a pool number to a weighted ledger.", 
-  "chapter_content": "Defines tools for allotment of a large number (called a pool) to a ledger (a list of things with a weighted value to represent their importance.", 
-  "chapter_description": "ch03_allot", 
-  "chapter_number": 3
-}

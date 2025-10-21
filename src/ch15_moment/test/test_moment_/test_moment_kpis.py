@@ -9,7 +9,7 @@ from src.ch15_moment.moment_report import (
     get_moment_jobs_voices_dataframe,
     get_moment_jobs_voices_plotly_fig,
 )
-from src.ch15_moment.test._util.ch15_env import env_dir_setup_cleanup
+from src.ch15_moment.test._util.ch15_env import temp_dir_setup
 from src.ch15_moment.test._util.ch15_examples import (
     create_example_moment2,
     create_example_moment3,
@@ -18,9 +18,7 @@ from src.ch15_moment.test._util.ch15_examples import (
 from src.ref.keywords import Ch15Keywords as kw
 
 
-def test_get_moment_guts_voices_dataframe_ReturnsObj(
-    env_dir_setup_cleanup, graphics_bool
-):
+def test_get_moment_guts_voices_dataframe_ReturnsObj(temp_dir_setup, graphics_bool):
     # ESTABLISH
     amy_moment = create_example_moment2()
 
@@ -48,9 +46,7 @@ def test_get_moment_guts_voices_dataframe_ReturnsObj(
     assert x_df.shape[0] == 8
 
 
-def test_get_moment_guts_voices_plotly_fig_DisplaysInfo(
-    env_dir_setup_cleanup, graphics_bool
-):
+def test_get_moment_guts_voices_plotly_fig_DisplaysInfo(temp_dir_setup, graphics_bool):
     # ESTABLISH
     amy_moment = create_example_moment2()
 
@@ -61,9 +57,7 @@ def test_get_moment_guts_voices_plotly_fig_DisplaysInfo(
     conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_moment_jobs_voices_dataframe_ReturnsObj(
-    env_dir_setup_cleanup, graphics_bool
-):
+def test_get_moment_jobs_voices_dataframe_ReturnsObj(temp_dir_setup, graphics_bool):
     # ESTABLISH
     amy_moment = create_example_moment2()
     amy_moment.generate_all_jobs()
@@ -93,9 +87,7 @@ def test_get_moment_jobs_voices_dataframe_ReturnsObj(
     assert set(x_df.columns) == voiceunit_colums
 
 
-def test_get_moment_jobs_voices_plotly_fig_DisplaysInfo(
-    env_dir_setup_cleanup, graphics_bool
-):
+def test_get_moment_jobs_voices_plotly_fig_DisplaysInfo(temp_dir_setup, graphics_bool):
     # ESTABLISH
     amy_moment = create_example_moment2()
     amy_moment.generate_all_jobs()
@@ -107,9 +99,7 @@ def test_get_moment_jobs_voices_plotly_fig_DisplaysInfo(
     conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_moment_guts_agenda_dataframe_ReturnsObj(
-    env_dir_setup_cleanup, graphics_bool
-):
+def test_get_moment_guts_agenda_dataframe_ReturnsObj(temp_dir_setup, graphics_bool):
     # ESTABLISH
     amy_moment = create_example_moment3()
 
@@ -136,9 +126,7 @@ def test_get_moment_guts_agenda_dataframe_ReturnsObj(
     assert x_df.shape[0] == 8
 
 
-def test_get_moment_guts_agenda_plotly_fig_DisplaysInfo(
-    env_dir_setup_cleanup, graphics_bool
-):
+def test_get_moment_guts_agenda_plotly_fig_DisplaysInfo(temp_dir_setup, graphics_bool):
     # ESTABLISH
     amy_moment = create_example_moment3()
 
@@ -149,7 +137,7 @@ def test_get_moment_guts_agenda_plotly_fig_DisplaysInfo(
     conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_moment_jobs_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
+def test_get_moment_jobs_agenda_dataframe_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     amy_moment = create_example_moment4()
     amy_moment.generate_all_jobs()
@@ -177,9 +165,7 @@ def test_get_moment_jobs_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
     assert x_df.shape[0] in [8, 9]
 
 
-def test_get_moment_jobs_agenda_plotly_fig_DisplaysInfo(
-    env_dir_setup_cleanup, graphics_bool
-):
+def test_get_moment_jobs_agenda_plotly_fig_DisplaysInfo(temp_dir_setup, graphics_bool):
     # ESTABLISH
     amy_moment = create_example_moment4()
     amy_moment.generate_all_jobs()

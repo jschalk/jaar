@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from src.ch01_py.dict_toolbox import get_0_if_None, get_empty_dict_if_None
-from src.ch03_allot.allot import (
+from src.ch02_allot.allot import (
     allot_scale,
     default_grain_num_if_None,
     validate_pool_num,
@@ -8,15 +8,16 @@ from src.ch03_allot.allot import (
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch14_keep._ref.ch14_semantic_types import (
     BeliefName,
+    ManaGrain,
+    ManaNum,
     MomentLabel,
-    MoneyGrain,
-    MoneyNum,
+    RespectNum,
     RopeTerm,
     VoiceName,
 )
 
 
-def get_credorledger(x_belief: BeliefUnit) -> dict[VoiceName, float]:
+def get_patientledger(x_belief: BeliefUnit) -> dict[VoiceName, RespectNum]:
     return {
         voiceunit.voice_name: voiceunit.voice_cred_lumen
         for voiceunit in x_belief.voices.values()
@@ -24,7 +25,7 @@ def get_credorledger(x_belief: BeliefUnit) -> dict[VoiceName, float]:
     }
 
 
-def get_debtorledger(x_belief: BeliefUnit) -> dict[VoiceName, float]:
+def get_doctorledger(x_belief: BeliefUnit) -> dict[VoiceName, RespectNum]:
     return {
         voiceunit.voice_name: voiceunit.voice_debt_lumen
         for voiceunit in x_belief.voices.values()
@@ -35,28 +36,28 @@ def get_debtorledger(x_belief: BeliefUnit) -> dict[VoiceName, float]:
 @dataclass
 class RiverBook:
     belief_name: BeliefName = None
-    _rivergrants: dict[VoiceName, float] = None
-    money_grain: MoneyGrain = None
+    _rivercares: dict[VoiceName, float] = None
+    mana_grain: ManaGrain = None
 
 
-def riverbook_shop(belief_name: BeliefName, money_grain: MoneyGrain = None):
+def riverbook_shop(belief_name: BeliefName, mana_grain: ManaGrain = None):
     x_riverbook = RiverBook(belief_name)
-    x_riverbook._rivergrants = {}
-    x_riverbook.money_grain = default_grain_num_if_None(money_grain)
+    x_riverbook._rivercares = {}
+    x_riverbook.mana_grain = default_grain_num_if_None(mana_grain)
     return x_riverbook
 
 
 def create_riverbook(
     belief_name: BeliefName,
-    keep_credorledger: dict,
+    keep_patientledger: dict,
     book_point_amount: int,
-    money_grain: MoneyGrain = None,
+    mana_grain: ManaGrain = None,
 ) -> RiverBook:
-    x_riverbook = riverbook_shop(belief_name, money_grain)
-    x_riverbook._rivergrants = allot_scale(
-        ledger=keep_credorledger,
+    x_riverbook = riverbook_shop(belief_name, mana_grain)
+    x_riverbook._rivercares = allot_scale(
+        ledger=keep_patientledger,
         scale_number=book_point_amount,
-        grain_unit=x_riverbook.money_grain,
+        grain_unit=x_riverbook.mana_grain,
     )
     return x_riverbook
 
@@ -65,9 +66,9 @@ def create_riverbook(
 class RiverCycle:
     healer_name: BeliefName = None
     number: int = None
-    keep_credorledgers: dict[BeliefName : dict[VoiceName, float]] = None
+    keep_patientledgers: dict[BeliefName : dict[VoiceName, float]] = None
     riverbooks: dict[VoiceName, RiverBook] = None
-    money_grain: MoneyGrain = None
+    mana_grain: ManaGrain = None
 
     def _set_complete_riverbook(self, x_riverbook: RiverBook):
         self.riverbooks[x_riverbook.belief_name] = x_riverbook
@@ -77,50 +78,50 @@ class RiverCycle:
         book_voice_name: VoiceName,
         book_point_amount: float,
     ):
-        belief_credorledger = self.keep_credorledgers.get(book_voice_name)
-        if belief_credorledger is not None:
+        belief_patientledger = self.keep_patientledgers.get(book_voice_name)
+        if belief_patientledger is not None:
             x_riverbook = create_riverbook(
                 belief_name=book_voice_name,
-                keep_credorledger=belief_credorledger,
+                keep_patientledger=belief_patientledger,
                 book_point_amount=book_point_amount,
-                money_grain=default_grain_num_if_None(self.money_grain),
+                mana_grain=default_grain_num_if_None(self.mana_grain),
             )
             self._set_complete_riverbook(x_riverbook)
 
     def create_cylceledger(self) -> dict[VoiceName, float]:
         x_dict = {}
         for x_riverbook in self.riverbooks.values():
-            for chargeee, charge_amount in x_riverbook._rivergrants.items():
-                if x_dict.get(chargeee) is None:
-                    x_dict[chargeee] = charge_amount
+            for caree, charge_amount in x_riverbook._rivercares.items():
+                if x_dict.get(caree) is None:
+                    x_dict[caree] = charge_amount
                 else:
-                    x_dict[chargeee] = x_dict[chargeee] + charge_amount
+                    x_dict[caree] = x_dict[caree] + charge_amount
         return x_dict
 
 
 def rivercycle_shop(
     healer_name: BeliefName,
     number: int,
-    keep_credorledgers: dict[BeliefName : dict[VoiceName, float]] = None,
-    money_grain: MoneyGrain = None,
+    keep_patientledgers: dict[BeliefName : dict[VoiceName, float]] = None,
+    mana_grain: ManaGrain = None,
 ):
     return RiverCycle(
         healer_name=healer_name,
         number=number,
-        keep_credorledgers=get_empty_dict_if_None(keep_credorledgers),
+        keep_patientledgers=get_empty_dict_if_None(keep_patientledgers),
         riverbooks=get_empty_dict_if_None(),
-        money_grain=default_grain_num_if_None(money_grain),
+        mana_grain=default_grain_num_if_None(mana_grain),
     )
 
 
 def create_init_rivercycle(
     healer_name: BeliefName,
-    keep_credorledgers: dict[BeliefName : dict[VoiceName, float]],
-    keep_point_magnitude: MoneyNum = None,
-    money_grain: MoneyGrain = None,
+    keep_patientledgers: dict[BeliefName : dict[VoiceName, float]],
+    keep_point_magnitude: ManaNum = None,
+    mana_grain: ManaGrain = None,
 ) -> RiverCycle:
     x_rivercycle = rivercycle_shop(
-        healer_name, 0, keep_credorledgers, money_grain=money_grain
+        healer_name, 0, keep_patientledgers, mana_grain=mana_grain
     )
     x_rivercycle.set_riverbook(healer_name, validate_pool_num(keep_point_magnitude))
     return x_rivercycle
@@ -128,16 +129,16 @@ def create_init_rivercycle(
 
 def create_next_rivercycle(
     prev_rivercycle: RiverCycle,
-    prev_cycle_cycleledger_post_tax: dict[VoiceName, float],
+    prev_cycle_cycleledger_post_need: dict[VoiceName, float],
 ) -> RiverCycle:
     next_rivercycle = rivercycle_shop(
         healer_name=prev_rivercycle.healer_name,
         number=prev_rivercycle.number + 1,
-        keep_credorledgers=prev_rivercycle.keep_credorledgers,
-        money_grain=prev_rivercycle.money_grain,
+        keep_patientledgers=prev_rivercycle.keep_patientledgers,
+        mana_grain=prev_rivercycle.mana_grain,
     )
-    for chargeer_id, chargeing_amount in prev_cycle_cycleledger_post_tax.items():
-        next_rivercycle.set_riverbook(chargeer_id, chargeing_amount)
+    for carer_id, chargeing_amount in prev_cycle_cycleledger_post_need.items():
+        next_rivercycle.set_riverbook(carer_id, chargeing_amount)
     return next_rivercycle
 
 
@@ -148,33 +149,33 @@ class RiverGrade:
     keep_rope: RopeTerm = None
     voice_name: VoiceName = None
     number: int = None
-    tax_bill_amount: float = None
-    grant_amount: float = None
-    debtor_rank_num: float = None
-    credor_rank_num: float = None
-    tax_paid_amount: float = None
-    tax_paid_bool: float = None
-    tax_paid_rank_num: float = None
-    tax_paid_rank_percent: float = None
-    debtor_count: float = None
-    credor_count: float = None
-    debtor_rank_percent: float = None
-    credor_rank_percent: float = None
+    need_bill_amount: float = None
+    care_amount: float = None
+    doctor_rank_num: float = None
+    patient_rank_num: float = None
+    need_paid_amount: float = None
+    need_paid_bool: float = None
+    need_paid_rank_num: float = None
+    need_paid_rank_percent: float = None
+    doctor_count: float = None
+    patient_count: float = None
+    doctor_rank_percent: float = None
+    patient_rank_percent: float = None
     rewards_count: float = None
     rewards_magnitude: float = None
 
-    def set_tax_bill_amount(self, x_tax_bill_amount: float):
-        self.tax_bill_amount = x_tax_bill_amount
-        self.set_tax_paid_bool()
+    def set_need_bill_amount(self, x_need_bill_amount: float):
+        self.need_bill_amount = x_need_bill_amount
+        self.set_need_paid_bool()
 
-    def set_tax_paid_amount(self, x_tax_paid_amount: float):
-        self.tax_paid_amount = x_tax_paid_amount
-        self.set_tax_paid_bool()
+    def set_need_paid_amount(self, x_need_paid_amount: float):
+        self.need_paid_amount = x_need_paid_amount
+        self.set_need_paid_bool()
 
-    def set_tax_paid_bool(self):
-        self.tax_paid_bool = (
-            self.tax_bill_amount is not None
-            and self.tax_bill_amount == self.tax_paid_amount
+    def set_need_paid_bool(self):
+        self.need_paid_bool = (
+            self.need_bill_amount is not None
+            and self.need_bill_amount == self.need_paid_amount
         )
 
     def to_dict(self) -> dict:
@@ -184,18 +185,18 @@ class RiverGrade:
             "moment_label": self.moment_label,
             "healer_name": self.belief_name,
             "keep_rope": self.keep_rope,
-            "tax_bill_amount": self.tax_bill_amount,
-            "grant_amount": self.grant_amount,
-            "debtor_rank_num": self.debtor_rank_num,
-            "credor_rank_num": self.credor_rank_num,
-            "tax_paid_amount": self.tax_paid_amount,
-            "tax_paid_bool": self.tax_paid_bool,
-            "tax_paid_rank_num": self.tax_paid_rank_num,
-            "tax_paid_rank_percent": self.tax_paid_rank_percent,
-            "debtor_count": self.debtor_count,
-            "credor_count": self.credor_count,
-            "debtor_rank_percent": self.debtor_rank_percent,
-            "credor_rank_percent": self.credor_rank_percent,
+            "need_bill_amount": self.need_bill_amount,
+            "care_amount": self.care_amount,
+            "doctor_rank_num": self.doctor_rank_num,
+            "patient_rank_num": self.patient_rank_num,
+            "need_paid_amount": self.need_paid_amount,
+            "need_paid_bool": self.need_paid_bool,
+            "need_paid_rank_num": self.need_paid_rank_num,
+            "need_paid_rank_percent": self.need_paid_rank_percent,
+            "doctor_count": self.doctor_count,
+            "patient_count": self.patient_count,
+            "doctor_rank_percent": self.doctor_rank_percent,
+            "patient_rank_percent": self.patient_rank_percent,
             "rewards_count": self.rewards_count,
             "rewards_magnitude": self.rewards_magnitude,
         }
@@ -207,8 +208,8 @@ def rivergrade_shop(
     keep_rope: RopeTerm,
     voice_name: VoiceName,
     number: float = None,
-    debtor_count: int = None,
-    credor_count: int = None,
+    doctor_count: int = None,
+    patient_count: int = None,
 ):
     return RiverGrade(
         moment_label=moment_label,
@@ -216,6 +217,6 @@ def rivergrade_shop(
         keep_rope=keep_rope,
         voice_name=voice_name,
         number=get_0_if_None(number),
-        debtor_count=debtor_count,
-        credor_count=credor_count,
+        doctor_count=doctor_count,
+        patient_count=patient_count,
     )

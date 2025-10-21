@@ -110,7 +110,7 @@ def get_belief_calc_args_type_dict() -> dict[str, str]:
         "fund_grain": "float",
         "fund_pool": "float",
         "max_tree_traverse": "int",
-        "money_grain": "float",
+        "mana_grain": "float",
         "respect_grain": "float",
         "tally": "int",
     }
@@ -192,7 +192,7 @@ def get_belief_calc_args_sqlite_datatype_dict() -> dict[str, str]:
         "fund_grain": "REAL",
         "fund_pool": "REAL",
         "max_tree_traverse": "INTEGER",
-        "money_grain": "REAL",
+        "mana_grain": "REAL",
         "respect_grain": "REAL",
         "solo": "INTEGER",
         "tally": "INTEGER",

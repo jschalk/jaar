@@ -2,8 +2,8 @@ from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from pytest import raises as pytest_raises
 from src.ch01_py.file_toolbox import create_path, get_json_filename
-from src.ch02_rope.rope import create_rope, create_rope_from_labels
-from src.ch11_bud.test._util.ch11_env import get_chapter_temp_dir
+from src.ch04_rope.rope import create_rope, create_rope_from_labels
+from src.ch11_bud.test._util.ch11_env import get_temp_dir
 from src.ch13_belief_listen._ref.ch13_path import (
     create_keep_duty_path,
     create_keep_dutys_path,
@@ -27,7 +27,7 @@ def test_treasury_filename_ReturnsObj():
 
 def test_create_keeps_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
 
@@ -45,7 +45,7 @@ def test_create_keeps_dir_path_ReturnsObj():
 
 def test_create_keep_rope_path_ReturnsObj_Scenario0_SimpleRope():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
     casa_str = "casa"
@@ -67,7 +67,7 @@ def test_create_keep_rope_path_ReturnsObj_Scenario1_MoreTestsForRopePathCreation
     # ESTABLISH
     sue_str = "Sue"
     peru_str = "peru"
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     texas_str = "texas"
     dallas_str = "dallas"
     elpaso_str = "el paso"
@@ -163,7 +163,7 @@ def test_create_keep_rope_path_RaisesError_Scenarion2_keep_rope_DoesNotExist():
 
 def test_create_keep_dutys_path_ReturnsObj() -> None:
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
     casa_str = "casa"
@@ -188,7 +188,7 @@ def test_create_keep_dutys_path_ReturnsObj() -> None:
 
 def test_create_keep_duty_path_ReturnsObj() -> None:
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
     casa_str = "casa"
@@ -216,7 +216,7 @@ def test_create_keep_duty_path_ReturnsObj() -> None:
 
 def test_create_keep_grades_path_ReturnsObj() -> None:
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
     casa_str = "casa"
@@ -241,7 +241,7 @@ def test_create_keep_grades_path_ReturnsObj() -> None:
 
 def test_create_keep_grade_path_ReturnsObj() -> None:
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
     casa_str = "casa"
@@ -268,7 +268,7 @@ def test_create_keep_grade_path_ReturnsObj() -> None:
 
 def test_create_keep_visions_path_ReturnsObj() -> None:
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
     casa_str = "casa"
@@ -293,7 +293,7 @@ def test_create_keep_visions_path_ReturnsObj() -> None:
 
 def test_create_treasury_db_path_ReturnsObj() -> None:
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
     casa_str = "casa"

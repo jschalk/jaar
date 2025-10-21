@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
-from src.ch02_rope.rope import default_knot_if_None
-from src.ch03_allot.allot import default_grain_num_if_None, validate_pool_num
+from src.ch02_allot.allot import default_grain_num_if_None, validate_pool_num
+from src.ch04_rope.rope import default_knot_if_None
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic._ref.ch07_semantic_types import RespectNum
 from src.ch07_belief_logic.belief_main import (
@@ -29,7 +29,7 @@ def test_BeliefUnit_Exists():
     assert x_belief.fund_pool is None
     assert x_belief.fund_grain is None
     assert x_belief.respect_grain is None
-    assert x_belief.money_grain is None
+    assert x_belief.mana_grain is None
     assert x_belief.last_lesson_id is None
     # calculated attr
     assert x_belief._plan_dict is None
@@ -72,7 +72,7 @@ def test_BeliefUnit_Exists():
         kw.last_lesson_id,
         kw.max_tree_traverse,
         kw.belief_name,
-        kw.money_grain,
+        kw.mana_grain,
         kw.respect_grain,
         kw.tally,
     }
@@ -122,7 +122,7 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     x_fund_pool = 555
     x_fund_grain = 7
     x_respect_grain = 5
-    x_money_grain = 1
+    x_mana_grain = 1
 
     # WHEN
     x_belief = beliefunit_shop(
@@ -132,7 +132,7 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
         fund_pool=x_fund_pool,
         fund_grain=x_fund_grain,
         respect_grain=x_respect_grain,
-        money_grain=x_money_grain,
+        mana_grain=x_mana_grain,
     )
 
     # THEN
@@ -147,7 +147,7 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     assert x_belief.fund_pool == x_fund_pool
     assert x_belief.fund_grain == x_fund_grain
     assert x_belief.respect_grain == x_respect_grain
-    assert x_belief.money_grain == x_money_grain
+    assert x_belief.mana_grain == x_mana_grain
     assert x_belief.credor_respect == RespectNum(validate_pool_num())
     assert x_belief.debtor_respect == RespectNum(validate_pool_num())
     assert not x_belief.last_lesson_id
@@ -179,7 +179,7 @@ def test_beliefunit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_belief.fund_pool == validate_pool_num()
     assert x_belief.fund_grain == default_grain_num_if_None()
     assert x_belief.respect_grain == default_grain_num_if_None()
-    assert x_belief.money_grain == default_grain_num_if_None()
+    assert x_belief.mana_grain == default_grain_num_if_None()
     assert x_belief.planroot.fund_grain == x_belief.fund_grain
     assert x_belief.planroot.knot == x_belief.knot
     assert x_belief.planroot.uid == 1

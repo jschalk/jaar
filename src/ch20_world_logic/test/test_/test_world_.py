@@ -1,8 +1,8 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import create_path, save_file
 from src.ch20_world_logic.test._util.ch20_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as worlds_dir,
+    get_temp_dir as worlds_dir,
+    temp_dir_setup,
 )
 from src.ch20_world_logic.world import (
     WorldName,
@@ -36,7 +36,7 @@ def test_WorldUnit_Exists():
     assert not x_world._translate_sparks
 
 
-def test_WorldUnit_set_input_dir_SetsDirsAndFiles(env_dir_setup_cleanup):
+def test_WorldUnit_set_input_dir_SetsDirsAndFiles(temp_dir_setup):
     # ESTABLISH
     fay_world = WorldUnit("Fay")
     x_example_dir = create_path(worlds_dir(), "example_dir")
@@ -59,7 +59,7 @@ def test_WorldUnit_set_input_dir_SetsDirsAndFiles(env_dir_setup_cleanup):
     assert os_path_exists(x_input_dir)
 
 
-def test_WorldUnit_set_world_dirs_SetsDirsAndFiles(env_dir_setup_cleanup):
+def test_WorldUnit_set_world_dirs_SetsDirsAndFiles(temp_dir_setup):
     # ESTABLISH
     fay_str = "Fay"
     fay_world = WorldUnit(world_name=fay_str, worlds_dir=worlds_dir())
@@ -90,7 +90,7 @@ def test_WorldUnit_set_world_dirs_SetsDirsAndFiles(env_dir_setup_cleanup):
     assert os_path_exists(x_moment_mstr_dir)
 
 
-def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanup):
+def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(temp_dir_setup):
     # ESTABLISH
     worlds2_dir = create_path(worlds_dir(), "worlds2")
     example_input_dir = create_path(worlds_dir(), "example_input")
@@ -121,7 +121,7 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
     assert x_world._translate_sparks == {}
 
 
-def test_worldunit_shop_ReturnsObj_Scenario1_WithoutParameters(env_dir_setup_cleanup):
+def test_worldunit_shop_ReturnsObj_Scenario1_WithoutParameters(temp_dir_setup):
     # ESTABLISH
     a23_str = "amy23"
 
@@ -140,7 +140,7 @@ def test_worldunit_shop_ReturnsObj_Scenario1_WithoutParameters(env_dir_setup_cle
 
 
 def test_worldunit_shop_ReturnsObj_Scenario2_ThirdParameterIs_output_dir(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     a23_str = "amy23"
@@ -155,7 +155,7 @@ def test_worldunit_shop_ReturnsObj_Scenario2_ThirdParameterIs_output_dir(
     assert x_world.output_dir == output_dir
 
 
-def test_init_momentunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
+def test_init_momentunits_from_dirs_ReturnsObj_Scenario0(temp_dir_setup):
     # ESTABLISH
     x_dir = worlds_dir()
 
@@ -166,7 +166,7 @@ def test_init_momentunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     assert x_momentunits == []
 
 
-def test_WorldUnit_set_spark_SetsAttr_Scenario0(env_dir_setup_cleanup):
+def test_WorldUnit_set_spark_SetsAttr_Scenario0(temp_dir_setup):
     # ESTABLISH
     x_world = worldunit_shop("amy23", worlds_dir())
     assert x_world._sparks == {}
@@ -181,7 +181,7 @@ def test_WorldUnit_set_spark_SetsAttr_Scenario0(env_dir_setup_cleanup):
     assert x_world._sparks == {e5_spark_num: e5_face_name}
 
 
-def test_WorldUnit_spark_exists_ReturnsObj(env_dir_setup_cleanup):
+def test_WorldUnit_spark_exists_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     x_world = worldunit_shop("amy23", worlds_dir())
     e5_spark_num = 5
@@ -195,7 +195,7 @@ def test_WorldUnit_spark_exists_ReturnsObj(env_dir_setup_cleanup):
     assert x_world.spark_exists(e5_spark_num)
 
 
-def test_WorldUnit_get_spark_ReturnsObj(env_dir_setup_cleanup):
+def test_WorldUnit_get_spark_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     x_world = worldunit_shop("amy23", worlds_dir())
     e5_spark_num = 5
@@ -209,7 +209,7 @@ def test_WorldUnit_get_spark_ReturnsObj(env_dir_setup_cleanup):
     assert x_world.get_spark(e5_spark_num) == e5_face_name
 
 
-def test_WorldUnit_get_world_db_path_ReturnsObj(env_dir_setup_cleanup):
+def test_WorldUnit_get_world_db_path_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     a23_world = worldunit_shop("amy23", worlds_dir())
 
@@ -220,7 +220,7 @@ def test_WorldUnit_get_world_db_path_ReturnsObj(env_dir_setup_cleanup):
     assert a23_db_path == create_path(a23_world._world_dir, "world.db")
 
 
-def test_WorldUnit_delete_world_db_DeletesFile(env_dir_setup_cleanup):
+def test_WorldUnit_delete_world_db_DeletesFile(temp_dir_setup):
     # ESTABLISH
     a23_world = worldunit_shop("amy23", worlds_dir())
     a23_db_path = a23_world.get_world_db_path()

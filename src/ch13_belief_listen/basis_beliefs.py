@@ -10,7 +10,7 @@ def create_empty_belief_from_belief(
     x_fund_pool = ref_belief.fund_pool
     x_fund_grain = ref_belief.fund_grain
     x_respect_grain = ref_belief.respect_grain
-    x_money_grain = ref_belief.money_grain
+    x_mana_grain = ref_belief.mana_grain
     return beliefunit_shop(
         belief_name=x_belief_name,
         moment_label=ref_belief.moment_label,
@@ -18,7 +18,7 @@ def create_empty_belief_from_belief(
         fund_pool=x_fund_pool,
         fund_grain=x_fund_grain,
         respect_grain=x_respect_grain,
-        money_grain=x_money_grain,
+        mana_grain=x_mana_grain,
     )
 
 

@@ -1,4 +1,4 @@
-from src.ch02_rope.rope import RopeTerm, create_rope, create_rope_from_labels
+from src.ch04_rope.rope import RopeTerm, create_rope, create_rope_from_labels
 from src.ch09_belief_atom.atom_main import BeliefAtom, beliefatom_shop
 from src.ch10_lesson._ref.ch10_semantic_types import LabelTerm, MomentLabel
 from src.ch10_lesson.delta import BeliefDelta, beliefdelta_shop

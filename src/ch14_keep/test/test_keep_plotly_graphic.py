@@ -8,7 +8,7 @@ from src.ch14_keep.keep_graphic import (
 )
 
 
-def test_money_graphics_ExplainedWell(graphics_bool):
+def test_mana_graphics_ExplainedWell(graphics_bool):
     # ESTABLISH / WHEN / THEN
     get_protect_structures0_fig(graphics_bool)
     get_protect_structures1_fig(graphics_bool)

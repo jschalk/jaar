@@ -7,15 +7,15 @@ from src.ch17_idea.idea_db_tool import create_idea_sorted_table, upsert_sheet
 from src.ch18_world_etl.tran_sqlstrs import create_prime_tablename
 from src.ch18_world_etl.transformers import get_max_brick_agg_spark_num
 from src.ch20_world_logic.test._util.ch20_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as worlds_dir,
+    get_temp_dir as worlds_dir,
+    temp_dir_setup,
 )
 from src.ch20_world_logic.world import WorldUnit, worldunit_shop
 from src.ref.keywords import Ch20Keywords as kw
 
 
 def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):  # sourcery skip: extract-method
     # ESTABLISH:
     fay_str = "Fay34"
@@ -145,7 +145,7 @@ def create_brick_agg_record(world: WorldUnit, spark_num: int):
 
 
 def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario1_DatabaseFileExists(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):  # sourcery skip: extract-method
     # ESTABLISH:
     fay_str = "Fay34"

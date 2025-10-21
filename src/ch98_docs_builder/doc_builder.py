@@ -7,7 +7,7 @@ from ast import (
 )
 from src.ch01_py.chapter_desc_tools import get_chapter_desc_prefix, get_chapter_descs
 from src.ch01_py.file_toolbox import create_path, open_json, save_file
-from src.ch02_rope._ref.ch02_doc_builder import get_ropeterm_explanation_md
+from src.ch04_rope._ref.ch04_doc_builder import get_ropeterm_explanation_md
 from src.ch17_idea._ref.ch17_doc_builder import get_brick_formats_md, get_idea_brick_mds
 
 
@@ -21,7 +21,7 @@ def get_chapter_num_descs() -> dict[int, str]:
     return chapter_prefix_descs
 
 
-def get_function_names_from_file(
+def get_func_names_and_class_bases_from_file(
     file_path: str, suffix: str = None
 ) -> tuple[list, dict[str, bool]]:
     """

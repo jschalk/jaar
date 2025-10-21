@@ -18,7 +18,7 @@ def get_moment_beliefepochpoint(momentunit: MomentUnit) -> BeliefEpochPoint:
         knot=momentunit.knot,
         fund_grain=momentunit.fund_grain,
         respect_grain=momentunit.respect_grain,
-        money_grain=momentunit.money_grain,
+        mana_grain=momentunit.mana_grain,
     )
     moment_epoch_label = momentunit.epoch.epoch_label
     epoch_rope = get_epoch_rope(

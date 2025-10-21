@@ -5,7 +5,6 @@ from src.ch05_reason._ref.ch05_semantic_types import (
     GroupTitle,
     HealerName,
     LabelTerm,
-    MoneyNum,
     NameTerm,
     RespectGrain,
     RespectNum,

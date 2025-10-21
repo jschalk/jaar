@@ -9,13 +9,13 @@ from src.ch01_py.csv_toolbox import (
     replace_csv_column_from_string,
 )
 from src.ch01_py.file_toolbox import create_path, save_file, set_dir
-from src.ch01_py.test._util.ch01_env import env_dir_setup_cleanup, get_chapter_temp_dir
+from src.ch01_py.test._util.ch01_env import get_temp_dir, temp_dir_setup
 
 
-def test_open_csv_with_types(env_dir_setup_cleanup):
+def test_open_csv_with_types(temp_dir_setup):
     """Test open_csv_with_types with various data types."""
     # ESTABLISH
-    set_dir(get_chapter_temp_dir())
+    set_dir(get_temp_dir())
     column_types = {
         "id": "INTEGER",
         "name": "TEXT",
@@ -31,7 +31,7 @@ def test_open_csv_with_types(env_dir_setup_cleanup):
 4,Doodad,12.00,truee,fay
 ,Doodad,,truee,fay
 """
-    save_file(get_chapter_temp_dir(), "test.csv", csv_str)
+    save_file(get_temp_dir(), "test.csv", csv_str)
     # with open(csv_path, mode="w", newline="", encoding="utf-8") as csv_file:
     #     writer = csv_writer(csv_file)
     #     writer.writerow(["id", "name", "price", "available", "Fay"])
@@ -39,7 +39,7 @@ def test_open_csv_with_types(env_dir_setup_cleanup):
     #     writer.writerow(["2", "Gadget", "5.49", "False", "Bob"])
     #     writer.writerow(["3", "Doodad", "12.00", "true", "Fay"])
     #     writer.writerow(["4", "Doodad", "12.00", "truee", "Fay"])
-    csv_path = create_path(get_chapter_temp_dir(), "test.csv")
+    csv_path = create_path(get_temp_dir(), "test.csv")
 
     # WHEN
     generated_rows = open_csv_with_types(csv_path, column_types)
@@ -57,10 +57,10 @@ def test_open_csv_with_types(env_dir_setup_cleanup):
     assert generated_rows == expected_rows
 
 
-def test_export_sqlite_tables_to_csv(env_dir_setup_cleanup):
+def test_export_sqlite_tables_to_csv(temp_dir_setup):
     # ESTABLISH
     # 1. Create temporary SQLite DB
-    temp_dir = get_chapter_temp_dir()
+    temp_dir = get_temp_dir()
     set_dir(temp_dir)
     db_path = create_path(temp_dir, "test555.db")
     print(f"{db_path=}")

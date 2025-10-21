@@ -1,7 +1,7 @@
-from src.ch02_rope.rope import RopeTerm, create_rope_from_labels
+from src.ch04_rope.rope import RopeTerm, create_rope_from_labels
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch14_keep._ref.ch14_semantic_types import BeliefName, VoiceName
-from src.ch14_keep.rivercycle import get_credorledger
+from src.ch14_keep.rivercycle import get_patientledger
 
 
 def get_nation_texas_rope() -> RopeTerm:
@@ -11,7 +11,7 @@ def get_nation_texas_rope() -> RopeTerm:
     return create_rope_from_labels([naton_str, usa_str, texas_str])
 
 
-def example_yao_credorledger() -> dict[str, float]:
+def example_yao_patientledger() -> dict[str, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
@@ -22,10 +22,10 @@ def example_yao_credorledger() -> dict[str, float]:
     yao_belief.add_voiceunit(yao_str, yao_voice_cred_lumen)
     yao_belief.add_voiceunit(bob_str, bob_voice_cred_lumen)
     yao_belief.add_voiceunit(zia_str, zia_voice_cred_lumen)
-    return get_credorledger(yao_belief)
+    return get_patientledger(yao_belief)
 
 
-def example_bob_credorledger() -> dict[str, float]:
+def example_bob_patientledger() -> dict[str, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
@@ -36,10 +36,10 @@ def example_bob_credorledger() -> dict[str, float]:
     bob_belief.add_voiceunit(yao_str, yao_voice_cred_lumen)
     bob_belief.add_voiceunit(bob_str, bob_voice_cred_lumen)
     bob_belief.add_voiceunit(zia_str, zia_voice_cred_lumen)
-    return get_credorledger(bob_belief)
+    return get_patientledger(bob_belief)
 
 
-def example_zia_credorledger() -> dict[str, float]:
+def example_zia_patientledger() -> dict[str, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
@@ -50,27 +50,27 @@ def example_zia_credorledger() -> dict[str, float]:
     zia_belief.add_voiceunit(yao_str, yao_voice_cred_lumen)
     zia_belief.add_voiceunit(bob_str, bob_voice_cred_lumen)
     zia_belief.add_voiceunit(zia_str, zia_voice_cred_lumen)
-    return get_credorledger(zia_belief)
+    return get_patientledger(zia_belief)
 
 
-def example_yao_bob_zia_credorledgers() -> dict[BeliefName : dict[VoiceName, float]]:
+def example_yao_bob_zia_patientledgers() -> dict[BeliefName : dict[VoiceName, float]]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
     return {
-        yao_str: example_yao_credorledger,
-        bob_str: example_bob_credorledger,
-        zia_str: example_zia_credorledger,
+        yao_str: example_yao_patientledger,
+        bob_str: example_bob_patientledger,
+        zia_str: example_zia_patientledger,
     }
 
 
-def example_yao_bob_zia_tax_dues() -> dict[VoiceName, float]:
+def example_yao_bob_zia_need_dues() -> dict[VoiceName, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_sum = sum(example_yao_credorledger().values())
-    bob_sum = sum(example_bob_credorledger().values())
-    zia_sum = sum(example_zia_credorledger().values())
+    yao_sum = sum(example_yao_patientledger().values())
+    bob_sum = sum(example_bob_patientledger().values())
+    zia_sum = sum(example_zia_patientledger().values())
 
     return {
         yao_str: yao_sum - 60000,

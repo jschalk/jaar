@@ -22,13 +22,13 @@ from src.ch11_bud._ref.ch11_path import (
     create_spark_all_lesson_path,
     create_spark_expressed_lesson_path,
 )
-from src.ch11_bud.test._util.ch11_env import get_chapter_temp_dir
+from src.ch11_bud.test._util.ch11_env import get_temp_dir
 from src.ref.keywords import Ch11Keywords as kw
 
 
 def test_create_buds_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
 
@@ -46,7 +46,7 @@ def test_create_buds_dir_path_ReturnsObj():
 
 def test_create_bud_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
     timepoint7 = 7
@@ -68,7 +68,7 @@ def test_create_bud_dir_path_ReturnsObj():
 
 def test_create_budunit_json_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     timepoint7 = 7
@@ -91,7 +91,7 @@ def test_create_budunit_json_path_ReturnsObj():
 
 def test_create_beliefpoint_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     timepoint7 = 7
@@ -114,7 +114,7 @@ def test_create_beliefpoint_path_ReturnsObj():
 
 def test_create_cell_dir_path_ReturnsObj_Scenario0_No_bud_ancestors():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     tp7 = 7
@@ -129,7 +129,7 @@ def test_create_cell_dir_path_ReturnsObj_Scenario0_No_bud_ancestors():
 
 def test_create_cell_dir_path_ReturnsObj_Scenario1_One_bud_ancestors():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     tp7 = 7
@@ -149,7 +149,7 @@ def test_create_cell_dir_path_ReturnsObj_Scenario1_One_bud_ancestors():
 
 def test_create_cell_dir_path_ReturnsObj_Scenario2_Three_bud_ancestors():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     tp7 = 7
@@ -173,7 +173,7 @@ def test_create_cell_dir_path_ReturnsObj_Scenario2_Three_bud_ancestors():
 
 def test_create_cell_json_path_ReturnsObj_Scenario0_Empty_bud_ancestors():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     timepoint7 = 7
@@ -196,7 +196,7 @@ def test_create_cell_json_path_ReturnsObj_Scenario0_Empty_bud_ancestors():
 
 def test_create_cell_json_path_ReturnsObj_Scenario1_Three_bud_ancestors():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     tp7 = 7
@@ -219,7 +219,7 @@ def test_create_cell_json_path_ReturnsObj_Scenario1_Three_bud_ancestors():
 
 def test_create_cell_voice_mandate_ledger_path_ReturnsObj_Scenario1_Three_bud_ancestors():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     tp7 = 7
@@ -242,7 +242,7 @@ def test_create_cell_voice_mandate_ledger_path_ReturnsObj_Scenario1_Three_bud_an
 
 def test_create_belief_spark_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     bob_str = "Bob"
     spark3 = 3
@@ -264,7 +264,7 @@ def test_create_belief_spark_dir_path_ReturnsObj():
 
 def test_create_beliefspark_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     bob_str = "Bob"
     spark3 = 3
@@ -287,7 +287,7 @@ def test_create_beliefspark_path_ReturnsObj():
 
 def test_create_spark_all_lesson_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     bob_str = "Bob"
     spark3 = 3
@@ -312,7 +312,7 @@ def test_create_spark_all_lesson_path_ReturnsObj():
 
 def test_create_spark_expressed_lesson_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     bob_str = "Bob"
     spark3 = 3

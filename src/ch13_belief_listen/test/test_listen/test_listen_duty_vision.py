@@ -1,4 +1,4 @@
-from src.ch02_rope.rope import LabelTerm, RopeTerm, create_rope
+from src.ch04_rope.rope import LabelTerm, RopeTerm, create_rope
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop, planunit_shop
 from src.ch10_lesson.lesson_filehandler import (
     LessonFileHandler,
@@ -17,8 +17,8 @@ from src.ch13_belief_listen.listen_main import (
     listen_to_belief_visions,
 )
 from src.ch13_belief_listen.test._util.ch13_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as env_dir,
+    get_temp_dir as env_dir,
+    temp_dir_setup,
 )
 from src.ch13_belief_listen.test._util.ch13_examples import (
     casa_str,
@@ -254,7 +254,7 @@ def get_example_yao_gut_with_3_healers():
 
 
 def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
@@ -395,7 +395,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
     assert yao_job != yao_gut0
 
 
-def test_create_vision_file_from_duty_file_CreatesEmptyvision(env_dir_setup_cleanup):
+def test_create_vision_file_from_duty_file_CreatesEmptyvision(temp_dir_setup):
     # ESTABLISH
     yao_str = "Yao"
     yao_duty = beliefunit_shop(yao_str)

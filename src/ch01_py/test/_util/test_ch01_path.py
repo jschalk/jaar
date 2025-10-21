@@ -5,14 +5,14 @@ from src.ch01_py._ref.ch01_path import (
     create_src_keywords_path,
 )
 from src.ch01_py.file_toolbox import create_path, get_json_filename
-from src.ch01_py.test._util.ch01_env import get_chapter_temp_dir
+from src.ch01_py.test._util.ch01_env import get_temp_dir
 
 LINUX_OS = platform_system() == "Linux"
 
 
 def test_create_src_keywords_path_ReturnsObj():
     # ESTABLISH
-    src_dir = get_chapter_temp_dir()
+    src_dir = get_temp_dir()
 
     # WHEN
     keywords_class_file_path = create_src_keywords_path(src_dir)

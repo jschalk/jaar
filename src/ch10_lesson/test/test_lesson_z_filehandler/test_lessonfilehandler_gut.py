@@ -8,10 +8,7 @@ from src.ch10_lesson.lesson_filehandler import (
     save_gut_file,
 )
 from src.ch10_lesson.lesson_main import init_lesson_id
-from src.ch10_lesson.test._util.ch10_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as env_dir,
-)
+from src.ch10_lesson.test._util.ch10_env import get_temp_dir as env_dir, temp_dir_setup
 from src.ch10_lesson.test._util.ch10_examples import sue_2beliefatoms_lessonunit
 
 
@@ -30,7 +27,7 @@ def test_LessonFileHandler_default_gut_belief_ReturnsObj():
         fund_pool=x_fund_pool,
         fund_grain=pnine_float,
         respect_grain=pnine_float,
-        money_grain=pfour_float,
+        mana_grain=pfour_float,
     )
 
     # WHEN
@@ -43,12 +40,12 @@ def test_LessonFileHandler_default_gut_belief_ReturnsObj():
     assert sue_default_gut.fund_pool == sue_lessonfilehandler.fund_pool
     assert sue_default_gut.fund_grain == sue_lessonfilehandler.fund_grain
     assert sue_default_gut.respect_grain == sue_lessonfilehandler.respect_grain
-    assert sue_default_gut.money_grain == sue_lessonfilehandler.money_grain
+    assert sue_default_gut.mana_grain == sue_lessonfilehandler.mana_grain
     assert sue_default_gut.last_lesson_id == init_lesson_id()
 
 
 def test_LessonFileHandler_create_initial_lesson_files_from_default_SavesLessonUnitFiles(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -69,7 +66,7 @@ def test_LessonFileHandler_create_initial_lesson_files_from_default_SavesLessonU
 
 
 def test_LessonFileHandler_create_gut_from_lessons_CreatesgutFileFromLessonFiles(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -95,7 +92,7 @@ def test_LessonFileHandler_create_gut_from_lessons_CreatesgutFileFromLessonFiles
 
 
 def test_LessonFileHandler_create_initial_lesson_and_gut_files_CreatesLessonFilesAndgutFile(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -121,7 +118,7 @@ def test_LessonFileHandler_create_initial_lesson_and_gut_files_CreatesLessonFile
 
 
 def test_LessonFileHandler_create_initial_lesson_files_from_gut_SavesOnlyLessonFiles(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -145,7 +142,7 @@ def test_LessonFileHandler_create_initial_lesson_files_from_gut_SavesOnlyLessonF
 
 
 def test_LessonFileHandler_initialize_lesson_gut_files_SavesgutFileAndLessonFile(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -172,7 +169,7 @@ def test_LessonFileHandler_initialize_lesson_gut_files_SavesgutFileAndLessonFile
 
 
 def test_LessonFileHandler_initialize_lesson_gut_files_SavesOnlygutFile(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -202,7 +199,7 @@ def test_LessonFileHandler_initialize_lesson_gut_files_SavesOnlygutFile(
 
 
 def test_LessonFileHandler_initialize_lesson_gut_files_SavesOnlyLessonFile(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -234,7 +231,7 @@ def test_LessonFileHandler_initialize_lesson_gut_files_SavesOnlyLessonFile(
 
 
 def test_LessonFileHandler_append_lessons_to_gut_file_AddsLessonsTogutFile(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"

@@ -1,7 +1,7 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
-from src.ch02_rope.rope import get_ancestor_ropes, get_first_label_from_rope
-from src.ch03_allot.allot import allot_scale
+from src.ch02_allot.allot import allot_scale
+from src.ch04_rope.rope import get_ancestor_ropes, get_first_label_from_rope
 from src.ch06_plan.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, VoiceUnit
 from src.ch10_lesson.lesson_filehandler import LessonFileHandler, open_gut_file

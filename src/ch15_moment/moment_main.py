@@ -2,7 +2,7 @@ from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from src.ch01_py.dict_toolbox import get_0_if_None, get_empty_set_if_None
 from src.ch01_py.file_toolbox import create_path, get_dir_file_strs, open_json, set_dir
-from src.ch03_allot.allot import default_grain_num_if_None
+from src.ch02_allot.allot import default_grain_num_if_None
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch08_epoch.epoch_main import (
     EpochPoint,
@@ -43,8 +43,8 @@ from src.ch15_moment._ref.ch15_semantic_types import (
     BeliefName,
     FundGrain,
     FundNum,
+    ManaGrain,
     MomentLabel,
-    MoneyGrain,
     RespectGrain,
     SparkInt,
     VoiceName,
@@ -91,7 +91,7 @@ class MomentUnit:
     knot: str = None
     fund_grain: FundGrain = None
     respect_grain: RespectGrain = None
-    money_grain: MoneyGrain = None
+    mana_grain: ManaGrain = None
     job_listen_rotations: int = None
     offi_time_max: EpochPoint = None
     _moment_dir: str = None
@@ -118,7 +118,7 @@ class MomentUnit:
         )
         return sorted(list(beliefs.keys()))
 
-    # belief management
+    # belief administration
     def _set_all_healer_dutys(self, belief_name: BeliefName):
         x_gut = open_gut_file(self.moment_mstr_dir, self.moment_label, belief_name)
         x_gut.cashout()
@@ -140,7 +140,7 @@ class MomentUnit:
                     duty_belief=x_gut,
                 )
 
-    # job belief management
+    # job belief administration
     def create_empty_belief_from_moment(self, belief_name: BeliefName) -> BeliefUnit:
         return beliefunit_shop(
             belief_name,
@@ -148,7 +148,7 @@ class MomentUnit:
             knot=self.knot,
             fund_grain=self.fund_grain,
             respect_grain=self.respect_grain,
-            money_grain=self.money_grain,
+            mana_grain=self.mana_grain,
         )
 
     def create_gut_file_if_none(self, belief_name: BeliefName) -> None:
@@ -228,7 +228,7 @@ class MomentUnit:
             "moment_mstr_dir": self.moment_mstr_dir,
             "knot": self.knot,
             "fund_grain": self.fund_grain,
-            "money_grain": self.money_grain,
+            "mana_grain": self.mana_grain,
             "beliefbudhistorys": self._get_beliefbudhistorys_dict(),
             "respect_grain": self.respect_grain,
             "epoch": self.epoch.to_dict(),
@@ -344,7 +344,7 @@ class MomentUnit:
             spark_num=past_spark_num,
             celldepth=budunit.celldepth,
             quota=budunit.quota,
-            money_grain=self.money_grain,
+            mana_grain=self.mana_grain,
         )
         root_cell_dir = create_cell_dir_path(
             self.moment_mstr_dir, self.moment_label, belief_name, bud_time, []
@@ -388,7 +388,7 @@ def momentunit_shop(
     knot: str = None,
     fund_grain: float = None,
     respect_grain: float = None,
-    money_grain: float = None,
+    mana_grain: float = None,
     job_listen_rotations: int = None,
 ) -> MomentUnit:
     if epoch is None:
@@ -405,7 +405,7 @@ def momentunit_shop(
         knot=default_knot_if_None(knot),
         fund_grain=default_grain_num_if_None(fund_grain),
         respect_grain=default_grain_num_if_None(respect_grain),
-        money_grain=default_grain_num_if_None(money_grain),
+        mana_grain=default_grain_num_if_None(mana_grain),
         all_tranbook=tranbook_shop(moment_label),
         job_listen_rotations=job_listen_rotations,
     )
@@ -432,7 +432,7 @@ def get_momentunit_from_dict(moment_dict: dict) -> MomentUnit:
         knot=moment_dict.get("knot"),
         fund_grain=moment_dict.get("fund_grain"),
         respect_grain=moment_dict.get("respect_grain"),
-        money_grain=moment_dict.get("money_grain"),
+        mana_grain=moment_dict.get("mana_grain"),
     )
     moment_dict_epoch_value = moment_dict.get("epoch")
     if moment_dict_epoch_value:

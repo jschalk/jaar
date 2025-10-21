@@ -444,7 +444,7 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckBeliefDimens():
         assert expected_h_del_agg_sqlstr == sqlstrs.get(v_del_agg_tablename)
 
 
-def test_get_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
+def test_get_prime_create_table_sqlstrs_ReturnsObj_HasAllKeys():
     # ESTABLISH / WHEN
     create_table_sqlstrs = get_prime_create_table_sqlstrs()
 

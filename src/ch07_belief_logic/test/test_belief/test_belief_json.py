@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
-from src.ch02_rope.rope import default_knot_if_None, to_rope
-from src.ch04_voice.labor import laborunit_shop, partyunit_shop
+from src.ch03_voice.labor import laborunit_shop, partyunit_shop
+from src.ch04_rope.rope import default_knot_if_None, to_rope
 from src.ch05_reason.reason import factunit_shop
 from src.ch06_plan.healer import healerunit_shop
 from src.ch06_plan.plan import planunit_shop
@@ -144,8 +144,8 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario4_planunit_WithLevels():
     zia_belief.fund_grain = x_fund_grain
     x_respect_grain = 7
     zia_belief.respect_grain = x_respect_grain
-    x_money_grain = 0.3
-    zia_belief.money_grain = x_money_grain
+    x_mana_grain = 0.3
+    zia_belief.mana_grain = x_mana_grain
     override_str = "override"
     yao_str = "Yao"
     run_str = ";runners"
@@ -168,7 +168,7 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario4_planunit_WithLevels():
     assert belief_dict[kw.fund_pool] == zia_belief.fund_pool
     assert belief_dict[kw.fund_grain] == zia_belief.fund_grain
     assert belief_dict[kw.respect_grain] == zia_belief.respect_grain
-    assert belief_dict[kw.money_grain] == zia_belief.money_grain
+    assert belief_dict[kw.mana_grain] == zia_belief.mana_grain
     assert belief_dict[kw.credor_respect] == zia_belief.credor_respect
     assert belief_dict[kw.debtor_respect] == zia_belief.debtor_respect
     # with pytest_raises(Exception) as excinfo:
@@ -310,7 +310,7 @@ def test_get_beliefunit_from_dict_ReturnsObj_knot_VoiceExample():
 
     # THEN
     after_bob_voiceunit = after_bob_belief.get_voice(bob_str)
-    assert after_bob_voiceunit.knot == slash_knot
+    assert after_bob_voiceunit.groupmark == slash_knot
 
 
 def test_get_beliefunit_from_dict_ReturnsObj_knot_GroupExample():
@@ -328,7 +328,7 @@ def test_get_beliefunit_from_dict_ReturnsObj_knot_GroupExample():
 
     # THEN
     after_yao_voiceunit = after_bob_belief.get_voice(yao_str)
-    assert after_yao_voiceunit.knot == slash_knot
+    assert after_yao_voiceunit.groupmark == slash_knot
 
 
 def test_get_beliefunit_from_dict_ReturnsObj_Scenario7_planroot_knot_IsApplied():

@@ -6,18 +6,15 @@ from src.ch18_world_etl.idea_collector import (
     get_all_excel_ideasheets,
     get_all_idea_dataframes,
 )
-from src.ch18_world_etl.test._util.ch18_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch18_world_etl.test._util.ch18_env import get_temp_dir, temp_dir_setup
 from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_get_all_excel_ideasheets_ReturnsObj_Scenario0_SheetNames(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    env_dir = get_chapter_temp_dir()
+    env_dir = get_temp_dir()
     x_dir = create_path(env_dir, "examples_folder")
     ex_filename = "Faybob.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
@@ -72,10 +69,10 @@ def test_IdeaFileRef_get_csv_filename_ReturnsObj_Scenario1():
 
 
 def test_get_all_idea_dataframes_ReturnsObj_Scenario0_TranslateSheetNames(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    env_dir = get_chapter_temp_dir()
+    env_dir = get_temp_dir()
     x_dir = create_path(env_dir, "examples_folder")
     sue_str = "Sue"
     spark1 = 1
@@ -112,9 +109,9 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_TranslateSheetNames(
     assert len(x_ideasheets) == 1
 
 
-def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
+def test_get_all_idea_dataframes_ReturnsObj_Scenario1(temp_dir_setup):
     # ESTABLISH
-    env_dir = get_chapter_temp_dir()
+    env_dir = get_temp_dir()
     x_dir = create_path(env_dir, "examples_folder")
     sue_str = "Sue"
     spark1 = 1

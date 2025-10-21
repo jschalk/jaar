@@ -20,10 +20,7 @@ from src.ch18_world_etl.stance_tool import (
     collect_stance_csv_strs,
     create_stance0001_file,
 )
-from src.ch18_world_etl.test._util.ch18_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch18_world_etl.test._util.ch18_env import get_temp_dir, temp_dir_setup
 from src.ch18_world_etl.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_heard_tables,
@@ -32,10 +29,10 @@ from src.ref.keywords import Ch18Keywords as kw
 
 
 def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoMomentUnits(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    world_dir = get_chapter_temp_dir()
+    world_dir = get_temp_dir()
     bob_str = "Bob"
 
     # WHEN
@@ -47,10 +44,10 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoMomentUnits(
 
 
 def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleMomentUnit_NoBeliefUnits(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    world_dir = get_chapter_temp_dir()
+    world_dir = get_temp_dir()
     moment_mstr_dir = create_moment_mstr_path(world_dir)
     a23_str = "amy23"
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
@@ -67,10 +64,10 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleMomentUnit_NoBeliefU
 
 
 def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BeliefUnits(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    world_dir = get_chapter_temp_dir()
+    world_dir = get_temp_dir()
     moment_mstr_dir = create_moment_mstr_path(world_dir)
     bob_str = "Bob"
     a23_str = "amy23"
@@ -94,7 +91,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BeliefUnits(
 
 
 def test_collect_stance_csv_strs_ReturnsObj_Scenario2_TranslateRowsInDB(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH database with translate data
     yao_str = "Yao"
@@ -108,8 +105,8 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_TranslateRowsInDB(
     colon_str = ":"
     sue_unknown_str = "SueUnknown"
     bob_unknown_str = "BobUnknown"
-    world_dir = get_chapter_temp_dir()
-    output_dir = create_path(get_chapter_temp_dir(), "output")
+    world_dir = get_temp_dir()
+    output_dir = create_path(get_temp_dir(), "output")
     world_db_path = create_world_db_path(world_dir)
     print(f"{world_db_path=}")
     set_dir(world_dir)
@@ -178,11 +175,11 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_TranslateRowsInDB(
 
 
 def test_create_stance0001_file_CreatesFile_Scenario0_NoMomentUnits(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
-    world_dir = get_chapter_temp_dir()
+    world_dir = get_temp_dir()
     output_dir = create_path(world_dir, "output")
     stance0001_path = create_stance0001_path(output_dir)
     assert os_path_exists(stance0001_path) is False
@@ -198,7 +195,7 @@ def test_create_stance0001_file_CreatesFile_Scenario0_NoMomentUnits(
 
 
 def test_create_stance0001_file_CreatesFile_Scenario1_TranslateRowsInDB(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH database with translate data
     yao_str = "Yao"
@@ -212,8 +209,8 @@ def test_create_stance0001_file_CreatesFile_Scenario1_TranslateRowsInDB(
     colon_str = ":"
     sue_unknown_str = "SueUnknown"
     bob_unknown_str = "BobUnknown"
-    world_dir = get_chapter_temp_dir()
-    output_dir = create_path(get_chapter_temp_dir(), "output")
+    world_dir = get_temp_dir()
+    output_dir = create_path(get_temp_dir(), "output")
     world_db_path = create_world_db_path(world_dir)
     print(f"{world_db_path=}")
     set_dir(world_dir)

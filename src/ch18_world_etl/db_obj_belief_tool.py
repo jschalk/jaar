@@ -2,9 +2,9 @@ from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from sqlite3 import Cursor as sqlite3_Cursor
 from src.ch01_py.db_toolbox import sqlite_obj_str
-from src.ch04_voice.group import AwardHeir, GroupUnit, MemberShip
-from src.ch04_voice.labor import LaborHeir
-from src.ch04_voice.voice import VoiceUnit
+from src.ch03_voice.group import AwardHeir, GroupUnit, MemberShip
+from src.ch03_voice.labor import LaborHeir
+from src.ch03_voice.voice import VoiceUnit
 from src.ch05_reason.reason import CaseUnit, FactHeir, ReasonHeir
 from src.ch06_plan.plan import HealerUnit, PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit
@@ -341,11 +341,11 @@ def create_beliefunit_metrics_insert_sqlstr(values_dict: dict[str,]):
     fund_grain = values_dict.get("fund_grain")
     fund_pool = values_dict.get("fund_pool")
     max_tree_traverse = values_dict.get("max_tree_traverse")
-    money_grain = values_dict.get("money_grain")
+    mana_grain = values_dict.get("mana_grain")
     respect_grain = values_dict.get("respect_grain")
     tally = values_dict.get("tally")
 
-    return f"""INSERT INTO beliefunit_job (moment_label, belief_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_grain, money_grain, respect_grain, rational, keeps_justified, offtrack_fund, sum_healerunit_plans_fund_total, keeps_buildable, tree_traverse_count)
+    return f"""INSERT INTO beliefunit_job (moment_label, belief_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_grain, mana_grain, respect_grain, rational, keeps_justified, offtrack_fund, sum_healerunit_plans_fund_total, keeps_buildable, tree_traverse_count)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -355,7 +355,7 @@ VALUES (
 , {sqlite_obj_str(max_tree_traverse, integer_str)}
 , {sqlite_obj_str(tally, real_str)}
 , {sqlite_obj_str(fund_grain, real_str)}
-, {sqlite_obj_str(money_grain, real_str)}
+, {sqlite_obj_str(mana_grain, real_str)}
 , {sqlite_obj_str(respect_grain, real_str)}
 , {sqlite_obj_str(rational, integer_str)}
 , {sqlite_obj_str(keeps_justified, integer_str)}

@@ -6,7 +6,7 @@ from src.ch01_py.dict_toolbox import (
     get_empty_dict_if_None,
     get_empty_list_if_None,
 )
-from src.ch03_allot.allot import allot_scale
+from src.ch02_allot.allot import allot_scale
 from src.ch05_reason.reason import (
     FactUnit,
     get_dict_from_factunits,
@@ -26,7 +26,7 @@ from src.ch07_belief_logic.belief_tool import (
 from src.ch11_bud._ref.ch11_semantic_types import (
     BeliefName,
     FundNum,
-    MoneyGrain,
+    ManaGrain,
     RopeTerm,
     SparkInt,
 )
@@ -40,7 +40,7 @@ class CellUnit:
     spark_num: SparkInt = None
     celldepth: int = None
     bud_belief_name: BeliefName = None
-    money_grain: MoneyGrain = None
+    mana_grain: ManaGrain = None
     quota: float = None
     mandate: float = None
     beliefadjust: BeliefUnit = None
@@ -76,7 +76,7 @@ class CellUnit:
         if not self.beliefadjust:
             return None
         credit_ledger = self.get_beliefsparks_credit_ledger()
-        return allot_scale(credit_ledger, self.quota, self.money_grain)
+        return allot_scale(credit_ledger, self.quota, self.mana_grain)
 
     def set_beliefspark_facts_from_dict(self, fact_dict: dict[RopeTerm, dict]):
         self.beliefspark_facts = get_factunits_from_dict(fact_dict)
@@ -157,7 +157,7 @@ class CellUnit:
             "spark_num": self.spark_num,
             "celldepth": self.celldepth,
             "bud_belief_name": self.bud_belief_name,
-            "money_grain": self.money_grain,
+            "mana_grain": self.mana_grain,
             "quota": self.quota,
             "mandate": self.mandate,
             "beliefadjust": self.beliefadjust.to_dict(),
@@ -172,7 +172,7 @@ def cellunit_shop(
     ancestors: list[BeliefName] = None,
     spark_num: SparkInt = None,
     celldepth: int = None,
-    money_grain: MoneyGrain = None,
+    mana_grain: ManaGrain = None,
     quota: float = None,
     beliefadjust: BeliefUnit = None,
     beliefspark_facts: dict[RopeTerm, FactUnit] = None,
@@ -196,7 +196,7 @@ def cellunit_shop(
         spark_num=spark_num,
         celldepth=get_0_if_None(celldepth),
         bud_belief_name=bud_belief_name,
-        money_grain=get_1_if_None(money_grain),
+        mana_grain=get_1_if_None(mana_grain),
         quota=quota,
         mandate=mandate,
         beliefadjust=beliefadjust,
@@ -213,7 +213,7 @@ def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
     ancestors = x_dict.get("ancestors")
     spark_num = x_dict.get("spark_num")
     celldepth = x_dict.get("celldepth")
-    money_grain = x_dict.get("money_grain")
+    mana_grain = x_dict.get("mana_grain")
     quota = x_dict.get("quota")
     mandate = x_dict.get("mandate")
     beliefadjust_dict = x_dict.get("beliefadjust")
@@ -232,7 +232,7 @@ def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
         ancestors=ancestors,
         spark_num=spark_num,
         celldepth=celldepth,
-        money_grain=money_grain,
+        mana_grain=mana_grain,
         quota=quota,
         beliefadjust=beliefadjust_obj,
         beliefspark_facts=beliefspark_facts,
@@ -258,7 +258,7 @@ def create_child_cellunits(parent_cell: CellUnit) -> list[CellUnit]:
                 ancestors=child_ancestors,
                 spark_num=parent_cell.spark_num,
                 celldepth=parent_cell.celldepth - 1,
-                money_grain=parent_cell.money_grain,
+                mana_grain=parent_cell.mana_grain,
                 mandate=child_mandate,
                 boss_facts=boss_facts,
             )

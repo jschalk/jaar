@@ -1,8 +1,6 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
-from os import listdir as os_listdir
-from os.path import exists as os_path_exists, isdir as os_path_isdir
-from src.ch01_py.dict_toolbox import get_empty_list_if_None
+from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import (
     create_path,
     delete_dir,
@@ -13,10 +11,9 @@ from src.ch01_py.file_toolbox import (
     get_max_file_number,
     open_json,
     save_json,
-    set_dir,
 )
-from src.ch02_rope.rope import validate_labelterm
-from src.ch03_allot.allot import default_grain_num_if_None, validate_pool_num
+from src.ch02_allot.allot import default_grain_num_if_None, validate_pool_num
+from src.ch04_rope.rope import validate_labelterm
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
@@ -30,9 +27,7 @@ from src.ch09_belief_atom.atom_main import (
 from src.ch10_lesson._ref.ch10_path import (
     create_atoms_dir_path,
     create_gut_path,
-    create_job_path,
     create_lessons_dir_path,
-    create_moment_beliefs_dir_path,
 )
 from src.ch10_lesson._ref.ch10_semantic_types import (
     BeliefName,
@@ -94,12 +89,12 @@ class LessonFileMissingException(Exception):
 class LessonFileHandler:
     belief_name: BeliefName = None
     moment_mstr_dir: str = None
-    moment_label: str = None
+    moment_label: MomentLabel = None
     knot: str = None
     fund_pool: float = None
     fund_grain: float = None
     respect_grain: float = None
-    money_grain: float = None
+    mana_grain: float = None
     _atoms_dir: str = None
     _lessons_dir: str = None
 
@@ -118,7 +113,7 @@ class LessonFileHandler:
             fund_pool=self.fund_pool,
             fund_grain=self.fund_grain,
             respect_grain=self.respect_grain,
-            money_grain=self.money_grain,
+            mana_grain=self.mana_grain,
         )
         x_beliefunit.last_lesson_id = init_lesson_id()
         return x_beliefunit
@@ -331,7 +326,7 @@ def lessonfilehandler_shop(
     fund_pool: float = None,
     fund_grain: float = None,
     respect_grain: float = None,
-    money_grain: float = None,
+    mana_grain: float = None,
 ) -> LessonFileHandler:
     x_lessonfilehandler = LessonFileHandler(
         moment_mstr_dir=moment_mstr_dir,
@@ -341,7 +336,7 @@ def lessonfilehandler_shop(
         fund_pool=validate_pool_num(fund_pool),
         fund_grain=default_grain_num_if_None(fund_grain),
         respect_grain=default_grain_num_if_None(respect_grain),
-        money_grain=default_grain_num_if_None(money_grain),
+        mana_grain=default_grain_num_if_None(mana_grain),
     )
     x_lessonfilehandler.set_dir_attrs()
     return x_lessonfilehandler

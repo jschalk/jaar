@@ -1,5 +1,5 @@
-from src.ch02_rope.rope import to_rope
-from src.ch03_allot.allot import default_pool_num
+from src.ch02_allot.allot import default_pool_num
+from src.ch04_rope.rope import to_rope
 from src.ch05_reason.reason import caseunit_shop, reasonheir_shop, reasonunit_shop
 from src.ch06_plan.healer import healerunit_shop
 from src.ch06_plan.plan import planunit_shop
@@ -220,7 +220,7 @@ def test_BeliefUnit_cashout_CalculatesRangeAttributes():
     # ESTABLISH
     sue_beliefunit = get_beliefunit_with7amCleanTableReason()
     sue_beliefunit.cashout()
-    house_str = "housemanagement"
+    house_str = "houseadministration"
     house_rope = sue_beliefunit.make_l1_rope(house_str)
     clean_str = "clean table"
     clean_rope = sue_beliefunit.make_rope(house_rope, clean_str)
@@ -261,7 +261,7 @@ def test_BeliefUnit_cashout_CalculatesRangeAttributes():
     )
     print(sue_beliefunit.planroot.factunits[x24hr_rope])
     print(sue_beliefunit.planroot.kids[house_str].kids[clean_str].reasonunits)
-    # sue_beliefunit.planroot.kids["housemanagement"].kids[clean_str].plan_active = None
+    # sue_beliefunit.planroot.kids["houseadministration"].kids[clean_str].plan_active = None
 
     # THEN
     sue_beliefunit.cashout()

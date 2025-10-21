@@ -15,8 +15,8 @@ from src.ch17_idea.idea_db_tool import (
     get_ordered_csv,
 )
 from src.ch17_idea.test._util.ch17_env import (
-    env_dir_setup_cleanup,
     idea_moments_dir as get_example_face_dir,
+    temp_dir_setup,
 )
 from src.ch17_idea.translate_toolbox import (
     _load_labelmap_from_csv,
@@ -149,7 +149,7 @@ def test_create_translate_label_dt_ReturnsObj():
     assert casa_csv == ex_label_csv
 
 
-def test_save_all_csvs_from_translateunit_SavesFiles(env_dir_setup_cleanup):
+def test_save_all_csvs_from_translateunit_SavesFiles(temp_dir_setup):
     # ESTABLISH
     sue_translateunit = get_sue_translateunit()
     map_dir = get_example_face_dir()
@@ -178,7 +178,7 @@ def test_save_all_csvs_from_translateunit_SavesFiles(env_dir_setup_cleanup):
     assert len(get_dir_file_strs(map_dir)) == 4
 
 
-def test_load_namemap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
+def test_load_namemap_from_csv_SetsAttrWhenFileExists(temp_dir_setup):
     # ESTABLISH
     sue_translateunit = get_sue_translateunit()
     map_dir = get_example_face_dir()
@@ -201,7 +201,7 @@ def test_load_namemap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     assert ex_namemap == sue_namemap
 
 
-def test_load_namemap_from_csv_DoesNotChangeWhenFileDoesNotExist(env_dir_setup_cleanup):
+def test_load_namemap_from_csv_DoesNotChangeWhenFileDoesNotExist(temp_dir_setup):
     # ESTABLISH
     map_dir = get_example_face_dir()
     name_filename = "name.csv"
@@ -220,7 +220,7 @@ def test_load_namemap_from_csv_DoesNotChangeWhenFileDoesNotExist(env_dir_setup_c
     assert len(sue_namemap.otx2inx) == 0
 
 
-def test_load_titlemap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
+def test_load_titlemap_from_csv_SetsAttrWhenFileExists(temp_dir_setup):
     # ESTABLISH
     sue_translateunit = get_sue_translateunit()
     map_dir = get_example_face_dir()
@@ -244,7 +244,7 @@ def test_load_titlemap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
 
 
 def test_load_titlemap_from_csv_DoesNotChangeWhenFileDoesNotExist(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     map_dir = get_example_face_dir()
@@ -264,7 +264,7 @@ def test_load_titlemap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     assert len(sue_titlemap.otx2inx) == 0
 
 
-def test_load_labelmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
+def test_load_labelmap_from_csv_SetsAttrWhenFileExists(temp_dir_setup):
     # ESTABLISH
     sue_translateunit = get_sue_translateunit()
     map_dir = get_example_face_dir()
@@ -288,7 +288,7 @@ def test_load_labelmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
 
 
 def test_load_labelmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     map_dir = get_example_face_dir()
@@ -308,7 +308,7 @@ def test_load_labelmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     assert len(sue_labelmap.otx2inx) == 0
 
 
-def test_load_ropemap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
+def test_load_ropemap_from_csv_SetsAttrWhenFileExists(temp_dir_setup):
     # ESTABLISH
     sue_translateunit = get_sue_translateunit()
     map_dir = get_example_face_dir()
@@ -335,7 +335,7 @@ def test_load_ropemap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
 
 
 def test_load_ropemap_from_csv_DoesNotChangeWhenFileDoesNotExist(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     map_dir = get_example_face_dir()
@@ -356,7 +356,7 @@ def test_load_ropemap_from_csv_DoesNotChangeWhenFileDoesNotExist(
 
 
 def test_create_dir_valid_empty_translateunit_Sets_otx_knot_inx_knot(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -387,7 +387,7 @@ def test_create_dir_valid_empty_translateunit_Sets_otx_knot_inx_knot(
 
 
 def test_create_dir_valid_empty_translateunit_Returns_spark_num(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -421,7 +421,7 @@ def test_create_dir_valid_empty_translateunit_Returns_spark_num(
     assert gen_mapunit.inx_knot == colon_inx_knot
 
 
-def test_init_translateunit_from_dir_ReturnsObj(env_dir_setup_cleanup):
+def test_init_translateunit_from_dir_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     sue_translateunit = get_sue_translateunit()
     map_dir = get_example_face_dir()

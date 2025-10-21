@@ -12,13 +12,13 @@ from src.ch10_lesson._ref.ch10_path import (
     create_moment_dir_path,
     create_moment_json_path,
 )
-from src.ch10_lesson.test._util.ch10_env import get_chapter_temp_dir
+from src.ch10_lesson.test._util.ch10_env import get_temp_dir
 from src.ref.keywords import Ch10Keywords as kw
 
 
 def test_create_moment_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
 
     # WHEN
@@ -32,7 +32,7 @@ def test_create_moment_dir_path_ReturnsObj():
 
 def test_create_moment_json_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
 
     # WHEN
@@ -47,7 +47,7 @@ def test_create_moment_json_path_ReturnsObj():
 
 def test_create_moment_beliefs_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
 
     # WHEN
@@ -62,7 +62,7 @@ def test_create_moment_beliefs_dir_path_ReturnsObj():
 
 def test_create_belief_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
 
@@ -79,7 +79,7 @@ def test_create_belief_dir_path_ReturnsObj():
 
 def test_create_atoms_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
 
@@ -97,7 +97,7 @@ def test_create_atoms_dir_path_ReturnsObj():
 
 def test_create_lessons_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
 
@@ -115,7 +115,7 @@ def test_create_lessons_dir_path_ReturnsObj():
 
 def test_create_gut_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     bob_str = "Bob"
 
@@ -136,7 +136,7 @@ def test_create_gut_path_ReturnsObj():
 
 def test_create_job_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     bob_str = "Bob"
 

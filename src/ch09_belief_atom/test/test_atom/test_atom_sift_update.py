@@ -1,4 +1,4 @@
-from src.ch04_voice.group import awardunit_shop
+from src.ch03_voice.group import awardunit_shop
 from src.ch05_reason.reason import factunit_shop, reasonunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.belief_tool import (
@@ -37,7 +37,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_beliefunit():
     sue_fund_grain = 66
     sue_fund_pool = 69
     sue_max_tree_traverse = 72
-    sue_money_grain = 2
+    sue_mana_grain = 2
     sue_tally = 100
     zia_atom = beliefatom_shop(kw.beliefunit, kw.INSERT)
     zia_atom.set_arg(kw.respect_grain, sue_bit)
@@ -46,7 +46,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_beliefunit():
     zia_atom.set_arg(kw.fund_grain, sue_fund_grain)
     zia_atom.set_arg(kw.fund_pool, sue_fund_pool)
     zia_atom.set_arg(kw.max_tree_traverse, sue_max_tree_traverse)
-    zia_atom.set_arg(kw.money_grain, sue_money_grain)
+    zia_atom.set_arg(kw.mana_grain, sue_mana_grain)
     zia_atom.set_arg(kw.tally, sue_tally)
 
     # WHEN
@@ -64,7 +64,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_beliefunit():
         kw.fund_grain: sue_fund_grain,
         kw.fund_pool: sue_fund_pool,
         kw.max_tree_traverse: sue_max_tree_traverse,
-        kw.money_grain: sue_money_grain,
+        kw.mana_grain: sue_mana_grain,
         kw.tally: sue_tally,
     }
 

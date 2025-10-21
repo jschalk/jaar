@@ -1,5 +1,5 @@
 from copy import deepcopy as copy_deepcopy
-from src.ch02_rope.rope import create_rope
+from src.ch04_rope.rope import create_rope
 from src.ch05_reason.reason import factunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch11_bud.cell import (
@@ -31,7 +31,7 @@ def test_CellUnit_Exists():
     assert not x_cellunit.spark_num
     assert not x_cellunit.celldepth
     assert not x_cellunit.bud_belief_name
-    assert not x_cellunit.money_grain
+    assert not x_cellunit.mana_grain
     assert not x_cellunit.quota
     assert not x_cellunit.mandate
     assert not x_cellunit.beliefadjust
@@ -50,7 +50,7 @@ def test_cellunit_shop_ReturnsObj_Scenario0_WithoutParameters():
     assert x_cellunit.ancestors == []
     assert not x_cellunit.spark_num
     assert x_cellunit.celldepth == 0
-    assert x_cellunit.money_grain == 1
+    assert x_cellunit.mana_grain == 1
     assert x_cellunit.quota == CELLNODE_QUOTA_DEFAULT
     assert x_cellunit.mandate == CELLNODE_QUOTA_DEFAULT
     assert x_cellunit.beliefadjust.to_dict() == beliefunit_shop(wx.bob).to_dict()
@@ -67,7 +67,7 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
     bob_sue_spark7 = 7
     bob_sue_bud_belief = wx.yao
     bob_sue_celldepth3 = 3
-    bob_sue_money_grain2 = 2
+    bob_sue_mana_grain2 = 2
     bob_sue_quota300 = 300
     bob_sue_mandate = 444
     bob_sue_belief = beliefunit_shop(wx.sue)
@@ -85,7 +85,7 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
         bob_sue_ancestors,
         bob_sue_spark7,
         bob_sue_celldepth3,
-        bob_sue_money_grain2,
+        bob_sue_mana_grain2,
         bob_sue_quota300,
         bob_sue_belief,
         bob_sue_beliefspark_factunits,
@@ -99,7 +99,7 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
     assert x_cellunit.spark_num == bob_sue_spark7
     assert x_cellunit.celldepth == bob_sue_celldepth3
     assert x_cellunit.bud_belief_name == bob_sue_bud_belief
-    assert x_cellunit.money_grain == bob_sue_money_grain2
+    assert x_cellunit.mana_grain == bob_sue_mana_grain2
     assert x_cellunit.quota == bob_sue_quota300
     assert x_cellunit.mandate == bob_sue_mandate
     assert x_cellunit.beliefadjust == bob_sue_belief
@@ -502,7 +502,7 @@ def test_CellUnit_filter_facts_by_reason_contexts_ReturnsObj_Scenario1():
     sue_spark7 = 7
     sue_bud_belief = wx.yao
     sue_celldepth3 = 3
-    sue_money_grain2 = 2
+    sue_mana_grain2 = 2
     sue_quota300 = 300
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
@@ -515,7 +515,7 @@ def test_CellUnit_filter_facts_by_reason_contexts_ReturnsObj_Scenario1():
         sue_ancestors,
         sue_spark7,
         sue_celldepth3,
-        sue_money_grain2,
+        sue_mana_grain2,
         sue_quota300,
         None,
         sue_beliefspark_factunits,
@@ -560,7 +560,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario0():
     sue_spark7 = 7
     sue_bud_belief = wx.yao
     sue_celldepth3 = 3
-    sue_money_grain2 = 2
+    sue_mana_grain2 = 2
     sue_quota300 = 300
     sue_belief = beliefunit_shop(wx.sue, wx.a23)
     sue_cell = cellunit_shop(
@@ -568,7 +568,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario0():
         sue_ancestors,
         sue_spark7,
         sue_celldepth3,
-        sue_money_grain2,
+        sue_mana_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
     )
@@ -587,7 +587,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario1():
     sue_spark7 = 7
     sue_bud_belief = wx.yao
     sue_celldepth3 = 3
-    sue_money_grain2 = 2
+    sue_mana_grain2 = 2
     sue_quota300 = 300
     casa_clean_fact = clean_factunit()
     clean_facts = {casa_clean_fact.fact_context: casa_clean_fact}
@@ -598,7 +598,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario1():
         sue_ancestors,
         sue_spark7,
         sue_celldepth3,
-        sue_money_grain2,
+        sue_mana_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
         beliefspark_facts=clean_facts,
@@ -621,7 +621,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario2():
     sue_spark7 = 7
     sue_bud_belief = wx.yao
     sue_celldepth3 = 3
-    sue_money_grain2 = 2
+    sue_mana_grain2 = 2
     sue_quota300 = 300
     casa_clean_fact = clean_factunit()
     casa_dirty_fact = dirty_factunit()
@@ -635,7 +635,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario2():
         sue_ancestors,
         sue_spark7,
         sue_celldepth3,
-        sue_money_grain2,
+        sue_mana_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
         beliefspark_facts=clean_facts,
@@ -659,7 +659,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario3():
     sue_spark7 = 7
     sue_bud_belief = wx.yao
     sue_celldepth3 = 3
-    sue_money_grain2 = 2
+    sue_mana_grain2 = 2
     sue_quota300 = 300
     casa_clean_fact = clean_factunit()
     casa_dirty_fact = dirty_factunit()
@@ -676,7 +676,7 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario3():
         sue_ancestors,
         sue_spark7,
         sue_celldepth3,
-        sue_money_grain2,
+        sue_mana_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
         beliefspark_facts=clean_facts,
@@ -700,7 +700,7 @@ def test_CellUnit_set_voice_mandate_ledger_ReturnsObj_Scenario0():
     sue_ancestors = [wx.sue]
     sue_spark7 = 7
     sue_celldepth3 = 3
-    sue_money_grain2 = 2
+    sue_mana_grain2 = 2
     sue_quota300 = 300
     sue_mandate = 444
     sue_belief = beliefunit_shop(wx.sue, wx.a23)
@@ -709,7 +709,7 @@ def test_CellUnit_set_voice_mandate_ledger_ReturnsObj_Scenario0():
         sue_ancestors,
         sue_spark7,
         sue_celldepth3,
-        sue_money_grain2,
+        sue_mana_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
         mandate=sue_mandate,
@@ -732,7 +732,7 @@ def test_CellUnit_set_voice_mandate_ledger_ReturnsObj_Scenario1():
     sue_ancestors = [wx.sue]
     sue_spark7 = 7
     sue_celldepth3 = 3
-    sue_money_grain2 = 2
+    sue_mana_grain2 = 2
     sue_quota300 = 300
     sue_mandate = 444
     sue_belief = beliefunit_shop(wx.sue, wx.a23)
@@ -743,7 +743,7 @@ def test_CellUnit_set_voice_mandate_ledger_ReturnsObj_Scenario1():
         sue_ancestors,
         sue_spark7,
         sue_celldepth3,
-        sue_money_grain2,
+        sue_mana_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
         mandate=sue_mandate,
@@ -767,7 +767,7 @@ def test_CellUnit_calc_voice_mandate_ledger_ReturnsObj_Scenario0():
     sue_ancestors = [wx.sue]
     sue_spark7 = 7
     sue_celldepth3 = 3
-    sue_money_grain2 = 2
+    sue_mana_grain2 = 2
     sue_quota300 = 300
     sue_mandate = 444
     sue_belief = beliefunit_shop(wx.sue, wx.a23)
@@ -791,7 +791,7 @@ def test_CellUnit_calc_voice_mandate_ledger_ReturnsObj_Scenario0():
         sue_ancestors,
         sue_spark7,
         sue_celldepth3,
-        sue_money_grain2,
+        sue_mana_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
         beliefspark_facts=sue_beliefspark_factunits,
@@ -827,7 +827,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
     sue_ancestors = [wx.sue]
     sue_spark7 = 7
     sue_celldepth3 = 3
-    sue_money_grain2 = 2
+    sue_mana_grain2 = 2
     sue_quota300 = 300
     sue_mandate = 444
     sue_belief = beliefunit_shop(wx.sue, wx.a23)
@@ -839,7 +839,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
         sue_ancestors,
         sue_spark7,
         sue_celldepth3,
-        sue_money_grain2,
+        sue_mana_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
         mandate=sue_mandate,
@@ -855,7 +855,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
     assert sue_sue_cell.ancestors == [wx.sue, wx.sue]
     assert sue_sue_cell.spark_num == sue_spark7
     assert sue_sue_cell.celldepth == sue_celldepth3 - 1
-    assert sue_sue_cell.money_grain == sue_money_grain2
+    assert sue_sue_cell.mana_grain == sue_mana_grain2
     assert sue_sue_cell.mandate == 133
     # assert not sue_sue_cell.beliefadjust
     assert sue_sue_cell.beliefspark_facts == {}
@@ -867,7 +867,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
     assert sue_yao_cell.ancestors == [wx.sue, wx.yao]
     assert sue_yao_cell.spark_num == sue_spark7
     assert sue_yao_cell.celldepth == sue_celldepth3 - 1
-    assert sue_yao_cell.money_grain == sue_money_grain2
+    assert sue_yao_cell.mana_grain == sue_mana_grain2
     assert sue_yao_cell.mandate == 311
     # assert sue_yao_cell.beliefadjust
     assert sue_yao_cell.beliefspark_facts == {}
@@ -881,7 +881,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario1_BudDepth0():
     sue_ancestors = [wx.sue]
     sue_spark7 = 7
     sue_celldepth = 0
-    sue_money_grain2 = 2
+    sue_mana_grain2 = 2
     sue_quota300 = 300
     sue_belief = beliefunit_shop(wx.sue, wx.a23)
     sue_belief.add_voiceunit(wx.sue, 3, 5)
@@ -892,7 +892,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario1_BudDepth0():
         sue_ancestors,
         sue_spark7,
         sue_celldepth,
-        sue_money_grain2,
+        sue_mana_grain2,
         sue_quota300,
         beliefadjust=sue_belief,
     )
@@ -947,7 +947,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     sue_ancestors = [wx.sue]
     sue_spark7 = 7
     sue_celldepth3 = 3
-    sue_money_grain2 = 2
+    sue_mana_grain2 = 2
     sue_mandate = 444
     sue_belief = beliefunit_shop(wx.sue, wx.a23)
     sue_belief.add_voiceunit(wx.sue, 3, 5)
@@ -970,7 +970,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
         sue_ancestors,
         sue_spark7,
         sue_celldepth3,
-        sue_money_grain2,
+        sue_mana_grain2,
         beliefadjust=sue_belief,
         beliefspark_facts=sue_beliefspark_factunits,
         found_facts=sue_found_factunits,

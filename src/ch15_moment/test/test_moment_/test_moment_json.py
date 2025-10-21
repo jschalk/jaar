@@ -1,6 +1,6 @@
 from src.ch01_py.file_toolbox import create_path, save_json
-from src.ch02_rope.rope import default_knot_if_None
-from src.ch03_allot.allot import default_grain_num_if_None
+from src.ch02_allot.allot import default_grain_num_if_None
+from src.ch04_rope.rope import default_knot_if_None
 from src.ch08_epoch.epoch_main import get_default_epoch_config_dict
 from src.ch10_lesson._ref.ch10_path import create_moment_json_path
 from src.ch15_moment.moment_main import (
@@ -8,16 +8,13 @@ from src.ch15_moment.moment_main import (
     get_momentunit_from_dict,
     momentunit_shop,
 )
-from src.ch15_moment.test._util.ch15_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch15_moment.test._util.ch15_env import get_temp_dir, temp_dir_setup
 from src.ref.keywords import Ch15Keywords as kw
 
 
 def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     # ESTABLISH
-    moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp1")
+    moment_mstr_dir = create_path(get_temp_dir(), "temp1")
     a45_str = "amy45"
     a45_offi_times = {17, 37}
     amy_moment = momentunit_shop(a45_str, moment_mstr_dir, offi_times=a45_offi_times)
@@ -56,7 +53,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     assert x_dict.get(kw.knot) == default_knot_if_None()
     assert x_dict.get(kw.fund_grain) == default_grain_num_if_None()
     assert x_dict.get(kw.respect_grain) == default_grain_num_if_None()
-    assert x_dict.get(kw.money_grain) == default_grain_num_if_None()
+    assert x_dict.get(kw.mana_grain) == default_grain_num_if_None()
     assert x_dict.get(kw.beliefbudhistorys) == amy_moment._get_beliefbudhistorys_dict()
     assert x_dict.get(kw.paybook) == amy_moment.paybook.to_dict()
     assert set(x_dict.keys()) == {
@@ -68,7 +65,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
         kw.knot,
         kw.fund_grain,
         kw.respect_grain,
-        kw.money_grain,
+        kw.mana_grain,
         kw.paybook,
     }
 
@@ -76,7 +73,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
 def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_temp_dir())
 
     # WHEN
     x_dict = amy_moment.to_dict(include_paybook=False)
@@ -92,14 +89,14 @@ def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
         kw.knot,
         kw.fund_grain,
         kw.respect_grain,
-        kw.money_grain,
+        kw.mana_grain,
     }
 
 
 def test_get_momentunit_from_dict_ReturnsObj_Scenario0_WithParameters():
     # ESTABLISH
     amy45_str = "amy45"
-    moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp1")
+    moment_mstr_dir = create_path(get_temp_dir(), "temp1")
     a45_offi_times = {17, 37}
     amy_moment = momentunit_shop(amy45_str, moment_mstr_dir, offi_times=a45_offi_times)
     sue_epoch_label = "sue casa"
@@ -107,7 +104,7 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario0_WithParameters():
     sue_knot = "/"
     sue_fund_grain = 0.3
     sue_respect_grain = 2
-    sue_money_grain = 3
+    sue_mana_grain = 3
     bob_str = "Bob"
     bob_x0_bud_time = 702
     bob_x0_quota = 33
@@ -124,7 +121,7 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario0_WithParameters():
     amy_moment.knot = sue_knot
     amy_moment.fund_grain = sue_fund_grain
     amy_moment.respect_grain = sue_respect_grain
-    amy_moment.money_grain = sue_money_grain
+    amy_moment.mana_grain = sue_mana_grain
     amy_moment.add_paypurchase(
         belief_name=bob_str,
         voice_name=sue_str,
@@ -144,7 +141,7 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario0_WithParameters():
     assert x_moment.knot == sue_knot
     assert x_moment.fund_grain == sue_fund_grain
     assert x_moment.respect_grain == sue_respect_grain
-    assert x_moment.money_grain == sue_money_grain
+    assert x_moment.mana_grain == sue_mana_grain
     assert x_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert x_moment.paybook == amy_moment.paybook
     assert x_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
@@ -156,13 +153,13 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario0_WithParameters():
 def test_get_momentunit_from_dict_ReturnsObj_Scenario1_WithOutParameters():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_temp_dir())
     x_dict = amy_moment.to_dict()
     x_dict[kw.epoch] = {}
     x_dict.pop(kw.knot)
     x_dict.pop(kw.fund_grain)
     x_dict.pop(kw.respect_grain)
-    x_dict.pop(kw.money_grain)
+    x_dict.pop(kw.mana_grain)
 
     # WHEN
     generated_moment = get_momentunit_from_dict(x_dict)
@@ -176,7 +173,7 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario1_WithOutParameters():
     assert generated_moment.knot == default_knot_if_None()
     assert generated_moment.fund_grain == default_grain_num_if_None()
     assert generated_moment.respect_grain == default_grain_num_if_None()
-    assert generated_moment.money_grain == 1
+    assert generated_moment.mana_grain == 1
     assert generated_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert generated_moment.paybook == amy_moment.paybook
     assert generated_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
@@ -186,7 +183,7 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario1_WithOutParameters():
 def test_get_momentunit_from_dict_ReturnsObj_Scenario2():
     # ESTABLISH
     amy45_str = "amy45"
-    temp_moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp")
+    temp_moment_mstr_dir = create_path(get_temp_dir(), "temp")
     amy_moment = momentunit_shop(amy45_str, temp_moment_mstr_dir)
     sue_epoch_label = "sue casa"
     amy_moment.epoch.epoch_label = sue_epoch_label
@@ -194,7 +191,7 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario2():
     sue_knot = "/"
     sue_fund_grain = 0.3
     sue_respect_grain = 2
-    sue_money_grain = 3
+    sue_mana_grain = 3
     bob_str = "Bob"
     bob_x0_bud_time = 702
     bob_x0_quota = 33
@@ -209,7 +206,7 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario2():
     amy_moment.knot = sue_knot
     amy_moment.fund_grain = sue_fund_grain
     amy_moment.respect_grain = sue_respect_grain
-    amy_moment.money_grain = sue_money_grain
+    amy_moment.mana_grain = sue_mana_grain
     amy_dict = amy_moment.to_dict()
 
     # WHEN
@@ -222,7 +219,7 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario2():
     assert x_moment.knot == sue_knot
     assert x_moment.fund_grain == sue_fund_grain
     assert x_moment.respect_grain == sue_respect_grain
-    assert x_moment.money_grain == sue_money_grain
+    assert x_moment.mana_grain == sue_mana_grain
     assert x_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert x_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
     assert x_moment != amy_moment
@@ -230,15 +227,15 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario2():
     assert x_moment == amy_moment
 
 
-def test_get_from_file_ReturnsMomentUnitWith_moment_mstr_dir(env_dir_setup_cleanup):
+def test_get_from_file_ReturnsMomentUnitWith_moment_mstr_dir(temp_dir_setup):
     # ESTABLISH
     amy45_str = "amy45"
-    amy45_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy45_moment = momentunit_shop(amy45_str, get_temp_dir())
     sue_epoch_label = "sue casa"
     amy45_moment.epoch.epoch_label = sue_epoch_label
     sue_respect_grain = 2
     amy45_moment.respect_grain = sue_respect_grain
-    x_moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_bob")
+    x_moment_mstr_dir = create_path(get_temp_dir(), "Fay_bob")
     amy45_json_path = create_moment_json_path(x_moment_mstr_dir, amy45_str)
     save_json(amy45_json_path, None, amy45_moment.to_dict())
     assert amy45_moment.moment_mstr_dir != x_moment_mstr_dir

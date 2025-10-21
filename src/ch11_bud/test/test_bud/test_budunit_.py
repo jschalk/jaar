@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch03_allot.allot import default_pool_num
+from src.ch02_allot.allot import default_pool_num
 from src.ch11_bud.bud_main import (
     DEFAULT_CELLDEPTH,
     BudUnit,

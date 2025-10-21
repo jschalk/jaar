@@ -10,16 +10,13 @@ from src.ch15_moment._ref.ch15_path import (
 )
 from src.ch15_moment.moment_cell import create_bud_mandate_ledgers
 from src.ch15_moment.moment_main import get_momentunit_from_dict, momentunit_shop
-from src.ch15_moment.test._util.ch15_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch15_moment.test._util.ch15_env import get_temp_dir, temp_dir_setup
 
 
-def test_create_bud_mandate_ledgers_Scenaro0_BudEmpty(env_dir_setup_cleanup):
+def test_create_bud_mandate_ledgers_Scenaro0_BudEmpty(temp_dir_setup):
     # ESTABLISH
     a23_str = "amy23"
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     amy23_moment = momentunit_shop(a23_str, mstr_dir)
     a23_json_path = create_moment_json_path(mstr_dir, a23_str)
     save_json(a23_json_path, None, amy23_moment.to_dict())
@@ -35,10 +32,10 @@ def test_create_bud_mandate_ledgers_Scenaro0_BudEmpty(env_dir_setup_cleanup):
     assert os_path_exists(bob9_bud_mandate_path) is False
 
 
-def test_create_bud_mandate_ledgers_Scenaro1_BudExists(env_dir_setup_cleanup):
+def test_create_bud_mandate_ledgers_Scenaro1_BudExists(temp_dir_setup):
     # ESTABLISH
     a23_str = "amy23"
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     amy23_moment = momentunit_shop(a23_str, mstr_dir)
     bob_str = "Bob"
     tp37 = 37
@@ -72,11 +69,11 @@ def test_create_bud_mandate_ledgers_Scenaro1_BudExists(env_dir_setup_cleanup):
 
 
 def test_create_bud_mandate_ledgers_Scenaro2_Mutliple_cell_voice_mandate_ledgers(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     a23_str = "amy23"
-    mstr_dir = get_chapter_temp_dir()
+    mstr_dir = get_temp_dir()
     amy23_moment = momentunit_shop(a23_str, mstr_dir)
     bob_str = "Bob"
     yao_str = "Yao"

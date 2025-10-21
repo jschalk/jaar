@@ -1,13 +1,13 @@
 from pytest import raises as pytest_raises
 from src.ch11_bud.bud_main import beliefbudhistory_shop
 from src.ch15_moment.moment_main import momentunit_shop
-from src.ch15_moment.test._util.ch15_env import get_chapter_temp_dir
+from src.ch15_moment.test._util.ch15_env import get_temp_dir
 
 
 def test_MomentUnit_set_beliefbudhistory_SetsAttr():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_temp_dir())
     assert amy_moment.beliefbudhistorys == {}
 
     # WHEN
@@ -23,7 +23,7 @@ def test_MomentUnit_set_beliefbudhistory_SetsAttr():
 def test_MomentUnit_beliefbudhistory_exists_ReturnsObj():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_temp_dir())
     sue_str = "Sue"
     assert amy_moment.beliefbudhistory_exists(sue_str) is False
 
@@ -38,7 +38,7 @@ def test_MomentUnit_beliefbudhistory_exists_ReturnsObj():
 def test_MomentUnit_get_beliefbudhistory_ReturnsObj():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_temp_dir())
     sue_str = "Sue"
     sue_beliefbudhistory = beliefbudhistory_shop(sue_str)
     amy_moment.set_beliefbudhistory(sue_beliefbudhistory)
@@ -55,7 +55,7 @@ def test_MomentUnit_get_beliefbudhistory_ReturnsObj():
 def test_MomentUnit_del_beliefbudhistory_SetsAttr():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_temp_dir())
     sue_str = "Sue"
     sue_beliefbudhistory = beliefbudhistory_shop(sue_str)
     amy_moment.set_beliefbudhistory(sue_beliefbudhistory)
@@ -71,7 +71,7 @@ def test_MomentUnit_del_beliefbudhistory_SetsAttr():
 def test_MomentUnit_add_budunit_SetsAttr():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_temp_dir())
     assert amy_moment.beliefbudhistorys == {}
 
     # WHEN
@@ -101,7 +101,7 @@ def test_MomentUnit_add_budunit_SetsAttr():
 def test_MomentUnit_get_budunit_ReturnsObj_Scenario0_BrokerDoesNotExist():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_temp_dir())
     sue_str = "Sue"
     sue_x7_bud_time = 7
 
@@ -116,7 +116,7 @@ def test_MomentUnit_get_budunit_ReturnsObj_Scenario0_BrokerDoesNotExist():
 def test_MomentUnit_get_budunit_ReturnsObj_Scenario1_BudDoesNotExist():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_temp_dir())
     sue_str = "Sue"
     sue_x4_bud_time = 4
     sue_x4_quota = 66
@@ -134,7 +134,7 @@ def test_MomentUnit_get_budunit_ReturnsObj_Scenario1_BudDoesNotExist():
 def test_MomentUnit_get_budunit_ReturnsObj_Scenario2_BudExists():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_temp_dir())
     bob_str = "Bob"
     bob_x0_bud_time = 702
     bob_x0_quota = 33
@@ -159,7 +159,7 @@ def test_MomentUnit_get_budunit_ReturnsObj_Scenario2_BudExists():
 def test_MomentUnit_get_beliefbudhistorys_bud_times_ReturnsObj():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_temp_dir())
     bob_str = "Bob"
     bob_x0_bud_time = 702
     bob_x0_quota = 33
@@ -183,7 +183,7 @@ def test_MomentUnit_get_beliefbudhistorys_bud_times_ReturnsObj():
 def test_MomentUnit_add_budunit_RaisesErrorWhen_bud_time_IsLessThan_offi_time_max():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_temp_dir())
     amy_offi_time_max = 606
     amy_moment.offi_time_max = amy_offi_time_max
     bob_str = "Bob"
@@ -208,7 +208,7 @@ def test_MomentUnit_add_budunit_RaisesErrorWhen_bud_time_IsLessThan_offi_time_ma
 def test_MomentUnit_add_budunit_DoesNotRaiseError_allow_prev_to_offi_time_max_entry_IsTrue():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_temp_dir())
     amy_offi_time_max = 606
     amy_moment.offi_time_max = amy_offi_time_max
     bob_str = "Bob"
@@ -247,7 +247,7 @@ def test_MomentUnit_add_budunit_DoesNotRaiseError_allow_prev_to_offi_time_max_en
 def test_MomentUnit_add_budunit_SetsAttr_celldepth():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_temp_dir())
     sue_str = "Sue"
     sue_x4_bud_time = 4
     sue_x4_quota = 55

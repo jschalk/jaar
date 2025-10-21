@@ -1,7 +1,7 @@
 from enum import Enum
 from src.ch01_py.file_toolbox import open_json
-from src.ch02_rope.rope import RopeTerm
-from src.ch04_voice.labor import laborunit_shop
+from src.ch03_voice.labor import laborunit_shop
+from src.ch04_rope.rope import RopeTerm
 from src.ch05_reason.reason import factunit_shop, reasonunit_shop
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import (
@@ -191,7 +191,7 @@ def get_beliefunit_with7amCleanTableReason() -> BeliefUnit:
     sue_belief.set_plan(n2_plan, am_rope)  # plan_am
     sue_belief.set_plan(n3_plan, am_rope)  # plan_am
 
-    house_str = "housemanagement"
+    house_str = "houseadministration"
     house_rope = sue_belief.make_l1_rope(house_str)
     clean_str = "clean table"
     clean_rope = sue_belief.make_rope(house_rope, clean_str)

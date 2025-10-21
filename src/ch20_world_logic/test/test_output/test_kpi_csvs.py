@@ -3,15 +3,15 @@ from pandas import DataFrame
 from src.ch01_py.file_toolbox import create_path
 from src.ch17_idea.idea_db_tool import upsert_sheet
 from src.ch20_world_logic.test._util.ch20_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as worlds_dir,
+    get_temp_dir as worlds_dir,
+    temp_dir_setup,
 )
 from src.ch20_world_logic.world import worldunit_shop
 from src.ref.keywords import Ch20Keywords as kw
 
 
 def test_WorldUnit_create_kpi_csvs_Senario0_EmptyWorld_CreatesFile(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     fay_str = "Fay"
@@ -28,7 +28,7 @@ def test_WorldUnit_create_kpi_csvs_Senario0_EmptyWorld_CreatesFile(
     assert os_path_exists(kpi001_csv_path)
 
 
-def test_WorldUnit_create_kpi_csvs_Senario1_Add_CreatesFile(env_dir_setup_cleanup):
+def test_WorldUnit_create_kpi_csvs_Senario1_Add_CreatesFile(temp_dir_setup):
     # ESTABLISH
     fay_str = "Fay"
     output_dir = create_path(worlds_dir(), "output")

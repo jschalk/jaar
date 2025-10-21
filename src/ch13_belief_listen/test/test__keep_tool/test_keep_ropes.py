@@ -8,16 +8,13 @@ from src.ch10_lesson.lesson_filehandler import (
     open_gut_file,
     save_gut_file,
 )
-from src.ch11_bud.test._util.ch11_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir as env_dir,
-)
+from src.ch11_bud.test._util.ch11_env import get_temp_dir as env_dir, temp_dir_setup
 from src.ch13_belief_listen._ref.ch13_path import create_keep_duty_path
 from src.ch13_belief_listen.keep_tool import get_keep_ropes, save_all_gut_dutys
 
 
 def test_get_keep_ropes_RaisesErrorWhen_keeps_justified_IsFalse(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -46,7 +43,7 @@ def test_get_keep_ropes_RaisesErrorWhen_keeps_justified_IsFalse(
 
 
 def test_get_keep_ropes_RaisesErrorWhen_keeps_buildable_IsFalse(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     sue_str = "Sue"
@@ -71,7 +68,7 @@ def test_get_keep_ropes_RaisesErrorWhen_keeps_buildable_IsFalse(
     assert str(excinfo.value) == exception_str
 
 
-def test_get_keep_ropes_ReturnsObj(env_dir_setup_cleanup, graphics_bool):
+def test_get_keep_ropes_ReturnsObj(temp_dir_setup, graphics_bool):
     # ESTABLISH
     sue_str = "Sue"
     a23_str = "amy23"
@@ -103,7 +100,7 @@ def test_get_keep_ropes_ReturnsObj(env_dir_setup_cleanup, graphics_bool):
     assert elpaso_rope in sue_keep_ropes
 
 
-def test_save_all_gut_dutys_Setsdutys(env_dir_setup_cleanup, graphics_bool):
+def test_save_all_gut_dutys_Setsdutys(temp_dir_setup, graphics_bool):
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_str = "Sue"

@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists, isdir as os_path_isdir
 from src.ch01_py.file_toolbox import create_path, get_json_filename, set_dir
-from src.ch02_rope.rope import default_knot_if_None
-from src.ch03_allot.allot import default_grain_num_if_None
+from src.ch02_allot.allot import default_grain_num_if_None
+from src.ch04_rope.rope import default_knot_if_None
 from src.ch06_plan.healer import healerunit_shop
 from src.ch06_plan.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
@@ -20,10 +20,7 @@ from src.ch15_moment.moment_main import (
     get_default_job_listen_count,
     momentunit_shop,
 )
-from src.ch15_moment.test._util.ch15_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch15_moment.test._util.ch15_env import get_temp_dir, temp_dir_setup
 from src.ref.keywords import Ch15Keywords as kw
 
 
@@ -44,7 +41,7 @@ def test_MomentUnit_Exists():
     assert not amy_moment.knot
     assert not amy_moment.fund_grain
     assert not amy_moment.respect_grain
-    assert not amy_moment.money_grain
+    assert not amy_moment.mana_grain
     assert not amy_moment.job_listen_rotations
     assert not amy_moment.moment_mstr_dir
     # Calculated fields
@@ -60,7 +57,7 @@ def test_MomentUnit_Exists():
         kw.knot,
         kw.fund_grain,
         kw.respect_grain,
-        kw.money_grain,
+        kw.mana_grain,
         kw.job_listen_rotations,
         "_moment_dir",
         "moment_mstr_dir",
@@ -77,7 +74,7 @@ def test_momentunit_shop_ReturnsMomentUnit():
     a23_str = "amy23"
 
     # WHEN
-    a23_moment = momentunit_shop(a23_str, get_chapter_temp_dir())
+    a23_moment = momentunit_shop(a23_str, get_temp_dir())
 
     # THEN
     assert a23_moment.moment_label == a23_str
@@ -88,8 +85,8 @@ def test_momentunit_shop_ReturnsMomentUnit():
     assert a23_moment.knot == default_knot_if_None()
     assert a23_moment.fund_grain == default_grain_num_if_None()
     assert a23_moment.respect_grain == default_grain_num_if_None()
-    assert a23_moment.money_grain == default_grain_num_if_None()
-    assert a23_moment.moment_mstr_dir == get_chapter_temp_dir()
+    assert a23_moment.mana_grain == default_grain_num_if_None()
+    assert a23_moment.moment_mstr_dir == get_temp_dir()
     assert a23_moment.job_listen_rotations == get_default_job_listen_count()
     # Calculated fields
     assert a23_moment._beliefs_dir != None
@@ -97,39 +94,39 @@ def test_momentunit_shop_ReturnsMomentUnit():
     assert a23_moment.all_tranbook == tranbook_shop(a23_str)
 
 
-def test_momentunit_shop_ReturnsMomentUnitWith_moments_dir(env_dir_setup_cleanup):
+def test_momentunit_shop_ReturnsMomentUnitWith_moments_dir(temp_dir_setup):
     # ESTABLISH
     a23_str = "amy23"
 
     # WHEN
-    a23_moment = momentunit_shop(a23_str, moment_mstr_dir=get_chapter_temp_dir())
+    a23_moment = momentunit_shop(a23_str, moment_mstr_dir=get_temp_dir())
 
     # THEN
     assert a23_moment.moment_label == a23_str
-    assert a23_moment.moment_mstr_dir == get_chapter_temp_dir()
+    assert a23_moment.moment_mstr_dir == get_temp_dir()
     assert a23_moment._beliefs_dir is not None
     assert a23_moment._lessons_dir is not None
 
 
-def test_momentunit_shop_ReturnsMomentUnitWith_knot(env_dir_setup_cleanup):
+def test_momentunit_shop_ReturnsMomentUnitWith_knot(temp_dir_setup):
     # ESTABLISH
     a23_str = "amy23"
     slash_str = "/"
     x_fund_grain = 7.0
     x_respect_grain = 9
-    x_money_grain = 3
+    x_mana_grain = 3
     a45_offi_times = {12, 15}
     x_job_listen_rotations = 888
 
     # WHEN
     a23_moment = momentunit_shop(
         moment_label=a23_str,
-        moment_mstr_dir=get_chapter_temp_dir(),
+        moment_mstr_dir=get_temp_dir(),
         offi_times=a45_offi_times,
         knot=slash_str,
         fund_grain=x_fund_grain,
         respect_grain=x_respect_grain,
-        money_grain=x_money_grain,
+        mana_grain=x_mana_grain,
         job_listen_rotations=x_job_listen_rotations,
     )
 
@@ -137,16 +134,16 @@ def test_momentunit_shop_ReturnsMomentUnitWith_knot(env_dir_setup_cleanup):
     assert a23_moment.knot == slash_str
     assert a23_moment.fund_grain == x_fund_grain
     assert a23_moment.respect_grain == x_respect_grain
-    assert a23_moment.money_grain == x_money_grain
+    assert a23_moment.mana_grain == x_mana_grain
     assert a23_moment.offi_times == a45_offi_times
     assert a23_moment.job_listen_rotations == x_job_listen_rotations
 
 
-def test_MomentUnit_set_moment_dirs_SetsDirsAndFiles(env_dir_setup_cleanup):
+def test_MomentUnit_set_moment_dirs_SetsDirsAndFiles(temp_dir_setup):
     # ESTABLISH
     a23_str = "amy23"
-    amy_moment = MomentUnit(a23_str, get_chapter_temp_dir())
-    x_moments_dir = create_path(get_chapter_temp_dir(), "moments")
+    amy_moment = MomentUnit(a23_str, get_temp_dir())
+    x_moments_dir = create_path(get_temp_dir(), "moments")
     x_moment_dir = create_path(x_moments_dir, a23_str)
     x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     x_lessons_dir = create_path(x_moment_dir, "lessons")
@@ -172,37 +169,37 @@ def test_MomentUnit_set_moment_dirs_SetsDirsAndFiles(env_dir_setup_cleanup):
     assert os_path_exists(x_lessons_dir)
 
 
-def test_momentunit_shop_SetsmomentsDirs(env_dir_setup_cleanup):
+def test_momentunit_shop_SetsmomentsDirs(temp_dir_setup):
     # ESTABLISH
     a23_str = "amy23"
 
     # WHEN
-    a23_moment = momentunit_shop(a23_str, get_chapter_temp_dir())
+    a23_moment = momentunit_shop(a23_str, get_temp_dir())
 
     # THEN
     assert a23_moment.moment_label == a23_str
-    x_moments_dir = create_path(get_chapter_temp_dir(), "moments")
+    x_moments_dir = create_path(get_temp_dir(), "moments")
     assert a23_moment._moment_dir == create_path(x_moments_dir, a23_str)
     assert a23_moment._beliefs_dir == create_path(a23_moment._moment_dir, "beliefs")
 
 
 def test_MomentUnit_create_empty_belief_from_moment_ReturnsObj_Scenario0(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     slash_str = "/"
     x_fund_grain = 4
     x_respect_grain = 5
-    x_money_grain = 6
+    x_mana_grain = 6
     a23_moment = momentunit_shop(
         a23_str,
         moment_mstr_dir,
         knot=slash_str,
         fund_grain=x_fund_grain,
         respect_grain=x_respect_grain,
-        money_grain=x_money_grain,
+        mana_grain=x_mana_grain,
     )
     sue_str = "Sue"
 
@@ -213,14 +210,14 @@ def test_MomentUnit_create_empty_belief_from_moment_ReturnsObj_Scenario0(
     assert generated_belief.knot == slash_str
     assert generated_belief.fund_grain == x_fund_grain
     assert generated_belief.respect_grain == x_respect_grain
-    assert generated_belief.money_grain == x_money_grain
+    assert generated_belief.mana_grain == x_mana_grain
 
 
 def test_MomentUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_belief_dir_ExistsNoFile(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     sue_str = "Sue"
@@ -239,22 +236,22 @@ def test_MomentUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_belief_dir
 
 
 def test_MomentUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario2_belief_dir_ExistsNoFile_Create_gut_AndConfirmMomentAttributesPassed(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     slash_str = "/"
     x_fund_grain = 4
     x_respect_grain = 5
-    x_money_grain = 6
+    x_mana_grain = 6
     a23_moment = momentunit_shop(
         a23_str,
         moment_mstr_dir,
         knot=slash_str,
         fund_grain=x_fund_grain,
         respect_grain=x_respect_grain,
-        money_grain=x_money_grain,
+        mana_grain=x_mana_grain,
     )
     sue_str = "Sue"
     sue_belief_dir = create_belief_dir_path(moment_mstr_dir, a23_str, sue_str)
@@ -272,14 +269,14 @@ def test_MomentUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario2_belief_dir
     assert generated_gut.knot == slash_str
     assert generated_gut.fund_grain == x_fund_grain
     assert generated_gut.respect_grain == x_respect_grain
-    assert generated_gut.money_grain == x_money_grain
+    assert generated_gut.mana_grain == x_mana_grain
 
 
 def test_MomentUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario3_FileExistsIsNotReplaced(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     sue_str = "Sue"
@@ -301,10 +298,10 @@ def test_MomentUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario3_FileExists
 
 
 def test_MomentUnit_create_init_job_from_guts_Scenario0_CreatesFile(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     slash_str = "/"
     x_fund_grain = 4
@@ -328,10 +325,10 @@ def test_MomentUnit_create_init_job_from_guts_Scenario0_CreatesFile(
 
 
 def test_MomentUnit_create_init_job_from_guts_Scenario1_ReplacesFile(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     slash_str = "/"
     x_fund_grain = 4
@@ -358,10 +355,10 @@ def test_MomentUnit_create_init_job_from_guts_Scenario1_ReplacesFile(
 
 
 def test_MomentUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Voices(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     slash_str = "/"
     x_fund_grain = 4
@@ -389,10 +386,10 @@ def test_MomentUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Voices(
 
 
 def test_MomentUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     slash_str = "/"
     x_fund_grain = 4
@@ -433,11 +430,11 @@ def test_MomentUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
 
 
 def test_MomentUnit__set_all_healer_dutys_Setsdutys(
-    env_dir_setup_cleanup,
+    temp_dir_setup,
 ):
     # ESTABLISH
     a23_str = "amy23"
-    x_moment_mstr_dir = get_chapter_temp_dir()
+    x_moment_mstr_dir = get_temp_dir()
     a23_moment = momentunit_shop(a23_str, x_moment_mstr_dir)
     sue_str = "Sue"
     yao_str = "Yao"
@@ -510,7 +507,7 @@ def test_MomentUnit__set_all_healer_dutys_Setsdutys(
 
 # def test_MomentUnit_set_offi_time_Scenario0_SetsAttr():
 #     # ESTABLISH
-#     moment_mstr_dir = get_chapter_temp_dir()
+#     moment_mstr_dir = get_temp_dir()
 #     time56 = 56
 #     a23_moment = momentunit_shop("amy23", moment_mstr_dir, offi_time_max=time56)
 #     assert a23_moment.offi_time == 0
@@ -527,7 +524,7 @@ def test_MomentUnit__set_all_healer_dutys_Setsdutys(
 
 # def test_MomentUnit_set_offi_time_Scenario1_SetsAttr():
 #     # ESTABLISH
-#     a23_moment = momentunit_shop("amy23", get_chapter_temp_dir())
+#     a23_moment = momentunit_shop("amy23", get_temp_dir())
 #     assert a23_moment.offi_time == 0
 #     assert a23_moment.offi_time_max == 0
 
@@ -542,7 +539,7 @@ def test_MomentUnit__set_all_healer_dutys_Setsdutys(
 
 def test_MomentUnit_set_offi_time_max_Scenario0_SetsAttr():
     # ESTABLISH
-    moment_mstr_dir = get_chapter_temp_dir()
+    moment_mstr_dir = get_temp_dir()
     time7 = 7
     a23_moment = momentunit_shop("amy23", moment_mstr_dir)
     a23_moment.offi_time_max = time7
@@ -560,7 +557,7 @@ def test_MomentUnit_set_offi_time_max_Scenario0_SetsAttr():
 
 # def test_MomentUnit_set_offi_time_max_Scenario1_SetsAttr():
 #     # ESTABLISH
-#     moment_mstr_dir = get_chapter_temp_dir()
+#     moment_mstr_dir = get_temp_dir()
 #     time21 = 21
 #     time77 = 77
 #     a23_moment = momentunit_shop(
@@ -579,7 +576,7 @@ def test_MomentUnit_set_offi_time_max_Scenario0_SetsAttr():
 
 # def test_MomentUnit_set_offi_time_Scenario0_SetsAttr():
 #     # ESTABLISH
-#     a23_moment = momentunit_shop("amy23", get_chapter_temp_dir())
+#     a23_moment = momentunit_shop("amy23", get_temp_dir())
 #     assert a23_moment.offi_time == 0
 #     assert a23_moment.offi_time_max == 0
 
