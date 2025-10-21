@@ -11,21 +11,6 @@ from src.ch12_belief_viewer.gcalendar import (
 from src.ch12_belief_viewer.test._util.ch12_examples import ExampleValuesRef as wx
 from src.ref.keywords import Ch12Keywords as kw
 
-# @pytest.mark.parametrize(
-#     "value,expected",
-#     [
-#         (0.1234, "12.34%"),
-#         (0.0000123, "0.0012%"),
-#         (0.00000000045, "4.50e-08%"),
-#         (1.0, "100%"),
-#         (-0.0567, "-5.67%"),
-#         (None, "0%"),
-#     ],
-# )
-# def test_gcal_readble_percent_outputs_expected_strings(value, expected):
-#     """Ensure known values return the correct formatted percent strings."""
-#     assert gcal_readble_percent(value) == expected
-
 
 def test_gcal_readble_percent_ReturnsObj():
     # ESTABLISH / WHEN / THEN

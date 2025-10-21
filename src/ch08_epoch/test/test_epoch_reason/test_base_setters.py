@@ -3,6 +3,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_plan_reason_caseunit_exists,
     belief_plan_reason_caseunit_get_obj,
     belief_plan_reasonunit_exists,
+    belief_plan_reasonunit_get_obj,
     get_belief_root_facts_dict,
 )
 from src.ch08_epoch.epoch_main import add_epoch_planunit
@@ -10,6 +11,7 @@ from src.ch08_epoch.epoch_reason_builder import (
     del_epoch_reason,
     set_epoch_base_case_dayly,
     set_epoch_base_case_monthday,
+    set_epoch_base_case_monthly,
     set_epoch_base_case_range,
     set_epoch_base_case_weekly,
     set_epoch_base_case_xdays,
@@ -30,7 +32,7 @@ def test_set_epoch_base_case_dayly_SetsAttr_Scenario0_NoWarppingParameters():
         kw.reason_context: wx.day_rope,
         kw.reason_state: wx.day_rope,
     }
-    mop_day_lower_min = 600
+    mop_dayly_lower_min = 600
     mop_day_duration = 90
     assert bob_belief.plan_exists(wx.five_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_dayly_args)
@@ -40,8 +42,8 @@ def test_set_epoch_base_case_dayly_SetsAttr_Scenario0_NoWarppingParameters():
         x_belief=bob_belief,
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
-        day_lower_min=mop_day_lower_min,
-        day_duration_min=mop_day_duration,
+        dayly_lower_min=mop_dayly_lower_min,
+        dayly_duration_min=mop_day_duration,
     )
 
     # THEN
@@ -49,7 +51,7 @@ def test_set_epoch_base_case_dayly_SetsAttr_Scenario0_NoWarppingParameters():
     assert belief_plan_reason_caseunit_exists(bob_belief, mop_dayly_args)
     day_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_dayly_args)
     assert day_case.reason_state == wx.day_rope
-    assert day_case.reason_lower == mop_day_lower_min
+    assert day_case.reason_lower == mop_dayly_lower_min
     assert day_case.reason_lower == 600
     assert day_case.reason_upper == 690
     assert day_case.reason_divisor == 1440
@@ -64,7 +66,7 @@ def test_set_epoch_base_case_dayly_SetsAttr_Scenario1_WarppingParameters():
         kw.reason_context: wx.day_rope,
         kw.reason_state: wx.day_rope,
     }
-    mop_day_lower_min = 2000
+    mop_dayly_lower_min = 2000
     mop_day_duration = 95
     assert bob_belief.plan_exists(wx.day_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_dayly_args)
@@ -74,8 +76,8 @@ def test_set_epoch_base_case_dayly_SetsAttr_Scenario1_WarppingParameters():
         x_belief=bob_belief,
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
-        day_lower_min=mop_day_lower_min,
-        day_duration_min=mop_day_duration,
+        dayly_lower_min=mop_dayly_lower_min,
+        dayly_duration_min=mop_day_duration,
     )
 
     # THEN
@@ -83,12 +85,37 @@ def test_set_epoch_base_case_dayly_SetsAttr_Scenario1_WarppingParameters():
     assert belief_plan_reason_caseunit_exists(bob_belief, mop_dayly_args)
     day_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_dayly_args)
     assert day_case.reason_state == wx.day_rope
-    assert day_case.reason_lower == mop_day_lower_min % 1440
+    assert day_case.reason_lower == mop_dayly_lower_min % 1440
     assert day_case.reason_lower == 560
     assert day_case.reason_upper == 655
     assert day_case.reason_divisor == 1440
     # for x_plan in get_sorted_plan_list(bob_belief._plan_dict):
     #     print(f"{x_plan.get_plan_rope()=}")
+
+
+def test_set_epoch_base_case_dayly_SetsAttr_Scenario2_ParametersAreNone():
+    # ESTABLISH
+    bob_belief = get_bob_five_belief()
+    bob_belief.cashout()
+    mop_dayly_args = {
+        kw.plan_rope: wx.mop_rope,
+        kw.reason_context: wx.day_rope,
+        kw.reason_state: wx.day_rope,
+    }
+    assert bob_belief.plan_exists(wx.day_rope)
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_dayly_args)
+
+    # WHEN
+    set_epoch_base_case_dayly(
+        x_belief=bob_belief,
+        plan_rope=wx.mop_rope,
+        epoch_label=wx.five_str,
+        dayly_lower_min=None,
+        dayly_duration_min=None,
+    )
+
+    # THEN
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_dayly_args)
 
 
 def test_set_epoch_base_case_xdays_SetsAttr_Scenario0_NoWarppingParameters():
@@ -101,8 +128,8 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario0_NoWarppingParameters():
         kw.reason_state: days_rope,
     }
     mop_every_xdays = 7
-    mop_day_lower = 3
-    mop_day_upper = 5
+    mop_days_lower_day = 3
+    mop_days_upper_day = 5
     assert bob_belief.plan_exists(wx.five_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_xdays_args)
     bob_belief.cashout()
@@ -114,8 +141,8 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario0_NoWarppingParameters():
         x_belief=bob_belief,
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
-        day_lower=mop_day_lower,
-        day_upper=mop_day_upper,
+        days_lower_day=mop_days_lower_day,
+        days_upper_day=mop_days_upper_day,
         every_x_days=mop_every_xdays,
     )
 
@@ -123,8 +150,8 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario0_NoWarppingParameters():
     assert belief_plan_reason_caseunit_exists(bob_belief, mop_xdays_args)
     xdays_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_xdays_args)
     assert xdays_case.reason_state == days_rope
-    assert xdays_case.reason_lower == mop_day_lower
-    assert xdays_case.reason_upper == mop_day_upper
+    assert xdays_case.reason_lower == mop_days_lower_day
+    assert xdays_case.reason_upper == mop_days_upper_day
     assert xdays_case.reason_upper == 5
     assert xdays_case.reason_divisor == mop_every_xdays
 
@@ -139,8 +166,8 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario1_WarppingParameters():
         kw.reason_state: days_rope,
     }
     mop_every_xdays = 7
-    mop_day_lower = 30
-    mop_day_upper = 56
+    mop_days_lower_day = 30
+    mop_days_upper_day = 56
     assert bob_belief.plan_exists(wx.five_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_xdays_args)
 
@@ -149,8 +176,8 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario1_WarppingParameters():
         x_belief=bob_belief,
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
-        day_lower=mop_day_lower,
-        day_upper=mop_day_upper,
+        days_lower_day=mop_days_lower_day,
+        days_upper_day=mop_days_upper_day,
         every_x_days=mop_every_xdays,
     )
 
@@ -158,10 +185,36 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario1_WarppingParameters():
     assert belief_plan_reason_caseunit_exists(bob_belief, mop_xdays_args)
     xdays_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_xdays_args)
     assert xdays_case.reason_state == days_rope
-    assert xdays_case.reason_lower == mop_day_lower % 7
-    assert xdays_case.reason_upper == mop_day_upper % 7
+    assert xdays_case.reason_lower == mop_days_lower_day % 7
+    assert xdays_case.reason_upper == mop_days_upper_day % 7
     assert xdays_case.reason_upper == 0
     assert xdays_case.reason_divisor == mop_every_xdays
+
+
+def test_set_epoch_base_case_xdays_SetsAttr_Scenario2_ParametersAreNone():
+    # ESTABLISH
+    bob_belief = get_bob_five_belief()
+    days_rope = bob_belief.make_rope(wx.five_rope, kw.days)
+    mop_xdays_args = {
+        kw.plan_rope: wx.mop_rope,
+        kw.reason_context: days_rope,
+        kw.reason_state: days_rope,
+    }
+    assert bob_belief.plan_exists(wx.five_rope)
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_xdays_args)
+
+    # WHEN
+    set_epoch_base_case_xdays(
+        x_belief=bob_belief,
+        plan_rope=wx.mop_rope,
+        epoch_label=wx.five_str,
+        days_lower_day=None,
+        days_upper_day=None,
+        every_x_days=None,
+    )
+
+    # THEN
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_xdays_args)
 
 
 def test_set_epoch_base_case_weekly_SetsAttr_Scenario0_NoWrapingParameters():
@@ -183,8 +236,8 @@ def test_set_epoch_base_case_weekly_SetsAttr_Scenario0_NoWrapingParameters():
         x_belief=bob_belief,
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
-        week_lower_min=mop_weekly_lower_min,
-        week_duration_min=mop_weekly_duration,
+        weekly_lower_min=mop_weekly_lower_min,
+        weekly_duration_min=mop_weekly_duration,
     )
 
     # THEN
@@ -217,8 +270,8 @@ def test_set_epoch_base_case_weekly_SetsAttr_Scenario1_WrapingParameters():
         x_belief=bob_belief,
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
-        week_lower_min=mop_weekly_lower_min,
-        week_duration_min=mop_weekly_duration,
+        weekly_lower_min=mop_weekly_lower_min,
+        weekly_duration_min=mop_weekly_duration,
     )
 
     # THEN
@@ -230,6 +283,32 @@ def test_set_epoch_base_case_weekly_SetsAttr_Scenario1_WrapingParameters():
     assert day_case.reason_lower == 7000
     assert day_case.reason_upper == 600
     assert day_case.reason_divisor == 7200
+
+
+def test_set_epoch_base_case_weekly_SetsAttr_Scenario2_ParametersAreNone():
+    # ESTABLISH
+    bob_belief = get_bob_five_belief()
+    week_rope = bob_belief.make_rope(wx.five_rope, kw.week)
+    mop_weekly_args = {
+        kw.plan_rope: wx.mop_rope,
+        kw.reason_context: week_rope,
+        kw.reason_state: week_rope,
+    }
+    assert bob_belief.plan_exists(wx.five_rope)
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_weekly_args)
+
+    # WHEN
+    set_epoch_base_case_weekly(
+        x_belief=bob_belief,
+        plan_rope=wx.mop_rope,
+        epoch_label=wx.five_str,
+        weekly_lower_min=None,
+        weekly_duration_min=None,
+    )
+
+    # THEN
+    print(f"{week_rope=}")
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_weekly_args)
 
 
 def test_set_epoch_base_case_xweeks_SetsAttr_Scenario0_NoWrapingParameters():
@@ -252,8 +331,8 @@ def test_set_epoch_base_case_xweeks_SetsAttr_Scenario0_NoWrapingParameters():
         x_belief=bob_belief,
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
-        weeks_lower=mop_week_lower,
-        weeks_upper=mop_week_upper,
+        weeks_lower_week=mop_week_lower,
+        weeks_upper_week=mop_week_upper,
         every_x_weeks=mop_every_xweeks,
     )
 
@@ -287,8 +366,8 @@ def test_set_epoch_base_case_xweeks_SetsAttr_Scenario1_WrapingParameters():
         x_belief=bob_belief,
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
-        weeks_lower=mop_week_lower,
-        weeks_upper=mop_week_upper,
+        weeks_lower_week=mop_week_lower,
+        weeks_upper_week=mop_week_upper,
         every_x_weeks=mop_every_xweeks,
     )
 
@@ -300,6 +379,32 @@ def test_set_epoch_base_case_xweeks_SetsAttr_Scenario1_WrapingParameters():
     assert xweeks_case.reason_upper == mop_week_upper % 7
     assert xweeks_case.reason_upper == 0
     assert xweeks_case.reason_divisor == mop_every_xweeks
+
+
+def test_set_epoch_base_case_xweeks_SetsAttr_Scenario2_NoParameters():
+    # ESTABLISH
+    bob_belief = get_bob_five_belief()
+    weeks_rope = bob_belief.make_rope(wx.five_rope, kw.weeks)
+    mop_xweeks_args = {
+        kw.plan_rope: wx.mop_rope,
+        kw.reason_context: weeks_rope,
+        kw.reason_state: weeks_rope,
+    }
+    assert bob_belief.plan_exists(wx.five_rope)
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_xweeks_args)
+
+    # WHEN
+    set_epoch_base_case_xweeks(
+        x_belief=bob_belief,
+        plan_rope=wx.mop_rope,
+        epoch_label=wx.five_str,
+        weeks_lower_week=None,
+        weeks_upper_week=None,
+        every_x_weeks=None,
+    )
+
+    # THEN
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_xweeks_args)
 
 
 def test_set_epoch_base_case_range_SetsAttr_Scenario0_NoWrapingParameters():
@@ -370,6 +475,30 @@ def test_set_epoch_base_case_range_SetsAttr_Scenario1_WrapingParameters():
     assert day_case.reason_divisor == 5259492000
 
 
+def test_set_epoch_base_case_range_SetsAttr_Scenario2_ParametersAreNone():
+    # ESTABLISH
+    bob_belief = get_bob_five_belief()
+    mop_range_args = {
+        kw.plan_rope: wx.mop_rope,
+        kw.reason_context: wx.five_rope,
+        kw.reason_state: wx.five_rope,
+    }
+    assert bob_belief.plan_exists(wx.five_rope)
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_range_args)
+
+    # WHEN
+    set_epoch_base_case_range(
+        x_belief=bob_belief,
+        plan_rope=wx.mop_rope,
+        epoch_label=wx.five_str,
+        range_lower_min=None,
+        range_duration_min=None,
+    )
+
+    # THEN
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_range_args)
+
+
 def test_set_epoch_base_case_monthday_SetsAttr_Scenario0_NoWrapingParameters():
     # ESTABLISH
     bob_belief = get_bob_five_belief()
@@ -395,8 +524,8 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario0_NoWrapingParameters():
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
         month_label=wx.Geo,
-        monthday=mop_monthday,
-        length_days=mop_length_days,
+        year_monthday_lower=mop_monthday,
+        year_monthday_duration_days=mop_length_days,
     )
 
     # THEN
@@ -405,11 +534,11 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario0_NoWrapingParameters():
     assert day_case.reason_state == month_geo_rope
     month_geo_plan = bob_belief.get_plan_obj(month_geo_rope)
     print(f"{month_geo_plan.gogo_want=} {month_geo_plan.stop_want=}")
-    expected_monthday_lower_min = mop_monthday * 1440 + month_geo_plan.gogo_want
-    expected_monthday_upper_min = day_case.reason_lower + (mop_length_days * 1440)
-    assert day_case.reason_lower == expected_monthday_lower_min
+    expected_monthdayly_lower_min = mop_monthday * 1440 + month_geo_plan.gogo_want
+    expected_monthdays_upper_day_min = day_case.reason_lower + (mop_length_days * 1440)
+    assert day_case.reason_lower == expected_monthdayly_lower_min
     assert day_case.reason_lower == 40320
-    assert day_case.reason_upper == expected_monthday_upper_min
+    assert day_case.reason_upper == expected_monthdays_upper_day_min
     assert day_case.reason_divisor is None
 
 
@@ -433,8 +562,8 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario1_WrapingParameters():
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
         month_label=wx.Trump,
-        monthday=mop_monthday,
-        length_days=mop_length_days,
+        year_monthday_lower=mop_monthday,
+        year_monthday_duration_days=mop_length_days,
     )
 
     # THEN
@@ -480,8 +609,8 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario2_monthday_MustBeWithinMo
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
         month_label=wx.Geo,
-        monthday=mop_monthday,
-        length_days=mop_length_days,
+        year_monthday_lower=mop_monthday,
+        year_monthday_duration_days=mop_length_days,
         range_must_be_within_month=True,
     )
 
@@ -512,8 +641,8 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario3_monthday_Reduce_length_
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
         month_label=wx.Geo,
-        monthday=mop_monthday,
-        length_days=mop_length_days,
+        year_monthday_lower=mop_monthday,
+        year_monthday_duration_days=mop_length_days,
         range_must_be_within_month=True,
     )
 
@@ -544,6 +673,110 @@ def test_set_epoch_base_case_monthday_SetsAttr_Scenario3_monthday_Reduce_length_
     assert monthday_case.reason_divisor is None
 
 
+def test_set_epoch_base_case_monthday_SetsAttr_Scenario4_ParametersAreNone():
+    # ESTABLISH
+    bob_belief = get_bob_five_belief()
+    month_geo_rope = bob_belief.make_rope(wx.five_year_rope, wx.Geo)
+    mop_monthday_args = {
+        kw.plan_rope: wx.mop_rope,
+        kw.reason_context: month_geo_rope,
+        kw.reason_state: month_geo_rope,
+    }
+    assert bob_belief.plan_exists(wx.five_rope)
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_monthday_args)
+
+    # WHEN
+    set_epoch_base_case_monthday(
+        x_belief=bob_belief,
+        plan_rope=wx.mop_rope,
+        epoch_label=wx.five_str,
+        month_label=None,
+        year_monthday_lower=None,
+        year_monthday_duration_days=None,
+    )
+
+    # THEN
+    assert not belief_plan_reason_caseunit_exists(bob_belief, mop_monthday_args)
+
+
+def test_set_epoch_base_case_monthly_SetsAttr_Scenario0_AllDays_within_month_range():
+    # ESTABLISH
+    bob_belief = get_bob_five_belief()
+    mop_year_args = {kw.plan_rope: wx.mop_rope, kw.reason_context: wx.five_year_rope}
+    mop_monthday = 3
+    mop_monthly_duration_days = 4
+    assert not belief_plan_reasonunit_exists(bob_belief, mop_year_args)
+
+    # WHEN
+    set_epoch_base_case_monthly(
+        x_belief=bob_belief,
+        plan_rope=wx.mop_rope,
+        epoch_label=wx.five_str,
+        monthly_monthday_lower=mop_monthday,
+        monthly_duration_days=mop_monthly_duration_days,
+    )
+
+    # THEN
+    assert belief_plan_reasonunit_exists(bob_belief, mop_year_args)
+    year_reasonunit = belief_plan_reasonunit_get_obj(bob_belief, mop_year_args)
+    year_cases = year_reasonunit.cases
+    print(f"{year_cases.keys()=}")
+    month_geo_rope = bob_belief.make_rope(wx.five_year_rope, wx.Geo)
+    month_trump_rope = bob_belief.make_rope(wx.five_year_rope, wx.Trump)
+    assert year_reasonunit.case_exists(month_geo_rope)
+    assert year_reasonunit.case_exists(month_trump_rope)
+    assert len(year_reasonunit.cases) == 15
+
+
+def test_set_epoch_base_case_monthly_SetsAttr_Scenario1_OneDayNot_within_month_range():
+    # ESTABLISH
+    bob_belief = get_bob_five_belief()
+    mop_year_args = {kw.plan_rope: wx.mop_rope, kw.reason_context: wx.five_year_rope}
+    mop_monthday = 20
+    mop_duration_days = 4
+    assert not belief_plan_reasonunit_exists(bob_belief, mop_year_args)
+
+    # WHEN
+    set_epoch_base_case_monthly(
+        x_belief=bob_belief,
+        plan_rope=wx.mop_rope,
+        epoch_label=wx.five_str,
+        monthly_monthday_lower=mop_monthday,
+        monthly_duration_days=mop_duration_days,
+    )
+
+    # THEN
+    assert belief_plan_reasonunit_exists(bob_belief, mop_year_args)
+    year_reasonunit = belief_plan_reasonunit_get_obj(bob_belief, mop_year_args)
+    year_cases = year_reasonunit.cases
+    for month_case in year_cases.values():
+        print(f"{month_case.reason_state} {month_case.reason_upper=}")
+    month_geo_rope = bob_belief.make_rope(wx.five_year_rope, wx.Geo)
+    month_trump_rope = bob_belief.make_rope(wx.five_year_rope, wx.Trump)
+    assert year_reasonunit.case_exists(month_geo_rope)
+    assert not year_reasonunit.case_exists(month_trump_rope)
+    assert len(year_reasonunit.cases) == 14
+
+
+def test_set_epoch_base_case_monthly_SetsAttr_Scenario2_ParametersAreNone():
+    # ESTABLISH
+    bob_belief = get_bob_five_belief()
+    mop_year_args = {kw.plan_rope: wx.mop_rope, kw.reason_context: wx.five_year_rope}
+    assert not belief_plan_reasonunit_exists(bob_belief, mop_year_args)
+
+    # WHEN
+    set_epoch_base_case_monthly(
+        x_belief=bob_belief,
+        plan_rope=wx.mop_rope,
+        epoch_label=wx.five_str,
+        monthly_monthday_lower=None,
+        monthly_duration_days=None,
+    )
+
+    # THEN
+    assert not belief_plan_reasonunit_exists(bob_belief, mop_year_args)
+
+
 def test_del_epoch_reason_SetsAttr_Scenario0_NoReasonUnitExists():
     # ESTABLISH
     bob_belief = beliefunit_shop(wx.Bob)
@@ -572,15 +805,15 @@ def test_del_epoch_reason_SetsAttr_Scenario1_ReasonUnitExists():
         kw.reason_context: wx.day_rope,
         kw.reason_state: wx.day_rope,
     }
-    mop_day_lower_min = 600
+    mop_dayly_lower_min = 600
     mop_day_duration = 90
     # WHEN
     set_epoch_base_case_dayly(
         x_belief=bob_belief,
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
-        day_lower_min=mop_day_lower_min,
-        day_duration_min=mop_day_duration,
+        dayly_lower_min=mop_dayly_lower_min,
+        dayly_duration_min=mop_day_duration,
     )
     assert belief_plan_reasonunit_exists(bob_belief, mop_dayly_args)
 

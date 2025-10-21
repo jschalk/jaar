@@ -28,7 +28,6 @@ from src.ch04_rope.rope import (
     all_ropes_between,
     create_rope,
     find_replace_rope_key_dict,
-    get_tail_label,
     is_sub_rope,
     rebuild_rope,
     replace_knot,
