@@ -53,6 +53,7 @@ from src.ch06_plan._ref.ch06_semantic_types import (
     FundGrain,
     FundNum,
     GroupTitle,
+    KnotTerm,
     LabelTerm,
     RopeTerm,
     VoiceName,
@@ -247,7 +248,7 @@ class PlanUnit:
 
     plan_label: LabelTerm = None
     parent_rope: RopeTerm = None
-    knot: str = None
+    knot: KnotTerm = None
     kids: dict[LabelTerm,] = None
     star: int = None
     uid: int = None  # Calculated field?
@@ -537,7 +538,7 @@ class PlanUnit:
         else:
             self.plan_label = plan_label
 
-    def set_knot(self, new_knot: str):
+    def set_knot(self, new_knot: KnotTerm):
         old_knot = deepcopy(self.knot)
         if old_knot is None:
             old_knot = default_knot_if_None()
@@ -1043,7 +1044,7 @@ def planunit_shop(
     all_voice_debt: bool = None,
     is_expanded: bool = True,
     plan_active_hx: dict[int, bool] = None,
-    knot: str = None,
+    knot: KnotTerm = None,
     healerunit_ratio: float = None,
 ) -> PlanUnit:
     x_healerunit = healerunit_shop() if healerunit is None else healerunit
@@ -1137,7 +1138,7 @@ def all_plans_between(
     belief_plan_dict: dict[RopeTerm, PlanUnit],
     src_rope: RopeTerm,
     dst_reason_context: RopeTerm,
-    knot: str,
+    knot: KnotTerm,
 ) -> list[PlanUnit]:
     all_ropes = all_ropes_between(src_rope, dst_reason_context, knot)
     return [belief_plan_dict.get(x_rope) for x_rope in all_ropes]

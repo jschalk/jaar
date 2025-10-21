@@ -5,6 +5,7 @@ from src.ch09_belief_atom._ref.ch09_semantic_types import (
     FundNum,
     GroupTitle,
     HealerName,
+    KnotTerm,
     LabelTerm,
     ManaGrain,
     MomentLabel,

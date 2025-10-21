@@ -25,8 +25,7 @@
       "fund_agenda_take": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
       "fund_give": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
       "fund_grain": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
-      "fund_take": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
-      "knot": {"class_type": "str", "populate_by_cashout": true, "sqlite_datatype": "TEXT"}
+      "fund_take": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}
     }
   }, 
   "belief_plan_awardunit": {
@@ -338,7 +337,7 @@
     }
   }, 
   "belief_voiceunit": {
-    "abbreviation": "blrpern", 
+    "abbreviation": "blfvoce", 
     "jkeys": {
       "belief_name": {
         "class_type": "NameTerm", 
@@ -368,7 +367,8 @@
       "inallocable_voice_debt_lumen": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
       "irrational_voice_debt_lumen": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
       "voice_cred_lumen": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
-      "voice_debt_lumen": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}
+      "voice_debt_lumen": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"},
+      "groupmark": {"class_type": "str", "populate_by_cashout": true, "sqlite_datatype": "TEXT"}
     }
   }, 
   "beliefunit": {

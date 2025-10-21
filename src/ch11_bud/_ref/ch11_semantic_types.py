@@ -6,6 +6,7 @@ from src.ch10_lesson._ref.ch10_semantic_types import (
     FundNum,
     GroupTitle,
     HealerName,
+    KnotTerm,
     LabelTerm,
     ManaGrain,
     MomentLabel,

@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from src.ch01_py.dict_toolbox import get_0_if_None
 from src.ch16_translate._ref.ch16_semantic_types import (
     BeliefName,
+    KnotTerm,
     SparkInt,
     default_knot_if_None,
 )
@@ -46,8 +47,8 @@ class TranslateUnit:
     labelmap: LabelMap = None
     ropemap: RopeMap = None
     unknown_str: str = None  # translateunit
-    otx_knot: str = None  # translateunit
-    inx_knot: str = None  # translateunit
+    otx_knot: KnotTerm = None  # translateunit
+    inx_knot: KnotTerm = None  # translateunit
 
     def set_titlemap(self, x_titlemap: TitleMap):
         self._check_all_core_attrs_match(x_titlemap)
@@ -236,8 +237,8 @@ class TranslateUnit:
 def translateunit_shop(
     face_name: BeliefName,
     spark_num: SparkInt = None,
-    otx_knot: str = None,
-    inx_knot: str = None,
+    otx_knot: KnotTerm = None,
+    inx_knot: KnotTerm = None,
     unknown_str: str = None,
 ) -> TranslateUnit:
     unknown_str = default_unknown_str_if_None(unknown_str)
@@ -360,8 +361,8 @@ def _add_translate_core_keys(
     map_dict: dict,
     spark_num: int,
     face_name: str,
-    otx_knot: str,
-    inx_knot: str,
+    otx_knot: KnotTerm,
+    inx_knot: KnotTerm,
     unknown_str: str,
 ) -> dict:
     map_dict["spark_num"] = spark_num

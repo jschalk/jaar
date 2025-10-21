@@ -6,6 +6,7 @@ from src.ch15_moment._ref.ch15_semantic_types import (
     FundNum,
     GroupTitle,
     HealerName,
+    KnotTerm,
     LabelTerm,
     ManaGrain,
     ManaNum,

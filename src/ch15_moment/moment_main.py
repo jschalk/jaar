@@ -43,6 +43,7 @@ from src.ch15_moment._ref.ch15_semantic_types import (
     BeliefName,
     FundGrain,
     FundNum,
+    KnotTerm,
     ManaGrain,
     MomentLabel,
     RespectGrain,
@@ -88,7 +89,7 @@ class MomentUnit:
     beliefbudhistorys: dict[BeliefName, BeliefBudHistory] = None
     paybook: TranBook = None
     offi_times: set[EpochPoint] = None
-    knot: str = None
+    knot: KnotTerm = None
     fund_grain: FundGrain = None
     respect_grain: RespectGrain = None
     mana_grain: ManaGrain = None
@@ -385,7 +386,7 @@ def momentunit_shop(
     moment_mstr_dir: str,
     epoch: EpochUnit = None,
     offi_times: set[EpochPoint] = None,
-    knot: str = None,
+    knot: KnotTerm = None,
     fund_grain: float = None,
     respect_grain: float = None,
     mana_grain: float = None,

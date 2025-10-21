@@ -6,6 +6,7 @@ from src.ch11_bud._ref.ch11_semantic_types import (
     FundNum,
     GroupTitle,
     HealerName,
+    KnotTerm,
     LabelTerm,
     ManaGrain,
     MomentLabel,

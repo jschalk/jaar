@@ -76,100 +76,100 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert translateable_delete_inx_cols.issubset(table_sorting_priority)
 
     # all the suffix otx/inx columns are only used in one table
-    assert table_sorting_priority[0] == "world_name"
-    assert table_sorting_priority[1] == "idea_number"
+    assert table_sorting_priority[0] == kw.world_name
+    assert table_sorting_priority[1] == kw.idea_number
     assert table_sorting_priority[2] == "source_dimen"
     assert table_sorting_priority[3] == "translate_spark_num"
     assert table_sorting_priority[4] == kw.spark_num
     assert table_sorting_priority[5] == kw.face_name
-    assert table_sorting_priority[6] == "face_name_otx"
-    assert table_sorting_priority[7] == "face_name_inx"
+    assert table_sorting_priority[6] == f"{kw.face_name}_otx"
+    assert table_sorting_priority[7] == f"{kw.face_name}_inx"
     assert table_sorting_priority[8] == kw.moment_label
-    assert table_sorting_priority[9] == "moment_label_otx"
-    assert table_sorting_priority[10] == "moment_label_inx"
-    assert table_sorting_priority[11] == "epoch_label"
-    assert table_sorting_priority[12] == "epoch_label_otx"
-    assert table_sorting_priority[13] == "epoch_label_inx"
+    assert table_sorting_priority[9] == f"{kw.moment_label}_otx"
+    assert table_sorting_priority[10] == f"{kw.moment_label}_inx"
+    assert table_sorting_priority[11] == kw.epoch_label
+    assert table_sorting_priority[12] == f"{kw.epoch_label}_otx"
+    assert table_sorting_priority[13] == f"{kw.epoch_label}_inx"
     assert table_sorting_priority[14] == kw.offi_time
     assert table_sorting_priority[15] == kw.c400_number
     assert table_sorting_priority[16] == kw.yr1_jan1_offset
     assert table_sorting_priority[17] == kw.monthday_index
     assert table_sorting_priority[18] == kw.cumulative_day
     assert table_sorting_priority[19] == kw.month_label
-    assert table_sorting_priority[20] == "month_label_otx"
-    assert table_sorting_priority[21] == "month_label_inx"
-    assert table_sorting_priority[22] == "cumulative_minute"
-    assert table_sorting_priority[23] == "hour_label"
-    assert table_sorting_priority[24] == "hour_label_otx"
-    assert table_sorting_priority[25] == "hour_label_inx"
-    assert table_sorting_priority[26] == "weekday_order"
-    assert table_sorting_priority[27] == "weekday_label"
-    assert table_sorting_priority[28] == "weekday_label_otx"
-    assert table_sorting_priority[29] == "weekday_label_inx"
+    assert table_sorting_priority[20] == f"{kw.month_label}_otx"
+    assert table_sorting_priority[21] == f"{kw.month_label}_inx"
+    assert table_sorting_priority[22] == kw.cumulative_minute
+    assert table_sorting_priority[23] == f"{kw.hour_label}"
+    assert table_sorting_priority[24] == f"{kw.hour_label}_otx"
+    assert table_sorting_priority[25] == f"{kw.hour_label}_inx"
+    assert table_sorting_priority[26] == kw.weekday_order
+    assert table_sorting_priority[27] == kw.weekday_label
+    assert table_sorting_priority[28] == f"{kw.weekday_label}_otx"
+    assert table_sorting_priority[29] == f"{kw.weekday_label}_inx"
     assert table_sorting_priority[30] == kw.belief_name
-    assert table_sorting_priority[31] == "belief_name_otx"
-    assert table_sorting_priority[32] == "belief_name_inx"
-    assert table_sorting_priority[33] == "belief_name_ERASE"
-    assert table_sorting_priority[34] == "belief_name_ERASE_otx"
-    assert table_sorting_priority[35] == "belief_name_ERASE_inx"
-    assert table_sorting_priority[36] == "voice_name"
-    assert table_sorting_priority[37] == "voice_name_otx"
-    assert table_sorting_priority[38] == "voice_name_inx"
-    assert table_sorting_priority[39] == "voice_name_ERASE"
-    assert table_sorting_priority[40] == "voice_name_ERASE_otx"
-    assert table_sorting_priority[41] == "voice_name_ERASE_inx"
-    assert table_sorting_priority[42] == "group_title"
-    assert table_sorting_priority[43] == "group_title_otx"
-    assert table_sorting_priority[44] == "group_title_inx"
-    assert table_sorting_priority[45] == "group_title_ERASE"
-    assert table_sorting_priority[46] == "group_title_ERASE_otx"
-    assert table_sorting_priority[47] == "group_title_ERASE_inx"
-    assert table_sorting_priority[48] == "plan_rope"
-    assert table_sorting_priority[49] == "plan_rope_otx"
-    assert table_sorting_priority[50] == "plan_rope_inx"
-    assert table_sorting_priority[51] == "plan_rope_ERASE"
-    assert table_sorting_priority[52] == "plan_rope_ERASE_otx"
-    assert table_sorting_priority[53] == "plan_rope_ERASE_inx"
-    assert table_sorting_priority[54] == "reason_context"
-    assert table_sorting_priority[55] == "reason_context_otx"
-    assert table_sorting_priority[56] == "reason_context_inx"
-    assert table_sorting_priority[57] == "reason_context_ERASE"
-    assert table_sorting_priority[58] == "reason_context_ERASE_otx"
-    assert table_sorting_priority[59] == "reason_context_ERASE_inx"
+    assert table_sorting_priority[31] == f"{kw.belief_name}_otx"
+    assert table_sorting_priority[32] == f"{kw.belief_name}_inx"
+    assert table_sorting_priority[33] == f"{kw.belief_name}_ERASE"
+    assert table_sorting_priority[34] == f"{kw.belief_name}_ERASE_otx"
+    assert table_sorting_priority[35] == f"{kw.belief_name}_ERASE_inx"
+    assert table_sorting_priority[36] == kw.voice_name
+    assert table_sorting_priority[37] == f"{kw.voice_name}_otx"
+    assert table_sorting_priority[38] == f"{kw.voice_name}_inx"
+    assert table_sorting_priority[39] == f"{kw.voice_name}_ERASE"
+    assert table_sorting_priority[40] == f"{kw.voice_name}_ERASE_otx"
+    assert table_sorting_priority[41] == f"{kw.voice_name}_ERASE_inx"
+    assert table_sorting_priority[42] == kw.group_title
+    assert table_sorting_priority[43] == f"{kw.group_title}_otx"
+    assert table_sorting_priority[44] == f"{kw.group_title}_inx"
+    assert table_sorting_priority[45] == f"{kw.group_title}_ERASE"
+    assert table_sorting_priority[46] == f"{kw.group_title}_ERASE_otx"
+    assert table_sorting_priority[47] == f"{kw.group_title}_ERASE_inx"
+    assert table_sorting_priority[48] == kw.plan_rope
+    assert table_sorting_priority[49] == f"{kw.plan_rope}_otx"
+    assert table_sorting_priority[50] == f"{kw.plan_rope}_inx"
+    assert table_sorting_priority[51] == f"{kw.plan_rope}_ERASE"
+    assert table_sorting_priority[52] == f"{kw.plan_rope}_ERASE_otx"
+    assert table_sorting_priority[53] == f"{kw.plan_rope}_ERASE_inx"
+    assert table_sorting_priority[54] == kw.reason_context
+    assert table_sorting_priority[55] == f"{kw.reason_context}_otx"
+    assert table_sorting_priority[56] == f"{kw.reason_context}_inx"
+    assert table_sorting_priority[57] == f"{kw.reason_context}_ERASE"
+    assert table_sorting_priority[58] == f"{kw.reason_context}_ERASE_otx"
+    assert table_sorting_priority[59] == f"{kw.reason_context}_ERASE_inx"
     assert table_sorting_priority[60] == kw.fact_context
-    assert table_sorting_priority[61] == "fact_context_otx"
-    assert table_sorting_priority[62] == "fact_context_inx"
-    assert table_sorting_priority[63] == "fact_context_ERASE"
-    assert table_sorting_priority[64] == "fact_context_ERASE_otx"
-    assert table_sorting_priority[65] == "fact_context_ERASE_inx"
-    assert table_sorting_priority[66] == "reason_state"
-    assert table_sorting_priority[67] == "reason_state_otx"
-    assert table_sorting_priority[68] == "reason_state_inx"
-    assert table_sorting_priority[69] == "reason_state_ERASE"
-    assert table_sorting_priority[70] == "reason_state_ERASE_otx"
-    assert table_sorting_priority[71] == "reason_state_ERASE_inx"
+    assert table_sorting_priority[61] == f"{kw.fact_context}_otx"
+    assert table_sorting_priority[62] == f"{kw.fact_context}_inx"
+    assert table_sorting_priority[63] == f"{kw.fact_context}_ERASE"
+    assert table_sorting_priority[64] == f"{kw.fact_context}_ERASE_otx"
+    assert table_sorting_priority[65] == f"{kw.fact_context}_ERASE_inx"
+    assert table_sorting_priority[66] == kw.reason_state
+    assert table_sorting_priority[67] == f"{kw.reason_state}_otx"
+    assert table_sorting_priority[68] == f"{kw.reason_state}_inx"
+    assert table_sorting_priority[69] == f"{kw.reason_state}_ERASE"
+    assert table_sorting_priority[70] == f"{kw.reason_state}_ERASE_otx"
+    assert table_sorting_priority[71] == f"{kw.reason_state}_ERASE_inx"
     assert table_sorting_priority[72] == kw.fact_state
-    assert table_sorting_priority[73] == "fact_state_otx"
-    assert table_sorting_priority[74] == "fact_state_inx"
+    assert table_sorting_priority[73] == f"{kw.fact_state}_otx"
+    assert table_sorting_priority[74] == f"{kw.fact_state}_inx"
     assert table_sorting_priority[75] == kw.party_title
-    assert table_sorting_priority[76] == "party_title_otx"
-    assert table_sorting_priority[77] == "party_title_inx"
-    assert table_sorting_priority[78] == "party_title_ERASE"
-    assert table_sorting_priority[79] == "party_title_ERASE_otx"
-    assert table_sorting_priority[80] == "party_title_ERASE_inx"
+    assert table_sorting_priority[76] == f"{kw.party_title}_otx"
+    assert table_sorting_priority[77] == f"{kw.party_title}_inx"
+    assert table_sorting_priority[78] == f"{kw.party_title}_ERASE"
+    assert table_sorting_priority[79] == f"{kw.party_title}_ERASE_otx"
+    assert table_sorting_priority[80] == f"{kw.party_title}_ERASE_inx"
     assert table_sorting_priority[81] == kw.solo
     assert table_sorting_priority[82] == kw.awardee_title
-    assert table_sorting_priority[83] == "awardee_title_otx"
-    assert table_sorting_priority[84] == "awardee_title_inx"
-    assert table_sorting_priority[85] == "awardee_title_ERASE"
-    assert table_sorting_priority[86] == "awardee_title_ERASE_otx"
-    assert table_sorting_priority[87] == "awardee_title_ERASE_inx"
+    assert table_sorting_priority[83] == f"{kw.awardee_title}_otx"
+    assert table_sorting_priority[84] == f"{kw.awardee_title}_inx"
+    assert table_sorting_priority[85] == f"{kw.awardee_title}_ERASE"
+    assert table_sorting_priority[86] == f"{kw.awardee_title}_ERASE_otx"
+    assert table_sorting_priority[87] == f"{kw.awardee_title}_ERASE_inx"
     assert table_sorting_priority[88] == kw.healer_name
-    assert table_sorting_priority[89] == "healer_name_otx"
-    assert table_sorting_priority[90] == "healer_name_inx"
-    assert table_sorting_priority[91] == "healer_name_ERASE"
-    assert table_sorting_priority[92] == "healer_name_ERASE_otx"
-    assert table_sorting_priority[93] == "healer_name_ERASE_inx"
+    assert table_sorting_priority[89] == f"{kw.healer_name}_otx"
+    assert table_sorting_priority[90] == f"{kw.healer_name}_inx"
+    assert table_sorting_priority[91] == f"{kw.healer_name}_ERASE"
+    assert table_sorting_priority[92] == f"{kw.healer_name}_ERASE_otx"
+    assert table_sorting_priority[93] == f"{kw.healer_name}_ERASE_inx"
     assert table_sorting_priority[94] == kw.bud_time
     assert table_sorting_priority[95] == kw.tran_time
     assert table_sorting_priority[96] == kw.begin
@@ -215,49 +215,50 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[136] == kw.otx_knot
     assert table_sorting_priority[137] == kw.inx_knot
     assert table_sorting_priority[138] == kw.knot
-    assert table_sorting_priority[139] == kw.unknown_str
-    assert table_sorting_priority[140] == kw.quota
-    assert table_sorting_priority[141] == kw.celldepth
-    assert table_sorting_priority[142] == kw.job_listen_rotations
-    assert table_sorting_priority[143] == kw.error_message
-    assert table_sorting_priority[144] == "_belief_name_is_labor"
-    assert table_sorting_priority[145] == kw.plan_active
-    assert table_sorting_priority[146] == kw.task
-    assert table_sorting_priority[147] == kw.reason_active
-    assert table_sorting_priority[148] == kw.case_active
-    assert table_sorting_priority[149] == kw.credor_pool
-    assert table_sorting_priority[150] == kw.debtor_pool
-    assert table_sorting_priority[151] == kw.rational
-    assert table_sorting_priority[152] == kw.fund_give
-    assert table_sorting_priority[153] == kw.fund_take
-    assert table_sorting_priority[154] == kw.fund_onset
-    assert table_sorting_priority[155] == kw.fund_cease
-    assert table_sorting_priority[156] == kw.fund_ratio
-    assert table_sorting_priority[157] == kw.fund_agenda_give
-    assert table_sorting_priority[158] == kw.fund_agenda_take
-    assert table_sorting_priority[159] == kw.fund_agenda_ratio_give
-    assert table_sorting_priority[160] == kw.fund_agenda_ratio_take
-    assert table_sorting_priority[161] == kw.inallocable_voice_debt_lumen
-    assert table_sorting_priority[162] == kw.gogo_calc
-    assert table_sorting_priority[163] == kw.stop_calc
-    assert table_sorting_priority[164] == kw.tree_level
-    assert table_sorting_priority[165] == kw.range_evaluated
-    assert table_sorting_priority[166] == kw.descendant_pledge_count
-    assert table_sorting_priority[167] == kw.healerunit_ratio
-    assert table_sorting_priority[168] == kw.all_voice_cred
-    assert table_sorting_priority[169] == kw.keeps_justified
-    assert table_sorting_priority[170] == kw.offtrack_fund
-    assert table_sorting_priority[171] == "parent_heir_active"
-    assert table_sorting_priority[172] == "irrational_voice_debt_lumen"
-    assert table_sorting_priority[173] == kw.sum_healerunit_plans_fund_total
-    assert table_sorting_priority[174] == kw.keeps_buildable
-    assert table_sorting_priority[175] == kw.all_voice_debt
-    assert table_sorting_priority[176] == kw.tree_traverse_count
-    assert table_sorting_priority[177] == "funds"
-    assert table_sorting_priority[178] == "fund_rank"
-    assert table_sorting_priority[179] == "pledges_count"
+    assert table_sorting_priority[139] == kw.groupmark
+    assert table_sorting_priority[140] == kw.unknown_str
+    assert table_sorting_priority[141] == kw.quota
+    assert table_sorting_priority[142] == kw.celldepth
+    assert table_sorting_priority[143] == kw.job_listen_rotations
+    assert table_sorting_priority[144] == kw.error_message
+    assert table_sorting_priority[145] == "_belief_name_is_labor"
+    assert table_sorting_priority[146] == kw.plan_active
+    assert table_sorting_priority[147] == kw.task
+    assert table_sorting_priority[148] == kw.reason_active
+    assert table_sorting_priority[149] == kw.case_active
+    assert table_sorting_priority[150] == kw.credor_pool
+    assert table_sorting_priority[151] == kw.debtor_pool
+    assert table_sorting_priority[152] == kw.rational
+    assert table_sorting_priority[153] == kw.fund_give
+    assert table_sorting_priority[154] == kw.fund_take
+    assert table_sorting_priority[155] == kw.fund_onset
+    assert table_sorting_priority[156] == kw.fund_cease
+    assert table_sorting_priority[157] == kw.fund_ratio
+    assert table_sorting_priority[158] == kw.fund_agenda_give
+    assert table_sorting_priority[159] == kw.fund_agenda_take
+    assert table_sorting_priority[160] == kw.fund_agenda_ratio_give
+    assert table_sorting_priority[161] == kw.fund_agenda_ratio_take
+    assert table_sorting_priority[162] == kw.inallocable_voice_debt_lumen
+    assert table_sorting_priority[163] == kw.gogo_calc
+    assert table_sorting_priority[164] == kw.stop_calc
+    assert table_sorting_priority[165] == kw.tree_level
+    assert table_sorting_priority[166] == kw.range_evaluated
+    assert table_sorting_priority[167] == kw.descendant_pledge_count
+    assert table_sorting_priority[168] == kw.healerunit_ratio
+    assert table_sorting_priority[169] == kw.all_voice_cred
+    assert table_sorting_priority[170] == kw.keeps_justified
+    assert table_sorting_priority[171] == kw.offtrack_fund
+    assert table_sorting_priority[172] == kw.parent_heir_active
+    assert table_sorting_priority[173] == kw.irrational_voice_debt_lumen
+    assert table_sorting_priority[174] == kw.sum_healerunit_plans_fund_total
+    assert table_sorting_priority[175] == kw.keeps_buildable
+    assert table_sorting_priority[176] == kw.all_voice_debt
+    assert table_sorting_priority[177] == kw.tree_traverse_count
+    assert table_sorting_priority[178] == "funds"
+    assert table_sorting_priority[179] == "fund_rank"
+    assert table_sorting_priority[180] == "pledges_count"
 
-    assert len(table_sorting_priority) == 180
+    assert len(table_sorting_priority) == 181
     all_args = copy_copy(atom_args)
     all_args.update(all_belief_dimen_delete_keys)
     all_args.update(moment_args)

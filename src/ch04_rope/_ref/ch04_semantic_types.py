@@ -28,10 +28,10 @@ def default_knot_if_None(knot: any = None) -> str:
 class LabelTerm(str):
     """A string representation of a tree node. Nodes cannot contain RopeTerm knot"""
 
-    def is_label(self, knot: str = None) -> bool:
+    def is_label(self, knot: KnotTerm = None) -> bool:
         return len(self) > 0 and self.contains_knot(knot)
 
-    def contains_knot(self, knot: str = None) -> bool:
+    def contains_knot(self, knot: KnotTerm = None) -> bool:
         return self.find(default_knot_if_None(knot)) == -1
 
 

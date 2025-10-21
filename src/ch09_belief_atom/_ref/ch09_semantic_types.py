@@ -5,6 +5,7 @@ from src.ch07_belief_logic._ref.ch07_semantic_types import (
     FundNum,
     GroupTitle,
     HealerName,
+    KnotTerm,
     LabelTerm,
     ManaGrain,
     MomentLabel,

@@ -6,6 +6,7 @@ from src.ch19_world_kpi._ref.ch19_semantic_types import (
     FundNum,
     GroupTitle,
     HealerName,
+    KnotTerm,
     LabelTerm,
     ManaGrain,
     ManaNum,

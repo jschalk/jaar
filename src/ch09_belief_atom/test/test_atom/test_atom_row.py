@@ -235,7 +235,7 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_planunit_INSERT_pledge_False_
 
     # THEN
     static_beliefatom = beliefatom_shop(kw.belief_planunit, kw.INSERT)
-    static_beliefatom.set_arg("plan_rope", create_rope("amy78", "casa"))
+    static_beliefatom.set_arg(kw.plan_rope, create_rope("amy78", "casa"))
     static_beliefatom.set_arg("pledge", False)
     print(static_beliefatom)
     print(x_beliefatom)
@@ -257,10 +257,10 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_planunit_INSERT_pledge_False_
     assert len(x_beliefatoms) == 2
     y_plan_beliefatom = beliefatom_shop(kw.belief_planunit, kw.INSERT)
     casa_rope = create_rope("amy78", "casa")
-    y_plan_beliefatom.set_arg("plan_rope", casa_rope)
+    y_plan_beliefatom.set_arg(kw.plan_rope, casa_rope)
     y_plan_beliefatom.set_arg("pledge", False)
     assert y_plan_beliefatom in x_beliefatoms
     healerunit_beliefatom = beliefatom_shop(kw.belief_plan_healerunit, kw.INSERT)
-    healerunit_beliefatom.set_arg("plan_rope", casa_rope)
+    healerunit_beliefatom.set_arg(kw.plan_rope, casa_rope)
     healerunit_beliefatom.set_arg("healer_name", "Bob")
     assert healerunit_beliefatom in x_beliefatoms

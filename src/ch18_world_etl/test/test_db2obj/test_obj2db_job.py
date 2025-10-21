@@ -3,13 +3,13 @@ from src.ch01_py.db_toolbox import create_insert_query
 from src.ch07_belief_logic.belief_config import get_belief_calc_dimen_args
 from src.ch18_world_etl.db_obj_belief_tool import (
     create_beliefunit_metrics_insert_sqlstr,
+    create_blfvoce_metrics_insert_sqlstr,
     create_blrawar_metrics_insert_sqlstr,
     create_blrfact_metrics_insert_sqlstr,
     create_blrgrou_metrics_insert_sqlstr,
     create_blrheal_metrics_insert_sqlstr,
     create_blrlabo_metrics_insert_sqlstr,
     create_blrmemb_metrics_insert_sqlstr,
-    create_blrpern_metrics_insert_sqlstr,
     create_blrplan_metrics_insert_sqlstr,
     create_blrprem_metrics_insert_sqlstr,
     create_blrreas_metrics_insert_sqlstr,
@@ -136,7 +136,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
         "tree_level": x_tree_level,
         "range_evaluated": x_range_evaluated,
         "stop_calc": x_stop_calc,
-        "task": x_task,
+        kw.task: x_task,
         "addin": x_addin,
         "begin": x_begin,
         "close": x_close,
@@ -145,7 +145,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
         kw.star: x_star,
         "morph": x_morph,
         "numor": x_numor,
-        "plan_rope": x_rope,
+        kw.plan_rope: x_rope,
         "pledge": x_pledge,
         "problem_bool": x_problem_bool,
         kw.stop_want: x_stop_want,
@@ -203,12 +203,12 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         kw.moment_label: x_moment_label,
         kw.belief_name: x_belief_name,
-        "plan_rope": x_rope,
+        kw.plan_rope: x_rope,
         kw.reason_context: x_reason_context,
         kw.active_requisite: x_active_requisite,
-        "task": x_task,
-        "reason_active": x_reason_active,
-        "parent_heir_active": x__heir_active,
+        kw.task: x_task,
+        kw.reason_active: x_reason_active,
+        kw.parent_heir_active: x__heir_active,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -333,12 +333,12 @@ def test_create_blrawar_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         kw.moment_label: x_moment_label,
         kw.belief_name: x_belief_name,
-        "plan_rope": x_rope,
+        kw.plan_rope: x_rope,
         kw.awardee_title: x_awardee_title,
         kw.give_force: x_give_force,
         kw.take_force: x_take_force,
-        "fund_give": x_fund_give,
-        "fund_take": x_fund_take,
+        kw.fund_give: x_fund_give,
+        kw.fund_take: x_fund_take,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -395,11 +395,11 @@ def test_create_blrfact_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         kw.moment_label: x_moment_label,
         kw.belief_name: x_belief_name,
-        "plan_rope": x_rope,
+        kw.plan_rope: x_rope,
         kw.fact_context: x_fact_context,
         kw.fact_state: x_fact_state,
-        "fact_lower": x_fact_lower,
-        "fact_upper": x_fact_upper,
+        kw.fact_lower: x_fact_lower,
+        kw.fact_upper: x_fact_upper,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -453,7 +453,7 @@ def test_create_blrheal_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         kw.moment_label: x_moment_label,
         kw.belief_name: x_belief_name,
-        "plan_rope": x_rope,
+        kw.plan_rope: x_rope,
         "healer_name": x_healer_name,
     }
     # all args included in values dict
@@ -510,7 +510,7 @@ def test_create_blrlabo_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         kw.moment_label: x_moment_label,
         kw.belief_name: x_belief_name,
-        "plan_rope": x_rope,
+        kw.plan_rope: x_rope,
         kw.party_title: x_party_title,
         "solo": x_solo,
         "_belief_name_is_labor": x__belief_name_is_labor,
@@ -535,7 +535,7 @@ def test_create_blrlabo_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
+def test_create_blfvoce_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_belief_calc_dimen_args("belief_voiceunit")
@@ -576,28 +576,30 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
     x_fund_agenda_ratio_take = 11
     x_inallocable_voice_debt_lumen = 12
     x_irrational_voice_debt_lumen = 13
+    x_groupmark = 13
     values_dict = {
         kw.moment_label: x_moment_label,
         kw.belief_name: x_belief_name,
-        "voice_name": x_voice_name,
-        "voice_cred_lumen": x_voice_cred_lumen,
-        "voice_debt_lumen": x_voice_debt_lumen,
-        "credor_pool": x_credor_pool,
-        "debtor_pool": x_debtor_pool,
-        "fund_give": x_fund_give,
-        "fund_take": x_fund_take,
-        "fund_agenda_give": x_fund_agenda_give,
-        "fund_agenda_take": x_fund_agenda_take,
-        "fund_agenda_ratio_give": x_fund_agenda_ratio_give,
-        "fund_agenda_ratio_take": x_fund_agenda_ratio_take,
-        "inallocable_voice_debt_lumen": x_inallocable_voice_debt_lumen,
-        "irrational_voice_debt_lumen": x_irrational_voice_debt_lumen,
+        kw.voice_name: x_voice_name,
+        kw.voice_cred_lumen: x_voice_cred_lumen,
+        kw.voice_debt_lumen: x_voice_debt_lumen,
+        kw.credor_pool: x_credor_pool,
+        kw.debtor_pool: x_debtor_pool,
+        kw.fund_give: x_fund_give,
+        kw.fund_take: x_fund_take,
+        kw.fund_agenda_give: x_fund_agenda_give,
+        kw.fund_agenda_take: x_fund_agenda_take,
+        kw.fund_agenda_ratio_give: x_fund_agenda_ratio_give,
+        kw.fund_agenda_ratio_take: x_fund_agenda_ratio_take,
+        kw.inallocable_voice_debt_lumen: x_inallocable_voice_debt_lumen,
+        kw.irrational_voice_debt_lumen: x_irrational_voice_debt_lumen,
+        kw.groupmark: x_groupmark,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_blrpern_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_blfvoce_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -655,18 +657,18 @@ def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         kw.moment_label: x_moment_label,
         kw.belief_name: x_belief_name,
-        "voice_name": x_voice_name,
-        "group_title": x_group_title,
-        "group_cred_lumen": x_group_cred_lumen,
-        "group_debt_lumen": x_group_debt_lumen,
-        "credor_pool": x_credor_pool,
-        "debtor_pool": x_debtor_pool,
-        "fund_give": x_fund_give,
-        "fund_take": x_fund_take,
-        "fund_agenda_give": x_fund_agenda_give,
-        "fund_agenda_take": x_fund_agenda_take,
-        "fund_agenda_ratio_give": x_fund_agenda_ratio_give,
-        "fund_agenda_ratio_take": x_fund_agenda_ratio_take,
+        kw.voice_name: x_voice_name,
+        kw.group_title: x_group_title,
+        kw.group_cred_lumen: x_group_cred_lumen,
+        kw.group_debt_lumen: x_group_debt_lumen,
+        kw.credor_pool: x_credor_pool,
+        kw.debtor_pool: x_debtor_pool,
+        kw.fund_give: x_fund_give,
+        kw.fund_take: x_fund_take,
+        kw.fund_agenda_give: x_fund_agenda_give,
+        kw.fund_agenda_take: x_fund_agenda_take,
+        kw.fund_agenda_ratio_give: x_fund_agenda_ratio_give,
+        kw.fund_agenda_ratio_take: x_fund_agenda_ratio_take,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -723,19 +725,17 @@ def test_create_blrgrou_metrics_insert_sqlstr_ReturnsObj():
     x_fund_take = 6
     x_fund_agenda_give = 7
     x_fund_agenda_take = 8
-    x_knot = 9
     values_dict = {
         kw.moment_label: x_moment_label,
         kw.belief_name: x_belief_name,
-        "group_title": x_group_title,
-        "credor_pool": x_credor_pool,
-        "debtor_pool": x_debtor_pool,
+        kw.group_title: x_group_title,
+        kw.credor_pool: x_credor_pool,
+        kw.debtor_pool: x_debtor_pool,
         kw.fund_grain: x_fund_grain,
-        "fund_give": x_fund_give,
-        "fund_take": x_fund_take,
-        "fund_agenda_give": x_fund_agenda_give,
-        "fund_agenda_take": x_fund_agenda_take,
-        kw.knot: x_knot,
+        kw.fund_give: x_fund_give,
+        kw.fund_take: x_fund_take,
+        kw.fund_agenda_give: x_fund_agenda_give,
+        kw.fund_agenda_take: x_fund_agenda_take,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())

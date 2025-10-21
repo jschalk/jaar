@@ -42,7 +42,7 @@ def test_ALL_DIMEN_ABBV7_has_all_dimens():
 def test_create_prime_tablename_ReturnsObj():
     # ESTABLISH
     blrunit_dimen = kw.beliefunit
-    blrpern_dimen = kw.belief_voiceunit
+    blfvoce_dimen = kw.belief_voiceunit
     blrmemb_dimen = kw.belief_voice_membership
     blrgrou_dimen = kw.belief_groupunit
     blrplan_dimen = kw.belief_planunit
@@ -72,7 +72,7 @@ def test_create_prime_tablename_ReturnsObj():
 
     # WHEN
     blrunit_s_agg_table = create_prime_tablename("beliefunit", "s", agg_str, put_str)
-    blrpern_s_agg_table = create_prime_tablename("blrpern", "s", agg_str, put_str)
+    blfvoce_s_agg_table = create_prime_tablename("blfvoce", "s", agg_str, put_str)
     blrmemb_s_agg_table = create_prime_tablename("blrmemb", "s", agg_str, put_str)
     blrplan_s_agg_table = create_prime_tablename("blrplan", "s", agg_str, put_str)
     blrawar_s_agg_table = create_prime_tablename("blrawar", "s", agg_str, put_str)
@@ -98,13 +98,13 @@ def test_create_prime_tablename_ReturnsObj():
     trltitl_s_val_table = create_prime_tablename("trltitl", "s", vld_str)
     trlcore_s_raw_table = create_prime_tablename("trlcore", "s", raw_str)
     trlcore_s_agg_table = create_prime_tablename("trlcore", "s", agg_str)
-    blrpern_job_table = create_prime_tablename("blrpern", kw.job, None)
-    x_blrpern_raw = create_prime_tablename("blrpern", "k", raw_str)
+    blfvoce_job_table = create_prime_tablename("blfvoce", kw.job, None)
+    x_blfvoce_raw = create_prime_tablename("blfvoce", "k", raw_str)
     blrgrou_job_table = create_prime_tablename("blrgrou", kw.job, None)
 
     # THEN
     assert blrunit_s_agg_table == f"{blrunit_dimen}_s_put_agg"
-    assert blrpern_s_agg_table == f"{blrpern_dimen}_s_put_agg"
+    assert blfvoce_s_agg_table == f"{blfvoce_dimen}_s_put_agg"
     assert blrmemb_s_agg_table == f"{blrmemb_dimen}_s_put_agg"
     assert blrplan_s_agg_table == f"{blrplan_dimen}_s_put_agg"
     assert blrawar_s_agg_table == f"{blrawar_dimen}_s_put_agg"
@@ -130,9 +130,9 @@ def test_create_prime_tablename_ReturnsObj():
     assert trltitl_s_val_table == f"{trltitl_dimen}_s_vld"
     assert trlcore_s_raw_table == f"{trlcore_dimen}_s_raw"
     assert trlcore_s_agg_table == f"{trlcore_dimen}_s_agg"
-    assert blrpern_job_table == f"{blrpern_dimen}_job"
+    assert blfvoce_job_table == f"{blfvoce_dimen}_job"
     assert blrgrou_job_table == f"{blrgrou_dimen}_job"
-    assert x_blrpern_raw == "belief_voiceunit_raw"
+    assert x_blfvoce_raw == "belief_voiceunit_raw"
 
 
 def test_create_all_idea_tables_CreatesMomentRawTables():

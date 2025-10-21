@@ -13,6 +13,7 @@ from src.ch07_belief_logic.test._util.ch07_examples import (
     get_beliefunit_with_4_levels_and_2reasons,
     get_beliefunit_x1_3levels_1reason_1facts,
 )
+from src.ref.keywords import Ch07Keywords as kw
 
 
 def test_display_plantree_Scenario0(graphics_bool):
@@ -44,7 +45,7 @@ def test_display_plantree_Scenario1_shows_tasks(graphics_bool):
     print(f"Belief {a_belief.moment_label}: Labels ({len(a_belief._plan_dict)})")
 
     # WHEN / THEN
-    display_plantree(a_belief, mode="task", graphics_bool=graphics_bool)
+    display_plantree(a_belief, mode=kw.task, graphics_bool=graphics_bool)
 
 
 def test_get_belief_voices_plotly_fig_DisplaysInfo(graphics_bool):
@@ -109,4 +110,4 @@ def test_BeliefUnit_fund_flow(graphics_bool):
     sue_belief.add_plan(dinner_rope, star=30, pledge=True)
 
     # WHEN / THEN
-    fund_graph0(sue_belief, "task", graphics_bool)
+    fund_graph0(sue_belief, kw.task, graphics_bool)
