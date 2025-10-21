@@ -195,11 +195,11 @@ def test_VoiceUnit_to_dict_ReturnsDictWith_irrational_voice_debt_lumen_ValuesIsN
     assert len(x_dict.keys()) == 10
 
 
-def test_voiceunit_get_from_dict_ReturnsObjWith_knot():
+def test_voiceunit_get_from_dict_ReturnsObjWith_groupmark():
     # ESTABLISH
     yao_str = ",Yao"
     slash_str = "/"
-    before_yao_voiceunit = voiceunit_shop(yao_str, knot=slash_str)
+    before_yao_voiceunit = voiceunit_shop(yao_str, groupmark=slash_str)
     yao_dict = before_yao_voiceunit.to_dict()
 
     # WHEN
@@ -207,14 +207,14 @@ def test_voiceunit_get_from_dict_ReturnsObjWith_knot():
 
     # THEN
     assert before_yao_voiceunit == after_yao_voiceunit
-    assert after_yao_voiceunit.knot == slash_str
+    assert after_yao_voiceunit.groupmark == slash_str
 
 
 def test_voiceunit_get_from_dict_Returns_memberships():
     # ESTABLISH
     yao_str = ",Yao"
     slash_str = "/"
-    before_yao_voiceunit = voiceunit_shop(yao_str, knot=slash_str)
+    before_yao_voiceunit = voiceunit_shop(yao_str, groupmark=slash_str)
     ohio_str = f"{slash_str}ohio"
     iowa_str = f"{slash_str}iowa"
     ohio_group_cred_lumen = 90
@@ -237,14 +237,14 @@ def test_voiceunit_get_from_dict_Returns_memberships():
     # THEN
     assert before_yao_voiceunit.memberships == after_yao_voiceunit.memberships
     assert before_yao_voiceunit == after_yao_voiceunit
-    assert after_yao_voiceunit.knot == slash_str
+    assert after_yao_voiceunit.groupmark == slash_str
 
 
-def test_voiceunits_get_from_dict_ReturnsObj_Scenario0_With_knot():
+def test_voiceunits_get_from_dict_ReturnsObj_Scenario0_With_groupmark():
     # ESTABLISH
     yao_str = ",Yao"
     slash_str = "/"
-    yao_voiceunit = voiceunit_shop(yao_str, knot=slash_str)
+    yao_voiceunit = voiceunit_shop(yao_str, groupmark=slash_str)
     yao_dict = yao_voiceunit.to_dict()
     x_voiceunits_dict = {yao_str: yao_dict}
 
@@ -253,7 +253,7 @@ def test_voiceunits_get_from_dict_ReturnsObj_Scenario0_With_knot():
 
     # THEN
     assert x_voiceunits_objs.get(yao_str) == yao_voiceunit
-    assert x_voiceunits_objs.get(yao_str).knot == slash_str
+    assert x_voiceunits_objs.get(yao_str).groupmark == slash_str
 
 
 def test_voiceunits_get_from_dict_ReturnsObj_Scenario1_SimpleExampleWith_IncompleteData():

@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 from src.ch01_py.dict_toolbox import get_0_if_None, get_1_if_None
 from src.ch02_allot.allot import allot_scale, default_grain_num_if_None
-from src.ch03_rope.rope import default_knot_if_None, is_labelterm, validate_labelterm
 from src.ch04_voice._ref.ch04_semantic_types import (
     FundNum,
     GroupMark,
@@ -24,6 +23,24 @@ def is_nameterm(x_nameterm: NameTerm, groupmark: GroupMark):
     return x_nameterm.is_name(groupmark=groupmark)
 
 
+class ValidateNameTermException(Exception):
+    pass
+
+
+def validate_nameterm(
+    x_nameterm: NameTerm, x_groupmark: str, not_nameterm_required: bool = False
+) -> NameTerm:
+    if is_nameterm(x_nameterm, x_groupmark) and not_nameterm_required:
+        raise ValidateNameTermException(
+            f"'{x_nameterm}' must not be a NameTerm. Must contain GroupMark: '{x_groupmark}'"
+        )
+    elif is_nameterm(x_nameterm, x_groupmark) is False and not not_nameterm_required:
+        raise ValidateNameTermException(
+            f"'{x_nameterm}' must be a NameTerm. Cannot contain GroupMark: '{x_groupmark}'"
+        )
+    return x_nameterm
+
+
 class Bad_voice_nameMemberShipException(Exception):
     pass
 
@@ -36,7 +53,7 @@ class VoiceUnit:
     """
 
     voice_name: VoiceName = None
-    knot: str = None
+    groupmark: str = None
     respect_grain: RespectGrain = None
     voice_cred_lumen: int = None
     voice_debt_lumen: int = None
@@ -56,7 +73,7 @@ class VoiceUnit:
     fund_agenda_ratio_take: FundNum = None
 
     def set_name(self, x_voice_name: VoiceName):
-        self.voice_name = validate_labelterm(x_voice_name, self.knot)
+        self.voice_name = validate_nameterm(x_voice_name, self.groupmark)
 
     def set_respect_grain(self, x_respect_grain: float):
         self.respect_grain = x_respect_grain
@@ -159,7 +176,7 @@ class VoiceUnit:
 
     def set_membership(self, x_membership: MemberShip):
         x_group_title = x_membership.group_title
-        group_title_is_voice_name = is_labelterm(x_group_title, self.knot)
+        group_title_is_voice_name = is_nameterm(x_group_title, self.groupmark)
         if group_title_is_voice_name and self.voice_name != x_group_title:
             exception_str = f"VoiceUnit with voice_name='{self.voice_name}' cannot have link to '{x_group_title}'."
             raise Bad_voice_nameMemberShipException(exception_str)
@@ -235,21 +252,23 @@ class VoiceUnit:
         x_dict["fund_agenda_ratio_take"] = self.fund_agenda_ratio_take
 
 
-def voiceunits_get_from_dict(x_dict: dict, _knot: str = None) -> dict[str, VoiceUnit]:
+def voiceunits_get_from_dict(
+    x_dict: dict, groupmark: str = None
+) -> dict[str, VoiceUnit]:
     voiceunits = {}
     for voiceunit_dict in x_dict.values():
-        x_voiceunit = voiceunit_get_from_dict(voiceunit_dict, _knot)
+        x_voiceunit = voiceunit_get_from_dict(voiceunit_dict, groupmark)
         voiceunits[x_voiceunit.voice_name] = x_voiceunit
     return voiceunits
 
 
-def voiceunit_get_from_dict(voiceunit_dict: dict, _knot: str) -> VoiceUnit:
+def voiceunit_get_from_dict(voiceunit_dict: dict, groupmark: str) -> VoiceUnit:
     x_voice_name = voiceunit_dict["voice_name"]
     x_voice_cred_lumen = voiceunit_dict["voice_cred_lumen"]
     x_voice_debt_lumen = voiceunit_dict["voice_debt_lumen"]
     x_memberships_dict = voiceunit_dict["memberships"]
     x_voiceunit = voiceunit_shop(
-        x_voice_name, x_voice_cred_lumen, x_voice_debt_lumen, _knot
+        x_voice_name, x_voice_cred_lumen, x_voice_debt_lumen, groupmark
     )
     x_voiceunit.memberships = memberships_get_from_dict(
         x_memberships_dict, x_voice_name
@@ -270,7 +289,7 @@ def voiceunit_shop(
     voice_name: VoiceName,
     voice_cred_lumen: int = None,
     voice_debt_lumen: int = None,
-    knot: str = None,
+    groupmark: str = None,
     respect_grain: float = None,
 ) -> VoiceUnit:
     x_voiceunit = VoiceUnit(
@@ -287,7 +306,7 @@ def voiceunit_shop(
         fund_agenda_take=0,
         fund_agenda_ratio_give=0,
         fund_agenda_ratio_take=0,
-        knot=default_knot_if_None(knot),
+        groupmark=default_groupmark_if_None(groupmark),
         respect_grain=default_grain_num_if_None(respect_grain),
     )
     x_voiceunit.set_name(x_voice_name=voice_name)

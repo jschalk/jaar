@@ -552,7 +552,7 @@ def test_replace_knot_WhenNewknotIsFirstInRopeTermRaisesError():
     )
 
 
-def test_validate_labelterm_RaisesErrorWhenNotLabelTerm():
+def test_validate_labelterm_Scenario0_RaisesErrorWhenNotLabelTerm():
     # ESTABLISH
     bob_str = "Bob, Tom"
     slash_str = "/"
@@ -570,7 +570,7 @@ def test_validate_labelterm_RaisesErrorWhenNotLabelTerm():
     )
 
 
-def test_validate_labelterm_RaisesErrorWhenLabelTerm():
+def test_validate_labelterm_Scenario1_RaisesErrorWhenLabelTerm():
     # ESTABLISH
     slash_str = "/"
     bob_str = f"Bob{slash_str}Tom"
@@ -592,7 +592,7 @@ def test_validate_labelterm_RaisesErrorWhenLabelTerm():
     )
 
 
-def test_rope_is_valid_dir_path_ReturnsObj_simple_knot():
+def test_rope_is_valid_dir_path_ReturnsObj_Scenario0_simple_knot():
     # ESTABLISH
     comma_str = ","
     # WHEN / THEN
@@ -605,7 +605,7 @@ def test_rope_is_valid_dir_path_ReturnsObj_simple_knot():
     ) or platform_system() == "Linux"
 
 
-def test_rope_is_valid_dir_path_ReturnsObj_complicated_knot():
+def test_rope_is_valid_dir_path_ReturnsObj_Scenario1_complicated_knot():
     # ESTABLISH
     question_str = "?"
     sport_str = "sport"
@@ -627,7 +627,7 @@ def test_rope_is_valid_dir_path_ReturnsObj_complicated_knot():
     ) or platform_system() == "Linux"
 
 
-def test_rope_is_valid_dir_path_ReturnsObjWhereSlashNotknotEdgeSituations():
+def test_rope_is_valid_dir_path_ReturnsObj_Scenario2_WhereSlashNotknotEdgeSituations():
     # ESTABLISH
     question_str = "?"
     sport_str = "sport"

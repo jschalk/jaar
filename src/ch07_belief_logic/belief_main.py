@@ -339,8 +339,8 @@ class BeliefUnit:
         self.set_voiceunit(voiceunit)
 
     def set_voiceunit(self, x_voiceunit: VoiceUnit, auto_set_membership: bool = True):
-        if x_voiceunit.knot != self.knot:
-            x_voiceunit.knot = self.knot
+        if x_voiceunit.groupmark != self.knot:
+            x_voiceunit.groupmark = self.knot
         if x_voiceunit.respect_grain != self.respect_grain:
             x_voiceunit.respect_grain = self.respect_grain
         if auto_set_membership and x_voiceunit.memberships_exist() is False:

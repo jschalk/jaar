@@ -25,10 +25,10 @@ class NameTerm(LabelTerm):
     """All Name string classes should inherit from this class"""
 
     def is_name(self, groupmark: GroupMark = None) -> bool:
-        return len(self) > 0 and self.contains_knot(groupmark)
+        return len(self) > 0 and self.contains_groupmark(groupmark)
 
-    # def contains_knot(self, knot: str = None) -> bool:
-    #     return self.find(default_knot_if_None(knot)) == -1
+    def contains_groupmark(self, groupmark: str = None) -> bool:
+        return self.find(default_groupmark_if_None(groupmark)) == -1
 
 
 class VoiceName(NameTerm):

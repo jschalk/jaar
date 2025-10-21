@@ -1,11 +1,11 @@
 from pytest import raises as pytest_raises
 from src.ch02_allot.allot import default_grain_num_if_None
-from src.ch03_rope.rope import default_knot_if_None
 from src.ch04_voice._ref.ch04_semantic_types import NameTerm
 from src.ch04_voice.voice import (
     VoiceUnit,
     default_groupmark_if_None,
     is_nameterm,
+    validate_nameterm,
     voiceunit_shop,
 )
 from src.ref.keywords import Ch04Keywords as kw
@@ -21,6 +21,46 @@ def test_is_nameterm_ReturnsObj():
     assert not is_nameterm(f"ZZ{x_groupmark}casa", x_groupmark)
     assert not is_nameterm(NameTerm(f"ZZ{x_groupmark}casa"), x_groupmark)
     assert is_nameterm(NameTerm("ZZ"), x_groupmark)
+
+
+def test_validate_nameterm_Scenario0_RaisesErrorWhenNotNameTerm():
+    # ESTABLISH
+    bob_str = "Bob, Tom"
+    slash_str = "/"
+    assert bob_str == validate_nameterm(bob_str, x_groupmark=slash_str)
+
+    # WHEN
+    comma_str = ","
+    with pytest_raises(Exception) as excinfo:
+        bob_str == validate_nameterm(bob_str, x_groupmark=comma_str)
+
+    # THEN
+    assert (
+        str(excinfo.value)
+        == f"'{bob_str}' must be a NameTerm. Cannot contain GroupMark: '{comma_str}'"
+    )
+
+
+def test_validate_nameterm_Scenario1_RaisesErrorWhenNameTerm():
+    # ESTABLISH
+    slash_str = "/"
+    bob_str = f"Bob{slash_str}Tom"
+    assert bob_str == validate_nameterm(
+        bob_str, x_groupmark=slash_str, not_nameterm_required=True
+    )
+
+    # WHEN
+    comma_str = ","
+    with pytest_raises(Exception) as excinfo:
+        bob_str == validate_nameterm(
+            bob_str, x_groupmark=comma_str, not_nameterm_required=True
+        )
+
+    # THEN
+    assert (
+        str(excinfo.value)
+        == f"'{bob_str}' must not be a NameTerm. Must contain GroupMark: '{comma_str}'"
+    )
 
 
 def test_VoiceUnit_Exists():
@@ -47,7 +87,7 @@ def test_VoiceUnit_Exists():
     assert not bob_voiceunit.fund_take
     assert not bob_voiceunit.fund_agenda_give
     assert not bob_voiceunit.fund_agenda_take
-    assert not bob_voiceunit.knot
+    assert not bob_voiceunit.groupmark
     assert not bob_voiceunit.respect_grain
     obj_attrs = set(bob_voiceunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
@@ -65,7 +105,7 @@ def test_VoiceUnit_Exists():
         kw.memberships,
         kw.respect_grain,
         kw.voice_name,
-        kw.knot,
+        kw.groupmark,
         kw.voice_cred_lumen,
         kw.voice_debt_lumen,
     }
@@ -83,17 +123,17 @@ def test_VoiceUnit_set_nameterm_SetsAttr():
     assert x_voiceunit.voice_name == bob_str
 
 
-def test_VoiceUnit_set_nameterm_RaisesErrorIfParameterContains_knot():
+def test_VoiceUnit_set_nameterm_RaisesErrorIfParameterContains_groupmark():
     # ESTABLISH
     slash_str = "/"
     texas_str = f"Texas{slash_str}Arkansas"
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        voiceunit_shop(voice_name=texas_str, knot=slash_str)
+        voiceunit_shop(voice_name=texas_str, groupmark=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{texas_str}' must be a LabelTerm. Cannot contain {kw.knot}: '{slash_str}'"
+        == f"'{texas_str}' must be a NameTerm. Cannot contain {kw.GroupMark}: '{slash_str}'"
     )
 
 
@@ -120,19 +160,19 @@ def test_voiceunit_shop_SetsAttributes():
     assert yao_voiceunit.fund_agenda_take == 0
     assert yao_voiceunit.fund_agenda_ratio_give == 0
     assert yao_voiceunit.fund_agenda_ratio_take == 0
-    assert yao_voiceunit.knot == default_knot_if_None()
+    assert yao_voiceunit.groupmark == default_groupmark_if_None()
     assert yao_voiceunit.respect_grain == default_grain_num_if_None()
 
 
-def test_voiceunit_shop_SetsAttributes_knot():
+def test_voiceunit_shop_SetsAttributes_groupmark():
     # ESTABLISH
     slash_str = "/"
 
     # WHEN
-    yao_voiceunit = voiceunit_shop("Yao", knot=slash_str)
+    yao_voiceunit = voiceunit_shop("Yao", groupmark=slash_str)
 
     # THEN
-    assert yao_voiceunit.knot == slash_str
+    assert yao_voiceunit.groupmark == slash_str
 
 
 def test_voiceunit_shop_SetsAttributes_respect_grain():

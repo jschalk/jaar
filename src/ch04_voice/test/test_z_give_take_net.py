@@ -12,21 +12,17 @@ def test_calc_give_take_net_ReturnsObj():
 
     with pytest_raises(Exception) as excinfo:
         calc_give_take_net(x_give=-1, x_take=14)
-    assert (
-        str(excinfo.value)
-        == "calc_give_take_net x_give=-1. Only non-negative numbers allowed."
-    )
+    exception1_str = "calc_give_take_net x_give=-1. Only non-negative numbers allowed."
+    assert str(excinfo.value) == exception1_str
 
     with pytest_raises(Exception) as excinfo:
         calc_give_take_net(x_give=15, x_take=-5)
-    assert (
-        str(excinfo.value)
-        == "calc_give_take_net x_take=-5. Only non-negative numbers allowed."
-    )
+    exception15_str = "calc_give_take_net x_take=-5. Only non-negative numbers allowed."
+    assert str(excinfo.value) == exception15_str
 
     with pytest_raises(Exception) as excinfo:
         calc_give_take_net(x_give=-4, x_take=-5)
-    assert (
-        str(excinfo.value)
-        == "calc_give_take_net x_give=-4 and x_take=-5. Only non-negative numbers allowed."
+    exception4_str = (
+        "calc_give_take_net x_give=-4 and x_take=-5. Only non-negative numbers allowed."
     )
+    assert str(excinfo.value) == exception4_str

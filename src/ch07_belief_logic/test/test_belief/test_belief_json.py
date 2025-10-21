@@ -310,7 +310,7 @@ def test_get_beliefunit_from_dict_ReturnsObj_knot_VoiceExample():
 
     # THEN
     after_bob_voiceunit = after_bob_belief.get_voice(bob_str)
-    assert after_bob_voiceunit.knot == slash_knot
+    assert after_bob_voiceunit.groupmark == slash_knot
 
 
 def test_get_beliefunit_from_dict_ReturnsObj_knot_GroupExample():
@@ -328,7 +328,7 @@ def test_get_beliefunit_from_dict_ReturnsObj_knot_GroupExample():
 
     # THEN
     after_yao_voiceunit = after_bob_belief.get_voice(yao_str)
-    assert after_yao_voiceunit.knot == slash_knot
+    assert after_yao_voiceunit.groupmark == slash_knot
 
 
 def test_get_beliefunit_from_dict_ReturnsObj_Scenario7_planroot_knot_IsApplied():
