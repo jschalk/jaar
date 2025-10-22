@@ -10,12 +10,6 @@ from src.ch07_belief_logic.belief_tool import (
 from src.ch08_epoch._ref.ch08_semantic_types import LabelTerm, RopeTerm
 from src.ch08_epoch.epoch_main import get_day_rope, get_week_rope, get_year_rope
 
-# THERE are 4 kinds of general repeat event requests:
-# Daily
-# Weekly
-# Monthly (day of month)
-# Yearly (by month/monthday)
-
 
 def del_epoch_reason(
     x_belief: BeliefUnit,
@@ -158,14 +152,14 @@ def set_epoch_base_case_xdays(
     epoch_label: LabelTerm,
     days_lower_day: int,
     days_upper_day: int,
-    every_x_days: int,
+    every_xdays: int,
 ):
     """Given an epoch_label set reason for a plan that would make it a occurance across entire week(s)
     Example:
-    Given: sue_beliefunit, plan_rope=;amy23;casa;mop;, epoch_label=lizzy9, every_x_days=5, days_duration=3
+    Given: sue_beliefunit, plan_rope=;amy23;casa;mop;, epoch_label=lizzy9, every_xdays=5, days_duration=3
     Add a reason to mop_plan that indicates it's to be active between every 5 days for a length of 3 days
     """
-    if days_lower_day and days_upper_day and every_x_days:
+    if days_lower_day and days_upper_day and every_xdays:
         time_rope = x_belief.make_l1_rope("time")
         epoch_rope = x_belief.make_rope(time_rope, epoch_label)
         days_rope = x_belief.make_rope(epoch_rope, "days")
@@ -176,9 +170,9 @@ def set_epoch_base_case_xdays(
             "plan_rope": plan_rope,
             "reason_context": days_rope,
             "reason_state": days_rope,
-            "reason_lower": days_lower_day % every_x_days,
-            "reason_upper": days_upper_day % every_x_days,
-            "reason_divisor": every_x_days,
+            "reason_lower": days_lower_day % every_xdays,
+            "reason_upper": days_upper_day % every_xdays,
+            "reason_divisor": every_xdays,
         }
         belief_plan_reason_caseunit_set_obj(x_belief, case_args)
 
@@ -245,7 +239,7 @@ def set_epoch_base_case_monthday(
 ):
     """Given an epoch_label set reason for a plan that would make it a occurance across entire week(s)
     Example:
-    Given: sue_beliefunit, plan_rope=;amy23;casa;mop;, epoch_label=lizzy9, every_x_days=5, days_duration=3
+    Given: sue_beliefunit, plan_rope=;amy23;casa;mop;, epoch_label=lizzy9, every_xdays=5, days_duration=3
     Add a reason to mop_plan that indicates it's to be active between every 5 days for a length of 3 days
     """
     if month_label and year_monthday_lower and year_monthday_duration_days:
@@ -282,7 +276,7 @@ def set_epoch_cases_for_dayly(
     dayly_duration_min: int,
     days_lower_day: int,
     days_upper_day: int,
-    every_x_days: int,
+    every_xdays: int,
     range_lower_min: int = None,
     range_duration: int = None,
 ):
@@ -290,7 +284,7 @@ def set_epoch_cases_for_dayly(
         x_belief, plan_rope, epoch_label, dayly_lower_min, dayly_duration_min
     )
     set_epoch_base_case_xdays(
-        x_belief, plan_rope, epoch_label, days_lower_day, days_upper_day, every_x_days
+        x_belief, plan_rope, epoch_label, days_lower_day, days_upper_day, every_xdays
     )
     set_epoch_base_case_range(
         x_belief, plan_rope, epoch_label, range_lower_min, range_duration
@@ -391,7 +385,7 @@ def set_epoch_cases_by_args_dict(
         epoch_label=x_epoch_label,
         days_lower_day=epoch_cases_args.get("days_lower_day"),
         days_upper_day=epoch_cases_args.get("days_upper_day"),
-        every_x_days=epoch_cases_args.get("every_x_days"),
+        every_xdays=epoch_cases_args.get("every_xdays"),
     )
     set_epoch_base_case_weekly(
         x_belief=x_belief,
@@ -430,3 +424,40 @@ def set_epoch_cases_by_args_dict(
         range_lower_min=epoch_cases_args.get("range_lower_min"),
         range_duration_min=epoch_cases_args.get("range_duration"),
     )
+
+
+# THERE are 5 kinds of epoch event requests:
+# given a epoch_reason_move_min number (how different otx time EpochPoint is from )
+# Daily
+# given any number of minutes
+# Weekly
+# Monthly (day of month)
+# Yearly (by month/monthday)
+# Range
+# set_epoch_base_case_dayly
+# "reason_lower": add_epoch_reason_move_min_then_modular_day_denom_1440,
+# "reason_upper": add_epoch_reason_move_min_then_modular_day_denom_1440,
+# set_epoch_base_case_xdays
+# "reason_lower": add_epoch_reason_move_min_then_modular_reason_divisor,
+# "reason_upper": add_epoch_reason_move_min_then_modular_reason_divisor,
+# "reason_divisor": do_not_change,
+# set_epoch_base_case_weekly
+# "reason_lower": add_minute_diffence_then_modular_week_denom_10020,
+# "reason_upper": add_minute_diffence_then_modular_week_denom_10020,
+# set_epoch_base_case_xweeks
+# "reason_lower": add_epoch_reason_move_min_then_modular_reason_divisor,
+# "reason_upper": add_epoch_reason_move_min_then_modular_reason_divisor,
+# "reason_divisor": do_not_change,
+# set_epoch_base_case_monthday
+# "reason_lower": add_epoch_reason_move_min_then_modular_reason_year_525600,
+# "reason_upper": add_epoch_reason_move_min_then_modular_reason_year_525600,
+# set_epoch_base_case_monthly
+# "reason_state": change reason_state month to
+# "reason_lower": add_epoch_reason_move_min_then_modular_reason_year_525600_Then check what month new reason_lower is in.
+# There can be only one caseunit per month, If there is a conflict take younger date or raise exception
+# "reason_upper": add_epoch_reason_move_min_then_modular_reason_year_525600_Then check what month new reason_upper is in.
+# There can be only one caseunit per month, If there is a conflict take younger date or raise exception
+
+# set_epoch_base_case_range
+# add_epoch_reason_move_min
+# add_epoch_reason_move_min

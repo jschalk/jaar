@@ -12,6 +12,7 @@ from src.ch08_epoch.test._util.ch08_examples import (
     get_expected_five_5524_markdown,
     get_five_config,
 )
+from src.ref.keywords import Ch08Keywords as kw
 
 
 def test_centered_to_len_ReturnsObj():
@@ -317,8 +318,8 @@ def test_CalendarMarkDown_create_2char_weekday_list_ReturnsObj_Scenario0_display
     # ESTABLISH
     creg_config = get_default_epoch_config_dict()
     creg_calendermarkdown = CalendarMarkDown(epoch_config=creg_config)
-    creg_calendermarkdown.display_init_day = "Monday"
-    creg_calendermarkdown.set_monthmarkdownrows("Tuesday", 1997)
+    creg_calendermarkdown.display_init_day = kw.Monday
+    creg_calendermarkdown.set_monthmarkdownrows(kw.Tuesday, 1997)
 
     # WHEN
     weekday_2char_list = creg_calendermarkdown.create_2char_weekday_list()
@@ -332,7 +333,7 @@ def test_CalendarMarkDown_create_2char_weekday_list_ReturnsObj_Scenario1_display
     # ESTABLISH
     creg_config = get_default_epoch_config_dict()
     creg_calendermarkdown = CalendarMarkDown(epoch_config=creg_config)
-    creg_calendermarkdown.set_monthmarkdownrows("Tuesday", 1997)
+    creg_calendermarkdown.set_monthmarkdownrows(kw.Tuesday, 1997)
 
     # WHEN
     weekday_2char_list = creg_calendermarkdown.create_2char_weekday_list()
@@ -346,14 +347,14 @@ def test_CalendarMarkDown_set_monthmarkdownrows_SetsAttr():
     # ESTABLISH
     creg_config = get_default_epoch_config_dict()
     creg_calendermarkdown = CalendarMarkDown(epoch_config=creg_config)
-    monday_str = "Monday"
+    monday_str = kw.Monday
     creg_calendermarkdown.display_init_day = monday_str
     x_weekday_2char_abvs = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
     yr1997_int = 1997
     assert not creg_calendermarkdown.epochunit
 
     # WHEN
-    creg_calendermarkdown.set_monthmarkdownrows("Tuesday", yr1997_int)
+    creg_calendermarkdown.set_monthmarkdownrows(kw.Tuesday, yr1997_int)
 
     # THEN
     expected_epochunit = epochunit_shop(creg_config)
@@ -395,7 +396,7 @@ def test_CalendarMarkDown_create_markdown_ReturnsObj_Scernario0_creg_config():
     # ESTABLISH
     creg_config = get_default_epoch_config_dict()
     creg_calendermarkdown = CalendarMarkDown(epoch_config=creg_config)
-    creg_calendermarkdown.display_init_day = "Monday"
+    creg_calendermarkdown.display_init_day = kw.Monday
     year_int = 2024
 
     # WHEN
@@ -412,7 +413,7 @@ def test_CalendarMarkDown_create_markdown_ReturnsObj_Scernario0_creg_config():
 def test_CalendarMarkDown_create_markdown_ReturnsObj_Scernario1_five_config():
     # ESTABLISH
     five_calendermarkdown = CalendarMarkDown(epoch_config=get_five_config())
-    five_calendermarkdown.display_init_day = "Anaday"
+    five_calendermarkdown.display_init_day = kw.Anaday
     year_int = 5224
 
     # WHEN
@@ -442,8 +443,8 @@ def test_get_calendarmarkdown_str_ReturnsObj_Scenario1_display_init_day_Paramete
     # ESTABLISH
     five_config = get_five_config()
     yr5524 = 5224
-    chiday_str = "Chiday"
-    anaday_str = "Anaday"
+    chiday_str = kw.Chiday
+    anaday_str = kw.Anaday
     expected_str = get_expected_five_5524_markdown()
 
     # WHEN / THEN

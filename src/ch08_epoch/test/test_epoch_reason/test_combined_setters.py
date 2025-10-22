@@ -53,7 +53,7 @@ def test_set_epoch_cases_for_dayly_SetsAttr_Scenario0_MiddleDayEvery3Days():
         dayly_duration_min=mop_day_duration,
         days_lower_day=mop_days_lower_day,
         days_upper_day=mop_days_upper_day,
-        every_x_days=mop_every_xdays,
+        every_xdays=mop_every_xdays,
     )
 
     # THEN
@@ -106,7 +106,7 @@ def test_set_epoch_cases_for_dayly_SetsAttr_Scenario1_IncludeRange():
         dayly_duration_min=mop_day_duration,
         days_lower_day=mop_days_lower_day,
         days_upper_day=mop_days_upper_day,
-        every_x_days=mop_every_xdays,
+        every_xdays=mop_every_xdays,
         range_lower_min=mop_range_lower_min,
         range_duration=mop_range_duration,
     )
@@ -483,7 +483,7 @@ def test_set_epoch_cases_by_args_dict_SetsAttr_Scenario0_dayly_AndIncludeRange()
         kw.dayly_duration_min: mop_day_duration,
         kw.days_lower_day: mop_days_lower_day,
         kw.days_upper_day: mop_days_upper_day,
-        kw.every_x_days: mop_every_xdays,
+        kw.every_xdays: mop_every_xdays,
         kw.range_lower_min: mop_range_lower_min,
         kw.range_duration: mop_range_duration,
     }

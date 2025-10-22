@@ -89,7 +89,7 @@ def test_BeliefEpochPoint_set_weekday_SetsAttr():
     x_epochpoint._set_weekday()
 
     # THEN
-    assert x_epochpoint._weekday == "Thursday"
+    assert x_epochpoint._weekday == kw.Thursday
 
 
 def test_BeliefEpochPoint_set_month_SetsAttr():
@@ -236,13 +236,13 @@ def test_calc_epoch_SetsAttrFiveEpoch(graphics_bool):
     five_epochpoint.calc_epoch()
 
     # THEN
-    assert creg_epochpoint._weekday == "Wednesday"
+    assert creg_epochpoint._weekday == kw.Wednesday
     assert creg_epochpoint._month == "March"
     assert creg_epochpoint._monthday == 1
     assert creg_epochpoint._hour == "12am"
     assert creg_epochpoint._minute == 0
     assert creg_epochpoint._year_num == 2000
-    assert five_epochpoint._weekday == "Baileyday"
+    assert five_epochpoint._weekday == kw.Baileyday
     assert five_epochpoint._monthday == 0
     assert five_epochpoint._month == "Fredrick"
     assert five_epochpoint._hour == "0hr"

@@ -316,7 +316,7 @@ VALUES
     # THEN
     a23_epoch_dict = a23_dict.get("epoch")
     assert a23_epoch_dict
-    a23_weekdays_config_dict = a23_epoch_dict.get("weekdays_config")
+    a23_weekdays_config_dict = a23_epoch_dict.get(kw.weekdays_config)
     assert a23_weekdays_config_dict == [ana_label, bee_label]
 
 

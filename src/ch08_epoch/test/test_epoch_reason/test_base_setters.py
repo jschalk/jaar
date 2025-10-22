@@ -143,7 +143,7 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario0_NoWarppingParameters():
         epoch_label=wx.five_str,
         days_lower_day=mop_days_lower_day,
         days_upper_day=mop_days_upper_day,
-        every_x_days=mop_every_xdays,
+        every_xdays=mop_every_xdays,
     )
 
     # THEN
@@ -178,7 +178,7 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario1_WarppingParameters():
         epoch_label=wx.five_str,
         days_lower_day=mop_days_lower_day,
         days_upper_day=mop_days_upper_day,
-        every_x_days=mop_every_xdays,
+        every_xdays=mop_every_xdays,
     )
 
     # THEN
@@ -210,7 +210,7 @@ def test_set_epoch_base_case_xdays_SetsAttr_Scenario2_ParametersAreNone():
         epoch_label=wx.five_str,
         days_lower_day=None,
         days_upper_day=None,
-        every_x_days=None,
+        every_xdays=None,
     )
 
     # THEN

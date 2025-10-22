@@ -1,12 +1,18 @@
 {
+  "Anaday": {"init_chapter": "ch08"}, 
+  "Baileyday": {"init_chapter": "ch08"}, 
   "BeliefName": {"init_chapter": "ch07", "semantic_type": "str"}, 
   "CRUD_command": {"init_chapter": "ch09", "semantic_type": "str"}, 
+  "Chiday": {"init_chapter": "ch08"}, 
   "DELETE": {"init_chapter": "ch09"}, 
+  "Danceday": {"init_chapter": "ch08"}, 
+  "Eastday": {"init_chapter": "ch08"}, 
   "EpochLabel": {"init_chapter": "ch08", "semantic_type": "str"}, 
   "EpochPoint": {"init_chapter": "ch08", "semantic_type": "int"}, 
   "Event": {"init_chapter": "ch12"}, 
   "FaceName": {"init_chapter": "ch10", "semantic_type": "str"}, 
   "FirstLabel": {"init_chapter": "ch02", "semantic_type": "str"}, 
+  "Friday": {"init_chapter": "ch08"}, 
   "FundGrain": {"init_chapter": "ch03", "semantic_type": "float"}, 
   "FundNum": {"init_chapter": "ch03", "semantic_type": "float"}, 
   "GrainNum": {"init_chapter": "ch02", "semantic_type": "float"}, 
@@ -20,16 +26,22 @@
   "ManaGrain": {"init_chapter": "ch04", "semantic_type": "float"}, 
   "ManaNum": {"init_chapter": "ch14", "semantic_type": "float"}, 
   "MomentLabel": {"init_chapter": "ch07", "semantic_type": "str"}, 
+  "Monday": {"init_chapter": "ch08"}, 
   "NameTerm": {"init_chapter": "ch03", "semantic_type": "str"}, 
   "NexusLabel": {"init_chapter": "ch07", "semantic_type": "str"}, 
   "PoolNum": {"init_chapter": "ch02", "semantic_type": "float"}, 
   "RespectGrain": {"init_chapter": "ch03", "semantic_type": "float"}, 
   "RespectNum": {"init_chapter": "ch03", "semantic_type": "float"}, 
   "RopeTerm": {"init_chapter": "ch02", "semantic_type": "str"}, 
+  "Saturday": {"init_chapter": "ch08"}, 
   "SparkInt": {"init_chapter": "ch11", "semantic_type": "int"}, 
+  "Sunday": {"init_chapter": "ch08"}, 
+  "Thursday": {"init_chapter": "ch08"}, 
   "TitleTerm": {"init_chapter": "ch03", "semantic_type": "str"}, 
+  "Tuesday": {"init_chapter": "ch08"}, 
   "UPDATE": {"init_chapter": "ch01"}, 
   "VoiceName": {"init_chapter": "ch03", "semantic_type": "str"}, 
+  "Wednesday": {"init_chapter": "ch08"}, 
   "WeightNum": {"init_chapter": "ch02", "semantic_type": "float"}, 
   "WorldName": {"init_chapter": "ch20", "semantic_type": "str"}, 
   "_cares": {"init_chapter": "ch14"}, 
@@ -85,10 +97,13 @@
   "bud_time": {"init_chapter": "ch11"}, 
   "bud_voice_nets": {"init_chapter": "ch11"}, 
   "build_order": {"init_chapter": "ch17"}, 
-  "c100": {"init_chapter": "ch08"}, 
-  "c400_clean": {"init_chapter": "ch08"}, 
-  "c400_leap": {"init_chapter": "ch08"}, 
-  "c400_number": {"init_chapter": "ch08"}, 
+  "c100": {"init_chapter": "ch08", "note": "100 years, sub part of C400_clean"}, 
+  "c400_clean": {"init_chapter": "ch08", "note": "400 years without the extra leap day."}, 
+  "c400_leap": {"init_chapter": "ch08", "note": "400 years with the extra leap day."}, 
+  "c400_number": {
+    "init_chapter": "ch08", 
+    "note": "Beto epoch tech is that any Epoch can be created in 400 year units. This is the number of 400_year_leap units the Epoch will have."
+  }, 
   "care_amount": {"init_chapter": "ch14"}, 
   "case_active": {"init_chapter": "ch05"}, 
   "cases": {"init_chapter": "ch05"}, 
@@ -119,11 +134,11 @@
   "days": {"init_chapter": "ch08"}, 
   "days_lower_day": {
     "init_chapter": "ch08", 
-    "note": "Required fields for creating Epoch every_x_days cases."
+    "note": "Required fields for creating Epoch every_xdays cases."
   }, 
   "days_upper_day": {
     "init_chapter": "ch08", 
-    "note": "Required fields for creating Epoch every_x_days cases."
+    "note": "Required fields for creating Epoch every_xdays cases."
   }, 
   "debtor_pool": {"init_chapter": "ch03"}, 
   "debtor_respect": {"init_chapter": "ch07"}, 
@@ -142,13 +157,13 @@
   "epoch": {"init_chapter": "ch08"}, 
   "epoch_label": {"init_chapter": "ch08"}, 
   "error_message": {"init_chapter": "ch17"}, 
-  "every_x_days": {
-    "init_chapter": "ch08", 
-    "note": "Required fields for creating Epoch every_x_days cases."
-  }, 
   "every_x_weeks": {
     "init_chapter": "ch08", 
     "note": "Required fields for creating Epoch weekly cases."
+  }, 
+  "every_xdays": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch every_xdays cases."
   }, 
   "face_name": {"init_chapter": "ch10"}, 
   "fact_context": {"init_chapter": "ch05"}, 
