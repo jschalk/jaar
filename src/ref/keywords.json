@@ -157,7 +157,7 @@
   "epoch": {"init_chapter": "ch08"}, 
   "epoch_label": {"init_chapter": "ch08"}, 
   "error_message": {"init_chapter": "ch17"}, 
-  "every_x_weeks": {
+  "every_xweeks": {
     "init_chapter": "ch08", 
     "note": "Required fields for creating Epoch weekly cases."
   }, 

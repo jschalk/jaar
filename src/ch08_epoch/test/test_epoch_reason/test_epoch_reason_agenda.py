@@ -17,7 +17,7 @@ from src.ch07_belief_logic.belief_tool import (
     set_factunits_to_belief,
 )
 from src.ch08_epoch.epoch_main import add_epoch_planunit
-from src.ch08_epoch.epoch_reason_builder import (
+from src.ch08_epoch.epoch_reason import (
     set_epoch_base_case_dayly,
     set_epoch_cases_for_monthly,
     set_epoch_cases_for_yearly_monthday,
@@ -122,7 +122,6 @@ def expected_ag_count_fact_set(
     x_belief.cashout()
     is_as_expected = expected == len(x_belief.get_agenda_dict())
     if not is_as_expected:
-        year_reasonheir = mop_plan.get_reasonheir(wx.five_year_rope)
         five_factheir = mop_plan.factheirs.get(wx.five_rope)
         year_factheir = mop_plan.factheirs.get(wx.five_year_rope)
         day_factheir = mop_plan.factheirs.get(wx.day_rope)

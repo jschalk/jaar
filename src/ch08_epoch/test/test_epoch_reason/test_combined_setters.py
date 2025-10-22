@@ -4,7 +4,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_plan_reasonunit_exists,
     belief_plan_reasonunit_get_obj,
 )
-from src.ch08_epoch.epoch_reason_builder import (
+from src.ch08_epoch.epoch_reason import (
     del_epoch_reason,
     set_epoch_base_case_range,
     set_epoch_cases_by_args_dict,
@@ -153,7 +153,7 @@ def test_set_epoch_cases_for_weekly_SetsAttr_Scenario0_ThirdDayEvery7Weeks():
         weekly_duration_min=mop_weekly_duration_min,
         weeks_lower_week=mop_week_lower,
         weeks_upper_week=mop_week_upper,
-        every_x_weeks=mop_every_xweeks,
+        every_xweeks=mop_every_xweeks,
     )
 
     # THEN
@@ -206,7 +206,7 @@ def test_set_epoch_cases_for_weekly_SetsAttr_Scenario1_IncludeRange():
         weekly_duration_min=mop_weekly_duration_min,
         weeks_lower_week=mop_week_lower,
         weeks_upper_week=mop_week_upper,
-        every_x_weeks=mop_every_xweeks,
+        every_xweeks=mop_every_xweeks,
         range_lower_min=mop_range_lower_min,
         range_duration=mop_range_duration,
     )
@@ -538,7 +538,7 @@ def test_set_epoch_cases_by_args_dict_SetsAttr_Scenario1_weekly_AndIncludeRange(
         kw.weekly_duration_min: mop_weekly_duration_min,
         kw.weeks_lower_week: mop_weeks_lower_week,
         kw.weeks_upper_week: mop_weeks_upper_week,
-        kw.every_x_weeks: mop_every_xweeks,
+        kw.every_xweeks: mop_every_xweeks,
         kw.range_lower_min: mop_range_lower_min,
         kw.range_duration: mop_range_duration,
     }

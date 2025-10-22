@@ -1,5 +1,6 @@
-from src.ch01_py.dict_toolbox import get_False_if_None
+from src.ch01_py.dict_toolbox import get_1_if_None, get_False_if_None
 from src.ch04_rope.rope import is_sub_rope
+from src.ch05_reason.reason import CaseUnit
 from src.ch06_plan.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch07_belief_logic.belief_tool import (
@@ -7,7 +8,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_planunit_exists,
     belief_planunit_get_obj,
 )
-from src.ch08_epoch._ref.ch08_semantic_types import LabelTerm, RopeTerm
+from src.ch08_epoch._ref.ch08_semantic_types import EpochPoint, LabelTerm, RopeTerm
 from src.ch08_epoch.epoch_main import get_day_rope, get_week_rope, get_year_rope
 
 
@@ -128,9 +129,9 @@ def set_epoch_base_case_xweeks(
     epoch_label: LabelTerm,
     weeks_lower_week: int,
     weeks_upper_week: int,
-    every_x_weeks: int,
+    every_xweeks: int,
 ):
-    if weeks_lower_week and weeks_upper_week and every_x_weeks:
+    if weeks_lower_week and weeks_upper_week and every_xweeks:
         time_rope = x_belief.make_l1_rope("time")
         epoch_rope = x_belief.make_rope(time_rope, epoch_label)
         weeks_rope = x_belief.make_rope(epoch_rope, "weeks")
@@ -139,9 +140,9 @@ def set_epoch_base_case_xweeks(
             "plan_rope": plan_rope,
             "reason_context": weeks_rope,
             "reason_state": weeks_rope,
-            "reason_lower": weeks_lower_week % every_x_weeks,
-            "reason_upper": weeks_upper_week % every_x_weeks,
-            "reason_divisor": every_x_weeks,
+            "reason_lower": weeks_lower_week % every_xweeks,
+            "reason_upper": weeks_upper_week % every_xweeks,
+            "reason_divisor": every_xweeks,
         }
         belief_plan_reason_caseunit_set_obj(x_belief, case_args)
 
@@ -299,7 +300,7 @@ def set_epoch_cases_for_weekly(
     weekly_duration_min: int,
     weeks_lower_week: int,
     weeks_upper_week: int,
-    every_x_weeks: int,
+    every_xweeks: int,
     range_lower_min: int = None,
     range_duration: int = None,
 ):
@@ -316,7 +317,7 @@ def set_epoch_cases_for_weekly(
         epoch_label=epoch_label,
         weeks_lower_week=weeks_lower_week,
         weeks_upper_week=weeks_upper_week,
-        every_x_weeks=every_x_weeks,
+        every_xweeks=every_xweeks,
     )
     set_epoch_base_case_range(
         x_belief, plan_rope, epoch_label, range_lower_min, range_duration
@@ -400,7 +401,7 @@ def set_epoch_cases_by_args_dict(
         epoch_label=x_epoch_label,
         weeks_lower_week=epoch_cases_args.get("weeks_lower_week"),
         weeks_upper_week=epoch_cases_args.get("weeks_upper_week"),
-        every_x_weeks=epoch_cases_args.get("every_x_weeks"),
+        every_xweeks=epoch_cases_args.get("every_xweeks"),
     )
     set_epoch_base_case_monthday(
         x_belief=x_belief,
@@ -426,38 +427,66 @@ def set_epoch_cases_by_args_dict(
     )
 
 
-# THERE are 5 kinds of epoch event requests:
-# given a epoch_reason_move_min number (how different otx time EpochPoint is from )
-# Daily
-# given any number of minutes
-# Weekly
-# Monthly (day of month)
-# Yearly (by month/monthday)
-# Range
-# set_epoch_base_case_dayly
-# "reason_lower": add_epoch_reason_move_min_then_modular_day_denom_1440,
-# "reason_upper": add_epoch_reason_move_min_then_modular_day_denom_1440,
-# set_epoch_base_case_xdays
-# "reason_lower": add_epoch_reason_move_min_then_modular_reason_divisor,
-# "reason_upper": add_epoch_reason_move_min_then_modular_reason_divisor,
-# "reason_divisor": do_not_change,
-# set_epoch_base_case_weekly
-# "reason_lower": add_minute_diffence_then_modular_week_denom_10020,
-# "reason_upper": add_minute_diffence_then_modular_week_denom_10020,
-# set_epoch_base_case_xweeks
-# "reason_lower": add_epoch_reason_move_min_then_modular_reason_divisor,
-# "reason_upper": add_epoch_reason_move_min_then_modular_reason_divisor,
-# "reason_divisor": do_not_change,
-# set_epoch_base_case_monthday
-# "reason_lower": add_epoch_reason_move_min_then_modular_reason_year_525600,
-# "reason_upper": add_epoch_reason_move_min_then_modular_reason_year_525600,
-# set_epoch_base_case_monthly
-# "reason_state": change reason_state month to
-# "reason_lower": add_epoch_reason_move_min_then_modular_reason_year_525600_Then check what month new reason_lower is in.
-# There can be only one caseunit per month, If there is a conflict take younger date or raise exception
-# "reason_upper": add_epoch_reason_move_min_then_modular_reason_year_525600_Then check what month new reason_upper is in.
-# There can be only one caseunit per month, If there is a conflict take younger date or raise exception
+def apply_epoch_frame(x_min: int, epoch_frame: int, denom: int) -> EpochPoint:
+    return (x_min + epoch_frame) % denom
 
-# set_epoch_base_case_range
-# add_epoch_reason_move_min
-# add_epoch_reason_move_min
+
+def add_epoch_frame_to_caseunit_any(
+    x_case: CaseUnit, case_frame_min: int, divisor: int = None, frame_denom: int = None
+):
+    """Given any case, divisor, and case_frame (could be in minutes, days, weeks, etc) apply changes to caseunit"""
+    if divisor is None:
+        divisor = x_case.reason_divisor
+    frame_denom = get_1_if_None(frame_denom)
+    case_frame_after = case_frame_min // frame_denom
+
+    new_reason_lower = apply_epoch_frame(x_case.reason_lower, case_frame_after, divisor)
+    new_reason_upper = apply_epoch_frame(x_case.reason_upper, case_frame_after, divisor)
+    x_case.reason_lower = new_reason_lower
+    x_case.reason_upper = new_reason_upper
+
+
+def add_epoch_frame_to_caseunit_dayly(day_case: CaseUnit, epoch_frame_min: int):
+    add_epoch_frame_to_caseunit_any(day_case, epoch_frame_min, day_case.reason_divisor)
+
+
+def add_epoch_frame_to_caseunit_xdays(xdays_case: CaseUnit, epoch_frame_min: int):
+    add_epoch_frame_to_caseunit_any(xdays_case, epoch_frame_min, frame_denom=1440)
+
+
+def add_epoch_frame_to_caseunit_weekly(week_case: CaseUnit, epoch_frame_min: int):
+    add_epoch_frame_to_caseunit_any(week_case, epoch_frame_min)
+
+
+def add_epoch_frame_to_caseunit_xweeks(xweeks_case: CaseUnit, epoch_frame_min: int):
+    add_epoch_frame_to_caseunit_any(xweeks_case, epoch_frame_min, frame_denom=10800)
+
+
+def add_epoch_frame_to_caseunit_monthday(monthday_case: CaseUnit, epoch_frame_min: int):
+    add_epoch_frame_to_caseunit_any(monthday_case, epoch_frame_min, 525600)
+
+
+def add_epoch_frame_to_caseunit_monthly(monthly_case: CaseUnit, epoch_frame_min: int):
+    add_epoch_frame_to_caseunit_any(monthly_case, epoch_frame_min, 525600)
+
+
+def add_epoch_frame_to_caseunit_range(
+    epoch_case: CaseUnit, epoch_total_min: int, epoch_frame_min: int
+):
+    add_epoch_frame_to_caseunit_any(epoch_case, epoch_frame_min, epoch_total_min)
+
+
+def add_epoch_frame_to_caseunit_obj():
+    pass
+
+
+def add_epoch_frame_to_factunit():
+    pass
+
+
+def add_epoch_frame_to_planunit():
+    pass
+
+
+def add_epoch_frame_to_beliefunit():
+    pass

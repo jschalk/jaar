@@ -6,8 +6,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_plan_reasonunit_get_obj,
     get_belief_root_facts_dict,
 )
-from src.ch08_epoch.epoch_main import add_epoch_planunit
-from src.ch08_epoch.epoch_reason_builder import (
+from src.ch08_epoch.epoch_reason import (
     del_epoch_reason,
     set_epoch_base_case_dayly,
     set_epoch_base_case_monthday,
@@ -33,7 +32,7 @@ def test_set_epoch_base_case_dayly_SetsAttr_Scenario0_NoWarppingParameters():
         kw.reason_state: wx.day_rope,
     }
     mop_dayly_lower_min = 600
-    mop_day_duration = 90
+    mop_dayly_duration_min = 90
     assert bob_belief.plan_exists(wx.five_rope)
     assert not belief_plan_reason_caseunit_exists(bob_belief, mop_dayly_args)
 
@@ -43,7 +42,7 @@ def test_set_epoch_base_case_dayly_SetsAttr_Scenario0_NoWarppingParameters():
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
         dayly_lower_min=mop_dayly_lower_min,
-        dayly_duration_min=mop_day_duration,
+        dayly_duration_min=mop_dayly_duration_min,
     )
 
     # THEN
@@ -333,7 +332,7 @@ def test_set_epoch_base_case_xweeks_SetsAttr_Scenario0_NoWrapingParameters():
         epoch_label=wx.five_str,
         weeks_lower_week=mop_week_lower,
         weeks_upper_week=mop_week_upper,
-        every_x_weeks=mop_every_xweeks,
+        every_xweeks=mop_every_xweeks,
     )
 
     # THEN
@@ -368,7 +367,7 @@ def test_set_epoch_base_case_xweeks_SetsAttr_Scenario1_WrapingParameters():
         epoch_label=wx.five_str,
         weeks_lower_week=mop_week_lower,
         weeks_upper_week=mop_week_upper,
-        every_x_weeks=mop_every_xweeks,
+        every_xweeks=mop_every_xweeks,
     )
 
     # THEN
@@ -400,7 +399,7 @@ def test_set_epoch_base_case_xweeks_SetsAttr_Scenario2_NoParameters():
         epoch_label=wx.five_str,
         weeks_lower_week=None,
         weeks_upper_week=None,
-        every_x_weeks=None,
+        every_xweeks=None,
     )
 
     # THEN
