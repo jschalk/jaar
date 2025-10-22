@@ -431,52 +431,24 @@ def apply_epoch_frame(x_min: int, epoch_frame: int, denom: int) -> EpochPoint:
     return (x_min + epoch_frame) % denom
 
 
-def add_epoch_frame_to_caseunit_any(
-    x_case: CaseUnit, case_frame_min: int, divisor: int = None, frame_denom: int = None
+def add_frame_to_caseunit(
+    x_case: CaseUnit,
+    case_frame_min: int,
+    context_plan_close: int,
+    context_plan_denom: int,
+    context_plan_morph: bool,
 ):
     """Given any case, divisor, and case_frame (could be in minutes, days, weeks, etc) apply changes to caseunit"""
-    if divisor is None:
-        divisor = x_case.reason_divisor
-    frame_denom = get_1_if_None(frame_denom)
-    case_frame_after = case_frame_min // frame_denom
-
-    new_reason_lower = apply_epoch_frame(x_case.reason_lower, case_frame_after, divisor)
-    new_reason_upper = apply_epoch_frame(x_case.reason_upper, case_frame_after, divisor)
+    divisor = x_case.reason_divisor or context_plan_close or context_plan_denom
+    if not context_plan_morph:
+        case_frame_min //= get_1_if_None(context_plan_denom)
+    new_reason_lower = apply_epoch_frame(x_case.reason_lower, case_frame_min, divisor)
+    new_reason_upper = apply_epoch_frame(x_case.reason_upper, case_frame_min, divisor)
     x_case.reason_lower = new_reason_lower
     x_case.reason_upper = new_reason_upper
 
 
-def add_epoch_frame_to_caseunit_dayly(day_case: CaseUnit, epoch_frame_min: int):
-    add_epoch_frame_to_caseunit_any(day_case, epoch_frame_min, day_case.reason_divisor)
-
-
-def add_epoch_frame_to_caseunit_xdays(xdays_case: CaseUnit, epoch_frame_min: int):
-    add_epoch_frame_to_caseunit_any(xdays_case, epoch_frame_min, frame_denom=1440)
-
-
-def add_epoch_frame_to_caseunit_weekly(week_case: CaseUnit, epoch_frame_min: int):
-    add_epoch_frame_to_caseunit_any(week_case, epoch_frame_min)
-
-
-def add_epoch_frame_to_caseunit_xweeks(xweeks_case: CaseUnit, epoch_frame_min: int):
-    add_epoch_frame_to_caseunit_any(xweeks_case, epoch_frame_min, frame_denom=10800)
-
-
-def add_epoch_frame_to_caseunit_monthday(monthday_case: CaseUnit, epoch_frame_min: int):
-    add_epoch_frame_to_caseunit_any(monthday_case, epoch_frame_min, 525600)
-
-
-def add_epoch_frame_to_caseunit_monthly(monthly_case: CaseUnit, epoch_frame_min: int):
-    add_epoch_frame_to_caseunit_any(monthly_case, epoch_frame_min, 525600)
-
-
-def add_epoch_frame_to_caseunit_range(
-    epoch_case: CaseUnit, epoch_total_min: int, epoch_frame_min: int
-):
-    add_epoch_frame_to_caseunit_any(epoch_case, epoch_frame_min, epoch_total_min)
-
-
-def add_epoch_frame_to_caseunit_obj():
+def add_epoch_frame_to_reasonunit():
     pass
 
 
