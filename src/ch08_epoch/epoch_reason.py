@@ -456,22 +456,24 @@ def append_frame_to_reasonunit(
     context_plan_morph: bool,
 ):
     for x_case in x_reason.cases.values():
-        append_frame_to_caseunit(
-            x_case,
-            frame_min,
-            context_plan_close,
-            context_plan_denom,
-            context_plan_morph,
-        )
+        if x_case.reason_lower and x_case.reason_upper:
+            append_frame_to_caseunit(
+                x_case,
+                frame_min,
+                context_plan_close,
+                context_plan_denom,
+                context_plan_morph,
+            )
 
 
 def append_frame_to_factunit(
     x_factunit: FactUnit, frame_min: int, context_plan_close: int
 ):
-    x_lower = modular_addition(x_factunit.fact_lower, frame_min, context_plan_close)
-    x_upper = modular_addition(x_factunit.fact_upper, frame_min, context_plan_close)
-    x_factunit.fact_lower = x_lower
-    x_factunit.fact_upper = x_upper
+    if x_factunit.fact_lower and x_factunit.fact_upper:
+        x_lower = modular_addition(x_factunit.fact_lower, frame_min, context_plan_close)
+        x_upper = modular_addition(x_factunit.fact_upper, frame_min, context_plan_close)
+        x_factunit.fact_lower = x_lower
+        x_factunit.fact_upper = x_upper
 
 
 def add_frame_to_beliefunit(

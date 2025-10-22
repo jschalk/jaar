@@ -785,5 +785,70 @@ def test_add_frame_to_beliefunit_ReturnsObj_Scenario1_FilterFactsAndReasonsEdite
     assert root_five_fact.fact_lower != x_lower_min
 
 
-# TODO
-# def test_add_frame_to_beliefunit_ReturnsObj_Scenario2_IgnoreNonRangeReasonsFacts():
+def test_add_frame_to_beliefunit_ReturnsObj_Scenario2_IgnoreNonRangeReasonsFacts():
+    # ESTABLISH
+    bob_belief = get_bob_five_belief()
+    bob_belief.add_plan(wx.clean_rope)
+    bob_belief.edit_plan_attr(
+        wx.mop_rope, reason_context=wx.clean_rope, reason_case=wx.clean_rope
+    )
+    x_range_lower_min = 7777
+    x_range_duration = 2000
+    mop_range_args = {
+        kw.plan_rope: wx.mop_rope,
+        kw.epoch_label: wx.five_str,
+        kw.reason_context: wx.five_rope,
+        kw.reason_state: wx.five_rope,
+        kw.range_lower_min: x_range_lower_min,
+        kw.range_duration: x_range_duration,
+    }
+    mop_clean_args = {
+        kw.plan_rope: wx.mop_rope,
+        kw.reason_context: wx.clean_rope,
+        kw.reason_state: wx.clean_rope,
+    }
+    set_epoch_cases_by_args_dict(bob_belief, mop_range_args)
+    x_lower_min = 5555
+    x_upper_min = 8000
+    bob_belief.add_fact(wx.five_rope, wx.five_rope, x_lower_min, x_upper_min)
+    bob_belief.add_fact(wx.clean_rope, wx.clean_rope)
+    root_five_args = {
+        kw.plan_rope: wx.mop_rope,
+        kw.plan_rope: bob_belief.planroot.get_plan_rope(),
+        kw.fact_context: wx.five_rope,
+    }
+    root_clean_args = {
+        kw.plan_rope: wx.mop_rope,
+        kw.plan_rope: bob_belief.planroot.get_plan_rope(),
+        kw.fact_context: wx.clean_rope,
+    }
+    assert belief_plan_factunit_exists(bob_belief, root_five_args)
+    assert belief_plan_factunit_exists(bob_belief, root_clean_args)
+    root_five_fact = belief_plan_factunit_get_obj(bob_belief, root_five_args)
+    root_clean_fact = belief_plan_factunit_get_obj(bob_belief, root_clean_args)
+    five_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_range_args)
+    clean_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_clean_args)
+
+    x_epoch_frame_min = 10005
+    x_range_upper_min = x_range_lower_min + x_range_duration
+    assert five_case.reason_lower == x_range_lower_min
+    assert five_case.reason_upper == x_range_upper_min
+    assert clean_case.reason_lower is None
+    assert clean_case.reason_upper is None
+    assert root_five_fact.fact_lower == x_lower_min
+    assert root_five_fact.fact_upper == x_upper_min
+    assert root_clean_fact.fact_lower is None
+    assert root_clean_fact.fact_upper is None
+
+    # WHEN
+    add_frame_to_beliefunit(bob_belief, x_epoch_frame_min)
+
+    # THEN
+    assert five_case.reason_lower != x_range_lower_min
+    assert five_case.reason_upper != x_range_upper_min
+    assert clean_case.reason_lower is None
+    assert clean_case.reason_upper is None
+    assert root_five_fact.fact_lower != x_lower_min
+    assert root_five_fact.fact_upper != x_upper_min
+    assert root_clean_fact.fact_lower is None
+    assert root_clean_fact.fact_upper is None
