@@ -200,9 +200,9 @@ def test_MemberShip_to_dict_ReturnsDictWithNecessaryDataForJSON():
     # THEN
     assert swim_dict is not None
     assert swim_dict == {
-        "group_title": swim_membership.group_title,
-        "group_cred_lumen": swim_membership.group_cred_lumen,
-        "group_debt_lumen": swim_membership.group_debt_lumen,
+        kw.group_title: swim_membership.group_title,
+        kw.group_cred_lumen: swim_membership.group_cred_lumen,
+        kw.group_debt_lumen: swim_membership.group_debt_lumen,
     }
 
 
@@ -322,6 +322,13 @@ def test_AwardHeir_Exists():
     assert x_awardheir.take_force == 1.0
     assert not x_awardheir.fund_give
     assert not x_awardheir.fund_take
+    assert x_awardheir.__dict__ == {
+        kw.awardee_title: None,
+        kw.give_force: 1,
+        kw.take_force: 1,
+        kw.fund_give: None,
+        kw.fund_take: None,
+    }
 
 
 def test_awardheir_shop_ReturnsObj():
@@ -405,6 +412,11 @@ def test_AwardLine_Exists():
     assert bikers_awardline.awardee_title == bikers_str
     assert bikers_awardline.fund_give == bikers_fund_give
     assert bikers_awardline.fund_take == bikers_fund_take
+    assert bikers_awardline.__dict__ == {
+        kw.awardee_title: bikers_str,
+        kw.fund_give: bikers_fund_give,
+        kw.fund_take: bikers_fund_take,
+    }
 
 
 def test_awardline_shop_ReturnsObj_Exists():

@@ -820,7 +820,7 @@ class PlanUnit:
         active_bool = self.all_reasonheirs_are_active()
         if active_bool and groupunits != {} and belief_name is not None:
             self.laborheir.set_belief_name_is_labor(groupunits, belief_name)
-            if self.laborheir._belief_name_is_labor is False:
+            if self.laborheir.belief_name_is_labor is False:
                 active_bool = False
         return active_bool
 

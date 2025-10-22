@@ -231,7 +231,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_membership()
     yao_beliefatom.set_jkey(kw.group_title, run_str)
     yao_beliefatom.set_jkey(kw.voice_name, yao_str)
     yao_run_group_cred_lumen = 17
-    yao_beliefatom.set_jvalue("group_cred_lumen", yao_run_group_cred_lumen)
+    yao_beliefatom.set_jvalue(kw.group_cred_lumen, yao_run_group_cred_lumen)
     print(f"{yao_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(yao_beliefatom)
@@ -956,7 +956,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_partyun
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_au.get_plan_obj(ball_rope)
-    assert before_ball_planunit.laborunit._partys == {}
+    assert before_ball_planunit.laborunit.partys == {}
 
     # WHEN
     update_disc_beliefatom = beliefatom_shop(kw.belief_plan_partyunit, kw.INSERT)
@@ -968,7 +968,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_partyun
 
     # THEN
     after_ball_planunit = after_sue_au.get_plan_obj(ball_rope)
-    assert after_ball_planunit.laborunit._partys != set()
+    assert after_ball_planunit.laborunit.partys != set()
     assert after_ball_planunit.laborunit.get_partyunit(yao_str) is not None
 
 
@@ -985,7 +985,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_partyun
     before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_au.get_plan_obj(ball_rope)
     before_ball_planunit.laborunit.add_party(yao_str)
-    assert before_ball_planunit.laborunit._partys != set()
+    assert before_ball_planunit.laborunit.partys != set()
     assert before_ball_planunit.laborunit.get_partyunit(yao_str) is not None
 
     # WHEN
@@ -999,7 +999,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_partyun
 
     # THEN
     after_ball_planunit = after_sue_au.get_plan_obj(ball_rope)
-    assert after_ball_planunit.laborunit._partys == {}
+    assert after_ball_planunit.laborunit.partys == {}
 
 
 def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_healerunit():

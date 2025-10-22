@@ -135,7 +135,7 @@ def test_create_gcalendar_events_list_ReturnsObj_Scenario2_3AllDayPledge():
     assert sue_gcal_events == [expected_event_dict]
 
 
-# -[ ] Build the concept of time zones into translate module, try out if the translation can be used for numbers
+# -[ ] Build the concept of time zones into the interpretation (trans late) module, try out if the translation can be used for numbers
 # def test_create_gcalendar_events_list_ReturnsObj_Scenario3_OneEpoch_pledge():
 #     # ESTABLISH
 #     sue_belief = beliefunit_shop(wx.sue, wx.a23)

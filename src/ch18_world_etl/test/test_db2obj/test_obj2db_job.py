@@ -513,7 +513,7 @@ def test_create_blrlabo_metrics_insert_sqlstr_ReturnsObj():
         kw.plan_rope: x_rope,
         kw.party_title: x_party_title,
         "solo": x_solo,
-        "_belief_name_is_labor": x__belief_name_is_labor,
+        "belief_name_is_labor": x__belief_name_is_labor,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())

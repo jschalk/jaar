@@ -562,9 +562,9 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrlabo, jk, kw.party_title) == "TEXT"
     assert g_popcashout(cfig, blrlabo, jk, kw.party_title) == False
 
-    assert g_class_type(cfig, blrlabo, jv, "_belief_name_is_labor") == "int"
-    assert g_sqlitetype(cfig, blrlabo, jv, "_belief_name_is_labor") == "INTEGER"
-    assert g_popcashout(cfig, blrlabo, jv, "_belief_name_is_labor") == True
+    assert g_class_type(cfig, blrlabo, jv, "belief_name_is_labor") == "int"
+    assert g_sqlitetype(cfig, blrlabo, jv, "belief_name_is_labor") == "INTEGER"
+    assert g_popcashout(cfig, blrlabo, jv, "belief_name_is_labor") == True
 
     assert g_class_type(cfig, blrplan, jv, "plan_active") == "int"
     assert g_sqlitetype(cfig, blrplan, jv, "plan_active") == "INTEGER"
@@ -842,7 +842,7 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(kw.parent_heir_active) == "int"
     assert belief_calc_args_type_dict.get(kw.active_requisite) == "bool"
     assert belief_calc_args_type_dict.get(kw.party_title) == kw.TitleTerm
-    assert belief_calc_args_type_dict.get("_belief_name_is_labor") == "int"
+    assert belief_calc_args_type_dict.get("belief_name_is_labor") == "int"
     assert belief_calc_args_type_dict.get(kw.plan_active) == "int"
     assert belief_calc_args_type_dict.get(kw.all_voice_cred) == "int"
     assert belief_calc_args_type_dict.get(kw.all_voice_debt) == "int"

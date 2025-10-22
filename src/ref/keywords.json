@@ -10,29 +10,12 @@
   "FundGrain": {"init_chapter": "ch03", "semantic_type": "float"}, 
   "FundNum": {"init_chapter": "ch03", "semantic_type": "float"}, 
   "GrainNum": {"init_chapter": "ch02", "semantic_type": "float"}, 
-  "GroupTitle": {"init_chapter": "ch03", "semantic_type": "str"}, 
   "GroupMark": {"init_chapter": "ch03", "semantic_type": "str"}, 
+  "GroupTitle": {"init_chapter": "ch03", "semantic_type": "str"}, 
   "HealerName": {"init_chapter": "ch03", "semantic_type": "str"}, 
   "INSERT": {"init_chapter": "ch01"}, 
-  "KnotTerm": {"init_chapter": "ch02", "semantic_type": "str"}, 
-  "groupmark": {"init_chapter": "ch03"}, 
+  "KnotTerm": {"init_chapter": "ch04", "semantic_type": "str"}, 
   "LabelTerm": {"init_chapter": "ch02", "semantic_type": "str"}, 
-  "weekly_lower_min": {"init_chapter": "ch08", "note": "Required fields for creating Epoch weekly cases."}, 
-  "weekly_duration_min": {"init_chapter": "ch08", "note": "Required fields for creating Epoch weekly cases."}, 
-  "weeks_lower_week": {"init_chapter": "ch08", "note": "Required fields for creating Epoch weekly cases."}, 
-  "weeks_upper_week": {"init_chapter": "ch08", "note": "Required fields for creating Epoch weekly cases."}, 
-  "every_x_weeks": {"init_chapter": "ch08", "note": "Required fields for creating Epoch weekly cases."}, 
-  "days_lower_day": {"init_chapter": "ch08", "note": "Required fields for creating Epoch every_x_days cases."}, 
-  "days_upper_day": {"init_chapter": "ch08", "note": "Required fields for creating Epoch every_x_days cases."}, 
-  "every_x_days": {"init_chapter": "ch08", "note": "Required fields for creating Epoch every_x_days cases."}, 
-  "dayly_lower_min": {"init_chapter": "ch08", "note": "Required fields for creating Epoch dayly cases."}, 
-  "dayly_duration_min": {"init_chapter": "ch08", "note": "Required fields for creating Epoch dayly cases."}, 
-  "range_lower_min": {"init_chapter": "ch08", "note": "Required fields for creating Epoch ranged cases."}, 
-  "range_duration": {"init_chapter": "ch08", "note": "Required fields for creating Epoch ranged cases."}, 
-  "year_monthday_lower": {"init_chapter": "ch08", "note": "Required fields for creating Epoch year_monthday cases."}, 
-  "year_monthday_duration_days": {"init_chapter": "ch08", "note": "Required fields for creating Epoch year_monthday cases."}, 
-  "monthly_monthday_lower": {"init_chapter": "ch08", "note": "Required fields for creating Epoch monthly cases."}, 
-  "monthly_duration_days": {"init_chapter": "ch08", "note": "Required fields for creating Epoch monthly cases."}, 
   "LobbyID": {"init_chapter": "ch21", "semantic_type": "str"}, 
   "ManaGrain": {"init_chapter": "ch04", "semantic_type": "float"}, 
   "ManaNum": {"init_chapter": "ch14", "semantic_type": "float"}, 
@@ -76,8 +59,10 @@
   "awardlines": {"init_chapter": "ch06"}, 
   "awardunits": {"init_chapter": "ch03"}, 
   "begin": {"init_chapter": "ch06"}, 
+  "belief": {"init_chapter": "ch03"}, 
   "belief_groupunit": {"init_chapter": "ch07"}, 
   "belief_name": {"init_chapter": "ch03"}, 
+  "belief_name_is_labor": {"init_chapter": "ch03"}, 
   "belief_net_amount": {"init_chapter": "ch18"}, 
   "belief_plan_awardunit": {"init_chapter": "ch07"}, 
   "belief_plan_factunit": {"init_chapter": "ch07"}, 
@@ -123,7 +108,23 @@
   "cumulative_minute": {"init_chapter": "ch15"}, 
   "cycle_max": {"init_chapter": "ch14"}, 
   "day": {"init_chapter": "ch08"}, 
+  "dayly_duration_min": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch dayly cases."
+  }, 
+  "dayly_lower_min": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch dayly cases."
+  }, 
   "days": {"init_chapter": "ch08"}, 
+  "days_lower_day": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch every_x_days cases."
+  }, 
+  "days_upper_day": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch every_x_days cases."
+  }, 
   "debtor_pool": {"init_chapter": "ch03"}, 
   "debtor_respect": {"init_chapter": "ch07"}, 
   "default_kpi_bundle": {"init_chapter": "ch19"}, 
@@ -141,6 +142,14 @@
   "epoch": {"init_chapter": "ch08"}, 
   "epoch_label": {"init_chapter": "ch08"}, 
   "error_message": {"init_chapter": "ch17"}, 
+  "every_x_days": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch every_x_days cases."
+  }, 
+  "every_x_weeks": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch weekly cases."
+  }, 
   "face_name": {"init_chapter": "ch10"}, 
   "fact_context": {"init_chapter": "ch05"}, 
   "fact_lower": {"init_chapter": "ch05"}, 
@@ -170,6 +179,7 @@
   "group_cred_lumen": {"init_chapter": "ch03"}, 
   "group_debt_lumen": {"init_chapter": "ch03"}, 
   "group_title": {"init_chapter": "ch03"}, 
+  "groupmark": {"init_chapter": "ch03"}, 
   "groupunits": {"init_chapter": "ch03"}, 
   "gut": {"init_chapter": "ch10"}, 
   "healer_name": {"init_chapter": "ch06"}, 
@@ -203,7 +213,7 @@
   "keeps_buildable": {"init_chapter": "ch07"}, 
   "keeps_justified": {"init_chapter": "ch07"}, 
   "kids": {"init_chapter": "ch06"}, 
-  "knot": {"init_chapter": "ch02"}, 
+  "knot": {"init_chapter": "ch04"}, 
   "laborheir": {"init_chapter": "ch03"}, 
   "laborunit": {"init_chapter": "ch03"}, 
   "last_lesson_id": {"init_chapter": "ch07"}, 
@@ -231,6 +241,14 @@
   "momentunit": {"init_chapter": "ch15"}, 
   "month_label": {"init_chapter": "ch08"}, 
   "monthday_index": {"init_chapter": "ch08"}, 
+  "monthly_duration_days": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch monthly cases."
+  }, 
+  "monthly_monthday_lower": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch monthly cases."
+  }, 
   "months_config": {"init_chapter": "ch08"}, 
   "morph": {"init_chapter": "ch06"}, 
   "need_bill_amount": {"init_chapter": "ch14"}, 
@@ -260,6 +278,7 @@
   "parent_rope": {"init_chapter": "ch02"}, 
   "parent_solo": {"init_chapter": "ch03"}, 
   "party_title": {"init_chapter": "ch03"}, 
+  "partys": {"init_chapter": "ch03"}, 
   "patient_count": {"init_chapter": "ch14"}, 
   "patient_rank_num": {"init_chapter": "ch14"}, 
   "patient_rank_percent": {"init_chapter": "ch14"}, 
@@ -273,10 +292,18 @@
   "pledge": {"init_chapter": "ch06"}, 
   "problem_bool": {"init_chapter": "ch06"}, 
   "quota": {"init_chapter": "ch11"}, 
+  "range_duration": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch ranged cases."
+  }, 
   "range_evaluated": {"init_chapter": "ch06"}, 
   "range_inheritors": {
     "init_chapter": "ch06", 
     "note": "# range_inheritors key: plan_rope for any Plan that inherits from a range_plan\n    # range_inheritors value: plan_rope for the range_plan\n    # During the cashout process range_inheritors defines when range_inheritors factheirs need to be created"
+  }, 
+  "range_lower_min": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch ranged cases."
   }, 
   "rational": {"init_chapter": "ch03"}, 
   "readable": {"init_chapter": "ch08"}, 
@@ -309,6 +336,7 @@
   "task": {"init_chapter": "ch05"}, 
   "time": {"init_chapter": "ch08"}, 
   "tran_time": {"init_chapter": "ch11"}, 
+  "translate": {"init_chapter": "ch16"}, 
   "translate_core": {"init_chapter": "ch16"}, 
   "translate_label": {"init_chapter": "ch16"}, 
   "translate_name": {"init_chapter": "ch16"}, 
@@ -328,9 +356,33 @@
   "weekday_label": {"init_chapter": "ch15"}, 
   "weekday_order": {"init_chapter": "ch15"}, 
   "weekdays_config": {"init_chapter": "ch08"}, 
+  "weekly_duration_min": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch weekly cases."
+  }, 
+  "weekly_lower_min": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch weekly cases."
+  }, 
   "weeks": {"init_chapter": "ch08"}, 
+  "weeks_lower_week": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch weekly cases."
+  }, 
+  "weeks_upper_week": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch weekly cases."
+  }, 
   "world_name": {"init_chapter": "ch17"}, 
   "year": {"init_chapter": "ch08"}, 
+  "year_monthday_duration_days": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch year_monthday cases."
+  }, 
+  "year_monthday_lower": {
+    "init_chapter": "ch08", 
+    "note": "Required fields for creating Epoch year_monthday cases."
+  }, 
   "yr1_jan1_offset": {"init_chapter": "ch08"}, 
   "yr4_clean": {"init_chapter": "ch08"}, 
   "yr4_leap": {"init_chapter": "ch08"}

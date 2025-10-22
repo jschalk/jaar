@@ -315,7 +315,7 @@ def add_belief_to_br00024_csv(
     spark_num: int = None,
 ) -> str:
     for planunit in x_belief._plan_dict.values():
-        for group_title in planunit.laborunit._partys:
+        for group_title in planunit.laborunit.partys:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(spark_num),

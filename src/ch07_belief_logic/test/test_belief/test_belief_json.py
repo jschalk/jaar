@@ -79,9 +79,7 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario1_planroot_laborunit():
     # THEN
     assert planroot_dict[kw.laborunit] == x_laborunit.to_dict()
     run_partyunit = partyunit_shop(run_str)
-    assert planroot_dict[kw.laborunit] == {
-        "_partys": {run_str: run_partyunit.to_dict()}
-    }
+    assert planroot_dict[kw.laborunit] == {"partys": {run_str: run_partyunit.to_dict()}}
     assert planroot_dict.get(kw.gogo_want) == x_gogo_want
     assert planroot_dict.get(kw.stop_want) == x_stop_want
 
@@ -131,7 +129,7 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario3_plankid_LaborUnit():
     labor_dict_x = planroot_dict[kw.kids][morn_str][kw.laborunit]
     assert labor_dict_x == x_laborunit.to_dict()
     run_partyunit = partyunit_shop(run_str)
-    assert labor_dict_x == {"_partys": {run_str: run_partyunit.to_dict()}}
+    assert labor_dict_x == {"partys": {run_str: run_partyunit.to_dict()}}
 
 
 def test_BeliefUnit_to_dict_ReturnsObj_Scenario4_planunit_WithLevels():

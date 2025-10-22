@@ -662,13 +662,13 @@ class BeliefUnit:
         for awardunit_awardee_title in awardunits_to_delete:
             x_plan.awardunits.pop(awardunit_awardee_title)
         if x_plan.laborunit is not None:
-            _partys_to_delete = [
+            partys_to_delete = [
                 _partyunit_party_title
-                for _partyunit_party_title in x_plan.laborunit._partys
+                for _partyunit_party_title in x_plan.laborunit.partys
                 if self.get_voiceunit_group_titles_dict().get(_partyunit_party_title)
                 is None
             ]
-            for _partyunit_party_title in _partys_to_delete:
+            for _partyunit_party_title in partys_to_delete:
                 x_plan.laborunit.del_partyunit(_partyunit_party_title)
         return x_plan
 
