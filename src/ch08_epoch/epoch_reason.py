@@ -474,17 +474,25 @@ def append_frame_to_factunit(
     x_factunit.fact_upper = x_upper
 
 
-def add_frame_to_beliefunit(x_belief: BeliefUnit, frame_min: int):
+def add_frame_to_beliefunit(
+    x_belief: BeliefUnit, frame_min: int, required_context_subrope: RopeTerm = None
+):
     for x_plan in x_belief.get_plan_dict().values():
         for x_reason in x_plan.reasonunits.values():
-            context_plan = x_belief.get_plan_obj(x_reason.reason_context)
-            append_frame_to_reasonunit(
-                x_reason=x_reason,
-                frame_min=frame_min,
-                context_plan_close=context_plan.close,
-                context_plan_denom=context_plan.denom,
-                context_plan_morph=context_plan.morph,
-            )
+            if required_context_subrope is None or is_sub_rope(
+                x_reason.reason_context, required_context_subrope
+            ):
+                reason_context_plan = x_belief.get_plan_obj(x_reason.reason_context)
+                append_frame_to_reasonunit(
+                    x_reason=x_reason,
+                    frame_min=frame_min,
+                    context_plan_close=reason_context_plan.close,
+                    context_plan_denom=reason_context_plan.denom,
+                    context_plan_morph=reason_context_plan.morph,
+                )
         for x_fact in x_plan.factunits.values():
-            context_plan = x_belief.get_plan_obj(x_fact.fact_context)
-            append_frame_to_factunit(x_fact, frame_min, context_plan.close)
+            if required_context_subrope is None or is_sub_rope(
+                x_fact.fact_context, required_context_subrope
+            ):
+                fact_context_plan = x_belief.get_plan_obj(x_fact.fact_context)
+                append_frame_to_factunit(x_fact, frame_min, fact_context_plan.close)

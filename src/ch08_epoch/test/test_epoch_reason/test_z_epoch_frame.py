@@ -9,6 +9,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_planunit_get_obj,
     get_belief_root_facts_dict,
 )
+from src.ch08_epoch.epoch_main import add_epoch_planunit
 from src.ch08_epoch.epoch_reason import (
     add_frame_to_beliefunit,
     append_frame_to_caseunit,
@@ -21,6 +22,7 @@ from src.ch08_epoch.epoch_reason import (
 from src.ch08_epoch.test._util.ch08_examples import (
     Ch08ExampleStrs as wx,
     get_bob_five_belief,
+    get_lizzy9_config,
 )
 from src.ref.keywords import Ch08Keywords as kw
 
@@ -685,7 +687,7 @@ def test_add_frame_to_beliefunit_ReturnsObj_Scenario0_OnlyEpochFactsAndReasons()
         kw.range_duration: x_range_duration,
     }
     set_epoch_cases_by_args_dict(bob_belief, mop_range_args)
-    x_lower_min = 7777
+    x_lower_min = 5555
     x_upper_min = 8000
     bob_belief.add_fact(wx.five_rope, wx.five_rope, x_lower_min, x_upper_min)
     root_five_args = {
@@ -719,6 +721,69 @@ def test_add_frame_to_beliefunit_ReturnsObj_Scenario0_OnlyEpochFactsAndReasons()
     assert root_five_fact.fact_upper != x_upper_min
 
 
+def test_add_frame_to_beliefunit_ReturnsObj_Scenario1_FilterFactsAndReasonsEdited():
+    # ESTABLISH
+    bob_belief = get_bob_five_belief()
+    add_epoch_planunit(bob_belief, get_lizzy9_config())
+    lizzy9_str = get_lizzy9_config().get(kw.epoch_label)
+    time_rope = bob_belief.make_l1_rope("time")
+    lizzy9_rope = bob_belief.make_rope(time_rope, lizzy9_str)
+    x_range_lower_min = 7777
+    x_range_duration = 2000
+    mop_five_args = {
+        kw.plan_rope: wx.mop_rope,
+        kw.epoch_label: wx.five_str,
+        kw.reason_context: wx.five_rope,
+        kw.reason_state: wx.five_rope,
+        kw.range_lower_min: x_range_lower_min,
+        kw.range_duration: x_range_duration,
+    }
+    mop_lizzy9_args = {
+        kw.plan_rope: wx.mop_rope,
+        kw.epoch_label: lizzy9_str,
+        kw.reason_context: lizzy9_rope,
+        kw.reason_state: lizzy9_rope,
+        kw.range_lower_min: x_range_lower_min,
+        kw.range_duration: x_range_duration,
+    }
+    set_epoch_cases_by_args_dict(bob_belief, mop_five_args)
+    set_epoch_cases_by_args_dict(bob_belief, mop_lizzy9_args)
+    x_lower_min = 7777
+    x_upper_min = 8000
+    bob_belief.add_fact(wx.five_rope, wx.five_rope, x_lower_min, x_upper_min)
+    bob_belief.add_fact(lizzy9_rope, lizzy9_rope, x_lower_min, x_upper_min)
+    root_five_args = {
+        kw.plan_rope: wx.mop_rope,
+        kw.plan_rope: bob_belief.planroot.get_plan_rope(),
+        kw.fact_context: wx.five_rope,
+    }
+    root_lizzy9_args = {
+        kw.plan_rope: wx.mop_rope,
+        kw.plan_rope: bob_belief.planroot.get_plan_rope(),
+        kw.fact_context: lizzy9_rope,
+    }
+    root_five_fact = belief_plan_factunit_get_obj(bob_belief, root_five_args)
+    root_lizzy9_fact = belief_plan_factunit_get_obj(bob_belief, root_lizzy9_args)
+    five_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_five_args)
+    lizzy9_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_lizzy9_args)
+
+    x_epoch_frame_min = 10005
+    assert five_case.reason_lower == x_range_lower_min
+    assert lizzy9_case.reason_lower == x_range_lower_min
+    assert root_five_fact.fact_lower == x_lower_min
+    assert root_lizzy9_fact.fact_lower == x_lower_min
+
+    # WHEN
+    add_frame_to_beliefunit(
+        bob_belief, x_epoch_frame_min, required_context_subrope=wx.five_rope
+    )
+
+    # THEN
+    assert lizzy9_case.reason_lower == x_range_lower_min
+    assert root_lizzy9_fact.fact_lower == x_lower_min
+    assert five_case.reason_lower != x_range_lower_min
+    assert root_five_fact.fact_lower != x_lower_min
+
+
 # TODO
-# def test_add_frame_to_beliefunit_ReturnsObj_Scenario1_FilterFactsAndReasonsEdited():
 # def test_add_frame_to_beliefunit_ReturnsObj_Scenario2_IgnoreNonRangeReasonsFacts():
