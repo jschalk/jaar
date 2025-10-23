@@ -151,7 +151,7 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario4_planunit_WithLevels():
     yao_voiceunit = zia_belief.get_voice(yao_str)
     yao_voiceunit.add_membership(run_str)
     run_healerunit = healerunit_shop({run_str})
-    root_rope = to_rope(zia_belief.moment_label)
+    root_rope = zia_belief.planroot.get_plan_rope()
     zia_belief.edit_plan_attr(root_rope, healerunit=run_healerunit)
     zia_belief.edit_plan_attr(root_rope, problem_bool=True)
 
@@ -275,7 +275,7 @@ def test_get_beliefunit_from_dict_ReturnsPlanRoot():
     json_belief = get_beliefunit_from_dict(zia_belief.to_dict())
 
     # THEN
-    json_planroot = json_belief.get_plan_obj(to_rope(zia_belief.moment_label))
+    json_planroot = json_belief.get_plan_obj(zia_belief.planroot.get_plan_rope())
     assert json_planroot.gogo_want == zia_gogo_want
     assert json_planroot.stop_want == zia_stop_want
 

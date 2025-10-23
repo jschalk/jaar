@@ -154,7 +154,7 @@ def test_BeliefUnit_cashout_Sets_plan_dict():
     # THEN
     casa_plan = sue_beliefunit._plan_dict.get(casa_rope)
     print(f"\nlook at {casa_plan.get_plan_rope()=}")
-    assert casa_plan.parent_rope == to_rope(sue_beliefunit.moment_label)
+    assert casa_plan.parent_rope == sue_beliefunit.planroot.get_plan_rope()
     assert casa_plan.kids == {}
     assert casa_plan.star == 30
     assert casa_plan.plan_label == casa_str
@@ -285,8 +285,6 @@ def test_BeliefUnit_cashout_SetsData_beliefunit_v001():
     # ESTABLISH
     yao_beliefunit = beliefunit_v001()
     print(f"{yao_beliefunit.get_reason_contexts()=}")
-    # hr_number = f"{yao_beliefunit.moment_label},hr_number"
-    # yao_beliefunit.add_fact(fact_context=hr_number, fact_state=hr_number, reason_lower=0, reason_upper=23)
     jour_min_str = "jour_minute"
     jour_min_rope = yao_beliefunit.make_l1_rope(jour_min_str)
     yao_beliefunit.add_fact(
@@ -358,7 +356,6 @@ def test_BeliefUnit_cashout_SetsData_beliefunit_v001():
 def test_BeliefUnit_cashout_OptionWeekJoursReturnsObj_beliefunit_v001():
     # ESTABLISH
     yao_beliefunit = beliefunit_v001()
-
     hr_number_str = "hr_number"
     hr_number_rope = yao_beliefunit.make_l1_rope(hr_number_str)
     yao_beliefunit.add_fact(
@@ -419,7 +416,7 @@ def test_BeliefUnit_cashout_OptionWeekJoursReturnsObj_beliefunit_v001():
     }
     mt_reasonunit = reasonunit_shop(wk_rope, cases=mt_cases)
     mt_reasonheir = reasonheir_shop(wk_rope, cases=mt_cases, reason_active=False)
-    x_planroot = yao_beliefunit.get_plan_obj(to_rope(yao_beliefunit.moment_label))
+    x_planroot = yao_beliefunit.planroot
     x_planroot.set_reasonunit(reason=mt_reasonunit)
     # print(f"{yao_beliefunit.reasonunits[wk_rope].reason_context=}")
     # print(f"{yao_beliefunit.reasonunits[wk_rope].cases[mon_rope].reason_state=}")
@@ -450,24 +447,6 @@ def test_BeliefUnit_cashout_OptionWeekJoursReturnsObj_beliefunit_v001():
     bird_str = "say hi to birds"
     bird_rope = yao_beliefunit.make_rope(casa_rope, bird_str)
     assert from_list_get_active(bird_rope, plan_dict) is False
-
-    # yao_beliefunit.add_fact(fact_context=wk_rope, fact_state=mon_rope)
-    # plan_dict = yao_beliefunit.get_plan_dict()
-    # casa_plan = x_planroot.kids[casa_str]
-    # twee_plan = casa_plan.kids[bird_str]
-    # print(f"{len(x_planroot.reasonheirs)=}")
-    # print(f"{len(casa_plan.reasonheirs)=}")
-    # print(f"{len(twee_plan.reasonheirs)=}")
-
-    # assert YR.get_active(rope=bird_plan, plan_dict=plan_dict) is True
-
-    # yao_beliefunit.add_fact(fact_context=f"{yao_beliefunit.moment_label},sem_jours", fact_state=f"{yao_beliefunit.moment_label},sem_jours,Tue")
-    # plan_dict = yao_beliefunit.get_plan_dict()
-    # assert YR.get_active(rope=bird_plan, plan_dict=plan_dict) is True
-
-    # yao_beliefunit.add_fact(fact_context=f"{yao_beliefunit.moment_label},sem_jours", fact_state=f"{yao_beliefunit.moment_label},sem_jours,Wed")
-    # plan_dict = yao_beliefunit.get_plan_dict()
-    # assert YR.get_active(rope=bird_plan, plan_dict=plan_dict) is False
 
 
 def test_BeliefUnit_cashout_SetsPlanUnitsActiveWithEvery6WeeksReason_beliefunit_v001():

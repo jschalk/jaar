@@ -365,7 +365,7 @@ def test_BeliefUnit_cashout_DoesNotKeepNonRequired_awardheirs():
     assert len(swim_plan.awardheirs) == 2
 
 
-def test_BeliefUnit_get_plan_tree_ordered_rope_list_ReturnsObj():
+def test_BeliefUnit_get_plan_tree_ordered_rope_list_ReturnsObj_Scenario0():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
     wk_str = "sem_jours"
@@ -382,15 +382,19 @@ def test_BeliefUnit_get_plan_tree_ordered_rope_list_ReturnsObj():
     x_8th_rope_in_ordered_list = sue_belief.get_plan_tree_ordered_rope_list()[9]
     assert x_8th_rope_in_ordered_list == sue_belief.make_l1_rope(wk_str)
 
-    # WHEN
-    y_belief = beliefunit_shop(moment_label="amy23")
 
-    # THEN
+def test_BeliefUnit_get_plan_tree_ordered_rope_list_ReturnsObj_Scenario1():
+    # ESTABLISH
+    y_belief = beliefunit_shop("Bob", "amy23")
+    root_rope = y_belief.planroot.get_plan_rope()
+
+    # WHEN
     y_1st_rope_in_ordered_list = y_belief.get_plan_tree_ordered_rope_list()[0]
+    # THEN
     assert y_1st_rope_in_ordered_list == root_rope
 
 
-def test_BeliefUnit_get_plan_tree_ordered_rope_list_CleansRangedPlanRopeTerms():
+def test_BeliefUnit_get_plan_tree_ordered_rope_list_Scenario2_CleansRangedPlanRopeTerms():
     # ESTABLISH
     yao_belief = beliefunit_shop("Yao")
 
@@ -466,7 +470,7 @@ def test_BeliefUnit_cashout_WhenPlanRootHas_starButAll_kidsHaveZero_starAddTo_of
     sue_beliefunit.cashout()
 
     # THEN
-    root_rope = to_rope(sue_beliefunit.moment_label)
+    root_rope = sue_beliefunit.planroot.get_plan_rope()
     assert sue_beliefunit.offtrack_kids_star_set == {root_rope}
 
     # WHEN
@@ -526,7 +530,7 @@ def test_BeliefUnit_cashout_CreatesNewGroupUnits_Scenario0():
     zia_voice_debt_lumen = 5
     yao_belief.add_voiceunit(yao_str, yao_voice_cred_lumen, yao_voice_debt_lumen)
     yao_belief.add_voiceunit(zia_str, zia_voice_cred_lumen, zia_voice_debt_lumen)
-    root_rope = to_rope(yao_belief.moment_label)
+    root_rope = yao_belief.planroot.get_plan_rope()
     x_planroot = yao_belief.get_plan_obj(root_rope)
     x_planroot.set_awardunit(awardunit_shop(yao_str))
     x_planroot.set_awardunit(awardunit_shop(zia_str))
@@ -662,7 +666,7 @@ def test_BeliefUnit_cashout_Sets_planroot_factheir_With_range_factheirs():
     tue_rope = yao_belief.make_rope(wk_rope, tue_str)
     tue_addin = 100
     yao_belief.set_plan_obj(planunit_shop(tue_str, addin=tue_addin), wk_rope)
-    root_rope = to_rope(yao_belief.moment_label)
+    root_rope = yao_belief.planroot.get_plan_rope()
     yao_belief.edit_plan_attr(root_rope, reason_context=tue_rope, reason_case=tue_rope)
 
     wk_reason_lower = 3

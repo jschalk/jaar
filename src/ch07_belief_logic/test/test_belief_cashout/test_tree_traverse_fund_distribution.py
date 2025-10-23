@@ -617,7 +617,7 @@ def test_BeliefUnit_cashout_WithLevel3AwardUnitAndEmptyAncestorsSetsGroupUnit_fu
     x_belief.cashout()
 
     # THEN
-    x_planroot = x_belief.get_plan_obj(to_rope(x_belief.moment_label))
+    x_planroot = x_belief.get_plan_obj(x_belief.planroot.get_plan_rope())
     with pytest_raises(Exception) as excinfo:
         x_planroot.awardunits[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
@@ -728,7 +728,7 @@ def test_BeliefUnit_cashout_SetsGroupLinkBeliefCredAndDebt():
     sue_awardunit = awardunit_shop(sue_str, 20, take_force=40)
     bob_awardunit = awardunit_shop(bob_str, 10, take_force=5)
     zia_awardunit = awardunit_shop(zia_str, 10, take_force=5)
-    root_rope = to_rope(yao_belief.moment_label)
+    root_rope = yao_belief.planroot.get_plan_rope()
     yao_belief.edit_plan_attr(root_rope, awardunit=sue_awardunit)
     yao_belief.edit_plan_attr(root_rope, awardunit=bob_awardunit)
     yao_belief.edit_plan_attr(root_rope, awardunit=zia_awardunit)

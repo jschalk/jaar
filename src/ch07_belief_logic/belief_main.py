@@ -605,7 +605,7 @@ class BeliefUnit:
 
         x_first_label = get_first_label_from_rope(parent_rope, self.knot)
         if self.planroot.plan_label != x_first_label:
-            exception_str = f"set_plan failed because parent_rope '{parent_rope}' has an invalid root label. Should be {self.planroot.plan_label}."
+            exception_str = f"set_plan failed because parent_rope '{parent_rope}' has an invalid root rope. Should be {self.planroot.get_plan_rope()}."
             raise InvalidBeliefException(exception_str)
 
         plan_kid.knot = self.knot

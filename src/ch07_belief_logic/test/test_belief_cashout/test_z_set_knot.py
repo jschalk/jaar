@@ -6,7 +6,7 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop, get_default_first
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 
 
-def test_BeliefUnit_set_plan_Setsmoment_label_AND_fund_grain():
+def test_BeliefUnit_set_plan_SetsAttrs_Scenario0_fund_grain():
     # ESTABLISH'
     x_fund_grain = 500
     sue_belief = get_beliefunit_with_4_levels()
@@ -58,7 +58,6 @@ def test_belief_set_knot_Modifies_parent_rope():
     semicolon_str = ";"
     assert zia_belief.knot == semicolon_str
     semicolon_cook_rope = zia_belief.make_rope(semicolon_casa_rope, cook_str)
-    # print(f"{zia_belief.moment_label=} {zia_belief.planroot.plan_label=} {casa_rope=}")
     # print(f"{cook_plan.parent_rope=} {cook_plan.plan_label=}")
     # semicolon_casa_plan = zia_belief.get_plan_obj(semicolon_casa_rope)
     # print(f"{semicolon_casa_plan.parent_rope=} {semicolon_casa_plan.plan_label=}")
@@ -70,8 +69,8 @@ def test_belief_set_knot_Modifies_parent_rope():
 
     # THEN
     assert cook_plan.get_plan_rope() != semicolon_cook_rope
-    zia_moment_label = zia_belief.moment_label
-    slash_casa_rope = create_rope(zia_moment_label, casa_str, knot=slash_str)
+    zia_nexus_label = zia_belief.get_nexus_label()
+    slash_casa_rope = create_rope(zia_nexus_label, casa_str, knot=slash_str)
     slash_cook_rope = create_rope(slash_casa_rope, cook_str, knot=slash_str)
     assert cook_plan.get_plan_rope() == slash_cook_rope
 
@@ -156,10 +155,10 @@ def test_belief_set_knot_ModifiesFactUnit():
 
 def test_BeliefUnit_set_knot_SetsAttr():
     # ESTABLISH
-    x_moment_label = "amy45"
+    a45_str = "amy45"
     slash_knot = "/"
     sue_str = "Sue"
-    sue_belief = beliefunit_shop(sue_str, x_moment_label, knot=slash_knot)
+    sue_belief = beliefunit_shop(sue_str, a45_str, knot=slash_knot)
     assert sue_belief.knot == slash_knot
 
     # WHEN
