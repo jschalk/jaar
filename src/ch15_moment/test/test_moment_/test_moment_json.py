@@ -250,4 +250,4 @@ def test_get_from_file_ReturnsMomentUnitWith_moment_mstr_dir(temp_dir_setup):
     assert generated_a45_moment.respect_grain == sue_respect_grain
     x_moments_dir = create_path(x_moment_mstr_dir, "moments")
     expected_a45_moment_dir = create_path(x_moments_dir, amy45_str)
-    assert generated_a45_moment._moment_dir == expected_a45_moment_dir
+    assert generated_a45_moment.moment_dir == expected_a45_moment_dir

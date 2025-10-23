@@ -95,27 +95,27 @@ class MomentUnit:
     mana_grain: ManaGrain = None
     job_listen_rotations: int = None
     offi_time_max: EpochPoint = None
-    _moment_dir: str = None
-    _beliefs_dir: str = None
-    _lessons_dir: str = None
+    moment_dir: str = None
+    beliefs_dir: str = None
+    lessons_dir: str = None
     all_tranbook: TranBook = None
 
     # directory setup
     def _set_moment_dirs(self):
         moments_dir = create_path(self.moment_mstr_dir, "moments")
-        self._moment_dir = create_path(moments_dir, self.moment_label)
-        self._beliefs_dir = create_path(self._moment_dir, "beliefs")
-        self._lessons_dir = create_path(self._moment_dir, "lessons")
-        set_dir(x_path=self._moment_dir)
-        set_dir(x_path=self._beliefs_dir)
-        set_dir(x_path=self._lessons_dir)
+        self.moment_dir = create_path(moments_dir, self.moment_label)
+        self.beliefs_dir = create_path(self.moment_dir, "beliefs")
+        self.lessons_dir = create_path(self.moment_dir, "lessons")
+        set_dir(x_path=self.moment_dir)
+        set_dir(x_path=self.beliefs_dir)
+        set_dir(x_path=self.lessons_dir)
 
     def _get_belief_dir(self, belief_name) -> str:
-        return create_path(self._beliefs_dir, belief_name)
+        return create_path(self.beliefs_dir, belief_name)
 
     def _get_belief_folder_names(self) -> set:
         beliefs = get_dir_file_strs(
-            self._beliefs_dir, include_dirs=True, include_files=False
+            self.beliefs_dir, include_dirs=True, include_files=False
         )
         return sorted(list(beliefs.keys()))
 

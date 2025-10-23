@@ -20,8 +20,8 @@ def test_LessonFileHandler_Exists():
     assert not x_lessonfilehandler.fund_grain
     assert not x_lessonfilehandler.respect_grain
     assert not x_lessonfilehandler.mana_grain
-    assert not x_lessonfilehandler._atoms_dir
-    assert not x_lessonfilehandler._lessons_dir
+    assert not x_lessonfilehandler.atoms_dir
+    assert not x_lessonfilehandler.lessons_dir
 
 
 def test_lessonfilehandler_shop_ReturnsObj():
@@ -57,8 +57,8 @@ def test_lessonfilehandler_shop_ReturnsObj():
     assert x_lessonfilehandler.respect_grain == x_respect_grain
     assert x_lessonfilehandler.mana_grain == x_mana_grain
     sue_dir = create_belief_dir_path(x_moment_mstr_dir, a45_str, sue_str)
-    assert x_lessonfilehandler._atoms_dir == create_path(sue_dir, "atoms")
-    assert x_lessonfilehandler._lessons_dir == create_path(sue_dir, "lessons")
+    assert x_lessonfilehandler.atoms_dir == create_path(sue_dir, "atoms")
+    assert x_lessonfilehandler.lessons_dir == create_path(sue_dir, "lessons")
 
 
 def test_lessonfilehandler_shop_ReturnsObjWhenEmpty():

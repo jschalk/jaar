@@ -48,8 +48,8 @@ def test_LessonUnit_Exists():
     assert not x_lessonunit._lesson_id
     assert not x_lessonunit._beliefdelta
     assert not x_lessonunit._delta_start
-    assert not x_lessonunit._lessons_dir
-    assert not x_lessonunit._atoms_dir
+    assert not x_lessonunit.lessons_dir
+    assert not x_lessonunit.atoms_dir
     assert not x_lessonunit.spark_num
 
 
@@ -67,8 +67,8 @@ def test_lessonunit_shop_ReturnsObjEstablishWithEmptyArgs():
     assert bob_lessonunit._lesson_id == 0
     assert bob_lessonunit._beliefdelta == beliefdelta_shop()
     assert bob_lessonunit._delta_start == 0
-    assert not bob_lessonunit._lessons_dir
-    assert not bob_lessonunit._atoms_dir
+    assert not bob_lessonunit.lessons_dir
+    assert not bob_lessonunit.atoms_dir
     assert not bob_lessonunit.spark_num
 
 
@@ -92,8 +92,8 @@ def test_lessonunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
         _lesson_id=bob_lesson_id,
         _beliefdelta=bob_beliefdelta,
         _delta_start=bob_delta_start,
-        _lessons_dir=bob_lessons_dir,
-        _atoms_dir=bob_atoms_dir,
+        lessons_dir=bob_lessons_dir,
+        atoms_dir=bob_atoms_dir,
         spark_num=amy45_e5_spark_num,
     )
 
@@ -104,8 +104,8 @@ def test_lessonunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
     assert bob_lessonunit._lesson_id == bob_lesson_id
     assert bob_lessonunit._beliefdelta == bob_beliefdelta
     assert bob_lessonunit._delta_start == bob_delta_start
-    assert bob_lessonunit._lessons_dir == bob_lessons_dir
-    assert bob_lessonunit._atoms_dir == bob_atoms_dir
+    assert bob_lessonunit.lessons_dir == bob_lessons_dir
+    assert bob_lessonunit.atoms_dir == bob_atoms_dir
     assert bob_lessonunit.spark_num == amy45_e5_spark_num
 
 
