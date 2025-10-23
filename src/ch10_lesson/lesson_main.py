@@ -6,7 +6,7 @@ from src.ch01_py.file_toolbox import (
     open_json,
     save_json,
 )
-from src.ch07_belief_logic.belief_main import BeliefUnit, get_default_moment_label
+from src.ch07_belief_logic.belief_main import BeliefUnit, get_default_first_label
 from src.ch09_belief_atom.atom_main import BeliefAtom, get_beliefatom_from_dict
 from src.ch10_lesson._ref.ch10_semantic_types import BeliefName, FaceName, MomentLabel
 from src.ch10_lesson.delta import (
@@ -163,7 +163,7 @@ def lessonunit_shop(
     spark_num: int = None,
 ) -> LessonUnit:
     _beliefdelta = beliefdelta_shop() if _beliefdelta is None else _beliefdelta
-    moment_label = get_default_moment_label() if moment_label is None else moment_label
+    moment_label = get_default_first_label() if moment_label is None else moment_label
     x_lessonunit = LessonUnit(
         face_name=face_name,
         belief_name=belief_name,

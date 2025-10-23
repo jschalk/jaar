@@ -9,6 +9,10 @@ from src.ch04_rope._ref.ch04_semantic_types import (
 )
 
 
+def get_default_first_label() -> FirstLabel:
+    return LabelTerm("YY")
+
+
 class knot_not_in_parent_rope_Exception(Exception):
     pass
 

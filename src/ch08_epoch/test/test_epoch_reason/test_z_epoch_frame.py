@@ -571,6 +571,7 @@ def test_append_frame_to_caseunit_SetsAttr_Scenario14_adds_epoch_frame_Wraps_ran
 
 
 def test_append_frame_to_reasonunit_SetsAttr_Scenario0_AllCaseUnitsAre_epoch():
+    # ESTABLISH
     bob_belief = get_bob_five_belief()
     x_range_lower_min = 7777
     x_range_duration = 2000
@@ -615,6 +616,7 @@ def test_append_frame_to_reasonunit_SetsAttr_Scenario0_AllCaseUnitsAre_epoch():
 
 
 def test_append_frame_to_factunit_SetsAttr_epoch_Scenario0_NoWrap():
+    # ESTABLISH
     bob_belief = get_bob_five_belief()
     x_lower_min = 7777
     x_upper_min = 8000
@@ -645,6 +647,7 @@ def test_append_frame_to_factunit_SetsAttr_epoch_Scenario0_NoWrap():
 
 
 def test_append_frame_to_factunit_SetsAttr_epoch_Scenario1_Wrap():
+    # ESTABLISH
     bob_belief = get_bob_five_belief()
     x_lower_min = 7777
     x_upper_min = 8000

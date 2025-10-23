@@ -21,6 +21,7 @@ from src.ch04_rope.rope import (
     default_knot_if_None,
     get_all_rope_labels,
     get_ancestor_ropes,
+    get_default_first_label,
     get_first_label_from_rope,
     get_forefather_ropes,
     get_parent_rope,
@@ -101,10 +102,6 @@ class healerunit_group_title_Exception(Exception):
 
 class gogo_calc_stop_calc_Exception(Exception):
     pass
-
-
-def get_default_moment_label() -> str:
-    return "ZZ"
 
 
 @dataclass
@@ -441,7 +438,7 @@ class BeliefUnit:
             self._create_plankid_if_empty(rope=fact_state)
 
         fact_context_plan = self.get_plan_obj(fact_context)
-        x_planroot = self.get_plan_obj(to_rope(self.moment_label))
+        x_planroot = self.planroot
         x_fact_lower = None
         if fact_upper is not None and fact_lower is None:
             x_fact_lower = x_planroot.factunits.get(fact_context).fact_lower
@@ -1448,7 +1445,7 @@ def beliefunit_shop(
     tally: float = None,
 ) -> BeliefUnit:
     belief_name = "" if belief_name is None else belief_name
-    moment_label = get_default_moment_label() if moment_label is None else moment_label
+    moment_label = get_default_first_label() if moment_label is None else moment_label
     x_belief = BeliefUnit(
         belief_name=belief_name,
         tally=get_1_if_None(tally),
