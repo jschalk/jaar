@@ -16,14 +16,8 @@ from src.ch06_plan._ref.ch06_semantic_types import (
 )
 
 
-class NexusLabel(FirstLabel):
-    """The Nexus is the FirstLabel of all RopeTerms in a BeliefUnit. NexusLabel cannot contain a knot."""
-
-    pass
-
-
-class MomentLabel(NexusLabel):  # Created to help track the object class relations
-    """A NexusLabel for a Moment. Cannot contain knot."""
+class MomentLabel(LabelTerm):  # Created to help track the object class relations
+    """A LabelTerm for a Moment. Cannot contain knot."""
 
     pass
 

@@ -3,7 +3,6 @@ from src.ch07_belief_logic._ref.ch07_semantic_types import (
     BeliefName,
     ManaGrain,
     MomentLabel,
-    NexusLabel,
 )
 from src.ref.keywords import Ch07Keywords as kw
 
@@ -19,17 +18,6 @@ def test_BeliefName_Exists():
     assert inspect_getdoc(bob_BeliefName_str) == doc_str
 
 
-def test_NexusLabel_Exists():
-    # ESTABLISH
-    empty_str = ""
-    # WHEN
-    x_nexus = NexusLabel(empty_str)
-    # THEN
-    assert x_nexus == empty_str
-    doc_str = f"The Nexus is the FirstLabel of all RopeTerms in a BeliefUnit. NexusLabel cannot contain a {kw.knot}."
-    assert inspect_getdoc(x_nexus) == doc_str
-
-
 def test_MomentLabel_Exists():
     # ESTABLISH
     bob_str = "Bob"
@@ -37,7 +25,7 @@ def test_MomentLabel_Exists():
     bob_MomentLabel_str = MomentLabel(bob_str)
     # THEN
     assert bob_MomentLabel_str == bob_str
-    doc_str = "A NexusLabel for a Moment. Cannot contain knot."
+    doc_str = "A LabelTerm for a Moment. Cannot contain knot."
     assert inspect_getdoc(bob_MomentLabel_str) == doc_str
 
 

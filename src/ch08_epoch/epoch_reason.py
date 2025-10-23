@@ -509,5 +509,7 @@ def append_frame_to_beliefunit(
 def append_epoch_frame_to_beliefunit(
     x_belief: BeliefUnit, epoch_label: LabelTerm, epoch_frame_min: int
 ):
-    epoch_rope = get_epoch_rope(x_belief.get_nexus_label(), epoch_label, x_belief.knot)
+    epoch_rope = get_epoch_rope(
+        x_belief.planroot.plan_label, epoch_label, x_belief.knot
+    )
     append_frame_to_beliefunit(x_belief, epoch_frame_min, epoch_rope)

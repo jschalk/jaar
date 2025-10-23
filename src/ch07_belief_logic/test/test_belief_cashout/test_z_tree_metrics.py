@@ -100,7 +100,7 @@ def test_BeliefUnit_get_tree_metrics_Returns_pledge_PlanRopeTerm():
     # WHEN / THEN
     traain_rope = create_rope_from_labels(
         [
-            yao_belief.get_nexus_label(),
+            yao_belief.planroot.plan_label,
             "ACME",
             "ACME Employee Responsiblities",
             "Know Abuse Deterrence and Reporting guildlines",

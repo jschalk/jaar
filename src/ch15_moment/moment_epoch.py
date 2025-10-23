@@ -22,7 +22,7 @@ def get_moment_beliefepochpoint(momentunit: MomentUnit) -> BeliefEpochPoint:
     )
     moment_epoch_label = momentunit.epoch.epoch_label
     epoch_rope = get_epoch_rope(
-        nexus_label=momentunit.moment_label,
+        moment_label=momentunit.moment_label,
         epoch_label=moment_epoch_label,
         knot=momentunit.knot,
     )

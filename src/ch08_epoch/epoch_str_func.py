@@ -18,8 +18,8 @@ def get_reason_case_readable_str(
 ) -> str:
     """Returns a string describing reason case in readable language. Will have special cases for time."""
 
-    nexus_label = get_first_label_from_rope(reason_context)
-    time_rope = create_rope(nexus_label, "time")
+    moment_label = get_first_label_from_rope(reason_context)
+    time_rope = create_rope(moment_label, "time")
     epoch_rope = create_rope(time_rope, epoch_label)
     week_rope = create_rope(epoch_rope, "week")
     if reason_context == week_rope:
@@ -53,8 +53,8 @@ def get_fact_state_readable_str(
     context_tail = get_tail_label(context_rope)
     state_trailing = state_rope.replace(context_rope, "", 1)
     x_str = f"({context_tail}) fact: {state_trailing}"
-    nexus_label = get_first_label_from_rope(context_rope)
-    time_rope = create_rope(nexus_label, "time")
+    moment_label = get_first_label_from_rope(context_rope)
+    time_rope = create_rope(moment_label, "time")
     if factunit.fact_context == create_rope(time_rope, epoch_label):
         lower_blurb = get_epochpoint_blurb(beliefunit, epoch_label, lower_float)
         upper_blurb = get_epochpoint_blurb(beliefunit, epoch_label, upper_float)

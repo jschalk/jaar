@@ -1,6 +1,6 @@
 {
   "chapter_blurb": "Defines a BeliefUnit as a PlanUnit and VoiceUnits capable of producing an agenda.", 
-  "chapter_content": "A belief is a beliefunit, made of voices and plans. All plans are connected to the nexus plan, which is given all the funds in a beliefunit.", 
+  "chapter_content": "A belief is a beliefunit, made of voices and plans. All plans are connected to the planroot, which is given all the funds in a beliefunit.", 
   "chapter_description": "ch07_belief_logic", 
   "chapter_number": 7
 }
