@@ -906,7 +906,7 @@ def test_BeliefUnit_cashout_Sets_keeps_buildable_False():
     oregon_rope = sue_beliefunit.make_rope(usa_rope, "Oregon")
     bend_str = "Be/nd"
     bend_rope = sue_beliefunit.make_rope(oregon_rope, bend_str)
-    sue_beliefunit.set_plan(planunit_shop(bend_str), oregon_rope)
+    sue_beliefunit.set_plan_obj(planunit_shop(bend_str), oregon_rope)
     sue_healerunit = healerunit_shop({sue_str})
     sue_beliefunit.edit_plan_attr(
         bend_rope, problem_bool=True, healerunit=sue_healerunit

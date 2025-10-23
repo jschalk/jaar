@@ -53,7 +53,7 @@ def test_BeliefUnit_cashout_ExecutesWithRangeRootFacts():
     sweep_stop_want = 1
     sweep_plan = planunit_shop(sweep_str, gogo_want=sweep_gogo_want)
     sweep_plan.stop_want = sweep_stop_want
-    zia_belief.set_plan(clean_plan, parent_rope=casa_rope)
+    zia_belief.set_plan_obj(clean_plan, parent_rope=casa_rope)
     zia_belief.add_fact(
         fact_context=clean_rope, fact_state=clean_rope, fact_lower=1, fact_upper=5
     )
@@ -84,8 +84,8 @@ def test_BeliefUnit_cashout_RaisesErrorIfNon_RangeRootHasFactUnit():
     sweep_str = "sweep"
     sweep_rope = zia_belief.make_rope(clean_rope, sweep_str)
     sweep_plan = planunit_shop(sweep_str, addin=2)
-    zia_belief.set_plan(clean_plan, parent_rope=casa_rope)
-    zia_belief.set_plan(sweep_plan, parent_rope=clean_rope)
+    zia_belief.set_plan_obj(clean_plan, parent_rope=casa_rope)
+    zia_belief.set_plan_obj(sweep_plan, parent_rope=clean_rope)
     zia_belief.add_fact(sweep_rope, sweep_rope, fact_lower=1, fact_upper=5)
 
     # WHEN
@@ -109,8 +109,8 @@ def test_BeliefUnit_cashout_FactHeirsInherited():
     slow_str = "slow"
     fast_rope = zia_belief.make_rope(swim_rope, fast_str)
     slow_rope = zia_belief.make_rope(swim_rope, slow_str)
-    zia_belief.set_plan(planunit_shop(fast_str), parent_rope=swim_rope)
-    zia_belief.set_plan(planunit_shop(slow_str), parent_rope=swim_rope)
+    zia_belief.set_plan_obj(planunit_shop(fast_str), parent_rope=swim_rope)
+    zia_belief.set_plan_obj(planunit_shop(slow_str), parent_rope=swim_rope)
 
     earth_str = "earth"
     earth_rope = zia_belief.make_l1_rope(earth_str)
@@ -169,8 +169,8 @@ def test_BeliefUnit_cashout_FactUnitMoldsFactHeir():
 
     fast_str = "fast"
     slow_str = "slow"
-    zia_belief.set_plan(planunit_shop(fast_str), parent_rope=swim_rope)
-    zia_belief.set_plan(planunit_shop(slow_str), parent_rope=swim_rope)
+    zia_belief.set_plan_obj(planunit_shop(fast_str), parent_rope=swim_rope)
+    zia_belief.set_plan_obj(planunit_shop(slow_str), parent_rope=swim_rope)
 
     earth_str = "earth"
     earth_rope = zia_belief.make_l1_rope(earth_str)
@@ -216,8 +216,8 @@ def test_BeliefUnit_cashout_FactHeirDeletesFactUnit():
     sue_belief.set_l1_plan(planunit_shop(swim_str))
     fast_str = "fast"
     slow_str = "slow"
-    sue_belief.set_plan(planunit_shop(fast_str), parent_rope=swim_rope)
-    sue_belief.set_plan(planunit_shop(slow_str), parent_rope=swim_rope)
+    sue_belief.set_plan_obj(planunit_shop(fast_str), parent_rope=swim_rope)
+    sue_belief.set_plan_obj(planunit_shop(slow_str), parent_rope=swim_rope)
     earth_str = "earth"
     earth_rope = sue_belief.make_l1_rope(earth_str)
     sue_belief.set_l1_plan(planunit_shop(earth_str))

@@ -28,7 +28,7 @@ def test_get_keep_ropes_RaisesErrorWhen_keeps_justified_IsFalse(
     dallas_str = "dallas"
     dallas_rope = sue_gut_belief.make_rope(texas_rope, dallas_str)
     sue_gut_belief.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
-    sue_gut_belief.set_plan(planunit_shop(dallas_str), texas_rope)
+    sue_gut_belief.set_plan_obj(planunit_shop(dallas_str), texas_rope)
     sue_gut_belief.edit_plan_attr(texas_rope, healerunit=healerunit_shop({sue_str}))
     sue_gut_belief.edit_plan_attr(dallas_rope, healerunit=healerunit_shop({sue_str}))
     sue_gut_belief.cashout()
@@ -85,8 +85,8 @@ def test_get_keep_ropes_ReturnsObj(temp_dir_setup, graphics_bool):
     elpaso_rope = sue_gut_belief.make_rope(texas_rope, elpaso_str)
     dallas_plan = planunit_shop(dallas_str, healerunit=healerunit_shop({sue_str}))
     elpaso_plan = planunit_shop(elpaso_str, healerunit=healerunit_shop({sue_str}))
-    sue_gut_belief.set_plan(dallas_plan, texas_rope)
-    sue_gut_belief.set_plan(elpaso_plan, texas_rope)
+    sue_gut_belief.set_plan_obj(dallas_plan, texas_rope)
+    sue_gut_belief.set_plan_obj(elpaso_plan, texas_rope)
     sue_gut_belief.cashout()
     display_plantree(sue_gut_belief, mode="Keep", graphics_bool=graphics_bool)
     save_gut_file(env_dir(), sue_gut_belief)
@@ -118,11 +118,11 @@ def test_save_all_gut_dutys_Setsdutys(temp_dir_setup, graphics_bool):
     dallas_str = "dallas"
     dallas_rope = sue_gut_belief.make_rope(texas_rope, dallas_str)
     dallas_plan = planunit_shop(dallas_str, healerunit=healerunit_shop({sue_str}))
-    sue_gut_belief.set_plan(dallas_plan, texas_rope)
+    sue_gut_belief.set_plan_obj(dallas_plan, texas_rope)
     elpaso_str = "el paso"
     elpaso_rope = sue_gut_belief.make_rope(texas_rope, elpaso_str)
     elpaso_plan = planunit_shop(elpaso_str, healerunit=healerunit_shop({sue_str}))
-    sue_gut_belief.set_plan(elpaso_plan, texas_rope)
+    sue_gut_belief.set_plan_obj(elpaso_plan, texas_rope)
     display_plantree(sue_gut_belief, mode="Keep", graphics_bool=graphics_bool)
     save_gut_file(env_dir(), sue_gut_belief)
     sue_dallas_duty_path = create_keep_duty_path(

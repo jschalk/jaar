@@ -270,7 +270,7 @@ def test_BeliefUnit_set_agenda_task_as_complete_SetsAttr_Range():
     jour_rope = zia_belief.make_rope(ziet_rope, jour_str)
 
     zia_belief.set_l1_plan(planunit_shop(run_str, pledge=True))
-    zia_belief.set_plan(planunit_shop(jour_str, begin=0, close=500), ziet_rope)
+    zia_belief.set_plan_obj(planunit_shop(jour_str, begin=0, close=500), ziet_rope)
     zia_belief.edit_plan_attr(
         run_rope,
         reason_context=jour_rope,
@@ -313,7 +313,7 @@ def test_BeliefUnit_set_agenda_task_as_complete_SetsAttr_Division():
     jour_rope = zia_belief.make_rope(ziet_rope, jour_str)
 
     zia_belief.set_l1_plan(planunit_shop(run_str, pledge=True))
-    zia_belief.set_plan(planunit_shop(jour_str, begin=0, close=500), ziet_rope)
+    zia_belief.set_plan_obj(planunit_shop(jour_str, begin=0, close=500), ziet_rope)
     zia_belief.edit_plan_attr(
         run_rope,
         reason_context=jour_rope,
@@ -532,9 +532,9 @@ def test_BeliefUnit_get_all_pledges_ReturnsObj():
     sweep_rope = zia_belief.make_rope(clean_rope, sweep_str)
     couch_str = "couch"
     couch_rope = zia_belief.make_rope(casa_rope, couch_str)
-    zia_belief.set_plan(planunit_shop(couch_str), casa_rope)
-    zia_belief.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
-    zia_belief.set_plan(planunit_shop(sweep_str, pledge=True), clean_rope)
+    zia_belief.set_plan_obj(planunit_shop(couch_str), casa_rope)
+    zia_belief.set_plan_obj(planunit_shop(clean_str, pledge=True), casa_rope)
+    zia_belief.set_plan_obj(planunit_shop(sweep_str, pledge=True), clean_rope)
     sweep_plan = zia_belief.get_plan_obj(sweep_rope)
     yao_str = "Yao"
     zia_belief.add_voiceunit(yao_str)

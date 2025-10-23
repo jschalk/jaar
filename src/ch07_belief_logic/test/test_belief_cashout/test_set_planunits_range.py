@@ -216,7 +216,7 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
 
     ziet1_str = "ziet1"
     ziet1_rope = yao_belief.make_rope(ziet0_rope, ziet1_str)
-    yao_belief.set_plan(planunit_shop(ziet1_str), ziet0_rope)
+    yao_belief.set_plan_obj(planunit_shop(ziet1_str), ziet0_rope)
     ziet1_plan = yao_belief.get_plan_obj(ziet1_rope)
     root_plan = yao_belief.get_plan_obj(root_rope)
     yao_belief._set_plan_dict()
@@ -256,7 +256,7 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
     ziet1_str = "ziet1"
     ziet1_denom = 7
     ziet1_rope = yao_belief.make_rope(ziet0_rope, ziet1_str)
-    yao_belief.set_plan(planunit_shop(ziet1_str, denom=ziet1_denom), ziet0_rope)
+    yao_belief.set_plan_obj(planunit_shop(ziet1_str, denom=ziet1_denom), ziet0_rope)
     ziet1_plan = yao_belief.get_plan_obj(ziet1_rope)
     root_rope = to_rope(yao_belief.moment_label)
     root_plan = yao_belief.get_plan_obj(root_rope)
@@ -297,7 +297,7 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
     ziet1_numor = 3
     ziet1_rope = yao_belief.make_rope(ziet0_rope, ziet1_str)
     temp_plan = planunit_shop(ziet1_str, numor=ziet1_numor, denom=ziet1_denom)
-    yao_belief.set_plan(temp_plan, ziet0_rope)
+    yao_belief.set_plan_obj(temp_plan, ziet0_rope)
     ziet1_plan = yao_belief.get_plan_obj(ziet1_rope)
     root_rope = to_rope(yao_belief.moment_label)
     root_plan = yao_belief.get_plan_obj(root_rope)
@@ -337,7 +337,7 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
     ziet1_addin = 5
     ziet1_rope = yao_belief.make_rope(ziet0_rope, ziet1_str)
     temp_plan = planunit_shop(ziet1_str, addin=ziet1_addin)
-    yao_belief.set_plan(temp_plan, ziet0_rope)
+    yao_belief.set_plan_obj(temp_plan, ziet0_rope)
     ziet1_plan = yao_belief.get_plan_obj(ziet1_rope)
     root_rope = to_rope(yao_belief.moment_label)
     root_plan = yao_belief.get_plan_obj(root_rope)
@@ -381,7 +381,7 @@ def test_BeliefUnit_set_plantree_range_attrs_Sets2LevelsDescendentPlan_gogo_calc
     ziet2_rope = yao_belief.make_rope(ziet1_rope, ziet2_str)
     ziet2_addin = 5
     x_ziet2_plan = planunit_shop(ziet2_str, addin=ziet2_addin)
-    yao_belief.set_plan(x_ziet2_plan, ziet1_rope)
+    yao_belief.set_plan_obj(x_ziet2_plan, ziet1_rope)
     ziet2_plan = yao_belief.get_plan_obj(ziet2_rope)
     root_rope = to_rope(yao_belief.moment_label)
     root_plan = yao_belief.get_plan_obj(root_rope)
@@ -428,7 +428,7 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
     ziet1_denom = 7
     ziet1_rope = yao_belief.make_rope(ziet0_rope, ziet1_str)
     temp_plan = planunit_shop(ziet1_str, denom=ziet1_denom, addin=ziet1_addin)
-    yao_belief.set_plan(temp_plan, ziet0_rope)
+    yao_belief.set_plan_obj(temp_plan, ziet0_rope)
     ziet1_plan = yao_belief.get_plan_obj(ziet1_rope)
     root_rope = to_rope(yao_belief.moment_label)
     root_plan = yao_belief.get_plan_obj(root_rope)
@@ -471,7 +471,7 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_When_knot_IsNonD
 
     ziet1_str = "ziet1"
     ziet1_rope = yao_belief.make_rope(ziet0_rope, ziet1_str)
-    yao_belief.set_plan(planunit_shop(ziet1_str), ziet0_rope)
+    yao_belief.set_plan_obj(planunit_shop(ziet1_str), ziet0_rope)
     ziet1_plan = yao_belief.get_plan_obj(ziet1_rope)
     root_plan = yao_belief.get_plan_obj(root_rope)
     yao_belief._set_plan_dict()

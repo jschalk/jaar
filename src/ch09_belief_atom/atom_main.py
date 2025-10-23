@@ -249,7 +249,7 @@ def _modify_belief_planunit_insert(x_belief: BeliefUnit, x_atom: BeliefAtom):
     plan_rope = x_atom.get_value("plan_rope")
     plan_label = get_tail_label(plan_rope)
     plan_parent_rope = get_parent_rope(plan_rope)
-    x_belief.set_plan(
+    x_belief.set_plan_obj(
         plan_kid=planunit_shop(
             plan_label=plan_label,
             addin=x_atom.get_value("addin"),

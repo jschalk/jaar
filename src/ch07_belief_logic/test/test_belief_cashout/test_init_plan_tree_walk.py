@@ -169,7 +169,9 @@ def test_BeliefUnit_set_plan_CreatesPlanUnitsUsedBy_reasonunits():
     assert sue_belief.plan_exists(buildings_rope) is False
 
     # WHEN
-    sue_belief.set_plan(clean_cookery_plan, cleaning_rope, create_missing_plans=True)
+    sue_belief.set_plan_obj(
+        clean_cookery_plan, cleaning_rope, create_missing_plans=True
+    )
 
     # THEN
     assert sue_belief.plan_exists(buildings_rope)

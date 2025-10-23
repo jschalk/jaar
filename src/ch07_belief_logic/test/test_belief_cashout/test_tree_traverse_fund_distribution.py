@@ -69,11 +69,11 @@ def test_BeliefUnit_cashout_Sets_planunit_fund_onset_fund_cease_Scenario1():
     lamb_str = "lambs"
     lamb_rope = yao_beliefunit.make_rope(carn_rope, lamb_str)
     lamb_plan = planunit_shop(lamb_str, star=1)
-    yao_beliefunit.set_plan(lamb_plan, parent_rope=carn_rope)
+    yao_beliefunit.set_plan_obj(lamb_plan, parent_rope=carn_rope)
     duck_str = "ducks"
     duck_rope = yao_beliefunit.make_rope(carn_rope, duck_str)
     duck_plan = planunit_shop(duck_str, star=2)
-    yao_beliefunit.set_plan(duck_plan, parent_rope=carn_rope)
+    yao_beliefunit.set_plan_obj(duck_plan, parent_rope=carn_rope)
 
     coal_str = "coal"
     coal_rope = yao_beliefunit.make_l1_rope(coal_str)
@@ -133,11 +133,11 @@ def test_BeliefUnit_cashout_Sets_planunit_fund_onset_fund_cease_Scenario2_Differ
     lamb_str = "lambs"
     lamb_rope = yao_beliefunit.make_rope(yarn_rope, lamb_str)
     lamb_plan = planunit_shop(lamb_str, star=1)
-    yao_beliefunit.set_plan(lamb_plan, parent_rope=yarn_rope)
+    yao_beliefunit.set_plan_obj(lamb_plan, parent_rope=yarn_rope)
     duck_str = "ducks"
     duck_rope = yao_beliefunit.make_rope(yarn_rope, duck_str)
     duck_plan = planunit_shop(duck_str, star=2)
-    yao_beliefunit.set_plan(duck_plan, parent_rope=yarn_rope)
+    yao_beliefunit.set_plan_obj(duck_plan, parent_rope=yarn_rope)
 
     coal_str = "coal"
     coal_rope = yao_beliefunit.make_l1_rope(coal_str)
@@ -188,19 +188,19 @@ def test_BeliefUnit_cashout_Sets_fund_ratio_WithSomePlansOfZero_starScenario0():
     floor_str = "mop floor"
     floor_rope = sue_belief.make_rope(casa_rope, floor_str)
     floor_plan = planunit_shop(floor_str, pledge=True)
-    sue_belief.set_plan(floor_plan, casa_rope)
+    sue_belief.set_plan_obj(floor_plan, casa_rope)
     sue_belief.set_l1_plan(planunit_shop("unimportant"))
 
     situation_str = "cleaniness situation"
     situation_rope = sue_belief.make_rope(casa_rope, situation_str)
-    sue_belief.set_plan(planunit_shop(situation_str, star=0), casa_rope)
+    sue_belief.set_plan_obj(planunit_shop(situation_str, star=0), casa_rope)
 
     non_str = "not clean"
     yes_str = "yes clean"
     non_rope = sue_belief.make_rope(situation_rope, non_str)
     yes_rope = sue_belief.make_rope(situation_rope, yes_str)
-    sue_belief.set_plan(planunit_shop(non_str), situation_rope)
-    sue_belief.set_plan(planunit_shop(yes_str, star=2), situation_rope)
+    sue_belief.set_plan_obj(planunit_shop(non_str), situation_rope)
+    sue_belief.set_plan_obj(planunit_shop(yes_str, star=2), situation_rope)
 
     assert sue_belief.planroot.fund_ratio is None
     assert sue_belief.get_plan_obj(casa_rope).fund_ratio is None
@@ -230,12 +230,12 @@ def test_BeliefUnit_cashout_Sets_fund_ratio_WithSomePlansOfZero_starScenario1():
     floor_str = "mop floor"
     floor_rope = sue_belief.make_rope(casa_rope, floor_str)
     floor_plan = planunit_shop(floor_str, pledge=True)
-    sue_belief.set_plan(floor_plan, casa_rope)
+    sue_belief.set_plan_obj(floor_plan, casa_rope)
     sue_belief.set_l1_plan(planunit_shop("unimportant"))
 
     situation_str = "cleaniness situation"
     situation_rope = sue_belief.make_rope(casa_rope, situation_str)
-    sue_belief.set_plan(planunit_shop(situation_str), casa_rope)
+    sue_belief.set_plan_obj(planunit_shop(situation_str), casa_rope)
 
     situation_plan = sue_belief.get_plan_obj(situation_rope)
     print(f"{situation_plan.star=}")
@@ -247,10 +247,10 @@ def test_BeliefUnit_cashout_Sets_fund_ratio_WithSomePlansOfZero_starScenario1():
     mod_str = "moderately"
     dirty_str = "dirty"
 
-    sue_belief.set_plan(planunit_shop(clean_str, star=0), situation_rope)
-    sue_belief.set_plan(planunit_shop(very_str), clean_rope)
-    sue_belief.set_plan(planunit_shop(mod_str, star=2), clean_rope)
-    sue_belief.set_plan(planunit_shop(dirty_str), clean_rope)
+    sue_belief.set_plan_obj(planunit_shop(clean_str, star=0), situation_rope)
+    sue_belief.set_plan_obj(planunit_shop(very_str), clean_rope)
+    sue_belief.set_plan_obj(planunit_shop(mod_str, star=2), clean_rope)
+    sue_belief.set_plan_obj(planunit_shop(dirty_str), clean_rope)
 
     very_rope = sue_belief.make_rope(clean_rope, very_str)
     mod_rope = sue_belief.make_rope(clean_rope, mod_str)
@@ -293,7 +293,7 @@ def test_BeliefUnit_cashout_WhenPlanUnitHasFundsBut_kidsHaveNostarDistributeFund
     clean_str = "cleaning"
     clean_rope = sue_beliefunit.make_rope(casa_rope, clean_str)
     clean_plan = planunit_shop(clean_str, star=2)
-    sue_beliefunit.set_plan(planunit_shop(clean_str), casa_rope)
+    sue_beliefunit.set_plan_obj(planunit_shop(clean_str), casa_rope)
 
     sweep_str = "sweep"
     sweep_rope = sue_beliefunit.make_rope(clean_rope, sweep_str)
@@ -303,10 +303,10 @@ def test_BeliefUnit_cashout_WhenPlanUnitHasFundsBut_kidsHaveNostarDistributeFund
     vacuum_plan = planunit_shop(vacuum_str, star=0)
 
     sue_beliefunit.set_l1_plan(casa_plan)
-    sue_beliefunit.set_plan(swim_plan, casa_rope)
-    sue_beliefunit.set_plan(clean_plan, casa_rope)
-    sue_beliefunit.set_plan(sweep_plan, clean_rope)  # _star=0
-    sue_beliefunit.set_plan(vacuum_plan, clean_rope)  # _star=0
+    sue_beliefunit.set_plan_obj(swim_plan, casa_rope)
+    sue_beliefunit.set_plan_obj(clean_plan, casa_rope)
+    sue_beliefunit.set_plan_obj(sweep_plan, clean_rope)  # _star=0
+    sue_beliefunit.set_plan_obj(vacuum_plan, clean_rope)  # _star=0
 
     assert sue_beliefunit.get_plan_obj(casa_rope).fund_ratio is None
     assert sue_beliefunit.get_plan_obj(swim_rope).fund_ratio is None

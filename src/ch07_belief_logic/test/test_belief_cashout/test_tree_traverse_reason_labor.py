@@ -79,8 +79,8 @@ def test_BeliefUnit_cashout_Set_grandchild_plan_laborheir_From_plankid_laborunit
     yao_voiceunit.add_membership(swimmers_str)
 
     sue_belief.set_l1_plan(planunit_shop(swim_str))
-    sue_belief.set_plan(planunit_shop(morn_str), parent_rope=swim_rope)
-    sue_belief.set_plan(planunit_shop(four_str), parent_rope=morn_rope)
+    sue_belief.set_plan_obj(planunit_shop(morn_str), parent_rope=swim_rope)
+    sue_belief.set_plan_obj(planunit_shop(four_str), parent_rope=morn_rope)
     sue_belief.edit_plan_attr(swim_rope, laborunit=x_laborunit)
     # print(sue_belief.make_rope(four_rope=}\n{morn_rope=))
     four_plan = sue_belief.get_plan_obj(four_rope)
@@ -121,8 +121,8 @@ def test_BeliefUnit_cashout_Set_grandchild_plan_laborheir_From_plankid_laborunit
     yao_voiceunit.add_membership(swimmers_str)
 
     sue_belief.set_l1_plan(planunit_shop(swim_str))
-    sue_belief.set_plan(planunit_shop(morn_str), parent_rope=swim_rope)
-    sue_belief.set_plan(planunit_shop(four_str), parent_rope=morn_rope)
+    sue_belief.set_plan_obj(planunit_shop(morn_str), parent_rope=swim_rope)
+    sue_belief.set_plan_obj(planunit_shop(four_str), parent_rope=morn_rope)
     sue_belief.edit_plan_attr(swim_rope, laborunit=swimmers_laborunit)
     # print(sue_belief.make_rope(four_rope=}\n{morn_rope=))
     four_plan = sue_belief.get_plan_obj(four_rope)
@@ -158,8 +158,12 @@ def test_BeliefUnit__get_filtered_awardunits_plan_CleansPlan_Laborunit():
     casa_rope = sue1_belief.make_l1_rope(casa_str)
     swim_str = "swim"
     swim_rope = sue1_belief.make_l1_rope(swim_str)
-    sue1_belief.set_plan(planunit_shop(casa_str), parent_rope=sue1_belief.moment_label)
-    sue1_belief.set_plan(planunit_shop(swim_str), parent_rope=sue1_belief.moment_label)
+    sue1_belief.set_plan_obj(
+        planunit_shop(casa_str), parent_rope=sue1_belief.moment_label
+    )
+    sue1_belief.set_plan_obj(
+        planunit_shop(swim_str), parent_rope=sue1_belief.moment_label
+    )
     swim_laborunit = laborunit_shop()
     swim_laborunit.add_party(party_title=xia_str)
     swim_laborunit.add_party(party_title=zoa_str)
@@ -191,8 +195,12 @@ def test_BeliefUnit_set_plan_CleansPlan_awardunits():
     casa_rope = sue1_belief.make_l1_rope(casa_str)
     swim_str = "swim"
     swim_rope = sue1_belief.make_l1_rope(swim_str)
-    sue1_belief.set_plan(planunit_shop(casa_str), parent_rope=sue1_belief.moment_label)
-    sue1_belief.set_plan(planunit_shop(swim_str), parent_rope=sue1_belief.moment_label)
+    sue1_belief.set_plan_obj(
+        planunit_shop(casa_str), parent_rope=sue1_belief.moment_label
+    )
+    sue1_belief.set_plan_obj(
+        planunit_shop(swim_str), parent_rope=sue1_belief.moment_label
+    )
     swim_laborunit = laborunit_shop()
     swim_laborunit.add_party(party_title=xia_str)
     swim_laborunit.add_party(party_title=zoa_str)

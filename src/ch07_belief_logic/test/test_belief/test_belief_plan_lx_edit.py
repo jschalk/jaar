@@ -14,7 +14,7 @@ def test_BeliefUnit_edit_plan_label_FailsWhenPlanDoesNotExist():
     casa_rope = yao_belief.make_l1_rope(casa_str)
     swim_str = "swim"
     yao_belief.set_l1_plan(planunit_shop(casa_str))
-    yao_belief.set_plan(planunit_shop(swim_str), parent_rope=casa_rope)
+    yao_belief.set_plan_obj(planunit_shop(swim_str), parent_rope=casa_rope)
 
     # WHEN / THEN
     no_plan_rope = yao_belief.make_l1_rope("bees")
@@ -34,7 +34,7 @@ def test_BeliefUnit_edit_plan_label_FailsWhenPlanDoesNotExist():
 #     swim_str = "swim"
 #     swim_rope = yao_belief.make_rope(casa_rope, swim_str)
 #     yao_belief.set_l1_plan(planunit_shop(casa_str))
-#     yao_belief.set_plan(planunit_shop(swim_str), parent_rope=casa_rope)
+#     yao_belief.set_plan_obj(planunit_shop(swim_str), parent_rope=casa_rope)
 #     assert yao_belief.belief_name == yao_str
 #     assert yao_belief.planroot.plan_label == yao_belief.moment_label
 #     casa_plan = yao_belief.get_plan_obj(casa_rope)
@@ -71,9 +71,9 @@ def test_BeliefUnit_find_replace_rope_Modifies_kids_Scenario1():
     old_red_rope = yao_belief.make_rope(old_roses_rope, red_str)
 
     yao_belief.set_l1_plan(planunit_shop(old_casa_str))
-    yao_belief.set_plan(planunit_shop(bloomers_str), parent_rope=old_casa_rope)
-    yao_belief.set_plan(planunit_shop(roses_str), parent_rope=old_bloomers_rope)
-    yao_belief.set_plan(planunit_shop(red_str), parent_rope=old_roses_rope)
+    yao_belief.set_plan_obj(planunit_shop(bloomers_str), parent_rope=old_casa_rope)
+    yao_belief.set_plan_obj(planunit_shop(roses_str), parent_rope=old_bloomers_rope)
+    yao_belief.set_plan_obj(planunit_shop(red_str), parent_rope=old_roses_rope)
     r_plan_roses = yao_belief.get_plan_obj(old_roses_rope)
     r_plan_bloomers = yao_belief.get_plan_obj(old_bloomers_rope)
 
@@ -121,8 +121,8 @@ def test_belief_edit_plan_label_Modifies_factunits():
     old_rain_rope = yao_belief.make_rope(old_water_rope, rain_str)
 
     yao_belief.set_l1_plan(planunit_shop(casa_str))
-    yao_belief.set_plan(planunit_shop(roses_str), parent_rope=bloomers_rope)
-    yao_belief.set_plan(planunit_shop(rain_str), parent_rope=old_water_rope)
+    yao_belief.set_plan_obj(planunit_shop(roses_str), parent_rope=bloomers_rope)
+    yao_belief.set_plan_obj(planunit_shop(rain_str), parent_rope=old_water_rope)
     yao_belief.add_fact(fact_context=old_water_rope, fact_state=old_rain_rope)
 
     plan_x = yao_belief.get_plan_obj(roses_rope)

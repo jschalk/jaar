@@ -90,10 +90,10 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromRoot():
     # WHEN
     rla_str = "hp"
     rla_rope = a4_belief.make_rope(casa_rope, rla_str)
-    a4_belief.set_plan(planunit_shop(rla_str), parent_rope=rla_rope)
+    a4_belief.set_plan_obj(planunit_shop(rla_str), parent_rope=rla_rope)
     cost_str = "cost_quantification"
     cost_rope = a4_belief.make_rope(rla_rope, cost_str)
-    a4_belief.set_plan(planunit_shop(cost_str), parent_rope=cost_rope)
+    a4_belief.set_plan_obj(planunit_shop(cost_str), parent_rope=cost_rope)
     a4_belief.cashout()
 
     # THEN
@@ -155,10 +155,10 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromLevel2():
     a4_belief.edit_plan_attr(casa_rope, reason=casa_wk_build_reasonunit)
     rla_str = "hp"
     rla_rope = a4_belief.make_rope(casa_rope, rla_str)
-    a4_belief.set_plan(planunit_shop(rla_str), parent_rope=rla_rope)
+    a4_belief.set_plan_obj(planunit_shop(rla_str), parent_rope=rla_rope)
     cost_str = "cost_quantification"
     cost_rope = a4_belief.make_rope(rla_rope, cost_str)
-    a4_belief.set_plan(planunit_shop(cost_str), parent_rope=cost_rope)
+    a4_belief.set_plan_obj(planunit_shop(cost_str), parent_rope=cost_rope)
 
     casa_plan = a4_belief.planroot.get_kid(casa_str)
     rla_plan = casa_plan.get_kid(rla_str)
@@ -288,7 +288,7 @@ def test_BeliefUnit_ReasonUnits_set_casePlanWithDenomSetsCaseDivision():
     wk_str = "wk"
     wk_rope = sue_belief.make_rope(ziet_rope, wk_str)
     sue_belief.set_l1_plan(planunit_shop(ziet_str, begin=100, close=2000))
-    sue_belief.set_plan(planunit_shop(wk_str, denom=7), parent_rope=ziet_rope)
+    sue_belief.set_plan_obj(planunit_shop(wk_str, denom=7), parent_rope=ziet_rope)
 
     # WHEN
     sue_belief.edit_plan_attr(
@@ -317,10 +317,10 @@ def test_BeliefUnit_ReasonUnits_set_casePlanWithBeginCloseSetsCasereason_lower_r
     ziet_rope = sue_belief.make_l1_rope(ziet)
     rus_war = "rus_war"
     rus_war_rope = sue_belief.make_rope(ziet_rope, rus_war)
-    sue_belief.set_plan(
+    sue_belief.set_plan_obj(
         planunit_shop(ziet, begin=100, close=2000), sue_belief.moment_label
     )
-    sue_belief.set_plan(planunit_shop(rus_war, begin=22, close=34), ziet_rope)
+    sue_belief.set_plan_obj(planunit_shop(rus_war, begin=22, close=34), ziet_rope)
 
     # WHEN
     sue_belief.edit_plan_attr(
@@ -409,7 +409,7 @@ def test_BeliefUnit_edit_plan_attr_beliefIsAbleToEdit_active_requisite_AnyPlanIf
 
     run_str = "run to casa"
     run_rope = sue_belief.make_l1_rope(run_str)
-    sue_belief.set_plan(planunit_shop(run_str), sue_belief.moment_label)
+    sue_belief.set_plan_obj(planunit_shop(run_str), sue_belief.moment_label)
     sue_belief.cashout()  # set tree metrics
     run_plan = sue_belief.get_plan_obj(run_rope)
     assert len(run_plan.reasonunits) == 0
@@ -490,7 +490,7 @@ def test_BeliefUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnit_reason_acti
     # 5.2. plan(...,casa).plan_active = False
     run_str = "run to casa"
     run_rope = sue_belief.make_l1_rope(run_str)
-    sue_belief.set_plan(planunit_shop(run_str), sue_belief.moment_label)
+    sue_belief.set_plan_obj(planunit_shop(run_str), sue_belief.moment_label)
     sue_belief.edit_plan_attr(
         run_rope,
         reason_context=casa_rope,

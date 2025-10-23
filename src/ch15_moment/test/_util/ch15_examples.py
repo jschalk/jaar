@@ -52,12 +52,12 @@ def create_example_moment2() -> MomentUnit:
     elpaso_healerunit = healerunit_shop({yao_str})
     elpaso_plan = planunit_shop(elpaso_str, healerunit=elpaso_healerunit)
 
-    yao_gut_belief.set_plan(dallas_plan, texas_rope)
-    yao_gut_belief.set_plan(elpaso_plan, texas_rope)
-    wei_gut_belief.set_plan(dallas_plan, texas_rope)
-    wei_gut_belief.set_plan(elpaso_plan, texas_rope)
-    zia_gut_belief.set_plan(dallas_plan, texas_rope)
-    zia_gut_belief.set_plan(elpaso_plan, texas_rope)
+    yao_gut_belief.set_plan_obj(dallas_plan, texas_rope)
+    yao_gut_belief.set_plan_obj(elpaso_plan, texas_rope)
+    wei_gut_belief.set_plan_obj(dallas_plan, texas_rope)
+    wei_gut_belief.set_plan_obj(elpaso_plan, texas_rope)
+    zia_gut_belief.set_plan_obj(dallas_plan, texas_rope)
+    zia_gut_belief.set_plan_obj(elpaso_plan, texas_rope)
     save_gut_file(x_moment_mstr_dir, yao_gut_belief)
     save_gut_file(x_moment_mstr_dir, wei_gut_belief)
     save_gut_file(x_moment_mstr_dir, zia_gut_belief)
@@ -93,16 +93,16 @@ def create_example_moment3() -> MomentUnit:
     bath_str = "clean bathroom"
     hall_str = "clean hall"
 
-    yao_gut_belief.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
-    yao_gut_belief.set_plan(planunit_shop(bath_str, pledge=True), clean_rope)
-    yao_gut_belief.set_plan(planunit_shop(hall_str, pledge=True), clean_rope)
+    yao_gut_belief.set_plan_obj(planunit_shop(clean_str, pledge=True), casa_rope)
+    yao_gut_belief.set_plan_obj(planunit_shop(bath_str, pledge=True), clean_rope)
+    yao_gut_belief.set_plan_obj(planunit_shop(hall_str, pledge=True), clean_rope)
 
-    wei_gut_belief.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
-    wei_gut_belief.set_plan(planunit_shop(bath_str, pledge=True), clean_rope)
+    wei_gut_belief.set_plan_obj(planunit_shop(clean_str, pledge=True), casa_rope)
+    wei_gut_belief.set_plan_obj(planunit_shop(bath_str, pledge=True), clean_rope)
 
-    zia_gut_belief.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
-    zia_gut_belief.set_plan(planunit_shop(bath_str, pledge=True), clean_rope)
-    zia_gut_belief.set_plan(planunit_shop(hall_str, pledge=True), clean_rope)
+    zia_gut_belief.set_plan_obj(planunit_shop(clean_str, pledge=True), casa_rope)
+    zia_gut_belief.set_plan_obj(planunit_shop(bath_str, pledge=True), clean_rope)
+    zia_gut_belief.set_plan_obj(planunit_shop(hall_str, pledge=True), clean_rope)
 
     save_gut_file(x_moment_mstr_dir, yao_gut_belief)
     save_gut_file(x_moment_mstr_dir, wei_gut_belief)
@@ -136,16 +136,16 @@ def create_example_moment4() -> MomentUnit:
     bath_str = "clean bathroom"
     hall_str = "clean hall"
 
-    yao_gut_belief.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
-    yao_gut_belief.set_plan(planunit_shop(bath_str, pledge=True), clean_rope)
-    yao_gut_belief.set_plan(planunit_shop(hall_str, pledge=True), clean_rope)
+    yao_gut_belief.set_plan_obj(planunit_shop(clean_str, pledge=True), casa_rope)
+    yao_gut_belief.set_plan_obj(planunit_shop(bath_str, pledge=True), clean_rope)
+    yao_gut_belief.set_plan_obj(planunit_shop(hall_str, pledge=True), clean_rope)
 
-    wei_gut_belief.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
-    wei_gut_belief.set_plan(planunit_shop(bath_str, pledge=True), clean_rope)
+    wei_gut_belief.set_plan_obj(planunit_shop(clean_str, pledge=True), casa_rope)
+    wei_gut_belief.set_plan_obj(planunit_shop(bath_str, pledge=True), clean_rope)
 
-    zia_gut_belief.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
-    zia_gut_belief.set_plan(planunit_shop(bath_str, pledge=True), clean_rope)
-    zia_gut_belief.set_plan(planunit_shop(hall_str, pledge=True), clean_rope)
+    zia_gut_belief.set_plan_obj(planunit_shop(clean_str, pledge=True), casa_rope)
+    zia_gut_belief.set_plan_obj(planunit_shop(bath_str, pledge=True), clean_rope)
+    zia_gut_belief.set_plan_obj(planunit_shop(hall_str, pledge=True), clean_rope)
 
     yao_gut_belief.set_credor_respect(101)
     wei_gut_belief.set_credor_respect(75)

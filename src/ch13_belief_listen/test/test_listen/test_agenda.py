@@ -89,7 +89,7 @@ def test_listen_to_speaker_agenda_ReturnsLevel2taskBelief():
     zia_clean_planunit = planunit_shop(clean_str, pledge=True)
     zia_clean_planunit.laborunit.add_party(yao_str)
     casa_rope = zia_beliefunit.make_l1_rope("casa")
-    zia_beliefunit.set_plan(zia_clean_planunit, casa_rope)
+    zia_beliefunit.set_plan_obj(zia_clean_planunit, casa_rope)
     assert len(zia_beliefunit.get_agenda_dict()) == 0
     zia_yao_beliefunit = copy_deepcopy(zia_beliefunit)
     zia_yao_beliefunit.set_belief_name(yao_str)
@@ -138,8 +138,8 @@ def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2taskBelief():
     yao_fly_planunit.laborunit.add_party(yao_str)
     casa_rope = zia_beliefunit.make_l1_rope("casa")
     fly_rope = zia_beliefunit.make_l1_rope(fly_str)
-    zia_beliefunit.set_plan(yao_clean_planunit, casa_rope)
-    zia_beliefunit.set_plan(yao_cook_planunit, casa_rope)
+    zia_beliefunit.set_plan_obj(yao_clean_planunit, casa_rope)
+    zia_beliefunit.set_plan_obj(yao_cook_planunit, casa_rope)
     zia_beliefunit.set_l1_plan(yao_fly_planunit)
     assert len(zia_beliefunit.get_agenda_dict()) == 0
     zia_yao_beliefunit = copy_deepcopy(zia_beliefunit)
@@ -198,10 +198,10 @@ def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2taskBeliefWhereAnPlan
     fly_rope = zia_beliefunit.make_l1_rope(fly_str)
     before_yao_dish_planunit = planunit_shop(dish_str, pledge=True)
     before_yao_dish_planunit.laborunit.add_party(yao_str)
-    before_yao_beliefunit.set_plan(before_yao_dish_planunit, casa_rope)
+    before_yao_beliefunit.set_plan_obj(before_yao_dish_planunit, casa_rope)
     before_yao_beliefunit.edit_plan_attr(dish_rope, star=1000)
-    zia_beliefunit.set_plan(yao_dish_planunit, casa_rope)
-    zia_beliefunit.set_plan(yao_cook_planunit, casa_rope)
+    zia_beliefunit.set_plan_obj(yao_dish_planunit, casa_rope)
+    zia_beliefunit.set_plan_obj(yao_cook_planunit, casa_rope)
     zia_beliefunit.set_l1_plan(yao_fly_planunit)
     assert len(zia_beliefunit.get_agenda_dict()) == 0
     zia_yao_beliefunit = copy_deepcopy(zia_beliefunit)

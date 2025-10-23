@@ -17,7 +17,7 @@ def test_belief_plan_reason_caseunit_set_obj_SetAttr_Scenario0_Pass_reason_case(
     wed_rope = bob_belief.make_rope(wk_rope, wx.wed_str)
     bob_belief.set_l1_plan(planunit_shop(wx.casa_str))
     bob_belief.set_l1_plan(planunit_shop(wx.wk_str))
-    bob_belief.set_plan(planunit_shop(wx.wed_str), wk_rope)
+    bob_belief.set_plan_obj(planunit_shop(wx.wed_str), wk_rope)
     wed_jkeys = {
         kw.plan_rope: casa_rope,
         kw.reason_context: wk_rope,

@@ -134,9 +134,9 @@ def test_set_listen_to_speaker_fact_SetsFact():
 
     yao_listener.add_voiceunit(yao_str)
     yao_listener.set_voice_respect(20)
-    yao_listener.set_plan(planunit_shop(clean_str), situation_rope)
-    yao_listener.set_plan(planunit_shop(dirty_str), situation_rope)
-    yao_listener.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
+    yao_listener.set_plan_obj(planunit_shop(clean_str), situation_rope)
+    yao_listener.set_plan_obj(planunit_shop(dirty_str), situation_rope)
+    yao_listener.set_plan_obj(planunit_shop(sweep_str, pledge=True), casa_rope)
     yao_listener.edit_plan_attr(
         sweep_rope, reason_context=situation_rope, reason_case=dirty_rope
     )
@@ -176,10 +176,10 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     running_str = "running"
     running_rope = yao_listener.make_rope(fridge_rope, running_str)
 
-    yao_listener.set_plan(planunit_shop(running_str), fridge_rope)
-    yao_listener.set_plan(planunit_shop(clean_str), situation_rope)
-    yao_listener.set_plan(planunit_shop(dirty_str), situation_rope)
-    yao_listener.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
+    yao_listener.set_plan_obj(planunit_shop(running_str), fridge_rope)
+    yao_listener.set_plan_obj(planunit_shop(clean_str), situation_rope)
+    yao_listener.set_plan_obj(planunit_shop(dirty_str), situation_rope)
+    yao_listener.set_plan_obj(planunit_shop(sweep_str, pledge=True), casa_rope)
     yao_listener.edit_plan_attr(
         sweep_rope, reason_context=situation_rope, reason_case=dirty_rope
     )
@@ -231,13 +231,13 @@ def test_migrate_all_facts_AddsPlanUnitsAndSetsFactUnits():
 
     yao_src.add_voiceunit(yao_str)
     yao_src.set_voice_respect(20)
-    yao_src.set_plan(planunit_shop(clean_str), situation_rope)
-    yao_src.set_plan(planunit_shop(dirty_str), situation_rope)
-    yao_src.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
+    yao_src.set_plan_obj(planunit_shop(clean_str), situation_rope)
+    yao_src.set_plan_obj(planunit_shop(dirty_str), situation_rope)
+    yao_src.set_plan_obj(planunit_shop(sweep_str, pledge=True), casa_rope)
     yao_src.edit_reason(sweep_rope, situation_rope, dirty_rope)
     # missing_fact_fact_contexts = list(yao_src.get_missing_fact_reason_contexts().keys())
-    yao_src.set_plan(planunit_shop(rain_str), weather_rope)
-    yao_src.set_plan(planunit_shop(snow_str), weather_rope)
+    yao_src.set_plan_obj(planunit_shop(rain_str), weather_rope)
+    yao_src.set_plan_obj(planunit_shop(snow_str), weather_rope)
     yao_src.add_fact(weather_rope, rain_rope)
     yao_src.add_fact(situation_rope, clean_rope)
     yao_src.cashout()

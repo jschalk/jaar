@@ -102,10 +102,10 @@ def test_BeliefUnit_set_fact_FailsToCreateWhenreason_contextAndFactAreDifferenct
     a1st = "age1st"
     a1st_rope = bob_belief.make_rope(ziet_rope, a1st)
     a1st_plan = planunit_shop(a1st, begin=0, close=20)
-    bob_belief.set_plan(a1st_plan, parent_rope=ziet_rope)
+    bob_belief.set_plan_obj(a1st_plan, parent_rope=ziet_rope)
     a1e1st_str = "a1_era1st"
     a1e1st_plan = planunit_shop(a1e1st_str, begin=20, close=30)
-    bob_belief.set_plan(a1e1st_plan, parent_rope=a1st_rope)
+    bob_belief.set_plan_obj(a1e1st_plan, parent_rope=a1st_rope)
     a1e1_rope = bob_belief.make_rope(a1st_rope, a1e1st_str)
     assert bob_belief.planroot.factunits in (None, {})
 
@@ -214,8 +214,8 @@ def test_BeliefUnit_get_rangeroot_factunits_ReturnsObj_Scenario1():
     m_x_rope = sue_belief.make_l1_rope(mood_x)
     happy = "happy"
     sad = "Sad"
-    sue_belief.set_plan(planunit_shop(happy), parent_rope=m_x_rope)
-    sue_belief.set_plan(planunit_shop(sad), parent_rope=m_x_rope)
+    sue_belief.set_plan_obj(planunit_shop(happy), parent_rope=m_x_rope)
+    sue_belief.set_plan_obj(planunit_shop(sad), parent_rope=m_x_rope)
     sue_belief.add_fact(
         fact_context=ziet_rope, fact_state=ziet_rope, fact_lower=5, fact_upper=10
     )

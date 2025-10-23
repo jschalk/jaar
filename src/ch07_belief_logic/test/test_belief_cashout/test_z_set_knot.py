@@ -6,74 +6,21 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop, get_default_first
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 
 
-def test_BeliefUnit_set_moment_label_SetsAttr():
-    # ESTABLISH
-    x_moment_label = "amy45"
-    sue_str = "Sue"
-    sue_belief = beliefunit_shop(sue_str)
-    assert sue_belief.moment_label == get_default_first_label()
-
-    # WHEN
-    sue_belief.set_moment_label(moment_label=x_moment_label)
-
-    # THEN
-    assert sue_belief.moment_label == x_moment_label
-
-
 def test_BeliefUnit_set_plan_Setsmoment_label_AND_fund_grain():
     # ESTABLISH'
     x_fund_grain = 500
     sue_belief = get_beliefunit_with_4_levels()
     sue_belief.fund_grain = x_fund_grain
-    belief_moment_label = "Texas"
-    sue_belief.set_moment_label(belief_moment_label)
-    assert sue_belief.moment_label == belief_moment_label
-
     casa_rope = sue_belief.make_l1_rope("casa")
     clean_rope = sue_belief.make_rope(casa_rope, "cleaning")
-    cookery_str = "cookery to use"
-    cookery_rope = sue_belief.make_rope(clean_rope, cookery_str)
+    cookery_plan = planunit_shop("cookery to use")
+    assert cookery_plan.fund_grain != x_fund_grain
 
     # WHEN
-    sue_belief.set_plan(planunit_shop(cookery_str), clean_rope)
+    sue_belief.set_plan_obj(cookery_plan, clean_rope)
 
     # THEN
-    cookery_plan = sue_belief.get_plan_obj(cookery_rope)
     assert cookery_plan.fund_grain == x_fund_grain
-
-
-def test_belief_set_moment_label_SetsAttr():
-    # ESTABLISH
-    yao_str = "Yao"
-    yao_belief = beliefunit_shop(belief_name=yao_str)
-    casa_str = "casa"
-    old_casa_rope = yao_belief.make_l1_rope(casa_str)
-    swim_str = "swim"
-    old_swim_rope = yao_belief.make_rope(old_casa_rope, swim_str)
-    yao_belief.set_l1_plan(planunit_shop(casa_str))
-    yao_belief.set_plan(planunit_shop(swim_str), parent_rope=old_casa_rope)
-    assert yao_belief.belief_name == yao_str
-    assert yao_belief.planroot.plan_label == yao_belief.moment_label
-    casa_plan = yao_belief.get_plan_obj(old_casa_rope)
-    assert casa_plan.parent_rope == to_rope(yao_belief.moment_label)
-    swim_plan = yao_belief.get_plan_obj(old_swim_rope)
-    assert swim_plan.parent_rope == old_casa_rope
-    assert yao_belief.moment_label == yao_belief.moment_label
-
-    # WHEN
-    x_moment_label = "amy45"
-    yao_belief.set_moment_label(moment_label=x_moment_label)
-
-    # THEN
-    new_casa_rope = yao_belief.make_l1_rope(casa_str)
-    swim_str = "swim"
-    new_swim_rope = yao_belief.make_rope(new_casa_rope, swim_str)
-    assert yao_belief.moment_label == x_moment_label
-    assert yao_belief.planroot.plan_label == x_moment_label
-    casa_plan = yao_belief.get_plan_obj(new_casa_rope)
-    assert casa_plan.parent_rope == to_rope(x_moment_label)
-    swim_plan = yao_belief.get_plan_obj(new_swim_rope)
-    assert swim_plan.parent_rope == new_casa_rope
 
 
 def test_belief_set_knot_RaisesErrorIfNew_knot_IsAnPlan_label():
@@ -85,7 +32,7 @@ def test_belief_set_knot_RaisesErrorIfNew_knot_IsAnPlan_label():
     zia_belief.set_l1_plan(planunit_shop(casa_str))
     slash_str = "/"
     casa_str = f"casa cook{slash_str}clean"
-    zia_belief.set_plan(planunit_shop(casa_str), parent_rope=casa_rope)
+    zia_belief.set_plan_obj(planunit_shop(casa_str), parent_rope=casa_rope)
 
     # WHEN / THEN
     casa_rope = zia_belief.make_rope(casa_rope, casa_str)
@@ -105,7 +52,7 @@ def test_belief_set_knot_Modifies_parent_rope():
     zia_belief.set_l1_plan(planunit_shop(casa_str))
     semicolon_casa_rope = zia_belief.make_l1_rope(casa_str)
     cook_str = "cook"
-    zia_belief.set_plan(planunit_shop(cook_str), semicolon_casa_rope)
+    zia_belief.set_plan_obj(planunit_shop(cook_str), semicolon_casa_rope)
     semicolon_cook_rope = zia_belief.make_rope(semicolon_casa_rope, cook_str)
     cook_plan = zia_belief.get_plan_obj(semicolon_cook_rope)
     semicolon_str = ";"

@@ -75,7 +75,7 @@ def _ingest_single_planunit(listener: BeliefUnit, ingest_planunit: PlanUnit):
 
     if listener.plan_exists(ingest_planunit.get_plan_rope()) is False:
         x_parent_rope = ingest_planunit.parent_rope
-        listener.set_plan(ingest_planunit, x_parent_rope, create_missing_plans=True)
+        listener.set_plan_obj(ingest_planunit, x_parent_rope, create_missing_plans=True)
 
     _add_and_replace_planunit_stars(
         listener=listener,
@@ -141,10 +141,12 @@ def migrate_all_facts(src_listener: BeliefUnit, dst_listener: BeliefUnit):
         fact_state_rope = x_factunit.fact_state
         if dst_listener.plan_exists(fact_context_rope) is False:
             reason_context_plan = src_listener.get_plan_obj(fact_context_rope)
-            dst_listener.set_plan(reason_context_plan, reason_context_plan.parent_rope)
+            dst_listener.set_plan_obj(
+                reason_context_plan, reason_context_plan.parent_rope
+            )
         if dst_listener.plan_exists(fact_state_rope) is False:
             fact_state_plan = src_listener.get_plan_obj(fact_state_rope)
-            dst_listener.set_plan(fact_state_plan, fact_state_plan.parent_rope)
+            dst_listener.set_plan_obj(fact_state_plan, fact_state_plan.parent_rope)
         dst_listener.add_fact(fact_context_rope, fact_state_rope)
 
 
@@ -393,9 +395,9 @@ def fact_state_keep_vision_and_listen(
 def listen_to_vision_agenda(listener: BeliefUnit, vision: BeliefUnit):
     for x_plan in vision._plan_dict.values():
         if listener.plan_exists(x_plan.get_plan_rope()) is False:
-            listener.set_plan(x_plan, x_plan.parent_rope)
+            listener.set_plan_obj(x_plan, x_plan.parent_rope)
         if listener.get_fact(x_plan.get_plan_rope()) is False:
-            listener.set_plan(x_plan, x_plan.parent_rope)
+            listener.set_plan_obj(x_plan, x_plan.parent_rope)
     for x_fact_rope, x_fact_unit in vision.planroot.factunits.items():
         listener.planroot.set_factunit(x_fact_unit)
     listener.cashout()
