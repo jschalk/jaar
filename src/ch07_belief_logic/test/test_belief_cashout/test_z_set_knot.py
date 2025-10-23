@@ -69,8 +69,8 @@ def test_belief_set_knot_Modifies_parent_rope():
 
     # THEN
     assert cook_plan.get_plan_rope() != semicolon_cook_rope
-    zia_nexus_label = zia_belief.get_nexus_label()
-    slash_casa_rope = create_rope(zia_nexus_label, casa_str, knot=slash_str)
+    zia_moment_label = zia_belief.planroot.plan_label
+    slash_casa_rope = create_rope(zia_moment_label, casa_str, knot=slash_str)
     slash_cook_rope = create_rope(slash_casa_rope, cook_str, knot=slash_str)
     assert cook_plan.get_plan_rope() == slash_cook_rope
 

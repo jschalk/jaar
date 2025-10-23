@@ -9,7 +9,7 @@ from src.ch07_belief_logic.test._util.ch07_examples import (
 )
 from src.ch11_bud._ref.ch11_path import (
     create_belief_spark_dir_path,
-    create_beliefpoint_path,
+    create_beliefinstant_path,
     create_beliefspark_path,
     create_budunit_json_path,
     create_cell_dir_path,
@@ -17,7 +17,7 @@ from src.ch11_bud._ref.ch11_path import (
     create_cell_voice_mandate_ledger_path,
 )
 from src.ch11_bud.bud_filehandler import (
-    beliefpoint_file_exists,
+    beliefinstant_file_exists,
     bud_file_exists,
     cellunit_add_json_file,
     cellunit_get_from_dir,
@@ -26,15 +26,15 @@ from src.ch11_bud.bud_filehandler import (
     create_cell_voice_mandate_ledger_json,
     get_beliefs_downhill_spark_nums,
     get_beliefspark_obj,
-    get_timepoint_dirs,
+    get_epochinstant_dirs,
     job_file_exists,
     open_belief_file,
-    open_beliefpoint_file,
+    open_beliefinstant_file,
     open_bud_file,
     open_job_file,
     save_arbitrary_beliefspark,
     save_belief_file,
-    save_beliefpoint_file,
+    save_beliefinstant_file,
     save_bud_file,
     save_job_file,
 )
@@ -658,58 +658,58 @@ def test_open_bud_file_ReturnsObj_Scenario1_FileExists(temp_dir_setup):
     assert open_bud_file(mstr_dir, a23_str, yao_str, t55_bud_time) == t55_bud
 
 
-def test_save_beliefpoint_file_SavesFile(temp_dir_setup):
+def test_save_beliefinstant_file_SavesFile(temp_dir_setup):
     # ESTABLISH
     mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
-    t55_beliefpoint = get_beliefunit_with_4_levels()
+    t55_beliefinstant = get_beliefunit_with_4_levels()
     t55_bud_time = 55
-    t55_beliefpoint_path = create_beliefpoint_path(
+    t55_beliefinstant_path = create_beliefinstant_path(
         mstr_dir, a23_str, sue_str, t55_bud_time
     )
-    print(f"{t55_beliefpoint.moment_label=}")
+    print(f"{t55_beliefinstant.moment_label=}")
     print(f"               {mstr_dir=}")
-    print(f"      {t55_beliefpoint_path=}")
-    assert os_path_exists(t55_beliefpoint_path) is False
+    print(f"      {t55_beliefinstant_path=}")
+    assert os_path_exists(t55_beliefinstant_path) is False
 
     # WHEN
-    save_beliefpoint_file(mstr_dir, t55_beliefpoint, t55_bud_time)
+    save_beliefinstant_file(mstr_dir, t55_beliefinstant, t55_bud_time)
 
     # THEN
-    assert os_path_exists(t55_beliefpoint_path)
+    assert os_path_exists(t55_beliefinstant_path)
 
 
-def test_save_beliefpoint_file_RaisesError(temp_dir_setup):
+def test_save_beliefinstant_file_RaisesError(temp_dir_setup):
     # ESTABLISH
     mstr_dir = get_temp_dir()
-    irrational_beliefpoint = get_beliefunit_irrational_example()
+    irrational_beliefinstant = get_beliefunit_irrational_example()
     t55_bud_time = 55
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        save_beliefpoint_file(mstr_dir, irrational_beliefpoint, t55_bud_time)
-    exception_str = "BeliefPoint could not be saved BeliefUnit.rational is False"
+        save_beliefinstant_file(mstr_dir, irrational_beliefinstant, t55_bud_time)
+    exception_str = "BeliefInstant could not be saved BeliefUnit.rational is False"
     assert str(excinfo.value) == exception_str
 
 
-def test_beliefpoint_file_exists_ReturnsObj(temp_dir_setup):
+def test_beliefinstant_file_exists_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     t55_bud_time = 55
-    assert beliefpoint_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time) is False
+    assert beliefinstant_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time) is False
 
     # WHEN
-    t55_beliefpoint = get_beliefunit_with_4_levels()
-    save_beliefpoint_file(mstr_dir, t55_beliefpoint, t55_bud_time)
+    t55_beliefinstant = get_beliefunit_with_4_levels()
+    save_beliefinstant_file(mstr_dir, t55_beliefinstant, t55_bud_time)
 
     # THEN
-    assert beliefpoint_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
+    assert beliefinstant_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
 
 
-def test_open_beliefpoint_file_ReturnsObj_Scenario0_NoFileExists(
+def test_open_beliefinstant_file_ReturnsObj_Scenario0_NoFileExists(
     temp_dir_setup,
 ):
     # ESTABLISH
@@ -717,42 +717,44 @@ def test_open_beliefpoint_file_ReturnsObj_Scenario0_NoFileExists(
     a23_str = "amy23"
     sue_str = "Sue"
     t55_bud_time = 55
-    assert not beliefpoint_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
+    assert not beliefinstant_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
 
     # WHEN / THEN
-    assert not open_beliefpoint_file(mstr_dir, a23_str, sue_str, t55_bud_time)
+    assert not open_beliefinstant_file(mstr_dir, a23_str, sue_str, t55_bud_time)
 
 
-def test_open_beliefpoint_file_ReturnsObj_Scenario1_FileExists(temp_dir_setup):
+def test_open_beliefinstant_file_ReturnsObj_Scenario1_FileExists(temp_dir_setup):
     # ESTABLISH
     mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     t55_bud_time = 55
-    t55_beliefpoint = get_beliefunit_with_4_levels()
-    save_beliefpoint_file(mstr_dir, t55_beliefpoint, t55_bud_time)
-    assert beliefpoint_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
+    t55_beliefinstant = get_beliefunit_with_4_levels()
+    save_beliefinstant_file(mstr_dir, t55_beliefinstant, t55_bud_time)
+    assert beliefinstant_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
 
     # WHEN
-    file_beliefpoint = open_beliefpoint_file(mstr_dir, a23_str, sue_str, t55_bud_time)
+    file_beliefinstant = open_beliefinstant_file(
+        mstr_dir, a23_str, sue_str, t55_bud_time
+    )
 
     # THEN
-    assert file_beliefpoint.to_dict() == t55_beliefpoint.to_dict()
+    assert file_beliefinstant.to_dict() == t55_beliefinstant.to_dict()
 
 
-def test_get_timepoint_dirs_ReturnsObj_Scenario0(temp_dir_setup):
+def test_get_epochinstant_dirs_ReturnsObj_Scenario0(temp_dir_setup):
     # ESTABLISH
     mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     t55_bud_time = 55
     t77_bud_time = 77
-    beliefpoint = get_beliefunit_with_4_levels()
-    save_beliefpoint_file(mstr_dir, beliefpoint, t55_bud_time)
-    save_beliefpoint_file(mstr_dir, beliefpoint, t77_bud_time)
+    beliefinstant = get_beliefunit_with_4_levels()
+    save_beliefinstant_file(mstr_dir, beliefinstant, t55_bud_time)
+    save_beliefinstant_file(mstr_dir, beliefinstant, t77_bud_time)
 
     # WHEN
-    timepoint_dirs = get_timepoint_dirs(mstr_dir, a23_str, sue_str)
+    epochinstant_dirs = get_epochinstant_dirs(mstr_dir, a23_str, sue_str)
 
     # THEN
-    assert timepoint_dirs == [t55_bud_time, t77_bud_time]
+    assert epochinstant_dirs == [t55_bud_time, t77_bud_time]

@@ -52,7 +52,7 @@ def test_LessonFileHandler_create_initial_lesson_files_from_default_SavesLessonU
     sue_lessonfilehandler = lessonfilehandler_shop(env_dir(), "amy23", sue_str)
     init_lesson_filename = sue_lessonfilehandler.lesson_filename(init_lesson_id())
     init_lesson_file_path = create_path(
-        sue_lessonfilehandler._lessons_dir, init_lesson_filename
+        sue_lessonfilehandler.lessons_dir, init_lesson_filename
     )
     assert os_path_exists(init_lesson_file_path) is False
     assert gut_file_exists(env_dir(), "amy23", sue_str) is False
@@ -73,7 +73,7 @@ def test_LessonFileHandler_create_gut_from_lessons_CreatesgutFileFromLessonFiles
     sue_lessonfilehandler = lessonfilehandler_shop(env_dir(), "amy23", sue_str)
     init_lesson_filename = sue_lessonfilehandler.lesson_filename(init_lesson_id())
     init_lesson_file_path = create_path(
-        sue_lessonfilehandler._lessons_dir, init_lesson_filename
+        sue_lessonfilehandler.lessons_dir, init_lesson_filename
     )
     sue_lessonfilehandler._create_initial_lesson_files_from_default()
     assert os_path_exists(init_lesson_file_path)
@@ -99,7 +99,7 @@ def test_LessonFileHandler_create_initial_lesson_and_gut_files_CreatesLessonFile
     sue_lessonfilehandler = lessonfilehandler_shop(env_dir(), "amy23", sue_str)
     init_lesson_filename = sue_lessonfilehandler.lesson_filename(init_lesson_id())
     init_lesson_file_path = create_path(
-        sue_lessonfilehandler._lessons_dir, init_lesson_filename
+        sue_lessonfilehandler.lessons_dir, init_lesson_filename
     )
     assert os_path_exists(init_lesson_file_path) is False
     assert gut_file_exists(env_dir(), "amy23", sue_str) is False
@@ -130,7 +130,7 @@ def test_LessonFileHandler_create_initial_lesson_files_from_gut_SavesOnlyLessonF
     save_gut_file(env_dir(), sue_gut_belief)
     assert gut_file_exists(env_dir(), "amy23", sue_str)
     init_lesson_file_path = create_path(
-        sue_lessonfilehandler._lessons_dir, f"{init_lesson_id()}.json"
+        sue_lessonfilehandler.lessons_dir, f"{init_lesson_id()}.json"
     )
     assert os_path_exists(init_lesson_file_path) is False
 
@@ -152,9 +152,9 @@ def test_LessonFileHandler_initialize_lesson_gut_files_SavesgutFileAndLessonFile
     )
     assert gut_file_exists(env_dir(), "amy23", sue_str) is False
     init_lesson_file_path = create_path(
-        sue_lessonfilehandler._lessons_dir, f"{init_lesson_id()}.json"
+        sue_lessonfilehandler.lessons_dir, f"{init_lesson_id()}.json"
     )
-    delete_dir(sue_lessonfilehandler._lessons_dir)
+    delete_dir(sue_lessonfilehandler.lessons_dir)
     assert os_path_exists(init_lesson_file_path) is False
 
     # WHEN
@@ -183,7 +183,7 @@ def test_LessonFileHandler_initialize_lesson_gut_files_SavesOnlygutFile(
     delete_dir(gut_path)
     assert gut_file_exists(env_dir(), "amy23", sue_str) is False
     init_lesson_file_path = create_path(
-        sue_lessonfilehandler._lessons_dir, f"{init_lesson_id()}.json"
+        sue_lessonfilehandler.lessons_dir, f"{init_lesson_id()}.json"
     )
     assert os_path_exists(init_lesson_file_path)
 
@@ -214,9 +214,9 @@ def test_LessonFileHandler_initialize_lesson_gut_files_SavesOnlyLessonFile(
     save_gut_file(env_dir(), sue_gut_belief)
     assert gut_file_exists(env_dir(), "amy23", sue_str)
     init_lesson_file_path = create_path(
-        sue_lessonfilehandler._lessons_dir, f"{init_lesson_id()}.json"
+        sue_lessonfilehandler.lessons_dir, f"{init_lesson_id()}.json"
     )
-    delete_dir(sue_lessonfilehandler._lessons_dir)
+    delete_dir(sue_lessonfilehandler.lessons_dir)
     assert os_path_exists(init_lesson_file_path) is False
 
     # WHEN

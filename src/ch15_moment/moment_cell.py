@@ -5,7 +5,7 @@ from os.path import exists as os_path_exists, join as os_path_join
 from src.ch01_py.file_toolbox import create_path, get_level1_dirs, open_json, save_json
 from src.ch02_allot.allot import allot_nested_scale
 from src.ch05_reason.reason import get_dict_from_factunits
-from src.ch08_epoch.epoch_main import EpochPoint
+from src.ch08_epoch.epoch_main import EpochInstant
 from src.ch10_lesson._ref.ch10_path import create_moment_json_path
 from src.ch11_bud._ref.ch11_path import (
     CELL_MANDATE_FILENAME,
@@ -196,7 +196,7 @@ def set_cell_tree_decrees(
     mstr_dir: str,
     moment_label: MomentLabel,
     belief_name: BeliefName,
-    bud_time: EpochPoint,
+    bud_time: EpochInstant,
     bud_time_dir: str,
 ):
     # clear all current child directorys

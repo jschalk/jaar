@@ -38,33 +38,33 @@ def test_EpochLabel_Exists():
 
 def test_get_epoch_rope_ReturnsObj_Scenario0_default_knot():
     # ESTABLISH
-    fay_nexus_label = "Fay"
+    fay_moment_label = "Fay"
     bob_epoch_label = "Bob_time3"
     default_knot = default_knot_if_None()
 
     # WHEN
-    bob_rope = get_epoch_rope(fay_nexus_label, bob_epoch_label, default_knot)
+    bob_rope = get_epoch_rope(fay_moment_label, bob_epoch_label, default_knot)
 
     # THEN
     assert bob_rope
-    time_rope = create_rope(fay_nexus_label, "time")
+    time_rope = create_rope(fay_moment_label, "time")
     expected_bob_rope = create_rope(time_rope, bob_epoch_label)
     assert bob_rope == expected_bob_rope
 
 
 def test_get_epoch_rope_ReturnsObj_Scenario1_slash_knot():
     # ESTABLISH
-    fay_nexus_label = "Fay"
+    fay_moment_label = "Fay"
     bob_epoch_label = "Bob_time3"
     slash_knot = "/"
     assert slash_knot != default_knot_if_None()
 
     # WHEN
-    bob_rope = get_epoch_rope(fay_nexus_label, bob_epoch_label, slash_knot)
+    bob_rope = get_epoch_rope(fay_moment_label, bob_epoch_label, slash_knot)
 
     # THEN
     assert bob_rope
-    time_rope = create_rope(fay_nexus_label, "time", slash_knot)
+    time_rope = create_rope(fay_moment_label, "time", slash_knot)
     expected_bob_rope = create_rope(time_rope, bob_epoch_label, slash_knot)
     assert bob_rope == expected_bob_rope
 

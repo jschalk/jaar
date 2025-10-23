@@ -36,8 +36,8 @@ class LessonUnit:
     _lesson_id: int = None
     _beliefdelta: BeliefDelta = None
     _delta_start: int = None
-    _lessons_dir: str = None
-    _atoms_dir: str = None
+    lessons_dir: str = None
+    atoms_dir: str = None
     spark_num: int = None
     """Represents a per moment_label/spark_num BeliefDelta for a belief_name"""
 
@@ -91,23 +91,23 @@ class LessonUnit:
 
     def _save_atom_file(self, atom_number: int, x_atom: BeliefAtom):
         x_filename = self._get_num_filename(atom_number)
-        save_json(self._atoms_dir, x_filename, x_atom.to_dict())
+        save_json(self.atoms_dir, x_filename, x_atom.to_dict())
 
     def atom_file_exists(self, atom_number: int) -> bool:
         x_filename = self._get_num_filename(atom_number)
-        return os_path_exists(create_path(self._atoms_dir, x_filename))
+        return os_path_exists(create_path(self.atoms_dir, x_filename))
 
     def _open_atom_file(self, atom_number: int) -> BeliefAtom:
-        x_dict = open_json(self._atoms_dir, self._get_num_filename(atom_number))
+        x_dict = open_json(self.atoms_dir, self._get_num_filename(atom_number))
         return get_beliefatom_from_dict(x_dict)
 
     def _save_lesson_file(self):
         x_filename = self._get_num_filename(self._lesson_id)
-        save_json(self._lessons_dir, x_filename, self.get_deltametric_dict())
+        save_json(self.lessons_dir, x_filename, self.get_deltametric_dict())
 
     def lesson_file_exists(self) -> bool:
         x_filename = self._get_num_filename(self._lesson_id)
-        return os_path_exists(create_path(self._lessons_dir, x_filename))
+        return os_path_exists(create_path(self.lessons_dir, x_filename))
 
     def _save_atom_files(self):
         step_dict = self.get_step_dict()
@@ -158,8 +158,8 @@ def lessonunit_shop(
     _lesson_id: int = None,
     _beliefdelta: BeliefDelta = None,
     _delta_start: int = None,
-    _lessons_dir: str = None,
-    _atoms_dir: str = None,
+    lessons_dir: str = None,
+    atoms_dir: str = None,
     spark_num: int = None,
 ) -> LessonUnit:
     _beliefdelta = beliefdelta_shop() if _beliefdelta is None else _beliefdelta
@@ -170,8 +170,8 @@ def lessonunit_shop(
         moment_label=moment_label,
         _lesson_id=get_init_lesson_id_if_None(_lesson_id),
         _beliefdelta=_beliefdelta,
-        _lessons_dir=_lessons_dir,
-        _atoms_dir=_atoms_dir,
+        lessons_dir=lessons_dir,
+        atoms_dir=atoms_dir,
         spark_num=spark_num,
     )
     x_lessonunit.set_delta_start(_delta_start)
@@ -194,7 +194,7 @@ def create_lessonunit_from_files(
         belief_name=x_belief_name,
         moment_label=x_moment_label,
         _lesson_id=lesson_id,
-        _atoms_dir=atoms_dir,
+        atoms_dir=atoms_dir,
     )
     x_lessonunit._create_beliefdelta_from_atom_files(delta_atom_numbers_list)
     return x_lessonunit
@@ -210,7 +210,7 @@ def get_lessonunit_from_dict(lesson_dict: dict) -> LessonUnit:
         belief_name=lesson_dict.get("belief_name"),
         moment_label=lesson_dict.get("moment_label"),
         _lesson_id=lesson_dict.get("lesson_id"),
-        _atoms_dir=lesson_dict.get("atoms_dir"),
+        atoms_dir=lesson_dict.get("atoms_dir"),
         spark_num=x_spark_num,
     )
     x_beliefdelta = get_beliefdelta_from_ordered_dict(lesson_dict.get("delta"))

@@ -135,11 +135,6 @@ class BeliefUnit:
     reason_contexts: set[RopeTerm] = None
     range_inheritors: dict[RopeTerm, RopeTerm] = None
 
-    def get_nexus_label(self) -> LabelTerm:
-        return get_first_label_from_rope(
-            rope=self.planroot.get_plan_rope(), knot=self.knot
-        )
-
     def del_last_lesson_id(self):
         self.last_lesson_id = None
 
@@ -1540,7 +1535,7 @@ def create_planroot_kids_from_dict(x_belief: BeliefUnit, planroot_dict: dict):
     parent_rope_str = "parent_rope"
     # for every kid dict, set parent_rope in dict, add to to_evaluate_list
     for x_dict in get_obj_from_plan_dict(planroot_dict, "kids").values():
-        x_dict[parent_rope_str] = x_belief.get_nexus_label()
+        x_dict[parent_rope_str] = x_belief.planroot.get_plan_rope()
         to_evaluate_plan_dicts.append(x_dict)
 
     while to_evaluate_plan_dicts != []:

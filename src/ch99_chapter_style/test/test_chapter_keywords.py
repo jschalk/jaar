@@ -1,51 +1,33 @@
 from importlib import import_module as importlib_import_module
 from inspect import getsource as inspect_getsource
-from os.path import exists as os_path_exists
-from src.ch01_py.file_toolbox import (
-    create_path,
-    get_dir_file_strs,
-    get_dir_filenames,
-    open_file,
-)
+from src.ch01_py.file_toolbox import create_path, get_dir_file_strs, open_file
 from src.ch01_py.keyword_class_builder import (
     get_chXX_keyword_classes,
     get_cumlative_ch_keywords_dict,
     get_keywords_by_chapter,
     get_keywords_src_config,
 )
-from src.ch98_docs_builder.doc_builder import (
-    get_chapter_desc_prefix,
-    get_chapter_desc_str_number,
-    get_chapter_descs,
-    get_chapter_num_descs,
-)
+from src.ch98_docs_builder.doc_builder import get_chapter_desc_prefix, get_chapter_descs
 from src.ch99_chapter_style.style import (
-    check_all_test_functions_are_formatted,
-    check_all_test_functions_have_proper_naming_format,
-    check_if_test_HasDocString_pytests_exist,
-    check_if_test_ReturnsObj_pytests_exist,
-    find_incorrect_imports,
     get_all_semantic_types_from_ref_files,
     get_chapters_obj_metrics,
-    get_docstring,
     get_json_files,
     get_python_files_with_flag,
     get_semantic_types_filename,
-    get_top_level_functions,
 )
 
 
 def get_semantic_types_dict() -> dict[str, str]:
     semantic_types_keywords = {}
     for x_keyword, x_dict in get_keywords_src_config().items():
-        semantic_type = x_dict.get("semantic_type")
-        if semantic_type:
+        if semantic_type := x_dict.get("semantic_type"):
             semantic_types_keywords[x_keyword] = semantic_type
 
     return semantic_types_keywords
 
 
 def test_get_semantic_types_dict_ReturnsObj():
+    # sourcery skip: no-conditionals-in-tests
     # ESTABLISH / WHEN
     semantic_types_dict = get_semantic_types_dict()
 
@@ -53,11 +35,8 @@ def test_get_semantic_types_dict_ReturnsObj():
     src_semantic_types_keywords = {}
     keywords_src_config = get_keywords_src_config()
     for x_keyword, x_dict in keywords_src_config.items():
-        semantic_type = x_dict.get("semantic_type")
-        if semantic_type:
+        if semantic_type := x_dict.get("semantic_type"):
             src_semantic_types_keywords[x_keyword] = semantic_type
-            # print(f"keyword={x_keyword} {x_dict=}")
-
     assert src_semantic_types_keywords == semantic_types_dict
     # "semantic_type": "str"
 
@@ -151,7 +130,7 @@ def test_Chapters_Semantic_Types_AreAllIn_chXX_semantic_types_ref_files():
 def test_Chapters_KeywordsAppearWhereTheyShould():
     """Test that checks no str function is created before it is needed or after the term is used."""
 
-    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+    # sourcery skip: low-code-quality, no-conditionals-in-tests, no-loop-in-tests
     # ESTABLISH
     # "close" is excluded because it is used to close sqlite database connections
     excluded_strs = {"close"}
@@ -219,7 +198,11 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
     for keyword, chapters_dict in keywords_in_ch_count.items():
         # for chapter_prefix in sorted(chapters_dict.keys()):
         #     chapter_count = chapters_dict.get(chapter_prefix)
-        print(f"{keyword=} {chapter_prefix=} ")
+        # print(f"{keyword=} {chapter_prefix=} ")
+        never_used_assertion_fail_str = (
+            f"The Keyword '{keyword}' is never used in the chapters"
+        )
+        assert chapters_dict.keys(), never_used_assertion_fail_str
         min_chapter_prefix = min(chapters_dict.keys())
         min_chapter_count = chapters_dict.get(min_chapter_prefix)
         if min_chapter_count <= 2:

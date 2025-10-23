@@ -17,7 +17,7 @@ def test_sift_atom_ReturnsNoneIfGivenBeliefAtomIsUPDATE():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     sue_belief.add_plan(casa_rope)
     casa_atom = beliefatom_shop(kw.belief_planunit, kw.UPDATE)
-    casa_atom.set_arg(kw.parent_rope, sue_belief.get_nexus_label())
+    casa_atom.set_arg(kw.parent_rope, sue_belief.planroot.plan_label)
     casa_atom.set_arg(kw.plan_label, casa_str)
     casa_atom.set_arg(kw.star, 8)
 

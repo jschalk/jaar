@@ -14,7 +14,7 @@ from src.ch98_docs_builder.doc_builder import (
     save_brick_formats_md,
     save_chapter_blurbs_md,
     save_idea_brick_mds,
-    save_ropeterm_explanation_md,
+    save_ropeterm_description_md,
 )
 
 
@@ -31,7 +31,7 @@ def test_SpecialTestThatBuildsDocs():
     save_idea_brick_mds(destination_dir)
     save_brick_formats_md(destination_dir)
     save_chapter_blurbs_md(destination_dir)
-    save_ropeterm_explanation_md(destination_dir)
+    save_ropeterm_description_md(destination_dir)
     save_keywords_by_chapter_md(destination_dir)  # docs\keywords_by_chapter.md
     # resave json files so that they are ordered alphabetically
     # 4% of instances resave all json files

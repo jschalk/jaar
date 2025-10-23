@@ -46,8 +46,8 @@ def test_MomentUnit_Exists():
     assert not amy_moment.moment_mstr_dir
     # Calculated fields
     assert not amy_moment.offi_time_max
-    assert not amy_moment._beliefs_dir
-    assert not amy_moment._lessons_dir
+    assert not amy_moment.beliefs_dir
+    assert not amy_moment.lessons_dir
     assert not amy_moment.all_tranbook
     assert set(amy_moment.__dict__) == {
         kw.moment_label,
@@ -59,13 +59,13 @@ def test_MomentUnit_Exists():
         kw.respect_grain,
         kw.mana_grain,
         kw.job_listen_rotations,
-        "_moment_dir",
+        "moment_dir",
         "moment_mstr_dir",
         kw.offi_times,
         kw.all_tranbook,
         kw.offi_time_max,
-        "_beliefs_dir",
-        "_lessons_dir",
+        "beliefs_dir",
+        "lessons_dir",
     }
 
 
@@ -89,8 +89,8 @@ def test_momentunit_shop_ReturnsMomentUnit():
     assert a23_moment.moment_mstr_dir == get_temp_dir()
     assert a23_moment.job_listen_rotations == get_default_job_listen_count()
     # Calculated fields
-    assert a23_moment._beliefs_dir != None
-    assert a23_moment._lessons_dir != None
+    assert a23_moment.beliefs_dir != None
+    assert a23_moment.lessons_dir != None
     assert a23_moment.all_tranbook == tranbook_shop(a23_str)
 
 
@@ -104,8 +104,8 @@ def test_momentunit_shop_ReturnsMomentUnitWith_moments_dir(temp_dir_setup):
     # THEN
     assert a23_moment.moment_label == a23_str
     assert a23_moment.moment_mstr_dir == get_temp_dir()
-    assert a23_moment._beliefs_dir is not None
-    assert a23_moment._lessons_dir is not None
+    assert a23_moment.beliefs_dir is not None
+    assert a23_moment.lessons_dir is not None
 
 
 def test_momentunit_shop_ReturnsMomentUnitWith_knot(temp_dir_setup):
@@ -148,9 +148,9 @@ def test_MomentUnit_set_moment_dirs_SetsDirsAndFiles(temp_dir_setup):
     x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     x_lessons_dir = create_path(x_moment_dir, "lessons")
 
-    assert not amy_moment._moment_dir
-    assert not amy_moment._beliefs_dir
-    assert not amy_moment._lessons_dir
+    assert not amy_moment.moment_dir
+    assert not amy_moment.beliefs_dir
+    assert not amy_moment.lessons_dir
     assert os_path_exists(x_moment_dir) is False
     assert os_path_isdir(x_moment_dir) is False
     assert os_path_exists(x_beliefs_dir) is False
@@ -160,9 +160,9 @@ def test_MomentUnit_set_moment_dirs_SetsDirsAndFiles(temp_dir_setup):
     amy_moment._set_moment_dirs()
 
     # THEN
-    assert amy_moment._moment_dir == x_moment_dir
-    assert amy_moment._beliefs_dir == x_beliefs_dir
-    assert amy_moment._lessons_dir == x_lessons_dir
+    assert amy_moment.moment_dir == x_moment_dir
+    assert amy_moment.beliefs_dir == x_beliefs_dir
+    assert amy_moment.lessons_dir == x_lessons_dir
     assert os_path_exists(x_moment_dir)
     assert os_path_isdir(x_moment_dir)
     assert os_path_exists(x_beliefs_dir)
@@ -179,8 +179,8 @@ def test_momentunit_shop_SetsmomentsDirs(temp_dir_setup):
     # THEN
     assert a23_moment.moment_label == a23_str
     x_moments_dir = create_path(get_temp_dir(), "moments")
-    assert a23_moment._moment_dir == create_path(x_moments_dir, a23_str)
-    assert a23_moment._beliefs_dir == create_path(a23_moment._moment_dir, "beliefs")
+    assert a23_moment.moment_dir == create_path(x_moments_dir, a23_str)
+    assert a23_moment.beliefs_dir == create_path(a23_moment.moment_dir, "beliefs")
 
 
 def test_MomentUnit_create_empty_belief_from_moment_ReturnsObj_Scenario0(

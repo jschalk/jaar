@@ -1,3 +1,4 @@
+from collections import Counter
 from pathlib import Path as pathlib_Path
 from src.ch01_py.file_toolbox import is_path_valid
 from src.ch04_rope._ref.ch04_semantic_types import (
@@ -227,3 +228,43 @@ def rope_is_valid_dir_path(x_rope: RopeTerm, knot: KnotTerm) -> bool:
     parts = pathlib_Path(x_rope_os_path).parts
     parts = parts[1:]
     return False if len(parts) != len(x_rope_labels) else is_path_valid(x_rope_os_path)
+
+
+def remove_knot_ends(x_rope: RopeTerm, knot: KnotTerm) -> str:
+    if x_rope[: len(knot)] == knot:
+        x_rope = x_rope[len(knot) :]
+    if x_rope[len(x_rope) - len(knot) :] == knot:
+        x_rope = x_rope[: len(x_rope) - len(knot)]
+    return x_rope
+
+
+def get_unique_short_ropes(
+    ropes_set: set[RopeTerm], knot: KnotTerm
+) -> dict[RopeTerm, RopeTerm]:
+    """Return dict of ropes and the shortest possible term for that rope that is unique."""
+
+    ropes_list = list(ropes_set)
+    parts_list = [get_all_rope_labels(rope, knot) for rope in ropes_list]
+    max_len = max((len(p) for p in parts_list), default=0)
+
+    # Build counters for all suffix lengths
+    counters = {}
+    for k in range(1, max_len + 1):
+        candidates = [tuple(p[-k:]) if len(p) >= k else tuple(p) for p in parts_list]
+        counters[k] = Counter(candidates)
+
+    result = {}
+    for idx, parts in enumerate(parts_list):
+        chosen = None
+        for k in range(1, len(parts) + 1):
+            cand = tuple(parts[-k:])
+            if counters[k][cand] == 1:
+                chosen = cand
+                break
+        if chosen is None:
+            chosen = tuple(parts)
+
+        rep = knot.join(chosen)
+        result[ropes_list[idx]] = rep
+
+    return result

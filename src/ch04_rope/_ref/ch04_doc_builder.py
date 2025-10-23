@@ -1,7 +1,7 @@
 from src.ch04_rope.rope import create_rope
 
 
-def get_ropeterm_explanation_md() -> str:
+def get_ropeterm_description_md() -> str:
     amy_str = "amy"
     casa_rope = create_rope(amy_str, "casa")
     clean_rope = create_rope(casa_rope, "clean")

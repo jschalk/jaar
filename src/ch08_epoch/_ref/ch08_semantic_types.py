@@ -22,5 +22,5 @@ class EpochLabel(LabelTerm):
     pass
 
 
-class EpochPoint(int):
+class EpochInstant(int):
     pass

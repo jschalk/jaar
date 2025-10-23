@@ -7,7 +7,7 @@ from src.ch04_rope.rope import (
 )
 from src.ch05_reason.reason import CaseUnit, FactUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit
-from src.ch08_epoch.epoch_main import beliefepochpoint_shop
+from src.ch08_epoch.epoch_main import beliefEpochInstant_shop
 
 
 def get_reason_case_readable_str(
@@ -18,8 +18,8 @@ def get_reason_case_readable_str(
 ) -> str:
     """Returns a string describing reason case in readable language. Will have special cases for time."""
 
-    nexus_label = get_first_label_from_rope(reason_context)
-    time_rope = create_rope(nexus_label, "time")
+    moment_label = get_first_label_from_rope(reason_context)
+    time_rope = create_rope(moment_label, "time")
     epoch_rope = create_rope(time_rope, epoch_label)
     week_rope = create_rope(epoch_rope, "week")
     if reason_context == week_rope:
@@ -53,11 +53,11 @@ def get_fact_state_readable_str(
     context_tail = get_tail_label(context_rope)
     state_trailing = state_rope.replace(context_rope, "", 1)
     x_str = f"({context_tail}) fact: {state_trailing}"
-    nexus_label = get_first_label_from_rope(context_rope)
-    time_rope = create_rope(nexus_label, "time")
+    moment_label = get_first_label_from_rope(context_rope)
+    time_rope = create_rope(moment_label, "time")
     if factunit.fact_context == create_rope(time_rope, epoch_label):
-        lower_blurb = get_epochpoint_blurb(beliefunit, epoch_label, lower_float)
-        upper_blurb = get_epochpoint_blurb(beliefunit, epoch_label, upper_float)
+        lower_blurb = get_EpochInstant_blurb(beliefunit, epoch_label, lower_float)
+        upper_blurb = get_EpochInstant_blurb(beliefunit, epoch_label, upper_float)
         return f"from {lower_blurb} to {upper_blurb}"
 
     if lower_float is not None and upper_float is not None:
@@ -66,9 +66,9 @@ def get_fact_state_readable_str(
     return x_str
 
 
-def get_epochpoint_blurb(
+def get_EpochInstant_blurb(
     beliefunit: BeliefUnit, epoch_rope: RopeTerm, x_min: int
 ) -> str:
-    lower_btlp = beliefepochpoint_shop(beliefunit, epoch_rope, x_min)
+    lower_btlp = beliefEpochInstant_shop(beliefunit, epoch_rope, x_min)
     lower_btlp.calc_epoch()
     return lower_btlp.get_blurb()

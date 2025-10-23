@@ -35,7 +35,7 @@ def test_LessonFileHandler_atom_file_path_ReturnsObj():
 
     # THEN
     one_atom_filename = yao_lessonfilehandler.atom_filename(one_int)
-    expected_path = create_path(yao_lessonfilehandler._atoms_dir, one_atom_filename)
+    expected_path = create_path(yao_lessonfilehandler.atoms_dir, one_atom_filename)
     assert one_atom_file_path == expected_path
 
 
@@ -214,7 +214,7 @@ def test_LessonFileHandler_get_belief_from_atom_files_ReturnsFile_WithFactUnit(
     yao_lessonfilehandler.save_atom_file(get_atom_example_planunit_ball(x_moment_label))
     yao_lessonfilehandler.save_atom_file(get_atom_example_planunit_knee(x_moment_label))
     yao_lessonfilehandler.save_atom_file(get_atom_example_factunit_knee(x_moment_label))
-    print(f"{get_dir_file_strs(yao_lessonfilehandler._atoms_dir).keys()=}")
+    print(f"{get_dir_file_strs(yao_lessonfilehandler.atoms_dir).keys()=}")
 
     # WHEN
     yao_belief = yao_lessonfilehandler._get_belief_from_atom_files()

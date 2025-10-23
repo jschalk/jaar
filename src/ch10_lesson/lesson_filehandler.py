@@ -96,15 +96,15 @@ class LessonFileHandler:
     fund_grain: float = None
     respect_grain: float = None
     mana_grain: float = None
-    _atoms_dir: str = None
-    _lessons_dir: str = None
+    atoms_dir: str = None
+    lessons_dir: str = None
 
     def set_dir_attrs(self):
         mstr_dir = self.moment_mstr_dir
         moment_label = self.moment_label
         belief_name = self.belief_name
-        self._atoms_dir = create_atoms_dir_path(mstr_dir, moment_label, belief_name)
-        self._lessons_dir = create_lessons_dir_path(mstr_dir, moment_label, belief_name)
+        self.atoms_dir = create_atoms_dir_path(mstr_dir, moment_label, belief_name)
+        self.lessons_dir = create_lessons_dir_path(mstr_dir, moment_label, belief_name)
 
     def default_gut_belief(self) -> BeliefUnit:
         x_beliefunit = beliefunit_shop(
@@ -121,7 +121,7 @@ class LessonFileHandler:
 
     # lesson methods
     def get_max_atom_file_number(self) -> int:
-        return get_max_file_number(self._atoms_dir)
+        return get_max_file_number(self.atoms_dir)
 
     def _get_next_atom_file_number(self) -> int:
         max_file_number = self.get_max_atom_file_number()
@@ -132,11 +132,11 @@ class LessonFileHandler:
 
     def atom_file_path(self, atom_number: int) -> str:
         "Returns path: _atoms_dir/atom_number.json"
-        return create_path(self._atoms_dir, self.atom_filename(atom_number))
+        return create_path(self.atoms_dir, self.atom_filename(atom_number))
 
     def _save_valid_atom_file(self, x_atom: BeliefAtom, file_number: int):
         save_json(
-            self._atoms_dir,
+            self.atoms_dir,
             self.atom_filename(file_number),
             x_atom.to_dict(),
             replace=False,
@@ -156,7 +156,7 @@ class LessonFileHandler:
     def _get_belief_from_atom_files(self) -> BeliefUnit:
         x_belief = beliefunit_shop(self.belief_name, self.moment_label)
         if self.h_atom_file_exists(self.get_max_atom_file_number()):
-            x_atom_files = get_dir_file_strs(self._atoms_dir, delete_extensions=True)
+            x_atom_files = get_dir_file_strs(self.atoms_dir, delete_extensions=True)
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
 
             for x_atom_filename in sorted_atom_filenames:
@@ -167,7 +167,7 @@ class LessonFileHandler:
         return x_belief
 
     def get_max_lesson_file_number(self) -> int:
-        return get_max_file_number(self._lessons_dir)
+        return get_max_file_number(self.lessons_dir)
 
     def _get_next_lesson_file_number(self) -> int:
         max_file_number = self.get_max_lesson_file_number()
@@ -181,16 +181,16 @@ class LessonFileHandler:
         """Returns path: _lessons/lesson_id.json"""
 
         lesson_filename = self.lesson_filename(lesson_id)
-        return create_path(self._lessons_dir, lesson_filename)
+        return create_path(self.lessons_dir, lesson_filename)
 
     def hub_lesson_file_exists(self, lesson_id: int) -> bool:
         return os_path_exists(self.lesson_file_path(lesson_id))
 
     def validate_lessonunit(self, x_lessonunit: LessonUnit) -> LessonUnit:
-        if x_lessonunit._atoms_dir != self._atoms_dir:
-            x_lessonunit._atoms_dir = self._atoms_dir
-        if x_lessonunit._lessons_dir != self._lessons_dir:
-            x_lessonunit._lessons_dir = self._lessons_dir
+        if x_lessonunit.atoms_dir != self.atoms_dir:
+            x_lessonunit.atoms_dir = self.atoms_dir
+        if x_lessonunit.lessons_dir != self.lessons_dir:
+            x_lessonunit.lessons_dir = self.lessons_dir
         if x_lessonunit._lesson_id != self._get_next_lesson_file_number():
             x_lessonunit._lesson_id = self._get_next_lesson_file_number()
         if x_lessonunit.belief_name != self.belief_name:
@@ -208,13 +208,13 @@ class LessonFileHandler:
         if correct_invalid_attrs:
             x_lesson = self.validate_lessonunit(x_lesson)
 
-        if x_lesson._atoms_dir != self._atoms_dir:
+        if x_lesson.atoms_dir != self.atoms_dir:
             raise SaveLessonFileException(
-                f"LessonUnit file cannot be saved because lessonunit._atoms_dir is incorrect: {x_lesson._atoms_dir}. It must be {self._atoms_dir}."
+                f"LessonUnit file cannot be saved because lessonunit.atoms_dir is incorrect: {x_lesson.atoms_dir}. It must be {self.atoms_dir}."
             )
-        if x_lesson._lessons_dir != self._lessons_dir:
+        if x_lesson.lessons_dir != self.lessons_dir:
             raise SaveLessonFileException(
-                f"LessonUnit file cannot be saved because lessonunit._lessons_dir is incorrect: {x_lesson._lessons_dir}. It must be {self._lessons_dir}."
+                f"LessonUnit file cannot be saved because lessonunit.lessons_dir is incorrect: {x_lesson.lessons_dir}. It must be {self.lessons_dir}."
             )
         if x_lesson.belief_name != self.belief_name:
             raise SaveLessonFileException(
@@ -235,8 +235,8 @@ class LessonFileHandler:
         return lessonunit_shop(
             belief_name=self.belief_name,
             _lesson_id=self._get_next_lesson_file_number(),
-            _atoms_dir=self._atoms_dir,
-            _lessons_dir=self._lessons_dir,
+            atoms_dir=self.atoms_dir,
+            lessons_dir=self.lessons_dir,
         )
 
     def create_save_lesson_file(
@@ -252,12 +252,12 @@ class LessonFileHandler:
             raise LessonFileMissingException(
                 f"LessonUnit file_number {lesson_id} does not exist."
             )
-        x_lessons_dir = self._lessons_dir
-        x_atoms_dir = self._atoms_dir
+        x_lessons_dir = self.lessons_dir
+        x_atoms_dir = self.atoms_dir
         return create_lessonunit_from_files(x_lessons_dir, lesson_id, x_atoms_dir)
 
     def _merge_any_lessons(self, x_belief: BeliefUnit) -> BeliefUnit:
-        lessons_dir = self._lessons_dir
+        lessons_dir = self.lessons_dir
         lesson_ints = get_integer_filenames(lessons_dir, x_belief.last_lesson_id)
         if len(lesson_ints) == 0:
             return copy_deepcopy(x_belief)
@@ -271,8 +271,8 @@ class LessonFileHandler:
         x_lessonunit = lessonunit_shop(
             belief_name=self.belief_name,
             _lesson_id=get_init_lesson_id_if_None(),
-            _lessons_dir=self._lessons_dir,
-            _atoms_dir=self._atoms_dir,
+            lessons_dir=self.lessons_dir,
+            atoms_dir=self.atoms_dir,
         )
         x_lessonunit._beliefdelta.add_all_different_beliefatoms(
             before_belief=self.default_gut_belief(),

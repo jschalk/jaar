@@ -12,7 +12,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_planunit_exists,
     belief_planunit_get_obj,
 )
-from src.ch08_epoch._ref.ch08_semantic_types import EpochPoint, LabelTerm, RopeTerm
+from src.ch08_epoch._ref.ch08_semantic_types import EpochInstant, LabelTerm, RopeTerm
 from src.ch08_epoch.epoch_main import (
     get_day_rope,
     get_epoch_rope,
@@ -440,9 +440,9 @@ def modular_addition(x_int: int, y_int: int, modulus: int) -> int:
     return (x_int + y_int) % modulus
 
 
-def append_frame_to_caseunit(
+def add_frame_to_caseunit(
     x_case: CaseUnit,
-    append_int: int,
+    x_int: int,
     context_plan_close: int,
     context_plan_denom: int,
     context_plan_morph: bool,
@@ -450,64 +450,62 @@ def append_frame_to_caseunit(
     """Given any case (could be in minutes, days, weeks, etc) append to caseunit"""
     modulus = x_case.reason_divisor or context_plan_close or context_plan_denom
     if not context_plan_morph:
-        append_int //= get_1_if_None(context_plan_denom)
-    new_reason_lower = modular_addition(x_case.reason_lower, append_int, modulus)
-    new_reason_upper = modular_addition(x_case.reason_upper, append_int, modulus)
+        x_int //= get_1_if_None(context_plan_denom)
+    new_reason_lower = modular_addition(x_case.reason_lower, x_int, modulus)
+    new_reason_upper = modular_addition(x_case.reason_upper, x_int, modulus)
     x_case.reason_lower = new_reason_lower
     x_case.reason_upper = new_reason_upper
 
 
-def append_frame_to_reasonunit(
+def add_frame_to_reasonunit(
     x_reason: ReasonUnit,
-    frame_min: int,
+    x_int: int,
     context_plan_close: int,
     context_plan_denom: int,
     context_plan_morph: bool,
 ):
     for x_case in x_reason.cases.values():
         if x_case.reason_lower and x_case.reason_upper:
-            append_frame_to_caseunit(
+            add_frame_to_caseunit(
                 x_case,
-                frame_min,
+                x_int,
                 context_plan_close,
                 context_plan_denom,
                 context_plan_morph,
             )
 
 
-def append_frame_to_factunit(
-    x_factunit: FactUnit, frame_min: int, context_plan_close: int
-):
+def add_frame_to_factunit(x_factunit: FactUnit, x_int: int, context_plan_close: int):
     if x_factunit.fact_lower and x_factunit.fact_upper:
-        x_lower = modular_addition(x_factunit.fact_lower, frame_min, context_plan_close)
-        x_upper = modular_addition(x_factunit.fact_upper, frame_min, context_plan_close)
+        x_lower = modular_addition(x_factunit.fact_lower, x_int, context_plan_close)
+        x_upper = modular_addition(x_factunit.fact_upper, x_int, context_plan_close)
         x_factunit.fact_lower = x_lower
         x_factunit.fact_upper = x_upper
 
 
-def append_frame_to_beliefunit(
-    x_belief: BeliefUnit, frame_min: int, required_context_subrope: RopeTerm = None
+def add_frame_to_beliefunit(
+    x_belief: BeliefUnit, x_int: int, required_context_subrope: RopeTerm = None
 ):
     required_context_subrope = get_empty_str_if_None(required_context_subrope)
     for x_plan in x_belief.get_plan_dict().values():
         for x_reason in x_plan.reasonunits.values():
             if is_sub_rope(x_reason.reason_context, required_context_subrope):
                 reason_context_plan = x_belief.get_plan_obj(x_reason.reason_context)
-                append_frame_to_reasonunit(
-                    x_reason=x_reason,
-                    frame_min=frame_min,
-                    context_plan_close=reason_context_plan.close,
-                    context_plan_denom=reason_context_plan.denom,
-                    context_plan_morph=reason_context_plan.morph,
-                )
+                close = reason_context_plan.close
+                denom = reason_context_plan.denom
+                morph = reason_context_plan.morph
+                add_frame_to_reasonunit(x_reason, x_int, close, denom, morph)
         for x_fact in x_plan.factunits.values():
             if is_sub_rope(x_fact.fact_context, required_context_subrope):
                 fact_context_plan = x_belief.get_plan_obj(x_fact.fact_context)
-                append_frame_to_factunit(x_fact, frame_min, fact_context_plan.close)
+                add_frame_to_factunit(x_fact, x_int, fact_context_plan.close)
 
 
-def append_epoch_frame_to_beliefunit(
+def add_epoch_frame_to_beliefunit(
     x_belief: BeliefUnit, epoch_label: LabelTerm, epoch_frame_min: int
 ):
-    epoch_rope = get_epoch_rope(x_belief.get_nexus_label(), epoch_label, x_belief.knot)
-    append_frame_to_beliefunit(x_belief, epoch_frame_min, epoch_rope)
+    root_plan_label = x_belief.planroot.plan_label
+    epoch_rope = get_epoch_rope(root_plan_label, epoch_label, x_belief.knot)
+    add_frame_to_beliefunit(
+        x_belief=x_belief, x_int=epoch_frame_min, required_context_subrope=epoch_rope
+    )

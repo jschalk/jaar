@@ -74,42 +74,6 @@ def test_BeliefUnit_Exists():
     }
 
 
-def test_BeliefUnit_get_nexus_label_Scenario0_Default_knot():
-    # ESTABLISH
-    casa_str = "casa"
-    casa_planroot = planunit_shop(casa_str)
-    amy_str = "Amy23"
-    print(f"{casa_planroot.get_plan_rope()=}")
-    x_belief = BeliefUnit(
-        belief_name=amy_str, knot=casa_planroot.knot, planroot=casa_planroot
-    )
-
-    # WHEN
-    nexus_label = x_belief.get_nexus_label()
-
-    # THEN
-    assert nexus_label == casa_str
-
-
-def test_BeliefUnit_get_nexus_label_Scenario1_NonDefault_knot():
-    # ESTABLISH
-    casa_str = "casa"
-    slash_str = "/"
-    assert slash_str != default_knot_if_None()
-    casa_planroot = planunit_shop(casa_str, knot=slash_str)
-    amy_str = "Amy23"
-    print(f"{casa_planroot.get_plan_rope()=}")
-    x_belief = BeliefUnit(
-        belief_name=amy_str, knot=casa_planroot.knot, planroot=casa_planroot
-    )
-
-    # WHEN
-    nexus_label = x_belief.get_nexus_label()
-
-    # THEN
-    assert nexus_label == casa_str
-
-
 def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     # ESTABLISH
     sue_str = "Sue"
