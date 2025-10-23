@@ -23,6 +23,7 @@ from src.ch04_rope.rope import (
     is_labelterm,
     is_sub_rope,
     rebuild_rope,
+    remove_knot_ends,
     replace_knot,
     rope_is_valid_dir_path,
     to_rope,
@@ -689,3 +690,21 @@ def test_all_ropes_between_ReturnsObj_Scenario1_NonDefault_knot():
         run_rope,
         lap_rope,
     ]
+
+
+def test_remove_knot_ends_ReturnsObj():
+    # ESTABLISH
+    x_s = default_knot_if_None()
+    root_str = "root"
+    root_rode = to_rope(root_str, x_s)
+    casa_str = "casa"
+    casa_rope = f"{x_s}{root_rope()}{x_s}{casa_str}{x_s}"
+    bloomers_str = "bloomers"
+    bloomers_rope = f"{casa_str}{x_s}{bloomers_str}{x_s}"
+
+    # WHEN / THENs
+    assert remove_knot_ends(root_str, x_s) == root_str
+    assert remove_knot_ends(root_rode, x_s) == root_str
+    assert remove_knot_ends(casa_rope, x_s) == f"{root_rope()}{x_s}{casa_str}"
+    assert remove_knot_ends(bloomers_rope, x_s) == f"{casa_str}{x_s}{bloomers_str}"
+    assert remove_knot_ends(x_rope="", knot=x_s) == ""

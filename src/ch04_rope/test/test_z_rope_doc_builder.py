@@ -1,15 +1,15 @@
 from src.ch01_py.file_toolbox import open_file
-from src.ch04_rope._ref.ch04_doc_builder import get_ropeterm_explanation_md
+from src.ch04_rope._ref.ch04_doc_builder import get_ropeterm_description_md
 
 
-def test_get_ropeterm_explanation_md_ReturnsObj():
+def test_get_ropeterm_description_md_ReturnsObj():
     # ESTABLISH / WHEN
-    ropeterm_explanation_md = get_ropeterm_explanation_md()
+    ropeterm_description_md = get_ropeterm_description_md()
 
     # THEN
-    assert ropeterm_explanation_md
-    # print(ropeterm_explanation_md)
-    expected_ropeterm_explanation_md = """# Ropes
+    assert ropeterm_description_md
+    # print(ropeterm_description_md)
+    expected_ropeterm_description_md = """# Ropes
 
 
 # Introduction
@@ -77,5 +77,5 @@ Here each Rope has the FirstLabel "USA"
 
 The ropes give different meaning to the concepts of Dallas and Paris
 """
-    # print(ropeterm_explanation_md)
-    assert ropeterm_explanation_md == expected_ropeterm_explanation_md
+    # print(ropeterm_description_md)
+    assert ropeterm_description_md == expected_ropeterm_description_md

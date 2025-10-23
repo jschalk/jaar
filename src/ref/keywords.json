@@ -296,6 +296,7 @@
   "patient_rank_num": {"init_chapter": "ch14"}, 
   "patient_rank_percent": {"init_chapter": "ch14"}, 
   "paybook": {"init_chapter": "ch15"}, 
+  "plan": {"init_chapter": "ch06"}, 
   "plan_active": {"init_chapter": "ch06"}, 
   "plan_active_hx": {"init_chapter": "ch06"}, 
   "plan_fund_total": {"init_chapter": "ch06"}, 

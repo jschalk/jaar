@@ -2,6 +2,7 @@ from src.ch01_py.dict_toolbox import create_csv
 from src.ch02_allot.allot import allot_scale
 from src.ch03_voice.group import AwardUnit, MemberShip
 from src.ch03_voice.voice import VoiceUnit, calc_give_take_net
+from src.ch04_rope.rope import get_all_rope_labels, get_unique_short_ropes
 from src.ch05_reason.reason import (
     CaseUnit,
     FactUnit,
@@ -337,3 +338,8 @@ def belief_plan_reason_caseunit_set_obj(belief: BeliefUnit, args: dict[str,]):
         reason_upper=reason_upper,
         reason_divisor=reason_divisor,
     )
+
+
+def get_belief_unique_short_ropes(belief: BeliefUnit) -> dict[RopeTerm, RopeTerm]:
+    """Return dict of all plan_ropes and the shortest possible term for that Plan that is unique."""
+    return get_unique_short_ropes(set(belief.get_plan_dict().keys()), belief.knot)
