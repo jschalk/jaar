@@ -173,13 +173,13 @@ def get_fund_breakdown_belief() -> BeliefUnit:
     # plan_kid_weekdays = planunit_shop(week_str, star=25)
     # sue_belief.set_l1_plan(plan_kid_weekdays)
 
-    # sun_str = "Sunday"
-    # mon_str = "Monday"
-    # tue_str = "Tuesday"
-    # wed_str = "Wednesday"
-    # thu_str = "Thursday"
-    # fri_str = "Friday"
-    # sat_str = "Saturday"
+    # sun_str = kw.Sunday
+    # mon_str = kw.Monday
+    # tue_str = kw.Tuesday
+    # wed_str = kw.Wednesday
+    # thu_str = kw.Thursday
+    # fri_str = kw.Friday
+    # sat_str = kw.Saturday
     # plan_grandkidU = planunit_shop(sun_str, star=20)
     # plan_grandkidM = planunit_shop(mon_str, star=20)
     # plan_grandkidT = planunit_shop(tue_str, star=20)

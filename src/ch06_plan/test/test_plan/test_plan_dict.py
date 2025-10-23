@@ -181,7 +181,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     assert casa_dict[kw.healerunit] == yao_healerunit.to_dict()
     assert casa_dict[kw.star] == casa_plan.star
     assert casa_dict[kw.plan_label] == casa_plan.plan_label
-    assert casa_dict["uid"] == casa_plan.uid
+    assert casa_dict[kw.uid] == casa_plan.uid
     assert casa_dict[kw.begin] == casa_plan.begin
     assert casa_dict[kw.close] == casa_plan.close
     assert casa_dict[kw.numor] == casa_plan.numor

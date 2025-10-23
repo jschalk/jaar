@@ -319,8 +319,8 @@ function renderPlanUnit(planUnit, level) {
     ${renderFlatReadableJson(planUnit.awardunits, indent, show_awardunits)}
     ${renderFlatReadableJson(planUnit.awardheirs, indent, show_awardheirs)}
     ${renderFlatReadableJson(planUnit.awardlines, indent, show_awardlines)}
-    ${renderFlatReadableJson(planUnit.laborunit._partys, indent, show_laborunit)}
-    ${renderFlatReadableJson(planUnit.laborheir._partys, indent, show_laborheir)}
+    ${renderFlatReadableJson(planUnit.laborunit.partys, indent, show_laborunit)}
+    ${renderFlatReadableJson(planUnit.laborheir.partys, indent, show_laborheir)}
     ${renderReasonReadableJson(planUnit.reasonunits, indent, show_reasonunits)}
     ${renderReasonReadableJson(planUnit.reasonheirs, indent, show_reasonheirs)}
     ${renderFlatReadableJson(planUnit.factunits, indent, show_factunits)}

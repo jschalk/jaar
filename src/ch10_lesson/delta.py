@@ -386,7 +386,7 @@ class BeliefDelta:
             )
             self.add_beliefatom_plan_partyunit_insert(
                 plan_rope=insert_plan_rope,
-                insert_partyunit_party_titles=insert_planunit.laborunit._partys,
+                insert_partyunit_party_titles=insert_planunit.laborunit.partys,
             )
             self.add_beliefatom_plan_healerunit_insert(
                 plan_rope=insert_plan_rope,
@@ -494,8 +494,8 @@ class BeliefDelta:
             # update reasonunits_permises delete_case
 
             # insert / update / delete partyunits
-            before_partys_party_titles = set(before_planunit.laborunit._partys)
-            after_partys_party_titles = set(after_planunit.laborunit._partys)
+            before_partys_party_titles = set(before_planunit.laborunit.partys)
+            after_partys_party_titles = set(after_planunit.laborunit.partys)
             self.add_beliefatom_plan_partyunit_insert(
                 plan_rope=plan_rope,
                 insert_partyunit_party_titles=after_partys_party_titles.difference(
@@ -555,7 +555,7 @@ class BeliefDelta:
             )
             self.add_beliefatom_plan_partyunit_deletes(
                 plan_rope=delete_plan_rope,
-                delete_partyunit_party_titles=delete_planunit.laborunit._partys,
+                delete_partyunit_party_titles=delete_planunit.laborunit.partys,
             )
             self.add_beliefatom_plan_healerunit_deletes(
                 plan_rope=delete_plan_rope,

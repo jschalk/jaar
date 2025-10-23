@@ -40,7 +40,7 @@ def test_get_all_belief_dimen_keys_ReturnsObj():
     all_belief_dimen_keys = get_all_belief_dimen_keys()
 
     # THEN
-    assert not all_belief_dimen_keys.isdisjoint({"voice_name"})
+    assert not all_belief_dimen_keys.isdisjoint({kw.voice_name})
     expected_belief_keys = set()
     for belief_dimen in get_belief_dimens():
         expected_belief_keys.update(_get_atom_config_jkey_keys(belief_dimen))
@@ -63,7 +63,7 @@ def test_get_all_belief_dimen_delete_keys_ReturnsObj():
 
     # THEN
     assert not all_belief_dimen_delete_keys.isdisjoint(
-        {get_delete_key_name("voice_name")}
+        {get_delete_key_name(kw.voice_name)}
     )
     expected_belief_delete_keys = {
         get_delete_key_name(belief_dimen_key)
@@ -464,7 +464,7 @@ def test_get_normalized_belief_table_build_ReturnsObj():
 
     beliefunit_columns = cat_beliefunit.get(columns_str)
     assert len(beliefunit_columns) == 9
-    assert beliefunit_columns.get("uid") is not None
+    assert beliefunit_columns.get(kw.uid) is not None
     assert beliefunit_columns.get(kw.max_tree_traverse) is not None
     assert beliefunit_columns.get(kw.credor_respect) is not None
     assert beliefunit_columns.get(kw.debtor_respect) is not None
@@ -477,7 +477,7 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     assert len(cat_voiceunit) == 2
     voiceunit_columns = cat_voiceunit.get(columns_str)
     assert len(voiceunit_columns) == 4
-    assert voiceunit_columns.get("uid") is not None
+    assert voiceunit_columns.get(kw.uid) is not None
     assert voiceunit_columns.get(kw.voice_name) is not None
     assert voiceunit_columns.get(kw.voice_cred_lumen) is not None
     assert voiceunit_columns.get(kw.voice_debt_lumen) is not None
@@ -494,7 +494,7 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     assert len(cat_plan) == 2
     plan_columns = cat_plan.get(columns_str)
     assert len(plan_columns) == 13
-    assert plan_columns.get("uid") is not None
+    assert plan_columns.get(kw.uid) is not None
     assert plan_columns.get(kw.plan_rope) is not None
     assert plan_columns.get(kw.begin) is not None
     assert plan_columns.get(kw.close) is not None
@@ -554,7 +554,7 @@ def test_get_allowed_class_types_ReturnsObj():
         kw.RopeTerm,
         "float",
         "bool",
-        "EpochPoint",
+        kw.EpochPoint,
     }
 
     # WHEN / THEN
@@ -612,7 +612,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(kw.addin) == "float"
     assert x_class_types.get(kw.awardee_title) == kw.TitleTerm
     assert x_class_types.get(kw.reason_context) == kw.RopeTerm
-    assert x_class_types.get("active_requisite") == "bool"
+    assert x_class_types.get(kw.active_requisite) == "bool"
     assert x_class_types.get(kw.begin) == "float"
     assert x_class_types.get(kw.respect_grain) == "float"
     assert x_class_types.get(kw.close) == "float"
@@ -623,7 +623,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(kw.group_debt_lumen) == "float"
     assert x_class_types.get(kw.debtor_respect) == "float"
     assert x_class_types.get(kw.denom) == "int"
-    assert x_class_types.get("reason_divisor") == "int"
+    assert x_class_types.get(kw.reason_divisor) == "int"
     assert x_class_types.get(kw.fact_context) == kw.RopeTerm
     assert x_class_types.get(kw.fact_upper) == "float"
     assert x_class_types.get(kw.fact_lower) == "float"
@@ -637,13 +637,13 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(kw.max_tree_traverse) == "int"
     assert x_class_types.get(kw.morph) == "bool"
     assert x_class_types.get(kw.reason_state) == kw.RopeTerm
-    assert x_class_types.get("reason_upper") == "float"
+    assert x_class_types.get(kw.reason_upper) == "float"
     assert x_class_types.get(kw.numor) == "int"
-    assert x_class_types.get("reason_lower") == "float"
+    assert x_class_types.get(kw.reason_lower) == "float"
     assert x_class_types.get(kw.mana_grain) == "float"
     assert x_class_types.get(kw.fact_state) == kw.RopeTerm
-    assert x_class_types.get("pledge") == "bool"
-    assert x_class_types.get("problem_bool") == "bool"
+    assert x_class_types.get(kw.pledge) == "bool"
+    assert x_class_types.get(kw.problem_bool) == "bool"
     assert x_class_types.get(kw.plan_rope) == kw.RopeTerm
     assert x_class_types.get(kw.solo) == "int"
     assert x_class_types.get(kw.stop_want) == "float"

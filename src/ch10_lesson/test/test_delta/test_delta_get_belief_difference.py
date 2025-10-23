@@ -224,8 +224,8 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_voice_memb
     run_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     assert run_beliefatom.get_value(kw.voice_name) == zia_str
     assert run_beliefatom.get_value(kw.group_title) == run_str
-    assert run_beliefatom.get_value("group_cred_lumen") == zia_run_credit_w
-    assert run_beliefatom.get_value("group_debt_lumen") == zia_run_debt_w
+    assert run_beliefatom.get_value(kw.group_cred_lumen) == zia_run_credit_w
+    assert run_beliefatom.get_value(kw.group_debt_lumen) == zia_run_debt_w
 
     print_beliefatom_keys(sue_beliefdelta)
     print(f"{get_beliefatom_total_count(sue_beliefdelta)=}")
@@ -269,8 +269,8 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_voice_memb
     xio_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     assert xio_beliefatom.get_value(kw.voice_name) == xio_str
     assert xio_beliefatom.get_value(kw.group_title) == run_str
-    assert xio_beliefatom.get_value("group_cred_lumen") == after_xio_credit_w
-    assert xio_beliefatom.get_value("group_debt_lumen") == after_xio_debt_w
+    assert xio_beliefatom.get_value(kw.group_cred_lumen) == after_xio_credit_w
+    assert xio_beliefatom.get_value(kw.group_debt_lumen) == after_xio_debt_w
 
     print(f"{get_beliefatom_total_count(sue_beliefdelta)=}")
     assert get_beliefatom_total_count(sue_beliefdelta) == 1

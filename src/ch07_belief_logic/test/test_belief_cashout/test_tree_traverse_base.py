@@ -441,7 +441,7 @@ def test_BeliefUnit_cashout_CreatesFullyPopulated_plan_dict():
 def test_BeliefUnit_cashout_Resets_offtrack_kids_star_set():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    sue_beliefunit.offtrack_kids_star_set = set("ZZ")
+    sue_beliefunit.offtrack_kids_star_set = set("YY")
     x_set = set()
 
     assert sue_beliefunit.offtrack_kids_star_set != x_set

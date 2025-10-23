@@ -73,14 +73,14 @@ def test_LaborUnit_to_dict_ReturnsDictWithSingle_partyunit():
     bob_party_title = GroupTitle("Bob")
     bob_partyunit = partyunit_shop(bob_party_title)
     x_partys = {bob_party_title: bob_partyunit}
-    x_laborunit = laborunit_shop(_partys=x_partys)
+    x_laborunit = laborunit_shop(partys=x_partys)
 
     # WHEN
     obj_dict = x_laborunit.to_dict()
 
     # THEN
     assert obj_dict is not None
-    example_dict = {"_partys": {bob_party_title: bob_partyunit.to_dict()}}
+    example_dict = {"partys": {bob_party_title: bob_partyunit.to_dict()}}
     print(f"{example_dict=}")
     assert obj_dict == example_dict
 
@@ -95,7 +95,7 @@ def test_get_laborunit_from_dict_ReturnsObj_Scenario0():
     run_partyunit = expected_laborunit.get_partyunit(run_str)
     xio_partyunit = expected_laborunit.get_partyunit(xio_str)
     src_laborunit_dict = {
-        "_partys": {
+        "partys": {
             run_str: run_partyunit.to_dict(),
             xio_str: xio_partyunit.to_dict(),
         }

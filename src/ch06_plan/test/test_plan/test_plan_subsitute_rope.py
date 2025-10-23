@@ -6,7 +6,7 @@ from src.ch06_plan.plan import planunit_shop
 def test_PlanUnit_find_replace_rope_Modifies_parent_rope():
     # ESTABLISH Plan with _parent_rope that will be different
     old_casa_str = "casa1"
-    old_first_label = "ZZ"
+    old_first_label = "YY"
     old_casa_rope = create_rope(old_first_label, old_casa_str)
     bloomers_str = "bloomers"
     old_bloomers_rope = create_rope(old_casa_rope, bloomers_str)
@@ -31,7 +31,7 @@ def test_PlanUnit_find_replace_rope_Modifies_parent_rope():
 def test_PlanUnit_find_replace_rope_Modifies_reasonunits():
     # ESTABLISH Plan with reason that will be different
     casa_str = "casa1"
-    old_first_label = "ZZ"
+    old_first_label = "YY"
     casa_rope = create_rope(old_first_label, casa_str)
     bloomers_str = "bloomers"
     bloomers_rope = create_rope(casa_rope, bloomers_str)
@@ -87,7 +87,7 @@ def test_PlanUnit_find_replace_rope_Modifies_factunits():
     # ESTABLISH Plan with factunit that will be different
     roses_str = "roses"
     old_water_str = "water"
-    old_first_label = "ZZ"
+    old_first_label = "YY"
     old_water_rope = create_rope(old_first_label, old_water_str)
     rain_str = "rain"
     old_rain_rope = create_rope(old_water_rope, rain_str)

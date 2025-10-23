@@ -221,7 +221,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[142] == kw.celldepth
     assert table_sorting_priority[143] == kw.job_listen_rotations
     assert table_sorting_priority[144] == kw.error_message
-    assert table_sorting_priority[145] == "_belief_name_is_labor"
+    assert table_sorting_priority[145] == "belief_name_is_labor"
     assert table_sorting_priority[146] == kw.plan_active
     assert table_sorting_priority[147] == kw.task
     assert table_sorting_priority[148] == kw.reason_active

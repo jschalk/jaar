@@ -813,14 +813,14 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
     x_rope = 3
     x__belief_name_is_labor = 5
     x_laborheir = laborheir_shop()
-    x_laborheir._belief_name_is_labor = x__belief_name_is_labor
+    x_laborheir.belief_name_is_labor = x__belief_name_is_labor
     bob_str = "Bob"
     bob_solo_bool = 6
     sue_str = "Sue"
     sue_solo_bool = 7
     bob_partyheir = partyheir_shop(bob_str, bob_solo_bool)
     sue_partyheir = partyheir_shop(sue_str, sue_solo_bool)
-    x_laborheir._partys = {bob_str: bob_partyheir, sue_str: sue_partyheir}
+    x_laborheir.partys = {bob_str: bob_partyheir, sue_str: sue_partyheir}
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()

@@ -104,10 +104,10 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_VoiceNam
     voice_name_mapunit.set_otx2inx(sue_otx, sue_inx)
     voice_name_mapunit.set_otx2inx(bob_otx, bob_inx)
     otx_dt = DataFrame(columns=[kw.moment_label, kw.voice_name, kw.voice_cred_lumen])
-    otx_dt.loc[0] = ["ZZ", zia_otx, 12]
-    otx_dt.loc[1] = ["ZZ", sue_otx, 12]
-    otx_dt.loc[2] = ["ZZ", bob_otx, 12]
-    otx_dt.loc[3] = ["ZZ", xio_otx, 12]
+    otx_dt.loc[0] = ["YY", zia_otx, 12]
+    otx_dt.loc[1] = ["YY", sue_otx, 12]
+    otx_dt.loc[2] = ["YY", bob_otx, 12]
+    otx_dt.loc[3] = ["YY", xio_otx, 12]
     otx_dt = otx_dt.reset_index(drop=True)
     old_otx_dt = copy_deepcopy(otx_dt)
     print(f"{otx_dt=}")
@@ -120,10 +120,10 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_VoiceNam
     assert otx_dt.iloc[1][kw.voice_name] == sue_inx
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
     inx_dt = DataFrame(columns=[kw.moment_label, kw.voice_name, kw.voice_cred_lumen])
-    inx_dt.loc[0] = ["ZZ", zia_otx, 12]
-    inx_dt.loc[1] = ["ZZ", sue_inx, 12]
-    inx_dt.loc[2] = ["ZZ", bob_inx, 12]
-    inx_dt.loc[3] = ["ZZ", xio_inx, 12]
+    inx_dt.loc[0] = ["YY", zia_otx, 12]
+    inx_dt.loc[1] = ["YY", sue_inx, 12]
+    inx_dt.loc[2] = ["YY", bob_inx, 12]
+    inx_dt.loc[3] = ["YY", xio_inx, 12]
     print(f"{str(otx_dt.to_csv())=}")
     print(f"{str(inx_dt.to_csv())=}")
     assert otx_dt.to_csv() == inx_dt.to_csv()
@@ -138,10 +138,10 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_VoiceName(
     bob_otx = "Bob"
     zia_otx = "Zia"
     otx_dt = DataFrame(columns=[kw.moment_label, kw.voice_name, kw.voice_cred_lumen])
-    otx_dt.loc[0] = ["ZZ", zia_otx, 12]
-    otx_dt.loc[1] = ["ZZ", sue_otx, 12]
-    otx_dt.loc[2] = ["ZZ", bob_otx, 12]
-    otx_dt.loc[3] = ["ZZ", xio_otx, 12]
+    otx_dt.loc[0] = ["YY", zia_otx, 12]
+    otx_dt.loc[1] = ["YY", sue_otx, 12]
+    otx_dt.loc[2] = ["YY", bob_otx, 12]
+    otx_dt.loc[3] = ["YY", xio_otx, 12]
     otx_dt = otx_dt.reset_index(drop=True)
     old_otx_dt = copy_deepcopy(otx_dt)
     print(f"{otx_dt=}")
@@ -154,10 +154,10 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_VoiceName(
     assert otx_dt.iloc[1][kw.voice_name] == sue_otx
     pandas_assert_frame_equal(otx_dt, old_otx_dt)
     inx_dt = DataFrame(columns=[kw.moment_label, kw.voice_name, kw.voice_cred_lumen])
-    inx_dt.loc[0] = ["ZZ", zia_otx, 12]
-    inx_dt.loc[1] = ["ZZ", sue_otx, 12]
-    inx_dt.loc[2] = ["ZZ", bob_otx, 12]
-    inx_dt.loc[3] = ["ZZ", xio_otx, 12]
+    inx_dt.loc[0] = ["YY", zia_otx, 12]
+    inx_dt.loc[1] = ["YY", sue_otx, 12]
+    inx_dt.loc[2] = ["YY", bob_otx, 12]
+    inx_dt.loc[3] = ["YY", xio_otx, 12]
     print(f"{str(otx_dt.to_csv())=}")
     print(f"{str(inx_dt.to_csv())=}")
     assert otx_dt.to_csv() == inx_dt.to_csv()
@@ -180,10 +180,10 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_VoiceName(
     yao_translateunit.set_otx2inx(kw.NameTerm, sue_otx, sue_inx)
     yao_translateunit.set_otx2inx(kw.NameTerm, bob_otx, bob_inx)
     otx_dt = DataFrame(columns=[kw.moment_label, kw.voice_name, kw.voice_cred_lumen])
-    otx_dt.loc[0] = ["ZZ", zia_otx, 12]
-    otx_dt.loc[1] = ["ZZ", sue_otx, 12]
-    otx_dt.loc[2] = ["ZZ", bob_otx, 12]
-    otx_dt.loc[3] = ["ZZ", xio_otx, 12]
+    otx_dt.loc[0] = ["YY", zia_otx, 12]
+    otx_dt.loc[1] = ["YY", sue_otx, 12]
+    otx_dt.loc[2] = ["YY", bob_otx, 12]
+    otx_dt.loc[3] = ["YY", xio_otx, 12]
     otx_dt = otx_dt.reset_index(drop=True)
     old_otx_dt = copy_deepcopy(otx_dt)
     print(f"{otx_dt=}")
@@ -196,10 +196,10 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_VoiceName(
     assert otx_dt.iloc[1][kw.voice_name] == sue_inx
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
     inx_dt = DataFrame(columns=[kw.moment_label, kw.voice_name, kw.voice_cred_lumen])
-    inx_dt.loc[0] = ["ZZ", zia_otx, 12]
-    inx_dt.loc[1] = ["ZZ", sue_inx, 12]
-    inx_dt.loc[2] = ["ZZ", bob_inx, 12]
-    inx_dt.loc[3] = ["ZZ", xio_inx, 12]
+    inx_dt.loc[0] = ["YY", zia_otx, 12]
+    inx_dt.loc[1] = ["YY", sue_inx, 12]
+    inx_dt.loc[2] = ["YY", bob_inx, 12]
+    inx_dt.loc[3] = ["YY", xio_inx, 12]
     print(f"{str(otx_dt.to_csv())=}")
     print(f"{str(inx_dt.to_csv())=}")
     assert otx_dt.to_csv() == inx_dt.to_csv()

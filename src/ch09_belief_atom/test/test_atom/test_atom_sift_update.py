@@ -145,7 +145,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_planunit():
     old_casa_atom.set_arg(kw.morph, sue_morph)
     old_casa_atom.set_arg(kw.numor, sue_numor)
     old_casa_atom.set_arg(kw.pledge, sue_pledge)
-    old_casa_atom.set_arg("problem_bool", sue_problem_bool)
+    old_casa_atom.set_arg(kw.problem_bool, sue_problem_bool)
     old_casa_atom.set_arg(kw.stop_want, sue_stop_want)
 
     # WHEN
@@ -165,7 +165,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_planunit():
     assert zia_jvalues.get(kw.morph) == sue_morph
     assert zia_jvalues.get(kw.numor) == sue_numor
     assert zia_jvalues.get(kw.pledge) == sue_pledge
-    assert zia_jvalues.get("problem_bool") == sue_problem_bool
+    assert zia_jvalues.get(kw.problem_bool) == sue_problem_bool
     assert zia_jvalues.get(kw.stop_want) == sue_stop_want
 
 
@@ -251,7 +251,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reason_caseunit():
     thur_atom.set_arg(kw.reason_context, week_rope)
     thur_atom.set_arg(kw.reason_state, thur_rope)
     assert thur_atom.is_valid()
-    thur_atom.set_arg("reason_divisor", thur_reason_divisor)
+    thur_atom.set_arg(kw.reason_divisor, thur_reason_divisor)
     thur_jkeys = thur_atom.get_jkeys_dict()
     thur_caseunit = caseunit_get_obj(sue_belief, thur_jkeys)
     assert thur_caseunit.reason_divisor != thur_reason_divisor
@@ -265,7 +265,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reason_caseunit():
     assert new_zia_beliefatom.crud_str == kw.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
-    assert zia_jvalues.get("reason_divisor") == thur_reason_divisor
+    assert zia_jvalues.get(kw.reason_divisor) == thur_reason_divisor
 
 
 def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_factunit():

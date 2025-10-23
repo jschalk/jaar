@@ -96,7 +96,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
     # THEN
     # laborunit
     mop_labor_dict = mop_dict.get(kw.laborunit)
-    mop_partys_dict = mop_labor_dict.get("_partys")
+    mop_partys_dict = mop_labor_dict.get("partys")
     sue_str = "Sue"
     bob_str = "Bob"
     mop_sue_dict = mop_partys_dict.get(sue_str)
@@ -113,7 +113,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
 
     # laborheir
     mop_labor_dict = mop_dict.get(kw.laborheir)
-    mop_partys_dict = mop_labor_dict.get("_partys")
+    mop_partys_dict = mop_labor_dict.get("partys")
     sue_str = "Sue"
     bob_str = "Bob"
     mop_sue_dict = mop_partys_dict.get(sue_str)
@@ -140,7 +140,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario2_RootPlanUnit_attrs():
     # for dict_key, value in casa_dict.items():
     #     print(f"{dict_key=} \t\t {value=}")
     # expected_laborunit_dict = {
-    #     "_partys": {sue_str: {kw.party_title: sue_str, "solo": False}}
+    #     "partys": {sue_str: {kw.party_title: sue_str, "solo": False}}
     # }
     expected_parent_rope = add_small_dot("Root Plan parent_rope is empty str")
     assert root_plan_view_dict.get(kw.parent_rope) == expected_parent_rope

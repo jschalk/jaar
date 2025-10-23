@@ -35,8 +35,8 @@ def test_create_legible_list_ReturnsObj_voice_membership_UPDATE_group_cred_lumen
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     dimen = kw.belief_voice_membership
-    group_cred_lumen_str = "group_cred_lumen"
-    group_debt_lumen_str = "group_debt_lumen"
+    group_cred_lumen_str = kw.group_cred_lumen
+    group_debt_lumen_str = kw.group_debt_lumen
     swim_str = f"{sue_belief.knot}Swimmers"
     yao_str = "Yao"
     group_cred_lumen_value = 81
@@ -63,7 +63,7 @@ def test_create_legible_list_ReturnsObj_voice_membership_UPDATE_group_cred_lumen
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     dimen = kw.belief_voice_membership
-    group_cred_lumen_str = "group_cred_lumen"
+    group_cred_lumen_str = kw.group_cred_lumen
     swim_str = f"{sue_belief.knot}Swimmers"
     yao_str = "Yao"
     group_cred_lumen_value = 81
@@ -88,7 +88,7 @@ def test_create_legible_list_ReturnsObj_voice_membership_UPDATE_group_debt_lumen
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     dimen = kw.belief_voice_membership
-    group_debt_lumen_str = "group_debt_lumen"
+    group_debt_lumen_str = kw.group_debt_lumen
     swim_str = f"{sue_belief.knot}Swimmers"
     yao_str = "Yao"
     group_debt_lumen_value = 43

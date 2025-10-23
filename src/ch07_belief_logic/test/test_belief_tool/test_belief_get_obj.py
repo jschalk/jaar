@@ -18,7 +18,7 @@ def test_belief_voiceunit_get_obj_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     sue_belief = beliefunit_shop("Sue")
-    jkeys = {"voice_name": yao_str}
+    jkeys = {kw.voice_name: yao_str}
     sue_belief.add_voiceunit(yao_str)
 
     # WHEN
@@ -33,7 +33,7 @@ def test_belief_voice_membership_get_obj_ReturnsObj():
     yao_str = "Yao"
     swim_str = ";swim"
     sue_belief = beliefunit_shop("Sue")
-    jkeys = {"voice_name": yao_str, "group_title": swim_str}
+    jkeys = {kw.voice_name: yao_str, "group_title": swim_str}
     sue_belief.add_voiceunit(yao_str)
     sue_belief.get_voice(yao_str).add_membership(swim_str)
 
@@ -147,7 +147,7 @@ def test_belief_get_obj_ReturnsObj_BeliefUnit():
     # ESTABLISH
     yao_str = "Yao"
     sue_belief = beliefunit_shop("Sue")
-    jkeys = {"voice_name": yao_str}
+    jkeys = {kw.voice_name: yao_str}
     sue_belief.add_voiceunit(yao_str)
 
     # WHEN
@@ -161,7 +161,7 @@ def test_belief_get_obj_ReturnsObj_belief_voiceunit_get_obj():
     # ESTABLISH
     yao_str = "Yao"
     sue_belief = beliefunit_shop("Sue")
-    jkeys = {"voice_name": yao_str}
+    jkeys = {kw.voice_name: yao_str}
     sue_belief.add_voiceunit(yao_str)
 
     # WHEN
@@ -176,7 +176,7 @@ def test_belief_get_obj_ReturnsObj_belief_voice_membership_get_obj():
     yao_str = "Yao"
     swim_str = ";swim"
     sue_belief = beliefunit_shop("Sue")
-    jkeys = {"voice_name": yao_str, "group_title": swim_str}
+    jkeys = {kw.voice_name: yao_str, "group_title": swim_str}
     sue_belief.add_voiceunit(yao_str)
     sue_belief.get_voice(yao_str).add_membership(swim_str)
 

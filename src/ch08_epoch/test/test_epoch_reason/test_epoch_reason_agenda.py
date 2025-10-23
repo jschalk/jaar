@@ -17,7 +17,7 @@ from src.ch07_belief_logic.belief_tool import (
     set_factunits_to_belief,
 )
 from src.ch08_epoch.epoch_main import add_epoch_planunit
-from src.ch08_epoch.epoch_reason_builder import (
+from src.ch08_epoch.epoch_reason import (
     set_epoch_base_case_dayly,
     set_epoch_cases_for_monthly,
     set_epoch_cases_for_yearly_monthday,
@@ -33,7 +33,7 @@ from src.ref.keywords import Ch08Keywords as kw
 def test_set_epoch_base_case_dayly_ChangesBeliefUnit_agenda():
     # ESTABLISH
     bob_belief = get_bob_five_belief()
-    mop_day_lower_min = 600
+    mop_dayly_lower_min = 600
     mop_day_duration = 90
     bob_belief.add_fact(wx.five_rope, wx.five_rope, 500, 500)
     assert len(bob_belief.get_agenda_dict()) == 1
@@ -43,8 +43,8 @@ def test_set_epoch_base_case_dayly_ChangesBeliefUnit_agenda():
         x_belief=bob_belief,
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
-        day_lower_min=mop_day_lower_min,
-        day_duration_min=mop_day_duration,
+        dayly_lower_min=mop_dayly_lower_min,
+        dayly_duration_min=mop_day_duration,
     )
 
     # THEN
@@ -70,7 +70,7 @@ def test_set_epoch_cases_for_yearly_monthday_ChangesBeliefUnit_agenda():
     month_geo_rope = bob_belief.make_rope(wx.five_year_rope, wx.Geo)
     mop_monthday = 3
     mop_length_days = 4
-    mop_day_lower_min = 600
+    mop_dayly_lower_min = 600
     mop_day_duration = 90
     bob_belief.add_fact(wx.five_rope, wx.five_rope, 400, 440)
     assert len(bob_belief.get_agenda_dict()) == 1
@@ -80,8 +80,8 @@ def test_set_epoch_cases_for_yearly_monthday_ChangesBeliefUnit_agenda():
         x_belief=bob_belief,
         plan_rope=wx.mop_rope,
         epoch_label=wx.five_str,
-        day_lower_min=mop_day_lower_min,
-        day_duration_min=mop_day_duration,
+        dayly_lower_min=mop_dayly_lower_min,
+        dayly_duration_min=mop_day_duration,
         month_label=wx.Geo,
         monthday=mop_monthday,
         length_days=mop_length_days,
@@ -122,7 +122,6 @@ def expected_ag_count_fact_set(
     x_belief.cashout()
     is_as_expected = expected == len(x_belief.get_agenda_dict())
     if not is_as_expected:
-        year_reasonheir = mop_plan.get_reasonheir(wx.five_year_rope)
         five_factheir = mop_plan.factheirs.get(wx.five_rope)
         year_factheir = mop_plan.factheirs.get(wx.five_year_rope)
         day_factheir = mop_plan.factheirs.get(wx.day_rope)
@@ -146,7 +145,7 @@ def test_set_epoch_cases_for_monthly_SetsAttr_Scenario1_ChangesBeliefUnit_agenda
     bob_belief = get_bob_five_belief()
     mop_monthday = 5
     mop_length_days = 1
-    mop_day_lower_min = 600
+    mop_dayly_lower_min = 600
     mop_day_duration = 90
     set_epoch_cases_for_monthly(
         x_belief=bob_belief,
@@ -154,8 +153,8 @@ def test_set_epoch_cases_for_monthly_SetsAttr_Scenario1_ChangesBeliefUnit_agenda
         epoch_label=wx.five_str,
         monthday=mop_monthday,
         length_days=mop_length_days,
-        day_lower_min=mop_day_lower_min,
-        day_duration_min=mop_day_duration,
+        dayly_lower_min=mop_dayly_lower_min,
+        dayly_duration_min=mop_day_duration,
     )
     mop_plan = bob_belief.get_plan_obj(wx.mop_rope)
 

@@ -20,7 +20,7 @@ def test_is_nameterm_ReturnsObj():
     assert is_nameterm("casa", groupmark=x_groupmark)
     assert not is_nameterm(f"ZZ{x_groupmark}casa", x_groupmark)
     assert not is_nameterm(NameTerm(f"ZZ{x_groupmark}casa"), x_groupmark)
-    assert is_nameterm(NameTerm("ZZ"), x_groupmark)
+    assert is_nameterm(NameTerm("YY"), x_groupmark)
 
 
 def test_validate_nameterm_Scenario0_RaisesErrorWhenNotNameTerm():

@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.ch01_py.dict_toolbox import get_json_from_dict
 from src.ch03_voice.voice import voiceunit_shop
-from src.ch07_belief_logic.belief_main import beliefunit_shop, get_default_moment_label
+from src.ch07_belief_logic.belief_main import beliefunit_shop, get_default_first_label
 from src.ch09_belief_atom.atom_main import beliefatom_shop
 from src.ch10_lesson._ref.ch10_semantic_types import FaceName, default_knot_if_None
 from src.ch10_lesson.delta import beliefdelta_shop
@@ -62,7 +62,7 @@ def test_lessonunit_shop_ReturnsObjEstablishWithEmptyArgs():
 
     # THEN
     assert not bob_lessonunit.face_name
-    assert bob_lessonunit.moment_label == get_default_moment_label()
+    assert bob_lessonunit.moment_label == get_default_first_label()
     assert bob_lessonunit.belief_name == bob_str
     assert bob_lessonunit._lesson_id == 0
     assert bob_lessonunit._beliefdelta == beliefdelta_shop()
@@ -371,7 +371,7 @@ def test_LessonUnit_get_serializable_dict_ReturnsObj_Scenario1_WithBeliefDeltaPo
     }
   }, 
   "face_name": null, 
-  "moment_label": "ZZ", 
+  "moment_label": "YY", 
   "spark_num": null
 }"""
     assert get_json_from_dict(generated_dict) == expected_json

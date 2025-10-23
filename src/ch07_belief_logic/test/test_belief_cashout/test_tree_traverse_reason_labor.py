@@ -46,7 +46,7 @@ def test_BeliefUnit_cashout_Set_child_plan_laborheir_FromParent_laborunit():
 
     # THEN
     assert run_plan.laborheir
-    assert run_plan.laborheir._belief_name_is_labor
+    assert run_plan.laborheir.belief_name_is_labor
 
     x_laborheir = laborheir_shop()
     x_laborheir.set_partys(
@@ -55,8 +55,8 @@ def test_BeliefUnit_cashout_Set_child_plan_laborheir_FromParent_laborunit():
         groupunits=bob_belief.groupunits,
     )
     x_laborheir.set_belief_name_is_labor(bob_belief.groupunits, bob_belief.belief_name)
-    print(f"{x_laborheir._belief_name_is_labor=}")
-    assert run_plan.laborheir._belief_name_is_labor == x_laborheir._belief_name_is_labor
+    print(f"{x_laborheir.belief_name_is_labor=}")
+    assert run_plan.laborheir.belief_name_is_labor == x_laborheir.belief_name_is_labor
     assert run_plan.laborheir == x_laborheir
 
 
@@ -141,7 +141,7 @@ def test_BeliefUnit_cashout_Set_grandchild_plan_laborheir_From_plankid_laborunit
     )
     assert four_plan.laborheir
     assert four_plan.laborheir == expected_laborheir
-    swimmers_party = four_plan.laborheir._partys.get(swimmers_str)
+    swimmers_party = four_plan.laborheir.partys.get(swimmers_str)
     assert swimmers_party.solo == swimmers_solo_bool
 
 
@@ -165,7 +165,7 @@ def test_BeliefUnit__get_filtered_awardunits_plan_CleansPlan_Laborunit():
     swim_laborunit.add_party(party_title=zoa_str)
     sue1_belief.edit_plan_attr(swim_rope, laborunit=swim_laborunit)
     sue1_belief_swim_plan = sue1_belief.get_plan_obj(swim_rope)
-    sue1_belief_swim_partys = sue1_belief_swim_plan.laborunit._partys
+    sue1_belief_swim_partys = sue1_belief_swim_plan.laborunit.partys
     assert len(sue1_belief_swim_partys) == 2
 
     # WHEN
@@ -174,7 +174,7 @@ def test_BeliefUnit__get_filtered_awardunits_plan_CleansPlan_Laborunit():
     cleaned_plan = sue2_belief._get_filtered_awardunits_plan(sue1_belief_swim_plan)
 
     # THEN
-    cleaned_swim_partys = cleaned_plan.laborunit._partys
+    cleaned_swim_partys = cleaned_plan.laborunit.partys
     assert len(cleaned_swim_partys) == 1
     assert list(cleaned_swim_partys) == [xia_str]
 
@@ -198,7 +198,7 @@ def test_BeliefUnit_set_plan_CleansPlan_awardunits():
     swim_laborunit.add_party(party_title=zoa_str)
     sue1_belief.edit_plan_attr(swim_rope, laborunit=swim_laborunit)
     sue1_belief_swim_plan = sue1_belief.get_plan_obj(swim_rope)
-    sue1_belief_swim_partys = sue1_belief_swim_plan.laborunit._partys
+    sue1_belief_swim_partys = sue1_belief_swim_plan.laborunit.partys
     assert len(sue1_belief_swim_partys) == 2
 
     # WHEN
@@ -210,6 +210,6 @@ def test_BeliefUnit_set_plan_CleansPlan_awardunits():
 
     # THEN
     sue2_belief_swim_plan = sue2_belief.get_plan_obj(swim_rope)
-    sue2_belief_swim_partys = sue2_belief_swim_plan.laborunit._partys
+    sue2_belief_swim_partys = sue2_belief_swim_plan.laborunit.partys
     assert len(sue2_belief_swim_partys) == 1
     assert list(sue2_belief_swim_partys) == [xia_str]

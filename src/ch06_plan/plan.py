@@ -28,7 +28,6 @@ from src.ch04_rope.rope import (
     all_ropes_between,
     create_rope,
     find_replace_rope_key_dict,
-    get_tail_label,
     is_sub_rope,
     rebuild_rope,
     replace_knot,
@@ -234,8 +233,8 @@ class PlanUnit:
     factheirs : dict[RopeTerm, FactHeir] parent plan provided facts.
     fund_ratio : float
     fund_grain : FundGrain Smallest indivisible funding component.
-    fund_onset : FundNum Point at which funding onsets inside BeliefUnit funding range
-    fund_cease : FundNum Point at which funding ceases inside BeliefUnit funding range
+    fund_onset : FundNum number at which funding onsets inside BeliefUnit funding range
+    fund_cease : FundNum number at which funding ceases inside BeliefUnit funding range
     healerunit_ratio : float
     tree_level : int that describes Depth tree_level in plan hierarchy.
     range_evaluated : bool Flag indicating whether range has been evaluated.
@@ -821,7 +820,7 @@ class PlanUnit:
         active_bool = self.all_reasonheirs_are_active()
         if active_bool and groupunits != {} and belief_name is not None:
             self.laborheir.set_belief_name_is_labor(groupunits, belief_name)
-            if self.laborheir._belief_name_is_labor is False:
+            if self.laborheir.belief_name_is_labor is False:
                 active_bool = False
         return active_bool
 

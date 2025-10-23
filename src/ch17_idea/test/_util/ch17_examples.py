@@ -87,7 +87,7 @@ def get_ex1_br00003_df() -> DataFrame:
 def get_ex1_br00004_df() -> DataFrame:
     """idea_format_00004_moment_epoch_month_v0_0_0
     cumulative_day,moment_label,month_label"""
-    x_df = DataFrame(columns=[kw.moment_label, "month_label", "cumulative_day"])
+    x_df = DataFrame(columns=[kw.moment_label, kw.month_label, "cumulative_day"])
     x_df.loc[0] = [AMY23_STR, "March", 31]
     x_df.loc[1] = [AMY23_STR, "April", 61]
     x_df.loc[2] = [AMY23_STR, "May", 92]
@@ -107,13 +107,13 @@ def get_ex1_br00005_df() -> DataFrame:
     """idea_format_00005_moment_epoch_weekday_v0_0_0
     moment_label,weekday_label,weekday_order"""
     x_df = DataFrame(columns=[kw.moment_label, kw.weekday_label, kw.weekday_order])
-    x_df.loc[0] = [AMY23_STR, "Wednesday", 0]
-    x_df.loc[1] = [AMY23_STR, "Thursday", 1]
-    x_df.loc[2] = [AMY23_STR, "Friday", 2]
-    x_df.loc[3] = [AMY23_STR, "Saturday", 3]
-    x_df.loc[4] = [AMY23_STR, "Sunday", 4]
-    x_df.loc[5] = [AMY23_STR, "Monday", 5]
-    x_df.loc[6] = [AMY23_STR, "Tuesday", 6]
+    x_df.loc[0] = [AMY23_STR, kw.Wednesday, 0]
+    x_df.loc[1] = [AMY23_STR, kw.Thursday, 1]
+    x_df.loc[2] = [AMY23_STR, kw.Friday, 2]
+    x_df.loc[3] = [AMY23_STR, kw.Saturday, 3]
+    x_df.loc[4] = [AMY23_STR, kw.Sunday, 4]
+    x_df.loc[5] = [AMY23_STR, kw.Monday, 5]
+    x_df.loc[6] = [AMY23_STR, kw.Tuesday, 6]
     return x_df
 
 
@@ -208,33 +208,23 @@ def get_ex2_br00003_df() -> DataFrame:
     x_df.loc[21] = [AMY23_STR, "9pm", 1320]
     x_df.loc[22] = [AMY23_STR, "10pm", 1380]
     x_df.loc[23] = [AMY23_STR, "11pm", 1440]
-    x_df.loc[24] = [JEFFY45_STR, "0hr", 72]
-    x_df.loc[25] = [JEFFY45_STR, "1hr", 144]
-    x_df.loc[26] = [JEFFY45_STR, "2hr", 216]
-    x_df.loc[27] = [JEFFY45_STR, "3hr", 288]
-    x_df.loc[28] = [JEFFY45_STR, "4hr", 360]
-    x_df.loc[29] = [JEFFY45_STR, "5hr", 432]
-    x_df.loc[30] = [JEFFY45_STR, "6hr", 504]
-    x_df.loc[31] = [JEFFY45_STR, "7hr", 576]
-    x_df.loc[32] = [JEFFY45_STR, "8hr", 648]
-    x_df.loc[33] = [JEFFY45_STR, "9hr", 720]
-    x_df.loc[34] = [JEFFY45_STR, "10hr", 792]
-    x_df.loc[35] = [JEFFY45_STR, "11hr", 864]
-    x_df.loc[36] = [JEFFY45_STR, "12hr", 936]
-    x_df.loc[37] = [JEFFY45_STR, "13hr", 1008]
-    x_df.loc[38] = [JEFFY45_STR, "14hr", 1080]
-    x_df.loc[39] = [JEFFY45_STR, "15hr", 1152]
-    x_df.loc[40] = [JEFFY45_STR, "16hr", 1224]
-    x_df.loc[41] = [JEFFY45_STR, "17hr", 1296]
-    x_df.loc[42] = [JEFFY45_STR, "18hr", 1368]
-    x_df.loc[43] = [JEFFY45_STR, "19hr", 1440]
+    x_df.loc[24] = [JEFFY45_STR, "0hr", 144]
+    x_df.loc[25] = [JEFFY45_STR, "1hr", 288]
+    x_df.loc[26] = [JEFFY45_STR, "2hr", 432]
+    x_df.loc[27] = [JEFFY45_STR, "3hr", 576]
+    x_df.loc[28] = [JEFFY45_STR, "4hr", 720]
+    x_df.loc[29] = [JEFFY45_STR, "5hr", 864]
+    x_df.loc[30] = [JEFFY45_STR, "6hr", 1008]
+    x_df.loc[31] = [JEFFY45_STR, "7hr", 1152]
+    x_df.loc[32] = [JEFFY45_STR, "8hr", 1296]
+    x_df.loc[33] = [JEFFY45_STR, "9hr", 1440]
     return x_df
 
 
 def get_ex2_br00004_df() -> DataFrame:
     """idea_format_00004_moment_epoch_month_v0_0_0
     cumulative_day,moment_label,month_label"""
-    x_df = DataFrame(columns=[kw.moment_label, "month_label", "cumulative_day"])
+    x_df = DataFrame(columns=[kw.moment_label, kw.month_label, kw.cumulative_day])
     x_df.loc[0] = [AMY23_STR, "March", 31]
     x_df.loc[1] = [AMY23_STR, "April", 61]
     x_df.loc[2] = [AMY23_STR, "May", 92]
@@ -269,18 +259,18 @@ def get_ex2_br00005_df() -> DataFrame:
     """idea_format_00005_moment_epoch_weekday_v0_0_0
     moment_label,weekday_label,weekday_order"""
     x_df = DataFrame(columns=[kw.moment_label, "weekday_label", "weekday_order"])
-    x_df.loc[0] = [AMY23_STR, "Wednesday", 0]
-    x_df.loc[1] = [AMY23_STR, "Thursday", 1]
-    x_df.loc[2] = [AMY23_STR, "Friday", 2]
-    x_df.loc[3] = [AMY23_STR, "Saturday", 3]
-    x_df.loc[4] = [AMY23_STR, "Sunday", 4]
-    x_df.loc[5] = [AMY23_STR, "Monday", 5]
-    x_df.loc[6] = [AMY23_STR, "Tuesday", 6]
-    x_df.loc[7] = [JEFFY45_STR, "Anaday", 0]
-    x_df.loc[8] = [JEFFY45_STR, "Baileyday", 1]
-    x_df.loc[9] = [JEFFY45_STR, "Chiday", 2]
-    x_df.loc[10] = [JEFFY45_STR, "Danceday", 3]
-    x_df.loc[11] = [JEFFY45_STR, "Eastday", 4]
+    x_df.loc[0] = [AMY23_STR, kw.Wednesday, 0]
+    x_df.loc[1] = [AMY23_STR, kw.Thursday, 1]
+    x_df.loc[2] = [AMY23_STR, kw.Friday, 2]
+    x_df.loc[3] = [AMY23_STR, kw.Saturday, 3]
+    x_df.loc[4] = [AMY23_STR, kw.Sunday, 4]
+    x_df.loc[5] = [AMY23_STR, kw.Monday, 5]
+    x_df.loc[6] = [AMY23_STR, kw.Tuesday, 6]
+    x_df.loc[7] = [JEFFY45_STR, kw.Anaday, 0]
+    x_df.loc[8] = [JEFFY45_STR, kw.Baileyday, 1]
+    x_df.loc[9] = [JEFFY45_STR, kw.Chiday, 2]
+    x_df.loc[10] = [JEFFY45_STR, kw.Danceday, 3]
+    x_df.loc[11] = [JEFFY45_STR, kw.Eastday, 4]
     return x_df
 
 

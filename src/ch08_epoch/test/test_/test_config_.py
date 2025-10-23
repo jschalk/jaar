@@ -210,9 +210,9 @@ def test_epoch_config_shop_ReturnsObj_AllParameters():
     # ESTABLISH
     five_c400_number = 25
     five_yr1_jan1_offset = 1683037440 + 440640  # 3200 years + JanLen + FebLen
-    five_hour_length = 72
+    five_hour_length = 144
     five_month_length = 25
-    five_weekday_list = ["Anaday", "Baileyday", "Chiday", "Danceday", "Eastday"]
+    five_weekday_list = [kw.Anaday, kw.Baileyday, kw.Chiday, kw.Danceday, kw.Eastday]
     # months = ["B", "C", "E", "G", "H", "I", "K", "L", "N", "P", "Q", "R", "T", "U", "W"]
     # c_mons = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"]
     five_months_list = [
@@ -266,9 +266,9 @@ def test_epoch_config_shop_ReturnsObj_AllParameters():
     assert x_months_config[14][0] == "Trump"
     assert x_months_config[14][1] == 365
     x_hours_config = five_dict.get(kw.hours_config)
-    assert len(x_hours_config) == 20
-    assert x_hours_config[0] == ["0hr", 72]
-    assert x_hours_config[4] == ["4hr", 360]
+    assert len(x_hours_config) == 10
+    assert x_hours_config[0] == ["0hr", 144]
+    assert x_hours_config[4] == ["4hr", 720]
     assert five_dict.get(kw.yr1_jan1_offset) == five_yr1_jan1_offset
 
     # five_filename = f"epoch_config_{kw.five}.json"
@@ -324,13 +324,13 @@ def test_epoch_config_shop_ReturnsObj_NoParameters():
     h_monthday_index = 1
     h_epoch_label = "creg"
     h_weekdays_config = [
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-        "Monday",
-        "Tuesday",
+        kw.Wednesday,
+        kw.Thursday,
+        kw.Friday,
+        kw.Saturday,
+        kw.Sunday,
+        kw.Monday,
+        kw.Tuesday,
     ]
     h_yr1_jan1_offset = 440640
 

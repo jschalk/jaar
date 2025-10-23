@@ -14,6 +14,7 @@ from src.ch04_rope.rope import (
     find_replace_rope_key_dict,
     get_all_rope_labels,
     get_ancestor_ropes,
+    get_default_first_label,
     get_first_label_from_rope,
     get_forefather_ropes,
     get_parent_rope,
@@ -29,8 +30,9 @@ from src.ch04_rope.rope import (
 )
 
 
-def get_default_first_label() -> FirstLabel:
-    return LabelTerm("YY")
+def test_get_default_first_label_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert get_default_first_label() == "YY"
 
 
 def root_rope() -> str:
@@ -76,7 +78,7 @@ def test_create_rope_Scenario0_RaisesErrorIfKnotNotAtPostionZeroOf_parent_rope()
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        create_rope("ZZ", rose_str, auto_add_first_knot=False) == knot_rose_rope
+        create_rope("YY", rose_str, auto_add_first_knot=False) == knot_rose_rope
     exception_str = (
         f"Parent rope must have knot '{semicolon_knot}' at position 0 in string"
     )
@@ -88,7 +90,7 @@ def test_create_rope_Scenario1_DoesNotRaiseError():
     rose_str = "rose"
 
     # WHEN / THEN
-    assert create_rope("ZZ", rose_str)
+    assert create_rope("YY", rose_str)
 
 
 def test_create_rope_ReturnsObj_Scenario3():
@@ -453,7 +455,7 @@ def test_is_labelterm_ReturnsObj():
     assert is_labelterm("casa", x_knot=x_s)
     assert not is_labelterm(f"ZZ{x_s}casa", x_s)
     assert not is_labelterm(RopeTerm(f"ZZ{x_s}casa"), x_s)
-    assert is_labelterm(RopeTerm("ZZ"), x_s)
+    assert is_labelterm(RopeTerm("YY"), x_s)
 
 
 def test_is_heir_rope_IdentifiesHeirs():
