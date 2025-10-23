@@ -63,17 +63,17 @@ def test_BeliefUnit_get_relevant_ropes_ReturnsSimpleReasonUnitreason_context():
     floor_str = "mop floor"
     floor_rope = sue_belief.make_rope(casa_rope, floor_str)
     floor_plan = planunit_shop(floor_str)
-    sue_belief.set_plan(floor_plan, parent_rope=casa_rope)
+    sue_belief.set_plan_obj(floor_plan, parent_rope=casa_rope)
 
     unim_str = "unimportant"
     unim_rope = sue_belief.make_l1_rope(unim_str)
     unim_plan = planunit_shop(unim_str)
-    sue_belief.set_plan(unim_plan, parent_rope=sue_belief.moment_label)
+    sue_belief.set_plan_obj(unim_plan, parent_rope=sue_belief.planroot.get_plan_rope())
 
     situation_str = "cleaniness situation"
     situation_rope = sue_belief.make_rope(casa_rope, situation_str)
     situation_plan = planunit_shop(situation_str)
-    sue_belief.set_plan(situation_plan, parent_rope=casa_rope)
+    sue_belief.set_plan_obj(situation_plan, parent_rope=casa_rope)
     floor_reason = reasonunit_shop(reason_context=situation_rope)
     floor_reason.set_case(case=situation_rope)
     sue_belief.edit_plan_attr(floor_rope, reason=floor_reason)
@@ -93,7 +93,7 @@ def test_BeliefUnit_get_relevant_ropes_ReturnsSimpleReasonUnitreason_context():
 def test_BeliefUnit_get_relevant_ropes_ReturnsReasonUnitreason_contextAndDescendents():
     # ESTABLISH
     x_belief = get_mop_with_reason_beliefunit_example1()
-    root_rope = to_rope(x_belief.moment_label)
+    root_rope = x_belief.planroot.get_plan_rope()
     casa_str = "casa"
     casa_rope = x_belief.make_l1_rope(casa_str)
     floor_str = "mop floor"
@@ -145,7 +145,7 @@ def test_BeliefUnit_get_relevant_ropes_ReturnSimple():
     # ESTABLISH
     yao_str = "Yao"
     yao_belief = beliefunit_shop(belief_name=yao_str)
-    root_rope = to_rope(yao_belief.moment_label)
+    root_rope = yao_belief.planroot.get_plan_rope()
     min_range_x_str = "a_minute_range"
     min_range_x_rope = yao_belief.make_l1_rope(min_range_x_str)
     min_range_plan = planunit_shop(min_range_x_str, begin=0, close=2880)
@@ -164,7 +164,7 @@ def test_BeliefUnit_get_relevant_ropes_ReturnSimple():
     min_jours_str = "jours in minute_range"
     min_jours_rope = yao_belief.make_rope(min_range_x_rope, min_jours_str)
     min_jours_plan = planunit_shop(min_jours_str)
-    yao_belief.set_plan(min_jours_plan, parent_rope=min_range_x_rope)
+    yao_belief.set_plan_obj(min_jours_plan, parent_rope=min_range_x_rope)
 
     # WHEN
     print(f"{yao_belief._plan_dict.keys()}")
@@ -188,10 +188,10 @@ def test_BeliefUnit_get_inheritor_plan_list_ReturnsObj_Scenario0():
     tech_rope = yao_beliefunit.make_l1_rope("tech")
     wk_str = "wk"
     wk_rope = yao_beliefunit.make_rope(tech_rope, wk_str)
-    yao_beliefunit.set_plan(planunit_shop(wk_str, begin=0, close=10800), tech_rope)
+    yao_beliefunit.set_plan_obj(planunit_shop(wk_str, begin=0, close=10800), tech_rope)
     mon_str = "Mon"
     mon_rope = yao_beliefunit.make_rope(wk_rope, mon_str)
-    yao_beliefunit.set_plan(planunit_shop(mon_str), wk_rope)
+    yao_beliefunit.set_plan_obj(planunit_shop(mon_str), wk_rope)
     yao_beliefunit.cashout()
 
     # WHEN

@@ -10,7 +10,7 @@ def test_BeliefUnit_get_plan_ranged_kids_ReturnsAllChildren():
     wk_str = "wk"
     wk_rope = yao_beliefunit.make_rope(tech_rope, wk_str)
     wk_plan = planunit_shop(wk_str, begin=0, close=10800)
-    yao_beliefunit.set_plan(wk_plan, tech_rope)
+    yao_beliefunit.set_plan_obj(wk_plan, tech_rope)
     mon_str = "Mon"
     tue_str = "Tue"
     wed_str = "Wed"
@@ -25,13 +25,13 @@ def test_BeliefUnit_get_plan_ranged_kids_ReturnsAllChildren():
     fri_plan = planunit_shop(fri_str, gogo_want=1440 * 4, stop_want=1440 * 5)
     sat_plan = planunit_shop(sat_str, gogo_want=1440 * 5, stop_want=1440 * 6)
     sun_plan = planunit_shop(sun_str, gogo_want=1440 * 6, stop_want=1440 * 7)
-    yao_beliefunit.set_plan(mon_plan, wk_rope)
-    yao_beliefunit.set_plan(tue_plan, wk_rope)
-    yao_beliefunit.set_plan(wed_plan, wk_rope)
-    yao_beliefunit.set_plan(thu_plan, wk_rope)
-    yao_beliefunit.set_plan(fri_plan, wk_rope)
-    yao_beliefunit.set_plan(sat_plan, wk_rope)
-    yao_beliefunit.set_plan(sun_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(mon_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(tue_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(wed_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(thu_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(fri_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(sat_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(sun_plan, wk_rope)
     yao_beliefunit.cashout()
 
     # WHEN
@@ -49,7 +49,7 @@ def test_BeliefUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario1():
     wk_str = "wk"
     wk_rope = yao_beliefunit.make_rope(tech_rope, wk_str)
     wk_plan = planunit_shop(wk_str, begin=0, close=10800)
-    yao_beliefunit.set_plan(wk_plan, tech_rope)
+    yao_beliefunit.set_plan_obj(wk_plan, tech_rope)
     mon_str = "Mon"
     tue_str = "Tue"
     wed_str = "Wed"
@@ -64,13 +64,13 @@ def test_BeliefUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario1():
     fri_plan = planunit_shop(fri_str, gogo_want=1440 * 4, stop_want=1440 * 5)
     sat_plan = planunit_shop(sat_str, gogo_want=1440 * 5, stop_want=1440 * 6)
     sun_plan = planunit_shop(sun_str, gogo_want=1440 * 6, stop_want=1440 * 7)
-    yao_beliefunit.set_plan(mon_plan, wk_rope)
-    yao_beliefunit.set_plan(tue_plan, wk_rope)
-    yao_beliefunit.set_plan(wed_plan, wk_rope)
-    yao_beliefunit.set_plan(thu_plan, wk_rope)
-    yao_beliefunit.set_plan(fri_plan, wk_rope)
-    yao_beliefunit.set_plan(sat_plan, wk_rope)
-    yao_beliefunit.set_plan(sun_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(mon_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(tue_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(wed_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(thu_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(fri_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(sat_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(sun_plan, wk_rope)
     yao_beliefunit.cashout()
 
     # WHEN
@@ -96,7 +96,7 @@ def test_BeliefUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario2():
     wk_str = "wk"
     wk_rope = yao_beliefunit.make_rope(tech_rope, wk_str)
     wk_plan = planunit_shop(wk_str, begin=0, close=10800)
-    yao_beliefunit.set_plan(wk_plan, tech_rope)
+    yao_beliefunit.set_plan_obj(wk_plan, tech_rope)
     mon_str = "Mon"
     tue_str = "Tue"
     wed_str = "Wed"
@@ -111,13 +111,13 @@ def test_BeliefUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario2():
     fri_plan = planunit_shop(fri_str, gogo_want=1440 * 4, stop_want=1440 * 5)
     sat_plan = planunit_shop(sat_str, gogo_want=1440 * 5, stop_want=1440 * 6)
     sun_plan = planunit_shop(sun_str, gogo_want=1440 * 6, stop_want=1440 * 7)
-    yao_beliefunit.set_plan(mon_plan, wk_rope)
-    yao_beliefunit.set_plan(tue_plan, wk_rope)
-    yao_beliefunit.set_plan(wed_plan, wk_rope)
-    yao_beliefunit.set_plan(thu_plan, wk_rope)
-    yao_beliefunit.set_plan(fri_plan, wk_rope)
-    yao_beliefunit.set_plan(sat_plan, wk_rope)
-    yao_beliefunit.set_plan(sun_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(mon_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(tue_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(wed_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(thu_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(fri_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(sat_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(sun_plan, wk_rope)
     yao_beliefunit.cashout()
 
     # WHEN / THEN
@@ -134,7 +134,7 @@ def test_BeliefUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario3():
     wk_str = "wk"
     wk_rope = yao_beliefunit.make_rope(tech_rope, wk_str)
     wk_plan = planunit_shop(wk_str, begin=0, close=10800)
-    yao_beliefunit.set_plan(wk_plan, tech_rope)
+    yao_beliefunit.set_plan_obj(wk_plan, tech_rope)
     mon_str = "Mon"
     tue_str = "Tue"
     wed_str = "Wed"
@@ -149,13 +149,13 @@ def test_BeliefUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario3():
     fri_plan = planunit_shop(fri_str, gogo_want=1440 * 4, stop_want=1440 * 5)
     sat_plan = planunit_shop(sat_str, gogo_want=1440 * 5, stop_want=1440 * 6)
     sun_plan = planunit_shop(sun_str, gogo_want=1440 * 6, stop_want=1440 * 7)
-    yao_beliefunit.set_plan(mon_plan, wk_rope)
-    yao_beliefunit.set_plan(tue_plan, wk_rope)
-    yao_beliefunit.set_plan(wed_plan, wk_rope)
-    yao_beliefunit.set_plan(thu_plan, wk_rope)
-    yao_beliefunit.set_plan(fri_plan, wk_rope)
-    yao_beliefunit.set_plan(sat_plan, wk_rope)
-    yao_beliefunit.set_plan(sun_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(mon_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(tue_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(wed_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(thu_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(fri_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(sat_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(sun_plan, wk_rope)
     yao_beliefunit.cashout()
 
     # WHEN / THEN
@@ -165,7 +165,7 @@ def test_BeliefUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario3():
     # ESTABLISH
     wk_str = "wk"
     wks_plan = planunit_shop(wk_str, gogo_want=0, stop_want=1440 * 5)
-    yao_beliefunit.set_plan(wks_plan, wk_rope)
+    yao_beliefunit.set_plan_obj(wks_plan, wk_rope)
 
     # WHEN
     yao_beliefunit.cashout()

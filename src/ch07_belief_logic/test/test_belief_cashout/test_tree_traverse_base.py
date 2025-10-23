@@ -164,7 +164,7 @@ def test_BeliefUnit_cashout_NLevelSetsDescendantAttributes_1():
 
     email_str = "email"
     email_plan = planunit_shop(email_str, pledge=True)
-    sue_belief.set_plan(email_plan, parent_rope=casa_rope)
+    sue_belief.set_plan_obj(email_plan, parent_rope=casa_rope)
 
     root_rope = sue_belief.planroot.get_plan_rope()
     x_planroot = sue_belief.get_plan_obj(root_rope)
@@ -208,9 +208,9 @@ def test_BeliefUnit_cashout_NLevelSetsDescendantAttributes_2():
 
     casa_rope = sue_belief.make_l1_rope(casa_str)
     email_plan = planunit_shop(email_str, pledge=True)
-    sue_belief.set_plan(email_plan, parent_rope=casa_rope)
+    sue_belief.set_plan_obj(email_plan, parent_rope=casa_rope)
     vacuum_plan = planunit_shop(vacuum_str, pledge=True)
-    sue_belief.set_plan(vacuum_plan, parent_rope=casa_rope)
+    sue_belief.set_plan_obj(vacuum_plan, parent_rope=casa_rope)
 
     sue_belief.add_voiceunit(voice_name=sue_str)
     x_awardunit = awardunit_shop(awardee_title=sue_str)
@@ -269,7 +269,7 @@ def test_BeliefUnit_cashout_SetsPlanUnitAttr_awardunits():
     sue_belief.edit_plan_attr(swim_rope, awardunit=awardunit_Xio)
 
     street_str = "streets"
-    sue_belief.set_plan(planunit_shop(street_str), parent_rope=swim_rope)
+    sue_belief.set_plan_obj(planunit_shop(street_str), parent_rope=swim_rope)
     assert sue_belief.planroot.awardunits in (None, {})
     assert len(sue_belief.planroot.kids[swim_str].awardunits) == 3
 
@@ -365,7 +365,7 @@ def test_BeliefUnit_cashout_DoesNotKeepNonRequired_awardheirs():
     assert len(swim_plan.awardheirs) == 2
 
 
-def test_BeliefUnit_get_plan_tree_ordered_rope_list_ReturnsObj():
+def test_BeliefUnit_get_plan_tree_ordered_rope_list_ReturnsObj_Scenario0():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
     wk_str = "sem_jours"
@@ -382,15 +382,19 @@ def test_BeliefUnit_get_plan_tree_ordered_rope_list_ReturnsObj():
     x_8th_rope_in_ordered_list = sue_belief.get_plan_tree_ordered_rope_list()[9]
     assert x_8th_rope_in_ordered_list == sue_belief.make_l1_rope(wk_str)
 
-    # WHEN
-    y_belief = beliefunit_shop(moment_label="amy23")
 
-    # THEN
+def test_BeliefUnit_get_plan_tree_ordered_rope_list_ReturnsObj_Scenario1():
+    # ESTABLISH
+    y_belief = beliefunit_shop("Bob", "amy23")
+    root_rope = y_belief.planroot.get_plan_rope()
+
+    # WHEN
     y_1st_rope_in_ordered_list = y_belief.get_plan_tree_ordered_rope_list()[0]
+    # THEN
     assert y_1st_rope_in_ordered_list == root_rope
 
 
-def test_BeliefUnit_get_plan_tree_ordered_rope_list_CleansRangedPlanRopeTerms():
+def test_BeliefUnit_get_plan_tree_ordered_rope_list_Scenario2_CleansRangedPlanRopeTerms():
     # ESTABLISH
     yao_belief = beliefunit_shop("Yao")
 
@@ -399,7 +403,7 @@ def test_BeliefUnit_get_plan_tree_ordered_rope_list_CleansRangedPlanRopeTerms():
     ziet_rope = yao_belief.make_l1_rope(ziet_str)
     yao_belief.set_l1_plan(planunit_shop(ziet_str, begin=0, close=700))
     wks_str = "wks"
-    yao_belief.set_plan(planunit_shop(wks_str, denom=7), ziet_rope)
+    yao_belief.set_plan_obj(planunit_shop(wks_str, denom=7), ziet_rope)
 
     # THEN
     assert len(yao_belief.get_plan_tree_ordered_rope_list()) == 3
@@ -466,7 +470,7 @@ def test_BeliefUnit_cashout_WhenPlanRootHas_starButAll_kidsHaveZero_starAddTo_of
     sue_beliefunit.cashout()
 
     # THEN
-    root_rope = to_rope(sue_beliefunit.moment_label)
+    root_rope = sue_beliefunit.planroot.get_plan_rope()
     assert sue_beliefunit.offtrack_kids_star_set == {root_rope}
 
     # WHEN
@@ -491,7 +495,7 @@ def test_BeliefUnit_cashout_WhenPlanUnitHas_starButAll_kidsHaveZero_starAddTo_of
     clean_str = "cleaning"
     clean_rope = sue_beliefunit.make_rope(casa_rope, clean_str)
     clean_plan = planunit_shop(clean_str, star=2)
-    sue_beliefunit.set_plan(planunit_shop(clean_str), casa_rope)
+    sue_beliefunit.set_plan_obj(planunit_shop(clean_str), casa_rope)
 
     sweep_str = "sweep"
     sweep_rope = sue_beliefunit.make_rope(clean_rope, sweep_str)
@@ -501,10 +505,10 @@ def test_BeliefUnit_cashout_WhenPlanUnitHas_starButAll_kidsHaveZero_starAddTo_of
     vacuum_plan = planunit_shop(vacuum_str, star=0)
 
     sue_beliefunit.set_l1_plan(casa_plan)
-    sue_beliefunit.set_plan(swim_plan, casa_rope)
-    sue_beliefunit.set_plan(clean_plan, casa_rope)
-    sue_beliefunit.set_plan(sweep_plan, clean_rope)  # _star=0
-    sue_beliefunit.set_plan(vacuum_plan, clean_rope)  # _star=0
+    sue_beliefunit.set_plan_obj(swim_plan, casa_rope)
+    sue_beliefunit.set_plan_obj(clean_plan, casa_rope)
+    sue_beliefunit.set_plan_obj(sweep_plan, clean_rope)  # _star=0
+    sue_beliefunit.set_plan_obj(vacuum_plan, clean_rope)  # _star=0
 
     assert sue_beliefunit.offtrack_kids_star_set == set()
 
@@ -526,7 +530,7 @@ def test_BeliefUnit_cashout_CreatesNewGroupUnits_Scenario0():
     zia_voice_debt_lumen = 5
     yao_belief.add_voiceunit(yao_str, yao_voice_cred_lumen, yao_voice_debt_lumen)
     yao_belief.add_voiceunit(zia_str, zia_voice_cred_lumen, zia_voice_debt_lumen)
-    root_rope = to_rope(yao_belief.moment_label)
+    root_rope = yao_belief.planroot.get_plan_rope()
     x_planroot = yao_belief.get_plan_obj(root_rope)
     x_planroot.set_awardunit(awardunit_shop(yao_str))
     x_planroot.set_awardunit(awardunit_shop(zia_str))
@@ -661,8 +665,8 @@ def test_BeliefUnit_cashout_Sets_planroot_factheir_With_range_factheirs():
     tue_str = "Tue"
     tue_rope = yao_belief.make_rope(wk_rope, tue_str)
     tue_addin = 100
-    yao_belief.set_plan(planunit_shop(tue_str, addin=tue_addin), wk_rope)
-    root_rope = to_rope(yao_belief.moment_label)
+    yao_belief.set_plan_obj(planunit_shop(tue_str, addin=tue_addin), wk_rope)
+    root_rope = yao_belief.planroot.get_plan_rope()
     yao_belief.edit_plan_attr(root_rope, reason_context=tue_rope, reason_case=tue_rope)
 
     wk_reason_lower = 3
@@ -713,7 +717,7 @@ def test_BeliefUnit_cashout_SetsPlanUnit_factheir_With_range_factheirs():
     tue_str = "Tue"
     tue_rope = yao_belief.make_rope(wk_rope, tue_str)
     tue_addin = 100
-    yao_belief.set_plan(planunit_shop(tue_str, addin=tue_addin), wk_rope)
+    yao_belief.set_plan_obj(planunit_shop(tue_str, addin=tue_addin), wk_rope)
     ball_str = "ball"
     ball_rope = yao_belief.make_l1_rope(ball_str)
     yao_belief.set_l1_plan(planunit_shop(ball_str))

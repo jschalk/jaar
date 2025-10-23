@@ -70,9 +70,9 @@ def get_example_zia_speaker() -> BeliefUnit:
     zia_str = "Zia"
     a23_str = "amy23"
     zia_speaker = beliefunit_shop(zia_str, a23_str)
-    zia_speaker.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
-    zia_speaker.set_plan(planunit_shop(hungry_str()), a23_eat_rope())
-    zia_speaker.set_plan(planunit_shop(full_str()), a23_eat_rope())
+    zia_speaker.set_plan_obj(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
+    zia_speaker.set_plan_obj(planunit_shop(hungry_str()), a23_eat_rope())
+    zia_speaker.set_plan_obj(planunit_shop(full_str()), a23_eat_rope())
     yao_str = "Yao"
     zia_speaker.add_voiceunit(yao_str, voice_debt_lumen=12)
     cook_planunit = zia_speaker.get_plan_obj(a23_cook_rope())
@@ -89,9 +89,9 @@ def get_example_bob_speaker() -> BeliefUnit:
     bob_str = "Bob"
     a23_str = "amy23"
     bob_speaker = beliefunit_shop(bob_str, a23_str)
-    bob_speaker.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
-    bob_speaker.set_plan(planunit_shop(hungry_str()), a23_eat_rope())
-    bob_speaker.set_plan(planunit_shop(full_str()), a23_eat_rope())
+    bob_speaker.set_plan_obj(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
+    bob_speaker.set_plan_obj(planunit_shop(hungry_str()), a23_eat_rope())
+    bob_speaker.set_plan_obj(planunit_shop(full_str()), a23_eat_rope())
     yao_str = "Yao"
     bob_speaker.add_voiceunit(yao_str, voice_debt_lumen=12)
     cook_planunit = bob_speaker.get_plan_obj(a23_cook_rope())
@@ -114,9 +114,9 @@ def get_example_yao_speaker() -> BeliefUnit:
     yao_speaker.add_voiceunit(zia_str, voice_debt_lumen=36)
     yao_speaker.add_voiceunit(bob_str, voice_debt_lumen=48)
     yao_speaker.set_voice_respect(100)
-    yao_speaker.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
-    yao_speaker.set_plan(planunit_shop(hungry_str()), a23_eat_rope())
-    yao_speaker.set_plan(planunit_shop(full_str()), a23_eat_rope())
+    yao_speaker.set_plan_obj(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
+    yao_speaker.set_plan_obj(planunit_shop(hungry_str()), a23_eat_rope())
+    yao_speaker.set_plan_obj(planunit_shop(full_str()), a23_eat_rope())
     cook_planunit = yao_speaker.get_plan_obj(a23_cook_rope())
     cook_planunit.laborunit.add_party(yao_str)
     yao_speaker.edit_plan_attr(
@@ -158,12 +158,12 @@ def get_fund_breakdown_belief() -> BeliefUnit:
     sweep_str = "sweep floor"
     dish_str = "clean dishes"
     sue_belief.set_l1_plan(planunit_shop(casa_str, star=30))
-    sue_belief.set_plan(planunit_shop(cat_str, star=30), casa_rope)
-    sue_belief.set_plan(planunit_shop(hun_n_str, star=30), cat_rope)
-    sue_belief.set_plan(planunit_shop(hun_y_str, star=30), cat_rope)
-    sue_belief.set_plan(planunit_shop(clean_str, star=30), casa_rope)
-    sue_belief.set_plan(planunit_shop(sweep_str, star=30, pledge=True), clean_rope)
-    sue_belief.set_plan(planunit_shop(dish_str, star=30, pledge=True), clean_rope)
+    sue_belief.set_plan_obj(planunit_shop(cat_str, star=30), casa_rope)
+    sue_belief.set_plan_obj(planunit_shop(hun_n_str, star=30), cat_rope)
+    sue_belief.set_plan_obj(planunit_shop(hun_y_str, star=30), cat_rope)
+    sue_belief.set_plan_obj(planunit_shop(clean_str, star=30), casa_rope)
+    sue_belief.set_plan_obj(planunit_shop(sweep_str, star=30, pledge=True), clean_rope)
+    sue_belief.set_plan_obj(planunit_shop(dish_str, star=30, pledge=True), clean_rope)
 
     cat_str = "cat have dinner"
     sue_belief.set_l1_plan(planunit_shop(cat_str, star=30, pledge=True))
@@ -187,13 +187,13 @@ def get_fund_breakdown_belief() -> BeliefUnit:
     # plan_grandkidR = planunit_shop(thu_str, star=30)
     # plan_grandkidF = planunit_shop(fri_str, star=40)
     # plan_grandkidA = planunit_shop(sat_str, star=50)
-    # sue_belief.set_plan(plan_grandkidU, week_rope)
-    # sue_belief.set_plan(plan_grandkidM, week_rope)
-    # sue_belief.set_plan(plan_grandkidT, week_rope)
-    # sue_belief.set_plan(plan_grandkidW, week_rope)
-    # sue_belief.set_plan(plan_grandkidR, week_rope)
-    # sue_belief.set_plan(plan_grandkidF, week_rope)
-    # sue_belief.set_plan(plan_grandkidA, week_rope)
+    # sue_belief.set_plan_obj(plan_grandkidU, week_rope)
+    # sue_belief.set_plan_obj(plan_grandkidM, week_rope)
+    # sue_belief.set_plan_obj(plan_grandkidT, week_rope)
+    # sue_belief.set_plan_obj(plan_grandkidW, week_rope)
+    # sue_belief.set_plan_obj(plan_grandkidR, week_rope)
+    # sue_belief.set_plan_obj(plan_grandkidF, week_rope)
+    # sue_belief.set_plan_obj(plan_grandkidA, week_rope)
 
     # nation_str = "nation"
     # nation_rope = sue_belief.make_l1_rope(nation_str)
@@ -207,14 +207,14 @@ def get_fund_breakdown_belief() -> BeliefUnit:
     # plan_grandkid_usa = planunit_shop(usa_str, star=50)
     # plan_grandkid_france = planunit_shop(france_str, star=50)
     # plan_grandkid_brazil = planunit_shop(brazil_str, star=50)
-    # sue_belief.set_plan(plan_grandkid_france, nation_rope)
-    # sue_belief.set_plan(plan_grandkid_brazil, nation_rope)
-    # sue_belief.set_plan(plan_grandkid_usa, nation_rope)
+    # sue_belief.set_plan_obj(plan_grandkid_france, nation_rope)
+    # sue_belief.set_plan_obj(plan_grandkid_brazil, nation_rope)
+    # sue_belief.set_plan_obj(plan_grandkid_usa, nation_rope)
 
     # texas_str = "Texas"
     # oregon_str = "Oregon"
     # plan_grandgrandkid_usa_texas = planunit_shop(texas_str, star=50)
     # plan_grandgrandkid_usa_oregon = planunit_shop(oregon_str, star=50)
-    # sue_belief.set_plan(plan_grandgrandkid_usa_texas, usa_rope)
-    # sue_belief.set_plan(plan_grandgrandkid_usa_oregon, usa_rope)
+    # sue_belief.set_plan_obj(plan_grandgrandkid_usa_texas, usa_rope)
+    # sue_belief.set_plan_obj(plan_grandgrandkid_usa_oregon, usa_rope)
     return sue_belief

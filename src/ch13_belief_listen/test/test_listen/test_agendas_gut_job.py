@@ -44,8 +44,8 @@ def test_listen_to_agendas_jobs_into_job_AddstasksToBeliefWhenNo_partyunitIsSet(
     save_gut_file(moment_mstr_dir, yao_gut)
 
     zia_job = beliefunit_shop(zia_str, a23_str)
-    zia_job.set_plan(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
-    zia_job.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
+    zia_job.set_plan_obj(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
+    zia_job.set_plan_obj(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
     zia_job.add_voiceunit(yao_str, voice_debt_lumen=12)
     save_job_file(moment_mstr_dir, zia_job)
 
@@ -76,8 +76,8 @@ def test_listen_to_agendas_jobs_into_job_AddstasksToBelief(temp_dir_setup):
     save_job_file(moment_mstr_dir, yao_gut)
 
     zia_job = beliefunit_shop(zia_str, a23_str)
-    zia_job.set_plan(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
-    zia_job.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
+    zia_job.set_plan_obj(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
+    zia_job.set_plan_obj(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
     zia_job.add_voiceunit(yao_str, voice_debt_lumen=12)
     clean_planunit = zia_job.get_plan_obj(a23_clean_rope())
     cook_planunit = zia_job.get_plan_obj(a23_cook_rope())
@@ -181,8 +181,8 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBelief(
 
     zia_str = "Zia"
     zia_job = beliefunit_shop(zia_str, a23_str)
-    zia_job.set_plan(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
-    zia_job.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
+    zia_job.set_plan_obj(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
+    zia_job.set_plan_obj(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
     zia_job.add_voiceunit(yao_str, voice_debt_lumen=12)
     clean_planunit = zia_job.get_plan_obj(a23_clean_rope())
     cook_planunit = zia_job.get_plan_obj(a23_cook_rope())
@@ -260,8 +260,8 @@ def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorBelief(
     save_gut_file(moment_mstr_dir, yao_gut)
 
     zia_job = beliefunit_shop(zia_str, a23_str)
-    zia_job.set_plan(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
-    zia_job.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
+    zia_job.set_plan_obj(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
+    zia_job.set_plan_obj(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
     zia_job.add_voiceunit(yao_str, voice_debt_lumen=12)
     clean_planunit = zia_job.get_plan_obj(a23_clean_rope())
     cook_planunit = zia_job.get_plan_obj(a23_cook_rope())
@@ -307,8 +307,8 @@ def test_listen_to_agendas_jobs_into_job_ListensToBelief_gut_AndNotBelief_job(
     # Save Zia to job
     zia_str = "Zia"
     zia_job = beliefunit_shop(zia_str, a23_str)
-    zia_job.set_plan(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
-    zia_job.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
+    zia_job.set_plan_obj(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
+    zia_job.set_plan_obj(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
     zia_job.add_voiceunit(yao_str, voice_debt_lumen=12)
     clean_planunit = zia_job.get_plan_obj(a23_clean_rope())
     cook_planunit = zia_job.get_plan_obj(a23_cook_rope())

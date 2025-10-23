@@ -41,9 +41,9 @@ def test_generate_perspective_agenda_GrabsAgendatasks():
     dirty_rope = yao_speaker.make_rope(situation_rope, dirty_str)
     sweep_str = "sweep"
     sweep_rope = yao_speaker.make_rope(casa_rope, sweep_str)
-    yao_speaker.set_plan(planunit_shop(clean_str), situation_rope)
-    yao_speaker.set_plan(planunit_shop(dirty_str), situation_rope)
-    yao_speaker.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
+    yao_speaker.set_plan_obj(planunit_shop(clean_str), situation_rope)
+    yao_speaker.set_plan_obj(planunit_shop(dirty_str), situation_rope)
+    yao_speaker.set_plan_obj(planunit_shop(sweep_str, pledge=True), casa_rope)
     yao_speaker.edit_plan_attr(
         sweep_rope, reason_context=situation_rope, reason_case=dirty_rope
     )

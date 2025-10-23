@@ -90,13 +90,13 @@ def get_beliefunit_with_4_levels() -> BeliefUnit:
     thu_str = "Thur"
     fri_str = "Fri"
     sat_str = "Sat"
-    sue_belief.set_plan(planunit_shop(sun_str, star=20), wk_rope)
-    sue_belief.set_plan(planunit_shop(mon_str, star=20), wk_rope)
-    sue_belief.set_plan(planunit_shop(tue_str, star=20), wk_rope)
-    sue_belief.set_plan(planunit_shop(wed_str, star=20), wk_rope)
-    sue_belief.set_plan(planunit_shop(thu_str, star=30), wk_rope)
-    sue_belief.set_plan(planunit_shop(fri_str, star=40), wk_rope)
-    sue_belief.set_plan(planunit_shop(sat_str, star=50), wk_rope)
+    sue_belief.set_plan_obj(planunit_shop(sun_str, star=20), wk_rope)
+    sue_belief.set_plan_obj(planunit_shop(mon_str, star=20), wk_rope)
+    sue_belief.set_plan_obj(planunit_shop(tue_str, star=20), wk_rope)
+    sue_belief.set_plan_obj(planunit_shop(wed_str, star=20), wk_rope)
+    sue_belief.set_plan_obj(planunit_shop(thu_str, star=30), wk_rope)
+    sue_belief.set_plan_obj(planunit_shop(fri_str, star=40), wk_rope)
+    sue_belief.set_plan_obj(planunit_shop(sat_str, star=50), wk_rope)
 
     nation_str = "nation"
     nation_rope = sue_belief.make_l1_rope(nation_str)
@@ -109,15 +109,15 @@ def get_beliefunit_with_4_levels() -> BeliefUnit:
     plan_grandkid_usa = planunit_shop(usa_str, star=50)
     plan_grandkid_france = planunit_shop(france_str, star=50)
     plan_grandkid_brazil = planunit_shop(brazil_str, star=50)
-    sue_belief.set_plan(plan_grandkid_france, nation_rope)
-    sue_belief.set_plan(plan_grandkid_brazil, nation_rope)
-    sue_belief.set_plan(plan_grandkid_usa, nation_rope)
+    sue_belief.set_plan_obj(plan_grandkid_france, nation_rope)
+    sue_belief.set_plan_obj(plan_grandkid_brazil, nation_rope)
+    sue_belief.set_plan_obj(plan_grandkid_usa, nation_rope)
     texas_str = "Texas"
     oregon_str = "Oregon"
     plan_grandgrandkid_usa_texas = planunit_shop(texas_str, star=50)
     plan_grandgrandkid_usa_oregon = planunit_shop(oregon_str, star=50)
-    sue_belief.set_plan(plan_grandgrandkid_usa_texas, usa_rope)
-    sue_belief.set_plan(plan_grandgrandkid_usa_oregon, usa_rope)
+    sue_belief.set_plan_obj(plan_grandgrandkid_usa_texas, usa_rope)
+    sue_belief.set_plan_obj(plan_grandgrandkid_usa_oregon, usa_rope)
     return sue_belief
 
 
@@ -184,12 +184,12 @@ def get_beliefunit_with7amCleanTableReason() -> BeliefUnit:
     n3_plan = planunit_shop(n3_str, gogo_want=3, stop_want=4)
 
     sue_belief.set_l1_plan(ziet_plan)
-    sue_belief.set_plan(x24hr_plan, ziet_rope)
-    sue_belief.set_plan(am_plan, x24hr_rope)
-    sue_belief.set_plan(pm_plan, x24hr_rope)
-    sue_belief.set_plan(n1_plan, am_rope)  # plan_am
-    sue_belief.set_plan(n2_plan, am_rope)  # plan_am
-    sue_belief.set_plan(n3_plan, am_rope)  # plan_am
+    sue_belief.set_plan_obj(x24hr_plan, ziet_rope)
+    sue_belief.set_plan_obj(am_plan, x24hr_rope)
+    sue_belief.set_plan_obj(pm_plan, x24hr_rope)
+    sue_belief.set_plan_obj(n1_plan, am_rope)  # plan_am
+    sue_belief.set_plan_obj(n2_plan, am_rope)  # plan_am
+    sue_belief.set_plan_obj(n3_plan, am_rope)  # plan_am
 
     house_str = "houseadministration"
     house_rope = sue_belief.make_l1_rope(house_str)
@@ -207,10 +207,10 @@ def get_beliefunit_with7amCleanTableReason() -> BeliefUnit:
     grab_plan = planunit_shop(grab_str, pledge=True)
 
     sue_belief.set_l1_plan(house_plan)
-    sue_belief.set_plan(clean_plan, house_rope)
-    sue_belief.set_plan(dish_plan, clean_rope)
-    sue_belief.set_plan(soap_plan, clean_rope)
-    sue_belief.set_plan(grab_plan, soap_rope)
+    sue_belief.set_plan_obj(clean_plan, house_rope)
+    sue_belief.set_plan_obj(dish_plan, clean_rope)
+    sue_belief.set_plan_obj(soap_plan, clean_rope)
+    sue_belief.set_plan_obj(grab_plan, soap_rope)
 
     clean_table_7am_reason_context = x24hr_rope
     clean_table_7am_case_rope = x24hr_rope
@@ -248,7 +248,7 @@ def get_beliefunit_1task_1CE0MinutesReason_1Fact() -> BeliefUnit:
 
 def get_beliefunit_x1_3levels_1reason_1facts() -> BeliefUnit:
     tiger_str = "tiger"
-    zia_belief = beliefunit_shop("Zia", moment_label=tiger_str)
+    zia_belief = beliefunit_shop("Zia", tiger_str)
     shave_str = "shave"
     shave_rope = zia_belief.make_l1_rope(shave_str)
     plan_kid_shave = planunit_shop(shave_str, star=30, pledge=True)
@@ -266,8 +266,8 @@ def get_beliefunit_x1_3levels_1reason_1facts() -> BeliefUnit:
     mon_rope = zia_belief.make_rope(wk_rope, mon_str)
     plan_grandkidU = planunit_shop(sun_str, star=20)
     plan_grandkidM = planunit_shop(mon_str, star=20)
-    zia_belief.set_plan(plan_grandkidU, wk_rope)
-    zia_belief.set_plan(plan_grandkidM, wk_rope)
+    zia_belief.set_plan_obj(plan_grandkidU, wk_rope)
+    zia_belief.set_plan_obj(plan_grandkidM, wk_rope)
 
     shave_reason = reasonunit_shop(wk_rope)
     shave_reason.set_case(mon_rope)
@@ -336,19 +336,19 @@ def get_mop_with_reason_beliefunit_example1():
     floor_str = "mop floor"
     floor_rope = sue_belief.make_rope(casa_rope, floor_str)
     floor_plan = planunit_shop(floor_str, pledge=True)
-    sue_belief.set_plan(floor_plan, casa_rope)
+    sue_belief.set_plan_obj(floor_plan, casa_rope)
     sue_belief.set_l1_plan(planunit_shop("unimportant"))
 
     situation_str = "cleaniness situation"
     situation_rope = sue_belief.make_rope(casa_rope, situation_str)
-    sue_belief.set_plan(planunit_shop(situation_str), casa_rope)
+    sue_belief.set_plan_obj(planunit_shop(situation_str), casa_rope)
 
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(situation_rope, clean_str)
-    sue_belief.set_plan(planunit_shop(clean_str), situation_rope)
-    sue_belief.set_plan(planunit_shop("very_much"), clean_rope)
-    sue_belief.set_plan(planunit_shop("moderately"), clean_rope)
-    sue_belief.set_plan(planunit_shop("dirty"), situation_rope)
+    sue_belief.set_plan_obj(planunit_shop(clean_str), situation_rope)
+    sue_belief.set_plan_obj(planunit_shop("very_much"), clean_rope)
+    sue_belief.set_plan_obj(planunit_shop("moderately"), clean_rope)
+    sue_belief.set_plan_obj(planunit_shop("dirty"), situation_rope)
 
     floor_reason = reasonunit_shop(situation_rope)
     floor_reason.set_case(case=situation_rope)
@@ -377,13 +377,13 @@ def get_beliefunit_laundry_example1() -> BeliefUnit:
     b_smel_rope = yao_belief.make_rope(basket_rope, b_smel_str)
     laundry_task_rope = yao_belief.make_rope(casa_rope, do_laundry_str)
     yao_belief.set_l1_plan(planunit_shop(casa_str))
-    yao_belief.set_plan(planunit_shop(basket_str), casa_rope)
-    yao_belief.set_plan(planunit_shop(b_full_str), basket_rope)
-    yao_belief.set_plan(planunit_shop(b_smel_str), basket_rope)
-    yao_belief.set_plan(planunit_shop(b_bare_str), basket_rope)
-    yao_belief.set_plan(planunit_shop(b_fine_str), basket_rope)
-    yao_belief.set_plan(planunit_shop(b_half_str), basket_rope)
-    yao_belief.set_plan(planunit_shop(do_laundry_str, pledge=True), casa_rope)
+    yao_belief.set_plan_obj(planunit_shop(basket_str), casa_rope)
+    yao_belief.set_plan_obj(planunit_shop(b_full_str), basket_rope)
+    yao_belief.set_plan_obj(planunit_shop(b_smel_str), basket_rope)
+    yao_belief.set_plan_obj(planunit_shop(b_bare_str), basket_rope)
+    yao_belief.set_plan_obj(planunit_shop(b_fine_str), basket_rope)
+    yao_belief.set_plan_obj(planunit_shop(b_half_str), basket_rope)
+    yao_belief.set_plan_obj(planunit_shop(do_laundry_str, pledge=True), casa_rope)
 
     # laundry requirement
     yao_belief.edit_plan_attr(

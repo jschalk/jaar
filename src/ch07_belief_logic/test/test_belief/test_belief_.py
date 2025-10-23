@@ -113,7 +113,7 @@ def test_BeliefUnit_get_nexus_label_Scenario1_NonDefault_knot():
 def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     # ESTABLISH
     sue_str = "Sue"
-    iowa_moment_label = "Iowa"
+    iowa_str = "Iowa"
     slash_knot = "/"
     x_fund_pool = 555
     x_fund_grain = 7
@@ -123,7 +123,7 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     # WHEN
     x_belief = beliefunit_shop(
         belief_name=sue_str,
-        moment_label=iowa_moment_label,
+        moment_label=iowa_str,
         knot=slash_knot,
         fund_pool=x_fund_pool,
         fund_grain=x_fund_grain,
@@ -134,7 +134,7 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     # THEN
     assert x_belief
     assert x_belief.belief_name == sue_str
-    assert x_belief.moment_label == iowa_moment_label
+    assert x_belief.moment_label == iowa_str
     assert x_belief.tally == 1
     assert x_belief.voices == {}
     assert x_belief.planroot is not None
@@ -231,10 +231,10 @@ def test_BeliefUnit_set_max_tree_traverse_RaisesError_Scenario1():
 
 def test_BeliefUnit_make_rope_ReturnsObj():
     # ESTABLISH
-    x_moment_label = "amy45"
+    a45_str = "amy45"
     slash_knot = "/"
     sue_str = "Sue"
-    sue_belief = beliefunit_shop(sue_str, x_moment_label, knot=slash_knot)
+    sue_belief = beliefunit_shop(sue_str, a45_str, knot=slash_knot)
     casa_str = "casa"
     v1_casa_rope = sue_belief.make_l1_rope(casa_str)
 

@@ -9,23 +9,22 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 
 
-def test_BeliefUnit_set_plan_RaisesErrorWhen_parent_rope_IsInvalid():
+def test_BeliefUnit_set_plan_ScenarioXX_RaisesErrorWhen_parent_rope_IsInvalid():
     # ESTABLISH
     zia_belief = beliefunit_shop("Zia")
     invalid_rootlabel_swim_rope = create_rope("swimming")
-    assert invalid_rootlabel_swim_rope != zia_belief.moment_label
     casa_str = "casa"
+    casa_plan = planunit_shop(casa_str)
+    assert invalid_rootlabel_swim_rope != zia_belief.planroot.get_plan_rope()
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        zia_belief.set_plan(
-            planunit_shop(casa_str), parent_rope=invalid_rootlabel_swim_rope
-        )
-    exception_str = f"set_plan failed because parent_rope '{invalid_rootlabel_swim_rope}' has an invalid root label. Should be {zia_belief.moment_label}."
+        zia_belief.set_plan_obj(casa_plan, parent_rope=invalid_rootlabel_swim_rope)
+    exception_str = f"set_plan failed because parent_rope '{invalid_rootlabel_swim_rope}' has an invalid root rope. Should be {zia_belief.planroot.get_plan_rope()}."
     assert str(excinfo.value) == exception_str
 
 
-def test_BeliefUnit_set_plan_RaisesErrorWhen_parent_rope_PlanDoesNotExist():
+def test_BeliefUnit_set_plan_ScenarioXX_RaisesErrorWhen_parent_rope_PlanDoesNotExist():
     # ESTABLISH
     zia_belief = beliefunit_shop("Zia")
     swim_rope = zia_belief.make_l1_rope("swimming")
@@ -33,7 +32,7 @@ def test_BeliefUnit_set_plan_RaisesErrorWhen_parent_rope_PlanDoesNotExist():
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        zia_belief.set_plan(
+        zia_belief.set_plan_obj(
             planunit_shop(casa_str),
             parent_rope=swim_rope,
             create_missing_ancestors=False,
@@ -42,7 +41,7 @@ def test_BeliefUnit_set_plan_RaisesErrorWhen_parent_rope_PlanDoesNotExist():
     assert str(excinfo.value) == exception_str
 
 
-def test_BeliefUnit_set_plan_RaisesErrorWhen_plan_label_IsNotLabel():
+def test_BeliefUnit_set_plan_ScenarioXX_RaisesErrorWhen_plan_label_IsNotLabel():
     # ESTABLISH
     zia_belief = beliefunit_shop("Zia")
     swim_rope = zia_belief.make_l1_rope("swimming")
@@ -53,21 +52,20 @@ def test_BeliefUnit_set_plan_RaisesErrorWhen_plan_label_IsNotLabel():
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        zia_belief.set_plan(planunit_shop(run_rope), parent_rope=swim_rope)
+        zia_belief.set_plan_obj(planunit_shop(run_rope), parent_rope=swim_rope)
     exception_str = f"set_plan failed because '{run_rope}' is not a LabelTerm."
     assert str(excinfo.value) == exception_str
 
 
-def test_BeliefUnit_set_plan_SetsAttr():
+def test_BeliefUnit_set_plan_ScenarioXX_SetsAttr():
     # ESTABLISH
     zia_belief = beliefunit_shop("Zia")
     casa_str = "casa"
+    root_plan_rope = zia_belief.planroot.get_plan_rope()
     assert not zia_belief.planroot.kids.get(casa_str)
 
     # WHEN
-    zia_belief.set_plan(
-        planunit_shop(casa_str), parent_rope=to_rope(zia_belief.moment_label)
-    )
+    zia_belief.set_plan_obj(planunit_shop(casa_str), parent_rope=root_plan_rope)
 
     # THEN
     print(f"{zia_belief.planroot.kids.keys()=}")
@@ -82,8 +80,8 @@ def test_BeliefUnit_plan_exists_ReturnsObj():
     assert zia_belief.plan_exists(casa_rope) is False
 
     # WHEN
-    zia_belief.set_plan(
-        planunit_shop(casa_str), parent_rope=to_rope(zia_belief.moment_label)
+    zia_belief.set_plan_obj(
+        planunit_shop(casa_str), parent_rope=zia_belief.planroot.get_plan_rope()
     )
 
     # THEN
@@ -154,7 +152,7 @@ def test_BeliefUnit_add_plan_ReturnsObj():
     assert casa_planunit.star == casa_star
 
 
-def test_BeliefUnit_set_plan_AddsPlanObjWithNonDefault_knot():
+def test_BeliefUnit_set_plan_ScenarioXX_AddsPlanObjWithNonDefault_knot():
     # ESTABLISH
     slash_str = "/"
     assert slash_str != default_knot_if_None()
@@ -167,7 +165,7 @@ def test_BeliefUnit_set_plan_AddsPlanObjWithNonDefault_knot():
     wed_rope = bob_belief.make_rope(wk_rope, wed_str)
     bob_belief.set_l1_plan(planunit_shop(casa_str))
     bob_belief.set_l1_plan(planunit_shop(wk_str))
-    bob_belief.set_plan(planunit_shop(wed_str), wk_rope)
+    bob_belief.set_plan_obj(planunit_shop(wed_str), wk_rope)
     print(f"{bob_belief.planroot.kids.keys()=}")
     assert len(bob_belief.planroot.kids) == 2
     wed_plan = bob_belief.get_plan_obj(wed_rope)
@@ -182,7 +180,7 @@ def test_BeliefUnit_set_plan_AddsPlanObjWithNonDefault_knot():
     assert casa_plan.reasonunits.get(wk_rope) is not None
 
 
-def test_BeliefUnit_set_plan_CanCreateMissingPlanUnits():
+def test_BeliefUnit_set_plan_ScenarioXX_CanCreateMissingPlanUnits():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
     ww2_rope = sue_belief.make_l1_rope("ww2")
@@ -193,7 +191,7 @@ def test_BeliefUnit_set_plan_CanCreateMissingPlanUnits():
     assert sue_belief.plan_exists(coralsea_rope) is False
 
     # WHEN
-    sue_belief.set_plan(saratoga_plan, parent_rope=coralsea_rope)
+    sue_belief.set_plan_obj(saratoga_plan, parent_rope=coralsea_rope)
 
     # THEN
     assert sue_belief.plan_exists(battles_rope)
@@ -610,7 +608,7 @@ def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario13_reason_conte
     wed_rope = bob_belief.make_rope(wk_rope, wed_str)
     bob_belief.set_l1_plan(planunit_shop(casa_str))
     bob_belief.set_l1_plan(planunit_shop(wk_str))
-    bob_belief.set_plan(planunit_shop(wed_str), wk_rope)
+    bob_belief.set_plan_obj(planunit_shop(wed_str), wk_rope)
     print(f"{bob_belief.planroot.kids.keys()=}")
     wed_plan = bob_belief.get_plan_obj(wed_rope)
     assert wed_plan.knot == slash_str
@@ -672,7 +670,7 @@ def test_BeliefUnit_edit_plan_attr_RaisesError_Scenario15_When_healerunit_healer
     assert str(excinfo.value) == exception_str
 
 
-def test_BeliefUnit_set_plan_MustReorderKidsDictToBeAlphabetical():
+def test_BeliefUnit_set_plan_ScenarioXX_MustReorderKidsDictToBeAlphabetical():
     # ESTABLISH
     bob_belief = beliefunit_shop("Bob")
     casa_str = "casa"
@@ -687,21 +685,21 @@ def test_BeliefUnit_set_plan_MustReorderKidsDictToBeAlphabetical():
     assert plan_list[0].plan_label == casa_str
 
 
-def test_BeliefUnit_set_plan_adoptee_RaisesErrorIfAdopteePlanDoesNotHaveParent():
+def test_BeliefUnit_set_plan_ScenarioXX_adoptee_RaisesErrorIfAdopteePlanDoesNotHaveParent():
     # ESTABLISH
     bob_belief = beliefunit_shop("Bob")
     sports_str = "sports"
     sports_rope = bob_belief.make_l1_rope(sports_str)
     bob_belief.set_l1_plan(planunit_shop(sports_str))
     swim_str = "swim"
-    bob_belief.set_plan(planunit_shop(swim_str), parent_rope=sports_rope)
+    bob_belief.set_plan_obj(planunit_shop(swim_str), parent_rope=sports_rope)
 
     # WHEN / THEN
     summer_str = "summer"
     hike_str = "hike"
     hike_rope = bob_belief.make_rope(sports_rope, hike_str)
     with pytest_raises(Exception) as excinfo:
-        bob_belief.set_plan(
+        bob_belief.set_plan_obj(
             plan_kid=planunit_shop(summer_str),
             parent_rope=sports_rope,
             adoptees=[swim_str, hike_str],
@@ -709,16 +707,16 @@ def test_BeliefUnit_set_plan_adoptee_RaisesErrorIfAdopteePlanDoesNotHaveParent()
     assert str(excinfo.value) == f"get_plan_obj failed. no plan at '{hike_rope}'"
 
 
-def test_BeliefUnit_set_plan_adoptee_AddsAdoptee():
+def test_BeliefUnit_set_plan_ScenarioXX_adoptee_AddsAdoptee():
     # ESTABLISH
     bob_belief = beliefunit_shop("Bob")
     sports_str = "sports"
     sports_rope = bob_belief.make_l1_rope(sports_str)
     bob_belief.set_l1_plan(planunit_shop(sports_str))
     swim_str = "swim"
-    bob_belief.set_plan(planunit_shop(swim_str), parent_rope=sports_rope)
+    bob_belief.set_plan_obj(planunit_shop(swim_str), parent_rope=sports_rope)
     hike_str = "hike"
-    bob_belief.set_plan(planunit_shop(hike_str), parent_rope=sports_rope)
+    bob_belief.set_plan_obj(planunit_shop(hike_str), parent_rope=sports_rope)
 
     sports_swim_rope = bob_belief.make_rope(sports_rope, swim_str)
     sports_hike_rope = bob_belief.make_rope(sports_rope, hike_str)
@@ -732,7 +730,7 @@ def test_BeliefUnit_set_plan_adoptee_AddsAdoptee():
     assert bob_belief.plan_exists(summer_hike_rope) is False
 
     # WHEN / THEN
-    bob_belief.set_plan(
+    bob_belief.set_plan_obj(
         plan_kid=planunit_shop(summer_str),
         parent_rope=sports_rope,
         adoptees=[swim_str, hike_str],
@@ -747,7 +745,7 @@ def test_BeliefUnit_set_plan_adoptee_AddsAdoptee():
     assert bob_belief.plan_exists(sports_hike_rope) is False
 
 
-def test_BeliefUnit_set_plan_bundling_SetsNewParentWithstarEqualToSumOfAdoptedPlans():
+def test_BeliefUnit_set_plan_ScenarioXX_bundling_SetsNewParentWithstarEqualToSumOfAdoptedPlans():
     # ESTABLISH
     bob_belief = beliefunit_shop("Bob")
     sports_str = "sports"
@@ -755,13 +753,13 @@ def test_BeliefUnit_set_plan_bundling_SetsNewParentWithstarEqualToSumOfAdoptedPl
     bob_belief.set_l1_plan(planunit_shop(sports_str, star=2))
     swim_str = "swim"
     swim_star = 3
-    bob_belief.set_plan(planunit_shop(swim_str, star=swim_star), sports_rope)
+    bob_belief.set_plan_obj(planunit_shop(swim_str, star=swim_star), sports_rope)
     hike_str = "hike"
     hike_star = 5
-    bob_belief.set_plan(planunit_shop(hike_str, star=hike_star), sports_rope)
+    bob_belief.set_plan_obj(planunit_shop(hike_str, star=hike_star), sports_rope)
     bball_str = "bball"
     bball_star = 7
-    bob_belief.set_plan(planunit_shop(bball_str, star=bball_star), sports_rope)
+    bob_belief.set_plan_obj(planunit_shop(bball_str, star=bball_star), sports_rope)
 
     sports_swim_rope = bob_belief.make_rope(sports_rope, swim_str)
     sports_hike_rope = bob_belief.make_rope(sports_rope, hike_str)
@@ -779,7 +777,7 @@ def test_BeliefUnit_set_plan_bundling_SetsNewParentWithstarEqualToSumOfAdoptedPl
     assert bob_belief.plan_exists(summer_bball_rope) is False
 
     # WHEN / THEN
-    bob_belief.set_plan(
+    bob_belief.set_plan_obj(
         plan_kid=planunit_shop(summer_str),
         parent_rope=sports_rope,
         adoptees=[swim_str, hike_str],
@@ -804,13 +802,13 @@ def test_BeliefUnit_del_plan_obj_DeletingBundledPlanReturnsPlansToOriginalState(
     bob_belief.set_l1_plan(planunit_shop(sports_str, star=2))
     swim_str = "swim"
     swim_star = 3
-    bob_belief.set_plan(planunit_shop(swim_str, star=swim_star), sports_rope)
+    bob_belief.set_plan_obj(planunit_shop(swim_str, star=swim_star), sports_rope)
     hike_str = "hike"
     hike_star = 5
-    bob_belief.set_plan(planunit_shop(hike_str, star=hike_star), sports_rope)
+    bob_belief.set_plan_obj(planunit_shop(hike_str, star=hike_star), sports_rope)
     bball_str = "bball"
     bball_star = 7
-    bob_belief.set_plan(planunit_shop(bball_str, star=bball_star), sports_rope)
+    bob_belief.set_plan_obj(planunit_shop(bball_str, star=bball_star), sports_rope)
 
     sports_swim_rope = bob_belief.make_rope(sports_rope, swim_str)
     sports_hike_rope = bob_belief.make_rope(sports_rope, hike_str)
@@ -826,7 +824,7 @@ def test_BeliefUnit_del_plan_obj_DeletingBundledPlanReturnsPlansToOriginalState(
     assert bob_belief.plan_exists(summer_swim_rope) is False
     assert bob_belief.plan_exists(summer_hike_rope) is False
     assert bob_belief.plan_exists(summer_bball_rope) is False
-    bob_belief.set_plan(
+    bob_belief.set_plan_obj(
         plan_kid=planunit_shop(summer_str),
         parent_rope=sports_rope,
         adoptees=[swim_str, hike_str],
@@ -949,7 +947,7 @@ def test_BeliefUnit__get_filtered_awardunits_plan_RemovesGroup_awardunit():
     assert list(cleaned_plan.awardunits.keys()) == [xia_str]
 
 
-def test_BeliefUnit_set_plan_SetsPlan_awardunits():
+def test_BeliefUnit_set_plan_ScenarioXX_SetsPlan_awardunits():
     # ESTABLISH
     bob_str = "Bob"
     example_belief = beliefunit_shop(bob_str)
@@ -1010,7 +1008,7 @@ def test_BeliefUnit_get_plan_obj_ReturnsPlan():
 
     # THEN
     assert root_plan is not None
-    assert root_plan.plan_label == sue_belief.moment_label
+    assert root_plan.get_plan_rope() == sue_belief.planroot.get_plan_rope()
 
     # WHEN / THEN
     bobdylan_str = "bobdylan"
@@ -1093,12 +1091,12 @@ def test_BeliefUnit_set_offtrack_fund_ReturnsObj():
     casa_plan = planunit_shop(casa_str, fund_onset=70, fund_cease=170)
     wk_plan = planunit_shop(wk_str, fund_onset=70, fund_cease=75)
     wed_plan = planunit_shop(wed_str, fund_onset=72, fund_cease=75)
-    casa_plan.parent_rope = bob_beliefunit.moment_label
-    wk_plan.parent_rope = bob_beliefunit.moment_label
+    casa_plan.parent_rope = bob_beliefunit.planroot.get_plan_rope()
+    wk_plan.parent_rope = bob_beliefunit.planroot.get_plan_rope()
     wed_plan.parent_rope = wk_rope
     bob_beliefunit.set_l1_plan(casa_plan)
     bob_beliefunit.set_l1_plan(wk_plan)
-    bob_beliefunit.set_plan(wed_plan, wk_rope)
+    bob_beliefunit.set_plan_obj(wed_plan, wk_rope)
     bob_beliefunit.offtrack_kids_star_set.add(casa_rope)
     bob_beliefunit.offtrack_kids_star_set.add(wk_rope)
     assert bob_beliefunit.offtrack_fund == 0
@@ -1150,12 +1148,12 @@ def test_BeliefUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     casa_plan = planunit_shop(casa_str, fund_onset=70, fund_cease=170)
     wk_plan = planunit_shop(wk_str, fund_onset=70, fund_cease=75)
     wed_plan = planunit_shop(wed_str, fund_onset=72, fund_cease=75)
-    casa_plan.parent_rope = bob_beliefunit.moment_label
-    wk_plan.parent_rope = bob_beliefunit.moment_label
+    casa_plan.parent_rope = bob_beliefunit.planroot.get_plan_rope()
+    wk_plan.parent_rope = bob_beliefunit.planroot.get_plan_rope()
     wed_plan.parent_rope = wk_rope
     bob_beliefunit.set_l1_plan(casa_plan)
     bob_beliefunit.set_l1_plan(wk_plan)
-    bob_beliefunit.set_plan(wed_plan, wk_rope)
+    bob_beliefunit.set_plan_obj(wed_plan, wk_rope)
     bob_beliefunit.offtrack_kids_star_set.add(casa_rope)
     bob_beliefunit.offtrack_kids_star_set.add(wk_rope)
     bob_beliefunit.set_offtrack_fund()

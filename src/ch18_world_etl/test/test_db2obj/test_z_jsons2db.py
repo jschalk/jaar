@@ -67,7 +67,7 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
     x_mana_grain = 4.0
     x_respect_grain = 0.2
     x_tally = 6
-    sue_belief = beliefunit_shop(belief_name=x_belief_name, moment_label=x_moment_label)
+    sue_belief = beliefunit_shop(x_belief_name, moment_label=x_moment_label)
     sue_belief.fund_pool = x_fund_pool
     sue_belief.fund_grain = x_fund_grain
     sue_belief.mana_grain = x_mana_grain

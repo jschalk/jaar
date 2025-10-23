@@ -185,7 +185,7 @@ class BeliefUnit:
         )
 
     def make_l1_rope(self, l1_label: LabelTerm):
-        return self.make_rope(self.moment_label, l1_label)
+        return self.make_rope(self.planroot.plan_label, l1_label)
 
     def set_knot(self, new_knot: KnotTerm):
         self.cashout()
@@ -199,15 +199,6 @@ class BeliefUnit:
             self.knot = default_knot_if_None(new_knot)
             for x_plan in self._plan_dict.values():
                 x_plan.set_knot(self.knot)
-
-    def set_moment_label(self, moment_label: str):
-        old_moment_label = copy_deepcopy(self.moment_label)
-        self.cashout()
-        self.moment_label = moment_label
-        self.edit_plan_label(
-            old_rope=to_rope(old_moment_label), new_plan_label=self.moment_label
-        )
-        self.cashout()
 
     def set_max_tree_traverse(self, x_int: int):
         if x_int < 2 or not float(x_int).is_integer():
@@ -573,7 +564,7 @@ class BeliefUnit:
         x_planunit = planunit_shop(x_plan_label, star=star)
         if pledge:
             x_planunit.pledge = True
-        self.set_plan(x_planunit, x_parent_rope)
+        self.set_plan_obj(x_planunit, x_parent_rope)
         return x_planunit
 
     def set_l1_plan(
@@ -585,9 +576,9 @@ class BeliefUnit:
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
-        self.set_plan(
+        self.set_plan_obj(
             plan_kid=plan_kid,
-            parent_rope=self.moment_label,
+            parent_rope=self.planroot.get_plan_rope(),
             create_missing_plans=create_missing_plans,
             get_rid_of_missing_awardunits_awardee_titles=get_rid_of_missing_awardunits_awardee_titles,
             adoptees=adoptees,
@@ -595,7 +586,7 @@ class BeliefUnit:
             create_missing_ancestors=create_missing_ancestors,
         )
 
-    def set_plan(
+    def set_plan_obj(
         self,
         plan_kid: PlanUnit,
         parent_rope: RopeTerm,
@@ -614,7 +605,7 @@ class BeliefUnit:
 
         x_first_label = get_first_label_from_rope(parent_rope, self.knot)
         if self.planroot.plan_label != x_first_label:
-            exception_str = f"set_plan failed because parent_rope '{parent_rope}' has an invalid root label. Should be {self.planroot.plan_label}."
+            exception_str = f"set_plan failed because parent_rope '{parent_rope}' has an invalid root rope. Should be {self.planroot.get_plan_rope()}."
             raise InvalidBeliefException(exception_str)
 
         plan_kid.knot = self.knot
@@ -639,7 +630,7 @@ class BeliefUnit:
                 adoptee_plan = self.get_plan_obj(adoptee_rope)
                 star_sum += adoptee_plan.star
                 new_adoptee_parent_rope = self.make_rope(kid_rope, adoptee_plan_label)
-                self.set_plan(adoptee_plan, new_adoptee_parent_rope)
+                self.set_plan_obj(adoptee_plan, new_adoptee_parent_rope)
                 self.edit_plan_attr(new_adoptee_parent_rope, star=adoptee_plan.star)
                 self.del_plan_obj(adoptee_rope)
 
@@ -697,7 +688,7 @@ class BeliefUnit:
         parent_rope = get_parent_rope(x_rope)
         d_temp_plan = self.get_plan_obj(x_rope)
         for kid in d_temp_plan.kids.values():
-            self.set_plan(kid, parent_rope=parent_rope)
+            self.set_plan_obj(kid, parent_rope=parent_rope)
 
     def set_belief_name(self, new_belief_name):
         self.belief_name = new_belief_name
@@ -1052,7 +1043,7 @@ reason_case:    {reason_case}"""
         return [self.get_plan_obj(x_plan_rope) for x_plan_rope in plan_ropes]
 
     def _set_plan_dict(self):
-        plan_list = [self.get_plan_obj(to_rope(self.moment_label, self.knot))]
+        plan_list = [self.planroot]
         while plan_list != []:
             x_plan = plan_list.pop()
             x_plan.clear_gogo_calc_stop_calc()
@@ -1397,17 +1388,16 @@ reason_case:    {reason_case}"""
         """Returns dict that is serializable to JSON."""
 
         x_dict = {
-            "voices": self.get_voiceunits_dict(),
-            "tally": self.tally,
-            "fund_pool": self.fund_pool,
-            "fund_grain": self.fund_grain,
-            "respect_grain": self.respect_grain,
-            "mana_grain": self.mana_grain,
             "belief_name": self.belief_name,
-            "moment_label": self.moment_label,
-            "max_tree_traverse": self.max_tree_traverse,
+            "fund_grain": self.fund_grain,
+            "fund_pool": self.fund_pool,
             "knot": self.knot,
+            "mana_grain": self.mana_grain,
+            "max_tree_traverse": self.max_tree_traverse,
             "planroot": self.planroot.to_dict(),
+            "respect_grain": self.respect_grain,
+            "tally": self.tally,
+            "voices": self.get_voiceunits_dict(),
         }
         if self.credor_respect is not None:
             x_dict["credor_respect"] = self.credor_respect
@@ -1420,7 +1410,7 @@ reason_case:    {reason_case}"""
 
     def set_dominate_pledge_plan(self, plan_kid: PlanUnit):
         plan_kid.pledge = True
-        self.set_plan(
+        self.set_plan_obj(
             plan_kid=plan_kid,
             parent_rope=self.make_rope(plan_kid.parent_rope),
             get_rid_of_missing_awardunits_awardee_titles=True,
@@ -1436,7 +1426,7 @@ reason_case:    {reason_case}"""
 
 def beliefunit_shop(
     belief_name: BeliefName = None,
-    moment_label: MomentLabel = None,
+    moment_label: LabelTerm = None,
     knot: KnotTerm = None,
     fund_pool: FundNum = None,
     fund_grain: FundGrain = None,
@@ -1445,11 +1435,13 @@ def beliefunit_shop(
     tally: float = None,
 ) -> BeliefUnit:
     belief_name = "" if belief_name is None else belief_name
-    moment_label = get_default_first_label() if moment_label is None else moment_label
+    root_plan_label = (
+        get_default_first_label() if moment_label is None else moment_label
+    )
     x_belief = BeliefUnit(
         belief_name=belief_name,
         tally=get_1_if_None(tally),
-        moment_label=moment_label,
+        moment_label=root_plan_label,
         voices=get_empty_dict_if_None(),
         groupunits={},
         knot=default_knot_if_None(knot),
@@ -1470,7 +1462,7 @@ def beliefunit_shop(
         range_inheritors={},
     )
     x_belief.planroot = planunit_shop(
-        plan_label=x_belief.moment_label,
+        plan_label=root_plan_label,
         uid=1,
         tree_level=0,
         knot=x_belief.knot,
@@ -1489,8 +1481,7 @@ def get_beliefunit_from_dict(belief_dict: dict) -> BeliefUnit:
     x_belief.set_max_tree_traverse(
         obj_from_belief_dict(belief_dict, "max_tree_traverse")
     )
-    x_belief.moment_label = obj_from_belief_dict(belief_dict, "moment_label")
-    x_belief.planroot.plan_label = obj_from_belief_dict(belief_dict, "moment_label")
+    x_belief.moment_label = belief_dict.get("planroot").get("plan_label")
     belief_knot = obj_from_belief_dict(belief_dict, "knot")
     x_belief.knot = default_knot_if_None(belief_knot)
     x_belief.fund_pool = validate_pool_num(
@@ -1519,7 +1510,7 @@ def get_beliefunit_from_dict(belief_dict: dict) -> BeliefUnit:
 def create_planroot_from_belief_dict(x_belief: BeliefUnit, belief_dict: dict):
     planroot_dict = belief_dict.get("planroot")
     x_belief.planroot = planunit_shop(
-        plan_label=x_belief.moment_label,
+        plan_label=get_obj_from_plan_dict(planroot_dict, "plan_label"),
         parent_rope="",
         tree_level=0,
         uid=get_obj_from_plan_dict(planroot_dict, "uid"),
@@ -1549,7 +1540,7 @@ def create_planroot_kids_from_dict(x_belief: BeliefUnit, planroot_dict: dict):
     parent_rope_str = "parent_rope"
     # for every kid dict, set parent_rope in dict, add to to_evaluate_list
     for x_dict in get_obj_from_plan_dict(planroot_dict, "kids").values():
-        x_dict[parent_rope_str] = x_belief.moment_label
+        x_dict[parent_rope_str] = x_belief.get_nexus_label()
         to_evaluate_plan_dicts.append(x_dict)
 
     while to_evaluate_plan_dicts != []:
@@ -1580,7 +1571,7 @@ def create_planroot_kids_from_dict(x_belief: BeliefUnit, planroot_dict: dict):
             factunits=get_obj_from_plan_dict(plan_dict, "factunits"),
             is_expanded=get_obj_from_plan_dict(plan_dict, "is_expanded"),
         )
-        x_belief.set_plan(x_plankid, parent_rope=plan_dict[parent_rope_str])
+        x_belief.set_plan_obj(x_plankid, parent_rope=plan_dict[parent_rope_str])
 
 
 def obj_from_belief_dict(

@@ -187,7 +187,7 @@ def add_epoch_planunit(x_beliefunit: BeliefUnit, epoch_config: dict):
     add_planunits(x_beliefunit, week_rope, create_weekday_planunits(x_weekdays_list))
     add_planunits(x_beliefunit, year_rope, create_month_planunits(x_months, x_mday))
     offset_plan = planunit_shop("yr1_jan1_offset", addin=x_yr1_jan1_offset)
-    x_beliefunit.set_plan(offset_plan, epoch_rope)
+    x_beliefunit.set_plan_obj(offset_plan, epoch_rope)
 
 
 def add_planunits(
@@ -196,7 +196,7 @@ def add_planunits(
     config_dict: dict[str, PlanUnit],
 ):
     for x_time_planunit in config_dict.values():
-        x_beliefunit.set_plan(x_time_planunit, parent_rope)
+        x_beliefunit.set_plan_obj(x_time_planunit, parent_rope)
 
 
 def add_stan_planunits(
@@ -222,15 +222,15 @@ def add_stan_planunits(
     if not x_beliefunit.plan_exists(time_rope):
         x_beliefunit.set_l1_plan(planunit_shop("time"))
     epoch_planunit = new_epoch_planunit(epoch_label, epoch_c400_number)
-    x_beliefunit.set_plan(epoch_planunit, time_rope)
-    x_beliefunit.set_plan(stan_c400_leap_planunit(), epoch_rope)
-    x_beliefunit.set_plan(stan_c400_clean_planunit(), c400_leap_rope)
-    x_beliefunit.set_plan(stan_c100_planunit(), c400_clean_rope)
-    x_beliefunit.set_plan(stan_yr4_leap_planunit(), c100_rope)
-    x_beliefunit.set_plan(stan_yr4_clean_planunit(), yr4_leap_rope)
-    x_beliefunit.set_plan(stan_year_planunit(), yr4_clean_rope)
-    x_beliefunit.set_plan(stan_day_planunit(), epoch_rope)
-    x_beliefunit.set_plan(stan_days_planunit(), epoch_rope)
+    x_beliefunit.set_plan_obj(epoch_planunit, time_rope)
+    x_beliefunit.set_plan_obj(stan_c400_leap_planunit(), epoch_rope)
+    x_beliefunit.set_plan_obj(stan_c400_clean_planunit(), c400_leap_rope)
+    x_beliefunit.set_plan_obj(stan_c100_planunit(), c400_clean_rope)
+    x_beliefunit.set_plan_obj(stan_yr4_leap_planunit(), c100_rope)
+    x_beliefunit.set_plan_obj(stan_yr4_clean_planunit(), yr4_leap_rope)
+    x_beliefunit.set_plan_obj(stan_year_planunit(), yr4_clean_rope)
+    x_beliefunit.set_plan_obj(stan_day_planunit(), epoch_rope)
+    x_beliefunit.set_plan_obj(stan_days_planunit(), epoch_rope)
 
 
 def get_c400_clean_rope(x_beliefunit: BeliefUnit, epoch_label: LabelTerm) -> RopeTerm:

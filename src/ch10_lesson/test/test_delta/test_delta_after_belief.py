@@ -290,8 +290,8 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_planunit():
     ball_rope = before_sue_beliefunit.make_rope(sports_rope, ball_str)
     disc_str = "Ultimate Disc"
     disc_rope = before_sue_beliefunit.make_rope(sports_rope, disc_str)
-    before_sue_beliefunit.set_plan(planunit_shop(ball_str), sports_rope)
-    before_sue_beliefunit.set_plan(planunit_shop(disc_str), sports_rope)
+    before_sue_beliefunit.set_plan_obj(planunit_shop(ball_str), sports_rope)
+    before_sue_beliefunit.set_plan_obj(planunit_shop(disc_str), sports_rope)
     delete_disc_beliefatom = beliefatom_shop(kw.belief_planunit, kw.DELETE)
     delete_disc_beliefatom.set_jkey(kw.plan_rope, disc_rope)
     print(f"{disc_rope=}")
@@ -320,7 +320,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_planunit():
     ball_rope = before_sue_beliefunit.make_rope(sports_rope, ball_str)
     disc_str = "Ultimate Disc"
     disc_rope = before_sue_beliefunit.make_rope(sports_rope, disc_str)
-    before_sue_beliefunit.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_beliefunit.set_plan_obj(planunit_shop(ball_str), sports_rope)
     assert before_sue_beliefunit.plan_exists(ball_rope)
     assert before_sue_beliefunit.plan_exists(disc_rope) is False
 
@@ -363,7 +363,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_planunit_Sim
     sports_rope = before_sue_beliefunit.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_beliefunit.make_rope(sports_rope, ball_str)
-    before_sue_beliefunit.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_beliefunit.set_plan_obj(planunit_shop(ball_str), sports_rope)
 
     # x_addin = 140
     x_begin = 1000
@@ -432,8 +432,8 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_awardun
     ball_rope = before_sue_beliefunit.make_rope(sports_rope, ball_str)
     disc_str = "Ultimate Disc"
     disc_rope = before_sue_beliefunit.make_rope(sports_rope, disc_str)
-    before_sue_beliefunit.set_plan(planunit_shop(ball_str), sports_rope)
-    before_sue_beliefunit.set_plan(planunit_shop(disc_str), sports_rope)
+    before_sue_beliefunit.set_plan_obj(planunit_shop(ball_str), sports_rope)
+    before_sue_beliefunit.set_plan_obj(planunit_shop(disc_str), sports_rope)
     before_sue_beliefunit.edit_plan_attr(ball_rope, awardunit=awardunit_shop(run_str))
     before_sue_beliefunit.edit_plan_attr(ball_rope, awardunit=awardunit_shop(fly_str))
     before_sue_beliefunit.edit_plan_attr(disc_rope, awardunit=awardunit_shop(run_str))
@@ -471,7 +471,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_awardun
     sports_rope = before_sue_beliefunit.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_beliefunit.make_rope(sports_rope, ball_str)
-    before_sue_beliefunit.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_beliefunit.set_plan_obj(planunit_shop(ball_str), sports_rope)
     before_sue_beliefunit.edit_plan_attr(ball_rope, awardunit=awardunit_shop(run_str))
     run_awardunit = before_sue_beliefunit.get_plan_obj(ball_rope).awardunits.get(
         run_str
@@ -514,7 +514,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_awardun
     sports_rope = before_sue_beliefunit.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_beliefunit.make_rope(sports_rope, ball_str)
-    before_sue_beliefunit.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_beliefunit.set_plan_obj(planunit_shop(ball_str), sports_rope)
     before_ball_plan = before_sue_beliefunit.get_plan_obj(ball_rope)
     assert before_ball_plan.awardunits.get(run_str) is None
 
@@ -544,13 +544,13 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_factuni
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
-    before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_au.make_l1_rope(knee_str)
     damaged_str = "damaged mcl"
     damaged_rope = before_sue_au.make_rope(knee_rope, damaged_str)
     before_sue_au.set_l1_plan(planunit_shop(knee_str))
-    before_sue_au.set_plan(planunit_shop(damaged_str), knee_rope)
+    before_sue_au.set_plan_obj(planunit_shop(damaged_str), knee_rope)
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
     assert before_ball_plan.factunits == {}
 
@@ -586,13 +586,13 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_factuni
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
-    before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_au.make_l1_rope(knee_str)
     damaged_str = "damaged mcl"
     damaged_rope = before_sue_au.make_rope(knee_rope, damaged_str)
     before_sue_au.set_l1_plan(planunit_shop(knee_str))
-    before_sue_au.set_plan(planunit_shop(damaged_str), knee_rope)
+    before_sue_au.set_plan_obj(planunit_shop(damaged_str), knee_rope)
     before_sue_au.edit_plan_attr(
         ball_rope,
         factunit=factunit_shop(fact_context=knee_rope, fact_state=damaged_rope),
@@ -624,7 +624,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_factuni
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
-    before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_au.make_l1_rope(knee_str)
     damaged_str = "damaged mcl"
@@ -632,8 +632,8 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_factuni
     medical_str = "get medical attention"
     medical_rope = before_sue_au.make_rope(knee_rope, medical_str)
     before_sue_au.set_l1_plan(planunit_shop(knee_str))
-    before_sue_au.set_plan(planunit_shop(damaged_str), knee_rope)
-    before_sue_au.set_plan(planunit_shop(medical_str), knee_rope)
+    before_sue_au.set_plan_obj(planunit_shop(damaged_str), knee_rope)
+    before_sue_au.set_plan_obj(planunit_shop(medical_str), knee_rope)
     before_knee_factunit = factunit_shop(knee_rope, damaged_rope)
     before_sue_au.edit_plan_attr(ball_rope, factunit=before_knee_factunit)
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
@@ -675,13 +675,13 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_reason_
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
-    before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_au.make_l1_rope(knee_str)
     damaged_str = "damaged mcl"
     damaged_rope = before_sue_au.make_rope(knee_rope, damaged_str)
     before_sue_au.set_l1_plan(planunit_shop(knee_str))
-    before_sue_au.set_plan(planunit_shop(damaged_str), knee_rope)
+    before_sue_au.set_plan_obj(planunit_shop(damaged_str), knee_rope)
     before_sue_au.edit_plan_attr(
         ball_rope, reason_context=knee_rope, reason_case=damaged_rope
     )
@@ -730,7 +730,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_reason_
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
-    before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_au.make_l1_rope(knee_str)
     damaged_str = "damaged mcl"
@@ -738,8 +738,8 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_reason_
     medical_str = "get medical attention"
     medical_rope = before_sue_au.make_rope(knee_rope, medical_str)
     before_sue_au.set_l1_plan(planunit_shop(knee_str))
-    before_sue_au.set_plan(planunit_shop(damaged_str), knee_rope)
-    before_sue_au.set_plan(planunit_shop(medical_str), knee_rope)
+    before_sue_au.set_plan_obj(planunit_shop(damaged_str), knee_rope)
+    before_sue_au.set_plan_obj(planunit_shop(medical_str), knee_rope)
     before_sue_au.edit_plan_attr(
         ball_rope, reason_context=knee_rope, reason_case=damaged_rope
     )
@@ -784,7 +784,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_reason_
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
-    before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_au.make_l1_rope(knee_str)
     damaged_str = "damaged mcl"
@@ -792,8 +792,8 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_reason_
     medical_str = "get medical attention"
     medical_rope = before_sue_au.make_rope(knee_rope, medical_str)
     before_sue_au.set_l1_plan(planunit_shop(knee_str))
-    before_sue_au.set_plan(planunit_shop(damaged_str), knee_rope)
-    before_sue_au.set_plan(planunit_shop(medical_str), knee_rope)
+    before_sue_au.set_plan_obj(planunit_shop(damaged_str), knee_rope)
+    before_sue_au.set_plan_obj(planunit_shop(medical_str), knee_rope)
     before_sue_au.edit_plan_attr(
         ball_rope, reason_context=knee_rope, reason_case=damaged_rope
     )
@@ -829,13 +829,13 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_reasonu
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
-    before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_au.make_l1_rope(knee_str)
     medical_str = "get medical attention"
     medical_rope = before_sue_au.make_rope(knee_rope, medical_str)
     before_sue_au.set_l1_plan(planunit_shop(knee_str))
-    before_sue_au.set_plan(planunit_shop(medical_str), knee_rope)
+    before_sue_au.set_plan_obj(planunit_shop(medical_str), knee_rope)
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
     assert before_ball_plan.get_reasonunit(knee_rope) is None
 
@@ -870,14 +870,14 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_reasonu
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
-    before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_au.make_l1_rope(knee_str)
     medical_str = "get medical attention"
     medical_rope = before_sue_au.make_rope(knee_rope, medical_str)
     before_medical_active_requisite = False
     before_sue_au.set_l1_plan(planunit_shop(knee_str))
-    before_sue_au.set_plan(planunit_shop(medical_str), knee_rope)
+    before_sue_au.set_plan_obj(planunit_shop(medical_str), knee_rope)
     before_sue_au.edit_plan_attr(
         ball_rope,
         reason_context=knee_rope,
@@ -918,7 +918,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_reasonu
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
-    before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_au.make_l1_rope(knee_str)
     medical_active_requisite = False
@@ -954,7 +954,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_partyun
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
-    before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_au.get_plan_obj(ball_rope)
     assert before_ball_planunit.laborunit.partys == {}
 
@@ -982,7 +982,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_partyun
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
-    before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_au.get_plan_obj(ball_rope)
     before_ball_planunit.laborunit.add_party(yao_str)
     assert before_ball_planunit.laborunit.partys != set()
@@ -1012,7 +1012,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_healeru
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
-    before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_au.get_plan_obj(ball_rope)
     assert before_ball_planunit.healerunit._healer_names == set()
     assert not before_ball_planunit.healerunit.healer_name_exists(yao_str)
@@ -1042,7 +1042,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_healeru
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
-    before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_au.get_plan_obj(ball_rope)
     before_ball_planunit.healerunit.set_healer_name(yao_str)
     assert before_ball_planunit.healerunit._healer_names != set()

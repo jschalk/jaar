@@ -723,7 +723,7 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     laundry_str = "do_laundry"
     laundry_rope = sue_belief.make_rope(casa_rope, laundry_str)
     sue_belief.set_l1_plan(planunit_shop(casa_str))
-    sue_belief.set_plan(planunit_shop(laundry_str, pledge=True), casa_rope)
+    sue_belief.set_plan_obj(planunit_shop(laundry_str, pledge=True), casa_rope)
     time_rope = sue_belief.make_l1_rope("time")
     cregtime_rope = sue_belief.make_rope(time_rope, kw.creg)
     sue_belief.edit_plan_attr(

@@ -43,8 +43,8 @@ def test_listen_to_agendas_create_init_job_from_guts_AddstasksToBeliefWhenNo_par
     save_gut_file(moment_mstr_dir, yao_gut)
 
     zia_gut = beliefunit_shop(zia_str, a23_str)
-    zia_gut.set_plan(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
-    zia_gut.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
+    zia_gut.set_plan_obj(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
+    zia_gut.set_plan_obj(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
     zia_gut.add_voiceunit(yao_str, voice_debt_lumen=12)
     save_gut_file(moment_mstr_dir, zia_gut)
 
@@ -76,8 +76,8 @@ def test_listen_to_agendas_create_init_job_from_guts_AddstasksToBelief(
     a23_str = "amy23"
     save_gut_file(moment_mstr_dir, yao_gut)
     zia_gut = beliefunit_shop(zia_str, a23_str)
-    zia_gut.set_plan(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
-    zia_gut.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
+    zia_gut.set_plan_obj(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
+    zia_gut.set_plan_obj(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
     zia_gut.add_voiceunit(yao_str, voice_debt_lumen=12)
     clean_planunit = zia_gut.get_plan_obj(a23_clean_rope())
     cook_planunit = zia_gut.get_plan_obj(a23_cook_rope())
@@ -181,8 +181,8 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBelief(
 
     zia_str = "Zia"
     zia_gut = beliefunit_shop(zia_str, a23_str)
-    zia_gut.set_plan(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
-    zia_gut.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
+    zia_gut.set_plan_obj(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
+    zia_gut.set_plan_obj(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
     zia_gut.add_voiceunit(yao_str, voice_debt_lumen=12)
     clean_planunit = zia_gut.get_plan_obj(a23_clean_rope())
     cook_planunit = zia_gut.get_plan_obj(a23_cook_rope())
@@ -260,8 +260,8 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorBelie
     save_gut_file(moment_mstr_dir, yao_gut)
 
     zia_gut = beliefunit_shop(zia_str, a23_str)
-    zia_gut.set_plan(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
-    zia_gut.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
+    zia_gut.set_plan_obj(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
+    zia_gut.set_plan_obj(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
     zia_gut.add_voiceunit(yao_str, voice_debt_lumen=12)
     clean_planunit = zia_gut.get_plan_obj(a23_clean_rope())
     cook_planunit = zia_gut.get_plan_obj(a23_cook_rope())

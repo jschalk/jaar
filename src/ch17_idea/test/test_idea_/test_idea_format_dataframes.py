@@ -142,7 +142,7 @@ def test_create_idea_df_Arg_idea_format_00013_planunit_v0_0_0():
     sue_beliefunit.set_l1_plan(planunit_shop(casa_str, star=casa_star))
     clean_str = "clean"
     clean_rope = sue_beliefunit.make_rope(casa_rope, clean_str)
-    sue_beliefunit.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
+    sue_beliefunit.set_plan_obj(planunit_shop(clean_str, pledge=True), casa_rope)
 
     # WHEN
     x_idea_name = idea_format_00013_planunit_v0_0_0()
@@ -255,7 +255,7 @@ def test_save_idea_csv_Arg_idea_format_00013_planunit_v0_0_0(
     sue_beliefunit.set_l1_plan(planunit_shop(casa_str, star=casa_star))
     clean_str = "clean"
     clean_rope = sue_beliefunit.make_rope(casa_rope, clean_str)
-    sue_beliefunit.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
+    sue_beliefunit.set_plan_obj(planunit_shop(clean_str, pledge=True), casa_rope)
     x_idea_name = idea_format_00013_planunit_v0_0_0()
     planunit_format = create_idea_df(sue_beliefunit, x_idea_name)
     name_filename = f"{sue_str}_planunit_example_000.csv"

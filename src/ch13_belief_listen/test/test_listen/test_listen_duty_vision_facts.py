@@ -96,7 +96,7 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferenttask(
     )
 
     zia_vision = get_example_zia_speaker()
-    zia_vision.set_plan(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
+    zia_vision.set_plan_obj(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
     clean_planunit = zia_vision.get_plan_obj(a23_clean_rope())
     clean_planunit.laborunit.add_party(yao_str)
     save_vision_belief(
@@ -408,9 +408,9 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
 
 #     sue_speaker.add_voiceunit(yao_str)
 #     sue_speaker.set_voice_respect(20)
-#     sue_speaker.set_plan(planunit_shop(clean_str), situation_rope)
-#     sue_speaker.set_plan(planunit_shop(dirty_str), situation_rope)
-#     sue_speaker.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
+#     sue_speaker.set_plan_obj(planunit_shop(clean_str), situation_rope)
+#     sue_speaker.set_plan_obj(planunit_shop(dirty_str), situation_rope)
+#     sue_speaker.set_plan_obj(planunit_shop(sweep_str, pledge=True), casa_rope)
 #     sue_speaker.edit_plan_attr(
 #         sweep_rope, reason_context=situation_rope, reason_case=dirty_rope
 #     )
@@ -461,10 +461,10 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
 #     running_str = "running"
 #     running_rope = yao_duty.make_rope(fridge_rope, running_str)
 
-#     yao_duty.set_plan(planunit_shop(running_str), fridge_rope)
-#     yao_duty.set_plan(planunit_shop(clean_str), situation_rope)
-#     yao_duty.set_plan(planunit_shop(dirty_str), situation_rope)
-#     yao_duty.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
+#     yao_duty.set_plan_obj(planunit_shop(running_str), fridge_rope)
+#     yao_duty.set_plan_obj(planunit_shop(clean_str), situation_rope)
+#     yao_duty.set_plan_obj(planunit_shop(dirty_str), situation_rope)
+#     yao_duty.set_plan_obj(planunit_shop(sweep_str, pledge=True), casa_rope)
 #     yao_duty.edit_plan_attr(
 #         sweep_rope, reason_context=situation_rope, reason_case=dirty_rope
 #     )

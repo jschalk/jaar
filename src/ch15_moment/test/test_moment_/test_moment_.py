@@ -460,10 +460,10 @@ def test_MomentUnit__set_all_healer_dutys_Setsdutys(
     elpaso_healerunit = healerunit_shop({sue_str})
     elpaso_plan = planunit_shop(elpaso_str, healerunit=elpaso_healerunit)
 
-    sue_gut_belief.set_plan(dallas_plan, texas_rope)
-    sue_gut_belief.set_plan(elpaso_plan, texas_rope)
-    yao_gut_belief.set_plan(dallas_plan, texas_rope)
-    yao_gut_belief.set_plan(elpaso_plan, texas_rope)
+    sue_gut_belief.set_plan_obj(dallas_plan, texas_rope)
+    sue_gut_belief.set_plan_obj(elpaso_plan, texas_rope)
+    yao_gut_belief.set_plan_obj(dallas_plan, texas_rope)
+    yao_gut_belief.set_plan_obj(elpaso_plan, texas_rope)
 
     save_gut_file(x_moment_mstr_dir, sue_gut_belief)
     save_gut_file(x_moment_mstr_dir, yao_gut_belief)

@@ -27,7 +27,7 @@ def test_LessonFileHandler_Exists():
 def test_lessonfilehandler_shop_ReturnsObj():
     # ESTABLISH
     x_moment_mstr_dir = "src/ch15_moment/test/_util"
-    x_moment_label = "amy45"
+    a45_str = "amy45"
     sue_str = "Sue"
     x_knot = "/"
     x_fund_pool = 13000
@@ -38,7 +38,7 @@ def test_lessonfilehandler_shop_ReturnsObj():
     # WHEN
     x_lessonfilehandler = lessonfilehandler_shop(
         moment_mstr_dir=x_moment_mstr_dir,
-        moment_label=x_moment_label,
+        moment_label=a45_str,
         belief_name=sue_str,
         knot=x_knot,
         fund_pool=x_fund_pool,
@@ -49,14 +49,14 @@ def test_lessonfilehandler_shop_ReturnsObj():
 
     # THEN
     assert x_lessonfilehandler.moment_mstr_dir == x_moment_mstr_dir
-    assert x_lessonfilehandler.moment_label == x_moment_label
+    assert x_lessonfilehandler.moment_label == a45_str
     assert x_lessonfilehandler.belief_name == sue_str
     assert x_lessonfilehandler.knot == x_knot
     assert x_lessonfilehandler.fund_pool == x_fund_pool
     assert x_lessonfilehandler.fund_grain == x_fund_grain
     assert x_lessonfilehandler.respect_grain == x_respect_grain
     assert x_lessonfilehandler.mana_grain == x_mana_grain
-    sue_dir = create_belief_dir_path(x_moment_mstr_dir, x_moment_label, sue_str)
+    sue_dir = create_belief_dir_path(x_moment_mstr_dir, a45_str, sue_str)
     assert x_lessonfilehandler._atoms_dir == create_path(sue_dir, "atoms")
     assert x_lessonfilehandler._lessons_dir == create_path(sue_dir, "lessons")
 

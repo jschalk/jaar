@@ -71,7 +71,9 @@ def test_BeliefUnit_cashout_Sets_keeps_justified_WhenKeepIsLevelAboveProblem():
     texas_rope = sue_belief.make_l1_rope(texas_str)
     sue_belief.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
     ep_str = "El Paso"
-    sue_belief.set_plan(planunit_shop(ep_str, healerunit=yao_healerunit), texas_rope)
+    sue_belief.set_plan_obj(
+        planunit_shop(ep_str, healerunit=yao_healerunit), texas_rope
+    )
     assert sue_belief.keeps_justified is False
 
     # WHEN
@@ -88,7 +90,7 @@ def test_BeliefUnit_cashout_Sets_keeps_justified_WhenKeepIsLevelBelowProblem():
     texas_rope = sue_belief.make_l1_rope(texas_str)
     yao_healerunit = healerunit_shop({"Yao"})
     sue_belief.set_l1_plan(planunit_shop(texas_str, healerunit=yao_healerunit))
-    sue_belief.set_plan(planunit_shop("El Paso", problem_bool=True), texas_rope)
+    sue_belief.set_plan_obj(planunit_shop("El Paso", problem_bool=True), texas_rope)
     assert sue_belief.keeps_justified is False
 
     # WHEN
@@ -107,7 +109,7 @@ def test_BeliefUnit_cashout_RaisesErrorWhenKeepIsLevelBelowProblem():
     texas_plan = planunit_shop(texas_str, healerunit=yao_healerunit)
     sue_belief.set_l1_plan(texas_plan)
     elpaso_plan = planunit_shop("El Paso", problem_bool=True)
-    sue_belief.set_plan(elpaso_plan, texas_rope)
+    sue_belief.set_plan_obj(elpaso_plan, texas_rope)
     assert sue_belief.keeps_justified is False
 
     # WHEN
@@ -130,7 +132,7 @@ def test_BeliefUnit_cashout_Sets_keeps_justified_WhenTwoKeepsAre_OnTheEqualLine(
     texas_plan = planunit_shop(texas_str, healerunit=yao_healerunit, problem_bool=True)
     sue_belief.set_l1_plan(texas_plan)
     elpaso_plan = planunit_shop("El Paso", healerunit=yao_healerunit, problem_bool=True)
-    sue_belief.set_plan(elpaso_plan, texas_rope)
+    sue_belief.set_plan_obj(elpaso_plan, texas_rope)
     assert sue_belief.keeps_justified is False
 
     # WHEN
@@ -149,7 +151,7 @@ def test_BeliefUnit_get_plan_dict_RaisesErrorWhen_keeps_justified_IsFalse():
     texas_plan = planunit_shop(texas_str, healerunit=yao_healerunit, problem_bool=True)
     sue_belief.set_l1_plan(texas_plan)
     elpaso_plan = planunit_shop("El Paso", healerunit=yao_healerunit, problem_bool=True)
-    sue_belief.set_plan(elpaso_plan, texas_rope)
+    sue_belief.set_plan_obj(elpaso_plan, texas_rope)
     sue_belief.cashout()
     assert sue_belief.keeps_justified is False
 
