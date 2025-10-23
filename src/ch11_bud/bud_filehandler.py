@@ -41,7 +41,7 @@ from src.ch10_lesson.lesson_main import (
 )
 from src.ch11_bud._ref.ch11_path import (
     CELLNODE_FILENAME,
-    create_beliefpoint_path,
+    create_beliefinstant_path,
     create_beliefspark_path,
     create_buds_dir_path,
     create_budunit_json_path,
@@ -55,7 +55,7 @@ from src.ch11_bud._ref.ch11_semantic_types import (
     SparkInt,
     default_knot_if_None,
 )
-from src.ch11_bud.bud_main import BudUnit, EpochPoint, get_budunit_from_dict
+from src.ch11_bud.bud_main import BudUnit, EpochInstant, get_budunit_from_dict
 from src.ch11_bud.cell import CellUnit, cellunit_get_from_dict, cellunit_shop
 
 
@@ -226,7 +226,7 @@ def bud_file_exists(
     moment_mstr_dir: str,
     moment_label: str,
     belief_name: BeliefName,
-    x_bud_time: EpochPoint = None,
+    x_bud_time: EpochInstant = None,
 ) -> bool:
     bud_json_path = create_budunit_json_path(
         moment_mstr_dir, moment_label, belief_name, x_bud_time
@@ -238,7 +238,7 @@ def open_bud_file(
     moment_mstr_dir: str,
     moment_label: str,
     belief_name: BeliefName,
-    x_bud_time: EpochPoint = None,
+    x_bud_time: EpochInstant = None,
 ) -> BudUnit:
     bud_json_path = create_budunit_json_path(
         moment_mstr_dir, moment_label, belief_name, x_bud_time
@@ -247,57 +247,57 @@ def open_bud_file(
         return get_budunit_from_dict(open_json(bud_json_path))
 
 
-class _save_valid_beliefpoint_Exception(Exception):
+class _save_valid_beliefinstant_Exception(Exception):
     pass
 
 
-def save_beliefpoint_file(
+def save_beliefinstant_file(
     moment_mstr_dir: str,
-    x_beliefpoint: BeliefUnit,
-    x_bud_time: EpochPoint = None,
+    x_beliefinstant: BeliefUnit,
+    x_bud_time: EpochInstant = None,
 ):
-    x_beliefpoint.cashout()
-    if x_beliefpoint.rational is False:
-        raise _save_valid_beliefpoint_Exception(
-            "BeliefPoint could not be saved BeliefUnit.rational is False"
+    x_beliefinstant.cashout()
+    if x_beliefinstant.rational is False:
+        raise _save_valid_beliefinstant_Exception(
+            "BeliefInstant could not be saved BeliefUnit.rational is False"
         )
-    beliefpoint_json_path = create_beliefpoint_path(
+    beliefinstant_json_path = create_beliefinstant_path(
         moment_mstr_dir,
-        x_beliefpoint.moment_label,
-        x_beliefpoint.belief_name,
+        x_beliefinstant.moment_label,
+        x_beliefinstant.belief_name,
         x_bud_time,
     )
-    save_belief_file(beliefpoint_json_path, None, x_beliefpoint)
+    save_belief_file(beliefinstant_json_path, None, x_beliefinstant)
 
 
-def beliefpoint_file_exists(
+def beliefinstant_file_exists(
     moment_mstr_dir: str,
     moment_label: str,
     belief_name: BeliefName,
-    x_bud_time: EpochPoint = None,
+    x_bud_time: EpochInstant = None,
 ) -> bool:
-    beliefpoint_json_path = create_beliefpoint_path(
+    beliefinstant_json_path = create_beliefinstant_path(
         moment_mstr_dir, moment_label, belief_name, x_bud_time
     )
-    return os_path_exists(beliefpoint_json_path)
+    return os_path_exists(beliefinstant_json_path)
 
 
-def open_beliefpoint_file(
+def open_beliefinstant_file(
     moment_mstr_dir: str,
     moment_label: str,
     belief_name: BeliefName,
-    x_bud_time: EpochPoint = None,
+    x_bud_time: EpochInstant = None,
 ) -> bool:
-    beliefpoint_json_path = create_beliefpoint_path(
+    beliefinstant_json_path = create_beliefinstant_path(
         moment_mstr_dir, moment_label, belief_name, x_bud_time
     )
-    # if self.beliefpoint_file_exists(x_bud_time):
-    return open_belief_file(beliefpoint_json_path)
+    # if self.beliefinstant_file_exists(x_bud_time):
+    return open_belief_file(beliefinstant_json_path)
 
 
-def get_timepoint_dirs(
+def get_epochinstant_dirs(
     moment_mstr_dir: str, moment_label: str, belief_name: BeliefName
-) -> list[EpochPoint]:
+) -> list[EpochInstant]:
     buds_dir = create_buds_dir_path(moment_mstr_dir, moment_label, belief_name)
     x_dict = get_dir_file_strs(buds_dir, include_dirs=True, include_files=False)
-    return [int(x_timepoint) for x_timepoint in sorted(list(x_dict.keys()))]
+    return [int(x_epochinstant) for x_epochinstant in sorted(list(x_dict.keys()))]

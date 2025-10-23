@@ -12,8 +12,8 @@ from src.ch06_plan.plan import (
 )
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch08_epoch._ref.ch08_semantic_types import (
+    EpochInstant,
     EpochLabel,
-    EpochPoint,
     KnotTerm,
     LabelTerm,
     RopeTerm,
@@ -438,8 +438,8 @@ def get_epoch_min_difference(epoch_config0: dict, epoch_config1: dict) -> int:
 
 
 @dataclass
-class BeliefEpochPoint:
-    """Given belief, epoch_rope, and EpochPoint, returns time technology attrs
+class BeliefEpochInstant:
+    """Given belief, epoch_rope, and EpochInstant, returns time technology attrs
     _c400_number: count of 400 year cycles
     _c100_count: count of 100 year cycles after _c400_number years removed
     _hour
@@ -455,7 +455,7 @@ class BeliefEpochPoint:
 
     x_beliefunit: BeliefUnit = None
     epoch_label: LabelTerm = None
-    x_min: EpochPoint = None
+    x_min: EpochInstant = None
     # calculated fields
     _epoch_plan: PlanUnit = None
     _weekday: str = None
@@ -573,8 +573,10 @@ class BeliefEpochPoint:
         return x_str
 
 
-def beliefepochpoint_shop(x_beliefunit: BeliefUnit, epoch_label: LabelTerm, x_min: int):
-    return BeliefEpochPoint(x_beliefunit, epoch_label, x_min=x_min)
+def beliefEpochInstant_shop(
+    x_beliefunit: BeliefUnit, epoch_label: LabelTerm, x_min: int
+):
+    return BeliefEpochInstant(x_beliefunit, epoch_label, x_min=x_min)
 
 
 def epoch_config_path() -> str:

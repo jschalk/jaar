@@ -12,7 +12,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_planunit_exists,
     belief_planunit_get_obj,
 )
-from src.ch08_epoch._ref.ch08_semantic_types import EpochPoint, LabelTerm, RopeTerm
+from src.ch08_epoch._ref.ch08_semantic_types import EpochInstant, LabelTerm, RopeTerm
 from src.ch08_epoch.epoch_main import (
     get_day_rope,
     get_epoch_rope,

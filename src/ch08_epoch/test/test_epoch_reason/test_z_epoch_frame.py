@@ -341,10 +341,10 @@ def test_add_frame_to_caseunit_SetsAttr_Scenario9_adds_epoch_frame_NoWrap_monthd
 
     print(f"{monthday_case.reason_divisor=}")
     x_epoch_frame_min = 500
-    geo_5_epochpoint = 43200
-    geo_8_epochpoint = 47520
-    assert monthday_case.reason_lower == geo_5_epochpoint
-    assert monthday_case.reason_upper == geo_8_epochpoint
+    geo_5_EpochInstant = 43200
+    geo_8_EpochInstant = 47520
+    assert monthday_case.reason_lower == geo_5_EpochInstant
+    assert monthday_case.reason_upper == geo_8_EpochInstant
 
     # WHEN
     add_frame_to_caseunit(
@@ -356,10 +356,10 @@ def test_add_frame_to_caseunit_SetsAttr_Scenario9_adds_epoch_frame_NoWrap_monthd
     )
 
     # THEN
-    assert monthday_case.reason_lower != geo_5_epochpoint
-    assert monthday_case.reason_upper != geo_8_epochpoint
-    assert monthday_case.reason_lower == geo_5_epochpoint + x_epoch_frame_min
-    assert monthday_case.reason_upper == geo_8_epochpoint + x_epoch_frame_min
+    assert monthday_case.reason_lower != geo_5_EpochInstant
+    assert monthday_case.reason_upper != geo_8_EpochInstant
+    assert monthday_case.reason_lower == geo_5_EpochInstant + x_epoch_frame_min
+    assert monthday_case.reason_upper == geo_8_EpochInstant + x_epoch_frame_min
 
 
 def test_add_frame_to_caseunit_SetsAttr_Scenario10_adds_epoch_frame_Wraps_monthday():
@@ -380,10 +380,10 @@ def test_add_frame_to_caseunit_SetsAttr_Scenario10_adds_epoch_frame_Wraps_monthd
     monthday_case = belief_plan_reason_caseunit_get_obj(bob_belief, mop_monthday_args)
     year_plan = belief_planunit_get_obj(bob_belief, {kw.plan_rope: wx.five_year_rope})
     x_epoch_frame_min = 5000000
-    geo_5_epochpoint = 43200
-    geo_8_epochpoint = 47520
-    assert monthday_case.reason_lower == geo_5_epochpoint
-    assert monthday_case.reason_upper == geo_8_epochpoint
+    geo_5_EpochInstant = 43200
+    geo_8_EpochInstant = 47520
+    assert monthday_case.reason_lower == geo_5_EpochInstant
+    assert monthday_case.reason_upper == geo_8_EpochInstant
 
     # WHEN
     add_frame_to_caseunit(
@@ -395,12 +395,16 @@ def test_add_frame_to_caseunit_SetsAttr_Scenario10_adds_epoch_frame_Wraps_monthd
     )
 
     # THEN
-    assert monthday_case.reason_lower != geo_5_epochpoint
-    assert monthday_case.reason_upper != geo_8_epochpoint
-    print(f"{(geo_5_epochpoint + x_epoch_frame_min) % 525600=}")
-    print(f"{(geo_8_epochpoint + x_epoch_frame_min) % 525600=}")
-    assert monthday_case.reason_lower == (geo_5_epochpoint + x_epoch_frame_min) % 525600
-    assert monthday_case.reason_upper == (geo_8_epochpoint + x_epoch_frame_min) % 525600
+    assert monthday_case.reason_lower != geo_5_EpochInstant
+    assert monthday_case.reason_upper != geo_8_EpochInstant
+    print(f"{(geo_5_EpochInstant + x_epoch_frame_min) % 525600=}")
+    print(f"{(geo_8_EpochInstant + x_epoch_frame_min) % 525600=}")
+    assert (
+        monthday_case.reason_lower == (geo_5_EpochInstant + x_epoch_frame_min) % 525600
+    )
+    assert (
+        monthday_case.reason_upper == (geo_8_EpochInstant + x_epoch_frame_min) % 525600
+    )
 
 
 def test_add_frame_to_caseunit_SetsAttr_Scenario11_adds_epoch_frame_NoWrap_monthly():
@@ -426,10 +430,10 @@ def test_add_frame_to_caseunit_SetsAttr_Scenario11_adds_epoch_frame_NoWrap_month
 
     print(f"{geo_case.reason_divisor=}")
     x_epoch_frame_min = 500
-    geo_5_epochpoint = 43200
-    geo_8_epochpoint = 47520
-    assert geo_case.reason_lower == geo_5_epochpoint
-    assert geo_case.reason_upper == geo_8_epochpoint
+    geo_5_EpochInstant = 43200
+    geo_8_EpochInstant = 47520
+    assert geo_case.reason_lower == geo_5_EpochInstant
+    assert geo_case.reason_upper == geo_8_EpochInstant
 
     # WHEN
     add_frame_to_caseunit(
@@ -437,10 +441,10 @@ def test_add_frame_to_caseunit_SetsAttr_Scenario11_adds_epoch_frame_NoWrap_month
     )
 
     # THEN
-    assert geo_case.reason_lower != geo_5_epochpoint
-    assert geo_case.reason_upper != geo_8_epochpoint
-    assert geo_case.reason_lower == geo_5_epochpoint + x_epoch_frame_min
-    assert geo_case.reason_upper == geo_8_epochpoint + x_epoch_frame_min
+    assert geo_case.reason_lower != geo_5_EpochInstant
+    assert geo_case.reason_upper != geo_8_EpochInstant
+    assert geo_case.reason_lower == geo_5_EpochInstant + x_epoch_frame_min
+    assert geo_case.reason_upper == geo_8_EpochInstant + x_epoch_frame_min
 
 
 def test_add_frame_to_caseunit_SetsAttr_Scenario12_adds_epoch_frame_Wraps_monthly():
@@ -464,10 +468,10 @@ def test_add_frame_to_caseunit_SetsAttr_Scenario12_adds_epoch_frame_Wraps_monthl
     geo_case = belief_plan_reason_caseunit_get_obj(bob_belief, geo_month_args)
     year_plan = belief_planunit_get_obj(bob_belief, {kw.plan_rope: wx.five_year_rope})
     x_epoch_frame_min = 5000000
-    geo_5_epochpoint = 43200
-    geo_8_epochpoint = 47520
-    assert geo_case.reason_lower == geo_5_epochpoint
-    assert geo_case.reason_upper == geo_8_epochpoint
+    geo_5_EpochInstant = 43200
+    geo_8_EpochInstant = 47520
+    assert geo_case.reason_lower == geo_5_EpochInstant
+    assert geo_case.reason_upper == geo_8_EpochInstant
 
     # WHEN
     add_frame_to_caseunit(
@@ -475,12 +479,12 @@ def test_add_frame_to_caseunit_SetsAttr_Scenario12_adds_epoch_frame_Wraps_monthl
     )
 
     # THEN
-    assert geo_case.reason_lower != geo_5_epochpoint
-    assert geo_case.reason_upper != geo_8_epochpoint
-    print(f"{(geo_5_epochpoint + x_epoch_frame_min) % 525600=}")
-    print(f"{(geo_8_epochpoint + x_epoch_frame_min) % 525600=}")
-    assert geo_case.reason_lower == (geo_5_epochpoint + x_epoch_frame_min) % 525600
-    assert geo_case.reason_upper == (geo_8_epochpoint + x_epoch_frame_min) % 525600
+    assert geo_case.reason_lower != geo_5_EpochInstant
+    assert geo_case.reason_upper != geo_8_EpochInstant
+    print(f"{(geo_5_EpochInstant + x_epoch_frame_min) % 525600=}")
+    print(f"{(geo_8_EpochInstant + x_epoch_frame_min) % 525600=}")
+    assert geo_case.reason_lower == (geo_5_EpochInstant + x_epoch_frame_min) % 525600
+    assert geo_case.reason_upper == (geo_8_EpochInstant + x_epoch_frame_min) % 525600
 
 
 def test_add_frame_to_caseunit_SetsAttr_Scenario13_adds_epoch_frame_NoWrap_range():

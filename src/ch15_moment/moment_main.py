@@ -5,7 +5,7 @@ from src.ch01_py.file_toolbox import create_path, get_dir_file_strs, open_json, 
 from src.ch02_allot.allot import default_grain_num_if_None
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch08_epoch.epoch_main import (
-    EpochPoint,
+    EpochInstant,
     EpochUnit,
     add_epoch_planunit,
     epochunit_shop,
@@ -88,13 +88,14 @@ class MomentUnit:
     epoch: EpochUnit = None
     beliefbudhistorys: dict[BeliefName, BeliefBudHistory] = None
     paybook: TranBook = None
-    offi_times: set[EpochPoint] = None
+    offi_times: set[EpochInstant] = None
     knot: KnotTerm = None
     fund_grain: FundGrain = None
     respect_grain: RespectGrain = None
     mana_grain: ManaGrain = None
     job_listen_rotations: int = None
-    offi_time_max: EpochPoint = None
+    # calculated fields
+    offi_time_max: EpochInstant = None
     moment_dir: str = None
     beliefs_dir: str = None
     lessons_dir: str = None
@@ -201,7 +202,7 @@ class MomentUnit:
     def add_budunit(
         self,
         belief_name: BeliefName,
-        bud_time: EpochPoint,
+        bud_time: EpochInstant,
         quota: int,
         allow_prev_to_offi_time_max_entry: bool = False,
         celldepth: int = None,
@@ -215,7 +216,7 @@ class MomentUnit:
         x_beliefbudhistory = self.get_beliefbudhistory(belief_name)
         x_beliefbudhistory.add_bud(bud_time, quota, celldepth)
 
-    def get_budunit(self, belief_name: BeliefName, bud_time: EpochPoint) -> BudUnit:
+    def get_budunit(self, belief_name: BeliefName, bud_time: EpochInstant) -> BudUnit:
         if not self.get_beliefbudhistory(belief_name):
             return None
         x_beliefbudhistory = self.get_beliefbudhistory(belief_name)
@@ -245,7 +246,7 @@ class MomentUnit:
             for x_bud in self.beliefbudhistorys.values()
         }
 
-    def get_beliefbudhistorys_bud_times(self) -> set[EpochPoint]:
+    def get_beliefbudhistorys_bud_times(self) -> set[EpochInstant]:
         all_budunit_bud_times = set()
         for x_beliefbudhistory in self.beliefbudhistorys.values():
             all_budunit_bud_times.update(x_beliefbudhistory.get_bud_times())
@@ -262,10 +263,10 @@ class MomentUnit:
         self,
         belief_name: BeliefName,
         voice_name: VoiceName,
-        tran_time: EpochPoint,
+        tran_time: EpochInstant,
         amount: FundNum,
-        blocked_tran_times: set[EpochPoint] = None,
-        offi_time_max: EpochPoint = None,
+        blocked_tran_times: set[EpochInstant] = None,
+        offi_time_max: EpochInstant = None,
     ) -> None:
         self.paybook.add_tranunit(
             belief_name=belief_name,
@@ -277,26 +278,26 @@ class MomentUnit:
         )
 
     def paypurchase_exists(
-        self, src: BeliefName, dst: VoiceName, x_tran_time: EpochPoint
+        self, src: BeliefName, dst: VoiceName, x_tran_time: EpochInstant
     ) -> bool:
         return self.paybook.tranunit_exists(src, dst, x_tran_time)
 
     def get_paypurchase(
-        self, src: BeliefName, dst: VoiceName, x_tran_time: EpochPoint
+        self, src: BeliefName, dst: VoiceName, x_tran_time: EpochInstant
     ) -> TranUnit:
         return self.paybook.get_tranunit(src, dst, x_tran_time)
 
     def del_paypurchase(
-        self, src: BeliefName, dst: VoiceName, x_tran_time: EpochPoint
+        self, src: BeliefName, dst: VoiceName, x_tran_time: EpochInstant
     ) -> TranUnit:
         return self.paybook.del_tranunit(src, dst, x_tran_time)
 
-    # def set_offi_time(self, offi_time: EpochPoint):
+    # def set_offi_time(self, offi_time: EpochInstant):
     #     self.offi_time = offi_time
     #     if self.offi_time_max < self.offi_time:
     #         self.offi_time_max = self.offi_time
 
-    def set_offi_time_max(self, x_offi_time_max: EpochPoint):
+    def set_offi_time_max(self, x_offi_time_max: EpochInstant):
         x_tran_times = self.paybook.get_tran_times()
         if x_tran_times != set() and max(x_tran_times) >= x_offi_time_max:
             exception_str = f"Cannot set offi_time_max {x_offi_time_max}, paypurchase with greater tran_time exists"
@@ -307,7 +308,7 @@ class MomentUnit:
         self.offi_time_max = x_offi_time_max
 
     # def set_offi_time(
-    #     self, offi_time: EpochPoint, offi_time_max: EpochPoint
+    #     self, offi_time: EpochInstant, offi_time_max: EpochInstant
     # ):
     #     self.set_offi_time(offi_time)
     #     self.set_offi_time_max(_offi_time_max)
@@ -325,7 +326,7 @@ class MomentUnit:
 
     def create_buds_root_cells(
         self,
-        ote1_dict: dict[BeliefName, dict[EpochPoint, SparkInt]],
+        ote1_dict: dict[BeliefName, dict[EpochInstant, SparkInt]],
     ) -> None:
         for belief_name, beliefbudhistory in self.beliefbudhistorys.items():
             for bud_time in beliefbudhistory.buds.keys():
@@ -334,8 +335,8 @@ class MomentUnit:
     def _create_bud_root_cell(
         self,
         belief_name: BeliefName,
-        ote1_dict: dict[BeliefName, dict[EpochPoint, SparkInt]],
-        bud_time: EpochPoint,
+        ote1_dict: dict[BeliefName, dict[EpochInstant, SparkInt]],
+        bud_time: EpochInstant,
     ) -> None:
         past_spark_num = _get_ote1_max_past_spark_num(belief_name, ote1_dict, bud_time)
         budunit = self.get_budunit(belief_name, bud_time)
@@ -375,17 +376,17 @@ def _get_ote1_max_past_spark_num(
     ote1_belief_dict = ote1_dict.get(belief_name)
     if not ote1_belief_dict:
         return None
-    spark_timepoints = set(ote1_belief_dict.keys())
-    if past_timepoints := {tp for tp in spark_timepoints if int(tp) <= bud_time}:
-        max_past_timepoint = max(past_timepoints)
-        return ote1_belief_dict.get(max_past_timepoint)
+    spark_epochinstants = set(ote1_belief_dict.keys())
+    if past_epochinstants := {tp for tp in spark_epochinstants if int(tp) <= bud_time}:
+        max_past_epochinstant = max(past_epochinstants)
+        return ote1_belief_dict.get(max_past_epochinstant)
 
 
 def momentunit_shop(
     moment_label: MomentLabel,
     moment_mstr_dir: str,
     epoch: EpochUnit = None,
-    offi_times: set[EpochPoint] = None,
+    offi_times: set[EpochInstant] = None,
     knot: KnotTerm = None,
     fund_grain: float = None,
     respect_grain: float = None,

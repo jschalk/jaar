@@ -8,7 +8,7 @@
   "Danceday": {"init_chapter": "ch08"}, 
   "Eastday": {"init_chapter": "ch08"}, 
   "EpochLabel": {"init_chapter": "ch08", "semantic_type": "str"}, 
-  "EpochPoint": {"init_chapter": "ch08", "semantic_type": "int"}, 
+  "EpochInstant": {"init_chapter": "ch08", "semantic_type": "int"}, 
   "Event": {"init_chapter": "ch12"}, 
   "FaceName": {"init_chapter": "ch10", "semantic_type": "str"}, 
   "FirstLabel": {"init_chapter": "ch02", "semantic_type": "str"}, 

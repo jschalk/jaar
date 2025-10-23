@@ -554,7 +554,7 @@ def test_get_allowed_class_types_ReturnsObj():
         kw.RopeTerm,
         "float",
         "bool",
-        kw.EpochPoint,
+        kw.EpochInstant,
     }
 
     # WHEN / THEN
