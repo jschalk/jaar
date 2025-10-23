@@ -3,13 +3,13 @@ from pandas import DataFrame
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_py.db_toolbox import db_table_exists, get_row_count
 from src.ch01_py.file_toolbox import count_dirs_files, create_path, save_file
-from src.ch10_lesson._ref.ch10_path import (
+from src.ch09_belief_lesson._ref.ch09_path import (
     create_gut_path,
     create_job_path,
     create_moment_json_path,
 )
-from src.ch10_lesson.lesson_filehandler import open_gut_file
-from src.ch11_bud._ref.ch11_path import (
+from src.ch09_belief_lesson.lesson_filehandler import open_gut_file
+from src.ch10_bud._ref.ch10_path import (
     create_spark_all_lesson_path,
     create_spark_expressed_lesson_path as expressed_path,
 )

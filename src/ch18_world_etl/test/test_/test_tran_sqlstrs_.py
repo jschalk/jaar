@@ -5,7 +5,7 @@ from src.ch01_py.db_toolbox import (
     get_table_columns,
     required_columns_exist,
 )
-from src.ch09_belief_atom.atom_config import get_delete_key_name
+from src.ch08_belief_atom.atom_config import get_delete_key_name
 from src.ch17_idea.idea_config import (
     get_idea_config_dict,
     get_idea_numbers,

@@ -1,5 +1,5 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_epoch.epoch_main import (
+from src.ch14_epoch.epoch_main import (
     BeliefEpochInstant,
     add_epoch_planunit,
     beliefEpochInstant_shop,

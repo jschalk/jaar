@@ -1,0 +1,85 @@
+from src.ch24_belief_viewer.belief_viewer_app import get_belief_viewer_template
+from src.ref.keywords import Ch24Keywords as kw
+
+
+def test_get_belief_viewer_template_ReturnsObj():
+    # ESTABLISH / WHEN
+    template_str = get_belief_viewer_template()
+
+    # THEN
+    assert template_str
+    expected_strs_in_template = {
+        kw.plan_active_hx,
+        kw.plan_active,
+        kw.all_voice_cred,
+        kw.all_voice_debt,
+        kw.awardheirs,
+        kw.awardlines,
+        kw.task,
+        kw.descendant_pledge_count,
+        kw.factheirs,
+        kw.fund_cease,
+        kw.fund_onset,
+        kw.fund_ratio,
+        kw.gogo_calc,
+        # kw.healerunit_ratio,
+        # kw.is_expanded,
+        kw.laborheir,
+        # kw.tree_level,
+        # kw.range_evaluated,
+        kw.reasonheirs,
+        kw.stop_calc,
+        kw.uid,
+        kw.addin,
+        kw.awardunits,
+        kw.begin,
+        kw.moment_label,
+        kw.close,
+        kw.denom,
+        kw.factunits,
+        kw.fund_grain,
+        kw.plan_fund_total,
+        kw.gogo_want,
+        # kw.healerunit,
+        # kw.knot,
+        kw.laborunit,
+        kw.morph,
+        kw.numor,
+        kw.parent_rope,
+        kw.voices,
+        kw.plan_label,
+        kw.planroot,
+        # kw.problem_bool,
+        kw.reasonunits,
+        kw.star,
+        kw.stop_want,
+        kw.pledge,
+        kw.voice_cred_lumen,
+        kw.voice_debt_lumen,
+        # f"voice{kw.memberships}",
+        f"voice_{kw.credor_pool}",
+        f"voice_{kw.debtor_pool}",
+        f"voice_{kw.irrational_voice_debt_lumen}",
+        f"voice_{kw.inallocable_voice_debt_lumen}",
+        f"voice_{kw.fund_give}",
+        f"voice_{kw.fund_take}",
+        f"voice_{kw.fund_agenda_give}",
+        f"voice_{kw.fund_agenda_take}",
+        f"voice_{kw.fund_agenda_ratio_give}",
+        f"voice_{kw.fund_agenda_ratio_take}",
+        f"voice_membership_{kw.group_title}",
+        f"voice_membership_{kw.group_cred_lumen}",
+        f"voice_membership_{kw.group_debt_lumen}",
+        f"voice_membership_{kw.credor_pool}",
+        f"voice_membership_{kw.debtor_pool}",
+        f"voice_membership_{kw.fund_agenda_give}",
+        f"voice_membership_{kw.fund_agenda_ratio_give}",
+        f"voice_membership_{kw.fund_agenda_ratio_take}",
+        f"voice_membership_{kw.fund_agenda_take}",
+        f"voice_membership_{kw.fund_give}",
+        f"voice_membership_{kw.fund_take}",
+    }
+
+    for expected_str in sorted(list(expected_strs_in_template)):
+        print(f"{expected_str=}")
+        assert template_str.find(expected_str) > 0

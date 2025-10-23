@@ -8,13 +8,13 @@ from src.ch01_py.dict_toolbox import (
     get_positional_dict,
 )
 from src.ch07_belief_logic.belief_main import BeliefUnit
-from src.ch08_epoch.epoch_main import epochunit_shop
-from src.ch09_belief_atom.atom_main import BeliefAtom, atomrow_shop
-from src.ch10_lesson.delta import (
+from src.ch08_belief_atom.atom_main import BeliefAtom, atomrow_shop
+from src.ch09_belief_lesson.delta import (
     BeliefDelta,
     beliefdelta_shop,
     get_dimens_cruds_beliefdelta,
 )
+from src.ch14_epoch.epoch_main import epochunit_shop
 from src.ch15_moment.moment_main import MomentUnit, momentunit_shop
 from src.ch17_idea._ref.ch17_semantic_types import BeliefName, MomentLabel
 from src.ch17_idea.idea_config import get_idea_format_headers, get_idearef_from_file

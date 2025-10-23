@@ -1,10 +1,10 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import save_json
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_epoch.epoch_main import epochunit_shop
-from src.ch08_epoch.test._util.ch08_examples import get_five_config
-from src.ch10_lesson._ref.ch10_path import create_moment_json_path
-from src.ch10_lesson.lesson_filehandler import open_gut_file, save_gut_file
+from src.ch09_belief_lesson._ref.ch09_path import create_moment_json_path
+from src.ch09_belief_lesson.lesson_filehandler import open_gut_file, save_gut_file
+from src.ch14_epoch.epoch_main import epochunit_shop
+from src.ch14_epoch.test._util.ch14_examples import get_five_config
 from src.ch15_moment.moment_main import momentunit_shop
 from src.ch18_world_etl.test._util.ch18_env import get_temp_dir, temp_dir_setup
 from src.ch18_world_etl.transformers import add_moment_epoch_to_guts

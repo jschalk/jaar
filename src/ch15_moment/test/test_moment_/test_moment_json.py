@@ -1,8 +1,8 @@
 from src.ch01_py.file_toolbox import create_path, save_json
 from src.ch02_allot.allot import default_grain_num_if_None
 from src.ch04_rope.rope import default_knot_if_None
-from src.ch08_epoch.epoch_main import get_default_epoch_config_dict
-from src.ch10_lesson._ref.ch10_path import create_moment_json_path
+from src.ch09_belief_lesson._ref.ch09_path import create_moment_json_path
+from src.ch14_epoch.epoch_main import get_default_epoch_config_dict
 from src.ch15_moment.moment_main import (
     get_default_path_momentunit,
     get_momentunit_from_dict,

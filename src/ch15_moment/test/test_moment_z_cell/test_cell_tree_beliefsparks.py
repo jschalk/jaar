@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import open_json
-from src.ch11_bud._ref.ch11_path import create_beliefspark_path, create_cell_json_path
-from src.ch11_bud.bud_filehandler import (
+from src.ch10_bud._ref.ch10_path import create_beliefspark_path, create_cell_json_path
+from src.ch10_bud.bud_filehandler import (
     cellunit_add_json_file,
     save_arbitrary_beliefspark,
 )

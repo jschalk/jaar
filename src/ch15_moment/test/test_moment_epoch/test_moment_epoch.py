@@ -1,5 +1,5 @@
-from src.ch08_epoch.epoch_main import epochunit_shop
-from src.ch08_epoch.test._util.ch08_examples import get_creg_config
+from src.ch14_epoch.epoch_main import epochunit_shop
+from src.ch14_epoch.test._util.ch14_examples import get_creg_config
 from src.ch15_moment.moment_epoch import get_moment_beliefEpochInstant
 from src.ch15_moment.moment_main import momentunit_shop
 from src.ch15_moment.test._util.ch15_env import get_temp_dir
