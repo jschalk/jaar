@@ -37,7 +37,6 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():
     assert belief_dict is not None
     assert str(type(belief_dict)) == "<class 'dict'>"
     assert belief_dict[kw.belief_name] == yao_belief.belief_name
-    assert belief_dict[kw.moment_label] == yao_belief.moment_label
     assert belief_dict[kw.tally] == yao_belief.tally
     assert belief_dict[kw.tally] == belief_tally
     assert belief_dict[kw.fund_pool] == yao_fund_pool
@@ -52,7 +51,6 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():
 
     x_planroot = yao_belief.planroot
     planroot_dict = belief_dict[kw.planroot]
-    assert x_planroot.plan_label == yao_belief.moment_label
     assert planroot_dict[kw.plan_label] == x_planroot.plan_label
     assert planroot_dict[kw.star] == x_planroot.star
     assert len(planroot_dict[kw.kids]) == len(x_planroot.kids)
@@ -161,7 +159,6 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario4_planunit_WithLevels():
     # THEN
     assert belief_dict is not None
     assert belief_dict[kw.belief_name] == zia_belief.belief_name
-    assert belief_dict[kw.moment_label] == zia_belief.moment_label
     assert belief_dict[kw.tally] == zia_belief.tally
     assert belief_dict[kw.fund_pool] == zia_belief.fund_pool
     assert belief_dict[kw.fund_grain] == zia_belief.fund_grain
@@ -224,7 +221,6 @@ def test_BeliefUnit_to_dict_ReturnsJSON_Scenario5_BigExample():
 
     # THEN
     assert belief_dict[kw.belief_name] == yao_belief.belief_name
-    assert belief_dict[kw.moment_label] == yao_belief.moment_label
     assert belief_dict[kw.tally] == yao_belief.tally
     assert belief_dict[kw.max_tree_traverse] == 2
     assert belief_dict[kw.max_tree_traverse] == yao_belief.max_tree_traverse
@@ -264,7 +260,6 @@ def test_get_beliefunit_from_dict_ReturnsPlanRoot():
     # ESTABLISH
     zia_belief = get_beliefunit_x1_3levels_1reason_1facts()
     zia_belief.set_max_tree_traverse(23)
-    # root_plan = zia_belief.get_plan_obj(zia_belief.get_plan_obj(zia_belief.moment_label))
     root_plan = zia_belief.planroot
     zia_gogo_want = 75
     zia_stop_want = 77
@@ -335,7 +330,7 @@ def test_get_beliefunit_from_dict_ReturnsObj_Scenario7_planroot_knot_IsApplied()
     slash_str = "/"
     run_str = "runners"
     sue_belief = beliefunit_shop("Sue", knot=slash_str)
-    root_rope = to_rope(sue_belief.moment_label, slash_str)
+    root_rope = sue_belief.planroot.get_plan_rope()
     hr_number_str = "hr_number"
     hr_number_rope = sue_belief.make_l1_rope(hr_number_str)
     sue_belief.add_plan(hr_number_rope)

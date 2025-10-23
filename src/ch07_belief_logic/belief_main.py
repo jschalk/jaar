@@ -1388,17 +1388,16 @@ reason_case:    {reason_case}"""
         """Returns dict that is serializable to JSON."""
 
         x_dict = {
-            "voices": self.get_voiceunits_dict(),
-            "tally": self.tally,
-            "fund_pool": self.fund_pool,
-            "fund_grain": self.fund_grain,
-            "respect_grain": self.respect_grain,
-            "mana_grain": self.mana_grain,
             "belief_name": self.belief_name,
-            "moment_label": self.moment_label,
-            "max_tree_traverse": self.max_tree_traverse,
+            "fund_grain": self.fund_grain,
+            "fund_pool": self.fund_pool,
             "knot": self.knot,
+            "mana_grain": self.mana_grain,
+            "max_tree_traverse": self.max_tree_traverse,
             "planroot": self.planroot.to_dict(),
+            "respect_grain": self.respect_grain,
+            "tally": self.tally,
+            "voices": self.get_voiceunits_dict(),
         }
         if self.credor_respect is not None:
             x_dict["credor_respect"] = self.credor_respect
@@ -1427,7 +1426,7 @@ reason_case:    {reason_case}"""
 
 def beliefunit_shop(
     belief_name: BeliefName = None,
-    moment_label: MomentLabel = None,
+    moment_label: LabelTerm = None,
     knot: KnotTerm = None,
     fund_pool: FundNum = None,
     fund_grain: FundGrain = None,
@@ -1436,11 +1435,13 @@ def beliefunit_shop(
     tally: float = None,
 ) -> BeliefUnit:
     belief_name = "" if belief_name is None else belief_name
-    moment_label = get_default_first_label() if moment_label is None else moment_label
+    root_plan_label = (
+        get_default_first_label() if moment_label is None else moment_label
+    )
     x_belief = BeliefUnit(
         belief_name=belief_name,
         tally=get_1_if_None(tally),
-        moment_label=moment_label,
+        moment_label=root_plan_label,
         voices=get_empty_dict_if_None(),
         groupunits={},
         knot=default_knot_if_None(knot),
@@ -1461,7 +1462,7 @@ def beliefunit_shop(
         range_inheritors={},
     )
     x_belief.planroot = planunit_shop(
-        plan_label=x_belief.moment_label,
+        plan_label=root_plan_label,
         uid=1,
         tree_level=0,
         knot=x_belief.knot,
@@ -1480,8 +1481,7 @@ def get_beliefunit_from_dict(belief_dict: dict) -> BeliefUnit:
     x_belief.set_max_tree_traverse(
         obj_from_belief_dict(belief_dict, "max_tree_traverse")
     )
-    x_belief.moment_label = obj_from_belief_dict(belief_dict, "moment_label")
-    x_belief.planroot.plan_label = obj_from_belief_dict(belief_dict, "moment_label")
+    x_belief.moment_label = belief_dict.get("planroot").get("plan_label")
     belief_knot = obj_from_belief_dict(belief_dict, "knot")
     x_belief.knot = default_knot_if_None(belief_knot)
     x_belief.fund_pool = validate_pool_num(
