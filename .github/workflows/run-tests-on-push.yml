@@ -25,7 +25,6 @@ jobs:
           python -m pip install flask
           python -m pip install flask_cors
           python -m pip install compact_json
-          python -m pip install collections
       - name: Execute tests and generate report
         id: pytest
         run: |

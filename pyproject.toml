@@ -8,7 +8,6 @@ dependencies = [
   "pandas",
   "plotly",
   "openpyxl",
-  "collections",
   "sqlalchemy",
   "xlsxwriter",
 ]
