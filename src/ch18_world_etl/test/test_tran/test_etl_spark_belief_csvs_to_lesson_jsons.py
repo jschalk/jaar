@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import open_file, open_json, save_file
-from src.ch10_lesson.lesson_main import get_lessonunit_from_dict, lessonunit_shop
-from src.ch11_bud._ref.ch11_path import (
+from src.ch09_belief_lesson.lesson_main import get_lessonunit_from_dict, lessonunit_shop
+from src.ch10_bud._ref.ch10_path import (
     create_belief_spark_dir_path as belief_spark_dir,
     create_spark_all_lesson_path as all_lesson_path,
 )

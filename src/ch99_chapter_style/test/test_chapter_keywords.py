@@ -266,8 +266,11 @@ def test_Chapters_KeywordEnumClassesAreCorrectlyTested():
         assert ChKeywordsClass
         expected_enum_keys = set(ExpectedEnumClass.__dict__.keys())
         current_enum_keys = set(ChKeywordsClass.__dict__.keys())
-        # print(expected_enum_keys.difference(current_enum_keys))
-        assert not expected_enum_keys.difference(current_enum_keys)
+        non_found_expected_enum_keys = expected_enum_keys.difference(current_enum_keys)
+        assertion_failure_str = (
+            f"These were expected but not found: {non_found_expected_enum_keys}"
+        )
+        assert not non_found_expected_enum_keys, assertion_failure_str
         expected_dunder_str_func = """    def __str__(self):
         return self.value
 """

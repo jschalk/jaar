@@ -1,6 +1,6 @@
 from os import getcwd as os_getcwd
 from src.ch01_py.file_toolbox import create_path
-from src.ch09_belief_atom.atom_config import get_allowed_class_types
+from src.ch08_belief_atom.atom_config import get_allowed_class_types
 from src.ch15_moment.moment_config import (
     get_moment_args_class_types,
     get_moment_args_dimen_mapping,

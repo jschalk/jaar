@@ -8,7 +8,7 @@ from src.ch01_py.db_toolbox import (
     get_create_table_sqlstr,
     get_table_columns,
 )
-from src.ch09_belief_atom.atom_config import get_belief_dimens, get_delete_key_name
+from src.ch08_belief_atom.atom_config import get_belief_dimens, get_delete_key_name
 from src.ch15_moment.moment_config import get_moment_dimens
 from src.ch16_translate.translate_config import (
     find_set_otx_inx_args,

@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch11_bud.bud_main import tranbook_shop, tranunit_shop
+from src.ch10_bud.bud_main import tranbook_shop, tranunit_shop
 from src.ch15_moment.moment_main import momentunit_shop
 
 

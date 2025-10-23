@@ -1,8 +1,8 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import create_path, open_json, save_json
 from src.ch07_belief_logic.belief_main import beliefunit_shop, get_beliefunit_from_dict
-from src.ch10_lesson.lesson_main import get_lessonunit_from_dict, lessonunit_shop
-from src.ch11_bud._ref.ch11_path import (
+from src.ch09_belief_lesson.lesson_main import get_lessonunit_from_dict, lessonunit_shop
+from src.ch10_bud._ref.ch10_path import (
     create_belief_spark_dir_path,
     create_spark_all_lesson_path,
     create_spark_expressed_lesson_path,

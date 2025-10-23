@@ -8,7 +8,7 @@ def sample_file(tmp_path: pathlib_Path):
     content = """\
 import os
 import src.ch21_old_chapter
-from src.ch12_helpers import func
+from src.ch24_helpers import func
 import src.ch23_calendar_viewer
 from src.ch25_utils import helper
 from src.ch25_utils import helper as h
@@ -33,7 +33,7 @@ def test_threshold_22(sample_file):
     assert "import src.ch30_bikehouse" in result
     assert "from src.ch31_more import thing" in result
     # ensure lower/equal series are excluded
-    assert all("ch21" not in r and "ch12" not in r for r in result)
+    assert all("ch21" not in r and "ch27" not in r for r in result)
 
 
 def test_high_threshold_only_top_matches(sample_file):

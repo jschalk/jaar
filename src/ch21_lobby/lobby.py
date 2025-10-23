@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from src.ch10_lesson.lesson_main import LessonUnit
+from src.ch09_belief_lesson.lesson_main import LessonUnit
 from src.ch20_world_logic.world import WorldName
 
 

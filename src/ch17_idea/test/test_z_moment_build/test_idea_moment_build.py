@@ -1,6 +1,6 @@
 from src.ch01_py.file_toolbox import create_path
-from src.ch08_epoch.epoch_main import epochunit_shop, get_default_epoch_config_dict
-from src.ch08_epoch.test._util.ch08_examples import get_five_config
+from src.ch14_epoch.epoch_main import epochunit_shop, get_default_epoch_config_dict
+from src.ch14_epoch.test._util.ch14_examples import get_five_config
 from src.ch15_moment.moment_main import momentunit_shop
 from src.ch17_idea.idea_main import moment_build_from_df
 from src.ch17_idea.test._util.ch17_env import idea_moments_dir, temp_dir_setup

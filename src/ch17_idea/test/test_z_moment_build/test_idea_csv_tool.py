@@ -3,8 +3,8 @@ from src.ch01_py.file_toolbox import create_path
 from src.ch03_voice.group import awardunit_shop
 from src.ch04_rope.rope import to_rope
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch10_lesson.delta import beliefdelta_shop
-from src.ch10_lesson.lesson_main import lessonunit_shop
+from src.ch09_belief_lesson.delta import beliefdelta_shop
+from src.ch09_belief_lesson.lesson_main import lessonunit_shop
 from src.ch17_idea.idea_csv_tool import (
     add_belief_to_br00020_csv,
     add_belief_to_br00021_csv,
