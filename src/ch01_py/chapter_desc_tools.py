@@ -15,6 +15,7 @@ def get_chapter_descs() -> dict[str, str]:
 
 
 def get_chapter_desc_prefix(chapter_desc: str) -> str:
+    # sourcery skip: str-prefix-suffix
     """Returns chapter number in 2 character string."""
     if chapter_desc[:2] == "ch":
         return chapter_desc[:4]
