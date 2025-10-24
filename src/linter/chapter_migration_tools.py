@@ -1,9 +1,70 @@
-from os import rename as os_rename, walk as os_walk
-from os.path import exists as os_path_exists, join as os_path_join
+from os import listdir as os_listdir, rename as os_rename, walk as os_walk
+from os.path import (
+    basename as os_path_basename,
+    dirname as os_path_dirname,
+    exists as os_path_exists,
+    isdir as os_path_isdir,
+    join as os_path_join,
+)
+from shutil import rmtree as shutil_rmtree
 from subprocess import (
     CalledProcessError as subprocess_CalledProcessError,
     run as subprocess_run,
 )
+
+
+def first_level_dirs_with_prefix(path_prefix: str):
+    """
+    Returns all first-level directories that start with `path_prefix`.
+    Only includes directories that are direct children of the parent of path_prefix.
+    """
+    parent_dir = os_path_dirname(path_prefix)
+    prefix_name = os_path_basename(path_prefix)
+
+    if not os_path_isdir(parent_dir):
+        return []
+
+    result = []
+    for entry in os_listdir(parent_dir):
+        full_path = os_path_join(parent_dir, entry)
+        if entry.startswith(prefix_name) and os_path_isdir(full_path):
+            result.append(full_path)
+
+    return result
+
+
+def delete_if_empty_or_pycache_only(x_dir: str) -> bool:
+    """
+    Recursively deletes `x_dir` and subdirectories if they are empty
+    or only contain __pycache__ directories with .pyc files.
+    Returns True if x_dir was deleted, False otherwise.
+    """
+    if not os_path_isdir(x_dir):
+        return False
+
+    # Process subdirectories first (post-order)
+    for entry in os_listdir(x_dir):
+        full_path = os_path_join(x_dir, entry)
+        if os_path_isdir(full_path):
+            delete_if_empty_or_pycache_only(full_path)
+
+    # After processing subdirectories, check current dir
+    entries = os_listdir(x_dir)
+    remaining = []
+    for entry in entries:
+        full_path = os_path_join(x_dir, entry)
+        if entry == "__pycache__" and os_path_isdir(full_path):
+            sub_entries = os_listdir(full_path)
+            if all(f.endswith(".pyc") for f in sub_entries):
+                continue  # safe to ignore
+        remaining.append(entry)
+
+    if not remaining:
+        print(f"delete empty dir {x_dir}")
+        shutil_rmtree(x_dir)
+        return True
+
+    return False
 
 
 def string_exists_in_filepaths(root_dir: str, search_text: str) -> bool:
@@ -12,10 +73,12 @@ def string_exists_in_filepaths(root_dir: str, search_text: str) -> bool:
     (including subdirectories and filenames) under `root_dir`.
     """
     for dirpath, _, filenames in os_walk(root_dir):
-        for filename in filenames:
-            filepath = os_path_join(dirpath, filename)
-            if search_text in filepath:
-                return True
+        if "__pycache__" not in dirpath:
+            for filename in filenames:
+                filepath = os_path_join(dirpath, filename)
+                if search_text in filepath:
+                    print(f"'{search_text}' exists in {filepath=}")
+                    return True
     return False
 
 
@@ -66,14 +129,16 @@ def string_exists_in_directory(root_dir: str, search_text: str) -> bool:
     for dirpath, _, filenames in os_walk(root_dir):
         for filename in filenames:
             filepath = os_path_join(dirpath, filename)
-            try:
-                with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
-                    for line in f:
-                        if search_text in line:
-                            return True
-            except Exception as e:
-                # Skip unreadable files (permissions, binary, etc.)
-                continue
+            if "__pycache__" not in filepath:
+                try:
+                    with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
+                        for line in f:
+                            if search_text in line:
+                                print(f"'{search_text}' exists in {filepath=}")
+                                return True
+                except Exception as e:
+                    # Skip unreadable files (permissions, binary, etc.)
+                    continue
     return False
 
 
