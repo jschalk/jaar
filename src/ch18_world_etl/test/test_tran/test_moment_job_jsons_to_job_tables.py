@@ -60,7 +60,7 @@ def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario0(
         blrawar_job_table = prime_table("blrawar", kw.job, None)
         blrfact_job_table = prime_table("blrfact", kw.job, None)
         blrheal_job_table = prime_table("blrheal", kw.job, None)
-        blrprem_job_table = prime_table("blrprem", kw.job, None)
+        blrcase_job_table = prime_table("blrcase", kw.job, None)
         blrreas_job_table = prime_table("blrreas", kw.job, None)
         blrlabo_job_table = prime_table("blrlabo", kw.job, None)
         blrplan_job_table = prime_table("blrplan", kw.job, None)
@@ -74,7 +74,7 @@ def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario0(
         assert not db_table_exists(cursor, blrfact_job_table)
         assert not db_table_exists(cursor, blrheal_job_table)
         assert not db_table_exists(cursor, blrreas_job_table)
-        assert not db_table_exists(cursor, blrprem_job_table)
+        assert not db_table_exists(cursor, blrcase_job_table)
         assert not db_table_exists(cursor, blrlabo_job_table)
 
         # WHEN
@@ -90,7 +90,7 @@ def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario0(
         assert get_row_count(cursor, blrfact_job_table) == 1
         assert get_row_count(cursor, blrheal_job_table) == 1
         assert get_row_count(cursor, blrreas_job_table) == 1
-        assert get_row_count(cursor, blrprem_job_table) == 1
+        assert get_row_count(cursor, blrcase_job_table) == 1
         assert get_row_count(cursor, blrlabo_job_table) == 1
 
 

@@ -5,13 +5,13 @@ from src.ch18_world_etl.db_obj_belief_tool import (
     create_beliefunit_metrics_insert_sqlstr,
     create_blfvoce_metrics_insert_sqlstr,
     create_blrawar_metrics_insert_sqlstr,
+    create_blrcase_metrics_insert_sqlstr,
     create_blrfact_metrics_insert_sqlstr,
     create_blrgrou_metrics_insert_sqlstr,
     create_blrheal_metrics_insert_sqlstr,
     create_blrlabo_metrics_insert_sqlstr,
     create_blrmemb_metrics_insert_sqlstr,
     create_blrplan_metrics_insert_sqlstr,
-    create_blrprem_metrics_insert_sqlstr,
     create_blrreas_metrics_insert_sqlstr,
 )
 from src.ch18_world_etl.tran_sqlstrs import create_job_tables
@@ -229,7 +229,7 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
+def test_create_blrcase_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_belief_calc_dimen_args("belief_plan_reason_caseunit")
@@ -281,7 +281,7 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_blrprem_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_blrcase_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr

@@ -48,7 +48,7 @@ def test_create_prime_tablename_ReturnsObj():
     blrplan_dimen = kw.belief_planunit
     blrawar_dimen = kw.belief_plan_awardunit
     blrreas_dimen = kw.belief_plan_reasonunit
-    blrprem_dimen = kw.belief_plan_reason_caseunit
+    blrcase_dimen = kw.belief_plan_reason_caseunit
     blrlabo_dimen = kw.belief_plan_partyunit
     blrheal_dimen = kw.belief_plan_healerunit
     blrfact_dimen = kw.belief_plan_factunit
@@ -77,7 +77,7 @@ def test_create_prime_tablename_ReturnsObj():
     blrplan_s_agg_table = create_prime_tablename("blrplan", "s", agg_str, put_str)
     blrawar_s_agg_table = create_prime_tablename("blrawar", "s", agg_str, put_str)
     blrreas_s_agg_table = create_prime_tablename("blrreas", "s", agg_str, put_str)
-    blrprem_s_agg_table = create_prime_tablename("blrprem", "s", agg_str, put_str)
+    blrcase_s_agg_table = create_prime_tablename("blrcase", "s", agg_str, put_str)
     blrlabo_s_agg_table = create_prime_tablename("BLRLABO", "s", agg_str, put_str)
     blrheal_s_agg_table = create_prime_tablename("blrheal", "s", agg_str, put_str)
     blrfact_s_agg_table = create_prime_tablename("blrfact", "s", agg_str, put_str)
@@ -109,7 +109,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert blrplan_s_agg_table == f"{blrplan_dimen}_s_put_agg"
     assert blrawar_s_agg_table == f"{blrawar_dimen}_s_put_agg"
     assert blrreas_s_agg_table == f"{blrreas_dimen}_s_put_agg"
-    assert blrprem_s_agg_table == f"{blrprem_dimen}_s_put_agg"
+    assert blrcase_s_agg_table == f"{blrcase_dimen}_s_put_agg"
     assert blrlabo_s_agg_table == f"{blrlabo_dimen}_s_put_agg"
     assert blrheal_s_agg_table == f"{blrheal_dimen}_s_put_agg"
     assert blrfact_s_agg_table == f"{blrfact_dimen}_s_put_agg"

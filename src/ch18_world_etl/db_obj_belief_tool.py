@@ -186,7 +186,7 @@ VALUES (
 """
 
 
-def create_blrprem_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_blrcase_metrics_insert_sqlstr(values_dict: dict[str,]):
     moment_label = values_dict.get("moment_label")
     belief_name = values_dict.get("belief_name")
     rope = values_dict.get("plan_rope")
@@ -458,7 +458,7 @@ def insert_job_blrheal(
         cursor.execute(insert_sqlstr)
 
 
-def insert_job_blrprem(
+def insert_job_blrcase(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_caseunit: CaseUnit,
@@ -468,7 +468,7 @@ def insert_job_blrprem(
     x_dict["belief_name"] = x_objkeysholder.belief_name
     x_dict["plan_rope"] = x_objkeysholder.rope
     x_dict["reason_context"] = x_objkeysholder.reason_context
-    insert_sqlstr = create_blrprem_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_blrcase_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
@@ -537,7 +537,7 @@ def insert_job_obj(cursor: sqlite3_Cursor, job_belief: BeliefUnit):
             insert_job_blrreas(cursor, x_objkeysholder, reasonheir)
             x_objkeysholder.reason_context = reason_context
             for prem in reasonheir.cases.values():
-                insert_job_blrprem(cursor, x_objkeysholder, prem)
+                insert_job_blrcase(cursor, x_objkeysholder, prem)
 
     for x_voice in job_belief.voices.values():
         insert_job_blfvoce(cursor, x_objkeysholder, x_voice)

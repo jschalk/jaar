@@ -17,13 +17,13 @@ from src.ch18_world_etl.db_obj_belief_tool import (
     ObjKeysHolder,
     insert_job_blfvoce,
     insert_job_blrawar,
+    insert_job_blrcase,
     insert_job_blrfact,
     insert_job_blrgrou,
     insert_job_blrheal,
     insert_job_blrlabo,
     insert_job_blrmemb,
     insert_job_blrplan,
-    insert_job_blrprem,
     insert_job_blrreas,
     insert_job_blrunit,
     insert_job_obj,
@@ -330,7 +330,7 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
         assert rows == expected_data
 
 
-def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
+def test_insert_job_blrcase_CreatesTableRowsFor_blrcase_job():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_belief_calc_dimen_args("belief_plan_reason_caseunit")
@@ -373,7 +373,7 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
         )
 
         # WHEN
-        insert_job_blrprem(cursor, x_objkeysholder, x_caseunit)
+        insert_job_blrcase(cursor, x_objkeysholder, x_caseunit)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -894,7 +894,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         blrawar_job_table = f"{kw.belief_plan_awardunit}_job"
         blrfact_job_table = f"{kw.belief_plan_factunit}_job"
         blrheal_job_table = f"{kw.belief_plan_healerunit}_job"
-        blrprem_job_table = f"{kw.belief_plan_reason_caseunit}_job"
+        blrcase_job_table = f"{kw.belief_plan_reason_caseunit}_job"
         blrreas_job_table = f"{kw.belief_plan_reasonunit}_job"
         blrlabo_job_table = f"{kw.belief_plan_partyunit}_job"
         blrplan_job_table = f"{kw.belief_planunit}_job"
@@ -908,7 +908,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         assert get_row_count(cursor, blrfact_job_table) == 0
         assert get_row_count(cursor, blrheal_job_table) == 0
         assert get_row_count(cursor, blrreas_job_table) == 0
-        assert get_row_count(cursor, blrprem_job_table) == 0
+        assert get_row_count(cursor, blrcase_job_table) == 0
         assert get_row_count(cursor, blrlabo_job_table) == 0
 
         # WHEN
@@ -924,5 +924,5 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         assert get_row_count(cursor, blrfact_job_table) == 1
         assert get_row_count(cursor, blrheal_job_table) == 1
         assert get_row_count(cursor, blrreas_job_table) == 1
-        assert get_row_count(cursor, blrprem_job_table) == 1
+        assert get_row_count(cursor, blrcase_job_table) == 1
         assert get_row_count(cursor, blrlabo_job_table) == 1

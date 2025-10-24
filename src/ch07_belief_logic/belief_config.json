@@ -153,7 +153,7 @@
     }
   }, 
   "belief_plan_reason_caseunit": {
-    "abbreviation": "blrprem", 
+    "abbreviation": "blrcase", 
     "jkeys": {
       "belief_name": {
         "class_type": "NameTerm", 

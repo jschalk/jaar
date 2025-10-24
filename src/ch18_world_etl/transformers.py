@@ -563,6 +563,12 @@ def set_all_heard_raw_inx_columns(cursor: sqlite3_Cursor):
         set_heard_raw_inx_column(
             cursor, heard_raw_tablename, columnname_without_otx, arg_class_type
         )
+        # TODO add_epoch_frame process should be added here.
+        # All _inx rope columns have been set. This is where the check for epoch_rope happens
+        # Identify the epoch_rope from the moment
+        # Identify how much should be added/deleted.
+        # Create "_otx" and "_inx" columns for
+        # reason_lower, reason_upper, fact_lower, fact_upper, tran_time, bud_time, offi_time
 
 
 def get_all_heard_raw_otx_columns(cursor: sqlite3_Cursor) -> set[tuple[str, str]]:

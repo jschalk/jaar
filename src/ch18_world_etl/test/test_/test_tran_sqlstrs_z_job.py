@@ -50,7 +50,7 @@ def test_create_job_tables_CreatesTables():
         blrawar_job_table = prime_table(kw.belief_plan_awardunit, kw.job, None)
         blrfact_job_table = prime_table(kw.belief_plan_factunit, kw.job, None)
         blrheal_job_table = prime_table(kw.belief_plan_healerunit, kw.job, None)
-        blrprem_job_table = prime_table(kw.belief_plan_reason_caseunit, kw.job, None)
+        blrcase_job_table = prime_table(kw.belief_plan_reason_caseunit, kw.job, None)
         beliefares_job_table = prime_table(kw.belief_plan_reasonunit, kw.job, None)
         blrlabo_job_table = prime_table(kw.belief_plan_partyunit, kw.job, None)
         blrplan_job_table = prime_table(kw.belief_planunit, kw.job, None)
@@ -61,7 +61,7 @@ def test_create_job_tables_CreatesTables():
         # blrawar_job_table = f"{kw.belief_plan_awardunit}_job"
         # blrfact_job_table = f"{kw.belief_plan_factunit}_job"
         # blrheal_job_table = f"{kw.belief_plan_healerunit}_job"
-        # blrprem_job_table = f"{kw.belief_plan_reason_caseunit}_job"
+        # blrcase_job_table = f"{kw.belief_plan_reason_caseunit}_job"
         # beliefares_job_table = f"{kw.belief_plan_reasonunit}_job"
         # blrlabo_job_table = f"{kw.belief_plan_partyunit}_job"
         # blrplan_job_table = f"{kw.belief_planunit}_job"
@@ -73,7 +73,7 @@ def test_create_job_tables_CreatesTables():
         assert db_table_exists(cursor, blrawar_job_table) is False
         assert db_table_exists(cursor, blrfact_job_table) is False
         assert db_table_exists(cursor, blrheal_job_table) is False
-        assert db_table_exists(cursor, blrprem_job_table) is False
+        assert db_table_exists(cursor, blrcase_job_table) is False
         assert db_table_exists(cursor, beliefares_job_table) is False
         assert db_table_exists(cursor, blrlabo_job_table) is False
         assert db_table_exists(cursor, blrplan_job_table) is False
@@ -95,7 +95,7 @@ def test_create_job_tables_CreatesTables():
         assert db_table_exists(cursor, blrawar_job_table)
         assert db_table_exists(cursor, blrfact_job_table)
         assert db_table_exists(cursor, blrheal_job_table)
-        assert db_table_exists(cursor, blrprem_job_table)
+        assert db_table_exists(cursor, blrcase_job_table)
         assert db_table_exists(cursor, beliefares_job_table)
         assert db_table_exists(cursor, blrlabo_job_table)
         assert db_table_exists(cursor, blrplan_job_table)

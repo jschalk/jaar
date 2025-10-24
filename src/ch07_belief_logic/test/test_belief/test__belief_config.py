@@ -99,7 +99,7 @@ def test_get_belief_config_dict_ReturnsObj_CheckAbbreviations():
     blrplan_attribute = belief_config.get(kw.belief_planunit)
     blrawar_attribute = belief_config.get(kw.belief_plan_awardunit)
     blrreas_attribute = belief_config.get(kw.belief_plan_reasonunit)
-    blrprem_attribute = belief_config.get(kw.belief_plan_reason_caseunit)
+    blrcase_attribute = belief_config.get(kw.belief_plan_reason_caseunit)
     blrlabo_attribute = belief_config.get(kw.belief_plan_partyunit)
     blrheal_attribute = belief_config.get(kw.belief_plan_healerunit)
     blrfact_attribute = belief_config.get(kw.belief_plan_factunit)
@@ -111,7 +111,7 @@ def test_get_belief_config_dict_ReturnsObj_CheckAbbreviations():
     assert blrplan_attribute.get(abbr_str) == "blrplan"
     assert blrawar_attribute.get(abbr_str) == "blrawar"
     assert blrreas_attribute.get(abbr_str) == "blrreas"
-    assert blrprem_attribute.get(abbr_str) == "blrprem"
+    assert blrcase_attribute.get(abbr_str) == "blrcase"
     assert blrlabo_attribute.get(abbr_str) == "blrlabo"
     assert blrheal_attribute.get(abbr_str) == "blrheal"
     assert blrfact_attribute.get(abbr_str) == "blrfact"
@@ -309,7 +309,7 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     blrplan = kw.belief_planunit
     blrawar = kw.belief_plan_awardunit
     blrreas = kw.belief_plan_reasonunit
-    blrprem = kw.belief_plan_reason_caseunit
+    blrcase = kw.belief_plan_reason_caseunit
     blrlabo = kw.belief_plan_partyunit
     blrheal = kw.belief_plan_healerunit
     blrfact = kw.belief_plan_factunit
@@ -498,37 +498,37 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrheal, jk, kw.plan_rope) == "TEXT"
     assert g_popcashout(cfig, blrheal, jk, kw.plan_rope) == False
 
-    assert g_class_type(cfig, blrprem, jk, kw.reason_context) == kw.RopeTerm
-    assert g_sqlitetype(cfig, blrprem, jk, kw.reason_context) == "TEXT"
-    assert g_popcashout(cfig, blrprem, jk, kw.reason_context) == False
+    assert g_class_type(cfig, blrcase, jk, kw.reason_context) == kw.RopeTerm
+    assert g_sqlitetype(cfig, blrcase, jk, kw.reason_context) == "TEXT"
+    assert g_popcashout(cfig, blrcase, jk, kw.reason_context) == False
 
-    assert g_class_type(cfig, blrprem, jk, kw.reason_state) == kw.RopeTerm
-    assert g_sqlitetype(cfig, blrprem, jk, kw.reason_state) == "TEXT"
-    assert g_popcashout(cfig, blrprem, jk, kw.reason_state) == False
+    assert g_class_type(cfig, blrcase, jk, kw.reason_state) == kw.RopeTerm
+    assert g_sqlitetype(cfig, blrcase, jk, kw.reason_state) == "TEXT"
+    assert g_popcashout(cfig, blrcase, jk, kw.reason_state) == False
 
-    assert g_class_type(cfig, blrprem, jk, kw.plan_rope) == kw.RopeTerm
-    assert g_sqlitetype(cfig, blrprem, jk, kw.plan_rope) == "TEXT"
-    assert g_popcashout(cfig, blrprem, jk, kw.plan_rope) == False
+    assert g_class_type(cfig, blrcase, jk, kw.plan_rope) == kw.RopeTerm
+    assert g_sqlitetype(cfig, blrcase, jk, kw.plan_rope) == "TEXT"
+    assert g_popcashout(cfig, blrcase, jk, kw.plan_rope) == False
 
-    assert g_class_type(cfig, blrprem, jv, kw.case_active) == "int"
-    assert g_sqlitetype(cfig, blrprem, jv, kw.case_active) == "INTEGER"
-    assert g_popcashout(cfig, blrprem, jv, kw.case_active) == True
+    assert g_class_type(cfig, blrcase, jv, kw.case_active) == "int"
+    assert g_sqlitetype(cfig, blrcase, jv, kw.case_active) == "INTEGER"
+    assert g_popcashout(cfig, blrcase, jv, kw.case_active) == True
 
-    assert g_class_type(cfig, blrprem, jv, kw.task) == "int"
-    assert g_sqlitetype(cfig, blrprem, jv, kw.task) == "INTEGER"
-    assert g_popcashout(cfig, blrprem, jv, kw.task) == True
+    assert g_class_type(cfig, blrcase, jv, kw.task) == "int"
+    assert g_sqlitetype(cfig, blrcase, jv, kw.task) == "INTEGER"
+    assert g_popcashout(cfig, blrcase, jv, kw.task) == True
 
-    assert g_class_type(cfig, blrprem, jv, kw.reason_divisor) == "int"
-    assert g_sqlitetype(cfig, blrprem, jv, kw.reason_divisor) == "INTEGER"
-    assert g_popcashout(cfig, blrprem, jv, kw.reason_divisor) == False
+    assert g_class_type(cfig, blrcase, jv, kw.reason_divisor) == "int"
+    assert g_sqlitetype(cfig, blrcase, jv, kw.reason_divisor) == "INTEGER"
+    assert g_popcashout(cfig, blrcase, jv, kw.reason_divisor) == False
 
-    assert g_class_type(cfig, blrprem, jv, kw.reason_upper) == "float"
-    assert g_sqlitetype(cfig, blrprem, jv, kw.reason_upper) == "REAL"
-    assert g_popcashout(cfig, blrprem, jv, kw.reason_upper) == False
+    assert g_class_type(cfig, blrcase, jv, kw.reason_upper) == "float"
+    assert g_sqlitetype(cfig, blrcase, jv, kw.reason_upper) == "REAL"
+    assert g_popcashout(cfig, blrcase, jv, kw.reason_upper) == False
 
-    assert g_class_type(cfig, blrprem, jv, kw.reason_lower) == "float"
-    assert g_sqlitetype(cfig, blrprem, jv, kw.reason_lower) == "REAL"
-    assert g_popcashout(cfig, blrprem, jv, kw.reason_lower) == False
+    assert g_class_type(cfig, blrcase, jv, kw.reason_lower) == "float"
+    assert g_sqlitetype(cfig, blrcase, jv, kw.reason_lower) == "REAL"
+    assert g_popcashout(cfig, blrcase, jv, kw.reason_lower) == False
 
     assert g_class_type(cfig, blrreas, jk, kw.reason_context) == kw.RopeTerm
     assert g_sqlitetype(cfig, blrreas, jk, kw.reason_context) == "TEXT"
