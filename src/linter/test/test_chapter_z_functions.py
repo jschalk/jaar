@@ -5,7 +5,7 @@ from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_str_number,
     get_chapter_descs,
 )
-from src.ch99_chapter_style.style import (
+from src.linter.style import (
     check_all_test_functions_are_formatted,
     check_all_test_functions_have_proper_naming_format,
     check_if_test_HasDocString_pytests_exist,

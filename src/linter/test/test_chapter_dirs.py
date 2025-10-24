@@ -11,7 +11,7 @@ from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
 )
-from src.ch99_chapter_style.style import (
+from src.linter.style import (
     check_if_chapter_keywords_by_chapter_is_sorted,
     check_keywords_by_chapter_are_not_duplicated,
     get_chapter_descs,

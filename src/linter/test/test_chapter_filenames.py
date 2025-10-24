@@ -1,5 +1,5 @@
 from src.ch01_py.file_toolbox import get_dir_file_strs
-from src.ch99_chapter_style.style import get_chapter_descs
+from src.linter.style import get_chapter_descs
 
 
 def test_check_Chapters_filenames_FollowFileNameConventions_NoNamingCollision():

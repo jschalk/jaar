@@ -1,6 +1,6 @@
 from pathlib import Path as pathlib_Path
 from pytest import fixture as pytest_fixture, raises as pytest_raises
-from src.ch99_chapter_style.style import find_incorrect_imports
+from src.linter.style import find_incorrect_imports
 
 
 @pytest_fixture

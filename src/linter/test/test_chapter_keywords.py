@@ -8,7 +8,7 @@ from src.ch01_py.keyword_class_builder import (
     get_keywords_src_config,
 )
 from src.ch98_docs_builder.doc_builder import get_chapter_desc_prefix, get_chapter_descs
-from src.ch99_chapter_style.style import (
+from src.linter.style import (
     get_all_semantic_types_from_ref_files,
     get_chapters_obj_metrics,
     get_json_files,
