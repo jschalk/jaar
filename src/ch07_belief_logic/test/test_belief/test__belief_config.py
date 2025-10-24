@@ -478,11 +478,11 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrfact, jk, kw.plan_rope) == "TEXT"
     assert g_popcashout(cfig, blrfact, jk, kw.plan_rope) == False
 
-    assert g_class_type(cfig, blrfact, jv, kw.fact_upper) == "float"
+    assert g_class_type(cfig, blrfact, jv, kw.fact_upper) == kw.MaybeEpoch
     assert g_sqlitetype(cfig, blrfact, jv, kw.fact_upper) == "REAL"
     assert g_popcashout(cfig, blrfact, jv, kw.fact_upper) == False
 
-    assert g_class_type(cfig, blrfact, jv, kw.fact_lower) == "float"
+    assert g_class_type(cfig, blrfact, jv, kw.fact_lower) == kw.MaybeEpoch
     assert g_sqlitetype(cfig, blrfact, jv, kw.fact_lower) == "REAL"
     assert g_popcashout(cfig, blrfact, jv, kw.fact_lower) == False
 
@@ -522,11 +522,11 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrcase, jv, kw.reason_divisor) == "INTEGER"
     assert g_popcashout(cfig, blrcase, jv, kw.reason_divisor) == False
 
-    assert g_class_type(cfig, blrcase, jv, kw.reason_upper) == "float"
+    assert g_class_type(cfig, blrcase, jv, kw.reason_upper) == kw.MaybeEpoch
     assert g_sqlitetype(cfig, blrcase, jv, kw.reason_upper) == "REAL"
     assert g_popcashout(cfig, blrcase, jv, kw.reason_upper) == False
 
-    assert g_class_type(cfig, blrcase, jv, kw.reason_lower) == "float"
+    assert g_class_type(cfig, blrcase, jv, kw.reason_lower) == kw.MaybeEpoch
     assert g_sqlitetype(cfig, blrcase, jv, kw.reason_lower) == "REAL"
     assert g_popcashout(cfig, blrcase, jv, kw.reason_lower) == False
 
@@ -829,16 +829,16 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(kw.give_force) == "float"
     assert belief_calc_args_type_dict.get(kw.take_force) == "float"
     assert belief_calc_args_type_dict.get(kw.reason_context) == kw.RopeTerm
-    assert belief_calc_args_type_dict.get(kw.fact_upper) == "float"
-    assert belief_calc_args_type_dict.get(kw.fact_lower) == "float"
+    assert belief_calc_args_type_dict.get(kw.fact_upper) == kw.MaybeEpoch
+    assert belief_calc_args_type_dict.get(kw.fact_lower) == kw.MaybeEpoch
     assert belief_calc_args_type_dict.get(kw.fact_state) == kw.RopeTerm
     assert belief_calc_args_type_dict.get(kw.healer_name) == kw.NameTerm
     assert belief_calc_args_type_dict.get(kw.reason_state) == kw.RopeTerm
     assert belief_calc_args_type_dict.get(kw.reason_active) == "int"
     assert belief_calc_args_type_dict.get(kw.task) == "int"
     assert belief_calc_args_type_dict.get(kw.reason_divisor) == "int"
-    assert belief_calc_args_type_dict.get(kw.reason_upper) == "float"
-    assert belief_calc_args_type_dict.get(kw.reason_lower) == "float"
+    assert belief_calc_args_type_dict.get(kw.reason_upper) == kw.MaybeEpoch
+    assert belief_calc_args_type_dict.get(kw.reason_lower) == kw.MaybeEpoch
     assert belief_calc_args_type_dict.get(kw.parent_heir_active) == "int"
     assert belief_calc_args_type_dict.get(kw.active_requisite) == "bool"
     assert belief_calc_args_type_dict.get(kw.party_title) == kw.TitleTerm

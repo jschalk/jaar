@@ -84,13 +84,13 @@
       }
     }, 
     "jvalues": {
-      "fact_lower": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
+      "fact_lower": {"class_type": "MaybeEpoch", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
       "fact_state": {
         "class_type": "RopeTerm", 
         "populate_by_cashout": false, 
         "sqlite_datatype": "TEXT"
       }, 
-      "fact_upper": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}
+      "fact_upper": {"class_type": "MaybeEpoch", "populate_by_cashout": false, "sqlite_datatype": "REAL"}
     }
   }, 
   "belief_plan_healerunit": {
@@ -188,8 +188,8 @@
         "populate_by_cashout": false, 
         "sqlite_datatype": "INTEGER"
       }, 
-      "reason_lower": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
-      "reason_upper": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
+      "reason_lower": {"class_type": "MaybeEpoch", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
+      "reason_upper": {"class_type": "MaybeEpoch", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
       "task": {"class_type": "int", "populate_by_cashout": true, "sqlite_datatype": "INTEGER"}
     }
   }, 

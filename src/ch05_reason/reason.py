@@ -161,12 +161,10 @@ class CaseActiveFinderException(Exception):
 
 @dataclass
 class CaseActiveFinder:
-    reason_lower: (
-        MaybeEpoch  # between 0 and reason_divisor, can be more than reason_upper
-    )
-    reason_upper: (
-        MaybeEpoch  # between 0 and reason_divisor, can be less than reason_lower
-    )
+    # between 0 and reason_divisor, can be more than reason_upper
+    reason_lower: MaybeEpoch
+    # between 0 and reason_divisor, can be less than reason_lower
+    reason_upper: MaybeEpoch
     reason_divisor: float  # greater than zero
     fact_lower_full: float  # less than fact_upper
     fact_upper_full: float
