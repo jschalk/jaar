@@ -7,7 +7,7 @@ from src.ch21_lobby._ref.ch21_path import (
     create_moment_mstr_dir_path,
     create_world_dir_path,
 )
-from src.ch21_lobby.test._util.ch21_env import get_temp_dir
+from src.ch22_finance.test._util.ch22_env import get_temp_dir
 from src.ref.keywords import Ch22Keywords as kw
 
 # financial tooling
