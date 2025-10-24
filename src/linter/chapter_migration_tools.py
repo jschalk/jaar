@@ -149,7 +149,10 @@ def replace_in_tracked_python_files(find_text, replace_text):
     try:
         # Get list of tracked .py files
         result = subprocess_run(
-            ["git", "ls-files", "*.py"], capture_output=True, text=True, check=True
+            ["git", "ls-files", "*.py", "*.json"],
+            capture_output=True,
+            text=True,
+            check=True,
         )
         tracked_files = result.stdout.strip().split("\n")
     except subprocess_CalledProcessError as e:
@@ -157,16 +160,18 @@ def replace_in_tracked_python_files(find_text, replace_text):
         return
 
     for filepath in tracked_files:
+        print(f"evaluate {os_path_exists(filepath)=} {filepath=}")
         if not filepath or not os_path_exists(filepath):
             continue
 
         try:
-            with open(filepath, "r", encoding="utf-8") as f:
+            with open(filepath, "r", encoding="utf-8-sig") as f:
                 content = f.read()
+            print(f"evaluate {filepath=} {len(content)=}")
+            print(f"evaluate {(find_text in content)=}")
             if find_text in content:
                 new_content = content.replace(find_text, replace_text)
                 with open(filepath, "w", encoding="utf-8") as f:
                     f.write(new_content)
-                print(f"Updated: {filepath}")
         except Exception as e:
             print(f"Error processing {filepath}: {e}")
