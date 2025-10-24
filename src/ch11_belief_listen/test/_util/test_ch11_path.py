@@ -3,7 +3,6 @@ from platform import system as platform_system
 from pytest import raises as pytest_raises
 from src.ch01_py.file_toolbox import create_path, get_json_filename
 from src.ch04_rope.rope import create_rope, create_rope_from_labels
-from src.ch10_bud.test._util.ch10_env import get_temp_dir
 from src.ch11_belief_listen._ref.ch11_path import (
     create_keep_duty_path,
     create_keep_dutys_path,
@@ -15,6 +14,7 @@ from src.ch11_belief_listen._ref.ch11_path import (
     create_treasury_db_path,
     treasury_filename,
 )
+from src.ch11_belief_listen.test._util.ch11_env import get_temp_dir
 from src.ref.keywords import Ch11Keywords as kw
 
 LINUX_OS = platform_system() == "Linux"

@@ -69,9 +69,9 @@ def test_RiverRun_cycle_carees_vary_ReturnsObj():
     # WHEN / THEN
     assert x_riverrun._cycle_carees_vary() is False
 
-    x_riverrun._cycle_carees_prev = {yao_str}
-    assert x_riverrun._cycle_carees_prev == {yao_str}
-    assert x_riverrun._cycle_carees_curr == set()
+    x_riverrun.cycle_carees_prev = {yao_str}
+    assert x_riverrun.cycle_carees_prev == {yao_str}
+    assert x_riverrun.cycle_carees_curr == set()
 
     # WHEN / THEN
     assert x_riverrun._cycle_carees_vary()
@@ -89,7 +89,7 @@ def test_RiverRun_cycles_vary_ReturnsObj():
     assert x_riverrun.cycles_vary() is False
 
     # WHEN
-    x_riverrun._cycle_carees_prev = {yao_str}
+    x_riverrun.cycle_carees_prev = {yao_str}
     # THEN
     assert x_riverrun._cycle_carees_vary()
     assert x_riverrun._need_gotten() is False
@@ -103,7 +103,7 @@ def test_RiverRun_cycles_vary_ReturnsObj():
     assert x_riverrun.cycles_vary()
 
     # WHEN
-    x_riverrun._cycle_carees_curr = {yao_str}
+    x_riverrun.cycle_carees_curr = {yao_str}
     # THEN
     assert x_riverrun._cycle_carees_vary() is False
     assert x_riverrun._need_gotten()

@@ -15,11 +15,11 @@ def test_RiverBook_Exists():
 
     # THEN
     assert not x_riverbook.belief_name
-    assert not x_riverbook._rivercares
+    assert not x_riverbook.rivercares
     assert not x_riverbook.mana_grain
     assert set(x_riverbook.__dict__.keys()) == {
         kw.belief_name,
-        kw._rivercares,
+        kw.rivercares,
         kw.mana_grain,
     }
 
@@ -33,7 +33,7 @@ def test_riverbook_shop_ReturnsObj_Scenario0_mana_grain_IsNone():
 
     # THEN
     assert bob_riverbook.belief_name == bob_str
-    assert bob_riverbook._rivercares == {}
+    assert bob_riverbook.rivercares == {}
     assert bob_riverbook.mana_grain == default_grain_num_if_None()
 
 
@@ -48,7 +48,7 @@ def test_riverbook_shop_ReturnsObj_Scenario1_mana_grain_Exists():
 
     # THEN
     assert bob_riverbook.belief_name == bob_str
-    assert bob_riverbook._rivercares == {}
+    assert bob_riverbook.rivercares == {}
     assert bob_riverbook.mana_grain == bob_mana_grain
 
 
@@ -67,8 +67,8 @@ def test_create_riverbook_ReturnsObj_Scenario0_mana_grain_IsNone():
 
     # THEN
     assert yao_riverbook.belief_name == yao_str
-    assert yao_riverbook._rivercares == {yao_str: 250, sue_str: 250}
-    assert sum(yao_riverbook._rivercares.values()) == yao_book_point_amount
+    assert yao_riverbook.rivercares == {yao_str: 250, sue_str: 250}
+    assert sum(yao_riverbook.rivercares.values()) == yao_book_point_amount
     assert yao_riverbook.mana_grain == default_grain_num_if_None()
 
 
@@ -90,6 +90,6 @@ def test_create_riverbook_ReturnsObj_Scenario0_mana_grain_ArgPassed():
 
     # THEN
     assert yao_riverbook.belief_name == yao_str
-    assert yao_riverbook._rivercares == {yao_str: 248, sue_str: 252}
-    assert sum(yao_riverbook._rivercares.values()) == yao_book_point_amount
+    assert yao_riverbook.rivercares == {yao_str: 248, sue_str: 252}
+    assert sum(yao_riverbook.rivercares.values()) == yao_book_point_amount
     assert yao_riverbook.mana_grain == yao_mana_grain

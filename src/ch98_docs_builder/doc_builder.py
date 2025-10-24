@@ -6,7 +6,14 @@ from ast import (
     walk as ast_walk,
 )
 from src.ch01_py.chapter_desc_tools import get_chapter_desc_prefix, get_chapter_descs
-from src.ch01_py.file_toolbox import create_path, open_json, save_file
+from src.ch01_py.file_toolbox import (
+    create_path,
+    get_dir_filenames,
+    open_json,
+    save_file,
+    save_json,
+)
+from src.ch01_py.keyword_class_builder import create_src_keywords_path
 from src.ch04_rope._ref.ch04_doc_builder import get_ropeterm_description_md
 from src.ch17_idea._ref.ch17_doc_builder import get_brick_formats_md, get_idea_brick_mds
 
@@ -88,3 +95,13 @@ def save_idea_brick_mds(dest_dir: str):
 def save_brick_formats_md(dest_dir: str):
     brick_formats_md = get_brick_formats_md()
     save_file(dest_dir, "idea_brick_formats.md", brick_formats_md)
+
+
+def resave_chapter_and_keyword_json_files():
+    for chapter_dir in get_chapter_descs().values():
+        json_file_tuples = get_dir_filenames(chapter_dir, {"json"})
+        for x_dir, x_filename in json_file_tuples:
+            json_dir = create_path(chapter_dir, x_dir)
+            save_json(json_dir, x_filename, open_json(json_dir, x_filename))
+    keywords_json_path = create_src_keywords_path("src")
+    save_json(keywords_json_path, None, open_json(keywords_json_path))

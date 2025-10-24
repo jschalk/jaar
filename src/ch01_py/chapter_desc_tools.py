@@ -5,8 +5,8 @@ def get_chapter_descs() -> dict[str, str]:
     """Returns chapter_desc, chapter_dir for all Chapters"""
     src_dir = "src"
     chapter_descs = get_level1_dirs(src_dir)
-    """ch99_chapter_style is not evaluated"""
-    chapter_descs.remove("ch99_chapter_style")
+    """linter is not evaluated"""
+    chapter_descs.remove("linter")
     chapter_descs.remove("ref")
     return {
         chapter_desc: create_path(src_dir, chapter_desc)
@@ -15,6 +15,7 @@ def get_chapter_descs() -> dict[str, str]:
 
 
 def get_chapter_desc_prefix(chapter_desc: str) -> str:
+    # sourcery skip: str-prefix-suffix
     """Returns chapter number in 2 character string."""
     if chapter_desc[:2] == "ch":
         return chapter_desc[:4]

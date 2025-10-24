@@ -9,8 +9,12 @@ from src.ch01_py.file_toolbox import (
     set_dir,
 )
 from src.ch07_belief_logic.belief_main import BeliefUnit, get_beliefunit_from_dict
-from src.ch09_belief_lesson.lesson_filehandler import open_gut_file
-from src.ch10_bud.bud_filehandler import open_job_file, save_belief_file
+from src.ch09_belief_lesson._ref.ch09_path import create_job_path
+from src.ch09_belief_lesson.lesson_filehandler import (
+    open_belief_file,
+    open_gut_file,
+    save_belief_file,
+)
 from src.ch11_belief_listen._ref.ch11_path import (
     create_keep_duty_path,
     create_keep_rope_path,
@@ -24,6 +28,27 @@ from src.ch11_belief_listen._ref.ch11_semantic_types import (
     MomentLabel,
     RopeTerm,
 )
+
+
+def job_file_exists(
+    moment_mstr_dir: str, moment_label: str, belief_name: BeliefName
+) -> bool:
+    job_path = create_job_path(moment_mstr_dir, moment_label, belief_name)
+    return os_path_exists(job_path)
+
+
+def save_job_file(moment_mstr_dir: str, beliefunit: BeliefUnit):
+    job_path = create_job_path(
+        moment_mstr_dir, beliefunit.moment_label, beliefunit.belief_name
+    )
+    save_belief_file(job_path, None, beliefunit)
+
+
+def open_job_file(
+    moment_mstr_dir: str, moment_label: str, belief_name: BeliefName
+) -> BeliefUnit:
+    job_path = create_job_path(moment_mstr_dir, moment_label, belief_name)
+    return open_belief_file(job_path)
 
 
 def create_keep_path_dir_if_missing(

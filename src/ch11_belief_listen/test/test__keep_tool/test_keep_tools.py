@@ -2,8 +2,6 @@ from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import delete_dir, open_file, save_file
 from src.ch04_rope.rope import create_rope
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
-from src.ch10_bud.test._util.ch10_env import get_temp_dir, temp_dir_setup
-from src.ch10_bud.test._util.ch10_examples import get_ch10_example_moment_label
 from src.ch11_belief_listen._ref.ch11_path import (
     create_keep_duty_path,
     create_keep_rope_path,
@@ -16,6 +14,8 @@ from src.ch11_belief_listen.keep_tool import (
     save_duty_belief,
     treasury_db_file_exists,
 )
+from src.ch11_belief_listen.test._util.ch11_env import get_temp_dir, temp_dir_setup
+from src.ch11_belief_listen.test._util.ch11_examples import ch11_example_moment_label
 
 
 def test_create_keep_path_dir_if_missing_CreatesDirectory(
@@ -24,7 +24,7 @@ def test_create_keep_path_dir_if_missing_CreatesDirectory(
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
-    nation_rope = create_rope(get_ch10_example_moment_label(), nation_str)
+    nation_rope = create_rope(ch11_example_moment_label(), nation_str)
     usa_str = "USA"
     usa_rope = create_rope(nation_rope, usa_str)
     texas_str = "Texas"
@@ -48,7 +48,7 @@ def test_treasury_db_file_exists_ReturnsObj(temp_dir_setup):
     sue_str = "Sue"
     a23_str = "amy23"
     moment_mstr_dir = get_temp_dir()
-    texas_rope = create_rope(get_ch10_example_moment_label(), "Texas")
+    texas_rope = create_rope(ch11_example_moment_label(), "Texas")
     treasury_db_path = create_treasury_db_path(
         moment_mstr_dir,
         belief_name=sue_str,
@@ -161,7 +161,7 @@ def test_save_duty_belief_SavesFile(temp_dir_setup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
-    nation_rope = create_rope(get_ch10_example_moment_label(), nation_str)
+    nation_rope = create_rope(ch11_example_moment_label(), nation_str)
     usa_str = "USA"
     usa_rope = create_rope(nation_rope, usa_str)
     texas_str = "Texas"
@@ -199,7 +199,7 @@ def test_get_duty_belief_reason_lowersFile(temp_dir_setup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
-    nation_rope = create_rope(get_ch10_example_moment_label(), nation_str)
+    nation_rope = create_rope(ch11_example_moment_label(), nation_str)
     usa_str = "USA"
     usa_rope = create_rope(nation_rope, usa_str)
     texas_str = "Texas"

@@ -1,16 +1,7 @@
 from random import random as random_random
-from src.ch01_py.file_toolbox import (
-    create_path,
-    get_dir_filenames,
-    open_json,
-    save_json,
-)
-from src.ch01_py.keyword_class_builder import (
-    create_src_keywords_path,
-    save_keywords_by_chapter_md,
-)
+from src.ch01_py.keyword_class_builder import save_keywords_by_chapter_md
 from src.ch98_docs_builder.doc_builder import (
-    get_chapter_descs,
+    resave_chapter_and_keyword_json_files,
     save_brick_formats_md,
     save_chapter_blurbs_md,
     save_idea_brick_mds,
@@ -33,16 +24,6 @@ def test_SpecialTestThatBuildsDocs():
     save_chapter_blurbs_md(destination_dir)
     save_ropeterm_description_md(destination_dir)
     save_keywords_by_chapter_md(destination_dir)  # docs\keywords_by_chapter.md
-    # resave json files so that they are ordered alphabetically
-    # 4% of instances resave all json files
+    # 4% of instances resave all json files so that they are ordered alphabetically
     if random_random() < 0.04:
-        for chapter_dir in get_chapter_descs().values():
-            json_file_tuples = get_dir_filenames(chapter_dir, {"json"})
-            for x_dir, x_filename in json_file_tuples:
-                json_filepath = create_path(x_dir, x_filename)
-                # print(f"{json_filepath=}")
-                # print(f"{x_dir} {x_filename=}")
-                json_dir = create_path(chapter_dir, x_dir)
-                save_json(json_dir, x_filename, open_json(json_dir, x_filename))
-        keywords_json_path = create_src_keywords_path("src")
-        save_json(keywords_json_path, None, open_json(keywords_json_path))
+        resave_chapter_and_keyword_json_files()

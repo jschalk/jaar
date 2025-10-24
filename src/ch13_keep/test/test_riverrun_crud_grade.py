@@ -12,10 +12,10 @@ def test_RiverRun_set_initial_rivergrade_SetsAttr():
     yao_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str, number=yao_number)
     x_doctor_count = 5
     x_patient_count = 8
-    yao_riverrun._doctor_count = x_doctor_count
-    yao_riverrun._patient_count = x_patient_count
+    yao_riverrun.doctor_count = x_doctor_count
+    yao_riverrun.patient_count = x_patient_count
     bob_str = "Bob"
-    assert yao_riverrun._rivergrades.get(bob_str) is None
+    assert yao_riverrun.rivergrades.get(bob_str) is None
 
     # WHEN
     yao_riverrun.set_initial_rivergrade(bob_str)
@@ -31,8 +31,8 @@ def test_RiverRun_set_initial_rivergrade_SetsAttr():
         x_patient_count,
     )
     bob_rivergrade.care_amount = 0
-    assert yao_riverrun._rivergrades.get(bob_str) is not None
-    gen_rivergrade = yao_riverrun._rivergrades.get(bob_str)
+    assert yao_riverrun.rivergrades.get(bob_str) is not None
+    gen_rivergrade = yao_riverrun.rivergrades.get(bob_str)
     assert gen_rivergrade.doctor_count == x_doctor_count
     assert gen_rivergrade.patient_count == x_patient_count
     assert gen_rivergrade == bob_rivergrade
@@ -46,14 +46,14 @@ def test_RiverRun_rivergrades_is_empty_ReturnsObj():
     yao_number = 8
     yao_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str, number=yao_number)
 
-    assert yao_riverrun._rivergrades_is_empty()
+    assert yao_riverrun.rivergrades_is_empty()
 
     # WHEN
     bob_str = "Bob"
     yao_riverrun.set_initial_rivergrade(bob_str)
 
     # THEN
-    assert yao_riverrun._rivergrades_is_empty() is False
+    assert yao_riverrun.rivergrades_is_empty() is False
 
 
 def test_RiverRun_rivergrade_exists_ReturnsObj():
@@ -67,14 +67,14 @@ def test_RiverRun_rivergrade_exists_ReturnsObj():
 
     bob_str = "Bob"
     assert yao_riverrun.rivergrade_exists(bob_str) is False
-    assert yao_riverrun._rivergrades_is_empty() is False
+    assert yao_riverrun.rivergrades_is_empty() is False
 
     # WHEN
     yao_riverrun.set_initial_rivergrade(bob_str)
 
     # THEN
     assert yao_riverrun.rivergrade_exists(bob_str)
-    assert yao_riverrun._rivergrades_is_empty() is False
+    assert yao_riverrun.rivergrades_is_empty() is False
 
 
 def test_RiverRun_set_all_initial_rivergrades_SetsAttr():
@@ -93,7 +93,7 @@ def test_RiverRun_set_all_initial_rivergrades_SetsAttr():
     x_riverrun.set_keep_patientledger(xio_str, sue_str, 1)
     all_voices_ids = x_riverrun.get_all_keep_patientledger_voice_names()
     assert all_voices_ids == {yao_str, bob_str, zia_str, xio_str, sue_str}
-    assert x_riverrun._rivergrades_is_empty()
+    assert x_riverrun.rivergrades_is_empty()
     assert x_riverrun.rivergrade_exists(yao_str) is False
     assert x_riverrun.rivergrade_exists(bob_str) is False
     assert x_riverrun.rivergrade_exists(zia_str) is False
@@ -102,7 +102,7 @@ def test_RiverRun_set_all_initial_rivergrades_SetsAttr():
     x_riverrun.set_all_initial_rivergrades()
 
     # THEN
-    assert x_riverrun._rivergrades_is_empty() is False
+    assert x_riverrun.rivergrades_is_empty() is False
     assert x_riverrun.rivergrade_exists(yao_str)
     assert x_riverrun.rivergrade_exists(bob_str)
     assert x_riverrun.rivergrade_exists(zia_str)

@@ -5,7 +5,6 @@ from src.ch04_rope.rope import get_ancestor_ropes, get_first_label_from_rope
 from src.ch06_plan.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, VoiceUnit
 from src.ch09_belief_lesson.lesson_filehandler import LessonFileHandler, open_gut_file
-from src.ch10_bud.bud_filehandler import open_job_file, save_job_file
 from src.ch11_belief_listen._ref.ch11_semantic_types import BeliefName, RopeTerm
 from src.ch11_belief_listen.basis_beliefs import (
     create_empty_belief_from_belief,
@@ -15,7 +14,9 @@ from src.ch11_belief_listen.keep_tool import (
     get_duty_belief,
     get_perspective_belief,
     get_vision_belief,
+    open_job_file,
     rj_speaker_belief,
+    save_job_file,
     save_vision_belief,
     vision_file_exists,
 )
@@ -34,8 +35,8 @@ def generate_perspective_agenda(perspective_belief: BeliefUnit) -> list[PlanUnit
 def _ingest_perspective_agenda(
     listener: BeliefUnit, agenda: list[PlanUnit]
 ) -> BeliefUnit:
-    debtor_amount = listener.debtor_respect
-    ingest_list = generate_ingest_list(agenda, debtor_amount, listener.respect_grain)
+    debtor_respect = listener.debtor_respect
+    ingest_list = generate_ingest_list(agenda, debtor_respect, listener.respect_grain)
     for ingest_planunit in ingest_list:
         _ingest_single_planunit(listener, ingest_planunit)
     return listener
@@ -61,10 +62,10 @@ def _allocate_inallocable_voice_debt_lumen(
 
 
 def generate_ingest_list(
-    plan_list: list[PlanUnit], debtor_amount: float, respect_grain: float
+    plan_list: list[PlanUnit], debtor_respect: float, respect_grain: float
 ) -> list[PlanUnit]:
     plan_ledger = {x_plan.get_plan_rope(): x_plan.star for x_plan in plan_list}
-    star_allot = allot_scale(plan_ledger, debtor_amount, respect_grain)
+    star_allot = allot_scale(plan_ledger, debtor_respect, respect_grain)
     for x_planunit in plan_list:
         x_planunit.star = star_allot.get(x_planunit.get_plan_rope())
     return plan_list

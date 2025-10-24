@@ -1,9 +1,9 @@
 {
   "moment_budunit": {
     "jkeys": {
-      "belief_name" : { "class_type": "NameTerm"   }, 
+      "belief_name" : { "class_type": "NameTerm"     }, 
       "bud_time"    : { "class_type": "EpochInstant" }, 
-      "moment_label": { "class_type": "LabelTerm"  }
+      "moment_label": { "class_type": "LabelTerm"    }
     }, 
     "jvalues": { "celldepth": {"class_type": "int"}, "quota": {"class_type": "int"} }, 
     "moment_static": "True"
@@ -34,17 +34,17 @@
   }, 
   "moment_paybook": {
     "jkeys": {
-      "belief_name" : { "class_type": "NameTerm"   }, 
-      "moment_label": { "class_type": "LabelTerm"  }, 
+      "belief_name" : { "class_type": "NameTerm"     }, 
+      "moment_label": { "class_type": "LabelTerm"    }, 
       "tran_time"   : { "class_type": "EpochInstant" }, 
-      "voice_name"  : { "class_type": "NameTerm"   }
+      "voice_name"  : { "class_type": "NameTerm"     }
     }, 
     "jvalues": { "amount": {"class_type": "float"} }, 
     "moment_static": "True"
   }, 
   "moment_timeoffi": {
     "jkeys": {
-      "moment_label": { "class_type": "LabelTerm"  }, 
+      "moment_label": { "class_type": "LabelTerm"    }, 
       "offi_time"   : { "class_type": "EpochInstant" }
     }, 
     "jvalues": {}, 

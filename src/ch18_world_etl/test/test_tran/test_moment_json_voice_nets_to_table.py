@@ -2,7 +2,7 @@ from sqlite3 import connect as sqlite3_connect
 from src.ch01_py.db_toolbox import db_table_exists, get_row_count
 from src.ch01_py.file_toolbox import save_json
 from src.ch09_belief_lesson._ref.ch09_path import create_moment_json_path
-from src.ch10_bud.bud_main import tranbook_shop
+from src.ch12_bud.bud_main import tranbook_shop
 from src.ch15_moment.moment_main import momentunit_shop
 from src.ch18_world_etl.test._util.ch18_env import get_temp_dir, temp_dir_setup
 from src.ch18_world_etl.tran_sqlstrs import CREATE_MOMENT_VOICE_NETS_SQLSTR
