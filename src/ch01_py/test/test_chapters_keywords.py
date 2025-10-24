@@ -1,10 +1,21 @@
 from src.ch01_py._ref.ch01_path import create_keywords_classes_file_path
+from src.ch01_py.chapter_desc_tools import get_chapter_desc_prefix
 from src.ch01_py.file_toolbox import open_file, save_file
 from src.ch01_py.keyword_class_builder import (
     create_all_enum_keyword_classes_str,
     create_keywords_enum_class_file_str,
     get_keywords_src_config,
 )
+
+
+def test_get_chapter_desc_prefix_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert get_chapter_desc_prefix("ch03_") == "ch03"
+    assert get_chapter_desc_prefix("ch99") == "ch99"
+    assert get_chapter_desc_prefix("ch03") == "ch03"
+    assert get_chapter_desc_prefix("ch99") == "ch99"
+    assert get_chapter_desc_prefix("chXX") == "chXX"
+    assert get_chapter_desc_prefix("cha01") != "ch02"
 
 
 def test_get_keywords_src_config_ReturnsObj():
@@ -45,12 +56,12 @@ class Ch03{key_str}words(str, Enum):
 def test_create_keywords_enum_class_file_str_ReturnsObj_Scenario1_NonEmpty_keyword_set():
     # ESTABLISH
     ch03_str = "ch03"
-    keywordF = f"Funny"
-    keywordI = f"INSET"
-    keywordf = f"funny"
-    keywordG = f"Guppies"
-    keywordH = f"Heath"
-    keywordR = f"Risto"
+    keywordF = "Funny"
+    keywordI = "INSET"
+    keywordf = "funny"
+    keywordG = "Guppies"
+    keywordH = "Heath"
+    keywordR = "Risto"
     ch03_keywords = {
         keywordF,
         keywordI,
