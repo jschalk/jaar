@@ -44,16 +44,16 @@ class RiverRun:
     need_dues: dict[VoiceName, float] = None
     cycle_max: int = None
     # calculated fields
-    _cares: dict[VoiceName, float] = None
-    _need_yields: dict[VoiceName, float] = None
-    _need_got_prev: float = None
-    _need_got_curr: float = None
-    _cycle_count: int = None
-    _cycle_carees_prev: set = None
-    _cycle_carees_curr: set = None
-    _doctor_count: int = None
-    _patient_count: int = None
-    _rivergrades: dict[VoiceName, RiverGrade] = None
+    cares: dict[VoiceName, float] = None
+    need_yields: dict[VoiceName, float] = None
+    need_got_prev: float = None
+    need_got_curr: float = None
+    cycle_count: int = None
+    cycle_carees_prev: set = None
+    cycle_carees_curr: set = None
+    doctor_count: int = None
+    patient_count: int = None
+    rivergrades: dict[VoiceName, RiverGrade] = None
 
     def set_cycle_max(self, x_cycle_max: int):
         self.cycle_max = get_positive_int(x_cycle_max)
@@ -137,23 +137,23 @@ class RiverRun:
         return self.need_dues
 
     def set_voice_need_yield(self, x_voice_name: VoiceName, need_yield: float):
-        self._need_yields[x_voice_name] = need_yield
+        self.need_yields[x_voice_name] = need_yield
 
     def need_yields_is_empty(self) -> bool:
-        return len(self._need_yields) == 0
+        return len(self.need_yields) == 0
 
     def reset_need_yields(self):
-        self._need_yields = {}
+        self.need_yields = {}
 
     def voice_has_need_yield(self, x_voice_name: VoiceName) -> bool:
-        return self._need_yields.get(x_voice_name) is not None
+        return self.need_yields.get(x_voice_name) is not None
 
     def get_voice_need_yield(self, x_voice_name: VoiceName) -> float:
-        x_need_yield = self._need_yields.get(x_voice_name)
+        x_need_yield = self.need_yields.get(x_voice_name)
         return 0 if x_need_yield is None else x_need_yield
 
     def delete_need_yield(self, x_voice_name: VoiceName):
-        self._need_yields.pop(x_voice_name)
+        self.need_yields.pop(x_voice_name)
 
     def add_voice_need_yield(self, x_voice_name: VoiceName, x_need_yield: float):
         if self.voice_has_need_yield(x_voice_name):
@@ -161,16 +161,16 @@ class RiverRun:
         self.set_voice_need_yield(x_voice_name, x_need_yield)
 
     def get_rivergrade(self, voice_name: VoiceName) -> RiverGrade:
-        return self._rivergrades.get(voice_name)
+        return self.rivergrades.get(voice_name)
 
-    def _rivergrades_is_empty(self) -> bool:
-        return self._rivergrades == {}
+    def rivergrades_is_empty(self) -> bool:
+        return self.rivergrades == {}
 
     def rivergrade_exists(self, voice_name: VoiceName) -> bool:
-        return self._rivergrades.get(voice_name) is not None
+        return self.rivergrades.get(voice_name) is not None
 
     def _get_voice_care(self, voice_name: VoiceName) -> float:
-        return get_0_if_None(self._cares.get(voice_name))
+        return get_0_if_None(self.cares.get(voice_name))
 
     def set_initial_rivergrade(self, voice_name: VoiceName):
         x_rivergrade = rivergrade_shop(
@@ -180,19 +180,19 @@ class RiverRun:
             voice_name,
             self.number,
         )
-        x_rivergrade.doctor_count = self._doctor_count
-        x_rivergrade.patient_count = self._patient_count
+        x_rivergrade.doctor_count = self.doctor_count
+        x_rivergrade.patient_count = self.patient_count
         x_rivergrade.care_amount = self._get_voice_care(voice_name)
-        self._rivergrades[voice_name] = x_rivergrade
+        self.rivergrades[voice_name] = x_rivergrade
 
     def set_all_initial_rivergrades(self):
-        self._rivergrades = {}
+        self.rivergrades = {}
         all_voice_names = self.get_all_keep_patientledger_voice_names()
         for voice_name in all_voice_names:
             self.set_initial_rivergrade(voice_name)
 
     def _set_post_loop_rivergrade_attrs(self):
-        for x_voice_name, voice_rivergrade in self._rivergrades.items():
+        for x_voice_name, voice_rivergrade in self.rivergrades.items():
             need_due_leftover = self.get_voice_need_due(x_voice_name)
             need_due_paid = self.get_voice_need_yield(x_voice_name)
             voice_rivergrade.set_need_bill_amount(need_due_paid + need_due_leftover)
@@ -203,33 +203,33 @@ class RiverRun:
         self._set_cares()
         self.set_all_initial_rivergrades()
 
-        self._cycle_count = 0
+        self.cycle_count = 0
         x_rivercyle = create_init_rivercycle(self.belief_name, self.keep_patientledgers)
         x_cyclelegder = x_rivercyle.create_cylceledger()
-        self._cycle_carees_curr = set(x_cyclelegder.keys())
+        self.cycle_carees_curr = set(x_cyclelegder.keys())
         x_cyclelegder, need_got_curr = self.levy_need_dues(x_cyclelegder)
         self._set_need_got_attrs(need_got_curr)
 
-        while self.cycle_max > self._cycle_count and self.cycles_vary():
+        while self.cycle_max > self.cycle_count and self.cycles_vary():
             x_rivercyle = create_next_rivercycle(x_rivercyle, x_cyclelegder)
             x_cyclelegder, need_got_curr = self.levy_need_dues(x_cyclelegder)
 
             self._set_need_got_attrs(need_got_curr)
-            self._cycle_carees_prev = self._cycle_carees_curr
-            self._cycle_carees_curr = set(x_cyclelegder.keys())
-            self._cycle_count += 1
+            self.cycle_carees_prev = self.cycle_carees_curr
+            self.cycle_carees_curr = set(x_cyclelegder.keys())
+            self.cycle_count += 1
 
         self._set_post_loop_rivergrade_attrs()
 
     def _set_doctor_count_patient_count(self):
         need_dues_voices = set(self.need_dues.keys())
-        need_yields_voices = set(self._need_yields.keys())
-        self._doctor_count = len(need_dues_voices.union(need_yields_voices))
-        self._patient_count = len(self.keep_patientledgers.get(self.belief_name))
+        need_yields_voices = set(self.need_yields.keys())
+        self.doctor_count = len(need_dues_voices.union(need_yields_voices))
+        self.patient_count = len(self.keep_patientledgers.get(self.belief_name))
 
     def _set_cares(self):
         care_patientledger = self.keep_patientledgers.get(self.belief_name)
-        self._cares = allot_scale(
+        self.cares = allot_scale(
             ledger=care_patientledger,
             scale_number=self.keep_point_magnitude,
             grain_unit=self.mana_grain,
@@ -248,18 +248,18 @@ class RiverRun:
         save_json(grade_path, None, rivergrade.to_dict())
 
     def save_rivergrade_files(self):
-        for rivergrade_voice in self._rivergrades.keys():
+        for rivergrade_voice in self.rivergrades.keys():
             self._save_rivergrade_file(rivergrade_voice)
 
     def _cycle_carees_vary(self) -> bool:
-        return self._cycle_carees_prev != self._cycle_carees_curr
+        return self.cycle_carees_prev != self.cycle_carees_curr
 
     def _set_need_got_attrs(self, x_need_got_curr: float):
-        self._need_got_prev = self._need_got_curr
-        self._need_got_curr = x_need_got_curr
+        self.need_got_prev = self.need_got_curr
+        self.need_got_curr = x_need_got_curr
 
     def _need_gotten(self) -> bool:
-        return max(self._need_got_prev, self._need_got_curr) > 0
+        return max(self.need_got_prev, self.need_got_curr) > 0
 
     def cycles_vary(self) -> bool:
         return self._need_gotten() or self._cycle_carees_vary()
@@ -289,15 +289,15 @@ def riverrun_shop(
         number=get_0_if_None(number),
         keep_patientledgers=get_empty_dict_if_None(keep_patientledgers),
         need_dues=get_empty_dict_if_None(need_dues),
-        _rivergrades={},
-        _cares={},
-        _need_yields={},
+        rivergrades={},
+        cares={},
+        need_yields={},
     )
-    x_riverun._cycle_count = 0
-    x_riverun._cycle_carees_prev = set()
-    x_riverun._cycle_carees_curr = set()
-    x_riverun._need_got_prev = 0
-    x_riverun._need_got_curr = 0
+    x_riverun.cycle_count = 0
+    x_riverun.cycle_carees_prev = set()
+    x_riverun.cycle_carees_curr = set()
+    x_riverun.need_got_prev = 0
+    x_riverun.need_got_curr = 0
     if cycle_max is None:
         cycle_max = 10
     x_riverun.set_cycle_max(cycle_max)

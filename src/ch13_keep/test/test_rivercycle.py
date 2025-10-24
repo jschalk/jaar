@@ -188,10 +188,10 @@ def test_create_init_rivercycle_ReturnsObj_Scenario2_magnitude_Default():
     assert len(yao_init_rivercycle.riverbooks) == 1
     yao_riverbook = yao_init_rivercycle.riverbooks.get(yao_str)
     assert yao_riverbook is not None
-    assert len(yao_riverbook._rivercares) == 3
-    assert yao_riverbook._rivercares.get(yao_str) == 350000000
-    assert yao_riverbook._rivercares.get(bob_str) == 150000000
-    assert yao_riverbook._rivercares.get(zia_str) == 500000000
+    assert len(yao_riverbook.rivercares) == 3
+    assert yao_riverbook.rivercares.get(yao_str) == 350000000
+    assert yao_riverbook.rivercares.get(bob_str) == 150000000
+    assert yao_riverbook.rivercares.get(zia_str) == 500000000
 
 
 def test_create_init_rivercycle_ReturnsObj_Scenario3_voiceunit():
@@ -220,10 +220,10 @@ def test_create_init_rivercycle_ReturnsObj_Scenario3_voiceunit():
     assert len(yao_init_rivercycle.riverbooks) == 1
     yao_riverbook = yao_init_rivercycle.riverbooks.get(yao_str)
     assert yao_riverbook is not None
-    assert len(yao_riverbook._rivercares) == 3
-    assert yao_riverbook._rivercares.get(yao_str) == 350
-    assert yao_riverbook._rivercares.get(bob_str) == 150
-    assert yao_riverbook._rivercares.get(zia_str) == 501
+    assert len(yao_riverbook.rivercares) == 3
+    assert yao_riverbook.rivercares.get(yao_str) == 350
+    assert yao_riverbook.rivercares.get(bob_str) == 150
+    assert yao_riverbook.rivercares.get(zia_str) == 501
 
 
 def test_create_next_rivercycle_ReturnsObj_ScenarioThree_voiceunit():
@@ -256,20 +256,20 @@ def test_create_next_rivercycle_ReturnsObj_ScenarioThree_voiceunit():
     assert yao_riverbook is not None
     assert bob_riverbook is not None
     assert zia_riverbook is not None
-    assert len(yao_riverbook._rivercares) == 3
-    assert yao_riverbook._rivercares.get(yao_str) == 122500000
-    assert yao_riverbook._rivercares.get(bob_str) == 52500000
-    assert yao_riverbook._rivercares.get(zia_str) == 175000000
-    assert bob_riverbook._rivercares.get(yao_str) == 3000000
-    assert bob_riverbook._rivercares.get(bob_str) == 21000000
-    assert bob_riverbook._rivercares.get(zia_str) == 126000000
-    assert zia_riverbook._rivercares.get(yao_str) == 148333333
-    assert zia_riverbook._rivercares.get(bob_str) == 250000000
-    assert zia_riverbook._rivercares.get(zia_str) == 101666667
+    assert len(yao_riverbook.rivercares) == 3
+    assert yao_riverbook.rivercares.get(yao_str) == 122500000
+    assert yao_riverbook.rivercares.get(bob_str) == 52500000
+    assert yao_riverbook.rivercares.get(zia_str) == 175000000
+    assert bob_riverbook.rivercares.get(yao_str) == 3000000
+    assert bob_riverbook.rivercares.get(bob_str) == 21000000
+    assert bob_riverbook.rivercares.get(zia_str) == 126000000
+    assert zia_riverbook.rivercares.get(yao_str) == 148333333
+    assert zia_riverbook.rivercares.get(bob_str) == 250000000
+    assert zia_riverbook.rivercares.get(zia_str) == 101666667
 
-    assert sum(zia_riverbook._rivercares.values()) == init_cycleledger.get(zia_str)
-    assert sum(bob_riverbook._rivercares.values()) == init_cycleledger.get(bob_str)
-    assert sum(yao_riverbook._rivercares.values()) == init_cycleledger.get(yao_str)
+    assert sum(zia_riverbook.rivercares.values()) == init_cycleledger.get(zia_str)
+    assert sum(bob_riverbook.rivercares.values()) == init_cycleledger.get(bob_str)
+    assert sum(yao_riverbook.rivercares.values()) == init_cycleledger.get(yao_str)
 
 
 def test_create_next_rivercycle_ReturnsObjDoesNotReference_cycleledger_From_prev_rivercycle():
@@ -303,22 +303,22 @@ def test_create_next_rivercycle_ReturnsObjDoesNotReference_cycleledger_From_prev
     assert yao_riverbook is not None
     assert bob_riverbook is not None
     assert zia_riverbook is not None
-    assert len(yao_riverbook._rivercares) == 3
-    assert yao_riverbook._rivercares.get(yao_str) == 122500000
-    assert yao_riverbook._rivercares.get(bob_str) == 52500000
-    assert yao_riverbook._rivercares.get(zia_str) == 175000000
+    assert len(yao_riverbook.rivercares) == 3
+    assert yao_riverbook.rivercares.get(yao_str) == 122500000
+    assert yao_riverbook.rivercares.get(bob_str) == 52500000
+    assert yao_riverbook.rivercares.get(zia_str) == 175000000
 
-    assert bob_riverbook._rivercares.get(yao_str) != 3000000
-    assert bob_riverbook._rivercares.get(yao_str) == 2990000
-    assert bob_riverbook._rivercares.get(bob_str) != 21000000
-    assert bob_riverbook._rivercares.get(bob_str) == 20930000
-    assert bob_riverbook._rivercares.get(zia_str) != 126000000
-    assert bob_riverbook._rivercares.get(zia_str) == 125580000
+    assert bob_riverbook.rivercares.get(yao_str) != 3000000
+    assert bob_riverbook.rivercares.get(yao_str) == 2990000
+    assert bob_riverbook.rivercares.get(bob_str) != 21000000
+    assert bob_riverbook.rivercares.get(bob_str) == 20930000
+    assert bob_riverbook.rivercares.get(zia_str) != 126000000
+    assert bob_riverbook.rivercares.get(zia_str) == 125580000
 
-    assert zia_riverbook._rivercares.get(yao_str) == 148333333
-    assert zia_riverbook._rivercares.get(bob_str) == 250000000
-    assert zia_riverbook._rivercares.get(zia_str) == 101666667
+    assert zia_riverbook.rivercares.get(yao_str) == 148333333
+    assert zia_riverbook.rivercares.get(bob_str) == 250000000
+    assert zia_riverbook.rivercares.get(zia_str) == 101666667
 
-    assert sum(zia_riverbook._rivercares.values()) == init_cycleledger.get(zia_str)
-    assert sum(bob_riverbook._rivercares.values()) == init_cycleledger.get(bob_str)
-    assert sum(yao_riverbook._rivercares.values()) == init_cycleledger.get(yao_str)
+    assert sum(zia_riverbook.rivercares.values()) == init_cycleledger.get(zia_str)
+    assert sum(bob_riverbook.rivercares.values()) == init_cycleledger.get(bob_str)
+    assert sum(yao_riverbook.rivercares.values()) == init_cycleledger.get(yao_str)

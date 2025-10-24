@@ -11,14 +11,14 @@ def test_RiverRun_set_voice_need_yield_SetsAttr():
     bob_str = "Bob"
     bob_riverrun = riverrun_shop(mstr_dir, a23_str, bob_str)
     yao_str = "Yao"
-    assert bob_riverrun._need_yields.get(yao_str) is None
+    assert bob_riverrun.need_yields.get(yao_str) is None
 
     # WHEN
     yao_need_yield = 7
     bob_riverrun.set_voice_need_yield(yao_str, yao_need_yield)
 
     # THEN
-    assert bob_riverrun._need_yields.get(yao_str) == yao_need_yield
+    assert bob_riverrun.need_yields.get(yao_str) == yao_need_yield
 
 
 def test_RiverRun_need_yields_is_empty_ReturnsObj():
@@ -308,20 +308,20 @@ def test_RiverRun_set_need_got_attrs_SetsAttrs():
     six_need_got = 6
     ten_need_got = 10
     x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
-    assert x_riverrun._need_got_curr == 0
-    assert x_riverrun._need_got_prev == 0
+    assert x_riverrun.need_got_curr == 0
+    assert x_riverrun.need_got_prev == 0
 
     # WHEN
     x_riverrun._set_need_got_attrs(six_need_got)
     # THEN
-    assert x_riverrun._need_got_curr == six_need_got
-    assert x_riverrun._need_got_prev == 0
+    assert x_riverrun.need_got_curr == six_need_got
+    assert x_riverrun.need_got_prev == 0
 
     # WHEN
     x_riverrun._set_need_got_attrs(ten_need_got)
     # THEN
-    assert x_riverrun._need_got_curr == ten_need_got
-    assert x_riverrun._need_got_prev == six_need_got
+    assert x_riverrun.need_got_curr == ten_need_got
+    assert x_riverrun.need_got_prev == six_need_got
 
 
 def test_RiverRun_need_gotten_ReturnsObj():
@@ -332,34 +332,34 @@ def test_RiverRun_need_gotten_ReturnsObj():
     six_need_got = 6
     ten_need_got = 10
     x_riverrun = riverrun_shop(mstr_dir, a23_str, yao_str)
-    assert x_riverrun._need_got_prev == 0
-    assert x_riverrun._need_got_curr == 0
+    assert x_riverrun.need_got_prev == 0
+    assert x_riverrun.need_got_curr == 0
     assert x_riverrun._need_gotten() is False
 
     # WHEN
     x_riverrun._set_need_got_attrs(six_need_got)
     # THEN
-    assert x_riverrun._need_got_prev == 0
-    assert x_riverrun._need_got_curr == six_need_got
+    assert x_riverrun.need_got_prev == 0
+    assert x_riverrun.need_got_curr == six_need_got
     assert x_riverrun._need_gotten()
 
     # ESTABLISH
     x_riverrun._set_need_got_attrs(six_need_got)
     # THEN
-    assert x_riverrun._need_got_prev == six_need_got
-    assert x_riverrun._need_got_curr == six_need_got
+    assert x_riverrun.need_got_prev == six_need_got
+    assert x_riverrun.need_got_curr == six_need_got
     assert x_riverrun._need_gotten()
 
     # WHEN
     x_riverrun._set_need_got_attrs(0)
     # THEN
-    assert x_riverrun._need_got_prev == six_need_got
-    assert x_riverrun._need_got_curr == 0
+    assert x_riverrun.need_got_prev == six_need_got
+    assert x_riverrun.need_got_curr == 0
     assert x_riverrun._need_gotten()
 
     # WHEN
     x_riverrun._set_need_got_attrs(0)
     # THEN
-    assert x_riverrun._need_got_prev == 0
-    assert x_riverrun._need_got_curr == 0
+    assert x_riverrun.need_got_prev == 0
+    assert x_riverrun.need_got_curr == 0
     assert x_riverrun._need_gotten() is False

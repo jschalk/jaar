@@ -36,13 +36,13 @@ def get_doctorledger(x_belief: BeliefUnit) -> dict[VoiceName, RespectNum]:
 @dataclass
 class RiverBook:
     belief_name: BeliefName = None
-    _rivercares: dict[VoiceName, float] = None
+    rivercares: dict[VoiceName, float] = None
     mana_grain: ManaGrain = None
 
 
 def riverbook_shop(belief_name: BeliefName, mana_grain: ManaGrain = None):
     x_riverbook = RiverBook(belief_name)
-    x_riverbook._rivercares = {}
+    x_riverbook.rivercares = {}
     x_riverbook.mana_grain = default_grain_num_if_None(mana_grain)
     return x_riverbook
 
@@ -54,7 +54,7 @@ def create_riverbook(
     mana_grain: ManaGrain = None,
 ) -> RiverBook:
     x_riverbook = riverbook_shop(belief_name, mana_grain)
-    x_riverbook._rivercares = allot_scale(
+    x_riverbook.rivercares = allot_scale(
         ledger=keep_patientledger,
         scale_number=book_point_amount,
         grain_unit=x_riverbook.mana_grain,
@@ -91,7 +91,7 @@ class RiverCycle:
     def create_cylceledger(self) -> dict[VoiceName, float]:
         x_dict = {}
         for x_riverbook in self.riverbooks.values():
-            for caree, charge_amount in x_riverbook._rivercares.items():
+            for caree, charge_amount in x_riverbook.rivercares.items():
                 if x_dict.get(caree) is None:
                     x_dict[caree] = charge_amount
                 else:

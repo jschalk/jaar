@@ -26,16 +26,16 @@ def test_RiverRun_Exists():
     assert not x_riverrun.need_dues
     assert not x_riverrun.cycle_max
     # calculated fields
-    assert not x_riverrun._rivergrades
-    assert not x_riverrun._cares
-    assert not x_riverrun._need_yields
-    assert not x_riverrun._need_got_prev
-    assert not x_riverrun._need_got_curr
-    assert not x_riverrun._cycle_count
-    assert not x_riverrun._cycle_carees_prev
-    assert not x_riverrun._cycle_carees_curr
-    assert not x_riverrun._doctor_count
-    assert not x_riverrun._patient_count
+    assert not x_riverrun.rivergrades
+    assert not x_riverrun.cares
+    assert not x_riverrun.need_yields
+    assert not x_riverrun.need_got_prev
+    assert not x_riverrun.need_got_curr
+    assert not x_riverrun.cycle_count
+    assert not x_riverrun.cycle_carees_prev
+    assert not x_riverrun.cycle_carees_curr
+    assert not x_riverrun.doctor_count
+    assert not x_riverrun.patient_count
     assert set(x_riverrun.__dict__.keys()) == {
         kw.moment_mstr_dir,
         kw.moment_label,
@@ -48,16 +48,16 @@ def test_RiverRun_Exists():
         kw.keep_patientledgers,
         kw.need_dues,
         kw.cycle_max,
-        kw._rivergrades,
-        kw._cares,
-        kw._need_yields,
-        kw._need_got_prev,
-        kw._need_got_curr,
-        kw._cycle_count,
-        kw._cycle_carees_prev,
-        kw._cycle_carees_curr,
-        kw._doctor_count,
-        kw._patient_count,
+        kw.rivergrades,
+        kw.cares,
+        kw.need_yields,
+        kw.need_got_prev,
+        kw.need_got_curr,
+        kw.cycle_count,
+        kw.cycle_carees_prev,
+        kw.cycle_carees_curr,
+        kw.doctor_count,
+        kw.patient_count,
     }
 
 
@@ -124,14 +124,14 @@ def test_riverrun_shop_ReturnsObj_Scenario0_WithArgs():
     assert x_riverrun.keep_patientledgers == keep_patientledgers
     assert x_riverrun.need_dues == x_need_dues
     assert x_riverrun.cycle_max == x_cycle_max
-    assert x_riverrun._rivergrades == {}
-    assert x_riverrun._cares == {}
-    assert x_riverrun._need_yields == {}
-    assert x_riverrun._need_got_prev == 0
-    assert x_riverrun._need_got_curr == 0
-    assert x_riverrun._cycle_count == 0
-    assert x_riverrun._cycle_carees_prev == set()
-    assert x_riverrun._cycle_carees_curr == set()
+    assert x_riverrun.rivergrades == {}
+    assert x_riverrun.cares == {}
+    assert x_riverrun.need_yields == {}
+    assert x_riverrun.need_got_prev == 0
+    assert x_riverrun.need_got_curr == 0
+    assert x_riverrun.cycle_count == 0
+    assert x_riverrun.cycle_carees_prev == set()
+    assert x_riverrun.cycle_carees_curr == set()
 
 
 def test_riverrun_shop_ReturnsObj_Scenario1_WithoutArgs():
@@ -158,10 +158,10 @@ def test_riverrun_shop_ReturnsObj_Scenario1_WithoutArgs():
     assert x_riverrun.number == 0
     assert x_riverrun.keep_patientledgers == {}
     assert x_riverrun.need_dues == {}
-    assert x_riverrun._rivergrades == {}
-    assert x_riverrun._cares == {}
-    assert x_riverrun._need_yields == {}
-    assert x_riverrun._cycle_count == 0
+    assert x_riverrun.rivergrades == {}
+    assert x_riverrun.cares == {}
+    assert x_riverrun.need_yields == {}
+    assert x_riverrun.cycle_count == 0
     assert x_riverrun.cycle_max == 10
 
 

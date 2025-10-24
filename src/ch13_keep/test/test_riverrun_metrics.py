@@ -20,9 +20,9 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario01():
 
     # THEN
     assert x_riverrun.get_voice_need_due(yao_str) == 0
-    assert x_riverrun._cycle_count == 1
-    assert x_riverrun._doctor_count == 0
-    assert x_riverrun._patient_count == 1
+    assert x_riverrun.cycle_count == 1
+    assert x_riverrun.doctor_count == 0
+    assert x_riverrun.patient_count == 1
     yao_rivergrade = x_riverrun.get_rivergrade(yao_str)
     assert yao_rivergrade is not None
     assert yao_rivergrade.moment_label == a23_str
@@ -66,9 +66,9 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario02():
     # THEN
     assert x_riverrun.get_voice_need_due(yao_str) == 0
     assert x_riverrun.get_voice_need_due(bob_str) == keep_mana_amount
-    assert x_riverrun._cycle_count == 1
-    assert x_riverrun._doctor_count == 1
-    assert x_riverrun._patient_count == 1
+    assert x_riverrun.cycle_count == 1
+    assert x_riverrun.doctor_count == 1
+    assert x_riverrun.patient_count == 1
     yao_rivergrade = x_riverrun.get_rivergrade(yao_str)
     assert yao_rivergrade is not None
     assert yao_rivergrade.moment_label == a23_str
@@ -117,9 +117,9 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario03():
     assert x_riverrun.get_voice_need_due(yao_str) == 0
     assert x_riverrun.get_voice_need_due(bob_str) == keep_mana_amount * 0.25
     assert x_riverrun.get_voice_need_due(sue_str) == keep_mana_amount * 0.75
-    assert x_riverrun._cycle_count == 1
-    assert x_riverrun._doctor_count == 2
-    assert x_riverrun._patient_count == 1
+    assert x_riverrun.cycle_count == 1
+    assert x_riverrun.doctor_count == 2
+    assert x_riverrun.patient_count == 1
     yao_rivergrade = x_riverrun.get_rivergrade(yao_str)
     assert yao_rivergrade is not None
     assert yao_rivergrade.moment_label == a23_str
@@ -171,9 +171,9 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario04():
     assert x_riverrun.get_voice_need_due(bob_str) == keep_mana_amount * 0.25
     assert x_riverrun.get_voice_need_due(sue_str) == 0
     assert x_riverrun.get_voice_need_yield(sue_str) == keep_mana_amount * 0.75
-    assert x_riverrun._cycle_count == 2
-    assert x_riverrun._doctor_count == 2
-    assert x_riverrun._patient_count == 2
+    assert x_riverrun.cycle_count == 2
+    assert x_riverrun.doctor_count == 2
+    assert x_riverrun.patient_count == 2
     yao_rivergrade = x_riverrun.get_rivergrade(yao_str)
     sue_rivergrade = x_riverrun.get_rivergrade(sue_str)
     assert yao_rivergrade.care_amount == keep_mana_amount * 0.2
@@ -212,9 +212,9 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario05():
     # THEN
     assert x_riverrun.get_voice_need_due(yao_str) == 0
     assert x_riverrun.get_voice_need_yield(yao_str) == keep_mana_amount
-    assert x_riverrun._cycle_count == 2
-    assert x_riverrun._doctor_count == 1
-    assert x_riverrun._patient_count == 1
+    assert x_riverrun.cycle_count == 2
+    assert x_riverrun.doctor_count == 1
+    assert x_riverrun.patient_count == 1
     yao_rivergrade = x_riverrun.get_rivergrade(yao_str)
     assert yao_rivergrade is not None
     assert yao_rivergrade.moment_label == a23_str
@@ -261,16 +261,16 @@ def test_RiverRun_calc_metrics_EndsRiverCycleLoopIfNoDifferencesBetweenCycles():
     keep_mana_amount = x_riverrun.keep_point_magnitude
     assert x_riverrun.get_voice_need_due(yao_str) == 0
     assert x_riverrun.get_voice_need_due(bob_str) == keep_mana_amount
-    assert x_riverrun._cycle_count == 0
-    assert x_riverrun._cycle_carees_prev == set()
-    assert x_riverrun._cycle_carees_curr == set()
+    assert x_riverrun.cycle_count == 0
+    assert x_riverrun.cycle_carees_prev == set()
+    assert x_riverrun.cycle_carees_curr == set()
 
     # WHEN
     x_riverrun.calc_metrics()
 
     # THEN
-    assert x_riverrun._cycle_carees_prev == {yao_str}
-    assert x_riverrun._cycle_carees_curr == {yao_str}
+    assert x_riverrun.cycle_carees_prev == {yao_str}
+    assert x_riverrun.cycle_carees_curr == {yao_str}
     assert x_riverrun.get_voice_need_due(yao_str) == 0
     assert x_riverrun.get_voice_need_due(bob_str) == keep_mana_amount
-    assert x_riverrun._cycle_count == 1
+    assert x_riverrun.cycle_count == 1
