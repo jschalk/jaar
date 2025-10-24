@@ -30,4 +30,6 @@ class CRUD_command(str):
 
 
 class EpochTime(int):
+    """An Integar that can represent a instant on the EpochTimeLine"""
+
     pass

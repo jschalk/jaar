@@ -10,6 +10,7 @@ from src.ch04_rope.rope import (
     rebuild_rope,
     replace_knot,
 )
+from src.ch05_reason._ref.ch05_semantic_types import MaybeEpoch
 
 
 class InvalidReasonException(Exception):

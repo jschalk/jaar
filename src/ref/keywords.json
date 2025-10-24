@@ -20,6 +20,7 @@
   "GroupTitle": {"init_chapter": "ch03", "semantic_type": "str"}, 
   "HealerName": {"init_chapter": "ch03", "semantic_type": "str"}, 
   "INSERT": {"init_chapter": "ch01"}, 
+  "MaybeEpoch": {"init_chapter": "ch04", "semantic_type": "float"}, 
   "KnotTerm": {"init_chapter": "ch04", "semantic_type": "str"}, 
   "LabelTerm": {"init_chapter": "ch02", "semantic_type": "str"}, 
   "LobbyID": {"init_chapter": "ch21", "semantic_type": "str"}, 

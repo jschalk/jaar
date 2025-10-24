@@ -18,3 +18,10 @@ from src.ch04_rope._ref.ch04_semantic_types import (
     RopeTerm,
     default_knot_if_None,
 )
+
+
+class MaybeEpoch(float):
+    """A numeric value that may or may not represent an min in an Epoch.
+    It's Epoch-relatedness is determined externally by context."""
+
+    pass
