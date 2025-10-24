@@ -1,31 +1,18 @@
-from src.ch04_rope.rope import get_tail_label
 from src.ch06_plan.test._util.ch06_examples import get_range_attrs
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     PlanUnit,
     RopeTerm,
-    beliefunit_shop,
-    get_sorted_plan_list,
 )
-from src.ch07_belief_logic.belief_tool import (
-    belief_plan_reason_caseunit_exists,
-    belief_plan_reason_caseunit_get_obj,
-    belief_plan_reason_caseunit_set_obj,
-    belief_plan_reasonunit_exists,
-    belief_plan_reasonunit_get_obj,
-    get_belief_root_facts_dict,
-    set_factunits_to_belief,
-)
-from src.ch14_epoch.epoch_main import add_epoch_planunit
 from src.ch14_epoch.epoch_reason import (
     set_epoch_base_case_dayly,
     set_epoch_cases_for_monthly,
     set_epoch_cases_for_yearly_monthday,
 )
+from src.ch14_epoch._ref.ch14_semantic_types import MaybeEpoch
 from src.ch14_epoch.test._util.ch14_examples import (
     Ch14ExampleStrs as wx,
     get_bob_five_belief,
-    get_five_config,
 )
 from src.ref.keywords import Ch14Keywords as kw
 
@@ -114,8 +101,8 @@ def test_set_epoch_cases_for_yearly_monthday_ChangesBeliefUnit_agenda():
 def expected_ag_count_fact_set(
     mop_plan: PlanUnit,
     x_belief: BeliefUnit,
-    fact_lower: float,
-    fact_upper: float,
+    fact_lower: MaybeEpoch,
+    fact_upper: MaybeEpoch,
     expected: int,
 ) -> dict[RopeTerm, PlanUnit]:
     x_belief.add_fact(wx.five_rope, wx.five_rope, fact_lower, fact_upper)

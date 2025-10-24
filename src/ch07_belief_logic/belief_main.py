@@ -50,6 +50,7 @@ from src.ch07_belief_logic._ref.ch07_semantic_types import (
     KnotTerm,
     LabelTerm,
     ManaGrain,
+    MaybeEpoch,
     MomentLabel,
     RespectGrain,
     RespectNum,
@@ -413,8 +414,8 @@ class BeliefUnit:
         self,
         fact_context: RopeTerm,
         fact_state: RopeTerm = None,
-        fact_lower: float = None,
-        fact_upper: float = None,
+        fact_lower: MaybeEpoch = None,
+        fact_upper: MaybeEpoch = None,
         create_missing_plans: bool = None,
     ):
         """Sets planroot factunit"""
@@ -749,8 +750,8 @@ class BeliefUnit:
         plan_rope: RopeTerm,
         reason_context: RopeTerm = None,
         reason_case: RopeTerm = None,
-        reason_lower: float = None,
-        reason_upper: float = None,
+        reason_lower: MaybeEpoch = None,
+        reason_upper: MaybeEpoch = None,
         reason_divisor: int = None,
     ):
         self.edit_plan_attr(
@@ -770,8 +771,8 @@ class BeliefUnit:
         reason: ReasonUnit = None,
         reason_context: RopeTerm = None,
         reason_case: RopeTerm = None,
-        reason_lower: float = None,
-        reason_upper: float = None,
+        reason_lower: MaybeEpoch = None,
+        reason_upper: MaybeEpoch = None,
         reason_divisor: int = None,
         reason_del_case_reason_context: RopeTerm = None,
         reason_del_case_reason_state: RopeTerm = None,

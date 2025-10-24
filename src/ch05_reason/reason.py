@@ -21,8 +21,8 @@ class InvalidReasonException(Exception):
 class FactCore:
     fact_context: RopeTerm = None
     fact_state: RopeTerm = None
-    fact_lower: float = None
-    fact_upper: float = None
+    fact_lower: MaybeEpoch = None
+    fact_upper: MaybeEpoch = None
 
     def to_dict(self) -> dict[str,]:
         """Returns dict that is serializable to JSON."""
@@ -43,8 +43,8 @@ class FactCore:
     def set_attr(
         self,
         fact_state: RopeTerm = None,
-        fact_lower: float = None,
-        fact_upper: float = None,
+        fact_lower: MaybeEpoch = None,
+        fact_upper: MaybeEpoch = None,
     ):
         if fact_state is not None:
             self.fact_state = fact_state
@@ -77,8 +77,8 @@ class FactUnit(FactCore):
 def factunit_shop(
     fact_context: RopeTerm = None,
     fact_state: RopeTerm = None,
-    fact_lower: float = None,
-    fact_upper: float = None,
+    fact_lower: MaybeEpoch = None,
+    fact_upper: MaybeEpoch = None,
 ) -> FactUnit:
     return FactUnit(
         fact_context=fact_context,
@@ -144,8 +144,8 @@ class FactHeir(FactCore):
 def factheir_shop(
     fact_context: RopeTerm = None,
     fact_state: RopeTerm = None,
-    fact_lower: float = None,
-    fact_upper: float = None,
+    fact_lower: MaybeEpoch = None,
+    fact_upper: MaybeEpoch = None,
 ) -> FactHeir:
     return FactHeir(
         fact_context=fact_context,
@@ -161,8 +161,12 @@ class CaseActiveFinderException(Exception):
 
 @dataclass
 class CaseActiveFinder:
-    reason_lower: float  # between 0 and reason_divisor, can be more than reason_upper
-    reason_upper: float  # between 0 and reason_divisor, can be less than reason_lower
+    reason_lower: (
+        MaybeEpoch  # between 0 and reason_divisor, can be more than reason_upper
+    )
+    reason_upper: (
+        MaybeEpoch  # between 0 and reason_divisor, can be less than reason_lower
+    )
     reason_divisor: float  # greater than zero
     fact_lower_full: float  # less than fact_upper
     fact_upper_full: float
@@ -260,8 +264,8 @@ def get_range_less_than_reason_divisor_active(
 
 
 def get_collasped_fact_range_active(
-    reason_lower: float,
-    reason_upper: float,
+    reason_lower: MaybeEpoch,
+    reason_upper: MaybeEpoch,
     reason_divisor: float,
     fact_upper_full: float,
 ) -> bool:
@@ -276,8 +280,8 @@ def get_collasped_fact_range_active(
 
 
 def caseactivefinder_shop(
-    reason_lower: float,
-    reason_upper: float,
+    reason_lower: MaybeEpoch,
+    reason_upper: MaybeEpoch,
     reason_divisor: float,
     fact_lower_full: float,
     fact_upper_full: float,
@@ -296,8 +300,8 @@ def caseactivefinder_shop(
 @dataclass
 class CaseUnit:
     reason_state: RopeTerm
-    reason_lower: float = None
-    reason_upper: float = None
+    reason_lower: MaybeEpoch = None
+    reason_upper: MaybeEpoch = None
     reason_divisor: int = None
     case_active: bool = None
     task: bool = None
@@ -433,8 +437,8 @@ class CaseUnit:
 # class casesshop:
 def caseunit_shop(
     reason_state: RopeTerm,
-    reason_lower: float = None,
-    reason_upper: float = None,
+    reason_lower: MaybeEpoch = None,
+    reason_upper: MaybeEpoch = None,
     reason_divisor: float = None,
     knot: KnotTerm = None,
 ) -> CaseUnit:
@@ -505,8 +509,8 @@ class ReasonCore:
     def set_case(
         self,
         case: RopeTerm,
-        reason_lower: float = None,
-        reason_upper: float = None,
+        reason_lower: MaybeEpoch = None,
+        reason_upper: MaybeEpoch = None,
         reason_divisor: int = None,
     ):
         self.cases[case] = caseunit_shop(
