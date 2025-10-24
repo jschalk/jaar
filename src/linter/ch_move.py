@@ -10,6 +10,10 @@ from src.linter.chapter_migration_tools import (
     string_exists_in_filepaths,
 )
 
+# HOW TO USE:
+# Open up CMD, change directory to repo
+# Enter this: python -m src.linter.ch_move -x
+
 
 def main():
     src_dir = create_path(os_getcwd(), "src")
