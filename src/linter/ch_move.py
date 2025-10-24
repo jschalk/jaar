@@ -19,6 +19,8 @@ def main():
     dst_chxx_int = int(dst_chxx_str)
     src_chxx_prefix = f"ch{src_chxx_int:02}"
     dst_chxx_prefix = f"ch{dst_chxx_int:02}"
+    src_uppercase_chxx = f"Ch{src_chxx_int:02}"
+    dst_uppercase_chxx = f"Ch{dst_chxx_int:02}"
     print(f"Goal is to move {src_chxx_prefix} to {dst_chxx_prefix}")
 
     # Sanity checks
@@ -42,6 +44,7 @@ def main():
     # change ref json
     change_ref_json(src_dir, src_chxx_prefix, prefix_dir, dst_chxx_int)
     replace_in_tracked_python_files(src_chxx_prefix, replace_text=dst_chxx_prefix)
+    replace_in_tracked_python_files(src_uppercase_chxx, dst_uppercase_chxx)
     rename_files_and_folders_4times(src_dir, src_chxx_prefix, dst_chxx_prefix)
     print("✅ Replacement complete.")
 
