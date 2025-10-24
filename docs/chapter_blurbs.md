@@ -13,8 +13,8 @@ What does each one do?
 - **ch07_belief_logic**: Defines a BeliefUnit as a PlanUnit and VoiceUnits capable of producing an agenda.
 - **ch08_belief_atom**: Defines BeliefAtoms: Irreducible units of change for a BeliefUnit.
 - **ch09_belief_lesson**: Defines lessons which are collections of BeliefAtoms by FaceName
-- **ch10_bud**: Defines BeliefBudHistory: BeliefName, BudUnits (EpochInstant, quota, celldepth)
 - **ch11_belief_listen**: These tools describe how one BeliefUnit listens to another.
+- **ch12_bud**: Defines BeliefBudHistory: BeliefName, BudUnits (EpochInstant, quota, celldepth)
 - **ch13_keep**: Builds a simulation that describes how much credit a healer has earned.
 - **ch14_epoch**: Defines how time is handled by BeliefUnits. Allows for arbitrary time structures.
 - **ch15_moment**: Defines MomentUnits: common time tech, ledger, VoiceNames, history of BeliefUnits.

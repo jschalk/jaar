@@ -1,9 +1,9 @@
-from src.ch10_bud.test._util.ch10_examples import (
+from src.ch12_bud.test._util.ch12_examples import (
     example_casa_clean_factunit,
     example_casa_dirty_factunit,
     example_sky_blue_factunit,
 )
-from src.ch10_bud.weighted_facts_tool import get_nodes_with_weighted_facts
+from src.ch12_bud.weighted_facts_tool import get_nodes_with_weighted_facts
 
 
 def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario00_RootOnly_NoFacts():

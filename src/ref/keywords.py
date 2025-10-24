@@ -871,7 +871,7 @@ class Ch09Keywords(str, Enum):
         return self.value
 
 
-class Ch10Keywords(str, Enum):
+class Ch11Keywords(str, Enum):
     BeliefName = "BeliefName"
     CRUD_command = "CRUD_command"
     DELETE = "DELETE"
@@ -894,7 +894,6 @@ class Ch10Keywords(str, Enum):
     RespectGrain = "RespectGrain"
     RespectNum = "RespectNum"
     RopeTerm = "RopeTerm"
-    SparkInt = "SparkInt"
     TitleTerm = "TitleTerm"
     UPDATE = "UPDATE"
     VoiceName = "VoiceName"
@@ -903,7 +902,6 @@ class Ch10Keywords(str, Enum):
     addin = "addin"
     all_voice_cred = "all_voice_cred"
     all_voice_debt = "all_voice_debt"
-    amount = "amount"
     ancestors = "ancestors"
     atom = "atom"
     atom_hx = "atom_hx"
@@ -925,17 +923,10 @@ class Ch10Keywords(str, Enum):
     belief_planunit = "belief_planunit"
     belief_voice_membership = "belief_voice_membership"
     belief_voiceunit = "belief_voiceunit"
-    beliefadjust = "beliefadjust"
-    beliefspark_facts = "beliefspark_facts"
     beliefunit = "beliefunit"
-    boss_facts = "boss_facts"
-    bud_belief_name = "bud_belief_name"
-    bud_time = "bud_time"
-    bud_voice_nets = "bud_voice_nets"
     case_active = "case_active"
     cases = "cases"
     cashout = "cashout"
-    celldepth = "celldepth"
     class_type = "class_type"
     close = "close"
     column_order = "column_order"
@@ -948,7 +939,6 @@ class Ch10Keywords(str, Enum):
     descendant_pledge_count = "descendant_pledge_count"
     dimen = "dimen"
     dimens = "dimens"
-    epoch = "epoch"
     face_name = "face_name"
     fact_context = "fact_context"
     fact_lower = "fact_lower"
@@ -956,7 +946,6 @@ class Ch10Keywords(str, Enum):
     fact_upper = "fact_upper"
     factheirs = "factheirs"
     factunits = "factunits"
-    found_facts = "found_facts"
     fund_agenda_give = "fund_agenda_give"
     fund_agenda_ratio_give = "fund_agenda_ratio_give"
     fund_agenda_ratio_take = "fund_agenda_ratio_take"
@@ -994,7 +983,6 @@ class Ch10Keywords(str, Enum):
     laborheir = "laborheir"
     laborunit = "laborunit"
     last_lesson_id = "last_lesson_id"
-    magnitude = "magnitude"
     mana_grain = "mana_grain"
     mandate = "mandate"
     max_tree_traverse = "max_tree_traverse"
@@ -1006,8 +994,6 @@ class Ch10Keywords(str, Enum):
     normal_specs = "normal_specs"
     normal_table_name = "normal_table_name"
     numor = "numor"
-    offi_time = "offi_time"
-    offi_time_max = "offi_time_max"
     offtrack_fund = "offtrack_fund"
     offtrack_kids_star_set = "offtrack_kids_star_set"
     parent_heir_active = "parent_heir_active"
@@ -1024,7 +1010,6 @@ class Ch10Keywords(str, Enum):
     planroot = "planroot"
     pledge = "pledge"
     problem_bool = "problem_bool"
-    quota = "quota"
     range_evaluated = "range_evaluated"
     range_inheritors = "range_inheritors"
     rational = "rational"
@@ -1048,8 +1033,6 @@ class Ch10Keywords(str, Enum):
     take_force = "take_force"
     tally = "tally"
     task = "task"
-    time = "time"
-    tran_time = "tran_time"
     tree_level = "tree_level"
     tree_traverse_count = "tree_traverse_count"
     uid = "uid"
@@ -1063,7 +1046,7 @@ class Ch10Keywords(str, Enum):
         return self.value
 
 
-class Ch11Keywords(str, Enum):
+class Ch12Keywords(str, Enum):
     BeliefName = "BeliefName"
     CRUD_command = "CRUD_command"
     DELETE = "DELETE"

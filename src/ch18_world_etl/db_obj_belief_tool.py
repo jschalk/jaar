@@ -8,7 +8,7 @@ from src.ch03_voice.voice import VoiceUnit
 from src.ch05_reason.reason import CaseUnit, FactHeir, ReasonHeir
 from src.ch06_plan.plan import HealerUnit, PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit
-from src.ch10_bud.bud_main import MomentLabel
+from src.ch12_bud.bud_main import MomentLabel
 from src.ch18_world_etl._ref.ch18_semantic_types import (
     BeliefName,
     GroupTitle,

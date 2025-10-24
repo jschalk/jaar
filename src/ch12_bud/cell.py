@@ -23,7 +23,7 @@ from src.ch07_belief_logic.belief_tool import (
     get_credit_ledger,
     get_voice_mandate_ledger,
 )
-from src.ch10_bud._ref.ch10_semantic_types import (
+from src.ch12_bud._ref.ch12_semantic_types import (
     BeliefName,
     FundNum,
     ManaGrain,

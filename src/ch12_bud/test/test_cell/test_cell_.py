@@ -2,20 +2,20 @@ from copy import deepcopy as copy_deepcopy
 from src.ch04_rope.rope import create_rope
 from src.ch05_reason.reason import factunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch10_bud.cell import (
+from src.ch12_bud.cell import (
     CELLNODE_QUOTA_DEFAULT,
     CellUnit,
     cellunit_shop,
     create_child_cellunits,
 )
-from src.ch10_bud.test._util.ch10_examples import (
-    Ch10ExampleStrs as wx,
+from src.ch12_bud.test._util.ch12_examples import (
+    Ch12ExampleStrs as wx,
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
     example_casa_grimy_factunit as grimy_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
-from src.ref.keywords import Ch10Keywords as kw
+from src.ref.keywords import Ch12Keywords as kw
 
 
 def test_CELLNODE_QUOTA_DEFAULT_value():

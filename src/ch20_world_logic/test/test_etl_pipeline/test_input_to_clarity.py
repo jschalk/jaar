@@ -9,7 +9,7 @@ from src.ch09_belief_lesson._ref.ch09_path import (
     create_moment_json_path,
 )
 from src.ch09_belief_lesson.lesson_filehandler import open_gut_file
-from src.ch10_bud._ref.ch10_path import (
+from src.ch12_bud._ref.ch12_path import (
     create_spark_all_lesson_path,
     create_spark_expressed_lesson_path as expressed_path,
 )

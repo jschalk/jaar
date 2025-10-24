@@ -1,4 +1,4 @@
-from src.ch10_bud.bud_main import tranbook_shop, tranunit_shop
+from src.ch12_bud.bud_main import tranbook_shop, tranunit_shop
 
 
 def test_TranBook_join_SetsAttr():

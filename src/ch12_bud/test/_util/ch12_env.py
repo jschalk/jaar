@@ -3,7 +3,7 @@ from src.ch01_py.file_toolbox import delete_dir
 
 
 def get_temp_dir():
-    return "src\\ch10_bud\\test\\_util\\temp"
+    return "src\\ch12_bud\\test\\_util\\temp"
 
 
 @pytest_fixture()

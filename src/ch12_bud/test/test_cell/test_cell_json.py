@@ -1,11 +1,11 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch10_bud.cell import cellunit_get_from_dict, cellunit_shop
-from src.ch10_bud.test._util.ch10_examples import (
+from src.ch12_bud.cell import cellunit_get_from_dict, cellunit_shop
+from src.ch12_bud.test._util.ch12_examples import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
-from src.ref.keywords import Ch10Keywords as kw
+from src.ref.keywords import Ch12Keywords as kw
 
 
 def test_CellUnit_to_dict_ReturnsObj_Scenario0():

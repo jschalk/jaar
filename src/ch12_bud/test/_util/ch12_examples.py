@@ -10,8 +10,8 @@ from src.ch09_belief_lesson.test._util.ch09_examples import (
     get_atom_example_planunit_knee,
     get_atom_example_planunit_sports,
 )
-from src.ch10_bud.bud_main import BudUnit, budunit_shop
-from src.ref.keywords import Ch10Keywords as kw
+from src.ch12_bud.bud_main import BudUnit, budunit_shop
+from src.ref.keywords import Ch12Keywords as kw
 
 A23_STR = "amy23"
 CASA_STR = "casa"
@@ -29,7 +29,7 @@ CASA_ROPE = SUE_BELIEF.make_l1_rope(CASA_STR)
 MOP_ROPE = SUE_BELIEF.make_rope(CASA_ROPE, MOOP_STR)
 
 
-class Ch10ExampleStrs(str, Enum):
+class Ch12ExampleStrs(str, Enum):
     a23 = A23_STR
     casa = CASA_STR
     casa_rope = CASA_ROPE
@@ -47,7 +47,7 @@ class Ch10ExampleStrs(str, Enum):
         return self.value
 
 
-def get_ch10_example_moment_label() -> str:
+def get_ch12_example_moment_label() -> str:
     return "fizz"
 
 

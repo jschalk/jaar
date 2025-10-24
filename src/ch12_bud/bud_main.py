@@ -10,7 +10,7 @@ from src.ch01_py.dict_toolbox import (
     set_in_nested_dict,
 )
 from src.ch02_allot.allot import default_pool_num
-from src.ch10_bud._ref.ch10_semantic_types import (
+from src.ch12_bud._ref.ch12_semantic_types import (
     BeliefName,
     EpochInstant,
     FundNum,

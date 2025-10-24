@@ -5,7 +5,7 @@ from src.ch09_belief_lesson._ref.ch09_path import (
     create_moment_beliefs_dir_path,
     create_moment_json_path,
 )
-from src.ch10_bud._ref.ch10_path import create_beliefspark_path
+from src.ch12_bud._ref.ch12_path import create_beliefspark_path
 from src.ch15_moment._ref.ch15_path import (
     create_bud_voice_mandate_ledger_path as bud_mandate_path,
 )

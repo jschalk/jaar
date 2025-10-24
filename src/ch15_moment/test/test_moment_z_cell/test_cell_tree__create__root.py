@@ -4,8 +4,8 @@ from src.ch09_belief_lesson._ref.ch09_path import (
     create_moment_beliefs_dir_path,
     create_moment_json_path,
 )
-from src.ch10_bud._ref.ch10_path import create_cell_json_path
-from src.ch10_bud.bud_main import DEFAULT_CELLDEPTH
+from src.ch12_bud._ref.ch12_path import create_cell_json_path
+from src.ch12_bud.bud_main import DEFAULT_CELLDEPTH
 from src.ch15_moment.moment_main import _get_ote1_max_past_spark_num, momentunit_shop
 from src.ch15_moment.test._util.ch15_env import get_temp_dir, temp_dir_setup
 from src.ref.keywords import Ch15Keywords as kw

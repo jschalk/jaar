@@ -1,7 +1,7 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from src.ch01_py.file_toolbox import create_path
-from src.ch10_bud._ref.ch10_path import (
+from src.ch12_bud._ref.ch12_path import (
     BELIEFINSTANT_FILENAME,
     BELIEFSPARK_FILENAME,
     BUDUNIT_FILENAME,
@@ -22,8 +22,8 @@ from src.ch10_bud._ref.ch10_path import (
     create_spark_all_lesson_path,
     create_spark_expressed_lesson_path,
 )
-from src.ch10_bud.test._util.ch10_env import get_temp_dir
-from src.ref.keywords import Ch10Keywords as kw
+from src.ch12_bud.test._util.ch12_env import get_temp_dir
+from src.ref.keywords import Ch12Keywords as kw
 
 
 def test_create_buds_dir_path_ReturnsObj():

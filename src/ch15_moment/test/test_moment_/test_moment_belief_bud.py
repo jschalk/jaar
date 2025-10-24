@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch10_bud.bud_main import beliefbudhistory_shop
+from src.ch12_bud.bud_main import beliefbudhistory_shop
 from src.ch15_moment.moment_main import momentunit_shop
 from src.ch15_moment.test._util.ch15_env import get_temp_dir
 

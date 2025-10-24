@@ -1,10 +1,10 @@
 from os.path import exists as os_path_exists
 from src.ch01_py.file_toolbox import open_json, save_json
 from src.ch09_belief_lesson._ref.ch09_path import create_moment_json_path
-from src.ch10_bud._ref.ch10_path import (
+from src.ch12_bud._ref.ch12_path import (
     create_cell_voice_mandate_ledger_path as cell_mandate_path,
 )
-from src.ch10_bud.bud_main import tranbook_shop
+from src.ch12_bud.bud_main import tranbook_shop
 from src.ch15_moment._ref.ch15_path import (
     create_bud_voice_mandate_ledger_path as bud_mandate_path,
 )
