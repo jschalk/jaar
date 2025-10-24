@@ -2,7 +2,7 @@ from sqlite3 import Cursor as sqlite3_Cursor, connect as sqlite3_connect
 from src.ch01_py.db_toolbox import db_table_exists, get_db_tables
 from src.ch01_py.file_toolbox import create_path, get_level1_dirs, save_file, set_dir
 from src.ch14_epoch.calendar_markdown import get_calendarmarkdown_str
-from src.ch15_moment.moment_epoch import get_moment_beliefEpochInstant
+from src.ch15_moment.moment_epoch import get_moment_beliefEpochTime
 from src.ch15_moment.moment_main import get_default_path_momentunit
 from src.ch17_idea.idea_db_tool import save_table_to_csv
 from src.ch19_world_kpi.kpi_sqlstrs import (
@@ -80,8 +80,8 @@ def create_calendar_markdown_files(moment_mstr_dir: str, output_dir: str):
     for moment_label in get_level1_dirs(moments_dir):
         moment_calendar_md_path = create_path(output_dir, f"{moment_label}_calendar.md")
         x_momentunit = get_default_path_momentunit(moment_mstr_dir, moment_label)
-        moment_beliefEpochInstant = get_moment_beliefEpochInstant(x_momentunit)
-        moment_year_num = moment_beliefEpochInstant._year_num
+        moment_beliefEpochTime = get_moment_beliefEpochTime(x_momentunit)
+        moment_year_num = moment_beliefEpochTime._year_num
         moment_epoch_config = x_momentunit.epoch.to_dict()
         x_calendarmarkdown = get_calendarmarkdown_str(
             moment_epoch_config, moment_year_num

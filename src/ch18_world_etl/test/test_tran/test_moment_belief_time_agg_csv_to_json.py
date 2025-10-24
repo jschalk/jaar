@@ -19,17 +19,17 @@ def test_etl_moment_ote1_agg_csvs_to_jsons_CreatesFile_Scenaro0(
     spark7 = 7
     amy23_str = "amy23"
     amy45_str = "amy45"
-    epochinstant55 = 55
-    epochinstant66 = 66
+    epochtime55 = 55
+    epochtime66 = 66
     moment_mstr_dir = get_temp_dir()
     a23_spark_time_p = create_moment_ote1_csv_path(moment_mstr_dir, amy23_str)
     a45_spark_time_p = create_moment_ote1_csv_path(moment_mstr_dir, amy45_str)
     a23_spark_time_csv = f"""{kw.moment_label},{kw.belief_name},{kw.spark_num},{kw.bud_time},{kw.error_message}
-{amy23_str},{bob_str},{spark3},{epochinstant55},
+{amy23_str},{bob_str},{spark3},{epochtime55},
 """
     a45_spark_time_csv = f"""{kw.moment_label},{kw.belief_name},{kw.spark_num},{kw.bud_time},{kw.error_message}
-{amy45_str},{sue_str},{spark3},{epochinstant55},
-{amy45_str},{sue_str},{spark7},{epochinstant66},
+{amy45_str},{sue_str},{spark3},{epochtime55},
+{amy45_str},{sue_str},{spark7},{epochtime66},
 """
     save_file(a23_spark_time_p, None, a23_spark_time_csv)
     save_file(a45_spark_time_p, None, a45_spark_time_csv)
@@ -48,7 +48,7 @@ def test_etl_moment_ote1_agg_csvs_to_jsons_CreatesFile_Scenaro0(
     assert os_path_exists(a45_ote1_json_path)
     a23_ote1_dict = open_json(a23_ote1_json_path)
     a45_ote1_dict = open_json(a45_ote1_json_path)
-    assert a23_ote1_dict == {bob_str: {str(epochinstant55): spark3}}
+    assert a23_ote1_dict == {bob_str: {str(epochtime55): spark3}}
     assert a45_ote1_dict == {
-        sue_str: {str(epochinstant55): spark3, str(epochinstant66): spark7}
+        sue_str: {str(epochtime55): spark3, str(epochtime66): spark7}
     }

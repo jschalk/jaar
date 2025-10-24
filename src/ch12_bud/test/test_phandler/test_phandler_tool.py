@@ -14,15 +14,15 @@ from src.ch11_belief_listen.keep_tool import (
 )
 from src.ch12_bud._ref.ch12_path import (
     create_belief_spark_dir_path,
-    create_beliefinstant_path,
     create_beliefspark_path,
+    create_belieftime_path,
     create_budunit_json_path,
     create_cell_dir_path,
     create_cell_json_path as node_path,
     create_cell_voice_mandate_ledger_path,
 )
 from src.ch12_bud.bud_filehandler import (
-    beliefinstant_file_exists,
+    belieftime_file_exists,
     bud_file_exists,
     cellunit_add_json_file,
     cellunit_get_from_dir,
@@ -31,13 +31,13 @@ from src.ch12_bud.bud_filehandler import (
     create_cell_voice_mandate_ledger_json,
     get_beliefs_downhill_spark_nums,
     get_beliefspark_obj,
-    get_epochinstant_dirs,
+    get_epochtime_dirs,
     open_belief_file,
-    open_beliefinstant_file,
+    open_belieftime_file,
     open_bud_file,
     save_arbitrary_beliefspark,
     save_belief_file,
-    save_beliefinstant_file,
+    save_belieftime_file,
     save_bud_file,
 )
 from src.ch12_bud.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
@@ -660,58 +660,58 @@ def test_open_bud_file_ReturnsObj_Scenario1_FileExists(temp_dir_setup):
     assert open_bud_file(mstr_dir, a23_str, yao_str, t55_bud_time) == t55_bud
 
 
-def test_save_beliefinstant_file_SavesFile(temp_dir_setup):
+def test_save_belieftime_file_SavesFile(temp_dir_setup):
     # ESTABLISH
     mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
-    t55_beliefinstant = get_beliefunit_with_4_levels()
+    t55_belieftime = get_beliefunit_with_4_levels()
     t55_bud_time = 55
-    t55_beliefinstant_path = create_beliefinstant_path(
+    t55_belieftime_path = create_belieftime_path(
         mstr_dir, a23_str, sue_str, t55_bud_time
     )
-    print(f"{t55_beliefinstant.moment_label=}")
+    print(f"{t55_belieftime.moment_label=}")
     print(f"               {mstr_dir=}")
-    print(f"      {t55_beliefinstant_path=}")
-    assert os_path_exists(t55_beliefinstant_path) is False
+    print(f"      {t55_belieftime_path=}")
+    assert os_path_exists(t55_belieftime_path) is False
 
     # WHEN
-    save_beliefinstant_file(mstr_dir, t55_beliefinstant, t55_bud_time)
+    save_belieftime_file(mstr_dir, t55_belieftime, t55_bud_time)
 
     # THEN
-    assert os_path_exists(t55_beliefinstant_path)
+    assert os_path_exists(t55_belieftime_path)
 
 
-def test_save_beliefinstant_file_RaisesError(temp_dir_setup):
+def test_save_belieftime_file_RaisesError(temp_dir_setup):
     # ESTABLISH
     mstr_dir = get_temp_dir()
-    irrational_beliefinstant = get_beliefunit_irrational_example()
+    irrational_belieftime = get_beliefunit_irrational_example()
     t55_bud_time = 55
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        save_beliefinstant_file(mstr_dir, irrational_beliefinstant, t55_bud_time)
-    exception_str = "BeliefInstant could not be saved BeliefUnit.rational is False"
+        save_belieftime_file(mstr_dir, irrational_belieftime, t55_bud_time)
+    exception_str = "BeliefTime could not be saved BeliefUnit.rational is False"
     assert str(excinfo.value) == exception_str
 
 
-def test_beliefinstant_file_exists_ReturnsObj(temp_dir_setup):
+def test_belieftime_file_exists_ReturnsObj(temp_dir_setup):
     # ESTABLISH
     mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     t55_bud_time = 55
-    assert beliefinstant_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time) is False
+    assert belieftime_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time) is False
 
     # WHEN
-    t55_beliefinstant = get_beliefunit_with_4_levels()
-    save_beliefinstant_file(mstr_dir, t55_beliefinstant, t55_bud_time)
+    t55_belieftime = get_beliefunit_with_4_levels()
+    save_belieftime_file(mstr_dir, t55_belieftime, t55_bud_time)
 
     # THEN
-    assert beliefinstant_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
+    assert belieftime_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
 
 
-def test_open_beliefinstant_file_ReturnsObj_Scenario0_NoFileExists(
+def test_open_belieftime_file_ReturnsObj_Scenario0_NoFileExists(
     temp_dir_setup,
 ):
     # ESTABLISH
@@ -719,44 +719,42 @@ def test_open_beliefinstant_file_ReturnsObj_Scenario0_NoFileExists(
     a23_str = "amy23"
     sue_str = "Sue"
     t55_bud_time = 55
-    assert not beliefinstant_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
+    assert not belieftime_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
 
     # WHEN / THEN
-    assert not open_beliefinstant_file(mstr_dir, a23_str, sue_str, t55_bud_time)
+    assert not open_belieftime_file(mstr_dir, a23_str, sue_str, t55_bud_time)
 
 
-def test_open_beliefinstant_file_ReturnsObj_Scenario1_FileExists(temp_dir_setup):
+def test_open_belieftime_file_ReturnsObj_Scenario1_FileExists(temp_dir_setup):
     # ESTABLISH
     mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     t55_bud_time = 55
-    t55_beliefinstant = get_beliefunit_with_4_levels()
-    save_beliefinstant_file(mstr_dir, t55_beliefinstant, t55_bud_time)
-    assert beliefinstant_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
+    t55_belieftime = get_beliefunit_with_4_levels()
+    save_belieftime_file(mstr_dir, t55_belieftime, t55_bud_time)
+    assert belieftime_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
 
     # WHEN
-    file_beliefinstant = open_beliefinstant_file(
-        mstr_dir, a23_str, sue_str, t55_bud_time
-    )
+    file_belieftime = open_belieftime_file(mstr_dir, a23_str, sue_str, t55_bud_time)
 
     # THEN
-    assert file_beliefinstant.to_dict() == t55_beliefinstant.to_dict()
+    assert file_belieftime.to_dict() == t55_belieftime.to_dict()
 
 
-def test_get_epochinstant_dirs_ReturnsObj_Scenario0(temp_dir_setup):
+def test_get_epochtime_dirs_ReturnsObj_Scenario0(temp_dir_setup):
     # ESTABLISH
     mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     t55_bud_time = 55
     t77_bud_time = 77
-    beliefinstant = get_beliefunit_with_4_levels()
-    save_beliefinstant_file(mstr_dir, beliefinstant, t55_bud_time)
-    save_beliefinstant_file(mstr_dir, beliefinstant, t77_bud_time)
+    belieftime = get_beliefunit_with_4_levels()
+    save_belieftime_file(mstr_dir, belieftime, t55_bud_time)
+    save_belieftime_file(mstr_dir, belieftime, t77_bud_time)
 
     # WHEN
-    epochinstant_dirs = get_epochinstant_dirs(mstr_dir, a23_str, sue_str)
+    epochtime_dirs = get_epochtime_dirs(mstr_dir, a23_str, sue_str)
 
     # THEN
-    assert epochinstant_dirs == [t55_bud_time, t77_bud_time]
+    assert epochtime_dirs == [t55_bud_time, t77_bud_time]

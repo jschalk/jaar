@@ -14,7 +14,7 @@ from src.ch15_moment.moment_cell import create_cell_tree
 from src.ch15_moment.test._util.ch15_env import get_temp_dir, temp_dir_setup
 
 
-def test_create_cell_tree_Scenaro0_epochinstant_Empty(temp_dir_setup):
+def test_create_cell_tree_Scenaro0_epochtime_Empty(temp_dir_setup):
     # ESTABLISH
     moment_mstr_dir = create_path(get_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
@@ -38,7 +38,7 @@ def test_create_cell_tree_Scenaro1_LedgerDepth0(temp_dir_setup):
     a23_str = "amy23"
     bob_str = "Bob"
     yao_str = "Yao"
-    tp37 = 37  # epochinstant
+    tp37 = 37  # epochtime
     bud1_quota = 450
     bud1_celldepth = 0
     spark56 = 56
@@ -66,7 +66,7 @@ def test_create_cell_tree_Scenaro2_LedgerDepth1(temp_dir_setup):
     bob_str = "Bob"
     yao_str = "Yao"
     zia_str = "Zia"
-    tp37 = 37  # epochinstant
+    tp37 = 37  # epochtime
     x_quota = 450
     x_celldepth = 1
     spark56 = 56
@@ -157,7 +157,7 @@ def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentSpark(temp_dir_setup):
     bob_str = "Bob"
     yao_str = "Yao"
     zia_str = "Zia"
-    tp37 = 37  # epochinstant
+    tp37 = 37  # epochtime
     x_quota = 450
     x_celldepth = 1
     spark33 = 33
@@ -254,7 +254,7 @@ def test_create_cell_tree_Scenaro4_LedgerDepth1_OneBeliefHasNoPast_beliefspark(
     bob_str = "Bob"
     yao_str = "Yao"
     zia_str = "Zia"
-    tp37 = 37  # epochinstant
+    tp37 = 37  # epochtime
     x_quota = 450
     x_celldepth = 1
     spark33 = 33
@@ -337,7 +337,7 @@ def test_create_cell_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
     bob_str = "Bob"
     yao_str = "Yao"
     zia_str = "Zia"
-    tp37 = 37  # epochinstant
+    tp37 = 37  # epochtime
     x_quota = 2
     x_celldepth = 1
     spark33 = 33

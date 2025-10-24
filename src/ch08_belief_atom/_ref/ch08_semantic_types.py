@@ -29,5 +29,5 @@ class CRUD_command(str):
     pass
 
 
-class EpochInstant(int):
+class EpochTime(int):
     pass

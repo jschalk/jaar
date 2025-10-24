@@ -12,7 +12,7 @@ from src.ch01_py.dict_toolbox import (
 from src.ch02_allot.allot import default_pool_num
 from src.ch12_bud._ref.ch12_semantic_types import (
     BeliefName,
-    EpochInstant,
+    EpochTime,
     FundNum,
     MomentLabel,
     VoiceName,
@@ -34,12 +34,12 @@ DEFAULT_CELLDEPTH = 2
 class TranUnit:
     src: BeliefName = None
     dst: VoiceName = None
-    tran_time: EpochInstant = None
+    tran_time: EpochTime = None
     amount: FundNum = None
 
 
 def tranunit_shop(
-    src: BeliefName, dst: VoiceName, tran_time: EpochInstant, amount: FundNum
+    src: BeliefName, dst: VoiceName, tran_time: EpochTime, amount: FundNum
 ) -> TranUnit:
     return TranUnit(src=src, dst=dst, tran_time=tran_time, amount=amount)
 
@@ -47,14 +47,14 @@ def tranunit_shop(
 @dataclass
 class TranBook:
     moment_label: MomentLabel = None
-    tranunits: dict[BeliefName, dict[VoiceName, dict[EpochInstant, FundNum]]] = None
+    tranunits: dict[BeliefName, dict[VoiceName, dict[EpochTime, FundNum]]] = None
     _voices_net: dict[BeliefName, dict[VoiceName, FundNum]] = None
 
     def set_tranunit(
         self,
         tranunit: TranUnit,
-        blocked_tran_times: set[EpochInstant] = None,
-        offi_time_max: EpochInstant = None,
+        blocked_tran_times: set[EpochTime] = None,
+        offi_time_max: EpochTime = None,
     ):
         self.add_tranunit(
             belief_name=tranunit.src,
@@ -69,45 +69,47 @@ class TranBook:
         self,
         belief_name: BeliefName,
         voice_name: VoiceName,
-        tran_time: EpochInstant,
+        tran_time: EpochTime,
         amount: FundNum,
-        blocked_tran_times: set[EpochInstant] = None,
-        offi_time_max: EpochInstant = None,
+        blocked_tran_times: set[EpochTime] = None,
+        offi_time_max: EpochTime = None,
     ):
         if tran_time in get_empty_set_if_None(blocked_tran_times):
-            exception_str = f"Cannot set tranunit for tran_time={tran_time}, EpochInstant is blocked"
+            exception_str = (
+                f"Cannot set tranunit for tran_time={tran_time}, EpochTime is blocked"
+            )
             raise tran_time_Exception(exception_str)
         if offi_time_max != None and tran_time >= offi_time_max:
-            exception_str = f"Cannot set tranunit for tran_time={tran_time}, EpochInstant is greater than current time={offi_time_max}"
+            exception_str = f"Cannot set tranunit for tran_time={tran_time}, EpochTime is greater than current time={offi_time_max}"
             raise tran_time_Exception(exception_str)
         x_keylist = [belief_name, voice_name, tran_time]
         set_in_nested_dict(self.tranunits, x_keylist, amount)
 
     def tranunit_exists(
-        self, src: BeliefName, dst: VoiceName, tran_time: EpochInstant
+        self, src: BeliefName, dst: VoiceName, tran_time: EpochTime
     ) -> bool:
         return get_from_nested_dict(self.tranunits, [src, dst, tran_time], True) != None
 
     def get_tranunit(
-        self, src: BeliefName, dst: VoiceName, tran_time: EpochInstant
+        self, src: BeliefName, dst: VoiceName, tran_time: EpochTime
     ) -> TranUnit:
         x_amount = get_from_nested_dict(self.tranunits, [src, dst, tran_time], True)
         if x_amount != None:
             return tranunit_shop(src, dst, tran_time, x_amount)
 
     def get_amount(
-        self, src: BeliefName, dst: VoiceName, tran_time: EpochInstant
+        self, src: BeliefName, dst: VoiceName, tran_time: EpochTime
     ) -> TranUnit:
         return get_from_nested_dict(self.tranunits, [src, dst, tran_time], True)
 
     def del_tranunit(
-        self, src: BeliefName, dst: VoiceName, tran_time: EpochInstant
+        self, src: BeliefName, dst: VoiceName, tran_time: EpochTime
     ) -> TranUnit:
         x_keylist = [src, dst, tran_time]
         if exists_in_nested_dict(self.tranunits, x_keylist):
             del_in_nested_dict(self.tranunits, x_keylist)
 
-    def get_tran_times(self) -> set[EpochInstant]:
+    def get_tran_times(self) -> set[EpochTime]:
         x_set = set()
         for dst_dict in self.tranunits.values():
             for tran_time_dict in dst_dict.values():
@@ -160,9 +162,7 @@ class TranBook:
 
     def to_dict(
         self,
-    ) -> dict[
-        MomentLabel, dict[BeliefName, dict[VoiceName, dict[EpochInstant, FundNum]]]
-    ]:
+    ) -> dict[MomentLabel, dict[BeliefName, dict[VoiceName, dict[EpochTime, FundNum]]]]:
         """Returns dict that is serializable to JSON."""
 
         return {"moment_label": self.moment_label, "tranunits": self.tranunits}
@@ -170,7 +170,7 @@ class TranBook:
 
 def tranbook_shop(
     x_moment_label: MomentLabel,
-    x_tranunits: dict[BeliefName, dict[VoiceName, dict[EpochInstant, FundNum]]] = None,
+    x_tranunits: dict[BeliefName, dict[VoiceName, dict[EpochTime, FundNum]]] = None,
 ):
     return TranBook(
         moment_label=x_moment_label,
@@ -192,7 +192,7 @@ def get_tranbook_from_dict(x_dict: dict) -> TranBook:
 
 @dataclass
 class BudUnit:
-    bud_time: EpochInstant = None
+    bud_time: EpochTime = None
     quota: FundNum = None
     celldepth: int = None  # non-negative
     _magnitude: FundNum = None  # how much of the actual quota is distributed
@@ -233,7 +233,7 @@ class BudUnit:
 
 
 def budunit_shop(
-    bud_time: EpochInstant,
+    bud_time: EpochTime,
     quota: FundNum = None,
     bud_voice_nets: dict[VoiceName, FundNum] = None,
     magnitude: FundNum = None,
@@ -256,29 +256,27 @@ def budunit_shop(
 @dataclass
 class BeliefBudHistory:
     belief_name: BeliefName = None
-    buds: dict[EpochInstant, BudUnit] = None
+    buds: dict[EpochTime, BudUnit] = None
     # calculated fields
     _sum_budunit_quota: FundNum = None
     _sum_voice_bud_nets: int = None
-    _bud_time_min: EpochInstant = None
-    _bud_time_max: EpochInstant = None
+    _bud_time_min: EpochTime = None
+    _bud_time_max: EpochTime = None
 
     def set_bud(self, x_bud: BudUnit):
         self.buds[x_bud.bud_time] = x_bud
 
-    def add_bud(
-        self, x_bud_time: EpochInstant, x_quota: FundNum, celldepth: int = None
-    ):
+    def add_bud(self, x_bud_time: EpochTime, x_quota: FundNum, celldepth: int = None):
         budunit = budunit_shop(bud_time=x_bud_time, quota=x_quota, celldepth=celldepth)
         self.set_bud(budunit)
 
-    def bud_exists(self, x_bud_time: EpochInstant) -> bool:
+    def bud_exists(self, x_bud_time: EpochTime) -> bool:
         return self.buds.get(x_bud_time) != None
 
-    def get_bud(self, x_bud_time: EpochInstant) -> BudUnit:
+    def get_bud(self, x_bud_time: EpochTime) -> BudUnit:
         return self.buds.get(x_bud_time)
 
-    def del_bud(self, x_bud_time: EpochInstant):
+    def del_bud(self, x_bud_time: EpochTime):
         self.buds.pop(x_bud_time)
 
     def get_2d_array(self) -> list[list]:
@@ -298,7 +296,7 @@ class BeliefBudHistory:
     def _get_buds_dict(self) -> dict:
         return {x_bud.bud_time: x_bud.to_dict() for x_bud in self.buds.values()}
 
-    def get_bud_times(self) -> set[EpochInstant]:
+    def get_bud_times(self) -> set[EpochTime]:
         return set(self.buds.keys())
 
     def get_tranbook(self, moment_label: MomentLabel) -> TranBook:
@@ -336,7 +334,7 @@ def get_beliefbudhistory_from_dict(x_dict: dict) -> BeliefBudHistory:
     return x_beliefbudhistory
 
 
-def get_buds_from_dict(buds_dict: dict) -> dict[EpochInstant, BudUnit]:
+def get_buds_from_dict(buds_dict: dict) -> dict[EpochTime, BudUnit]:
     x_dict = {}
     for x_bud_dict in buds_dict.values():
         x_budunit = get_budunit_from_dict(x_bud_dict)

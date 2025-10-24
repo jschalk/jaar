@@ -5,7 +5,7 @@ MOMENT_FILENAME = "moment.json"
 BUDUNIT_FILENAME = "budunit.json"
 CELLNODE_FILENAME = "cell.json"
 CELL_MANDATE_FILENAME = "cell_voice_mandate_ledger.json"
-BELIEFINSTANT_FILENAME = "beliefinstant.json"
+BELIEFTIME_FILENAME = "belieftime.json"
 BELIEFSPARK_FILENAME = "belief.json"
 SPARK_ALL_LESSON_FILENAME = "all_lesson.json"
 SPARK_EXPRESSED_LESSON_FILENAME = "expressed_lesson.json"
@@ -40,23 +40,23 @@ def create_budunit_json_path(
     bud_time: int,
 ) -> str:
     """Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\buds\n\\bud_time\\budunit.json"""
-    epochinstant_dir = create_bud_dir_path(
+    epochtime_dir = create_bud_dir_path(
         moment_mstr_dir, moment_label, belief_name, bud_time
     )
-    return create_path(epochinstant_dir, "budunit.json")
+    return create_path(epochtime_dir, "budunit.json")
 
 
-def create_beliefinstant_path(
+def create_belieftime_path(
     moment_mstr_dir: str,
     moment_label: MomentLabel,
     belief_name: BeliefName,
     bud_time: int,
 ) -> str:
-    """Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\buds\n\\bud_time\\beliefinstant.json"""
-    epochinstant_dir = create_bud_dir_path(
+    """Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\buds\n\\bud_time\\belieftime.json"""
+    epochtime_dir = create_bud_dir_path(
         moment_mstr_dir, moment_label, belief_name, bud_time
     )
-    return create_path(epochinstant_dir, "beliefinstant.json")
+    return create_path(epochtime_dir, "belieftime.json")
 
 
 def create_cell_dir_path(

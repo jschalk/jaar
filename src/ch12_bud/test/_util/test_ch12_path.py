@@ -2,8 +2,8 @@ from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from src.ch01_py.file_toolbox import create_path
 from src.ch12_bud._ref.ch12_path import (
-    BELIEFINSTANT_FILENAME,
     BELIEFSPARK_FILENAME,
+    BELIEFTIME_FILENAME,
     BUDUNIT_FILENAME,
     CELL_MANDATE_FILENAME,
     CELLNODE_FILENAME,
@@ -11,8 +11,8 @@ from src.ch12_bud._ref.ch12_path import (
     SPARK_ALL_LESSON_FILENAME,
     SPARK_EXPRESSED_LESSON_FILENAME,
     create_belief_spark_dir_path,
-    create_beliefinstant_path,
     create_beliefspark_path,
+    create_belieftime_path,
     create_bud_dir_path,
     create_buds_dir_path,
     create_budunit_json_path,
@@ -49,11 +49,11 @@ def test_create_bud_dir_path_ReturnsObj():
     x_moment_mstr_dir = get_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
-    epochinstant7 = 7
+    epochtime7 = 7
 
     # WHEN
-    generated_epochinstant_dir = create_bud_dir_path(
-        x_moment_mstr_dir, amy23_str, sue_str, epochinstant7
+    generated_epochtime_dir = create_bud_dir_path(
+        x_moment_mstr_dir, amy23_str, sue_str, epochtime7
     )
 
     # THEN
@@ -62,8 +62,8 @@ def test_create_bud_dir_path_ReturnsObj():
     beliefs_dir = create_path(amy23_dir, "beliefs")
     sue_dir = create_path(beliefs_dir, sue_str)
     buds_dir = create_path(sue_dir, "buds")
-    expected_epochinstant_dir = create_path(buds_dir, epochinstant7)
-    assert generated_epochinstant_dir == expected_epochinstant_dir
+    expected_epochtime_dir = create_path(buds_dir, epochtime7)
+    assert generated_epochtime_dir == expected_epochtime_dir
 
 
 def test_create_budunit_json_path_ReturnsObj():
@@ -71,11 +71,11 @@ def test_create_budunit_json_path_ReturnsObj():
     x_moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
-    epochinstant7 = 7
+    epochtime7 = 7
 
     # WHEN
     gen_bud_path = create_budunit_json_path(
-        x_moment_mstr_dir, a23_str, sue_str, epochinstant7
+        x_moment_mstr_dir, a23_str, sue_str, epochtime7
     )
 
     # THEN
@@ -84,21 +84,21 @@ def test_create_budunit_json_path_ReturnsObj():
     beliefs_dir = create_path(amy23_dir, "beliefs")
     sue_dir = create_path(beliefs_dir, sue_str)
     buds_dir = create_path(sue_dir, "buds")
-    epochinstant_dir = create_path(buds_dir, epochinstant7)
-    expected_bud_path_dir = create_path(epochinstant_dir, BUDUNIT_FILENAME)
+    epochtime_dir = create_path(buds_dir, epochtime7)
+    expected_bud_path_dir = create_path(epochtime_dir, BUDUNIT_FILENAME)
     assert gen_bud_path == expected_bud_path_dir
 
 
-def test_create_beliefinstant_path_ReturnsObj():
+def test_create_belieftime_path_ReturnsObj():
     # ESTABLISH
     x_moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
-    epochinstant7 = 7
+    epochtime7 = 7
 
     # WHEN
-    gen_beliefinstant_path = create_beliefinstant_path(
-        x_moment_mstr_dir, a23_str, sue_str, epochinstant7
+    gen_belieftime_path = create_belieftime_path(
+        x_moment_mstr_dir, a23_str, sue_str, epochtime7
     )
 
     # THEN
@@ -107,11 +107,9 @@ def test_create_beliefinstant_path_ReturnsObj():
     beliefs_dir = create_path(amy23_dir, "beliefs")
     sue_dir = create_path(beliefs_dir, sue_str)
     buds_dir = create_path(sue_dir, "buds")
-    epochinstant_dir = create_path(buds_dir, epochinstant7)
-    expected_beliefinstant_path_dir = create_path(
-        epochinstant_dir, BELIEFINSTANT_FILENAME
-    )
-    assert gen_beliefinstant_path == expected_beliefinstant_path_dir
+    epochtime_dir = create_path(buds_dir, epochtime7)
+    expected_belieftime_path_dir = create_path(epochtime_dir, BELIEFTIME_FILENAME)
+    assert gen_belieftime_path == expected_belieftime_path_dir
 
 
 def test_create_cell_dir_path_ReturnsObj_Scenario0_No_bud_ancestors():
@@ -125,8 +123,8 @@ def test_create_cell_dir_path_ReturnsObj_Scenario0_No_bud_ancestors():
     gen_cell_dir = create_cell_dir_path(x_moment_mstr_dir, a23_str, sue_str, tp7, [])
 
     # THEN
-    epochinstant_dir = create_bud_dir_path(x_moment_mstr_dir, a23_str, sue_str, tp7)
-    assert gen_cell_dir == epochinstant_dir
+    epochtime_dir = create_bud_dir_path(x_moment_mstr_dir, a23_str, sue_str, tp7)
+    assert gen_cell_dir == epochtime_dir
 
 
 def test_create_cell_dir_path_ReturnsObj_Scenario1_One_bud_ancestors():
@@ -144,8 +142,8 @@ def test_create_cell_dir_path_ReturnsObj_Scenario1_One_bud_ancestors():
     )
 
     # THEN
-    epochinstant_dir = create_bud_dir_path(x_moment_mstr_dir, a23_str, sue_str, tp7)
-    tp_yao_dir = create_path(epochinstant_dir, yao_str)
+    epochtime_dir = create_bud_dir_path(x_moment_mstr_dir, a23_str, sue_str, tp7)
+    tp_yao_dir = create_path(epochtime_dir, yao_str)
     assert gen_cell_dir == tp_yao_dir
 
 
@@ -166,8 +164,8 @@ def test_create_cell_dir_path_ReturnsObj_Scenario2_Three_bud_ancestors():
     )
 
     # THEN
-    epochinstant_dir = create_bud_dir_path(x_moment_mstr_dir, a23_str, sue_str, tp7)
-    tp_yao_dir = create_path(epochinstant_dir, yao_str)
+    epochtime_dir = create_bud_dir_path(x_moment_mstr_dir, a23_str, sue_str, tp7)
+    tp_yao_dir = create_path(epochtime_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
     expected_tp_yao_bob_zia_dir = create_path(tp_yao_bob_dir, zia_str)
     assert gen_bud_celldepth_dir_path == expected_tp_yao_bob_zia_dir
@@ -178,11 +176,11 @@ def test_create_cell_json_path_ReturnsObj_Scenario0_Empty_bud_ancestors():
     x_moment_mstr_dir = get_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
-    epochinstant7 = 7
+    epochtime7 = 7
 
     # WHEN
     gen_cell_json_path = create_cell_json_path(
-        x_moment_mstr_dir, a23_str, sue_str, epochinstant7
+        x_moment_mstr_dir, a23_str, sue_str, epochtime7
     )
 
     # THEN
@@ -191,8 +189,8 @@ def test_create_cell_json_path_ReturnsObj_Scenario0_Empty_bud_ancestors():
     beliefs_dir = create_path(amy23_dir, "beliefs")
     sue_dir = create_path(beliefs_dir, sue_str)
     buds_dir = create_path(sue_dir, "buds")
-    epochinstant_dir = create_path(buds_dir, epochinstant7)
-    expected_cell_json_path = create_path(epochinstant_dir, CELLNODE_FILENAME)
+    epochtime_dir = create_path(buds_dir, epochtime7)
+    expected_cell_json_path = create_path(epochtime_dir, CELLNODE_FILENAME)
     assert gen_cell_json_path == expected_cell_json_path
 
 
@@ -212,8 +210,8 @@ def test_create_cell_json_path_ReturnsObj_Scenario1_Three_bud_ancestors():
     )
 
     # THEN
-    epochinstant_dir = create_bud_dir_path(x_moment_mstr_dir, a23_str, sue_str, tp7)
-    tp_yao_dir = create_path(epochinstant_dir, yao_str)
+    epochtime_dir = create_bud_dir_path(x_moment_mstr_dir, a23_str, sue_str, tp7)
+    tp_yao_dir = create_path(epochtime_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
     expected_cell_json_path = create_path(tp_yao_bob_dir, CELLNODE_FILENAME)
     assert gen_cell_json_path == expected_cell_json_path
@@ -235,8 +233,8 @@ def test_create_cell_voice_mandate_ledger_path_ReturnsObj_Scenario1_Three_bud_an
     )
 
     # THEN
-    epochinstant_dir = create_bud_dir_path(x_moment_mstr_dir, a23_str, sue_str, tp7)
-    tp_yao_dir = create_path(epochinstant_dir, yao_str)
+    epochtime_dir = create_bud_dir_path(x_moment_mstr_dir, a23_str, sue_str, tp7)
+    tp_yao_dir = create_path(epochtime_dir, yao_str)
     tp_yao_bob_dir = create_path(tp_yao_dir, bob_str)
     expected_cell_json_path = create_path(tp_yao_bob_dir, CELL_MANDATE_FILENAME)
     assert gen_cell_json_path == expected_cell_json_path
@@ -428,9 +426,9 @@ def test_create_budunit_json_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_budunit_json_path) == doc_str
 
 
-def test_create_beliefinstant_path_HasDocString():
+def test_create_belieftime_path_HasDocString():
     # ESTABLISH
-    doc_str = create_beliefinstant_path(
+    doc_str = create_belieftime_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=kw.moment_label,
         belief_name=kw.belief_name,
@@ -439,7 +437,7 @@ def test_create_beliefinstant_path_HasDocString():
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_beliefinstant_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_belieftime_path) == doc_str
 
 
 def test_create_belief_spark_dir_path_HasDocString():

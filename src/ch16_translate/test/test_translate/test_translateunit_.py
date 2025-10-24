@@ -79,7 +79,7 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert translate_args_class_types.get(kw.reason_state) == kw.RopeTerm
     assert translate_args_class_types.get(kw.reason_upper) == "float"
     assert translate_args_class_types.get(kw.numor) == "int"
-    assert translate_args_class_types.get(kw.offi_time) == kw.EpochInstant
+    assert translate_args_class_types.get(kw.offi_time) == kw.EpochTime
     assert translate_args_class_types.get(kw.belief_name) == kw.NameTerm
     assert translate_args_class_types.get(kw.reason_lower) == "float"
     assert translate_args_class_types.get(kw.mana_grain) == "float"
@@ -94,8 +94,8 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert translate_args_class_types.get(kw.take_force) == "float"
     assert translate_args_class_types.get(kw.tally) == "int"
     assert translate_args_class_types.get(kw.party_title) == kw.TitleTerm
-    assert translate_args_class_types.get(kw.bud_time) == kw.EpochInstant
-    assert translate_args_class_types.get(kw.tran_time) == kw.EpochInstant
+    assert translate_args_class_types.get(kw.bud_time) == kw.EpochTime
+    assert translate_args_class_types.get(kw.tran_time) == kw.EpochTime
     assert translate_args_class_types.get(kw.epoch_label) == kw.LabelTerm
     assert translate_args_class_types.get(kw.weekday_label) == kw.LabelTerm
     assert translate_args_class_types.get(kw.weekday_order) == "int"

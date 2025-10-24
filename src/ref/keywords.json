@@ -7,7 +7,7 @@
   "DELETE": {"init_chapter": "ch08"}, 
   "Danceday": {"init_chapter": "ch14"}, 
   "Eastday": {"init_chapter": "ch14"}, 
-  "EpochInstant": {"init_chapter": "ch08", "semantic_type": "int"}, 
+  "EpochTime": {"init_chapter": "ch08", "semantic_type": "int"}, 
   "EpochLabel": {"init_chapter": "ch14", "semantic_type": "str"}, 
   "Event": {"init_chapter": "ch24"}, 
   "FaceName": {"init_chapter": "ch09", "semantic_type": "str"}, 

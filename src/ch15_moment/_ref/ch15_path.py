@@ -12,7 +12,7 @@ def create_bud_voice_mandate_ledger_path(
     bud_time: int,
 ) -> str:
     """Returns path: moment_mstr_dir\\moments\\moment_label\\beliefs\\belief_name\\buds\n\\bud_time\\bud_voice_mandate_ledger.json"""
-    epochinstant_dir = create_bud_dir_path(
+    epochtime_dir = create_bud_dir_path(
         moment_mstr_dir, moment_label, belief_name, bud_time
     )
-    return create_path(epochinstant_dir, "bud_voice_mandate_ledger.json")
+    return create_path(epochtime_dir, "bud_voice_mandate_ledger.json")

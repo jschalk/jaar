@@ -26,7 +26,7 @@ from src.ch12_bud.bud_filehandler import (
 from src.ch12_bud.bud_main import MomentLabel
 from src.ch12_bud.cell import CellUnit, cellunit_shop
 from src.ch12_bud.weighted_facts_tool import get_nodes_with_weighted_facts
-from src.ch14_epoch.epoch_main import EpochInstant
+from src.ch14_epoch.epoch_main import EpochTime
 from src.ch15_moment._ref.ch15_path import BUD_MANDATE_FILENAME
 from src.ch15_moment._ref.ch15_semantic_types import BeliefName, FundNum, LabelTerm
 from src.ch15_moment.moment_main import get_momentunit_from_dict
@@ -196,7 +196,7 @@ def set_cell_tree_decrees(
     mstr_dir: str,
     moment_label: MomentLabel,
     belief_name: BeliefName,
-    bud_time: EpochInstant,
+    bud_time: EpochTime,
     bud_time_dir: str,
 ):
     # clear all current child directorys

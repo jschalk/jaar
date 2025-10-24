@@ -53,9 +53,9 @@ def test_MomentUnit_create_buds_root_cells_Scenaro1_BudExists(
     # Create MomentUnit with bob bud at time 37
     amy23_moment = momentunit_shop(a23_str, mstr_dir)
     bob_str = "Bob"
-    epochinstant37 = 37
+    epochtime37 = 37
     bud1_quota = 450
-    amy23_moment.add_budunit(bob_str, epochinstant37, bud1_quota)
+    amy23_moment.add_budunit(bob_str, epochtime37, bud1_quota)
     a23_json_path = create_moment_json_path(mstr_dir, a23_str)
     save_json(a23_json_path, None, amy23_moment.to_dict())
     assert os_path_exists(a23_json_path)
@@ -63,15 +63,11 @@ def test_MomentUnit_create_buds_root_cells_Scenaro1_BudExists(
     # Create spark time mapping belief_time_agg for time 37
     spark3 = 3
     spark7 = 7
-    epochinstant66 = 66
-    a23_ote1_dict = {
-        bob_str: {str(epochinstant37): spark3, str(epochinstant66): spark7}
-    }
+    epochtime66 = 66
+    a23_ote1_dict = {bob_str: {str(epochtime37): spark3, str(epochtime66): spark7}}
 
-    # epochinstant37 cell path
-    tp37_cell_json_path = create_cell_json_path(
-        mstr_dir, a23_str, bob_str, epochinstant37
-    )
+    # epochtime37 cell path
+    tp37_cell_json_path = create_cell_json_path(mstr_dir, a23_str, bob_str, epochtime37)
     assert os_path_exists(tp37_cell_json_path) is False
 
     # WHEN
@@ -97,9 +93,9 @@ def test_MomentUnit_create_buds_root_cells_Scenaro2_BudExistsButNoBeliefExistsIn
     # Create MomentUnit with bob bud at time 37
     amy23_moment = momentunit_shop(a23_str, mstr_dir)
     bob_str = "Bob"
-    epochinstant37 = 37
+    epochtime37 = 37
     bud1_quota = 450
-    amy23_moment.add_budunit(bob_str, epochinstant37, bud1_quota)
+    amy23_moment.add_budunit(bob_str, epochtime37, bud1_quota)
     a23_json_path = create_moment_json_path(mstr_dir, a23_str)
     save_json(a23_json_path, None, amy23_moment.to_dict())
     assert os_path_exists(a23_json_path)
@@ -107,14 +103,10 @@ def test_MomentUnit_create_buds_root_cells_Scenaro2_BudExistsButNoBeliefExistsIn
     # Create spark time mapping belief_time_agg for time 37
     spark3 = 3
     spark7 = 7
-    epochinstant40 = 40
-    epochinstant66 = 66
-    a23_ote1_dict = {
-        bob_str: {str(epochinstant40): spark3, str(epochinstant66): spark7}
-    }
-    tp37_cell_json_path = create_cell_json_path(
-        mstr_dir, a23_str, bob_str, epochinstant37
-    )
+    epochtime40 = 40
+    epochtime66 = 66
+    a23_ote1_dict = {bob_str: {str(epochtime40): spark3, str(epochtime66): spark7}}
+    tp37_cell_json_path = create_cell_json_path(mstr_dir, a23_str, bob_str, epochtime37)
     assert os_path_exists(tp37_cell_json_path) is False
 
     # WHEN
@@ -143,12 +135,10 @@ def test_MomentUnit_create_buds_root_cells_Scenaro3_BudExistsNotPerfectMatch_bud
     amy23_moment = momentunit_shop(a23_str, mstr_dir, mana_grain=a23_mana_grain)
     print(f"{amy23_moment.mana_grain=}")
     bob_str = "Bob"
-    epochinstant37 = 37
+    epochtime37 = 37
     bud1_quota = 450
     bud1_celldepth = 3
-    amy23_moment.add_budunit(
-        bob_str, epochinstant37, bud1_quota, celldepth=bud1_celldepth
-    )
+    amy23_moment.add_budunit(bob_str, epochtime37, bud1_quota, celldepth=bud1_celldepth)
     a23_json_path = create_moment_json_path(mstr_dir, a23_str)
     save_json(a23_json_path, None, amy23_moment.to_dict())
     assert os_path_exists(a23_json_path)
@@ -156,16 +146,12 @@ def test_MomentUnit_create_buds_root_cells_Scenaro3_BudExistsNotPerfectMatch_bud
     # Create spark time mapping belief_time_agg for time 37
     spark3 = 3
     spark7 = 7
-    epochinstant30 = 30
-    epochinstant66 = 66
-    a23_ote1_dict = {
-        bob_str: {str(epochinstant30): spark3, str(epochinstant66): spark7}
-    }
+    epochtime30 = 30
+    epochtime66 = 66
+    a23_ote1_dict = {bob_str: {str(epochtime30): spark3, str(epochtime66): spark7}}
 
     # destination of cell json
-    tp37_cell_json_path = create_cell_json_path(
-        mstr_dir, a23_str, bob_str, epochinstant37
-    )
+    tp37_cell_json_path = create_cell_json_path(mstr_dir, a23_str, bob_str, epochtime37)
     assert os_path_exists(tp37_cell_json_path) is False
 
     # WHEN

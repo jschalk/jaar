@@ -16,8 +16,8 @@ from src.ch09_belief_lesson._ref.ch09_path import (
 from src.ch09_belief_lesson.lesson_filehandler import open_belief_file, save_belief_file
 from src.ch12_bud._ref.ch12_path import (
     CELLNODE_FILENAME,
-    create_beliefinstant_path,
     create_beliefspark_path,
+    create_belieftime_path,
     create_buds_dir_path,
     create_budunit_json_path,
     create_cell_dir_path,
@@ -28,7 +28,7 @@ from src.ch12_bud._ref.ch12_semantic_types import (
     RopeTerm,
     SparkInt,
 )
-from src.ch12_bud.bud_main import BudUnit, EpochInstant, get_budunit_from_dict
+from src.ch12_bud.bud_main import BudUnit, EpochTime, get_budunit_from_dict
 from src.ch12_bud.cell import CellUnit, cellunit_get_from_dict, cellunit_shop
 
 
@@ -178,7 +178,7 @@ def bud_file_exists(
     moment_mstr_dir: str,
     moment_label: str,
     belief_name: BeliefName,
-    x_bud_time: EpochInstant = None,
+    x_bud_time: EpochTime = None,
 ) -> bool:
     bud_json_path = create_budunit_json_path(
         moment_mstr_dir, moment_label, belief_name, x_bud_time
@@ -190,7 +190,7 @@ def open_bud_file(
     moment_mstr_dir: str,
     moment_label: str,
     belief_name: BeliefName,
-    x_bud_time: EpochInstant = None,
+    x_bud_time: EpochTime = None,
 ) -> BudUnit:
     bud_json_path = create_budunit_json_path(
         moment_mstr_dir, moment_label, belief_name, x_bud_time
@@ -199,57 +199,57 @@ def open_bud_file(
         return get_budunit_from_dict(open_json(bud_json_path))
 
 
-class _save_valid_beliefinstant_Exception(Exception):
+class _save_valid_belieftime_Exception(Exception):
     pass
 
 
-def save_beliefinstant_file(
+def save_belieftime_file(
     moment_mstr_dir: str,
-    x_beliefinstant: BeliefUnit,
-    x_bud_time: EpochInstant = None,
+    x_belieftime: BeliefUnit,
+    x_bud_time: EpochTime = None,
 ):
-    x_beliefinstant.cashout()
-    if x_beliefinstant.rational is False:
-        raise _save_valid_beliefinstant_Exception(
-            "BeliefInstant could not be saved BeliefUnit.rational is False"
+    x_belieftime.cashout()
+    if x_belieftime.rational is False:
+        raise _save_valid_belieftime_Exception(
+            "BeliefTime could not be saved BeliefUnit.rational is False"
         )
-    beliefinstant_json_path = create_beliefinstant_path(
+    belieftime_json_path = create_belieftime_path(
         moment_mstr_dir,
-        x_beliefinstant.moment_label,
-        x_beliefinstant.belief_name,
+        x_belieftime.moment_label,
+        x_belieftime.belief_name,
         x_bud_time,
     )
-    save_belief_file(beliefinstant_json_path, None, x_beliefinstant)
+    save_belief_file(belieftime_json_path, None, x_belieftime)
 
 
-def beliefinstant_file_exists(
+def belieftime_file_exists(
     moment_mstr_dir: str,
     moment_label: str,
     belief_name: BeliefName,
-    x_bud_time: EpochInstant = None,
+    x_bud_time: EpochTime = None,
 ) -> bool:
-    beliefinstant_json_path = create_beliefinstant_path(
+    belieftime_json_path = create_belieftime_path(
         moment_mstr_dir, moment_label, belief_name, x_bud_time
     )
-    return os_path_exists(beliefinstant_json_path)
+    return os_path_exists(belieftime_json_path)
 
 
-def open_beliefinstant_file(
+def open_belieftime_file(
     moment_mstr_dir: str,
     moment_label: str,
     belief_name: BeliefName,
-    x_bud_time: EpochInstant = None,
+    x_bud_time: EpochTime = None,
 ) -> bool:
-    beliefinstant_json_path = create_beliefinstant_path(
+    belieftime_json_path = create_belieftime_path(
         moment_mstr_dir, moment_label, belief_name, x_bud_time
     )
-    # if self.beliefinstant_file_exists(x_bud_time):
-    return open_belief_file(beliefinstant_json_path)
+    # if self.belieftime_file_exists(x_bud_time):
+    return open_belief_file(belieftime_json_path)
 
 
-def get_epochinstant_dirs(
+def get_epochtime_dirs(
     moment_mstr_dir: str, moment_label: str, belief_name: BeliefName
-) -> list[EpochInstant]:
+) -> list[EpochTime]:
     buds_dir = create_buds_dir_path(moment_mstr_dir, moment_label, belief_name)
     x_dict = get_dir_file_strs(buds_dir, include_dirs=True, include_files=False)
-    return [int(x_epochinstant) for x_epochinstant in sorted(list(x_dict.keys()))]
+    return [int(x_epochtime) for x_epochtime in sorted(list(x_dict.keys()))]

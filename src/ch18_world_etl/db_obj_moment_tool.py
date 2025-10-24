@@ -96,12 +96,12 @@ def _set_moment_dict_momentbud(cursor: sqlite3_Cursor, moment_dict: dict):
         belief_keylist = [row_belief_name, "belief_name"]
         set_in_nested_dict(beliefbudhistorys_dict, belief_keylist, row_belief_name)
         keylist = [row_belief_name, "buds", row_bud_time]
-        bud_epochinstant_dict = {
+        bud_epochtime_dict = {
             "bud_time": row_bud_time,
             "quota": row_quota,
             "celldepth": row_celldepth,
         }
-        set_in_nested_dict(beliefbudhistorys_dict, keylist, bud_epochinstant_dict)
+        set_in_nested_dict(beliefbudhistorys_dict, keylist, bud_epochtime_dict)
     moment_dict["beliefbudhistorys"] = beliefbudhistorys_dict
 
 
