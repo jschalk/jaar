@@ -62,8 +62,8 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert translate_args_class_types.get(kw.face_name) == kw.NameTerm
     assert translate_args_class_types.get(kw.fact_context) == kw.RopeTerm
     assert translate_args_class_types.get(kw.moment_label) == kw.LabelTerm
-    assert translate_args_class_types.get(kw.fact_upper) == kw.MaybeEpoch
-    assert translate_args_class_types.get(kw.fact_lower) == kw.MaybeEpoch
+    assert translate_args_class_types.get(kw.fact_upper) == kw.ContextNum
+    assert translate_args_class_types.get(kw.fact_lower) == kw.ContextNum
     assert translate_args_class_types.get(kw.fund_grain) == "float"
     assert translate_args_class_types.get(kw.fund_pool) == "float"
     assert translate_args_class_types.get(kw.give_force) == "float"
@@ -77,11 +77,11 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert translate_args_class_types.get(kw.monthday_index) == "int"
     assert translate_args_class_types.get(kw.morph) == "bool"
     assert translate_args_class_types.get(kw.reason_state) == kw.RopeTerm
-    assert translate_args_class_types.get(kw.reason_upper) == kw.MaybeEpoch
+    assert translate_args_class_types.get(kw.reason_upper) == kw.ContextNum
     assert translate_args_class_types.get(kw.numor) == "int"
     assert translate_args_class_types.get(kw.offi_time) == kw.EpochTime
     assert translate_args_class_types.get(kw.belief_name) == kw.NameTerm
-    assert translate_args_class_types.get(kw.reason_lower) == kw.MaybeEpoch
+    assert translate_args_class_types.get(kw.reason_lower) == kw.ContextNum
     assert translate_args_class_types.get(kw.mana_grain) == "float"
     assert translate_args_class_types.get(kw.fact_state) == kw.RopeTerm
     assert translate_args_class_types.get(kw.pledge) == "bool"

@@ -24,11 +24,12 @@ from src.ch12_bud._ref.ch12_path import (
 )
 from src.ch12_bud._ref.ch12_semantic_types import (
     BeliefName,
+    EpochTime,
     LabelTerm,
     RopeTerm,
     SparkInt,
 )
-from src.ch12_bud.bud_main import BudUnit, EpochTime, get_budunit_from_dict
+from src.ch12_bud.bud_main import BudUnit, get_budunit_from_dict
 from src.ch12_bud.cell import CellUnit, cellunit_get_from_dict, cellunit_shop
 
 

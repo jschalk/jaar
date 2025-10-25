@@ -35,18 +35,6 @@ def default_unknown_str_if_None(unknown_str: any = None) -> str:
     return unknown_str
 
 
-def default_epoch_frame() -> str:
-    return 0
-
-
-def default_epoch_frame_if_None(epoch_frame: any = None) -> str:
-    if epoch_frame != epoch_frame:
-        epoch_frame = None
-    if epoch_frame is None:
-        epoch_frame = default_epoch_frame()
-    return epoch_frame
-
-
 def get_translate_config_jkeys(x_dimen: str) -> dict:
     jkeys_key_list = [x_dimen, "jkeys"]
     return get_from_nested_dict(get_translate_config_dict(), jkeys_key_list)
@@ -79,11 +67,6 @@ def get_translate_args_dimen_mapping() -> dict[str, str]:
 
 def get_translate_args_class_types() -> dict[str, str]:
     return {
-        "voice_name": "NameTerm",
-        "voice_cred_lumen": "float",
-        "voice_debt_lumen": "float",
-        "group_cred_lumen": "float",
-        "group_debt_lumen": "float",
         "active_requisite": "bool",
         "addin": "float",
         "amount": "float",
@@ -103,12 +86,14 @@ def get_translate_args_class_types() -> dict[str, str]:
         "face_name": "NameTerm",
         "fact_context": "RopeTerm",
         "fact_state": "RopeTerm",
-        "fact_upper": "MaybeEpoch",
-        "fact_lower": "MaybeEpoch",
+        "fact_upper": "ContextNum",
+        "fact_lower": "ContextNum",
         "fund_grain": "float",
         "fund_pool": "float",
         "give_force": "float",
         "gogo_want": "float",
+        "group_cred_lumen": "float",
+        "group_debt_lumen": "float",
         "group_title": "TitleTerm",
         "healer_name": "NameTerm",
         "hour_label": "LabelTerm",
@@ -127,11 +112,11 @@ def get_translate_args_class_types() -> dict[str, str]:
         "plan_rope": "RopeTerm",
         "pledge": "bool",
         "problem_bool": "bool",
-        "reason_state": "RopeTerm",
-        "reason_divisor": "int",
-        "reason_lower": "MaybeEpoch",
-        "reason_upper": "MaybeEpoch",
         "reason_context": "RopeTerm",
+        "reason_divisor": "int",
+        "reason_lower": "ContextNum",
+        "reason_upper": "ContextNum",
+        "reason_state": "RopeTerm",
         "star": "int",
         "respect_grain": "float",
         "solo": "int",
@@ -139,6 +124,9 @@ def get_translate_args_class_types() -> dict[str, str]:
         "take_force": "float",
         "tally": "int",
         "tran_time": "EpochTime",
+        "voice_name": "NameTerm",
+        "voice_cred_lumen": "float",
+        "voice_debt_lumen": "float",
         "weekday_label": "LabelTerm",
         "weekday_order": "int",
         "yr1_jan1_offset": "int",
@@ -148,7 +136,6 @@ def get_translate_args_class_types() -> dict[str, str]:
 def get_quick_translates_column_ref() -> dict[str, set[str]]:
     """for each translate_config dimen contains the associated columns"""
     return {
-        "translate_epoch": {"inx_epoch", "otx_epoch"},
         "translate_title": {
             "inx_title",
             "otx_title",

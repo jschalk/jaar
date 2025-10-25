@@ -77,6 +77,7 @@ def test_get_moment_config_dict_ReturnsObj():
 def _validate_moment_config(moment_config: dict):
     accepted_class_typees = get_allowed_class_types()
     accepted_class_typees.add("str")
+    accepted_class_typees.add(kw.EpochTime)
 
     # for every moment_format file there exists a unique moment_number with leading zeros to make 5 digits
     for moment_dimen, dimen_dict in moment_config.items():
@@ -84,9 +85,9 @@ def _validate_moment_config(moment_config: dict):
         assert dimen_dict.get(kw.jkeys) is not None
         assert dimen_dict.get(kw.jvalues) is not None
         if moment_dimen == kw.moment_timeoffi:
-            assert dimen_dict.get("moment_static") == "False"
+            assert dimen_dict.get(kw.moment_static) == "False"
         else:
-            assert dimen_dict.get("moment_static") == "True"
+            assert dimen_dict.get(kw.moment_static) == "True"
         assert dimen_dict.get(kw.UPDATE) is None
         assert dimen_dict.get(kw.INSERT) is None
         assert dimen_dict.get(kw.DELETE) is None

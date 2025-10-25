@@ -20,8 +20,7 @@ from src.ch04_rope._ref.ch04_semantic_types import (
 )
 
 
-class MaybeEpoch(float):
-    """A numeric value that may or may not represent an min in an Epoch.
-    It's Epoch-relatedness is determined externally by context."""
+class ContextNum(float):
+    """A numeric value that may converted to other Semantic Types by an external process driven by context."""
 
     pass

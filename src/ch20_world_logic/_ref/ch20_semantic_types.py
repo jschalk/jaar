@@ -23,9 +23,9 @@ from src.ch07_belief_logic._ref.ch07_semantic_types import (
     ManaGrain,
     MomentLabel,
 )
-from src.ch08_belief_atom._ref.ch08_semantic_types import CRUD_command, EpochTime
+from src.ch08_belief_atom._ref.ch08_semantic_types import CRUD_command
 from src.ch09_belief_lesson._ref.ch09_semantic_types import FaceName
-from src.ch12_bud._ref.ch12_semantic_types import SparkInt
+from src.ch12_bud._ref.ch12_semantic_types import EpochTime, SparkInt
 from src.ch13_keep._ref.ch13_semantic_types import ManaNum
 from src.ch14_epoch._ref.ch14_semantic_types import EpochLabel
 

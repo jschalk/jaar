@@ -18,4 +18,4 @@ from src.ch04_rope._ref.ch04_semantic_types import (
     RopeTerm,
     default_knot_if_None,
 )
-from src.ch05_reason._ref.ch05_semantic_types import MaybeEpoch
+from src.ch05_reason._ref.ch05_semantic_types import ContextNum
