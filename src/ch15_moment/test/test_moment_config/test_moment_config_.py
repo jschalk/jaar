@@ -59,8 +59,7 @@ def test_get_moment_config_dict_ReturnsObj():
         kw.knot,
         kw.epoch_label,
         kw.yr1_jan1_offset,
-        "job_listen_rotations",
-        # kw.job_listen_rotations,
+        kw.job_listen_rotations,
     }
     print(f"{momentunit_dict.get(kw.jvalues).keys()=}")
     gen_jvalues = set(momentunit_dict.get(kw.jvalues).keys())
@@ -200,7 +199,6 @@ def test_get_moment_args_set_ReturnsObj():
         kw.fund_grain,
         kw.month_label,
         kw.monthday_index,
-        # kw.job_listen_rotations,
         kw.job_listen_rotations,
         kw.mana_grain,
         kw.belief_name,

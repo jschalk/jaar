@@ -4,6 +4,9 @@ from src.ch01_py.file_toolbox import open_file, save_file
 from src.ch01_py.keyword_class_builder import (
     create_all_enum_keyword_classes_str,
     create_keywords_enum_class_file_str,
+    get_chapter_descs,
+    get_cumlative_ch_keywords_dict,
+    get_keywords_by_chapter,
     get_keywords_src_config,
 )
 
@@ -93,6 +96,29 @@ class Ch03{key_str}words(str, Enum):
     print(file_str)
     print(expected_file_str)
     assert file_str == expected_file_str
+
+
+def test_create_all_enum_keyword_classes_str_ReturnsObj():
+    # ESTABLISH / WHEN
+    classes_str = create_all_enum_keyword_classes_str()
+
+    # THEN
+    keywords_by_chapter = get_keywords_by_chapter(get_keywords_src_config())
+    cumlative_keywords = get_cumlative_ch_keywords_dict(keywords_by_chapter)
+    expected_classes_str = """from enum import Enum
+"""
+    for chapter_desc, chapter_dir in get_chapter_descs().items():
+        ch_prefix = get_chapter_desc_prefix(chapter_desc)
+        ch_keywords = cumlative_keywords.get(ch_prefix)
+        enum_class_str = create_keywords_enum_class_file_str(ch_prefix, ch_keywords)
+        expected_classes_str += enum_class_str
+    assert expected_classes_str == classes_str
+    two_line_spacing_str = """from enum import Enum
+
+
+class Ch00Key"""
+    print(classes_str[:100])
+    assert classes_str.find(two_line_spacing_str) == 0
 
 
 def test_SpecialTestThatBuildsKeywordEnumClasses():
