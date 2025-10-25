@@ -1,4 +1,8 @@
 {
+  "translate_epoch": {
+    "jkeys": {"otx_epoch": {}}, 
+    "jvalues": {"inx_epoch": {}}
+  }, 
   "translate_label": {
     "jkeys": {"otx_label": {}}, 
     "jvalues": {"inx_knot": {}, "inx_label": {}, "otx_knot": {}, "unknown_str": {}}

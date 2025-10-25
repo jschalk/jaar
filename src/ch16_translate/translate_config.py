@@ -5,7 +5,7 @@ from src.ch08_belief_atom.atom_config import get_all_belief_dimen_delete_keys
 
 
 def translate_config_path() -> str:
-    "Returns path: a16_translate_logic/translate_config.json"
+    "Returns path: c16_translate/translate_config.json"
     src_dir = create_path(os_getcwd(), "src")
     chapter_dir = create_path(src_dir, "ch16_translate")
     return create_path(chapter_dir, "translate_config.json")
@@ -33,6 +33,18 @@ def default_unknown_str_if_None(unknown_str: any = None) -> str:
     if unknown_str is None:
         unknown_str = default_unknown_str()
     return unknown_str
+
+
+def default_epoch_frame() -> str:
+    return 0
+
+
+def default_epoch_frame_if_None(epoch_frame: any = None) -> str:
+    if epoch_frame != epoch_frame:
+        epoch_frame = None
+    if epoch_frame is None:
+        epoch_frame = default_epoch_frame()
+    return epoch_frame
 
 
 def get_translate_config_jkeys(x_dimen: str) -> dict:
@@ -136,6 +148,7 @@ def get_translate_args_class_types() -> dict[str, str]:
 def get_quick_translates_column_ref() -> dict[str, set[str]]:
     """for each translate_config dimen contains the associated columns"""
     return {
+        "translate_epoch": {"inx_epoch", "otx_epoch"},
         "translate_title": {
             "inx_title",
             "otx_title",
