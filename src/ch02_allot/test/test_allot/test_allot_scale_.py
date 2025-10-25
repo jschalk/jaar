@@ -5,6 +5,7 @@ from src.ch02_allot.allot import (
     _get_missing_scale_list,
     allot_scale,
 )
+from src.ref.keywords import ExampleStrs as exx
 
 
 def test_create_missing_distribution_list_ReturnsObj_Scenario00():
@@ -118,16 +119,13 @@ def test_allot_missing_scale_DistributesTheMissingScale_scenario00():
 
 def test_allot_missing_scale_DistributesTheMissingScale_scenario01():
     # ESTABLISH
-    bob_str = "Bob"
-    sue_str = "Sue"
-    yao_str = "Yao"
     bob_before_allot = 1000
     sue_before_allot = 900
     yao_allot = 800
     before_ledger = {
-        yao_str: yao_allot,
-        sue_str: sue_before_allot,
-        bob_str: bob_before_allot,
+        exx.yao: yao_allot,
+        exx.sue: sue_before_allot,
+        exx.bob: bob_before_allot,
     }
     x_missing_scale = 10
     x_grain = 5
@@ -145,28 +143,25 @@ def test_allot_missing_scale_DistributesTheMissingScale_scenario01():
     # THEN
     bob_after_allot = bob_before_allot + x_grain
     sue_after_allot = sue_before_allot + x_grain
-    assert gen_ledger.get(bob_str) == bob_after_allot
-    assert gen_ledger.get(sue_str) == sue_after_allot
+    assert gen_ledger.get(exx.bob) == bob_after_allot
+    assert gen_ledger.get(exx.sue) == sue_after_allot
     after_ledger = {
-        yao_str: yao_allot,
-        sue_str: sue_after_allot,
-        bob_str: bob_after_allot,
+        exx.yao: yao_allot,
+        exx.sue: sue_after_allot,
+        exx.bob: bob_after_allot,
     }
     assert gen_ledger == after_ledger
 
 
 def test_allot_missing_scale_DistributesTheMissingScale_scenario02():
     # ESTABLISH
-    bob_str = "Bob"
-    sue_str = "Sue"
-    yao_str = "Yao"
     bob_before_allot = 1000
     sue_before_allot = 900
     yao_before_allot = 800
     before_ledger = {
-        yao_str: yao_before_allot,
-        sue_str: sue_before_allot,
-        bob_str: bob_before_allot,
+        exx.yao: yao_before_allot,
+        exx.sue: sue_before_allot,
+        exx.bob: bob_before_allot,
     }
     x_missing_scale = 40
     x_grain = 5
@@ -185,28 +180,25 @@ def test_allot_missing_scale_DistributesTheMissingScale_scenario02():
     bob_after_allot = bob_before_allot + 15
     sue_after_allot = sue_before_allot + 15
     yao_after_allot = yao_before_allot + 10
-    assert gen_ledger.get(bob_str) == bob_after_allot
-    assert gen_ledger.get(sue_str) == sue_after_allot
+    assert gen_ledger.get(exx.bob) == bob_after_allot
+    assert gen_ledger.get(exx.sue) == sue_after_allot
     after_ledger = {
-        yao_str: yao_after_allot,
-        sue_str: sue_after_allot,
-        bob_str: bob_after_allot,
+        exx.yao: yao_after_allot,
+        exx.sue: sue_after_allot,
+        exx.bob: bob_after_allot,
     }
     assert gen_ledger == after_ledger
 
 
 def test_allot_missing_scale_RaisesErrorWhen_ledgerSummationIsNot_scale_number():
     # ESTABLISH
-    bob_str = "Bob"
-    sue_str = "Sue"
-    yao_str = "Yao"
     bob_before_allot = 1000
     sue_before_allot = 900
     yao_allot = 800
     before_ledger = {
-        yao_str: yao_allot,
-        sue_str: sue_before_allot,
-        bob_str: bob_before_allot,
+        exx.yao: yao_allot,
+        exx.sue: sue_before_allot,
+        exx.bob: bob_before_allot,
     }
     x_missing_scale = 10
     x_grain = 5
@@ -222,10 +214,8 @@ def test_allot_missing_scale_RaisesErrorWhen_ledgerSummationIsNot_scale_number()
             grain_unit=x_grain,
             missing_scale=x_missing_scale,
         )
-    assert (
-        str(excinfo.value)
-        == f"Summation of allots '{correct_full_scale}' is not equal to scale '{wrong_full_scale}'."
-    )
+    exception_str = f"Summation of allots '{correct_full_scale}' is not equal to scale '{wrong_full_scale}'."
+    assert str(excinfo.value) == exception_str
 
 
 def test_allot_missing_scale_ReturnsEmpty_ledger():

@@ -1,6 +1,15 @@
 from enum import Enum
 
 
+class ExampleStrs(str, Enum):
+    bob = "Bob"
+    sue = "Sue"
+    yao = "Yao"
+
+    def __str__(self):
+        return self.value
+
+
 class Ch00Keywords(str, Enum):
     pass
 

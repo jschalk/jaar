@@ -106,6 +106,15 @@ def test_create_all_enum_keyword_classes_str_ReturnsObj():
     keywords_by_chapter = get_keywords_by_chapter(get_keywords_src_config())
     cumlative_keywords = get_cumlative_ch_keywords_dict(keywords_by_chapter)
     expected_classes_str = """from enum import Enum
+
+
+class ExampleStrs(str, Enum):
+    bob = "Bob"
+    sue = "Sue"
+    yao = "Yao"
+
+    def __str__(self):
+        return self.value
 """
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         ch_prefix = get_chapter_desc_prefix(chapter_desc)
@@ -114,6 +123,15 @@ def test_create_all_enum_keyword_classes_str_ReturnsObj():
         expected_classes_str += enum_class_str
     assert expected_classes_str == classes_str
     two_line_spacing_str = """from enum import Enum
+
+
+class ExampleStrs(str, Enum):
+    bob = "Bob"
+    sue = "Sue"
+    yao = "Yao"
+
+    def __str__(self):
+        return self.value
 
 
 class Ch00Key"""

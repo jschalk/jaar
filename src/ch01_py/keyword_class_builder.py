@@ -65,6 +65,15 @@ def create_all_enum_keyword_classes_str() -> str:
     keywords_by_chapter = get_keywords_by_chapter(get_keywords_src_config())
     cumlative_keywords = get_cumlative_ch_keywords_dict(keywords_by_chapter)
     import_enum_line = """from enum import Enum
+
+
+class ExampleStrs(str, Enum):
+    bob = "Bob"
+    sue = "Sue"
+    yao = "Yao"
+
+    def __str__(self):
+        return self.value
 """
     classes_str = copy_copy(import_enum_line)
     for chapter_desc, chapter_dir in get_chapter_descs().items():
