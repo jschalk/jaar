@@ -39,7 +39,6 @@ def test_find_incorrect_imports_ReturnsObj_Scenario0_threshold_52(sample_file):
     assert all("ch51" not in r and "ch57" not in r for r in result)
 
 
-# TODO fix and reactivate test
 def test_find_incorrect_imports_ReturnsObj_Scenario1_high_threshold_only_top_matches(
     sample_file,
 ):

@@ -332,6 +332,7 @@ def create_five_time_config_idea_csvs() -> dict[str, str]:
     return with_spark_face_csvs
 
 
+# TODO check this still works in gui
 def create_elpaso_time_config_idea_csvs() -> dict[str, str]:
     elpaso_rope = create_rope("ElPaso")
     creg_epochunit = epochunit_shop(get_creg_config())

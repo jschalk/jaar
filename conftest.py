@@ -43,7 +43,7 @@ def pytest_addoption(parser):
         help="Rebuild JSON files during the test run",
     )
     parser.addoption(
-        "--check-pip",
+        "--check_pip",
         action="store_true",
         default=False,
         help="Run tests that download packages from pip",
@@ -65,7 +65,7 @@ def pytest_generate_tests(metafunc):
 
 @pytest.fixture
 def check_pip(request):
-    return request.config.getoption("--check-pip")
+    return request.config.getoption("--check_pip")
 
 
 @pytest.fixture
