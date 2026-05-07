@@ -1,6 +1,10 @@
 from ch00_py.chapter_desc_main import get_chapter_desc_prefix, get_chapter_descs
 from ch00_py.file_toolbox import create_path, open_json, save_json
-from ch00_py.keyword_class_builder import get_keywords_src_config
+from ch00_py.keyword_class_builder import (
+    get_chapter_descs,
+    get_keywords_src_config,
+    parse_valid_ch_str,
+)
 from ch07_person_logic.person_config import (
     get_all_person_calc_args,
     get_person_calc_dimen_args,
@@ -12,6 +16,8 @@ from ch98_docs_builder._ref.ch98_path import (
     create_src_keg_definitions_path,
     create_src_keg_exam_path,
 )
+from csv import writer as csv_writer
+from pathlib import Path
 from re import search as re_search
 
 
@@ -77,6 +83,97 @@ def get_chxx_ref_blurb(ch_dict, keyword) -> str:
 
 def get_keg_exam() -> dict[str, dict]:
     return open_json(create_src_keg_exam_path("src"))
+
+
+def get_exam_middle1() -> dict:
+    chapter_descs = get_chapter_descs().keys()
+    ch_ints = {int(chapter_desc[2:4]) for chapter_desc in chapter_descs}
+    keywords_src_config = get_keywords_src_config()
+
+    keg_definitions = get_keg_definitions()
+    exam_middle = {}
+    for keg_term, keg_definition in keg_definitions.items():
+        kw_config = keywords_src_config.get(keg_term)
+        kw_exam_dict = {
+            'keg_definition': keg_definition,
+        }
+        if kw_config:
+            valid_chs = parse_valid_ch_str(ch_ints, kw_config.get("valid_ch"))
+            init_ch = sorted(valid_chs)[0] if valid_chs else "No Chapter"
+            kw_exam_dict["init_ch"] = init_ch
+            kw_exam_dict["exam_tier"] = kw_config.get("exam_tier")
+        else:
+            kw_exam_dict["init_ch"] = "Not a keyword"
+            kw_exam_dict["exam_tier"] = "Not a keyword"
+        exam_middle[keg_term] = kw_exam_dict
+    return exam_middle
+
+
+def create_did_you_read_questions(exam_middle1: dict) -> list[tuple[str, str]]:
+    # largest to smallest
+    # keg_term alphabetical
+    sorted_items = sorted(
+        exam_middle1.items(),
+        key=lambda item: (item[1]["exam_tier"], -item[1]["init_ch"], item[0]),
+    )
+
+    return [
+        (f"Did you read about '{kt}'?", cf["keg_definition"]) for kt, cf in sorted_items
+    ]
+
+
+def create_final_exam_question_list(
+    fixed_questions: dict[int, str], floating_questions: list[str]
+) -> list[str]:
+    """Merge fixed-position questions with floating questions."""
+
+    if not fixed_questions:
+        return floating_questions.copy()
+
+    max_fixed_index = max(fixed_questions.keys())
+    total_length = max_fixed_index + 1 + len(floating_questions)
+
+    result: list[str] = []
+    floating_iter = iter(floating_questions)
+
+    total_length = len(fixed_questions) + len(floating_questions)
+
+    for index in range(total_length):
+        if index in fixed_questions:
+            result.append(fixed_questions[index])
+        else:
+            result.append(next(floating_iter))
+
+    return result
+
+
+def export_final_exam_questions_to_csv(
+    fixed_questions: dict[int, str],
+    floating_questions: list[str],
+    output_csv_path: str | Path,
+) -> None:
+    """
+    Create the final exam question list and save it as a CSV file.
+
+    CSV columns:
+        - row_number
+        - question
+    """
+
+    final_questions = create_final_exam_question_list(
+        fixed_questions=fixed_questions,
+        floating_questions=floating_questions,
+    )
+
+    with open(output_csv_path, "w", newline="", encoding="utf-8") as csv_file:
+        writer = csv_writer(csv_file)
+
+        # Header row
+        writer.writerow(["row_number", "question"])
+
+        # Question rows
+        for row_number, question in enumerate(final_questions):
+            writer.writerow([row_number, question])
 
 
 def get_ch_sorted_keywords(keywords_src_config: dict) -> list[str]:
