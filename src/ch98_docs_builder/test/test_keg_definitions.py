@@ -1,6 +1,8 @@
 from ch00_py.keyword_class_builder import (
+    get_chapter_descs,
     get_example_strs_config,
     get_keywords_src_config,
+    parse_valid_ch_str,
 )
 from ch07_person_logic.person_config import (
     get_all_person_calc_args,
@@ -125,13 +127,14 @@ def test_get_keg_definitions_ReturnsObj_CheckNoChapter_keywords():
     # ESTABLISH / WHEN
     keg_definitions = get_keg_definitions()
     # THEN
+    chapter_descs = get_chapter_descs().keys()
+    ch_ints = {int(chapter_desc[2:4]) for chapter_desc in chapter_descs}
     for keyword, kw_config in get_keywords_src_config().items():
-        x_valid_ch = kw_config.get(kw.valid_ch)
         assert kw.valid_ch in set(kw_config.keys()), keyword
-        # TODO reactivate this
-        # if not bool(re_fullmatch(r"ch\d{2}", x_valid_ch)):
-        #     config_description = keg_definitions.get(keyword)
-        #     assert "Not used in codebase." in config_description, keyword
+        valid_chs = parse_valid_ch_str(ch_ints, kw_config.get(kw.valid_ch))
+        if not valid_chs:
+            config_description = keg_definitions.get(keyword)
+            assert "Not used in codebase." in config_description, keyword
         assert "exam_tier" in set(kw_config.keys()), keyword
         x_exam_tier = kw_config.get("exam_tier")
         assert x_exam_tier >= 0
@@ -182,23 +185,26 @@ def test_get_keg_definitions_ReturnsObj_Check_semantic_types():
         assert class_doc_str in semantic_description
 
 
-# TODO reactivate
-# def test_get_keg_definitions_ReturnsObj_Checb_src_config_keywords():
-#     # sourcery skip: no-conditionals-in-tests
-#     # ESTABLISH / WHEN
-#     keg_definitions = get_keg_definitions()
+def test_get_keg_definitions_ReturnsObj_Check_src_config_keywords():
+    # sourcery skip: no-conditionals-in-tests
+    # ESTABLISH / WHEN
+    keg_definitions = get_keg_definitions()
 
-#     # THEN
-#     all_semantic_types = get_all_semantic_types_with_doc_strs()
-#     doc_str_semantic_types = set(all_semantic_types.keys())
-#     for keyword, kw_config in get_keywords_src_config().items():
-#         if semantic_type := kw_config.get("semantic_type"):
-#             # print(f"{keyword} {kw_config=}")
-#             x_valid_ch = kw_config.get("valid_ch")
-#             kw_desc = f"{semantic_type} first used in {x_valid_ch}"
-#             config_description = keg_definitions.get(keyword)
-#             assert kw_desc in config_description, keyword
-#             assert keyword in doc_str_semantic_types
+    # THEN
+    chapter_descs = get_chapter_descs().keys()
+    ch_ints = {int(chapter_desc[2:4]) for chapter_desc in chapter_descs}
+    all_semantic_types = get_all_semantic_types_with_doc_strs()
+    doc_str_semantic_types = set(all_semantic_types.keys())
+    for keyword, kw_config in get_keywords_src_config().items():
+        if semantic_type := kw_config.get("semantic_type"):
+            # print(f"{keyword} {kw_config=}")
+            valid_ch_str = kw_config.get(kw.valid_ch)
+            if valid_chs := parse_valid_ch_str(ch_ints, valid_ch_str):
+                init_ch = sorted(valid_chs)[0]
+                kw_desc = f"{semantic_type} first used in ch{init_ch:02d}"
+                config_description = keg_definitions.get(keyword)
+                assert kw_desc in config_description, keyword
+                assert keyword in doc_str_semantic_types
 
 
 def test_get_keg_definitions_ReturnsObj_Check_epoch_config():
