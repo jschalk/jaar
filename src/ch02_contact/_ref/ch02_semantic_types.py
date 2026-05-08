@@ -3,7 +3,7 @@ from ch01_allot._ref.ch01_semantic_types import GrainNum, PoolNum, WeightNum
 
 
 class BreakTerm(str):
-    """All str separator classes are BreakTerms. Meant to envoke the analogy of the necessity to break experience reality into things so they can be understood."""
+    """All str separator classes are BreakTerms. Exists because of the necessity to break experience reality into things so they can be understood."""
 
     pass
 

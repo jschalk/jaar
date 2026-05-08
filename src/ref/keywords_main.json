@@ -325,6 +325,7 @@
   "mana_grain": {"exam_tier": 0, "sort_ordinal": 138, "valid_ch": "4:"}, 
   "mandate": {"exam_tier": 0, "valid_ch": "7:"}, 
   "max_tree_traverse": {"exam_tier": 0, "sort_ordinal": 126, "valid_ch": "7:"}, 
+  "meaning": {"exam_tier": 10, "valid_ch": "4"}, 
   "memberships": {"exam_tier": 0, "valid_ch": "2:"}, 
   "mmtbudd": {"exam_tier": 0, "valid_ch": "18:"}, 
   "mmthour": {"exam_tier": 0, "valid_ch": "18:"}, 

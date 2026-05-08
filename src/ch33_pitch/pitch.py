@@ -50,7 +50,7 @@ def pitchunit_shop(
 
 
 # The pitch process model is as follows from Pitcher to Peer
-# 1. offer gift. Gifts are Ideas at the pitcher is vowing to make into a brick. Are meant to appeal to the audience
+# 1. offer gift. Gifts are Ideas at the pitcher is vowing to make into a brick.  to appeal to the audience
 # 2. Describe possible future Gifts. From you, from me.
 
 # When a pitch is given the gift must automatically be bricked. The gift's spark_num

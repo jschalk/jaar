@@ -23,7 +23,7 @@ def test_BreakTerm_Exists():
     semi_colon_break = BreakTerm(semi_colon_str)
     # THEN
     assert semi_colon_break == semi_colon_str
-    doc_str = "All str separator classes are BreakTerms. Meant to envoke the analogy of the necessity to break experience reality into things so they can be understood."
+    doc_str = """All str separator classes are BreakTerms. Exists because of the necessity to break experience reality into things so they can be understood."""
     assert inspect_getdoc(semi_colon_break) == doc_str
 
 

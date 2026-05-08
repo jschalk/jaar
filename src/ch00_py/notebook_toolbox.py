@@ -125,7 +125,7 @@ def get_marimo_cells(function_str: str) -> List[str]:
 
         current_cell.append(line)
 
-        # Track whether previous meaningful line was code
+        # Track whether previous substantial line was code
         if line.strip() != "":
             prev_was_code = not comment
 

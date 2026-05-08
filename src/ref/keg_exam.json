@@ -25,35 +25,35 @@ row_number,question
 23,Did you read that the keg_definition of 'a23' is 'Example key with value ';Amy23;' used for tests throughout codebase.'.
 24,Did you read that the keg_definition of 'a23_dash' is 'Example key with value '-Amy23-' used for tests throughout codebase.'.
 25,Did you read that the keg_definition of 'a23_slash' is 'Example key with value '/Amy23/' used for tests throughout codebase.'.
-26,Did you read that the keg_definition of 'assert' is 'Used so often in Python that it cannot be given any kegology meaning.'.
+26,Did you read that the keg_definition of 'assert' is 'Used so often in Python that it cannot be a kegology keyword.'.
 27,Did you read that the keg_definition of 'blue' is 'Example key with value 'blue' used for tests throughout codebase.'.
 28,Did you read that the keg_definition of 'bob' is 'Example key with value 'Bob' used for tests throughout codebase.'.
 29,Did you read that the keg_definition of 'bowl' is 'Example key with value 'bowl' used for tests throughout codebase.'.
-30,Did you read that the keg_definition of 'break' is 'Used so often in Python that it cannot be given any kegology meaning.'.
+30,Did you read that the keg_definition of 'break' is 'Used so often in Python that it cannot be a kegology keyword.'.
 31,Did you read that the keg_definition of 'casa' is 'Example key with value 'casa' used for tests throughout codebase.'.
-32,Did you read that the keg_definition of 'class' is 'Used so often in Python that it cannot be given any kegology meaning.'.
+32,Did you read that the keg_definition of 'class' is 'Used so often in Python that it cannot be a kegology keyword.'.
 33,Did you read that the keg_definition of 'clean' is 'Example key with value 'clean' used for tests throughout codebase.'.
 34,Did you read that the keg_definition of 'cuisine' is 'Example key with value 'cuisine' used for tests throughout codebase.'.
 35,Did you read that the keg_definition of 'dash' is 'Example key with value '-' used for tests throughout codebase.'.
 36,Did you read that the keg_definition of 'dirtyness' is 'Example key with value 'dirtyness' used for tests throughout codebase.'.
 37,Did you read that the keg_definition of 'ep8' is 'Example key with value ';ep8;' used for tests throughout codebase.'.
 38,"Did you read that the keg_definition of 'factory' is 'Not used in codebase. The factory method in programming is very important. However because I want 'fact' only to refer to the Keg concept I don't use the word 'factory', instead I use 'shop'.'."
-39,Did you read that the keg_definition of 'global' is 'Used so often in Python that it cannot be given any kegology meaning.'.
+39,Did you read that the keg_definition of 'global' is 'Used so often in Python that it cannot be a kegology keyword.'.
 40,Did you read that the keg_definition of 'heart' is 'Not used in codebase.'.
 41,Did you read that the keg_definition of 'hn_blu' is 'Example key with value ';herenow_blu;' used for tests throughout codebase.'.
 42,Did you read that the keg_definition of 'hn_red' is 'Example key with value ';herenow_red;' used for tests throughout codebase.'.
 43,Did you read that the keg_definition of 'hn_yel' is 'Example key with value ';herenow_yel;' used for tests throughout codebase.'.
-44,Did you read that the keg_definition of 'import' is 'Used so often in Python that it cannot be given any kegology meaning.'.
+44,Did you read that the keg_definition of 'import' is 'Used so often in Python that it cannot be a kegology keyword.'.
 45,Did you read that the keg_definition of 'infinity' is 'As described in Totality and Infinity. Not used in codebase.'.
 46,Did you read that the keg_definition of 'jump' is 'To use keg requires a human to jump and try. Not easy. Not used in codebase.'.
-47,Did you read that the keg_definition of 'match' is 'Used so often in Python that it cannot be given any kegology meaning.'.
+47,Did you read that the keg_definition of 'match' is 'Used so often in Python that it cannot be a kegology keyword.'.
 48,Did you read that the keg_definition of 'mop' is 'Example key with value 'mop' used for tests throughout codebase.'.
 49,Did you read that the keg_definition of 'power' is 'Not used in codebase.'.
 50,Did you read that the keg_definition of 'red' is 'Example key with value 'red' used for tests throughout codebase.'.
 51,Did you read that the keg_definition of 'run' is 'Example key with value ';runners' used for tests throughout codebase.'.
 52,Did you read that the keg_definition of 'run_dash' is 'Example key with value '-runners' used for tests throughout codebase.'.
 53,Did you read that the keg_definition of 'scrub' is 'Example key with value 'scrub' used for tests throughout codebase.'.
-54,Did you read that the keg_definition of 'self' is 'Used so often in Python that it cannot be given any kegology meaning.'.
+54,Did you read that the keg_definition of 'self' is 'Used so often in Python that it cannot be a kegology keyword.'.
 55,Did you read that the keg_definition of 'slash' is 'Example key with value '/' used for tests throughout codebase.'.
 56,Did you read that the keg_definition of 'square' is 'Example key with value 'square' used for tests throughout codebase.'.
 57,Did you read that the keg_definition of 'sue' is 'Example key with value 'Sue' used for tests throughout codebase.'.
@@ -63,7 +63,7 @@ row_number,question
 61,Did you read that the keg_definition of 'wk' is 'Example key with value 'wk' used for tests throughout codebase.'.
 62,Did you read that the keg_definition of 'xio' is 'Example key with value 'Xio' used for tests throughout codebase.'.
 63,Did you read that the keg_definition of 'yao' is 'Example key with value 'Yao' used for tests throughout codebase.'.
-64,Did you read that the keg_definition of 'yield' is 'Used so often in Python that it cannot be given any kegology meaning.'.
+64,Did you read that the keg_definition of 'yield' is 'Used so often in Python that it cannot be a kegology keyword.'.
 65,Did you read that the keg_definition of 'zia' is 'Example key with value 'Zia' used for tests throughout codebase.'.
 66,Did you read that the keg_definition of 'ch98' is 'Defines Tools that create documentation.'.
 67,Did you read that the keg_definition of 'ch36' is 'ETL app to create day punches from excel files.'.
@@ -559,7 +559,7 @@ row_number,question
 555,Did you read that the keg_definition of 'person' is 'Definition needed.'.
 556,"Did you read that the keg_definition of 'person_name' is ', paybook arg, bud arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed, Contact seed, Member seed.'."
 557,"Did you read that the keg_definition of 'person_name_is_workforce' is ', Workforce thinkout'."
-558,Did you read that the keg_definition of 'BreakTerm' is 'str first used in ch02. All str separator classes are BreakTerms. Meant to envoke the analogy of the necessity to break experience reality into things so they can be understood.'.
+558,Did you read that the keg_definition of 'BreakTerm' is 'str first used in ch02. All str separator classes are BreakTerms. Exists because of the necessity to break experience reality into things so they can be understood.'.
 559,"Did you read that the keg_definition of 'ContactName' is 'str first used in ch02. Every ContactName object is NameTerm, must follow NameTerm format.'."
 560,Did you read that the keg_definition of 'FundGrain' is 'float first used in ch02. Smallest Unit of fund_num'.
 561,Did you read that the keg_definition of 'FundNum' is 'float first used in ch02. FundNum inherits from float class'.
@@ -635,3 +635,4 @@ row_number,question
 631,Did you read that the keg_definition of 'SparkInt' is 'int first used in ch11. Each Spark is a int that describes the order of data ingestion'.
 632,Did you read that the keg_definition of 'dive' is 'To go from living on land to swimming with fearlessness. Not used in codebase.'.
 633,Did you read that the keg_definition of 'swim' is 'To live with faith. To be slave to many masters instead of a slave to one. To live in many moments. Not used in codebase.'.
+634,Did you read that the keg_definition of 'meaning' is 'A term specifically used to describe how defining Ropes creates meaning. Ropes with the same start and end points can have different meaning based on the Labels in between.'.
