@@ -1,3 +1,10 @@
+## [0.83.27](https://github.com/jschalk/keg/compare/v0.83.26...v0.83.27) (2026-05-08)
+
+
+### Bug Fixes
+
+* [#1204](https://github.com/jschalk/keg/issues/1204) deactivate get_keg_exam because it doesn't fit in the flow yet ([9d80e75](https://github.com/jschalk/keg/commit/9d80e75a18268a89e507a2c9089bc6dba35d0dd0))
+
 ## [0.83.26](https://github.com/jschalk/keg/compare/v0.83.25...v0.83.26) (2026-05-04)
 
 
