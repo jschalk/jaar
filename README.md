@@ -27,7 +27,7 @@ For keg all data must have *spark_num*, *spark_face*, and a rope, either *moment
   
 ## 0.1 Short introduction to keg excel sheets
 
-`keg` is a python library for listening to the needs of my neighbors and in turn letting them know what I need. Needs can be expressed in Excel sheets that range in complexity from a simple five column single row (example below) to 10+ columns that include configuration options that are usually set to defaults. Each row is translated and used to build the "mind" data set. Even sheet with a single row like the example 0.1.0 below can be processed by keg. 
+`keg` is a python library for listening to the needs of my neighbors and in turn letting them know what I need. Needs can be expressed in Excel sheets that range in complexity from a simple five column single row (example below) to 10+ columns that include configuration options that are usually set to defaults. Each row is translated and used to build the "lego" data set. Even sheet with a single row like the example 0.1.0 below can be processed by keg. 
 
 # Input Example Excel file 0.1.0: fizz0.xlsx with sheet "br00000_buzz" 
 | spark_num | spark_face | moment_rope | person_name | contact_name | tran_time | amount |
@@ -72,18 +72,13 @@ This is mostly a one man projeect. Femi has significantly helped.
  
 ### 1.0 Installing `keg`
 
-<!-- TODO: add dependencies -->
 
-Future enhancement: `keg` can be installed using `pip`
+    pip install keg2
 
-<!-- TODO: Get pip install to function correctly
+If you have installed `keg2` before, and you should ensure `pip` downloads the latest version (rather than using cache) you can use the follow ing commands:
 
-    pip install keg
-
-If you have installed `keg` before, and you should ensure `pip` downloads the latest version (rather than using cache) you can use the follow ing commands:
-
-    pip uninstall keg
-    pip install --no-cache keg
+    pip uninstall keg2
+    pip install --no-cache keg2
 
 -->
 
@@ -144,12 +139,11 @@ screenshots and elucidatory text.)
 
 ## 2. License
 
-<!-- TODO: Consider which license to pick -->
+
 
 
 ## 3. Acknowledgements
 
-<!-- TODO: Consider which license to pick -->
 
 
 

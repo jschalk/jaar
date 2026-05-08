@@ -430,7 +430,7 @@ def check_all_test_functions_are_formatted(all_test_functions: dict[str, str]):
             assert declare_str not in test_function_str, fail2_str
 
 
-_CH_PATTERN = re_compile(r"^.ch(\d+)(?:[._]|$)")
+_CH_PATTERN = re_compile(r"^ch(\d+)(?:[._]|$)")
 _CH_STR_PATTERN = re_compile(r"ch(\d{2})_str(?:[._]|$)")
 
 

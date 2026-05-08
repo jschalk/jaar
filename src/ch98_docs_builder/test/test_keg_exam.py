@@ -1,71 +1,274 @@
 from ch00_py.keyword_class_builder import get_keywords_src_config
-from ch07_person_logic.person_config import (
-    get_all_person_calc_args,
-    get_person_config_dict,
-)
-from ch13_time.epoch_main import get_c400_constants, get_default_epoch_config_dict
-from ch14_moment.moment_config import get_moment_config_args
-from ch15_nabu.nabu_config import get_nabu_args, get_nabuable_args
-from ch16_translate.translate_config import (
-    get_translate_config_args,
-    get_translate_config_dict,
-)
-from ch18_etl_config.etl_config import get_etl_stage_types_config_dict
-from ch22_heard.heard import etl_heard_raw_tables_to_moment_ote1_agg
-from ch98_docs_builder._ref.ch98_semantic_types import (
-    BreakTerm,
-    ContactName,
-    CRUD_command,
-    EpochLabel,
-    FaceName,
-    FactNum,
-    FirstLabel,
-    FundGrain,
-    FundNum,
-    GrainNum,
-    GroupMark,
-    GroupTitle,
-    HealerName,
-    KnotTerm,
-    LabelTerm,
-    ManaGrain,
-    ManaNum,
-    MomentRope,
-    NameTerm,
-    PersonName,
-    PitchID,
-    PoolNum,
-    ReasonNum,
-    RespectGrain,
-    RespectNum,
-    RopeTerm,
-    SparkInt,
-    TimeNum,
-    TitleTerm,
-    WeightNum,
-    WorldName,
-)
 from ch98_docs_builder.keg_definitions_builder import (
+    QuestionUnit,
     get_ch_sorted_keywords,
-    get_chxx_prefix_path_dict,
-    get_chxx_ref_blurb,
+    get_exam_fixed_questions,
+    get_keg_definition_questionunits,
     get_keg_definitions,
-    get_keg_exam,
-    get_kegology_exam_grade,
     get_keywords_by_importance,
-    get_person_dimen_config,
+    merge_fixed_and_floating_questions,
+    rebuild_final_exam_questions,
+    set_did_you_read_orders,
 )
-from inspect import getdoc as inspect_getdoc
-from re import fullmatch as re_fullmatch
+from csv import reader as csv_reader
 from ref.keywords import Ch98Keywords as kw
+
+
+def test_QuestionUnit_Exists():
+    # ESTABLISH / WHEN
+    questionunit = QuestionUnit()
+    # THEN
+    assert not QuestionUnit.keg_term
+    assert not QuestionUnit.keg_definition
+    assert not QuestionUnit.init_ch
+    assert not QuestionUnit.exam_tier
+    assert not QuestionUnit.did_you_read_order
+    assert not QuestionUnit.complete_question
+    assert set(questionunit.__dict__.keys()) == {
+        "keg_term",
+        kw.exam_tier,
+        "keg_definition",
+        "init_ch",
+        "did_you_read_order",
+        "complete_question",
+    }
+
+
+def test_QuestionUnit_get_question_ReturnsObj_Scenario0():
+    # ESTABLISH
+    star_definition = f"{kw.star} is an attribute that represents A."
+    star_questionunit = QuestionUnit(kw.star, star_definition)
+    # WHEN
+    did_you_read_question_str = star_questionunit.get_question()
+    # THEN
+    assert did_you_read_question_str
+    expected_did_you_read_question_str = (
+        f"Did you read that the keg_definition of '{kw.star}' is '{star_definition}'."
+    )
+    assert did_you_read_question_str == expected_did_you_read_question_str
+
+
+def test_QuestionUnit_get_question_ReturnsObj_Scenario1_complete_question_Exists():
+    # ESTABLISH
+    expected_question_str = "Have you heard of Kegology?"
+    a_questionunit = QuestionUnit(complete_question=expected_question_str)
+    # WHEN
+    a_question_str = a_questionunit.get_question()
+    # THEN
+    assert a_question_str
+    assert a_question_str == expected_question_str
+
+
+def test_get_keg_definition_questionunits_ReturnsObj():
+    # ESTABLISH / WHEN
+    keg_questions1 = get_keg_definition_questionunits()
+    # THEN
+    keg_definitions = get_keg_definitions()
+    assert set(keg_definitions.keys()) == set(keg_questions1.keys())
+    expected_year_length_questionunit = QuestionUnit(
+        keg_term=kw.year_length,
+        keg_definition=keg_definitions.get(kw.year_length),
+        init_ch=13,
+        exam_tier=0,
+    )
+    assert keg_questions1.get(kw.year_length) == expected_year_length_questionunit
+
+
+def test_set_did_you_read_orders_SetAttrs_Scenario0_EmptyList_WhenNoTermsExist():
+    # ESTABLISH
+    keg_questions = {}
+
+    # WHEN
+    set_did_you_read_orders(keg_questions)
+
+    # THEN
+    assert not keg_questions
+
+
+def test_set_did_you_read_orders_SetAttrs_Scenario1_SingleQuestion_WhenSingleTermProvided():
+    # ESTABLISH
+    star_questionunit = QuestionUnit(
+        keg_term=kw.star,
+        exam_tier=0,
+        init_ch=4,
+        keg_definition="Used to measure weight of plan",
+    )
+    keg_questions = {kw.star: star_questionunit}
+    assert star_questionunit.did_you_read_order is None
+
+    # WHEN
+    set_did_you_read_orders(keg_questions)
+
+    # THEN
+    assert star_questionunit.did_you_read_order == 0
+
+
+def test_set_did_you_read_orders_SetAttrs_Scenario2_AssignsSequentialOrder():
+    # ESTABLISH
+    alpha_questionunit = QuestionUnit(
+        keg_term="alpha", exam_tier=0, init_ch=1, keg_definition="Alpha definition"
+    )
+    beta_questionunit = QuestionUnit(
+        keg_term="beta", exam_tier=1, init_ch=10, keg_definition="Beta definition"
+    )
+    gamma_questionunit = QuestionUnit(
+        keg_term="gamma", exam_tier=1, init_ch=5, keg_definition="Gamma definition"
+    )
+    keg_questions = {
+        "gamma": gamma_questionunit,
+        "alpha": alpha_questionunit,
+        "beta": beta_questionunit,
+    }
+
+    # WHEN
+    set_did_you_read_orders(keg_questions)
+
+    # THEN
+    assert alpha_questionunit.did_you_read_order == 0
+    assert beta_questionunit.did_you_read_order == 1
+    assert gamma_questionunit.did_you_read_order == 2
+
+
+def test_set_did_you_read_orders_SetAttrs_Scenario3_SortsAlphabetically_WhenOtherFieldsMatch():
+    # ESTABLISH
+    zebra_questionunit = QuestionUnit(
+        keg_term="zebra", exam_tier=1, init_ch=5, keg_definition="Zebra definition"
+    )
+    alpha_questionunit = QuestionUnit(
+        keg_term="alpha", exam_tier=1, init_ch=5, keg_definition="Alpha definition"
+    )
+    keg_questions = {"zebra": zebra_questionunit, "alpha": alpha_questionunit}
+
+    # WHEN
+    set_did_you_read_orders(keg_questions)
+
+    # THEN
+    assert alpha_questionunit.did_you_read_order == 0
+    assert zebra_questionunit.did_you_read_order == 1
+
+
+def test_set_did_you_read_orders_SetAttrs_Scenario4_SortsNoneInitChAheadOfNumericInitCh():
+    # ESTABLISH
+    none_init_ch_questionunit = QuestionUnit(
+        keg_term="alpha",
+        exam_tier=0,
+        init_ch=None,
+        keg_definition="Alpha definition",
+    )
+
+    numeric_init_ch_questionunit = QuestionUnit(
+        keg_term="beta",
+        exam_tier=0,
+        init_ch=99,
+        keg_definition="Beta definition",
+    )
+
+    keg_questions = {
+        "beta": numeric_init_ch_questionunit,
+        "alpha": none_init_ch_questionunit,
+    }
+
+    # WHEN
+    set_did_you_read_orders(keg_questions)
+
+    # THEN
+    assert none_init_ch_questionunit.did_you_read_order == 0
+    assert numeric_init_ch_questionunit.did_you_read_order == 1
+
+
+def test_get_exam_fixed_questions_ReturnsObj():
+    # ESTABLISH / WHEN
+    exam_fixed_questions = get_exam_fixed_questions()
+
+    # THEN
+    assert len(exam_fixed_questions) > 3
+    for int_key in exam_fixed_questions.keys():
+        assert int_key >= 0
+
+
+def test_merge_fixed_and_floating_questions_ReturnsObj_Scenario0_OnlyFloatingQuestions():
+    # ESTABLISH
+    alpha_question = QuestionUnit(keg_term="alpha", exam_tier=0, init_ch=1)
+    beta_question = QuestionUnit(keg_term="beta", exam_tier=1, init_ch=10)
+    floating_questions = {"beta": beta_question, "alpha": alpha_question}
+    fixed_questions = {}
+
+    # WHEN
+    result = merge_fixed_and_floating_questions(
+        fixed_questions=fixed_questions,
+        floating_questions=floating_questions,
+    )
+
+    # THEN
+    assert result == [alpha_question, beta_question]
+
+
+def test_merge_fixed_and_floating_questions_ReturnsObj_Scenario1_FixedQuestionInsertedAtAbsoluteIndex():
+    # ESTABLISH
+    fixed_question = QuestionUnit(complete_question="Fixed Question")
+    alpha_question = QuestionUnit(keg_term="alpha", exam_tier=0, init_ch=1)
+    beta_question = QuestionUnit(keg_term="beta", exam_tier=1, init_ch=10)
+    fixed_questions = {1: fixed_question}
+    floating_questions = {"beta": beta_question, "alpha": alpha_question}
+
+    # WHEN
+    result = merge_fixed_and_floating_questions(
+        fixed_questions=fixed_questions,
+        floating_questions=floating_questions,
+    )
+
+    # THEN
+    assert result == [alpha_question, fixed_question, beta_question]
+
+
+def test_merge_fixed_and_floating_questions_ReturnsObj_Scenario2_MultipleFixedIndexesRemainAbsolute():
+    # ESTABLISH
+    fixed_question_b = QuestionUnit(complete_question="Fixed B")
+    fixed_question_d = QuestionUnit(complete_question="Fixed D")
+    alpha_question = QuestionUnit(keg_term="alpha", exam_tier=0, init_ch=1)
+    beta_question = QuestionUnit(keg_term="beta", exam_tier=1, init_ch=10)
+    gamma_question = QuestionUnit(keg_term="gamma", exam_tier=1, init_ch=5)
+
+    fixed_questions = {1: fixed_question_b, 3: fixed_question_d}
+    floating_questions = {
+        "gamma": gamma_question,
+        "alpha": alpha_question,
+        "beta": beta_question,
+    }
+
+    # WHEN
+    result = merge_fixed_and_floating_questions(
+        fixed_questions=fixed_questions,
+        floating_questions=floating_questions,
+    )
+
+    # THEN
+    assert result == [
+        alpha_question,
+        fixed_question_b,
+        beta_question,
+        fixed_question_d,
+        gamma_question,
+    ]
+
+
+def test_rebuild_final_exam_questions_ReturnsNone_Scenario3_CreatesCsvFile(
+    tmp_path,
+):
+    # ESTABLISH
+    output_csv_path = tmp_path / "final_exam_questions.csv"
+    # WHEN
+    rebuild_final_exam_questions(output_csv_path=output_csv_path)
+    # THEN
+    assert output_csv_path.exists()
 
 
 def test_get_ch_sorted_keywords_ReturnsObj_Scenario0_basic_sorting():
     # ESTABLISH
     data = {
-        "Excel": {kw.exam_tier: 0, kw.init_chapter: kw.ch17},
-        "Word": {kw.exam_tier: 0, kw.init_chapter: kw.ch02},
-        "Access": {kw.exam_tier: 1, kw.init_chapter: kw.ch01},
+        "Excel": {kw.exam_tier: 0, kw.valid_ch: kw.ch17},
+        "Word": {kw.exam_tier: 0, kw.valid_ch: kw.ch02},
+        "Access": {kw.exam_tier: 1, kw.valid_ch: kw.ch01},
     }
     # WHEN
     result = get_ch_sorted_keywords(data)
@@ -76,9 +279,9 @@ def test_get_ch_sorted_keywords_ReturnsObj_Scenario0_basic_sorting():
 def test_get_ch_sorted_keywords_ReturnsObj_Scenario1_empty_chapter_goes_first_within_tier():
     # ESTABLISH
     data = {
-        "Excel": {kw.exam_tier: 0, kw.init_chapter: kw.ch17},
-        "Word": {kw.exam_tier: 0, kw.init_chapter: ""},
-        "Access": {kw.exam_tier: 0, kw.init_chapter: kw.ch02},
+        "Excel": {kw.exam_tier: 0, kw.valid_ch: kw.ch17},
+        "Word": {kw.exam_tier: 0, kw.valid_ch: ""},
+        "Access": {kw.exam_tier: 0, kw.valid_ch: kw.ch02},
     }
     # WHEN
     result = get_ch_sorted_keywords(data)
@@ -89,9 +292,9 @@ def test_get_ch_sorted_keywords_ReturnsObj_Scenario1_empty_chapter_goes_first_wi
 def test_get_ch_sorted_keywords_ReturnsObj_Scenario2_empty_vs_other_tiers():
     # ESTABLISH
     data = {
-        "A": {kw.exam_tier: 1, kw.init_chapter: ""},
-        "B": {kw.exam_tier: 0, kw.init_chapter: kw.ch01},
-        "C": {kw.exam_tier: 0, kw.init_chapter: ""},
+        "A": {kw.exam_tier: 1, kw.valid_ch: ""},
+        "B": {kw.exam_tier: 0, kw.valid_ch: kw.ch01},
+        "C": {kw.exam_tier: 0, kw.valid_ch: ""},
     }
     # WHEN
     result = get_ch_sorted_keywords(data)
@@ -103,9 +306,9 @@ def test_get_ch_sorted_keywords_ReturnsObj_Scenario2_empty_vs_other_tiers():
 def test_get_ch_sorted_keywords_ReturnsObj_Scenario3_malformed_chapter_treated_like_empty():
     # ESTABLISH
     data = {
-        "A": {kw.exam_tier: 0, kw.init_chapter: "foo"},
-        "B": {kw.exam_tier: 0, kw.init_chapter: kw.ch02},
-        "C": {kw.exam_tier: 0, kw.init_chapter: ""},
+        "A": {kw.exam_tier: 0, kw.valid_ch: "foo"},
+        "B": {kw.exam_tier: 0, kw.valid_ch: kw.ch02},
+        "C": {kw.exam_tier: 0, kw.valid_ch: ""},
     }
     # WHEN
     result = get_ch_sorted_keywords(data)
@@ -117,9 +320,9 @@ def test_get_ch_sorted_keywords_ReturnsObj_Scenario3_malformed_chapter_treated_l
 def test_get_ch_sorted_keywords_ReturnsObj_Scenario4_alphabetical_tiebreaker():
     # ESTABLISH
     data = {
-        "beta": {kw.exam_tier: 0, kw.init_chapter: kw.ch01},
-        "Alpha": {kw.exam_tier: 0, kw.init_chapter: kw.ch01},
-        "gamma": {kw.exam_tier: 0, kw.init_chapter: kw.ch01},
+        "beta": {kw.exam_tier: 0, kw.valid_ch: kw.ch01},
+        "Alpha": {kw.exam_tier: 0, kw.valid_ch: kw.ch01},
+        "gamma": {kw.exam_tier: 0, kw.valid_ch: kw.ch01},
     }
     # WHEN
     result = get_ch_sorted_keywords(data)
@@ -132,7 +335,7 @@ def test_get_ch_sorted_keywords_ReturnsObj_Scenario5_missing_fields():
     data = {
         "A": {},  # missing both fields
         "B": {kw.exam_tier: 0},
-        "C": {kw.init_chapter: kw.ch01},
+        "C": {kw.valid_ch: kw.ch01},
     }
     # WHEN
     result = get_ch_sorted_keywords(data)
@@ -157,83 +360,83 @@ def test_get_keywords_by_importance_ReturnsObj_Scenario0():
     for kw_index, kw_with_i in kws_by_importance.items():
         kw_src_config = keywords_src_config.get(kw_with_i)
         tier_str = kw_src_config.get(kw.exam_tier)
-        init_chapter_str = kw_src_config.get(kw.init_chapter)
+        valid_ch_str = kw_src_config.get(kw.valid_ch)
         # if kw_index < 30:
-        #     print(f"{kw_index} {tier_str} {init_chapter_str} {kw_with_i=}")
+        #     print(f"{kw_index} {tier_str} {valid_ch_str} {kw_with_i=}")
 
 
-def test_get_keg_exam_ReturnsObj_ObjExists():
-    # ESTABLISH / WHEN
-    keg_exam = get_keg_exam()
+# def test_get_keg_exam_ReturnsObj_ObjExists():
+#     # ESTABLISH / WHEN
+#     keg_exam = get_keg_exam()
 
-    # THEN
-    assert isinstance(keg_exam, dict), "keg_exam must be a dict"
-    assert keg_exam
-    assert len(keg_exam) > 1
-
-
-def test_get_keg_exam_ReturnsObj_KeysAreSequentialInts():
-    # ESTABLISH / WHEN
-    keg_exam = get_keg_exam()
-
-    # THEN
-    assert isinstance(keg_exam, dict), "keg_exam must be a dict"
-    keys = list(keg_exam.keys())
-    assert keys, "keg_exam should not be empty"
-
-    int_keys = []
-    for key in keys:
-        assertion_failure_str = f"Expected string keys for keg_exam, but found key of type {type(key).__name__}: {key}"
-        assert isinstance(key, str), assertion_failure_str
-        assert key.isdigit(), f"Expected numeric string keys, but found: {key}"
-        int_keys.append(int(key))
-
-    sorted_keys = sorted(int_keys)
-    start = sorted_keys[0]
-    for expected, actual in zip(range(start, start + len(sorted_keys)), sorted_keys):
-        assert expected == actual, (
-            f"keg_exam first-level keys are not sequential: expected {expected} but found {actual}. "
-            f"Break in sequence after {expected - 1}."
-        )
+#     # THEN
+#     assert isinstance(keg_exam, dict), "keg_exam must be a dict"
+#     assert keg_exam
+#     assert len(keg_exam) > 1
 
 
-def test_get_keg_exam_ReturnsObj_DictionariesHavekeys():
-    # sourcery skip: no-conditionals-in-tests
-    # ESTABLISH / WHEN
-    keg_exam = get_keg_exam()
+# def test_get_keg_exam_ReturnsObj_KeysAreSequentialInts():
+#     # ESTABLISH / WHEN
+#     keg_exam = get_keg_exam()
 
-    # THEN
-    assert isinstance(keg_exam, dict), "keg_exam must be a dict"
-    required_fields = {"question_type", "question_str"}
+#     # THEN
+#     assert isinstance(keg_exam, dict), "keg_exam must be a dict"
+#     keys = list(keg_exam.keys())
+#     assert keys, "keg_exam should not be empty"
 
-    for exam_level, exam_dict in keg_exam.items():
-        assert_dict_fails_str = f"Expected keg_exam[{exam_level!r}] to be a dict, but got {type(exam_dict).__name__}"
-        assert isinstance(exam_dict, dict), assert_dict_fails_str
-        missing_fields = required_fields - exam_dict.keys()
-        assertion_missing_fields_fails = f"keg_exam[{exam_level!r}] is missing required field(s): {sorted(missing_fields)}"
-        assert not missing_fields, assertion_missing_fields_fails
+#     int_keys = []
+#     for key in keys:
+#         assertion_failure_str = f"Expected string keys for keg_exam, but found key of type {type(key).__name__}: {key}"
+#         assert isinstance(key, str), assertion_failure_str
+#         assert key.isdigit(), f"Expected numeric string keys, but found: {key}"
+#         int_keys.append(int(key))
 
-        if exam_dict.get("question_type") == "Keyword Definition":
-            assert exam_dict.get("keyword")
+#     sorted_keys = sorted(int_keys)
+#     start = sorted_keys[0]
+#     for expected, actual in zip(range(start, start + len(sorted_keys)), sorted_keys):
+#         assert expected == actual, (
+#             f"keg_exam first-level keys are not sequential: expected {expected} but found {actual}. "
+#             f"Break in sequence after {expected - 1}."
+#         )
 
 
-def test_get_keg_exam_HasAll_keywords_DefinitionQuestions():
-    # ESTABLISH / WHEN
-    keg_exam = get_keg_exam()
+# def test_get_keg_exam_ReturnsObj_DictionariesHavekeys():
+#     # sourcery skip: no-conditionals-in-tests
+#     # ESTABLISH / WHEN
+#     keg_exam = get_keg_exam()
 
-    # THEN
-    keywords_with_index_key = {
-        key: value["keyword"]
-        for key, value in keg_exam.items()
-        if isinstance(value, dict)
-        and value.get("question_type") == "Keyword Definition"
-    }
-    definition_fail_str = "No Keyword Definition questions found in keg_exam"
-    assert keywords_with_index_key, definition_fail_str
+#     # THEN
+#     assert isinstance(keg_exam, dict), "keg_exam must be a dict"
+#     required_fields = {"question_type", "question_str"}
 
-    keg_definitions = get_keg_definitions()
-    for keyword in keywords_with_index_key.values():
-        assert keg_definitions.get(keyword) != None, keyword
+#     for exam_level, exam_dict in keg_exam.items():
+#         assert_dict_fails_str = f"Expected keg_exam[{exam_level!r}] to be a dict, but got {type(exam_dict).__name__}"
+#         assert isinstance(exam_dict, dict), assert_dict_fails_str
+#         missing_fields = required_fields - exam_dict.keys()
+#         assertion_missing_fields_fails = f"keg_exam[{exam_level!r}] is missing required field(s): {sorted(missing_fields)}"
+#         assert not missing_fields, assertion_missing_fields_fails
+
+#         if exam_dict.get("question_type") == "Keyword Definition":
+#             assert exam_dict.get("keyword")
+
+
+# def test_get_keg_exam_HasAll_keywords_DefinitionQuestions():
+#     # ESTABLISH / WHEN
+#     keg_exam = get_keg_exam()
+
+#     # THEN
+#     keywords_with_index_key = {
+#         key: value["keyword"]
+#         for key, value in keg_exam.items()
+#         if isinstance(value, dict)
+#         and value.get("question_type") == "Keyword Definition"
+#     }
+#     definition_fail_str = "No Keyword Definition questions found in keg_exam"
+#     assert keywords_with_index_key, definition_fail_str
+
+#     keg_definitions = get_keg_definitions()
+#     for keyword in keywords_with_index_key.values():
+#         assert keg_definitions.get(keyword) != None, keyword
 
 
 # def first_out_of_order(

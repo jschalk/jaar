@@ -154,7 +154,8 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
     # all_file_count = 0
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
-        allowed_chapter_keywords = cumlative_keywords_main_dict.get(chapter_prefix)
+        chapter_int = int(chapter_desc[2:4])
+        allowed_chapter_keywords = cumlative_keywords_main_dict.get(chapter_int)
         not_allowed_keywords = all_keywords_set.difference(allowed_chapter_keywords)
         not_allowed_keywords = not_allowed_keywords.difference(excluded_strs)
         # print(f"{chapter_prefix} {len(not_allowed_keywords)=}")
@@ -221,8 +222,8 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
             f"The Keyword '{keyword}' is never used in the chapters"
         )
         if not chapters_dict.keys():
-            init_ch = keywords_dict[keyword][kw.init_chapter]
-            assert init_ch == "", never_used_assertion_fail_str
+            valid_ch = keywords_dict[keyword][kw.valid_ch]
+            assert valid_ch == "", never_used_assertion_fail_str
         else:
             min_chapter_prefix = min(chapters_dict.keys())
             min_chapter_count = chapters_dict.get(min_chapter_prefix)

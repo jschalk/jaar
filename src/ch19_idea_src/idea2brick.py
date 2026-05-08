@@ -3,6 +3,7 @@ from ch00_py.file_toolbox import delete_dir, set_dir
 from ch17_brick.brick_config import get_brick_types
 from ch17_brick.brick_db_tool import save_sheet
 from ch19_idea_src._ref.ch19_semantic_types import SheetName
+from ch19_idea_src.idea_config import get_idea_config_dict, get_idea_types
 from dataclasses import dataclass
 from openpyxl import load_workbook
 from os import listdir as os_listdir
@@ -13,6 +14,7 @@ from pandas import (
     to_numeric as pandas_to_numeric,
 )
 from pathlib import Path
+from re import search as re_search
 from typing import List, Tuple
 
 
@@ -174,35 +176,48 @@ def get_sheets_with_brick_types(directory: str) -> List[Tuple[str, str]]:
     ]
 
 
-def get_validated_i_src_brick_type_sheets(
-    i_src_dir: str, b_src_dir: str
-) -> List[Tuple[str, str]]:
+def get_sheets_with_idea_types(directory: str) -> List[Tuple[str, str]]:
     """
-    Returns all brick_type sheets found in i_src_dir.
-    Raises a ValueError if any of those brick_type sheets also exist in b_src_dir.
+    Returns all (filename, sheet_name) tuples where the sheet_name contains
+    any of the provided brick_types.
 
     Args:
-        i_src_dir: Path to the IDEA source directory.
-        b_src_dir: Path to the BRICK source directory.
+        directory:  Path to the directory to search for Excel files.
+        brick_types: Set of strings to match against sheet names.
 
     Returns:
-        Sorted list of (filename, sheet_name) tuples from i_src_dir
-        whose sheet_name contains a brick_type string.
-
-    Raises:
-        ValueError: If any brick_type sheet found in i_src_dir also exists
-                    in b_src_dir (matched on sheet_name alone).
+        Sorted list of (filename, sheet_name) tuples where sheet_name
+        contains at least one brick_type.
     """
-    idea_bk_sheets = get_sheets_with_brick_types(i_src_dir)
-    brick_bk_sheets = get_sheets_with_brick_types(b_src_dir)
-    idea_bk_sheets_set = set(idea_bk_sheets)
-    brick_bk_sheets_set = set(brick_bk_sheets)
+    idea_types = get_idea_types()
+    all_tuples = get_excel_sheet_tuples(directory)
+    return [
+        (filename, sheet_name)
+        for filename, sheet_name in all_tuples
+        if any(brick_type in sheet_name.lower() for brick_type in idea_types)
+    ]
 
-    if overlapping := brick_bk_sheets_set.intersection(idea_bk_sheets_set):
-        exception_str = "brick_type sheets found in both i_src_dir and b_src_dir: "
-        raise ValueError(exception_str, f"{sorted(overlapping)}")
 
-    return idea_bk_sheets
+# def get_validated_i_src_idea_type_sheets(
+#     i_src_dir: str, b_src_dir: str
+# ) -> List[Tuple[str, str]]:
+#     """
+#     Returns all brick_type sheets found in i_src_dir.
+#     Raises a ValueError if any of those brick_type sheets also exist in b_src_dir.
+
+#     Args:
+#         i_src_dir: Path to the IDEA source directory.
+#         b_src_dir: Path to the BRICK source directory.
+
+#     Returns:
+#         Sorted list of (filename, sheet_name) tuples from i_src_dir
+#         whose sheet_name contains a brick_type string.
+
+#     Raises:
+#         ValueError: If any brick_type sheet found in i_src_dir also exists
+#                     in b_src_dir (matched on sheet_name alone).
+#     """
+#     return set(get_sheets_with_idea_types(i_src_dir))
 
 
 def ideas_sheets_to_brick_sheets(
@@ -231,22 +246,33 @@ def ideas_sheets_to_brick_sheets(
         idea_spark_faces, general_max_spark_num
     )
 
-    idea_bk_sheets = get_validated_i_src_brick_type_sheets(i_src_dir, b_src_dir)
+    idea_config = get_idea_config_dict()
+    idea_ii_sheets = set(get_sheets_with_idea_types(i_src_dir))
+    etl_sheets = []
+    for ii_sheet_tuple in idea_ii_sheets:
+        src_file_path = ii_sheet_tuple[0]
+        idea_sheet_name = ii_sheet_tuple[1]
+        src_idea_type = re_search(r"ii\d+", idea_sheet_name).group(0)
+        config_dict = idea_config.get(src_idea_type)
+        dst_brick_type = config_dict.get("brick_type")
+        brick_sheet_name = idea_sheet_name.replace(src_idea_type, dst_brick_type)
+        etl_sheet_tuple = (src_file_path, idea_sheet_name, brick_sheet_name)
+        etl_sheets.append(etl_sheet_tuple)
     # Group sheet names by their source file
     file_to_sheets: dict[str, List[str]] = {}
-    for filename, sheet_name in idea_bk_sheets:
-        file_to_sheets.setdefault(filename, []).append(sheet_name)
+    for filename, src_sheet_name, dst_sheet_name in etl_sheets:
+        file_to_sheets.setdefault(filename, []).append((src_sheet_name, dst_sheet_name))
 
     copied: List[Tuple[str, str]] = []
 
     for filename, sheet_names in file_to_sheets.items():
         src_path = os_path_join(i_src_dir, filename)
         dst_path = os_path_join(b_src_dir, filename)
-        for sheet_name in sheet_names:
-            bk_df = pandas_read_excel(src_path, sheet_name)
-            add_spark_num_column(bk_df, spark_face_spark_nums)
-            save_sheet(dst_path, sheet_name, bk_df, False)
-            copied.append((dst_path, sheet_name))
+        for src_sheet_name, dst_sheet_name in sheet_names:
+            idea_df = pandas_read_excel(src_path, src_sheet_name)
+            add_spark_num_column(idea_df, spark_face_spark_nums)
+            save_sheet(dst_path, dst_sheet_name, idea_df, False)
+            copied.append((dst_path, dst_sheet_name))
 
     delete_dir(i_src_dir)
     set_dir(i_src_dir)

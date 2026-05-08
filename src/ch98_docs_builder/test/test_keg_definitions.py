@@ -1,6 +1,8 @@
 from ch00_py.keyword_class_builder import (
+    get_chapter_descs,
     get_example_strs_config,
     get_keywords_src_config,
+    parse_valid_ch_str,
 )
 from ch07_person_logic.person_config import (
     get_all_person_calc_args,
@@ -16,7 +18,7 @@ from ch16_translate.translate_config import (
 )
 from ch17_brick.brick_config import get_brick_config_dict
 from ch18_etl_config.etl_config import get_etl_stage_types_config_dict
-from ch22_heard.heard import etl_heard_raw_tables_to_moment_ote1_agg
+from ch22_heard.heard import etl_heard_raw_tables_to_lego_moment_ote1_agg
 from ch98_docs_builder._ref.ch98_semantic_types import (
     BreakTerm,
     ContactName,
@@ -61,6 +63,7 @@ from ch98_docs_builder.keg_definitions_builder import (
 from inspect import getdoc as inspect_getdoc
 from re import fullmatch as re_fullmatch
 from ref.keywords import Ch98Keywords as kw, ExampleStrs as exx
+from ref.sorter import get_keg_elements_sort_order
 
 
 def python_keywords() -> set:
@@ -115,7 +118,7 @@ def test_get_keg_definitions_ReturnsObj_Check_moment_ote1_agg():
     keg_definitions = get_keg_definitions()
 
     # THEN
-    moment_ote1_agg_desc = inspect_getdoc(etl_heard_raw_tables_to_moment_ote1_agg)
+    moment_ote1_agg_desc = inspect_getdoc(etl_heard_raw_tables_to_lego_moment_ote1_agg)
     assert moment_ote1_agg_desc in keg_definitions.get(kw.moment_ote1_agg)
 
 
@@ -124,10 +127,12 @@ def test_get_keg_definitions_ReturnsObj_CheckNoChapter_keywords():
     # ESTABLISH / WHEN
     keg_definitions = get_keg_definitions()
     # THEN
+    chapter_descs = get_chapter_descs().keys()
+    ch_ints = {int(chapter_desc[2:4]) for chapter_desc in chapter_descs}
     for keyword, kw_config in get_keywords_src_config().items():
-        x_init_chapter = kw_config.get(kw.init_chapter)
-        assert kw.init_chapter in set(kw_config.keys()), keyword
-        if not bool(re_fullmatch(r"ch\d{2}", x_init_chapter)):
+        assert kw.valid_ch in set(kw_config.keys()), keyword
+        valid_chs = parse_valid_ch_str(ch_ints, kw_config.get(kw.valid_ch))
+        if not valid_chs:
             config_description = keg_definitions.get(keyword)
             assert "Not used in codebase." in config_description, keyword
         assert "exam_tier" in set(kw_config.keys()), keyword
@@ -180,22 +185,26 @@ def test_get_keg_definitions_ReturnsObj_Check_semantic_types():
         assert class_doc_str in semantic_description
 
 
-def test_get_keg_definitions_ReturnsObj_Checb_src_config_keywords():
+def test_get_keg_definitions_ReturnsObj_Check_src_config_keywords():
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH / WHEN
     keg_definitions = get_keg_definitions()
 
     # THEN
+    chapter_descs = get_chapter_descs().keys()
+    ch_ints = {int(chapter_desc[2:4]) for chapter_desc in chapter_descs}
     all_semantic_types = get_all_semantic_types_with_doc_strs()
     doc_str_semantic_types = set(all_semantic_types.keys())
     for keyword, kw_config in get_keywords_src_config().items():
         if semantic_type := kw_config.get("semantic_type"):
             # print(f"{keyword} {kw_config=}")
-            x_init_chapter = kw_config.get("init_chapter")
-            kw_desc = f"{semantic_type} first used in {x_init_chapter}"
-            config_description = keg_definitions.get(keyword)
-            assert kw_desc in config_description, keyword
-            assert keyword in doc_str_semantic_types
+            valid_ch_str = kw_config.get(kw.valid_ch)
+            if valid_chs := parse_valid_ch_str(ch_ints, valid_ch_str):
+                init_ch = sorted(valid_chs)[0]
+                kw_desc = f"{semantic_type} first used in ch{init_ch:02d}"
+                config_description = keg_definitions.get(keyword)
+                assert kw_desc in config_description, keyword
+                assert keyword in doc_str_semantic_types
 
 
 def test_get_keg_definitions_ReturnsObj_Check_epoch_config():
@@ -413,8 +422,10 @@ def test_get_keg_definitions_ReturnsObj_HasAllkeywords():
     description_keywords = set(keg_definitions.keys())
     expected_keg_keys = set(keywords_config.keys())
     expected_keg_keys.update(python_keywords())
-    print(f"{expected_keg_keys.difference(description_keywords)=}")
-    print(f"{description_keywords.difference(expected_keg_keys)=}")
+    missing_keg_definitions = expected_keg_keys.difference(description_keywords)
+    for missing_keg_definition in sorted(missing_keg_definitions):
+        print(f""""{missing_keg_definition}": "Definition needed.",""")
+    # print(f"{description_keywords.difference(expected_keg_keys)=}")
     expected_keg_keys.update(set(get_example_strs_config().keys()))
     assert set(keg_definitions.keys()) == expected_keg_keys
     for keyword, description in keg_definitions.items():
@@ -481,3 +492,37 @@ def test_get_keg_definitions_ReturnsObj_get_brick_config_dict():
 
     expected_allowed_crud_desc = "Each brick config dimen has an allowed_crud that describes whether the data may be updated/deleted/inserted more than one."
     assert keg_definitions.get(kw.allowed_crud) == expected_allowed_crud_desc
+
+
+def test_get_keg_definitions_ReturnsObj_inx_otx_ContainTranslateReference():
+    # sourcery skip: no-conditionals-in-tests
+    # ESTABLISH / WHEN
+    keg_definitions = get_keg_definitions()
+
+    # THEN
+    # to_save_keg_definitions = get_keg_definitions()
+    # for keg_term, definition_str in keg_definitions.items():
+    #     expected_inx_str = (
+    #         f"The '{keg_term.replace("_inx", "")}' value after Translate."
+    #     )
+    #     if keg_term.endswith("_inx") and expected_inx_str not in definition_str:
+    #         # print(f""""{keg_term}": "{expected_inx_str}",""")
+    #         to_save_keg_definitions[keg_term] = expected_inx_str
+    # for keg_term, definition_str in keg_definitions.items():
+    #     expected_otx_str = (
+    #         f"The '{keg_term.replace("_otx", "")}' value after Translate."
+    #     )
+    #     if keg_term.endswith("_otx") and expected_otx_str not in definition_str:
+    #         # print(f""""{keg_term}": "{expected_otx_str}",""")
+    #         to_save_keg_definitions[keg_term] = expected_otx_str
+    # save_keg_descriptions_json("src", to_save_keg_definitions)
+
+    for keg_term, definition_str in keg_definitions.items():
+        if keg_term.endswith("_inx"):
+            base_keg_term = keg_term.replace("_inx", "")
+            expected_inx_str = f"The '{base_keg_term}' value after Translate."
+            assert expected_inx_str in definition_str, keg_term
+        if keg_term.endswith("_otx"):
+            base_keg_term = keg_term.replace("_otx", "")
+            expected_otx_str = f"The '{base_keg_term}' value after Translate."
+            assert expected_otx_str in definition_str, keg_term

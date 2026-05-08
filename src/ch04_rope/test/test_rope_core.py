@@ -609,38 +609,38 @@ def test_rope_is_valid_dir_path_ReturnsObj_Scenario0_simple_knot():
 @pytest_mark.skip_on_linux
 def test_rope_is_valid_dir_path_ReturnsObj_Scenario1_complicated_knot():
     # ESTABLISH
-    question_str = "?"
+    colon_str = ":"
     sport_str = "sport"
     run_str = "run,"
     lap_str = "lap"
-    sport_rope = create_rope(sport_str, knot=question_str)
+    sport_rope = create_rope(sport_str, knot=colon_str)
     print(f"{sport_rope=}")
-    run_rope = create_rope(sport_rope, run_str, knot=question_str)
-    lap_rope = create_rope(run_rope, lap_str, knot=question_str)
-    assert lap_rope == f"{sport_rope}{run_str}?{lap_str}?"
+    run_rope = create_rope(sport_rope, run_str, knot=colon_str)
+    lap_rope = create_rope(run_rope, lap_str, knot=colon_str)
+    assert lap_rope == f"{sport_rope}{run_str}:{lap_str}:"
 
     # WHEN / THEN
-    assert rope_is_valid_dir_path(sport_rope, knot=question_str)
-    assert rope_is_valid_dir_path(run_rope, knot=question_str)
-    assert rope_is_valid_dir_path(lap_rope, knot=question_str)
+    assert rope_is_valid_dir_path(sport_rope, knot=colon_str)
+    assert rope_is_valid_dir_path(run_rope, knot=colon_str)
+    assert rope_is_valid_dir_path(lap_rope, knot=colon_str)
     assert rope_is_valid_dir_path(lap_rope, knot=",") is False
 
 
 def test_rope_is_valid_dir_path_ReturnsObj_Scenario2_WhereSlashNotknotEdgeSituations():
     # ESTABLISH
-    question_str = "?"
+    colon_str = ":"
     sport_str = "sport"
     run_str = "run/bowl"
     lap_str = "lap"
-    sport_rope = create_rope(sport_str, knot=question_str)
-    run_rope = create_rope(sport_rope, run_str, knot=question_str)
-    lap_rope = create_rope(run_rope, lap_str, knot=question_str)
-    assert lap_rope == f"{sport_rope}{run_str}?{lap_str}?"
+    sport_rope = create_rope(sport_str, knot=colon_str)
+    run_rope = create_rope(sport_rope, run_str, knot=colon_str)
+    lap_rope = create_rope(run_rope, lap_str, knot=colon_str)
+    assert lap_rope == f"{sport_rope}{run_str}:{lap_str}:"
 
     # WHEN / THEN
-    assert rope_is_valid_dir_path(sport_rope, knot=question_str)
-    assert rope_is_valid_dir_path(run_rope, knot=question_str) is False
-    assert rope_is_valid_dir_path(lap_rope, knot=question_str) is False
+    assert rope_is_valid_dir_path(sport_rope, knot=colon_str)
+    assert rope_is_valid_dir_path(run_rope, knot=colon_str) is False
+    assert rope_is_valid_dir_path(lap_rope, knot=colon_str) is False
     assert rope_is_valid_dir_path(lap_rope, knot=",") is False
 
 

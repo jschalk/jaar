@@ -4,19 +4,23 @@ from ch00_py.chapter_desc_main import (
     get_chapter_desc_str_number,
     valid_chapter_numbers,
 )
-from ch00_py.file_toolbox import open_file, save_file
+from ch00_py.file_toolbox import open_file, save_file, save_json
 from ch00_py.keyword_class_builder import (
+    check_relative_order,
     create_all_enum_keyword_classes_str,
     create_examplestrs_class_str,
     create_keywords_enum_class_file_str,
+    create_src_keywords_main_path,
     get_chapter_descs,
     get_cumlative_keywords_main_dict,
     get_example_strs_config,
     get_keywords_by_chapter,
     get_keywords_src_config,
     get_possible_keyword_config_keys,
+    parse_valid_ch_str,
 )
 from ref.keywords import Ch00Keywords as kw
+from ref.sorter import get_keg_elements_sort_order
 
 
 def test_get_chapter_desc_prefix_ReturnsObj():
@@ -29,6 +33,50 @@ def test_get_chapter_desc_prefix_ReturnsObj():
     assert get_chapter_desc_prefix(f"{ch_str}99") == f"{ch_str}99"
     assert get_chapter_desc_prefix(f"{ch_str}XX") == f"{ch_str}XX"
     assert get_chapter_desc_prefix(f"{ch_str}a01") != f"{ch_str}02"
+
+
+def test_parse_valid_ch_str_ReturnsEmptySet_EmptyString():
+    # ESTABLISH
+    chapters = {0, 1, 2, 5, 10, 98}
+    # WHEN
+    result = parse_valid_ch_str(chapters, "")
+    # THEN
+    assert result == set()
+
+
+def test_parse_valid_ch_str_ReturnsAllChapters_RangeFromZero():
+    # ESTABLISH
+    chapters = {0, 1, 2, 5, 10, 98}
+    # WHEN
+    result = parse_valid_ch_str(chapters, "0:")
+    # THEN
+    assert result == {0, 1, 2, 5, 10, 98}
+
+
+def test_parse_valid_ch_str_ReturnsExplicitChapterSet_CommaSeparatedIntegers():
+    # ESTABLISH
+    chapters = {0, 1, 2, 5, 10, 98}
+    # WHEN
+    result = parse_valid_ch_str(chapters, "0, 1, 98")
+    # THEN
+    assert result == {0, 1, 98}
+
+
+def test_parse_valid_ch_str_ReturnsChaptersGreaterThanOrEqualTo_RangeSelection():
+    # ESTABLISH
+    chapters = {0, 1, 2, 5, 10, 98}
+    # WHEN
+    result = parse_valid_ch_str(chapters, "5:")
+    # THEN
+    assert result == {5, 10, 98}
+
+
+def test_get_keywords_by_chapter_ReturnsObj():
+    # ESTABLISH / WHEN
+    keywords_by_chapter = get_keywords_by_chapter(get_keywords_src_config())
+    # THEN
+    print(f"{len(keywords_by_chapter)=}")
+    assert len(keywords_by_chapter.get(0)) > 0
 
 
 def test_get_chapter_desc_str_number_ReturnsObj():
@@ -61,7 +109,12 @@ def test_get_possible_keyword_config_keys_ReturnsObj():
     # ESTABLISH / WHEN
     req_config_keys = get_possible_keyword_config_keys()
     # THEN
-    assert req_config_keys == {kw.init_chapter, kw.semantic_type, kw.exam_tier}
+    assert req_config_keys == {
+        kw.valid_ch,
+        kw.semantic_type,
+        kw.exam_tier,
+        "sort_ordinal",
+    }
 
 
 def test_get_keywords_src_config_ReturnsObj():
@@ -183,7 +236,8 @@ def test_create_all_enum_keyword_classes_str_ReturnsObj():
 """
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         ch_prefix = get_chapter_desc_prefix(chapter_desc)
-        keywords_main = cumlative_keywords.get(ch_prefix)
+        ch_int = int(chapter_desc[2:4])
+        keywords_main = cumlative_keywords.get(ch_int)
         enum_class_str = create_keywords_enum_class_file_str(ch_prefix, keywords_main)
         expected_classes_str += enum_class_str
     assert expected_classes_str == classes_str
@@ -216,3 +270,103 @@ def test_SpecialTestThatBuildsKeywordEnumClasses():
     prev_and_curr_classes_file_are_same = enum_classes_str == current_classes_file_str
     assertion_failure_str = "Special case: keywords.py was changed. Run test again."
     assert prev_and_curr_classes_file_are_same, assertion_failure_str
+
+
+def test_check_relative_order_ReturnsTuple_ScenarioValidOrder_PreservesRelativeOrdering():
+    # ESTABLISH
+    full = ['a', 'b', 'c', 'd', 'e']
+    subset = ['a', 'c', 'e']
+
+    # WHEN
+    ok, msg = check_relative_order(subset, full)
+
+    # THEN
+    assert ok is True
+    assert msg == ""
+
+
+def test_check_relative_order_ReturnsTuple_ScenarioInvalidOrder_ReturnsExpectedOrderingMessage():
+    # ESTABLISH
+    full = ['a', 'b', 'c', 'd', 'e']
+    subset = ['b', 'e', 'c']
+
+    # WHEN
+    ok, msg = check_relative_order(subset, full)
+
+    # THEN
+    assert ok is False
+    assert "Incorrect order" in msg
+    assert "['b', 'c', 'e']" in msg
+
+
+def test_check_relative_order_ReturnsTuple_ScenarioSingleElementSubset_AlwaysValid():
+    # ESTABLISH
+    full = ['a', 'b', 'c']
+    subset = ['b']
+
+    # WHEN
+    ok, msg = check_relative_order(subset, full)
+
+    # THEN
+    assert ok is True
+    assert msg == ""
+
+
+def test_check_relative_order_ReturnsTuple_ScenarioEmptySubset_AlwaysValid():
+    # ESTABLISH
+    full = ['a', 'b', 'c']
+    subset = []
+
+    # WHEN
+    ok, msg = check_relative_order(subset, full)
+
+    # THEN
+    assert ok is True
+    assert msg == ""
+
+
+def test_check_relative_order_ReturnsTuple_ScenarioElementMissing_ReturnsErrorMessage():
+    # ESTABLISH
+    full = ['a', 'b', 'c']
+    subset = ['a', 'x']
+
+    # WHEN
+    ok, msg = check_relative_order(subset, full)
+
+    # THEN
+    assert ok is False
+    assert "not found in full list" in msg
+    assert "'x'" in msg
+
+
+def test_check_relative_order_ReturnsTuple_ScenarioSubsetEqualsFullList_OrderIsValid():
+    # ESTABLISH
+    full = ['a', 'b', 'c']
+    subset = ['a', 'b', 'c']
+
+    # WHEN
+    ok, msg = check_relative_order(subset, full)
+
+    # THEN
+    assert ok is True
+    assert msg == ""
+
+
+def test_get_keg_elements_sort_order_Scenario0_AllElementsAre_keywords():
+    # sourcery skip: no-conditionals-in-tests
+    # ESTABLISH / WHEN / THEN
+    keywords_set = set(get_keywords_src_config())
+    missing_elements = {
+        keyword
+        for keyword in get_keg_elements_sort_order()
+        if keyword not in keywords_set
+    }
+    x_count = 0
+    ch_num = "17"
+    for missing_element in sorted(missing_elements):
+        x_count += 1
+        print(
+            f""""{missing_element}": {{"{kw.exam_tier}": 0, "{kw.valid_ch}": "ch{ch_num}"}},"""
+        )
+    print(f"{x_count} elements")
+    assert set(get_keg_elements_sort_order()).issubset(keywords_set)
