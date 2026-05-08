@@ -83,10 +83,6 @@ def get_chxx_ref_blurb(ch_dict, keyword) -> str:
     return ch_ref_dict.get("chapter_blurb")
 
 
-def get_keg_exam() -> dict[str, dict]:
-    return open_json(create_src_keg_exam_path("src"))
-
-
 @dataclass
 class QuestionUnit:
     keg_term: str = None

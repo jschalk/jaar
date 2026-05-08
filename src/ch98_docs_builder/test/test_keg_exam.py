@@ -5,7 +5,6 @@ from ch98_docs_builder.keg_definitions_builder import (
     get_exam_fixed_questions,
     get_keg_definition_questionunits,
     get_keg_definitions,
-    get_keg_exam,
     get_keywords_by_importance,
     merge_fixed_and_floating_questions,
     rebuild_final_exam_questions,
@@ -366,78 +365,78 @@ def test_get_keywords_by_importance_ReturnsObj_Scenario0():
         #     print(f"{kw_index} {tier_str} {valid_ch_str} {kw_with_i=}")
 
 
-def test_get_keg_exam_ReturnsObj_ObjExists():
-    # ESTABLISH / WHEN
-    keg_exam = get_keg_exam()
+# def test_get_keg_exam_ReturnsObj_ObjExists():
+#     # ESTABLISH / WHEN
+#     keg_exam = get_keg_exam()
 
-    # THEN
-    assert isinstance(keg_exam, dict), "keg_exam must be a dict"
-    assert keg_exam
-    assert len(keg_exam) > 1
-
-
-def test_get_keg_exam_ReturnsObj_KeysAreSequentialInts():
-    # ESTABLISH / WHEN
-    keg_exam = get_keg_exam()
-
-    # THEN
-    assert isinstance(keg_exam, dict), "keg_exam must be a dict"
-    keys = list(keg_exam.keys())
-    assert keys, "keg_exam should not be empty"
-
-    int_keys = []
-    for key in keys:
-        assertion_failure_str = f"Expected string keys for keg_exam, but found key of type {type(key).__name__}: {key}"
-        assert isinstance(key, str), assertion_failure_str
-        assert key.isdigit(), f"Expected numeric string keys, but found: {key}"
-        int_keys.append(int(key))
-
-    sorted_keys = sorted(int_keys)
-    start = sorted_keys[0]
-    for expected, actual in zip(range(start, start + len(sorted_keys)), sorted_keys):
-        assert expected == actual, (
-            f"keg_exam first-level keys are not sequential: expected {expected} but found {actual}. "
-            f"Break in sequence after {expected - 1}."
-        )
+#     # THEN
+#     assert isinstance(keg_exam, dict), "keg_exam must be a dict"
+#     assert keg_exam
+#     assert len(keg_exam) > 1
 
 
-def test_get_keg_exam_ReturnsObj_DictionariesHavekeys():
-    # sourcery skip: no-conditionals-in-tests
-    # ESTABLISH / WHEN
-    keg_exam = get_keg_exam()
+# def test_get_keg_exam_ReturnsObj_KeysAreSequentialInts():
+#     # ESTABLISH / WHEN
+#     keg_exam = get_keg_exam()
 
-    # THEN
-    assert isinstance(keg_exam, dict), "keg_exam must be a dict"
-    required_fields = {"question_type", "question_str"}
+#     # THEN
+#     assert isinstance(keg_exam, dict), "keg_exam must be a dict"
+#     keys = list(keg_exam.keys())
+#     assert keys, "keg_exam should not be empty"
 
-    for exam_level, exam_dict in keg_exam.items():
-        assert_dict_fails_str = f"Expected keg_exam[{exam_level!r}] to be a dict, but got {type(exam_dict).__name__}"
-        assert isinstance(exam_dict, dict), assert_dict_fails_str
-        missing_fields = required_fields - exam_dict.keys()
-        assertion_missing_fields_fails = f"keg_exam[{exam_level!r}] is missing required field(s): {sorted(missing_fields)}"
-        assert not missing_fields, assertion_missing_fields_fails
+#     int_keys = []
+#     for key in keys:
+#         assertion_failure_str = f"Expected string keys for keg_exam, but found key of type {type(key).__name__}: {key}"
+#         assert isinstance(key, str), assertion_failure_str
+#         assert key.isdigit(), f"Expected numeric string keys, but found: {key}"
+#         int_keys.append(int(key))
 
-        if exam_dict.get("question_type") == "Keyword Definition":
-            assert exam_dict.get("keyword")
+#     sorted_keys = sorted(int_keys)
+#     start = sorted_keys[0]
+#     for expected, actual in zip(range(start, start + len(sorted_keys)), sorted_keys):
+#         assert expected == actual, (
+#             f"keg_exam first-level keys are not sequential: expected {expected} but found {actual}. "
+#             f"Break in sequence after {expected - 1}."
+#         )
 
 
-def test_get_keg_exam_HasAll_keywords_DefinitionQuestions():
-    # ESTABLISH / WHEN
-    keg_exam = get_keg_exam()
+# def test_get_keg_exam_ReturnsObj_DictionariesHavekeys():
+#     # sourcery skip: no-conditionals-in-tests
+#     # ESTABLISH / WHEN
+#     keg_exam = get_keg_exam()
 
-    # THEN
-    keywords_with_index_key = {
-        key: value["keyword"]
-        for key, value in keg_exam.items()
-        if isinstance(value, dict)
-        and value.get("question_type") == "Keyword Definition"
-    }
-    definition_fail_str = "No Keyword Definition questions found in keg_exam"
-    assert keywords_with_index_key, definition_fail_str
+#     # THEN
+#     assert isinstance(keg_exam, dict), "keg_exam must be a dict"
+#     required_fields = {"question_type", "question_str"}
 
-    keg_definitions = get_keg_definitions()
-    for keyword in keywords_with_index_key.values():
-        assert keg_definitions.get(keyword) != None, keyword
+#     for exam_level, exam_dict in keg_exam.items():
+#         assert_dict_fails_str = f"Expected keg_exam[{exam_level!r}] to be a dict, but got {type(exam_dict).__name__}"
+#         assert isinstance(exam_dict, dict), assert_dict_fails_str
+#         missing_fields = required_fields - exam_dict.keys()
+#         assertion_missing_fields_fails = f"keg_exam[{exam_level!r}] is missing required field(s): {sorted(missing_fields)}"
+#         assert not missing_fields, assertion_missing_fields_fails
+
+#         if exam_dict.get("question_type") == "Keyword Definition":
+#             assert exam_dict.get("keyword")
+
+
+# def test_get_keg_exam_HasAll_keywords_DefinitionQuestions():
+#     # ESTABLISH / WHEN
+#     keg_exam = get_keg_exam()
+
+#     # THEN
+#     keywords_with_index_key = {
+#         key: value["keyword"]
+#         for key, value in keg_exam.items()
+#         if isinstance(value, dict)
+#         and value.get("question_type") == "Keyword Definition"
+#     }
+#     definition_fail_str = "No Keyword Definition questions found in keg_exam"
+#     assert keywords_with_index_key, definition_fail_str
+
+#     keg_definitions = get_keg_definitions()
+#     for keyword in keywords_with_index_key.values():
+#         assert keg_definitions.get(keyword) != None, keyword
 
 
 # def first_out_of_order(
