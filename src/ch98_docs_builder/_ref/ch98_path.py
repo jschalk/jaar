@@ -9,10 +9,10 @@ def create_src_keg_definitions_path(src_dir: str) -> str:
 
 
 def create_src_keg_exam_path(src_dir: str) -> str:
-    """Returns path: src\\ref\\keg_exam.json"""
+    """Returns path: src\\ref\\keg_exam.csv"""
 
     ref_dir = create_path(src_dir, "ref")
-    return create_path(ref_dir, "keg_exam.json")
+    return create_path(ref_dir, "keg_exam.csv")
 
 
 def create_chapter_ref_path(chapter_dir: str, chapter_prefix: str) -> str:

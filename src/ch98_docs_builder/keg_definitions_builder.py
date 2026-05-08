@@ -131,7 +131,7 @@ def set_did_you_read_orders(keg_questions: dict[str, QuestionUnit]) -> None:
     sorted_questunits = sorted(
         keg_questions.values(),
         key=lambda q: (
-            q.exam_tier,
+            -q.exam_tier,
             q.init_ch is not None,  # None last or first depending on your preference
             -(q.init_ch or 0),  # descending for ints
             q.keg_term,
@@ -170,19 +170,22 @@ def merge_fixed_and_floating_questions(
         key=lambda questionunit: questionunit.did_you_read_order,
     )
 
-    result: list[QuestionUnit] = []
+    result_questionunits: list[QuestionUnit] = []
 
     floating_index = 0
     total_length = len(fixed_questions) + len(sorted_floating_questions)
 
     for index in range(total_length):
         if index in fixed_questions:
-            result.append(fixed_questions[index])
+            result_questionunits.append(fixed_questions[index])
         else:
-            result.append(sorted_floating_questions[floating_index])
+            result_questionunits.append(sorted_floating_questions[floating_index])
             floating_index += 1
 
-    return result
+    for question in result_questionunits:
+        print(f"{question.keg_term} {question.did_you_read_order=}")
+
+    return result_questionunits
 
 
 def rebuild_final_exam_questions(
