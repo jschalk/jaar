@@ -1,323 +1,267 @@
 from ch00_py.keyword_class_builder import get_keywords_src_config
 from ch98_docs_builder.keg_definitions_builder import (
-    create_did_you_read_questions,
-    create_final_exam_question_list,
-    export_final_exam_questions_to_csv,
+    QuestionUnit,
     get_ch_sorted_keywords,
-    get_exam_middle1,
+    get_exam_fixed_questions,
+    get_keg_definition_questionunits,
     get_keg_definitions,
     get_keg_exam,
     get_keywords_by_importance,
+    merge_fixed_and_floating_questions,
+    rebuild_final_exam_questions,
+    set_did_you_read_orders,
 )
 from csv import reader as csv_reader
 from ref.keywords import Ch98Keywords as kw
 
 
-# TODO change this it returns a obj like KegQTerm, there will be more to change
-def test_get_exam_middle1_dict_ReturnsObj():
+def test_QuestionUnit_Exists():
     # ESTABLISH / WHEN
-    exam_middle1 = get_exam_middle1()
+    questionunit = QuestionUnit()
+    # THEN
+    assert not QuestionUnit.keg_term
+    assert not QuestionUnit.keg_definition
+    assert not QuestionUnit.init_ch
+    assert not QuestionUnit.exam_tier
+    assert not QuestionUnit.did_you_read_order
+    assert not QuestionUnit.complete_question
+    assert set(questionunit.__dict__.keys()) == {
+        "keg_term",
+        kw.exam_tier,
+        "keg_definition",
+        "init_ch",
+        "did_you_read_order",
+        "complete_question",
+    }
+
+
+def test_QuestionUnit_get_question_ReturnsObj_Scenario0():
+    # ESTABLISH
+    star_definition = f"{kw.star} is an attribute that represents A."
+    star_questionunit = QuestionUnit(kw.star, star_definition)
+    # WHEN
+    did_you_read_question_str = star_questionunit.get_question()
+    # THEN
+    assert did_you_read_question_str
+    expected_did_you_read_question_str = (
+        f"Did you read that the keg_definition of '{kw.star}' is '{star_definition}'."
+    )
+    assert did_you_read_question_str == expected_did_you_read_question_str
+
+
+def test_QuestionUnit_get_question_ReturnsObj_Scenario1_complete_question_Exists():
+    # ESTABLISH
+    expected_question_str = "Have you heard of Kegology?"
+    a_questionunit = QuestionUnit(complete_question=expected_question_str)
+    # WHEN
+    a_question_str = a_questionunit.get_question()
+    # THEN
+    assert a_question_str
+    assert a_question_str == expected_question_str
+
+
+def test_get_keg_definition_questionunits_ReturnsObj():
+    # ESTABLISH / WHEN
+    keg_questions1 = get_keg_definition_questionunits()
     # THEN
     keg_definitions = get_keg_definitions()
-    assert set(keg_definitions.keys()) == set(exam_middle1.keys())
-    expected_keys = {"keg_definition", "init_ch", "exam_tier"}
-    for keg_term, exam_dict in exam_middle1.items():
-        assert set(exam_dict.keys()) == expected_keys, keg_term
+    assert set(keg_definitions.keys()) == set(keg_questions1.keys())
+    expected_year_length_questionunit = QuestionUnit(
+        keg_term=kw.year_length,
+        keg_definition=keg_definitions.get(kw.year_length),
+        init_ch=13,
+        exam_tier=0,
+    )
+    assert keg_questions1.get(kw.year_length) == expected_year_length_questionunit
 
 
-def test_create_did_you_read_questions_ReturnsEmptyList_WhenNoTermsExist():
+def test_set_did_you_read_orders_SetAttrs_Scenario0_EmptyList_WhenNoTermsExist():
     # ESTABLISH
-    keg_terms = {}
+    keg_questions = {}
 
     # WHEN
-    result = create_did_you_read_questions(keg_terms)
+    set_did_you_read_orders(keg_questions)
 
     # THEN
-    assert result == []
+    assert not keg_questions
 
 
-def test_create_did_you_read_questions_ReturnsSingleQuestion_WhenSingleTermProvided():
+def test_set_did_you_read_orders_SetAttrs_Scenario1_SingleQuestion_WhenSingleTermProvided():
     # ESTABLISH
-    keg_terms = {
-        "star": {
-            "exam_tier": 0,
-            "keg_definition": "Used to measure weight of plan",
-            "init_ch": 4,
-        },
+    star_questionunit = QuestionUnit(
+        keg_term=kw.star,
+        exam_tier=0,
+        init_ch=4,
+        keg_definition="Used to measure weight of plan",
+    )
+    keg_questions = {kw.star: star_questionunit}
+    assert star_questionunit.did_you_read_order is None
+
+    # WHEN
+    set_did_you_read_orders(keg_questions)
+
+    # THEN
+    assert star_questionunit.did_you_read_order == 0
+
+
+def test_set_did_you_read_orders_SetAttrs_Scenario2_AssignsSequentialOrder():
+    # ESTABLISH
+    alpha_questionunit = QuestionUnit(
+        keg_term="alpha", exam_tier=0, init_ch=1, keg_definition="Alpha definition"
+    )
+    beta_questionunit = QuestionUnit(
+        keg_term="beta", exam_tier=1, init_ch=10, keg_definition="Beta definition"
+    )
+    gamma_questionunit = QuestionUnit(
+        keg_term="gamma", exam_tier=1, init_ch=5, keg_definition="Gamma definition"
+    )
+    keg_questions = {
+        "gamma": gamma_questionunit,
+        "alpha": alpha_questionunit,
+        "beta": beta_questionunit,
     }
 
     # WHEN
-    result = create_did_you_read_questions(keg_terms)
+    set_did_you_read_orders(keg_questions)
 
     # THEN
-    assert result == [
-        (
-            "Did you read about 'star'?",
-            "Used to measure weight of plan",
-        ),
-    ]
+    assert alpha_questionunit.did_you_read_order == 0
+    assert beta_questionunit.did_you_read_order == 1
+    assert gamma_questionunit.did_you_read_order == 2
 
 
-def test_create_did_you_read_questions_ReturnsQuestionsSortedByExamTier():
+def test_set_did_you_read_orders_SetAttrs_Scenario3_SortsAlphabetically_WhenOtherFieldsMatch():
     # ESTABLISH
-    keg_terms = {
-        "high": {
-            "exam_tier": 5,
-            "keg_definition": "High tier",
-            "init_ch": 1,
-        },
-        "low": {
-            "exam_tier": 0,
-            "keg_definition": "Low tier",
-            "init_ch": 1,
-        },
+    zebra_questionunit = QuestionUnit(
+        keg_term="zebra", exam_tier=1, init_ch=5, keg_definition="Zebra definition"
+    )
+    alpha_questionunit = QuestionUnit(
+        keg_term="alpha", exam_tier=1, init_ch=5, keg_definition="Alpha definition"
+    )
+    keg_questions = {"zebra": zebra_questionunit, "alpha": alpha_questionunit}
+
+    # WHEN
+    set_did_you_read_orders(keg_questions)
+
+    # THEN
+    assert alpha_questionunit.did_you_read_order == 0
+    assert zebra_questionunit.did_you_read_order == 1
+
+
+def test_set_did_you_read_orders_SetAttrs_Scenario4_SortsNoneInitChAheadOfNumericInitCh():
+    # ESTABLISH
+    none_init_ch_questionunit = QuestionUnit(
+        keg_term="alpha",
+        exam_tier=0,
+        init_ch=None,
+        keg_definition="Alpha definition",
+    )
+
+    numeric_init_ch_questionunit = QuestionUnit(
+        keg_term="beta",
+        exam_tier=0,
+        init_ch=99,
+        keg_definition="Beta definition",
+    )
+
+    keg_questions = {
+        "beta": numeric_init_ch_questionunit,
+        "alpha": none_init_ch_questionunit,
     }
 
     # WHEN
-    result = create_did_you_read_questions(keg_terms)
+    set_did_you_read_orders(keg_questions)
 
     # THEN
-    assert result == [
-        ("Did you read about 'low'?", "Low tier"),
-        ("Did you read about 'high'?", "High tier"),
-    ]
+    assert none_init_ch_questionunit.did_you_read_order == 0
+    assert numeric_init_ch_questionunit.did_you_read_order == 1
 
 
-def test_create_did_you_read_questions_ReturnsQuestionsSortedByInitChDescending_WhenExamTierMatches():
-    # ESTABLISH
-    keg_terms = {
-        "small_ch": {
-            "exam_tier": 1,
-            "keg_definition": "Small chapter",
-            "init_ch": 2,
-        },
-        "large_ch": {
-            "exam_tier": 1,
-            "keg_definition": "Large chapter",
-            "init_ch": 10,
-        },
-    }
-
-    # WHEN
-    result = create_did_you_read_questions(keg_terms)
+def test_get_exam_fixed_questions_ReturnsObj():
+    # ESTABLISH / WHEN
+    exam_fixed_questions = get_exam_fixed_questions()
 
     # THEN
-    assert result == [
-        ("Did you read about 'large_ch'?", "Large chapter"),
-        ("Did you read about 'small_ch'?", "Small chapter"),
-    ]
+    assert len(exam_fixed_questions) > 3
+    for int_key in exam_fixed_questions.keys():
+        assert int_key >= 0
 
 
-def test_create_did_you_read_questions_ReturnsAlphabeticalOrder_WhenExamTierAndInitChMatch():
+def test_merge_fixed_and_floating_questions_ReturnsObj_Scenario0_OnlyFloatingQuestions():
     # ESTABLISH
-    keg_terms = {
-        "zebra": {
-            "exam_tier": 2,
-            "keg_definition": "Zebra definition",
-            "init_ch": 5,
-        },
-        "alpha": {
-            "exam_tier": 2,
-            "keg_definition": "Alpha definition",
-            "init_ch": 5,
-        },
-    }
-
-    # WHEN
-    result = create_did_you_read_questions(keg_terms)
-
-    # THEN
-    assert result == [
-        ("Did you read about 'alpha'?", "Alpha definition"),
-        ("Did you read about 'zebra'?", "Zebra definition"),
-    ]
-
-
-# TODO change this it handles a obj like KegQTerm, there will be more to change
-def test_create_did_you_read_questions_ReturnsCorrectMultiFieldOrdering():
-    # ESTABLISH
-    keg_terms = {
-        "gamma": {
-            "exam_tier": 1,
-            "keg_definition": "Gamma definition",
-            "init_ch": 5,
-        },
-        "alpha": {
-            "exam_tier": 0,
-            "keg_definition": "Alpha definition",
-            "init_ch": 1,
-        },
-        "beta": {
-            "exam_tier": 1,
-            "keg_definition": "Beta definition",
-            "init_ch": 10,
-        },
-        "delta": {
-            "exam_tier": 1,
-            "keg_definition": "Delta definition",
-            "init_ch": 5,
-        },
-    }
-
-    # WHEN
-    result = create_did_you_read_questions(keg_terms)
-
-    # THEN
-    assert result == [
-        ("Did you read about 'alpha'?", "Alpha definition"),
-        ("Did you read about 'beta'?", "Beta definition"),
-        ("Did you read about 'delta'?", "Delta definition"),
-        ("Did you read about 'gamma'?", "Gamma definition"),
-    ]
-
-
-# TODO change this it handles a obj like QuestionUnit, there will be more to change
-def test_create_final_exam_question_list_ReturnsList_Scenario0_EmptyInputs():
-    # ESTABLISH
+    alpha_question = QuestionUnit(keg_term="alpha", exam_tier=0, init_ch=1)
+    beta_question = QuestionUnit(keg_term="beta", exam_tier=1, init_ch=10)
+    floating_questions = {"beta": beta_question, "alpha": alpha_question}
     fixed_questions = {}
-    floating_questions = []
 
     # WHEN
-    result = create_final_exam_question_list(
+    result = merge_fixed_and_floating_questions(
         fixed_questions=fixed_questions,
         floating_questions=floating_questions,
     )
 
     # THEN
-    assert result == []
+    assert result == [alpha_question, beta_question]
 
 
-def test_create_final_exam_question_list_ReturnsList_Scenario0_OnlyFloatingQuestions():
+def test_merge_fixed_and_floating_questions_ReturnsObj_Scenario1_FixedQuestionInsertedAtAbsoluteIndex():
     # ESTABLISH
-    fixed_questions = {}
-    floating_questions = ["Question A", "Question B"]
+    fixed_question = QuestionUnit(complete_question="Fixed Question")
+    alpha_question = QuestionUnit(keg_term="alpha", exam_tier=0, init_ch=1)
+    beta_question = QuestionUnit(keg_term="beta", exam_tier=1, init_ch=10)
+    fixed_questions = {1: fixed_question}
+    floating_questions = {"beta": beta_question, "alpha": alpha_question}
 
     # WHEN
-    result = create_final_exam_question_list(
+    result = merge_fixed_and_floating_questions(
         fixed_questions=fixed_questions,
         floating_questions=floating_questions,
     )
 
     # THEN
-    assert result == ["Question A", "Question B"]
+    assert result == [alpha_question, fixed_question, beta_question]
 
 
-def test_create_final_exam_question_list_ReturnsList_Scenario0_FixedQuestionInsertedAtBeginning():
+def test_merge_fixed_and_floating_questions_ReturnsObj_Scenario2_MultipleFixedIndexesRemainAbsolute():
     # ESTABLISH
-    fixed_questions = {0: "Fixed Question"}
-    floating_questions = ["Question A", "Question B"]
+    fixed_question_b = QuestionUnit(complete_question="Fixed B")
+    fixed_question_d = QuestionUnit(complete_question="Fixed D")
+    alpha_question = QuestionUnit(keg_term="alpha", exam_tier=0, init_ch=1)
+    beta_question = QuestionUnit(keg_term="beta", exam_tier=1, init_ch=10)
+    gamma_question = QuestionUnit(keg_term="gamma", exam_tier=1, init_ch=5)
+
+    fixed_questions = {1: fixed_question_b, 3: fixed_question_d}
+    floating_questions = {
+        "gamma": gamma_question,
+        "alpha": alpha_question,
+        "beta": beta_question,
+    }
 
     # WHEN
-    result = create_final_exam_question_list(
-        fixed_questions=fixed_questions,
-        floating_questions=floating_questions,
-    )
-
-    # THEN
-    assert result == ["Fixed Question", "Question A", "Question B"]
-
-
-def test_create_final_exam_question_list_ReturnsList_Scenario0_FixedQuestionInsertedInMiddle():
-    # ESTABLISH
-    fixed_questions = {1: "Fixed Question"}
-    floating_questions = ["Question A", "Question B"]
-
-    # WHEN
-    result = create_final_exam_question_list(
-        fixed_questions=fixed_questions,
-        floating_questions=floating_questions,
-    )
-
-    # THEN
-    assert result == ["Question A", "Fixed Question", "Question B"]
-
-
-def test_create_final_exam_question_list_ReturnsList_Scenario0_MultipleFixedIndexes():
-    # ESTABLISH
-    fixed_questions = {1: "Fixed B", 3: "Fixed D"}
-    floating_questions = ["Question A", "Question C", "Question E"]
-
-    # WHEN
-    result = create_final_exam_question_list(
-        fixed_questions=fixed_questions,
-        floating_questions=floating_questions,
-    )
-
-    # THEN
-    assert result == ["Question A", "Fixed B", "Question C", "Fixed D", "Question E"]
-
-
-# TODO change this it handes create_did_you_read_questions result
-def test_create_final_exam_question_list_ReturnsList_Scenario0_FixedIndexesRemainAbsolute():
-    # ESTABLISH
-    fixed_questions = {2: "Fixed C", 5: "Fixed F"}
-    floating_questions = ["Question A", "Question B", "Question D", "Question E"]
-
-    # WHEN
-    result = create_final_exam_question_list(
+    result = merge_fixed_and_floating_questions(
         fixed_questions=fixed_questions,
         floating_questions=floating_questions,
     )
 
     # THEN
     assert result == [
-        "Question A",
-        "Question B",
-        "Fixed C",
-        "Question D",
-        "Question E",
-        "Fixed F",
+        alpha_question,
+        fixed_question_b,
+        beta_question,
+        fixed_question_d,
+        gamma_question,
     ]
 
 
-def test_export_final_exam_questions_to_csv_ReturnsNone_Scenario0_WritesCsvFile(
+def test_rebuild_final_exam_questions_ReturnsNone_Scenario3_CreatesCsvFile(
     tmp_path,
 ):
     # ESTABLISH
-    output_csv_path = tmp_path / "questions.csv"
-    fixed_questions = {1: "Fixed Question"}
-    floating_questions = ["Question A", "Question B"]
-
+    output_csv_path = tmp_path / "final_exam_questions.csv"
     # WHEN
-    export_final_exam_questions_to_csv(
-        fixed_questions=fixed_questions,
-        floating_questions=floating_questions,
-        output_csv_path=output_csv_path,
-    )
-
+    rebuild_final_exam_questions(output_csv_path=output_csv_path)
     # THEN
-    with open(output_csv_path, newline="", encoding="utf-8") as csv_file:
-        rows = list(csv_reader(csv_file))
-    assert rows == [
-        ["row_number", "question"],
-        ["0", "Question A"],
-        ["1", "Fixed Question"],
-        ["2", "Question B"],
-    ]
-
-
-# TODO change this so exported csv has question number, keg_term, question_str
-def test_export_final_exam_questions_to_csv_ReturnsNone_Scenario0_WritesEmptyCsvWithHeaderOnly(
-    tmp_path,
-):
-    # ESTABLISH
-    output_csv_path = tmp_path / "questions.csv"
-
-    fixed_questions = {}
-    floating_questions = []
-
-    # WHEN
-    export_final_exam_questions_to_csv(
-        fixed_questions=fixed_questions,
-        floating_questions=floating_questions,
-        output_csv_path=output_csv_path,
-    )
-
-    # THEN
-    with open(output_csv_path, newline="", encoding="utf-8") as csv_file:
-        rows = list(csv_reader(csv_file))
-
-    assert rows == [["row_number", "question"]]
+    assert output_csv_path.exists()
 
 
 def test_get_ch_sorted_keywords_ReturnsObj_Scenario0_basic_sorting():

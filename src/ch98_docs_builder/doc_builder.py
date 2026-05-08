@@ -20,8 +20,14 @@ from ch00_py.keyword_class_builder import (
 )
 from ch04_rope._ref.ch04_doc_builder import get_ropeterm_description_md
 from ch17_brick._ref.ch17_doc_builder import get_brick_formats_md, get_brick_mds
-from ch98_docs_builder._ref.ch98_path import create_chapter_ref_path
-from ch98_docs_builder.keg_definitions_builder import rebuild_keg_definitions_contents
+from ch98_docs_builder._ref.ch98_path import (
+    create_chapter_ref_path,
+    create_src_keg_exam_path,
+)
+from ch98_docs_builder.keg_definitions_builder import (
+    rebuild_final_exam_questions,
+    rebuild_keg_definitions_contents,
+)
 from ref.sorter import get_keg_elements_sort_order
 
 
@@ -115,3 +121,4 @@ def resave_chapter_and_keyword_json_files():
     # save_json(keywords_main_json_path, None, open_json(keywords_main_json_path))
     save_json(ex_strs_json_path, None, open_json(ex_strs_json_path))
     rebuild_keg_definitions_contents()
+    rebuild_final_exam_questions(create_src_keg_exam_path("src"))
