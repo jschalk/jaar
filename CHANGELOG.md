@@ -1,3 +1,11 @@
+## [0.83.28](https://github.com/jschalk/keg/compare/v0.83.27...v0.83.28) (2026-05-09)
+
+
+### Bug Fixes
+
+* [#1207](https://github.com/jschalk/keg/issues/1207) add print button w1_app.py ([f81d1d6](https://github.com/jschalk/keg/commit/f81d1d66573997a9d5302a275cdab2ec3ad5ab27))
+* [#1208](https://github.com/jschalk/keg/issues/1208) version meta grab fix ([6c8e0be](https://github.com/jschalk/keg/commit/6c8e0be5f6392ff9198cc096e939fa652c24ef75))
+
 ## [0.83.27](https://github.com/jschalk/keg/compare/v0.83.26...v0.83.27) (2026-05-08)
 
 
