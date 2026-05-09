@@ -69,7 +69,7 @@ def test_get_keg_definition_questionunits_ReturnsObj():
         keg_term=kw.year_length,
         keg_definition=keg_definitions.get(kw.year_length),
         init_ch=13,
-        exam_tier=0,
+        exam_tier=3,
     )
     assert keg_questions1.get(kw.year_length) == expected_year_length_questionunit
 
@@ -124,9 +124,9 @@ def test_set_did_you_read_orders_SetAttrs_Scenario2_AssignsSequentialOrder():
     set_did_you_read_orders(keg_questions)
 
     # THEN
-    assert alpha_questionunit.did_you_read_order == 0
-    assert beta_questionunit.did_you_read_order == 1
-    assert gamma_questionunit.did_you_read_order == 2
+    assert alpha_questionunit.did_you_read_order == 2
+    assert beta_questionunit.did_you_read_order == 0
+    assert gamma_questionunit.did_you_read_order == 1
 
 
 def test_set_did_you_read_orders_SetAttrs_Scenario3_SortsAlphabetically_WhenOtherFieldsMatch():
@@ -200,7 +200,7 @@ def test_merge_fixed_and_floating_questions_ReturnsObj_Scenario0_OnlyFloatingQue
     )
 
     # THEN
-    assert result == [alpha_question, beta_question]
+    assert result == [beta_question, alpha_question]
 
 
 def test_merge_fixed_and_floating_questions_ReturnsObj_Scenario1_FixedQuestionInsertedAtAbsoluteIndex():
@@ -218,7 +218,7 @@ def test_merge_fixed_and_floating_questions_ReturnsObj_Scenario1_FixedQuestionIn
     )
 
     # THEN
-    assert result == [alpha_question, fixed_question, beta_question]
+    assert result == [beta_question, fixed_question, alpha_question]
 
 
 def test_merge_fixed_and_floating_questions_ReturnsObj_Scenario2_MultipleFixedIndexesRemainAbsolute():
@@ -244,11 +244,11 @@ def test_merge_fixed_and_floating_questions_ReturnsObj_Scenario2_MultipleFixedIn
 
     # THEN
     assert result == [
-        alpha_question,
-        fixed_question_b,
         beta_question,
-        fixed_question_d,
+        fixed_question_b,
         gamma_question,
+        fixed_question_d,
+        alpha_question,
     ]
 
 
@@ -266,27 +266,27 @@ def test_rebuild_final_exam_questions_ReturnsNone_Scenario3_CreatesCsvFile(
 def test_get_ch_sorted_keywords_ReturnsObj_Scenario0_basic_sorting():
     # ESTABLISH
     data = {
-        "Excel": {kw.exam_tier: 0, kw.valid_ch: kw.ch17},
-        "Word": {kw.exam_tier: 0, kw.valid_ch: kw.ch02},
-        "Access": {kw.exam_tier: 1, kw.valid_ch: kw.ch01},
+        "E": {kw.exam_tier: 0, kw.valid_ch: kw.ch17},
+        "W": {kw.exam_tier: 0, kw.valid_ch: kw.ch02},
+        "A": {kw.exam_tier: 1, kw.valid_ch: kw.ch01},
     }
     # WHEN
     result = get_ch_sorted_keywords(data)
     # THEN
-    assert result == ["Access", "Excel", "Word"]
+    assert result == ["A", "E", "W"]
 
 
 def test_get_ch_sorted_keywords_ReturnsObj_Scenario1_empty_chapter_goes_first_within_tier():
     # ESTABLISH
     data = {
-        "Excel": {kw.exam_tier: 0, kw.valid_ch: kw.ch17},
-        "Word": {kw.exam_tier: 0, kw.valid_ch: ""},
-        "Access": {kw.exam_tier: 0, kw.valid_ch: kw.ch02},
+        "E": {kw.exam_tier: 0, kw.valid_ch: kw.ch17},
+        "W": {kw.exam_tier: 0, kw.valid_ch: ""},
+        "A": {kw.exam_tier: 0, kw.valid_ch: kw.ch02},
     }
     # WHEN
     result = get_ch_sorted_keywords(data)
     # THEN
-    assert result == ["Word", "Excel", "Access"]
+    assert result == ["W", "E", "A"]
 
 
 def test_get_ch_sorted_keywords_ReturnsObj_Scenario2_empty_vs_other_tiers():

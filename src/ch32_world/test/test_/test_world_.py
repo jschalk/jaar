@@ -193,3 +193,37 @@ def test_WorldDir_delete_world_db_DeletesFile(temp3_fs):
 
     # THEN
     assert not os_path_exists(a23_db_path)
+
+
+def test_clear_output_dir_ClearDir(temp3_fs):
+    # ESTABLISH
+    worlddir = worlddir_shop("HereNow", str(temp3_fs))
+    example_file_path = create_path(worlddir.output_dir, "example.txt")
+    save_file(example_file_path, None, "placeholder text")
+    assert os_path_exists(example_file_path)
+    assert os_path_exists(worlddir.output_dir)
+
+    # WHEN
+    worlddir.clear_output_dir()
+
+    # THEN
+    print(f"{example_file_path=}")
+    assert not os_path_exists(example_file_path)
+    assert os_path_exists(worlddir.output_dir)
+
+
+def test_clear_world_dir_ClearDir(temp3_fs):
+    # ESTABLISH
+    worlddir = worlddir_shop("HereNow", str(temp3_fs))
+    example_file_path = create_path(worlddir.world_dir, "example.txt")
+    save_file(example_file_path, None, "placeholder text")
+    assert os_path_exists(example_file_path)
+    assert os_path_exists(worlddir.world_dir)
+
+    # WHEN
+    worlddir.clear_world_dir()
+
+    # THEN
+    print(f"{example_file_path=}")
+    assert not os_path_exists(example_file_path)
+    assert os_path_exists(worlddir.world_dir)

@@ -31,6 +31,7 @@ from ch31_kpi.test._util.ch31_examples import (
 from datetime import datetime
 from os.path import exists as os_path_exists
 from ref.keywords import Ch31Keywords as kw, ExampleStrs as exx
+from ref.sorter import get_library_version
 from sqlite3 import Cursor, connect as sqlite3_connect
 
 
@@ -49,6 +50,7 @@ def test_get_gcal_day_punch_from_personunit_ReturnsObj_Scenario0_EmptyPerson():
     ap7_epoch_min = get_epoch_min_from_dt(sue_person, kw.creg, apr7)
     ap7_timeshoe = timeshoe_shop(sue_person, kw.creg, ap7_epoch_min)
     expected_str = f"{ap7_timeshoe.get_long_date_blurb()} Agenda for {exx.sue}"
+    assert get_library_version() in sue_day_punch_str
     assert expected_str in sue_day_punch_str
     assert "Schedule Priorities" in sue_day_punch_str
     assert "All Agenda Items" in sue_day_punch_str

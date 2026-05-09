@@ -292,6 +292,7 @@ class Ch04Keywords(str, Enum):
     laborheir = "laborheir"
     labors = "labors"
     mana_grain = "mana_grain"
+    meaning = "meaning"
     memberships = "memberships"
     parent_rope = "parent_rope"
     parent_solo = "parent_solo"

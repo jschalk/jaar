@@ -33,7 +33,6 @@ from ch31_kpi._ref.ch31_path import (
 from ch31_kpi._ref.ch31_semantic_types import (
     FundNum,
     GroupTitle,
-    KnotTerm,
     LabelTerm,
     MomentRope,
     PersonName,
@@ -46,6 +45,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 from io import StringIO as io_StringIO
 from os.path import exists as os_path_exists
+from ref.sorter import get_library_version
 from sqlite3 import connect as sqlite3_connect
 
 
@@ -328,6 +328,8 @@ def get_gcal_day_punch_from_personunit(
     x_str += f"\n\n{get_gcal_contacts_str(x_person)}"
     if group_title:
         x_str += f"\n{get_gcal_memberships_str(x_person, group_title)}"
+    x_str += f"\n\nkeg version: {get_library_version()}"
+
     return x_str
 
 

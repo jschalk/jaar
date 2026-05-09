@@ -24,15 +24,19 @@ from ch36_world_app.w1_tool import (
     get_app_glb_attrs,
     get_option_table_options,
 )
+from contextlib import suppress as contextlib_suppress
 from importlib.metadata import version as metadata_version
-from os import listdir as os_listdir
+from json import dump as json_dump, load as json_load
+from os import environ as os_environ, listdir as os_listdir, makedirs as os_makedirs
 from os.path import (
+    expanduser as os_path_expanduser,
     isdir as os_path_isdir,
     isfile as os_path_isfile,
     join as os_path_join,
 )
 from platform import system as platform_system
 from subprocess import Popen as subprocess_Popen
+from tempfile import NamedTemporaryFile as tempfile_NamedTemporaryFile
 from tkinter import (
     BOTH as tk_BOTH,
     END as tk_END,
@@ -53,7 +57,7 @@ from tkinter import (
     messagebox as tkinter_messagebox,
     ttk as tkinter_ttk,
 )
-from tkinter.scrolledtext import ScrolledText as tk_ScrolledText
+from webbrowser import open as webbrowser_open
 
 
 class OptionTable(tk_Frame):
@@ -166,6 +170,70 @@ class ETLApp(tk_Tk):
         # Your config: description -> function
         self._build_ui()
         self._set_defaults()
+        self._load_state()
+        self.protocol("WM_DELETE_WINDOW", self._on_close)
+
+    # ── state persistence ──────────────────────
+    @staticmethod
+    def _state_path() -> str:
+
+        app_data = os_environ.get("APPDATA") or os_path_expanduser("~")
+        state_dir = os_path_join(app_data, "w1_app")
+        os_makedirs(state_dir, exist_ok=True)
+        return os_path_join(state_dir, "state.json")
+
+    def _save_state(self):
+        state = {
+            "me": self._me_personname.get().strip(),
+            "you": self._you_personname.get().strip(),
+            "ideas_dir": self._i_src_dir.get().strip(),
+            "bricks_dir": self._b_src_dir.get().strip(),
+            "working_dir": self._working.get().strip(),
+            "agendas_dir": self._output.get().strip(),
+            "person": self._person_var.get().strip(),
+            "moment": self._moment_var.get().strip(),
+            "day_punch_text": self._punch_text.get("1.0", tk_END).strip(),
+        }
+        with contextlib_suppress(OSError):
+            with open(self._state_path(), "w", encoding="utf-8") as f:
+                json_dump(state, f, indent=2)
+
+    def _load_state(self):
+        try:
+            with open(self._state_path(), encoding="utf-8") as f:
+                state = json_load(f)
+        except (OSError, ValueError):
+            return  # no previous state — start fresh
+
+        # Simple fields — overwrite the defaults that _set_defaults just applied
+        field_map = {
+            "me": self._me_personname,
+            "you": self._you_personname,
+            "ideas_dir": self._i_src_dir,
+            "bricks_dir": self._b_src_dir,
+            "working_dir": self._working,
+            "agendas_dir": self._output,
+        }
+        for key, var in field_map.items():
+            if value := state.get(key):
+                var.set(value)
+
+        # Punch viewer — restore person/moment labels and punch text
+        if person := state.get("person"):
+            self._person_var.set(person)
+            self._person_combo["values"] = [person]
+
+        if moment := state.get("moment"):
+            self._moment_var.set(moment)
+            self._moment_combo["values"] = [moment]
+
+        if text := state.get("day_punch_text"):
+            self._set_punch_text(text)
+            self._viewer_hint.pack_forget()
+
+    def _on_close(self):
+        self._save_state()
+        self.destroy()
 
     def _set_defaults(self):
         vars_map = {
@@ -754,6 +822,23 @@ class ETLApp(tk_Tk):
         )
         self._copy_btn.pack(side="right")
 
+        self._print_btn = tk_Button(
+            hdr,
+            text="🖨  Print",
+            font=ax.mono,
+            bg=ax.border,
+            fg=ax.fg,
+            activebackground=ax.accent,
+            activeforeground=ax.fg_black,
+            relief="flat",
+            bd=0,
+            padx=10,
+            pady=4,
+            cursor="hand2",
+            command=self._print_punch_text,
+        )
+        self._print_btn.pack(side="right", padx=(0, 6))
+
         tk_Frame(parent, bg=ax.border, height=1).pack(fill="x", padx=16)
 
         # ── selectors ───────────────────────────
@@ -891,6 +976,40 @@ class ETLApp(tk_Tk):
             self.clipboard_append(text)
             self._copy_btn.configure(text="✔  Copied!")
             self.after(1500, lambda: self._copy_btn.configure(text="⧉  Copy"))
+
+    def _print_punch_text(self):
+        """Print the current punch viewer contents via a temporary HTML file."""
+
+        text = self._punch_text.get("1.0", tk_END).strip()
+        if not text:
+            tkinter_messagebox.showinfo(
+                "Nothing to print", "The punch viewer is empty."
+            )
+            return
+
+        # Build a minimal HTML page and open it in the browser for printing
+        escaped = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        html = (
+            "<!DOCTYPE html><html><head>"
+            "<meta charset='utf-8'>"
+            "<title>Punch Viewer</title>"
+            "<style>"
+            "body{font-family:monospace;white-space:pre-wrap;padding:24px;}"
+            "</style>"
+            "</head><body>"
+            f"{escaped}"
+            "<script>window.onload=function(){{window.print();}}</script>"
+            "</body></html>"
+        )
+        with tempfile_NamedTemporaryFile(
+            mode="w", suffix=".html", delete=False, encoding="utf-8"
+        ) as f:
+            f.write(html)
+            tmp_path = f.name
+
+        webbrowser_open(f"file:///{tmp_path.replace(chr(92), '/')}")
+        self._print_btn.configure(text="✔  Sent!")
+        self.after(1500, lambda: self._print_btn.configure(text="🖨  Print"))
 
     @staticmethod
     def _placeholder(entry, var, tip):

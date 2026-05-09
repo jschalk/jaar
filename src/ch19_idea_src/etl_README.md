@@ -10,7 +10,7 @@ The design focuses on **traceability, auditability, and simplicity** — every s
 ## 1. Overview
 
 Data in this system originates from **Excel sources**.
-It goes through a series of **structured stages** that progressively clean, validate, and transform the data into consistent, meaningful tables.
+It goes through a series of **structured stages** that progressively clean, validate, and transform the data into consistent, useful tables.
 
 The process starts in **bricks** tables and ends in **Sound** and **Heard** tables, where the data is finalized and ready for analysis or downstream logic.
 
@@ -34,7 +34,7 @@ flowchart LR
 At a high level:
 
 * **bricks** tables (`Brick Raw`, `Brick Agg`, `Brick Vld`) capture raw and aggregated source data.
-* **Sound** tables interpret and translate that data into structured, meaningful forms.
+* **Sound** tables interpret and translate that data into structured, useful forms.
 * **Heard** tables finalize transformations involving numeric and time-based data.
 
 ---

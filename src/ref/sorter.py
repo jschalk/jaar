@@ -1,3 +1,13 @@
+from importlib.metadata import PackageNotFoundError, version as metadata_version
+
+
+def get_library_version() -> str:
+    try:
+        return metadata_version("requests")
+    except PackageNotFoundError:
+        return "0.0.0"
+
+
 def get_keg_elements_sort_order() -> list[str]:
     """Contains the standard sort order for all brick and person_calc columns"""
     return [

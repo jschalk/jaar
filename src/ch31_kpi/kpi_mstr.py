@@ -17,7 +17,7 @@ def create_populate_kpi001_table(cursor: sqlite3_Cursor):
 
 
 def create_populate_kpi002_table(cursor: sqlite3_Cursor):
-    cursor.execute("DROP TABLE IF EXISTS moment_kpi002_person_pledges")
+    # cursor.execute("DROP TABLE IF EXISTS moment_kpi002_person_pledges")
     cursor.execute(get_create_kpi002_sqlstr())
 
 

@@ -45,7 +45,7 @@ def test_ContactUnit_set_membership_SetsMultipleAttr():
     assert yao_contactunit.memberships == yao_memberships
 
 
-def test_ContactUnit_set_membership_RaisesErrorIf_group_titleIsContactNameAndNotContactUnit_contact_name():
+def test_ContactUnit_set_membership_RaisesErrorIf_group_titleIsContactName_NotContactUnit_contact_name():
     # ESTABLISH
     yao_contactunit = contactunit_shop(exx.yao)
     bob_membership = membership_shop(exx.bob)

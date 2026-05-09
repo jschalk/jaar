@@ -121,6 +121,14 @@ class WorldDir:
     def delete_world_db(self):
         delete_dir(self.get_world_db_path())
 
+    def clear_output_dir(self):
+        delete_dir(self.output_dir)
+        set_dir(self.output_dir)
+
+    def clear_world_dir(self):
+        delete_dir(self.world_dir)
+        set_dir(self.world_dir)
+
     def set_bricks_src_dir(self, x_dir: str):
         self.bricks_src_dir = x_dir
         set_dir(self.bricks_src_dir)
@@ -223,6 +231,10 @@ def create_today_punchs(
         bricks_src_dir=bricks_src_dir,
         ideas_src_dir=ideas_src_dir,
     )
+    # worlddir.clear_world_dir()
+    worlddir.clear_output_dir()
+    worlddir.set_bricks_src_dir(worlddir.bricks_src_dir)
+    worlddir.set_ideas_src_dir(worlddir.ideas_src_dir)
     idea_sheets_to_gcal_day_punchs(
         worlddir=worlddir,
         person_names=person_names,

@@ -105,9 +105,7 @@ def test_get_keg_definitions_ReturnsObj_Check_python_keywords():
     keg_definitions = get_keg_definitions()
 
     # THEN
-    py_used_often_str = (
-        "Used so often in Python that it cannot be given any kegology meaning."
-    )
+    py_used_often_str = "Used so often in Python that it cannot be a kegology keyword."
     for python_keyword in python_keyword_args:
         py_key_description = keg_definitions.get(python_keyword)
         assert py_used_often_str in py_key_description, python_keyword
