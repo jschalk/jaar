@@ -38,7 +38,7 @@ def test_etl_brick_dfs_to_brixk_raw_tables_PopulatesTables_Scenario0(
     df1 = DataFrame([row0, row1, row2, row3, row4], columns=bk3_columns)
     bk00103_ex1_str = "example1_bk00103"
     save_sheet(b_src_file_path, bk00103_ex1_str, df1)
-    bk00103_tablename = f"bk00103_{kw.brixk_raw}"
+    bk00103_tablename = f"bk00103_{kw.b_raw}"
     assert not db_table_exists(cursor0, bk00103_tablename)
 
     # WHEN
@@ -130,7 +130,7 @@ def test_etl_brick_dfs_to_brixk_raw_tables_PopulatesTables_Scenario1(
     save_sheet(b_src_file_path, bk00103_ex1_str, df1)
     save_sheet(b_src_file_path, bk00103_ex2_str, df2)
     save_sheet(b_src_file_path, bk00103_ex3_str, df3)
-    bk00103_tablename = f"bk00103_{kw.brixk_raw}"
+    bk00103_tablename = f"bk00103_{kw.b_raw}"
     assert not db_table_exists(cursor0, bk00103_tablename)
 
     # WHEN
@@ -205,7 +205,7 @@ def test_etl_brick_dfs_to_brixk_raw_tables_PopulatesTables_Scenario2_NanValuesCo
     df1 = DataFrame([row0, row1, row2], columns=bk3_columns)
     bk00103_ex1_str = "example1_bk00103"
     save_sheet(b_src_file_path, bk00103_ex1_str, df1)
-    bk00103_tablename = f"bk00103_{kw.brixk_raw}"
+    bk00103_tablename = f"bk00103_{kw.b_raw}"
     assert not db_table_exists(cursor0, bk00103_tablename)
 
     # WHEN
@@ -273,7 +273,7 @@ def test_etl_brick_dfs_to_brixk_raw_tables_PopulatesTables_Scenario3_DeletesTabl
     df1 = DataFrame([row0, row1, row2, row3, row4], columns=bk3_columns)
     bk00103_ex1_str = "example1_bk00103"
     save_sheet(b_src_file_path, bk00103_ex1_str, df1)
-    bk00103_tablename = f"bk00103_{kw.brixk_raw}"
+    bk00103_tablename = f"bk00103_{kw.b_raw}"
     assert not db_table_exists(cursor0, bk00103_tablename)
     etl_brick_dfs_to_brixk_raw_tables(cursor0, b_src_dir)
     assert get_row_count(cursor0, bk00103_tablename) == 5

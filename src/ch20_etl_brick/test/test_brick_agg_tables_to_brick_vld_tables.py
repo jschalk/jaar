@@ -18,7 +18,7 @@ def test_etl_brixk_agg_tables_to_brixk_vld_tables_PopulatesVldTable_Scenario0_va
     hour6am = "6am"
     hour7am = "7am"
     # INSERT INTO brixk_agg table
-    agg_bk00103_tablename = f"bk00103_{kw.brixk_agg}"
+    agg_bk00103_tablename = f"bk00103_{kw.b_agg}"
     agg_bk00103_columns = [
         kw.spark_num,
         kw.spark_face,
@@ -100,7 +100,7 @@ def test_etl_brixk_agg_tables_to_brixk_vld_tables_PopulatesVldTable_Scenario1_No
     hour6am = "6am"
     hour7am = "7am"
     # INSERT INTO brixk_agg table
-    agg_bk00103_tablename = f"bk00103_{kw.brixk_agg}"
+    agg_bk00103_tablename = f"bk00103_{kw.b_agg}"
     agg_bk00103_columns = [
         kw.spark_num,
         kw.spark_face,
@@ -176,7 +176,7 @@ VALUES
 #     hour7am = "7am"
 #     hour8am = "8am"
 
-#     agg_bk00103_tablename = f"bk00103_{kw.brixk_agg}"
+#     agg_bk00103_tablename = f"bk00103_{kw.b_agg}"
 #     agg_bk00103_columns = [
 #         kw.spark_num,
 #         kw.spark_face,
@@ -247,7 +247,7 @@ VALUES
 #     hour6am = "6am"
 #     hour7am = "7am"
 #     hour8am = "8am"
-#     agg_bk00103_tablename = f"bk00103_{kw.brixk_agg}"
+#     agg_bk00103_tablename = f"bk00103_{kw.b_agg}"
 #     agg_bk00103_columns = [
 #         kw.spark_num,
 #         kw.spark_face,
@@ -306,7 +306,7 @@ VALUES
 # ):
 #     # ESTABLISH
 #     spark1 = 1
-#     agg_bk00105_tablename = f"bk00105_{kw.brixk_agg}"
+#     agg_bk00105_tablename = f"bk00105_{kw.b_agg}"
 #     agg_bk00105_columns = [
 #         kw.spark_num,
 #         kw.spark_face,

@@ -114,7 +114,7 @@ row_number,question
 112,Did you read that the keg_definition of 'sound_agg' is 'stage_type_order=8 Populated by aggregated Sound Raw dimen data (elimanate duplicates). Translate Core data is validated then used to translate non-Translate dimen data'.
 113,Did you read that the keg_definition of 'sound_raw' is 'stage_type_order=7 The Brick Valid data is seperated by column into dimen data such as person_planunit and moment_budunit'.
 114,Did you read that the keg_definition of 'sound_vld' is 'stage_type_order=9 The Translated Sound Agg data is aggregated to elimanate duplicates into Sound Valid'.
-115,Did you read that the keg_definition of 'sparks_brixk_agg' is 'Definition needed.'.
+115,Did you read that the keg_definition of 'sparks_b_agg' is 'Definition needed.'.
 116,Did you read that the keg_definition of 'sparks_brixk_vld' is 'Definition needed.'.
 117,Did you read that the keg_definition of 'trlcore' is 'abbv for translate_core'.
 118,Did you read that the keg_definition of 'trllabe' is 'abbv for translate_label'.
