@@ -1,7 +1,7 @@
 from importlib.metadata import PackageNotFoundError, version as metadata_version
 
 
-def get_version() -> str:
+def get_library_version() -> str:
     try:
         return metadata_version("requests")
     except PackageNotFoundError:
