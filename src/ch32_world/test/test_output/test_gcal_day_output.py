@@ -1,4 +1,4 @@
-from ch00_py.file_toolbox import create_path, open_file
+from ch00_py.file_toolbox import create_path, open_file, save_file
 from ch04_rope.rope import create_rope_from_labels as init_rope
 from ch09_person_lesson._ref.ch09_path import create_moment_json_path
 from ch09_person_lesson.lasso import lassounit_shop
@@ -249,3 +249,34 @@ def test_create_today_punchs_SavesFiles_Scenario0_PopulatedSueReport(
     expected_sue_punch_paths = expected_dst_persons_punch_paths.get(exx.sue)
     assert gen_sue_punch_paths == expected_sue_punch_paths
     assert gen_dst_persons_punch_paths == expected_dst_persons_punch_paths
+
+
+def test_create_today_punchs_Clears_world_dir_And_output_dir(
+    temp3_fs,
+):
+    # ESTABLISH
+    here_wdir = worlddir_shop("HereNow", str(temp3_fs))
+    output_file_path = create_path(here_wdir.output_dir, "example.txt")
+    world_file_path = create_path(here_wdir.world_dir, "example.txt")
+    save_file(output_file_path, None, "exmaple str")
+    save_file(world_file_path, None, "exmaple str")
+    assert os_path_exists(output_file_path)
+    assert os_path_exists(world_file_path)
+    assert os_path_exists(here_wdir.world_dir)
+    assert os_path_exists(here_wdir.output_dir)
+
+    # WHEN
+    create_today_punchs(
+        {exx.sue},
+        here_wdir.world_name,
+        here_wdir.worlds_dir,
+        output_dir=here_wdir.output_dir,
+        bricks_src_dir=here_wdir.bricks_src_dir,
+        ideas_src_dir=here_wdir.ideas_src_dir,
+    )
+
+    # THEN
+    assert not os_path_exists(output_file_path)
+    # assert not os_path_exists(world_file_path)
+    assert os_path_exists(here_wdir.world_dir)
+    assert os_path_exists(here_wdir.output_dir)

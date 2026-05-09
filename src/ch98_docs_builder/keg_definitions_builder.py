@@ -182,9 +182,6 @@ def merge_fixed_and_floating_questions(
             result_questionunits.append(sorted_floating_questions[floating_index])
             floating_index += 1
 
-    for question in result_questionunits:
-        print(f"{question.keg_term} {question.did_you_read_order=}")
-
     return result_questionunits
 
 
