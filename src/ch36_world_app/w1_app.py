@@ -754,6 +754,23 @@ class ETLApp(tk_Tk):
         )
         self._copy_btn.pack(side="right")
 
+        self._print_btn = tk_Button(
+            hdr,
+            text="🖨  Print",
+            font=ax.mono,
+            bg=ax.border,
+            fg=ax.fg,
+            activebackground=ax.accent,
+            activeforeground=ax.fg_black,
+            relief="flat",
+            bd=0,
+            padx=10,
+            pady=4,
+            cursor="hand2",
+            command=self._print_punch_text,
+        )
+        self._print_btn.pack(side="right", padx=(0, 6))
+
         tk_Frame(parent, bg=ax.border, height=1).pack(fill="x", padx=16)
 
         # ── selectors ───────────────────────────
@@ -891,6 +908,42 @@ class ETLApp(tk_Tk):
             self.clipboard_append(text)
             self._copy_btn.configure(text="✔  Copied!")
             self.after(1500, lambda: self._copy_btn.configure(text="⧉  Copy"))
+
+    def _print_punch_text(self):
+        """Print the current punch viewer contents via a temporary HTML file."""
+        from tempfile import NamedTemporaryFile as tempfile_NamedTemporaryFile
+        from webbrowser import open as webbrowser_open
+
+        text = self._punch_text.get("1.0", tk_END).strip()
+        if not text:
+            tkinter_messagebox.showinfo(
+                "Nothing to print", "The punch viewer is empty."
+            )
+            return
+
+        # Build a minimal HTML page and open it in the browser for printing
+        escaped = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        html = (
+            "<!DOCTYPE html><html><head>"
+            "<meta charset='utf-8'>"
+            "<title>Punch Viewer</title>"
+            "<style>"
+            "body{font-family:monospace;white-space:pre-wrap;padding:24px;}"
+            "</style>"
+            "</head><body>"
+            f"{escaped}"
+            "<script>window.onload=function(){{window.print();}}</script>"
+            "</body></html>"
+        )
+        with tempfile_NamedTemporaryFile(
+            mode="w", suffix=".html", delete=False, encoding="utf-8"
+        ) as f:
+            f.write(html)
+            tmp_path = f.name
+
+        webbrowser_open(f"file:///{tmp_path.replace(chr(92), '/')}")
+        self._print_btn.configure(text="✔  Sent!")
+        self.after(1500, lambda: self._print_btn.configure(text="🖨  Print"))
 
     @staticmethod
     def _placeholder(entry, var, tip):
