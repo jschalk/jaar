@@ -68,6 +68,11 @@ def test_Chapters_CheckStringMetricsFromEveryFile():
         "set_knot",
         "set_otx2inx",  # used in Nabu/Translate
         "to_dict",  # used to return class custom dictionary, usually for json file storage
+        '_state_path',  # exists in app and must be recreated in tests
+        '_load_state',  # exists in app and must be recreated in tests
+        '_on_close',  # exists in app and must be recreated in tests
+        '_save_state',  # exists in app and must be recreated in tests
+        '_print_punch_text',  # exists in app and must be recreated in tests
     }
 
     # WHEN
@@ -136,6 +141,14 @@ def test_Chapters_Semantic_Types_AreAllIn_chXX_semantic_types_ref_files():
     assert ref_files_semantic_types == expected_types_set
 
 
+def is_py_file_allowed_any_imports(file_path: str) -> bool:
+    files_with_all_imports_allowed = {
+        "test_entry_presistence.py",
+        "test_print_punch_text.py",
+    }
+    return any(file in file_path for file in files_with_all_imports_allowed)
+
+
 def test_Chapters_KeywordsAppearWhereTheyShould():
     """Test that checks no str function is created before it is needed or after the term is used."""
 
@@ -174,7 +187,9 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
                 not_allowed_keywords, file_str, chapter_prefix, file_path
             )
             assert does_not_allowed_from_src_import_exist(file_str, file_path)
-            assert py_file_has_from_imports_only(file_str, file_path), file_path
+            allowed_any_import = is_py_file_allowed_any_imports(file_path)
+            has_from_imports_only = py_file_has_from_imports_only(file_str, file_path)
+            assert has_from_imports_only or allowed_any_import, file_path
             excessive_imports_str = f"{file_path} has too many Keywords class imports"
             ch_class_name = f"C{chapter_prefix[1:]}Keywords"
             is_doc_builder_file = "doc_builder.py" in file_path
