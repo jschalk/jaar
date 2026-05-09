@@ -1,3 +1,10 @@
+from importlib.metadata import version as metadata_version
+
+
+def get_library_version():
+    return metadata_version("requests")
+
+
 def get_keg_elements_sort_order() -> list[str]:
     """Contains the standard sort order for all brick and person_calc columns"""
     return [
