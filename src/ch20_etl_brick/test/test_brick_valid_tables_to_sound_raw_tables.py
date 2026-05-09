@@ -24,7 +24,7 @@ def test_etl_brixk_vld_tables_to_sound_raw_tables_PopulatesTable_Scenario0_Only_
     spark5 = 5
     spark7 = 7
 
-    bk00174_valid_tablename = f"bk00174_{kw.brixk_vld}"
+    bk00174_valid_tablename = f"bk00174_{kw.b_vld}"
     bk00174_columns = [
         kw.spark_num,
         kw.spark_face,
@@ -54,7 +54,7 @@ VALUES
 """
     cursor0.execute(f"{insert_into_clause} {values_clause}")
 
-    bk00145_valid_tablename = f"bk00145_{kw.brixk_vld}"
+    bk00145_valid_tablename = f"bk00145_{kw.b_vld}"
     bk00145_columns = [
         kw.spark_num,
         kw.spark_face,
@@ -136,7 +136,7 @@ def test_etl_brixk_vld_tables_to_sound_raw_tables_PopulatesTable_Scenario1_NoDup
     yao_inx = "Yaoito"
     bob_inx = "Bobito"
     spark1 = 1
-    bk00174_valid_tablename = f"bk00174_{kw.brixk_vld}"
+    bk00174_valid_tablename = f"bk00174_{kw.b_vld}"
     bk00174_columns = [
         kw.spark_num,
         kw.spark_face,

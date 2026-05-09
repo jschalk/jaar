@@ -3,9 +3,9 @@ from ch17_brick.brick_db_tool import create_brick_sorted_table
 from ch20_etl_brick.etl_brick_main import (
     etl_brixk_agg_tables_to_sparks_b_agg_table,
     etl_sparks_b_agg_db_to_spark_dict,
-    etl_sparks_b_agg_table_to_sparks_brixk_vld_table,
+    etl_sparks_b_agg_table_to_sparks_b_vld_table,
     get_create_sparks_b_agg_sqlstr,
-    get_create_sparks_brixk_vld_sqlstr,
+    get_create_sparks_b_vld_sqlstr,
 )
 from ref.keywords import Ch20Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
@@ -19,12 +19,14 @@ def test_get_create_sparks_b_agg_sqlstr_ReturnsObj():
     assert create_sparks_b_agg_sqlstr == expected_create_sparks_b_agg_sqlstr
 
 
-def test_get_create_sparks_brixk_vld_sqlstr_ReturnsObj():
+def test_get_create_sparks_b_vld_sqlstr_ReturnsObj():
     # ESTABLISH / WHEN
-    create_sparks_brixk_vld_sqlstr = get_create_sparks_brixk_vld_sqlstr()
+    create_sparks_b_vld_sqlstr = get_create_sparks_b_vld_sqlstr()
     # THEN
-    expected_create_sparks_brixk_vld_sqlstr = "CREATE TABLE IF NOT EXISTS sparks_brixk_vld (spark_num INTEGER, spark_face TEXT)"
-    assert create_sparks_brixk_vld_sqlstr == expected_create_sparks_brixk_vld_sqlstr
+    expected_create_sparks_b_vld_sqlstr = (
+        "CREATE TABLE IF NOT EXISTS sparks_b_vld (spark_num INTEGER, spark_face TEXT)"
+    )
+    assert create_sparks_b_vld_sqlstr == expected_create_sparks_b_vld_sqlstr
 
 
 def test_etl_brixk_agg_tables_to_sparks_b_agg_table_PopulatesTables_Scenario0(
@@ -244,7 +246,7 @@ ORDER BY {kw.spark_num}, {kw.spark_face};"""
     assert rows[4] == yao9_row
 
 
-def test_etl_sparks_b_agg_table_to_sparks_brixk_vld_table_PopulatesTables_Scenario0(
+def test_etl_sparks_b_agg_table_to_sparks_b_vld_table_PopulatesTables_Scenario0(
     cursor0: Cursor,
 ):
     # ESTABLISH
@@ -277,11 +279,11 @@ VALUES
     insert_sqlstr = f"{insert_into_clause} {values_clause}"
     cursor0.execute(insert_sqlstr)
     assert get_row_count(cursor0, agg_sparks_tablename) == 4
-    valid_sparks_tablename = kw.sparks_brixk_vld
+    valid_sparks_tablename = kw.sparks_b_vld
     assert not db_table_exists(cursor0, valid_sparks_tablename)
 
     # WHEN
-    etl_sparks_b_agg_table_to_sparks_brixk_vld_table(cursor0)
+    etl_sparks_b_agg_table_to_sparks_b_vld_table(cursor0)
 
     # THEN
     assert db_table_exists(cursor0, valid_sparks_tablename)
@@ -301,7 +303,7 @@ ORDER BY {kw.spark_num}, {kw.spark_face};"""
     assert rows[1] == yao9_row
 
 
-def test_etl_sparks_b_agg_table_to_sparks_brixk_vld_table_PopulatesTables_Scenario1_DuplicateRows(
+def test_etl_sparks_b_agg_table_to_sparks_b_vld_table_PopulatesTables_Scenario1_DuplicateRows(
     cursor0: Cursor,
 ):
     # ESTABLISH
@@ -334,8 +336,8 @@ VALUES
     insert_sqlstr = f"{insert_into_clause} {values_clause}"
     cursor0.execute(insert_sqlstr)
     assert get_row_count(cursor0, agg_sparks_tablename) == 4
-    valid_sparks_tablename = kw.sparks_brixk_vld
-    etl_sparks_b_agg_table_to_sparks_brixk_vld_table(cursor0)
+    valid_sparks_tablename = kw.sparks_b_vld
+    etl_sparks_b_agg_table_to_sparks_b_vld_table(cursor0)
     assert get_row_count(cursor0, valid_sparks_tablename) == 2
     spark7 = 7
     values2_clause = f"""
@@ -347,7 +349,7 @@ VALUES
     cursor0.execute(f"{insert_into_clause} {values2_clause}")
     assert get_row_count(cursor0, valid_sparks_tablename) == 2
     # WHEN
-    etl_sparks_b_agg_table_to_sparks_brixk_vld_table(cursor0)
+    etl_sparks_b_agg_table_to_sparks_b_vld_table(cursor0)
     # THEN
     assert get_row_count(cursor0, valid_sparks_tablename) == 3
 
@@ -387,7 +389,7 @@ VALUES
 ;
 """
     cursor0.execute(insert_into_clause)
-    etl_sparks_b_agg_table_to_sparks_brixk_vld_table(cursor0)
+    etl_sparks_b_agg_table_to_sparks_b_vld_table(cursor0)
     assert get_row_count(cursor0, agg_sparks_tablename) == 6
 
     # WHEN

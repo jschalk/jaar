@@ -2,7 +2,7 @@ from ch00_py.db_toolbox import db_table_exists, get_row_count, get_table_columns
 from ch17_brick.brick_db_tool import create_brick_sorted_table
 from ch20_etl_brick.etl_brick_main import (
     etl_brixk_agg_tables_to_brixk_vld_tables,
-    get_create_sparks_brixk_vld_sqlstr,
+    get_create_sparks_b_vld_sqlstr,
 )
 from ref.keywords import Ch20Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
@@ -46,14 +46,14 @@ VALUES
 """
     cursor0.execute(f"{insert_into_agg_clause} {values_agg_clause}")
     # INSERT INTO
-    cursor0.execute(get_create_sparks_brixk_vld_sqlstr())
-    select_sparks_brixk_vld_sqlstr = f"""
-INSERT INTO sparks_brixk_vld ({kw.spark_num}, {kw.spark_face}) 
+    cursor0.execute(get_create_sparks_b_vld_sqlstr())
+    select_sparks_b_vld_sqlstr = f"""
+INSERT INTO sparks_b_vld ({kw.spark_num}, {kw.spark_face}) 
 VALUES ('{spark1}', '{exx.sue}')
 ;
 """
-    cursor0.execute(select_sparks_brixk_vld_sqlstr)
-    vld_bk00103_tablename = f"bk00103_{kw.brixk_vld}"
+    cursor0.execute(select_sparks_b_vld_sqlstr)
+    vld_bk00103_tablename = f"bk00103_{kw.b_vld}"
     assert get_row_count(cursor0, agg_bk00103_tablename) == 2
     assert not db_table_exists(cursor0, vld_bk00103_tablename)
 
@@ -128,14 +128,14 @@ VALUES
 """
     cursor0.execute(f"{insert_into_agg_clause} {values_agg_clause}")
     # INSERT INTO
-    cursor0.execute(get_create_sparks_brixk_vld_sqlstr())
-    select_sparks_brixk_vld_sqlstr = f"""
-INSERT INTO sparks_brixk_vld ({kw.spark_num}, {kw.spark_face}) 
+    cursor0.execute(get_create_sparks_b_vld_sqlstr())
+    select_sparks_b_vld_sqlstr = f"""
+INSERT INTO sparks_b_vld ({kw.spark_num}, {kw.spark_face}) 
 VALUES ('{spark1}', '{exx.sue}')
 ;
 """
-    cursor0.execute(select_sparks_brixk_vld_sqlstr)
-    vld_bk00103_tablename = f"bk00103_{kw.brixk_vld}"
+    cursor0.execute(select_sparks_b_vld_sqlstr)
+    vld_bk00103_tablename = f"bk00103_{kw.b_vld}"
     etl_brixk_agg_tables_to_brixk_vld_tables(cursor0)
     assert get_row_count(cursor0, vld_bk00103_tablename) == 2
     minute_480 = 480
@@ -205,7 +205,7 @@ VALUES
 # """
 #     insert_sqlstr = f"{insert_into_clause} {values_clause}"
 #     cursor0.execute(insert_sqlstr)
-#     vld_bk00103_tablename = f"bk00103_{kw.brixk_vld}"
+#     vld_bk00103_tablename = f"bk00103_{kw.b_vld}"
 #     assert get_row_count(cursor0, agg_bk00103_tablename) == 3
 #     assert not db_table_exists(cursor0, vld_bk00103_tablename)
 
@@ -277,7 +277,7 @@ VALUES
 # """
 #     insert_sqlstr = f"{insert_into_clause} {values_clause}"
 #     cursor0.execute(insert_sqlstr)
-#     vld_bk00103_tablename = f"bk00103_{kw.brixk_vld}"
+#     vld_bk00103_tablename = f"bk00103_{kw.b_vld}"
 #     assert get_row_count(cursor0, agg_bk00103_tablename) == 4
 #     assert not db_table_exists(cursor0, vld_bk00103_tablename)
 
@@ -336,7 +336,7 @@ VALUES
 # """
 #     insert_sqlstr = f"{insert_into_clause} {values_clause}"
 #     cursor0.execute(insert_sqlstr)
-#     vld_bk00105_tablename = f"bk00105_{kw.brixk_vld}"
+#     vld_bk00105_tablename = f"bk00105_{kw.b_vld}"
 #     assert get_row_count(cursor0, agg_bk00105_tablename) == 4
 #     assert not db_table_exists(cursor0, vld_bk00105_tablename)
 #     etl_brixk_agg_tables_to_brixk_vld_tables(cursor0)

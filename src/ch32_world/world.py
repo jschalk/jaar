@@ -9,7 +9,7 @@ from ch20_etl_brick.etl_brick_main import (
     etl_brixk_agg_tables_to_sparks_b_agg_table,
     etl_brixk_raw_tables_to_brixk_agg_tables,
     etl_brixk_vld_tables_to_sound_raw_tables,
-    etl_sparks_b_agg_table_to_sparks_brixk_vld_table,
+    etl_sparks_b_agg_table_to_sparks_b_vld_table,
 )
 from ch21_sound.sound import (
     etl_sound_agg_tables_to_sound_vld_tables,
@@ -73,7 +73,7 @@ def brick_sheets_to_lego_with_cursor(
     # brick raw to sound raw, check by spark_nums
     etl_brixk_raw_tables_to_brixk_agg_tables(cursor)
     etl_brixk_agg_tables_to_sparks_b_agg_table(cursor)
-    etl_sparks_b_agg_table_to_sparks_brixk_vld_table(cursor)
+    etl_sparks_b_agg_table_to_sparks_b_vld_table(cursor)
     etl_brixk_agg_tables_to_brixk_vld_tables(cursor)
     etl_brixk_vld_tables_to_sound_raw_tables(cursor)
     # sound raw to heard raw, filter through translates

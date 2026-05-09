@@ -147,7 +147,7 @@ def etl_brixk_agg_tables_to_brixk_vld_tables(conn_or_cursor: sqlite3_Connection)
     for x_tablename in get_db_tables(conn_or_cursor):
         if x_tablename in brixk_agg_tables:
             brick_type = brixk_agg_dict.get(x_tablename)
-            valid_tablename = f"{brick_type}_brixk_vld"
+            valid_tablename = f"{brick_type}_b_vld"
             agg_columns = get_table_columns(conn_or_cursor, x_tablename)
             create_table_from_columns(
                 conn_or_cursor,
@@ -165,7 +165,7 @@ def etl_brixk_agg_tables_to_brixk_vld_tables(conn_or_cursor: sqlite3_Connection)
             select_sqlstr = select_sqlstr.replace("spark_num", "agg.spark_num")
             select_sqlstr = select_sqlstr.replace("spark_face", "agg.spark_face")
             select_sqlstr = select_sqlstr.replace(x_tablename, f"{x_tablename} agg")
-            join_clause_str = """JOIN sparks_brixk_vld valid_sparks ON valid_sparks.spark_num = agg.spark_num"""
+            join_clause_str = """JOIN sparks_b_vld valid_sparks ON valid_sparks.spark_num = agg.spark_num"""
             insert_select_into_sqlstr = f"""
 {insert_clause_str}
 {select_sqlstr}{join_clause_str}
@@ -209,15 +209,17 @@ WHERE spark_num IN (
     delete_all_duplicate_rows(conn_or_cursor, brick_sparks_tablename)
 
 
-def get_create_sparks_brixk_vld_sqlstr() -> str:
-    return "CREATE TABLE IF NOT EXISTS sparks_brixk_vld (spark_num INTEGER, spark_face TEXT)"
+def get_create_sparks_b_vld_sqlstr() -> str:
+    return (
+        "CREATE TABLE IF NOT EXISTS sparks_b_vld (spark_num INTEGER, spark_face TEXT)"
+    )
 
 
-def etl_sparks_b_agg_table_to_sparks_brixk_vld_table(
+def etl_sparks_b_agg_table_to_sparks_b_vld_table(
     conn_or_cursor: sqlite3_Cursor,
 ):
-    conn_or_cursor.execute(get_create_sparks_brixk_vld_sqlstr())
-    valid_sparks_tablename = "sparks_brixk_vld"
+    conn_or_cursor.execute(get_create_sparks_b_vld_sqlstr())
+    valid_sparks_tablename = "sparks_b_vld"
     insert_select_sqlstr = f"""
 INSERT INTO {valid_sparks_tablename} (spark_num, spark_face)
 SELECT spark_num, spark_face 
@@ -234,7 +236,7 @@ def etl_sparks_b_agg_db_to_spark_dict(
 ) -> dict[SparkInt, FaceName]:
     select_sqlstr = """
 SELECT spark_num, spark_face 
-FROM sparks_brixk_vld
+FROM sparks_b_vld
 ;
 """
     conn_or_cursor.execute(select_sqlstr)
@@ -284,7 +286,7 @@ def etl_brixk_vld_table_into_prime_table(
 def etl_brixk_vld_tables_to_sound_raw_tables(cursor: sqlite3_Cursor):
     all_touched_sound_raw_tables = set()
     create_sound_and_heard_tables(cursor)
-    brixk_vld_tablenames = get_db_tables(cursor, "_brixk_vld", "bk")
+    brixk_vld_tablenames = get_db_tables(cursor, "_b_vld", "bk")
     for brixk_vld_tablename in brixk_vld_tablenames:
         brick_type = brixk_vld_tablename[:7]
         brickref_filename = get_brick_format_filename(brick_type)

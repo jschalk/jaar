@@ -70,8 +70,8 @@ def test_idea_sheets_to_lego_mstr_Scenario0_CreatesDatabaseFile(
         bk00171_str = "bk00171"
         bk00171_raw = f"{bk00171_str}_b_raw"
         bk00171_agg = f"{bk00171_str}_b_agg"
-        bk00171_valid = f"{bk00171_str}_brixk_vld"
-        sparks_brixk_vld_tablename = kw.sparks_brixk_vld
+        bk00171_valid = f"{bk00171_str}_b_vld"
+        sparks_b_vld_tablename = kw.sparks_b_vld
         trlname_sound_raw = create_prime_tablename("trlname", kw.s_raw)
         trlname_sound_agg = create_prime_tablename("trlname", "s_agg")
         trlname_sound_vld = create_prime_tablename("trlname", kw.s_vld)
@@ -95,7 +95,7 @@ def test_idea_sheets_to_lego_mstr_Scenario0_CreatesDatabaseFile(
         assert get_row_count(cursor, bk00171_raw) == 1
         assert get_row_count(cursor, bk00171_agg) == 1
         assert get_row_count(cursor, kw.sparks_b_agg) == 2
-        assert get_row_count(cursor, sparks_brixk_vld_tablename) == 1
+        assert get_row_count(cursor, sparks_b_vld_tablename) == 1
         assert get_row_count(cursor, bk00171_valid) == 1
         assert get_row_count(cursor, trlname_sound_raw) == 1
         assert get_row_count(cursor, momentunit_sound_raw) == 2
