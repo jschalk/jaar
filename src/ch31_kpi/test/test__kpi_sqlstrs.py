@@ -13,7 +13,7 @@ def test_get_create_kpi001_sqlstr_ReturnsObj():
 
     # THEN
     expected_kpi001_sqlstr = f"""
-CREATE TABLE {kw.moment_kpi001_contact_nets} AS
+CREATE TABLE IF NOT EXISTS {kw.moment_kpi001_contact_nets} AS
 SELECT
   {kw.moment_tranbook_nets}.{kw.moment_rope}
 , {kw.moment_tranbook_nets}.{kw.person_name}
@@ -40,7 +40,7 @@ def test_get_create_kpi002_sqlstr_ReturnsObj():
 
     # THEN
     expected_kpi002_sqlstr = f"""
-CREATE TABLE {kw.moment_kpi002_person_pledges} AS
+CREATE TABLE IF NOT EXISTS {kw.moment_kpi002_person_pledges} AS
 SELECT
   {kw.moment_rope}
 , {kw.person_name}

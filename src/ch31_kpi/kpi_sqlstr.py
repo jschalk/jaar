@@ -3,7 +3,7 @@ def get_create_kpi001_sqlstr() -> str:
     Returns the SQL string for creating the KPI001 contact nets table.
     """
     return """
-CREATE TABLE moment_kpi001_contact_nets AS
+CREATE TABLE IF NOT EXISTS moment_kpi001_contact_nets AS
 SELECT
   moment_tranbook_nets.moment_rope
 , moment_tranbook_nets.person_name
@@ -21,7 +21,7 @@ GROUP BY moment_tranbook_nets.moment_rope, moment_tranbook_nets.person_name
 
 def get_create_kpi002_sqlstr() -> str:
     return """
-CREATE TABLE moment_kpi002_person_pledges AS
+CREATE TABLE IF NOT EXISTS moment_kpi002_person_pledges AS
 SELECT
   moment_rope
 , person_name
