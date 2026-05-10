@@ -30,7 +30,8 @@ def get_reason_case_readable_str(
             if week_lower_bool and week_upper_bool:
                 return f"case: every {weekday_plan.plan_label}"
 
-    x_str = f"case: {caseunit.reason_state.replace(reason_context, "", 1)}"
+    emtpy_str = ""
+    x_str = f"case: {caseunit.reason_state.replace(reason_context, emtpy_str, 1)}"
     if caseunit.reason_divisor:
         x_str += f" divided by {caseunit.reason_divisor} then"
     if caseunit.reason_lower is not None and caseunit.reason_upper is not None:
