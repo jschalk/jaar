@@ -42,6 +42,11 @@ from pandas import (
     to_datetime as pandas_to_datetime,
     to_numeric as pandas_to_numeric,
 )
+from pandas.api.types import (
+    is_float_dtype as pandas_is_float_dtype,
+    is_integer_dtype as pandas_is_integer_dtype,
+    is_string_dtype as pandas_is_string_dtype,
+)
 from ref.sorter import get_keg_elements_sort_order
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
 
@@ -458,23 +463,27 @@ class SqliteDataTypeError(Exception):
     pass
 
 
-def is_column_type_valid(df: DataFrame, column: str, sqlite_data_type: str) -> bool:
+def is_column_type_valid(
+    df: DataFrame,
+    column: str,
+    sqlite_data_type: str,
+) -> bool:
     """expected sqlite_data_types: INT, REAL, TEXT"""
-    if sqlite_data_type == "INT":
-        expected_data_type = "int64"
-    elif sqlite_data_type == "REAL":
-        expected_data_type = "float64"
-    elif sqlite_data_type == "TEXT":
-        expected_data_type = "str"
-    else:
+    valid_sqlite_types = {"INT", "REAL", "TEXT"}
+    if sqlite_data_type not in valid_sqlite_types:
         raise SqliteDataTypeError(f"{sqlite_data_type} is not valid sqlite_type")
     if column not in df.columns:
         return False
+    series = df[column].dropna().infer_objects()
+
     # If column is completely empty (all NaN), accept it
-    if df[column].isna().all():
+    if series.empty:
         return True
-    actual_dtype = df[column].dropna().infer_objects().dtype
-    return str(actual_dtype) == expected_data_type
+    if sqlite_data_type == "INT":
+        return pandas_is_integer_dtype(series)
+    if sqlite_data_type == "REAL":
+        return pandas_is_float_dtype(series)
+    return pandas_is_string_dtype(series)
 
 
 def prettify_excel_files(x_dir: str) -> None:

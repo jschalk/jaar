@@ -3,10 +3,11 @@ from linter.chapter_move_tools import (
     string_exists_in_directory,
     string_exists_in_filepaths,
 )
-from os import chdir as os_chdir
+from os import chdir as os_chdir, getcwd as os_getcwd
 from os.path import join as os_path_join
 from pathlib import Path
 from subprocess import run as subprocess_run
+from tempfile import TemporaryDirectory as tempfile_TemporaryDirectory
 
 # replace with your actual module name
 
@@ -56,39 +57,46 @@ def test_string_exists_in_directory(tmp_path):
     assert string_exists_in_directory(empty_dir, "anything") is False
 
 
-from subprocess import run as subprocess_run
-from tempfile import TemporaryDirectory as tempfile_TemporaryDirectory
+def test_replace_in_tracked_python_files():  # sourcery skip: extract-method
+    original_cwd = os_getcwd()
 
-
-def test_replace_in_tracked_python_files():
     with tempfile_TemporaryDirectory() as tmpdir:
-        os_chdir(tmpdir)
+        try:
+            os_chdir(tmpdir)
 
-        # Initialize a temporary git repo
-        subprocess_run(["git", "init"], check=True)
-        subprocess_run(["git", "config", "user.name", "Test User"], check=True)
-        subprocess_run(["git", "config", "user.email", "test@example.com"], check=True)
+            # Initialize a temporary git repo
+            subprocess_run(["git", "init"], check=True)
+            subprocess_run(["git", "config", "user.name", "Test User"], check=True)
+            subprocess_run(
+                ["git", "config", "user.email", "test@example.com"], check=True
+            )
 
-        # Create dummy Python and JSON files
-        py_file = os_path_join(tmpdir, "test_file.py")
-        json_file = os_path_join(tmpdir, "test_file.json")
-        with open(py_file, "w") as f:
-            f.write("old_value = 123\n")
-        with open(json_file, "w") as f:
-            f.write('{"key": "old_value"}\n')
+            # Create dummy Python and JSON files
+            py_file = os_path_join(tmpdir, "test_file.py")
+            json_file = os_path_join(tmpdir, "test_file.json")
 
-        # Stage files and commit
-        subprocess_run(["git", "add", "."], check=True)
-        subprocess_run(["git", "commit", "-m", "initial commit"], check=True)
+            with open(py_file, "w") as f:
+                f.write("old_value = 123\n")
 
-        # Run find-and-replace on JSON file (adapt for Python if needed)
-        replace_in_tracked_python_files("old_value", "new_value")
+            with open(json_file, "w") as f:
+                f.write('{"key": "old_value"}\n')
 
-        # Check that replacement occurred
-        with open(json_file, "r") as f:
-            content = f.read()
-        assert "new_value" in content
-        assert "old_value" not in content
+            # Stage files and commit
+            subprocess_run(["git", "add", "."], check=True)
+            subprocess_run(["git", "commit", "-m", "initial commit"], check=True)
+
+            # Run find-and-replace
+            replace_in_tracked_python_files("old_value", "new_value")
+
+            # Check replacement
+            with open(json_file, "r") as f:
+                content = f.read()
+
+            assert "new_value" in content
+            assert "old_value" not in content
+
+        finally:
+            os_chdir(original_cwd)
 
         # Optional: you could add similar checks for Python files if you implement replace there
 
