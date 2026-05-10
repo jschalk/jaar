@@ -61,7 +61,7 @@ from tempfile import TemporaryDirectory as tempfile_TemporaryDirectory
 
 
 def test_replace_in_tracked_python_files():
-    with tempfile_TemporaryDirectory(delete=False) as tmpdir:
+    with tempfile_TemporaryDirectory() as tmpdir:
         os_chdir(tmpdir)
 
         # Initialize a temporary git repo
