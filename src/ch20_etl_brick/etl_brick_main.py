@@ -19,7 +19,11 @@ from ch17_brick.brick_config import (
     get_brickref_from_file,
 )
 from ch17_brick.brick_dataframe import get_brickref_obj
-from ch17_brick.brick_db_tool import create_brick_sorted_table, get_default_sorted_list
+from ch17_brick.brick_db_tool import (
+    create_brick_sorted_table,
+    get_default_sorted_list,
+    normalize_excel_file_for_loading,
+)
 from ch18_etl_config.brick_collector import BrickFileRef, get_all_brickfilerefs
 from ch18_etl_config.etl_sqlstr import (
     create_prime_tablename,
@@ -36,6 +40,7 @@ def etl_brick_dfs_to_brixk_raw_tables(cursor: sqlite3_Cursor, bricks_src_dir: st
     brickfilerefs = get_all_brickfilerefs(bricks_src_dir)
     for ref in brickfilerefs:
         x_file_path = create_path(ref.file_dir, ref.filename)
+        normalize_excel_file_for_loading(x_file_path)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
         brick_sorting_columns = get_default_sorted_list(set(df.columns))
         df = df.reindex(columns=brick_sorting_columns)

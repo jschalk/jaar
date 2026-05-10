@@ -627,8 +627,27 @@ class ETLApp(tk_Tk):
         left = tk_Frame(body, bg=ax.bg, width=640)
         left.grid(row=0, column=0, sticky="nsew")
 
+        # ── reset button above the fields card ──
+        reset_bar = tk_Frame(left, bg=ax.bg)
+        reset_bar.pack(fill="x", padx=28, pady=(16, 0))
+        tk_Button(
+            reset_bar,
+            text="↺  Reset to defaults",
+            font=ax.mono,
+            bg=ax.border,
+            fg=ax.fg,
+            activebackground=ax.accent,
+            activeforeground=ax.fg_black,
+            relief="flat",
+            bd=0,
+            padx=10,
+            pady=4,
+            cursor="hand2",
+            command=self._set_defaults,
+        ).pack(side="right")
+
         card = tk_Frame(left, bg=ax.bg_card, bd=0, padx=24, pady=20)
-        card.pack(fill="x", padx=28, pady=(16, 0))
+        card.pack(fill="x", padx=28, pady=(6, 0))
         self._create_dir_rows(card)
 
         btn_frame = tk_Frame(left, bg=ax.bg, pady=22)

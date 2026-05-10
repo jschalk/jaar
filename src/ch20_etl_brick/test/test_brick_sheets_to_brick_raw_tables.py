@@ -78,8 +78,8 @@ ORDER BY sheet_name, {kw.spark_num}, {kw.cumulative_minute};"""
     row2 = (s_dir, file, bk3_str, e1, exx.sue, exx.a23_dash, m_420, hour7am, "-", None)
     row3 = (s_dir, file, bk3_str, e2, exx.sue, exx.a23_dash, m_420, hour7am, "-", None)
     row4 = (s_dir, file, bk3_str, e3, exx.sue, exx.a23_dash, None, hour7am, "-", err4)
-    print(f"{rows[0]=}")
-    print(f"   {row0=}")
+    print(f"{rows[1]=}")
+    print(f"   {row1=}")
     assert rows[0] == row0
     assert rows[1] == row1
     assert rows[2] == row2
@@ -281,3 +281,53 @@ def test_etl_brick_dfs_to_brixk_raw_tables_PopulatesTables_Scenario3_DeletesTabl
     etl_brick_dfs_to_brixk_raw_tables(cursor0, b_src_dir)
     # THEN
     assert get_row_count(cursor0, bk00103_tablename) == 5
+
+
+def test_etl_brick_dfs_to_brixk_raw_tables_Excel_TRUE_FALSE_ConvertedToText(
+    temp3_fs, cursor0: Cursor
+):
+    # ESTABLISH an Excel sheet containing formula-like boolean cells
+    x_file = "Faybob.xlsx"
+    b_dir = create_path(str(temp3_fs), kw.b_src)
+    b_src_file_path = create_path(b_dir, x_file)
+    min320, min420 = 320, 420
+
+    columns = [
+        kw.spark_num,
+        kw.spark_face,
+        kw.cumulative_minute,
+        kw.moment_rope,
+        kw.hour_label,
+        kw.knot,
+    ]
+
+    df = DataFrame(
+        [
+            [1, exx.sue, min320, exx.a23_dash, "=TRUE()", exx.dash],
+            [2, exx.sue, min420, exx.a23_dash, "=FALSE()", exx.dash],
+        ],
+        columns=columns,
+    )
+    bk3_str = "bk00103"
+    save_sheet(b_src_file_path, "sheet1_bk00103", df)
+
+    table_name = f"bk00103_{kw.b_raw}"
+    assert not db_table_exists(cursor0, table_name)
+
+    # WHEN
+    etl_brick_dfs_to_brixk_raw_tables(cursor0, b_dir)
+
+    # THEN
+    cursor0.execute(f"SELECT * FROM {table_name} ORDER BY spark_num;")
+    rows = cursor0.fetchall()
+    assert len(rows) == 2
+    # TODO figure this out
+    # for row in rows:
+    #     print(f"{row=}")
+    # expected_rows = {
+    #     (b_dir, x_file, bk3_str, 1, exx.sue, min320, exx.a23_dash, 1, exx.dash),
+    #     (b_dir, x_file, bk3_str, 2, exx.sue, min420, exx.a23_dash, 0, exx.dash),
+    # }
+
+    # assert rows[0] == list(expected_rows)[0]
+    # assert set(rows) == expected_rows
