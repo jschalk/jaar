@@ -122,7 +122,7 @@ def open_directory(path: str) -> None:
     system = platform_system()
 
     if system == "Windows":
-        subprocess_Popen(["explorer", path])
+        subprocess_Popen(["explorer", path.replace("/", "\\")])
 
     elif system == "Darwin":
         subprocess_Popen(["open", path])
