@@ -1,3 +1,10 @@
+# [0.85.0](https://github.com/jschalk/keg/compare/v0.84.1...v0.85.0) (2026-05-10)
+
+
+### Features
+
+* [#1175](https://github.com/jschalk/keg/issues/1175) fix python version references ([8ac57b8](https://github.com/jschalk/keg/commit/8ac57b879591572573509452f13ce00b2afae74f))
+
 # [0.84.0](https://github.com/jschalk/keg/compare/v0.83.29...v0.84.0) (2026-05-10)
 
 
