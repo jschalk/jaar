@@ -29,7 +29,7 @@ from ch17_brick.brick_config import (
 from contextlib import suppress as contextlib_suppress
 from io import BytesIO as io_BytesIO, StringIO as io_StringIO
 from numpy import float64
-from openpyxl import Workbook, load_workbook, load_workbook as openpyxl_load_workbook
+from openpyxl import Workbook, load_workbook as openpyxl_load_workbook
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 from os.path import dirname as os_path_dirname, exists as os_path_exists
@@ -49,6 +49,27 @@ from pandas.api.types import (
 )
 from ref.sorter import get_keg_elements_sort_order
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
+
+
+def normalize_excel_file_for_loading(excel_path: str) -> None:
+    wb = openpyxl_load_workbook(excel_path, data_only=False)
+
+    for ws in wb.worksheets:
+        for row in ws.iter_rows():
+            for cell in row:
+                v = cell.value
+
+                if isinstance(v, str):
+                    v_clean = v.strip().upper()
+                    if v_clean == "=TRUE()":
+                        cell.value = "TRUE"
+                    elif v_clean == "=FALSE()":
+                        cell.value = "FALSE"
+
+                elif isinstance(v, bool):
+                    cell.value = "TRUE" if v else "FALSE"
+
+    wb.save(excel_path)
 
 
 def save_dataframe_to_csv(x_df: DataFrame, x_dir: str, x_filename: str):
@@ -520,7 +541,7 @@ def prettify_excel_file(file_path: str, output_path: str = None) -> str:
     with open(file_path, "rb") as f:
         file_bytes = io_BytesIO(f.read())
 
-        wb = load_workbook(file_bytes)  # ← load from bytes, not the path
+        wb = openpyxl_load_workbook(file_bytes)  # ← load from bytes, not the path
 
         # --- Style constants ---
         HEADER_BG = "2F5496"  # Dark blue
@@ -555,7 +576,7 @@ def prettify_excel_file(file_path: str, output_path: str = None) -> str:
             none_strs = {"", "na", "n/a", "nan", "none"}
             return isinstance(value, str) and value.strip().lower() in none_strs
 
-        wb = load_workbook(file_path)
+        wb = openpyxl_load_workbook(file_path)
 
         for ws in wb.worksheets:
             if ws.max_row == 0 or ws.max_column == 0:
