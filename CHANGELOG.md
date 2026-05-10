@@ -1,3 +1,10 @@
+# [0.84.0](https://github.com/jschalk/keg/compare/v0.83.29...v0.84.0) (2026-05-10)
+
+
+### Features
+
+* upgraded readme, upgraded app interface and features including idea/brick tables ([3bdbe89](https://github.com/jschalk/keg/commit/3bdbe89d16c84e08f4f6853424bdb8ab516b3937))
+
 ## [0.83.29](https://github.com/jschalk/keg/compare/v0.83.28...v0.83.29) (2026-05-10)
 
 
