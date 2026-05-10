@@ -7,8 +7,10 @@ def test_is_column_type_valid_ReturnsObj():
     # ESTABLISH
     sue_bob_df = DataFrame({"Per": ["Sue", "Bob"]})
     per_dtype = sue_bob_df["Per"].dropna().infer_objects().dtype
-    print(f"{per_dtype=} {"object"==per_dtype=}")
-    print(f"{str(per_dtype)=} {"str"==str(per_dtype)=}")
+    is_object_dtype = per_dtype == "object"
+    is_str_dtype = str(per_dtype) == "str"
+    print(f"{per_dtype=} {is_object_dtype=}")
+    print(f"{str(per_dtype)=} {is_str_dtype=}")
 
     # WHEN / THEN
     assert is_column_type_valid(DataFrame({"ID": [1, 2, 3]}), "ID", "INT")

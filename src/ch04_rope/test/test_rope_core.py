@@ -264,7 +264,7 @@ def test_rope_get_tail_label_ReturnsLabelTermWhenNonDefaultknot():
     # ESTABLISH
     bloomers_str = "bloomers"
     tulips_str = "tulips"
-    slash_casa_rope = f"{exx.slash}{"YY"}{exx.slash}{exx.casa}{exx.slash}"
+    slash_casa_rope = f"{exx.slash}YY{exx.slash}{exx.casa}{exx.slash}"
     slash_bloomers_rope = f"{slash_casa_rope}{bloomers_str}{exx.slash}"
     slash_tulips_rope = f"{slash_bloomers_rope}{tulips_str}{exx.slash}"
 
@@ -292,7 +292,7 @@ def test_rope_get_first_label_from_rope_ReturnsLabelTerm():
 def test_rope_get_parent_rope_ReturnsObj_Scenario0():
     # ESTABLISH
     x_s = default_knot_if_None()
-    expected_root_rope = f"{x_s}{"YY"}{x_s}"
+    expected_root_rope = f"{x_s}YY{x_s}"
     casa_rope = f"{expected_root_rope}{exx.casa}{x_s}"
     bloomers_str = "bloomers"
     bloomers_rope = f"{casa_rope}{bloomers_str}{x_s}"
@@ -309,7 +309,7 @@ def test_rope_get_parent_rope_ReturnsObj_Scenario0():
 def test_rope_get_parent_rope_ReturnsObj_Scenario1():
     # ESTABLISH
     x_s = "/"
-    expected_root_rope = f"{x_s}{"YY"}{x_s}"
+    expected_root_rope = f"{x_s}YY{x_s}"
     casa_rope = f"{expected_root_rope}{exx.casa}{x_s}"
     bloomers_str = "bloomers"
     bloomers_rope = f"{casa_rope}{bloomers_str}{x_s}"
