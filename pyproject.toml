@@ -18,8 +18,8 @@ description = "A Python package for communicating across cultures."
 license = {text = "MIT"}
 name = "keg2"
 readme = "README.md"
-requires-python = ">=3.11"
-version = "0.83.11"
+requires-python = ">=3.10"
+version = "0.85.1"
 
 [project.optional-dependencies]
 test = [

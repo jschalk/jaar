@@ -5,7 +5,7 @@ Usage:
     python w1_app.py
 
 Requires:
-    Python 3.8+ (tkinter is included in the standard library)
+    Python 3.10+ (tkinter is included in the standard library)
 
 To integrate your CLI logic, replace the `create_today_punchs()` call inside
 `_run()` with your actual ETL function / subprocess call.
