@@ -1,3 +1,10 @@
+## [0.83.29](https://github.com/jschalk/keg/compare/v0.83.28...v0.83.29) (2026-05-10)
+
+
+### Bug Fixes
+
+* [#1207](https://github.com/jschalk/keg/issues/1207) release with updates ([4c27ff1](https://github.com/jschalk/keg/commit/4c27ff1f4552f7bb42d44a5f17fef4d7ba7727c7))
+
 ## [0.83.28](https://github.com/jschalk/keg/compare/v0.83.27...v0.83.28) (2026-05-09)
 
 
