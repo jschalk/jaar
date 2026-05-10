@@ -10,13 +10,13 @@ Repository: https://github.com/jschalk/keg
 
 ## Requirements
 
-- **Python 3.14** — [download here](https://www.python.org/downloads/)
+- **Python 3.12+** — [download here](https://www.python.org/downloads/)
 
 ---
 
 ## Installation
 
-1. Install Python 3.14 from the link above
+1. Install Python 3.12 or newer from the link above
 2. Open Command Prompt and run:
 
 ```
