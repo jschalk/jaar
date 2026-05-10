@@ -1187,7 +1187,6 @@ class ETLApp(tk_Tk):
             open_directory(output)
 
     def create_me_you_today_punchs_and_display(self, me_person: str, you_person: str):
-        print(f"{self._world_name.get()=}")
         persons_punchs = create_today_punchs(
             person_names={me_person, you_person},
             world_name=self._world_name.get(),
