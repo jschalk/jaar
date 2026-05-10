@@ -14,7 +14,7 @@ def test_etl_brixk_raw_tables_to_brixk_agg_tables_PopulatesAggTable_Scenario0_Gr
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
-    raw_bk00103_tablename = f"bk00103_{kw.brixk_raw}"
+    raw_bk00103_tablename = f"bk00103_{kw.b_raw}"
     raw_bk00103_columns = [
         kw.spark_num,
         kw.spark_face,
@@ -43,7 +43,7 @@ VALUES
 """
     insert_sqlstr = f"{insert_into_clause} {values_clause}"
     cursor0.execute(insert_sqlstr)
-    agg_bk00103_tablename = f"bk00103_{kw.brixk_agg}"
+    agg_bk00103_tablename = f"bk00103_{kw.b_agg}"
     assert get_row_count(cursor0, raw_bk00103_tablename) == 3
     assert not db_table_exists(cursor0, agg_bk00103_tablename)
 
@@ -91,7 +91,7 @@ def test_etl_brixk_raw_tables_to_brixk_agg_tables_PopulatesAggTable_Scenario1_Gr
     hour7am = "7am"
     hour8am = "8am"
 
-    raw_bk00103_tablename = f"bk00103_{kw.brixk_raw}"
+    raw_bk00103_tablename = f"bk00103_{kw.b_raw}"
     raw_bk00103_columns = [
         kw.spark_num,
         kw.spark_face,
@@ -120,7 +120,7 @@ VALUES
 """
     insert_sqlstr = f"{insert_into_clause} {values_clause}"
     cursor0.execute(insert_sqlstr)
-    agg_bk00103_tablename = f"bk00103_{kw.brixk_agg}"
+    agg_bk00103_tablename = f"bk00103_{kw.b_agg}"
     assert get_row_count(cursor0, raw_bk00103_tablename) == 3
     assert not db_table_exists(cursor0, agg_bk00103_tablename)
 
@@ -162,7 +162,7 @@ def test_etl_brixk_raw_tables_to_brixk_agg_tables_PopulatesAggTable_Scenario2_Gr
     hour6am = "6am"
     hour7am = "7am"
     hour8am = "8am"
-    raw_bk00103_tablename = f"bk00103_{kw.brixk_raw}"
+    raw_bk00103_tablename = f"bk00103_{kw.b_raw}"
     raw_bk00103_columns = [
         kw.spark_num,
         kw.spark_face,
@@ -192,7 +192,7 @@ VALUES
 """
     insert_sqlstr = f"{insert_into_clause} {values_clause}"
     cursor0.execute(insert_sqlstr)
-    agg_bk00103_tablename = f"bk00103_{kw.brixk_agg}"
+    agg_bk00103_tablename = f"bk00103_{kw.b_agg}"
     assert get_row_count(cursor0, raw_bk00103_tablename) == 4
     assert not db_table_exists(cursor0, agg_bk00103_tablename)
 
@@ -221,7 +221,7 @@ def test_etl_brixk_raw_tables_to_brixk_agg_tables_PopulatesAggTable_Scenario3_Ta
 ):
     # ESTABLISH
     spark1 = 1
-    raw_bk00105_tablename = f"bk00105_{kw.brixk_raw}"
+    raw_bk00105_tablename = f"bk00105_{kw.b_raw}"
     raw_bk00105_columns = [
         kw.spark_num,
         kw.spark_face,
@@ -251,7 +251,7 @@ VALUES
 """
     insert_sqlstr = f"{insert_into_clause} {values_clause}"
     cursor0.execute(insert_sqlstr)
-    agg_bk00105_tablename = f"bk00105_{kw.brixk_agg}"
+    agg_bk00105_tablename = f"bk00105_{kw.b_agg}"
     assert get_row_count(cursor0, raw_bk00105_tablename) == 4
     assert not db_table_exists(cursor0, agg_bk00105_tablename)
     etl_brixk_raw_tables_to_brixk_agg_tables(cursor0)

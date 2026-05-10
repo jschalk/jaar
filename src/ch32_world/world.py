@@ -6,10 +6,10 @@ from ch19_idea_src.idea2brick import ideas_sheets_to_brick_sheets
 from ch20_etl_brick.etl_brick_main import (
     etl_brick_dfs_to_brixk_raw_tables,
     etl_brixk_agg_tables_to_brixk_vld_tables,
-    etl_brixk_agg_tables_to_sparks_brixk_agg_table,
+    etl_brixk_agg_tables_to_sparks_b_agg_table,
     etl_brixk_raw_tables_to_brixk_agg_tables,
     etl_brixk_vld_tables_to_sound_raw_tables,
-    etl_sparks_brixk_agg_table_to_sparks_brixk_vld_table,
+    etl_sparks_b_agg_table_to_sparks_b_vld_table,
 )
 from ch21_sound.sound import (
     etl_sound_agg_tables_to_sound_vld_tables,
@@ -36,7 +36,7 @@ from ch27_lego.lego_core import (
     etl_moment_json_contact_nets_to_moment_tranbook_nets_table,
     etl_moment_ote1_agg_csvs_to_jsons,
     etl_spark_inherited_personunits_to_mind_gut,
-    get_max_brixk_agg_spark_num,
+    get_max_b_agg_spark_num,
 )
 from ch30_idea_dst.lego_db2df import create_lego0001_file, prettify_excel_file
 from ch31_kpi.gcalendar import (
@@ -72,8 +72,8 @@ def brick_sheets_to_lego_with_cursor(
     etl_brick_dfs_to_brixk_raw_tables(cursor, bricks_src_dir)
     # brick raw to sound raw, check by spark_nums
     etl_brixk_raw_tables_to_brixk_agg_tables(cursor)
-    etl_brixk_agg_tables_to_sparks_brixk_agg_table(cursor)
-    etl_sparks_brixk_agg_table_to_sparks_brixk_vld_table(cursor)
+    etl_brixk_agg_tables_to_sparks_b_agg_table(cursor)
+    etl_sparks_b_agg_table_to_sparks_b_vld_table(cursor)
     etl_brixk_agg_tables_to_brixk_vld_tables(cursor)
     etl_brixk_vld_tables_to_sound_raw_tables(cursor)
     # sound raw to heard raw, filter through translates
@@ -176,25 +176,29 @@ def brick_sheets_to_lego_mstr(worlddir: WorldDir, export_db: bool = False):
             cursor, worlddir.bricks_src_dir, worlddir.moment_mstr_dir
         )
         if export_db and worlddir.output_dir:
-            set_dir(worlddir.output_dir)
-            excel_path = create_path(worlddir.output_dir, "db_export.xlsx")
-            export_db_to_excel(cursor, excel_path, True)
-            reorder_etl_db_sheets(excel_path)
-            prettify_excel_file(excel_path)
-
+            save_and_reformat_db_export(worlddir, cursor)
         db_conn.commit()
     db_conn.close()
 
 
+def save_and_reformat_db_export(worlddir: WorldDir, cursor: sqlite3_Cursor):
+    set_dir(worlddir.output_dir)
+    db_file_name = f"{worlddir.world_name}_db_export.xlsx"
+    excel_path = create_path(worlddir.output_dir, db_file_name)
+    export_db_to_excel(cursor, excel_path, True)
+    reorder_etl_db_sheets(excel_path)
+    prettify_excel_file(excel_path)
+
+
 def idea_sheets_to_lego_mstr(worlddir: WorldDir, export_db: bool = False):
-    max_brixk_agg_spark_num = 0
+    max_b_agg_spark_num = 0
     if os_path_exists(worlddir.db_path):
         with sqlite3_connect(worlddir.db_path) as db_conn0:
             cursor0 = db_conn0.cursor()
-            max_brixk_agg_spark_num = get_max_brixk_agg_spark_num(cursor0)
+            max_b_agg_spark_num = get_max_b_agg_spark_num(cursor0)
         db_conn0.close()
     ideas_sheets_to_brick_sheets(
-        worlddir.ideas_src_dir, worlddir.bricks_src_dir, max_brixk_agg_spark_num
+        worlddir.ideas_src_dir, worlddir.bricks_src_dir, max_b_agg_spark_num
     )
     brick_sheets_to_lego_mstr(worlddir, export_db)
 

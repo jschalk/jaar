@@ -78,7 +78,7 @@ def get_app_default_you_personname() -> str:
 
 
 def get_app_default_world_name() -> str:
-    return "my_first_world"
+    return "hope1"
 
 
 def get_app_default_dir(is_windows: bool | None = None) -> Path:
@@ -92,7 +92,7 @@ def get_app_default_dirs(default_root: Path) -> dict[str, Path]:
     x_worlddir = worlddir_shop(world_name=x_world_name, worlds_dir=default_root)
     return {
         "world_name": x_world_name,
-        "working": x_worlddir.worlds_dir,
+        "worlds": x_worlddir.worlds_dir,
         "ideas_src": x_worlddir.ideas_src_dir,
         "bricks_src": x_worlddir.bricks_src_dir,
         "output": x_worlddir.output_dir,

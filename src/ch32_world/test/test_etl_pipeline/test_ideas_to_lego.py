@@ -3,7 +3,7 @@ from ch00_py.file_toolbox import create_path
 from ch04_rope.rope import create_rope
 from ch17_brick.brick_db_tool import create_brick_sorted_table, save_sheet
 from ch18_etl_config.etl_sqlstr import create_prime_tablename
-from ch27_lego.lego_core import get_max_brixk_agg_spark_num
+from ch27_lego.lego_core import get_max_b_agg_spark_num
 from ch32_world.world import WorldDir, idea_sheets_to_lego_mstr, worlddir_shop
 from os.path import exists as os_path_exists
 from pandas import DataFrame
@@ -68,10 +68,10 @@ def test_idea_sheets_to_lego_mstr_Scenario0_CreatesDatabaseFile(
     assert os_path_exists(fay_db_path)
     with sqlite3_connect(fay_db_path) as db_conn:
         bk00171_str = "bk00171"
-        bk00171_raw = f"{bk00171_str}_brixk_raw"
-        bk00171_agg = f"{bk00171_str}_brixk_agg"
-        bk00171_valid = f"{bk00171_str}_brixk_vld"
-        sparks_brixk_vld_tablename = kw.sparks_brixk_vld
+        bk00171_raw = f"{bk00171_str}_b_raw"
+        bk00171_agg = f"{bk00171_str}_b_agg"
+        bk00171_valid = f"{bk00171_str}_b_vld"
+        sparks_b_vld_tablename = kw.sparks_b_vld
         trlname_sound_raw = create_prime_tablename("trlname", kw.s_raw)
         trlname_sound_agg = create_prime_tablename("trlname", "s_agg")
         trlname_sound_vld = create_prime_tablename("trlname", kw.s_vld)
@@ -94,8 +94,8 @@ def test_idea_sheets_to_lego_mstr_Scenario0_CreatesDatabaseFile(
         cursor = db_conn.cursor()
         assert get_row_count(cursor, bk00171_raw) == 1
         assert get_row_count(cursor, bk00171_agg) == 1
-        assert get_row_count(cursor, kw.sparks_brixk_agg) == 2
-        assert get_row_count(cursor, sparks_brixk_vld_tablename) == 1
+        assert get_row_count(cursor, kw.sparks_b_agg) == 2
+        assert get_row_count(cursor, sparks_b_vld_tablename) == 1
         assert get_row_count(cursor, bk00171_valid) == 1
         assert get_row_count(cursor, trlname_sound_raw) == 1
         assert get_row_count(cursor, momentunit_sound_raw) == 2
@@ -122,7 +122,7 @@ def test_idea_sheets_to_lego_mstr_Scenario0_CreatesDatabaseFile(
 def create_brixk_agg_record(wdir: WorldDir, spark_num: int):
     minute_360 = 360
     hour6am = "6am"
-    agg_bk00103_tablename = f"bk00103_{kw.brixk_agg}"
+    agg_bk00103_tablename = f"bk00103_{kw.b_agg}"
     agg_bk00103_columns = [
         kw.spark_num,
         kw.spark_face,
@@ -176,7 +176,7 @@ def test_idea_sheets_to_lego_mstr_Scenario1_DatabaseFileExists(
     assert os_path_exists(fay_db_path)
     with sqlite3_connect(fay_db_path) as db_conn0:
         cursor0 = db_conn0.cursor()
-        assert get_max_brixk_agg_spark_num(cursor0) == spark5
+        assert get_max_b_agg_spark_num(cursor0) == spark5
     db_conn0.close()
     assert os_path_exists(ideas_src_dir_file_path)
     b_src_dir_file_path = create_path(fay_wdir.bricks_src_dir, ex_filename)
@@ -189,9 +189,9 @@ def test_idea_sheets_to_lego_mstr_Scenario1_DatabaseFileExists(
     assert os_path_exists(fay_db_path)
     with sqlite3_connect(fay_db_path) as db_conn1:
         cursor1 = db_conn1.cursor()
-        assert get_max_brixk_agg_spark_num(cursor1) != spark5
-        assert get_max_brixk_agg_spark_num(cursor1) == spark5 + 1
-        select_sqlstr = f"SELECT * FROM {kw.sparks_brixk_agg}"
+        assert get_max_b_agg_spark_num(cursor1) != spark5
+        assert get_max_b_agg_spark_num(cursor1) == spark5 + 1
+        select_sqlstr = f"SELECT * FROM {kw.sparks_b_agg}"
         cursor1.execute(select_sqlstr)
         rows = cursor1.fetchall()
         assert len(rows) == 2

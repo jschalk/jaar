@@ -287,22 +287,22 @@ def etl_moment_json_contact_nets_to_moment_tranbook_nets_table(
     delete_all_duplicate_rows(cursor, "moment_tranbook_nets")
 
 
-def get_max_brixk_agg_spark_num(cursor: sqlite3_Cursor) -> int:
-    agg_tables = get_db_tables(cursor, "brixk_agg")
-    brixk_aggs_max_spark_num = 0
+def get_max_b_agg_spark_num(cursor: sqlite3_Cursor) -> int:
+    agg_tables = get_db_tables(cursor, "b_agg")
+    b_aggs_max_spark_num = 0
     for agg_table in agg_tables:
-        if agg_table.startswith("bk") and agg_table.endswith("brixk_agg"):
+        if agg_table.startswith("bk") and agg_table.endswith("b_agg"):
             sqlstr = f"SELECT MAX(spark_num) FROM {agg_table}"
             table_max_spark_num = cursor.execute(sqlstr).fetchone()[0] or 1
-            if table_max_spark_num > brixk_aggs_max_spark_num:
-                brixk_aggs_max_spark_num = table_max_spark_num
-    return brixk_aggs_max_spark_num
+            if table_max_spark_num > b_aggs_max_spark_num:
+                b_aggs_max_spark_num = table_max_spark_num
+    return b_aggs_max_spark_num
 
 
 def create_last_run_metrics_json(cursor: sqlite3_Cursor, moment_mstr_dir: str):
-    max_brixk_agg_spark_num = get_max_brixk_agg_spark_num(cursor)
+    max_b_agg_spark_num = get_max_b_agg_spark_num(cursor)
     last_run_metrics_path = create_last_run_metrics_path(moment_mstr_dir)
-    last_run_metrics_dict = {"max_brixk_agg_spark_num": max_brixk_agg_spark_num}
+    last_run_metrics_dict = {"max_b_agg_spark_num": max_b_agg_spark_num}
     save_json(last_run_metrics_path, None, last_run_metrics_dict)
 
 

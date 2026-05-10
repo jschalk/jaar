@@ -16,7 +16,7 @@ def test_create_last_run_metrics_json_CreatesFile(cursor0: Cursor, temp3_fs):
     moment_mstr_dir = str(temp3_fs)
     last_run_metrics_path = create_last_run_metrics_path(moment_mstr_dir)
     create_sound_and_heard_tables(cursor0)
-    agg_bk00103_tablename = f"bk00103_{kw.brixk_agg}"
+    agg_bk00103_tablename = f"bk00103_{kw.b_agg}"
     agg_bk00103_columns = [kw.spark_num]
     create_brick_sorted_table(cursor0, agg_bk00103_tablename, agg_bk00103_columns)
     agg_bk00103_insert_sqlstr = f"""
@@ -24,7 +24,7 @@ INSERT INTO {agg_bk00103_tablename} ({kw.spark_num})
 VALUES ('{spark1}'), ('{spark1}'), ('{spark9}');"""
     cursor0.execute(agg_bk00103_insert_sqlstr)
 
-    agg_bk00144_tablename = f"bk00144_{kw.brixk_agg}"
+    agg_bk00144_tablename = f"bk00144_{kw.b_agg}"
     agg_bk00144_columns = [kw.spark_num]
     create_brick_sorted_table(cursor0, agg_bk00144_tablename, agg_bk00144_columns)
     agg_bk00144_insert_sqlstr = f"""
@@ -39,7 +39,7 @@ VALUES ('{spark3}');"""
     # THEN
     assert os_path_exists(last_run_metrics_path)
     last_run_metrics_dict = open_json(last_run_metrics_path)
-    max_brixk_agg_spark_num_str = "max_brixk_agg_spark_num"
-    assert max_brixk_agg_spark_num_str in set(last_run_metrics_dict.keys())
-    max_brixk_agg_spark_num = last_run_metrics_dict.get(max_brixk_agg_spark_num_str)
-    assert max_brixk_agg_spark_num == spark9
+    max_b_agg_spark_num_str = "max_b_agg_spark_num"
+    assert max_b_agg_spark_num_str in set(last_run_metrics_dict.keys())
+    max_b_agg_spark_num = last_run_metrics_dict.get(max_b_agg_spark_num_str)
+    assert max_b_agg_spark_num == spark9

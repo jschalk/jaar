@@ -65,10 +65,10 @@ def test_brick_sheets_to_lego_with_cursor_Scenario0_bk001071PopulatesTables(
     bk00171_df = DataFrame([bk00171row0], columns=bk00171_columns)
     bk00171_ex0_str = f"example0_{bk00171_str}"
     save_sheet(b_src_dir_file_path, bk00171_ex0_str, bk00171_df)
-    bk00171_raw = f"{bk00171_str}_brixk_raw"
-    bk00171_agg = f"{bk00171_str}_brixk_agg"
-    bk00171_valid = f"{bk00171_str}_brixk_vld"
-    sparks_brixk_vld_tablename = kw.sparks_brixk_vld
+    bk00171_raw = f"{bk00171_str}_b_raw"
+    bk00171_agg = f"{bk00171_str}_b_agg"
+    bk00171_valid = f"{bk00171_str}_b_vld"
+    sparks_b_vld_tablename = kw.sparks_b_vld
     trlname_sound_raw = prime_tbl(kw.trlname, kw.s_raw)
     trlname_sound_agg = prime_tbl(kw.trlname, "s_agg")
     trlname_sound_vld = prime_tbl(kw.trlname, kw.s_vld)
@@ -105,8 +105,8 @@ def test_brick_sheets_to_lego_with_cursor_Scenario0_bk001071PopulatesTables(
 
     assert not db_table_exists(cursor0, bk00171_raw)
     assert not db_table_exists(cursor0, bk00171_agg)
-    assert not db_table_exists(cursor0, kw.sparks_brixk_agg)
-    assert not db_table_exists(cursor0, sparks_brixk_vld_tablename)
+    assert not db_table_exists(cursor0, kw.sparks_b_agg)
+    assert not db_table_exists(cursor0, sparks_b_vld_tablename)
     assert not db_table_exists(cursor0, bk00171_valid)
     assert not db_table_exists(cursor0, trlname_sound_raw)
     assert not db_table_exists(cursor0, trlname_sound_agg)
@@ -163,8 +163,8 @@ def test_brick_sheets_to_lego_with_cursor_Scenario0_bk001071PopulatesTables(
 
     assert get_row_count(cursor0, bk00171_raw) == 1
     assert get_row_count(cursor0, bk00171_agg) == 1
-    assert get_row_count(cursor0, kw.sparks_brixk_agg) == 1
-    assert get_row_count(cursor0, sparks_brixk_vld_tablename) == 1
+    assert get_row_count(cursor0, kw.sparks_b_agg) == 1
+    assert get_row_count(cursor0, sparks_b_vld_tablename) == 1
     assert get_row_count(cursor0, bk00171_valid) == 1
     assert get_row_count(cursor0, trlname_sound_raw) == 1
     assert get_row_count(cursor0, momentunit_sound_raw) == 1
@@ -251,10 +251,10 @@ def test_brick_sheets_to_lego_with_cursor_Scenario1_PopulateBudPayRows(
     save_sheet(b_src_dir_file_path, bk00101_ex0_str, bk00101_1df)
 
     # Names of tables
-    bk00171_raw = f"{bk00171_str}_brixk_raw"
-    bk00171_agg = f"{bk00171_str}_brixk_agg"
-    bk00171_valid = f"{bk00171_str}_brixk_vld"
-    sparks_brixk_vld_tablename = kw.sparks_brixk_vld
+    bk00171_raw = f"{bk00171_str}_b_raw"
+    bk00171_agg = f"{bk00171_str}_b_agg"
+    bk00171_valid = f"{bk00171_str}_b_vld"
+    sparks_b_vld_tablename = kw.sparks_b_vld
     trlname_sound_raw = prime_tbl(kw.trlname, kw.s_raw)
     trlname_sound_agg = prime_tbl(kw.trlname, "s_agg")
     trlname_sound_vld = prime_tbl(kw.trlname, kw.s_vld)
@@ -286,8 +286,8 @@ def test_brick_sheets_to_lego_with_cursor_Scenario1_PopulateBudPayRows(
 
     assert not db_table_exists(cursor0, bk00171_raw)
     assert not db_table_exists(cursor0, bk00171_agg)
-    assert not db_table_exists(cursor0, kw.sparks_brixk_agg)
-    assert not db_table_exists(cursor0, sparks_brixk_vld_tablename)
+    assert not db_table_exists(cursor0, kw.sparks_b_agg)
+    assert not db_table_exists(cursor0, sparks_b_vld_tablename)
     assert not db_table_exists(cursor0, bk00171_valid)
     assert not db_table_exists(cursor0, trlname_sound_raw)
     assert not db_table_exists(cursor0, trlname_sound_agg)
@@ -332,9 +332,9 @@ def test_brick_sheets_to_lego_with_cursor_Scenario1_PopulateBudPayRows(
     # THEN
     assert get_row_count(cursor0, bk00171_raw) == 1
     assert get_row_count(cursor0, bk00171_agg) == 1
-    print(cursor0.execute(f"SELECT * FROM {kw.sparks_brixk_agg}").fetchall())
-    assert get_row_count(cursor0, kw.sparks_brixk_agg) == 2
-    assert get_row_count(cursor0, sparks_brixk_vld_tablename) == 1
+    print(cursor0.execute(f"SELECT * FROM {kw.sparks_b_agg}").fetchall())
+    assert get_row_count(cursor0, kw.sparks_b_agg) == 2
+    assert get_row_count(cursor0, sparks_b_vld_tablename) == 1
     assert get_row_count(cursor0, bk00171_valid) == 1
     assert get_row_count(cursor0, trlname_sound_raw) == 1
     assert get_row_count(cursor0, momentunit_sound_raw) == 2
@@ -720,10 +720,10 @@ def test_brick_sheets_to_lego_mstr_Scenario0_CreatesDatabaseFile(
     # THEN
     assert os_path_exists(fay_db_path)
     with sqlite3_connect(fay_db_path) as db_conn:
-        bk00171_raw = f"{bk00171_str}_brixk_raw"
-        bk00171_agg = f"{bk00171_str}_brixk_agg"
-        bk00171_valid = f"{bk00171_str}_brixk_vld"
-        sparks_brixk_vld_tablename = kw.sparks_brixk_vld
+        bk00171_raw = f"{bk00171_str}_b_raw"
+        bk00171_agg = f"{bk00171_str}_b_agg"
+        bk00171_valid = f"{bk00171_str}_b_vld"
+        sparks_b_vld_tablename = kw.sparks_b_vld
         trlname_sound_raw = prime_tbl("trlname", kw.s_raw)
         trlname_sound_agg = prime_tbl("trlname", "s_agg")
         trlname_sound_vld = prime_tbl("TRLNAME", kw.s_vld)
@@ -746,8 +746,8 @@ def test_brick_sheets_to_lego_mstr_Scenario0_CreatesDatabaseFile(
         cursor = db_conn.cursor()
         assert get_row_count(cursor, bk00171_raw) == 1
         assert get_row_count(cursor, bk00171_agg) == 1
-        assert get_row_count(cursor, kw.sparks_brixk_agg) == 2
-        assert get_row_count(cursor, sparks_brixk_vld_tablename) == 1
+        assert get_row_count(cursor, kw.sparks_b_agg) == 2
+        assert get_row_count(cursor, sparks_b_vld_tablename) == 1
         assert get_row_count(cursor, bk00171_valid) == 1
         assert get_row_count(cursor, trlname_sound_raw) == 1
         assert get_row_count(cursor, momentunit_sound_raw) == 2
