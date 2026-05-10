@@ -1,3 +1,244 @@
+## [0.83.29](https://github.com/jschalk/keg/compare/v0.83.28...v0.83.29) (2026-05-10)
+
+
+### Bug Fixes
+
+* [#1207](https://github.com/jschalk/keg/issues/1207) release with updates ([4c27ff1](https://github.com/jschalk/keg/commit/4c27ff1f4552f7bb42d44a5f17fef4d7ba7727c7))
+
+## [0.83.28](https://github.com/jschalk/keg/compare/v0.83.27...v0.83.28) (2026-05-09)
+
+
+### Bug Fixes
+
+* [#1207](https://github.com/jschalk/keg/issues/1207) add print button w1_app.py ([f81d1d6](https://github.com/jschalk/keg/commit/f81d1d66573997a9d5302a275cdab2ec3ad5ab27))
+* [#1208](https://github.com/jschalk/keg/issues/1208) version meta grab fix ([6c8e0be](https://github.com/jschalk/keg/commit/6c8e0be5f6392ff9198cc096e939fa652c24ef75))
+
+## [0.83.27](https://github.com/jschalk/keg/compare/v0.83.26...v0.83.27) (2026-05-08)
+
+
+### Bug Fixes
+
+* [#1204](https://github.com/jschalk/keg/issues/1204) deactivate get_keg_exam because it doesn't fit in the flow yet ([9d80e75](https://github.com/jschalk/keg/commit/9d80e75a18268a89e507a2c9089bc6dba35d0dd0))
+
+## [0.83.26](https://github.com/jschalk/keg/compare/v0.83.25...v0.83.26) (2026-05-04)
+
+
+### Bug Fixes
+
+* [#1198](https://github.com/jschalk/keg/issues/1198) enable save of output ideas ([c9516ea](https://github.com/jschalk/keg/commit/c9516ea429a348d056e4b174d0c1dba4b78f468a))
+
+## [0.83.25](https://github.com/jschalk/keg/compare/v0.83.24...v0.83.25) (2026-05-03)
+
+
+### Bug Fixes
+
+* [#1196](https://github.com/jschalk/keg/issues/1196) added ideas_dir view, enhanced automatic refresh ([02a5909](https://github.com/jschalk/keg/commit/02a59099138450973f1e621e4a8c07a63f1334ce))
+
+## [0.83.23](https://github.com/jschalk/keg/compare/v0.83.22...v0.83.23) (2026-05-02)
+
+
+### Bug Fixes
+
+* [#1192](https://github.com/jschalk/keg/issues/1192) previous commits corrected duplciate row issue ([a856a19](https://github.com/jschalk/keg/commit/a856a19f0145b37e751f328aaecf172cfb814265))
+
+## [0.83.21](https://github.com/jschalk/keg/compare/v0.83.20...v0.83.21) (2026-04-30)
+
+
+### Bug Fixes
+
+* display day punchs ([8ad992f](https://github.com/jschalk/keg/commit/8ad992faffe4cb0ed01f05701e644ade6f6ffd0a))
+
+## [0.83.19](https://github.com/jschalk/keg/compare/v0.83.18...v0.83.19) (2026-04-30)
+
+
+### Bug Fixes
+
+* replace get_version func that caused package command to crash ([e986cd2](https://github.com/jschalk/keg/commit/e986cd293695790dccad5c062f74a82b3faa4231))
+
+## [0.83.18](https://github.com/jschalk/keg/compare/v0.83.17...v0.83.18) (2026-04-21)
+
+
+### Bug Fixes
+
+* [#1173](https://github.com/jschalk/keg/issues/1173) add to day punch display ([fc95265](https://github.com/jschalk/keg/commit/fc952654f49d22729091528e0df22251d4d54e55))
+
+## [0.83.16](https://github.com/jschalk/keg/compare/v0.83.15...v0.83.16) (2026-04-19)
+
+
+### Bug Fixes
+
+* [#1124](https://github.com/jschalk/keg/issues/1124) add scaffolding for new etl_gui app example ([fa384d5](https://github.com/jschalk/keg/commit/fa384d5e073721dfc4b382796862250cd64758e5))
+* [#1124](https://github.com/jschalk/keg/issues/1124) issue where belief file was not prettified ([925b069](https://github.com/jschalk/keg/commit/925b06966216f8982665cfbf6edcdbc8a427d35c))
+* [#1124](https://github.com/jschalk/keg/issues/1124) replace all "src.ch" imports with "ch" ([213948a](https://github.com/jschalk/keg/commit/213948aeb12073855df4ee48fe7f76e0c34965ee))
+* [#1167](https://github.com/jschalk/keg/issues/1167), close [#1168](https://github.com/jschalk/keg/issues/1168), close [#1169](https://github.com/jschalk/keg/issues/1169) ([477240c](https://github.com/jschalk/keg/commit/477240c06e8889e6d160f97d29ad5f421ca4eeec))
+
+## [0.83.14](https://github.com/jschalk/keg/compare/v0.83.13...v0.83.14) (2026-04-19)
+
+
+### Bug Fixes
+
+* [#1124](https://github.com/jschalk/keg/issues/1124) changed publish.yaml to automatically set version number when releasing to pypi ([e0ef71d](https://github.com/jschalk/keg/commit/e0ef71dbfe0556fa0974bdfd7c57899c0d36e93c))
+
+## [0.83.12](https://github.com/jschalk/keg/compare/v0.83.11...v0.83.12) (2026-04-19)
+
+
+### Bug Fixes
+
+* correct pyproject toml version ([64928be](https://github.com/jschalk/keg/commit/64928beca76c8f086a6f92d52cba26c890a143ec))
+
+## [0.83.11](https://github.com/jschalk/keg/compare/v0.83.10...v0.83.11) (2026-04-19)
+
+
+### Bug Fixes
+
+* toml version was incorrect [#1124](https://github.com/jschalk/keg/issues/1124) ([e699379](https://github.com/jschalk/keg/commit/e69937994ec3f37fec008bd31020ac5c2bbdb44d))
+
+## [0.83.9](https://github.com/jschalk/keg/compare/v0.83.8...v0.83.9) (2026-04-18)
+
+
+### Bug Fixes
+
+* [#1158](https://github.com/jschalk/keg/issues/1158), fix: [#1159](https://github.com/jschalk/keg/issues/1159) ([9793ca9](https://github.com/jschalk/keg/commit/9793ca97e7969c213299f63c2ba2f2c53092bf20))
+
+## [0.83.8](https://github.com/jschalk/keg/compare/v0.83.7...v0.83.8) (2026-04-18)
+
+
+### Bug Fixes
+
+* [#1128](https://github.com/jschalk/keg/issues/1128) found bug with save_to_split_csvs, change plan_rope to moment_rope. brittle solution ([0439363](https://github.com/jschalk/keg/commit/0439363d501487fb77b842ffba4b911430fc7bec))
+
+## [0.83.7](https://github.com/jschalk/keg/compare/v0.83.6...v0.83.7) (2026-04-13)
+
+
+### Bug Fixes
+
+* [#1128](https://github.com/jschalk/keg/issues/1128) potential hanging issue ([dedd174](https://github.com/jschalk/keg/commit/dedd1744e9faa87ba6b656bae07dda8cb9f14f6e))
+
+## [0.83.6](https://github.com/jschalk/keg/compare/v0.83.5...v0.83.6) (2026-04-13)
+
+
+### Bug Fixes
+
+* [#1149](https://github.com/jschalk/keg/issues/1149). close [#1150](https://github.com/jschalk/keg/issues/1150), ([bef3cde](https://github.com/jschalk/keg/commit/bef3cde0ed89193a1ea38a3273e8718cfdcb5fa6))
+
+## [0.83.5](https://github.com/jschalk/keg/compare/v0.83.4...v0.83.5) (2026-04-13)
+
+
+### Bug Fixes
+
+* [#1146](https://github.com/jschalk/keg/issues/1146), [#1147](https://github.com/jschalk/keg/issues/1147), small refactor etl_gui app ([15e958c](https://github.com/jschalk/keg/commit/15e958ce20543263d890c343e92269e9746f592a))
+
+## [0.83.4](https://github.com/jschalk/keg/compare/v0.83.3...v0.83.4) (2026-04-10)
+
+
+### Bug Fixes
+
+* 1141 keyword tier added ([8296a1d](https://github.com/jschalk/keg/commit/8296a1d6197700cbae8fc562d102e6e78a56363f))
+
+## [0.83.3](https://github.com/jschalk/keg/compare/v0.83.2...v0.83.3) (2026-04-06)
+
+
+### Bug Fixes
+
+* [#1133](https://github.com/jschalk/keg/issues/1133), fix [#1134](https://github.com/jschalk/keg/issues/1134) ([ff4d614](https://github.com/jschalk/keg/commit/ff4d614cd749b66ed370c01fb81a21711caeba97))
+
+## [0.83.2](https://github.com/jschalk/keg/compare/v0.83.1...v0.83.2) (2026-04-06)
+
+
+### Bug Fixes
+
+* [#1131](https://github.com/jschalk/keg/issues/1131) etl_gui_main was accidently  deleted by key commands that keep going off by accident ([40cea58](https://github.com/jschalk/keg/commit/40cea581b6a494a2444b5c9e3c8965d20e9b11ea))
+
+## [0.83.1](https://github.com/jschalk/keg/compare/v0.83.0...v0.83.1) (2026-04-05)
+
+
+### Bug Fixes
+
+* [#1127](https://github.com/jschalk/keg/issues/1127) replace "face_name" with "spark_face" ([63a0de3](https://github.com/jschalk/keg/commit/63a0de3d0c4edfda6621b782edcfe27fe56bb2a8))
+
+# [0.83.0](https://github.com/jschalk/keg/compare/v0.82.1...v0.83.0) (2026-04-04)
+
+
+### Features
+
+* changing deployable version ([1415955](https://github.com/jschalk/keg/commit/1415955a2957561485eafbb7d57adaccd9ad0300))
+* first pypi upload ([9fa7387](https://github.com/jschalk/keg/commit/9fa7387a87f8913806b3bb09cfa8c800adf83917))
+
+## [0.82.1](https://github.com/jschalk/keg/compare/v0.82.0...v0.82.1) (2026-04-01)
+
+
+### Bug Fixes
+
+* closes [#1122](https://github.com/jschalk/keg/issues/1122), closes [#1123](https://github.com/jschalk/keg/issues/1123) ([557b420](https://github.com/jschalk/keg/commit/557b42033fdb3f6e02d64cad90ce82f2ea3da809))
+
+# [0.82.0](https://github.com/jschalk/keg/compare/v0.81.110...v0.82.0) (2026-04-01)
+
+
+### Bug Fixes
+
+* cleanup missing chxx keywords ([94bcf3b](https://github.com/jschalk/keg/commit/94bcf3b9772d974075ffbdc4fad0bfb37ac7658a))
+
+
+### Features
+
+* [#1118](https://github.com/jschalk/keg/issues/1118) create etl gui app ([ba3878b](https://github.com/jschalk/keg/commit/ba3878b4f565fafade02023789e8640438790f93))
+
+## [0.81.110](https://github.com/jschalk/keg/compare/v0.81.109...v0.81.110) (2026-03-31)
+
+
+### Bug Fixes
+
+* [#1114](https://github.com/jschalk/keg/issues/1114) replace "partner" with "contact" ([609200a](https://github.com/jschalk/keg/commit/609200ab348f61b1dfd954ea1065787da6e89afa))
+
+## [0.81.109](https://github.com/jschalk/keg/compare/v0.81.108...v0.81.109) (2026-03-31)
+
+
+### Bug Fixes
+
+* [#1113](https://github.com/jschalk/keg/issues/1113) replace "Labor" with "Workforce", "party" with "labor" ([b1cc75d](https://github.com/jschalk/keg/commit/b1cc75d956b0e1e49879230401fff8f4f6d19113))
+
+## [0.81.108](https://github.com/jschalk/keg/compare/v0.81.107...v0.81.108) (2026-03-31)
+
+
+### Bug Fixes
+
+* change keywords_description.json to keg_terminology.json ([d206d59](https://github.com/jschalk/keg/commit/d206d59b5f1cee86e5ac0d9172fa1144018befa1))
+
+## [0.81.107](https://github.com/jschalk/keg/compare/v0.81.106...v0.81.107) (2026-03-25)
+
+
+### Bug Fixes
+
+* [#1106](https://github.com/jschalk/keg/issues/1106), closes [#1111](https://github.com/jschalk/keg/issues/1111) ([07e7f9a](https://github.com/jschalk/keg/commit/07e7f9a7f3bacc352a96c0fd0689b9b265f3c6ca))
+
+## [0.81.106](https://github.com/jschalk/keg/compare/v0.81.105...v0.81.106) (2026-03-24)
+
+
+### Bug Fixes
+
+* [#1097](https://github.com/jschalk/keg/issues/1097), get_gcal note from job json works [#1069](https://github.com/jschalk/keg/issues/1069) ([5992a8b](https://github.com/jschalk/keg/commit/5992a8b25c964f77e74cc2c9546eacf435c6181e))
+
+## [0.81.105](https://github.com/jschalk/keg/compare/v0.81.104...v0.81.105) (2026-03-17)
+
+
+### Bug Fixes
+
+* [#1069](https://github.com/jschalk/keg/issues/1069) create_gcalendar_events_list displays start time, end time for agenda items with non-dayly recurance, like weekly ([88746a0](https://github.com/jschalk/keg/commit/88746a030902e7d84b1a886520fbcdf63114fe03))
+
+## [0.81.104](https://github.com/jschalk/keg/compare/v0.81.103...v0.81.104) (2026-03-15)
+
+
+### Bug Fixes
+
+* [#1079](https://github.com/jschalk/keg/issues/1079) mmt timenums update query changed to incorporate previous spark_nums ([51f4bf6](https://github.com/jschalk/keg/commit/51f4bf61d8c432b5ee60d3b62e94e52c939d50db))
+
+## [0.81.103](https://github.com/jschalk/keg/compare/v0.81.102...v0.81.103) (2026-03-15)
+
+
+### Bug Fixes
+
+* [#1085](https://github.com/jschalk/keg/issues/1085) change WorldUnit to WorldDir, change world_logic to world_apex ([227c5ba](https://github.com/jschalk/keg/commit/227c5baf981c781091b6ab4f081e68a49dd3f8a9))
+
 ## [0.81.102](https://github.com/jschalk/keg/compare/v0.81.101...v0.81.102) (2026-03-15)
 
 
