@@ -176,14 +176,18 @@ def brick_sheets_to_lego_mstr(worlddir: WorldDir, export_db: bool = False):
             cursor, worlddir.bricks_src_dir, worlddir.moment_mstr_dir
         )
         if export_db and worlddir.output_dir:
-            set_dir(worlddir.output_dir)
-            excel_path = create_path(worlddir.output_dir, "db_export.xlsx")
-            export_db_to_excel(cursor, excel_path, True)
-            reorder_etl_db_sheets(excel_path)
-            prettify_excel_file(excel_path)
-
+            save_and_reformat_db_export(worlddir, cursor)
         db_conn.commit()
     db_conn.close()
+
+
+def save_and_reformat_db_export(worlddir: WorldDir, cursor: sqlite3_Cursor):
+    set_dir(worlddir.output_dir)
+    db_file_name = f"{worlddir.world_name}_db_export.xlsx"
+    excel_path = create_path(worlddir.output_dir, db_file_name)
+    export_db_to_excel(cursor, excel_path, True)
+    reorder_etl_db_sheets(excel_path)
+    prettify_excel_file(excel_path)
 
 
 def idea_sheets_to_lego_mstr(worlddir: WorldDir, export_db: bool = False):

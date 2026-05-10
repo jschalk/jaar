@@ -114,7 +114,7 @@ def test_get_app_default_you_personname_ReturnsObj():
 
 def test_get_app_default_world_name_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_app_default_world_name() == "my_first_world"
+    assert get_app_default_world_name() == "hope1"
 
 
 # # this test is failing when github actions run it. Probably same issue: monkeypath is failing for platform
@@ -161,7 +161,7 @@ def test_get_app_default_dir_ReturnsObj_Scenari0_app_default_dir():
     example_worlddir = worlddir_shop(example_world_name, worlds_dir=default_dir)
     assert x_default_dirs == {
         kw.world_name: example_worlddir.world_name,
-        "working": example_worlddir.worlds_dir,
+        "worlds": example_worlddir.worlds_dir,
         "ideas_src": example_worlddir.ideas_src_dir,
         "bricks_src": example_worlddir.bricks_src_dir,
         "output": example_worlddir.output_dir,

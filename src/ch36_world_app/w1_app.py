@@ -162,7 +162,7 @@ class ETLApp(tk_Tk):
         self._world_name = tk_StringVar()
         self._me_personname = tk_StringVar()
         self._you_personname = tk_StringVar()
-        self._working = tk_StringVar()
+        self._worlds_dir = tk_StringVar()
         self._i_src_dir = tk_StringVar()
         self._b_src_dir = tk_StringVar()
         self._output = tk_StringVar()
@@ -188,7 +188,8 @@ class ETLApp(tk_Tk):
             "you": self._you_personname.get().strip(),
             "ideas_dir": self._i_src_dir.get().strip(),
             "bricks_dir": self._b_src_dir.get().strip(),
-            "working_dir": self._working.get().strip(),
+            "world_name": self._world_name.get().strip(),
+            "worlds_dir": self._worlds_dir.get().strip(),
             "agendas_dir": self._output.get().strip(),
             "person": self._person_var.get().strip(),
             "moment": self._moment_var.get().strip(),
@@ -211,7 +212,8 @@ class ETLApp(tk_Tk):
             "you": self._you_personname,
             "ideas_dir": self._i_src_dir,
             "bricks_dir": self._b_src_dir,
-            "working_dir": self._working,
+            "world_name": self._world_name,
+            "worlds_dir": self._worlds_dir,
             "agendas_dir": self._output,
         }
         for key, var in field_map.items():
@@ -236,18 +238,20 @@ class ETLApp(tk_Tk):
         self.destroy()
 
     def _set_defaults(self):
+        defaults = get_app_default_dirs(get_app_default_dir())
+        defaults["me_personname"] = get_app_default_me_personname()
+        defaults["you_personname"] = get_app_default_you_personname()
+
+        # Keys match what get_app_default_dirs returns; vars map to our StringVars.
         vars_map = {
             "world_name": self._world_name,
-            "working": self._working,
+            "worlds": self._worlds_dir,  # external key is still "worlds"
             "ideas_src": self._i_src_dir,
             "bricks_src": self._b_src_dir,
             "output": self._output,
             "me_personname": self._me_personname,
             "you_personname": self._you_personname,
         }
-        defaults = get_app_default_dirs(get_app_default_dir())
-        defaults["me_personname"] = get_app_default_me_personname()
-        defaults["you_personname"] = get_app_default_you_personname()
 
         for key, var in vars_map.items():
             if defaults.get(key) is None:
@@ -295,12 +299,19 @@ class ETLApp(tk_Tk):
             },
             "4": {
                 "row_type": "dir",
-                "title": "WORKING DIR",
-                "var": self._working,
+                "title": "WORLDS DIR",
+                "var": self._worlds_dir,
                 "required": True,
                 "tip": "Root directory for the ETL process",
             },
             "5": {
+                "row_type": "world_name",
+                "title": "WORLD NAME",
+                "var": self._world_name,
+                "required": False,
+                "tip": "Name of the current world",
+            },
+            "6": {
                 "row_type": "dir",
                 "title": "AGENDAS DIR",
                 "var": self._output,
@@ -321,6 +332,8 @@ class ETLApp(tk_Tk):
                 self._text_row(card, row_int, title, var, required=req, tip=tip)
             elif row_dict.get("row_type") == "dir":
                 self._dir_row(card, row_int, title, var, required=req, tip=tip)
+            elif row_dict.get("row_type") == "world_name":
+                self._world_name_row(card, row_int, title, var, required=req, tip=tip)
 
     def _dir_row(self, parent, row, label, var, *, required, tip):
         """Render one label + entry + browse button row."""
@@ -418,8 +431,8 @@ class ETLApp(tk_Tk):
 
     def _rebuild_dirs(self, path):
         delete_dir(path)
-        if len(self._working.get()) > 0:
-            set_dir(self._working.get())
+        if len(self._worlds_dir.get()) > 0:
+            set_dir(self._worlds_dir.get())
         if self._i_src_dir:
             set_dir(self._i_src_dir.get())
         if self._b_src_dir:
@@ -463,6 +476,99 @@ class ETLApp(tk_Tk):
 
         if not required:
             self._placeholder(entry, var, tip)
+
+    def _world_name_row(self, parent, row, label, var, *, required, tip):
+        """Render the world_name row: text entry + open + delete buttons targeting worlds_dir/world_name."""
+        ax = get_app_glb_attrs()
+        lbl_text = f"{'*' if required else ' '} {label}"
+
+        tk_Label(
+            parent,
+            text=lbl_text,
+            font=ax.mono,
+            bg=ax.bg_card,
+            fg=ax.accent,
+            width=14,
+            anchor="w",
+        ).grid(row=row, column=0, padx=(0, 10), pady=7, sticky="w")
+
+        entry = tk_Entry(
+            parent,
+            textvariable=var,
+            font=ax.mono,
+            bg=ax.entry_bg,
+            fg=ax.fg,
+            insertbackground=ax.accent,
+            relief="flat",
+            bd=0,
+            width=32,
+            highlightthickness=1,
+            highlightbackground=ax.border,
+            highlightcolor=ax.accent,
+        )
+        entry.grid(row=row, column=1, pady=7, ipady=5, sticky="ew")
+
+        def _world_path() -> str:
+            from os.path import join as os_path_join
+
+            return os_path_join(
+                self._worlds_dir.get().strip(),
+                var.get().strip(),
+            )
+
+        def _open_world():
+            path = _world_path()
+            if os_path_isdir(path):
+                open_directory(path.replace("/", "\\"))
+            else:
+                tkinter_messagebox.showwarning(
+                    "Invalid directory", f"Not a valid directory:\n{path}"
+                )
+
+        def _delete_world():
+            path = _world_path()
+            if not os_path_isdir(path):
+                tkinter_messagebox.showwarning(
+                    "Invalid directory", f"Not a valid directory:\n{path}"
+                )
+                return
+            explain_str = f"Delete all contents in:\n{path}\n\nThis cannot be undone."
+            if tkinter_messagebox.askyesno("Confirm delete", explain_str):
+                self._rebuild_dirs(path)
+
+        tk_Button(
+            parent,
+            text="📂",
+            font=ax.mono,
+            bg=ax.border,
+            fg=ax.fg,
+            activebackground=ax.accent,
+            activeforeground=ax.fg_black,
+            relief="flat",
+            bd=0,
+            padx=10,
+            pady=4,
+            cursor="hand2",
+            command=_open_world,
+        ).grid(row=row, column=2, padx=(8, 0), pady=7)
+
+        tk_Button(
+            parent,
+            text="🗑",
+            font=ax.mono,
+            bg=ax.border,
+            fg=ax.fg,
+            activebackground=ax.bg_red,
+            activeforeground=ax.fg_black,
+            relief="flat",
+            bd=0,
+            padx=10,
+            pady=4,
+            cursor="hand2",
+            command=_delete_world,
+        ).grid(row=row, column=3, padx=(4, 0), pady=7)
+
+        parent.columnconfigure(1, weight=1)
 
     def _build_ui(self):
         ax = get_app_glb_attrs()
@@ -1043,7 +1149,7 @@ class ETLApp(tk_Tk):
         ax = get_app_glb_attrs()
         me_person = self._me_personname.get().strip()
         you_person = self._you_personname.get().strip()
-        working = self._working.get().strip()
+        worlds = self._worlds_dir.get().strip()
         i_src_dir_ = self._i_src_dir.get().strip()
         b_src_dir_ = self._b_src_dir.get().strip()
         output = self._output.get().strip()
@@ -1055,10 +1161,10 @@ class ETLApp(tk_Tk):
         # person = person if person and not person.startswith("Filter ") else None
 
         # Validate required field
-        if not working or not os_path_isdir(working):
+        if not worlds or not os_path_isdir(worlds):
             tkinter_messagebox.showerror(
-                "Missing working directory",
-                "Please select a valid working directory before running.",
+                "Missing worlds directory",
+                "Please select a valid worlds directory before running.",
             )
             return
 
@@ -1081,15 +1187,16 @@ class ETLApp(tk_Tk):
             open_directory(output)
 
     def create_me_you_today_punchs_and_display(self, me_person: str, you_person: str):
+        print(f"{self._world_name.get()=}")
         persons_punchs = create_today_punchs(
             person_names={me_person, you_person},
             world_name=self._world_name.get(),
-            worlds_dir=self._working.get(),
+            worlds_dir=self._worlds_dir.get(),
             output_dir=self._output.get(),
             bricks_src_dir=self._b_src_dir.get(),
             ideas_src_dir=self._i_src_dir.get(),
         )
-        world_dir = create_path(self._working.get(), self._world_name.get())
+        world_dir = create_path(self._worlds_dir.get(), self._world_name.get())
         create_lego0002_file(world_dir, self._output.get(), person_name=me_person)
         create_lego0002_file(world_dir, self._output.get(), person_name=you_person)
         self._status.set("✔  Pipeline completed successfully.")
