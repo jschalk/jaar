@@ -300,14 +300,9 @@ def test_etl_brick_dfs_to_brixk_raw_tables_Excel_TRUE_FALSE_ConvertedToText(
         kw.hour_label,
         kw.knot,
     ]
-
-    df = DataFrame(
-        [
-            [1, exx.sue, min320, exx.a23_dash, "=TRUE()", exx.dash],
-            [2, exx.sue, min420, exx.a23_dash, "=FALSE()", exx.dash],
-        ],
-        columns=columns,
-    )
+    bk_row0 = [7, exx.sue, min320, exx.a23_dash, "=TRUE()", exx.dash]
+    bk_row1 = [9, exx.sue, min420, exx.a23_dash, "=FALSE()", exx.dash]
+    df = DataFrame([bk_row0, bk_row1], columns=columns)
     bk3_str = "bk00103"
     save_sheet(b_src_file_path, "sheet1_bk00103", df)
 
@@ -321,13 +316,13 @@ def test_etl_brick_dfs_to_brixk_raw_tables_Excel_TRUE_FALSE_ConvertedToText(
     cursor0.execute(f"SELECT * FROM {table_name} ORDER BY spark_num;")
     rows = cursor0.fetchall()
     assert len(rows) == 2
-    # TODO figure this out
-    # for row in rows:
-    #     print(f"{row=}")
+    for row in rows:
+        print(f"{row=}")
     # expected_rows = {
-    #     (b_dir, x_file, bk3_str, 1, exx.sue, min320, exx.a23_dash, 1, exx.dash),
-    #     (b_dir, x_file, bk3_str, 2, exx.sue, min420, exx.a23_dash, 0, exx.dash),
+    #     (b_dir, x_file, bk3_str, 7, exx.sue, min320, exx.a23_dash, 1, exx.dash),
+    #     (b_dir, x_file, bk3_str, 9, exx.sue, min420, exx.a23_dash, 0, exx.dash),
     # }
 
-    # assert rows[0] == list(expected_rows)[0]
+    assert '1' in rows[0]
+    assert '0' in rows[1]
     # assert set(rows) == expected_rows

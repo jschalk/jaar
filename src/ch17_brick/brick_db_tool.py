@@ -21,6 +21,7 @@ from ch16_translate.translate_config import (
     get_translateable_args,
 )
 from ch16_translate.translate_main import TranslateUnit, get_translateunit_from_dict
+from ch17_brick._ref.ch17_path import get_excel_reader_config_path
 from ch17_brick._ref.ch17_semantic_types import FaceName, SparkInt
 from ch17_brick.brick_config import (
     get_brick_sqlite_types,
@@ -28,11 +29,17 @@ from ch17_brick.brick_config import (
 )
 from contextlib import suppress as contextlib_suppress
 from io import BytesIO as io_BytesIO, StringIO as io_StringIO
+from json import load as json_load
+from math import isnan as math_isnan
 from numpy import float64
-from openpyxl import Workbook, load_workbook as openpyxl_load_workbook
+from openpyxl import Workbook, load_workbook, load_workbook as openpyxl_load_workbook
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
-from os.path import dirname as os_path_dirname, exists as os_path_exists
+from os.path import (
+    dirname as os_path_dirname,
+    exists as os_path_exists,
+    join as os_path_join,
+)
 from pandas import (
     DataFrame,
     ExcelWriter,
@@ -51,25 +58,111 @@ from ref.sorter import get_keg_elements_sort_order
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
 
 
-def normalize_excel_file_for_loading(excel_path: str) -> None:
-    wb = openpyxl_load_workbook(excel_path, data_only=False)
+def get_excel_reader_src_config() -> str:
+    return open_json(get_excel_reader_config_path())
 
-    for ws in wb.worksheets:
-        for row in ws.iter_rows():
-            for cell in row:
-                v = cell.value
 
-                if isinstance(v, str):
-                    v_clean = v.strip().upper()
-                    if v_clean == "=TRUE()":
-                        cell.value = "TRUE"
-                    elif v_clean == "=FALSE()":
-                        cell.value = "FALSE"
+EXCEL_READER_CONFIG = {
+    "canonical_cell_types": {
+        "TEXT": "str",
+        "INT": "int",
+        "REAL": "float",
+        "EMPTY": None,
+    },
+    "normalization_rules": [
+        {"rule_name": "nan_to_none", "match_type": "is_nan", "replacement_value": None},
+        {
+            "rule_name": "empty_string_to_none",
+            "match_type": "exact_string",
+            "match_value": "",
+            "replacement_value": None,
+        },
+        {
+            "rule_name": "whitespace_string_to_none",
+            "match_type": "whitespace_string",
+            "replacement_value": None,
+        },
+        {
+            "rule_name": "excel_true_formula_to_text",
+            "match_type": "exact_string",
+            "match_value": "=TRUE()",
+            "replacement_value": 1,
+        },
+        {
+            "rule_name": "excel_false_formula_to_text",
+            "match_type": "exact_string",
+            "match_value": "=FALSE()",
+            "replacement_value": 0,
+        },
+        # {
+        #     "rule_name": "python_true_to_text",
+        #     "match_type": "python_bool",
+        #     "match_value": True,
+        #     "replacement_value": "TRUE",
+        # },
+        # {
+        #     "rule_name": "python_false_to_text",
+        #     "match_type": "python_bool",
+        #     "match_value": False,
+        #     "replacement_value": "FALSE",
+        # },
+    ],
+    "error_handling": {
+        "on_conversion_error": "collect",
+        "error_column_name": "error_message",
+    },
+}
 
-                elif isinstance(v, bool):
-                    cell.value = "TRUE" if v else "FALSE"
 
-    wb.save(excel_path)
+def create_brick_df_from_file(
+    excel_file_path: str,
+    sheet_name: str,
+) -> DataFrame:
+    """
+    Reads a single normalized Excel sheet into a DataFrame.
+    """
+
+    normalization_rules = EXCEL_READER_CONFIG["normalization_rules"]
+    wb = load_workbook(excel_file_path, data_only=False)
+    if sheet_name not in wb.sheetnames:
+        raise ValueError(f"Sheet does not exist: {sheet_name}")
+    ws = wb[sheet_name]
+    rows = list(ws.iter_rows(values_only=True))
+    if not rows:
+        return DataFrame()
+    columns = list(rows[0])
+    data_rows = rows[1:]
+
+    normalized_rows = []
+    for row in data_rows:
+        normalized_row = []
+        normalized_row.extend(_normalize_excel_value(value) for value in row)
+        normalized_rows.append(normalized_row)
+
+    return DataFrame(normalized_rows, columns=columns)
+
+
+def _normalize_excel_value(value):
+    for rule in EXCEL_READER_CONFIG["normalization_rules"]:
+        match_type = rule["match_type"]
+
+        if match_type == "is_nan":
+            if pandas_isna(value):
+                return rule["replacement_value"]
+
+        elif match_type == "exact_string":
+            if isinstance(value, str) and value == rule["match_value"]:
+                return rule["replacement_value"]
+
+        elif match_type == "whitespace_string":
+            if isinstance(value, str) and value.strip() == "":
+                return rule["replacement_value"]
+
+        elif match_type == "python_bool":
+            if isinstance(value, bool) and value == rule["match_value"]:
+                return rule["replacement_value"]
+
+    return value
 
 
 def save_dataframe_to_csv(x_df: DataFrame, x_dir: str, x_filename: str):

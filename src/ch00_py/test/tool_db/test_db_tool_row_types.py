@@ -66,3 +66,12 @@ def test_get_nonconvertible_columns_Scenario6_NonDeclaredTypesIgnored():
 
     # WHEN / THEN
     assert get_nonconvertible_columns(row, col_types) == {}
+
+
+def test_get_nonconvertible_columns_Scenario7_BooleanPassed():
+    # ESTABLISH
+    row = {"current": True}
+    col_types = {"current": "INTEGER"}
+
+    # WHEN / THEN
+    assert get_nonconvertible_columns(row, col_types) == {}
