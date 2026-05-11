@@ -1,3 +1,10 @@
+## [0.85.3](https://github.com/jschalk/keg/compare/v0.85.2...v0.85.3) (2026-05-11)
+
+
+### Bug Fixes
+
+* closes [#1222](https://github.com/jschalk/keg/issues/1222) change brick reader to normalize against corrupted cell data. ([fe2bdf6](https://github.com/jschalk/keg/commit/fe2bdf60c5fbcc3721cb9a17b1bcb7e23e9acca9))
+
 # [0.85.0](https://github.com/jschalk/keg/compare/v0.84.1...v0.85.0) (2026-05-10)
 
 
