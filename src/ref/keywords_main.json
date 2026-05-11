@@ -238,6 +238,7 @@
   "fund_rank": {"exam_tier": 3, "sort_ordinal": 196, "valid_ch": "17:"}, 
   "fund_ratio": {"exam_tier": 3, "sort_ordinal": 174, "valid_ch": "6:"}, 
   "fund_take": {"exam_tier": 3, "sort_ordinal": 171, "valid_ch": "2:"}, 
+  "fusion": {"exam_tier": 3, "valid_ch": "19:"}, 
   "gcal": {"exam_tier": 3, "valid_ch": "31:"}, 
   "gift": {"exam_tier": 3, "valid_ch": "33:"}, 
   "give_force": {"exam_tier": 3, "sort_ordinal": 124, "valid_ch": "2:"}, 

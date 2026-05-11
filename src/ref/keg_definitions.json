@@ -223,6 +223,7 @@
   "fund_take": ", Contact thinkout, Award thinkout, Member thinkout data", 
   "FundGrain": "float first used in ch02. Smallest Unit of fund_num", 
   "FundNum": "float first used in ch02. FundNum inherits from float class", 
+  "fusion": "Any complicated step changing idea_type to brick_type. Each fusion_step makes a single type of change. Can be simple (set value to X) or complicated (add missing rows with relative values).", 
   "gcal": "Definition needed.", 
   "Gift": "Definition needed.", 
   "gift": "Definition needed.", 
