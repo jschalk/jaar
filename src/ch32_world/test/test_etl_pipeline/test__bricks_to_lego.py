@@ -806,7 +806,6 @@ def test_brick_sheets_to_lego_mstr_Scenario1_Creates_job_Files(temp3_fs):
 
     # WHEN
     brick_sheets_to_lego_mstr(here_wdir)
-
     # THEN
     # world_test_ex_dir = "src\ch32_world\test\test_world_examples"
     # export_db_to_excel(here_wdir.get_world_db_path(), here_wdir.worlds_dir, "export.xlsx")

@@ -1,0 +1,42 @@
+{
+  "canonical_cell_types": {"BOOL": "bool", "EMPTY": null, "INT": "int", "REAL": "float", "TEXT": "str"}, 
+  "error_handling": {"error_column_name": "error_message", "on_conversion_error": "collect"}, 
+  "normalization_rules": [
+    {"match_type": "is_nan", "replacement_value": null, "rule_name": "nan_to_none"}, 
+    {
+      "match_type": "exact_string", 
+      "match_value": "", 
+      "replacement_value": null, 
+      "rule_name": "empty_string_to_none"
+    }, 
+    {
+      "match_type": "whitespace_string", 
+      "replacement_value": null, 
+      "rule_name": "whitespace_string_to_none"
+    }, 
+    {
+      "match_type": "exact_string", 
+      "match_value": "=TRUE()", 
+      "replacement_value": 1, 
+      "rule_name": "excel_true_formula_to_bool"
+    }, 
+    {
+      "match_type": "exact_string", 
+      "match_value": "=FALSE()", 
+      "replacement_value": 0, 
+      "rule_name": "excel_false_formula_to_bool"
+    }, 
+    {
+      "match_type": "python_bool", 
+      "match_value": true, 
+      "replacement_value": true, 
+      "rule_name": "python_true_identity"
+    }, 
+    {
+      "match_type": "python_bool", 
+      "match_value": false, 
+      "replacement_value": false, 
+      "rule_name": "python_false_identity"
+    }
+  ]
+}

@@ -71,9 +71,13 @@ def get_nonconvertible_columns(
         expected_type = col_types.get(col)
         if expected_type == "INTEGER":
             try:
-                int_val = int(value)
-                if isinstance(value, float) and not value.is_integer():
-                    raise ValueError("float with decimal")
+                if isinstance(value, bool):
+                    int_val = 1 if value else 0
+                else:
+                    int_val = int(value)
+                    if isinstance(value, float) and not value.is_integer():
+                        raise ValueError("float with decimal")
+
             except (ValueError, TypeError):
                 nonconvertible[col] = value
 
