@@ -8,6 +8,10 @@ from dataclasses import dataclass
 from openpyxl import load_workbook
 from os import listdir as os_listdir
 from os.path import join as os_path_join
+
+# TODO replace all pandas_read_excel with get_brick_df_from_file
+# create tests where it's used in ideas_sheets_to_brick_sheets to confirm it's used.
+# Others can be just replaced.
 from pandas import (
     DataFrame,
     read_excel as pandas_read_excel,
