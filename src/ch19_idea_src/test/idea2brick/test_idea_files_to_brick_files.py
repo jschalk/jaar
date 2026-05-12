@@ -5,6 +5,7 @@ from ch19_idea_src.idea2brick import (
     add_spark_num_column,
     create_spark_face_spark_nums,
     get_excel_sheet_refs,
+    get_idea_config_dict,
     get_max_spark_num_from_files,
     get_sheets_with_brick_types,
     get_sheets_with_idea_types,
@@ -216,6 +217,171 @@ def test_add_spark_num_column_SetsAttr_Scenario0_MutatesOriginalDataframe():
     assert kw.spark_num in df.columns
 
 
+def test_SheetRef_Exists():
+    # ESTABLISH
+    x_src_filename = "file_x.xlsx"
+    bk_sheet_name = "bk00005"
+    # WHEN
+    sheet_ref = SheetRef(x_src_filename, bk_sheet_name)
+    # THEN
+    assert sheet_ref.src_filename == x_src_filename
+    assert sheet_ref.src_sheet_name == bk_sheet_name
+    assert sheet_ref.src_ii_bk_type is None
+    assert sheet_ref.idea_type_exists is None
+    assert sheet_ref.src_idea_type is None
+    assert sheet_ref.dst_brick_type is None
+    assert sheet_ref.dst_sheet_name is None
+    assert set(sheet_ref.__dict__.keys()) == {
+        "src_filename",
+        "src_sheet_name",
+        "idea_type_exists",
+        "src_ii_bk_type",
+        "src_idea_type",
+        "dst_brick_type",
+        "dst_sheet_name",
+    }
+
+
+def test_set_src_ii_bk_type_SetsAttr_Scenario0_ReturnsIiMatchWhenIiExists():
+    # ESTABLISH
+    sheet_ref = SheetRef("test.xlsx", src_sheet_name="abc_ii123_test")
+    assert not sheet_ref.src_ii_bk_type
+    # WHEN
+    sheet_ref.set_src_ii_bk_type()
+    # THEN
+    assert sheet_ref.src_ii_bk_type == "ii123"
+
+
+def test_set_src_ii_bk_type_SetsAttr_Scenario1_ReturnsBkMatchWhenBkExistsAndNoIiExists():
+    # ESTABLISH
+    sheet_ref = SheetRef("test.xlsx", src_sheet_name="abc_bk456_test")
+    assert not sheet_ref.src_ii_bk_type
+    # WHEN
+    sheet_ref.set_src_ii_bk_type()
+    # THEN
+    assert sheet_ref.src_ii_bk_type == "bk456"
+
+
+def test_set_src_ii_bk_type_SetsAttr_Scenario2_ReturnsIiMatchWhenBothIiAndBkExist():
+    # ESTABLISH
+    sheet_ref = SheetRef("test.xlsx", src_sheet_name="bk456_middle_ii123_end")
+    assert not sheet_ref.src_ii_bk_type
+    # WHEN
+    sheet_ref.set_src_ii_bk_type()
+    # THEN
+    assert sheet_ref.src_ii_bk_type == "ii123"
+
+
+def test_set_src_ii_bk_type_SetsAttr_Scenario3_ReturnsNoneWhenNoMatchExists():
+    # ESTABLISH
+    sheet_ref = SheetRef("test.xlsx", src_sheet_name="abc_xyz_test")
+    assert not sheet_ref.src_ii_bk_type
+    # WHEN
+    sheet_ref.set_src_ii_bk_type()
+    # THEN
+    assert sheet_ref.src_ii_bk_type is None
+
+
+def test_set_idea_type_exists_SetsAttr_Scenario0_SetTrueWhenExists():
+    # ESTABLISH
+    sheet_ref = SheetRef("test.xlsx", "ii00122_end")
+    sheet_ref.set_src_ii_bk_type()
+    idea_config = get_idea_config_dict()
+    assert sheet_ref.idea_type_exists is None
+    assert not sheet_ref.src_idea_type
+    # WHEN
+    sheet_ref.set_idea_type_exists(idea_config)
+    # THEN
+    assert sheet_ref.idea_type_exists is True
+    assert sheet_ref.src_idea_type == "ii00122"
+
+
+def test_set_idea_type_exists_SetsAttr_Scenario2_SetFalse():
+    # ESTABLISH
+    sheet_ref = SheetRef("test.xlsx", "ii123_end")
+    sheet_ref.set_src_ii_bk_type()
+    idea_config = get_idea_config_dict()
+    assert sheet_ref.idea_type_exists is None
+    assert not sheet_ref.src_idea_type
+    # WHEN
+    sheet_ref.set_idea_type_exists(idea_config)
+    # THEN
+    assert sheet_ref.idea_type_exists is False
+    assert not sheet_ref.src_idea_type
+
+
+def test_set_idea_type_exists_SetsAttr_Scenario3_bk00120SetTrue():
+    # ESTABLISH
+    sheet_ref = SheetRef("test.xlsx", "bk00123ii_x")
+    sheet_ref.set_src_ii_bk_type()
+    idea_config = get_idea_config_dict()
+    assert sheet_ref.idea_type_exists is None
+    assert not sheet_ref.src_idea_type
+    # WHEN
+    sheet_ref.set_idea_type_exists(idea_config)
+    # THEN
+    assert sheet_ref.idea_type_exists is True
+    assert sheet_ref.src_idea_type == "ii00123"
+
+
+def test_set_idea_type_exists_SetsAttr_Scenario2_SetFalse():
+    # ESTABLISH
+    sheet_ref = SheetRef("test.xlsx", "ii123_end")
+    sheet_ref.set_src_ii_bk_type()
+    idea_config = get_idea_config_dict()
+    assert sheet_ref.idea_type_exists is None
+    assert not sheet_ref.src_idea_type
+    # WHEN
+    sheet_ref.set_idea_type_exists(idea_config)
+    # THEN
+    assert sheet_ref.idea_type_exists is False
+    assert not sheet_ref.src_idea_type
+
+
+def test_set_idea_type_exists_SetsAttr_Scenario3_bk00120SetTrue():
+    # ESTABLISH
+    sheet_ref = SheetRef("test.xlsx", "bk00123ii_x")
+    sheet_ref.set_src_ii_bk_type()
+    idea_config = get_idea_config_dict()
+    assert sheet_ref.idea_type_exists is None
+    assert not sheet_ref.src_idea_type
+    # WHEN
+    sheet_ref.set_idea_type_exists(idea_config)
+    # THEN
+    assert sheet_ref.idea_type_exists is True
+    assert sheet_ref.src_idea_type == "ii00123"
+
+
+def test_set_dst_attrs_SetsAttr_Scenario0_bk00120SetTrue():
+    # ESTABLISH
+    sheet_ref = SheetRef("test.xlsx", "bk00123ii_x")
+    idea_config = get_idea_config_dict()
+    assert sheet_ref.idea_type_exists is None
+    assert not sheet_ref.src_idea_type
+    assert not sheet_ref.dst_brick_type
+    # WHEN
+    sheet_ref.set_dst_attrs(idea_config)
+    # THEN
+    assert sheet_ref.idea_type_exists is True
+    assert sheet_ref.src_idea_type == "ii00123"
+    assert sheet_ref.dst_brick_type == "bk00123"
+
+
+def test_set_dst_attrs_SetsAttr_Scenario0_Set_False():
+    # ESTABLISH
+    sheet_ref = SheetRef("test.xlsx", "bk001ii123_end23ii_x")
+    idea_config = get_idea_config_dict()
+    assert not sheet_ref.idea_type_exists
+    assert not sheet_ref.src_idea_type
+    assert not sheet_ref.dst_brick_type
+    # WHEN
+    sheet_ref.set_dst_attrs(idea_config)
+    # THEN
+    assert sheet_ref.idea_type_exists is False
+    assert not sheet_ref.src_idea_type
+    assert not sheet_ref.dst_brick_type
+
+
 @pytest_fixture
 def excel_dir(tmp_path):
     """Creates a temporary directory with sample Excel files for testing."""
@@ -238,7 +404,7 @@ def excel_dir(tmp_path):
 
 
 def test_get_excel_sheet_refs_ReturnsObj_Scenario0_AllSheetTuples(excel_dir):
-    """All (filename, sheet) pairs across every Excel file are returned."""
+    """All (src_filename, sheet) pairs across every Excel file are returned."""
     # ESTABLISH / WHEN
     result = get_excel_sheet_refs(str(excel_dir))
     # THEN
@@ -249,11 +415,13 @@ def test_get_excel_sheet_refs_ReturnsObj_Scenario0_AllSheetTuples(excel_dir):
 
 
 def test_get_excel_sheet_refs_ReturnsObj_Scenario1_SortedList(excel_dir):
-    """Returned list is sorted lexicographically by (filename, sheet_name)."""
+    """Returned list is sorted lexicographically by (src_filename, sheet_name)."""
     # ESTABLISH / WHEN
     sheet_refs = get_excel_sheet_refs(str(excel_dir))
     # THEN
-    assert sheet_refs == sorted(sheet_refs, key=lambda x: (x.filename, x.sheet_name))
+    assert sheet_refs == sorted(
+        sheet_refs, key=lambda x: (x.src_filename, x.src_sheet_name)
+    )
 
 
 def test_get_excel_sheet_refs_ReturnsObj_Scenario2_EmptyListForNoExcelFiles(
@@ -326,7 +494,7 @@ def test_get_sheets_with_idea_types_ReturnsObj_Scenario0_MatchingTuples(
     assert SheetRef("report.xlsx", "Summary") not in result
 
 
-# def test_get_validated_i_src_idea_type_sheets_ReturnsObj_Scenario0_IdeaBrSheets(
+# def test_get_validated_i_src_ii_bk_type_sheets_ReturnsObj_Scenario0_IdeaBrSheets(
 #     tmp_path: Path,
 # ):
 #     """Returns only brick_type sheet tuples from i_src_dir when there is no overlap."""
@@ -342,14 +510,14 @@ def test_get_sheets_with_idea_types_ReturnsObj_Scenario0_MatchingTuples(
 #     wb.save(idea_dir / "x300reports.xlsx")
 
 #     # WHEN
-#     result = get_validated_i_src_idea_type_sheets(idea_dir, b_src_dir)
+#     result = get_validated_i_src_ii_bk_type_sheets(idea_dir, b_src_dir)
 #     # THEN
 #     assert ("x300reports.xlsx", "ii00105_Sales") in result
 #     assert ("x300reports.xlsx", "ii00142_Costs") in result
 #     assert ("x300reports.xlsx", "Revenue") not in result
 
 
-# def test_get_validated_i_src_idea_type_sheets_Scenario1_RaisesOnOverlap(
+# def test_get_validated_i_src_ii_bk_type_sheets_Scenario1_RaisesOnOverlap(
 #     tmp_path: Path,
 # ):  # sourcery skip: extract-duplicate-method
 #     """Raises ValueError when a brick_type sheet name exists in both directories."""
@@ -360,21 +528,21 @@ def test_get_sheets_with_idea_types_ReturnsObj_Scenario0_MatchingTuples(
 #     idea_wb.active.title = "ii00105_Sales"
 #     idea_wb.create_sheet("Revenue")
 #     idea_wb.create_sheet("ii00142_Costs")
-#     x3_filename = "x300reports.xlsx"
-#     idea_wb.save(idea_dir / x3_filename)
+#     x3_src_filename = "x300reports.xlsx"
+#     idea_wb.save(idea_dir / x3_src_filename)
 
 #     b_src_dir = tmp_path / "brick_overlap"
 #     b_src_dir.mkdir()
 #     brick_wb = openpyxl_Workbook()
 #     brick_wb.active.title = "bk00105_Sales"  # overlaps with idea_dir
-#     brick_wb.save(b_src_dir / x3_filename)
+#     brick_wb.save(b_src_dir / x3_src_filename)
 
 #     # WHEN / THEN
 #     with pytest_raises(ValueError, match="bk00105_Sales"):
-#         get_validated_i_src_idea_type_sheets(idea_dir, b_src_dir)
+#         get_validated_i_src_ii_bk_type_sheets(idea_dir, b_src_dir)
 
 
-# def test_get_validated_i_src_idea_type_sheets_Scenario2_DoesNotRaiseError(
+# def test_get_validated_i_src_ii_bk_type_sheets_Scenario2_DoesNotRaiseError(
 #     tmp_path: Path,
 # ):  # sourcery skip: extract-duplicate-method
 #     """Raises ValueError when a brick_type sheet name exists in both directories."""
@@ -399,13 +567,13 @@ def test_get_sheets_with_idea_types_ReturnsObj_Scenario0_MatchingTuples(
 #     brick_wb.save(b_src_dir / x4_filename)
 
 #     # WHEN
-#     sheet_tuples = get_validated_i_src_idea_type_sheets(idea_dir, b_src_dir)
+#     sheet_tuples = get_validated_i_src_ii_bk_type_sheets(idea_dir, b_src_dir)
 #     # THEN
 #     print(f"{(x3_filename, bk42_sheetname)=}")
 #     print(f"{sheet_tuples=}")
 #     assert (x3_filename, bk42_sheetname) in sheet_tuples
 
-# def test_get_validated_i_src_idea_type_sheets_ReturnsObj_Scenario2_EmptyWhenNoIdeaBrSheets(
+# def test_get_validated_i_src_ii_bk_type_sheets_ReturnsObj_Scenario2_EmptyWhenNoIdeaBrSheets(
 #     tmp_path: Path,
 # ):
 #     """Returns an empty list when i_src_dir has no brick_type sheets."""
@@ -423,7 +591,7 @@ def test_get_sheets_with_idea_types_ReturnsObj_Scenario0_MatchingTuples(
 #     wb.active.title = "Summary"
 #     wb.save(empty_idea / "plain.xlsx")
 #     # WHEN
-#     result = get_validated_i_src_idea_type_sheets(empty_idea, b_src_dir)
+#     result = get_validated_i_src_ii_bk_type_sheets(empty_idea, b_src_dir)
 #     # THEN
 #     assert result == []
 
@@ -438,12 +606,12 @@ def test_ideas_sheets_to_brick_sheets_Scenario0_TwoTuples(tmp_path: Path):
     populated_idea_dir.mkdir()
     wb = openpyxl_Workbook()
     ws1 = wb.active
-    ws1.title = "ii00120_Sales"
+    ws1.title = "ii00119_Sales"
     ws1.append(["product", "units", "revenue"])
     ws1.append(["widget", 10, 500])
     ws1.append(["gadget", 5, 250])
 
-    ws2 = wb.create_sheet("ii00104_Costs")
+    ws2 = wb.create_sheet("ii00112_Costs")
     ws2.append(["category", "amount"])
     ws2.append(["rent", 1000])
     wb.create_sheet("Summary")  # non-BR, should be ignored
@@ -452,9 +620,15 @@ def test_ideas_sheets_to_brick_sheets_Scenario0_TwoTuples(tmp_path: Path):
     # WHEN
     result = ideas_sheets_to_brick_sheets(populated_idea_dir, empty_b_src_dir)
     # THEN
-    dst_all_sales_path = create_path(empty_b_src_dir, "AllSales.xlsx")
-    assert (dst_all_sales_path, "bk00104_Costs") in result
-    assert (dst_all_sales_path, "bk00120_Sales") in result
+    x_filename = "AllSales.xlsx"
+    print(f"{result=}")
+    expected_bk00104_sheet_ref = SheetRef(x_filename, "ii00112_Costs")
+    expected_bk00120_sheet_ref = SheetRef(x_filename, "ii00119_Sales")
+    idea_config = get_idea_config_dict()
+    expected_bk00104_sheet_ref.set_dst_attrs(idea_config)
+    expected_bk00120_sheet_ref.set_dst_attrs(idea_config)
+    assert expected_bk00104_sheet_ref == result[0]
+    assert expected_bk00120_sheet_ref == result[1]
     assert len(result) == 2
 
 
