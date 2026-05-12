@@ -134,7 +134,14 @@ def add_spark_num_column(df: DataFrame, spark_face_spark_nums: dict[str, int]):
     df.insert(0, "spark_num", spark_num_series)
 
 
-def get_excel_sheet_tuples(directory: str) -> List[Tuple[str, str]]:
+# TODO create test Exists for this class
+@dataclass
+class SheetRef:
+    filename: str
+    sheet_name: str
+
+
+def get_excel_sheet_refs(directory: str) -> List[SheetRef]:
     """
     Given a directory, returns a sorted list of (filename, sheet_name) tuples
     for all Excel files found in that directory.
@@ -145,17 +152,17 @@ def get_excel_sheet_tuples(directory: str) -> List[Tuple[str, str]]:
     Returns:
         Sorted list of (filename, sheet_name) tuples.
     """
-    result = []
+    sheet_refs = []
     excel_extensions = (".xlsx", ".xlsm", ".xltx", ".xltm")
 
     for filename in os_listdir(directory):
         if filename.lower().endswith(excel_extensions):
             filepath = os_path_join(directory, filename)
             wb = load_workbook(filepath, read_only=True)
-            result.extend((filename, sheet_name) for sheet_name in wb.sheetnames)
+            sheet_refs.extend(SheetRef(filename, s_name) for s_name in wb.sheetnames)
             wb.close()
 
-    return sorted(result)
+    return sorted(sheet_refs, key=lambda x: (x.filename, x.sheet_name))
 
 
 def get_sheets_with_brick_types(directory: str) -> List[Tuple[str, str]]:
@@ -172,34 +179,36 @@ def get_sheets_with_brick_types(directory: str) -> List[Tuple[str, str]]:
         contains at least one brick_type.
     """
     brick_types = get_brick_types()
-    all_tuples = get_excel_sheet_tuples(directory)
-    return [
-        (filename, sheet_name)
-        for filename, sheet_name in all_tuples
-        if any(brick_type in sheet_name.lower() for brick_type in brick_types)
+    all_sheet_refs = get_excel_sheet_refs(directory)
+    brick_sheet_refs = [
+        sheet_ref
+        for sheet_ref in all_sheet_refs
+        if any(brick_type in sheet_ref.sheet_name.lower() for brick_type in brick_types)
     ]
+    return sorted(brick_sheet_refs, key=lambda x: (x.filename, x.sheet_name))
 
 
-def get_sheets_with_idea_types(directory: str) -> List[Tuple[str, str]]:
+def get_sheets_with_idea_types(directory: str) -> List[SheetRef]:
     """
     Returns all (filename, sheet_name) tuples where the sheet_name contains
-    any of the provided brick_types.
+    any of the provided idea_types.
 
     Args:
         directory:  Path to the directory to search for Excel files.
-        brick_types: Set of strings to match against sheet names.
+        idea_types: Set of strings to match against sheet names.
 
     Returns:
         Sorted list of (filename, sheet_name) tuples where sheet_name
-        contains at least one brick_type.
+        contains at least one idea_type.
     """
     idea_types = get_idea_types()
-    all_tuples = get_excel_sheet_tuples(directory)
-    return [
-        (filename, sheet_name)
-        for filename, sheet_name in all_tuples
-        if any(brick_type in sheet_name.lower() for brick_type in idea_types)
+    all_sheet_refs = get_excel_sheet_refs(directory)
+    idea_sheet_refs = [
+        sheet_ref
+        for sheet_ref in all_sheet_refs
+        if any(idea_type in sheet_ref.sheet_name.lower() for idea_type in idea_types)
     ]
+    return sorted(idea_sheet_refs, key=lambda x: (x.filename, x.sheet_name))
 
 
 # def get_validated_i_src_idea_type_sheets(
@@ -251,16 +260,14 @@ def ideas_sheets_to_brick_sheets(
     )
 
     idea_config = get_idea_config_dict()
-    idea_ii_sheets = set(get_sheets_with_idea_types(i_src_dir))
+    idea_ii_sheets = get_sheets_with_idea_types(i_src_dir)
     etl_sheets = []
-    for ii_sheet_tuple in idea_ii_sheets:
-        src_file_path = ii_sheet_tuple[0]
-        idea_sheet_name = ii_sheet_tuple[1]
-        src_idea_type = re_search(r"ii\d+", idea_sheet_name).group(0)
+    for ii_sheet in idea_ii_sheets:
+        src_idea_type = re_search(r"ii\d+", ii_sheet.sheet_name).group(0)
         config_dict = idea_config.get(src_idea_type)
         dst_brick_type = config_dict.get("brick_type")
-        brick_sheet_name = idea_sheet_name.replace(src_idea_type, dst_brick_type)
-        etl_sheet_tuple = (src_file_path, idea_sheet_name, brick_sheet_name)
+        brick_sheet_name = ii_sheet.sheet_name.replace(src_idea_type, dst_brick_type)
+        etl_sheet_tuple = (ii_sheet.filename, ii_sheet.sheet_name, brick_sheet_name)
         etl_sheets.append(etl_sheet_tuple)
     # Group sheet names by their source file
     file_to_sheets: dict[str, List[str]] = {}

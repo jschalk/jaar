@@ -1,9 +1,10 @@
 from ch00_py.file_toolbox import count_dirs_files, create_path
 from ch19_idea_src.idea2brick import (
     IdeaBook,
+    SheetRef,
     add_spark_num_column,
     create_spark_face_spark_nums,
-    get_excel_sheet_tuples,
+    get_excel_sheet_refs,
     get_max_spark_num_from_files,
     get_sheets_with_brick_types,
     get_sheets_with_idea_types,
@@ -236,33 +237,33 @@ def excel_dir(tmp_path):
     return tmp_path
 
 
-def test_get_excel_sheet_tuples_ReturnsObj_Scenario0_AllSheetTuples(excel_dir):
+def test_get_excel_sheet_refs_ReturnsObj_Scenario0_AllSheetTuples(excel_dir):
     """All (filename, sheet) pairs across every Excel file are returned."""
     # ESTABLISH / WHEN
-    result = get_excel_sheet_tuples(str(excel_dir))
+    result = get_excel_sheet_refs(str(excel_dir))
     # THEN
-    assert ("data.xlsx", "Summary") in result
-    assert ("report.xlsx", "Alpha") in result
-    assert ("report.xlsx", "Beta") in result
+    assert SheetRef("data.xlsx", "Summary") in result
+    assert SheetRef("report.xlsx", "Alpha") in result
+    assert SheetRef("report.xlsx", "Beta") in result
     assert len(result) == 3
 
 
-def test_get_excel_sheet_tuples_ReturnsObj_Scenario1_SortedList(excel_dir):
+def test_get_excel_sheet_refs_ReturnsObj_Scenario1_SortedList(excel_dir):
     """Returned list is sorted lexicographically by (filename, sheet_name)."""
     # ESTABLISH / WHEN
-    result = get_excel_sheet_tuples(str(excel_dir))
+    sheet_refs = get_excel_sheet_refs(str(excel_dir))
     # THEN
-    assert result == sorted(result)
+    assert sheet_refs == sorted(sheet_refs, key=lambda x: (x.filename, x.sheet_name))
 
 
-def test_get_excel_sheet_tuples_ReturnsObj_Scenario2_EmptyListForNoExcelFiles(
+def test_get_excel_sheet_refs_ReturnsObj_Scenario2_EmptyListForNoExcelFiles(
     tmp_path: Path,
 ):
     """Returns an empty list when the directory contains no Excel files."""
     # ESTABLISH
     (tmp_path / "readme.md").write_text("nothing here")
     # WHEN
-    result = get_excel_sheet_tuples(str(tmp_path))
+    result = get_excel_sheet_refs(str(tmp_path))
     # THEN
     assert result == []
 
@@ -289,11 +290,11 @@ def test_get_sheets_with_brick_types_ReturnsObj_Scenario0_MatchingTuples(
     result = get_sheets_with_brick_types(ideas_excel_dir)
 
     # THEN
-    assert ("x300reports.xlsx", "bk00102_Sales") in result
-    assert ("x300reports.xlsx", "Costs_bk00105") in result
-    assert ("report.xlsx", "bk00142_Overview") in result
-    assert ("x300reports.xlsx", "Revenue") not in result
-    assert ("report.xlsx", "Summary") not in result
+    assert SheetRef("x300reports.xlsx", "bk00102_Sales") in result
+    assert SheetRef("x300reports.xlsx", "Costs_bk00105") in result
+    assert SheetRef("report.xlsx", "bk00142_Overview") in result
+    assert SheetRef("x300reports.xlsx", "Revenue") not in result
+    assert SheetRef("report.xlsx", "Summary") not in result
 
 
 def test_get_sheets_with_idea_types_ReturnsObj_Scenario0_MatchingTuples(
@@ -318,11 +319,11 @@ def test_get_sheets_with_idea_types_ReturnsObj_Scenario0_MatchingTuples(
     result = get_sheets_with_idea_types(ideas_excel_dir)
 
     # THEN
-    assert ("x300reports.xlsx", "ii00102_Sales") in result
-    assert ("x300reports.xlsx", "Costs_ii00105") in result
-    assert ("report.xlsx", "ii00142_Overview") in result
-    assert ("x300reports.xlsx", "Revenue") not in result
-    assert ("report.xlsx", "Summary") not in result
+    assert SheetRef("x300reports.xlsx", "ii00102_Sales") in result
+    assert SheetRef("x300reports.xlsx", "Costs_ii00105") in result
+    assert SheetRef("report.xlsx", "ii00142_Overview") in result
+    assert SheetRef("x300reports.xlsx", "Revenue") not in result
+    assert SheetRef("report.xlsx", "Summary") not in result
 
 
 # def test_get_validated_i_src_idea_type_sheets_ReturnsObj_Scenario0_IdeaBrSheets(
