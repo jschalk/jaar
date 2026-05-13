@@ -13,7 +13,7 @@ from os.path import join as os_path_join
 # create tests where it's used in ideas_sheets_to_brick_sheets to confirm it's used.
 # Others can be just replaced.
 from pandas import (
-    DataFrame,
+    DataFrame as pandas_DataFrame,
     read_excel as pandas_read_excel,
     to_numeric as pandas_to_numeric,
 )
@@ -24,10 +24,10 @@ from typing import List, Tuple
 
 @dataclass
 class IdeaBook:
-    ideas: dict[str, DataFrame] = None
+    ideas: dict[str, pandas_DataFrame] = None
 
 
-def get_spark_faces_from_df(df: DataFrame) -> set:
+def get_spark_faces_from_df(df: pandas_DataFrame) -> set:
     """
     Returns a set of distinct values from the 'spark_face' column.
     NaN values are excluded.
@@ -89,7 +89,7 @@ def get_max_spark_num_from_files(directory) -> int | None:
     return max_val
 
 
-def get_max_spark_num_from_df(df: DataFrame, max_val: int) -> int:
+def get_max_spark_num_from_df(df: pandas_DataFrame, max_val: int) -> int:
     if "spark_num" not in df.columns:
         return max_val
 
@@ -117,16 +117,16 @@ def create_spark_face_spark_nums(
     }
 
 
-def add_spark_num_column(df: DataFrame, spark_face_spark_nums: dict[str, int]):
+def set_spark_num_column(df: pandas_DataFrame, spark_face_spark_nums: dict[str, int]):
     """
     Adds 'spark_num' as the first column based on 'spark_face' values.
-    - mutates original DataFrame (does not create new df)
+    - mutates original pandas_DataFrame (does not create new df)
     """
     if "spark_num" in df.columns:
         df.drop(columns=["spark_num"], inplace=True)
 
     if "spark_face" not in df.columns:
-        # raise ValueError("Column 'spark_face' not found in DataFrame")
+        # raise ValueError("Column 'spark_face' not found in pandas_DataFrame")
         return
     spark_num_series = df["spark_face"].map(spark_face_spark_nums)
 
@@ -186,16 +186,6 @@ class SheetRef:
 
 
 def get_idea_sheet_refs(directory: str) -> List[SheetRef]:
-    """
-    Given a directory, returns a sorted list of (filename, sheet_name) tuples
-    for all Excel files found in that directory.
-
-    Args:
-        directory: Path to the directory to search for Excel files.
-
-    Returns:
-        Sorted list of (filename, sheet_name) tuples.
-    """
     idea_config = get_idea_config_dict()
     file_sheet_refs = []
     excel_extensions = (".xlsx", ".xlsm", ".xltx", ".xltm")
@@ -213,6 +203,33 @@ def get_idea_sheet_refs(directory: str) -> List[SheetRef]:
             wb.close()
 
     return sorted(file_sheet_refs, key=lambda x: (x.src_filename, x.src_sheet_name))
+
+
+def get_spark_face_spark_nums_from_dir(
+    i_src_dir: str, b_src_dir: str, db_max_spark_num: int
+) -> dict[str, int]:
+    idea_spark_faces = get_spark_faces_from_files(i_src_dir)
+    brick_max_spark_num = get_0_if_None(get_max_spark_num_from_files(b_src_dir))
+    calc_max_spark_num = max(brick_max_spark_num, get_0_if_None(db_max_spark_num))
+    return create_spark_face_spark_nums(idea_spark_faces, calc_max_spark_num)
+
+
+def validate_idea_columns(
+    df: pandas_DataFrame, config: dict, strict: bool
+) -> pandas_DataFrame | None:
+    """Validates that the pandas_DataFrame contains all columns defined in config src_columns.
+    Raises ValueError if strict, returns None if not."""
+    expected = set(config.get("src_columns", []))
+    missing = expected - set(df.columns)
+    if missing:
+        if strict:
+            raise ValueError(
+                f"validate_idea_columns found missing source columns: {missing}. "
+                f"Expected: {expected}. "
+                f"Present: {set(df.columns)}."
+            )
+        return None
+    return df
 
 
 def ideas_sheets_to_brick_sheets(
@@ -234,26 +251,22 @@ def ideas_sheets_to_brick_sheets(
         ValueError: (propagated from get_idea_bk_sheets_validated) if any BR
                     sheet name exists in both directories before the copy.
     """
-    idea_spark_faces = get_spark_faces_from_files(i_src_dir)
-    brick_max_spark_num = get_0_if_None(get_max_spark_num_from_files(b_src_dir))
-    general_max_spark_num = max(brick_max_spark_num, get_0_if_None(db_max_spark_num))
-    spark_face_spark_nums = create_spark_face_spark_nums(
-        idea_spark_faces, general_max_spark_num
+
+    spark_face_spark_nums = get_spark_face_spark_nums_from_dir(
+        i_src_dir, b_src_dir, db_max_spark_num
     )
-
-    idea_config = get_idea_config_dict()
-    etl_sheets = []
-    for src_sheet_ref in get_idea_sheet_refs(i_src_dir):
-        src_sheet_ref.set_dst_attrs(idea_config)
-        etl_sheets.append(src_sheet_ref)
-
-    for etl_sheet in etl_sheets:
-        src_path = os_path_join(i_src_dir, etl_sheet.src_filename)
-        dst_path = os_path_join(b_src_dir, etl_sheet.src_filename)
-        idea_df = pandas_read_excel(src_path, etl_sheet.src_sheet_name)
-        add_spark_num_column(idea_df, spark_face_spark_nums)
-        save_sheet(dst_path, etl_sheet.dst_sheet_name, idea_df, False)
+    idea_sheet_refs = get_idea_sheet_refs(i_src_dir)
+    for idea_sheet_ref in idea_sheet_refs:
+        src_path = os_path_join(i_src_dir, idea_sheet_ref.src_filename)
+        dst_path = os_path_join(b_src_dir, idea_sheet_ref.src_filename)
+        idea_df = pandas_read_excel(src_path, idea_sheet_ref.src_sheet_name)
+        set_spark_num_column(idea_df, spark_face_spark_nums)
+        # if fission:
+        # add fission_steps
+        # TODO check all columns exist
+        # run all fision_steps
+        save_sheet(dst_path, idea_sheet_ref.dst_sheet_name, idea_df, False)
 
     delete_dir(i_src_dir)
     set_dir(i_src_dir)
-    return sorted(etl_sheets, key=lambda x: (x.src_filename, x.src_sheet_name))
+    return idea_sheet_refs

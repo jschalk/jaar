@@ -310,8 +310,6 @@ class PandasToolsExcelWriterError(Exception):
 def save_sheet(
     file_path: str, sheet_name: str, dataframe: DataFrame, replace: bool = False
 ):
-    # sourcery skip: remove-redundant-exception, simplify-single-exception-tuple
-    set_dir(os_path_dirname(file_path))
     """
     Updates or creates an Excel sheet with a specified DataFrame.
 
@@ -320,6 +318,9 @@ def save_sheet(
     - sheet_name (str): The name of the sheet to update or create.
     - dataframe (DataFrame): The DataFrame to write to the sheet.
     """
+    # sourcery skip: remove-redundant-exception, simplify-single-exception-tuple
+
+    set_dir(os_path_dirname(file_path))
 
     # Check if the file exists
     if not os_path_exists(file_path):
