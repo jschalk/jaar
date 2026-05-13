@@ -9,12 +9,25 @@ from ch99_linter.style import (
     check_all_test_functions_are_formatted,
     check_path_funcs_has_docstring_tests_exist,
     check_path_funcs_return_str_exists,
+    find_chapter_dir,
     find_incorrect_imports,
     get_docstring,
+    get_file_ast_tree,
     get_python_files_with_flag,
     no_banned_imports_exist,
+    validate_semantic_types_import,
 )
 from os.path import exists as os_path_exists
+
+
+def test_find_chapter_dir_ReturnsPath_Scenario0_FindsMatchingParent():
+    # ESTABLISH
+    file_path = "/projects/book/ch03_algorithms/examples/test_file.py"
+    # WHEN / THEN
+    assert find_chapter_dir(file_path) == "ch03_algorithms"
+    # WHEN / THEN
+    file_path = "/projects/book/examples/test_file.py"
+    assert not find_chapter_dir(file_path)
 
 
 def test_Chapters_AllImportsAreFromLibrariesInLessThanEqual_aXX():
@@ -50,32 +63,14 @@ def validate_py_file_imports(
     chapter_desc_str_number: str,
     chapter_file_count: int,
 ):
-    # TODO change find_incorrect_imports so it takes ast_tree as parameter, create other function that gets ast_tree
-    incorrect_imports, ast_tree = find_incorrect_imports(file_path, ch_int)
+    file_ast_tree = get_file_ast_tree(file_path)
+    incorrect_imports = find_incorrect_imports(file_ast_tree, ch_int)
     if len(incorrect_imports) == 1 and file_path.find("_keywords.py") > 0:
         incorrect_imports = []
     assertion_fail_str = f"File #{all_file_count} a{chapter_desc_str_number} file #{chapter_file_count} Imports: {len(incorrect_imports)} {file_path}"
     assert not incorrect_imports, assertion_fail_str
-    assert no_banned_imports_exist(ast_tree)
-    # TODO delete this: brought over from test_Chapters_KeywordsAppearWhereTheyShould
-    # # check if semantic_types import is from current chapter
-    # # TODO reactivate this
-    # # TODO move this to ast impport check?
-    # _semantic_types_import_count = file_str.count("_semantic_types import")
-    # if "semantic_types" not in file_path and _semantic_types_import_count > 0:
-    #     chXX_semantic_types_str = f"{chapter_prefix}_semantic_types"
-    #     semantic_types_failure_str = f"{file_path=} {chXX_semantic_types_str=}"
-    #     assert _semantic_types_import_count == 1, semantic_types_failure_str
-    #     assert chXX_semantic_types_str in file_str, semantic_types_failure_str
-
-    # # check if examples import is from current chapter
-    # TODO move this to ast impport check?
-    # dir_import_count = file_str.count("_env import ")
-    # if dir_import_count > 0:
-    #     chXX_dir_import_str = f"{chapter_prefix}_env import "
-    #     dir_failure_str = f"{file_path=} {chXX_dir_import_str=}"
-    #     assert dir_import_count == 1, dir_failure_str
-    #     assert chXX_dir_import_str in file_str, dir_failure_str
+    assert no_banned_imports_exist(file_ast_tree), assertion_fail_str
+    validate_semantic_types_import(file_ast_tree, file_path, ch_int)
 
 
 def test_Chapters_path_FunctionStructureAndFormat():

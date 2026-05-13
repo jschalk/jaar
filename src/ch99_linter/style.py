@@ -20,7 +20,7 @@ from dataclasses import dataclass
 from os import walk as os_walk
 from os.path import exists as os_path_exists, join as os_path_join
 from pathlib import Path as pathlib_Path
-from re import compile as re_compile, search as re_search
+from re import compile as re_compile, match as re_match, search as re_search
 from typing import Dict, List, Set, Tuple
 
 
@@ -494,16 +494,18 @@ class _ImportCollector(ast_NodeVisitor):
         self.generic_visit(node)
 
 
+def get_file_ast_tree(py_file_path: str) -> ast_AST:
+    py_file_path = pathlib_Path(py_file_path)
+    file_text = py_file_path.read_text(encoding="utf-8")
+    return ast_parse(file_text, filename=str(py_file_path))
+
+
 def find_incorrect_imports(
-    py_file_path: str,
-    min_number: int,
+    ast_tree: ast_AST, min_number: int
 ) -> tuple[list[str], ast_AST]:
-    p = pathlib_Path(py_file_path)
-    file_text = p.read_text(encoding="utf-8")
-    ast_tree = ast_parse(file_text, filename=str(p))
     collector = _ImportCollector(min_number)
     collector.visit(ast_tree)
-    return collector.matches, ast_tree
+    return collector.matches
 
 
 _PATTERN = re_compile(r"^test_(?P<func>.+?)_ReturnsObj(?P<rest>.*)$")
@@ -571,9 +573,7 @@ def py_file_has_from_imports_only(py_code: str, file_path: str) -> tuple[bool, s
 BANNED_IMPORTS = {"replace_me_when_new_element_added"}
 
 
-def no_banned_imports_exist(
-    ast_tree: ast_AST,
-) -> bool:
+def no_banned_imports_exist(ast_tree: ast_AST) -> bool:
     for node in ast_walk(ast_tree):
         if isinstance(node, ast_Import):
             for alias in node.names:
@@ -595,3 +595,45 @@ def no_banned_imports_exist(
                     print(f"Not allowed import: '{imported_name}'")
                     return False
     return True
+
+
+def find_chapter_dir(file_path: str) -> pathlib_Path | None:
+    """
+    Given a file path, walk upward through parent folders and return
+    the first folder whose name matches: chXX_*
+    """
+    path = pathlib_Path(file_path).resolve()
+    return next(
+        (
+            p.name
+            for p in [path.parent, *path.parents]
+            if re_match(r"^ch\d{2}_", p.name)
+        ),
+        None,
+    )
+
+
+def validate_semantic_types_import(tree: ast_AST, file_path, ch_int: int) -> None:
+    """
+    Walk a Python AST tree and print any imports that contain
+    'semantic_types'.
+    """
+    expected_ch_semantic_types = f"ch{ch_int:02}_semantic_types"
+    assertion_fail_str = (
+        f"Did not find expected {expected_ch_semantic_types} in '{file_path}'"
+    )
+    if "semantic_types" not in file_path:
+        for node in ast_walk(tree):
+
+            # Handles: from x.y.semantic_types import Something
+            if isinstance(node, ast_ImportFrom):
+                if node.module and "semantic_types" in node.module:
+                    assert expected_ch_semantic_types in node.module, assertion_fail_str
+
+            # Handles: import x.y.semantic_types
+            elif isinstance(node, ast_Import):
+                for alias in node.names:
+                    if "semantic_types" in alias.name:
+                        assert (
+                            expected_ch_semantic_types in node.names
+                        ), assertion_fail_str
