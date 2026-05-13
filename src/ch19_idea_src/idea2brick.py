@@ -146,20 +146,24 @@ class SheetRef:
     dst_sheet_name: str = None
 
     def set_src_ii_bk_type(self):
-        if ii_match := re_search(r"ii\d+", self.src_sheet_name):
+        if ii_match := re_search(r"ii\d{5}", self.src_sheet_name):
             self.src_ii_bk_type = ii_match.group(0)
-        elif bk_match := re_search(r"bk\d+", self.src_sheet_name):
+        elif bk_match := re_search(r"bk\d{5}", self.src_sheet_name):
             self.src_ii_bk_type = bk_match.group(0)
         else:
             self.src_ii_bk_type = None
 
     def set_idea_type_exists(self, idea_config: dict):
-        idea_type = self.src_ii_bk_type
-        if self.src_ii_bk_type.startswith("bk"):
-            idea_type = f"ii{self.src_ii_bk_type[2:]}"
-        self.idea_type_exists = idea_config.get(idea_type) is not None
-        if self.idea_type_exists:
-            self.src_idea_type = idea_type
+        if self.src_ii_bk_type:
+            if self.src_ii_bk_type.startswith("bk"):
+                idea_type = f"ii{self.src_ii_bk_type[2:]}"
+            else:
+                idea_type = self.src_ii_bk_type
+            self.idea_type_exists = idea_config.get(idea_type) is not None
+            if self.idea_type_exists:
+                self.src_idea_type = idea_type
+        else:
+            self.idea_type_exists = False
 
     def set_dst_brick_type(self, idea_config: dict):
         config_dict = idea_config.get(self.src_idea_type)
@@ -181,7 +185,7 @@ class SheetRef:
         self.set_brick_sheet_name()
 
 
-def get_excel_sheet_refs(directory: str) -> List[SheetRef]:
+def get_idea_sheet_refs(directory: str) -> List[SheetRef]:
     """
     Given a directory, returns a sorted list of (filename, sheet_name) tuples
     for all Excel files found in that directory.
@@ -192,90 +196,23 @@ def get_excel_sheet_refs(directory: str) -> List[SheetRef]:
     Returns:
         Sorted list of (filename, sheet_name) tuples.
     """
-    sheet_refs = []
+    idea_config = get_idea_config_dict()
+    file_sheet_refs = []
     excel_extensions = (".xlsx", ".xlsm", ".xltx", ".xltm")
 
     for filename in os_listdir(directory):
         if filename.lower().endswith(excel_extensions):
             filepath = os_path_join(directory, filename)
             wb = load_workbook(filepath, read_only=True)
-            sheet_refs.extend(SheetRef(filename, s_name) for s_name in wb.sheetnames)
+            wb_sheet_refs = [SheetRef(filename, s_name) for s_name in wb.sheetnames]
+            for wb_sheet_ref in wb_sheet_refs:
+                wb_sheet_ref.set_src_ii_bk_type()
+                wb_sheet_ref.set_dst_attrs(idea_config)
+                if wb_sheet_ref.idea_type_exists:
+                    file_sheet_refs.append(wb_sheet_ref)
             wb.close()
 
-    return sorted(sheet_refs, key=lambda x: (x.src_filename, x.src_sheet_name))
-
-
-# TODO consider getting rid of. never used anywhere
-def get_sheets_with_brick_types(directory: str) -> List[Tuple[str, str]]:
-    """
-    Returns all (filename, sheet_name) tuples where the sheet_name contains
-    any of the provided brick_types.
-
-    Args:
-        directory:  Path to the directory to search for Excel files.
-        brick_types: Set of strings to match against sheet names.
-
-    Returns:
-        Sorted list of (filename, sheet_name) tuples where sheet_name
-        contains at least one brick_type.
-    """
-    brick_types = get_brick_types()
-    all_sheet_refs = get_excel_sheet_refs(directory)
-    brick_sheet_refs = [
-        sheet_ref
-        for sheet_ref in all_sheet_refs
-        if any(
-            brick_type in sheet_ref.src_sheet_name.lower() for brick_type in brick_types
-        )
-    ]
-    return sorted(brick_sheet_refs, key=lambda x: (x.src_filename, x.src_sheet_name))
-
-
-def get_sheets_with_idea_types(directory: str) -> List[SheetRef]:
-    """
-    Returns all (filename, sheet_name) tuples where the sheet_name contains
-    any of the provided idea_types.
-
-    Args:
-        directory:  Path to the directory to search for Excel files.
-        idea_types: Set of strings to match against sheet names.
-
-    Returns:
-        Sorted list of (filename, sheet_name) tuples where sheet_name
-        contains at least one idea_type.
-    """
-    idea_types = get_idea_types()
-    all_sheet_refs = get_excel_sheet_refs(directory)
-    idea_sheet_refs = [
-        sheet_ref
-        for sheet_ref in all_sheet_refs
-        if any(
-            idea_type in sheet_ref.src_sheet_name.lower() for idea_type in idea_types
-        )
-    ]
-    return sorted(idea_sheet_refs, key=lambda x: (x.src_filename, x.src_sheet_name))
-
-
-# def get_validated_i_src_ii_bk_type_sheets(
-#     i_src_dir: str, b_src_dir: str
-# ) -> List[Tuple[str, str]]:
-#     """
-#     Returns all brick_type sheets found in i_src_dir.
-#     Raises a ValueError if any of those brick_type sheets also exist in b_src_dir.
-
-#     Args:
-#         i_src_dir: Path to the IDEA source directory.
-#         b_src_dir: Path to the BRICK source directory.
-
-#     Returns:
-#         Sorted list of (filename, sheet_name) tuples from i_src_dir
-#         whose sheet_name contains a brick_type string.
-
-#     Raises:
-#         ValueError: If any brick_type sheet found in i_src_dir also exists
-#                     in b_src_dir (matched on sheet_name alone).
-#     """
-#     return set(get_sheets_with_idea_types(i_src_dir))
+    return sorted(file_sheet_refs, key=lambda x: (x.src_filename, x.src_sheet_name))
 
 
 def ideas_sheets_to_brick_sheets(
@@ -306,7 +243,7 @@ def ideas_sheets_to_brick_sheets(
 
     idea_config = get_idea_config_dict()
     etl_sheets = []
-    for src_sheet_ref in get_sheets_with_idea_types(i_src_dir):
+    for src_sheet_ref in get_idea_sheet_refs(i_src_dir):
         src_sheet_ref.set_dst_attrs(idea_config)
         etl_sheets.append(src_sheet_ref)
 
