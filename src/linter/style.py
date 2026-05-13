@@ -1,4 +1,5 @@
 from ast import (
+    AST as ast_AST,
     FunctionDef as ast_FunctionDef,
     Import as ast_Import,
     ImportFrom as ast_ImportFrom,
@@ -491,13 +492,16 @@ class _ImportCollector(ast_NodeVisitor):
         self.generic_visit(node)
 
 
-def find_incorrect_imports(py_file_path: str, min_number: int) -> list[str]:
+def find_incorrect_imports(
+    py_file_path: str,
+    min_number: int,
+) -> tuple[list[str], ast_AST]:
     p = pathlib_Path(py_file_path)
     file_text = p.read_text(encoding="utf-8")
-    tree = ast_parse(file_text, filename=str(p))
+    ast_tree = ast_parse(file_text, filename=str(p))
     collector = _ImportCollector(min_number)
-    collector.visit(tree)
-    return collector.matches
+    collector.visit(ast_tree)
+    return collector.matches, ast_tree
 
 
 _PATTERN = re_compile(r"^test_(?P<func>.+?)_ReturnsObj(?P<rest>.*)$")
@@ -555,5 +559,34 @@ def py_file_has_from_imports_only(py_code: str, file_path: str) -> tuple[bool, s
             # forbid "from x import *"
             for alias in node.names:
                 if alias.name == "*":
+                    return False
+    return True
+
+
+BANNED_IMPORTS = {"replace_me_when_new_element_added"}
+
+
+def no_banned_imports_exist(
+    ast_tree: ast_AST,
+) -> bool:
+    for node in ast_walk(ast_tree):
+        if isinstance(node, ast_Import):
+            for alias in node.names:
+                imported_name = alias.name.split(".")[0]
+                if imported_name in BANNED_IMPORTS:
+                    print(f"Not allowed import: '{imported_name}'")
+                    return False
+
+        elif isinstance(node, ast_ImportFrom):
+            if node.module is not None:
+                module_name = node.module.split(".")[0]
+                if module_name in BANNED_IMPORTS:
+                    print(f"Not allowed import: '{imported_name}'")
+                    return False
+
+            for alias in node.names:
+                imported_name = alias.name.split(".")[0]
+                if imported_name in BANNED_IMPORTS:
+                    print(f"Not allowed import: '{imported_name}'")
                     return False
     return True

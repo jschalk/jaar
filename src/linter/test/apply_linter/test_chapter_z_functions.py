@@ -12,6 +12,7 @@ from linter.style import (
     find_incorrect_imports,
     get_docstring,
     get_python_files_with_flag,
+    no_banned_imports_exist,
 )
 from os.path import exists as os_path_exists
 
@@ -28,17 +29,33 @@ def test_Chapters_AllImportsAreFromLibrariesInLessThanEqual_aXX():
         chapter_dir = chapter_descs.get(chapter_desc)
         chapter_desc_str_number = get_chapter_desc_str_number(chapter_desc)
         print(f"{chapter_desc=}")
-        desc_number_int = int(chapter_desc_str_number)
+        ch_int = int(chapter_desc_str_number)
         chapter_files = sorted(list(get_python_files_with_flag(chapter_dir).keys()))
         # print(f"{desc_number_str} src.{chapter_desc}")
         for chapter_file_count, file_path in enumerate(chapter_files, start=1):
             all_file_count += 1
-            incorrect_imports = find_incorrect_imports(file_path, desc_number_int)
-            if len(incorrect_imports) == 1 and file_path.find("_keywords.py") > 0:
-                incorrect_imports = []
+            validate_py_file_imports(
+                file_path,
+                ch_int,
+                all_file_count,
+                chapter_desc_str_number,
+                chapter_file_count,
+            )
 
-            assertion_fail_str = f"File #{all_file_count} a{chapter_desc_str_number} file #{chapter_file_count} Imports: {len(incorrect_imports)} {file_path}"
-            assert not incorrect_imports, assertion_fail_str
+
+def validate_py_file_imports(
+    file_path: str,
+    ch_int: int,
+    all_file_count: int,
+    chapter_desc_str_number: str,
+    chapter_file_count: int,
+):
+    incorrect_imports, ast_tree = find_incorrect_imports(file_path, ch_int)
+    if len(incorrect_imports) == 1 and file_path.find("_keywords.py") > 0:
+        incorrect_imports = []
+    assertion_fail_str = f"File #{all_file_count} a{chapter_desc_str_number} file #{chapter_file_count} Imports: {len(incorrect_imports)} {file_path}"
+    assert not incorrect_imports, assertion_fail_str
+    assert no_banned_imports_exist(ast_tree)
 
 
 def test_Chapters_path_FunctionStructureAndFormat():

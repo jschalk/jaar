@@ -121,8 +121,6 @@ def create_brick_df_from_file(
     """
     Reads a single normalized Excel sheet into a DataFrame.
     """
-
-    normalization_rules = EXCEL_READER_CONFIG["normalization_rules"]
     wb = load_workbook(excel_file_path, data_only=False)
     if sheet_name not in wb.sheetnames:
         raise ValueError(f"Sheet does not exist: {sheet_name}")
