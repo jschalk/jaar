@@ -5,10 +5,10 @@ from ch00_py.chapter_desc_main import (
 from ch00_py.file_toolbox import create_path, get_dir_filenames
 from ch00_py.notebook_toolbox import get_top_level_functions
 from ch98_docs_builder.doc_builder import get_chapter_descs
-from linter.style import (
+from ch99_linter.style import (
     check_all_test_functions_are_formatted,
-    check_path_funcs_HasDocString_TestsExist,
-    check_path_funcs_ReturnsObj_TestsExist,
+    check_path_funcs_has_docstring_tests_exist,
+    check_path_funcs_return_str_exists,
     find_incorrect_imports,
     get_docstring,
     get_python_files_with_flag,
@@ -50,12 +50,32 @@ def validate_py_file_imports(
     chapter_desc_str_number: str,
     chapter_file_count: int,
 ):
+    # TODO change find_incorrect_imports so it takes ast_tree as parameter, create other function that gets ast_tree
     incorrect_imports, ast_tree = find_incorrect_imports(file_path, ch_int)
     if len(incorrect_imports) == 1 and file_path.find("_keywords.py") > 0:
         incorrect_imports = []
     assertion_fail_str = f"File #{all_file_count} a{chapter_desc_str_number} file #{chapter_file_count} Imports: {len(incorrect_imports)} {file_path}"
     assert not incorrect_imports, assertion_fail_str
     assert no_banned_imports_exist(ast_tree)
+    # TODO delete this: brought over from test_Chapters_KeywordsAppearWhereTheyShould
+    # # check if semantic_types import is from current chapter
+    # # TODO reactivate this
+    # # TODO move this to ast impport check?
+    # _semantic_types_import_count = file_str.count("_semantic_types import")
+    # if "semantic_types" not in file_path and _semantic_types_import_count > 0:
+    #     chXX_semantic_types_str = f"{chapter_prefix}_semantic_types"
+    #     semantic_types_failure_str = f"{file_path=} {chXX_semantic_types_str=}"
+    #     assert _semantic_types_import_count == 1, semantic_types_failure_str
+    #     assert chXX_semantic_types_str in file_str, semantic_types_failure_str
+
+    # # check if examples import is from current chapter
+    # TODO move this to ast impport check?
+    # dir_import_count = file_str.count("_env import ")
+    # if dir_import_count > 0:
+    #     chXX_dir_import_str = f"{chapter_prefix}_env import "
+    #     dir_failure_str = f"{file_path=} {chXX_dir_import_str=}"
+    #     assert dir_import_count == 1, dir_failure_str
+    #     assert chXX_dir_import_str in file_str, dir_failure_str
 
 
 def test_Chapters_path_FunctionStructureAndFormat():
@@ -132,7 +152,7 @@ def test_Chapters_path_FunctionStructureAndFormat():
                 get_top_level_functions(pytest_path_func_path).keys()
             )
             # print(f"{chapter_desc} {test_path_func_names=}")
-            check_path_funcs_ReturnsObj_TestsExist(path_funcs, test_path_func_names)
-            check_path_funcs_HasDocString_TestsExist(path_funcs, test_path_func_names)
+            check_path_funcs_return_str_exists(path_funcs, test_path_func_names)
+            check_path_funcs_has_docstring_tests_exist(path_funcs, test_path_func_names)
 
     check_all_test_functions_are_formatted(all_test_functions)

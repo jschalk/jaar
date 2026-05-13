@@ -1,18 +1,18 @@
-from linter.chapter_move_tools import (
+from ch99_linter.chapter_move_tool import (
     replace_in_tracked_python_files,
     string_exists_in_directory,
     string_exists_in_filepaths,
 )
 from os import chdir as os_chdir, getcwd as os_getcwd
 from os.path import join as os_path_join
-from pathlib import Path
 from subprocess import run as subprocess_run
 from tempfile import TemporaryDirectory as tempfile_TemporaryDirectory
 
 # replace with your actual module name
 
 
-def test_string_exists_in_filepaths(tmp_path):
+def test_string_exists_in_filepaths_ReturnsObj(tmp_path):
+    # ESTABLISH
     # sourcery skip: extract-duplicate-method
     # Setup: create some files and dirs
     subdir = tmp_path / "project_data"
@@ -23,7 +23,7 @@ def test_string_exists_in_filepaths(tmp_path):
     hidden_dir = tmp_path / "backup_hidden"
     hidden_dir.mkdir()
     (hidden_dir / "old_version.txt").write_text("outdated", encoding="utf-8")
-
+    # WHEN / THEN
     assert not string_exists_in_filepaths(tmp_path, "forbidden")
     assert string_exists_in_filepaths(tmp_path, "backup")
     assert string_exists_in_filepaths(tmp_path, "notes")
@@ -32,7 +32,8 @@ def test_string_exists_in_filepaths(tmp_path):
     assert not string_exists_in_filepaths(empty_dir, "anything")
 
 
-def test_string_exists_in_directory(tmp_path):
+def test_string_exists_in_directory_ReturnsObj(tmp_path):
+    # ESTABLISH
     # Setup: create temporary directory with files
     dir1 = tmp_path / "dir1"
     dir1.mkdir()
@@ -45,19 +46,20 @@ def test_string_exists_in_directory(tmp_path):
     file2.write_text("Another file with a secret keyword inside.", encoding="utf-8")
     file3.write_bytes(b"\x00\x01\x02")  # binary file (should be skipped safely)
 
-    # Case 1: keyword exists in one file
+    # WHEN / THEN Case 1: keyword exists in one file
     assert string_exists_in_directory(tmp_path, "keyword") is True
 
-    # Case 2: keyword does not exist anywhere
+    # WHEN / THEN Case 2: keyword does not exist anywhere
     assert string_exists_in_directory(tmp_path, "nonexistentstring") is False
 
-    # Case 3: empty directory
+    # WHEN / THEN Case 3: empty directory
     empty_dir = tmp_path / "empty"
     empty_dir.mkdir()
     assert string_exists_in_directory(empty_dir, "anything") is False
 
 
-def test_replace_in_tracked_python_files():  # sourcery skip: extract-method
+def test_replace_in_tracked_python_files_ChangesFiles():  # sourcery skip: extract-method
+    # ESTABLISH
     original_cwd = os_getcwd()
 
     with tempfile_TemporaryDirectory() as tmpdir:
@@ -85,10 +87,10 @@ def test_replace_in_tracked_python_files():  # sourcery skip: extract-method
             subprocess_run(["git", "add", "."], check=True)
             subprocess_run(["git", "commit", "-m", "initial commit"], check=True)
 
-            # Run find-and-replace
+            # WHEN
             replace_in_tracked_python_files("old_value", "new_value")
 
-            # Check replacement
+            # THEN
             with open(json_file, "r") as f:
                 content = f.read()
 
@@ -102,7 +104,7 @@ def test_replace_in_tracked_python_files():  # sourcery skip: extract-method
 
 
 # Old test worked locally, fails on GitHUb
-# def test_replace_in_tracked_python_files(tmp_path):
+# def test_find_matching_tests_ReturnsObj_Scenario0_replace_in_tracked_python_files(tmp_path):
 #     # Create a temporary git repo
 #     repo_dir = tmp_path / "repo"
 #     repo_dir.mkdir()

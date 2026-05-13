@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import get_dir_file_strs
-from linter.style import get_chapter_descs, get_filenames_with_wrong_style
+from ch99_linter.style import get_chapter_descs, get_filenames_with_wrong_style
 
 
 def get_filenamebase_mapping(filenamebases: list[str]) -> dict:
@@ -42,6 +42,7 @@ def test_check_Chapters_filenames_FollowFileNameConventions_NoNamingCollision():
         assert not collisions
 
     # CHECK for collisions acress chapters
+    # WHEN / THEN
     all_collisions = get_file_collisions_set(all_level1_file_bases)
     if all_collisions:
         print(f"{all_collisions=}")

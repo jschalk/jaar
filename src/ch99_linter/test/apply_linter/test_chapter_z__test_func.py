@@ -1,32 +1,34 @@
-from linter.style import find_matching_tests
+from ch99_linter.style import find_matching_tests
 
 
-def test_matches_any_function_name_with_same_scenario():
+def test_find_matching_tests_ReturnsObj_Scenario0_MatchesAnyFunctionNameWithSameScenario():
+    # ESTABLISH
     tests = {
         "test_alpha_ReturnsObj_Scenario1_valid",
         "test_alpha_ReturnsObj_Scenario1_invalid",
         "test_beta_ReturnsObj_Scenario1_valid",  # different func → ignore
         "test_alpha_ReturnsObj_Scenario2_valid",  # single → ignore
     }
-
+    # WHEN
     result = find_matching_tests(tests)
-
+    # THEN
     assert set(result) == {
         "test_alpha_ReturnsObj_Scenario1_valid",
         "test_alpha_ReturnsObj_Scenario1_invalid",
     }
 
 
-def test_separates_different_functions_same_scenario():
+def test_find_matching_tests_ReturnsObj_Scenario1_SeparatesDifferentFunctionsSameScenario():
+    # ESTABLISH
     tests = {
         "test_alpha_ReturnsObj_Scenario1_a",
         "test_alpha_ReturnsObj_Scenario1_b",
         "test_beta_ReturnsObj_Scenario1_a",
         "test_beta_ReturnsObj_Scenario1_b",
     }
-
+    # WHEN
     result = find_matching_tests(tests)
-
+    # THEN
     assert set(result) == {
         "test_alpha_ReturnsObj_Scenario1_a",
         "test_alpha_ReturnsObj_Scenario1_b",
@@ -35,40 +37,44 @@ def test_separates_different_functions_same_scenario():
     }
 
 
-def test_ignores_non_returnsobj_tests():
+def test_find_matching_tests_ReturnsObj_Scenario2_IgnoresNonr_returns_objTests():
+    # ESTABLISH
     tests = {
         "test_alpha_Scenario1_a",
         "test_alpha_Scenario1_b",
     }
-
+    # WHEN
     result = find_matching_tests(tests)
-
+    # THEN
     assert result == []
 
 
-def test_ignores_missing_scenario():
+def test_find_matching_tests_ReturnsObj_Scenario3_IgnoresMissingScenario():
+    # ESTABLISH
     tests = {
         "test_alpha_ReturnsObj_valid",
         "test_alpha_ReturnsObj_invalid",
     }
-
+    # WHEN
     result = find_matching_tests(tests)
-
+    # THEN
     assert result == []
 
 
-def test_requires_duplicates_per_function_and_scenario():
+def test_find_matching_tests_ReturnsObj_Scenario4_RequiresDuplicatesPerFunctionAndScenario():
+    # ESTABLISH
     tests = {
         "test_alpha_ReturnsObj_Scenario1_a",
         "test_beta_ReturnsObj_Scenario1_a",
     }
-
+    # WHEN
     result = find_matching_tests(tests)
-
+    # THEN
     assert result == []
 
 
-def test_multiple_valid_groups():
+def test_find_matching_tests_ReturnsObj_Scenario5_multiple_valid_groups():
+    # ESTABLISH
     tests = {
         "test_alpha_ReturnsObj_Scenario1_a",
         "test_alpha_ReturnsObj_Scenario1_b",
@@ -77,7 +83,7 @@ def test_multiple_valid_groups():
         "test_beta_ReturnsObj_Scenario1_a",
         "test_beta_ReturnsObj_Scenario1_b",
     }
-
+    # WHEN
     result = find_matching_tests(tests)
-
+    # THEN
     assert set(result) == tests

@@ -1,10 +1,10 @@
 from ch36_world_app.w1_app import ETLApp
 
 
-def main():
+def listen_main():
     """Entry point for the keg2 listen CLI."""
     ETLApp().mainloop()
 
 
 if __name__ == "__main__":
-    main()
+    listen_main()

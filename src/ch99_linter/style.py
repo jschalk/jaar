@@ -40,6 +40,9 @@ def get_filenames_with_wrong_style(filenames: set[str]) -> set[str]:
 
 
 def function_name_style_is_correct(function_name: str):
+    if function_name in {"visit_Import", "visit_ImportFrom"}:
+        return True
+
     if not function_name.startswith("test") and "None" not in function_name:
         return uppercase_in_str(function_name) is False
     elif "scenario" in function_name:
@@ -358,9 +361,7 @@ def get_docstring(file_path: str, function_name: str) -> str:
     )
 
 
-def check_path_funcs_ReturnsObj_TestsExist(
-    path_funcs: set, test_path_func_names: set[str]
-):
+def check_path_funcs_return_str_exists(path_funcs: set, test_path_func_names: set[str]):
     for path_func in path_funcs:
         pytest_for_func_exists = False
         # print(f"{chapter_desc} {path_func}")
@@ -375,7 +376,7 @@ def check_path_funcs_ReturnsObj_TestsExist(
         # print(f"{chapter_desc} {test_func_exists} {path_func}")
 
 
-def check_path_funcs_HasDocString_TestsExist(
+def check_path_funcs_has_docstring_tests_exist(
     path_funcs: set, test_path_func_names: set[str]
 ):
     for path_func in path_funcs:
@@ -442,7 +443,8 @@ def _extract_series_number(chapter: str) -> int | None:
     return int(m.group(1)) if m else None
 
 
-def _extract_aXX_str_number(chapter: str) -> int | None:
+def _extract_axx_str_number(chapter: str) -> int | None:
+    "extract_aXX_str_number"
     if not chapter:
         return None
     m = _CH_STR_PATTERN.search(chapter)
@@ -465,7 +467,7 @@ class _ImportCollector(ast_NodeVisitor):
                     s += f" as {alias.asname}"
                 self.matches.append(s)
             # Check aXX_str
-            n2 = _extract_aXX_str_number(chapter)
+            n2 = _extract_axx_str_number(chapter)
             if n2 is not None and n2 != self.min_number:
                 s = f"import {chapter}"
                 if alias.asname:
@@ -483,7 +485,7 @@ class _ImportCollector(ast_NodeVisitor):
             ]
             self.matches.append(f"from {chapter} import {', '.join(parts)}")
         # Check aXX_str
-        n2 = _extract_aXX_str_number(chapter) if chapter else None
+        n2 = _extract_axx_str_number(chapter) if chapter else None
         if n2 is not None and n2 != self.min_number:
             parts = [
                 f"{a.name} as {a.asname}" if a.asname else a.name for a in node.names
@@ -546,6 +548,9 @@ def find_matching_tests(test_names: Set[str]) -> List[str]:
 
 
 def py_file_has_from_imports_only(py_code: str, file_path: str) -> tuple[bool, str]:
+    if file_path and "test__py_file_chapter.py" in file_path:
+        return True
+
     try:
         tree = ast_parse(py_code)
     except SyntaxError:

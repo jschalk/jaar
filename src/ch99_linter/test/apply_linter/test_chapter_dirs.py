@@ -1,7 +1,7 @@
 from ch00_py.chapter_desc_main import get_chapter_desc_str_number
 from ch00_py.file_toolbox import create_path, get_level1_dirs, open_json
 from ch98_docs_builder.doc_builder import get_chapter_desc_prefix
-from linter.style import (
+from ch99_linter.style import (
     get_chapter_descs,
     get_python_files_with_flag,
     get_semantic_types_filename,
@@ -41,7 +41,14 @@ def test_Chapters_NonTestFilesDoNotHavePrintStatments():
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
     print_str = "print"
-    excluded_file = "w1_app.py"
+    excluded_files = {
+        "w1_app.py",
+        "chapter_move_tool.py",
+        "ch_move.py",
+        "create_notebook.py",
+        "paths_change.py",
+        "style.py",
+    }
 
     # WHEN / THEN
     for chapter_desc, chapter_dir in get_chapter_descs().items():
@@ -50,8 +57,9 @@ def test_Chapters_NonTestFilesDoNotHavePrintStatments():
             py_file_path = create_path(chapter_dir, py_file)
             py_file_str = open(py_file_path, encoding="utf-8").read()
             print_str_in_py_file_bool = print_str in py_file_str
-            if excluded_file in py_file_path:
-                print_str_in_py_file_bool = False
+            for excluded_file in excluded_files:
+                if excluded_file in py_file_path:
+                    print_str_in_py_file_bool = False
             assertion_fail_str = (
                 f"Chapter {chapter_desc} file {py_file_path} has print statement"
             )

@@ -33,3 +33,4 @@
 - ch35_person_viewer: ch35
 - ch36_world_app: ch36
 - ch98_docs_builder: ch98
+- ch99_linter: ch99

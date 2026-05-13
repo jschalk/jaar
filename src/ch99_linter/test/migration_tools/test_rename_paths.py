@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import create_path, get_dir_file_strs, save_file
-from linter.chapter_move_tools import (
+from ch99_linter.chapter_move_tool import (
     delete_if_empty_or_pycache_only,
     first_level_dirs_with_prefix,
     rename_files_and_dirs,
@@ -15,6 +15,7 @@ from tempfile import TemporaryDirectory as tempfile_TemporaryDirectory
 
 
 def test_first_level_dirs_with_prefix_ReturnsObj():
+    # ESTABLISH
     with tempfile_TemporaryDirectory() as tmpdir:
         # Setup directories
         os_mkdir(os_path_join(tmpdir, "ch02_yahoo"))
@@ -28,7 +29,9 @@ def test_first_level_dirs_with_prefix_ReturnsObj():
 
         # Test prefix "ch02"
         prefix_path = os_path_join(tmpdir, "ch02")
+        # WHEN
         result = first_level_dirs_with_prefix(prefix_path)
+        # THEN
         result_names = [os_path_basename(p) for p in result]
 
         assert set(result_names) == {"ch02_yahoo", "ch02_google", "ch02_yahoo_temp"}
@@ -48,11 +51,14 @@ def test_first_level_dirs_with_prefix_ReturnsObj():
 
 
 def test_delete_if_empty_or_pycache_only_DeletesDir():
+    # ESTABLISH
     with tempfile_TemporaryDirectory() as tmpdir:
         # Case 1: empty dir → should delete
         d1 = os_path_join(tmpdir, "empty_dir")
         os_mkdir(d1)
+        # WHEN
         assert delete_if_empty_or_pycache_only(d1)
+        # THEN
         assert not os_path_exists(d1)
 
         # Case 2: only __pycache__ with .pyc → should delete
@@ -61,7 +67,9 @@ def test_delete_if_empty_or_pycache_only_DeletesDir():
         pyc_dir = os_path_join(d2, "__pycache__")
         os_mkdir(pyc_dir)
         open(os_path_join(pyc_dir, "file.pyc"), "w").close()
+        # WHEN
         assert delete_if_empty_or_pycache_only(d2)
+        # THEN
         assert not os_path_exists(d2)
 
         # Case 3: __pycache__ with extra non-.pyc file → should NOT delete
@@ -80,16 +88,19 @@ def test_delete_if_empty_or_pycache_only_DeletesDir():
         d4 = os_path_join(tmpdir, "nonempty_dir")
         os_mkdir(d4)
         open(os_path_join(d4, "somefile.py"), "w").close()
+        # WHEN
         assert not delete_if_empty_or_pycache_only(d4)
+        # THEN
         assert os_path_exists(d4)
 
         # Case 5: nonexistent directory → should NOT delete
         d5 = os_path_join(tmpdir, "does_not_exist")
+        # WHEN / THEN
         assert not delete_if_empty_or_pycache_only(d5)
 
 
 def test_rename_files_and_dirs_NotChangesWhenNoneNeeded(temp3_fs):
-    # GIVEN
+    # ESTABLISH
     env_dir = str(temp3_fs)
     dolphin_filename = "dolphin.txt"
     lopster_filename = "lopster.txt"
@@ -113,7 +124,7 @@ def test_rename_files_and_dirs_NotChangesWhenNoneNeeded(temp3_fs):
 
 
 def test_rename_files_and_dirs_NoChangeTo_dot_git_Dirs(temp3_fs):
-    # GIVEN
+    # ESTABLISH
     dot_git_dir = create_path(str(temp3_fs), ".git")
     dolphin_filename = "dolphin.txt"
     dot_git_file_path = create_path(dot_git_dir, dolphin_filename)
@@ -135,7 +146,7 @@ def test_rename_files_and_dirs_NoChangeTo_dot_git_Dirs(temp3_fs):
 
 
 def test_rename_files_and_dirs_ChangesWhenNeeded_lowercase(temp3_fs):
-    # GIVEN
+    # ESTABLISH
     env_dir = str(temp3_fs)
     dolphin_filename = "dolphin.json"
     lopster_filename = "lopster.json"
@@ -163,7 +174,7 @@ def test_rename_files_and_dirs_ChangesWhenNeeded_lowercase(temp3_fs):
 def test_rename_files_and_dirs_NoChangesWith_lowercase_parameters(
     temp3_fs,
 ):  # sourcery skip: extract-duplicate-method
-    # GIVEN
+    # ESTABLISH
     env_dir = str(temp3_fs)
     dolphin_filename = "dolphin.json"
     lopster_filename = "lopster.json"
@@ -191,7 +202,7 @@ def test_rename_files_and_dirs_NoChangesWith_lowercase_parameters(
 def test_rename_files_and_dirs_NoChangesWith_lowercase_filenames(
     temp3_fs,
 ):  # sourcery skip: extract-duplicate-method
-    # GIVEN
+    # ESTABLISH
     env_dir = str(temp3_fs)
     dolphin_filename = "Dolphin.json"
     lopster_filename = "lopster.json"
@@ -219,7 +230,7 @@ def test_rename_files_and_dirs_NoChangesWith_lowercase_filenames(
 def test_rename_files_and_dirs_ChangesWhenNeeded_directory(
     temp3_fs,
 ):
-    # GIVEN
+    # ESTABLISH
     env_dir = str(temp3_fs)
     dolphine_text = "dolphin"
     dolphin_dir = create_path(env_dir, dolphine_text)
@@ -255,7 +266,7 @@ def test_rename_files_and_dirs_ChangesWhenNeeded_directory(
 def test_rename_files_and_dirs_ChangesWhenNeeded_delete_old_directorys(
     temp3_fs,
 ):
-    # GIVEN
+    # ESTABLISH
     env_dir = str(temp3_fs)
     dolphine_text = "dolphin"
     dolphin_dir = create_path(env_dir, dolphine_text)

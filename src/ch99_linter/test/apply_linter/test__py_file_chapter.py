@@ -5,7 +5,11 @@ from ast import (
     parse as ast_parse,
     walk as ast_walk,
 )
-from linter.style import BANNED_IMPORTS, find_incorrect_imports, no_banned_imports_exist
+from ch99_linter.style import (
+    BANNED_IMPORTS,
+    find_incorrect_imports,
+    no_banned_imports_exist,
+)
 from pathlib import Path as pathlib_Path
 from pytest import fixture as pytest_fixture, raises as pytest_raises
 
@@ -71,7 +75,7 @@ def test_find_incorrect_imports_ReturnsObj_Scenario3_missing_file():
 
 
 def test_find_incorrect_imports_ReturnsAstTree_AstTreeIsModuleNode():
-    # GIVEN
+    # ESTABLISH
     py_file_text = """
 import os
 from pathlib import Path
@@ -90,7 +94,7 @@ from pathlib import Path
 
 
 def test_find_incorrect_imports_ReturnsAstTree_CanDetectImportPresence():
-    # GIVEN
+    # ESTABLISH
     py_file_text = """
 import os
 import json
@@ -115,7 +119,7 @@ import json
 
 
 def test_find_incorrect_imports_ReturnsAstTree_CanDetectFromImports():
-    # GIVEN
+    # ESTABLISH
     py_file_text = """
 from pathlib import Path
 from collections import defaultdict
@@ -139,7 +143,7 @@ from collections import defaultdict
 
 def test_find_incorrect_imports_ReturnsAstTree_CanAssertForbiddenImportAbsent():
     # sourcery skip: no-conditionals-in-tests
-    # GIVEN
+    # ESTABLISH
     py_file_text = """
 import os
 from pathlib import Path
@@ -183,7 +187,7 @@ def test_BANNED_IMPORTS_Exists():
 
 
 def test_no_banned_imports_exist_ReturnsObj_Scenario0_WhenBannedImportExists():
-    # GIVEN
+    # ESTABLISH
     ast_tree = ast_parse("""
 import os
 import replace_me_when_new_element_added
@@ -197,7 +201,7 @@ import replace_me_when_new_element_added
 
 
 def test_no_banned_imports_exist_ReturnsObj_Scenario1_WhenBannedImportExists():
-    # GIVEN
+    # ESTABLISH
     ast_tree = ast_parse("""
 import os
 from pandas import replace_me_when_new_element_added
@@ -211,7 +215,7 @@ from pandas import replace_me_when_new_element_added
 
 
 def test_no_banned_imports_exist_ReturnsObj_Scenario2_WhenBannedImportExists():
-    # GIVEN
+    # ESTABLISH
     ast_tree = ast_parse("""
 import os
 from pandas import replace_me_when_new_element_added as pandas_replace_me_when_new_element_added
@@ -225,7 +229,7 @@ from pandas import replace_me_when_new_element_added as pandas_replace_me_when_n
 
 
 def test_no_banned_imports_exist_ReturnsObj_Scenario3_WhenBannedImportExists():
-    # GIVEN
+    # ESTABLISH
     ast_tree = ast_parse("""
 import os
 from pandas import read_csv, replace_me_when_new_element_added as pandas_replace_me_when_new_element_added
@@ -239,7 +243,7 @@ from pandas import read_csv, replace_me_when_new_element_added as pandas_replace
 
 
 def test_no_banned_imports_exist_ReturnsTrue_WhenNoBannedImportsExist():
-    # GIVEN
+    # ESTABLISH
     ast_tree = ast_parse("""
 import os
 from pathlib import Path
