@@ -324,7 +324,7 @@ def test_set_idea_type_exists_SetsAttr_Scenario3_bk00120SetTrue():
     assert sheet_ref.src_idea_type == "ii00123"
 
 
-def test_set_idea_type_exists_SetsAttr_Scenario2_SetFalse():
+def test_set_idea_type_exists_SetsAttr_Scenario0_SetFalse():
     # ESTABLISH
     sheet_ref = SheetRef("test.xlsx", "ii123_end")
     sheet_ref.set_src_ii_bk_type()
@@ -338,7 +338,7 @@ def test_set_idea_type_exists_SetsAttr_Scenario2_SetFalse():
     assert not sheet_ref.src_idea_type
 
 
-def test_set_idea_type_exists_SetsAttr_Scenario3_bk00120SetTrue():
+def test_set_idea_type_exists_SetsAttr_Scenario1_SetFalse():
     # ESTABLISH
     sheet_ref = SheetRef("test.xlsx", "bk00123ii_x")
     sheet_ref.set_src_ii_bk_type()
