@@ -1,17 +1,12 @@
 from ch00_py.dict_toolbox import get_0_if_None
 from ch00_py.file_toolbox import delete_dir, set_dir
-from ch17_brick.brick_config import get_brick_types
-from ch17_brick.brick_db_tool import save_sheet
+from ch17_brick.brick_db_tool import create_brick_df_from_file, save_sheet
 from ch19_idea_src._ref.ch19_semantic_types import SheetName
 from ch19_idea_src.idea_config import get_idea_config_dict, get_idea_types
 from dataclasses import dataclass
 from openpyxl import load_workbook
 from os import listdir as os_listdir
 from os.path import join as os_path_join
-
-# TODO replace all pandas_read_excel with get_brick_df_from_file
-# create tests where it's used in ideas_sheets_to_brick_sheets to confirm it's used.
-# Others can be just replaced.
 from pandas import (
     DataFrame as pandas_DataFrame,
     read_excel as pandas_read_excel,
@@ -134,16 +129,15 @@ def set_spark_num_column(df: pandas_DataFrame, spark_face_spark_nums: dict[str, 
     df.insert(0, "spark_num", spark_num_series)
 
 
-# TODO create test Exists for this class
 @dataclass
 class SheetRef:
     src_filename: str
-    src_sheet_name: str
+    src_sheet_name: SheetName
     src_ii_bk_type: str = None
     src_idea_type: str = None
     idea_type_exists: bool = None
     dst_brick_type: str = None
-    dst_sheet_name: str = None
+    dst_sheet_name: SheetName = None
 
     def set_src_ii_bk_type(self):
         if ii_match := re_search(r"ii\d{5}", self.src_sheet_name):
@@ -259,7 +253,7 @@ def ideas_sheets_to_brick_sheets(
     for idea_sheet_ref in idea_sheet_refs:
         src_path = os_path_join(i_src_dir, idea_sheet_ref.src_filename)
         dst_path = os_path_join(b_src_dir, idea_sheet_ref.src_filename)
-        idea_df = pandas_read_excel(src_path, idea_sheet_ref.src_sheet_name)
+        idea_df = create_brick_df_from_file(src_path, idea_sheet_ref.src_sheet_name)
         set_spark_num_column(idea_df, spark_face_spark_nums)
         # if fission:
         # add fission_steps
