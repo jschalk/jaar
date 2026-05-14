@@ -7,7 +7,7 @@ from ch18_etl_config.etl_sqlstr import (
     create_prime_tablename,
 )
 from ch21_sound.sound import set_moment_person_sound_agg_knot_errors
-from ref.keywords import Ch21Keywords as kw, ExampleStrs as exx
+from ch99_ref.keywords import Ch21Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

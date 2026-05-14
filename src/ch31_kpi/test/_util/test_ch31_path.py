@@ -6,9 +6,9 @@ from ch31_kpi._ref.ch31_path import (
     create_dst_person_punch_path,
     create_moments_dir_path,
 )
+from ch99_ref.keywords import Ch31Keywords as kw, ExampleStrs as exx
 from inspect import getdoc as inspect_getdoc
 from pytest import mark as pytest_mark
-from ref.keywords import Ch31Keywords as kw, ExampleStrs as exx
 
 
 def test_create_day_punch_txt_path_ReturnsObj(temp3_dir):

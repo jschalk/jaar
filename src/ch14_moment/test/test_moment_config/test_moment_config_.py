@@ -8,8 +8,8 @@ from ch14_moment.moment_config import (
     get_moment_dimens,
     moment_config_path,
 )
+from ch99_ref.keywords import Ch14Keywords as kw, ExampleStrs as exx
 from os import getcwd as os_getcwd
-from ref.keywords import Ch14Keywords as kw, ExampleStrs as exx
 
 
 def test_moment_config_path_ReturnsObj_Moment() -> str:

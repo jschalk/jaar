@@ -14,8 +14,8 @@ from ch13_time.test._util.ch13_examples import (
     get_creg_min_from_dt,
     get_five_min_from_dt,
 )
+from ch99_ref.keywords import Ch13Keywords as kw, ExampleStrs as exx
 from datetime import datetime
-from ref.keywords import Ch13Keywords as kw, ExampleStrs as exx
 
 
 def test_TimeNum_Exists():

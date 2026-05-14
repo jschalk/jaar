@@ -31,8 +31,8 @@ from ch19_idea_src.test._util.ch19_examples import (  # get_ex2_ii00106_df,
     get_ex2_ii00104_df,
     get_ex2_ii00105_df,
 )
+from ch99_ref.keywords import ExampleStrs as exx
 from copy import deepcopy as copy_deepcopy
-from ref.keywords import ExampleStrs as exx
 
 
 def test_create_init_idea_csv_strs_ReturnsObj_Scenario0_EmptyMomentUnit(

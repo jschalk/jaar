@@ -2,8 +2,8 @@ from ch01_allot.allot import default_grain_num_if_None, validate_pool_num
 from ch04_rope.rope import create_rope, default_knot_if_None, get_default_rope
 from ch07_person_logic._ref.ch07_semantic_types import RespectNum
 from ch07_person_logic.person_main import PersonUnit, personunit_shop
+from ch99_ref.keywords import Ch07Keywords as kw, ExampleStrs as exx
 from pytest import raises as pytest_raises
-from ref.keywords import Ch07Keywords as kw, ExampleStrs as exx
 
 
 def test_PersonUnit_Exists():

@@ -11,10 +11,10 @@ from ch31_kpi.gcalendar import (
     create_gcalendar_csv_from_person,
     create_gcalendar_events_list,
 )
+from ch99_ref.keywords import Ch31Keywords as kw
 from csv import DictReader as csv_DictReader
 from datetime import datetime, timedelta
 from io import StringIO as io_StringIO
-from ref.keywords import Ch31Keywords as kw
 
 
 def test_create_gcalendar_events_list_ReturnsObj_Scenario0_Empty():

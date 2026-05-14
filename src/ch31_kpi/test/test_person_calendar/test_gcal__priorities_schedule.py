@@ -5,7 +5,7 @@ from ch31_kpi.gcalendar import (
     get_gcal_priorities_schedule_str,
     get_inflection_points_dict,
 )
-from ref.keywords import Ch31Keywords as kw, ExampleStrs as exx
+from ch99_ref.keywords import Ch31Keywords as kw, ExampleStrs as exx
 
 
 def test_get_inflection_points_dict_ReturnsObj_Scenario0_EmptyList():

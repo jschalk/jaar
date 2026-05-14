@@ -9,7 +9,7 @@ from ch05_reason.reason_main import (
     reasonunit_shop,
 )
 from ch06_plan.plan import planunit_shop
-from ref.keywords import ExampleStrs as exx
+from ch99_ref.keywords import ExampleStrs as exx
 
 
 def test_PlanUnit_clear_all_contact_cred_debt_ClearsAttrs():

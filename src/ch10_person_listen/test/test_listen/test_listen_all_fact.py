@@ -6,7 +6,7 @@ from ch10_person_listen.listen_main import (
     listen_to_speaker_fact,
     migrate_all_facts,
 )
-from ref.keywords import ExampleStrs as exx
+from ch99_ref.keywords import ExampleStrs as exx
 
 
 def test_get_debtors_roll_ReturnsObj():

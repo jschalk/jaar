@@ -5,7 +5,7 @@ from ch31_kpi.kpi_mstr import (
     get_bundles_config,
     get_kpi_set_from_bundle,
 )
-from ref.keywords import Ch31Keywords as kw
+from ch99_ref.keywords import Ch31Keywords as kw
 
 
 def test_get_all_kpi_functions_ReturnsObj():

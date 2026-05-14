@@ -1,8 +1,8 @@
 from ch02_contact.contact import contactunit_shop
 from ch07_person_logic.person_main import personunit_shop
+from ch99_ref.keywords import ExampleStrs as exx
 from copy import deepcopy as copy_deepcopy
 from pytest import raises as pytest_raises
-from ref.keywords import ExampleStrs as exx
 
 
 def test_PersonUnit_set_contactunit_SetsAttr():

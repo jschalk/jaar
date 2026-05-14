@@ -4,9 +4,9 @@ from ch10_person_listen.listen_main import (
     create_empty_person_from_person,
     listen_to_speaker_agenda,
 )
+from ch99_ref.keywords import ExampleStrs as exx
 from copy import deepcopy as copy_deepcopy
 from pytest import raises as pytest_raises
-from ref.keywords import ExampleStrs as exx
 
 
 def test_listen_to_speaker_agenda_RaisesErrorIfPoolIsNotSet():

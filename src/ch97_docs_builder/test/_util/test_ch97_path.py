@@ -18,7 +18,7 @@ def test_create_src_keg_definitions_path_ReturnsObj(temp3_dir):
     # THEN
     assert keywords_class_file_path
     # ref_dir = create_path(chapter_dir, "_ref")
-    ref_dir = create_path(src_dir, "ref")
+    ref_dir = create_path(src_dir, "ch99_ref")
     expected_filename = get_json_filename("keg_definitions")
     expected_file_path = create_path(ref_dir, expected_filename)
     assert keywords_class_file_path == expected_file_path
@@ -28,7 +28,7 @@ def test_create_src_keg_definitions_path_ReturnsObj(temp3_dir):
 def test_create_src_keg_definitions_path_HasDocString():
     # ESTABLISH
     src_dir = "src"
-    ref_dir = create_path(src_dir, "ref")
+    ref_dir = create_path(src_dir, "ch99_ref")
     doc_str = create_path(ref_dir, get_json_filename("keg_definitions"))
     doc_str = f"Returns path: {doc_str}"
     print(f"{doc_str=}")
@@ -76,7 +76,7 @@ def test_create_src_keg_exam_path_ReturnsObj(temp3_dir):
     # THEN
     assert keywords_class_file_path
     # ref_dir = create_path(chapter_dir, "_ref")
-    ref_dir = create_path(src_dir, "ref")
+    ref_dir = create_path(src_dir, "ch99_ref")
     expected_filename = "keg_exam.csv"
     expected_file_path = create_path(ref_dir, expected_filename)
     assert keywords_class_file_path == expected_file_path
@@ -86,7 +86,7 @@ def test_create_src_keg_exam_path_ReturnsObj(temp3_dir):
 def test_create_src_keg_exam_path_HasDocString():
     # ESTABLISH
     src_dir = "src"
-    ref_dir = create_path(src_dir, "ref")
+    ref_dir = create_path(src_dir, "ch99_ref")
     doc_str = create_path(ref_dir, "keg_exam.csv")
     doc_str = f"Returns path: {doc_str}"
     print(f"{doc_str=}")

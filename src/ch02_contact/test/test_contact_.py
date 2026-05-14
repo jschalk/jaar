@@ -7,8 +7,8 @@ from ch02_contact.contact import (
     is_nameterm,
     validate_nameterm,
 )
+from ch99_ref.keywords import Ch02Keywords as kw, ExampleStrs as exx
 from pytest import raises as pytest_raises
-from ref.keywords import Ch02Keywords as kw, ExampleStrs as exx
 
 
 def test_is_nameterm_ReturnsObj():

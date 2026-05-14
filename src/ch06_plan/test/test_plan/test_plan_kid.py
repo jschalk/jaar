@@ -1,7 +1,7 @@
 from ch04_rope.rope import create_rope
 from ch06_plan.plan import planunit_shop
+from ch99_ref.keywords import Ch06Keywords as kw, ExampleStrs as exx
 from pytest import raises as pytest_raises
-from ref.keywords import Ch06Keywords as kw, ExampleStrs as exx
 
 
 def test_get_kids_in_range_GetsCorrectPlans():

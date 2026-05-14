@@ -15,8 +15,8 @@ from ch09_person_lesson.test._util.ch09_examples import (
     get_atom_example_planunit_sports,
     get_persondelta_sue_example,
 )
+from ch99_ref.keywords import Ch09Keywords as kw, ExampleStrs as exx
 from pytest import raises as pytest_raises
-from ref.keywords import Ch09Keywords as kw, ExampleStrs as exx
 
 
 def test_FaceName_Exists():

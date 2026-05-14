@@ -6,8 +6,8 @@ from ch16_translate.map_term import (
     titlemap_shop,
 )
 from ch16_translate.translate_config import default_unknown_str_if_None
+from ch99_ref.keywords import Ch16Keywords as kw, ExampleStrs as exx
 from pytest import raises as pytest_raises
-from ref.keywords import Ch16Keywords as kw, ExampleStrs as exx
 
 
 def test_TitleMap_Exists():

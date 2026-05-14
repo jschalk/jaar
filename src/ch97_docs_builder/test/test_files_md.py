@@ -7,8 +7,8 @@ from ch97_docs_builder.doc_builder import (
     save_chapter_blurbs_md,
     save_ropeterm_description_md,
 )
+from ch99_ref.keywords import Ch97Keywords as kw
 from os.path import exists as os_path_exists
-from ref.keywords import Ch97Keywords as kw
 
 
 def test_get_chapter_blurbs_md_ReturnsObj():

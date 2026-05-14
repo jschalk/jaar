@@ -1,7 +1,7 @@
 from ch00_py.file_toolbox import create_path, open_json, save_json
 from ch01_allot.allot import allot_nested_scale
+from ch99_ref.keywords import ExampleStrs as exx
 from os.path import exists as os_path_exists
-from ref.keywords import ExampleStrs as exx
 
 
 def test_allot_nested_scale_ReturnsObj_Scenari0_depth0(

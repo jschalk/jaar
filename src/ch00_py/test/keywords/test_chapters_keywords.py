@@ -19,8 +19,8 @@ from ch00_py.keyword_class_builder import (
     get_possible_keyword_config_keys,
     parse_valid_ch_str,
 )
-from ref.keywords import Ch00Keywords as kw
-from ref.sorter import get_keg_elements_sort_order
+from ch99_ref.keywords import Ch00Keywords as kw
+from ch99_ref.sorter import get_keg_elements_sort_order
 
 
 def test_get_chapter_desc_prefix_ReturnsObj():

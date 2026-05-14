@@ -28,7 +28,7 @@ from ch97_docs_builder.keg_definitions_builder import (
     rebuild_final_exam_questions,
     rebuild_keg_definitions_contents,
 )
-from ref.sorter import get_keg_elements_sort_order
+from ch99_ref.sorter import get_keg_elements_sort_order
 
 
 def get_func_names_and_class_bases_from_file(

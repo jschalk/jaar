@@ -4,8 +4,8 @@ from ch01_allot.allot import (
     _get_missing_scale_list,
     allot_scale,
 )
+from ch99_ref.keywords import ExampleStrs as exx
 from pytest import raises as pytest_raises
-from ref.keywords import ExampleStrs as exx
 
 
 def test_create_missing_distribution_list_ReturnsObj_Scenario00():

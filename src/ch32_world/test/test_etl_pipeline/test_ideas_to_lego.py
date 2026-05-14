@@ -5,9 +5,9 @@ from ch17_brick.brick_db_tool import create_brick_sorted_table, save_sheet
 from ch18_etl_config.etl_sqlstr import create_prime_tablename
 from ch27_lego.lego_core import get_max_b_agg_spark_num
 from ch32_world.world import WorldDir, idea_sheets_to_lego_mstr, worlddir_shop
+from ch99_ref.keywords import Ch32Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
 from pandas import DataFrame
-from ref.keywords import Ch32Keywords as kw, ExampleStrs as exx
 from sqlite3 import connect as sqlite3_connect
 
 

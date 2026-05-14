@@ -6,8 +6,8 @@ from ch06_plan.healer import healerunit_shop
 from ch06_plan.plan import planunit_shop
 from ch07_person_logic.person_main import personunit_shop
 from ch07_person_logic.test._util.ch07_examples import get_personunit_with_4_levels
+from ch99_ref.keywords import ExampleStrs as exx
 from pytest import raises as pytest_raises
-from ref.keywords import ExampleStrs as exx
 
 
 def test_PersonUnit_set_plan_ScenarioXX_RaisesErrorWhen_parent_rope_IsInvalid():

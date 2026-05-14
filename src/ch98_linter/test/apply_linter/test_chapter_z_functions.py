@@ -59,10 +59,15 @@ def validate_py_file_imports(
 ):
     file_ast_tree = get_file_ast_tree(file_path)
     incorrect_imports = find_incorrect_imports(file_ast_tree, ch_int)
-    if len(incorrect_imports) == 1 and file_path.find("_keywords.py") > 0:
+    filtered_incorrect_imports = []
+    for incorrect_import in incorrect_imports:
+        if not incorrect_import.startswith("from ch99_ref."):
+            filtered_incorrect_imports.append(incorrect_import)
+
+    if len(incorrect_imports) == 1 and "_keywords.py" in file_path:
         incorrect_imports = []
     assertion_fail_str = f"File #{all_file_count} ch{ch_int:02} file #{chapter_file_count} Imports: {len(incorrect_imports)} {file_path}"
-    assert not incorrect_imports, assertion_fail_str
+    assert not filtered_incorrect_imports, assertion_fail_str
     assert no_banned_imports_exist(file_ast_tree), assertion_fail_str
     validate_semantic_types_import(file_ast_tree, file_path, ch_int)
     validate_keywords_imports(file_ast_tree, file_path, ch_int)

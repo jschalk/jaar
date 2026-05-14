@@ -22,8 +22,8 @@ from ch18_etl_config.etl_config import (
     remove_otx_columns,
     remove_staging_columns,
 )
+from ch99_ref.keywords import Ch18Keywords as kw
 from os import getcwd as os_getcwd
-from ref.keywords import Ch18Keywords as kw
 
 
 def test_remove_otx_columns_ReturnsObj():

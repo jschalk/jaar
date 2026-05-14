@@ -1,7 +1,7 @@
 from ch16_translate.map_term import labelmap_shop
 from ch16_translate.translate_main import translateunit_shop
+from ch99_ref.keywords import ExampleStrs as exx
 from pytest import raises as pytest_raises
-from ref.keywords import ExampleStrs as exx
 
 
 def test_TranslateUnit_set_labelmap_SetsAttr():

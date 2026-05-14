@@ -4,7 +4,7 @@ from ch09_person_lesson._ref.ch09_semantic_types import LabelTerm, MomentRope
 from ch09_person_lesson.delta import PersonDelta, persondelta_shop
 from ch09_person_lesson.lasso import LassoUnit, lassounit_shop
 from ch09_person_lesson.lesson_main import LessonUnit, lessonunit_shop
-from ref.keywords import Ch09Keywords as kw, ExampleStrs as exx
+from ch99_ref.keywords import Ch09Keywords as kw, ExampleStrs as exx
 
 
 def get_ch09_example_moment_rope() -> str:

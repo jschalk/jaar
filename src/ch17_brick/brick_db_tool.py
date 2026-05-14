@@ -27,6 +27,7 @@ from ch17_brick.brick_config import (
     get_brick_sqlite_types,
     get_default_sorted_list,
 )
+from ch99_ref.sorter import get_keg_elements_sort_order
 from contextlib import suppress as contextlib_suppress
 from io import BytesIO as io_BytesIO, StringIO as io_StringIO
 from json import load as json_load
@@ -54,7 +55,6 @@ from pandas.api.types import (
     is_integer_dtype as pandas_is_integer_dtype,
     is_string_dtype as pandas_is_string_dtype,
 )
-from ref.sorter import get_keg_elements_sort_order
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
 
 

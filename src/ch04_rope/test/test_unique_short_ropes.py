@@ -1,5 +1,5 @@
 from ch04_rope.rope import create_rope, default_knot_if_None, get_unique_short_ropes
-from ref.keywords import ExampleStrs as exx
+from ch99_ref.keywords import ExampleStrs as exx
 
 
 def test_get_unique_short_ropes_ReturnsObj_Scenario0_RootOnly():

@@ -12,6 +12,7 @@ from ch19_idea_src.idea2brick import (
     set_spark_num_column,
     validate_idea_columns,
 )
+from ch99_ref.keywords import Ch19Keywords as kw, ExampleStrs as exx
 from openpyxl import Workbook as openpyxl_Workbook
 from os.path import join as os_path_join
 from pandas import (
@@ -22,7 +23,6 @@ from pandas import (
 )
 from pathlib import Path
 from pytest import fixture as pytest_fixture, raises as pytest_raises
-from ref.keywords import Ch19Keywords as kw, ExampleStrs as exx
 
 
 def test_IdeaBook_Exists():

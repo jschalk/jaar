@@ -5,7 +5,7 @@ from ch07_person_logic.person_tool import (
     person_plan_reason_caseunit_get_obj,
     person_plan_reason_caseunit_set_obj,
 )
-from ref.keywords import Ch07Keywords as kw, ExampleStrs as exx
+from ch99_ref.keywords import Ch07Keywords as kw, ExampleStrs as exx
 
 
 def test_person_plan_reason_caseunit_set_obj_SetAttr_Scenario0_Pass_reason_case():

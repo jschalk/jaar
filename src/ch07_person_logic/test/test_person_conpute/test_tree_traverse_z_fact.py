@@ -4,8 +4,8 @@ from ch07_person_logic.person_main import personunit_shop
 from ch07_person_logic.test._util.ch07_examples import (
     get_personunit_1case_task_1ceo_minutes_reason_1fact,
 )
+from ch99_ref.keywords import ExampleStrs as exx
 from pytest import raises as pytest_raises
-from ref.keywords import ExampleStrs as exx
 
 
 def test_PersonUnit_thinkout_ChangesPlanUnit_pledge_case_task():

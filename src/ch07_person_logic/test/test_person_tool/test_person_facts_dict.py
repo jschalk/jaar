@@ -5,8 +5,8 @@ from ch07_person_logic.person_tool import (
     get_person_root_facts_dict,
     set_factunits_to_person,
 )
+from ch99_ref.keywords import Ch07Keywords as kw, ExampleStrs as exx
 from copy import deepcopy as copy_deepcopy
-from ref.keywords import Ch07Keywords as kw, ExampleStrs as exx
 
 
 def test_get_person_root_facts_dict_ReturnsObj_Scenario0_No_factunits():

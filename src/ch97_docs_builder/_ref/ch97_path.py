@@ -2,16 +2,16 @@ from ch00_py.file_toolbox import create_path
 
 
 def create_src_keg_definitions_path(src_dir: str) -> str:
-    """Returns path: src\\ref\\keg_definitions.json"""
+    """Returns path: src\\ch99_ref\\keg_definitions.json"""
 
-    ref_dir = create_path(src_dir, "ref")
+    ref_dir = create_path(src_dir, "ch99_ref")
     return create_path(ref_dir, "keg_definitions.json")
 
 
 def create_src_keg_exam_path(src_dir: str) -> str:
-    """Returns path: src\\ref\\keg_exam.csv"""
+    """Returns path: src\\ch99_ref\\keg_exam.csv"""
 
-    ref_dir = create_path(src_dir, "ref")
+    ref_dir = create_path(src_dir, "ch99_ref")
     return create_path(ref_dir, "keg_exam.csv")
 
 

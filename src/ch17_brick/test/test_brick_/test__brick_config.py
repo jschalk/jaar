@@ -42,10 +42,10 @@ from ch17_brick.brick_config import (
     get_dimens_with_brick_element,
     get_quick_bricks_column_ref,
 )
+from ch99_ref.keywords import Ch17Keywords as kw
+from ch99_ref.sorter import get_keg_elements_sort_order
 from copy import copy as copy_copy
 from os import getcwd as os_getcwd
-from ref.keywords import Ch17Keywords as kw
-from ref.sorter import get_keg_elements_sort_order
 
 
 def test_get_keg_elements_sort_order_ReturnsObj():

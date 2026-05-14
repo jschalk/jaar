@@ -17,7 +17,7 @@ from ch35_person_viewer.person_viewer_example import (
     play_str,
 )
 from ch35_person_viewer.person_viewer_tool import add_small_dot, get_plan_view_dict
-from ref.keywords import Ch35Keywords as kw, ExampleStrs as exx
+from ch99_ref.keywords import Ch35Keywords as kw, ExampleStrs as exx
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():

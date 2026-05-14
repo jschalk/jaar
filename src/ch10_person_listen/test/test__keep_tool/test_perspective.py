@@ -9,7 +9,7 @@ from ch10_person_listen.keep_tool import (
     save_job_file,
     save_vision_person,
 )
-from ref.keywords import ExampleStrs as exx
+from ch99_ref.keywords import ExampleStrs as exx
 
 
 def test_get_perspective_person_ReturnsPersonWith_person_nameSetToLessonFileHandler_person_name():

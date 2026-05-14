@@ -1,7 +1,7 @@
 from ch17_brick.brick_db_tool import create_brick_sorted_table
 from ch18_etl_config.etl_sqlstr import create_sound_and_heard_tables
 from ch27_lego.lego_core import get_max_b_agg_spark_num
-from ref.keywords import Ch27Keywords as kw, ExampleStrs as exx
+from ch99_ref.keywords import Ch27Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

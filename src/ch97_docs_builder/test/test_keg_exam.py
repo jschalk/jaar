@@ -10,8 +10,8 @@ from ch97_docs_builder.keg_definitions_builder import (
     rebuild_final_exam_questions,
     set_did_you_read_orders,
 )
+from ch99_ref.keywords import Ch97Keywords as kw
 from csv import reader as csv_reader
-from ref.keywords import Ch97Keywords as kw
 
 # TODO replace how exam tier source of truth
 # Having exam tier sourced in keywords_main makes it so example strings don't have exam_tiers.

@@ -1,5 +1,5 @@
 # from ch15_nabu.map_epoch import timenabu_shop
-# from ref.keywords import ExampleStrs as exx
+# from ch99_ref.keywords import ExampleStrs as exx
 
 
 # def test_NabuUnit_set_timenabu_SetsAttr():

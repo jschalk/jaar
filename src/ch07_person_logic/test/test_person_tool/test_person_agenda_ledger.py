@@ -6,7 +6,7 @@ from ch07_person_logic.person_tool import (
     get_person_contact_agenda_award_array,
     get_person_contact_agenda_award_csv,
 )
-from ref.keywords import ExampleStrs as exx
+from ch99_ref.keywords import ExampleStrs as exx
 
 
 def test_get_person_contact_agenda_award_array_ReturnsObj_ScenarioZeroContactUnits():

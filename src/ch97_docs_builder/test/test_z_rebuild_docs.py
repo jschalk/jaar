@@ -10,9 +10,9 @@ from ch97_docs_builder.doc_builder import (
     save_chapter_blurbs_md,
     save_ropeterm_description_md,
 )
+from ch99_ref.keywords import Ch97Keywords as kw
+from ch99_ref.sorter import get_keg_elements_sort_order
 from random import random as random_random
-from ref.keywords import Ch97Keywords as kw
-from ref.sorter import get_keg_elements_sort_order
 
 
 def test_recreate_keyword_src_config_Scenario0_Includes_sort_ordinal():

@@ -17,9 +17,9 @@ from ch98_linter.style import (
     get_semantic_types_filename,
     py_file_has_from_imports_only,
 )
+from ch99_ref.keywords import Ch98Keywords as kw
 from importlib import import_module as importlib_import_module
 from inspect import getsource as inspect_getsource
-from ref.keywords import Ch98Keywords as kw
 from typing import Literal
 
 
@@ -260,7 +260,7 @@ def test_Chapters_KeywordEnumClassesAreCorrectlyTested():
     chXX_keyword_classes = get_chapter_keyword_classes(cumlative_keywords_main_dict)
     # WHEN / THEN
     for chapter_prefix, ExpectedEnumClass in chXX_keyword_classes.items():
-        chapter_ref_keywords_path = f"src.ref.keywords"
+        chapter_ref_keywords_path = f"src.ch99_ref.keywords"
         print(f"{chapter_ref_keywords_path=}")
 
         # dynamically import the module

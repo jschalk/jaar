@@ -3,8 +3,8 @@ from ch17_brick.brick_db_tool import create_brick_sorted_table
 from ch18_etl_config._ref.ch18_path import create_last_run_metrics_path
 from ch18_etl_config.etl_sqlstr import create_sound_and_heard_tables
 from ch27_lego.lego_core import create_last_run_metrics_json
+from ch99_ref.keywords import Ch27Keywords as kw
 from os.path import exists as os_path_exists
-from ref.keywords import Ch27Keywords as kw
 from sqlite3 import Cursor
 
 

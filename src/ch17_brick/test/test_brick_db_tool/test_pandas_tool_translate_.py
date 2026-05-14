@@ -14,10 +14,10 @@ from ch17_brick.test._util.ch17_examples import (
     get_casa_maison_rope_inx_dt,
     get_casa_maison_rope_otx_dt,
 )
+from ch99_ref.keywords import Ch17Keywords as kw, ExampleStrs as exx
 from copy import deepcopy as copy_deepcopy
 from pandas import DataFrame
 from pandas.testing import assert_frame_equal as pandas_assert_frame_equal
-from ref.keywords import Ch17Keywords as kw, ExampleStrs as exx
 
 
 def test_get_dataframe_translateable_columns_ReturnsObj():

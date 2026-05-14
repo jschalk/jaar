@@ -5,6 +5,7 @@ from ch17_brick.brick_db_tool import (
     prettify_excel_files,
     set_df_brick_column_types,
 )
+from ch99_ref.keywords import Ch17Keywords as kw
 from openpyxl import load_workbook
 from os.path import exists as os_path_exists, join as os_path_join
 from pandas import (
@@ -18,7 +19,6 @@ from pandas.api.types import (
     is_string_dtype as pandas_is_string_dtype,
 )
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
-from ref.keywords import Ch17Keywords as kw
 
 
 def test_csv_dict_to_excel_SavesFile(temp3_fs):

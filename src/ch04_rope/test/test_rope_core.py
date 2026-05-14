@@ -23,9 +23,9 @@ from ch04_rope.rope import (
     to_rope,
     validate_labelterm,
 )
+from ch99_ref.keywords import ExampleStrs as exx
 from dataclasses import dataclass
 from pytest import mark as pytest_mark, raises as pytest_raises
-from ref.keywords import ExampleStrs as exx
 
 
 def test_get_default_rope_ReturnsObj_Scenario0_NoKnotTerm():

@@ -7,7 +7,7 @@ from ch18_etl_config.etl_sqlstr import (
     create_prime_tablename as prime_table,
     get_job_create_table_sqlstrs,
 )
-from ref.keywords import Ch18Keywords as kw
+from ch99_ref.keywords import Ch18Keywords as kw
 from sqlite3 import Cursor
 
 

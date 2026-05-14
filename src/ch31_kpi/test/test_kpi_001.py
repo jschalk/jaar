@@ -3,7 +3,7 @@ from ch04_rope.rope import create_rope
 from ch18_etl_config.etl_sqlstr import CREATE_JOB_PRNPLAN_SQLSTR, create_prime_tablename
 from ch27_lego.lego_core import CREATE_MOMENT_TRANBOOK_NETS_SQLSTR
 from ch31_kpi.kpi_mstr import create_populate_kpi001_table
-from ref.keywords import Ch31Keywords as kw, ExampleStrs as exx
+from ch99_ref.keywords import Ch31Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

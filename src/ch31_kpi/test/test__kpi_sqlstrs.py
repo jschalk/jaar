@@ -1,6 +1,6 @@
 from ch18_etl_config.etl_sqlstr import create_prime_tablename
 from ch31_kpi.kpi_sqlstr import get_create_kpi001_sqlstr, get_create_kpi002_sqlstr
-from ref.keywords import Ch31Keywords as kw
+from ch99_ref.keywords import Ch31Keywords as kw
 
 
 def test_get_create_kpi001_sqlstr_ReturnsObj():
