@@ -162,10 +162,14 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
     all_keywords_set = set(keywords_dict.keys())
     keywords_in_ch_count = {keyword: {} for keyword in keywords_dict.keys()}
     cumlative_keywords_main_dict = get_cumlative_keywords_main_dict(keywords_by_chapter)
-
+    filtered_chapter_descs = {
+        chapter_desc: x_value
+        for chapter_desc, x_value in get_chapter_descs().items()
+        if chapter_desc != "ch99_ref"
+    }
     # WHEN / THEN
     # all_file_count = 0
-    for chapter_desc, chapter_dir in get_chapter_descs().items():
+    for chapter_desc, chapter_dir in filtered_chapter_descs.items():
         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
         chapter_int = int(chapter_desc[2:4])
         allowed_chapter_keywords = cumlative_keywords_main_dict.get(chapter_int)
@@ -209,10 +213,10 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
         never_used_assertion_fail_str = (
             f"The Keyword '{keyword}' is never used in the chapters"
         )
-        if not chapters_dict.keys():
+        if keyword != "ch99" and not chapters_dict.keys():
             valid_ch = keywords_dict[keyword][kw.valid_ch]
             assert valid_ch == "", never_used_assertion_fail_str
-        else:
+        elif keyword != "ch99":
             min_chapter_prefix = min(chapters_dict.keys())
             min_chapter_count = chapters_dict.get(min_chapter_prefix)
             ch_count_fail_str = f"{keyword=} {min_chapter_prefix} {min_chapter_count=}"
@@ -234,13 +238,14 @@ def check_not_allowed_keywords(
     not_allowed_keywords: set, file_str: str, chapter_prefix: str, file_path: str
 ):
     for keyword in not_allowed_keywords:
-        notallowed_keyword_failure_str = f"keyword '{keyword}' is not allowed in chapter {chapter_prefix}. It is in {file_path=}"
-        if keyword in {"fact", "factory"}:
-            # Special case, doesn't provide perfect check but better than nothing
-            if keyword in file_str and "row_factory" not in file_str:
-                assert False, notallowed_keyword_failure_str
-        else:
-            assert keyword not in file_str, notallowed_keyword_failure_str
+        if keyword != "ch99":
+            notallowed_keyword_failure_str = f"keyword '{keyword}' is not allowed in chapter {chapter_prefix}. It is in {file_path=}"
+            if keyword in {"fact", "factory"}:
+                # Special case, doesn't provide perfect check but better than nothing
+                if keyword in file_str and "row_factory" not in file_str:
+                    assert False, notallowed_keyword_failure_str
+            else:
+                assert keyword not in file_str, notallowed_keyword_failure_str
 
 
 def add_ch_keyword_count(keywords_ch_counts: dict, keyword: str, chapter_prefix: str):

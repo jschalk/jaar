@@ -100,6 +100,7 @@
   "ch36": "ETL app to create day punches from excel files.", 
   "ch97": "Defines Tools that create documentation.", 
   "ch98": "Linter for repo.", 
+  "ch99": "Where keg terms will be defined, described, ranked.", 
   "Chiday": "Third Day of 5 day week of 'Five' Epoch", 
   "class": "Used so often in Python that it cannot be a kegology keyword.", 
   "clean": "Example key with value 'clean' used for tests throughout codebase.", 

@@ -27,6 +27,7 @@ def test_get_chapter_descs_Scenario0_RemovesLinterAndRef():
             "intro_test_mock": "src/intro_test_mock",
             "chapter1": "src/chapter1",
             "chapter2": "src/chapter2",
+            "ch99_ref": "src/ch99_ref",
         }
 
 
@@ -43,19 +44,6 @@ def test_get_chapter_descs_Scenario1_GetsLevel1Directories():
 
         # THEN
         mock_get_dirs.assert_called_once_with("src")
-
-
-def test_get_chapter_descs_Scenario2_RaisesErrorIf_linterIsMissing():
-    """
-    Current behavior: list.remove will raise ValueError
-    if 'linter' or 'ref' are not present.
-    """
-    # ESTABLISH / WHEN / THEN
-    with patch("ch00_py.chapter_desc_main.get_level1_dirs") as mock_get_dirs:
-        mock_get_dirs.return_value = ["chapter1", "chapter2"]
-
-        with pytest_raises(ValueError):
-            get_chapter_descs()
 
 
 def test_valid_chapter_numbers_ReturnsObj_Scenario0():

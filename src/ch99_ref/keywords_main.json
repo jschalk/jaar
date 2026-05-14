@@ -141,6 +141,7 @@
   "ch36": {"exam_tier": 6, "valid_ch": "36:"}, 
   "ch97": {"exam_tier": 6, "valid_ch": "97:"}, 
   "ch98": {"exam_tier": 3, "valid_ch": "98:"}, 
+  "ch99": {"exam_tier": 3, "valid_ch": "99:"}, 
   "clock": {"exam_tier": 3, "valid_ch": "13:"}, 
   "close": {"exam_tier": 3, "sort_ordinal": 103, "valid_ch": "6:"}, 
   "column_ordinal": {"exam_tier": 3, "valid_ch": "8:"}, 
