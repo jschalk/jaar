@@ -13,7 +13,7 @@
 
 from ch00_py.file_toolbox import create_path, open_json, save_json
 from ch00_py.notebook_toolbox import save_marimo_notebook_from_test_file
-from ch99_linter.chapter_move_tool import (
+from ch98_linter.chapter_move_tool import (
     first_level_dirs_with_prefix,
     rename_files_and_dirs_4times,
     string_exists_in_filepaths,

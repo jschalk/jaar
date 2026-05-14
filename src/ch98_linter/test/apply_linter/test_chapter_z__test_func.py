@@ -1,4 +1,4 @@
-from ch99_linter.style import find_matching_tests
+from ch98_linter.style import find_matching_tests
 
 
 def test_find_matching_tests_ReturnsObj_Scenario0_MatchesAnyFunctionNameWithSameScenario():

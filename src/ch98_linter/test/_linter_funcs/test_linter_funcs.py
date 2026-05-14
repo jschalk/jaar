@@ -1,4 +1,4 @@
-from ch99_linter.style import (
+from ch98_linter.style import (
     filename_style_is_correct,
     function_name_style_is_correct,
     get_filenames_with_wrong_style,

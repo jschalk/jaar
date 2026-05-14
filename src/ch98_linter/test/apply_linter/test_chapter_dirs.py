@@ -1,7 +1,7 @@
 from ch00_py.chapter_desc_main import get_chapter_desc_str_number
 from ch00_py.file_toolbox import create_path, get_level1_dirs, open_json
 from ch97_docs_builder.doc_builder import get_chapter_desc_prefix
-from ch99_linter.style import (
+from ch98_linter.style import (
     get_chapter_descs,
     get_python_files_with_flag,
     get_semantic_types_filename,

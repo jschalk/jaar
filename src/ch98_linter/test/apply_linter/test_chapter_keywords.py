@@ -6,7 +6,7 @@ from ch00_py.keyword_class_builder import (
     get_keywords_src_config,
 )
 from ch97_docs_builder.doc_builder import get_chapter_desc_prefix, get_chapter_descs
-from ch99_linter.style import (
+from ch98_linter.style import (
     check_custom_exception_classes_style,
     find_matching_tests,
     function_name_style_is_correct,
@@ -19,7 +19,7 @@ from ch99_linter.style import (
 )
 from importlib import import_module as importlib_import_module
 from inspect import getsource as inspect_getsource
-from ref.keywords import Ch99Keywords as kw
+from ref.keywords import Ch98Keywords as kw
 from typing import Literal
 
 

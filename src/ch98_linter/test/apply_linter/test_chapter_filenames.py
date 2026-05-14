@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import get_dir_file_strs
-from ch99_linter.style import get_chapter_descs, get_filenames_with_wrong_style
+from ch98_linter.style import get_chapter_descs, get_filenames_with_wrong_style
 
 
 def get_filenamebase_mapping(filenamebases: list[str]) -> dict:

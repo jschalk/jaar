@@ -5,7 +5,7 @@ from ast import (
     parse as ast_parse,
     walk as ast_walk,
 )
-from ch99_linter.style import (
+from ch98_linter.style import (
     BANNED_IMPORTS,
     find_incorrect_imports,
     get_file_ast_tree,
