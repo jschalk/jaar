@@ -15,6 +15,7 @@ from ch99_linter.style import (
     get_file_ast_tree,
     get_python_files_with_flag,
     no_banned_imports_exist,
+    validate_keywords_imports,
     validate_semantic_types_import,
 )
 from os.path import exists as os_path_exists
@@ -34,11 +35,8 @@ def test_Chapters_AllImportsAreFromLibrariesInLessThanEqual_aXX():
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
     chapter_descs = get_chapter_descs()
-    mod_descs_sorted = sorted(list(chapter_descs.keys()))
-
-    # WHEN / THEN
     all_file_count = 0
-    for chapter_desc in mod_descs_sorted:
+    for chapter_desc in sorted(list(chapter_descs.keys())):
         chapter_dir = chapter_descs.get(chapter_desc)
         chapter_desc_str_number = get_chapter_desc_str_number(chapter_desc)
         print(f"{chapter_desc=}")
@@ -47,12 +45,9 @@ def test_Chapters_AllImportsAreFromLibrariesInLessThanEqual_aXX():
         # print(f"{desc_number_str} src.{chapter_desc}")
         for chapter_file_count, file_path in enumerate(chapter_files, start=1):
             all_file_count += 1
+            # WHEN / THEN
             validate_py_file_imports(
-                file_path,
-                ch_int,
-                all_file_count,
-                chapter_desc_str_number,
-                chapter_file_count,
+                file_path, ch_int, all_file_count, chapter_file_count
             )
 
 
@@ -60,17 +55,17 @@ def validate_py_file_imports(
     file_path: str,
     ch_int: int,
     all_file_count: int,
-    chapter_desc_str_number: str,
     chapter_file_count: int,
 ):
     file_ast_tree = get_file_ast_tree(file_path)
     incorrect_imports = find_incorrect_imports(file_ast_tree, ch_int)
     if len(incorrect_imports) == 1 and file_path.find("_keywords.py") > 0:
         incorrect_imports = []
-    assertion_fail_str = f"File #{all_file_count} a{chapter_desc_str_number} file #{chapter_file_count} Imports: {len(incorrect_imports)} {file_path}"
+    assertion_fail_str = f"File #{all_file_count} ch{ch_int:02} file #{chapter_file_count} Imports: {len(incorrect_imports)} {file_path}"
     assert not incorrect_imports, assertion_fail_str
     assert no_banned_imports_exist(file_ast_tree), assertion_fail_str
     validate_semantic_types_import(file_ast_tree, file_path, ch_int)
+    validate_keywords_imports(file_ast_tree, file_path, ch_int)
 
 
 def test_Chapters_path_FunctionStructureAndFormat():

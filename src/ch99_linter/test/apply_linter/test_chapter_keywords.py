@@ -190,7 +190,6 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
             allowed_any_import = is_py_file_allowed_any_imports(file_path)
             has_from_imports_only = py_file_has_from_imports_only(file_str, file_path)
             assert has_from_imports_only or allowed_any_import, file_path
-            check_keywords_are_correct(file_path, chapter_prefix, file_str)
 
             is_ref_keywords_file = f"\\{chapter_prefix}_keywords.py" in file_path
             if is_ref_keywords_file:
@@ -223,24 +222,6 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
                 assert min_chapter_count != 1, ch_count_fail_str
 
 
-# TODO reactivate this
-def check_keywords_are_correct(file_path: str, chapter_prefix: str, file_str: str):
-    ch_class_name = f"C{chapter_prefix[1:]}Keywords"
-    # for excluded_file in {"doc_builder.py", f"test_{chapter_prefix}_keywords.py"}:
-    #     if excluded_file in file_path:
-    #         return
-
-    # excessive_imports_str = f"{file_path} has too many Keywords class imports"
-    # assert file_str.count("Keywords") <= 1, excessive_imports_str
-    # assert file_str.count(ch_class_name) in {0, 4}, ""
-    # if "Keywords" in file_str:
-    #     enum_x = (
-    #         f"{file_path} Keywords Class Import is wrong, it should be {ch_class_name}"
-    #     )
-    #     assert ch_class_name in file_str, enum_x
-    #     # print(f"{file_path=} {ch_class_name=}")
-
-
 def does_not_allowed_from_src_import_exist(
     file_str: str, file_path
 ) -> tuple[Literal[False]] | Literal[True]:
@@ -267,28 +248,6 @@ def add_ch_keyword_count(keywords_ch_counts: dict, keyword: str, chapter_prefix:
     if keyword_ch_counts.get(chapter_prefix) is None:
         keyword_ch_counts[chapter_prefix] = 0
     keyword_ch_counts[chapter_prefix] += 1
-
-
-def test_Chapters_FirstLevelFilesDoNotImportKeywords():
-    """Test that checks no str function is created before it is needed or after the term is used."""
-    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    # ESTABLISH / WHEN
-    # all_file_count = 0
-    for chapter_desc, chapter_dir in get_chapter_descs().items():
-        chapter_prefix = get_chapter_desc_prefix(chapter_desc)
-
-        chapter_files = list(get_dir_file_strs(chapter_dir, include_dirs=False).keys())
-        chapter_files = sorted(chapter_files)
-        print(f"{chapter_files=}")
-        # chapter_file_count = 0
-        for filename in chapter_files:
-            file_path = create_path(chapter_dir, filename)
-            file_str = open_file(file_path)
-            # print(f"{file_path=}")
-            # THEN
-            assert "Keywords" not in file_str, f"Keywords reference in {file_path}"
-            failure_example_str = f"ExampleStrs reference in {file_path}"
-            assert "ExampleStrs " not in file_str, failure_example_str
 
 
 def test_Chapters_KeywordEnumClassesAreCorrectlyTested():

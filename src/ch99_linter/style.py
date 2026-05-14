@@ -39,7 +39,7 @@ def get_filenames_with_wrong_style(filenames: set[str]) -> set[str]:
     return {file for file in filenames if not filename_style_is_correct(file)}
 
 
-def function_name_style_is_correct(function_name: str):
+def function_name_style_is_correct(function_name: str) -> bool:
     if function_name in {"visit_Import", "visit_ImportFrom"}:
         return True
 
@@ -136,9 +136,7 @@ def get_all_semantic_types_from_ref_files() -> set[str]:
         semantic_types_filename = get_semantic_types_filename(chapter_prefix)
         str_util_path = create_path(ref_dir, semantic_types_filename)
         functions, class_bases = get_func_names_and_class_bases_from_file(str_util_path)
-        print(f"{chapter_desc} {class_bases=}")
         all_ref_files_semantic_types.update(class_bases)
-    print(all_ref_files_semantic_types)
     return all_ref_files_semantic_types
 
 
@@ -154,13 +152,11 @@ def check_if_function_name_repeats(
     all_functions: dict,
     non_excluded_functions: set,
     excluded_functions: dict,
-    file_path: str,
     duplicate_func_names: set,
 ):
     for function_name in file_functions:
         add_or_count_function_name_occurance(all_functions, function_name)
         if function_name in non_excluded_functions:
-            print(f"Duplicate function {function_name} in {file_path}")
             duplicate_func_names.add(function_name)
         if function_name not in excluded_functions:
             non_excluded_functions.add(function_name)
@@ -203,14 +199,9 @@ def get_chapters_obj_metrics(excluded_functions) -> ChaptersObjMetrics:
                 all_functions,
                 non_excluded_functions,
                 excluded_functions,
-                file_path,
                 duplicate_func_names,
             )
 
-    print(f"{duplicate_func_names=}")
-    # print(f"{duplicate_func_names=}")
-    # print(f"{len(non_excluded_functions)=}")
-    # print(f"{len(all_functions)=}")
     unnecessarily_excluded_funcs = get_unnecessarily_excluded_funcs(
         all_functions, excluded_functions
     )
@@ -229,7 +220,6 @@ def check_custom_exception_classes_style(all_classes: dict[str, str]):
     for x_class, class_str in all_classes.items():
         if "exception" in class_str.lower():
             x_count += 1
-            # print(f"{x_count}. {class_str[26:]}")
             file_path = class_str[26:]
             if not os_path_exists(file_path):
                 raise AssertionError("File does not exist")
@@ -279,9 +269,6 @@ def get_unnecessarily_excluded_funcs(
             unnecessarily_excluded_funcs[excluded_function] = does_not_exist_str
     # for func_name in sorted(list(all_functions.keys()), reverse=False):
     #     func_count = all_functions.get(func_name)
-    # if func_count > 1:
-    #     print(f"{func_name} {func_count=}")
-    print(f"{len(excluded_functions)=}")
     return unnecessarily_excluded_funcs
 
 
@@ -303,7 +290,6 @@ def get_semantic_types(semantic_type_candidates) -> set:
                 # if x_base exists in semantic_type_candidates change classes bases reference to parent class
                 semantic_type_candidates[x_class] = new_bases
                 candidates_list.append(x_class)
-    # print(f"{sorted(list(confirmed_semantic_types))=}")
     return confirmed_semantic_types
 
 
@@ -322,17 +308,16 @@ def check_if_chapter_keywords_by_chapter_is_sorted(
     if filtered_ch_str_func != sorted_filtered_ch_str_func:
         first_wrong_index = None
         for x in range(len(filtered_ch_str_func)):
-            # print(f"{filtered_ch_str_func[x]}")
             if (
                 not first_wrong_index
                 and filtered_ch_str_func[x] != sorted_filtered_ch_str_func[x]
             ):
                 first_wrong_index = f"{filtered_ch_str_func[x]} should be {sorted_filtered_ch_str_func[x]}"
 
-        # print(f"{first_wrong_index=}")
-        # print(f"Bad Order     {filtered_ch_str_func}")
-        # print(f"Correct order {sorted(filtered_ch_str_func)}")
-    assert filtered_ch_str_func == sorted(filtered_ch_str_func)
+    assert_fail_str = f"{first_wrong_index=}"
+    assert_fail_str += f"Bad Order     {filtered_ch_str_func}"
+    assert_fail_str += f"Correct order {sorted(filtered_ch_str_func)}"
+    assert filtered_ch_str_func == sorted(filtered_ch_str_func), assert_fail_str
 
 
 def check_keywords_by_chapter_are_not_duplicated(
@@ -340,11 +325,8 @@ def check_keywords_by_chapter_are_not_duplicated(
 ):
     running_str_functions_set = set(running_str_functions_set)
     chapter_keywords_by_chapter = set(chapter_keywords_by_chapter)
-    if chapter_keywords_by_chapter & running_str_functions_set:
-        print(
-            f"Duplicate functions: {chapter_keywords_by_chapter & running_str_functions_set}"
-        )
-    assert not chapter_keywords_by_chapter & running_str_functions_set
+    assert_fail_str = f"Duplicate functions: {chapter_keywords_by_chapter & running_str_functions_set}"
+    assert not chapter_keywords_by_chapter & running_str_functions_set, assert_fail_str
 
 
 def get_docstring(file_path: str, function_name: str) -> str:
@@ -364,16 +346,11 @@ def get_docstring(file_path: str, function_name: str) -> str:
 def check_path_funcs_return_str_exists(path_funcs: set, test_path_func_names: set[str]):
     for path_func in path_funcs:
         pytest_for_func_exists = False
-        # print(f"{chapter_desc} {path_func}")
         expected_test_func = f"test_{path_func}_ReturnsObj"
         for test_path_func_name in test_path_func_names:
             if test_path_func_name.startswith(expected_test_func):
                 pytest_for_func_exists = True
-            # print(
-            #     f"{pytest_for_func_exists} {chapter_desc} {path_func} {test_path_func_name}"
-            # )
         assert pytest_for_func_exists, f"missing {expected_test_func=}"
-        # print(f"{chapter_desc} {test_func_exists} {path_func}")
 
 
 def check_path_funcs_has_docstring_tests_exist(
@@ -381,29 +358,26 @@ def check_path_funcs_has_docstring_tests_exist(
 ):
     for path_func in path_funcs:
         pytest_for_func_exists = False
-        # print(f"{chapter_desc} {path_func}")
         expected_test_func = f"test_{path_func}_HasDocString"
         for test_path_func_name in test_path_func_names:
             if test_path_func_name.startswith(expected_test_func):
                 pytest_for_func_exists = True
-            # print(
-            #     f"{pytest_for_func_exists} {chapter_desc} {path_func} {test_path_func_name}"
-            # )
         assert pytest_for_func_exists, f"missing {expected_test_func=}"
-        # print(f"{chapter_desc} {test_func_exists} {path_func}")
 
 
-def necessary_comments_exist(function_name: str, test_function_str: str) -> bool:
+def necessary_comments_exist(
+    function_name: str, test_function_str: str
+) -> tuple[bool, str]:
     establish_exists = "ESTABLISH" in test_function_str
     when_exists = "WHEN" in test_function_str
     then_exists = "THEN" in test_function_str
     establish_when_then_exist = establish_exists and when_exists and then_exists
     if "SQLTEST" in function_name:
         before_str_exists = "BEFORE" in test_function_str
-        if not before_str_exists:
-            print(f"SQLTEST {function_name} requires BEFORE comment")
-        return before_str_exists and establish_when_then_exist
-    return establish_when_then_exist
+        assert_fail_str = f"SQLTEST {function_name} requires BEFORE comment"
+        return before_str_exists and establish_when_then_exist, assert_fail_str
+    fail_str = f"Necessary comments like 'ESTABLISH', 'WHEN', 'THEN' are missing in test function '{function_name}'"
+    return establish_when_then_exist, fail_str
 
 
 def check_all_test_functions_are_formatted(all_test_functions: dict[str, str]):
@@ -414,8 +388,7 @@ def check_all_test_functions_are_formatted(all_test_functions: dict[str, str]):
     print(f"check all {func_total_count} functions...")
     for function_count, function_name in enumerate(sorted_test_functions_names):
         test_function_str = all_test_functions.get(function_name)
-        fail_str = f"Necessary comments like 'ESTABLISH', 'WHEN', 'THEN' are missing in test function '{function_name}'"
-        assert necessary_comments_exist(function_name, test_function_str), fail_str
+        assert necessary_comments_exist(function_name, test_function_str)
         # check that no test creates it's own cursor in memory
         memory_cursor_fail_str = f"{function_name} init memory cursor"
         if (
@@ -615,8 +588,7 @@ def find_chapter_dir(file_path: str) -> pathlib_Path | None:
 
 def validate_semantic_types_import(tree: ast_AST, file_path, ch_int: int) -> None:
     """
-    Walk a Python AST tree and print any imports that contain
-    'semantic_types'.
+    Walk a Python AST tree and check imports that contain 'semantic_types'.
     """
     expected_ch_semantic_types = f"ch{ch_int:02}_semantic_types"
     assertion_fail_str = (
@@ -637,3 +609,35 @@ def validate_semantic_types_import(tree: ast_AST, file_path, ch_int: int) -> Non
                         assert (
                             expected_ch_semantic_types in node.names
                         ), assertion_fail_str
+
+
+def validate_keywords_imports(tree: ast_AST, file_path, ch_int: int) -> None:
+    """
+    Walk a Python AST tree and check if Keywords import allowed/correct
+    """
+    expected_kw_import = f"Ch{ch_int:02}Keywords"
+    if "test" in file_path:
+        assertion_fail_str = (
+            f"Did not find expected {expected_kw_import} in '{file_path}'"
+        )
+
+        for node in ast_walk(tree):
+            if not isinstance(node, ast_ImportFrom):
+                continue
+
+            if node.module != "ref.keywords":
+                continue
+
+            for alias in node.names:
+                imported_name = alias.name
+                if "Keywords" in imported_name:
+                    assert imported_name == expected_kw_import, assertion_fail_str
+
+    else:
+        assertion_fail_str = f"No Keywords Enum class import alloed in '{file_path}'"
+        for node in ast_walk(tree):
+            if isinstance(node, ast_ImportFrom):
+                assert node.module and "keywords" not in node.module, assertion_fail_str
+            elif isinstance(node, ast_Import):
+                for alias in node.names:
+                    assert "keywords" not in alias.name, assertion_fail_str
