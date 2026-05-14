@@ -2,7 +2,7 @@ from ch00_py.keyword_class_builder import (
     get_keywords_src_config,
     save_keywords_by_chapter_md,
 )
-from ch98_docs_builder.doc_builder import (
+from ch97_docs_builder.doc_builder import (
     get_rebuilt_keywords_src_config,
     resave_chapter_and_keyword_json_files,
     save_brick_formats_md,
@@ -11,7 +11,7 @@ from ch98_docs_builder.doc_builder import (
     save_ropeterm_description_md,
 )
 from random import random as random_random
-from ref.keywords import Ch98Keywords as kw
+from ref.keywords import Ch97Keywords as kw
 from ref.sorter import get_keg_elements_sort_order
 
 

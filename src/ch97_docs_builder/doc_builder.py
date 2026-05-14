@@ -20,11 +20,11 @@ from ch00_py.keyword_class_builder import (
 )
 from ch04_rope._ref.ch04_doc_builder import get_ropeterm_description_md
 from ch17_brick._ref.ch17_doc_builder import get_brick_formats_md, get_brick_mds
-from ch98_docs_builder._ref.ch98_path import (
+from ch97_docs_builder._ref.ch97_path import (
     create_chapter_ref_path,
     create_src_keg_exam_path,
 )
-from ch98_docs_builder.keg_definitions_builder import (
+from ch97_docs_builder.keg_definitions_builder import (
     rebuild_final_exam_questions,
     rebuild_keg_definitions_contents,
 )

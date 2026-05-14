@@ -75,6 +75,7 @@ def test_get_keywords_by_chapter_ReturnsObj():
     # ESTABLISH / WHEN
     keywords_by_chapter = get_keywords_by_chapter(get_keywords_src_config())
     # THEN
+    print(f"{keywords_by_chapter=}")
     print(f"{len(keywords_by_chapter)=}")
     assert len(keywords_by_chapter.get(0)) > 0
 

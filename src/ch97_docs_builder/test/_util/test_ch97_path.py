@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import create_path, get_json_filename
-from ch98_docs_builder._ref.ch98_path import (
+from ch97_docs_builder._ref.ch97_path import (
     create_chapter_ref_path,
     create_src_keg_definitions_path,
     create_src_keg_exam_path,

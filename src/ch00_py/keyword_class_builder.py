@@ -63,6 +63,8 @@ def get_keywords_by_chapter(keywords_dict: dict[str, dict[str]]) -> dict:
         keyword_valid_chs = parse_valid_ch_str(ch_ints, valid_ch_str)
         for valid_ch_int in keyword_valid_chs:
             chapter_set = chapters_keywords.get(valid_ch_int)
+            if chapter_set is None:
+                return f"failure concerning {valid_ch_int=}"
             chapter_set.add(x_keyword)
     return chapters_keywords
 

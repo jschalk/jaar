@@ -1,5 +1,5 @@
 from ch00_py.keyword_class_builder import get_keywords_src_config
-from ch98_docs_builder.keg_definitions_builder import (
+from ch97_docs_builder.keg_definitions_builder import (
     QuestionUnit,
     get_ch_sorted_keywords,
     get_exam_fixed_questions,
@@ -11,7 +11,7 @@ from ch98_docs_builder.keg_definitions_builder import (
     set_did_you_read_orders,
 )
 from csv import reader as csv_reader
-from ref.keywords import Ch98Keywords as kw
+from ref.keywords import Ch97Keywords as kw
 
 # TODO replace how exam tier source of truth
 # Having exam tier sourced in keywords_main makes it so example strings don't have exam_tiers.
@@ -515,7 +515,7 @@ def test_get_keywords_by_importance_ReturnsObj_Scenario0():
 #     }
 
 #     # WHEN
-#     from ch98_docs_builder.keg_definitions_builder import (
+#     from ch97_docs_builder.keg_definitions_builder import (
 #         get_kegology_exam_grade,
 #     )
 
@@ -536,7 +536,7 @@ def test_get_keywords_by_importance_ReturnsObj_Scenario0():
 #     }
 
 #     # WHEN
-#     from ch98_docs_builder.keg_definitions_builder import (
+#     from ch97_docs_builder.keg_definitions_builder import (
 #         get_kegology_exam_grade,
 #     )
 
@@ -556,7 +556,7 @@ def test_get_keywords_by_importance_ReturnsObj_Scenario0():
 #     answers = {}
 
 #     # WHEN
-#     from ch98_docs_builder.keg_definitions_builder import (
+#     from ch97_docs_builder.keg_definitions_builder import (
 #         get_kegology_exam_grade,
 #     )
 

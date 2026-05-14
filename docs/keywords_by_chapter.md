@@ -32,5 +32,5 @@
 - ch34_finance: ch34, finance, financial
 - ch35_person_viewer: ch35
 - ch36_world_app: ch36
-- ch98_docs_builder: ch98
+- ch97_docs_builder: ch97
 - ch99_linter: ch99

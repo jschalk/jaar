@@ -4,7 +4,7 @@ from ch00_py.chapter_desc_main import (
 )
 from ch00_py.file_toolbox import create_path, get_dir_filenames
 from ch00_py.notebook_toolbox import get_top_level_functions
-from ch98_docs_builder.doc_builder import get_chapter_descs
+from ch97_docs_builder.doc_builder import get_chapter_descs
 from ch99_linter.style import (
     check_all_test_functions_are_formatted,
     check_path_funcs_has_docstring_tests_exist,

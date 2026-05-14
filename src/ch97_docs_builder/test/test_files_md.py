@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import count_dirs_files, create_path, open_file
 from ch04_rope._ref.ch04_doc_builder import get_ropeterm_description_md
-from ch98_docs_builder.doc_builder import (
+from ch97_docs_builder.doc_builder import (
     get_chapter_blurbs_md,
     save_brick_formats_md,
     save_brick_mds,
@@ -8,7 +8,7 @@ from ch98_docs_builder.doc_builder import (
     save_ropeterm_description_md,
 )
 from os.path import exists as os_path_exists
-from ref.keywords import Ch98Keywords as kw
+from ref.keywords import Ch97Keywords as kw
 
 
 def test_get_chapter_blurbs_md_ReturnsObj():

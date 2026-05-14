@@ -19,7 +19,7 @@ from ch16_translate.translate_config import (
 from ch17_brick.brick_config import get_brick_config_dict
 from ch18_etl_config.etl_config import get_etl_stage_types_config_dict
 from ch22_heard.heard import etl_heard_raw_tables_to_lego_moment_ote1_agg
-from ch98_docs_builder._ref.ch98_semantic_types import (
+from ch97_docs_builder._ref.ch97_semantic_types import (
     BreakTerm,
     ContactName,
     CRUD_command,
@@ -53,7 +53,7 @@ from ch98_docs_builder._ref.ch98_semantic_types import (
     WeightNum,
     WorldName,
 )
-from ch98_docs_builder.keg_definitions_builder import (
+from ch97_docs_builder.keg_definitions_builder import (
     get_chxx_prefix_path_dict,
     get_chxx_ref_blurb,
     get_keg_definitions,
@@ -62,7 +62,7 @@ from ch98_docs_builder.keg_definitions_builder import (
 )
 from inspect import getdoc as inspect_getdoc
 from re import fullmatch as re_fullmatch
-from ref.keywords import Ch98Keywords as kw, ExampleStrs as exx
+from ref.keywords import Ch97Keywords as kw, ExampleStrs as exx
 from ref.sorter import get_keg_elements_sort_order
 
 

@@ -5,7 +5,7 @@ from ch00_py.keyword_class_builder import (
     get_keywords_by_chapter,
     get_keywords_src_config,
 )
-from ch98_docs_builder.doc_builder import get_chapter_desc_prefix, get_chapter_descs
+from ch97_docs_builder.doc_builder import get_chapter_desc_prefix, get_chapter_descs
 from ch99_linter.style import (
     check_custom_exception_classes_style,
     find_matching_tests,

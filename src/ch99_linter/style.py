@@ -11,7 +11,7 @@ from ast import (
 from ch00_py.dict_toolbox import is_camel_case, uppercase_in_str
 from ch00_py.file_toolbox import create_path, get_dir_filenames, open_file
 from ch00_py.keyword_class_builder import get_example_strs_config
-from ch98_docs_builder.doc_builder import (
+from ch97_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_descs,
     get_func_names_and_class_bases_from_file,
