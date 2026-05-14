@@ -3,7 +3,7 @@ from ch00_py.notebook_toolbox import (
     create_marimo_notebook_from_test_str,
     save_marimo_notebook_from_test_file,
 )
-from ch99_ref.keywords import Ch00Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch00Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 

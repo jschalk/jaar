@@ -7,7 +7,7 @@ from ch09_person_lesson.lesson_filehandler import (
     LessonFileHandler,
     lessonfilehandler_shop,
 )
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 from pytest import raises as pytest_raises
 
 

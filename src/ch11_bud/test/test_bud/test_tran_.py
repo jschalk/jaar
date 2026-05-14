@@ -5,7 +5,7 @@ from ch11_bud.bud_main import (
     tranbook_shop,
     tranunit_shop,
 )
-from ch99_ref.keywords import Ch11Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch11Keywords as kw, ExampleStrs as exx
 from pytest import raises as pytest_raises
 
 

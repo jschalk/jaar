@@ -15,7 +15,7 @@ from ch00_py.file_toolbox import (
 )
 from ch00_py.keyword_class_builder import (
     create_src_example_strs_path,
-    create_src_keywords_main_path,
+    create_src_keywords_src_path,
     get_keywords_src_config,
 )
 from ch04_rope._ref.ch04_doc_builder import get_ropeterm_description_md
@@ -28,7 +28,7 @@ from ch97_docs_builder.keg_definitions_builder import (
     rebuild_final_exam_questions,
     rebuild_keg_definitions_contents,
 )
-from ch99_ref.sorter import get_keg_elements_sort_order
+from ch99_glossary.sorter import get_keg_elements_sort_order
 
 
 def get_func_names_and_class_bases_from_file(
@@ -114,11 +114,11 @@ def resave_chapter_and_keyword_json_files():
         for x_dir, x_filename in json_file_tuples:
             json_dir = create_path(chapter_dir, x_dir)
             save_json(json_dir, x_filename, open_json(json_dir, x_filename))
-    keywords_main_json_path = create_src_keywords_main_path("src")
+    keywords_src_json_path = create_src_keywords_src_path("src")
     ex_strs_json_path = create_src_example_strs_path("src")
     rebuilt_keywords_src_config = get_rebuilt_keywords_src_config()
-    save_json(keywords_main_json_path, None, rebuilt_keywords_src_config)
-    # save_json(keywords_main_json_path, None, open_json(keywords_main_json_path))
+    save_json(keywords_src_json_path, None, rebuilt_keywords_src_config)
+    # save_json(keywords_src_json_path, None, open_json(keywords_src_json_path))
     save_json(ex_strs_json_path, None, open_json(ex_strs_json_path))
     rebuild_keg_definitions_contents()
     rebuild_final_exam_questions(create_src_keg_exam_path("src"))

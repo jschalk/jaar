@@ -5,7 +5,7 @@ from ch04_rope._ref.ch04_semantic_types import (
     RopeTerm,
     default_knot_if_None,
 )
-from ch99_ref.keywords import Ch04Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch04Keywords as kw, ExampleStrs as exx
 from inspect import getdoc as inspect_getdoc
 
 

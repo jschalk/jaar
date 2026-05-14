@@ -11,7 +11,7 @@ from ch17_brick.brick_db_tool import (
     split_excel_into_dirs,
     update_all_spark_face_spark_num_columns,
 )
-from ch99_ref.keywords import Ch17Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch17Keywords as kw, ExampleStrs as exx
 from numpy import float64, nan as numpy_nan
 from openpyxl import (
     Workbook as openpyxl_Workbook,

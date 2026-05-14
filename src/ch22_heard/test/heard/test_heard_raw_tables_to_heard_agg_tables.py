@@ -23,7 +23,7 @@ from ch22_heard.test.heard.test_heard_agg__update_factnum_pfhapx import (
     pfhapx_insert_prnplan,
     pfhapx_select_prnfact,
 )
-from ch99_ref.keywords import Ch22Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch22Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

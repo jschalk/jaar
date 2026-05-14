@@ -4,7 +4,7 @@ from ch09_person_lesson.lesson_filehandler import open_gut_file, save_gut_file
 from ch13_time.epoch_main import epochunit_shop, get_default_epoch_config_dict
 from ch13_time.test._util.ch13_examples import get_five_config
 from ch14_moment.moment_main import momentunit_shop
-from ch99_ref.keywords import Ch14Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch14Keywords as kw, ExampleStrs as exx
 
 
 def test_MomentUnit_get_epoch_config_ReturnsObj_Scenario0(temp3_dir):

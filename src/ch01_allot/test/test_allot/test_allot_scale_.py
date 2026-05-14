@@ -4,7 +4,7 @@ from ch01_allot.allot import (
     _get_missing_scale_list,
     allot_scale,
 )
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 from pytest import raises as pytest_raises
 
 

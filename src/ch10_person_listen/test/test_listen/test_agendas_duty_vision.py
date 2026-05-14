@@ -21,7 +21,7 @@ from ch10_person_listen.test._util.ch10_examples import (
     get_example_zia_speaker,
     run_str,
 )
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 
 
 def test_listen_to_agenda_duty_vision_agenda_Addscase_tasksTovision_PersonWhenNo_laborunitIsSet(

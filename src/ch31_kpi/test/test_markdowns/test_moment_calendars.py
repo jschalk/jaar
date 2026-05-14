@@ -11,7 +11,7 @@ from ch13_time.test._util.ch13_examples import (
 )
 from ch14_moment.moment_main import momentunit_shop
 from ch31_kpi.kpi_mstr import create_calendar_markdown_files
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 

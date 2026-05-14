@@ -1,7 +1,7 @@
 from ch04_rope.rope import create_rope, create_rope_from_labels as init_rope
 from ch07_person_logic.person_main import PersonUnit, personunit_shop
 from ch13_time.epoch_main import add_epoch_planunit
-from ch99_ref.keywords import Ch32Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch32Keywords as kw, ExampleStrs as exx
 from pandas import DataFrame as pandas_DataFrame
 
 

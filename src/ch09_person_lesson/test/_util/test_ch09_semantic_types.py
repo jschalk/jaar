@@ -1,5 +1,5 @@
 from ch09_person_lesson._ref.ch09_semantic_types import MomentRope
-from ch99_ref.keywords import Ch09Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch09Keywords as kw, ExampleStrs as exx
 from inspect import getdoc as inspect_getdoc
 
 

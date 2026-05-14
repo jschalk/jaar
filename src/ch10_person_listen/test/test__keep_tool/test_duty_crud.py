@@ -6,7 +6,7 @@ from ch10_person_listen.keep_tool import (
     vision_file_exists,
 )
 from ch10_person_listen.test._util.ch10_examples import ch10_example_moment_rope
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 
 
 def test_save_vision_person_SavesFile(temp3_fs):

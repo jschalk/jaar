@@ -1,12 +1,11 @@
 from ch00_py._ref.ch00_path import (
     create_src_example_strs_path,
-    create_src_keywords_main_path,
+    create_src_keywords_src_path,
 )
 from ch00_py.chapter_desc_main import get_chapter_desc_prefix, get_chapter_descs
 from ch00_py.file_toolbox import create_path, open_json, save_file
 from copy import copy as copy_copy
 from enum import Enum
-from re import fullmatch as re_fullmatch
 from typing import Any, List, Set, Tuple
 
 
@@ -15,7 +14,7 @@ def get_example_strs_config() -> dict[str, dict]:
 
 
 def get_keywords_src_config() -> dict[str, dict]:
-    return open_json(create_src_keywords_main_path("src"))
+    return open_json(create_src_keywords_src_path("src"))
 
 
 def get_possible_keyword_config_keys() -> set:
@@ -69,22 +68,22 @@ def get_keywords_by_chapter(keywords_dict: dict[str, dict[str]]) -> dict:
     return chapters_keywords
 
 
-def get_cumlative_keywords_main_dict(keywords_by_chapter: dict[int, set[str]]) -> dict:
-    cumlative_keywords_main_dict = {}
+def get_cumlative_keywords_src_dict(keywords_by_chapter: dict[int, set[str]]) -> dict:
+    cumlative_keywords_src_dict = {}
     for chapter_num in sorted(list(keywords_by_chapter.keys())):
-        keywords_main_set = keywords_by_chapter.get(chapter_num)
-        cumlative_keywords_main_dict[chapter_num] = copy_copy(keywords_main_set)
-    return cumlative_keywords_main_dict
+        keywords_src_set = keywords_by_chapter.get(chapter_num)
+        cumlative_keywords_src_dict[chapter_num] = copy_copy(keywords_src_set)
+    return cumlative_keywords_src_dict
 
 
-def get_chapter_keyword_classes(cumlative_keywords_main_dict: dict) -> dict[int,]:
+def get_chapter_keyword_classes(cumlative_keywords_src_dict: dict) -> dict[int,]:
     chXX_keyword_classes = {}
     word_str = "word"
-    for chapter_int in sorted(list(cumlative_keywords_main_dict.keys())):
-        keywords_main = cumlative_keywords_main_dict.get(chapter_int)
+    for chapter_int in sorted(list(cumlative_keywords_src_dict.keys())):
+        keywords_src = cumlative_keywords_src_dict.get(chapter_int)
         chapter_prefix = f"Ch{chapter_int:02d}"
         class_name = f"C{chapter_prefix[1:]}Key{word_str}s"
-        ExpectedClass = Enum(class_name, {t: t for t in keywords_main}, type=str)
+        ExpectedClass = Enum(class_name, {t: t for t in keywords_src}, type=str)
         chXX_keyword_classes[chapter_prefix] = ExpectedClass
     return chXX_keyword_classes
 
@@ -124,7 +123,7 @@ def create_examplestrs_class_str(example_strs_dict: dict) -> str:
 def create_all_enum_keyword_classes_str() -> str:
     examples_strs = get_example_strs_config()
     keywords_by_chapter = get_keywords_by_chapter(get_keywords_src_config())
-    cumlative_keywords = get_cumlative_keywords_main_dict(keywords_by_chapter)
+    cumlative_keywords = get_cumlative_keywords_src_dict(keywords_by_chapter)
     import_enum_line = f"""from enum import Enum
 
 
@@ -134,8 +133,8 @@ def create_all_enum_keyword_classes_str() -> str:
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         ch_prefix = get_chapter_desc_prefix(chapter_desc)
         ch_int = int(chapter_desc[2:4])
-        keywords_main = cumlative_keywords.get(ch_int)
-        enum_class_str = create_keywords_enum_class_file_str(ch_prefix, keywords_main)
+        keywords_src = cumlative_keywords.get(ch_int)
+        enum_class_str = create_keywords_enum_class_file_str(ch_prefix, keywords_src)
         classes_str += enum_class_str
     return classes_str
 

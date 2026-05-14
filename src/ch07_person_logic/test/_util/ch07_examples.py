@@ -8,7 +8,7 @@ from ch07_person_logic.person_main import (
     get_personunit_from_dict,
     personunit_shop,
 )
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 from enum import Enum
 
 # save_json(env_dir(), "example_person3.json", personunit_v001().to_dict())

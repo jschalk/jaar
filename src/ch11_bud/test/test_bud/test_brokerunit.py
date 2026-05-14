@@ -5,7 +5,7 @@ from ch11_bud.bud_main import (
     get_personbudhistory_from_dict,
     personbudhistory_shop,
 )
-from ch99_ref.keywords import Ch11Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch11Keywords as kw, ExampleStrs as exx
 
 
 def test_SparkInt_Exists():

@@ -22,7 +22,7 @@ from ch13_time.test._util.ch13_examples import (
     get_bob_five_person,
     get_lizzy9_config,
 )
-from ch99_ref.keywords import Ch13Keywords as kw
+from ch99_glossary.keywords import Ch13Keywords as kw
 
 
 def test_add_frame_to_caseunit_SetsAttr_Scenario0_NoWrap_dayly():

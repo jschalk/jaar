@@ -27,7 +27,7 @@ from ch17_brick.brick_config import (
     get_brick_sqlite_types,
     get_default_sorted_list,
 )
-from ch99_ref.sorter import get_keg_elements_sort_order
+from ch99_glossary.sorter import get_keg_elements_sort_order
 from contextlib import suppress as contextlib_suppress
 from io import BytesIO as io_BytesIO, StringIO as io_StringIO
 from json import load as json_load

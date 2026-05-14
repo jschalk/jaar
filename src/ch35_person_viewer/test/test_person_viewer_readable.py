@@ -3,7 +3,7 @@ from ch35_person_viewer.person_viewer_tool import (
     get_person_view_dict,
     get_plan_view_dict,
 )
-from ch99_ref.keywords import Ch35Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch35Keywords as kw, ExampleStrs as exx
 
 
 def test_get_person_view_dict_ReturnsObj_Scenario0_Empty():

@@ -2,7 +2,7 @@ from ch07_person_logic.person_main import personunit_shop
 from ch08_person_atom.atom_main import personatom_shop
 from ch09_person_lesson.delta import persondelta_shop
 from ch09_person_lesson.legible import create_legible_list
-from ch99_ref.keywords import Ch09Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch09Keywords as kw, ExampleStrs as exx
 
 
 def test_create_legible_list_ReturnsObj_contactunit_INSERT():

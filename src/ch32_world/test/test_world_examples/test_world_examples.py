@@ -7,7 +7,7 @@ from ch00_py.file_toolbox import (
 )
 from ch31_kpi.kpi_mstr import create_kpi_csvs
 from ch32_world.world import brick_sheets_to_lego_mstr, create_ideas, worlddir_shop
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 

@@ -1,7 +1,7 @@
 from ch04_rope.rope import create_rope
 from ch11_bud.bud_main import personbudhistory_shop
 from ch14_moment.moment_main import momentunit_shop
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 from pytest import raises as pytest_raises
 
 

@@ -1,7 +1,7 @@
 from ch00_py.file_toolbox import create_path, get_dir_file_strs, open_file
 from ch00_py.keyword_class_builder import (
     get_chapter_keyword_classes,
-    get_cumlative_keywords_main_dict,
+    get_cumlative_keywords_src_dict,
     get_keywords_by_chapter,
     get_keywords_src_config,
 )
@@ -17,7 +17,7 @@ from ch98_linter.style import (
     get_semantic_types_filename,
     py_file_has_from_imports_only,
 )
-from ch99_ref.keywords import Ch98Keywords as kw
+from ch99_glossary.keywords import Ch98Keywords as kw
 from importlib import import_module as importlib_import_module
 from inspect import getsource as inspect_getsource
 from typing import Literal
@@ -161,18 +161,18 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
     keywords_by_chapter = get_keywords_by_chapter(keywords_dict)
     all_keywords_set = set(keywords_dict.keys())
     keywords_in_ch_count = {keyword: {} for keyword in keywords_dict.keys()}
-    cumlative_keywords_main_dict = get_cumlative_keywords_main_dict(keywords_by_chapter)
+    cumlative_keywords_src_dict = get_cumlative_keywords_src_dict(keywords_by_chapter)
     filtered_chapter_descs = {
         chapter_desc: x_value
         for chapter_desc, x_value in get_chapter_descs().items()
-        if chapter_desc != "ch99_ref"
+        if chapter_desc != "ch99_glossary"
     }
     # WHEN / THEN
     # all_file_count = 0
     for chapter_desc, chapter_dir in filtered_chapter_descs.items():
         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
         chapter_int = int(chapter_desc[2:4])
-        allowed_chapter_keywords = cumlative_keywords_main_dict.get(chapter_int)
+        allowed_chapter_keywords = cumlative_keywords_src_dict.get(chapter_int)
         not_allowed_keywords = all_keywords_set.difference(allowed_chapter_keywords)
         not_allowed_keywords = not_allowed_keywords.difference(excluded_strs)
         # print(f"{chapter_prefix} {len(not_allowed_keywords)=}")
@@ -260,12 +260,12 @@ def test_Chapters_KeywordEnumClassesAreCorrectlyTested():
     # ESTABLISH
     keywords_dict = get_keywords_src_config()
     keywords_by_chapter = get_keywords_by_chapter(keywords_dict)
-    cumlative_keywords_main_dict = get_cumlative_keywords_main_dict(keywords_by_chapter)
+    cumlative_keywords_src_dict = get_cumlative_keywords_src_dict(keywords_by_chapter)
 
-    chXX_keyword_classes = get_chapter_keyword_classes(cumlative_keywords_main_dict)
+    chXX_keyword_classes = get_chapter_keyword_classes(cumlative_keywords_src_dict)
     # WHEN / THEN
     for chapter_prefix, ExpectedEnumClass in chXX_keyword_classes.items():
-        chapter_ref_keywords_path = f"src.ch99_ref.keywords"
+        chapter_ref_keywords_path = f"src.ch99_glossary.keywords"
         print(f"{chapter_ref_keywords_path=}")
 
         # dynamically import the module
@@ -275,7 +275,7 @@ def test_Chapters_KeywordEnumClassesAreCorrectlyTested():
         #     getattr(mod, enum_class_name)
         # except Exception:
         #     print(f"class {enum_class_name}(str, Enum):")
-        #     for keyword in sorted(list(cumlative_keywords_main_dict.get(chapter_num))):
+        #     for keyword in sorted(list(cumlative_keywords_src_dict.get(chapter_num))):
         #         print(f"    {keyword} = '{keyword}'")
         #     print("def __str__(self): return self.value")
 

@@ -5,7 +5,7 @@ from ch09_person_lesson.lasso import lassounit_shop
 from ch09_person_lesson.lesson_filehandler import gut_file_exists, save_gut_file
 from ch10_person_listen.keep_tool import job_file_exists, open_job_file, save_job_file
 from ch14_moment.moment_main import momentunit_shop
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 
 
 def test_MomentUnit_rotate_job_ReturnsObj_Scenario1(temp3_fs):

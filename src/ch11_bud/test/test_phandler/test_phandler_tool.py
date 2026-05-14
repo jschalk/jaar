@@ -43,7 +43,7 @@ from ch11_bud.test._util.ch11_examples import (
     get_budunit_55_example,
     get_budunit_invalid_example,
 )
-from ch99_ref.keywords import Ch11Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch11Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
 

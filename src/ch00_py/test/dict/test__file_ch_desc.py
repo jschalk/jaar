@@ -12,7 +12,7 @@ def test_get_chapter_descs_Scenario0_RemovesLinterAndRef():
         mock_get_dirs.return_value = [
             "intro_test_mock",
             "chapter1",
-            "ch99_ref",
+            "ch99_glossary",
             "chapter2",
         ]
 
@@ -27,7 +27,7 @@ def test_get_chapter_descs_Scenario0_RemovesLinterAndRef():
             "intro_test_mock": "src/intro_test_mock",
             "chapter1": "src/chapter1",
             "chapter2": "src/chapter2",
-            "ch99_ref": "src/ch99_ref",
+            "ch99_glossary": "src/ch99_glossary",
         }
 
 
@@ -37,7 +37,7 @@ def test_get_chapter_descs_Scenario1_GetsLevel1Directories():
         patch("ch00_py.chapter_desc_main.get_level1_dirs") as mock_get_dirs,
         patch("ch00_py.chapter_desc_main.create_path"),
     ):
-        mock_get_dirs.return_value = ["chapter1", "ch99_ref"]
+        mock_get_dirs.return_value = ["chapter1", "ch99_glossary"]
 
         # WHEN
         get_chapter_descs()

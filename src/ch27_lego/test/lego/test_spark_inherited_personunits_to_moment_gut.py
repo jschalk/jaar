@@ -4,7 +4,7 @@ from ch09_person_lesson._ref.ch09_path import create_gut_path
 from ch09_person_lesson.lasso import lassounit_shop
 from ch11_bud._ref.ch11_path import create_person_spark_dir_path
 from ch27_lego.lego_core import etl_spark_inherited_personunits_to_mind_gut
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 # create test where spark create_person_spark_dir_path()

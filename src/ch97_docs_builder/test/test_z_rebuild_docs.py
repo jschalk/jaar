@@ -10,8 +10,8 @@ from ch97_docs_builder.doc_builder import (
     save_chapter_blurbs_md,
     save_ropeterm_description_md,
 )
-from ch99_ref.keywords import Ch97Keywords as kw
-from ch99_ref.sorter import get_keg_elements_sort_order
+from ch99_glossary.keywords import Ch97Keywords as kw
+from ch99_glossary.sorter import get_keg_elements_sort_order
 from random import random as random_random
 
 

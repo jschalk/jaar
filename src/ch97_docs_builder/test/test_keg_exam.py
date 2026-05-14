@@ -10,11 +10,11 @@ from ch97_docs_builder.keg_definitions_builder import (
     rebuild_final_exam_questions,
     set_did_you_read_orders,
 )
-from ch99_ref.keywords import Ch97Keywords as kw
+from ch99_glossary.keywords import Ch97Keywords as kw
 from csv import reader as csv_reader
 
 # TODO replace how exam tier source of truth
-# Having exam tier sourced in keywords_main makes it so example strings don't have exam_tiers.
+# Having exam tier sourced in keywords_src makes it so example strings don't have exam_tiers.
 # - [ ] create new json "keg_def_exam_tier.json", populate it with all terms in keg_definitions.json
 
 
@@ -470,7 +470,7 @@ def test_get_keywords_by_importance_ReturnsObj_Scenario0():
 
 
 # TODO write keg_exam_doc_builder that passes this test
-# follow keywords_main model: On every test run rewrite key_exam.json. Then run
+# follow keywords_src model: On every test run rewrite key_exam.json. Then run
 # the tests so that it's clear it satisfies requirements.
 # def test_get_keg_exam_DefinitionQuestionsAreInOrder():
 #     # ESTABLISH / WHEN

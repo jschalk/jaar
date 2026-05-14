@@ -7,7 +7,7 @@ from ch10_person_listen.basis_person import (
     create_listen_basis,
     get_default_job,
 )
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 
 
 def test_create_empty_person_from_person_ReturnsObj():

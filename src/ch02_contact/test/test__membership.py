@@ -13,7 +13,7 @@ from ch02_contact.group import (
     membership_shop,
     memberships_get_from_dict,
 )
-from ch99_ref.keywords import Ch02Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch02Keywords as kw, ExampleStrs as exx
 
 
 def test_GroupCore_Exists():

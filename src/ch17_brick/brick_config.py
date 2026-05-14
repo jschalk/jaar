@@ -1,6 +1,6 @@
 from ch00_py.db_toolbox import get_sorted_cols_only_list
 from ch00_py.file_toolbox import create_path, get_json_filename, open_json
-from ch99_ref.sorter import get_keg_elements_sort_order
+from ch99_glossary.sorter import get_keg_elements_sort_order
 from enum import Enum
 from os import getcwd as os_getcwd
 

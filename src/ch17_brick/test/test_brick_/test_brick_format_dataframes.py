@@ -8,7 +8,7 @@ from ch13_time.test._util.ch13_examples import (
 )
 from ch17_brick.brick_config import BrickFormatsEnum
 from ch17_brick.brick_dataframe import create_brick_df, get_brickref_obj, save_brick_csv
-from ch99_ref.keywords import Ch17Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch17Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 

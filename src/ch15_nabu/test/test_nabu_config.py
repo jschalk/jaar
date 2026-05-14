@@ -9,7 +9,7 @@ from ch15_nabu.nabu_config import (
     nabu_config_path,
     set_nabuable_otx_inx_args,
 )
-from ch99_ref.keywords import Ch15Keywords as kw
+from ch99_glossary.keywords import Ch15Keywords as kw
 from os import getcwd as os_getcwd
 
 

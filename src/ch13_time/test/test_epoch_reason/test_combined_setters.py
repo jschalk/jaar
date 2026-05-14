@@ -15,7 +15,7 @@ from ch13_time.test._util.ch13_examples import (
     Ch13ExampleStrs as wx,
     get_bob_five_person,
 )
-from ch99_ref.keywords import Ch13Keywords as kw
+from ch99_glossary.keywords import Ch13Keywords as kw
 
 
 def test_set_epoch_cases_for_dayly_SetsAttr_Scenario0_MiddleDayEvery3Days():

@@ -12,7 +12,7 @@ from ch02_contact._ref.ch02_semantic_types import (
     TitleTerm,
     default_groupmark_if_None,
 )
-from ch99_ref.keywords import Ch02Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch02Keywords as kw, ExampleStrs as exx
 from inspect import getdoc as inspect_getdoc
 
 

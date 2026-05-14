@@ -6,7 +6,7 @@ from ch18_etl_config.etl_sqlstr import (
     create_update_heard_raw_existing_inx_col_sqlstr,
 )
 from ch22_heard.heard import set_all_heard_raw_inx_columns
-from ch99_ref.keywords import Ch22Keywords as kw
+from ch99_glossary.keywords import Ch22Keywords as kw
 from sqlite3 import Cursor
 
 

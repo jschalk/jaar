@@ -7,7 +7,7 @@ from ch11_bud._ref.ch11_path import (
 from ch11_bud.bud_filehandler import cellunit_save_to_dir
 from ch11_bud.cell_main import cellunit_shop
 from ch14_moment.moment_cell import set_cell_tree_cell_mandates
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 

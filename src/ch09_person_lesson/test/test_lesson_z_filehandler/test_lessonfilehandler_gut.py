@@ -9,7 +9,7 @@ from ch09_person_lesson.lesson_filehandler import (
 )
 from ch09_person_lesson.lesson_main import init_lesson_id
 from ch09_person_lesson.test._util.ch09_examples import sue_2personatoms_lessonunit
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 

@@ -17,7 +17,7 @@ from ch14_moment.test._util.ch14_examples import (
     get_bob_mop_with_reason_personunit_example,
     get_bob_mop_without_reason_personunit_example,
 )
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 
 
 def test_DecreeUnit_Exists():

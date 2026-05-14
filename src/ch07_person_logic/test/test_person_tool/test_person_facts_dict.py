@@ -5,7 +5,7 @@ from ch07_person_logic.person_tool import (
     get_person_root_facts_dict,
     set_factunits_to_person,
 )
-from ch99_ref.keywords import Ch07Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch07Keywords as kw, ExampleStrs as exx
 from copy import deepcopy as copy_deepcopy
 
 

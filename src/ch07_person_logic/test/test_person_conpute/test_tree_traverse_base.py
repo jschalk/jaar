@@ -7,7 +7,7 @@ from ch07_person_logic.test._util.ch07_examples import (
     get_personunit_with_4_levels,
     get_personunit_with_4_levels_and_2reasons,
 )
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 from pytest import raises as pytest_raises
 
 

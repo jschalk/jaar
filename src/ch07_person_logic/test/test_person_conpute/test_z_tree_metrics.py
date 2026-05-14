@@ -4,7 +4,7 @@ from ch04_rope.rope import create_rope_from_labels
 from ch06_plan.plan import planunit_shop
 from ch07_person_logic.person_main import personunit_shop
 from ch07_person_logic.test._util.ch07_examples import personunit_v001
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 
 
 def test_PersonUnit_get_tree_metrics_Exists():

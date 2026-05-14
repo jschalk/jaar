@@ -17,7 +17,7 @@ from ch17_brick.test._util.ch17_examples import (
     get_small_example01_csv,
     get_small_example01_dataframe,
 )
-from ch99_ref.keywords import Ch17Keywords as kw
+from ch99_glossary.keywords import Ch17Keywords as kw
 from os.path import exists as os_path_exists
 from pandas import DataFrame
 

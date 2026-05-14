@@ -11,7 +11,7 @@ from ch16_translate.translate_main import (
     get_translateunit_from_dict,
     translateunit_shop,
 )
-from ch99_ref.keywords import Ch16Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch16Keywords as kw, ExampleStrs as exx
 
 
 def test_TranslateUnit_to_dict_ReturnsObj_Scenario0():

@@ -1,7 +1,7 @@
 from ch04_rope.rope import create_rope
 from ch05_reason.reason_main import FactUnit, factunit_shop
 from ch11_bud.bud_main import BudUnit, budunit_shop
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 
 
 def get_ch11_example_moment_rope() -> str:

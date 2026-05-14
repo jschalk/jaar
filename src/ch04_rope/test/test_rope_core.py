@@ -23,7 +23,7 @@ from ch04_rope.rope import (
     to_rope,
     validate_labelterm,
 )
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 from dataclasses import dataclass
 from pytest import mark as pytest_mark, raises as pytest_raises
 

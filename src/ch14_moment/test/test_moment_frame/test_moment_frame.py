@@ -3,7 +3,7 @@ from ch13_time.epoch_main import DEFAULT_EPOCH_LENGTH, epochunit_shop, get_epoch
 from ch13_time.test._util.ch13_examples import get_creg_config
 from ch14_moment.moment_frame import add_epoch_frame_to_momentunit, get_moment_timeshoe
 from ch14_moment.moment_main import momentunit_shop
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 
 
 def test_get_moment_timeshoe_ReturnsObj_Scenario0_Empty_offi_time(temp3_dir):

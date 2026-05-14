@@ -8,7 +8,7 @@ from ch31_kpi.gcalendar import (
     get_dayevents,
     get_gcal_all_agenda_str,
 )
-from ch99_ref.keywords import Ch31Keywords as kw
+from ch99_glossary.keywords import Ch31Keywords as kw
 from datetime import datetime
 
 

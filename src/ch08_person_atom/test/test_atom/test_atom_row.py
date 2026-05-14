@@ -1,7 +1,7 @@
 from ch04_rope.rope import create_rope, to_rope
 from ch08_person_atom.atom_config import get_atom_args_obj_types
 from ch08_person_atom.atom_main import AtomRow, atomrow_shop, personatom_shop
-from ch99_ref.keywords import Ch08Keywords as kw
+from ch99_glossary.keywords import Ch08Keywords as kw
 
 
 def test_AtomRow_Exists():

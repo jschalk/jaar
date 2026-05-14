@@ -60,8 +60,8 @@ from ch97_docs_builder.keg_definitions_builder import (
     get_person_dimen_config,
     save_keg_descriptions_json,
 )
-from ch99_ref.keywords import Ch97Keywords as kw, ExampleStrs as exx
-from ch99_ref.sorter import get_keg_elements_sort_order
+from ch99_glossary.keywords import Ch97Keywords as kw, ExampleStrs as exx
+from ch99_glossary.sorter import get_keg_elements_sort_order
 from inspect import getdoc as inspect_getdoc
 from re import fullmatch as re_fullmatch
 

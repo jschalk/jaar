@@ -17,7 +17,7 @@ from ch08_person_atom.atom_config import (
     is_person_dimen,
     set_mog,
 )
-from ch99_ref.keywords import Ch08Keywords as kw
+from ch99_glossary.keywords import Ch08Keywords as kw
 
 
 def test_CRUD_command_Exists():

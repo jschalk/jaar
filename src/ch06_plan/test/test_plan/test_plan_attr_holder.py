@@ -1,7 +1,7 @@
 from ch06_plan.healer import healerunit_shop
 from ch06_plan.plan import PlanAttrHolder, PlanUnit, planattrholder_shop, planunit_shop
 from ch06_plan.test._util.ch06_examples import RangeAttrHolder, get_range_attrs
-from ch99_ref.keywords import Ch06Keywords as kw
+from ch99_glossary.keywords import Ch06Keywords as kw
 
 
 def test_PlanAttrHolder_Exists():

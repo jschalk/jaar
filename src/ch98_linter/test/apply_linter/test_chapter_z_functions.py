@@ -61,7 +61,7 @@ def validate_py_file_imports(
     incorrect_imports = find_incorrect_imports(file_ast_tree, ch_int)
     filtered_incorrect_imports = []
     for incorrect_import in incorrect_imports:
-        if not incorrect_import.startswith("from ch99_ref."):
+        if not incorrect_import.startswith("from ch99_glossary."):
             filtered_incorrect_imports.append(incorrect_import)
 
     if len(incorrect_imports) == 1 and "_keywords.py" in file_path:

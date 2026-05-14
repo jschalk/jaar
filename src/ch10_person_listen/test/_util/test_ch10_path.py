@@ -13,7 +13,7 @@ from ch10_person_listen._ref.ch10_path import (
     create_treasury_db_path,
     treasury_filename,
 )
-from ch99_ref.keywords import Ch10Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch10Keywords as kw, ExampleStrs as exx
 from inspect import getdoc as inspect_getdoc
 from pytest import mark as pytest_mark, raises as pytest_raises
 

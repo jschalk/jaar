@@ -47,8 +47,8 @@ from ch19_idea_src.idea_config import (
     get_idea_types,
     idea_config_path,
 )
-from ch99_ref.keywords import Ch19Keywords as kw
-from ch99_ref.sorter import get_keg_elements_sort_order
+from ch99_glossary.keywords import Ch19Keywords as kw
+from ch99_glossary.sorter import get_keg_elements_sort_order
 from copy import copy as copy_copy
 from os import getcwd as os_getcwd
 

@@ -7,7 +7,7 @@ from ch20_etl_brick.etl_brick_main import (
     get_create_sparks_b_agg_sqlstr,
     get_create_sparks_b_vld_sqlstr,
 )
-from ch99_ref.keywords import Ch20Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch20Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

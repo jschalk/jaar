@@ -28,8 +28,8 @@ from ch31_kpi.test._util.ch31_examples import (
     get_ep8_sue_clean_example,
     get_ep8_yao_clean_example,
 )
-from ch99_ref.keywords import Ch31Keywords as kw, ExampleStrs as exx
-from ch99_ref.sorter import get_library_version
+from ch99_glossary.keywords import Ch31Keywords as kw, ExampleStrs as exx
+from ch99_glossary.sorter import get_library_version
 from datetime import datetime
 from os.path import exists as os_path_exists
 from sqlite3 import Cursor, connect as sqlite3_connect

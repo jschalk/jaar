@@ -16,7 +16,7 @@ from ch13_time.epoch_main import (
     new_epoch_planunit,
     timeshoe_shop,
 )
-from ch99_ref.keywords import Ch13Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch13Keywords as kw, ExampleStrs as exx
 from datetime import datetime
 from enum import Enum
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter

@@ -12,7 +12,7 @@ from ch11_bud.test._util.ch11_examples import (
     example_casa_grimy_factunit as grimy_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
-from ch99_ref.keywords import Ch11Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch11Keywords as kw, ExampleStrs as exx
 from copy import deepcopy as copy_deepcopy
 
 SUE_PERSON = personunit_shop(exx.sue, exx.a23)

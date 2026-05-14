@@ -32,7 +32,7 @@ from ch27_lego.lego_job2db import (
     insert_job_prnreas,
     insert_job_prnunit,
 )
-from ch99_ref.keywords import Ch27Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch27Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

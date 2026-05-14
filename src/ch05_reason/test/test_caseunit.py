@@ -5,7 +5,7 @@ from ch05_reason.reason_main import (
     caseunit_shop,
     factheir_shop,
 )
-from ch99_ref.keywords import Ch05Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch05Keywords as kw, ExampleStrs as exx
 
 
 def test_CaseUnit_Exists():

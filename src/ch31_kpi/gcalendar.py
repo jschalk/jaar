@@ -39,7 +39,7 @@ from ch31_kpi._ref.ch31_semantic_types import (
     RopeTerm,
     TimeNum,
 )
-from ch99_ref.sorter import get_library_version
+from ch99_glossary.sorter import get_library_version
 from copy import copy as copy_copy, deepcopy as copy_deepcopy
 from csv import DictWriter as csv_DictWriter
 from dataclasses import dataclass

@@ -11,7 +11,7 @@ from ch31_kpi.gcalendar import (
     create_gcalendar_csv_from_person,
     create_gcalendar_events_list,
 )
-from ch99_ref.keywords import Ch31Keywords as kw
+from ch99_glossary.keywords import Ch31Keywords as kw
 from csv import DictReader as csv_DictReader
 from datetime import datetime, timedelta
 from io import StringIO as io_StringIO

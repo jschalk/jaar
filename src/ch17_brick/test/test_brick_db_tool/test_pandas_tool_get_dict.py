@@ -1,5 +1,5 @@
 from ch17_brick.brick_db_tool import dataframe_to_dict
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 from pandas import DataFrame
 
 

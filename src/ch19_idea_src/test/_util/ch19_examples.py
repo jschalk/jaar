@@ -1,7 +1,7 @@
 from ch04_rope.rope import create_rope
 from ch07_person_logic.person_main import PersonUnit
 from ch14_moment.test._util.ch14_examples import _example_empty_bob_personunit
-from ch99_ref.keywords import Ch19Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch19Keywords as kw, ExampleStrs as exx
 from pandas import DataFrame
 
 J45_ROPE = create_rope("jeffy45", knot=exx.slash)

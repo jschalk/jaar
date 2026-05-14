@@ -11,7 +11,7 @@ from ch07_person_logic.test._util.ch07_examples import (
     personunit_v001_with_large_agenda,
     personunit_v002,
 )
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 
 
 def get_case_tasks_count(agenda_dict: dict[RopeTerm, PlanUnit]) -> int:

@@ -4,7 +4,7 @@ from ch02_contact.contact import (
     contactunits_get_from_dict,
 )
 from ch02_contact.group import membership_shop
-from ch99_ref.keywords import Ch02Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch02Keywords as kw, ExampleStrs as exx
 
 
 def test_ContactUnit_get_memberships_dict_ReturnsObj():

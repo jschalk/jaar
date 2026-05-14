@@ -8,7 +8,7 @@ from ch18_etl_config.etl_sqlstr import (
     create_sound_and_heard_tables,
 )
 from ch22_heard.heard import etl_heard_vld_to_lego_spark_person_csvs
-from ch99_ref.keywords import Ch22Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch22Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
 from sqlite3 import Cursor
 

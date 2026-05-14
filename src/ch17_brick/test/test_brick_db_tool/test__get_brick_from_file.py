@@ -6,7 +6,7 @@ from ch17_brick.brick_db_tool import (
     get_excel_reader_config_path,
     get_excel_reader_src_config,
 )
-from ch99_ref.keywords import Ch17Keywords as kw
+from ch99_glossary.keywords import Ch17Keywords as kw
 from json import dump as json_dump
 from openpyxl import Workbook
 from os import getcwd as os_getcwd

@@ -1,6 +1,6 @@
 from ch07_person_logic.person_main import personunit_shop
 from ch07_person_logic.person_tool import get_person_unique_short_ropes
-from ch99_ref.keywords import Ch07Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch07Keywords as kw, ExampleStrs as exx
 
 
 def test_get_person_unique_short_ropes_ReturnsObj_Scenario0_RootOnly():

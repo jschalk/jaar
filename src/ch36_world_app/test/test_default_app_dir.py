@@ -8,7 +8,7 @@ from ch36_world_app.w1_tool import (
     get_app_default_you_personname,
     get_app_glb_attrs,
 )
-from ch99_ref.keywords import Ch36Keywords as kw
+from ch99_glossary.keywords import Ch36Keywords as kw
 from pathlib import Path
 from platform import system as platform_system
 

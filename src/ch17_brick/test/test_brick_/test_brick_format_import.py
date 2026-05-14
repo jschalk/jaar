@@ -3,7 +3,7 @@ from ch07_person_logic.person_main import personunit_shop
 from ch17_brick.brick_config import BrickFormatsEnum
 from ch17_brick.brick_dataframe import get_brickref_obj, save_brick_csv
 from ch17_brick.brick_db_tool import open_csv
-from ch99_ref.keywords import Ch17Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch17Keywords as kw, ExampleStrs as exx
 
 
 def test_open_csv_ReturnsObjWhenFileExists(temp3_fs):

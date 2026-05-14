@@ -11,7 +11,7 @@ from ch16_translate.map_term import (
 )
 from ch16_translate.translate_config import default_unknown_str_if_None
 from ch16_translate.translate_main import TranslateUnit, translateunit_shop
-from ch99_ref.keywords import Ch16Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch16Keywords as kw, ExampleStrs as exx
 from pandas import DataFrame
 
 

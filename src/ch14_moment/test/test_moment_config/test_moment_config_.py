@@ -8,7 +8,7 @@ from ch14_moment.moment_config import (
     get_moment_dimens,
     moment_config_path,
 )
-from ch99_ref.keywords import Ch14Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch14Keywords as kw, ExampleStrs as exx
 from os import getcwd as os_getcwd
 
 

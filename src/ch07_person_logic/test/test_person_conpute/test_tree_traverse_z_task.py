@@ -11,7 +11,7 @@ from ch07_person_logic.test._util.ch07_examples import (
     get_personunit_with_4_levels_and_2reasons,
     personunit_v001,
 )
-from ch99_ref.keywords import ExampleStrs as exx
+from ch99_glossary.keywords import ExampleStrs as exx
 
 
 def test_PersonUnit_thinkout_Sets_active_WhenFactSaysNo():

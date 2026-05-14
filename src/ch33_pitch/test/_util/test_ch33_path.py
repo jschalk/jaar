@@ -5,7 +5,7 @@ from ch33_pitch._ref.ch33_path import (
     create_pitch_dir_path,
     create_world_dir_path,
 )
-from ch99_ref.keywords import Ch33Keywords as kw
+from ch99_glossary.keywords import Ch33Keywords as kw
 from inspect import getdoc as inspect_getdoc
 from pytest import mark as pytest_mark
 

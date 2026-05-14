@@ -10,7 +10,7 @@ from ch05_reason.reason_main import (
     reasonheir_shop,
     reasonunit_shop,
 )
-from ch99_ref.keywords import Ch05Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch05Keywords as kw, ExampleStrs as exx
 
 
 def test_ReasonCore_Exists():

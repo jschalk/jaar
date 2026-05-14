@@ -5,7 +5,7 @@ from ch16_translate.test._util.ch16_examples import (
     get_suita_namemap,
 )
 from ch16_translate.translate_main import inherit_translateunit, translateunit_shop
-from ch99_ref.keywords import Ch16Keywords as kw, ExampleStrs as exx
+from ch99_glossary.keywords import Ch16Keywords as kw, ExampleStrs as exx
 from pytest import raises as pytest_raises
 
 
