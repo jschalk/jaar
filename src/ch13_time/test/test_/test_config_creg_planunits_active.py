@@ -8,7 +8,7 @@ from ch13_time.test._util.ch13_examples import (
     get_thu,
     get_wed,
 )
-from ch99_glossary.keywords import Ch13Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch13Keywords as kw, ExampleStrs as exx
 from datetime import datetime
 
 

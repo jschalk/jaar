@@ -5,7 +5,7 @@ from ch11_bud.test._util.ch11_examples import (
     example_casa_dirty_factunit as dirty_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
-from ch99_glossary.keywords import Ch11Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch11Keywords as kw, ExampleStrs as exx
 
 
 def test_CellUnit_to_dict_ReturnsObj_Scenario0():

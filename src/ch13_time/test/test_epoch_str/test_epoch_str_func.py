@@ -7,7 +7,7 @@ from ch13_time.epoch_str_func import (
     get_reason_case_readable_str,
 )
 from ch13_time.test._util.ch13_examples import get_creg_config, get_thu
-from ch99_glossary.keywords import Ch13Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch13Keywords as kw, ExampleStrs as exx
 
 
 def test_get_reason_case_readable_str_ReturnsObj_Scenario0_Level1():

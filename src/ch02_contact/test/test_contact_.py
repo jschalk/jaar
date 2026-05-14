@@ -7,7 +7,7 @@ from ch02_contact.contact import (
     is_nameterm,
     validate_nameterm,
 )
-from ch99_glossary.keywords import Ch02Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch02Keywords as kw, ExampleStrs as exx
 from pytest import raises as pytest_raises
 
 

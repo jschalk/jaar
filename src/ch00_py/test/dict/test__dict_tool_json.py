@@ -1,5 +1,5 @@
 from ch00_py.dict_toolbox import get_serializable_dict
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 
 
 def test_get_serializable_dict_ReturnsObj_Scenario0_FlatDict():

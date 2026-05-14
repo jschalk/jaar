@@ -9,7 +9,7 @@ from ch09_person_lesson.delta import (
     persondelta_shop,
 )
 from ch09_person_lesson.test._util.ch09_examples import get_persondelta_example1
-from ch99_glossary.keywords import Ch09Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch09Keywords as kw, ExampleStrs as exx
 from pytest import raises as pytest_raises
 
 

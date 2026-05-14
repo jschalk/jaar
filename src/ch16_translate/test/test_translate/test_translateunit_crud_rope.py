@@ -1,6 +1,6 @@
 from ch16_translate.map_term import ropemap_shop
 from ch16_translate.translate_main import translateunit_shop
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from pytest import raises as pytest_raises
 
 

@@ -3,7 +3,7 @@ from ch17_brick.brick_dataframe import (
     get_csv_moment_rope_person_name_metrics,
     moment_rope_person_name_nested_csv_dict,
 )
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 
 
 def test_get_csv_moment_rope_person_name_metrics_ReturnsObj_Scenario2():

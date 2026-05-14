@@ -4,7 +4,7 @@ from ch10_person_listen.listen_main import (
     create_empty_person_from_person,
     listen_to_speaker_agenda,
 )
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from copy import deepcopy as copy_deepcopy
 from pytest import raises as pytest_raises
 

@@ -4,7 +4,7 @@ from ch07_person_logic.person_report import (
     get_person_contactunits_dataframe,
 )
 from ch07_person_logic.test._util.ch07_examples import personunit_v001_with_large_agenda
-from ch99_glossary.keywords import Ch07Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch07Keywords as kw, ExampleStrs as exx
 
 
 def test_get_person_contactunits_dataframe_ReturnsDataFrame():

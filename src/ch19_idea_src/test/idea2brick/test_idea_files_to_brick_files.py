@@ -12,7 +12,7 @@ from ch19_idea_src.idea2brick import (
     set_spark_num_column,
     validate_idea_columns,
 )
-from ch99_glossary.keywords import Ch19Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch19Keywords as kw, ExampleStrs as exx
 from openpyxl import Workbook as openpyxl_Workbook
 from os.path import join as os_path_join
 from pandas import (

@@ -71,7 +71,7 @@ def test_create_keywords_classes_file_path_ReturnsObj():
 
     # THEN
     ref_dir = create_path(src_dir, "ch99_glossary")
-    expected_keywords_file_path = create_path(ref_dir, "keywords.py")
+    expected_keywords_file_path = create_path(ref_dir, "ch_keyword.py")
     assert keywords_class_file_path
     # ref_dir = create_path(chapter_dir, "_ref")
     assert keywords_class_file_path == expected_keywords_file_path

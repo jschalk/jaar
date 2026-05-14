@@ -26,7 +26,7 @@ from ch00_py.db_toolbox import (
     table_has_duplicates,
 )
 from ch00_py.file_toolbox import create_path, delete_dir, set_dir
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from pandas import NA as pandas_NA
 from pytest import raises as pytest_raises
 from sqlite3 import (

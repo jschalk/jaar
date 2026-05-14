@@ -1,5 +1,5 @@
 from ch06_plan.healer import HealerUnit, get_healerunit_from_dict, healerunit_shop
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 
 
 def test_HealerUnit_Exists():

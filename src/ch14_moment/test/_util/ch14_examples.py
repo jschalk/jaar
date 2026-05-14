@@ -6,7 +6,7 @@ from ch07_person_logic.person_main import PersonUnit, personunit_shop
 from ch09_person_lesson.lasso import lassounit_shop
 from ch09_person_lesson.lesson_filehandler import open_gut_file, save_gut_file
 from ch14_moment.moment_main import MomentUnit, momentunit_shop
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 
 
 def create_example_moment2(x_moment_mstr_dir) -> MomentUnit:

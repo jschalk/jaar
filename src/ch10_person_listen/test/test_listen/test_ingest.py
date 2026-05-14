@@ -5,7 +5,7 @@ from ch10_person_listen.listen_main import (
     generate_ingest_list,
     generate_perspective_agenda,
 )
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 
 
 def test_allocate_irrational_contact_debt_lumen_SetsPersonAttr():

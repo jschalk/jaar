@@ -27,7 +27,7 @@ from ch10_person_listen.test._util.ch10_examples import (
     hungry_str,
     run_str,
 )
-from ch99_glossary.keywords import Ch10Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch10Keywords as kw, ExampleStrs as exx
 
 
 def sanitation_str() -> str:

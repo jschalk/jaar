@@ -2,7 +2,7 @@
 from ch07_person_logic.person_main import personunit_shop
 from ch08_person_atom.atom_main import personatom_shop
 from ch09_person_lesson.delta import get_minimal_persondelta, persondelta_shop
-from ch99_glossary.keywords import Ch09Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch09Keywords as kw, ExampleStrs as exx
 
 
 def test_get_minimal_persondelta_ReturnsObjWithoutUnecessaryDELETE_person_contactunit():

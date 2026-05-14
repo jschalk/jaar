@@ -6,7 +6,7 @@ from ch09_person_lesson.lesson_filehandler import (
     lessonfilehandler_shop,
 )
 from ch09_person_lesson.test._util.ch09_examples import get_texas_rope
-from ch99_glossary.keywords import Ch10Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch10Keywords as kw, ExampleStrs as exx
 
 
 def ch10_example_moment_rope() -> str:

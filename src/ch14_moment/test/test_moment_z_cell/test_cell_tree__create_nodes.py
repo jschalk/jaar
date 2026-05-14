@@ -11,7 +11,7 @@ from ch11_bud.bud_filehandler import (
 )
 from ch11_bud.cell_main import cellunit_shop
 from ch14_moment.moment_cell import create_cell_tree
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 

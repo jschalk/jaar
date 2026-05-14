@@ -42,7 +42,7 @@ from ch17_brick.brick_config import (
     get_dimens_with_brick_element,
     get_quick_bricks_column_ref,
 )
-from ch99_glossary.keywords import Ch17Keywords as kw
+from ch99_glossary.ch_keyword import Ch17Keywords as kw
 from ch99_glossary.sorter import get_keg_elements_sort_order
 from copy import copy as copy_copy
 from os import getcwd as os_getcwd

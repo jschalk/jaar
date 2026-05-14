@@ -27,7 +27,7 @@ from ch17_brick.translate_toolbox import (
     init_translateunit_from_dir,
     save_all_csvs_from_translateunit,
 )
-from ch99_glossary.keywords import Ch17Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch17Keywords as kw, ExampleStrs as exx
 from ch99_glossary.sorter import get_keg_elements_sort_order as sorting_columns
 from os.path import exists as os_path_exists
 

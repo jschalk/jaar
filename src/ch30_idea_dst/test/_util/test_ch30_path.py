@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import create_path
 from ch30_idea_dst._ref.ch30_path import create_lego0001_path, create_lego0002_path
-from ch99_glossary.keywords import Ch30Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch30Keywords as kw, ExampleStrs as exx
 from inspect import getdoc as inspect_getdoc
 from pytest import mark as pytest_mark
 

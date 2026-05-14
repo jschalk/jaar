@@ -23,7 +23,7 @@ from ch09_person_lesson.test._util.ch09_examples import (
     sue_3personatoms_lessonunit,
     sue_4personatoms_lessonunit,
 )
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from copy import deepcopy as copy_deepcopy
 from pytest import raises as pytest_raises
 

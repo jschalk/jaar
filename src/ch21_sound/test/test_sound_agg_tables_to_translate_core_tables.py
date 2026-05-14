@@ -32,7 +32,7 @@ from ch21_sound.sound import (
     update_translate_sound_agg_inconsist_errors,
     update_translate_sound_agg_knot_errors,
 )
-from ch99_glossary.keywords import Ch21Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch21Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

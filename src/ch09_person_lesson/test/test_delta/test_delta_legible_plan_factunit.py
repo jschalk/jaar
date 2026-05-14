@@ -2,7 +2,7 @@ from ch07_person_logic.person_main import personunit_shop
 from ch08_person_atom.atom_main import personatom_shop
 from ch09_person_lesson.delta import persondelta_shop
 from ch09_person_lesson.legible import create_legible_list
-from ch99_glossary.keywords import Ch09Keywords as kw
+from ch99_glossary.ch_keyword import Ch09Keywords as kw
 
 
 def test_create_legible_list_ReturnsObj_plan_factunit_INSERT_WithOutNumberArgs():

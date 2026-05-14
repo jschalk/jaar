@@ -7,7 +7,7 @@ from ch18_etl_config.brick_collector import (
     get_etl_db_sheets_tier2_order,
     reorder_etl_db_sheets,
 )
-from ch99_glossary.keywords import Ch18Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch18Keywords as kw, ExampleStrs as exx
 from pandas import (
     DataFrame,
     ExcelWriter as pandas_ExcelWriter,

@@ -9,7 +9,7 @@ from ch05_reason.reason_main import (
 )
 from ch06_plan.healer import healerunit_shop
 from ch06_plan.plan import get_obj_from_plan_dict, planunit_shop
-from ch99_glossary.keywords import Ch06Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch06Keywords as kw, ExampleStrs as exx
 
 
 def test_get_obj_from_plan_dict_ReturnsObj():

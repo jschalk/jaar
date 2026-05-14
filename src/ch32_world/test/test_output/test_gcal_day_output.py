@@ -14,7 +14,7 @@ from ch32_world.world import (
     idea_sheets_to_gcal_day_punchs,
     worlddir_shop,
 )
-from ch99_glossary.keywords import Ch32Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch32Keywords as kw, ExampleStrs as exx
 from datetime import datetime
 from os.path import exists as os_path_exists
 from pandas import DataFrame as pandas_DataFrame

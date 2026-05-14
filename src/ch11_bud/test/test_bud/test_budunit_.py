@@ -5,7 +5,7 @@ from ch11_bud.bud_main import (
     budunit_shop,
     get_budunit_from_dict,
 )
-from ch99_glossary.keywords import Ch11Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch11Keywords as kw, ExampleStrs as exx
 from pytest import raises as pytest_raises
 
 

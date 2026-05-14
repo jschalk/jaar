@@ -1,7 +1,7 @@
 from ch03_workforce.workforce import workforceheir_shop, workforceunit_shop
 from ch06_plan.plan import planunit_shop
 from ch07_person_logic.person_main import personunit_shop
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 
 
 def test_PersonUnit_thinkout_Sets_planroot_workforceheirFrom_planroot_workforceunit():

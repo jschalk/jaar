@@ -16,7 +16,7 @@ from ch17_brick.brick_dataframe import (
     get_brickref_obj,
 )
 from ch17_brick.test.test_brick_.test__brick_config import change_erase_attrs
-from ch99_glossary.keywords import Ch17Keywords as kw
+from ch99_glossary.ch_keyword import Ch17Keywords as kw
 from ch99_glossary.sorter import get_keg_elements_sort_order
 
 

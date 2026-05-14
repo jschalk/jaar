@@ -53,14 +53,14 @@ from ch97_docs_builder._ref.ch97_semantic_types import (
     WeightNum,
     WorldName,
 )
-from ch97_docs_builder.keg_definitions_builder import (
+from ch97_docs_builder.definitions_builder import (
     get_chxx_prefix_path_dict,
     get_chxx_ref_blurb,
     get_keg_definitions,
     get_person_dimen_config,
     save_keg_descriptions_json,
 )
-from ch99_glossary.keywords import Ch97Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch97Keywords as kw, ExampleStrs as exx
 from ch99_glossary.sorter import get_keg_elements_sort_order
 from inspect import getdoc as inspect_getdoc
 from re import fullmatch as re_fullmatch

@@ -7,7 +7,7 @@ from ch97_docs_builder.doc_builder import (
     save_chapter_blurbs_md,
     save_ropeterm_description_md,
 )
-from ch99_glossary.keywords import Ch97Keywords as kw
+from ch99_glossary.ch_keyword import Ch97Keywords as kw
 from os.path import exists as os_path_exists
 
 

@@ -19,7 +19,7 @@ from ch19_idea_src.test._util.ch19_examples import (
     get_ex2_ii00104_df,
     get_ex2_ii00105_df,
 )
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 
 
 # ESTABLISH a dataframe, build a moment unit

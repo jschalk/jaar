@@ -1,5 +1,5 @@
 from ch12_keep.riverrun import riverrun_shop
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 
 
 def test_RiverRun_levy_need_dues_Molds_cycleledger_Scenario01(temp3_dir):

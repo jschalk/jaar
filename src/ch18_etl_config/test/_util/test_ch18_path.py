@@ -10,7 +10,7 @@ from ch18_etl_config._ref.ch18_path import (
     create_moment_ote1_json_path,
     create_world_db_path,
 )
-from ch99_glossary.keywords import Ch18Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch18Keywords as kw, ExampleStrs as exx
 from inspect import getdoc as inspect_getdoc
 from pytest import mark as pytest_mark
 

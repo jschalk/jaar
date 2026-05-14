@@ -24,7 +24,7 @@ from ch97_docs_builder._ref.ch97_path import (
     create_chapter_ref_path,
     create_src_keg_exam_path,
 )
-from ch97_docs_builder.keg_definitions_builder import (
+from ch97_docs_builder.definitions_builder import (
     rebuild_final_exam_questions,
     rebuild_keg_definitions_contents,
 )

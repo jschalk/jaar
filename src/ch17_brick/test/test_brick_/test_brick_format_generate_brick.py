@@ -9,7 +9,7 @@ from ch17_brick.brick_dataframe import (
     get_brickref_obj,
     make_persondelta,
 )
-from ch99_glossary.keywords import Ch17Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch17Keywords as kw, ExampleStrs as exx
 
 
 def test_make_persondelta_Arg_bk00121_person_contactunit_v0_0_0():

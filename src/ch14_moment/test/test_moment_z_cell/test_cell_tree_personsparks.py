@@ -4,7 +4,7 @@ from ch11_bud._ref.ch11_path import create_cell_json_path, create_personspark_pa
 from ch11_bud.bud_filehandler import cellunit_add_json_file, save_arbitrary_personspark
 from ch14_moment.moment_cell import load_cells_personspark
 from ch14_moment.test._util.ch14_examples import example_casa_floor_clean_factunit
-from ch99_glossary.keywords import Ch14Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch14Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 

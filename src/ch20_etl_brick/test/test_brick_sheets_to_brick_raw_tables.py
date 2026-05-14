@@ -2,7 +2,7 @@ from ch00_py.db_toolbox import db_table_exists, get_row_count, get_table_columns
 from ch00_py.file_toolbox import create_path
 from ch17_brick.brick_db_tool import save_sheet
 from ch20_etl_brick.etl_brick_main import etl_brick_dfs_to_brixk_raw_tables
-from ch99_glossary.keywords import Ch20Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch20Keywords as kw, ExampleStrs as exx
 from pandas import NA as pandas_NA, DataFrame
 from sqlite3 import Cursor
 

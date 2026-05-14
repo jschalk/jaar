@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import create_path, save_file
 from ch32_world.world import WorldDir, WorldName, worlddir_shop
-from ch99_glossary.keywords import Ch32Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch32Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 

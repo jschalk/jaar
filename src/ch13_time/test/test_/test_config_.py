@@ -22,7 +22,7 @@ from ch13_time.epoch_main import (
     get_year_rope,
     validate_epoch_config,
 )
-from ch99_glossary.keywords import Ch13Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch13Keywords as kw, ExampleStrs as exx
 from copy import deepcopy as copy_deepcopy
 from inspect import getdoc as inspect_getdoc
 

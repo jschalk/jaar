@@ -19,7 +19,7 @@ from ch10_person_listen.test._util.ch10_examples import (
     get_example_yao_speaker,
     get_example_zia_speaker,
 )
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 

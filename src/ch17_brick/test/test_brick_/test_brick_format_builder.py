@@ -6,7 +6,7 @@ from ch17_brick._ref.ch17_doc_builder import (
     get_brick_mds,
 )
 from ch17_brick.brick_config import get_brick_config_dict
-from ch99_glossary.keywords import Ch17Keywords as kw
+from ch99_glossary.ch_keyword import Ch17Keywords as kw
 
 
 def create_dimens_brick_format_dict() -> dict:

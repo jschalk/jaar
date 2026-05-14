@@ -6,7 +6,7 @@ from ch18_etl_config._ref.ch18_path import (
     create_moment_ote1_json_path,
 )
 from ch27_lego.lego_core import etl_moment_ote1_agg_csvs_to_jsons
-from ch99_glossary.keywords import Ch27Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch27Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 

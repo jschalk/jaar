@@ -6,7 +6,7 @@ from ch16_translate.map_term import (
     namemap_shop,
 )
 from ch16_translate.translate_config import default_unknown_str_if_None
-from ch99_glossary.keywords import Ch16Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch16Keywords as kw, ExampleStrs as exx
 from numpy import int64 as numpy_int64
 from pytest import raises as pytest_raises
 

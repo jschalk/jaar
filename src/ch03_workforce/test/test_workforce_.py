@@ -10,7 +10,7 @@ from ch03_workforce.workforce import (
     workforceheir_shop,
     workforceunit_shop,
 )
-from ch99_glossary.keywords import Ch03Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch03Keywords as kw, ExampleStrs as exx
 
 
 def test_LaborUnit_Exists():

@@ -1,6 +1,6 @@
 from ch02_contact.contact import contactunit_shop
 from ch02_contact.group import membership_shop
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from pytest import raises as pytest_raises
 
 

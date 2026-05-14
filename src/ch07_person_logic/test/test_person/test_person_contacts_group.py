@@ -1,6 +1,6 @@
 from ch02_contact.group import groupunit_shop
 from ch07_person_logic.person_main import personunit_shop
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 
 
 def test_PersonUnit_get_contactunit_group_titles_dict_ReturnsObj():

@@ -10,7 +10,7 @@ from ch18_etl_config.etl_sqlstr import (
     get_update_heard_agg_moment_timenum_sqlstrs,
     get_update_heard_agg_timenum_sqlstr,
 )
-from ch99_glossary.keywords import Ch22Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch22Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

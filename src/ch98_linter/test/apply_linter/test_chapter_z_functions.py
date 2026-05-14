@@ -64,7 +64,7 @@ def validate_py_file_imports(
         if not incorrect_import.startswith("from ch99_glossary."):
             filtered_incorrect_imports.append(incorrect_import)
 
-    if len(incorrect_imports) == 1 and "_keywords.py" in file_path:
+    if len(incorrect_imports) == 1 and "_ch_keyword.py" in file_path:
         incorrect_imports = []
     assertion_fail_str = f"File #{all_file_count} ch{ch_int:02} file #{chapter_file_count} Imports: {len(incorrect_imports)} {file_path}"
     assert not filtered_incorrect_imports, assertion_fail_str

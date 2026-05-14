@@ -1,5 +1,5 @@
 from ch07_person_logic.person_main import personunit_shop
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from datetime import datetime
 from enum import Enum
 

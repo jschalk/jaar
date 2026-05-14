@@ -6,7 +6,7 @@ from ch09_person_lesson.test._util.ch09_examples import (
     get_atom_example_planunit_knee,
     get_atom_example_planunit_sports,
 )
-from ch99_glossary.keywords import Ch09Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch09Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 

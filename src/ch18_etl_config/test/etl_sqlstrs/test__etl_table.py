@@ -22,7 +22,7 @@ from ch18_etl_config.etl_config import (
     remove_otx_columns,
     remove_staging_columns,
 )
-from ch99_glossary.keywords import Ch18Keywords as kw
+from ch99_glossary.ch_keyword import Ch18Keywords as kw
 from os import getcwd as os_getcwd
 
 

@@ -7,7 +7,7 @@ from ch09_person_lesson.lasso import lassounit_shop
 from ch11_bud._ref.ch11_path import create_cell_json_path
 from ch11_bud.bud_main import DEFAULT_CELLDEPTH
 from ch14_moment.moment_main import _get_ote1_max_past_spark_num, momentunit_shop
-from ch99_glossary.keywords import Ch14Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch14Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 

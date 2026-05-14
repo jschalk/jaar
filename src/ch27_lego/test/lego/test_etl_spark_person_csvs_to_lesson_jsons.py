@@ -7,7 +7,7 @@ from ch11_bud._ref.ch11_path import (
 )
 from ch18_etl_config.etl_sqlstr import create_prime_tablename
 from ch27_lego.lego_core import etl_lego_spark_person_csvs_to_lesson_json
-from ch99_glossary.keywords import Ch27Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch27Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 

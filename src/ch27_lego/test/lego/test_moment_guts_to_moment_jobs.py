@@ -5,7 +5,7 @@ from ch09_person_lesson.lasso import lassounit_shop
 from ch10_person_listen._ref.ch10_path import create_job_path
 from ch14_moment.moment_main import momentunit_shop
 from ch27_lego.lego_core import etl_mind_guts_to_mind_jobs
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 

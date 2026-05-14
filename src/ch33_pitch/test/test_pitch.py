@@ -1,5 +1,5 @@
 from ch33_pitch.pitch import PitchUnit, pitchunit_shop
-from ch99_glossary.keywords import Ch33Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch33Keywords as kw, ExampleStrs as exx
 
 
 def test_PitchUnit_Exists():

@@ -34,7 +34,7 @@ from ch32_world.world import (
     brick_sheets_to_lego_with_cursor,
     worlddir_shop,
 )
-from ch99_glossary.keywords import Ch32Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch32Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
 from pandas import DataFrame, DataFrame as pandas_DataFrame
 from sqlite3 import Cursor, connect as sqlite3_connect

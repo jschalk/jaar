@@ -17,7 +17,7 @@ from ch98_linter.style import (
     get_semantic_types_filename,
     py_file_has_from_imports_only,
 )
-from ch99_glossary.keywords import Ch98Keywords as kw
+from ch99_glossary.ch_keyword import Ch98Keywords as kw
 from importlib import import_module as importlib_import_module
 from inspect import getsource as inspect_getsource
 from typing import Literal
@@ -195,7 +195,7 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
             has_from_imports_only = py_file_has_from_imports_only(file_str, file_path)
             assert has_from_imports_only or allowed_any_import, file_path
 
-            is_ref_keywords_file = f"\\{chapter_prefix}_keywords.py" in file_path
+            is_ref_keywords_file = f"\\{chapter_prefix}_ch_keyword.py" in file_path
             if is_ref_keywords_file:
                 # print(f"{file_path=}")
                 assert file_str.count("keywords import") == 0, "No imports"
@@ -265,7 +265,7 @@ def test_Chapters_KeywordEnumClassesAreCorrectlyTested():
     chXX_keyword_classes = get_chapter_keyword_classes(cumlative_keywords_src_dict)
     # WHEN / THEN
     for chapter_prefix, ExpectedEnumClass in chXX_keyword_classes.items():
-        chapter_ref_keywords_path = f"src.ch99_glossary.keywords"
+        chapter_ref_keywords_path = f"src.ch99_glossary.ch_keyword"
         print(f"{chapter_ref_keywords_path=}")
 
         # dynamically import the module

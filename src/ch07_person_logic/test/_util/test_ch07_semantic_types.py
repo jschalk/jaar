@@ -1,5 +1,5 @@
 from ch07_person_logic._ref.ch07_semantic_types import ManaGrain, PersonName
-from ch99_glossary.keywords import Ch07Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch07Keywords as kw, ExampleStrs as exx
 from inspect import getdoc as inspect_getdoc
 
 

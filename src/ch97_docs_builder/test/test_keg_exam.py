@@ -1,5 +1,5 @@
 from ch00_py.keyword_class_builder import get_keywords_src_config
-from ch97_docs_builder.keg_definitions_builder import (
+from ch97_docs_builder.definitions_builder import (
     QuestionUnit,
     get_ch_sorted_keywords,
     get_exam_fixed_questions,
@@ -10,7 +10,7 @@ from ch97_docs_builder.keg_definitions_builder import (
     rebuild_final_exam_questions,
     set_did_you_read_orders,
 )
-from ch99_glossary.keywords import Ch97Keywords as kw
+from ch99_glossary.ch_keyword import Ch97Keywords as kw
 from csv import reader as csv_reader
 
 # TODO replace how exam tier source of truth

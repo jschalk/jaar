@@ -12,7 +12,7 @@ from ch18_etl_config.etl_sqlstr import (
 )
 from ch20_etl_brick.etl_brick_main import create_sound_and_heard_tables
 from ch22_heard.heard import etl_heard_vld_tables_to_mind_moment_jsons
-from ch99_glossary.keywords import Ch22Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch22Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
 from sqlite3 import Cursor
 

@@ -5,7 +5,7 @@ from ch17_brick.brick_db_tool import (
     prettify_excel_files,
     set_df_brick_column_types,
 )
-from ch99_glossary.keywords import Ch17Keywords as kw
+from ch99_glossary.ch_keyword import Ch17Keywords as kw
 from openpyxl import load_workbook
 from os.path import exists as os_path_exists, join as os_path_join
 from pandas import (

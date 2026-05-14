@@ -12,7 +12,7 @@ from ch13_time.test._util.ch13_examples import (
     get_expected_five_5524_markdown,
     get_five_config,
 )
-from ch99_glossary.keywords import Ch13Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch13Keywords as kw, ExampleStrs as exx
 
 
 def test_centered_to_len_ReturnsObj():

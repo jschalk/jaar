@@ -5,7 +5,7 @@ from ch31_kpi.gcalendar import (
     get_gcal_contacts_str,
     get_gcal_memberships_str,
 )
-from ch99_glossary.keywords import Ch31Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch31Keywords as kw, ExampleStrs as exx
 
 
 def test_get_gcal_contacts_str_ReturnsObj_Scenario1_TwoContacts():

@@ -15,7 +15,7 @@ from ch09_person_lesson.test._util.ch09_examples import (
     get_atom_example_planunit_sports,
     get_persondelta_sue_example,
 )
-from ch99_glossary.keywords import Ch09Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch09Keywords as kw, ExampleStrs as exx
 from pytest import raises as pytest_raises
 
 

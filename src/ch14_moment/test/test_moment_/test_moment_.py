@@ -20,7 +20,7 @@ from ch14_moment.moment_main import (
     get_default_job_listen_count,
     momentunit_shop,
 )
-from ch99_glossary.keywords import Ch14Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch14Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists, isdir as os_path_isdir
 
 

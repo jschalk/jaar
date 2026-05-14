@@ -4,7 +4,7 @@ from ch15_nabu.nabu_epoch import (
     inherit_timenabu,
     timenabu_shop,
 )
-from ch99_glossary.keywords import Ch15Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch15Keywords as kw, ExampleStrs as exx
 from numpy import int64 as numpy_int64
 from pytest import raises as pytest_raises
 

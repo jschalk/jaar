@@ -2,7 +2,7 @@ from ch00_py.file_toolbox import delete_dir
 from ch10_person_listen._ref.ch10_path import create_keep_grade_path
 from ch12_keep.riverrun import riverrun_shop
 from ch12_keep.test._util.ch12_examples import get_nation_texas_rope
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from os.path import exists as os_path_exists
 
 

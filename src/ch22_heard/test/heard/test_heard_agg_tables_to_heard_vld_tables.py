@@ -9,7 +9,7 @@ from ch18_etl_config.etl_sqlstr import (
     get_insert_heard_vld_sqlstrs,
 )
 from ch22_heard.heard import etl_heard_agg_tables_to_heard_vld_tables
-from ch99_glossary.keywords import Ch22Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch22Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

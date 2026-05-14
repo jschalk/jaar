@@ -1,6 +1,6 @@
 from ch04_rope.rope import create_rope
 from ch08_person_atom.atom_main import get_personatom_from_dict, personatom_shop
-from ch99_glossary.keywords import Ch08Keywords as kw
+from ch99_glossary.ch_keyword import Ch08Keywords as kw
 
 
 def test_PersonAtom_to_dict_ReturnsObj():

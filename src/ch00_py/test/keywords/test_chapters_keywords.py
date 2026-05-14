@@ -19,7 +19,7 @@ from ch00_py.keyword_class_builder import (
     get_possible_keyword_config_keys,
     parse_valid_ch_str,
 )
-from ch99_glossary.keywords import Ch00Keywords as kw
+from ch99_glossary.ch_keyword import Ch00Keywords as kw
 from ch99_glossary.sorter import get_keg_elements_sort_order
 
 
@@ -269,7 +269,7 @@ def test_SpecialTestThatBuildsKeywordEnumClasses():
 
     # WHEN / THEN
     prev_and_curr_classes_file_are_same = enum_classes_str == current_classes_file_str
-    assertion_failure_str = "Special case: keywords.py was changed. Run test again."
+    assertion_failure_str = "Special case: ch_keyword.py was changed. Run test again."
     assert prev_and_curr_classes_file_are_same, assertion_failure_str
 
 

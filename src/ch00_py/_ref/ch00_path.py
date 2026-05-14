@@ -16,8 +16,8 @@ def create_src_keywords_src_path(src_dir: str) -> str:
 
 
 def create_keywords_classes_file_path(src_dir: str) -> str:
-    """Returns path: src\\ch99_glossary\\keywords.py"""
+    """Returns path: src\\ch99_glossary\\ch_keyword.py"""
 
     # ref_dir = create_path(chapter_dir, "_ref")
     ref_dir = create_path(src_dir, "ch99_glossary")
-    return create_path(ref_dir, "keywords.py")
+    return create_path(ref_dir, "ch_keyword.py")

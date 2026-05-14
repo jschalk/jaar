@@ -1,6 +1,6 @@
 from ch11_bud.bud_main import tranbook_shop, tranunit_shop
 from ch14_moment.moment_main import momentunit_shop
-from ch99_glossary.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from pytest import raises as pytest_raises
 
 

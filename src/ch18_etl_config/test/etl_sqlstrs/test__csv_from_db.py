@@ -1,7 +1,7 @@
 from ch00_py.csv_toolbox import open_csv_with_types
 from ch00_py.file_toolbox import create_path
 from ch18_etl_config.etl_csv import save_to_split_csvs
-from ch99_glossary.keywords import Ch18Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch18Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
 from sqlite3 import Cursor
 
