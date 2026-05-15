@@ -53,7 +53,7 @@ from ch97_docs_builder._ref.ch97_semantic_types import (
     WeightNum,
     WorldName,
 )
-from ch97_docs_builder.definitions_builder import (
+from ch97_docs_builder.glossary_definition import (
     get_chxx_prefix_path_dict,
     get_chxx_ref_blurb,
     get_keg_definitions,

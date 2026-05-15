@@ -578,65 +578,66 @@ row_number,question
 574,Did you read that the keg_definition of 'UPDATE' is 'CRUD_COMMAND to update records for a table. 'Associated dimens: personunit' in 'CRUD_COMMAND to update records for a table''.
 575,Did you read that the keg_definition of 'exam_tier' is 'Every Keyword has an exam_tier. The highter the exam_tier the more relatively important the keyword.'.
 576,Did you read that the keg_definition of 'filename' is 'Should always include extension ala filebasename + '.' + extension'.
-577,Did you read that the keg_definition of 'keyword' is 'Reserved word that is supposed to have one meaning.'.
-578,"Did you read that the keg_definition of 'semantic_type' is 'A datatype that is fundamentally int, str, or float'."
-579,"Did you read that the keg_definition of 'shop' is 'The factory method in programming is very important. However because I want 'fact' only to refer to the Keg concept I don't use the word 'factory', instead I use 'shop'.'."
-580,Did you read that the keg_definition of 'sort_ordinal' is 'Int that represents where the keyword is indexed in the general sorting order.'.
-581,Did you read that the keg_definition of 'sqlite_datatype' is 'Definition needed.'.
-582,"Did you read that the keg_definition of 'valid_ch' is 'Describes which chapters a keyword is allowed to be in. Format is '0:' for all chapters, '5:' for all chapters after ch05, '3,7' for only 3 and 7. Empty string for not allowed in any chapter.'."
-583,Did you read that the keg_definition of 'April' is 'Example key with value 'April' used for tests throughout codebase.'.
-584,Did you read that the keg_definition of 'August' is 'Example key with value 'August' used for tests throughout codebase.'.
-585,Did you read that the keg_definition of 'December' is 'Example key with value 'December' used for tests throughout codebase.'.
-586,Did you read that the keg_definition of 'February' is 'Example key with value 'February' used for tests throughout codebase.'.
-587,Did you read that the keg_definition of 'Friday' is 'Example key with value 'Friday' used for tests throughout codebase.'.
-588,Did you read that the keg_definition of 'January' is 'Example key with value 'January' used for tests throughout codebase.'.
-589,Did you read that the keg_definition of 'July' is 'Example key with value 'July' used for tests throughout codebase.'.
-590,Did you read that the keg_definition of 'June' is 'Example key with value 'June' used for tests throughout codebase.'.
-591,Did you read that the keg_definition of 'March' is 'Example key with value 'March' used for tests throughout codebase.'.
-592,Did you read that the keg_definition of 'May' is 'Example key with value 'May' used for tests throughout codebase.'.
-593,Did you read that the keg_definition of 'Monday' is 'Example key with value 'Monday' used for tests throughout codebase.'.
-594,Did you read that the keg_definition of 'November' is 'Example key with value 'November' used for tests throughout codebase.'.
-595,Did you read that the keg_definition of 'October' is 'Example key with value 'October' used for tests throughout codebase.'.
-596,Did you read that the keg_definition of 'Saturday' is 'Example key with value 'Saturday' used for tests throughout codebase.'.
-597,Did you read that the keg_definition of 'September' is 'Example key with value 'September' used for tests throughout codebase.'.
-598,Did you read that the keg_definition of 'Sunday' is 'Example key with value 'Sunday' used for tests throughout codebase.'.
-599,Did you read that the keg_definition of 'Thursday' is 'Example key with value 'Thursday' used for tests throughout codebase.'.
-600,Did you read that the keg_definition of 'Tuesday' is 'Example key with value 'Tuesday' used for tests throughout codebase.'.
-601,Did you read that the keg_definition of 'Wednesday' is 'Example key with value 'Wednesday' used for tests throughout codebase.'.
-602,Did you read that the keg_definition of 'a23' is 'Example key with value ';Amy23;' used for tests throughout codebase.'.
-603,Did you read that the keg_definition of 'a23_dash' is 'Example key with value '-Amy23-' used for tests throughout codebase.'.
-604,Did you read that the keg_definition of 'a23_slash' is 'Example key with value '/Amy23/' used for tests throughout codebase.'.
-605,Did you read that the keg_definition of 'assert' is 'Used so often in Python that it cannot be a kegology keyword.'.
-606,Did you read that the keg_definition of 'blue' is 'Example key with value 'blue' used for tests throughout codebase.'.
-607,Did you read that the keg_definition of 'bob' is 'Example key with value 'Bob' used for tests throughout codebase.'.
-608,Did you read that the keg_definition of 'bowl' is 'Example key with value 'bowl' used for tests throughout codebase.'.
-609,Did you read that the keg_definition of 'break' is 'Used so often in Python that it cannot be a kegology keyword.'.
-610,Did you read that the keg_definition of 'casa' is 'Example key with value 'casa' used for tests throughout codebase.'.
-611,Did you read that the keg_definition of 'class' is 'Used so often in Python that it cannot be a kegology keyword.'.
-612,Did you read that the keg_definition of 'clean' is 'Example key with value 'clean' used for tests throughout codebase.'.
-613,Did you read that the keg_definition of 'cuisine' is 'Example key with value 'cuisine' used for tests throughout codebase.'.
-614,Did you read that the keg_definition of 'dash' is 'Example key with value '-' used for tests throughout codebase.'.
-615,Did you read that the keg_definition of 'dirtyness' is 'Example key with value 'dirtyness' used for tests throughout codebase.'.
-616,Did you read that the keg_definition of 'ep8' is 'Example key with value ';ep8;' used for tests throughout codebase.'.
-617,Did you read that the keg_definition of 'global' is 'Used so often in Python that it cannot be a kegology keyword.'.
-618,Did you read that the keg_definition of 'hn_blu' is 'Example key with value ';herenow_blu;' used for tests throughout codebase.'.
-619,Did you read that the keg_definition of 'hn_red' is 'Example key with value ';herenow_red;' used for tests throughout codebase.'.
-620,Did you read that the keg_definition of 'hn_yel' is 'Example key with value ';herenow_yel;' used for tests throughout codebase.'.
-621,Did you read that the keg_definition of 'import' is 'Used so often in Python that it cannot be a kegology keyword.'.
-622,Did you read that the keg_definition of 'match' is 'Used so often in Python that it cannot be a kegology keyword.'.
-623,Did you read that the keg_definition of 'mop' is 'Example key with value 'mop' used for tests throughout codebase.'.
-624,Did you read that the keg_definition of 'red' is 'Example key with value 'red' used for tests throughout codebase.'.
-625,Did you read that the keg_definition of 'run' is 'Example key with value ';runners' used for tests throughout codebase.'.
-626,Did you read that the keg_definition of 'run_dash' is 'Example key with value '-runners' used for tests throughout codebase.'.
-627,Did you read that the keg_definition of 'scrub' is 'Example key with value 'scrub' used for tests throughout codebase.'.
-628,Did you read that the keg_definition of 'self' is 'Used so often in Python that it cannot be a kegology keyword.'.
-629,Did you read that the keg_definition of 'slash' is 'Example key with value '/' used for tests throughout codebase.'.
-630,Did you read that the keg_definition of 'square' is 'Example key with value 'square' used for tests throughout codebase.'.
-631,Did you read that the keg_definition of 'sue' is 'Example key with value 'Sue' used for tests throughout codebase.'.
-632,Did you read that the keg_definition of 'sweep' is 'Example key with value 'sweep' used for tests throughout codebase.'.
-633,Did you read that the keg_definition of 'wed' is 'Example key with value 'Wed' used for tests throughout codebase.'.
-634,Did you read that the keg_definition of 'wk' is 'Example key with value 'wk' used for tests throughout codebase.'.
-635,Did you read that the keg_definition of 'xio' is 'Example key with value 'Xio' used for tests throughout codebase.'.
-636,Did you read that the keg_definition of 'yao' is 'Example key with value 'Yao' used for tests throughout codebase.'.
-637,Did you read that the keg_definition of 'yield' is 'Used so often in Python that it cannot be a kegology keyword.'.
-638,Did you read that the keg_definition of 'zia' is 'Example key with value 'Zia' used for tests throughout codebase.'.
+577,Did you read that the keg_definition of 'glossary' is 'Definition needed.'.
+578,Did you read that the keg_definition of 'keyword' is 'Reserved word that is supposed to have one meaning.'.
+579,"Did you read that the keg_definition of 'semantic_type' is 'A datatype that is fundamentally int, str, or float'."
+580,"Did you read that the keg_definition of 'shop' is 'The factory method in programming is very important. However because I want 'fact' only to refer to the Keg concept I don't use the word 'factory', instead I use 'shop'.'."
+581,Did you read that the keg_definition of 'sort_ordinal' is 'Int that represents where the keyword is indexed in the general sorting order.'.
+582,Did you read that the keg_definition of 'sqlite_datatype' is 'Definition needed.'.
+583,"Did you read that the keg_definition of 'valid_ch' is 'Describes which chapters a keyword is allowed to be in. Format is '0:' for all chapters, '5:' for all chapters after ch05, '3,7' for only 3 and 7. Empty string for not allowed in any chapter.'."
+584,Did you read that the keg_definition of 'April' is 'Example key with value 'April' used for tests throughout codebase.'.
+585,Did you read that the keg_definition of 'August' is 'Example key with value 'August' used for tests throughout codebase.'.
+586,Did you read that the keg_definition of 'December' is 'Example key with value 'December' used for tests throughout codebase.'.
+587,Did you read that the keg_definition of 'February' is 'Example key with value 'February' used for tests throughout codebase.'.
+588,Did you read that the keg_definition of 'Friday' is 'Example key with value 'Friday' used for tests throughout codebase.'.
+589,Did you read that the keg_definition of 'January' is 'Example key with value 'January' used for tests throughout codebase.'.
+590,Did you read that the keg_definition of 'July' is 'Example key with value 'July' used for tests throughout codebase.'.
+591,Did you read that the keg_definition of 'June' is 'Example key with value 'June' used for tests throughout codebase.'.
+592,Did you read that the keg_definition of 'March' is 'Example key with value 'March' used for tests throughout codebase.'.
+593,Did you read that the keg_definition of 'May' is 'Example key with value 'May' used for tests throughout codebase.'.
+594,Did you read that the keg_definition of 'Monday' is 'Example key with value 'Monday' used for tests throughout codebase.'.
+595,Did you read that the keg_definition of 'November' is 'Example key with value 'November' used for tests throughout codebase.'.
+596,Did you read that the keg_definition of 'October' is 'Example key with value 'October' used for tests throughout codebase.'.
+597,Did you read that the keg_definition of 'Saturday' is 'Example key with value 'Saturday' used for tests throughout codebase.'.
+598,Did you read that the keg_definition of 'September' is 'Example key with value 'September' used for tests throughout codebase.'.
+599,Did you read that the keg_definition of 'Sunday' is 'Example key with value 'Sunday' used for tests throughout codebase.'.
+600,Did you read that the keg_definition of 'Thursday' is 'Example key with value 'Thursday' used for tests throughout codebase.'.
+601,Did you read that the keg_definition of 'Tuesday' is 'Example key with value 'Tuesday' used for tests throughout codebase.'.
+602,Did you read that the keg_definition of 'Wednesday' is 'Example key with value 'Wednesday' used for tests throughout codebase.'.
+603,Did you read that the keg_definition of 'a23' is 'Example key with value ';Amy23;' used for tests throughout codebase.'.
+604,Did you read that the keg_definition of 'a23_dash' is 'Example key with value '-Amy23-' used for tests throughout codebase.'.
+605,Did you read that the keg_definition of 'a23_slash' is 'Example key with value '/Amy23/' used for tests throughout codebase.'.
+606,Did you read that the keg_definition of 'assert' is 'Used so often in Python that it cannot be a kegology keyword.'.
+607,Did you read that the keg_definition of 'blue' is 'Example key with value 'blue' used for tests throughout codebase.'.
+608,Did you read that the keg_definition of 'bob' is 'Example key with value 'Bob' used for tests throughout codebase.'.
+609,Did you read that the keg_definition of 'bowl' is 'Example key with value 'bowl' used for tests throughout codebase.'.
+610,Did you read that the keg_definition of 'break' is 'Used so often in Python that it cannot be a kegology keyword.'.
+611,Did you read that the keg_definition of 'casa' is 'Example key with value 'casa' used for tests throughout codebase.'.
+612,Did you read that the keg_definition of 'class' is 'Used so often in Python that it cannot be a kegology keyword.'.
+613,Did you read that the keg_definition of 'clean' is 'Example key with value 'clean' used for tests throughout codebase.'.
+614,Did you read that the keg_definition of 'cuisine' is 'Example key with value 'cuisine' used for tests throughout codebase.'.
+615,Did you read that the keg_definition of 'dash' is 'Example key with value '-' used for tests throughout codebase.'.
+616,Did you read that the keg_definition of 'dirtyness' is 'Example key with value 'dirtyness' used for tests throughout codebase.'.
+617,Did you read that the keg_definition of 'ep8' is 'Example key with value ';ep8;' used for tests throughout codebase.'.
+618,Did you read that the keg_definition of 'global' is 'Used so often in Python that it cannot be a kegology keyword.'.
+619,Did you read that the keg_definition of 'hn_blu' is 'Example key with value ';herenow_blu;' used for tests throughout codebase.'.
+620,Did you read that the keg_definition of 'hn_red' is 'Example key with value ';herenow_red;' used for tests throughout codebase.'.
+621,Did you read that the keg_definition of 'hn_yel' is 'Example key with value ';herenow_yel;' used for tests throughout codebase.'.
+622,Did you read that the keg_definition of 'import' is 'Used so often in Python that it cannot be a kegology keyword.'.
+623,Did you read that the keg_definition of 'match' is 'Used so often in Python that it cannot be a kegology keyword.'.
+624,Did you read that the keg_definition of 'mop' is 'Example key with value 'mop' used for tests throughout codebase.'.
+625,Did you read that the keg_definition of 'red' is 'Example key with value 'red' used for tests throughout codebase.'.
+626,Did you read that the keg_definition of 'run' is 'Example key with value ';runners' used for tests throughout codebase.'.
+627,Did you read that the keg_definition of 'run_dash' is 'Example key with value '-runners' used for tests throughout codebase.'.
+628,Did you read that the keg_definition of 'scrub' is 'Example key with value 'scrub' used for tests throughout codebase.'.
+629,Did you read that the keg_definition of 'self' is 'Used so often in Python that it cannot be a kegology keyword.'.
+630,Did you read that the keg_definition of 'slash' is 'Example key with value '/' used for tests throughout codebase.'.
+631,Did you read that the keg_definition of 'square' is 'Example key with value 'square' used for tests throughout codebase.'.
+632,Did you read that the keg_definition of 'sue' is 'Example key with value 'Sue' used for tests throughout codebase.'.
+633,Did you read that the keg_definition of 'sweep' is 'Example key with value 'sweep' used for tests throughout codebase.'.
+634,Did you read that the keg_definition of 'wed' is 'Example key with value 'Wed' used for tests throughout codebase.'.
+635,Did you read that the keg_definition of 'wk' is 'Example key with value 'wk' used for tests throughout codebase.'.
+636,Did you read that the keg_definition of 'xio' is 'Example key with value 'Xio' used for tests throughout codebase.'.
+637,Did you read that the keg_definition of 'yao' is 'Example key with value 'Yao' used for tests throughout codebase.'.
+638,Did you read that the keg_definition of 'yield' is 'Used so often in Python that it cannot be a kegology keyword.'.
+639,Did you read that the keg_definition of 'zia' is 'Example key with value 'Zia' used for tests throughout codebase.'.

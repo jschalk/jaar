@@ -24,10 +24,8 @@ from ch97_docs_builder._ref.ch97_path import (
     create_chapter_ref_path,
     create_src_keg_exam_path,
 )
-from ch97_docs_builder.definitions_builder import (
-    rebuild_final_exam_questions,
-    rebuild_keg_definitions_contents,
-)
+from ch97_docs_builder.glossary_definition import rebuild_keg_definitions_contents
+from ch97_docs_builder.glossary_ranking import rebuild_final_exam_questions
 from ch99_glossary.sorter import get_keg_elements_sort_order
 
 

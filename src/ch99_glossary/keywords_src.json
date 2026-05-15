@@ -244,6 +244,7 @@
   "gcal": {"exam_tier": 3, "valid_ch": "31:"}, 
   "gift": {"exam_tier": 3, "valid_ch": "33:"}, 
   "give_force": {"exam_tier": 3, "sort_ordinal": 124, "valid_ch": "2:"}, 
+  "glossary": {"exam_tier": 3, "valid_ch": "0:"}, 
   "gogo_calc": {"exam_tier": 3, "sort_ordinal": 180, "valid_ch": "6:"}, 
   "gogo_want": {"exam_tier": 3, "sort_ordinal": 108, "valid_ch": "6:"}, 
   "group_cred_lumen": {"exam_tier": 3, "sort_ordinal": 113, "valid_ch": "2:"}, 
