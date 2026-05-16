@@ -134,9 +134,6 @@ def test_get_keg_definitions_ReturnsObj_CheckNoChapter_keywords():
         if not valid_chs:
             config_description = keg_definitions.get(keyword)
             assert "Not used in codebase." in config_description, keyword
-        assert "exam_tier" in set(kw_config.keys()), keyword
-        x_exam_tier = kw_config.get("exam_tier")
-        assert x_exam_tier >= 0
 
 
 def test_get_keg_definitions_ReturnsObj_Check_person_dimen():

@@ -1,20 +1,14 @@
 from ch00_py.chapter_desc_main import get_chapter_descs
-from ch00_py.file_toolbox import open_json, save_json, set_dir
+from ch00_py.file_toolbox import set_dir
 from ch00_py.keyword_class_builder import (
     get_ch_int,
     get_chapter_descs,
     get_keywords_src_config,
     parse_valid_ch_str,
 )
-from ch07_person_logic.person_config import (
-    get_all_person_calc_args,
-    get_person_config_dict,
-)
 from ch97_docs_builder._ref.ch97_path import (
-    create_chapter_ref_path,
     create_keg_exam_questions_path,
-    create_src_keg_definitions_path,
-    create_term_rank_json_path,
+    create_keg_rank_json_path,
 )
 from ch97_docs_builder.glossary_definition import get_keg_definitions
 from csv import writer as csv_writer
@@ -30,7 +24,7 @@ class QuestionUnit:
     keg_term: str = None
     keg_definition: str = None
     init_ch: int = None
-    exam_tier: int = None
+    rank_tier: int = None
     did_you_read_order: int = None
     complete_question: str = None
 
@@ -54,31 +48,47 @@ def get_keg_definition_questionunits() -> dict[str, QuestionUnit]:
             valid_chs = parse_valid_ch_str(ch_ints, kw_config.get("valid_ch"))
             init_ch = sorted(valid_chs)[0] if valid_chs else None
             questionunit.init_ch = init_ch
-            questionunit.exam_tier = kw_config.get("exam_tier")
-        else:
-            questionunit.exam_tier = 0
+        questionunit.rank_tier = 0
         keg_questions[keg_term] = questionunit
     return keg_questions
 
 
-def rebuild_term_rank_json(src_dir: str = None):
+def get_tiered_questionunits() -> dict[str, QuestionUnit]:
     keywords_src_config = get_keywords_src_config()
-    keg_questionunits = get_keg_definition_questionunits()
+    keywords_set = set(keywords_src_config.keys())
+    keg_qus = get_keg_definition_questionunits()
+    for keg_term, keg_qu in keg_qus.items():
+        # check chxx terms
+        if len(keg_term) == 4 and keg_term.startswith("ch"):
+            keg_qu.rank_tier = 6
+        elif keg_qu.init_ch is None and keg_term in keywords_set:
+            keg_qu.rank_tier = 10
+    return keg_qus
+
+
+def get_keg_rank_dict() -> dict[str, dict]:
+    keywords_src_config = get_keywords_src_config()
+    keg_questionunits = get_tiered_questionunits()
     set_did_you_read_orders(keg_questionunits)
     keg_tiers = {}
     for keg_term, keg_qu in keg_questionunits.items():
         kw_config = keywords_src_config.get(keg_term)
         valid_ch = kw_config.get("valid_ch") if kw_config else "0:"
         keg_tiers[keg_qu.keg_term] = {
-            "term_rank": keg_qu.did_you_read_order,
-            "exam_tier": keg_qu.exam_tier,
+            "keg_rank": keg_qu.did_you_read_order,
+            "rank_tier": keg_qu.rank_tier,
             "chs": valid_ch,
         }
-    sorted_items = sorted(keg_tiers.items(), key=lambda item: item[1]["term_rank"])
+    return keg_tiers
+
+
+def rebuild_keg_rank_json(src_dir: str = None):
+    keg_tiers = get_keg_rank_dict()
+    sorted_items = sorted(keg_tiers.items(), key=lambda item: item[1]["keg_rank"])
     ordered_dict = dict(sorted_items)
     if src_dir is None:
         src_dir = "src"
-    output_path = Path(create_term_rank_json_path(src_dir))
+    output_path = Path(create_keg_rank_json_path(src_dir))
     derived_dir = os_path_join(src_dir, "ch99_glossary", "derived")
     set_dir(derived_dir)
     with output_path.open("w", encoding="utf-8", newline="\n") as file:
@@ -88,8 +98,8 @@ def rebuild_term_rank_json(src_dir: str = None):
         for index, (key, value) in enumerate(items):
             line = (
                 f'    "{key}": '
-                f'{{"term_rank": {value["term_rank"]}, '
-                f'"exam_tier": {value["exam_tier"]}, '
+                f'{{"keg_rank": {value["keg_rank"]}, '
+                f'"rank_tier": {value["rank_tier"]}, '
                 f'"chs": {json_dumps(value["chs"])}}}'
             )
             if index < len(items) - 1:
@@ -103,16 +113,16 @@ def set_did_you_read_orders(keg_questions: dict[str, QuestionUnit]) -> None:
     Assign did_you_read_order values in-place.
 
     Ordering rules:
-        1. exam_tier ascending
+        1. rank_tier ascending
         2. init_ch descending
         3. keg_term alphabetical
     """
     sorted_questunits = sorted(
         keg_questions.values(),
         key=lambda q: (
-            -q.exam_tier,
+            -q.rank_tier,
             q.init_ch is not None,  # None last or first depending on your preference
-            -(q.init_ch or 0),  # descending for ints
+            (q.init_ch or 0),  # descending for ints
             q.keg_term,
         ),
     )
@@ -178,7 +188,7 @@ def rebuild_keg_exam_questions(
         output_csv_path = create_keg_exam_questions_path("src")
     final_questions = merge_fixed_and_floating_questions(
         fixed_questions=get_exam_fixed_questions(),
-        floating_questions=get_keg_definition_questionunits(),
+        floating_questions=get_tiered_questionunits(),
     )
 
     with open(output_csv_path, "w", newline="", encoding="utf-8") as csv_file:
@@ -198,7 +208,7 @@ def get_ch_sorted_keywords(keywords_src_config: dict) -> list[str]:
     return sorted(
         keywords_src_config.keys(),
         key=lambda k: (
-            -keywords_src_config[k].get("exam_tier", float("inf")),
+            -keywords_src_config[k].get("rank_tier", float("inf")),
             -parse_chapter(keywords_src_config[k].get("valid_ch", "")),
             k.lower(),
         ),

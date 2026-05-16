@@ -1,3 +1,5 @@
+from ch00_py._ref.ch00_path import create_src_keywords_src_path
+from ch00_py.file_toolbox import save_json
 from ch00_py.keyword_class_builder import (
     get_keywords_src_config,
     save_keywords_by_chapter_md,
@@ -15,16 +17,14 @@ from ch99_glossary.sorter import get_keg_elements_sort_order
 from random import random as random_random
 
 
+# TODO consider getting rid of this, it doesn't need to be rebuilt
 def test_recreate_keyword_src_config_Scenario0_Includes_sort_ordinal():
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
     keywords_src_config = get_keywords_src_config()
     expected_clean_keywords_src_config = {}
     for keyword, kw_config in keywords_src_config.items():
-        new_kw_config = {
-            kw.exam_tier: kw_config.get(kw.exam_tier),
-            kw.valid_ch: kw_config.get(kw.valid_ch),
-        }
+        new_kw_config = {kw.valid_ch: kw_config.get(kw.valid_ch)}
         if kw_config.get(kw.semantic_type):
             new_kw_config[kw.semantic_type] = kw_config.get(kw.semantic_type)
         expected_clean_keywords_src_config[keyword] = new_kw_config
@@ -46,7 +46,7 @@ def test_recreate_keyword_src_config_Scenario0_Includes_sort_ordinal():
     # for missing_element in sorted(missing_elements):
     #     x_count += 1
     #     print(
-    #         f""""{missing_element}": {{"exam_tier": 0, "valid_ch": "ch{ch_num}"}},"""
+    #         f""""{missing_element}": {{"rank_tier": 0, "valid_ch": "ch{ch_num}"}},"""
     #     )
     # print(f"{x_count} elements")
     # assert set(get_keg_elements_sort_order()).issubset(keywords_set)

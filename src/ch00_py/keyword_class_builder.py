@@ -22,7 +22,7 @@ def get_keywords_src_config() -> dict[str, dict]:
 
 
 def get_possible_keyword_config_keys() -> set:
-    return {"valid_ch", "semantic_type", "exam_tier", "sort_ordinal"}
+    return {"valid_ch", "semantic_type", "rank_tier", "sort_ordinal"}
 
 
 def parse_valid_ch_str(

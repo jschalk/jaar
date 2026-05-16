@@ -24,7 +24,7 @@ from ch97_docs_builder._ref.ch97_path import create_chapter_ref_path
 from ch97_docs_builder.glossary_definition import rebuild_keg_definitions_contents
 from ch97_docs_builder.glossary_ranking import (
     rebuild_keg_exam_questions,
-    rebuild_term_rank_json,
+    rebuild_keg_rank_json,
 )
 from ch99_glossary.sorter import get_keg_elements_sort_order
 
@@ -93,10 +93,7 @@ def get_rebuilt_keywords_src_config() -> dict:
     keywords_src_config = get_keywords_src_config()
     rebuilt_keywords_src_config = {}
     for keyword, kw_config in keywords_src_config.items():
-        new_kw_config = {
-            "exam_tier": kw_config.get("exam_tier"),
-            "valid_ch": kw_config.get("valid_ch"),
-        }
+        new_kw_config = {"valid_ch": kw_config.get("valid_ch")}
         if kw_config.get("semantic_type"):
             new_kw_config["semantic_type"] = kw_config.get("semantic_type")
         rebuilt_keywords_src_config[keyword] = new_kw_config
@@ -110,16 +107,17 @@ def resave_chapter_and_keyword_json_files():
     for chapter_dir in get_chapter_descs().values():
         json_file_tuples = get_dir_filenames(chapter_dir, {"json"})
         for x_dir, x_filename in json_file_tuples:
-            json_dir = create_path(chapter_dir, x_dir)
-            save_json(json_dir, x_filename, open_json(json_dir, x_filename))
-    keywords_src_json_path = create_src_keywords_src_path("src")
+            if "rank_tier.json" not in x_filename:
+                json_dir = create_path(chapter_dir, x_dir)
+                save_json(json_dir, x_filename, open_json(json_dir, x_filename))
     ex_strs_json_path = create_src_example_strs_path("src")
-    rebuilt_keywords_src_config = get_rebuilt_keywords_src_config()
-    save_json(keywords_src_json_path, None, rebuilt_keywords_src_config)
+    # keywords_src_json_path = create_src_keywords_src_path("src")
+    # rebuilt_keywords_src_config = get_rebuilt_keywords_src_config()
+    # save_json(keywords_src_json_path, None, rebuilt_keywords_src_config)
     # save_json(keywords_src_json_path, None, open_json(keywords_src_json_path))
     save_json(ex_strs_json_path, None, open_json(ex_strs_json_path))
     rebuild_keg_definitions_contents()
     # TODO create rebuild_keg_ranking
-    rebuild_term_rank_json()
+    rebuild_keg_rank_json()
     # TODO change rebuild_keg_exam_questions so it references keg_ranking
     rebuild_keg_exam_questions()
