@@ -1,4 +1,11 @@
-from ch00_py.keyword_class_builder import get_keywords_src_config
+from ch00_py.file_toolbox import open_json, save_json
+from ch00_py.keyword_class_builder import (
+    get_ch_int,
+    get_chapter_descs,
+    get_keywords_src_config,
+    parse_valid_ch_str,
+)
+from ch97_docs_builder._ref.ch97_path import create_term_rank_json_path
 from ch97_docs_builder.glossary_ranking import (
     QuestionUnit,
     get_ch_sorted_keywords,
@@ -7,11 +14,13 @@ from ch97_docs_builder.glossary_ranking import (
     get_keg_definitions,
     get_keywords_by_importance,
     merge_fixed_and_floating_questions,
-    rebuild_final_exam_questions,
+    rebuild_keg_exam_questions,
+    rebuild_term_rank_json,
     set_did_you_read_orders,
 )
 from ch99_glossary.ch_keyword import Ch97Keywords as kw
 from csv import reader as csv_reader
+from os.path import exists as os_path_exists
 
 # TODO replace how exam tier source of truth
 # Having exam tier sourced in keywords_src makes it so example strings don't have exam_tiers.
@@ -180,6 +189,72 @@ def test_set_did_you_read_orders_SetAttrs_Scenario4_SortsNoneInitChAheadOfNumeri
     assert numeric_init_ch_questionunit.did_you_read_order == 1
 
 
+def test_rebuild_term_rank_json_SavesFile_Scenario0_NoFileExists(temp3_fs):
+    # ESTABLISH
+    src_dir = str(temp3_fs)
+    exam_tier_path = create_term_rank_json_path(src_dir)
+    assert not os_path_exists(exam_tier_path)
+    # WHEN
+    rebuild_term_rank_json(src_dir)
+    # THEN
+    assert os_path_exists(exam_tier_path)
+    exam_tier_dict = open_json(exam_tier_path)
+
+    keywords_src_config = get_keywords_src_config()
+    chapter_descs = get_chapter_descs().keys()
+    ch_ints = {get_ch_int(chapter_desc) for chapter_desc in chapter_descs}
+    keg_questionunits = get_keg_definition_questionunits()
+    set_did_you_read_orders(keg_questionunits)
+    expected_keg_tiers = {}
+    for keg_term, keg_qu in keg_questionunits.items():
+        kw_config = keywords_src_config.get(keg_term)
+        # if kw_config:
+        #     ch_list = parse_valid_ch_str(ch_ints, kw_config.get("valid_ch"))
+        # else:
+        #     ch_list = set(ch_ints)
+        valid_ch = kw_config.get("valid_ch") if kw_config else "0:"
+        expected_keg_tiers[keg_qu.keg_term] = {
+            "term_rank": keg_qu.did_you_read_order,
+            "exam_tier": keg_qu.exam_tier,
+            "chs": valid_ch,
+        }
+    for keg_term, exam_dict in expected_keg_tiers.items():
+        print(f"{keg_term=} {exam_dict=}")
+    assert exam_tier_dict == expected_keg_tiers
+
+
+# def test_rebuild_term_rank_json_SavesFile_Scenario1_NoFileExists(temp3_fs):
+#     # ESTABLISH
+#     src_dir = str(temp3_fs)
+#     exam_tier_path = create_term_rank_json_path(src_dir)
+#     assert not os_path_exists(exam_tier_path)
+#     # WHEN
+#     rebuild_term_rank_json(src_dir)
+#     # THEN
+#     assert os_path_exists(exam_tier_path)
+#     exam_tier_dict = open_json(exam_tier_path)
+
+#     keywords_src_config = get_keywords_src_config()
+#     chapter_descs = get_chapter_descs().keys()
+#     ch_ints = {get_ch_int(chapter_desc) for chapter_desc in chapter_descs}
+#     keg_questionunits = get_keg_definition_questionunits()
+#     expected_keg_tiers = {}
+#     for keg_term, keg_qu in keg_questionunits.items():
+#         kw_config = keywords_src_config.get(keg_term)
+#         # if kw_config:
+#         #     ch_list = parse_valid_ch_str(ch_ints, kw_config.get("valid_ch"))
+#         # else:
+#         #     ch_list = set(ch_ints)
+#         valid_ch = kw_config.get("valid_ch") if kw_config else "0:"
+#         expected_keg_tiers[keg_qu.keg_term] = {
+#             "exam_tier": keg_qu.exam_tier,
+#             "chs": valid_ch,
+#         }
+#     for keg_term, exam_dict in expected_keg_tiers.items():
+#         print(f"{keg_term=} {exam_dict=}")
+#     assert exam_tier_dict == expected_keg_tiers
+
+
 def test_get_exam_fixed_questions_ReturnsObj():
     # ESTABLISH / WHEN
     exam_fixed_questions = get_exam_fixed_questions()
@@ -256,13 +331,13 @@ def test_merge_fixed_and_floating_questions_ReturnsObj_Scenario2_MultipleFixedIn
     ]
 
 
-def test_rebuild_final_exam_questions_ReturnsNone_Scenario3_CreatesCsvFile(
+def test_rebuild_keg_exam_questions_ReturnsNone_Scenario3_CreatesCsvFile(
     tmp_path,
 ):
     # ESTABLISH
     output_csv_path = tmp_path / "final_exam_questions.csv"
     # WHEN
-    rebuild_final_exam_questions(output_csv_path=output_csv_path)
+    rebuild_keg_exam_questions(output_csv_path=output_csv_path)
     # THEN
     assert output_csv_path.exists()
 

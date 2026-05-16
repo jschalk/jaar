@@ -1,6 +1,7 @@
-from ch00_py.chapter_desc_main import get_chapter_desc_prefix, get_chapter_descs
-from ch00_py.file_toolbox import open_json, save_json
+from ch00_py.chapter_desc_main import get_chapter_descs
+from ch00_py.file_toolbox import open_json, save_json, set_dir
 from ch00_py.keyword_class_builder import (
+    get_ch_int,
     get_chapter_descs,
     get_keywords_src_config,
     parse_valid_ch_str,
@@ -11,11 +12,15 @@ from ch07_person_logic.person_config import (
 )
 from ch97_docs_builder._ref.ch97_path import (
     create_chapter_ref_path,
+    create_keg_exam_questions_path,
     create_src_keg_definitions_path,
+    create_term_rank_json_path,
 )
 from ch97_docs_builder.glossary_definition import get_keg_definitions
 from csv import writer as csv_writer
 from dataclasses import dataclass
+from json import dumps as json_dumps
+from os.path import join as os_path_join
 from pathlib import Path
 from re import search as re_search
 
@@ -37,7 +42,7 @@ class QuestionUnit:
 
 def get_keg_definition_questionunits() -> dict[str, QuestionUnit]:
     chapter_descs = get_chapter_descs().keys()
-    ch_ints = {int(chapter_desc[2:4]) for chapter_desc in chapter_descs}
+    ch_ints = {get_ch_int(chapter_desc) for chapter_desc in chapter_descs}
     keywords_src_config = get_keywords_src_config()
 
     keg_definitions = get_keg_definitions()
@@ -54,6 +59,43 @@ def get_keg_definition_questionunits() -> dict[str, QuestionUnit]:
             questionunit.exam_tier = 0
         keg_questions[keg_term] = questionunit
     return keg_questions
+
+
+def rebuild_term_rank_json(src_dir: str = None):
+    keywords_src_config = get_keywords_src_config()
+    keg_questionunits = get_keg_definition_questionunits()
+    set_did_you_read_orders(keg_questionunits)
+    keg_tiers = {}
+    for keg_term, keg_qu in keg_questionunits.items():
+        kw_config = keywords_src_config.get(keg_term)
+        valid_ch = kw_config.get("valid_ch") if kw_config else "0:"
+        keg_tiers[keg_qu.keg_term] = {
+            "term_rank": keg_qu.did_you_read_order,
+            "exam_tier": keg_qu.exam_tier,
+            "chs": valid_ch,
+        }
+    sorted_items = sorted(keg_tiers.items(), key=lambda item: item[1]["term_rank"])
+    ordered_dict = dict(sorted_items)
+    if src_dir is None:
+        src_dir = "src"
+    output_path = Path(create_term_rank_json_path(src_dir))
+    derived_dir = os_path_join(src_dir, "ch99_glossary", "derived")
+    set_dir(derived_dir)
+    with output_path.open("w", encoding="utf-8", newline="\n") as file:
+        file.write("{\n")
+
+        items = list(ordered_dict.items())
+        for index, (key, value) in enumerate(items):
+            line = (
+                f'    "{key}": '
+                f'{{"term_rank": {value["term_rank"]}, '
+                f'"exam_tier": {value["exam_tier"]}, '
+                f'"chs": {json_dumps(value["chs"])}}}'
+            )
+            if index < len(items) - 1:
+                line += ","
+            file.write(line + "\n")
+        file.write("}\n")
 
 
 def set_did_you_read_orders(keg_questions: dict[str, QuestionUnit]) -> None:
@@ -122,8 +164,8 @@ def merge_fixed_and_floating_questions(
     return result_questionunits
 
 
-def rebuild_final_exam_questions(
-    output_csv_path: str | Path,
+def rebuild_keg_exam_questions(
+    output_csv_path: str | Path = None,
 ) -> None:
     """
     Create the final exam question list and export it to a CSV file.
@@ -132,6 +174,8 @@ def rebuild_final_exam_questions(
         - row_number
         - question
     """
+    if not output_csv_path:
+        output_csv_path = create_keg_exam_questions_path("src")
     final_questions = merge_fixed_and_floating_questions(
         fixed_questions=get_exam_fixed_questions(),
         floating_questions=get_keg_definition_questionunits(),

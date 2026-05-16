@@ -1,4 +1,5 @@
 from ch00_py.keyword_class_builder import (
+    get_ch_int,
     get_chapter_descs,
     get_example_strs_config,
     get_keywords_src_config,
@@ -126,7 +127,7 @@ def test_get_keg_definitions_ReturnsObj_CheckNoChapter_keywords():
     keg_definitions = get_keg_definitions()
     # THEN
     chapter_descs = get_chapter_descs().keys()
-    ch_ints = {int(chapter_desc[2:4]) for chapter_desc in chapter_descs}
+    ch_ints = {get_ch_int(chapter_desc) for chapter_desc in chapter_descs}
     for keyword, kw_config in get_keywords_src_config().items():
         assert kw.valid_ch in set(kw_config.keys()), keyword
         valid_chs = parse_valid_ch_str(ch_ints, kw_config.get(kw.valid_ch))
@@ -190,7 +191,7 @@ def test_get_keg_definitions_ReturnsObj_Check_src_config_keywords():
 
     # THEN
     chapter_descs = get_chapter_descs().keys()
-    ch_ints = {int(chapter_desc[2:4]) for chapter_desc in chapter_descs}
+    ch_ints = {get_ch_int(chapter_desc) for chapter_desc in chapter_descs}
     all_semantic_types = get_all_semantic_types_with_doc_strs()
     doc_str_semantic_types = set(all_semantic_types.keys())
     for keyword, kw_config in get_keywords_src_config().items():

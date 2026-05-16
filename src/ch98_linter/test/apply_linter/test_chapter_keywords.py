@@ -1,5 +1,6 @@
 from ch00_py.file_toolbox import create_path, get_dir_file_strs, open_file
 from ch00_py.keyword_class_builder import (
+    get_ch_int,
     get_chapter_keyword_classes,
     get_cumlative_keywords_src_dict,
     get_keywords_by_chapter,
@@ -171,7 +172,7 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
     # all_file_count = 0
     for chapter_desc, chapter_dir in filtered_chapter_descs.items():
         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
-        chapter_int = int(chapter_desc[2:4])
+        chapter_int = get_ch_int(chapter_desc)
         allowed_chapter_keywords = cumlative_keywords_src_dict.get(chapter_int)
         not_allowed_keywords = all_keywords_set.difference(allowed_chapter_keywords)
         not_allowed_keywords = not_allowed_keywords.difference(excluded_strs)

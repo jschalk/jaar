@@ -2,7 +2,11 @@ from ch00_py._ref.ch00_path import (
     create_src_example_strs_path,
     create_src_keywords_src_path,
 )
-from ch00_py.chapter_desc_main import get_chapter_desc_prefix, get_chapter_descs
+from ch00_py.chapter_desc_main import (
+    get_ch_int,
+    get_chapter_desc_prefix,
+    get_chapter_descs,
+)
 from ch00_py.file_toolbox import create_path, open_json, save_file
 from copy import copy as copy_copy
 from enum import Enum
@@ -55,7 +59,7 @@ def parse_valid_ch_str(
 
 def get_keywords_by_chapter(keywords_dict: dict[str, dict[str]]) -> dict:
     chapter_descs = get_chapter_descs().keys()
-    ch_ints = {int(chapter_desc[2:4]) for chapter_desc in chapter_descs}
+    ch_ints = {get_ch_int(chapter_desc) for chapter_desc in chapter_descs}
     chapters_keywords = {ch_int: set() for ch_int in ch_ints}
     for x_keyword, config_dict in keywords_dict.items():
         valid_ch_str = config_dict.get("valid_ch")
@@ -132,7 +136,7 @@ def create_all_enum_keyword_classes_str() -> str:
     classes_str = copy_copy(import_enum_line)
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         ch_prefix = get_chapter_desc_prefix(chapter_desc)
-        ch_int = int(chapter_desc[2:4])
+        ch_int = get_ch_int(chapter_desc)
         keywords_src = cumlative_keywords.get(ch_int)
         enum_class_str = create_keywords_enum_class_file_str(ch_prefix, keywords_src)
         classes_str += enum_class_str
@@ -144,8 +148,8 @@ def get_keywords_by_chapter_md() -> str:
     keywords_title_str = f"Key{words_str} by Chapter"
     func_lines = [f"## {keywords_title_str}"]
     chapter_descs = get_chapter_descs().keys()
-    ch_ints = {int(chapter_desc[2:4]) for chapter_desc in chapter_descs}
-    keywords_init_ch = {int(ch_desc[2:4]): set() for ch_desc in chapter_descs}
+    ch_ints = {get_ch_int(chapter_desc) for chapter_desc in chapter_descs}
+    keywords_init_ch = {get_ch_int(ch_desc): set() for ch_desc in chapter_descs}
     keywords_init_ch["No Chapter"] = set()
     for keyword_str, kw_config in get_keywords_src_config().items():
         if ch_list := parse_valid_ch_str(ch_ints, kw_config.get("valid_ch")):
@@ -155,7 +159,7 @@ def get_keywords_by_chapter_md() -> str:
             keywords_init_ch.get("No Chapter").add(keyword_str)
 
     for chapter_desc in chapter_descs:
-        ch_int = int(chapter_desc[2:4])
+        ch_int = get_ch_int(chapter_desc)
         chapter_keywords = keywords_init_ch.get(ch_int)
         chapter_keywords = sorted(list(chapter_keywords))
         _line = f"- {chapter_desc}: " + ", ".join(chapter_keywords)

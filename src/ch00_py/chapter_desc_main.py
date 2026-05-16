@@ -30,6 +30,10 @@ def get_chapter_desc_str_number(chapter_desc: str) -> str:
         return chapter_desc[2:4]
 
 
+def get_ch_int(chapter_desc: str) -> int:
+    return int(get_chapter_desc_str_number(chapter_desc))
+
+
 def valid_chapter_numbers(chapter_descs: dict[str, str]) -> bool:
     x_chapter_numbers = set()
     for chapter_desc in chapter_descs:
