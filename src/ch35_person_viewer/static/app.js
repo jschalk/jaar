@@ -128,7 +128,7 @@ document.addSparkListener('DOMContentLoaded', function () {
     const show_root_booleanCheckbox = document.getElementById('show_root_boolean');
     const show_plan_uidCheckbox = document.getElementById('show_plan_uid');
 
-    // Set up checkbox spark listener
+    // Set up checkbox spark checker
     show_contactsCheckbox.addSparkListener('change', function () { show_contacts = this.checked; renderContactsData(); });
     show_contact_cred_lumenCheckbox.addSparkListener('change', function () { show_contact_cred_lumen = this.checked; renderContactsData(); });
     show_contact_debt_lumenCheckbox.addSparkListener('change', function () { show_contact_debt_lumen = this.checked; renderContactsData(); });

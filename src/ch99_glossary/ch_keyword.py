@@ -1393,6 +1393,7 @@ class Ch10Keywords(str, Enum):
     labors = "labors"
     lasso = "lasso"
     last_lesson_id = "last_lesson_id"
+    listener = "listener"
     mana_grain = "mana_grain"
     mandate = "mandate"
     max_tree_traverse = "max_tree_traverse"
@@ -1478,6 +1479,7 @@ class Ch10Keywords(str, Enum):
     solo = "solo"
     spark_face = "spark_face"
     spark_num = "spark_num"
+    speaker = "speaker"
     sqlite_datatype = "sqlite_datatype"
     star = "star"
     stop_calc = "stop_calc"
@@ -10635,7 +10637,7 @@ class Ch35Keywords(str, Enum):
         return self.value
 
 
-class Ch36Keywords(str, Enum):
+class Ch50Keywords(str, Enum):
     Anaday = "Anaday"
     Baileyday = "Baileyday"
     BreakTerm = "BreakTerm"
@@ -10775,7 +10777,7 @@ class Ch36Keywords(str, Enum):
     ch33 = "ch33"
     ch34 = "ch34"
     ch35 = "ch35"
-    ch36 = "ch36"
+    ch50 = "ch50"
     clock = "clock"
     close = "close"
     column_ordinal = "column_ordinal"
@@ -11346,7 +11348,7 @@ class Ch97Keywords(str, Enum):
     ch33 = "ch33"
     ch34 = "ch34"
     ch35 = "ch35"
-    ch36 = "ch36"
+    ch50 = "ch50"
     ch97 = "ch97"
     clock = "clock"
     close = "close"
@@ -11921,7 +11923,7 @@ class Ch98Keywords(str, Enum):
     ch33 = "ch33"
     ch34 = "ch34"
     ch35 = "ch35"
-    ch36 = "ch36"
+    ch50 = "ch50"
     ch97 = "ch97"
     ch98 = "ch98"
     clock = "clock"
@@ -12495,7 +12497,7 @@ class Ch99Keywords(str, Enum):
     ch33 = "ch33"
     ch34 = "ch34"
     ch35 = "ch35"
-    ch36 = "ch36"
+    ch50 = "ch50"
     ch97 = "ch97"
     ch98 = "ch98"
     ch99 = "ch99"
