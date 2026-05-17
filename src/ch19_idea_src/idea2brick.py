@@ -2,7 +2,7 @@ from ch00_py.dict_toolbox import get_0_if_None
 from ch00_py.file_toolbox import delete_dir, set_dir
 from ch17_brick.brick_db_tool import create_brick_df_from_file, save_sheet
 from ch19_idea_src._ref.ch19_semantic_types import SheetName
-from ch19_idea_src.idea_config import get_idea_config_dict, get_idea_types
+from ch19_idea_src.idea_config import get_idea_config_dict, is_non_mirror
 from dataclasses import dataclass
 from openpyxl import load_workbook
 from os import listdir as os_listdir
@@ -226,6 +226,19 @@ def validate_idea_columns(
     return df
 
 
+# TODO add fission to keywords, a word used to describe how non-mirror ideas are converted into stable brick_types
+def run_fission_steps(df: pandas_DataFrame, idea_type_config: dict) -> pandas_DataFrame:
+    # for step_name in config.get("fission_steps", []):
+    #     if step_name not in FISSION_STEPS:
+    #         raise ValueError(
+    #             f"run_fission_steps encountered unknown fission step '{step_name}'. "
+    #             f"Registered steps: {list(FISSION_STEPS.keys())}"
+    #         )
+    #     df = FISSION_STEPS[step_name](df, config)
+    # return df
+    pass
+
+
 def ideas_sheets_to_brick_sheets(
     i_src_dir: str, b_src_dir: str, db_max_spark_num: int = None
 ) -> List[Tuple[str, str]]:
@@ -250,15 +263,21 @@ def ideas_sheets_to_brick_sheets(
         i_src_dir, b_src_dir, db_max_spark_num
     )
     idea_sheet_refs = get_idea_sheet_refs(i_src_dir)
+    idea_config_dict = get_idea_config_dict()
     for idea_sheet_ref in idea_sheet_refs:
         src_path = os_path_join(i_src_dir, idea_sheet_ref.src_filename)
         dst_path = os_path_join(b_src_dir, idea_sheet_ref.src_filename)
         idea_df = create_brick_df_from_file(src_path, idea_sheet_ref.src_sheet_name)
         set_spark_num_column(idea_df, spark_face_spark_nums)
         # if fission:
-        # add fission_steps
-        # TODO check all columns exist
-        # run all fision_steps
+        if is_non_mirror(idea_sheet_ref.src_idea_type):
+            idea_type_config = idea_config_dict.get(idea_sheet_ref.src_idea_type)
+            # prit(f"non_mirror {idea_sheet_ref.src_idea_type=}")
+            # prit(f"non_mirror {idea_type_config=}")
+
+            # add fission_steps
+            # TODO check all columns exist
+            # run all fision_steps
         save_sheet(dst_path, idea_sheet_ref.dst_sheet_name, idea_df, False)
 
     delete_dir(i_src_dir)

@@ -5,6 +5,7 @@ from ch19_idea_src.fusion_step import (
     fusion_set_plan_rope_from_health_label,
     fusion_set_pledge_to_one,
 )
+from ch99_glossary.ch_keyword import Ch19Keywords as kw, ExampleStrs as exx
 from pandas import DataFrame as pandas_DataFrame, testing as pandas_testing
 from pytest import raises as pytest_raises
 
@@ -405,3 +406,46 @@ def test_fusion_add_knot_from_rope_ReturnsDf_Scenario08_DoesNotMutateInputDf():
     fusion_add_knot_from_rope(df, {})
     # THEN
     assert "knot" not in df.columns
+
+
+# TODO reactivate, edit and pass
+# def test_run_fission_steps_ReturnsObj_Scenario00_OutputColumnsMatchBrickSchema():
+#     # ESTABLISH
+
+#     clean_rope = create_rope(exx.a23, exx.clean)
+#     mop_rope = create_rope(clean_rope, exx.mop)
+#     star2 = 2
+#     ii00502_columns = [
+#         kw.spark_face,
+#         kw.moment_rope,
+#         kw.person_name,
+#         kw.plan_rope,
+#         kw.star,
+#         kw.knot,
+#     ]
+#     ws1.append(ii00502_columns)
+#     ws1.append([exx.sue, exx.a23, exx.yao, mop_rope, star2, ";"])
+#     # WHEN
+#     ideas_sheets_to_brick_sheets(idea_dir, b_src_dir)
+#     # THEN
+#     df_columns = list(df.columns.array)
+#     print(f"{df_columns=}")
+#     assert df_columns == [
+#         kw.spark_num,
+#         kw.spark_face,
+#         kw.moment_rope,
+#         kw.person_name,
+#         kw.plan_rope,
+#         kw.star,
+#         kw.pledge,
+#         kw.knot,
+#     ]
+#     assert len(df) == 3
+
+#     config = II_CONFIG["ii00015"]
+#     expected_columns = BRICK_SCHEMAS[config["brick_type"]]
+#     df = make_df(...)  # minimal fixture with src_columns
+#     # WHEN
+#     result = run_fission_steps(df, config)
+#     # THEN
+#     assert set(result.columns) == set(expected_columns)

@@ -3,14 +3,6 @@
   "ii00002": {"brick_type": "bk00002"}, 
   "ii00005": {"brick_type": "bk00005"}, 
   "ii00007": {"brick_type": "bk00007"}, 
-  "ii00015": {
-    "brick_type": "bk00174", 
-    "columns": [
-      "moment_rope", "person_name", "plan_rope", "pledge", "reason_context", 
-      "reason_state", "spark_face", "spark_num", "star"
-    ], 
-    "description": "Allows easy creation of weekly events."
-  }, 
   "ii00100": {"brick_type": "bk00100"}, 
   "ii00101": {"brick_type": "bk00101"}, 
   "ii00102": {"brick_type": "bk00102"}, 
@@ -49,5 +41,10 @@
   "ii00171": {"brick_type": "bk00171"}, 
   "ii00172": {"brick_type": "bk00172"}, 
   "ii00173": {"brick_type": "bk00173"}, 
-  "ii00174": {"brick_type": "bk00174"}
+  "ii00174": {"brick_type": "bk00174"}, 
+  "ii00502": {
+    "brick_type": "bk00002", 
+    "description": "And pledge column and missing ancestor ropes (new rows will only have jkeys populated, jvalues will be null.)", 
+    "src_columns": ["spark_face", "moment_rope", "person_name", "plan_rope", "star", "knot"]
+  }
 }

@@ -22,7 +22,6 @@ def get_idea_types() -> set:
         "ii00002",
         "ii00005",
         "ii00007",
-        "ii00015",
         "ii00100",
         "ii00101",
         "ii00102",
@@ -62,4 +61,13 @@ def get_idea_types() -> set:
         "ii00172",
         "ii00173",
         "ii00174",
+        "ii00502",
     }
+
+
+def get_non_mirror_idea_types() -> set[str]:
+    return {"ii00502"}
+
+
+def is_non_mirror(idea_type: str) -> bool:
+    return idea_type in get_non_mirror_idea_types()
