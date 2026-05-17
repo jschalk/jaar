@@ -8,8 +8,8 @@ from ch16_translate.test._util.ch16_examples import (
     get_suita_namemap,
 )
 from ch16_translate.translate_main import translateunit_shop
+from ch99_glossary.ch_keyword import Ch16Keywords as kw, ExampleStrs as exx
 from pytest import raises as pytest_raises
-from ref.keywords import Ch16Keywords as kw, ExampleStrs as exx
 
 
 def test_TranslateUnit_set_mapunit_SetsAttr():

@@ -9,8 +9,8 @@ from ch16_translate.translate_config import (
     get_translates_column_ref,
     translate_config_path,
 )
+from ch99_glossary.ch_keyword import Ch16Keywords as kw
 from os import getcwd as os_getcwd
-from ref.keywords import Ch16Keywords as kw
 
 
 def test_get_translate_filename_ReturnsObj():

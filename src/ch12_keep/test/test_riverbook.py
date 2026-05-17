@@ -6,7 +6,7 @@ from ch12_keep.rivercycle import (
     get_patientledger,
     riverbook_shop,
 )
-from ref.keywords import Ch12Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch12Keywords as kw, ExampleStrs as exx
 
 
 def test_RiverBook_Exists():

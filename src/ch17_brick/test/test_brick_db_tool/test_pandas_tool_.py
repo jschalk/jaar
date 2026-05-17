@@ -17,9 +17,9 @@ from ch17_brick.test._util.ch17_examples import (
     get_small_example01_csv,
     get_small_example01_dataframe,
 )
+from ch99_glossary.ch_keyword import Ch17Keywords as kw
 from os.path import exists as os_path_exists
 from pandas import DataFrame
-from ref.keywords import Ch17Keywords as kw
 
 
 def test_get_ordered_csv_ReturnsObj():

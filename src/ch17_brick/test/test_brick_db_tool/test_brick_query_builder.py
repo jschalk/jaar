@@ -4,7 +4,7 @@ from ch17_brick.brick_db_tool import (
     get_brick_into_dimen_raw_query,
     get_default_sorted_list,
 )
-from ref.keywords import Ch17Keywords as kw
+from ch99_glossary.ch_keyword import Ch17Keywords as kw
 from sqlite3 import Cursor
 
 

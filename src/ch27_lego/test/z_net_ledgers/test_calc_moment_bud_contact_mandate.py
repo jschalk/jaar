@@ -19,8 +19,8 @@ from ch19_idea_src.test._util.ch19_examples import (
     get_bob_mop_reason_personunit_example,
 )
 from ch27_lego.lego_core import calc_moment_bud_contact_mandate_net_ledgers
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from os.path import exists as os_path_exists
-from ref.keywords import ExampleStrs as exx
 
 
 def test_calc_moment_bud_contact_mandate_net_ledgers_Scenaro0_BudEmpty(

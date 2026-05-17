@@ -2,28 +2,27 @@ from ch00_py.file_toolbox import count_dirs_files, create_path
 from ch19_idea_src.idea2brick import (
     IdeaBook,
     SheetRef,
-    add_spark_num_column,
     create_spark_face_spark_nums,
-    get_excel_sheet_refs,
     get_idea_config_dict,
+    get_idea_sheet_refs,
     get_max_spark_num_from_files,
-    get_sheets_with_brick_types,
-    get_sheets_with_idea_types,
     get_spark_faces_from_df,
     get_spark_faces_from_files,
     ideas_sheets_to_brick_sheets,
+    set_spark_num_column,
+    validate_idea_columns,
 )
+from ch99_glossary.ch_keyword import Ch19Keywords as kw, ExampleStrs as exx
 from openpyxl import Workbook as openpyxl_Workbook
 from os.path import join as os_path_join
 from pandas import (
-    DataFrame,
+    DataFrame as pandas_DataFrame,
     ExcelWriter as pandas_ExcelWriter,
     isna as pandas_isna,
     read_excel as pandas_read_excel,
 )
 from pathlib import Path
 from pytest import fixture as pytest_fixture, raises as pytest_raises
-from ref.keywords import Ch19Keywords as kw, ExampleStrs as exx
 
 
 def test_IdeaBook_Exists():
@@ -36,7 +35,7 @@ def test_IdeaBook_Exists():
 
 def test_get_spark_faces_from_df_ReturnsObj_Scenario0_Basic():
     # ESTABLISH
-    df = DataFrame({kw.spark_face: ["a", "b", "a", "c"]})
+    df = pandas_DataFrame({kw.spark_face: ["a", "b", "a", "c"]})
     # WHEN
     result = get_spark_faces_from_df(df)
     # THEN
@@ -45,7 +44,7 @@ def test_get_spark_faces_from_df_ReturnsObj_Scenario0_Basic():
 
 def test_get_spark_faces_from_df_ReturnsObj_Scenario1_excludes_nulls():
     # ESTABLISH
-    df = DataFrame({kw.spark_face: ["a", None, "b", float("nan")]})
+    df = pandas_DataFrame({kw.spark_face: ["a", None, "b", float("nan")]})
     # WHEN
     result = get_spark_faces_from_df(df)
     # THEN
@@ -54,7 +53,7 @@ def test_get_spark_faces_from_df_ReturnsObj_Scenario1_excludes_nulls():
 
 def test_get_spark_faces_from_df_ReturnsObj_Scenario2_MissingColumnReturnsEmptySet():
     # ESTABLISH
-    df = DataFrame({"other_col": [1, 2, 3]})
+    df = pandas_DataFrame({"other_col": [1, 2, 3]})
     # WHEN
     result = get_spark_faces_from_df(df)
     # THEN
@@ -66,8 +65,8 @@ def test_get_spark_faces_from_files_ReturnsObj_Scenario0_Multiple_files(tmp_path
     file1 = tmp_path / "file1.xlsx"
     file2 = tmp_path / "file2.xlsx"
 
-    df1 = DataFrame({kw.spark_face: ["a", "b"]})
-    df2 = DataFrame({kw.spark_face: ["b", "c"]})
+    df1 = pandas_DataFrame({kw.spark_face: ["a", "b"]})
+    df2 = pandas_DataFrame({kw.spark_face: ["b", "c"]})
 
     df1.to_excel(file1, index=False)
     df2.to_excel(file2, index=False)
@@ -81,8 +80,8 @@ def test_get_spark_faces_from_files_ReturnsObj_Scenario1_Multiple_sheets(tmp_pat
     # ESTABLISH
     file1 = tmp_path / "file1.xlsx"
 
-    df1 = DataFrame({kw.spark_face: ["a"]})
-    df2 = DataFrame({kw.spark_face: [exx.sue]})
+    df1 = pandas_DataFrame({kw.spark_face: ["a"]})
+    df2 = pandas_DataFrame({kw.spark_face: [exx.sue]})
 
     with pandas_ExcelWriter(file1) as writer:
         df1.to_excel(writer, sheet_name="Sheet1", index=False)
@@ -97,8 +96,8 @@ def test_get_spark_faces_from_files_ReturnsObj_Scenario2_IgnoresMissingColumn(tm
     # ESTABLISH
     file1 = tmp_path / "file1.xlsx"
 
-    df1 = DataFrame({kw.spark_face: ["a"]})
-    df2 = DataFrame({"other": [1, 2]})  # no spark_face column
+    df1 = pandas_DataFrame({kw.spark_face: ["a"]})
+    df2 = pandas_DataFrame({"other": [1, 2]})  # no spark_face column
 
     with pandas_ExcelWriter(file1) as writer:
         df1.to_excel(writer, sheet_name="Sheet1", index=False)
@@ -113,8 +112,8 @@ def test_get_max_spark_num_from_files_ReturnsObj_Scenario0_MultipleFiles(tmp_pat
     # ESTABLISH
     file1 = tmp_path / "file1.xlsx"
     file2 = tmp_path / "file2.xlsx"
-    df1 = DataFrame({kw.spark_num: [1, 2, 3]})
-    df2 = DataFrame({kw.spark_num: [4, 5]})
+    df1 = pandas_DataFrame({kw.spark_num: [1, 2, 3]})
+    df2 = pandas_DataFrame({kw.spark_num: [4, 5]})
     df1.to_excel(file1, index=False)
     df2.to_excel(file2, index=False)
     # WHEN
@@ -128,7 +127,7 @@ def test_get_max_spark_num_from_files_ReturnsObj_Scenario1_IgnoresInvalidAndConv
 ):
     # ESTABLISH
     file1 = tmp_path / "file1.xlsx"
-    df = DataFrame({kw.spark_num: ["10", "bad", None, 7.9]})  # 7.9 -> 7
+    df = pandas_DataFrame({kw.spark_num: ["10", "bad", None, 7.9]})  # 7.9 -> 7
     df.to_excel(file1, index=False)
     # WHEN
     result = get_max_spark_num_from_files(tmp_path)
@@ -141,9 +140,9 @@ def test_get_max_spark_num_from_files_ReturnsObj_Scenario2_MultipleSheetsAndMiss
 ):
     # ESTABLISH
     file1 = tmp_path / "file1.xlsx"
-    df1 = DataFrame({kw.spark_num: [1, 20]})
-    df2 = DataFrame({"other": [100, 200]})  # no spark_num
-    df3 = DataFrame({kw.spark_num: [15]})
+    df1 = pandas_DataFrame({kw.spark_num: [1, 20]})
+    df2 = pandas_DataFrame({"other": [100, 200]})  # no spark_num
+    df3 = pandas_DataFrame({kw.spark_num: [15]})
     with pandas_ExcelWriter(file1) as writer:
         df1.to_excel(writer, sheet_name="Sheet1", index=False)
         df2.to_excel(writer, sheet_name="Sheet2", index=False)
@@ -184,35 +183,35 @@ def test_create_spark_face_spark_nums_ReturnsObj_Scenario2_No_max_spark_num():
     assert x_dict == {exx.bob: 1, exx.sue: 2, exx.yao: 3}
 
 
-def test_add_spark_num_column_SetsAttr_Scenario0_Add_spark_num_Basic():
+def test_set_spark_num_column_SetsAttr_Scenario0_Add_spark_num_Basic():
     # ESTABLISH
-    df = DataFrame({kw.spark_face: ["a", "b", "c"]})
+    df = pandas_DataFrame({kw.spark_face: ["a", "b", "c"]})
     mapping = {"a": 1, "b": 2, "c": 3}
     # WHEN
-    add_spark_num_column(df, mapping)
+    set_spark_num_column(df, mapping)
     # THEN
     assert list(df.columns)[0] == kw.spark_num
     assert df[kw.spark_num].tolist() == [1, 2, 3]
 
 
-def test_add_spark_num_column_SetsAttr_Scenario1_MissingSparkFaceSets_nan():
+def test_set_spark_num_column_SetsAttr_Scenario1_MissingSparkFaceSets_nan():
     # ESTABLISH
-    df = DataFrame({kw.spark_face: ["a", "b", "x"]})
+    df = pandas_DataFrame({kw.spark_face: ["a", "b", "x"]})
     mapping = {"a": 1, "b": 2}
     # WHEN
-    add_spark_num_column(df, mapping)
+    set_spark_num_column(df, mapping)
     # THEN
     assert df[kw.spark_num].tolist()[:2] == [1, 2]
     assert pandas_isna(df[kw.spark_num].iloc[2])
 
 
-def test_add_spark_num_column_SetsAttr_Scenario0_MutatesOriginalDataframe():
+def test_set_spark_num_column_SetsAttr_Scenario0_MutatesOriginalDataframe():
     # ESTABLISH
-    df = DataFrame({kw.spark_face: ["a", "b"]})
+    df = pandas_DataFrame({kw.spark_face: ["a", "b"]})
     mapping = {"a": 1, "b": 2}
     assert kw.spark_num not in df.columns
     # WHEN
-    add_spark_num_column(df, mapping)
+    set_spark_num_column(df, mapping)
     # THEN
     assert kw.spark_num in df.columns
 
@@ -244,32 +243,32 @@ def test_SheetRef_Exists():
 
 def test_set_src_ii_bk_type_SetsAttr_Scenario0_ReturnsIiMatchWhenIiExists():
     # ESTABLISH
-    sheet_ref = SheetRef("test.xlsx", src_sheet_name="abc_ii123_test")
+    sheet_ref = SheetRef("test.xlsx", src_sheet_name="abc_ii12300_test")
     assert not sheet_ref.src_ii_bk_type
     # WHEN
     sheet_ref.set_src_ii_bk_type()
     # THEN
-    assert sheet_ref.src_ii_bk_type == "ii123"
+    assert sheet_ref.src_ii_bk_type == "ii12300"
 
 
 def test_set_src_ii_bk_type_SetsAttr_Scenario1_ReturnsBkMatchWhenBkExistsAndNoIiExists():
     # ESTABLISH
-    sheet_ref = SheetRef("test.xlsx", src_sheet_name="abc_bk456_test")
+    sheet_ref = SheetRef("test.xlsx", src_sheet_name="abc_bk45600_test")
     assert not sheet_ref.src_ii_bk_type
     # WHEN
     sheet_ref.set_src_ii_bk_type()
     # THEN
-    assert sheet_ref.src_ii_bk_type == "bk456"
+    assert sheet_ref.src_ii_bk_type == "bk45600"
 
 
 def test_set_src_ii_bk_type_SetsAttr_Scenario2_ReturnsIiMatchWhenBothIiAndBkExist():
     # ESTABLISH
-    sheet_ref = SheetRef("test.xlsx", src_sheet_name="bk456_middle_ii123_end")
+    sheet_ref = SheetRef("test.xlsx", src_sheet_name="bk456_middle_ii12300_end")
     assert not sheet_ref.src_ii_bk_type
     # WHEN
     sheet_ref.set_src_ii_bk_type()
     # THEN
-    assert sheet_ref.src_ii_bk_type == "ii123"
+    assert sheet_ref.src_ii_bk_type == "ii12300"
 
 
 def test_set_src_ii_bk_type_SetsAttr_Scenario3_ReturnsNoneWhenNoMatchExists():
@@ -328,8 +327,9 @@ def test_set_idea_type_exists_SetsAttr_Scenario0_SetFalse():
     # ESTABLISH
     sheet_ref = SheetRef("test.xlsx", "ii123_end")
     sheet_ref.set_src_ii_bk_type()
+    assert not sheet_ref.src_ii_bk_type
     idea_config = get_idea_config_dict()
-    assert sheet_ref.idea_type_exists is None
+    assert not sheet_ref.idea_type_exists
     assert not sheet_ref.src_idea_type
     # WHEN
     sheet_ref.set_idea_type_exists(idea_config)
@@ -382,218 +382,47 @@ def test_set_dst_attrs_SetsAttr_Scenario0_Set_False():
     assert not sheet_ref.dst_brick_type
 
 
-@pytest_fixture
-def excel_dir(tmp_path):
-    """Creates a temporary directory with sample Excel files for testing."""
-
-    # File 1: two sheets
-    wb1 = openpyxl_Workbook()
-    wb1.active.title = "Alpha"
-    wb1.create_sheet("Beta")
-    wb1.save(tmp_path / "report.xlsx")
-
-    # File 2: one sheet
-    wb2 = openpyxl_Workbook()
-    wb2.active.title = "Summary"
-    wb2.save(tmp_path / "data.xlsx")
-
-    # Non-Excel file (should be ignored)
-    (tmp_path / "notes.txt").write_text("ignore me")
-
-    return tmp_path
+def create_df(**kwargs):
+    return pandas_DataFrame({**kwargs})
 
 
-def test_get_excel_sheet_refs_ReturnsObj_Scenario0_AllSheetTuples(excel_dir):
-    """All (src_filename, sheet) pairs across every Excel file are returned."""
-    # ESTABLISH / WHEN
-    result = get_excel_sheet_refs(str(excel_dir))
-    # THEN
-    assert SheetRef("data.xlsx", "Summary") in result
-    assert SheetRef("report.xlsx", "Alpha") in result
-    assert SheetRef("report.xlsx", "Beta") in result
-    assert len(result) == 3
-
-
-def test_get_excel_sheet_refs_ReturnsObj_Scenario1_SortedList(excel_dir):
-    """Returned list is sorted lexicographically by (src_filename, sheet_name)."""
-    # ESTABLISH / WHEN
-    sheet_refs = get_excel_sheet_refs(str(excel_dir))
-    # THEN
-    assert sheet_refs == sorted(
-        sheet_refs, key=lambda x: (x.src_filename, x.src_sheet_name)
-    )
-
-
-def test_get_excel_sheet_refs_ReturnsObj_Scenario2_EmptyListForNoExcelFiles(
-    tmp_path: Path,
-):
-    """Returns an empty list when the directory contains no Excel files."""
+def test_validate_idea_columns_ReturnsDf_Scenario01_ReturnsDataframeWhenAllColumnsPresent():
     # ESTABLISH
-    (tmp_path / "readme.md").write_text("nothing here")
+    df = create_df(moment_rope=[";mmt01;"], person_name=["Alice"])
+    config = {"src_columns": ["moment_rope", "person_name"]}
     # WHEN
-    result = get_excel_sheet_refs(str(tmp_path))
+    result = validate_idea_columns(df, config, strict=True)
     # THEN
-    assert result == []
+    assert result is not None
 
 
-def test_get_sheets_with_brick_types_ReturnsObj_Scenario0_MatchingTuples(
-    tmp_path: Path,
-):  # sourcery skip: extract-duplicate-method
-    """Only tuples whose sheet_name contains a bk_string are returned."""
+def test_validate_idea_columns_ReturnsNone_Scenario02_ReturnsNoneWhenColumnsMissingAndNotStrict():
     # ESTABLISH
-    ideas_excel_dir = tmp_path / "ideas"
-    ideas_excel_dir.mkdir()
-    wb1 = openpyxl_Workbook()
-    wb1.active.title = "bk00102_Sales"
-    wb1.create_sheet("Revenue")
-    wb1.create_sheet("Costs_bk00105")
-    wb1.save(ideas_excel_dir / "x300reports.xlsx")
-
-    wb2 = openpyxl_Workbook()
-    wb2.active.title = "Summary"
-    wb2.create_sheet("bk00142_Overview")
-    wb2.save(ideas_excel_dir / "report.xlsx")
-
+    df = create_df(person_name=["Alice"])
+    config = {"src_columns": ["moment_rope", "person_name"]}
     # WHEN
-    result = get_sheets_with_brick_types(ideas_excel_dir)
-
+    result = validate_idea_columns(df, config, strict=False)
     # THEN
-    assert SheetRef("x300reports.xlsx", "bk00102_Sales") in result
-    assert SheetRef("x300reports.xlsx", "Costs_bk00105") in result
-    assert SheetRef("report.xlsx", "bk00142_Overview") in result
-    assert SheetRef("x300reports.xlsx", "Revenue") not in result
-    assert SheetRef("report.xlsx", "Summary") not in result
+    assert result is None
 
 
-def test_get_sheets_with_idea_types_ReturnsObj_Scenario0_MatchingTuples(
-    tmp_path: Path,
-):  # sourcery skip: extract-duplicate-method
-    """Only tuples whose sheet_name contains a bk_string are returned."""
+def test_validate_idea_columns_RaisesValueError_Scenario03_RaisesWhenColumnsMissingAndStrict():
     # ESTABLISH
-    ideas_excel_dir = tmp_path / "ideas"
-    ideas_excel_dir.mkdir()
-    wb1 = openpyxl_Workbook()
-    wb1.active.title = "ii00102_Sales"
-    wb1.create_sheet("Revenue")
-    wb1.create_sheet("Costs_ii00105")
-    wb1.save(ideas_excel_dir / "x300reports.xlsx")
+    df = create_df(person_name=["Alice"])
+    config = {"src_columns": ["moment_rope", "person_name"]}
+    # WHEN / THEN
+    with pytest_raises(ValueError, match="moment_rope"):
+        validate_idea_columns(df, config, strict=True)
 
-    wb2 = openpyxl_Workbook()
-    wb2.active.title = "Summary"
-    wb2.create_sheet("ii00142_Overview")
-    wb2.save(ideas_excel_dir / "report.xlsx")
 
+def test_validate_idea_columns_ReturnsDf_Scenario04_ReturnsDataframeWhenNoSrcColumnsInConfig():
+    # ESTABLISH
+    df = create_df(person_name=["Alice"])
+    config = {}
     # WHEN
-    result = get_sheets_with_idea_types(ideas_excel_dir)
-
+    result = validate_idea_columns(df, config, strict=True)
     # THEN
-    assert SheetRef("x300reports.xlsx", "ii00102_Sales") in result
-    assert SheetRef("x300reports.xlsx", "Costs_ii00105") in result
-    assert SheetRef("report.xlsx", "ii00142_Overview") in result
-    assert SheetRef("x300reports.xlsx", "Revenue") not in result
-    assert SheetRef("report.xlsx", "Summary") not in result
-
-
-# def test_get_validated_i_src_ii_bk_type_sheets_ReturnsObj_Scenario0_IdeaBrSheets(
-#     tmp_path: Path,
-# ):
-#     """Returns only brick_type sheet tuples from i_src_dir when there is no overlap."""
-#     # ESTABLISH
-#     idea_dir = tmp_path / kw.idea
-#     idea_dir.mkdir()
-#     b_src_dir = tmp_path / "bricks"
-#     b_src_dir.mkdir()
-#     wb = openpyxl_Workbook()
-#     wb.active.title = "ii00105_Sales"
-#     wb.create_sheet("Revenue")
-#     wb.create_sheet("ii00142_Costs")
-#     wb.save(idea_dir / "x300reports.xlsx")
-
-#     # WHEN
-#     result = get_validated_i_src_ii_bk_type_sheets(idea_dir, b_src_dir)
-#     # THEN
-#     assert ("x300reports.xlsx", "ii00105_Sales") in result
-#     assert ("x300reports.xlsx", "ii00142_Costs") in result
-#     assert ("x300reports.xlsx", "Revenue") not in result
-
-
-# def test_get_validated_i_src_ii_bk_type_sheets_Scenario1_RaisesOnOverlap(
-#     tmp_path: Path,
-# ):  # sourcery skip: extract-duplicate-method
-#     """Raises ValueError when a brick_type sheet name exists in both directories."""
-#     # ESTABLISH
-#     idea_dir = tmp_path / kw.idea
-#     idea_dir.mkdir()
-#     idea_wb = openpyxl_Workbook()
-#     idea_wb.active.title = "ii00105_Sales"
-#     idea_wb.create_sheet("Revenue")
-#     idea_wb.create_sheet("ii00142_Costs")
-#     x3_src_filename = "x300reports.xlsx"
-#     idea_wb.save(idea_dir / x3_src_filename)
-
-#     b_src_dir = tmp_path / "brick_overlap"
-#     b_src_dir.mkdir()
-#     brick_wb = openpyxl_Workbook()
-#     brick_wb.active.title = "bk00105_Sales"  # overlaps with idea_dir
-#     brick_wb.save(b_src_dir / x3_src_filename)
-
-#     # WHEN / THEN
-#     with pytest_raises(ValueError, match="bk00105_Sales"):
-#         get_validated_i_src_ii_bk_type_sheets(idea_dir, b_src_dir)
-
-
-# def test_get_validated_i_src_ii_bk_type_sheets_Scenario2_DoesNotRaiseError(
-#     tmp_path: Path,
-# ):  # sourcery skip: extract-duplicate-method
-#     """Raises ValueError when a brick_type sheet name exists in both directories."""
-#     # ESTABLISH
-#     idea_dir = tmp_path / kw.idea
-#     idea_dir.mkdir()
-#     idea_wb = openpyxl_Workbook()
-#     idea_wb.active.title = "ii00105_Sales"
-#     idea_wb.create_sheet("Revenue")
-#     ii42_sheetname = "ii00142_Costs"
-#     idea_wb.create_sheet(ii42_sheetname)
-#     x3_filename = "x300reports.xlsx"
-#     idea_wb.save(idea_dir / x3_filename)
-
-#     b_src_dir = tmp_path / "brick_overlap"
-#     b_src_dir.mkdir()
-#     brick_wb = openpyxl_Workbook()
-#     brick_wb.active.title = "bk00105_Sales"  # overlaps with idea_dir
-#     x4_filename = "x400reports.xlsx"
-#     bk42_sheetname = "bk00142_Costs"
-#     brick_wb.create_sheet(bk42_sheetname)
-#     brick_wb.save(b_src_dir / x4_filename)
-
-#     # WHEN
-#     sheet_tuples = get_validated_i_src_ii_bk_type_sheets(idea_dir, b_src_dir)
-#     # THEN
-#     print(f"{(x3_filename, bk42_sheetname)=}")
-#     print(f"{sheet_tuples=}")
-#     assert (x3_filename, bk42_sheetname) in sheet_tuples
-
-# def test_get_validated_i_src_ii_bk_type_sheets_ReturnsObj_Scenario2_EmptyWhenNoIdeaBrSheets(
-#     tmp_path: Path,
-# ):
-#     """Returns an empty list when i_src_dir has no brick_type sheets."""
-#     # ESTABLISH
-#     b_src_dir = tmp_path / "bricks"
-#     b_src_dir.mkdir()
-#     wb = openpyxl_Workbook()
-#     wb.active.title = "Summary"
-#     wb.create_sheet("Details")
-#     wb.save(b_src_dir / "brick_report.xlsx")
-
-#     empty_idea = tmp_path / "empty_idea"
-#     empty_idea.mkdir()
-#     wb = openpyxl_Workbook()
-#     wb.active.title = "Summary"
-#     wb.save(empty_idea / "plain.xlsx")
-#     # WHEN
-#     result = get_validated_i_src_ii_bk_type_sheets(empty_idea, b_src_dir)
-#     # THEN
-#     assert result == []
+    assert result is not None
 
 
 def test_ideas_sheets_to_brick_sheets_Scenario0_TwoTuples(tmp_path: Path):
@@ -664,29 +493,6 @@ def test_ideas_sheets_to_brick_sheets_Scenario1_CreatesDestinationFile(
     assert len(df) == 2
     assert df[kw.spark_num].min() == 1
     assert df["revenue"].sum() == 750
-
-
-# TODO change so sheet data is added
-# def test_ideas_sheets_to_brick_sheets_Scenario2_RaisesOnOverlap(tmp_path: Path):
-#     # sourcery skip: extract-duplicate-method
-#     """Propagates ValueError from get_idea_bk_sheets_validated on sheet name overlap."""
-#     # ESTABLISH
-#     ideas_dir = tmp_path / kw.idea
-#     ideas_dir.mkdir()
-#     b_src_dir = tmp_path / "bricks"
-#     b_src_dir.mkdir()
-
-#     wb_idea = openpyxl_Workbook()
-#     wb_idea.active.title = "bk00120_Sales"
-#     allsales_filename = "AllSales.xlsx"
-#     wb_idea.save(ideas_dir / allsales_filename)
-
-#     wb_brick = openpyxl_Workbook()
-#     wb_brick.active.title = "bk00120_Sales"
-#     wb_brick.save(b_src_dir / allsales_filename)
-#     # WHEN / THEN
-#     with pytest_raises(ValueError, match="bk00120_Sales"):
-#         ideas_sheets_to_brick_sheets(ideas_dir, b_src_dir)
 
 
 def test_ideas_sheets_to_brick_sheets_Scenario3_DestinationFileHas_spark_num_SetBy_b_src_dir(

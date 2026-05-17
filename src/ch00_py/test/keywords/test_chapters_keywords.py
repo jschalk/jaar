@@ -1,5 +1,6 @@
 from ch00_py._ref.ch00_path import create_keywords_classes_file_path
 from ch00_py.chapter_desc_main import (
+    get_ch_int,
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
     valid_chapter_numbers,
@@ -10,17 +11,18 @@ from ch00_py.keyword_class_builder import (
     create_all_enum_keyword_classes_str,
     create_examplestrs_class_str,
     create_keywords_enum_class_file_str,
-    create_src_keywords_main_path,
+    create_src_keywords_src_path,
     get_chapter_descs,
-    get_cumlative_keywords_main_dict,
+    get_cumlative_keywords_src_dict,
     get_example_strs_config,
     get_keywords_by_chapter,
     get_keywords_src_config,
     get_possible_keyword_config_keys,
     parse_valid_ch_str,
 )
-from ref.keywords import Ch00Keywords as kw
-from ref.sorter import get_keg_elements_sort_order
+from ch99_glossary.ch_keyword import Ch00Keywords as kw
+from ch99_glossary.sorter import get_keg_elements_sort_order
+from pytest import raises as pytest_raises
 
 
 def test_get_chapter_desc_prefix_ReturnsObj():
@@ -75,6 +77,7 @@ def test_get_keywords_by_chapter_ReturnsObj():
     # ESTABLISH / WHEN
     keywords_by_chapter = get_keywords_by_chapter(get_keywords_src_config())
     # THEN
+    print(f"{keywords_by_chapter=}")
     print(f"{len(keywords_by_chapter)=}")
     assert len(keywords_by_chapter.get(0)) > 0
 
@@ -92,6 +95,20 @@ def test_get_chapter_desc_str_number_ReturnsObj():
     assert get_chapter_desc_str_number(f"{ch_str}99") == "99"
     assert get_chapter_desc_str_number(f"{ch_str}XX") == "XX"
     assert get_chapter_desc_str_number(f"{ch_str}a01") != "01"
+
+
+def test_get_ch_int_ReturnsObj():
+    # sourcery skip: extract-duplicate-method
+    # ESTABLISH
+    ch_str = "ch"
+    # WHEN / THEN
+    assert get_ch_int(f"{ch_str}04") == 4
+    assert get_ch_int(f"{ch_str}99") == 99
+    assert get_ch_int(f"{ch_str}03") == 3
+    assert get_ch_int(f"{ch_str}99") == 99
+    with pytest_raises(Exception) as excinfo:
+        get_ch_int(f"{ch_str}XX")
+    assert str(excinfo.value) == "invalid literal for int() with base 10: 'XX'"
 
 
 def test_get_example_strs_config_ReturnsObj():
@@ -112,7 +129,7 @@ def test_get_possible_keyword_config_keys_ReturnsObj():
     assert req_config_keys == {
         kw.valid_ch,
         kw.semantic_type,
-        kw.exam_tier,
+        kw.question_tier,
         "sort_ordinal",
     }
 
@@ -228,7 +245,7 @@ def test_create_all_enum_keyword_classes_str_ReturnsObj():
 
     # THEN
     keywords_by_chapter = get_keywords_by_chapter(get_keywords_src_config())
-    cumlative_keywords = get_cumlative_keywords_main_dict(keywords_by_chapter)
+    cumlative_keywords = get_cumlative_keywords_src_dict(keywords_by_chapter)
     expected_classes_str = f"""from enum import Enum
 
 
@@ -236,9 +253,9 @@ def test_create_all_enum_keyword_classes_str_ReturnsObj():
 """
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         ch_prefix = get_chapter_desc_prefix(chapter_desc)
-        ch_int = int(chapter_desc[2:4])
-        keywords_main = cumlative_keywords.get(ch_int)
-        enum_class_str = create_keywords_enum_class_file_str(ch_prefix, keywords_main)
+        ch_int = get_ch_int(chapter_desc)
+        keywords_src = cumlative_keywords.get(ch_int)
+        enum_class_str = create_keywords_enum_class_file_str(ch_prefix, keywords_src)
         expected_classes_str += enum_class_str
     assert expected_classes_str == classes_str
     two_line_spacing_str = f"""from enum import Enum
@@ -268,7 +285,7 @@ def test_SpecialTestThatBuildsKeywordEnumClasses():
 
     # WHEN / THEN
     prev_and_curr_classes_file_are_same = enum_classes_str == current_classes_file_str
-    assertion_failure_str = "Special case: keywords.py was changed. Run test again."
+    assertion_failure_str = "Special case: ch_keyword.py was changed. Run test again."
     assert prev_and_curr_classes_file_are_same, assertion_failure_str
 
 
@@ -366,7 +383,7 @@ def test_get_keg_elements_sort_order_Scenario0_AllElementsAre_keywords():
     for missing_element in sorted(missing_elements):
         x_count += 1
         print(
-            f""""{missing_element}": {{"{kw.exam_tier}": 0, "{kw.valid_ch}": "ch{ch_num}"}},"""
+            f""""{missing_element}": {{"{kw.question_tier}": 0, "{kw.valid_ch}": "ch{ch_num}"}},"""
         )
     print(f"{x_count} elements")
     assert set(get_keg_elements_sort_order()).issubset(keywords_set)

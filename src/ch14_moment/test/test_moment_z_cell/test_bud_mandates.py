@@ -10,8 +10,8 @@ from ch14_moment._ref.ch14_path import (
 )
 from ch14_moment.moment_cell import create_bud_mandate_ledgers
 from ch14_moment.moment_main import get_momentunit_from_dict, momentunit_shop
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from os.path import exists as os_path_exists
-from ref.keywords import ExampleStrs as exx
 
 
 def test_create_bud_mandate_ledgers_Scenaro0_BudEmpty(temp3_fs):

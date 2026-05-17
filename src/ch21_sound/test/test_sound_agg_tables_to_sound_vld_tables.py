@@ -5,7 +5,7 @@ from ch18_etl_config.etl_sqlstr import (
     get_insert_into_sound_vld_sqlstrs,
 )
 from ch21_sound.sound import etl_sound_agg_tables_to_sound_vld_tables
-from ref.keywords import Ch21Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch21Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

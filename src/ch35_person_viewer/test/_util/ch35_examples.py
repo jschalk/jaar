@@ -1,7 +1,7 @@
 from ch07_person_logic.person_main import personunit_shop
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from datetime import datetime
 from enum import Enum
-from ref.keywords import ExampleStrs as exx
 
 SUE_PERSON = personunit_shop(exx.sue, exx.a23)
 CASA_ROPE = SUE_PERSON.make_l1_rope(exx.casa)

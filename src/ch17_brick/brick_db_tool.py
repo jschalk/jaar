@@ -22,11 +22,12 @@ from ch16_translate.translate_config import (
 )
 from ch16_translate.translate_main import TranslateUnit, get_translateunit_from_dict
 from ch17_brick._ref.ch17_path import get_excel_reader_config_path
-from ch17_brick._ref.ch17_semantic_types import FaceName, SparkInt
+from ch17_brick._ref.ch17_semantic_types import FaceName, SheetName, SparkInt
 from ch17_brick.brick_config import (
     get_brick_sqlite_types,
     get_default_sorted_list,
 )
+from ch99_glossary.sorter import get_keg_elements_sort_order
 from contextlib import suppress as contextlib_suppress
 from io import BytesIO as io_BytesIO, StringIO as io_StringIO
 from json import load as json_load
@@ -54,7 +55,6 @@ from pandas.api.types import (
     is_integer_dtype as pandas_is_integer_dtype,
     is_string_dtype as pandas_is_string_dtype,
 )
-from ref.sorter import get_keg_elements_sort_order
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
 
 
@@ -116,7 +116,7 @@ EXCEL_READER_CONFIG = {
 
 def create_brick_df_from_file(
     excel_file_path: str,
-    sheet_name: str,
+    sheet_name: SheetName,
 ) -> DataFrame:
     """
     Reads a single normalized Excel sheet into a DataFrame.
@@ -268,7 +268,7 @@ def move_otx_csvs_to_translate_inx(face_dir: str):
         save_dataframe_to_csv(x_df, inx_dir, x_filename)
 
 
-def append_df_to_excel(file_path: str, sheet_name: str, dataframe: DataFrame):
+def append_df_to_excel(file_path: str, sheet_name: SheetName, dataframe: DataFrame):
     try:
         # Load the existing workbook
         workbook = openpyxl_load_workbook(file_path)
@@ -308,10 +308,8 @@ class PandasToolsExcelWriterError(Exception):
 
 
 def save_sheet(
-    file_path: str, sheet_name: str, dataframe: DataFrame, replace: bool = False
+    file_path: str, sheet_name: SheetName, dataframe: DataFrame, replace: bool = False
 ):
-    # sourcery skip: remove-redundant-exception, simplify-single-exception-tuple
-    set_dir(os_path_dirname(file_path))
     """
     Updates or creates an Excel sheet with a specified DataFrame.
 
@@ -320,6 +318,9 @@ def save_sheet(
     - sheet_name (str): The name of the sheet to update or create.
     - dataframe (DataFrame): The DataFrame to write to the sheet.
     """
+    # sourcery skip: remove-redundant-exception, simplify-single-exception-tuple
+
+    set_dir(os_path_dirname(file_path))
 
     # Check if the file exists
     if not os_path_exists(file_path):
@@ -342,7 +343,7 @@ def save_sheet(
         raise PandasToolsExcelWriterError(f"An error occurred: {e}") from e
 
 
-def sheet_exists(file_path: str, sheet_name: str):
+def sheet_exists(file_path: str, sheet_name: SheetName):
     """
     Checks if a specific sheet exists in an Excel workbook.
 
@@ -363,7 +364,7 @@ def sheet_exists(file_path: str, sheet_name: str):
 
 
 def split_excel_into_dirs(
-    src_file: str, dst_dir: str, column_name: str, filename: str, sheet_name: str
+    src_file: str, dst_dir: str, column_name: str, filename: str, sheet_name: SheetName
 ):
     """
     Splits an Excel file into multiple Excel files, each containing rows
@@ -849,7 +850,7 @@ def remove_empty_sheets(file_path):
     return removed
 
 
-def delete_sheet(file_path: str, sheet_name: str) -> None:
+def delete_sheet(file_path: str, sheet_name: SheetName) -> None:
     """
     Deletes a sheet from an Excel file.
 

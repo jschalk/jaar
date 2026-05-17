@@ -1,5 +1,5 @@
 from ch12_keep.rivercycle import RiverGrade, rivergrade_shop
-from ref.keywords import Ch12Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch12Keywords as kw, ExampleStrs as exx
 
 
 def test_RiverGrade_Exists():

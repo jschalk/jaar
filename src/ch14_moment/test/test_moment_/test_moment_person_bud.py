@@ -1,8 +1,8 @@
 from ch04_rope.rope import create_rope
 from ch11_bud.bud_main import personbudhistory_shop
 from ch14_moment.moment_main import momentunit_shop
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from pytest import raises as pytest_raises
-from ref.keywords import ExampleStrs as exx
 
 
 def test_MomentUnit_set_personbudhistory_SetsAttr(temp3_dir):

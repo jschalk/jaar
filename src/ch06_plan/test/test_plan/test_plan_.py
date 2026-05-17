@@ -4,7 +4,7 @@ from ch03_workforce.workforce import workforceunit_shop
 from ch04_rope.rope import create_rope, default_knot_if_None
 from ch06_plan.healer import healerunit_shop
 from ch06_plan.plan import PlanUnit, planunit_shop
-from ref.keywords import Ch06Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch06Keywords as kw, ExampleStrs as exx
 
 
 def test_PlanUnit_Exists():
@@ -102,8 +102,8 @@ def test_PlanUnit_Exists():
 
 
 from ch06_plan.plan import planunit_shop
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from pytest import raises as pytest_raises
-from ref.keywords import ExampleStrs as exx
 
 
 def test_PlanUnit_set_plan_label_Scenario0_SetsAttr():

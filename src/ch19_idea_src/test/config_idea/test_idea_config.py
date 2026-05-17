@@ -47,10 +47,10 @@ from ch19_idea_src.idea_config import (
     get_idea_types,
     idea_config_path,
 )
+from ch99_glossary.ch_keyword import Ch19Keywords as kw
+from ch99_glossary.sorter import get_keg_elements_sort_order
 from copy import copy as copy_copy
 from os import getcwd as os_getcwd
-from ref.keywords import Ch19Keywords as kw
-from ref.sorter import get_keg_elements_sort_order
 
 
 def test_idea_config_path_ReturnsObj_Brick() -> str:

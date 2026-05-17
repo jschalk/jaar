@@ -8,8 +8,8 @@ from ch31_kpi.gcalendar import (
     get_dayevents,
     get_gcal_all_agenda_str,
 )
+from ch99_glossary.ch_keyword import Ch31Keywords as kw
 from datetime import datetime
-from ref.keywords import Ch31Keywords as kw
 
 
 def test_gcal_readable_percent_ReturnsObj():

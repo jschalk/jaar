@@ -12,9 +12,9 @@ from ch09_person_lesson._ref.ch09_path import (
     create_person_dir_path,
 )
 from ch09_person_lesson.lasso import lassounit_shop
+from ch99_glossary.ch_keyword import Ch09Keywords as kw, ExampleStrs as exx
 from inspect import getdoc as inspect_getdoc
 from pytest import mark as pytest_mark
-from ref.keywords import Ch09Keywords as kw, ExampleStrs as exx
 
 A23_LASSO = lassounit_shop(exx.a23)
 

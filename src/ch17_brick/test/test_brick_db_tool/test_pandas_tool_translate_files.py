@@ -17,9 +17,9 @@ from ch17_brick.test._util.ch17_examples import (
     get_suita_contact_name_inx_dt,
     get_suita_contact_name_otx_dt,
 )
+from ch99_glossary.ch_keyword import Ch17Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
 from pandas import DataFrame
-from ref.keywords import Ch17Keywords as kw, ExampleStrs as exx
 
 
 def test_move_otx_csvs_to_translate_inx_CreatesTranslateedFiles_Scenario0_SingleFile(

@@ -18,7 +18,7 @@ from ch10_person_listen.test._util.ch10_examples import (
     get_texas_lessonfilehandler,
     get_texas_rope,
 )
-from ref.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 
 
 def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(temp3_fs):

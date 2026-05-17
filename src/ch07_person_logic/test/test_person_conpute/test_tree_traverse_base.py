@@ -7,8 +7,8 @@ from ch07_person_logic.test._util.ch07_examples import (
     get_personunit_with_4_levels,
     get_personunit_with_4_levels_and_2reasons,
 )
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from pytest import raises as pytest_raises
-from ref.keywords import ExampleStrs as exx
 
 
 def test_PersonUnit_clear_plan_dict_and_person_obj_settle_attrs_SetsAttrs_Scenario0():

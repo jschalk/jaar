@@ -12,8 +12,8 @@ from ch02_contact._ref.ch02_semantic_types import (
     TitleTerm,
     default_groupmark_if_None,
 )
+from ch99_glossary.ch_keyword import Ch02Keywords as kw, ExampleStrs as exx
 from inspect import getdoc as inspect_getdoc
-from ref.keywords import Ch02Keywords as kw, ExampleStrs as exx
 
 
 def test_BreakTerm_Exists():

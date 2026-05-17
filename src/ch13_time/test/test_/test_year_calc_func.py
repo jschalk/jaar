@@ -1,6 +1,6 @@
 from ch13_time.epoch_main import get_first_weekday_index_of_year
 from ch13_time.test._util.ch13_examples import get_creg_config, get_five_config
-from ref.keywords import Ch13Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch13Keywords as kw, ExampleStrs as exx
 
 
 def test_get_first_weekday_index_of_year_ReturnsObj_Scenario0_creg_epoch_config():

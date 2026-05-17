@@ -10,9 +10,9 @@ from ch14_moment.moment_main import (
     open_moment_file,
     save_moment_file,
 )
+from ch99_glossary.ch_keyword import Ch14Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
-from ref.keywords import Ch14Keywords as kw, ExampleStrs as exx
 
 
 def test_MomentUnit_to_dict_ReturnsObjWith_paybook(temp3_dir):

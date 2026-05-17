@@ -1,7 +1,7 @@
 from ch00_py.db_toolbox import db_table_exists, get_row_count, get_table_columns
 from ch17_brick.brick_db_tool import create_brick_sorted_table
 from ch20_etl_brick.etl_brick_main import etl_brixk_raw_tables_to_brixk_agg_tables
-from ref.keywords import Ch20Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch20Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

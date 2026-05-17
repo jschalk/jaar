@@ -21,10 +21,10 @@ from ch00_py.file_toolbox import (
     save_json,
     set_dir,
 )
+from ch99_glossary.ch_keyword import Ch00Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exist, join as os_path_join
 from pathlib import Path as pathlib_Path
 from pytest import mark as pytest_mark, raises as pytest_raises
-from ref.keywords import Ch00Keywords as kw, ExampleStrs as exx
 
 
 def test_create_path_ReturnsObj(temp3_dir):

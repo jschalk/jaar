@@ -4,8 +4,8 @@ from ch07_person_logic.test._util.ch07_examples import (
     get_personunit_irrational_example,
     get_personunit_with_4_levels,
 )
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from pytest import raises as pytest_raises
-from ref.keywords import ExampleStrs as exx
 
 
 def test_agenda_returned_WhenNoReasonsExist():

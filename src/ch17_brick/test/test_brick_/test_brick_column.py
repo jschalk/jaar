@@ -1,5 +1,5 @@
 from ch17_brick.brick_dataframe import BrickRef, brickref_shop
-from ref.keywords import Ch17Keywords as kw
+from ch99_glossary.ch_keyword import Ch17Keywords as kw
 
 
 def test_BrickRef_Exists():

@@ -13,7 +13,7 @@ from ch07_person_logic.test._util.ch07_examples import (
     get_personunit_x1_3levels_1reason_1facts,
     personunit_v001_with_large_agenda,
 )
-from ref.keywords import Ch07Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch07Keywords as kw, ExampleStrs as exx
 
 
 def test_display_plantree_Scenario0(graphics_bool):

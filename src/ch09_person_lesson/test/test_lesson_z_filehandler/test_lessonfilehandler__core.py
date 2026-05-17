@@ -7,8 +7,8 @@ from ch09_person_lesson.lesson_filehandler import (
     LessonFileHandler,
     lessonfilehandler_shop,
 )
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from pytest import raises as pytest_raises
-from ref.keywords import ExampleStrs as exx
 
 
 def test_LessonFileHandler_Exists():

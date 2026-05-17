@@ -11,6 +11,7 @@ from ch17_brick.brick_db_tool import (
     split_excel_into_dirs,
     update_all_spark_face_spark_num_columns,
 )
+from ch99_glossary.ch_keyword import Ch17Keywords as kw, ExampleStrs as exx
 from numpy import float64, nan as numpy_nan
 from openpyxl import (
     Workbook as openpyxl_Workbook,
@@ -21,7 +22,6 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from pathlib import Path
 from pytest import fixture as pytest_fixture, raises as pytest_raises
-from ref.keywords import Ch17Keywords as kw, ExampleStrs as exx
 
 
 def test_append_df_to_excel_CreatesSheet(temp3_fs):

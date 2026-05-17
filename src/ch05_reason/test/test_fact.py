@@ -7,7 +7,7 @@ from ch05_reason.reason_main import (
     get_factunit_from_tuple,
     get_factunits_from_dict,
 )
-from ref.keywords import Ch05Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch05Keywords as kw, ExampleStrs as exx
 
 
 def test_FactUnit_Exists():

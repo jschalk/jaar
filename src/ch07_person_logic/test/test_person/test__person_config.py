@@ -11,9 +11,9 @@ from ch07_person_logic.person_config import (
     person_config_path,
 )
 from ch07_person_logic.person_main import ContactUnit, PersonUnit
+from ch99_glossary.ch_keyword import Ch07Keywords as kw
 from os import getcwd as os_getcwd
 from os.path import exists as os_path_exists
-from ref.keywords import Ch07Keywords as kw
 
 
 def test_max_tree_traverse_default_ReturnsObj() -> str:

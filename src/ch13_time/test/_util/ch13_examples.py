@@ -16,10 +16,10 @@ from ch13_time.epoch_main import (
     new_epoch_planunit,
     timeshoe_shop,
 )
+from ch99_glossary.ch_keyword import Ch13Keywords as kw, ExampleStrs as exx
 from datetime import datetime
 from enum import Enum
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
-from ref.keywords import Ch13Keywords as kw, ExampleStrs as exx
 
 DIRTYNESS_STR = "dirtyness"
 FIVE_STR = "five"

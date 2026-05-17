@@ -10,7 +10,7 @@ from ch21_sound.sound import (
     insert_sound_raw_selects_into_sound_agg_tables,
     set_sound_raw_tables_error_message,
 )
-from ref.keywords import Ch21Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch21Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

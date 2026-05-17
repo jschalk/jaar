@@ -16,9 +16,9 @@ from ch10_person_listen.keep_tool import (
     treasury_db_file_exists,
 )
 from ch10_person_listen.test._util.ch10_examples import ch10_example_moment_rope
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from inspect import getdoc as inspect_getdoc
 from os.path import exists as os_path_exists
-from ref.keywords import ExampleStrs as exx
 
 
 def test_create_keep_path_dir_if_missing_CreatesDirectory(temp3_fs):

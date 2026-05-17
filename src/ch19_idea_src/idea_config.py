@@ -1,8 +1,8 @@
 from ch00_py.db_toolbox import get_sorted_cols_only_list
 from ch00_py.file_toolbox import create_path, get_json_filename, open_json
+from ch99_glossary.sorter import get_keg_elements_sort_order
 from enum import Enum
 from os import getcwd as os_getcwd
-from ref.sorter import get_keg_elements_sort_order
 
 
 def idea_config_path() -> str:

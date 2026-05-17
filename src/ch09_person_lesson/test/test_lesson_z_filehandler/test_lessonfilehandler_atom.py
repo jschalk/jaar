@@ -8,8 +8,8 @@ from ch09_person_lesson.test._util.ch09_examples import (
     get_atom_example_planunit_sports,
     get_ch09_example_moment_lasso as moment_lasso,
 )
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from os.path import exists as os_path_exists
-from ref.keywords import ExampleStrs as exx
 
 
 def test_LessonFileHandler_atom_filename_ReturnsObj(temp3_fs):

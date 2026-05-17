@@ -9,8 +9,8 @@ from ch09_person_lesson.lesson_filehandler import (
 )
 from ch09_person_lesson.lesson_main import init_lesson_id
 from ch09_person_lesson.test._util.ch09_examples import sue_2personatoms_lessonunit
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from os.path import exists as os_path_exists
-from ref.keywords import ExampleStrs as exx
 
 
 def test_LessonFileHandler_default_gut_person_ReturnsObj(temp3_fs):

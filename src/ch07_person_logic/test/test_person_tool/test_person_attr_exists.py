@@ -15,7 +15,7 @@ from ch07_person_logic.person_tool import (
     person_planunit_exists,
     personunit_exists,
 )
-from ref.keywords import Ch07Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch07Keywords as kw, ExampleStrs as exx
 
 
 def test_personunit_exists_ReturnsObj():

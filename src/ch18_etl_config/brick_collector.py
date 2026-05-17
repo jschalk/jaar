@@ -1,6 +1,7 @@
 from ch00_py.file_toolbox import create_path
 from ch17_brick.brick_config import get_brick_types, get_quick_bricks_column_ref
 from ch17_brick.brick_db_tool import get_all_excel_sheet_names
+from ch18_etl_config._ref.ch18_semantic_types import SheetName
 from ch18_etl_config.etl_config import get_etl_stage_types_config_dict
 from dataclasses import dataclass
 from pandas import (
@@ -19,7 +20,7 @@ def get_all_excel_bricksheets(dir: str) -> set[tuple[str, str, str]]:
 class BrickFileRef:
     file_dir: str = None
     filename: str = None
-    sheet_name: str = None
+    sheet_name: SheetName = None
     brick_type: str = None
 
     def get_csv_filename(self) -> str:
@@ -72,7 +73,7 @@ def reorder_etl_db_sheets(filepath: str | Path) -> None:
 
     original_order = list(sheets.keys())
 
-    def sort_key(sheet_name: str):
+    def sort_key(sheet_name: SheetName):
         # Tier 1: prefix match
         # for i, prefix in enumerate(tier1_prefixes):
         #     if sheet_name.startswith(prefix):

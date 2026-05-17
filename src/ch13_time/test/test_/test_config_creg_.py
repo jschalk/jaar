@@ -30,8 +30,8 @@ from ch13_time.test._util.ch13_examples import (
     get_tue,
     get_wed,
 )
+from ch99_glossary.ch_keyword import Ch13Keywords as kw, ExampleStrs as exx
 from datetime import datetime
-from ref.keywords import Ch13Keywords as kw, ExampleStrs as exx
 
 
 def test_get_creg_config_ReturnsObj():

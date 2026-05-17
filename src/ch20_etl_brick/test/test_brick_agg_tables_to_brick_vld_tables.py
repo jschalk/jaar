@@ -4,7 +4,7 @@ from ch20_etl_brick.etl_brick_main import (
     etl_brixk_agg_tables_to_brixk_vld_tables,
     get_create_sparks_b_vld_sqlstr,
 )
-from ref.keywords import Ch20Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch20Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

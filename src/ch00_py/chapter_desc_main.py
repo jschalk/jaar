@@ -10,8 +10,6 @@ def get_chapter_descs() -> dict[str, str]:
         chapter_descs.remove("__pycache__")
     if "keg2.egg-info" in chapter_descs:
         chapter_descs.remove("keg2.egg-info")
-    chapter_descs.remove("linter")
-    chapter_descs.remove("ref")
     return {
         chapter_desc: create_path(src_dir, chapter_desc)
         for chapter_desc in chapter_descs
@@ -30,6 +28,10 @@ def get_chapter_desc_str_number(chapter_desc: str) -> str:
     """Returns chapter number in 2 character string."""
     if chapter_desc[:2] == "ch":
         return chapter_desc[2:4]
+
+
+def get_ch_int(chapter_desc: str) -> int:
+    return int(get_chapter_desc_str_number(chapter_desc))
 
 
 def valid_chapter_numbers(chapter_descs: dict[str, str]) -> bool:

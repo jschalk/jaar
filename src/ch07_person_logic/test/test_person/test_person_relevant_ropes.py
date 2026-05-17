@@ -6,7 +6,7 @@ from ch07_person_logic.test._util.ch07_examples import (
     get_mop_with_reason_personunit_example1,
     get_personunit_with_4_levels,
 )
-from ref.keywords import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 
 
 def test_PersonUnit_get_relevant_ropes_EmptyRopeTermReturnsEmpty():

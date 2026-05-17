@@ -5,8 +5,8 @@ from ch04_rope._ref.ch04_semantic_types import (
     RopeTerm,
     default_knot_if_None,
 )
+from ch99_glossary.ch_keyword import Ch04Keywords as kw, ExampleStrs as exx
 from inspect import getdoc as inspect_getdoc
-from ref.keywords import Ch04Keywords as kw, ExampleStrs as exx
 
 
 def test_KnotTerm_Exists():

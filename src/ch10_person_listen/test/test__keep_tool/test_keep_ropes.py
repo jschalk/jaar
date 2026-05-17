@@ -9,9 +9,9 @@ from ch09_person_lesson.lesson_filehandler import (
 )
 from ch10_person_listen._ref.ch10_path import create_keep_duty_path
 from ch10_person_listen.keep_tool import get_keep_ropes, save_all_gut_dutys
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
-from ref.keywords import ExampleStrs as exx
 
 
 def test_get_keep_ropes_RaisesErrorWhen_keeps_justified_IsFalse(

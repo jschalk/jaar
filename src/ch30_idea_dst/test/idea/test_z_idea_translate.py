@@ -10,7 +10,7 @@ from ch30_idea_dst.lego_db2df import (
     add_to_ii00145_csv,
     add_translate_rows_to_idea_csv_strs,
 )
-from ref.keywords import Ch30Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch30Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

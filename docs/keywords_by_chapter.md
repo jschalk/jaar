@@ -1,7 +1,7 @@
 # Keywords by Chapter
 
 ## Keywords by Chapter
-- ch00_py: DELETE, INSERT, Keyword, UPDATE, ch00, exam_tier, filename, keyword, semantic_type, shop, sort_ordinal, sqlite_datatype, valid_ch
+- ch00_py: DELETE, INSERT, Keyword, UPDATE, ch00, filename, glossary, keyword, question_tier, semantic_type, shop, sort_ordinal, sqlite_datatype, valid_ch
 - ch01_allot: GrainNum, PoolNum, WeightNum, ch01
 - ch02_contact: BreakTerm, ContactName, FundGrain, FundNum, GroupMark, GroupTitle, HealerName, NameTerm, RespectGrain, RespectNum, TitleTerm, awardee_title, awardunits, ch02, contact_cred_lumen, contact_debt_lumen, contact_name, credor_pool, debtor_pool, fund_agenda_give, fund_agenda_ratio_give, fund_agenda_ratio_take, fund_agenda_take, fund_give, fund_grain, fund_take, give_force, group_cred_lumen, group_debt_lumen, group_title, groupmark, groupunits, inallocable_contact_debt_lumen, irrational_contact_debt_lumen, labor_title, labors, memberships, parent_solo, rational, respect_grain, solo, take_force, thinkout, workforceheir, workforceunit
 - ch03_workforce: LaborHeir, ch03, laborheir, person, person_name, person_name_is_workforce
@@ -11,7 +11,7 @@
 - ch07_person_logic: PersonName, PersonUnit, ancestors, calc_by_thinkout, ch07, contact_mandate_ledger, contact_pool, contacts, context_plan_close, context_plan_denom, context_plan_morph, credor_respect, debtor_respect, dimen, dimens, jkeys, jvalues, keep_rope, keeps_buildable, keeps_justified, last_lesson_id, mandate, max_tree_traverse, obj_type, offtrack_fund, offtrack_kids_star_set, person_contact_membership, person_contactunit, person_groupunit, person_plan_awardunit, person_plan_factunit, person_plan_healerunit, person_plan_laborunit, person_plan_reason_caseunit, person_plan_reasonunit, person_planunit, personunit, planroot, prnawar, prncase, prncont, prnfact, prngrou, prnheal, prnlabo, prnmemb, prnplan, prnreas, prnunit, reason_contexts, sum_healerunit_plans_fund_total
 - ch08_person_atom: CRUD_command, atom, atom_hx, awardee_title_ERASE, awardee_title_ERASE_inx, awardee_title_ERASE_otx, ch08, column_ordinal, contact_name_ERASE, contact_name_ERASE_inx, contact_name_ERASE_otx, crud, fact_context_ERASE, fact_context_ERASE_inx, fact_context_ERASE_otx, group_title_ERASE, group_title_ERASE_inx, group_title_ERASE_otx, healer_name_ERASE, healer_name_ERASE_inx, healer_name_ERASE_otx, labor_title_ERASE, labor_title_ERASE_inx, labor_title_ERASE_otx, nesting_order, normal_specs, normal_table_name, person_name_ERASE, person_name_ERASE_inx, person_name_ERASE_otx, plan_rope_ERASE, plan_rope_ERASE_inx, plan_rope_ERASE_otx, reason_context_ERASE, reason_context_ERASE_inx, reason_context_ERASE_otx, reason_state_ERASE, reason_state_ERASE_inx, reason_state_ERASE_otx
 - ch09_person_lesson: FaceName, Lasso, MomentRope, ch09, gut, job, lasso, moment, moment_mstr_dir, moment_rope, spark_face, spark_num
-- ch10_person_listen: ch10
+- ch10_person_listen: ch10, listener, speaker
 - ch11_bud: Epoch, SparkInt, TimeNum, amount, boss_facts, bud_contact_nets, bud_person_name, bud_time, celldepth, ch11, epoch, found_facts, magnitude, offi_time, offi_time_max, person_contacts_net, personadjust, personspark_facts, quota, time, tran_time
 - ch12_keep: ManaNum, care_amount, cares, ch12, cycle_carees_curr, cycle_carees_prev, cycle_count, cycle_max, doctor_count, doctor_rank_num, doctor_rank_percent, keep_patientledgers, keep_point_magnitude, need_bill_amount, need_dues, need_got_curr, need_got_prev, need_paid_amount, need_paid_bool, need_paid_rank_num, need_paid_rank_percent, need_results, patient_count, patient_rank_num, patient_rank_percent, rewards_count, rewards_magnitude, riverbooks, rivercares, rivergrades
 - ch13_time: Anaday, Baileyday, Chiday, Danceday, Eastday, EpochLabel, TimeShoe, c100, c100_length, c400_core, c400_core_length, c400_leap, c400_leap_length, c400_number, ch13, clock, creg, cumulative_day, day, day_length, dayly_duration_min, dayly_lower_min, days, days_lower_day, days_upper_day, duration, epoch_label, epoch_length, epoch_min, every_xdays, every_xweeks, five, hour, hour_label, hours_config, month_label, monthday_index, monthly_duration_days, monthly_monthday_lower, months_config, range_duration, range_lower_min, readable, week, weekdays_config, weekly_duration_min, weekly_lower_min, weeks, weeks_lower_week, weeks_upper_week, year, year_length, year_monthday_duration_days, year_monthday_lower, yr1_jan1_offset, yr4_core, yr4_core_length, yr4_leap, yr4_leap_length
@@ -31,5 +31,7 @@
 - ch33_pitch: Deal, Gift, Peer, PitchID, PitchUnit, ch33, deal, gift, offer, peer, pitch, pitch_id, pitcher_name, pitchs, request
 - ch34_finance: ch34, finance, financial
 - ch35_person_viewer: ch35
-- ch36_world_app: ch36
-- ch98_docs_builder: ch98
+- ch50_world_app: ch50
+- ch97_docs_builder: ch97
+- ch98_linter: ch98
+- ch99_glossary: ch99

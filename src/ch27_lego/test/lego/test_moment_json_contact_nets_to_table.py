@@ -9,7 +9,7 @@ from ch27_lego.lego_core import (
     etl_moment_json_contact_nets_to_moment_tranbook_nets_table,
     insert_tranunit_contacts_net,
 )
-from ref.keywords import Ch27Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch27Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

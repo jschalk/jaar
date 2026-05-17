@@ -14,7 +14,7 @@ from ch14_moment.test._util.ch14_examples import (
     create_example_moment3,
     create_example_moment4,
 )
-from ref.keywords import Ch14Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch14Keywords as kw, ExampleStrs as exx
 
 
 def test_get_moment_guts_contacts_dataframe_ReturnsObj(temp3_fs, graphics_bool):

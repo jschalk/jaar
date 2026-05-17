@@ -8,8 +8,8 @@ from ch13_time.test._util.ch13_examples import (
     get_thu,
     get_wed,
 )
+from ch99_glossary.ch_keyword import Ch13Keywords as kw, ExampleStrs as exx
 from datetime import datetime
-from ref.keywords import Ch13Keywords as kw, ExampleStrs as exx
 
 
 def test_PersonUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario0():

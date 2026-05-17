@@ -9,8 +9,8 @@ from ch15_nabu.nabu_config import (
     nabu_config_path,
     set_nabuable_otx_inx_args,
 )
+from ch99_glossary.ch_keyword import Ch15Keywords as kw
 from os import getcwd as os_getcwd
-from ref.keywords import Ch15Keywords as kw
 
 
 def test_nabu_config_path_ReturnsObj_Nabu() -> str:

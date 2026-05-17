@@ -22,7 +22,7 @@ from ch16_translate.translate_config import (
     translateable_obj_types,
 )
 from ch16_translate.translate_main import TranslateUnit, translateunit_shop
-from ref.keywords import Ch16Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch16Keywords as kw, ExampleStrs as exx
 
 
 def test_get_translate_args_obj_types_ReturnsObj():

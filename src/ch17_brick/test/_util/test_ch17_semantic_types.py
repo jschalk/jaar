@@ -1,6 +1,6 @@
 from ch17_brick._ref.ch17_semantic_types import SheetName
+from ch99_glossary.ch_keyword import Ch17Keywords as kw, ExampleStrs as exx
 from inspect import getdoc as inspect_getdoc
-from ref.keywords import Ch17Keywords as kw, ExampleStrs as exx
 
 
 def test_SheetName_Exists():

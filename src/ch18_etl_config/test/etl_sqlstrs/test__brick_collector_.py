@@ -7,13 +7,13 @@ from ch18_etl_config.brick_collector import (
     get_etl_db_sheets_tier2_order,
     reorder_etl_db_sheets,
 )
+from ch99_glossary.ch_keyword import Ch18Keywords as kw, ExampleStrs as exx
 from pandas import (
     DataFrame,
     ExcelWriter as pandas_ExcelWriter,
     read_excel as pandas_read_excel,
 )
 from pathlib import Path
-from ref.keywords import Ch18Keywords as kw, ExampleStrs as exx
 
 
 def test_get_all_excel_bricksheets_ReturnsObj_Scenario0_SheetNames(temp3_fs):

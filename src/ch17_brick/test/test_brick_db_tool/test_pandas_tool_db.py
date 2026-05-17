@@ -1,9 +1,9 @@
 from ch17_brick.brick_config import get_brick_sqlite_types
 from ch17_brick.brick_db_tool import create_brick_table_from_csv, insert_brick_csv
+from ch99_glossary.ch_keyword import Ch17Keywords as kw, ExampleStrs as exx
 from os import remove as os_remove
 from os.path import exists as os_path_exists
 from pytest import fixture as pytest_fixture
-from ref.keywords import Ch17Keywords as kw, ExampleStrs as exx
 from sqlite3 import Connection as sqlite3_Connection, connect as sqlite3_connect
 
 

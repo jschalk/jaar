@@ -10,10 +10,9 @@ def test_get_chapter_descs_Scenario0_RemovesLinterAndRef():
         patch("ch00_py.chapter_desc_main.create_path") as mock_create_path,
     ):
         mock_get_dirs.return_value = [
-            "intro",
+            "intro_test_mock",
             "chapter1",
-            "linter",
-            "ref",
+            "ch99_glossary",
             "chapter2",
         ]
 
@@ -25,9 +24,10 @@ def test_get_chapter_descs_Scenario0_RemovesLinterAndRef():
         # THEN
         print(f"{chapter_descs}")
         assert chapter_descs == {
-            "intro": "src/intro",
+            "intro_test_mock": "src/intro_test_mock",
             "chapter1": "src/chapter1",
             "chapter2": "src/chapter2",
+            "ch99_glossary": "src/ch99_glossary",
         }
 
 
@@ -37,26 +37,13 @@ def test_get_chapter_descs_Scenario1_GetsLevel1Directories():
         patch("ch00_py.chapter_desc_main.get_level1_dirs") as mock_get_dirs,
         patch("ch00_py.chapter_desc_main.create_path"),
     ):
-        mock_get_dirs.return_value = ["chapter1", "linter", "ref"]
+        mock_get_dirs.return_value = ["chapter1", "ch99_glossary"]
 
         # WHEN
         get_chapter_descs()
 
         # THEN
         mock_get_dirs.assert_called_once_with("src")
-
-
-def test_get_chapter_descs_Scenario2_RaisesErrorIf_linterIsMissing():
-    """
-    Current behavior: list.remove will raise ValueError
-    if 'linter' or 'ref' are not present.
-    """
-    # ESTABLISH / WHEN / THEN
-    with patch("ch00_py.chapter_desc_main.get_level1_dirs") as mock_get_dirs:
-        mock_get_dirs.return_value = ["chapter1", "chapter2"]
-
-        with pytest_raises(ValueError):
-            get_chapter_descs()
 
 
 def test_valid_chapter_numbers_ReturnsObj_Scenario0():

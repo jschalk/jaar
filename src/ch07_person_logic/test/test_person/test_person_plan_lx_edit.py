@@ -3,8 +3,8 @@ from ch07_person_logic.person_main import personunit_shop
 from ch07_person_logic.test._util.ch07_examples import (
     get_personunit_with_4_levels_and_2reasons_2facts,
 )
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from pytest import raises as pytest_raises
-from ref.keywords import ExampleStrs as exx
 
 
 def test_PersonUnit_edit_plan_label_FailsWhenPlanDoesNotExist():
