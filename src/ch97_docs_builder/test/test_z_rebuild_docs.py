@@ -46,7 +46,7 @@ def test_recreate_keyword_src_config_Scenario0_Includes_sort_ordinal():
     # for missing_element in sorted(missing_elements):
     #     x_count += 1
     #     print(
-    #         f""""{missing_element}": {{"rank_tier": 0, "valid_ch": "ch{ch_num}"}},"""
+    #         f""""{missing_element}": {{"question_tier": 0, "valid_ch": "ch{ch_num}"}},"""
     #     )
     # print(f"{x_count} elements")
     # assert set(get_keg_elements_sort_order()).issubset(keywords_set)

@@ -24,7 +24,7 @@ class QuestionUnit:
     keg_term: str = None
     keg_definition: str = None
     init_ch: int = None
-    rank_tier: int = None
+    question_tier: int = None
     did_you_read_order: int = None
     complete_question: str = None
 
@@ -48,7 +48,7 @@ def get_keg_definition_questionunits() -> dict[str, QuestionUnit]:
             valid_chs = parse_valid_ch_str(ch_ints, kw_config.get("valid_ch"))
             init_ch = sorted(valid_chs)[0] if valid_chs else None
             questionunit.init_ch = init_ch
-        questionunit.rank_tier = 0
+        questionunit.question_tier = 0
         keg_questions[keg_term] = questionunit
     return keg_questions
 
@@ -60,9 +60,9 @@ def get_tiered_questionunits() -> dict[str, QuestionUnit]:
     for keg_term, keg_qu in keg_qus.items():
         # check chxx terms
         if len(keg_term) == 4 and keg_term.startswith("ch"):
-            keg_qu.rank_tier = 6
+            keg_qu.question_tier = 6
         elif keg_qu.init_ch is None and keg_term in keywords_set:
-            keg_qu.rank_tier = 10
+            keg_qu.question_tier = 10
     return keg_qus
 
 
@@ -76,7 +76,7 @@ def get_keg_rank_dict() -> dict[str, dict]:
         valid_ch = kw_config.get("valid_ch") if kw_config else "0:"
         keg_tiers[keg_qu.keg_term] = {
             "keg_rank": keg_qu.did_you_read_order,
-            "rank_tier": keg_qu.rank_tier,
+            "question_tier": keg_qu.question_tier,
             "chs": valid_ch,
         }
     return keg_tiers
@@ -99,7 +99,7 @@ def rebuild_keg_rank_json(src_dir: str = None):
             line = (
                 f'    "{key}": '
                 f'{{"keg_rank": {value["keg_rank"]}, '
-                f'"rank_tier": {value["rank_tier"]}, '
+                f'"question_tier": {value["question_tier"]}, '
                 f'"chs": {json_dumps(value["chs"])}}}'
             )
             if index < len(items) - 1:
@@ -113,14 +113,14 @@ def set_did_you_read_orders(keg_questions: dict[str, QuestionUnit]) -> None:
     Assign did_you_read_order values in-place.
 
     Ordering rules:
-        1. rank_tier ascending
+        1. question_tier ascending
         2. init_ch descending
         3. keg_term alphabetical
     """
     sorted_questunits = sorted(
         keg_questions.values(),
         key=lambda q: (
-            -q.rank_tier,
+            -q.question_tier,
             q.init_ch is not None,  # None last or first depending on your preference
             (q.init_ch or 0),  # descending for ints
             q.keg_term,
@@ -208,7 +208,7 @@ def get_ch_sorted_keywords(keywords_src_config: dict) -> list[str]:
     return sorted(
         keywords_src_config.keys(),
         key=lambda k: (
-            -keywords_src_config[k].get("rank_tier", float("inf")),
+            -keywords_src_config[k].get("question_tier", float("inf")),
             -parse_chapter(keywords_src_config[k].get("valid_ch", "")),
             k.lower(),
         ),

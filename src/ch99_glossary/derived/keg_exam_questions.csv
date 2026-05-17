@@ -108,7 +108,7 @@ row_number,question
 106,Did you read that the keg_definition of 'filename' is 'Should always include extension ala filebasename + '.' + extension'.
 107,Did you read that the keg_definition of 'glossary' is 'Definition needed.'.
 108,Did you read that the keg_definition of 'keyword' is 'Reserved word that is supposed to have one meaning.'.
-109,Did you read that the keg_definition of 'rank_tier' is 'Every Keyword has an rank_tier. The highter the rank_tier the more relatively important the keyword.'.
+109,Did you read that the keg_definition of 'question_tier' is 'Every Keyword has an question_tier. The highter the question_tier the more relatively important the keyword.'.
 110,"Did you read that the keg_definition of 'semantic_type' is 'A datatype that is fundamentally int, str, or float'."
 111,"Did you read that the keg_definition of 'shop' is 'The factory method in programming is very important. However because I want 'fact' only to refer to the Keg concept I don't use the word 'factory', instead I use 'shop'.'."
 112,Did you read that the keg_definition of 'sort_ordinal' is 'Int that represents where the keyword is indexed in the general sorting order.'.

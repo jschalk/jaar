@@ -107,7 +107,7 @@ def resave_chapter_and_keyword_json_files():
     for chapter_dir in get_chapter_descs().values():
         json_file_tuples = get_dir_filenames(chapter_dir, {"json"})
         for x_dir, x_filename in json_file_tuples:
-            if "rank_tier.json" not in x_filename:
+            if "question_tier.json" not in x_filename:
                 json_dir = create_path(chapter_dir, x_dir)
                 save_json(json_dir, x_filename, open_json(json_dir, x_filename))
     ex_strs_json_path = create_src_example_strs_path("src")

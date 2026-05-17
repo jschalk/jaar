@@ -111,7 +111,7 @@ def test_create_keg_rank_json_path_ReturnsObj(temp3_dir):
     # ref_dir = create_path(chapter_dir, "_ref")
     ref_dir = create_path(src_dir, "ch99_glossary")
     derived_dir = create_path(ref_dir, "derived")
-    expected_filename = "rank_tier.json"
+    expected_filename = "question_tier.json"
     expected_file_path = create_path(derived_dir, expected_filename)
     print(f"{expected_file_path=}")
     print(f"{keg_exam_csv_path=}")
@@ -124,7 +124,7 @@ def test_create_keg_rank_json_path_HasDocString():
     src_dir = "src"
     ch99_dir = create_path(src_dir, "ch99_glossary")
     derived_dir = create_path(ch99_dir, "derived")
-    doc_str = create_path(derived_dir, "rank_tier.json")
+    doc_str = create_path(derived_dir, "question_tier.json")
     doc_str = f"Returns path: {doc_str}"
     print(f"{doc_str=}")
     # WHEN / THEN

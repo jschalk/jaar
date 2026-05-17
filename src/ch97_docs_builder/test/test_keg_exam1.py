@@ -14,12 +14,12 @@ def test_QuestionUnit_Exists():
     assert not QuestionUnit.keg_term
     assert not QuestionUnit.keg_definition
     assert not QuestionUnit.init_ch
-    assert not QuestionUnit.rank_tier
+    assert not QuestionUnit.question_tier
     assert not QuestionUnit.did_you_read_order
     assert not QuestionUnit.complete_question
     assert set(questionunit.__dict__.keys()) == {
         "keg_term",
-        kw.rank_tier,
+        kw.question_tier,
         "keg_definition",
         "init_ch",
         "did_you_read_order",
@@ -62,7 +62,7 @@ def test_get_keg_definition_questionunits_ReturnsObj():
         keg_term=kw.year_length,
         keg_definition=keg_definitions.get(kw.year_length),
         init_ch=13,
-        rank_tier=0,
+        question_tier=0,
     )
     assert keg_questions1.get(kw.year_length) == expected_year_length_questionunit
 
@@ -82,7 +82,7 @@ def test_set_did_you_read_orders_SetAttrs_Scenario1_SingleQuestion_WhenSingleTer
     # ESTABLISH
     star_questionunit = QuestionUnit(
         keg_term=kw.star,
-        rank_tier=0,
+        question_tier=0,
         init_ch=4,
         keg_definition="Used to measure weight of plan",
     )
@@ -99,13 +99,13 @@ def test_set_did_you_read_orders_SetAttrs_Scenario1_SingleQuestion_WhenSingleTer
 def test_set_did_you_read_orders_SetAttrs_Scenario2_AssignsSequentialOrder():
     # ESTABLISH
     alpha_questionunit = QuestionUnit(
-        keg_term="alpha", rank_tier=0, init_ch=1, keg_definition="Alpha definition"
+        keg_term="alpha", question_tier=0, init_ch=1, keg_definition="Alpha definition"
     )
     beta_questionunit = QuestionUnit(
-        keg_term="beta", rank_tier=1, init_ch=10, keg_definition="Beta definition"
+        keg_term="beta", question_tier=1, init_ch=10, keg_definition="Beta definition"
     )
     gamma_questionunit = QuestionUnit(
-        keg_term="gamma", rank_tier=1, init_ch=5, keg_definition="Gamma definition"
+        keg_term="gamma", question_tier=1, init_ch=5, keg_definition="Gamma definition"
     )
     keg_questions = {
         "gamma": gamma_questionunit,
@@ -125,10 +125,10 @@ def test_set_did_you_read_orders_SetAttrs_Scenario2_AssignsSequentialOrder():
 def test_set_did_you_read_orders_SetAttrs_Scenario3_SortsAlphabetically_WhenOtherFieldsMatch():
     # ESTABLISH
     zebra_questionunit = QuestionUnit(
-        keg_term="zebra", rank_tier=1, init_ch=5, keg_definition="Zebra definition"
+        keg_term="zebra", question_tier=1, init_ch=5, keg_definition="Zebra definition"
     )
     alpha_questionunit = QuestionUnit(
-        keg_term="alpha", rank_tier=1, init_ch=5, keg_definition="Alpha definition"
+        keg_term="alpha", question_tier=1, init_ch=5, keg_definition="Alpha definition"
     )
     keg_questions = {"zebra": zebra_questionunit, "alpha": alpha_questionunit}
 
@@ -144,14 +144,14 @@ def test_set_did_you_read_orders_SetAttrs_Scenario4_SortsNoneInitChAheadOfNumeri
     # ESTABLISH
     none_init_ch_questionunit = QuestionUnit(
         keg_term="alpha",
-        rank_tier=0,
+        question_tier=0,
         init_ch=None,
         keg_definition="Alpha definition",
     )
 
     numeric_init_ch_questionunit = QuestionUnit(
         keg_term="beta",
-        rank_tier=0,
+        question_tier=0,
         init_ch=99,
         keg_definition="Beta definition",
     )

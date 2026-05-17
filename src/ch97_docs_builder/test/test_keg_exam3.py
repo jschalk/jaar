@@ -23,13 +23,13 @@ from os.path import exists as os_path_exists
 def test_rebuild_keg_rank_json_SavesFile_Scenario0_NoFileExists(temp3_fs):
     # ESTABLISH
     src_dir = str(temp3_fs)
-    rank_tier_path = create_keg_rank_json_path(src_dir)
-    assert not os_path_exists(rank_tier_path)
+    question_tier_path = create_keg_rank_json_path(src_dir)
+    assert not os_path_exists(question_tier_path)
     # WHEN
     rebuild_keg_rank_json(src_dir)
     # THEN
-    assert os_path_exists(rank_tier_path)
-    rank_tier_dict = open_json(rank_tier_path)
+    assert os_path_exists(question_tier_path)
+    question_tier_dict = open_json(question_tier_path)
 
     keywords_src_config = get_keywords_src_config()
     chapter_descs = get_chapter_descs().keys()
@@ -46,24 +46,24 @@ def test_rebuild_keg_rank_json_SavesFile_Scenario0_NoFileExists(temp3_fs):
         valid_ch = kw_config.get("valid_ch") if kw_config else "0:"
         expected_keg_tiers[keg_qu.keg_term] = {
             "keg_rank": keg_qu.did_you_read_order,
-            "rank_tier": keg_qu.rank_tier,
+            "question_tier": keg_qu.question_tier,
             "chs": valid_ch,
         }
     # for keg_term, exam_dict in expected_keg_tiers.items():
     #     print(f"{keg_term=} {exam_dict=}")
-    assert rank_tier_dict == expected_keg_tiers
+    assert question_tier_dict == expected_keg_tiers
 
 
 # def test_rebuild_keg_rank_json_SavesFile_Scenario1_NoFileExists(temp3_fs):
 #     # ESTABLISH
 #     src_dir = str(temp3_fs)
-#     rank_tier_path = create_keg_rank_json_path(src_dir)
-#     assert not os_path_exists(rank_tier_path)
+#     question_tier_path = create_keg_rank_json_path(src_dir)
+#     assert not os_path_exists(question_tier_path)
 #     # WHEN
 #     rebuild_keg_rank_json(src_dir)
 #     # THEN
-#     assert os_path_exists(rank_tier_path)
-#     rank_tier_dict = open_json(rank_tier_path)
+#     assert os_path_exists(question_tier_path)
+#     question_tier_dict = open_json(question_tier_path)
 
 #     keywords_src_config = get_keywords_src_config()
 #     chapter_descs = get_chapter_descs().keys()
@@ -78,12 +78,12 @@ def test_rebuild_keg_rank_json_SavesFile_Scenario0_NoFileExists(temp3_fs):
 #         #     ch_list = set(ch_ints)
 #         valid_ch = kw_config.get("valid_ch") if kw_config else "0:"
 #         expected_keg_tiers[keg_qu.keg_term] = {
-#             "rank_tier": keg_qu.rank_tier,
+#             "question_tier": keg_qu.question_tier,
 #             "chs": valid_ch,
 #         }
 #     for keg_term, exam_dict in expected_keg_tiers.items():
 #         print(f"{keg_term=} {exam_dict=}")
-#     assert rank_tier_dict == expected_keg_tiers
+#     assert question_tier_dict == expected_keg_tiers
 
 
 def test_get_exam_fixed_questions_ReturnsObj():
@@ -98,8 +98,8 @@ def test_get_exam_fixed_questions_ReturnsObj():
 
 def test_merge_fixed_and_floating_questions_ReturnsObj_Scenario0_OnlyFloatingQuestions():
     # ESTABLISH
-    alpha_question = QuestionUnit(keg_term="alpha", rank_tier=0, init_ch=1)
-    beta_question = QuestionUnit(keg_term="beta", rank_tier=1, init_ch=10)
+    alpha_question = QuestionUnit(keg_term="alpha", question_tier=0, init_ch=1)
+    beta_question = QuestionUnit(keg_term="beta", question_tier=1, init_ch=10)
     floating_questions = {"beta": beta_question, "alpha": alpha_question}
     fixed_questions = {}
 
@@ -116,8 +116,8 @@ def test_merge_fixed_and_floating_questions_ReturnsObj_Scenario0_OnlyFloatingQue
 def test_merge_fixed_and_floating_questions_ReturnsObj_Scenario1_FixedQuestionInsertedAtAbsoluteIndex():
     # ESTABLISH
     fixed_question = QuestionUnit(complete_question="Fixed Question")
-    alpha_question = QuestionUnit(keg_term="alpha", rank_tier=0, init_ch=1)
-    beta_question = QuestionUnit(keg_term="beta", rank_tier=1, init_ch=10)
+    alpha_question = QuestionUnit(keg_term="alpha", question_tier=0, init_ch=1)
+    beta_question = QuestionUnit(keg_term="beta", question_tier=1, init_ch=10)
     fixed_questions = {1: fixed_question}
     floating_questions = {"beta": beta_question, "alpha": alpha_question}
 
@@ -135,9 +135,9 @@ def test_merge_fixed_and_floating_questions_ReturnsObj_Scenario2_MultipleFixedIn
     # ESTABLISH
     fixed_question_b = QuestionUnit(complete_question="Fixed B")
     fixed_question_d = QuestionUnit(complete_question="Fixed D")
-    alpha_question = QuestionUnit(keg_term="alpha", rank_tier=0, init_ch=1)
-    beta_question = QuestionUnit(keg_term="beta", rank_tier=1, init_ch=5)
-    gamma_question = QuestionUnit(keg_term="gamma", rank_tier=1, init_ch=10)
+    alpha_question = QuestionUnit(keg_term="alpha", question_tier=0, init_ch=1)
+    beta_question = QuestionUnit(keg_term="beta", question_tier=1, init_ch=5)
+    gamma_question = QuestionUnit(keg_term="gamma", question_tier=1, init_ch=10)
 
     fixed_questions = {1: fixed_question_b, 3: fixed_question_d}
     floating_questions = {
@@ -176,9 +176,9 @@ def test_rebuild_keg_exam_questions_ReturnsNone_Scenario3_CreatesCsvFile(
 def test_get_ch_sorted_keywords_ReturnsObj_Scenario0_basic_sorting():
     # ESTABLISH
     data = {
-        "E": {kw.rank_tier: 0, kw.valid_ch: kw.ch17},
-        "W": {kw.rank_tier: 0, kw.valid_ch: kw.ch02},
-        "A": {kw.rank_tier: 1, kw.valid_ch: kw.ch01},
+        "E": {kw.question_tier: 0, kw.valid_ch: kw.ch17},
+        "W": {kw.question_tier: 0, kw.valid_ch: kw.ch02},
+        "A": {kw.question_tier: 1, kw.valid_ch: kw.ch01},
     }
     # WHEN
     result = get_ch_sorted_keywords(data)
@@ -189,9 +189,9 @@ def test_get_ch_sorted_keywords_ReturnsObj_Scenario0_basic_sorting():
 def test_get_ch_sorted_keywords_ReturnsObj_Scenario1_empty_chapter_goes_first_within_tier():
     # ESTABLISH
     data = {
-        "E": {kw.rank_tier: 0, kw.valid_ch: kw.ch17},
-        "W": {kw.rank_tier: 0, kw.valid_ch: ""},
-        "A": {kw.rank_tier: 0, kw.valid_ch: kw.ch02},
+        "E": {kw.question_tier: 0, kw.valid_ch: kw.ch17},
+        "W": {kw.question_tier: 0, kw.valid_ch: ""},
+        "A": {kw.question_tier: 0, kw.valid_ch: kw.ch02},
     }
     # WHEN
     result = get_ch_sorted_keywords(data)
@@ -202,9 +202,9 @@ def test_get_ch_sorted_keywords_ReturnsObj_Scenario1_empty_chapter_goes_first_wi
 def test_get_ch_sorted_keywords_ReturnsObj_Scenario2_empty_vs_other_tiers():
     # ESTABLISH
     data = {
-        "A": {kw.rank_tier: 1, kw.valid_ch: ""},
-        "B": {kw.rank_tier: 0, kw.valid_ch: kw.ch01},
-        "C": {kw.rank_tier: 0, kw.valid_ch: ""},
+        "A": {kw.question_tier: 1, kw.valid_ch: ""},
+        "B": {kw.question_tier: 0, kw.valid_ch: kw.ch01},
+        "C": {kw.question_tier: 0, kw.valid_ch: ""},
     }
     # WHEN
     result = get_ch_sorted_keywords(data)
@@ -216,9 +216,9 @@ def test_get_ch_sorted_keywords_ReturnsObj_Scenario2_empty_vs_other_tiers():
 def test_get_ch_sorted_keywords_ReturnsObj_Scenario3_malformed_chapter_treated_like_empty():
     # ESTABLISH
     data = {
-        "A": {kw.rank_tier: 0, kw.valid_ch: "foo"},
-        "B": {kw.rank_tier: 0, kw.valid_ch: kw.ch02},
-        "C": {kw.rank_tier: 0, kw.valid_ch: ""},
+        "A": {kw.question_tier: 0, kw.valid_ch: "foo"},
+        "B": {kw.question_tier: 0, kw.valid_ch: kw.ch02},
+        "C": {kw.question_tier: 0, kw.valid_ch: ""},
     }
     # WHEN
     result = get_ch_sorted_keywords(data)

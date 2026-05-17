@@ -25,6 +25,7 @@ from os.path import exists as os_path_exists
 
 # CUT / EXAM2
 def test_tiered_questionunits_ReturnsObj():
+    # sourcery skip: no-conditionals-in-tests
     # ESTABLISH / WHEN
     tiered_questionunits = get_tiered_questionunits()
     # THEN
@@ -33,9 +34,9 @@ def test_tiered_questionunits_ReturnsObj():
     for keg_term, keg_qu in tiered_questionunits.items():
         # check chxx terms
         if len(keg_term) == 4 and keg_term.startswith("ch"):
-            assert keg_qu.rank_tier == 6
+            assert keg_qu.question_tier == 6
         # check non ch terms
         if keg_qu.init_ch is None and keg_term in keywords_set:
-            print(f"{keg_term=} {keg_qu.init_ch=} {keg_qu.rank_tier=}")
-            assert keg_qu.rank_tier == 10
+            print(f"{keg_term=} {keg_qu.init_ch=} {keg_qu.question_tier=}")
+            assert keg_qu.question_tier == 10
     # assert 1 == 2
