@@ -608,7 +608,7 @@
     "trlrope": {"keg_rank": 606, "question_tier": 0, "chs": "18:"},
     "trltitl": {"keg_rank": 607, "question_tier": 0, "chs": "18:"},
     "day_punch": {"keg_rank": 608, "question_tier": 0, "chs": "19:"},
-    "fusion": {"keg_rank": 609, "question_tier": 0, "chs": "19:"},
+    "fission": {"keg_rank": 609, "question_tier": 0, "chs": "19"},
     "idea_type": {"keg_rank": 610, "question_tier": 0, "chs": "19:"},
     "ii": {"keg_rank": 611, "question_tier": 0, "chs": "19:"},
     "moment_tranbook_nets": {"keg_rank": 612, "question_tier": 0, "chs": "19:"},

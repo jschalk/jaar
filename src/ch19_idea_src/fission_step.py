@@ -1,10 +1,9 @@
-from pandas import DataFrame as pandas_DataFrame, concat as pandas_concat
+from ch04_rope.rope import default_knot_if_None
+from pandas import DataFrame, concat as pandas_concat
 
 
-def fusion_add_ancestor_rope_rows(
-    df: pandas_DataFrame, config: dict
-) -> pandas_DataFrame:
-    KNOT = ";"
+def fission_add_ancestor_rope_rows(df: DataFrame) -> DataFrame:
+    knot_str = default_knot_if_None()
 
     if "plan_rope" not in df.columns:
         return df
@@ -15,9 +14,9 @@ def fusion_add_ancestor_rope_rows(
         rope = row["plan_rope"]
         if not isinstance(rope, str):
             continue
-        segments = [s for s in rope.split(KNOT) if s]
+        segments = [s for s in rope.split(knot_str) if s]
         for i in range(1, len(segments)):
-            ancestor = KNOT + KNOT.join(segments[:i]) + KNOT
+            ancestor = knot_str + knot_str.join(segments[:i]) + knot_str
             if ancestor not in existing_ropes:
                 existing_ropes.add(ancestor)
                 new_rows.append(
@@ -31,26 +30,24 @@ def fusion_add_ancestor_rope_rows(
     if not new_rows:
         return df
 
-    return pandas_concat([df, pandas_DataFrame(new_rows)], ignore_index=True)
+    return pandas_concat([df, DataFrame(new_rows)], ignore_index=True)
 
 
-def fusion_set_pledge_to_one(df: pandas_DataFrame, config: dict) -> pandas_DataFrame:
+def fission_set_pledge_to_one(df: DataFrame) -> DataFrame:
     df = df.copy()
     df["pledge"] = 1
     return df
 
 
-def fusion_set_plan_rope_from_health_label(
-    df: pandas_DataFrame, config: dict
-) -> pandas_DataFrame:
+def fission_set_plan_rope_from_health_label(df: DataFrame) -> DataFrame:
     if "moment_rope" not in df.columns:
         raise ValueError(
-            "fusion_set_plan_rope_from_health_label requires a 'moment_rope' column but it was not found. "
+            "fission_set_plan_rope_from_health_label requires a 'moment_rope' column but it was not found. "
             f"Columns present: {list(df.columns)}"
         )
     if "health_label" not in df.columns:
         raise ValueError(
-            "fusion_set_plan_rope_from_health_label requires a 'health_label' column but it was not found. "
+            "fission_set_plan_rope_from_health_label requires a 'health_label' column but it was not found. "
             f"Columns present: {list(df.columns)}"
         )
 
@@ -58,7 +55,7 @@ def fusion_set_plan_rope_from_health_label(
     if null_moment.any():
         bad_indices = df.index[null_moment].tolist()
         raise ValueError(
-            f"fusion_set_plan_rope_from_health_label found null values in 'moment_rope' at row indices: {bad_indices}. "
+            f"fission_set_plan_rope_from_health_label found null values in 'moment_rope' at row indices: {bad_indices}. "
             "Every row must have a valid moment_rope value to construct plan_rope."
         )
 
@@ -66,7 +63,7 @@ def fusion_set_plan_rope_from_health_label(
     if null_health.any():
         bad_indices = df.index[null_health].tolist()
         raise ValueError(
-            f"fusion_set_plan_rope_from_health_label found null values in 'health_label' at row indices: {bad_indices}. "
+            f"fission_set_plan_rope_from_health_label found null values in 'health_label' at row indices: {bad_indices}. "
             "Every row must have a valid health_label value to construct plan_rope."
         )
 
@@ -75,12 +72,10 @@ def fusion_set_plan_rope_from_health_label(
     return df
 
 
-def fusion_set_moment_rope_from_moment_label(
-    df: pandas_DataFrame, config: dict
-) -> pandas_DataFrame:
+def fission_set_moment_rope_from_moment_label(df: DataFrame) -> DataFrame:
     if "moment_label" not in df.columns:
         raise ValueError(
-            "fusion_set_moment_rope_from_moment_label requires a 'moment_label' column but it was not found. "
+            "fission_set_moment_rope_from_moment_label requires a 'moment_label' column but it was not found. "
             f"Columns present: {list(df.columns)}"
         )
 
@@ -88,7 +83,7 @@ def fusion_set_moment_rope_from_moment_label(
     if null_moment_label.any():
         bad_indices = df.index[null_moment_label].tolist()
         raise ValueError(
-            f"fusion_set_moment_rope_from_moment_label found null values in 'moment_label' at row indices: {bad_indices}. "
+            f"fission_set_moment_rope_from_moment_label found null values in 'moment_label' at row indices: {bad_indices}. "
             "Every row must have a valid moment_label value to construct moment_rope."
         )
 
@@ -97,7 +92,7 @@ def fusion_set_moment_rope_from_moment_label(
     return df
 
 
-def fusion_add_knot_from_rope(df: pandas_DataFrame, config: dict) -> pandas_DataFrame:
+def fission_add_knot_from_rope(df: DataFrame) -> DataFrame:
     if "knot" in df.columns:
         return df
 
@@ -115,4 +110,28 @@ def fusion_add_knot_from_rope(df: pandas_DataFrame, config: dict) -> pandas_Data
 
     df = df.copy()
     df["knot"] = knot
+    return df
+
+
+def get_all_fission_steps() -> dict[str,]:
+    return {
+        "fission_add_knot_from_rope": fission_add_knot_from_rope,
+        "fission_set_moment_rope_from_moment_label": fission_set_moment_rope_from_moment_label,
+        "fission_set_plan_rope_from_health_label": fission_set_plan_rope_from_health_label,
+        "fission_set_pledge_to_one": fission_set_pledge_to_one,
+        "fission_add_ancestor_rope_rows": fission_add_ancestor_rope_rows,
+    }
+
+
+# TODO add fission to keywords, a word used to describe how non-mirror ideas are converted into stable brick_types
+def run_fission_steps(df: DataFrame, idea_type_config: dict) -> DataFrame:
+    print(f"{idea_type_config.keys()=}")
+    # for step_name in config.get("fission_steps", []):
+    #     if step_name not in fission_STEPS:
+    #         raise ValueError(
+    #             f"run_fission_steps encountered unknown fission step '{step_name}'. "
+    #             f"Registered steps: {list(fission_STEPS.keys())}"
+    #         )
+    #     df = fission_STEPS[step_name](df, config)
+    # return df
     return df

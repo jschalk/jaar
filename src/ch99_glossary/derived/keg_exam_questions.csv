@@ -167,7 +167,7 @@ row_number,question
 165,"Did you read that the keg_definition of 'person_name' is ', paybook arg, bud arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed, Contact seed, Member seed.'."
 166,"Did you read that the keg_definition of 'person_name_is_workforce' is ', Workforce thinkout'."
 167,Did you read that the keg_definition of 'FactNum' is 'float first used in ch04. A numeric value that may converted to other Semantic Types by an external process driven by context.'.
-168,Did you read that the keg_definition of 'FirstLabel' is 'str first used in ch04. The first LabelTerm in a RopeTerm. FirstLabel cannot contain knot. Not called RootLabel to avoid confusion.'.
+168,Did you read that the keg_definition of 'FirstLabel' is 'str first used in ch04. The first LabelTerm in a RopeTerm. FirstLabel cannot contain knot. Not called RootLabel to avoid confission.'.
 169,Did you read that the keg_definition of 'KnotTerm' is 'str first used in ch04. A string to used as a delimiter in RopeTerms.'.
 170,Did you read that the keg_definition of 'LabelTerm' is 'str first used in ch04. A string representation of a tree node. Nodes cannot contain RopeTerm knot'.
 171,Did you read that the keg_definition of 'ManaGrain' is 'float first used in ch04. Smallest Unit of Mana.'.
@@ -614,7 +614,7 @@ row_number,question
 610,Did you read that the keg_definition of 'trlrope' is 'abbv for translate_rope'.
 611,Did you read that the keg_definition of 'trltitl' is 'abbv for translate_title'.
 612,Did you read that the keg_definition of 'day_punch' is 'A report that summarizes the tasks of a person for a day.'.
-613,Did you read that the keg_definition of 'fusion' is 'Any complicated step changing idea_type to brick_type. Each fusion_step makes a single type of change. Can be simple (set value to X) or complicated (add missing rows with relative values).'.
+613,Did you read that the keg_definition of 'fission' is 'Any complicated step changing idea_type to brick_type. Each fission_step makes a single type of change. Can be simple (set value to X) or complicated (add missing rows with relative values). Only referenced in ch19'.
 614,Did you read that the keg_definition of 'idea_type' is 'Definition needed.'.
 615,Did you read that the keg_definition of 'ii' is 'Idea Format Identifier. Every idea_type format starts with 'ii' and then 5 numbers. Every brick_type has a mirrored idea_type. Multiple idea_types can map to single brick_type'.
 616,Did you read that the keg_definition of 'moment_tranbook_nets' is 'Definition needed.'.

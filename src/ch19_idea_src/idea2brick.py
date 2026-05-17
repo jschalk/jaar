@@ -226,19 +226,6 @@ def validate_idea_columns(
     return df
 
 
-# TODO add fission to keywords, a word used to describe how non-mirror ideas are converted into stable brick_types
-def run_fission_steps(df: pandas_DataFrame, idea_type_config: dict) -> pandas_DataFrame:
-    # for step_name in config.get("fission_steps", []):
-    #     if step_name not in FISSION_STEPS:
-    #         raise ValueError(
-    #             f"run_fission_steps encountered unknown fission step '{step_name}'. "
-    #             f"Registered steps: {list(FISSION_STEPS.keys())}"
-    #         )
-    #     df = FISSION_STEPS[step_name](df, config)
-    # return df
-    pass
-
-
 def ideas_sheets_to_brick_sheets(
     i_src_dir: str, b_src_dir: str, db_max_spark_num: int = None
 ) -> List[Tuple[str, str]]:
