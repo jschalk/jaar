@@ -2,6 +2,7 @@ from ch00_py.dict_toolbox import get_0_if_None
 from ch00_py.file_toolbox import delete_dir, set_dir
 from ch17_brick.brick_db_tool import create_brick_df_from_file, save_sheet
 from ch19_idea_src._ref.ch19_semantic_types import SheetName
+from ch19_idea_src.fission_step import run_fission_steps
 from ch19_idea_src.idea_config import get_idea_config_dict, is_non_mirror
 from dataclasses import dataclass
 from openpyxl import load_workbook
@@ -256,15 +257,10 @@ def ideas_sheets_to_brick_sheets(
         dst_path = os_path_join(b_src_dir, idea_sheet_ref.src_filename)
         idea_df = create_brick_df_from_file(src_path, idea_sheet_ref.src_sheet_name)
         set_spark_num_column(idea_df, spark_face_spark_nums)
-        # if fission:
         if is_non_mirror(idea_sheet_ref.src_idea_type):
             idea_type_config = idea_config_dict.get(idea_sheet_ref.src_idea_type)
-            # prit(f"non_mirror {idea_sheet_ref.src_idea_type=}")
-            # prit(f"non_mirror {idea_type_config=}")
-
-            # add fission_steps
-            # TODO check all columns exist
-            # run all fision_steps
+            x_fission_steps = idea_type_config.get("fission_steps")
+            idea_df = run_fission_steps(idea_df, x_fission_steps)
         save_sheet(dst_path, idea_sheet_ref.dst_sheet_name, idea_df, False)
 
     delete_dir(i_src_dir)

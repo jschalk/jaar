@@ -635,57 +635,56 @@ def test_ideas_sheets_to_brick_sheets_Scenario6_src_num_Exists(
     assert df[kw.spark_num].min() == 1
 
 
-# TODO reactivate once fission_steps has been tested
-# def test_ideas_sheets_to_brick_sheets_Scenario7_non_mirror_ii00502(
-#     tmp_path: Path,
-# ):
-#     # "description": "And pledge column and missing ancestor ropes (new rows will only have jkeys populated, jvalues will be null.)"
-#     # ESTABLISH
-#     idea_dir = tmp_path / kw.idea
-#     idea_dir.mkdir()
-#     b_src_dir = tmp_path / "bricks"
-#     b_src_dir.mkdir()
+def test_ideas_sheets_to_brick_sheets_Scenario7_non_mirror_ii00502(
+    tmp_path: Path,
+):
+    # "description": "And pledge column and missing ancestor ropes (new rows will only have jkeys populated, jvalues will be null.)"
+    # ESTABLISH
+    idea_dir = tmp_path / kw.idea
+    idea_dir.mkdir()
+    b_src_dir = tmp_path / "bricks"
+    b_src_dir.mkdir()
 
-#     wb = openpyxl_Workbook()
-#     ws1 = wb.active
-#     src_ii00502_sheetname = "ii00502_example"
-#     dst_brick_sheetname = 'bk00002_example'
-#     ws1.title = src_ii00502_sheetname
-#     clean_rope = create_rope(exx.a23, exx.clean)
-#     mop_rope = create_rope(clean_rope, exx.mop)
-#     star2 = 2
-#     ii00502_columns = [
-#         kw.spark_face,
-#         kw.moment_rope,
-#         kw.person_name,
-#         kw.plan_rope,
-#         kw.star,
-#         kw.knot,
-#     ]
-#     ws1.append(ii00502_columns)
-#     ws1.append([exx.sue, exx.a23, exx.yao, mop_rope, star2, ";"])
-#     example_filename = "example6_file.xlsx"
-#     idea_example_path = idea_dir / example_filename
-#     wb.save(idea_example_path)
-#     assert count_dirs_files(idea_dir) == 1
-#     assert count_dirs_files(b_src_dir) == 0
-#     # WHEN
-#     ideas_sheets_to_brick_sheets(idea_dir, b_src_dir)
-#     # THEN
-#     assert count_dirs_files(idea_dir) == 0
-#     assert count_dirs_files(b_src_dir) == 1
-#     brick_allsales_path = b_src_dir / example_filename
-#     df = pandas_read_excel(brick_allsales_path, sheet_name=dst_brick_sheetname)
-#     df_columns = list(df.columns.array)
-#     print(f"{df_columns=}")
-#     assert df_columns == [
-#         kw.spark_num,
-#         kw.spark_face,
-#         kw.moment_rope,
-#         kw.person_name,
-#         kw.plan_rope,
-#         kw.star,
-#         kw.pledge,
-#         kw.knot,
-#     ]
-#     assert len(df) == 3
+    wb = openpyxl_Workbook()
+    ws1 = wb.active
+    src_ii00502_sheetname = "ii00502_example"
+    dst_brick_sheetname = 'bk00002_example'
+    ws1.title = src_ii00502_sheetname
+    clean_rope = create_rope(exx.a23, exx.clean)
+    mop_rope = create_rope(clean_rope, exx.mop)
+    star2 = 2
+    ii00502_columns = [
+        kw.spark_face,
+        kw.moment_rope,
+        kw.person_name,
+        kw.plan_rope,
+        kw.star,
+        kw.knot,
+    ]
+    ws1.append(ii00502_columns)
+    ws1.append([exx.sue, exx.a23, exx.yao, mop_rope, star2, ";"])
+    example_filename = "example6_file.xlsx"
+    idea_example_path = idea_dir / example_filename
+    wb.save(idea_example_path)
+    assert count_dirs_files(idea_dir) == 1
+    assert count_dirs_files(b_src_dir) == 0
+    # WHEN
+    ideas_sheets_to_brick_sheets(idea_dir, b_src_dir)
+    # THEN
+    assert count_dirs_files(idea_dir) == 0
+    assert count_dirs_files(b_src_dir) == 1
+    brick_allsales_path = b_src_dir / example_filename
+    df = pandas_read_excel(brick_allsales_path, sheet_name=dst_brick_sheetname)
+    df_columns = list(df.columns.array)
+    print(f"{df_columns=}")
+    assert df_columns == [
+        kw.spark_num,
+        kw.spark_face,
+        kw.moment_rope,
+        kw.person_name,
+        kw.plan_rope,
+        kw.star,
+        kw.pledge,
+        kw.knot,
+    ]
+    assert len(df) == 3
