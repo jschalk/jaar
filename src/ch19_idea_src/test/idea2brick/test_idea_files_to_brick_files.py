@@ -17,7 +17,7 @@ from ch99_glossary.ch_keyword import Ch19Keywords as kw, ExampleStrs as exx
 from openpyxl import Workbook as openpyxl_Workbook
 from os.path import join as os_path_join
 from pandas import (
-    DataFrame as pandas_DataFrame,
+    DataFrame,
     ExcelWriter as pandas_ExcelWriter,
     isna as pandas_isna,
     read_excel as pandas_read_excel,
@@ -36,7 +36,7 @@ def test_IdeaBook_Exists():
 
 def test_get_spark_faces_from_df_ReturnsObj_Scenario0_Basic():
     # ESTABLISH
-    df = pandas_DataFrame({kw.spark_face: ["a", "b", "a", "c"]})
+    df = DataFrame({kw.spark_face: ["a", "b", "a", "c"]})
     # WHEN
     result = get_spark_faces_from_df(df)
     # THEN
@@ -45,7 +45,7 @@ def test_get_spark_faces_from_df_ReturnsObj_Scenario0_Basic():
 
 def test_get_spark_faces_from_df_ReturnsObj_Scenario1_excludes_nulls():
     # ESTABLISH
-    df = pandas_DataFrame({kw.spark_face: ["a", None, "b", float("nan")]})
+    df = DataFrame({kw.spark_face: ["a", None, "b", float("nan")]})
     # WHEN
     result = get_spark_faces_from_df(df)
     # THEN
@@ -54,7 +54,7 @@ def test_get_spark_faces_from_df_ReturnsObj_Scenario1_excludes_nulls():
 
 def test_get_spark_faces_from_df_ReturnsObj_Scenario2_MissingColumnReturnsEmptySet():
     # ESTABLISH
-    df = pandas_DataFrame({"other_col": [1, 2, 3]})
+    df = DataFrame({"other_col": [1, 2, 3]})
     # WHEN
     result = get_spark_faces_from_df(df)
     # THEN
@@ -66,8 +66,8 @@ def test_get_spark_faces_from_files_ReturnsObj_Scenario0_Multiple_files(tmp_path
     file1 = tmp_path / "file1.xlsx"
     file2 = tmp_path / "file2.xlsx"
 
-    df1 = pandas_DataFrame({kw.spark_face: ["a", "b"]})
-    df2 = pandas_DataFrame({kw.spark_face: ["b", "c"]})
+    df1 = DataFrame({kw.spark_face: ["a", "b"]})
+    df2 = DataFrame({kw.spark_face: ["b", "c"]})
 
     df1.to_excel(file1, index=False)
     df2.to_excel(file2, index=False)
@@ -81,8 +81,8 @@ def test_get_spark_faces_from_files_ReturnsObj_Scenario1_Multiple_sheets(tmp_pat
     # ESTABLISH
     file1 = tmp_path / "file1.xlsx"
 
-    df1 = pandas_DataFrame({kw.spark_face: ["a"]})
-    df2 = pandas_DataFrame({kw.spark_face: [exx.sue]})
+    df1 = DataFrame({kw.spark_face: ["a"]})
+    df2 = DataFrame({kw.spark_face: [exx.sue]})
 
     with pandas_ExcelWriter(file1) as writer:
         df1.to_excel(writer, sheet_name="Sheet1", index=False)
@@ -97,8 +97,8 @@ def test_get_spark_faces_from_files_ReturnsObj_Scenario2_IgnoresMissingColumn(tm
     # ESTABLISH
     file1 = tmp_path / "file1.xlsx"
 
-    df1 = pandas_DataFrame({kw.spark_face: ["a"]})
-    df2 = pandas_DataFrame({"other": [1, 2]})  # no spark_face column
+    df1 = DataFrame({kw.spark_face: ["a"]})
+    df2 = DataFrame({"other": [1, 2]})  # no spark_face column
 
     with pandas_ExcelWriter(file1) as writer:
         df1.to_excel(writer, sheet_name="Sheet1", index=False)
@@ -113,8 +113,8 @@ def test_get_max_spark_num_from_files_ReturnsObj_Scenario0_MultipleFiles(tmp_pat
     # ESTABLISH
     file1 = tmp_path / "file1.xlsx"
     file2 = tmp_path / "file2.xlsx"
-    df1 = pandas_DataFrame({kw.spark_num: [1, 2, 3]})
-    df2 = pandas_DataFrame({kw.spark_num: [4, 5]})
+    df1 = DataFrame({kw.spark_num: [1, 2, 3]})
+    df2 = DataFrame({kw.spark_num: [4, 5]})
     df1.to_excel(file1, index=False)
     df2.to_excel(file2, index=False)
     # WHEN
@@ -128,7 +128,7 @@ def test_get_max_spark_num_from_files_ReturnsObj_Scenario1_IgnoresInvalidAndConv
 ):
     # ESTABLISH
     file1 = tmp_path / "file1.xlsx"
-    df = pandas_DataFrame({kw.spark_num: ["10", "bad", None, 7.9]})  # 7.9 -> 7
+    df = DataFrame({kw.spark_num: ["10", "bad", None, 7.9]})  # 7.9 -> 7
     df.to_excel(file1, index=False)
     # WHEN
     result = get_max_spark_num_from_files(tmp_path)
@@ -141,9 +141,9 @@ def test_get_max_spark_num_from_files_ReturnsObj_Scenario2_MultipleSheetsAndMiss
 ):
     # ESTABLISH
     file1 = tmp_path / "file1.xlsx"
-    df1 = pandas_DataFrame({kw.spark_num: [1, 20]})
-    df2 = pandas_DataFrame({"other": [100, 200]})  # no spark_num
-    df3 = pandas_DataFrame({kw.spark_num: [15]})
+    df1 = DataFrame({kw.spark_num: [1, 20]})
+    df2 = DataFrame({"other": [100, 200]})  # no spark_num
+    df3 = DataFrame({kw.spark_num: [15]})
     with pandas_ExcelWriter(file1) as writer:
         df1.to_excel(writer, sheet_name="Sheet1", index=False)
         df2.to_excel(writer, sheet_name="Sheet2", index=False)
@@ -186,7 +186,7 @@ def test_create_spark_face_spark_nums_ReturnsObj_Scenario2_No_max_spark_num():
 
 def test_set_spark_num_column_SetsAttr_Scenario0_Add_spark_num_Basic():
     # ESTABLISH
-    df = pandas_DataFrame({kw.spark_face: ["a", "b", "c"]})
+    df = DataFrame({kw.spark_face: ["a", "b", "c"]})
     mapping = {"a": 1, "b": 2, "c": 3}
     # WHEN
     set_spark_num_column(df, mapping)
@@ -197,7 +197,7 @@ def test_set_spark_num_column_SetsAttr_Scenario0_Add_spark_num_Basic():
 
 def test_set_spark_num_column_SetsAttr_Scenario1_MissingSparkFaceSets_nan():
     # ESTABLISH
-    df = pandas_DataFrame({kw.spark_face: ["a", "b", "x"]})
+    df = DataFrame({kw.spark_face: ["a", "b", "x"]})
     mapping = {"a": 1, "b": 2}
     # WHEN
     set_spark_num_column(df, mapping)
@@ -208,7 +208,7 @@ def test_set_spark_num_column_SetsAttr_Scenario1_MissingSparkFaceSets_nan():
 
 def test_set_spark_num_column_SetsAttr_Scenario0_MutatesOriginalDataframe():
     # ESTABLISH
-    df = pandas_DataFrame({kw.spark_face: ["a", "b"]})
+    df = DataFrame({kw.spark_face: ["a", "b"]})
     mapping = {"a": 1, "b": 2}
     assert kw.spark_num not in df.columns
     # WHEN
@@ -384,7 +384,7 @@ def test_set_dst_attrs_SetsAttr_Scenario0_Set_False():
 
 
 def create_df(**kwargs):
-    return pandas_DataFrame({**kwargs})
+    return DataFrame({**kwargs})
 
 
 def test_validate_idea_columns_ReturnsDf_Scenario01_ReturnsDataframeWhenAllColumnsPresent():

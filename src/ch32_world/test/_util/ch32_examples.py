@@ -2,10 +2,10 @@ from ch04_rope.rope import create_rope, create_rope_from_labels as init_rope
 from ch07_person_logic.person_main import PersonUnit, personunit_shop
 from ch13_time.epoch_main import add_epoch_planunit
 from ch99_glossary.ch_keyword import Ch32Keywords as kw, ExampleStrs as exx
-from pandas import DataFrame as pandas_DataFrame
+from pandas import DataFrame
 
 
-def bk00002_example() -> pandas_DataFrame:
+def bk00002_example() -> DataFrame:
     """All rows valid. pledge=True throughout. Covers varied names."""
 
     hr_mop = init_rope(["herenow_red", "family", exx.casa, exx.clean, exx.mop])
@@ -30,4 +30,4 @@ def bk00002_example() -> pandas_DataFrame:
         kw.star,
         kw.pledge,
     ]
-    return pandas_DataFrame(data, columns=cols)
+    return DataFrame(data, columns=cols)

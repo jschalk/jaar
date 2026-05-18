@@ -417,6 +417,7 @@
   "otx_rope": ", TRANSLATE_ROPE arg", 
   "otx_time": ", nabu arg", 
   "otx_title": ", TRANSLATE_TITLE arg", 
+  "pandas_DataFrame": "Not used in codebase. Added as keyword it is confirmed never to appear.", 
   "parent_heir_active": ", Reason thinkout", 
   "parent_rope": "A parent_rope of rope is created by removing the last label. For PlanUnits the parent_rope is the key for their parent PlanUnit.", 
   "parent_solo": "The parent PlanUnit's LaborUnit's solo value for that labor_title", 

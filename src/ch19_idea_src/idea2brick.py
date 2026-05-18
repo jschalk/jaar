@@ -8,7 +8,7 @@ from openpyxl import load_workbook
 from os import listdir as os_listdir
 from os.path import join as os_path_join
 from pandas import (
-    DataFrame as pandas_DataFrame,
+    DataFrame,
     read_excel as pandas_read_excel,
     to_numeric as pandas_to_numeric,
 )
@@ -19,10 +19,10 @@ from typing import List, Tuple
 
 @dataclass
 class IdeaBook:
-    ideas: dict[str, pandas_DataFrame] = None
+    ideas: dict[str, DataFrame] = None
 
 
-def get_spark_faces_from_df(df: pandas_DataFrame) -> set:
+def get_spark_faces_from_df(df: DataFrame) -> set:
     """
     Returns a set of distinct values from the 'spark_face' column.
     NaN values are excluded.
@@ -84,7 +84,7 @@ def get_max_spark_num_from_files(directory) -> int | None:
     return max_val
 
 
-def get_max_spark_num_from_df(df: pandas_DataFrame, max_val: int) -> int:
+def get_max_spark_num_from_df(df: DataFrame, max_val: int) -> int:
     if "spark_num" not in df.columns:
         return max_val
 
@@ -112,16 +112,16 @@ def create_spark_face_spark_nums(
     }
 
 
-def set_spark_num_column(df: pandas_DataFrame, spark_face_spark_nums: dict[str, int]):
+def set_spark_num_column(df: DataFrame, spark_face_spark_nums: dict[str, int]):
     """
     Adds 'spark_num' as the first column based on 'spark_face' values.
-    - mutates original pandas_DataFrame (does not create new df)
+    - mutates original DataFrame (does not create new df)
     """
     if "spark_num" in df.columns:
         df.drop(columns=["spark_num"], inplace=True)
 
     if "spark_face" not in df.columns:
-        # raise ValueError("Column 'spark_face' not found in pandas_DataFrame")
+        # raise ValueError("Column 'spark_face' not found in DataFrame")
         return
     spark_num_series = df["spark_face"].map(spark_face_spark_nums)
 
@@ -209,9 +209,9 @@ def get_spark_face_spark_nums_from_dir(
 
 
 def validate_idea_columns(
-    df: pandas_DataFrame, config: dict, strict: bool
-) -> pandas_DataFrame | None:
-    """Validates that the pandas_DataFrame contains all columns defined in config src_columns.
+    df: DataFrame, config: dict, strict: bool
+) -> DataFrame | None:
+    """Validates that the DataFrame contains all columns defined in config src_columns.
     Raises ValueError if strict, returns None if not."""
     expected = set(config.get("src_columns", []))
     missing = expected - set(df.columns)

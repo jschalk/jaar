@@ -9,12 +9,12 @@ from ch19_idea_src.fission_step import (
     run_fission_steps,
 )
 from ch99_glossary.ch_keyword import Ch19Keywords as kw, ExampleStrs as exx
-from pandas import DataFrame as pandas_DataFrame, testing as pandas_testing
+from pandas import DataFrame, testing as pandas_testing
 from pytest import raises as pytest_raises
 
 
-def make_df(**kwargs) -> pandas_DataFrame:
-    return pandas_DataFrame({**kwargs})
+def make_df(**kwargs) -> DataFrame:
+    return DataFrame({**kwargs})
 
 
 def test_fission_add_ancestor_rope_rows_ReturnsDf_Scenario01_AddsAllAncestorsForSingleRope():
@@ -124,7 +124,7 @@ def test_fission_add_ancestor_rope_rows_ReturnsDf_Scenario09_OtherColumnsAreCopi
 
 def test_fission_add_ancestor_rope_rows_ReturnsDf_Scenario10_EmptyDataframeReturnsEmpty():
     # ESTABLISH
-    df = pandas_DataFrame(columns=["plan_rope", "pledge", "person_name"])
+    df = DataFrame(columns=["plan_rope", "pledge", "person_name"])
     # WHEN
     result = fission_add_ancestor_rope_rows(df)
     # THEN
@@ -179,7 +179,7 @@ def test_fission_set_pledge_to_one_ReturnsDf_Scenario05_DoesNotMutateInputDf():
 
 def test_fission_set_pledge_to_one_ReturnsDf_Scenario06_EmptyDataframeReturnsPledgeColumn():
     # ESTABLISH
-    df = pandas_DataFrame(columns=["person_name"])
+    df = DataFrame(columns=["person_name"])
     # WHEN
     result = fission_set_pledge_to_one(df)
     # THEN
@@ -438,7 +438,7 @@ def test_run_fission_steps_ReturnsObj_Scenario00_OutputColumnsMatchBrickSchema()
     ]
 
     ii00502_rows = [[exx.sue, exx.a23, exx.yao, mop_rope, star2, ";"]]
-    ii00502_df = pandas_DataFrame(ii00502_rows, columns=ii00502_columns)
+    ii00502_df = DataFrame(ii00502_rows, columns=ii00502_columns)
     pledge_fission_steps_list = ["fission_set_pledge_to_one"]
     # WHEN
     fissioned_df = run_fission_steps(ii00502_df, pledge_fission_steps_list)
@@ -463,7 +463,7 @@ def test_run_fission_steps_ReturnsObj_Scenario00_OutputColumnsMatchBrickSchema()
         kw.pledge: 1,
         kw.knot: ";",
     }
-    expected_df = pandas_DataFrame([expected_values])
+    expected_df = DataFrame([expected_values])
     assert len(fissioned_df) == 1
     assert fissioned_df[kw.pledge][0] == 1
 
@@ -483,7 +483,7 @@ def test_run_fission_steps_ReturnsObj_Scenario01_OutputAddsRows():
     ]
 
     ii00502_rows = [[exx.sue, exx.a23, exx.yao, mop_rope, star2, ";"]]
-    ii00502_df = pandas_DataFrame(ii00502_rows, columns=ii00502_columns)
+    ii00502_df = DataFrame(ii00502_rows, columns=ii00502_columns)
     pledge_fission_steps_list = [
         "fission_set_pledge_to_one",
         "fission_add_ancestor_rope_rows",
@@ -511,7 +511,7 @@ def test_run_fission_steps_ReturnsObj_Scenario01_OutputAddsRows():
     #     kw.pledge: 1,
     #     kw.knot: ";",
     # }
-    # expected_df = pandas_DataFrame([expected_values])
+    # expected_df = DataFrame([expected_values])
     assert len(fissioned_df) == 3
     assert list(fissioned_df[kw.star]) == [star2, None, None]
     assert list(fissioned_df[kw.pledge]) == [1, 0, 0]

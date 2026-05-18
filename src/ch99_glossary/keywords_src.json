@@ -400,6 +400,7 @@
   "otx_rope": {"sort_ordinal": 143, "valid_ch": "16:"}, 
   "otx_time": {"sort_ordinal": 151, "valid_ch": "15:"}, 
   "otx_title": {"sort_ordinal": 147, "valid_ch": "16:"}, 
+  "pandas_DataFrame": {"valid_ch": ""}, 
   "parent_heir_active": {"sort_ordinal": 189, "valid_ch": "5:"}, 
   "parent_rope": {"valid_ch": "4:"}, 
   "parent_solo": {"valid_ch": "2:"}, 

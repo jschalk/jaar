@@ -129,6 +129,7 @@ def test_get_keg_definitions_ReturnsObj_CheckNoChapter_keywords():
     chapter_descs = get_chapter_descs().keys()
     ch_ints = {get_ch_int(chapter_desc) for chapter_desc in chapter_descs}
     for keyword, kw_config in get_keywords_src_config().items():
+        assert keg_definitions.get(keyword), f"{keyword} missing from keg_definitions"
         assert kw.valid_ch in set(kw_config.keys()), keyword
         valid_chs = parse_valid_ch_str(ch_ints, kw_config.get(kw.valid_ch))
         if not valid_chs:
