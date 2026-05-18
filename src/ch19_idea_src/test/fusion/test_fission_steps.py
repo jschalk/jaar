@@ -5,9 +5,9 @@ from ch19_idea_src.fission_step import (
     fission_set_moment_rope_from_moment_label,
     fission_set_plan_rope_from_health_label,
     fission_set_pledge_to_one,
+    get_all_fission_steps,
     run_fission_steps,
 )
-from ch19_idea_src.idea_config import get_idea_config_dict
 from ch99_glossary.ch_keyword import Ch19Keywords as kw, ExampleStrs as exx
 from pandas import DataFrame as pandas_DataFrame, testing as pandas_testing
 from pytest import raises as pytest_raises
@@ -409,38 +409,109 @@ def test_fission_add_knot_from_rope_ReturnsDf_Scenario08_DoesNotMutateInputDf():
     assert "knot" not in df.columns
 
 
-# TODO reactivate, edit and pass
-# def test_run_fission_steps_ReturnsObj_Scenario00_OutputColumnsMatchBrickSchema():
-#     # ESTABLISH
-#     idea_config_dict = get_idea_config_dict()
-#     ii00502_config = idea_config_dict.get("ii00502")
-#     clean_rope = create_rope(exx.a23, exx.clean)
-#     mop_rope = create_rope(clean_rope, exx.mop)
-#     star2 = 2
-#     ii00502_columns = [
-#         kw.spark_face,
-#         kw.moment_rope,
-#         kw.person_name,
-#         kw.plan_rope,
-#         kw.star,
-#         kw.knot,
-#     ]
+def test_get_all_fission_steps_ReturnsObj():
+    # ESTABLISH / WHEN
+    all_fission_steps = get_all_fission_steps()
+    # THEN
+    expected_all_fission_steps = {
+        "fission_add_knot_from_rope": fission_add_knot_from_rope,
+        "fission_set_moment_rope_from_moment_label": fission_set_moment_rope_from_moment_label,
+        "fission_set_plan_rope_from_health_label": fission_set_plan_rope_from_health_label,
+        "fission_set_pledge_to_one": fission_set_pledge_to_one,
+        "fission_add_ancestor_rope_rows": fission_add_ancestor_rope_rows,
+    }
+    assert all_fission_steps == expected_all_fission_steps
 
-#     ii00502_rows = [[exx.sue, exx.a23, exx.yao, mop_rope, star2, ";"]]
-#     ii00502_df = pandas_DataFrame(ii00502_rows, columns=ii00502_columns)
-#     # WHEN
-#     fissioned_df = run_fission_steps(ii00502_df, ii00502_config)
-#     # THEN
-#     fissioned_columns = list(fissioned_df.columns.array)
-#     print(f"{fissioned_columns=}")
-#     assert fissioned_columns == [
-#         kw.spark_num,
-#         kw.spark_face,
-#         kw.moment_rope,
-#         kw.person_name,
-#         kw.plan_rope,
-#         kw.star,
-#         kw.pledge,
-#         kw.knot,
-#     ]
-#     assert len(fissioned_columns) == 3
+
+def test_run_fission_steps_ReturnsObj_Scenario00_OutputColumnsMatchBrickSchema():
+    # ESTABLISH
+    clean_rope = create_rope(exx.a23, exx.clean)
+    mop_rope = create_rope(clean_rope, exx.mop)
+    star2 = 2
+    ii00502_columns = [
+        kw.spark_face,
+        kw.moment_rope,
+        kw.person_name,
+        kw.plan_rope,
+        kw.star,
+        kw.knot,
+    ]
+
+    ii00502_rows = [[exx.sue, exx.a23, exx.yao, mop_rope, star2, ";"]]
+    ii00502_df = pandas_DataFrame(ii00502_rows, columns=ii00502_columns)
+    pledge_fission_steps_list = ["fission_set_pledge_to_one"]
+    # WHEN
+    fissioned_df = run_fission_steps(ii00502_df, pledge_fission_steps_list)
+    # THEN
+    print(fissioned_df)
+    fissioned_columns = list(fissioned_df.columns.array)
+    assert fissioned_columns == [
+        kw.spark_face,
+        kw.moment_rope,
+        kw.person_name,
+        kw.plan_rope,
+        kw.star,
+        kw.pledge,
+        kw.knot,
+    ]
+    expected_values = {
+        kw.spark_face: exx.sue,
+        kw.moment_rope: exx.a23,
+        kw.person_name: exx.yao,
+        kw.plan_rope: mop_rope,
+        kw.star: 2,
+        kw.pledge: 1,
+        kw.knot: ";",
+    }
+    expected_df = pandas_DataFrame([expected_values])
+    assert len(fissioned_df) == 1
+    assert fissioned_df[kw.pledge][0] == 1
+
+
+def test_run_fission_steps_ReturnsObj_Scenario01_OutputAddsRows():
+    # ESTABLISH
+    clean_rope = create_rope(exx.a23, exx.clean)
+    mop_rope = create_rope(clean_rope, exx.mop)
+    star2 = 2
+    ii00502_columns = [
+        kw.spark_face,
+        kw.moment_rope,
+        kw.person_name,
+        kw.plan_rope,
+        kw.star,
+        kw.knot,
+    ]
+
+    ii00502_rows = [[exx.sue, exx.a23, exx.yao, mop_rope, star2, ";"]]
+    ii00502_df = pandas_DataFrame(ii00502_rows, columns=ii00502_columns)
+    pledge_fission_steps_list = [
+        "fission_set_pledge_to_one",
+        "fission_add_ancestor_rope_rows",
+    ]
+    # WHEN
+    fissioned_df = run_fission_steps(ii00502_df, pledge_fission_steps_list)
+    # THEN
+    print(fissioned_df)
+    fissioned_columns = list(fissioned_df.columns.array)
+    assert fissioned_columns == [
+        kw.spark_face,
+        kw.moment_rope,
+        kw.person_name,
+        kw.plan_rope,
+        kw.star,
+        kw.pledge,
+        kw.knot,
+    ]
+    # expected_values = {
+    #     kw.spark_face: exx.sue,
+    #     kw.moment_rope: exx.a23,
+    #     kw.person_name: exx.yao,
+    #     kw.plan_rope: mop_rope,
+    #     kw.star: star2,
+    #     kw.pledge: 1,
+    #     kw.knot: ";",
+    # }
+    # expected_df = pandas_DataFrame([expected_values])
+    assert len(fissioned_df) == 3
+    assert list(fissioned_df[kw.star]) == [star2, None, None]
+    assert list(fissioned_df[kw.pledge]) == [1, 0, 0]

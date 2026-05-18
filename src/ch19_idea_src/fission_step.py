@@ -1,4 +1,6 @@
 from ch04_rope.rope import default_knot_if_None
+from ch17_brick.brick_dataframe import _sort_dataframe
+from ch99_glossary.sorter import get_keg_elements_sort_order
 from pandas import DataFrame, concat as pandas_concat
 
 
@@ -19,13 +21,9 @@ def fission_add_ancestor_rope_rows(df: DataFrame) -> DataFrame:
             ancestor = knot_str + knot_str.join(segments[:i]) + knot_str
             if ancestor not in existing_ropes:
                 existing_ropes.add(ancestor)
-                new_rows.append(
-                    {
-                        **row.to_dict(),
-                        "plan_rope": ancestor,
-                        "pledge": 0,
-                    }
-                )
+                new_row = {**row.to_dict(), "plan_rope": ancestor, "pledge": 0}
+                new_row["star"] = None
+                new_rows.append(new_row)
 
     if not new_rows:
         return df
@@ -123,15 +121,18 @@ def get_all_fission_steps() -> dict[str,]:
     }
 
 
-# TODO add fission to keywords, a word used to describe how non-mirror ideas are converted into stable brick_types
-def run_fission_steps(df: DataFrame, idea_type_config: dict) -> DataFrame:
-    print(f"{idea_type_config.keys()=}")
-    # for step_name in config.get("fission_steps", []):
-    #     if step_name not in fission_STEPS:
-    #         raise ValueError(
-    #             f"run_fission_steps encountered unknown fission step '{step_name}'. "
-    #             f"Registered steps: {list(fission_STEPS.keys())}"
-    #         )
-    #     df = fission_STEPS[step_name](df, config)
-    # return df
+def run_fission_steps(df: DataFrame, fission_steps: list[str]) -> DataFrame:
+    all_fission_steps = get_all_fission_steps()
+    allowed_fission_steps = set(all_fission_steps.keys())
+    for step_name in fission_steps:
+        if step_name not in allowed_fission_steps:
+            raise ValueError(
+                f"run_fission_steps encountered unknown fission step '{step_name}'. "
+                f"Registered steps: {list(fission_steps.keys())}"
+            )
+        df = all_fission_steps[step_name](df)
+        ke_sorted = get_keg_elements_sort_order()
+        df = df[[c for c in ke_sorted if c in df.columns]]
+        df.reset_index(inplace=True)
+        df.drop(columns=["index"], inplace=True)
     return df

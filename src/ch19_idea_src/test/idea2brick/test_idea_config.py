@@ -1,5 +1,6 @@
 from ch00_py.file_toolbox import create_path
 from ch17_brick.brick_config import get_brick_types
+from ch19_idea_src.fission_step import get_all_fission_steps
 from ch19_idea_src.idea_config import (
     get_idea_config_dict,
     get_idea_types,
@@ -42,14 +43,24 @@ def test_get_idea_config_dict_ReturnsObj_Scenario1_NonMirrored_idea_type_Format(
     non_mirror_idea_types = config_idea_types.difference(mirrored_brick_types)
     assert non_mirror_idea_types
     # Confirm every brick_type is mirrored
+    all_fission_steps = set(get_all_fission_steps().keys())
+    for a_fission_step in sorted(all_fission_steps):
+        print(f"{a_fission_step=}")
     for idea_type in non_mirror_idea_types:
-        print(f""""{idea_type}": """)
+        print(f"""{idea_type=}""")
         assert idea_type in config_idea_types
         config_dict = x_idea_config.get(idea_type)
         config_keys = set(config_dict.keys())
-        assert config_keys == {kw.brick_type, "src_columns", "description"}
+        assert config_keys == {
+            kw.brick_type,
+            "src_columns",
+            "description",
+            "fission_steps",
+        }
         src_columns = config_dict.get("src_columns")
         assert kw.spark_num not in src_columns
+        fission_steps = set(config_dict.get("fission_steps"))
+        assert fission_steps.issubset(all_fission_steps), fission_steps
 
 
 def test_get_idea_types_ReturnsObj():
