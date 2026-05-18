@@ -36,7 +36,7 @@ from ch32_world.world import (
 )
 from ch99_glossary.ch_keyword import Ch32Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists
-from pandas import DataFrame, DataFrame as pandas_DataFrame
+from pandas import DataFrame
 from sqlite3 import Cursor, connect as sqlite3_connect
 
 
@@ -789,7 +789,7 @@ def test_brick_sheets_to_lego_mstr_Scenario1_Creates_job_Files(temp3_fs):
         kw.star,
         kw.pledge,
     ]
-    bk00002_example = pandas_DataFrame(data, columns=cols)
+    bk00002_example = DataFrame(data, columns=cols)
 
     here_wdir = worlddir_shop("HereNow", str(temp3_fs))
     bk00002_example_path = create_path(here_wdir.bricks_src_dir, "example.xlsx")

@@ -17,7 +17,7 @@ from ch32_world.world import (
 from ch99_glossary.ch_keyword import Ch32Keywords as kw, ExampleStrs as exx
 from datetime import datetime
 from os.path import exists as os_path_exists
-from pandas import DataFrame as pandas_DataFrame
+from pandas import DataFrame
 
 
 def test_idea_sheets_to_gcal_day_punchs_SavesFiles_Scenario0_TwoSueReports(
@@ -66,7 +66,7 @@ def test_idea_sheets_to_gcal_day_punchs_SavesFiles_Scenario1_PopulatedSueReport(
         kw.person_name,
         kw.contact_name,
     ]
-    bk00001_df = pandas_DataFrame(bk00001_data, columns=bk00001_cols)
+    bk00001_df = DataFrame(bk00001_data, columns=bk00001_cols)
     # create tasks for sue, yao, others
     bk00002_data = [
         (spark0, exx.bob, exx.zia, exx.hn_red, hr_mop, 1, True),
@@ -84,7 +84,7 @@ def test_idea_sheets_to_gcal_day_punchs_SavesFiles_Scenario1_PopulatedSueReport(
         kw.star,
         kw.pledge,
     ]
-    bk00002_df = pandas_DataFrame(bk00002_data, columns=bk00002_cols)
+    bk00002_df = DataFrame(bk00002_data, columns=bk00002_cols)
     here_wdir = worlddir_shop("HereNow", str(temp3_fs))
     bricks01_path = create_path(here_wdir.bricks_src_dir, "example.xlsx")
     # unrelated to this test
@@ -160,7 +160,7 @@ def test_create_today_punchs_SavesFiles_Scenario0_PopulatedSueReport(
         (spark0, exx.bob, exx.hn_blu, exx.yao, exx.yao),
         (spark0, exx.bob, exx.hn_blu, exx.yao, exx.sue),
     ]
-    bk00001_df = pandas_DataFrame(bk00001_data, columns=bk00001_cols)
+    bk00001_df = DataFrame(bk00001_data, columns=bk00001_cols)
     # create tasks for sue, yao, others
     bk00002_cols = [
         kw.spark_num,
@@ -178,7 +178,7 @@ def test_create_today_punchs_SavesFiles_Scenario0_PopulatedSueReport(
         (spark3, exx.bob, exx.sue, exx.hn_blu, hb_sweep, 3, True),
         (spark4, exx.bob, exx.xio, exx.hn_blu, hb_brush, 1, True),
     ]
-    bk00002_df = pandas_DataFrame(bk00002_data, columns=bk00002_cols)
+    bk00002_df = DataFrame(bk00002_data, columns=bk00002_cols)
     # external_dir = "C:dev/_temp_working_dir"
     here_wdir = worlddir_shop("HereNow", str(temp3_fs))
     bricks01_path = create_path(here_wdir.bricks_src_dir, "example.xlsx")

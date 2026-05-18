@@ -1,55 +1,14 @@
-from ch00_py.dict_toolbox import normalize_obj
-from ch00_py.file_toolbox import create_path, save_json
-from ch07_person_logic.person_config import (
-    get_all_person_calc_args,
-    get_person_calc_args_sqlite_datatype_dict,
-)
-from ch08_person_atom.atom_config import (
-    get_all_person_dimen_delete_keys,
-    get_atom_args_dimen_mapping,
-    get_atom_config_dict,
-    get_person_dimens,
-)
-from ch14_moment.moment_config import (
-    get_moment_args_dimen_mapping,
-    get_moment_config_dict,
-    get_moment_dimens,
-)
-from ch15_nabu.nabu_config import (
-    get_nabu_args,
-    get_nabu_config_dict,
-    get_nabu_dimens,
-    get_nabuable_args,
-)
-from ch16_translate.translate_config import (
-    get_translate_args_dimen_mapping,
-    get_translate_config_dict,
-    get_translate_dimens,
-    get_translateable_args,
-)
-from ch17_brick.brick_config import (
-    BrickFormatsEnum,
-    brick_config_path,
-    get_allowed_curds,
-    get_brick_config_dict,
-    get_brick_dimen_ref,
-    get_brick_format_filename,
-    get_brick_format_filenames,
-    get_brick_sqlite_types,
-    get_brick_types,
-    get_brickref_from_file,
-    get_default_sorted_list,
-    get_dimens_with_brick_element,
-    get_quick_bricks_column_ref,
-)
+from ch00_py.file_toolbox import create_path
+from ch17_brick.brick_config import get_brick_types
+from ch19_idea_src.fission_step import get_all_fission_steps
 from ch19_idea_src.idea_config import (
     get_idea_config_dict,
     get_idea_types,
+    get_non_mirror_idea_types,
     idea_config_path,
+    is_non_mirror,
 )
 from ch99_glossary.ch_keyword import Ch19Keywords as kw
-from ch99_glossary.sorter import get_keg_elements_sort_order
-from copy import copy as copy_copy
 from os import getcwd as os_getcwd
 
 
@@ -84,12 +43,24 @@ def test_get_idea_config_dict_ReturnsObj_Scenario1_NonMirrored_idea_type_Format(
     non_mirror_idea_types = config_idea_types.difference(mirrored_brick_types)
     assert non_mirror_idea_types
     # Confirm every brick_type is mirrored
+    all_fission_steps = set(get_all_fission_steps().keys())
+    for a_fission_step in sorted(all_fission_steps):
+        print(f"{a_fission_step=}")
     for idea_type in non_mirror_idea_types:
-        print(f""""{idea_type}": """)
+        print(f"""{idea_type=}""")
         assert idea_type in config_idea_types
         config_dict = x_idea_config.get(idea_type)
         config_keys = set(config_dict.keys())
-        assert config_keys == {kw.brick_type, "columns", "description"}
+        assert config_keys == {
+            kw.brick_type,
+            "src_columns",
+            "description",
+            "fission_steps",
+        }
+        src_columns = config_dict.get("src_columns")
+        assert kw.spark_num not in src_columns
+        fission_steps = set(config_dict.get("fission_steps"))
+        assert fission_steps.issubset(all_fission_steps), fission_steps
 
 
 def test_get_idea_types_ReturnsObj():
@@ -99,9 +70,29 @@ def test_get_idea_types_ReturnsObj():
     assert idea_types
     x_idea_config = get_idea_config_dict()
     config_idea_types = set(x_idea_config.keys())
-    for config_idea_type in sorted(config_idea_types):
-        print(f""""{config_idea_type}",""")
+    # for config_idea_type in sorted(config_idea_types):
+    #     print(f""""{config_idea_type}",""")
+    print(f"{config_idea_types=}")
     assert idea_types == config_idea_types
+
+
+def test_get_non_mirror_idea_types_ReturnsObj():
+    # ESTABLISH / WHEN
+    non_mirror_idea_types = get_non_mirror_idea_types()
+    # THEN
+    assert non_mirror_idea_types
+    x_idea_config = get_idea_config_dict()
+    config_idea_types = set(x_idea_config.keys())
+    mirrored_brick_types = {bt.replace(kw.bk, kw.ii) for bt in get_brick_types()}
+    # THEN
+    expected_non_mirror_idea_types = config_idea_types.difference(mirrored_brick_types)
+    assert non_mirror_idea_types == expected_non_mirror_idea_types
+
+
+def test_is_non_mirror_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert is_non_mirror("ii00502")
+    assert not is_non_mirror("ii00173")
 
 
 # def get_brick_categorys():

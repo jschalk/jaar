@@ -69,11 +69,12 @@ def test_Chapters_CheckStringMetricsFromEveryFile():
         "set_knot",
         "set_otx2inx",  # used in Nabu/Translate
         "to_dict",  # used to return class custom dictionary, usually for json file storage
-        '_state_path',  # exists in app and must be recreated in tests
-        '_load_state',  # exists in app and must be recreated in tests
-        '_on_close',  # exists in app and must be recreated in tests
-        '_save_state',  # exists in app and must be recreated in tests
-        '_print_punch_text',  # exists in app and must be recreated in tests
+        # "_run",  # exists in etl app and used in pip install tests
+        '_state_path',  # exists in etl app and must be recreated in tests
+        '_load_state',  # exists in etl app and must be recreated in tests
+        '_on_close',  # exists in etl app and must be recreated in tests
+        '_save_state',  # exists in etl app and must be recreated in tests
+        '_print_punch_text',  # exists in etl app and must be recreated in tests
     }
 
     # WHEN

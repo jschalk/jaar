@@ -117,7 +117,5 @@ def resave_chapter_and_keyword_json_files():
     # save_json(keywords_src_json_path, None, open_json(keywords_src_json_path))
     save_json(ex_strs_json_path, None, open_json(ex_strs_json_path))
     rebuild_keg_definitions_contents()
-    # TODO create rebuild_keg_ranking
     rebuild_keg_rank_json()
-    # TODO change rebuild_keg_exam_questions so it references keg_ranking
     rebuild_keg_exam_questions()

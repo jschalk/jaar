@@ -22,7 +22,7 @@ from ch32_world.world import worlddir_shop
 from dataclasses import dataclass
 from io import StringIO
 from pandas import (
-    DataFrame as pandas_DataFrame,
+    DataFrame,
     ExcelWriter as pandas_ExcelWriter,
     read_csv as pandas_read_csv,
     read_excel as pandas_read_excel,
