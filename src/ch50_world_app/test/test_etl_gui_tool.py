@@ -12,6 +12,7 @@ from ch50_world_app.w1_tool import (
     create_simple_2m2p5pledges_idea_file,
     get_option_table_options,
 )
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 
 
 def test_get_option_table_options_ReturnsObj():
@@ -26,16 +27,16 @@ def test_get_option_table_options_ReturnsObj():
     # expected_keys = {func_desc00, func_desc01, func_desc02, func_desc03, func_desc04}
     # assert set(result.keys()) == expected_keys
     expected_func_objs = {
-        create_simple_1m2p2pledges_idea_file,
-        create_simple_1m2p5pledges_idea_file,
-        create_simple_2m2p5pledges_idea_file,
-        create_emmanuel_lovemaking_idea_file,
-        create_five_time_config_file,
-        create_elpaso_time_config_file,
-        create_emmanuel_idea_file,
-        create_example_moment_ledger_file,
-        create_example_moment_budget_file,
-        create_monopoly_idea_file,
+        create_simple_1m2p2pledges_idea_file: 2,
+        create_simple_1m2p5pledges_idea_file: 0,
+        create_simple_2m2p5pledges_idea_file: 0,
+        create_emmanuel_lovemaking_idea_file: 0,
+        create_five_time_config_file: 0,
+        create_elpaso_time_config_file: 0,
+        create_emmanuel_idea_file: 0,
+        create_example_moment_ledger_file: 0,
+        create_example_moment_budget_file: 0,
+        create_monopoly_idea_file: 0,
     }
 
     for func_desc, func_obj in result.items():
@@ -54,7 +55,7 @@ def test_get_option_table_options_ReturnsObj():
 def test_create_simple_1m2p2pledges_idea_csvs_ReturnsObj(temp3_fs):
     # ESTABLISH / WHEN
     print(f" {str(temp3_fs)=}")
-    idea_csvs = create_simple_1m2p2pledges_idea_csvs()
+    idea_csvs = create_simple_1m2p2pledges_idea_csvs(exx.sue, exx.yao)
 
     # THEN
     assert idea_csvs

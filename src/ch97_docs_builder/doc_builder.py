@@ -89,20 +89,6 @@ def save_brick_formats_md(dest_dir: str):
     save_file(dest_dir, "brick_formats.md", brick_formats_md)
 
 
-def get_rebuilt_keywords_src_config() -> dict:
-    keywords_src_config = get_keywords_src_config()
-    rebuilt_keywords_src_config = {}
-    for keyword, kw_config in keywords_src_config.items():
-        new_kw_config = {"valid_ch": kw_config.get("valid_ch")}
-        if kw_config.get("semantic_type"):
-            new_kw_config["semantic_type"] = kw_config.get("semantic_type")
-        rebuilt_keywords_src_config[keyword] = new_kw_config
-
-    for sort_index, sorting_keyword in enumerate(get_keg_elements_sort_order()):
-        rebuilt_keywords_src_config[sorting_keyword]["sort_ordinal"] = sort_index
-    return rebuilt_keywords_src_config
-
-
 def resave_chapter_and_keyword_json_files():
     for chapter_dir in get_chapter_descs().values():
         json_file_tuples = get_dir_filenames(chapter_dir, {"json"})
@@ -112,7 +98,6 @@ def resave_chapter_and_keyword_json_files():
                 save_json(json_dir, x_filename, open_json(json_dir, x_filename))
     ex_strs_json_path = create_src_example_strs_path("src")
     # keywords_src_json_path = create_src_keywords_src_path("src")
-    # rebuilt_keywords_src_config = get_rebuilt_keywords_src_config()
     # save_json(keywords_src_json_path, None, rebuilt_keywords_src_config)
     # save_json(keywords_src_json_path, None, open_json(keywords_src_json_path))
     save_json(ex_strs_json_path, None, open_json(ex_strs_json_path))

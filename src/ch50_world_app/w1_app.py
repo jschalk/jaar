@@ -67,6 +67,7 @@ class OptionTable(tk_Frame):
         options: dict,
         i_src_dir: str,
         me_personname,
+        you_personname,
         on_select_callback=None,
         **kwargs,
     ):
@@ -74,6 +75,7 @@ class OptionTable(tk_Frame):
         self.options = options
         self.i_src_dir = i_src_dir
         self.me_personname = me_personname
+        self.you_personname = you_personname
         self.on_select_callback = on_select_callback
         self._build()
 
@@ -112,7 +114,8 @@ class OptionTable(tk_Frame):
         description = self.tree.item(selected[0], "values")[0]
         fn = self.options.get(description)
         if callable(fn):
-            fn(self.i_src_dir())  # ← call it to get the current string value
+            # ← call it to get the current string value
+            fn(self.i_src_dir(), self.me_personname(), self.you_personname())
         fill_spark_face_in_directory(self.i_src_dir(), self.me_personname())
         if self.on_select_callback:
             self.on_select_callback()
@@ -680,6 +683,7 @@ class ETLApp(tk_Tk):
             options,
             self._i_src_dir.get,
             self._me_personname.get,
+            self._you_personname.get,
             on_select_callback=refresh_callback,
         )
         table.pack(fill=tk_BOTH, expand=True, padx=10, pady=10)

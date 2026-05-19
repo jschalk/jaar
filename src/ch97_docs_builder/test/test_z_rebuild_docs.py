@@ -1,55 +1,12 @@
-from ch00_py._ref.ch00_path import create_src_keywords_src_path
-from ch00_py.file_toolbox import save_json
-from ch00_py.keyword_class_builder import (
-    get_keywords_src_config,
-    save_keywords_by_chapter_md,
-)
+from ch00_py.keyword_class_builder import save_keywords_by_chapter_md
 from ch97_docs_builder.doc_builder import (
-    get_rebuilt_keywords_src_config,
     resave_chapter_and_keyword_json_files,
     save_brick_formats_md,
     save_brick_mds,
     save_chapter_blurbs_md,
     save_ropeterm_description_md,
 )
-from ch99_glossary.ch_keyword import Ch97Keywords as kw
-from ch99_glossary.sorter import get_keg_elements_sort_order
 from random import random as random_random
-
-
-# TODO consider getting rid of this, it doesn't need to be rebuilt
-def test_recreate_keyword_src_config_Scenario0_Includes_sort_ordinal():
-    # sourcery skip: no-conditionals-in-tests
-    # ESTABLISH
-    keywords_src_config = get_keywords_src_config()
-    expected_clean_keywords_src_config = {}
-    for keyword, kw_config in keywords_src_config.items():
-        new_kw_config = {kw.valid_ch: kw_config.get(kw.valid_ch)}
-        if kw_config.get(kw.semantic_type):
-            new_kw_config[kw.semantic_type] = kw_config.get(kw.semantic_type)
-        expected_clean_keywords_src_config[keyword] = new_kw_config
-
-    for sort_index, sorting_keyword in enumerate(get_keg_elements_sort_order()):
-        expected_clean_keywords_src_config[sorting_keyword]["sort_ordinal"] = sort_index
-
-    # WHEN / THEN
-    # assert get_keywords_src_config() == clean_keywords_src_config
-    assert get_rebuilt_keywords_src_config() == expected_clean_keywords_src_config
-
-    # missing_elements = {
-    #     keyword
-    #     for keyword in get_keg_elements_sort_order()
-    #     if keyword not in keywords_set
-    # }
-    # ch_num = 17
-    # x_count = 0
-    # for missing_element in sorted(missing_elements):
-    #     x_count += 1
-    #     print(
-    #         f""""{missing_element}": {{"question_tier": 0, "valid_ch": "ch{ch_num}"}},"""
-    #     )
-    # print(f"{x_count} elements")
-    # assert set(get_keg_elements_sort_order()).issubset(keywords_set)
 
 
 def test_SpecialTestThatBuildsDocs(rebuild_jsons):
