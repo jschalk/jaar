@@ -1,3 +1,10 @@
+## [0.85.4](https://github.com/jschalk/keg/compare/v0.85.3...v0.85.4) (2026-05-19)
+
+
+### Bug Fixes
+
+* change app so me, you gets passed to example ideas for app ([d92f455](https://github.com/jschalk/keg/commit/d92f455876b96c462ec197a031e675bbbc04b827))
+
 ## [0.85.3](https://github.com/jschalk/keg/compare/v0.85.2...v0.85.3) (2026-05-11)
 
 
