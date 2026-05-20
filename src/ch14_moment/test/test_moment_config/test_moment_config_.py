@@ -9,13 +9,11 @@ from ch14_moment.moment_config import (
     moment_config_path,
 )
 from ch99_glossary.ch_keyword import Ch14Keywords as kw, ExampleStrs as exx
-from os import getcwd as os_getcwd
 
 
 def test_moment_config_path_ReturnsObj_Moment() -> str:
     # ESTABLISH / WHEN / THEN
-    src_dir = create_path(os_getcwd(), "src")
-    chapter_dir = create_path(src_dir, "ch14_moment")
+    chapter_dir = create_path("src", "ch14_moment")
     assert moment_config_path() == create_path(chapter_dir, "moment_config.json")
 
 

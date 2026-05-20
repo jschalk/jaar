@@ -45,7 +45,6 @@ from ch17_brick.brick_config import (
 from ch99_glossary.ch_keyword import Ch17Keywords as kw
 from ch99_glossary.sorter import get_keg_elements_sort_order
 from copy import copy as copy_copy
-from os import getcwd as os_getcwd
 
 
 def test_get_keg_elements_sort_order_ReturnsObj():
@@ -572,8 +571,7 @@ def test_get_allowed_curds_ReturnsObj():
 
 def test_brick_config_path_ReturnsObj_Brick() -> str:
     # ESTABLISH / WHEN / THEN
-    src_dir = create_path(os_getcwd(), "src")
-    chapter_dir = create_path(src_dir, "ch17_brick")
+    chapter_dir = create_path("src", "ch17_brick")
     assert brick_config_path() == create_path(chapter_dir, "brick_config.json")
 
 

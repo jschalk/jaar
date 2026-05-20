@@ -17,7 +17,6 @@ from ch13_time._ref.ch13_semantic_types import (
 )
 from dataclasses import dataclass
 from datetime import datetime, timedelta
-from os import getcwd as os_getcwd
 from re import search as re_search
 from typing import Tuple
 
@@ -170,9 +169,7 @@ def get_epoch_length(epoch_config: dict) -> int:
 
 def epoch_config_path() -> str:
     "Returns path: src/ch13_time/epoch_configs/default_epoch_config.json"
-
-    src_dir = create_path(os_getcwd(), "src")
-    chapter_dir = create_path(src_dir, "ch13_time")
+    chapter_dir = create_path("src", "ch13_time")
     epoch_configs_dir = create_path(chapter_dir, "epoch_configs")
     return create_path(epoch_configs_dir, "default_epoch_config.json")
 

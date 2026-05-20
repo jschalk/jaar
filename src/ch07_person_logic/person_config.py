@@ -1,5 +1,4 @@
 from ch00_py.file_toolbox import create_path, open_json
-from os import getcwd as os_getcwd
 
 
 def max_tree_traverse_default() -> int:
@@ -8,8 +7,7 @@ def max_tree_traverse_default() -> int:
 
 def person_config_path() -> str:
     """src/ch07_person_logic/person_config.json"""
-    src_dir = create_path(os_getcwd(), "src")
-    chapter_dir = create_path(src_dir, "ch07_person_logic")
+    chapter_dir = create_path("src", "ch07_person_logic")
     return create_path(chapter_dir, "person_config.json")
 
 

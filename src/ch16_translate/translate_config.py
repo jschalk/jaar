@@ -1,13 +1,11 @@
 from ch00_py.dict_toolbox import get_from_nested_dict
 from ch00_py.file_toolbox import create_path, open_json
 from ch08_person_atom.atom_config import get_all_person_dimen_delete_keys
-from os import getcwd as os_getcwd
 
 
 def translate_config_path() -> str:
     "Returns path: c16_translate/translate_config.json"
-    src_dir = create_path(os_getcwd(), "src")
-    chapter_dir = create_path(src_dir, "ch16_translate")
+    chapter_dir = create_path("src", "ch16_translate")
     return create_path(chapter_dir, "translate_config.json")
 
 

@@ -10,7 +10,6 @@ from ch17_brick.brick_config import (
     get_default_sorted_list,
 )
 from copy import copy as copy_copy
-from os import getcwd as os_getcwd
 
 ALL_DIMEN_ABBV7 = {
     "MMTPAYY",
@@ -173,8 +172,7 @@ def create_prime_tablename(
 
 def etl_stage_types_config_path() -> str:
     "Returns path: ch18_etl_config/etl_stage_types_config.json"
-    src_dir = create_path(os_getcwd(), "src")
-    chapter_dir = create_path(src_dir, "ch18_etl_config")
+    chapter_dir = create_path("src", "ch18_etl_config")
     return create_path(chapter_dir, "etl_stage_types_config.json")
 
 
@@ -194,8 +192,7 @@ def get_ordered_stage_types() -> list[str]:
 
 def etl_brick_category_config_path() -> str:
     "Returns path: ch18_etl_config/etl_brick_category_config.json"
-    src_dir = create_path(os_getcwd(), "src")
-    chapter_dir = create_path(src_dir, "ch18_etl_config")
+    chapter_dir = create_path("src", "ch18_etl_config")
     return create_path(chapter_dir, "etl_brick_category_config.json")
 
 

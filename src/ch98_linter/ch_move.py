@@ -16,7 +16,6 @@ from os.path import isdir as os_path_isdir
 
 
 def ch_move_main():
-    src_dir = create_path(os_getcwd(), "src")
     src_chxx_str = input("Chapter to move (int): ").strip()
     dst_chxx_str = input("Chapter destina (int): ").strip()
     src_chxx_int = int(src_chxx_str)
@@ -28,30 +27,30 @@ def ch_move_main():
     print(f"Goal is to move {src_chxx_prefix} to {dst_chxx_prefix}")
 
     # Sanity checks
-    dst_chxx_dir_prefix = create_path(src_dir, dst_chxx_prefix)
+    dst_chxx_dir_prefix = create_path("src", dst_chxx_prefix)
     x_prefix_dir = ""
     for prefix_dir in first_level_dirs_with_prefix(dst_chxx_dir_prefix):
         print(f"Try to delete {prefix_dir}")
         delete_if_empty_or_pycache_only(prefix_dir)
 
-    if not os_path_isdir(src_dir):
+    if not os_path_isdir("src"):
         print("Error: directory does not exist.")
         return
 
-    if string_exists_in_filepaths(src_dir, dst_chxx_prefix):
+    if string_exists_in_filepaths("src", dst_chxx_prefix):
         print(f"❌ The new string '{dst_chxx_prefix}' already exists in file paths.")
         return
 
-    if string_exists_in_directory(src_dir, dst_chxx_prefix):
+    if string_exists_in_directory("src", dst_chxx_prefix):
         print(f"❌ The new string '{dst_chxx_prefix}' already exists in file contents.")
         return
 
     # file contents
-    change_ref_json(src_dir, src_chxx_prefix, x_prefix_dir, dst_chxx_int)
+    change_ref_json("src", src_chxx_prefix, x_prefix_dir, dst_chxx_int)
     replace_in_tracked_python_files(src_chxx_prefix, replace_text=dst_chxx_prefix)
     replace_in_tracked_python_files(src_uppercase_chxx, dst_uppercase_chxx)
     # change file paths
-    rename_files_and_dirs_4times(src_dir, src_chxx_prefix, dst_chxx_prefix)
+    rename_files_and_dirs_4times("src", src_chxx_prefix, dst_chxx_prefix)
     print("✅ Replacement complete.")
 
 
