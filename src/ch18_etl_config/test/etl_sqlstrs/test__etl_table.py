@@ -23,7 +23,6 @@ from ch18_etl_config.etl_config import (
     remove_staging_columns,
 )
 from ch99_glossary.ch_keyword import Ch18Keywords as kw
-from os import getcwd as os_getcwd
 
 
 def test_remove_otx_columns_ReturnsObj():
@@ -204,8 +203,7 @@ def test_get_all_dimen_columns_set_ReturnsObj_Scenario1_translate_core_Dimens():
 
 def test_etl_stage_types_config_path_ReturnsObj():
     # ESTABLISH
-    src_dir = create_path(os_getcwd(), "src")
-    chapter_dir = create_path(src_dir, "ch18_etl_config")
+    chapter_dir = create_path("src", "ch18_etl_config")
     # WHEN / THEN
     assert etl_stage_types_config_path() == create_path(
         chapter_dir, "etl_stage_types_config.json"
@@ -298,8 +296,7 @@ def test_get_ordered_stage_types_ReturnsObj():
 
 def test_etl_brick_category_config_path_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    src_dir = create_path(os_getcwd(), "src")
-    chapter_dir = create_path(src_dir, "ch18_etl_config")
+    chapter_dir = create_path("src", "ch18_etl_config")
     assert etl_brick_category_config_path() == create_path(
         chapter_dir, "etl_brick_category_config.json"
     )

@@ -10,7 +10,6 @@ from ch16_translate.translate_config import (
     translate_config_path,
 )
 from ch99_glossary.ch_keyword import Ch16Keywords as kw
-from os import getcwd as os_getcwd
 
 
 def test_get_translate_filename_ReturnsObj():
@@ -20,8 +19,7 @@ def test_get_translate_filename_ReturnsObj():
 
 def test_translate_config_path_ReturnsObj_Translate() -> str:
     # ESTABLISH / WHEN / THEN
-    src_dir = create_path(os_getcwd(), "src")
-    chapter_dir = create_path(src_dir, "ch16_translate")
+    chapter_dir = create_path("src", "ch16_translate")
     assert translate_config_path() == create_path(chapter_dir, "translate_config.json")
 
 

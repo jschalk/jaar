@@ -1,12 +1,10 @@
 from ch00_py.dict_toolbox import get_from_nested_dict
 from ch00_py.file_toolbox import create_path, open_json
-from os import getcwd as os_getcwd
 
 
 def nabu_config_path():
     "Returns path: c15_nabu/nabu_config.json"
-    src_dir = create_path(os_getcwd(), "src")
-    chapter_dir = create_path(src_dir, "ch15_nabu")
+    chapter_dir = create_path("src", "ch15_nabu")
     return create_path(chapter_dir, "nabu_config.json")
 
 

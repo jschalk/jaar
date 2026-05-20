@@ -7,15 +7,12 @@ from ch17_brick.brick_db_tool import (
     get_excel_reader_src_config,
 )
 from ch99_glossary.ch_keyword import Ch17Keywords as kw
-from json import dump as json_dump
 from openpyxl import Workbook
-from os import getcwd as os_getcwd
 
 
 def test_get_excel_reader_config_path_ReturnsObj() -> str:
     # ESTABLISH
-    src_dir = create_path(os_getcwd(), "src")
-    chapter_dir = create_path(src_dir, "ch17_brick")
+    chapter_dir = create_path("src", "ch17_brick")
     # WHEN / THEN
     assert get_excel_reader_config_path() == create_path(
         chapter_dir, "excel_reader.json"

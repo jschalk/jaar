@@ -1,12 +1,10 @@
 from ch00_py.dict_toolbox import get_from_nested_dict
 from ch00_py.file_toolbox import create_path, open_json
-from os import getcwd as os_getcwd
 
 
 def moment_config_path() -> str:
     "Returns Path: a15_moment_logic/moment_config.json"
-    src_dir = create_path(os_getcwd(), "src")
-    chapter_dir = create_path(src_dir, "ch14_moment")
+    chapter_dir = create_path("src", "ch14_moment")
     return create_path(chapter_dir, "moment_config.json")
 
 

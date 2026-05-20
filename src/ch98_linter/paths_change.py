@@ -16,14 +16,3 @@ def paths_change_main():
     if os_path_isdir(src_dir) is False:
         print("Error: directory does not exist.")
         return
-
-    # if string_exists_in_filepaths(src_dir, replace_str):
-    #     print(f"❌ The new string '{replace_str}' already exists in file paths.")
-    #     return
-
-    rename_files_and_dirs_4times(src_dir, find_str, replace_str)
-    print("✅ Replacement complete.")
-
-
-if __name__ == "__main__":
-    paths_change_main()
