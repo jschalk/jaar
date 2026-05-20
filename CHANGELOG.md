@@ -1,3 +1,10 @@
+## [0.85.6](https://github.com/jschalk/keg/compare/v0.85.5...v0.85.6) (2026-05-20)
+
+
+### Bug Fixes
+
+* [#1228](https://github.com/jschalk/keg/issues/1228) update toml file ([e6861b8](https://github.com/jschalk/keg/commit/e6861b8ad808fc6cf47e62ef525275c9c430b97f))
+
 ## [0.85.4](https://github.com/jschalk/keg/compare/v0.85.3...v0.85.4) (2026-05-19)
 
 
