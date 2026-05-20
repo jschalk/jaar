@@ -1,3 +1,10 @@
+## [0.85.8](https://github.com/jschalk/keg/compare/v0.85.7...v0.85.8) (2026-05-20)
+
+
+### Bug Fixes
+
+* [#1228](https://github.com/jschalk/keg/issues/1228), no release for bug fix ([aecb2c1](https://github.com/jschalk/keg/commit/aecb2c17cc602dce9428ce867357593c80ce1a93))
+
 ## [0.85.6](https://github.com/jschalk/keg/compare/v0.85.5...v0.85.6) (2026-05-20)
 
 
