@@ -28,7 +28,7 @@ test = [
 ]
 
 [project.scripts]
-keg2_app = "listen:main"
+keg2_app = "listen:listen_main"
 
 [tool.black]
 line-length = 88
