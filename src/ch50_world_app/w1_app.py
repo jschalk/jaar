@@ -60,6 +60,7 @@ from tkinter import (
 from webbrowser import open as webbrowser_open
 
 
+# idea excel options
 class OptionTable(tk_Frame):
     def __init__(
         self,
