@@ -1,3 +1,10 @@
+## [0.85.10](https://github.com/jschalk/keg/compare/v0.85.9...v0.85.10) (2026-05-21)
+
+
+### Bug Fixes
+
+* [#1228](https://github.com/jschalk/keg/issues/1228) load idea_config.json from package location instead of assuming current working directory ([ac4f578](https://github.com/jschalk/keg/commit/ac4f578916572fcc06660a67fc62e22b30c913a6))
+
 ## [0.85.8](https://github.com/jschalk/keg/compare/v0.85.7...v0.85.8) (2026-05-20)
 
 
