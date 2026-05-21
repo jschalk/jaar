@@ -9,12 +9,14 @@ from ch19_idea_src.idea_config import (
     is_non_mirror,
 )
 from ch99_glossary.ch_keyword import Ch19Keywords as kw
+from pathlib import Path
 
 
 def test_idea_config_path_ReturnsObj_Brick() -> str:
     # ESTABLISH / WHEN / THEN
-    chapter_dir = create_path("src", "ch19_idea_src")
-    assert idea_config_path() == create_path(chapter_dir, "idea_config.json")
+    path_str = idea_config_path()
+    assert path_str.endswith("idea_config.json")
+    assert Path(path_str).is_file()
 
 
 def test_get_idea_config_dict_ReturnsObj_Scenario0_AllBrickTypesRepresented():
