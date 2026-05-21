@@ -46,6 +46,10 @@ line_length = 88
 no_sections = true
 profile = "black"
 
+[tool.pytest.ini_options]
+collect_ignore_glob = ["*/_ref/*"]
+testpaths = ["src", "tests"]
+
 [tool.semantic_release]
 branch = "main"
 build_command = ""
