@@ -154,15 +154,12 @@ def test__generate_brick_dataframe_ReturnsObj():
 def test_brick_FilesExist():
     # ESTABLISH
     brick_format_dir = get_brick_formats_dir()
-
-    # WHEN
-    brick_files = get_dir_file_strs(brick_format_dir, True)
-
-    # THEN
-    brick_filenames = set(brick_files.keys())
-    print(f"{brick_filenames=}")
-    assert brick_filenames == get_brick_format_filenames()
-    assert len(brick_filenames) == len(get_brick_format_filenames())
+    expected_brick_filenames = set(get_dir_file_strs(brick_format_dir, True).keys())
+    print(f"{expected_brick_filenames=}")
+    expected_brick_filenames.remove("__init__")
+    # WHEN / THEN
+    assert expected_brick_filenames == get_brick_format_filenames()
+    assert len(expected_brick_filenames) == len(get_brick_format_filenames())
 
 
 def test_get_brickref_obj_HasAttrs_bk00121_person_contactunit_v0_0_0():
