@@ -62,5 +62,8 @@ version_variable = "keg/__init__.py:__version__"
 package-dir = {"" = "src"}
 py-modules = ["listen"]
 
+[tool.setuptools.package-data]
+ch19_idea_src = ["idea_config.json"]
+
 [tool.setuptools.packages.find]
 where = ["src"]
