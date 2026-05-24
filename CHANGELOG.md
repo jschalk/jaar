@@ -1,3 +1,10 @@
+## [0.86.10](https://github.com/jschalk/keg/compare/v0.86.9...v0.86.10) (2026-05-24)
+
+
+### Bug Fixes
+
+* release epoch config reference error. [#1228](https://github.com/jschalk/keg/issues/1228) ([614f95e](https://github.com/jschalk/keg/commit/614f95e2b72449fe0ef51e553af1dfad8354d771))
+
 ## [0.86.8](https://github.com/jschalk/keg/compare/v0.86.7...v0.86.8) (2026-05-24)
 
 
