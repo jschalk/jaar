@@ -1,3 +1,12 @@
+## [0.86.4](https://github.com/jschalk/keg/compare/v0.86.3...v0.86.4) (2026-05-24)
+
+
+### Bug Fixes
+
+* get rid of warnings by deleting pytest.ini, update pyproject.toml ([4ef9d85](https://github.com/jschalk/keg/commit/4ef9d8571c9c627062bc7c2fcabb184de67ba561))
+* is this requirement to run tests on push? ([0187bf7](https://github.com/jschalk/keg/commit/0187bf7dd51b8ffa1776109d438803a2e0568e29))
+* push runs tests ([a6b7757](https://github.com/jschalk/keg/commit/a6b7757962cb7cf0cdfd87b026cb420dcd5b6ac4))
+
 ## [0.86.2](https://github.com/jschalk/keg/compare/v0.86.1...v0.86.2) (2026-05-24)
 
 
