@@ -54,9 +54,8 @@ def test_create_path_UsesFallback_WhenSrcPathDoesNotExist():
         result = create_path("src", "sh17_fizz")
 
     # THEN it returns a path relative to the caller's module, not src/
-    assert "src" not in pathlib_Path(result).parts or result != os_path_join(
-        "src", "sh17_fizz"
-    )
+    src_sh17_fizz_path = os_path_join("src", "sh17_fizz")
+    assert "src" not in pathlib_Path(result).parts or result != src_sh17_fizz_path
 
 
 def test_create_path_SkipsFallback_WhenNotSrcPath(temp3_dir):
