@@ -124,7 +124,7 @@ def _all_missing() -> list[tuple[str, Path]]:
     _all_missing(),
     ids=lambda p: str(p) if isinstance(p, Path) else p,
 )
-def test_has_init_py(root: str, directory: Path):
+def test_LibraryHasAll_init_py_Files(root: str, directory: Path):
     """Every non-test, non-ref package directory must contain an __init__.py."""
     assert (directory / "__init__.py").exists(), (
         f"Missing __init__.py in '{directory}'\n"
