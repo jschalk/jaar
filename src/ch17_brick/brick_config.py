@@ -8,7 +8,7 @@ from pathlib import Path as pathlib_Path
 
 def brick_config_path() -> str:
     """Returns src\\ch17_brick\\brick_config.json"""
-    return create_path(create_path("src", "ch17_brick"), "brick_config.json")
+    return create_path("src", os_path_join("ch17_brick", "brick_config.json"))
 
 
 def get_brick_config_dict(brick_categorys: set[str] = None) -> dict:

@@ -10,11 +10,12 @@ from ch15_nabu.nabu_config import (
     set_nabuable_otx_inx_args,
 )
 from ch99_glossary.ch_keyword import Ch15Keywords as kw
+from os.path import join as os_path_join
 
 
 def test_nabu_config_path_ReturnsObj_Nabu() -> str:
     # ESTABLISH / WHEN / THEN
-    chapter_dir = create_path("src", "ch15_nabu")
+    chapter_dir = create_path("src", os_path_join("ch15_nabu"))
     assert nabu_config_path() == create_path(chapter_dir, "nabu_config.json")
 
 
