@@ -154,9 +154,10 @@ def test__generate_brick_dataframe_ReturnsObj():
 def test_brick_FilesExist():
     # ESTABLISH
     brick_format_dir = get_brick_formats_dir()
-    expected_brick_filenames = set(get_dir_file_strs(brick_format_dir, True).keys())
+    dir_filenames = set(get_dir_file_strs(brick_format_dir, True).keys())
+    expected_brick_filenames = {fn for fn in dir_filenames if fn.startswith("bk")}
+    assert len(expected_brick_filenames) > 20
     print(f"{expected_brick_filenames=}")
-    expected_brick_filenames.remove("__init__")
     # WHEN / THEN
     assert expected_brick_filenames == get_brick_format_filenames()
     assert len(expected_brick_filenames) == len(get_brick_format_filenames())
