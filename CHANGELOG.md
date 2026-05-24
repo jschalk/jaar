@@ -1,3 +1,10 @@
+## [0.86.6](https://github.com/jschalk/keg/compare/v0.86.5...v0.86.6) (2026-05-24)
+
+
+### Bug Fixes
+
+* add print statement to debug issue with pip installed app unable to reference files. ([a380b15](https://github.com/jschalk/keg/commit/a380b15ada3d7c781e564ec178aa59f481b7af69))
+
 ## [0.86.4](https://github.com/jschalk/keg/compare/v0.86.3...v0.86.4) (2026-05-24)
 
 
