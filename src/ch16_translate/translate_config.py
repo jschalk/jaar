@@ -6,7 +6,7 @@ from os.path import join as os_path_join
 
 def translate_config_path() -> str:
     "Returns path: c16_translate/translate_config.json"
-    return create_path("src", os_path_join("ch16_translate", "translate_config.json"))
+    return create_path("src", "ch16_translate", "translate_config.json")
 
 
 def get_translate_filename() -> str:

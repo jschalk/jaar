@@ -6,7 +6,7 @@ from os.path import join as os_path_join
 
 def atom_config_path() -> str:
     "Returns Path: ch08_person_atom/atom_config.json"
-    return create_path("src", os_path_join("ch08_person_atom", "atom_config.json"))
+    return create_path("src", "ch08_person_atom", "atom_config.json")
 
 
 def get_atom_config_dict() -> dict:

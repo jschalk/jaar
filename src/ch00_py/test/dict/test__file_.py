@@ -51,7 +51,7 @@ def test_create_path_UsesFallback_WhenSrcPathDoesNotExist():
     with mock_patch("ch00_py.file_toolbox.os_path_exists", return_value=False):
 
         # WHEN create_path is called with a src/ path
-        result = create_path("src", os_path_join("sh17_fizz"))
+        result = create_path("src", "sh17_fizz")
 
     # THEN it returns a path relative to the caller's module, not src/
     src_sh17_fizz_path = os_path_join("src", "sh17_fizz")
@@ -75,7 +75,7 @@ def test_create_path_FallbackPathExists_WhenSrcUnavailable():
     with mock_patch("ch00_py.file_toolbox.os_path_exists", return_value=False):
 
         # WHEN create_path is called with this test file's own name
-        result = create_path("src", os_path_join(this_filename))
+        result = create_path("src", this_filename)
 
     # THEN the fallback path must point to an existing file
     assert pathlib_Path(result).exists(), (

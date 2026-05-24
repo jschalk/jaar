@@ -5,7 +5,7 @@ from os.path import join as os_path_join
 
 def moment_config_path() -> str:
     "Returns Path: a15_moment_logic/moment_config.json"
-    return create_path("src", os_path_join("ch14_moment", "moment_config.json"))
+    return create_path("src", "ch14_moment", "moment_config.json")
 
 
 def get_moment_config_dict() -> dict:

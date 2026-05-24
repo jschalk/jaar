@@ -27,7 +27,7 @@ def ch_move_main():
     print(f"Goal is to move {src_chxx_prefix} to {dst_chxx_prefix}")
 
     # Sanity checks
-    dst_chxx_dir_prefix = create_path("src", os_path_join(dst_chxx_prefix))
+    dst_chxx_dir_prefix = create_path("src", dst_chxx_prefix)
     x_prefix_dir = ""
     for prefix_dir in first_level_dirs_with_prefix(dst_chxx_dir_prefix):
         print(f"Try to delete {prefix_dir}")

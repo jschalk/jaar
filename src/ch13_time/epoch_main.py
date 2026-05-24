@@ -170,9 +170,7 @@ def get_epoch_length(epoch_config: dict) -> int:
 
 def epoch_config_path() -> str:
     "Returns path: src/ch13_time/epoch_configs/default_epoch_config.json"
-    return create_path(
-        "src", os_path_join("ch13_time", "epoch_configs", "default_epoch_config.json")
-    )
+    return create_path("src", "ch13_time", "epoch_configs", "default_epoch_config.json")
 
 
 def get_default_epoch_config_dict() -> dict:

@@ -204,9 +204,7 @@ def test_get_all_dimen_columns_set_ReturnsObj_Scenario1_translate_core_Dimens():
 
 def test_etl_stage_types_config_path_ReturnsObj():
     # ESTABLISH
-    expected_path = create_path(
-        "src", os_path_join("ch18_etl_config", "etl_stage_types_config.json")
-    )
+    expected_path = create_path("src", "ch18_etl_config", "etl_stage_types_config.json")
     # WHEN / THEN
     assert etl_stage_types_config_path() == expected_path
 
@@ -298,7 +296,7 @@ def test_get_ordered_stage_types_ReturnsObj():
 def test_etl_brick_category_config_path_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     expected_path = create_path(
-        "src", os_path_join("ch18_etl_config", "etl_brick_category_config.json")
+        "src", "ch18_etl_config", "etl_brick_category_config.json"
     )
     assert etl_brick_category_config_path() == expected_path
 
