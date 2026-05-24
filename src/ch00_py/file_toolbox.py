@@ -40,21 +40,31 @@ def _get_caller_dir() -> pathlib_Path:
     return pathlib_Path(".").resolve()
 
 
-def create_path(x_dir: any, filename: any) -> str:
-    """Create a path by joining two parameters, both converted to strings."""
-    if not x_dir:
-        return f"{filename}" if filename else ""
-    x_dir = str(x_dir)
-    x_dir.replace("\\", "/")
-    path = os_path_join(x_dir, str(filename)) if filename is not None else x_dir
+def create_path(*args) -> str:
+    """Create a path by joining all parameters, all converted to strings."""
+    # GIVEN no args or all empty
+    if not args:
+        return ""
+    cleaned = [str(a) for a in args if a is not None and a != ""]
+    if not cleaned:
+        return ""
+
+    # single arg
+    if len(cleaned) == 1:
+        return cleaned[0]
+
+    path = os_path_join(*cleaned)
 
     if os_path_exists(path):
         return path
 
-    # fallback for pip install environment � only when path starts with src/
-    if x_dir.startswith("src"):
+    # fallback for pip install — only when first part is "src"
+    if cleaned[0] == "src":
         caller_dir = _get_caller_dir()
-        return str(caller_dir / pathlib_Path(str(filename)).name)
+        remaining = cleaned[2:]  # everything after "src/chXX_name"
+        if remaining:
+            return str(caller_dir / os_path_join(*remaining))
+        return str(caller_dir)
 
     return path
 
