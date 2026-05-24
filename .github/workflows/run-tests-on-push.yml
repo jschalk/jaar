@@ -30,6 +30,10 @@ jobs:
           python -m pip install flask
           python -m pip install flask_cors
           python -m pip install compact_json
+      - name: Debug config
+        run: |
+          pwd
+          cat pyproject.toml | grep -A5 "pytest.ini_options"
       - name: Execute tests and generate report
         id: pytest
         run: |
