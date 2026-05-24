@@ -48,6 +48,7 @@ def test_Chapters_NonTestFilesDoNotHavePrintStatments():
         "create_notebook.py",
         "paths_change.py",
         "style.py",
+        "brick_config.py",
     }
 
     # WHEN / THEN

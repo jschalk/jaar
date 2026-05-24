@@ -2,7 +2,7 @@ from ch00_py.db_toolbox import get_sorted_cols_only_list
 from ch00_py.file_toolbox import create_path, get_json_filename, open_json
 from ch99_glossary.sorter import get_keg_elements_sort_order
 from enum import Enum
-from os.path import exists as os_path_exists
+from os.path import exists as os_path_exists, join as os_path_join
 from pathlib import Path as pathlib_Path
 
 
@@ -40,8 +40,10 @@ def get_allowed_curds() -> set[str]:
 
 def get_brick_formats_dir() -> str:
     """src/ch17_brick/brick_formats"""
-    ch_dir = create_path("src", "ch17_brick")
-    return create_path(ch_dir, "brick_formats")
+    result = create_path("src", os_path_join("ch17_brick", "brick_formats"))
+    print(f"\nbrick_formats_dir: {result}")
+    print(f"brick_formats_dir exists: {os_path_exists(result)}")
+    return result
 
 
 def get_default_sorted_list(
@@ -486,7 +488,13 @@ def get_brick_format_headers() -> dict[str, list[str]]:
 
 def get_brickref_from_file(brick_format_filename: str) -> dict:
     brickref_filename = get_json_filename(brick_format_filename)
-    return open_json(get_brick_formats_dir(), brickref_filename)
+    brick_formats_dir = get_brick_formats_dir()
+    full_path = create_path(brick_formats_dir, brickref_filename)
+    print(f"\nbrickref_filename: {brickref_filename}")
+    print(f"brick_formats_dir: {brick_formats_dir}")
+    print(f"full_path: {full_path}")
+    print(f"full_path exists: {os_path_exists(full_path)}")
+    return open_json(brick_formats_dir, brickref_filename)
 
 
 def get_quick_bricks_column_ref() -> dict[str, set[str]]:
