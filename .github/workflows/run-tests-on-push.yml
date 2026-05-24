@@ -1,8 +1,6 @@
 name: run-tests-on-push
 on:
   push:
-    branches:
-      - main
   pull_request:
 
 jobs:
@@ -56,7 +54,7 @@ jobs:
 
   publish:
     needs: run-tests
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       contents: write
