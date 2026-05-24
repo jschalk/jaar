@@ -149,7 +149,7 @@ The internal data model is built around the following object hierarchy:
 ### Development
 
 keg was built using Test-Driven Development. Every feature has a corresponding test. This is mostly a one-man project — Femi has significantly helped.
-
+pip deployment has been a challenge. Hopefully __init__.py file creation gets rid of failed file reference errors. 
 ---
 
 ## Acknowledgements
