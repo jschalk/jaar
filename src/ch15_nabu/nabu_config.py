@@ -4,7 +4,7 @@ from os.path import join as os_path_join
 
 def nabu_config_path():
     "Returns path: c15_nabu/nabu_config.json"
-    return create_path("src", os_path_join("ch15_nabu", "nabu_config.json"))
+    return create_path("src", "ch15_nabu", "nabu_config.json")
 
 
 def get_nabu_config_dict():

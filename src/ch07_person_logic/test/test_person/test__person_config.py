@@ -22,7 +22,7 @@ def test_max_tree_traverse_default_ReturnsObj() -> str:
 
 def test_get_person_config_dict_Exists():
     # ESTABLISH
-    expected_dir = create_path("src", os_path_join("ch07_person_logic"))
+    expected_dir = create_path("src", "ch07_person_logic")
 
     # WHEN
     config_path = person_config_path()

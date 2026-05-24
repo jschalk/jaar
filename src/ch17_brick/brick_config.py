@@ -8,7 +8,7 @@ from pathlib import Path as pathlib_Path
 
 def brick_config_path() -> str:
     """Returns src\\ch17_brick\\brick_config.json"""
-    return create_path("src", os_path_join("ch17_brick", "brick_config.json"))
+    return create_path("src", "ch17_brick", "brick_config.json")
 
 
 def get_brick_config_dict(brick_categorys: set[str] = None) -> dict:
@@ -40,7 +40,7 @@ def get_allowed_curds() -> set[str]:
 
 def get_brick_formats_dir() -> str:
     """src/ch17_brick/brick_formats"""
-    result = create_path("src", os_path_join("ch17_brick", "brick_formats"))
+    result = create_path("src", "ch17_brick", "brick_formats")
     print(f"\nbrick_formats_dir: {result}")
     print(f"brick_formats_dir exists: {os_path_exists(result)}")
     return result

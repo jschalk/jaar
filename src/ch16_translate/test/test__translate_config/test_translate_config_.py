@@ -20,7 +20,7 @@ def test_get_translate_filename_ReturnsObj():
 
 def test_translate_config_path_ReturnsObj_Translate() -> str:
     # ESTABLISH / WHEN / THEN
-    chapter_dir = create_path("src", os_path_join("ch16_translate"))
+    chapter_dir = create_path("src", "ch16_translate")
     assert translate_config_path() == create_path(chapter_dir, "translate_config.json")
 
 

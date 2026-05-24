@@ -173,9 +173,7 @@ def create_prime_tablename(
 
 def etl_stage_types_config_path() -> str:
     "Returns path: ch18_etl_config/etl_stage_types_config.json"
-    return create_path(
-        "src", os_path_join("ch18_etl_config", "etl_stage_types_config.json")
-    )
+    return create_path("src", "ch18_etl_config", "etl_stage_types_config.json")
 
 
 def get_etl_stage_types_config_dict() -> dict:
@@ -194,9 +192,7 @@ def get_ordered_stage_types() -> list[str]:
 
 def etl_brick_category_config_path() -> str:
     "Returns path: ch18_etl_config/etl_brick_category_config.json"
-    return create_path(
-        "src", os_path_join("ch18_etl_config", "etl_brick_category_config.json")
-    )
+    return create_path("src", "ch18_etl_config", "etl_brick_category_config.json")
 
 
 def etl_brick_category_config_dict() -> dict:
