@@ -1,3 +1,10 @@
+## [0.86.8](https://github.com/jschalk/keg/compare/v0.86.7...v0.86.8) (2026-05-24)
+
+
+### Bug Fixes
+
+* create release so this can be tested [#1228](https://github.com/jschalk/keg/issues/1228) ([991ea70](https://github.com/jschalk/keg/commit/991ea70974ea9432d62937180cdf8b6211792659))
+
 ## [0.86.6](https://github.com/jschalk/keg/compare/v0.86.5...v0.86.6) (2026-05-24)
 
 
