@@ -1,8 +1,8 @@
 # Brick Manifest
 
 - [`bk00001`](brick_formats\bk00001.md): spark_num, spark_face, moment_rope, person_name, contact_name
-- [`bk00002`](brick_formats\bk00002.md): spark_num, spark_face, moment_rope, person_name, plan_rope, star, pledge
-- [`bk00005`](brick_formats\bk00005.md): spark_num, spark_face, moment_rope, person_name, plan_rope, reason_context, reason_state, star, pledge
+- [`bk00002`](brick_formats\bk00002.md): spark_num, spark_face, moment_rope, person_name, plan_rope, kar, pledge
+- [`bk00005`](brick_formats\bk00005.md): spark_num, spark_face, moment_rope, person_name, plan_rope, reason_context, reason_state, kar, pledge
 - [`bk00007`](brick_formats\bk00007.md): spark_num, spark_face, moment_rope, person_name, plan_rope, fact_context, fact_state
 - [`bk00100`](brick_formats\bk00100.md): spark_num, spark_face, moment_rope, epoch_label, c400_number, yr1_jan1_offset, monthday_index, fund_grain, mana_grain, respect_grain, knot, job_listen_rotations
 - [`bk00101`](brick_formats\bk00101.md): spark_num, spark_face, moment_rope, person_name, bud_time, knot, quota, celldepth
@@ -21,7 +21,7 @@
 - [`bk00125`](brick_formats\bk00125.md): spark_num, spark_face, person_name, plan_rope, healer_name, knot
 - [`bk00126`](brick_formats\bk00126.md): spark_num, spark_face, person_name, plan_rope, reason_context, reason_state, reason_lower, reason_upper, reason_divisor, knot
 - [`bk00127`](brick_formats\bk00127.md): spark_num, spark_face, person_name, plan_rope, reason_context, active_requisite, knot
-- [`bk00128`](brick_formats\bk00128.md): spark_num, spark_face, person_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, pledge, problem_bool, knot
+- [`bk00128`](brick_formats\bk00128.md): spark_num, spark_face, person_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, kar, pledge, problem_bool, knot
 - [`bk00129`](brick_formats\bk00129.md): spark_num, spark_face, moment_rope, person_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, fund_grain, mana_grain, respect_grain, knot
 - [`bk00136`](brick_formats\bk00136.md): spark_num, spark_face, moment_rope, person_name, plan_rope, healer_name, problem_bool
 - [`bk00142`](brick_formats\bk00142.md): spark_num, spark_face, otx_title, inx_title, otx_knot, inx_knot, unknown_str

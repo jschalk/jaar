@@ -96,7 +96,7 @@ def get_atom_args_obj_types() -> dict[str, str]:
         "problem_bool": "bool",
         "respect_grain": "float",
         "plan_rope": "RopeTerm",
-        "star": "int",
+        "kar": "int",
         "stop_want": "float",
         "solo": "int",
         "take_force": "float",

@@ -33,7 +33,7 @@ def test_PersonUnit_Exists():
     assert x_person.keeps_justified is None
     assert x_person.keeps_buildable is None
     assert x_person.sum_healerunit_plans_fund_total is None
-    assert x_person.offtrack_kids_star_set is None
+    assert x_person.offtrack_kids_kar_set is None
     assert x_person.offtrack_fund is None
     assert x_person.reason_contexts is None
     assert x_person.range_inheritors is None
@@ -47,7 +47,7 @@ def test_PersonUnit_Exists():
         kw.keeps_buildable,
         kw.keeps_justified,
         kw.offtrack_fund,
-        kw.offtrack_kids_star_set,
+        kw.offtrack_kids_kar_set,
         kw.range_inheritors,
         kw.rational,
         kw.reason_contexts,
@@ -126,7 +126,7 @@ def test_personunit_shop_ReturnsObj_Scenario1_WithParameters():
     assert x_person.keeps_justified is False
     assert x_person.keeps_buildable is False
     assert x_person.sum_healerunit_plans_fund_total == 0
-    assert x_person.offtrack_kids_star_set == set()
+    assert x_person.offtrack_kids_kar_set == set()
     assert not x_person.offtrack_fund
     assert x_person.reason_contexts == set()
     assert x_person.range_inheritors == {}

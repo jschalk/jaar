@@ -173,6 +173,7 @@
       "gogo_calc"              : { "calc_by_thinkout": true , "obj_type": "float", "sqlite_datatype": "REAL"    }, 
       "gogo_want"              : { "calc_by_thinkout": false, "obj_type": "float", "sqlite_datatype": "REAL"    }, 
       "healerunit_ratio"       : { "calc_by_thinkout": true , "obj_type": "float", "sqlite_datatype": "REAL"    }, 
+      "kar"                    : { "calc_by_thinkout": false, "obj_type": "int"  , "sqlite_datatype": "INTEGER" }, 
       "knot"                   : { "calc_by_thinkout": false, "obj_type": "float", "sqlite_datatype": "TEXT"    }, 
       "morph"                  : { "calc_by_thinkout": false, "obj_type": "bool" , "sqlite_datatype": "INTEGER" }, 
       "numor"                  : { "calc_by_thinkout": false, "obj_type": "int"  , "sqlite_datatype": "INTEGER" }, 
@@ -181,7 +182,6 @@
       "pledge"                 : { "calc_by_thinkout": false, "obj_type": "bool" , "sqlite_datatype": "INTEGER" }, 
       "problem_bool"           : { "calc_by_thinkout": false, "obj_type": "bool" , "sqlite_datatype": "INTEGER" }, 
       "range_evaluated"        : { "calc_by_thinkout": true , "obj_type": "int"  , "sqlite_datatype": "INTEGER" }, 
-      "star"                   : { "calc_by_thinkout": false, "obj_type": "int"  , "sqlite_datatype": "INTEGER" }, 
       "stop_calc"              : { "calc_by_thinkout": true , "obj_type": "float", "sqlite_datatype": "REAL"    }, 
       "stop_want"              : { "calc_by_thinkout": false, "obj_type": "float", "sqlite_datatype": "REAL"    }, 
       "tree_level"             : { "calc_by_thinkout": true , "obj_type": "int"  , "sqlite_datatype": "INTEGER" }

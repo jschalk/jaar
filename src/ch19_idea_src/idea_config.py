@@ -1,10 +1,15 @@
-from ch00_py.file_toolbox import open_json
+from ch00_py.file_toolbox import create_path, open_json
 from importlib.resources import as_file, files
+from os.path import exists as os_path_exists
 from pathlib import Path
 
 
 def idea_config_path() -> str:
     "Returns path: ch19_idea_src/idea_config.json"
+    cwd_path = create_path(create_path("src", "ch19_idea_src"), "idea_config.json")
+    if os_path_exists(cwd_path):
+        return cwd_path
+
     module_dir = Path(__file__).resolve().parent
     candidate_path = module_dir / "idea_config.json"
     if candidate_path.exists():
@@ -19,7 +24,7 @@ def idea_config_path() -> str:
         pass
 
     raise FileNotFoundError(
-        f"Missing idea_config.json from package resources or module path: {candidate_path}"
+        f"Missing idea_config.json from cwd, package resources, or module path: {candidate_path}"
     )
 
 

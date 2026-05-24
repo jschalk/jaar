@@ -81,7 +81,7 @@ class RangedFactPlanError(Exception):
 
 @dataclass
 class PlanAttrHolder:
-    star: int = None
+    kar: int = None
     plan_uid: int = None
     reason: ReasonUnit = None
     reason_context: RopeTerm = None
@@ -125,7 +125,7 @@ class PlanAttrHolder:
 
 
 def planattrholder_shop(
-    star: int = None,
+    kar: int = None,
     plan_uid: int = None,
     reason: ReasonUnit = None,
     reason_context: RopeTerm = None,
@@ -154,7 +154,7 @@ def planattrholder_shop(
     problem_bool: bool = None,
 ) -> PlanAttrHolder:
     return PlanAttrHolder(
-        star=star,
+        kar=kar,
         plan_uid=plan_uid,
         reason=reason,
         reason_context=reason_context,
@@ -204,7 +204,7 @@ class PlanUnit:
     parent_rope : RopeTerm that this plan stems from. Empty string for root plans.
     knot : str Identifier or label for bridging plans.
     optional:
-    star : int weight that is arbitrary used by parent plan to calculated relative importance.
+    kar : int weight that is arbitrary used by parent plan to calculated relative importance.
     kids : dict[LabelTerm, PlanUnit], mapping of child plans by their LabelTerm
     plan_uid : int Unique identifier, forgot how I use this.
     awardunits : dict[GroupTitle, AwardUnit] that describe who funds and who is funded
@@ -250,7 +250,7 @@ class PlanUnit:
     parent_rope: RopeTerm = None
     knot: KnotTerm = None
     kids: dict[LabelTerm,] = None
-    star: int = None
+    kar: int = None
     plan_uid: int = None  # Calculated field?
     awardunits: dict[GroupTitle, AwardUnit] = None
     reasonunits: dict[RopeTerm, ReasonUnit] = None
@@ -578,8 +578,8 @@ class PlanUnit:
         self.factunits = new_factunits
 
     def _set_attrs_to_planunit(self, plan_attr: PlanAttrHolder):
-        if plan_attr.star is not None:
-            self.star = plan_attr.star
+        if plan_attr.kar is not None:
+            self.kar = plan_attr.kar
         if plan_attr.plan_uid is not None:
             self.plan_uid = plan_attr.plan_uid
         if plan_attr.reason is not None:
@@ -755,8 +755,8 @@ class PlanUnit:
     def clear_kids(self):
         self.kids = {}
 
-    def get_kids_star_sum(self) -> float:
-        return sum(x_kid.star for x_kid in self.kids.values())
+    def get_kids_kar_sum(self) -> float:
+        return sum(x_kid.kar for x_kid in self.kids.values())
 
     def set_awardunit(self, awardunit: AwardUnit):
         self.awardunits[awardunit.awardee_title] = awardunit
@@ -933,7 +933,7 @@ class PlanUnit:
     def to_dict(self) -> dict[str, str]:
         """Returns dict that is serializable to JSON."""
 
-        x_dict = {"star": self.star}
+        x_dict = {"kar": self.kar}
 
         if self.plan_label is not None:
             x_dict["plan_label"] = self.plan_label
@@ -1013,7 +1013,7 @@ def planunit_shop(
     plan_uid: int = None,  # Calculated field?
     parent_rope: RopeTerm = None,
     kids: dict = None,
-    star: int = 1,
+    kar: int = 1,
     awardunits: dict[GroupTitle, AwardUnit] = None,
     awardheirs: dict[GroupTitle, AwardHeir] = None,  # Calculated field
     awardlines: dict[GroupTitle, AwardUnit] = None,  # Calculated field
@@ -1057,7 +1057,7 @@ def planunit_shop(
         plan_uid=plan_uid,
         parent_rope=parent_rope,
         kids=get_empty_dict_if_None(kids),
-        star=get_positive_int(star),
+        kar=get_positive_int(kar),
         awardunits=get_empty_dict_if_None(awardunits),
         awardheirs=get_empty_dict_if_None(awardheirs),
         awardlines=get_empty_dict_if_None(awardlines),

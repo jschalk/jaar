@@ -14,7 +14,7 @@ def test_PlanUnit_Exists():
     # WHEN / THEN
     assert x_planunit
     assert x_planunit.kids is None
-    assert x_planunit.star is None
+    assert x_planunit.kar is None
     assert x_planunit.plan_label is None
     assert x_planunit.plan_uid is None
     assert x_planunit.reasonunits is None
@@ -90,7 +90,7 @@ def test_PlanUnit_Exists():
         kw.gogo_want,
         kw.healerunit,
         kw.workforceunit,
-        kw.star,
+        kw.kar,
         kw.morph,
         kw.numor,
         kw.parent_rope,
@@ -138,7 +138,7 @@ def test_planunit_shop_ReturnsObj_Scenario0_WithOneParameter():
     # THEN
     assert x_planunit
     assert x_planunit.kids == {}
-    assert x_planunit.star == 1
+    assert x_planunit.kar == 1
     assert x_planunit.plan_label == exx.casa
     assert not x_planunit.plan_uid
     assert not x_planunit.begin
@@ -175,23 +175,23 @@ def test_planunit_shop_ReturnsObj_Scenario0_WithOneParameter():
     assert x_planunit.healerunit_ratio == 0
 
 
-def test_planunit_shop_ReturnsObj_Scenario1_Allows_starToBeZero():
+def test_planunit_shop_ReturnsObj_Scenario1_Allows_startoBeZero():
     # ESTABLISH
     zero_int = 0
     # WHEN
-    x_planunit = planunit_shop("run", star=zero_int)
+    x_planunit = planunit_shop("run", kar=zero_int)
     # THEN
-    assert x_planunit.star == zero_int
+    assert x_planunit.kar == zero_int
 
 
-def test_planunit_shop_ReturnsObj_Scenario2_ConvertsNegative_starToZero():
+def test_planunit_shop_ReturnsObj_Scenario2_ConvertsNegative_startoZero():
     # ESTABLISH
     negative_int = -4
     # WHEN
-    x_planunit = planunit_shop("run", star=negative_int)
+    x_planunit = planunit_shop("run", kar=negative_int)
     # THEN
     zero_int = 0
-    assert x_planunit.star == zero_int
+    assert x_planunit.kar == zero_int
 
 
 def test_planunit_shop_ReturnsObj_Scenario3_Given_healerunit_Parameter():

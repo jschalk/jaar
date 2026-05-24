@@ -29,14 +29,14 @@ def test_QuestionUnit_Exists():
 
 def test_QuestionUnit_get_question_ReturnsObj_Scenario0():
     # ESTABLISH
-    star_definition = f"{kw.star} is an attribute that represents A."
-    star_questionunit = QuestionUnit(kw.star, star_definition)
+    kar_definition = f"{kw.kar} is an attribute that represents A."
+    kar_questionunit = QuestionUnit(kw.kar, kar_definition)
     # WHEN
-    did_you_read_question_str = star_questionunit.get_question()
+    did_you_read_question_str = kar_questionunit.get_question()
     # THEN
     assert did_you_read_question_str
     expected_did_you_read_question_str = (
-        f"Did you read that the keg_definition of '{kw.star}' is '{star_definition}'."
+        f"Did you read that the keg_definition of '{kw.kar}' is '{kar_definition}'."
     )
     assert did_you_read_question_str == expected_did_you_read_question_str
 
@@ -80,20 +80,20 @@ def test_set_did_you_read_orders_SetAttrs_Scenario0_EmptyList_WhenNoTermsExist()
 
 def test_set_did_you_read_orders_SetAttrs_Scenario1_SingleQuestion_WhenSingleTermProvided():
     # ESTABLISH
-    star_questionunit = QuestionUnit(
-        keg_term=kw.star,
+    kar_questionunit = QuestionUnit(
+        keg_term=kw.kar,
         question_tier=0,
         init_ch=4,
         keg_definition="Used to measure weight of plan",
     )
-    keg_questions = {kw.star: star_questionunit}
-    assert star_questionunit.did_you_read_order is None
+    keg_questions = {kw.kar: kar_questionunit}
+    assert kar_questionunit.did_you_read_order is None
 
     # WHEN
     set_did_you_read_orders(keg_questions)
 
     # THEN
-    assert star_questionunit.did_you_read_order == 0
+    assert kar_questionunit.did_you_read_order == 0
 
 
 def test_set_did_you_read_orders_SetAttrs_Scenario2_AssignsSequentialOrder():

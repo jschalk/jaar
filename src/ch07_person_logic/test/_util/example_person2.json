@@ -268,6 +268,7 @@
       }
     }
   }, 
+  "kar": 1, 
   "knot": ";", 
   "mana_grain": 1, 
   "max_tree_traverse": 20, 
@@ -295,16 +296,21 @@
         "fact_upper": 1064130373
       }
     }, 
+    "kar": 1, 
     "kids": {
       "ACME": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
           "ACME Employee Responsiblities": {
             "is_expanded": false, 
+            "kar": 1, 
             "kids": {
               "Abuse Deterrence and Reporting guildlines": {
+                "kar": 1, 
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
+                    "kar": 1, 
                     "plan_label": "Accomplish Fall 2021 traaining", 
                     "plan_uid": 116, 
                     "pledge": true, 
@@ -319,17 +325,17 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "Abuse Deterrence and Reporting guildlines", 
-                "plan_uid": 106, 
-                "star": 1
+                "plan_uid": 106
               }, 
               "Know ACME Staff  and Safety #2 guildlines": {
+                "kar": 1, 
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
+                    "kar": 1, 
                     "plan_label": "Accomplish Fall 2021 traaining", 
                     "plan_uid": 115, 
                     "reasonunits": {
@@ -343,17 +349,17 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "Know ACME Staff  and Safety #2 guildlines", 
-                "plan_uid": 105, 
-                "star": 1
+                "plan_uid": 105
               }, 
               "Know Adult Sexual Misconduct guildlines": {
+                "kar": 1, 
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
+                    "kar": 1, 
                     "plan_label": "Accomplish Fall 2021 traaining", 
                     "plan_uid": 118, 
                     "pledge": true, 
@@ -368,15 +374,14 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "Know Adult Sexual Misconduct guildlines", 
-                "plan_uid": 108, 
-                "star": 1
+                "plan_uid": 108
               }, 
               "Know Employee Intruction manuel.": {
+                "kar": 1, 
                 "plan_label": "Know Employee Intruction manuel.", 
                 "plan_uid": 123, 
                 "pledge": true, 
@@ -391,12 +396,13 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "Know Identifying and Supporting Houseless Youth guildlines": {
+                "kar": 1, 
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
+                    "kar": 1, 
                     "plan_label": "Accomplish Fall 2021 traaining", 
                     "plan_uid": 119, 
                     "pledge": true, 
@@ -411,17 +417,17 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "Know Identifying and Supporting Houseless Youth guildlines", 
-                "plan_uid": 109, 
-                "star": 1
+                "plan_uid": 109
               }, 
               "Know Information Security Awareness guildlines": {
+                "kar": 1, 
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
+                    "kar": 1, 
                     "plan_label": "Accomplish Fall 2021 traaining", 
                     "plan_uid": 121, 
                     "pledge": true, 
@@ -436,17 +442,17 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "Know Information Security Awareness guildlines", 
-                "plan_uid": 111, 
-                "star": 1
+                "plan_uid": 111
               }, 
               "Know retaliation guildlines": {
+                "kar": 1, 
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
+                    "kar": 1, 
                     "plan_label": "Accomplish Fall 2021 traaining", 
                     "plan_uid": 117, 
                     "reasonunits": {
@@ -460,17 +466,17 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "Know retaliation guildlines", 
-                "plan_uid": 107, 
-                "star": 1
+                "plan_uid": 107
               }, 
               "Rick administration and Hazard Analysis": {
+                "kar": 1, 
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
+                    "kar": 1, 
                     "plan_label": "Accomplish Fall 2021 traaining", 
                     "plan_uid": 122, 
                     "reasonunits": {
@@ -484,17 +490,17 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "Rick administration and Hazard Analysis", 
-                "plan_uid": 112, 
-                "star": 1
+                "plan_uid": 112
               }, 
               "know OSHA COVID-19 Rick Reduction guildlines": {
+                "kar": 1, 
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
+                    "kar": 1, 
                     "plan_label": "Accomplish Fall 2021 traaining", 
                     "plan_uid": 120, 
                     "pledge": true, 
@@ -509,27 +515,28 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "know OSHA COVID-19 Rick Reduction guildlines", 
-                "plan_uid": 110, 
-                "star": 1
+                "plan_uid": 110
               }
             }, 
             "plan_label": "ACME Employee Responsiblities", 
-            "plan_uid": 102, 
-            "star": 1
+            "plan_uid": 102
           }, 
           "IT DEPT": {
             "is_expanded": false, 
+            "kar": 1, 
             "kids": {
               "IT DEPT off-hrs responsiblities": {
+                "kar": 1, 
                 "kids": {
                   "check ETLs ran correctly": {
+                    "kar": 1, 
                     "kids": {
                       "check emails": {
+                        "kar": 1, 
                         "plan_label": "check emails", 
                         "plan_uid": 138, 
                         "pledge": true, 
@@ -545,15 +552,15 @@
                             }, 
                             "reason_context": ";A;ziet;gregziet;"
                           }
-                        }, 
-                        "star": 1
+                        }
                       }, 
                       "check mechanisms": {
+                        "kar": 1, 
                         "kids": {
-                          "MECHANISM1": { "plan_label": "MECHANISM1", "plan_uid": 170, "star": 1 }, 
-                          "MECHANISM2": { "plan_label": "MECHANISM2", "plan_uid": 171, "star": 1 }, 
-                          "MECHANISM3": { "plan_label": "MECHANISM3", "plan_uid": 172, "star": 1 }, 
-                          "MECHANISM4": { "plan_label": "MECHANISM4", "plan_uid": 173, "star": 1 }
+                          "MECHANISM1": { "kar": 1, "plan_label": "MECHANISM1", "plan_uid": 170 }, 
+                          "MECHANISM2": { "kar": 1, "plan_label": "MECHANISM2", "plan_uid": 171 }, 
+                          "MECHANISM3": { "kar": 1, "plan_label": "MECHANISM3", "plan_uid": 172 }, 
+                          "MECHANISM4": { "kar": 1, "plan_label": "MECHANISM4", "plan_uid": 173 }
                         }, 
                         "plan_label": "check mechanisms", 
                         "plan_uid": 139, 
@@ -570,8 +577,7 @@
                             }, 
                             "reason_context": ";A;ziet;gregziet;"
                           }
-                        }, 
-                        "star": 1
+                        }
                       }
                     }, 
                     "plan_label": "check ETLs ran correctly", 
@@ -588,10 +594,10 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "dress to slightly impress": {
+                    "kar": 1, 
                     "plan_label": "dress to slightly impress", 
                     "plan_uid": 158, 
                     "pledge": true, 
@@ -607,10 +613,10 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "go to employment": {
+                    "kar": 1, 
                     "plan_label": "go to employment", 
                     "plan_uid": 231, 
                     "pledge": true, 
@@ -626,8 +632,7 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "IT DEPT off-hrs responsiblities", 
@@ -644,12 +649,13 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "IT DEPT regular hrs responsiblities": {
+                "kar": 1.0, 
                 "kids": {
                   "Add to Azure DevOps": {
+                    "kar": 1, 
                     "plan_label": "Add to Azure DevOps", 
                     "plan_uid": 156, 
                     "pledge": true, 
@@ -665,12 +671,13 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "Datawarehouse": {
+                    "kar": 1, 
                     "kids": {
                       "Datawarehouse Expertise acquisition": {
+                        "kar": 1, 
                         "plan_label": "Datawarehouse Expertise acquisition", 
                         "plan_uid": 142, 
                         "pledge": true, 
@@ -686,15 +693,15 @@
                             }, 
                             "reason_context": ";A;ziet;gregziet;"
                           }
-                        }, 
-                        "star": 1
+                        }
                       }, 
                       "dev quantification script \"T2R8\"": {
+                        "kar": 1, 
                         "kids": {
-                          "MECHANISM1"  : { "plan_label": "MECHANISM1"  , "plan_uid": 175, "star": 1 }, 
-                          "MECHANISM2"  : { "plan_label": "MECHANISM2"  , "plan_uid": 176, "star": 1 }, 
-                          "MECHANISM4D" : { "plan_label": "MECHANISM4D" , "plan_uid": 177, "star": 1 }, 
-                          "MECHANISM4DD": { "plan_label": "MECHANISM4DD", "plan_uid": 174, "star": 1 }
+                          "MECHANISM1"  : { "kar": 1, "plan_label": "MECHANISM1"  , "plan_uid": 175 }, 
+                          "MECHANISM2"  : { "kar": 1, "plan_label": "MECHANISM2"  , "plan_uid": 176 }, 
+                          "MECHANISM4D" : { "kar": 1, "plan_label": "MECHANISM4D" , "plan_uid": 177 }, 
+                          "MECHANISM4DD": { "kar": 1, "plan_label": "MECHANISM4DD", "plan_uid": 174 }
                         }, 
                         "plan_label": "dev quantification script \"T2R8\"", 
                         "plan_uid": 157, 
@@ -711,10 +718,10 @@
                             }, 
                             "reason_context": ";A;ziet;gregziet;"
                           }
-                        }, 
-                        "star": 1
+                        }
                       }, 
                       "go to daily meeting ": {
+                        "kar": 1, 
                         "plan_label": "go to daily meeting ", 
                         "plan_uid": 232, 
                         "pledge": true, 
@@ -730,15 +737,14 @@
                             }, 
                             "reason_context": ";A;ziet;gregziet;"
                           }
-                        }, 
-                        "star": 1
+                        }
                       }
                     }, 
                     "plan_label": "Datawarehouse", 
-                    "plan_uid": 135, 
-                    "star": 1
+                    "plan_uid": 135
                   }, 
                   "IT DEPT general": {
+                    "kar": 1, 
                     "plan_label": "IT DEPT general", 
                     "plan_uid": 141, 
                     "reasonunits": {
@@ -753,10 +759,10 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "Keep track of Chatroom conversations": {
+                    "kar": 1, 
                     "plan_label": "Keep track of Chatroom conversations", 
                     "plan_uid": 151, 
                     "pledge": true, 
@@ -772,12 +778,13 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "SQLIte": {
+                    "kar": 1, 
                     "kids": {
                       "check for access": {
+                        "kar": 1, 
                         "plan_label": "check for access", 
                         "plan_uid": 143, 
                         "reasonunits": {
@@ -792,8 +799,7 @@
                             }, 
                             "reason_context": ";A;ziet;gregziet;"
                           }
-                        }, 
-                        "star": 1
+                        }
                       }
                     }, 
                     "plan_label": "SQLIte", 
@@ -810,10 +816,10 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "consider administration perspective": {
+                    "kar": 1, 
                     "plan_label": "consider administration perspective", 
                     "plan_uid": 155, 
                     "pledge": true, 
@@ -829,8 +835,7 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "morph": false, 
@@ -849,8 +854,7 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1.0
+                }
               }
             }, 
             "plan_label": "IT DEPT", 
@@ -867,36 +871,40 @@
                 }, 
                 "reason_context": ";A;ziet;gregziet;"
               }
-            }, 
-            "star": 1
+            }
           }
         }, 
         "plan_label": "ACME", 
-        "plan_uid": 100, 
-        "star": 1
+        "plan_uid": 100
       }, 
       "Aaron Donald objects effected by him": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
-          "compelling"    : { "plan_label": "compelling"    , "plan_uid": 262, "star": 1 }, 
-          "not compelling": { "plan_label": "not compelling", "plan_uid": 263, "star": 1 }
+          "compelling"    : { "kar": 1, "plan_label": "compelling"    , "plan_uid": 262 }, 
+          "not compelling": { "kar": 1, "plan_label": "not compelling", "plan_uid": 263 }
         }, 
         "plan_label": "Aaron Donald objects effected by him", 
-        "plan_uid": 261, 
-        "star": 1
+        "plan_uid": 261
       }, 
       "Asset administration": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
           "American sovereignty": {
+            "kar": 1, 
             "kids": {
               "portland sovereignty": {
+                "kar": 1, 
                 "kids": {
                   "downtown": {
+                    "kar": 1, 
                     "kids": {
                       "Local college": {
+                        "kar": 1, 
                         "kids": {
                           "bowling": {
+                            "kar": 1, 
                             "plan_label": "bowling", 
                             "plan_uid": 212, 
                             "reasonunits": {
@@ -906,10 +914,10 @@
                                 }, 
                                 "reason_context": ";A;Nation-States;"
                               }
-                            }, 
-                            "star": 1
+                            }
                           }, 
                           "browsing": {
+                            "kar": 1, 
                             "plan_label": "browsing", 
                             "plan_uid": 217, 
                             "reasonunits": {
@@ -919,10 +927,10 @@
                                 }, 
                                 "reason_context": ";A;Nation-States;"
                               }
-                            }, 
-                            "star": 1
+                            }
                           }, 
                           "picnic": {
+                            "kar": 1, 
                             "plan_label": "picnic", 
                             "plan_uid": 216, 
                             "reasonunits": {
@@ -930,10 +938,10 @@
                                 "cases": { "A;Seasons;Summer;": {"reason_state": ";A;Seasons;Summer;"} }, 
                                 "reason_context": ";A;Seasons;"
                               }
-                            }, 
-                            "star": 1
+                            }
                           }, 
                           "street soccer": {
+                            "kar": 1, 
                             "plan_label": "street soccer", 
                             "plan_uid": 213, 
                             "reasonunits": {
@@ -943,8 +951,7 @@
                                 }, 
                                 "reason_context": ";A;Nation-States;"
                               }
-                            }, 
-                            "star": 1
+                            }
                           }
                         }, 
                         "plan_label": "Local college", 
@@ -956,12 +963,13 @@
                             }, 
                             "reason_context": ";A;Nation-States;"
                           }
-                        }, 
-                        "star": 1
+                        }
                       }, 
                       "flats": {
+                        "kar": 1, 
                         "kids": {
                           "be reponsible for rent": {
+                            "kar": 1, 
                             "plan_label": "be reponsible for rent", 
                             "plan_uid": 209, 
                             "reasonunits": {
@@ -971,12 +979,13 @@
                                 }, 
                                 "reason_context": ";A;Nation-States;"
                               }
-                            }, 
-                            "star": 1
+                            }
                           }, 
                           "enjoy silent ziet": {
+                            "kar": 1, 
                             "kids": {
                               "maybe watch a video": {
+                                "kar": 1, 
                                 "plan_label": "maybe watch a video", 
                                 "plan_uid": 218, 
                                 "reasonunits": {
@@ -984,8 +993,7 @@
                                     "cases": { "A;Websites,YahooVideo": {"reason_state": ";A;Websites,YahooVideo"} }, 
                                     "reason_context": ";A;Websites;"
                                   }
-                                }, 
-                                "star": 1
+                                }
                               }
                             }, 
                             "plan_label": "enjoy silent ziet", 
@@ -999,10 +1007,10 @@
                                 }, 
                                 "reason_context": ";A;Nation-States;"
                               }
-                            }, 
-                            "star": 1
+                            }
                           }, 
                           "flat": {
+                            "kar": 1, 
                             "plan_label": "flat", 
                             "plan_uid": 211, 
                             "reasonunits": {
@@ -1012,10 +1020,10 @@
                                 }, 
                                 "reason_context": ";A;Nation-States;"
                               }
-                            }, 
-                            "star": 1
+                            }
                           }, 
                           "gym": {
+                            "kar": 1, 
                             "plan_label": "gym", 
                             "plan_uid": 215, 
                             "reasonunits": {
@@ -1023,8 +1031,7 @@
                                 "cases": { "A;Moods;hungry;": {"reason_state": ";A;Moods;hungry;"} }, 
                                 "reason_context": ";A;Moods;"
                               }
-                            }, 
-                            "star": 1
+                            }
                           }
                         }, 
                         "plan_label": "flats", 
@@ -1036,8 +1043,7 @@
                             }, 
                             "reason_context": ";A;Nation-States;"
                           }
-                        }, 
-                        "star": 1
+                        }
                       }
                     }, 
                     "plan_label": "downtown", 
@@ -1049,8 +1055,7 @@
                         }, 
                         "reason_context": ";A;Nation-States;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "portland sovereignty", 
@@ -1062,10 +1067,10 @@
                     }, 
                     "reason_context": ";A;Nation-States;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "texas sovereignty": {
+                "kar": 1, 
                 "plan_label": "texas sovereignty", 
                 "plan_uid": 205, 
                 "reasonunits": {
@@ -1073,8 +1078,7 @@
                     "cases": { "A;Nation-States;USA;Texas": {"reason_state": ";A;Nation-States;USA;Texas"} }, 
                     "reason_context": ";A;Nation-States;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "American sovereignty", 
@@ -1084,10 +1088,10 @@
                 "cases": { "A;Nation-States;USA": {"reason_state": ";A;Nation-States;USA"} }, 
                 "reason_context": ";A;Nation-States;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "French sovereignty": {
+            "kar": 1, 
             "plan_label": "French sovereignty", 
             "plan_uid": 203, 
             "reasonunits": {
@@ -1095,20 +1099,21 @@
                 "cases": { "A;Nation-States;France2": {"reason_state": ";A;Nation-States;France2"} }, 
                 "reason_context": ";A;Nation-States;"
               }
-            }, 
-            "star": 1
+            }
           }
         }, 
         "plan_label": "Asset administration", 
-        "plan_uid": 199, 
-        "star": 1
+        "plan_uid": 199
       }, 
       "Better Stuff Proposal": {
         "is_expanded": false, 
+        "kar": 1.0, 
         "kids": {
           "decrease carbon footprint": {
+            "kar": 1.0, 
             "kids": {
               "never fly a private G5": {
+                "kar": 1.0, 
                 "morph": false, 
                 "plan_label": "never fly a private G5", 
                 "pledge": true, 
@@ -1123,27 +1128,24 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1.0
+                }
               }
             }, 
             "morph": false, 
-            "plan_label": "decrease carbon footprint", 
-            "star": 1.0
+            "plan_label": "decrease carbon footprint"
           }
         }, 
         "morph": false, 
-        "plan_label": "Better Stuff Proposal", 
-        "star": 1.0
+        "plan_label": "Better Stuff Proposal"
       }, 
       "Bob Dylan": {
+        "kar": 1, 
         "kids": {
-          "Aint me Babe"      : { "plan_label": "Aint me Babe"      , "plan_uid": 270, "star": 1 }, 
-          "tangled up in blue": { "plan_label": "tangled up in blue", "plan_uid": 271, "star": 1 }
+          "Aint me Babe"      : { "kar": 1, "plan_label": "Aint me Babe"      , "plan_uid": 270 }, 
+          "tangled up in blue": { "kar": 1, "plan_label": "tangled up in blue", "plan_uid": 271 }
         }, 
         "plan_label": "Bob Dylan", 
-        "plan_uid": 269, 
-        "star": 1
+        "plan_uid": 269
       }, 
       "D&B": {
         "awardunits": {
@@ -1152,16 +1154,19 @@
           "America"       : { "awardee_title": "America"       , "give_force": 1.0, "take_force": 1 }
         }, 
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
           "bens friends be desperate for of housing support": {
             "awardunits": {
               "Renee Elise Goldsberry": {"awardee_title": "Renee Elise Goldsberry", "give_force": 1.0, "take_force": 1}
             }, 
+            "kar": 1, 
             "kids": {
               "Ask Aaron monthly what I can do": {
                 "awardunits": {
                   "Renee Elise Goldsberry": {"awardee_title": "Renee Elise Goldsberry", "give_force": 1.0, "take_force": 1}
                 }, 
+                "kar": 1, 
                 "plan_label": "Ask Aaron monthly what I can do", 
                 "plan_uid": 160, 
                 "reasonunits": {
@@ -1171,8 +1176,7 @@
                     }, 
                     "reason_context": ";A;Aaron Donald objects effected by him;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "bens friends be desperate for of housing support", 
@@ -1184,15 +1188,16 @@
                 }, 
                 "reason_context": ";A;Aaron Donald objects effected by him;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "develop D&B software": {
             "awardunits": {
               ";hurt by us dollar": {"awardee_title": ";hurt by us dollar", "give_force": 1.0, "take_force": 1}
             }, 
+            "kar": 1, 
             "kids": {
               "test program": {
+                "kar": 1, 
                 "plan_label": "test program", 
                 "plan_uid": 178, 
                 "pledge": true, 
@@ -1214,8 +1219,7 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "develop D&B software", 
@@ -1227,15 +1231,16 @@
                 }, 
                 "reason_context": ";A;Aaron Donald objects effected by him;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "donate to pro-climate committees": {
+            "kar": 1, 
             "kids": {
               "donate to influential people that are pro-Climate Death": {
                 "awardunits": {
                   ";Climate Death": {"awardee_title": ";Climate Death", "give_force": 1.0, "take_force": 1}
                 }, 
+                "kar": 1, 
                 "plan_label": "donate to influential people that are pro-Climate Death", 
                 "plan_uid": 168, 
                 "pledge": true, 
@@ -1257,8 +1262,7 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "donate to pro-climate committees", 
@@ -1270,10 +1274,10 @@
                 }, 
                 "reason_context": ";A;Aaron Donald objects effected by him;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "late_evening_go_to_sleep": {
+            "kar": 1, 
             "plan_label": "late_evening_go_to_sleep", 
             "plan_uid": 149, 
             "pledge": true, 
@@ -1295,14 +1299,16 @@
                 }, 
                 "reason_context": ";A;ziet;gregziet;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "sympathetic receptive": {
+            "kar": 1, 
             "kids": {
               "Ernesto Chavez": {
+                "kar": 4.0, 
                 "kids": {
                   "available for phone call": {
+                    "kar": 4.0, 
                     "morph": false, 
                     "plan_label": "available for phone call", 
                     "pledge": true, 
@@ -1318,24 +1324,24 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 4.0
+                    }
                   }
                 }, 
                 "morph": false, 
                 "plan_label": "Ernesto Chavez", 
-                "reasonunits": { "A;ziet;gregziet;": {"reason_context": ";A;ziet;gregziet;"} }, 
-                "star": 4.0
+                "reasonunits": { "A;ziet;gregziet;": {"reason_context": ";A;ziet;gregziet;"} }
               }, 
               "sympathetic receptive to Aaron": {
                 "awardunits": {
                   "Renee Elise Goldsberry": {"awardee_title": "Renee Elise Goldsberry", "give_force": 1.0, "take_force": 1}
                 }, 
+                "kar": 1, 
                 "kids": {
                   "be available for phone call": {
                     "awardunits": {
                       "Renee Elise Goldsberry": {"awardee_title": "Renee Elise Goldsberry", "give_force": 1.0, "take_force": 1}
                     }, 
+                    "kar": 1, 
                     "plan_label": "be available for phone call", 
                     "plan_uid": 163, 
                     "pledge": true, 
@@ -1357,14 +1363,14 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "call Aaron and discuss methodology": {
                     "awardunits": {
                       ";Climate Death": {"awardee_title": ";Climate Death", "give_force": 1.0, "take_force": 1}, 
                       "Renee Elise Goldsberry": {"awardee_title": "Renee Elise Goldsberry", "give_force": 1.0, "take_force": 1}
                     }, 
+                    "kar": 1, 
                     "plan_label": "call Aaron and discuss methodology", 
                     "plan_uid": 164, 
                     "pledge": true, 
@@ -1386,8 +1392,7 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "sympathetic receptive to Aaron", 
@@ -1399,8 +1404,7 @@
                     }, 
                     "reason_context": ";A;Aaron Donald objects effected by him;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "sympathetic receptive", 
@@ -1412,15 +1416,16 @@
                 }, 
                 "reason_context": ";A;Aaron Donald objects effected by him;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "write letters to reps": {
+            "kar": 1, 
             "kids": {
               "write letters about Climate Death to congressman": {
                 "awardunits": {
                   ";Climate Death": {"awardee_title": ";Climate Death", "give_force": 1.0, "take_force": 1}
                 }, 
+                "kar": 1, 
                 "plan_label": "write letters about Climate Death to congressman", 
                 "plan_uid": 166, 
                 "reasonunits": {
@@ -1441,8 +1446,7 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "write letters to reps", 
@@ -1454,8 +1458,7 @@
                 }, 
                 "reason_context": ";A;Aaron Donald objects effected by him;"
               }
-            }, 
-            "star": 1
+            }
           }
         }, 
         "plan_label": "D&B", 
@@ -1467,111 +1470,112 @@
             }, 
             "reason_context": ";A;Aaron Donald objects effected by him;"
           }
-        }, 
-        "star": 1
+        }
       }, 
       "Moods": {
+        "kar": 1, 
         "kids": {
-          "Bllod Meridan by Cormac": {"plan_label": "Bllod Meridan by Cormac", "plan_uid": 265, "star": 1}, 
+          "Bllod Meridan by Cormac": {"kar": 1, "plan_label": "Bllod Meridan by Cormac", "plan_uid": 265}, 
           "Happy": {
+            "kar": 1, 
             "kids": {
-              "Happy - angerish": {"plan_label": "Happy - angerish", "plan_uid": 267, "star": 1}
+              "Happy - angerish": {"kar": 1, "plan_label": "Happy - angerish", "plan_uid": 267}
             }, 
             "plan_label": "Happy", 
-            "plan_uid": 266, 
-            "star": 1
+            "plan_uid": 266
           }, 
-          "I will waste ziet": {"morph": false, "plan_label": "I will waste ziet", "star": 1.0}, 
-          "hungry": {"plan_label": "hungry", "plan_uid": 268, "star": 1}
+          "I will waste ziet": {"kar": 1.0, "morph": false, "plan_label": "I will waste ziet"}, 
+          "hungry": {"kar": 1, "plan_label": "hungry", "plan_uid": 268}
         }, 
         "plan_label": "Moods", 
-        "plan_uid": 264, 
-        "star": 1
+        "plan_uid": 264
       }, 
       "Nation-States": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
-          "France2": {"plan_label": "France2", "plan_uid": 235, "star": 1}, 
+          "France2": {"kar": 1, "plan_label": "France2", "plan_uid": 235}, 
           "USA": {
+            "kar": 1, 
             "kids": {
               "Portland OR": {
+                "kar": 1, 
                 "kids": {
                   "Downtown": {
+                    "kar": 1, 
                     "kids": {
                       "Flats": {
+                        "kar": 1, 
                         "kids": {
-                          "10th floor gaarden": { "plan_label": "10th floor gaarden", "plan_uid": 246, "star": 1 }, 
-                          "Apt 450"           : { "plan_label": "Apt 450"           , "plan_uid": 247, "star": 1 }, 
-                          "Gym"               : { "plan_label": "Gym"               , "plan_uid": 248, "star": 1 }, 
-                          "workspace"         : { "plan_label": "workspace"         , "plan_uid": 249, "star": 1 }
+                          "10th floor gaarden": { "kar": 1, "plan_label": "10th floor gaarden", "plan_uid": 246 }, 
+                          "Apt 450"           : { "kar": 1, "plan_label": "Apt 450"           , "plan_uid": 247 }, 
+                          "Gym"               : { "kar": 1, "plan_label": "Gym"               , "plan_uid": 248 }, 
+                          "workspace"         : { "kar": 1, "plan_label": "workspace"         , "plan_uid": 249 }
                         }, 
                         "plan_label": "Flats", 
-                        "plan_uid": 245, 
-                        "star": 1
+                        "plan_uid": 245
                       }, 
                       "PSU": {
+                        "kar": 1, 
                         "kids": {
-                          "Park Squares": { "plan_label": "Park Squares", "plan_uid": 241, "star": 1 }, 
-                          "Pool"        : { "plan_label": "Pool"        , "plan_uid": 242, "star": 1 }, 
-                          "Stott Field" : { "plan_label": "Stott Field" , "plan_uid": 243, "star": 1 }, 
-                          "library"     : { "plan_label": "library"     , "plan_uid": 244, "star": 1 }
+                          "Park Squares": { "kar": 1, "plan_label": "Park Squares", "plan_uid": 241 }, 
+                          "Pool"        : { "kar": 1, "plan_label": "Pool"        , "plan_uid": 242 }, 
+                          "Stott Field" : { "kar": 1, "plan_label": "Stott Field" , "plan_uid": 243 }, 
+                          "library"     : { "kar": 1, "plan_label": "library"     , "plan_uid": 244 }
                         }, 
                         "plan_label": "PSU", 
-                        "plan_uid": 240, 
-                        "star": 1
+                        "plan_uid": 240
                       }
                     }, 
                     "plan_label": "Downtown", 
-                    "plan_uid": 239, 
-                    "star": 1
+                    "plan_uid": 239
                   }
                 }, 
                 "plan_label": "Portland OR", 
-                "plan_uid": 237, 
-                "star": 1
+                "plan_uid": 237
               }, 
-              "Texas": {"plan_label": "Texas", "plan_uid": 238, "star": 1}
+              "Texas": {"kar": 1, "plan_label": "Texas", "plan_uid": 238}
             }, 
             "plan_label": "USA", 
-            "plan_uid": 236, 
-            "star": 1
+            "plan_uid": 236
           }
         }, 
         "plan_label": "Nation-States", 
-        "plan_uid": 234, 
-        "star": 1
+        "plan_uid": 234
       }, 
       "No Movie playing": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
-          "Big Lewbwski"     : { "plan_label": "Big Lewbwski"     , "plan_uid": 273, "star": 1 }, 
-          "Jedi Movie eps IV": { "plan_label": "Jedi Movie eps IV", "plan_uid": 274, "star": 1 }
+          "Big Lewbwski"     : { "kar": 1, "plan_label": "Big Lewbwski"     , "plan_uid": 273 }, 
+          "Jedi Movie eps IV": { "kar": 1, "plan_label": "Jedi Movie eps IV", "plan_uid": 274 }
         }, 
         "plan_label": "No Movie playing", 
-        "plan_uid": 272, 
-        "star": 1
+        "plan_uid": 272
       }, 
       "Seasons": {
         "is_expanded": false, 
-        "kids": { "Summer": {"plan_label": "Summer", "plan_uid": 276, "star": 1} }, 
+        "kar": 1, 
+        "kids": { "Summer": {"kar": 1, "plan_label": "Summer", "plan_uid": 276} }, 
         "plan_label": "Seasons", 
-        "plan_uid": 275, 
-        "star": 1
+        "plan_uid": 275
       }, 
       "Tired Situation": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
-          "Not tired": { "plan_label": "Not tired", "plan_uid": 278, "star": 1 }, 
-          "Tired"    : { "plan_label": "Tired"    , "plan_uid": 279, "star": 1 }
+          "Not tired": { "kar": 1, "plan_label": "Not tired", "plan_uid": 278 }, 
+          "Tired"    : { "kar": 1, "plan_label": "Tired"    , "plan_uid": 279 }
         }, 
         "plan_label": "Tired Situation", 
-        "plan_uid": 277, 
-        "star": 1
+        "plan_uid": 277
       }, 
       "Ultimate Frisbee": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
           "check on m33": {
+            "kar": 1, 
             "plan_label": "check on m33", 
             "plan_uid": 221, 
             "reasonunits": {
@@ -1579,10 +1583,10 @@
                 "cases": { "A;Moods;Happy": {"reason_state": ";A;Moods;Happy"} }, 
                 "reason_context": ";A;Moods;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "contemplate the disc": {
+            "kar": 1, 
             "plan_label": "contemplate the disc", 
             "plan_uid": 229, 
             "reasonunits": {
@@ -1592,12 +1596,13 @@
                 }, 
                 "reason_context": ";A;No Movie playing;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "playing ultimate": {
+            "kar": 1, 
             "kids": {
               "check for mini ultimate at park": {
+                "kar": 1, 
                 "plan_label": "check for mini ultimate at park", 
                 "plan_uid": 219, 
                 "reasonunits": {
@@ -1605,8 +1610,7 @@
                     "cases": { "A;Moods;Happy": {"reason_state": ";A;Moods;Happy"} }, 
                     "reason_context": ";A;Moods;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "playing ultimate", 
@@ -1616,10 +1620,10 @@
                 "cases": { "A;Moods;Happy": {"reason_state": ";A;Moods;Happy"} }, 
                 "reason_context": ";A;Moods;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "relaxing": {
+            "kar": 1, 
             "plan_label": "relaxing", 
             "plan_uid": 202, 
             "reasonunits": {
@@ -1629,8 +1633,7 @@
                 }, 
                 "reason_context": ";A;No Movie playing;"
               }
-            }, 
-            "star": 1
+            }
           }
         }, 
         "plan_label": "Ultimate Frisbee", 
@@ -1640,15 +1643,17 @@
             "cases": { "A;Moods;Happy": {"reason_state": ";A;Moods;Happy"} }, 
             "reason_context": ";A;Moods;"
           }
-        }, 
-        "star": 1
+        }
       }, 
       "Water Living": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
           "bowling in Williamette watershed": {
+            "kar": 1, 
             "kids": {
               "Go climbing at east Circuit": {
+                "kar": 1, 
                 "plan_label": "Go climbing at east Circuit", 
                 "plan_uid": 226, 
                 "reasonunits": {
@@ -1660,10 +1665,10 @@
                     }, 
                     "reason_context": ";A;WaterExistence;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "bike around": {
+                "kar": 1, 
                 "plan_label": "bike around", 
                 "plan_uid": 227, 
                 "reasonunits": {
@@ -1675,10 +1680,10 @@
                     }, 
                     "reason_context": ";A;WaterExistence;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "trout": {
+                "kar": 1, 
                 "plan_label": "trout", 
                 "plan_uid": 228, 
                 "reasonunits": {
@@ -1690,8 +1695,7 @@
                     }, 
                     "reason_context": ";A;WaterExistence;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "bowling in Williamette watershed", 
@@ -1703,61 +1707,62 @@
                 }, 
                 "reason_context": ";A;WaterExistence;"
               }
-            }, 
-            "star": 1
+            }
           }
         }, 
         "plan_label": "Water Living", 
-        "plan_uid": 223, 
-        "star": 1
+        "plan_uid": 223
       }, 
       "WaterExistence": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
           "Williamette WaterShed": {
+            "kar": 1, 
             "kids": {
               "East Side of Watershed": {
-                "kids": { "flat": {"plan_label": "flat", "plan_uid": 260, "star": 1} }, 
+                "kar": 1, 
+                "kids": { "flat": {"kar": 1, "plan_label": "flat", "plan_uid": 260} }, 
                 "plan_label": "East Side of Watershed", 
-                "plan_uid": 258, 
-                "star": 1
+                "plan_uid": 258
               }, 
-              "West side of Watershed": {"plan_label": "West side of Watershed", "plan_uid": 259, "star": 1}
+              "West side of Watershed": {"kar": 1, "plan_label": "West side of Watershed", "plan_uid": 259}
             }, 
             "plan_label": "Williamette WaterShed", 
-            "plan_uid": 257, 
-            "star": 1
+            "plan_uid": 257
           }
         }, 
         "plan_label": "WaterExistence", 
-        "plan_uid": 256, 
-        "star": 1
+        "plan_uid": 256
       }, 
       "Websites": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
           "AOL AIM": {
-            "kids": { "PSU Ultimate": {"plan_label": "PSU Ultimate", "plan_uid": 254, "star": 1} }, 
+            "kar": 1, 
+            "kids": { "PSU Ultimate": {"kar": 1, "plan_label": "PSU Ultimate", "plan_uid": 254} }, 
             "plan_label": "AOL AIM", 
-            "plan_uid": 253, 
-            "star": 1
+            "plan_uid": 253
           }, 
-          "Faaceboook": {"plan_label": "Faaceboook", "plan_uid": 251, "star": 1}, 
-          "Github": {"plan_label": "Github", "plan_uid": 252, "star": 1}, 
-          "YahooVideo": {"plan_label": "YahooVideo", "plan_uid": 255, "star": 1}
+          "Faaceboook": {"kar": 1, "plan_label": "Faaceboook", "plan_uid": 251}, 
+          "Github": {"kar": 1, "plan_label": "Github", "plan_uid": 252}, 
+          "YahooVideo": {"kar": 1, "plan_label": "YahooVideo", "plan_uid": 255}
         }, 
         "plan_label": "Websites", 
-        "plan_uid": 250, 
-        "star": 1
+        "plan_uid": 250
       }, 
       "casa": {
         "is_expanded": false, 
+        "kar": 20.0, 
         "kids": {
           "Boring Ops": {
             "is_expanded": false, 
+            "kar": 1, 
             "kids": {
               "be reponsible for rent": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "be reponsible for rent", 
                 "plan_uid": 45, 
                 "pledge": true, 
@@ -1772,11 +1777,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "be responsible for expenses card": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "be responsible for expenses card", 
                 "plan_uid": 31, 
                 "pledge": true, 
@@ -1791,13 +1796,13 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "be responsible for utilities": {
                 "awardunits": {
                   "Perrison": {"awardee_title": "Perrison", "give_force": 1.0, "take_force": 1}
                 }, 
+                "kar": 1, 
                 "plan_label": "be responsible for utilities", 
                 "plan_uid": 37, 
                 "pledge": true, 
@@ -1812,11 +1817,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "set aside a little bucks for fun the wk": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "set aside a little bucks for fun the wk", 
                 "plan_uid": 75, 
                 "pledge": true, 
@@ -1831,78 +1836,77 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "Boring Ops", 
-            "plan_uid": 148, 
-            "star": 1
+            "plan_uid": 148
           }, 
           "Housing": {
             "awardunits": {
               ";MerVista Apt": {"awardee_title": ";MerVista Apt", "give_force": 1.0, "take_force": 1}
             }, 
             "is_expanded": false, 
+            "kar": 1, 
             "kids": {
-              "Bike Garage": {"plan_label": "Bike Garage", "plan_uid": 185, "star": 1}, 
-              "Bike Gym": {"plan_label": "Bike Gym", "plan_uid": 184, "star": 1}, 
+              "Bike Garage": {"kar": 1, "plan_label": "Bike Garage", "plan_uid": 185}, 
+              "Bike Gym": {"kar": 1, "plan_label": "Bike Gym", "plan_uid": 184}, 
               "Flat": {
+                "kar": 1, 
                 "kids": {
-                  "bathroom #2": {"plan_label": "bathroom #2", "plan_uid": 196, "star": 1}, 
+                  "bathroom #2": {"kar": 1, "plan_label": "bathroom #2", "plan_uid": 196}, 
                   "bedroom #1": {
+                    "kar": 1, 
                     "kids": {
-                      "big bathroom": { "plan_label": "big bathroom", "plan_uid": 195, "star": 1 }, 
-                      "closet"      : { "plan_label": "closet"      , "plan_uid": 194, "star": 1 }
+                      "big bathroom": { "kar": 1, "plan_label": "big bathroom", "plan_uid": 195 }, 
+                      "closet"      : { "kar": 1, "plan_label": "closet"      , "plan_uid": 194 }
                     }, 
                     "plan_label": "bedroom #1", 
-                    "plan_uid": 191, 
-                    "star": 1
+                    "plan_uid": 191
                   }, 
                   "bedroom #2": {
+                    "kar": 1, 
                     "kids": {
                       "bed area": {
+                        "kar": 1, 
                         "kids": {
                           "heater maintenance": {
                             "awardunits": {
                               "Norberto": {"awardee_title": "Norberto", "give_force": 1.0, "take_force": 1}
                             }, 
+                            "kar": 1, 
                             "plan_label": "heater maintenance", 
-                            "plan_uid": 198, 
-                            "star": 1
+                            "plan_uid": 198
                           }
                         }, 
                         "plan_label": "bed area", 
-                        "plan_uid": 197, 
-                        "star": 1
+                        "plan_uid": 197
                       }, 
-                      "closet": {"plan_label": "closet", "plan_uid": 193, "star": 1}
+                      "closet": {"kar": 1, "plan_label": "closet", "plan_uid": 193}
                     }, 
                     "plan_label": "bedroom #2", 
-                    "plan_uid": 192, 
-                    "star": 1
+                    "plan_uid": 192
                   }, 
-                  "cuisine": {"plan_label": "cuisine", "plan_uid": 189, "star": 1}, 
-                  "dining area": {"plan_label": "dining area", "plan_uid": 190, "star": 1}, 
-                  "maintenance": {"plan_label": "maintenance", "plan_uid": 187, "star": 1}, 
-                  "nursery": {"plan_label": "nursery", "plan_uid": 188, "star": 1}
+                  "cuisine": {"kar": 1, "plan_label": "cuisine", "plan_uid": 189}, 
+                  "dining area": {"kar": 1, "plan_label": "dining area", "plan_uid": 190}, 
+                  "maintenance": {"kar": 1, "plan_label": "maintenance", "plan_uid": 187}, 
+                  "nursery": {"kar": 1, "plan_label": "nursery", "plan_uid": 188}
                 }, 
                 "plan_label": "Flat", 
-                "plan_uid": 181, 
-                "star": 1
+                "plan_uid": 181
               }, 
-              "Lifting Gym": {"plan_label": "Lifting Gym", "plan_uid": 183, "star": 1}, 
-              "Playing in nurserys": {"plan_label": "Playing in nurserys", "plan_uid": 186, "star": 1}, 
-              "Pool": {"plan_label": "Pool", "plan_uid": 182, "star": 1}
+              "Lifting Gym": {"kar": 1, "plan_label": "Lifting Gym", "plan_uid": 183}, 
+              "Playing in nurserys": {"kar": 1, "plan_label": "Playing in nurserys", "plan_uid": 186}, 
+              "Pool": {"kar": 1, "plan_label": "Pool", "plan_uid": 182}
             }, 
             "plan_label": "Housing", 
-            "plan_uid": 180, 
-            "star": 1
+            "plan_uid": 180
           }, 
           "call Crazy pete to say hi": {
             "awardunits": {
               "Perrison": {"awardee_title": "Perrison", "give_force": 1.0, "take_force": 1}
             }, 
+            "kar": 30.0, 
             "morph": false, 
             "plan_label": "call Crazy pete to say hi", 
             "plan_uid": 35, 
@@ -1919,10 +1923,10 @@
                 }, 
                 "reason_context": ";A;ziet;gregziet;"
               }
-            }, 
-            "star": 30.0
+            }
           }, 
           "check up on old family friends": {
+            "kar": 1, 
             "plan_label": "check up on old family friends", 
             "plan_uid": 222, 
             "reasonunits": {
@@ -1932,13 +1936,14 @@
                 }, 
                 "reason_context": ";A;Moods;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "cleaning": {
+            "kar": 1, 
             "kids": {
               "check cat water": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "check cat water", 
                 "plan_uid": 33, 
                 "pledge": true, 
@@ -1954,10 +1959,10 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "check humidifer": {
+                "kar": 1, 
                 "plan_label": "check humidifer", 
                 "plan_uid": 159, 
                 "pledge": true, 
@@ -1973,11 +1978,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "clean baby seats": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "clean baby seats", 
                 "plan_uid": 49, 
                 "pledge": true, 
@@ -1993,11 +1998,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "clean bathroom": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "clean bathroom", 
                 "plan_uid": 65, 
                 "pledge": true, 
@@ -2013,11 +2018,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "clean cat poo": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1.0, 
                 "morph": false, 
                 "plan_label": "clean cat poo", 
                 "plan_uid": 9, 
@@ -2034,13 +2039,13 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1.0
+                }
               }, 
               "clean couch blankets": {
                 "awardunits": {
                   "Perrison": {"awardee_title": "Perrison", "give_force": 1.0, "take_force": 1}
                 }, 
+                "kar": 1, 
                 "plan_label": "clean couch blankets", 
                 "plan_uid": 41, 
                 "pledge": true, 
@@ -2056,11 +2061,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "clean humidifiers": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "clean humidifiers", 
                 "plan_uid": 55, 
                 "pledge": true, 
@@ -2076,11 +2081,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "clean table": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "clean table", 
                 "plan_uid": 53, 
                 "pledge": true, 
@@ -2096,11 +2101,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "deep clean play mat": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "deep clean play mat", 
                 "plan_uid": 71, 
                 "pledge": true, 
@@ -2116,11 +2121,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "empty roomba": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "empty roomba", 
                 "plan_uid": 11, 
                 "pledge": true, 
@@ -2136,11 +2141,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "empty roomba Fri": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "empty roomba Fri", 
                 "plan_uid": 13, 
                 "pledge": true, 
@@ -2156,20 +2161,20 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "laundry basket situation": {
+                "kar": 1.0, 
                 "kids": {
-                  "full"    : { "morph": false, "plan_label": "full"    , "star": 1.0 }, 
-                  "not full": { "morph": false, "plan_label": "not full", "star": 1.0 }
+                  "full"    : { "kar": 1.0, "morph": false, "plan_label": "full"     }, 
+                  "not full": { "kar": 1.0, "morph": false, "plan_label": "not full" }
                 }, 
                 "morph": false, 
-                "plan_label": "laundry basket situation", 
-                "star": 1.0
+                "plan_label": "laundry basket situation"
               }, 
               "laundry mon": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "laundry mon", 
                 "plan_uid": 25, 
                 "pledge": true, 
@@ -2191,13 +2196,13 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "laundry sat": {
                 "awardunits": {
                   "Travis Fox": {"awardee_title": "Travis Fox", "give_force": 1.0, "take_force": 1}
                 }, 
+                "kar": 1, 
                 "plan_label": "laundry sat", 
                 "plan_uid": 29, 
                 "pledge": true, 
@@ -2219,10 +2224,10 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "laundry thur": {
+                "kar": 1.0, 
                 "morph": false, 
                 "plan_label": "laundry thur", 
                 "pledge": true, 
@@ -2244,11 +2249,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1.0
+                }
               }, 
               "laundry wed": {
                 "awardunits": { "America": {"awardee_title": "America", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "laundry wed", 
                 "plan_uid": 27, 
                 "pledge": true, 
@@ -2270,10 +2275,10 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "morning cuisine clean-up": {
+                "kar": 1, 
                 "plan_label": "morning cuisine clean-up", 
                 "plan_uid": 150, 
                 "reasonunits": {
@@ -2288,11 +2293,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "prepare_bed clean bedroom": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "prepare_bed clean bedroom", 
                 "plan_uid": 63, 
                 "pledge": true, 
@@ -2308,11 +2313,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "roomba bedroom": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "roomba bedroom", 
                 "plan_uid": 15, 
                 "pledge": true, 
@@ -2328,11 +2333,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "roomba bedroom Fri": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "roomba bedroom Fri", 
                 "plan_uid": 17, 
                 "pledge": true, 
@@ -2348,11 +2353,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "roomba living area": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "roomba living area", 
                 "plan_uid": 19, 
                 "pledge": true, 
@@ -2368,11 +2373,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "roomba living area thur": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "roomba living area thur", 
                 "plan_uid": 21, 
                 "pledge": true, 
@@ -2388,11 +2393,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "roomba maintenance": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "roomba maintenance", 
                 "plan_uid": 51, 
                 "pledge": true, 
@@ -2408,11 +2413,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "wipe down play mat2": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "wipe down play mat2", 
                 "plan_uid": 69, 
                 "pledge": true, 
@@ -2428,8 +2433,7 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "cleaning", 
@@ -2441,14 +2445,15 @@
                 }, 
                 "reason_context": ";A;Nation-States;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "exercise": {
             "is_expanded": false, 
+            "kar": 1, 
             "kids": {
               "5 push-ups": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "5 push-ups", 
                 "plan_uid": 5, 
                 "pledge": true, 
@@ -2464,11 +2469,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "check protein for wk is adequate": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "check protein for wk is adequate", 
                 "plan_uid": 61, 
                 "pledge": true, 
@@ -2484,11 +2489,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "clean ears": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "clean ears", 
                 "plan_uid": 79, 
                 "pledge": true, 
@@ -2504,11 +2509,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "clip body nails": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "clip body nails", 
                 "plan_uid": 77, 
                 "pledge": true, 
@@ -2524,10 +2529,10 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "evening multivitamin": {
+                "kar": 1, 
                 "plan_label": "evening multivitamin", 
                 "plan_uid": 230, 
                 "reasonunits": {
@@ -2542,11 +2547,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "flossing teeth": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "flossing teeth", 
                 "plan_uid": 47, 
                 "pledge": true, 
@@ -2562,13 +2567,14 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "full traaining": {
+                "kar": 1, 
                 "kids": {
                   "bike or stuff": {
                     "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                    "kar": 1, 
                     "plan_label": "bike or stuff", 
                     "plan_uid": 92, 
                     "pledge": true, 
@@ -2584,14 +2590,14 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "chest and arms (mon)": {
                     "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                    "kar": 1, 
                     "kids": {
-                      "bi and triceps exercises": { "plan_label": "bi and triceps exercises", "plan_uid": 130, "star": 1 }, 
-                      "chest  exercises"        : { "plan_label": "chest  exercises"        , "plan_uid": 129, "star": 1 }
+                      "bi and triceps exercises": { "kar": 1, "plan_label": "bi and triceps exercises", "plan_uid": 130 }, 
+                      "chest  exercises"        : { "kar": 1, "plan_label": "chest  exercises"        , "plan_uid": 129 }
                     }, 
                     "plan_label": "chest and arms (mon)", 
                     "plan_uid": 84, 
@@ -2608,11 +2614,11 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "core all back": {
                     "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                    "kar": 1, 
                     "plan_label": "core all back", 
                     "plan_uid": 86, 
                     "pledge": true, 
@@ -2628,10 +2634,10 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "core and squats": {
+                    "kar": 1, 
                     "plan_label": "core and squats", 
                     "plan_uid": 179, 
                     "reasonunits": {
@@ -2646,11 +2652,11 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "rest": {
                     "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                    "kar": 1, 
                     "plan_label": "rest", 
                     "plan_uid": 94, 
                     "reasonunits": {
@@ -2665,25 +2671,25 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "shoulders and back": {
                     "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                    "kar": 1, 
                     "kids": {
                       "back exercises": {
+                        "kar": 1.0, 
                         "morph": false, 
                         "plan_label": "back exercises", 
                         "plan_uid": 132, 
-                        "pledge": true, 
-                        "star": 1.0
+                        "pledge": true
                       }, 
                       "shoulder exercises": {
+                        "kar": 1.0, 
                         "morph": false, 
                         "plan_label": "shoulder exercises", 
                         "plan_uid": 131, 
-                        "pledge": true, 
-                        "star": 1.0
+                        "pledge": true
                       }
                     }, 
                     "plan_label": "shoulders and back", 
@@ -2701,11 +2707,11 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "squats hamstrings and calves": {
                     "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                    "kar": 1, 
                     "plan_label": "squats hamstrings and calves", 
                     "plan_uid": 90, 
                     "pledge": true, 
@@ -2721,16 +2727,15 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "full traaining", 
-                "plan_uid": 81, 
-                "star": 1
+                "plan_uid": 81
               }, 
               "morning multivitamin": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "morning multivitamin", 
                 "plan_uid": 3, 
                 "pledge": true, 
@@ -2746,11 +2751,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "shampooing": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "shampooing", 
                 "plan_uid": 39, 
                 "pledge": true, 
@@ -2766,11 +2771,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "straight back for 45 secs": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "straight back for 45 secs", 
                 "plan_uid": 57, 
                 "pledge": true, 
@@ -2786,13 +2791,14 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "stretch": {
                 "is_expanded": false, 
+                "kar": 30.0, 
                 "kids": {
                   "back": {
+                    "kar": 30.0, 
                     "morph": false, 
                     "plan_label": "back", 
                     "pledge": true, 
@@ -2808,10 +2814,10 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 30.0
+                    }
                   }, 
                   "legs": {
+                    "kar": 30.0, 
                     "morph": false, 
                     "plan_label": "legs", 
                     "pledge": true, 
@@ -2827,10 +2833,9 @@
                         }, 
                         "reason_context": ";A;ziet;gregziet;"
                       }
-                    }, 
-                    "star": 30.0
+                    }
                   }, 
-                  "waist": {"morph": false, "plan_label": "waist", "pledge": true, "star": 30.0}
+                  "waist": {"kar": 30.0, "morph": false, "plan_label": "waist", "pledge": true}
                 }, 
                 "morph": false, 
                 "plan_label": "stretch", 
@@ -2847,11 +2852,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 30.0
+                }
               }, 
               "trim beard": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "trim beard", 
                 "plan_uid": 73, 
                 "pledge": true, 
@@ -2867,11 +2872,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "veggies every morning": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "veggies every morning", 
                 "plan_uid": 59, 
                 "pledge": true, 
@@ -2887,15 +2892,14 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "exercise", 
-            "plan_uid": 147, 
-            "star": 1
+            "plan_uid": 147
           }, 
           "keep up with friends": {
+            "kar": 1, 
             "plan_label": "keep up with friends", 
             "plan_uid": 220, 
             "reasonunits": {
@@ -2903,14 +2907,15 @@
                 "cases": { "A;Websites,Faaceboook": {"reason_state": ";A;Websites,Faaceboook"} }, 
                 "reason_context": ";A;Websites;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "responsible for kids": {
             "is_expanded": false, 
+            "kar": 1, 
             "kids": {
               "clip oldest nails": {
                 "awardunits": { "America": {"awardee_title": "America", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "clip oldest nails", 
                 "plan_uid": 23, 
                 "pledge": true, 
@@ -2932,11 +2937,11 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "get rid of toy get new toy": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+                "kar": 1, 
                 "plan_label": "get rid of toy get new toy", 
                 "plan_uid": 43, 
                 "pledge": true, 
@@ -2958,8 +2963,7 @@
                     }, 
                     "reason_context": ";A;ziet;gregziet;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "responsible for kids", 
@@ -2971,10 +2975,10 @@
                 }, 
                 "reason_context": ";A;Nation-States;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "say double hi to birds": {
+            "kar": 25.0, 
             "morph": false, 
             "plan_label": "say double hi to birds", 
             "pledge": true, 
@@ -2990,11 +2994,11 @@
                 }, 
                 "reason_context": ";A;ziet;gregziet;"
               }
-            }, 
-            "star": 25.0
+            }
           }, 
           "say hi to birds": {
             "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
+            "kar": 1.0, 
             "plan_label": "say hi to birds", 
             "plan_uid": 7, 
             "pledge": true, 
@@ -3010,1453 +3014,1449 @@
                 }, 
                 "reason_context": ";A;ziet;gregziet;"
               }
-            }, 
-            "star": 1.0
+            }
           }
         }, 
         "morph": false, 
         "plan_label": "casa", 
-        "plan_uid": 2, 
-        "star": 20.0
+        "plan_uid": 2
       }, 
       "ziet": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
           "gregziet": {
             "begin": 0, 
             "close": 1472657760, 
+            "kar": 1, 
             "kids": {
               "400 yr segment": {
                 "denom": 7, 
                 "gogo_want": 0.0, 
                 "is_expanded": false, 
+                "kar": 1, 
                 "morph": true, 
                 "numor": 1, 
                 "plan_label": "400 yr segment", 
-                "star": 1, 
                 "stop_want": 210379680.0
               }, 
               "400 yr segments": {
                 "denom": 210379680, 
                 "gogo_want": 0.0, 
                 "is_expanded": false, 
+                "kar": 1, 
                 "morph": false, 
                 "numor": 1, 
                 "plan_label": "400 yr segments", 
-                "star": 1, 
                 "stop_want": 7.0
               }, 
               "jour": {
                 "denom": 1022679.0, 
                 "gogo_want": 0.0, 
                 "is_expanded": false, 
+                "kar": 1, 
                 "morph": true, 
                 "numor": 1, 
                 "plan_label": "jour", 
-                "star": 1, 
                 "stop_want": 1440.0
               }, 
               "jours": {
                 "denom": 1440, 
                 "gogo_want": 0.0, 
                 "is_expanded": false, 
+                "kar": 1, 
                 "morph": false, 
                 "numor": 1, 
                 "plan_label": "jours", 
-                "star": 1, 
                 "stop_want": 1022679.0
               }, 
               "wk": {
                 "denom": 146097.0, 
                 "gogo_want": 0.0, 
                 "is_expanded": false, 
+                "kar": 1, 
                 "morph": true, 
                 "numor": 1, 
                 "plan_label": "wk", 
-                "star": 1, 
                 "stop_want": 10080.0
               }, 
               "wks": {
                 "denom": 10080, 
                 "gogo_want": 0.0, 
                 "is_expanded": false, 
+                "kar": 1, 
                 "morph": false, 
                 "numor": 1, 
                 "plan_label": "wks", 
-                "star": 1, 
                 "stop_want": 146097.0
               }, 
               "x2": {
                 "gogo_want": 0.0, 
+                "kar": 1.0, 
                 "kids": {
                   "Sept 4th 2023 9am": {
                     "gogo_want": 1064350680.0, 
+                    "kar": 1.0, 
                     "morph": false, 
                     "plan_label": "Sept 4th 2023 9am", 
-                    "star": 1.0, 
                     "stop_want": 1064350680.0
                   }, 
                   "monthly 1st business journee": {
                     "gogo_want": 0.0, 
+                    "kar": 1.0, 
                     "kids": {
                       "2023 Feb 9am": {
                         "gogo_want": 1064041020.0, 
+                        "kar": 1.0, 
                         "morph": false, 
                         "plan_label": "2023 Feb 9am", 
-                        "star": 1.0, 
                         "stop_want": 1064041020.0
                       }
                     }, 
                     "morph": false, 
                     "plan_label": "monthly 1st business journee", 
-                    "star": 1.0, 
                     "stop_want": 1472657760.0
                   }
                 }, 
                 "morph": false, 
                 "plan_label": "x2", 
-                "star": 1.0, 
                 "stop_want": 1472657760.0
               }
             }, 
-            "plan_label": "gregziet", 
-            "star": 1
+            "plan_label": "gregziet"
           }, 
           "tech": {
+            "kar": 1, 
             "kids": {
               "365 yr": {
                 "begin": 0, 
                 "close": 525600, 
                 "is_expanded": false, 
+                "kar": 1, 
                 "kids": {
                   "1-Jan": {
                     "gogo_want": 0, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "1-Jan", 
-                    "star": 1, 
                     "stop_want": 44640
                   }, 
                   "10-Oct": {
                     "gogo_want": 393120, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "10-Oct", 
-                    "star": 1, 
                     "stop_want": 437760
                   }, 
                   "11-Nov": {
                     "gogo_want": 437760, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "11-Nov", 
-                    "star": 1, 
                     "stop_want": 480960
                   }, 
                   "12-Dec": {
                     "gogo_want": 480960, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "12-Dec", 
-                    "star": 1, 
                     "stop_want": 525600
                   }, 
                   "2-Feb28": {
                     "gogo_want": 44640, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "2-Feb28", 
-                    "star": 1, 
                     "stop_want": 84960
                   }, 
                   "3-Mar": {
                     "gogo_want": 84960, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "3-Mar", 
-                    "star": 1, 
                     "stop_want": 129600
                   }, 
                   "4-Apr": {
                     "gogo_want": 129600, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "4-Apr", 
-                    "star": 1, 
                     "stop_want": 172800
                   }, 
                   "5-May": {
                     "gogo_want": 172800, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "5-May", 
-                    "star": 1, 
                     "stop_want": 217440
                   }, 
                   "6-Jun": {
                     "gogo_want": 217440, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "6-Jun", 
-                    "star": 1, 
                     "stop_want": 260640
                   }, 
                   "7-Jul": {
                     "gogo_want": 260640, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "7-Jul", 
-                    "star": 1, 
                     "stop_want": 305280
                   }, 
                   "8-Aug": {
                     "gogo_want": 305280, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "8-Aug", 
-                    "star": 1, 
                     "stop_want": 349920
                   }, 
                   "9-Sep": {
                     "gogo_want": 349920, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "9-Sep", 
-                    "star": 1, 
                     "stop_want": 393120
                   }
                 }, 
-                "plan_label": "365 yr", 
-                "star": 1
+                "plan_label": "365 yr"
               }, 
               "366 yr": {
                 "begin": 0, 
                 "close": 527040, 
                 "is_expanded": false, 
+                "kar": 1, 
                 "kids": {
                   "1-Jan": {
                     "gogo_want": 0, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "1-Jan", 
-                    "star": 1, 
                     "stop_want": 44640
                   }, 
                   "10-Oct": {
                     "gogo_want": 394560, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "10-Oct", 
-                    "star": 1, 
                     "stop_want": 439200
                   }, 
                   "11-Nov": {
                     "gogo_want": 439200, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "11-Nov", 
-                    "star": 1, 
                     "stop_want": 482400
                   }, 
                   "12-Dec": {
                     "gogo_want": 482400, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "12-Dec", 
-                    "star": 1, 
                     "stop_want": 527040
                   }, 
                   "2-Feb29": {
                     "gogo_want": 44640, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "2-Feb29", 
-                    "star": 1, 
                     "stop_want": 86400
                   }, 
                   "3-Mar": {
                     "gogo_want": 86400, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "3-Mar", 
-                    "star": 1, 
                     "stop_want": 131040
                   }, 
                   "4-Apr": {
                     "gogo_want": 131040, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "4-Apr", 
-                    "star": 1, 
                     "stop_want": 174240
                   }, 
                   "5-May": {
                     "gogo_want": 174240, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "5-May", 
-                    "star": 1, 
                     "stop_want": 218880
                   }, 
                   "6-Jun": {
                     "gogo_want": 218880, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "6-Jun", 
-                    "star": 1, 
                     "stop_want": 262080
                   }, 
                   "7-Jul": {
                     "gogo_want": 262080, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "7-Jul", 
-                    "star": 1, 
                     "stop_want": 306720
                   }, 
                   "8-Aug": {
                     "gogo_want": 306720, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "8-Aug", 
-                    "star": 1, 
                     "stop_want": 351360
                   }, 
                   "9-Sep": {
                     "gogo_want": 351360, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "9-Sep", 
-                    "star": 1, 
                     "stop_want": 394560
                   }
                 }, 
-                "plan_label": "366 yr", 
-                "star": 1
+                "plan_label": "366 yr"
               }, 
               "400 yr segment": {
                 "begin": 0.0, 
                 "close": 210379680.0, 
                 "is_expanded": false, 
+                "kar": 1, 
                 "kids": {
                   "0-100-25 leap yrs": {
                     "gogo_want": 0, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "4yr with leap": {
                         "denom": 25, 
                         "gogo_want": 0.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "4yr with leap", 
-                        "star": 1, 
                         "stop_want": 2103840.0
                       }
                     }, 
                     "plan_label": "0-100-25 leap yrs", 
-                    "star": 1, 
                     "stop_want": 52596000
                   }, 
                   "100-104-0 leap yrs": {
                     "gogo_want": 52596000, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "4yr wo leap": {
                         "denom": 1, 
                         "gogo_want": 52596000.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "4yr wo leap", 
-                        "star": 1, 
                         "stop_want": 54698400.0
                       }
                     }, 
                     "plan_label": "100-104-0 leap yrs", 
-                    "star": 1, 
                     "stop_want": 54698400
                   }, 
                   "104-200-24 leap yrs": {
                     "gogo_want": 54698400, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "4yr with leap": {
                         "denom": 24, 
                         "gogo_want": 2279100.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "4yr with leap", 
-                        "star": 1, 
                         "stop_want": 4382940.0
                       }
                     }, 
                     "plan_label": "104-200-24 leap yrs", 
-                    "star": 1, 
                     "stop_want": 105190560
                   }, 
                   "200-204-0 leap yrs": {
                     "gogo_want": 105190560, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "4yr wo leap": {
                         "denom": 1, 
                         "gogo_want": 105190560.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "4yr wo leap", 
-                        "star": 1, 
                         "stop_want": 107292960.0
                       }
                     }, 
                     "plan_label": "200-204-0 leap yrs", 
-                    "star": 1, 
                     "stop_want": 107292960
                   }, 
                   "204-300-24 leap yrs": {
                     "gogo_want": 107292960, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "4yr with leap": {
                         "denom": 24, 
                         "gogo_want": 4470540.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "4yr with leap", 
-                        "star": 1, 
                         "stop_want": 6574380.0
                       }
                     }, 
                     "plan_label": "204-300-24 leap yrs", 
-                    "star": 1, 
                     "stop_want": 157785120
                   }, 
                   "300-304-0 leap yrs": {
                     "gogo_want": 157785120, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "4yr wo leap": {
                         "denom": 1, 
                         "gogo_want": 157785120.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "4yr wo leap", 
-                        "star": 1, 
                         "stop_want": 159887520.0
                       }
                     }, 
                     "plan_label": "300-304-0 leap yrs", 
-                    "star": 1, 
                     "stop_want": 159887520
                   }, 
                   "304-400-24 leap yrs": {
                     "gogo_want": 159887520, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "4yr with leap": {
                         "denom": 24, 
                         "gogo_want": 6661980.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "4yr with leap", 
-                        "star": 1, 
                         "stop_want": 8765820.0
                       }
                     }, 
                     "plan_label": "304-400-24 leap yrs", 
-                    "star": 1, 
                     "stop_want": 210379680
                   }
                 }, 
-                "plan_label": "400 yr segment", 
-                "star": 1
+                "plan_label": "400 yr segment"
               }, 
               "4yr with leap": {
                 "begin": 0.0, 
                 "close": 2103840.0, 
                 "is_expanded": false, 
+                "kar": 1, 
                 "kids": {
                   "1-yr": {
                     "gogo_want": 0, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "1-yr", 
-                    "star": 1, 
                     "stop_want": 527040
                   }, 
                   "2-yr": {
                     "gogo_want": 527040, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "2-yr", 
-                    "star": 1, 
                     "stop_want": 1052640
                   }, 
                   "3-yr": {
                     "gogo_want": 1052640, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "3-yr", 
-                    "star": 1, 
                     "stop_want": 1578240
                   }, 
                   "4-yr": {
                     "gogo_want": 1578240, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "4-yr", 
-                    "star": 1, 
                     "stop_want": 2103840
                   }
                 }, 
-                "plan_label": "4yr with leap", 
-                "star": 1
+                "plan_label": "4yr with leap"
               }, 
               "4yr wo leap": {
                 "begin": 0, 
                 "close": 2102400, 
                 "is_expanded": false, 
+                "kar": 1, 
                 "kids": {
                   "1-yr": {
                     "gogo_want": 0, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "1-yr", 
-                    "star": 1, 
                     "stop_want": 525600
                   }, 
                   "2-yr": {
                     "gogo_want": 525600, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "2-yr", 
-                    "star": 1, 
                     "stop_want": 1051200
                   }, 
                   "3-yr": {
                     "gogo_want": 1051200, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "3-yr", 
-                    "star": 1, 
                     "stop_want": 1576800
                   }, 
                   "4-yr": {
                     "gogo_want": 1576800, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "4-yr", 
-                    "star": 1, 
                     "stop_want": 2102400
                   }
                 }, 
-                "plan_label": "4yr wo leap", 
-                "star": 1
+                "plan_label": "4yr wo leap"
               }, 
               "hr": {
                 "begin": 0, 
                 "close": 60, 
                 "is_expanded": false, 
+                "kar": 1, 
                 "kids": {
                   "0-:00": {
                     "gogo_want": 0, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "0-:00", 
-                    "star": 1, 
                     "stop_want": 1
                   }, 
                   "1-:01": {
                     "gogo_want": 1, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "1-:01", 
-                    "star": 1, 
                     "stop_want": 2
                   }, 
                   "10-:10": {
                     "gogo_want": 10, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "10-:10", 
-                    "star": 1, 
                     "stop_want": 11
                   }, 
                   "11-:11": {
                     "gogo_want": 11, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "11-:11", 
-                    "star": 1, 
                     "stop_want": 12
                   }, 
                   "12-:12": {
                     "gogo_want": 12, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "12-:12", 
-                    "star": 1, 
                     "stop_want": 13
                   }, 
                   "13-:13": {
                     "gogo_want": 13, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "13-:13", 
-                    "star": 1, 
                     "stop_want": 14
                   }, 
                   "14-:14": {
                     "gogo_want": 14, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "14-:14", 
-                    "star": 1, 
                     "stop_want": 15
                   }, 
                   "15-:15": {
                     "gogo_want": 15, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "15-:15", 
-                    "star": 1, 
                     "stop_want": 16
                   }, 
                   "16-:16": {
                     "gogo_want": 16, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "16-:16", 
-                    "star": 1, 
                     "stop_want": 17
                   }, 
                   "17-:17": {
                     "gogo_want": 17, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "17-:17", 
-                    "star": 1, 
                     "stop_want": 18
                   }, 
                   "18-:18": {
                     "gogo_want": 18, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "18-:18", 
-                    "star": 1, 
                     "stop_want": 19
                   }, 
                   "19-:19": {
                     "gogo_want": 19, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "19-:19", 
-                    "star": 1, 
                     "stop_want": 20
                   }, 
                   "2-:02": {
                     "gogo_want": 2, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "2-:02", 
-                    "star": 1, 
                     "stop_want": 3
                   }, 
                   "20-:20": {
                     "gogo_want": 20, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "20-:20", 
-                    "star": 1, 
                     "stop_want": 21
                   }, 
                   "21-:21": {
                     "gogo_want": 21, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "21-:21", 
-                    "star": 1, 
                     "stop_want": 22
                   }, 
                   "22-:22": {
                     "gogo_want": 22, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "22-:22", 
-                    "star": 1, 
                     "stop_want": 23
                   }, 
                   "23-:23": {
                     "gogo_want": 23, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "23-:23", 
-                    "star": 1, 
                     "stop_want": 24
                   }, 
                   "24-:24": {
                     "gogo_want": 24, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "24-:24", 
-                    "star": 1, 
                     "stop_want": 25
                   }, 
                   "25-:25": {
                     "gogo_want": 25, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "25-:25", 
-                    "star": 1, 
                     "stop_want": 26
                   }, 
                   "26-:26": {
                     "gogo_want": 26, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "26-:26", 
-                    "star": 1, 
                     "stop_want": 27
                   }, 
                   "27-:27": {
                     "gogo_want": 27, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "27-:27", 
-                    "star": 1, 
                     "stop_want": 28
                   }, 
                   "28-:28": {
                     "gogo_want": 28, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "28-:28", 
-                    "star": 1, 
                     "stop_want": 29
                   }, 
                   "29-:29": {
                     "gogo_want": 29, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "29-:29", 
-                    "star": 1, 
                     "stop_want": 30
                   }, 
                   "3-:03": {
                     "gogo_want": 3, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "3-:03", 
-                    "star": 1, 
                     "stop_want": 4
                   }, 
                   "30-:30": {
                     "gogo_want": 30, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "30-:30", 
-                    "star": 1, 
                     "stop_want": 31
                   }, 
                   "31-:31": {
                     "gogo_want": 31, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "31-:31", 
-                    "star": 1, 
                     "stop_want": 32
                   }, 
                   "32-:32": {
                     "gogo_want": 32, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "32-:32", 
-                    "star": 1, 
                     "stop_want": 33
                   }, 
                   "33-:33": {
                     "gogo_want": 33, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "33-:33", 
-                    "star": 1, 
                     "stop_want": 34
                   }, 
                   "34-:34": {
                     "gogo_want": 34, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "34-:34", 
-                    "star": 1, 
                     "stop_want": 35
                   }, 
                   "35-:35": {
                     "gogo_want": 35, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "35-:35", 
-                    "star": 1, 
                     "stop_want": 36
                   }, 
                   "36-:36": {
                     "gogo_want": 36, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "36-:36", 
-                    "star": 1, 
                     "stop_want": 37
                   }, 
                   "37-:37": {
                     "gogo_want": 37, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "37-:37", 
-                    "star": 1, 
                     "stop_want": 38
                   }, 
                   "38-:38": {
                     "gogo_want": 38, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "38-:38", 
-                    "star": 1, 
                     "stop_want": 39
                   }, 
                   "39-:39": {
                     "gogo_want": 39, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "39-:39", 
-                    "star": 1, 
                     "stop_want": 40
                   }, 
                   "4-:04": {
                     "gogo_want": 4, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "4-:04", 
-                    "star": 1, 
                     "stop_want": 5
                   }, 
                   "40-:40": {
                     "gogo_want": 40, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "40-:40", 
-                    "star": 1, 
                     "stop_want": 41
                   }, 
                   "41-:41": {
                     "gogo_want": 41, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "41-:41", 
-                    "star": 1, 
                     "stop_want": 42
                   }, 
                   "42-:42": {
                     "gogo_want": 42, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "42-:42", 
-                    "star": 1, 
                     "stop_want": 43
                   }, 
                   "43-:43": {
                     "gogo_want": 43, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "43-:43", 
-                    "star": 1, 
                     "stop_want": 44
                   }, 
                   "44-:44": {
                     "gogo_want": 44, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "44-:44", 
-                    "star": 1, 
                     "stop_want": 45
                   }, 
                   "45-:45": {
                     "gogo_want": 45, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "45-:45", 
-                    "star": 1, 
                     "stop_want": 46
                   }, 
                   "46-:46": {
                     "gogo_want": 46, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "46-:46", 
-                    "star": 1, 
                     "stop_want": 47
                   }, 
                   "47-:47": {
                     "gogo_want": 47, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "47-:47", 
-                    "star": 1, 
                     "stop_want": 48
                   }, 
                   "48-:48": {
                     "gogo_want": 48, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "48-:48", 
-                    "star": 1, 
                     "stop_want": 49
                   }, 
                   "49-:49": {
                     "gogo_want": 49, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "49-:49", 
-                    "star": 1, 
                     "stop_want": 50
                   }, 
                   "5-:05": {
                     "gogo_want": 5, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "5-:05", 
-                    "star": 1, 
                     "stop_want": 6
                   }, 
                   "50-:50": {
                     "gogo_want": 50, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "50-:50", 
-                    "star": 1, 
                     "stop_want": 51
                   }, 
                   "51-:51": {
                     "gogo_want": 51, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "51-:51", 
-                    "star": 1, 
                     "stop_want": 52
                   }, 
                   "52-:52": {
                     "gogo_want": 52, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "52-:52", 
-                    "star": 1, 
                     "stop_want": 53
                   }, 
                   "53-:53": {
                     "gogo_want": 53, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "53-:53", 
-                    "star": 1, 
                     "stop_want": 54
                   }, 
                   "54-:54": {
                     "gogo_want": 54, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "54-:54", 
-                    "star": 1, 
                     "stop_want": 55
                   }, 
                   "55-:55": {
                     "gogo_want": 55, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "55-:55", 
-                    "star": 1, 
                     "stop_want": 56
                   }, 
                   "56-:56": {
                     "gogo_want": 56, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "56-:56", 
-                    "star": 1, 
                     "stop_want": 57
                   }, 
                   "57-:57": {
                     "gogo_want": 57, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "57-:57", 
-                    "star": 1, 
                     "stop_want": 58
                   }, 
                   "58-:58": {
                     "gogo_want": 58, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "58-:58", 
-                    "star": 1, 
                     "stop_want": 59
                   }, 
                   "59-59": {
                     "gogo_want": 59, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "59-59", 
-                    "star": 1, 
                     "stop_want": 60
                   }, 
                   "6-:06": {
                     "gogo_want": 6, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "6-:06", 
-                    "star": 1, 
                     "stop_want": 7
                   }, 
                   "7-:07": {
                     "gogo_want": 7, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "7-:07", 
-                    "star": 1, 
                     "stop_want": 8
                   }, 
                   "8-:08": {
                     "gogo_want": 8, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "8-:08", 
-                    "star": 1, 
                     "stop_want": 9
                   }, 
                   "9-:09": {
                     "gogo_want": 9, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "9-:09", 
-                    "star": 1, 
                     "stop_want": 10
                   }
                 }, 
-                "plan_label": "hr", 
-                "star": 1
+                "plan_label": "hr"
               }, 
               "jour": {
                 "begin": 0, 
                 "close": 1440, 
                 "is_expanded": false, 
+                "kar": 1, 
                 "kids": {
                   "10am": {
                     "gogo_want": 600, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "10am", 
-                    "star": 1, 
                     "stop_want": 660
                   }, 
                   "10pm": {
                     "gogo_want": 1320, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "10pm", 
-                    "star": 1, 
                     "stop_want": 1380
                   }, 
                   "11am": {
                     "gogo_want": 660, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "11am", 
-                    "star": 1, 
                     "stop_want": 720
                   }, 
                   "11pm": {
                     "gogo_want": 1380, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "11pm", 
-                    "star": 1, 
                     "stop_want": 1440
                   }, 
                   "12am": {
                     "gogo_want": 0, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "12am", 
-                    "star": 1, 
                     "stop_want": 60
                   }, 
                   "12pm": {
                     "gogo_want": 720, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "12pm", 
-                    "star": 1, 
                     "stop_want": 780
                   }, 
                   "1am": {
                     "gogo_want": 60, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "1am", 
-                    "star": 1, 
                     "stop_want": 120
                   }, 
                   "1pm": {
                     "gogo_want": 780, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "1pm", 
-                    "star": 1, 
                     "stop_want": 840
                   }, 
                   "2am": {
                     "gogo_want": 120, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "2am", 
-                    "star": 1, 
                     "stop_want": 180
                   }, 
                   "2pm": {
                     "gogo_want": 840, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "2pm", 
-                    "star": 1, 
                     "stop_want": 900
                   }, 
                   "3am": {
                     "gogo_want": 180, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "3am", 
-                    "star": 1, 
                     "stop_want": 240
                   }, 
                   "3pm": {
                     "gogo_want": 900, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "3pm", 
-                    "star": 1, 
                     "stop_want": 960
                   }, 
                   "4am": {
                     "gogo_want": 240, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "4am", 
-                    "star": 1, 
                     "stop_want": 300
                   }, 
                   "4pm": {
                     "gogo_want": 960, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "4pm", 
-                    "star": 1, 
                     "stop_want": 1020
                   }, 
                   "5am": {
                     "gogo_want": 300, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "5am", 
-                    "star": 1, 
                     "stop_want": 360
                   }, 
                   "5pm": {
                     "gogo_want": 1020, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "5pm", 
-                    "star": 1, 
                     "stop_want": 1080
                   }, 
                   "6am": {
                     "gogo_want": 360, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "6am", 
-                    "star": 1, 
                     "stop_want": 420
                   }, 
                   "6pm": {
                     "gogo_want": 1080, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "6pm", 
-                    "star": 1, 
                     "stop_want": 1140
                   }, 
                   "7am": {
                     "gogo_want": 420, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "7am", 
-                    "star": 1, 
                     "stop_want": 480
                   }, 
                   "7pm": {
                     "gogo_want": 1140, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "7pm", 
-                    "star": 1, 
                     "stop_want": 1200
                   }, 
                   "8am": {
                     "gogo_want": 480, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "8am", 
-                    "star": 1, 
                     "stop_want": 540
                   }, 
                   "8pm": {
                     "gogo_want": 1200, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "8pm", 
-                    "star": 1, 
                     "stop_want": 1260
                   }, 
                   "9am": {
                     "gogo_want": 540, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "9am", 
-                    "star": 1, 
                     "stop_want": 600
                   }, 
                   "9pm": {
                     "gogo_want": 1260, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "9pm", 
-                    "star": 1, 
                     "stop_want": 1320
                   }
                 }, 
-                "plan_label": "jour", 
-                "star": 1
+                "plan_label": "jour"
               }, 
               "month": {
                 "is_expanded": false, 
+                "kar": 1, 
                 "kids": {
                   "Apr": {
                     "begin": 0, 
                     "close": 43200, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "jours": {
                         "denom": 1440, 
                         "gogo_want": 0.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "jours", 
-                        "star": 1, 
                         "stop_want": 30.0
                       }
                     }, 
-                    "plan_label": "Apr", 
-                    "star": 1
+                    "plan_label": "Apr"
                   }, 
                   "Aug": {
                     "begin": 0, 
                     "close": 44640, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "jours": {
                         "denom": 1440, 
                         "gogo_want": 0.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "jours", 
-                        "star": 1, 
                         "stop_want": 31.0
                       }
                     }, 
-                    "plan_label": "Aug", 
-                    "star": 1
+                    "plan_label": "Aug"
                   }, 
                   "Dec": {
                     "begin": 0, 
                     "close": 44640, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "jours": {
                         "denom": 1440, 
                         "gogo_want": 0.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "jours", 
-                        "star": 1, 
                         "stop_want": 31.0
                       }
                     }, 
-                    "plan_label": "Dec", 
-                    "star": 1
+                    "plan_label": "Dec"
                   }, 
                   "Feb28": {
                     "begin": 0, 
                     "close": 40320, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "jours": {
                         "denom": 1440, 
                         "gogo_want": 0.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "jours", 
-                        "star": 1, 
                         "stop_want": 28.0
                       }
                     }, 
-                    "plan_label": "Feb28", 
-                    "star": 1
+                    "plan_label": "Feb28"
                   }, 
                   "Feb29": {
                     "begin": 0, 
                     "close": 41760, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "jours": {
                         "denom": 1440, 
                         "gogo_want": 0.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "jours", 
-                        "star": 1, 
                         "stop_want": 29.0
                       }
                     }, 
-                    "plan_label": "Feb29", 
-                    "star": 1
+                    "plan_label": "Feb29"
                   }, 
                   "Jan": {
                     "begin": 0, 
                     "close": 44640, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "jours": {
                         "denom": 1440, 
                         "gogo_want": 0.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "jours", 
-                        "star": 1, 
                         "stop_want": 31.0
                       }
                     }, 
-                    "plan_label": "Jan", 
-                    "star": 1
+                    "plan_label": "Jan"
                   }, 
                   "Jul": {
                     "begin": 0, 
                     "close": 44640, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "jours": {
                         "denom": 1440, 
                         "gogo_want": 0.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "jours", 
-                        "star": 1, 
                         "stop_want": 31.0
                       }
                     }, 
-                    "plan_label": "Jul", 
-                    "star": 1
+                    "plan_label": "Jul"
                   }, 
                   "Jun": {
                     "begin": 0, 
                     "close": 43200, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "jours": {
                         "denom": 1440, 
                         "gogo_want": 0.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "jours", 
-                        "star": 1, 
                         "stop_want": 30.0
                       }
                     }, 
-                    "plan_label": "Jun", 
-                    "star": 1
+                    "plan_label": "Jun"
                   }, 
                   "Mar": {
                     "begin": 0, 
                     "close": 44640, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "jours": {
                         "denom": 1440, 
                         "gogo_want": 0.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "jours", 
-                        "star": 1, 
                         "stop_want": 31.0
                       }
                     }, 
-                    "plan_label": "Mar", 
-                    "star": 1
+                    "plan_label": "Mar"
                   }, 
                   "May": {
                     "begin": 0, 
                     "close": 44640, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "jours": {
                         "denom": 1440, 
                         "gogo_want": 0.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "jours", 
-                        "star": 1, 
                         "stop_want": 31.0
                       }
                     }, 
-                    "plan_label": "May", 
-                    "star": 1
+                    "plan_label": "May"
                   }, 
                   "Nov": {
                     "begin": 0, 
                     "close": 43200, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "jours": {
                         "denom": 1440, 
                         "gogo_want": 0.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "jours", 
-                        "star": 1, 
                         "stop_want": 30.0
                       }
                     }, 
-                    "plan_label": "Nov", 
-                    "star": 1
+                    "plan_label": "Nov"
                   }, 
                   "Oct": {
                     "begin": 0, 
                     "close": 44640, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "jours": {
                         "denom": 1440, 
                         "gogo_want": 0.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "jours", 
-                        "star": 1, 
                         "stop_want": 31.0
                       }
                     }, 
-                    "plan_label": "Oct", 
-                    "star": 1
+                    "plan_label": "Oct"
                   }, 
                   "Sep": {
                     "begin": 0, 
                     "close": 43200, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "jours": {
                         "denom": 1440, 
                         "gogo_want": 0.0, 
                         "is_expanded": false, 
+                        "kar": 1, 
                         "morph": true, 
                         "numor": 1, 
                         "plan_label": "jours", 
-                        "star": 1, 
                         "stop_want": 30.0
                       }
                     }, 
-                    "plan_label": "Sep", 
-                    "star": 1
+                    "plan_label": "Sep"
                   }
                 }, 
-                "plan_label": "month", 
-                "star": 1
+                "plan_label": "month"
               }, 
               "wk": {
                 "begin": 0.0, 
                 "close": 10080.0, 
                 "is_expanded": false, 
+                "kar": 1, 
                 "kids": {
                   "Fri": {
                     "gogo_want": 8640, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "Fri", 
-                    "star": 1, 
                     "stop_want": 10080
                   }, 
                   "Mon": {
                     "gogo_want": 2880, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "Mon", 
-                    "star": 1, 
                     "stop_want": 4320
                   }, 
                   "Sat": {
                     "gogo_want": 0, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "Sat", 
-                    "star": 1, 
                     "stop_want": 1440
                   }, 
                   "Sun": {
                     "gogo_want": 1440, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "Sun", 
-                    "star": 1, 
                     "stop_want": 2880
                   }, 
                   "Thur": {
                     "gogo_want": 7200, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "Thur", 
-                    "star": 1, 
                     "stop_want": 8640
                   }, 
                   "Tue": {
                     "gogo_want": 4320, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "Tue", 
-                    "star": 1, 
                     "stop_want": 5760
                   }, 
                   "Wed": {
                     "gogo_want": 5760, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "Wed", 
-                    "star": 1, 
                     "stop_want": 7200
                   }
                 }, 
-                "plan_label": "wk", 
-                "star": 1
+                "plan_label": "wk"
               }
             }, 
-            "plan_label": "tech", 
-            "star": 1
+            "plan_label": "tech"
           }
         }, 
-        "plan_label": "ziet", 
-        "star": 1
+        "plan_label": "ziet"
       }
     }, 
     "plan_label": "A", 
-    "plan_uid": 1, 
-    "star": 1
+    "plan_uid": 1
   }, 
-  "respect_grain": 1, 
-  "star": 1
+  "respect_grain": 1
 }

@@ -723,7 +723,7 @@ def test_get_atom_args_obj_types_ReturnsObj():
     assert x_obj_types.get(kw.gogo_want) == "float"
     assert x_obj_types.get(kw.group_title) == kw.TitleTerm
     assert x_obj_types.get(kw.healer_name) == kw.NameTerm
-    assert x_obj_types.get(kw.star) == "int"
+    assert x_obj_types.get(kw.kar) == "int"
     assert x_obj_types.get(kw.max_tree_traverse) == "int"
     assert x_obj_types.get(kw.morph) == "bool"
     assert x_obj_types.get(kw.reason_state) == kw.RopeTerm

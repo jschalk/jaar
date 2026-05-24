@@ -2,12 +2,13 @@ from ch00_py.db_toolbox import get_sorted_cols_only_list
 from ch00_py.file_toolbox import create_path, get_json_filename, open_json
 from ch99_glossary.sorter import get_keg_elements_sort_order
 from enum import Enum
+from os.path import exists as os_path_exists
+from pathlib import Path as pathlib_Path
 
 
 def brick_config_path() -> str:
-    "Returns path: ch17_brick/brick_config.json"
-    chapter_dir = create_path("src", "ch17_brick")
-    return create_path(chapter_dir, "brick_config.json")
+    """Returns src\\ch17_brick\\brick_config.json"""
+    return create_path(create_path("src", "ch17_brick"), "brick_config.json")
 
 
 def get_brick_config_dict(brick_categorys: set[str] = None) -> dict:
@@ -239,7 +240,7 @@ def get_brick_sqlite_types() -> dict[str, str]:
         "spark_face_inx": "TEXT",
         "spark_face_otx": "TEXT",
         "spark_num": "INTEGER",
-        "star": "INTEGER",
+        "kar": "INTEGER",
         "stop_calc": "REAL",
         "stop_want": "REAL",
         "sum_healerunit_plans_fund_total": "REAL",
@@ -438,8 +439,8 @@ def get_brick_format_headers() -> dict[str, list[str]]:
     ifx = BrickFormatsEnum
     return {
         "moment_rope,person_name,contact_name": ifx.bk00001_contact_v0_0_0,
-        "moment_rope,person_name,plan_rope,star,pledge": ifx.bk00002_planunit_v0_0_0,
-        "moment_rope,person_name,plan_rope,reason_context,reason_state,star,pledge": ifx.bk00005_plan_reason,
+        "moment_rope,person_name,plan_rope,kar,pledge": ifx.bk00002_planunit_v0_0_0,
+        "moment_rope,person_name,plan_rope,reason_context,reason_state,kar,pledge": ifx.bk00005_plan_reason,
         "moment_rope,person_name,plan_rope,fact_context,fact_state": ifx.bk00007_moment_fact,
         "moment_rope,epoch_label,c400_number,yr1_jan1_offset,monthday_index,fund_grain,mana_grain,respect_grain,knot,job_listen_rotations": ifx.bk00100_momentunit_v0_0_0,
         "moment_rope,person_name,bud_time,knot,quota,celldepth": ifx.bk00101_moment_budunit_v0_0_0,
@@ -458,7 +459,7 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "person_name,plan_rope,healer_name,knot": ifx.bk00125_person_plan_healerunit_v0_0_0,
         "person_name,plan_rope,reason_context,reason_state,reason_lower,reason_upper,reason_divisor,knot": ifx.bk00126_person_plan_reason_caseunit_v0_0_0,
         "person_name,plan_rope,reason_context,active_requisite,knot": ifx.bk00127_person_plan_reasonunit_v0_0_0,
-        "person_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,star,pledge,problem_bool,knot": ifx.bk00128_person_planunit_v0_0_0,
+        "person_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,kar,pledge,problem_bool,knot": ifx.bk00128_person_planunit_v0_0_0,
         "moment_rope,person_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,fund_grain,mana_grain,respect_grain,knot": ifx.bk00129_personunit_v0_0_0,
         "moment_rope,person_name,plan_rope,healer_name,problem_bool": ifx.bk00136_problem_healer_v0_0_0,
         "otx_title,inx_title,otx_knot,inx_knot,unknown_str": ifx.bk00142_translate_title_v0_0_0,

@@ -56,13 +56,9 @@ def test_create_chapter_ref_path_ReturnsObj(temp3_dir):
 
 @pytest_mark.skip_on_linux
 def test_create_chapter_ref_path_HasDocString():
-    # ESTABLISH
-    src_dir = "src"
-    ch_dir = create_path(src_dir, "chapter_dir")
-    ref_dir = create_path(ch_dir, "_ref")
-    doc_str = create_path(ref_dir, get_json_filename("chXX_ref"))
-    doc_str = f"Returns path: {doc_str}"
-    print(f"{doc_str=}")
+    # GIVEN the expected docstring with literal src/ path
+    doc_str = "Returns path: src\\chapter_dir\\_ref\\chXX_ref.json"
+
     # WHEN / THEN
     assert inspect_getdoc(create_chapter_ref_path) == doc_str
 

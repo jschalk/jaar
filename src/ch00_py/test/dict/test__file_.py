@@ -22,9 +22,68 @@ from ch00_py.file_toolbox import (
     set_dir,
 )
 from ch99_glossary.ch_keyword import Ch00Keywords as kw, ExampleStrs as exx
-from os.path import exists as os_path_exist, join as os_path_join
+from os.path import (
+    exists as os_path_exist,
+    exists as os_path_exists,
+    join as os_path_join,
+)
 from pathlib import Path as pathlib_Path
 from pytest import mark as pytest_mark, raises as pytest_raises
+from unittest.mock import patch as mock_patch
+
+
+def test_create_path_ReturnsSrcPath_WhenSrcPathExists(tmp_path):
+    # GIVEN a path that exists on disk
+    existing_file = tmp_path / "obj.json"
+    existing_file.touch()  # create the file
+
+    # WHEN create_path is called with an existing path
+    result = create_path(str(tmp_path), "obj.json")
+
+    # THEN it returns the src/ path as normal
+    assert result == os_path_join(str(tmp_path), "obj.json")
+    assert os_path_exists(result)
+
+
+# TODO clean up test a bit.
+def test_create_path_UsesFallback_WhenSrcPathDoesNotExist():
+    # GIVEN os_path_exists returns False (simulates pip install environment)
+    with mock_patch("ch00_py.file_toolbox.os_path_exists", return_value=False):
+
+        # WHEN create_path is called with a src/ path
+        result = create_path("src", "sh17_fizz")
+
+    # THEN it returns a path relative to the caller's module, not src/
+    assert "src" not in pathlib_Path(result).parts or result != os_path_join(
+        "src", "sh17_fizz"
+    )
+
+
+def test_create_path_SkipsFallback_WhenNotSrcPath(temp3_dir):
+    # GIVEN a non-src path that does not exist
+    non_existent = os_path_join(temp3_dir, "ghost_dir")
+
+    # WHEN create_path is called with a non-src path
+    result = create_path(non_existent, "file.json")
+
+    # THEN it returns the joined path as-is without fallback
+    assert result == os_path_join(non_existent, "file.json")
+
+
+def test_create_path_FallbackPathExists_WhenSrcUnavailable():
+    # GIVEN os_path_exists returns False (simulates pip install environment)
+    this_filename = pathlib_Path(__file__).name
+    with mock_patch("ch00_py.file_toolbox.os_path_exists", return_value=False):
+
+        # WHEN create_path is called with this test file's own name
+        result = create_path("src", this_filename)
+
+    # THEN the fallback path must point to an existing file
+    assert pathlib_Path(result).exists(), (
+        f"Fallback path does not exist: '{result}'\n"
+        f"  Expected to find: '{this_filename}' next to this test file.\n"
+        f"  Path(__file__) fallback is not working correctly."
+    )
 
 
 def test_create_path_ReturnsObj(temp3_dir):

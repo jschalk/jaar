@@ -39,17 +39,17 @@ def test_PersonDelta_set_personatom_Sets_PersonUnitSimpleAttrs():
     opt1_arg = kw.mana_grain
     jvalues = {opt1_arg: attribute_value}
     jkeys = {}
-    person_star_personatom = personatom_shop(
+    person_kar_personatom = personatom_shop(
         dimen,
         kw.UPDATE,
         jkeys=jkeys,
         jvalues=jvalues,
     )
     assert ex1_persondelta.personatoms == {}
-    assert person_star_personatom.atom_order is None
+    assert person_kar_personatom.atom_order is None
 
     # WHEN
-    ex1_persondelta.set_personatom(person_star_personatom)
+    ex1_persondelta.set_personatom(person_kar_personatom)
 
     # THEN
     assert len(ex1_persondelta.personatoms) == 1
@@ -57,19 +57,19 @@ def test_PersonDelta_set_personatom_Sets_PersonUnitSimpleAttrs():
     # print(f"{x_update_dict=}")
     x_dimen_personatom = x_update_dict.get(dimen)
     print(f"{x_dimen_personatom=}")
-    assert x_dimen_personatom == person_star_personatom
-    assert person_star_personatom.atom_order is not None
+    assert x_dimen_personatom == person_kar_personatom
+    assert person_kar_personatom.atom_order is not None
 
 
 def test_PersonDelta_set_personatom_RaisesErrorWhen_is_valid_IsFalse():
     # ESTABLISH
     ex1_persondelta = persondelta_shop()
     x_dimen = kw.person_contactunit
-    person_star_personatom = personatom_shop(x_dimen, kw.UPDATE)
+    person_kar_personatom = personatom_shop(x_dimen, kw.UPDATE)
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        ex1_persondelta.set_personatom(person_star_personatom)
+        ex1_persondelta.set_personatom(person_kar_personatom)
 
     # THEN
     exception_str = f"""'{x_dimen}' UPDATE PersonAtom is invalid
@@ -240,16 +240,16 @@ def test_PersonDelta_get_dimen_sorted_personatoms_list_ReturnsObj_Scenario0_rope
 #     # WHEN
 #     opt2_value = 55
 #     dimen = kw.personunit
-#     opt2_arg = kw.star
-#     star_personatom = personatom_shop(dimen, kw.UPDATE)
-#     star_personatom.set_jvalue(opt2_arg, opt2_value)
-#     ex1_persondelta.set_personatom(star_personatom)
+#     opt2_arg = kw.kar
+#     kar_personatom = personatom_shop(dimen, kw.UPDATE)
+#     kar_personatom.set_jvalue(opt2_arg, opt2_value)
+#     ex1_persondelta.set_personatom(kar_personatom)
 #     # THEN
 #     assert len(ex1_persondelta.personatoms.get(kw.UPDATE).keys()) == 1
 #     sue_personunit_dict = ex1_persondelta.personatoms.get(kw.UPDATE)
-#     sue_star_personatom = sue_personunit_dict.get(dimen)
-#     print(f"{sue_star_personatom=}")
-#     assert star_personatom == sue_star_personatom
+#     sue_kar_personatom = sue_personunit_dict.get(dimen)
+#     print(f"{sue_kar_personatom=}")
+#     assert kar_personatom == sue_kar_personatom
 
 #     # WHEN
 #     new2_value = 66

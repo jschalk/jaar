@@ -445,7 +445,7 @@ def add_person_to_ii00128_csv(
                 if_none_str(planunit.morph),
                 if_none_str(planunit.gogo_want),
                 if_none_str(planunit.stop_want),
-                if_none_str(planunit.star),
+                if_none_str(planunit.kar),
                 if_none_str(planunit.pledge),
                 if_none_str(planunit.problem_bool),
                 x_knot,

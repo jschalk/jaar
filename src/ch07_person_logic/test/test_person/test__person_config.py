@@ -147,7 +147,7 @@ def test_get_all_person_calc_args_ReturnsObj():
     assert len(all_person_calc_args) == 79
 
 
-def test_get_person_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
+def test_get_person_config_dict_ReturnsObj_ArgDataTypesKeysExist():
     # ESTABLISH / WHEN
     person_config = get_person_config_dict()
 
@@ -226,7 +226,7 @@ def test_get_person_calc_dimen_args_ReturnsObj():
         kw.close,
         kw.addin,
         kw.numor,
-        kw.star,
+        kw.kar,
         kw.stop_want,
         kw.gogo_calc,
         kw.stop_calc,
@@ -289,7 +289,7 @@ def g_popthinkout(
     return j_arg.get(kw.calc_by_thinkout)
 
 
-def test_get_person_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
+def test_get_person_config_dict_ReturnsObj_ArgDataTypesCorrect():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH / WHEN
     cfig = get_person_config_dict()
@@ -650,9 +650,9 @@ def test_get_person_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, prnplan, jv, kw.gogo_want) == "REAL"
     assert g_popthinkout(cfig, prnplan, jv, kw.gogo_want) == False
 
-    assert g_obj_type(cfig, prnplan, jv, kw.star) == "int"
-    assert g_sqlitetype(cfig, prnplan, jv, kw.star) == "INTEGER"
-    assert g_popthinkout(cfig, prnplan, jv, kw.star) == False
+    assert g_obj_type(cfig, prnplan, jv, kw.kar) == "int"
+    assert g_sqlitetype(cfig, prnplan, jv, kw.kar) == "INTEGER"
+    assert g_popthinkout(cfig, prnplan, jv, kw.kar) == False
 
     assert g_obj_type(cfig, prnplan, jv, kw.morph) == "bool"
     assert g_sqlitetype(cfig, prnplan, jv, kw.morph) == "INTEGER"
@@ -825,7 +825,7 @@ def test_get_person_calc_args_type_dict_ReturnsObj():
     assert person_calc_args_type_dict.get(kw.close) == "float"
     assert person_calc_args_type_dict.get(kw.denom) == "int"
     assert person_calc_args_type_dict.get(kw.gogo_want) == "float"
-    assert person_calc_args_type_dict.get(kw.star) == "int"
+    assert person_calc_args_type_dict.get(kw.kar) == "int"
     assert person_calc_args_type_dict.get(kw.morph) == "bool"
     assert person_calc_args_type_dict.get(kw.numor) == "int"
     assert person_calc_args_type_dict.get(kw.pledge) == "bool"

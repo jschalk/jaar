@@ -1,5 +1,6 @@
 {
   "attributes": {
+    "kar"           : { "otx_key": false }, 
     "moment_rope"   : { "otx_key": true  }, 
     "person_name"   : { "otx_key": true  }, 
     "plan_rope"     : { "otx_key": true  }, 
@@ -7,8 +8,7 @@
     "reason_context": { "otx_key": true  }, 
     "reason_state"  : { "otx_key": true  }, 
     "spark_face"    : { "otx_key": true  }, 
-    "spark_num"     : { "otx_key": true  }, 
-    "star"          : { "otx_key": false }
+    "spark_num"     : { "otx_key": true  }
   }, 
   "brick_type": "bk00005", 
   "dimens": [

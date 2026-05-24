@@ -45,6 +45,8 @@ from ch17_brick.brick_config import (
 from ch99_glossary.ch_keyword import Ch17Keywords as kw
 from ch99_glossary.sorter import get_keg_elements_sort_order
 from copy import copy as copy_copy
+from pathlib import Path as pathlib_Path
+from unittest.mock import patch as mock_patch
 
 
 def test_get_keg_elements_sort_order_ReturnsObj():
@@ -216,7 +218,7 @@ def test_get_keg_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[122] == f"{kw.fact_upper}_inx"
     assert table_sorting_priority[123] == kw.fund_pool
     assert table_sorting_priority[124] == kw.give_force
-    assert table_sorting_priority[125] == kw.star
+    assert table_sorting_priority[125] == kw.kar
     assert table_sorting_priority[126] == kw.max_tree_traverse
     assert table_sorting_priority[127] == kw.reason_lower
     assert table_sorting_priority[128] == f"{kw.reason_lower}_otx"
@@ -527,7 +529,7 @@ def test_get_brick_sqlite_types_ReturnsObj():
     assert sqlite_types.get(kw.spark_face_inx) == "TEXT"
     assert sqlite_types.get(kw.spark_face_otx) == "TEXT"
     assert sqlite_types.get(kw.spark_num) == "INTEGER"
-    assert sqlite_types.get(kw.star) == "INTEGER"
+    assert sqlite_types.get(kw.kar) == "INTEGER"
     assert sqlite_types.get(kw.stop_calc) == "REAL"
     assert sqlite_types.get(kw.stop_want) == "REAL"
     assert sqlite_types.get(kw.sum_healerunit_plans_fund_total) == "REAL"
@@ -573,6 +575,48 @@ def test_brick_config_path_ReturnsObj_Brick() -> str:
     # ESTABLISH / WHEN / THEN
     chapter_dir = create_path("src", "ch17_brick")
     assert brick_config_path() == create_path(chapter_dir, "brick_config.json")
+
+
+def test_brick_config_UsesAliasedImport():
+    # GIVEN the ch17_brick.brick_config module
+    from ch17_brick import brick_config as brick_config_module
+
+    # WHEN we inspect the module's namespace
+    # THEN os_path_exists must exist as an attribute and must be os.path.exists
+    from os.path import exists as os_path_exists
+
+    assert hasattr(brick_config_module, "os_path_exists"), (
+        "ch17_brick.brick_config does not import exists as os_path_exists.\n"
+        "  The mock in test_brick_config_path_UsesModuleRelativePathWhenSrcUnavailable\n"
+        "  will not work without this exact import alias."
+    )
+    assert brick_config_module.os_path_exists is os_path_exists, (
+        "os_path_exists in ch17_brick.brick_config is not os.path.exists.\n"
+        "  It may have been reassigned or imported incorrectly."
+    )
+
+
+def test_brick_config_path_UsesModuleRelativePathWhenSrcUnavailable():
+    # GIVEN os_path_exists returns False (simulates pip install environment)
+    with mock_patch("ch17_brick.brick_config.os_path_exists", return_value=False):
+
+        # WHEN brick_config_path is called without src/ available
+        path = pathlib_Path(brick_config_path()).resolve()
+
+    # THEN path must be relative to the module file, not the cwd src/ path
+    from ch17_brick import brick_config as brick_config_module
+
+    expected = (
+        pathlib_Path(brick_config_module.__file__).resolve().parent
+        / "brick_config.json"
+    )
+
+    assert path == expected, (
+        f"returned : {path}\n"
+        f"expected : {expected}\n"
+        f"  The Path(__file__) fallback is not being used."
+    )
+    assert path.exists(), f"Fallback path does not exist: '{path}'"
 
 
 def test_get_brick_config_dict_ReturnsObj_Scenario0_IsFullyPopulated():

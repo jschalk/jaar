@@ -155,7 +155,7 @@ def test_etl_heard_vld_to_lego_spark_person_csvs_CreatesCSVs_Scenario2_person_pl
 
     create_sound_and_heard_tables(cursor0)
     insert_raw_sqlstr = f"""
-INSERT INTO {put_agg_tablename} ({kw.spark_num},{kw.spark_face},{kw.person_name},{kw.plan_rope},{kw.star},{kw.pledge})
+INSERT INTO {put_agg_tablename} ({kw.spark_num},{kw.spark_face},{kw.person_name},{kw.plan_rope},{kw.kar},{kw.pledge})
 VALUES
   ({spark3}, '{exx.sue}', '{exx.sue}', '{music_rope}', 10, 1)
 , ({spark3}, '{exx.sue}', '{exx.bob}', '{home_rope}', 1, 0)
@@ -190,7 +190,7 @@ VALUES
     assert neighbor_rope in e3_put_csv
     assert music_rope in e3_put_csv
 
-    expected_e3_put_csv = f"""{kw.spark_num},{kw.spark_face},{kw.person_name},{kw.plan_rope},{kw.begin},{kw.close},{kw.addin},{kw.numor},{kw.denom},{kw.morph},{kw.gogo_want},{kw.stop_want},{kw.star},{kw.pledge},{kw.problem_bool},{kw.knot}
+    expected_e3_put_csv = f"""{kw.spark_num},{kw.spark_face},{kw.person_name},{kw.plan_rope},{kw.begin},{kw.close},{kw.addin},{kw.numor},{kw.denom},{kw.morph},{kw.gogo_want},{kw.stop_want},{kw.kar},{kw.pledge},{kw.problem_bool},{kw.knot}
 {spark3},{exx.sue},{exx.bob},;Amy23;clean home;,,,,,,,,,1,0,,
 {spark3},{exx.sue},{exx.bob},;Amy23;clean home;ask neighbor to use baking soda;,,,,,,,,,3,1,,
 {spark3},{exx.sue},{exx.bob},;Amy23;clean home;clean clothes with baking soda;,,,,,,,,,12,1,,

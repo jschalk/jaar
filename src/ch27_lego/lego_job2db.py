@@ -301,7 +301,7 @@ def create_prnplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     morph = values_dict.get("morph")
     gogo_want = values_dict.get("gogo_want")
     stop_want = values_dict.get("stop_want")
-    star = values_dict.get("star")
+    kar = values_dict.get("kar")
     pledge = values_dict.get("pledge")
     problem_bool = values_dict.get("problem_bool")
     active = values_dict.get("plan_active")
@@ -321,7 +321,7 @@ def create_prnplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO person_planunit_job (moment_rope, person_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, pledge, problem_bool, fund_grain, knot, plan_active, plan_task, fund_onset, fund_cease, fund_ratio, gogo_calc, stop_calc, tree_level, range_evaluated, descendant_pledge_count, healerunit_ratio, all_contact_cred, all_contact_debt)
+    return f"""INSERT INTO person_planunit_job (moment_rope, person_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, kar, pledge, problem_bool, fund_grain, knot, plan_active, plan_task, fund_onset, fund_cease, fund_ratio, gogo_calc, stop_calc, tree_level, range_evaluated, descendant_pledge_count, healerunit_ratio, all_contact_cred, all_contact_debt)
 VALUES (
   {sqlite_obj_str(moment_rope, "TEXT")}
 , {sqlite_obj_str(person_name, "TEXT")}
@@ -334,7 +334,7 @@ VALUES (
 , {sqlite_obj_str(morph, real_str)}
 , {sqlite_obj_str(gogo_want, real_str)}
 , {sqlite_obj_str(stop_want, real_str)}
-, {sqlite_obj_str(star, real_str)}
+, {sqlite_obj_str(kar, real_str)}
 , {sqlite_obj_str(pledge, real_str)}
 , {sqlite_obj_str(problem_bool, "INTEGER")}
 , {sqlite_obj_str(fund_grain, real_str)}

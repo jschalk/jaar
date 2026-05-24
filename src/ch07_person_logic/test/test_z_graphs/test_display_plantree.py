@@ -94,16 +94,16 @@ def test_PersonUnit_fund_graph0_VisualizesCirculation(graphics_bool):
     sweep_rope = sue_person.make_rope(clean_rope, exx.sweep)
     dish_str = "clean dishes"
     dish_rope = sue_person.make_rope(clean_rope, dish_str)
-    sue_person.add_plan(casa_rope, star=30)
-    sue_person.add_plan(cat_rope, star=30)
-    sue_person.add_plan(hun_n_rope, star=30)
-    sue_person.add_plan(hun_y_rope, star=30)
-    sue_person.add_plan(clean_rope, star=30)
-    sue_person.add_plan(sweep_rope, star=30, pledge=True)
-    sue_person.add_plan(dish_rope, star=30, pledge=True)
+    sue_person.add_plan(casa_rope, kar=30)
+    sue_person.add_plan(cat_rope, kar=30)
+    sue_person.add_plan(hun_n_rope, kar=30)
+    sue_person.add_plan(hun_y_rope, kar=30)
+    sue_person.add_plan(clean_rope, kar=30)
+    sue_person.add_plan(sweep_rope, kar=30, pledge=True)
+    sue_person.add_plan(dish_rope, kar=30, pledge=True)
     dinner_str = "cat have dinner"
     dinner_rope = sue_person.make_l1_rope(dinner_str)
-    sue_person.add_plan(dinner_rope, star=30, pledge=True)
+    sue_person.add_plan(dinner_rope, kar=30, pledge=True)
 
     # WHEN / THEN
     fund_graph0(sue_person, kw.case_task, graphics_bool)
