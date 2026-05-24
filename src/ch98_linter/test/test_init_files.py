@@ -132,7 +132,7 @@ def test_LibraryHasAll_init_py_Files(root: str, directory: Path):
     )
 
 
-def test_root_dirs_exist():
+def test_RootDirsExist():
     """All configured ROOT_DIRS must exist so the linter is actually running."""
     missing_roots = [r for r in ROOT_DIRS if not Path(r).exists()]
     assert not missing_roots, (
