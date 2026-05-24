@@ -143,3 +143,6 @@ src/ch32_world_apex/test/test_world_examples/worlds
 src/ch32_world/test/test_world_examples/example.xlsx
 docs/essays/
 .vscode/settings.json
+build/
+dist/
+src/*.egg-info/

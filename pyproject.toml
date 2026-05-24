@@ -8,7 +8,6 @@ dependencies = [
   "compact_json",
   "flask",
   "flask_cors",
-  "importlib",
   "pandas",
   "plotly",
   "openpyxl",
@@ -47,7 +46,16 @@ no_sections = true
 profile = "black"
 
 [tool.pytest.ini_options]
-norecursedirs = ["_ref", "__pycache__", ".git", ".venv", "dist", "build"]
+markers = ["local_only: tests meant to run locally only, not in CI"]
+norecursedirs = [
+  "_ref",
+  "__pycache__",
+  ".git",
+  ".venv",
+  "dist",
+  "build",
+  "*.egg-info",
+]
 testpaths = ["src", "tests"]
 
 [tool.semantic_release]
@@ -67,7 +75,7 @@ package-dir = {"" = "src"}
 py-modules = ["listen"]
 
 [tool.setuptools.package-data]
-ch19_idea_src = ["idea_config.json"]
+"*" = ["*.json", "*.yaml", "**/*.json", "**/*.yaml"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
