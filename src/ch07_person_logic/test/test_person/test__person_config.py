@@ -12,7 +12,7 @@ from ch07_person_logic.person_config import (
 )
 from ch07_person_logic.person_main import ContactUnit, PersonUnit
 from ch99_glossary.ch_keyword import Ch07Keywords as kw
-from os.path import exists as os_path_exists
+from os.path import exists as os_path_exists, join as os_path_join
 
 
 def test_max_tree_traverse_default_ReturnsObj() -> str:
@@ -22,7 +22,7 @@ def test_max_tree_traverse_default_ReturnsObj() -> str:
 
 def test_get_person_config_dict_Exists():
     # ESTABLISH
-    expected_dir = create_path("src", "ch07_person_logic")
+    expected_dir = create_path("src", os_path_join("ch07_person_logic"))
 
     # WHEN
     config_path = person_config_path()

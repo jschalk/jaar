@@ -1,12 +1,12 @@
 from ch00_py.dict_toolbox import get_from_nested_dict
 from ch00_py.file_toolbox import create_path, open_json, save_json
 from ch08_person_atom._ref.ch08_semantic_types import CRUD_command
+from os.path import join as os_path_join
 
 
 def atom_config_path() -> str:
     "Returns Path: ch08_person_atom/atom_config.json"
-    chapter_dir = create_path("src", "ch08_person_atom")
-    return create_path(chapter_dir, "atom_config.json")
+    return create_path("src", os_path_join("ch08_person_atom", "atom_config.json"))
 
 
 def get_atom_config_dict() -> dict:
