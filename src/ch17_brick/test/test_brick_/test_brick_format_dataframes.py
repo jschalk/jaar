@@ -131,8 +131,8 @@ def test_create_brick_df_Arg_bk00002_planunit_v0_0_0():
     amy_moment_rope = create_rope("amy56")
     sue_personunit = personunit_shop(exx.sue, amy_moment_rope)
     casa_rope = sue_personunit.make_l1_rope(exx.casa)
-    casa_star = 31
-    sue_personunit.set_l1_plan(planunit_shop(exx.casa, star=casa_star))
+    casa_kar = 31
+    sue_personunit.set_l1_plan(planunit_shop(exx.casa, kar=casa_kar))
     clean_rope = sue_personunit.make_rope(casa_rope, exx.clean)
     sue_personunit.set_plan_obj(planunit_shop(exx.clean, pledge=True), casa_rope)
 
@@ -148,13 +148,13 @@ def test_create_brick_df_Arg_bk00002_planunit_v0_0_0():
     assert planunit_format.loc[0, kw.pledge] == ""
     assert planunit_format.loc[0, kw.moment_rope] == amy_moment_rope
     assert planunit_format.loc[0, kw.plan_rope] == casa_rope
-    assert planunit_format.loc[0, kw.star] == casa_star
+    assert planunit_format.loc[0, kw.kar] == casa_kar
 
     assert planunit_format.loc[1, kw.person_name] == sue_personunit.person_name
     assert planunit_format.loc[1, kw.pledge] == "Yes"
     assert planunit_format.loc[1, kw.moment_rope] == amy_moment_rope
     assert planunit_format.loc[1, kw.plan_rope] == clean_rope
-    assert planunit_format.loc[1, kw.star] == 1
+    assert planunit_format.loc[1, kw.kar] == 1
     assert len(planunit_format) == 2
 
 
@@ -242,8 +242,8 @@ def test_save_brick_csv_Arg_bk00002_planunit_v0_0_0(
     amy_moment_rope = create_rope("amy56")
     sue_personunit = personunit_shop(exx.sue, amy_moment_rope)
     casa_rope = sue_personunit.make_l1_rope(exx.casa)
-    casa_star = 31
-    sue_personunit.set_l1_plan(planunit_shop(exx.casa, star=casa_star))
+    casa_kar = 31
+    sue_personunit.set_l1_plan(planunit_shop(exx.casa, kar=casa_kar))
     clean_rope = sue_personunit.make_rope(casa_rope, exx.clean)
     sue_personunit.set_plan_obj(planunit_shop(exx.clean, pledge=True), casa_rope)
     x_brick_name = BrickFormatsEnum.bk00002_planunit_v0_0_0

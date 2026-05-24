@@ -136,7 +136,7 @@ def get_keg_elements_sort_order() -> list[str]:
         "fact_upper_inx",
         "fund_pool",
         "give_force",
-        "star",
+        "kar",
         "max_tree_traverse",
         "reason_lower",
         "reason_lower_otx",

@@ -81,7 +81,7 @@ def test_idea_sheets_to_gcal_day_punchs_SavesFiles_Scenario1_PopulatedSueReport(
         kw.person_name,
         kw.moment_rope,
         kw.plan_rope,
-        kw.star,
+        kw.kar,
         kw.pledge,
     ]
     bk00002_df = DataFrame(bk00002_data, columns=bk00002_cols)
@@ -168,7 +168,7 @@ def test_create_today_punchs_SavesFiles_Scenario0_PopulatedSueReport(
         kw.person_name,
         kw.moment_rope,
         kw.plan_rope,
-        kw.star,
+        kw.kar,
         kw.pledge,
     ]
     bk00002_data = [

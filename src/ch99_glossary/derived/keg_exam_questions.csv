@@ -221,25 +221,25 @@ row_number,question
 219,Did you read that the keg_definition of 'healerunit' is 'Definition needed.'.
 220,"Did you read that the keg_definition of 'healerunit_ratio' is ', Plan thinkout'."
 221,Did you read that the keg_definition of 'is_expanded' is 'If A '.
-222,Did you read that the keg_definition of 'kids' is 'Definition needed.'.
-223,"Did you read that the keg_definition of 'morph' is 'bool that describes how to change parent range in calculations, Plan seed'."
-224,"Did you read that the keg_definition of 'numor' is 'int that describes numerator to parent range calculations, Plan seed'."
-225,Did you read that the keg_definition of 'plan' is 'Definition needed.'.
-226,"Did you read that the keg_definition of 'plan_active' is ', Plan thinkout'."
-227,Did you read that the keg_definition of 'plan_active_hx' is 'Definition needed.'.
-228,Did you read that the keg_definition of 'plan_fund_total' is 'Definition needed.'.
-229,Did you read that the keg_definition of 'plan_label' is 'Every planunit has a plan_label. Every other sibling planunit must have a different plan label.'.
-230,"Did you read that the keg_definition of 'plan_rope' is ', Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed.'."
-231,"Did you read that the keg_definition of 'plan_task' is 'A plan_task planUnit can change a FactUnit and change Active Plan without plan_task, Plan thinkout'."
-232,Did you read that the keg_definition of 'plan_uid' is 'A uniqueidentifier for a planunit. Currently at the person level. Perhaps at a global level in the future.'.
-233,"Did you read that the keg_definition of 'pledge' is ', Plan seed'."
-234,"Did you read that the keg_definition of 'problem_bool' is ', Plan seed'."
-235,"Did you read that the keg_definition of 'range_evaluated' is ', Plan thinkout'."
-236,"Did you read that the keg_definition of 'range_inheritors' is '# range_inheritors key: plan_rope for any Plan that inherits from a range_plan
+222,"Did you read that the keg_definition of 'kar' is ', Plan seed'."
+223,Did you read that the keg_definition of 'kids' is 'Definition needed.'.
+224,"Did you read that the keg_definition of 'morph' is 'bool that describes how to change parent range in calculations, Plan seed'."
+225,"Did you read that the keg_definition of 'numor' is 'int that describes numerator to parent range calculations, Plan seed'."
+226,Did you read that the keg_definition of 'plan' is 'Definition needed.'.
+227,"Did you read that the keg_definition of 'plan_active' is ', Plan thinkout'."
+228,Did you read that the keg_definition of 'plan_active_hx' is 'Definition needed.'.
+229,Did you read that the keg_definition of 'plan_fund_total' is 'Definition needed.'.
+230,Did you read that the keg_definition of 'plan_label' is 'Every planunit has a plan_label. Every other sibling planunit must have a different plan label.'.
+231,"Did you read that the keg_definition of 'plan_rope' is ', Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed.'."
+232,"Did you read that the keg_definition of 'plan_task' is 'A plan_task planUnit can change a FactUnit and change Active Plan without plan_task, Plan thinkout'."
+233,Did you read that the keg_definition of 'plan_uid' is 'A uniqueidentifier for a planunit. Currently at the person level. Perhaps at a global level in the future.'.
+234,"Did you read that the keg_definition of 'pledge' is ', Plan seed'."
+235,"Did you read that the keg_definition of 'problem_bool' is ', Plan seed'."
+236,"Did you read that the keg_definition of 'range_evaluated' is ', Plan thinkout'."
+237,"Did you read that the keg_definition of 'range_inheritors' is '# range_inheritors key: plan_rope for any Plan that inherits from a range_plan
     # range_inheritors value: plan_rope for the range_plan
     # During the thinkout process range_inheritors defines when range_inheritors factheirs need to be created'."
-237,Did you read that the keg_definition of 'reasonheirs' is 'Definition needed.'.
-238,"Did you read that the keg_definition of 'star' is ', Plan seed'."
+238,Did you read that the keg_definition of 'reasonheirs' is 'Definition needed.'.
 239,"Did you read that the keg_definition of 'stop_calc' is ', Plan thinkout'."
 240,"Did you read that the keg_definition of 'stop_want' is ', Plan seed'."
 241,"Did you read that the keg_definition of 'tree_level' is ', Plan thinkout'."
@@ -268,7 +268,7 @@ row_number,question
 264,"Did you read that the keg_definition of 'max_tree_traverse' is ', Person seed.'."
 265,Did you read that the keg_definition of 'obj_type' is 'Used idenify an attribute's object class. Usually in config files.'.
 266,"Did you read that the keg_definition of 'offtrack_fund' is ', Person thinkout'."
-267,Did you read that the keg_definition of 'offtrack_kids_star_set' is 'Definition needed.'.
+267,Did you read that the keg_definition of 'offtrack_kids_kar_set' is 'Definition needed.'.
 268,"Did you read that the keg_definition of 'person_contact_membership' is 'A person dimen representing Membership data. Keys: person_name, contact_name, group_title. person seed.'."
 269,"Did you read that the keg_definition of 'person_contactunit' is 'A person dimen representing ParterUnit data. Keys: person_name, contact_name. person seed.'."
 270,"Did you read that the keg_definition of 'person_groupunit' is 'A person dimen representing GroupUnit data. Keys: person_name, group_title. person thinkout.'."

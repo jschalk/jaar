@@ -786,7 +786,7 @@ def test_brick_sheets_to_lego_mstr_Scenario1_Creates_job_Files(temp3_fs):
         kw.person_name,
         kw.moment_rope,
         kw.plan_rope,
-        kw.star,
+        kw.kar,
         kw.pledge,
     ]
     bk00002_example = DataFrame(data, columns=cols)

@@ -43,7 +43,7 @@ def test_create_gcalendar_events_list_ReturnsObj_Scenario1_1AllDayPledge():
     bob_person = personunit_shop(wx.Bob, wx.root_rope)
     default_epoch_config = get_default_epoch_config_dict()
     add_epoch_planunit(bob_person, default_epoch_config)
-    bob_person.add_plan(wx.mop_rope, pledge=True, star=1)
+    bob_person.add_plan(wx.mop_rope, pledge=True, kar=1)
     apr7 = datetime(2010, 5, 7, 9)
     print(f"{apr7=}")
 
@@ -73,9 +73,9 @@ def test_create_gcalendar_events_list_ReturnsObj_Scenario2_3AllDayPledge():
     bob_person = personunit_shop(wx.Bob, wx.root_rope)
     default_epoch_config = get_default_epoch_config_dict()
     add_epoch_planunit(bob_person, default_epoch_config)
-    bob_person.add_plan(wx.mop_rope, pledge=True, star=2)
-    bob_person.add_plan(wx.sweep_rope, pledge=True, star=1)
-    bob_person.add_plan(wx.scrub_rope, pledge=True, star=1)
+    bob_person.add_plan(wx.mop_rope, pledge=True, kar=2)
+    bob_person.add_plan(wx.sweep_rope, pledge=True, kar=1)
+    bob_person.add_plan(wx.scrub_rope, pledge=True, kar=1)
     apr7 = datetime(2010, 5, 7, 9)
     print(f"{apr7=}")
 
@@ -109,10 +109,10 @@ def test_create_gcalendar_events_list_ReturnsObj_Scenario2_3AllDayPledge():
 def test_create_gcalendar_events_list_ReturnsObj_Scenario3_OneEpoch_pledge():
     # ESTABLISH
     bob_person = personunit_shop(wx.Bob, wx.root_rope)
-    bob_person.add_plan(wx.sweep_rope, pledge=True, star=1)
+    bob_person.add_plan(wx.sweep_rope, pledge=True, kar=1)
 
     # add mop task but only at a point during the day
-    bob_person.add_plan(wx.mop_rope, pledge=True, star=2)
+    bob_person.add_plan(wx.mop_rope, pledge=True, kar=2)
     default_epoch_config = get_default_epoch_config_dict()
     default_epoch_label = default_epoch_config.get(kw.epoch_label)
     add_epoch_planunit(bob_person, default_epoch_config)
@@ -200,10 +200,10 @@ def test_create_gcalendar_csv_from_list_ReturnsObj():
 def test_create_gcalendar_csv_from_person_ReturnsObj_Scenario0_OneEpoch_pledge():
     # ESTABLISH
     bob_person = personunit_shop(wx.Bob, wx.root_rope)
-    bob_person.add_plan(wx.sweep_rope, pledge=True, star=1)
+    bob_person.add_plan(wx.sweep_rope, pledge=True, kar=1)
 
     # add mop task but only at a point during the day
-    bob_person.add_plan(wx.mop_rope, pledge=True, star=2)
+    bob_person.add_plan(wx.mop_rope, pledge=True, kar=2)
     default_epoch_config = get_default_epoch_config_dict()
     default_epoch_label = default_epoch_config.get(kw.epoch_label)
     add_epoch_planunit(bob_person, default_epoch_config)
@@ -230,10 +230,10 @@ def test_create_gcalendar_csv_from_person_ReturnsObj_Scenario0_OneEpoch_pledge()
 def test_create_gcalendar_csv_from_person_ReturnsObj_Scenario1_Non_all_day_EventExists():
     # ESTABLISH
     bob_person = personunit_shop(wx.Bob, wx.root_rope)
-    bob_person.add_plan(wx.sweep_rope, pledge=True, star=1)
+    bob_person.add_plan(wx.sweep_rope, pledge=True, kar=1)
 
     # add mop task but only at a point during the day
-    bob_person.add_plan(wx.mop_rope, pledge=True, star=2)
+    bob_person.add_plan(wx.mop_rope, pledge=True, kar=2)
     default_epoch_config = get_default_epoch_config_dict()
     default_epoch_label = default_epoch_config.get(kw.epoch_label)
     add_epoch_planunit(bob_person, default_epoch_config)
@@ -269,10 +269,10 @@ def test_create_gcalendar_csv_from_person_ReturnsObj_Scenario1_Non_all_day_Event
 def test_create_gcalendar_csv_from_person_ReturnsObj_Scenario2_DiferentEvents():
     # ESTABLISH
     bob_person = personunit_shop(wx.Bob, wx.root_rope)
-    bob_person.add_plan(wx.sweep_rope, pledge=True, star=1)
+    bob_person.add_plan(wx.sweep_rope, pledge=True, kar=1)
 
     # add mop task but only at a point during the day
-    bob_person.add_plan(wx.mop_rope, pledge=True, star=2)
+    bob_person.add_plan(wx.mop_rope, pledge=True, kar=2)
     default_epoch_config = get_default_epoch_config_dict()
     default_epoch_label = default_epoch_config.get(kw.epoch_label)
     add_epoch_planunit(bob_person, default_epoch_config)
@@ -309,10 +309,10 @@ def test_create_gcalendar_csv_from_person_ReturnsObj_Scenario3_WeeklyEventDispla
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     bob_person = personunit_shop(wx.Bob, wx.root_rope)
-    bob_person.add_plan(wx.sweep_rope, pledge=True, star=1)
+    bob_person.add_plan(wx.sweep_rope, pledge=True, kar=1)
 
     # add mop task but only at a point during the day
-    bob_person.add_plan(wx.mop_rope, pledge=True, star=2)
+    bob_person.add_plan(wx.mop_rope, pledge=True, kar=2)
     default_epoch_config = get_default_epoch_config_dict()
     default_epoch_label = default_epoch_config.get(kw.epoch_label)
     add_epoch_planunit(bob_person, default_epoch_config)

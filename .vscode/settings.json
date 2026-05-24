@@ -25,5 +25,8 @@
         "**/dist": true,
         "**/build": true,
         "**/keg.egg-info": true
+    },
+    "search.exclude": {
+        "**/build": true
     }
 }

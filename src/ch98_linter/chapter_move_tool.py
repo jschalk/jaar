@@ -6,6 +6,7 @@ from os.path import (
     isdir as os_path_isdir,
     join as os_path_join,
 )
+from pathlib import Path
 from shutil import rmtree as shutil_rmtree
 from subprocess import (
     CalledProcessError as subprocess_CalledProcessError,
@@ -89,36 +90,46 @@ def rename_files_and_dirs_4times(directory: str, old_string: str, new_string: st
     rename_files_and_dirs(directory, old_string, new_string)
 
 
-def rename_files_and_dirs(
-    directory: str, old_string: str, new_string: str
-) -> list[str]:
-    # new_string = new_string.lower()
-    # old_string = old_string.lower()
-
+def rename_files_and_dirs(directory: str, old_string: str, new_string: str) -> None:
     for root, dirs, files in os_walk(directory):
+        # Remove dot-directories BEFORE os.walk descends into them
+        dirs[:] = [d for d in dirs if not d.startswith(".")]
+
+        # Skip current root if ANY path component starts with "."
+        root_parts = root.replace("\\", "/").split("/")
+
+        if any(part.startswith(".") for part in root_parts):
+            continue
+
         rename_directories(dirs, root, old_string, new_string)
+        file_extensions = [".txt", ".py", ".json", ".ui"]
+        for filename in files:
+            if not any(filename.endswith(ext) for ext in file_extensions):
+                continue
 
-        if "." not in root:
-            # List of file extensions to consider
-            file_extensions = ["txt", ".py", ".json", ".ui"]
-            for filename in files:
-                if any(filename.endswith(ext) for ext in file_extensions):
-                    old_file_path = os_path_join(root, filename)
-                    new_filename = filename.replace(old_string, new_string)
-                    new_file_path = os_path_join(root, new_filename)
-                    if old_file_path != new_file_path:
-                        os_rename(old_file_path, new_file_path)
-                        print(f"{old_string=} {new_string=} {new_file_path=}")
+            old_file_path = os_path_join(root, filename)
+            new_filename = filename.replace(old_string, new_string)
+            new_file_path = os_path_join(root, new_filename)
+            if old_file_path != new_file_path:
+                os_rename(old_file_path, new_file_path)
+                print(f"{old_string=} " f"{new_string=} " f"{new_file_path=}")
 
 
-def rename_directories(dirs: list[str], root, old_string: str, new_string: str):
+def rename_directories(
+    dirs: list[str], root: str, old_string: str, new_string: str
+) -> None:
+
     for d in dirs:
+        # NEVER rename dot-directories
+        if d.startswith("."):
+            continue
         old_dir_path = os_path_join(root, d)
         new_dir_name = d.replace(old_string, new_string)
         new_dir_path = os_path_join(root, new_dir_name)
-        if ".git" not in old_dir_path and old_dir_path != new_dir_path:
+
+        if old_dir_path != new_dir_path:
             os_rename(old_dir_path, new_dir_path)
-            print(f"{old_string=} {new_string=} {new_dir_path=}")
+            print(f"{old_string=} " f"{new_string=} " f"{new_dir_path=}")
 
 
 def string_exists_in_directory(root_dir: str, search_text: str) -> bool:

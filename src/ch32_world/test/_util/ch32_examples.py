@@ -27,7 +27,7 @@ def bk00002_example() -> DataFrame:
         kw.person_name,
         kw.moment_rope,
         kw.plan_rope,
-        kw.star,
+        kw.kar,
         kw.pledge,
     ]
     return DataFrame(data, columns=cols)

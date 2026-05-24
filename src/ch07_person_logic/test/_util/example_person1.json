@@ -268,6 +268,7 @@
       }
     }
   }, 
+  "kar": 1, 
   "knot": ";", 
   "mana_grain": 1, 
   "max_tree_traverse": 2, 
@@ -287,15 +288,19 @@
         "fact_upper": 59
       }
     }, 
+    "kar": 1, 
     "kids": {
       "ACME": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
           "ACME Employee Responsiblities": {
             "is_expanded": false, 
+            "kar": 1, 
             "kids": {
               "Employee Intruction manuel.": {
                 "is_expanded": false, 
+                "kar": 1, 
                 "plan_label": "Employee Intruction manuel.", 
                 "plan_uid": 123, 
                 "pledge": true, 
@@ -321,12 +326,13 @@
                     }, 
                     "reason_context": ";amy45;yr_month;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "Know Abuse Deterrence and Reporting guildlines": {
+                "kar": 1, 
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
+                    "kar": 1, 
                     "plan_label": "Accomplish Fall 2021 traaining", 
                     "plan_uid": 116, 
                     "pledge": true, 
@@ -352,17 +358,17 @@
                         }, 
                         "reason_context": ";amy45;yr_month;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "Know Abuse Deterrence and Reporting guildlines", 
-                "plan_uid": 106, 
-                "star": 1
+                "plan_uid": 106
               }, 
               "Know Discrimination Harassment Bully guildlines": {
+                "kar": 1, 
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
+                    "kar": 1, 
                     "plan_label": "Accomplish Fall 2021 traaining", 
                     "plan_uid": 117, 
                     "reasonunits": {
@@ -387,18 +393,18 @@
                         }, 
                         "reason_context": ";amy45;yr_month;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "Know Discrimination Harassment Bully guildlines", 
-                "plan_uid": 107, 
-                "star": 1
+                "plan_uid": 107
               }, 
               "PC1025 Identifying and Supporting houseless Youth": {
+                "kar": 1, 
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "Accomplish Fall 2021 traaining", 
                     "plan_uid": 119, 
                     "pledge": true, 
@@ -424,31 +430,31 @@
                         }, 
                         "reason_context": ";amy45;yr_month;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "PC1025 Identifying and Supporting houseless Youth", 
-                "plan_uid": 109, 
-                "star": 1
+                "plan_uid": 109
               }, 
               "PC1026 Rick administration and Hazard Analysis": {
+                "kar": 1, 
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "Accomplish Fall 2021 traaining", 
-                    "plan_uid": 122, 
-                    "star": 1
+                    "plan_uid": 122
                   }
                 }, 
                 "plan_label": "PC1026 Rick administration and Hazard Analysis", 
-                "plan_uid": 112, 
-                "star": 1
+                "plan_uid": 112
               }, 
               "PC1027 Adult Sexual Misconduct: Staff to Student/ IX": {
+                "kar": 1, 
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "Accomplish Fall 2021 traaining", 
                     "plan_uid": 118, 
                     "pledge": true, 
@@ -474,18 +480,18 @@
                         }, 
                         "reason_context": ";amy45;yr_month;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "PC1027 Adult Sexual Misconduct: Staff to Student/ IX", 
-                "plan_uid": 108, 
-                "star": 1
+                "plan_uid": 108
               }, 
               "PC1029 Information Security Awareness traaining": {
+                "kar": 1, 
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "Accomplish Fall 2021 traaining", 
                     "plan_uid": 121, 
                     "pledge": true, 
@@ -511,18 +517,18 @@
                         }, 
                         "reason_context": ";amy45;yr_month;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "PC1029 Information Security Awareness traaining", 
-                "plan_uid": 111, 
-                "star": 1
+                "plan_uid": 111
               }, 
               "PRM1003 ACME OSHA COVID-19 Rick Reduction traaining": {
+                "kar": 1, 
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "Accomplish Fall 2021 traaining", 
                     "plan_uid": 120, 
                     "pledge": true, 
@@ -548,17 +554,17 @@
                         }, 
                         "reason_context": ";amy45;yr_month;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "PRM1003 ACME OSHA COVID-19 Rick Reduction traaining", 
-                "plan_uid": 110, 
-                "star": 1
+                "plan_uid": 110
               }, 
               "PRM1005 ACME Staff  and Safety": {
+                "kar": 1, 
                 "kids": {
                   "Accomplish Fall 2021 traaining": {
+                    "kar": 1, 
                     "plan_label": "Accomplish Fall 2021 traaining", 
                     "plan_uid": 115, 
                     "reasonunits": {
@@ -583,26 +589,27 @@
                         }, 
                         "reason_context": ";amy45;yr_month;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "PRM1005 ACME Staff  and Safety", 
-                "plan_uid": 105, 
-                "star": 1
+                "plan_uid": 105
               }
             }, 
             "plan_label": "ACME Employee Responsiblities", 
-            "plan_uid": 102, 
-            "star": 1
+            "plan_uid": 102
           }, 
           "IT DEPT": {
+            "kar": 1, 
             "kids": {
               "IT DEPT off-hrs responsiblities": {
+                "kar": 1, 
                 "kids": {
                   "check ETLs ran correctly": {
+                    "kar": 1, 
                     "kids": {
                       "check emails": {
+                        "kar": 1, 
                         "plan_label": "check emails", 
                         "plan_uid": 138, 
                         "pledge": true, 
@@ -617,15 +624,15 @@
                             }, 
                             "reason_context": ";amy45;jour_minute;"
                           }
-                        }, 
-                        "star": 1
+                        }
                       }, 
                       "check mechanisms": {
+                        "kar": 1, 
                         "kids": {
-                          "MECHANISM2": { "plan_label": "MECHANISM2", "plan_uid": 171, "star": 1 }, 
-                          "MECHANISM3": { "plan_label": "MECHANISM3", "plan_uid": 172, "star": 1 }, 
-                          "MECHANISM5": { "plan_label": "MECHANISM5", "plan_uid": 173, "star": 1 }, 
-                          "MECHANISM7": { "plan_label": "MECHANISM7", "plan_uid": 170, "star": 1 }
+                          "MECHANISM2": { "kar": 1, "plan_label": "MECHANISM2", "plan_uid": 171 }, 
+                          "MECHANISM3": { "kar": 1, "plan_label": "MECHANISM3", "plan_uid": 172 }, 
+                          "MECHANISM5": { "kar": 1, "plan_label": "MECHANISM5", "plan_uid": 173 }, 
+                          "MECHANISM7": { "kar": 1, "plan_label": "MECHANISM7", "plan_uid": 170 }
                         }, 
                         "plan_label": "check mechanisms", 
                         "plan_uid": 139, 
@@ -641,8 +648,7 @@
                             }, 
                             "reason_context": ";amy45;jour_minute;"
                           }
-                        }, 
-                        "star": 1
+                        }
                       }
                     }, 
                     "plan_label": "check ETLs ran correctly", 
@@ -658,10 +664,10 @@
                         }, 
                         "reason_context": ";amy45;jour_minute;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "dress to slightly impress": {
+                    "kar": 1, 
                     "plan_label": "dress to slightly impress", 
                     "plan_uid": 158, 
                     "pledge": true, 
@@ -676,11 +682,11 @@
                         }, 
                         "reason_context": ";amy45;jour_minute;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "go to employment": {
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "go to employment", 
                     "plan_uid": 231, 
                     "pledge": true, 
@@ -695,8 +701,7 @@
                         }, 
                         "reason_context": ";amy45;jour_minute;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "IT DEPT off-hrs responsiblities", 
@@ -712,12 +717,13 @@
                     }, 
                     "reason_context": ";amy45;jour_minute;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "IT DEPT regular hrs responsiblities": {
+                "kar": 1, 
                 "kids": {
                   "Add to Azure DevOps": {
+                    "kar": 1, 
                     "plan_label": "Add to Azure DevOps", 
                     "plan_uid": 156, 
                     "pledge": true, 
@@ -732,12 +738,13 @@
                         }, 
                         "reason_context": ";amy45;jour_minute;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "Datawarehouse": {
+                    "kar": 1, 
                     "kids": {
                       "Datawarehouse Expertise acquisition": {
+                        "kar": 1, 
                         "plan_label": "Datawarehouse Expertise acquisition", 
                         "plan_uid": 142, 
                         "pledge": true, 
@@ -752,15 +759,15 @@
                             }, 
                             "reason_context": ";amy45;jour_minute;"
                           }
-                        }, 
-                        "star": 1
+                        }
                       }, 
                       "dev quantification script \"TIMOTHY\"": {
+                        "kar": 1, 
                         "kids": {
-                          "MECHANISM2": { "plan_label": "MECHANISM2", "plan_uid": 176, "star": 1 }, 
-                          "MECHANISM7": { "plan_label": "MECHANISM7", "plan_uid": 175, "star": 1 }, 
-                          "WPRD"      : { "plan_label": "WPRD"      , "plan_uid": 177, "star": 1 }, 
-                          "WPRDD"     : { "plan_label": "WPRDD"     , "plan_uid": 174, "star": 1 }
+                          "MECHANISM2": { "kar": 1, "plan_label": "MECHANISM2", "plan_uid": 176 }, 
+                          "MECHANISM7": { "kar": 1, "plan_label": "MECHANISM7", "plan_uid": 175 }, 
+                          "WPRD"      : { "kar": 1, "plan_label": "WPRD"      , "plan_uid": 177 }, 
+                          "WPRDD"     : { "kar": 1, "plan_label": "WPRDD"     , "plan_uid": 174 }
                         }, 
                         "plan_label": "dev quantification script \"TIMOTHY\"", 
                         "plan_uid": 157, 
@@ -776,10 +783,10 @@
                             }, 
                             "reason_context": ";amy45;jour_minute;"
                           }
-                        }, 
-                        "star": 1
+                        }
                       }, 
                       "go to daily meeting ": {
+                        "kar": 1, 
                         "plan_label": "go to daily meeting ", 
                         "plan_uid": 232, 
                         "pledge": true, 
@@ -794,15 +801,14 @@
                             }, 
                             "reason_context": ";amy45;jour_minute;"
                           }
-                        }, 
-                        "star": 1
+                        }
                       }
                     }, 
                     "plan_label": "Datawarehouse", 
-                    "plan_uid": 135, 
-                    "star": 1
+                    "plan_uid": 135
                   }, 
                   "IT DEPT general": {
+                    "kar": 1, 
                     "plan_label": "IT DEPT general", 
                     "plan_uid": 141, 
                     "reasonunits": {
@@ -816,10 +822,10 @@
                         }, 
                         "reason_context": ";amy45;jour_minute;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "Keep track of Chatroom conversations": {
+                    "kar": 1, 
                     "plan_label": "Keep track of Chatroom conversations", 
                     "plan_uid": 151, 
                     "pledge": true, 
@@ -834,12 +840,13 @@
                         }, 
                         "reason_context": ";amy45;jour_minute;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "Synergy": {
+                    "kar": 1, 
                     "kids": {
                       "check for access": {
+                        "kar": 1, 
                         "plan_label": "check for access", 
                         "plan_uid": 143, 
                         "reasonunits": {
@@ -853,8 +860,7 @@
                             }, 
                             "reason_context": ";amy45;jour_minute;"
                           }
-                        }, 
-                        "star": 1
+                        }
                       }
                     }, 
                     "plan_label": "Synergy", 
@@ -870,10 +876,10 @@
                         }, 
                         "reason_context": ";amy45;jour_minute;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "consider administration perspective": {
+                    "kar": 1, 
                     "plan_label": "consider administration perspective", 
                     "plan_uid": 155, 
                     "pledge": true, 
@@ -888,8 +894,7 @@
                         }, 
                         "reason_context": ";amy45;jour_minute;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "IT DEPT regular hrs responsiblities", 
@@ -906,8 +911,7 @@
                     }, 
                     "reason_context": ";amy45;jour_minute;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "IT DEPT", 
@@ -923,37 +927,41 @@
                 }, 
                 "reason_context": ";amy45;jour_minute;"
               }
-            }, 
-            "star": 1
+            }
           }
         }, 
         "plan_label": "ACME", 
-        "plan_uid": 100, 
-        "star": 1
+        "plan_uid": 100
       }, 
       "Aaron Donald objects effected by him": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
-          "compelling"    : { "plan_label": "compelling"    , "plan_uid": 262, "star": 1 }, 
-          "not compelling": { "plan_label": "not compelling", "plan_uid": 263, "star": 1 }
+          "compelling"    : { "kar": 1, "plan_label": "compelling"    , "plan_uid": 262 }, 
+          "not compelling": { "kar": 1, "plan_label": "not compelling", "plan_uid": 263 }
         }, 
         "plan_label": "Aaron Donald objects effected by him", 
-        "plan_uid": 261, 
-        "star": 1
+        "plan_uid": 261
       }, 
       "Asset administration": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
           "American sovereignty": {
+            "kar": 1, 
             "kids": {
               "portland sovereignty": {
+                "kar": 1, 
                 "kids": {
                   "downtown": {
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "PSU Sports": {
+                        "kar": 1, 
                         "kids": {
                           "bowling": {
+                            "kar": 1, 
                             "plan_label": "bowling", 
                             "plan_uid": 212, 
                             "reasonunits": {
@@ -963,10 +971,10 @@
                                 }, 
                                 "reason_context": ";amy45;Nation-States;"
                               }
-                            }, 
-                            "star": 1
+                            }
                           }, 
                           "browsing": {
+                            "kar": 1, 
                             "plan_label": "browsing", 
                             "plan_uid": 217, 
                             "reasonunits": {
@@ -976,10 +984,10 @@
                                 }, 
                                 "reason_context": ";amy45;Nation-States;"
                               }
-                            }, 
-                            "star": 1
+                            }
                           }, 
                           "picnic": {
+                            "kar": 1, 
                             "plan_label": "picnic", 
                             "plan_uid": 216, 
                             "reasonunits": {
@@ -987,10 +995,10 @@
                                 "cases": { ";amy45;Seasons;Summer;": {"reason_state": ";amy45;Seasons;Summer;"} }, 
                                 "reason_context": ";amy45;Seasons;"
                               }
-                            }, 
-                            "star": 1
+                            }
                           }, 
                           "street soccer": {
+                            "kar": 1, 
                             "plan_label": "street soccer", 
                             "plan_uid": 213, 
                             "reasonunits": {
@@ -1002,8 +1010,7 @@
                                 }, 
                                 "reason_context": ";amy45;Nation-States;"
                               }
-                            }, 
-                            "star": 1
+                            }
                           }
                         }, 
                         "plan_label": "PSU Sports", 
@@ -1015,12 +1022,13 @@
                             }, 
                             "reason_context": ";amy45;Nation-States;"
                           }
-                        }, 
-                        "star": 1
+                        }
                       }, 
                       "flats": {
+                        "kar": 1, 
                         "kids": {
                           "be reponsible for rent": {
+                            "kar": 1, 
                             "plan_label": "be reponsible for rent", 
                             "plan_uid": 209, 
                             "reasonunits": {
@@ -1032,10 +1040,10 @@
                                 }, 
                                 "reason_context": ";amy45;Nation-States;"
                               }
-                            }, 
-                            "star": 1
+                            }
                           }, 
                           "flat": {
+                            "kar": 1, 
                             "plan_label": "flat", 
                             "plan_uid": 211, 
                             "reasonunits": {
@@ -1047,12 +1055,13 @@
                                 }, 
                                 "reason_context": ";amy45;Nation-States;"
                               }
-                            }, 
-                            "star": 1
+                            }
                           }, 
                           "go for parent_rope": {
+                            "kar": 1, 
                             "kids": {
                               "maybe watch a video": {
+                                "kar": 1, 
                                 "plan_label": "maybe watch a video", 
                                 "plan_uid": 218, 
                                 "reasonunits": {
@@ -1062,8 +1071,7 @@
                                     }, 
                                     "reason_context": ";amy45;Websites;"
                                   }
-                                }, 
-                                "star": 1
+                                }
                               }
                             }, 
                             "plan_label": "go for parent_rope", 
@@ -1077,10 +1085,10 @@
                                 }, 
                                 "reason_context": ";amy45;Nation-States;"
                               }
-                            }, 
-                            "star": 1
+                            }
                           }, 
                           "gym": {
+                            "kar": 1, 
                             "plan_label": "gym", 
                             "plan_uid": 215, 
                             "reasonunits": {
@@ -1088,8 +1096,7 @@
                                 "cases": { ";amy45;Moods;hungry;": {"reason_state": ";amy45;Moods;hungry;"} }, 
                                 "reason_context": ";amy45;Moods;"
                               }
-                            }, 
-                            "star": 1
+                            }
                           }
                         }, 
                         "plan_label": "flats", 
@@ -1103,8 +1110,7 @@
                             }, 
                             "reason_context": ";amy45;Nation-States;"
                           }
-                        }, 
-                        "star": 1
+                        }
                       }
                     }, 
                     "plan_label": "downtown", 
@@ -1116,8 +1122,7 @@
                         }, 
                         "reason_context": ";amy45;Nation-States;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "portland sovereignty", 
@@ -1129,10 +1134,10 @@
                     }, 
                     "reason_context": ";amy45;Nation-States;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "texas sovereignty": {
+                "kar": 1, 
                 "plan_label": "texas sovereignty", 
                 "plan_uid": 205, 
                 "reasonunits": {
@@ -1142,8 +1147,7 @@
                     }, 
                     "reason_context": ";amy45;Nation-States;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "American sovereignty", 
@@ -1153,10 +1157,10 @@
                 "cases": { ";amy45;Nation-States;USA": {"reason_state": ";amy45;Nation-States;USA"} }, 
                 "reason_context": ";amy45;Nation-States;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "French sovereignty": {
+            "kar": 1, 
             "plan_label": "French sovereignty", 
             "plan_uid": 203, 
             "reasonunits": {
@@ -1166,22 +1170,20 @@
                 }, 
                 "reason_context": ";amy45;Nation-States;"
               }
-            }, 
-            "star": 1
+            }
           }
         }, 
         "plan_label": "Asset administration", 
-        "plan_uid": 199, 
-        "star": 1
+        "plan_uid": 199
       }, 
       "Bob Dylan": {
+        "kar": 1, 
         "kids": {
-          "Aint me Babe"      : { "plan_label": "Aint me Babe"      , "plan_uid": 270, "star": 1 }, 
-          "tangled up in blue": { "plan_label": "tangled up in blue", "plan_uid": 271, "star": 1 }
+          "Aint me Babe"      : { "kar": 1, "plan_label": "Aint me Babe"      , "plan_uid": 270 }, 
+          "tangled up in blue": { "kar": 1, "plan_label": "tangled up in blue", "plan_uid": 271 }
         }, 
         "plan_label": "Bob Dylan", 
-        "plan_uid": 269, 
-        "star": 1
+        "plan_uid": 269
       }, 
       "D&B": {
         "awardunits": {
@@ -1190,6 +1192,7 @@
           "America"       : { "awardee_title": "America"       , "give_force": 1.0, "take_force": 1.0 }
         }, 
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
           "Aarons friends are desperate for of housing support": {
             "awardunits": {
@@ -1200,6 +1203,7 @@
               }
             }, 
             "is_expanded": false, 
+            "kar": 1, 
             "kids": {
               "Ask Chuck monthly what I can do": {
                 "awardunits": {
@@ -1209,6 +1213,7 @@
                     "take_force": 1.0
                   }
                 }, 
+                "kar": 1, 
                 "plan_label": "Ask Chuck monthly what I can do", 
                 "plan_uid": 160, 
                 "reasonunits": {
@@ -1218,8 +1223,7 @@
                     }, 
                     "reason_context": ";amy45;Aaron Donald objects effected by him;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "Aarons friends are desperate for of housing support", 
@@ -1231,15 +1235,16 @@
                 }, 
                 "reason_context": ";amy45;Aaron Donald objects effected by him;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "develop D&B software": {
             "awardunits": {
               ";hurt by us dollar": {"awardee_title": ";hurt by us dollar", "give_force": 1.0, "take_force": 1.0}
             }, 
+            "kar": 1, 
             "kids": {
               "test program": {
+                "kar": 1, 
                 "plan_label": "test program", 
                 "plan_uid": 178, 
                 "pledge": true, 
@@ -1264,8 +1269,7 @@
                     "cases": { ";amy45;sem_jours;Mon": {"reason_state": ";amy45;sem_jours;Mon"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "develop D&B software", 
@@ -1277,16 +1281,17 @@
                 }, 
                 "reason_context": ";amy45;Aaron Donald objects effected by him;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "donate to pro-climate committees": {
             "is_expanded": false, 
+            "kar": 1, 
             "kids": {
               "donate to influential people that are pro-Climate Death": {
                 "awardunits": {
                   ";Climate Death": {"awardee_title": ";Climate Death", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "donate to influential people that are pro-Climate Death", 
                 "plan_uid": 168, 
                 "pledge": true, 
@@ -1322,8 +1327,7 @@
                     "cases": { ";amy45;sem_jours;Fri": {"reason_state": ";amy45;sem_jours;Fri"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "donate to pro-climate committees", 
@@ -1335,10 +1339,10 @@
                 }, 
                 "reason_context": ";amy45;Aaron Donald objects effected by him;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "late_evening_go_to_sleep": {
+            "kar": 1, 
             "plan_label": "late_evening_go_to_sleep", 
             "plan_uid": 149, 
             "pledge": true, 
@@ -1349,11 +1353,11 @@
                 }, 
                 "reason_context": ";amy45;Aaron Donald objects effected by him;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "sympathetic receptive": {
             "is_expanded": false, 
+            "kar": 1, 
             "kids": {
               "sympathetic receptive to David": {
                 "awardunits": {
@@ -1363,6 +1367,7 @@
                     "take_force": 1.0
                   }
                 }, 
+                "kar": 1, 
                 "kids": {
                   "be available for phone call": {
                     "awardunits": {
@@ -1372,6 +1377,7 @@
                         "take_force": 1.0
                       }
                     }, 
+                    "kar": 1, 
                     "plan_label": "be available for phone call", 
                     "plan_uid": 163, 
                     "pledge": true, 
@@ -1392,8 +1398,7 @@
                         }, 
                         "reason_context": ";amy45;jour_minute;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "call David and discuss methodology": {
                     "awardunits": {
@@ -1404,6 +1409,7 @@
                         "take_force": 1.0
                       }
                     }, 
+                    "kar": 1, 
                     "plan_label": "call David and discuss methodology", 
                     "plan_uid": 164, 
                     "pledge": true, 
@@ -1435,8 +1441,7 @@
                         }, 
                         "reason_context": ";amy45;yr_month;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "sympathetic receptive to David", 
@@ -1448,8 +1453,7 @@
                     }, 
                     "reason_context": ";amy45;Aaron Donald objects effected by him;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "sympathetic receptive", 
@@ -1461,16 +1465,17 @@
                 }, 
                 "reason_context": ";amy45;Aaron Donald objects effected by him;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "write letters to reps": {
             "is_expanded": false, 
+            "kar": 1, 
             "kids": {
               "write letters about Climate Death to congressman": {
                 "awardunits": {
                   ";Climate Death": {"awardee_title": ";Climate Death", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "write letters about Climate Death to congressman", 
                 "plan_uid": 166, 
                 "reasonunits": {
@@ -1484,8 +1489,7 @@
                     "cases": { ";amy45;sem_jours;Fri": {"reason_state": ";amy45;sem_jours;Fri"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "write letters to reps", 
@@ -1497,8 +1501,7 @@
                 }, 
                 "reason_context": ";amy45;Aaron Donald objects effected by him;"
               }
-            }, 
-            "star": 1
+            }
           }
         }, 
         "plan_label": "D&B", 
@@ -1510,14 +1513,15 @@
             }, 
             "reason_context": ";amy45;Aaron Donald objects effected by him;"
           }
-        }, 
-        "star": 1
+        }
       }, 
       "Freelancing": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
           "Submit hrs on website": {
             "is_expanded": false, 
+            "kar": 1, 
             "plan_label": "Submit hrs on website", 
             "plan_uid": 104, 
             "pledge": true, 
@@ -1536,8 +1540,7 @@
                 "cases": { ";amy45;sem_jours;Fri": {"reason_state": ";amy45;sem_jours;Fri"} }, 
                 "reason_context": ";amy45;sem_jours;"
               }
-            }, 
-            "star": 1
+            }
           }
         }, 
         "plan_label": "Freelancing", 
@@ -1553,107 +1556,108 @@
             }, 
             "reason_context": ";amy45;jour_minute;"
           }
-        }, 
-        "star": 1
+        }
       }, 
       "Moods": {
+        "kar": 1, 
         "kids": {
-          "Bllod Meridan by Cormac": {"plan_label": "Bllod Meridan by Cormac", "plan_uid": 265, "star": 1}, 
+          "Bllod Meridan by Cormac": {"kar": 1, "plan_label": "Bllod Meridan by Cormac", "plan_uid": 265}, 
           "Happy": {
+            "kar": 1, 
             "kids": {
-              "Happy - angerish": {"plan_label": "Happy - angerish", "plan_uid": 267, "star": 1}
+              "Happy - angerish": {"kar": 1, "plan_label": "Happy - angerish", "plan_uid": 267}
             }, 
             "plan_label": "Happy", 
-            "plan_uid": 266, 
-            "star": 1
+            "plan_uid": 266
           }, 
-          "hungry": {"plan_label": "hungry", "plan_uid": 268, "star": 1}
+          "hungry": {"kar": 1, "plan_label": "hungry", "plan_uid": 268}
         }, 
         "plan_label": "Moods", 
-        "plan_uid": 264, 
-        "star": 1
+        "plan_uid": 264
       }, 
       "Nation-States": {
+        "kar": 1, 
         "kids": {
-          "France2": {"plan_label": "France2", "plan_uid": 235, "star": 1}, 
+          "France2": {"kar": 1, "plan_label": "France2", "plan_uid": 235}, 
           "USA": {
+            "kar": 1, 
             "kids": {
               "Portland OR": {
+                "kar": 1, 
                 "kids": {
                   "Downtown": {
+                    "kar": 1, 
                     "kids": {
                       "Northfield Apt": {
+                        "kar": 1, 
                         "kids": {
-                          "10th floor gaarden": { "plan_label": "10th floor gaarden", "plan_uid": 246, "star": 1 }, 
-                          "Apt X4XX"          : { "plan_label": "Apt X4XX"          , "plan_uid": 247, "star": 1 }, 
-                          "Gym"               : { "plan_label": "Gym"               , "plan_uid": 248, "star": 1 }, 
-                          "workspace"         : { "plan_label": "workspace"         , "plan_uid": 249, "star": 1 }
+                          "10th floor gaarden": { "kar": 1, "plan_label": "10th floor gaarden", "plan_uid": 246 }, 
+                          "Apt X4XX"          : { "kar": 1, "plan_label": "Apt X4XX"          , "plan_uid": 247 }, 
+                          "Gym"               : { "kar": 1, "plan_label": "Gym"               , "plan_uid": 248 }, 
+                          "workspace"         : { "kar": 1, "plan_label": "workspace"         , "plan_uid": 249 }
                         }, 
                         "plan_label": "Northfield Apt", 
-                        "plan_uid": 245, 
-                        "star": 1
+                        "plan_uid": 245
                       }, 
                       "PSU": {
+                        "kar": 1, 
                         "kids": {
-                          "Park Squares": { "plan_label": "Park Squares", "plan_uid": 241, "star": 1 }, 
-                          "Pool"        : { "plan_label": "Pool"        , "plan_uid": 242, "star": 1 }, 
-                          "Stott Field" : { "plan_label": "Stott Field" , "plan_uid": 243, "star": 1 }, 
-                          "library"     : { "plan_label": "library"     , "plan_uid": 244, "star": 1 }
+                          "Park Squares": { "kar": 1, "plan_label": "Park Squares", "plan_uid": 241 }, 
+                          "Pool"        : { "kar": 1, "plan_label": "Pool"        , "plan_uid": 242 }, 
+                          "Stott Field" : { "kar": 1, "plan_label": "Stott Field" , "plan_uid": 243 }, 
+                          "library"     : { "kar": 1, "plan_label": "library"     , "plan_uid": 244 }
                         }, 
                         "plan_label": "PSU", 
-                        "plan_uid": 240, 
-                        "star": 1
+                        "plan_uid": 240
                       }
                     }, 
                     "plan_label": "Downtown", 
-                    "plan_uid": 239, 
-                    "star": 1
+                    "plan_uid": 239
                   }
                 }, 
                 "plan_label": "Portland OR", 
-                "plan_uid": 237, 
-                "star": 1
+                "plan_uid": 237
               }, 
-              "Texas": {"plan_label": "Texas", "plan_uid": 238, "star": 1}
+              "Texas": {"kar": 1, "plan_label": "Texas", "plan_uid": 238}
             }, 
             "plan_label": "USA", 
-            "plan_uid": 236, 
-            "star": 1
+            "plan_uid": 236
           }
         }, 
         "plan_label": "Nation-States", 
-        "plan_uid": 234, 
-        "star": 1
+        "plan_uid": 234
       }, 
       "No Movie playing": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
-          "Big Lewbwski"     : { "plan_label": "Big Lewbwski"     , "plan_uid": 273, "star": 1 }, 
-          "Jedi Movie eps IV": { "plan_label": "Jedi Movie eps IV", "plan_uid": 274, "star": 1 }
+          "Big Lewbwski"     : { "kar": 1, "plan_label": "Big Lewbwski"     , "plan_uid": 273 }, 
+          "Jedi Movie eps IV": { "kar": 1, "plan_label": "Jedi Movie eps IV", "plan_uid": 274 }
         }, 
         "plan_label": "No Movie playing", 
-        "plan_uid": 272, 
-        "star": 1
+        "plan_uid": 272
       }, 
       "Seasons": {
-        "kids": { "Summer": {"plan_label": "Summer", "plan_uid": 276, "star": 1} }, 
+        "kar": 1, 
+        "kids": { "Summer": {"kar": 1, "plan_label": "Summer", "plan_uid": 276} }, 
         "plan_label": "Seasons", 
-        "plan_uid": 275, 
-        "star": 1
+        "plan_uid": 275
       }, 
       "Tired Situation": {
+        "kar": 1, 
         "kids": {
-          "Not tired": { "plan_label": "Not tired", "plan_uid": 278, "star": 1 }, 
-          "Tired"    : { "plan_label": "Tired"    , "plan_uid": 279, "star": 1 }
+          "Not tired": { "kar": 1, "plan_label": "Not tired", "plan_uid": 278 }, 
+          "Tired"    : { "kar": 1, "plan_label": "Tired"    , "plan_uid": 279 }
         }, 
         "plan_label": "Tired Situation", 
-        "plan_uid": 277, 
-        "star": 1
+        "plan_uid": 277
       }, 
       "Ultimate Frisbee": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
           "check on m33": {
+            "kar": 1, 
             "plan_label": "check on m33", 
             "plan_uid": 221, 
             "reasonunits": {
@@ -1661,10 +1665,10 @@
                 "cases": { ";amy45;Moods;Happy": {"reason_state": ";amy45;Moods;Happy"} }, 
                 "reason_context": ";amy45;Moods;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "contemplate the disc": {
+            "kar": 1, 
             "plan_label": "contemplate the disc", 
             "plan_uid": 229, 
             "reasonunits": {
@@ -1674,12 +1678,13 @@
                 }, 
                 "reason_context": ";amy45;No Movie playing;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "playing ultimate": {
+            "kar": 1, 
             "kids": {
               "check PSU mini": {
+                "kar": 1, 
                 "plan_label": "check PSU mini", 
                 "plan_uid": 219, 
                 "reasonunits": {
@@ -1687,8 +1692,7 @@
                     "cases": { ";amy45;Moods;Happy": {"reason_state": ";amy45;Moods;Happy"} }, 
                     "reason_context": ";amy45;Moods;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "playing ultimate", 
@@ -1698,10 +1702,10 @@
                 "cases": { ";amy45;Moods;Happy": {"reason_state": ";amy45;Moods;Happy"} }, 
                 "reason_context": ";amy45;Moods;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "relaxing": {
+            "kar": 1, 
             "plan_label": "relaxing", 
             "plan_uid": 202, 
             "reasonunits": {
@@ -1711,8 +1715,7 @@
                 }, 
                 "reason_context": ";amy45;No Movie playing;"
               }
-            }, 
-            "star": 1
+            }
           }
         }, 
         "plan_label": "Ultimate Frisbee", 
@@ -1722,15 +1725,17 @@
             "cases": { ";amy45;Moods;Happy": {"reason_state": ";amy45;Moods;Happy"} }, 
             "reason_context": ";amy45;Moods;"
           }
-        }, 
-        "star": 1
+        }
       }, 
       "Water Living": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
           "bowling in Williamette watershed": {
+            "kar": 1, 
             "kids": {
               "Go climbing at east Circuit": {
+                "kar": 1, 
                 "plan_label": "Go climbing at east Circuit", 
                 "plan_uid": 226, 
                 "reasonunits": {
@@ -1742,10 +1747,10 @@
                     }, 
                     "reason_context": ";amy45;WaterExistence;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "animate": {
+                "kar": 1, 
                 "plan_label": "animate", 
                 "plan_uid": 228, 
                 "reasonunits": {
@@ -1757,10 +1762,10 @@
                     }, 
                     "reason_context": ";amy45;WaterExistence;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "bike around": {
+                "kar": 1, 
                 "plan_label": "bike around", 
                 "plan_uid": 227, 
                 "reasonunits": {
@@ -1772,8 +1777,7 @@
                     }, 
                     "reason_context": ";amy45;WaterExistence;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "bowling in Williamette watershed", 
@@ -1785,62 +1789,63 @@
                 }, 
                 "reason_context": ";amy45;WaterExistence;"
               }
-            }, 
-            "star": 1
+            }
           }
         }, 
         "plan_label": "Water Living", 
-        "plan_uid": 223, 
-        "star": 1
+        "plan_uid": 223
       }, 
       "WaterExistence": {
+        "kar": 1, 
         "kids": {
           "Williamette WaterShed": {
+            "kar": 1, 
             "kids": {
               "East Side of Watershed": {
-                "kids": { "flat": {"plan_label": "flat", "plan_uid": 260, "star": 1} }, 
+                "kar": 1, 
+                "kids": { "flat": {"kar": 1, "plan_label": "flat", "plan_uid": 260} }, 
                 "plan_label": "East Side of Watershed", 
-                "plan_uid": 258, 
-                "star": 1
+                "plan_uid": 258
               }, 
-              "West side of Watershed": {"plan_label": "West side of Watershed", "plan_uid": 259, "star": 1}
+              "West side of Watershed": {"kar": 1, "plan_label": "West side of Watershed", "plan_uid": 259}
             }, 
             "plan_label": "Williamette WaterShed", 
-            "plan_uid": 257, 
-            "star": 1
+            "plan_uid": 257
           }
         }, 
         "plan_label": "WaterExistence", 
-        "plan_uid": 256, 
-        "star": 1
+        "plan_uid": 256
       }, 
       "Websites": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
           "AOL AIM": {
-            "kids": { "PSU Ultimate": {"plan_label": "PSU Ultimate", "plan_uid": 254, "star": 1} }, 
+            "kar": 1, 
+            "kids": { "PSU Ultimate": {"kar": 1, "plan_label": "PSU Ultimate", "plan_uid": 254} }, 
             "plan_label": "AOL AIM", 
-            "plan_uid": 253, 
-            "star": 1
+            "plan_uid": 253
           }, 
-          "Faaceboook": {"plan_label": "Faaceboook", "plan_uid": 251, "star": 1}, 
-          "Github": {"plan_label": "Github", "plan_uid": 252, "star": 1}, 
-          "YahooVideo": {"plan_label": "YahooVideo", "plan_uid": 255, "star": 1}
+          "Faaceboook": {"kar": 1, "plan_label": "Faaceboook", "plan_uid": 251}, 
+          "Github": {"kar": 1, "plan_label": "Github", "plan_uid": 252}, 
+          "YahooVideo": {"kar": 1, "plan_label": "YahooVideo", "plan_uid": 255}
         }, 
         "plan_label": "Websites", 
-        "plan_uid": 250, 
-        "star": 1
+        "plan_uid": 250
       }, 
       "casa": {
         "is_expanded": false, 
+        "kar": 1, 
         "kids": {
           "Boring Ops": {
             "is_expanded": false, 
+            "kar": 1, 
             "kids": {
               "be reponsible for rent": {
                 "awardunits": {
                   "Perrison": {"awardee_title": "Perrison", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "be reponsible for rent", 
                 "plan_uid": 37, 
                 "pledge": true, 
@@ -1859,13 +1864,13 @@
                     "cases": { ";amy45;month_wk;1st wk": {"reason_state": ";amy45;month_wk;1st wk"} }, 
                     "reason_context": ";amy45;month_wk;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "be responsible for expenses card": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "be responsible for expenses card", 
                 "plan_uid": 45, 
                 "pledge": true, 
@@ -1884,13 +1889,13 @@
                     "cases": { ";amy45;month_wk;1st wk": {"reason_state": ";amy45;month_wk;1st wk"} }, 
                     "reason_context": ";amy45;month_wk;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "be responsible for utilities": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "be responsible for utilities", 
                 "plan_uid": 31, 
                 "pledge": true, 
@@ -1909,13 +1914,13 @@
                     "cases": { ";amy45;month_wk;1st wk": {"reason_state": ";amy45;month_wk;1st wk"} }, 
                     "reason_context": ";amy45;month_wk;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "set resturant bucks for the wk": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "set resturant bucks for the wk", 
                 "plan_uid": 75, 
                 "pledge": true, 
@@ -1934,78 +1939,77 @@
                     "cases": { ";amy45;sem_jours;Tue": {"reason_state": ";amy45;sem_jours;Tue"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "Boring Ops", 
-            "plan_uid": 148, 
-            "star": 1
+            "plan_uid": 148
           }, 
           "Housing": {
             "awardunits": {
               ";MerVista Apt": {"awardee_title": ";MerVista Apt", "give_force": 1.0, "take_force": 1.0}
             }, 
             "is_expanded": false, 
+            "kar": 1, 
             "kids": {
-              "Bike Garage": {"plan_label": "Bike Garage", "plan_uid": 185, "star": 1}, 
-              "Bike Gym": {"plan_label": "Bike Gym", "plan_uid": 184, "star": 1}, 
+              "Bike Garage": {"kar": 1, "plan_label": "Bike Garage", "plan_uid": 185}, 
+              "Bike Gym": {"kar": 1, "plan_label": "Bike Gym", "plan_uid": 184}, 
               "Flat": {
+                "kar": 1, 
                 "kids": {
-                  "bathroom #2": {"plan_label": "bathroom #2", "plan_uid": 196, "star": 1}, 
+                  "bathroom #2": {"kar": 1, "plan_label": "bathroom #2", "plan_uid": 196}, 
                   "bedroom #1": {
+                    "kar": 1, 
                     "kids": {
-                      "big bathroom": { "plan_label": "big bathroom", "plan_uid": 195, "star": 1 }, 
-                      "closet"      : { "plan_label": "closet"      , "plan_uid": 194, "star": 1 }
+                      "big bathroom": { "kar": 1, "plan_label": "big bathroom", "plan_uid": 195 }, 
+                      "closet"      : { "kar": 1, "plan_label": "closet"      , "plan_uid": 194 }
                     }, 
                     "plan_label": "bedroom #1", 
-                    "plan_uid": 191, 
-                    "star": 1
+                    "plan_uid": 191
                   }, 
                   "bedroom #2": {
+                    "kar": 1, 
                     "kids": {
                       "bed area": {
+                        "kar": 1, 
                         "kids": {
                           "heater maintenance": {
                             "awardunits": {
                               "Norberto": {"awardee_title": "Norberto", "give_force": 1.0, "take_force": 1.0}
                             }, 
+                            "kar": 1, 
                             "plan_label": "heater maintenance", 
-                            "plan_uid": 198, 
-                            "star": 1
+                            "plan_uid": 198
                           }
                         }, 
                         "plan_label": "bed area", 
-                        "plan_uid": 197, 
-                        "star": 1
+                        "plan_uid": 197
                       }, 
-                      "closet": {"plan_label": "closet", "plan_uid": 193, "star": 1}
+                      "closet": {"kar": 1, "plan_label": "closet", "plan_uid": 193}
                     }, 
                     "plan_label": "bedroom #2", 
-                    "plan_uid": 192, 
-                    "star": 1
+                    "plan_uid": 192
                   }, 
-                  "cuisine": {"plan_label": "cuisine", "plan_uid": 189, "star": 1}, 
-                  "dining area": {"plan_label": "dining area", "plan_uid": 190, "star": 1}, 
-                  "maintenance": {"plan_label": "maintenance", "plan_uid": 187, "star": 1}, 
-                  "nursery": {"plan_label": "nursery", "plan_uid": 188, "star": 1}
+                  "cuisine": {"kar": 1, "plan_label": "cuisine", "plan_uid": 189}, 
+                  "dining area": {"kar": 1, "plan_label": "dining area", "plan_uid": 190}, 
+                  "maintenance": {"kar": 1, "plan_label": "maintenance", "plan_uid": 187}, 
+                  "nursery": {"kar": 1, "plan_label": "nursery", "plan_uid": 188}
                 }, 
                 "plan_label": "Flat", 
-                "plan_uid": 181, 
-                "star": 1
+                "plan_uid": 181
               }, 
-              "Lifting Gym": {"plan_label": "Lifting Gym", "plan_uid": 183, "star": 1}, 
-              "Playing in nurserys": {"plan_label": "Playing in nurserys", "plan_uid": 186, "star": 1}, 
-              "Pool": {"plan_label": "Pool", "plan_uid": 182, "star": 1}
+              "Lifting Gym": {"kar": 1, "plan_label": "Lifting Gym", "plan_uid": 183}, 
+              "Playing in nurserys": {"kar": 1, "plan_label": "Playing in nurserys", "plan_uid": 186}, 
+              "Pool": {"kar": 1, "plan_label": "Pool", "plan_uid": 182}
             }, 
             "plan_label": "Housing", 
-            "plan_uid": 180, 
-            "star": 1
+            "plan_uid": 180
           }, 
           "call high school friend": {
             "awardunits": {
               "Perrison": {"awardee_title": "Perrison", "give_force": 1.0, "take_force": 1.0}
             }, 
+            "kar": 1, 
             "plan_label": "call high school friend", 
             "plan_uid": 35, 
             "pledge": true, 
@@ -2031,10 +2035,10 @@
                 }, 
                 "reason_context": ";amy45;yr_month;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "check up on old family friends": {
+            "kar": 1, 
             "plan_label": "check up on old family friends", 
             "plan_uid": 222, 
             "reasonunits": {
@@ -2044,16 +2048,17 @@
                 }, 
                 "reason_context": ";amy45;Moods;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "cleaning": {
             "is_expanded": false, 
+            "kar": 1, 
             "kids": {
               "check cat water": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "check cat water", 
                 "plan_uid": 33, 
                 "pledge": true, 
@@ -2080,10 +2085,10 @@
                     "cases": { ";amy45;sem_jours;Sun": {"reason_state": ";amy45;sem_jours;Sun"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "check humidifer": {
+                "kar": 1, 
                 "plan_label": "check humidifer", 
                 "plan_uid": 159, 
                 "pledge": true, 
@@ -2106,13 +2111,13 @@
                     }, 
                     "reason_context": ";amy45;jour_minute;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "clean baby seats": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "clean baby seats", 
                 "plan_uid": 49, 
                 "pledge": true, 
@@ -2146,13 +2151,13 @@
                     }, 
                     "reason_context": ";amy45;yr_month;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "clean bathroom": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "clean bathroom", 
                 "plan_uid": 65, 
                 "pledge": true, 
@@ -2175,13 +2180,13 @@
                     }, 
                     "reason_context": ";amy45;jour_minute;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "clean cat poo": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "clean cat poo", 
                 "plan_uid": 9, 
                 "pledge": true, 
@@ -2208,13 +2213,13 @@
                     "cases": { ";amy45;sem_jours;Mon": {"reason_state": ";amy45;sem_jours;Mon"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "clean couch blankets": {
                 "awardunits": {
                   "Perrison": {"awardee_title": "Perrison", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "clean couch blankets", 
                 "plan_uid": 41, 
                 "pledge": true, 
@@ -2252,13 +2257,13 @@
                     "cases": { ";amy45;sem_jours;Mon": {"reason_state": ";amy45;sem_jours;Mon"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "clean humidifiers": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "clean humidifiers", 
                 "plan_uid": 55, 
                 "pledge": true, 
@@ -2285,13 +2290,13 @@
                     "cases": { ";amy45;sem_jours;Mon": {"reason_state": ";amy45;sem_jours;Mon"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "clean table": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "clean table", 
                 "plan_uid": 53, 
                 "pledge": true, 
@@ -2318,13 +2323,13 @@
                     "cases": { ";amy45;sem_jours;Mon": {"reason_state": ";amy45;sem_jours;Mon"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "deep clean play mat": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "deep clean play mat", 
                 "plan_uid": 71, 
                 "pledge": true, 
@@ -2362,13 +2367,13 @@
                     }, 
                     "reason_context": ";amy45;yr_month;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "empty roomba": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "empty roomba", 
                 "plan_uid": 11, 
                 "pledge": true, 
@@ -2395,13 +2400,13 @@
                     "cases": { ";amy45;sem_jours;Fri": {"reason_state": ";amy45;sem_jours;Fri"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "empty roomba Fri": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "empty roomba Fri", 
                 "plan_uid": 13, 
                 "pledge": true, 
@@ -2428,13 +2433,13 @@
                     "cases": { ";amy45;sem_jours;Fri": {"reason_state": ";amy45;sem_jours;Fri"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "laundry mon": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "laundry mon", 
                 "plan_uid": 25, 
                 "pledge": true, 
@@ -2461,13 +2466,13 @@
                     "cases": { ";amy45;sem_jours;Mon": {"reason_state": ";amy45;sem_jours;Mon"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "laundry sat": {
                 "awardunits": {
                   "Travis Fox": {"awardee_title": "Travis Fox", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "laundry sat", 
                 "plan_uid": 29, 
                 "pledge": true, 
@@ -2494,13 +2499,13 @@
                     "cases": { ";amy45;sem_jours;Sat": {"reason_state": ";amy45;sem_jours;Sat"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "laundry wed": {
                 "awardunits": {
                   "America": {"awardee_title": "America", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "laundry wed", 
                 "plan_uid": 27, 
                 "pledge": true, 
@@ -2527,10 +2532,10 @@
                     "cases": { ";amy45;sem_jours;Wed": {"reason_state": ";amy45;sem_jours;Wed"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "morning cuisine clean-up": {
+                "kar": 1, 
                 "plan_label": "morning cuisine clean-up", 
                 "plan_uid": 150, 
                 "reasonunits": {
@@ -2552,13 +2557,13 @@
                     }, 
                     "reason_context": ";amy45;jour_minute;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "prepare_bed clean bedroom": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "prepare_bed clean bedroom", 
                 "plan_uid": 63, 
                 "pledge": true, 
@@ -2581,13 +2586,13 @@
                     }, 
                     "reason_context": ";amy45;jour_minute;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "roomba bedroom": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "roomba bedroom", 
                 "plan_uid": 15, 
                 "pledge": true, 
@@ -2614,13 +2619,13 @@
                     "cases": { ";amy45;sem_jours;Tue": {"reason_state": ";amy45;sem_jours;Tue"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "roomba bedroom Fri": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "roomba bedroom Fri", 
                 "plan_uid": 17, 
                 "pledge": true, 
@@ -2647,13 +2652,13 @@
                     "cases": { ";amy45;sem_jours;Fri": {"reason_state": ";amy45;sem_jours;Fri"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "roomba living area": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "roomba living area", 
                 "plan_uid": 19, 
                 "pledge": true, 
@@ -2680,13 +2685,13 @@
                     "cases": { ";amy45;sem_jours;Mon": {"reason_state": ";amy45;sem_jours;Mon"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "roomba living area thur": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "roomba living area thur", 
                 "plan_uid": 21, 
                 "pledge": true, 
@@ -2713,13 +2718,13 @@
                     "cases": { ";amy45;sem_jours;Thur": {"reason_state": ";amy45;sem_jours;Thur"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "roomba maintenance": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "roomba maintenance", 
                 "plan_uid": 51, 
                 "pledge": true, 
@@ -2746,13 +2751,13 @@
                     "cases": { ";amy45;sem_jours;Mon": {"reason_state": ";amy45;sem_jours;Mon"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "wipe down play mat2": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "wipe down play mat2", 
                 "plan_uid": 69, 
                 "pledge": true, 
@@ -2779,8 +2784,7 @@
                     "cases": { ";amy45;sem_jours;Mon": {"reason_state": ";amy45;sem_jours;Mon"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "cleaning", 
@@ -2794,15 +2798,16 @@
                 }, 
                 "reason_context": ";amy45;Nation-States;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "exercise": {
+            "kar": 1, 
             "kids": {
               "5 push-ups": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "5 push-ups", 
                 "plan_uid": 5, 
                 "pledge": true, 
@@ -2817,13 +2822,13 @@
                     }, 
                     "reason_context": ";amy45;jour_minute;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "check protein for wk is adequate": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "check protein for wk is adequate", 
                 "plan_uid": 61, 
                 "pledge": true, 
@@ -2838,13 +2843,13 @@
                     }, 
                     "reason_context": ";amy45;jour_minute;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "clean ears": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "clean ears", 
                 "plan_uid": 79, 
                 "pledge": true, 
@@ -2870,13 +2875,13 @@
                     }, 
                     "reason_context": ";amy45;yr_month;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "clip nails": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "clip nails", 
                 "plan_uid": 77, 
                 "pledge": true, 
@@ -2895,16 +2900,17 @@
                     "cases": { ";amy45;sem_jours;Mon": {"reason_state": ";amy45;sem_jours;Mon"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "daily exercise 20min": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
                 "is_expanded": false, 
+                "kar": 1, 
                 "kids": {
                   "I do not be desperate for of I have to exercise": {
+                    "kar": 1, 
                     "plan_label": "I do not be desperate for of I have to exercise", 
                     "plan_uid": 154, 
                     "reasonunits": {
@@ -2918,8 +2924,7 @@
                         }, 
                         "reason_context": ";amy45;jour_minute;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "daily exercise 20min", 
@@ -2936,10 +2941,10 @@
                     }, 
                     "reason_context": ";amy45;jour_minute;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "evening multivitamin": {
+                "kar": 1, 
                 "plan_label": "evening multivitamin", 
                 "plan_uid": 230, 
                 "reasonunits": {
@@ -2953,13 +2958,13 @@
                     }, 
                     "reason_context": ";amy45;jour_minute;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "flossing teeth": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "flossing teeth", 
                 "plan_uid": 47, 
                 "pledge": true, 
@@ -2985,15 +2990,16 @@
                     }, 
                     "reason_context": ";amy45;yr_month;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "full traaining": {
+                "kar": 1, 
                 "kids": {
                   "bike or stuff": {
                     "awardunits": {
                       ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                     }, 
+                    "kar": 1, 
                     "plan_label": "bike or stuff", 
                     "plan_uid": 92, 
                     "pledge": true, 
@@ -3012,26 +3018,26 @@
                         "cases": { ";amy45;sem_jours;Sat": {"reason_state": ";amy45;sem_jours;Sat"} }, 
                         "reason_context": ";amy45;sem_jours;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "chest and arms (mon)": {
                     "awardunits": {
                       ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                     }, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "bi and triceps exercises": {
                         "is_expanded": false, 
+                        "kar": 1, 
                         "plan_label": "bi and triceps exercises", 
-                        "plan_uid": 130, 
-                        "star": 1
+                        "plan_uid": 130
                       }, 
                       "chest  exercises": {
                         "is_expanded": false, 
+                        "kar": 1, 
                         "plan_label": "chest  exercises", 
-                        "plan_uid": 129, 
-                        "star": 1
+                        "plan_uid": 129
                       }
                     }, 
                     "plan_label": "chest and arms (mon)", 
@@ -3052,13 +3058,13 @@
                         "cases": { ";amy45;sem_jours;Mon": {"reason_state": ";amy45;sem_jours;Mon"} }, 
                         "reason_context": ";amy45;sem_jours;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "core all back": {
                     "awardunits": {
                       ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                     }, 
+                    "kar": 1, 
                     "plan_label": "core all back", 
                     "plan_uid": 86, 
                     "pledge": true, 
@@ -3077,10 +3083,10 @@
                         "cases": { ";amy45;sem_jours;Wed": {"reason_state": ";amy45;sem_jours;Wed"} }, 
                         "reason_context": ";amy45;sem_jours;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "core and squats": {
+                    "kar": 1, 
                     "plan_label": "core and squats", 
                     "plan_uid": 179, 
                     "reasonunits": {
@@ -3098,14 +3104,14 @@
                         "cases": { ";amy45;sem_jours;Fri": {"reason_state": ";amy45;sem_jours;Fri"} }, 
                         "reason_context": ";amy45;sem_jours;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "rest": {
                     "awardunits": {
                       ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                     }, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "plan_label": "rest", 
                     "plan_uid": 94, 
                     "reasonunits": {
@@ -3113,26 +3119,26 @@
                         "cases": { ";amy45;sem_jours;Sun": {"reason_state": ";amy45;sem_jours;Sun"} }, 
                         "reason_context": ";amy45;sem_jours;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "shoulders and back": {
                     "awardunits": {
                       ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                     }, 
                     "is_expanded": false, 
+                    "kar": 1, 
                     "kids": {
                       "back exercises": {
                         "is_expanded": false, 
+                        "kar": 1, 
                         "plan_label": "back exercises", 
-                        "plan_uid": 132, 
-                        "star": 1
+                        "plan_uid": 132
                       }, 
                       "shoulder exercises": {
                         "is_expanded": false, 
+                        "kar": 1, 
                         "plan_label": "shoulder exercises", 
-                        "plan_uid": 131, 
-                        "star": 1
+                        "plan_uid": 131
                       }
                     }, 
                     "plan_label": "shoulders and back", 
@@ -3153,13 +3159,13 @@
                         "cases": { ";amy45;sem_jours;Tue": {"reason_state": ";amy45;sem_jours;Tue"} }, 
                         "reason_context": ";amy45;sem_jours;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }, 
                   "squats hamstrings and calves": {
                     "awardunits": {
                       ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                     }, 
+                    "kar": 1, 
                     "plan_label": "squats hamstrings and calves", 
                     "plan_uid": 90, 
                     "pledge": true, 
@@ -3178,18 +3184,17 @@
                         "cases": { ";amy45;sem_jours;Thur": {"reason_state": ";amy45;sem_jours;Thur"} }, 
                         "reason_context": ";amy45;sem_jours;"
                       }
-                    }, 
-                    "star": 1
+                    }
                   }
                 }, 
                 "plan_label": "full traaining", 
-                "plan_uid": 81, 
-                "star": 1
+                "plan_uid": 81
               }, 
               "morning multivitamin": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "morning multivitamin", 
                 "plan_uid": 3, 
                 "pledge": true, 
@@ -3204,13 +3209,13 @@
                     }, 
                     "reason_context": ";amy45;jour_minute;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "shampooing": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "shampooing", 
                 "plan_uid": 39, 
                 "pledge": true, 
@@ -3229,13 +3234,13 @@
                     "cases": { ";amy45;sem_jours;Mon": {"reason_state": ";amy45;sem_jours;Mon"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "straight back for 45 secs": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "straight back for 45 secs", 
                 "plan_uid": 57, 
                 "pledge": true, 
@@ -3250,13 +3255,13 @@
                     }, 
                     "reason_context": ";amy45;jour_minute;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "trim beard": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "trim beard", 
                 "plan_uid": 73, 
                 "pledge": true, 
@@ -3275,13 +3280,13 @@
                     "cases": { ";amy45;sem_jours;Mon": {"reason_state": ";amy45;sem_jours;Mon"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "veggies every morning": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "veggies every morning", 
                 "plan_uid": 59, 
                 "pledge": true, 
@@ -3296,16 +3301,15 @@
                     }, 
                     "reason_context": ";amy45;jour_minute;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "exercise", 
-            "plan_uid": 147, 
-            "star": 1
+            "plan_uid": 147
           }, 
           "keep up with friends": {
             "is_expanded": false, 
+            "kar": 1, 
             "plan_label": "keep up with friends", 
             "plan_uid": 220, 
             "reasonunits": {
@@ -3313,16 +3317,17 @@
                 "cases": { ";amy45;Websites;Faaceboook": {"reason_state": ";amy45;Websites;Faaceboook"} }, 
                 "reason_context": ";amy45;Websites;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "responsible for kids": {
             "is_expanded": false, 
+            "kar": 1, 
             "kids": {
               "clip fingernails": {
                 "awardunits": {
                   "America": {"awardee_title": "America", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "clip fingernails", 
                 "plan_uid": 23, 
                 "pledge": true, 
@@ -3358,13 +3363,13 @@
                     "cases": { ";amy45;sem_jours;Fri": {"reason_state": ";amy45;sem_jours;Fri"} }, 
                     "reason_context": ";amy45;sem_jours;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "get rid of toy get new toy": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
+                "kar": 1, 
                 "plan_label": "get rid of toy get new toy", 
                 "plan_uid": 43, 
                 "pledge": true, 
@@ -3396,10 +3401,10 @@
                     }, 
                     "reason_context": ";amy45;yr_month;"
                   }
-                }, 
-                "star": 1
+                }
               }, 
               "going to get them": {
+                "kar": 1, 
                 "plan_label": "going to get them", 
                 "plan_uid": 145, 
                 "pledge": true, 
@@ -3420,8 +3425,7 @@
                     }, 
                     "reason_context": ";amy45;jour_minute;"
                   }
-                }, 
-                "star": 1
+                }
               }
             }, 
             "plan_label": "responsible for kids", 
@@ -3433,13 +3437,13 @@
                 }, 
                 "reason_context": ";amy45;Nation-States;"
               }
-            }, 
-            "star": 1
+            }
           }, 
           "say hi to birds": {
             "awardunits": {
               ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
             }, 
+            "kar": 1, 
             "plan_label": "say hi to birds", 
             "plan_uid": 7, 
             "pledge": true, 
@@ -3460,18 +3464,16 @@
                 }, 
                 "reason_context": ";amy45;jour_minute;"
               }
-            }, 
-            "star": 1
+            }
           }
         }, 
         "plan_label": "casa", 
-        "plan_uid": 2, 
-        "star": 1
+        "plan_uid": 2
       }, 
-      "ced_jour": {"begin": 0, "close": 80000, "plan_label": "ced_jour", "star": 40}, 
-      "ced_wk": {"begin": 0, "close": 110000, "plan_label": "ced_wk", "star": 40}, 
-      "ced_yr": {"begin": 0, "close": 2100, "plan_label": "ced_yr", "star": 40}, 
-      "hr_number": {"begin": 0, "close": 23, "plan_label": "hr_number", "star": 40}, 
+      "ced_jour": {"begin": 0, "close": 80000, "kar": 40, "plan_label": "ced_jour"}, 
+      "ced_wk": {"begin": 0, "close": 110000, "kar": 40, "plan_label": "ced_wk"}, 
+      "ced_yr": {"begin": 0, "close": 2100, "kar": 40, "plan_label": "ced_yr"}, 
+      "hr_number": {"begin": 0, "close": 23, "kar": 40, "plan_label": "hr_number"}, 
       "jour_minute": {
         "begin": 0, 
         "close": 1439, 
@@ -3483,62 +3485,60 @@
             "fact_upper": 59
           }
         }, 
-        "plan_label": "jour_minute", 
-        "star": 40
+        "kar": 40, 
+        "plan_label": "jour_minute"
       }, 
-      "month_number": {"begin": 1, "close": 31, "plan_label": "month_number", "star": 40}, 
+      "month_number": {"begin": 1, "close": 31, "kar": 40, "plan_label": "month_number"}, 
       "month_wk": {
         "begin": 1, 
         "close": 5, 
+        "kar": 40, 
         "kids": {
-          "1st wk": { "gogo_want": 1, "plan_label": "1st wk", "star": 40, "stop_want": 2 }, 
-          "2nd wk": { "gogo_want": 2, "plan_label": "2nd wk", "star": 40, "stop_want": 3 }, 
-          "3rd wk": { "gogo_want": 3, "plan_label": "3rd wk", "star": 40, "stop_want": 4 }, 
-          "4th wk": { "gogo_want": 4, "plan_label": "4th wk", "star": 40, "stop_want": 5 }, 
-          "5th wk": { "gogo_want": 5, "plan_label": "5th wk", "star": 40, "stop_want": 6 }
+          "1st wk": { "gogo_want": 1, "kar": 40, "plan_label": "1st wk", "stop_want": 2 }, 
+          "2nd wk": { "gogo_want": 2, "kar": 40, "plan_label": "2nd wk", "stop_want": 3 }, 
+          "3rd wk": { "gogo_want": 3, "kar": 40, "plan_label": "3rd wk", "stop_want": 4 }, 
+          "4th wk": { "gogo_want": 4, "kar": 40, "plan_label": "4th wk", "stop_want": 5 }, 
+          "5th wk": { "gogo_want": 5, "kar": 40, "plan_label": "5th wk", "stop_want": 6 }
         }, 
-        "plan_label": "month_wk", 
-        "star": 40
+        "plan_label": "month_wk"
       }, 
       "sem_jours": {
+        "kar": 40, 
         "kids": {
-          "Fri" : { "plan_label": "Fri" , "star": 40 }, 
-          "Mon" : { "plan_label": "Mon" , "star": 20 }, 
-          "Sat" : { "plan_label": "Sat" , "star": 50 }, 
-          "Sun" : { "plan_label": "Sun" , "star": 20 }, 
-          "Thur": { "plan_label": "Thur", "star": 30 }, 
-          "Tue" : { "plan_label": "Tue" , "star": 20 }, 
-          "Wed" : { "plan_label": "Wed" , "star": 20 }
+          "Fri" : { "kar": 40, "plan_label": "Fri"  }, 
+          "Mon" : { "kar": 20, "plan_label": "Mon"  }, 
+          "Sat" : { "kar": 50, "plan_label": "Sat"  }, 
+          "Sun" : { "kar": 20, "plan_label": "Sun"  }, 
+          "Thur": { "kar": 30, "plan_label": "Thur" }, 
+          "Tue" : { "kar": 20, "plan_label": "Tue"  }, 
+          "Wed" : { "kar": 20, "plan_label": "Wed"  }
         }, 
-        "plan_label": "sem_jours", 
-        "star": 40
+        "plan_label": "sem_jours"
       }, 
       "yr_month": {
         "begin": 1, 
         "close": 13, 
+        "kar": 40, 
         "kids": {
-          "April"    : { "gogo_want":  4, "plan_label": "April"    , "star": 40, "stop_want":  5 }, 
-          "August"   : { "gogo_want":  8, "plan_label": "August"   , "star": 40, "stop_want":  9 }, 
-          "December" : { "gogo_want": 12, "plan_label": "December" , "star": 40, "stop_want": 13 }, 
-          "February" : { "gogo_want":  2, "plan_label": "February" , "star": 40, "stop_want":  3 }, 
-          "January"  : { "gogo_want":  1, "plan_label": "January"  , "star": 40, "stop_want":  2 }, 
-          "July"     : { "gogo_want":  7, "plan_label": "July"     , "star": 40, "stop_want":  8 }, 
-          "June"     : { "gogo_want":  6, "plan_label": "June"     , "star": 40, "stop_want":  7 }, 
-          "March"    : { "gogo_want":  3, "plan_label": "March"    , "star": 40, "stop_want":  4 }, 
-          "May"      : { "gogo_want":  5, "plan_label": "May"      , "star": 40, "stop_want":  6 }, 
-          "November" : { "gogo_want": 11, "plan_label": "November" , "star": 40, "stop_want": 12 }, 
-          "October"  : { "gogo_want": 10, "plan_label": "October"  , "star": 40, "stop_want": 11 }, 
-          "September": { "gogo_want":  9, "plan_label": "September", "star": 40, "stop_want": 10 }
+          "April"    : { "gogo_want":  4, "kar": 40, "plan_label": "April"    , "stop_want":  5 }, 
+          "August"   : { "gogo_want":  8, "kar": 40, "plan_label": "August"   , "stop_want":  9 }, 
+          "December" : { "gogo_want": 12, "kar": 40, "plan_label": "December" , "stop_want": 13 }, 
+          "February" : { "gogo_want":  2, "kar": 40, "plan_label": "February" , "stop_want":  3 }, 
+          "January"  : { "gogo_want":  1, "kar": 40, "plan_label": "January"  , "stop_want":  2 }, 
+          "July"     : { "gogo_want":  7, "kar": 40, "plan_label": "July"     , "stop_want":  8 }, 
+          "June"     : { "gogo_want":  6, "kar": 40, "plan_label": "June"     , "stop_want":  7 }, 
+          "March"    : { "gogo_want":  3, "kar": 40, "plan_label": "March"    , "stop_want":  4 }, 
+          "May"      : { "gogo_want":  5, "kar": 40, "plan_label": "May"      , "stop_want":  6 }, 
+          "November" : { "gogo_want": 11, "kar": 40, "plan_label": "November" , "stop_want": 12 }, 
+          "October"  : { "gogo_want": 10, "kar": 40, "plan_label": "October"  , "stop_want": 11 }, 
+          "September": { "gogo_want":  9, "kar": 40, "plan_label": "September", "stop_want": 10 }
         }, 
-        "plan_label": "yr_month", 
-        "star": 40
+        "plan_label": "yr_month"
       }, 
-      "yr_wk": {"begin": 0, "close": 52, "plan_label": "yr_wk", "star": 40}
+      "yr_wk": {"begin": 0, "close": 52, "kar": 40, "plan_label": "yr_wk"}
     }, 
     "plan_label": "amy45", 
-    "plan_uid": 1, 
-    "star": 1
+    "plan_uid": 1
   }, 
-  "respect_grain": 1, 
-  "star": 1
+  "respect_grain": 1
 }

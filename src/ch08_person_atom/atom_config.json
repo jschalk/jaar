@@ -204,11 +204,11 @@
       "close"       : { "column_ordinal":  6, "obj_type": "float", "sqlite_datatype": "REAL"    }, 
       "denom"       : { "column_ordinal":  8, "obj_type": "int"  , "sqlite_datatype": "INTEGER" }, 
       "gogo_want"   : { "column_ordinal": 11, "obj_type": "float", "sqlite_datatype": "REAL"    }, 
+      "kar"         : { "column_ordinal":  3, "obj_type": "int"  , "sqlite_datatype": "INTEGER" }, 
       "morph"       : { "column_ordinal":  9, "obj_type": "bool" , "sqlite_datatype": "INTEGER" }, 
       "numor"       : { "column_ordinal":  7, "obj_type": "int"  , "sqlite_datatype": "INTEGER" }, 
       "pledge"      : { "column_ordinal":  2, "obj_type": "bool" , "sqlite_datatype": "INTEGER" }, 
       "problem_bool": { "column_ordinal":  4, "obj_type": "bool" , "sqlite_datatype": "INTEGER" }, 
-      "star"        : { "column_ordinal":  3, "obj_type": "int"  , "sqlite_datatype": "INTEGER" }, 
       "stop_want"   : { "column_ordinal": 12, "obj_type": "float", "sqlite_datatype": "REAL"    }
     }, 
     "normal_specs": {"normal_table_name": "plan"}

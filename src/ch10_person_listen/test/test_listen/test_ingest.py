@@ -73,7 +73,7 @@ def test_generate_ingest_list_ReturnsList_v1():
     clean_rope = zia_personunit.make_l1_rope(exx.clean)
     clean_planunit = zia_personunit.get_plan_obj(clean_rope)
     assert ingested_list[0] == clean_planunit
-    assert ingested_list[0].star == zia_debtor_pool
+    assert ingested_list[0].kar == zia_debtor_pool
 
 
 def test_generate_ingest_list_ReturnsList_v2():
@@ -100,7 +100,7 @@ def test_generate_ingest_list_ReturnsList_v2():
     clean_planunit = zia_personunit.get_plan_obj(clean_rope)
     cuisine_planunit = zia_personunit.get_plan_obj(cuisine_rope)
     assert ingested_list[0] == cuisine_planunit
-    assert ingested_list[0].star == 16.0
+    assert ingested_list[0].kar == 16.0
     assert ingested_list == [cuisine_planunit, clean_planunit]
 
 
@@ -108,7 +108,7 @@ def test_generate_ingest_list_ReturnsList_v3():
     # ESTABLISH
     zia_personunit = personunit_shop(exx.zia)
     zia_personunit.set_l1_plan(planunit_shop(exx.clean, pledge=True))
-    zia_personunit.set_l1_plan(planunit_shop(exx.cuisine, star=3, pledge=True))
+    zia_personunit.set_l1_plan(planunit_shop(exx.cuisine, kar=3, pledge=True))
     zia_debtor_pool = 32
     zia_resepect_bit = 2
     assert len(zia_personunit.get_agenda_dict()) == 2
@@ -126,15 +126,15 @@ def test_generate_ingest_list_ReturnsList_v3():
     clean_planunit = zia_personunit.get_plan_obj(clean_rope)
     cuisine_planunit = zia_personunit.get_plan_obj(cuisine_rope)
     assert ingested_list == [cuisine_planunit, clean_planunit]
-    assert ingested_list[0].star == 24.0
-    assert ingested_list[1].star == 8.0
+    assert ingested_list[0].kar == 24.0
+    assert ingested_list[1].kar == 8.0
 
 
 def test_generate_ingest_list_ReturnsList_v4():
     # ESTABLISH
     zia_personunit = personunit_shop(exx.zia)
     zia_personunit.set_l1_plan(planunit_shop(exx.clean, pledge=True))
-    zia_personunit.set_l1_plan(planunit_shop(exx.cuisine, star=2, pledge=True))
+    zia_personunit.set_l1_plan(planunit_shop(exx.cuisine, kar=2, pledge=True))
     zia_debtor_pool = 32
     zia_resepect_bit = 2
     assert len(zia_personunit.get_agenda_dict()) == 2
@@ -151,6 +151,6 @@ def test_generate_ingest_list_ReturnsList_v4():
     cuisine_rope = zia_personunit.make_l1_rope(exx.cuisine)
     clean_planunit = zia_personunit.get_plan_obj(clean_rope)
     cuisine_planunit = zia_personunit.get_plan_obj(cuisine_rope)
-    assert ingested_list[0].star == 22
-    assert ingested_list[1].star == 10
+    assert ingested_list[0].kar == 22
+    assert ingested_list[1].kar == 10
     assert ingested_list == [cuisine_planunit, clean_planunit]

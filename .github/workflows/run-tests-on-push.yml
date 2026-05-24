@@ -1,12 +1,15 @@
 name: run-tests-on-push
-on: push
+on:
+  push:
+  pull_request:
+
 jobs:
   run-tests:
     runs-on: ubuntu-latest
     permissions:
       issues: write
     steps:
-      - uses: actions/checkout@v4 #there are different versions of the actions/checkout action
+      - uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -25,25 +28,15 @@ jobs:
           python -m pip install flask
           python -m pip install flask_cors
           python -m pip install compact_json
+      - name: Debug config
+        run: |
+          pwd
+          cat pyproject.toml | grep -A5 "pytest.ini_options"
       - name: Execute tests and generate report
         id: pytest
         run: |
-          python -m pytest -m "not local_only" --junitxml="junit/test-results_`date '+%Y-%m-%d_%T'`.xml" --doctest-modules | tee testresults
+          python -m pytest -m "not local_only" --junitxml="junit/test-results_`date '+%Y-%m-%d_%T'`.xml" | tee testresults
           echo "EXIT_CODE=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
-        #  TEST_SUMMARY_START=$(cat testresults | grep FAILURES)
-        #  TEST_SUMMARY_END=$(cat testresults | grep "summary info")
-        #  sed -n "/$TEST_SUMMARY_START/,/$TEST_SUMMARY_END/p" testresults > failure_log
-        #  F_LOG=$(cat failure_log)
-        #  FAIL_LOG=$(echo "$F_LOG")
-        #  echo "FAILURE_LOG="$FAIL_LOG"" >> "$GITHUB_OUTPUT"
-      # - name: If All Tests Pass, Merge
-      #   if: ${{ steps.pytest.outputs.EXIT_CODE == 0 }}
-      #   uses: devmasx/merge-branch@master
-      #   with:
-      #     type: now
-      #     target_branch: main
-      #     message: ${{ github.run_id }} tests passed.
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: If ANY Test Fails, Open A Ticket
         if: ${{ steps.pytest.outputs.EXIT_CODE != 0 }}
         uses: dacbd/create-issue-action@main
@@ -57,5 +50,55 @@ jobs:
             Workflow name - `${{ github.workflow }}`
             Job -           `${{ github.job }}`
             status -        `${{ job.status }}`
-            Log -           `${{ steps.pytest.outputs.FAILURE_LOG }}`
           assignees: jschalk
+
+  publish:
+    needs: run-tests
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install build tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build twine commitizen
+
+      - name: Configure git for commitizen
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Check if bump is needed
+        id: cz
+        run: |
+          cz bump --dry-run 2>&1 && echo "BUMP=true" >> "$GITHUB_OUTPUT" || echo "BUMP=false" >> "$GITHUB_OUTPUT"
+
+      - name: Bump version with commitizen
+        if: steps.cz.outputs.BUMP == 'true'
+        run: cz bump --yes
+
+      - name: Push version bump commit and tag
+        if: steps.cz.outputs.BUMP == 'true'
+        run: git push --follow-tags
+
+      - name: Build wheel
+        if: steps.cz.outputs.BUMP == 'true'
+        run: python -m build
+
+      - name: Publish to PyPI
+        if: steps.cz.outputs.BUMP == 'true'
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: twine upload dist/*

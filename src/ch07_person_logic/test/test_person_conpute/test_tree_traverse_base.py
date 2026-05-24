@@ -20,13 +20,13 @@ def test_PersonUnit_clear_plan_dict_and_person_obj_settle_attrs_SetsAttrs_Scenar
     sue_person.rational = x_rational
     sue_person.tree_traverse_count = x_tree_traverse_count
     sue_person._plan_dict = x_plan_dict
-    sue_person.offtrack_kids_star_set = "example"
+    sue_person.offtrack_kids_kar_set = "example"
     sue_person.reason_contexts = {"example2"}
     sue_person.range_inheritors = {"example2": 1}
     assert sue_person.rational == x_rational
     assert sue_person.tree_traverse_count == x_tree_traverse_count
     assert sue_person._plan_dict == x_plan_dict
-    assert sue_person.offtrack_kids_star_set != set()
+    assert sue_person.offtrack_kids_kar_set != set()
     assert sue_person.reason_contexts != set()
     assert sue_person.range_inheritors != {}
 
@@ -42,7 +42,7 @@ def test_PersonUnit_clear_plan_dict_and_person_obj_settle_attrs_SetsAttrs_Scenar
     assert sue_person._plan_dict == {
         sue_person.planroot.get_plan_rope(): sue_person.planroot
     }
-    assert sue_person.offtrack_kids_star_set == set()
+    assert sue_person.offtrack_kids_kar_set == set()
     assert not sue_person.reason_contexts
     assert not sue_person.range_inheritors
 
@@ -428,77 +428,77 @@ def test_PersonUnit_thinkout_CreatesFullyPopulated_plan_dict():
     assert len(sue_personunit._plan_dict) == 17
 
 
-def test_PersonUnit_thinkout_Resets_offtrack_kids_star_set():
+def test_PersonUnit_thinkout_Resets_offtrack_kids_kar_set():
     # ESTABLISH
     sue_personunit = personunit_shop("Sue")
-    sue_personunit.offtrack_kids_star_set = set("YY")
+    sue_personunit.offtrack_kids_kar_set = set("YY")
     x_set = set()
 
-    assert sue_personunit.offtrack_kids_star_set != x_set
+    assert sue_personunit.offtrack_kids_kar_set != x_set
 
     # WHEN
     sue_personunit.thinkout()
 
     # THEN
-    assert sue_personunit.offtrack_kids_star_set == x_set
+    assert sue_personunit.offtrack_kids_kar_set == x_set
 
 
-def test_PersonUnit_thinkout_WhenPlanRootHas_starButAll_kidsHaveZero_starAddTo_offtrack_kids_star_set_Scenario0():
+def test_PersonUnit_thinkout_WhenPlanRootHas_karButAll_kidsHaveZero_karAddTo_offtrack_kids_kar_set_Scenario0():
     # ESTABLISH
     sue_personunit = personunit_shop("Sue")
     casa_rope = sue_personunit.make_l1_rope(exx.casa)
-    casa_plan = planunit_shop(exx.casa, star=0)
+    casa_plan = planunit_shop(exx.casa, kar=0)
     sue_personunit.set_l1_plan(casa_plan)
-    assert sue_personunit.offtrack_kids_star_set == set()
+    assert sue_personunit.offtrack_kids_kar_set == set()
 
     # WHEN
     sue_personunit.thinkout()
 
     # THEN
     root_rope = sue_personunit.planroot.get_plan_rope()
-    assert sue_personunit.offtrack_kids_star_set == {root_rope}
+    assert sue_personunit.offtrack_kids_kar_set == {root_rope}
 
     # WHEN
-    sue_personunit.edit_plan_attr(casa_rope, star=2)
+    sue_personunit.edit_plan_attr(casa_rope, kar=2)
     sue_personunit.thinkout()
 
     # THEN
-    assert sue_personunit.offtrack_kids_star_set == set()
+    assert sue_personunit.offtrack_kids_kar_set == set()
 
 
-def test_PersonUnit_thinkout_WhenPlanUnitHas_starButAll_kidsHaveZero_starAddTo_offtrack_kids_star_set():
+def test_PersonUnit_thinkout_WhenPlanUnitHas_karButAll_kidsHaveZero_karAddTo_offtrack_kids_kar_set():
     # ESTABLISH
     sue_personunit = personunit_shop("Sue")
     casa_rope = sue_personunit.make_l1_rope(exx.casa)
-    casa_plan = planunit_shop(exx.casa, star=1)
+    casa_plan = planunit_shop(exx.casa, kar=1)
 
     bowl_rope = sue_personunit.make_rope(casa_rope, exx.bowl)
-    bowl_plan = planunit_shop(exx.bowl, star=8)
+    bowl_plan = planunit_shop(exx.bowl, kar=8)
 
     clean_str = "cleaning"
     clean_rope = sue_personunit.make_rope(casa_rope, clean_str)
-    clean_plan = planunit_shop(clean_str, star=2)
+    clean_plan = planunit_shop(clean_str, kar=2)
     sue_personunit.set_plan_obj(planunit_shop(clean_str), casa_rope)
 
     sweep_rope = sue_personunit.make_rope(clean_rope, exx.sweep)
-    sweep_plan = planunit_shop(exx.sweep, star=0)
+    sweep_plan = planunit_shop(exx.sweep, kar=0)
     vacuum_str = "vacuum"
     vacuum_rope = sue_personunit.make_rope(clean_rope, vacuum_str)
-    vacuum_plan = planunit_shop(vacuum_str, star=0)
+    vacuum_plan = planunit_shop(vacuum_str, kar=0)
 
     sue_personunit.set_l1_plan(casa_plan)
     sue_personunit.set_plan_obj(bowl_plan, casa_rope)
     sue_personunit.set_plan_obj(clean_plan, casa_rope)
-    sue_personunit.set_plan_obj(sweep_plan, clean_rope)  # _star=0
-    sue_personunit.set_plan_obj(vacuum_plan, clean_rope)  # _star=0
+    sue_personunit.set_plan_obj(sweep_plan, clean_rope)  # _kar=0
+    sue_personunit.set_plan_obj(vacuum_plan, clean_rope)  # _kar=0
 
-    assert sue_personunit.offtrack_kids_star_set == set()
+    assert sue_personunit.offtrack_kids_kar_set == set()
 
     # WHEN
     sue_personunit.thinkout()
 
     # THEN
-    assert sue_personunit.offtrack_kids_star_set == {clean_rope}
+    assert sue_personunit.offtrack_kids_kar_set == {clean_rope}
 
 
 def test_PersonUnit_thinkout_CreatesNewGroupUnits_Scenario0():

@@ -46,6 +46,6 @@
     "brick_type": "bk00002", 
     "description": "And pledge column and missing ancestor ropes (new rows will only have jkeys populated, jvalues will be null.)", 
     "fission_steps": ["fission_set_pledge_to_one", "fission_add_ancestor_rope_rows"], 
-    "src_columns": ["spark_face", "moment_rope", "person_name", "plan_rope", "star", "knot"]
+    "src_columns": ["spark_face", "moment_rope", "person_name", "plan_rope", "kar", "knot"]
   }
 }

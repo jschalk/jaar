@@ -1,6 +1,7 @@
 from ch00_py.dict_toolbox import get_dict_from_json, get_json_from_dict
 from copy import deepcopy as copy_deepcopy
 from errno import ENAMETOOLONG as errno_ENAMETOOLONG, ERANGE as errno_ERANGE
+from inspect import stack as inspect_stack
 from os import (
     W_OK as os_W_OK,
     access as os_access,
@@ -31,13 +32,31 @@ from shutil import copytree as shutil_copytree, rmtree as shutil_rmtree
 from tempfile import TemporaryFile as tempfile_TemporaryFile
 
 
+def _get_caller_dir() -> pathlib_Path:
+    """Walk the stack to find the first caller outside file_toolbox.py."""
+    for frame_info in inspect_stack():
+        if pathlib_Path(frame_info.filename).name != "file_toolbox.py":
+            return pathlib_Path(frame_info.filename).resolve().parent
+    return pathlib_Path(".").resolve()
+
+
 def create_path(x_dir: any, filename: any) -> str:
-    """Create a path by joining two parameters, both parameters are converted to strings."""
+    """Create a path by joining two parameters, both converted to strings."""
     if not x_dir:
         return f"{filename}" if filename else ""
     x_dir = str(x_dir)
     x_dir.replace("\\", "/")
-    return os_path_join(x_dir, str(filename)) if filename is not None else x_dir
+    path = os_path_join(x_dir, str(filename)) if filename is not None else x_dir
+
+    if os_path_exists(path):
+        return path
+
+    # fallback for pip install environment � only when path starts with src/
+    if x_dir.startswith("src"):
+        caller_dir = _get_caller_dir()
+        return str(caller_dir / pathlib_Path(str(filename)).name)
+
+    return path
 
 
 def is_subdirectory(sub_path: str, focus_path: str) -> bool:

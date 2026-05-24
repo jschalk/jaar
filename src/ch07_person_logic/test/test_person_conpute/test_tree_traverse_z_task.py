@@ -153,7 +153,7 @@ def test_PersonUnit_thinkout_Sets_plan_dict():
     print(f"\nlook at {casa_plan.get_plan_rope()=}")
     assert casa_plan.parent_rope == sue_personunit.planroot.get_plan_rope()
     assert casa_plan.kids == {}
-    assert casa_plan.star == 30
+    assert casa_plan.kar == 30
     assert casa_plan.plan_label == exx.casa
     assert casa_plan.tree_level == 1
     assert casa_plan.plan_active

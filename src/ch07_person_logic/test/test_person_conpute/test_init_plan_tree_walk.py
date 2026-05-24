@@ -154,7 +154,7 @@ def test_PersonUnit_set_plan_CreatesPlanUnitsUsedBy_reasonunits():
     casa_rope = sue_person.make_l1_rope("casa")
     cleaning_rope = sue_person.make_rope(casa_rope, "cleaning")
     clean_cuisine_str = "clean_cuisine"
-    clean_cuisine_plan = planunit_shop(clean_cuisine_str, star=40, pledge=True)
+    clean_cuisine_plan = planunit_shop(clean_cuisine_str, kar=40, pledge=True)
 
     buildings_str = "buildings"
     buildings_rope = sue_person.make_l1_rope(buildings_str)

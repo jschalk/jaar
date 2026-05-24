@@ -65,60 +65,60 @@ def _allocate_inallocable_contact_debt_lumen(
 def generate_ingest_list(
     plan_list: list[PlanUnit], debtor_respect: float, respect_grain: float
 ) -> list[PlanUnit]:
-    plan_ledger = {x_plan.get_plan_rope(): x_plan.star for x_plan in plan_list}
-    star_allot = allot_scale(plan_ledger, debtor_respect, respect_grain)
+    plan_ledger = {x_plan.get_plan_rope(): x_plan.kar for x_plan in plan_list}
+    kar_allot = allot_scale(plan_ledger, debtor_respect, respect_grain)
     for x_planunit in plan_list:
-        x_planunit.star = star_allot.get(x_planunit.get_plan_rope())
+        x_planunit.kar = kar_allot.get(x_planunit.get_plan_rope())
     return plan_list
 
 
 def _ingest_single_planunit(listener: PersonUnit, ingest_planunit: PlanUnit):
-    star_data = _create_star_data(listener, ingest_planunit.get_plan_rope())
+    kar_data = _create_kar_data(listener, ingest_planunit.get_plan_rope())
 
     if listener.plan_exists(ingest_planunit.get_plan_rope()) is False:
         x_parent_rope = ingest_planunit.parent_rope
         listener.set_plan_obj(ingest_planunit, x_parent_rope, create_missing_plans=True)
 
-    _add_and_replace_planunit_stars(
+    _add_and_replace_planunit_kars(
         listener=listener,
-        replace_star_list=star_data.replace_star_list,
-        add_to_star_list=star_data.add_to_star_list,
-        x_star=ingest_planunit.star,
+        replace_kar_list=kar_data.replace_kar_list,
+        add_to_kar_list=kar_data.add_to_kar_list,
+        x_kar=ingest_planunit.kar,
     )
 
 
 @dataclass
-class starReplaceOrAddData:
-    add_to_star_list: list = None
-    replace_star_list: list = None
+class karReplaceOrAddData:
+    add_to_kar_list: list = None
+    replace_kar_list: list = None
 
 
-def _create_star_data(listener: PersonUnit, x_rope: RopeTerm) -> list:
-    star_data = starReplaceOrAddData()
-    star_data.add_to_star_list = []
-    star_data.replace_star_list = []
+def _create_kar_data(listener: PersonUnit, x_rope: RopeTerm) -> list:
+    kar_data = karReplaceOrAddData()
+    kar_data.add_to_kar_list = []
+    kar_data.replace_kar_list = []
     ancestor_ropes = get_ancestor_ropes(x_rope, listener.knot)
     root_rope = get_first_label_from_rope(x_rope, listener.knot)
     for ancestor_rope in ancestor_ropes:
         if ancestor_rope != root_rope:
             if listener.plan_exists(ancestor_rope):
-                star_data.add_to_star_list.append(ancestor_rope)
+                kar_data.add_to_kar_list.append(ancestor_rope)
             else:
-                star_data.replace_star_list.append(ancestor_rope)
-    return star_data
+                kar_data.replace_kar_list.append(ancestor_rope)
+    return kar_data
 
 
-def _add_and_replace_planunit_stars(
+def _add_and_replace_planunit_kars(
     listener: PersonUnit,
-    replace_star_list: list[RopeTerm],
-    add_to_star_list: list[RopeTerm],
-    x_star: float,
+    replace_kar_list: list[RopeTerm],
+    add_to_kar_list: list[RopeTerm],
+    x_kar: float,
 ) -> None:
-    for plan_rope in replace_star_list:
-        listener.edit_plan_attr(plan_rope, star=x_star)
-    for plan_rope in add_to_star_list:
+    for plan_rope in replace_kar_list:
+        listener.edit_plan_attr(plan_rope, kar=x_kar)
+    for plan_rope in add_to_kar_list:
         x_planunit = listener.get_plan_obj(plan_rope)
-        x_planunit.star += x_star
+        x_planunit.kar += x_kar
 
 
 def get_debtors_roll(x_duty: PersonUnit) -> list[ContactUnit]:

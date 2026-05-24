@@ -427,17 +427,17 @@ def test_run_fission_steps_ReturnsObj_Scenario00_OutputColumnsMatchBrickSchema()
     # ESTABLISH
     clean_rope = create_rope(exx.a23, exx.clean)
     mop_rope = create_rope(clean_rope, exx.mop)
-    star2 = 2
+    kar2 = 2
     ii00502_columns = [
         kw.spark_face,
         kw.moment_rope,
         kw.person_name,
         kw.plan_rope,
-        kw.star,
+        kw.kar,
         kw.knot,
     ]
 
-    ii00502_rows = [[exx.sue, exx.a23, exx.yao, mop_rope, star2, ";"]]
+    ii00502_rows = [[exx.sue, exx.a23, exx.yao, mop_rope, kar2, ";"]]
     ii00502_df = DataFrame(ii00502_rows, columns=ii00502_columns)
     pledge_fission_steps_list = ["fission_set_pledge_to_one"]
     # WHEN
@@ -450,7 +450,7 @@ def test_run_fission_steps_ReturnsObj_Scenario00_OutputColumnsMatchBrickSchema()
         kw.moment_rope,
         kw.person_name,
         kw.plan_rope,
-        kw.star,
+        kw.kar,
         kw.pledge,
         kw.knot,
     ]
@@ -459,7 +459,7 @@ def test_run_fission_steps_ReturnsObj_Scenario00_OutputColumnsMatchBrickSchema()
         kw.moment_rope: exx.a23,
         kw.person_name: exx.yao,
         kw.plan_rope: mop_rope,
-        kw.star: 2,
+        kw.kar: 2,
         kw.pledge: 1,
         kw.knot: ";",
     }
@@ -472,17 +472,17 @@ def test_run_fission_steps_ReturnsObj_Scenario01_OutputAddsRows():
     # ESTABLISH
     clean_rope = create_rope(exx.a23, exx.clean)
     mop_rope = create_rope(clean_rope, exx.mop)
-    star2 = 2
+    kar2 = 2
     ii00502_columns = [
         kw.spark_face,
         kw.moment_rope,
         kw.person_name,
         kw.plan_rope,
-        kw.star,
+        kw.kar,
         kw.knot,
     ]
 
-    ii00502_rows = [[exx.sue, exx.a23, exx.yao, mop_rope, star2, ";"]]
+    ii00502_rows = [[exx.sue, exx.a23, exx.yao, mop_rope, kar2, ";"]]
     ii00502_df = DataFrame(ii00502_rows, columns=ii00502_columns)
     pledge_fission_steps_list = [
         "fission_set_pledge_to_one",
@@ -498,7 +498,7 @@ def test_run_fission_steps_ReturnsObj_Scenario01_OutputAddsRows():
         kw.moment_rope,
         kw.person_name,
         kw.plan_rope,
-        kw.star,
+        kw.kar,
         kw.pledge,
         kw.knot,
     ]
@@ -507,11 +507,11 @@ def test_run_fission_steps_ReturnsObj_Scenario01_OutputAddsRows():
     #     kw.moment_rope: exx.a23,
     #     kw.person_name: exx.yao,
     #     kw.plan_rope: mop_rope,
-    #     kw.star: star2,
+    #     kw.kar: kar2,
     #     kw.pledge: 1,
     #     kw.knot: ";",
     # }
     # expected_df = DataFrame([expected_values])
     assert len(fissioned_df) == 3
-    assert list(fissioned_df[kw.star]) == [star2, None, None]
+    assert list(fissioned_df[kw.kar]) == [kar2, None, None]
     assert list(fissioned_df[kw.pledge]) == [1, 0, 0]
