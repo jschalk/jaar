@@ -1,3 +1,10 @@
+## [0.86.12](https://github.com/jschalk/keg/compare/v0.86.11...v0.86.12) (2026-05-24)
+
+
+### Bug Fixes
+
+* new pip install file ref issue concerning idea_config ([2245d42](https://github.com/jschalk/keg/commit/2245d4238a5aa074751a34169579859292694c8c))
+
 ## [0.86.10](https://github.com/jschalk/keg/compare/v0.86.9...v0.86.10) (2026-05-24)
 
 
