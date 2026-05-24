@@ -1,3 +1,10 @@
+## [0.86.2](https://github.com/jschalk/keg/compare/v0.86.1...v0.86.2) (2026-05-24)
+
+
+### Bug Fixes
+
+* corrects pypi distribution run-time failure. ([9f4b0c4](https://github.com/jschalk/keg/commit/9f4b0c4c81b8babf789afedb019ec57f004db6c7))
+
 # [0.86.0](https://github.com/jschalk/keg/compare/v0.85.11...v0.86.0) (2026-05-24)
 
 
