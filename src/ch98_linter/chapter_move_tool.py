@@ -20,6 +20,7 @@ def first_level_dirs_with_prefix(path_prefix: str):
     Only includes directories that are direct children of the parent of path_prefix.
     """
     parent_dir = os_path_dirname(path_prefix)
+    print(f"{parent_dir=}")
     prefix_name = os_path_basename(path_prefix)
 
     if not os_path_isdir(parent_dir):
@@ -28,6 +29,7 @@ def first_level_dirs_with_prefix(path_prefix: str):
     result = []
     for entry in os_listdir(parent_dir):
         full_path = os_path_join(parent_dir, entry)
+        print(f"{full_path=} {entry=}")
         if entry.startswith(prefix_name) and os_path_isdir(full_path):
             result.append(full_path)
 
