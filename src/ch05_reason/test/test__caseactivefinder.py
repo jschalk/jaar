@@ -1,4 +1,5 @@
 from ch00_py.csv_toolbox import open_csv_with_types
+from ch00_py.file_toolbox import create_path
 from ch00_py.plotly_toolbox import conditional_fig_show
 from ch05_reason.reason_main import CaseActiveFinder, caseactivefinder_shop
 from ch99_glossary.ch_keyword import Ch05Keywords as kw, ExampleStrs as exx
@@ -409,7 +410,9 @@ def check_show_caseactivefinder_scenarios(graphics_bool: bool):
     pd = 1  # reason_divisor
     fig = get_fig(pd, graphics_bool)
     linel = 0
-    test_cases_csv_path = "src/ch05_reason/test/caseactivefinder_test_cases.csv"
+    test_cases_csv_path = create_path(
+        "src", "ch05_reason", "test", "caseactivefinder_test_cases.csv"
+    )
     test_cases_types = {
         "case_desc": "TEXT",
         kw.reason_lower: "REAL",

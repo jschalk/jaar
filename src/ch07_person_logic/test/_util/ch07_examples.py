@@ -1,4 +1,4 @@
-from ch00_py.file_toolbox import open_json
+from ch00_py.file_toolbox import create_path, open_json
 from ch03_workforce.workforce import workforceunit_shop
 from ch04_rope.rope import RopeTerm, create_rope
 from ch05_reason.reason_main import factunit_shop, reasonunit_shop
@@ -16,7 +16,9 @@ from enum import Enum
 
 
 def personunit_v001() -> PersonUnit:
-    person1_path = "src/ch07_person_logic/test/_util/example_person1.json"
+    person1_path = create_path(
+        "src", "ch07_person_logic", "test", "_util", "example_person1.json"
+    )
     return get_personunit_from_dict(open_json(person1_path))
 
 
@@ -48,7 +50,9 @@ def personunit_v001_with_large_agenda() -> PersonUnit:
 
 
 def personunit_v002() -> PersonUnit:
-    person2_path = "src/ch07_person_logic/test/_util/example_person2.json"
+    person2_path = create_path(
+        "src", "ch07_person_logic", "test", "_util", "example_person2.json"
+    )
     return get_personunit_from_dict(open_json(person2_path))
 
 

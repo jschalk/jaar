@@ -18,7 +18,7 @@ def test_brick_sheets_to_lego_mstr_Examples(temp3_fs, run_big_tests):
 
     if not run_big_tests:
         return
-    examples_dir = "src/ch32_world/test/test_world_examples"
+    examples_dir = create_path("src", "ch32_world", "test", "test_world_examples")
     example_names = set(get_level1_dirs(examples_dir))
     if "__pycache__" in example_names:
         example_names.remove("__pycache__")  # Remove __pycache__ if it exists

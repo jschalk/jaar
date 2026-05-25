@@ -1,11 +1,11 @@
-from ch00_py.file_toolbox import open_json
+from ch00_py.file_toolbox import create_path, open_json
 from ch13_time._ref.ch13_semantic_types import LabelTerm
 
 
 def get_custom_epoch_config(epoch_label: LabelTerm) -> dict:
-    x_dir = "src/ch13_time/epoch_configs/"
     x_filename = f"epoch_config_{epoch_label}.json"
-    return open_json(x_dir, x_filename)
+    file_path = create_path("src", "ch13_time", "epoch_configs", x_filename)
+    return open_json(file_path)
 
 
 def get_five_config() -> dict:
