@@ -41,6 +41,7 @@ class PersonAtom:
     jvalues: dict[str, str] = None
     atom_order: int = None
 
+    # TODO look at getting rid of this method
     def get_insert_sqlstr(self) -> str:
         if self.is_valid() is False:
             raise PersonAtomDescriptionError(
