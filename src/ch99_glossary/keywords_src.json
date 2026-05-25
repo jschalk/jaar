@@ -65,7 +65,6 @@
   "amount": {"sort_ordinal": 140, "valid_ch": "11:"}, 
   "ancestors": {"valid_ch": "7:"}, 
   "atom": {"valid_ch": "8:"}, 
-  "atom_hx": {"valid_ch": "8:"}, 
   "attributes": {"valid_ch": "17:"}, 
   "awardee_title": {"sort_ordinal": 84, "valid_ch": "2:"}, 
   "awardee_title_ERASE": {"sort_ordinal": 87, "valid_ch": "8:"}, 

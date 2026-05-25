@@ -1,4 +1,3 @@
-from ch00_py.db_toolbox import RowData, create_type_reference_insert_sqlstr
 from ch00_py.dict_toolbox import get_empty_dict_if_None
 from ch02_contact.contact import contactunit_shop
 from ch02_contact.group import awardunit_shop
@@ -29,10 +28,6 @@ from ch08_person_atom.atom_config import (
 from dataclasses import dataclass
 
 
-class PersonAtomDescriptionError(Exception):
-    pass
-
-
 @dataclass
 class PersonAtom:
     dimen: str = None
@@ -40,24 +35,6 @@ class PersonAtom:
     jkeys: dict[str, str] = None
     jvalues: dict[str, str] = None
     atom_order: int = None
-
-    # TODO look at getting rid of this method
-    def get_insert_sqlstr(self) -> str:
-        if self.is_valid() is False:
-            raise PersonAtomDescriptionError(
-                f"Cannot get_insert_sqlstr '{self.dimen}' with is_valid=False."
-            )
-
-        x_columns = [
-            f"{self.dimen}_{self.crud_str}_{jkey}"
-            for jkey in get_sorted_jkey_keys(self.dimen)
-        ]
-        x_columns.extend(
-            f"{self.dimen}_{self.crud_str}_{jvalue}" for jvalue in self.jvalues.keys()
-        )
-        x_values = self.get_nesting_order_args()
-        x_values.extend(iter(self.jvalues.values()))
-        return create_type_reference_insert_sqlstr("atom_hx", x_columns, [x_values])
 
     def get_all_args_in_list(self):
         x_list = self.get_nesting_order_args()
@@ -574,16 +551,6 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
         return (x_obj.contact_cred_lumen != y_obj.contact_cred_lumen) or (
             x_obj.contact_debt_lumen != y_obj.contact_debt_lumen
         )
-
-
-def get_personatom_from_rowdata(x_rowdata: RowData) -> PersonAtom:
-    dimen_str, crud_str = get_dimen_from_dict(x_rowdata.row_dict)
-    x_atom = personatom_shop(dimen=dimen_str, crud_str=crud_str)
-    front_len = len(dimen_str) + len(crud_str) + 2
-    for x_columnname, x_value in x_rowdata.row_dict.items():
-        arg_key = x_columnname[front_len:]
-        x_atom.set_arg(x_key=arg_key, x_value=x_value)
-    return x_atom
 
 
 @dataclass
