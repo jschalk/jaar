@@ -37,7 +37,6 @@ def test_Chapters_test_TestsAreInCorrectDirStructure():
                 assert level1_dir == test_str
 
 
-# TODO remove brick_config.py from list
 def test_Chapters_NonTestFilesDoNotHavePrintStatments():
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
@@ -49,7 +48,6 @@ def test_Chapters_NonTestFilesDoNotHavePrintStatments():
         "create_notebook.py",
         "paths_change.py",
         "style.py",
-        "brick_config.py",
     }
 
     # WHEN / THEN

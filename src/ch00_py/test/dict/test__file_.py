@@ -45,7 +45,6 @@ def test_create_path_ReturnsSrcPath_WhenSrcPathExists(tmp_path):
     assert os_path_exists(result)
 
 
-# TODO clean up test a bit.
 def test_create_path_UsesFallback_WhenSrcPathDoesNotExist():
     # GIVEN os_path_exists returns False (simulates pip install environment)
     with mock_patch("ch00_py.file_toolbox.os_path_exists", return_value=False):
