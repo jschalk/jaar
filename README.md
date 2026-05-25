@@ -42,7 +42,7 @@ keg2_app
 
 The app window will open and you are ready to go.
 
-![App demo](demo.gif)
+![App demo](https://raw.githubusercontent.com/jschalk/keg/main/demo.gif)
 
 ---
 
