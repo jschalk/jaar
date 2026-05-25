@@ -36,7 +36,7 @@ class C400Constants:
 
 
 def get_c400_constants() -> C400Constants:
-    c400_constants_path = create_path("src/ch13_time", "c400_constants.json")
+    c400_constants_path = create_path("src", "ch13_time", "c400_constants.json")
     c400_dict = open_json(c400_constants_path)
     return C400Constants(
         day_length=c400_dict.get("day_length"),

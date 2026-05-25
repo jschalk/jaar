@@ -146,10 +146,10 @@ def test_Chapters_ChapterReferenceDir_ref_ExistsForEveryChapter_Scenario0():
 def test_Chapters_DoNotHaveEmptyDirectories():
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
-    excluded_dirs = {
-        "src/ch32_world/test/test_world_examples/worlds",
-        "src/ch19_idea_src/test/z_notebooks",
-    }
+    twe = "test_world_examples"
+    x_worlds_dir = create_path("src", "ch32_world", "test", twe, "worlds")
+    z_nootbooks_dir = create_path("src", "ch19_idea_src", "test", "z_notebooks")
+    excluded_dirs = {x_worlds_dir, z_nootbooks_dir}
 
     # WHEN / THEN
     for chapter_desc, chapter_dir in get_chapter_descs().items():
