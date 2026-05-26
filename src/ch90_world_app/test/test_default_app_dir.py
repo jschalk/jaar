@@ -1,5 +1,5 @@
 from ch32_world.world import worlddir_shop
-from ch50_world_app.w1_tool import (
+from ch90_world_app.w1_tool import (
     ETLAppSettings,
     get_app_default_dir,
     get_app_default_dirs,
@@ -8,7 +8,7 @@ from ch50_world_app.w1_tool import (
     get_app_default_you_personname,
     get_app_glb_attrs,
 )
-from ch99_glossary.ch_keyword import Ch50Keywords as kw
+from ch99_glossary.ch_keyword import Ch90Keywords as kw
 from pathlib import Path
 from platform import system as platform_system
 
@@ -130,7 +130,7 @@ def test_get_app_default_world_name_ReturnsObj():
 def test_get_app_default_dir_ReturnsObj_UnixPath(monkeypatch):
     # ESTABLISH
     fake_home = Path("/home/testuser")
-    monkeypatch.setattr("ch50_world_app.w1_tool.Path.home", lambda: fake_home)
+    monkeypatch.setattr("ch90_world_app.w1_tool.Path.home", lambda: fake_home)
     # WHEN
     path = get_app_default_dir(is_windows=False)
     # THEN
