@@ -21,7 +21,7 @@ from ch00_py.file_toolbox import (
     save_json,
     set_dir,
 )
-from ch99_glossary.ch_keyword import Ch00Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx
 from os.path import (
     exists as os_path_exist,
     exists as os_path_exists,

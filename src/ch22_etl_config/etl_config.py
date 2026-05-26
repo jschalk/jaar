@@ -363,7 +363,7 @@ def get_stage_abbv5(stage_name: str) -> str:
         "heard_vld": "h_vld",
     }
     abb5_str = stage_abbv5.get(stage_name)
-    return abb5_str if abb5_str else stage_name
+    return abb5_str or stage_name
 
 
 def get_prime_columns(

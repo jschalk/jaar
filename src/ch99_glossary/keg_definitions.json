@@ -67,6 +67,7 @@
   "cases": "Definition needed.", 
   "celldepth": ", used with Budget Cells, bud arg", 
   "ch00": "Creates helper tools for OS and python data manipulation.", 
+  "ch01": "Create keyword glossary tools for all chapters.", 
   "ch02": "Defines how to allot a pool number to a weighted ledger.", 
   "ch03": "Defines Contacts, Groups, Memberships, Awardees debt and cred.", 
   "ch04": "Defines Workforce, LaborUnit. How tasks are assigned to labor.", 

@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import create_path, open_file
-from ch00_py.keyword_class_builder import (
+from ch01_keyword.keyword_class_builder import (
     get_keywords_by_chapter_md,
     save_keywords_by_chapter_md,
 )

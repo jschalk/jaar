@@ -1,12 +1,12 @@
-from ch00_py._ref.ch00_path import create_keywords_classes_file_path
-from ch00_py.chapter_desc_main import (
+from ch00_py.file_toolbox import open_file, save_file, save_json
+from ch01_keyword._ref.ch01_path import create_keywords_classes_file_path
+from ch01_keyword.chapter_desc_main import (
     get_ch_int,
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
     valid_chapter_numbers,
 )
-from ch00_py.file_toolbox import open_file, save_file, save_json
-from ch00_py.keyword_class_builder import (
+from ch01_keyword.keyword_class_builder import (
     check_relative_order,
     create_all_enum_keyword_classes_str,
     create_examplestrs_class_str,
@@ -20,7 +20,7 @@ from ch00_py.keyword_class_builder import (
     get_possible_keyword_config_keys,
     parse_valid_ch_str,
 )
-from ch99_glossary.ch_keyword import Ch00Keywords as kw
+from ch99_glossary.ch_keyword import Ch01Keywords as kw
 from ch99_glossary.sorter import get_keg_elements_sort_order
 from pytest import raises as pytest_raises
 

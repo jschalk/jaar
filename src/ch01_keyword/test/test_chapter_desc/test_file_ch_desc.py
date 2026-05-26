@@ -1,13 +1,13 @@
-from ch00_py.chapter_desc_main import get_chapter_descs, valid_chapter_numbers
-from pytest import raises as pytest_raises
+from ch01_keyword.chapter_desc_main import get_chapter_descs, valid_chapter_numbers
+from ch99_glossary.ch_keyword import Ch01Keywords as kw
 from unittest.mock import patch
 
 
 def test_get_chapter_descs_Scenario0_RemovesLinterAndRef():
     # ESTABLISH
     with (
-        patch("ch00_py.chapter_desc_main.get_level1_dirs") as mock_get_dirs,
-        patch("ch00_py.chapter_desc_main.create_path") as mock_create_path,
+        patch("ch01_keyword.chapter_desc_main.get_level1_dirs") as mock_get_dirs,
+        patch("ch01_keyword.chapter_desc_main.create_path") as mock_create_path,
     ):
         mock_get_dirs.return_value = [
             "intro_test_mock",
@@ -34,8 +34,8 @@ def test_get_chapter_descs_Scenario0_RemovesLinterAndRef():
 def test_get_chapter_descs_Scenario1_GetsLevel1Directories():
     # ESTABLISH
     with (
-        patch("ch00_py.chapter_desc_main.get_level1_dirs") as mock_get_dirs,
-        patch("ch00_py.chapter_desc_main.create_path"),
+        patch("ch01_keyword.chapter_desc_main.get_level1_dirs") as mock_get_dirs,
+        patch("ch01_keyword.chapter_desc_main.create_path"),
     ):
         mock_get_dirs.return_value = ["chapter1", "ch99_glossary"]
 

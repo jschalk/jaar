@@ -1,13 +1,13 @@
-from ch00_py._ref.ch00_path import (
+from ch00_py.file_toolbox import create_path, open_json, save_file
+from ch01_keyword._ref.ch01_path import (
     create_src_example_strs_path,
     create_src_keywords_src_path,
 )
-from ch00_py.chapter_desc_main import (
+from ch01_keyword.chapter_desc_main import (
     get_ch_int,
     get_chapter_desc_prefix,
     get_chapter_descs,
 )
-from ch00_py.file_toolbox import create_path, open_json, save_file
 from copy import copy as copy_copy
 from enum import Enum
 from typing import Any, List, Set, Tuple

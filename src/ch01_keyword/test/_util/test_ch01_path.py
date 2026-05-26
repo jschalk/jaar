@@ -1,9 +1,9 @@
-from ch00_py._ref.ch00_path import (
+from ch00_py.file_toolbox import create_path, get_json_filename
+from ch01_keyword._ref.ch01_path import (
     create_keywords_classes_file_path,
     create_src_example_strs_path,
     create_src_keywords_src_path,
 )
-from ch00_py.file_toolbox import create_path, get_json_filename
 from inspect import getdoc as inspect_getdoc
 from pytest import mark as pytest_mark
 

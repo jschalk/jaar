@@ -1,5 +1,5 @@
-from ch00_py.chapter_desc_main import get_chapter_desc_str_number
 from ch00_py.file_toolbox import create_path, get_level1_dirs, open_json
+from ch01_keyword.chapter_desc_main import get_chapter_desc_str_number
 from ch97_docs_builder.doc_builder import get_chapter_desc_prefix
 from ch98_linter.style import (
     get_chapter_descs,

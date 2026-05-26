@@ -8,8 +8,8 @@ Usage:
 Configure ROOT_DIRS below to match your project layout.
 """
 
-from ch00_py.chapter_desc_main import get_chapter_descs
 from ch00_py.file_toolbox import get_dir_filenames
+from ch01_keyword.chapter_desc_main import get_chapter_descs
 from os.path import join as os_path_join
 from pathlib import Path
 

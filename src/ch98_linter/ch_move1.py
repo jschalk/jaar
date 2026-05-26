@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import open_json, save_json
-from ch00_py.keyword_class_builder import (
+from ch01_keyword.keyword_class_builder import (
     create_src_keywords_src_path,
     get_keywords_src_config,
 )

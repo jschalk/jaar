@@ -5,7 +5,6 @@ from ast import (
     parse as ast_parse,
     walk as ast_walk,
 )
-from ch00_py.chapter_desc_main import get_chapter_desc_prefix, get_chapter_descs
 from ch00_py.file_toolbox import (
     create_path,
     get_dir_filenames,
@@ -13,7 +12,11 @@ from ch00_py.file_toolbox import (
     save_file,
     save_json,
 )
-from ch00_py.keyword_class_builder import (
+from ch01_keyword.chapter_desc_main import (
+    get_chapter_desc_prefix,
+    get_chapter_descs,
+)
+from ch01_keyword.keyword_class_builder import (
     create_src_example_strs_path,
     create_src_keywords_src_path,
     get_keywords_src_config,

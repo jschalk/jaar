@@ -4,6 +4,7 @@ What does each one do?
 
 
 - **ch00_py**: Creates helper tools for OS and python data manipulation.
+- **ch01_keyword**: Create keyword glossary tools for all chapters.
 - **ch02_allot**: Defines how to allot a pool number to a weighted ledger.
 - **ch03_contact**: Defines Contacts, Groups, Memberships, Awardees debt and cred.
 - **ch04_workforce**: Defines Workforce, LaborUnit. How tasks are assigned to labor.

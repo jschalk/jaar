@@ -1,4 +1,4 @@
-from ch00_py.keyword_class_builder import save_keywords_by_chapter_md
+from ch01_keyword.keyword_class_builder import save_keywords_by_chapter_md
 from ch97_docs_builder.doc_builder import (
     resave_chapter_and_keyword_json_files,
     save_brick_formats_md,

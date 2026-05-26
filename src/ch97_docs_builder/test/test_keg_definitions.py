@@ -1,4 +1,4 @@
-from ch00_py.keyword_class_builder import (
+from ch01_keyword.keyword_class_builder import (
     get_ch_int,
     get_chapter_descs,
     get_example_strs_config,
