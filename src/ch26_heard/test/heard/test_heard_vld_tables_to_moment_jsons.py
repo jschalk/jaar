@@ -10,7 +10,7 @@ from ch18_etl_config.etl_sqlstr import (
     create_prime_tablename,
     get_moment_heard_select1_sqlstrs,
 )
-from ch20_etl_brick.etl_brick_main import create_sound_and_heard_tables
+from ch24_etl_brick.etl_brick_main import create_sound_and_heard_tables
 from ch26_heard.heard import etl_heard_vld_tables_to_mind_moment_jsons
 from ch99_glossary.ch_keyword import Ch26Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists

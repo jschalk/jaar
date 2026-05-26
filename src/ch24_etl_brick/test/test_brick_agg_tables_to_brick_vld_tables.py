@@ -1,10 +1,10 @@
 from ch00_py.db_toolbox import db_table_exists, get_row_count, get_table_columns
 from ch17_brick.brick_db_tool import create_brick_sorted_table
-from ch20_etl_brick.etl_brick_main import (
+from ch24_etl_brick.etl_brick_main import (
     etl_brixk_agg_tables_to_brixk_vld_tables,
     get_create_sparks_b_vld_sqlstr,
 )
-from ch99_glossary.ch_keyword import Ch20Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch24Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

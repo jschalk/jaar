@@ -29,7 +29,7 @@ from ch18_etl_config.etl_sqlstr import (
     create_prime_tablename,
     create_sound_and_heard_tables,
 )
-from ch20_etl_brick._ref.ch20_semantic_types import FaceName, SparkInt
+from ch24_etl_brick._ref.ch24_semantic_types import FaceName, SparkInt
 from os.path import exists as os_path_exists
 from pandas import read_excel as pandas_read_excel
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
