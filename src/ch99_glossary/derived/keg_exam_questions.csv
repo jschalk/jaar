@@ -108,195 +108,195 @@ row_number,question
 106,Did you read that the keg_definition of 'yao' is 'Example key with value 'Yao' used for tests throughout codebase.'.
 107,Did you read that the keg_definition of 'yield' is 'Used so often in Python that it cannot be a kegology keyword.'.
 108,Did you read that the keg_definition of 'zia' is 'Example key with value 'Zia' used for tests throughout codebase.'.
-109,Did you read that the keg_definition of 'DELETE' is 'CRUD_COMMAND to delete records for a table'.
-110,Did you read that the keg_definition of 'INSERT' is 'CRUD_COMMAND to delete records for a table'.
-111,Did you read that the keg_definition of 'Keyword' is 'Reserved word that is supposed to have one meaning.'.
-112,Did you read that the keg_definition of 'UPDATE' is 'CRUD_COMMAND to update records for a table. 'Associated dimens: personunit' in 'CRUD_COMMAND to update records for a table''.
-113,Did you read that the keg_definition of 'filename' is 'Should always include extension ala filebasename + '.' + extension'.
-114,Did you read that the keg_definition of 'glossary' is 'Definition needed.'.
-115,Did you read that the keg_definition of 'keyword' is 'Reserved word that is supposed to have one meaning.'.
-116,"Did you read that the keg_definition of 'semantic_type' is 'A datatype that is fundamentally int, str, or float'."
-117,"Did you read that the keg_definition of 'shop' is 'The factory method in programming is very important. However because I want 'fact' only to refer to the Keg concept I don't use the word 'factory', instead I use 'shop'.'."
-118,Did you read that the keg_definition of 'sqlite_datatype' is 'Definition needed.'.
-119,Did you read that the keg_definition of 'question_tier' is 'Every Keyword has an question_tier. The highter the question_tier the more relatively important the keyword.'.
-120,Did you read that the keg_definition of 'sort_ordinal' is 'Int that represents where the keyword is indexed in the general sorting order.'.
-121,"Did you read that the keg_definition of 'valid_ch' is 'Describes which chapters a keyword is allowed to be in. Format is '0:' for all chapters, '5:' for all chapters after ch06, '3,7' for only 3 and 7. Empty string for not allowed in any chapter.'."
-122,Did you read that the keg_definition of 'GrainNum' is 'float first used in ch02. GrainNum represents the smallest fraction allowed'.
-123,Did you read that the keg_definition of 'PoolNum' is 'float first used in ch02. PoolNum represents any possible subset of the sum of numbers in the pool.'.
-124,Did you read that the keg_definition of 'WeightNum' is 'float first used in ch02. WeightNum represents the unnormalized value of a ledger key. The sum of all WeightNum values in a ledger is not defined.'.
-125,Did you read that the keg_definition of 'BreakTerm' is 'str first used in ch03. All str separator classes are BreakTerms. Exists because of the necessity to break experience reality into things so they can be understood.'.
-126,"Did you read that the keg_definition of 'ContactName' is 'str first used in ch03. Every ContactName object is NameTerm, must follow NameTerm format.'."
-127,Did you read that the keg_definition of 'FundGrain' is 'float first used in ch03. Smallest Unit of fund_num'.
-128,Did you read that the keg_definition of 'FundNum' is 'float first used in ch03. FundNum inherits from float class'.
-129,"Did you read that the keg_definition of 'GroupMark' is 'str first used in ch03. GroupMark(s) exist in TitleTerms to indicate its a group, no GroupMark indicates it is a ContactName.'."
-130,Did you read that the keg_definition of 'GroupTitle' is 'str first used in ch03. If contains SepartorTerms(s) it represents a group otherwise its a ContactName.'.
-131,Did you read that the keg_definition of 'HealerName' is 'str first used in ch03. A NameTerm used to identify a Problem's Healer'.
-132,Did you read that the keg_definition of 'NameTerm' is 'str first used in ch03. All Name string classes should inherit from this class'.
-133,Did you read that the keg_definition of 'RespectGrain' is 'float first used in ch03. Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!''.
-134,Did you read that the keg_definition of 'RespectNum' is 'float first used in ch03. RespectNum inherits from float class'.
-135,Did you read that the keg_definition of 'TitleTerm' is 'str first used in ch03. If a TitleTerm contains SepartorTerms(s) it represents a group otherwise its a single member group of an ContactName.'.
-136,"Did you read that the keg_definition of 'awardee_title' is ', Award seed.'."
-137,"Did you read that the keg_definition of 'awardunits' is 'Every PlanUnit has AwardUnits that represent who is awarded give_fund and take_fund, Plan seed'."
-138,"Did you read that the keg_definition of 'contact_cred_lumen' is ', Contact seed.'."
-139,"Did you read that the keg_definition of 'contact_debt_lumen' is ', Contact seed.'."
-140,"Did you read that the keg_definition of 'contact_name' is ', paybook arg, Contact seed, Member seed'."
-141,"Did you read that the keg_definition of 'credor_pool' is ', Contact thinkout, Member thinkout data'."
-142,"Did you read that the keg_definition of 'debtor_pool' is ', Contact thinkout, Member thinkout data'."
-143,"Did you read that the keg_definition of 'fund_agenda_give' is ', Contact thinkout, Member thinkout data'."
-144,"Did you read that the keg_definition of 'fund_agenda_ratio_give' is ', Contact thinkout, Member thinkout data'."
-145,"Did you read that the keg_definition of 'fund_agenda_ratio_take' is ', Contact thinkout, Member thinkout data'."
-146,"Did you read that the keg_definition of 'fund_agenda_take' is ', Contact thinkout, Member thinkout data'."
-147,"Did you read that the keg_definition of 'fund_give' is ', Contact thinkout, Award thinkout, Member thinkout data'."
-148,"Did you read that the keg_definition of 'fund_grain' is ', Moment arg, Person seed, Plan thinkout.'."
-149,"Did you read that the keg_definition of 'fund_take' is ', Contact thinkout, Award thinkout, Member thinkout data'."
-150,"Did you read that the keg_definition of 'give_force' is ', Award seed.'."
-151,"Did you read that the keg_definition of 'group_cred_lumen' is ', Member seed.'."
-152,"Did you read that the keg_definition of 'group_debt_lumen' is ', Member seed.'."
-153,"Did you read that the keg_definition of 'group_title' is ', Member seed.'."
-154,"Did you read that the keg_definition of 'groupmark' is ', Contact thinkout, Member thinkout data.'."
-155,Did you read that the keg_definition of 'groupunits' is 'Definition needed.'.
-156,"Did you read that the keg_definition of 'inallocable_contact_debt_lumen' is ', Contact thinkout'."
-157,"Did you read that the keg_definition of 'irrational_contact_debt_lumen' is ', Contact thinkout'."
-158,"Did you read that the keg_definition of 'labor_title' is ', Workforce seed.'."
-159,Did you read that the keg_definition of 'labors' is 'Definition needed.'.
-160,Did you read that the keg_definition of 'memberships' is 'Definition needed.'.
-161,Did you read that the keg_definition of 'parent_solo' is 'The parent PlanUnit's LaborUnit's solo value for that labor_title'.
-162,"Did you read that the keg_definition of 'rational' is 'If a PersonUnit's agenda is deterministic (always the same after thinkout) then value is True, Person thinkout'."
-163,"Did you read that the keg_definition of 'respect_grain' is ', Moment arg, Person seed.'."
-164,"Did you read that the keg_definition of 'solo' is 'I can't figure out what this is for. Where in the codebase is it necessary for a LaborUnit to know if it the only LaborUnit in a WorkforceUnit, Workforce seed.'."
-165,"Did you read that the keg_definition of 'take_force' is ', Workforce seed, Award seed'."
-166,Did you read that the keg_definition of 'thinkout' is 'The process by which a PersonUnit creates all it's output metrics from file-stored data. Meant to invoke contemplation and computation. The PersonUnit contemplates what is important to them (their plans) and decides what they want to do. They compute their rules and create their agenda. If the PersonUnit plans are trusted with a currency quota they can be used as an Budget. Each Contact is assigned a FundNum. It may be negative.'.
-167,Did you read that the keg_definition of 'workforceheir' is 'Definition needed.'.
-168,Did you read that the keg_definition of 'workforceunit' is 'Definition needed.'.
-169,Did you read that the keg_definition of 'LaborHeir' is 'Definition needed.'.
-170,Did you read that the keg_definition of 'laborheir' is 'Definition needed.'.
-171,Did you read that the keg_definition of 'person' is 'Definition needed.'.
-172,"Did you read that the keg_definition of 'person_name' is ', paybook arg, bud arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed, Contact seed, Member seed.'."
-173,"Did you read that the keg_definition of 'person_name_is_workforce' is ', Workforce thinkout'."
-174,Did you read that the keg_definition of 'FactNum' is 'float first used in ch05. A numeric value that may converted to other Semantic Types by an external process driven by context.'.
-175,Did you read that the keg_definition of 'FirstLabel' is 'str first used in ch05. The first LabelTerm in a RopeTerm. FirstLabel cannot contain knot. Not called RootLabel to avoid confission.'.
-176,Did you read that the keg_definition of 'KnotTerm' is 'str first used in ch05. A string to used as a delimiter in RopeTerms.'.
-177,Did you read that the keg_definition of 'LabelTerm' is 'str first used in ch05. A string representation of a tree node. Nodes cannot contain RopeTerm knot'.
-178,Did you read that the keg_definition of 'ManaGrain' is 'float first used in ch05. Smallest Unit of Mana.'.
-179,Did you read that the keg_definition of 'ReasonNum' is 'float first used in ch05. A numeric value that may converted to other Semantic Types by an external process driven by context.'.
-180,Did you read that the keg_definition of 'RopeTerm' is 'str first used in ch05. A string representation of a tree path. LabelTerms are seperated by knots.'.
-181,Did you read that the keg_definition of 'fact' is 'Facts are very important concept. I tried never to use those 4 letters anywhere that didn't refer exactly to that concept.'.
-182,"Did you read that the keg_definition of 'knot' is ', Moment arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed'."
-183,"Did you read that the keg_definition of 'mana_grain' is ', Moment arg, used with Budget Cells, Person seed.'."
-184,Did you read that the keg_definition of 'meaning' is 'A term specifically used to describe how defining Ropes creates meaning. Ropes with the same start and end points can have different meaning based on the Labels in between. Only referenced in ch05'.
-185,Did you read that the keg_definition of 'parent_rope' is 'A parent_rope of rope is created by removing the last label. For PlanUnits the parent_rope is the key for their parent PlanUnit.'.
-186,"Did you read that the keg_definition of 'active_requisite' is 'Represents the expected boolean of the PlanUnit with address reason_context. If None, no check. If False expected Active bool of reason_context PlanUnit is false. If True expected contest_plan.active is True, Reason seed'."
-187,"Did you read that the keg_definition of 'case_active' is ', Case thinkout'."
-188,"Did you read that the keg_definition of 'case_task' is ', Case thinkout'."
-189,Did you read that the keg_definition of 'cases' is 'Definition needed.'.
-190,"Did you read that the keg_definition of 'fact_context' is 'All facts have a foundational context, Fact seed.'."
-191,"Did you read that the keg_definition of 'fact_lower' is ', Fact seed, Nabuable arg.'."
-192,"Did you read that the keg_definition of 'fact_state' is 'A fact can have a state different from its context, a different branch of the context where all other branches are not in fact, Fact seed.'."
-193,"Did you read that the keg_definition of 'fact_upper' is ', Fact seed, Nabuable arg.'."
-194,Did you read that the keg_definition of 'factheirs' is 'Definition needed.'.
-195,Did you read that the keg_definition of 'factunits' is 'PlanUnit holds all it's factunits in an attribute called factunits.'.
-196,"Did you read that the keg_definition of 'parent_heir_active' is ', Reason thinkout'."
-197,"Did you read that the keg_definition of 'reason_active' is ', Reason thinkout'."
-198,"Did you read that the keg_definition of 'reason_context' is ', Reason seed, Case seed'."
-199,"Did you read that the keg_definition of 'reason_divisor' is ', Case seed.'."
-200,"Did you read that the keg_definition of 'reason_lower' is ', Case seed, Nabuable arg.'."
-201,"Did you read that the keg_definition of 'reason_state' is ', Case seed.'."
-202,"Did you read that the keg_definition of 'reason_task' is ', Reason thinkout'."
-203,"Did you read that the keg_definition of 'reason_upper' is ', Case seed, Nabuable arg.'."
-204,Did you read that the keg_definition of 'reasonunits' is 'Definition needed.'.
-205,"Did you read that the keg_definition of 'addin' is 'float that describes addition to parent range calculations, Plan seed'."
-206,"Did you read that the keg_definition of 'all_contact_cred' is ', Plan thinkout'."
-207,"Did you read that the keg_definition of 'all_contact_debt' is ', Plan thinkout'."
-208,"Did you read that the keg_definition of 'awardheirs' is 'Every PlanUnit has AwardHeirs that represent who is awarded give_fund and take_fund. AwardHeirs have every AwardUnit group_title for every PlanUnit Ancestor back to root, Plan thinkout'."
-209,"Did you read that the keg_definition of 'awardlines' is 'Every PlanUnit has AwardLines that represent who is awarded give_fund and take_fund. AwardLines have every AwardUnit group_title for every PlanUnit Descedant starting at the childless PlanUnit, Plan thinkout'."
-210,"Did you read that the keg_definition of 'begin' is 'float that describes the begin of a numerical range if it exists, Plan seed'."
-211,"Did you read that the keg_definition of 'close' is 'float that describes the close of a numerical range if it exists, Plan seed'."
-212,"Did you read that the keg_definition of 'denom' is 'int that describes denominator to parent range calculations, Plan seed'."
-213,"Did you read that the keg_definition of 'descendant_pledge_count' is ', Plan thinkout'."
-214,"Did you read that the keg_definition of 'fund_cease' is 'FundNum number at which funding ceases inside master funding range, Plan thinkout'."
-215,"Did you read that the keg_definition of 'fund_onset' is 'FundNum number at which funding onsets inside master funding range, Plan thinkout'."
-216,"Did you read that the keg_definition of 'fund_pool' is ', Person seed.'."
-217,"Did you read that the keg_definition of 'fund_ratio' is ', Plan thinkout'."
-218,"Did you read that the keg_definition of 'gogo_calc' is ', Plan thinkout'."
-219,"Did you read that the keg_definition of 'gogo_want' is ', Plan seed'."
-220,"Did you read that the keg_definition of 'healer_name' is ', Healer seed.'."
-221,Did you read that the keg_definition of 'healerunit' is 'Definition needed.'.
-222,"Did you read that the keg_definition of 'healerunit_ratio' is ', Plan thinkout'."
-223,Did you read that the keg_definition of 'is_expanded' is 'If A '.
-224,"Did you read that the keg_definition of 'kar' is ', Plan seed'."
-225,Did you read that the keg_definition of 'kids' is 'Definition needed.'.
-226,"Did you read that the keg_definition of 'morph' is 'bool that describes how to change parent range in calculations, Plan seed'."
-227,"Did you read that the keg_definition of 'numor' is 'int that describes numerator to parent range calculations, Plan seed'."
-228,Did you read that the keg_definition of 'plan' is 'Definition needed.'.
-229,"Did you read that the keg_definition of 'plan_active' is ', Plan thinkout'."
-230,Did you read that the keg_definition of 'plan_active_hx' is 'Definition needed.'.
-231,Did you read that the keg_definition of 'plan_fund_total' is 'Definition needed.'.
-232,Did you read that the keg_definition of 'plan_label' is 'Every planunit has a plan_label. Every other sibling planunit must have a different plan label.'.
-233,"Did you read that the keg_definition of 'plan_rope' is ', Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed.'."
-234,"Did you read that the keg_definition of 'plan_task' is 'A plan_task planUnit can change a FactUnit and change Active Plan without plan_task, Plan thinkout'."
-235,Did you read that the keg_definition of 'plan_uid' is 'A uniqueidentifier for a planunit. Currently at the person level. Perhaps at a global level in the future.'.
-236,"Did you read that the keg_definition of 'pledge' is ', Plan seed'."
-237,"Did you read that the keg_definition of 'problem_bool' is ', Plan seed'."
-238,"Did you read that the keg_definition of 'range_evaluated' is ', Plan thinkout'."
-239,"Did you read that the keg_definition of 'range_inheritors' is '# range_inheritors key: plan_rope for any Plan that inherits from a range_plan
+109,Did you read that the keg_definition of 'Keyword' is 'Reserved word that is supposed to have one meaning.'.
+110,Did you read that the keg_definition of 'filename' is 'Should always include extension ala filebasename + '.' + extension'.
+111,Did you read that the keg_definition of 'glossary' is 'Definition needed.'.
+112,Did you read that the keg_definition of 'keyword' is 'Reserved word that is supposed to have one meaning.'.
+113,"Did you read that the keg_definition of 'semantic_type' is 'A datatype that is fundamentally int, str, or float'."
+114,"Did you read that the keg_definition of 'shop' is 'The factory method in programming is very important. However because I want 'fact' only to refer to the Keg concept I don't use the word 'factory', instead I use 'shop'.'."
+115,Did you read that the keg_definition of 'sqlite_datatype' is 'Definition needed.'.
+116,Did you read that the keg_definition of 'question_tier' is 'Every Keyword has an question_tier. The highter the question_tier the more relatively important the keyword.'.
+117,Did you read that the keg_definition of 'sort_ordinal' is 'Int that represents where the keyword is indexed in the general sorting order.'.
+118,"Did you read that the keg_definition of 'valid_ch' is 'Describes which chapters a keyword is allowed to be in. Format is '0:' for all chapters, '5:' for all chapters after ch06, '3,7' for only 3 and 7. Empty string for not allowed in any chapter.'."
+119,Did you read that the keg_definition of 'GrainNum' is 'float first used in ch02. GrainNum represents the smallest fraction allowed'.
+120,Did you read that the keg_definition of 'PoolNum' is 'float first used in ch02. PoolNum represents any possible subset of the sum of numbers in the pool.'.
+121,Did you read that the keg_definition of 'WeightNum' is 'float first used in ch02. WeightNum represents the unnormalized value of a ledger key. The sum of all WeightNum values in a ledger is not defined.'.
+122,Did you read that the keg_definition of 'BreakTerm' is 'str first used in ch03. All str separator classes are BreakTerms. Exists because of the necessity to break experience reality into things so they can be understood.'.
+123,"Did you read that the keg_definition of 'ContactName' is 'str first used in ch03. Every ContactName object is NameTerm, must follow NameTerm format.'."
+124,Did you read that the keg_definition of 'FundGrain' is 'float first used in ch03. Smallest Unit of fund_num'.
+125,Did you read that the keg_definition of 'FundNum' is 'float first used in ch03. FundNum inherits from float class'.
+126,"Did you read that the keg_definition of 'GroupMark' is 'str first used in ch03. GroupMark(s) exist in TitleTerms to indicate its a group, no GroupMark indicates it is a ContactName.'."
+127,Did you read that the keg_definition of 'GroupTitle' is 'str first used in ch03. If contains SepartorTerms(s) it represents a group otherwise its a ContactName.'.
+128,Did you read that the keg_definition of 'HealerName' is 'str first used in ch03. A NameTerm used to identify a Problem's Healer'.
+129,Did you read that the keg_definition of 'NameTerm' is 'str first used in ch03. All Name string classes should inherit from this class'.
+130,Did you read that the keg_definition of 'RespectGrain' is 'float first used in ch03. Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!''.
+131,Did you read that the keg_definition of 'RespectNum' is 'float first used in ch03. RespectNum inherits from float class'.
+132,Did you read that the keg_definition of 'TitleTerm' is 'str first used in ch03. If a TitleTerm contains SepartorTerms(s) it represents a group otherwise its a single member group of an ContactName.'.
+133,"Did you read that the keg_definition of 'awardee_title' is ', Award seed.'."
+134,"Did you read that the keg_definition of 'awardunits' is 'Every PlanUnit has AwardUnits that represent who is awarded give_fund and take_fund, Plan seed'."
+135,"Did you read that the keg_definition of 'contact_cred_lumen' is ', Contact seed.'."
+136,"Did you read that the keg_definition of 'contact_debt_lumen' is ', Contact seed.'."
+137,"Did you read that the keg_definition of 'contact_name' is ', paybook arg, Contact seed, Member seed'."
+138,"Did you read that the keg_definition of 'credor_pool' is ', Contact thinkout, Member thinkout data'."
+139,"Did you read that the keg_definition of 'debtor_pool' is ', Contact thinkout, Member thinkout data'."
+140,"Did you read that the keg_definition of 'fund_agenda_give' is ', Contact thinkout, Member thinkout data'."
+141,"Did you read that the keg_definition of 'fund_agenda_ratio_give' is ', Contact thinkout, Member thinkout data'."
+142,"Did you read that the keg_definition of 'fund_agenda_ratio_take' is ', Contact thinkout, Member thinkout data'."
+143,"Did you read that the keg_definition of 'fund_agenda_take' is ', Contact thinkout, Member thinkout data'."
+144,"Did you read that the keg_definition of 'fund_give' is ', Contact thinkout, Award thinkout, Member thinkout data'."
+145,"Did you read that the keg_definition of 'fund_grain' is ', Moment arg, Person seed, Plan thinkout.'."
+146,"Did you read that the keg_definition of 'fund_take' is ', Contact thinkout, Award thinkout, Member thinkout data'."
+147,"Did you read that the keg_definition of 'give_force' is ', Award seed.'."
+148,"Did you read that the keg_definition of 'group_cred_lumen' is ', Member seed.'."
+149,"Did you read that the keg_definition of 'group_debt_lumen' is ', Member seed.'."
+150,"Did you read that the keg_definition of 'group_title' is ', Member seed.'."
+151,"Did you read that the keg_definition of 'groupmark' is ', Contact thinkout, Member thinkout data.'."
+152,Did you read that the keg_definition of 'groupunits' is 'Definition needed.'.
+153,"Did you read that the keg_definition of 'inallocable_contact_debt_lumen' is ', Contact thinkout'."
+154,"Did you read that the keg_definition of 'irrational_contact_debt_lumen' is ', Contact thinkout'."
+155,"Did you read that the keg_definition of 'labor_title' is ', Workforce seed.'."
+156,Did you read that the keg_definition of 'labors' is 'Definition needed.'.
+157,Did you read that the keg_definition of 'memberships' is 'Definition needed.'.
+158,Did you read that the keg_definition of 'parent_solo' is 'The parent PlanUnit's LaborUnit's solo value for that labor_title'.
+159,"Did you read that the keg_definition of 'rational' is 'If a PersonUnit's agenda is deterministic (always the same after thinkout) then value is True, Person thinkout'."
+160,"Did you read that the keg_definition of 'respect_grain' is ', Moment arg, Person seed.'."
+161,"Did you read that the keg_definition of 'solo' is 'I can't figure out what this is for. Where in the codebase is it necessary for a LaborUnit to know if it the only LaborUnit in a WorkforceUnit, Workforce seed.'."
+162,"Did you read that the keg_definition of 'take_force' is ', Workforce seed, Award seed'."
+163,Did you read that the keg_definition of 'thinkout' is 'The process by which a PersonUnit creates all it's output metrics from file-stored data. Meant to invoke contemplation and computation. The PersonUnit contemplates what is important to them (their plans) and decides what they want to do. They compute their rules and create their agenda. If the PersonUnit plans are trusted with a currency quota they can be used as an Budget. Each Contact is assigned a FundNum. It may be negative.'.
+164,Did you read that the keg_definition of 'workforceheir' is 'Definition needed.'.
+165,Did you read that the keg_definition of 'workforceunit' is 'Definition needed.'.
+166,Did you read that the keg_definition of 'LaborHeir' is 'Definition needed.'.
+167,Did you read that the keg_definition of 'laborheir' is 'Definition needed.'.
+168,Did you read that the keg_definition of 'person' is 'Definition needed.'.
+169,"Did you read that the keg_definition of 'person_name' is ', paybook arg, bud arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed, Contact seed, Member seed.'."
+170,"Did you read that the keg_definition of 'person_name_is_workforce' is ', Workforce thinkout'."
+171,Did you read that the keg_definition of 'FactNum' is 'float first used in ch05. A numeric value that may converted to other Semantic Types by an external process driven by context.'.
+172,Did you read that the keg_definition of 'FirstLabel' is 'str first used in ch05. The first LabelTerm in a RopeTerm. FirstLabel cannot contain knot. Not called RootLabel to avoid confission.'.
+173,Did you read that the keg_definition of 'KnotTerm' is 'str first used in ch05. A string to used as a delimiter in RopeTerms.'.
+174,Did you read that the keg_definition of 'LabelTerm' is 'str first used in ch05. A string representation of a tree node. Nodes cannot contain RopeTerm knot'.
+175,Did you read that the keg_definition of 'ManaGrain' is 'float first used in ch05. Smallest Unit of Mana.'.
+176,Did you read that the keg_definition of 'ReasonNum' is 'float first used in ch05. A numeric value that may converted to other Semantic Types by an external process driven by context.'.
+177,Did you read that the keg_definition of 'RopeTerm' is 'str first used in ch05. A string representation of a tree path. LabelTerms are seperated by knots.'.
+178,Did you read that the keg_definition of 'fact' is 'Facts are very important concept. I tried never to use those 4 letters anywhere that didn't refer exactly to that concept.'.
+179,"Did you read that the keg_definition of 'knot' is ', Moment arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed'."
+180,"Did you read that the keg_definition of 'mana_grain' is ', Moment arg, used with Budget Cells, Person seed.'."
+181,Did you read that the keg_definition of 'meaning' is 'A term specifically used to describe how defining Ropes creates meaning. Ropes with the same start and end points can have different meaning based on the Labels in between. Only referenced in ch05'.
+182,Did you read that the keg_definition of 'parent_rope' is 'A parent_rope of rope is created by removing the last label. For PlanUnits the parent_rope is the key for their parent PlanUnit.'.
+183,"Did you read that the keg_definition of 'active_requisite' is 'Represents the expected boolean of the PlanUnit with address reason_context. If None, no check. If False expected Active bool of reason_context PlanUnit is false. If True expected contest_plan.active is True, Reason seed'."
+184,"Did you read that the keg_definition of 'case_active' is ', Case thinkout'."
+185,"Did you read that the keg_definition of 'case_task' is ', Case thinkout'."
+186,Did you read that the keg_definition of 'cases' is 'Definition needed.'.
+187,"Did you read that the keg_definition of 'fact_context' is 'All facts have a foundational context, Fact seed.'."
+188,"Did you read that the keg_definition of 'fact_lower' is ', Fact seed, Nabuable arg.'."
+189,"Did you read that the keg_definition of 'fact_state' is 'A fact can have a state different from its context, a different branch of the context where all other branches are not in fact, Fact seed.'."
+190,"Did you read that the keg_definition of 'fact_upper' is ', Fact seed, Nabuable arg.'."
+191,Did you read that the keg_definition of 'factheirs' is 'Definition needed.'.
+192,Did you read that the keg_definition of 'factunits' is 'PlanUnit holds all it's factunits in an attribute called factunits.'.
+193,"Did you read that the keg_definition of 'parent_heir_active' is ', Reason thinkout'."
+194,"Did you read that the keg_definition of 'reason_active' is ', Reason thinkout'."
+195,"Did you read that the keg_definition of 'reason_context' is ', Reason seed, Case seed'."
+196,"Did you read that the keg_definition of 'reason_divisor' is ', Case seed.'."
+197,"Did you read that the keg_definition of 'reason_lower' is ', Case seed, Nabuable arg.'."
+198,"Did you read that the keg_definition of 'reason_state' is ', Case seed.'."
+199,"Did you read that the keg_definition of 'reason_task' is ', Reason thinkout'."
+200,"Did you read that the keg_definition of 'reason_upper' is ', Case seed, Nabuable arg.'."
+201,Did you read that the keg_definition of 'reasonunits' is 'Definition needed.'.
+202,"Did you read that the keg_definition of 'addin' is 'float that describes addition to parent range calculations, Plan seed'."
+203,"Did you read that the keg_definition of 'all_contact_cred' is ', Plan thinkout'."
+204,"Did you read that the keg_definition of 'all_contact_debt' is ', Plan thinkout'."
+205,"Did you read that the keg_definition of 'awardheirs' is 'Every PlanUnit has AwardHeirs that represent who is awarded give_fund and take_fund. AwardHeirs have every AwardUnit group_title for every PlanUnit Ancestor back to root, Plan thinkout'."
+206,"Did you read that the keg_definition of 'awardlines' is 'Every PlanUnit has AwardLines that represent who is awarded give_fund and take_fund. AwardLines have every AwardUnit group_title for every PlanUnit Descedant starting at the childless PlanUnit, Plan thinkout'."
+207,"Did you read that the keg_definition of 'begin' is 'float that describes the begin of a numerical range if it exists, Plan seed'."
+208,"Did you read that the keg_definition of 'close' is 'float that describes the close of a numerical range if it exists, Plan seed'."
+209,"Did you read that the keg_definition of 'denom' is 'int that describes denominator to parent range calculations, Plan seed'."
+210,"Did you read that the keg_definition of 'descendant_pledge_count' is ', Plan thinkout'."
+211,"Did you read that the keg_definition of 'fund_cease' is 'FundNum number at which funding ceases inside master funding range, Plan thinkout'."
+212,"Did you read that the keg_definition of 'fund_onset' is 'FundNum number at which funding onsets inside master funding range, Plan thinkout'."
+213,"Did you read that the keg_definition of 'fund_pool' is ', Person seed.'."
+214,"Did you read that the keg_definition of 'fund_ratio' is ', Plan thinkout'."
+215,"Did you read that the keg_definition of 'gogo_calc' is ', Plan thinkout'."
+216,"Did you read that the keg_definition of 'gogo_want' is ', Plan seed'."
+217,"Did you read that the keg_definition of 'healer_name' is ', Healer seed.'."
+218,Did you read that the keg_definition of 'healerunit' is 'Definition needed.'.
+219,"Did you read that the keg_definition of 'healerunit_ratio' is ', Plan thinkout'."
+220,Did you read that the keg_definition of 'is_expanded' is 'If A '.
+221,"Did you read that the keg_definition of 'kar' is ', Plan seed'."
+222,Did you read that the keg_definition of 'kids' is 'Definition needed.'.
+223,"Did you read that the keg_definition of 'morph' is 'bool that describes how to change parent range in calculations, Plan seed'."
+224,"Did you read that the keg_definition of 'numor' is 'int that describes numerator to parent range calculations, Plan seed'."
+225,Did you read that the keg_definition of 'plan' is 'Definition needed.'.
+226,"Did you read that the keg_definition of 'plan_active' is ', Plan thinkout'."
+227,Did you read that the keg_definition of 'plan_active_hx' is 'Definition needed.'.
+228,Did you read that the keg_definition of 'plan_fund_total' is 'Definition needed.'.
+229,Did you read that the keg_definition of 'plan_label' is 'Every planunit has a plan_label. Every other sibling planunit must have a different plan label.'.
+230,"Did you read that the keg_definition of 'plan_rope' is ', Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed.'."
+231,"Did you read that the keg_definition of 'plan_task' is 'A plan_task planUnit can change a FactUnit and change Active Plan without plan_task, Plan thinkout'."
+232,Did you read that the keg_definition of 'plan_uid' is 'A uniqueidentifier for a planunit. Currently at the person level. Perhaps at a global level in the future.'.
+233,"Did you read that the keg_definition of 'pledge' is ', Plan seed'."
+234,"Did you read that the keg_definition of 'problem_bool' is ', Plan seed'."
+235,"Did you read that the keg_definition of 'range_evaluated' is ', Plan thinkout'."
+236,"Did you read that the keg_definition of 'range_inheritors' is '# range_inheritors key: plan_rope for any Plan that inherits from a range_plan
     # range_inheritors value: plan_rope for the range_plan
     # During the thinkout process range_inheritors defines when range_inheritors factheirs need to be created'."
-240,Did you read that the keg_definition of 'reasonheirs' is 'Definition needed.'.
-241,"Did you read that the keg_definition of 'stop_calc' is ', Plan thinkout'."
-242,"Did you read that the keg_definition of 'stop_want' is ', Plan seed'."
-243,"Did you read that the keg_definition of 'tree_level' is ', Plan thinkout'."
-244,"Did you read that the keg_definition of 'tree_traverse_count' is ', Person thinkout'."
-245,Did you read that the keg_definition of 'PersonName' is 'str first used in ch08. The LabelTerm used to identify a PersonUnit. Must be a LabelTerm/NameTerm because when identifying if a PlanUnit is an active pledge the PersonName will be compared against ContactNames. If they match the pledge will be active.'.
-246,Did you read that the keg_definition of 'PersonUnit' is 'Definition needed.'.
-247,"Did you read that the keg_definition of 'ancestors' is ', used with Budget Cells'."
-248,Did you read that the keg_definition of 'calc_by_thinkout' is 'Describes when data is defined by thinkout process. Not required seed data.'.
-249,"Did you read that the keg_definition of 'contact_mandate_ledger' is ', used with Budget Cells'."
-250,Did you read that the keg_definition of 'contact_pool' is 'Definition needed.'.
-251,Did you read that the keg_definition of 'contacts' is 'Definition needed.'.
-252,Did you read that the keg_definition of 'context_plan_close' is 'Definition needed.'.
-253,Did you read that the keg_definition of 'context_plan_denom' is 'Definition needed.'.
-254,Did you read that the keg_definition of 'context_plan_morph' is 'Definition needed.'.
-255,"Did you read that the keg_definition of 'credor_respect' is ', Person seed.'."
-256,"Did you read that the keg_definition of 'debtor_respect' is ', Person seed.'."
-257,Did you read that the keg_definition of 'dimen' is 'Definition needed.'.
-258,Did you read that the keg_definition of 'dimens' is 'Definition needed.'.
-259,Did you read that the keg_definition of 'jkeys' is 'The term 'keys' was too generic. 'jkeys' is less generic.'.
-260,Did you read that the keg_definition of 'jvalues' is 'Definition needed.'.
-261,Did you read that the keg_definition of 'keep_rope' is 'Definition needed.'.
-262,"Did you read that the keg_definition of 'keeps_buildable' is ', Person thinkout'."
-263,"Did you read that the keg_definition of 'keeps_justified' is ', Person thinkout'."
-264,Did you read that the keg_definition of 'last_lesson_id' is 'Definition needed.'.
-265,"Did you read that the keg_definition of 'mandate' is ', used with Budget Cells'."
-266,"Did you read that the keg_definition of 'max_tree_traverse' is ', Person seed.'."
-267,Did you read that the keg_definition of 'obj_type' is 'Used idenify an attribute's object class. Usually in config files.'.
-268,"Did you read that the keg_definition of 'offtrack_fund' is ', Person thinkout'."
-269,Did you read that the keg_definition of 'offtrack_kids_kar_set' is 'Definition needed.'.
-270,"Did you read that the keg_definition of 'person_contact_membership' is 'A person dimen representing Membership data. Keys: person_name, contact_name, group_title. person seed.'."
-271,"Did you read that the keg_definition of 'person_contactunit' is 'A person dimen representing ParterUnit data. Keys: person_name, contact_name. person seed.'."
-272,"Did you read that the keg_definition of 'person_groupunit' is 'A person dimen representing GroupUnit data. Keys: person_name, group_title. person thinkout.'."
-273,"Did you read that the keg_definition of 'person_plan_awardunit' is 'A person dimen representing AwardUnit data. Keys: person_name, plan_rope, awardee_title. person seed.'."
-274,"Did you read that the keg_definition of 'person_plan_factunit' is 'A person dimen representing FactUnit data. Keys: person_name, plan_rope, fact_context. person seed.'."
-275,"Did you read that the keg_definition of 'person_plan_healerunit' is 'A person dimen representing HealerUnit data. Keys: person_name, plan_rope, healer_name. person seed.'."
-276,"Did you read that the keg_definition of 'person_plan_laborunit' is 'A person dimen representing HealerUnit data. Keys: person_name, plan_rope, labor_title. person seed.'."
-277,"Did you read that the keg_definition of 'person_plan_reason_caseunit' is 'A person dimen representing CaseUnit data. Keys: person_name, plan_rope, reason_context, reason_state. person seed.'."
-278,"Did you read that the keg_definition of 'person_plan_reasonunit' is 'A person dimen representing ReasonUnit data. Keys: person_name, plan_rope, reason_context. person seed.'."
-279,"Did you read that the keg_definition of 'person_planunit' is 'A person dimen representing PlanUnit data. Keys: person_name, plan_rope. person seed.'."
-280,Did you read that the keg_definition of 'personunit' is 'A person dimen representing PersonUnit data. Keys: person_name. person seed.'.
-281,"Did you read that the keg_definition of 'planroot' is 'Every PersonUnit has one planunit called the planroot. It can have child planunits and those can have child planunits, etc.'."
-282,Did you read that the keg_definition of 'prnawar' is 'abbv for person_plan_awardunit'.
-283,Did you read that the keg_definition of 'prncase' is 'abbv for person_plan_reason_caseunit'.
-284,Did you read that the keg_definition of 'prncont' is 'abbv for person_contactunit'.
-285,Did you read that the keg_definition of 'prnfact' is 'abbv for person_plan_factunit'.
-286,Did you read that the keg_definition of 'prngrou' is 'abbv for person_groupunit'.
-287,Did you read that the keg_definition of 'prnheal' is 'abbv for person_plan_healerunit'.
-288,Did you read that the keg_definition of 'prnlabo' is 'abbv for person_plan_laborunit'.
-289,Did you read that the keg_definition of 'prnmemb' is 'abbv for person_contact_membership'.
-290,Did you read that the keg_definition of 'prnplan' is 'abbv for person_planunit'.
-291,Did you read that the keg_definition of 'prnreas' is 'abbv for person_plan_reasonunit'.
-292,Did you read that the keg_definition of 'prnunit' is 'abbv for personunit'.
-293,"Did you read that the keg_definition of 'reason_contexts' is ', used with Budget Cells'."
-294,"Did you read that the keg_definition of 'sum_healerunit_plans_fund_total' is ', Person thinkout'."
-295,Did you read that the keg_definition of 'CRUD_command' is 'str first used in ch09 that represents database CRUD commands'.
+237,Did you read that the keg_definition of 'reasonheirs' is 'Definition needed.'.
+238,"Did you read that the keg_definition of 'stop_calc' is ', Plan thinkout'."
+239,"Did you read that the keg_definition of 'stop_want' is ', Plan seed'."
+240,"Did you read that the keg_definition of 'tree_level' is ', Plan thinkout'."
+241,"Did you read that the keg_definition of 'tree_traverse_count' is ', Person thinkout'."
+242,Did you read that the keg_definition of 'PersonName' is 'str first used in ch08. The LabelTerm used to identify a PersonUnit. Must be a LabelTerm/NameTerm because when identifying if a PlanUnit is an active pledge the PersonName will be compared against ContactNames. If they match the pledge will be active.'.
+243,Did you read that the keg_definition of 'PersonUnit' is 'Definition needed.'.
+244,"Did you read that the keg_definition of 'ancestors' is ', used with Budget Cells'."
+245,Did you read that the keg_definition of 'calc_by_thinkout' is 'Describes when data is defined by thinkout process. Not required seed data.'.
+246,"Did you read that the keg_definition of 'contact_mandate_ledger' is ', used with Budget Cells'."
+247,Did you read that the keg_definition of 'contact_pool' is 'Definition needed.'.
+248,Did you read that the keg_definition of 'contacts' is 'Definition needed.'.
+249,Did you read that the keg_definition of 'context_plan_close' is 'Definition needed.'.
+250,Did you read that the keg_definition of 'context_plan_denom' is 'Definition needed.'.
+251,Did you read that the keg_definition of 'context_plan_morph' is 'Definition needed.'.
+252,"Did you read that the keg_definition of 'credor_respect' is ', Person seed.'."
+253,"Did you read that the keg_definition of 'debtor_respect' is ', Person seed.'."
+254,Did you read that the keg_definition of 'dimen' is 'Definition needed.'.
+255,Did you read that the keg_definition of 'dimens' is 'Definition needed.'.
+256,Did you read that the keg_definition of 'jkeys' is 'The term 'keys' was too generic. 'jkeys' is less generic.'.
+257,Did you read that the keg_definition of 'jvalues' is 'Definition needed.'.
+258,Did you read that the keg_definition of 'keep_rope' is 'Definition needed.'.
+259,"Did you read that the keg_definition of 'keeps_buildable' is ', Person thinkout'."
+260,"Did you read that the keg_definition of 'keeps_justified' is ', Person thinkout'."
+261,Did you read that the keg_definition of 'last_lesson_id' is 'Definition needed.'.
+262,"Did you read that the keg_definition of 'mandate' is ', used with Budget Cells'."
+263,"Did you read that the keg_definition of 'max_tree_traverse' is ', Person seed.'."
+264,Did you read that the keg_definition of 'obj_type' is 'Used idenify an attribute's object class. Usually in config files.'.
+265,"Did you read that the keg_definition of 'offtrack_fund' is ', Person thinkout'."
+266,Did you read that the keg_definition of 'offtrack_kids_kar_set' is 'Definition needed.'.
+267,"Did you read that the keg_definition of 'person_contact_membership' is 'A person dimen representing Membership data. Keys: person_name, contact_name, group_title. person seed.'."
+268,"Did you read that the keg_definition of 'person_contactunit' is 'A person dimen representing ParterUnit data. Keys: person_name, contact_name. person seed.'."
+269,"Did you read that the keg_definition of 'person_groupunit' is 'A person dimen representing GroupUnit data. Keys: person_name, group_title. person thinkout.'."
+270,"Did you read that the keg_definition of 'person_plan_awardunit' is 'A person dimen representing AwardUnit data. Keys: person_name, plan_rope, awardee_title. person seed.'."
+271,"Did you read that the keg_definition of 'person_plan_factunit' is 'A person dimen representing FactUnit data. Keys: person_name, plan_rope, fact_context. person seed.'."
+272,"Did you read that the keg_definition of 'person_plan_healerunit' is 'A person dimen representing HealerUnit data. Keys: person_name, plan_rope, healer_name. person seed.'."
+273,"Did you read that the keg_definition of 'person_plan_laborunit' is 'A person dimen representing HealerUnit data. Keys: person_name, plan_rope, labor_title. person seed.'."
+274,"Did you read that the keg_definition of 'person_plan_reason_caseunit' is 'A person dimen representing CaseUnit data. Keys: person_name, plan_rope, reason_context, reason_state. person seed.'."
+275,"Did you read that the keg_definition of 'person_plan_reasonunit' is 'A person dimen representing ReasonUnit data. Keys: person_name, plan_rope, reason_context. person seed.'."
+276,"Did you read that the keg_definition of 'person_planunit' is 'A person dimen representing PlanUnit data. Keys: person_name, plan_rope. person seed.'."
+277,Did you read that the keg_definition of 'personunit' is 'A person dimen representing PersonUnit data. Keys: person_name. person seed.'.
+278,"Did you read that the keg_definition of 'planroot' is 'Every PersonUnit has one planunit called the planroot. It can have child planunits and those can have child planunits, etc.'."
+279,Did you read that the keg_definition of 'prnawar' is 'abbv for person_plan_awardunit'.
+280,Did you read that the keg_definition of 'prncase' is 'abbv for person_plan_reason_caseunit'.
+281,Did you read that the keg_definition of 'prncont' is 'abbv for person_contactunit'.
+282,Did you read that the keg_definition of 'prnfact' is 'abbv for person_plan_factunit'.
+283,Did you read that the keg_definition of 'prngrou' is 'abbv for person_groupunit'.
+284,Did you read that the keg_definition of 'prnheal' is 'abbv for person_plan_healerunit'.
+285,Did you read that the keg_definition of 'prnlabo' is 'abbv for person_plan_laborunit'.
+286,Did you read that the keg_definition of 'prnmemb' is 'abbv for person_contact_membership'.
+287,Did you read that the keg_definition of 'prnplan' is 'abbv for person_planunit'.
+288,Did you read that the keg_definition of 'prnreas' is 'abbv for person_plan_reasonunit'.
+289,Did you read that the keg_definition of 'prnunit' is 'abbv for personunit'.
+290,"Did you read that the keg_definition of 'reason_contexts' is ', used with Budget Cells'."
+291,"Did you read that the keg_definition of 'sum_healerunit_plans_fund_total' is ', Person thinkout'."
+292,Did you read that the keg_definition of 'CRUD_command' is 'str first used in ch09 that represents database CRUD commands'.
+293,Did you read that the keg_definition of 'DELETE' is 'CRUD_COMMAND to delete records for a table'.
+294,Did you read that the keg_definition of 'INSERT' is 'CRUD_COMMAND to delete records for a table'.
+295,Did you read that the keg_definition of 'UPDATE' is 'CRUD_COMMAND to update records for a table. 'Associated dimens: personunit' in 'CRUD_COMMAND to update records for a table''.
 296,Did you read that the keg_definition of 'atom' is 'Smallest possible unit of a PersonUnit'.
 297,Did you read that the keg_definition of 'awardee_title_ERASE' is 'Definition needed.'.
 298,Did you read that the keg_definition of 'awardee_title_ERASE_inx' is 'The 'awardee_title_ERASE' value after Translate.'.

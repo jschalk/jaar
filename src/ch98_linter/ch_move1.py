@@ -63,7 +63,6 @@ def move_chapters_given_ints(src_chxx_int, dst_chxx_int):
     # change file paths
     rename_files_and_dirs_4times("src", src_chxx_prefix, dst_chxx_prefix)
     update_keywords_source_valid_ch(src_chxx_int, dst_chxx_int)
-    # TODO update keg_questions_csv "chxx" to "chxx"
     update_keg_questions_csv(src_chxx_prefix, dst_chxx_prefix)
     update_keg_questions_csv(src_uppercase_chxx, dst_uppercase_chxx)
     print("✅ Replacement complete.")
