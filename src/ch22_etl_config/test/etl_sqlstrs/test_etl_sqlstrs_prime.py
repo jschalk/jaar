@@ -8,9 +8,9 @@ from ch00_py.db_toolbox import (
     get_table_columns,
 )
 from ch08_person_atom.atom_config import get_person_dimens
-from ch14_moment.moment_config import get_moment_dimens
-from ch15_nabu.nabu_config import get_nabu_dimens
-from ch16_translate.translate_config import (
+from ch15_moment.moment_config import get_moment_dimens
+from ch16_nabu.nabu_config import get_nabu_dimens
+from ch17_translate.translate_config import (
     get_translate_dimens,
     set_translateable_otx_inx_args,
 )

@@ -1,4 +1,5 @@
 from ch98_linter.ch_move1 import move_chapters_given_ints
+from time import sleep as time_sleep
 
 # HOW TO USE:
 # Open up CMD, change directory to repo
@@ -16,6 +17,8 @@ def ch_many_move_main():
         dst_ch_num = src_ch_num + move_number_int
         print(f"from {src_ch_num} to {dst_ch_num}")
         move_chapters_given_ints(src_ch_num, dst_ch_num)
+        time_sleep(3)
+    print(f"Moved {lower_chxx_str}:{upper_chxx_str} by {move_number} chapters")
 
 
 if __name__ == "__main__":

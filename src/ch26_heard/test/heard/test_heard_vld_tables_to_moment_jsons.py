@@ -3,8 +3,8 @@ from ch00_py.file_toolbox import open_json
 from ch04_rope.rope import create_rope
 from ch09_person_lesson._ref.ch09_path import create_moment_json_path
 from ch09_person_lesson.lasso import lassounit_shop
-from ch14_moment.moment_config import get_moment_dimens
-from ch14_moment.moment_main import get_momentunit_from_dict
+from ch15_moment.moment_config import get_moment_dimens
+from ch15_moment.moment_main import get_momentunit_from_dict
 from ch22_etl_config.etl_config import get_dimen_abbv7
 from ch22_etl_config.etl_sqlstr import (
     create_prime_tablename,

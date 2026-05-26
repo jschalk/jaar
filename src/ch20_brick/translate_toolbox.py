@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import create_path, get_dir_file_strs, save_file
-from ch16_translate.translate_main import (
+from ch17_translate.translate_main import (
     LabelMap,
     NameMap,
     RopeMap,

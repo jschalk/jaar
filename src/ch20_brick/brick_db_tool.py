@@ -15,12 +15,12 @@ from ch00_py.file_toolbox import (
     save_file,
     set_dir,
 )
-from ch16_translate.map_term import MapCore
-from ch16_translate.translate_config import (
+from ch17_translate.map_term import MapCore
+from ch17_translate.translate_config import (
     get_translate_args_obj_types,
     get_translateable_args,
 )
-from ch16_translate.translate_main import TranslateUnit, get_translateunit_from_dict
+from ch17_translate.translate_main import TranslateUnit, get_translateunit_from_dict
 from ch20_brick._ref.ch20_path import get_excel_reader_config_path
 from ch20_brick._ref.ch20_semantic_types import FaceName, SheetName, SparkInt
 from ch20_brick.brick_config import (

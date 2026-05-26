@@ -10,18 +10,18 @@ from ch08_person_atom.atom_config import (
     get_atom_config_dict,
     get_person_dimens,
 )
-from ch14_moment.moment_config import (
+from ch15_moment.moment_config import (
     get_moment_args_dimen_mapping,
     get_moment_config_dict,
     get_moment_dimens,
 )
-from ch15_nabu.nabu_config import (
+from ch16_nabu.nabu_config import (
     get_nabu_args,
     get_nabu_config_dict,
     get_nabu_dimens,
     get_nabuable_args,
 )
-from ch16_translate.translate_config import (
+from ch17_translate.translate_config import (
     get_translate_args_dimen_mapping,
     get_translate_config_dict,
     get_translate_dimens,

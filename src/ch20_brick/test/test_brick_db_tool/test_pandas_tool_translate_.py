@@ -1,10 +1,10 @@
 from ch04_rope.rope import create_rope, to_rope
-from ch16_translate.map_term import namemap_shop
-from ch16_translate.test._util.ch16_examples import (
+from ch17_translate.map_term import namemap_shop
+from ch17_translate.test._util.ch17_examples import (
     get_casa_maison_translateunit_set_by_label,
     get_casa_maison_translateunit_set_by_otx2inx,
 )
-from ch16_translate.translate_main import translateunit_shop
+from ch17_translate.translate_main import translateunit_shop
 from ch20_brick.brick_db_tool import (
     get_dataframe_translateable_columns,
     translate_all_columns_dataframe,

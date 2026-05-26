@@ -7,7 +7,7 @@ from ch04_rope.rope import create_rope, default_knot_if_None
 from ch09_person_lesson._ref.ch09_path import create_moments_dir_path
 from ch09_person_lesson.lasso import lassounit_shop
 from ch11_bud.bud_filehandler import open_person_file
-from ch14_moment.moment_main import open_moment_file
+from ch15_moment.moment_main import open_moment_file
 from ch20_brick.brick_db_tool import (
     csv_dict_to_excel,
     prettify_excel_file,

@@ -12,7 +12,7 @@ from ch09_person_lesson._ref.ch09_path import (
 )
 from ch09_person_lesson.lasso import LassoUnit, lassounit_shop
 from ch11_bud.bud_main import MomentRope
-from ch16_translate.translate_config import (
+from ch17_translate.translate_config import (
     get_translate_args_obj_types,
     translateable_obj_types,
 )

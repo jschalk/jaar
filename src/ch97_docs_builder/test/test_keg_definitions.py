@@ -11,9 +11,9 @@ from ch07_person_logic.person_config import (
 )
 from ch11_bud.cell_main import cellunit_shop
 from ch13_time.epoch_main import get_c400_constants, get_default_epoch_config_dict
-from ch14_moment.moment_config import get_moment_config_args
-from ch15_nabu.nabu_config import get_nabu_args, get_nabuable_args
-from ch16_translate.translate_config import (
+from ch15_moment.moment_config import get_moment_config_args
+from ch16_nabu.nabu_config import get_nabu_args, get_nabuable_args
+from ch17_translate.translate_config import (
     get_translate_config_args,
     get_translate_config_dict,
 )

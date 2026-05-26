@@ -1,5 +1,5 @@
 from ch00_py.db_toolbox import get_row_count
-from ch16_translate.translate_main import (
+from ch17_translate.translate_main import (
     default_knot_if_None,
     default_unknown_str_if_None,
 )

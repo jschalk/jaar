@@ -17,9 +17,9 @@ What does each one do?
 - **ch11_bud**: Defines PersonBudHistory: PersonName, BudUnits (TimeNum, quota, celldepth)
 - **ch12_keep**: Builds a simulation that describes how much credit a healer has earned.
 - **ch13_time**: Defines how time is handled by PersonUnits. Allows for arbitrary time structures.
-- **ch14_moment**: Defines MomentUnits: common time tech, ledger, ContactNames, history of PersonUnits.
-- **ch15_nabu**: Defines NabuUnit tools that interpret numeric values into inside accounting.
-- **ch16_translate**: Defines TranslateUnit tools that translate MomentUnits into inside language.
+- **ch15_moment**: Defines MomentUnits: common time tech, ledger, ContactNames, history of PersonUnits.
+- **ch16_nabu**: Defines NabuUnit tools that interpret numeric values into inside accounting.
+- **ch17_translate**: Defines TranslateUnit tools that translate MomentUnits into inside language.
 - **ch20_brick**: Defines how to build Bricks using Bricks. Moments and Persons are built by Bricks.
 - **ch22_etl_config**: Defines the tools that use Bricks to build MomentUnits.
 - **ch23_idea_src**: Defines the 'Idea Src' process. Data going to 'Bricks'.

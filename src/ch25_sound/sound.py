@@ -4,14 +4,14 @@ from ch00_py.db_toolbox import (
     get_table_columns,
 )
 from ch04_rope.rope import default_knot_if_None
-from ch16_translate.translate_config import (
+from ch17_translate.translate_config import (
     get_translate_labelterm_args,
     get_translate_nameterm_args,
     get_translate_ropeterm_args,
     get_translate_titleterm_args,
     get_translates_column_ref,
 )
-from ch16_translate.translate_main import default_unknown_str_if_None
+from ch17_translate.translate_main import default_unknown_str_if_None
 from ch20_brick.brick_config import get_brick_dimen_ref
 from ch22_etl_config.etl_sqlstr import (
     create_insert_into_translate_core_raw_sqlstr,
