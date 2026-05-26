@@ -15,7 +15,7 @@ from ch09_person_lesson._ref.ch09_path import create_moments_dir_path
 from ch09_person_lesson.lasso import LassoUnit, lassounit_shop
 from ch10_person_listen._ref.ch10_path import create_job_path
 from ch10_person_listen.keep_tool import open_job_file
-from ch13_time.epoch_main import (
+from ch14_time.epoch_main import (
     TimeShoe,
     add_epoch_planunit,
     get_default_epoch_config_dict,
@@ -23,7 +23,7 @@ from ch13_time.epoch_main import (
     get_epoch_rope,
     timeshoe_shop,
 )
-from ch13_time.epoch_reason import set_epoch_fact
+from ch14_time.epoch_reason import set_epoch_fact
 from ch15_moment.moment_main import open_moment_file
 from ch22_etl_config._ref.ch22_path import create_moment_mstr_path, create_world_db_path
 from ch31_kpi._ref.ch31_path import (

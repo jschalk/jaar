@@ -1,5 +1,5 @@
-from ch13_time.epoch_main import DEFAULT_EPOCH_LENGTH, get_c400_constants
-from ch13_time.test._util.ch13_examples import Ch13ExampleStrs as wx
+from ch14_time.epoch_main import DEFAULT_EPOCH_LENGTH, get_c400_constants
+from ch14_time.test._util.ch14_examples import Ch14ExampleStrs as wx
 from ch22_etl_config.etl_sqlstr import (
     create_sound_and_heard_tables,
     update_heard_agg_timenum_columns,

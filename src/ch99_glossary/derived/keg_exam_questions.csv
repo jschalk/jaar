@@ -28,8 +28,8 @@ row_number,question
 26,Did you read that the keg_definition of 'ch09' is 'Defines lessons which are collections of PersonAtoms by FaceName'.
 27,Did you read that the keg_definition of 'ch10' is 'These tools describe how one PersonUnit listens to another.'.
 28,"Did you read that the keg_definition of 'ch11' is 'Defines PersonBudHistory: PersonName, BudUnits (TimeNum, quota, celldepth)'."
-29,Did you read that the keg_definition of 'ch12' is 'Builds a simulation that describes how much credit a healer has earned.'.
-30,Did you read that the keg_definition of 'ch13' is 'Defines how time is handled by PersonUnits. Allows for arbitrary time structures.'.
+29,Did you read that the keg_definition of 'ch13' is 'Builds a simulation that describes how much credit a healer has earned.'.
+30,Did you read that the keg_definition of 'ch14' is 'Defines how time is handled by PersonUnits. Allows for arbitrary time structures.'.
 31,"Did you read that the keg_definition of 'ch15' is 'Defines MomentUnits: common time tech, ledger, ContactNames, history of PersonUnits.'."
 32,Did you read that the keg_definition of 'ch16' is 'Defines NabuUnit tools that interpret numeric values into inside accounting.'.
 33,Did you read that the keg_definition of 'ch17' is 'Defines TranslateUnit tools that translate MomentUnits into inside language.'.
@@ -364,7 +364,7 @@ row_number,question
 360,"Did you read that the keg_definition of 'quota' is 'The importance of a BudUnit. The currency given to the BudUnit to be distributed to Contacts. The magnitude number will always be less then quote because its the sum of how much of the quota is distributed, bud arg, used with Budget Cells'."
 361,Did you read that the keg_definition of 'time' is 'Definition needed.'.
 362,"Did you read that the keg_definition of 'tran_time' is ', paybook arg, Nabuable arg'."
-363,Did you read that the keg_definition of 'ManaNum' is 'float first used in ch12. ManaNum inherits from float class'.
+363,Did you read that the keg_definition of 'ManaNum' is 'float first used in ch13. ManaNum inherits from float class'.
 364,Did you read that the keg_definition of 'care_amount' is 'Definition needed.'.
 365,Did you read that the keg_definition of 'cares' is 'Definition needed.'.
 366,Did you read that the keg_definition of 'cycle_carees_curr' is 'Definition needed.'.
@@ -398,7 +398,7 @@ row_number,question
 394,Did you read that the keg_definition of 'Chiday' is 'Third Day of 5 day week of 'Five' Epoch'.
 395,Did you read that the keg_definition of 'Danceday' is 'Fourth Day of 5 day week of 'Five' Epoch'.
 396,Did you read that the keg_definition of 'Eastday' is 'Fifth Day of 5 day week of 'Five' Epoch'.
-397,Did you read that the keg_definition of 'EpochLabel' is 'str first used in ch13. EpochLabel is required for every EpochUnit. It is a LabelTerm that must not contain the knot.'.
+397,Did you read that the keg_definition of 'EpochLabel' is 'str first used in ch14. EpochLabel is required for every EpochUnit. It is a LabelTerm that must not contain the knot.'.
 398,Did you read that the keg_definition of 'TimeShoe' is 'Definition needed.'.
 399,"Did you read that the keg_definition of 'c100' is '100 years, sub part of c400_core'."
 400,"Did you read that the keg_definition of 'c100_length' is 'A C400Constant for building Epochs: 52,594,560 minutes in 100 year cycle'."

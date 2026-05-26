@@ -3,8 +3,8 @@ from ch07_person_logic.person_main import personunit_shop
 from ch09_person_lesson._ref.ch09_path import create_moment_json_path
 from ch09_person_lesson.lasso import lassounit_shop
 from ch09_person_lesson.lesson_filehandler import open_gut_file, save_gut_file
-from ch13_time.epoch_main import epochunit_shop
-from ch13_time.test._util.ch13_examples import get_five_config
+from ch14_time.epoch_main import epochunit_shop
+from ch14_time.test._util.ch14_examples import get_five_config
 from ch15_moment.moment_main import momentunit_shop
 from ch27_lego.lego_core import add_lego_epoch_to_mind_guts
 from ch99_glossary.ch_keyword import Ch27Keywords as kw, ExampleStrs as exx
