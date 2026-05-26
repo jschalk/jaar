@@ -147,7 +147,7 @@ def test_Chapters_DoNotHaveEmptyDirectories():
     # ESTABLISH
     twe = "test_world_examples"
     x_worlds_dir = create_path("src", "ch32_world", "test", twe, "worlds")
-    z_nootbooks_dir = create_path("src", "ch19_idea_src", "test", "z_notebooks")
+    z_nootbooks_dir = create_path("src", "ch23_idea_src", "test", "z_notebooks")
     excluded_dirs = {x_worlds_dir, z_nootbooks_dir}
 
     # WHEN / THEN

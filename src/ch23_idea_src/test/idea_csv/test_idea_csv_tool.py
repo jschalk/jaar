@@ -6,7 +6,7 @@ from ch09_person_lesson.delta import persondelta_shop
 from ch09_person_lesson.lesson_main import lessonunit_shop
 from ch17_brick.brick_dataframe import moment_build_from_df
 from ch17_brick.brick_db_tool import get_ordered_csv
-from ch19_idea_src.idea_csv import (
+from ch23_idea_src.idea_csv import (
     add_momentunit_to_idea_csv_strs,
     add_momentunits_to_idea_csv_strs,
     add_person_to_ii00120_csv,
@@ -22,7 +22,7 @@ from ch19_idea_src.idea_csv import (
     add_personunit_to_idea_csv_strs,
     create_init_idea_csv_strs,
 )
-from ch19_idea_src.test._util.ch19_examples import (  # get_ex2_ii00106_df,
+from ch23_idea_src.test._util.ch23_examples import (  # get_ex2_ii00106_df,
     J45_ROPE,
     get_ex2_ii00100_df,
     get_ex2_ii00101_df,

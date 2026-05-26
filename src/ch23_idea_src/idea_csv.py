@@ -2,7 +2,7 @@ from ch00_py.dict_toolbox import get_empty_str_if_None as if_none_str
 from ch07_person_logic.person_main import PersonUnit
 from ch14_moment.moment_main import MomentUnit
 from ch17_brick.brick_config import get_brick_format_filename, get_brick_format_headers
-from ch19_idea_src._ref.ch19_semantic_types import FaceName, KnotTerm, MomentRope
+from ch23_idea_src._ref.ch23_semantic_types import FaceName, KnotTerm, MomentRope
 
 
 def create_init_idea_csv_strs() -> dict[str, str]:

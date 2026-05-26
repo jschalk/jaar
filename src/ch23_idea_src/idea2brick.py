@@ -1,9 +1,9 @@
 from ch00_py.dict_toolbox import get_0_if_None
 from ch00_py.file_toolbox import delete_dir, set_dir
 from ch17_brick.brick_db_tool import create_brick_df_from_file, save_sheet
-from ch19_idea_src._ref.ch19_semantic_types import SheetName
-from ch19_idea_src.fission_step import run_fission_steps
-from ch19_idea_src.idea_config import get_idea_config_dict, is_non_mirror
+from ch23_idea_src._ref.ch23_semantic_types import SheetName
+from ch23_idea_src.fission_step import run_fission_steps
+from ch23_idea_src.idea_config import get_idea_config_dict, is_non_mirror
 from dataclasses import dataclass
 from openpyxl import load_workbook
 from os import listdir as os_listdir

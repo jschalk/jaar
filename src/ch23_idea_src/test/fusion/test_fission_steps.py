@@ -1,5 +1,5 @@
 from ch04_rope.rope import create_rope
-from ch19_idea_src.fission_step import (
+from ch23_idea_src.fission_step import (
     fission_add_ancestor_rope_rows,
     fission_add_knot_from_rope,
     fission_set_moment_rope_from_moment_label,
@@ -8,7 +8,7 @@ from ch19_idea_src.fission_step import (
     get_all_fission_steps,
     run_fission_steps,
 )
-from ch99_glossary.ch_keyword import Ch19Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch23Keywords as kw, ExampleStrs as exx
 from pandas import DataFrame, testing as pandas_testing
 from pytest import raises as pytest_raises
 

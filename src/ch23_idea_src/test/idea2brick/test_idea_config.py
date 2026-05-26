@@ -1,14 +1,14 @@
 from ch00_py.file_toolbox import create_path
 from ch17_brick.brick_config import get_brick_types
-from ch19_idea_src.fission_step import get_all_fission_steps
-from ch19_idea_src.idea_config import (
+from ch23_idea_src.fission_step import get_all_fission_steps
+from ch23_idea_src.idea_config import (
     get_idea_config_dict,
     get_idea_types,
     get_non_mirror_idea_types,
     idea_config_path,
     is_non_mirror,
 )
-from ch99_glossary.ch_keyword import Ch19Keywords as kw
+from ch99_glossary.ch_keyword import Ch23Keywords as kw
 from pathlib import Path
 
 

@@ -35,7 +35,7 @@ row_number,question
 33,Did you read that the keg_definition of 'ch16' is 'Defines TranslateUnit tools that translate MomentUnits into inside language.'.
 34,Did you read that the keg_definition of 'ch17' is 'Defines how to build Bricks using Bricks. Moments and Persons are built by Bricks.'.
 35,Did you read that the keg_definition of 'ch18' is 'Defines the tools that use Bricks to build MomentUnits.'.
-36,Did you read that the keg_definition of 'ch19' is 'Defines the 'Idea Src' process. Data going to 'Bricks'.'.
+36,Did you read that the keg_definition of 'ch23' is 'Defines the 'Idea Src' process. Data going to 'Bricks'.'.
 37,Did you read that the keg_definition of 'ch24' is 'Defines the 'Etl Bricks' process. From 'Source Ideas' to 'Sound'.'.
 38,Did you read that the keg_definition of 'ch25' is 'Defines the 'Sound' process. From 'Bricks' to 'Heard'.'.
 39,Did you read that the keg_definition of 'ch26' is 'Defines the 'Heard' process. From 'Sound' to 'lego'.'.
@@ -618,7 +618,7 @@ row_number,question
 614,Did you read that the keg_definition of 'trlrope' is 'abbv for translate_rope'.
 615,Did you read that the keg_definition of 'trltitl' is 'abbv for translate_title'.
 616,Did you read that the keg_definition of 'day_punch' is 'A report that summarizes the tasks of a person for a day.'.
-617,Did you read that the keg_definition of 'fission' is 'Any complicated step changing idea_type to brick_type. Each fission_step makes a single type of change. Can be simple (set value to X) or complicated (add missing rows with relative values). Only referenced in ch19'.
+617,Did you read that the keg_definition of 'fission' is 'Any complicated step changing idea_type to brick_type. Each fission_step makes a single type of change. Can be simple (set value to X) or complicated (add missing rows with relative values). Only referenced in ch23'.
 618,Did you read that the keg_definition of 'idea_type' is 'Definition needed.'.
 619,Did you read that the keg_definition of 'ii' is 'Idea Format Identifier. Every idea_type format starts with 'ii' and then 5 numbers. Every brick_type has a mirrored idea_type. Multiple idea_types can map to single brick_type'.
 620,Did you read that the keg_definition of 'moment_tranbook_nets' is 'Definition needed.'.

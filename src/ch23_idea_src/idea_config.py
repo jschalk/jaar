@@ -2,8 +2,8 @@ from ch00_py.file_toolbox import create_path, open_json
 
 
 def idea_config_path() -> str:
-    "Returns path: ch19_idea_src/idea_config.json"
-    return create_path("src", "ch19_idea_src", "idea_config.json")
+    "Returns path: ch23_idea_src/idea_config.json"
+    return create_path("src", "ch23_idea_src", "idea_config.json")
 
 
 def get_idea_config_dict() -> dict:

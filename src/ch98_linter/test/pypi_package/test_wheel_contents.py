@@ -20,7 +20,7 @@ from zipfile import ZipFile as zipfile_ZipFile
 REQUIRED_FILES = [
     "ch17_brick/brick_formats/bk00119_planunit_v0_0_0.json",
     "ch17_brick/brick_formats/bk00136_problem_healer_v0_0_0.json",
-    "ch19_idea_src/idea_config.json",
+    "ch23_idea_src/idea_config.json",
     # add more as you discover missing ones, e.g.:
 ]
 

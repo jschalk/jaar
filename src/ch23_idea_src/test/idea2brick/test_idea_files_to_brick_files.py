@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import count_dirs_files, create_path
 from ch04_rope.rope import create_rope
-from ch19_idea_src.idea2brick import (
+from ch23_idea_src.idea2brick import (
     IdeaBook,
     SheetRef,
     create_spark_face_spark_nums,
@@ -13,7 +13,7 @@ from ch19_idea_src.idea2brick import (
     set_spark_num_column,
     validate_idea_columns,
 )
-from ch99_glossary.ch_keyword import Ch19Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch23Keywords as kw, ExampleStrs as exx
 from openpyxl import Workbook as openpyxl_Workbook
 from os.path import join as os_path_join
 from pandas import (
