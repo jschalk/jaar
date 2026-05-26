@@ -1,3 +1,12 @@
+## [0.86.16](https://github.com/jschalk/keg/compare/v0.86.15...v0.86.16) (2026-05-26)
+
+
+### Bug Fixes
+
+* [#1228](https://github.com/jschalk/keg/issues/1228) add demo gif ([4ebf7c5](https://github.com/jschalk/keg/commit/4ebf7c557d50eb3187861709babc35fbf39643d5))
+* [#1228](https://github.com/jschalk/keg/issues/1228) cleanup, move wheel tests to correct dir ([27c2429](https://github.com/jschalk/keg/commit/27c2429588ed619c0dac40af725c82bfd07a5bcd))
+* [#1254](https://github.com/jschalk/keg/issues/1254) ch01_keywords created, keyword init actions now more robust ([b85c15f](https://github.com/jschalk/keg/commit/b85c15f4541fcc3971e7f66df157873ff2154b5d))
+
 ## [0.86.14](https://github.com/jschalk/keg/compare/v0.86.13...v0.86.14) (2026-05-25)
 
 
