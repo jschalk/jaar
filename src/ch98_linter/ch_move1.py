@@ -1,4 +1,8 @@
 from ch00_py.file_toolbox import open_json, save_json
+from ch00_py.keyword_class_builder import (
+    create_src_keywords_src_path,
+    get_keywords_src_config,
+)
 from ch98_linter.chapter_move_tool import (
     delete_if_empty_or_pycache_only,
     first_level_dirs_with_prefix,
@@ -56,6 +60,7 @@ def move_chapters_given_ints(src_chxx_int, dst_chxx_int):
     replace_in_tracked_python_files(src_uppercase_chxx, dst_uppercase_chxx)
     # change file paths
     rename_files_and_dirs_4times("src", src_chxx_prefix, dst_chxx_prefix)
+    update_keywords_source_valid_ch(src_chxx_int, dst_chxx_int)
     print("✅ Replacement complete.")
 
 
@@ -68,6 +73,30 @@ def change_ref_json(src_dir, src_chxx_prefix, prefix_dir: str, dst_chxx_int: int
         ref_dict["chapter_number"] = dst_chxx_int
         save_json(chapter_ref_json_path, None, ref_dict)
         print(f"Updated ref json '{chapter_ref_json_path}'")
+
+
+def update_keywords_source_valid_ch(src_chxx_int, dst_chxx_int):
+    config_dict = get_keywords_src_config()
+    config_dict = replace_valid_ch(config_dict, src_chxx_int, dst_chxx_int)
+    save_json(create_src_keywords_src_path("src"), None, config_dict)
+
+
+def replace_valid_ch(config_dict: dict, src_num: int | str, dst_num: int | str) -> dict:
+    src_str = str(src_num)
+    dst_str = str(dst_num)
+
+    for config in config_dict.values():
+        valid_ch = str(config.get("valid_ch"))
+        src_with_colon = f"{src_num}:"
+
+        if valid_ch == src_str:
+            config["valid_ch"] = dst_str
+        elif valid_ch.startswith(src_with_colon):
+            dst_with_colon = f"{dst_num}:"
+            new_v_ch = valid_ch.replace(src_with_colon, dst_with_colon)
+            config["valid_ch"] = new_v_ch
+
+    return config_dict
 
 
 if __name__ == "__main__":
