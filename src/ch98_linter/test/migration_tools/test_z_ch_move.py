@@ -1,4 +1,4 @@
-from ch98_linter.ch_move1 import replace_valid_ch
+from ch98_linter.ch_move1 import replace_string_in_csv, replace_valid_ch
 from copy import deepcopy as copy_deepcopy
 
 
@@ -89,3 +89,99 @@ def test_replace_valid_ch_ReturnsSameObject_Scenario5_MutatesInput():
 
     # THEN
     assert result is data
+
+
+def test_replace_string_in_csv_ReplacesString_Scenario0_SingleMatch(
+    tmp_path,
+):
+    # GIVEN
+    csv_file_path = tmp_path / "test.csv"
+    csv_file_path.write_text(
+        "name,age\nSue,19\nBob,20\n",
+        encoding="utf-8",
+    )
+
+    # WHEN
+    replace_string_in_csv(csv_file_path, "19", "23")
+
+    # THEN
+    result = csv_file_path.read_text(encoding="utf-8")
+
+    assert result == "name,age\nSue,23\nBob,20\n"
+
+
+def test_replace_string_in_csv_ReplacesMultiple_Scenario1_MultipleMatches(
+    tmp_path,
+):
+    # GIVEN
+    csv_file_path = tmp_path / "test.csv"
+    csv_file_path.write_text(
+        "19,19,19\n",
+        encoding="utf-8",
+    )
+
+    # WHEN
+    replace_string_in_csv(csv_file_path, "19", "23")
+
+    # THEN
+    result = csv_file_path.read_text(encoding="utf-8")
+
+    assert result == "23,23,23\n"
+
+
+def test_replace_string_in_csv_DoesNothing_Scenario2_NoMatches(
+    tmp_path,
+):
+    # GIVEN
+    csv_file_path = tmp_path / "test.csv"
+    original_text = "a,b,c\n1,2,3\n"
+
+    csv_file_path.write_text(
+        original_text,
+        encoding="utf-8",
+    )
+
+    # WHEN
+    replace_string_in_csv(csv_file_path, "19", "23")
+
+    # THEN
+    result = csv_file_path.read_text(encoding="utf-8")
+
+    assert result == original_text
+
+
+def test_replace_string_in_csv_ReplacesPartialText_Scenario3_SubstringMatch(
+    tmp_path,
+):
+    # GIVEN
+    csv_file_path = tmp_path / "test.csv"
+    csv_file_path.write_text(
+        "value19,test19\n",
+        encoding="utf-8",
+    )
+
+    # WHEN
+    replace_string_in_csv(csv_file_path, "19", "23")
+
+    # THEN
+    result = csv_file_path.read_text(encoding="utf-8")
+
+    assert result == "value23,test23\n"
+
+
+def test_replace_string_in_csv_HandlesEmptyFile_Scenario4_EmptyCsv(
+    tmp_path,
+):
+    # GIVEN
+    csv_file_path = tmp_path / "empty.csv"
+    csv_file_path.write_text(
+        "",
+        encoding="utf-8",
+    )
+
+    # WHEN
+    replace_string_in_csv(csv_file_path, "19", "23")
+
+    # THEN
+    result = csv_file_path.read_text(encoding="utf-8")
+    assert result == ""

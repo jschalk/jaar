@@ -3,6 +3,7 @@ from ch00_py.keyword_class_builder import (
     create_src_keywords_src_path,
     get_keywords_src_config,
 )
+from ch97_docs_builder.glossary_ranking import create_keg_exam_questions_path
 from ch98_linter.chapter_move_tool import (
     delete_if_empty_or_pycache_only,
     first_level_dirs_with_prefix,
@@ -13,6 +14,7 @@ from ch98_linter.chapter_move_tool import (
 )
 from os import getcwd as os_getcwd
 from os.path import isdir as os_path_isdir, join as os_path_join
+from pathlib import Path
 
 # HOW TO USE:
 # Open up CMD, change directory to repo
@@ -61,6 +63,9 @@ def move_chapters_given_ints(src_chxx_int, dst_chxx_int):
     # change file paths
     rename_files_and_dirs_4times("src", src_chxx_prefix, dst_chxx_prefix)
     update_keywords_source_valid_ch(src_chxx_int, dst_chxx_int)
+    # TODO update keg_questions_csv "chxx" to "chxx"
+    update_keg_questions_csv(src_chxx_prefix, dst_chxx_prefix)
+    update_keg_questions_csv(src_uppercase_chxx, dst_uppercase_chxx)
     print("✅ Replacement complete.")
 
 
@@ -97,6 +102,20 @@ def replace_valid_ch(config_dict: dict, src_num: int | str, dst_num: int | str) 
             config["valid_ch"] = new_v_ch
 
     return config_dict
+
+
+def update_keg_questions_csv(old_string, new_string):
+    keg_path = create_keg_exam_questions_path("src")
+    replace_string_in_csv(keg_path, old_string, new_string)
+
+
+def replace_string_in_csv(
+    csv_file_path: str | Path, old_string: str, new_string: str
+) -> None:
+    csv_file_path = Path(csv_file_path)
+    file_text = csv_file_path.read_text(encoding="utf-8")
+    updated_text = file_text.replace(old_string, new_string)
+    csv_file_path.write_text(updated_text, encoding="utf-8")
 
 
 if __name__ == "__main__":

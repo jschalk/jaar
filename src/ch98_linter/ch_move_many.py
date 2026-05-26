@@ -1,7 +1,4 @@
-from ch00_py.file_toolbox import open_json, save_json
-from ch98_linter.ch_move1 import ch_move_main
-from os import getcwd as os_getcwd
-from os.path import isdir as os_path_isdir, join as os_path_join
+from ch98_linter.ch_move1 import move_chapters_given_ints
 
 # HOW TO USE:
 # Open up CMD, change directory to repo
@@ -15,8 +12,10 @@ def ch_many_move_main():
     lower_chxx_int = int(lower_chxx_str)
     upper_chxx_int = int(upper_chxx_str)
     move_number_int = int(move_number)
-    for x_num in sorted(range(lower_chxx_int, upper_chxx_int + 1), reverse=True):
-        print(f"from {x_num} to {x_num+move_number_int}")
+    for src_ch_num in sorted(range(lower_chxx_int, upper_chxx_int + 1), reverse=True):
+        dst_ch_num = src_ch_num + move_number_int
+        print(f"from {src_ch_num} to {dst_ch_num}")
+        move_chapters_given_ints(src_ch_num, dst_ch_num)
 
 
 if __name__ == "__main__":
