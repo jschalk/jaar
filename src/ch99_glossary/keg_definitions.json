@@ -88,7 +88,7 @@
   "ch19": "Defines the 'Idea Src' process. Data going to 'Bricks'.", 
   "ch20": "Defines the 'Etl Bricks' process. From 'Source Ideas' to 'Sound'.", 
   "ch21": "Defines the 'Sound' process. From 'Bricks' to 'Heard'.", 
-  "ch22": "Defines the 'Heard' process. From 'Sound' to 'lego'.", 
+  "ch26": "Defines the 'Heard' process. From 'Sound' to 'lego'.", 
   "ch27": "Defines the lego stage of data. Source of Job Persons, complete Moment data.", 
   "ch30": "Defines how ideas for outside audiences are created.", 
   "ch31": "Defines the analytics outcomes of completed MomentUnits.", 

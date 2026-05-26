@@ -17,7 +17,7 @@ from ch21_sound.sound import (
     etl_sound_vld_tables_to_heard_raw_tables,
     etl_translate_sound_agg_tables_to_translate_sound_vld_tables,
 )
-from ch22_heard.heard import (
+from ch26_heard.heard import (
     etl_heard_agg_tables_to_heard_vld_tables,
     etl_heard_raw_tables_to_heard_agg_tables,
     etl_heard_raw_tables_to_lego_moment_ote1_agg,

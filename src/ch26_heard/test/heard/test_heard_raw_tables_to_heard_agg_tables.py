@@ -16,14 +16,14 @@ from ch18_etl_config.etl_sqlstr import (
     create_sound_and_heard_tables,
     get_insert_heard_agg_sqlstrs,
 )
-from ch22_heard.heard import etl_heard_raw_tables_to_heard_agg_tables
-from ch22_heard.test.heard.test_heard_agg__update_factnum_pfhapx import (
+from ch26_heard.heard import etl_heard_raw_tables_to_heard_agg_tables
+from ch26_heard.test.heard.test_heard_agg__update_factnum_pfhapx import (
     pfhapx_insert_nabtime,
     pfhapx_insert_prnfact,
     pfhapx_insert_prnplan,
     pfhapx_select_prnfact,
 )
-from ch99_glossary.ch_keyword import Ch22Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch26Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 

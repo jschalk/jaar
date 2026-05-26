@@ -1,4 +1,4 @@
-from ch00_py.file_toolbox import create_path, open_json, save_json
+from ch00_py.file_toolbox import open_json, save_json
 from ch98_linter.chapter_move_tool import (
     delete_if_empty_or_pycache_only,
     first_level_dirs_with_prefix,
@@ -56,10 +56,10 @@ def ch_move_main():
 
 
 def change_ref_json(src_dir, src_chxx_prefix, prefix_dir: str, dst_chxx_int: int):
-    src_chxx_dir_prefix = create_path(src_dir, src_chxx_prefix)
+    src_chxx_dir_prefix = os_path_join(src_dir, src_chxx_prefix)
     for src_ch_desc_dir in first_level_dirs_with_prefix(src_chxx_dir_prefix):
-        ref_dir = create_path(src_ch_desc_dir, "_ref")
-        chapter_ref_json_path = create_path(ref_dir, f"{src_chxx_prefix}_ref.json")
+        ref_dir = os_path_join(src_ch_desc_dir, "_ref")
+        chapter_ref_json_path = os_path_join(ref_dir, f"{src_chxx_prefix}_ref.json")
         ref_dict = open_json(chapter_ref_json_path)
         ref_dict["chapter_number"] = dst_chxx_int
         save_json(chapter_ref_json_path, None, ref_dict)

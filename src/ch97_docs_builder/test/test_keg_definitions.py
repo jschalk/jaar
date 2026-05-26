@@ -19,7 +19,7 @@ from ch16_translate.translate_config import (
 )
 from ch17_brick.brick_config import get_brick_config_dict
 from ch18_etl_config.etl_config import get_etl_stage_types_config_dict
-from ch22_heard.heard import etl_heard_raw_tables_to_lego_moment_ote1_agg
+from ch26_heard.heard import etl_heard_raw_tables_to_lego_moment_ote1_agg
 from ch97_docs_builder._ref.ch97_semantic_types import (
     BreakTerm,
     ContactName,

@@ -23,7 +23,7 @@
 - ch19_idea_src: ch19, day_punch, fission, idea_type, ii, moment_tranbook_nets
 - ch20_etl_brick: ch20
 - ch21_sound: ch21
-- ch22_heard: ch22
+- ch26_heard: ch26
 - ch27_lego: ch27
 - ch30_idea_dst: ch30, vow
 - ch31_kpi: DayEvent, Event, ch31, default_kpi_bundle, gcal, moment_kpi001_contact_nets, moment_kpi002_person_pledges

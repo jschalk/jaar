@@ -29,7 +29,6 @@ def first_level_dirs_with_prefix(path_prefix: str):
     result = []
     for entry in os_listdir(parent_dir):
         full_path = os_path_join(parent_dir, entry)
-        print(f"{full_path=} {entry=}")
         if entry.startswith(prefix_name) and os_path_isdir(full_path):
             result.append(full_path)
 
@@ -130,6 +129,7 @@ def rename_directories(
         new_dir_path = os_path_join(root, new_dir_name)
 
         if old_dir_path != new_dir_path:
+            print(old_dir_path, new_dir_path)
             os_rename(old_dir_path, new_dir_path)
             print(f"{old_string=} " f"{new_string=} " f"{new_dir_path=}")
 

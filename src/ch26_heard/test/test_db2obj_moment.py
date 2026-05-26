@@ -3,8 +3,8 @@ from ch18_etl_config.etl_sqlstr import (
     create_prime_tablename,
     create_sound_and_heard_tables,
 )
-from ch22_heard.heard import get_moment_dict_from_heard_tables
-from ch99_glossary.ch_keyword import Ch22Keywords as kw, ExampleStrs as exx
+from ch26_heard.heard import get_moment_dict_from_heard_tables
+from ch99_glossary.ch_keyword import Ch26Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 
