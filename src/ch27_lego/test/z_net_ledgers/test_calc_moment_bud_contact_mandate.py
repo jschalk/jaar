@@ -5,7 +5,7 @@ from ch09_person_lesson._ref.ch09_path import (
     create_moment_persons_dir_path,
 )
 from ch09_person_lesson.lasso import lassounit_shop
-from ch11_bud._ref.ch11_path import create_personspark_path
+from ch12_bud._ref.ch12_path import create_personspark_path
 from ch15_moment._ref.ch15_path import (
     create_bud_contact_mandate_ledger_path as bud_mandate_path,
 )

@@ -1,4 +1,4 @@
-from ch11_bud.bud_main import personbudhistory_shop
+from ch12_bud.bud_main import personbudhistory_shop
 from ch14_time.epoch_main import DEFAULT_EPOCH_LENGTH, epochunit_shop, get_epoch_length
 from ch14_time.test._util.ch14_examples import get_creg_config
 from ch15_moment.moment_frame import add_epoch_frame_to_momentunit, get_moment_timeshoe

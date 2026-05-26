@@ -11,7 +11,7 @@ from ch09_person_lesson._ref.ch09_path import (
     create_moments_dir_path,
 )
 from ch09_person_lesson.lasso import LassoUnit, lassounit_shop
-from ch11_bud.bud_main import MomentRope
+from ch12_bud.bud_main import MomentRope
 from ch17_translate.translate_config import (
     get_translate_args_obj_types,
     translateable_obj_types,

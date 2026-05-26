@@ -4,8 +4,8 @@ from ch09_person_lesson._ref.ch09_path import (
     create_moment_persons_dir_path,
 )
 from ch09_person_lesson.lasso import lassounit_shop
-from ch11_bud._ref.ch11_path import create_cell_json_path
-from ch11_bud.bud_main import DEFAULT_CELLDEPTH
+from ch12_bud._ref.ch12_path import create_cell_json_path
+from ch12_bud.bud_main import DEFAULT_CELLDEPTH
 from ch15_moment.moment_main import _get_ote1_max_past_spark_num, momentunit_shop
 from ch99_glossary.ch_keyword import Ch15Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists

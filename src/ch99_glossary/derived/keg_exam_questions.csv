@@ -26,8 +26,8 @@ row_number,question
 24,Did you read that the keg_definition of 'ch07' is 'Defines a PersonUnit as a PlanUnit and ContactUnits capable of producing an agenda.'.
 25,Did you read that the keg_definition of 'ch08' is 'Defines PersonAtoms: Irreducible units of change for a PersonUnit.'.
 26,Did you read that the keg_definition of 'ch09' is 'Defines lessons which are collections of PersonAtoms by FaceName'.
-27,Did you read that the keg_definition of 'ch10' is 'These tools describe how one PersonUnit listens to another.'.
-28,"Did you read that the keg_definition of 'ch11' is 'Defines PersonBudHistory: PersonName, BudUnits (TimeNum, quota, celldepth)'."
+27,Did you read that the keg_definition of 'ch11' is 'These tools describe how one PersonUnit listens to another.'.
+28,"Did you read that the keg_definition of 'ch12' is 'Defines PersonBudHistory: PersonName, BudUnits (TimeNum, quota, celldepth)'."
 29,Did you read that the keg_definition of 'ch13' is 'Builds a simulation that describes how much credit a healer has earned.'.
 30,Did you read that the keg_definition of 'ch14' is 'Defines how time is handled by PersonUnits. Allows for arbitrary time structures.'.
 31,"Did you read that the keg_definition of 'ch15' is 'Defines MomentUnits: common time tech, ledger, ContactNames, history of PersonUnits.'."
@@ -342,11 +342,11 @@ row_number,question
 338,"Did you read that the keg_definition of 'moment_rope' is ', Moment arg, offi_time arg, paybook arg, mmtweek arg, mmtmont arg, mmthour arg, bud arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed, Contact seed, Member seed, nabu arg.'."
 339,Did you read that the keg_definition of 'spark_face' is 'Every spark has a spark_face that identifies which Face it belongs to. The Face is the source of all outside data. In theory a spark_face can be any data type. In practice it is currently a string data type.'.
 340,"Did you read that the keg_definition of 'spark_num' is 'Every spark has a spark_num that identifies its order of ingestion. Sparks are orderd but not necessarily sequential. Spark_num is an int. , used with Budget Cells'."
-341,Did you read that the keg_definition of 'listener' is 'Definition needed. Only referenced in ch10.'.
-342,Did you read that the keg_definition of 'speaker' is 'Definition needed. Only referenced in ch10.'.
+341,Did you read that the keg_definition of 'listener' is 'Definition needed. Only referenced in ch11.'.
+342,Did you read that the keg_definition of 'speaker' is 'Definition needed. Only referenced in ch11.'.
 343,Did you read that the keg_definition of 'Epoch' is 'Definition needed.'.
-344,Did you read that the keg_definition of 'SparkInt' is 'int first used in ch11. Each Spark is a int that describes the order of data ingestion'.
-345,Did you read that the keg_definition of 'TimeNum' is 'int first used in ch11. An Integar that can represent a instant on the TimeNumLine'.
+344,Did you read that the keg_definition of 'SparkInt' is 'int first used in ch12. Each Spark is a int that describes the order of data ingestion'.
+345,Did you read that the keg_definition of 'TimeNum' is 'int first used in ch12. An Integar that can represent a instant on the TimeNumLine'.
 346,"Did you read that the keg_definition of 'amount' is ', paybook arg'."
 347,"Did you read that the keg_definition of 'boss_facts' is ', used with Budget Cells'."
 348,"Did you read that the keg_definition of 'bud_contact_nets' is 'ledger of bud outcome. The PersonUnit that embodies the Budget distrubutes the funds per the PersonUnit contacts. dict[ContactName, FundNum]. FundNum can be negative.'."

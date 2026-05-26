@@ -13,8 +13,8 @@ from ch06_plan.plan import PlanUnit
 from ch07_person_logic.person_main import PersonUnit, get_sorted_plan_list
 from ch09_person_lesson._ref.ch09_path import create_moments_dir_path
 from ch09_person_lesson.lasso import LassoUnit, lassounit_shop
-from ch10_person_listen._ref.ch10_path import create_job_path
-from ch10_person_listen.keep_tool import open_job_file
+from ch11_person_listen._ref.ch11_path import create_job_path
+from ch11_person_listen.keep_tool import open_job_file
 from ch14_time.epoch_main import (
     TimeShoe,
     add_epoch_planunit,

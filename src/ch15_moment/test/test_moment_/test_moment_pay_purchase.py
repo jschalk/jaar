@@ -1,4 +1,4 @@
-from ch11_bud.bud_main import tranbook_shop, tranunit_shop
+from ch12_bud.bud_main import tranbook_shop, tranunit_shop
 from ch15_moment.moment_main import momentunit_shop
 from ch99_glossary.ch_keyword import ExampleStrs as exx
 from pytest import raises as pytest_raises

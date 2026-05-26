@@ -5,7 +5,7 @@ from ch03_workforce.workforce import WorkforceHeir
 from ch05_reason.reason_main import CaseUnit, FactHeir, ReasonHeir
 from ch06_plan.plan import HealerUnit, PlanUnit
 from ch07_person_logic.person_main import PersonUnit
-from ch11_bud.bud_main import MomentRope
+from ch12_bud.bud_main import MomentRope
 from ch27_lego._ref.ch27_semantic_types import (
     ContactName,
     FaceName,

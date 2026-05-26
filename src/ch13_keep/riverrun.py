@@ -6,7 +6,7 @@ from ch00_py.dict_toolbox import (
 )
 from ch00_py.file_toolbox import save_json
 from ch01_allot.allot import allot_scale, default_grain_num_if_None, validate_pool_num
-from ch10_person_listen._ref.ch10_path import create_keep_grade_path
+from ch11_person_listen._ref.ch11_path import create_keep_grade_path
 from ch13_keep._ref.ch13_semantic_types import (
     ContactName,
     KnotTerm,

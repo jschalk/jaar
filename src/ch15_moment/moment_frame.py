@@ -1,5 +1,5 @@
 from ch07_person_logic.person_main import personunit_shop
-from ch11_bud.bud_main import personbudhistory_shop, tranbook_shop
+from ch12_bud.bud_main import personbudhistory_shop, tranbook_shop
 from ch14_time.epoch_main import (
     TimeShoe,
     add_epoch_planunit,

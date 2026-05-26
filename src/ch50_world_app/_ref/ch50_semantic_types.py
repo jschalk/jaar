@@ -21,7 +21,7 @@ from ch04_rope._ref.ch04_semantic_types import (
 from ch07_person_logic._ref.ch07_semantic_types import ManaGrain, PersonName
 from ch08_person_atom._ref.ch08_semantic_types import CRUD_command
 from ch09_person_lesson._ref.ch09_semantic_types import FaceName, MomentRope
-from ch11_bud._ref.ch11_semantic_types import SparkInt, TimeNum
+from ch12_bud._ref.ch12_semantic_types import SparkInt, TimeNum
 from ch13_keep._ref.ch13_semantic_types import ManaNum
 from ch14_time._ref.ch14_semantic_types import EpochLabel
 from ch20_brick._ref.ch20_semantic_types import SheetName

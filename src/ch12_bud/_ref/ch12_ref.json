@@ -1,0 +1,7 @@
+{
+  "chapter_blurb": "Defines PersonBudHistory: PersonName, BudUnits (TimeNum, quota, celldepth)", 
+  "chapter_content": "Defines a budget and the tools necessary to create one. Budgets are created when a personunit is given funds that must be distributed", 
+  "chapter_description": "ch12_bud", 
+  "chapter_number": 12, 
+  "ontology summary": "Defines Budget that distribute funds."
+}
