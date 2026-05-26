@@ -1,0 +1,7 @@
+{
+  "chapter_blurb": "Defines ReasonUnits, FactUnits, and Facts decide if a Reason is Active", 
+  "chapter_content": "Describes what a reason and a fact is; if the reasons match the facts, the Reason.reason_active = True", 
+  "chapter_description": "ch06_reason", 
+  "chapter_number": 6, 
+  "ontology summary": "ReasonUnits mated to FactUnits produce justifications. If a task must be justified the Reasons and Facts must match."
+}

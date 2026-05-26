@@ -1,8 +1,8 @@
-from ch00_py.db_toolbox import get_row_count
 from ch00_py.file_toolbox import create_path
-from ch04_rope.rope import create_rope
-from ch17_brick.brick_db_tool import create_brick_sorted_table, save_sheet
-from ch18_etl_config.etl_sqlstr import create_prime_tablename
+from ch05_rope.rope import create_rope
+from ch18_db_tool.db_toolbox import get_row_count
+from ch20_brick.brick_db_tool import create_brick_sorted_table, save_sheet
+from ch22_etl_config.etl_sqlstr import create_prime_tablename
 from ch27_lego.lego_core import get_max_b_agg_spark_num
 from ch32_world.world import WorldDir, idea_sheets_to_lego_mstr, worlddir_shop
 from ch99_glossary.ch_keyword import Ch32Keywords as kw, ExampleStrs as exx

@@ -1,15 +1,15 @@
 from ch00_py.file_toolbox import count_files, create_path, get_level1_dirs, save_json
-from ch09_person_lesson._ref.ch09_path import (
+from ch10_person_lesson._ref.ch10_path import (
     create_moment_json_path,
     create_moments_dir_path,
 )
-from ch09_person_lesson.lasso import lassounit_shop
-from ch13_time.epoch_main import epochunit_shop
-from ch13_time.test._util.ch13_examples import (
+from ch10_person_lesson.lasso import lassounit_shop
+from ch14_time.epoch_main import epochunit_shop
+from ch14_time.test._util.ch14_examples import (
     get_creg_config,
     get_expected_creg_year0_markdown,
 )
-from ch14_moment.moment_main import momentunit_shop
+from ch15_moment.moment_main import momentunit_shop
 from ch31_kpi.kpi_mstr import create_calendar_markdown_files
 from ch99_glossary.ch_keyword import ExampleStrs as exx
 from os.path import exists as os_path_exists

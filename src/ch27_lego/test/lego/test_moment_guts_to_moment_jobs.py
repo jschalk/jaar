@@ -1,9 +1,9 @@
 from ch00_py.file_toolbox import open_json, save_json
-from ch07_person_logic.person_main import get_personunit_from_dict, personunit_shop
-from ch09_person_lesson._ref.ch09_path import create_gut_path, create_moment_json_path
-from ch09_person_lesson.lasso import lassounit_shop
-from ch10_person_listen._ref.ch10_path import create_job_path
-from ch14_moment.moment_main import momentunit_shop
+from ch08_person_logic.person_main import get_personunit_from_dict, personunit_shop
+from ch10_person_lesson._ref.ch10_path import create_gut_path, create_moment_json_path
+from ch10_person_lesson.lasso import lassounit_shop
+from ch11_person_listen._ref.ch11_path import create_job_path
+from ch15_moment.moment_main import momentunit_shop
 from ch27_lego.lego_core import etl_mind_guts_to_mind_jobs
 from ch99_glossary.ch_keyword import ExampleStrs as exx
 from os.path import exists as os_path_exists

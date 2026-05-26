@@ -1,5 +1,4 @@
 from ch00_py.csv_toolbox import open_csv_with_types
-from ch00_py.db_toolbox import delete_all_duplicate_rows, get_db_tables
 from ch00_py.file_toolbox import (
     create_path,
     get_level1_dirs,
@@ -8,45 +7,46 @@ from ch00_py.file_toolbox import (
     save_file,
     save_json,
 )
-from ch04_rope.rope import create_rope
-from ch07_person_logic.person_main import PersonUnit, personunit_shop
-from ch08_person_atom.atom_config import get_person_dimens
-from ch08_person_atom.atom_main import personatom_shop
-from ch09_person_lesson._ref.ch09_path import create_gut_path, create_moments_dir_path
-from ch09_person_lesson.delta import get_minimal_persondelta
-from ch09_person_lesson.lasso import LassoUnit, lassounit_shop
-from ch09_person_lesson.lesson_main import (
+from ch05_rope.rope import create_rope
+from ch08_person_logic.person_main import PersonUnit, personunit_shop
+from ch09_person_atom.atom_config import get_person_dimens
+from ch09_person_atom.atom_main import personatom_shop
+from ch10_person_lesson._ref.ch10_path import create_gut_path, create_moments_dir_path
+from ch10_person_lesson.delta import get_minimal_persondelta
+from ch10_person_lesson.lasso import LassoUnit, lassounit_shop
+from ch10_person_lesson.lesson_main import (
     LessonUnit,
     get_lessonunit_from_dict,
     lessonunit_shop,
 )
-from ch10_person_listen.keep_tool import open_job_file
-from ch11_bud._ref.ch11_path import (
+from ch11_person_listen.keep_tool import open_job_file
+from ch12_bud._ref.ch12_path import (
     create_person_spark_dir_path,
     create_personspark_path,
     create_spark_all_lesson_path,
 )
-from ch11_bud.bud_filehandler import (
+from ch12_bud.bud_filehandler import (
     collect_person_spark_dir_sets,
     get_persons_downhill_spark_nums,
     open_person_file,
 )
-from ch11_bud.bud_main import TranBook
-from ch14_moment.moment_cell import (
+from ch12_bud.bud_main import TranBook
+from ch15_moment.moment_cell import (
     create_bud_mandate_ledgers,
     create_moment_persons_cell_trees,
     set_cell_tree_cell_mandates,
     set_cell_trees_decrees,
     set_cell_trees_found_facts,
 )
-from ch14_moment.moment_main import open_moment_file
-from ch17_brick.brick_config import get_brick_sqlite_types
-from ch18_etl_config._ref.ch18_path import (
+from ch15_moment.moment_main import open_moment_file
+from ch18_db_tool.db_toolbox import delete_all_duplicate_rows, get_db_tables
+from ch20_brick.brick_config import get_brick_sqlite_types
+from ch22_etl_config._ref.ch22_path import (
     create_last_run_metrics_path,
     create_moment_ote1_csv_path,
     create_moment_ote1_json_path,
 )
-from ch18_etl_config.etl_sqlstr import create_job_tables, create_prime_tablename
+from ch22_etl_config.etl_sqlstr import create_job_tables, create_prime_tablename
 from ch27_lego.lego_job2db import insert_job_obj
 from copy import deepcopy as copy_deepcopy
 from os.path import exists as os_path_exists

@@ -1,11 +1,11 @@
 from ch00_py.file_toolbox import open_file, open_json, save_file
-from ch09_person_lesson.lasso import lassounit_shop
-from ch09_person_lesson.lesson_main import get_lessonunit_from_dict, lessonunit_shop
-from ch11_bud._ref.ch11_path import (
+from ch10_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lesson_main import get_lessonunit_from_dict, lessonunit_shop
+from ch12_bud._ref.ch12_path import (
     create_person_spark_dir_path as person_spark_dir,
     create_spark_all_lesson_path as all_lesson_path,
 )
-from ch18_etl_config.etl_sqlstr import create_prime_tablename
+from ch22_etl_config.etl_sqlstr import create_prime_tablename
 from ch27_lego.lego_core import etl_lego_spark_person_csvs_to_lesson_json
 from ch99_glossary.ch_keyword import Ch27Keywords as kw, ExampleStrs as exx
 from os.path import exists as os_path_exists

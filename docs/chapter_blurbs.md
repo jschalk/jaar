@@ -4,28 +4,30 @@ What does each one do?
 
 
 - **ch00_py**: Creates helper tools for OS and python data manipulation.
-- **ch01_allot**: Defines how to allot a pool number to a weighted ledger.
-- **ch02_contact**: Defines Contacts, Groups, Memberships, Awardees debt and cred.
-- **ch03_workforce**: Defines Workforce, LaborUnit. How tasks are assigned to labor.
-- **ch04_rope**: Defines Term Classes: Knots, Labels, RopeTerms, FirstLabels
-- **ch05_reason**: Defines ReasonUnits, FactUnits, and Facts decide if a Reason is Active
-- **ch06_plan**: Defines PlanUnits with sub-plans, Awardees, Workforce, Reasons, Facts, etc.
-- **ch07_person_logic**: Defines a PersonUnit as a PlanUnit and ContactUnits capable of producing an agenda.
-- **ch08_person_atom**: Defines PersonAtoms: Irreducible units of change for a PersonUnit.
-- **ch09_person_lesson**: Defines lessons which are collections of PersonAtoms by FaceName
-- **ch10_person_listen**: These tools describe how one PersonUnit listens to another.
-- **ch11_bud**: Defines PersonBudHistory: PersonName, BudUnits (TimeNum, quota, celldepth)
-- **ch12_keep**: Builds a simulation that describes how much credit a healer has earned.
-- **ch13_time**: Defines how time is handled by PersonUnits. Allows for arbitrary time structures.
-- **ch14_moment**: Defines MomentUnits: common time tech, ledger, ContactNames, history of PersonUnits.
-- **ch15_nabu**: Defines NabuUnit tools that interpret numeric values into inside accounting.
-- **ch16_translate**: Defines TranslateUnit tools that translate MomentUnits into inside language.
-- **ch17_brick**: Defines how to build Bricks using Bricks. Moments and Persons are built by Bricks.
-- **ch18_etl_config**: Defines the tools that use Bricks to build MomentUnits.
-- **ch19_idea_src**: Defines the 'Idea Src' process. Data going to 'Bricks'.
-- **ch20_etl_brick**: Defines the 'Etl Bricks' process. From 'Source Ideas' to 'Sound'.
-- **ch21_sound**: Defines the 'Sound' process. From 'Bricks' to 'Heard'.
-- **ch22_heard**: Defines the 'Heard' process. From 'Sound' to 'lego'.
+- **ch01_keyword**: Create keyword glossary tools for all chapters.
+- **ch02_allot**: Defines how to allot a pool number to a weighted ledger.
+- **ch03_contact**: Defines Contacts, Groups, Memberships, Awardees debt and cred.
+- **ch04_workforce**: Defines Workforce, LaborUnit. How tasks are assigned to labor.
+- **ch05_rope**: Defines Term Classes: Knots, Labels, RopeTerms, FirstLabels
+- **ch06_reason**: Defines ReasonUnits, FactUnits, and Facts decide if a Reason is Active
+- **ch07_plan**: Defines PlanUnits with sub-plans, Awardees, Workforce, Reasons, Facts, etc.
+- **ch08_person_logic**: Defines a PersonUnit as a PlanUnit and ContactUnits capable of producing an agenda.
+- **ch09_person_atom**: Defines PersonAtoms: Irreducible units of change for a PersonUnit.
+- **ch10_person_lesson**: Defines lessons which are collections of PersonAtoms by FaceName
+- **ch11_person_listen**: These tools describe how one PersonUnit listens to another.
+- **ch12_bud**: Defines PersonBudHistory: PersonName, BudUnits (TimeNum, quota, celldepth)
+- **ch13_keep**: Builds a simulation that describes how much credit a healer has earned.
+- **ch14_time**: Defines how time is handled by PersonUnits. Allows for arbitrary time structures.
+- **ch15_moment**: Defines MomentUnits: common time tech, ledger, ContactNames, history of PersonUnits.
+- **ch16_nabu**: Defines NabuUnit tools that interpret numeric values into inside accounting.
+- **ch17_translate**: Defines TranslateUnit tools that translate MomentUnits into inside language.
+- **ch18_db_tool**: Creates helper tools for database admin.
+- **ch20_brick**: Defines how to build Bricks using Bricks. Moments and Persons are built by Bricks.
+- **ch22_etl_config**: Defines the tools that use Bricks to build MomentUnits.
+- **ch23_idea_src**: Defines the 'Idea Src' process. Data going to 'Bricks'.
+- **ch24_etl_brick**: Defines the 'Etl Bricks' process. From 'Source Ideas' to 'Sound'.
+- **ch25_sound**: Defines the 'Sound' process. From 'Bricks' to 'Heard'.
+- **ch26_heard**: Defines the 'Heard' process. From 'Sound' to 'lego'.
 - **ch27_lego**: Defines the lego stage of data. Source of Job Persons, complete Moment data.
 - **ch30_idea_dst**: Defines how ideas for outside audiences are created.
 - **ch31_kpi**: Defines the analytics outcomes of completed MomentUnits.

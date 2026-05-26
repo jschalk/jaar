@@ -61,7 +61,7 @@ def test_get_keg_definition_questionunits_ReturnsObj():
     expected_year_length_questionunit = QuestionUnit(
         keg_term=kw.year_length,
         keg_definition=keg_definitions.get(kw.year_length),
-        init_ch=13,
+        init_ch=14,
         question_tier=0,
     )
     assert keg_questions1.get(kw.year_length) == expected_year_length_questionunit

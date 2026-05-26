@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import create_path
-from ch04_rope.rope import create_rope
-from ch09_person_lesson.lasso import lassounit_shop
+from ch05_rope.rope import create_rope
+from ch10_person_lesson.lasso import lassounit_shop
 from ch31_kpi._ref.ch31_path import (
     create_day_punch_txt_path,
     create_dst_person_punch_path,

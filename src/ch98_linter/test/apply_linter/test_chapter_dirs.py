@@ -1,5 +1,5 @@
-from ch00_py.chapter_desc_main import get_chapter_desc_str_number
 from ch00_py.file_toolbox import create_path, get_level1_dirs, open_json
+from ch01_keyword.chapter_desc_main import get_chapter_desc_str_number
 from ch97_docs_builder.doc_builder import get_chapter_desc_prefix
 from ch98_linter.style import (
     get_chapter_descs,
@@ -37,7 +37,6 @@ def test_Chapters_test_TestsAreInCorrectDirStructure():
                 assert level1_dir == test_str
 
 
-# TODO remove brick_config.py from list
 def test_Chapters_NonTestFilesDoNotHavePrintStatments():
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
@@ -45,11 +44,11 @@ def test_Chapters_NonTestFilesDoNotHavePrintStatments():
     excluded_files = {
         "w1_app.py",
         "chapter_move_tool.py",
-        "ch_move.py",
+        "ch_move1.py",
+        "ch_move_many.py",
         "create_notebook.py",
         "paths_change.py",
         "style.py",
-        "brick_config.py",
     }
 
     # WHEN / THEN
@@ -148,7 +147,7 @@ def test_Chapters_DoNotHaveEmptyDirectories():
     # ESTABLISH
     twe = "test_world_examples"
     x_worlds_dir = create_path("src", "ch32_world", "test", twe, "worlds")
-    z_nootbooks_dir = create_path("src", "ch19_idea_src", "test", "z_notebooks")
+    z_nootbooks_dir = create_path("src", "ch23_idea_src", "test", "z_notebooks")
     excluded_dirs = {x_worlds_dir, z_nootbooks_dir}
 
     # WHEN / THEN

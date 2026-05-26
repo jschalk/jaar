@@ -1,33 +1,33 @@
-from ch00_py.db_toolbox import (
-    db_table_exists,
-    get_all_tables_with_duplicates,
-    get_row_count,
-)
 from ch00_py.file_toolbox import (
     count_dirs_files,
     create_path,
     get_level1_dirs,
     save_file,
 )
-from ch00_py.test.tool_db.test_db_tool_ import print_table
-from ch04_rope.rope import create_rope_from_labels as init_rope
-from ch09_person_lesson._ref.ch09_path import create_gut_path, create_moment_json_path
-from ch09_person_lesson.lasso import lassounit_shop
-from ch09_person_lesson.lesson_filehandler import open_gut_file
-from ch10_person_listen._ref.ch10_path import create_job_path
-from ch11_bud._ref.ch11_path import (
+from ch05_rope.rope import create_rope_from_labels as init_rope
+from ch10_person_lesson._ref.ch10_path import create_gut_path, create_moment_json_path
+from ch10_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lesson_filehandler import open_gut_file
+from ch11_person_listen._ref.ch11_path import create_job_path
+from ch12_bud._ref.ch12_path import (
     create_spark_all_lesson_path,
     create_spark_expressed_lesson_path as expressed_path,
 )
-from ch14_moment._ref.ch14_path import (
+from ch15_moment._ref.ch15_path import (
     create_bud_contact_mandate_ledger_path as bud_mandate,
 )
-from ch17_brick.brick_db_tool import save_sheet
-from ch18_etl_config._ref.ch18_path import (
+from ch18_db_tool.db_toolbox import (
+    db_table_exists,
+    get_all_tables_with_duplicates,
+    get_row_count,
+)
+from ch18_db_tool.test.tool_db.test_db_tool_ import print_table
+from ch20_brick.brick_db_tool import save_sheet
+from ch22_etl_config._ref.ch22_path import (
     create_last_run_metrics_path,
     create_moment_ote1_csv_path,
 )
-from ch18_etl_config.etl_sqlstr import create_prime_tablename as prime_tbl
+from ch22_etl_config.etl_sqlstr import create_prime_tablename as prime_tbl
 from ch32_world.test._util.ch32_examples import bk00002_example
 from ch32_world.world import (
     brick_sheets_to_lego_mstr,

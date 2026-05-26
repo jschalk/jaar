@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import create_path, get_dir_file_strs, open_file
-from ch00_py.keyword_class_builder import (
+from ch01_keyword.keyword_class_builder import (
     get_ch_int,
     get_chapter_keyword_classes,
     get_cumlative_keywords_src_dict,

@@ -1,11 +1,11 @@
-from ch00_py.chapter_desc_main import get_chapter_desc_prefix, get_chapter_descs
 from ch00_py.file_toolbox import open_json, save_json
-from ch00_py.keyword_class_builder import (
+from ch01_keyword.chapter_desc_main import get_chapter_desc_prefix, get_chapter_descs
+from ch01_keyword.keyword_class_builder import (
     get_chapter_descs,
     get_keywords_src_config,
     parse_valid_ch_str,
 )
-from ch07_person_logic.person_config import (
+from ch08_person_logic.person_config import (
     get_all_person_calc_args,
     get_person_config_dict,
 )

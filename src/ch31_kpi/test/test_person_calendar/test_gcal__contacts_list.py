@@ -1,5 +1,5 @@
-from ch07_person_logic.person_main import personunit_shop
-from ch13_time.test._util.ch13_examples import Ch13ExampleStrs as wx
+from ch08_person_logic.person_main import personunit_shop
+from ch14_time.test._util.ch14_examples import Ch14ExampleStrs as wx
 from ch31_kpi.gcalendar import (
     gcal_readable_percent,
     get_gcal_contacts_str,

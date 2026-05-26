@@ -1,25 +1,25 @@
-from ch00_py.keyword_class_builder import (
+from ch01_keyword.keyword_class_builder import (
     get_ch_int,
     get_chapter_descs,
     get_example_strs_config,
     get_keywords_src_config,
     parse_valid_ch_str,
 )
-from ch07_person_logic.person_config import (
+from ch08_person_logic.person_config import (
     get_all_person_calc_args,
     get_person_config_dict,
 )
-from ch11_bud.cell_main import cellunit_shop
-from ch13_time.epoch_main import get_c400_constants, get_default_epoch_config_dict
-from ch14_moment.moment_config import get_moment_config_args
-from ch15_nabu.nabu_config import get_nabu_args, get_nabuable_args
-from ch16_translate.translate_config import (
+from ch12_bud.cell_main import cellunit_shop
+from ch14_time.epoch_main import get_c400_constants, get_default_epoch_config_dict
+from ch15_moment.moment_config import get_moment_config_args
+from ch16_nabu.nabu_config import get_nabu_args, get_nabuable_args
+from ch17_translate.translate_config import (
     get_translate_config_args,
     get_translate_config_dict,
 )
-from ch17_brick.brick_config import get_brick_config_dict
-from ch18_etl_config.etl_config import get_etl_stage_types_config_dict
-from ch22_heard.heard import etl_heard_raw_tables_to_lego_moment_ote1_agg
+from ch20_brick.brick_config import get_brick_config_dict
+from ch22_etl_config.etl_config import get_etl_stage_types_config_dict
+from ch26_heard.heard import etl_heard_raw_tables_to_lego_moment_ote1_agg
 from ch97_docs_builder._ref.ch97_semantic_types import (
     BreakTerm,
     ContactName,

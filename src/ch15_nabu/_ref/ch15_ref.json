@@ -1,7 +1,0 @@
-{
-  "chapter_blurb": "Defines NabuUnit tools that interpret numeric values into inside accounting.", 
-  "chapter_content": "A tool that interprets numbers from outside accounting to inside accounting.", 
-  "chapter_description": "ch15_nabu", 
-  "chapter_number": 15, 
-  "ontology summary": "Numeric translation is different from word translation, it has to be done after the non-numeric translations."
-}

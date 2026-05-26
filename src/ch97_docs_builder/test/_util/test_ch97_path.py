@@ -40,7 +40,7 @@ def test_create_src_keg_definitions_path_HasDocString():
 def test_create_chapter_ref_path_ReturnsObj(temp3_dir):
     # ESTABLISH
     src_dir = temp3_dir
-    chapter_prefix = "ch04"
+    chapter_prefix = "ch05"
 
     # WHEN
     keywords_class_file_path = create_chapter_ref_path(src_dir, chapter_prefix)

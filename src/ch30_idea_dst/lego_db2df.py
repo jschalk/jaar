@@ -3,22 +3,22 @@ from ch00_py.csv_toolbox import (
     replace_csv_column_from_string,
 )
 from ch00_py.file_toolbox import create_path, get_level1_dirs
-from ch04_rope.rope import create_rope, default_knot_if_None
-from ch09_person_lesson._ref.ch09_path import create_moments_dir_path
-from ch09_person_lesson.lasso import lassounit_shop
-from ch11_bud.bud_filehandler import open_person_file
-from ch14_moment.moment_main import open_moment_file
-from ch17_brick.brick_db_tool import (
+from ch05_rope.rope import create_rope, default_knot_if_None
+from ch10_person_lesson._ref.ch10_path import create_moments_dir_path
+from ch10_person_lesson.lasso import lassounit_shop
+from ch12_bud.bud_filehandler import open_person_file
+from ch15_moment.moment_main import open_moment_file
+from ch20_brick.brick_db_tool import (
     csv_dict_to_excel,
     prettify_excel_file,
     remove_empty_sheets,
 )
-from ch18_etl_config._ref.ch18_path import create_moment_mstr_path, create_world_db_path
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config._ref.ch22_path import create_moment_mstr_path, create_world_db_path
+from ch22_etl_config.etl_sqlstr import (
     create_prime_tablename as prime_tbl,
     create_sound_and_heard_tables,
 )
-from ch19_idea_src.idea_csv import (
+from ch23_idea_src.idea_csv import (
     add_momentunit_to_idea_csv_strs,
     add_personunit_to_idea_csv_strs,
     create_init_idea_csv_strs,

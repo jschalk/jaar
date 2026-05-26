@@ -1,9 +1,9 @@
-from ch00_py.chapter_desc_main import (
+from ch00_py.file_toolbox import create_path, get_dir_filenames
+from ch01_keyword.chapter_desc_main import (
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
 )
-from ch00_py.file_toolbox import create_path, get_dir_filenames
-from ch00_py.notebook_toolbox import get_top_level_functions
+from ch18_db_tool.notebook_toolbox import get_top_level_functions
 from ch97_docs_builder.doc_builder import get_chapter_descs
 from ch98_linter.style import (
     check_all_test_functions_are_formatted,
@@ -23,9 +23,9 @@ from os.path import exists as os_path_exists
 
 def test_find_chapter_dir_ReturnsPath_Scenario0_FindsMatchingParent():
     # ESTABLISH
-    file_path = "/projects/book/ch03_algorithms/examples/test_file.py"
+    file_path = "/projects/book/ch04_algorithms/examples/test_file.py"
     # WHEN / THEN
-    assert find_chapter_dir(file_path) == "ch03_algorithms"
+    assert find_chapter_dir(file_path) == "ch04_algorithms"
     # WHEN / THEN
     file_path = "/projects/book/examples/test_file.py"
     assert not find_chapter_dir(file_path)
@@ -142,7 +142,8 @@ def test_Chapters_path_FunctionStructureAndFormat():
             util_dir = create_path(test_dir, "_util")
             pytest_path_func_filename = f"test_{path_func_filename}"
             pytest_path_func_path = create_path(util_dir, pytest_path_func_filename)
-            assert os_path_exists(pytest_path_func_path)
+            print("src//ch01_keyword//_util//test_ch01_path.py")
+            assert os_path_exists(pytest_path_func_path), pytest_path_func_path
             test_path_func_names = set(
                 get_top_level_functions(pytest_path_func_path).keys()
             )

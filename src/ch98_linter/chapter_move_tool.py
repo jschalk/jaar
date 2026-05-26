@@ -20,6 +20,7 @@ def first_level_dirs_with_prefix(path_prefix: str):
     Only includes directories that are direct children of the parent of path_prefix.
     """
     parent_dir = os_path_dirname(path_prefix)
+    print(f"{parent_dir=}")
     prefix_name = os_path_basename(path_prefix)
 
     if not os_path_isdir(parent_dir):
@@ -128,6 +129,7 @@ def rename_directories(
         new_dir_path = os_path_join(root, new_dir_name)
 
         if old_dir_path != new_dir_path:
+            print(old_dir_path, new_dir_path)
             os_rename(old_dir_path, new_dir_path)
             print(f"{old_string=} " f"{new_string=} " f"{new_dir_path=}")
 

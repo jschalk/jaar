@@ -1,0 +1,261 @@
+from ch00_py.file_toolbox import delete_dir
+from ch07_plan.plan import planunit_shop
+from ch08_person_logic.person_main import personunit_shop
+from ch10_person_lesson._ref.ch10_path import create_gut_path
+from ch10_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lesson_filehandler import lessonfilehandler_shop, save_gut_file
+from ch11_person_listen.listen_main import (
+    create_listen_basis,
+    listen_to_agendas_create_init_job_from_guts,
+)
+from ch11_person_listen.test._util.ch11_examples import (
+    a23_casa_rope,
+    a23_clean_rope,
+    a23_cuisine_rope,
+    a23_eat_rope,
+    a23_hungry_rope,
+    get_example_bob_speaker,
+    get_example_yao_speaker,
+    get_example_zia_speaker,
+)
+from ch99_glossary.ch_keyword import ExampleStrs as exx
+from os.path import exists as os_path_exists
+
+
+def test_listen_to_agendas_create_init_job_from_guts_Addscase_tasksToPersonWhenNo_laborunitIsSet(
+    temp3_fs,
+):
+    # ESTABLISH
+    moment_mstr_dir = str(temp3_fs)
+    yao_gut = personunit_shop(exx.yao, exx.a23)
+    zia_contact_cred_lumen = 47
+    zia_contact_debt_lumen = 41
+    zia_pool = 87
+    yao_gut.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
+    yao_gut.set_contact_respect(zia_pool)
+    save_gut_file(moment_mstr_dir, yao_gut)
+
+    zia_gut = personunit_shop(exx.zia, exx.a23)
+    zia_gut.set_plan_obj(planunit_shop(exx.clean, pledge=True), a23_casa_rope())
+    zia_gut.set_plan_obj(planunit_shop(exx.cuisine, pledge=True), a23_casa_rope())
+    zia_gut.add_contactunit(exx.yao, contact_debt_lumen=12)
+    save_gut_file(moment_mstr_dir, zia_gut)
+
+    new_yao_job = create_listen_basis(yao_gut)
+    assert len(new_yao_job.get_agenda_dict()) == 0
+
+    # WHEN
+    print(f"{len(new_yao_job.get_plan_dict())=}")
+    listen_to_agendas_create_init_job_from_guts(moment_mstr_dir, new_yao_job)
+
+    # THEN
+    assert len(new_yao_job.get_agenda_dict()) == 2
+
+
+def test_listen_to_agendas_create_init_job_from_guts_Addscase_tasksToPerson(
+    temp3_fs,
+):
+    # ESTABLISH
+    moment_mstr_dir = str(temp3_fs)
+    yao_gut = personunit_shop(exx.yao, exx.a23)
+    zia_contact_cred_lumen = 47
+    zia_contact_debt_lumen = 41
+    zia_pool = 87
+    yao_gut.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
+    yao_gut.set_contact_respect(zia_pool)
+    save_gut_file(moment_mstr_dir, yao_gut)
+    zia_gut = personunit_shop(exx.zia, exx.a23)
+    zia_gut.set_plan_obj(planunit_shop(exx.clean, pledge=True), a23_casa_rope())
+    zia_gut.set_plan_obj(planunit_shop(exx.cuisine, pledge=True), a23_casa_rope())
+    zia_gut.add_contactunit(exx.yao, contact_debt_lumen=12)
+    clean_planunit = zia_gut.get_plan_obj(a23_clean_rope())
+    cuisine_planunit = zia_gut.get_plan_obj(a23_cuisine_rope())
+    clean_planunit.workforceunit.add_labor(exx.yao)
+    cuisine_planunit.workforceunit.add_labor(exx.yao)
+    save_gut_file(moment_mstr_dir, zia_gut)
+    new_yao_job = create_listen_basis(yao_gut)
+    assert len(new_yao_job.get_agenda_dict()) == 0
+
+    # WHEN
+    print(f"{len(new_yao_job.get_plan_dict())=}")
+    listen_to_agendas_create_init_job_from_guts(moment_mstr_dir, new_yao_job)
+
+    # THEN
+    assert len(new_yao_job.get_agenda_dict()) == 2
+
+
+def test_listen_to_agendas_create_init_job_from_guts_Addscase_tasksToPersonWithDetailsDecidedBy_contact_debt_lumen(
+    temp3_fs,
+):
+    # ESTABLISH
+    moment_mstr_dir = str(temp3_fs)
+    zia_gut = get_example_zia_speaker()
+    bob_gut = get_example_bob_speaker()
+    bob_gut.edit_plan_attr(
+        a23_cuisine_rope(),
+        reason_del_case_reason_context=a23_eat_rope(),
+        reason_del_case_reason_state=a23_hungry_rope(),
+    )
+    bob_cuisine_planunit = bob_gut.get_plan_obj(a23_cuisine_rope())
+    zia_cuisine_planunit = zia_gut.get_plan_obj(a23_cuisine_rope())
+    assert bob_cuisine_planunit != zia_cuisine_planunit
+    assert len(zia_cuisine_planunit.reasonunits) == 1
+    assert len(bob_cuisine_planunit.reasonunits) == 0
+    save_gut_file(moment_mstr_dir, zia_gut)
+    save_gut_file(moment_mstr_dir, bob_gut)
+
+    yao_gut = get_example_yao_speaker()
+    save_gut_file(moment_mstr_dir, yao_gut)
+
+    new_yao_gut1 = create_listen_basis(yao_gut)
+    a23_lasso = lassounit_shop(exx.a23)
+    assert new_yao_gut1.plan_exists(a23_cuisine_rope()) is False
+
+    # WHEN
+    yao_lessonfilehandler = lessonfilehandler_shop(moment_mstr_dir, a23_lasso, exx.yao)
+    listen_to_agendas_create_init_job_from_guts(moment_mstr_dir, new_yao_gut1)
+
+    # THEN
+    assert new_yao_gut1.plan_exists(a23_cuisine_rope())
+    new_cuisine_plan = new_yao_gut1.get_plan_obj(a23_cuisine_rope())
+    zia_contactunit = new_yao_gut1.get_contact(exx.zia)
+    bob_contactunit = new_yao_gut1.get_contact(exx.bob)
+    assert zia_contactunit.contact_debt_lumen < bob_contactunit.contact_debt_lumen
+    assert new_cuisine_plan.get_reasonunit(a23_eat_rope()) is None
+
+    yao_zia_contact_debt_lumen = 15
+    yao_bob_contact_debt_lumen = 5
+    yao_gut.add_contactunit(exx.zia, None, yao_zia_contact_debt_lumen)
+    yao_gut.add_contactunit(exx.bob, None, yao_bob_contact_debt_lumen)
+    yao_gut.set_contact_respect(100)
+    new_yao_gut2 = create_listen_basis(yao_gut)
+    assert new_yao_gut2.plan_exists(a23_cuisine_rope()) is False
+
+    # WHEN
+    listen_to_agendas_create_init_job_from_guts(moment_mstr_dir, new_yao_gut2)
+
+    # THEN
+    assert new_yao_gut2.plan_exists(a23_cuisine_rope())
+    new_cuisine_plan = new_yao_gut2.get_plan_obj(a23_cuisine_rope())
+    zia_contactunit = new_yao_gut2.get_contact(exx.zia)
+    bob_contactunit = new_yao_gut2.get_contact(exx.bob)
+    assert zia_contactunit.contact_debt_lumen > bob_contactunit.contact_debt_lumen
+    zia_eat_reasonunit = zia_cuisine_planunit.get_reasonunit(a23_eat_rope())
+    assert new_cuisine_plan.get_reasonunit(a23_eat_rope()) == zia_eat_reasonunit
+
+
+def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPerson(
+    temp3_fs,
+):  # sourcery skip: extract-duplicate-method
+    # ESTABLISH
+    moment_mstr_dir = str(temp3_fs)
+    yao_gut = personunit_shop(exx.yao, exx.a23)
+    zia_contact_cred_lumen = 47
+    zia_contact_debt_lumen = 41
+    sue_contact_cred_lumen = 57
+    sue_contact_debt_lumen = 51
+    yao_gut.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
+    yao_gut.add_contactunit(exx.sue, sue_contact_cred_lumen, sue_contact_debt_lumen)
+    yao_pool = 92
+    yao_gut.set_contact_respect(yao_pool)
+    save_gut_file(moment_mstr_dir, yao_gut)
+
+    zia_gut = personunit_shop(exx.zia, exx.a23)
+    zia_gut.set_plan_obj(planunit_shop(exx.clean, pledge=True), a23_casa_rope())
+    zia_gut.set_plan_obj(planunit_shop(exx.cuisine, pledge=True), a23_casa_rope())
+    zia_gut.add_contactunit(exx.yao, contact_debt_lumen=12)
+    clean_planunit = zia_gut.get_plan_obj(a23_clean_rope())
+    cuisine_planunit = zia_gut.get_plan_obj(a23_cuisine_rope())
+    clean_planunit.workforceunit.add_labor(exx.yao)
+    cuisine_planunit.workforceunit.add_labor(exx.yao)
+    save_gut_file(moment_mstr_dir, zia_gut)
+
+    sue_gut = personunit_shop(exx.sue, exx.a23)
+    sue_gut.set_max_tree_traverse(5)
+    zia_gut.add_contactunit(exx.yao, contact_debt_lumen=12)
+    vacuum_str = "vacuum"
+    vacuum_rope = sue_gut.make_l1_rope(vacuum_str)
+    sue_gut.set_l1_plan(planunit_shop(vacuum_str, pledge=True))
+    vacuum_planunit = sue_gut.get_plan_obj(vacuum_rope)
+    vacuum_planunit.workforceunit.add_labor(exx.yao)
+
+    egg_str = "egg first"
+    egg_rope = sue_gut.make_l1_rope(egg_str)
+    sue_gut.set_l1_plan(planunit_shop(egg_str))
+    chicken_str = "chicken first"
+    chicken_rope = sue_gut.make_l1_rope(chicken_str)
+    sue_gut.set_l1_plan(planunit_shop(chicken_str))
+    # set egg pledge is True when chicken first is False
+    sue_gut.edit_plan_attr(
+        egg_rope,
+        pledge=True,
+        reason_context=chicken_rope,
+        reason_requisite_active=True,
+    )
+    # set chick pledge is True when egg first is False
+    sue_gut.edit_plan_attr(
+        chicken_rope,
+        pledge=True,
+        reason_context=egg_rope,
+        reason_requisite_active=False,
+    )
+    save_gut_file(moment_mstr_dir, sue_gut)
+
+    # WHEN
+    new_yao_gut = create_listen_basis(yao_gut)
+    listen_to_agendas_create_init_job_from_guts(moment_mstr_dir, new_yao_gut)
+
+    # THEN irrational person is ignored
+    assert len(new_yao_gut.get_agenda_dict()) != 3
+    assert len(new_yao_gut.get_agenda_dict()) == 2
+    zia_contactunit = new_yao_gut.get_contact(exx.zia)
+    sue_contactunit = new_yao_gut.get_contact(exx.sue)
+    print(f"{sue_contactunit.contact_debt_lumen=}")
+    print(f"{sue_contactunit.irrational_contact_debt_lumen=}")
+    assert zia_contactunit.irrational_contact_debt_lumen == 0
+    assert sue_contactunit.irrational_contact_debt_lumen == 51
+
+
+def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorPerson(
+    temp3_fs,
+):
+    # ESTABLISH
+    moment_mstr_dir = str(temp3_fs)
+    a23_lasso = lassounit_shop(exx.a23)
+    yao_gut_path = create_gut_path(moment_mstr_dir, a23_lasso, exx.yao)
+    delete_dir(yao_gut_path)  # don't know why I have to do this...
+    print(f"{os_path_exists(yao_gut_path)=}")
+    yao_gut = personunit_shop(exx.yao, exx.a23)
+    zia_contact_cred_lumen = 47
+    sue_contact_cred_lumen = 57
+    zia_contact_debt_lumen = 41
+    sue_contact_debt_lumen = 51
+    yao_gut.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
+    yao_gut.add_contactunit(exx.sue, sue_contact_cred_lumen, sue_contact_debt_lumen)
+    yao_pool = 92
+    yao_gut.set_contact_respect(yao_pool)
+    save_gut_file(moment_mstr_dir, yao_gut)
+
+    zia_gut = personunit_shop(exx.zia, exx.a23)
+    zia_gut.set_plan_obj(planunit_shop(exx.clean, pledge=True), a23_casa_rope())
+    zia_gut.set_plan_obj(planunit_shop(exx.cuisine, pledge=True), a23_casa_rope())
+    zia_gut.add_contactunit(exx.yao, contact_debt_lumen=12)
+    clean_planunit = zia_gut.get_plan_obj(a23_clean_rope())
+    cuisine_planunit = zia_gut.get_plan_obj(a23_cuisine_rope())
+    clean_planunit.workforceunit.add_labor(exx.yao)
+    cuisine_planunit.workforceunit.add_labor(exx.yao)
+    save_gut_file(moment_mstr_dir, zia_gut)
+
+    # WHEN
+    new_yao_gut = create_listen_basis(yao_gut)
+    listen_to_agendas_create_init_job_from_guts(moment_mstr_dir, new_yao_gut)
+
+    # THEN irrational person is ignored
+    assert len(new_yao_gut.get_agenda_dict()) != 3
+    assert len(new_yao_gut.get_agenda_dict()) == 2
+    zia_contactunit = new_yao_gut.get_contact(exx.zia)
+    sue_contactunit = new_yao_gut.get_contact(exx.sue)
+    print(f"{sue_contactunit.contact_debt_lumen=}")
+    print(f"{sue_contactunit.inallocable_contact_debt_lumen=}")
+    assert zia_contactunit.inallocable_contact_debt_lumen == 0
+    assert sue_contactunit.inallocable_contact_debt_lumen == 51

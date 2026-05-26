@@ -1,11 +1,11 @@
-from ch07_person_logic.person_main import personunit_shop
-from ch13_time.epoch_main import (
+from ch08_person_logic.person_main import personunit_shop
+from ch14_time.epoch_main import (
     add_epoch_planunit,
     get_default_epoch_config_dict,
     get_epoch_rope,
 )
-from ch13_time.epoch_reason import set_epoch_base_case_dayly, set_epoch_base_case_weekly
-from ch13_time.test._util.ch13_examples import Ch13ExampleStrs as wx
+from ch14_time.epoch_reason import set_epoch_base_case_dayly, set_epoch_base_case_weekly
+from ch14_time.test._util.ch14_examples import Ch14ExampleStrs as wx
 from ch31_kpi.gcalendar import (
     create_gcalendar_csv_from_list,
     create_gcalendar_csv_from_person,

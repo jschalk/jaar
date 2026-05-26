@@ -42,7 +42,7 @@ keg2_app
 
 The app window will open and you are ready to go.
 
-![App demo](demo.gif)
+![App demo](https://raw.githubusercontent.com/jschalk/keg/main/demo.gif)
 
 ---
 
@@ -149,8 +149,6 @@ The internal data model is built around the following object hierarchy:
 ### Development
 
 keg was built using Test-Driven Development. Every feature has a corresponding test. This is mostly a one-man project — Femi has significantly helped.
-# TODO remove this once it's fixed.
-pip deployment has been a challenge. Hopefully __init__.py file creation gets rid of failed file reference errors. 
 ---
 
 ## Acknowledgements
