@@ -16,9 +16,9 @@ from ch16_translate.translate_config import (
     get_translate_args_obj_types,
     translateable_obj_types,
 )
-from ch18_etl_config._ref.ch18_path import create_moment_ote1_csv_path
-from ch18_etl_config.etl_csv import save_to_split_csvs
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config._ref.ch22_path import create_moment_ote1_csv_path
+from ch22_etl_config.etl_csv import save_to_split_csvs
+from ch22_etl_config.etl_sqlstr import (
     CREATE_MOMENT_OTE1_AGG_SQLSTR,
     INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR,
     create_update_heard_raw_empty_inx_col_sqlstr,

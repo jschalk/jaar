@@ -1,7 +1,7 @@
 from ch00_py.db_toolbox import create_type_reference_insert_sqlstr
 from ch13_time.test._util.ch13_examples import Ch13ExampleStrs as wx
-from ch18_etl_config.etl_config import create_prime_tablename
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config.etl_config import create_prime_tablename
+from ch22_etl_config.etl_sqlstr import (
     create_prime_db_table,
     create_prime_tablename as prime_tbl,
     get_update_prncase_range_sqlstr,

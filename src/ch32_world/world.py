@@ -1,7 +1,7 @@
 from ch00_py.file_toolbox import create_path, delete_dir, set_dir
 from ch17_brick.brick_db_tool import export_db_to_excel
-from ch18_etl_config._ref.ch18_path import create_moment_mstr_path, create_world_db_path
-from ch18_etl_config.brick_collector import reorder_etl_db_sheets
+from ch22_etl_config._ref.ch22_path import create_moment_mstr_path, create_world_db_path
+from ch22_etl_config.brick_collector import reorder_etl_db_sheets
 from ch23_idea_src.idea2brick import ideas_sheets_to_brick_sheets
 from ch24_etl_brick.etl_brick_main import (
     etl_brick_dfs_to_brixk_raw_tables,

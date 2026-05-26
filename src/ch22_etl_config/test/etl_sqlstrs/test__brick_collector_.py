@@ -1,13 +1,13 @@
 from ch00_py.file_toolbox import create_path
 from ch17_brick.brick_db_tool import save_sheet
-from ch18_etl_config.brick_collector import (
+from ch22_etl_config.brick_collector import (
     BrickFileRef,
     get_all_brickfilerefs,
     get_all_excel_bricksheets,
     get_etl_db_sheets_tier2_order,
     reorder_etl_db_sheets,
 )
-from ch99_glossary.ch_keyword import Ch18Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch22Keywords as kw, ExampleStrs as exx
 from pandas import (
     DataFrame,
     ExcelWriter as pandas_ExcelWriter,

@@ -2,8 +2,8 @@ from ch00_py.db_toolbox import get_row_count, get_table_columns
 from ch14_moment.moment_config import get_moment_dimens
 from ch15_nabu.nabu_config import get_nabu_dimens
 from ch17_brick.brick_config import get_brick_config_dict, get_default_sorted_list
-from ch18_etl_config.etl_config import get_dimen_abbv7
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config.etl_config import get_dimen_abbv7
+from ch22_etl_config.etl_sqlstr import (
     create_prime_tablename as prime_tbl,
     create_sound_and_heard_tables,
     get_insert_heard_vld_sqlstrs,

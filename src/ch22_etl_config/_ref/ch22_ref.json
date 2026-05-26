@@ -1,7 +1,7 @@
 {
   "chapter_blurb": "Defines the tools that use Bricks to build MomentUnits.", 
   "chapter_content": "All the tools used by WorldDirs to create MomentUnits.", 
-  "chapter_description": "ch18_etl_config", 
-  "chapter_number": 18, 
+  "chapter_description": "ch22_etl_config", 
+  "chapter_number": 22, 
   "ontology summary": "Defines the tools that move data through pipelines"
 }

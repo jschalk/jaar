@@ -1,4 +1,4 @@
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config.etl_sqlstr import (
     create_prime_tablename as prime_tbl,
     create_sound_and_heard_tables,
 )

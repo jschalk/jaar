@@ -3,7 +3,7 @@ from ch16_translate.translate_main import (
     default_knot_if_None,
     default_unknown_str_if_None,
 )
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config.etl_sqlstr import (
     CREATE_TRLCORE_SOUND_AGG_SQLSTR,
     CREATE_TRLCORE_SOUND_RAW_SQLSTR,
     CREATE_TRLCORE_SOUND_VLD_SQLSTR,

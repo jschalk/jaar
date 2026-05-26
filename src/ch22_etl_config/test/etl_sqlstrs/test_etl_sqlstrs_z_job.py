@@ -2,12 +2,12 @@ from ch00_py.db_toolbox import db_table_exists, get_create_table_sqlstr, get_db_
 from ch07_person_logic.person_config import get_person_config_dict
 from ch17_brick.brick_config import get_brick_sqlite_types
 from ch17_brick.brick_db_tool import get_default_sorted_list
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config.etl_sqlstr import (
     create_job_tables,
     create_prime_tablename as prime_table,
     get_job_create_table_sqlstrs,
 )
-from ch99_glossary.ch_keyword import Ch18Keywords as kw
+from ch99_glossary.ch_keyword import Ch22Keywords as kw
 from sqlite3 import Cursor
 
 

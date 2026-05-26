@@ -4,8 +4,8 @@ from ch09_person_lesson.lasso import lassounit_shop
 from ch10_person_listen.keep_tool import save_job_file
 from ch14_moment.moment_main import momentunit_shop, save_moment_file
 from ch17_brick.brick_db_tool import get_sheet_names, openpyxl_load_workbook
-from ch18_etl_config._ref.ch18_path import create_moment_mstr_path, create_world_db_path
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config._ref.ch22_path import create_moment_mstr_path, create_world_db_path
+from ch22_etl_config.etl_sqlstr import (
     create_prime_tablename as prime_tbl,
     create_sound_and_heard_tables,
 )

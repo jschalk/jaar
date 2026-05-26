@@ -1,5 +1,5 @@
 from ch00_py.db_toolbox import get_table_columns
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config.etl_sqlstr import (
     create_prime_tablename as prime_tbl,
     create_sound_and_heard_tables,
     create_update_heard_raw_empty_inx_col_sqlstr,

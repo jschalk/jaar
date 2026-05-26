@@ -24,8 +24,8 @@ from ch17_brick.brick_db_tool import (
     create_brick_sorted_table,
     get_default_sorted_list,
 )
-from ch18_etl_config.brick_collector import BrickFileRef, get_all_brickfilerefs
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config.brick_collector import BrickFileRef, get_all_brickfilerefs
+from ch22_etl_config.etl_sqlstr import (
     create_prime_tablename,
     create_sound_and_heard_tables,
 )

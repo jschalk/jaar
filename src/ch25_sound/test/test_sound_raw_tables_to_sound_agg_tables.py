@@ -1,5 +1,5 @@
 from ch00_py.db_toolbox import get_row_count, get_table_columns
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config.etl_sqlstr import (
     CREATE_TRLROPE_SOUND_RAW_SQLSTR,
     create_prime_tablename,
     create_sound_and_heard_tables,

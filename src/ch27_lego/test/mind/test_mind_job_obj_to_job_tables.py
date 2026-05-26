@@ -16,7 +16,7 @@ from ch05_reason.reason_main import caseunit_shop, factheir_shop, reasonheir_sho
 from ch06_plan.healer import healerunit_shop
 from ch06_plan.plan import planunit_shop
 from ch07_person_logic.person_main import personunit_shop
-from ch18_etl_config.etl_sqlstr import create_job_tables
+from ch22_etl_config.etl_sqlstr import create_job_tables
 from ch27_lego.lego_job2db import (
     ObjKeysHolder,
     insert_job_obj,

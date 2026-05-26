@@ -1,4 +1,4 @@
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config.etl_sqlstr import (
     CREATE_MMTMONT_SOUND_AGG_SQLSTR,
     CREATE_PRNCONT_PUT_SOUND_AGG_SQLSTR,
     CREATE_TRLCORE_SOUND_VLD_SQLSTR,

@@ -5,8 +5,8 @@ from ch09_person_lesson._ref.ch09_path import create_moment_json_path
 from ch09_person_lesson.lasso import lassounit_shop
 from ch14_moment.moment_config import get_moment_dimens
 from ch14_moment.moment_main import get_momentunit_from_dict
-from ch18_etl_config.etl_config import get_dimen_abbv7
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config.etl_config import get_dimen_abbv7
+from ch22_etl_config.etl_sqlstr import (
     create_prime_tablename,
     get_moment_heard_select1_sqlstrs,
 )

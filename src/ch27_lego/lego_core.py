@@ -41,12 +41,12 @@ from ch14_moment.moment_cell import (
 )
 from ch14_moment.moment_main import open_moment_file
 from ch17_brick.brick_config import get_brick_sqlite_types
-from ch18_etl_config._ref.ch18_path import (
+from ch22_etl_config._ref.ch22_path import (
     create_last_run_metrics_path,
     create_moment_ote1_csv_path,
     create_moment_ote1_json_path,
 )
-from ch18_etl_config.etl_sqlstr import create_job_tables, create_prime_tablename
+from ch22_etl_config.etl_sqlstr import create_job_tables, create_prime_tablename
 from ch27_lego.lego_job2db import insert_job_obj
 from copy import deepcopy as copy_deepcopy
 from os.path import exists as os_path_exists

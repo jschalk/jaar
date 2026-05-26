@@ -11,7 +11,7 @@ from ch14_moment._ref.ch14_path import (
 )
 from ch14_moment.moment_main import get_momentunit_from_dict, momentunit_shop
 from ch14_moment.test._util.ch14_examples import example_casa_floor_clean_factunit
-from ch18_etl_config._ref.ch18_path import (
+from ch22_etl_config._ref.ch22_path import (
     create_moment_mstr_path,
     create_moment_ote1_json_path,
 )

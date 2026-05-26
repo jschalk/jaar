@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import create_path
 from ch17_brick.brick_config import get_brick_config_dict
-from ch18_etl_config.etl_config import (
+from ch22_etl_config.etl_config import (
     ALL_DIMEN_ABBV2,
     ALL_DIMEN_ABBV7,
     create_prime_table_sqlstr,
@@ -22,7 +22,7 @@ from ch18_etl_config.etl_config import (
     remove_otx_columns,
     remove_staging_columns,
 )
-from ch99_glossary.ch_keyword import Ch18Keywords as kw
+from ch99_glossary.ch_keyword import Ch22Keywords as kw
 from os.path import join as os_path_join
 
 
@@ -204,7 +204,7 @@ def test_get_all_dimen_columns_set_ReturnsObj_Scenario1_translate_core_Dimens():
 
 def test_etl_stage_types_config_path_ReturnsObj():
     # ESTABLISH
-    expected_path = create_path("src", "ch18_etl_config", "etl_stage_types_config.json")
+    expected_path = create_path("src", "ch22_etl_config", "etl_stage_types_config.json")
     # WHEN / THEN
     assert etl_stage_types_config_path() == expected_path
 
@@ -296,7 +296,7 @@ def test_get_ordered_stage_types_ReturnsObj():
 def test_etl_brick_category_config_path_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     expected_path = create_path(
-        "src", "ch18_etl_config", "etl_brick_category_config.json"
+        "src", "ch22_etl_config", "etl_brick_category_config.json"
     )
     assert etl_brick_category_config_path() == expected_path
 

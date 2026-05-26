@@ -3,8 +3,8 @@ from ch13_time.epoch_main import DEFAULT_EPOCH_LENGTH, get_c400_constants
 from ch13_time.test._util.ch13_examples import Ch13ExampleStrs as wx
 from ch15_nabu.nabu_config import get_nabu_config_dict
 from ch17_brick.brick_config import get_dimens_with_brick_element
-from ch18_etl_config.etl_config import create_prime_tablename
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config.etl_config import create_prime_tablename
+from ch22_etl_config.etl_sqlstr import (
     create_prime_db_table,
     create_prime_tablename as prime_tbl,
     get_update_heard_agg_moment_timenum_sqlstrs,

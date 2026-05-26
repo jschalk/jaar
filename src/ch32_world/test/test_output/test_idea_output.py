@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import create_path, set_dir
 from ch17_brick.brick_db_tool import get_sheet_names, save_sheet
-from ch18_etl_config._ref.ch18_path import create_ideas_dir_path
+from ch22_etl_config._ref.ch22_path import create_ideas_dir_path
 from ch30_idea_dst._ref.ch30_path import create_lego0001_path
 from ch32_world.world import brick_sheets_to_lego_mstr, create_ideas, worlddir_shop
 from ch99_glossary.ch_keyword import Ch32Keywords as kw, ExampleStrs as exx

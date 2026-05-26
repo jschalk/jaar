@@ -13,7 +13,7 @@ from ch16_translate.translate_config import (
 )
 from ch16_translate.translate_main import default_unknown_str_if_None
 from ch17_brick.brick_config import get_brick_dimen_ref
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config.etl_sqlstr import (
     create_insert_into_translate_core_raw_sqlstr,
     create_insert_missing_spark_face_into_translate_core_vld_sqlstr,
     create_insert_translate_core_agg_into_vld_sqlstr,

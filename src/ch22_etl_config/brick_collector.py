@@ -1,8 +1,8 @@
 from ch00_py.file_toolbox import create_path
 from ch17_brick.brick_config import get_brick_types, get_quick_bricks_column_ref
 from ch17_brick.brick_db_tool import get_all_excel_sheet_names
-from ch18_etl_config._ref.ch18_semantic_types import SheetName
-from ch18_etl_config.etl_config import get_etl_stage_types_config_dict
+from ch22_etl_config._ref.ch22_semantic_types import SheetName
+from ch22_etl_config.etl_config import get_etl_stage_types_config_dict
 from dataclasses import dataclass
 from pandas import (
     DataFrame,

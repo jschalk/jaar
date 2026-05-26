@@ -1,7 +1,7 @@
 from ch00_py.file_toolbox import create_path
 from ch04_rope.rope import create_rope
 from ch09_person_lesson.lasso import lassounit_shop
-from ch18_etl_config._ref.ch18_path import (
+from ch22_etl_config._ref.ch22_path import (
     create_ideas_dir_path,
     create_ideas_person_dir_path,
     create_last_run_metrics_path,
@@ -10,7 +10,7 @@ from ch18_etl_config._ref.ch18_path import (
     create_moment_ote1_json_path,
     create_world_db_path,
 )
-from ch99_glossary.ch_keyword import Ch18Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch22Keywords as kw, ExampleStrs as exx
 from inspect import getdoc as inspect_getdoc
 from pytest import mark as pytest_mark
 
@@ -20,7 +20,7 @@ LAST_RUN_METRICS_JSON_FILENAME = "last_run_metrics.json"
 WORLD_DB_FILENAME = "world.db"
 
 
-def test_ch18_path_constants_ReturnsObj():
+def test_ch22_path_constants_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert MOMENT_OTE1_AGG_CSV_FILENAME == "moment_ote1_agg.csv"
     assert MOMENT_OTE1_AGG_JSON_FILENAME == "moment_ote1_agg.json"

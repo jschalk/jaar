@@ -1,5 +1,5 @@
 from ch14_moment.moment_main import get_momentunit_from_dict
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config.etl_sqlstr import (
     create_prime_tablename,
     create_sound_and_heard_tables,
 )

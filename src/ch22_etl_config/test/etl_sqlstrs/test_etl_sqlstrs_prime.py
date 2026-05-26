@@ -15,13 +15,13 @@ from ch16_translate.translate_config import (
     set_translateable_otx_inx_args,
 )
 from ch17_brick.brick_config import get_brick_config_dict, get_default_sorted_list
-from ch18_etl_config.etl_config import (
+from ch22_etl_config.etl_config import (
     create_prime_table_sqlstr,
     get_dimen_abbv7,
     get_etl_category_stages_dict,
     get_etl_stage_types_config_dict,
 )
-from ch18_etl_config.etl_sqlstr import (
+from ch22_etl_config.etl_sqlstr import (
     create_insert_into_translate_core_raw_sqlstr,
     create_insert_missing_spark_face_into_translate_core_vld_sqlstr,
     create_insert_translate_core_agg_into_vld_sqlstr,
@@ -37,7 +37,7 @@ from ch18_etl_config.etl_sqlstr import (
     get_person_heard_vld_tablenames,
     get_prime_create_table_sqlstrs,
 )
-from ch99_glossary.ch_keyword import Ch18Keywords as kw
+from ch99_glossary.ch_keyword import Ch22Keywords as kw
 from sqlite3 import Cursor
 
 
