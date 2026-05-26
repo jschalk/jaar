@@ -1,10 +1,3 @@
-from ch00_py.db_toolbox import (
-    create_table_from_columns,
-    create_table_from_csv,
-    db_table_exists,
-    get_table_columns,
-    insert_csv,
-)
 from ch00_py.dict_toolbox import set_in_nested_dict
 from ch00_py.file_toolbox import (
     create_path,
@@ -21,6 +14,13 @@ from ch17_translate.translate_config import (
     get_translateable_args,
 )
 from ch17_translate.translate_main import TranslateUnit, get_translateunit_from_dict
+from ch18_db_tool.db_toolbox import (
+    create_table_from_columns,
+    create_table_from_csv,
+    db_table_exists,
+    get_table_columns,
+    insert_csv,
+)
 from ch20_brick._ref.ch20_path import get_excel_reader_config_path
 from ch20_brick._ref.ch20_semantic_types import FaceName, SheetName, SparkInt
 from ch20_brick.brick_config import (

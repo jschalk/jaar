@@ -3,7 +3,7 @@ from ch00_py.chapter_desc_main import (
     get_chapter_desc_str_number,
 )
 from ch00_py.file_toolbox import create_path, get_dir_filenames
-from ch00_py.notebook_toolbox import get_top_level_functions
+from ch18_db_tool.notebook_toolbox import get_top_level_functions
 from ch97_docs_builder.doc_builder import get_chapter_descs
 from ch98_linter.style import (
     check_all_test_functions_are_formatted,

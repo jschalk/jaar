@@ -1,4 +1,11 @@
-from ch00_py.db_toolbox import (
+from ch09_person_atom.atom_config import get_person_dimens
+from ch15_moment.moment_config import get_moment_dimens
+from ch16_nabu.nabu_config import get_nabu_dimens
+from ch17_translate.translate_config import (
+    get_translate_dimens,
+    set_translateable_otx_inx_args,
+)
+from ch18_db_tool.db_toolbox import (
     create_insert_into_clause_str as get_insert_sql,
     create_select_query as get_select_sql,
     create_table2table_agg_insert_query,
@@ -6,13 +13,6 @@ from ch00_py.db_toolbox import (
     db_table_exists,
     get_db_tables,
     get_table_columns,
-)
-from ch09_person_atom.atom_config import get_person_dimens
-from ch15_moment.moment_config import get_moment_dimens
-from ch16_nabu.nabu_config import get_nabu_dimens
-from ch17_translate.translate_config import (
-    get_translate_dimens,
-    set_translateable_otx_inx_args,
 )
 from ch20_brick.brick_config import get_brick_config_dict, get_default_sorted_list
 from ch22_etl_config.etl_config import (

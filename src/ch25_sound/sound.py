@@ -1,8 +1,3 @@
-from ch00_py.db_toolbox import (
-    create_update_inconsistency_error_query,
-    delete_all_duplicate_rows,
-    get_table_columns,
-)
 from ch05_rope.rope import default_knot_if_None
 from ch17_translate.translate_config import (
     get_translate_labelterm_args,
@@ -12,6 +7,11 @@ from ch17_translate.translate_config import (
     get_translates_column_ref,
 )
 from ch17_translate.translate_main import default_unknown_str_if_None
+from ch18_db_tool.db_toolbox import (
+    create_update_inconsistency_error_query,
+    delete_all_duplicate_rows,
+    get_table_columns,
+)
 from ch20_brick.brick_config import get_brick_dimen_ref
 from ch22_etl_config.etl_sqlstr import (
     create_insert_into_translate_core_raw_sqlstr,

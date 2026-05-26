@@ -1,4 +1,5 @@
-from ch00_py.db_toolbox import (
+from ch00_py.file_toolbox import create_path
+from ch18_db_tool.db_toolbox import (
     create_insert_into_clause_str,
     create_select_query,
     create_table_from_columns,
@@ -11,7 +12,6 @@ from ch00_py.db_toolbox import (
     get_nonconvertible_columns,
     get_table_columns,
 )
-from ch00_py.file_toolbox import create_path
 from ch20_brick.brick_config import (
     get_brick_format_filename,
     get_brick_sqlite_types,

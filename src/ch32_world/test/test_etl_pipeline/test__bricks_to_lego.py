@@ -1,15 +1,9 @@
-from ch00_py.db_toolbox import (
-    db_table_exists,
-    get_all_tables_with_duplicates,
-    get_row_count,
-)
 from ch00_py.file_toolbox import (
     count_dirs_files,
     create_path,
     get_level1_dirs,
     save_file,
 )
-from ch00_py.test.tool_db.test_db_tool_ import print_table
 from ch05_rope.rope import create_rope_from_labels as init_rope
 from ch10_person_lesson._ref.ch10_path import create_gut_path, create_moment_json_path
 from ch10_person_lesson.lasso import lassounit_shop
@@ -22,6 +16,12 @@ from ch12_bud._ref.ch12_path import (
 from ch15_moment._ref.ch15_path import (
     create_bud_contact_mandate_ledger_path as bud_mandate,
 )
+from ch18_db_tool.db_toolbox import (
+    db_table_exists,
+    get_all_tables_with_duplicates,
+    get_row_count,
+)
+from ch18_db_tool.test.tool_db.test_db_tool_ import print_table
 from ch20_brick.brick_db_tool import save_sheet
 from ch22_etl_config._ref.ch22_path import (
     create_last_run_metrics_path,

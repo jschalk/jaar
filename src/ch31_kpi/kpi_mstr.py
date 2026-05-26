@@ -1,4 +1,3 @@
-from ch00_py.db_toolbox import get_db_tables
 from ch00_py.file_toolbox import create_path, get_level1_dirs, save_file, set_dir
 from ch05_rope.rope import create_rope
 from ch10_person_lesson._ref.ch10_path import create_moments_dir_path
@@ -6,6 +5,7 @@ from ch10_person_lesson.lasso import lassounit_shop
 from ch14_time.calendar_markdown import get_calendarmarkdown_str
 from ch15_moment.moment_frame import get_moment_timeshoe
 from ch15_moment.moment_main import open_moment_file
+from ch18_db_tool.db_toolbox import get_db_tables
 from ch20_brick.brick_db_tool import save_table_to_csv
 from ch31_kpi.kpi_sqlstr import get_create_kpi001_sqlstr, get_create_kpi002_sqlstr
 from sqlite3 import Cursor as sqlite3_Cursor, connect as sqlite3_connect
