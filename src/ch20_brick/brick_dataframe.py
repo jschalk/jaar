@@ -5,8 +5,8 @@ from ch00_py.dict_toolbox import (
     get_positional_dict,
 )
 from ch07_person_logic.person_main import PersonUnit
-from ch08_person_atom.atom_main import PersonAtom, atomrow_shop
-from ch09_person_lesson.delta import (
+from ch09_person_atom.atom_main import PersonAtom, atomrow_shop
+from ch10_person_lesson.delta import (
     PersonDelta,
     get_dimens_cruds_persondelta,
     persondelta_shop,

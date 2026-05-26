@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import open_json, save_json
-from ch09_person_lesson._ref.ch09_path import create_moment_json_path
-from ch09_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson._ref.ch10_path import create_moment_json_path
+from ch10_person_lesson.lasso import lassounit_shop
 from ch12_bud._ref.ch12_path import (
     create_cell_contact_mandate_ledger_path as cell_mandate_path,
 )

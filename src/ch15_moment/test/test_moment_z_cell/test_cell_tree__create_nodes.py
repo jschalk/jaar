@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import create_path
-from ch09_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lasso import lassounit_shop
 from ch12_bud._ref.ch12_path import (
     create_cell_dir_path as cell_dir,
     create_cell_json_path as node_path,

@@ -4,7 +4,7 @@ from ch07_person_logic.person_config import (
     get_all_person_calc_args,
     get_person_calc_args_sqlite_datatype_dict,
 )
-from ch08_person_atom.atom_config import (
+from ch09_person_atom.atom_config import (
     get_all_person_dimen_delete_keys,
     get_atom_args_dimen_mapping,
     get_atom_config_dict,

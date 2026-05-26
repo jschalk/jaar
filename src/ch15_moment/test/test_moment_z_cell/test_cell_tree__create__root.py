@@ -1,9 +1,9 @@
 from ch00_py.file_toolbox import count_dirs_files, open_json, save_json
-from ch09_person_lesson._ref.ch09_path import (
+from ch10_person_lesson._ref.ch10_path import (
     create_moment_json_path,
     create_moment_persons_dir_path,
 )
-from ch09_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lasso import lassounit_shop
 from ch12_bud._ref.ch12_path import create_cell_json_path
 from ch12_bud.bud_main import DEFAULT_CELLDEPTH
 from ch15_moment.moment_main import _get_ote1_max_past_spark_num, momentunit_shop

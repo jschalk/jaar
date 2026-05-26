@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import create_path
 from ch04_rope.rope import create_rope
-from ch09_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lasso import lassounit_shop
 from ch22_etl_config._ref.ch22_path import (
     create_ideas_dir_path,
     create_ideas_person_dir_path,

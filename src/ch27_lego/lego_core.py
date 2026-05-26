@@ -10,12 +10,12 @@ from ch00_py.file_toolbox import (
 )
 from ch04_rope.rope import create_rope
 from ch07_person_logic.person_main import PersonUnit, personunit_shop
-from ch08_person_atom.atom_config import get_person_dimens
-from ch08_person_atom.atom_main import personatom_shop
-from ch09_person_lesson._ref.ch09_path import create_gut_path, create_moments_dir_path
-from ch09_person_lesson.delta import get_minimal_persondelta
-from ch09_person_lesson.lasso import LassoUnit, lassounit_shop
-from ch09_person_lesson.lesson_main import (
+from ch09_person_atom.atom_config import get_person_dimens
+from ch09_person_atom.atom_main import personatom_shop
+from ch10_person_lesson._ref.ch10_path import create_gut_path, create_moments_dir_path
+from ch10_person_lesson.delta import get_minimal_persondelta
+from ch10_person_lesson.lasso import LassoUnit, lassounit_shop
+from ch10_person_lesson.lesson_main import (
     LessonUnit,
     get_lessonunit_from_dict,
     lessonunit_shop,

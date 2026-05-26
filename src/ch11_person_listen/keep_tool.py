@@ -7,8 +7,8 @@ from ch00_py.file_toolbox import (
     set_dir,
 )
 from ch07_person_logic.person_main import PersonUnit, get_personunit_from_dict
-from ch09_person_lesson.lasso import LassoUnit, lassounit_shop
-from ch09_person_lesson.lesson_filehandler import (
+from ch10_person_lesson.lasso import LassoUnit, lassounit_shop
+from ch10_person_lesson.lesson_filehandler import (
     open_gut_file,
     open_person_file,
     save_person_file,

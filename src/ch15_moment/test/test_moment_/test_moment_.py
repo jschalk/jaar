@@ -4,9 +4,9 @@ from ch04_rope.rope import default_knot_if_None
 from ch06_plan.healer import healerunit_shop
 from ch06_plan.plan import planunit_shop
 from ch07_person_logic.person_main import personunit_shop
-from ch09_person_lesson._ref.ch09_path import create_person_dir_path
-from ch09_person_lesson.lasso import lassounit_shop
-from ch09_person_lesson.lesson_filehandler import (
+from ch10_person_lesson._ref.ch10_path import create_person_dir_path
+from ch10_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lesson_filehandler import (
     gut_file_exists,
     open_gut_file,
     save_gut_file,

@@ -13,11 +13,11 @@ def test_get_keywords_by_chapter_md_SetsFile_CheckMarkdownHasAllStrFunctions():
     # THEN
     print(keywords_by_chapter_md)
     assert keywords_by_chapter_md.find("words by Chapter") > 0
-    ch09_person_lesson_index = keywords_by_chapter_md.find("ch09_person_lesson")
-    assert ch09_person_lesson_index > 0
+    ch10_person_lesson_index = keywords_by_chapter_md.find("ch10_person_lesson")
+    assert ch10_person_lesson_index > 0
     spark_num_index = keywords_by_chapter_md.find("spark_num")
     assert spark_num_index > 0
-    assert ch09_person_lesson_index < spark_num_index
+    assert ch10_person_lesson_index < spark_num_index
 
 
 def test_save_keywords_by_chapter_md_SavesFile_get_keywords_by_chapter_md_ToGivenDirectory(

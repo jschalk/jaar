@@ -1,11 +1,11 @@
 from ch04_rope.rope import RopeTerm, create_rope, create_rope_from_labels
 from ch07_person_logic.person_main import PersonUnit, personunit_shop, planunit_shop
-from ch09_person_lesson.lasso import lassounit_shop
-from ch09_person_lesson.lesson_filehandler import (
+from ch10_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lesson_filehandler import (
     LessonFileHandler,
     lessonfilehandler_shop,
 )
-from ch09_person_lesson.test._util.ch09_examples import get_texas_rope
+from ch10_person_lesson.test._util.ch10_examples import get_texas_rope
 from ch99_glossary.ch_keyword import Ch11Keywords as kw, ExampleStrs as exx
 
 

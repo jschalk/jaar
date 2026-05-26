@@ -1,9 +1,9 @@
 from ch00_py.file_toolbox import count_files, create_path, get_level1_dirs, save_json
-from ch09_person_lesson._ref.ch09_path import (
+from ch10_person_lesson._ref.ch10_path import (
     create_moment_json_path,
     create_moments_dir_path,
 )
-from ch09_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lasso import lassounit_shop
 from ch14_time.epoch_main import epochunit_shop
 from ch14_time.test._util.ch14_examples import (
     get_creg_config,

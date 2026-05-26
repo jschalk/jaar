@@ -7,7 +7,7 @@ from ch00_py.db_toolbox import (
     get_db_tables,
     get_table_columns,
 )
-from ch08_person_atom.atom_config import get_person_dimens
+from ch09_person_atom.atom_config import get_person_dimens
 from ch15_moment.moment_config import get_moment_dimens
 from ch16_nabu.nabu_config import get_nabu_dimens
 from ch17_translate.translate_config import (

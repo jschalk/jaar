@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import create_path
-from ch09_person_lesson.lasso import LassoUnit
+from ch10_person_lesson.lasso import LassoUnit
 from ch12_bud._ref.ch12_path import create_bud_dir_path
 from ch15_moment._ref.ch15_semantic_types import PersonName
 

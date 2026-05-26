@@ -5,7 +5,7 @@ from ch07_person_logic.test._util.ch07_examples import (
     get_personunit_irrational_example,
     get_personunit_with_4_levels,
 )
-from ch09_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lasso import lassounit_shop
 from ch12_bud._ref.ch12_path import (
     create_budunit_json_path,
     create_cell_contact_mandate_ledger_path,

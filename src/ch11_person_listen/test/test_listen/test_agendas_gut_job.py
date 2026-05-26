@@ -1,9 +1,9 @@
 from ch00_py.file_toolbox import delete_dir
 from ch06_plan.plan import planunit_shop
 from ch07_person_logic.person_main import personunit_shop
-from ch09_person_lesson._ref.ch09_path import create_gut_path
-from ch09_person_lesson.lasso import lassounit_shop
-from ch09_person_lesson.lesson_filehandler import lessonfilehandler_shop, save_gut_file
+from ch10_person_lesson._ref.ch10_path import create_gut_path
+from ch10_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lesson_filehandler import lessonfilehandler_shop, save_gut_file
 from ch11_person_listen.keep_tool import save_job_file
 from ch11_person_listen.listen_main import (
     create_listen_basis,

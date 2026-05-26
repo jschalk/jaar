@@ -1,8 +1,8 @@
 from ch06_plan.healer import healerunit_shop
 from ch06_plan.plan import planunit_shop
 from ch07_person_logic.person_graphic import display_plantree
-from ch09_person_lesson.lasso import lassounit_shop
-from ch09_person_lesson.lesson_filehandler import (
+from ch10_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lesson_filehandler import (
     lessonfilehandler_shop,
     open_gut_file,
     save_gut_file,

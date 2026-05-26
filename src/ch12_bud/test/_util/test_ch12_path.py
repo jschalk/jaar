@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import create_path
 from ch04_rope.rope import create_rope
-from ch09_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lasso import lassounit_shop
 from ch12_bud._ref.ch12_path import (
     BUDUNIT_FILENAME,
     CELL_MANDATE_FILENAME,

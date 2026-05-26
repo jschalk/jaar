@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import open_file, open_json, save_file
-from ch09_person_lesson.lasso import lassounit_shop
-from ch09_person_lesson.lesson_main import get_lessonunit_from_dict, lessonunit_shop
+from ch10_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lesson_main import get_lessonunit_from_dict, lessonunit_shop
 from ch12_bud._ref.ch12_path import (
     create_person_spark_dir_path as person_spark_dir,
     create_spark_all_lesson_path as all_lesson_path,

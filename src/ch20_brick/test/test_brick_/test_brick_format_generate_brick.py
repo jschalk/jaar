@@ -2,7 +2,7 @@ from ch04_rope.rope import create_rope
 from ch06_plan.plan import planunit_shop
 from ch07_person_logic.person_main import personunit_shop
 from ch07_person_logic.test._util.ch07_examples import personunit_v001
-from ch08_person_atom.atom_main import personatom_shop
+from ch09_person_atom.atom_main import personatom_shop
 from ch20_brick.brick_config import BrickFormatsEnum
 from ch20_brick.brick_dataframe import (
     create_brick_df,

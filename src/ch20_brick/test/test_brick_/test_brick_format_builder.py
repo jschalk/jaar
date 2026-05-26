@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import save_json
-from ch08_person_atom.atom_config import get_atom_config_args
+from ch09_person_atom.atom_config import get_atom_config_args
 from ch20_brick._ref.ch20_doc_builder import (
     get_brick_formats_md,
     get_brick_md,

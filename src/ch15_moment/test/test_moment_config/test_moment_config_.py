@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import create_path
-from ch08_person_atom.atom_config import get_allowed_obj_types
+from ch09_person_atom.atom_config import get_allowed_obj_types
 from ch15_moment.moment_config import (
     get_moment_args_dimen_mapping,
     get_moment_args_obj_types,

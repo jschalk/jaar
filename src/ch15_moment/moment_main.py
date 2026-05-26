@@ -8,12 +8,12 @@ from ch00_py.file_toolbox import (
 )
 from ch01_allot.allot import default_grain_num_if_None
 from ch07_person_logic.person_main import PersonUnit, personunit_shop
-from ch09_person_lesson._ref.ch09_path import (
+from ch10_person_lesson._ref.ch10_path import (
     create_moment_dir_path,
     create_moment_json_path,
 )
-from ch09_person_lesson.lasso import LassoUnit, lassounit_shop
-from ch09_person_lesson.lesson_filehandler import (
+from ch10_person_lesson.lasso import LassoUnit, lassounit_shop
+from ch10_person_lesson.lesson_filehandler import (
     gut_file_exists,
     open_gut_file,
     save_gut_file,

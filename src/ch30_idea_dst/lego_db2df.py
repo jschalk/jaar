@@ -4,8 +4,8 @@ from ch00_py.csv_toolbox import (
 )
 from ch00_py.file_toolbox import create_path, get_level1_dirs
 from ch04_rope.rope import create_rope, default_knot_if_None
-from ch09_person_lesson._ref.ch09_path import create_moments_dir_path
-from ch09_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson._ref.ch10_path import create_moments_dir_path
+from ch10_person_lesson.lasso import lassounit_shop
 from ch12_bud.bud_filehandler import open_person_file
 from ch15_moment.moment_main import open_moment_file
 from ch20_brick.brick_db_tool import (

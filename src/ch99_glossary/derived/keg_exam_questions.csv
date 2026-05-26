@@ -24,8 +24,8 @@ row_number,question
 22,"Did you read that the keg_definition of 'ch05' is 'Defines ReasonUnits, FactUnits, and Facts decide if a Reason is Active'."
 23,"Did you read that the keg_definition of 'ch06' is 'Defines PlanUnits with sub-plans, Awardees, Workforce, Reasons, Facts, etc.'."
 24,Did you read that the keg_definition of 'ch07' is 'Defines a PersonUnit as a PlanUnit and ContactUnits capable of producing an agenda.'.
-25,Did you read that the keg_definition of 'ch08' is 'Defines PersonAtoms: Irreducible units of change for a PersonUnit.'.
-26,Did you read that the keg_definition of 'ch09' is 'Defines lessons which are collections of PersonAtoms by FaceName'.
+25,Did you read that the keg_definition of 'ch09' is 'Defines PersonAtoms: Irreducible units of change for a PersonUnit.'.
+26,Did you read that the keg_definition of 'ch10' is 'Defines lessons which are collections of PersonAtoms by FaceName'.
 27,Did you read that the keg_definition of 'ch11' is 'These tools describe how one PersonUnit listens to another.'.
 28,"Did you read that the keg_definition of 'ch12' is 'Defines PersonBudHistory: PersonName, BudUnits (TimeNum, quota, celldepth)'."
 29,Did you read that the keg_definition of 'ch13' is 'Builds a simulation that describes how much credit a healer has earned.'.
@@ -294,7 +294,7 @@ row_number,question
 290,Did you read that the keg_definition of 'prnunit' is 'abbv for personunit'.
 291,"Did you read that the keg_definition of 'reason_contexts' is ', used with Budget Cells'."
 292,"Did you read that the keg_definition of 'sum_healerunit_plans_fund_total' is ', Person thinkout'."
-293,Did you read that the keg_definition of 'CRUD_command' is 'str first used in ch08 that represents database CRUD commands'.
+293,Did you read that the keg_definition of 'CRUD_command' is 'str first used in ch09 that represents database CRUD commands'.
 294,Did you read that the keg_definition of 'atom' is 'Smallest possible unit of a PersonUnit'.
 295,Did you read that the keg_definition of 'awardee_title_ERASE' is 'Definition needed.'.
 296,Did you read that the keg_definition of 'awardee_title_ERASE_inx' is 'The 'awardee_title_ERASE' value after Translate.'.
@@ -331,9 +331,9 @@ row_number,question
 327,Did you read that the keg_definition of 'reason_state_ERASE' is 'Definition needed.'.
 328,Did you read that the keg_definition of 'reason_state_ERASE_inx' is 'The 'reason_state_ERASE' value after Translate.'.
 329,Did you read that the keg_definition of 'reason_state_ERASE_otx' is 'The 'reason_state_ERASE' value after Translate.'.
-330,Did you read that the keg_definition of 'FaceName' is 'str first used in ch09. The Face is the source of all outside data.'.
+330,Did you read that the keg_definition of 'FaceName' is 'str first used in ch10. The Face is the source of all outside data.'.
 331,Did you read that the keg_definition of 'Lasso' is 'Definition needed.'.
-332,Did you read that the keg_definition of 'MomentRope' is 'str first used in ch09. The RopeTerm for a Moment. Must contain knots.'.
+332,Did you read that the keg_definition of 'MomentRope' is 'str first used in ch10. The RopeTerm for a Moment. Must contain knots.'.
 333,Did you read that the keg_definition of 'gut' is 'Definition needed.'.
 334,Did you read that the keg_definition of 'job' is 'Definition needed.'.
 335,Did you read that the keg_definition of 'lasso' is 'Definition needed.'.

@@ -4,8 +4,8 @@ from ch02_contact.group import awardunit_shop
 from ch03_workforce.workforce import workforceunit_shop
 from ch06_plan.healer import healerunit_shop
 from ch07_person_logic.person_main import personunit_shop
-from ch09_person_lesson._ref.ch09_path import create_moment_json_path
-from ch09_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson._ref.ch10_path import create_moment_json_path
+from ch10_person_lesson.lasso import lassounit_shop
 from ch11_person_listen._ref.ch11_path import create_job_path
 from ch11_person_listen.keep_tool import save_job_file
 from ch15_moment.moment_main import momentunit_shop

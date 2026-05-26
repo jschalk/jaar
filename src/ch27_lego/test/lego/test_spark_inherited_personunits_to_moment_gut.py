@@ -1,7 +1,7 @@
 from ch00_py.file_toolbox import create_path, open_json, save_json
 from ch07_person_logic.person_main import get_personunit_from_dict, personunit_shop
-from ch09_person_lesson._ref.ch09_path import create_gut_path
-from ch09_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson._ref.ch10_path import create_gut_path
+from ch10_person_lesson.lasso import lassounit_shop
 from ch12_bud._ref.ch12_path import create_person_spark_dir_path
 from ch27_lego.lego_core import etl_spark_inherited_personunits_to_mind_gut
 from ch99_glossary.ch_keyword import ExampleStrs as exx

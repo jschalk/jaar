@@ -1,5 +1,5 @@
 from ch07_person_logic.person_main import personunit_shop
-from ch09_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lasso import lassounit_shop
 from ch12_bud._ref.ch12_path import create_cell_dir_path as cell_dir
 from ch12_bud.bud_filehandler import cellunit_get_from_dir, cellunit_save_to_dir
 from ch12_bud.cell_main import cellunit_shop

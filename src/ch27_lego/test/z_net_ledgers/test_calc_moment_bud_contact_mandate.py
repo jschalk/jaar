@@ -1,10 +1,10 @@
 from ch00_py.file_toolbox import count_dirs_files, create_path, open_json, save_json
 from ch07_person_logic.person_main import personunit_shop
-from ch09_person_lesson._ref.ch09_path import (
+from ch10_person_lesson._ref.ch10_path import (
     create_moment_json_path,
     create_moment_persons_dir_path,
 )
-from ch09_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lasso import lassounit_shop
 from ch12_bud._ref.ch12_path import create_personspark_path
 from ch15_moment._ref.ch15_path import (
     create_bud_contact_mandate_ledger_path as bud_mandate_path,

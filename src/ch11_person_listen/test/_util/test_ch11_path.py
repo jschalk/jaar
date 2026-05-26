@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import create_path, get_json_filename
 from ch04_rope.rope import create_rope, create_rope_from_labels
-from ch09_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lasso import lassounit_shop
 from ch11_person_listen._ref.ch11_path import (
     create_job_path,
     create_keep_duty_path,

@@ -1,7 +1,7 @@
 from ch00_py.db_toolbox import db_table_exists, get_row_count
 from ch00_py.file_toolbox import save_json
-from ch09_person_lesson._ref.ch09_path import create_moment_json_path
-from ch09_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson._ref.ch10_path import create_moment_json_path
+from ch10_person_lesson.lasso import lassounit_shop
 from ch12_bud.bud_main import tranbook_shop
 from ch15_moment.moment_main import momentunit_shop
 from ch27_lego.lego_core import (

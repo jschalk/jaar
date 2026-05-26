@@ -1,5 +1,5 @@
 from ch00_py.dict_toolbox import get_0_if_None
-from ch09_person_lesson.lesson_main import LessonUnit
+from ch10_person_lesson.lesson_main import LessonUnit
 from ch23_idea_src.idea2brick import IdeaBook
 from ch32_world.world import WorldName
 from ch33_pitch._ref.ch33_semantic_types import PersonName, SparkInt

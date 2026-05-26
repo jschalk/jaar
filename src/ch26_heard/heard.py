@@ -6,11 +6,11 @@ from ch00_py.db_toolbox import (
 from ch00_py.dict_toolbox import set_in_nested_dict
 from ch00_py.file_toolbox import get_level1_dirs, save_file, save_json
 from ch04_rope.rope import create_rope
-from ch09_person_lesson._ref.ch09_path import (
+from ch10_person_lesson._ref.ch10_path import (
     create_moment_json_path,
     create_moments_dir_path,
 )
-from ch09_person_lesson.lasso import LassoUnit, lassounit_shop
+from ch10_person_lesson.lasso import LassoUnit, lassounit_shop
 from ch12_bud.bud_main import MomentRope
 from ch17_translate.translate_config import (
     get_translate_args_obj_types,

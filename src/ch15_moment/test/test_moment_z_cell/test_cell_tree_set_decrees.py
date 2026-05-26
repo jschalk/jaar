@@ -1,5 +1,5 @@
 from ch07_person_logic.person_main import PersonUnit, personunit_shop
-from ch09_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lasso import lassounit_shop
 from ch12_bud._ref.ch12_path import (
     create_cell_dir_path as cell_dir,
     create_personspark_path,

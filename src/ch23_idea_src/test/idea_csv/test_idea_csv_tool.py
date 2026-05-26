@@ -2,8 +2,8 @@ from ch00_py.file_toolbox import create_path
 from ch02_contact.group import awardunit_shop
 from ch04_rope.rope import to_rope
 from ch07_person_logic.person_main import personunit_shop
-from ch09_person_lesson.delta import persondelta_shop
-from ch09_person_lesson.lesson_main import lessonunit_shop
+from ch10_person_lesson.delta import persondelta_shop
+from ch10_person_lesson.lesson_main import lessonunit_shop
 from ch20_brick.brick_dataframe import moment_build_from_df
 from ch20_brick.brick_db_tool import get_ordered_csv
 from ch23_idea_src.idea_csv import (

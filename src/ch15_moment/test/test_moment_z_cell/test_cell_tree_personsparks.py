@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import open_json
-from ch09_person_lesson.lasso import lassounit_shop
+from ch10_person_lesson.lasso import lassounit_shop
 from ch12_bud._ref.ch12_path import create_cell_json_path, create_personspark_path
 from ch12_bud.bud_filehandler import cellunit_add_json_file, save_arbitrary_personspark
 from ch15_moment.moment_cell import load_cells_personspark

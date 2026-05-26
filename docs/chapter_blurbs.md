@@ -11,8 +11,8 @@ What does each one do?
 - **ch05_reason**: Defines ReasonUnits, FactUnits, and Facts decide if a Reason is Active
 - **ch06_plan**: Defines PlanUnits with sub-plans, Awardees, Workforce, Reasons, Facts, etc.
 - **ch07_person_logic**: Defines a PersonUnit as a PlanUnit and ContactUnits capable of producing an agenda.
-- **ch08_person_atom**: Defines PersonAtoms: Irreducible units of change for a PersonUnit.
-- **ch09_person_lesson**: Defines lessons which are collections of PersonAtoms by FaceName
+- **ch09_person_atom**: Defines PersonAtoms: Irreducible units of change for a PersonUnit.
+- **ch10_person_lesson**: Defines lessons which are collections of PersonAtoms by FaceName
 - **ch11_person_listen**: These tools describe how one PersonUnit listens to another.
 - **ch12_bud**: Defines PersonBudHistory: PersonName, BudUnits (TimeNum, quota, celldepth)
 - **ch13_keep**: Builds a simulation that describes how much credit a healer has earned.
