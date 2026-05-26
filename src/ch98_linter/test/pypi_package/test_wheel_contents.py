@@ -118,5 +118,4 @@ def test_DataFilesInWheelAreVisible(wheel_contents: list[str]):
     for f in sorted(data_files):
         print(f"  {f}")
     assert data_files
-    # TODO find a way to always delete src\keg2.egg-info
     shutil_rmtree("src//keg2.egg-info")
