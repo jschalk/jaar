@@ -1,10 +1,6 @@
 from ch00_py.file_toolbox import open_json, save_json
 from ch01_keyword.chapter_desc_main import get_chapter_desc_prefix, get_chapter_descs
-from ch01_keyword.keyword_class_builder import (
-    get_chapter_descs,
-    get_keywords_src_config,
-    parse_valid_ch_str,
-)
+from ch01_keyword.keyword_class_builder import get_chapter_descs
 from ch08_person_logic.person_config import (
     get_all_person_calc_args,
     get_person_config_dict,
@@ -13,10 +9,6 @@ from ch97_docs_builder._ref.ch97_path import (
     create_chapter_ref_path,
     create_src_keg_definitions_path,
 )
-from csv import writer as csv_writer
-from dataclasses import dataclass
-from pathlib import Path
-from re import search as re_search
 
 
 def get_keg_definitions() -> dict[str, dict]:
