@@ -12,7 +12,7 @@ from ch16_translate.translate_config import (
     get_translates_column_ref,
 )
 from ch16_translate.translate_main import default_unknown_str_if_None
-from ch17_brick.brick_config import get_brick_dimen_ref
+from ch20_brick.brick_config import get_brick_dimen_ref
 from ch22_etl_config.etl_sqlstr import (
     create_insert_into_translate_core_raw_sqlstr,
     create_insert_missing_spark_face_into_translate_core_vld_sqlstr,

@@ -19,7 +19,7 @@ from ch00_py.keyword_class_builder import (
     get_keywords_src_config,
 )
 from ch04_rope._ref.ch04_doc_builder import get_ropeterm_description_md
-from ch17_brick._ref.ch17_doc_builder import get_brick_formats_md, get_brick_mds
+from ch20_brick._ref.ch20_doc_builder import get_brick_formats_md, get_brick_mds
 from ch97_docs_builder._ref.ch97_path import create_chapter_ref_path
 from ch97_docs_builder.glossary_definition import rebuild_keg_definitions_contents
 from ch97_docs_builder.glossary_ranking import (
@@ -78,7 +78,7 @@ def save_ropeterm_description_md(x_dir: str):
 
 def save_brick_mds(dest_dir: str):
     brick_mds = get_brick_mds()
-    dest_dir = create_path(dest_dir, "ch17_brick_formats")
+    dest_dir = create_path(dest_dir, "ch20_brick_formats")
 
     for brick_type, brick_md in brick_mds.items():
         save_file(dest_dir, f"{brick_type}.md", brick_md)

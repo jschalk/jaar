@@ -20,7 +20,7 @@ What does each one do?
 - **ch14_moment**: Defines MomentUnits: common time tech, ledger, ContactNames, history of PersonUnits.
 - **ch15_nabu**: Defines NabuUnit tools that interpret numeric values into inside accounting.
 - **ch16_translate**: Defines TranslateUnit tools that translate MomentUnits into inside language.
-- **ch17_brick**: Defines how to build Bricks using Bricks. Moments and Persons are built by Bricks.
+- **ch20_brick**: Defines how to build Bricks using Bricks. Moments and Persons are built by Bricks.
 - **ch22_etl_config**: Defines the tools that use Bricks to build MomentUnits.
 - **ch23_idea_src**: Defines the 'Idea Src' process. Data going to 'Bricks'.
 - **ch24_etl_brick**: Defines the 'Etl Bricks' process. From 'Source Ideas' to 'Sound'.

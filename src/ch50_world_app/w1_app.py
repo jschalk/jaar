@@ -12,7 +12,7 @@ To integrate your CLI logic, replace the `create_today_punchs()` call inside
 """
 
 from ch00_py.file_toolbox import create_path, delete_dir, open_file, set_dir
-from ch17_brick.brick_db_tool import prettify_excel_files
+from ch20_brick.brick_db_tool import prettify_excel_files
 from ch30_idea_dst.lego_db2df import create_lego0002_file
 from ch32_world.world import create_today_punchs
 from ch50_world_app.w1_tool import (

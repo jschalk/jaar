@@ -24,6 +24,6 @@ from ch09_person_lesson._ref.ch09_semantic_types import FaceName, MomentRope
 from ch11_bud._ref.ch11_semantic_types import SparkInt, TimeNum
 from ch12_keep._ref.ch12_semantic_types import ManaNum
 from ch13_time._ref.ch13_semantic_types import EpochLabel
-from ch17_brick._ref.ch17_semantic_types import SheetName
+from ch20_brick._ref.ch20_semantic_types import SheetName
 from ch32_world._ref.ch32_semantic_types import WorldName
 from ch33_pitch._ref.ch33_semantic_types import PitchID

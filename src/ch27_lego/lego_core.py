@@ -40,7 +40,7 @@ from ch14_moment.moment_cell import (
     set_cell_trees_found_facts,
 )
 from ch14_moment.moment_main import open_moment_file
-from ch17_brick.brick_config import get_brick_sqlite_types
+from ch20_brick.brick_config import get_brick_sqlite_types
 from ch22_etl_config._ref.ch22_path import (
     create_last_run_metrics_path,
     create_moment_ote1_csv_path,

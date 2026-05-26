@@ -14,7 +14,7 @@ from ch16_translate.translate_config import (
     get_translate_dimens,
     set_translateable_otx_inx_args,
 )
-from ch17_brick.brick_config import get_brick_config_dict, get_default_sorted_list
+from ch20_brick.brick_config import get_brick_config_dict, get_default_sorted_list
 from ch22_etl_config.etl_config import (
     create_prime_table_sqlstr,
     get_dimen_abbv7,

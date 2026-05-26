@@ -3,7 +3,7 @@ from ch04_rope.rope import default_knot_if_None
 from ch13_time.epoch_main import epochunit_shop, get_default_epoch_config_dict
 from ch13_time.test._util.ch13_examples import get_five_config
 from ch14_moment.moment_main import momentunit_shop
-from ch17_brick.brick_dataframe import moment_build_from_df
+from ch20_brick.brick_dataframe import moment_build_from_df
 from ch23_idea_src.test._util.ch23_examples import (
     J45_ROPE,
     get_ex1_bk00100_df,

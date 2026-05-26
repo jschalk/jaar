@@ -33,7 +33,7 @@ row_number,question
 31,"Did you read that the keg_definition of 'ch14' is 'Defines MomentUnits: common time tech, ledger, ContactNames, history of PersonUnits.'."
 32,Did you read that the keg_definition of 'ch15' is 'Defines NabuUnit tools that interpret numeric values into inside accounting.'.
 33,Did you read that the keg_definition of 'ch16' is 'Defines TranslateUnit tools that translate MomentUnits into inside language.'.
-34,Did you read that the keg_definition of 'ch17' is 'Defines how to build Bricks using Bricks. Moments and Persons are built by Bricks.'.
+34,Did you read that the keg_definition of 'ch20' is 'Defines how to build Bricks using Bricks. Moments and Persons are built by Bricks.'.
 35,Did you read that the keg_definition of 'ch22' is 'Defines the tools that use Bricks to build MomentUnits.'.
 36,Did you read that the keg_definition of 'ch23' is 'Defines the 'Idea Src' process. Data going to 'Bricks'.'.
 37,Did you read that the keg_definition of 'ch24' is 'Defines the 'Etl Bricks' process. From 'Source Ideas' to 'Sound'.'.
@@ -502,7 +502,7 @@ row_number,question
 498,Did you read that the keg_definition of 'translateunit' is 'Definition needed.'.
 499,"Did you read that the keg_definition of 'unknown_str' is ', TRANSLATE_LABEL arg, TRANSLATE_NAME arg, TRANSLATE_ROPE arg, TRANSLATE_TITLE arg'."
 500,Did you read that the keg_definition of 'Excel' is 'A spreadsheet format.'.
-501,Did you read that the keg_definition of 'SheetName' is 'A string used as SheetName for SpreadSheet files. str first used in ch17'.
+501,Did you read that the keg_definition of 'SheetName' is 'A string used as SheetName for SpreadSheet files. str first used in ch20'.
 502,Did you read that the keg_definition of 'allowed_crud' is 'Each brick config dimen has an allowed_crud that describes whether the data may be updated/deleted/inserted more than one.'.
 503,Did you read that the keg_definition of 'attributes' is 'General term used to describe things about another thing'.
 504,Did you read that the keg_definition of 'awardee_title_inx' is 'The 'awardee_title' value after Translate.'.
