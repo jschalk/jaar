@@ -1,7 +1,0 @@
-{
-  "chapter_blurb": "Defines Contacts, Groups, Memberships, Awardees debt and cred.", 
-  "chapter_content": "Defines a contact, and its group memberships. Groups will be produced from memberships.", 
-  "chapter_description": "ch02_contact", 
-  "chapter_number": 2, 
-  "ontology summary": "Keg's first core philosophical definitions: Groups, Memberships, Awardees, Contacts. Membership, Awardees are types of Groups. Contacts can have memberships. "
-}

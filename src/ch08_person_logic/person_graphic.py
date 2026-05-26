@@ -4,7 +4,7 @@ from ch00_py.plotly_toolbox import (
     add_simp_rect,
     conditional_fig_show,
 )
-from ch04_rope.rope import RopeTerm, get_parent_rope, is_sub_rope
+from ch05_rope.rope import RopeTerm, get_parent_rope, is_sub_rope
 from ch07_plan.plan import PlanUnit
 from ch08_person_logic.person_main import PersonUnit
 from ch08_person_logic.person_report import (

@@ -1,7 +1,7 @@
 from ch00_py.file_toolbox import create_path, open_json
-from ch03_workforce.workforce import workforceunit_shop
-from ch04_rope.rope import RopeTerm, create_rope
-from ch05_reason.reason_main import factunit_shop, reasonunit_shop
+from ch04_workforce.workforce import workforceunit_shop
+from ch05_rope.rope import RopeTerm, create_rope
+from ch06_reason.reason_main import factunit_shop, reasonunit_shop
 from ch07_plan.plan import planunit_shop
 from ch08_person_logic.person_main import (
     PersonUnit,

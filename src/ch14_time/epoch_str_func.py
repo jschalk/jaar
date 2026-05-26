@@ -1,11 +1,11 @@
-from ch04_rope.rope import (
+from ch05_rope.rope import (
     LabelTerm,
     RopeTerm,
     create_rope,
     get_first_label_from_rope,
     get_tail_label,
 )
-from ch05_reason.reason_main import CaseUnit, FactUnit
+from ch06_reason.reason_main import CaseUnit, FactUnit
 from ch08_person_logic.person_main import PersonUnit
 from ch14_time.epoch_main import timeshoe_shop
 

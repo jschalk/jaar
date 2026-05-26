@@ -1,7 +1,7 @@
-from ch01_allot.allot import default_grain_num_if_None
-from ch02_contact.group import awardunit_shop
-from ch03_workforce.workforce import workforceunit_shop
-from ch04_rope.rope import create_rope, default_knot_if_None
+from ch02_allot.allot import default_grain_num_if_None
+from ch03_contact.group import awardunit_shop
+from ch04_workforce.workforce import workforceunit_shop
+from ch05_rope.rope import create_rope, default_knot_if_None
 from ch07_plan.healer import healerunit_shop
 from ch07_plan.plan import PlanUnit, planunit_shop
 from ch99_glossary.ch_keyword import Ch07Keywords as kw, ExampleStrs as exx

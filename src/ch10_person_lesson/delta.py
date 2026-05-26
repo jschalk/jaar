@@ -5,9 +5,9 @@ from ch00_py.dict_toolbox import (
     get_from_nested_dict,
     set_in_nested_dict,
 )
-from ch02_contact.contact import ContactName, ContactUnit, MemberShip
-from ch02_contact.group import MemberShip
-from ch05_reason.reason_main import FactUnit, ReasonUnit
+from ch03_contact.contact import ContactName, ContactUnit, MemberShip
+from ch03_contact.group import MemberShip
+from ch06_reason.reason_main import FactUnit, ReasonUnit
 from ch07_plan.plan import PlanUnit
 from ch08_person_logic.person_main import PersonUnit, personunit_shop
 from ch09_person_atom.atom_config import CRUD_command

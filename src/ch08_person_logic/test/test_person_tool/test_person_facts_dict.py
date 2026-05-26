@@ -1,4 +1,4 @@
-from ch04_rope.rope import create_rope
+from ch05_rope.rope import create_rope
 from ch08_person_logic.person_main import personunit_shop
 from ch08_person_logic.person_tool import (
     clear_factunits_from_person,

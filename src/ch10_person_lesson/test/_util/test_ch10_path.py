@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import create_path
-from ch04_rope.rope import create_rope
+from ch05_rope.rope import create_rope
 from ch10_person_lesson._ref.ch10_path import (
     MOMENT_FILENAME,
     create_atoms_dir_path,

@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import create_path, save_json
-from ch04_rope.rope import create_rope, to_rope
+from ch05_rope.rope import create_rope, to_rope
 from ch17_translate.test._util.ch17_examples import (
     get_casa_maison_translateunit_set_by_label,
     get_suita_namemap,

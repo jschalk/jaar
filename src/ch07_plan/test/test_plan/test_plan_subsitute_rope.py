@@ -1,5 +1,5 @@
-from ch04_rope.rope import create_rope
-from ch05_reason.reason_main import caseunit_shop, factunit_shop, reasonunit_shop
+from ch05_rope.rope import create_rope
+from ch06_reason.reason_main import caseunit_shop, factunit_shop, reasonunit_shop
 from ch07_plan.plan import planunit_shop
 
 

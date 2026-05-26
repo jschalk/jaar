@@ -8,7 +8,7 @@ from ch00_py.file_toolbox import (
     save_file,
     save_json,
 )
-from ch04_rope.rope import create_rope
+from ch05_rope.rope import create_rope
 from ch08_person_logic.person_main import PersonUnit, personunit_shop
 from ch09_person_atom.atom_config import get_person_dimens
 from ch09_person_atom.atom_main import personatom_shop

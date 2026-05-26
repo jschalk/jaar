@@ -1,4 +1,4 @@
-from ch04_rope.rope import RopeTerm, create_rope, create_rope_from_labels
+from ch05_rope.rope import RopeTerm, create_rope, create_rope_from_labels
 from ch08_person_logic.person_main import PersonUnit, personunit_shop, planunit_shop
 from ch10_person_lesson.lasso import lassounit_shop
 from ch10_person_lesson.lesson_filehandler import (

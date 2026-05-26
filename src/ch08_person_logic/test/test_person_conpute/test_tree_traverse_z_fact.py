@@ -1,4 +1,4 @@
-from ch05_reason.reason_main import factheir_shop, factunit_shop
+from ch06_reason.reason_main import factheir_shop, factunit_shop
 from ch07_plan.plan import planunit_shop
 from ch08_person_logic.person_main import personunit_shop
 from ch08_person_logic.test._util.ch08_examples import (

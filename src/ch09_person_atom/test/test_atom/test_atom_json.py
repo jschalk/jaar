@@ -1,4 +1,4 @@
-from ch04_rope.rope import create_rope
+from ch05_rope.rope import create_rope
 from ch09_person_atom.atom_main import get_personatom_from_dict, personatom_shop
 from ch99_glossary.ch_keyword import Ch09Keywords as kw
 

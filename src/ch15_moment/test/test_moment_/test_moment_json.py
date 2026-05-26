@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import create_path, save_json
-from ch01_allot.allot import default_grain_num_if_None
-from ch04_rope.rope import create_rope, default_knot_if_None
+from ch02_allot.allot import default_grain_num_if_None
+from ch05_rope.rope import create_rope, default_knot_if_None
 from ch10_person_lesson._ref.ch10_path import create_moment_json_path
 from ch10_person_lesson.lasso import lassounit_shop
 from ch14_time.epoch_main import get_default_epoch_config_dict

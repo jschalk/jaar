@@ -18,7 +18,7 @@ from ch00_py.keyword_class_builder import (
     create_src_keywords_src_path,
     get_keywords_src_config,
 )
-from ch04_rope._ref.ch04_doc_builder import get_ropeterm_description_md
+from ch05_rope._ref.ch05_doc_builder import get_ropeterm_description_md
 from ch20_brick._ref.ch20_doc_builder import get_brick_formats_md, get_brick_mds
 from ch97_docs_builder._ref.ch97_path import create_chapter_ref_path
 from ch97_docs_builder.glossary_definition import rebuild_keg_definitions_contents

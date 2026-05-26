@@ -4,11 +4,11 @@ from ch00_py.dict_toolbox import (
     get_empty_str_if_None,
     modular_addition,
 )
-from ch01_allot.allot import allot_scale
-from ch02_contact.contact import ContactUnit, calc_give_take_net
-from ch02_contact.group import AwardUnit, MemberShip
-from ch04_rope.rope import get_unique_short_ropes, is_sub_rope
-from ch05_reason.reason_main import (
+from ch02_allot.allot import allot_scale
+from ch03_contact.contact import ContactUnit, calc_give_take_net
+from ch03_contact.group import AwardUnit, MemberShip
+from ch05_rope.rope import get_unique_short_ropes, is_sub_rope
+from ch06_reason.reason_main import (
     CaseUnit,
     FactUnit,
     ReasonUnit,

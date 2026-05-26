@@ -153,7 +153,8 @@ def test_get_keywords_src_config_ReturnsObj():
 def test_create_keywords_enum_class_file_str_ReturnsObj_Scenario0_Empty_keyword_set():
     # ESTABLISH
     ch_str = "ch"
-    ch_03_str = f"{ch_str}03"
+    num04_str = "04"
+    ch_03_str = f"{ch_str}04"
     ch_03_keywords = {}
 
     # WHEN
@@ -164,7 +165,7 @@ def test_create_keywords_enum_class_file_str_ReturnsObj_Scenario0_Empty_keyword_
     key_str = "Key"
     expected_file_str = f"""
 
-class Ch03{key_str}words(str, Enum):
+class Ch{num04_str}{key_str}words(str, Enum):
     pass
 
     def __str__(self):
@@ -178,6 +179,7 @@ class Ch03{key_str}words(str, Enum):
 def test_create_keywords_enum_class_file_str_ReturnsObj_Scenario1_NonEmpty_keyword_set():
     # ESTABLISH
     ch_str = "ch"
+    num03_str = "03"
     ch_03_str = f"{ch_str}03"
     keywordF = "Funny"
     keywordI = "INSET"
@@ -202,7 +204,7 @@ def test_create_keywords_enum_class_file_str_ReturnsObj_Scenario1_NonEmpty_keywo
     key_str = "Key"
     expected_file_str = f"""
 
-class Ch03{key_str}words(str, Enum):
+class Ch{num03_str}{key_str}words(str, Enum):
     {keywordF} = "{keywordF}"
     {keywordG} = "{keywordG}"
     {keywordH} = "{keywordH}"

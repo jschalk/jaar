@@ -1,4 +1,4 @@
-from ch04_rope.rope import default_knot_if_None
+from ch05_rope.rope import default_knot_if_None
 from ch17_translate.map_term import (
     TitleMap,
     get_titlemap_from_dict,

@@ -1,7 +1,7 @@
-from ch02_contact.group import awardunit_shop
-from ch03_workforce.workforce import workforceunit_shop
-from ch04_rope.rope import create_rope, default_knot_if_None, is_sub_rope, to_rope
-from ch05_reason.reason_main import caseunit_shop, factunit_shop, reasonunit_shop
+from ch03_contact.group import awardunit_shop
+from ch04_workforce.workforce import workforceunit_shop
+from ch05_rope.rope import create_rope, default_knot_if_None, is_sub_rope, to_rope
+from ch06_reason.reason_main import caseunit_shop, factunit_shop, reasonunit_shop
 from ch07_plan.healer import healerunit_shop
 from ch07_plan.plan import planunit_shop
 from ch08_person_logic.person_main import personunit_shop

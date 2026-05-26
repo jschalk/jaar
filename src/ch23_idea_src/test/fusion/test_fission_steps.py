@@ -1,4 +1,4 @@
-from ch04_rope.rope import create_rope
+from ch05_rope.rope import create_rope
 from ch23_idea_src.fission_step import (
     fission_add_ancestor_rope_rows,
     fission_add_knot_from_rope,

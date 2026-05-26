@@ -1,4 +1,4 @@
-from ch02_contact.contact import contactunit_shop
+from ch03_contact.contact import contactunit_shop
 from ch08_person_logic.person_main import personunit_shop
 from ch99_glossary.ch_keyword import ExampleStrs as exx
 from copy import deepcopy as copy_deepcopy

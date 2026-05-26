@@ -3,7 +3,7 @@ from ch00_py.db_toolbox import (
     delete_all_duplicate_rows,
     get_table_columns,
 )
-from ch04_rope.rope import default_knot_if_None
+from ch05_rope.rope import default_knot_if_None
 from ch17_translate.translate_config import (
     get_translate_labelterm_args,
     get_translate_nameterm_args,

@@ -1,4 +1,4 @@
-from ch04_rope.rope import create_rope
+from ch05_rope.rope import create_rope
 from ch07_plan.plan import planunit_shop
 from ch99_glossary.ch_keyword import Ch07Keywords as kw, ExampleStrs as exx
 from pytest import raises as pytest_raises

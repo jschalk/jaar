@@ -1,4 +1,4 @@
-from ch02_contact.group import groupunit_shop
+from ch03_contact.group import groupunit_shop
 from ch08_person_logic.person_main import personunit_shop
 from ch99_glossary.ch_keyword import ExampleStrs as exx
 

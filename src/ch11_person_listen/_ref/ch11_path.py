@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import create_directory_path, create_path, get_json_filename
-from ch04_rope.rope import get_all_rope_labels, rebuild_rope
+from ch05_rope.rope import get_all_rope_labels, rebuild_rope
 from ch10_person_lesson._ref.ch10_path import (
     create_moment_persons_dir_path,
     create_moments_dir_path,

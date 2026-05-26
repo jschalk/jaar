@@ -1,6 +1,6 @@
-from ch01_allot.allot import default_pool_num
-from ch04_rope.rope import to_rope
-from ch05_reason.reason_main import caseunit_shop, reasonheir_shop, reasonunit_shop
+from ch02_allot.allot import default_pool_num
+from ch05_rope.rope import to_rope
+from ch06_reason.reason_main import caseunit_shop, reasonheir_shop, reasonunit_shop
 from ch07_plan.healer import healerunit_shop
 from ch07_plan.plan import planunit_shop
 from ch08_person_logic.person_graphic import display_plantree

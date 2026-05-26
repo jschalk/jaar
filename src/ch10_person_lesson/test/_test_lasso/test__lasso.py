@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import create_path
-from ch04_rope.rope import create_rope, get_default_rope
+from ch05_rope.rope import create_rope, get_default_rope
 from ch10_person_lesson._ref.ch10_semantic_types import default_knot_if_None
 from ch10_person_lesson.lasso import LassoUnit, default_knot_if_None, lassounit_shop
 from ch99_glossary.ch_keyword import Ch10Keywords as kw, ExampleStrs as exx

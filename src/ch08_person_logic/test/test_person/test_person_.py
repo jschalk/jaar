@@ -1,5 +1,5 @@
-from ch01_allot.allot import default_grain_num_if_None, validate_pool_num
-from ch04_rope.rope import create_rope, default_knot_if_None, get_default_rope
+from ch02_allot.allot import default_grain_num_if_None, validate_pool_num
+from ch05_rope.rope import create_rope, default_knot_if_None, get_default_rope
 from ch08_person_logic._ref.ch08_semantic_types import RespectNum
 from ch08_person_logic.person_main import PersonUnit, personunit_shop
 from ch99_glossary.ch_keyword import Ch08Keywords as kw, ExampleStrs as exx

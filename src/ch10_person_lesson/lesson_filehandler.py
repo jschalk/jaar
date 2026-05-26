@@ -9,8 +9,8 @@ from ch00_py.file_toolbox import (
     open_json,
     save_json,
 )
-from ch01_allot.allot import default_grain_num_if_None, validate_pool_num
-from ch04_rope.rope import get_parent_rope, get_tail_label, validate_labelterm
+from ch02_allot.allot import default_grain_num_if_None, validate_pool_num
+from ch05_rope.rope import get_parent_rope, get_tail_label, validate_labelterm
 from ch08_person_logic.person_main import (
     PersonUnit,
     get_personunit_from_dict,

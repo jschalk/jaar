@@ -4,8 +4,8 @@ from ch00_py.dict_toolbox import (
     get_False_if_None,
     modular_addition,
 )
-from ch04_rope.rope import is_sub_rope
-from ch05_reason.reason_main import CaseUnit, FactUnit, ReasonUnit
+from ch05_rope.rope import is_sub_rope
+from ch06_reason.reason_main import CaseUnit, FactUnit, ReasonUnit
 from ch07_plan.plan import PlanUnit
 from ch08_person_logic.person_main import PersonUnit
 from ch08_person_logic.person_tool import (

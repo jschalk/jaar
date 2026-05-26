@@ -1,6 +1,6 @@
-from ch03_workforce.workforce import laborunit_shop, workforceunit_shop
-from ch04_rope.rope import default_knot_if_None
-from ch05_reason.reason_main import factunit_shop
+from ch04_workforce.workforce import laborunit_shop, workforceunit_shop
+from ch05_rope.rope import default_knot_if_None
+from ch06_reason.reason_main import factunit_shop
 from ch07_plan.healer import healerunit_shop
 from ch07_plan.plan import planunit_shop
 from ch08_person_logic.person_main import (

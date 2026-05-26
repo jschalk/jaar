@@ -1,4 +1,4 @@
-from ch05_reason.reason_main import factunit_shop
+from ch06_reason.reason_main import factunit_shop
 from ch08_person_logic.person_main import personunit_shop
 from ch12_bud.cell_main import (
     CELLNODE_QUOTA_DEFAULT,

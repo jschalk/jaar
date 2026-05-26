@@ -17,11 +17,11 @@ row_number,question
 15,Did you read that the keg_definition of 'swim' is 'To live with faith. To be slave to many masters instead of a slave to one. To live in many moments. Not used in codebase.'.
 16,Did you read that the keg_definition of 'totality' is 'As described in Totality and Infinity. Not used in codebase.'.
 17,Did you read that the keg_definition of 'ch00' is 'Creates helper tools for OS and python data manipulation.'.
-18,Did you read that the keg_definition of 'ch01' is 'Defines how to allot a pool number to a weighted ledger.'.
-19,"Did you read that the keg_definition of 'ch02' is 'Defines Contacts, Groups, Memberships, Awardees debt and cred.'."
-20,"Did you read that the keg_definition of 'ch03' is 'Defines Workforce, LaborUnit. How tasks are assigned to labor.'."
-21,"Did you read that the keg_definition of 'ch04' is 'Defines Term Classes: Knots, Labels, RopeTerms, FirstLabels'."
-22,"Did you read that the keg_definition of 'ch05' is 'Defines ReasonUnits, FactUnits, and Facts decide if a Reason is Active'."
+18,Did you read that the keg_definition of 'ch02' is 'Defines how to allot a pool number to a weighted ledger.'.
+19,"Did you read that the keg_definition of 'ch03' is 'Defines Contacts, Groups, Memberships, Awardees debt and cred.'."
+20,"Did you read that the keg_definition of 'ch04' is 'Defines Workforce, LaborUnit. How tasks are assigned to labor.'."
+21,"Did you read that the keg_definition of 'ch05' is 'Defines Term Classes: Knots, Labels, RopeTerms, FirstLabels'."
+22,"Did you read that the keg_definition of 'ch06' is 'Defines ReasonUnits, FactUnits, and Facts decide if a Reason is Active'."
 23,"Did you read that the keg_definition of 'ch07' is 'Defines PlanUnits with sub-plans, Awardees, Workforce, Reasons, Facts, etc.'."
 24,Did you read that the keg_definition of 'ch08' is 'Defines a PersonUnit as a PlanUnit and ContactUnits capable of producing an agenda.'.
 25,Did you read that the keg_definition of 'ch09' is 'Defines PersonAtoms: Irreducible units of change for a PersonUnit.'.
@@ -118,21 +118,21 @@ row_number,question
 116,"Did you read that the keg_definition of 'shop' is 'The factory method in programming is very important. However because I want 'fact' only to refer to the Keg concept I don't use the word 'factory', instead I use 'shop'.'."
 117,Did you read that the keg_definition of 'sort_ordinal' is 'Int that represents where the keyword is indexed in the general sorting order.'.
 118,Did you read that the keg_definition of 'sqlite_datatype' is 'Definition needed.'.
-119,"Did you read that the keg_definition of 'valid_ch' is 'Describes which chapters a keyword is allowed to be in. Format is '0:' for all chapters, '5:' for all chapters after ch05, '3,7' for only 3 and 7. Empty string for not allowed in any chapter.'."
-120,Did you read that the keg_definition of 'GrainNum' is 'float first used in ch01. GrainNum represents the smallest fraction allowed'.
-121,Did you read that the keg_definition of 'PoolNum' is 'float first used in ch01. PoolNum represents any possible subset of the sum of numbers in the pool.'.
-122,Did you read that the keg_definition of 'WeightNum' is 'float first used in ch01. WeightNum represents the unnormalized value of a ledger key. The sum of all WeightNum values in a ledger is not defined.'.
-123,Did you read that the keg_definition of 'BreakTerm' is 'str first used in ch02. All str separator classes are BreakTerms. Exists because of the necessity to break experience reality into things so they can be understood.'.
-124,"Did you read that the keg_definition of 'ContactName' is 'str first used in ch02. Every ContactName object is NameTerm, must follow NameTerm format.'."
-125,Did you read that the keg_definition of 'FundGrain' is 'float first used in ch02. Smallest Unit of fund_num'.
-126,Did you read that the keg_definition of 'FundNum' is 'float first used in ch02. FundNum inherits from float class'.
-127,"Did you read that the keg_definition of 'GroupMark' is 'str first used in ch02. GroupMark(s) exist in TitleTerms to indicate its a group, no GroupMark indicates it is a ContactName.'."
-128,Did you read that the keg_definition of 'GroupTitle' is 'str first used in ch02. If contains SepartorTerms(s) it represents a group otherwise its a ContactName.'.
-129,Did you read that the keg_definition of 'HealerName' is 'str first used in ch02. A NameTerm used to identify a Problem's Healer'.
-130,Did you read that the keg_definition of 'NameTerm' is 'str first used in ch02. All Name string classes should inherit from this class'.
-131,Did you read that the keg_definition of 'RespectGrain' is 'float first used in ch02. Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!''.
-132,Did you read that the keg_definition of 'RespectNum' is 'float first used in ch02. RespectNum inherits from float class'.
-133,Did you read that the keg_definition of 'TitleTerm' is 'str first used in ch02. If a TitleTerm contains SepartorTerms(s) it represents a group otherwise its a single member group of an ContactName.'.
+119,"Did you read that the keg_definition of 'valid_ch' is 'Describes which chapters a keyword is allowed to be in. Format is '0:' for all chapters, '5:' for all chapters after ch06, '3,7' for only 3 and 7. Empty string for not allowed in any chapter.'."
+120,Did you read that the keg_definition of 'GrainNum' is 'float first used in ch02. GrainNum represents the smallest fraction allowed'.
+121,Did you read that the keg_definition of 'PoolNum' is 'float first used in ch02. PoolNum represents any possible subset of the sum of numbers in the pool.'.
+122,Did you read that the keg_definition of 'WeightNum' is 'float first used in ch02. WeightNum represents the unnormalized value of a ledger key. The sum of all WeightNum values in a ledger is not defined.'.
+123,Did you read that the keg_definition of 'BreakTerm' is 'str first used in ch03. All str separator classes are BreakTerms. Exists because of the necessity to break experience reality into things so they can be understood.'.
+124,"Did you read that the keg_definition of 'ContactName' is 'str first used in ch03. Every ContactName object is NameTerm, must follow NameTerm format.'."
+125,Did you read that the keg_definition of 'FundGrain' is 'float first used in ch03. Smallest Unit of fund_num'.
+126,Did you read that the keg_definition of 'FundNum' is 'float first used in ch03. FundNum inherits from float class'.
+127,"Did you read that the keg_definition of 'GroupMark' is 'str first used in ch03. GroupMark(s) exist in TitleTerms to indicate its a group, no GroupMark indicates it is a ContactName.'."
+128,Did you read that the keg_definition of 'GroupTitle' is 'str first used in ch03. If contains SepartorTerms(s) it represents a group otherwise its a ContactName.'.
+129,Did you read that the keg_definition of 'HealerName' is 'str first used in ch03. A NameTerm used to identify a Problem's Healer'.
+130,Did you read that the keg_definition of 'NameTerm' is 'str first used in ch03. All Name string classes should inherit from this class'.
+131,Did you read that the keg_definition of 'RespectGrain' is 'float first used in ch03. Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!''.
+132,Did you read that the keg_definition of 'RespectNum' is 'float first used in ch03. RespectNum inherits from float class'.
+133,Did you read that the keg_definition of 'TitleTerm' is 'str first used in ch03. If a TitleTerm contains SepartorTerms(s) it represents a group otherwise its a single member group of an ContactName.'.
 134,"Did you read that the keg_definition of 'awardee_title' is ', Award seed.'."
 135,"Did you read that the keg_definition of 'awardunits' is 'Every PlanUnit has AwardUnits that represent who is awarded give_fund and take_fund, Plan seed'."
 136,"Did you read that the keg_definition of 'contact_cred_lumen' is ', Contact seed.'."
@@ -171,17 +171,17 @@ row_number,question
 169,Did you read that the keg_definition of 'person' is 'Definition needed.'.
 170,"Did you read that the keg_definition of 'person_name' is ', paybook arg, bud arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed, Contact seed, Member seed.'."
 171,"Did you read that the keg_definition of 'person_name_is_workforce' is ', Workforce thinkout'."
-172,Did you read that the keg_definition of 'FactNum' is 'float first used in ch04. A numeric value that may converted to other Semantic Types by an external process driven by context.'.
-173,Did you read that the keg_definition of 'FirstLabel' is 'str first used in ch04. The first LabelTerm in a RopeTerm. FirstLabel cannot contain knot. Not called RootLabel to avoid confission.'.
-174,Did you read that the keg_definition of 'KnotTerm' is 'str first used in ch04. A string to used as a delimiter in RopeTerms.'.
-175,Did you read that the keg_definition of 'LabelTerm' is 'str first used in ch04. A string representation of a tree node. Nodes cannot contain RopeTerm knot'.
-176,Did you read that the keg_definition of 'ManaGrain' is 'float first used in ch04. Smallest Unit of Mana.'.
-177,Did you read that the keg_definition of 'ReasonNum' is 'float first used in ch04. A numeric value that may converted to other Semantic Types by an external process driven by context.'.
-178,Did you read that the keg_definition of 'RopeTerm' is 'str first used in ch04. A string representation of a tree path. LabelTerms are seperated by knots.'.
+172,Did you read that the keg_definition of 'FactNum' is 'float first used in ch05. A numeric value that may converted to other Semantic Types by an external process driven by context.'.
+173,Did you read that the keg_definition of 'FirstLabel' is 'str first used in ch05. The first LabelTerm in a RopeTerm. FirstLabel cannot contain knot. Not called RootLabel to avoid confission.'.
+174,Did you read that the keg_definition of 'KnotTerm' is 'str first used in ch05. A string to used as a delimiter in RopeTerms.'.
+175,Did you read that the keg_definition of 'LabelTerm' is 'str first used in ch05. A string representation of a tree node. Nodes cannot contain RopeTerm knot'.
+176,Did you read that the keg_definition of 'ManaGrain' is 'float first used in ch05. Smallest Unit of Mana.'.
+177,Did you read that the keg_definition of 'ReasonNum' is 'float first used in ch05. A numeric value that may converted to other Semantic Types by an external process driven by context.'.
+178,Did you read that the keg_definition of 'RopeTerm' is 'str first used in ch05. A string representation of a tree path. LabelTerms are seperated by knots.'.
 179,Did you read that the keg_definition of 'fact' is 'Facts are very important concept. I tried never to use those 4 letters anywhere that didn't refer exactly to that concept.'.
 180,"Did you read that the keg_definition of 'knot' is ', Moment arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed'."
 181,"Did you read that the keg_definition of 'mana_grain' is ', Moment arg, used with Budget Cells, Person seed.'."
-182,Did you read that the keg_definition of 'meaning' is 'A term specifically used to describe how defining Ropes creates meaning. Ropes with the same start and end points can have different meaning based on the Labels in between. Only referenced in ch04'.
+182,Did you read that the keg_definition of 'meaning' is 'A term specifically used to describe how defining Ropes creates meaning. Ropes with the same start and end points can have different meaning based on the Labels in between. Only referenced in ch05'.
 183,Did you read that the keg_definition of 'parent_rope' is 'A parent_rope of rope is created by removing the last label. For PlanUnits the parent_rope is the key for their parent PlanUnit.'.
 184,"Did you read that the keg_definition of 'active_requisite' is 'Represents the expected boolean of the PlanUnit with address reason_context. If None, no check. If False expected Active bool of reason_context PlanUnit is false. If True expected contest_plan.active is True, Reason seed'."
 185,"Did you read that the keg_definition of 'case_active' is ', Case thinkout'."

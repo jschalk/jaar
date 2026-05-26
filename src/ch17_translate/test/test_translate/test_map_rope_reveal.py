@@ -1,4 +1,4 @@
-from ch04_rope.rope import create_rope, to_rope
+from ch05_rope.rope import create_rope, to_rope
 from ch17_translate.map_term import ropemap_shop
 from ch99_glossary.ch_keyword import ExampleStrs as exx
 

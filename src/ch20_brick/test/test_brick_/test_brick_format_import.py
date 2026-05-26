@@ -1,4 +1,4 @@
-from ch04_rope.rope import create_rope
+from ch05_rope.rope import create_rope
 from ch08_person_logic.person_main import personunit_shop
 from ch20_brick.brick_config import BrickFormatsEnum
 from ch20_brick.brick_dataframe import get_brickref_obj, save_brick_csv

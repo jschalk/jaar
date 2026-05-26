@@ -1,4 +1,4 @@
-from ch04_rope.rope import create_rope
+from ch05_rope.rope import create_rope
 from ch08_person_logic.person_main import PersonUnit
 from ch15_moment.test._util.ch15_examples import _example_empty_bob_personunit
 from ch99_glossary.ch_keyword import Ch23Keywords as kw, ExampleStrs as exx

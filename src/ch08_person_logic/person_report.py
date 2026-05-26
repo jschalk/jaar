@@ -1,4 +1,4 @@
-from ch04_rope.rope import RopeTerm
+from ch05_rope.rope import RopeTerm
 from ch08_person_logic.person_main import PersonUnit
 from pandas import DataFrame
 

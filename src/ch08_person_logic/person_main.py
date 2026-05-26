@@ -3,20 +3,20 @@ from ch00_py.dict_toolbox import (
     get_empty_dict_if_None,
     get_False_if_None,
 )
-from ch01_allot.allot import (
+from ch02_allot.allot import (
     allot_scale,
     default_grain_num_if_None as grain_num,
     valid_allotment_ratio,
     validate_pool_num,
 )
-from ch02_contact.contact import (
+from ch03_contact.contact import (
     ContactUnit,
     contactunit_shop,
     contactunits_get_from_dict,
 )
-from ch02_contact.group import AwardUnit, GroupUnit, groupunit_shop, membership_shop
-from ch03_workforce.workforce import WorkforceUnit
-from ch04_rope.rope import (
+from ch03_contact.group import AwardUnit, GroupUnit, groupunit_shop, membership_shop
+from ch04_workforce.workforce import WorkforceUnit
+from ch05_rope.rope import (
     all_ropes_between,
     create_rope,
     default_knot_if_None,
@@ -34,7 +34,7 @@ from ch04_rope.rope import (
     rope_is_valid_dir_path,
     to_rope,
 )
-from ch05_reason.reason_main import FactUnit, ReasonUnit, RopeTerm, factunit_shop
+from ch06_reason.reason_main import FactUnit, ReasonUnit, RopeTerm, factunit_shop
 from ch07_plan.healer import HealerUnit
 from ch07_plan.plan import (
     PlanAttrHolder,

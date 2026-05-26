@@ -1,7 +1,7 @@
 from ch00_py.dict_toolbox import get_serializable_dict
-from ch02_contact.group import AwardHeir, AwardLine, AwardUnit
-from ch03_workforce.workforce import LaborHeir, LaborUnit
-from ch05_reason.reason_main import CaseUnit, FactHeir, FactUnit, ReasonHeir, ReasonUnit
+from ch03_contact.group import AwardHeir, AwardLine, AwardUnit
+from ch04_workforce.workforce import LaborHeir, LaborUnit
+from ch06_reason.reason_main import CaseUnit, FactHeir, FactUnit, ReasonHeir, ReasonUnit
 from ch07_plan.plan import PlanUnit
 from ch08_person_logic.person_main import PersonUnit
 from ch14_time.epoch_str_func import (

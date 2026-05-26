@@ -1,4 +1,4 @@
-from ch04_rope.rope import default_knot_if_None
+from ch05_rope.rope import default_knot_if_None
 from ch09_person_atom.atom_config import (
     get_all_person_dimen_delete_keys,
     get_atom_args_obj_types,

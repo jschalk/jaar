@@ -1,5 +1,5 @@
-from ch03_workforce.workforce import workforceunit_shop
-from ch04_rope.rope import RopeTerm
+from ch04_workforce.workforce import workforceunit_shop
+from ch05_rope.rope import RopeTerm
 from ch07_plan.plan import PlanUnit, planunit_shop
 from ch08_person_logic.person_main import get_personunit_from_dict, personunit_shop
 from ch08_person_logic.test._util.ch08_examples import (

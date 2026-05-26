@@ -3,7 +3,7 @@ from ch00_py.csv_toolbox import (
     replace_csv_column_from_string,
 )
 from ch00_py.file_toolbox import create_path, delete_dir
-from ch04_rope.rope import create_rope, default_knot_if_None
+from ch05_rope.rope import create_rope, default_knot_if_None
 from ch08_person_logic.person_main import personunit_shop
 from ch14_time.epoch_config import get_creg_config, get_five_config
 from ch14_time.epoch_main import epochunit_shop

@@ -1,5 +1,5 @@
-from ch04_rope.rope import create_rope
-from ch05_reason.reason_main import FactUnit, factunit_shop
+from ch05_rope.rope import create_rope
+from ch06_reason.reason_main import FactUnit, factunit_shop
 from ch12_bud.bud_main import BudUnit, budunit_shop
 from ch99_glossary.ch_keyword import ExampleStrs as exx
 

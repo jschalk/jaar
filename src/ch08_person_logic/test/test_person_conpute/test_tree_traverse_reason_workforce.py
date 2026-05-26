@@ -1,4 +1,4 @@
-from ch03_workforce.workforce import workforceheir_shop, workforceunit_shop
+from ch04_workforce.workforce import workforceheir_shop, workforceunit_shop
 from ch07_plan.plan import planunit_shop
 from ch08_person_logic.person_main import personunit_shop
 from ch99_glossary.ch_keyword import ExampleStrs as exx

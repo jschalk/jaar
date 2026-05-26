@@ -1,6 +1,6 @@
 from ch00_py.db_toolbox import get_table_columns
 from ch00_py.file_toolbox import create_path, set_dir
-from ch04_rope.rope import create_rope, get_all_rope_labels, get_first_label_from_rope
+from ch05_rope.rope import create_rope, get_all_rope_labels, get_first_label_from_rope
 from csv import writer as csv_writer
 from os.path import join as os_path_join
 from sqlite3 import Connection as sqlite3_Connection

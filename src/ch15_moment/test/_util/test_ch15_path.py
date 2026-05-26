@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import create_path
-from ch04_rope.rope import create_rope
+from ch05_rope.rope import create_rope
 from ch10_person_lesson.lasso import lassounit_shop
 from ch15_moment._ref.ch15_path import (
     BUD_MANDATE_FILENAME,

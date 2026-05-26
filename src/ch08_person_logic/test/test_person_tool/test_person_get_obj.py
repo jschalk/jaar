@@ -1,5 +1,5 @@
-from ch02_contact.group import awardunit_shop
-from ch05_reason.reason_main import factunit_shop, reasonunit_shop
+from ch03_contact.group import awardunit_shop
+from ch06_reason.reason_main import factunit_shop, reasonunit_shop
 from ch08_person_logic.person_main import personunit_shop
 from ch08_person_logic.person_tool import (
     person_contact_membership_get_obj,

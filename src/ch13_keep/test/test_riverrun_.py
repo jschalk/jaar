@@ -1,4 +1,4 @@
-from ch01_allot.allot import default_grain_num_if_None, validate_pool_num
+from ch02_allot.allot import default_grain_num_if_None, validate_pool_num
 from ch13_keep._ref.ch13_semantic_types import default_knot_if_None
 from ch13_keep.riverrun import RiverRun, riverrun_shop
 from ch13_keep.test._util.ch13_examples import (

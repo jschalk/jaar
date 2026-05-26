@@ -1,4 +1,4 @@
-from ch01_allot.allot import default_pool_num
+from ch02_allot.allot import default_pool_num
 from ch12_bud.bud_main import (
     DEFAULT_CELLDEPTH,
     BudUnit,

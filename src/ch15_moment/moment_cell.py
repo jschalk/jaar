@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import create_path, get_level1_dirs, save_json
-from ch01_allot.allot import allot_nested_scale
-from ch05_reason.reason_main import get_dict_from_factunits
+from ch02_allot.allot import allot_nested_scale
+from ch06_reason.reason_main import get_dict_from_factunits
 from ch10_person_lesson._ref.ch10_path import create_moment_persons_dir_path
 from ch10_person_lesson.lasso import LassoUnit
 from ch12_bud._ref.ch12_path import (

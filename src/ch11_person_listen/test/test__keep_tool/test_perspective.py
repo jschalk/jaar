@@ -1,4 +1,4 @@
-from ch04_rope.rope import create_rope, default_knot_if_None
+from ch05_rope.rope import create_rope, default_knot_if_None
 from ch08_person_logic.test._util.ch08_examples import get_personunit_with_4_levels
 from ch10_person_lesson.lasso import lassounit_shop
 from ch10_person_lesson.lesson_filehandler import lessonfilehandler_shop

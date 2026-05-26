@@ -1,4 +1,4 @@
-from ch02_contact.contact import contactunit_shop
+from ch03_contact.contact import contactunit_shop
 from ch09_person_atom.atom_main import PersonAtom, personatom_shop
 from ch99_glossary.ch_keyword import Ch09Keywords as kw, ExampleStrs as exx
 

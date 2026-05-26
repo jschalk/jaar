@@ -1,8 +1,8 @@
 from ch00_py.dict_toolbox import get_empty_dict_if_None
-from ch02_contact.contact import contactunit_shop
-from ch02_contact.group import awardunit_shop
-from ch04_rope.rope import create_rope, get_parent_rope, get_tail_label
-from ch05_reason.reason_main import factunit_shop
+from ch03_contact.contact import contactunit_shop
+from ch03_contact.group import awardunit_shop
+from ch05_rope.rope import create_rope, get_parent_rope, get_tail_label
+from ch06_reason.reason_main import factunit_shop
 from ch07_plan.plan import planunit_shop
 from ch08_person_logic.person_main import PersonUnit
 from ch08_person_logic.person_tool import person_attr_exists, person_get_obj

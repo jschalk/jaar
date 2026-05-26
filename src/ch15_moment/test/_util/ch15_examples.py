@@ -1,5 +1,5 @@
-from ch04_rope.rope import create_rope
-from ch05_reason.reason_main import FactUnit, factunit_shop
+from ch05_rope.rope import create_rope
+from ch06_reason.reason_main import FactUnit, factunit_shop
 from ch07_plan.healer import healerunit_shop
 from ch07_plan.plan import planunit_shop
 from ch08_person_logic.person_main import PersonUnit, personunit_shop

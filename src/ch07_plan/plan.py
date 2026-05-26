@@ -5,8 +5,8 @@ from ch00_py.dict_toolbox import (
     get_False_if_None,
     get_positive_int,
 )
-from ch01_allot.allot import allot_scale, default_grain_num_if_None
-from ch02_contact.group import (
+from ch02_allot.allot import allot_scale, default_grain_num_if_None
+from ch03_contact.group import (
     AwardHeir,
     AwardLine,
     AwardUnit,
@@ -15,14 +15,14 @@ from ch02_contact.group import (
     awardline_shop,
     get_awardunits_from_dict,
 )
-from ch03_workforce.workforce import (
+from ch04_workforce.workforce import (
     WorkforceHeir,
     WorkforceUnit,
     get_workforceunit_from_dict,
     workforceheir_shop,
     workforceunit_shop,
 )
-from ch04_rope.rope import (
+from ch05_rope.rope import (
     all_ropes_between,
     create_rope,
     find_replace_rope_key_dict,
@@ -30,7 +30,7 @@ from ch04_rope.rope import (
     rebuild_rope,
     replace_knot,
 )
-from ch05_reason.reason_main import (
+from ch06_reason.reason_main import (
     FactCore,
     FactHeir,
     FactUnit,

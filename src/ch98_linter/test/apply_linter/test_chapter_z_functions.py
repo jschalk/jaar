@@ -23,9 +23,9 @@ from os.path import exists as os_path_exists
 
 def test_find_chapter_dir_ReturnsPath_Scenario0_FindsMatchingParent():
     # ESTABLISH
-    file_path = "/projects/book/ch03_algorithms/examples/test_file.py"
+    file_path = "/projects/book/ch04_algorithms/examples/test_file.py"
     # WHEN / THEN
-    assert find_chapter_dir(file_path) == "ch03_algorithms"
+    assert find_chapter_dir(file_path) == "ch04_algorithms"
     # WHEN / THEN
     file_path = "/projects/book/examples/test_file.py"
     assert not find_chapter_dir(file_path)

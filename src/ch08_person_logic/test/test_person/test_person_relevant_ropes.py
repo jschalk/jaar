@@ -1,5 +1,5 @@
-from ch04_rope.rope import to_rope
-from ch05_reason.reason_main import reasonunit_shop
+from ch05_rope.rope import to_rope
+from ch06_reason.reason_main import reasonunit_shop
 from ch07_plan.plan import planunit_shop
 from ch08_person_logic.person_main import personunit_shop
 from ch08_person_logic.test._util.ch08_examples import (

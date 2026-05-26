@@ -177,8 +177,8 @@ def test_get_ch_sorted_keywords_ReturnsObj_Scenario0_basic_sorting():
     # ESTABLISH
     data = {
         "E": {kw.question_tier: 0, kw.valid_ch: kw.ch20},
-        "W": {kw.question_tier: 0, kw.valid_ch: kw.ch02},
-        "A": {kw.question_tier: 1, kw.valid_ch: kw.ch01},
+        "W": {kw.question_tier: 0, kw.valid_ch: kw.ch03},
+        "A": {kw.question_tier: 1, kw.valid_ch: kw.ch02},
     }
     # WHEN
     result = get_ch_sorted_keywords(data)
@@ -191,7 +191,7 @@ def test_get_ch_sorted_keywords_ReturnsObj_Scenario1_empty_chapter_goes_first_wi
     data = {
         "E": {kw.question_tier: 0, kw.valid_ch: kw.ch20},
         "W": {kw.question_tier: 0, kw.valid_ch: ""},
-        "A": {kw.question_tier: 0, kw.valid_ch: kw.ch02},
+        "A": {kw.question_tier: 0, kw.valid_ch: kw.ch03},
     }
     # WHEN
     result = get_ch_sorted_keywords(data)
@@ -203,7 +203,7 @@ def test_get_ch_sorted_keywords_ReturnsObj_Scenario2_empty_vs_other_tiers():
     # ESTABLISH
     data = {
         "A": {kw.question_tier: 1, kw.valid_ch: ""},
-        "B": {kw.question_tier: 0, kw.valid_ch: kw.ch01},
+        "B": {kw.question_tier: 0, kw.valid_ch: kw.ch02},
         "C": {kw.question_tier: 0, kw.valid_ch: ""},
     }
     # WHEN
@@ -217,7 +217,7 @@ def test_get_ch_sorted_keywords_ReturnsObj_Scenario3_malformed_chapter_treated_l
     # ESTABLISH
     data = {
         "A": {kw.question_tier: 0, kw.valid_ch: "foo"},
-        "B": {kw.question_tier: 0, kw.valid_ch: kw.ch02},
+        "B": {kw.question_tier: 0, kw.valid_ch: kw.ch03},
         "C": {kw.question_tier: 0, kw.valid_ch: ""},
     }
     # WHEN

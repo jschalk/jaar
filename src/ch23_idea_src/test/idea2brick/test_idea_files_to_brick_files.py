@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import count_dirs_files, create_path
-from ch04_rope.rope import create_rope
+from ch05_rope.rope import create_rope
 from ch23_idea_src.idea2brick import (
     IdeaBook,
     SheetRef,

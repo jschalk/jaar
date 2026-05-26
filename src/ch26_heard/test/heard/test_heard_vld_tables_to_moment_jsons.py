@@ -1,6 +1,6 @@
 from ch00_py.db_toolbox import create_select_query, db_table_exists, get_row_count
 from ch00_py.file_toolbox import open_json
-from ch04_rope.rope import create_rope
+from ch05_rope.rope import create_rope
 from ch10_person_lesson._ref.ch10_path import create_moment_json_path
 from ch10_person_lesson.lasso import lassounit_shop
 from ch15_moment.moment_config import get_moment_dimens

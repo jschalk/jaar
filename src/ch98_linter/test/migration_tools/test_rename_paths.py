@@ -18,23 +18,23 @@ def test_first_level_dirs_with_prefix_ReturnsObj():
     # ESTABLISH
     with tempfile_TemporaryDirectory() as tmpdir:
         # Setup directories
-        os_mkdir(os_path_join(tmpdir, "ch02_yahoo"))
-        os_mkdir(os_path_join(tmpdir, "ch02_google"))
-        os_mkdir(os_path_join(tmpdir, "ch02_yahoo_temp"))
+        os_mkdir(os_path_join(tmpdir, "ch03_yahoo"))
+        os_mkdir(os_path_join(tmpdir, "ch03_google"))
+        os_mkdir(os_path_join(tmpdir, "ch03_yahoo_temp"))
         os_mkdir(os_path_join(tmpdir, "other_dir"))
 
         # Nested dir should not be included
-        nested_dir = os_path_join(tmpdir, "ch02_yahoo", "temp")
+        nested_dir = os_path_join(tmpdir, "ch03_yahoo", "temp")
         os_mkdir(nested_dir)
 
-        # Test prefix "ch02"
-        prefix_path = os_path_join(tmpdir, "ch02")
+        # Test prefix "ch03"
+        prefix_path = os_path_join(tmpdir, "ch03")
         # WHEN
         result = first_level_dirs_with_prefix(prefix_path)
         # THEN
         result_names = [os_path_basename(p) for p in result]
 
-        assert set(result_names) == {"ch02_yahoo", "ch02_google", "ch02_yahoo_temp"}
+        assert set(result_names) == {"ch03_yahoo", "ch03_google", "ch03_yahoo_temp"}
         # nested dir should not appear
         assert "temp" not in result_names
 

@@ -1,4 +1,4 @@
-from ch05_reason.reason_main import caseunit_shop, reasonheir_shop, reasonunit_shop
+from ch06_reason.reason_main import caseunit_shop, reasonheir_shop, reasonunit_shop
 from ch07_plan.plan import planunit_shop
 from ch08_person_logic.test._util.ch08_examples import (
     get_personunit_irrational_example,

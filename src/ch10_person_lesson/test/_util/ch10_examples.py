@@ -1,4 +1,4 @@
-from ch04_rope.rope import RopeTerm, create_rope, create_rope_from_labels
+from ch05_rope.rope import RopeTerm, create_rope, create_rope_from_labels
 from ch09_person_atom.atom_main import PersonAtom, personatom_shop
 from ch10_person_lesson._ref.ch10_semantic_types import LabelTerm, MomentRope
 from ch10_person_lesson.delta import PersonDelta, persondelta_shop

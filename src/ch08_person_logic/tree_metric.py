@@ -1,6 +1,6 @@
 from ch00_py.dict_toolbox import get_0_if_None, get_empty_dict_if_None
-from ch02_contact.group import AwardUnit
-from ch05_reason.reason_main import ReasonUnit, RopeTerm
+from ch03_contact.group import AwardUnit
+from ch06_reason.reason_main import ReasonUnit, RopeTerm
 from ch08_person_logic._ref.ch08_semantic_types import GroupTitle
 from dataclasses import dataclass
 

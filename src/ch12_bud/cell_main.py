@@ -4,8 +4,8 @@ from ch00_py.dict_toolbox import (
     get_empty_dict_if_None,
     get_empty_list_if_None,
 )
-from ch01_allot.allot import allot_scale
-from ch05_reason.reason_main import (
+from ch02_allot.allot import allot_scale
+from ch06_reason.reason_main import (
     FactUnit,
     get_dict_from_factunits,
     get_factunits_from_dict,

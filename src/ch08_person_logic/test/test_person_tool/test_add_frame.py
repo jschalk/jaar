@@ -1,4 +1,4 @@
-# from ch07_plan.test._util.ch06_examples import get_range_attrs
+# from ch07_plan.test._util.ch07_examples import get_range_attrs
 # from ch08_person_logic.person_main import personunit_shop
 # from ch08_person_logic.person_tool import (
 #     add_frame_to_personunit,

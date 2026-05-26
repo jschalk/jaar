@@ -10,7 +10,7 @@ from ch00_py.file_toolbox import (
     save_file,
 )
 from ch00_py.test.tool_db.test_db_tool_ import print_table
-from ch04_rope.rope import create_rope_from_labels as init_rope
+from ch05_rope.rope import create_rope_from_labels as init_rope
 from ch10_person_lesson._ref.ch10_path import create_gut_path, create_moment_json_path
 from ch10_person_lesson.lasso import lassounit_shop
 from ch10_person_lesson.lesson_filehandler import open_gut_file

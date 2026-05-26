@@ -8,7 +8,7 @@ from ch00_py.dict_toolbox import (
     get_from_nested_dict,
     set_in_nested_dict,
 )
-from ch01_allot.allot import default_pool_num
+from ch02_allot.allot import default_pool_num
 from ch12_bud._ref.ch12_semantic_types import (
     ContactName,
     FundNum,

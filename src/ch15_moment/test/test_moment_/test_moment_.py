@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import create_path, get_json_filename, set_dir
-from ch01_allot.allot import default_grain_num_if_None
-from ch04_rope.rope import default_knot_if_None
+from ch02_allot.allot import default_grain_num_if_None
+from ch05_rope.rope import default_knot_if_None
 from ch07_plan.healer import healerunit_shop
 from ch07_plan.plan import planunit_shop
 from ch08_person_logic.person_main import personunit_shop

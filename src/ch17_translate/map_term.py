@@ -8,7 +8,7 @@ from ch00_py.dict_toolbox import (
     str_in_dict_keys,
     str_in_dict_values,
 )
-from ch04_rope.rope import (
+from ch05_rope.rope import (
     create_rope,
     create_rope_from_labels,
     get_all_rope_labels,

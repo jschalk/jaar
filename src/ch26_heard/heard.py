@@ -5,7 +5,7 @@ from ch00_py.db_toolbox import (
 )
 from ch00_py.dict_toolbox import set_in_nested_dict
 from ch00_py.file_toolbox import get_level1_dirs, save_file, save_json
-from ch04_rope.rope import create_rope
+from ch05_rope.rope import create_rope
 from ch10_person_lesson._ref.ch10_path import (
     create_moment_json_path,
     create_moments_dir_path,

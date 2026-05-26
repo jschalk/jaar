@@ -1,4 +1,4 @@
-from ch04_rope.rope import create_rope, default_knot_if_None, to_rope
+from ch05_rope.rope import create_rope, default_knot_if_None, to_rope
 from ch17_translate.map_term import (
     LabelMap,
     NameMap,

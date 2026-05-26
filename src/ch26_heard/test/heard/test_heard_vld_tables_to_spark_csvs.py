@@ -1,6 +1,6 @@
 from ch00_py.db_toolbox import get_table_columns
 from ch00_py.file_toolbox import create_path, open_file
-from ch04_rope.rope import create_rope
+from ch05_rope.rope import create_rope
 from ch10_person_lesson.lasso import lassounit_shop
 from ch12_bud._ref.ch12_path import create_person_spark_dir_path
 from ch22_etl_config.etl_sqlstr import (

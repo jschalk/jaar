@@ -6,7 +6,7 @@ from ch00_py.plotly_toolbox import (
     add_simp_rect,
     conditional_fig_show,
 )
-from ch01_allot.allot import default_pool_num
+from ch02_allot.allot import default_pool_num
 from ch08_person_logic.person_graphic import display_plantree
 from ch08_person_logic.person_main import PersonUnit
 from ch99_glossary.ch_keyword import ExampleStrs as exx

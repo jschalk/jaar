@@ -1,7 +1,7 @@
-from ch01_allot.allot import default_pool_num
-from ch02_contact.contact import contactunit_shop
-from ch02_contact.group import awardline_shop, awardunit_shop
-from ch04_rope.rope import RopeTerm, to_rope
+from ch02_allot.allot import default_pool_num
+from ch03_contact.contact import contactunit_shop
+from ch03_contact.group import awardline_shop, awardunit_shop
+from ch05_rope.rope import RopeTerm, to_rope
 from ch07_plan.plan import PlanUnit, planunit_shop
 from ch08_person_logic.person_main import PersonUnit, personunit_shop
 from ch08_person_logic.test._util.ch08_examples import (

@@ -1,5 +1,5 @@
 from ch00_py.dict_toolbox import get_max_key
-from ch05_reason.reason_main import FactUnit, get_factunit_from_tuple
+from ch06_reason.reason_main import FactUnit, get_factunit_from_tuple
 from ch12_bud._ref.ch12_semantic_types import PersonName, RopeTerm
 
 

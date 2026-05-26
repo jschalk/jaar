@@ -1,5 +1,5 @@
 from ch00_py.dict_toolbox import get_0_if_None, get_empty_dict_if_None
-from ch01_allot.allot import allot_scale, default_grain_num_if_None, validate_pool_num
+from ch02_allot.allot import allot_scale, default_grain_num_if_None, validate_pool_num
 from ch08_person_logic.person_main import PersonUnit
 from ch13_keep._ref.ch13_semantic_types import (
     ContactName,

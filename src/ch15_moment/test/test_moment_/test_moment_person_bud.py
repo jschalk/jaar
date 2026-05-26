@@ -1,4 +1,4 @@
-from ch04_rope.rope import create_rope
+from ch05_rope.rope import create_rope
 from ch12_bud.bud_main import personbudhistory_shop
 from ch15_moment.moment_main import momentunit_shop
 from ch99_glossary.ch_keyword import ExampleStrs as exx

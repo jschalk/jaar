@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import create_path, open_file, save_file
-from ch04_rope.rope import create_rope_from_labels as init_rope
+from ch05_rope.rope import create_rope_from_labels as init_rope
 from ch10_person_lesson._ref.ch10_path import create_moment_json_path
 from ch10_person_lesson.lasso import lassounit_shop
 from ch11_person_listen._ref.ch11_path import create_job_path
