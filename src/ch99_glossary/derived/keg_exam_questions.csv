@@ -37,8 +37,8 @@ row_number,question
 35,Did you read that the keg_definition of 'ch18' is 'Defines the tools that use Bricks to build MomentUnits.'.
 36,Did you read that the keg_definition of 'ch19' is 'Defines the 'Idea Src' process. Data going to 'Bricks'.'.
 37,Did you read that the keg_definition of 'ch20' is 'Defines the 'Etl Bricks' process. From 'Source Ideas' to 'Sound'.'.
-38,Did you read that the keg_definition of 'ch21' is 'Defines the 'Sound' process. From 'Bricks' to 'Heard'.'.
-39,Did you read that the keg_definition of 'ch22' is 'Defines the 'Heard' process. From 'Sound' to 'lego'.'.
+38,Did you read that the keg_definition of 'ch25' is 'Defines the 'Sound' process. From 'Bricks' to 'Heard'.'.
+39,Did you read that the keg_definition of 'ch26' is 'Defines the 'Heard' process. From 'Sound' to 'lego'.'.
 40,"Did you read that the keg_definition of 'ch27' is 'Defines the lego stage of data. Source of Job Persons, complete Moment data.'."
 41,Did you read that the keg_definition of 'ch30' is 'Defines how ideas for outside audiences are created.'.
 42,Did you read that the keg_definition of 'ch31' is 'Defines the analytics outcomes of completed MomentUnits.'.

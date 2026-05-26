@@ -20,6 +20,10 @@ def ch_move_main():
     dst_chxx_str = input("Chapter destina (int): ").strip()
     src_chxx_int = int(src_chxx_str)
     dst_chxx_int = int(dst_chxx_str)
+    move_chapters_given_ints(src_chxx_int, dst_chxx_int)
+
+
+def move_chapters_given_ints(src_chxx_int, dst_chxx_int):
     src_chxx_prefix = f"ch{src_chxx_int:02}"
     dst_chxx_prefix = f"ch{dst_chxx_int:02}"
     src_uppercase_chxx = f"Ch{src_chxx_int:02}"

@@ -22,8 +22,8 @@
 - ch18_etl_config: b_agg, b_raw, b_src, b_vld, brixk_agg, brixk_raw, brixk_src, brixk_vld, ch18, h_agg, h_raw, h_vld, heard_agg, heard_raw, heard_vld, i_dst, i_src, ideax_dst, ideax_src, k_vld, lego, legox_mst, mmtbudd, mmthour, mmtmont, mmtoffi, mmtpayy, mmtunit, mmtweek, moment_ote1_agg, nabtime, person_net_amount, s_agg, s_raw, s_vld, sound_agg, sound_raw, sound_vld, sparks_b_agg, sparks_b_vld, trlcore, trllabe, trlname, trlrope, trltitl
 - ch19_idea_src: ch19, day_punch, fission, idea_type, ii, moment_tranbook_nets
 - ch20_etl_brick: ch20
-- ch21_sound: ch21
-- ch26_heard: ch26
+- ch25_sound: ch25, ch26
+- ch26_heard: 
 - ch27_lego: ch27
 - ch30_idea_dst: ch30, vow
 - ch31_kpi: DayEvent, Event, ch31, default_kpi_bundle, gcal, moment_kpi001_contact_nets, moment_kpi002_person_pledges

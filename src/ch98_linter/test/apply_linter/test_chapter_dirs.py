@@ -44,7 +44,8 @@ def test_Chapters_NonTestFilesDoNotHavePrintStatments():
     excluded_files = {
         "w1_app.py",
         "chapter_move_tool.py",
-        "ch_move.py",
+        "ch_move1.py",
+        "ch_move_many.py",
         "create_notebook.py",
         "paths_change.py",
         "style.py",

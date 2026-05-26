@@ -11,7 +11,7 @@ from ch20_etl_brick.etl_brick_main import (
     etl_brixk_vld_tables_to_sound_raw_tables,
     etl_sparks_b_agg_table_to_sparks_b_vld_table,
 )
-from ch21_sound.sound import (
+from ch25_sound.sound import (
     etl_sound_agg_tables_to_sound_vld_tables,
     etl_sound_raw_tables_to_sound_agg_tables,
     etl_sound_vld_tables_to_heard_raw_tables,

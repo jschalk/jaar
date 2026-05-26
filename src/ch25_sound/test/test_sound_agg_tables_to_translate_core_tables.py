@@ -21,7 +21,7 @@ from ch18_etl_config.etl_sqlstr import (
     create_update_trlrope_sound_agg_knot_error_sqlstr,
     create_update_trltitl_sound_agg_knot_error_sqlstr,
 )
-from ch21_sound.sound import (
+from ch25_sound.sound import (
     etl_translate_sound_agg_tables_to_translate_sound_vld_tables,
     insert_translate_core_agg_to_translate_core_vld_table,
     insert_translate_core_raw_to_translate_core_agg_table,
@@ -32,7 +32,7 @@ from ch21_sound.sound import (
     update_translate_sound_agg_inconsist_errors,
     update_translate_sound_agg_knot_errors,
 )
-from ch99_glossary.ch_keyword import Ch21Keywords as kw, ExampleStrs as exx
+from ch99_glossary.ch_keyword import Ch25Keywords as kw, ExampleStrs as exx
 from sqlite3 import Cursor
 
 
