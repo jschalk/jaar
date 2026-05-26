@@ -10,12 +10,12 @@ from ch05_reason.reason_main import (
     get_dict_from_factunits,
     get_factunits_from_dict,
 )
-from ch07_person_logic.person_main import (
+from ch08_person_logic.person_main import (
     PersonUnit,
     get_personunit_from_dict,
     personunit_shop,
 )
-from ch07_person_logic.person_tool import (
+from ch08_person_logic.person_tool import (
     clear_factunits_from_person,
     get_contact_mandate_ledger,
     get_credit_ledger,

@@ -6,7 +6,7 @@ from ch00_py.file_toolbox import (
     save_json,
     set_dir,
 )
-from ch07_person_logic.person_main import PersonUnit, personunit_shop
+from ch08_person_logic.person_main import PersonUnit, personunit_shop
 from ch10_person_lesson._ref.ch10_path import create_moment_persons_dir_path
 from ch10_person_lesson.lasso import LassoUnit, lassounit_shop
 from ch10_person_lesson.lesson_filehandler import open_person_file, save_person_file

@@ -9,8 +9,8 @@ What does each one do?
 - **ch03_workforce**: Defines Workforce, LaborUnit. How tasks are assigned to labor.
 - **ch04_rope**: Defines Term Classes: Knots, Labels, RopeTerms, FirstLabels
 - **ch05_reason**: Defines ReasonUnits, FactUnits, and Facts decide if a Reason is Active
-- **ch06_plan**: Defines PlanUnits with sub-plans, Awardees, Workforce, Reasons, Facts, etc.
-- **ch07_person_logic**: Defines a PersonUnit as a PlanUnit and ContactUnits capable of producing an agenda.
+- **ch07_plan**: Defines PlanUnits with sub-plans, Awardees, Workforce, Reasons, Facts, etc.
+- **ch08_person_logic**: Defines a PersonUnit as a PlanUnit and ContactUnits capable of producing an agenda.
 - **ch09_person_atom**: Defines PersonAtoms: Irreducible units of change for a PersonUnit.
 - **ch10_person_lesson**: Defines lessons which are collections of PersonAtoms by FaceName
 - **ch11_person_listen**: These tools describe how one PersonUnit listens to another.

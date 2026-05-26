@@ -1,4 +1,4 @@
-from ch06_plan.plan import planunit_shop
+from ch07_plan.plan import planunit_shop
 from ch31_kpi.gcalendar import (
     DayEvent,
     gcal_readable_percent,

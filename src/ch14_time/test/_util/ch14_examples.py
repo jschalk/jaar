@@ -1,6 +1,6 @@
 from ch00_py.plotly_toolbox import conditional_fig_show
-from ch06_plan.plan import PlanUnit
-from ch07_person_logic.person_main import PersonUnit, personunit_shop
+from ch07_plan.plan import PlanUnit
+from ch08_person_logic.person_main import PersonUnit, personunit_shop
 from ch14_time._ref.ch14_semantic_types import TimeNum
 from ch14_time.epoch_config import (
     get_creg_config,

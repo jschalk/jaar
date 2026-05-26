@@ -1,7 +1,7 @@
 from ch01_allot.allot import allot_scale
 from ch04_rope.rope import get_ancestor_ropes, get_first_label_from_rope
-from ch06_plan.plan import PlanUnit
-from ch07_person_logic.person_main import ContactUnit, PersonUnit
+from ch07_plan.plan import PlanUnit
+from ch08_person_logic.person_main import ContactUnit, PersonUnit
 from ch10_person_lesson.lasso import LassoUnit, lassounit_shop
 from ch10_person_lesson.lesson_filehandler import LessonFileHandler, open_gut_file
 from ch11_person_listen._ref.ch11_semantic_types import PersonName, RopeTerm

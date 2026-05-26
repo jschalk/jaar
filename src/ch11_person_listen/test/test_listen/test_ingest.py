@@ -1,5 +1,5 @@
-from ch06_plan.plan import planunit_shop
-from ch07_person_logic.person_main import personunit_shop
+from ch07_plan.plan import planunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch11_person_listen.listen_main import (
     _allocate_irrational_contact_debt_lumen,
     generate_ingest_list,

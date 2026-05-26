@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import count_dirs_files, create_path, open_json, save_json
-from ch07_person_logic.person_main import personunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch10_person_lesson._ref.ch10_path import (
     create_moment_json_path,
     create_moment_persons_dir_path,

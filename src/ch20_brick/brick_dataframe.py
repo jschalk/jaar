@@ -4,7 +4,7 @@ from ch00_py.dict_toolbox import (
     get_csv_column1_column2_metrics,
     get_positional_dict,
 )
-from ch07_person_logic.person_main import PersonUnit
+from ch08_person_logic.person_main import PersonUnit
 from ch09_person_atom.atom_main import PersonAtom, atomrow_shop
 from ch10_person_lesson.delta import (
     PersonDelta,

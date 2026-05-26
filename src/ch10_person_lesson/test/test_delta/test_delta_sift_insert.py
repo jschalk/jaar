@@ -1,4 +1,4 @@
-from ch07_person_logic.person_main import personunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch09_person_atom.atom_main import personatom_shop
 from ch10_person_lesson.delta import get_minimal_persondelta, persondelta_shop
 from ch99_glossary.ch_keyword import Ch10Keywords as kw, ExampleStrs as exx

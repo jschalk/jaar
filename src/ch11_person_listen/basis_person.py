@@ -1,4 +1,4 @@
-from ch07_person_logic.person_main import PersonUnit, personunit_shop
+from ch08_person_logic.person_main import PersonUnit, personunit_shop
 from ch11_person_listen._ref.ch11_semantic_types import PersonName
 
 

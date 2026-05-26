@@ -1,5 +1,5 @@
-from ch07_person_logic.person_main import get_sorted_plan_list, personunit_shop
-from ch07_person_logic.person_tool import (
+from ch08_person_logic.person_main import get_sorted_plan_list, personunit_shop
+from ch08_person_logic.person_tool import (
     get_person_root_facts_dict,
     person_plan_reason_caseunit_exists,
     person_plan_reason_caseunit_get_obj,

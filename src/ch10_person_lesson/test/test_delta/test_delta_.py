@@ -1,6 +1,6 @@
 from ch02_contact.contact import contactunit_shop
 from ch04_rope.rope import create_rope, to_rope
-from ch07_person_logic.person_main import personunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch09_person_atom.atom_main import personatom_shop
 from ch10_person_lesson.delta import (
     PersonDelta,

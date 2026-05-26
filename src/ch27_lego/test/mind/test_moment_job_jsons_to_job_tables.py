@@ -2,8 +2,8 @@ from ch00_py.db_toolbox import db_table_exists, get_row_count
 from ch00_py.file_toolbox import save_json
 from ch02_contact.group import awardunit_shop
 from ch03_workforce.workforce import workforceunit_shop
-from ch06_plan.healer import healerunit_shop
-from ch07_person_logic.person_main import personunit_shop
+from ch07_plan.healer import healerunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch10_person_lesson._ref.ch10_path import create_moment_json_path
 from ch10_person_lesson.lasso import lassounit_shop
 from ch11_person_listen._ref.ch11_path import create_job_path

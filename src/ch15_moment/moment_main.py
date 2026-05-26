@@ -7,7 +7,7 @@ from ch00_py.file_toolbox import (
     set_dir,
 )
 from ch01_allot.allot import default_grain_num_if_None
-from ch07_person_logic.person_main import PersonUnit, personunit_shop
+from ch08_person_logic.person_main import PersonUnit, personunit_shop
 from ch10_person_lesson._ref.ch10_path import (
     create_moment_dir_path,
     create_moment_json_path,

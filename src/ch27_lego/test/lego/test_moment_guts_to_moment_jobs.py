@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import open_json, save_json
-from ch07_person_logic.person_main import get_personunit_from_dict, personunit_shop
+from ch08_person_logic.person_main import get_personunit_from_dict, personunit_shop
 from ch10_person_lesson._ref.ch10_path import create_gut_path, create_moment_json_path
 from ch10_person_lesson.lasso import lassounit_shop
 from ch11_person_listen._ref.ch11_path import create_job_path

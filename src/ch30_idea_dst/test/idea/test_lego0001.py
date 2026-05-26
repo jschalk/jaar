@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import create_path, set_dir
-from ch07_person_logic.person_main import personunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch10_person_lesson.lasso import lassounit_shop
 from ch10_person_lesson.lesson_filehandler import save_gut_file
 from ch15_moment.moment_main import momentunit_shop, save_moment_file

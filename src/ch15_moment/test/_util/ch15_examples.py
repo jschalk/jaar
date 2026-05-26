@@ -1,8 +1,8 @@
 from ch04_rope.rope import create_rope
 from ch05_reason.reason_main import FactUnit, factunit_shop
-from ch06_plan.healer import healerunit_shop
-from ch06_plan.plan import planunit_shop
-from ch07_person_logic.person_main import PersonUnit, personunit_shop
+from ch07_plan.healer import healerunit_shop
+from ch07_plan.plan import planunit_shop
+from ch08_person_logic.person_main import PersonUnit, personunit_shop
 from ch10_person_lesson.lasso import lassounit_shop
 from ch10_person_lesson.lesson_filehandler import open_gut_file, save_gut_file
 from ch15_moment.moment_main import MomentUnit, momentunit_shop

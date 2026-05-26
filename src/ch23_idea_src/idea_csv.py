@@ -1,5 +1,5 @@
 from ch00_py.dict_toolbox import get_empty_str_if_None as if_none_str
-from ch07_person_logic.person_main import PersonUnit
+from ch08_person_logic.person_main import PersonUnit
 from ch15_moment.moment_main import MomentUnit
 from ch20_brick.brick_config import get_brick_format_filename, get_brick_format_headers
 from ch23_idea_src._ref.ch23_semantic_types import FaceName, KnotTerm, MomentRope

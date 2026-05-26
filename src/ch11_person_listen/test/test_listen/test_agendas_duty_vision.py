@@ -1,5 +1,5 @@
-from ch06_plan.plan import planunit_shop
-from ch07_person_logic.person_main import personunit_shop
+from ch07_plan.plan import planunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch10_person_lesson.lasso import lassounit_shop
 from ch10_person_lesson.lesson_filehandler import lessonfilehandler_shop
 from ch11_person_listen.keep_tool import save_duty_person, save_vision_person

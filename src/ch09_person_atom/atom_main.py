@@ -3,9 +3,9 @@ from ch02_contact.contact import contactunit_shop
 from ch02_contact.group import awardunit_shop
 from ch04_rope.rope import create_rope, get_parent_rope, get_tail_label
 from ch05_reason.reason_main import factunit_shop
-from ch06_plan.plan import planunit_shop
-from ch07_person_logic.person_main import PersonUnit
-from ch07_person_logic.person_tool import person_attr_exists, person_get_obj
+from ch07_plan.plan import planunit_shop
+from ch08_person_logic.person_main import PersonUnit
+from ch08_person_logic.person_tool import person_attr_exists, person_get_obj
 from ch09_person_atom._ref.ch09_semantic_types import (
     ContactName,
     FactNum,

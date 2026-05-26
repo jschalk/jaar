@@ -1,4 +1,4 @@
-from ch07_person_logic.person_main import personunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch12_bud.cell_main import cellunit_get_from_dict, cellunit_shop
 from ch12_bud.test._util.ch12_examples import (
     example_casa_clean_factunit as clean_factunit,

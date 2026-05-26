@@ -13,9 +13,9 @@ from ch03_workforce.workforce import (
 )
 from ch04_rope.rope import create_rope
 from ch05_reason.reason_main import caseunit_shop, factheir_shop, reasonheir_shop
-from ch06_plan.healer import healerunit_shop
-from ch06_plan.plan import planunit_shop
-from ch07_person_logic.person_main import personunit_shop
+from ch07_plan.healer import healerunit_shop
+from ch07_plan.plan import planunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch22_etl_config.etl_sqlstr import create_job_tables
 from ch27_lego.lego_job2db import (
     ObjKeysHolder,

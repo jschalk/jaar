@@ -6,9 +6,9 @@ from ch00_py.dict_toolbox import (
 )
 from ch04_rope.rope import is_sub_rope
 from ch05_reason.reason_main import CaseUnit, FactUnit, ReasonUnit
-from ch06_plan.plan import PlanUnit
-from ch07_person_logic.person_main import PersonUnit
-from ch07_person_logic.person_tool import (
+from ch07_plan.plan import PlanUnit
+from ch08_person_logic.person_main import PersonUnit
+from ch08_person_logic.person_tool import (
     add_frame_to_personunit,
     person_plan_reason_caseunit_set_obj,
     person_planunit_exists,

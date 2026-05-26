@@ -1,5 +1,5 @@
-from ch06_plan.plan import planunit_shop
-from ch07_person_logic.person_main import PersonUnit, personunit_shop
+from ch07_plan.plan import planunit_shop
+from ch08_person_logic.person_main import PersonUnit, personunit_shop
 from ch14_time.epoch_main import get_year_rope
 from ch14_time.test._util.ch14_examples import (
     add_time_creg_planunit,

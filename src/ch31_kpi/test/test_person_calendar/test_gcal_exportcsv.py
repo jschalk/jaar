@@ -1,4 +1,4 @@
-from ch07_person_logic.person_main import personunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch14_time.epoch_main import (
     add_epoch_planunit,
     get_default_epoch_config_dict,

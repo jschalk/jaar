@@ -1,7 +1,7 @@
 from ch02_contact.group import awardunit_shop
 from ch04_rope.rope import to_rope
 from ch05_reason.reason_main import factunit_shop, reasonunit_shop
-from ch07_person_logic.person_main import personunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch09_person_atom.atom_main import personatom_shop, sift_personatom
 from ch99_glossary.ch_keyword import Ch09Keywords as kw, ExampleStrs as exx
 

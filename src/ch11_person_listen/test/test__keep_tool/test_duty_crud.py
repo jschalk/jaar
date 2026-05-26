@@ -1,5 +1,5 @@
 from ch04_rope.rope import create_rope, default_knot_if_None
-from ch07_person_logic.test._util.ch07_examples import get_personunit_with_4_levels
+from ch08_person_logic.test._util.ch08_examples import get_personunit_with_4_levels
 from ch11_person_listen.keep_tool import (
     get_vision_person,
     save_vision_person,

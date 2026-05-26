@@ -9,7 +9,7 @@ from ch00_py.file_toolbox import (
     save_json,
 )
 from ch04_rope.rope import create_rope
-from ch07_person_logic.person_main import PersonUnit, personunit_shop
+from ch08_person_logic.person_main import PersonUnit, personunit_shop
 from ch09_person_atom.atom_config import get_person_dimens
 from ch09_person_atom.atom_main import personatom_shop
 from ch10_person_lesson._ref.ch10_path import create_gut_path, create_moments_dir_path

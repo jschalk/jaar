@@ -1,4 +1,4 @@
-from ch07_person_logic.person_main import personunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch13_keep.rivercycle import get_doctorledger, get_patientledger
 from ch13_keep.riverrun import riverrun_shop
 from ch99_glossary.ch_keyword import ExampleStrs as exx

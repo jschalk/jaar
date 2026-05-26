@@ -9,8 +9,8 @@ from ch00_py.file_toolbox import (
 from ch02_contact.contact import ContactUnit
 from ch04_rope.rope import create_rope, is_sub_rope
 from ch05_reason.reason_main import ReasonHeir
-from ch06_plan.plan import PlanUnit
-from ch07_person_logic.person_main import PersonUnit, get_sorted_plan_list
+from ch07_plan.plan import PlanUnit
+from ch08_person_logic.person_main import PersonUnit, get_sorted_plan_list
 from ch10_person_lesson._ref.ch10_path import create_moments_dir_path
 from ch10_person_lesson.lasso import LassoUnit, lassounit_shop
 from ch11_person_listen._ref.ch11_path import create_job_path

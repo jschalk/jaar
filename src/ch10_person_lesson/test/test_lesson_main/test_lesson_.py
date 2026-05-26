@@ -1,6 +1,6 @@
 from ch00_py.dict_toolbox import get_json_from_dict
 from ch02_contact.contact import contactunit_shop
-from ch07_person_logic.person_main import get_default_rope, personunit_shop
+from ch08_person_logic.person_main import get_default_rope, personunit_shop
 from ch09_person_atom.atom_main import personatom_shop
 from ch10_person_lesson._ref.ch10_semantic_types import FaceName, default_knot_if_None
 from ch10_person_lesson.delta import persondelta_shop

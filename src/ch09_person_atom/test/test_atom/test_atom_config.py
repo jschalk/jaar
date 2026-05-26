@@ -1,5 +1,5 @@
 from ch00_py.dict_toolbox import get_from_nested_dict
-from ch07_person_logic.person_config import get_person_config_dict
+from ch08_person_logic.person_config import get_person_config_dict
 from ch09_person_atom._ref.ch09_semantic_types import CRUD_command
 from ch09_person_atom.atom_config import (
     get_all_person_dimen_delete_keys,

@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import create_path, get_json_filename, open_json, save_json
-from ch07_person_logic.person_main import PersonUnit, get_default_rope
+from ch08_person_logic.person_main import PersonUnit, get_default_rope
 from ch09_person_atom.atom_main import PersonAtom, get_personatom_from_dict
 from ch10_person_lesson._ref.ch10_semantic_types import FaceName, MomentRope, PersonName
 from ch10_person_lesson.delta import (

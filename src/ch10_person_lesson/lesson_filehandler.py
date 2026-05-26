@@ -11,7 +11,7 @@ from ch00_py.file_toolbox import (
 )
 from ch01_allot.allot import default_grain_num_if_None, validate_pool_num
 from ch04_rope.rope import get_parent_rope, get_tail_label, validate_labelterm
-from ch07_person_logic.person_main import (
+from ch08_person_logic.person_main import (
     PersonUnit,
     get_personunit_from_dict,
     personunit_shop,

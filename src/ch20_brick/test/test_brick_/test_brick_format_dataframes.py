@@ -1,7 +1,7 @@
 from ch00_py.file_toolbox import create_path, open_file
 from ch04_rope.rope import create_rope
-from ch06_plan.plan import planunit_shop
-from ch07_person_logic.person_main import personunit_shop
+from ch07_plan.plan import planunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch14_time.test._util.ch14_examples import (
     add_time_creg_planunit,
     add_time_five_planunit,

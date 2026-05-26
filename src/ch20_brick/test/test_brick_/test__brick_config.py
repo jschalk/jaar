@@ -1,6 +1,6 @@
 from ch00_py.dict_toolbox import normalize_obj
 from ch00_py.file_toolbox import create_path, save_json
-from ch07_person_logic.person_config import (
+from ch08_person_logic.person_config import (
     get_all_person_calc_args,
     get_person_calc_args_sqlite_datatype_dict,
 )

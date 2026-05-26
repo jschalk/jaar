@@ -1,8 +1,8 @@
 from ch00_py.plotly_toolbox import conditional_fig_show
 from ch02_contact.group import awardunit_shop
 from ch05_reason.reason_main import reasonunit_shop
-from ch06_plan.plan import planunit_shop
-from ch07_person_logic.person_main import personunit_shop
+from ch07_plan.plan import planunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch14_time.epoch_main import (
     add_epoch_planunit,
     get_c400_constants,

@@ -5,7 +5,7 @@ from ch00_py.keyword_class_builder import (
     get_keywords_src_config,
     parse_valid_ch_str,
 )
-from ch07_person_logic.person_config import (
+from ch08_person_logic.person_config import (
     get_all_person_calc_args,
     get_person_config_dict,
 )

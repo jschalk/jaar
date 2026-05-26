@@ -1,5 +1,5 @@
 from ch04_rope.rope import RopeTerm, create_rope_from_labels
-from ch07_person_logic.person_main import personunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch13_keep._ref.ch13_semantic_types import ContactName, PersonName
 from ch13_keep.rivercycle import get_patientledger
 from ch99_glossary.ch_keyword import ExampleStrs as exx

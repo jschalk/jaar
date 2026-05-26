@@ -19,7 +19,7 @@ from ch04_rope._ref.ch04_semantic_types import (
     default_knot_if_None,
 )
 from ch05_reason._ref.ch05_semantic_types import FactNum, ReasonNum
-from ch07_person_logic._ref.ch07_semantic_types import ManaGrain, PersonName
+from ch08_person_logic._ref.ch08_semantic_types import ManaGrain, PersonName
 
 
 class CRUD_command(str):

@@ -18,5 +18,5 @@ from ch04_rope._ref.ch04_semantic_types import (
     RopeTerm,
     default_knot_if_None,
 )
-from ch07_person_logic._ref.ch07_semantic_types import ManaGrain, PersonName
+from ch08_person_logic._ref.ch08_semantic_types import ManaGrain, PersonName
 from ch10_person_lesson._ref.ch10_semantic_types import FaceName, MomentRope

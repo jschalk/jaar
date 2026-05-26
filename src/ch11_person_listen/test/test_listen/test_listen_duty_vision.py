@@ -1,5 +1,5 @@
 from ch04_rope.rope import LabelTerm, RopeTerm, create_rope
-from ch07_person_logic.person_main import PersonUnit, personunit_shop, planunit_shop
+from ch08_person_logic.person_main import PersonUnit, personunit_shop, planunit_shop
 from ch10_person_lesson.lasso import lassounit_shop
 from ch10_person_lesson.lesson_filehandler import (
     LessonFileHandler,

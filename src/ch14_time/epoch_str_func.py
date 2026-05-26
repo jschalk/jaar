@@ -6,7 +6,7 @@ from ch04_rope.rope import (
     get_tail_label,
 )
 from ch05_reason.reason_main import CaseUnit, FactUnit
-from ch07_person_logic.person_main import PersonUnit
+from ch08_person_logic.person_main import PersonUnit
 from ch14_time.epoch_main import timeshoe_shop
 
 

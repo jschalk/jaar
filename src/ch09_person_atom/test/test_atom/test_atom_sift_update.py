@@ -1,7 +1,7 @@
 from ch02_contact.group import awardunit_shop
 from ch05_reason.reason_main import factunit_shop, reasonunit_shop
-from ch07_person_logic.person_main import personunit_shop
-from ch07_person_logic.person_tool import (
+from ch08_person_logic.person_main import personunit_shop
+from ch08_person_logic.person_tool import (
     person_plan_factunit_get_obj,
     person_plan_reason_caseunit_get_obj as caseunit_get_obj,
     person_plan_reasonunit_get_obj,

@@ -2,9 +2,9 @@ from ch00_py.dict_toolbox import get_empty_list_if_None, get_from_nested_dict
 from ch02_contact.contact import contactunit_shop
 from ch02_contact.group import awardunit_shop
 from ch05_reason.reason_main import factunit_shop
-from ch06_plan.plan import planunit_shop
-from ch07_person_logic.person_main import personunit_shop
-from ch07_person_logic.test._util.ch07_examples import get_personunit_with_4_levels
+from ch07_plan.plan import planunit_shop
+from ch08_person_logic.person_main import personunit_shop
+from ch08_person_logic.test._util.ch08_examples import get_personunit_with_4_levels
 from ch10_person_lesson.delta import PersonDelta, persondelta_shop
 from ch99_glossary.ch_keyword import Ch10Keywords as kw, ExampleStrs as exx
 from copy import deepcopy as copy_deepcopy

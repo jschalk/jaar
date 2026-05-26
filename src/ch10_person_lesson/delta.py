@@ -8,8 +8,8 @@ from ch00_py.dict_toolbox import (
 from ch02_contact.contact import ContactName, ContactUnit, MemberShip
 from ch02_contact.group import MemberShip
 from ch05_reason.reason_main import FactUnit, ReasonUnit
-from ch06_plan.plan import PlanUnit
-from ch07_person_logic.person_main import PersonUnit, personunit_shop
+from ch07_plan.plan import PlanUnit
+from ch08_person_logic.person_main import PersonUnit, personunit_shop
 from ch09_person_atom.atom_config import CRUD_command
 from ch09_person_atom.atom_main import (
     PersonAtom,

@@ -1,6 +1,6 @@
-from ch06_plan.healer import healerunit_shop
-from ch06_plan.plan import planunit_shop
-from ch07_person_logic.person_graphic import display_plantree
+from ch07_plan.healer import healerunit_shop
+from ch07_plan.plan import planunit_shop
+from ch08_person_logic.person_graphic import display_plantree
 from ch10_person_lesson.lasso import lassounit_shop
 from ch10_person_lesson.lesson_filehandler import (
     lessonfilehandler_shop,

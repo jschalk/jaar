@@ -1,5 +1,5 @@
-from ch06_plan.test._util.ch06_examples import get_range_attrs
-from ch07_person_logic.person_main import PersonUnit, PlanUnit, RopeTerm
+from ch07_plan.test._util.ch07_examples import get_range_attrs
+from ch08_person_logic.person_main import PersonUnit, PlanUnit, RopeTerm
 from ch14_time._ref.ch14_semantic_types import FactNum, ReasonNum
 from ch14_time.epoch_reason import (
     set_epoch_base_case_dayly,

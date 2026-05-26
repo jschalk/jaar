@@ -1,4 +1,4 @@
-from ch07_person_logic.person_report import (
+from ch08_person_logic.person_report import (
     get_person_agenda_dataframe,
     get_person_contactunits_dataframe,
 )

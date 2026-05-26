@@ -1,6 +1,6 @@
 from ch04_rope.rope import create_rope, default_knot_if_None
 from ch05_reason.reason_main import factunit_shop, reasonunit_shop
-from ch07_person_logic.person_main import personunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch14_time.epoch_main import add_epoch_planunit
 from ch14_time.epoch_str_func import (
     get_fact_state_readable_str,

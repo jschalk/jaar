@@ -1,7 +1,7 @@
 from ch00_py.file_toolbox import create_path, open_json, set_dir
 from ch04_rope.rope import create_rope
-from ch07_person_logic.person_main import personunit_shop
-from ch07_person_logic.test._util.ch07_examples import (
+from ch08_person_logic.person_main import personunit_shop
+from ch08_person_logic.test._util.ch08_examples import (
     get_personunit_irrational_example,
     get_personunit_with_4_levels,
 )

@@ -1,5 +1,5 @@
 from ch00_py.file_toolbox import set_dir
-from ch07_person_logic.person_main import PersonUnit, personunit_shop
+from ch08_person_logic.person_main import PersonUnit, personunit_shop
 from ch10_person_lesson._ref.ch10_path import create_person_dir_path
 from ch10_person_lesson.lasso import lassounit_shop
 from ch10_person_lesson.lesson_filehandler import gut_file_exists, save_gut_file

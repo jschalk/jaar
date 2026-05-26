@@ -1,5 +1,5 @@
 from ch00_py.dict_toolbox import get_from_nested_dict
-from ch07_person_logic.person_main import PersonUnit
+from ch08_person_logic.person_main import PersonUnit
 from ch09_person_atom.atom_main import PersonAtom
 from ch10_person_lesson.delta import PersonDelta
 

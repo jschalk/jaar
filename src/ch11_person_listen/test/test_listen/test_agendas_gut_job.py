@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import delete_dir
-from ch06_plan.plan import planunit_shop
-from ch07_person_logic.person_main import personunit_shop
+from ch07_plan.plan import planunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch10_person_lesson._ref.ch10_path import create_gut_path
 from ch10_person_lesson.lasso import lassounit_shop
 from ch10_person_lesson.lesson_filehandler import lessonfilehandler_shop, save_gut_file

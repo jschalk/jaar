@@ -1,7 +1,7 @@
 from ch01_allot.allot import default_pool_num, validate_pool_num
 from ch02_contact.contact import RespectNum
-from ch06_plan.plan import planunit_shop
-from ch07_person_logic.person_main import personunit_shop
+from ch07_plan.plan import planunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch11_person_listen.basis_person import (
     create_empty_person_from_person,
     create_listen_basis,

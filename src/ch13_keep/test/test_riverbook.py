@@ -1,5 +1,5 @@
 from ch01_allot.allot import default_grain_num_if_None
-from ch07_person_logic.person_main import personunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch13_keep.rivercycle import (
     RiverBook,
     create_riverbook,

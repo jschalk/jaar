@@ -1,13 +1,13 @@
 from ch00_py.dict_toolbox import get_1_if_None
 from ch00_py.file_toolbox import create_path, open_json
 from ch04_rope.rope import create_rope, get_first_label_from_rope
-from ch06_plan.plan import (
+from ch07_plan.plan import (
     PlanUnit,
     all_plans_between,
     get_rangeunit_from_lineage_of_plans as calc_range,
     planunit_shop,
 )
-from ch07_person_logic.person_main import PersonUnit
+from ch08_person_logic.person_main import PersonUnit
 from ch14_time._ref.ch14_semantic_types import (
     EpochLabel,
     KnotTerm,

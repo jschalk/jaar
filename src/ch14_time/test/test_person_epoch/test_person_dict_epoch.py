@@ -1,4 +1,4 @@
-from ch07_person_logic.person_main import get_personunit_from_dict, personunit_shop
+from ch08_person_logic.person_main import get_personunit_from_dict, personunit_shop
 from ch14_time.epoch_main import add_epoch_planunit
 from ch99_glossary.ch_keyword import Ch14Keywords as kw, ExampleStrs as exx
 

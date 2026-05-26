@@ -1,5 +1,5 @@
 from ch04_rope.rope import create_rope, default_knot_if_None
-from ch07_person_logic.person_main import personunit_shop
+from ch08_person_logic.person_main import personunit_shop
 from ch14_time._ref.ch14_semantic_types import EpochLabel
 from ch14_time.epoch_config import (
     get_creg_config,
