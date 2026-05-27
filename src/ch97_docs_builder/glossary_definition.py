@@ -139,7 +139,7 @@ def get_count_keg_terms_by_chapters():
         if ch_int != 99:
             ch_dirs[ch_int] = ch_dir
     keg_terms = set(get_keg_definitions().keys())
-    excluded_substrs = {"Semantic"}
+    excluded_substrs = {"semantic"}
     count_strs_by_dirs = get_count_strs_by_dirs(ch_dirs, keg_terms, excluded_substrs)
     return {
         keg_term: {ch_int: count for ch_int, count in ch_counts.items() if count != 0}

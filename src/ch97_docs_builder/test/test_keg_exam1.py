@@ -58,13 +58,13 @@ def test_get_keg_definition_questionunits_ReturnsObj():
     # THEN
     keg_definitions = get_keg_definitions()
     assert set(keg_definitions.keys()) == set(keg_questions1.keys())
-    expected_year_length_questionunit = QuestionUnit(
-        keg_term=kw.year_length,
-        keg_definition=keg_definitions.get(kw.year_length),
-        init_ch=14,
+    expected_trlcore_questionunit = QuestionUnit(
+        keg_term=kw.trlcore,
+        keg_definition=keg_definitions.get(kw.trlcore),
+        init_ch=22,
         question_tier=0,
     )
-    assert keg_questions1.get(kw.year_length) == expected_year_length_questionunit
+    assert keg_questions1.get(kw.trlcore) == expected_trlcore_questionunit
 
 
 def test_set_did_you_read_orders_SetAttrs_Scenario0_EmptyList_WhenNoTermsExist():

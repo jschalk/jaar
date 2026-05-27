@@ -157,16 +157,16 @@ row_number,question
 155,"Did you read that the keg_definition of 'labor_title' is ', Workforce seed.'."
 156,Did you read that the keg_definition of 'labors' is 'Definition needed.'.
 157,Did you read that the keg_definition of 'memberships' is 'Definition needed.'.
-158,Did you read that the keg_definition of 'parent_solo' is 'The parent PlanUnit's LaborUnit's solo value for that labor_title'.
-159,"Did you read that the keg_definition of 'rational' is 'If a PersonUnit's agenda is deterministic (always the same after thinkout) then value is True, Person thinkout'."
-160,"Did you read that the keg_definition of 'respect_grain' is ', Moment arg, Person seed.'."
-161,"Did you read that the keg_definition of 'solo' is 'I can't figure out what this is for. Where in the codebase is it necessary for a LaborUnit to know if it the only LaborUnit in a WorkforceUnit, Workforce seed.'."
-162,"Did you read that the keg_definition of 'take_force' is ', Workforce seed, Award seed'."
-163,Did you read that the keg_definition of 'thinkout' is 'The process by which a PersonUnit creates all it's output metrics from file-stored data. Meant to invoke contemplation and computation. The PersonUnit contemplates what is important to them (their plans) and decides what they want to do. They compute their rules and create their agenda. If the PersonUnit plans are trusted with a currency quota they can be used as an Budget. Each Contact is assigned a FundNum. It may be negative.'.
-164,Did you read that the keg_definition of 'workforceheir' is 'Definition needed.'.
-165,Did you read that the keg_definition of 'workforceunit' is 'Definition needed.'.
-166,Did you read that the keg_definition of 'LaborHeir' is 'Definition needed.'.
-167,Did you read that the keg_definition of 'laborheir' is 'Definition needed.'.
+158,"Did you read that the keg_definition of 'rational' is 'If a PersonUnit's agenda is deterministic (always the same after thinkout) then value is True, Person thinkout'."
+159,"Did you read that the keg_definition of 'respect_grain' is ', Moment arg, Person seed.'."
+160,"Did you read that the keg_definition of 'solo' is 'I can't figure out what this is for. Where in the codebase is it necessary for a LaborUnit to know if it the only LaborUnit in a WorkforceUnit, Workforce seed.'."
+161,"Did you read that the keg_definition of 'take_force' is ', Workforce seed, Award seed'."
+162,Did you read that the keg_definition of 'thinkout' is 'The process by which a PersonUnit creates all it's output metrics from file-stored data. Meant to invoke contemplation and computation. The PersonUnit contemplates what is important to them (their plans) and decides what they want to do. They compute their rules and create their agenda. If the PersonUnit plans are trusted with a currency quota they can be used as an Budget. Each Contact is assigned a FundNum. It may be negative.'.
+163,Did you read that the keg_definition of 'workforceheir' is 'Definition needed.'.
+164,Did you read that the keg_definition of 'workforceunit' is 'Definition needed.'.
+165,Did you read that the keg_definition of 'LaborHeir' is 'Definition needed.'.
+166,Did you read that the keg_definition of 'laborheir' is 'Definition needed.'.
+167,Did you read that the keg_definition of 'parent_solo' is 'The parent PlanUnit's LaborUnit's solo value for that labor_title'.
 168,Did you read that the keg_definition of 'person' is 'Definition needed.'.
 169,"Did you read that the keg_definition of 'person_name' is ', paybook arg, bud arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed, Contact seed, Member seed.'."
 170,"Did you read that the keg_definition of 'person_name_is_workforce' is ', Workforce thinkout'."
