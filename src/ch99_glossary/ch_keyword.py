@@ -11050,7 +11050,7 @@ class Ch35Keywords(str, Enum):
         return self.value
 
 
-class Ch50Keywords(str, Enum):
+class Ch90Keywords(str, Enum):
     Anaday = "Anaday"
     Baileyday = "Baileyday"
     BreakTerm = "BreakTerm"
@@ -11191,7 +11191,7 @@ class Ch50Keywords(str, Enum):
     ch33 = "ch33"
     ch34 = "ch34"
     ch35 = "ch35"
-    ch50 = "ch50"
+    ch90 = "ch90"
     clock = "clock"
     close = "close"
     column_ordinal = "column_ordinal"
@@ -11762,7 +11762,7 @@ class Ch97Keywords(str, Enum):
     ch33 = "ch33"
     ch34 = "ch34"
     ch35 = "ch35"
-    ch50 = "ch50"
+    ch90 = "ch90"
     ch97 = "ch97"
     clock = "clock"
     close = "close"
@@ -12337,7 +12337,7 @@ class Ch98Keywords(str, Enum):
     ch33 = "ch33"
     ch34 = "ch34"
     ch35 = "ch35"
-    ch50 = "ch50"
+    ch90 = "ch90"
     ch97 = "ch97"
     ch98 = "ch98"
     clock = "clock"
@@ -12911,7 +12911,7 @@ class Ch99Keywords(str, Enum):
     ch33 = "ch33"
     ch34 = "ch34"
     ch35 = "ch35"
-    ch50 = "ch50"
+    ch90 = "ch90"
     ch97 = "ch97"
     ch98 = "ch98"
     ch99 = "ch99"

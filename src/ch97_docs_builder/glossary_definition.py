@@ -1,10 +1,10 @@
 from ch00_py.file_toolbox import open_json, save_json
-from ch01_keyword.chapter_desc_main import get_chapter_desc_prefix, get_chapter_descs
-from ch01_keyword.keyword_class_builder import (
+from ch01_keyword.chapter_desc_main import (
+    get_ch_int,
+    get_chapter_desc_prefix,
     get_chapter_descs,
-    get_keywords_src_config,
-    parse_valid_ch_str,
 )
+from ch01_keyword.keyword_class_builder import get_chapter_descs
 from ch08_person_logic.person_config import (
     get_all_person_calc_args,
     get_person_config_dict,
@@ -13,10 +13,8 @@ from ch97_docs_builder._ref.ch97_path import (
     create_chapter_ref_path,
     create_src_keg_definitions_path,
 )
-from csv import writer as csv_writer
-from dataclasses import dataclass
+from collections import defaultdict
 from pathlib import Path
-from re import search as re_search
 
 
 def get_keg_definitions() -> dict[str, dict]:
@@ -77,3 +75,73 @@ def get_chxx_prefix_path_dict() -> dict[str, str]:
 def get_chxx_ref_blurb(ch_dict, keyword) -> str:
     ch_ref_dict = open_json(ch_dict[keyword])
     return ch_ref_dict.get("chapter_blurb")
+
+
+def get_count_strs_by_dirs(
+    ch_dirs: dict[int, str | Path],
+    keg_terms: set[str],
+    excluded_path_strs: set[str] | None = None,
+) -> dict[str, dict[int, int]]:
+    """
+    Returns:
+        {
+            "SomeTerm": {
+                1: 4,
+                2: 0,
+                3: 9,
+            },
+            ...
+        }
+    """
+    excluded_path_strs = excluded_path_strs or set()
+
+    term_counts = defaultdict(dict)
+
+    for ch_int, ch_dir in ch_dirs.items():
+        ch_dir = Path(ch_dir)
+
+        chapter_text_parts = []
+
+        for file_path in ch_dir.rglob("*"):
+            if not file_path.is_file():
+                continue
+
+            file_path_str = str(file_path)
+
+            if any(
+                excluded_path_str in file_path_str
+                for excluded_path_str in excluded_path_strs
+            ):
+                continue
+
+            try:
+                file_text = file_path.read_text(
+                    encoding="utf-8",
+                )
+                chapter_text_parts.append(file_text)
+
+            except UnicodeDecodeError:
+                continue
+
+        chapter_text = "\n".join(chapter_text_parts)
+
+        for keg_term in keg_terms:
+            count = chapter_text.count(keg_term)
+            term_counts[keg_term][ch_int] = count
+
+    return dict(term_counts)
+
+
+def get_count_keg_terms_by_chapters():
+    ch_dirs = {}
+    for ch_desc, ch_dir in get_chapter_descs().items():
+        ch_int = get_ch_int(ch_desc)
+        if ch_int != 99:
+            ch_dirs[ch_int] = ch_dir
+    keg_terms = set(get_keg_definitions().keys())
+    excluded_substrs = {"Semantic"}
+    count_strs_by_dirs = get_count_strs_by_dirs(ch_dirs, keg_terms, excluded_substrs)
+    return {
+        keg_term: {ch_int: count for ch_int, count in ch_counts.items() if count != 0}
+        for keg_term, ch_counts in count_strs_by_dirs.items()
+    }

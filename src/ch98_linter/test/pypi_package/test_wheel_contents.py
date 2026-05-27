@@ -12,6 +12,7 @@ test run and invoke it explicitly before publishing.
 from fnmatch import fnmatch as fnmatch_fnmatch
 from pathlib import Path as pathlib_Path
 from pytest import fixture as pytest_fixture, mark as pytest_mark, skip as pytest_skip
+from shutil import rmtree as shutil_rmtree
 from subprocess import run as subprocess_run
 from zipfile import ZipFile as zipfile_ZipFile
 
@@ -117,6 +118,4 @@ def test_DataFilesInWheelAreVisible(wheel_contents: list[str]):
     for f in sorted(data_files):
         print(f"  {f}")
     assert data_files
-
-
-# TODO find a way to always delete src\keg2.egg-info
+    shutil_rmtree("src//keg2.egg-info")
