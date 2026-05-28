@@ -98,8 +98,8 @@ def test_Chapters_ChapterReferenceDir_ref_ExistsForEveryChapter_Scenario0():
         chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
         docs_dir = create_path(chapter_dir, "_ref")
         chapter_ref_path = create_path(docs_dir, f"{chapter_desc_prefix}_ref.json")
-        ch_ai_1min_file = f"{chapter_desc_prefix}_ai_summary_1min.md"
-        ch_ai_1min_path = create_path(docs_dir, ch_ai_1min_file)
+        ch_ai_1min_filename = f"{chapter_desc_prefix}_ai_summary_1min.md"
+        ch_ai_1min_path = create_path(docs_dir, ch_ai_1min_filename)
         # chapter_ref_path = create_chapter_ref_path(chapter_dir,)
         semantic_types_filename = get_semantic_types_filename(chapter_desc_prefix)
         semantics_path = create_path(docs_dir, semantic_types_filename)

@@ -1,4 +1,4 @@
-*This summary is authored by AI.*
+*This summary is authored by AI 5-26-2026.*
 
 ## Chapter 01 — `ch01_keyword`
 **"Keyword Glossary Engine — gives every chapter a shared controlled vocabulary"**

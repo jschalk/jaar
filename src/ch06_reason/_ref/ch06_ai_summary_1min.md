@@ -1,6 +1,6 @@
 # ch06_reason — Chapter Summary
 
-*This summary is authored by AI.*
+*This summary is authored by AI 5-26-2026.*
 
 ## 1. Title and Summary Declaration
 

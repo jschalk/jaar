@@ -258,7 +258,7 @@ def get_ex2_ii00104_df() -> DataFrame:
     x_df.loc[21] = (J45_ROPE, "Obama", 250, exx.slash)
     x_df.loc[22] = (J45_ROPE, "Preston", 275, exx.slash)
     x_df.loc[23] = (J45_ROPE, "Quorum", 300, exx.slash)
-    x_df.loc[24] = (J45_ROPE, "RioGrande", 325, exx.slash)
+    x_df.loc[24] = (J45_ROPE, "Rio", 325, exx.slash)
     x_df.loc[25] = (J45_ROPE, "Simon", 350, exx.slash)
     x_df.loc[26] = [J45_ROPE, "Trump", 365, exx.slash]
     return x_df

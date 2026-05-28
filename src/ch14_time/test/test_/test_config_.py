@@ -256,7 +256,7 @@ def test_epoch_config_shop_ReturnsObj_AllParameters():
         "Obama",
         "Preston",
         "Quorum",
-        "RioGrande",
+        "Rio",
         "Simon",
         "Trump",
     ]

@@ -8,6 +8,7 @@ from ast import (
 from ch00_py.file_toolbox import (
     create_path,
     get_dir_filenames,
+    open_file,
     open_json,
     save_file,
     save_json,
@@ -30,6 +31,7 @@ from ch97_docs_builder.glossary_ranking import (
     rebuild_keg_rank_json,
 )
 from ch99_glossary.sorter import get_keg_elements_sort_order
+from os.path import join as os_path_join
 
 
 def get_func_names_and_class_bases_from_file(
@@ -107,3 +109,21 @@ def resave_chapter_and_keyword_json_files():
     rebuild_keg_definitions_contents()
     rebuild_keg_rank_json()
     rebuild_keg_exam_questions()
+
+
+def save_chapters_ai_summary(x_dir: str):
+    chapters_ai_summary = "**ALL CHAPTER SUMMARIES WRITTEN BY AI"
+    for chapter_desc, chapter_dir in get_chapter_descs().items():
+        chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
+        ref_dir = create_path(chapter_dir, "_ref")
+        ch_ai_1min_filename = f"{chapter_desc_prefix}_ai_summary_1min.md"
+        ch_ai_1min_path = create_path(ref_dir, ch_ai_1min_filename)
+        ch_ai_1min_md = open_file(ch_ai_1min_path)
+        if chapter_desc_prefix != "ch99":
+            chapters_ai_summary += f"\n{ch_ai_1min_md}"
+
+    # save_file(x_dir, "chapter_ai_summaries.md", chapters_ai_summary)
+    dst_path = os_path_join(x_dir, "chapter_ai_summaries.md")
+    with open(dst_path, "w", newline="", encoding="utf-8") as ai_sum_file:
+        ai_sum_file.write(chapters_ai_summary)
+    # TODO make five_epoch_config weekday and month_labels keywords
