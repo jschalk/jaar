@@ -42,7 +42,7 @@ Key mechanics:
 - `keyword_class_builder.py` parses the `valid_ch` range syntax (e.g. `"3:"` means "all chapters from 3 onwards"), builds cumulative keyword sets per chapter, and generates `Enum` class source code strings like `C03Keywords`, `C07Keywords`, etc.
 - It also produces a human-understandable `keywords_by_chapter.md` markdown file listing which keywords are introduced in each chapter.
 
-The effect is that all later chapters can reference domain terms (like `moment_rope`, `spark_num`, `person_name`) as strongly-typed enum values rather than raw strings, making the codebase self-documenting and testable at the vocabulary level.
+The effect is that all later chapters can reference domain terms as strongly-typed enum values rather than raw strings, making the codebase self-documenting and testable at the vocabulary level.
 
 
 *This summary is authored by AI 5-26-2026.*
@@ -57,23 +57,23 @@ The effect is that all later chapters can reference domain terms (like `moment_r
 Imports from `ch00_py` only — `dict_toolbox` for null-safe helpers (`get_0_if_None`, `get_1_if_None`) and `file_toolbox` for `create_path`, `open_json`, `save_json`. It does not use `ch01_keyword`. This chapter introduces its own semantic type aliases in `ch02_semantic_types.py` (`GrainNum`, `PoolNum`, `WeightNum`) which are thin subclasses of `float` used to make function signatures self-describing.
 
 **What this chapter does:**
-`ch02_allot` solves the problem of fairly distributing a discrete pool of value (e.g. a budget, a time allocation, a resource pool) across a set of competing claims that have relative weights. The author's ref note says plainly: *"When things have to be divided, such as currency, this defines how."*
+`ch02_allot` solves the problem of fairly distributing a discrete pool of value (e.g. a resource pool) across a set of competing claims that have relative weights. The author's ref note says plainly: *"When things have to be divided, such as currency, this defines how."*
 
 Three semantic types anchor the logic:
-- `PoolNum` — the total amount to distribute.
+- `PoolNum` — the total number to distribute.
 - `WeightNum` — the unnormalized relative importance of each ledger entry.
 - `GrainNum` — the smallest indivisible unit (like a cent in currency).
 
 The core function `allot_scale(ledger, scale_number, grain_unit)` takes a weighted dictionary, a total to distribute, and a grain size, and returns a new dictionary where each key receives a share proportional to its weight — guaranteed to sum exactly to `scale_number` with no floating-point remainder. A careful residual-distribution algorithm handles the rounding leftover by assigning extra grain units to the highest-weighted entries first.
 
-`allot_nested_scale` extends this to hierarchical ledgers stored as directory trees of JSON files, recursively allotting a parent's share down to its children up to a configurable depth. This foreshadows the tree-structured plan logic that appears in later chapters.
+`allot_nested_scale` extends this to hierarchical ledgers stored as directory trees of JSON files, recursively allotting a parent's share down to its children up to a configurable depth. This foreshadows the tree-structured logic that appears in later chapters.
 
 
 *This summary is authored by AI 5-26-2026.*
 
 
 ## Chapter 03 — `ch03_contact`
-**"Contacts, Groups, and Memberships — the first core philosophical definitions in keg"**
+**"A Contact, A Group, and A Membership — the first core philosophical definitions in keg"**
 
 **Prompt used to build this** *(from `ch03_ref.json`)*:
 > "Defines a contact, and its group memberships. Groups will be produced from memberships."
@@ -83,7 +83,7 @@ The core function `allot_scale(ledger, scale_number, grain_unit)` takes a weight
 - From `ch02_allot`: `allot_scale` and `default_grain_num_if_None` — used directly to distribute a contact's creditor/debtor pool proportionally across its group memberships. The semantic types `GrainNum`, `PoolNum`, `WeightNum` are re-exported through `ch03_semantic_types.py`.
 
 **What this chapter does:**
-This is where `keg`'s philosophical content begins. The author's ref note calls these *"keg's first core philosophical definitions."* The chapter defines the social actors of the system and how they relate to one another through credit and debt.
+This is where `keg`'s philosophical content starts. The author's ref note calls these *"keg's first core philosophical definitions."* The chapter defines the social actors of the system and how they relate to one another through credit and debt.
 
 **`ContactUnit`** is the fundamental social actor — a named individual. Each contact carries:
 - `contact_cred_lumen` and `contact_debt_lumen`: how much credit and debt the surrounding system assigns to this contact.
@@ -92,9 +92,9 @@ This is where `keg`'s philosophical content begins. The author's ref note calls 
 
 **`MemberShip`** links a contact to a group with its own `group_cred_lumen` and `group_debt_lumen` weights. When a contact's `credor_pool` or `debtor_pool` is set, `allot_scale` (from `ch02`) distributes that pool proportionally across all of the contact's memberships.
 
-**`GroupUnit`** is derived from memberships rather than declared directly. It aggregates the memberships of multiple contacts and, using `allot_scale`, distributes its `fund_give` and `fund_take` values back down to individual members. This give/take accounting is the core mechanism by which the system tracks flows of obligation and resource.
+**`GroupUnit`** is derived from memberships rather than declared directly. It aggregates the memberships of multiple contactunits and, using `allot_scale`, distributes its `fund_give` and `fund_take` values back down to individual members. This give/take accounting is the core mechanism by which the system tracks flows of obligation and resource.
 
-**`AwardUnit`**, **`AwardHeir`**, and **`AwardLine`** form a parallel hierarchy representing explicit awards of `give_force` and `take_force` to groups — used later when plan tasks assign their fund flows to specific groups.
+**`AwardUnit`**, **`AwardHeir`**, and **`AwardLine`** form a parallel hierarchy representing explicit awards of `give_force` and `take_force` to groups — used later assign relevance to specific groups.
 
 The semantic types introduced here (`ContactName`, `GroupTitle`, `GroupMark`, `NameTerm`, `FundNum`, `RespectNum`) are inherited by all subsequent chapters via `ch03_semantic_types.py`. The `GroupMark` (defaulting to `";"`) is the separator character that distinguishes a group title from a contact name — a contact name cannot contain it, while a group title can.
 
@@ -110,18 +110,18 @@ The semantic types introduced here (`ContactName`, `GroupTitle`, `GroupMark`, `N
 
 **Summary of previous relevant chapters:**
 - From `ch00_py`: `get_empty_dict_if_None`, `get_False_if_None` for safe initialization.
-- From `ch03_contact`: `ContactName`, `GroupTitle`, `GroupUnit` — workforce assignment is expressed entirely in terms of the group and contact structures defined in ch03. `ch04_semantic_types.py` simply re-exports all of ch03's semantic types wholesale, adding nothing new of its own.
+- From `ch03_contact`: `ContactName`, `GroupTitle`, `GroupUnit` — workforce assignment is expressed entirely in terms of the group and contact structures defined in ch03. `ch04_semantic_types.py` simply re-exports all of ch03's semantic types wholesale, nothing new of its own.
 
 **What this chapter does:**
-`ch04_workforce` is a focused, relatively small chapter that introduces the concept of *labor* — which groups or contacts are designated as responsible for carrying out a task.
+`ch04_workforce` is a focused, relatively small chapter that introduces the concept of *labor* — which groups or a contact are designated as responsible for carrying out a task.
 
 **`LaborUnit`** is a simple dataclass pairing a `GroupTitle` with an optional `solo` boolean flag. When `solo=True`, the labor is restricted to a single contact rather than any member of the group.
 
-**`WorkforceUnit`** is a container of `LaborUnit` objects — essentially a named set of groups/contacts that are eligible to perform a task. It supports add, delete, and existence checks for individual labor entries.
+**`WorkforceUnit`** is a container of `LaborUnit` objects — essentially a named set of groupunits/contactunits that are eligible to perform a task. It supports add, delete, and existence checks for individual labor entries.
 
-**`LaborHeir`** and **`WorkforceHeir`** are the "inherited" counterparts used when a task inherits workforce constraints from a parent task in the plan tree. `WorkforceHeir.set_labors()` implements the inheritance logic: if the parent has no workforce defined, the child's own workforce is used; if the child has no workforce, the parent's is inherited; if both have workforce definitions, the parent's takes precedence and the child's is only added if not already present. `WorkforceHeir.get_person_name_is_workforce_bool()` then checks whether a specific contact (by `ContactName`) is a member of any of the heir's labor groups, determining if that person is eligible to carry out the task.
+**`LaborHeir`** and **`WorkforceHeir`** are the "inherited" counterparts used when a task inherits workforce constraints from a parent task in a tree. `WorkforceHeir.set_labors()` implements the inheritance logic: if the parent has no workforce defined, the child's own workforce is used; if the child has no workforce, the parent's is inherited; if both have workforce definitions, the parent's takes precedence and the child's is only added if not already present. `WorkforceHeir.get_person_name_is_workforce_bool()` then checks whether a specific contact (by `ContactName`) is a member of any of the heir's labor groups, determining if that person is eligible to carry out the task.
 
-This chapter establishes the workforce inheritance pattern that will be applied recursively across the plan tree in later chapters.
+This chapter establishes the workforce inheritance pattern that will be applied recursively across a tree in later chapters.
 
 # ch05_rope — Chapter Summary
 
@@ -156,12 +156,12 @@ Ch05 introduces no new numeric types, only new string-based structural types.
 
 ## 4. Summary of What This Chapter Does
 
-`ch05_rope` defines the **address system** used throughout keg to identify any node in the plan tree. The core idea: reality is organized as a hierarchy of named nodes, and any node can be uniquely addressed by its path from the root — this path is called a `RopeTerm`.
+`ch05_rope` defines the **address system** used throughout keg to identify any node in a tree. The core concept: reality is organized as a hierarchy of named nodes, and any node can be uniquely addressed by its path from the root — this path is called a `RopeTerm`.
 
 **New semantic types introduced:**
 - `KnotTerm` — the delimiter character that separates labels within a rope (defaults to `";"`). This directly parallels `GroupMark` from ch03, which used the same default separator to distinguish group names from contact names. In ch05 the concept is generalized into the tree-path domain.
 - `LabelTerm` — a single node name; must not contain the `KnotTerm`.
-- `RopeTerm` — a full path string composed of `LabelTerm`s joined by `KnotTerm`s, always beginning and ending with the knot (e.g. `";root;tasks;cooking;"`).
+- `RopeTerm` — a full path string composed of `LabelTerm`s joined by `KnotTerm`s, always starts and ends with the knot (e.g. `";root;tasks;cooking;"`).
 - `FirstLabel` — the top-level label in a rope, the root of a subtree.
 
 **Key functions in `rope.py`:**
@@ -174,7 +174,7 @@ Ch05 introduces no new numeric types, only new string-based structural types.
 - `get_unique_short_ropes(ropes_set, knot)` — produces the shortest unambiguous label suffix for each rope in a set (useful for display).
 - `rope_is_valid_dir_path(rope, knot)` — checks if a rope can be mapped to a valid OS file path, enabling the file-system-backed persistence used in later chapters.
 
-The rope system is the backbone of every subsequent chapter. Every `PlanUnit`, every `ReasonUnit`, every `FactUnit` is identified by a `RopeTerm`. The tree structure of plans is navigated entirely through rope operations.
+The rope system is the backbone of every subsequent chapter. A tree structure navigations can/will be done entirely through rope operations.
 
 # ch06_reason — Chapter Summary
 
@@ -183,7 +183,7 @@ The rope system is the backbone of every subsequent chapter. Every `PlanUnit`, e
 ## 1. Title and Summary Declaration
 
 **Chapter 06 — `ch06_reason`**
-**"Reasons and Facts — the logic engine that decides whether a plan is active"**
+**"Reasons and Facts — the logic engine that decides whether a Reason is active"**
 
 ---
 
@@ -207,16 +207,16 @@ Ontology note:
 
 ## 4. Summary of What This Chapter Does
 
-`ch06_reason` implements the **conditional activation logic** of keg — the mechanism by which a plan declares what conditions must be true for it to be considered active.
+`ch06_reason` implements the **conditional activation logic** of keg — the mechanism by which a node object declares what conditions must be true for it to be considered active.
 
 **`FactUnit` / `FactHeir` / `FactCore`**
-A `FactUnit` is a statement about the world: it says that a context (identified by a `RopeTerm` called `fact_context`) is currently in a particular state (`fact_state`), optionally within a numeric range (`fact_lower` to `fact_upper`). Facts are supplied externally to the person and flow down the plan tree as `FactHeir` objects. A `FactHeir` can be further narrowed by child `FactUnit` moldations as it propagates.
+A `FactUnit` is a statement about the world: it says that a context (identified by a `RopeTerm` called `fact_context`) is currently in a particular state (`fact_state`), optionally within a numeric range (`fact_lower` to `fact_upper`). Facts are supplied externally to the person and flow down a tree as `FactHeir` objects. A `FactHeir` can be further narrowed by child `FactUnit` moldations as it propagates.
 
 **`CaseUnit`**
 A `CaseUnit` is a single condition within a reason. It specifies:
 - `reason_state`: the rope state that must be active for this case to pass.
 - Optionally `reason_lower` / `reason_upper`: a numeric range the fact must fall within.
-- Optionally `reason_divisor`: enables **cyclic/modular reasoning** — the fact value is taken modulo the divisor before comparing to the range. This allows conditions like "every 7 days" or "every quarter."
+- Optionally `reason_divisor`: enables **cyclic/modular reasoning** — the fact value is taken modulo the divisor before comparing to the range. This allows conditions like "every 7 rotations of the earth" or "every quarter."
 
 `CaseUnit.set_case_active(factheir)` evaluates whether the supplied fact satisfies this case's condition, setting both `case_active` and `case_task` (whether the case indicates there is still work remaining within the range).
 
@@ -224,7 +224,7 @@ A `CaseUnit` is a single condition within a reason. It specifies:
 A helper dataclass that handles the complex modular arithmetic for cyclic range checks. It computes remainders of fact bounds against the divisor and tests multiple overlap scenarios to determine whether the cyclic condition is currently satisfied.
 
 **`ReasonUnit` / `ReasonHeir`**
-A `ReasonUnit` groups one or more `CaseUnit`s under a shared `reason_context` rope. It can also carry `active_requisite` — a boolean that, if set, requires the *parent plan's active state* to match before this reason counts. `ReasonHeir.set_reason_active(factheirs)` evaluates all cases against the current fact set and sets `reason_active = True` if any case passes (or if `active_requisite` is satisfied). It also computes `reason_task` to indicate whether the plan is not yet fully complete within the fact's range.
+A `ReasonUnit` groups one or more `CaseUnit`s under a shared `reason_context` rope. It can also carry `active_requisite` — a boolean that, if set, requires the *parent node's active state* to match before this reason counts. `ReasonHeir.set_reason_active(factheirs)` evaluates all cases against the current fact set and sets `reason_active = True` if any case passes (or if `active_requisite` is satisfied). It also computes `reason_task` to indicate whether the node is not yet fully complete within the fact's range.
 
 This chapter delivers the core inference engine: given a set of real-world facts and a set of declared conditions, it determines what is currently true and what still needs to be done.
 
@@ -256,7 +256,7 @@ Ontology note:
 - **ch00_py**: null-safe helpers (`get_0_if_None`, `get_1_if_None`, `get_empty_dict_if_None`, `get_False_if_None`, `get_positive_int`).
 - **ch02_allot**: `allot_scale` and `default_grain_num_if_None` — used to distribute a plan's fund pool proportionally among its child plans (via their `kar` weights) and to distribute award funds among `AwardUnit`s.
 - **ch03_contact**: `AwardUnit`, `AwardHeir`, `AwardLine`, `GroupUnit` — the award system from ch03 is embedded into each `PlanUnit`. Groups receive fund flows via award structures.
-- **ch04_workforce**: `WorkforceUnit`, `WorkforceHeir` — each plan can declare which groups/contacts are responsible for carrying it out; these inherit down the tree.
+- **ch04_workforce**: `WorkforceUnit`, `WorkforceHeir` — each plan can declare which groups/contactunits are responsible for carrying it out; these inherit down the tree.
 - **ch05_rope**: `RopeTerm`, `create_rope`, `rebuild_rope`, `is_sub_rope`, `find_replace_rope_key_dict`, `all_ropes_between` — the plan tree is entirely organized by rope paths. Every plan has a `parent_rope` and a `plan_label`, and its full identity is its rope.
 - **ch06_reason**: `ReasonUnit`, `ReasonHeir`, `FactUnit`, `FactHeir` — each plan can declare conditions (`reasonunits`) and local facts (`factunits`). These are evaluated to determine `plan_active`.
 
@@ -266,7 +266,7 @@ Ch07 also introduces `HealerUnit` (in `healer.py`) and `RangeUnit` (in `range_to
 
 ## 4. Summary of What This Chapter Does
 
-`ch07_plan` defines `PlanUnit` — the central data structure of keg. A `PlanUnit` is a node in a tree of plans rooted at a single `planroot`. Each node can be:
+`ch07_plan` defines `PlanUnit` — the central data structure of keg. A `PlanUnit` is a node in a tree of plans rooted at a single root. Each node can be:
 
 - A **container** (`kids: dict[LabelTerm, PlanUnit]`) that groups sub-plans.
 - A **pledge** (`pledge: True`) — a declared commitment that can be active or inactive.
@@ -276,15 +276,15 @@ Ch07 also introduces `HealerUnit` (in `healer.py`) and `RangeUnit` (in `range_to
 - A **ranged plan** (`begin`, `close`, `addin`, `numor`, `denom`, `morph`) — can represent a numeric interval that can be inherited and morphed by children.
 - A **problem** (`problem_bool`) with designated **healers** (`healerunit`) — plans that flag issues and point to responsible remediation plans.
 
-**Key computed ("heir") attributes** that flow down from parent to child:
+**Key computed ("heir") attrs** that flow down from parent to child:
 - `factheirs` — facts inherited and possibly narrowed by local `factunits`.
 - `reasonheirs` — reasons inherited from parent and evaluated against `factheirs`.
 - `workforceheir` — inherited workforce assignment.
 - `awardheirs` / `awardlines` — fund flow directions inherited and accumulated from children.
 
-**`PlanAttrHolder`** is a parameter-object pattern used to batch-set attributes on a `PlanUnit` without requiring positional arguments for every field — a clean API for the large number of settable properties.
+**`PlanAttrHolder`** is a parameter-object pattern used to batch-set attrs on a `PlanUnit` without requiring positional arguments for every field — a clean API for the large number of settable properties.
 
-The plan tree is the structural heart of keg. Every subsequent chapter either populates this tree (ch08 `PersonUnit`), tracks changes to it (ch09 atoms), or reads from it to produce outputs (calendars, finances, reports).
+The plan tree is the structural core of keg. Every subsequent chapter either populates this tree, tracks changes to it, or reads from it to produce outputs such as reports.
 
 # ch08_person_logic — Chapter Summary
 
@@ -337,7 +337,7 @@ A new semantic type is introduced in `ch08_semantic_types.py`: `PersonName` (a `
 2. **Set range attrs** — evaluates numeric range inheritance for ranged plans.
 3. **Set contact/group respect ledgers** — builds credit and debit ledgers across contacts and groups.
 4. **Clear fund attrs** — resets all fund tracking fields.
-5. **Set factheirs, workforceheirs, awardheirs** — propagates inherited attributes down the plan tree.
+5. **Set factheirs, workforceheirs, awardheirs** — propagates inherited attrs down the plan tree.
 6. **Iterative plan-active loop** — repeatedly traverses the plan tree setting `plan_active` for each plan based on its reasons and facts, until no more changes occur (the system reaches a `rational` stable state, or `max_tree_traverse` is reached).
 7. **Set fund attrs** — distributes the `fund_pool` down the tree proportionally by `kar` weights using `allot_scale`, assigning each plan its `fund_onset` and `fund_cease`.
 8. **Set contact/group fund flows** — propagates fund give/take from plan award structures back to contacts and groups.
@@ -345,7 +345,7 @@ A new semantic type is introduced in `ch08_semantic_types.py`: `PersonName` (a `
 
 **`get_agenda_dict()`** returns the subset of plans that are active pledges with a qualifying reason context — this is the person's current to-do list.
 
-This chapter is the largest in the codebase (~1.4MB) and is the computational heart of keg. All subsequent chapters either transform `PersonUnit` data (ch09 atoms, ch10 lessons) or use it to produce outputs (calendars, finance reports, world coordination).
+This chapter is the largest in the codebase (~1.4MB) and is the computational core of keg. All subsequent chapters either transform `PersonUnit` data or use it to produce outputs (reports, world coordination, other things to be defined).
 
 # ch09_person_atom — Chapter Summary
 
@@ -398,7 +398,7 @@ Ch09's `ch09_semantic_types.py` re-exports types from ch03, ch05, ch06 with no a
 
 **`jvalues_different(dimen, x_obj, y_obj)`** compares two objects of a given dimension to determine what atom(s) would need to be generated to transform one into the other — the basis for diff-generation between two `PersonUnit` states.
 
-Together, `PersonAtom`s form a complete, ordered, reversible description of any transformation between two `PersonUnit` states. This chapter is the foundation for ch10 (lessons/deltas) and ch11 (the listening/synchronization process).
+Together, `PersonAtom`s form a complete, ordered, reversible description of any transformation between two `PersonUnit` states. This chapter is the foundation for future chapters that use PersonAtoms to communicate indivisible data.
 
 # ch10_person_lesson — Chapter Summary
 
@@ -496,7 +496,7 @@ Ontology note:
 
 ## 4. Summary of What This Chapter Does
 
-This is the philosophical center of keg, implemented as code. The `listen_to_speaker_agenda` function embodies the Levinasian idea that genuine listening means taking the other person's perspective seriously and incorporating it into your own understanding.
+This is the philosophical center of keg, implemented as code. The `listen_to_speaker_agenda` function embodies the Levinasian concept that genuine listening means taking the other person's perspective seriously and incorporating it into your own understanding.
 
 **`get_perspective_person(speaker, listener_person_name)`** (from `keep_tool.py`) — creates a version of the speaker's `PersonUnit` re-evaluated from the listener's perspective. Facts on the speaker's plan root are reset so the listener can independently assess which of the speaker's pledges are currently active from their own vantage point.
 
@@ -552,7 +552,7 @@ New semantic types introduced in `ch12_semantic_types.py`:
 
 `ch12_bud` introduces the **time dimension** to keg's fund-flow system. Where ch03 defined how funds are distributed across contacts within a single `PersonUnit` evaluation, ch12 defines how those distributions are recorded as time-stamped transactions and aggregated across time.
 
-**`TranUnit`** is the atomic financial record: a transfer of `amount` (`FundNum`) from a source person (`src`) to a destination contact (`dst`) at a specific `tran_time` (`TimeNum`). It is keg's equivalent of a double-entry ledger line.
+**`TranUnit`** is the atomic fund record: a transfer of `amount` (`FundNum`) from a source person (`src`) to a destination contact (`dst`) at a specific `tran_time` (`TimeNum`). It is keg's equivalent of a double-entry ledger line.
 
 **`TranBook`** aggregates `TranUnit`s into a three-level nested dictionary: `person_name → contact_name → tran_time → amount`. It tracks a `moment_rope` scope and provides:
 - `add_tranunit` — validates against blocked times and a maximum time ceiling before inserting.
@@ -566,8 +566,7 @@ New semantic types introduced in `ch12_semantic_types.py`:
 
 **`cell_main.py`** and **`weighted_facts_tool.py`** (not read in full) implement the cell-based distribution logic — the mechanism by which a `BudUnit`'s quota is recursively divided among listening participants up to `celldepth` levels deep, weighted by the contact cred/debt lumen values established in ch03.
 
-Ch12 is the first chapter to introduce `TimeNum` as a first-class type, setting up the absolute time number line that ch14 will map to human calendar concepts.
-
+Ch12 is the first chapter to introduce `TimeNum` as a first-class type, setting up the time numbers for later.
 # ch13_keep — Chapter Summary
 
 *This summary is authored by AI 5-26-2026.*
@@ -645,7 +644,7 @@ Ontology note:
 - **ch00_py**: `create_path`, `open_json` — used to load `c400_constants.json`, the Gregorian calendar constants file.
 - **ch05_rope**: `create_rope`, `get_first_label_from_rope`, `is_sub_rope` — epoch plan trees are organized and navigated using rope paths.
 - **ch06_reason**: `CaseUnit`, `FactUnit`, `ReasonUnit` — `epoch_reason.py` generates reason/case structures on a person's plan tree to express time-based conditions (e.g. "active during Monday 8am–10am").
-- **ch07_plan**: `PlanUnit`, `planunit_shop`, `all_plans_between`, `get_rangeunit_from_lineage_of_plans` — the epoch calendar is built as a tree of `PlanUnit`s with `denom` and `morph` attributes that encode calendar arithmetic.
+- **ch07_plan**: `PlanUnit`, `planunit_shop`, `all_plans_between`, `get_rangeunit_from_lineage_of_plans` — the epoch calendar is built as a tree of `PlanUnit`s with `denom` and `morph` attrs that encode calendar arithmetic.
 - **ch08_person_logic**: `PersonUnit`, `add_frame_to_personunit`, `person_planunit_exists`, `person_planunit_get_obj` — epoch plans are inserted into a person's plan tree and queried.
 - **ch12_bud**: `TimeNum` — the absolute integer minute value that the epoch system converts to and from human calendar positions.
 - **ch13_keep**: `ManaNum` — re-exported through ch14's semantic types, accumulating the full type chain.
@@ -658,13 +657,13 @@ New semantic type: `EpochLabel` (a `LabelTerm`) — identifies a specific epoch 
 
 `ch14_time` solves a fundamental problem: keg's reasoning engine operates on abstract numeric ranges (`fact_lower`, `fact_upper`, `reason_lower`, `reason_upper`) but humans think in calendars. This chapter bridges the two.
 
-**The C400 system.** Time in keg is measured in absolute minutes from an epoch. The Gregorian calendar repeats exactly every 400 years (a "c400 cycle" of 210,379,680 minutes). `c400_constants.json` encodes the precise minute-lengths of leap years, non-leap centuries, 4-year cycles, and individual years. These constants are loaded into `C400Constants` and used to build standard `PlanUnit`s with `denom` and `morph` attributes that perform the modular calendar arithmetic.
+**The C400 system.** Time in keg is measured in absolute minutes from an epoch. The Gregorian calendar repeats exactly every 400 years (a "c400 cycle" of 210,379,680 minutes). `c400_constants.json` encodes the precise minute-lengths of leap years, non-leap centuries, 4-year cycles, and individual years. These constants are loaded into `C400Constants` and used to build standard `PlanUnit`s with `denom` and `morph` attrs that perform the modular calendar arithmetic.
 
 **Epoch plan trees.** A calendar is represented as a hierarchy of `PlanUnit`s (e.g. `c400_leap → c100 → yr4_leap → year → month → week → day → hour`) where each node's `denom` encodes the number of minutes in that unit relative to its parent's cycle. The `morph=True` flag instructs the plan tree to inherit and transform parent numeric ranges — enabling a `TimeNum` value to be correctly positioned within any calendar level by propagating the range arithmetic down the tree.
 
-**`epoch_reason.py`** provides functions that take a human-understandable time specification (e.g. "Monday, 8am to 10am, weekly") and translate it into `ReasonUnit`/`CaseUnit` structures on a specific plan in the person's tree, using modular arithmetic against the day/week denominators. This is how a person declares "this pledge is active every Monday morning" — expressed as a case with a `reason_divisor` equal to the week length in minutes.
+**`epoch_reason.py`** provides functions that take a human-understandable time specification (e.g. "Monday, 8am to 10am, weekly") and make `ReasonUnit`/`CaseUnit` structures on a specific plan in the person's tree, using modular arithmetic against the day/week denominators. This is how a person declares "this pledge is active every Monday morning" — expressed as a case with a `reason_divisor` equal to the week length in minutes.
 
-**`epoch_main.py`** provides helpers like `get_day_rope`, `get_week_rope`, `get_year_rope` — pre-built rope paths for standard calendar nodes — and `stan_c400_leap_planunit()` etc. — factory functions for the standard Gregorian plan units.
+**`epoch_main.py`** provides helpers like `get_day_rope`, `get_week_rope`, `get_year_rope` — pre-built rope paths for standard calendar nodes — and `stan_c400_leap_planunit()` etc. — creation functions for the standard Gregorian plan units.
 
 **`calendar_markdown.py`** generates human-understandable calendar output from a person's plan tree for display and reporting.
 
@@ -716,7 +715,7 @@ Ch15 is the first true integration chapter — it imports from every prior chapt
 - `moment_mstr_dir` — the root directory where all moment data is persisted.
 - `epoch` — the shared `EpochUnit` (calendar system) all persons in this moment use.
 - `personbudhistorys` — a dictionary of `PersonBudHistory` per person, tracking all scheduled fund distributions.
-- `paybook` — a `TranBook` recording all financial transactions within the moment.
+- `paybook` — a `TranBook` recording all fund transactions within the moment.
 - `offi_times` — the set of official time points at which distributions have been processed.
 - Grain parameters (`fund_grain`, `respect_grain`, `mana_grain`) — shared resolution settings applied when creating new persons.
 
@@ -763,7 +762,7 @@ Ontology note:
 
 - **ch00_py**: `set_modular_dict_values` from `dict_toolbox` — applies modular arithmetic to the `otx2inx` mapping, enforcing that epoch differences wrap correctly within the cycle length.
 - **ch10_person_lesson**: `FaceName`, `MomentRope` — a `NabuTime` is attributed to a specific face and spark number, matching the lesson provenance model from ch10.
-- **ch12_bud**: `TimeNum`, `SparkInt` — the numeric types being translated. The "nabuable" args (`bud_time`, `fact_lower`, `fact_upper`, `reason_lower`, `reason_upper`, `tran_time`, `offi_time`) are all time-related numeric fields from ch12 and ch06.
+- **ch12_bud**: `TimeNum`, `SparkInt` — the numeric types being converted. The "nabuable" args (`bud_time`, `fact_lower`, `fact_upper`, `reason_lower`, `reason_upper`, `tran_time`, `offi_time`) are all time-related numeric fields from ch12 and ch06.
 - **ch14_time**: `EpochLabel` — epoch cycle lengths are the denominators used in the modular translation arithmetic.
 
 `ch16_semantic_types.py` re-exports the full chain through ch14 with no new additions. The chapter introduces no new semantic types of its own.
@@ -784,11 +783,11 @@ The mapping is stored modularly: `set_modular_dict_values` applies `value % key`
 
 **`reveal_inx(otx_epoch_length, otx_value)`** is the translation function: it adds the stored `inx_epoch_diff` to the external value, then takes it modulo the epoch length — producing the correct internal `TimeNum` position within the cycle.
 
-**`nabu_config.py`** defines which argument fields are "nabuable" — meaning they carry raw external time values that need translation before being used internally:
+**`nabu_config.py`** defines which argument fields are "nabuable" — they carry raw external time values that need translation before being used internally:
 - `bud_time`, `tran_time`, `offi_time` — scheduling and transaction times.
 - `fact_lower`, `fact_upper`, `reason_lower`, `reason_upper` — the numeric bounds in fact and reason conditions.
 
-The config also defines the `nabu_timenum` dimension for atom-style CRUD operations, and `set_nabuable_otx_inx_args` which expands nabuable field names into their `_otx` / `_inx` variants — used downstream when storing both the external and translated versions of a value side by side.
+The config also defines the `nabu_timenum` dimension for atom-style CRUD operations, and `set_nabuable_otx_inx_args` which expands nabuable field names into their `_otx` / `_inx` variants — used downstream when storing both the external and converted versions of a value side by side.
 
 **`inherit_timenabu(new, old)`** enforces that newer `NabuTime` objects (higher `spark_num`) from the same face supersede older ones — maintaining the same ordered-inheritance pattern established in ch10's lesson sequencing.
 
@@ -900,7 +899,7 @@ This is a deliberate design: ch18 is a low-level database infrastructure chapter
 
 **`notebook_toolbox.py`** provides Jupyter-notebook-oriented utilities — helpers for displaying query results and database state in an interactive analysis context.
 
-Ch18 is the "ch00 of persistence" — a deliberately dependency-free utility layer. It carries the full semantic type chain in its `_ref` file as preparation for the ETL chapters (ch20–ch27) that will use both these database tools and the domain objects to build the full data pipeline.
+Ch18 is the "ch00 of persistence" — a deliberately dependency-free utility layer. It carries the full semantic type chain in its `_ref` file as preparation for the ETL chapters that will use both these database tools and the domain objects to build the full data pipeline.
 
 # ch20_brick — Chapter Summary
 
@@ -994,7 +993,7 @@ Ontology note:
 
 ## 4. Summary of What This Chapter Does
 
-`ch22_etl_config` is the configuration and orchestration backbone of the ETL pipeline — it defines the stage ordering, dimension abbreviations, SQL generation utilities, and Excel file collection tools that the actual ETL execution chapters (ch24 onward) consume.
+`ch22_etl_config` is the configuration and orchestration backbone of the ETL pipeline — it defines the stage ordering, dimension abbreviations, SQL generation utilities, and Excel file collection tools that the actual ETL execution chapters consume.
 
 **`etl_config.py`** — the core configuration module:
 
@@ -1053,7 +1052,7 @@ Ontology note:
 
 ## 4. Summary of What This Chapter Does
 
-`ch23_idea_src` is the **entry point of the ETL pipeline** — where raw human-authored Excel data ("ideas") is first read, lightly transformed, and written out as structured brick DataFrames ready for validation in ch24.
+`ch23_idea_src` is the **entry point of the ETL pipeline** — where raw human-authored Excel data ("ideas") is first read, lightly transformed, and written out as structured brick DataFrames ready for validation in later chapters.
 
 **`fission_step.py`** — data transformation functions applied to raw idea DataFrames before they become bricks. Each function is a pure DataFrame → DataFrame transform:
 
@@ -1123,7 +1122,7 @@ Aggregates all `spark_num`/`spark_face` pairs from every `_b_agg` table into a `
 Produces `{brick_type}_b_vld` by JOINing the `_b_agg` table against `sparks_b_vld` — only rows whose `spark_num` is validated pass through. This is the final validated brick layer.
 
 **Stage 5 — `etl_brixk_vld_tables_to_sound_raw_tables(cursor)`**
-Maps validated brick rows into "sound" dimension tables (`{ABBV7}_s_raw_put` / `{ABBV7}_s_raw_del`) by intersecting the brick's columns with the target sound table's columns and inserting the common fields. The `brick_type` column is prepended to each inserted row for traceability. This produces the `s_raw` tables that downstream chapters (ch25+) will aggregate into `s_agg`, validate into `s_vld`, and ultimately use to reconstruct `PersonUnit` and `MomentUnit` objects.
+Maps validated brick rows into "sound" dimension tables (`{ABBV7}_s_raw_put` / `{ABBV7}_s_raw_del`) by intersecting the brick's columns with the target sound table's columns and inserting the common fields. The `brick_type` column is prepended to each inserted row for traceability. This produces the `s_raw` tables that downstream chapters will aggregate into `s_agg`, validate into `s_vld`, and ultimately use to reconstruct `PersonUnit` and `MomentUnit` objects.
 
 The table naming convention throughout: `{brick_type}_b_{stage}` for brick-level tables, `{ABBV7}_s_{stage}_{crud}` for sound-level tables.
 
@@ -1154,7 +1153,7 @@ Ontology note:
 - **ch17_translate**: `get_translate_labelterm_args`, `get_translate_nameterm_args`, `get_translate_ropeterm_args`, `get_translate_titleterm_args`, `get_translates_column_ref`, `default_unknown_str_if_None` — the full translation type registry drives which sound-agg columns need knot-error checking and which need `otx → inx` resolution.
 - **ch18_db_tool**: `create_update_inconsistency_error_query`, `delete_all_duplicate_rows`, `get_table_columns` — SQL-level data quality tools.
 - **ch20_brick**: `get_brick_dimen_ref` — the master brick dimension registry drives which `s_raw` and `s_agg` tables exist and need processing.
-- **ch22_etl_config**: `etl_sqlstr` — nearly all SQL strings used in ch25 are generated by ch22's SQL-string factory functions. Ch25 is the executor; ch22 is the generator.
+- **ch22_etl_config**: `etl_sqlstr` — nearly all SQL strings used in ch25 are generated by ch22's SQL-string generation functions. Ch25 is the executor; ch22 is the generator.
 
 `ch25_semantic_types.py` re-exports through ch20 with no additions.
 
@@ -1180,7 +1179,7 @@ This is the most complex function in ch25. It processes the four translation dim
 
 **`etl_sound_agg_tables_to_sound_vld_tables(cursor)`** — promotes all moment/person dimension rows from `s_agg` to `s_vld` by running the pre-generated `get_insert_into_sound_vld_sqlstrs` queries and deduplicating.
 
-**`etl_sound_vld_tables_to_heard_raw_tables(cursor)`** — the final step of ch25: copies `s_vld` rows into `h_raw` tables, using `exclude_postfix="_inx"` in deduplication so that `_inx` columns (not yet populated) don't trigger false duplicate detection. The `_inx` columns are populated in ch26.
+**`etl_sound_vld_tables_to_heard_raw_tables(cursor)`** — the final step of ch25: copies `s_vld` rows into `h_raw` tables, using `exclude_postfix="_inx"` in deduplication so that `_inx` columns (not yet populated) don't trigger false duplicate detection. The `_inx` columns are populated by later steps.
 
 The sound layer is where the data first becomes semantically trustworthy — type-validated in ch24, consistency-checked and translation-prepared in ch25.
 
@@ -1232,9 +1231,9 @@ Ontology note:
 
 **`etl_heard_vld_tables_to_mind_moment_jsons(cursor, moment_mstr_dir)`** — iterates all `moment_rope`s from `momentunit_h_vld`, calls `get_moment_dict_from_heard_tables` for each, and writes the result as a `moment.json` file to the appropriate directory. The inline comment notes a known architectural tension: using rope-based file paths is idiomatic but problematic when `moment_rope` contains characters that don't translate to valid OS paths — a hash-based directory scheme is suggested as an alternative.
 
-**`etl_heard_raw_tables_to_lego_moment_ote1_agg`** — builds the `moment_ote1_agg` table: a mapping of `(moment_rope, person_name, spark_num) → bud_time`, which later tells ch27 which spark to apply at which budget time.
+**`etl_heard_raw_tables_to_lego_moment_ote1_agg`** — builds the `moment_ote1_agg` table: a mapping of `(moment_rope, person_name, spark_num) → bud_time`, which tells later chapters which spark to apply at which budget time.
 
-**`etl_heard_vld_to_lego_spark_person_csvs`** — splits validated `h_vld` person dimension tables into per-moment/per-person/per-spark CSV files on disk, organized as `moments/{moment}/persons/{person}/sparks/{spark_num}/{dimen_h_vld_put.csv}`. These CSVs are the raw material ch27 converts into `LessonUnit`s.
+**`etl_heard_vld_to_lego_spark_person_csvs`** — splits validated `h_vld` person dimension tables into per-moment/per-person/per-spark CSV files on disk, organized as `moments/{moment}/persons/{person}/sparks/{spark_num}/{dimen_h_vld_put.csv}`. These CSVs are the raw material later chapters convert into `LessonUnit`s.
 
 # ch27_lego — Chapter Summary
 
@@ -1476,7 +1475,7 @@ New semantic type: `WorldName` (a `str`) — identifies a world, the top-level c
 
 ## 4. Summary of What This Chapter Does
 
-`ch32_world` defines `WorldDir` and its factory function `worlddir_shop` — the user-facing entry point for the entire keg system.
+`ch32_world` defines `WorldDir` and its generation function `worlddir_shop` — the user-facing entry point for the entire keg system.
 
 **`WorldDir`** is a dataclass holding the directory layout for one world:
 - `world_name` / `worlds_dir` — the name and parent directory of this world.
@@ -1542,7 +1541,7 @@ Ontology note:
 
 ## 4. Summary of What This Chapter Does
 
-Ch33 is an **early-stage design stub** — its ref file's `chapter_blurb` is incomplete ("Defines Finance Tools for "), and `pitch.py` consists of a dataclass, a factory function, and inline design notes rather than a working implementation.
+Ch33 is an **early-stage design stub** — its ref file's `chapter_blurb` is incomplete ("Defines Finance Tools for "), and `pitch.py` consists of a dataclass, a generation function, and inline design notes rather than a working implementation.
 
 **`PitchUnit`** is the dataclass representing a negotiation between two persons:
 - `pitcher_name` / `peer_name` — the two parties.
@@ -1559,7 +1558,7 @@ The inline design comments in `pitch.py` reveal the intended model:
 - The pitch then describes possible future gifts from both parties.
 - If accepted, the deal (explicitly noted as "needs to be added here so the word isn't used anywhere else") translates the offer ideabook into bricks.
 
-The `pitchunit_shop` factory is a placeholder — it accepts all parameters but currently only sets `pitcher_name`. The chapter represents keg's planned mechanism for structured peer-to-peer negotiation, grounding agreement in concrete idea commitments rather than verbal promises. The ontology note's phrase "here are the possible Worlds" indicates this chapter is also intended to support scenario comparison across different `WorldDir` configurations.
+The `pitchunit_shop` function is a placeholder — it accepts all parameters but currently only sets `pitcher_name`. The chapter represents keg's planned mechanism for structured peer-to-peer negotiation, grounding agreement in concrete idea commitments rather than verbal promises. The ontology note's phrase "here are the possible Worlds" indicates this chapter is also intended to support scenario comparison across different `WorldDir` configurations.
 
 # ch34_finance — Chapter Summary
 
@@ -1594,7 +1593,7 @@ Ch34 is an **empty stub**. The `src/ch34_finance/` directory contains only `__in
 
 The ref file and ontology note indicate the intended purpose: financial modeling tools that operate over `PitchUnit`s (ch33) — specifically measuring the financial implications of different world scenarios represented by competing `WorldDir` configurations. This would close the loop between the negotiation layer (ch33) and quantified financial outcomes.
 
-As of the cloned repository state on 5-26-2026, this chapter has not been implemented. It is a reserved chapter number in the inductive chain, positioned after the negotiation scaffold (ch33) and before the person viewer web app (ch35).
+As of the cloned repository state on 5-26-2026, this chapter has not been implemented. It is a reserved chapter number in the inductive chain, positioned after the negotiation scaffold (ch33) and before the person viewer web app in future chapters.
 
 # ch35_person_viewer — Chapter Summary
 
