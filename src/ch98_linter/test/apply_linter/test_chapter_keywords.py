@@ -1,4 +1,4 @@
-from ch00_py.file_toolbox import create_path, get_dir_file_strs, open_file
+from ch00_py.file_toolbox import create_path, open_file
 from ch01_keyword.keyword_class_builder import (
     get_ch_int,
     get_chapter_keyword_classes,
@@ -14,7 +14,7 @@ from ch98_linter.style import (
     get_all_semantic_types_from_ref_files,
     get_chapters_obj_metrics,
     get_json_files,
-    get_python_files_with_flag,
+    get_keyword_scope_files,
     get_semantic_types_filename,
     py_file_has_from_imports_only,
 )
@@ -176,11 +176,11 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
         chapter_int = get_ch_int(chapter_desc)
         allowed_chapter_keywords = cumlative_keywords_src_dict.get(chapter_int)
         not_allowed_keywords = all_keywords_set.difference(allowed_chapter_keywords)
-        not_allowed_keywords = not_allowed_keywords.difference(excluded_strs)
+        not_allowed_keywords = sorted(not_allowed_keywords.difference(excluded_strs))
         # print(f"{chapter_prefix} {len(not_allowed_keywords)=}")
 
-        chapter_files = list(get_python_files_with_flag(chapter_dir).keys())
-        # TODO add .md and .txt and .json files to chapter files
+        # TODO confirm add .md and .txt and .json files to chapter files
+        chapter_files = sorted(get_keyword_scope_files(chapter_dir))
         chapter_files.extend(list(get_json_files(chapter_dir)))
         chapter_files = sorted(chapter_files)
         # chapter_file_count = 0
@@ -193,20 +193,25 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
             check_not_allowed_keywords(
                 not_allowed_keywords, file_str, chapter_prefix, file_path
             )
-            assert does_not_allowed_from_src_import_exist(file_str, file_path)
-            allowed_any_import = is_py_file_allowed_any_imports(file_path)
-            has_from_imports_only = py_file_has_from_imports_only(file_str, file_path)
-            assert has_from_imports_only or allowed_any_import, file_path
+            if file_path.endswith(".py") or file_path.endswith(".json"):
+                assert does_not_allowed_from_src_import_exist(file_str, file_path)
+                allowed_any_import = is_py_file_allowed_any_imports(file_path)
+                has_from_imports_only = py_file_has_from_imports_only(
+                    file_str, file_path
+                )
+                assert has_from_imports_only or allowed_any_import, file_path
 
-            is_ref_keywords_file = f"\\{chapter_prefix}_ch_keyword.py" in file_path
-            if is_ref_keywords_file:
-                # print(f"{file_path=}")
-                assert file_str.count("keywords import") == 0, "No imports"
-                assert file_str.count("from enum import Enum") == 1, "import Enum"
+                is_ref_keywords_file = f"\\{chapter_prefix}_ch_keyword.py" in file_path
+                if is_ref_keywords_file:
+                    # print(f"{file_path=}")
+                    assert file_str.count("keywords import") == 0, "No imports"
+                    assert file_str.count("from enum import Enum") == 1, "import Enum"
 
-            for keyword in allowed_chapter_keywords:
-                if keyword in file_str:
-                    add_ch_keyword_count(keywords_in_ch_count, keyword, chapter_prefix)
+                for keyword in allowed_chapter_keywords:
+                    if keyword in file_str:
+                        add_ch_keyword_count(
+                            keywords_in_ch_count, keyword, chapter_prefix
+                        )
 
     # Check that keyword is not introduced before it is used.
     for keyword, chapters_dict in keywords_in_ch_count.items():
@@ -238,7 +243,7 @@ def does_not_allowed_from_src_import_exist(
 
 
 def check_not_allowed_keywords(
-    not_allowed_keywords: set, file_str: str, chapter_prefix: str, file_path: str
+    not_allowed_keywords: list, file_str: str, chapter_prefix: str, file_path: str
 ):
     for keyword in not_allowed_keywords:
         if keyword != "ch99":
@@ -248,6 +253,9 @@ def check_not_allowed_keywords(
                 if keyword in file_str and "row_factory" not in file_str:
                     assert False, notallowed_keyword_failure_str
             else:
+                if keyword in file_str:
+                    print(f"{keyword=}")
+                    print(f"{file_path=}")
                 assert keyword not in file_str, notallowed_keyword_failure_str
 
 

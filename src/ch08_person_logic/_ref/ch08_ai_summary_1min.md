@@ -49,7 +49,7 @@ A new semantic type is introduced in `ch08_semantic_types.py`: `PersonName` (a `
 2. **Set range attrs** — evaluates numeric range inheritance for ranged plans.
 3. **Set contact/group respect ledgers** — builds credit and debit ledgers across contacts and groups.
 4. **Clear fund attrs** — resets all fund tracking fields.
-5. **Set factheirs, workforceheirs, awardheirs** — propagates inherited attributes down the plan tree.
+5. **Set factheirs, workforceheirs, awardheirs** — propagates inherited attrs down the plan tree.
 6. **Iterative plan-active loop** — repeatedly traverses the plan tree setting `plan_active` for each plan based on its reasons and facts, until no more changes occur (the system reaches a `rational` stable state, or `max_tree_traverse` is reached).
 7. **Set fund attrs** — distributes the `fund_pool` down the tree proportionally by `kar` weights using `allot_scale`, assigning each plan its `fund_onset` and `fund_cease`.
 8. **Set contact/group fund flows** — propagates fund give/take from plan award structures back to contacts and groups.
@@ -57,4 +57,4 @@ A new semantic type is introduced in `ch08_semantic_types.py`: `PersonName` (a `
 
 **`get_agenda_dict()`** returns the subset of plans that are active pledges with a qualifying reason context — this is the person's current to-do list.
 
-This chapter is the largest in the codebase (~1.4MB) and is the computational heart of keg. All subsequent chapters either transform `PersonUnit` data (ch09 atoms, ch10 lessons) or use it to produce outputs (calendars, finance reports, world coordination).
+This chapter is the largest in the codebase (~1.4MB) and is the computational core of keg. All subsequent chapters either transform `PersonUnit` data or use it to produce outputs (reports, world coordination, other things to be defined).

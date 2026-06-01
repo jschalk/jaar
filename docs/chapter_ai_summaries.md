@@ -20,7 +20,7 @@ None. This is chapter zero — the base of the inductive stack. It imports only 
 - `csv_toolbox.py` — CSV reading with type coercion, CSV-to-SQLite bridging.
 - `plotly_toolbox.py` — minimal Plotly charting wrappers.
 
-The chapter establishes the project's coding style: highly defensive null handling, consistent type aliasing, and thin wrappers around standard library calls with explicit, readable names.
+The chapter establishes the project's coding style: highly defensive null handling, consistent type aliasing, and thin wrappers around standard library calls with explicit, understandable names.
 
 
 *This summary is authored by AI 5-26-2026.*
@@ -40,7 +40,7 @@ Imports directly from `ch00_py` — specifically `file_toolbox` for `create_path
 Key mechanics:
 - `chapter_desc_main.py` scans the `src/` directory using `ch00`'s `get_level1_dirs` to discover all chapter folders and extract their numbers.
 - `keyword_class_builder.py` parses the `valid_ch` range syntax (e.g. `"3:"` means "all chapters from 3 onwards"), builds cumulative keyword sets per chapter, and generates `Enum` class source code strings like `C03Keywords`, `C07Keywords`, etc.
-- It also produces a human-readable `keywords_by_chapter.md` markdown file listing which keywords are introduced in each chapter.
+- It also produces a human-understandable `keywords_by_chapter.md` markdown file listing which keywords are introduced in each chapter.
 
 The effect is that all later chapters can reference domain terms (like `moment_rope`, `spark_num`, `person_name`) as strongly-typed enum values rather than raw strings, making the codebase self-documenting and testable at the vocabulary level.
 
@@ -457,7 +457,7 @@ New semantic types introduced in `ch10_semantic_types.py`:
 
 **`LassoUnit`** (in `lasso.py`) is a small path-construction helper that converts a `MomentRope` into an OS directory path — bridging the rope addressing system to the file system layout used for persisting lesson and gut files.
 
-**`legible.py`** (not read in full) provides human-readable representations of deltas and atoms for debugging and reporting.
+**`legible.py`** (not read in full) provides human-understandable representations of deltas and atoms for debugging and reporting.
 
 Together, ch10 establishes the full change-tracking and persistence layer: any transformation of a `PersonUnit` can be expressed as a named, ordered, file-backed `LessonUnit` attributed to a specific face and moment.
 
@@ -662,11 +662,11 @@ New semantic type: `EpochLabel` (a `LabelTerm`) — identifies a specific epoch 
 
 **Epoch plan trees.** A calendar is represented as a hierarchy of `PlanUnit`s (e.g. `c400_leap → c100 → yr4_leap → year → month → week → day → hour`) where each node's `denom` encodes the number of minutes in that unit relative to its parent's cycle. The `morph=True` flag instructs the plan tree to inherit and transform parent numeric ranges — enabling a `TimeNum` value to be correctly positioned within any calendar level by propagating the range arithmetic down the tree.
 
-**`epoch_reason.py`** provides functions that take a human-readable time specification (e.g. "Monday, 8am to 10am, weekly") and translate it into `ReasonUnit`/`CaseUnit` structures on a specific plan in the person's tree, using modular arithmetic against the day/week denominators. This is how a person declares "this pledge is active every Monday morning" — expressed as a case with a `reason_divisor` equal to the week length in minutes.
+**`epoch_reason.py`** provides functions that take a human-understandable time specification (e.g. "Monday, 8am to 10am, weekly") and translate it into `ReasonUnit`/`CaseUnit` structures on a specific plan in the person's tree, using modular arithmetic against the day/week denominators. This is how a person declares "this pledge is active every Monday morning" — expressed as a case with a `reason_divisor` equal to the week length in minutes.
 
 **`epoch_main.py`** provides helpers like `get_day_rope`, `get_week_rope`, `get_year_rope` — pre-built rope paths for standard calendar nodes — and `stan_c400_leap_planunit()` etc. — factory functions for the standard Gregorian plan units.
 
-**`calendar_markdown.py`** generates human-readable calendar output from a person's plan tree for display and reporting.
+**`calendar_markdown.py`** generates human-understandable calendar output from a person's plan tree for display and reporting.
 
 In summary, ch14 makes keg's belief system time-aware: a person's plan tree can now express not just what they want to accomplish, but *when* — using any calendar structure they choose, mapped faithfully onto the absolute `TimeNum` line.
 
@@ -1315,7 +1315,7 @@ This is the moment when the full atom-based version history from ch09/ch10 is re
 ## 1. Title and Summary Declaration
 
 **Chapter 30 — `ch30_idea_dst`**
-**"Idea Destination — exporting the fully processed world state back to human-readable Excel idea files for external audiences"**
+**"Idea Destination — exporting the fully processed world state back to human-understandable Excel idea files for external audiences"**
 
 ---
 
@@ -1422,7 +1422,7 @@ Two KPIs are currently defined, both implemented as `CREATE TABLE AS SELECT` SQL
 
 **Calendar markdown (`kpi_mstr.py`)**
 
-`create_calendar_markdown_files(moment_mstr_dir, output_dir)` — for each moment, loads the `MomentUnit`, calls `get_moment_timeshoe` to get the epoch's time-shoe (the mapping from `TimeNum` to calendar position), then calls ch14's `get_calendarmarkdown_str` to produce a human-readable markdown calendar showing the epoch structure. Written to `output_dir`.
+`create_calendar_markdown_files(moment_mstr_dir, output_dir)` — for each moment, loads the `MomentUnit`, calls `get_moment_timeshoe` to get the epoch's time-shoe (the mapping from `TimeNum` to calendar position), then calls ch14's `get_calendarmarkdown_str` to produce a human-understandable markdown calendar showing the epoch structure. Written to `output_dir`.
 
 **Google Calendar day-punches (`gcalendar.py`)**
 
@@ -1619,12 +1619,12 @@ Ontology note:
 
 ## 3. Summary of Previous Relevant Chapters
 
-- **ch03_contact**: `AwardHeir`, `AwardLine`, `AwardUnit` — rendered with human-readable strings showing `give_force` and `fund_give` values.
+- **ch03_contact**: `AwardHeir`, `AwardLine`, `AwardUnit` — rendered with human-understandable strings showing `give_force` and `fund_give` values.
 - **ch04_workforce**: `LaborHeir`, `LaborUnit` — rendered with solo-flag labeling.
 - **ch06_reason**: `CaseUnit`, `FactHeir`, `FactUnit`, `ReasonHeir`, `ReasonUnit` — each type gets its own readable string representation.
 - **ch07_plan**: `PlanUnit` — the tree node rendered at every level of the plan hierarchy.
 - **ch08_person_logic**: `PersonUnit` — the root object visualized.
-- **ch14_time**: `get_fact_state_readable_str`, `get_reason_case_readable_str` — convert numeric time-based fact/reason values into human-readable calendar strings (e.g. "Monday 8am–10am" rather than raw `TimeNum` integers).
+- **ch14_time**: `get_fact_state_readable_str`, `get_reason_case_readable_str` — convert numeric time-based fact/reason values into human-understandable calendar strings (e.g. "Monday 8am–10am" rather than raw `TimeNum` integers).
 
 `ch35_semantic_types.py` re-exports through ch22 with no additions.
 
@@ -1711,7 +1711,7 @@ Eight named example generators build `PersonUnit`s and `MomentUnit`s programmati
 
 *Utility:*
 - `fill_spark_face_in_directory(directory, face_name)` — fills empty `spark_face` cells in all Excel files in a directory with the provided face name. Used before running the pipeline when a user has authored idea sheets without attributing them to a face.
-- `get_option_table_options()` — returns a dict mapping human-readable option names to their generator functions, used to populate the GUI's dropdown/table of example actions.
+- `get_option_table_options()` — returns a dict mapping human-understandable option names to their generator functions, used to populate the GUI's dropdown/table of example actions.
 
 **`w1_app.py`** — the tkinter GUI:
 - A dark-themed desktop window with labeled entry fields for `world_name`, `worlds_dir`, `me_name`, `you_name`, and `output_dir`.

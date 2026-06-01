@@ -54,7 +54,7 @@ Two KPIs are currently defined, both implemented as `CREATE TABLE AS SELECT` SQL
 
 **Calendar markdown (`kpi_mstr.py`)**
 
-`create_calendar_markdown_files(moment_mstr_dir, output_dir)` — for each moment, loads the `MomentUnit`, calls `get_moment_timeshoe` to get the epoch's time-shoe (the mapping from `TimeNum` to calendar position), then calls ch14's `get_calendarmarkdown_str` to produce a human-readable markdown calendar showing the epoch structure. Written to `output_dir`.
+`create_calendar_markdown_files(moment_mstr_dir, output_dir)` — for each moment, loads the `MomentUnit`, calls `get_moment_timeshoe` to get the epoch's time-shoe (the mapping from `TimeNum` to calendar position), then calls ch14's `get_calendarmarkdown_str` to produce a human-understandable markdown calendar showing the epoch structure. Written to `output_dir`.
 
 **Google Calendar day-punches (`gcalendar.py`)**
 

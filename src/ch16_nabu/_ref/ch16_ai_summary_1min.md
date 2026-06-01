@@ -23,7 +23,7 @@ Ontology note:
 
 - **ch00_py**: `set_modular_dict_values` from `dict_toolbox` — applies modular arithmetic to the `otx2inx` mapping, enforcing that epoch differences wrap correctly within the cycle length.
 - **ch10_person_lesson**: `FaceName`, `MomentRope` — a `NabuTime` is attributed to a specific face and spark number, matching the lesson provenance model from ch10.
-- **ch12_bud**: `TimeNum`, `SparkInt` — the numeric types being translated. The "nabuable" args (`bud_time`, `fact_lower`, `fact_upper`, `reason_lower`, `reason_upper`, `tran_time`, `offi_time`) are all time-related numeric fields from ch12 and ch06.
+- **ch12_bud**: `TimeNum`, `SparkInt` — the numeric types being converted. The "nabuable" args (`bud_time`, `fact_lower`, `fact_upper`, `reason_lower`, `reason_upper`, `tran_time`, `offi_time`) are all time-related numeric fields from ch12 and ch06.
 - **ch14_time**: `EpochLabel` — epoch cycle lengths are the denominators used in the modular translation arithmetic.
 
 `ch16_semantic_types.py` re-exports the full chain through ch14 with no new additions. The chapter introduces no new semantic types of its own.
@@ -44,11 +44,11 @@ The mapping is stored modularly: `set_modular_dict_values` applies `value % key`
 
 **`reveal_inx(otx_epoch_length, otx_value)`** is the translation function: it adds the stored `inx_epoch_diff` to the external value, then takes it modulo the epoch length — producing the correct internal `TimeNum` position within the cycle.
 
-**`nabu_config.py`** defines which argument fields are "nabuable" — meaning they carry raw external time values that need translation before being used internally:
+**`nabu_config.py`** defines which argument fields are "nabuable" — they carry raw external time values that need translation before being used internally:
 - `bud_time`, `tran_time`, `offi_time` — scheduling and transaction times.
 - `fact_lower`, `fact_upper`, `reason_lower`, `reason_upper` — the numeric bounds in fact and reason conditions.
 
-The config also defines the `nabu_timenum` dimension for atom-style CRUD operations, and `set_nabuable_otx_inx_args` which expands nabuable field names into their `_otx` / `_inx` variants — used downstream when storing both the external and translated versions of a value side by side.
+The config also defines the `nabu_timenum` dimension for atom-style CRUD operations, and `set_nabuable_otx_inx_args` which expands nabuable field names into their `_otx` / `_inx` variants — used downstream when storing both the external and converted versions of a value side by side.
 
 **`inherit_timenabu(new, old)`** enforces that newer `NabuTime` objects (higher `spark_num`) from the same face supersede older ones — maintaining the same ordered-inheritance pattern established in ch10's lesson sequencing.
 

@@ -39,7 +39,7 @@ New semantic type: `WorldName` (a `str`) — identifies a world, the top-level c
 
 ## 4. Summary of What This Chapter Does
 
-`ch32_world` defines `WorldDir` and its factory function `worlddir_shop` — the user-facing entry point for the entire keg system.
+`ch32_world` defines `WorldDir` and its generation function `worlddir_shop` — the user-facing entry point for the entire keg system.
 
 **`WorldDir`** is a dataclass holding the directory layout for one world:
 - `world_name` / `worlds_dir` — the name and parent directory of this world.

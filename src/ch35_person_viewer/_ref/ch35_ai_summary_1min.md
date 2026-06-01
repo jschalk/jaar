@@ -21,12 +21,12 @@ Ontology note:
 
 ## 3. Summary of Previous Relevant Chapters
 
-- **ch03_contact**: `AwardHeir`, `AwardLine`, `AwardUnit` — rendered with human-readable strings showing `give_force` and `fund_give` values.
+- **ch03_contact**: `AwardHeir`, `AwardLine`, `AwardUnit` — rendered with human-understandable strings showing `give_force` and `fund_give` values.
 - **ch04_workforce**: `LaborHeir`, `LaborUnit` — rendered with solo-flag labeling.
 - **ch06_reason**: `CaseUnit`, `FactHeir`, `FactUnit`, `ReasonHeir`, `ReasonUnit` — each type gets its own readable string representation.
 - **ch07_plan**: `PlanUnit` — the tree node rendered at every level of the plan hierarchy.
 - **ch08_person_logic**: `PersonUnit` — the root object visualized.
-- **ch14_time**: `get_fact_state_readable_str`, `get_reason_case_readable_str` — convert numeric time-based fact/reason values into human-readable calendar strings (e.g. "Monday 8am–10am" rather than raw `TimeNum` integers).
+- **ch14_time**: `get_fact_state_readable_str`, `get_reason_case_readable_str` — convert numeric time-based fact/reason values into human-understandable calendar strings (e.g. "Monday 8am–10am" rather than raw `TimeNum` integers).
 
 `ch35_semantic_types.py` re-exports through ch22 with no additions.
 

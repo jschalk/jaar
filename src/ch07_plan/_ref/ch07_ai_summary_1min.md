@@ -26,7 +26,7 @@ Ontology note:
 - **ch00_py**: null-safe helpers (`get_0_if_None`, `get_1_if_None`, `get_empty_dict_if_None`, `get_False_if_None`, `get_positive_int`).
 - **ch02_allot**: `allot_scale` and `default_grain_num_if_None` — used to distribute a plan's fund pool proportionally among its child plans (via their `kar` weights) and to distribute award funds among `AwardUnit`s.
 - **ch03_contact**: `AwardUnit`, `AwardHeir`, `AwardLine`, `GroupUnit` — the award system from ch03 is embedded into each `PlanUnit`. Groups receive fund flows via award structures.
-- **ch04_workforce**: `WorkforceUnit`, `WorkforceHeir` — each plan can declare which groups/contacts are responsible for carrying it out; these inherit down the tree.
+- **ch04_workforce**: `WorkforceUnit`, `WorkforceHeir` — each plan can declare which groups/contactunits are responsible for carrying it out; these inherit down the tree.
 - **ch05_rope**: `RopeTerm`, `create_rope`, `rebuild_rope`, `is_sub_rope`, `find_replace_rope_key_dict`, `all_ropes_between` — the plan tree is entirely organized by rope paths. Every plan has a `parent_rope` and a `plan_label`, and its full identity is its rope.
 - **ch06_reason**: `ReasonUnit`, `ReasonHeir`, `FactUnit`, `FactHeir` — each plan can declare conditions (`reasonunits`) and local facts (`factunits`). These are evaluated to determine `plan_active`.
 
@@ -36,7 +36,7 @@ Ch07 also introduces `HealerUnit` (in `healer.py`) and `RangeUnit` (in `range_to
 
 ## 4. Summary of What This Chapter Does
 
-`ch07_plan` defines `PlanUnit` — the central data structure of keg. A `PlanUnit` is a node in a tree of plans rooted at a single `planroot`. Each node can be:
+`ch07_plan` defines `PlanUnit` — the central data structure of keg. A `PlanUnit` is a node in a tree of plans rooted at a single root. Each node can be:
 
 - A **container** (`kids: dict[LabelTerm, PlanUnit]`) that groups sub-plans.
 - A **pledge** (`pledge: True`) — a declared commitment that can be active or inactive.
@@ -46,12 +46,12 @@ Ch07 also introduces `HealerUnit` (in `healer.py`) and `RangeUnit` (in `range_to
 - A **ranged plan** (`begin`, `close`, `addin`, `numor`, `denom`, `morph`) — can represent a numeric interval that can be inherited and morphed by children.
 - A **problem** (`problem_bool`) with designated **healers** (`healerunit`) — plans that flag issues and point to responsible remediation plans.
 
-**Key computed ("heir") attributes** that flow down from parent to child:
+**Key computed ("heir") attrs** that flow down from parent to child:
 - `factheirs` — facts inherited and possibly narrowed by local `factunits`.
 - `reasonheirs` — reasons inherited from parent and evaluated against `factheirs`.
 - `workforceheir` — inherited workforce assignment.
 - `awardheirs` / `awardlines` — fund flow directions inherited and accumulated from children.
 
-**`PlanAttrHolder`** is a parameter-object pattern used to batch-set attributes on a `PlanUnit` without requiring positional arguments for every field — a clean API for the large number of settable properties.
+**`PlanAttrHolder`** is a parameter-object pattern used to batch-set attrs on a `PlanUnit` without requiring positional arguments for every field — a clean API for the large number of settable properties.
 
-The plan tree is the structural heart of keg. Every subsequent chapter either populates this tree (ch08 `PersonUnit`), tracks changes to it (ch09 atoms), or reads from it to produce outputs (calendars, finances, reports).
+The plan tree is the structural core of keg. Every subsequent chapter either populates this tree, tracks changes to it, or reads from it to produce outputs such as reports.

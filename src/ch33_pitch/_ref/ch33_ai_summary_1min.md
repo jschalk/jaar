@@ -32,7 +32,7 @@ Ontology note:
 
 ## 4. Summary of What This Chapter Does
 
-Ch33 is an **early-stage design stub** — its ref file's `chapter_blurb` is incomplete ("Defines Finance Tools for "), and `pitch.py` consists of a dataclass, a factory function, and inline design notes rather than a working implementation.
+Ch33 is an **early-stage design stub** — its ref file's `chapter_blurb` is incomplete ("Defines Finance Tools for "), and `pitch.py` consists of a dataclass, a generation function, and inline design notes rather than a working implementation.
 
 **`PitchUnit`** is the dataclass representing a negotiation between two persons:
 - `pitcher_name` / `peer_name` — the two parties.
@@ -49,4 +49,4 @@ The inline design comments in `pitch.py` reveal the intended model:
 - The pitch then describes possible future gifts from both parties.
 - If accepted, the deal (explicitly noted as "needs to be added here so the word isn't used anywhere else") translates the offer ideabook into bricks.
 
-The `pitchunit_shop` factory is a placeholder — it accepts all parameters but currently only sets `pitcher_name`. The chapter represents keg's planned mechanism for structured peer-to-peer negotiation, grounding agreement in concrete idea commitments rather than verbal promises. The ontology note's phrase "here are the possible Worlds" indicates this chapter is also intended to support scenario comparison across different `WorldDir` configurations.
+The `pitchunit_shop` function is a placeholder — it accepts all parameters but currently only sets `pitcher_name`. The chapter represents keg's planned mechanism for structured peer-to-peer negotiation, grounding agreement in concrete idea commitments rather than verbal promises. The ontology note's phrase "here are the possible Worlds" indicates this chapter is also intended to support scenario comparison across different `WorldDir` configurations.

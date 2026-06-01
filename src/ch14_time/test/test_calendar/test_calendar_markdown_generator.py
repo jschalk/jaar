@@ -443,8 +443,11 @@ def test_get_calendarmarkdown_str_ReturnsObj_Scenario1_display_init_day_Paramete
     # ESTABLISH
     five_config = get_five_config()
     yr5524 = 5224
-    chiday_str = kw.Chiday
     anaday_str = kw.Anaday
+    baiday_str = kw.Baileyday
+    chiday_str = kw.Chiday
+    danday_str = kw.Danceday
+    easday_str = kw.Eastday
     expected_str = get_expected_five_5524_markdown()
 
     # WHEN / THEN

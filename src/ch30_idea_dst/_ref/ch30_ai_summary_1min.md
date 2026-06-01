@@ -5,7 +5,7 @@
 ## 1. Title and Summary Declaration
 
 **Chapter 30 — `ch30_idea_dst`**
-**"Idea Destination — exporting the fully processed world state back to human-readable Excel idea files for external audiences"**
+**"Idea Destination — exporting the fully processed world state back to human-understandable Excel idea files for external audiences"**
 
 ---
 

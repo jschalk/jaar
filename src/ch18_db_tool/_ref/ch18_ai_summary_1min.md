@@ -48,4 +48,4 @@ This is a deliberate design: ch18 is a low-level database infrastructure chapter
 
 **`notebook_toolbox.py`** provides Jupyter-notebook-oriented utilities — helpers for displaying query results and database state in an interactive analysis context.
 
-Ch18 is the "ch00 of persistence" — a deliberately dependency-free utility layer. It carries the full semantic type chain in its `_ref` file as preparation for the ETL chapters (ch20–ch27) that will use both these database tools and the domain objects to build the full data pipeline.
+Ch18 is the "ch00 of persistence" — a deliberately dependency-free utility layer. It carries the full semantic type chain in its `_ref` file as preparation for the ETL chapters that will use both these database tools and the domain objects to build the full data pipeline.

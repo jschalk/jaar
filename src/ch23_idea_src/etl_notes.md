@@ -51,7 +51,7 @@ Each dimension has a specific focus but is treated identically in terms of ETL l
 | **translate**      | Raw translation data used to update translatable content.             |
 | **translate_core** | Verified translation subset extracted from `translate`.               |
 | **nabu**           | Core content or base entities that receive translated text.           |
-| **moment**         | Event-based or temporal data derived from `nabu` content.             |
+| **moment**         | Iterative temporal data derived from `nabu` content.                  |
 | **person**         | Higher-level interpretive or logical data derived from `moment` data. |
 
 Each dimension advances through a fixed set of stages (Sound and Heard) with clearly defined insert/update rules.

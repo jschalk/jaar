@@ -105,7 +105,6 @@ def test_Chapters_ChapterReferenceDir_ref_ExistsForEveryChapter_Scenario0():
         semantics_path = create_path(docs_dir, semantic_types_filename)
         assert os_path_exists(docs_dir)
         assert os_path_exists(chapter_ref_path)
-        # TODO reactivate this ch_ai_1min_path
         assert os_path_exists(ch_ai_1min_path)
         assert os_path_exists(semantics_path)
         chapter_ref_dict = open_json(chapter_ref_path)

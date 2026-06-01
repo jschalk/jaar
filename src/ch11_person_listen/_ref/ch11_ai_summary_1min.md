@@ -33,7 +33,7 @@ Ontology note:
 
 ## 4. Summary of What This Chapter Does
 
-This is the philosophical center of keg, implemented as code. The `listen_to_speaker_agenda` function embodies the Levinasian idea that genuine listening means taking the other person's perspective seriously and incorporating it into your own understanding.
+This is the philosophical center of keg, implemented as code. The `listen_to_speaker_agenda` function embodies the Levinasian concept that genuine listening means taking the other person's perspective seriously and incorporating it into your own understanding.
 
 **`get_perspective_person(speaker, listener_person_name)`** (from `keep_tool.py`) — creates a version of the speaker's `PersonUnit` re-evaluated from the listener's perspective. Facts on the speaker's plan root are reset so the listener can independently assess which of the speaker's pledges are currently active from their own vantage point.
 
