@@ -180,6 +180,7 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
         # print(f"{chapter_prefix} {len(not_allowed_keywords)=}")
 
         chapter_files = list(get_python_files_with_flag(chapter_dir).keys())
+        # TODO add .md and .txt and .json files to chapter files
         chapter_files.extend(list(get_json_files(chapter_dir)))
         chapter_files = sorted(chapter_files)
         # chapter_file_count = 0

@@ -1651,6 +1651,7 @@ The HTML template is extensive — it renders ~30 checkbox controls for toggling
 
 This chapter is a debugging and demonstration tool — it makes the complexity of a post-`thinkout()` `PersonUnit` inspectable by a human without reading raw JSON. The calendar-readable strings from ch14 are what make it genuinely useful: instead of seeing `fact_lower=525600`, a user sees "Monday 8:00 AM".
 
+
 # ch90_world_app — Chapter Summary
 
 *This summary is authored by AI 5-26-2026.*

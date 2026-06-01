@@ -33,7 +33,8 @@
 - ch33_pitch: Deal, Gift, Peer, PitchID, PitchUnit, ch33, deal, gift, offer, peer, pitch, pitch_id, pitcher_name, pitchs, request
 - ch34_finance: ch34, finance, financial
 - ch35_person_viewer: ch35
-- ch90_world_app: ch90
+- ch40_on_x0: ch40, ch90
+- ch90_world_app: 
 - ch97_docs_builder: ch97
 - ch98_linter: ch98
 - ch99_glossary: ch99
