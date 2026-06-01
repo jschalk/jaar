@@ -17,6 +17,7 @@ from json import dumps as json_dumps
 from os.path import join as os_path_join
 from pathlib import Path
 from re import search as re_search
+from pandas import read_excel as pandas_read_excel, DataFrame
 
 
 @dataclass
@@ -248,3 +249,33 @@ def get_kegology_exam_grade(answers: dict[str, str]) -> int:
     #         return question_number - 1
 
     # return max(question_numbers)
+
+
+def load_keg_knowledge(file_path: str) -> DataFrame:
+    """
+    Reads the 'keg_knowledge' sheet from an Excel file, loads it into a
+    dataframe with columns [keg_question, answer], aggregates exact duplicate
+    pairs, then removes any keg_question that has more than one distinct answer.
+
+    Args:
+        file_path: Path to the Excel file.
+
+    Returns:
+        Cleaned DataFrame with columns [keg_question, answer].
+    """
+    df = pandas_read_excel(file_path, sheet_name="keg_knowledge")
+    df = df[["keg_question", "answer"]].copy()
+
+    # Strip whitespace and normalise case for reliable deduplication
+    df["keg_question"] = df["keg_question"].astype(str).str.strip()
+    df["answer"] = df["answer"].astype(str).str.strip().str.lower()
+
+    # Step 1: collapse exact duplicate question/answer pairs
+    df = df.drop_duplicates(subset=["keg_question", "answer"])
+
+    # Step 2: drop questions that have more than one distinct answer
+    answer_counts = df.groupby("keg_question")["answer"].nunique()
+    single_answer_questions = answer_counts[answer_counts == 1].index
+    df = df[df["keg_question"].isin(single_answer_questions)].reset_index(drop=True)
+
+    return df

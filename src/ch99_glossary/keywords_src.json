@@ -314,6 +314,7 @@
   "keeps_buildable": {"sort_ordinal": 192, "valid_ch": "8:"}, 
   "keeps_justified": {"sort_ordinal": 187, "valid_ch": "8:"}, 
   "keg_wheel": {"valid_ch": ""}, 
+  "kegbox": {"valid_ch": ""}, 
   "keyword": {"valid_ch": "0:"}, 
   "kids": {"valid_ch": "7:"}, 
   "knot": {"sort_ordinal": 153, "valid_ch": "5:"}, 
