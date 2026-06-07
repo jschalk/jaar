@@ -117,537 +117,538 @@ row_number,question
 115,"Did you read that the keg_definition of 'semantic_type' is 'A datatype that is fundamentally int, str, or float'."
 116,"Did you read that the keg_definition of 'shop' is 'The factory method in programming is very important. However because I want 'fact' only to refer to the Keg concept I don't use the word 'factory', instead I use 'shop'.'."
 117,Did you read that the keg_definition of 'sqlite_datatype' is 'Definition needed.'.
-118,Did you read that the keg_definition of 'question_tier' is 'Every Keyword has an question_tier. The highter the question_tier the more relatively important the keyword.'.
-119,Did you read that the keg_definition of 'sort_ordinal' is 'Int that represents where the keyword is indexed in the general sorting order.'.
-120,"Did you read that the keg_definition of 'valid_ch' is 'Describes which chapters a keyword is allowed to be in. Format is '0:' for all chapters, '5:' for all chapters after ch06, '3,7' for only 3 and 7. Empty string for not allowed in any chapter.'."
-121,Did you read that the keg_definition of 'GrainNum' is 'float first used in ch02. GrainNum represents the smallest fraction allowed'.
-122,Did you read that the keg_definition of 'PoolNum' is 'float first used in ch02. PoolNum represents any possible subset of the sum of numbers in the pool.'.
-123,Did you read that the keg_definition of 'WeightNum' is 'float first used in ch02. WeightNum represents the unnormalized value of a ledger key. The sum of all WeightNum values in a ledger is not defined.'.
-124,Did you read that the keg_definition of 'BreakTerm' is 'str first used in ch03. All str separator classes are BreakTerms. Exists because of the necessity to break experience reality into things so they can be understood.'.
-125,"Did you read that the keg_definition of 'ContactName' is 'str first used in ch03. Every ContactName object is NameTerm, must follow NameTerm format.'."
-126,Did you read that the keg_definition of 'FundGrain' is 'float first used in ch03. Smallest Unit of fund_num'.
-127,Did you read that the keg_definition of 'FundNum' is 'float first used in ch03. FundNum inherits from float class'.
-128,"Did you read that the keg_definition of 'GroupMark' is 'str first used in ch03. GroupMark(s) exist in TitleTerms to indicate its a group, no GroupMark indicates it is a ContactName.'."
-129,Did you read that the keg_definition of 'GroupTitle' is 'str first used in ch03. If contains SepartorTerms(s) it represents a group otherwise its a ContactName.'.
-130,Did you read that the keg_definition of 'HealerName' is 'str first used in ch03. A NameTerm used to identify a Problem's Healer'.
-131,Did you read that the keg_definition of 'NameTerm' is 'str first used in ch03. All Name string classes should inherit from this class'.
-132,Did you read that the keg_definition of 'RespectGrain' is 'float first used in ch03. Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!''.
-133,Did you read that the keg_definition of 'RespectNum' is 'float first used in ch03. RespectNum inherits from float class'.
-134,Did you read that the keg_definition of 'TitleTerm' is 'str first used in ch03. If a TitleTerm contains SepartorTerms(s) it represents a group otherwise its a single member group of an ContactName.'.
-135,"Did you read that the keg_definition of 'awardee_title' is ', Award seed.'."
-136,"Did you read that the keg_definition of 'awardunits' is 'Every PlanUnit has AwardUnits that represent who is awarded give_fund and take_fund, Plan seed'."
-137,"Did you read that the keg_definition of 'contact_cred_lumen' is ', Contact seed.'."
-138,"Did you read that the keg_definition of 'contact_debt_lumen' is ', Contact seed.'."
-139,"Did you read that the keg_definition of 'contact_name' is ', paybook arg, Contact seed, Member seed'."
-140,"Did you read that the keg_definition of 'credor_pool' is ', Contact thinkout, Member thinkout data'."
-141,"Did you read that the keg_definition of 'debtor_pool' is ', Contact thinkout, Member thinkout data'."
-142,"Did you read that the keg_definition of 'fund_agenda_give' is ', Contact thinkout, Member thinkout data'."
-143,"Did you read that the keg_definition of 'fund_agenda_ratio_give' is ', Contact thinkout, Member thinkout data'."
-144,"Did you read that the keg_definition of 'fund_agenda_ratio_take' is ', Contact thinkout, Member thinkout data'."
-145,"Did you read that the keg_definition of 'fund_agenda_take' is ', Contact thinkout, Member thinkout data'."
-146,"Did you read that the keg_definition of 'fund_give' is ', Contact thinkout, Award thinkout, Member thinkout data'."
-147,"Did you read that the keg_definition of 'fund_grain' is ', Moment arg, Person seed, Plan thinkout.'."
-148,"Did you read that the keg_definition of 'fund_take' is ', Contact thinkout, Award thinkout, Member thinkout data'."
-149,"Did you read that the keg_definition of 'give_force' is ', Award seed.'."
-150,"Did you read that the keg_definition of 'group_cred_lumen' is ', Member seed.'."
-151,"Did you read that the keg_definition of 'group_debt_lumen' is ', Member seed.'."
-152,"Did you read that the keg_definition of 'group_title' is ', Member seed.'."
-153,"Did you read that the keg_definition of 'groupmark' is ', Contact thinkout, Member thinkout data.'."
-154,Did you read that the keg_definition of 'groupunits' is 'Definition needed.'.
-155,"Did you read that the keg_definition of 'inallocable_contact_debt_lumen' is ', Contact thinkout'."
-156,"Did you read that the keg_definition of 'irrational_contact_debt_lumen' is ', Contact thinkout'."
-157,"Did you read that the keg_definition of 'labor_title' is ', Workforce seed.'."
-158,Did you read that the keg_definition of 'labors' is 'Definition needed.'.
-159,Did you read that the keg_definition of 'memberships' is 'Definition needed.'.
-160,"Did you read that the keg_definition of 'rational' is 'If a PersonUnit's agenda is deterministic (always the same after thinkout) then value is True, Person thinkout'."
-161,"Did you read that the keg_definition of 'respect_grain' is ', Moment arg, Person seed.'."
-162,"Did you read that the keg_definition of 'solo' is 'I can't figure out what this is for. Where in the codebase is it necessary for a LaborUnit to know if it the only LaborUnit in a WorkforceUnit, Workforce seed.'."
-163,"Did you read that the keg_definition of 'take_force' is ', Workforce seed, Award seed'."
-164,Did you read that the keg_definition of 'thinkout' is 'The process by which a PersonUnit creates all it's output metrics from file-stored data. Meant to invoke contemplation and computation. The PersonUnit contemplates what is important to them (their plans) and decides what they want to do. They compute their rules and create their agenda. If the PersonUnit plans are trusted with a currency quota they can be used as an Budget. Each Contact is assigned a FundNum. It may be negative.'.
-165,Did you read that the keg_definition of 'workforceheir' is 'Definition needed.'.
-166,Did you read that the keg_definition of 'workforceunit' is 'Definition needed.'.
-167,Did you read that the keg_definition of 'LaborHeir' is 'Definition needed.'.
-168,Did you read that the keg_definition of 'laborheir' is 'Definition needed.'.
-169,Did you read that the keg_definition of 'parent_solo' is 'The parent PlanUnit's LaborUnit's solo value for that labor_title'.
-170,Did you read that the keg_definition of 'person' is 'Definition needed.'.
-171,"Did you read that the keg_definition of 'person_name' is ', paybook arg, bud arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed, Contact seed, Member seed.'."
-172,"Did you read that the keg_definition of 'person_name_is_workforce' is ', Workforce thinkout'."
-173,Did you read that the keg_definition of 'FactNum' is 'float first used in ch05. A numeric value that may converted to other Semantic Types by an external process driven by context.'.
-174,Did you read that the keg_definition of 'FirstLabel' is 'str first used in ch05. The first LabelTerm in a RopeTerm. FirstLabel cannot contain knot. Not called RootLabel to avoid confission.'.
-175,Did you read that the keg_definition of 'KnotTerm' is 'str first used in ch05. A string to used as a delimiter in RopeTerms.'.
-176,Did you read that the keg_definition of 'LabelTerm' is 'str first used in ch05. A string representation of a tree node. Nodes cannot contain RopeTerm knot'.
-177,Did you read that the keg_definition of 'ManaGrain' is 'float first used in ch05. Smallest Unit of Mana.'.
-178,Did you read that the keg_definition of 'ReasonNum' is 'float first used in ch05. A numeric value that may converted to other Semantic Types by an external process driven by context.'.
-179,Did you read that the keg_definition of 'RopeTerm' is 'str first used in ch05. A string representation of a tree path. LabelTerms are seperated by knots.'.
-180,Did you read that the keg_definition of 'fact' is 'Facts are very important concept. I tried never to use those 4 letters anywhere that didn't refer exactly to that concept.'.
-181,"Did you read that the keg_definition of 'knot' is ', Moment arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed'."
-182,"Did you read that the keg_definition of 'mana_grain' is ', Moment arg, used with Budget Cells, Person seed.'."
-183,Did you read that the keg_definition of 'meaning' is 'A term specifically used to describe how defining Ropes creates meaning. Ropes with the same start and end points can have different meaning based on the Labels in between. Only referenced in ch05'.
-184,Did you read that the keg_definition of 'parent_rope' is 'A parent_rope of rope is created by removing the last label. For PlanUnits the parent_rope is the key for their parent PlanUnit.'.
-185,"Did you read that the keg_definition of 'active_requisite' is 'Represents the expected boolean of the PlanUnit with address reason_context. If None, no check. If False expected Active bool of reason_context PlanUnit is false. If True expected contest_plan.active is True, Reason seed'."
-186,"Did you read that the keg_definition of 'case_active' is ', Case thinkout'."
-187,"Did you read that the keg_definition of 'case_task' is ', Case thinkout'."
-188,Did you read that the keg_definition of 'cases' is 'Definition needed.'.
-189,"Did you read that the keg_definition of 'fact_context' is 'All facts have a foundational context, Fact seed.'."
-190,"Did you read that the keg_definition of 'fact_lower' is ', Fact seed, Nabuable arg.'."
-191,"Did you read that the keg_definition of 'fact_state' is 'A fact can have a state different from its context, a different branch of the context where all other branches are not in fact, Fact seed.'."
-192,"Did you read that the keg_definition of 'fact_upper' is ', Fact seed, Nabuable arg.'."
-193,Did you read that the keg_definition of 'factheirs' is 'Definition needed.'.
-194,Did you read that the keg_definition of 'factunits' is 'PlanUnit holds all it's factunits in an attribute called factunits.'.
-195,"Did you read that the keg_definition of 'parent_heir_active' is ', Reason thinkout'."
-196,"Did you read that the keg_definition of 'reason_active' is ', Reason thinkout'."
-197,"Did you read that the keg_definition of 'reason_context' is ', Reason seed, Case seed'."
-198,"Did you read that the keg_definition of 'reason_divisor' is ', Case seed.'."
-199,"Did you read that the keg_definition of 'reason_lower' is ', Case seed, Nabuable arg.'."
-200,"Did you read that the keg_definition of 'reason_state' is ', Case seed.'."
-201,"Did you read that the keg_definition of 'reason_task' is ', Reason thinkout'."
-202,"Did you read that the keg_definition of 'reason_upper' is ', Case seed, Nabuable arg.'."
-203,Did you read that the keg_definition of 'reasonunits' is 'Definition needed.'.
-204,"Did you read that the keg_definition of 'addin' is 'float that describes addition to parent range calculations, Plan seed'."
-205,"Did you read that the keg_definition of 'all_contact_cred' is ', Plan thinkout'."
-206,"Did you read that the keg_definition of 'all_contact_debt' is ', Plan thinkout'."
-207,"Did you read that the keg_definition of 'awardheirs' is 'Every PlanUnit has AwardHeirs that represent who is awarded give_fund and take_fund. AwardHeirs have every AwardUnit group_title for every PlanUnit Ancestor back to root, Plan thinkout'."
-208,"Did you read that the keg_definition of 'awardlines' is 'Every PlanUnit has AwardLines that represent who is awarded give_fund and take_fund. AwardLines have every AwardUnit group_title for every PlanUnit Descedant starting at the childless PlanUnit, Plan thinkout'."
-209,"Did you read that the keg_definition of 'begin' is 'float that describes the begin of a numerical range if it exists, Plan seed'."
-210,"Did you read that the keg_definition of 'close' is 'float that describes the close of a numerical range if it exists, Plan seed'."
-211,"Did you read that the keg_definition of 'denom' is 'int that describes denominator to parent range calculations, Plan seed'."
-212,"Did you read that the keg_definition of 'descendant_pledge_count' is ', Plan thinkout'."
-213,"Did you read that the keg_definition of 'fund_cease' is 'FundNum number at which funding ceases inside master funding range, Plan thinkout'."
-214,"Did you read that the keg_definition of 'fund_onset' is 'FundNum number at which funding onsets inside master funding range, Plan thinkout'."
-215,"Did you read that the keg_definition of 'fund_pool' is ', Person seed.'."
-216,"Did you read that the keg_definition of 'fund_ratio' is ', Plan thinkout'."
-217,"Did you read that the keg_definition of 'gogo_calc' is ', Plan thinkout'."
-218,"Did you read that the keg_definition of 'gogo_want' is ', Plan seed'."
-219,"Did you read that the keg_definition of 'healer_name' is ', Healer seed.'."
-220,Did you read that the keg_definition of 'healerunit' is 'Definition needed.'.
-221,"Did you read that the keg_definition of 'healerunit_ratio' is ', Plan thinkout'."
-222,Did you read that the keg_definition of 'is_expanded' is 'If A '.
-223,"Did you read that the keg_definition of 'kar' is ', Plan seed'."
-224,Did you read that the keg_definition of 'kids' is 'Definition needed.'.
-225,"Did you read that the keg_definition of 'morph' is 'bool that describes how to change parent range in calculations, Plan seed'."
-226,"Did you read that the keg_definition of 'numor' is 'int that describes numerator to parent range calculations, Plan seed'."
-227,Did you read that the keg_definition of 'plan' is 'Definition needed.'.
-228,"Did you read that the keg_definition of 'plan_active' is ', Plan thinkout'."
-229,Did you read that the keg_definition of 'plan_active_hx' is 'Definition needed.'.
-230,Did you read that the keg_definition of 'plan_fund_total' is 'Definition needed.'.
-231,Did you read that the keg_definition of 'plan_label' is 'Every planunit has a plan_label. Every other sibling planunit must have a different plan label.'.
-232,"Did you read that the keg_definition of 'plan_rope' is ', Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed.'."
-233,"Did you read that the keg_definition of 'plan_task' is 'A plan_task planUnit can change a FactUnit and change Active Plan without plan_task, Plan thinkout'."
-234,Did you read that the keg_definition of 'plan_uid' is 'A uniqueidentifier for a planunit. Currently at the person level. Perhaps at a global level in the future.'.
-235,"Did you read that the keg_definition of 'pledge' is ', Plan seed'."
-236,"Did you read that the keg_definition of 'problem_bool' is ', Plan seed'."
-237,"Did you read that the keg_definition of 'range_evaluated' is ', Plan thinkout'."
-238,"Did you read that the keg_definition of 'range_inheritors' is '# range_inheritors key: plan_rope for any Plan that inherits from a range_plan
+118,"Did you read that the keg_definition of 'src' is 'Abbrevation for the word 'source', used in different ways. All chapters are in directory named 'src'.'."
+119,Did you read that the keg_definition of 'question_tier' is 'Every Keyword has an question_tier. The highter the question_tier the more relatively important the keyword.'.
+120,Did you read that the keg_definition of 'sort_ordinal' is 'Int that represents where the keyword is indexed in the general sorting order.'.
+121,"Did you read that the keg_definition of 'valid_ch' is 'Describes which chapters a keyword is allowed to be in. Format is '0:' for all chapters, '5:' for all chapters after ch06, '3,7' for only 3 and 7. Empty string for not allowed in any chapter.'."
+122,Did you read that the keg_definition of 'GrainNum' is 'float first used in ch02. GrainNum represents the smallest fraction allowed'.
+123,Did you read that the keg_definition of 'PoolNum' is 'float first used in ch02. PoolNum represents any possible subset of the sum of numbers in the pool.'.
+124,Did you read that the keg_definition of 'WeightNum' is 'float first used in ch02. WeightNum represents the unnormalized value of a ledger key. The sum of all WeightNum values in a ledger is not defined.'.
+125,Did you read that the keg_definition of 'BreakTerm' is 'str first used in ch03. All str separator classes are BreakTerms. Exists because of the necessity to break experience reality into things so they can be understood.'.
+126,"Did you read that the keg_definition of 'ContactName' is 'str first used in ch03. Every ContactName object is NameTerm, must follow NameTerm format.'."
+127,Did you read that the keg_definition of 'FundGrain' is 'float first used in ch03. Smallest Unit of fund_num'.
+128,Did you read that the keg_definition of 'FundNum' is 'float first used in ch03. FundNum inherits from float class'.
+129,"Did you read that the keg_definition of 'GroupMark' is 'str first used in ch03. GroupMark(s) exist in TitleTerms to indicate its a group, no GroupMark indicates it is a ContactName.'."
+130,Did you read that the keg_definition of 'GroupTitle' is 'str first used in ch03. If contains SepartorTerms(s) it represents a group otherwise its a ContactName.'.
+131,Did you read that the keg_definition of 'HealerName' is 'str first used in ch03. A NameTerm used to identify a Problem's Healer'.
+132,Did you read that the keg_definition of 'NameTerm' is 'str first used in ch03. All Name string classes should inherit from this class'.
+133,Did you read that the keg_definition of 'RespectGrain' is 'float first used in ch03. Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!''.
+134,Did you read that the keg_definition of 'RespectNum' is 'float first used in ch03. RespectNum inherits from float class'.
+135,Did you read that the keg_definition of 'TitleTerm' is 'str first used in ch03. If a TitleTerm contains SepartorTerms(s) it represents a group otherwise its a single member group of an ContactName.'.
+136,"Did you read that the keg_definition of 'awardee_title' is ', Award seed.'."
+137,"Did you read that the keg_definition of 'awardunits' is 'Every PlanUnit has AwardUnits that represent who is awarded give_fund and take_fund, Plan seed'."
+138,"Did you read that the keg_definition of 'contact_cred_lumen' is ', Contact seed.'."
+139,"Did you read that the keg_definition of 'contact_debt_lumen' is ', Contact seed.'."
+140,"Did you read that the keg_definition of 'contact_name' is ', paybook arg, Contact seed, Member seed'."
+141,"Did you read that the keg_definition of 'credor_pool' is ', Contact thinkout, Member thinkout data'."
+142,"Did you read that the keg_definition of 'debtor_pool' is ', Contact thinkout, Member thinkout data'."
+143,"Did you read that the keg_definition of 'fund_agenda_give' is ', Contact thinkout, Member thinkout data'."
+144,"Did you read that the keg_definition of 'fund_agenda_ratio_give' is ', Contact thinkout, Member thinkout data'."
+145,"Did you read that the keg_definition of 'fund_agenda_ratio_take' is ', Contact thinkout, Member thinkout data'."
+146,"Did you read that the keg_definition of 'fund_agenda_take' is ', Contact thinkout, Member thinkout data'."
+147,"Did you read that the keg_definition of 'fund_give' is ', Contact thinkout, Award thinkout, Member thinkout data'."
+148,"Did you read that the keg_definition of 'fund_grain' is ', Moment arg, Person seed, Plan thinkout.'."
+149,"Did you read that the keg_definition of 'fund_take' is ', Contact thinkout, Award thinkout, Member thinkout data'."
+150,"Did you read that the keg_definition of 'give_force' is ', Award seed.'."
+151,"Did you read that the keg_definition of 'group_cred_lumen' is ', Member seed.'."
+152,"Did you read that the keg_definition of 'group_debt_lumen' is ', Member seed.'."
+153,"Did you read that the keg_definition of 'group_title' is ', Member seed.'."
+154,"Did you read that the keg_definition of 'groupmark' is ', Contact thinkout, Member thinkout data.'."
+155,Did you read that the keg_definition of 'groupunits' is 'Definition needed.'.
+156,"Did you read that the keg_definition of 'inallocable_contact_debt_lumen' is ', Contact thinkout'."
+157,"Did you read that the keg_definition of 'irrational_contact_debt_lumen' is ', Contact thinkout'."
+158,"Did you read that the keg_definition of 'labor_title' is ', Workforce seed.'."
+159,Did you read that the keg_definition of 'labors' is 'Definition needed.'.
+160,Did you read that the keg_definition of 'memberships' is 'Definition needed.'.
+161,"Did you read that the keg_definition of 'rational' is 'If a PersonUnit's agenda is deterministic (always the same after thinkout) then value is True, Person thinkout'."
+162,"Did you read that the keg_definition of 'respect_grain' is ', Moment arg, Person seed.'."
+163,"Did you read that the keg_definition of 'solo' is 'I can't figure out what this is for. Where in the codebase is it necessary for a LaborUnit to know if it the only LaborUnit in a WorkforceUnit, Workforce seed.'."
+164,"Did you read that the keg_definition of 'take_force' is ', Workforce seed, Award seed'."
+165,Did you read that the keg_definition of 'thinkout' is 'The process by which a PersonUnit creates all it's output metrics from file-stored data. Meant to invoke contemplation and computation. The PersonUnit contemplates what is important to them (their plans) and decides what they want to do. They compute their rules and create their agenda. If the PersonUnit plans are trusted with a currency quota they can be used as an Budget. Each Contact is assigned a FundNum. It may be negative.'.
+166,Did you read that the keg_definition of 'workforceheir' is 'Definition needed.'.
+167,Did you read that the keg_definition of 'workforceunit' is 'Definition needed.'.
+168,Did you read that the keg_definition of 'LaborHeir' is 'Definition needed.'.
+169,Did you read that the keg_definition of 'laborheir' is 'Definition needed.'.
+170,Did you read that the keg_definition of 'parent_solo' is 'The parent PlanUnit's LaborUnit's solo value for that labor_title'.
+171,Did you read that the keg_definition of 'person' is 'Definition needed.'.
+172,"Did you read that the keg_definition of 'person_name' is ', paybook arg, bud arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed, Contact seed, Member seed.'."
+173,"Did you read that the keg_definition of 'person_name_is_workforce' is ', Workforce thinkout'."
+174,Did you read that the keg_definition of 'FactNum' is 'float first used in ch05. A numeric value that may converted to other Semantic Types by an external process driven by context.'.
+175,Did you read that the keg_definition of 'FirstLabel' is 'str first used in ch05. The first LabelTerm in a RopeTerm. FirstLabel cannot contain knot. Not called RootLabel to avoid confission.'.
+176,Did you read that the keg_definition of 'KnotTerm' is 'str first used in ch05. A string to used as a delimiter in RopeTerms.'.
+177,Did you read that the keg_definition of 'LabelTerm' is 'str first used in ch05. A string representation of a tree node. Nodes cannot contain RopeTerm knot'.
+178,Did you read that the keg_definition of 'ManaGrain' is 'float first used in ch05. Smallest Unit of Mana.'.
+179,Did you read that the keg_definition of 'ReasonNum' is 'float first used in ch05. A numeric value that may converted to other Semantic Types by an external process driven by context.'.
+180,Did you read that the keg_definition of 'RopeTerm' is 'str first used in ch05. A string representation of a tree path. LabelTerms are seperated by knots.'.
+181,Did you read that the keg_definition of 'fact' is 'Facts are very important concept. I tried never to use those 4 letters anywhere that didn't refer exactly to that concept.'.
+182,"Did you read that the keg_definition of 'knot' is ', Moment arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed'."
+183,"Did you read that the keg_definition of 'mana_grain' is ', Moment arg, used with Budget Cells, Person seed.'."
+184,Did you read that the keg_definition of 'meaning' is 'A term specifically used to describe how defining Ropes creates meaning. Ropes with the same start and end points can have different meaning based on the Labels in between. Only referenced in ch05'.
+185,Did you read that the keg_definition of 'parent_rope' is 'A parent_rope of rope is created by removing the last label. For PlanUnits the parent_rope is the key for their parent PlanUnit.'.
+186,"Did you read that the keg_definition of 'active_requisite' is 'Represents the expected boolean of the PlanUnit with address reason_context. If None, no check. If False expected Active bool of reason_context PlanUnit is false. If True expected contest_plan.active is True, Reason seed'."
+187,"Did you read that the keg_definition of 'case_active' is ', Case thinkout'."
+188,"Did you read that the keg_definition of 'case_task' is ', Case thinkout'."
+189,Did you read that the keg_definition of 'cases' is 'Definition needed.'.
+190,"Did you read that the keg_definition of 'fact_context' is 'All facts have a foundational context, Fact seed.'."
+191,"Did you read that the keg_definition of 'fact_lower' is ', Fact seed, Nabuable arg.'."
+192,"Did you read that the keg_definition of 'fact_state' is 'A fact can have a state different from its context, a different branch of the context where all other branches are not in fact, Fact seed.'."
+193,"Did you read that the keg_definition of 'fact_upper' is ', Fact seed, Nabuable arg.'."
+194,Did you read that the keg_definition of 'factheirs' is 'Definition needed.'.
+195,Did you read that the keg_definition of 'factunits' is 'PlanUnit holds all it's factunits in an attribute called factunits.'.
+196,"Did you read that the keg_definition of 'parent_heir_active' is ', Reason thinkout'."
+197,"Did you read that the keg_definition of 'reason_active' is ', Reason thinkout'."
+198,"Did you read that the keg_definition of 'reason_context' is ', Reason seed, Case seed'."
+199,"Did you read that the keg_definition of 'reason_divisor' is ', Case seed.'."
+200,"Did you read that the keg_definition of 'reason_lower' is ', Case seed, Nabuable arg.'."
+201,"Did you read that the keg_definition of 'reason_state' is ', Case seed.'."
+202,"Did you read that the keg_definition of 'reason_task' is ', Reason thinkout'."
+203,"Did you read that the keg_definition of 'reason_upper' is ', Case seed, Nabuable arg.'."
+204,Did you read that the keg_definition of 'reasonunits' is 'Definition needed.'.
+205,"Did you read that the keg_definition of 'addin' is 'float that describes addition to parent range calculations, Plan seed'."
+206,"Did you read that the keg_definition of 'all_contact_cred' is ', Plan thinkout'."
+207,"Did you read that the keg_definition of 'all_contact_debt' is ', Plan thinkout'."
+208,"Did you read that the keg_definition of 'awardheirs' is 'Every PlanUnit has AwardHeirs that represent who is awarded give_fund and take_fund. AwardHeirs have every AwardUnit group_title for every PlanUnit Ancestor back to root, Plan thinkout'."
+209,"Did you read that the keg_definition of 'awardlines' is 'Every PlanUnit has AwardLines that represent who is awarded give_fund and take_fund. AwardLines have every AwardUnit group_title for every PlanUnit Descedant starting at the childless PlanUnit, Plan thinkout'."
+210,"Did you read that the keg_definition of 'begin' is 'float that describes the begin of a numerical range if it exists, Plan seed'."
+211,"Did you read that the keg_definition of 'close' is 'float that describes the close of a numerical range if it exists, Plan seed'."
+212,"Did you read that the keg_definition of 'denom' is 'int that describes denominator to parent range calculations, Plan seed'."
+213,"Did you read that the keg_definition of 'descendant_pledge_count' is ', Plan thinkout'."
+214,"Did you read that the keg_definition of 'fund_cease' is 'FundNum number at which funding ceases inside master funding range, Plan thinkout'."
+215,"Did you read that the keg_definition of 'fund_onset' is 'FundNum number at which funding onsets inside master funding range, Plan thinkout'."
+216,"Did you read that the keg_definition of 'fund_pool' is ', Person seed.'."
+217,"Did you read that the keg_definition of 'fund_ratio' is ', Plan thinkout'."
+218,"Did you read that the keg_definition of 'gogo_calc' is ', Plan thinkout'."
+219,"Did you read that the keg_definition of 'gogo_want' is ', Plan seed'."
+220,"Did you read that the keg_definition of 'healer_name' is ', Healer seed.'."
+221,Did you read that the keg_definition of 'healerunit' is 'Definition needed.'.
+222,"Did you read that the keg_definition of 'healerunit_ratio' is ', Plan thinkout'."
+223,Did you read that the keg_definition of 'is_expanded' is 'If A '.
+224,"Did you read that the keg_definition of 'kar' is ', Plan seed'."
+225,Did you read that the keg_definition of 'kids' is 'Definition needed.'.
+226,"Did you read that the keg_definition of 'morph' is 'bool that describes how to change parent range in calculations, Plan seed'."
+227,"Did you read that the keg_definition of 'numor' is 'int that describes numerator to parent range calculations, Plan seed'."
+228,Did you read that the keg_definition of 'plan' is 'Definition needed.'.
+229,"Did you read that the keg_definition of 'plan_active' is ', Plan thinkout'."
+230,Did you read that the keg_definition of 'plan_active_hx' is 'Definition needed.'.
+231,Did you read that the keg_definition of 'plan_fund_total' is 'Definition needed.'.
+232,Did you read that the keg_definition of 'plan_label' is 'Every planunit has a plan_label. Every other sibling planunit must have a different plan label.'.
+233,"Did you read that the keg_definition of 'plan_rope' is ', Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed.'."
+234,"Did you read that the keg_definition of 'plan_task' is 'A plan_task planUnit can change a FactUnit and change Active Plan without plan_task, Plan thinkout'."
+235,Did you read that the keg_definition of 'plan_uid' is 'A uniqueidentifier for a planunit. Currently at the person level. Perhaps at a global level in the future.'.
+236,"Did you read that the keg_definition of 'pledge' is ', Plan seed'."
+237,"Did you read that the keg_definition of 'problem_bool' is ', Plan seed'."
+238,"Did you read that the keg_definition of 'range_evaluated' is ', Plan thinkout'."
+239,"Did you read that the keg_definition of 'range_inheritors' is '# range_inheritors key: plan_rope for any Plan that inherits from a range_plan
     # range_inheritors value: plan_rope for the range_plan
     # During the thinkout process range_inheritors defines when range_inheritors factheirs need to be created'."
-239,Did you read that the keg_definition of 'reasonheirs' is 'Definition needed.'.
-240,"Did you read that the keg_definition of 'stop_calc' is ', Plan thinkout'."
-241,"Did you read that the keg_definition of 'stop_want' is ', Plan seed'."
-242,"Did you read that the keg_definition of 'tree_level' is ', Plan thinkout'."
-243,"Did you read that the keg_definition of 'tree_traverse_count' is ', Person thinkout'."
-244,Did you read that the keg_definition of 'PersonName' is 'str first used in ch08. The LabelTerm used to identify a PersonUnit. Must be a LabelTerm/NameTerm because when identifying if a PlanUnit is an active pledge the PersonName will be compared against ContactNames. If they match the pledge will be active.'.
-245,Did you read that the keg_definition of 'PersonUnit' is 'Definition needed.'.
-246,"Did you read that the keg_definition of 'ancestors' is ', used with Budget Cells'."
-247,Did you read that the keg_definition of 'calc_by_thinkout' is 'Describes when data is defined by thinkout process. Not required seed data.'.
-248,"Did you read that the keg_definition of 'contact_mandate_ledger' is ', used with Budget Cells'."
-249,Did you read that the keg_definition of 'contact_pool' is 'Definition needed.'.
-250,Did you read that the keg_definition of 'contacts' is 'Definition needed.'.
-251,Did you read that the keg_definition of 'context_plan_close' is 'Definition needed.'.
-252,Did you read that the keg_definition of 'context_plan_denom' is 'Definition needed.'.
-253,Did you read that the keg_definition of 'context_plan_morph' is 'Definition needed.'.
-254,"Did you read that the keg_definition of 'credor_respect' is ', Person seed.'."
-255,"Did you read that the keg_definition of 'debtor_respect' is ', Person seed.'."
-256,Did you read that the keg_definition of 'dimen' is 'Definition needed.'.
-257,Did you read that the keg_definition of 'dimens' is 'Definition needed.'.
-258,Did you read that the keg_definition of 'jkeys' is 'The term 'keys' was too generic. 'jkeys' is less generic.'.
-259,Did you read that the keg_definition of 'jvalues' is 'Definition needed.'.
-260,Did you read that the keg_definition of 'keep_rope' is 'Definition needed.'.
-261,"Did you read that the keg_definition of 'keeps_buildable' is ', Person thinkout'."
-262,"Did you read that the keg_definition of 'keeps_justified' is ', Person thinkout'."
-263,Did you read that the keg_definition of 'last_lesson_id' is 'Definition needed.'.
-264,"Did you read that the keg_definition of 'mandate' is ', used with Budget Cells'."
-265,"Did you read that the keg_definition of 'max_tree_traverse' is ', Person seed.'."
-266,Did you read that the keg_definition of 'obj_type' is 'Used idenify an attribute's object class. Usually in config files.'.
-267,"Did you read that the keg_definition of 'offtrack_fund' is ', Person thinkout'."
-268,Did you read that the keg_definition of 'offtrack_kids_kar_set' is 'Definition needed.'.
-269,"Did you read that the keg_definition of 'person_contact_membership' is 'A person dimen representing Membership data. Keys: person_name, contact_name, group_title. person seed.'."
-270,"Did you read that the keg_definition of 'person_contactunit' is 'A person dimen representing ParterUnit data. Keys: person_name, contact_name. person seed.'."
-271,"Did you read that the keg_definition of 'person_groupunit' is 'A person dimen representing GroupUnit data. Keys: person_name, group_title. person thinkout.'."
-272,"Did you read that the keg_definition of 'person_plan_awardunit' is 'A person dimen representing AwardUnit data. Keys: person_name, plan_rope, awardee_title. person seed.'."
-273,"Did you read that the keg_definition of 'person_plan_factunit' is 'A person dimen representing FactUnit data. Keys: person_name, plan_rope, fact_context. person seed.'."
-274,"Did you read that the keg_definition of 'person_plan_healerunit' is 'A person dimen representing HealerUnit data. Keys: person_name, plan_rope, healer_name. person seed.'."
-275,"Did you read that the keg_definition of 'person_plan_laborunit' is 'A person dimen representing HealerUnit data. Keys: person_name, plan_rope, labor_title. person seed.'."
-276,"Did you read that the keg_definition of 'person_plan_reason_caseunit' is 'A person dimen representing CaseUnit data. Keys: person_name, plan_rope, reason_context, reason_state. person seed.'."
-277,"Did you read that the keg_definition of 'person_plan_reasonunit' is 'A person dimen representing ReasonUnit data. Keys: person_name, plan_rope, reason_context. person seed.'."
-278,"Did you read that the keg_definition of 'person_planunit' is 'A person dimen representing PlanUnit data. Keys: person_name, plan_rope. person seed.'."
-279,Did you read that the keg_definition of 'personunit' is 'A person dimen representing PersonUnit data. Keys: person_name. person seed.'.
-280,"Did you read that the keg_definition of 'planroot' is 'Every PersonUnit has one planunit called the planroot. It can have child planunits and those can have child planunits, etc.'."
-281,Did you read that the keg_definition of 'prnawar' is 'abbv for person_plan_awardunit'.
-282,Did you read that the keg_definition of 'prncase' is 'abbv for person_plan_reason_caseunit'.
-283,Did you read that the keg_definition of 'prncont' is 'abbv for person_contactunit'.
-284,Did you read that the keg_definition of 'prnfact' is 'abbv for person_plan_factunit'.
-285,Did you read that the keg_definition of 'prngrou' is 'abbv for person_groupunit'.
-286,Did you read that the keg_definition of 'prnheal' is 'abbv for person_plan_healerunit'.
-287,Did you read that the keg_definition of 'prnlabo' is 'abbv for person_plan_laborunit'.
-288,Did you read that the keg_definition of 'prnmemb' is 'abbv for person_contact_membership'.
-289,Did you read that the keg_definition of 'prnplan' is 'abbv for person_planunit'.
-290,Did you read that the keg_definition of 'prnreas' is 'abbv for person_plan_reasonunit'.
-291,Did you read that the keg_definition of 'prnunit' is 'abbv for personunit'.
-292,"Did you read that the keg_definition of 'reason_contexts' is ', used with Budget Cells'."
-293,"Did you read that the keg_definition of 'sum_healerunit_plans_fund_total' is ', Person thinkout'."
-294,Did you read that the keg_definition of 'CRUD_command' is 'str first used in ch09 that represents database CRUD commands'.
-295,Did you read that the keg_definition of 'DELETE' is 'CRUD_COMMAND to delete records for a table'.
-296,Did you read that the keg_definition of 'INSERT' is 'CRUD_COMMAND to delete records for a table'.
-297,Did you read that the keg_definition of 'UPDATE' is 'CRUD_COMMAND to update records for a table. 'Associated dimens: personunit' in 'CRUD_COMMAND to update records for a table''.
-298,Did you read that the keg_definition of 'atom' is 'Smallest possible unit of a PersonUnit'.
-299,Did you read that the keg_definition of 'awardee_title_ERASE' is 'Definition needed.'.
-300,Did you read that the keg_definition of 'awardee_title_ERASE_inx' is 'The 'awardee_title_ERASE' value after Translate.'.
-301,Did you read that the keg_definition of 'awardee_title_ERASE_otx' is 'The 'awardee_title_ERASE' value after Translate.'.
-302,Did you read that the keg_definition of 'column_ordinal' is 'Describes which column in a table the attribute should have. The number '2' would be 3rd column because of starting at 0 index.'.
-303,Did you read that the keg_definition of 'contact_name_ERASE' is 'Definition needed.'.
-304,Did you read that the keg_definition of 'contact_name_ERASE_inx' is 'The 'contact_name_ERASE' value after Translate.'.
-305,Did you read that the keg_definition of 'contact_name_ERASE_otx' is 'The 'contact_name_ERASE' value after Translate.'.
-306,"Did you read that the keg_definition of 'crud' is 'Create, Read, Update, Delete. The main things that can be done in a database.'."
-307,Did you read that the keg_definition of 'fact_context_ERASE' is 'Definition needed.'.
-308,Did you read that the keg_definition of 'fact_context_ERASE_inx' is 'The 'fact_context_ERASE' value after Translate.'.
-309,Did you read that the keg_definition of 'fact_context_ERASE_otx' is 'The 'fact_context_ERASE' value after Translate.'.
-310,Did you read that the keg_definition of 'group_title_ERASE' is 'Definition needed.'.
-311,Did you read that the keg_definition of 'group_title_ERASE_inx' is 'The 'group_title_ERASE' value after Translate.'.
-312,Did you read that the keg_definition of 'group_title_ERASE_otx' is 'The 'group_title_ERASE' value after Translate.'.
-313,Did you read that the keg_definition of 'healer_name_ERASE' is 'Definition needed.'.
-314,Did you read that the keg_definition of 'healer_name_ERASE_inx' is 'The 'healer_name_ERASE' value after Translate.'.
-315,Did you read that the keg_definition of 'healer_name_ERASE_otx' is 'The 'healer_name_ERASE' value after Translate.'.
-316,Did you read that the keg_definition of 'labor_title_ERASE' is 'Definition needed.'.
-317,Did you read that the keg_definition of 'labor_title_ERASE_inx' is 'The 'labor_title_ERASE' value after Translate.'.
-318,Did you read that the keg_definition of 'labor_title_ERASE_otx' is 'The 'labor_title_ERASE' value after Translate.'.
-319,Did you read that the keg_definition of 'nesting_order' is 'Definition needed.'.
-320,Did you read that the keg_definition of 'normal_specs' is 'Definition needed.'.
-321,Did you read that the keg_definition of 'normal_table_name' is 'Definition needed.'.
-322,Did you read that the keg_definition of 'person_name_ERASE' is 'Definition needed.'.
-323,Did you read that the keg_definition of 'person_name_ERASE_inx' is 'The 'person_name_ERASE' value after Translate.'.
-324,Did you read that the keg_definition of 'person_name_ERASE_otx' is 'The 'person_name_ERASE' value after Translate.'.
-325,Did you read that the keg_definition of 'plan_rope_ERASE' is 'Definition needed.'.
-326,Did you read that the keg_definition of 'plan_rope_ERASE_inx' is 'The 'plan_rope_ERASE' value after Translate.'.
-327,Did you read that the keg_definition of 'plan_rope_ERASE_otx' is 'The 'plan_rope_ERASE' value after Translate.'.
-328,Did you read that the keg_definition of 'reason_context_ERASE' is 'Definition needed.'.
-329,Did you read that the keg_definition of 'reason_context_ERASE_inx' is 'The 'reason_context_ERASE' value after Translate.'.
-330,Did you read that the keg_definition of 'reason_context_ERASE_otx' is 'The 'reason_context_ERASE' value after Translate.'.
-331,Did you read that the keg_definition of 'reason_state_ERASE' is 'Definition needed.'.
-332,Did you read that the keg_definition of 'reason_state_ERASE_inx' is 'The 'reason_state_ERASE' value after Translate.'.
-333,Did you read that the keg_definition of 'reason_state_ERASE_otx' is 'The 'reason_state_ERASE' value after Translate.'.
-334,Did you read that the keg_definition of 'FaceName' is 'str first used in ch10. The Face is the source of all outside data.'.
-335,Did you read that the keg_definition of 'Lasso' is 'Definition needed.'.
-336,Did you read that the keg_definition of 'MomentRope' is 'str first used in ch10. The RopeTerm for a Moment. Must contain knots.'.
-337,Did you read that the keg_definition of 'gut' is 'Definition needed.'.
-338,Did you read that the keg_definition of 'job' is 'Definition needed.'.
-339,Did you read that the keg_definition of 'lasso' is 'Definition needed.'.
-340,Did you read that the keg_definition of 'moment' is 'Definition needed.'.
-341,Did you read that the keg_definition of 'moment_mstr_dir' is 'starting point for most lego file structue. Moment functions usually refernce this directory as root.'.
-342,"Did you read that the keg_definition of 'moment_rope' is ', Moment arg, offi_time arg, paybook arg, mmtweek arg, mmtmont arg, mmthour arg, bud arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed, Contact seed, Member seed, nabu arg.'."
-343,Did you read that the keg_definition of 'spark_face' is 'Every spark has a spark_face that identifies which Face it belongs to. The Face is the source of all outside data. In theory a spark_face can be any data type. In practice it is currently a string data type.'.
-344,"Did you read that the keg_definition of 'spark_num' is 'Every spark has a spark_num that identifies its order of ingestion. Sparks are orderd but not necessarily sequential. Spark_num is an int. , used with Budget Cells'."
-345,Did you read that the keg_definition of 'listener' is 'Definition needed. Only referenced in ch11.'.
-346,Did you read that the keg_definition of 'speaker' is 'Definition needed. Only referenced in ch11.'.
-347,Did you read that the keg_definition of 'Epoch' is 'Definition needed.'.
-348,Did you read that the keg_definition of 'SparkInt' is 'int first used in ch12. Each Spark is a int that describes the order of data ingestion'.
-349,Did you read that the keg_definition of 'TimeNum' is 'int first used in ch12. An Integar that can represent a instant on the TimeNumLine'.
-350,"Did you read that the keg_definition of 'amount' is ', paybook arg'."
-351,"Did you read that the keg_definition of 'boss_facts' is ', used with Budget Cells'."
-352,"Did you read that the keg_definition of 'bud_contact_nets' is 'ledger of bud outcome. The PersonUnit that embodies the Budget distrubutes the funds per the PersonUnit contacts. dict[ContactName, FundNum]. FundNum can be negative.'."
-353,"Did you read that the keg_definition of 'bud_person_name' is ', used with Budget Cells'."
-354,"Did you read that the keg_definition of 'bud_time' is 'When a budget adds to the supply, bud arg, Nabuable arg'."
-355,"Did you read that the keg_definition of 'celldepth' is ', used with Budget Cells, bud arg'."
-356,Did you read that the keg_definition of 'epoch' is 'Definition needed.'.
-357,"Did you read that the keg_definition of 'found_facts' is ', used with Budget Cells'."
-358,Did you read that the keg_definition of 'magnitude' is 'Definition needed.'.
-359,"Did you read that the keg_definition of 'offi_time' is ', offi_time arg, Nabuable arg'."
-360,Did you read that the keg_definition of 'offi_time_max' is 'Definition needed.'.
-361,"Did you read that the keg_definition of 'person_contacts_net' is 'calculated from loaded TranUnits data. It holds the calculated net output for each PersonName, ContactName tuple.'."
-362,"Did you read that the keg_definition of 'personadjust' is ', used with Budget Cells'."
-363,"Did you read that the keg_definition of 'personspark_facts' is ', used with Budget Cells'."
-364,"Did you read that the keg_definition of 'quota' is 'The importance of a BudUnit. The currency given to the BudUnit to be distributed to Contacts. The magnitude number will always be less then quote because its the sum of how much of the quota is distributed, bud arg, used with Budget Cells'."
-365,Did you read that the keg_definition of 'time' is 'Definition needed.'.
-366,"Did you read that the keg_definition of 'tran_time' is ', paybook arg, Nabuable arg'."
-367,Did you read that the keg_definition of 'ManaNum' is 'float first used in ch13. ManaNum inherits from float class'.
-368,Did you read that the keg_definition of 'care_amount' is 'Definition needed.'.
-369,Did you read that the keg_definition of 'cares' is 'Definition needed.'.
-370,Did you read that the keg_definition of 'cycle_carees_curr' is 'Definition needed.'.
-371,Did you read that the keg_definition of 'cycle_carees_prev' is 'Definition needed.'.
-372,Did you read that the keg_definition of 'cycle_count' is 'Definition needed.'.
-373,Did you read that the keg_definition of 'cycle_max' is 'Definition needed.'.
-374,Did you read that the keg_definition of 'doctor_count' is 'Definition needed.'.
-375,Did you read that the keg_definition of 'doctor_rank_num' is 'Definition needed.'.
-376,Did you read that the keg_definition of 'doctor_rank_percent' is 'Definition needed.'.
-377,Did you read that the keg_definition of 'keep_patientledgers' is 'Definition needed.'.
-378,Did you read that the keg_definition of 'keep_point_magnitude' is 'Definition needed.'.
-379,Did you read that the keg_definition of 'need_bill_amount' is 'Definition needed.'.
-380,Did you read that the keg_definition of 'need_dues' is 'Definition needed.'.
-381,Did you read that the keg_definition of 'need_got_curr' is 'Definition needed.'.
-382,Did you read that the keg_definition of 'need_got_prev' is 'Definition needed.'.
-383,Did you read that the keg_definition of 'need_paid_amount' is 'Definition needed.'.
-384,Did you read that the keg_definition of 'need_paid_bool' is 'Definition needed.'.
-385,Did you read that the keg_definition of 'need_paid_rank_num' is 'Definition needed.'.
-386,Did you read that the keg_definition of 'need_paid_rank_percent' is 'Definition needed.'.
-387,Did you read that the keg_definition of 'need_results' is 'Definition needed.'.
-388,Did you read that the keg_definition of 'patient_count' is 'Definition needed.'.
-389,Did you read that the keg_definition of 'patient_rank_num' is 'Definition needed.'.
-390,Did you read that the keg_definition of 'patient_rank_percent' is 'Definition needed.'.
-391,Did you read that the keg_definition of 'rewards_count' is 'Definition needed.'.
-392,Did you read that the keg_definition of 'rewards_magnitude' is 'Definition needed.'.
-393,Did you read that the keg_definition of 'riverbooks' is 'Definition needed.'.
-394,Did you read that the keg_definition of 'rivercares' is 'Definition needed.'.
-395,Did you read that the keg_definition of 'rivergrades' is 'Definition needed.'.
-396,Did you read that the keg_definition of 'Anaday' is 'First Day of 5 day week of 'Five' Epoch'.
-397,Did you read that the keg_definition of 'Baileyday' is 'Second Day of 5 day week of 'Five' Epoch'.
-398,Did you read that the keg_definition of 'Chiday' is 'Third Day of 5 day week of 'Five' Epoch'.
-399,Did you read that the keg_definition of 'Danceday' is 'Fourth Day of 5 day week of 'Five' Epoch'.
-400,Did you read that the keg_definition of 'Eastday' is 'Fifth Day of 5 day week of 'Five' Epoch'.
-401,Did you read that the keg_definition of 'EpochLabel' is 'str first used in ch14. EpochLabel is required for every EpochUnit. It is a LabelTerm that must not contain the knot.'.
-402,Did you read that the keg_definition of 'TimeShoe' is 'Definition needed.'.
-403,"Did you read that the keg_definition of 'c100' is '100 years, sub part of c400_core'."
-404,"Did you read that the keg_definition of 'c100_length' is 'A C400Constant for building Epochs: 52,594,560 minutes in 100 year cycle'."
-405,Did you read that the keg_definition of 'c400_core' is '400 years without the extra leap day.'.
-406,"Did you read that the keg_definition of 'c400_core_length' is 'A C400Constant for building Epochs: 210,378,240 minutes in 400 year cycle without last leap-day'."
-407,Did you read that the keg_definition of 'c400_leap' is '400 years with the extra leap day.'.
-408,"Did you read that the keg_definition of 'c400_leap_length' is 'A C400Constant for building Epochs: 210,379,680 minutes in 400 year cycle'."
-409,"Did you read that the keg_definition of 'c400_number' is 'Epoch config Integer that represents number of 400 year cycles. Defines the range of years in epoch c400_number=7 means 2800 years, Moment arg'."
-410,Did you read that the keg_definition of 'clock' is 'String representation of the time during the day. '10:00am' or '0:15hr'.
-411,"Did you read that the keg_definition of 'creg' is 'Gregorian time does not have year zero. It was necessary to have year zero so the default epoch technology is Cregorian time, Gregorian time with year 0.'."
-412,"Did you read that the keg_definition of 'cumulative_day' is ', mmtmont arg'."
-413,Did you read that the keg_definition of 'day' is 'A fundamental structure of time for Keg2. Always assumed to be a 1440 minutes long.'.
-414,"Did you read that the keg_definition of 'day_length' is 'A C400Constant for building Epochs: 1,440 minutes in day'."
-415,Did you read that the keg_definition of 'dayly_duration_min' is 'Required fields for creating Epoch dayly cases.'.
-416,Did you read that the keg_definition of 'dayly_lower_min' is 'Required fields for creating Epoch dayly cases.'.
-417,Did you read that the keg_definition of 'days' is 'Definition needed.'.
-418,Did you read that the keg_definition of 'days_lower_day' is 'Required fields for creating Epoch every_xdays cases.'.
-419,Did you read that the keg_definition of 'days_upper_day' is 'Required fields for creating Epoch every_xdays cases.'.
-420,Did you read that the keg_definition of 'duration' is 'Definition needed.'.
-421,"Did you read that the keg_definition of 'epoch_label' is 'Epoch config: Name of epoch. Persons may have multiple epochs, they are differentiated by this LabelTerm, Moment arg'."
-422,Did you read that the keg_definition of 'epoch_length' is 'Total number of minutes in a Epoch. Calculated by number of minutes in C400_leap times Epoch's c400_number'.
-423,Did you read that the keg_definition of 'epoch_min' is 'Definition needed.'.
-424,Did you read that the keg_definition of 'every_xdays' is 'Required fields for creating Epoch every_xdays cases.'.
-425,Did you read that the keg_definition of 'every_xweeks' is 'Required fields for creating Epoch weekly cases.'.
-426,"Did you read that the keg_definition of 'five' is 'An Epoch. A structure for time often used in the codebase. Starts about 5000 years ago, has 16 months, 15 of which are 25 days. Week is 5 days long.'."
-427,Did you read that the keg_definition of 'hour' is 'Definition needed.'.
-428,"Did you read that the keg_definition of 'hour_label' is ', mmthour arg'."
-429,"Did you read that the keg_definition of 'hours_config' is 'Epoch config List of Lists that contain two elements: hour name and the day's minute when it ends. Last item list must contain hour name and 1440 because that is the last minute of the day, partial example: [['12am', 60], ['11pm', 1440]]'."
-430,"Did you read that the keg_definition of 'month_label' is ', mmtmont arg'."
-431,"Did you read that the keg_definition of 'monthday_index' is 'Epoch config: Changes MonthDay displayed day number. Months' day numbers are assumed to start with 0. The first day of the month is #0. The 3rd day of the month would be Day #2 of month. Most prefer The first day of the month to be 1 even though this makes divisor difficult. If monthday_index=1 then the 3rd day of the month is #3, Moment arg'."
-432,Did you read that the keg_definition of 'monthly_duration_days' is 'Required fields for creating Epoch monthly cases.'.
-433,Did you read that the keg_definition of 'monthly_monthday_lower' is 'Required fields for creating Epoch monthly cases.'.
-434,"Did you read that the keg_definition of 'months_config' is 'Epoch config: List of lists that contain two elements: month name and the year's day when it ends. Last item list must contain year's day equal 365 because it is the last day of the year. [['March', 31], ['February', 365]]'."
-435,Did you read that the keg_definition of 'range_duration' is 'Required fields for creating Epoch ranged cases.'.
-436,Did you read that the keg_definition of 'range_lower_min' is 'Required fields for creating Epoch ranged cases.'.
-437,Did you read that the keg_definition of 'readable' is 'Human readable text. Often for time.'.
-438,Did you read that the keg_definition of 'week' is 'A fundamental structure of time for Keg2. Always assumed to be a days long. Never partial days.'.
-439,"Did you read that the keg_definition of 'weekdays_config' is 'Epoch config, List of Weekday names. When the Epoch begins the first Weekday in the list is the first day of the Epoch. ['Wednesday', ...'Tuesday'],'."
-440,Did you read that the keg_definition of 'weekly_duration_min' is 'Required fields for creating Epoch weekly cases.'.
-441,Did you read that the keg_definition of 'weekly_lower_min' is 'Required fields for creating Epoch weekly cases.'.
-442,Did you read that the keg_definition of 'weeks' is 'Definition needed.'.
-443,Did you read that the keg_definition of 'weeks_lower_week' is 'Required fields for creating Epoch weekly cases.'.
-444,Did you read that the keg_definition of 'weeks_upper_week' is 'Required fields for creating Epoch weekly cases.'.
-445,Did you read that the keg_definition of 'year' is 'A fundamental structure of time for Keg2. Always 365 days. The leap day is a special other thing in Keg2.'.
-446,"Did you read that the keg_definition of 'year_length' is 'A C400Constant for building Epochs: 525,600 minutes in year without leap-day'."
-447,Did you read that the keg_definition of 'year_monthday_duration_days' is 'Required fields for creating Epoch year_monthday cases.'.
-448,Did you read that the keg_definition of 'year_monthday_lower' is 'Required fields for creating Epoch year_monthday cases.'.
-449,"Did you read that the keg_definition of 'yr1_jan1_offset' is 'Epoch config: Number of minutes the calendar is different from March 1, year 1 where Gregorian calendar is projected to year 1. Example 440640 is almost 10 months, Moment arg'."
-450,"Did you read that the keg_definition of 'yr4_core' is 'A fundamental structure of time for Keg2. Includes 4 years of 365 days, plan_label for Epoch'."
-451,"Did you read that the keg_definition of 'yr4_core_length' is 'A C400Constant for building Epochs: 2,102,400 minutes in 4 year cycle without leap-day'."
-452,Did you read that the keg_definition of 'yr4_leap' is 'A fundamental structure of time for Keg2. Includes 4 years of 365 days (yr4_core) and a leap day. The leap day is the last day.'.
-453,"Did you read that the keg_definition of 'yr4_leap_length' is 'A C400Constant for building Epochs: 2,103,840 minutes in 4 year cycle'."
-454,Did you read that the keg_definition of 'all_tranbook' is 'Definition needed.'.
-455,"Did you read that the keg_definition of 'cumulative_minute' is ', mmthour argDefinition needed.'."
-456,"Did you read that the keg_definition of 'job_listen_rotations' is ', Moment arg'."
-457,Did you read that the keg_definition of 'moment_budunit' is 'Definition needed.'.
-458,Did you read that the keg_definition of 'moment_epoch_hour' is 'Definition needed.'.
-459,Did you read that the keg_definition of 'moment_epoch_month' is 'Definition needed.'.
-460,Did you read that the keg_definition of 'moment_epoch_weekday' is 'Definition needed.'.
-461,Did you read that the keg_definition of 'moment_paybook' is 'Definition needed.'.
-462,Did you read that the keg_definition of 'moment_static' is 'Used to identify if the data can change or must be identify when the Moment of instantization.'.
-463,Did you read that the keg_definition of 'moment_timeoffi' is 'Definition needed.'.
-464,Did you read that the keg_definition of 'momentunit' is 'Definition needed.'.
-465,Did you read that the keg_definition of 'offi_times' is 'Definition needed.'.
-466,Did you read that the keg_definition of 'paybook' is 'Definition needed.'.
-467,Did you read that the keg_definition of 'personbudhistorys' is 'Definition needed.'.
-468,"Did you read that the keg_definition of 'weekday_label' is ', mmtweek arg'."
-469,"Did you read that the keg_definition of 'weekday_order' is ', mmtweek arg'."
-470,Did you read that the keg_definition of 'Nabu' is 'Definition needed.'.
-471,Did you read that the keg_definition of 'NabuTime' is 'Definition needed.'.
-472,Did you read that the keg_definition of 'inx_epoch_diff' is 'Definition needed.'.
-473,"Did you read that the keg_definition of 'inx_time' is ', nabu arg'."
-474,Did you read that the keg_definition of 'nabu' is 'Definition needed.'.
-475,Did you read that the keg_definition of 'nabu_timenum' is 'Definition needed.'.
-476,Did you read that the keg_definition of 'otx2inx' is 'Definition needed.'.
-477,Did you read that the keg_definition of 'otx_epoch_length' is 'Definition needed.'.
-478,"Did you read that the keg_definition of 'otx_time' is ', nabu arg'."
-479,Did you read that the keg_definition of 'timenabu' is 'Definition needed.'.
-480,Did you read that the keg_definition of 'contact_name_inx' is 'The 'contact_name' value after Translate.'.
-481,Did you read that the keg_definition of 'contact_name_otx' is 'The 'contact_name' value after Translate.'.
-482,"Did you read that the keg_definition of 'inx_knot' is ', TRANSLATE_LABEL arg, TRANSLATE_NAME arg, TRANSLATE_ROPE arg, TRANSLATE_TITLE arg'."
-483,"Did you read that the keg_definition of 'inx_label' is ', TRANSLATE_LABEL arg'."
-484,"Did you read that the keg_definition of 'inx_name' is ', TRANSLATE_NAME arg'."
-485,"Did you read that the keg_definition of 'inx_rope' is ', TRANSLATE_ROPE arg'."
-486,"Did you read that the keg_definition of 'inx_title' is ', TRANSLATE_TITLE arg'."
-487,Did you read that the keg_definition of 'labelmap' is 'Definition needed.'.
-488,Did you read that the keg_definition of 'namemap' is 'Definition needed.'.
-489,"Did you read that the keg_definition of 'otx_knot' is ', TRANSLATE_LABEL arg, TRANSLATE_NAME arg, TRANSLATE_ROPE arg, TRANSLATE_TITLE arg'."
-490,"Did you read that the keg_definition of 'otx_label' is ', TRANSLATE_LABEL arg'."
-491,"Did you read that the keg_definition of 'otx_name' is ', TRANSLATE_NAME arg'."
-492,"Did you read that the keg_definition of 'otx_rope' is ', TRANSLATE_ROPE arg'."
-493,"Did you read that the keg_definition of 'otx_title' is ', TRANSLATE_TITLE arg'."
-494,Did you read that the keg_definition of 'ropemap' is 'Definition needed.'.
-495,Did you read that the keg_definition of 'titlemap' is 'Definition needed.'.
-496,Did you read that the keg_definition of 'translate' is 'Definition needed.'.
-497,Did you read that the keg_definition of 'translate_core' is 'Definition needed.'.
-498,"Did you read that the keg_definition of 'translate_label' is ''translate_label' is a translation dimen where otx_label is translated by inx_knot, inx_label, otx_knot, unknown_str'."
-499,"Did you read that the keg_definition of 'translate_name' is ''translate_name' is a translation dimen where otx_name is translated by inx_knot, inx_name, otx_knot, unknown_str'."
-500,"Did you read that the keg_definition of 'translate_rope' is ''translate_rope' is a translation dimen where otx_rope is translated by inx_knot, inx_rope, otx_knot, unknown_str'."
-501,"Did you read that the keg_definition of 'translate_title' is ''translate_title' is a translation dimen where otx_title is translated by inx_knot, inx_title, otx_knot, unknown_str'."
-502,Did you read that the keg_definition of 'translateunit' is 'Definition needed.'.
-503,"Did you read that the keg_definition of 'unknown_str' is ', TRANSLATE_LABEL arg, TRANSLATE_NAME arg, TRANSLATE_ROPE arg, TRANSLATE_TITLE arg'."
-504,Did you read that the keg_definition of 'Excel' is 'A spreadsheet format.'.
-505,Did you read that the keg_definition of 'SheetName' is 'A string used as SheetName for SpreadSheet files. str first used in ch20'.
-506,Did you read that the keg_definition of 'allowed_crud' is 'Each brick config dimen has an allowed_crud that describes whether the data may be updated/deleted/inserted more than one.'.
-507,Did you read that the keg_definition of 'attributes' is 'General term used to describe things about another thing'.
-508,Did you read that the keg_definition of 'awardee_title_inx' is 'The 'awardee_title' value after Translate.'.
-509,Did you read that the keg_definition of 'awardee_title_otx' is 'The 'awardee_title' value after Translate.'.
-510,Did you read that the keg_definition of 'bk' is 'Brick Format Identifier. Every brick_type format starts with 'bk' and then 5 numbers.'.
-511,Did you read that the keg_definition of 'brick' is 'Definition needed.'.
-512,Did you read that the keg_definition of 'brick_category' is 'Definition needed.'.
-513,Did you read that the keg_definition of 'brick_type' is 'Definition needed.'.
-514,Did you read that the keg_definition of 'bud_time_inx' is 'The 'bud_time' value after Translate.'.
-515,Did you read that the keg_definition of 'bud_time_otx' is 'The 'bud_time' value after Translate.'.
-516,Did you read that the keg_definition of 'build_order' is 'When building a world the order of dimen data implementation must be deterministic. build_order defines the order dimens are evaluated for a World.'.
-517,"Did you read that the keg_definition of 'delete_insert' is 'Associated dimens: person_plan_healerunit, person_plan_laborunit'."
-518,"Did you read that the keg_definition of 'delete_insert_update' is 'Associated dimens: person_contact_membership, person_contactunit, person_plan_awardunit, person_plan_factunit, person_plan_reason_caseunit, person_plan_reasonunit, person_planunit' in 'Associated dimens: person_planunit, person_contactunit, person_plan_reasonunit, person_plan_factunit, person_plan_awardunit, person_contact_membership, person_plan_reason_caseunit'."
-519,"Did you read that the keg_definition of 'delete_update' is 'Associated dimens: person_plan_healerunit, person_plan_laborunit'."
-520,Did you read that the keg_definition of 'epoch_label_inx' is 'The 'epoch_label' value after Translate.'.
-521,Did you read that the keg_definition of 'epoch_label_otx' is 'The 'epoch_label' value after Translate.'.
-522,Did you read that the keg_definition of 'error_message' is 'Definition needed.'.
-523,Did you read that the keg_definition of 'excel' is 'A spreadsheet format.'.
-524,Did you read that the keg_definition of 'fact_context_inx' is 'The 'fact_context' value after Translate.'.
-525,Did you read that the keg_definition of 'fact_context_otx' is 'The 'fact_context' value after Translate.'.
-526,Did you read that the keg_definition of 'fact_lower_inx' is 'The 'fact_lower' value after Translate.'.
-527,Did you read that the keg_definition of 'fact_lower_otx' is 'The 'fact_lower' value after Translate.'.
-528,Did you read that the keg_definition of 'fact_state_inx' is 'The 'fact_state' value after Translate.'.
-529,Did you read that the keg_definition of 'fact_state_otx' is 'The 'fact_state' value after Translate.'.
-530,Did you read that the keg_definition of 'fact_upper_inx' is 'The 'fact_upper' value after Translate.'.
-531,Did you read that the keg_definition of 'fact_upper_otx' is 'The 'fact_upper' value after Translate.'.
-532,Did you read that the keg_definition of 'fund_rank' is 'Definition needed.'.
-533,Did you read that the keg_definition of 'group_title_inx' is 'The 'group_title' value after Translate.'.
-534,Did you read that the keg_definition of 'group_title_otx' is 'The 'group_title' value after Translate.'.
-535,Did you read that the keg_definition of 'healer_name_inx' is 'The 'healer_name' value after Translate.'.
-536,Did you read that the keg_definition of 'healer_name_otx' is 'The 'healer_name' value after Translate.'.
-537,Did you read that the keg_definition of 'hour_label_inx' is 'The 'hour_label' value after Translate.'.
-538,Did you read that the keg_definition of 'hour_label_otx' is 'The 'hour_label' value after Translate.'.
-539,Did you read that the keg_definition of 'idea' is 'A collection of bricks (currently only in brick format) with a spark_face but no spark_num.'.
-540,"Did you read that the keg_definition of 'insert_multiple' is 'Associated dimens: moment_budunit, moment_paybook, moment_timeoffi'."
-541,"Did you read that the keg_definition of 'insert_one_time' is 'Associated dimens: moment_epoch_hour, moment_epoch_month, moment_epoch_weekday, momentunit, nabu_timenum, translate_label, translate_name, translate_rope, translate_title'."
-542,Did you read that the keg_definition of 'insert_update' is 'Definition needed.'.
-543,Did you read that the keg_definition of 'labor_title_inx' is 'The 'labor_title' value after Translate.'.
-544,Did you read that the keg_definition of 'labor_title_otx' is 'The 'labor_title' value after Translate.'.
-545,Did you read that the keg_definition of 'moment_rope_inx' is 'The 'moment_rope' value after Translate.'.
-546,Did you read that the keg_definition of 'moment_rope_otx' is 'The 'moment_rope' value after Translate.'.
-547,Did you read that the keg_definition of 'month_label_inx' is 'The 'month_label' value after Translate.'.
-548,Did you read that the keg_definition of 'month_label_otx' is 'The 'month_label' value after Translate.'.
-549,Did you read that the keg_definition of 'net_funds' is 'Definition needed.'.
-550,Did you read that the keg_definition of 'offi_time_inx' is 'The 'offi_time' value after Translate.'.
-551,Did you read that the keg_definition of 'offi_time_otx' is 'The 'offi_time' value after Translate.'.
-552,Did you read that the keg_definition of 'otx_key' is 'Definition needed.'.
-553,Did you read that the keg_definition of 'person_name_inx' is 'The 'person_name' value after Translate.'.
-554,Did you read that the keg_definition of 'person_name_otx' is 'The 'person_name' value after Translate.'.
-555,Did you read that the keg_definition of 'plan_rope_inx' is 'The 'plan_rope' value after Translate.'.
-556,Did you read that the keg_definition of 'plan_rope_otx' is 'The 'plan_rope' value after Translate.'.
-557,Did you read that the keg_definition of 'pledges_count' is 'Definition needed.'.
-558,Did you read that the keg_definition of 'reason_context_inx' is 'The 'reason_context' value after Translate.'.
-559,Did you read that the keg_definition of 'reason_context_otx' is 'The 'reason_context' value after Translate.'.
-560,Did you read that the keg_definition of 'reason_lower_inx' is 'The 'reason_lower' value after Translate.'.
-561,Did you read that the keg_definition of 'reason_lower_otx' is 'The 'reason_lower' value after Translate.'.
-562,Did you read that the keg_definition of 'reason_state_inx' is 'The 'reason_state' value after Translate.'.
-563,Did you read that the keg_definition of 'reason_state_otx' is 'The 'reason_state' value after Translate.'.
-564,Did you read that the keg_definition of 'reason_upper_inx' is 'The 'reason_upper' value after Translate.'.
-565,Did you read that the keg_definition of 'reason_upper_otx' is 'The 'reason_upper' value after Translate.'.
-566,"Did you read that the keg_definition of 'sheet' is 'Object that represents a spreadsheet. It has attributes like filename, table_name, and data.'."
-567,Did you read that the keg_definition of 'source_dimen' is 'Definition needed.'.
-568,Did you read that the keg_definition of 'spark_face_inx' is 'The 'spark_face' value after Translate.'.
-569,Did you read that the keg_definition of 'spark_face_otx' is 'The 'spark_face' value after Translate.'.
-570,Did you read that the keg_definition of 'tran_time_inx' is 'The 'tran_time' value after Translate.'.
-571,Did you read that the keg_definition of 'tran_time_otx' is 'The 'tran_time' value after Translate.'.
-572,Did you read that the keg_definition of 'translate_spark_num' is 'Definition needed.'.
-573,Did you read that the keg_definition of 'weekday_label_inx' is 'The 'weekday_label' value after Translate.'.
-574,Did you read that the keg_definition of 'weekday_label_otx' is 'The 'weekday_label' value after Translate.'.
-575,Did you read that the keg_definition of 'world_name' is 'Definition needed.'.
-576,Did you read that the keg_definition of 'b_agg' is '5 character abbreviation of brixk_agg. stage_type_order=4 Brick Agg: The Brick Raw tables are aggregated to elimanate duplicates.'.
-577,Did you read that the keg_definition of 'b_raw' is '5 character abbreviation of brixk_raw. stage_type_order=3 Brick Raw: The importable Excel Sheets entering the database'.
-578,Did you read that the keg_definition of 'b_src' is '5 character abbreviation of brixk_src. stage_type_order=2 Brick files. Brick formats with SparkNum.'.
-579,Did you read that the keg_definition of 'b_vld' is '5 character abbreviation of brixk_vld. stage_type_order=4 Brick Vld: .'.
-580,Did you read that the keg_definition of 'brixk_agg' is 'stage_type_order=4 Brick Agg: The Brick Raw tables are aggregated to elimanate duplicates.'.
-581,Did you read that the keg_definition of 'brixk_raw' is 'stage_type_order=3 Brick Raw: The importable Excel Sheets entering the database'.
-582,Did you read that the keg_definition of 'brixk_src' is 'stage_type_order=2 Brick files. Brick formats with SparkNum.'.
-583,Did you read that the keg_definition of 'brixk_vld' is 'stage_type_order=6 Brick Valid: The Brick Agg tables filtered to correct datatypes. '.
-584,Did you read that the keg_definition of 'h_agg' is '5 character abbreviation of heard_agg. stage_type_order=11 Populated by aggregated Heard Raw tables. Nabu number conversions take place here.'.
-585,Did you read that the keg_definition of 'h_raw' is '5 character abbreviation of heard_raw. stage_type_order=10 Populated by Sound Valid tables'.
-586,Did you read that the keg_definition of 'h_vld' is '5 character abbreviation of heard_vld. stage_type_order=12 Populated by aggregated and Nabu changed Heard Agg tables'.
-587,Did you read that the keg_definition of 'heard_agg' is 'stage_type_order=11 Populated by aggregated Heard Raw tables. Nabu number conversions take place here.'.
-588,Did you read that the keg_definition of 'heard_raw' is 'stage_type_order=10 Populated by Sound Valid tables'.
-589,Did you read that the keg_definition of 'heard_vld' is 'stage_type_order=12 Populated by aggregated and Nabu changed Heard Agg tables'.
-590,"Did you read that the keg_definition of 'i_dst' is '5 character abbreviation of ideax_dst. stage_type_order=14 Idea (Brick formats without SparkNum) Destination. Filtered Job, Moment data.'."
-591,Did you read that the keg_definition of 'i_src' is '5 character abbreviation of ideax_src. stage_type_order=1 Idea Source files. Brick formats without SparkNum.'.
-592,"Did you read that the keg_definition of 'ideax_dst' is 'stage_type_order=14 Idea (Brick formats without SparkNum) Destination. Filtered Job, Moment data.'."
-593,Did you read that the keg_definition of 'ideax_src' is 'stage_type_order=1 Idea Source files. Brick formats without SparkNum.'.
-594,Did you read that the keg_definition of 'k_vld' is '5 character abbreviation of brixk_vld. stage_type_order=6 Brick Valid: The Brick Agg tables filtered to correct datatypes. '.
-595,Did you read that the keg_definition of 'lego' is '5 character abbreviation of legox_mst. stage_type_order=13 File buildout of Moments and PersonUnits. Word used to describe the end state of the core ETL pipeline. All core data should be in the database. Files may still be accessible. KPIs should all be sourced from it.'.
-596,Did you read that the keg_definition of 'legox_mst' is 'stage_type_order=13 File buildout of Moments and PersonUnits'.
-597,Did you read that the keg_definition of 'mmtbudd' is 'abbv for moment_budunit'.
-598,Did you read that the keg_definition of 'mmthour' is 'abbv for moment_epoch_hour'.
-599,Did you read that the keg_definition of 'mmtmont' is 'abbv for moment_epoch_month'.
-600,Did you read that the keg_definition of 'mmtoffi' is 'abbv for moment_timeoffi'.
-601,Did you read that the keg_definition of 'mmtpayy' is 'abbv for moment_paybook'.
-602,Did you read that the keg_definition of 'mmtunit' is 'abbv for momentunit'.
-603,Did you read that the keg_definition of 'mmtweek' is 'abbv for moment_epoch_weekday'.
-604,Did you read that the keg_definition of 'moment_ote1_agg' is 'Create Database Table that holds all spark_num to bud_time pairs. Include moment_rope and person_name'.
-605,Did you read that the keg_definition of 'nabtime' is 'abbv for nabu_timenum'.
-606,Did you read that the keg_definition of 'person_net_amount' is 'Definition needed.'.
-607,Did you read that the keg_definition of 's_agg' is '5 character abbreviation of sound_agg. stage_type_order=8 Populated by aggregated Sound Raw dimen data (elimanate duplicates). Translate Core data is validated then used to translate non-Translate dimen data'.
-608,Did you read that the keg_definition of 's_raw' is '5 character abbreviation of sound_raw. stage_type_order=7 The Brick Valid data is seperated by column into dimen data such as person_planunit and moment_budunit'.
-609,Did you read that the keg_definition of 's_vld' is '5 character abbreviation of sound_vld. stage_type_order=9 The Translated Sound Agg data is aggregated to elimanate duplicates into Sound Valid'.
-610,Did you read that the keg_definition of 'sound_agg' is 'stage_type_order=8 Populated by aggregated Sound Raw dimen data (elimanate duplicates). Translate Core data is validated then used to translate non-Translate dimen data'.
-611,Did you read that the keg_definition of 'sound_raw' is 'stage_type_order=7 The Brick Valid data is seperated by column into dimen data such as person_planunit and moment_budunit'.
-612,Did you read that the keg_definition of 'sound_vld' is 'stage_type_order=9 The Translated Sound Agg data is aggregated to elimanate duplicates into Sound Valid'.
-613,Did you read that the keg_definition of 'sparks_b_agg' is 'Definition needed.'.
-614,Did you read that the keg_definition of 'sparks_b_vld' is 'Definition needed.'.
-615,Did you read that the keg_definition of 'trlcore' is 'abbv for translate_core'.
-616,Did you read that the keg_definition of 'trllabe' is 'abbv for translate_label'.
-617,Did you read that the keg_definition of 'trlname' is 'abbv for translate_name'.
-618,Did you read that the keg_definition of 'trlrope' is 'abbv for translate_rope'.
-619,Did you read that the keg_definition of 'trltitl' is 'abbv for translate_title'.
-620,Did you read that the keg_definition of 'day_punch' is 'A report that summarizes the tasks of a person for a day.'.
-621,Did you read that the keg_definition of 'fission' is 'Any complicated step changing idea_type to brick_type. Each fission_step makes a single type of change. Can be simple (set value to X) or complicated (add missing rows with relative values). Only referenced in ch23'.
-622,Did you read that the keg_definition of 'idea_type' is 'Definition needed.'.
-623,Did you read that the keg_definition of 'ii' is 'Idea Format Identifier. Every idea_type format starts with 'ii' and then 5 numbers. Every brick_type has a mirrored idea_type. Multiple idea_types can map to single brick_type'.
-624,Did you read that the keg_definition of 'moment_tranbook_nets' is 'Definition needed.'.
-625,Did you read that the keg_definition of 'vow' is 'ideas created for audience'.
-626,Did you read that the keg_definition of 'DayEvent' is 'Definition needed.'.
-627,Did you read that the keg_definition of 'Event' is 'Definition needed.'.
-628,Did you read that the keg_definition of 'default_kpi_bundle' is 'Definition needed.'.
-629,Did you read that the keg_definition of 'gcal' is 'Definition needed.'.
-630,Did you read that the keg_definition of 'moment_kpi001_contact_nets' is 'Definition needed.'.
-631,Did you read that the keg_definition of 'moment_kpi002_person_pledges' is 'Definition needed.'.
-632,Did you read that the keg_definition of 'WorldName' is 'str first used in ch32. Name of WorldDir'.
-633,"Did you read that the keg_definition of 'today' is 'Refences the computer's current date, used to create a day_punch.'."
-634,Did you read that the keg_definition of 'Deal' is 'Definition needed. ch33'.
-635,Did you read that the keg_definition of 'Gift' is 'Definition needed.'.
-636,Did you read that the keg_definition of 'Peer' is 'Ch33 Definition needed.'.
-637,Did you read that the keg_definition of 'PitchID' is 'str first used in ch33. str used to name PitchUnit'.
-638,Did you read that the keg_definition of 'PitchUnit' is 'Ch33 Definition needed.'.
-639,Did you read that the keg_definition of 'deal' is 'Definition needed. ch33'.
-640,Did you read that the keg_definition of 'gift' is 'Definition needed.'.
-641,Did you read that the keg_definition of 'offer' is 'Ch33 Definition needed.'.
-642,Did you read that the keg_definition of 'peer' is 'Ch33 Definition needed.'.
-643,Did you read that the keg_definition of 'pitch' is 'Definition needed.'.
-644,Did you read that the keg_definition of 'pitch_id' is 'Definition needed.'.
-645,Did you read that the keg_definition of 'pitcher_name' is 'Ch33 Definition needed.'.
-646,Did you read that the keg_definition of 'pitchs' is 'Definition needed.'.
-647,Did you read that the keg_definition of 'request' is 'Ch33 Definition needed.'.
-648,Did you read that the keg_definition of 'finance' is 'Definition needed.'.
-649,Did you read that the keg_definition of 'financial' is 'Definition needed.'.
+240,Did you read that the keg_definition of 'reasonheirs' is 'Definition needed.'.
+241,"Did you read that the keg_definition of 'stop_calc' is ', Plan thinkout'."
+242,"Did you read that the keg_definition of 'stop_want' is ', Plan seed'."
+243,"Did you read that the keg_definition of 'tree_level' is ', Plan thinkout'."
+244,"Did you read that the keg_definition of 'tree_traverse_count' is ', Person thinkout'."
+245,Did you read that the keg_definition of 'PersonName' is 'str first used in ch08. The LabelTerm used to identify a PersonUnit. Must be a LabelTerm/NameTerm because when identifying if a PlanUnit is an active pledge the PersonName will be compared against ContactNames. If they match the pledge will be active.'.
+246,Did you read that the keg_definition of 'PersonUnit' is 'Definition needed.'.
+247,"Did you read that the keg_definition of 'ancestors' is ', used with Budget Cells'."
+248,Did you read that the keg_definition of 'calc_by_thinkout' is 'Describes when data is defined by thinkout process. Not required seed data.'.
+249,"Did you read that the keg_definition of 'contact_mandate_ledger' is ', used with Budget Cells'."
+250,Did you read that the keg_definition of 'contact_pool' is 'Definition needed.'.
+251,Did you read that the keg_definition of 'contacts' is 'Definition needed.'.
+252,Did you read that the keg_definition of 'context_plan_close' is 'Definition needed.'.
+253,Did you read that the keg_definition of 'context_plan_denom' is 'Definition needed.'.
+254,Did you read that the keg_definition of 'context_plan_morph' is 'Definition needed.'.
+255,"Did you read that the keg_definition of 'credor_respect' is ', Person seed.'."
+256,"Did you read that the keg_definition of 'debtor_respect' is ', Person seed.'."
+257,Did you read that the keg_definition of 'dimen' is 'Definition needed.'.
+258,Did you read that the keg_definition of 'dimens' is 'Definition needed.'.
+259,Did you read that the keg_definition of 'jkeys' is 'The term 'keys' was too generic. 'jkeys' is less generic.'.
+260,Did you read that the keg_definition of 'jvalues' is 'Definition needed.'.
+261,Did you read that the keg_definition of 'keep_rope' is 'Definition needed.'.
+262,"Did you read that the keg_definition of 'keeps_buildable' is ', Person thinkout'."
+263,"Did you read that the keg_definition of 'keeps_justified' is ', Person thinkout'."
+264,Did you read that the keg_definition of 'last_lesson_id' is 'Definition needed.'.
+265,"Did you read that the keg_definition of 'mandate' is ', used with Budget Cells'."
+266,"Did you read that the keg_definition of 'max_tree_traverse' is ', Person seed.'."
+267,Did you read that the keg_definition of 'obj_type' is 'Used idenify an attribute's object class. Usually in config files.'.
+268,"Did you read that the keg_definition of 'offtrack_fund' is ', Person thinkout'."
+269,Did you read that the keg_definition of 'offtrack_kids_kar_set' is 'Definition needed.'.
+270,"Did you read that the keg_definition of 'person_contact_membership' is 'A person dimen representing Membership data. Keys: person_name, contact_name, group_title. person seed.'."
+271,"Did you read that the keg_definition of 'person_contactunit' is 'A person dimen representing ParterUnit data. Keys: person_name, contact_name. person seed.'."
+272,"Did you read that the keg_definition of 'person_groupunit' is 'A person dimen representing GroupUnit data. Keys: person_name, group_title. person thinkout.'."
+273,"Did you read that the keg_definition of 'person_plan_awardunit' is 'A person dimen representing AwardUnit data. Keys: person_name, plan_rope, awardee_title. person seed.'."
+274,"Did you read that the keg_definition of 'person_plan_factunit' is 'A person dimen representing FactUnit data. Keys: person_name, plan_rope, fact_context. person seed.'."
+275,"Did you read that the keg_definition of 'person_plan_healerunit' is 'A person dimen representing HealerUnit data. Keys: person_name, plan_rope, healer_name. person seed.'."
+276,"Did you read that the keg_definition of 'person_plan_laborunit' is 'A person dimen representing HealerUnit data. Keys: person_name, plan_rope, labor_title. person seed.'."
+277,"Did you read that the keg_definition of 'person_plan_reason_caseunit' is 'A person dimen representing CaseUnit data. Keys: person_name, plan_rope, reason_context, reason_state. person seed.'."
+278,"Did you read that the keg_definition of 'person_plan_reasonunit' is 'A person dimen representing ReasonUnit data. Keys: person_name, plan_rope, reason_context. person seed.'."
+279,"Did you read that the keg_definition of 'person_planunit' is 'A person dimen representing PlanUnit data. Keys: person_name, plan_rope. person seed.'."
+280,Did you read that the keg_definition of 'personunit' is 'A person dimen representing PersonUnit data. Keys: person_name. person seed.'.
+281,"Did you read that the keg_definition of 'planroot' is 'Every PersonUnit has one planunit called the planroot. It can have child planunits and those can have child planunits, etc.'."
+282,Did you read that the keg_definition of 'prnawar' is 'abbv for person_plan_awardunit'.
+283,Did you read that the keg_definition of 'prncase' is 'abbv for person_plan_reason_caseunit'.
+284,Did you read that the keg_definition of 'prncont' is 'abbv for person_contactunit'.
+285,Did you read that the keg_definition of 'prnfact' is 'abbv for person_plan_factunit'.
+286,Did you read that the keg_definition of 'prngrou' is 'abbv for person_groupunit'.
+287,Did you read that the keg_definition of 'prnheal' is 'abbv for person_plan_healerunit'.
+288,Did you read that the keg_definition of 'prnlabo' is 'abbv for person_plan_laborunit'.
+289,Did you read that the keg_definition of 'prnmemb' is 'abbv for person_contact_membership'.
+290,Did you read that the keg_definition of 'prnplan' is 'abbv for person_planunit'.
+291,Did you read that the keg_definition of 'prnreas' is 'abbv for person_plan_reasonunit'.
+292,Did you read that the keg_definition of 'prnunit' is 'abbv for personunit'.
+293,"Did you read that the keg_definition of 'reason_contexts' is ', used with Budget Cells'."
+294,"Did you read that the keg_definition of 'sum_healerunit_plans_fund_total' is ', Person thinkout'."
+295,Did you read that the keg_definition of 'CRUD_command' is 'str first used in ch09 that represents database CRUD commands'.
+296,Did you read that the keg_definition of 'DELETE' is 'CRUD_COMMAND to delete records for a table'.
+297,Did you read that the keg_definition of 'INSERT' is 'CRUD_COMMAND to delete records for a table'.
+298,Did you read that the keg_definition of 'UPDATE' is 'CRUD_COMMAND to update records for a table. 'Associated dimens: personunit' in 'CRUD_COMMAND to update records for a table''.
+299,Did you read that the keg_definition of 'atom' is 'Smallest possible unit of a PersonUnit'.
+300,Did you read that the keg_definition of 'awardee_title_ERASE' is 'Definition needed.'.
+301,Did you read that the keg_definition of 'awardee_title_ERASE_inx' is 'The 'awardee_title_ERASE' value after Translate.'.
+302,Did you read that the keg_definition of 'awardee_title_ERASE_otx' is 'The 'awardee_title_ERASE' value after Translate.'.
+303,Did you read that the keg_definition of 'column_ordinal' is 'Describes which column in a table the attribute should have. The number '2' would be 3rd column because of starting at 0 index.'.
+304,Did you read that the keg_definition of 'contact_name_ERASE' is 'Definition needed.'.
+305,Did you read that the keg_definition of 'contact_name_ERASE_inx' is 'The 'contact_name_ERASE' value after Translate.'.
+306,Did you read that the keg_definition of 'contact_name_ERASE_otx' is 'The 'contact_name_ERASE' value after Translate.'.
+307,"Did you read that the keg_definition of 'crud' is 'Create, Read, Update, Delete. The main things that can be done in a database.'."
+308,Did you read that the keg_definition of 'fact_context_ERASE' is 'Definition needed.'.
+309,Did you read that the keg_definition of 'fact_context_ERASE_inx' is 'The 'fact_context_ERASE' value after Translate.'.
+310,Did you read that the keg_definition of 'fact_context_ERASE_otx' is 'The 'fact_context_ERASE' value after Translate.'.
+311,Did you read that the keg_definition of 'group_title_ERASE' is 'Definition needed.'.
+312,Did you read that the keg_definition of 'group_title_ERASE_inx' is 'The 'group_title_ERASE' value after Translate.'.
+313,Did you read that the keg_definition of 'group_title_ERASE_otx' is 'The 'group_title_ERASE' value after Translate.'.
+314,Did you read that the keg_definition of 'healer_name_ERASE' is 'Definition needed.'.
+315,Did you read that the keg_definition of 'healer_name_ERASE_inx' is 'The 'healer_name_ERASE' value after Translate.'.
+316,Did you read that the keg_definition of 'healer_name_ERASE_otx' is 'The 'healer_name_ERASE' value after Translate.'.
+317,Did you read that the keg_definition of 'labor_title_ERASE' is 'Definition needed.'.
+318,Did you read that the keg_definition of 'labor_title_ERASE_inx' is 'The 'labor_title_ERASE' value after Translate.'.
+319,Did you read that the keg_definition of 'labor_title_ERASE_otx' is 'The 'labor_title_ERASE' value after Translate.'.
+320,Did you read that the keg_definition of 'nesting_order' is 'Definition needed.'.
+321,Did you read that the keg_definition of 'normal_specs' is 'Definition needed.'.
+322,Did you read that the keg_definition of 'normal_table_name' is 'Definition needed.'.
+323,Did you read that the keg_definition of 'person_name_ERASE' is 'Definition needed.'.
+324,Did you read that the keg_definition of 'person_name_ERASE_inx' is 'The 'person_name_ERASE' value after Translate.'.
+325,Did you read that the keg_definition of 'person_name_ERASE_otx' is 'The 'person_name_ERASE' value after Translate.'.
+326,Did you read that the keg_definition of 'plan_rope_ERASE' is 'Definition needed.'.
+327,Did you read that the keg_definition of 'plan_rope_ERASE_inx' is 'The 'plan_rope_ERASE' value after Translate.'.
+328,Did you read that the keg_definition of 'plan_rope_ERASE_otx' is 'The 'plan_rope_ERASE' value after Translate.'.
+329,Did you read that the keg_definition of 'reason_context_ERASE' is 'Definition needed.'.
+330,Did you read that the keg_definition of 'reason_context_ERASE_inx' is 'The 'reason_context_ERASE' value after Translate.'.
+331,Did you read that the keg_definition of 'reason_context_ERASE_otx' is 'The 'reason_context_ERASE' value after Translate.'.
+332,Did you read that the keg_definition of 'reason_state_ERASE' is 'Definition needed.'.
+333,Did you read that the keg_definition of 'reason_state_ERASE_inx' is 'The 'reason_state_ERASE' value after Translate.'.
+334,Did you read that the keg_definition of 'reason_state_ERASE_otx' is 'The 'reason_state_ERASE' value after Translate.'.
+335,Did you read that the keg_definition of 'FaceName' is 'str first used in ch10. The Face is the source of all outside data.'.
+336,Did you read that the keg_definition of 'Lasso' is 'Definition needed.'.
+337,Did you read that the keg_definition of 'MomentRope' is 'str first used in ch10. The RopeTerm for a Moment. Must contain knots.'.
+338,Did you read that the keg_definition of 'gut' is 'Definition needed.'.
+339,Did you read that the keg_definition of 'job' is 'Definition needed.'.
+340,Did you read that the keg_definition of 'lasso' is 'Definition needed.'.
+341,Did you read that the keg_definition of 'moment' is 'Definition needed.'.
+342,Did you read that the keg_definition of 'moment_mstr_dir' is 'starting point for most lego file structue. Moment functions usually refernce this directory as root.'.
+343,"Did you read that the keg_definition of 'moment_rope' is ', Moment arg, offi_time arg, paybook arg, mmtweek arg, mmtmont arg, mmthour arg, bud arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed, Contact seed, Member seed, nabu arg.'."
+344,Did you read that the keg_definition of 'spark_face' is 'Every spark has a spark_face that identifies which Face it belongs to. The Face is the source of all outside data. In theory a spark_face can be any data type. In practice it is currently a string data type.'.
+345,"Did you read that the keg_definition of 'spark_num' is 'Every spark has a spark_num that identifies its order of ingestion. Sparks are orderd but not necessarily sequential. Spark_num is an int. , used with Budget Cells'."
+346,Did you read that the keg_definition of 'listener' is 'Definition needed. Only referenced in ch11.'.
+347,Did you read that the keg_definition of 'speaker' is 'Definition needed. Only referenced in ch11.'.
+348,Did you read that the keg_definition of 'Epoch' is 'Definition needed.'.
+349,Did you read that the keg_definition of 'SparkInt' is 'int first used in ch12. Each Spark is a int that describes the order of data ingestion'.
+350,Did you read that the keg_definition of 'TimeNum' is 'int first used in ch12. An Integar that can represent a instant on the TimeNumLine'.
+351,"Did you read that the keg_definition of 'amount' is ', paybook arg'."
+352,"Did you read that the keg_definition of 'boss_facts' is ', used with Budget Cells'."
+353,"Did you read that the keg_definition of 'bud_contact_nets' is 'ledger of bud outcome. The PersonUnit that embodies the Budget distrubutes the funds per the PersonUnit contacts. dict[ContactName, FundNum]. FundNum can be negative.'."
+354,"Did you read that the keg_definition of 'bud_person_name' is ', used with Budget Cells'."
+355,"Did you read that the keg_definition of 'bud_time' is 'When a budget adds to the supply, bud arg, Nabuable arg'."
+356,"Did you read that the keg_definition of 'celldepth' is ', used with Budget Cells, bud arg'."
+357,Did you read that the keg_definition of 'epoch' is 'Definition needed.'.
+358,"Did you read that the keg_definition of 'found_facts' is ', used with Budget Cells'."
+359,Did you read that the keg_definition of 'magnitude' is 'Definition needed.'.
+360,"Did you read that the keg_definition of 'offi_time' is ', offi_time arg, Nabuable arg'."
+361,Did you read that the keg_definition of 'offi_time_max' is 'Definition needed.'.
+362,"Did you read that the keg_definition of 'person_contacts_net' is 'calculated from loaded TranUnits data. It holds the calculated net output for each PersonName, ContactName tuple.'."
+363,"Did you read that the keg_definition of 'personadjust' is ', used with Budget Cells'."
+364,"Did you read that the keg_definition of 'personspark_facts' is ', used with Budget Cells'."
+365,"Did you read that the keg_definition of 'quota' is 'The importance of a BudUnit. The currency given to the BudUnit to be distributed to Contacts. The magnitude number will always be less then quote because its the sum of how much of the quota is distributed, bud arg, used with Budget Cells'."
+366,Did you read that the keg_definition of 'time' is 'Definition needed.'.
+367,"Did you read that the keg_definition of 'tran_time' is ', paybook arg, Nabuable arg'."
+368,Did you read that the keg_definition of 'ManaNum' is 'float first used in ch13. ManaNum inherits from float class'.
+369,Did you read that the keg_definition of 'care_amount' is 'Definition needed.'.
+370,Did you read that the keg_definition of 'cares' is 'Definition needed.'.
+371,Did you read that the keg_definition of 'cycle_carees_curr' is 'Definition needed.'.
+372,Did you read that the keg_definition of 'cycle_carees_prev' is 'Definition needed.'.
+373,Did you read that the keg_definition of 'cycle_count' is 'Definition needed.'.
+374,Did you read that the keg_definition of 'cycle_max' is 'Definition needed.'.
+375,Did you read that the keg_definition of 'doctor_count' is 'Definition needed.'.
+376,Did you read that the keg_definition of 'doctor_rank_num' is 'Definition needed.'.
+377,Did you read that the keg_definition of 'doctor_rank_percent' is 'Definition needed.'.
+378,Did you read that the keg_definition of 'keep_patientledgers' is 'Definition needed.'.
+379,Did you read that the keg_definition of 'keep_point_magnitude' is 'Definition needed.'.
+380,Did you read that the keg_definition of 'need_bill_amount' is 'Definition needed.'.
+381,Did you read that the keg_definition of 'need_dues' is 'Definition needed.'.
+382,Did you read that the keg_definition of 'need_got_curr' is 'Definition needed.'.
+383,Did you read that the keg_definition of 'need_got_prev' is 'Definition needed.'.
+384,Did you read that the keg_definition of 'need_paid_amount' is 'Definition needed.'.
+385,Did you read that the keg_definition of 'need_paid_bool' is 'Definition needed.'.
+386,Did you read that the keg_definition of 'need_paid_rank_num' is 'Definition needed.'.
+387,Did you read that the keg_definition of 'need_paid_rank_percent' is 'Definition needed.'.
+388,Did you read that the keg_definition of 'need_results' is 'Definition needed.'.
+389,Did you read that the keg_definition of 'patient_count' is 'Definition needed.'.
+390,Did you read that the keg_definition of 'patient_rank_num' is 'Definition needed.'.
+391,Did you read that the keg_definition of 'patient_rank_percent' is 'Definition needed.'.
+392,Did you read that the keg_definition of 'rewards_count' is 'Definition needed.'.
+393,Did you read that the keg_definition of 'rewards_magnitude' is 'Definition needed.'.
+394,Did you read that the keg_definition of 'riverbooks' is 'Definition needed.'.
+395,Did you read that the keg_definition of 'rivercares' is 'Definition needed.'.
+396,Did you read that the keg_definition of 'rivergrades' is 'Definition needed.'.
+397,Did you read that the keg_definition of 'Anaday' is 'First Day of 5 day week of 'Five' Epoch'.
+398,Did you read that the keg_definition of 'Baileyday' is 'Second Day of 5 day week of 'Five' Epoch'.
+399,Did you read that the keg_definition of 'Chiday' is 'Third Day of 5 day week of 'Five' Epoch'.
+400,Did you read that the keg_definition of 'Danceday' is 'Fourth Day of 5 day week of 'Five' Epoch'.
+401,Did you read that the keg_definition of 'Eastday' is 'Fifth Day of 5 day week of 'Five' Epoch'.
+402,Did you read that the keg_definition of 'EpochLabel' is 'str first used in ch14. EpochLabel is required for every EpochUnit. It is a LabelTerm that must not contain the knot.'.
+403,Did you read that the keg_definition of 'TimeShoe' is 'Definition needed.'.
+404,"Did you read that the keg_definition of 'c100' is '100 years, sub part of c400_core'."
+405,"Did you read that the keg_definition of 'c100_length' is 'A C400Constant for building Epochs: 52,594,560 minutes in 100 year cycle'."
+406,Did you read that the keg_definition of 'c400_core' is '400 years without the extra leap day.'.
+407,"Did you read that the keg_definition of 'c400_core_length' is 'A C400Constant for building Epochs: 210,378,240 minutes in 400 year cycle without last leap-day'."
+408,Did you read that the keg_definition of 'c400_leap' is '400 years with the extra leap day.'.
+409,"Did you read that the keg_definition of 'c400_leap_length' is 'A C400Constant for building Epochs: 210,379,680 minutes in 400 year cycle'."
+410,"Did you read that the keg_definition of 'c400_number' is 'Epoch config Integer that represents number of 400 year cycles. Defines the range of years in epoch c400_number=7 means 2800 years, Moment arg'."
+411,Did you read that the keg_definition of 'clock' is 'String representation of the time during the day. '10:00am' or '0:15hr'.
+412,"Did you read that the keg_definition of 'creg' is 'Gregorian time does not have year zero. It was necessary to have year zero so the default epoch technology is Cregorian time, Gregorian time with year 0.'."
+413,"Did you read that the keg_definition of 'cumulative_day' is ', mmtmont arg'."
+414,Did you read that the keg_definition of 'day' is 'A fundamental structure of time for Keg2. Always assumed to be a 1440 minutes long.'.
+415,"Did you read that the keg_definition of 'day_length' is 'A C400Constant for building Epochs: 1,440 minutes in day'."
+416,Did you read that the keg_definition of 'dayly_duration_min' is 'Required fields for creating Epoch dayly cases.'.
+417,Did you read that the keg_definition of 'dayly_lower_min' is 'Required fields for creating Epoch dayly cases.'.
+418,Did you read that the keg_definition of 'days' is 'Definition needed.'.
+419,Did you read that the keg_definition of 'days_lower_day' is 'Required fields for creating Epoch every_xdays cases.'.
+420,Did you read that the keg_definition of 'days_upper_day' is 'Required fields for creating Epoch every_xdays cases.'.
+421,Did you read that the keg_definition of 'duration' is 'Definition needed.'.
+422,"Did you read that the keg_definition of 'epoch_label' is 'Epoch config: Name of epoch. Persons may have multiple epochs, they are differentiated by this LabelTerm, Moment arg'."
+423,Did you read that the keg_definition of 'epoch_length' is 'Total number of minutes in a Epoch. Calculated by number of minutes in C400_leap times Epoch's c400_number'.
+424,Did you read that the keg_definition of 'epoch_min' is 'Definition needed.'.
+425,Did you read that the keg_definition of 'every_xdays' is 'Required fields for creating Epoch every_xdays cases.'.
+426,Did you read that the keg_definition of 'every_xweeks' is 'Required fields for creating Epoch weekly cases.'.
+427,"Did you read that the keg_definition of 'five' is 'An Epoch. A structure for time often used in the codebase. Starts about 5000 years ago, has 16 months, 15 of which are 25 days. Week is 5 days long.'."
+428,Did you read that the keg_definition of 'hour' is 'Definition needed.'.
+429,"Did you read that the keg_definition of 'hour_label' is ', mmthour arg'."
+430,"Did you read that the keg_definition of 'hours_config' is 'Epoch config List of Lists that contain two elements: hour name and the day's minute when it ends. Last item list must contain hour name and 1440 because that is the last minute of the day, partial example: [['12am', 60], ['11pm', 1440]]'."
+431,"Did you read that the keg_definition of 'month_label' is ', mmtmont arg'."
+432,"Did you read that the keg_definition of 'monthday_index' is 'Epoch config: Changes MonthDay displayed day number. Months' day numbers are assumed to start with 0. The first day of the month is #0. The 3rd day of the month would be Day #2 of month. Most prefer The first day of the month to be 1 even though this makes divisor difficult. If monthday_index=1 then the 3rd day of the month is #3, Moment arg'."
+433,Did you read that the keg_definition of 'monthly_duration_days' is 'Required fields for creating Epoch monthly cases.'.
+434,Did you read that the keg_definition of 'monthly_monthday_lower' is 'Required fields for creating Epoch monthly cases.'.
+435,"Did you read that the keg_definition of 'months_config' is 'Epoch config: List of lists that contain two elements: month name and the year's day when it ends. Last item list must contain year's day equal 365 because it is the last day of the year. [['March', 31], ['February', 365]]'."
+436,Did you read that the keg_definition of 'range_duration' is 'Required fields for creating Epoch ranged cases.'.
+437,Did you read that the keg_definition of 'range_lower_min' is 'Required fields for creating Epoch ranged cases.'.
+438,Did you read that the keg_definition of 'readable' is 'Human readable text. Often for time.'.
+439,Did you read that the keg_definition of 'week' is 'A fundamental structure of time for Keg2. Always assumed to be a days long. Never partial days.'.
+440,"Did you read that the keg_definition of 'weekdays_config' is 'Epoch config, List of Weekday names. When the Epoch begins the first Weekday in the list is the first day of the Epoch. ['Wednesday', ...'Tuesday'],'."
+441,Did you read that the keg_definition of 'weekly_duration_min' is 'Required fields for creating Epoch weekly cases.'.
+442,Did you read that the keg_definition of 'weekly_lower_min' is 'Required fields for creating Epoch weekly cases.'.
+443,Did you read that the keg_definition of 'weeks' is 'Definition needed.'.
+444,Did you read that the keg_definition of 'weeks_lower_week' is 'Required fields for creating Epoch weekly cases.'.
+445,Did you read that the keg_definition of 'weeks_upper_week' is 'Required fields for creating Epoch weekly cases.'.
+446,Did you read that the keg_definition of 'year' is 'A fundamental structure of time for Keg2. Always 365 days. The leap day is a special other thing in Keg2.'.
+447,"Did you read that the keg_definition of 'year_length' is 'A C400Constant for building Epochs: 525,600 minutes in year without leap-day'."
+448,Did you read that the keg_definition of 'year_monthday_duration_days' is 'Required fields for creating Epoch year_monthday cases.'.
+449,Did you read that the keg_definition of 'year_monthday_lower' is 'Required fields for creating Epoch year_monthday cases.'.
+450,"Did you read that the keg_definition of 'yr1_jan1_offset' is 'Epoch config: Number of minutes the calendar is different from March 1, year 1 where Gregorian calendar is projected to year 1. Example 440640 is almost 10 months, Moment arg'."
+451,"Did you read that the keg_definition of 'yr4_core' is 'A fundamental structure of time for Keg2. Includes 4 years of 365 days, plan_label for Epoch'."
+452,"Did you read that the keg_definition of 'yr4_core_length' is 'A C400Constant for building Epochs: 2,102,400 minutes in 4 year cycle without leap-day'."
+453,Did you read that the keg_definition of 'yr4_leap' is 'A fundamental structure of time for Keg2. Includes 4 years of 365 days (yr4_core) and a leap day. The leap day is the last day.'.
+454,"Did you read that the keg_definition of 'yr4_leap_length' is 'A C400Constant for building Epochs: 2,103,840 minutes in 4 year cycle'."
+455,Did you read that the keg_definition of 'all_tranbook' is 'Definition needed.'.
+456,"Did you read that the keg_definition of 'cumulative_minute' is ', mmthour argDefinition needed.'."
+457,"Did you read that the keg_definition of 'job_listen_rotations' is ', Moment arg'."
+458,Did you read that the keg_definition of 'moment_budunit' is 'Definition needed.'.
+459,Did you read that the keg_definition of 'moment_epoch_hour' is 'Definition needed.'.
+460,Did you read that the keg_definition of 'moment_epoch_month' is 'Definition needed.'.
+461,Did you read that the keg_definition of 'moment_epoch_weekday' is 'Definition needed.'.
+462,Did you read that the keg_definition of 'moment_paybook' is 'Definition needed.'.
+463,Did you read that the keg_definition of 'moment_static' is 'Used to identify if the data can change or must be identify when the Moment of instantization.'.
+464,Did you read that the keg_definition of 'moment_timeoffi' is 'Definition needed.'.
+465,Did you read that the keg_definition of 'momentunit' is 'Definition needed.'.
+466,Did you read that the keg_definition of 'offi_times' is 'Definition needed.'.
+467,Did you read that the keg_definition of 'paybook' is 'Definition needed.'.
+468,Did you read that the keg_definition of 'personbudhistorys' is 'Definition needed.'.
+469,"Did you read that the keg_definition of 'weekday_label' is ', mmtweek arg'."
+470,"Did you read that the keg_definition of 'weekday_order' is ', mmtweek arg'."
+471,Did you read that the keg_definition of 'Nabu' is 'Definition needed.'.
+472,Did you read that the keg_definition of 'NabuTime' is 'Definition needed.'.
+473,Did you read that the keg_definition of 'inx_epoch_diff' is 'Definition needed.'.
+474,"Did you read that the keg_definition of 'inx_time' is ', nabu arg'."
+475,Did you read that the keg_definition of 'nabu' is 'Definition needed.'.
+476,Did you read that the keg_definition of 'nabu_timenum' is 'Definition needed.'.
+477,Did you read that the keg_definition of 'otx2inx' is 'Definition needed.'.
+478,Did you read that the keg_definition of 'otx_epoch_length' is 'Definition needed.'.
+479,"Did you read that the keg_definition of 'otx_time' is ', nabu arg'."
+480,Did you read that the keg_definition of 'timenabu' is 'Definition needed.'.
+481,Did you read that the keg_definition of 'contact_name_inx' is 'The 'contact_name' value after Translate.'.
+482,Did you read that the keg_definition of 'contact_name_otx' is 'The 'contact_name' value after Translate.'.
+483,"Did you read that the keg_definition of 'inx_knot' is ', TRANSLATE_LABEL arg, TRANSLATE_NAME arg, TRANSLATE_ROPE arg, TRANSLATE_TITLE arg'."
+484,"Did you read that the keg_definition of 'inx_label' is ', TRANSLATE_LABEL arg'."
+485,"Did you read that the keg_definition of 'inx_name' is ', TRANSLATE_NAME arg'."
+486,"Did you read that the keg_definition of 'inx_rope' is ', TRANSLATE_ROPE arg'."
+487,"Did you read that the keg_definition of 'inx_title' is ', TRANSLATE_TITLE arg'."
+488,Did you read that the keg_definition of 'labelmap' is 'Definition needed.'.
+489,Did you read that the keg_definition of 'namemap' is 'Definition needed.'.
+490,"Did you read that the keg_definition of 'otx_knot' is ', TRANSLATE_LABEL arg, TRANSLATE_NAME arg, TRANSLATE_ROPE arg, TRANSLATE_TITLE arg'."
+491,"Did you read that the keg_definition of 'otx_label' is ', TRANSLATE_LABEL arg'."
+492,"Did you read that the keg_definition of 'otx_name' is ', TRANSLATE_NAME arg'."
+493,"Did you read that the keg_definition of 'otx_rope' is ', TRANSLATE_ROPE arg'."
+494,"Did you read that the keg_definition of 'otx_title' is ', TRANSLATE_TITLE arg'."
+495,Did you read that the keg_definition of 'ropemap' is 'Definition needed.'.
+496,Did you read that the keg_definition of 'titlemap' is 'Definition needed.'.
+497,Did you read that the keg_definition of 'translate' is 'Definition needed.'.
+498,Did you read that the keg_definition of 'translate_core' is 'Definition needed.'.
+499,"Did you read that the keg_definition of 'translate_label' is ''translate_label' is a translation dimen where otx_label is translated by inx_knot, inx_label, otx_knot, unknown_str'."
+500,"Did you read that the keg_definition of 'translate_name' is ''translate_name' is a translation dimen where otx_name is translated by inx_knot, inx_name, otx_knot, unknown_str'."
+501,"Did you read that the keg_definition of 'translate_rope' is ''translate_rope' is a translation dimen where otx_rope is translated by inx_knot, inx_rope, otx_knot, unknown_str'."
+502,"Did you read that the keg_definition of 'translate_title' is ''translate_title' is a translation dimen where otx_title is translated by inx_knot, inx_title, otx_knot, unknown_str'."
+503,Did you read that the keg_definition of 'translateunit' is 'Definition needed.'.
+504,"Did you read that the keg_definition of 'unknown_str' is ', TRANSLATE_LABEL arg, TRANSLATE_NAME arg, TRANSLATE_ROPE arg, TRANSLATE_TITLE arg'."
+505,Did you read that the keg_definition of 'Excel' is 'A spreadsheet format.'.
+506,Did you read that the keg_definition of 'SheetName' is 'A string used as SheetName for SpreadSheet files. str first used in ch20'.
+507,Did you read that the keg_definition of 'allowed_crud' is 'Each brick config dimen has an allowed_crud that describes whether the data may be updated/deleted/inserted more than one.'.
+508,Did you read that the keg_definition of 'attributes' is 'General term used to describe things about another thing'.
+509,Did you read that the keg_definition of 'awardee_title_inx' is 'The 'awardee_title' value after Translate.'.
+510,Did you read that the keg_definition of 'awardee_title_otx' is 'The 'awardee_title' value after Translate.'.
+511,Did you read that the keg_definition of 'bk' is 'Brick Format Identifier. Every brick_type format starts with 'bk' and then 5 numbers.'.
+512,Did you read that the keg_definition of 'brick' is 'Definition needed.'.
+513,Did you read that the keg_definition of 'brick_category' is 'Definition needed.'.
+514,Did you read that the keg_definition of 'brick_type' is 'Definition needed.'.
+515,Did you read that the keg_definition of 'bud_time_inx' is 'The 'bud_time' value after Translate.'.
+516,Did you read that the keg_definition of 'bud_time_otx' is 'The 'bud_time' value after Translate.'.
+517,Did you read that the keg_definition of 'build_order' is 'When building a world the order of dimen data implementation must be deterministic. build_order defines the order dimens are evaluated for a World.'.
+518,"Did you read that the keg_definition of 'delete_insert' is 'Associated dimens: person_plan_healerunit, person_plan_laborunit'."
+519,"Did you read that the keg_definition of 'delete_insert_update' is 'Associated dimens: person_contact_membership, person_contactunit, person_plan_awardunit, person_plan_factunit, person_plan_reason_caseunit, person_plan_reasonunit, person_planunit' in 'Associated dimens: person_planunit, person_contactunit, person_plan_reasonunit, person_plan_factunit, person_plan_awardunit, person_contact_membership, person_plan_reason_caseunit'."
+520,"Did you read that the keg_definition of 'delete_update' is 'Associated dimens: person_plan_healerunit, person_plan_laborunit'."
+521,Did you read that the keg_definition of 'epoch_label_inx' is 'The 'epoch_label' value after Translate.'.
+522,Did you read that the keg_definition of 'epoch_label_otx' is 'The 'epoch_label' value after Translate.'.
+523,Did you read that the keg_definition of 'error_message' is 'Definition needed.'.
+524,Did you read that the keg_definition of 'excel' is 'A spreadsheet format.'.
+525,Did you read that the keg_definition of 'fact_context_inx' is 'The 'fact_context' value after Translate.'.
+526,Did you read that the keg_definition of 'fact_context_otx' is 'The 'fact_context' value after Translate.'.
+527,Did you read that the keg_definition of 'fact_lower_inx' is 'The 'fact_lower' value after Translate.'.
+528,Did you read that the keg_definition of 'fact_lower_otx' is 'The 'fact_lower' value after Translate.'.
+529,Did you read that the keg_definition of 'fact_state_inx' is 'The 'fact_state' value after Translate.'.
+530,Did you read that the keg_definition of 'fact_state_otx' is 'The 'fact_state' value after Translate.'.
+531,Did you read that the keg_definition of 'fact_upper_inx' is 'The 'fact_upper' value after Translate.'.
+532,Did you read that the keg_definition of 'fact_upper_otx' is 'The 'fact_upper' value after Translate.'.
+533,Did you read that the keg_definition of 'fund_rank' is 'Definition needed.'.
+534,Did you read that the keg_definition of 'group_title_inx' is 'The 'group_title' value after Translate.'.
+535,Did you read that the keg_definition of 'group_title_otx' is 'The 'group_title' value after Translate.'.
+536,Did you read that the keg_definition of 'healer_name_inx' is 'The 'healer_name' value after Translate.'.
+537,Did you read that the keg_definition of 'healer_name_otx' is 'The 'healer_name' value after Translate.'.
+538,Did you read that the keg_definition of 'hour_label_inx' is 'The 'hour_label' value after Translate.'.
+539,Did you read that the keg_definition of 'hour_label_otx' is 'The 'hour_label' value after Translate.'.
+540,Did you read that the keg_definition of 'idea' is 'A collection of bricks (currently only in brick format) with a spark_face but no spark_num.'.
+541,"Did you read that the keg_definition of 'insert_multiple' is 'Associated dimens: moment_budunit, moment_paybook, moment_timeoffi'."
+542,"Did you read that the keg_definition of 'insert_one_time' is 'Associated dimens: moment_epoch_hour, moment_epoch_month, moment_epoch_weekday, momentunit, nabu_timenum, translate_label, translate_name, translate_rope, translate_title'."
+543,Did you read that the keg_definition of 'insert_update' is 'Definition needed.'.
+544,Did you read that the keg_definition of 'labor_title_inx' is 'The 'labor_title' value after Translate.'.
+545,Did you read that the keg_definition of 'labor_title_otx' is 'The 'labor_title' value after Translate.'.
+546,Did you read that the keg_definition of 'moment_rope_inx' is 'The 'moment_rope' value after Translate.'.
+547,Did you read that the keg_definition of 'moment_rope_otx' is 'The 'moment_rope' value after Translate.'.
+548,Did you read that the keg_definition of 'month_label_inx' is 'The 'month_label' value after Translate.'.
+549,Did you read that the keg_definition of 'month_label_otx' is 'The 'month_label' value after Translate.'.
+550,Did you read that the keg_definition of 'net_funds' is 'Definition needed.'.
+551,Did you read that the keg_definition of 'offi_time_inx' is 'The 'offi_time' value after Translate.'.
+552,Did you read that the keg_definition of 'offi_time_otx' is 'The 'offi_time' value after Translate.'.
+553,Did you read that the keg_definition of 'otx_key' is 'Definition needed.'.
+554,Did you read that the keg_definition of 'person_name_inx' is 'The 'person_name' value after Translate.'.
+555,Did you read that the keg_definition of 'person_name_otx' is 'The 'person_name' value after Translate.'.
+556,Did you read that the keg_definition of 'plan_rope_inx' is 'The 'plan_rope' value after Translate.'.
+557,Did you read that the keg_definition of 'plan_rope_otx' is 'The 'plan_rope' value after Translate.'.
+558,Did you read that the keg_definition of 'pledges_count' is 'Definition needed.'.
+559,Did you read that the keg_definition of 'reason_context_inx' is 'The 'reason_context' value after Translate.'.
+560,Did you read that the keg_definition of 'reason_context_otx' is 'The 'reason_context' value after Translate.'.
+561,Did you read that the keg_definition of 'reason_lower_inx' is 'The 'reason_lower' value after Translate.'.
+562,Did you read that the keg_definition of 'reason_lower_otx' is 'The 'reason_lower' value after Translate.'.
+563,Did you read that the keg_definition of 'reason_state_inx' is 'The 'reason_state' value after Translate.'.
+564,Did you read that the keg_definition of 'reason_state_otx' is 'The 'reason_state' value after Translate.'.
+565,Did you read that the keg_definition of 'reason_upper_inx' is 'The 'reason_upper' value after Translate.'.
+566,Did you read that the keg_definition of 'reason_upper_otx' is 'The 'reason_upper' value after Translate.'.
+567,"Did you read that the keg_definition of 'sheet' is 'Object that represents a spreadsheet. It has attributes like filename, table_name, and data.'."
+568,Did you read that the keg_definition of 'source_dimen' is 'Definition needed.'.
+569,Did you read that the keg_definition of 'spark_face_inx' is 'The 'spark_face' value after Translate.'.
+570,Did you read that the keg_definition of 'spark_face_otx' is 'The 'spark_face' value after Translate.'.
+571,Did you read that the keg_definition of 'tran_time_inx' is 'The 'tran_time' value after Translate.'.
+572,Did you read that the keg_definition of 'tran_time_otx' is 'The 'tran_time' value after Translate.'.
+573,Did you read that the keg_definition of 'translate_spark_num' is 'Definition needed.'.
+574,Did you read that the keg_definition of 'weekday_label_inx' is 'The 'weekday_label' value after Translate.'.
+575,Did you read that the keg_definition of 'weekday_label_otx' is 'The 'weekday_label' value after Translate.'.
+576,Did you read that the keg_definition of 'world_name' is 'Definition needed.'.
+577,Did you read that the keg_definition of 'b_agg' is '5 character abbreviation of brixk_agg. stage_type_order=4 Brick Agg: The Brick Raw tables are aggregated to elimanate duplicates.'.
+578,Did you read that the keg_definition of 'b_raw' is '5 character abbreviation of brixk_raw. stage_type_order=3 Brick Raw: The importable Excel Sheets entering the database'.
+579,Did you read that the keg_definition of 'b_src' is '5 character abbreviation of brixk_src. stage_type_order=2 Brick files. Brick formats with SparkNum.'.
+580,Did you read that the keg_definition of 'b_vld' is '5 character abbreviation of brixk_vld. stage_type_order=4 Brick Vld: .'.
+581,Did you read that the keg_definition of 'brixk_agg' is 'stage_type_order=4 Brick Agg: The Brick Raw tables are aggregated to elimanate duplicates.'.
+582,Did you read that the keg_definition of 'brixk_raw' is 'stage_type_order=3 Brick Raw: The importable Excel Sheets entering the database'.
+583,Did you read that the keg_definition of 'brixk_src' is 'stage_type_order=2 Brick files. Brick formats with SparkNum.'.
+584,Did you read that the keg_definition of 'brixk_vld' is 'stage_type_order=6 Brick Valid: The Brick Agg tables filtered to correct datatypes. '.
+585,Did you read that the keg_definition of 'h_agg' is '5 character abbreviation of heard_agg. stage_type_order=11 Populated by aggregated Heard Raw tables. Nabu number conversions take place here.'.
+586,Did you read that the keg_definition of 'h_raw' is '5 character abbreviation of heard_raw. stage_type_order=10 Populated by Sound Valid tables'.
+587,Did you read that the keg_definition of 'h_vld' is '5 character abbreviation of heard_vld. stage_type_order=12 Populated by aggregated and Nabu changed Heard Agg tables'.
+588,Did you read that the keg_definition of 'heard_agg' is 'stage_type_order=11 Populated by aggregated Heard Raw tables. Nabu number conversions take place here.'.
+589,Did you read that the keg_definition of 'heard_raw' is 'stage_type_order=10 Populated by Sound Valid tables'.
+590,Did you read that the keg_definition of 'heard_vld' is 'stage_type_order=12 Populated by aggregated and Nabu changed Heard Agg tables'.
+591,"Did you read that the keg_definition of 'i_dst' is '5 character abbreviation of ideax_dst. stage_type_order=14 Idea (Brick formats without SparkNum) Destination. Filtered Job, Moment data.'."
+592,Did you read that the keg_definition of 'i_src' is '5 character abbreviation of ideax_src. stage_type_order=1 Idea Source files. Brick formats without SparkNum.'.
+593,"Did you read that the keg_definition of 'ideax_dst' is 'stage_type_order=14 Idea (Brick formats without SparkNum) Destination. Filtered Job, Moment data.'."
+594,Did you read that the keg_definition of 'ideax_src' is 'stage_type_order=1 Idea Source files. Brick formats without SparkNum.'.
+595,Did you read that the keg_definition of 'k_vld' is '5 character abbreviation of brixk_vld. stage_type_order=6 Brick Valid: The Brick Agg tables filtered to correct datatypes. '.
+596,Did you read that the keg_definition of 'lego' is '5 character abbreviation of legox_mst. stage_type_order=13 File buildout of Moments and PersonUnits. Word used to describe the end state of the core ETL pipeline. All core data should be in the database. Files may still be accessible. KPIs should all be sourced from it.'.
+597,Did you read that the keg_definition of 'legox_mst' is 'stage_type_order=13 File buildout of Moments and PersonUnits'.
+598,Did you read that the keg_definition of 'mmtbudd' is 'abbv for moment_budunit'.
+599,Did you read that the keg_definition of 'mmthour' is 'abbv for moment_epoch_hour'.
+600,Did you read that the keg_definition of 'mmtmont' is 'abbv for moment_epoch_month'.
+601,Did you read that the keg_definition of 'mmtoffi' is 'abbv for moment_timeoffi'.
+602,Did you read that the keg_definition of 'mmtpayy' is 'abbv for moment_paybook'.
+603,Did you read that the keg_definition of 'mmtunit' is 'abbv for momentunit'.
+604,Did you read that the keg_definition of 'mmtweek' is 'abbv for moment_epoch_weekday'.
+605,Did you read that the keg_definition of 'moment_ote1_agg' is 'Create Database Table that holds all spark_num to bud_time pairs. Include moment_rope and person_name'.
+606,Did you read that the keg_definition of 'nabtime' is 'abbv for nabu_timenum'.
+607,Did you read that the keg_definition of 'person_net_amount' is 'Definition needed.'.
+608,Did you read that the keg_definition of 's_agg' is '5 character abbreviation of sound_agg. stage_type_order=8 Populated by aggregated Sound Raw dimen data (elimanate duplicates). Translate Core data is validated then used to translate non-Translate dimen data'.
+609,Did you read that the keg_definition of 's_raw' is '5 character abbreviation of sound_raw. stage_type_order=7 The Brick Valid data is seperated by column into dimen data such as person_planunit and moment_budunit'.
+610,Did you read that the keg_definition of 's_vld' is '5 character abbreviation of sound_vld. stage_type_order=9 The Translated Sound Agg data is aggregated to elimanate duplicates into Sound Valid'.
+611,Did you read that the keg_definition of 'sound_agg' is 'stage_type_order=8 Populated by aggregated Sound Raw dimen data (elimanate duplicates). Translate Core data is validated then used to translate non-Translate dimen data'.
+612,Did you read that the keg_definition of 'sound_raw' is 'stage_type_order=7 The Brick Valid data is seperated by column into dimen data such as person_planunit and moment_budunit'.
+613,Did you read that the keg_definition of 'sound_vld' is 'stage_type_order=9 The Translated Sound Agg data is aggregated to elimanate duplicates into Sound Valid'.
+614,Did you read that the keg_definition of 'sparks_b_agg' is 'Definition needed.'.
+615,Did you read that the keg_definition of 'sparks_b_vld' is 'Definition needed.'.
+616,Did you read that the keg_definition of 'trlcore' is 'abbv for translate_core'.
+617,Did you read that the keg_definition of 'trllabe' is 'abbv for translate_label'.
+618,Did you read that the keg_definition of 'trlname' is 'abbv for translate_name'.
+619,Did you read that the keg_definition of 'trlrope' is 'abbv for translate_rope'.
+620,Did you read that the keg_definition of 'trltitl' is 'abbv for translate_title'.
+621,Did you read that the keg_definition of 'day_punch' is 'A report that summarizes the tasks of a person for a day.'.
+622,Did you read that the keg_definition of 'fission' is 'Any complicated step changing idea_type to brick_type. Each fission_step makes a single type of change. Can be simple (set value to X) or complicated (add missing rows with relative values). Only referenced in ch23'.
+623,Did you read that the keg_definition of 'idea_type' is 'Definition needed.'.
+624,Did you read that the keg_definition of 'ii' is 'Idea Format Identifier. Every idea_type format starts with 'ii' and then 5 numbers. Every brick_type has a mirrored idea_type. Multiple idea_types can map to single brick_type'.
+625,Did you read that the keg_definition of 'moment_tranbook_nets' is 'Definition needed.'.
+626,Did you read that the keg_definition of 'vow' is 'ideas created for audience'.
+627,Did you read that the keg_definition of 'DayEvent' is 'Definition needed.'.
+628,Did you read that the keg_definition of 'Event' is 'Definition needed.'.
+629,Did you read that the keg_definition of 'default_kpi_bundle' is 'Definition needed.'.
+630,Did you read that the keg_definition of 'gcal' is 'Definition needed.'.
+631,Did you read that the keg_definition of 'moment_kpi001_contact_nets' is 'Definition needed.'.
+632,Did you read that the keg_definition of 'moment_kpi002_person_pledges' is 'Definition needed.'.
+633,Did you read that the keg_definition of 'WorldName' is 'str first used in ch32. Name of WorldDir'.
+634,"Did you read that the keg_definition of 'today' is 'Refences the computer's current date, used to create a day_punch.'."
+635,Did you read that the keg_definition of 'Deal' is 'Definition needed. ch33'.
+636,Did you read that the keg_definition of 'Gift' is 'Definition needed.'.
+637,Did you read that the keg_definition of 'Peer' is 'Ch33 Definition needed.'.
+638,Did you read that the keg_definition of 'PitchID' is 'str first used in ch33. str used to name PitchUnit'.
+639,Did you read that the keg_definition of 'PitchUnit' is 'Ch33 Definition needed.'.
+640,Did you read that the keg_definition of 'deal' is 'Definition needed. ch33'.
+641,Did you read that the keg_definition of 'gift' is 'Definition needed.'.
+642,Did you read that the keg_definition of 'offer' is 'Ch33 Definition needed.'.
+643,Did you read that the keg_definition of 'peer' is 'Ch33 Definition needed.'.
+644,Did you read that the keg_definition of 'pitch' is 'Definition needed.'.
+645,Did you read that the keg_definition of 'pitch_id' is 'Definition needed.'.
+646,Did you read that the keg_definition of 'pitcher_name' is 'Ch33 Definition needed.'.
+647,Did you read that the keg_definition of 'pitchs' is 'Definition needed.'.
+648,Did you read that the keg_definition of 'request' is 'Ch33 Definition needed.'.
+649,Did you read that the keg_definition of 'finance' is 'Definition needed.'.
+650,Did you read that the keg_definition of 'financial' is 'Definition needed.'.

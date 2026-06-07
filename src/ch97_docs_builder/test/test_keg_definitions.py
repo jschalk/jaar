@@ -62,9 +62,7 @@ from ch97_docs_builder.glossary_definition import (
     save_keg_descriptions_json,
 )
 from ch99_glossary.ch_keyword import Ch97Keywords as kw, ExampleStrs as exx
-from ch99_glossary.sorter import get_keg_elements_sort_order
 from inspect import getdoc as inspect_getdoc
-from re import fullmatch as re_fullmatch
 
 
 def python_keywords() -> set:
@@ -92,7 +90,7 @@ def test_SpecialUpdate_keg_definitions_file():
         keg_definitions[chxx_prefix] = ch_blurb
 
     # Special action, test mutates keg_descriptions.json
-    save_keg_descriptions_json("src", keg_definitions)
+    save_keg_descriptions_json(kw.src, keg_definitions)
     # WHEN / THEN
     assert not chapter_changes_needed
 
@@ -533,7 +531,7 @@ def test_get_keg_definitions_ReturnsObj_inx_otx_ContainTranslateReference():
     #     if keg_term.endswith("_otx") and expected_otx_str not in definition_str:
     #         # print(f""""{keg_term}": "{expected_otx_str}",""")
     #         to_save_keg_definitions[keg_term] = expected_otx_str
-    # save_keg_descriptions_json("src", to_save_keg_definitions)
+    # save_keg_descriptions_json(kw.src, to_save_keg_definitions)
 
     for keg_term, definition_str in keg_definitions.items():
         if keg_term.endswith("_inx"):

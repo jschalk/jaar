@@ -160,7 +160,7 @@ def test_get_count_keg_terms_by_chapters_CountsTerms_Scenario0_SrcDir():
     #                 print(f"{keg_term} {sorted(set(ch_dir_dict.keys()))}")
     #                 # print(f"{x_valid_ch=}")
     #                 keyword_config[kw.valid_ch] = str(lone_ch)
-    # src_keywords_src_path = create_src_keywords_src_path("src")
+    # src_keywords_src_path = create_src_keywords_src_path(kw.src)
     # save_json(src_keywords_src_path, None, keywords_src_config)
     # assert 1 == 2
     # TODO consider adapting this to ch01

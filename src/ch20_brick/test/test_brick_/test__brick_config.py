@@ -573,7 +573,7 @@ def test_get_allowed_curds_ReturnsObj():
 
 def test_brick_config_path_ReturnsObj_Brick() -> str:
     # ESTABLISH / WHEN / THEN
-    chapter_dir = create_path("src", "ch20_brick")
+    chapter_dir = create_path(kw.src, "ch20_brick")
     assert brick_config_path() == create_path(chapter_dir, "brick_config.json")
 
 

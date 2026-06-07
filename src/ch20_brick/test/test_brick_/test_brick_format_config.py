@@ -36,7 +36,7 @@ def test_get_brick_formats_dir_ReturnsObj():
     brick_format_dir = get_brick_formats_dir()
     # THEN
     print(f"{brick_format_dir=}")
-    src_chapter_dir = create_path("src", "ch20_brick")
+    src_chapter_dir = create_path(kw.src, "ch20_brick")
     print(f"{src_chapter_dir=}")
     assert brick_format_dir == create_path(src_chapter_dir, "brick_formats")
 

@@ -1,5 +1,4 @@
 from ch00_py.file_toolbox import create_path, open_json
-from os.path import join as os_path_join
 
 
 def max_tree_traverse_default() -> int:

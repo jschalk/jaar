@@ -534,6 +534,7 @@
   "sparks_b_vld": {"valid_ch": "22:"}, 
   "speaker": {"valid_ch": "11"}, 
   "sqlite_datatype": {"valid_ch": "0:"}, 
+  "src": {"valid_ch": "0:"}, 
   "stop_calc": {"sort_ordinal": 181, "valid_ch": "7:"}, 
   "stop_want": {"sort_ordinal": 109, "valid_ch": "7:"}, 
   "sum_healerunit_plans_fund_total": {"sort_ordinal": 191, "valid_ch": "8:"}, 

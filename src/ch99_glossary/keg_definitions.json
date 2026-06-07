@@ -572,6 +572,7 @@
   "speaker": "Definition needed. Only referenced in ch11.", 
   "sqlite_datatype": "Definition needed.", 
   "square": "Example key with value 'square' used for tests throughout codebase.", 
+  "src": "Abbrevation for the word 'source', used in different ways. All chapters are in directory named 'src'.", 
   "stop_calc": ", Plan thinkout", 
   "stop_want": ", Plan seed", 
   "sue": "Example key with value 'Sue' used for tests throughout codebase.", 
