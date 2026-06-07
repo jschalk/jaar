@@ -39,7 +39,7 @@ The resolution: ch99 contains only data files and simple utility functions with 
 **`keywords_src.json`** — the master keyword registry. Each entry defines:
 - `keg_term` — the string identifier (e.g. `"plan_rope"`, `"moment_rope"`, `"spark_face"`).
 - `valid_ch` — a range string (e.g. `"5:"`, `"3:8"`) indicating which chapters this term is relevant to.
-- `keg_definition` — a concise human-readable definition.
+- `keg_definition` — a concise human-understandable definition.
 - Additional metadata fields used by ch97's exam-question generator.
 
 **`keg_definitions.json`** — a secondary definitions file, structured for documentation output and kept in sync by `ch97_docs_builder.rebuild_keg_definitions_contents`.

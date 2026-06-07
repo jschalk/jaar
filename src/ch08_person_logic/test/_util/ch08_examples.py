@@ -8,7 +8,7 @@ from ch08_person_logic.person_main import (
     get_personunit_from_dict,
     personunit_shop,
 )
-from ch99_glossary.ch_keyword import ExampleStrs as exx
+from ch99_glossary.ch_keyword import ExampleStrs as exx, Ch08Keywords as kw
 from enum import Enum
 
 # save_json(env_dir(), "example_person3.json", personunit_v001().to_dict())
@@ -17,7 +17,7 @@ from enum import Enum
 
 def personunit_v001() -> PersonUnit:
     person1_path = create_path(
-        "src", "ch08_person_logic", "test", "_util", "example_person1.json"
+        kw.src, "ch08_person_logic", "test", "_util", "example_person1.json"
     )
     return get_personunit_from_dict(open_json(person1_path))
 
@@ -51,7 +51,7 @@ def personunit_v001_with_large_agenda() -> PersonUnit:
 
 def personunit_v002() -> PersonUnit:
     person2_path = create_path(
-        "src", "ch08_person_logic", "test", "_util", "example_person2.json"
+        kw.src, "ch08_person_logic", "test", "_util", "example_person2.json"
     )
     return get_personunit_from_dict(open_json(person2_path))
 

@@ -57,7 +57,7 @@ Eight named example generators build `PersonUnit`s and `MomentUnit`s programmati
 
 *Utility:*
 - `fill_spark_face_in_directory(directory, face_name)` — fills empty `spark_face` cells in all Excel files in a directory with the provided face name. Used before running the pipeline when a user has authored idea sheets without attributing them to a face.
-- `get_option_table_options()` — returns a dict mapping human-readable option names to their generator functions, used to populate the GUI's dropdown/table of example actions.
+- `get_option_table_options()` — returns a dict mapping human-understandable option names to their generator functions, used to populate the GUI's dropdown/table of example actions.
 
 **`w1_app.py`** — the tkinter GUI:
 - A dark-themed desktop window with labeled entry fields for `world_name`, `worlds_dir`, `me_name`, `you_name`, and `output_dir`.

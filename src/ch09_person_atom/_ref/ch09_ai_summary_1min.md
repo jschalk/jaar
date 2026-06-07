@@ -1,6 +1,6 @@
 # ch09_person_atom — Chapter Summary
 
-*This summary is authored by AI.*
+*This summary is authored by AI 5-26-2026.*
 
 ## 1. Title and Summary Declaration
 
@@ -49,4 +49,4 @@ Ch09's `ch09_semantic_types.py` re-exports types from ch03, ch05, ch06 with no a
 
 **`jvalues_different(dimen, x_obj, y_obj)`** compares two objects of a given dimension to determine what atom(s) would need to be generated to transform one into the other — the basis for diff-generation between two `PersonUnit` states.
 
-Together, `PersonAtom`s form a complete, ordered, reversible description of any transformation between two `PersonUnit` states. This chapter is the foundation for ch10 (lessons/deltas) and ch11 (the listening/synchronization process).
+Together, `PersonAtom`s form a complete, ordered, reversible description of any transformation between two `PersonUnit` states. This chapter is the foundation for future chapters that use PersonAtoms to communicate indivisible data.

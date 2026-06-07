@@ -971,3 +971,7 @@ def test_get_insert_into_heard_raw_sqlstrs_ReturnsObj_Moment_Nabu_Dimens(
         print(f'{sqlstr_ref}= "{h_raw_insert_select}"')
         # print(f""""{h_raw_tablename}": {sqlstr_ref},""")
         assert insert_h_raw_sqlstrs.get(h_raw_tbl) == h_raw_insert_select
+
+
+# consider moving brixk_src to different chapter
+# brixk_vld

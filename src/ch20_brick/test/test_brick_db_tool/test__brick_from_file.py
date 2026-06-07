@@ -12,7 +12,7 @@ from openpyxl import Workbook
 
 def test_get_excel_reader_config_path_ReturnsObj() -> str:
     # ESTABLISH
-    chapter_dir = create_path("src", "ch20_brick")
+    chapter_dir = create_path(kw.src, "ch20_brick")
     # WHEN / THEN
     assert get_excel_reader_config_path() == create_path(
         chapter_dir, "excel_reader.json"

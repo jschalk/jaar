@@ -113,6 +113,18 @@ def get_python_files_with_flag(directory, x_str=None) -> dict[str, list]:
     return py_files
 
 
+def get_keyword_scope_files(directory: str) -> set[str]:
+    dir_files = set()
+
+    for root, _, files in os_walk(directory):
+        for file in files:
+            if file.endswith(".py") or file.endswith(".json") or file.endswith(".md"):
+                full_path = os_path_join(root, file)
+                dir_files.add(full_path)
+
+    return dir_files
+
+
 def get_json_files(directory) -> set[str]:
     json_files = set()
 

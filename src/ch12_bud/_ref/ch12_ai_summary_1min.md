@@ -35,7 +35,7 @@ New semantic types introduced in `ch12_semantic_types.py`:
 
 `ch12_bud` introduces the **time dimension** to keg's fund-flow system. Where ch03 defined how funds are distributed across contacts within a single `PersonUnit` evaluation, ch12 defines how those distributions are recorded as time-stamped transactions and aggregated across time.
 
-**`TranUnit`** is the atomic financial record: a transfer of `amount` (`FundNum`) from a source person (`src`) to a destination contact (`dst`) at a specific `tran_time` (`TimeNum`). It is keg's equivalent of a double-entry ledger line.
+**`TranUnit`** is the atomic fund record: a transfer of `amount` (`FundNum`) from a source person (`src`) to a destination contact (`dst`) at a specific `tran_time` (`TimeNum`). It is keg's equivalent of a double-entry ledger line.
 
 **`TranBook`** aggregates `TranUnit`s into a three-level nested dictionary: `person_name → contact_name → tran_time → amount`. It tracks a `moment_rope` scope and provides:
 - `add_tranunit` — validates against blocked times and a maximum time ceiling before inserting.
@@ -49,4 +49,4 @@ New semantic types introduced in `ch12_semantic_types.py`:
 
 **`cell_main.py`** and **`weighted_facts_tool.py`** (not read in full) implement the cell-based distribution logic — the mechanism by which a `BudUnit`'s quota is recursively divided among listening participants up to `celldepth` levels deep, weighted by the contact cred/debt lumen values established in ch03.
 
-Ch12 is the first chapter to introduce `TimeNum` as a first-class type, setting up the absolute time number line that ch14 will map to human calendar concepts.
+Ch12 is the first chapter to introduce `TimeNum` as a first-class type, setting up the time numbers for later.

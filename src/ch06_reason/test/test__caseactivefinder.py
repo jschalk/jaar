@@ -6,6 +6,7 @@ from ch99_glossary.ch_keyword import Ch06Keywords as kw, ExampleStrs as exx
 from dataclasses import dataclass
 from plotly.graph_objects import Figure as plotly_figure, Scatter as plotly_Scatter
 from pytest import raises as pytest_raises
+from ch99_glossary.ch_keyword import Ch06Keywords as kw
 
 
 def test_CaseActiveFinder_Exists():
@@ -411,7 +412,7 @@ def check_show_caseactivefinder_scenarios(graphics_bool: bool):
     fig = get_fig(pd, graphics_bool)
     linel = 0
     test_cases_csv_path = create_path(
-        "src", "ch06_reason", "test", "caseactivefinder_test_cases.csv"
+        kw.src, "ch06_reason", "test", "caseactivefinder_test_cases.csv"
     )
     test_cases_types = {
         "case_desc": "TEXT",

@@ -46,6 +46,6 @@ Ontology note:
 
 **`etl_heard_vld_tables_to_mind_moment_jsons(cursor, moment_mstr_dir)`** — iterates all `moment_rope`s from `momentunit_h_vld`, calls `get_moment_dict_from_heard_tables` for each, and writes the result as a `moment.json` file to the appropriate directory. The inline comment notes a known architectural tension: using rope-based file paths is idiomatic but problematic when `moment_rope` contains characters that don't translate to valid OS paths — a hash-based directory scheme is suggested as an alternative.
 
-**`etl_heard_raw_tables_to_lego_moment_ote1_agg`** — builds the `moment_ote1_agg` table: a mapping of `(moment_rope, person_name, spark_num) → bud_time`, which later tells ch27 which spark to apply at which budget time.
+**`etl_heard_raw_tables_to_lego_moment_ote1_agg`** — builds the `moment_ote1_agg` table: a mapping of `(moment_rope, person_name, spark_num) → bud_time`, which tells later chapters which spark to apply at which budget time.
 
-**`etl_heard_vld_to_lego_spark_person_csvs`** — splits validated `h_vld` person dimension tables into per-moment/per-person/per-spark CSV files on disk, organized as `moments/{moment}/persons/{person}/sparks/{spark_num}/{dimen_h_vld_put.csv}`. These CSVs are the raw material ch27 converts into `LessonUnit`s.
+**`etl_heard_vld_to_lego_spark_person_csvs`** — splits validated `h_vld` person dimension tables into per-moment/per-person/per-spark CSV files on disk, organized as `moments/{moment}/persons/{person}/sparks/{spark_num}/{dimen_h_vld_put.csv}`. These CSVs are the raw material later chapters convert into `LessonUnit`s.

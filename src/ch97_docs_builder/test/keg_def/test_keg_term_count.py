@@ -143,22 +143,26 @@ def test_get_count_keg_terms_by_chapters_CountsTerms_Scenario0_SrcDir():
     # THEN
     keg_terms = set(get_keg_definitions().keys())
     assert set(keg_terms_by_chapters.keys()) == keg_terms
-    # TODO move this to function in glossary_definition.py
+    # # TODO move this to function in glossary_definition.py
     # # This part finds all keg_terms used only in one chapter and changes
     # # valid_ch from range to single chapter
     # keywords_src_config = get_keywords_src_config()
     # for keg_term in sorted(keg_terms_by_chapters.keys()):
     #     ch_dir_dict = keg_terms_by_chapters.get(keg_term)
-    #     if len(ch_dir_dict) == 1:
-    #         if keyword_config := keywords_src_config.get(keg_term):
-    #             lone_ch = list(ch_dir_dict.values())[0]
-    #             # print(f"{set(ch_dir_dict.keys())=}")
-    #             print(f"{keg_term} {ch_dir_dict=} {lone_ch=}")
+    #     # if len(ch_dir_dict) == 2:
+    #     if keyword_config := keywords_src_config.get(keg_term):
+    #         if len(ch_dir_dict) > 0:
+    #             lone_ch = list(ch_dir_dict.keys())[0]
     #             x_valid_ch = keyword_config.get(kw.valid_ch)
-    #             print(f"{x_valid_ch=}")
-    #             keyword_config[kw.valid_ch] = str(lone_ch)
-    # src_keywords_src_path = create_src_keywords_src_path("src")
+    #             if str(lone_ch) != x_valid_ch:
+    #                 # print(f"{set(ch_dir_dict.keys())=}")
+    #                 # print(f"{keg_term} {ch_dir_dict=} {lone_ch=} {x_valid_ch=}")
+    #                 print(f"{keg_term} {sorted(set(ch_dir_dict.keys()))}")
+    #                 # print(f"{x_valid_ch=}")
+    #                 keyword_config[kw.valid_ch] = str(lone_ch)
+    # src_keywords_src_path = create_src_keywords_src_path(kw.src)
     # save_json(src_keywords_src_path, None, keywords_src_config)
+    # assert 1 == 2
     # TODO consider adapting this to ch01
     # TODO consider finding all terms used twice and change keyword src.
     # TODO consider replacing all range with individual listed

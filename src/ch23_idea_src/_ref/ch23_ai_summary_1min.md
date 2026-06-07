@@ -33,7 +33,7 @@ Ontology note:
 
 ## 4. Summary of What This Chapter Does
 
-`ch23_idea_src` is the **entry point of the ETL pipeline** — where raw human-authored Excel data ("ideas") is first read, lightly transformed, and written out as structured brick DataFrames ready for validation in ch24.
+`ch23_idea_src` is the **entry point of the ETL pipeline** — where raw human-authored Excel data ("ideas") is first read, lightly transformed, and written out as structured brick DataFrames ready for validation in later chapters.
 
 **`fission_step.py`** — data transformation functions applied to raw idea DataFrames before they become bricks. Each function is a pure DataFrame → DataFrame transform:
 

@@ -19,5 +19,5 @@ None. This is chapter zero — the base of the inductive stack. It imports only 
 - `csv_toolbox.py` — CSV reading with type coercion, CSV-to-SQLite bridging.
 - `plotly_toolbox.py` — minimal Plotly charting wrappers.
 
-The chapter establishes the project's coding style: highly defensive null handling, consistent type aliasing, and thin wrappers around standard library calls with explicit, readable names.
+The chapter establishes the project's coding style: highly defensive null handling, consistent type aliasing, and thin wrappers around standard library calls with explicit, understandable names.
 

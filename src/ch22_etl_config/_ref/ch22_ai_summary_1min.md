@@ -32,7 +32,7 @@ Ontology note:
 
 ## 4. Summary of What This Chapter Does
 
-`ch22_etl_config` is the configuration and orchestration backbone of the ETL pipeline — it defines the stage ordering, dimension abbreviations, SQL generation utilities, and Excel file collection tools that the actual ETL execution chapters (ch24 onward) consume.
+`ch22_etl_config` is the configuration and orchestration backbone of the ETL pipeline — it defines the stage ordering, dimension abbreviations, SQL generation utilities, and Excel file collection tools that the actual ETL execution chapters consume.
 
 **`etl_config.py`** — the core configuration module:
 

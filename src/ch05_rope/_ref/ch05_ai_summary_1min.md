@@ -1,6 +1,6 @@
 # ch05_rope — Chapter Summary
 
-*This summary is authored by AI.*
+*This summary is authored by AI 5-26-2026.*
 
 ## 1. Title and Summary Declaration
 
@@ -31,12 +31,12 @@ Ch05 introduces no new numeric types, only new string-based structural types.
 
 ## 4. Summary of What This Chapter Does
 
-`ch05_rope` defines the **address system** used throughout keg to identify any node in the plan tree. The core idea: reality is organized as a hierarchy of named nodes, and any node can be uniquely addressed by its path from the root — this path is called a `RopeTerm`.
+`ch05_rope` defines the **address system** used throughout keg to identify any node in a tree. The core concept: reality is organized as a hierarchy of named nodes, and any node can be uniquely addressed by its path from the root — this path is called a `RopeTerm`.
 
 **New semantic types introduced:**
 - `KnotTerm` — the delimiter character that separates labels within a rope (defaults to `";"`). This directly parallels `GroupMark` from ch03, which used the same default separator to distinguish group names from contact names. In ch05 the concept is generalized into the tree-path domain.
 - `LabelTerm` — a single node name; must not contain the `KnotTerm`.
-- `RopeTerm` — a full path string composed of `LabelTerm`s joined by `KnotTerm`s, always beginning and ending with the knot (e.g. `";root;tasks;cooking;"`).
+- `RopeTerm` — a full path string composed of `LabelTerm`s joined by `KnotTerm`s, always starts and ends with the knot (e.g. `";root;tasks;cooking;"`).
 - `FirstLabel` — the top-level label in a rope, the root of a subtree.
 
 **Key functions in `rope.py`:**
@@ -49,4 +49,4 @@ Ch05 introduces no new numeric types, only new string-based structural types.
 - `get_unique_short_ropes(ropes_set, knot)` — produces the shortest unambiguous label suffix for each rope in a set (useful for display).
 - `rope_is_valid_dir_path(rope, knot)` — checks if a rope can be mapped to a valid OS file path, enabling the file-system-backed persistence used in later chapters.
 
-The rope system is the backbone of every subsequent chapter. Every `PlanUnit`, every `ReasonUnit`, every `FactUnit` is identified by a `RopeTerm`. The tree structure of plans is navigated entirely through rope operations.
+The rope system is the backbone of every subsequent chapter. A tree structure navigations can/will be done entirely through rope operations.

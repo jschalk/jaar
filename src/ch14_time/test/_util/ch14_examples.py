@@ -83,7 +83,7 @@ class Ch14ExampleStrs(str, Enum):
     Obama = "Obama"
     Preston = "Preston"
     Quorum = "Quorum"
-    RioGrande = "RioGrande"
+    Rio = "Rio"
     Simon = "Simon"
     Trump = "Trump"
 
@@ -404,7 +404,7 @@ An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea
 18 19 20 21 22      18 19 20 21 22      18 19 20 21 22      18 19 20 21 22
 23 24               23 24               23 24               23 24         
 
-  RioGrande             Simon               Trump     
+     Rio                Simon               Trump     
 An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea
        0  1  2             0  1  2             0  1  2
  3  4  5  6  7       3  4  5  6  7       3  4  5  6  7

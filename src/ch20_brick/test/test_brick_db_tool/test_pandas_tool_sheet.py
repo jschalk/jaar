@@ -30,7 +30,7 @@ def test_append_df_to_excel_CreatesSheet(temp3_fs):
     append_data = {
         "Name": ["Alice", "Bob"],
         "Age": [25, 30],
-        "City": ["New York", "Los Angeles"],
+        "City": ["New York", "San Francisco"],
     }
     append_df = DataFrame(append_data)
     set_dir(str(temp3_fs))
@@ -47,7 +47,7 @@ def test_append_df_to_excel_CreatesSheet(temp3_fs):
     expected_rows = [
         ("Name", "Age", "City"),
         ("Alice", 25, "New York"),
-        ("Bob", 30, "Los Angeles"),
+        ("Bob", 30, "San Francisco"),
     ]
     assert rows == expected_rows
 
@@ -64,7 +64,7 @@ def test_append_df_to_excel_AppendsToSheet(temp3_fs):
     append_data = {
         "Name": ["Alice", "Bob"],
         "Age": [25, 30],
-        "City": ["New York", "Los Angeles"],
+        "City": ["New York", "San Francisco"],
     }
     initial_df = DataFrame(initial_data)
     append_df = DataFrame(append_data)
@@ -82,7 +82,7 @@ def test_append_df_to_excel_AppendsToSheet(temp3_fs):
         ("John", 40, "Boston"),
         ("Doe", 50, "Chicago"),
         ("Alice", 25, "New York"),
-        ("Bob", 30, "Los Angeles"),
+        ("Bob", 30, "San Francisco"),
     ]
     assert rows == expected_rows
 
@@ -93,7 +93,7 @@ def sample_dataframe():
     data = {
         "Name": ["Alice", "Bob", "Charlie"],
         "Age": [25, 30, 35],
-        "City": ["New York", "Los Angeles", "Chicago"],
+        "City": ["New York", "San Francisco", "Chicago"],
     }
     return DataFrame(data)
 

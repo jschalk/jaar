@@ -515,10 +515,7 @@ class ETLApp(tk_Tk):
         def _world_path() -> str:
             from os.path import join as os_path_join
 
-            return os_path_join(
-                self._worlds_dir.get().strip(),
-                var.get().strip(),
-            )
+            return os_path_join(self._worlds_dir.get().strip(), var.get().strip())
 
         def _open_world():
             path = _world_path()

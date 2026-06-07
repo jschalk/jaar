@@ -55,6 +55,6 @@ New semantic types introduced in `ch10_semantic_types.py`:
 
 **`LassoUnit`** (in `lasso.py`) is a small path-construction helper that converts a `MomentRope` into an OS directory path — bridging the rope addressing system to the file system layout used for persisting lesson and gut files.
 
-**`legible.py`** (not read in full) provides human-readable representations of deltas and atoms for debugging and reporting.
+**`legible.py`** (not read in full) provides human-understandable representations of deltas and atoms for debugging and reporting.
 
 Together, ch10 establishes the full change-tracking and persistence layer: any transformation of a `PersonUnit` can be expressed as a named, ordered, file-backed `LessonUnit` attributed to a specific face and moment.

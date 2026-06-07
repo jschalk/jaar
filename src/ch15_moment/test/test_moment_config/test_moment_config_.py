@@ -13,7 +13,7 @@ from ch99_glossary.ch_keyword import Ch15Keywords as kw, ExampleStrs as exx
 
 def test_moment_config_path_ReturnsObj_Moment() -> str:
     # ESTABLISH / WHEN / THEN
-    chapter_dir = create_path("src", "ch15_moment")
+    chapter_dir = create_path(kw.src, "ch15_moment")
     assert moment_config_path() == create_path(chapter_dir, "moment_config.json")
 
 

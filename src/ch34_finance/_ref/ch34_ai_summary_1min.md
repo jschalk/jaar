@@ -31,4 +31,4 @@ Ch34 is an **empty stub**. The `src/ch34_finance/` directory contains only `__in
 
 The ref file and ontology note indicate the intended purpose: financial modeling tools that operate over `PitchUnit`s (ch33) — specifically measuring the financial implications of different world scenarios represented by competing `WorldDir` configurations. This would close the loop between the negotiation layer (ch33) and quantified financial outcomes.
 
-As of the cloned repository state on 5-26-2026, this chapter has not been implemented. It is a reserved chapter number in the inductive chain, positioned after the negotiation scaffold (ch33) and before the person viewer web app (ch35).
+As of the cloned repository state on 5-26-2026, this chapter has not been implemented. It is a reserved chapter number in the inductive chain, positioned after the negotiation scaffold (ch33) and before the person viewer web app in future chapters.

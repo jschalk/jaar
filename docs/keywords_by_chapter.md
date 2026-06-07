@@ -1,11 +1,11 @@
 # Keywords by Chapter
 
 ## Keywords by Chapter
-- ch00_py: Keyword, ch00, filename, glossary, keyword, semantic_type, shop, sqlite_datatype
+- ch00_py: Keyword, ch00, filename, glossary, keyword, semantic_type, shop, sqlite_datatype, src
 - ch01_keyword: ch01, question_tier, sort_ordinal, valid_ch
 - ch02_allot: GrainNum, PoolNum, WeightNum, ch02
-- ch03_contact: BreakTerm, ContactName, FundGrain, FundNum, GroupMark, GroupTitle, HealerName, NameTerm, RespectGrain, RespectNum, TitleTerm, awardee_title, awardunits, ch03, contact_cred_lumen, contact_debt_lumen, contact_name, credor_pool, debtor_pool, fund_agenda_give, fund_agenda_ratio_give, fund_agenda_ratio_take, fund_agenda_take, fund_give, fund_grain, fund_take, give_force, group_cred_lumen, group_debt_lumen, group_title, groupmark, groupunits, inallocable_contact_debt_lumen, irrational_contact_debt_lumen, labor_title, labors, memberships, parent_solo, rational, respect_grain, solo, take_force, thinkout, workforceheir, workforceunit
-- ch04_workforce: LaborHeir, ch04, laborheir, person, person_name, person_name_is_workforce
+- ch03_contact: BreakTerm, ContactName, FundGrain, FundNum, GroupMark, GroupTitle, HealerName, NameTerm, RespectGrain, RespectNum, TitleTerm, awardee_title, awardunits, ch03, contact_cred_lumen, contact_debt_lumen, contact_name, credor_pool, debtor_pool, fund_agenda_give, fund_agenda_ratio_give, fund_agenda_ratio_take, fund_agenda_take, fund_give, fund_grain, fund_take, give_force, group_cred_lumen, group_debt_lumen, group_title, groupmark, groupunits, inallocable_contact_debt_lumen, irrational_contact_debt_lumen, labor_title, labors, memberships, rational, respect_grain, solo, take_force, thinkout, workforceheir, workforceunit
+- ch04_workforce: LaborHeir, ch04, laborheir, parent_solo, person, person_name, person_name_is_workforce
 - ch05_rope: FactNum, FirstLabel, KnotTerm, LabelTerm, ManaGrain, ReasonNum, RopeTerm, ch05, fact, knot, mana_grain, meaning, parent_rope
 - ch06_reason: active_requisite, case_active, case_task, cases, ch06, fact_context, fact_lower, fact_state, fact_upper, factheirs, factunits, parent_heir_active, reason_active, reason_context, reason_divisor, reason_lower, reason_state, reason_task, reason_upper, reasonunits
 - ch07_plan: addin, all_contact_cred, all_contact_debt, awardheirs, awardlines, begin, ch07, close, denom, descendant_pledge_count, fund_cease, fund_onset, fund_pool, fund_ratio, gogo_calc, gogo_want, healer_name, healerunit, healerunit_ratio, is_expanded, kar, kids, morph, numor, plan, plan_active, plan_active_hx, plan_fund_total, plan_label, plan_rope, plan_task, plan_uid, pledge, problem_bool, range_evaluated, range_inheritors, reasonheirs, stop_calc, stop_want, tree_level, tree_traverse_count
@@ -33,7 +33,8 @@
 - ch33_pitch: Deal, Gift, Peer, PitchID, PitchUnit, ch33, deal, gift, offer, peer, pitch, pitch_id, pitcher_name, pitchs, request
 - ch34_finance: ch34, finance, financial
 - ch35_person_viewer: ch35
-- ch90_world_app: ch90
+- ch40_on_x0: ch40, ch90
+- ch90_world_app: 
 - ch97_docs_builder: ch97
 - ch98_linter: ch98
 - ch99_glossary: ch99

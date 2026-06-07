@@ -128,7 +128,7 @@ def run_fission_steps(df: DataFrame, fission_steps: list[str]) -> DataFrame:
         if step_name not in allowed_fission_steps:
             raise ValueError(
                 f"run_fission_steps encountered unknown fission step '{step_name}'. "
-                f"Registered steps: {list(fission_steps.keys())}"
+                f"Registered steps: {list(all_fission_steps.keys())}"
             )
         df = all_fission_steps[step_name](df)
         ke_sorted = get_keg_elements_sort_order()
