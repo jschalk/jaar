@@ -8,8 +8,7 @@ def max_tree_traverse_default() -> int:
 
 def person_config_path() -> str:
     """src/ch08_person_logic/person_config.json"""
-    chapter_dir = create_path("src", "ch08_person_logic")
-    return create_path(chapter_dir, os_path_join("person_config.json"))
+    return create_path("src", "ch08_person_logic", "person_config.json")
 
 
 def get_person_config_dict() -> dict[str, dict]:
