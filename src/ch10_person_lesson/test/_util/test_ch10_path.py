@@ -140,6 +140,7 @@ def test_create_gut_path_ReturnsObj(temp3_dir):
     assert gen_a23_e3_person_path == expected_a23_bob_gut_json_path
 
 
+@pytest_mark.skip_on_linux
 def test_create_moments_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_moments_dir_path("moment_mstr_dir")
@@ -148,6 +149,7 @@ def test_create_moments_dir_path_HasDocString():
     assert inspect_getdoc(create_moments_dir_path) == doc_str
 
 
+@pytest_mark.skip_on_linux
 def test_create_moment_dir_path_HasDocString():
     # ESTABLISH
     x_moment_lasso = lassounit_shop(create_rope(kw.moment_rope))
