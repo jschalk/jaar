@@ -596,17 +596,18 @@ def test_validate_labelterm_Scenario1_RaisesErrorWhenLabelTerm():
     assert str(excinfo.value) == assertion_failure_str
 
 
-@pytest_mark.skip_on_linux
 def test_rope_is_valid_dir_path_ReturnsObj_Scenario0_simple_knot():
     # ESTABLISH
     comma_str = ","
     # WHEN / THEN
+    assert not rope_is_valid_dir_path("", knot=comma_str)
+    assert not rope_is_valid_dir_path(None, knot=comma_str)
     assert rope_is_valid_dir_path(",run,", knot=comma_str)
     assert rope_is_valid_dir_path(",run,sport,", knot=comma_str)
-    assert not rope_is_valid_dir_path("run,sport?,", comma_str)
+    assert not rope_is_valid_dir_path("run,sport,", comma_str)
+    assert not rope_is_valid_dir_path(",run,sport", comma_str)
 
 
-@pytest_mark.skip_on_linux
 def test_rope_is_valid_dir_path_ReturnsObj_Scenario1_complicated_knot():
     # ESTABLISH
     colon_str = ":"
