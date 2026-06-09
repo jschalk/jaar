@@ -2,19 +2,19 @@ row_number,question
 0,Have you heard of 'Kegology'?
 1,Have you heard the word 'Philosophy'?
 2,Do you believe listening is important?
-3,Did you read that the keg_definition of 'KegWheel' is 'Theory of Political Power learned from Kamil Kazani. The political world changing is represented as a wheel where some people are going up in Prestige and some are going down. Those going down are incentized to cause chaos to try to get back up. Not used in codebase.'.
+3,"Did you read that the keg_definition of 'Governance' is 'Moments that have an active budget and ledger, and for which some people crawl. A government that exists and is important.'."
 4,Did you read that the keg_definition of 'Prestige' is 'Within KegWheel Theory Prestige is the measure of the zero-sum game of power. Any Prestige gained is by definition someone else's lost. Within a MomentUnit. Not used in codebase.'.
-5,Did you read that the keg_definition of 'dive' is 'To go from living on land to swimming with fearlessness. Not used in codebase.'.
-6,"Did you read that the keg_definition of 'factory' is 'Not used in codebase. The factory method in programming is very important. However because I want 'fact' only to refer to the Keg concept I don't use the word 'factory', instead I use 'shop'.'."
-7,Did you read that the keg_definition of 'heart' is 'Not used in codebase.'.
-8,Did you read that the keg_definition of 'infinity' is 'As described in Totality and Infinity. Not used in codebase.'.
-9,Did you read that the keg_definition of 'jump' is 'To use keg requires a human to jump and try. Not easy. Not used in codebase.'.
+5,Did you read that the keg_definition of 'crawl' is 'The opposite of 'swim'. To be slave to one. To live in one moment as it allows.'.
+6,Did you read that the keg_definition of 'dive' is 'To go from living on land to swimming with fearlessness. Not used in codebase.'.
+7,"Did you read that the keg_definition of 'factory' is 'Not used in codebase. The factory method in programming is very important. However because I want 'fact' only to refer to the Keg concept I don't use the word 'factory', instead I use 'shop'.'."
+8,Did you read that the keg_definition of 'governance' is 'A moment that has Governance. Check 'governance' definition.'.
+9,Did you read that the keg_definition of 'heart' is 'Not used in codebase.'.
 10,Have you heard of Excel spreadsheet application?
-11,"Did you read that the keg_definition of 'keg_wheel' is 'A instance of KegWheel, within a single MomentUnit. Not used in codebase.'."
-12,Did you read that the keg_definition of 'kegbox' is 'Anything that holds Keg worlds. Usually a computer thought it's possible to work with paper.'.
-13,Did you read that the keg_definition of 'pandas_DataFrame' is 'Not used in codebase. Added as keyword it is confirmed never to appear.'.
-14,Did you read that the keg_definition of 'power' is 'Not used in codebase.'.
-15,Did you read that the keg_definition of 'prestige' is 'An instance of Prestige power. Not used in codebase.'.
+11,Did you read that the keg_definition of 'infinity' is 'As described in Totality and Infinity. Not used in codebase.'.
+12,Did you read that the keg_definition of 'jump' is 'To use keg requires a human to jump and try. Not easy. Not used in codebase.'.
+13,"Did you read that the keg_definition of 'keg_wheel' is 'A instance of KegWheel, within a single MomentUnit. Not used in codebase.'."
+14,Did you read that the keg_definition of 'kegbox' is 'Anything that holds Keg worlds. Usually a computer thought it's possible to work with paper.'.
+15,Did you read that the keg_definition of 'pandas_DataFrame' is 'Not used in codebase. Added as keyword it is confirmed never to appear.'.
 16,Did you read that the keg_definition of 'swim' is 'To live with faith. To be slave to many masters instead of a slave to one. To live in many moments. Not used in codebase.'.
 17,Did you read that the keg_definition of 'totality' is 'As described in Totality and Infinity. Not used in codebase.'.
 18,Did you read that the keg_definition of 'ch00' is 'Creates helper tools for OS and python data manipulation.'.
@@ -652,3 +652,7 @@ row_number,question
 648,Did you read that the keg_definition of 'request' is 'Ch33 Definition needed.'.
 649,Did you read that the keg_definition of 'finance' is 'Definition needed.'.
 650,Did you read that the keg_definition of 'financial' is 'Definition needed.'.
+651,"Did you read that the keg_definition of 'Hayek' is 'Fredrich Hayek, philosopher. Often incorrectly interpreted and since he's dead he can't refute them.'."
+652,Did you read that the keg_definition of 'KegWheel' is 'Theory of Political Power learned from Kamil Kazani. The political world changing is represented as a wheel where some people are going up in Prestige and some are going down. Those going down are incentized to cause chaos to try to get back up.'.
+653,Did you read that the keg_definition of 'power' is 'Not used in codebase.'.
+654,Did you read that the keg_definition of 'prestige' is 'An instance of Prestige.'.

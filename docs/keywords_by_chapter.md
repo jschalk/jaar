@@ -33,7 +33,7 @@
 - ch33_pitch: Deal, Gift, Peer, PitchID, PitchUnit, ch33, deal, gift, offer, peer, pitch, pitch_id, pitcher_name, pitchs, request
 - ch34_finance: ch34, finance, financial
 - ch35_person_viewer: ch35
-- ch40_on_x0: KegWheel, ch40, ch90, power, prestige
+- ch40_on_x0: Hayek, KegWheel, ch40, ch90, power, prestige
 - ch90_world_app: 
 - ch97_docs_builder: ch97
 - ch98_linter: ch98

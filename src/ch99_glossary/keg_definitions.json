@@ -255,6 +255,7 @@
   "h_agg": "5 character abbreviation of heard_agg. stage_type_order=11 Populated by aggregated Heard Raw tables. Nabu number conversions take place here.", 
   "h_raw": "5 character abbreviation of heard_raw. stage_type_order=10 Populated by Sound Valid tables", 
   "h_vld": "5 character abbreviation of heard_vld. stage_type_order=12 Populated by aggregated and Nabu changed Heard Agg tables", 
+  "Hayek": "Fredrich Hayek, philosopher. Often incorrectly interpreted and since he's dead he can't refute them.", 
   "healer_name": ", Healer seed.", 
   "healer_name_ERASE": "Definition needed.", 
   "healer_name_ERASE_inx": "The 'healer_name_ERASE' value after Translate.", 

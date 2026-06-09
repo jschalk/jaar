@@ -10133,6 +10133,7 @@ class Ch40Keywords(str, Enum):
     GrainNum = "GrainNum"
     GroupMark = "GroupMark"
     GroupTitle = "GroupTitle"
+    Hayek = "Hayek"
     HealerName = "HealerName"
     INSERT = "INSERT"
     KegWheel = "KegWheel"
