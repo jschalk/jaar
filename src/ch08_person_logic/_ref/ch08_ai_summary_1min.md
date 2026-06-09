@@ -53,7 +53,7 @@ A new semantic type is introduced in `ch08_semantic_types.py`: `PersonName` (a `
 6. **Iterative plan-active loop** — repeatedly traverses the plan tree setting `plan_active` for each plan based on its reasons and facts, until no more changes occur (the system reaches a `rational` stable state, or `max_tree_traverse` is reached).
 7. **Set fund attrs** — distributes the `fund_pool` down the tree proportionally by `kar` weights using `allot_scale`, assigning each plan its `fund_onset` and `fund_cease`.
 8. **Set contact/group fund flows** — propagates fund give/take from plan award structures back to contacts and groups.
-9. **Set keep attrs** — identifies "keep" plans (healer-designated plans) for governance tracking.
+9. **Set keep attrs** — identifies "keep" plans (healer-designated plans) for some kind of tracking.
 
 **`get_agenda_dict()`** returns the subset of plans that are active pledges with a qualifying reason context — this is the person's current to-do list.
 
