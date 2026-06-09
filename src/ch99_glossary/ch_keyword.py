@@ -10517,6 +10517,7 @@ class Ch40Keywords(str, Enum):
     planroot = "planroot"
     pledge = "pledge"
     pledges_count = "pledges_count"
+    power = "power"
     prnawar = "prnawar"
     prncase = "prncase"
     prncont = "prncont"

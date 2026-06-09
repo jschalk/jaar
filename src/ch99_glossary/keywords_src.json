@@ -460,7 +460,7 @@
   "planroot": {"valid_ch": "8:"}, 
   "pledge": {"sort_ordinal": 134, "valid_ch": "7:"}, 
   "pledges_count": {"sort_ordinal": 197, "valid_ch": "20:"}, 
-  "power": {"valid_ch": ""}, 
+  "power": {"valid_ch": "40"}, 
   "prestige": {"valid_ch": ""}, 
   "prnawar": {"valid_ch": "8:"}, 
   "prncase": {"valid_ch": "8:"}, 

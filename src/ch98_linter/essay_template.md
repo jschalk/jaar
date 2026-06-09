@@ -13,12 +13,19 @@ First paragraph.
 
 Paragraph with footnote.[^1] Can continue paragraph
 
-paragraph.
+Another paragraph.
 
 <div align="center"><img src="images/example_02.png" alt="A different description of image" width="700"></div>
 
-> [!IMPORTANT]
-> Important note that should stand out from the surrounding text.
+
+Another paragraph and then a longer quote.
+
+> Ideas of economists and political philosophers, both when they are right and when they are wrong, are more than is commonly understood. 
+
+<div align="center">
+
+### Important note that should stand out from the surrounding text.
+</div>
 
 Closing statement connects to tagline.[^2]
 

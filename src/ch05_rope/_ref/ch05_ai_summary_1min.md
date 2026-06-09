@@ -45,7 +45,7 @@ Ch05 introduces no new numeric types, only new string-based structural types.
 - `get_parent_rope(rope)` / `get_tail_label(rope)` — navigate up and down the tree.
 - `get_ancestor_ropes(rope)` — returns the full list of ancestor paths from root to the given rope.
 - `is_sub_rope(ref_rope, sub_rope)` / `is_heir_rope(src, heir)` — test hierarchical containment relationships.
-- `rebuild_rope(subj_rope, old_rope, new_rope)` / `replace_knot(rope, old_knot, new_knot)` — support structural refactoring of the tree.
+- `rebuild_rope(subj_rope, old_rope, new_rope)` / `replace_knot(rope, old_knot, new_knot)` — support structural reorganization of the tree.
 - `get_unique_short_ropes(ropes_set, knot)` — produces the shortest unambiguous label suffix for each rope in a set (useful for display).
 - `rope_is_valid_dir_path(rope, knot)` — checks if a rope can be mapped to a valid OS file path, enabling the file-system-backed persistence used in later chapters.
 

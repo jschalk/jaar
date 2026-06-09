@@ -19,7 +19,7 @@ Let's review
 
 (The only other commodity that is comparable to me is salt. But lets ignore that for now) 
 
-
+To use baking soda from your neighbor is to trust your neighbor and give them power.
 
 
 
