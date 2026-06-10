@@ -138,8 +138,8 @@ def test_make_persondelta_Arg_bk00002_planunit_v0_0_0():
     amy_moment_rope = create_rope("amy56")
     sue_personunit = personunit_shop(exx.sue, amy_moment_rope)
     casa_rope = sue_personunit.make_l1_rope(exx.casa)
-    casa_kar = 31
-    sue_personunit.set_l1_plan(planunit_shop(exx.casa, kar=casa_kar))
+    casa_poynt = 31
+    sue_personunit.set_l1_plan(planunit_shop(exx.casa, poynt=casa_poynt))
     clean_rope = sue_personunit.make_rope(casa_rope, exx.clean)
     sue_personunit.set_plan_obj(planunit_shop(exx.clean, pledge=True), casa_rope)
     x_brick_name = BrickFormatsEnum.bk00002_planunit_v0_0_0
@@ -153,13 +153,13 @@ def test_make_persondelta_Arg_bk00002_planunit_v0_0_0():
     casa_personatom = personatom_shop(kw.person_planunit, kw.INSERT)
     casa_personatom.set_arg(kw.plan_rope, casa_rope)
     casa_personatom.set_arg(kw.pledge, False)
-    casa_personatom.set_arg(kw.kar, casa_kar)
+    casa_personatom.set_arg(kw.poynt, casa_poynt)
     print(f"{casa_personatom=}")
-    assert casa_personatom.get_value(kw.kar) == casa_kar
+    assert casa_personatom.get_value(kw.poynt) == casa_poynt
     clean_personatom = personatom_shop(kw.person_planunit, kw.INSERT)
     clean_personatom.set_arg(kw.plan_rope, clean_rope)
     clean_personatom.set_arg(kw.pledge, True)
-    clean_personatom.set_arg(kw.kar, 1)
+    clean_personatom.set_arg(kw.poynt, 1)
     assert planunit_changunit.c_personatom_exists(casa_personatom)
     assert planunit_changunit.c_personatom_exists(clean_personatom)
     assert len(planunit_changunit.get_ordered_personatoms()) == 2

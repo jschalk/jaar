@@ -231,7 +231,7 @@ def test_get_brickref_obj_HasAttrs_bk00002_planunit_v0_0_0():
     assert headers_list[2] == kw.moment_rope
     assert headers_list[3] == kw.person_name
     assert headers_list[4] == kw.plan_rope
-    assert headers_list[5] == kw.kar
+    assert headers_list[5] == kw.poynt
     assert headers_list[6] == kw.pledge
 
 

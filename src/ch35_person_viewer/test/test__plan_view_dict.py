@@ -38,7 +38,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         kw.plan_label,
         kw.parent_rope,
         kw.kids,
-        kw.kar,
+        kw.poynt,
         kw.plan_uid,
         kw.awardunits,
         kw.reasonunits,

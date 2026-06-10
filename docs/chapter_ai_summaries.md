@@ -254,7 +254,7 @@ Ontology note:
 `ch07_plan` is the first chapter to draw on every prior chapter simultaneously:
 
 - **ch00_py**: null-safe helpers (`get_0_if_None`, `get_1_if_None`, `get_empty_dict_if_None`, `get_False_if_None`, `get_positive_int`).
-- **ch02_allot**: `allot_scale` and `default_grain_num_if_None` — used to distribute a plan's fund pool proportionally among its child plans (via their `kar` weights) and to distribute award funds among `AwardUnit`s.
+- **ch02_allot**: `allot_scale` and `default_grain_num_if_None` — used to distribute a plan's fund pool proportionally among its child plans (via their `poynt` weights) and to distribute award funds among `AwardUnit`s.
 - **ch03_contact**: `AwardUnit`, `AwardHeir`, `AwardLine`, `GroupUnit` — the award system from ch03 is embedded into each `PlanUnit`. Groups receive fund flows via award structures.
 - **ch04_workforce**: `WorkforceUnit`, `WorkforceHeir` — each plan can declare which groups/contactunits are responsible for carrying it out; these inherit down the tree.
 - **ch05_rope**: `RopeTerm`, `create_rope`, `rebuild_rope`, `is_sub_rope`, `find_replace_rope_key_dict`, `all_ropes_between` — the plan tree is entirely organized by rope paths. Every plan has a `parent_rope` and a `plan_label`, and its full identity is its rope.
@@ -272,7 +272,7 @@ Ch07 also introduces `HealerUnit` (in `healer.py`) and `RangeUnit` (in `range_to
 - A **pledge** (`pledge: True`) — a declared commitment that can be active or inactive.
 - A **fact source** (`factunits`) — a local override of incoming facts.
 - A **reason-gated plan** (`reasonunits`) — only active if its conditions are met.
-- A **funded node** — receives a slice of the parent's fund pool proportional to its `kar` weight, tracked via `fund_onset` and `fund_cease`.
+- A **funded node** — receives a slice of the parent's fund pool proportional to its `poynt` weight, tracked via `fund_onset` and `fund_cease`.
 - A **ranged plan** (`begin`, `close`, `addin`, `numor`, `denom`, `morph`) — can represent a numeric interval that can be inherited and morphed by children.
 - A **problem** (`problem_bool`) with designated **healers** (`healerunit`) — plans that flag issues and point to responsible remediation plans.
 
@@ -339,7 +339,7 @@ A new semantic type is introduced in `ch08_semantic_types.py`: `PersonName` (a `
 4. **Clear fund attrs** — resets all fund tracking fields.
 5. **Set factheirs, workforceheirs, awardheirs** — propagates inherited attrs down the plan tree.
 6. **Iterative plan-active loop** — repeatedly traverses the plan tree setting `plan_active` for each plan based on its reasons and facts, until no more changes occur (the system reaches a `rational` stable state, or `max_tree_traverse` is reached).
-7. **Set fund attrs** — distributes the `fund_pool` down the tree proportionally by `kar` weights using `allot_scale`, assigning each plan its `fund_onset` and `fund_cease`.
+7. **Set fund attrs** — distributes the `fund_pool` down the tree proportionally by `poynt` weights using `allot_scale`, assigning each plan its `fund_onset` and `fund_cease`.
 8. **Set contact/group fund flows** — propagates fund give/take from plan award structures back to contacts and groups.
 9. **Set keep attrs** — identifies "keep" plans (healer-designated plans) for some kind of tracking.
 
@@ -484,7 +484,7 @@ Ontology note:
 
 ## 3. Summary of Previous Relevant Chapters
 
-- **ch02_allot**: `allot_scale` — used in `generate_ingest_list` to distribute the listener's `debtor_respect` pool across the speaker's agenda plans proportionally by their `kar` weights.
+- **ch02_allot**: `allot_scale` — used in `generate_ingest_list` to distribute the listener's `debtor_respect` pool across the speaker's agenda plans proportionally by their `poynt` weights.
 - **ch05_rope**: `get_ancestor_ropes`, `get_first_label_from_rope` — used when ingesting plans to create any missing ancestor plans in the listener's tree.
 - **ch07_plan**: `PlanUnit` — the unit of exchange between speaker and listener.
 - **ch08_person_logic**: `PersonUnit`, `ContactUnit` — the listener and speaker objects. `create_empty_person_from_person` and `create_listen_basis` (in `basis_person.py`) create clean shells of a person preserving grain/pool parameters.
@@ -505,7 +505,7 @@ This is the philosophical center of keg, implemented as code. The `listen_to_spe
 2. Gets the perspective person.
 3. If the speaker's belief system is irrational (didn't converge), marks the full speaker `contact_debt_lumen` as `irrational_contact_debt_lumen` — the listener notes the speaker couldn't provide a coherent agenda.
 4. If the speaker has no agenda items, marks the debt as `inallocable_contact_debt_lumen`.
-5. Otherwise, generates the agenda, scales each plan's `kar` by `allot_scale` against the listener's `debtor_respect`, and ingests each plan into the listener's tree via `_ingest_single_planunit`.
+5. Otherwise, generates the agenda, scales each plan's `poynt` by `allot_scale` against the listener's `debtor_respect`, and ingests each plan into the listener's tree via `_ingest_single_planunit`.
 
 **`listen_to_speaker_fact(listener, speaker)`** — fills in missing facts in the listener's plan tree by borrowing matching facts from the speaker. This allows the listener to become aware of real-world state they couldn't observe themselves.
 
@@ -1056,7 +1056,7 @@ Ontology note:
 
 **`fission_step.py`** — data transformation functions applied to raw idea DataFrames before they become bricks. Each function is a pure DataFrame → DataFrame transform:
 
-- `fission_add_ancestor_rope_rows(df)` — inspects all `plan_rope` values in the DataFrame; for any rope that references an ancestor path not already present as a row, it inserts synthetic ancestor rows (with `pledge=0`, `kar=None`). This ensures the plan tree is complete before it reaches the person object.
+- `fission_add_ancestor_rope_rows(df)` — inspects all `plan_rope` values in the DataFrame; for any rope that references an ancestor path not already present as a row, it inserts synthetic ancestor rows (with `pledge=0`, `poynt=None`). This ensures the plan tree is complete before it reaches the person object.
 - `fission_set_pledge_to_one(df)` — sets all `pledge` values to 1 (marking all rows as active pledges).
 - `fission_set_plan_rope_from_health_label(df)` — constructs `plan_rope` values by combining `moment_rope` and `health_label` columns, with strict null validation raising `ValueError` on missing values.
 - `fission_set_moment_rope_from_moment_label(df)` — constructs `moment_rope` from a `moment_label` column.

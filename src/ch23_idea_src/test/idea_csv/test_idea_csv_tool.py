@@ -61,7 +61,7 @@ def test_create_init_idea_csv_strs_ReturnsObj_Scenario0_EmptyMomentUnit(
         "ii00125": "person_name,plan_rope,healer_name,knot\n",
         "ii00126": "person_name,plan_rope,reason_context,reason_state,reason_lower,reason_upper,reason_divisor,knot\n",
         "ii00127": "person_name,plan_rope,reason_context,active_requisite,knot\n",
-        "ii00128": "person_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,kar,pledge,problem_bool,knot\n",
+        "ii00128": "person_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,poynt,pledge,problem_bool,knot\n",
         "ii00129": "moment_rope,person_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,fund_grain,mana_grain,respect_grain,knot\n",
         "ii00142": "otx_title,inx_title,otx_knot,inx_knot,unknown_str\n",
         "ii00143": "otx_name,inx_name,otx_knot,inx_knot,unknown_str\n",
@@ -477,7 +477,7 @@ def test_add_person_to_ii00128_csv_ReturnsObj():
     casa_morph = 27
     casa_gogo_want = 31
     casa_stop_want = 41
-    casa_kar = 2
+    casa_poynt = 2
     casa_pledge = False
     casa_problem_bool = False
     bob_person.add_plan(casa_rope)
@@ -492,7 +492,7 @@ def test_add_person_to_ii00128_csv_ReturnsObj():
         morph=casa_morph,
         gogo_want=casa_gogo_want,
         stop_want=casa_stop_want,
-        kar=casa_kar,
+        poynt=casa_poynt,
         pledge=casa_pledge,
         problem_bool=casa_problem_bool,
     )
@@ -505,7 +505,7 @@ def test_add_person_to_ii00128_csv_ReturnsObj():
 
     # THEN
     root_row = f",,{exx.bob},,{a23_rope},,,,,,,,,1,False,False,;\n"
-    mop_row = f",,{exx.bob},{mop_rope},{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_kar},{casa_pledge},{casa_problem_bool},;\n"
+    mop_row = f",,{exx.bob},{mop_rope},{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_poynt},{casa_pledge},{casa_problem_bool},;\n"
     casa_row = f",,{exx.bob},{casa_rope},,,,,,,,,0,False,False,;\n"
     # print(f"{mop_row=}")
     expected_csv = f"{csv_header}{mop_row}{casa_row}"

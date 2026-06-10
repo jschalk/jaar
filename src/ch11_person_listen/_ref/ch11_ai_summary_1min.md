@@ -21,7 +21,7 @@ Ontology note:
 
 ## 3. Summary of Previous Relevant Chapters
 
-- **ch02_allot**: `allot_scale` — used in `generate_ingest_list` to distribute the listener's `debtor_respect` pool across the speaker's agenda plans proportionally by their `kar` weights.
+- **ch02_allot**: `allot_scale` — used in `generate_ingest_list` to distribute the listener's `debtor_respect` pool across the speaker's agenda plans proportionally by their `poynt` weights.
 - **ch05_rope**: `get_ancestor_ropes`, `get_first_label_from_rope` — used when ingesting plans to create any missing ancestor plans in the listener's tree.
 - **ch07_plan**: `PlanUnit` — the unit of exchange between speaker and listener.
 - **ch08_person_logic**: `PersonUnit`, `ContactUnit` — the listener and speaker objects. `create_empty_person_from_person` and `create_listen_basis` (in `basis_person.py`) create clean shells of a person preserving grain/pool parameters.
@@ -42,7 +42,7 @@ This is the philosophical center of keg, implemented as code. The `listen_to_spe
 2. Gets the perspective person.
 3. If the speaker's belief system is irrational (didn't converge), marks the full speaker `contact_debt_lumen` as `irrational_contact_debt_lumen` — the listener notes the speaker couldn't provide a coherent agenda.
 4. If the speaker has no agenda items, marks the debt as `inallocable_contact_debt_lumen`.
-5. Otherwise, generates the agenda, scales each plan's `kar` by `allot_scale` against the listener's `debtor_respect`, and ingests each plan into the listener's tree via `_ingest_single_planunit`.
+5. Otherwise, generates the agenda, scales each plan's `poynt` by `allot_scale` against the listener's `debtor_respect`, and ingests each plan into the listener's tree via `_ingest_single_planunit`.
 
 **`listen_to_speaker_fact(listener, speaker)`** — fills in missing facts in the listener's plan tree by borrowing matching facts from the speaker. This allows the listener to become aware of real-world state they couldn't observe themselves.
 

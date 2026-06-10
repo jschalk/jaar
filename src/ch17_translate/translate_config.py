@@ -115,7 +115,7 @@ def get_translate_args_obj_types() -> dict[str, str]:
         "reason_lower": "ReasonNum",
         "reason_upper": "ReasonNum",
         "reason_state": "RopeTerm",
-        "kar": "int",
+        "poynt": "int",
         "respect_grain": "float",
         "solo": "int",
         "stop_want": "float",

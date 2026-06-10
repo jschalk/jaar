@@ -51,7 +51,7 @@ def test_get_person_viewer_template_ReturnsObj():
         kw.planroot,
         # kw.problem_bool,
         kw.reasonunits,
-        kw.kar,
+        kw.poynt,
         kw.stop_want,
         kw.pledge,
         kw.contact_cred_lumen,

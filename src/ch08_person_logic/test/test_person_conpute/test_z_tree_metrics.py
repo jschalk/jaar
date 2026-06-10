@@ -84,7 +84,7 @@ def test_PersonUnit_get_tree_metrics_ReturnsANone_pledge_PlanRopeTerm():
     nia_str = "Nia"
     nia_person = personunit_shop(nia_str)
     wk = "wk"
-    nia_person.set_l1_plan(planunit_shop(wk, kar=40))
+    nia_person.set_l1_plan(planunit_shop(wk, poynt=40))
     tree_metrics_before = nia_person.get_tree_metrics()
 
     # WHEN / THEN

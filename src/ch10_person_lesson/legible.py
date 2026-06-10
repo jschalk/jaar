@@ -321,7 +321,7 @@ def add_person_planunit_insert_to_legible_list(
         _numor_value = planunit_atom.get_value("numor")
         _problem_bool_value = planunit_atom.get_value(_problem_bool_str)
         _morph_value = planunit_atom.get_value("morph")
-        _kar_value = planunit_atom.get_value("kar")
+        _poynt_value = planunit_atom.get_value("poynt")
         pledge_value = planunit_atom.get_value("pledge")
         x_str = f"Created Plan '{rope_value}'. "
         if _addin_value is not None:
@@ -338,8 +338,8 @@ def add_person_planunit_insert_to_legible_list(
             x_str += f"problem_bool={_problem_bool_value}."
         if _morph_value is not None:
             x_str += f"morph={_morph_value}."
-        if _kar_value is not None:
-            x_str += f"kar={_kar_value}."
+        if _poynt_value is not None:
+            x_str += f"poynt={_poynt_value}."
         if pledge_value is not None:
             x_str += f"pledge={pledge_value}."
 
@@ -359,7 +359,7 @@ def add_person_planunit_update_to_legible_list(
         numor_value = planunit_atom.get_value("numor")
         problem_bool_value = planunit_atom.get_value(_problem_bool_str)
         morph_value = planunit_atom.get_value("morph")
-        kar_value = planunit_atom.get_value("kar")
+        poynt_value = planunit_atom.get_value("poynt")
         pledge_value = planunit_atom.get_value("pledge")
         x_str = f"Plan '{rope_value}' set these attrs: "
         if addin_value is not None:
@@ -376,8 +376,8 @@ def add_person_planunit_update_to_legible_list(
             x_str += f"problem_bool={problem_bool_value}."
         if morph_value is not None:
             x_str += f"morph={morph_value}."
-        if kar_value is not None:
-            x_str += f"kar={kar_value}."
+        if poynt_value is not None:
+            x_str += f"poynt={poynt_value}."
         if pledge_value is not None:
             x_str += f"pledge={pledge_value}."
 

@@ -60,25 +60,25 @@ def test_PersonUnit_thinkout_Sets_planunit_fund_onset_fund_cease_Scenario1():
 
     auto_str = "auto"
     auto_rope = yao_personunit.make_l1_rope(auto_str)
-    auto_plan = planunit_shop(auto_str, kar=10)
+    auto_plan = planunit_shop(auto_str, poynt=10)
     yao_personunit.set_l1_plan(auto_plan)
 
     carn_str = "carn"
     carn_rope = yao_personunit.make_l1_rope(carn_str)
-    carn_plan = planunit_shop(carn_str, kar=60)
+    carn_plan = planunit_shop(carn_str, poynt=60)
     yao_personunit.set_l1_plan(carn_plan)
     lamb_str = "lambs"
     lamb_rope = yao_personunit.make_rope(carn_rope, lamb_str)
-    lamb_plan = planunit_shop(lamb_str, kar=1)
+    lamb_plan = planunit_shop(lamb_str, poynt=1)
     yao_personunit.set_plan_obj(lamb_plan, parent_rope=carn_rope)
     duck_str = "ducks"
     duck_rope = yao_personunit.make_rope(carn_rope, duck_str)
-    duck_plan = planunit_shop(duck_str, kar=2)
+    duck_plan = planunit_shop(duck_str, poynt=2)
     yao_personunit.set_plan_obj(duck_plan, parent_rope=carn_rope)
 
     coal_str = "coal"
     coal_rope = yao_personunit.make_l1_rope(coal_str)
-    coal_plan = planunit_shop(coal_str, kar=30)
+    coal_plan = planunit_shop(coal_str, poynt=30)
     yao_personunit.set_l1_plan(coal_plan)
 
     assert yao_personunit.planroot.fund_onset is None
@@ -124,25 +124,25 @@ def test_PersonUnit_thinkout_Sets_planunit_fund_onset_fund_cease_Scenario2_Diffe
 
     auto_str = "auto"
     auto_rope = yao_personunit.make_l1_rope(auto_str)
-    auto_plan = planunit_shop(auto_str, kar=10)
+    auto_plan = planunit_shop(auto_str, poynt=10)
     yao_personunit.set_l1_plan(auto_plan)
 
     yarn_str = "yarn"
     yarn_rope = yao_personunit.make_l1_rope(yarn_str)
-    yarn_plan = planunit_shop(yarn_str, kar=60)
+    yarn_plan = planunit_shop(yarn_str, poynt=60)
     yao_personunit.set_l1_plan(yarn_plan)
     lamb_str = "lambs"
     lamb_rope = yao_personunit.make_rope(yarn_rope, lamb_str)
-    lamb_plan = planunit_shop(lamb_str, kar=1)
+    lamb_plan = planunit_shop(lamb_str, poynt=1)
     yao_personunit.set_plan_obj(lamb_plan, parent_rope=yarn_rope)
     duck_str = "ducks"
     duck_rope = yao_personunit.make_rope(yarn_rope, duck_str)
-    duck_plan = planunit_shop(duck_str, kar=2)
+    duck_plan = planunit_shop(duck_str, poynt=2)
     yao_personunit.set_plan_obj(duck_plan, parent_rope=yarn_rope)
 
     coal_str = "coal"
     coal_rope = yao_personunit.make_l1_rope(coal_str)
-    coal_plan = planunit_shop(coal_str, kar=30)
+    coal_plan = planunit_shop(coal_str, poynt=30)
     yao_personunit.set_l1_plan(coal_plan)
 
     assert yao_personunit.planroot.fund_onset is None
@@ -181,7 +181,7 @@ def test_PersonUnit_thinkout_Sets_planunit_fund_onset_fund_cease_Scenario2_Diffe
     assert lamb_after.fund_cease == default_pool_num() * 1.0
 
 
-def test_PersonUnit_thinkout_Sets_fund_ratio_WithSomePlansOfZero_karScenario0():
+def test_PersonUnit_thinkout_Sets_fund_ratio_WithSomePlansOfZero_poyntScenario0():
     # ESTABLISH
     sue_person = personunit_shop("Sue")
     casa_rope = sue_person.make_l1_rope(exx.casa)
@@ -193,14 +193,14 @@ def test_PersonUnit_thinkout_Sets_fund_ratio_WithSomePlansOfZero_karScenario0():
 
     situation_str = "cleaniness situation"
     situation_rope = sue_person.make_rope(casa_rope, situation_str)
-    sue_person.set_plan_obj(planunit_shop(situation_str, kar=0), casa_rope)
+    sue_person.set_plan_obj(planunit_shop(situation_str, poynt=0), casa_rope)
 
     non_str = "not clean"
     yes_str = "yes clean"
     non_rope = sue_person.make_rope(situation_rope, non_str)
     yes_rope = sue_person.make_rope(situation_rope, yes_str)
     sue_person.set_plan_obj(planunit_shop(non_str), situation_rope)
-    sue_person.set_plan_obj(planunit_shop(yes_str, kar=2), situation_rope)
+    sue_person.set_plan_obj(planunit_shop(yes_str, poynt=2), situation_rope)
 
     assert sue_person.planroot.fund_ratio is None
     assert sue_person.get_plan_obj(casa_rope).fund_ratio is None
@@ -222,7 +222,7 @@ def test_PersonUnit_thinkout_Sets_fund_ratio_WithSomePlansOfZero_karScenario0():
     assert sue_person.get_plan_obj(yes_rope).fund_ratio == 0.0
 
 
-def test_PersonUnit_thinkout_Sets_fund_ratio_WithSomePlansOfZero_karScenario1():
+def test_PersonUnit_thinkout_Sets_fund_ratio_WithSomePlansOfZero_poyntScenario1():
     # ESTABLISH
     sue_person = personunit_shop("Sue")
     casa_rope = sue_person.make_l1_rope(exx.casa)
@@ -237,7 +237,7 @@ def test_PersonUnit_thinkout_Sets_fund_ratio_WithSomePlansOfZero_karScenario1():
     sue_person.set_plan_obj(planunit_shop(situation_str), casa_rope)
 
     situation_plan = sue_person.get_plan_obj(situation_rope)
-    print(f"{situation_plan.kar=}")
+    print(f"{situation_plan.poynt=}")
     print("This should raise error: 'Planunit._'")
 
     clean_rope = sue_person.make_rope(situation_rope, exx.clean)
@@ -245,9 +245,9 @@ def test_PersonUnit_thinkout_Sets_fund_ratio_WithSomePlansOfZero_karScenario1():
     mod_str = "moderately"
     dirty_str = "dirty"
 
-    sue_person.set_plan_obj(planunit_shop(exx.clean, kar=0), situation_rope)
+    sue_person.set_plan_obj(planunit_shop(exx.clean, poynt=0), situation_rope)
     sue_person.set_plan_obj(planunit_shop(very_str), clean_rope)
-    sue_person.set_plan_obj(planunit_shop(mod_str, kar=2), clean_rope)
+    sue_person.set_plan_obj(planunit_shop(mod_str, poynt=2), clean_rope)
     sue_person.set_plan_obj(planunit_shop(dirty_str), clean_rope)
 
     very_rope = sue_person.make_rope(clean_rope, very_str)
@@ -275,32 +275,32 @@ def test_PersonUnit_thinkout_Sets_fund_ratio_WithSomePlansOfZero_karScenario1():
     assert sue_person.get_plan_obj(dirty_rope).fund_ratio == 0
 
 
-def test_PersonUnit_thinkout_WhenPlanUnitHasFundsBut_kidsHaveNokarDistributeFundsToContactUnits_Scenario0():
+def test_PersonUnit_thinkout_WhenPlanUnitHasFundsBut_kidsHaveNopoyntDistributeFundsToContactUnits_Scenario0():
     # ESTABLISH
     sue_personunit = personunit_shop("Sue")
     sue_personunit.add_contactunit(exx.yao)
     casa_rope = sue_personunit.make_l1_rope(exx.casa)
-    casa_plan = planunit_shop(exx.casa, kar=1)
+    casa_plan = planunit_shop(exx.casa, poynt=1)
 
     bowl_rope = sue_personunit.make_rope(casa_rope, exx.bowl)
-    bowl_plan = planunit_shop(exx.bowl, kar=8)
+    bowl_plan = planunit_shop(exx.bowl, poynt=8)
 
     clean_str = "cleaning"
     clean_rope = sue_personunit.make_rope(casa_rope, clean_str)
-    clean_plan = planunit_shop(clean_str, kar=2)
+    clean_plan = planunit_shop(clean_str, poynt=2)
     sue_personunit.set_plan_obj(planunit_shop(clean_str), casa_rope)
 
     sweep_rope = sue_personunit.make_rope(clean_rope, exx.sweep)
-    sweep_plan = planunit_shop(exx.sweep, kar=0)
+    sweep_plan = planunit_shop(exx.sweep, poynt=0)
     vacuum_str = "vacuum"
     vacuum_rope = sue_personunit.make_rope(clean_rope, vacuum_str)
-    vacuum_plan = planunit_shop(vacuum_str, kar=0)
+    vacuum_plan = planunit_shop(vacuum_str, poynt=0)
 
     sue_personunit.set_l1_plan(casa_plan)
     sue_personunit.set_plan_obj(bowl_plan, casa_rope)
     sue_personunit.set_plan_obj(clean_plan, casa_rope)
-    sue_personunit.set_plan_obj(sweep_plan, clean_rope)  # _kar=0
-    sue_personunit.set_plan_obj(vacuum_plan, clean_rope)  # _kar=0
+    sue_personunit.set_plan_obj(sweep_plan, clean_rope)  # _poynt=0
+    sue_personunit.set_plan_obj(vacuum_plan, clean_rope)  # _poynt=0
 
     assert sue_personunit.get_plan_obj(casa_rope).fund_ratio is None
     assert sue_personunit.get_plan_obj(bowl_rope).fund_ratio is None
@@ -583,7 +583,7 @@ def test_PersonUnit_thinkout_WithLevel3AwardUnitAndEmptyAncestorsSetsGroupUnit_f
     bowl_plan.set_awardunit(xio_awardunit)
 
     # no awardunits attached to this one
-    x_person.set_l1_plan(planunit_shop("hunt", kar=3))
+    x_person.set_l1_plan(planunit_shop("hunt", poynt=3))
 
     # WHEN
     x_person.thinkout()
@@ -891,7 +891,7 @@ def test_PersonUnit_thinkout_SetsPartGroupedLWContactUnitPerson_fund():
 
     # no awardunits attached to this one
     hunt_str = "hunt"
-    yao_person.set_l1_plan(planunit_shop(hunt_str, kar=3))
+    yao_person.set_l1_plan(planunit_shop(hunt_str, poynt=3))
 
     # WHEN
     yao_person.thinkout()

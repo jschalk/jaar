@@ -652,17 +652,17 @@ def test_ideas_sheets_to_brick_sheets_Scenario7_non_mirror_ii00502(
     ws1.title = src_ii00502_sheetname
     clean_rope = create_rope(exx.a23, exx.clean)
     mop_rope = create_rope(clean_rope, exx.mop)
-    kar2 = 2
+    poynt2 = 2
     ii00502_columns = [
         kw.spark_face,
         kw.moment_rope,
         kw.person_name,
         kw.plan_rope,
-        kw.kar,
+        kw.poynt,
         kw.knot,
     ]
     ws1.append(ii00502_columns)
-    ws1.append([exx.sue, exx.a23, exx.yao, mop_rope, kar2, ";"])
+    ws1.append([exx.sue, exx.a23, exx.yao, mop_rope, poynt2, ";"])
     example_filename = "example6_file.xlsx"
     idea_example_path = idea_dir / example_filename
     wb.save(idea_example_path)
@@ -683,7 +683,7 @@ def test_ideas_sheets_to_brick_sheets_Scenario7_non_mirror_ii00502(
         kw.moment_rope,
         kw.person_name,
         kw.plan_rope,
-        kw.kar,
+        kw.poynt,
         kw.pledge,
         kw.knot,
     ]

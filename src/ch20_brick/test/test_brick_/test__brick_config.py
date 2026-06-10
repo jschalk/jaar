@@ -218,7 +218,7 @@ def test_get_keg_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[122] == f"{kw.fact_upper}_inx"
     assert table_sorting_priority[123] == kw.fund_pool
     assert table_sorting_priority[124] == kw.give_force
-    assert table_sorting_priority[125] == kw.kar
+    assert table_sorting_priority[125] == kw.poynt
     assert table_sorting_priority[126] == kw.max_tree_traverse
     assert table_sorting_priority[127] == kw.reason_lower
     assert table_sorting_priority[128] == f"{kw.reason_lower}_otx"
@@ -529,7 +529,7 @@ def test_get_brick_sqlite_types_ReturnsObj():
     assert sqlite_types.get(kw.spark_face_inx) == "TEXT"
     assert sqlite_types.get(kw.spark_face_otx) == "TEXT"
     assert sqlite_types.get(kw.spark_num) == "INTEGER"
-    assert sqlite_types.get(kw.kar) == "INTEGER"
+    assert sqlite_types.get(kw.poynt) == "INTEGER"
     assert sqlite_types.get(kw.stop_calc) == "REAL"
     assert sqlite_types.get(kw.stop_want) == "REAL"
     assert sqlite_types.get(kw.sum_healerunit_plans_fund_total) == "REAL"

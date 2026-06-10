@@ -226,7 +226,7 @@ def test_get_person_calc_dimen_args_ReturnsObj():
         kw.close,
         kw.addin,
         kw.numor,
-        kw.kar,
+        kw.poynt,
         kw.stop_want,
         kw.gogo_calc,
         kw.stop_calc,
@@ -650,9 +650,9 @@ def test_get_person_config_dict_ReturnsObj_ArgDataTypesCorrect():
     assert g_sqlitetype(cfig, prnplan, jv, kw.gogo_want) == "REAL"
     assert g_popthinkout(cfig, prnplan, jv, kw.gogo_want) == False
 
-    assert g_obj_type(cfig, prnplan, jv, kw.kar) == "int"
-    assert g_sqlitetype(cfig, prnplan, jv, kw.kar) == "INTEGER"
-    assert g_popthinkout(cfig, prnplan, jv, kw.kar) == False
+    assert g_obj_type(cfig, prnplan, jv, kw.poynt) == "int"
+    assert g_sqlitetype(cfig, prnplan, jv, kw.poynt) == "INTEGER"
+    assert g_popthinkout(cfig, prnplan, jv, kw.poynt) == False
 
     assert g_obj_type(cfig, prnplan, jv, kw.morph) == "bool"
     assert g_sqlitetype(cfig, prnplan, jv, kw.morph) == "INTEGER"
@@ -825,7 +825,7 @@ def test_get_person_calc_args_type_dict_ReturnsObj():
     assert person_calc_args_type_dict.get(kw.close) == "float"
     assert person_calc_args_type_dict.get(kw.denom) == "int"
     assert person_calc_args_type_dict.get(kw.gogo_want) == "float"
-    assert person_calc_args_type_dict.get(kw.kar) == "int"
+    assert person_calc_args_type_dict.get(kw.poynt) == "int"
     assert person_calc_args_type_dict.get(kw.morph) == "bool"
     assert person_calc_args_type_dict.get(kw.numor) == "int"
     assert person_calc_args_type_dict.get(kw.pledge) == "bool"

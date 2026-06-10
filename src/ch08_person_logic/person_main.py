@@ -132,7 +132,7 @@ class PersonUnit:
     keeps_buildable: bool = None
     sum_healerunit_plans_fund_total: float = None
     groupunits: dict[GroupTitle, GroupUnit] = None
-    offtrack_kids_kar_set: set[RopeTerm] = None
+    offtrack_kids_poynt_set: set[RopeTerm] = None
     offtrack_fund: float = None
     reason_contexts: set[RopeTerm] = None
     range_inheritors: dict[RopeTerm, RopeTerm] = None
@@ -557,12 +557,12 @@ class PersonUnit:
         return missing_reason_contexts
 
     def add_plan(
-        self, plan_rope: RopeTerm, kar: float = None, pledge: bool = None
+        self, plan_rope: RopeTerm, poynt: float = None, pledge: bool = None
     ) -> PlanUnit:
-        """default kar is 0, pledges will have weight of 0 if kar is not passed"""
+        """default poynt is 0, pledges will have weight of 0 if poynt is not passed"""
         x_plan_label = get_tail_label(plan_rope, self.knot)
         x_parent_rope = get_parent_rope(plan_rope, self.knot)
-        x_planunit = planunit_shop(x_plan_label, kar=kar)
+        x_planunit = planunit_shop(x_plan_label, poynt=poynt)
         if pledge:
             x_planunit.pledge = True
         self.set_plan_obj(x_planunit, x_parent_rope)
@@ -625,18 +625,18 @@ class PersonUnit:
 
         kid_rope = self.make_rope(parent_rope, plan_kid.plan_label)
         if adoptees is not None:
-            kar_sum = 0
+            poynt_sum = 0
             for adoptee_plan_label in adoptees:
                 adoptee_rope = self.make_rope(parent_rope, adoptee_plan_label)
                 adoptee_plan = self.get_plan_obj(adoptee_rope)
-                kar_sum += adoptee_plan.kar
+                poynt_sum += adoptee_plan.poynt
                 new_adoptee_parent_rope = self.make_rope(kid_rope, adoptee_plan_label)
                 self.set_plan_obj(adoptee_plan, new_adoptee_parent_rope)
-                self.edit_plan_attr(new_adoptee_parent_rope, kar=adoptee_plan.kar)
+                self.edit_plan_attr(new_adoptee_parent_rope, poynt=adoptee_plan.poynt)
                 self.del_plan_obj(adoptee_rope)
 
             if bundling:
-                self.edit_plan_attr(kid_rope, kar=kar_sum)
+                self.edit_plan_attr(kid_rope, poynt=poynt_sum)
 
         if create_missing_plans:
             self._create_missing_plans(rope=kid_rope)
@@ -771,7 +771,7 @@ class PersonUnit:
     def edit_plan_attr(
         self,
         plan_rope: RopeTerm,
-        kar: int = None,
+        poynt: int = None,
         plan_uid: int = None,
         reason: ReasonUnit = None,
         reason_context: RopeTerm = None,
@@ -817,7 +817,7 @@ reason_case:    {reason_case}"""
             )
 
         x_planattrholder = planattrholder_shop(
-            kar=kar,
+            poynt=poynt,
             plan_uid=plan_uid,
             reason=reason,
             reason_context=reason_context,
@@ -1092,10 +1092,10 @@ reason_case:    {reason_case}"""
 
             if (
                 not x_plan.is_kidless()
-                and x_plan.get_kids_kar_sum() == 0
-                and x_plan.kar != 0
+                and x_plan.get_kids_poynt_sum() == 0
+                and x_plan.poynt != 0
             ):
-                self.offtrack_kids_kar_set.add(x_plan.get_plan_rope())
+                self.offtrack_kids_poynt_set.add(x_plan.get_plan_rope())
 
     def _set_groupunit_contactunit_funds(self, keep_exceptions):
         for x_plan in self._plan_dict.values():
@@ -1211,7 +1211,7 @@ reason_case:    {reason_case}"""
         self._plan_dict = {self.planroot.get_plan_rope(): self.planroot}
         self.rational = False
         self.tree_traverse_count = 0
-        self.offtrack_kids_kar_set = set()
+        self.offtrack_kids_poynt_set = set()
         self.reason_contexts = set()
         self.range_inheritors = {}
         self.keeps_justified = True
@@ -1276,7 +1276,7 @@ reason_case:    {reason_case}"""
         while cache_plan_list != []:
             parent_plan = cache_plan_list.pop()
             kids_plans = parent_plan.kids.items()
-            x_ledger = {x_rope: plan_kid.kar for x_rope, plan_kid in kids_plans}
+            x_ledger = {x_rope: plan_kid.poynt for x_rope, plan_kid in kids_plans}
             parent_fund_num = parent_plan.fund_cease - parent_plan.fund_onset
             alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self.fund_grain)
 
@@ -1425,9 +1425,9 @@ reason_case:    {reason_case}"""
         )
 
     def set_offtrack_fund(self) -> float:
-        kar_set = self.offtrack_kids_kar_set
+        poynt_set = self.offtrack_kids_poynt_set
         self.offtrack_fund = sum(
-            self.get_plan_obj(rope).get_plan_fund_total() for rope in kar_set
+            self.get_plan_obj(rope).get_plan_fund_total() for rope in poynt_set
         )
 
 
@@ -1463,7 +1463,7 @@ def personunit_shop(
         keeps_justified=get_False_if_None(),
         keeps_buildable=get_False_if_None(),
         sum_healerunit_plans_fund_total=get_0_if_None(),
-        offtrack_kids_kar_set=set(),
+        offtrack_kids_poynt_set=set(),
         reason_contexts=set(),
         range_inheritors={},
     )
@@ -1515,7 +1515,7 @@ def create_planroot_from_person_dict(x_person: PersonUnit, person_dict: dict):
         parent_rope="",
         tree_level=0,
         plan_uid=get_obj_from_plan_dict(planroot_dict, "plan_uid"),
-        kar=get_obj_from_plan_dict(planroot_dict, "kar"),
+        poynt=get_obj_from_plan_dict(planroot_dict, "poynt"),
         begin=get_obj_from_plan_dict(planroot_dict, "begin"),
         close=get_obj_from_plan_dict(planroot_dict, "close"),
         numor=get_obj_from_plan_dict(planroot_dict, "numor"),
@@ -1555,7 +1555,7 @@ def create_planroot_kids_from_dict(x_person: PersonUnit, planroot_dict: dict):
             to_evaluate_plan_dicts.append(kid_dict)
         x_plankid = planunit_shop(
             plan_label=get_obj_from_plan_dict(plan_dict, "plan_label"),
-            kar=get_obj_from_plan_dict(plan_dict, "kar"),
+            poynt=get_obj_from_plan_dict(plan_dict, "poynt"),
             plan_uid=get_obj_from_plan_dict(plan_dict, "plan_uid"),
             begin=get_obj_from_plan_dict(plan_dict, "begin"),
             close=get_obj_from_plan_dict(plan_dict, "close"),

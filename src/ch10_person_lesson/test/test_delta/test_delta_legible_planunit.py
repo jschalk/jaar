@@ -20,7 +20,7 @@ def test_create_legible_list_ReturnsObj_planunit_INSERT():
     numor_value = 29
     problem_bool_value = False
     morph_value = 37
-    kar_value = 43
+    poynt_value = 43
     pledge_value = False
     clean_personatom = personatom_shop(dimen, kw.INSERT)
     clean_personatom.set_arg(kw.plan_rope, clean_rope)
@@ -31,7 +31,7 @@ def test_create_legible_list_ReturnsObj_planunit_INSERT():
     clean_personatom.set_arg(kw.numor, numor_value)
     clean_personatom.set_arg(_problem_bool_str, problem_bool_value)
     clean_personatom.set_arg(kw.morph, morph_value)
-    clean_personatom.set_arg(kw.kar, kar_value)
+    clean_personatom.set_arg(kw.poynt, poynt_value)
     clean_personatom.set_arg(kw.pledge, pledge_value)
 
     x_persondelta = persondelta_shop()
@@ -41,7 +41,7 @@ def test_create_legible_list_ReturnsObj_planunit_INSERT():
     legible_list = create_legible_list(x_persondelta, sue_person)
 
     # THEN
-    x_str = f"Created Plan '{clean_rope}'. addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.kar={kar_value}.pledge={pledge_value}."
+    x_str = f"Created Plan '{clean_rope}'. addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.poynt={poynt_value}.pledge={pledge_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -61,7 +61,7 @@ def test_create_legible_list_ReturnsObj_planunit_UPDATE():
     numor_value = 29
     problem_bool_value = False
     morph_value = 37
-    kar_value = 43
+    poynt_value = 43
     pledge_value = False
     clean_personatom = personatom_shop(dimen, kw.UPDATE)
     clean_personatom.set_arg(kw.plan_rope, clean_rope)
@@ -72,7 +72,7 @@ def test_create_legible_list_ReturnsObj_planunit_UPDATE():
     clean_personatom.set_arg(kw.numor, numor_value)
     clean_personatom.set_arg(_problem_bool_str, problem_bool_value)
     clean_personatom.set_arg(kw.morph, morph_value)
-    clean_personatom.set_arg(kw.kar, kar_value)
+    clean_personatom.set_arg(kw.poynt, poynt_value)
     clean_personatom.set_arg(kw.pledge, pledge_value)
 
     x_persondelta = persondelta_shop()
@@ -82,7 +82,7 @@ def test_create_legible_list_ReturnsObj_planunit_UPDATE():
     legible_list = create_legible_list(x_persondelta, sue_person)
 
     # THEN
-    x_str = f"Plan '{clean_rope}' set these attrs: addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.kar={kar_value}.pledge={pledge_value}."
+    x_str = f"Plan '{clean_rope}' set these attrs: addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.poynt={poynt_value}.pledge={pledge_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

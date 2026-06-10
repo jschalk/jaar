@@ -112,7 +112,7 @@ def test_create_prnplan_metrics_insert_sqlstr_ReturnsObj(cursor0: Cursor):
     x_close = 17
     x_denom = 18
     x_gogo_want = 19
-    x_kar = 21
+    x_poynt = 21
     x_morph = 22
     x_numor = 23
     x_rope = 24
@@ -142,7 +142,7 @@ def test_create_prnplan_metrics_insert_sqlstr_ReturnsObj(cursor0: Cursor):
         kw.close: x_close,
         kw.denom: x_denom,
         kw.gogo_want: x_gogo_want,
-        kw.kar: x_kar,
+        kw.poynt: x_poynt,
         kw.morph: x_morph,
         kw.numor: x_numor,
         kw.plan_rope: x_rope,

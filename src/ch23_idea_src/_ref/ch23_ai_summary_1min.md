@@ -37,7 +37,7 @@ Ontology note:
 
 **`fission_step.py`** — data transformation functions applied to raw idea DataFrames before they become bricks. Each function is a pure DataFrame → DataFrame transform:
 
-- `fission_add_ancestor_rope_rows(df)` — inspects all `plan_rope` values in the DataFrame; for any rope that references an ancestor path not already present as a row, it inserts synthetic ancestor rows (with `pledge=0`, `kar=None`). This ensures the plan tree is complete before it reaches the person object.
+- `fission_add_ancestor_rope_rows(df)` — inspects all `plan_rope` values in the DataFrame; for any rope that references an ancestor path not already present as a row, it inserts synthetic ancestor rows (with `pledge=0`, `poynt=None`). This ensures the plan tree is complete before it reaches the person object.
 - `fission_set_pledge_to_one(df)` — sets all `pledge` values to 1 (marking all rows as active pledges).
 - `fission_set_plan_rope_from_health_label(df)` — constructs `plan_rope` values by combining `moment_rope` and `health_label` columns, with strict null validation raising `ValueError` on missing values.
 - `fission_set_moment_rope_from_moment_label(df)` — constructs `moment_rope` from a `moment_label` column.

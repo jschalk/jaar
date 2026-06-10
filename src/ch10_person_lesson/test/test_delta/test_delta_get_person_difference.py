@@ -371,7 +371,7 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_inser
     amy45_str = "amy45"
     amy_begin = 34
     amy_close = 78
-    amy_kar = 55
+    amy_poynt = 55
     amy_pledge = True
     amy_rope = after_sue_person.make_l1_rope(amy45_str)
     after_sue_person.set_l1_plan(
@@ -379,7 +379,7 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_inser
             amy45_str,
             begin=amy_begin,
             close=amy_close,
-            kar=amy_kar,
+            poynt=amy_poynt,
             pledge=amy_pledge,
         )
     )
@@ -401,7 +401,7 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_inser
     assert ball_personatom.get_value(kw.plan_rope) == a45_rope
     assert ball_personatom.get_value(kw.begin) == amy_begin
     assert ball_personatom.get_value(kw.close) == amy_close
-    assert ball_personatom.get_value(kw.kar) == amy_kar
+    assert ball_personatom.get_value(kw.poynt) == amy_poynt
     assert ball_personatom.get_value(kw.pledge) == amy_pledge
 
     assert get_personatom_total_count(sue_persondelta) == 2
@@ -416,7 +416,7 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_updat
     amy45_rope = before_sue_person.make_l1_rope(amy45_str)
     before_amy_begin = 34
     before_amy_close = 78
-    before_amy_kar = 55
+    before_amy_poynt = 55
     before_amy_pledge = True
     amy_rope = before_sue_person.make_l1_rope(amy45_str)
     before_sue_person.set_l1_plan(
@@ -424,7 +424,7 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_updat
             amy45_str,
             begin=before_amy_begin,
             close=before_amy_close,
-            kar=before_amy_kar,
+            poynt=before_amy_poynt,
             pledge=before_amy_pledge,
         )
     )
@@ -432,13 +432,13 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_updat
     after_sue_person = copy_deepcopy(before_sue_person)
     after_amy_begin = 99
     after_amy_close = 111
-    after_amy_kar = 22
+    after_amy_poynt = 22
     after_amy_pledge = False
     after_sue_person.edit_plan_attr(
         amy_rope,
         begin=after_amy_begin,
         close=after_amy_close,
-        kar=after_amy_kar,
+        poynt=after_amy_poynt,
         pledge=after_amy_pledge,
     )
 
@@ -454,7 +454,7 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_updat
     assert ball_personatom.get_value(kw.plan_rope) == amy45_rope
     assert ball_personatom.get_value(kw.begin) == after_amy_begin
     assert ball_personatom.get_value(kw.close) == after_amy_close
-    assert ball_personatom.get_value(kw.kar) == after_amy_kar
+    assert ball_personatom.get_value(kw.poynt) == after_amy_poynt
     assert ball_personatom.get_value(kw.pledge) == after_amy_pledge
 
     assert get_personatom_total_count(sue_persondelta) == 1

@@ -149,7 +149,7 @@ def test_insert_job_prnplan_CreatesTableRowsFor_prnplan_job(cursor0: Cursor):
     x_morph = 10
     x_gogo_want = 11.0
     x_stop_want = 12.0
-    x_kar = 13
+    x_poynt = 13
     x_pledge = 14
     x_problem_bool = 15
     x_active = 16
@@ -178,7 +178,7 @@ def test_insert_job_prnplan_CreatesTableRowsFor_prnplan_job(cursor0: Cursor):
     x_plan.morph = x_morph
     x_plan.gogo_want = x_gogo_want
     x_plan.stop_want = x_stop_want
-    x_plan.kar = x_kar
+    x_plan.poynt = x_poynt
     x_plan.pledge = x_pledge
     x_plan.problem_bool = x_problem_bool
     x_plan.plan_active = x_active
@@ -203,7 +203,7 @@ def test_insert_job_prnplan_CreatesTableRowsFor_prnplan_job(cursor0: Cursor):
     x_plan.morph = x_morph
     x_plan.gogo_want = x_gogo_want
     x_plan.stop_want = x_stop_want
-    x_plan.kar = x_kar
+    x_plan.poynt = x_poynt
     x_plan.pledge = x_pledge
     x_plan.problem_bool = x_problem_bool
     x_plan.plan_active = x_active
@@ -249,7 +249,7 @@ def test_insert_job_prnplan_CreatesTableRowsFor_prnplan_job(cursor0: Cursor):
         x_morph,
         x_gogo_want,
         x_stop_want,
-        x_kar,
+        x_poynt,
         x_pledge,
         x_problem_bool,
         x_fund_grain,

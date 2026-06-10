@@ -9,7 +9,7 @@ def test_PlanAttrHolder_Exists():
     new_obj = PlanAttrHolder()
 
     # THEN
-    assert new_obj.kar is None
+    assert new_obj.poynt is None
     assert new_obj.plan_uid is None
     assert new_obj.reason is None
     assert new_obj.reason_context is None
@@ -34,7 +34,7 @@ def test_PlanAttrHolder_Exists():
     assert new_obj.awardunit_del is None
     assert new_obj.is_expanded is None
     assert set(new_obj.__dict__.keys()) == {
-        kw.kar,
+        kw.poynt,
         kw.plan_uid,
         "reason",
         "reason_context",

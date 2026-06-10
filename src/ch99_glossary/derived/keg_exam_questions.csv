@@ -223,19 +223,19 @@ row_number,question
 221,Did you read that the keg_definition of 'healerunit' is 'Definition needed.'.
 222,"Did you read that the keg_definition of 'healerunit_ratio' is ', Plan thinkout'."
 223,Did you read that the keg_definition of 'is_expanded' is 'If A '.
-224,"Did you read that the keg_definition of 'kar' is ', Plan seed'."
-225,Did you read that the keg_definition of 'kids' is 'Definition needed.'.
-226,"Did you read that the keg_definition of 'morph' is 'bool that describes how to change parent range in calculations, Plan seed'."
-227,"Did you read that the keg_definition of 'numor' is 'int that describes numerator to parent range calculations, Plan seed'."
-228,Did you read that the keg_definition of 'plan' is 'Definition needed.'.
-229,"Did you read that the keg_definition of 'plan_active' is ', Plan thinkout'."
-230,Did you read that the keg_definition of 'plan_active_hx' is 'Definition needed.'.
-231,Did you read that the keg_definition of 'plan_fund_total' is 'Definition needed.'.
-232,Did you read that the keg_definition of 'plan_label' is 'Every planunit has a plan_label. Every other sibling planunit must have a different plan label.'.
-233,"Did you read that the keg_definition of 'plan_rope' is ', Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed.'."
-234,"Did you read that the keg_definition of 'plan_task' is 'A plan_task planUnit can change a FactUnit and change Active Plan without plan_task, Plan thinkout'."
-235,Did you read that the keg_definition of 'plan_uid' is 'A uniqueidentifier for a planunit. Currently at the person level. Perhaps at a global level in the future.'.
-236,"Did you read that the keg_definition of 'pledge' is ', Plan seed'."
+224,Did you read that the keg_definition of 'kids' is 'Definition needed.'.
+225,"Did you read that the keg_definition of 'morph' is 'bool that describes how to change parent range in calculations, Plan seed'."
+226,"Did you read that the keg_definition of 'numor' is 'int that describes numerator to parent range calculations, Plan seed'."
+227,Did you read that the keg_definition of 'plan' is 'Definition needed.'.
+228,"Did you read that the keg_definition of 'plan_active' is ', Plan thinkout'."
+229,Did you read that the keg_definition of 'plan_active_hx' is 'Definition needed.'.
+230,Did you read that the keg_definition of 'plan_fund_total' is 'Definition needed.'.
+231,Did you read that the keg_definition of 'plan_label' is 'Every planunit has a plan_label. Every other sibling planunit must have a different plan label.'.
+232,"Did you read that the keg_definition of 'plan_rope' is ', Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed.'."
+233,"Did you read that the keg_definition of 'plan_task' is 'A plan_task planUnit can change a FactUnit and change Active Plan without plan_task, Plan thinkout'."
+234,Did you read that the keg_definition of 'plan_uid' is 'A uniqueidentifier for a planunit. Currently at the person level. Perhaps at a global level in the future.'.
+235,"Did you read that the keg_definition of 'pledge' is ', Plan seed'."
+236,"Did you read that the keg_definition of 'poynt' is ', Plan seed'."
 237,"Did you read that the keg_definition of 'problem_bool' is ', Plan seed'."
 238,"Did you read that the keg_definition of 'range_evaluated' is ', Plan thinkout'."
 239,"Did you read that the keg_definition of 'range_inheritors' is '# range_inheritors key: plan_rope for any Plan that inherits from a range_plan
@@ -270,7 +270,7 @@ row_number,question
 266,"Did you read that the keg_definition of 'max_tree_traverse' is ', Person seed.'."
 267,Did you read that the keg_definition of 'obj_type' is 'Used idenify an attribute's object class. Usually in config files.'.
 268,"Did you read that the keg_definition of 'offtrack_fund' is ', Person thinkout'."
-269,Did you read that the keg_definition of 'offtrack_kids_kar_set' is 'Definition needed.'.
+269,Did you read that the keg_definition of 'offtrack_kids_poynt_set' is 'Definition needed.'.
 270,"Did you read that the keg_definition of 'person_contact_membership' is 'A person dimen representing Membership data. Keys: person_name, contact_name, group_title. person seed.'."
 271,"Did you read that the keg_definition of 'person_contactunit' is 'A person dimen representing ParterUnit data. Keys: person_name, contact_name. person seed.'."
 272,"Did you read that the keg_definition of 'person_groupunit' is 'A person dimen representing GroupUnit data. Keys: person_name, group_title. person thinkout.'."
