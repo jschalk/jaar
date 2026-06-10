@@ -67,7 +67,7 @@ Let me give you an example
 
 <div align="center"><img src="images/stalin_crew.webp" alt="Article image 3" width="700"></div>
 
-Joseph Stalin, a dictator holding the absolute power over the USSR for several decades, was an avid reader, and has left a massive personal library. What is particularly valuable is that has left a library of books full of his personal notes, remarks, highlighted passages, his own thoughts scribed on the margins. Giving us a fairly good idea of what he was reading, what kind of ideas he was absorbing and what he was paying specific attention to.
+Joseph Stalin, a dictator holding the absolute power over the USSR for several decades, was an avid reader, and has left an enourmous personal library. What is particularly valuable is that has left a library of books full of his personal notes, remarks, highlighted passages, his own thoughts scribed on the margins. Giving us a fairly good idea of what he was reading, what kind of ideas he was absorbing and what he was paying specific attention to.
 
 One interesting observation of that is:
 
@@ -138,7 +138,7 @@ These dynamics - with a limited number of idea peddlars defining the course of a
 
 Long time ago, I was sitting in the historical library in Moscow, and just scrolling through the catalogues of books. Scrolling, and scrolling and scrolling. There was not much information there except for the author, name of the book, date and place of publishing, etc. But over the time, and over hundreds of entries, I started noticing a pattern
 
-There is lots of French books there. A lot of powerful, well-known, celebrated works that made a massive cultural and ideological impact far beyond the borders of France
+There is lots of French books there. A lot of powerful, well-known, celebrated works that made an enourmous cultural and ideological impact far beyond the borders of France
 
 BUT
 
@@ -182,7 +182,7 @@ One good measure would be: kill all the scholars, burn their books
 
 Notice that Joseph Stalin did exactly that upon seizing power
 
-Over decades of purges, he slaughtered the educated classes, specifically focusing on the idea peddlars. Like the narrow experts staying in the limits of their expertise, that was sometimes tolerable (to a certain degree). But the generalists, preaching to masses, was absolutely intolerable at all
+Over decades of purges, he slaughtered the educated classes, specifically focusing on the idea peddlars. Like the narrow experts staying in the limits of their expertise, that was sometimes tolerable (to a certain degree). But the generalists, preaching to anybody, was absolutely intolerable at all.
 
 What effect did this produce?
 
@@ -219,7 +219,7 @@ But the thing is - after the Stalin’s slaughter of scholars and burning the bo
 
 So, basically what Stalin did made perfect sense - in the short run, and was a brilliant tactical decision.
 
-The governing subject has found the governed object too complex to be governed and reduced its complexity via the mass slaughter, making it very much easier to rule
+The governing subject has found the governed object too complex to be governed and reduced its complexity via slaughter, making it very much easier to rule
 
 That was very smart
 
