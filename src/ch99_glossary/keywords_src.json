@@ -297,6 +297,7 @@
   "insert_multiple": {"valid_ch": "20:"}, 
   "insert_one_time": {"valid_ch": "20:"}, 
   "insert_update": {"valid_ch": "20:"}, 
+  "invitation": {"valid_ch": "40"}, 
   "inx_epoch_diff": {"sort_ordinal": 201, "valid_ch": "16:"}, 
   "inx_knot": {"sort_ordinal": 150, "valid_ch": "17:"}, 
   "inx_label": {"sort_ordinal": 142, "valid_ch": "17:"}, 

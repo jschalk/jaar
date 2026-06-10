@@ -10375,6 +10375,7 @@ class Ch40Keywords(str, Enum):
     insert_multiple = "insert_multiple"
     insert_one_time = "insert_one_time"
     insert_update = "insert_update"
+    invitation = "invitation"
     inx_epoch_diff = "inx_epoch_diff"
     inx_knot = "inx_knot"
     inx_label = "inx_label"

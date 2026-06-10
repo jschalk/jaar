@@ -291,6 +291,7 @@
   "insert_multiple": "Associated dimens: moment_budunit, moment_paybook, moment_timeoffi", 
   "insert_one_time": "Associated dimens: moment_epoch_hour, moment_epoch_month, moment_epoch_weekday, momentunit, nabu_timenum, translate_label, translate_name, translate_rope, translate_title", 
   "insert_update": "Definition needed.", 
+  "invitation": "From KegWheel theory, describes the act of a FamilyUnit giving another prestige. Or bringing those out of Power into Power.", 
   "inx_epoch_diff": "Definition needed.", 
   "inx_knot": ", TRANSLATE_LABEL arg, TRANSLATE_NAME arg, TRANSLATE_ROPE arg, TRANSLATE_TITLE arg", 
   "inx_label": ", TRANSLATE_LABEL arg", 
