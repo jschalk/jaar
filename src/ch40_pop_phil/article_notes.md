@@ -8,4 +8,3 @@ TODO https://kamilkazani.substack.com/p/on-fertility
 Importance of referencing living thinkers:
 TODO https://kamilkazani.substack.com/p/humility-of-comrade-stalin?utm_source=publication-search
 
-TODO write KegWheel article
