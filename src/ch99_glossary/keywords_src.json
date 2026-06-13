@@ -37,6 +37,7 @@
   "ManaNum": {"semantic_type": "float", "valid_ch": "13:"}, 
   "MomentRope": {"semantic_type": "str", "valid_ch": "10:"}, 
   "Nabu": {"valid_ch": "16:"}, 
+  "ch41": {"valid_ch": "41:"}, 
   "NabuTime": {"valid_ch": "16:"}, 
   "NameTerm": {"semantic_type": "str", "valid_ch": "3:"}, 
   "Peer": {"valid_ch": "33:"}, 
