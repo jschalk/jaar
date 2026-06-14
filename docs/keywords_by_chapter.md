@@ -34,7 +34,7 @@
 - ch34_finance: ch34, finance, financial
 - ch35_person_viewer: ch35
 - ch40_pop_phil: Hayek, ch40, ch90, invitation, power, prestige
-- ch41_wheel: KegWheel, ch41
+- ch41_wheel: Fall, KegWheel, ch41, fall
 - ch90_world_app: 
 - ch97_docs_builder: ch97
 - ch98_linter: ch98

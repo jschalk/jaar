@@ -658,4 +658,6 @@ row_number,question
 654,"Did you read that the keg_definition of 'invitation' is 'From KegWheel theory, describes the act of a FamilyUnit giving another prestige. Or bringing those out of Power into Power.'."
 655,Did you read that the keg_definition of 'power' is 'Not used in codebase.'.
 656,Did you read that the keg_definition of 'prestige' is 'An instance of Prestige.'.
-657,Did you read that the keg_definition of 'KegWheel' is 'Theory of Political Power learned from Kamil Kazani. The political world changing is represented as a wheel where some people are going up in Prestige and some are going down. Those going down are incentized to cause chaos to try to get back up.'.
+657,Did you read that the keg_definition of 'Fall' is 'When a FamilyUnit loses all Prestige and exits power.'.
+658,Did you read that the keg_definition of 'KegWheel' is 'Theory of Political Power learned from Kamil Kazani. The political world changing is represented as a wheel where some people are going up in Prestige and some are going down. Those going down are incentized to cause chaos to try to get back up.'.
+659,Did you read that the keg_definition of 'fall' is 'When a FamilyUnit loses all Prestige and exits power.'.

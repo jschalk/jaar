@@ -17,7 +17,7 @@ What do we need to know about the revolution?
 
 Sequence. That means more than one.
 
-The power doesn’t just fall from the hands of the old regime to the “revolutionaries”, but changes hands several times, before you reach any kind of stability at all. Some of these phases are passing so fast, that they are getting completely memoryholed later.
+The power doesn’t just go from the hands of the old regime to the “revolutionaries”, but changes hands several times, before you reach any kind of stability at all. Some of these phases are passing so fast, that they are getting completely memoryholed later.
 
 (For example, the Russian revolution of 1917-1918 included, at the very least, five coup-events, each of them leading to a radical transformation of the entire political landscape. So, although the popular imagination tends to fuse them all into a one singular event, that had not been the case, historically and chronologically speaking)
 

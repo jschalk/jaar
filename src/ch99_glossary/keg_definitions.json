@@ -206,6 +206,8 @@
   "FactNum": "float first used in ch05. A numeric value that may converted to other Semantic Types by an external process driven by context.", 
   "factory": "Not used in codebase. The factory method in programming is very important. However because I want 'fact' only to refer to the Keg concept I don't use the word 'factory', instead I use 'shop'.", 
   "factunits": "PlanUnit holds all it's factunits in an attribute called factunits.", 
+  "Fall": "When a FamilyUnit loses all Prestige and exits power.", 
+  "fall": "When a FamilyUnit loses all Prestige and exits power.", 
   "February": "Example key with value 'February' used for tests throughout codebase.", 
   "filename": "Should always include extension ala filebasename + '.' + extension", 
   "finance": "Definition needed.", 

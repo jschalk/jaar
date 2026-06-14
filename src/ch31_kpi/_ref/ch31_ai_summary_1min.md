@@ -22,7 +22,7 @@ Ontology note:
 ## 3. Summary of Previous Relevant Chapters
 
 - **ch03_contact**: `ContactUnit` — contacts are examined when building day-punch schedules.
-- **ch05_rope**: `create_rope`, `is_sub_rope` — used in `gcalendar.py` to check whether a plan falls within a focus subtree.
+- **ch05_rope**: `create_rope`, `is_sub_rope` — used in `gcalendar.py` to check whether a plan is within a focus subtree.
 - **ch06_reason**: `ReasonHeir` — plan reasons are inspected to extract time-based conditions for calendar generation.
 - **ch07_plan**: `PlanUnit` — plan trees are walked to find active pledges.
 - **ch08_person_logic**: `PersonUnit`, `get_sorted_plan_list` — the job `PersonUnit` is the data source for all KPI and calendar output.
@@ -63,6 +63,6 @@ Two KPIs are currently defined, both implemented as `CREATE TABLE AS SELECT` SQL
 2. Calls `add_epoch_planunit` and `set_epoch_fact` (from ch14) to inject the current datetime's `TimeNum` as a fact into the person's plan tree.
 3. Runs `thinkout()` to re-evaluate plan activation at that specific point in time.
 4. Walks the plan tree looking for active pledges whose `ReasonHeir` references a time-based fact context (using `is_sub_rope` to check against the epoch rope).
-5. For each such plan, if it falls under `focus_group_title`'s workforce scope, writes a "day punch" text file — a plain-text record of the plan rope, active status, and time bounds suitable for importing into Google Calendar.
+5. For each such plan, if it is under `focus_group_title`'s workforce scope, writes a "day punch" text file — a plain-text record of the plan rope, active status, and time bounds suitable for importing into Google Calendar.
 
 `get_day_punchs_persons` and `copy_person_day_punches_to_dst_dir` handle multi-person orchestration and file copying. The day-punch output is the most direct link between keg's belief system and a person's real-world schedule.

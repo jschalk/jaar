@@ -46,7 +46,7 @@ The "outside" (`otx`) / "inside" (`inx`) distinction is fundamental: an external
 - `NameMap` — translates `NameTerm`s (contact names, person names). Direct `otx → inx` lookup.
 - `TitleMap` — translates `TitleTerm`s (group titles). Direct lookup.
 - `LabelMap` — translates `LabelTerm`s (single rope node names). Validates that neither `otx` nor `inx` contains the knot character.
-- `RopeMap` — translates full `RopeTerm` paths. It splits the external rope into labels, applies `LabelMap` to each label, replaces the `otx_knot` with the `inx_knot`, and reassembles. Falls back to `unknown_str` if any label cannot be translated.
+- `RopeMap` — translates full `RopeTerm` paths. It splits the external rope into labels, applies `LabelMap` to each label, replaces the `otx_knot` with the `inx_knot`, and reassembles. Backup to `unknown_str` if any label cannot be translated.
 
 **`TranslateUnit`** composes all four maps into a single per-face translation object. It exposes unified methods (`set_titleterm`, `set_nameterm`, `set_labelterm`, `set_ropeterm`) and a `get_mapunit(obj_type)` dispatcher. It also holds top-level `otx_knot`/`inx_knot` and `unknown_str` settings that are propagated to all child maps via `_check_all_core_attrs_match`.
 

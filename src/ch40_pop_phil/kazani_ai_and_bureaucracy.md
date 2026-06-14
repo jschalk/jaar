@@ -23,7 +23,7 @@ Bureaucracy hates variation, and does not know what to do with it. Everything it
 
 You have a preference for monotony. You are selecting for monotony. And, in the end, you end up with monotony, as all types of actors (including humans) will be adjusting themselves for your preferences.
 
-This largely comes from necessity. Everything outstanding, unusual, bizarre - puzzles bureaucracy, as its mental models are simply not fit to deal with it. The most it can do, is to classify the object not falling into any of its standard categories, into the separate category of ‘bizarre’, and throw it all away, into the trashbin.
+This largely comes from necessity. Everything outstanding, unusual, bizarre - puzzles bureaucracy, as its mental models are simply not fit to deal with it. The most it can do, is to classify the object not in any of its standard categories, into the separate category of ‘bizarre’, and throw it all away, into the trashbin.
 
 > That is a major reason, why the large institutions always ultimately fail. They fail, because they have missed too many opportunities, and the trashbin in their storage is full of diamonds. Which they cannot see, and recognise as such
 

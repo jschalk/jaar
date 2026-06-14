@@ -215,7 +215,7 @@ A `FactUnit` is a statement about the world: it says that a context (identified 
 **`CaseUnit`**
 A `CaseUnit` is a single condition within a reason. It specifies:
 - `reason_state`: the rope state that must be active for this case to pass.
-- Optionally `reason_lower` / `reason_upper`: a numeric range the fact must fall within.
+- Optionally `reason_lower` / `reason_upper`: a numeric range the fact must be within.
 - Optionally `reason_divisor`: enables **cyclic/modular reasoning** — the fact value is taken modulo the divisor before comparing to the range. This allows conditions like "every 7 rotations of the earth" or "every quarter."
 
 `CaseUnit.set_case_active(factheir)` evaluates whether the supplied fact satisfies this case's condition, setting both `case_active` and `case_task` (whether the case indicates there is still work remaining within the range).
@@ -841,7 +841,7 @@ The "outside" (`otx`) / "inside" (`inx`) distinction is fundamental: an external
 - `NameMap` — translates `NameTerm`s (contact names, person names). Direct `otx → inx` lookup.
 - `TitleMap` — translates `TitleTerm`s (group titles). Direct lookup.
 - `LabelMap` — translates `LabelTerm`s (single rope node names). Validates that neither `otx` nor `inx` contains the knot character.
-- `RopeMap` — translates full `RopeTerm` paths. It splits the external rope into labels, applies `LabelMap` to each label, replaces the `otx_knot` with the `inx_knot`, and reassembles. Falls back to `unknown_str` if any label cannot be translated.
+- `RopeMap` — translates full `RopeTerm` paths. It splits the external rope into labels, applies `LabelMap` to each label, replaces the `otx_knot` with the `inx_knot`, and reassembles. Backup to `unknown_str` if any label cannot be translated.
 
 **`TranslateUnit`** composes all four maps into a single per-face translation object. It exposes unified methods (`set_titleterm`, `set_nameterm`, `set_labelterm`, `set_ropeterm`) and a `get_mapunit(obj_type)` dispatcher. It also holds top-level `otx_knot`/`inx_knot` and `unknown_str` settings that are propagated to all child maps via `_check_all_core_attrs_match`.
 
@@ -1221,7 +1221,7 @@ Ontology note:
 `ch26_heard` is the final ETL stage before data becomes usable `PersonUnit` and `MomentUnit` objects. It advances data through `h_raw → h_agg → h_vld` and then reconstructs structured files from the validated heard tables.
 
 **`etl_heard_raw_tables_to_heard_agg_tables(cursor)`** — three steps:
-1. `set_all_heard_raw_inx_columns` — for every `_otx`-suffixed column in every `h_raw` table, determines the translation type (`NameTerm`, `TitleTerm`, `LabelTerm`, or `RopeTerm`) from the ch17 translate-args registry. If the column's base type is translateable, runs an UPDATE query that JOINs against the validated `trl{type}_s_vld` table to fill in the `_inx` value. For rows where no translation mapping exists, falls back to copying the `_otx` value into `_inx` directly (pass-through for untranslated terms).
+1. `set_all_heard_raw_inx_columns` — for every `_otx`-suffixed column in every `h_raw` table, determines the translation type (`NameTerm`, `TitleTerm`, `LabelTerm`, or `RopeTerm`) from the ch17 translate-args registry. If the column's base type is translateable, runs an UPDATE query that JOINs against the validated `trl{type}_s_vld` table to fill in the `_inx` value. For rows where no translation mapping exists, goes back to copying the `_otx` value into `_inx` directly (pass-through for untranslated terms).
 2. INSERT into `h_agg` tables from `h_raw`, deduplicating while excluding `_inx` columns from duplicate comparison.
 3. `update_heard_agg_timenum_columns` — applies NabuTime conversion to all time-numeric columns (`bud_time`, `fact_lower`, `fact_upper`, `reason_lower`, `reason_upper`, `tran_time`, `offi_time`) in `h_agg` tables: reads the `_otx` value, applies the epoch-length modular offset from the validated nabu table, and writes the result to the `_inx` column. This is where ch16's numeric translation is finally executed against real data.
 
@@ -1389,7 +1389,7 @@ Ontology note:
 ## 3. Summary of Previous Relevant Chapters
 
 - **ch03_contact**: `ContactUnit` — contacts are examined when building day-punch schedules.
-- **ch05_rope**: `create_rope`, `is_sub_rope` — used in `gcalendar.py` to check whether a plan falls within a focus subtree.
+- **ch05_rope**: `create_rope`, `is_sub_rope` — used in `gcalendar.py` to check whether a plan is within a focus subtree.
 - **ch06_reason**: `ReasonHeir` — plan reasons are inspected to extract time-based conditions for calendar generation.
 - **ch07_plan**: `PlanUnit` — plan trees are walked to find active pledges.
 - **ch08_person_logic**: `PersonUnit`, `get_sorted_plan_list` — the job `PersonUnit` is the data source for all KPI and calendar output.
@@ -1430,7 +1430,7 @@ Two KPIs are currently defined, both implemented as `CREATE TABLE AS SELECT` SQL
 2. Calls `add_epoch_planunit` and `set_epoch_fact` (from ch14) to inject the current datetime's `TimeNum` as a fact into the person's plan tree.
 3. Runs `thinkout()` to re-evaluate plan activation at that specific point in time.
 4. Walks the plan tree looking for active pledges whose `ReasonHeir` references a time-based fact context (using `is_sub_rope` to check against the epoch rope).
-5. For each such plan, if it falls under `focus_group_title`'s workforce scope, writes a "day punch" text file — a plain-text record of the plan rope, active status, and time bounds suitable for importing into Google Calendar.
+5. For each such plan, if it is under `focus_group_title`'s workforce scope, writes a "day punch" text file — a plain-text record of the plan rope, active status, and time bounds suitable for importing into Google Calendar.
 
 `get_day_punchs_persons` and `copy_person_day_punches_to_dst_dir` handle multi-person orchestration and file copying. The day-punch output is the most direct link between keg's belief system and a person's real-world schedule.
 
