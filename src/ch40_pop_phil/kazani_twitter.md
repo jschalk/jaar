@@ -2,7 +2,7 @@
 
 **Date:** 2025-08-02  
 **Author:** Kamil Kazani  
-**Source:** https://x.com/kamilkazani viewed from https://x.com/joachim1
+**Source:** https://x.com/kamilkazani viewed from Emmanuel Schalk's twitter login.
 **Copied to Keg:** 2026-06-09 
 
 On Oct 29, 2025 in response to question about Ukraine being able to give Russia a symbolic vistory:

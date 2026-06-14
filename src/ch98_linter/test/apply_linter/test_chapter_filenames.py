@@ -59,12 +59,8 @@ def get_image_paths_from_markdown(md_text: str) -> list[str]:
     return markdown_imgs + html_imgs
 
 
-def test_AllMarkdownImageLinksExist() -> None:
-    # repo_root = Path("src").resolve().parents[1]
-    src_dir = Path(__file__).resolve().parents[3]
-
+def get_missing_markdown_image_file_links(src_dir: Path) -> list[str]:
     missing_files: list[str] = []
-
     for md_file in src_dir.rglob("*.md"):
         # print(f"{md_file=}")
         md_text = md_file.read_text(encoding="utf-8")
@@ -83,5 +79,14 @@ def test_AllMarkdownImageLinksExist() -> None:
             if not image_path.exists():
                 missing_files.append(f"{md_file}: image not found -> {image_path_str}")
 
+
+def test_MarkdownImageLinksFilesExist() -> None:
+    # GIVEN
+    # repo_root = Path("src").resolve().parents[1]
+    src_dir = Path(__file__).resolve().parents[3]
+
+    # WHEN
+    missing_files = get_missing_markdown_image_file_links(src_dir)
+
+    # THEN
     assert not missing_files, "\n".join(missing_files)
-    assert 1 == 2

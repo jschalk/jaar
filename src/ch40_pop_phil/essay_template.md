@@ -9,13 +9,13 @@
 
 First paragraph. 
 
-<div align="center"><img src="images/example_01.png" alt="Description of image" width="700"></div>
+<div align="center"><img src="images/guillotine_mob.webp" alt="Description of image" width="300"></div>
 
 Paragraph with footnote.[^1] Can continue paragraph
 
 Another paragraph.
 
-<div align="center"><img src="images/example_02.png" alt="A different description of image" width="700"></div>
+<div align="center"><img src="images/a_b_venn_diagram.webp" alt="A different description of image" width="700"></div>
 
 
 Another paragraph and then a longer quote.

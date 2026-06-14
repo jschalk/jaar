@@ -14,7 +14,7 @@ The KegWheel is a model of understanding power and predicting how to affect chan
 
 As with any grand theory the hardest thing is deciding where to start.
 
-<div align="center"><img src="images/yelstin_family.webp" alt="FamilyUnit Yelstin" width="500"></div>
+<div align="center"><img src="../ch40_pop_phil/images/yelstin_family.webp" alt="FamilyUnit Yelstin" width="500"></div>
 
 <div align="center">
 

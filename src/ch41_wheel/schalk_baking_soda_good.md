@@ -1,6 +1,6 @@
 # On Buying and Giving Baking Soda
 
-**Date:** 2026-06-01  
+**Date:** 2026-06-14  
 **Author:** Emmanuel Schalk
 
 `Give, share, take sodium bicarbonate.`
