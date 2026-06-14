@@ -51,9 +51,9 @@ Here's an important insight I gained from reading Kazani:
 </div>
 
 
-I'm unable to remember which article talks about this. But the concept is that if there is chaos then that means there a chance the a family's decline could change. No one knows the future and chaos makes the future more unknowable. Of course chaos may could make the family fallout faster. But  *Stay rich or die trying*
+I'm unable to remember which article talks about this. But the concept is that if there is chaos then that means there a chance the a family's decline could change. No one knows the future and chaos makes the future more unknowable. So of course chaos may could make the family fall faster. But better to try then not. *Stay rich or die trying*
 
-Kegology Term *'Fallout'*: The opposite of a invitation, when a family loses prestige, usually because no other family with prestige wants to invite them.
+Kegology Term *'Fall'*: The opposite of a invitation, when a family loses prestige, usually because no other family with prestige wants to invite them.
 
 To be clear having money and prestige are different. Those with money will try to buy prestige and may succeed. But it's not automatic or even likely. There is little incentive for those with prestige to sell it, better to break promises and just keep asking for more money. Relationships matter more than money.  
 
