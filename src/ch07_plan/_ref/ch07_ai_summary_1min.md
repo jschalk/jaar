@@ -24,7 +24,7 @@ Ontology note:
 `ch07_plan` is the first chapter to draw on every prior chapter simultaneously:
 
 - **ch00_py**: null-safe helpers (`get_0_if_None`, `get_1_if_None`, `get_empty_dict_if_None`, `get_False_if_None`, `get_positive_int`).
-- **ch02_allot**: `allot_scale` and `default_grain_num_if_None` — used to distribute a plan's fund pool proportionally among its child plans (via their `kar` weights) and to distribute award funds among `AwardUnit`s.
+- **ch02_allot**: `allot_scale` and `default_grain_num_if_None` — used to distribute a plan's fund pool proportionally among its child plans (via their `poynt` weights) and to distribute award funds among `AwardUnit`s.
 - **ch03_contact**: `AwardUnit`, `AwardHeir`, `AwardLine`, `GroupUnit` — the award system from ch03 is embedded into each `PlanUnit`. Groups receive fund flows via award structures.
 - **ch04_workforce**: `WorkforceUnit`, `WorkforceHeir` — each plan can declare which groups/contactunits are responsible for carrying it out; these inherit down the tree.
 - **ch05_rope**: `RopeTerm`, `create_rope`, `rebuild_rope`, `is_sub_rope`, `find_replace_rope_key_dict`, `all_ropes_between` — the plan tree is entirely organized by rope paths. Every plan has a `parent_rope` and a `plan_label`, and its full identity is its rope.
@@ -42,7 +42,7 @@ Ch07 also introduces `HealerUnit` (in `healer.py`) and `RangeUnit` (in `range_to
 - A **pledge** (`pledge: True`) — a declared commitment that can be active or inactive.
 - A **fact source** (`factunits`) — a local override of incoming facts.
 - A **reason-gated plan** (`reasonunits`) — only active if its conditions are met.
-- A **funded node** — receives a slice of the parent's fund pool proportional to its `kar` weight, tracked via `fund_onset` and `fund_cease`.
+- A **funded node** — receives a slice of the parent's fund pool proportional to its `poynt` weight, tracked via `fund_onset` and `fund_cease`.
 - A **ranged plan** (`begin`, `close`, `addin`, `numor`, `denom`, `morph`) — can represent a numeric interval that can be inherited and morphed by children.
 - A **problem** (`problem_bool`) with designated **healers** (`healerunit`) — plans that flag issues and point to responsible remediation plans.
 

@@ -217,7 +217,7 @@ def _modify_person_planunit_update(x_person: PersonUnit, x_atom: PersonAtom):
         denom=x_atom.get_value("denom"),
         numor=x_atom.get_value("numor"),
         morph=x_atom.get_value("morph"),
-        kar=x_atom.get_value("kar"),
+        poynt=x_atom.get_value("poynt"),
         pledge=x_atom.get_value("pledge"),
     )
 
@@ -530,7 +530,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.denom != y_obj.denom
             or x_obj.numor != y_obj.numor
             or x_obj.morph != y_obj.morph
-            or x_obj.kar != y_obj.kar
+            or x_obj.poynt != y_obj.poynt
             or x_obj.pledge != y_obj.pledge
         )
     elif dimen == "person_plan_factunit":
@@ -582,7 +582,7 @@ class AtomRow:
     gogo_want: float = None
     group_title: TitleTerm = None
     healer_name: TitleTerm = None
-    kar: int = None
+    poynt: int = None
     max_tree_traverse: int = None
     morph: bool = None
     reason_state: RopeTerm = None

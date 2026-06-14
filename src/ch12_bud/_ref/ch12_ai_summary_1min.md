@@ -26,7 +26,7 @@ Ontology note:
 - **ch10_person_lesson**: `MomentRope` — `TranBook` is scoped to a moment rope, tying transactions to a specific temporal/contextual location.
 
 New semantic types introduced in `ch12_semantic_types.py`:
-- `TimeNum` (an `int`) — represents an instant on the time number line (absolute minutes from an epoch).
+- `TimeNum` (an `int`) — represents an instant on the time number line (absolute minutes from a zero-minute).
 - `SparkInt` (an `int`) — describes the ordinal position of a data ingestion event (a "spark").
 
 ---

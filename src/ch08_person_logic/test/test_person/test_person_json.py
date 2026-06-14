@@ -48,7 +48,7 @@ def test_PersonUnit_to_dict_ReturnsObj_Scenario0():
     x_planroot = yao_person.planroot
     planroot_dict = person_dict[kw.planroot]
     assert planroot_dict[kw.plan_label] == x_planroot.plan_label
-    assert planroot_dict[kw.kar] == x_planroot.kar
+    assert planroot_dict[kw.poynt] == x_planroot.poynt
     assert len(planroot_dict[kw.kids]) == len(x_planroot.kids)
 
 
@@ -334,17 +334,17 @@ def test_get_personunit_from_dict_ReturnsObj_Scenario4_planroot_knot_IsApplied()
     assert after_bob_person.get_plan_obj(hr_number_rope).knot == exx.slash
 
 
-def test_get_personunit_from_dict_ReturnsObj_Scenario5_ExportsPersonUnit_kar():
+def test_get_personunit_from_dict_ReturnsObj_Scenario5_ExportsPersonUnit_poynt():
     # ESTABLISH
     x1_person = personunit_v001()
-    assert x1_person.planroot.kar == 1
+    assert x1_person.planroot.poynt == 1
 
     # WHEN
     x2_person = get_personunit_from_dict(x1_person.to_dict())
 
     # THEN
-    assert x1_person.planroot.kar == 1
-    assert x1_person.planroot.kar == x2_person.planroot.kar
+    assert x1_person.planroot.poynt == 1
+    assert x1_person.planroot.poynt == x2_person.planroot.poynt
     assert x1_person.planroot.kids == x2_person.planroot.kids
 
 
@@ -354,7 +354,7 @@ def test_get_personunit_from_dict_ReturnsObj_Scenario6_CheckNumericalPlanUnitAtt
     casa_rope = before_person.make_l1_rope(exx.casa)
     before_person.add_plan(casa_rope)
     before_casa_plan = before_person.get_plan_obj(casa_rope)
-    x_kar = 11
+    x_poynt = 11
     x_begin = 12
     x_close = 13
     x_numor = 14
@@ -363,7 +363,7 @@ def test_get_personunit_from_dict_ReturnsObj_Scenario6_CheckNumericalPlanUnitAtt
     x_addin = 19
     x_gogo_want = 17
     x_stop_want = 18
-    before_casa_plan.kar = x_kar
+    before_casa_plan.poynt = x_poynt
     before_casa_plan.begin = x_begin
     before_casa_plan.close = x_close
     before_casa_plan.numor = x_numor
@@ -372,7 +372,7 @@ def test_get_personunit_from_dict_ReturnsObj_Scenario6_CheckNumericalPlanUnitAtt
     before_casa_plan.addin = x_addin
     before_casa_plan.gogo_want = x_gogo_want
     before_casa_plan.stop_want = x_stop_want
-    assert before_casa_plan.kar == x_kar
+    assert before_casa_plan.poynt == x_poynt
     assert before_casa_plan.begin == x_begin
     assert before_casa_plan.close == x_close
     assert before_casa_plan.numor == x_numor
@@ -387,7 +387,7 @@ def test_get_personunit_from_dict_ReturnsObj_Scenario6_CheckNumericalPlanUnitAtt
 
     # THEN
     after_casa_plan = after_person.get_plan_obj(casa_rope)
-    assert after_casa_plan.kar == x_kar
+    assert after_casa_plan.poynt == x_poynt
     assert after_casa_plan.begin == x_begin
     assert after_casa_plan.close == x_close
     assert after_casa_plan.numor == x_numor

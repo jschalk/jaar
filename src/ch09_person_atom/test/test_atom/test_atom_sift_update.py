@@ -18,7 +18,7 @@ def test_sift_atom_ReturnsNoneIfGivenPersonAtomIsUPDATE():
     casa_atom = personatom_shop(kw.person_planunit, kw.UPDATE)
     casa_atom.set_arg(kw.parent_rope, sue_person.planroot.plan_label)
     casa_atom.set_arg(kw.plan_label, exx.casa)
-    casa_atom.set_arg(kw.kar, 8)
+    casa_atom.set_arg(kw.poynt, 8)
 
     # WHEN
     new_casa_atom = sift_personatom(sue_person, casa_atom)
@@ -120,7 +120,7 @@ def test_sift_atom_ReturnsObj_PersonAtom_UPDATE_person_planunit():
     sue_close = 43
     sue_denom = 47
     sue_gogo_want = 59
-    sue_kar = 67
+    sue_poynt = 67
     sue_morph = 79
     sue_numor = 83
     sue_pledge = 97
@@ -133,7 +133,7 @@ def test_sift_atom_ReturnsObj_PersonAtom_UPDATE_person_planunit():
     old_casa_atom.set_arg(kw.close, sue_close)
     old_casa_atom.set_arg(kw.denom, sue_denom)
     old_casa_atom.set_arg(kw.gogo_want, sue_gogo_want)
-    old_casa_atom.set_arg(kw.kar, sue_kar)
+    old_casa_atom.set_arg(kw.poynt, sue_poynt)
     old_casa_atom.set_arg(kw.morph, sue_morph)
     old_casa_atom.set_arg(kw.numor, sue_numor)
     old_casa_atom.set_arg(kw.pledge, sue_pledge)
@@ -153,7 +153,7 @@ def test_sift_atom_ReturnsObj_PersonAtom_UPDATE_person_planunit():
     assert zia_jvalues.get(kw.close) == sue_close
     assert zia_jvalues.get(kw.denom) == sue_denom
     assert zia_jvalues.get(kw.gogo_want) == sue_gogo_want
-    assert zia_jvalues.get(kw.kar) == sue_kar
+    assert zia_jvalues.get(kw.poynt) == sue_poynt
     assert zia_jvalues.get(kw.morph) == sue_morph
     assert zia_jvalues.get(kw.numor) == sue_numor
     assert zia_jvalues.get(kw.pledge) == sue_pledge

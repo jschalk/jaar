@@ -369,7 +369,7 @@ class PersonDelta:
             x_personatom.set_jvalue("denom", insert_planunit.denom)
             x_personatom.set_jvalue("numor", insert_planunit.numor)
             x_personatom.set_jvalue("morph", insert_planunit.morph)
-            x_personatom.set_jvalue("kar", insert_planunit.kar)
+            x_personatom.set_jvalue("poynt", insert_planunit.poynt)
             x_personatom.set_jvalue("pledge", insert_planunit.pledge)
             self.set_personatom(x_personatom)
 
@@ -420,8 +420,8 @@ class PersonDelta:
                     x_personatom.set_jvalue("numor", after_planunit.numor)
                 if before_planunit.morph != after_planunit.morph:
                     x_personatom.set_jvalue("morph", after_planunit.morph)
-                if before_planunit.kar != after_planunit.kar:
-                    x_personatom.set_jvalue("kar", after_planunit.kar)
+                if before_planunit.poynt != after_planunit.poynt:
+                    x_personatom.set_jvalue("poynt", after_planunit.poynt)
                 if before_planunit.pledge != after_planunit.pledge:
                     x_personatom.set_jvalue("pledge", after_planunit.pledge)
                 self.set_personatom(x_personatom)

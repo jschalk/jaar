@@ -47,7 +47,7 @@ def test_Chapters_NonTestFilesDoNotHavePrintStatments():
         "ch_move1.py",
         "ch_move_many.py",
         "create_notebook.py",
-        "paths_change.py",
+        "src_paths_rename.py",
         "style.py",
     }
 

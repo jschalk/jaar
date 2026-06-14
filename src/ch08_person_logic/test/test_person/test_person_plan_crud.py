@@ -117,15 +117,15 @@ def test_PersonUnit_add_plan_SetsAttr_Scenario1():
     # ESTABLISH
     bob_personunit = personunit_shop(exx.bob)
     casa_rope = bob_personunit.make_l1_rope("casa")
-    casa_kar = 13
+    casa_poynt = 13
     casa_pledge = True
 
     # WHEN
-    bob_personunit.add_plan(casa_rope, kar=casa_kar, pledge=casa_pledge)
+    bob_personunit.add_plan(casa_rope, poynt=casa_poynt, pledge=casa_pledge)
 
     # THEN
     casa_planunit = bob_personunit.get_plan_obj(casa_rope)
-    assert casa_planunit.kar == casa_kar
+    assert casa_planunit.poynt == casa_poynt
     assert casa_planunit.pledge
 
 
@@ -133,14 +133,14 @@ def test_PersonUnit_add_plan_ReturnsObj():
     # ESTABLISH
     bob_personunit = personunit_shop(exx.bob)
     casa_rope = bob_personunit.make_l1_rope("casa")
-    casa_kar = 13
+    casa_poynt = 13
 
     # WHEN
-    casa_planunit = bob_personunit.add_plan(casa_rope, kar=casa_kar)
+    casa_planunit = bob_personunit.add_plan(casa_rope, poynt=casa_poynt)
 
     # THEN
     assert casa_planunit.plan_label == "casa"
-    assert casa_planunit.kar == casa_kar
+    assert casa_planunit.poynt == casa_poynt
 
 
 def test_PersonUnit_set_plan_ScenarioXX_AddsPlanObjWithNonDefault_knot():
@@ -307,20 +307,20 @@ def test_PersonUnit_del_plan_obj_LevelNCanBeDeleted_ChildrenDeleted():
     assert str(excinfo.value) == f"get_plan_obj failed. no plan at '{usa_texas_rope}'"
 
 
-def test_PersonUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario00_kar():
+def test_PersonUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario00_poynt():
     # ESTABLISH
     sue_person = get_personunit_with_4_levels()
     casa_rope = sue_person.make_l1_rope(exx.casa)
     print(f"{casa_rope=}")
-    old_kar = sue_person.planroot.kids[exx.casa].kar
-    assert old_kar == 30
+    old_poynt = sue_person.planroot.kids[exx.casa].poynt
+    assert old_poynt == 30
 
     # WHEN
-    sue_person.edit_plan_attr(casa_rope, kar=23)
+    sue_person.edit_plan_attr(casa_rope, poynt=23)
 
     # THEN
-    new_kar = sue_person.planroot.kids[exx.casa].kar
-    assert new_kar == 23
+    new_poynt = sue_person.planroot.kids[exx.casa].poynt
+    assert new_poynt == 23
 
 
 def test_PersonUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario01_plan_uid():
@@ -704,27 +704,27 @@ def test_PersonUnit_set_plan_ScenarioXX_adoptee_AddsAdoptee():
     assert bob_person.plan_exists(sports_hike_rope) is False
 
 
-def test_PersonUnit_set_plan_ScenarioXX_bundling_SetsNewParentWithkarEqualToSumOfAdoptedPlans():
+def test_PersonUnit_set_plan_ScenarioXX_bundling_SetsNewParentWithpoyntEqualToSumOfAdoptedPlans():
     # ESTABLISH
     bob_person = personunit_shop("Bob")
     sports_str = "sports"
     sports_rope = bob_person.make_l1_rope(sports_str)
-    bob_person.set_l1_plan(planunit_shop(sports_str, kar=2))
-    bowl_kar = 3
-    bob_person.set_plan_obj(planunit_shop(exx.bowl, kar=bowl_kar), sports_rope)
+    bob_person.set_l1_plan(planunit_shop(sports_str, poynt=2))
+    bowl_poynt = 3
+    bob_person.set_plan_obj(planunit_shop(exx.bowl, poynt=bowl_poynt), sports_rope)
     hike_str = "hike"
-    hike_kar = 5
-    bob_person.set_plan_obj(planunit_shop(hike_str, kar=hike_kar), sports_rope)
+    hike_poynt = 5
+    bob_person.set_plan_obj(planunit_shop(hike_str, poynt=hike_poynt), sports_rope)
     bball_str = "bball"
-    bball_kar = 7
-    bob_person.set_plan_obj(planunit_shop(bball_str, kar=bball_kar), sports_rope)
+    bball_poynt = 7
+    bob_person.set_plan_obj(planunit_shop(bball_str, poynt=bball_poynt), sports_rope)
 
     sports_bowl_rope = bob_person.make_rope(sports_rope, exx.bowl)
     sports_hike_rope = bob_person.make_rope(sports_rope, hike_str)
     sports_bball_rope = bob_person.make_rope(sports_rope, bball_str)
-    assert bob_person.get_plan_obj(sports_bowl_rope).kar == bowl_kar
-    assert bob_person.get_plan_obj(sports_hike_rope).kar == hike_kar
-    assert bob_person.get_plan_obj(sports_bball_rope).kar == bball_kar
+    assert bob_person.get_plan_obj(sports_bowl_rope).poynt == bowl_poynt
+    assert bob_person.get_plan_obj(sports_hike_rope).poynt == hike_poynt
+    assert bob_person.get_plan_obj(sports_bball_rope).poynt == bball_poynt
     summer_str = "summer"
     summer_rope = bob_person.make_rope(sports_rope, summer_str)
     summer_bowl_rope = bob_person.make_rope(summer_rope, exx.bowl)
@@ -743,9 +743,9 @@ def test_PersonUnit_set_plan_ScenarioXX_bundling_SetsNewParentWithkarEqualToSumO
     )
 
     # THEN
-    assert bob_person.get_plan_obj(summer_rope).kar == bowl_kar + hike_kar
-    assert bob_person.get_plan_obj(summer_bowl_rope).kar == bowl_kar
-    assert bob_person.get_plan_obj(summer_hike_rope).kar == hike_kar
+    assert bob_person.get_plan_obj(summer_rope).poynt == bowl_poynt + hike_poynt
+    assert bob_person.get_plan_obj(summer_bowl_rope).poynt == bowl_poynt
+    assert bob_person.get_plan_obj(summer_hike_rope).poynt == hike_poynt
     assert bob_person.plan_exists(summer_bball_rope) is False
     assert bob_person.plan_exists(sports_bowl_rope) is False
     assert bob_person.plan_exists(sports_hike_rope) is False
@@ -757,22 +757,22 @@ def test_PersonUnit_del_plan_obj_DeletingBundledPlanReturnsPlansToOriginalState(
     bob_person = personunit_shop("Bob")
     sports_str = "sports"
     sports_rope = bob_person.make_l1_rope(sports_str)
-    bob_person.set_l1_plan(planunit_shop(sports_str, kar=2))
-    bowl_kar = 3
-    bob_person.set_plan_obj(planunit_shop(exx.bowl, kar=bowl_kar), sports_rope)
+    bob_person.set_l1_plan(planunit_shop(sports_str, poynt=2))
+    bowl_poynt = 3
+    bob_person.set_plan_obj(planunit_shop(exx.bowl, poynt=bowl_poynt), sports_rope)
     hike_str = "hike"
-    hike_kar = 5
-    bob_person.set_plan_obj(planunit_shop(hike_str, kar=hike_kar), sports_rope)
+    hike_poynt = 5
+    bob_person.set_plan_obj(planunit_shop(hike_str, poynt=hike_poynt), sports_rope)
     bball_str = "bball"
-    bball_kar = 7
-    bob_person.set_plan_obj(planunit_shop(bball_str, kar=bball_kar), sports_rope)
+    bball_poynt = 7
+    bob_person.set_plan_obj(planunit_shop(bball_str, poynt=bball_poynt), sports_rope)
 
     sports_bowl_rope = bob_person.make_rope(sports_rope, exx.bowl)
     sports_hike_rope = bob_person.make_rope(sports_rope, hike_str)
     sports_bball_rope = bob_person.make_rope(sports_rope, bball_str)
-    assert bob_person.get_plan_obj(sports_bowl_rope).kar == bowl_kar
-    assert bob_person.get_plan_obj(sports_hike_rope).kar == hike_kar
-    assert bob_person.get_plan_obj(sports_bball_rope).kar == bball_kar
+    assert bob_person.get_plan_obj(sports_bowl_rope).poynt == bowl_poynt
+    assert bob_person.get_plan_obj(sports_hike_rope).poynt == hike_poynt
+    assert bob_person.get_plan_obj(sports_bball_rope).poynt == bball_poynt
     summer_str = "summer"
     summer_rope = bob_person.make_rope(sports_rope, summer_str)
     summer_bowl_rope = bob_person.make_rope(summer_rope, exx.bowl)
@@ -787,9 +787,9 @@ def test_PersonUnit_del_plan_obj_DeletingBundledPlanReturnsPlansToOriginalState(
         adoptees=[exx.bowl, hike_str],
         bundling=True,
     )
-    assert bob_person.get_plan_obj(summer_rope).kar == bowl_kar + hike_kar
-    assert bob_person.get_plan_obj(summer_bowl_rope).kar == bowl_kar
-    assert bob_person.get_plan_obj(summer_hike_rope).kar == hike_kar
+    assert bob_person.get_plan_obj(summer_rope).poynt == bowl_poynt + hike_poynt
+    assert bob_person.get_plan_obj(summer_bowl_rope).poynt == bowl_poynt
+    assert bob_person.get_plan_obj(summer_hike_rope).poynt == hike_poynt
     assert bob_person.plan_exists(summer_bball_rope) is False
     assert bob_person.plan_exists(sports_bowl_rope) is False
     assert bob_person.plan_exists(sports_hike_rope) is False
@@ -803,9 +803,9 @@ def test_PersonUnit_del_plan_obj_DeletingBundledPlanReturnsPlansToOriginalState(
     sports_bowl_plan = bob_person.get_plan_obj(sports_bowl_rope)
     sports_hike_plan = bob_person.get_plan_obj(sports_hike_rope)
     sports_bball_plan = bob_person.get_plan_obj(sports_bball_rope)
-    assert sports_bowl_plan.kar == bowl_kar
-    assert sports_hike_plan.kar == hike_kar
-    assert sports_bball_plan.kar == bball_kar
+    assert sports_bowl_plan.poynt == bowl_poynt
+    assert sports_hike_plan.poynt == hike_poynt
+    assert sports_bball_plan.poynt == bball_poynt
 
 
 def test_PersonUnit_edit_plan_attr_DeletesPlanUnit_awardunits():
@@ -1039,8 +1039,8 @@ def test_PersonUnit_set_offtrack_fund_ReturnsObj():
     bob_personunit.set_l1_plan(casa_plan)
     bob_personunit.set_l1_plan(wk_plan)
     bob_personunit.set_plan_obj(wed_plan, wk_rope)
-    bob_personunit.offtrack_kids_kar_set.add(casa_rope)
-    bob_personunit.offtrack_kids_kar_set.add(wk_rope)
+    bob_personunit.offtrack_kids_poynt_set.add(casa_rope)
+    bob_personunit.offtrack_kids_poynt_set.add(wk_rope)
     assert bob_personunit.offtrack_fund == 0
 
     # WHEN
@@ -1050,7 +1050,7 @@ def test_PersonUnit_set_offtrack_fund_ReturnsObj():
     assert bob_personunit.offtrack_fund == 105
 
     # WHEN
-    bob_personunit.offtrack_kids_kar_set.add(wed_rope)
+    bob_personunit.offtrack_kids_poynt_set.add(wed_rope)
     bob_personunit.set_offtrack_fund()
 
     # THEN
@@ -1091,8 +1091,8 @@ def test_PersonUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     bob_personunit.set_l1_plan(casa_plan)
     bob_personunit.set_l1_plan(wk_plan)
     bob_personunit.set_plan_obj(wed_plan, wk_rope)
-    bob_personunit.offtrack_kids_kar_set.add(casa_rope)
-    bob_personunit.offtrack_kids_kar_set.add(wk_rope)
+    bob_personunit.offtrack_kids_poynt_set.add(casa_rope)
+    bob_personunit.offtrack_kids_poynt_set.add(wk_rope)
     bob_personunit.set_offtrack_fund()
     assert bob_personunit.offtrack_fund == 105
 
@@ -1107,7 +1107,7 @@ def test_PersonUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     assert bob_personunit.get_contact(exx.sue).fund_give == 26
     assert bob_personunit.get_contact(exx.sue).fund_take == 53
 
-    bob_personunit.offtrack_kids_kar_set.add(wed_rope)
+    bob_personunit.offtrack_kids_poynt_set.add(wed_rope)
     bob_personunit.set_offtrack_fund()
 
     # THEN

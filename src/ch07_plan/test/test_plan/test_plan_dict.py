@@ -125,7 +125,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
         parent_rope=casa_rope,
         kids=None,
         awardunits=biker_and_flyer_awardunits,
-        kar=30,
+        poynt=30,
         plan_label=exx.casa,
         tree_level=1,
         reasonunits=x1_reasonunits,
@@ -171,7 +171,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     assert casa_dict[kw.awardunits] == x1_awardunits
     assert casa_dict[kw.workforceunit] == sue_workforceunit.to_dict()
     assert casa_dict[kw.healerunit] == yao_healerunit.to_dict()
-    assert casa_dict[kw.kar] == casa_plan.kar
+    assert casa_dict[kw.poynt] == casa_plan.poynt
     assert casa_dict[kw.plan_label] == casa_plan.plan_label
     assert casa_dict[kw.plan_uid] == casa_plan.plan_uid
     assert casa_dict[kw.begin] == casa_plan.begin
@@ -198,7 +198,7 @@ def test_PlanUnit_to_dict_ReturnsObj_WithoutEmptyAttributes():
 
     # THEN
     assert casa_dict is not None
-    assert casa_dict == {kw.plan_label: exx.casa, kw.kar: 1}
+    assert casa_dict == {kw.plan_label: exx.casa, kw.poynt: 1}
 
 
 def test_PlanUnit_to_dict_ReturnsObj_DictWith_attrs_SetToTrue():

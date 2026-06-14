@@ -61,7 +61,7 @@ def test_get_translate_args_obj_types_ReturnsObj():
     assert translate_args_obj_types.get(kw.group_title) == kw.TitleTerm
     assert translate_args_obj_types.get(kw.healer_name) == kw.NameTerm
     assert translate_args_obj_types.get(kw.hour_label) == kw.LabelTerm
-    assert translate_args_obj_types.get(kw.kar) == "int"
+    assert translate_args_obj_types.get(kw.poynt) == "int"
     assert translate_args_obj_types.get(kw.max_tree_traverse) == "int"
     assert translate_args_obj_types.get(kw.month_label) == kw.LabelTerm
     assert translate_args_obj_types.get(kw.monthday_index) == "int"

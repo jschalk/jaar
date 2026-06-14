@@ -36,7 +36,7 @@ def test_AtomRow_Exists():
     assert x_atomrow.group_title is None
     assert x_atomrow.healer_name is None
     assert x_atomrow.solo is None
-    assert x_atomrow.kar is None
+    assert x_atomrow.poynt is None
     assert x_atomrow.max_tree_traverse is None
     assert x_atomrow.morph is None
     assert x_atomrow.reason_state is None

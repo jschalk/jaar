@@ -210,7 +210,7 @@ def add_epoch_planunit(person: PersonUnit, epoch_config: dict = None):
     offset_plan = planunit_shop("yr1_jan1_offset", addin=x_yr1_jan1_offset)
     person.set_plan_obj(offset_plan, epoch_rope)
     time_rope = person.make_l1_rope("time")
-    person.edit_plan_attr(time_rope, kar=0)
+    person.edit_plan_attr(time_rope, poynt=0)
 
 
 def add_planunits(

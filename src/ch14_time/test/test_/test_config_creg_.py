@@ -569,7 +569,7 @@ def test_add_epoch_planunit_SetsAttr_Scenario1_config_IsNone():
     assert creg_offset_plan.addin == creg_config.get(kw.yr1_jan1_offset)
 
 
-def test_add_epoch_planunit_SetsAttr_Scenario2_time_PlanUnitHasZero_kar():
+def test_add_epoch_planunit_SetsAttr_Scenario2_time_PlanUnitHasZero_poynt():
     # ESTABLISH
     sue_person = personunit_shop("Sue")
     time_rope = sue_person.make_l1_rope(kw.time)
@@ -580,7 +580,7 @@ def test_add_epoch_planunit_SetsAttr_Scenario2_time_PlanUnitHasZero_kar():
     add_epoch_planunit(sue_person)
 
     # THEN
-    assert sue_person.get_plan_obj(time_rope).kar == 0
+    assert sue_person.get_plan_obj(time_rope).poynt == 0
 
 
 # def test_PersonUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario2():

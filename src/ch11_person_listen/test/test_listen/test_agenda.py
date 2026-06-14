@@ -62,9 +62,9 @@ def test_listen_to_speaker_agenda_ReturnsSinglecase_taskPerson():
     # THEN
     clean_rope = zia_personunit.make_l1_rope(exx.clean)
     yao_clean_planunit = after_yao_personunit.get_plan_obj(clean_rope)
-    print(f"{yao_clean_planunit.kar=}")
-    assert yao_clean_planunit.kar != zia_clean_planunit.kar
-    assert yao_clean_planunit.kar == yao_contact_contact_debt_lumen
+    print(f"{yao_clean_planunit.poynt=}")
+    assert yao_clean_planunit.poynt != zia_clean_planunit.poynt
+    assert yao_clean_planunit.poynt == yao_contact_contact_debt_lumen
     assert after_yao_personunit == before_yao_personunit
     assert len(after_yao_personunit.get_agenda_dict()) == 1
 
@@ -95,13 +95,13 @@ def test_listen_to_speaker_agenda_ReturnsLevel2case_taskPerson():
     # THEN
     clean_rope = zia_personunit.make_rope(casa_rope, exx.clean)
     yao_clean_planunit = after_yao_personunit.get_plan_obj(clean_rope)
-    print(f"{yao_clean_planunit.kar=}")
-    assert yao_clean_planunit.kar != zia_clean_planunit.kar
-    assert yao_clean_planunit.kar == yao_contact_debt_lumen
+    print(f"{yao_clean_planunit.poynt=}")
+    assert yao_clean_planunit.poynt != zia_clean_planunit.poynt
+    assert yao_clean_planunit.poynt == yao_contact_debt_lumen
     after_casa_planunit = after_yao_personunit.get_plan_obj(casa_rope)
-    print(f"{after_casa_planunit.kar=}")
-    assert after_casa_planunit.kar != 1
-    assert after_casa_planunit.kar == yao_contact_debt_lumen
+    print(f"{after_casa_planunit.poynt=}")
+    assert after_casa_planunit.poynt != 1
+    assert after_casa_planunit.poynt == yao_contact_debt_lumen
     assert after_yao_personunit == before_yao_personunit
     assert len(after_yao_personunit.get_agenda_dict()) == 1
 
@@ -144,19 +144,19 @@ def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2case_taskPerson():
     after_clean_planunit = after_yao_personunit.get_plan_obj(clean_rope)
     after_casa_planunit = after_yao_personunit.get_plan_obj(casa_rope)
     after_fly_planunit = after_yao_personunit.get_plan_obj(fly_rope)
-    print(f"{after_clean_planunit.kar=}")
-    assert after_clean_planunit.kar != yao_clean_planunit.kar
-    assert after_clean_planunit.kar == 19
-    print(f"{after_cuisine_planunit.kar=}")
-    assert after_cuisine_planunit.kar != yao_cuisine_planunit.kar
-    assert after_cuisine_planunit.kar == 18
-    print(f"{after_casa_planunit.kar=}")
-    assert after_casa_planunit.kar != 1
-    assert after_casa_planunit.kar == 37
+    print(f"{after_clean_planunit.poynt=}")
+    assert after_clean_planunit.poynt != yao_clean_planunit.poynt
+    assert after_clean_planunit.poynt == 19
+    print(f"{after_cuisine_planunit.poynt=}")
+    assert after_cuisine_planunit.poynt != yao_cuisine_planunit.poynt
+    assert after_cuisine_planunit.poynt == 18
+    print(f"{after_casa_planunit.poynt=}")
+    assert after_casa_planunit.poynt != 1
+    assert after_casa_planunit.poynt == 37
     assert after_yao_personunit == before_yao_personunit
     assert len(after_yao_personunit.get_agenda_dict()) == 3
-    assert after_fly_planunit.kar != 1
-    assert after_fly_planunit.kar == 18
+    assert after_fly_planunit.poynt != 1
+    assert after_fly_planunit.poynt == 18
 
 
 def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2case_taskPersonWhereAnPlanUnitExistsInAdvance():
@@ -181,7 +181,7 @@ def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2case_taskPersonWhereA
     before_yao_dish_planunit = planunit_shop(dish_str, pledge=True)
     before_yao_dish_planunit.workforceunit.add_labor(exx.yao)
     before_yao_personunit.set_plan_obj(before_yao_dish_planunit, casa_rope)
-    before_yao_personunit.edit_plan_attr(dish_rope, kar=1000)
+    before_yao_personunit.edit_plan_attr(dish_rope, poynt=1000)
     zia_personunit.set_plan_obj(yao_dish_planunit, casa_rope)
     zia_personunit.set_plan_obj(yao_cuisine_planunit, casa_rope)
     zia_personunit.set_l1_plan(yao_fly_planunit)
@@ -201,19 +201,19 @@ def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2case_taskPersonWhereA
     after_dish_planunit = after_yao_personunit.get_plan_obj(dish_rope)
     after_casa_planunit = after_yao_personunit.get_plan_obj(casa_rope)
     after_fly_planunit = after_yao_personunit.get_plan_obj(fly_rope)
-    print(f"{after_dish_planunit.kar=}")
-    assert after_dish_planunit.kar != yao_dish_planunit.kar
-    assert after_dish_planunit.kar == 1018
-    print(f"{after_cuisine_planunit.kar=}")
-    assert after_cuisine_planunit.kar != yao_cuisine_planunit.kar
-    assert after_cuisine_planunit.kar == 19
-    print(f"{after_casa_planunit.kar=}")
-    assert after_casa_planunit.kar != 1
-    assert after_casa_planunit.kar == 38
+    print(f"{after_dish_planunit.poynt=}")
+    assert after_dish_planunit.poynt != yao_dish_planunit.poynt
+    assert after_dish_planunit.poynt == 1018
+    print(f"{after_cuisine_planunit.poynt=}")
+    assert after_cuisine_planunit.poynt != yao_cuisine_planunit.poynt
+    assert after_cuisine_planunit.poynt == 19
+    print(f"{after_casa_planunit.poynt=}")
+    assert after_casa_planunit.poynt != 1
+    assert after_casa_planunit.poynt == 38
     assert after_yao_personunit == before_yao_personunit
     assert len(after_yao_personunit.get_agenda_dict()) == 3
-    assert after_fly_planunit.kar != 1
-    assert after_fly_planunit.kar == 18
+    assert after_fly_planunit.poynt != 1
+    assert after_fly_planunit.poynt == 18
 
 
 def test_listen_to_speaker_agenda_ProcessesIrrationalPerson():

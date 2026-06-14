@@ -22,7 +22,7 @@ def fission_add_ancestor_rope_rows(df: DataFrame) -> DataFrame:
             if ancestor not in existing_ropes:
                 existing_ropes.add(ancestor)
                 new_row = {**row.to_dict(), "plan_rope": ancestor, "pledge": 0}
-                new_row["kar"] = None
+                new_row["poynt"] = None
                 new_rows.append(new_row)
 
     if not new_rows:

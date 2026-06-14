@@ -207,11 +207,9 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
                     assert file_str.count("keywords import") == 0, "No imports"
                     assert file_str.count("from enum import Enum") == 1, "import Enum"
 
-                for keyword in allowed_chapter_keywords:
-                    if keyword in file_str:
-                        add_ch_keyword_count(
-                            keywords_in_ch_count, keyword, chapter_prefix
-                        )
+            for keyword in allowed_chapter_keywords:
+                if keyword in file_str:
+                    add_ch_keyword_count(keywords_in_ch_count, keyword, chapter_prefix)
 
     # Check that keyword is not introduced before it is used.
     for keyword, chapters_dict in keywords_in_ch_count.items():

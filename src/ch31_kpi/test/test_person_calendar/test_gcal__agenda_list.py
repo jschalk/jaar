@@ -55,7 +55,7 @@ def test_DayEvents_Exists():
 def test_get_dayevents_ReturnsObj_Scenario0_EmptyList():
     # ESTABLISH
     bob_person = personunit_shop(wx.Bob, wx.root_rope)
-    bob_person.add_plan(wx.sweep_rope, pledge=True, kar=1)
+    bob_person.add_plan(wx.sweep_rope, pledge=True, poynt=1)
     epoch_config = get_default_epoch_config_dict()
     add_epoch_planunit(bob_person, epoch_config)
     epoch_label = epoch_config.get(kw.epoch_label)
@@ -71,10 +71,10 @@ def test_get_dayevents_ReturnsObj_Scenario0_EmptyList():
 def test_get_dayevents_ReturnsObj_Scenario1_OneElementList():
     # ESTABLISH
     bob_person = personunit_shop(wx.Bob, wx.root_rope)
-    bob_person.add_plan(wx.sweep_rope, pledge=True, kar=1)
+    bob_person.add_plan(wx.sweep_rope, pledge=True, poynt=1)
 
     # add mop task but only at a point during the day
-    bob_person.add_plan(wx.mop_rope, pledge=True, kar=2)
+    bob_person.add_plan(wx.mop_rope, pledge=True, poynt=2)
     default_epoch_config = get_default_epoch_config_dict()
     default_epoch_label = default_epoch_config.get(kw.epoch_label)
     add_epoch_planunit(bob_person, default_epoch_config)
@@ -103,7 +103,7 @@ def test_get_gcal_all_agenda_str_ReturnsObj_Scenario1_1AllDayPledge():
     default_epoch_config = get_default_epoch_config_dict()
     epoch_label = default_epoch_config.get(kw.epoch_label)
     add_epoch_planunit(bob_person, default_epoch_config)
-    bob_person.add_plan(wx.mop_rope, pledge=True, kar=1)
+    bob_person.add_plan(wx.mop_rope, pledge=True, poynt=1)
     apr7_dt = datetime(2010, 5, 7, 9)
     print(f"{apr7_dt=}")
 
@@ -121,9 +121,9 @@ def test_get_gcal_all_agenda_str_ReturnsObj_Scenario2_3AllDayPledge():
     default_epoch_config = get_default_epoch_config_dict()
     epoch_label = default_epoch_config.get(kw.epoch_label)
     add_epoch_planunit(bob_person, default_epoch_config)
-    bob_person.add_plan(wx.mop_rope, pledge=True, kar=2)
-    bob_person.add_plan(wx.sweep_rope, pledge=True, kar=1)
-    bob_person.add_plan(wx.scrub_rope, pledge=True, kar=1)
+    bob_person.add_plan(wx.mop_rope, pledge=True, poynt=2)
+    bob_person.add_plan(wx.sweep_rope, pledge=True, poynt=1)
+    bob_person.add_plan(wx.scrub_rope, pledge=True, poynt=1)
     apr7_dt = datetime(2010, 5, 7, 9)
     print(f"{apr7_dt=}")
 
@@ -140,10 +140,10 @@ def test_get_gcal_all_agenda_str_ReturnsObj_Scenario2_3AllDayPledge():
 def test_get_gcal_all_agenda_str_ReturnsObj_Scenario3_OneEpoch_pledge():
     # ESTABLISH
     bob_person = personunit_shop(wx.Bob, wx.root_rope)
-    bob_person.add_plan(wx.sweep_rope, pledge=True, kar=1)
+    bob_person.add_plan(wx.sweep_rope, pledge=True, poynt=1)
 
     # add mop task but only at a point during the day
-    bob_person.add_plan(wx.mop_rope, pledge=True, kar=2)
+    bob_person.add_plan(wx.mop_rope, pledge=True, poynt=2)
     default_epoch_config = get_default_epoch_config_dict()
     default_epoch_label = default_epoch_config.get(kw.epoch_label)
     add_epoch_planunit(bob_person, default_epoch_config)
