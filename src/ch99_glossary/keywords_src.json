@@ -31,6 +31,8 @@
   "Invite": {"valid_ch": ""}, 
   "Joachim": {"valid_ch": ""}, 
   "KegWheel": {"valid_ch": "41"}, 
+  "Wheel": {"valid_ch": "41"}, 
+  "wheel": {"valid_ch": "41, 98"}, 
   "Keyword": {"valid_ch": "0:"}, 
   "KnotTerm": {"semantic_type": "str", "valid_ch": "5:"}, 
   "LabelTerm": {"semantic_type": "str", "valid_ch": "5:"}, 

@@ -639,6 +639,8 @@
   "weeks_lower_week": "Required fields for creating Epoch weekly cases.", 
   "weeks_upper_week": "Required fields for creating Epoch weekly cases.", 
   "WeightNum": "float first used in ch02. WeightNum represents the unnormalized value of a ledger key. The sum of all WeightNum values in a ledger is not defined.", 
+  "Wheel": "Refers to the KegWheel concept.", 
+  "wheel": "Refers to the KegWheel concept or the wheel concept in library distribution.", 
   "wk": "Example key with value 'wk' used for tests throughout codebase.", 
   "workforceheir": "Definition needed.", 
   "workforceunit": "Definition needed.", 
