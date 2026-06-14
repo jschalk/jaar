@@ -1,5 +1,7 @@
 from ch00_py.file_toolbox import get_dir_file_strs
 from ch98_linter.style import get_chapter_descs, get_filenames_with_wrong_style
+from re import findall as re_findall
+from pathlib import Path
 
 
 def get_filenamebase_mapping(filenamebases: list[str]) -> dict:
@@ -48,3 +50,38 @@ def test_check_Chapters_filenames_FollowFileNameConventions_NoNamingCollision():
         print(f"{all_collisions=}")
     assert not all_collisions
     assert get_filenames_with_wrong_style(all_level1_filenames) == set()
+
+
+def get_image_paths_from_markdown(md_text: str) -> list[str]:
+    """Extract image paths from markdown and html img tags."""
+    markdown_imgs = re_findall(r"!\[[^\]]*]\(([^)]+)\)", md_text)
+    html_imgs = re_findall(r'<img[^>]*src=["\']([^"\']+)["\']', md_text)
+    return markdown_imgs + html_imgs
+
+
+def test_AllMarkdownImageLinksExist() -> None:
+    # repo_root = Path("src").resolve().parents[1]
+    src_dir = Path(__file__).resolve().parents[3]
+
+    missing_files: list[str] = []
+
+    for md_file in src_dir.rglob("*.md"):
+        # print(f"{md_file=}")
+        md_text = md_file.read_text(encoding="utf-8")
+
+        for image_path_str in get_image_paths_from_markdown(md_text):
+            image_path_str = image_path_str.strip()
+
+            if image_path_str.startswith(("http://", "https://")):
+                continue
+
+            if image_path_str.startswith("/"):
+                image_path = src_dir / image_path_str.lstrip("/")
+            else:
+                image_path = md_file.parent / image_path_str
+
+            if not image_path.exists():
+                missing_files.append(f"{md_file}: image not found -> {image_path_str}")
+
+    assert not missing_files, "\n".join(missing_files)
+    assert 1 == 2
