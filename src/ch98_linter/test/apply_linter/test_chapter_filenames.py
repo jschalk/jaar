@@ -90,3 +90,44 @@ def test_MarkdownImageLinksFilesExist() -> None:
 
     # THEN
     assert not missing_files, "\n".join(missing_files)
+
+
+IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".tif", ".tiff"}
+FORBIDDEN_MARKERS = {
+    b"Exif",
+    b"http://ns.adobe.com/xap",  # XMP
+    b"Photoshop",
+    b"ICC_PROFILE",
+    b"XML:com.adobe.xmp",
+    b"tEXt",
+    b"iTXt",
+    b"zTXt",
+}
+
+
+def get_all_images_with_metadata(src_dir: Path) -> list[str]:
+    failures = []
+    for image_path in src_dir.rglob("*"):
+        if image_path.suffix.lower() not in IMAGE_EXTENSIONS:
+            continue
+
+        data = image_path.read_bytes()
+
+        if found_markers := [
+            marker.decode(errors="ignore")
+            for marker in FORBIDDEN_MARKERS
+            if marker in data
+        ]:
+            failures.append(f"{image_path}: found metadata markers {found_markers}")
+    return failures
+
+
+# # TODO activate this test
+# def test_images_HaveNoMetadata_AllImagesInSrc():
+#     # GIVEN
+#     src_dir = Path(__file__).resolve().parents[3]
+#     # WHEN
+#     failures = get_all_images_with_metadata(src_dir)
+#     # THEN
+#     assertion_failure_str = "Images containing metadata were found:\n"
+#     assert not failures, assertion_failure_str + "\n".join(failures)

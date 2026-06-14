@@ -3,14 +3,14 @@
 **Date:** 2026-06-09  
 **Author:** Emmanuel Schalk
 
-> How to demand change.
+> What do you want?
 
 ---
 
 Reality is infinitely complex. Any model of reality will be wrong. But some models are better than others. 
 
 
-The KegWheel is a model of understanding power and predicting how to affect change. The easiest introduction to the concepts of KegWheel is from the writings of Kamil Kazani. Quickest primer on how power is structured: [Mechanics of Revolution](../ch40_pop_phil/mechanics_of_revolution_kazani.md)  
+KegWheel Theory is a model of understanding power and predicting how to affect change. The easiest introduction to the concepts of KegWheel is from the writings of Kamil Kazani. The quickest primer is Kazani's article on the [Mechanics of Revolution](../ch40_pop_phil/mechanics_of_revolution_kazani.md).  
 
 As with any grand theory the hardest thing is deciding where to start.
 
@@ -21,31 +21,39 @@ As with any grand theory the hardest thing is deciding where to start.
 ### Start with Family
 </div>
 
-The primary unit of history is the FamilyUnit. Ronald Syne wrote ""In all ages, whatever the form and name of government, be it monarchy, republic, or democracy, an oligarchy lurks behind the façade."[^1] There are powerful families that decide how things are done. Families will mostly have one dominate personality but over time that can change and its better to think of families rather then personalities because most leaders will trust at least some family. 
+The primary unit of history is the FamilyUnit. Ronald Syne wrote ""In all ages, whatever the form and name of government, be it monarchy, republic, or democracy, an oligarchy lurks behind the façade."[^1] Families can have one dominate personality but is better to think of families rather then personalities.[^2] The trusted advisors can often have enourmous influence. Kazani claims that one of the people in the Yelstin family portrait above made Vladamir Putin king. It wasn't Boris Yelstin. Do you know which one it is? Do you know his name? I don't.
 
 <div align="center">
 
-### "...Status & prestige is a zero sum game..." Kamil Kazani on Twitter[^2]
+### "...Status & prestige is a zero sum game..." Kamil Kazani on Twitter[^3]
 
 </div>
 
-These families have all the prestige and if they cooperate no other families will ever have prestige. The coalition will rule forever. However families do not trust each other and are in competition. To gain an upperhand a family will invite a those outside of power into power.  In Kegology terms: An "invitation" is the act of giving prestige to a family without any in return for service. 
+Define the term *'prestige'* the way Kazani and others do. It is something a family either has or doesn't. It cannot be shared.  
+
+There are families that have all the prestige. If they cooperate no other families will ever have prestige. The coalition will rule forever. However thse families do not trust each other and are in competition. To gain an upperhand a family can decide to get help others outside of power. The non-prestigious family provides a service and the prestigious family invites the non-prestigious family into power. 
+
+Define the term *'invitation'* as the act of giving prestige to a family. Always done in service.
+
+This invitation is only extended when the prestigious family has no other choice. Expanding how many families have prestige is dangerous. The fewer players in the game the easier it is to win.
 
 ### The KegWheel
 
-For all centralized power the Wheel Turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. An endless army of those without prestige will do absolutely any service for chance of getting prestige. Promises don't even have to be made, the implication is obvious. 
+Any system of centralized power can be represented as a KegWheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There are an endless army of those without prestige who will do absolutely any service for chance of getting prestige[^5]. Promises don't even have to be made, the implication is obvious. 
 
-Before Beto O'Rouke became a congressman he joined a group of us who played Ultimate frisbee in El Paso. Suddenly our small group had multiple new people interested in playing. They were perfectly nice people but they weren't there for ultimate. They were there in case Beto O'Rouke became president. But he never did. Because Obama and others never invited him in.
+Before Beto O'Rouke became a congressman he joined a group of us who played Ultimate frisbee in El Paso, TX. Suddenly our small group had multiple new people interested in playing. They were perfectly nice people, some like Jay were very good, but they weren't there for ultimate frisbee. They were there in case Beto O'Rouke became president. But he never did. Maybe because Barack Obama never gave him an invitation the same why Obama received an invitation.
 
 Here's an important insight I gained from reading Kazani:
 
 <div align="center">
 
 ### If a family feels they are losing prestige they will sow chaos.
-
 </div>
 
-If there is chaos then there's a chance the fortunes of the family will change. No one knows the future. Chaos may accelerate the family's descent but it may also save it. *Stay rich or die trying*
+
+I'm unable to remember which article talks about this. But the concept is that if there is chaos then that means there a chance the a family's decline could change. No one knows the future and chaos makes the future more unknowable. Of course chaos may could make the family fallout faster. But  *Stay rich or die trying*
+
+Kegology Term *'Fallout'*: The opposite of a invitation, when a family loses prestige, usually because no other family with prestige wants to invite them.
 
 To be clear having money and prestige are different. Those with money will try to buy prestige and may succeed. But it's not automatic or even likely. There is little incentive for those with prestige to sell it, better to break promises and just keep asking for more money. Relationships matter more than money.  
 
@@ -77,7 +85,7 @@ Don't do what Plato did. From "Wisdom of Lenin" by Kazani:
 *Plato is a Top 5 philosopher, but don't let the beard fool you, He was also a toddler.*
 </div>
 
-Instead, proposes Kazani, if you want prestige earn it. Start with a podcast. One day you may be useful enough that someone with prestige will invite you in. However...
+Instead, proposes Kazani, if you want prestige earn it. Start with a podcast.[^4] One day you may be useful enough that someone with prestige will invite you in. However...
 
 Not only is that plan of action unlikely to succeed it probably also corrupting. Remember the title of this section is *What to do if you have an agenda* not 'What to do if you want power'.
 
@@ -101,7 +109,13 @@ Closing statement connects to tagline.[^2]
 
 [^1]: Ronald Syne (died 1989), Historian and Author of Books on Roman History. 
 
-[^2]: Taken from conversation about Ukraine [Kazani Twitter Posts](twitter_kazani.md)
+[^2]: Basically all leaders have family they trust. To understand how someone of prestige got that prestige Kazani in [The Able Family]("../ch40_pop_phil/kazani_the_able_family.md") 
+
+[^3]: Taken from conversation about Ukraine [Kazani Twitter Posts](twitter_kazani.md)
+
+[^4]: [Wisdom of Lenin](../ch40_pop_phil/wisdom_of_lenin_kazani.md)  
+
+[^5]: [The Vassal Strategy](../ch40_pop_phil/skallas_the_vassal_strategy.md)  
 
 ## Biblography
 
