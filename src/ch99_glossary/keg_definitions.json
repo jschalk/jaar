@@ -329,6 +329,8 @@
   "kids": "Definition needed.", 
   "knot": ", Moment arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed", 
   "KnotTerm": "str first used in ch05. A string to used as a delimiter in RopeTerms.", 
+  "Kronos": "Greek God of War and Time. Known for eating his children.", 
+  "kronosmax": "To proactively elimanate not just current threats but potential threats to one's prestige.", 
   "labelmap": "Definition needed.", 
   "LabelTerm": "str first used in ch05. A string representation of a tree node. Nodes cannot contain RopeTerm knot", 
   "labor_title": ", Workforce seed.", 

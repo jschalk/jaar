@@ -650,11 +650,15 @@
     "finance": {"keg_rank": 648, "question_tier": 0, "chs": "34:"},
     "financial": {"keg_rank": 649, "question_tier": 0, "chs": "34:"},
     "Hayek": {"keg_rank": 650, "question_tier": 0, "chs": "40, 41"},
-    "invitation": {"keg_rank": 651, "question_tier": 0, "chs": "40, 41"},
-    "invite": {"keg_rank": 652, "question_tier": 0, "chs": "40, 41"},
-    "power": {"keg_rank": 653, "question_tier": 0, "chs": "40, 41"},
-    "prestige": {"keg_rank": 654, "question_tier": 0, "chs": "40, 41"},
-    "Fall": {"keg_rank": 655, "question_tier": 0, "chs": "41"},
-    "KegWheel": {"keg_rank": 656, "question_tier": 0, "chs": "41"},
-    "fall": {"keg_rank": 657, "question_tier": 0, "chs": "41"}
+    "Kronos": {"keg_rank": 651, "question_tier": 0, "chs": "40"},
+    "invitation": {"keg_rank": 652, "question_tier": 0, "chs": "40, 41"},
+    "invite": {"keg_rank": 653, "question_tier": 0, "chs": "40, 41"},
+    "kronosmax": {"keg_rank": 654, "question_tier": 0, "chs": "40"},
+    "power": {"keg_rank": 655, "question_tier": 0, "chs": "40, 41"},
+    "prestige": {"keg_rank": 656, "question_tier": 0, "chs": "40, 41"},
+    "Fall": {"keg_rank": 657, "question_tier": 0, "chs": "41"},
+    "KegWheel": {"keg_rank": 658, "question_tier": 0, "chs": "41"},
+    "Wheel": {"keg_rank": 659, "question_tier": 0, "chs": "41"},
+    "fall": {"keg_rank": 660, "question_tier": 0, "chs": "41"},
+    "wheel": {"keg_rank": 661, "question_tier": 0, "chs": "41, 98"}
 }
