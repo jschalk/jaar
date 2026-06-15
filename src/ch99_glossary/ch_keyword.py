@@ -10135,6 +10135,7 @@ class Ch40Keywords(str, Enum):
     GroupTitle = "GroupTitle"
     Hayek = "Hayek"
     HealerName = "HealerName"
+    Hobbit = "Hobbit"
     INSERT = "INSERT"
     Keyword = "Keyword"
     KnotTerm = "KnotTerm"

@@ -1,4 +1,4 @@
-# KegWheel Model of Power
+# Kegology's Wheel Model of Power
 
 **Date:** 2026-06-09  
 **Author:** Emmanuel Schalk
@@ -124,8 +124,11 @@ Closing statement connects to tagline.[^2]
 How power is structured: [Mechanics of Revolution](../ch40_pop_phil/mechanics_of_revolution_kazani.md)  
 The real work of leadership: [How Stalin Came to Power](../ch40_pop_phil/how_stalin_came_to_power_kazani.md)  
 How slavish devotion is perfectly reasonable: [Suffering from Success](../ch40_pop_phil/suffering_from_success_kazani.md)  
-Why Plato's ideas of power are stupid: [Wisdom of Lenin](../ch40_pop_phil/wisdom_of_lenin_kazani.md)  
-Why and how thinkers matter; [Kill the Scholars](../ch40_pop_phil/kill_the_scholars.md)  
+How slavish devotion is perfectly reasonable: [The Vassal Strategy](../ch40_pop_phil/skallas_the_vassal_strategy.md)  
+Why Plato's power behind the throne plan fails: [Wisdom of Lenin](../ch40_pop_phil/wisdom_of_lenin_kazani.md)  
+Why and how thinkers matter: [Kill the Scholars](../ch40_pop_phil/kill_the_scholars.md)  
+Tyranny protects power: [Why Putin killed Navalny](../ch40_pop_phil/kazani_putin_navalny.md)
+
 
 #### Foundational Texts:
 

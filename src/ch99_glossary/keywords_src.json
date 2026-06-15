@@ -32,6 +32,7 @@
   "Joachim": {"valid_ch": ""}, 
   "KegWheel": {"valid_ch": "41"}, 
   "Keyword": {"valid_ch": "0:"}, 
+  "Hobbit": {"valid_ch": "40"}, 
   "KnotTerm": {"semantic_type": "str", "valid_ch": "5:"}, 
   "Kronos": {"valid_ch": "40"}, 
   "LabelTerm": {"semantic_type": "str", "valid_ch": "5:"}, 
