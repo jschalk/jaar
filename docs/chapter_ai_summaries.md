@@ -42,7 +42,7 @@ Key mechanics:
 - `keyword_class_builder.py` parses the `valid_ch` range syntax (e.g. `"3:"` means "all chapters from 3 onwards"), builds cumulative keyword sets per chapter, and generates `Enum` class source code strings like `C03Keywords`, `C07Keywords`, etc.
 - It also produces a human-understandable `keywords_by_chapter.md` markdown file listing which keywords are introduced in each chapter.
 
-The effect is that all later chapters can reference domain terms as strongly-typed enum values rather than raw strings, making the codebase self-documenting and testable at the vocabulary level.
+The effect is that all later chapters can reference domain terms as strongly-typed enum values rather than raw strings, making the codebase self-documenting and test-able at the vocabulary level.
 
 
 *This summary is authored by AI 5-26-2026.*
@@ -338,7 +338,7 @@ A new semantic type is introduced in `ch08_semantic_types.py`: `PersonName` (a `
 3. **Set contact/group respect ledgers** — builds credit and debit ledgers across contacts and groups.
 4. **Clear fund attrs** — resets all fund tracking fields.
 5. **Set factheirs, workforceheirs, awardheirs** — propagates inherited attrs down the plan tree.
-6. **Iterative plan-active loop** — repeatedly traverses the plan tree setting `plan_active` for each plan based on its reasons and facts, until no more changes occur (the system reaches a `rational` stable state, or `max_tree_traverse` is reached).
+6. **Iterative plan-active loop** — repeatedly traverses the plan tree setting `plan_active` for each plan based on its reasons and facts, until no more changes occur (the system reaches a `rational` constant state, or `max_tree_traverse` is reached).
 7. **Set fund attrs** — distributes the `fund_pool` down the tree proportionally by `poynt` weights using `allot_scale`, assigning each plan its `fund_onset` and `fund_cease`.
 8. **Set contact/group fund flows** — propagates fund give/take from plan award structures back to contacts and groups.
 9. **Set keep attrs** — identifies "keep" plans (healer-designated plans) for some kind of tracking.
@@ -388,7 +388,7 @@ Ch09's `ch09_semantic_types.py` re-exports types from ch03, ch05, ch06 with no a
 **`PersonAtom` structure:**
 - `dimen` — the "dimension" or table being modified. Valid dimensions (defined in `atom_config.json`) include: `personunit`, `person_contactunit`, `person_contact_membership`, `person_planunit`, `person_plan_awardunit`, `person_plan_factunit`, `person_plan_reasonunit`, `person_plan_reason_caseunit`, `person_plan_healerunit`, `person_plan_laborunit`.
 - `crud_str` — one of `"INSERT"`, `"UPDATE"`, `"DELETE"`.
-- `jkeys` — the primary key fields that identify the target object (e.g. `plan_rope` for a plan, `contact_name` for a contact).
+- `jkeys` — the primary key fields that identify the focus object (e.g. `plan_rope` for a plan, `contact_name` for a contact).
 - `jvalues` — the attribute fields being set or changed.
 - `atom_order` — an integer determining the correct application order (e.g. a plan must exist before its reasons can be inserted).
 
@@ -446,7 +446,7 @@ New semantic types introduced in `ch10_semantic_types.py`:
 - `add_all_different_personatoms(before_person, after_person)` — the diff engine. It calls `thinkout()` on both persons, then walks contacts and plans field-by-field, generating INSERT/UPDATE/DELETE atoms for every difference found. This is a complete, schema-aware diff of two `PersonUnit` states.
 - `get_sorted_personatoms()` — returns atoms in the correct application order (respecting `atom_order` so that e.g. a plan exists before its reasons are inserted).
 - `get_atom_edited_person(before_person)` — applies the delta to a copy of a person, producing the after state.
-- `get_minimal_persondelta(delta, person)` — filters a delta to only atoms that would actually change the target person, eliminating no-ops.
+- `get_minimal_persondelta(delta, person)` — filters a delta to only atoms that would actually change the focus person, eliminating no-ops.
 
 **`LessonUnit`** wraps a `PersonDelta` with provenance metadata:
 - `spark_face` (`FaceName`) — who the lesson came from.
@@ -614,7 +614,7 @@ The metaphor is a river: mana flows from healers to patients and circulates thro
 
 **`RiverCycle`** — one full cycle of the river simulation for a healer. It holds `keep_patientledgers` (the patient ledgers of all persons in the healer's keep) and iterates through them, creating a `RiverBook` for each, then aggregates via `create_cylceledger()` — a merged ledger summing all care flows across all river books in the cycle. This cycle ledger becomes the input mana distribution for the next cycle.
 
-**`riverrun.py`** (not read in full) orchestrates multiple `RiverCycle`s in sequence — running the river through N cycles to reach a stable distribution. The convergence of the cycle ledger across runs indicates how much each person in the keep has earned relative to their declared responsibilities.
+**`riverrun.py`** (not read in full) orchestrates multiple `RiverCycle`s in sequence — running the river through N cycles to reach a static distribution. The convergence of the cycle ledger across runs indicates how much each person in the keep has earned relative to their declared responsibilities.
 
 The river metaphor directly operationalizes the Levinasian ethic: a healer's credit is not self-declared but emerges from actual cycles of caring — how much mana flows through them toward others over time.
 
@@ -872,7 +872,7 @@ Ontology note:
 
 ## 3. Summary of Previous Relevant Chapters
 
-- **ch00_py**: `ch18_db_tool` is structurally parallel to ch00 — it is a pure utility chapter with no domain logic, just as ch00 provided Python/file toolboxes. The main difference is ch18 targets SQLite rather than the file system.
+- **ch00_py**: `ch18_db_tool` is structurally parallel to ch00 — it is a pure utility chapter with no domain logic, just as ch00 provided Python/file toolboxes. The main difference is ch18 uses SQLite rather than the file system.
 - All prior semantic types are re-exported through `ch18_semantic_types.py` (the full chain through ch14) — but ch18's own code imports only from Python's `sqlite3`, `csv`, `pandas`, `re`, and `dataclasses` standard/third-party libraries. It does not import from any prior keg chapter in `db_toolbox.py` itself.
 
 This is a deliberate design: ch18 is a low-level database infrastructure chapter — like ch00, it intentionally avoids domain dependencies so it can be used freely by all higher chapters.
@@ -1122,7 +1122,7 @@ Aggregates all `spark_num`/`spark_face` pairs from every `_b_agg` table into a `
 Produces `{brick_type}_b_vld` by JOINing the `_b_agg` table against `sparks_b_vld` — only rows whose `spark_num` is validated pass through. This is the final validated brick layer.
 
 **Stage 5 — `etl_brixk_vld_tables_to_sound_raw_tables(cursor)`**
-Maps validated brick rows into "sound" dimension tables (`{ABBV7}_s_raw_put` / `{ABBV7}_s_raw_del`) by intersecting the brick's columns with the target sound table's columns and inserting the common fields. The `brick_type` column is prepended to each inserted row for traceability. This produces the `s_raw` tables that downstream chapters will aggregate into `s_agg`, validate into `s_vld`, and ultimately use to reconstruct `PersonUnit` and `MomentUnit` objects.
+Maps validated brick rows into "sound" dimension tables (`{ABBV7}_s_raw_put` / `{ABBV7}_s_raw_del`) by intersecting the brick's columns with the focus sound table's columns and inserting the common fields. The `brick_type` column is prepended to each inserted row for traceability. This produces the `s_raw` tables that downstream chapters will aggregate into `s_agg`, validate into `s_vld`, and ultimately use to reconstruct `PersonUnit` and `MomentUnit` objects.
 
 The table naming convention throughout: `{brick_type}_b_{stage}` for brick-level tables, `{ABBV7}_s_{stage}_{crud}` for sound-level tables.
 
@@ -1252,7 +1252,7 @@ From `ch27_ref.json`:
 > "Defines the lego stage of data. Source of Job Persons, complete Moment data."
 
 Ontology note:
-> "The most stable and clear of all etl stages. Everything has been calculated except for audience idea."
+> "The most static and clear of all etl stages. Everything has been calculated except for audience idea."
 
 ---
 

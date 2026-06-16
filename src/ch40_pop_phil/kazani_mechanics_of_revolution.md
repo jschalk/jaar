@@ -62,7 +62,7 @@ And that is a very important thing to understand
 
 For an outsider, can rarely ever participate in the high politics of high circles - unless by their direct invitation
 
-That is a crucially important point, that I want to stress again and again. Fools tend to greatly exaggerate the factor of “taking” or “capturing” power, which is supposedly happening “by force”. All of these bully, toughguy, Conan the Barbarian-style rhetorics have very little do to with the actual revolutionary dynamics[^3]. Contrary to the popular delusion, taking the power “by force” or - an even greater absurdity - against the wishes of the power in being, is not a very common nor a very realistic scenario of action against an already established, internally stable regime.
+That is a crucially important point, that I want to stress again and again. Fools tend to greatly exaggerate the factor of “taking” or “capturing” power, which is supposedly happening “by force”. All of these bully, toughguy, Conan the Barbarian-style rhetorics have very little do to with the actual revolutionary dynamics[^3]. Contrary to the popular delusion, taking the power “by force” or - an even greater absurdity - against the wishes of the power in being, is not a very common nor a very realistic scenario of action against an already established, internally static regime.
 
 How do you take the power then, if not by force?
 
@@ -136,7 +136,7 @@ Paragraph with footnote.[^1] Can continue paragraph
 
 ## Footnotes
 
-[^1]: This won’t be an exhaustive explanation - for the reasons discussed below. still, imagining it as a sequence of coups happening in a row will be much closer to reality than seeing it as a one, singular event. One problem with popular imagination is that it tends to fuse events happening over the months, or years into a one snapshot
+[^1]: This won’t be an exhaustive explanation - for the reasons discussed below. still, imagining it as a sequence of coups happening in a row will be much nearer to reality than seeing it as a one, singular event. One problem with popular imagination is that it tends to fuse events happening over the months, or years into a one snapshot
 
 [^2]: If the political life had not been extirpated from the nation, that this nation cannot experience a revolution. All it can have is a civil war.
 

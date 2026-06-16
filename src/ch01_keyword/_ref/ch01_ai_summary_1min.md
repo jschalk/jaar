@@ -17,5 +17,5 @@ Key mechanics:
 - `keyword_class_builder.py` parses the `valid_ch` range syntax (e.g. `"3:"` means "all chapters from 3 onwards"), builds cumulative keyword sets per chapter, and generates `Enum` class source code strings like `C03Keywords`, `C07Keywords`, etc.
 - It also produces a human-understandable `keywords_by_chapter.md` markdown file listing which keywords are introduced in each chapter.
 
-The effect is that all later chapters can reference domain terms as strongly-typed enum values rather than raw strings, making the codebase self-documenting and testable at the vocabulary level.
+The effect is that all later chapters can reference domain terms as strongly-typed enum values rather than raw strings, making the codebase self-documenting and test-able at the vocabulary level.
 

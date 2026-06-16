@@ -101,7 +101,7 @@ You don't have to be in power to get your agenda enacted, you just need those in
 </div>
 
 
-Closing statement connects to tagline.[^2]
+
 
 ---
 

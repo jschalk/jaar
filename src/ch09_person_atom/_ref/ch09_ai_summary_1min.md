@@ -39,7 +39,7 @@ Ch09's `ch09_semantic_types.py` re-exports types from ch03, ch05, ch06 with no a
 **`PersonAtom` structure:**
 - `dimen` — the "dimension" or table being modified. Valid dimensions (defined in `atom_config.json`) include: `personunit`, `person_contactunit`, `person_contact_membership`, `person_planunit`, `person_plan_awardunit`, `person_plan_factunit`, `person_plan_reasonunit`, `person_plan_reason_caseunit`, `person_plan_healerunit`, `person_plan_laborunit`.
 - `crud_str` — one of `"INSERT"`, `"UPDATE"`, `"DELETE"`.
-- `jkeys` — the primary key fields that identify the target object (e.g. `plan_rope` for a plan, `contact_name` for a contact).
+- `jkeys` — the primary key fields that identify the focus object (e.g. `plan_rope` for a plan, `contact_name` for a contact).
 - `jvalues` — the attribute fields being set or changed.
 - `atom_order` — an integer determining the correct application order (e.g. a plan must exist before its reasons can be inserted).
 

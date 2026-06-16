@@ -482,7 +482,7 @@ class ETLApp(tk_Tk):
             self._placeholder(entry, var, tip)
 
     def _world_name_row(self, parent, row, label, var, *, required, tip):
-        """Render the world_name row: text entry + open + delete buttons targeting worlds_dir/world_name."""
+        """Render the world_name row: text entry + open + delete buttons focusing on worlds_dir/world_name."""
         ax = get_app_glb_attrs()
         lbl_text = f"{'*' if required else ' '} {label}"
 

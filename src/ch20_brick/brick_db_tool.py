@@ -30,17 +30,11 @@ from ch20_brick.brick_config import (
 from ch99_glossary.sorter import get_keg_elements_sort_order
 from contextlib import suppress as contextlib_suppress
 from io import BytesIO as io_BytesIO, StringIO as io_StringIO
-from json import load as json_load
-from math import isnan as math_isnan
 from numpy import float64
 from openpyxl import Workbook, load_workbook, load_workbook as openpyxl_load_workbook
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
-from os.path import (
-    dirname as os_path_dirname,
-    exists as os_path_exists,
-    join as os_path_join,
-)
+from os.path import dirname as os_path_dirname, exists as os_path_exists
 from pandas import (
     DataFrame,
     ExcelWriter,

@@ -8,3 +8,6 @@ pass
 # Kronos
 # kronosmax
 # Hobbit
+# ladder
+# winning
+# winner
