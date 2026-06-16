@@ -1099,7 +1099,7 @@ Ontology note:
 - **ch00_py**: `create_path` for file path construction.
 - **ch18_db_tool**: `create_insert_into_clause_str`, `create_select_query`, `create_table_from_columns`, `create_type_reference_insert_sqlstr`, `db_table_exists`, `delete_all_duplicate_rows`, `get_create_table_sqlstr`, `get_db_tables`, `get_grouping_with_all_values_equal_sql_query`, `get_nonconvertible_columns`, `get_table_columns` — ch24 is the primary consumer of ch18's full SQL utility library.
 - **ch20_brick**: `get_brick_format_filename`, `get_brick_sqlite_types`, `get_brick_types`, `get_brickref_from_file`, `get_brickref_obj`, `create_brick_df_from_file`, `create_brick_sorted_table`, `get_default_sorted_list` — all brick schema operations.
-- **ch22_etl_config**: `BrickFileRef`, `get_all_brickfilerefs`, `create_prime_tablename`, `create_sound_and_heard_tables`, `etl_sqlstr` — stage naming and table creation scaffolding.
+- **ch22_etl_config**: `BrickFileRef`, `get_all_brickfilerefs`, `create_prime_tablename`, `create_sound_and_heard_tables`, `etl_sqlstr` — stage naming and table creation helper tools.
 
 `ch24_semantic_types.py` adds `SheetName` from ch20 to the full accumulated type chain.
 
@@ -1593,7 +1593,7 @@ Ch34 is an **empty stub**. The `src/ch34_finance/` directory contains only `__in
 
 The ref file and ontology note indicate the intended purpose: financial modeling tools that operate over `PitchUnit`s (ch33) — specifically measuring the financial implications of different world scenarios represented by competing `WorldDir` configurations. This would close the loop between the negotiation layer (ch33) and quantified financial outcomes.
 
-As of the cloned repository state on 5-26-2026, this chapter has not been implemented. It is a reserved chapter number in the inductive chain, positioned after the negotiation scaffold (ch33) and before the person viewer web app in future chapters.
+As of the cloned repository state on 5-26-2026, this chapter has not been implemented. It is a reserved chapter number in the inductive chain, positioned after the negotiation chapter (ch33) and before the person viewer web app in future chapters.
 
 # ch35_person_viewer — Chapter Summary
 
@@ -1831,6 +1831,6 @@ Ontology note:
 
 **`paths_change.py`** — finds and replaces path strings across the repo when directory structures change.
 
-**`create_notebook.py`** — generates Jupyter notebook scaffolding for a chapter's test suite, enabling interactive exploration of chapter functionality.
+**`create_notebook.py`** — generates Jupyter notebook helper library for a chapter's test suite, enabling interactive exploration of chapter functionality.
 
 The linter's placement at 98 means it can validate the import-ordering rule across the entire codebase — it has the highest chapter number of any functional chapter, and can therefore check that nothing in chapters 0–97 imports from chapters higher than themselves.

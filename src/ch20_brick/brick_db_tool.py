@@ -698,9 +698,7 @@ def prettify_excel_file(file_path: str, output_path: str = None) -> str:
                     h_align = "left" if col_idx in ws_left_align_cols else "center"
                     cell.fill = fill
                     cell.border = header_border if is_header else cell_border
-                    cell.alignment = Alignment(
-                        h_align, vertical="center", wrap_text=True
-                    )
+                    cell.alignment = Alignment(h_align, "center", wrap_text=True)
                     x_color = HEADER_FONT if is_header else "000000"
                     cell.font = Font(
                         name=FONT_NAME, bold=is_header, color=x_color, size=10
@@ -777,7 +775,7 @@ def export_db_to_excel(
 
     header_font = Font(name="Arial", bold=True, color="FFFFFF")
     header_fill = PatternFill("solid", start_color="4472C4")
-    header_align = Alignment(horizontal="center", vertical="center")
+    header_align = Alignment("center", "center")
 
     for table in tables:
         cursor.execute(f"SELECT * FROM [{table}]")

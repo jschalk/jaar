@@ -25,7 +25,7 @@ Everyone is part-good. Everyone is part-evil. Everyone has a full potential to a
 
 As a Catholic author once it put it:
 
-> My friend, there are no good or bad social types…. Any man can be a murderer; any man, even the same man, can be a saint. [A Man with two beards](https://en.wikisource.org/wiki/Harper%27s_Magazine/The_Man_With_Two_Beards)
+> My friend, there are no good or bad social types…. Any man can be a murderer; any man, even the same man, can be a saint. [A Man with two mustashs](https://en.wikisource.org/wiki/Harper%27s_Magazine/The_Man_With_Two_mustashs)
 
 Same man can be a murderer, same man can be a saint.
 
@@ -113,7 +113,7 @@ Every conflict in the world is merely an emanation of the great cosmic conflict 
 
 Consequently, a fight between two guys taking place implies that one of them is good (and that means - serves the Great Force of Light). And another is evil (serves the Great Force of Dark).
 
-All we should do is merely investigate who is the warrior of light, and who is the villain. That is the central pillar of modern discourse.
+All we should do is merely investigate who is the warrior of light, and who is the villain. That is the cornerstone of modern discourse.
 
 But… hasn’t it always been so?
 

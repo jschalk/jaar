@@ -3255,11 +3255,11 @@
                   }
                 }
               }, 
-              "trim beard": {
+              "trim mustash": {
                 "awardunits": {
                   ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1.0}
                 }, 
-                "plan_label": "trim beard", 
+                "plan_label": "trim mustash", 
                 "plan_uid": 73, 
                 "pledge": true, 
                 "poynt": 1, 
