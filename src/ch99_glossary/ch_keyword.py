@@ -10251,6 +10251,7 @@ class Ch40Keywords(str, Enum):
     ch35 = "ch35"
     ch40 = "ch40"
     ch90 = "ch90"
+    climb = "climb"
     clock = "clock"
     close = "close"
     column_ordinal = "column_ordinal"

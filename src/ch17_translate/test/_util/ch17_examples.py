@@ -48,10 +48,10 @@ def get_bowl_titlemap() -> TitleMap:
     knot = default_knot_if_None()
     bowl_otx = f"bowl{knot}"
     bowl_inx = f"nage{knot}"
-    climb_otx = f"climb{knot}"
+    boulder_otx = f"boulder{knot}"
     x_titlemap = titlemap_shop(spark_face="Sue")
     x_titlemap.set_otx2inx(bowl_otx, bowl_inx)
-    x_titlemap.set_otx2inx(climb_otx, climb_otx)
+    x_titlemap.set_otx2inx(boulder_otx, boulder_otx)
     return x_titlemap
 
 
@@ -309,8 +309,8 @@ def get_slash_titlemap() -> TitleMap:
     colon_inx_knot = ":"
     bowl_otx = f"bowl{slash_otx_knot}"
     bowl_inx = f"nage{colon_inx_knot}"
-    climb_otx = f"climb{slash_otx_knot}"
-    climb_inx = f"climb{colon_inx_knot}"
+    boulder_otx = f"boulder{slash_otx_knot}"
+    boulder_inx = f"boulder{colon_inx_knot}"
     x_titlemap = titlemap_shop(
         otx_knot=slash_otx_knot,
         inx_knot=colon_inx_knot,
@@ -319,7 +319,7 @@ def get_slash_titlemap() -> TitleMap:
         spark_num=7,
     )
     x_titlemap.set_otx2inx(bowl_otx, bowl_inx)
-    x_titlemap.set_otx2inx(climb_otx, climb_inx)
+    x_titlemap.set_otx2inx(boulder_otx, boulder_inx)
     return x_titlemap
 
 

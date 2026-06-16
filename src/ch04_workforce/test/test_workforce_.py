@@ -465,12 +465,12 @@ def test_WorkforceHeir_set_labors_Scenario4_WorkforceUnitEqualParentWorkforceHei
 
 def test_WorkforceUnit_get_laborunit_ReturnsObj():
     # ESTABLISH
-    climb_str = ",climbers"
+    boulder_str = ",boulderers"
     hike_str = ",hikers"
     bowlers_str = ";bowlers"
 
     x_workforceunit = workforceunit_shop()
-    x_workforceunit.add_labor(climb_str)
+    x_workforceunit.add_labor(boulder_str)
     x_workforceunit.add_labor(hike_str)
     x_workforceunit.add_labor(bowlers_str)
 
