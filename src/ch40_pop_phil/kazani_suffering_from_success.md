@@ -1,7 +1,7 @@
 # Suffering from success
 
 **Date:** 2026-02-27  
-**Author:** Kamil Kazani
+**Author:** Kamil Kazani  
 **Source:** https://kamilkazani.substack.com/p/suffering-from-success?utm_source=publication-search
 **Copied to Keg:** 2026-06-10 
 

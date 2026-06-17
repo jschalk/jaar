@@ -2,7 +2,7 @@
 
 **Date:** 2024-02-19  
 **Author:** Kamil Kazani  
-**Source:** https://kamilkazani.substack.com/p/why-did-putin-kill-navalny
+**Source:** https://kamilkazani.substack.com/p/why-did-putin-kill-navalny  
 **Copied to Keg:** 2026-06-14 
 
 

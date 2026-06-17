@@ -1,8 +1,8 @@
 # The Vassal Strategy
 
 **Date:** 2026-04-06  
-**Author:** Paul Skallas
-**Source:** https://lindynewsletter.beehiiv.com/p/the-vassal-strategy
+**Author:** Paul Skallas  
+**Source:** https://lindynewsletter.beehiiv.com/p/the-vassal-strategy  
 **Copied to Keg:** 2026-06-14
 
 ---
