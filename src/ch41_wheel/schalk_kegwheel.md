@@ -39,7 +39,12 @@ This invitation is only extended when the prestigious family has no other choice
 
 ### The KegWheel
 
-Any system of centralized power can be represented as a KegWheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There are an endless army of those without prestige who will do absolutely any service for chance of getting prestige[^5]. Promises don't even have to be made, the implication is obvious. 
+<div align="center"><img src="images/wheel01_intro.webp" alt="Plato head sculpture" width="600"></div>
+
+Any system of centralized power can be represented as a KegWheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There is an endless army of those without prestige who will do absolutely any service for chance of getting prestige[^5]. Promises don't even have to be made, the implication is obvious. 
+
+<div align="center"><img src="images/wheel02_falling.jpg" alt="Plato head sculpture" width="600"></div>
+
 
 Before Beto O'Rouke became a congressman he joined a group of us who played Ultimate frisbee in El Paso, TX. Suddenly our small group had multiple new people interested in playing. They were perfectly nice people, some like Jay were very good, but they weren't there for ultimate frisbee. They were there in case Beto O'Rouke became president. But he never did. Maybe because Barack Obama never gave him an invitation the same why Obama received an invitation.
 
@@ -80,7 +85,7 @@ Don't do what Plato did. From "Wisdom of Lenin" by Kazani:
 >
 > The plan is incredibly common (countless intellectuals would try it in centuries after Plato), and incredibly naive. Because obviously no man in power needs a 'philosopher’ who would be telling him what to do. That is an absolute self delusion on behalf of a philosopher. A tyrant needs servants, he needs slavs, he - if he is mentally healthy - needs a jester. But philosopher? No, he does not really need one.
 
-<div align="center"><img src="images/plato_mustash.jpg" alt="FamilyUnit Yelstin" width="200">
+<div align="center"><img src="images/plato_mustash.jpg" alt="Plato head sculpture" width="200">
 
 *Plato is a Top 5 philosopher, but don't let the mustash fool you, He was also a toddler.*
 </div>
@@ -93,6 +98,7 @@ You don't have to be in power to get your agenda enacted, you just need those in
 
 1. Gain the support of the families going up by treatening to make the total power of the KegWheel less. Make their pie smaller.
 2. Neutralize 
+
 
 <div align="center">
 

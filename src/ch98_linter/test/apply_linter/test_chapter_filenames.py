@@ -1,6 +1,6 @@
 from ch00_py.file_toolbox import get_dir_file_strs
 from ch98_linter.style import get_chapter_descs, get_filenames_with_wrong_style
-from re import findall as re_findall
+from re import findall as re_findall, IGNORECASE as re_IGNORECASE
 from pathlib import Path
 
 
@@ -67,7 +67,6 @@ def get_missing_markdown_image_file_links(src_dir: Path) -> list[str]:
 
         for image_path_str in get_image_paths_from_markdown(md_text):
             image_path_str = image_path_str.strip()
-
             if image_path_str.startswith(("http://", "https://")):
                 continue
 
@@ -78,6 +77,7 @@ def get_missing_markdown_image_file_links(src_dir: Path) -> list[str]:
 
             if not image_path.exists():
                 missing_files.append(f"{md_file}: image not found -> {image_path_str}")
+    return missing_files
 
 
 def test_MarkdownImageLinksFilesExist() -> None:
