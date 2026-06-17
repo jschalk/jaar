@@ -44,7 +44,7 @@ New semantic types introduced in `ch10_semantic_types.py`:
 - `add_all_different_personatoms(before_person, after_person)` — the diff engine. It calls `thinkout()` on both persons, then walks contacts and plans field-by-field, generating INSERT/UPDATE/DELETE atoms for every difference found. This is a complete, schema-aware diff of two `PersonUnit` states.
 - `get_sorted_personatoms()` — returns atoms in the correct application order (respecting `atom_order` so that e.g. a plan exists before its reasons are inserted).
 - `get_atom_edited_person(before_person)` — applies the delta to a copy of a person, producing the after state.
-- `get_minimal_persondelta(delta, person)` — filters a delta to only atoms that would actually change the target person, eliminating no-ops.
+- `get_minimal_persondelta(delta, person)` — filters a delta to only atoms that would actually change the focus person, eliminating no-ops.
 
 **`LessonUnit`** wraps a `PersonDelta` with provenance metadata:
 - `spark_face` (`FaceName`) — who the lesson came from.

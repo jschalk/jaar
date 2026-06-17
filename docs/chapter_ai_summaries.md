@@ -42,7 +42,7 @@ Key mechanics:
 - `keyword_class_builder.py` parses the `valid_ch` range syntax (e.g. `"3:"` means "all chapters from 3 onwards"), builds cumulative keyword sets per chapter, and generates `Enum` class source code strings like `C03Keywords`, `C07Keywords`, etc.
 - It also produces a human-understandable `keywords_by_chapter.md` markdown file listing which keywords are introduced in each chapter.
 
-The effect is that all later chapters can reference domain terms as strongly-typed enum values rather than raw strings, making the codebase self-documenting and testable at the vocabulary level.
+The effect is that all later chapters can reference domain terms as strongly-typed enum values rather than raw strings, making the codebase self-documenting and test-able at the vocabulary level.
 
 
 *This summary is authored by AI 5-26-2026.*
@@ -215,7 +215,7 @@ A `FactUnit` is a statement about the world: it says that a context (identified 
 **`CaseUnit`**
 A `CaseUnit` is a single condition within a reason. It specifies:
 - `reason_state`: the rope state that must be active for this case to pass.
-- Optionally `reason_lower` / `reason_upper`: a numeric range the fact must fall within.
+- Optionally `reason_lower` / `reason_upper`: a numeric range the fact must be within.
 - Optionally `reason_divisor`: enables **cyclic/modular reasoning** — the fact value is taken modulo the divisor before comparing to the range. This allows conditions like "every 7 rotations of the earth" or "every quarter."
 
 `CaseUnit.set_case_active(factheir)` evaluates whether the supplied fact satisfies this case's condition, setting both `case_active` and `case_task` (whether the case indicates there is still work remaining within the range).
@@ -338,7 +338,7 @@ A new semantic type is introduced in `ch08_semantic_types.py`: `PersonName` (a `
 3. **Set contact/group respect ledgers** — builds credit and debit ledgers across contacts and groups.
 4. **Clear fund attrs** — resets all fund tracking fields.
 5. **Set factheirs, workforceheirs, awardheirs** — propagates inherited attrs down the plan tree.
-6. **Iterative plan-active loop** — repeatedly traverses the plan tree setting `plan_active` for each plan based on its reasons and facts, until no more changes occur (the system reaches a `rational` stable state, or `max_tree_traverse` is reached).
+6. **Iterative plan-active loop** — repeatedly traverses the plan tree setting `plan_active` for each plan based on its reasons and facts, until no more changes occur (the system reaches a `rational` constant state, or `max_tree_traverse` is reached).
 7. **Set fund attrs** — distributes the `fund_pool` down the tree proportionally by `poynt` weights using `allot_scale`, assigning each plan its `fund_onset` and `fund_cease`.
 8. **Set contact/group fund flows** — propagates fund give/take from plan award structures back to contacts and groups.
 9. **Set keep attrs** — identifies "keep" plans (healer-designated plans) for some kind of tracking.
@@ -388,7 +388,7 @@ Ch09's `ch09_semantic_types.py` re-exports types from ch03, ch05, ch06 with no a
 **`PersonAtom` structure:**
 - `dimen` — the "dimension" or table being modified. Valid dimensions (defined in `atom_config.json`) include: `personunit`, `person_contactunit`, `person_contact_membership`, `person_planunit`, `person_plan_awardunit`, `person_plan_factunit`, `person_plan_reasonunit`, `person_plan_reason_caseunit`, `person_plan_healerunit`, `person_plan_laborunit`.
 - `crud_str` — one of `"INSERT"`, `"UPDATE"`, `"DELETE"`.
-- `jkeys` — the primary key fields that identify the target object (e.g. `plan_rope` for a plan, `contact_name` for a contact).
+- `jkeys` — the primary key fields that identify the focus object (e.g. `plan_rope` for a plan, `contact_name` for a contact).
 - `jvalues` — the attribute fields being set or changed.
 - `atom_order` — an integer determining the correct application order (e.g. a plan must exist before its reasons can be inserted).
 
@@ -446,7 +446,7 @@ New semantic types introduced in `ch10_semantic_types.py`:
 - `add_all_different_personatoms(before_person, after_person)` — the diff engine. It calls `thinkout()` on both persons, then walks contacts and plans field-by-field, generating INSERT/UPDATE/DELETE atoms for every difference found. This is a complete, schema-aware diff of two `PersonUnit` states.
 - `get_sorted_personatoms()` — returns atoms in the correct application order (respecting `atom_order` so that e.g. a plan exists before its reasons are inserted).
 - `get_atom_edited_person(before_person)` — applies the delta to a copy of a person, producing the after state.
-- `get_minimal_persondelta(delta, person)` — filters a delta to only atoms that would actually change the target person, eliminating no-ops.
+- `get_minimal_persondelta(delta, person)` — filters a delta to only atoms that would actually change the focus person, eliminating no-ops.
 
 **`LessonUnit`** wraps a `PersonDelta` with provenance metadata:
 - `spark_face` (`FaceName`) — who the lesson came from.
@@ -614,7 +614,7 @@ The metaphor is a river: mana flows from healers to patients and circulates thro
 
 **`RiverCycle`** — one full cycle of the river simulation for a healer. It holds `keep_patientledgers` (the patient ledgers of all persons in the healer's keep) and iterates through them, creating a `RiverBook` for each, then aggregates via `create_cylceledger()` — a merged ledger summing all care flows across all river books in the cycle. This cycle ledger becomes the input mana distribution for the next cycle.
 
-**`riverrun.py`** (not read in full) orchestrates multiple `RiverCycle`s in sequence — running the river through N cycles to reach a stable distribution. The convergence of the cycle ledger across runs indicates how much each person in the keep has earned relative to their declared responsibilities.
+**`riverrun.py`** (not read in full) orchestrates multiple `RiverCycle`s in sequence — running the river through N cycles to reach a static distribution. The convergence of the cycle ledger across runs indicates how much each person in the keep has earned relative to their declared responsibilities.
 
 The river metaphor directly operationalizes the Levinasian ethic: a healer's credit is not self-declared but emerges from actual cycles of caring — how much mana flows through them toward others over time.
 
@@ -841,7 +841,7 @@ The "outside" (`otx`) / "inside" (`inx`) distinction is fundamental: an external
 - `NameMap` — translates `NameTerm`s (contact names, person names). Direct `otx → inx` lookup.
 - `TitleMap` — translates `TitleTerm`s (group titles). Direct lookup.
 - `LabelMap` — translates `LabelTerm`s (single rope node names). Validates that neither `otx` nor `inx` contains the knot character.
-- `RopeMap` — translates full `RopeTerm` paths. It splits the external rope into labels, applies `LabelMap` to each label, replaces the `otx_knot` with the `inx_knot`, and reassembles. Falls back to `unknown_str` if any label cannot be translated.
+- `RopeMap` — translates full `RopeTerm` paths. It splits the external rope into labels, applies `LabelMap` to each label, replaces the `otx_knot` with the `inx_knot`, and reassembles. Backup to `unknown_str` if any label cannot be translated.
 
 **`TranslateUnit`** composes all four maps into a single per-face translation object. It exposes unified methods (`set_titleterm`, `set_nameterm`, `set_labelterm`, `set_ropeterm`) and a `get_mapunit(obj_type)` dispatcher. It also holds top-level `otx_knot`/`inx_knot` and `unknown_str` settings that are propagated to all child maps via `_check_all_core_attrs_match`.
 
@@ -872,7 +872,7 @@ Ontology note:
 
 ## 3. Summary of Previous Relevant Chapters
 
-- **ch00_py**: `ch18_db_tool` is structurally parallel to ch00 — it is a pure utility chapter with no domain logic, just as ch00 provided Python/file toolboxes. The main difference is ch18 targets SQLite rather than the file system.
+- **ch00_py**: `ch18_db_tool` is structurally parallel to ch00 — it is a pure utility chapter with no domain logic, just as ch00 provided Python/file toolboxes. The main difference is ch18 uses SQLite rather than the file system.
 - All prior semantic types are re-exported through `ch18_semantic_types.py` (the full chain through ch14) — but ch18's own code imports only from Python's `sqlite3`, `csv`, `pandas`, `re`, and `dataclasses` standard/third-party libraries. It does not import from any prior keg chapter in `db_toolbox.py` itself.
 
 This is a deliberate design: ch18 is a low-level database infrastructure chapter — like ch00, it intentionally avoids domain dependencies so it can be used freely by all higher chapters.
@@ -1099,7 +1099,7 @@ Ontology note:
 - **ch00_py**: `create_path` for file path construction.
 - **ch18_db_tool**: `create_insert_into_clause_str`, `create_select_query`, `create_table_from_columns`, `create_type_reference_insert_sqlstr`, `db_table_exists`, `delete_all_duplicate_rows`, `get_create_table_sqlstr`, `get_db_tables`, `get_grouping_with_all_values_equal_sql_query`, `get_nonconvertible_columns`, `get_table_columns` — ch24 is the primary consumer of ch18's full SQL utility library.
 - **ch20_brick**: `get_brick_format_filename`, `get_brick_sqlite_types`, `get_brick_types`, `get_brickref_from_file`, `get_brickref_obj`, `create_brick_df_from_file`, `create_brick_sorted_table`, `get_default_sorted_list` — all brick schema operations.
-- **ch22_etl_config**: `BrickFileRef`, `get_all_brickfilerefs`, `create_prime_tablename`, `create_sound_and_heard_tables`, `etl_sqlstr` — stage naming and table creation scaffolding.
+- **ch22_etl_config**: `BrickFileRef`, `get_all_brickfilerefs`, `create_prime_tablename`, `create_sound_and_heard_tables`, `etl_sqlstr` — stage naming and table creation helper tools.
 
 `ch24_semantic_types.py` adds `SheetName` from ch20 to the full accumulated type chain.
 
@@ -1122,7 +1122,7 @@ Aggregates all `spark_num`/`spark_face` pairs from every `_b_agg` table into a `
 Produces `{brick_type}_b_vld` by JOINing the `_b_agg` table against `sparks_b_vld` — only rows whose `spark_num` is validated pass through. This is the final validated brick layer.
 
 **Stage 5 — `etl_brixk_vld_tables_to_sound_raw_tables(cursor)`**
-Maps validated brick rows into "sound" dimension tables (`{ABBV7}_s_raw_put` / `{ABBV7}_s_raw_del`) by intersecting the brick's columns with the target sound table's columns and inserting the common fields. The `brick_type` column is prepended to each inserted row for traceability. This produces the `s_raw` tables that downstream chapters will aggregate into `s_agg`, validate into `s_vld`, and ultimately use to reconstruct `PersonUnit` and `MomentUnit` objects.
+Maps validated brick rows into "sound" dimension tables (`{ABBV7}_s_raw_put` / `{ABBV7}_s_raw_del`) by intersecting the brick's columns with the focus sound table's columns and inserting the common fields. The `brick_type` column is prepended to each inserted row for traceability. This produces the `s_raw` tables that downstream chapters will aggregate into `s_agg`, validate into `s_vld`, and ultimately use to reconstruct `PersonUnit` and `MomentUnit` objects.
 
 The table naming convention throughout: `{brick_type}_b_{stage}` for brick-level tables, `{ABBV7}_s_{stage}_{crud}` for sound-level tables.
 
@@ -1221,7 +1221,7 @@ Ontology note:
 `ch26_heard` is the final ETL stage before data becomes usable `PersonUnit` and `MomentUnit` objects. It advances data through `h_raw → h_agg → h_vld` and then reconstructs structured files from the validated heard tables.
 
 **`etl_heard_raw_tables_to_heard_agg_tables(cursor)`** — three steps:
-1. `set_all_heard_raw_inx_columns` — for every `_otx`-suffixed column in every `h_raw` table, determines the translation type (`NameTerm`, `TitleTerm`, `LabelTerm`, or `RopeTerm`) from the ch17 translate-args registry. If the column's base type is translateable, runs an UPDATE query that JOINs against the validated `trl{type}_s_vld` table to fill in the `_inx` value. For rows where no translation mapping exists, falls back to copying the `_otx` value into `_inx` directly (pass-through for untranslated terms).
+1. `set_all_heard_raw_inx_columns` — for every `_otx`-suffixed column in every `h_raw` table, determines the translation type (`NameTerm`, `TitleTerm`, `LabelTerm`, or `RopeTerm`) from the ch17 translate-args registry. If the column's base type is translateable, runs an UPDATE query that JOINs against the validated `trl{type}_s_vld` table to fill in the `_inx` value. For rows where no translation mapping exists, goes back to copying the `_otx` value into `_inx` directly (pass-through for untranslated terms).
 2. INSERT into `h_agg` tables from `h_raw`, deduplicating while excluding `_inx` columns from duplicate comparison.
 3. `update_heard_agg_timenum_columns` — applies NabuTime conversion to all time-numeric columns (`bud_time`, `fact_lower`, `fact_upper`, `reason_lower`, `reason_upper`, `tran_time`, `offi_time`) in `h_agg` tables: reads the `_otx` value, applies the epoch-length modular offset from the validated nabu table, and writes the result to the `_inx` column. This is where ch16's numeric translation is finally executed against real data.
 
@@ -1252,7 +1252,7 @@ From `ch27_ref.json`:
 > "Defines the lego stage of data. Source of Job Persons, complete Moment data."
 
 Ontology note:
-> "The most stable and clear of all etl stages. Everything has been calculated except for audience idea."
+> "The most static and clear of all etl stages. Everything has been calculated except for audience idea."
 
 ---
 
@@ -1389,7 +1389,7 @@ Ontology note:
 ## 3. Summary of Previous Relevant Chapters
 
 - **ch03_contact**: `ContactUnit` — contacts are examined when building day-punch schedules.
-- **ch05_rope**: `create_rope`, `is_sub_rope` — used in `gcalendar.py` to check whether a plan falls within a focus subtree.
+- **ch05_rope**: `create_rope`, `is_sub_rope` — used in `gcalendar.py` to check whether a plan is within a focus subtree.
 - **ch06_reason**: `ReasonHeir` — plan reasons are inspected to extract time-based conditions for calendar generation.
 - **ch07_plan**: `PlanUnit` — plan trees are walked to find active pledges.
 - **ch08_person_logic**: `PersonUnit`, `get_sorted_plan_list` — the job `PersonUnit` is the data source for all KPI and calendar output.
@@ -1430,7 +1430,7 @@ Two KPIs are currently defined, both implemented as `CREATE TABLE AS SELECT` SQL
 2. Calls `add_epoch_planunit` and `set_epoch_fact` (from ch14) to inject the current datetime's `TimeNum` as a fact into the person's plan tree.
 3. Runs `thinkout()` to re-evaluate plan activation at that specific point in time.
 4. Walks the plan tree looking for active pledges whose `ReasonHeir` references a time-based fact context (using `is_sub_rope` to check against the epoch rope).
-5. For each such plan, if it falls under `focus_group_title`'s workforce scope, writes a "day punch" text file — a plain-text record of the plan rope, active status, and time bounds suitable for importing into Google Calendar.
+5. For each such plan, if it is under `focus_group_title`'s workforce scope, writes a "day punch" text file — a plain-text record of the plan rope, active status, and time bounds suitable for importing into Google Calendar.
 
 `get_day_punchs_persons` and `copy_person_day_punches_to_dst_dir` handle multi-person orchestration and file copying. The day-punch output is the most direct link between keg's belief system and a person's real-world schedule.
 
@@ -1593,7 +1593,7 @@ Ch34 is an **empty stub**. The `src/ch34_finance/` directory contains only `__in
 
 The ref file and ontology note indicate the intended purpose: financial modeling tools that operate over `PitchUnit`s (ch33) — specifically measuring the financial implications of different world scenarios represented by competing `WorldDir` configurations. This would close the loop between the negotiation layer (ch33) and quantified financial outcomes.
 
-As of the cloned repository state on 5-26-2026, this chapter has not been implemented. It is a reserved chapter number in the inductive chain, positioned after the negotiation scaffold (ch33) and before the person viewer web app in future chapters.
+As of the cloned repository state on 5-26-2026, this chapter has not been implemented. It is a reserved chapter number in the inductive chain, positioned after the negotiation chapter (ch33) and before the person viewer web app in future chapters.
 
 # ch35_person_viewer — Chapter Summary
 
@@ -1831,6 +1831,6 @@ Ontology note:
 
 **`paths_change.py`** — finds and replaces path strings across the repo when directory structures change.
 
-**`create_notebook.py`** — generates Jupyter notebook scaffolding for a chapter's test suite, enabling interactive exploration of chapter functionality.
+**`create_notebook.py`** — generates Jupyter notebook helper library for a chapter's test suite, enabling interactive exploration of chapter functionality.
 
 The linter's placement at 98 means it can validate the import-ordering rule across the entire codebase — it has the highest chapter number of any functional chapter, and can therefore check that nothing in chapters 0–97 imports from chapters higher than themselves.

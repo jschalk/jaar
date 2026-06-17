@@ -55,6 +55,6 @@ Ontology note:
 
 **`paths_change.py`** — finds and replaces path strings across the repo when directory structures change.
 
-**`create_notebook.py`** — generates Jupyter notebook scaffolding for a chapter's test suite, enabling interactive exploration of chapter functionality.
+**`create_notebook.py`** — generates Jupyter notebook helper library for a chapter's test suite, enabling interactive exploration of chapter functionality.
 
 The linter's placement at 98 means it can validate the import-ordering rule across the entire codebase — it has the highest chapter number of any functional chapter, and can therefore check that nothing in chapters 0–97 imports from chapters higher than themselves.

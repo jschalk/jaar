@@ -27,7 +27,7 @@ Another paragraph and then a longer quote.
 ### Important note that should stand out from the surrounding text.
 </div>
 
-Closing statement connects to tagline.[^2]
+Fin. Statement connects to tagline.[^2]
 
 ---
 

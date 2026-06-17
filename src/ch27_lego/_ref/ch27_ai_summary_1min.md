@@ -15,7 +15,7 @@ From `ch27_ref.json`:
 > "Defines the lego stage of data. Source of Job Persons, complete Moment data."
 
 Ontology note:
-> "The most stable and clear of all etl stages. Everything has been calculated except for audience idea."
+> "The most static and clear of all etl stages. Everything has been calculated except for audience idea."
 
 ---
 

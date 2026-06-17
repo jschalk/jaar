@@ -58,7 +58,7 @@ def create_path(*args) -> str:
     if os_path_exists(path):
         return path
 
-    # fallback for pip install — only when first part is "src"
+    # backup for pip install — only when first part is "src"
     if cleaned[0] == "src":
         caller_dir = _get_caller_dir()
         remaining = cleaned[2:]  # everything after "src/chXX_name"

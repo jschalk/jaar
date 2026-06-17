@@ -45,7 +45,7 @@ def test_create_path_ReturnsSrcPath_WhenSrcPathExists(tmp_path):
     assert os_path_exists(result)
 
 
-def test_create_path_UsesFallback_WhenSrcPathDoesNotExist():
+def test_create_path_UsesBackup_WhenSrcPathDoesNotExist():
     # GIVEN os_path_exists returns False (simulates pip install environment)
     with mock_patch("ch00_py.file_toolbox.os_path_exists", return_value=False):
 
@@ -57,18 +57,18 @@ def test_create_path_UsesFallback_WhenSrcPathDoesNotExist():
     assert "src" not in pathlib_Path(result).parts or result != src_sh17_fizz_path
 
 
-def test_create_path_SkipsFallback_WhenNotSrcPath(temp3_dir):
+def test_create_path_SkipsBackup_WhenNotSrcPath(temp3_dir):
     # GIVEN a non-src path that does not exist
     non_existent = os_path_join(temp3_dir, "ghost_dir")
 
     # WHEN create_path is called with a non-src path
     result = create_path(non_existent, "file.json")
 
-    # THEN it returns the joined path as-is without fallback
+    # THEN it returns the joined path as-is without backup
     assert result == os_path_join(non_existent, "file.json")
 
 
-def test_create_path_FallbackPathExists_WhenSrcUnavailable():
+def test_create_path_BackupPathExists_WhenSrcUnavailable():
     # GIVEN os_path_exists returns False (simulates pip install environment)
     this_filename = pathlib_Path(__file__).name
     with mock_patch("ch00_py.file_toolbox.os_path_exists", return_value=False):
@@ -76,11 +76,11 @@ def test_create_path_FallbackPathExists_WhenSrcUnavailable():
         # WHEN create_path is called with this test file's own name
         result = create_path("src", this_filename)
 
-    # THEN the fallback path must point to an existing file
+    # THEN the backup path must point to an existing file
     assert pathlib_Path(result).exists(), (
-        f"Fallback path does not exist: '{result}'\n"
+        f"Backup path does not exist: '{result}'\n"
         f"  Expected to find: '{this_filename}' next to this test file.\n"
-        f"  Path(__file__) fallback is not working correctly."
+        f"  Path(__file__) backup is not working correctly."
     )
 
 

@@ -130,7 +130,7 @@ def change_nested_key(x_dict: dict, x_keylist: list, new_key: str):
 
     Args:
         d (dict): The dictionary to modify.
-        key_path (list): List of keys leading to the target key to rename.
+        key_path (list): List of keys leading to the focus key to rename.
                          The last key in the list is the one to be renamed.
         new_key (str): The new name for the final key in key_path.
 

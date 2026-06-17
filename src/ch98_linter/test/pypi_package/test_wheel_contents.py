@@ -50,7 +50,7 @@ def wheel_contents() -> list[str]:
     # THEN the build must succeed
     assert (
         result.returncode == 0
-    ), f"Wheel build failed:\n{result.stdout}\n{result.stderr}"
+    ), f"wheel build failed:\n{result.stdout}\n{result.stderr}"
 
     wheels = sorted(dist_dir.glob("*.whl"), key=lambda p: p.stat().st_mtime)
     assert wheels, "No .whl file found in dist/ after build."
@@ -65,7 +65,7 @@ def wheel_contents() -> list[str]:
 # # ── Test 1: exact file paths ───────────────────────────────────────────────────
 # @pytest_mark.local_only
 # @pytest_mark.parametrize("expected_file", REQUIRED_FILES)
-# def test_ExactFileIsPresentInWheel(wheel_contents: list[str], expected_file: str):
+# def test_ExactFileIsPresentIn_wheel(wheel_contents: list[str], expected_file: str):
 #     # GIVEN a built wheel and an expected file path
 #     # WHEN we search the wheel's contents for that file
 #     matches = [entry for entry in wheel_contents if entry.endswith(expected_file)]
@@ -84,7 +84,7 @@ def wheel_contents() -> list[str]:
 # # ── Test 2: glob patterns — at least one match each ───────────────────────────
 # @pytest_mark.local_only
 # @pytest_mark.parametrize("pattern", REQUIRED_GLOB_PATTERNS)
-# def test_GlobPatternHasAtLeastOneMatchInWheel(wheel_contents: list[str], pattern: str):
+# def test_GlobPatternHasAtLeastOneMatchIn_wheel(wheel_contents: list[str], pattern: str):
 #     # sourcery skip: no-conditionals-in-tests
 #     # GIVEN a built wheel and a glob pattern
 #     # WHEN we search all wheel entries for files matching the pattern
@@ -108,7 +108,7 @@ def wheel_contents() -> list[str]:
 # TODO reactivate
 # # ── Test 3: print all non-py files for visibility ─────────────────────────────
 # @pytest_mark.local_only
-# def test_DataFilesInWheelAreVisible(wheel_contents: list[str]):
+# def test_DataFilesIn_wheelAreVisible(wheel_contents: list[str]):
 #     # GIVEN a built wheel
 #     # WHEN we filter out .py files and dist-info metadata
 #     data_files = [

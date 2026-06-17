@@ -955,11 +955,11 @@ def test_change_nested_key_Scenario2():
 
 def test_change_nested_key_Scenario3():
     # ESTABLISH
-    d = {"x": {"y": {"z": {"target": "val"}}}}
+    d = {"x": {"y": {"z": {"focus": "val"}}}}
     expected = {"x": {"y": {"z": {"renamed": "val"}}}}
 
     # WHEN
-    result = change_nested_key(copy_deepcopy(d), ["x", "y", "z", "target"], "renamed")
+    result = change_nested_key(copy_deepcopy(d), ["x", "y", "z", "focus"], "renamed")
 
     # THEN
     assert result == expected

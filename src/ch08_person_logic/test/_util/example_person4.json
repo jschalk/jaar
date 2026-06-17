@@ -306,8 +306,8 @@
             "kids": {
               "Abuse Deterrence and Reporting guildlines": {
                 "kids": {
-                  "Accomplish Fall 2021 traaining": {
-                    "plan_label": "Accomplish Fall 2021 traaining", 
+                  "Accomplish Summer 2021 traaining": {
+                    "plan_label": "Accomplish Summer 2021 traaining", 
                     "plan_uid": 116, 
                     "pledge": true, 
                     "poynt": 1, 
@@ -331,8 +331,8 @@
               }, 
               "Know ACME Staff  and Safety #2 guildlines": {
                 "kids": {
-                  "Accomplish Fall 2021 traaining": {
-                    "plan_label": "Accomplish Fall 2021 traaining", 
+                  "Accomplish Summer 2021 traaining": {
+                    "plan_label": "Accomplish Summer 2021 traaining", 
                     "plan_uid": 115, 
                     "poynt": 1, 
                     "reasonunits": {
@@ -355,8 +355,8 @@
               }, 
               "Know Adult Sexual Misconduct guildlines": {
                 "kids": {
-                  "Accomplish Fall 2021 traaining": {
-                    "plan_label": "Accomplish Fall 2021 traaining", 
+                  "Accomplish Summer 2021 traaining": {
+                    "plan_label": "Accomplish Summer 2021 traaining", 
                     "plan_uid": 118, 
                     "pledge": true, 
                     "poynt": 1, 
@@ -398,8 +398,8 @@
               }, 
               "Know Identifying and Supporting Houseless Youth guildlines": {
                 "kids": {
-                  "Accomplish Fall 2021 traaining": {
-                    "plan_label": "Accomplish Fall 2021 traaining", 
+                  "Accomplish Summer 2021 traaining": {
+                    "plan_label": "Accomplish Summer 2021 traaining", 
                     "plan_uid": 119, 
                     "pledge": true, 
                     "poynt": 1, 
@@ -423,8 +423,8 @@
               }, 
               "Know Information Security Awareness guildlines": {
                 "kids": {
-                  "Accomplish Fall 2021 traaining": {
-                    "plan_label": "Accomplish Fall 2021 traaining", 
+                  "Accomplish Summer 2021 traaining": {
+                    "plan_label": "Accomplish Summer 2021 traaining", 
                     "plan_uid": 121, 
                     "pledge": true, 
                     "poynt": 1, 
@@ -448,8 +448,8 @@
               }, 
               "Know retaliation guildlines": {
                 "kids": {
-                  "Accomplish Fall 2021 traaining": {
-                    "plan_label": "Accomplish Fall 2021 traaining", 
+                  "Accomplish Summer 2021 traaining": {
+                    "plan_label": "Accomplish Summer 2021 traaining", 
                     "plan_uid": 117, 
                     "poynt": 1, 
                     "reasonunits": {
@@ -472,8 +472,8 @@
               }, 
               "Rick administration and Hazard Analysis": {
                 "kids": {
-                  "Accomplish Fall 2021 traaining": {
-                    "plan_label": "Accomplish Fall 2021 traaining", 
+                  "Accomplish Summer 2021 traaining": {
+                    "plan_label": "Accomplish Summer 2021 traaining", 
                     "plan_uid": 122, 
                     "poynt": 1, 
                     "reasonunits": {
@@ -496,8 +496,8 @@
               }, 
               "know OSHA COVID-19 Rick Reduction guildlines": {
                 "kids": {
-                  "Accomplish Fall 2021 traaining": {
-                    "plan_label": "Accomplish Fall 2021 traaining", 
+                  "Accomplish Summer 2021 traaining": {
+                    "plan_label": "Accomplish Summer 2021 traaining", 
                     "plan_uid": 120, 
                     "pledge": true, 
                     "poynt": 1, 
@@ -1650,8 +1650,8 @@
         "kids": {
           "bowling in Williamette watershed": {
             "kids": {
-              "Go climbing at east Circuit": {
-                "plan_label": "Go climbing at east Circuit", 
+              "Go bouldering at east Circuit": {
+                "plan_label": "Go bouldering at east Circuit", 
                 "plan_uid": 226, 
                 "poynt": 1, 
                 "reasonunits": {
@@ -2852,9 +2852,9 @@
                   }
                 }
               }, 
-              "trim beard": {
+              "trim mustash": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
-                "plan_label": "trim beard", 
+                "plan_label": "trim mustash", 
                 "plan_uid": 73, 
                 "pledge": true, 
                 "poynt": 1, 

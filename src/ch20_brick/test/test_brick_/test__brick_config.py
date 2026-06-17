@@ -614,9 +614,9 @@ def test_brick_config_path_UsesModuleRelativePathWhenSrcUnavailable():
     assert path == expected, (
         f"returned : {path}\n"
         f"expected : {expected}\n"
-        f"  The Path(__file__) fallback is not being used."
+        f"  The Path(__file__) backup is not being used."
     )
-    assert path.exists(), f"Fallback path does not exist: '{path}'"
+    assert path.exists(), f"Backup path does not exist: '{path}'"
 
 
 def test_get_brick_config_dict_ReturnsObj_Scenario0_IsFullyPopulated():

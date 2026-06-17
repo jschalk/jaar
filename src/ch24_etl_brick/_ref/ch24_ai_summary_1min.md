@@ -24,7 +24,7 @@ Ontology note:
 - **ch00_py**: `create_path` for file path construction.
 - **ch18_db_tool**: `create_insert_into_clause_str`, `create_select_query`, `create_table_from_columns`, `create_type_reference_insert_sqlstr`, `db_table_exists`, `delete_all_duplicate_rows`, `get_create_table_sqlstr`, `get_db_tables`, `get_grouping_with_all_values_equal_sql_query`, `get_nonconvertible_columns`, `get_table_columns` — ch24 is the primary consumer of ch18's full SQL utility library.
 - **ch20_brick**: `get_brick_format_filename`, `get_brick_sqlite_types`, `get_brick_types`, `get_brickref_from_file`, `get_brickref_obj`, `create_brick_df_from_file`, `create_brick_sorted_table`, `get_default_sorted_list` — all brick schema operations.
-- **ch22_etl_config**: `BrickFileRef`, `get_all_brickfilerefs`, `create_prime_tablename`, `create_sound_and_heard_tables`, `etl_sqlstr` — stage naming and table creation scaffolding.
+- **ch22_etl_config**: `BrickFileRef`, `get_all_brickfilerefs`, `create_prime_tablename`, `create_sound_and_heard_tables`, `etl_sqlstr` — stage naming and table creation helper tools.
 
 `ch24_semantic_types.py` adds `SheetName` from ch20 to the full accumulated type chain.
 
@@ -47,6 +47,6 @@ Aggregates all `spark_num`/`spark_face` pairs from every `_b_agg` table into a `
 Produces `{brick_type}_b_vld` by JOINing the `_b_agg` table against `sparks_b_vld` — only rows whose `spark_num` is validated pass through. This is the final validated brick layer.
 
 **Stage 5 — `etl_brixk_vld_tables_to_sound_raw_tables(cursor)`**
-Maps validated brick rows into "sound" dimension tables (`{ABBV7}_s_raw_put` / `{ABBV7}_s_raw_del`) by intersecting the brick's columns with the target sound table's columns and inserting the common fields. The `brick_type` column is prepended to each inserted row for traceability. This produces the `s_raw` tables that downstream chapters will aggregate into `s_agg`, validate into `s_vld`, and ultimately use to reconstruct `PersonUnit` and `MomentUnit` objects.
+Maps validated brick rows into "sound" dimension tables (`{ABBV7}_s_raw_put` / `{ABBV7}_s_raw_del`) by intersecting the brick's columns with the focus sound table's columns and inserting the common fields. The `brick_type` column is prepended to each inserted row for traceability. This produces the `s_raw` tables that downstream chapters will aggregate into `s_agg`, validate into `s_vld`, and ultimately use to reconstruct `PersonUnit` and `MomentUnit` objects.
 
 The table naming convention throughout: `{brick_type}_b_{stage}` for brick-level tables, `{ABBV7}_s_{stage}_{crud}` for sound-level tables.

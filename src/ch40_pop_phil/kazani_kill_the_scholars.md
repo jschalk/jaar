@@ -138,7 +138,7 @@ These dynamics - with a limited number of idea peddlars defining the course of a
 
 Long time ago, I was sitting in the historical library in Moscow, and just scrolling through the catalogues of books. Scrolling, and scrolling and scrolling. There was not much information there except for the author, name of the book, date and place of publishing, etc. But over the time, and over hundreds of entries, I started noticing a pattern
 
-There is lots of French books there. A lot of powerful, well-known, celebrated works that made an enourmous cultural and ideological impact far beyond the borders of France
+There is lots of French books there. A lot of powerful, well-known, celebrated works that made an enourmous cultural and ideological impact far beyond the physical land of France.
 
 BUT
 

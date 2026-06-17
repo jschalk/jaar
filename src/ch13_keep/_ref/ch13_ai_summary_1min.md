@@ -45,6 +45,6 @@ The metaphor is a river: mana flows from healers to patients and circulates thro
 
 **`RiverCycle`** — one full cycle of the river simulation for a healer. It holds `keep_patientledgers` (the patient ledgers of all persons in the healer's keep) and iterates through them, creating a `RiverBook` for each, then aggregates via `create_cylceledger()` — a merged ledger summing all care flows across all river books in the cycle. This cycle ledger becomes the input mana distribution for the next cycle.
 
-**`riverrun.py`** (not read in full) orchestrates multiple `RiverCycle`s in sequence — running the river through N cycles to reach a stable distribution. The convergence of the cycle ledger across runs indicates how much each person in the keep has earned relative to their declared responsibilities.
+**`riverrun.py`** (not read in full) orchestrates multiple `RiverCycle`s in sequence — running the river through N cycles to reach a static distribution. The convergence of the cycle ledger across runs indicates how much each person in the keep has earned relative to their declared responsibilities.
 
 The river metaphor directly operationalizes the Levinasian ethic: a healer's credit is not self-declared but emerges from actual cycles of caring — how much mana flows through them toward others over time.

@@ -71,8 +71,8 @@ def test_ContactUnit_get_membership_ReturnsObj():
     # WHEN / THEN
     assert yao_contactunit.get_membership(exx.run) is not None
     assert yao_contactunit.get_membership(fly_str) is not None
-    climb_str = ",climbers"
-    assert yao_contactunit.get_membership(climb_str) is None
+    boulder_str = ",boulderers"
+    assert yao_contactunit.get_membership(boulder_str) is None
 
 
 def test_membership_exists_ReturnsObj():
@@ -85,8 +85,8 @@ def test_membership_exists_ReturnsObj():
     # WHEN / THEN
     assert yao_contactunit.membership_exists(exx.run)
     assert yao_contactunit.membership_exists(fly_str)
-    climb_str = ",climbers"
-    assert yao_contactunit.membership_exists(climb_str) is False
+    boulder_str = ",boulderers"
+    assert yao_contactunit.membership_exists(boulder_str) is False
 
 
 def test_memberships_exist_ReturnsObj():

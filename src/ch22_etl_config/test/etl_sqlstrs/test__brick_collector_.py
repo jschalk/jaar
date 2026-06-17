@@ -268,7 +268,7 @@ def test_reorder_etl_db_sheets_SortsSheets_Scenario1_PostfixPriority(tmp_path):
     assert result == ["report_done_b_raw", "zzz_final_b_vld", "misc"]
 
 
-def test_reorder_etl_db_sheets_SortsSheets_Scenario2_FallbackIgnoresOriginalOrder(
+def test_reorder_etl_db_sheets_SortsSheets_Scenario2_BackupIgnoresOriginalOrder(
     tmp_path,
 ):
     # ESTABLISH

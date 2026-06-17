@@ -37,7 +37,7 @@ A `FactUnit` is a statement about the world: it says that a context (identified 
 **`CaseUnit`**
 A `CaseUnit` is a single condition within a reason. It specifies:
 - `reason_state`: the rope state that must be active for this case to pass.
-- Optionally `reason_lower` / `reason_upper`: a numeric range the fact must fall within.
+- Optionally `reason_lower` / `reason_upper`: a numeric range the fact must be within.
 - Optionally `reason_divisor`: enables **cyclic/modular reasoning** — the fact value is taken modulo the divisor before comparing to the range. This allows conditions like "every 7 rotations of the earth" or "every quarter."
 
 `CaseUnit.set_case_active(factheir)` evaluates whether the supplied fact satisfies this case's condition, setting both `case_active` and `case_task` (whether the case indicates there is still work remaining within the range).

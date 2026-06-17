@@ -13,15 +13,15 @@ Sodium Bicarbonate, also known as "Baking Soda", is the most important commodity
 
 Before I tell you why let me talk about personal experience. 
 
-I use it to keep my children healthy. It's good for cleaning the dishes, the kitchen surfaces, the laundry. It's used in baking. It very effective and very cheap. It can be stored indefinitly and put in any container. One day I'll figure out how to make toothpaste with if it. 
+I use it to keep my children healthy. It's good for cleaning the dishes, the kitchen surfaces, the laundry. It's used in baking. It very effective and very cheap. It can be stored almost indefinitly and put in any container. One day I'll figure out how to make toothpaste with if it. 
 
 <div align="center"><img src="images/baking_soda_powder.jpg" alt="popular baking soda product" width="400"></div>
 
 Let's talk about why it is not the dominate cleaning agent.
 
-If it's so cheap and so effective why are there so many other cleaning products? Well some of the other products are better. But mainly it's because those other products don't really cost that much and they smell better.[^1] Which is nice but can be ignored.
+If it's so cheap and so effective why are there so many other cleaning products? Well some of the other products are more effective in different scenarios. But mainly it's because those other products don't really cost that much and they smell better.[^1] Which is nice but can be ignored.
 
-Let's list the reasons why it's awesome:
+Let's list the reasons why sodium bicardonate is awesome:
 
 1. It is useful to every household.
 2. It can be shipped easily and has a distant expriation date.
@@ -30,7 +30,7 @@ Let's list the reasons why it's awesome:
 
 The only other commodity that is comparable is salt.
 
-You might ask: *Ok, great, why do I care?*
+You might ask: *Ok, great. Why do I care?*
 
 <div align="center">
 
@@ -58,10 +58,10 @@ Baking soda is so cheap it's possible for a middle class family to buy the month
 
 <div align="center">
 
-> #### Strong the raceways with your local neighbors are, the weaker the external authority is.
+> #### Stronger the raceways with your local neighbors are, the weaker the external authority is.
 </div>
 
-If you don't have any raceway with your neighbors, if you don't share anything at all. Baking Soda is a great way to start. Maybe salt is a better one. Everyone needs salt. But salt has a problem: it never goes bad and it's easy to inspect. 
+If you don't have any raceway with your neighbors, if you don't share anything at all, Baking Soda is a great way to start. Maybe salt is a better one. Everyone needs salt. But salt has a problem: it never goes bad and it's easy to inspect. 
 
 Why would it be good that Baking Soda can go bad and it's difficult to inspect for quality? 
 
@@ -104,4 +104,4 @@ Give, share, take sodium bicarbonate.
 
 [^2]: Family is whoever in the world you love and sacrifice for.
 
-[^3]: I don't know the real number
+[^3]: I don't know a better number

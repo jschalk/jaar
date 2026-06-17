@@ -60,7 +60,7 @@ def reorder_etl_db_sheets(filepath: str | Path) -> None:
     Reorders sheets in an Excel file based on:
       1. Prefix priority (tier1_prefixes)
       2. Postfix priority (tier2_postfixes)
-      3. Original order fallback
+      3. Original order backup
 
     Modifies the file in place.
     """
@@ -84,7 +84,7 @@ def reorder_etl_db_sheets(filepath: str | Path) -> None:
             if sheet_name.endswith(postfix):
                 return (1, i, sheet_name)
 
-        # Tier 3: fallback (do not preserve original order)
+        # Tier 3: backup (do not preserve original order)
         return (2, sheet_name)
 
     # Sort sheet names

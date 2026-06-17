@@ -56,7 +56,7 @@ def test_fission_add_ancestor_rope_rows_ReturnsDf_Scenario04_NoDuplicateAncestor
     # ESTABLISH
     soccer_rope = ";mmt01;sports;play soccer;"
     df = make_df(
-        plan_rope=[soccer_rope, ";mmt01;sports;climb;"],
+        plan_rope=[soccer_rope, ";mmt01;sports;boulder;"],
         pledge=[1, 1],
         person_name=["Alice", "Bob"],
     )
@@ -382,7 +382,7 @@ def test_fission_add_knot_from_rope_ReturnsDf_Scenario05_ReturnsUnchangedWhenKno
     assert result["knot"].iloc[0] == "!"
 
 
-def test_fission_add_knot_from_rope_ReturnsDf_Scenario06_SkipsNullMomentRopeFallsBackToPlanRope():
+def test_fission_add_knot_from_rope_ReturnsDf_Scenario06_SkipsNullMomentRopeGoesBackToPlanRope():
     # ESTABLISH
     df = make_df(moment_rope=[None], plan_rope=["|mmt01|sports|"])
     # WHEN
