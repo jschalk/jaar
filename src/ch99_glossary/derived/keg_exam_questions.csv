@@ -7,7 +7,7 @@ row_number,question
 5,Did you read that the keg_definition of 'Climb' is 'To connote the action a FamilyUnit takes to gain Prestige.'.
 6,Did you read that the keg_definition of 'Cling' is 'To connote the action a FamilyUnit takes to avoids losing Prestige.'.
 7,Did you read that the keg_definition of 'Closer' is 'Do not use this term so there is no confusion with 'Loser'.'.
-8,"Did you read that the keg_definition of 'Governance' is 'Moments that have an active budget and ledger, and for which some people crawl. A government that exists and is important.'."
+8,"Did you read that the keg_definition of 'Discipline' is 'Moments that have an active budget and ledger, and for which some people crawl has Discipline. A government that exists and is important.'."
 9,Did you read that the keg_definition of 'Invite' is 'The giving of prestige from a FamilyUnit with it to a FamilyUnit without it.'.
 10,Have you heard of Excel spreadsheet application?
 11,Did you read that the keg_definition of 'Joachim' is 'Fairly common name. Also name of Init Kegology Philosopher. Lots of different prounoucations possible.'.
@@ -31,9 +31,9 @@ row_number,question
 29,Did you read that the keg_definition of 'cling' is 'To connote the action a FamilyUnit takes to avoids losing Prestige.'.
 30,Did you read that the keg_definition of 'closer' is 'Do not use this term so there is no confusion with 'loser'.'.
 31,Did you read that the keg_definition of 'crawl' is 'The opposite of 'swim'. To be slave to one. To live in one moment as it allows.'.
-32,Did you read that the keg_definition of 'dive' is 'To go from living on land to swimming with fearlessness. Not used in codebase.'.
-33,"Did you read that the keg_definition of 'factory' is 'Not used in codebase. The factory method in programming is very important. However because I want 'fact' only to refer to the Keg concept I don't use the word 'factory', instead I use 'shop'.'."
-34,Did you read that the keg_definition of 'governance' is 'A moment that has Governance. Check 'governance' definition.'.
+32,Did you read that the keg_definition of 'discipline' is 'A moment that has Discipline. Check 'Discipline' definition.'.
+33,Did you read that the keg_definition of 'dive' is 'To go from living on land to swimming with fearlessness. Not used in codebase.'.
+34,"Did you read that the keg_definition of 'factory' is 'Not used in codebase. The factory method in programming is very important. However because I want 'fact' only to refer to the Keg concept I don't use the word 'factory', instead I use 'shop'.'."
 35,Did you read that the keg_definition of 'heart' is 'Not used in codebase.'.
 36,Did you read that the keg_definition of 'infinity' is 'As described in Totality and Infinity. Not used in codebase.'.
 37,"Did you read that the keg_definition of 'keg_wheel' is 'A instance of KegWheel, within a single MomentUnit. Not used in codebase.'."
