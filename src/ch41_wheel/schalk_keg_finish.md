@@ -3,7 +3,7 @@
 **Date:** 2026-06-09  
 **Author:** Emmanuel Schalk
 
-> Kegology has taken up all my free time. My kids want me to play with them.
+> Kegology has taken up all my free time. My children want me to play with them.
 
 ---
 

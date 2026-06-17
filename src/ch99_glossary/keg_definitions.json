@@ -570,6 +570,8 @@
   "respect_grain": ", Moment arg, Person seed.", 
   "RespectGrain": "float first used in ch03. Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!'", 
   "RespectNum": "float first used in ch03. RespectNum inherits from float class", 
+  "Revenge": "Definition needed or maybe not.", 
+  "revenge": "Definition needed or maybe not.", 
   "rewards_count": "Definition needed.", 
   "rewards_magnitude": "Definition needed.", 
   "Rival": "A different FamilyUnit within a Wheel that is in open competition.", 
