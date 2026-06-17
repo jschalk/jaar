@@ -97,7 +97,7 @@ For the vassal strategy to work, you need to know who to follow. You can just se
 
 But most people are not choosing between titans. They are choosing inside the organizations and communities they actually inhabit. The selection problem is local before it is global.
 
-This means you should be looking for trajectory and not status. Status is a snapshot, a lagging indicator of past victories. Trajectory is the rate of change.
+This means you should be looking for trajectory and not status. Status is a residue, a lagging indicator of past victories. Trajectory is the rate of change.
 
 Women are great at this. It’s a misconception that women are just drawn to status. They sometimes are. But clever girls are drawn to trajectory.
 

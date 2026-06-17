@@ -34,7 +34,7 @@
 - ch34_finance: ch34, finance, financial
 - ch35_person_viewer: ch35
 - ch40_pop_phil: Hayek, Hobbit, Kronos, ch40, ch90, climb, invitation, invite, kronosmax, ladder, power, prestige, rival, winner, winning
-- ch41_wheel: Fall, KegWheel, Wheel, ch41, fall, losing, stable, wheel
+- ch41_wheel: Fall, KegWheel, Shot, Wheel, ch41, fall, jump, losing, shot, stable, welcome, wheel
 - ch90_world_app: 
 - ch97_docs_builder: ch97
 - ch98_linter: ch98

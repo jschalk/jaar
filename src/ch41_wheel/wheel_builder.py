@@ -5,3 +5,7 @@ pass
 # TODO get rid of invite references here. The terms should be in a second article.
 # stable
 # losing
+# welcome
+# jump
+# Shot
+# shot

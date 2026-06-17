@@ -1,8 +1,8 @@
-# Against the brainrot
+# Wisdom of Lenin
 
 **Date:** 2026-06-05  
 **Author:** Kamil Kazani  
-**Source:** https://kamilkazani.substack.com/p/the-wisdom-of-vladimir-lenin 
+**Source:** https://kamilkazani.substack.com/p/the-wisdom-of-vladimir-lenin  
 **Copied to Keg:** 2026-06-09 
 
 ---

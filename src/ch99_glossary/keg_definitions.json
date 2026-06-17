@@ -594,6 +594,8 @@
   "sheet": "Object that represents a spreadsheet. It has attributes like filename, table_name, and data.", 
   "SheetName": "A string used as SheetName for SpreadSheet files. str first used in ch20", 
   "shop": "The factory method in programming is very important. However because I want 'fact' only to refer to the Keg concept I don't use the word 'factory', instead I use 'shop'.", 
+  "Shot": "I'm not throwing away my shot.", 
+  "shot": "I'm not throwing away my shot.", 
   "slash": "Example key with value '/' used for tests throughout codebase.", 
   "solo": "I can't figure out what this is for. Where in the codebase is it necessary for a LaborUnit to know if it the only LaborUnit in a WorkforceUnit, Workforce seed.", 
   "sort_ordinal": "Int that represents where the keyword is indexed in the general sorting order.", 

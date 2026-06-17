@@ -136,7 +136,7 @@ Paragraph with footnote.[^1] Can continue paragraph
 
 ## Footnotes
 
-[^1]: This won’t be an exhaustive explanation - for the reasons discussed below. still, imagining it as a sequence of coups happening in a row will be much nearer to reality than seeing it as a one, singular event. One problem with popular imagination is that it tends to fuse events happening over the months, or years into a one snapshot
+[^1]: This won’t be an exhaustive explanation - for the reasons discussed below. still, imagining it as a sequence of coups happening in a row will be much nearer to reality than seeing it as a one, singular event. One problem with popular imagination is that it tends to fuse events happening over the months, or years into a one scene
 
 [^2]: If the political life had not been extirpated from the nation, that this nation cannot experience a revolution. All it can have is a civil war.
 
