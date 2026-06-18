@@ -9,3 +9,6 @@ pass
 # jump
 # Shot
 # shot
+# alien
+# border
+# cling
