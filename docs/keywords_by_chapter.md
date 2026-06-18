@@ -33,7 +33,7 @@
 - ch33_pitch: Deal, Gift, Peer, PitchID, PitchUnit, ch33, deal, gift, offer, peer, pitch, pitch_id, pitcher_name, pitchs, request
 - ch34_finance: ch34, finance, financial
 - ch35_person_viewer: ch35
-- ch40_pop_phil: Hayek, Hobbit, Kronos, ch40, ch90, climb, invitation, invite, kronosmax, ladder, power, prestige, rival, winner, winning
+- ch40_pop_phil: Hayek, Hobbit, Knee, Kronos, ch40, ch90, climb, invitation, invite, knee, kronosmax, ladder, power, prestige, rival, winner, winning
 - ch41_wheel: Fall, KegWheel, Shot, Wheel, alien, ch41, cling, fall, jump, losing, shot, stable, welcome, wheel
 - ch90_world_app: 
 - ch97_docs_builder: ch97

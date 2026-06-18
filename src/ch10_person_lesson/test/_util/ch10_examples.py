@@ -23,23 +23,23 @@ def get_texas_rope() -> RopeTerm:
     return create_rope_from_labels([moment_rope, nation_str, usa_str, texas_str])
 
 
-def get_atom_example_factunit_knee(first_label: LabelTerm = None) -> PersonAtom:
+def get_atom_example_factunit_foot(first_label: LabelTerm = None) -> PersonAtom:
     if not first_label:
         first_label = exx.a23
     sports_str = "sports"
     sports_rope = create_rope(first_label, sports_str)
     ball_str = "basketball"
     ball_rope = create_rope(sports_rope, ball_str)
-    knee_str = "knee"
-    knee_rope = create_rope(first_label, knee_str)
-    knee_fact_lower = 7
-    knee_fact_upper = 23
+    foot_str = "foot"
+    foot_rope = create_rope(first_label, foot_str)
+    foot_fact_lower = 7
+    foot_fact_upper = 23
     x_dimen = kw.person_plan_factunit
     insert_factunit_personatom = personatom_shop(x_dimen, kw.INSERT)
     insert_factunit_personatom.set_jkey(kw.plan_rope, ball_rope)
-    insert_factunit_personatom.set_jkey(kw.fact_context, knee_rope)
-    insert_factunit_personatom.set_jvalue(kw.fact_lower, knee_fact_lower)
-    insert_factunit_personatom.set_jvalue(kw.fact_upper, knee_fact_upper)
+    insert_factunit_personatom.set_jkey(kw.fact_context, foot_rope)
+    insert_factunit_personatom.set_jvalue(kw.fact_lower, foot_fact_lower)
+    insert_factunit_personatom.set_jvalue(kw.fact_upper, foot_fact_upper)
     return insert_factunit_personatom
 
 
@@ -65,21 +65,21 @@ def get_atom_example_planunit_ball(moment_rope: MomentRope = None) -> PersonAtom
     return insert_planunit_personatom
 
 
-def get_atom_example_planunit_knee(moment_rope: MomentRope = None) -> PersonAtom:
+def get_atom_example_planunit_foot(moment_rope: MomentRope = None) -> PersonAtom:
     if not moment_rope:
         moment_rope = exx.a23
     sports_str = "sports"
     sports_rope = create_rope(moment_rope, sports_str)
-    knee_str = "knee"
-    knee_begin = 1
-    knee_close = 71
+    foot_str = "foot"
+    foot_begin = 1
+    foot_close = 71
     begin_str = "begin"
     close_str = "close"
-    knee_rope = create_rope(sports_rope, knee_str)
+    foot_rope = create_rope(sports_rope, foot_str)
     insert_planunit_personatom = personatom_shop(kw.person_planunit, crud_str=kw.INSERT)
-    insert_planunit_personatom.set_jkey(kw.plan_rope, knee_rope)
-    insert_planunit_personatom.set_jvalue(begin_str, knee_begin)
-    insert_planunit_personatom.set_jvalue(close_str, knee_close)
+    insert_planunit_personatom.set_jkey(kw.plan_rope, foot_rope)
+    insert_planunit_personatom.set_jvalue(begin_str, foot_begin)
+    insert_planunit_personatom.set_jvalue(close_str, foot_close)
     return insert_planunit_personatom
 
 
@@ -125,23 +125,23 @@ def sue_1personatoms_lessonunit() -> LessonUnit:
 
 def sue_2personatoms_lessonunit() -> LessonUnit:
     x_lessonunit = lessonunit_shop(person_name="Sue", lesson_id=53, spark_face="Yao")
-    x_lessonunit.persondelta.set_personatom(get_atom_example_planunit_knee())
+    x_lessonunit.persondelta.set_personatom(get_atom_example_planunit_foot())
     x_lessonunit.persondelta.set_personatom(get_atom_example_planunit_sports())
     return x_lessonunit
 
 
 def sue_3personatoms_lessonunit() -> LessonUnit:
     x_lessonunit = lessonunit_shop(person_name="Sue", lesson_id=37, spark_face="Yao")
-    x_lessonunit.persondelta.set_personatom(get_atom_example_factunit_knee())
+    x_lessonunit.persondelta.set_personatom(get_atom_example_factunit_foot())
     x_lessonunit.persondelta.set_personatom(get_atom_example_planunit_ball())
-    x_lessonunit.persondelta.set_personatom(get_atom_example_planunit_knee())
+    x_lessonunit.persondelta.set_personatom(get_atom_example_planunit_foot())
     return x_lessonunit
 
 
 def sue_4personatoms_lessonunit() -> LessonUnit:
     x_lessonunit = lessonunit_shop(person_name="Sue", lesson_id=47, spark_face="Yao")
-    x_lessonunit.persondelta.set_personatom(get_atom_example_factunit_knee())
+    x_lessonunit.persondelta.set_personatom(get_atom_example_factunit_foot())
     x_lessonunit.persondelta.set_personatom(get_atom_example_planunit_ball())
-    x_lessonunit.persondelta.set_personatom(get_atom_example_planunit_knee())
+    x_lessonunit.persondelta.set_personatom(get_atom_example_planunit_foot())
     x_lessonunit.persondelta.set_personatom(get_atom_example_planunit_sports())
     return x_lessonunit

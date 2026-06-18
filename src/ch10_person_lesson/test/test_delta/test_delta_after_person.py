@@ -500,12 +500,12 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_insert_plan_factuni
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_au.make_l1_rope(knee_str)
+    foot_str = "foot"
+    foot_rope = before_sue_au.make_l1_rope(foot_str)
     damaged_str = "damaged mcl"
-    damaged_rope = before_sue_au.make_rope(knee_rope, damaged_str)
-    before_sue_au.set_l1_plan(planunit_shop(knee_str))
-    before_sue_au.set_plan_obj(planunit_shop(damaged_str), knee_rope)
+    damaged_rope = before_sue_au.make_rope(foot_rope, damaged_str)
+    before_sue_au.set_l1_plan(planunit_shop(foot_str))
+    before_sue_au.set_plan_obj(planunit_shop(damaged_str), foot_rope)
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
     assert before_ball_plan.factunits == {}
 
@@ -514,7 +514,7 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_insert_plan_factuni
     damaged_fact_upper = 66
     update_disc_personatom = personatom_shop(kw.person_plan_factunit, kw.INSERT)
     update_disc_personatom.set_jkey(kw.plan_rope, ball_rope)
-    update_disc_personatom.set_jkey(kw.fact_context, knee_rope)
+    update_disc_personatom.set_jkey(kw.fact_context, foot_rope)
     update_disc_personatom.set_jvalue(kw.fact_state, damaged_rope)
     update_disc_personatom.set_jvalue(kw.fact_lower, damaged_fact_lower)
     update_disc_personatom.set_jvalue(kw.fact_upper, damaged_fact_upper)
@@ -526,11 +526,11 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_insert_plan_factuni
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
     assert after_ball_plan.factunits != {}
-    assert after_ball_plan.factunits.get(knee_rope) is not None
-    assert after_ball_plan.factunits.get(knee_rope).fact_context == knee_rope
-    assert after_ball_plan.factunits.get(knee_rope).fact_state == damaged_rope
-    assert after_ball_plan.factunits.get(knee_rope).fact_lower == damaged_fact_lower
-    assert after_ball_plan.factunits.get(knee_rope).fact_upper == damaged_fact_upper
+    assert after_ball_plan.factunits.get(foot_rope) is not None
+    assert after_ball_plan.factunits.get(foot_rope).fact_context == foot_rope
+    assert after_ball_plan.factunits.get(foot_rope).fact_state == damaged_rope
+    assert after_ball_plan.factunits.get(foot_rope).fact_lower == damaged_fact_lower
+    assert after_ball_plan.factunits.get(foot_rope).fact_upper == damaged_fact_upper
 
 
 def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_delete_plan_factunit():
@@ -541,24 +541,24 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_delete_plan_factuni
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_au.make_l1_rope(knee_str)
+    foot_str = "foot"
+    foot_rope = before_sue_au.make_l1_rope(foot_str)
     damaged_str = "damaged mcl"
-    damaged_rope = before_sue_au.make_rope(knee_rope, damaged_str)
-    before_sue_au.set_l1_plan(planunit_shop(knee_str))
-    before_sue_au.set_plan_obj(planunit_shop(damaged_str), knee_rope)
+    damaged_rope = before_sue_au.make_rope(foot_rope, damaged_str)
+    before_sue_au.set_l1_plan(planunit_shop(foot_str))
+    before_sue_au.set_plan_obj(planunit_shop(damaged_str), foot_rope)
     before_sue_au.edit_plan_attr(
         ball_rope,
-        factunit=factunit_shop(fact_context=knee_rope, fact_state=damaged_rope),
+        factunit=factunit_shop(fact_context=foot_rope, fact_state=damaged_rope),
     )
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
     assert before_ball_plan.factunits != {}
-    assert before_ball_plan.factunits.get(knee_rope) is not None
+    assert before_ball_plan.factunits.get(foot_rope) is not None
 
     # WHEN
     update_disc_personatom = personatom_shop(kw.person_plan_factunit, kw.DELETE)
     update_disc_personatom.set_jkey(kw.plan_rope, ball_rope)
-    update_disc_personatom.set_jkey(kw.fact_context, knee_rope)
+    update_disc_personatom.set_jkey(kw.fact_context, foot_rope)
     # print(f"{update_disc_personatom=}")
     sue_persondelta = persondelta_shop()
     sue_persondelta.set_personatom(update_disc_personatom)
@@ -578,30 +578,30 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_update_plan_factuni
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_au.make_l1_rope(knee_str)
+    foot_str = "foot"
+    foot_rope = before_sue_au.make_l1_rope(foot_str)
     damaged_str = "damaged mcl"
-    damaged_rope = before_sue_au.make_rope(knee_rope, damaged_str)
+    damaged_rope = before_sue_au.make_rope(foot_rope, damaged_str)
     medical_str = "get medical attention"
-    medical_rope = before_sue_au.make_rope(knee_rope, medical_str)
-    before_sue_au.set_l1_plan(planunit_shop(knee_str))
-    before_sue_au.set_plan_obj(planunit_shop(damaged_str), knee_rope)
-    before_sue_au.set_plan_obj(planunit_shop(medical_str), knee_rope)
-    before_knee_factunit = factunit_shop(knee_rope, damaged_rope)
-    before_sue_au.edit_plan_attr(ball_rope, factunit=before_knee_factunit)
+    medical_rope = before_sue_au.make_rope(foot_rope, medical_str)
+    before_sue_au.set_l1_plan(planunit_shop(foot_str))
+    before_sue_au.set_plan_obj(planunit_shop(damaged_str), foot_rope)
+    before_sue_au.set_plan_obj(planunit_shop(medical_str), foot_rope)
+    before_foot_factunit = factunit_shop(foot_rope, damaged_rope)
+    before_sue_au.edit_plan_attr(ball_rope, factunit=before_foot_factunit)
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
     assert before_ball_plan.factunits != {}
-    assert before_ball_plan.factunits.get(knee_rope) is not None
-    assert before_ball_plan.factunits.get(knee_rope).fact_state == damaged_rope
-    assert before_ball_plan.factunits.get(knee_rope).fact_lower is None
-    assert before_ball_plan.factunits.get(knee_rope).fact_upper is None
+    assert before_ball_plan.factunits.get(foot_rope) is not None
+    assert before_ball_plan.factunits.get(foot_rope).fact_state == damaged_rope
+    assert before_ball_plan.factunits.get(foot_rope).fact_lower is None
+    assert before_ball_plan.factunits.get(foot_rope).fact_upper is None
 
     # WHEN
     medical_fact_lower = 45
     medical_fact_upper = 77
     update_disc_personatom = personatom_shop(kw.person_plan_factunit, kw.UPDATE)
     update_disc_personatom.set_jkey(kw.plan_rope, ball_rope)
-    update_disc_personatom.set_jkey(kw.fact_context, knee_rope)
+    update_disc_personatom.set_jkey(kw.fact_context, foot_rope)
     update_disc_personatom.set_jvalue(kw.fact_state, medical_rope)
     update_disc_personatom.set_jvalue(kw.fact_lower, medical_fact_lower)
     update_disc_personatom.set_jvalue(kw.fact_upper, medical_fact_upper)
@@ -613,10 +613,10 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_update_plan_factuni
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
     assert after_ball_plan.factunits != {}
-    assert after_ball_plan.factunits.get(knee_rope) is not None
-    assert after_ball_plan.factunits.get(knee_rope).fact_state == medical_rope
-    assert after_ball_plan.factunits.get(knee_rope).fact_lower == medical_fact_lower
-    assert after_ball_plan.factunits.get(knee_rope).fact_upper == medical_fact_upper
+    assert after_ball_plan.factunits.get(foot_rope) is not None
+    assert after_ball_plan.factunits.get(foot_rope).fact_state == medical_rope
+    assert after_ball_plan.factunits.get(foot_rope).fact_lower == medical_fact_lower
+    assert after_ball_plan.factunits.get(foot_rope).fact_upper == medical_fact_upper
 
 
 def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_update_plan_reason_caseunit():
@@ -628,20 +628,20 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_update_plan_reason_
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_au.make_l1_rope(knee_str)
+    foot_str = "foot"
+    foot_rope = before_sue_au.make_l1_rope(foot_str)
     damaged_str = "damaged mcl"
-    damaged_rope = before_sue_au.make_rope(knee_rope, damaged_str)
-    before_sue_au.set_l1_plan(planunit_shop(knee_str))
-    before_sue_au.set_plan_obj(planunit_shop(damaged_str), knee_rope)
+    damaged_rope = before_sue_au.make_rope(foot_rope, damaged_str)
+    before_sue_au.set_l1_plan(planunit_shop(foot_str))
+    before_sue_au.set_plan_obj(planunit_shop(damaged_str), foot_rope)
     before_sue_au.edit_plan_attr(
-        ball_rope, reason_context=knee_rope, reason_case=damaged_rope
+        ball_rope, reason_context=foot_rope, reason_case=damaged_rope
     )
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
     assert before_ball_plan.reasonunits != {}
-    before_knee_reasonunit = before_ball_plan.get_reasonunit(knee_rope)
-    assert before_knee_reasonunit is not None
-    damaged_caseunit = before_knee_reasonunit.get_case(damaged_rope)
+    before_foot_reasonunit = before_ball_plan.get_reasonunit(foot_rope)
+    assert before_foot_reasonunit is not None
+    damaged_caseunit = before_foot_reasonunit.get_case(damaged_rope)
     assert damaged_caseunit.reason_state == damaged_rope
     assert damaged_caseunit.reason_lower is None
     assert damaged_caseunit.reason_upper is None
@@ -653,7 +653,7 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_update_plan_reason_
     damaged_reason_divisor = 3
     update_disc_personatom = personatom_shop(kw.person_plan_reason_caseunit, kw.UPDATE)
     update_disc_personatom.set_jkey(kw.plan_rope, ball_rope)
-    update_disc_personatom.set_jkey(kw.reason_context, knee_rope)
+    update_disc_personatom.set_jkey(kw.reason_context, foot_rope)
     update_disc_personatom.set_jkey(kw.reason_state, damaged_rope)
     update_disc_personatom.set_jvalue(kw.reason_lower, damaged_reason_lower)
     update_disc_personatom.set_jvalue(kw.reason_upper, damaged_reason_upper)
@@ -665,9 +665,9 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_update_plan_reason_
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
-    after_knee_reasonunit = after_ball_plan.get_reasonunit(knee_rope)
-    assert after_knee_reasonunit is not None
-    after_damaged_caseunit = after_knee_reasonunit.get_case(damaged_rope)
+    after_foot_reasonunit = after_ball_plan.get_reasonunit(foot_rope)
+    assert after_foot_reasonunit is not None
+    after_damaged_caseunit = after_foot_reasonunit.get_case(damaged_rope)
     assert after_damaged_caseunit.reason_state == damaged_rope
     assert after_damaged_caseunit.reason_lower == damaged_reason_lower
     assert after_damaged_caseunit.reason_upper == damaged_reason_upper
@@ -682,22 +682,22 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_insert_plan_reason_
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_au.make_l1_rope(knee_str)
+    foot_str = "foot"
+    foot_rope = before_sue_au.make_l1_rope(foot_str)
     damaged_str = "damaged mcl"
-    damaged_rope = before_sue_au.make_rope(knee_rope, damaged_str)
+    damaged_rope = before_sue_au.make_rope(foot_rope, damaged_str)
     medical_str = "get medical attention"
-    medical_rope = before_sue_au.make_rope(knee_rope, medical_str)
-    before_sue_au.set_l1_plan(planunit_shop(knee_str))
-    before_sue_au.set_plan_obj(planunit_shop(damaged_str), knee_rope)
-    before_sue_au.set_plan_obj(planunit_shop(medical_str), knee_rope)
+    medical_rope = before_sue_au.make_rope(foot_rope, medical_str)
+    before_sue_au.set_l1_plan(planunit_shop(foot_str))
+    before_sue_au.set_plan_obj(planunit_shop(damaged_str), foot_rope)
+    before_sue_au.set_plan_obj(planunit_shop(medical_str), foot_rope)
     before_sue_au.edit_plan_attr(
-        ball_rope, reason_context=knee_rope, reason_case=damaged_rope
+        ball_rope, reason_context=foot_rope, reason_case=damaged_rope
     )
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
-    before_knee_reasonunit = before_ball_plan.get_reasonunit(knee_rope)
-    assert before_knee_reasonunit.get_case(damaged_rope) is not None
-    assert before_knee_reasonunit.get_case(medical_rope) is None
+    before_foot_reasonunit = before_ball_plan.get_reasonunit(foot_rope)
+    assert before_foot_reasonunit.get_case(damaged_rope) is not None
+    assert before_foot_reasonunit.get_case(medical_rope) is None
 
     # WHEN
     medical_reason_lower = 45
@@ -705,7 +705,7 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_insert_plan_reason_
     medical_reason_divisor = 3
     update_disc_personatom = personatom_shop(kw.person_plan_reason_caseunit, kw.INSERT)
     update_disc_personatom.set_jkey(kw.plan_rope, ball_rope)
-    update_disc_personatom.set_jkey(kw.reason_context, knee_rope)
+    update_disc_personatom.set_jkey(kw.reason_context, foot_rope)
     update_disc_personatom.set_jkey(kw.reason_state, medical_rope)
     update_disc_personatom.set_jvalue(kw.reason_lower, medical_reason_lower)
     update_disc_personatom.set_jvalue(kw.reason_upper, medical_reason_upper)
@@ -717,8 +717,8 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_insert_plan_reason_
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
-    after_knee_reasonunit = after_ball_plan.get_reasonunit(knee_rope)
-    after_medical_caseunit = after_knee_reasonunit.get_case(medical_rope)
+    after_foot_reasonunit = after_ball_plan.get_reasonunit(foot_rope)
+    after_medical_caseunit = after_foot_reasonunit.get_case(medical_rope)
     assert after_medical_caseunit is not None
     assert after_medical_caseunit.reason_state == medical_rope
     assert after_medical_caseunit.reason_lower == medical_reason_lower
@@ -735,30 +735,30 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_delete_plan_reason_
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_au.make_l1_rope(knee_str)
+    foot_str = "foot"
+    foot_rope = before_sue_au.make_l1_rope(foot_str)
     damaged_str = "damaged mcl"
-    damaged_rope = before_sue_au.make_rope(knee_rope, damaged_str)
+    damaged_rope = before_sue_au.make_rope(foot_rope, damaged_str)
     medical_str = "get medical attention"
-    medical_rope = before_sue_au.make_rope(knee_rope, medical_str)
-    before_sue_au.set_l1_plan(planunit_shop(knee_str))
-    before_sue_au.set_plan_obj(planunit_shop(damaged_str), knee_rope)
-    before_sue_au.set_plan_obj(planunit_shop(medical_str), knee_rope)
+    medical_rope = before_sue_au.make_rope(foot_rope, medical_str)
+    before_sue_au.set_l1_plan(planunit_shop(foot_str))
+    before_sue_au.set_plan_obj(planunit_shop(damaged_str), foot_rope)
+    before_sue_au.set_plan_obj(planunit_shop(medical_str), foot_rope)
     before_sue_au.edit_plan_attr(
-        ball_rope, reason_context=knee_rope, reason_case=damaged_rope
+        ball_rope, reason_context=foot_rope, reason_case=damaged_rope
     )
     before_sue_au.edit_plan_attr(
-        ball_rope, reason_context=knee_rope, reason_case=medical_rope
+        ball_rope, reason_context=foot_rope, reason_case=medical_rope
     )
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
-    before_knee_reasonunit = before_ball_plan.get_reasonunit(knee_rope)
-    assert before_knee_reasonunit.get_case(damaged_rope) is not None
-    assert before_knee_reasonunit.get_case(medical_rope) is not None
+    before_foot_reasonunit = before_ball_plan.get_reasonunit(foot_rope)
+    assert before_foot_reasonunit.get_case(damaged_rope) is not None
+    assert before_foot_reasonunit.get_case(medical_rope) is not None
 
     # WHEN
     update_disc_personatom = personatom_shop(kw.person_plan_reason_caseunit, kw.DELETE)
     update_disc_personatom.set_jkey(kw.plan_rope, ball_rope)
-    update_disc_personatom.set_jkey(kw.reason_context, knee_rope)
+    update_disc_personatom.set_jkey(kw.reason_context, foot_rope)
     update_disc_personatom.set_jkey(kw.reason_state, medical_rope)
     sue_persondelta = persondelta_shop()
     sue_persondelta.set_personatom(update_disc_personatom)
@@ -766,9 +766,9 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_delete_plan_reason_
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
-    after_knee_reasonunit = after_ball_plan.get_reasonunit(knee_rope)
-    assert after_knee_reasonunit.get_case(damaged_rope) is not None
-    assert after_knee_reasonunit.get_case(medical_rope) is None
+    after_foot_reasonunit = after_ball_plan.get_reasonunit(foot_rope)
+    assert after_foot_reasonunit.get_case(damaged_rope) is not None
+    assert after_foot_reasonunit.get_case(medical_rope) is None
 
 
 def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_insert_plan_reasonunit():
@@ -779,20 +779,20 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_insert_plan_reasonu
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_au.make_l1_rope(knee_str)
+    foot_str = "foot"
+    foot_rope = before_sue_au.make_l1_rope(foot_str)
     medical_str = "get medical attention"
-    medical_rope = before_sue_au.make_rope(knee_rope, medical_str)
-    before_sue_au.set_l1_plan(planunit_shop(knee_str))
-    before_sue_au.set_plan_obj(planunit_shop(medical_str), knee_rope)
+    medical_rope = before_sue_au.make_rope(foot_rope, medical_str)
+    before_sue_au.set_l1_plan(planunit_shop(foot_str))
+    before_sue_au.set_plan_obj(planunit_shop(medical_str), foot_rope)
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
-    assert before_ball_plan.get_reasonunit(knee_rope) is None
+    assert before_ball_plan.get_reasonunit(foot_rope) is None
 
     # WHEN
     medical_active_requisite = True
     update_disc_personatom = personatom_shop(kw.person_plan_reasonunit, kw.INSERT)
     update_disc_personatom.set_jkey(kw.plan_rope, ball_rope)
-    update_disc_personatom.set_jkey("reason_context", knee_rope)
+    update_disc_personatom.set_jkey("reason_context", foot_rope)
     update_disc_personatom.set_jvalue(
         kw.active_requisite,
         medical_active_requisite,
@@ -804,10 +804,10 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_insert_plan_reasonu
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
-    after_knee_reasonunit = after_ball_plan.get_reasonunit(knee_rope)
-    assert after_knee_reasonunit is not None
-    assert after_knee_reasonunit.get_case(medical_rope) is None
-    assert after_knee_reasonunit.active_requisite == medical_active_requisite
+    after_foot_reasonunit = after_ball_plan.get_reasonunit(foot_rope)
+    assert after_foot_reasonunit is not None
+    assert after_foot_reasonunit.get_case(medical_rope) is None
+    assert after_foot_reasonunit.active_requisite == medical_active_requisite
 
 
 def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_update_plan_reasonunit():
@@ -819,20 +819,20 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_update_plan_reasonu
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_au.make_l1_rope(knee_str)
+    foot_str = "foot"
+    foot_rope = before_sue_au.make_l1_rope(foot_str)
     medical_str = "get medical attention"
-    medical_rope = before_sue_au.make_rope(knee_rope, medical_str)
+    medical_rope = before_sue_au.make_rope(foot_rope, medical_str)
     before_medical_active_requisite = False
-    before_sue_au.set_l1_plan(planunit_shop(knee_str))
-    before_sue_au.set_plan_obj(planunit_shop(medical_str), knee_rope)
+    before_sue_au.set_l1_plan(planunit_shop(foot_str))
+    before_sue_au.set_plan_obj(planunit_shop(medical_str), foot_rope)
     before_sue_au.edit_plan_attr(
         ball_rope,
-        reason_context=knee_rope,
+        reason_context=foot_rope,
         reason_requisite_active=before_medical_active_requisite,
     )
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
-    before_ball_reasonunit = before_ball_plan.get_reasonunit(knee_rope)
+    before_ball_reasonunit = before_ball_plan.get_reasonunit(foot_rope)
     assert before_ball_reasonunit is not None
     assert before_ball_reasonunit.active_requisite == before_medical_active_requisite
 
@@ -840,7 +840,7 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_update_plan_reasonu
     after_medical_active_requisite = True
     update_disc_personatom = personatom_shop(kw.person_plan_reasonunit, kw.UPDATE)
     update_disc_personatom.set_jkey(kw.plan_rope, ball_rope)
-    update_disc_personatom.set_jkey("reason_context", knee_rope)
+    update_disc_personatom.set_jkey("reason_context", foot_rope)
     update_disc_personatom.set_jvalue(
         kw.active_requisite,
         after_medical_active_requisite,
@@ -852,10 +852,10 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_update_plan_reasonu
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
-    after_knee_reasonunit = after_ball_plan.get_reasonunit(knee_rope)
-    assert after_knee_reasonunit is not None
-    assert after_knee_reasonunit.get_case(medical_rope) is None
-    assert after_knee_reasonunit.active_requisite == after_medical_active_requisite
+    after_foot_reasonunit = after_ball_plan.get_reasonunit(foot_rope)
+    assert after_foot_reasonunit is not None
+    assert after_foot_reasonunit.get_case(medical_rope) is None
+    assert after_foot_reasonunit.active_requisite == after_medical_active_requisite
 
 
 def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_delete_plan_reasonunit():
@@ -866,29 +866,29 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_delete_plan_reasonu
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_au.make_l1_rope(knee_str)
+    foot_str = "foot"
+    foot_rope = before_sue_au.make_l1_rope(foot_str)
     medical_active_requisite = False
-    before_sue_au.set_l1_plan(planunit_shop(knee_str))
+    before_sue_au.set_l1_plan(planunit_shop(foot_str))
     before_sue_au.edit_plan_attr(
         ball_rope,
-        reason_context=knee_rope,
+        reason_context=foot_rope,
         reason_requisite_active=medical_active_requisite,
     )
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
-    assert before_ball_plan.get_reasonunit(knee_rope) is not None
+    assert before_ball_plan.get_reasonunit(foot_rope) is not None
 
     # WHEN
     update_disc_personatom = personatom_shop(kw.person_plan_reasonunit, kw.DELETE)
     update_disc_personatom.set_jkey(kw.plan_rope, ball_rope)
-    update_disc_personatom.set_jkey("reason_context", knee_rope)
+    update_disc_personatom.set_jkey("reason_context", foot_rope)
     sue_persondelta = persondelta_shop()
     sue_persondelta.set_personatom(update_disc_personatom)
     after_sue_au = sue_persondelta.get_atom_edited_person(before_sue_au)
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
-    assert after_ball_plan.get_reasonunit(knee_rope) is None
+    assert after_ball_plan.get_reasonunit(foot_rope) is None
 
 
 def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_insert_plan_laborunit():

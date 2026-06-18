@@ -3,7 +3,7 @@ from ch10_person_lesson.delta import persondelta_shop
 from ch10_person_lesson.lesson_main import create_lessonunit_from_files, lessonunit_shop
 from ch10_person_lesson.test._util.ch10_examples import (
     get_atom_example_planunit_ball,
-    get_atom_example_planunit_knee,
+    get_atom_example_planunit_foot,
     get_atom_example_planunit_sports,
 )
 from ch99_glossary.ch_keyword import Ch10Keywords as kw, ExampleStrs as exx
@@ -169,9 +169,9 @@ def test_LessonUnit_save_files_SavesFiles(temp3_fs):
     int4 = 4
     int5 = 5
     sports_atom = get_atom_example_planunit_sports()
-    knee_atom = get_atom_example_planunit_knee()
+    foot_atom = get_atom_example_planunit_foot()
     sue_lessonunit.persondelta.set_personatom(sports_atom)
-    sue_lessonunit.persondelta.set_personatom(knee_atom)
+    sue_lessonunit.persondelta.set_personatom(foot_atom)
     assert sue_lessonunit.lesson_file_exists() is False
     assert sue_lessonunit.atom_file_exists(int4) is False
     assert sue_lessonunit.atom_file_exists(int5) is False
@@ -197,10 +197,10 @@ def test_LessonUnit_create_persondelta_from_atom_files_SetsAttr(temp3_fs):
     int5 = 5
     int9 = 9
     spor_atom = get_atom_example_planunit_sports()
-    knee_atom = get_atom_example_planunit_knee()
+    foot_atom = get_atom_example_planunit_foot()
     ball_atom = get_atom_example_planunit_ball()
     sue_lessonunit._save_atom_file(int4, spor_atom)
-    sue_lessonunit._save_atom_file(int5, knee_atom)
+    sue_lessonunit._save_atom_file(int5, foot_atom)
     sue_lessonunit._save_atom_file(int9, ball_atom)
     assert sue_lessonunit.persondelta == persondelta_shop()
 
@@ -211,7 +211,7 @@ def test_LessonUnit_create_persondelta_from_atom_files_SetsAttr(temp3_fs):
     # THEN
     static_persondelta = persondelta_shop()
     static_persondelta.set_personatom(spor_atom)
-    static_persondelta.set_personatom(knee_atom)
+    static_persondelta.set_personatom(foot_atom)
     static_persondelta.set_personatom(ball_atom)
     assert sue_lessonunit.persondelta != persondelta_shop()
     assert sue_lessonunit.persondelta == static_persondelta
@@ -232,10 +232,10 @@ def test_create_lessonunit_from_files_ReturnsObj(temp3_fs):
     src_sue_lessonunit.set_delta_start(sue_delta_start)
     src_sue_lessonunit.set_face(exx.yao)
     sports_atom = get_atom_example_planunit_sports()
-    knee_atom = get_atom_example_planunit_knee()
+    foot_atom = get_atom_example_planunit_foot()
     ball_atom = get_atom_example_planunit_ball()
     src_sue_lessonunit.persondelta.set_personatom(sports_atom)
-    src_sue_lessonunit.persondelta.set_personatom(knee_atom)
+    src_sue_lessonunit.persondelta.set_personatom(foot_atom)
     src_sue_lessonunit.persondelta.set_personatom(ball_atom)
     src_sue_lessonunit.save_files()
 

@@ -241,10 +241,10 @@ def test_LessonFileHandler_append_lessons_to_gut_file_AddsLessonsTogutFile(
     # gut_person.add_plan(gut_person.make_l1_rope("sports"))
     sports_str = "sports"
     sports_rope = gut_person.make_l1_rope(sports_str)
-    knee_str = "knee"
-    knee_rope = gut_person.make_rope(sports_rope, knee_str)
+    foot_str = "foot"
+    foot_rope = gut_person.make_rope(sports_rope, foot_str)
     assert gut_person.plan_exists(sports_rope) is False
-    assert gut_person.plan_exists(knee_rope) is False
+    assert gut_person.plan_exists(foot_rope) is False
 
     # WHEN
     new_person = sue_lessonfilehandler.append_lessons_to_gut_file()
@@ -252,4 +252,4 @@ def test_LessonFileHandler_append_lessons_to_gut_file_AddsLessonsTogutFile(
     # THEN
     assert new_person != gut_person
     assert new_person.plan_exists(sports_rope)
-    assert new_person.plan_exists(knee_rope)
+    assert new_person.plan_exists(foot_rope)
