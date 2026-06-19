@@ -298,7 +298,7 @@
   "hours_config": "Epoch config List of Lists that contain two elements: hour name and the day's minute when it ends. Last item list must contain hour name and 1440 because that is the last minute of the day, partial example: [['12am', 60], ['11pm', 1440]]", 
   "i_dst": "5 character abbreviation of ideax_dst. stage_type_order=14 Idea (Brick formats without SparkNum) Destination. Filtered Job, Moment data.", 
   "i_src": "5 character abbreviation of ideax_src. stage_type_order=1 Idea Source files. Brick formats without SparkNum.", 
-  "idea": "A collection of bricks (currently only in brick format) with a spark_face but no spark_num.", 
+  "idea": "A collection of bricks (currently only in brick format) with a spark_face but no spark_num. Conceptually ideas are things that represent direct promises to the soul. People are made of ideas and share them.", 
   "idea_type": "Definition needed.", 
   "ideax_dst": "stage_type_order=14 Idea (Brick formats without SparkNum) Destination. Filtered Job, Moment data.", 
   "ideax_src": "stage_type_order=1 Idea Source files. Brick formats without SparkNum.", 

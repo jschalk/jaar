@@ -7,7 +7,7 @@
 
 ---
 
-Today, I am going to introduce some basic ideas for the general theory of revolution
+Today, I am going to introduce some basic concepts for the general theory of revolution
 
 Notice, that I am not discussing any political change in particular, but laying the basic concepts that will serve as a groundwork for the future empirical discussions. For now, a bit of theory.
 
@@ -102,7 +102,7 @@ For the agenda has changed completely. And it is now set by the outsiders.
 
 That is called - the revolution
 
-And the radicalising dynamics that we associate with the revolution - that is political agendas, and political goals getting increasingly more extreme, over the time - is largely driven by the increasing flow of the outsiders who do not belong to the original high circle, who, increasingly, have no connection with that circle at all (like, on an iteration 5 or 6, most political players do not know the players from iterations 1 or 2, and - quite sincerely - have very little idea of why it had all started and what had been the original plan) and - most importantly - **have no stake in the existing order of things.**
+And the radicalising dynamics that we associate with the revolution - that is political agendas, and political goals getting increasingly more extreme, over the time - is largely driven by the increasing flow of the outsiders who do not belong to the original high circle, who, increasingly, have no connection with that circle at all (like, on an iteration 5 or 6, most political players do not know the players from iterations 1 or 2, and - quite sincerely - have very little understanding of why it had all started and what had been the original plan) and - most importantly - **have no stake in the existing order of things.**
 
 The progressive radicalisation of revolutionary process - from moderate revolutionaries of an iteration 1 to the extremists of an iteration 5, largely reflects the different social composition of the whole set of political players on the iterations 1 and 5, respectively. Those who started it all on the iteration 1 tend to belong to the upper elites, who have hella lot to lose, and having a lot to lose causes a moderating effect on their views and agenda. Those who play politics on the iteration 5, have nothing to lose, and all to gain, and their particular interest makes them considerably more radical compared to the original initiators of the revolutionary events.
 

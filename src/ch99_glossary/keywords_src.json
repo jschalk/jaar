@@ -326,7 +326,7 @@
   "hours_config": {"valid_ch": "14:"}, 
   "i_dst": {"valid_ch": "22:"}, 
   "i_src": {"valid_ch": "22:"}, 
-  "idea": {"valid_ch": "20:"}, 
+  "idea": {"valid_ch": "22, 23, 27, 30, 32, 33, 40, 41, 90, 97, 98"}, 
   "idea_type": {"valid_ch": "23:"}, 
   "ideax_dst": {"valid_ch": "22:"}, 
   "ideax_src": {"valid_ch": "22:"}, 

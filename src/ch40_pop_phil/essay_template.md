@@ -20,7 +20,7 @@ Another paragraph.
 
 Another paragraph and then a longer quote.
 
-> Ideas of economists and political philosophers, both when they are right and when they are wrong, are more than is commonly understood. 
+> Concepts of economists and political philosophers, both when they are right and when they are wrong, are more than is commonly understood. 
 
 <div align="center">
 

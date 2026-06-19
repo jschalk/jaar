@@ -25,7 +25,7 @@ Our brains have evolved to live within communities. All of the known higher prim
 
 I don’t need to throw fuel on the eyebrow-scorching bonfire that is “social media is bad!” We all know the goods and many ills of the always-online world. But one of the greatest casualties of communicating with people through devices is that we miss their faces. How easy is it to misinterpret someone’s words over email? How often do we assume a comment is mean when it was never intended to be so? How funny is it when you have to explain to people you were being sarcastic?
 
-I’ve always loved Orwell’s line: “At 50, everyone has the face he deserves.” I love the idea that every frown, smile, and deep, wistful thought is somewhere etched onto our faces. Of course, Orwell couldn’t have predicted the sheer technological achievement of the beauty industry, but I think the point is still true. Our autobiographies are etched onto our faces, and it takes three seconds to see if it’s the kind of autobiography we want to learn more about.
+I’ve always loved Orwell’s line: “At 50, everyone has the face he deserves.” I love the concept that every frown, smile, and deep, wistful thought is somewhere etched onto our faces. Of course, Orwell couldn’t have predicted the sheer technological achievement of the beauty industry, but I think the point is still true. Our autobiographies are etched onto our faces, and it takes three seconds to see if it’s the kind of autobiography we want to learn more about.
 
 So, our faces are important. This week, we look at just how much.
 

@@ -10,7 +10,7 @@
 
 On Friday, Alexey Navalny died (almost certainly killed) in prison. This is a good occasion to debunk some pervasive myths on the mechanics of power.
 
-First, getting rid of Navalny was probably a correct decision on behalf of Kremlin. Execution of this murder may have been suboptimal. Its timing may have been capricious[^1]. But the very idea to eliminate him was reasonable and makes perfect sense. There is nothing crazy or irrational about it.
+First, getting rid of Navalny was probably a correct decision on behalf of Kremlin. Execution of this murder may have been suboptimal. Its timing may have been capricious[^1]. But the decision to eliminate him was reasonable and makes perfect sense. There is nothing crazy or irrational about it.
 
 This remark may sound as cynical or paradoxical. So let me clarify my position.
 

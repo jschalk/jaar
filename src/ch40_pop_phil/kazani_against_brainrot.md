@@ -83,7 +83,7 @@ But there is another explanation, too. The thing with your style is that you can
 
 Long story short, reading a range of old poets, and reading them daily or so, will give you a broad, and comprehensive understanding of the old literature, and with relatively little effort. And that serves as a critical groundwork, now for developing your own taste, and your own style. By and large, you can assume that the old literary culture is just better, and consuming it will make you good, very good.
 
-Some kind of short poem, few pages a day will be enough. For that, of course, you need to keep a fresh supply of poetry at home, so you will always have it at hand in the morning. Again, I highly recommend having it all in paper form and, ideally, the form should be beautiful. If you can, start your day with interacting with a nice work of art.
+Some kind of short poem, few pages a day will be enough. For that, of course, you need to keep a fresh supply of poetry at home, so you will always have it at hand in the morning. Again, I highly recommend having it all in paper form and, if possible, the form should be beautiful. If you can, start your day with interacting with a nice work of art.
 
 
 <div align="center"><img src="images/helicon_pages.webp" alt="Zeng Guofan, the conqueror of Taipings." width="700"></div>

@@ -47,7 +47,7 @@ And that is, how bit by a bit, they built the structure of governance so central
 
 For the revolution is not when the power breaks down, but when the omnipotence - built by the previous regime! - drops into the new hands, and the obedient populace follows the new leaders, and obeys their every order and every whim.
 
-(That is why the idea of revolution feels so magic and so appealing to the power hungry, ambitious folk. For the dream of revolution is the dream of omnipotence)
+(That is why the concept of revolution feels so magic and so appealing to the power hungry, ambitious folk. For the dream of revolution is the dream of omnipotence)
 
 For the revolution is not the crazy mob doing whatever it wants - that is called mutiny and does not produce any significant or lasting effect2.
 
@@ -75,7 +75,7 @@ For when we discuss the “old regime”, and how it was overthrown by the Frenc
 
 For before the “old regime” - that is the absolute monarchy - there used to be a very different medieval regime that the monarchy had destroyed, hollowed out, and built the edifice of absolutism upon its ruins.
 
-> NB: The idea expressed in paragraph above is crucially important, and can, perhaps, be best summarised in a concept of “ancient constitution”. The normal, ancient constitutional order is getting stomped over by the royal absolutism, and that is not good, and we perhaps must do something about it. We will return to this idea, and not once but many times, when we will be discussing the Dutch Revolt, the English Civil War, and, well, pretty much any anti-absolutist movement in Europe until 1789.
+> NB: The concept expressed in paragraph above is crucially important, and can, perhaps, be best summarised in a concept of “ancient constitution”. The normal, ancient constitutional order is getting stomped over by the royal absolutism, and that is not good, and we perhaps must do something about it. We will return to this concept, and not once but many times, when we will be discussing the Dutch Revolt, the English Civil War, and, well, pretty much any anti-absolutist movement in Europe until 1789.
 
 > Until the (very late) phases of French Revolution, pretty much any anti-absolutist movement in Europe, was enflamed not by an idea of change, but by the idea of return, restoration. It is the king, and his bureacracy who are acting as “innovators” (which is a bad thing), and we want merely return to the good old medieval order - how we imagine it. That was the logic of Dutch, English and - last but not least - early French revolution which was replaced by an idea of dismantling it all to the last brick and building the new edifice from the first principles, unburdened and unrestrained by the past, only very, very late on.
 
