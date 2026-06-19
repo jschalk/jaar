@@ -16,7 +16,7 @@ def create_keg_exam_questions_path(src_dir: str) -> str:
     return create_path(derived_dir, "keg_exam_questions.csv")
 
 
-def create_keg_rank_json_path(src_dir: str) -> str:
+def create_question_tier_path(src_dir: str) -> str:
     """Returns path: src\\ch99_glossary\\derived\\question_tier.json"""
 
     ch99_dir = create_path(src_dir, "ch99_glossary")

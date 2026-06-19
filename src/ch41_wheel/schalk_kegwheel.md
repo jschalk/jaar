@@ -1,18 +1,15 @@
-# Kegology's Wheel Model of Power
+# Kegology Wheel theory of power
 
 **Date:** 2026-06-09  
 **Author:** Emmanuel Schalk
 
-> What do you want?
+> Those who kneel can still turn the wheel.
 
 ---
 
-Reality is infinitely complex. Any model of reality will be wrong. But some models are better than others. 
+Here's a footnote describing the foundations of KegWheel[^1]. Read it if you want. 
 
-
-KegWheel Theory is a model of understanding power and predicting how to affect change. The easiest introduction to the concepts of KegWheel is from the writings of Kamil Kazani. The quickest primer is Kazani's article on the [Mechanics of Revolution](../ch40_pop_phil/mechanics_of_revolution_kazani.md).  
-
-As with any grand theory the hardest thing is deciding where to start.
+Now where to start? Let's start with the most important concept in Kegology. 
 
 <div align="center"><img src="../ch40_pop_phil/images/yelstin_family.webp" alt="FamilyUnit Yelstin" width="500"></div>
 
@@ -21,42 +18,90 @@ As with any grand theory the hardest thing is deciding where to start.
 ### Start with Family
 </div>
 
-The primary unit of history is the FamilyUnit. Ronald Syne wrote ""In all ages, whatever the form and name of government, be it monarchy, republic, or democracy, an oligarchy lurks behind the façade."[^1] Families can have one dominate personality but is better to think of families rather then personalities.[^2] The trusted advisors can often have enourmous influence. Kazani claims that one of the people in the Yelstin family portrait above made Vladamir Putin king. It wasn't Boris Yelstin. Do you know which one it is? Do you know his name? I don't.
+The primary unit of history is the Family. Ronald Syne wrote ""In all ages, whatever the form and name of government, be it monarchy, republic, or democracy, an oligarchy lurks behind the façade."[^2] The oligarchy can be best understand as a bunch of Families. A Family can have a dominate personality as letter but is better to think of families rather then personalities[^3] because the trusted family members of a leader can often have enourmous influence. Kamil Kazani claims that one of the people in the Yelstin family portrait above made Vladamir Putin king. It wasn't Boris Yelstin. Do you know which one it was? Do you know his name? I don't. Still I know the Family: The Yelstin Family. A Family that had **prestige** but then it fell from power.
 
 <div align="center">
 
-### "...Status & prestige is a zero sum game..." Kamil Kazani on Twitter[^3]
+#### "...Status & prestige is a zero sum game..." Kamil Kazani on Twitter[^4]
 
 </div>
 
-Define the term *'prestige'* the way Kazani and others do. It is something a family either has or doesn't. It cannot be shared.  
+Let's define the term *'prestige'* the way Kazani and others do. It is something a family either has or doesn't. It cannot be shared. A Family with Prestige has power.
 
-There are families that have all the prestige. If they cooperate no other families will ever have prestige. The coalition will rule forever. However thse families do not trust each other and are in competition. To gain an upperhand a family can decide to get help others outside of power. The non-prestigious family provides a service and the prestigious family invites the non-prestigious family into power. 
+The Families that have all the prestige are the Power. If they cooperate no other families will ever have prestige. The coalition will rule forever. However (most of the time) these families do not trust each other and are often in conflict. The conflict can be reasonable or unreasonable. Petty jealously, revenge or lust can motivate a conflict. To gain an upperhand a family can decide to get help from others outside of power. The non-prestigious family provides a service and the prestigious family invites the non-prestigious family into power. 
 
-Define the term *'invitation'* as the act of giving prestige to a family. Always done in service.
+<div align="center">
 
-This invitation is only extended when the prestigious family has no other choice. Expanding how many families have prestige is dangerous. The fewer players in the game the easier it is to win.
+#### An 'invitation' is the act of giving prestige to a family that has none.
+</div>
+
+This invitation is only extended when the prestigious family has no other choice. When they feel they are in danger of losing prestige. Expanding how many families have prestige is dangerous. The fewer players in the game the easier it is to win. Let's visualize these dynamics with some diagrams:
 
 ### The KegWheel
 
-<div align="center"><img src="images/wheel01_intro.webp" alt="Plato head sculpture" width="600"></div>
+Any system of centralized power can be represented as a KegWheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There is an endless army of those without prestige who will do absolutely any service for chance of getting prestige[^6]. Promises don't even have to be made, the implication is obvious.
 
-Any system of centralized power can be represented as a KegWheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There is an endless army of those without prestige who will do absolutely any service for chance of getting prestige[^5]. Promises don't even have to be made, the implication is obvious. 
+<div align="center"><img src="images/wheel01_intro.webp" alt="Plato head sculpture" width="400"></div>
 
-<div align="center"><img src="images/wheel02_falling.jpg" alt="Plato head sculpture" width="600"></div>
+As the Wheel spins there are families that are winning and families that are losing. On the other hand some families lose so much they fall out of power. There is also the "stable" section of the Wheel where families have prestige but their influence does not increase or decrease.  
 
+<div align="center"><img src="images/wheel02_falling.jpg" alt="Wheel diagram showing those that Fall" width="400"></div>
 
-Before Beto O'Rouke became a congressman he joined a group of us who played Ultimate frisbee in El Paso, TX. Suddenly our small group had multiple new people interested in playing. They were perfectly nice people, some like Jay were very good, but they weren't there for ultimate frisbee. They were there in case Beto O'Rouke became president. But he never did. Maybe because Barack Obama never gave him an invitation the same why Obama received an invitation.
+Families only invite those out of power into power when they can provide a service. Something useful to them. That is represented here as a ladder. Those out of power must have a large ladder to even be considered for invitiation. The obvious example is money. Money is not equal to prestige. But if someone in power wants money then a a ladder made of money can result in an invitation.
+
+<div align="center"><img src="images/wheel03_invitation.webp" alt="Diagram invitation ladder" width="400"></div>
+
+Here's a diagram showing what the Wheel could look like with distinct families in power, falling out of power, and totally outside of power.
+
+<div align="center"><img src="images/wheel04_familyunits.webp" alt="17 FamilyUnits in a Wheel diagram" width="400"></div>
+
+Here's what it looks like when a Wheel touches another Wheel. Each system of power requires institutions, customs, language so precise that they can only be described as "alien". 
+
+<div align="center"><img src="images/wheel05_alien.webp" alt="Plato head sculpture" width="400"></div>
+
+Let's introduce a few terms here. For every Wheel we can describe
+
+1. Wheel Size: The radius of the Wheel. Represents how powerful the wheel is.
+2. Stable Size: The radius of the stable part of the Wheel. Represents how powerful the stable part of the wheel is.
+3. Moving Size: The width of the moving part of the Wheel. Represents how powerful the moving part of the wheel is. (Moving_Size = Wheel_Size - Stable_Size)
+
+<div align="center"><img src="images/wheel06_size.webp" alt="Plato head sculpture" width="400"></div>
+
+Between two Wheels that touch they can create a border. All systems of power want to have a border to define the alien and the non-alien.
+
+<div align="center"><img src="images/wheel07_borders.webp" alt="A border between two wheels" width="400"></div>
+
+Here's a scenario where many wheels of different color exist in touch. (Please excuse the circles that don't actually touch others, if they're really close they're meeant to touch.)
+
+<div align="center"><img src="images/wheel08_many_wheels.webp" alt="Many wheels of different colors" width="400"></div>
+
+Here's the same scenario with many borders. Notice the space between borders. That's a feature that is important, because borders can become their own space that's weirdly part of both wheels and not.[^7] Wheels exist against each other. 
+
+<div align="center"><img src="images/wheel09_many_borders.webp" alt="Many borders of different colors" width="400"></div>
+
+Going back to the Wheel: As the wheel turns there are winners and losers and the stable. The winners are climbing and the losers are clinging. What are they climbing? Each other of course. 
+
+- Winning families are climbing on top of the stable families and losing families. Stable ones can take it. Losing ones can't. Climbing on top of losing families isn't very effective. Because they're going down. Climbing on stable ones is effective.
+- Losing families are clinging to stable families and winning families. 
+
+<div align="center"><img src="images/wheel10_climb_cling.webp" alt="Climbing and clinging" width="400"></div>
+
+**How to get The Welcome.** 
+
+A family with prestige will only consider inviting another family into power if they have a "load-bearing" ladder. Something the prestigious family can climb. The welcoming family is climbing on top of the invited family and invited family is clinging to the welcoming family. Naturally this means that if you're trying to climb from out of power into power 
+
+<div align="center"><img src="images/wheel11_welcomes.webp" alt="Plato head sculpture" width="400"></div>
+
+These are the mechanics of the the KegWheel. Next  
 
 Here's an important insight I gained from reading Kazani:
 
 <div align="center">
 
-### If a family feels they are losing prestige they will sow chaos.
+### If a family feels they are losing prestige they will sow chaos by bringing new families into power.
 </div>
 
-
-I'm unable to remember which article talks about this. But the concept is that if there is chaos then that means there a chance the a family's decline could change. No one knows the future and chaos makes the future more unknowable. So of course chaos may could make the family fall faster. But better to try then not. *Stay rich or die trying*
+I'm unable to remember which article talks about this. But the concept is that if there is chaos then a family in power wants that chaos. Chaos means there a chance any family's prestige could decline or increase. No one knows the future and chaos makes the future more unknowable. Of course chaos may could make the family fall faster, in fact it's probably . But better to try then not. *Stay rich or die trying*
 
 Kegology Term *'Fall'*: The opposite of a invitation, when a family loses prestige, usually because no other family with prestige wants to invite them.
 
@@ -72,6 +117,8 @@ On the flip side:
 
 If a Family is confident of their prestige helping the government become more powerful makes sense. They have a share of the pie and if the pie gets bigger their slice gets bigger. 
 
+
+# TODO create new article for what to do. Change this article to what KegWheel is
 
 ### What to do if you want something and you're without prestige. 
 
@@ -90,7 +137,7 @@ Don't do what Plato did. From "Wisdom of Lenin" by Kazani:
 *Plato is a Top 5 philosopher, but don't let the mustash fool you, He was also a toddler.*
 </div>
 
-Instead, proposes Kazani, if you want prestige earn it. Start with a podcast.[^4] One day you may be useful enough that someone with prestige will invite you in. However...
+Instead, proposes Kazani, if you want prestige earn it. Start with a podcast.[^5] One day you may be useful enough that someone with prestige will invite you in. However...
 
 Not only is that plan of action unlikely to succeed it probably also corrupting. Remember the title of this section is *What to do if you have an agenda* not 'What to do if you want power'.
 
@@ -113,15 +160,23 @@ You don't have to be in power to get your agenda enacted, you just need those in
 
 ## Footnotes
 
-[^1]: Ronald Syne (died 1989), Historian and Author of Books on Roman History. 
+[^1]: Reality is infinitely complex. Any model of reality will be wrong. But some models are better than others. KegWheel Theory is a model of understanding power and predicting how to affect change. 
 
-[^2]: Basically all leaders have family they trust. To understand how someone of prestige got that prestige Kazani in [The Able Family]("../ch40_pop_phil/kazani_the_able_family.md") 
+The easiest introduction to the concepts of KegWheel is from the writings of Kamil Kazani. The quickest primer is Kazani's article on the [Mechanics of Revolution](../ch40_pop_phil/kazani_mechanics_of_revolution.md). 
 
-[^3]: Taken from conversation about Ukraine [Kazani Twitter Posts](twitter_kazani.md)
+Fundamentally KegWheel is not motivated by Kazani's cynical worldview but by Emmanuel Levinas's MetaEthics. The source of all truth is the Face of the Other in front of me. It can get pretty complicated so leave it for later. I just wanted to declare this. It is important to me.
 
-[^4]: [Wisdom of Lenin](../ch40_pop_phil/wisdom_of_lenin_kazani.md)  
+[^2]: Ronald Syne (died 1989), Historian and Author of Books on Roman History. 
 
-[^5]: [The Vassal Strategy](../ch40_pop_phil/skallas_the_vassal_strategy.md)  
+[^3]: Basically all leaders have family they trust. To understand how someone of prestige got that prestige Kazani in [The Able Family]("../ch40_pop_phil/kazani_the_able_family.md") 
+
+[^4]: Taken from conversation about Ukraine [Kazani Twitter Posts](twitter_kazani.md)
+
+[^5]: [Wisdom of Lenin](../ch40_pop_phil/wisdom_of_lenin_kazani.md)  
+
+[^6]: [The Vassal Strategy](../ch40_pop_phil/skallas_the_vassal_strategy.md)  
+
+[^7]: I grew up on a border so I have strong opinions about these things. 
 
 ## Biblography
 
@@ -134,6 +189,7 @@ How slavish devotion is perfectly reasonable: [The Vassal Strategy](../ch40_pop_
 Why Plato's power behind the throne plan fails: [Wisdom of Lenin](../ch40_pop_phil/wisdom_of_lenin_kazani.md)  
 Why and how thinkers matter: [Kill the Scholars](../ch40_pop_phil/kill_the_scholars.md)  
 Tyranny protects power: [Why Putin killed Navalny](../ch40_pop_phil/kazani_putin_navalny.md)
+Levinas and the Face intro: [I exist, I suffer. Please don't destroy me.](../ch40_pop_phil/thompson_i_exist_i_suffer.md).  
 
 
 #### Foundational Texts:

@@ -8,7 +8,7 @@ from ch01_keyword.keyword_class_builder import (
 )
 from ch97_docs_builder._ref.ch97_path import (
     create_keg_exam_questions_path,
-    create_keg_rank_json_path,
+    create_question_tier_path,
 )
 from ch97_docs_builder.glossary_definition import get_keg_definitions
 from csv import writer as csv_writer
@@ -85,11 +85,10 @@ def get_keg_rank_dict() -> dict[str, dict]:
 
 def rebuild_keg_rank_json(src_dir: str = None):
     keg_tiers = get_keg_rank_dict()
-    sorted_items = sorted(keg_tiers.items(), key=lambda item: item[1]["keg_rank"])
-    ordered_dict = dict(sorted_items)
+    ordered_dict = dict(sorted(keg_tiers.items()))
     if src_dir is None:
         src_dir = "src"
-    output_path = Path(create_keg_rank_json_path(src_dir))
+    output_path = Path(create_question_tier_path(src_dir))
     derived_dir = os_path_join(src_dir, "ch99_glossary", "derived")
     set_dir(derived_dir)
     with output_path.open("w", encoding="utf-8", newline="\n") as file:
@@ -194,9 +193,9 @@ def rebuild_keg_exam_questions(
 
     with open(output_csv_path, "w", newline="", encoding="utf-8") as csv_file:
         writer = csv_writer(csv_file)
-        writer.writerow(["row_number", "question"])
-        for row_number, questionunit in enumerate(final_questions):
-            writer.writerow([row_number, questionunit.get_question()])
+        writer.writerow(["question"])
+        for questionunit in final_questions:
+            writer.writerow([questionunit.get_question()])
 
 
 def get_ch_sorted_keywords(keywords_src_config: dict) -> list[str]:

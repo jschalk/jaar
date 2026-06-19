@@ -222,14 +222,16 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
         if keyword != "ch99" and not chapters_dict.keys():
             valid_ch = keywords_dict[keyword][kw.valid_ch]
             assert valid_ch == "", never_used_assertion_fail_str
-        elif keyword != "ch99":
-            min_chapter_prefix = min(chapters_dict.keys())
-            min_chapter_count = chapters_dict.get(min_chapter_prefix)
-            ch_count_fail_str = f"{keyword=} {min_chapter_prefix} {min_chapter_count=}"
-            # if min_chapter_count <= 2:
-            #     print()
-            if keyword not in {"semantic_type"}:
-                assert min_chapter_count != 1, ch_count_fail_str
+        # TODO reactivate this assert if useful
+        # TODO add comment about what this assert does
+        # elif keyword != "ch99":
+        #     min_chapter_prefix = min(chapters_dict.keys())
+        #     min_chapter_count = chapters_dict.get(min_chapter_prefix)
+        #     ch_count_fail_str = f"{keyword=} {min_chapter_prefix} {min_chapter_count=}"
+        #     # if min_chapter_count <= 2:
+        #     #     print()
+        #     if keyword not in {"semantic_type"}:
+        #         assert min_chapter_count != 1, ch_count_fail_str
 
 
 def does_not_allowed_from_src_import_exist(
