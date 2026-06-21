@@ -1,4 +1,4 @@
-# Kegology Wheel theory of power
+# Kegology Theory of Power/History
 
 **Date:** 2026-06-09  
 **Author:** Emmanuel Schalk
@@ -28,7 +28,7 @@ The primary unit of history is the Family. Ronald Syne wrote ""In all ages, what
 
 Let's define the term *'prestige'* the way Kazani and others do. It is something a family either has or doesn't. It cannot be shared. A Family with Prestige has power.
 
-The Families that have all the prestige are the Power. If they cooperate no other families will ever have prestige. The coalition will rule forever. However (most of the time) these families do not trust each other and are often in conflict. The conflict can be reasonable or unreasonable. Petty jealously, revenge or lust can motivate a conflict. To gain an upperhand a family can decide to get help from others outside of power. The non-prestigious family provides a service and the prestigious family invites the non-prestigious family into power. 
+The Families that have all the prestige are those in power. If they cooperate no other families will ever have prestige. The coalition will rule forever. However (most of the time) these families do not trust each other and are often in conflict. The conflict can be reasonable or unreasonable. Petty jealously, revenge or lust can motivate a conflict. To gain an upperhand a family can decide to get help from others outside of power. The non-prestigious family provides a service and the prestigious family invites the non-prestigious family into power. 
 
 <div align="center">
 
@@ -92,11 +92,7 @@ A family with prestige will only consider inviting another family into power if 
 
 <div align="center"><img src="images/wheel11_welcomes.webp" alt="Plato head sculpture" width="400"></div>
 
-These are the mechanics of the the KegWheel. Next  
-
-Here's an important insight I gained from reading Kazani:
-
-
+These are the mechanics of the the KegWheel. Next part will address
 
 
 ---

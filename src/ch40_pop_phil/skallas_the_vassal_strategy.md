@@ -93,7 +93,7 @@ There’s a reason you often see the same women move through overlapping circles
 ([Skallas on x.com](https://x.com/PaulSkallas/status/1828123461346062760))
 
 ### The Selection
-For the vassal strategy to work, you need to know who to follow. You can just select the most prominent member in the field. That isn’t irrational.
+For the vassal strategy to work, you need to know who to follow. You can just select the most prominent member in the field. That isn’t stupid.
 
 But most people are not choosing between titans. They are choosing inside the organizations and communities they actually inhabit. The selection problem is local before it is global.
 
