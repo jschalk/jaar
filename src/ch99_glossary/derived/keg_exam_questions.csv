@@ -619,7 +619,7 @@ Did you read that the keg_definition of 'heard_raw' is 'stage_type_order=10 Popu
 Did you read that the keg_definition of 'heard_vld' is 'stage_type_order=12 Populated by aggregated and Nabu changed Heard Agg tables'.
 "Did you read that the keg_definition of 'i_dst' is '5 character abbreviation of ideax_dst. stage_type_order=14 Idea (Brick formats without SparkNum) Destination. Filtered Job, Moment data.'."
 Did you read that the keg_definition of 'i_src' is '5 character abbreviation of ideax_src. stage_type_order=1 Idea Source files. Brick formats without SparkNum.'.
-Did you read that the keg_definition of 'idea' is 'A collection of bricks (currently only in brick format) with a spark_face but no spark_num.'.
+Did you read that the keg_definition of 'idea' is 'A collection of bricks (currently only in brick format) with a spark_face but no spark_num. Conceptually ideas are things that represent direct promises to the soul. People are made of ideas and share them.'.
 "Did you read that the keg_definition of 'ideax_dst' is 'stage_type_order=14 Idea (Brick formats without SparkNum) Destination. Filtered Job, Moment data.'."
 Did you read that the keg_definition of 'ideax_src' is 'stage_type_order=1 Idea Source files. Brick formats without SparkNum.'.
 Did you read that the keg_definition of 'k_vld' is '5 character abbreviation of brixk_vld. stage_type_order=6 Brick Valid: The Brick Agg tables filtered to correct datatypes. '.

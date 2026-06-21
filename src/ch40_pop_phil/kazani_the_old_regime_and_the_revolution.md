@@ -10,7 +10,7 @@
 
 <div align="center"><img src="images/tocqueville_title_page.webp" alt="A different description of image" width="700"></div>
 
-Today, I am going to talk about Alexis de Tocqueville, the single smartest and sharpest author who ever wrote on the French Revolution1.
+Today, I am going to talk about Alexis de Tocqueville, the single smartest and sharpest author who ever wrote on the French Revolution[^1].
 
 The funny thing about all of that, is that he never really intended to write about the revolution. He aimed to write a book on Napoleon. Yet, when he got into the life and career of Napoleon, he felt he needed to study the revolution, for you could not understand Napoleon without the revolution. And, once he focused on the revolution, he inevitably faced the question:
 
@@ -49,7 +49,7 @@ For the revolution is not when the power breaks down, but when the omnipotence -
 
 (That is why the concept of revolution feels so magic and so appealing to the power hungry, ambitious folk. For the dream of revolution is the dream of omnipotence)
 
-For the revolution is not the crazy mob doing whatever it wants - that is called mutiny and does not produce any significant or lasting effect2.
+For the revolution is not the crazy mob doing whatever it wants - that is called mutiny and does not produce any significant or lasting effect[^2].
 
 The revolution is an army of droids, marching in line
 
@@ -98,7 +98,7 @@ There were rural communes - that often had a significant degree of self governan
 
 BUT
 
-Over most of the French territory, the real power belonged to the aristocracy. By and large, it were the landowners of noble pedigree that acted as the political leaders, as the military leaders, as the judges and administrators, and - putting it simply - as the overlords of their social inferiors over most of the country. Noblemen took charge of the countryside where most of the Frenchmen lived, and most of the French had some kind of a feudal overlord, to look up to3
+Over most of the French territory, the real power belonged to the aristocracy. By and large, it were the landowners of noble pedigree that acted as the political leaders, as the military leaders, as the judges and administrators, and - putting it simply - as the overlords of their social inferiors over most of the country. Noblemen took charge of the countryside where most of the Frenchmen lived, and most of the French had some kind of a feudal overlord, to look up to[^3]
 
 But am I right to call them French? Not quite, for the middle ages, that sounds as a horrible anachronism. Back then, most of the kingdom’s population did not see themselves in terms of some uniform “French” nationality, but rather associated themselves with their towns, communities, counties and provinces. That is where their identity resided, and that is where their political loyalty belonged to.
 
@@ -243,7 +243,7 @@ In fact, we constantly see the king sending his laws to the parliament of Paris,
 
 But they could still send angry remonstrances, protesting against the illegal actions of the king. In fact, they constantly did. That is one paradox of the old French monarchy: the extreme level of royal despotism, combined with just as extreme freedom of speech (within a certain context).
 
-Parliaments commanded a massive respect amongst the populace. In this respect, they often became the foca of the popular protest. Indeed, the Civil War of mid-17th c - that became the formative life experience for young Louis XIV - all started from the inconsiderate royal minister attempting to arrest two officials of the Paris Parliament. This infringement of parliamentary authority triggered the mutiny in the capital, and loss of control, and the mutineers capturing Bastille, and the number of greatest nobles switching to the mutineers, and the king himself and the royal family becoming the captives for the mutineers in their own palace4.
+Parliaments commanded a massive respect amongst the populace. In this respect, they often became the foca of the popular protest. Indeed, the Civil War of mid-17th c - that became the formative life experience for young Louis XIV - all started from the inconsiderate royal minister attempting to arrest two officials of the Paris Parliament. This infringement of parliamentary authority triggered the mutiny in the capital, and loss of control, and the mutineers capturing Bastille, and the number of greatest nobles switching to the mutineers, and the king himself and the royal family becoming the captives for the mutineers in their own palace[^4].
 
 The king could not dismiss the parliamentary officials. The king could not arrest parliamentary officials. The king could not judge or sentence them, they could only sentence each other. And they of course were extremely unwilling to do that, no matter the circumstances. The parliaments could register the royal laws or they could choose not to. They could agree with the royal decisions, or they could write remonstrances. And, as they commanded respect and obedience in the towns, they could easily become the foca of the popular dissent and, eventually, of the rebellion.
 

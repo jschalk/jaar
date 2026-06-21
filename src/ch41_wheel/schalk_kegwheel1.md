@@ -39,7 +39,7 @@ This invitation is only extended when the prestigious family has no other choice
 
 ### The KegWheel
 
-Any system of centralized power can be represented as a KegWheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There is an endless army of those without prestige who will do absolutely any service for chance of getting prestige[^6]. Promises don't even have to be made, the implication is obvious.
+Any system of centralized power can be represented as a KegWheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There is an endless army of those without prestige who will do absolutely any service for chance of getting prestige[^5]. Promises don't even have to be made, the implication is obvious.
 
 <div align="center"><img src="images/wheel01_intro.webp" alt="Plato head sculpture" width="400"></div>
 
@@ -75,7 +75,7 @@ Here's a scenario where many wheels of different color exist in touch. (Please e
 
 <div align="center"><img src="images/wheel08_many_wheels.webp" alt="Many wheels of different colors" width="400"></div>
 
-Here's the same scenario with many borders. Notice the space between borders. That's a feature that is important, because borders can become their own space that's weirdly part of both wheels and not.[^7] Wheels exist against each other. 
+Here's the same scenario with many borders. Notice the space between borders. That's a feature that is important, because borders can become their own space that's weirdly part of both wheels and not.[^6] Wheels exist against each other. 
 
 <div align="center"><img src="images/wheel09_many_borders.webp" alt="Many borders of different colors" width="400"></div>
 
@@ -96,63 +96,6 @@ These are the mechanics of the the KegWheel. Next
 
 Here's an important insight I gained from reading Kazani:
 
-<div align="center">
-
-### If a family feels they are losing prestige they will sow chaos by bringing new families into power.
-</div>
-
-I'm unable to remember which article talks about this. But the concept is that if there is chaos then a family in power wants that chaos. Chaos means there a chance any family's prestige could decline or increase. No one knows the future and chaos makes the future more unknowable. Of course chaos may could make the family fall faster, in fact it's probably . But better to try then not. *Stay rich or die trying*
-
-Kegology Term *'Fall'*: The opposite of a invitation, when a family loses prestige, usually because no other family with prestige wants to invite them.
-
-To be clear having money and prestige are different. Those with money will try to buy prestige and may succeed. But it's not automatic or even likely. There is little incentive for those with prestige to sell it, better to break promises and just keep asking for more money. Relationships matter more than money.  
-
-On the flip side:
-
-<div align="center">
-
-### If a family feels they are gaining or keeping prestige they will increase the power of govt.
-
-</div>
-
-If a Family is confident of their prestige helping the government become more powerful makes sense. They have a share of the pie and if the pie gets bigger their slice gets bigger. 
-
-
-# TODO create new article for what to do. Change this article to what KegWheel is
-
-### What to do if you want something and you're without prestige. 
-
-Don't do what Plato did. From "Wisdom of Lenin" by Kazani:
-
-> Plato of course wanted power. Nearly all intellectuals do. But - wanting power - he was childishly naive and childishly delusional about how he will get it. For what was his plan?
->
-> 1. Approach a tyrant, a man in power
-> 2. Become his advisor, a power behind the throne
-> 3. Use the tyrant to execute your plans & your agenda
->
-> The plan is incredibly common (countless intellectuals would try it in centuries after Plato), and incredibly naive. Because obviously no man in power needs a 'philosopher’ who would be telling him what to do. That is an absolute self delusion on behalf of a philosopher. A tyrant needs servants, he needs slavs, he - if he is mentally healthy - needs a jester. But philosopher? No, he does not really need one.
-
-<div align="center"><img src="images/plato_mustash.jpg" alt="Plato head sculpture" width="200">
-
-*Plato is a Top 5 philosopher, but don't let the mustash fool you, He was also a toddler.*
-</div>
-
-Instead, proposes Kazani, if you want prestige earn it. Start with a podcast.[^5] One day you may be useful enough that someone with prestige will invite you in. However...
-
-Not only is that plan of action unlikely to succeed it probably also corrupting. Remember the title of this section is *What to do if you have an agenda* not 'What to do if you want power'.
-
-You don't have to be in power to get your agenda enacted, you just need those in power to enact the agenda. Lobbyists can succeed.
-
-1. Gain the support of the families going up by treatening to make the total power of the KegWheel less. Make their pie smaller.
-2. Neutralize 
-
-
-<div align="center">
-
-### An agenda is things you want. Families going up with prestige will give you those things if it increases their prestige and the general power of the KegWheel. Families going down will 
-
-</div>
-
 
 
 
@@ -168,26 +111,25 @@ Fundamentally KegWheel is not motivated by Kazani's cynical worldview but by Emm
 
 [^2]: Ronald Syne (died 1989), Historian and Author of Books on Roman History. 
 
-[^3]: Basically all leaders have family they trust. To understand how someone of prestige got that prestige Kazani in [The Able Family]("../ch40_pop_phil/kazani_the_able_family.md") 
+[^3]: Basically all leaders have family they trust. To understand how someone of prestige got that prestige see Kazani in [The Able Family](../ch40_pop_phil/kazani_the_able_family.md) 
 
-[^4]: Taken from conversation about Ukraine [Kazani Twitter Posts](twitter_kazani.md)
+[^4]: Taken from conversation about Ukraine [Kazani Twitter Posts](../ch40_pop_phil/kazani_twitter.md)
 
-[^5]: [Wisdom of Lenin](../ch40_pop_phil/wisdom_of_lenin_kazani.md)  
+[^5]: [The Vassal Strategy](../ch40_pop_phil/skallas_the_vassal_strategy.md)  
 
-[^6]: [The Vassal Strategy](../ch40_pop_phil/skallas_the_vassal_strategy.md)  
+[^6]: I grew up on a border so I have strong opinions about these things. 
 
-[^7]: I grew up on a border so I have strong opinions about these things. 
 
 ## Biblography
 
 #### Easy reads:
 
-How power is structured: [Mechanics of Revolution](../ch40_pop_phil/mechanics_of_revolution_kazani.md)  
-The real work of leadership: [How Stalin Came to Power](../ch40_pop_phil/how_stalin_came_to_power_kazani.md)  
-How slavish devotion is perfectly reasonable: [Suffering from Success](../ch40_pop_phil/suffering_from_success_kazani.md)  
-How slavish devotion is perfectly reasonable: [The Vassal Strategy](../ch40_pop_phil/skallas_the_vassal_strategy.md)  
-Why Plato's power behind the throne plan fails: [Wisdom of Lenin](../ch40_pop_phil/wisdom_of_lenin_kazani.md)  
-Why and how thinkers matter: [Kill the Scholars](../ch40_pop_phil/kill_the_scholars.md)  
+How power is structured: [Mechanics of Revolution](../ch40_pop_phil/kazani_mechanics_of_revolution.md)  
+The real work of leadership: [How Stalin Came to Power](../ch40_pop_phil/kazani_how_stalin_came_to_power.md)  
+How slavish devotion is perfectly reasonable1: [Suffering from Success](../ch40_pop_phil/kazani_suffering_from_success.md)  
+How slavish devotion is perfectly reasonable2: [The Vassal Strategy](../ch40_pop_phil/skallas_the_vassal_strategy.md)  
+Why Plato's power behind the throne plan fails: [Wisdom of Lenin](../ch40_pop_phil/kazani_wisdom_of_lenin.md)  
+Why and how thinkers matter: [Kill the Scholars](../ch40_pop_phil/kazani_kill_the_scholars.md)  
 Tyranny protects power: [Why Putin killed Navalny](../ch40_pop_phil/kazani_putin_navalny.md)
 Levinas and the Face intro: [I exist, I suffer. Please don't destroy me.](../ch40_pop_phil/thompson_i_exist_i_suffer.md).  
 

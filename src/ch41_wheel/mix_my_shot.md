@@ -8,7 +8,7 @@
 > *Choir*
 
 The Hamilton Mixtape  
-Woah, woah, woah, woah
+Woah, woah, woah, woah  
 Woah, woah, woah
 
 

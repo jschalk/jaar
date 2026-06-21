@@ -13,7 +13,7 @@ Notice, that I am not discussing any political change in particular, but laying 
 
 What do we need to know about the revolution?
 
-*First*. That revolution never happens at once - by a single blow - but over the time, iteratively. A not bad first approximation for how does the revolution works in practice would be picturing it as a **sequence of coups[^2].**
+*First*. That revolution never happens at once - by a single blow - but over the time, iteratively. A not bad first approximation for how does the revolution works in practice would be picturing it as a **sequence of coups[^1].**
 
 Sequence. That means more than one.
 
@@ -130,8 +130,6 @@ It is aiming to defeat their rivals (from the existing elite), that the elites a
 And it is on this stage, and with the new composition of political class, and with all of the original players sidelined, that things start to get really, really nasty.
 
 
-Paragraph with footnote.[^1] Can continue paragraph
-
 ---
 
 ## Footnotes
@@ -140,4 +138,4 @@ Paragraph with footnote.[^1] Can continue paragraph
 
 [^2]: If the political life had not been extirpated from the nation, that this nation cannot experience a revolution. All it can have is a civil war.
 
-[^3] Unless on the very, very mature stages of the revolutionary process, when the state machine is already so disorganised that literally nothing is working, including police.
+[^3]: Unless on the very, very mature stages of the revolutionary process, when the state machine is already so disorganised that literally nothing is working, including police.
