@@ -3,7 +3,7 @@
 **Date:** 2026-06-09  
 **Author:** Emmanuel Schalk
 
-> Those who kneel can still turn the wheel.
+> Are there kneelers in the wheelers?
 
 ---
 
@@ -26,7 +26,7 @@ The primary unit of history is the Family. Ronald Syne wrote ""In all ages, what
 
 </div>
 
-Let's define the term *'prestige'* the way Kazani and others do. It is something a family either has or doesn't. It cannot be shared. A Family with Prestige has power.
+Let's define the term *'prestige'* the way Kazani and others do. A Family with Prestige has status, influence, power. It is something a family either has or doesn't. It cannot be shared. 
 
 The Families that have all the prestige are those in power. If they cooperate no other families will ever have prestige. The coalition will rule forever. However (most of the time) these families do not trust each other and are often in conflict. The conflict can be reasonable or unreasonable. Petty jealously, revenge or lust can motivate a conflict. To gain an upperhand a family can decide to get help from others outside of power. The non-prestigious family provides a service and the prestigious family invites the non-prestigious family into power. 
 
@@ -35,29 +35,31 @@ The Families that have all the prestige are those in power. If they cooperate no
 #### An 'invitation' is the act of giving prestige to a family that has none.
 </div>
 
-This invitation is only extended when the prestigious family has no other choice. When they feel they are in danger of losing prestige. Expanding how many families have prestige is dangerous. The fewer players in the game the easier it is to win. Let's visualize these dynamics with some diagrams:
+Logically this invitation should only be extended when the prestigious family has no other choice. When they feel they are in danger of losing prestige. Expanding how many families have prestige is dangerous. The fewer players in the game the easier it is to stay in the game. Let's visualize these dynamics with some diagrams:
 
-### The KegWheel
-
-Any system of centralized power can be represented as a KegWheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There is an endless army of those without prestige who will do absolutely any service for chance of getting prestige[^5]. Promises don't even have to be made, the implication is obvious.
+### The Wheel
 
 <div align="center"><img src="images/wheel01_intro.webp" alt="Plato head sculpture" width="400"></div>
 
-As the Wheel spins there are families that are winning and families that are losing. On the other hand some families lose so much they fall out of power. There is also the "stable" section of the Wheel where families have prestige but their influence does not increase or decrease.  
+Any system of centralized power can be represented as a Wheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There is an endless army of those without prestige who will do absolutely any service for a chance of getting prestige[^5]. Promises don't even have to be made, the implication is obvious.
 
 <div align="center"><img src="images/wheel02_falling.jpg" alt="Wheel diagram showing those that Fall" width="400"></div>
 
-Families only invite those out of power into power when they can provide a service. Something useful to them. That is represented here as a ladder. Those out of power must have a large ladder to even be considered for invitiation. The obvious example is money. Money is not equal to prestige. But if someone in power wants money then a a ladder made of money can result in an invitation.
+As the Wheel spins there are families that are winning and families that are losing. On the other hand some families lose so much they fall out of power. There is also the "stable" section of the Wheel where families have prestige but their influence does not increase or decrease.  
 
 <div align="center"><img src="images/wheel03_invitation.webp" alt="Diagram invitation ladder" width="400"></div>
 
-Here's a diagram showing what the Wheel could look like with distinct families in power, falling out of power, and totally outside of power.
+Families only invite those out of power into power when they can provide a service. Something useful to them. That is represented here as a ladder. Those out of power must have a large ladder to even be considered for invitiation. The obvious example is money. Money is not equal to prestige. But if someone in power wants money then a a ladder made of money can result in an invitation.
 
 <div align="center"><img src="images/wheel04_familyunits.webp" alt="17 FamilyUnits in a Wheel diagram" width="400"></div>
 
-Here's what it looks like when a Wheel touches another Wheel. Each system of power requires institutions, customs, language so precise that they can only be described as "alien". 
+Here's a diagram showing what the Wheel could look like with distinct families in power, falling out of power, and totally outside of power.
 
 <div align="center"><img src="images/wheel05_alien.webp" alt="Plato head sculpture" width="400"></div>
+
+Here's what it looks like when a Wheel touches another Wheel. Each system of power requires institutions, customs, language so precise that they can only be described as "alien". 
+
+<div align="center"><img src="images/wheel06_size.webp" alt="Plato head sculpture" width="400"></div>
 
 Let's introduce a few terms here. For every Wheel we can describe
 
@@ -65,34 +67,38 @@ Let's introduce a few terms here. For every Wheel we can describe
 2. Stable Size: The radius of the stable part of the Wheel. Represents how powerful the stable part of the wheel is.
 3. Moving Size: The width of the moving part of the Wheel. Represents how powerful the moving part of the wheel is. (Moving_Size = Wheel_Size - Stable_Size)
 
-<div align="center"><img src="images/wheel06_size.webp" alt="Plato head sculpture" width="400"></div>
+<div align="center"><img src="images/wheel07_borders.webp" alt="A border between two wheels" width="400"></div>
 
 Between two Wheels that touch they can create a border. All systems of power want to have a border to define the alien and the non-alien.
 
-<div align="center"><img src="images/wheel07_borders.webp" alt="A border between two wheels" width="400"></div>
+<div align="center"><img src="images/wheel08_many_wheels.webp" alt="Many wheels of different colors" width="400"></div>
 
 Here's a scenario where many wheels of different color exist in touch. (Please excuse the circles that don't actually touch others, if they're really close they're meeant to touch.)
 
-<div align="center"><img src="images/wheel08_many_wheels.webp" alt="Many wheels of different colors" width="400"></div>
+<div align="center"><img src="images/wheel09_many_borders.webp" alt="Many borders of different colors" width="400"></div>
 
 Here's the same scenario with many borders. Notice the space between borders. That's a feature that is important, because borders can become their own space that's weirdly part of both wheels and not.[^6] Wheels exist against each other. 
 
-<div align="center"><img src="images/wheel09_many_borders.webp" alt="Many borders of different colors" width="400"></div>
+<div align="center"><img src="images/wheel10_climb_cling.webp" alt="Climbing and clinging" width="400"></div>
 
 Going back to the Wheel: As the wheel turns there are winners and losers and the stable. The winners are climbing and the losers are clinging. What are they climbing? Each other of course. 
 
 - Winning families are climbing on top of the stable families and losing families. Stable ones can take it. Losing ones can't. Climbing on top of losing families isn't very effective. Because they're going down. Climbing on stable ones is effective.
 - Losing families are clinging to stable families and winning families. 
 
-<div align="center"><img src="images/wheel10_climb_cling.webp" alt="Climbing and clinging" width="400"></div>
 
 **How to get The Welcome.** 
 
-A family with prestige will only consider inviting another family into power if they have a "load-bearing" ladder. Something the prestigious family can climb. The welcoming family is climbing on top of the invited family and invited family is clinging to the welcoming family. Naturally this means that if you're trying to climb from out of power into power 
+<div align="center"><img src="images/wheel11_welcomes.webp" alt="5 ladders" width="400"></div>
 
-<div align="center"><img src="images/wheel11_welcomes.webp" alt="Plato head sculpture" width="400"></div>
 
-These are the mechanics of the the KegWheel. Next part will address
+A family with prestige will only consider inviting another family into power if they have a "load-bearing" ladder. Something the prestigious family can climb. The welcoming family is climbing on top of the invited family and invited family is clinging to the welcoming family. Naturally this means that if you're trying to climb from out of power into power you can't go any higher then the welcoming family. For now. 
+
+
+
+
+
+These are the mechanics of the the KegWheel. Next part will address what it's good for. 
 
 
 ---

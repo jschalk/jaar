@@ -572,7 +572,7 @@
     "range_evaluated": {"keg_rank": 257, "question_tier": 0, "chs": "7:"},
     "range_inheritors": {"keg_rank": 258, "question_tier": 0, "chs": "7, 8, 14"},
     "range_lower_min": {"keg_rank": 437, "question_tier": 0, "chs": "14"},
-    "rational": {"keg_rank": 180, "question_tier": 0, "chs": "3:"},
+    "rational": {"keg_rank": 180, "question_tier": 0, "chs": "3, 6, 8, 11, 12, 13, 15, 20, 22, 27, 31, 35, 97"},
     "readable": {"keg_rank": 438, "question_tier": 0, "chs": "14:"},
     "reason_active": {"keg_rank": 216, "question_tier": 0, "chs": "6:"},
     "reason_context": {"keg_rank": 217, "question_tier": 0, "chs": "6:"},
