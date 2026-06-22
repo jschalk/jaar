@@ -409,6 +409,7 @@
   "MomentRope": "str first used in ch10. The RopeTerm for a Moment. Must contain knots.", 
   "momentunit": "Definition needed.", 
   "Monday": "Example key with value 'Monday' used for tests throughout codebase.", 
+  "Monopoly": "One of the most popular boardgames ever created. Published 1935, based on The Landlord's Game by Lizzie Magie.", 
   "month_label": ", mmtmont arg", 
   "month_label_inx": "The 'month_label' value after Translate.", 
   "month_label_otx": "The 'month_label' value after Translate.", 
