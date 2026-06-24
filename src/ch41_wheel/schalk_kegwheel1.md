@@ -89,11 +89,12 @@ Going back to the Wheel: As the wheel turns there are winners and losers and the
 
 **How to get The Welcome.** 
 
-<div align="center"><img src="images/wheel11_welcomes.webp" alt="5 ladders" width="400"></div>
+<div align="center"><img src="images/wheel11_welcomes.webp" alt="5 ladders" width="700"></div>
 
 
 A family with prestige will only consider inviting another family into power if they have a "load-bearing" ladder. Something the prestigious family can climb. The welcoming family is climbing on top of the invited family and invited family is clinging to the welcoming family. Naturally this means that if you're trying to climb from out of power into power you can't go any higher then the welcoming family. For now. 
 
+From this point on use 
 
 
 
