@@ -40,7 +40,7 @@ Ch07 also introduces `HealerUnit` (in `healer.py`) and `RangeUnit` (in `range_to
 
 - A **container** (`kids: dict[LabelTerm, PlanUnit]`) that groups sub-plans.
 - A **pledge** (`pledge: True`) — a declared commitment that can be active or inactive.
-- A **fact source** (`factunits`) — a local override of incoming facts.
+- A **fact source** (`factunits`) — a local regulator of incoming facts.
 - A **reason-gated plan** (`reasonunits`) — only active if its conditions are met.
 - A **funded node** — receives a slice of the parent's fund pool proportional to its `poynt` weight, tracked via `fund_onset` and `fund_cease`.
 - A **ranged plan** (`begin`, `close`, `addin`, `numor`, `denom`, `morph`) — can represent a numeric interval that can be inherited and morphed by children.

@@ -50,7 +50,7 @@ def test_PersonUnit_set_contact_DoesSet_contact_name_membership():
     assert zia_zia_membership.group_debt_lumen == 1
 
 
-def test_PersonUnit_set_contact_DoesNotOverRide_contact_name_membership():
+def test_PersonUnit_set_contact_DoesNotChange_contact_name_membership():
     # ESTABLISH
     x_respect_grain = 5
     yao_person = personunit_shop(exx.yao, respect_grain=x_respect_grain)

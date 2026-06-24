@@ -188,7 +188,7 @@ Create one card for each of the following.
 11. Go to Jail
 12. Make General Repairs on All Your Property
 13. Pay Poor Tax of $15
-14. Take a Ride on the Reading Railroad
+14. Go to the Reading Railroad
 15. You Have Been Elected Chairman of the Board (Pay each player $50)
 16. Your Building Loan Matures (Collect $150)
 

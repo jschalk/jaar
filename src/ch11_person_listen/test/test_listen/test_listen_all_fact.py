@@ -140,7 +140,7 @@ def test_set_listen_to_speaker_fact_SetsFact():
     assert len(yao_listener.get_missing_fact_reason_contexts().keys()) == 0
 
 
-def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
+def test_set_listen_to_speaker_fact_DoesNotChangeFact():
     # ESTABLISH
     yao_listener = personunit_shop(exx.yao)
     yao_listener.add_contactunit(exx.yao)

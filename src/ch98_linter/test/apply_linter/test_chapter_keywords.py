@@ -57,7 +57,7 @@ def test_Chapters_CheckStringMetricsFromEveryFile():
         "get_inx_value",  # used in Nabu/Translate
         "_is_inx_knot_inclusion_correct",  # used in Nabu/Translate
         "_is_otx_knot_inclusion_correct",  # used in Nabu/Translate
-        "unknown_str_in_otx2inx",  # RopeMap method overrides MapCore method
+        "unknown_str_in_otx2inx",  # RopeMap replaces the inherited MapCore implementation
         "del_otx2inx",  # used in Nabu/Translate
         "find_replace_rope",  # used by ReasonUnit, CaseUnit, FactUnit classes
         "get_obj_key",
@@ -65,7 +65,7 @@ def test_Chapters_CheckStringMetricsFromEveryFile():
         "otx_exists",  # used in Nabu/Translate
         "otx2inx_exists",  # used in Nabu/Translate
         "reveal_inx",  # used in Nabu/Translate
-        "set_all_otx2inx",  # RopeMap method overrides MapCore method
+        "set_all_otx2inx",  # RopeMap replaces the inherited MapCore implementation
         "set_knot",
         "set_otx2inx",  # used in Nabu/Translate
         "to_dict",  # used to return class custom dictionary, usually for json file storage

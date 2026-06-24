@@ -325,7 +325,7 @@ def remove_staging_columns(columns_set: set) -> set:
 def get_all_dimen_columns_set(x_dimen: str) -> set[str]:
     if x_dimen == "translate_core":
         translate_core_dict = etl_brick_category_config_dict().get("translate_core")
-        return set(translate_core_dict.get("override_columns"))
+        return set(translate_core_dict.get("core_columns"))
     x_config = get_brick_config_dict().get(x_dimen)
     columns = set(x_config.get("jkeys").keys())
     columns.update(set(x_config.get("jvalues").keys()))

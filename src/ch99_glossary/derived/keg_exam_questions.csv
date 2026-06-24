@@ -4,17 +4,19 @@ Have you heard the word 'Philosophy'?
 Do you believe listening is important?
 Did you read that the keg_definition of 'Alien' is 'A bordering Wheel.'.
 Did you read that the keg_definition of 'Axle' is 'The part of the Wheel that load-bears the most. Only Pillars.'.
+Did you read that the keg_definition of 'Booster' is 'A Rider for a good person.'.
 Did you read that the keg_definition of 'Cling' is 'To connote the action a FamilyUnit takes to avoids losing Prestige.'.
 Did you read that the keg_definition of 'Closer' is 'Do not use this term so there is no confusion with 'Loser'.'.
 Did you read that the keg_definition of 'Cow' is 'A FamilyUnit without Prestige. Consider whether it's a useful term.'.
 Did you read that the keg_definition of 'Invite' is 'The giving of prestige from a FamilyUnit with it to a FamilyUnit without it.'.
-Did you read that the keg_definition of 'Joachim' is 'Fairly common name. Also name of Init Kegology Philosopher. Lots of different prounoucations possible.'.
 Have you heard of Excel spreadsheet application?
+Did you read that the keg_definition of 'Joachim' is 'Fairly common name. Also name of Init Kegology Philosopher. Lots of different prounoucations possible.'.
 "Did you read that the keg_definition of 'Knee' is ', used with Budget Cells'."
 Did you read that the keg_definition of 'Ladder' is 'A requirement for an invitation. The FamilyUnit out of power must have one to get prestige.'.
 Did you read that the keg_definition of 'Loser' is 'A FamilyUnit getting less Prestige.'.
 Did you read that the keg_definition of 'Pillar' is 'A non-ladder load-bearing support of a Wheel.'.
 Did you read that the keg_definition of 'Revenge' is 'Definition needed or maybe not.'.
+"Did you read that the keg_definition of 'Rider' is 'Synonmous with Vassal as a neutral term. Someone who recognizes authority, leadership. 'I ride with that person.''."
 Did you read that the keg_definition of 'Rival' is 'A different FamilyUnit within a Wheel that is in open competition.'.
 Did you read that the keg_definition of 'Scaffold' is 'The only way to get to a wheel if not welcomed.'.
 Did you read that the keg_definition of 'Stilt' is 'A ladder load-bearing support of a Wheel.'.
@@ -22,6 +24,7 @@ Did you read that the keg_definition of 'Target' is 'A FamilyUnit with prestige.
 "Did you read that the keg_definition of 'Vertical' is 'The height of a Pillar, Ladder, Stilt, or Scaffold. Is it enough to reach?'."
 Did you read that the keg_definition of 'Winner' is 'A FamilyUnit getting more Prestige.'.
 Did you read that the keg_definition of 'axle' is 'The part of the Wheel that load-bears the most. Only Pillars.'.
+Did you read that the keg_definition of 'booster' is 'A Rider for a good person.'.
 Did you read that the keg_definition of 'closer' is 'Do not use this term so there is no confusion with 'loser'.'.
 Did you read that the keg_definition of 'crawl' is 'The opposite of 'swim'. To be slave to one. To live in one moment as it allows.'.
 Did you read that the keg_definition of 'dive' is 'To go from living on land to swimming with fearlessness. Not used in codebase.'.
@@ -32,6 +35,7 @@ Did you read that the keg_definition of 'infinity' is 'As described in Totality 
 Did you read that the keg_definition of 'kegbox' is 'Anything that holds Keg worlds. Usually a computer thought it's possible to work with paper.'.
 Did you read that the keg_definition of 'pandas_DataFrame' is 'Not used in codebase. Added as keyword it is confirmed never to appear.'.
 Did you read that the keg_definition of 'pillar' is 'A non-ladder load-bearing support of a Wheel.'.
+"Did you read that the keg_definition of 'rider' is 'Synonmous with Vassal as a neutral term. Someone who recognizes authority, leadership. 'I ride with that person.''."
 Did you read that the keg_definition of 'scaffold' is 'The only way to get to a wheel if not welcomed.'.
 Did you read that the keg_definition of 'stilt' is 'A ladder load-bearing support of a Wheel.'.
 Did you read that the keg_definition of 'swim' is 'To live with faith. To be slave to many masters instead of a slave to one. To live in many moments. Not used in codebase.'.
@@ -680,6 +684,8 @@ Did you read that the keg_definition of 'financial' is 'Definition needed.'.
 Did you read that the keg_definition of 'Hobbit' is 'Part of Kazani theory 'The Hobbit Theory of Man' that our grandparents accepted evil within us. Not so now.'.
 Did you read that the keg_definition of 'Kronos' is 'Greek God of War and Time. Known for eating his children.'.
 "Did you read that the keg_definition of 'Monopoly' is 'One of the most popular boardgames ever created. Published 1935, based on The Landlord's Game by Lizzie Magie.'."
+"Did you read that the keg_definition of 'Ride' is 'The act of recognizing authority, leadership. 'Who do I ride with?''."
+Did you read that the keg_definition of 'Shill' is 'A Rider for a bad person.'.
 Did you read that the keg_definition of 'climb' is 'To connote the action a FamilyUnit takes to gain Prestige.'.
 Did you read that the keg_definition of 'cow' is 'A FamilyUnit without Prestige. Consider whether it's a useful term.'.
 "Did you read that the keg_definition of 'invitation' is 'From KegWheel theory, describes the act of a FamilyUnit giving another prestige. Or bringing those out of Power into Power.'."
@@ -689,7 +695,9 @@ Did you read that the keg_definition of 'kronosmax' is 'To proactively elimanate
 Did you read that the keg_definition of 'ladder' is 'A requirement for an invitation. The FamilyUnit out of power must have one to get prestige.'.
 Did you read that the keg_definition of 'power' is 'Not used in codebase.'.
 Did you read that the keg_definition of 'prestige' is 'An instance of Prestige.'.
+"Did you read that the keg_definition of 'ride' is 'The act of recognizing authority, leadership. 'Who do I ride with?''."
 Did you read that the keg_definition of 'rival' is 'A different FamilyUnit within a Wheel that is in open competition.'.
+Did you read that the keg_definition of 'shill' is 'A Rider for a bad person.'.
 Did you read that the keg_definition of 'winner' is 'A FamilyUnit getting more Prestige.'.
 Did you read that the keg_definition of 'winning' is 'The act of a FamilyUnit getting more Prestige.'.
 Did you read that the keg_definition of 'Climb' is 'To connote the action a FamilyUnit takes to gain Prestige.'.

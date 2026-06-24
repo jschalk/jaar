@@ -154,7 +154,7 @@ def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario06_Level2ChildsHaveTwo
     assert nodes_wgt_facts == expected_nodes_weighted_facts
 
 
-def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario07_Level2ChildFactOverridesAncestorFact():
+def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario07_Level2ChildFactChangesAncestorFact():
     # ESTABLISH
     clean_fact = example_casa_clean_factunit()
     dirty_fact = example_casa_dirty_factunit()

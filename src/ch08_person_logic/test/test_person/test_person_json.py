@@ -136,7 +136,6 @@ def test_PersonUnit_to_dict_ReturnsObj_Scenario4_planunit_WithLevels():
     zia_person.respect_grain = x_respect_grain
     x_mana_grain = 0.3
     zia_person.mana_grain = x_mana_grain
-    override_str = "override"
     zia_person.add_contactunit(exx.yao)
     yao_contactunit = zia_person.get_contact(exx.yao)
     yao_contactunit.add_membership(exx.run)

@@ -429,7 +429,7 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromPersonsSpeaker
 #     assert 1 == 3
 
 
-# def test_listen_to_facts_duty_vision_DoesNotOverrideFact():
+# def test_listen_to_facts_duty_vision_DoesNotChangeFact():
 #     # ESTABLISH
 #     exx.yao = exx.yao
 #     yao_duty = personunit_shop(exx.yao)

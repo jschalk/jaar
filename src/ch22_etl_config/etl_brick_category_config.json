@@ -56,7 +56,7 @@
     }
   }, 
   "translate_core": {
-    "override_columns": ["spark_face", "otx_knot", "inx_knot", "unknown_str"], 
+    "core_columns": ["spark_face", "otx_knot", "inx_knot", "unknown_str"], 
     "stages": {
       "s_agg": {}, 
       "s_raw": { "add": ["source_dimen", "error_message"] }, 

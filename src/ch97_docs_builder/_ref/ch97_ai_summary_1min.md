@@ -45,7 +45,7 @@ Ontology note:
 
 **`glossary_ranking.py`**
 
-- `QuestionUnit` — a dataclass representing a single study question about a keg term: `keg_term`, `keg_definition`, `init_ch` (the chapter where the term is first introduced), `question_tier`, `did_you_read_order`, and optionally a `complete_question` override.
+- `QuestionUnit` — a dataclass representing a single study question about a keg term: `keg_term`, `keg_definition`, `init_ch` (the chapter where the term is first introduced), `question_tier`, `did_you_read_order`, and optionally a `complete_question` arbitary setting.
 - `get_keg_definition_questionunits()` — iterates all keywords in `keywords_src.json`, parses their `valid_ch` range to determine `init_ch`, looks up their definition, and constructs a `QuestionUnit` for each. Default questions follow the pattern: "Did you read that the keg_definition of '{term}' is '{definition}'."
 - `rebuild_keg_exam_questions(dst_path)` — writes all questions to a CSV file, sorted by `did_you_read_order`, suitable for use as flash cards or onboarding material.
 - `rebuild_keg_rank_json(dst_path)` — writes a JSON ranking of all keg terms ordered by chapter of introduction, providing a structured learning path through the system's vocabulary.
