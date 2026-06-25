@@ -29,8 +29,8 @@ def get_moment_guts_contacts_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
     column_header_list = [
         "person_name",
         "contact_name",
-        "contact_cred_lumen",
-        "contact_debt_lumen",
+        "contact_cred_mass",
+        "contact_debt_mass",
         "fund_give",
         "fund_take",
         "fund_agenda_give",
@@ -44,8 +44,8 @@ def get_moment_guts_contacts_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
             values=[
                 df.person_name,
                 df.contact_name,
-                df.contact_cred_lumen,
-                df.contact_debt_lumen,
+                df.contact_cred_mass,
+                df.contact_debt_mass,
                 df.fund_give,
                 df.fund_take,
                 df.fund_agenda_give,
@@ -84,8 +84,8 @@ def get_moment_jobs_contacts_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
     column_header_list = [
         "person_name",
         "contact_name",
-        "contact_cred_lumen",
-        "contact_debt_lumen",
+        "contact_cred_mass",
+        "contact_debt_mass",
         "fund_give",
         "fund_take",
         "fund_agenda_give",
@@ -99,8 +99,8 @@ def get_moment_jobs_contacts_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
             values=[
                 df.person_name,
                 df.contact_name,
-                df.contact_cred_lumen,
-                df.contact_debt_lumen,
+                df.contact_cred_mass,
+                df.contact_debt_mass,
                 df.fund_give,
                 df.fund_take,
                 df.fund_agenda_give,

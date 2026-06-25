@@ -46,8 +46,8 @@ def test_PersonUnit_set_contact_DoesSet_contact_name_membership():
     # THEN
     zia_zia_membership = yao_person.get_contact(exx.zia).get_membership(exx.zia)
     assert zia_zia_membership is not None
-    assert zia_zia_membership.group_cred_lumen == 1
-    assert zia_zia_membership.group_debt_lumen == 1
+    assert zia_zia_membership.group_cred_mass == 1
+    assert zia_zia_membership.group_debt_mass == 1
 
 
 def test_PersonUnit_set_contact_DoesNotChange_contact_name_membership():
@@ -66,8 +66,8 @@ def test_PersonUnit_set_contact_DoesNotChange_contact_name_membership():
     # THEN
     zia_ohio_membership = yao_person.get_contact(exx.zia).get_membership(ohio_str)
     assert zia_ohio_membership is not None
-    assert zia_ohio_membership.group_cred_lumen == zia_ohio_credit_w
-    assert zia_ohio_membership.group_debt_lumen == zia_ohio_debt_w
+    assert zia_ohio_membership.group_cred_mass == zia_ohio_credit_w
+    assert zia_ohio_membership.group_debt_mass == zia_ohio_debt_w
     zia_zia_membership = yao_person.get_contact(exx.zia).get_membership(exx.zia)
     assert zia_zia_membership is None
 
@@ -78,15 +78,15 @@ def test_PersonUnit_add_contactunit_Sets_contacts():
     yao_person = personunit_shop(exx.yao, respect_grain=x_respect_grain)
 
     # WHEN
-    yao_person.add_contactunit(exx.zia, contact_cred_lumen=13, contact_debt_lumen=8)
-    yao_person.add_contactunit(exx.sue, contact_debt_lumen=5)
-    yao_person.add_contactunit(exx.xio, contact_cred_lumen=17)
+    yao_person.add_contactunit(exx.zia, contact_cred_mass=13, contact_debt_mass=8)
+    yao_person.add_contactunit(exx.sue, contact_debt_mass=5)
+    yao_person.add_contactunit(exx.xio, contact_cred_mass=17)
 
     # THEN
     assert len(yao_person.contacts) == 3
     assert len(yao_person.get_contactunit_group_titles_dict()) == 3
-    assert yao_person.contacts.get(exx.xio).contact_cred_lumen == 17
-    assert yao_person.contacts.get(exx.sue).contact_debt_lumen == 5
+    assert yao_person.contacts.get(exx.xio).contact_cred_mass == 17
+    assert yao_person.contacts.get(exx.sue).contact_debt_mass == 5
     assert yao_person.contacts.get(exx.xio).respect_grain == x_respect_grain
 
 
@@ -113,10 +113,10 @@ def test_PersonUnit_set_contact_Creates_membership():
     yao_person.add_contactunit(exx.zia, before_zia_credit, before_zia_debt)
     zia_contactunit = yao_person.get_contact(exx.zia)
     zia_membership = zia_contactunit.get_membership(exx.zia)
-    assert zia_membership.group_cred_lumen != before_zia_credit
-    assert zia_membership.group_debt_lumen != before_zia_debt
-    assert zia_membership.group_cred_lumen == 1
-    assert zia_membership.group_debt_lumen == 1
+    assert zia_membership.group_cred_mass != before_zia_credit
+    assert zia_membership.group_debt_mass != before_zia_debt
+    assert zia_membership.group_cred_mass == 1
+    assert zia_membership.group_debt_mass == 1
 
     # WHEN
     after_zia_credit = 11
@@ -126,20 +126,20 @@ def test_PersonUnit_set_contact_Creates_membership():
     )
 
     # THEN
-    assert zia_membership.group_cred_lumen != after_zia_credit
-    assert zia_membership.group_debt_lumen != after_zia_debt
-    assert zia_membership.group_cred_lumen == 1
-    assert zia_membership.group_debt_lumen == 1
+    assert zia_membership.group_cred_mass != after_zia_credit
+    assert zia_membership.group_debt_mass != after_zia_debt
+    assert zia_membership.group_cred_mass == 1
+    assert zia_membership.group_debt_mass == 1
 
 
 def test_PersonUnit_edit_contact_RaiseExceptionWhenContactDoesNotExist():
     # ESTABLISH
     yao_person = personunit_shop(exx.yao)
-    zia_contact_cred_lumen = 55
+    zia_contact_cred_mass = 55
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        yao_person.edit_contactunit(exx.zia, contact_cred_lumen=zia_contact_cred_lumen)
+        yao_person.edit_contactunit(exx.zia, contact_cred_mass=zia_contact_cred_mass)
 
     # THEN
     assert str(excinfo.value) == f"ContactUnit '{exx.zia}' does not exist."
@@ -148,31 +148,31 @@ def test_PersonUnit_edit_contact_RaiseExceptionWhenContactDoesNotExist():
 def test_PersonUnit_edit_contact_UpdatesObj():
     # ESTABLISH
     yao_person = personunit_shop(exx.yao)
-    old_zia_contact_cred_lumen = 55
-    old_zia_contact_debt_lumen = 66
+    old_zia_contact_cred_mass = 55
+    old_zia_contact_debt_mass = 66
     yao_person.set_contactunit(
         contactunit_shop(
             exx.zia,
-            old_zia_contact_cred_lumen,
-            old_zia_contact_debt_lumen,
+            old_zia_contact_cred_mass,
+            old_zia_contact_debt_mass,
         )
     )
     zia_contactunit = yao_person.get_contact(exx.zia)
-    assert zia_contactunit.contact_cred_lumen == old_zia_contact_cred_lumen
-    assert zia_contactunit.contact_debt_lumen == old_zia_contact_debt_lumen
+    assert zia_contactunit.contact_cred_mass == old_zia_contact_cred_mass
+    assert zia_contactunit.contact_debt_mass == old_zia_contact_debt_mass
 
     # WHEN
-    new_zia_contact_cred_lumen = 22
-    new_zia_contact_debt_lumen = 33
+    new_zia_contact_cred_mass = 22
+    new_zia_contact_debt_mass = 33
     yao_person.edit_contactunit(
         contact_name=exx.zia,
-        contact_cred_lumen=new_zia_contact_cred_lumen,
-        contact_debt_lumen=new_zia_contact_debt_lumen,
+        contact_cred_mass=new_zia_contact_cred_mass,
+        contact_debt_mass=new_zia_contact_debt_mass,
     )
 
     # THEN
-    assert zia_contactunit.contact_cred_lumen == new_zia_contact_cred_lumen
-    assert zia_contactunit.contact_debt_lumen == new_zia_contact_debt_lumen
+    assert zia_contactunit.contact_cred_mass == new_zia_contact_cred_mass
+    assert zia_contactunit.contact_debt_mass == new_zia_contact_debt_mass
 
 
 def test_PersonUnit_get_contact_ReturnsObj():

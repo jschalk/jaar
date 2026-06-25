@@ -43,21 +43,21 @@ def _ingest_perspective_agenda(
     return listener
 
 
-def _allocate_irrational_contact_debt_lumen(
+def _allocate_irrational_contact_debt_mass(
     listener: PersonUnit, speaker_person_name: PersonName
 ) -> PersonUnit:
     speaker_contactunit = listener.get_contact(speaker_person_name)
-    speaker_contact_debt_lumen = speaker_contactunit.contact_debt_lumen
-    speaker_contactunit.add_irrational_contact_debt_lumen(speaker_contact_debt_lumen)
+    speaker_contact_debt_mass = speaker_contactunit.contact_debt_mass
+    speaker_contactunit.add_irrational_contact_debt_mass(speaker_contact_debt_mass)
     return listener
 
 
-def _allocate_inallocable_contact_debt_lumen(
+def _allocate_inallocable_contact_debt_mass(
     listener: PersonUnit, speaker_person_name: PersonName
 ) -> PersonUnit:
     speaker_contactunit = listener.get_contact(speaker_person_name)
-    speaker_contactunit.add_inallocable_contact_debt_lumen(
-        speaker_contactunit.contact_debt_lumen
+    speaker_contactunit.add_inallocable_contact_debt_mass(
+        speaker_contactunit.contact_debt_mass
     )
     return listener
 
@@ -125,14 +125,14 @@ def get_debtors_roll(x_duty: PersonUnit) -> list[ContactUnit]:
     return [
         x_contactunit
         for x_contactunit in x_duty.contacts.values()
-        if x_contactunit.contact_debt_lumen != 0
+        if x_contactunit.contact_debt_mass != 0
     ]
 
 
 def get_ordered_debtors_roll(x_person: PersonUnit) -> list[ContactUnit]:
     contacts_ordered_list = get_debtors_roll(x_person)
     contacts_ordered_list.sort(
-        key=lambda x: (x.contact_debt_lumen, x.contact_name), reverse=True
+        key=lambda x: (x.contact_debt_mass, x.contact_name), reverse=True
     )
     return contacts_ordered_list
 
@@ -178,15 +178,15 @@ def listen_to_speaker_agenda(listener: PersonUnit, speaker: PersonUnit) -> Perso
         )
     perspective_person = get_perspective_person(speaker, listener.person_name)
     if perspective_person.rational is False:
-        return _allocate_irrational_contact_debt_lumen(listener, speaker.person_name)
+        return _allocate_irrational_contact_debt_mass(listener, speaker.person_name)
     if listener.debtor_respect is None:
-        return _allocate_inallocable_contact_debt_lumen(listener, speaker.person_name)
+        return _allocate_inallocable_contact_debt_mass(listener, speaker.person_name)
     if listener.person_name != speaker.person_name:
         agenda = generate_perspective_agenda(perspective_person)
     else:
         agenda = list(perspective_person.get_all_pledges().values())
     if len(agenda) == 0:
-        return _allocate_inallocable_contact_debt_lumen(listener, speaker.person_name)
+        return _allocate_inallocable_contact_debt_mass(listener, speaker.person_name)
     return _ingest_perspective_agenda(listener, agenda)
 
 

@@ -15,19 +15,19 @@ def test_create_empty_person_from_person_ReturnsObj():
     mana_grain_float = 0.7
     yao_gut = personunit_shop(exx.yao, knot=exx.slash, mana_grain=mana_grain_float)
     yao_gut.set_l1_plan(planunit_shop("Iowa"))
-    zia_contact_cred_lumen = 47
-    zia_contact_debt_lumen = 41
+    zia_contact_cred_mass = 47
+    zia_contact_debt_mass = 41
     zia_credor_pool = 87
     zia_debtor_pool = 81
-    yao_gut.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
-    zia_irrational_contact_debt_lumen = 11
-    zia_inallocable_contact_debt_lumen = 22
+    yao_gut.add_contactunit(exx.zia, zia_contact_cred_mass, zia_contact_debt_mass)
+    zia_irrational_contact_debt_mass = 11
+    zia_inallocable_contact_debt_mass = 22
     duty_zia_contactunit = yao_gut.get_contact(exx.zia)
-    duty_zia_contactunit.add_irrational_contact_debt_lumen(
-        zia_irrational_contact_debt_lumen
+    duty_zia_contactunit.add_irrational_contact_debt_mass(
+        zia_irrational_contact_debt_mass
     )
-    duty_zia_contactunit.add_inallocable_contact_debt_lumen(
-        zia_inallocable_contact_debt_lumen
+    duty_zia_contactunit.add_inallocable_contact_debt_mass(
+        zia_inallocable_contact_debt_mass
     )
     zia_contactunit = yao_gut.get_contact(exx.zia)
     zia_contactunit.add_membership(f"{exx.slash}bowlers")
@@ -60,19 +60,19 @@ def test_create_listen_basis_ReturnsObj():
     # ESTABLISH
     yao_duty = personunit_shop(exx.yao, knot=exx.slash)
     yao_duty.set_l1_plan(planunit_shop("Iowa"))
-    zia_contact_cred_lumen = 47
-    zia_contact_debt_lumen = 41
+    zia_contact_cred_mass = 47
+    zia_contact_debt_mass = 41
     zia_credor_pool = 8700
     zia_debtor_pool = 8100
-    yao_duty.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
-    zia_irrational_contact_debt_lumen = 11
-    zia_inallocable_contact_debt_lumen = 22
+    yao_duty.add_contactunit(exx.zia, zia_contact_cred_mass, zia_contact_debt_mass)
+    zia_irrational_contact_debt_mass = 11
+    zia_inallocable_contact_debt_mass = 22
     duty_zia_contactunit = yao_duty.get_contact(exx.zia)
-    duty_zia_contactunit.add_irrational_contact_debt_lumen(
-        zia_irrational_contact_debt_lumen
+    duty_zia_contactunit.add_irrational_contact_debt_mass(
+        zia_irrational_contact_debt_mass
     )
-    duty_zia_contactunit.add_inallocable_contact_debt_lumen(
-        zia_inallocable_contact_debt_lumen
+    duty_zia_contactunit.add_inallocable_contact_debt_mass(
+        zia_inallocable_contact_debt_mass
     )
     zia_contactunit = yao_duty.get_contact(exx.zia)
     zia_contactunit.add_membership(f"{exx.slash}bowlers")
@@ -103,8 +103,8 @@ def test_create_listen_basis_ReturnsObj():
         yao_basis_vision.get_contactunits_dict().keys()
         == yao_duty.get_contactunits_dict().keys()
     )
-    assert vision_zia_contactunit.irrational_contact_debt_lumen == 0
-    assert vision_zia_contactunit.inallocable_contact_debt_lumen == 0
+    assert vision_zia_contactunit.irrational_contact_debt_mass == 0
+    assert vision_zia_contactunit.inallocable_contact_debt_mass == 0
 
 
 def test_get_default_job_ReturnsObj():

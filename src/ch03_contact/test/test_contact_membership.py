@@ -6,30 +6,30 @@ from pytest import raises as pytest_raises
 
 def test_ContactUnit_set_membership_SetsAttr_memberships():
     # ESTABLISH
-    run_group_cred_lumen = 66
-    run_group_debt_lumen = 85
+    run_group_cred_mass = 66
+    run_group_debt_mass = 85
     yao_contactunit = contactunit_shop(exx.yao)
     assert yao_contactunit.memberships == {}
 
     # WHEN
     yao_contactunit.set_membership(
-        membership_shop(exx.run, run_group_cred_lumen, run_group_debt_lumen)
+        membership_shop(exx.run, run_group_cred_mass, run_group_debt_mass)
     )
 
     # THEN
     assert len(yao_contactunit.memberships) == 1
     run_membership = yao_contactunit.memberships.get(exx.run)
     assert run_membership.group_title == exx.run
-    assert run_membership.group_cred_lumen == run_group_cred_lumen
-    assert run_membership.group_debt_lumen == run_group_debt_lumen
+    assert run_membership.group_cred_mass == run_group_cred_mass
+    assert run_membership.group_debt_mass == run_group_debt_mass
     assert run_membership.contact_name == exx.yao
 
 
 def test_ContactUnit_set_membership_SetsMultipleAttr():
     # ESTABLISH
     fly_str = ";fly"
-    run_membership = membership_shop(exx.run, group_cred_lumen=13, group_debt_lumen=7)
-    fly_membership = membership_shop(fly_str, group_cred_lumen=23, group_debt_lumen=5)
+    run_membership = membership_shop(exx.run, group_cred_mass=13, group_debt_mass=7)
+    fly_membership = membership_shop(fly_str, group_cred_mass=23, group_debt_mass=5)
     yao_contactunit = contactunit_shop(exx.yao)
     assert yao_contactunit.memberships == {}
 
@@ -164,19 +164,19 @@ def test_ContactUnit_clear_memberships_SetsAttr():
 
 def test_ContactUnit_add_membership_SetsAttr():
     # ESTABLISH
-    run_group_cred_lumen = 78
-    run_group_debt_lumen = 99
+    run_group_cred_mass = 78
+    run_group_debt_mass = 99
     yao_contactunit = contactunit_shop(exx.yao)
     assert yao_contactunit.get_membership(exx.run) is None
 
     # WHEN
-    yao_contactunit.add_membership(exx.run, run_group_cred_lumen, run_group_debt_lumen)
+    yao_contactunit.add_membership(exx.run, run_group_cred_mass, run_group_debt_mass)
 
     # THEN
     assert yao_contactunit.get_membership(exx.run) is not None
     run_membership = yao_contactunit.get_membership(exx.run)
-    assert run_membership.group_cred_lumen == run_group_cred_lumen
-    assert run_membership.group_debt_lumen == run_group_debt_lumen
+    assert run_membership.group_cred_mass == run_group_cred_mass
+    assert run_membership.group_debt_mass == run_group_debt_mass
 
 
 def test_ContactUnit_set_credor_pool_SetAttr():
@@ -209,11 +209,11 @@ def test_ContactUnit_set_credor_pool_Sets_memberships():
     # ESTABLISH
     ohio_str = ";Ohio"
     iowa_str = ";Iowa"
-    sue_group_cred_lumen = 1
-    yao_group_cred_lumen = 4
+    sue_group_cred_mass = 1
+    yao_group_cred_mass = 4
     bob_contactunit = contactunit_shop(exx.bob)
-    bob_contactunit.add_membership(ohio_str, sue_group_cred_lumen)
-    bob_contactunit.add_membership(iowa_str, yao_group_cred_lumen)
+    bob_contactunit.add_membership(ohio_str, sue_group_cred_mass)
+    bob_contactunit.add_membership(iowa_str, yao_group_cred_mass)
     assert bob_contactunit.credor_pool == 0
     sue_membership = bob_contactunit.get_membership(ohio_str)
     yao_membership = bob_contactunit.get_membership(iowa_str)
@@ -234,11 +234,11 @@ def test_ContactUnit_set_debtor_pool_Sets_memberships():
     # ESTABLISH
     ohio_str = ";Ohio"
     iowa_str = ";Iowa"
-    sue_group_debt_lumen = 1
-    yao_group_debt_lumen = 4
+    sue_group_debt_mass = 1
+    yao_group_debt_mass = 4
     bob_contactunit = contactunit_shop(exx.bob)
-    bob_contactunit.add_membership(ohio_str, 2, sue_group_debt_lumen)
-    bob_contactunit.add_membership(iowa_str, 2, yao_group_debt_lumen)
+    bob_contactunit.add_membership(ohio_str, 2, sue_group_debt_mass)
+    bob_contactunit.add_membership(iowa_str, 2, yao_group_debt_mass)
     assert bob_contactunit.debtor_pool == 0
     sue_membership = bob_contactunit.get_membership(ohio_str)
     yao_membership = bob_contactunit.get_membership(iowa_str)

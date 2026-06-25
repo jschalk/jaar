@@ -29,17 +29,17 @@ def test_listen_to_agendas_jobs_into_job_Addscase_tasksToPersonWhenNo_laborunitI
     # ESTABLISH
     moment_mstr_dir = str(temp3_fs)
     yao_gut = personunit_shop(exx.yao, exx.a23)
-    zia_contact_cred_lumen = 47
-    zia_contact_debt_lumen = 41
+    zia_contact_cred_mass = 47
+    zia_contact_debt_mass = 41
     zia_pool = 87
-    yao_gut.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
+    yao_gut.add_contactunit(exx.zia, zia_contact_cred_mass, zia_contact_debt_mass)
     yao_gut.set_contact_respect(zia_pool)
     save_gut_file(moment_mstr_dir, yao_gut)
 
     zia_job = personunit_shop(exx.zia, exx.a23)
     zia_job.set_plan_obj(planunit_shop(exx.clean, pledge=True), a23_casa_rope())
     zia_job.set_plan_obj(planunit_shop(exx.cuisine, pledge=True), a23_casa_rope())
-    zia_job.add_contactunit(exx.yao, contact_debt_lumen=12)
+    zia_job.add_contactunit(exx.yao, contact_debt_mass=12)
     save_job_file(moment_mstr_dir, zia_job)
 
     new_yao_job = create_listen_basis(yao_gut)
@@ -57,17 +57,17 @@ def test_listen_to_agendas_jobs_into_job_Addscase_tasksToPerson(temp3_fs):
     # ESTABLISH
     moment_mstr_dir = str(temp3_fs)
     yao_gut = personunit_shop(exx.yao, exx.a23)
-    zia_contact_cred_lumen = 47
-    zia_contact_debt_lumen = 41
+    zia_contact_cred_mass = 47
+    zia_contact_debt_mass = 41
     zia_pool = 87
-    yao_gut.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
+    yao_gut.add_contactunit(exx.zia, zia_contact_cred_mass, zia_contact_debt_mass)
     yao_gut.set_contact_respect(zia_pool)
     save_job_file(moment_mstr_dir, yao_gut)
 
     zia_job = personunit_shop(exx.zia, exx.a23)
     zia_job.set_plan_obj(planunit_shop(exx.clean, pledge=True), a23_casa_rope())
     zia_job.set_plan_obj(planunit_shop(exx.cuisine, pledge=True), a23_casa_rope())
-    zia_job.add_contactunit(exx.yao, contact_debt_lumen=12)
+    zia_job.add_contactunit(exx.yao, contact_debt_mass=12)
     clean_planunit = zia_job.get_plan_obj(a23_clean_rope())
     cuisine_planunit = zia_job.get_plan_obj(a23_cuisine_rope())
     clean_planunit.workforceunit.add_labor(exx.yao)
@@ -84,7 +84,7 @@ def test_listen_to_agendas_jobs_into_job_Addscase_tasksToPerson(temp3_fs):
     assert len(new_yao_job.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_jobs_into_job_Addscase_tasksToPersonWithDetailsDecidedBy_contact_debt_lumen(
+def test_listen_to_agendas_jobs_into_job_Addscase_tasksToPersonWithDetailsDecidedBy_contact_debt_mass(
     temp3_fs,
 ):
     # ESTABLISH
@@ -120,13 +120,13 @@ def test_listen_to_agendas_jobs_into_job_Addscase_tasksToPersonWithDetailsDecide
     new_cuisine_plan = new_yao_job1.get_plan_obj(a23_cuisine_rope())
     zia_contactunit = new_yao_job1.get_contact(exx.zia)
     bob_contactunit = new_yao_job1.get_contact(exx.bob)
-    assert zia_contactunit.contact_debt_lumen < bob_contactunit.contact_debt_lumen
+    assert zia_contactunit.contact_debt_mass < bob_contactunit.contact_debt_mass
     assert new_cuisine_plan.get_reasonunit(a23_eat_rope()) is None
 
-    yao_zia_contact_debt_lumen = 15
-    yao_bob_contact_debt_lumen = 5
-    yao_gut.add_contactunit(exx.zia, None, yao_zia_contact_debt_lumen)
-    yao_gut.add_contactunit(exx.bob, None, yao_bob_contact_debt_lumen)
+    yao_zia_contact_debt_mass = 15
+    yao_bob_contact_debt_mass = 5
+    yao_gut.add_contactunit(exx.zia, None, yao_zia_contact_debt_mass)
+    yao_gut.add_contactunit(exx.bob, None, yao_bob_contact_debt_mass)
     yao_gut.set_contact_respect(100)
     new_yao_job2 = create_listen_basis(yao_gut)
     assert new_yao_job2.plan_exists(a23_cuisine_rope()) is False
@@ -139,7 +139,7 @@ def test_listen_to_agendas_jobs_into_job_Addscase_tasksToPersonWithDetailsDecide
     new_cuisine_plan = new_yao_job2.get_plan_obj(a23_cuisine_rope())
     zia_contactunit = new_yao_job2.get_contact(exx.zia)
     bob_contactunit = new_yao_job2.get_contact(exx.bob)
-    assert zia_contactunit.contact_debt_lumen > bob_contactunit.contact_debt_lumen
+    assert zia_contactunit.contact_debt_mass > bob_contactunit.contact_debt_mass
     zia_eat_reasonunit = zia_cuisine_planunit.get_reasonunit(a23_eat_rope())
     assert new_cuisine_plan.get_reasonunit(a23_eat_rope()) == zia_eat_reasonunit
 
@@ -150,12 +150,12 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalPerson(
     # ESTABLISH
     moment_mstr_dir = str(temp3_fs)
     yao_gut = personunit_shop(exx.yao, exx.a23)
-    zia_contact_cred_lumen = 47
-    zia_contact_debt_lumen = 41
-    sue_contact_cred_lumen = 57
-    sue_contact_debt_lumen = 51
-    yao_gut.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
-    yao_gut.add_contactunit(exx.sue, sue_contact_cred_lumen, sue_contact_debt_lumen)
+    zia_contact_cred_mass = 47
+    zia_contact_debt_mass = 41
+    sue_contact_cred_mass = 57
+    sue_contact_debt_mass = 51
+    yao_gut.add_contactunit(exx.zia, zia_contact_cred_mass, zia_contact_debt_mass)
+    yao_gut.add_contactunit(exx.sue, sue_contact_cred_mass, sue_contact_debt_mass)
     yao_pool = 92
     yao_gut.set_contact_respect(yao_pool)
     save_gut_file(moment_mstr_dir, yao_gut)
@@ -163,7 +163,7 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalPerson(
     zia_job = personunit_shop(exx.zia, exx.a23)
     zia_job.set_plan_obj(planunit_shop(exx.clean, pledge=True), a23_casa_rope())
     zia_job.set_plan_obj(planunit_shop(exx.cuisine, pledge=True), a23_casa_rope())
-    zia_job.add_contactunit(exx.yao, contact_debt_lumen=12)
+    zia_job.add_contactunit(exx.yao, contact_debt_mass=12)
     clean_planunit = zia_job.get_plan_obj(a23_clean_rope())
     cuisine_planunit = zia_job.get_plan_obj(a23_cuisine_rope())
     clean_planunit.workforceunit.add_labor(exx.yao)
@@ -172,7 +172,7 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalPerson(
 
     sue_job = personunit_shop(exx.sue, exx.a23)
     sue_job.set_max_tree_traverse(5)
-    zia_job.add_contactunit(exx.yao, contact_debt_lumen=12)
+    zia_job.add_contactunit(exx.yao, contact_debt_mass=12)
     vacuum_str = "vacuum"
     vacuum_rope = sue_job.make_l1_rope(vacuum_str)
     sue_job.set_l1_plan(planunit_shop(vacuum_str, pledge=True))
@@ -210,10 +210,10 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalPerson(
     assert len(new_yao_job.get_agenda_dict()) == 2
     zia_contactunit = new_yao_job.get_contact(exx.zia)
     sue_contactunit = new_yao_job.get_contact(exx.sue)
-    print(f"{sue_contactunit.contact_debt_lumen=}")
-    print(f"{sue_contactunit.irrational_contact_debt_lumen=}")
-    assert zia_contactunit.irrational_contact_debt_lumen == 0
-    assert sue_contactunit.irrational_contact_debt_lumen == 51
+    print(f"{sue_contactunit.contact_debt_mass=}")
+    print(f"{sue_contactunit.irrational_contact_debt_mass=}")
+    assert zia_contactunit.irrational_contact_debt_mass == 0
+    assert sue_contactunit.irrational_contact_debt_mass == 51
 
 
 def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorPerson(
@@ -226,12 +226,12 @@ def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorPerson(
     delete_dir(yao_gut_path)  # don't know why I have to do this...
     print(f"{os_path_exists(yao_gut_path)=}")
     yao_gut = personunit_shop(exx.yao, exx.a23)
-    zia_contact_cred_lumen = 47
-    sue_contact_cred_lumen = 57
-    zia_contact_debt_lumen = 41
-    sue_contact_debt_lumen = 51
-    yao_gut.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
-    yao_gut.add_contactunit(exx.sue, sue_contact_cred_lumen, sue_contact_debt_lumen)
+    zia_contact_cred_mass = 47
+    sue_contact_cred_mass = 57
+    zia_contact_debt_mass = 41
+    sue_contact_debt_mass = 51
+    yao_gut.add_contactunit(exx.zia, zia_contact_cred_mass, zia_contact_debt_mass)
+    yao_gut.add_contactunit(exx.sue, sue_contact_cred_mass, sue_contact_debt_mass)
     yao_pool = 92
     yao_gut.set_contact_respect(yao_pool)
     save_gut_file(moment_mstr_dir, yao_gut)
@@ -239,7 +239,7 @@ def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorPerson(
     zia_job = personunit_shop(exx.zia, exx.a23)
     zia_job.set_plan_obj(planunit_shop(exx.clean, pledge=True), a23_casa_rope())
     zia_job.set_plan_obj(planunit_shop(exx.cuisine, pledge=True), a23_casa_rope())
-    zia_job.add_contactunit(exx.yao, contact_debt_lumen=12)
+    zia_job.add_contactunit(exx.yao, contact_debt_mass=12)
     clean_planunit = zia_job.get_plan_obj(a23_clean_rope())
     cuisine_planunit = zia_job.get_plan_obj(a23_cuisine_rope())
     clean_planunit.workforceunit.add_labor(exx.yao)
@@ -255,10 +255,10 @@ def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorPerson(
     assert len(new_yao_job.get_agenda_dict()) == 2
     zia_contactunit = new_yao_job.get_contact(exx.zia)
     sue_contactunit = new_yao_job.get_contact(exx.sue)
-    print(f"{sue_contactunit.contact_debt_lumen=}")
-    print(f"{sue_contactunit.inallocable_contact_debt_lumen=}")
-    assert zia_contactunit.inallocable_contact_debt_lumen == 0
-    assert sue_contactunit.inallocable_contact_debt_lumen == 51
+    print(f"{sue_contactunit.contact_debt_mass=}")
+    print(f"{sue_contactunit.inallocable_contact_debt_mass=}")
+    assert zia_contactunit.inallocable_contact_debt_mass == 0
+    assert sue_contactunit.inallocable_contact_debt_mass == 51
 
 
 def test_listen_to_agendas_jobs_into_job_ListensToPerson_gut_AndNotPerson_job(
@@ -267,12 +267,12 @@ def test_listen_to_agendas_jobs_into_job_ListensToPerson_gut_AndNotPerson_job(
     # ESTABLISH
     moment_mstr_dir = str(temp3_fs)
     yao_gut = personunit_shop(exx.yao, exx.a23)
-    yao_contact_cred_lumen = 57
-    yao_contact_debt_lumen = 51
-    yao_gut.add_contactunit(exx.yao, yao_contact_cred_lumen, yao_contact_debt_lumen)
-    zia_contact_cred_lumen = 47
-    zia_contact_debt_lumen = 41
-    yao_gut.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
+    yao_contact_cred_mass = 57
+    yao_contact_debt_mass = 51
+    yao_gut.add_contactunit(exx.yao, yao_contact_cred_mass, yao_contact_debt_mass)
+    zia_contact_cred_mass = 47
+    zia_contact_debt_mass = 41
+    yao_gut.add_contactunit(exx.zia, zia_contact_cred_mass, zia_contact_debt_mass)
     yao_pool = 87
     yao_gut.set_contact_respect(yao_pool)
     # save yao without case_task to dutys
@@ -282,7 +282,7 @@ def test_listen_to_agendas_jobs_into_job_ListensToPerson_gut_AndNotPerson_job(
     zia_job = personunit_shop(exx.zia, exx.a23)
     zia_job.set_plan_obj(planunit_shop(exx.clean, pledge=True), a23_casa_rope())
     zia_job.set_plan_obj(planunit_shop(exx.cuisine, pledge=True), a23_casa_rope())
-    zia_job.add_contactunit(exx.yao, contact_debt_lumen=12)
+    zia_job.add_contactunit(exx.yao, contact_debt_mass=12)
     clean_planunit = zia_job.get_plan_obj(a23_clean_rope())
     cuisine_planunit = zia_job.get_plan_obj(a23_cuisine_rope())
     clean_planunit.workforceunit.add_labor(exx.yao)

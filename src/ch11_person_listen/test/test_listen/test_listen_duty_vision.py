@@ -81,9 +81,9 @@ def run_rope() -> RopeTerm:
 def get_example_yao_person() -> PersonUnit:
     yao_speaker = personunit_shop(exx.yao, ch11_example_moment_rope())
     yao_speaker.set_plan_obj(planunit_shop(run_str()), casa_rope())
-    yao_speaker.add_contactunit(exx.yao, contact_debt_lumen=10)
-    yao_speaker.add_contactunit(exx.zia, contact_debt_lumen=30)
-    yao_speaker.add_contactunit(exx.bob, contact_debt_lumen=40)
+    yao_speaker.add_contactunit(exx.yao, contact_debt_mass=10)
+    yao_speaker.add_contactunit(exx.zia, contact_debt_mass=30)
+    yao_speaker.add_contactunit(exx.bob, contact_debt_mass=40)
     yao_speaker.set_contact_respect(80)
     return yao_speaker
 
@@ -238,7 +238,7 @@ def test_listen_to_person_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
 ):
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
-    # yao0_gut with 3 debotors of different contact_cred_lumens
+    # yao0_gut with 3 debotors of different contact_cred_masss
     # yao_vision1 with 1 case_task, fact that doesn't make that case_task active
     # yao_vision2 with 2 case_tasks, one is equal fact that makes case_task active
     # yao_vision3 with 1 new case_task, fact stays with it
@@ -348,7 +348,7 @@ def test_listen_to_person_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
     yao_job = open_job_file(moment_mstr_dir, moment_lasso, exx.yao)
     yao_job.thinkout()
     assert yao_job.contacts.keys() == yao_gut0.contacts.keys()
-    assert yao_job.get_contact(exx.yao).irrational_contact_debt_lumen == 0
+    assert yao_job.get_contact(exx.yao).irrational_contact_debt_mass == 0
     yao_job_contacts = yao_job.to_dict().get(kw.contacts)
     yao_gut0_contacts = yao_gut0.to_dict().get(kw.contacts)
     yao_job_bob = yao_job_contacts.get("Bob")

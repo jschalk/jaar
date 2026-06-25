@@ -48,22 +48,22 @@ class InvalidContactNameMemberShipError(Exception):
 @dataclass
 class ContactUnit:
     """This represents the object's opinion of the ContactUnit.contact_name
-    ContactUnit.contact_cred_lumen represents how much contact_cred_lumen the object projects to the contact_name
-    ContactUnit.contact_debt_lumen represents how much contact_debt_lumen the object projects to the contact_name
+    ContactUnit.contact_cred_mass represents how much contact_cred_mass the object projects to the contact_name
+    ContactUnit.contact_debt_mass represents how much contact_debt_mass the object projects to the contact_name
     """
 
     contact_name: ContactName = None
     groupmark: str = None
     respect_grain: RespectGrain = None
-    contact_cred_lumen: float = None
-    contact_debt_lumen: float = None
+    contact_cred_mass: float = None
+    contact_debt_mass: float = None
     # special attribute: static in json, in memory it is deleted after loading and recalculated during saving.
     memberships: dict[ContactName, MemberShip] = None
     # calculated fields
     credor_pool: RespectNum = None
     debtor_pool: RespectNum = None
-    irrational_contact_debt_lumen: float = None  # set by listening process
-    inallocable_contact_debt_lumen: float = None  # set by listening process
+    irrational_contact_debt_mass: float = None  # set by listening process
+    inallocable_contact_debt_mass: float = None  # set by listening process
     # set by thinkout()
     fund_give: FundNum = None
     fund_take: FundNum = None
@@ -78,27 +78,27 @@ class ContactUnit:
     def set_respect_grain(self, x_respect_grain: float):
         self.respect_grain = x_respect_grain
 
-    def set_credor_contact_debt_lumen(
+    def set_credor_contact_debt_mass(
         self,
-        contact_cred_lumen: float = None,
-        contact_debt_lumen: float = None,
+        contact_cred_mass: float = None,
+        contact_debt_mass: float = None,
     ):
-        if contact_cred_lumen is not None:
-            self.set_contact_cred_lumen(contact_cred_lumen)
-        if contact_debt_lumen is not None:
-            self.set_contact_debt_lumen(contact_debt_lumen)
+        if contact_cred_mass is not None:
+            self.set_contact_cred_mass(contact_cred_mass)
+        if contact_debt_mass is not None:
+            self.set_contact_debt_mass(contact_debt_mass)
 
-    def set_contact_cred_lumen(self, contact_cred_lumen: float):
-        self.contact_cred_lumen = contact_cred_lumen
+    def set_contact_cred_mass(self, contact_cred_mass: float):
+        self.contact_cred_mass = contact_cred_mass
 
-    def set_contact_debt_lumen(self, contact_debt_lumen: float):
-        self.contact_debt_lumen = contact_debt_lumen
+    def set_contact_debt_mass(self, contact_debt_mass: float):
+        self.contact_debt_mass = contact_debt_mass
 
-    def get_contact_cred_lumen(self):
-        return get_1_if_None(self.contact_cred_lumen)
+    def get_contact_cred_mass(self):
+        return get_1_if_None(self.contact_cred_mass)
 
-    def get_contact_debt_lumen(self):
-        return get_1_if_None(self.contact_debt_lumen)
+    def get_contact_debt_mass(self):
+        return get_1_if_None(self.contact_debt_mass)
 
     def clear_fund_give_take(self):
         self.fund_give = 0
@@ -108,17 +108,15 @@ class ContactUnit:
         self.fund_agenda_ratio_give = 0
         self.fund_agenda_ratio_take = 0
 
-    def add_irrational_contact_debt_lumen(self, x_irrational_contact_debt_lumen: float):
-        self.irrational_contact_debt_lumen += x_irrational_contact_debt_lumen
+    def add_irrational_contact_debt_mass(self, x_irrational_contact_debt_mass: float):
+        self.irrational_contact_debt_mass += x_irrational_contact_debt_mass
 
-    def add_inallocable_contact_debt_lumen(
-        self, x_inallocable_contact_debt_lumen: float
-    ):
-        self.inallocable_contact_debt_lumen += x_inallocable_contact_debt_lumen
+    def add_inallocable_contact_debt_mass(self, x_inallocable_contact_debt_mass: float):
+        self.inallocable_contact_debt_mass += x_inallocable_contact_debt_mass
 
     def reset_listen_calculated_attrs(self):
-        self.irrational_contact_debt_lumen = 0
-        self.inallocable_contact_debt_lumen = 0
+        self.irrational_contact_debt_mass = 0
+        self.inallocable_contact_debt_mass = 0
 
     def add_fund_give(self, fund_give: float):
         self.fund_give += fund_give
@@ -148,20 +146,20 @@ class ContactUnit:
         self,
         fund_agenda_ratio_give_sum: float,
         fund_agenda_ratio_take_sum: float,
-        contactunits_contact_cred_lumen_sum: float,
-        contactunits_contact_debt_lumen_sum: float,
+        contactunits_contact_cred_mass_sum: float,
+        contactunits_contact_debt_mass_sum: float,
     ):
-        total_contact_cred_lumen = contactunits_contact_cred_lumen_sum
+        total_contact_cred_mass = contactunits_contact_cred_mass_sum
         ratio_give_sum = fund_agenda_ratio_give_sum
         self.fund_agenda_ratio_give = (
-            self.get_contact_cred_lumen() / total_contact_cred_lumen
+            self.get_contact_cred_mass() / total_contact_cred_mass
             if fund_agenda_ratio_give_sum == 0
             else self.fund_agenda_give / ratio_give_sum
         )
         if fund_agenda_ratio_take_sum == 0:
-            total_contact_debt_lumen = contactunits_contact_debt_lumen_sum
+            total_contact_debt_mass = contactunits_contact_debt_mass_sum
             self.fund_agenda_ratio_take = (
-                self.get_contact_debt_lumen() / total_contact_debt_lumen
+                self.get_contact_debt_mass() / total_contact_debt_mass
             )
         else:
             ratio_take_sum = fund_agenda_ratio_take_sum
@@ -170,10 +168,10 @@ class ContactUnit:
     def add_membership(
         self,
         group_title: GroupTitle,
-        group_cred_lumen: float = None,
-        group_debt_lumen: float = None,
+        group_cred_mass: float = None,
+        group_debt_mass: float = None,
     ):
-        x_membership = membership_shop(group_title, group_cred_lumen, group_debt_lumen)
+        x_membership = membership_shop(group_title, group_cred_mass, group_debt_mass)
         self.set_membership(x_membership)
 
     def set_membership(self, x_membership: MemberShip):
@@ -204,7 +202,7 @@ class ContactUnit:
     def set_credor_pool(self, credor_pool: RespectNum):
         self.credor_pool = credor_pool
         ledger_dict = {
-            x_membership.group_title: x_membership.group_cred_lumen
+            x_membership.group_title: x_membership.group_cred_mass
             for x_membership in self.memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self.credor_pool, self.respect_grain)
@@ -214,7 +212,7 @@ class ContactUnit:
     def set_debtor_pool(self, debtor_pool: RespectNum):
         self.debtor_pool = debtor_pool
         ledger_dict = {
-            x_membership.group_title: x_membership.group_debt_lumen
+            x_membership.group_title: x_membership.group_debt_mass
             for x_membership in self.memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self.debtor_pool, self.respect_grain)
@@ -232,16 +230,14 @@ class ContactUnit:
 
         x_dict = {
             "contact_name": self.contact_name,
-            "contact_cred_lumen": self.contact_cred_lumen,
-            "contact_debt_lumen": self.contact_debt_lumen,
+            "contact_cred_mass": self.contact_cred_mass,
+            "contact_debt_mass": self.contact_debt_mass,
             "memberships": self.get_memberships_dict(),
         }
-        if self.irrational_contact_debt_lumen not in [None, 0]:
-            x_dict["irrational_contact_debt_lumen"] = self.irrational_contact_debt_lumen
-        if self.inallocable_contact_debt_lumen not in [None, 0]:
-            x_dict["inallocable_contact_debt_lumen"] = (
-                self.inallocable_contact_debt_lumen
-            )
+        if self.irrational_contact_debt_mass not in [None, 0]:
+            x_dict["irrational_contact_debt_mass"] = self.irrational_contact_debt_mass
+        if self.inallocable_contact_debt_mass not in [None, 0]:
+            x_dict["inallocable_contact_debt_mass"] = self.inallocable_contact_debt_mass
 
         if all_attrs:
             self.all_attrs_necessary_in_dict(x_dict)
@@ -268,26 +264,26 @@ def contactunits_get_from_dict(
 
 def contactunit_get_from_dict(contactunit_dict: dict, groupmark: str) -> ContactUnit:
     x_contact_name = contactunit_dict["contact_name"]
-    x_contact_cred_lumen = contactunit_dict["contact_cred_lumen"]
-    x_contact_debt_lumen = contactunit_dict["contact_debt_lumen"]
+    x_contact_cred_mass = contactunit_dict["contact_cred_mass"]
+    x_contact_debt_mass = contactunit_dict["contact_debt_mass"]
     x_memberships_dict = contactunit_dict["memberships"]
     x_contactunit = contactunit_shop(
-        x_contact_name, x_contact_cred_lumen, x_contact_debt_lumen, groupmark
+        x_contact_name, x_contact_cred_mass, x_contact_debt_mass, groupmark
     )
     x_contactunit.memberships = memberships_get_from_dict(
         x_memberships_dict, x_contact_name
     )
-    irrational_contact_debt_lumen = contactunit_dict.get(
-        "irrational_contact_debt_lumen", 0
+    irrational_contact_debt_mass = contactunit_dict.get(
+        "irrational_contact_debt_mass", 0
     )
-    inallocable_contact_debt_lumen = contactunit_dict.get(
-        "inallocable_contact_debt_lumen", 0
+    inallocable_contact_debt_mass = contactunit_dict.get(
+        "inallocable_contact_debt_mass", 0
     )
-    x_contactunit.add_irrational_contact_debt_lumen(
-        get_0_if_None(irrational_contact_debt_lumen)
+    x_contactunit.add_irrational_contact_debt_mass(
+        get_0_if_None(irrational_contact_debt_mass)
     )
-    x_contactunit.add_inallocable_contact_debt_lumen(
-        get_0_if_None(inallocable_contact_debt_lumen)
+    x_contactunit.add_inallocable_contact_debt_mass(
+        get_0_if_None(inallocable_contact_debt_mass)
     )
 
     return x_contactunit
@@ -295,19 +291,19 @@ def contactunit_get_from_dict(contactunit_dict: dict, groupmark: str) -> Contact
 
 def contactunit_shop(
     contact_name: ContactName,
-    contact_cred_lumen: float = None,
-    contact_debt_lumen: float = None,
+    contact_cred_mass: float = None,
+    contact_debt_mass: float = None,
     groupmark: str = None,
     respect_grain: float = None,
 ) -> ContactUnit:
     x_contactunit = ContactUnit(
-        contact_cred_lumen=get_1_if_None(contact_cred_lumen),
-        contact_debt_lumen=get_1_if_None(contact_debt_lumen),
+        contact_cred_mass=get_1_if_None(contact_cred_mass),
+        contact_debt_mass=get_1_if_None(contact_debt_mass),
         memberships={},
         credor_pool=0,
         debtor_pool=0,
-        irrational_contact_debt_lumen=0,
-        inallocable_contact_debt_lumen=0,
+        irrational_contact_debt_mass=0,
+        inallocable_contact_debt_mass=0,
         fund_give=0,
         fund_take=0,
         fund_agenda_give=0,

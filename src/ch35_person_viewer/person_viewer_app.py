@@ -24,12 +24,12 @@ def get_person_viewer_template() -> str:
         
         <div class="contacts_controls">
             <input type="checkbox" id="show_contacts"><label for="show_contacts">contacts</label>
-            <input type="checkbox" id="show_contact_cred_lumen"><label for="show_contact_cred_lumen">cred_lumen</label>
-            <input type="checkbox" id="show_contact_debt_lumen"><label for="show_contact_debt_lumen">debt_lumen</label>
+            <input type="checkbox" id="show_contact_cred_mass"><label for="show_contact_cred_mass">cred_mass</label>
+            <input type="checkbox" id="show_contact_debt_mass"><label for="show_contact_debt_mass">debt_mass</label>
             <input type="checkbox" id="show_contact_credor_pool"><label for="show_contact_credor_pool">credor_pool</label>
             <input type="checkbox" id="show_contact_debtor_pool"><label for="show_contact_debtor_pool">debtor_pool</label>
-            <input type="checkbox" id="show_contact_irrational_contact_debt_lumen"><label for="show_contact_irrational_contact_debt_lumen">irrational_contact_debt_lumen</label>
-            <input type="checkbox" id="show_contact_inallocable_contact_debt_lumen"><label for="show_contact_inallocable_contact_debt_lumen">inallocable_contact_debt_lumen</label>
+            <input type="checkbox" id="show_contact_irrational_contact_debt_mass"><label for="show_contact_irrational_contact_debt_mass">irrational_contact_debt_mass</label>
+            <input type="checkbox" id="show_contact_inallocable_contact_debt_mass"><label for="show_contact_inallocable_contact_debt_mass">inallocable_contact_debt_mass</label>
             <input type="checkbox" id="show_contact_fund_give"><label for="show_contact_fund_give">fund_give</label>
             <input type="checkbox" id="show_contact_fund_take"><label for="show_contact_fund_take">fund_take</label>
             <input type="checkbox" id="show_contact_fund_agenda_give"><label for="show_contact_fund_agenda_give">fund_agenda_give</label>
@@ -38,8 +38,8 @@ def get_person_viewer_template() -> str:
             <input type="checkbox" id="show_contact_fund_agenda_ratio_take"><label for="show_contact_fund_agenda_ratio_take">fund_agenda_ratio_take</label>
             <br>
             <input type="checkbox" id="show_contact_membership_group_title"><label for="show_contact_membership_group_title">membership_group_title</label>
-            <input type="checkbox" id="show_contact_membership_group_cred_lumen"><label for="show_contact_membership_group_cred_lumen">membership_group_cred_lumen</label>
-            <input type="checkbox" id="show_contact_membership_group_debt_lumen"><label for="show_contact_membership_group_debt_lumen">membership_group_debt_lumen</label>
+            <input type="checkbox" id="show_contact_membership_group_cred_mass"><label for="show_contact_membership_group_cred_mass">membership_group_cred_mass</label>
+            <input type="checkbox" id="show_contact_membership_group_debt_mass"><label for="show_contact_membership_group_debt_mass">membership_group_debt_mass</label>
             <input type="checkbox" id="show_contact_membership_credor_pool"><label for="show_contact_membership_credor_pool">membership_credor_pool</label>
             <input type="checkbox" id="show_contact_membership_debtor_pool"><label for="show_contact_membership_debtor_pool">membership_debtor_pool</label>
             <input type="checkbox" id="show_contact_membership_fund_agenda_give"><label for="show_contact_membership_fund_agenda_give">membership_fund_agenda_give</label>

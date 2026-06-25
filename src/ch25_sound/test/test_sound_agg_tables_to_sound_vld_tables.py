@@ -34,8 +34,8 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0(
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 )"""
     values_clause = f"""
 VALUES
@@ -62,8 +62,8 @@ VALUES
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 FROM {prnawar_h_vld_put_tablename}
 """
     cursor0.execute(select_sqlstr)
@@ -100,8 +100,8 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario0_AddRowsToTable(
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 )"""
     values_clause = f"""
 VALUES
@@ -126,8 +126,8 @@ VALUES
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 FROM {prncont_h_vld_put_tablename}
 """
     cursor0.execute(select_sqlstr)
@@ -163,8 +163,8 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario1_Populates_Columns(
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 )"""
     values_clause = f"""
 VALUES
@@ -189,8 +189,8 @@ VALUES
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 FROM {prncont_h_vld_put_tablename}
 """
     cursor0.execute(select_sqlstr)
@@ -226,8 +226,8 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario2_DoesNotSelectWhere_e
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 , {kw.error_message}
 )"""
     values_clause = f"""
@@ -253,8 +253,8 @@ VALUES
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 FROM {prncont_h_vld_put_tablename}
 """
     cursor0.execute(select_sqlstr)
@@ -290,8 +290,8 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario3_NoDuplicates(
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 )"""
     values_clause = f"""
 VALUES

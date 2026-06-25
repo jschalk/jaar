@@ -146,8 +146,8 @@ def test_get_insert_heard_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0(
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 )
 VALUES
 ({spark1}, '{exx.sue}', '{exx.a23}','{exx.yao}', '{yao_inx}', {x44_credit}, {x22_debt})
@@ -174,8 +174,8 @@ VALUES
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 FROM {prncont_h_vld_put_tablename}
 """
     cursor0.execute(select_sqlstr)
@@ -212,8 +212,8 @@ def test_etl_heard_agg_tables_to_heard_vld_tables_PopulatesTable_Scenario0(
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 )
 VALUES
 ({spark1}, '{exx.sue}', '{exx.a23}','{exx.yao}', '{yao_inx}', {x44_credit}, {x22_debt})
@@ -238,8 +238,8 @@ VALUES
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 FROM {prncont_h_vld_put_tablename}
 """
     cursor0.execute(select_sqlstr)
@@ -276,8 +276,8 @@ def test_etl_heard_agg_tables_to_heard_vld_tables_PopulatesTable_Scenario1_NoDup
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 )
 VALUES
 ({spark1}, '{exx.sue}', '{exx.a23}','{exx.yao}', '{yao_inx}', {x44_credit}, {x22_debt})

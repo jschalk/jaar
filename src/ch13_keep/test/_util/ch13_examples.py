@@ -13,35 +13,35 @@ def get_nation_texas_rope() -> RopeTerm:
 
 
 def example_yao_patientledger() -> dict[str, float]:
-    yao_contact_cred_lumen = 7
-    bob_contact_cred_lumen = 3
-    zia_contact_cred_lumen = 10
+    yao_contact_cred_mass = 7
+    bob_contact_cred_mass = 3
+    zia_contact_cred_mass = 10
     yao_person = personunit_shop(exx.yao)
-    yao_person.add_contactunit(exx.yao, yao_contact_cred_lumen)
-    yao_person.add_contactunit(exx.bob, bob_contact_cred_lumen)
-    yao_person.add_contactunit(exx.zia, zia_contact_cred_lumen)
+    yao_person.add_contactunit(exx.yao, yao_contact_cred_mass)
+    yao_person.add_contactunit(exx.bob, bob_contact_cred_mass)
+    yao_person.add_contactunit(exx.zia, zia_contact_cred_mass)
     return get_patientledger(yao_person)
 
 
 def example_bob_patientledger() -> dict[str, float]:
-    yao_contact_cred_lumen = 1
-    bob_contact_cred_lumen = 7
-    zia_contact_cred_lumen = 42
+    yao_contact_cred_mass = 1
+    bob_contact_cred_mass = 7
+    zia_contact_cred_mass = 42
     bob_person = personunit_shop(exx.bob)
-    bob_person.add_contactunit(exx.yao, yao_contact_cred_lumen)
-    bob_person.add_contactunit(exx.bob, bob_contact_cred_lumen)
-    bob_person.add_contactunit(exx.zia, zia_contact_cred_lumen)
+    bob_person.add_contactunit(exx.yao, yao_contact_cred_mass)
+    bob_person.add_contactunit(exx.bob, bob_contact_cred_mass)
+    bob_person.add_contactunit(exx.zia, zia_contact_cred_mass)
     return get_patientledger(bob_person)
 
 
 def example_zia_patientledger() -> dict[str, float]:
-    yao_contact_cred_lumen = 89
-    bob_contact_cred_lumen = 150
-    zia_contact_cred_lumen = 61
+    yao_contact_cred_mass = 89
+    bob_contact_cred_mass = 150
+    zia_contact_cred_mass = 61
     zia_person = personunit_shop(exx.zia)
-    zia_person.add_contactunit(exx.yao, yao_contact_cred_lumen)
-    zia_person.add_contactunit(exx.bob, bob_contact_cred_lumen)
-    zia_person.add_contactunit(exx.zia, zia_contact_cred_lumen)
+    zia_person.add_contactunit(exx.yao, yao_contact_cred_mass)
+    zia_person.add_contactunit(exx.bob, bob_contact_cred_mass)
+    zia_person.add_contactunit(exx.zia, zia_contact_cred_mass)
     return get_patientledger(zia_person)
 
 

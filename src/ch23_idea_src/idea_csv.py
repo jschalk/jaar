@@ -241,8 +241,8 @@ def add_person_to_ii00120_csv(
                 x_person.person_name,
                 contactunit.contact_name,
                 membership.group_title,
-                if_none_str(membership.group_cred_lumen),
-                if_none_str(membership.group_debt_lumen),
+                if_none_str(membership.group_cred_mass),
+                if_none_str(membership.group_debt_mass),
                 x_knot,
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -265,8 +265,8 @@ def add_person_to_ii00121_csv(
             x_person.planroot.get_plan_rope(),
             x_person.person_name,
             contactunit.contact_name,
-            if_none_str(contactunit.contact_cred_lumen),
-            if_none_str(contactunit.contact_debt_lumen),
+            if_none_str(contactunit.contact_cred_mass),
+            if_none_str(contactunit.contact_debt_mass),
             x_knot,
         ]
         x_csv += csv_delimiter.join(x_row)

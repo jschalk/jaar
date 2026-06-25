@@ -15,17 +15,17 @@ from dataclasses import dataclass
 
 def get_patientledger(x_person: PersonUnit) -> dict[ContactName, RespectNum]:
     return {
-        contactunit.contact_name: contactunit.contact_cred_lumen
+        contactunit.contact_name: contactunit.contact_cred_mass
         for contactunit in x_person.contacts.values()
-        if contactunit.contact_cred_lumen > 0
+        if contactunit.contact_cred_mass > 0
     }
 
 
 def get_doctorledger(x_person: PersonUnit) -> dict[ContactName, RespectNum]:
     return {
-        contactunit.contact_name: contactunit.contact_debt_lumen
+        contactunit.contact_name: contactunit.contact_debt_mass
         for contactunit in x_person.contacts.values()
-        if contactunit.contact_debt_lumen > 0
+        if contactunit.contact_debt_mass > 0
     }
 
 

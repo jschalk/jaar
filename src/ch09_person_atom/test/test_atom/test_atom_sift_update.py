@@ -67,13 +67,13 @@ def test_sift_atom_ReturnsObj_PersonAtom_UPDATE_personunit():
 
 def test_sift_atom_ReturnsObj_PersonAtom_UPDATE_person_contactunit():
     # ESTABLISH
-    zia_contact_debt_lumen = 51
+    zia_contact_debt_mass = 51
     sue_person = personunit_shop("Sue")
     sue_person.add_contactunit(exx.zia)
 
     zia_atom = personatom_shop(kw.person_contactunit, kw.INSERT)
     zia_atom.set_arg(kw.contact_name, exx.zia)
-    zia_atom.set_arg(kw.contact_debt_lumen, zia_contact_debt_lumen)
+    zia_atom.set_arg(kw.contact_debt_mass, zia_contact_debt_mass)
 
     # WHEN
     new_zia_personatom = sift_personatom(sue_person, zia_atom)
@@ -83,12 +83,12 @@ def test_sift_atom_ReturnsObj_PersonAtom_UPDATE_person_contactunit():
     assert new_zia_personatom.crud_str == kw.UPDATE
     assert new_zia_personatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_personatom.get_jvalues_dict()
-    assert zia_jvalues == {kw.contact_debt_lumen: 51}
+    assert zia_jvalues == {kw.contact_debt_mass: 51}
 
 
 def test_sift_atom_ReturnsObj_PersonAtom_UPDATE_person_contact_membership():
     # ESTABLISH
-    zia_run_group_debt_lumen = 76
+    zia_run_group_debt_mass = 76
     sue_person = personunit_shop("Sue")
     sue_person.add_contactunit(exx.zia)
     sue_person.get_contact(exx.zia).add_membership(exx.run)
@@ -96,7 +96,7 @@ def test_sift_atom_ReturnsObj_PersonAtom_UPDATE_person_contact_membership():
     zia_atom = personatom_shop(kw.person_contact_membership, kw.INSERT)
     zia_atom.set_arg(kw.contact_name, exx.zia)
     zia_atom.set_arg(kw.group_title, exx.run)
-    zia_atom.set_arg(kw.group_debt_lumen, zia_run_group_debt_lumen)
+    zia_atom.set_arg(kw.group_debt_mass, zia_run_group_debt_mass)
 
     # WHEN
     new_zia_personatom = sift_personatom(sue_person, zia_atom)
@@ -106,7 +106,7 @@ def test_sift_atom_ReturnsObj_PersonAtom_UPDATE_person_contact_membership():
     assert new_zia_personatom.crud_str == kw.UPDATE
     assert new_zia_personatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_personatom.get_jvalues_dict()
-    assert zia_jvalues == {kw.group_debt_lumen: zia_run_group_debt_lumen}
+    assert zia_jvalues == {kw.group_debt_mass: zia_run_group_debt_mass}
 
 
 def test_sift_atom_ReturnsObj_PersonAtom_UPDATE_person_planunit():

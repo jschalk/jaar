@@ -185,19 +185,19 @@ def _modify_person_contact_membership_update(x_person: PersonUnit, x_atom: Perso
     x_group_title = x_atom.get_value("group_title")
     x_contactunit = x_person.get_contact(x_contact_name)
     x_membership = x_contactunit.get_membership(x_group_title)
-    x_group_cred_lumen = x_atom.get_value("group_cred_lumen")
-    x_group_debt_lumen = x_atom.get_value("group_debt_lumen")
-    x_membership.set_group_cred_lumen(x_group_cred_lumen)
-    x_membership.set_group_debt_lumen(x_group_debt_lumen)
+    x_group_cred_mass = x_atom.get_value("group_cred_mass")
+    x_group_debt_mass = x_atom.get_value("group_debt_mass")
+    x_membership.set_group_cred_mass(x_group_cred_mass)
+    x_membership.set_group_debt_mass(x_group_debt_mass)
 
 
 def _modify_person_contact_membership_insert(x_person: PersonUnit, x_atom: PersonAtom):
     x_contact_name = x_atom.get_value("contact_name")
     x_group_title = x_atom.get_value("group_title")
-    x_group_cred_lumen = x_atom.get_value("group_cred_lumen")
-    x_group_debt_lumen = x_atom.get_value("group_debt_lumen")
+    x_group_cred_mass = x_atom.get_value("group_cred_mass")
+    x_group_debt_mass = x_atom.get_value("group_debt_mass")
     x_contactunit = x_person.get_contact(x_contact_name)
-    x_contactunit.add_membership(x_group_title, x_group_cred_lumen, x_group_debt_lumen)
+    x_contactunit.add_membership(x_group_title, x_group_cred_mass, x_group_debt_mass)
 
 
 def _modify_person_planunit_delete(x_person: PersonUnit, x_atom: PersonAtom):
@@ -384,8 +384,8 @@ def _modify_person_contactunit_delete(x_person: PersonUnit, x_atom: PersonAtom):
 def _modify_person_contactunit_update(x_person: PersonUnit, x_atom: PersonAtom):
     x_person.edit_contactunit(
         contact_name=x_atom.get_value("contact_name"),
-        contact_cred_lumen=x_atom.get_value("contact_cred_lumen"),
-        contact_debt_lumen=x_atom.get_value("contact_debt_lumen"),
+        contact_cred_mass=x_atom.get_value("contact_cred_mass"),
+        contact_debt_mass=x_atom.get_value("contact_debt_mass"),
     )
 
 
@@ -393,8 +393,8 @@ def _modify_person_contactunit_insert(x_person: PersonUnit, x_atom: PersonAtom):
     x_person.set_contactunit(
         contactunit_shop(
             contact_name=x_atom.get_value("contact_name"),
-            contact_cred_lumen=x_atom.get_value("contact_cred_lumen"),
-            contact_debt_lumen=x_atom.get_value("contact_debt_lumen"),
+            contact_cred_mass=x_atom.get_value("contact_cred_mass"),
+            contact_debt_mass=x_atom.get_value("contact_debt_mass"),
         )
     )
 
@@ -515,8 +515,8 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.fund_grain != y_obj.fund_grain
         )
     elif dimen in {"person_contact_membership"}:
-        return (x_obj.group_cred_lumen != y_obj.group_cred_lumen) or (
-            x_obj.group_debt_lumen != y_obj.group_debt_lumen
+        return (x_obj.group_cred_mass != y_obj.group_cred_mass) or (
+            x_obj.group_debt_mass != y_obj.group_debt_mass
         )
     elif dimen in {"person_plan_awardunit"}:
         return (x_obj.give_force != y_obj.give_force) or (
@@ -548,8 +548,8 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.reason_divisor != y_obj.reason_divisor
         )
     elif dimen == "person_contactunit":
-        return (x_obj.contact_cred_lumen != y_obj.contact_cred_lumen) or (
-            x_obj.contact_debt_lumen != y_obj.contact_debt_lumen
+        return (x_obj.contact_cred_mass != y_obj.contact_cred_mass) or (
+            x_obj.contact_debt_mass != y_obj.contact_debt_mass
         )
 
 
@@ -565,11 +565,11 @@ class AtomRow:
     begin: float = None
     respect_grain: float = None
     close: float = None
-    contact_cred_lumen: float = None
-    group_cred_lumen: float = None
+    contact_cred_mass: float = None
+    group_cred_mass: float = None
     credor_respect: int = None
-    contact_debt_lumen: float = None
-    group_debt_lumen: float = None
+    contact_debt_mass: float = None
+    group_debt_mass: float = None
     debtor_respect: int = None
     denom: int = None
     reason_divisor: int = None

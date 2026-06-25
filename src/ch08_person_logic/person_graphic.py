@@ -150,9 +150,9 @@ def get_person_contacts_plotly_fig(x_person: PersonUnit) -> plotly_Figure:
     column_header_list = [
         "contact_name",
         "_credor_respect",
-        "contact_cred_lumen",
+        "contact_cred_mass",
         "_debtor_respect",
-        "contact_debt_lumen",
+        "contact_debt_mass",
         "fund_give",
         "fund_take",
         "fund_agenda_give",
@@ -168,9 +168,9 @@ def get_person_contacts_plotly_fig(x_person: PersonUnit) -> plotly_Figure:
             values=[
                 df.contact_name,
                 df._credor_respect,
-                df.contact_cred_lumen,
+                df.contact_cred_mass,
                 df._debtor_respect,
-                df.contact_debt_lumen,
+                df.contact_debt_mass,
                 df.fund_give,
                 df.fund_take,
                 df.fund_agenda_give,

@@ -49,6 +49,6 @@ Ontology note:
 3. Calls `get_person_view_dict` to serialize the person.
 4. Returns the dict as JSON to a self-contained HTML template that renders the plan tree and contacts panel with JavaScript-driven checkbox toggles.
 
-The HTML template is extensive — it renders ~30 checkbox controls for toggling visibility of individual contact fields (`fund_give`, `fund_agenda_ratio_take`, `irrational_contact_debt_lumen`, membership details, etc.) and ~20 plan-level fields (`pledge`, `plan_active`, `plan_task`, `descendant_pledge_count`, reason/fact/award/workforce subtrees). A `static/style.css` file handles layout.
+The HTML template is extensive — it renders ~30 checkbox controls for toggling visibility of individual contact fields (`fund_give`, `fund_agenda_ratio_take`, `irrational_contact_debt_mass`, membership details, etc.) and ~20 plan-level fields (`pledge`, `plan_active`, `plan_task`, `descendant_pledge_count`, reason/fact/award/workforce subtrees). A `static/style.css` file handles layout.
 
 This chapter is a debugging and demonstration tool — it makes the complexity of a post-`thinkout()` `PersonUnit` inspectable by a human without reading raw JSON. The calendar-readable strings from ch14 are what make it genuinely useful: instead of seeing `fact_lower=525600`, a user sees "Monday 8:00 AM".

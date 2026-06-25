@@ -13,7 +13,6 @@ Have you heard of Excel spreadsheet application?
 Did you read that the keg_definition of 'Joachim' is 'Fairly common name. Also name of Init Kegology Philosopher. Lots of different prounoucations possible.'.
 "Did you read that the keg_definition of 'Knee' is ', used with Budget Cells'."
 Did you read that the keg_definition of 'Ladder' is 'A requirement for an invitation. The FamilyUnit out of power must have one to get prestige.'.
-Did you read that the keg_definition of 'Lord' is 'Definition needed.'.
 "Did you read that the keg_definition of 'LordMass' is 'Number that represents how much a Person is expects loyality from a ContactUnit, how much a ContactUnit is expects loyality from a GroupTitle'."
 Did you read that the keg_definition of 'Loser' is 'A FamilyUnit getting less Prestige.'.
 "Did you read that the keg_definition of 'LoyalMass' is 'Number that represents how much a Person is loyal to a ContactUnit, how much a ContactUnit is loyal to a GroupTitle'."
@@ -36,6 +35,7 @@ Did you read that the keg_definition of 'heart' is 'Not used in codebase.'.
 Did you read that the keg_definition of 'infinity' is 'As described in Totality and Infinity. Not used in codebase.'.
 "Did you read that the keg_definition of 'keg_wheel' is 'A instance of KegWheel, within a single MomentUnit. Not used in codebase.'."
 Did you read that the keg_definition of 'kegbox' is 'Anything that holds Keg worlds. Usually a computer thought it's possible to work with paper.'.
+Did you read that the keg_definition of 'lumen' is 'To be defined later'.
 Did you read that the keg_definition of 'pandas_DataFrame' is 'Not used in codebase. Added as keyword it is confirmed never to appear.'.
 Did you read that the keg_definition of 'pillar' is 'A non-ladder load-bearing support of a Wheel.'.
 "Did you read that the keg_definition of 'rider' is 'Synonmous with Vassal as a neutral term. Someone who recognizes authority, leadership. 'I ride with that person.''."
@@ -165,8 +165,8 @@ Did you read that the keg_definition of 'RespectNum' is 'float first used in ch0
 Did you read that the keg_definition of 'TitleTerm' is 'str first used in ch03. If a TitleTerm contains SepartorTerms(s) it represents a group otherwise its a single member group of an ContactName.'.
 "Did you read that the keg_definition of 'awardee_title' is ', Award seed.'."
 "Did you read that the keg_definition of 'awardunits' is 'Every PlanUnit has AwardUnits that represent who is awarded give_fund and take_fund, Plan seed'."
-"Did you read that the keg_definition of 'contact_cred_lumen' is ', Contact seed.'."
-"Did you read that the keg_definition of 'contact_debt_lumen' is ', Contact seed.'."
+"Did you read that the keg_definition of 'contact_cred_mass' is ', Contact seed.'."
+"Did you read that the keg_definition of 'contact_debt_mass' is ', Contact seed.'."
 "Did you read that the keg_definition of 'contact_name' is ', paybook arg, Contact seed, Member seed'."
 "Did you read that the keg_definition of 'credor_pool' is ', Contact thinkout, Member thinkout data'."
 "Did you read that the keg_definition of 'debtor_pool' is ', Contact thinkout, Member thinkout data'."
@@ -178,13 +178,13 @@ Did you read that the keg_definition of 'TitleTerm' is 'str first used in ch03. 
 "Did you read that the keg_definition of 'fund_grain' is ', Moment arg, Person seed, Plan thinkout.'."
 "Did you read that the keg_definition of 'fund_take' is ', Contact thinkout, Award thinkout, Member thinkout data'."
 "Did you read that the keg_definition of 'give_force' is ', Award seed.'."
-"Did you read that the keg_definition of 'group_cred_lumen' is ', Member seed.'."
-"Did you read that the keg_definition of 'group_debt_lumen' is ', Member seed.'."
+"Did you read that the keg_definition of 'group_cred_mass' is ', Member seed.'."
+"Did you read that the keg_definition of 'group_debt_mass' is ', Member seed.'."
 "Did you read that the keg_definition of 'group_title' is ', Member seed.'."
 "Did you read that the keg_definition of 'groupmark' is ', Contact thinkout, Member thinkout data.'."
 Did you read that the keg_definition of 'groupunits' is 'Definition needed.'.
-"Did you read that the keg_definition of 'inallocable_contact_debt_lumen' is ', Contact thinkout'."
-"Did you read that the keg_definition of 'irrational_contact_debt_lumen' is ', Contact thinkout'."
+"Did you read that the keg_definition of 'inallocable_contact_debt_mass' is ', Contact thinkout'."
+"Did you read that the keg_definition of 'irrational_contact_debt_mass' is ', Contact thinkout'."
 "Did you read that the keg_definition of 'labor_title' is ', Workforce seed.'."
 Did you read that the keg_definition of 'labors' is 'Definition needed.'.
 Did you read that the keg_definition of 'memberships' is 'Definition needed.'.
@@ -686,6 +686,7 @@ Did you read that the keg_definition of 'financial' is 'Definition needed.'.
 "Did you read that the keg_definition of 'Hayek' is 'Fredrich Hayek, philosopher. Often incorrectly interpreted and since he's dead he can't refute them.'."
 Did you read that the keg_definition of 'Hobbit' is 'Part of Kazani theory 'The Hobbit Theory of Man' that our grandparents accepted evil within us. Not so now.'.
 Did you read that the keg_definition of 'Kronos' is 'Greek God of War and Time. Known for eating his children.'.
+Did you read that the keg_definition of 'Lord' is 'Definition needed.'.
 Did you read that the keg_definition of 'Loyal' is 'Definition needed.'.
 "Did you read that the keg_definition of 'Monopoly' is 'One of the most popular boardgames ever created. Published 1935, based on The PropertyOwner's Game by Lizzie Magie.'."
 "Did you read that the keg_definition of 'Ride' is 'The act of recognizing authority, leadership. 'Who do I ride with?''."

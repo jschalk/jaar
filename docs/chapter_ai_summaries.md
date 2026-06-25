@@ -86,11 +86,11 @@ The core function `allot_scale(ledger, scale_number, grain_unit)` takes a weight
 This is where `keg`'s philosophical content starts. The author's ref note calls these *"keg's first core philosophical definitions."* The chapter defines the social actors of the system and how they relate to one another through credit and debt.
 
 **`ContactUnit`** is the fundamental social actor — a named individual. Each contact carries:
-- `contact_cred_lumen` and `contact_debt_lumen`: how much credit and debt the surrounding system assigns to this contact.
+- `contact_cred_mass` and `contact_debt_mass`: how much credit and debt the surrounding system assigns to this contact.
 - `memberships`: a dictionary of `MemberShip` objects, each linking the contact to a `GroupTitle`.
 - Calculated fields like `fund_give`, `fund_take`, `fund_agenda_give`, `fund_agenda_take`, and their ratios — populated later by the "thinkout" process in higher chapters.
 
-**`MemberShip`** links a contact to a group with its own `group_cred_lumen` and `group_debt_lumen` weights. When a contact's `credor_pool` or `debtor_pool` is set, `allot_scale` (from `ch02`) distributes that pool proportionally across all of the contact's memberships.
+**`MemberShip`** links a contact to a group with its own `group_cred_mass` and `group_debt_mass` weights. When a contact's `credor_pool` or `debtor_pool` is set, `allot_scale` (from `ch02`) distributes that pool proportionally across all of the contact's memberships.
 
 **`GroupUnit`** is derived from memberships rather than declared directly. It aggregates the memberships of multiple contactunits and, using `allot_scale`, distributes its `fund_give` and `fund_take` values back down to individual members. This give/take accounting is the core mechanism by which the system tracks flows of obligation and resource.
 
@@ -503,8 +503,8 @@ This is the philosophical center of keg, implemented as code. The `listen_to_spe
 **`listen_to_speaker_agenda(listener, speaker)`** — the core function:
 1. Checks the listener has the speaker as a contact (a prerequisite — you can only listen to someone you've acknowledged).
 2. Gets the perspective person.
-3. If the speaker's belief system is irrational (didn't converge), marks the full speaker `contact_debt_lumen` as `irrational_contact_debt_lumen` — the listener notes the speaker couldn't provide a coherent agenda.
-4. If the speaker has no agenda items, marks the debt as `inallocable_contact_debt_lumen`.
+3. If the speaker's belief system is irrational (didn't converge), marks the full speaker `contact_debt_mass` as `irrational_contact_debt_mass` — the listener notes the speaker couldn't provide a coherent agenda.
+4. If the speaker has no agenda items, marks the debt as `inallocable_contact_debt_mass`.
 5. Otherwise, generates the agenda, scales each plan's `poynt` by `allot_scale` against the listener's `debtor_respect`, and ingests each plan into the listener's tree via `_ingest_single_planunit`.
 
 **`listen_to_speaker_fact(listener, speaker)`** — fills in missing facts in the listener's plan tree by borrowing matching facts from the speaker. This allows the listener to become aware of real-world state they couldn't observe themselves.
@@ -564,7 +564,7 @@ New semantic types introduced in `ch12_semantic_types.py`:
 
 **`PersonBudHistory`** is a person's full history of `BudUnit`s keyed by `bud_time`. It tracks summary statistics: total quota committed, net contact balances, and time range.
 
-**`cell_main.py`** and **`weighted_facts_tool.py`** (not read in full) implement the cell-based distribution logic — the mechanism by which a `BudUnit`'s quota is recursively divided among listening participants up to `celldepth` levels deep, weighted by the contact cred/debt lumen values established in ch03.
+**`cell_main.py`** and **`weighted_facts_tool.py`** (not read in full) implement the cell-based distribution logic — the mechanism by which a `BudUnit`'s quota is recursively divided among listening participants up to `celldepth` levels deep, weighted by the contact cred_mass/debt_mass values established in ch03.
 
 Ch12 is the first chapter to introduce `TimeNum` as a first-class type, setting up the time numbers for later.
 # ch13_keep — Chapter Summary
@@ -592,7 +592,7 @@ Ontology note:
 
 - **ch00_py**: `get_0_if_None`, `get_empty_dict_if_None` for safe initialization.
 - **ch02_allot**: `allot_scale`, `default_grain_num_if_None`, `validate_pool_num` — the core mechanism by which `mana` (care credit) is distributed across contacts in each river cycle.
-- **ch08_person_logic**: `PersonUnit` — `get_patientledger` and `get_doctorledger` extract credit/debt lumen dictionaries directly from a person's contacts.
+- **ch08_person_logic**: `PersonUnit` — `get_patientledger` and `get_doctorledger` extract credit_mass/debt_mass dictionaries directly from a person's contacts.
 - **ch12_bud**: `TimeNum`, `SparkInt` — imported via ch13's semantic types, tying the river simulation to the time/transaction layer.
 
 New semantic type introduced in `ch13_semantic_types.py`:
@@ -606,9 +606,9 @@ New semantic type introduced in `ch13_semantic_types.py`:
 
 The metaphor is a river: mana flows from healers to patients and circulates through the community across multiple cycles, accumulating to form a picture of who has given and received care.
 
-**`get_patientledger(person)`** — extracts a ledger of `contact_name → contact_cred_lumen` for all contacts with positive credit lumen. These are the people the person cares about (their "patients").
+**`get_patientledger(person)`** — extracts a ledger of `contact_name → contact_cred_mass` for all contacts with positive credit_mass. These are the people the person cares about (their "patients").
 
-**`get_doctorledger(person)`** — extracts `contact_name → contact_debt_lumen` for contacts with positive debt lumen. These are the people who owe care to this person (their "doctors").
+**`get_doctorledger(person)`** — extracts `contact_name → contact_debt_mass` for contacts with positive debt_mass. These are the people who owe care to this person (their "doctors").
 
 **`RiverBook`** — a single person's mana distribution record within one cycle. Given a patient ledger and a total `book_point_amount`, it uses `allot_scale` to distribute the mana proportionally across patients.
 
@@ -1646,7 +1646,7 @@ Ontology note:
 3. Calls `get_person_view_dict` to serialize the person.
 4. Returns the dict as JSON to a self-contained HTML template that renders the plan tree and contacts panel with JavaScript-driven checkbox toggles.
 
-The HTML template is extensive — it renders ~30 checkbox controls for toggling visibility of individual contact fields (`fund_give`, `fund_agenda_ratio_take`, `irrational_contact_debt_lumen`, membership details, etc.) and ~20 plan-level fields (`pledge`, `plan_active`, `plan_task`, `descendant_pledge_count`, reason/fact/award/workforce subtrees). A `static/style.css` file handles layout.
+The HTML template is extensive — it renders ~30 checkbox controls for toggling visibility of individual contact fields (`fund_give`, `fund_agenda_ratio_take`, `irrational_contact_debt_mass`, membership details, etc.) and ~20 plan-level fields (`pledge`, `plan_active`, `plan_task`, `descendant_pledge_count`, reason/fact/award/workforce subtrees). A `static/style.css` file handles layout.
 
 This chapter is a debugging and demonstration tool — it makes the complexity of a post-`thinkout()` `PersonUnit` inspectable by a human without reading raw JSON. The calendar-readable strings from ch14 are what make it genuinely useful: instead of seeing `fact_lower=525600`, a user sees "Monday 8:00 AM".
 

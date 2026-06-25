@@ -504,12 +504,12 @@ def test_PersonUnit_thinkout_WhenPlanUnitHas_poyntButAll_kidsHaveZero_poyntAddTo
 def test_PersonUnit_thinkout_CreatesNewGroupUnits_Scenario0():
     # ESTABLISH
     yao_person = personunit_shop(exx.yao)
-    yao_contact_cred_lumen = 3
-    yao_contact_debt_lumen = 2
-    zia_contact_cred_lumen = 4
-    zia_contact_debt_lumen = 5
-    yao_person.add_contactunit(exx.yao, yao_contact_cred_lumen, yao_contact_debt_lumen)
-    yao_person.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
+    yao_contact_cred_mass = 3
+    yao_contact_debt_mass = 2
+    zia_contact_cred_mass = 4
+    zia_contact_debt_mass = 5
+    yao_person.add_contactunit(exx.yao, yao_contact_cred_mass, yao_contact_debt_mass)
+    yao_person.add_contactunit(exx.zia, zia_contact_cred_mass, zia_contact_debt_mass)
     root_rope = yao_person.planroot.get_plan_rope()
     x_planroot = yao_person.get_plan_obj(root_rope)
     x_planroot.set_awardunit(awardunit_shop(exx.yao))
@@ -540,10 +540,10 @@ def test_PersonUnit_thinkout_CreatesNewGroupUnits_Scenario0():
     assert not xio_groupunit.group_membership_exists(exx.xio)
     yao_membership = xio_groupunit.get_contact_membership(exx.yao)
     zia_membership = xio_groupunit.get_contact_membership(exx.zia)
-    assert yao_membership.group_cred_lumen == yao_contact_cred_lumen
-    assert zia_membership.group_cred_lumen == zia_contact_cred_lumen
-    assert yao_membership.group_debt_lumen == yao_contact_debt_lumen
-    assert zia_membership.group_debt_lumen == zia_contact_debt_lumen
+    assert yao_membership.group_cred_mass == yao_contact_cred_mass
+    assert zia_membership.group_cred_mass == zia_contact_cred_mass
+    assert yao_membership.group_debt_mass == yao_contact_debt_mass
+    assert zia_membership.group_debt_mass == zia_contact_debt_mass
 
 
 def test_PersonUnit_thinkout_CreatesNewGroupUnits_Scenario1():

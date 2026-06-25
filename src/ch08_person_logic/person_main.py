@@ -315,12 +315,12 @@ class PersonUnit:
     def add_contactunit(
         self,
         contact_name: ContactName,
-        contact_cred_lumen: float = None,
-        contact_debt_lumen: float = None,
+        contact_cred_mass: float = None,
+        contact_debt_mass: float = None,
     ):
         x_knot = self.knot
         contactunit = contactunit_shop(
-            contact_name, contact_cred_lumen, contact_debt_lumen, x_knot
+            contact_name, contact_cred_mass, contact_debt_mass, x_knot
         )
         self.set_contactunit(contactunit)
 
@@ -341,16 +341,16 @@ class PersonUnit:
     def edit_contactunit(
         self,
         contact_name: ContactName,
-        contact_cred_lumen: float = None,
-        contact_debt_lumen: float = None,
+        contact_cred_mass: float = None,
+        contact_debt_mass: float = None,
     ):
         if self.contacts.get(contact_name) is None:
             raise ContactMissingError(f"ContactUnit '{contact_name}' does not exist.")
         x_contactunit = self.get_contact(contact_name)
-        if contact_cred_lumen is not None:
-            x_contactunit.set_contact_cred_lumen(contact_cred_lumen)
-        if contact_debt_lumen is not None:
-            x_contactunit.set_contact_debt_lumen(contact_debt_lumen)
+        if contact_cred_mass is not None:
+            x_contactunit.set_contact_cred_mass(contact_cred_mass)
+        if contact_debt_mass is not None:
+            x_contactunit.set_contact_debt_mass(contact_debt_mass)
         self.set_contactunit(x_contactunit)
 
     def clear_contactunits_memberships(self):
@@ -387,8 +387,8 @@ class PersonUnit:
         for x_contactunit in self.contacts.values():
             x_membership = membership_shop(
                 group_title=x_group_title,
-                group_cred_lumen=x_contactunit.contact_cred_lumen,
-                group_debt_lumen=x_contactunit.contact_debt_lumen,
+                group_cred_mass=x_contactunit.contact_cred_mass,
+                group_debt_mass=x_contactunit.contact_debt_mass,
                 contact_name=x_contactunit.contact_name,
             )
             x_groupunit.set_g_membership(x_membership)
@@ -877,22 +877,22 @@ reason_case:    {reason_case}"""
         credit_ledger = {}
         debt_ledger = {}
         for x_contactunit in self.contacts.values():
-            credit_ledger[x_contactunit.contact_name] = x_contactunit.contact_cred_lumen
-            debt_ledger[x_contactunit.contact_name] = x_contactunit.contact_debt_lumen
+            credit_ledger[x_contactunit.contact_name] = x_contactunit.contact_cred_mass
+            debt_ledger[x_contactunit.contact_name] = x_contactunit.contact_debt_mass
         return credit_ledger, debt_ledger
 
     def _allot_offtrack_fund(self):
         self._add_to_contactunits_fund_give_take(self.offtrack_fund)
 
-    def get_contactunits_contact_cred_lumen_sum(self) -> float:
+    def get_contactunits_contact_cred_mass_sum(self) -> float:
         return sum(
-            contactunit.get_contact_cred_lumen()
+            contactunit.get_contact_cred_mass()
             for contactunit in self.contacts.values()
         )
 
-    def get_contactunits_contact_debt_lumen_sum(self) -> float:
+    def get_contactunits_contact_debt_mass_sum(self) -> float:
         return sum(
-            contactunit.get_contact_debt_lumen()
+            contactunit.get_contact_debt_mass()
             for contactunit in self.contacts.values()
         )
 
@@ -981,18 +981,18 @@ reason_case:    {reason_case}"""
         fund_agenda_ratio_take_sum = sum(
             x_contactunit.fund_agenda_take for x_contactunit in self.contacts.values()
         )
-        x_contactunits_contact_cred_lumen_sum = (
-            self.get_contactunits_contact_cred_lumen_sum()
+        x_contactunits_contact_cred_mass_sum = (
+            self.get_contactunits_contact_cred_mass_sum()
         )
-        x_contactunits_contact_debt_lumen_sum = (
-            self.get_contactunits_contact_debt_lumen_sum()
+        x_contactunits_contact_debt_mass_sum = (
+            self.get_contactunits_contact_debt_mass_sum()
         )
         for x_contactunit in self.contacts.values():
             x_contactunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
                 fund_agenda_ratio_take_sum=fund_agenda_ratio_take_sum,
-                contactunits_contact_cred_lumen_sum=x_contactunits_contact_cred_lumen_sum,
-                contactunits_contact_debt_lumen_sum=x_contactunits_contact_debt_lumen_sum,
+                contactunits_contact_cred_mass_sum=x_contactunits_contact_cred_mass_sum,
+                contactunits_contact_debt_mass_sum=x_contactunits_contact_debt_mass_sum,
             )
 
     def _reset_contactunit_fund_give_take(self):

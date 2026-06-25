@@ -211,11 +211,11 @@ def test_get_person_calc_dimen_args_ReturnsObj():
         kw.fund_agenda_ratio_take,
         kw.fund_give,
         kw.fund_take,
-        kw.contact_cred_lumen,
-        kw.contact_debt_lumen,
+        kw.contact_cred_mass,
+        kw.contact_debt_mass,
         kw.contact_name,
-        kw.inallocable_contact_debt_lumen,
-        kw.irrational_contact_debt_lumen,
+        kw.inallocable_contact_debt_mass,
+        kw.irrational_contact_debt_mass,
         kw.groupmark,
     }
     assert person_planunit_args == {
@@ -362,13 +362,13 @@ def test_get_person_config_dict_ReturnsObj_ArgDataTypesCorrect():
     assert g_sqlitetype(cfig, prnmemb, jv, kw.fund_take) == "REAL"
     assert g_popthinkout(cfig, prnmemb, jv, kw.fund_take) == True
 
-    assert g_obj_type(cfig, prnmemb, jv, kw.group_cred_lumen) == "float"
-    assert g_sqlitetype(cfig, prnmemb, jv, kw.group_cred_lumen) == "REAL"
-    assert g_popthinkout(cfig, prnmemb, jv, kw.group_cred_lumen) == False
+    assert g_obj_type(cfig, prnmemb, jv, kw.group_cred_mass) == "float"
+    assert g_sqlitetype(cfig, prnmemb, jv, kw.group_cred_mass) == "REAL"
+    assert g_popthinkout(cfig, prnmemb, jv, kw.group_cred_mass) == False
 
-    assert g_obj_type(cfig, prnmemb, jv, kw.group_debt_lumen) == "float"
-    assert g_sqlitetype(cfig, prnmemb, jv, kw.group_debt_lumen) == "REAL"
-    assert g_popthinkout(cfig, prnmemb, jv, kw.group_debt_lumen) == False
+    assert g_obj_type(cfig, prnmemb, jv, kw.group_debt_mass) == "float"
+    assert g_sqlitetype(cfig, prnmemb, jv, kw.group_debt_mass) == "REAL"
+    assert g_popthinkout(cfig, prnmemb, jv, kw.group_debt_mass) == False
 
     assert g_obj_type(cfig, prncont, jk, kw.contact_name) == kw.NameTerm
     assert g_sqlitetype(cfig, prncont, jk, kw.contact_name) == "TEXT"
@@ -406,21 +406,21 @@ def test_get_person_config_dict_ReturnsObj_ArgDataTypesCorrect():
     assert g_sqlitetype(cfig, prncont, jv, kw.fund_take) == "REAL"
     assert g_popthinkout(cfig, prncont, jv, kw.fund_take) == True
 
-    assert g_obj_type(cfig, prncont, jv, kw.inallocable_contact_debt_lumen) == "float"
-    assert g_sqlitetype(cfig, prncont, jv, kw.inallocable_contact_debt_lumen) == "REAL"
-    assert g_popthinkout(cfig, prncont, jv, kw.inallocable_contact_debt_lumen) == True
+    assert g_obj_type(cfig, prncont, jv, kw.inallocable_contact_debt_mass) == "float"
+    assert g_sqlitetype(cfig, prncont, jv, kw.inallocable_contact_debt_mass) == "REAL"
+    assert g_popthinkout(cfig, prncont, jv, kw.inallocable_contact_debt_mass) == True
 
-    assert g_obj_type(cfig, prncont, jv, kw.irrational_contact_debt_lumen) == "float"
-    assert g_sqlitetype(cfig, prncont, jv, kw.irrational_contact_debt_lumen) == "REAL"
-    assert g_popthinkout(cfig, prncont, jv, kw.irrational_contact_debt_lumen) == True
+    assert g_obj_type(cfig, prncont, jv, kw.irrational_contact_debt_mass) == "float"
+    assert g_sqlitetype(cfig, prncont, jv, kw.irrational_contact_debt_mass) == "REAL"
+    assert g_popthinkout(cfig, prncont, jv, kw.irrational_contact_debt_mass) == True
 
-    assert g_obj_type(cfig, prncont, jv, kw.contact_cred_lumen) == "float"
-    assert g_sqlitetype(cfig, prncont, jv, kw.contact_cred_lumen) == "REAL"
-    assert g_popthinkout(cfig, prncont, jv, kw.contact_cred_lumen) == False
+    assert g_obj_type(cfig, prncont, jv, kw.contact_cred_mass) == "float"
+    assert g_sqlitetype(cfig, prncont, jv, kw.contact_cred_mass) == "REAL"
+    assert g_popthinkout(cfig, prncont, jv, kw.contact_cred_mass) == False
 
-    assert g_obj_type(cfig, prncont, jv, kw.contact_debt_lumen) == "float"
-    assert g_sqlitetype(cfig, prncont, jv, kw.contact_debt_lumen) == "REAL"
-    assert g_popthinkout(cfig, prncont, jv, kw.contact_debt_lumen) == False
+    assert g_obj_type(cfig, prncont, jv, kw.contact_debt_mass) == "float"
+    assert g_sqlitetype(cfig, prncont, jv, kw.contact_debt_mass) == "REAL"
+    assert g_popthinkout(cfig, prncont, jv, kw.contact_debt_mass) == False
 
     assert g_obj_type(cfig, prngrou, jk, kw.group_title) == "TitleTerm"
     assert g_sqlitetype(cfig, prngrou, jk, kw.group_title) == "TEXT"
@@ -814,12 +814,12 @@ def test_get_person_calc_args_type_dict_ReturnsObj():
     assert person_calc_args_type_dict.get(kw.fund_agenda_take) == "float"
     assert person_calc_args_type_dict.get(kw.fund_give) == "float"
     assert person_calc_args_type_dict.get(kw.fund_take) == "float"
-    assert person_calc_args_type_dict.get(kw.group_cred_lumen) == "int"
-    assert person_calc_args_type_dict.get(kw.group_debt_lumen) == "int"
-    assert person_calc_args_type_dict.get(kw.inallocable_contact_debt_lumen) == "float"
-    assert person_calc_args_type_dict.get(kw.irrational_contact_debt_lumen) == "float"
-    assert person_calc_args_type_dict.get(kw.contact_cred_lumen) == "float"
-    assert person_calc_args_type_dict.get(kw.contact_debt_lumen) == "float"
+    assert person_calc_args_type_dict.get(kw.group_cred_mass) == "int"
+    assert person_calc_args_type_dict.get(kw.group_debt_mass) == "int"
+    assert person_calc_args_type_dict.get(kw.inallocable_contact_debt_mass) == "float"
+    assert person_calc_args_type_dict.get(kw.irrational_contact_debt_mass) == "float"
+    assert person_calc_args_type_dict.get(kw.contact_cred_mass) == "float"
+    assert person_calc_args_type_dict.get(kw.contact_debt_mass) == "float"
     assert person_calc_args_type_dict.get(kw.addin) == "float"
     assert person_calc_args_type_dict.get(kw.begin) == "float"
     assert person_calc_args_type_dict.get(kw.close) == "float"

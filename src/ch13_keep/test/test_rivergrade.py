@@ -7,15 +7,15 @@ def test_RiverGrade_Exists():
     x_rivergrade = RiverGrade()
 
     # THEN
-    #: Healer gut get_contact._contact_debt_lumen (SELECT need_due_amount FROM contact WHERE contact_name = exx.bob)
+    #: Healer gut get_contact._contact_debt_mass (SELECT need_due_amount FROM contact WHERE contact_name = exx.bob)
     assert not x_rivergrade.moment_rope
     assert not x_rivergrade.person_name
     assert not x_rivergrade.keep_rope
     assert not x_rivergrade.contact_name
     assert not x_rivergrade.number
-    #: Healer gut get_contact._contact_debt_lumen (SELECT need_due_amount FROM contact WHERE contact_name = exx.bob)
+    #: Healer gut get_contact._contact_debt_mass (SELECT need_due_amount FROM contact WHERE contact_name = exx.bob)
     assert x_rivergrade.need_bill_amount is None
-    #: Healer gut get_contact._contact_cred_lumen (SELECT care_amount FROM contact WHERE contact_name = exx.bob)
+    #: Healer gut get_contact._contact_cred_mass (SELECT care_amount FROM contact WHERE contact_name = exx.bob)
     assert x_rivergrade.care_amount is None
     #: SELECT COUNT(*) FROM contact WHERE need_due_amount > (SELECT need_due_amount FROM contact WHERE contact_name = exx.bob)
     assert x_rivergrade.doctor_rank_num is None

@@ -99,10 +99,10 @@ def save_arbitrary_personspark(
     x_personunit = personunit_shop(person_name, moment_lasso.moment_rope)
     for contact_list in contacts:
         try:
-            contact_cred_lumen = contact_list[1]
+            contact_cred_mass = contact_list[1]
         except Exception:
-            contact_cred_lumen = None
-        x_personunit.add_contactunit(contact_list[0], contact_cred_lumen)
+            contact_cred_mass = None
+        x_personunit.add_contactunit(contact_list[0], contact_cred_mass)
     for fact_tup in facts:
         x_reason_context = fact_tup[0]
         x_fact_state = fact_tup[1]

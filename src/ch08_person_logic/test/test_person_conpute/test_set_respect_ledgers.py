@@ -161,8 +161,8 @@ def test_PersonUnit_set_contactunit_groupunit_respect_ledgers_ResetContactUnitsA
     zia_contactunit.set_fund_agenda_ratio_give_take(
         fund_agenda_ratio_give_sum=zia_1,
         fund_agenda_ratio_take_sum=zia_2,
-        contactunits_contact_cred_lumen_sum=zia_3,
-        contactunits_contact_debt_lumen_sum=zia_4,
+        contactunits_contact_cred_mass_sum=zia_3,
+        contactunits_contact_debt_mass_sum=zia_4,
     )
     yao_1 = 0.2
     yao_2 = 0.5
@@ -171,8 +171,8 @@ def test_PersonUnit_set_contactunit_groupunit_respect_ledgers_ResetContactUnitsA
     yao_contactunit.set_fund_agenda_ratio_give_take(
         fund_agenda_ratio_give_sum=yao_1,
         fund_agenda_ratio_take_sum=yao_2,
-        contactunits_contact_cred_lumen_sum=yao_3,
-        contactunits_contact_debt_lumen_sum=yao_4,
+        contactunits_contact_cred_mass_sum=yao_3,
+        contactunits_contact_debt_mass_sum=yao_4,
     )
     assert zia_contactunit.fund_agenda_ratio_give == 0.125
     assert zia_contactunit.fund_agenda_ratio_take == 0.44

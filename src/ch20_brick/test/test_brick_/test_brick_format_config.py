@@ -73,8 +73,8 @@ def test_get_headers_list_ReturnsObj():
         kw.moment_rope,
         kw.person_name,
         kw.contact_name,
-        kw.contact_cred_lumen,
-        kw.contact_debt_lumen,
+        kw.contact_cred_mass,
+        kw.contact_debt_mass,
         kw.knot,
     ]
 
@@ -102,7 +102,7 @@ def test_get_sorted_headers_str_ReturnsObj_Scenario0_SingleExample():
     bk00121_headers = get_sorted_headers_str(filebasename)
 
     # THEN
-    expected_bk00121_headers_str = f"{kw.moment_rope},{kw.person_name},{kw.contact_name},{kw.contact_cred_lumen},{kw.contact_debt_lumen},{kw.knot}"
+    expected_bk00121_headers_str = f"{kw.moment_rope},{kw.person_name},{kw.contact_name},{kw.contact_cred_mass},{kw.contact_debt_mass},{kw.knot}"
     assert bk00121_headers == expected_bk00121_headers_str
 
 
@@ -175,8 +175,8 @@ def test_get_brickref_obj_HasAttrs_bk00121_person_contactunit_v0_0_0():
     assert len(format_00121_brickref.attributes) == 8
     assert format_00121_brickref.attributes == {
         kw.contact_name: {kw.otx_key: True},
-        kw.contact_cred_lumen: {kw.otx_key: False},
-        kw.contact_debt_lumen: {kw.otx_key: False},
+        kw.contact_cred_mass: {kw.otx_key: False},
+        kw.contact_debt_mass: {kw.otx_key: False},
         kw.spark_num: {kw.otx_key: True},
         kw.spark_face: {kw.otx_key: True},
         kw.moment_rope: {kw.otx_key: True},
@@ -189,8 +189,8 @@ def test_get_brickref_obj_HasAttrs_bk00121_person_contactunit_v0_0_0():
     assert headers_list[2] == kw.moment_rope
     assert headers_list[3] == kw.person_name
     assert headers_list[4] == kw.contact_name
-    assert headers_list[5] == kw.contact_cred_lumen
-    assert headers_list[6] == kw.contact_debt_lumen
+    assert headers_list[5] == kw.contact_cred_mass
+    assert headers_list[6] == kw.contact_debt_mass
 
 
 def test_get_brickref_obj_HasAttrs_bk00120_person_contact_membership_v0_0_0():
@@ -210,8 +210,8 @@ def test_get_brickref_obj_HasAttrs_bk00120_person_contact_membership_v0_0_0():
     assert headers_list[3] == kw.person_name
     assert headers_list[4] == kw.contact_name
     assert headers_list[5] == kw.group_title
-    assert headers_list[6] == kw.group_cred_lumen
-    assert headers_list[7] == kw.group_debt_lumen
+    assert headers_list[6] == kw.group_cred_mass
+    assert headers_list[7] == kw.group_debt_mass
     assert headers_list[8] == kw.knot
 
 

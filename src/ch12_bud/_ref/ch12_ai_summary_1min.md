@@ -47,6 +47,6 @@ New semantic types introduced in `ch12_semantic_types.py`:
 
 **`PersonBudHistory`** is a person's full history of `BudUnit`s keyed by `bud_time`. It tracks summary statistics: total quota committed, net contact balances, and time range.
 
-**`cell_main.py`** and **`weighted_facts_tool.py`** (not read in full) implement the cell-based distribution logic — the mechanism by which a `BudUnit`'s quota is recursively divided among listening participants up to `celldepth` levels deep, weighted by the contact cred/debt lumen values established in ch03.
+**`cell_main.py`** and **`weighted_facts_tool.py`** (not read in full) implement the cell-based distribution logic — the mechanism by which a `BudUnit`'s quota is recursively divided among listening participants up to `celldepth` levels deep, weighted by the contact cred_mass/debt_mass values established in ch03.
 
 Ch12 is the first chapter to introduce `TimeNum` as a first-class type, setting up the time numbers for later.

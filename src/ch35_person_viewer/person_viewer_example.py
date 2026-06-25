@@ -47,12 +47,12 @@ def play_run_str() -> str:
 
 def get_sue_personunit() -> PersonUnit:
     sue_person = personunit_shop(sue2_str(), ";accord23;")
-    sue_cred_lumen = 11
-    sue_debt_lumen = 13
-    bob_cred_lumen = 23
-    bob_debt_lumen = 29
-    sue_person.add_contactunit(sue2_str(), sue_cred_lumen, sue_debt_lumen)
-    sue_person.add_contactunit(bob2_str(), bob_cred_lumen, bob_debt_lumen)
+    sue_cred_mass = 11
+    sue_debt_mass = 13
+    bob_cred_mass = 23
+    bob_debt_mass = 29
+    sue_person.add_contactunit(sue2_str(), sue_cred_mass, sue_debt_mass)
+    sue_person.add_contactunit(bob2_str(), bob_cred_mass, bob_debt_mass)
     sue_contact = sue_person.get_contact(sue2_str())
     bowlers_str = ";bowlers"
     squad_str = ";Squad Administrator"

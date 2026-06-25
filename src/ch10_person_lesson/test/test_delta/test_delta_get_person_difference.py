@@ -63,10 +63,10 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_contactuni
     # ESTABLISH
     before_sue_person = personunit_shop(exx.sue)
     after_sue_person = copy_deepcopy(before_sue_person)
-    xio_contact_cred_lumen = 33
-    xio_contact_debt_lumen = 44
+    xio_contact_cred_mass = 33
+    xio_contact_debt_mass = 44
     xio_contactunit = contactunit_shop(
-        exx.xio, xio_contact_cred_lumen, xio_contact_debt_lumen
+        exx.xio, xio_contact_cred_mass, xio_contact_debt_mass
     )
     after_sue_person.set_contactunit(xio_contactunit, auto_set_membership=False)
 
@@ -82,8 +82,8 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_contactuni
     sue_contactunit_dict = sue_insert_dict.get(kw.person_contactunit)
     xio_personatom = sue_contactunit_dict.get(exx.xio)
     assert xio_personatom.get_value(kw.contact_name) == exx.xio
-    assert xio_personatom.get_value("contact_cred_lumen") == xio_contact_cred_lumen
-    assert xio_personatom.get_value("contact_debt_lumen") == xio_contact_debt_lumen
+    assert xio_personatom.get_value("contact_cred_mass") == xio_contact_cred_mass
+    assert xio_personatom.get_value("contact_debt_mass") == xio_contact_debt_mass
 
     print(f"{get_personatom_total_count(sue_persondelta)=}")
     assert get_personatom_total_count(sue_persondelta) == 1
@@ -120,10 +120,10 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_contactuni
     before_sue_person = personunit_shop(exx.sue)
     after_sue_person = copy_deepcopy(before_sue_person)
     before_sue_person.add_contactunit(exx.xio)
-    xio_contact_cred_lumen = 33
-    xio_contact_debt_lumen = 44
+    xio_contact_cred_mass = 33
+    xio_contact_debt_mass = 44
     after_sue_person.add_contactunit(
-        exx.xio, xio_contact_cred_lumen, xio_contact_debt_lumen
+        exx.xio, xio_contact_cred_mass, xio_contact_debt_mass
     )
 
     # WHEN
@@ -134,8 +134,8 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_contactuni
     x_keylist = [kw.UPDATE, kw.person_contactunit, exx.xio]
     xio_personatom = get_from_nested_dict(sue_persondelta.personatoms, x_keylist)
     assert xio_personatom.get_value(kw.contact_name) == exx.xio
-    assert xio_personatom.get_value("contact_cred_lumen") == xio_contact_cred_lumen
-    assert xio_personatom.get_value("contact_debt_lumen") == xio_contact_debt_lumen
+    assert xio_personatom.get_value("contact_cred_mass") == xio_contact_cred_mass
+    assert xio_personatom.get_value("contact_debt_mass") == xio_contact_debt_mass
 
     print(f"{get_personatom_total_count(sue_persondelta)=}")
     assert get_personatom_total_count(sue_persondelta) == 1
@@ -216,8 +216,8 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_contact_me
     run_personatom = get_from_nested_dict(sue_persondelta.personatoms, x_keylist)
     assert run_personatom.get_value(kw.contact_name) == exx.zia
     assert run_personatom.get_value(kw.group_title) == exx.run
-    assert run_personatom.get_value(kw.group_cred_lumen) == zia_run_credit_w
-    assert run_personatom.get_value(kw.group_debt_lumen) == zia_run_debt_w
+    assert run_personatom.get_value(kw.group_cred_mass) == zia_run_credit_w
+    assert run_personatom.get_value(kw.group_debt_mass) == zia_run_debt_w
 
     print_personatom_keys(sue_persondelta)
     print(f"{get_personatom_total_count(sue_persondelta)=}")
@@ -257,8 +257,8 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_contact_me
     xio_personatom = get_from_nested_dict(sue_persondelta.personatoms, x_keylist)
     assert xio_personatom.get_value(kw.contact_name) == exx.xio
     assert xio_personatom.get_value(kw.group_title) == exx.run
-    assert xio_personatom.get_value(kw.group_cred_lumen) == after_xio_credit_w
-    assert xio_personatom.get_value(kw.group_debt_lumen) == after_xio_debt_w
+    assert xio_personatom.get_value(kw.group_cred_mass) == after_xio_credit_w
+    assert xio_personatom.get_value(kw.group_debt_mass) == after_xio_debt_w
 
     print(f"{get_personatom_total_count(sue_persondelta)=}")
     assert get_personatom_total_count(sue_persondelta) == 1

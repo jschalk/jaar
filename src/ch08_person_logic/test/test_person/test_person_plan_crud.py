@@ -1062,8 +1062,8 @@ def test_PersonUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     # ESTABLISH
     bob_personunit = personunit_shop(exx.bob)
     bob_personunit.add_contactunit(exx.bob)
-    bob_personunit.add_contactunit(exx.yao, contact_cred_lumen=2)
-    bob_personunit.add_contactunit(exx.sue, contact_debt_lumen=2)
+    bob_personunit.add_contactunit(exx.yao, contact_cred_mass=2)
+    bob_personunit.add_contactunit(exx.sue, contact_debt_mass=2)
     bob_personunit.set_offtrack_fund()
     assert bob_personunit.offtrack_fund == 0
 

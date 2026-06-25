@@ -69,10 +69,10 @@ def test_etl_lego_spark_person_csvs_to_lesson_json_CreatesFiles_Scenario1(
     # a23_bob_e7_dir = create_path(a23_bob_dir, spark7)
     a23_bob_e3_dir = person_spark_dir(moment_mstr_dir, a23_lasso, bob_inx, spark3)
     a23_bob_e7_dir = person_spark_dir(moment_mstr_dir, a23_lasso, bob_inx, spark7)
-    e3_put_csv = f"""{kw.spark_num},{kw.spark_face},{kw.moment_rope},{kw.person_name},{kw.contact_name},{kw.contact_cred_lumen},{kw.contact_debt_lumen}
+    e3_put_csv = f"""{kw.spark_num},{kw.spark_face},{kw.moment_rope},{kw.person_name},{kw.contact_name},{kw.contact_cred_mass},{kw.contact_debt_mass}
 {spark3},{sue_inx},{exx.a23},{bob_inx},{bob_inx},{credit77},{debt_empty}
 """
-    e7_put_csv = f"""{kw.spark_num},{kw.spark_face},{kw.moment_rope},{kw.person_name},{kw.contact_name},{kw.contact_cred_lumen},{kw.contact_debt_lumen}
+    e7_put_csv = f"""{kw.spark_num},{kw.spark_face},{kw.moment_rope},{kw.person_name},{kw.contact_name},{kw.contact_cred_mass},{kw.contact_debt_mass}
 {spark7},{sue_inx},{exx.a23},{bob_inx},{bob_inx},{credit77},{debt_empty}
 {spark7},{sue_inx},{exx.a23},{bob_inx},{sue_inx},{credit88},{debt_empty}
 """
@@ -106,19 +106,19 @@ def test_etl_lego_spark_person_csvs_to_lesson_json_CreatesFiles_Scenario1(
         prncont_dimen,
         kw.INSERT,
         jkeys={kw.contact_name: bob_inx},
-        jvalues={kw.contact_cred_lumen: credit77, kw.contact_debt_lumen: None},
+        jvalues={kw.contact_cred_mass: credit77, kw.contact_debt_mass: None},
     )
     expected_e7_lesson.persondelta.add_personatom(
         prncont_dimen,
         kw.INSERT,
         jkeys={kw.contact_name: bob_inx},
-        jvalues={kw.contact_cred_lumen: credit77, kw.contact_debt_lumen: None},
+        jvalues={kw.contact_cred_mass: credit77, kw.contact_debt_mass: None},
     )
     expected_e7_lesson.persondelta.add_personatom(
         prncont_dimen,
         kw.INSERT,
         jkeys={kw.contact_name: sue_inx},
-        jvalues={kw.contact_cred_lumen: credit88, kw.contact_debt_lumen: None},
+        jvalues={kw.contact_cred_mass: credit88, kw.contact_debt_mass: None},
     )
     e3_lessonunit = get_lessonunit_from_dict(open_json(e3_all_lesson_path))
     e7_lessonunit = get_lessonunit_from_dict(open_json(e7_all_lesson_path))

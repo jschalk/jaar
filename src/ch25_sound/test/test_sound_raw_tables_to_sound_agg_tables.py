@@ -216,8 +216,8 @@ VALUES
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 , {kw.error_message}
 )"""
     values_clause = f"""
@@ -366,8 +366,8 @@ VALUES
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 , {kw.error_message}
 )"""
     values_clause = f"""
@@ -469,8 +469,8 @@ VALUES
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 , {kw.error_message}
 )"""
     values_clause = f"""

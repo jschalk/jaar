@@ -1,12 +1,12 @@
 // Global state
 let planTreeData = null;
 let show_contacts = true;
-let show_contact_cred_lumen = false;
-let show_contact_debt_lumen = false;
+let show_contact_cred_mass = false;
+let show_contact_debt_mass = false;
 let show_contact_credor_pool = false;
 let show_contact_debtor_pool = false;
-let show_contact_irrational_contact_debt_lumen = false;
-let show_contact_inallocable_contact_debt_lumen = false;
+let show_contact_irrational_contact_debt_mass = false;
+let show_contact_inallocable_contact_debt_mass = false;
 let show_contact_fund_give = false;
 let show_contact_fund_take = false;
 let show_contact_fund_agenda_give = false;
@@ -14,8 +14,8 @@ let show_contact_fund_agenda_take = false;
 let show_contact_fund_agenda_ratio_give = false;
 let show_contact_fund_agenda_ratio_take = false;
 let show_contact_membership_group_title = true;
-let show_contact_membership_group_cred_lumen = false;
-let show_contact_membership_group_debt_lumen = false;
+let show_contact_membership_group_cred_mass = false;
+let show_contact_membership_group_debt_mass = false;
 let show_contact_membership_credor_pool = false;
 let show_contact_membership_debtor_pool = false;
 let show_contact_membership_fund_agenda_give = false;
@@ -66,12 +66,12 @@ let show_plan_uid = false;
 // Initialize the app when DOM loads
 document.addSparkListener('DOMContentLoaded', function () {
     const show_contactsCheckbox = document.getElementById('show_contacts');
-    const show_contact_cred_lumenCheckbox = document.getElementById('show_contact_cred_lumen')
-    const show_contact_debt_lumenCheckbox = document.getElementById('show_contact_debt_lumen')
+    const show_contact_cred_massCheckbox = document.getElementById('show_contact_cred_mass')
+    const show_contact_debt_massCheckbox = document.getElementById('show_contact_debt_mass')
     const show_contact_credor_poolCheckbox = document.getElementById('show_contact_credor_pool')
     const show_contact_debtor_poolCheckbox = document.getElementById('show_contact_debtor_pool')
-    const show_contact_irrational_contact_debt_lumenCheckbox = document.getElementById('show_contact_irrational_contact_debt_lumen')
-    const show_contact_inallocable_contact_debt_lumenCheckbox = document.getElementById('show_contact_inallocable_contact_debt_lumen')
+    const show_contact_irrational_contact_debt_massCheckbox = document.getElementById('show_contact_irrational_contact_debt_mass')
+    const show_contact_inallocable_contact_debt_massCheckbox = document.getElementById('show_contact_inallocable_contact_debt_mass')
     const show_contact_fund_giveCheckbox = document.getElementById('show_contact_fund_give')
     const show_contact_fund_takeCheckbox = document.getElementById('show_contact_fund_take')
     const show_contact_fund_agenda_giveCheckbox = document.getElementById('show_contact_fund_agenda_give')
@@ -79,8 +79,8 @@ document.addSparkListener('DOMContentLoaded', function () {
     const show_contact_fund_agenda_ratio_giveCheckbox = document.getElementById('show_contact_fund_agenda_ratio_give')
     const show_contact_fund_agenda_ratio_takeCheckbox = document.getElementById('show_contact_fund_agenda_ratio_take')
     const show_contact_membership_group_titleCheckbox = document.getElementById('show_contact_membership_group_title')
-    const show_contact_membership_group_cred_lumenCheckbox = document.getElementById('show_contact_membership_group_cred_lumen')
-    const show_contact_membership_group_debt_lumenCheckbox = document.getElementById('show_contact_membership_group_debt_lumen')
+    const show_contact_membership_group_cred_massCheckbox = document.getElementById('show_contact_membership_group_cred_mass')
+    const show_contact_membership_group_debt_massCheckbox = document.getElementById('show_contact_membership_group_debt_mass')
     const show_contact_membership_credor_poolCheckbox = document.getElementById('show_contact_membership_credor_pool')
     const show_contact_membership_debtor_poolCheckbox = document.getElementById('show_contact_membership_debtor_pool')
     const show_contact_membership_fund_agenda_giveCheckbox = document.getElementById('show_contact_membership_fund_agenda_give')
@@ -130,12 +130,12 @@ document.addSparkListener('DOMContentLoaded', function () {
 
     // Set up checkbox spark checker
     show_contactsCheckbox.addSparkListener('change', function () { show_contacts = this.checked; renderContactsData(); });
-    show_contact_cred_lumenCheckbox.addSparkListener('change', function () { show_contact_cred_lumen = this.checked; renderContactsData(); });
-    show_contact_debt_lumenCheckbox.addSparkListener('change', function () { show_contact_debt_lumen = this.checked; renderContactsData(); });
+    show_contact_cred_massCheckbox.addSparkListener('change', function () { show_contact_cred_mass = this.checked; renderContactsData(); });
+    show_contact_debt_massCheckbox.addSparkListener('change', function () { show_contact_debt_mass = this.checked; renderContactsData(); });
     show_contact_credor_poolCheckbox.addSparkListener('change', function () { show_contact_credor_pool = this.checked; renderContactsData(); });
     show_contact_debtor_poolCheckbox.addSparkListener('change', function () { show_contact_debtor_pool = this.checked; renderContactsData(); });
-    show_contact_irrational_contact_debt_lumenCheckbox.addSparkListener('change', function () { show_contact_irrational_contact_debt_lumen = this.checked; renderContactsData(); });
-    show_contact_inallocable_contact_debt_lumenCheckbox.addSparkListener('change', function () { show_contact_inallocable_contact_debt_lumen = this.checked; renderContactsData(); });
+    show_contact_irrational_contact_debt_massCheckbox.addSparkListener('change', function () { show_contact_irrational_contact_debt_mass = this.checked; renderContactsData(); });
+    show_contact_inallocable_contact_debt_massCheckbox.addSparkListener('change', function () { show_contact_inallocable_contact_debt_mass = this.checked; renderContactsData(); });
     show_contact_fund_giveCheckbox.addSparkListener('change', function () { show_contact_fund_give = this.checked; renderContactsData(); });
     show_contact_fund_takeCheckbox.addSparkListener('change', function () { show_contact_fund_take = this.checked; renderContactsData(); });
     show_contact_fund_agenda_giveCheckbox.addSparkListener('change', function () { show_contact_fund_agenda_give = this.checked; renderContactsData(); });
@@ -143,8 +143,8 @@ document.addSparkListener('DOMContentLoaded', function () {
     show_contact_fund_agenda_ratio_giveCheckbox.addSparkListener('change', function () { show_contact_fund_agenda_ratio_give = this.checked; renderContactsData(); });
     show_contact_fund_agenda_ratio_takeCheckbox.addSparkListener('change', function () { show_contact_fund_agenda_ratio_take = this.checked; renderContactsData(); });
     show_contact_membership_group_titleCheckbox.addSparkListener('change', function () { show_contact_membership_group_title = this.checked; renderContactsData(); });
-    show_contact_membership_group_cred_lumenCheckbox.addSparkListener('change', function () { show_contact_membership_group_cred_lumen = this.checked; renderContactsData(); });
-    show_contact_membership_group_debt_lumenCheckbox.addSparkListener('change', function () { show_contact_membership_group_debt_lumen = this.checked; renderContactsData(); });
+    show_contact_membership_group_cred_massCheckbox.addSparkListener('change', function () { show_contact_membership_group_cred_mass = this.checked; renderContactsData(); });
+    show_contact_membership_group_debt_massCheckbox.addSparkListener('change', function () { show_contact_membership_group_debt_mass = this.checked; renderContactsData(); });
     show_contact_membership_credor_poolCheckbox.addSparkListener('change', function () { show_contact_membership_credor_pool = this.checked; renderContactsData(); });
     show_contact_membership_debtor_poolCheckbox.addSparkListener('change', function () { show_contact_membership_debtor_pool = this.checked; renderContactsData(); });
     show_contact_membership_fund_agenda_giveCheckbox.addSparkListener('change', function () { show_contact_membership_fund_agenda_give = this.checked; renderContactsData(); });
@@ -230,12 +230,12 @@ function buildContactsHtml(contactsData) {
     let html = '';
     Object.values(contactsData).forEach(contact => {
         html += `<br>${contacts_indent}${contact.contact_name}`;
-        if (show_contact_cred_lumen) { html += `<br>${contacts_indent}    ${contact.contact_cred_lumen_readable}` };
-        if (show_contact_debt_lumen) { html += `<br>${contacts_indent}    ${contact.contact_debt_lumen_readable}` };
+        if (show_contact_cred_mass) { html += `<br>${contacts_indent}    ${contact.contact_cred_mass_readable}` };
+        if (show_contact_debt_mass) { html += `<br>${contacts_indent}    ${contact.contact_debt_mass_readable}` };
         if (show_contact_credor_pool) { html += `<br>${contacts_indent}    ${contact.credor_pool_readable}` };
         if (show_contact_debtor_pool) { html += `<br>${contacts_indent}    ${contact.debtor_pool_readable}` };
-        if (show_contact_irrational_contact_debt_lumen) { html += `<br>${contacts_indent}    ${contact.irrational_contact_debt_lumen_readable}` };
-        if (show_contact_inallocable_contact_debt_lumen) { html += `<br>${contacts_indent}    ${contact.inallocable_contact_debt_lumen_readable}` };
+        if (show_contact_irrational_contact_debt_mass) { html += `<br>${contacts_indent}    ${contact.irrational_contact_debt_mass_readable}` };
+        if (show_contact_inallocable_contact_debt_mass) { html += `<br>${contacts_indent}    ${contact.inallocable_contact_debt_mass_readable}` };
         if (show_contact_fund_give) { html += `<br>${contacts_indent}    ${contact.fund_give_readable}` };
         if (show_contact_fund_take) { html += `<br>${contacts_indent}    ${contact.fund_take_readable}` };
         if (show_contact_fund_agenda_give) { html += `<br>${contacts_indent}    ${contact.fund_agenda_give_readable}` };
@@ -245,8 +245,8 @@ function buildContactsHtml(contactsData) {
         console.info(contact)
         Object.values(contact.memberships).forEach(membership => {
             if (show_contact_membership_group_title) { html += `<br><b>${member_title_indent}${membership.group_title_readable}</b>` };
-            if (show_contact_membership_group_cred_lumen) { html += `<br>${membership_indent}${membership.group_cred_lumen_readable}` };
-            if (show_contact_membership_group_debt_lumen) { html += `<br>${membership_indent}${membership.group_debt_lumen_readable}` };
+            if (show_contact_membership_group_cred_mass) { html += `<br>${membership_indent}${membership.group_cred_mass_readable}` };
+            if (show_contact_membership_group_debt_mass) { html += `<br>${membership_indent}${membership.group_debt_mass_readable}` };
             if (show_contact_membership_credor_pool) { html += `<br>${membership_indent}${membership.credor_pool_readable}` };
             if (show_contact_membership_debtor_pool) { html += `<br>${membership_indent}${membership.debtor_pool_readable}` };
             if (show_contact_membership_fund_agenda_give) { html += `<br>${membership_indent}${membership.fund_agenda_give_readable}` };

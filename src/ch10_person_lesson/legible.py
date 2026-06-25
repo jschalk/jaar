@@ -215,9 +215,9 @@ def add_person_contactunit_insert_to_legible_list(
 ):
     for contactunit_atom in contactunit_dict.values():
         contact_name = contactunit_atom.get_value("contact_name")
-        contact_cred_lumen_value = contactunit_atom.get_value("contact_cred_lumen")
-        contact_debt_lumen_value = contactunit_atom.get_value("contact_debt_lumen")
-        x_str = f"{contact_name} was added with {contact_cred_lumen_value} score credit and {contact_debt_lumen_value} score debt"
+        contact_cred_mass_value = contactunit_atom.get_value("contact_cred_mass")
+        contact_debt_mass_value = contactunit_atom.get_value("contact_debt_mass")
+        x_str = f"{contact_name} was added with {contact_cred_mass_value} score credit and {contact_debt_mass_value} score debt"
         legible_list.append(x_str)
 
 
@@ -226,17 +226,14 @@ def add_person_contactunit_update_to_legible_list(
 ):
     for contactunit_atom in contactunit_dict.values():
         contact_name = contactunit_atom.get_value("contact_name")
-        contact_cred_lumen_value = contactunit_atom.get_value("contact_cred_lumen")
-        contact_debt_lumen_value = contactunit_atom.get_value("contact_debt_lumen")
-        if (
-            contact_cred_lumen_value is not None
-            and contact_debt_lumen_value is not None
-        ):
-            x_str = f"{contact_name} now has {contact_cred_lumen_value} score credit and {contact_debt_lumen_value} score debt."
-        elif contact_cred_lumen_value is not None:
-            x_str = f"{contact_name} now has {contact_cred_lumen_value} score credit."
-        elif contact_debt_lumen_value is not None:
-            x_str = f"{contact_name} now has {contact_debt_lumen_value} score debt."
+        contact_cred_mass_value = contactunit_atom.get_value("contact_cred_mass")
+        contact_debt_mass_value = contactunit_atom.get_value("contact_debt_mass")
+        if contact_cred_mass_value is not None and contact_debt_mass_value is not None:
+            x_str = f"{contact_name} now has {contact_cred_mass_value} score credit and {contact_debt_mass_value} score debt."
+        elif contact_cred_mass_value is not None:
+            x_str = f"{contact_name} now has {contact_cred_mass_value} score credit."
+        elif contact_debt_mass_value is not None:
+            x_str = f"{contact_name} now has {contact_debt_mass_value} score debt."
         legible_list.append(x_str)
 
 
@@ -258,13 +255,9 @@ def add_person_contact_membership_insert_to_legible_list(
         for contact_membership_atom in contact_membership_dict.values():
             group_title = contact_membership_atom.get_value("group_title")
             contact_name = contact_membership_atom.get_value("contact_name")
-            group_cred_lumen_value = contact_membership_atom.get_value(
-                "group_cred_lumen"
-            )
-            group_debt_lumen_value = contact_membership_atom.get_value(
-                "group_debt_lumen"
-            )
-            x_str = f"Group '{group_title}' has new membership {contact_name} with group_cred_lumen_value{group_cred_lumen_value} and group_debt_lumen_value={group_debt_lumen_value}."
+            group_cred_mass_value = contact_membership_atom.get_value("group_cred_mass")
+            group_debt_mass_value = contact_membership_atom.get_value("group_debt_mass")
+            x_str = f"Group '{group_title}' has new membership {contact_name} with group_cred_mass_value{group_cred_mass_value} and group_debt_mass_value={group_debt_mass_value}."
             legible_list.append(x_str)
 
 
@@ -277,21 +270,14 @@ def add_person_contact_membership_update_to_legible_list(
         for contact_membership_atom in contact_membership_dict.values():
             group_title = contact_membership_atom.get_value("group_title")
             contact_name = contact_membership_atom.get_value("contact_name")
-            group_cred_lumen_value = contact_membership_atom.get_value(
-                "group_cred_lumen"
-            )
-            group_debt_lumen_value = contact_membership_atom.get_value(
-                "group_debt_lumen"
-            )
-            if (
-                group_cred_lumen_value is not None
-                and group_debt_lumen_value is not None
-            ):
-                x_str = f"Group '{group_title}' membership {contact_name} has new group_cred_lumen_value{group_cred_lumen_value} and group_debt_lumen_value={group_debt_lumen_value}."
-            elif group_cred_lumen_value is not None:
-                x_str = f"Group '{group_title}' membership {contact_name} has new group_cred_lumen_value{group_cred_lumen_value}."
-            elif group_debt_lumen_value is not None:
-                x_str = f"Group '{group_title}' membership {contact_name} has new group_debt_lumen_value={group_debt_lumen_value}."
+            group_cred_mass_value = contact_membership_atom.get_value("group_cred_mass")
+            group_debt_mass_value = contact_membership_atom.get_value("group_debt_mass")
+            if group_cred_mass_value is not None and group_debt_mass_value is not None:
+                x_str = f"Group '{group_title}' membership {contact_name} has new group_cred_mass_value{group_cred_mass_value} and group_debt_mass_value={group_debt_mass_value}."
+            elif group_cred_mass_value is not None:
+                x_str = f"Group '{group_title}' membership {contact_name} has new group_cred_mass_value{group_cred_mass_value}."
+            elif group_debt_mass_value is not None:
+                x_str = f"Group '{group_title}' membership {contact_name} has new group_debt_mass_value={group_debt_mass_value}."
             legible_list.append(x_str)
 
 

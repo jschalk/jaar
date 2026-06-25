@@ -240,7 +240,7 @@ def test_PersonUnit_to_dict_ReturnsJSON_Scenario5_BigExample():
 
     anna_str = "Anna"
     anna_contactunit = yao_person.get_contact(anna_str)
-    assert anna_contactunit.get_membership(";Family").group_cred_lumen == 6.2
+    assert anna_contactunit.get_membership(";Family").group_cred_mass == 6.2
     assert yao_person.contacts is not None
     assert len(yao_person.contacts) == 22
 

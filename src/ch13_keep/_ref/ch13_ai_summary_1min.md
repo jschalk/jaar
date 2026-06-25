@@ -23,7 +23,7 @@ Ontology note:
 
 - **ch00_py**: `get_0_if_None`, `get_empty_dict_if_None` for safe initialization.
 - **ch02_allot**: `allot_scale`, `default_grain_num_if_None`, `validate_pool_num` — the core mechanism by which `mana` (care credit) is distributed across contacts in each river cycle.
-- **ch08_person_logic**: `PersonUnit` — `get_patientledger` and `get_doctorledger` extract credit/debt lumen dictionaries directly from a person's contacts.
+- **ch08_person_logic**: `PersonUnit` — `get_patientledger` and `get_doctorledger` extract credit_mass/debt_mass dictionaries directly from a person's contacts.
 - **ch12_bud**: `TimeNum`, `SparkInt` — imported via ch13's semantic types, tying the river simulation to the time/transaction layer.
 
 New semantic type introduced in `ch13_semantic_types.py`:
@@ -37,9 +37,9 @@ New semantic type introduced in `ch13_semantic_types.py`:
 
 The metaphor is a river: mana flows from healers to patients and circulates through the community across multiple cycles, accumulating to form a picture of who has given and received care.
 
-**`get_patientledger(person)`** — extracts a ledger of `contact_name → contact_cred_lumen` for all contacts with positive credit lumen. These are the people the person cares about (their "patients").
+**`get_patientledger(person)`** — extracts a ledger of `contact_name → contact_cred_mass` for all contacts with positive credit_mass. These are the people the person cares about (their "patients").
 
-**`get_doctorledger(person)`** — extracts `contact_name → contact_debt_lumen` for contacts with positive debt lumen. These are the people who owe care to this person (their "doctors").
+**`get_doctorledger(person)`** — extracts `contact_name → contact_debt_mass` for contacts with positive debt_mass. These are the people who owe care to this person (their "doctors").
 
 **`RiverBook`** — a single person's mana distribution record within one cycle. Given a patient ledger and a total `book_point_amount`, it uses `allot_scale` to distribute the mana proportionally across patients.
 

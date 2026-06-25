@@ -204,10 +204,10 @@ def test_get_keg_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[108] == kw.gogo_want
     assert table_sorting_priority[109] == kw.stop_want
     assert table_sorting_priority[110] == kw.active_requisite
-    assert table_sorting_priority[111] == kw.contact_cred_lumen
-    assert table_sorting_priority[112] == kw.contact_debt_lumen
-    assert table_sorting_priority[113] == kw.group_cred_lumen
-    assert table_sorting_priority[114] == kw.group_debt_lumen
+    assert table_sorting_priority[111] == kw.contact_cred_mass
+    assert table_sorting_priority[112] == kw.contact_debt_mass
+    assert table_sorting_priority[113] == kw.group_cred_mass
+    assert table_sorting_priority[114] == kw.group_debt_mass
     assert table_sorting_priority[115] == kw.credor_respect
     assert table_sorting_priority[116] == kw.debtor_respect
     assert table_sorting_priority[117] == kw.fact_lower
@@ -272,7 +272,7 @@ def test_get_keg_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[176] == kw.fund_agenda_take
     assert table_sorting_priority[177] == kw.fund_agenda_ratio_give
     assert table_sorting_priority[178] == kw.fund_agenda_ratio_take
-    assert table_sorting_priority[179] == kw.inallocable_contact_debt_lumen
+    assert table_sorting_priority[179] == kw.inallocable_contact_debt_mass
     assert table_sorting_priority[180] == kw.gogo_calc
     assert table_sorting_priority[181] == kw.stop_calc
     assert table_sorting_priority[182] == kw.tree_level
@@ -283,7 +283,7 @@ def test_get_keg_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[187] == kw.keeps_justified
     assert table_sorting_priority[188] == kw.offtrack_fund
     assert table_sorting_priority[189] == kw.parent_heir_active
-    assert table_sorting_priority[190] == kw.irrational_contact_debt_lumen
+    assert table_sorting_priority[190] == kw.irrational_contact_debt_mass
     assert table_sorting_priority[191] == kw.sum_healerunit_plans_fund_total
     assert table_sorting_priority[192] == kw.keeps_buildable
     assert table_sorting_priority[193] == kw.all_contact_debt
@@ -365,8 +365,8 @@ def test_get_brick_sqlite_types_ReturnsObj():
     assert sqlite_types.get(kw.case_task) == "INTEGER"
     assert sqlite_types.get(kw.celldepth) == "INTEGER"
     assert sqlite_types.get(kw.close) == "REAL"
-    assert sqlite_types.get(kw.contact_cred_lumen) == "REAL"
-    assert sqlite_types.get(kw.contact_debt_lumen) == "REAL"
+    assert sqlite_types.get(kw.contact_cred_mass) == "REAL"
+    assert sqlite_types.get(kw.contact_debt_mass) == "REAL"
     assert sqlite_types.get(kw.contact_name) == "TEXT"
     assert sqlite_types.get(kw.contact_name_ERASE) == "TEXT"
     assert sqlite_types.get(kw.contact_name_ERASE_inx) == "TEXT"
@@ -418,8 +418,8 @@ def test_get_brick_sqlite_types_ReturnsObj():
     assert sqlite_types.get(kw.give_force) == "REAL"
     assert sqlite_types.get(kw.gogo_calc) == "REAL"
     assert sqlite_types.get(kw.gogo_want) == "REAL"
-    assert sqlite_types.get(kw.group_cred_lumen) == "REAL"
-    assert sqlite_types.get(kw.group_debt_lumen) == "REAL"
+    assert sqlite_types.get(kw.group_cred_mass) == "REAL"
+    assert sqlite_types.get(kw.group_debt_mass) == "REAL"
     assert sqlite_types.get(kw.group_title) == "TEXT"
     assert sqlite_types.get(kw.group_title_ERASE) == "TEXT"
     assert sqlite_types.get(kw.group_title_ERASE_inx) == "TEXT"
@@ -438,7 +438,7 @@ def test_get_brick_sqlite_types_ReturnsObj():
     assert sqlite_types.get(kw.hour_label_inx) == "TEXT"
     assert sqlite_types.get(kw.hour_label_otx) == "TEXT"
     assert sqlite_types.get(kw.brick_type) == "TEXT"
-    assert sqlite_types.get(kw.inallocable_contact_debt_lumen) == "REAL"
+    assert sqlite_types.get(kw.inallocable_contact_debt_mass) == "REAL"
     assert sqlite_types.get(kw.inx_epoch_diff) == "INTEGER"
     assert sqlite_types.get(kw.inx_knot) == "TEXT"
     assert sqlite_types.get(kw.inx_label) == "TEXT"
@@ -446,7 +446,7 @@ def test_get_brick_sqlite_types_ReturnsObj():
     assert sqlite_types.get(kw.inx_rope) == "TEXT"
     assert sqlite_types.get(kw.inx_time) == "INTEGER"
     assert sqlite_types.get(kw.inx_title) == "TEXT"
-    assert sqlite_types.get(kw.irrational_contact_debt_lumen) == "REAL"
+    assert sqlite_types.get(kw.irrational_contact_debt_mass) == "REAL"
     assert sqlite_types.get(kw.job_listen_rotations) == "INTEGER"
     assert sqlite_types.get(kw.keeps_buildable) == "INTEGER"
     assert sqlite_types.get(kw.keeps_justified) == "INTEGER"

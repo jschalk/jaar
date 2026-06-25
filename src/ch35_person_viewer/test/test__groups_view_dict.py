@@ -21,21 +21,21 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     sue_believer = personunit_shop(exx.sue)
 #     exx.yao = exx.yao
 #     bob_str = "Bob"
-#     yao_cred_lumen = 110
-#     yao_debt_lumen = 130
-#     bob_cred_lumen = 230
-#     bob_debt_lumen = 290
-#     sue_believer.add_contactunit(exx.yao, yao_cred_lumen, yao_debt_lumen)
-#     sue_believer.add_contactunit(bob_str, bob_cred_lumen, bob_debt_lumen)
+#     yao_cred_mass = 110
+#     yao_debt_mass = 130
+#     bob_cred_mass = 230
+#     bob_debt_mass = 290
+#     sue_believer.add_contactunit(exx.yao, yao_cred_mass, yao_debt_mass)
+#     sue_believer.add_contactunit(bob_str, bob_cred_mass, bob_debt_mass)
 #     bowlers_str = ";bowlers"
-#     bob_bowl_cred_lumen = 66
-#     bob_bowl_debt_lumen = 77
-#     yao_bowl_cred_lumen = 88
-#     yao_bowl_debt_lumen = 99
+#     bob_bowl_cred_mass = 66
+#     bob_bowl_debt_mass = 77
+#     yao_bowl_cred_mass = 88
+#     yao_bowl_debt_mass = 99
 #     yao_contact = sue_believer.get_contact(exx.yao)
 #     bob_contact = sue_believer.get_contact(bob_str)
-#     yao_contact.add_membership(bowlers_str, yao_bowl_cred_lumen, yao_bowl_debt_lumen)
-#     bob_contact.add_membership(bowlers_str, bob_bowl_cred_lumen, bob_bowl_debt_lumen)
+#     yao_contact.add_membership(bowlers_str, yao_bowl_cred_mass, yao_bowl_debt_mass)
+#     bob_contact.add_membership(bowlers_str, bob_bowl_cred_mass, bob_bowl_debt_mass)
 #     sue_believer.thinkout()
 
 #     # WHEN
@@ -112,10 +112,10 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     exx.yao = exx.yao
 #     sue_believer.add_contactunit(exx.yao)
 #     bowlers_str = ";bowlers"
-#     yao_bowl_cred_lumen = 311
-#     yao_bowl_debt_lumen = 313
+#     yao_bowl_cred_mass = 311
+#     yao_bowl_debt_mass = 313
 #     yao_contactunit = sue_believer.get_contact(exx.yao)
-#     yao_contactunit.add_membership(bowlers_str, yao_bowl_cred_lumen, yao_bowl_debt_lumen)
+#     yao_contactunit.add_membership(bowlers_str, yao_bowl_cred_mass, yao_bowl_debt_mass)
 #     sue_believer.thinkout()
 
 #     # WHEN
@@ -130,8 +130,8 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     yao_bowl_dict = yao_memberships_dict.get(bowlers_str)
 
 #     group_title_readable_key = add_readable(kw.group_title)
-#     group_cred_lumen_readable_key = add_readable(kw.group_cred_lumen)
-#     group_debt_lumen_readable_key = add_readable(kw.group_debt_lumen)
+#     group_cred_mass_readable_key = add_readable(kw.group_cred_mass)
+#     group_debt_mass_readable_key = add_readable(kw.group_debt_mass)
 #     credor_pool_readable_key = add_readable(kw.credor_pool)
 #     debtor_pool_readable_key = add_readable(kw.debtor_pool)
 #     fund_agenda_give_readable_key = add_readable(kw.fund_agenda_give)
@@ -143,8 +143,8 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     assert set(yao_bowl_dict.keys()) == {
 #         kw.contact_name,
 #        kw.group_title,
-#        kw.group_cred_lumen,
-#        kw.group_debt_lumen,
+#        kw.group_cred_mass,
+#        kw.group_debt_mass,
 #         kw.credor_pool,
 #         kw.debtor_pool,
 #         kw.fund_agenda_give,
@@ -154,8 +154,8 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #         kw.fund_give,
 #         kw.fund_take,
 #         group_title_readable_key,
-#         group_cred_lumen_readable_key,
-#         group_debt_lumen_readable_key,
+#         group_cred_mass_readable_key,
+#         group_debt_mass_readable_key,
 #         credor_pool_readable_key,
 #         debtor_pool_readable_key,
 #         fund_agenda_give_readable_key,
@@ -167,11 +167,11 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     }
 #     yao_bowl_mu = yao_contactunit.get_membership(bowlers_str)
 #     expected_group_title_readable = f"{kw.group_title}: {yao_bowl_mu.group_title}"
-#     expected_group_cred_lumen_readable = (
-#         f"{kw.group_cred_lumen}: {yao_bowl_mu.group_cred_lumen}"
+#     expected_group_cred_mass_readable = (
+#         f"{kw.group_cred_mass}: {yao_bowl_mu.group_cred_mass}"
 #     )
-#     expected_group_debt_lumen_readable = (
-#         f"{kw.group_debt_lumen}: {yao_bowl_mu.group_debt_lumen}"
+#     expected_group_debt_mass_readable = (
+#         f"{kw.group_debt_mass}: {yao_bowl_mu.group_debt_mass}"
 #     )
 #     expected_credor_pool_readable = f"{kw.credor_pool}: {yao_bowl_mu.credor_pool}"
 #     expected_debtor_pool_readable = f"{kw.debtor_pool}: {yao_bowl_mu.debtor_pool}"
@@ -192,8 +192,8 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 
 #     assert yao_bowl_dict.get(kw.contact_name) == yao_bowl_mu.contact_name
 #     assert yao_bowl_dict.get(kw.group_title) == yao_bowl_mu.group_title
-#     assert yao_bowl_dict.get(kw.group_cred_lumen) == yao_bowl_mu.group_cred_lumen
-#     assert yao_bowl_dict.get(kw.group_debt_lumen) == yao_bowl_mu.group_debt_lumen
+#     assert yao_bowl_dict.get(kw.group_cred_mass) == yao_bowl_mu.group_cred_mass
+#     assert yao_bowl_dict.get(kw.group_debt_mass) == yao_bowl_mu.group_debt_mass
 #     assert yao_bowl_dict.get(kw.credor_pool) == yao_bowl_mu.credor_pool
 #     assert yao_bowl_dict.get(kw.debtor_pool) == yao_bowl_mu.debtor_pool
 #     assert yao_bowl_dict.get(kw.fund_agenda_give) == yao_bowl_mu.fund_agenda_give
@@ -210,12 +210,12 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     assert yao_bowl_dict.get(kw.fund_take) == yao_bowl_mu.fund_take
 #     assert yao_bowl_dict.get(group_title_readable_key) == expected_group_title_readable
 #     assert (
-#         yao_bowl_dict.get(group_cred_lumen_readable_key)
-#         == expected_group_cred_lumen_readable
+#         yao_bowl_dict.get(group_cred_mass_readable_key)
+#         == expected_group_cred_mass_readable
 #     )
 #     assert (
-#         yao_bowl_dict.get(group_debt_lumen_readable_key)
-#         == expected_group_debt_lumen_readable
+#         yao_bowl_dict.get(group_debt_mass_readable_key)
+#         == expected_group_debt_mass_readable
 #     )
 #     assert (
 #         yao_bowl_dict.get(credor_pool_readable_key) == expected_credor_pool_readable
@@ -245,23 +245,23 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     # sue_believer = personunit_shop(exx.sue)
 #     # exx.yao = exx.yao
 #     # bob_str = "Bob"
-#     # yao_cred_lumen = 110
-#     # yao_debt_lumen = 130
-#     # bob_cred_lumen = 230
-#     # bob_debt_lumen = 290
-#     # sue_believer.add_contactunit(exx.yao, yao_cred_lumen, yao_debt_lumen)
-#     # sue_believer.add_contactunit(bob_str, bob_cred_lumen, bob_debt_lumen)
+#     # yao_cred_mass = 110
+#     # yao_debt_mass = 130
+#     # bob_cred_mass = 230
+#     # bob_debt_mass = 290
+#     # sue_believer.add_contactunit(exx.yao, yao_cred_mass, yao_debt_mass)
+#     # sue_believer.add_contactunit(bob_str, bob_cred_mass, bob_debt_mass)
 #     # bowlers_str = ";bowlers"
-#     # yao_bowl_cred_lumen = 311
-#     # yao_bowl_debt_lumen = 313
-#     # bob_bowl_cred_lumen = 411
-#     # bob_bowl_debt_lumen = 413
+#     # yao_bowl_cred_mass = 311
+#     # yao_bowl_debt_mass = 313
+#     # bob_bowl_cred_mass = 411
+#     # bob_bowl_debt_mass = 413
 #     # clea_str = ";cleaners"
-#     # cleaners_cred_lumen = 511
-#     # cleaners_debt_lumen = 513
+#     # cleaners_cred_mass = 511
+#     # cleaners_debt_mass = 513
 #     # yao_contactunit = sue_believer.get_contact(exx.yao)
 #     # bob_contactunit = sue_believer.get_contact(bob_str)
-#     # bob_contactunit.add_membership(bowlers_str, bob_bowl_cred_lumen, bob_bowl_debt_lumen)
-#     # yao_contactunit.add_membership(bowlers_str, yao_bowl_cred_lumen, yao_bowl_debt_lumen)
-#     # yao_contactunit.add_membership(clea_str, cleaners_cred_lumen, cleaners_debt_lumen)
+#     # bob_contactunit.add_membership(bowlers_str, bob_bowl_cred_mass, bob_bowl_debt_mass)
+#     # yao_contactunit.add_membership(bowlers_str, yao_bowl_cred_mass, yao_bowl_debt_mass)
+#     # yao_contactunit.add_membership(clea_str, cleaners_cred_mass, cleaners_debt_mass)
 #     # sue_believer.get_contact(exx.yao).add_membership()

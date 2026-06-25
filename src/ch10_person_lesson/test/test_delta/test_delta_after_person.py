@@ -110,10 +110,10 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_insert_contact():
     dimen = kw.person_contactunit
     x_personatom = personatom_shop(dimen, kw.INSERT)
     x_personatom.set_jkey(kw.contact_name, exx.zia)
-    x_contact_cred_lumen = 55
-    x_contact_debt_lumen = 66
-    x_personatom.set_jvalue("contact_cred_lumen", x_contact_cred_lumen)
-    x_personatom.set_jvalue("contact_debt_lumen", x_contact_debt_lumen)
+    x_contact_cred_mass = 55
+    x_contact_debt_mass = 66
+    x_personatom.set_jvalue("contact_cred_mass", x_contact_cred_mass)
+    x_personatom.set_jvalue("contact_debt_mass", x_contact_debt_mass)
     sue_persondelta.set_personatom(x_personatom)
     print(f"{sue_persondelta.personatoms.keys()=}")
     after_sue_personunit = sue_persondelta.get_atom_edited_person(before_sue_personunit)
@@ -123,8 +123,8 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_insert_contact():
     zia_contactunit = after_sue_personunit.get_contact(exx.zia)
     assert yao_contactunit is not None
     assert zia_contactunit is not None
-    assert zia_contactunit.contact_cred_lumen == x_contact_cred_lumen
-    assert zia_contactunit.contact_debt_lumen == x_contact_debt_lumen
+    assert zia_contactunit.contact_cred_mass == x_contact_cred_mass
+    assert zia_contactunit.contact_debt_mass == x_contact_debt_mass
 
 
 def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_update_contact():
@@ -133,21 +133,21 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_update_contact():
 
     before_sue_personunit = personunit_shop(exx.sue)
     before_sue_personunit.add_contactunit(exx.yao)
-    assert before_sue_personunit.get_contact(exx.yao).contact_cred_lumen == 1
+    assert before_sue_personunit.get_contact(exx.yao).contact_cred_mass == 1
 
     # WHEN
     dimen = kw.person_contactunit
     x_personatom = personatom_shop(dimen, kw.UPDATE)
     x_personatom.set_jkey(kw.contact_name, exx.yao)
-    yao_contact_cred_lumen = 55
-    x_personatom.set_jvalue("contact_cred_lumen", yao_contact_cred_lumen)
+    yao_contact_cred_mass = 55
+    x_personatom.set_jvalue("contact_cred_mass", yao_contact_cred_mass)
     sue_persondelta.set_personatom(x_personatom)
     print(f"{sue_persondelta.personatoms.keys()=}")
     after_sue_personunit = sue_persondelta.get_atom_edited_person(before_sue_personunit)
 
     # THEN
     yao_contact = after_sue_personunit.get_contact(exx.yao)
-    assert yao_contact.contact_cred_lumen == yao_contact_cred_lumen
+    assert yao_contact.contact_cred_mass == yao_contact_cred_mass
 
 
 def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_delete_membership():
@@ -205,8 +205,8 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_insert_membership()
     yao_personatom = personatom_shop(kw.person_contact_membership, kw.INSERT)
     yao_personatom.set_jkey(kw.group_title, exx.run)
     yao_personatom.set_jkey(kw.contact_name, exx.yao)
-    yao_run_group_cred_lumen = 17
-    yao_personatom.set_jvalue(kw.group_cred_lumen, yao_run_group_cred_lumen)
+    yao_run_group_cred_mass = 17
+    yao_personatom.set_jvalue(kw.group_cred_mass, yao_run_group_cred_mass)
     print(f"{yao_personatom=}")
     sue_persondelta = persondelta_shop()
     sue_persondelta.set_personatom(yao_personatom)
@@ -218,7 +218,7 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_insert_membership()
     after_yao_contactunit = after_sue_personunit.get_contact(exx.yao)
     after_yao_run_membership = after_yao_contactunit.get_membership(exx.run)
     assert after_yao_run_membership is not None
-    assert after_yao_run_membership.group_cred_lumen == yao_run_group_cred_lumen
+    assert after_yao_run_membership.group_cred_mass == yao_run_group_cred_mass
 
 
 def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_update_membership():
@@ -227,20 +227,20 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_update_membership()
     before_sue_personunit = personunit_shop(exx.sue)
     before_sue_personunit.add_contactunit(exx.yao)
     before_yao_contactunit = before_sue_personunit.get_contact(exx.yao)
-    old_yao_run_group_cred_lumen = 3
-    before_yao_contactunit.add_membership(exx.run, old_yao_run_group_cred_lumen)
+    old_yao_run_group_cred_mass = 3
+    before_yao_contactunit.add_membership(exx.run, old_yao_run_group_cred_mass)
     yao_run_membership = before_yao_contactunit.get_membership(exx.run)
-    assert yao_run_membership.group_cred_lumen == old_yao_run_group_cred_lumen
-    assert yao_run_membership.group_debt_lumen == 1
+    assert yao_run_membership.group_cred_mass == old_yao_run_group_cred_mass
+    assert yao_run_membership.group_debt_mass == 1
 
     # WHEN
     yao_personatom = personatom_shop(kw.person_contact_membership, kw.UPDATE)
     yao_personatom.set_jkey(kw.group_title, exx.run)
     yao_personatom.set_jkey(kw.contact_name, exx.yao)
-    new_yao_run_group_cred_lumen = 7
-    new_yao_run_group_debt_lumen = 11
-    yao_personatom.set_jvalue(kw.group_cred_lumen, new_yao_run_group_cred_lumen)
-    yao_personatom.set_jvalue(kw.group_debt_lumen, new_yao_run_group_debt_lumen)
+    new_yao_run_group_cred_mass = 7
+    new_yao_run_group_debt_mass = 11
+    yao_personatom.set_jvalue(kw.group_cred_mass, new_yao_run_group_cred_mass)
+    yao_personatom.set_jvalue(kw.group_debt_mass, new_yao_run_group_debt_mass)
     sue_persondelta = persondelta_shop()
     sue_persondelta.set_personatom(yao_personatom)
     after_sue_personunit = sue_persondelta.get_atom_edited_person(before_sue_personunit)
@@ -248,8 +248,8 @@ def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_update_membership()
     # THEN
     after_yao_contactunit = after_sue_personunit.get_contact(exx.yao)
     after_yao_run_membership = after_yao_contactunit.get_membership(exx.run)
-    assert after_yao_run_membership.group_cred_lumen == new_yao_run_group_cred_lumen
-    assert after_yao_run_membership.group_debt_lumen == new_yao_run_group_debt_lumen
+    assert after_yao_run_membership.group_cred_mass == new_yao_run_group_cred_mass
+    assert after_yao_run_membership.group_debt_mass == new_yao_run_group_debt_mass
 
 
 def test_PersonDelta_get_edited_person_ReturnsObj_PersonUnit_delete_planunit():

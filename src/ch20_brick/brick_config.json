@@ -90,7 +90,7 @@
       "spark_face": {}, 
       "spark_num": {}
     }, 
-    "jvalues": {"group_cred_lumen": {}, "group_debt_lumen": {}, "knot": {}}
+    "jvalues": {"group_cred_mass": {}, "group_debt_mass": {}, "knot": {}}
   }, 
   "person_contactunit": {
     "allowed_crud": "delete_insert_update", 
@@ -103,7 +103,7 @@
       "spark_face": {}, 
       "spark_num": {}
     }, 
-    "jvalues": {"contact_cred_lumen": {}, "contact_debt_lumen": {}, "knot": {}}
+    "jvalues": {"contact_cred_mass": {}, "contact_debt_mass": {}, "knot": {}}
   }, 
   "person_plan_awardunit": {
     "allowed_crud": "delete_insert_update", 

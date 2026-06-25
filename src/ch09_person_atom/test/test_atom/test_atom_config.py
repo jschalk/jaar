@@ -567,17 +567,17 @@ def test_get_normalized_person_table_build_ReturnsObj():
     assert len(contactunit_columns) == 4
     assert contactunit_columns.get(kw.plan_uid) is not None
     assert contactunit_columns.get(kw.contact_name) is not None
-    assert contactunit_columns.get(kw.contact_cred_lumen) is not None
-    assert contactunit_columns.get(kw.contact_debt_lumen) is not None
+    assert contactunit_columns.get(kw.contact_cred_mass) is not None
+    assert contactunit_columns.get(kw.contact_debt_mass) is not None
 
     contact_name_dict = contactunit_columns.get(kw.contact_name)
     assert len(contact_name_dict) == 2
     assert contact_name_dict.get(kw.sqlite_datatype) == "TEXT"
     assert contact_name_dict.get("nullable") is False
-    contact_debt_lumen_dict = contactunit_columns.get("contact_debt_lumen")
+    contact_debt_mass_dict = contactunit_columns.get("contact_debt_mass")
     assert len(contact_name_dict) == 2
-    assert contact_debt_lumen_dict.get(kw.sqlite_datatype) == "REAL"
-    assert contact_debt_lumen_dict.get("nullable") is True
+    assert contact_debt_mass_dict.get(kw.sqlite_datatype) == "REAL"
+    assert contact_debt_mass_dict.get("nullable") is True
 
     assert len(cat_plan) == 2
     plan_columns = cat_plan.get(columns_str)
@@ -706,11 +706,11 @@ def test_get_atom_args_obj_types_ReturnsObj():
     assert x_obj_types.get(kw.begin) == "float"
     assert x_obj_types.get(kw.respect_grain) == "float"
     assert x_obj_types.get(kw.close) == "float"
-    assert x_obj_types.get(kw.contact_cred_lumen) == "float"
-    assert x_obj_types.get(kw.group_cred_lumen) == "float"
+    assert x_obj_types.get(kw.contact_cred_mass) == "float"
+    assert x_obj_types.get(kw.group_cred_mass) == "float"
     assert x_obj_types.get(kw.credor_respect) == "float"
-    assert x_obj_types.get(kw.contact_debt_lumen) == "float"
-    assert x_obj_types.get(kw.group_debt_lumen) == "float"
+    assert x_obj_types.get(kw.contact_debt_mass) == "float"
+    assert x_obj_types.get(kw.group_debt_mass) == "float"
     assert x_obj_types.get(kw.debtor_respect) == "float"
     assert x_obj_types.get(kw.denom) == "int"
     assert x_obj_types.get(kw.reason_divisor) == "int"
