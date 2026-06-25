@@ -715,7 +715,7 @@ Ch15 is the first true integration chapter — it imports from every prior chapt
 - `moment_mstr_dir` — the root directory where all moment data is persisted.
 - `epoch` — the shared `EpochUnit` (calendar system) all persons in this moment use.
 - `personbudhistorys` — a dictionary of `PersonBudHistory` per person, tracking all scheduled fund distributions.
-- `paybook` — a `TranBook` recording all fund transactions within the moment.
+- `ceckbook` — a `TranBook` recording all fund transactions within the moment.
 - `offi_times` — the set of official time points at which distributions have been processed.
 - Grain parameters (`fund_grain`, `respect_grain`, `mana_grain`) — shared resolution settings applied when creating new persons.
 
@@ -945,7 +945,7 @@ New semantic type: `SheetName` (a `str`) — identifies a named sheet within an 
 - `dimens` — the list of atom dimensions this brick maps to (e.g. `["person_planunit", "person_plan_awardunit"]`).
 - `attributes` — a dict of column names to `{"otx_key": bool}` — marking whether a column is a primary key field (`otx_key=True`) or a value field (`otx_key=False`).
 
-`get_otx_keys_list()` and `get_otx_values_list()` split attributes into the key columns (used for deduplication and joining) and value columns (the data payload).
+`get_otx_keys_list()` and `get_otx_values_list()` split attributes into the key columns (used for deduplication and joining) and value columns.
 
 **`brick_config.json`** is the master schema registry — a dictionary of all brick types, each with their `brick_category`, `dimens`, and column definitions. Categories include `"person"`, `"moment"`, `"translate"`, `"nabu"`, and `"spark"`.
 
@@ -997,7 +997,7 @@ Ontology note:
 
 **`etl_config.py`** — the core configuration module:
 
-- `ALL_DIMEN_ABBV7` and `ALL_DIMEN_ABBV2` — two abbreviation sets for all 23 dimension types (e.g. `"moment_paybook"` → `"MMTPAYY"` / `"MP"`). These abbreviated names are used as table name prefixes throughout the SQLite ETL database.
+- `ALL_DIMEN_ABBV7` and `ALL_DIMEN_ABBV2` — two abbreviation sets for all 23 dimension types (e.g. `"moment_ceckbook"` → `"MMTCECK"` / `"MP"`). These abbreviated names are used as table name prefixes throughout the SQLite ETL database.
 - `get_dimen_abbv7(dimen)` and `get_dimen_abbv2(dimen)` — dispatch functions mapping full dimension names to abbreviations.
 - `get_etl_stage_types_config_dict()` — loads `etl_stage_types_config.json`, which defines the ordered sequence of ETL stages (e.g. `b_raw` → `b_agg` → `b_vld` → `s_raw` → `s_agg` → `s_vld` → `h_raw` → ...). Each stage has a `stage_type_order` integer determining its position in the pipeline.
 - `get_stage_create_table_sqlstr(dimen, stage_type)` — generates the `CREATE TABLE` SQL for a specific dimension at a specific pipeline stage, incorporating `_otx`/`_inx` column expansions for translated and nabu fields.
@@ -1227,7 +1227,7 @@ Ontology note:
 
 **`etl_heard_agg_tables_to_heard_vld_tables(cursor)`** — promotes `h_agg` rows to `h_vld` via pre-generated INSERT/SELECT queries, deduplicating.
 
-**`get_moment_dict_from_heard_tables(cursor, moment_rope)`** — the reconstruction function. Runs a series of SELECT queries against the fully validated `h_vld` tables for a given `moment_rope` and assembles a nested Python dict representing the complete `MomentUnit` state: `momentunit` row for top-level attributes, `moment_paybook` rows for `TranUnit`s (nested `person_name → contact_name → tran_time → amount`), `moment_budunit` rows for `BudUnit`s, and epoch configuration rows (hours, months, weekdays, offi_times).
+**`get_moment_dict_from_heard_tables(cursor, moment_rope)`** — the reconstruction function. Runs a series of SELECT queries against the fully validated `h_vld` tables for a given `moment_rope` and assembles a nested Python dict representing the complete `MomentUnit` state: `momentunit` row for top-level attributes, `moment_ceckbook` rows for `TranUnit`s (nested `person_name → contact_name → tran_time → amount`), `moment_budunit` rows for `BudUnit`s, and epoch configuration rows (hours, months, weekdays, offi_times).
 
 **`etl_heard_vld_tables_to_mind_moment_jsons(cursor, moment_mstr_dir)`** — iterates all `moment_rope`s from `momentunit_h_vld`, calls `get_moment_dict_from_heard_tables` for each, and writes the result as a `moment.json` file to the appropriate directory. The inline comment notes a known architectural tension: using rope-based file paths is idiomatic but problematic when `moment_rope` contains characters that don't translate to valid OS paths — a hash-based directory scheme is suggested as an alternative.
 
@@ -1348,7 +1348,7 @@ New semantic type: none. `ch30_semantic_types.py` re-exports through ch22.
 Ch30 is the **output inverse of ch23** — where ch23 reads human-authored idea sheets and converts them into bricks for ingestion, ch30 takes the fully processed world state and writes it back out as idea-format Excel files for human consumption.
 
 **`collect_full_world_idea_csv_strs(world_dir)`** — the main data-collection function:
-1. Walks all moment directories, loads each `MomentUnit` via `open_moment_file`, and calls `add_momentunit_to_idea_csv_strs` to serialize moment-level fields (budget units, epoch config, paybook, offi_times) into the idea CSV string dict.
+1. Walks all moment directories, loads each `MomentUnit` via `open_moment_file`, and calls `add_momentunit_to_idea_csv_strs` to serialize moment-level fields (budget units, epoch config, ceckbook, offi_times) into the idea CSV string dict.
 2. For each person within each moment, loads the **gut** `PersonUnit` (the person's own belief system, not the job) and calls `add_personunit_to_idea_csv_strs` to serialize their full plan tree, contacts, reasons, facts, etc.
 3. Opens the world SQLite database, creates sound/heard tables if absent, then calls `add_translate_rows_to_idea_csv_strs` to append validated translation mappings (from `trltitl_s_vld`, `trlname_s_vld`, `trllabe_s_vld`, `trlrope_s_vld` joined with `trlcore_s_vld`) into the four translation idea sheets (`ii00142`–`ii00145`).
 

@@ -628,7 +628,7 @@ def test_get_brick_config_dict_ReturnsObj_Scenario0_IsFullyPopulated():
     brick_config_dimens = set(x_brick_config.keys())
     assert kw.momentunit in brick_config_dimens
     assert kw.moment_budunit in brick_config_dimens
-    assert kw.moment_paybook in brick_config_dimens
+    assert kw.moment_ceckbook in brick_config_dimens
     assert kw.moment_epoch_hour in brick_config_dimens
     assert kw.moment_epoch_month in brick_config_dimens
     assert kw.moment_epoch_weekday in brick_config_dimens
@@ -713,7 +713,7 @@ def _validate_brick_config(x_brick_config: dict):
             kw.translate_rope,
         }:
             assert brick_allowed_crud == kw.insert_one_time
-        elif brick_dimen in {kw.moment_budunit, kw.moment_paybook, kw.moment_timeoffi}:
+        elif brick_dimen in {kw.moment_budunit, kw.moment_ceckbook, kw.moment_timeoffi}:
             assert brick_allowed_crud == kw.insert_multiple
         elif UPDATE_dimen != None and INSERT_dimen != None and DELETE_dimen != None:
             assert brick_allowed_crud == kw.delete_insert_update
@@ -930,7 +930,7 @@ def test_get_brick_config_dict_ReturnsObj_Scenario1_Check_build_order():
     # set_brick_config_json(kw.person_planunit, 18)
     # set_brick_config_json(kw.personunit, 19)
     # set_brick_config_json(kw.moment_budunit, 20)
-    # set_brick_config_json(kw.moment_paybook, 21)
+    # set_brick_config_json(kw.moment_ceckbook, 21)
 
     x_brick_config = get_brick_config_dict()
 
@@ -955,7 +955,7 @@ def test_get_brick_config_dict_ReturnsObj_Scenario1_Check_build_order():
     assert x_brick_config.get(kw.person_planunit).get(bo) == 18
     assert x_brick_config.get(kw.personunit).get(bo) == 19
     assert x_brick_config.get(kw.moment_budunit).get(bo) == 20
-    assert x_brick_config.get(kw.moment_paybook).get(bo) == 21
+    assert x_brick_config.get(kw.moment_ceckbook).get(bo) == 21
     assert x_brick_config.get(kw.moment_timeoffi).get(bo) == 22
     builder_order_dict = {}
     for dimen_key, dimen_dict in x_brick_config.items():
@@ -994,7 +994,7 @@ def test_get_brick_config_dict_ReturnsObj_Scenario2_Person():
     assert person_brick_config.get(kw.person_planunit)
     assert person_brick_config.get(kw.personunit)
     assert not person_brick_config.get(kw.moment_budunit)
-    assert not person_brick_config.get(kw.moment_paybook)
+    assert not person_brick_config.get(kw.moment_ceckbook)
     assert not person_brick_config.get(kw.moment_timeoffi)
 
 

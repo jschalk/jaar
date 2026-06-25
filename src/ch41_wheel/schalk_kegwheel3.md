@@ -10,6 +10,12 @@
 
 You want to be a good person. You want to help your family and friends. Be good to the in-group. What to do now?
 
+You need to pay for what you want. This may seem obvious but it's important to note that many people, in fact most people, do not feel they get what they pay for. For example I donated what felt like lots of money to the Obama presidential campaign and I got the opposite of what I felt I paid for. To pay for what you want and not cheat to the maximum possible you must have faith that there's a small chance it's worth it. 
+
+So if you've decided you will pay for what you want. then you've got to decide what you want. How do you know what you want? If you made a list of all the things you want and then ranked them by poynts and 
+
+
+
 First Identify if you are outside of power or inside power. 
 
 The easiest way to know if you have prestige is if anyone considers about your feelings when they come to revenge. Powerful people can feel slighted and angry and demand retribution (which always fails because suffering and loss is infinitely deep) however 

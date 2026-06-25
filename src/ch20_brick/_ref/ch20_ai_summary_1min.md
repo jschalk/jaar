@@ -42,7 +42,7 @@ New semantic type: `SheetName` (a `str`) — identifies a named sheet within an 
 - `dimens` — the list of atom dimensions this brick maps to (e.g. `["person_planunit", "person_plan_awardunit"]`).
 - `attributes` — a dict of column names to `{"otx_key": bool}` — marking whether a column is a primary key field (`otx_key=True`) or a value field (`otx_key=False`).
 
-`get_otx_keys_list()` and `get_otx_values_list()` split attributes into the key columns (used for deduplication and joining) and value columns (the data payload).
+`get_otx_keys_list()` and `get_otx_values_list()` split attributes into the key columns (used for deduplication and joining) and value columns.
 
 **`brick_config.json`** is the master schema registry — a dictionary of all brick types, each with their `brick_category`, `dimens`, and column definitions. Categories include `"person"`, `"moment"`, `"translate"`, `"nabu"`, and `"spark"`.
 

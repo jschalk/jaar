@@ -42,7 +42,7 @@ Ontology note:
 
 **`etl_heard_agg_tables_to_heard_vld_tables(cursor)`** — promotes `h_agg` rows to `h_vld` via pre-generated INSERT/SELECT queries, deduplicating.
 
-**`get_moment_dict_from_heard_tables(cursor, moment_rope)`** — the reconstruction function. Runs a series of SELECT queries against the fully validated `h_vld` tables for a given `moment_rope` and assembles a nested Python dict representing the complete `MomentUnit` state: `momentunit` row for top-level attributes, `moment_paybook` rows for `TranUnit`s (nested `person_name → contact_name → tran_time → amount`), `moment_budunit` rows for `BudUnit`s, and epoch configuration rows (hours, months, weekdays, offi_times).
+**`get_moment_dict_from_heard_tables(cursor, moment_rope)`** — the reconstruction function. Runs a series of SELECT queries against the fully validated `h_vld` tables for a given `moment_rope` and assembles a nested Python dict representing the complete `MomentUnit` state: `momentunit` row for top-level attributes, `moment_ceckbook` rows for `TranUnit`s (nested `person_name → contact_name → tran_time → amount`), `moment_budunit` rows for `BudUnit`s, and epoch configuration rows (hours, months, weekdays, offi_times).
 
 **`etl_heard_vld_tables_to_mind_moment_jsons(cursor, moment_mstr_dir)`** — iterates all `moment_rope`s from `momentunit_h_vld`, calls `get_moment_dict_from_heard_tables` for each, and writes the result as a `moment.json` file to the appropriate directory. The inline comment notes a known architectural tension: using rope-based file paths is idiomatic but problematic when `moment_rope` contains characters that don't translate to valid OS paths — a hash-based directory scheme is suggested as an alternative.
 

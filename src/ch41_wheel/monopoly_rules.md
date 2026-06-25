@@ -228,7 +228,7 @@ When landing on Community Chest:
 
 When landing on Income Tax:
 
-- Pay $200.
+- Bud tax of $200.
 
 ---
 
@@ -236,7 +236,7 @@ When landing on Income Tax:
 
 When landing on Luxury Tax:
 
-- Pay $100.
+- Bud tax of $100.
 
 ---
 
@@ -288,7 +288,7 @@ Using a Get Out of Jail Free card.
 
 ### Option 2
 
-Paying $50 before rolling.
+Bud of tax of $50 before rolling.
 
 ---
 
@@ -300,7 +300,7 @@ A player may attempt doubles for up to three turns.
 
 If unsuccessful after the third attempt:
 
-- Pay $50.
+- Bud of tax of $50.
 - Move according to the dice roll.
 
 ---
@@ -421,8 +421,7 @@ While mortgaged:
 
 To remove a mortgage:
 
-1. Pay the mortgage value.
-2. Pay an additional 10%.
+1. Ceck to banker of the mortgage value plus an additional 10%.
 
 Example:
 

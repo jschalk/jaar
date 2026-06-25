@@ -61,7 +61,7 @@ def add_momentunit_to_idea_csv_strs(
     ii00105_csv = moment_csv_strs.get("ii00105")
     ii00100_csv = _add_momentunit_to_ii00100_csv(ii00100_csv, x_moment, csv_delimiter)
     ii00101_csv = _add_budunit_to_ii00101_csv(ii00101_csv, x_moment, csv_delimiter)
-    ii00102_csv = _add_paybook_to_ii00102_csv(ii00102_csv, x_moment, csv_delimiter)
+    ii00102_csv = _add_ceckbook_to_ii00102_csv(ii00102_csv, x_moment, csv_delimiter)
     ii00103_csv = _add_hours_to_ii00103_csv(ii00103_csv, x_moment, csv_delimiter)
     ii00104_csv = _add_months_to_ii00104_csv(ii00104_csv, x_moment, csv_delimiter)
     ii00105_csv = _add_weekdays_to_ii00105_csv(ii00105_csv, x_moment, csv_delimiter)
@@ -131,7 +131,7 @@ def _add_budunit_to_ii00101_csv(
     return x_csv
 
 
-def _add_paybook_to_ii00102_csv(
+def _add_ceckbook_to_ii00102_csv(
     x_csv: str,
     x_moment: MomentUnit,
     csv_delimiter: str,
@@ -139,7 +139,7 @@ def _add_paybook_to_ii00102_csv(
     spark_num: int = None,
 ) -> str:
     x_knot = get_csv_compatible_knot(x_moment.knot, csv_delimiter)
-    for person_name, tranunit in x_moment.paybook.tranunits.items():
+    for person_name, tranunit in x_moment.ceckbook.tranunits.items():
         for contact_name, time_dict in tranunit.items():
             for tran_time, amount in time_dict.items():
                 moment_rope = x_moment.moment_rope

@@ -74,7 +74,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario0_OneMomentRope(
         allow_prev_to_offi_time_max_entry=True,
         celldepth=5,
     )
-    expected_amy23_momentunit.add_paypurchase(
+    expected_amy23_momentunit.add_ceckpurchase(
         person_name="Zia",
         contact_name="Bob",
         tran_time=777,
@@ -91,11 +91,11 @@ def test_moment_build_from_df_ReturnsObj_Scenario0_OneMomentRope(
     print(expected_personbudhistorys)
     print(gen_momentunit.personbudhistorys)
     assert gen_momentunit.personbudhistorys == expected_personbudhistorys
-    a23_tranunits = expected_amy23_momentunit.paybook.tranunits
-    assert gen_momentunit.paybook.tranunits == a23_tranunits
+    a23_tranunits = expected_amy23_momentunit.ceckbook.tranunits
+    assert gen_momentunit.ceckbook.tranunits == a23_tranunits
     # print(f"{gen_momentunit.personbudhistorys=}")
     assert len(gen_momentunit.personbudhistorys) == 1
-    assert len(gen_momentunit.paybook.tranunits) == 1
+    assert len(gen_momentunit.ceckbook.tranunits) == 1
     assert gen_momentunit == expected_amy23_momentunit
 
 
@@ -160,7 +160,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario1_TwoMomentRopes(
     assert creg_momentunit.moment_mstr_dir == x_moments_dir
     assert creg_momentunit.epoch == amy23_momentunit.epoch
     assert len(creg_momentunit.personbudhistorys) == 3
-    assert len(creg_momentunit.paybook.tranunits) == 4
+    assert len(creg_momentunit.ceckbook.tranunits) == 4
     # assert creg_momentunit == amy23_momentunit
 
     five_momentunit = x_momentunits.get(J45_ROPE)
@@ -170,7 +170,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario1_TwoMomentRopes(
     assert five_momentunit.moment_rope == J45_ROPE
     assert five_momentunit.moment_mstr_dir == x_moments_dir
     assert len(five_momentunit.personbudhistorys) == 2
-    assert len(five_momentunit.paybook.tranunits) == 1
+    assert len(five_momentunit.ceckbook.tranunits) == 1
     jeffy45_epoch = jeffy45_momentunit.epoch
     assert five_momentunit.epoch.hours_config == jeffy45_epoch.hours_config
     assert five_momentunit.epoch.weekdays_config == jeffy45_epoch.weekdays_config

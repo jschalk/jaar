@@ -26,7 +26,7 @@ def test_get_moment_config_dict_ReturnsObj():
     moment_config_dimens = set(moment_config.keys())
     assert kw.momentunit in moment_config_dimens
     assert kw.moment_budunit in moment_config_dimens
-    assert kw.moment_paybook in moment_config_dimens
+    assert kw.moment_ceckbook in moment_config_dimens
     assert kw.moment_epoch_hour in moment_config_dimens
     assert kw.moment_epoch_month in moment_config_dimens
     assert kw.moment_epoch_weekday in moment_config_dimens
@@ -35,14 +35,14 @@ def test_get_moment_config_dict_ReturnsObj():
     _validate_moment_config(moment_config)
     momentunit_dict = moment_config.get(kw.momentunit)
     moment_budunit_dict = moment_config.get(kw.moment_budunit)
-    moment_paybook_dict = moment_config.get(kw.moment_paybook)
+    moment_ceckbook_dict = moment_config.get(kw.moment_ceckbook)
     moment_epoch_hour_dict = moment_config.get(kw.moment_epoch_hour)
     moment_epoch_month_dict = moment_config.get(kw.moment_epoch_month)
     moment_epoch_weekday_dict = moment_config.get(kw.moment_epoch_weekday)
     # moment_timeoffi_dict = moment_config.get(kw.moment_timeoffi)
     assert len(momentunit_dict.get(kw.jkeys)) == 1
     assert len(moment_budunit_dict.get(kw.jkeys)) == 3
-    assert len(moment_paybook_dict.get(kw.jkeys)) == 4
+    assert len(moment_ceckbook_dict.get(kw.jkeys)) == 4
     assert len(moment_epoch_hour_dict.get(kw.jkeys)) == 2
     assert len(moment_epoch_month_dict.get(kw.jkeys)) == 2
     assert len(moment_epoch_weekday_dict.get(kw.jkeys)) == 2
@@ -64,7 +64,7 @@ def test_get_moment_config_dict_ReturnsObj():
     assert gen_jvalues == x_momentunit_jvalues
     assert len(momentunit_dict.get(kw.jvalues)) == 9
     assert len(moment_budunit_dict.get(kw.jvalues)) == 2
-    assert len(moment_paybook_dict.get(kw.jvalues)) == 1
+    assert len(moment_ceckbook_dict.get(kw.jvalues)) == 1
     assert len(moment_epoch_hour_dict.get(kw.jvalues)) == 1
     assert len(moment_epoch_month_dict.get(kw.jvalues)) == 1
     assert len(moment_epoch_weekday_dict.get(kw.jvalues)) == 1
@@ -111,7 +111,7 @@ def test_get_moment_dimens_ReturnsObj():
     # THEN
     assert kw.momentunit in moment_config_dimens
     assert kw.moment_budunit in moment_config_dimens
-    assert kw.moment_paybook in moment_config_dimens
+    assert kw.moment_ceckbook in moment_config_dimens
     assert kw.moment_epoch_hour in moment_config_dimens
     assert kw.moment_epoch_month in moment_config_dimens
     assert kw.moment_epoch_weekday in moment_config_dimens

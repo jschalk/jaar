@@ -182,14 +182,14 @@ Create one card for each of the following.
 5. Advance token to nearest Utility
 6. Advance token to nearest Railroad
 7. Advance token to nearest Railroad
-8. Bank pays you dividend of $50
+8. Bank Bud outlays you $50. Why: dividend
 9. Get Out of Jail Free
 10. Go Back 3 Spaces
 11. Go to Jail
 12. Make General Repairs on All Your Property
-13. Pay Poor Tax of $15
+13. Bank Bud taxes you $15. Why: To help the destitute
 14. Go to the Reading Railroad
-15. You Have Been Elected Chairman of the Board (Pay each player $50)
+15. You Have Been Elected Chairman of the Board (Ceck to each player for $50)
 16. Your Building Loan Matures (Collect $150)
 
 ---
@@ -200,7 +200,7 @@ Create one card for each of the following.
 
 1. Advance to GO (Collect $200)
 2. Bank Error in Your Favor (Collect $200)
-3. Doctor's Fee (Pay $50)
+3. Bank Bud tax of $50. Why: Doctor
 4. From Sale of Stock You Get $50
 5. Get Out of Jail Free
 6. Go to Jail
@@ -208,8 +208,8 @@ Create one card for each of the following.
 8. Income Tax Refund (Collect $20)
 9. It Is Your Birthday (Collect $10 From Every Player)
 10. Life Insurance Matures (Collect $100)
-11. Pay Hospital Fees of $100
-12. Pay School Fees of $50
+11. Bank Bud tax of $100. Why: Hospital
+12. Bank Bud tax of $50. Why: School
 13. Receive $25 Consultancy Fee
 14. You Are Assessed for Street Repairs
 15. You Have Won Second Prize in a Beauty Contest (Collect $10)

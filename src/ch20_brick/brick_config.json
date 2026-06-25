@@ -33,7 +33,7 @@
     "jkeys": {"moment_rope": {}, "spark_face": {}, "spark_num": {}, "weekday_order": {}}, 
     "jvalues": {"knot": {}, "weekday_label": {}}
   }, 
-  "moment_paybook": {
+  "moment_ceckbook": {
     "allowed_crud": "insert_multiple", 
     "brick_category": "moment", 
     "build_order": 21, 

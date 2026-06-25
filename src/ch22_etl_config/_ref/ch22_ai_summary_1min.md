@@ -36,7 +36,7 @@ Ontology note:
 
 **`etl_config.py`** — the core configuration module:
 
-- `ALL_DIMEN_ABBV7` and `ALL_DIMEN_ABBV2` — two abbreviation sets for all 23 dimension types (e.g. `"moment_paybook"` → `"MMTPAYY"` / `"MP"`). These abbreviated names are used as table name prefixes throughout the SQLite ETL database.
+- `ALL_DIMEN_ABBV7` and `ALL_DIMEN_ABBV2` — two abbreviation sets for all 23 dimension types (e.g. `"moment_ceckbook"` → `"MMTCECK"` / `"MP"`). These abbreviated names are used as table name prefixes throughout the SQLite ETL database.
 - `get_dimen_abbv7(dimen)` and `get_dimen_abbv2(dimen)` — dispatch functions mapping full dimension names to abbreviations.
 - `get_etl_stage_types_config_dict()` — loads `etl_stage_types_config.json`, which defines the ordered sequence of ETL stages (e.g. `b_raw` → `b_agg` → `b_vld` → `s_raw` → `s_agg` → `s_vld` → `h_raw` → ...). Each stage has a `stage_type_order` integer determining its position in the pipeline.
 - `get_stage_create_table_sqlstr(dimen, stage_type)` — generates the `CREATE TABLE` SQL for a specific dimension at a specific pipeline stage, incorporating `_otx`/`_inx` column expansions for translated and nabu fields.

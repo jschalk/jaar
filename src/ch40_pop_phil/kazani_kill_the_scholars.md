@@ -67,7 +67,7 @@ Let me give you an example
 
 <div align="center"><img src="images/stalin_crew.webp" alt="Article image 3" width="700"></div>
 
-Joseph Stalin, a dictator holding the absolute power over the USSR for several decades, was an avid reader, and has left an enourmous personal library. What is particularly valuable is that has left a library of books full of his personal notes, remarks, highlighted passages, his own thoughts scribed on the margins. Giving us a fairly good idea of what he was reading, what kind of ideas he was absorbing and what he was paying specific attention to.
+Joseph Stalin, a dictator holding the absolute power over the USSR for several decades, was an avid reader, and has left an enourmous personal library. What is particularly valuable is that has left a library of books full of his personal notes, remarks, highlighted passages, his own thoughts scribed on the margins. Giving us a fairly good idea of what he was reading, what kind of ideas he was absorbing and what he was giving specific attention to.
 
 One interesting observation of that is:
 
@@ -75,7 +75,7 @@ There is surprisingly little Marx in all of that
 
 There is surprisingly little Engels
 
-Despite Stalin, and the Communist movement itself drawing its legitimacy from the divine authority of Marx and Engels, it does not look like Stalin himself was paying very much attention in what Marx and Engels were writing, or took any particular interest in all of that. To put it in a simple terms,
+Despite Stalin, and the Communist movement itself drawing its legitimacy from the divine authority of Marx and Engels, it does not look like Stalin himself was giving very much attention in what Marx and Engels were writing, or took any particular interest in all of that. To put it in a simple terms,
 
 <div align="center">
 

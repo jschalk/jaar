@@ -92,12 +92,12 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario1_With_momentunit_
         kw.moment_rope,
         "offi_times",
         kw.epoch,
-        kw.paybook,
+        kw.ceckbook,
         kw.personbudhistorys,
     }
 
 
-def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario2_With_mmtpayy_Attrs(
+def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario2_With_mmtceck_Attrs(
     cursor0: Cursor,
 ):
     # sourcery skip: extract-duplicate-method
@@ -106,25 +106,25 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario2_With_mmtpayy_Att
     bob_sue_tp55_amount = 444
     create_sound_and_heard_tables(cursor0)
     mmtunit_h_vld_tablename = create_prime_tablename("mmtunit", kw.h_vld)
-    momentpay_h_vld_tablename = create_prime_tablename("mmtpayy", kw.h_vld)
+    momentceck_h_vld_tablename = create_prime_tablename("mmtceck", kw.h_vld)
     momentunit_insert_sqlstr = (
         f"INSERT INTO {mmtunit_h_vld_tablename} (moment_rope) VALUES ('{exx.a23}');"
     )
     cursor0.execute(momentunit_insert_sqlstr)
-    mmtpayy_insert_sqlstr = f"""INSERT INTO {momentpay_h_vld_tablename} (moment_rope, person_name, contact_name, tran_time, amount)
+    mmtceck_insert_sqlstr = f"""INSERT INTO {momentceck_h_vld_tablename} (moment_rope, person_name, contact_name, tran_time, amount)
 VALUES ('{exx.a23}', '{exx.bob}', '{exx.sue}', {tp55}, {bob_sue_tp55_amount})
 ;
 """
-    cursor0.execute(mmtpayy_insert_sqlstr)
+    cursor0.execute(mmtceck_insert_sqlstr)
 
     # WHEN
     a23_dict = get_moment_dict_from_heard_tables(cursor0, exx.a23)
 
     # THEN
-    a23_paybook_dict = a23_dict.get("paybook")
-    assert a23_paybook_dict
-    assert a23_paybook_dict.get(kw.moment_rope) == exx.a23
-    a23_tranunits_dict = a23_paybook_dict.get("tranunits")
+    a23_ceckbook_dict = a23_dict.get("ceckbook")
+    assert a23_ceckbook_dict
+    assert a23_ceckbook_dict.get(kw.moment_rope) == exx.a23
+    a23_tranunits_dict = a23_ceckbook_dict.get("tranunits")
     assert a23_tranunits_dict
     a23_trans_bob_dict = a23_tranunits_dict.get(exx.bob)
     assert a23_trans_bob_dict
@@ -133,7 +133,7 @@ VALUES ('{exx.a23}', '{exx.bob}', '{exx.sue}', {tp55}, {bob_sue_tp55_amount})
     assert a23_trans_bob_sue_dict.get(tp55) == bob_sue_tp55_amount
 
 
-def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario3_With_mmtpayy_Attrs(
+def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario3_With_mmtceck_Attrs(
     cursor0: Cursor,
 ):
     # ESTABLISH
@@ -143,27 +143,27 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario3_With_mmtpayy_Att
     a45_bob_sue_tp55_amount = 800
     create_sound_and_heard_tables(cursor0)
     mmtunit_h_vld_tablename = create_prime_tablename("mmtunit", kw.h_vld)
-    momentpay_h_vld_tablename = create_prime_tablename("mmtpayy", kw.h_vld)
+    momentceck_h_vld_tablename = create_prime_tablename("mmtceck", kw.h_vld)
     momentunit_insert_sqlstr = (
         f"INSERT INTO {mmtunit_h_vld_tablename} (moment_rope) VALUES ('{exx.a23}');"
     )
     cursor0.execute(momentunit_insert_sqlstr)
-    mmtpayy_insert_sqlstr = f"""INSERT INTO {momentpay_h_vld_tablename} (moment_rope, person_name, contact_name, tran_time, amount)
+    mmtceck_insert_sqlstr = f"""INSERT INTO {momentceck_h_vld_tablename} (moment_rope, person_name, contact_name, tran_time, amount)
 VALUES
   ('{exx.a23}', '{exx.bob}', '{exx.sue}', {tp55}, {a23_bob_sue_tp55_amount})
 , ('{a45_str}', '{exx.bob}', '{exx.sue}', {tp55}, {a45_bob_sue_tp55_amount})
 ;
 """
-    cursor0.execute(mmtpayy_insert_sqlstr)
+    cursor0.execute(mmtceck_insert_sqlstr)
 
     # WHEN
     a23_dict = get_moment_dict_from_heard_tables(cursor0, exx.a23)
 
     # THEN
-    a23_paybook_dict = a23_dict.get("paybook")
-    assert a23_paybook_dict
-    assert a23_paybook_dict.get(kw.moment_rope) == exx.a23
-    a23_tranunits_dict = a23_paybook_dict.get("tranunits")
+    a23_ceckbook_dict = a23_dict.get("ceckbook")
+    assert a23_ceckbook_dict
+    assert a23_ceckbook_dict.get(kw.moment_rope) == exx.a23
+    a23_tranunits_dict = a23_ceckbook_dict.get("tranunits")
     assert a23_tranunits_dict
     a23_trans_bob_dict = a23_tranunits_dict.get(exx.bob)
     assert a23_trans_bob_dict
@@ -186,11 +186,11 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario4_With_momentbud_A
         f"INSERT INTO {mmtunit_h_vld_tablename} (moment_rope) VALUES ('{exx.a23}');"
     )
     cursor0.execute(momentunit_insert_sqlstr)
-    mmtpayy_insert_sqlstr = f"""INSERT INTO {momentbud_h_vld_tablename} (moment_rope, person_name, bud_time, knot, quota, celldepth)
+    mmtceck_insert_sqlstr = f"""INSERT INTO {momentbud_h_vld_tablename} (moment_rope, person_name, bud_time, knot, quota, celldepth)
 VALUES ('{exx.a23}', '{exx.bob}', {tp55}, '{exx.dash}', {bob_tp55_quota}, {bob_tp55_celldepth})
 ;
 """
-    cursor0.execute(mmtpayy_insert_sqlstr)
+    cursor0.execute(mmtceck_insert_sqlstr)
 
     # WHEN
     a23_dict = get_moment_dict_from_heard_tables(cursor0, exx.a23)
@@ -228,13 +228,13 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario5_With_mmthour_Att
         f"INSERT INTO {mmtunit_h_vld_tablename} (moment_rope) VALUES ('{exx.a23}');"
     )
     cursor0.execute(momentunit_insert_sqlstr)
-    mmtpayy_insert_sqlstr = f"""INSERT INTO {mmthour_h_vld_tablename} (moment_rope, cumulative_minute, hour_label)
+    mmtceck_insert_sqlstr = f"""INSERT INTO {mmthour_h_vld_tablename} (moment_rope, cumulative_minute, hour_label)
 VALUES
   ('{exx.a23}', {hour3_min}, '{hour3_label}')
 , ('{exx.a23}', {hour4_min}, '{hour4_label}')
 ;
 """
-    cursor0.execute(mmtpayy_insert_sqlstr)
+    cursor0.execute(mmtceck_insert_sqlstr)
 
     # WHEN
     a23_dict = get_moment_dict_from_heard_tables(cursor0, exx.a23)
@@ -263,13 +263,13 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario6_With_mmtmont_Att
         f"INSERT INTO {mmtunit_h_vld_tablename} (moment_rope) VALUES ('{exx.a23}');"
     )
     cursor0.execute(momentunit_insert_sqlstr)
-    mmtpayy_insert_sqlstr = f"""INSERT INTO {mmtmont_h_vld_tablename} (moment_rope, cumulative_day, month_label)
+    mmtceck_insert_sqlstr = f"""INSERT INTO {mmtmont_h_vld_tablename} (moment_rope, cumulative_day, month_label)
 VALUES
   ('{exx.a23}', {day111_min}, '{month111_label}')
 , ('{exx.a23}', {day222_min}, '{month222_label}')
 ;
 """
-    cursor0.execute(mmtpayy_insert_sqlstr)
+    cursor0.execute(mmtceck_insert_sqlstr)
 
     # WHEN
     a23_dict = get_moment_dict_from_heard_tables(cursor0, exx.a23)
@@ -299,13 +299,13 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario7_With_mmtweek_Att
         f"INSERT INTO {mmtunit_h_vld_tablename} (moment_rope) VALUES ('{exx.a23}');"
     )
     cursor0.execute(momentunit_insert_sqlstr)
-    mmtpayy_insert_sqlstr = f"""INSERT INTO {mmtweek_h_vld_tablename} (moment_rope, weekday_order, weekday_label)
+    mmtceck_insert_sqlstr = f"""INSERT INTO {mmtweek_h_vld_tablename} (moment_rope, weekday_order, weekday_label)
 VALUES
   ('{exx.a23}', {ana_order}, '{ana_label}')
 , ('{exx.a23}', {bee_order}, '{bee_label}')
 ;
 """
-    cursor0.execute(mmtpayy_insert_sqlstr)
+    cursor0.execute(mmtceck_insert_sqlstr)
 
     # WHEN
     a23_dict = get_moment_dict_from_heard_tables(cursor0, exx.a23)
@@ -330,13 +330,13 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario8_With_mmtoffi_Att
         f"INSERT INTO {mmtunit_h_vld_tablename} (moment_rope) VALUES ('{exx.a23}');"
     )
     cursor0.execute(momentunit_insert_sqlstr)
-    mmtpayy_insert_sqlstr = f"""INSERT INTO {mmtoffi_h_vld_tablename} (moment_rope, offi_time)
+    mmtceck_insert_sqlstr = f"""INSERT INTO {mmtoffi_h_vld_tablename} (moment_rope, offi_time)
 VALUES
   ('{exx.a23}', {offi_time5})
 , ('{exx.a23}', {offi_time7})
 ;
 """
-    cursor0.execute(mmtpayy_insert_sqlstr)
+    cursor0.execute(mmtceck_insert_sqlstr)
 
     # WHEN
     a23_dict = get_moment_dict_from_heard_tables(cursor0, exx.a23)
@@ -403,7 +403,7 @@ VALUES (
     assert a23_momentunit.knot == a23_knot
 
 
-def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario10_IsFormatted_mmtpayy(
+def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario10_IsFormatted_mmtceck(
     cursor0: Cursor,
 ):
     # ESTABLISH
@@ -411,16 +411,16 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario10_IsFormatted_mmt
     bob_sue_tp55_amount = 444
     create_sound_and_heard_tables(cursor0)
     mmtunit_h_vld_tablename = create_prime_tablename("mmtunit", kw.h_vld)
-    momentpay_h_vld_tablename = create_prime_tablename("mmtpayy", kw.h_vld)
+    momentceck_h_vld_tablename = create_prime_tablename("mmtceck", kw.h_vld)
     momentunit_insert_sqlstr = (
         f"INSERT INTO {mmtunit_h_vld_tablename} (moment_rope) VALUES ('{exx.a23}');"
     )
     cursor0.execute(momentunit_insert_sqlstr)
-    mmtpayy_insert_sqlstr = f"""INSERT INTO {momentpay_h_vld_tablename} (moment_rope, person_name, contact_name, tran_time, amount)
+    mmtceck_insert_sqlstr = f"""INSERT INTO {momentceck_h_vld_tablename} (moment_rope, person_name, contact_name, tran_time, amount)
 VALUES ('{exx.a23}', '{exx.bob}', '{exx.sue}', {tp55}, {bob_sue_tp55_amount})
 ;
 """
-    cursor0.execute(mmtpayy_insert_sqlstr)
+    cursor0.execute(mmtceck_insert_sqlstr)
     a23_dict = get_moment_dict_from_heard_tables(cursor0, exx.a23)
 
     # WHEN
@@ -428,8 +428,8 @@ VALUES ('{exx.a23}', '{exx.bob}', '{exx.sue}', {tp55}, {bob_sue_tp55_amount})
 
     # THEN
     assert a23_momentunit.moment_rope == exx.a23
-    assert a23_momentunit.paybook.tranunits.get(exx.bob)
-    bob_tranunit = a23_momentunit.paybook.tranunits.get(exx.bob)
+    assert a23_momentunit.ceckbook.tranunits.get(exx.bob)
+    bob_tranunit = a23_momentunit.ceckbook.tranunits.get(exx.bob)
     assert bob_tranunit == {exx.sue: {tp55: bob_sue_tp55_amount}}
 
 
@@ -447,11 +447,11 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario11_IsFormatted_mom
         f"INSERT INTO {mmtunit_h_vld_tablename} (moment_rope) VALUES ('{exx.a23}');"
     )
     cursor0.execute(momentunit_insert_sqlstr)
-    mmtpayy_insert_sqlstr = f"""INSERT INTO {momentbud_h_vld_tablename} (moment_rope, person_name, bud_time, quota, celldepth)
+    mmtceck_insert_sqlstr = f"""INSERT INTO {momentbud_h_vld_tablename} (moment_rope, person_name, bud_time, quota, celldepth)
 VALUES ('{exx.a23}', '{exx.bob}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth})
 ;
 """
-    cursor0.execute(mmtpayy_insert_sqlstr)
+    cursor0.execute(mmtceck_insert_sqlstr)
     a23_dict = get_moment_dict_from_heard_tables(cursor0, exx.a23)
 
     # WHEN
@@ -482,13 +482,13 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario12_mmthour(
         f"INSERT INTO {mmtunit_h_vld_tablename} (moment_rope) VALUES ('{exx.a23}');"
     )
     cursor0.execute(momentunit_insert_sqlstr)
-    mmtpayy_insert_sqlstr = f"""INSERT INTO {mmthour_h_vld_tablename} (moment_rope, cumulative_minute, hour_label)
+    mmtceck_insert_sqlstr = f"""INSERT INTO {mmthour_h_vld_tablename} (moment_rope, cumulative_minute, hour_label)
 VALUES
   ('{exx.a23}', {hour3_min}, '{hour3_label}')
 , ('{exx.a23}', {hour4_min}, '{hour4_label}')
 ;
 """
-    cursor0.execute(mmtpayy_insert_sqlstr)
+    cursor0.execute(mmtceck_insert_sqlstr)
     a23_dict = get_moment_dict_from_heard_tables(cursor0, exx.a23)
 
     # WHEN
@@ -516,13 +516,13 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario13_mmtmont(
         f"INSERT INTO {mmtunit_h_vld_tablename} (moment_rope) VALUES ('{exx.a23}');"
     )
     cursor0.execute(momentunit_insert_sqlstr)
-    mmtpayy_insert_sqlstr = f"""INSERT INTO {mmtmont_h_vld_tablename} (moment_rope, cumulative_day, month_label)
+    mmtceck_insert_sqlstr = f"""INSERT INTO {mmtmont_h_vld_tablename} (moment_rope, cumulative_day, month_label)
 VALUES
   ('{exx.a23}', {day111_min}, '{month111_label}')
 , ('{exx.a23}', {day222_min}, '{month222_label}')
 ;
 """
-    cursor0.execute(mmtpayy_insert_sqlstr)
+    cursor0.execute(mmtceck_insert_sqlstr)
     a23_dict = get_moment_dict_from_heard_tables(cursor0, exx.a23)
 
     # WHEN
@@ -550,13 +550,13 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario14_mmtweek(
         f"INSERT INTO {mmtunit_h_vld_tablename} (moment_rope) VALUES ('{exx.a23}');"
     )
     cursor0.execute(momentunit_insert_sqlstr)
-    mmtpayy_insert_sqlstr = f"""INSERT INTO {mmtweek_h_vld_tablename} (moment_rope, weekday_order, weekday_label)
+    mmtceck_insert_sqlstr = f"""INSERT INTO {mmtweek_h_vld_tablename} (moment_rope, weekday_order, weekday_label)
 VALUES
   ('{exx.a23}', {ana_order}, '{ana_label}')
 , ('{exx.a23}', {bee_order}, '{bee_label}')
 ;
 """
-    cursor0.execute(mmtpayy_insert_sqlstr)
+    cursor0.execute(mmtceck_insert_sqlstr)
     a23_dict = get_moment_dict_from_heard_tables(cursor0, exx.a23)
 
     # WHEN
@@ -579,13 +579,13 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_Scenario15_mmtoffi(
         f"INSERT INTO {mmtunit_h_vld_tablename} (moment_rope) VALUES ('{exx.a23}');"
     )
     cursor0.execute(momentunit_insert_sqlstr)
-    mmtpayy_insert_sqlstr = f"""INSERT INTO {mmtoffi_h_vld_tablename} (moment_rope, offi_time)
+    mmtceck_insert_sqlstr = f"""INSERT INTO {mmtoffi_h_vld_tablename} (moment_rope, offi_time)
 VALUES
   ('{exx.a23}', {offi_time5})
 , ('{exx.a23}', {offi_time7})
 ;
 """
-    cursor0.execute(mmtpayy_insert_sqlstr)
+    cursor0.execute(mmtceck_insert_sqlstr)
     a23_dict = get_moment_dict_from_heard_tables(cursor0, exx.a23)
 
     # WHEN

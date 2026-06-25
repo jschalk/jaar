@@ -75,17 +75,17 @@ def test_add_epoch_frame_to_momentunit_SetsAttr_Scenario0_tran_time(temp3_dir):
     # ESTABLISH
     a23_momentunit = momentunit_shop(exx.a23, temp3_dir)
     t55 = 55
-    a23_momentunit.paybook.add_tranunit(exx.a23, exx.yao, t55, 3)
+    a23_momentunit.ceckbook.add_tranunit(exx.a23, exx.yao, t55, 3)
     epoch_frame_min = 6
-    assert a23_momentunit.paybook.tranunit_exists(exx.a23, exx.yao, t55)
+    assert a23_momentunit.ceckbook.tranunit_exists(exx.a23, exx.yao, t55)
 
     # WHEN
     add_epoch_frame_to_momentunit(a23_momentunit, epoch_frame_min)
 
     # THEN
-    assert not a23_momentunit.paybook.tranunit_exists(exx.a23, exx.yao, t55)
+    assert not a23_momentunit.ceckbook.tranunit_exists(exx.a23, exx.yao, t55)
     expected_time = t55 + epoch_frame_min
-    assert a23_momentunit.paybook.tranunit_exists(exx.a23, exx.yao, expected_time)
+    assert a23_momentunit.ceckbook.tranunit_exists(exx.a23, exx.yao, expected_time)
 
 
 def test_add_epoch_frame_to_momentunit_SetsAttr_Scenario1_tran_time_ModularAddition(
@@ -94,17 +94,17 @@ def test_add_epoch_frame_to_momentunit_SetsAttr_Scenario1_tran_time_ModularAddit
     # ESTABLISH
     a23_momentunit = momentunit_shop(exx.a23, temp3_dir)
     t55 = 55
-    a23_momentunit.paybook.add_tranunit(exx.a23, exx.yao, t55, 3)
+    a23_momentunit.ceckbook.add_tranunit(exx.a23, exx.yao, t55, 3)
     frame_min = DEFAULT_EPOCH_LENGTH + 300
-    assert a23_momentunit.paybook.tranunit_exists(exx.a23, exx.yao, t55)
+    assert a23_momentunit.ceckbook.tranunit_exists(exx.a23, exx.yao, t55)
 
     # WHEN
     add_epoch_frame_to_momentunit(a23_momentunit, frame_min)
 
     # THEN
-    assert not a23_momentunit.paybook.tranunit_exists(exx.a23, exx.yao, t55)
+    assert not a23_momentunit.ceckbook.tranunit_exists(exx.a23, exx.yao, t55)
     expected_time = (t55 + frame_min) % DEFAULT_EPOCH_LENGTH
-    assert a23_momentunit.paybook.tranunit_exists(exx.a23, exx.yao, expected_time)
+    assert a23_momentunit.ceckbook.tranunit_exists(exx.a23, exx.yao, expected_time)
 
 
 def test_add_epoch_frame_to_momentunit_SetsAttr_Scenario2_tran_time_DifferentEpochUnit(
@@ -114,18 +114,18 @@ def test_add_epoch_frame_to_momentunit_SetsAttr_Scenario2_tran_time_DifferentEpo
     creg_epochunit = epochunit_shop(get_creg_config())
     a23_momentunit = momentunit_shop(exx.a23, temp3_dir, creg_epochunit)
     t55 = 55
-    a23_momentunit.paybook.add_tranunit(exx.a23, exx.yao, t55, 3)
+    a23_momentunit.ceckbook.add_tranunit(exx.a23, exx.yao, t55, 3)
     epoch_length = get_epoch_length(get_creg_config())
     frame_min = epoch_length + 300
-    assert a23_momentunit.paybook.tranunit_exists(exx.a23, exx.yao, t55)
+    assert a23_momentunit.ceckbook.tranunit_exists(exx.a23, exx.yao, t55)
 
     # WHEN
     add_epoch_frame_to_momentunit(a23_momentunit, frame_min)
 
     # THEN
-    assert not a23_momentunit.paybook.tranunit_exists(exx.a23, exx.yao, t55)
+    assert not a23_momentunit.ceckbook.tranunit_exists(exx.a23, exx.yao, t55)
     expected_time = (t55 + frame_min) % epoch_length
-    assert a23_momentunit.paybook.tranunit_exists(exx.a23, exx.yao, expected_time)
+    assert a23_momentunit.ceckbook.tranunit_exists(exx.a23, exx.yao, expected_time)
 
 
 def test_add_epoch_frame_to_momentunit_SetsAttr_Scenario3_tran_time_NoErrorWhenUsingSameTIme(
@@ -136,19 +136,19 @@ def test_add_epoch_frame_to_momentunit_SetsAttr_Scenario3_tran_time_NoErrorWhenU
     t55 = 55
     t65 = 65
     t75 = 75
-    a23_momentunit.paybook.add_tranunit(exx.a23, exx.yao, t55, 3)
-    a23_momentunit.paybook.add_tranunit(exx.a23, exx.yao, t65, 3)
-    assert a23_momentunit.paybook.tranunit_exists(exx.a23, exx.yao, t55)
-    assert a23_momentunit.paybook.tranunit_exists(exx.a23, exx.yao, t65)
-    assert not a23_momentunit.paybook.tranunit_exists(exx.a23, exx.yao, t75)
+    a23_momentunit.ceckbook.add_tranunit(exx.a23, exx.yao, t55, 3)
+    a23_momentunit.ceckbook.add_tranunit(exx.a23, exx.yao, t65, 3)
+    assert a23_momentunit.ceckbook.tranunit_exists(exx.a23, exx.yao, t55)
+    assert a23_momentunit.ceckbook.tranunit_exists(exx.a23, exx.yao, t65)
+    assert not a23_momentunit.ceckbook.tranunit_exists(exx.a23, exx.yao, t75)
 
     # WHEN
     add_epoch_frame_to_momentunit(a23_momentunit, 10)
 
     # THEN
-    assert not a23_momentunit.paybook.tranunit_exists(exx.a23, exx.yao, t55)
-    assert a23_momentunit.paybook.tranunit_exists(exx.a23, exx.yao, t65)
-    assert a23_momentunit.paybook.tranunit_exists(exx.a23, exx.yao, t75)
+    assert not a23_momentunit.ceckbook.tranunit_exists(exx.a23, exx.yao, t55)
+    assert a23_momentunit.ceckbook.tranunit_exists(exx.a23, exx.yao, t65)
+    assert a23_momentunit.ceckbook.tranunit_exists(exx.a23, exx.yao, t75)
 
 
 def test_add_epoch_frame_to_momentunit_SetsAttr_Scenario4_bud_time(temp3_dir):

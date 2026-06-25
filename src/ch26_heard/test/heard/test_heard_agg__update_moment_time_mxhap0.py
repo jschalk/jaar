@@ -279,22 +279,22 @@ def test_get_update_heard_agg_moment_timenum_sqlstrs_ReturnsObj():
             expected_update_sqlstrs[(arg_dimen, timenum_arg)] = update_sqlstr
     assert set(gen_update_sqlstrs.keys()) == {
         (kw.moment_timeoffi, kw.offi_time),
-        (kw.moment_paybook, kw.tran_time),
+        (kw.moment_ceckbook, kw.tran_time),
         (kw.moment_budunit, kw.bud_time),
     }
     assert gen_update_sqlstrs == expected_update_sqlstrs
 
 
-def test_get_update_heard_agg_timenum_sqlstr_ReturnsObj_Scenario1_MMTPAYY():
+def test_get_update_heard_agg_timenum_sqlstr_ReturnsObj_Scenario1_MMTCECK():
     # ESTABLISH
     mmtunit_h_agg_tablename = prime_tbl(kw.momentunit, kw.h_agg)
     nabtime_h_agg_tablename = prime_tbl(kw.nabu_timenum, kw.h_agg)
-    mmtpayy_h_agg_tablename = prime_tbl(kw.moment_paybook, kw.h_agg)
+    mmtceck_h_agg_tablename = prime_tbl(kw.moment_ceckbook, kw.h_agg)
     c400_leap_length = get_c400_constants().c400_leap_length
 
     # WHEN
     generated_update_heard_agg_timenum_sqlstr = get_update_heard_agg_timenum_sqlstr(
-        mmtpayy_h_agg_tablename, kw.tran_time
+        mmtceck_h_agg_tablename, kw.tran_time
     )
 
     # THEN
@@ -310,7 +310,7 @@ enriched AS (
         dst2_table.{kw.moment_rope},
         {kw.nabtime}.{kw.otx_time} - {kw.nabtime}.{kw.inx_time} AS {kw.inx_epoch_diff},
         {kw.mmtunit}.{kw.c400_number}
-    FROM {mmtpayy_h_agg_tablename} as dst2_table
+    FROM {mmtceck_h_agg_tablename} as dst2_table
     LEFT JOIN {nabtime_h_agg_tablename} as {kw.nabtime}
         ON {kw.nabtime}.{kw.spark_num} = (
             SELECT MAX(n2.{kw.spark_num})
@@ -321,7 +321,7 @@ enriched AS (
     LEFT JOIN {kw.mmtunit}
         ON {kw.mmtunit}.{kw.moment_rope} = {kw.nabtime}.{kw.moment_rope}
 )
-UPDATE {mmtpayy_h_agg_tablename} as dst_table
+UPDATE {mmtceck_h_agg_tablename} as dst_table
 SET {kw.tran_time}_inx = mod(
     dst_table.{kw.tran_time}_otx + IFNULL(enriched.{kw.inx_epoch_diff}, 0)
     , IFNULL(enriched.{kw.c400_number} * {c400_leap_length}, {DEFAULT_EPOCH_LENGTH})

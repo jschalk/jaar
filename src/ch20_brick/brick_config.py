@@ -267,7 +267,7 @@ class BrickFormatsEnum(str, Enum):
     bk00007_moment_fact = "bk00007_moment_fact"
     bk00100_momentunit_v0_0_0 = "bk00100_momentunit_v0_0_0"
     bk00101_moment_budunit_v0_0_0 = "bk00101_moment_budunit_v0_0_0"
-    bk00102_moment_paybook_v0_0_0 = "bk00102_moment_paybook_v0_0_0"
+    bk00102_moment_ceckbook_v0_0_0 = "bk00102_moment_ceckbook_v0_0_0"
     bk00103_moment_epoch_hour_v0_0_0 = "bk00103_moment_epoch_hour_v0_0_0"
     bk00104_moment_epoch_month_v0_0_0 = "bk00104_moment_epoch_month_v0_0_0"
     bk00105_moment_epoch_weekday_v0_0_0 = "bk00105_moment_epoch_weekday_v0_0_0"
@@ -339,7 +339,7 @@ def get_brick_format_filenames() -> set[str]:
         ifx.bk00007_moment_fact,
         ifx.bk00100_momentunit_v0_0_0,
         ifx.bk00101_moment_budunit_v0_0_0,
-        ifx.bk00102_moment_paybook_v0_0_0,
+        ifx.bk00102_moment_ceckbook_v0_0_0,
         ifx.bk00103_moment_epoch_hour_v0_0_0,
         ifx.bk00104_moment_epoch_month_v0_0_0,
         ifx.bk00105_moment_epoch_weekday_v0_0_0,
@@ -443,7 +443,7 @@ def get_brick_format_headers() -> dict[str, list[str]]:
         "moment_rope,person_name,plan_rope,fact_context,fact_state": ifx.bk00007_moment_fact,
         "moment_rope,epoch_label,c400_number,yr1_jan1_offset,monthday_index,fund_grain,mana_grain,respect_grain,knot,job_listen_rotations": ifx.bk00100_momentunit_v0_0_0,
         "moment_rope,person_name,bud_time,knot,quota,celldepth": ifx.bk00101_moment_budunit_v0_0_0,
-        "moment_rope,person_name,contact_name,tran_time,amount,knot": ifx.bk00102_moment_paybook_v0_0_0,
+        "moment_rope,person_name,contact_name,tran_time,amount,knot": ifx.bk00102_moment_ceckbook_v0_0_0,
         "moment_rope,cumulative_minute,hour_label,knot": ifx.bk00103_moment_epoch_hour_v0_0_0,
         "moment_rope,cumulative_day,month_label,knot": ifx.bk00104_moment_epoch_month_v0_0_0,
         "moment_rope,weekday_order,weekday_label,knot": ifx.bk00105_moment_epoch_weekday_v0_0_0,
@@ -505,7 +505,7 @@ def get_brick_dimen_ref() -> dict[str, set[str]]:
         "moment_epoch_hour": {"bk00103"},
         "moment_epoch_month": {"bk00104"},
         "moment_epoch_weekday": {"bk00105"},
-        "moment_paybook": {"bk00102"},
+        "moment_ceckbook": {"bk00102"},
         "moment_timeoffi": {"bk00106"},
         "momentunit": {
             "bk00001",
@@ -628,7 +628,7 @@ def get_dimen_minimum_put_brick_names() -> dict[str, str]:
         "moment_epoch_hour": ifx.bk00103_moment_epoch_hour_v0_0_0,
         "moment_epoch_month": ifx.bk00104_moment_epoch_month_v0_0_0,
         "moment_epoch_weekday": ifx.bk00105_moment_epoch_weekday_v0_0_0,
-        "moment_paybook": ifx.bk00102_moment_paybook_v0_0_0,
+        "moment_ceckbook": ifx.bk00102_moment_ceckbook_v0_0_0,
         "moment_timeoffi": ifx.bk00106_moment_timeoffi_v0_0_0,
         "momentunit": ifx.bk00100_momentunit_v0_0_0,
         "nabu_timenum": ifx.bk00170_nabu_time_v0_0_0,

@@ -205,7 +205,7 @@ def test_brick_sheets_to_lego_with_cursor_Scenario0_bk001071PopulatesTables(
     assert os_path_exists(last_run_metrics_path)
 
 
-def test_brick_sheets_to_lego_with_cursor_Scenario1_PopulateBudPayRows(
+def test_brick_sheets_to_lego_with_cursor_Scenario1_PopulateBudRows(
     temp3_fs, cursor0: Cursor
 ):
     # ESTABLISH:
