@@ -57,7 +57,7 @@ def get_ropeterm_description_md() -> str:
     fb_baking_rope = create_rope(fb_not_compelling_rope, baking_str)
     fb_like_things_rope = create_rope(soccer_str, "Things I like to do")
     fb_recruit_rope = create_rope(
-        fb_like_things_rope, "tell players to play at my favorite team"
+        fb_like_things_rope, "tell players to play at my favorite university"
     )
     fb_demps_rope = create_rope(fb_like_things_rope, "tell stories about Quetin Demps")
     # soccer_ ;Soccer;my favorite;tell players to play there;

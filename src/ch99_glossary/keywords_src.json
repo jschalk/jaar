@@ -55,6 +55,8 @@
   "MomentRope": {"semantic_type": "str", "valid_ch": "10:"}, 
   "Monopoly": {"valid_ch": "40, 41, 90"}, 
   "Nabu": {"valid_ch": "16:"}, 
+  "Team": {"valid_ch": "90"}, 
+  "team": {"valid_ch": "90"}, 
   "NabuTime": {"valid_ch": "16:"}, 
   "NameTerm": {"semantic_type": "str", "valid_ch": "3:"}, 
   "Peer": {"valid_ch": "33:"}, 

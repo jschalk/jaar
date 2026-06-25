@@ -36,7 +36,7 @@ Why?
 
 Let’s start with the beginnings
 
-America is highly polarised country, polarised - largely - into the two political tribes, of very different speech, value and culture codes. And, being a small minority in the university conservatives naturally want to find their own, to team with them.
+America is highly polarised country, polarised - largely - into the two political tribes, of very different speech, value and culture codes. And, being a small minority in the university conservatives naturally want to find their own, to group with them.
 
 So, they approached my friend because they identified her as one of their own tribe, as one of the red
 

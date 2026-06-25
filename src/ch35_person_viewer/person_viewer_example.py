@@ -55,11 +55,11 @@ def get_sue_personunit() -> PersonUnit:
     sue_person.add_contactunit(bob2_str(), bob_cred_lumen, bob_debt_lumen)
     sue_contact = sue_person.get_contact(sue2_str())
     bowlers_str = ";bowlers"
-    team_str = ";Team Administrator"
+    squad_str = ";Squad Administrator"
     sue_contact.add_membership(bowlers_str, 77, 51)
     bob_contact = sue_person.get_contact(bob2_str())
     bob_contact.add_membership(bowlers_str, 12, 37)
-    bob_contact.add_membership(team_str, 51, 91)
+    bob_contact.add_membership(squad_str, 51, 91)
 
     casa_rope = sue_person.make_l1_rope("casa")
     clean_rope = sue_person.make_rope(casa_rope, "clean")
@@ -97,12 +97,12 @@ def get_sue_personunit() -> PersonUnit:
 
     # Add some award links
     casa_administrator_awardunit = awardunit_shop("Administrator", 0.5, 0.2)
-    casa_team_awardunit = awardunit_shop(team_str, 0.3, 0.1)
+    casa_squad_awardunit = awardunit_shop(squad_str, 0.3, 0.1)
     casa_devloper_awardunit = awardunit_shop(sue2_str(), 1, 0.8)
     casa_jundevloper_awardunit = awardunit_shop("Bob", 0.7, 0.9)
     root_rope = sue_person.planroot.get_plan_rope()
     sue_person.edit_plan_attr(root_rope, awardunit=casa_administrator_awardunit)
-    sue_person.edit_plan_attr(root_rope, awardunit=casa_team_awardunit)
+    sue_person.edit_plan_attr(root_rope, awardunit=casa_squad_awardunit)
     sue_person.edit_plan_attr(casa_rope, awardunit=casa_devloper_awardunit)
     sue_person.edit_plan_attr(casa_rope, awardunit=casa_jundevloper_awardunit)
     sue_person.thinkout()

@@ -49,7 +49,7 @@ Notice that I am not preaching you to read the high brow “intellectual” stuf
 
 Not a good look
 
-A lot of people are hitting the gym, while what they really need is just move. Jump, run, dance, box, play some team sports. A lot of people are diving into the over-sophisticated “intellectual” stuff, while what they need is some kind of artistic, aesthetic impression in their lives.
+A lot of people are hitting the gym, while what they really need is just move. Jump, run, dance, box, play some group sports. A lot of people are diving into the over-sophisticated “intellectual” stuff, while what they need is some kind of artistic, aesthetic impression in their lives.
 
 If I were to give you an advice regarding your intellectual routine, I would recommend to start your morning (or finish your day, whatever your prefer) with a poem.
 
