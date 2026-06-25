@@ -565,11 +565,11 @@ class AtomRow:
     begin: float = None
     respect_grain: float = None
     close: float = None
-    contact_cred_lumen: int = None
-    group_cred_lumen: int = None
+    contact_cred_lumen: float = None
+    group_cred_lumen: float = None
     credor_respect: int = None
-    contact_debt_lumen: int = None
-    group_debt_lumen: int = None
+    contact_debt_lumen: float = None
+    group_debt_lumen: float = None
     debtor_respect: int = None
     denom: int = None
     reason_divisor: int = None

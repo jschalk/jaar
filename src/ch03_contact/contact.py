@@ -55,15 +55,15 @@ class ContactUnit:
     contact_name: ContactName = None
     groupmark: str = None
     respect_grain: RespectGrain = None
-    contact_cred_lumen: int = None
-    contact_debt_lumen: int = None
+    contact_cred_lumen: float = None
+    contact_debt_lumen: float = None
     # special attribute: static in json, in memory it is deleted after loading and recalculated during saving.
     memberships: dict[ContactName, MemberShip] = None
     # calculated fields
     credor_pool: RespectNum = None
     debtor_pool: RespectNum = None
-    irrational_contact_debt_lumen: int = None  # set by listening process
-    inallocable_contact_debt_lumen: int = None  # set by listening process
+    irrational_contact_debt_lumen: float = None  # set by listening process
+    inallocable_contact_debt_lumen: float = None  # set by listening process
     # set by thinkout()
     fund_give: FundNum = None
     fund_take: FundNum = None
@@ -88,10 +88,10 @@ class ContactUnit:
         if contact_debt_lumen is not None:
             self.set_contact_debt_lumen(contact_debt_lumen)
 
-    def set_contact_cred_lumen(self, contact_cred_lumen: int):
+    def set_contact_cred_lumen(self, contact_cred_lumen: float):
         self.contact_cred_lumen = contact_cred_lumen
 
-    def set_contact_debt_lumen(self, contact_debt_lumen: int):
+    def set_contact_debt_lumen(self, contact_debt_lumen: float):
         self.contact_debt_lumen = contact_debt_lumen
 
     def get_contact_cred_lumen(self):
@@ -295,8 +295,8 @@ def contactunit_get_from_dict(contactunit_dict: dict, groupmark: str) -> Contact
 
 def contactunit_shop(
     contact_name: ContactName,
-    contact_cred_lumen: int = None,
-    contact_debt_lumen: int = None,
+    contact_cred_lumen: float = None,
+    contact_debt_lumen: float = None,
     groupmark: str = None,
     respect_grain: float = None,
 ) -> ContactUnit:

@@ -162,7 +162,7 @@ def test_get_count_keg_terms_by_chapters_CountsTerms_Scenario0_SrcDir():
                     # print(f"{set(ch_dir_dict.keys())=}")
                     # print(f"{keg_term} {ch_dir_dict=} {lone_ch=} {x_valid_ch=}")
                     # if len(valid_chapters) - len(ch_dir_dict) > 20:
-                    if keg_term == "b_agg":
+                    if keg_term == "huh":
                         print(
                             f"{keg_term:<20} {str(sorted(set(ch_dir_dict.keys()))):<40} {valid_chapters[:20]=}"
                         )

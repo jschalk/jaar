@@ -88,13 +88,13 @@ def _ingest_single_planunit(listener: PersonUnit, ingest_planunit: PlanUnit):
 
 
 @dataclass
-class poyntReplaceOrAddData:
+class PoyntReplaceOrAddData:
     add_to_poynt_list: list = None
     replace_poynt_list: list = None
 
 
 def _create_poynt_data(listener: PersonUnit, x_rope: RopeTerm) -> list:
-    poynt_data = poyntReplaceOrAddData()
+    poynt_data = PoyntReplaceOrAddData()
     poynt_data.add_to_poynt_list = []
     poynt_data.replace_poynt_list = []
     ancestor_ropes = get_ancestor_ropes(x_rope, listener.knot)

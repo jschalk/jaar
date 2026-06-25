@@ -315,8 +315,8 @@ class PersonUnit:
     def add_contactunit(
         self,
         contact_name: ContactName,
-        contact_cred_lumen: int = None,
-        contact_debt_lumen: int = None,
+        contact_cred_lumen: float = None,
+        contact_debt_lumen: float = None,
     ):
         x_knot = self.knot
         contactunit = contactunit_shop(
@@ -341,8 +341,8 @@ class PersonUnit:
     def edit_contactunit(
         self,
         contact_name: ContactName,
-        contact_cred_lumen: int = None,
-        contact_debt_lumen: int = None,
+        contact_cred_lumen: float = None,
+        contact_debt_lumen: float = None,
     ):
         if self.contacts.get(contact_name) is None:
             raise ContactMissingError(f"ContactUnit '{contact_name}' does not exist.")

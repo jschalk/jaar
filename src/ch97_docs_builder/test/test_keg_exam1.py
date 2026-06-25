@@ -96,7 +96,7 @@ def test_set_did_you_read_orders_SetAttrs_Scenario1_SingleQuestion_WhenSingleTer
     assert poynt_questionunit.did_you_read_order == 0
 
 
-def test_set_did_you_read_orders_SetAttrs_Scenario2_AssignsSequentialOrder():
+def test_set_did_you_read_orders_SetAttrs_Scenario2_AssignsSequential_Order():
     # ESTABLISH
     alpha_questionunit = QuestionUnit(
         keg_term="alpha", question_tier=0, init_ch=1, keg_definition="Alpha definition"

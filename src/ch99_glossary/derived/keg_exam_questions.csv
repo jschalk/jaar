@@ -13,7 +13,10 @@ Have you heard of Excel spreadsheet application?
 Did you read that the keg_definition of 'Joachim' is 'Fairly common name. Also name of Init Kegology Philosopher. Lots of different prounoucations possible.'.
 "Did you read that the keg_definition of 'Knee' is ', used with Budget Cells'."
 Did you read that the keg_definition of 'Ladder' is 'A requirement for an invitation. The FamilyUnit out of power must have one to get prestige.'.
+Did you read that the keg_definition of 'Lord' is 'Definition needed.'.
+"Did you read that the keg_definition of 'LordMass' is 'Number that represents how much a Person is expects loyality from a ContactUnit, how much a ContactUnit is expects loyality from a GroupTitle'."
 Did you read that the keg_definition of 'Loser' is 'A FamilyUnit getting less Prestige.'.
+"Did you read that the keg_definition of 'LoyalMass' is 'Number that represents how much a Person is loyal to a ContactUnit, how much a ContactUnit is loyal to a GroupTitle'."
 Did you read that the keg_definition of 'Pillar' is 'A non-ladder load-bearing support of a Wheel.'.
 Did you read that the keg_definition of 'Revenge' is 'Definition needed or maybe not.'.
 "Did you read that the keg_definition of 'Rider' is 'Synonmous with Vassal as a neutral term. Someone who recognizes authority, leadership. 'I ride with that person.''."
@@ -683,7 +686,8 @@ Did you read that the keg_definition of 'financial' is 'Definition needed.'.
 "Did you read that the keg_definition of 'Hayek' is 'Fredrich Hayek, philosopher. Often incorrectly interpreted and since he's dead he can't refute them.'."
 Did you read that the keg_definition of 'Hobbit' is 'Part of Kazani theory 'The Hobbit Theory of Man' that our grandparents accepted evil within us. Not so now.'.
 Did you read that the keg_definition of 'Kronos' is 'Greek God of War and Time. Known for eating his children.'.
-"Did you read that the keg_definition of 'Monopoly' is 'One of the most popular boardgames ever created. Published 1935, based on The Landlord's Game by Lizzie Magie.'."
+Did you read that the keg_definition of 'Loyal' is 'Definition needed.'.
+"Did you read that the keg_definition of 'Monopoly' is 'One of the most popular boardgames ever created. Published 1935, based on The PropertyOwner's Game by Lizzie Magie.'."
 "Did you read that the keg_definition of 'Ride' is 'The act of recognizing authority, leadership. 'Who do I ride with?''."
 Did you read that the keg_definition of 'Shill' is 'A Rider for a bad person.'.
 Did you read that the keg_definition of 'climb' is 'To connote the action a FamilyUnit takes to gain Prestige.'.
@@ -693,6 +697,8 @@ Did you read that the keg_definition of 'invite' is 'The giving of prestige from
 Did you read that the keg_definition of 'knee' is 'Knee and Kneel used to conote a FamilyUnit without Prestige. At least within a wheel's moment. In another moment the FamilyUnit may have prestige.'.
 Did you read that the keg_definition of 'kronosmax' is 'To proactively elimanate not just current threats but potential threats to one's prestige.'.
 Did you read that the keg_definition of 'ladder' is 'A requirement for an invitation. The FamilyUnit out of power must have one to get prestige.'.
+Did you read that the keg_definition of 'lord' is 'Definition needed.'.
+Did you read that the keg_definition of 'loyal' is 'Definition needed.'.
 Did you read that the keg_definition of 'power' is 'Not used in codebase.'.
 Did you read that the keg_definition of 'prestige' is 'An instance of Prestige.'.
 "Did you read that the keg_definition of 'ride' is 'The act of recognizing authority, leadership. 'Who do I ride with?''."
@@ -724,3 +730,5 @@ Did you read that the keg_definition of 'shot' is 'I'm not throwing away my shot
 Did you read that the keg_definition of 'stable' is 'FamilyUnit with prestige and not winning or losing.'.
 Did you read that the keg_definition of 'welcome' is 'For a FamilyUnit outside a wheel to get into the Wheel it must be invited.'.
 Did you read that the keg_definition of 'wheel' is 'Refers to the KegWheel concept or the wheel concept in library distribution.'.
+Did you read that the keg_definition of 'Team' is 'Definition needed.'.
+Did you read that the keg_definition of 'team' is 'Definition needed.'.
