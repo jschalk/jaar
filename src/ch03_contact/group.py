@@ -1,6 +1,12 @@
 from ch00_py.dict_toolbox import get_1_if_None
 from ch02_allot.allot import allot_scale, default_grain_num_if_None
-from ch03_contact._ref.ch03_semantic_types import ContactName, FundGrain, GroupTitle
+from ch03_contact._ref.ch03_semantic_types import (
+    ContactName,
+    FundGrain,
+    GroupTitle,
+    LordMass,
+    LoyalMass,
+)
 from dataclasses import dataclass
 
 
@@ -15,8 +21,8 @@ class GroupCore:
 
 @dataclass
 class MemberShip(GroupCore):
-    group_cred_mass: float = 1.0
-    group_debt_mass: float = 1.0
+    group_cred_mass: LordMass = 1.0
+    group_debt_mass: LoyalMass = 1.0
     # calculated fields
     credor_pool: float = None
     debtor_pool: float = None
@@ -28,11 +34,11 @@ class MemberShip(GroupCore):
     fund_agenda_ratio_take: float = None
     contact_name: ContactName = None
 
-    def set_group_cred_mass(self, x_group_cred_mass: float):
+    def set_group_cred_mass(self, x_group_cred_mass: LordMass):
         if x_group_cred_mass is not None:
             self.group_cred_mass = x_group_cred_mass
 
-    def set_group_debt_mass(self, x_group_debt_mass: float):
+    def set_group_debt_mass(self, x_group_debt_mass: LoyalMass):
         if x_group_debt_mass is not None:
             self.group_debt_mass = x_group_debt_mass
 
@@ -56,8 +62,8 @@ class MemberShip(GroupCore):
 
 def membership_shop(
     group_title: GroupTitle,
-    group_cred_mass: float = None,
-    group_debt_mass: float = None,
+    group_cred_mass: LordMass = None,
+    group_debt_mass: LoyalMass = None,
     contact_name: ContactName = None,
 ) -> MemberShip:
     return MemberShip(

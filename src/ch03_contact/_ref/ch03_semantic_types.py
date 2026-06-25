@@ -73,3 +73,15 @@ class RespectGrain(float):
     """Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!'"""
 
     pass
+
+
+class LoyalMass(float):
+    """LoyalMass inherits from float class"""
+
+    pass
+
+
+class LordMass(float):
+    """LordMass inherits from float class"""
+
+    pass

@@ -4,7 +4,7 @@
 - ch00_py: Keyword, ch00, filename, glossary, keyword, semantic_type, shop, src
 - ch01_keyword: ch01, question_tier, sort_ordinal, valid_ch
 - ch02_allot: GrainNum, PoolNum, WeightNum, ch02
-- ch03_contact: BreakTerm, ContactName, FundGrain, FundNum, GroupMark, GroupTitle, HealerName, NameTerm, RespectGrain, RespectNum, TitleTerm, awardee_title, awardunits, ch03, contact_cred_mass, contact_debt_mass, contact_name, credor_pool, debtor_pool, fund_agenda_give, fund_agenda_ratio_give, fund_agenda_ratio_take, fund_agenda_take, fund_give, fund_grain, fund_take, give_force, group_cred_mass, group_debt_mass, group_title, groupmark, groupunits, inallocable_contact_debt_mass, irrational_contact_debt_mass, labor_title, labors, memberships, rational, respect_grain, solo, take_force, thinkout, workforceheir, workforceunit
+- ch03_contact: BreakTerm, ContactName, FundGrain, FundNum, GroupMark, GroupTitle, HealerName, Lord, LordMass, Loyal, LoyalMass, NameTerm, RespectGrain, RespectNum, TitleTerm, awardee_title, awardunits, ch03, contact_cred_mass, contact_debt_mass, contact_name, credor_pool, debtor_pool, fund_agenda_give, fund_agenda_ratio_give, fund_agenda_ratio_take, fund_agenda_take, fund_give, fund_grain, fund_take, give_force, group_cred_mass, group_debt_mass, group_title, groupmark, groupunits, inallocable_contact_debt_mass, irrational_contact_debt_mass, labor_title, labors, memberships, rational, respect_grain, solo, take_force, thinkout, workforceheir, workforceunit
 - ch04_workforce: LaborHeir, ch04, laborheir, parent_solo, person, person_name, person_name_is_workforce
 - ch05_rope: FactNum, FirstLabel, KnotTerm, LabelTerm, ManaGrain, ReasonNum, RopeTerm, ch05, fact, knot, mana_grain, meaning, parent_rope
 - ch06_reason: active_requisite, case_active, case_task, cases, ch06, fact_context, fact_lower, fact_state, fact_upper, factheirs, factunits, parent_heir_active, reason_active, reason_context, reason_divisor, reason_lower, reason_state, reason_task, reason_upper, reasonunits
@@ -33,7 +33,7 @@
 - ch33_pitch: Deal, Gift, Peer, PitchID, PitchUnit, ch33, deal, gift, offer, peer, pitch, pitch_id, pitcher_name, pitchs, request
 - ch34_finance: ch34, finance, financial
 - ch35_person_viewer: ch35
-- ch40_pop_phil: Hayek, Hobbit, Kronos, Lord, Loyal, Monopoly, Ride, Shill, ch40, ch90, climb, cow, invitation, invite, knee, kronosmax, ladder, lord, loyal, power, prestige, ride, rival, shill, winner, winning
+- ch40_pop_phil: Hayek, Hobbit, Kronos, Monopoly, Ride, Shill, ch40, ch90, climb, cow, invitation, invite, knee, kronosmax, ladder, lord, loyal, power, prestige, ride, rival, shill, winner, winning
 - ch41_wheel: Climb, Discipline, Fall, KegWheel, Losing, Prestige, Shot, Stable, Welcome, Wheel, Winning, alien, bearing, ch41, cling, discipline, fall, jump, loser, losing, revenge, shot, stable, welcome, wheel
 - ch90_world_app: Team, team
 - ch97_docs_builder: ch97

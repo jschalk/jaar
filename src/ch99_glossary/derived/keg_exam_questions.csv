@@ -155,13 +155,13 @@ Did you read that the keg_definition of 'WeightNum' is 'float first used in ch02
 Did you read that the keg_definition of 'BreakTerm' is 'str first used in ch03. All str separator classes are BreakTerms. Exists because of the necessity to break experience reality into things so they can be understood.'.
 "Did you read that the keg_definition of 'ContactName' is 'str first used in ch03. Every ContactName object is NameTerm, must follow NameTerm format.'."
 Did you read that the keg_definition of 'FundGrain' is 'float first used in ch03. Smallest Unit of fund_num'.
-Did you read that the keg_definition of 'FundNum' is 'float first used in ch03. FundNum inherits from float class'.
+Did you read that the keg_definition of 'FundNum' is 'float first used in ch03. FundNum inherits from float class.
 "Did you read that the keg_definition of 'GroupMark' is 'str first used in ch03. GroupMark(s) exist in TitleTerms to indicate its a group, no GroupMark indicates it is a ContactName.'."
 Did you read that the keg_definition of 'GroupTitle' is 'str first used in ch03. If contains SepartorTerms(s) it represents a group otherwise its a ContactName.'.
 Did you read that the keg_definition of 'HealerName' is 'str first used in ch03. A NameTerm used to identify a Problem's Healer'.
 Did you read that the keg_definition of 'NameTerm' is 'str first used in ch03. All Name string classes should inherit from this class'.
 Did you read that the keg_definition of 'RespectGrain' is 'float first used in ch03. Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!''.
-Did you read that the keg_definition of 'RespectNum' is 'float first used in ch03. RespectNum inherits from float class'.
+Did you read that the keg_definition of 'RespectNum' is 'float first used in ch03. RespectNum inherits from float class.
 Did you read that the keg_definition of 'TitleTerm' is 'str first used in ch03. If a TitleTerm contains SepartorTerms(s) it represents a group otherwise its a single member group of an ContactName.'.
 "Did you read that the keg_definition of 'awardee_title' is ', Award seed.'."
 "Did you read that the keg_definition of 'awardunits' is 'Every PlanUnit has AwardUnits that represent who is awarded give_fund and take_fund, Plan seed'."
@@ -378,7 +378,7 @@ Did you read that the keg_definition of 'offi_time_max' is 'Definition needed.'.
 "Did you read that the keg_definition of 'quota' is 'The importance of a BudUnit. The currency given to the BudUnit to be distributed to Contacts. The magnitude number will always be less then quote because its the sum of how much of the quota is distributed, bud arg, used with Budget Cells'."
 Did you read that the keg_definition of 'time' is 'Definition needed.'.
 "Did you read that the keg_definition of 'tran_time' is ', paybook arg, Nabuable arg'."
-Did you read that the keg_definition of 'ManaNum' is 'float first used in ch13. ManaNum inherits from float class'.
+Did you read that the keg_definition of 'ManaNum' is 'float first used in ch13. ManaNum inherits from float class.
 Did you read that the keg_definition of 'care_amount' is 'Definition needed.'.
 Did you read that the keg_definition of 'cares' is 'Definition needed.'.
 Did you read that the keg_definition of 'cycle_carees_curr' is 'Definition needed.'.
