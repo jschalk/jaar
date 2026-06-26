@@ -7,9 +7,9 @@
 
 ---
 
-Here's a footnote describing the foundations of KegWheel[^1]. Read it if you want. 
+Here's a footnote describing the philosophical foundations of KegWheel[^1]. Read it if you want. 
 
-Now where to start? Let's start with the most important concept in Kegology. 
+Let's start with the most important concept in Kegology. 
 
 <div align="center"><img src="../ch40_pop_phil/images/yelstin_family.webp" alt="FamilyUnit Yelstin" width="500"></div>
 
@@ -20,11 +20,12 @@ Now where to start? Let's start with the most important concept in Kegology.
 
 The primary unit of history is the Family. Ronald Syne wrote ""In all ages, whatever the form and name of government, be it monarchy, republic, or democracy, an oligarchy lurks behind the façade."[^2] The oligarchy can be best understand as a bunch of Families. A Family can have a dominate personality as letter but is better to think of families rather then personalities[^3] because the trusted family members of a leader can often have enourmous influence. Kamil Kazani claims that one of the people in the Yelstin family portrait above made Vladamir Putin king. It wasn't Boris Yelstin. Do you know which one it was? Do you know his name? I don't. Still I know the Family: The Yelstin Family. A Family that had **prestige** but then it fell from power.
 
+
 <div align="center">
 
 #### "...Status & prestige is a zero sum game..." Kamil Kazani on Twitter[^4]
-
 </div>
+
 
 Let's define the term *'prestige'* the way Kazani and others do. A Family with Prestige has status, influence, power. It is something a family either has or doesn't. It cannot be shared. 
 
@@ -37,15 +38,29 @@ The Families that have all the prestige are those in power. If they cooperate no
 
 Logically this invitation should only be extended when the prestigious family has no other choice. When they feel they are in danger of losing prestige. Expanding how many families have prestige is dangerous. The fewer players in the game the easier it is to stay in the game. Let's visualize these dynamics with some diagrams:
 
+
 ### The Wheel
 
 <div align="center"><img src="images/wheel01_intro.webp" alt="Plato head sculpture" width="400"></div>
 
-Any system of centralized power can be represented as a Wheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There is an endless army of those without prestige who will do absolutely any service for a chance of getting prestige[^5]. Promises don't even have to be made, the implication is obvious.
+Any system of centralized power can be represented as a Wheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There is an endless caravan of those without prestige who will do absolutely any service for a chance of getting prestige[^5]. Promises don't even have to be made, the implication is obvious.
 
 <div align="center"><img src="images/wheel02_falling.jpg" alt="Wheel diagram showing those that Fall" width="400"></div>
 
 As the Wheel spins there are families that are winning and families that are losing. On the other hand some families lose so much they fall out of power. There is also the "stable" section of the Wheel where families have prestige but their influence does not increase or decrease.  
+
+Why do Families fall? Perhaps the most important member dies or becomes unpopular. There are many reasons why it can happen,  In [The Poverty of Realism](../ch40_pop_phil/kazani_the_poverty_of_realism.md) Kazani lays out how the powerful stop from falling. Here are the rules edited to explicitly refer to families. 
+
+> 1. No family becomes powerful by accident
+> 
+> 2. To become powerful, a family must first win the power
+> 
+> 3. And then the family must defend it from all kinds of the pretenders 
+> 
+> 4. Defending the power takes at the very, very least 99% of the family's attention
+>  
+> 5. If the family cannot fulfil this bare minimum, it will be ousted out by a more single-focused family
+
 
 <div align="center"><img src="images/wheel03_invitation.webp" alt="Diagram invitation ladder" width="400"></div>
 
@@ -57,7 +72,7 @@ Here's a diagram showing what the Wheel could look like with distinct families i
 
 <div align="center"><img src="images/wheel05_alien.webp" alt="Plato head sculpture" width="400"></div>
 
-Here's what it looks like when a Wheel touches another Wheel. Each system of power requires institutions, customs, language so precise that they can only be described as "alien". 
+Here's what it looks like when a Wheel touches another Wheel. Each system of power requires institutions, customs, language so precise to their circumstances that they can only be described as "alien" by a different Wheel. 
 
 <div align="center"><img src="images/wheel06_size.webp" alt="Plato head sculpture" width="400"></div>
 
@@ -79,9 +94,9 @@ Here's a scenario where many wheels of different color exist in touch. (Please e
 
 Here's the same scenario with many borders. Notice the space between borders. That's a feature that is important, because borders can become their own space that's weirdly part of both wheels and not.[^6] Wheels exist against each other. 
 
-<div align="center"><img src="images/wheel10_climb_cling.webp" alt="Climbing and clinging" width="400"></div>
+<div align="center"><img src="images/wheel10_climb_cling.webp" alt="Climbing and clinging" width="300"></div>
 
-Going back to the Wheel: As the wheel turns there are winners and losers and the stable. The winners are climbing and the losers are clinging. What are they climbing? Each other of course. 
+Going back to the Wheel: As the wheel turns there are winners and losers and the stable. The winners are climbing and the losers are clinging. What are they climbing and clinging to? Two things: each other and vassalage networks. 
 
 - Winning families are climbing on top of the stable families and losing families. Stable ones can take it. Losing ones can't. Climbing on top of losing families isn't very effective. Because they're going down. Climbing on stable ones is effective.
 - Losing families are clinging to stable families and winning families. 
@@ -89,7 +104,7 @@ Going back to the Wheel: As the wheel turns there are winners and losers and the
 
 **How to get The Welcome.** 
 
-<div align="center"><img src="images/wheel11_welcomes.webp" alt="5 ladders" width="700"></div>
+<div align="center"><img src="images/wheel11_welcomes.webp" alt="5 ladders" width="300"></div>
 
 
 A family with prestige will only consider inviting another family into power if they have a "load-bearing" ladder. Something the prestigious family can climb. The welcoming family is climbing on top of the invited family and invited family is clinging to the welcoming family. Naturally this means that if you're trying to climb from out of power into power you can't go any higher then the welcoming family. For now. 
@@ -133,7 +148,8 @@ How slavish devotion is perfectly reasonable1: [Suffering from Success](../ch40_
 How slavish devotion is perfectly reasonable2: [The Vassal Strategy](../ch40_pop_phil/skallas_the_vassal_strategy.md)  
 Why Plato's power behind the throne plan fails: [Wisdom of Lenin](../ch40_pop_phil/kazani_wisdom_of_lenin.md)  
 Why and how thinkers matter: [Kill the Scholars](../ch40_pop_phil/kazani_kill_the_scholars.md)  
-Tyranny protects power: [Why Putin killed Navalny](../ch40_pop_phil/kazani_putin_navalny.md)
+Why domestic goals motivate the most: [The Poverty of Realism](../ch40_pop_phil/kazani_the_poverty_of_realism.md)  
+Tyranny protects power: [Why Putin killed Navalny](../ch40_pop_phil/kazani_putin_navalny.md)  
 Levinas and the Face intro: [I exist, I suffer. Please don't destroy me.](../ch40_pop_phil/thompson_i_exist_i_suffer.md).  
 
 
