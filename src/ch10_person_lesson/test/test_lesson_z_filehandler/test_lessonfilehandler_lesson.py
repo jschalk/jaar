@@ -16,7 +16,7 @@ from ch10_person_lesson.lesson_filehandler import (
 )
 from ch10_person_lesson.lesson_main import init_lesson_id, lessonunit_shop
 from ch10_person_lesson.test._util.ch10_examples import (
-    get_atom_example_planunit_knee,
+    get_atom_example_planunit_foot,
     get_sue_lessonunit,
     sue_1personatoms_lessonunit,
     sue_2personatoms_lessonunit,
@@ -388,7 +388,7 @@ def test_LessonFileHandler_del_lesson_file_DeleteslessonjsonAndNotPersonAtomjson
         atoms_dir=sue_lessonfilehandler.atoms_dir,
         lessons_dir=sue_lessonfilehandler.lessons_dir,
     )
-    sue_lessonunit.persondelta.set_personatom(get_atom_example_planunit_knee())
+    sue_lessonunit.persondelta.set_personatom(get_atom_example_planunit_foot())
     zero_int = 0
     assert sue_lessonfilehandler.hub_lesson_file_exists(six_int) is False
     assert sue_lessonfilehandler.h_atom_file_exists(zero_int) is False
@@ -519,8 +519,8 @@ def test_LessonFileHandler_merge_any_lessons_ReturnsObj_WithSinglelessonModifies
     print(f"{sue_lessonfilehandler.moment_lasso.moment_rope=}")
     sports_str = "sports"
     sports_rope = gut_person.make_l1_rope(sports_str)
-    knee_str = "knee"
-    knee_rope = gut_person.make_rope(sports_rope, knee_str)
+    foot_str = "foot"
+    foot_rope = gut_person.make_rope(sports_rope, foot_str)
     assert gut_person.plan_exists(sports_rope) is False
 
     # WHEN
@@ -544,10 +544,10 @@ def test_LessonFileHandler_merge_any_lessons_ReturnsObj_WithSinglelessonModifies
     print(f"{gut_person.planroot.get_plan_rope()=}")
     sports_str = "sports"
     sports_rope = gut_person.make_l1_rope(sports_str)
-    knee_str = "knee"
-    knee_rope = gut_person.make_rope(sports_rope, knee_str)
+    foot_str = "foot"
+    foot_rope = gut_person.make_rope(sports_rope, foot_str)
     assert gut_person.plan_exists(sports_rope) is False
-    assert gut_person.plan_exists(knee_rope) is False
+    assert gut_person.plan_exists(foot_rope) is False
 
     # WHEN
     new_person = sue_lessonfilehandler._merge_any_lessons(gut_person)
@@ -555,4 +555,4 @@ def test_LessonFileHandler_merge_any_lessons_ReturnsObj_WithSinglelessonModifies
     # THEN
     assert new_person != gut_person
     assert new_person.plan_exists(sports_rope)
-    assert new_person.plan_exists(knee_rope)
+    assert new_person.plan_exists(foot_rope)

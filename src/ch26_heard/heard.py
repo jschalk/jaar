@@ -136,8 +136,8 @@ def get_moment_dict_from_sqlstrs(
     if knot := momentunit_row[8]:
         moment_dict["knot"] = knot
 
-    cursor.execute(fu1_sqlstrs.get("moment_paybook"))
-    _set_moment_dict_mmtpayy(cursor, moment_dict, moment_rope)
+    cursor.execute(fu1_sqlstrs.get("moment_ceckbook"))
+    _set_moment_dict_mmtceck(cursor, moment_dict, moment_rope)
 
     cursor.execute(fu1_sqlstrs.get("moment_budunit"))
     _set_moment_dict_momentbud(cursor, moment_dict)
@@ -156,31 +156,31 @@ def get_moment_dict_from_sqlstrs(
     return moment_dict
 
 
-def _set_moment_dict_mmtpayy(
+def _set_moment_dict_mmtceck(
     cursor: sqlite3_Cursor, moment_dict: dict, x_moment_rope: str
 ):
     tranunits_dict = {}
-    for mmtpayy_row in cursor.fetchall():
-        row_moment_rope = mmtpayy_row[0]
-        row_person_name = mmtpayy_row[1]
-        row_contact_name = mmtpayy_row[2]
-        row_tran_time = mmtpayy_row[3]
-        row_amount = mmtpayy_row[4]
+    for mmtceck_row in cursor.fetchall():
+        row_moment_rope = mmtceck_row[0]
+        row_person_name = mmtceck_row[1]
+        row_contact_name = mmtceck_row[2]
+        row_tran_time = mmtceck_row[3]
+        row_amount = mmtceck_row[4]
         keylist = [row_person_name, row_contact_name, row_tran_time]
         set_in_nested_dict(tranunits_dict, keylist, row_amount)
-    paybook_dict = {"moment_rope": x_moment_rope, "tranunits": tranunits_dict}
-    moment_dict["paybook"] = paybook_dict
+    ceckbook_dict = {"moment_rope": x_moment_rope, "tranunits": tranunits_dict}
+    moment_dict["ceckbook"] = ceckbook_dict
 
 
 def _set_moment_dict_momentbud(cursor: sqlite3_Cursor, moment_dict: dict):
     personbudhistorys_dict = {}
-    for mmtpayy_row in cursor.fetchall():
-        row_moment_rope = mmtpayy_row[0]
-        row_person_name = mmtpayy_row[1]
-        row_bud_time = mmtpayy_row[2]
-        row_knot = mmtpayy_row[3]
-        row_quota = mmtpayy_row[4]
-        row_celldepth = mmtpayy_row[5]
+    for mmtceck_row in cursor.fetchall():
+        row_moment_rope = mmtceck_row[0]
+        row_person_name = mmtceck_row[1]
+        row_bud_time = mmtceck_row[2]
+        row_knot = mmtceck_row[3]
+        row_quota = mmtceck_row[4]
+        row_celldepth = mmtceck_row[5]
         person_keylist = [row_person_name, "person_name"]
         set_in_nested_dict(personbudhistorys_dict, person_keylist, row_person_name)
         keylist = [row_person_name, "buds", row_bud_time]
@@ -195,10 +195,10 @@ def _set_moment_dict_momentbud(cursor: sqlite3_Cursor, moment_dict: dict):
 
 def _set_moment_dict_mmthour(cursor: sqlite3_Cursor, moment_dict: dict):
     hours_config_list = []
-    for mmtpayy_row in cursor.fetchall():
-        row_moment_rope = mmtpayy_row[0]
-        row_cumulative_minute = mmtpayy_row[1]
-        row_hour_label = mmtpayy_row[2]
+    for mmtceck_row in cursor.fetchall():
+        row_moment_rope = mmtceck_row[0]
+        row_cumulative_minute = mmtceck_row[1]
+        row_hour_label = mmtceck_row[2]
         hours_config_list.append([row_hour_label, row_cumulative_minute])
     if hours_config_list:
         moment_dict["epoch"]["hours_config"] = hours_config_list
@@ -206,10 +206,10 @@ def _set_moment_dict_mmthour(cursor: sqlite3_Cursor, moment_dict: dict):
 
 def _set_moment_dict_mmtmont(cursor: sqlite3_Cursor, moment_dict: dict):
     months_config_list = []
-    for mmtpayy_row in cursor.fetchall():
-        row_moment_rope = mmtpayy_row[0]
-        row_cumulative_day = mmtpayy_row[1]
-        row_month_label = mmtpayy_row[2]
+    for mmtceck_row in cursor.fetchall():
+        row_moment_rope = mmtceck_row[0]
+        row_cumulative_day = mmtceck_row[1]
+        row_month_label = mmtceck_row[2]
         months_config_list.append([row_month_label, row_cumulative_day])
     if months_config_list:
         moment_dict["epoch"]["months_config"] = months_config_list
@@ -217,10 +217,10 @@ def _set_moment_dict_mmtmont(cursor: sqlite3_Cursor, moment_dict: dict):
 
 def _set_moment_dict_mmtweek(cursor: sqlite3_Cursor, moment_dict: dict):
     weekday_dict = {}
-    for mmtpayy_row in cursor.fetchall():
-        row_moment_rope = mmtpayy_row[0]
-        row_weekday_order = mmtpayy_row[1]
-        row_weekday_label = mmtpayy_row[2]
+    for mmtceck_row in cursor.fetchall():
+        row_moment_rope = mmtceck_row[0]
+        row_weekday_order = mmtceck_row[1]
+        row_weekday_label = mmtceck_row[2]
         weekday_dict[row_weekday_order] = row_weekday_label
     weekday_config_list = [weekday_dict[key] for key in sorted(weekday_dict.keys())]
     if weekday_dict:
@@ -229,9 +229,9 @@ def _set_moment_dict_mmtweek(cursor: sqlite3_Cursor, moment_dict: dict):
 
 def _set_moment_dict_timeoffi(cursor: sqlite3_Cursor, moment_dict: dict):
     offi_times_set = set()
-    for mmtpayy_row in cursor.fetchall():
-        row_moment_rope = mmtpayy_row[0]
-        row_offi_time = mmtpayy_row[1]
+    for mmtceck_row in cursor.fetchall():
+        row_moment_rope = mmtceck_row[0]
+        row_offi_time = mmtceck_row[1]
         offi_times_set.add(row_offi_time)
     moment_dict["offi_times"] = list(offi_times_set)
 

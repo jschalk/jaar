@@ -146,20 +146,16 @@ def get_plan_view_dict(x_plan: PlanUnit) -> dict[str,]:
 def get_contacts_view_dict(person: PersonUnit) -> dict[str,]:
     contacts_dict = {}
     for contact in person.contacts.values():
-        contact_cred_lumen_readable = (
-            f"contact_cred_lumen: {contact.contact_cred_lumen}"
-        )
-        contact_debt_lumen_readable = (
-            f"contact_debt_lumen: {contact.contact_debt_lumen}"
-        )
+        contact_cred_mass_readable = f"contact_cred_mass: {contact.contact_cred_mass}"
+        contact_debt_mass_readable = f"contact_debt_mass: {contact.contact_debt_mass}"
         memberships_readable = f"memberships: {contact.memberships}"
         credor_pool_readable = f"credor_pool: {contact.credor_pool}"
         debtor_pool_readable = f"debtor_pool: {contact.debtor_pool}"
-        irrational_contact_debt_lumen_readable = (
-            f"irrational_contact_debt_lumen: {contact.irrational_contact_debt_lumen}"
+        irrational_contact_debt_mass_readable = (
+            f"irrational_contact_debt_mass: {contact.irrational_contact_debt_mass}"
         )
-        inallocable_contact_debt_lumen_readable = (
-            f"inallocable_contact_debt_lumen: {contact.inallocable_contact_debt_lumen}"
+        inallocable_contact_debt_mass_readable = (
+            f"inallocable_contact_debt_mass: {contact.inallocable_contact_debt_mass}"
         )
         fund_give_readable = f"fund_give: {contact.fund_give}"
         fund_take_readable = f"fund_take: {contact.fund_take}"
@@ -175,8 +171,8 @@ def get_contacts_view_dict(person: PersonUnit) -> dict[str,]:
             x_membership.group_title: {
                 "contact_name": x_membership.contact_name,
                 "group_title": x_membership.group_title,
-                "group_cred_lumen": x_membership.group_cred_lumen,
-                "group_debt_lumen": x_membership.group_debt_lumen,
+                "group_cred_mass": x_membership.group_cred_mass,
+                "group_debt_mass": x_membership.group_debt_mass,
                 "credor_pool": x_membership.credor_pool,
                 "debtor_pool": x_membership.debtor_pool,
                 "fund_agenda_give": x_membership.fund_agenda_give,
@@ -188,11 +184,11 @@ def get_contacts_view_dict(person: PersonUnit) -> dict[str,]:
                 "group_title_readable": add_small_dot(
                     f"group_title: {x_membership.group_title}"
                 ),
-                "group_cred_lumen_readable": add_small_dot(
-                    f"group_cred_lumen: {x_membership.group_cred_lumen}"
+                "group_cred_mass_readable": add_small_dot(
+                    f"group_cred_mass: {x_membership.group_cred_mass}"
                 ),
-                "group_debt_lumen_readable": add_small_dot(
-                    f"group_debt_lumen: {x_membership.group_debt_lumen}"
+                "group_debt_mass_readable": add_small_dot(
+                    f"group_debt_mass: {x_membership.group_debt_mass}"
                 ),
                 "credor_pool_readable": add_small_dot(
                     f"credor_pool: {x_membership.credor_pool}"
@@ -223,26 +219,26 @@ def get_contacts_view_dict(person: PersonUnit) -> dict[str,]:
         }
         contact_dict = {
             "contact_name": contact.contact_name,
-            "contact_cred_lumen": contact.contact_cred_lumen,
-            "contact_debt_lumen": contact.contact_debt_lumen,
+            "contact_cred_mass": contact.contact_cred_mass,
+            "contact_debt_mass": contact.contact_debt_mass,
             "memberships": x_members_dict,
             "credor_pool": contact.credor_pool,
             "debtor_pool": contact.debtor_pool,
-            "irrational_contact_debt_lumen": contact.irrational_contact_debt_lumen,
-            "inallocable_contact_debt_lumen": contact.inallocable_contact_debt_lumen,
+            "irrational_contact_debt_mass": contact.irrational_contact_debt_mass,
+            "inallocable_contact_debt_mass": contact.inallocable_contact_debt_mass,
             "fund_give": contact.fund_give,
             "fund_take": contact.fund_take,
             "fund_agenda_give": contact.fund_agenda_give,
             "fund_agenda_take": contact.fund_agenda_take,
             "fund_agenda_ratio_give": contact.fund_agenda_ratio_give,
             "fund_agenda_ratio_take": contact.fund_agenda_ratio_take,
-            "contact_cred_lumen_readable": contact_cred_lumen_readable,
-            "contact_debt_lumen_readable": contact_debt_lumen_readable,
+            "contact_cred_mass_readable": contact_cred_mass_readable,
+            "contact_debt_mass_readable": contact_debt_mass_readable,
             "memberships_readable": memberships_readable,
             "credor_pool_readable": credor_pool_readable,
             "debtor_pool_readable": debtor_pool_readable,
-            "irrational_contact_debt_lumen_readable": irrational_contact_debt_lumen_readable,
-            "inallocable_contact_debt_lumen_readable": inallocable_contact_debt_lumen_readable,
+            "irrational_contact_debt_mass_readable": irrational_contact_debt_mass_readable,
+            "inallocable_contact_debt_mass_readable": inallocable_contact_debt_mass_readable,
             "fund_give_readable": fund_give_readable,
             "fund_take_readable": fund_take_readable,
             "fund_agenda_give_readable": fund_agenda_give_readable,
@@ -259,8 +255,8 @@ def get_groups_view_dict(person: PersonUnit) -> dict[str,]:
     groups_dict = {}
     group_title_readable_key = "group_title_readable"
     for group in person.groupunits.values():
-        #     group_cred_lumen_readable_key = f"group_cred_lumen_readable"
-        #     group_debt_lumen_readable_key = f"group_debt_lumen_readable"
+        #     group_cred_mass_readable_key = f"group_cred_mass_readable"
+        #     group_debt_mass_readable_key = f"group_debt_mass_readable"
         #     credor_pool_readable_key = f"credor_pool_readable"
         #     debtor_pool_readable_key = f"debtor_pool_readable"
         #     fund_agenda_give_readable_key = f"fund_agenda_give_readable"
@@ -287,8 +283,8 @@ def get_groups_view_dict(person: PersonUnit) -> dict[str,]:
         #         # x_membership.contact_name: {
         #         #     "contact_name": x_membership.contact_name,
         #         #     "group_title": x_membership.group_title,
-        #         #     "group_cred_lumen": x_membership.group_cred_lumen,
-        #         #     "group_debt_lumen": x_membership.group_debt_lumen,
+        #         #     "group_cred_mass": x_membership.group_cred_mass,
+        #         #     "group_debt_mass": x_membership.group_debt_mass,
         #         #     "credor_pool": x_membership.credor_pool,
         #         #     "debtor_pool": x_membership.debtor_pool,
         #         #     "fund_agenda_give": x_membership.fund_agenda_give,
@@ -300,11 +296,11 @@ def get_groups_view_dict(person: PersonUnit) -> dict[str,]:
         #         #     "contact_name_readable": add_small_dot(
         #         #         f"contact name: {x_membership.contact_name}"
         #         #     ),
-        #         #     "group_cred_lumen_readable": add_small_dot(
-        #         #         f"group_cred_lumen: {x_membership.group_cred_lumen}"
+        #         #     "group_cred_mass_readable": add_small_dot(
+        #         #         f"group_cred_mass: {x_membership.group_cred_mass}"
         #         #     ),
-        #         #     "group_debt_lumen_readable": add_small_dot(
-        #         #         f"group_debt_lumen: {x_membership.group_debt_lumen}"
+        #         #     "group_debt_mass_readable": add_small_dot(
+        #         #         f"group_debt_mass: {x_membership.group_debt_mass}"
         #         #     ),
         #         #     "credor_pool_readable": add_small_dot(
         #         #         f"credor_pool: {x_membership.credor_pool}"
@@ -337,8 +333,8 @@ def get_groups_view_dict(person: PersonUnit) -> dict[str,]:
             "group_title": group.group_title,
             #         "contact_name": 1,
             #         "group_title": 1,
-            #         "group_cred_lumen": 1,
-            #         "group_debt_lumen": 1,
+            #         "group_cred_mass": 1,
+            #         "group_debt_mass": 1,
             #         "credor_pool": 1,
             #         "debtor_pool": 1,
             "fund_agenda_give": 1,
@@ -348,8 +344,8 @@ def get_groups_view_dict(person: PersonUnit) -> dict[str,]:
             #         "fund_give": 1,
             "fund_take": 1,
             #         group_title_readable_key: 1,
-            #         group_cred_lumen_readable_key: 1,
-            #         group_debt_lumen_readable_key: 1,
+            #         group_cred_mass_readable_key: 1,
+            #         group_debt_mass_readable_key: 1,
             #         credor_pool_readable_key: 1,
             #         debtor_pool_readable_key: 1,
             #         fund_agenda_give_readable_key: 1,

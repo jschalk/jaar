@@ -24,10 +24,10 @@ from ch99_glossary.ch_keyword import ExampleStrs as exx
 def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(temp3_fs):
     # ESTABLISH
     yao_duty = personunit_shop(exx.yao, exx.a23)
-    zia_contact_cred_lumen = 47
-    zia_contact_debt_lumen = 41
+    zia_contact_cred_mass = 47
+    zia_contact_debt_mass = 41
     zia_pool = 87
-    yao_duty.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
+    yao_duty.add_contactunit(exx.zia, zia_contact_cred_mass, zia_contact_debt_mass)
     yao_duty.set_contact_respect(zia_pool)
     sue_texas_lessonfilehandler = get_texas_lessonfilehandler(str(temp3_fs))
     save_duty_person(
@@ -73,10 +73,10 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferentcase_task(
 ):
     # ESTABLISH
     yao_duty = personunit_shop(exx.yao, exx.a23)
-    yao_contact_cred_lumen = 47
-    yao_contact_debt_lumen = 41
+    yao_contact_cred_mass = 47
+    yao_contact_debt_mass = 41
     yao_pool = 87
-    yao_duty.add_contactunit(exx.zia, yao_contact_cred_lumen, yao_contact_debt_lumen)
+    yao_duty.add_contactunit(exx.zia, yao_contact_cred_mass, yao_contact_debt_mass)
     yao_duty.set_contact_respect(yao_pool)
     sue_texas_lessonfilehandler = get_texas_lessonfilehandler(str(temp3_fs))
     save_duty_person(
@@ -354,16 +354,16 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromPersonsSpeaker
     assert yao_duty.get_fact(a23_eat_rope()) is None
     zia_contactunit = new_yao_vision1.get_contact(exx.zia)
     bob_contactunit = new_yao_vision1.get_contact(bob_str)
-    assert zia_contactunit.contact_debt_lumen < bob_contactunit.contact_debt_lumen
+    assert zia_contactunit.contact_debt_mass < bob_contactunit.contact_debt_mass
     assert bob_vision.get_fact(a23_eat_rope()).fact_state == a23_hungry_rope()
     assert zia_vision.get_fact(a23_eat_rope()).fact_state == a23_eat_rope()
     assert new_yao_vision1.get_fact(a23_eat_rope()).fact_state == a23_hungry_rope()
 
     # WHEN
-    yao_zia_contact_debt_lumen = 15
-    yao_bob_contact_debt_lumen = 5
-    yao_duty.add_contactunit(exx.zia, None, yao_zia_contact_debt_lumen)
-    yao_duty.add_contactunit(bob_str, None, yao_bob_contact_debt_lumen)
+    yao_zia_contact_debt_mass = 15
+    yao_bob_contact_debt_mass = 5
+    yao_duty.add_contactunit(exx.zia, None, yao_zia_contact_debt_mass)
+    yao_duty.add_contactunit(bob_str, None, yao_bob_contact_debt_mass)
     yao_duty.set_contact_respect(100)
     new_yao_vision2 = create_listen_basis(yao_duty)
     listen_to_agendas_duty_vision(
@@ -376,7 +376,7 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromPersonsSpeaker
     # THEN
     zia_contactunit = new_yao_vision2.get_contact(exx.zia)
     bob_contactunit = new_yao_vision2.get_contact(bob_str)
-    assert zia_contactunit.contact_debt_lumen > bob_contactunit.contact_debt_lumen
+    assert zia_contactunit.contact_debt_mass > bob_contactunit.contact_debt_mass
     assert bob_vision.get_fact(a23_eat_rope()).fact_state == a23_hungry_rope()
     assert zia_vision.get_fact(a23_eat_rope()).fact_state == a23_eat_rope()
     assert new_yao_vision2.get_fact(a23_eat_rope()).fact_state == a23_eat_rope()
@@ -429,7 +429,7 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromPersonsSpeaker
 #     assert 1 == 3
 
 
-# def test_listen_to_facts_duty_vision_DoesNotOverrideFact():
+# def test_listen_to_facts_duty_vision_DoesNotChangeFact():
 #     # ESTABLISH
 #     exx.yao = exx.yao
 #     yao_duty = personunit_shop(exx.yao)

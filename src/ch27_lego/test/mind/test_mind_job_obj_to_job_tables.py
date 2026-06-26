@@ -419,8 +419,8 @@ def test_insert_job_prnmemb_CreatesTableRowsFor_prnmemb_job(cursor0: Cursor):
     x_person_name = 2
     x_contact_name = 3
     x_group_title = 4
-    x_group_cred_lumen = 5.0
-    x_group_debt_lumen = 6.0
+    x_group_cred_mass = 5.0
+    x_group_debt_mass = 6.0
     x_credor_pool = 7.0
     x_debtor_pool = 8.0
     x_fund_give = 9.0
@@ -431,8 +431,8 @@ def test_insert_job_prnmemb_CreatesTableRowsFor_prnmemb_job(cursor0: Cursor):
     x_fund_agenda_ratio_take = 14.0
     x_membership = membership_shop(x_group_title)
     x_membership.contact_name = x_contact_name
-    x_membership.group_cred_lumen = x_group_cred_lumen
-    x_membership.group_debt_lumen = x_group_debt_lumen
+    x_membership.group_cred_mass = x_group_cred_mass
+    x_membership.group_debt_mass = x_group_debt_mass
     x_membership.credor_pool = x_credor_pool
     x_membership.debtor_pool = x_debtor_pool
     x_membership.fund_give = x_fund_give
@@ -462,8 +462,8 @@ def test_insert_job_prnmemb_CreatesTableRowsFor_prnmemb_job(cursor0: Cursor):
         str(x_person_name),
         str(x_contact_name),
         str(x_group_title),
-        x_group_cred_lumen,
-        x_group_debt_lumen,
+        x_group_cred_mass,
+        x_group_debt_mass,
         x_credor_pool,
         x_debtor_pool,
         x_fund_give,
@@ -494,8 +494,8 @@ def test_insert_job_prncont_CreatesTableRowsFor_prncont_job(cursor0: Cursor):
     x_moment_rope = 1
     x_person_name = 2
     x_contact_name = 3
-    x_contact_cred_lumen = 4
-    x_contact_debt_lumen = 5
+    x_contact_cred_mass = 4
+    x_contact_debt_mass = 5
     x_credor_pool = 6
     x_debtor_pool = 7
     x_fund_give = 8
@@ -504,13 +504,13 @@ def test_insert_job_prncont_CreatesTableRowsFor_prncont_job(cursor0: Cursor):
     x_fund_agenda_take = 11
     x_fund_agenda_ratio_give = 12
     x_fund_agenda_ratio_take = 13
-    x_inallocable_contact_debt_lumen = 14
-    x_irrational_contact_debt_lumen = 15
+    x_inallocable_contact_debt_mass = 14
+    x_irrational_contact_debt_mass = 15
     x_groupmark = 16
     x_contact = contactunit_shop(x_contact_name)
     x_contact.contact_name = x_contact_name
-    x_contact.contact_cred_lumen = x_contact_cred_lumen
-    x_contact.contact_debt_lumen = x_contact_debt_lumen
+    x_contact.contact_cred_mass = x_contact_cred_mass
+    x_contact.contact_debt_mass = x_contact_debt_mass
     x_contact.credor_pool = x_credor_pool
     x_contact.debtor_pool = x_debtor_pool
     x_contact.fund_give = x_fund_give
@@ -519,8 +519,8 @@ def test_insert_job_prncont_CreatesTableRowsFor_prncont_job(cursor0: Cursor):
     x_contact.fund_agenda_take = x_fund_agenda_take
     x_contact.fund_agenda_ratio_give = x_fund_agenda_ratio_give
     x_contact.fund_agenda_ratio_take = x_fund_agenda_ratio_take
-    x_contact.inallocable_contact_debt_lumen = x_inallocable_contact_debt_lumen
-    x_contact.irrational_contact_debt_lumen = x_irrational_contact_debt_lumen
+    x_contact.inallocable_contact_debt_mass = x_inallocable_contact_debt_mass
+    x_contact.irrational_contact_debt_mass = x_irrational_contact_debt_mass
     x_contact.groupmark = x_groupmark
 
     create_job_tables(cursor0)
@@ -542,8 +542,8 @@ def test_insert_job_prncont_CreatesTableRowsFor_prncont_job(cursor0: Cursor):
         str(x_moment_rope),
         str(x_person_name),
         str(x_contact_name),
-        x_contact_cred_lumen,
-        x_contact_debt_lumen,
+        x_contact_cred_mass,
+        x_contact_debt_mass,
         str(x_groupmark),
         x_credor_pool,
         x_debtor_pool,
@@ -553,8 +553,8 @@ def test_insert_job_prncont_CreatesTableRowsFor_prncont_job(cursor0: Cursor):
         x_fund_agenda_take,
         x_fund_agenda_ratio_give,
         x_fund_agenda_ratio_take,
-        x_inallocable_contact_debt_lumen,
-        x_irrational_contact_debt_lumen,
+        x_inallocable_contact_debt_mass,
+        x_irrational_contact_debt_mass,
     )
     expected_data = [expected_row0]
     assert rows == expected_data

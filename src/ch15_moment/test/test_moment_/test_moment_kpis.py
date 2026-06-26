@@ -28,8 +28,8 @@ def test_get_moment_guts_contacts_dataframe_ReturnsObj(temp3_fs, graphics_bool):
     contactunit_colums = {
         kw.person_name,
         kw.contact_name,
-        kw.contact_cred_lumen,
-        kw.contact_debt_lumen,
+        kw.contact_cred_mass,
+        kw.contact_debt_mass,
         kw.memberships,
         kw.fund_give,
         kw.fund_take,
@@ -68,8 +68,8 @@ def test_get_moment_jobs_contacts_dataframe_ReturnsObj(temp3_fs, graphics_bool):
     contactunit_colums = {
         kw.person_name,
         kw.contact_name,
-        kw.contact_cred_lumen,
-        kw.contact_debt_lumen,
+        kw.contact_cred_mass,
+        kw.contact_debt_mass,
         kw.memberships,
         kw.fund_give,
         kw.fund_take,
@@ -77,7 +77,7 @@ def test_get_moment_jobs_contacts_dataframe_ReturnsObj(temp3_fs, graphics_bool):
         kw.fund_agenda_take,
         kw.fund_agenda_ratio_give,
         kw.fund_agenda_ratio_take,
-        kw.inallocable_contact_debt_lumen,
+        kw.inallocable_contact_debt_mass,
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)

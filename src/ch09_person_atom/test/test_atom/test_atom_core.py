@@ -17,13 +17,13 @@ def test_PersonAtom_Exists():
 
 def test_personatom_shop_ReturnsObj():
     # ESTABLISH
-    bob_contact_cred_lumen = 55
-    bob_contact_debt_lumen = 66
+    bob_contact_cred_mass = 55
+    bob_contact_debt_mass = 66
     bob_contactunit = contactunit_shop(
-        exx.bob, bob_contact_cred_lumen, bob_contact_debt_lumen
+        exx.bob, bob_contact_cred_mass, bob_contact_debt_mass
     )
-    cw_str = "_contact_cred_lumen"
-    dw_str = "_contact_debt_lumen"
+    cw_str = "_contact_cred_mass"
+    dw_str = "_contact_debt_mass"
     bob_required_dict = {kw.contact_name: exx.sue}
     bob_optional_dict = {cw_str: bob_contactunit.to_dict().get(cw_str)}
     bob_optional_dict[dw_str] = bob_contactunit.to_dict().get(dw_str)
@@ -88,13 +88,13 @@ def test_PersonAtom_is_jvalues_valid_ReturnsBoolean():
     assert bob_insert_personatom.is_jvalues_valid()
 
     # WHEN
-    bob_insert_personatom.set_jvalue(kw.contact_cred_lumen, 55)
+    bob_insert_personatom.set_jvalue(kw.contact_cred_mass, 55)
     # THEN
     assert len(bob_insert_personatom.jvalues) == 1
     assert bob_insert_personatom.is_jvalues_valid()
 
     # WHEN
-    bob_insert_personatom.set_jvalue(kw.contact_debt_lumen, 66)
+    bob_insert_personatom.set_jvalue(kw.contact_debt_mass, 66)
     # THEN
     assert len(bob_insert_personatom.jvalues) == 2
     assert bob_insert_personatom.is_jvalues_valid()
@@ -108,10 +108,10 @@ def test_PersonAtom_is_jvalues_valid_ReturnsBoolean():
 
 def test_PersonAtom_is_valid_ReturnsBoolean_ContactUnit_INSERT():
     # ESTABLISH
-    bob_contact_cred_lumen = 55
-    bob_contact_debt_lumen = 66
+    bob_contact_cred_mass = 55
+    bob_contact_debt_mass = 66
     bob_contactunit = contactunit_shop(
-        exx.bob, bob_contact_cred_lumen, bob_contact_debt_lumen
+        exx.bob, bob_contact_cred_mass, bob_contact_debt_mass
     )
     contactunit_str = kw.person_contactunit
 
@@ -141,8 +141,8 @@ def test_PersonAtom_is_valid_ReturnsBoolean_ContactUnit_INSERT():
 
     # WHEN
     bob_insert_personatom.jvalues = {}
-    cw_str = kw.contact_cred_lumen
-    dw_str = kw.contact_debt_lumen
+    cw_str = kw.contact_cred_mass
+    dw_str = kw.contact_debt_mass
     bob_insert_personatom.set_jvalue(cw_str, bob_contactunit.to_dict().get(cw_str))
     bob_insert_personatom.set_jvalue(dw_str, bob_contactunit.to_dict().get(dw_str))
 
@@ -168,15 +168,15 @@ def test_PersonAtom_is_valid_ReturnsBoolean_ContactUnit_INSERT():
 
 def test_PersonAtom_get_value_ReturnsObj_Scenario1():
     # ESTABLISH
-    bob_contact_cred_lumen = 55
-    bob_contact_debt_lumen = 66
+    bob_contact_cred_mass = 55
+    bob_contact_debt_mass = 66
     bob_contactunit = contactunit_shop(
-        exx.bob, bob_contact_cred_lumen, bob_contact_debt_lumen
+        exx.bob, bob_contact_cred_mass, bob_contact_debt_mass
     )
     contactunit_str = kw.person_contactunit
     bob_insert_personatom = personatom_shop(contactunit_str, kw.INSERT)
-    cw_str = kw.contact_cred_lumen
-    dw_str = kw.contact_debt_lumen
+    cw_str = kw.contact_cred_mass
+    dw_str = kw.contact_debt_mass
     print(f"{bob_contactunit.to_dict()=}")
     # bob_contactunit_dict = {kw.contact_name: bob_contactunit.to_dict().get(kw.contact_name)}
     # print(f"{bob_contactunit_dict=}")
@@ -186,8 +186,8 @@ def test_PersonAtom_get_value_ReturnsObj_Scenario1():
     assert bob_insert_personatom.is_valid()
 
     # WHEN / THEN
-    assert bob_insert_personatom.get_value(cw_str) == bob_contact_cred_lumen
-    assert bob_insert_personatom.get_value(dw_str) == bob_contact_debt_lumen
+    assert bob_insert_personatom.get_value(cw_str) == bob_contact_cred_mass
+    assert bob_insert_personatom.get_value(dw_str) == bob_contact_debt_mass
 
 
 def test_PersonAtom_is_valid_ReturnsBoolean_ContactUnit_DELETE():
@@ -228,40 +228,40 @@ def test_PersonAtom_is_valid_ReturnsBoolean_personunit():
 
 def test_PersonAtom_set_atom_order_SetsAttr():
     # ESTABLISH
-    bob_contact_cred_lumen = 55
-    bob_contact_debt_lumen = 66
+    bob_contact_cred_mass = 55
+    bob_contact_debt_mass = 66
     contactunit_str = kw.person_contactunit
     bob_insert_personatom = personatom_shop(contactunit_str, kw.INSERT)
-    cw_str = kw.contact_cred_lumen
-    dw_str = kw.contact_debt_lumen
+    cw_str = kw.contact_cred_mass
+    dw_str = kw.contact_debt_mass
     bob_insert_personatom.set_jkey(kw.contact_name, exx.bob)
-    bob_insert_personatom.set_jvalue(cw_str, bob_contact_cred_lumen)
-    bob_insert_personatom.set_jvalue(dw_str, bob_contact_debt_lumen)
+    bob_insert_personatom.set_jvalue(cw_str, bob_contact_cred_mass)
+    bob_insert_personatom.set_jvalue(dw_str, bob_contact_debt_mass)
     assert bob_insert_personatom.is_valid()
 
     # WHEN / THEN
-    assert bob_insert_personatom.get_value(cw_str) == bob_contact_cred_lumen
-    assert bob_insert_personatom.get_value(dw_str) == bob_contact_debt_lumen
+    assert bob_insert_personatom.get_value(cw_str) == bob_contact_cred_mass
+    assert bob_insert_personatom.get_value(dw_str) == bob_contact_debt_mass
 
 
 def test_PersonAtom_set_arg_SetsAny_jkey_jvalue():
     # ESTABLISH
-    bob_contact_cred_lumen = 55
-    bob_contact_debt_lumen = 66
+    bob_contact_cred_mass = 55
+    bob_contact_debt_mass = 66
     contactunit_str = kw.person_contactunit
     bob_insert_personatom = personatom_shop(contactunit_str, kw.INSERT)
-    cw_str = kw.contact_cred_lumen
-    dw_str = kw.contact_debt_lumen
+    cw_str = kw.contact_cred_mass
+    dw_str = kw.contact_debt_mass
 
     # WHEN
     bob_insert_personatom.set_arg(kw.contact_name, exx.bob)
-    bob_insert_personatom.set_arg(cw_str, bob_contact_cred_lumen)
-    bob_insert_personatom.set_arg(dw_str, bob_contact_debt_lumen)
+    bob_insert_personatom.set_arg(cw_str, bob_contact_cred_mass)
+    bob_insert_personatom.set_arg(dw_str, bob_contact_debt_mass)
 
     # THEN
     assert bob_insert_personatom.get_value(kw.contact_name) == exx.bob
-    assert bob_insert_personatom.get_value(cw_str) == bob_contact_cred_lumen
-    assert bob_insert_personatom.get_value(dw_str) == bob_contact_debt_lumen
+    assert bob_insert_personatom.get_value(cw_str) == bob_contact_cred_mass
+    assert bob_insert_personatom.get_value(dw_str) == bob_contact_debt_mass
     assert bob_insert_personatom.get_value(kw.contact_name) == exx.bob
     assert bob_insert_personatom.is_valid()
 

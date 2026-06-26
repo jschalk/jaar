@@ -26,7 +26,7 @@ def test_MomentUnit_rotate_job_ReturnsObj_Scenario1(temp3_fs):
     assert sue_job.person_name == example_person.person_name
 
 
-def test_MomentUnit_rotate_job_ReturnsObj_Scenario2_EmptyContactsCause_inallocable_contact_debt_lumen(
+def test_MomentUnit_rotate_job_ReturnsObj_Scenario2_EmptyContactsCause_inallocable_contact_debt_mass(
     temp3_fs,
 ):
     # ESTABLISH
@@ -49,8 +49,8 @@ def test_MomentUnit_rotate_job_ReturnsObj_Scenario2_EmptyContactsCause_inallocab
     # THEN method should wipe over job person
     assert rotated_sue_job.contact_exists(exx.bob)
     assert rotated_sue_job.to_dict() != init_sue_job.to_dict()
-    assert init_sue_job.get_contact(exx.bob).inallocable_contact_debt_lumen == 0
-    assert rotated_sue_job.get_contact(exx.bob).inallocable_contact_debt_lumen == 1
+    assert init_sue_job.get_contact(exx.bob).inallocable_contact_debt_mass == 0
+    assert rotated_sue_job.get_contact(exx.bob).inallocable_contact_debt_mass == 1
 
 
 def a23_job(person_name: str, moment_mstr_dir: str) -> PersonUnit:

@@ -86,11 +86,11 @@ The core function `allot_scale(ledger, scale_number, grain_unit)` takes a weight
 This is where `keg`'s philosophical content starts. The author's ref note calls these *"keg's first core philosophical definitions."* The chapter defines the social actors of the system and how they relate to one another through credit and debt.
 
 **`ContactUnit`** is the fundamental social actor — a named individual. Each contact carries:
-- `contact_cred_lumen` and `contact_debt_lumen`: how much credit and debt the surrounding system assigns to this contact.
+- `contact_cred_mass` and `contact_debt_mass`: how much credit and debt the surrounding system assigns to this contact.
 - `memberships`: a dictionary of `MemberShip` objects, each linking the contact to a `GroupTitle`.
 - Calculated fields like `fund_give`, `fund_take`, `fund_agenda_give`, `fund_agenda_take`, and their ratios — populated later by the "thinkout" process in higher chapters.
 
-**`MemberShip`** links a contact to a group with its own `group_cred_lumen` and `group_debt_lumen` weights. When a contact's `credor_pool` or `debtor_pool` is set, `allot_scale` (from `ch02`) distributes that pool proportionally across all of the contact's memberships.
+**`MemberShip`** links a contact to a group with its own `group_cred_mass` and `group_debt_mass` weights. When a contact's `credor_pool` or `debtor_pool` is set, `allot_scale` (from `ch02`) distributes that pool proportionally across all of the contact's memberships.
 
 **`GroupUnit`** is derived from memberships rather than declared directly. It aggregates the memberships of multiple contactunits and, using `allot_scale`, distributes its `fund_give` and `fund_take` values back down to individual members. This give/take accounting is the core mechanism by which the system tracks flows of obligation and resource.
 
@@ -270,7 +270,7 @@ Ch07 also introduces `HealerUnit` (in `healer.py`) and `RangeUnit` (in `range_to
 
 - A **container** (`kids: dict[LabelTerm, PlanUnit]`) that groups sub-plans.
 - A **pledge** (`pledge: True`) — a declared commitment that can be active or inactive.
-- A **fact source** (`factunits`) — a local override of incoming facts.
+- A **fact source** (`factunits`) — a local regulator of incoming facts.
 - A **reason-gated plan** (`reasonunits`) — only active if its conditions are met.
 - A **funded node** — receives a slice of the parent's fund pool proportional to its `poynt` weight, tracked via `fund_onset` and `fund_cease`.
 - A **ranged plan** (`begin`, `close`, `addin`, `numor`, `denom`, `morph`) — can represent a numeric interval that can be inherited and morphed by children.
@@ -503,8 +503,8 @@ This is the philosophical center of keg, implemented as code. The `listen_to_spe
 **`listen_to_speaker_agenda(listener, speaker)`** — the core function:
 1. Checks the listener has the speaker as a contact (a prerequisite — you can only listen to someone you've acknowledged).
 2. Gets the perspective person.
-3. If the speaker's belief system is irrational (didn't converge), marks the full speaker `contact_debt_lumen` as `irrational_contact_debt_lumen` — the listener notes the speaker couldn't provide a coherent agenda.
-4. If the speaker has no agenda items, marks the debt as `inallocable_contact_debt_lumen`.
+3. If the speaker's belief system is irrational (didn't converge), marks the full speaker `contact_debt_mass` as `irrational_contact_debt_mass` — the listener notes the speaker couldn't provide a coherent agenda.
+4. If the speaker has no agenda items, marks the debt as `inallocable_contact_debt_mass`.
 5. Otherwise, generates the agenda, scales each plan's `poynt` by `allot_scale` against the listener's `debtor_respect`, and ingests each plan into the listener's tree via `_ingest_single_planunit`.
 
 **`listen_to_speaker_fact(listener, speaker)`** — fills in missing facts in the listener's plan tree by borrowing matching facts from the speaker. This allows the listener to become aware of real-world state they couldn't observe themselves.
@@ -564,7 +564,7 @@ New semantic types introduced in `ch12_semantic_types.py`:
 
 **`PersonBudHistory`** is a person's full history of `BudUnit`s keyed by `bud_time`. It tracks summary statistics: total quota committed, net contact balances, and time range.
 
-**`cell_main.py`** and **`weighted_facts_tool.py`** (not read in full) implement the cell-based distribution logic — the mechanism by which a `BudUnit`'s quota is recursively divided among listening participants up to `celldepth` levels deep, weighted by the contact cred/debt lumen values established in ch03.
+**`cell_main.py`** and **`weighted_facts_tool.py`** (not read in full) implement the cell-based distribution logic — the mechanism by which a `BudUnit`'s quota is recursively divided among listening participants up to `celldepth` levels deep, weighted by the contact cred_mass/debt_mass values established in ch03.
 
 Ch12 is the first chapter to introduce `TimeNum` as a first-class type, setting up the time numbers for later.
 # ch13_keep — Chapter Summary
@@ -592,7 +592,7 @@ Ontology note:
 
 - **ch00_py**: `get_0_if_None`, `get_empty_dict_if_None` for safe initialization.
 - **ch02_allot**: `allot_scale`, `default_grain_num_if_None`, `validate_pool_num` — the core mechanism by which `mana` (care credit) is distributed across contacts in each river cycle.
-- **ch08_person_logic**: `PersonUnit` — `get_patientledger` and `get_doctorledger` extract credit/debt lumen dictionaries directly from a person's contacts.
+- **ch08_person_logic**: `PersonUnit` — `get_patientledger` and `get_doctorledger` extract credit_mass/debt_mass dictionaries directly from a person's contacts.
 - **ch12_bud**: `TimeNum`, `SparkInt` — imported via ch13's semantic types, tying the river simulation to the time/transaction layer.
 
 New semantic type introduced in `ch13_semantic_types.py`:
@@ -606,9 +606,9 @@ New semantic type introduced in `ch13_semantic_types.py`:
 
 The metaphor is a river: mana flows from healers to patients and circulates through the community across multiple cycles, accumulating to form a picture of who has given and received care.
 
-**`get_patientledger(person)`** — extracts a ledger of `contact_name → contact_cred_lumen` for all contacts with positive credit lumen. These are the people the person cares about (their "patients").
+**`get_patientledger(person)`** — extracts a ledger of `contact_name → contact_cred_mass` for all contacts with positive credit_mass. These are the people the person cares about (their "patients").
 
-**`get_doctorledger(person)`** — extracts `contact_name → contact_debt_lumen` for contacts with positive debt lumen. These are the people who owe care to this person (their "doctors").
+**`get_doctorledger(person)`** — extracts `contact_name → contact_debt_mass` for contacts with positive debt_mass. These are the people who owe care to this person (their "doctors").
 
 **`RiverBook`** — a single person's mana distribution record within one cycle. Given a patient ledger and a total `book_point_amount`, it uses `allot_scale` to distribute the mana proportionally across patients.
 
@@ -715,7 +715,7 @@ Ch15 is the first true integration chapter — it imports from every prior chapt
 - `moment_mstr_dir` — the root directory where all moment data is persisted.
 - `epoch` — the shared `EpochUnit` (calendar system) all persons in this moment use.
 - `personbudhistorys` — a dictionary of `PersonBudHistory` per person, tracking all scheduled fund distributions.
-- `paybook` — a `TranBook` recording all fund transactions within the moment.
+- `ceckbook` — a `TranBook` recording all fund transactions within the moment.
 - `offi_times` — the set of official time points at which distributions have been processed.
 - Grain parameters (`fund_grain`, `respect_grain`, `mana_grain`) — shared resolution settings applied when creating new persons.
 
@@ -945,7 +945,7 @@ New semantic type: `SheetName` (a `str`) — identifies a named sheet within an 
 - `dimens` — the list of atom dimensions this brick maps to (e.g. `["person_planunit", "person_plan_awardunit"]`).
 - `attributes` — a dict of column names to `{"otx_key": bool}` — marking whether a column is a primary key field (`otx_key=True`) or a value field (`otx_key=False`).
 
-`get_otx_keys_list()` and `get_otx_values_list()` split attributes into the key columns (used for deduplication and joining) and value columns (the data payload).
+`get_otx_keys_list()` and `get_otx_values_list()` split attributes into the key columns (used for deduplication and joining) and value columns.
 
 **`brick_config.json`** is the master schema registry — a dictionary of all brick types, each with their `brick_category`, `dimens`, and column definitions. Categories include `"person"`, `"moment"`, `"translate"`, `"nabu"`, and `"spark"`.
 
@@ -997,7 +997,7 @@ Ontology note:
 
 **`etl_config.py`** — the core configuration module:
 
-- `ALL_DIMEN_ABBV7` and `ALL_DIMEN_ABBV2` — two abbreviation sets for all 23 dimension types (e.g. `"moment_paybook"` → `"MMTPAYY"` / `"MP"`). These abbreviated names are used as table name prefixes throughout the SQLite ETL database.
+- `ALL_DIMEN_ABBV7` and `ALL_DIMEN_ABBV2` — two abbreviation sets for all 23 dimension types (e.g. `"moment_ceckbook"` → `"MMTCECK"` / `"MP"`). These abbreviated names are used as table name prefixes throughout the SQLite ETL database.
 - `get_dimen_abbv7(dimen)` and `get_dimen_abbv2(dimen)` — dispatch functions mapping full dimension names to abbreviations.
 - `get_etl_stage_types_config_dict()` — loads `etl_stage_types_config.json`, which defines the ordered sequence of ETL stages (e.g. `b_raw` → `b_agg` → `b_vld` → `s_raw` → `s_agg` → `s_vld` → `h_raw` → ...). Each stage has a `stage_type_order` integer determining its position in the pipeline.
 - `get_stage_create_table_sqlstr(dimen, stage_type)` — generates the `CREATE TABLE` SQL for a specific dimension at a specific pipeline stage, incorporating `_otx`/`_inx` column expansions for translated and nabu fields.
@@ -1227,7 +1227,7 @@ Ontology note:
 
 **`etl_heard_agg_tables_to_heard_vld_tables(cursor)`** — promotes `h_agg` rows to `h_vld` via pre-generated INSERT/SELECT queries, deduplicating.
 
-**`get_moment_dict_from_heard_tables(cursor, moment_rope)`** — the reconstruction function. Runs a series of SELECT queries against the fully validated `h_vld` tables for a given `moment_rope` and assembles a nested Python dict representing the complete `MomentUnit` state: `momentunit` row for top-level attributes, `moment_paybook` rows for `TranUnit`s (nested `person_name → contact_name → tran_time → amount`), `moment_budunit` rows for `BudUnit`s, and epoch configuration rows (hours, months, weekdays, offi_times).
+**`get_moment_dict_from_heard_tables(cursor, moment_rope)`** — the reconstruction function. Runs a series of SELECT queries against the fully validated `h_vld` tables for a given `moment_rope` and assembles a nested Python dict representing the complete `MomentUnit` state: `momentunit` row for top-level attributes, `moment_ceckbook` rows for `TranUnit`s (nested `person_name → contact_name → tran_time → amount`), `moment_budunit` rows for `BudUnit`s, and epoch configuration rows (hours, months, weekdays, offi_times).
 
 **`etl_heard_vld_tables_to_mind_moment_jsons(cursor, moment_mstr_dir)`** — iterates all `moment_rope`s from `momentunit_h_vld`, calls `get_moment_dict_from_heard_tables` for each, and writes the result as a `moment.json` file to the appropriate directory. The inline comment notes a known architectural tension: using rope-based file paths is idiomatic but problematic when `moment_rope` contains characters that don't translate to valid OS paths — a hash-based directory scheme is suggested as an alternative.
 
@@ -1348,7 +1348,7 @@ New semantic type: none. `ch30_semantic_types.py` re-exports through ch22.
 Ch30 is the **output inverse of ch23** — where ch23 reads human-authored idea sheets and converts them into bricks for ingestion, ch30 takes the fully processed world state and writes it back out as idea-format Excel files for human consumption.
 
 **`collect_full_world_idea_csv_strs(world_dir)`** — the main data-collection function:
-1. Walks all moment directories, loads each `MomentUnit` via `open_moment_file`, and calls `add_momentunit_to_idea_csv_strs` to serialize moment-level fields (budget units, epoch config, paybook, offi_times) into the idea CSV string dict.
+1. Walks all moment directories, loads each `MomentUnit` via `open_moment_file`, and calls `add_momentunit_to_idea_csv_strs` to serialize moment-level fields (budget units, epoch config, ceckbook, offi_times) into the idea CSV string dict.
 2. For each person within each moment, loads the **gut** `PersonUnit` (the person's own belief system, not the job) and calls `add_personunit_to_idea_csv_strs` to serialize their full plan tree, contacts, reasons, facts, etc.
 3. Opens the world SQLite database, creates sound/heard tables if absent, then calls `add_translate_rows_to_idea_csv_strs` to append validated translation mappings (from `trltitl_s_vld`, `trlname_s_vld`, `trllabe_s_vld`, `trlrope_s_vld` joined with `trlcore_s_vld`) into the four translation idea sheets (`ii00142`–`ii00145`).
 
@@ -1646,7 +1646,7 @@ Ontology note:
 3. Calls `get_person_view_dict` to serialize the person.
 4. Returns the dict as JSON to a self-contained HTML template that renders the plan tree and contacts panel with JavaScript-driven checkbox toggles.
 
-The HTML template is extensive — it renders ~30 checkbox controls for toggling visibility of individual contact fields (`fund_give`, `fund_agenda_ratio_take`, `irrational_contact_debt_lumen`, membership details, etc.) and ~20 plan-level fields (`pledge`, `plan_active`, `plan_task`, `descendant_pledge_count`, reason/fact/award/workforce subtrees). A `static/style.css` file handles layout.
+The HTML template is extensive — it renders ~30 checkbox controls for toggling visibility of individual contact fields (`fund_give`, `fund_agenda_ratio_take`, `irrational_contact_debt_mass`, membership details, etc.) and ~20 plan-level fields (`pledge`, `plan_active`, `plan_task`, `descendant_pledge_count`, reason/fact/award/workforce subtrees). A `static/style.css` file handles layout.
 
 This chapter is a debugging and demonstration tool — it makes the complexity of a post-`thinkout()` `PersonUnit` inspectable by a human without reading raw JSON. The calendar-readable strings from ch14 are what make it genuinely useful: instead of seeing `fact_lower=525600`, a user sees "Monday 8:00 AM".
 
@@ -1767,7 +1767,7 @@ Ontology note:
 
 **`glossary_ranking.py`**
 
-- `QuestionUnit` — a dataclass representing a single study question about a keg term: `keg_term`, `keg_definition`, `init_ch` (the chapter where the term is first introduced), `question_tier`, `did_you_read_order`, and optionally a `complete_question` override.
+- `QuestionUnit` — a dataclass representing a single study question about a keg term: `keg_term`, `keg_definition`, `init_ch` (the chapter where the term is first introduced), `question_tier`, `did_you_read_order`, and optionally a `complete_question` arbitary setting.
 - `get_keg_definition_questionunits()` — iterates all keywords in `keywords_src.json`, parses their `valid_ch` range to determine `init_ch`, looks up their definition, and constructs a `QuestionUnit` for each. Default questions follow the pattern: "Did you read that the keg_definition of '{term}' is '{definition}'."
 - `rebuild_keg_exam_questions(dst_path)` — writes all questions to a CSV file, sorted by `did_you_read_order`, suitable for use as flash cards or onboarding material.
 - `rebuild_keg_rank_json(dst_path)` — writes a JSON ranking of all keg terms ordered by chapter of introduction, providing a structured learning path through the system's vocabulary.

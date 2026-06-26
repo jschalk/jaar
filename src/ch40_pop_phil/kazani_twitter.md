@@ -2,7 +2,7 @@
 
 **Date:** 2025-08-02  
 **Author:** Kamil Kazani  
-**Source:** https://x.com/kamilkazani viewed from Emmanuel Schalk's twitter login.
+**Source:** https://x.com/kamilkazani viewed from Emmanuel Schalk's twitter login.  
 **Copied to Keg:** 2026-06-09 
 
 On Oct 29, 2025 in response to question about Ukraine being able to give Russia a symbolic vistory:
@@ -10,3 +10,27 @@ On Oct 29, 2025 in response to question about Ukraine being able to give Russia 
 
 On Dec 20th, 2025 in response to a comment accusing Kamil of ignoring the political interests of Siberian natives
 > Siberian natives are a low status, low prestige and with a (partial) exception of Yakuts completely powerless minority with no leverage in any form at all. Either under Putin, or under the “democratic” (= majoritarian) system it is more or less irrelevant what they are thinking
+
+On June 15th, 2026 in response to the following comment:
+*The most manipulative but effective thing I’ve ever done in my life was when I read an article about how children moderate their behavior to protect their self-identity, so if a child believes he’s smart, for example, he’ll intentionally study and try to do well to protect his image of himself. 
+
+Anyway, I would pull children aside with behavioral issues at church and tell them, “David (obviously fake name), you’re such a kind person and so good at listening. I can see that in you. Thank you for always listening.” “Little Annie, thank you for taking such good care of the babies around you. You’re going to be such a good big sister. Can you be in charge of watching Sally?”
+
+They would ALWAYS behave afterward. ALWAYS. Worked like a charm. Morally questionable because it wasn’t initially true, but I kind of willed it into existence. Tbf, I did think that they had that in them or I wouldn’t have tried. 
+
+Will publish longitudinal results of this method once my kid is old enough to report back.*
+
+Kamil Kazani:
+
+> And the truth is, that everyone in the world needs (and will have!) a positive image of themselves. Everyone, no exception. And yes, that includes the outgroup as well. The outgroup too needs to see itself as fundamentally good, and will see itself this way no matter what you do <br><br>
+Lots of politics nowadays, is focused on choosing some sort of an outgroup and making them feel bad about themselves. And not just bad, but irrevocably, eternally bad, with no escape
+<br>
+(usually justified by some sort of 'pain' they caused to others, in the past)
+<br><br>
+That is the most common kind of political demand in today's world, *and that demand is absurd*
+<br>
+It is very important to understand that. Your pain is not worth that much. If you want to make a real world change, you need first of all stop making absurd demands
+<br><br>
+What you can do, is suggest them another *positive* image of themselves. Which makes perfect sense. They need positive image, and they have it, but you can give them another, provided that it's also positive
+<br>
+Positive self-image (which they have) can be replaced by another one

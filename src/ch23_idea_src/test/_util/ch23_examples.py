@@ -47,7 +47,7 @@ def get_ex1_bk00101_df() -> DataFrame:
 
 
 def get_ex1_bk00102_df() -> DataFrame:
-    """bk00102_moment_paybook_v0_0_0
+    """bk00102_moment_ceckbook_v0_0_0
     contact_name,amount,moment_rope,person_name,tran_time"""
     x_df = DataFrame(
         columns=["contact_name", "amount", kw.moment_rope, kw.person_name, "tran_time"]
@@ -165,7 +165,7 @@ def get_ex2_ii00101_df() -> DataFrame:
 
 
 def get_ex2_ii00102_df() -> DataFrame:
-    """bk00102_moment_paybook_v0_0_0
+    """bk00102_moment_ceckbook_v0_0_0
     contact_name,amount,moment_rope,person_name,tran_time,knot"""
     x_df = DataFrame(
         columns=[

@@ -14,22 +14,22 @@ from os.path import exists as os_path_exists
 
 def test_create_brick_df_Arg_bk00121_person_contactunit_v0_0_0():
     # ESTABLISH
-    sue_contact_cred_lumen = 11
-    bob_contact_cred_lumen = 13
-    yao_contact_cred_lumen = 41
-    sue_contact_debt_lumen = 23
-    bob_contact_debt_lumen = 29
-    yao_contact_debt_lumen = 37
+    sue_contact_cred_mass = 11
+    bob_contact_cred_mass = 13
+    yao_contact_cred_mass = 41
+    sue_contact_debt_mass = 23
+    bob_contact_debt_mass = 29
+    yao_contact_debt_mass = 37
     amy_moment_rope = create_rope("amy56")
     sue_personunit = personunit_shop(exx.sue, amy_moment_rope)
     sue_personunit.add_contactunit(
-        exx.sue, sue_contact_cred_lumen, sue_contact_debt_lumen
+        exx.sue, sue_contact_cred_mass, sue_contact_debt_mass
     )
     sue_personunit.add_contactunit(
-        exx.bob, bob_contact_cred_lumen, bob_contact_debt_lumen
+        exx.bob, bob_contact_cred_mass, bob_contact_debt_mass
     )
     sue_personunit.add_contactunit(
-        exx.yao, yao_contact_cred_lumen, yao_contact_debt_lumen
+        exx.yao, yao_contact_cred_mass, yao_contact_debt_mass
     )
 
     # WHEN
@@ -43,20 +43,20 @@ def test_create_brick_df_Arg_bk00121_person_contactunit_v0_0_0():
     assert contact_dataframe.loc[0, kw.moment_rope] == amy_moment_rope
     assert contact_dataframe.loc[0, kw.person_name] == sue_personunit.person_name
     assert contact_dataframe.loc[0, kw.contact_name] == exx.bob
-    assert contact_dataframe.loc[0, kw.contact_debt_lumen] == bob_contact_debt_lumen
-    assert contact_dataframe.loc[0, kw.contact_cred_lumen] == bob_contact_cred_lumen
+    assert contact_dataframe.loc[0, kw.contact_debt_mass] == bob_contact_debt_mass
+    assert contact_dataframe.loc[0, kw.contact_cred_mass] == bob_contact_cred_mass
 
     assert contact_dataframe.loc[1, kw.moment_rope] == amy_moment_rope
     assert contact_dataframe.loc[1, kw.person_name] == sue_personunit.person_name
     assert contact_dataframe.loc[1, kw.contact_name] == exx.sue
-    assert contact_dataframe.loc[1, kw.contact_debt_lumen] == sue_contact_debt_lumen
-    assert contact_dataframe.loc[1, kw.contact_cred_lumen] == sue_contact_cred_lumen
+    assert contact_dataframe.loc[1, kw.contact_debt_mass] == sue_contact_debt_mass
+    assert contact_dataframe.loc[1, kw.contact_cred_mass] == sue_contact_cred_mass
 
     assert contact_dataframe.loc[2, kw.moment_rope] == amy_moment_rope
     assert contact_dataframe.loc[2, kw.person_name] == sue_personunit.person_name
     assert contact_dataframe.loc[2, kw.contact_name] == exx.yao
-    assert contact_dataframe.loc[2, kw.contact_debt_lumen] == yao_contact_debt_lumen
-    assert contact_dataframe.loc[2, kw.contact_cred_lumen] == yao_contact_cred_lumen
+    assert contact_dataframe.loc[2, kw.contact_debt_mass] == yao_contact_debt_mass
+    assert contact_dataframe.loc[2, kw.contact_cred_mass] == yao_contact_cred_mass
 
     assert len(contact_dataframe) == 3
 
@@ -100,29 +100,29 @@ def test_create_brick_df_Arg_bk00120_person_contact_membership_v0_0_0():
     assert membership_dataframe.loc[0, kw.person_name] == sue_personunit.person_name
     assert membership_dataframe.loc[0, kw.contact_name] == exx.bob
     assert membership_dataframe.loc[0, kw.group_title] == iowa_str
-    assert membership_dataframe.loc[0, kw.group_cred_lumen] == bob_iowa_credit_w
-    assert membership_dataframe.loc[0, kw.group_debt_lumen] == bob_iowa_debt_w
+    assert membership_dataframe.loc[0, kw.group_cred_mass] == bob_iowa_credit_w
+    assert membership_dataframe.loc[0, kw.group_debt_mass] == bob_iowa_debt_w
 
     assert membership_dataframe.loc[3, kw.moment_rope] == amy_moment_rope
     assert membership_dataframe.loc[3, kw.person_name] == sue_personunit.person_name
     assert membership_dataframe.loc[3, kw.contact_name] == exx.sue
     assert membership_dataframe.loc[3, kw.group_title] == iowa_str
-    assert membership_dataframe.loc[3, kw.group_cred_lumen] == sue_iowa_credit_w
-    assert membership_dataframe.loc[3, kw.group_debt_lumen] == sue_iowa_debt_w
+    assert membership_dataframe.loc[3, kw.group_cred_mass] == sue_iowa_credit_w
+    assert membership_dataframe.loc[3, kw.group_debt_mass] == sue_iowa_debt_w
 
     assert membership_dataframe.loc[4, kw.moment_rope] == amy_moment_rope
     assert membership_dataframe.loc[4, kw.person_name] == sue_personunit.person_name
     assert membership_dataframe.loc[4, kw.contact_name] == exx.sue
     assert membership_dataframe.loc[4, kw.group_title] == exx.sue
-    assert membership_dataframe.loc[4, kw.group_cred_lumen] == 1
-    assert membership_dataframe.loc[4, kw.group_debt_lumen] == 1
+    assert membership_dataframe.loc[4, kw.group_cred_mass] == 1
+    assert membership_dataframe.loc[4, kw.group_debt_mass] == 1
 
     assert membership_dataframe.loc[7, kw.moment_rope] == amy_moment_rope
     assert membership_dataframe.loc[7, kw.person_name] == sue_personunit.person_name
     assert membership_dataframe.loc[7, kw.contact_name] == exx.yao
     assert membership_dataframe.loc[7, kw.group_title] == ohio_str
-    assert membership_dataframe.loc[7, kw.group_cred_lumen] == yao_ohio_credit_w
-    assert membership_dataframe.loc[7, kw.group_debt_lumen] == yao_ohio_debt_w
+    assert membership_dataframe.loc[7, kw.group_cred_mass] == yao_ohio_credit_w
+    assert membership_dataframe.loc[7, kw.group_debt_mass] == yao_ohio_debt_w
     assert len(membership_dataframe) == 10
 
 
@@ -182,22 +182,22 @@ def test_save_brick_csv_Arg_bk00121_person_contactunit_v0_0_0_SaveToCSV(
     temp3_fs,
 ):
     # ESTABLISH
-    sue_contact_cred_lumen = 11
-    bob_contact_cred_lumen = 13
-    yao_contact_cred_lumen = 41
-    sue_contact_debt_lumen = 23
-    bob_contact_debt_lumen = 29
-    yao_contact_debt_lumen = 37
+    sue_contact_cred_mass = 11
+    bob_contact_cred_mass = 13
+    yao_contact_cred_mass = 41
+    sue_contact_debt_mass = 23
+    bob_contact_debt_mass = 29
+    yao_contact_debt_mass = 37
     amy_moment_rope = create_rope("amy56")
     sue_personunit = personunit_shop(exx.sue, amy_moment_rope)
     sue_personunit.add_contactunit(
-        exx.sue, sue_contact_cred_lumen, sue_contact_debt_lumen
+        exx.sue, sue_contact_cred_mass, sue_contact_debt_mass
     )
     sue_personunit.add_contactunit(
-        exx.bob, bob_contact_cred_lumen, bob_contact_debt_lumen
+        exx.bob, bob_contact_cred_mass, bob_contact_debt_mass
     )
     sue_personunit.add_contactunit(
-        exx.yao, yao_contact_cred_lumen, yao_contact_debt_lumen
+        exx.yao, yao_contact_cred_mass, yao_contact_debt_mass
     )
     j1_brickname = BrickFormatsEnum.bk00121_person_contactunit_v0_0_0
     name_filename = f"{exx.sue}_contact_example_00.csv"
@@ -210,7 +210,7 @@ def test_save_brick_csv_Arg_bk00121_person_contactunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue1_name_example_csv = """spark_num,spark_face,moment_rope,person_name,contact_name,contact_cred_lumen,contact_debt_lumen,knot
+    sue1_name_example_csv = """spark_num,spark_face,moment_rope,person_name,contact_name,contact_cred_mass,contact_debt_mass,knot
 ,,;amy56;,Sue,Bob,13,29,
 ,,;amy56;,Sue,Sue,11,23,
 ,,;amy56;,Sue,Yao,41,37,
@@ -226,7 +226,7 @@ def test_save_brick_csv_Arg_bk00121_person_contactunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue2_contact_example_csv = """spark_num,spark_face,moment_rope,person_name,contact_name,contact_cred_lumen,contact_debt_lumen,knot
+    sue2_contact_example_csv = """spark_num,spark_face,moment_rope,person_name,contact_name,contact_cred_mass,contact_debt_mass,knot
 ,,;amy56;,Sue,Bob,13,29,
 ,,;amy56;,Sue,Sue,11,23,
 ,,;amy56;,Sue,Yao,41,37,

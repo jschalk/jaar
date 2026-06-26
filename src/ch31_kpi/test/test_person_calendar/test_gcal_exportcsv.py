@@ -158,7 +158,7 @@ def test_create_gcalendar_csv_from_list_ReturnsObj():
     # ESTABLISH
     events = [
         {
-            "Subject": "Team Meeting",
+            "Subject": "Squad Meeting",
             "Start Date": "10/08/2025",
             "Start Time": "09:00:00",
             "End Date": "10/08/2025",
@@ -185,7 +185,7 @@ def test_create_gcalendar_csv_from_list_ReturnsObj():
         "Subject,Start Date,Start Time,End Date,End Time,All Day Event,Description"
     )
     assert header_str in csv_str
-    assert "Team Meeting" in csv_str
+    assert "Squad Meeting" in csv_str
     assert "All Hands Day" in csv_str
     assert "Company-wide offsite" in csv_str
 

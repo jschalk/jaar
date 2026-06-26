@@ -16,7 +16,7 @@ def get_moment_dimens() -> set[str]:
     return {
         "momentunit",
         "moment_budunit",
-        "moment_paybook",
+        "moment_ceckbook",
         "moment_epoch_hour",
         "moment_epoch_month",
         "moment_epoch_weekday",

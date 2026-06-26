@@ -2,7 +2,7 @@ from ch00_py.file_toolbox import create_path, get_json_filename
 from ch97_docs_builder._ref.ch97_path import (
     create_chapter_ref_path,
     create_keg_exam_questions_path,
-    create_keg_rank_json_path,
+    create_question_tier_path,
     create_src_keg_definitions_path,
 )
 from inspect import getdoc as inspect_getdoc
@@ -95,12 +95,12 @@ def test_create_keg_exam_questions_path_HasDocString():
     assert inspect_getdoc(create_keg_exam_questions_path) == doc_str
 
 
-def test_create_keg_rank_json_path_ReturnsObj(temp3_dir):
+def test_create_question_tier_path_ReturnsObj(temp3_dir):
     # ESTABLISH
     src_dir = temp3_dir
 
     # WHEN
-    keg_exam_csv_path = create_keg_rank_json_path(src_dir)
+    keg_exam_csv_path = create_question_tier_path(src_dir)
 
     # THEN
     assert keg_exam_csv_path
@@ -115,7 +115,7 @@ def test_create_keg_rank_json_path_ReturnsObj(temp3_dir):
 
 
 @pytest_mark.skip_on_linux
-def test_create_keg_rank_json_path_HasDocString():
+def test_create_question_tier_path_HasDocString():
     # ESTABLISH
     src_dir = "src"
     ch99_dir = create_path(src_dir, "ch99_glossary")
@@ -124,4 +124,4 @@ def test_create_keg_rank_json_path_HasDocString():
     doc_str = f"Returns path: {doc_str}"
     print(f"{doc_str=}")
     # WHEN / THEN
-    assert inspect_getdoc(create_keg_rank_json_path) == doc_str
+    assert inspect_getdoc(create_question_tier_path) == doc_str

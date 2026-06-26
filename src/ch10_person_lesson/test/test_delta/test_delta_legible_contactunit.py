@@ -8,12 +8,12 @@ from ch99_glossary.ch_keyword import Ch10Keywords as kw, ExampleStrs as exx
 def test_create_legible_list_ReturnsObj_contactunit_INSERT():
     # ESTABLISH
     dimen = kw.person_contactunit
-    contact_cred_lumen_value = 81
-    contact_debt_lumen_value = 43
+    contact_cred_mass_value = 81
+    contact_debt_mass_value = 43
     yao_personatom = personatom_shop(dimen, kw.INSERT)
     yao_personatom.set_arg(kw.contact_name, exx.yao)
-    yao_personatom.set_arg(kw.contact_cred_lumen, contact_cred_lumen_value)
-    yao_personatom.set_arg(kw.contact_debt_lumen, contact_debt_lumen_value)
+    yao_personatom.set_arg(kw.contact_cred_mass, contact_cred_mass_value)
+    yao_personatom.set_arg(kw.contact_debt_mass, contact_debt_mass_value)
     # print(f"{yao_personatom=}")
     x_persondelta = persondelta_shop()
     x_persondelta.set_personatom(yao_personatom)
@@ -23,7 +23,7 @@ def test_create_legible_list_ReturnsObj_contactunit_INSERT():
     legible_list = create_legible_list(x_persondelta, sue_person)
 
     # THEN
-    x_str = f"{exx.yao} was added with {contact_cred_lumen_value} score credit and {contact_debt_lumen_value} score debt"
+    x_str = f"{exx.yao} was added with {contact_cred_mass_value} score credit and {contact_debt_mass_value} score debt"
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -31,12 +31,12 @@ def test_create_legible_list_ReturnsObj_contactunit_INSERT():
 def test_create_legible_list_ReturnsObj_contactunit_INSERT_score():
     # ESTABLISH
     dimen = kw.person_contactunit
-    contact_cred_lumen_value = 81
-    contact_debt_lumen_value = 43
+    contact_cred_mass_value = 81
+    contact_debt_mass_value = 43
     yao_personatom = personatom_shop(dimen, kw.INSERT)
     yao_personatom.set_arg(kw.contact_name, exx.yao)
-    yao_personatom.set_arg(kw.contact_cred_lumen, contact_cred_lumen_value)
-    yao_personatom.set_arg(kw.contact_debt_lumen, contact_debt_lumen_value)
+    yao_personatom.set_arg(kw.contact_cred_mass, contact_cred_mass_value)
+    yao_personatom.set_arg(kw.contact_debt_mass, contact_debt_mass_value)
     # print(f"{yao_personatom=}")
     x_persondelta = persondelta_shop()
     x_persondelta.set_personatom(yao_personatom)
@@ -46,20 +46,20 @@ def test_create_legible_list_ReturnsObj_contactunit_INSERT_score():
     legible_list = create_legible_list(x_persondelta, sue_person)
 
     # THEN
-    x_str = f"{exx.yao} was added with {contact_cred_lumen_value} score credit and {contact_debt_lumen_value} score debt"
+    x_str = f"{exx.yao} was added with {contact_cred_mass_value} score credit and {contact_debt_mass_value} score debt"
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_contactunit_UPDATE_contact_cred_lumen_contact_debt_lumen():
+def test_create_legible_list_ReturnsObj_contactunit_UPDATE_contact_cred_mass_contact_debt_mass():
     # ESTABLISH
     dimen = kw.person_contactunit
-    contact_cred_lumen_value = 81
-    contact_debt_lumen_value = 43
+    contact_cred_mass_value = 81
+    contact_debt_mass_value = 43
     yao_personatom = personatom_shop(dimen, kw.UPDATE)
     yao_personatom.set_arg(kw.contact_name, exx.yao)
-    yao_personatom.set_arg(kw.contact_cred_lumen, contact_cred_lumen_value)
-    yao_personatom.set_arg(kw.contact_debt_lumen, contact_debt_lumen_value)
+    yao_personatom.set_arg(kw.contact_cred_mass, contact_cred_mass_value)
+    yao_personatom.set_arg(kw.contact_debt_mass, contact_debt_mass_value)
     # print(f"{yao_personatom=}")
     x_persondelta = persondelta_shop()
     x_persondelta.set_personatom(yao_personatom)
@@ -69,18 +69,18 @@ def test_create_legible_list_ReturnsObj_contactunit_UPDATE_contact_cred_lumen_co
     legible_list = create_legible_list(x_persondelta, sue_person)
 
     # THEN
-    x_str = f"{exx.yao} now has {contact_cred_lumen_value} score credit and {contact_debt_lumen_value} score debt."
+    x_str = f"{exx.yao} now has {contact_cred_mass_value} score credit and {contact_debt_mass_value} score debt."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_contactunit_UPDATE_contact_cred_lumen():
+def test_create_legible_list_ReturnsObj_contactunit_UPDATE_contact_cred_mass():
     # ESTABLISH
     dimen = kw.person_contactunit
-    contact_cred_lumen_value = 81
+    contact_cred_mass_value = 81
     yao_personatom = personatom_shop(dimen, kw.UPDATE)
     yao_personatom.set_arg(kw.contact_name, exx.yao)
-    yao_personatom.set_arg(kw.contact_cred_lumen, contact_cred_lumen_value)
+    yao_personatom.set_arg(kw.contact_cred_mass, contact_cred_mass_value)
     # print(f"{yao_personatom=}")
     x_persondelta = persondelta_shop()
     x_persondelta.set_personatom(yao_personatom)
@@ -90,18 +90,18 @@ def test_create_legible_list_ReturnsObj_contactunit_UPDATE_contact_cred_lumen():
     legible_list = create_legible_list(x_persondelta, sue_person)
 
     # THEN
-    x_str = f"{exx.yao} now has {contact_cred_lumen_value} score credit."
+    x_str = f"{exx.yao} now has {contact_cred_mass_value} score credit."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_contactunit_UPDATE_contact_debt_lumen():
+def test_create_legible_list_ReturnsObj_contactunit_UPDATE_contact_debt_mass():
     # ESTABLISH
     dimen = kw.person_contactunit
-    contact_debt_lumen_value = 43
+    contact_debt_mass_value = 43
     yao_personatom = personatom_shop(dimen, kw.UPDATE)
     yao_personatom.set_arg(kw.contact_name, exx.yao)
-    yao_personatom.set_arg(kw.contact_debt_lumen, contact_debt_lumen_value)
+    yao_personatom.set_arg(kw.contact_debt_mass, contact_debt_mass_value)
     # print(f"{yao_personatom=}")
     x_persondelta = persondelta_shop()
     x_persondelta.set_personatom(yao_personatom)
@@ -111,7 +111,7 @@ def test_create_legible_list_ReturnsObj_contactunit_UPDATE_contact_debt_lumen():
     legible_list = create_legible_list(x_persondelta, sue_person)
 
     # THEN
-    x_str = f"{exx.yao} now has {contact_debt_lumen_value} score debt."
+    x_str = f"{exx.yao} now has {contact_debt_mass_value} score debt."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

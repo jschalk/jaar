@@ -180,13 +180,13 @@ class PersonDelta:
             insert_contactunit = after_person.get_contact(insert_contact_name)
             x_personatom = personatom_shop("person_contactunit", "INSERT")
             x_personatom.set_jkey("contact_name", insert_contactunit.contact_name)
-            if insert_contactunit.contact_cred_lumen is not None:
+            if insert_contactunit.contact_cred_mass is not None:
                 x_personatom.set_jvalue(
-                    "contact_cred_lumen", insert_contactunit.contact_cred_lumen
+                    "contact_cred_mass", insert_contactunit.contact_cred_mass
                 )
-            if insert_contactunit.contact_debt_lumen is not None:
+            if insert_contactunit.contact_debt_mass is not None:
                 x_personatom.set_jvalue(
-                    "contact_debt_lumen", insert_contactunit.contact_debt_lumen
+                    "contact_debt_mass", insert_contactunit.contact_debt_mass
                 )
             self.set_personatom(x_personatom)
             all_group_titles = set(insert_contactunit.memberships.keys())
@@ -210,18 +210,18 @@ class PersonDelta:
                 x_personatom = personatom_shop("person_contactunit", "UPDATE")
                 x_personatom.set_jkey("contact_name", after_contactunit.contact_name)
                 if (
-                    before_contactunit.contact_cred_lumen
-                    != after_contactunit.contact_cred_lumen
+                    before_contactunit.contact_cred_mass
+                    != after_contactunit.contact_cred_mass
                 ):
                     x_personatom.set_jvalue(
-                        "contact_cred_lumen", after_contactunit.contact_cred_lumen
+                        "contact_cred_mass", after_contactunit.contact_cred_mass
                     )
                 if (
-                    before_contactunit.contact_debt_lumen
-                    != after_contactunit.contact_debt_lumen
+                    before_contactunit.contact_debt_mass
+                    != after_contactunit.contact_debt_mass
                 ):
                     x_personatom.set_jvalue(
-                        "contact_debt_lumen", after_contactunit.contact_debt_lumen
+                        "contact_debt_mass", after_contactunit.contact_debt_mass
                     )
                 self.set_personatom(x_personatom)
             self.add_personatom_contactunit_update_memberships(
@@ -298,13 +298,13 @@ class PersonDelta:
             x_personatom = personatom_shop("person_contact_membership", "INSERT")
             x_personatom.set_jkey("contact_name", after_contact_name)
             x_personatom.set_jkey("group_title", after_membership.group_title)
-            if after_membership.group_cred_lumen is not None:
+            if after_membership.group_cred_mass is not None:
                 x_personatom.set_jvalue(
-                    "group_cred_lumen", after_membership.group_cred_lumen
+                    "group_cred_mass", after_membership.group_cred_mass
                 )
-            if after_membership.group_debt_lumen is not None:
+            if after_membership.group_debt_mass is not None:
                 x_personatom.set_jvalue(
-                    "group_debt_lumen", after_membership.group_debt_lumen
+                    "group_debt_mass", after_membership.group_debt_mass
                 )
             self.set_personatom(x_personatom)
 
@@ -317,14 +317,10 @@ class PersonDelta:
         x_personatom = personatom_shop("person_contact_membership", "UPDATE")
         x_personatom.set_jkey("contact_name", contact_name)
         x_personatom.set_jkey("group_title", after_membership.group_title)
-        if after_membership.group_cred_lumen != before_membership.group_cred_lumen:
-            x_personatom.set_jvalue(
-                "group_cred_lumen", after_membership.group_cred_lumen
-            )
-        if after_membership.group_debt_lumen != before_membership.group_debt_lumen:
-            x_personatom.set_jvalue(
-                "group_debt_lumen", after_membership.group_debt_lumen
-            )
+        if after_membership.group_cred_mass != before_membership.group_cred_mass:
+            x_personatom.set_jvalue("group_cred_mass", after_membership.group_cred_mass)
+        if after_membership.group_debt_mass != before_membership.group_debt_mass:
+            x_personatom.set_jvalue("group_debt_mass", after_membership.group_debt_mass)
         self.set_personatom(x_personatom)
 
     def add_personatom_memberships_delete(

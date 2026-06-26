@@ -1,6 +1,6 @@
 # HOW TO USE:
 # Open up CMD, change directory to repo
-# Enter this: python -m src.linter.paths_change -x
+# Enter this: python -m src.linter.src_paths_rename -x
 from ch98_linter.chapter_move_tool import rename_files_and_dirs_4times
 from inspect import getfile as inspect_getfile
 from os import getcwd as os_getcwd

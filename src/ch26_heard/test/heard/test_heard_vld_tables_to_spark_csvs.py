@@ -22,8 +22,8 @@ def test_etl_heard_vld_to_lego_spark_person_csvs_CreatesCSVs_Scenario0_person_co
     yao_inx = "Bobby"
     spark3 = 3
     spark7 = 7
-    yao_contact_cred_lumen5 = 5
-    sue_contact_cred_lumen7 = 7
+    yao_contact_cred_mass5 = 5
+    sue_contact_cred_mass7 = 7
     put_agg_tablename = create_prime_tablename(kw.person_contactunit, kw.h_vld, "put")
     put_agg_csv = f"{put_agg_tablename}.csv"
     x_dir = str(temp3_fs)
@@ -35,11 +35,11 @@ def test_etl_heard_vld_to_lego_spark_person_csvs_CreatesCSVs_Scenario0_person_co
 
     create_sound_and_heard_tables(cursor0)
     insert_raw_sqlstr = f"""
-INSERT INTO {put_agg_tablename} ({kw.spark_num},{kw.spark_face},{kw.moment_rope},{kw.person_name},{kw.contact_name},{kw.contact_cred_lumen},{kw.knot})
+INSERT INTO {put_agg_tablename} ({kw.spark_num},{kw.spark_face},{kw.moment_rope},{kw.person_name},{kw.contact_name},{kw.contact_cred_mass},{kw.knot})
 VALUES
-  ({spark3},'{sue_inx}','{exx.a23_dash}','{bob_inx}','{yao_inx}',{yao_contact_cred_lumen5},'{exx.dash}')
-, ({spark7},'{sue_inx}','{exx.a23_dash}','{bob_inx}','{yao_inx}',{yao_contact_cred_lumen5},'{exx.dash}')
-, ({spark7},'{sue_inx}','{exx.a23_dash}','{bob_inx}','{sue_inx}',{sue_contact_cred_lumen7},'{exx.dash}')
+  ({spark3},'{sue_inx}','{exx.a23_dash}','{bob_inx}','{yao_inx}',{yao_contact_cred_mass5},'{exx.dash}')
+, ({spark7},'{sue_inx}','{exx.a23_dash}','{bob_inx}','{yao_inx}',{yao_contact_cred_mass5},'{exx.dash}')
+, ({spark7},'{sue_inx}','{exx.a23_dash}','{bob_inx}','{sue_inx}',{sue_contact_cred_mass7},'{exx.dash}')
 ;
 """
     print(insert_raw_sqlstr)
@@ -59,10 +59,10 @@ VALUES
     e7_put_csv = open_file(a23_e7_prncont_put_path)
     print(f"{e3_put_csv=}")
     print(f"{e7_put_csv=}")
-    expected_e3_put_csv = f"""spark_num,spark_face,moment_rope,person_name,contact_name,contact_cred_lumen,contact_debt_lumen,knot
+    expected_e3_put_csv = f"""spark_num,spark_face,moment_rope,person_name,contact_name,contact_cred_mass,contact_debt_mass,knot
 3,Suzy,{exx.a23_dash},Bobby,Bobby,5.0,,{exx.dash}
 """
-    expected_e7_put_csv = f"""spark_num,spark_face,moment_rope,person_name,contact_name,contact_cred_lumen,contact_debt_lumen,knot
+    expected_e7_put_csv = f"""spark_num,spark_face,moment_rope,person_name,contact_name,contact_cred_mass,contact_debt_mass,knot
 7,Suzy,{exx.a23_dash},Bobby,Bobby,5.0,,{exx.dash}
 7,Suzy,{exx.a23_dash},Bobby,Suzy,7.0,,{exx.dash}
 """

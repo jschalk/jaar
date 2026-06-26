@@ -26,16 +26,14 @@ def test_get_dataframe_translateable_columns_ReturnsObj():
     assert get_dataframe_translateable_columns(x_dt) == set()
     x_dt = DataFrame(columns=[kw.contact_name])
     assert get_dataframe_translateable_columns(x_dt) == {kw.contact_name}
-    x_dt = DataFrame(columns=[kw.contact_name, kw.contact_cred_lumen])
+    x_dt = DataFrame(columns=[kw.contact_name, kw.contact_cred_mass])
     assert get_dataframe_translateable_columns(x_dt) == {kw.contact_name}
-    x_dt = DataFrame(
-        columns=[kw.reason_context, kw.contact_name, kw.contact_cred_lumen]
-    )
+    x_dt = DataFrame(columns=[kw.reason_context, kw.contact_name, kw.contact_cred_mass])
     assert get_dataframe_translateable_columns(x_dt) == {
         kw.contact_name,
         kw.reason_context,
     }
-    x_dt = DataFrame(columns=["calc_bowl", kw.contact_name, kw.contact_cred_lumen])
+    x_dt = DataFrame(columns=["calc_bowl", kw.contact_name, kw.contact_cred_mass])
     assert get_dataframe_translateable_columns(x_dt) == {kw.contact_name}
 
 
@@ -107,7 +105,7 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_ContactN
     contact_name_mapunit.set_otx2inx(xio_otx, xio_inx)
     contact_name_mapunit.set_otx2inx(sue_otx, sue_inx)
     contact_name_mapunit.set_otx2inx(bob_otx, bob_inx)
-    otx_dt = DataFrame(columns=[kw.moment_rope, kw.contact_name, kw.contact_cred_lumen])
+    otx_dt = DataFrame(columns=[kw.moment_rope, kw.contact_name, kw.contact_cred_mass])
     otx_dt.loc[0] = [exx.a23, zia_otx, 12]
     otx_dt.loc[1] = [exx.a23, sue_otx, 12]
     otx_dt.loc[2] = [exx.a23, bob_otx, 12]
@@ -123,7 +121,7 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_ContactN
     assert otx_dt.iloc[0][kw.contact_name] == zia_otx
     assert otx_dt.iloc[1][kw.contact_name] == sue_inx
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
-    inx_dt = DataFrame(columns=[kw.moment_rope, kw.contact_name, kw.contact_cred_lumen])
+    inx_dt = DataFrame(columns=[kw.moment_rope, kw.contact_name, kw.contact_cred_mass])
     inx_dt.loc[0] = [exx.a23, zia_otx, 12]
     inx_dt.loc[1] = [exx.a23, sue_inx, 12]
     inx_dt.loc[2] = [exx.a23, bob_inx, 12]
@@ -141,7 +139,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_ContactNam
     sue_otx = "Sue"
     bob_otx = "Bob"
     zia_otx = "Zia"
-    otx_dt = DataFrame(columns=[kw.moment_rope, kw.contact_name, kw.contact_cred_lumen])
+    otx_dt = DataFrame(columns=[kw.moment_rope, kw.contact_name, kw.contact_cred_mass])
     otx_dt.loc[0] = [exx.a23, zia_otx, 12]
     otx_dt.loc[1] = [exx.a23, sue_otx, 12]
     otx_dt.loc[2] = [exx.a23, bob_otx, 12]
@@ -157,7 +155,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_ContactNam
     assert otx_dt.iloc[0][kw.contact_name] == zia_otx
     assert otx_dt.iloc[1][kw.contact_name] == sue_otx
     pandas_assert_frame_equal(otx_dt, old_otx_dt)
-    inx_dt = DataFrame(columns=[kw.moment_rope, kw.contact_name, kw.contact_cred_lumen])
+    inx_dt = DataFrame(columns=[kw.moment_rope, kw.contact_name, kw.contact_cred_mass])
     inx_dt.loc[0] = [exx.a23, zia_otx, 12]
     inx_dt.loc[1] = [exx.a23, sue_otx, 12]
     inx_dt.loc[2] = [exx.a23, bob_otx, 12]
@@ -182,7 +180,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_ContactNam
     yao_translateunit.set_otx2inx(kw.NameTerm, xio_otx, xio_inx)
     yao_translateunit.set_otx2inx(kw.NameTerm, sue_otx, sue_inx)
     yao_translateunit.set_otx2inx(kw.NameTerm, bob_otx, bob_inx)
-    otx_dt = DataFrame(columns=[kw.moment_rope, kw.contact_name, kw.contact_cred_lumen])
+    otx_dt = DataFrame(columns=[kw.moment_rope, kw.contact_name, kw.contact_cred_mass])
     otx_dt.loc[0] = [exx.a23, zia_otx, 12]
     otx_dt.loc[1] = [exx.a23, sue_otx, 12]
     otx_dt.loc[2] = [exx.a23, bob_otx, 12]
@@ -198,7 +196,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_ContactNam
     assert otx_dt.iloc[0][kw.contact_name] == zia_otx
     assert otx_dt.iloc[1][kw.contact_name] == sue_inx
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
-    inx_dt = DataFrame(columns=[kw.moment_rope, kw.contact_name, kw.contact_cred_lumen])
+    inx_dt = DataFrame(columns=[kw.moment_rope, kw.contact_name, kw.contact_cred_mass])
     inx_dt.loc[0] = [exx.a23, zia_otx, 12]
     inx_dt.loc[1] = [exx.a23, sue_inx, 12]
     inx_dt.loc[2] = [exx.a23, bob_inx, 12]

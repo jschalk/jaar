@@ -71,8 +71,8 @@ def test_get_brick_into_dimen_raw_query_ReturnsObj_Scenario1_person_contactunit(
         kw.labor_title,
         kw.person_name,
         kw.contact_name,
-        kw.contact_cred_lumen,
-        kw.contact_debt_lumen,
+        kw.contact_cred_mass,
+        kw.contact_debt_mass,
         kw.amount,
     ]
     src_table = f"{brick_type}_raw"
@@ -93,7 +93,7 @@ def test_get_brick_into_dimen_raw_query_ReturnsObj_Scenario1_person_contactunit(
     )
 
     # THEN
-    columns_str = "spark_num, spark_face, moment_rope, person_name, contact_name, contact_cred_lumen, contact_debt_lumen"
+    columns_str = "spark_num, spark_face, moment_rope, person_name, contact_name, contact_cred_mass, contact_debt_mass"
     expected_sqlstr = f"""INSERT INTO {kw.person_contactunit}_raw (brick_type, {columns_str})
 SELECT '{brick_type}' as brick_type, {columns_str}
 FROM {brick_type}_raw
@@ -120,7 +120,7 @@ def test_get_brick_into_dimen_raw_query_ReturnsObj_Scenario2_person_contactunit(
         kw.labor_title,
         kw.person_name,
         kw.contact_name,
-        kw.contact_cred_lumen,
+        kw.contact_cred_mass,
         kw.amount,
     ]
     src_table = f"{brick_type}_raw"
@@ -141,7 +141,7 @@ def test_get_brick_into_dimen_raw_query_ReturnsObj_Scenario2_person_contactunit(
     )
 
     # THEN
-    columns_str = "spark_num, spark_face, person_name, contact_name, contact_cred_lumen"
+    columns_str = "spark_num, spark_face, person_name, contact_name, contact_cred_mass"
     expected_sqlstr = f"""INSERT INTO {kw.person_contactunit}_raw (brick_type, {columns_str})
 SELECT '{brick_type}' as brick_type, {columns_str}
 FROM {brick_type}_raw

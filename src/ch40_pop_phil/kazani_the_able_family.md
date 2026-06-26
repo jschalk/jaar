@@ -1,8 +1,8 @@
 # The Able Family
 
 **Date:** 2024-09-07  
-**Author:** Kamil Kazani
-**Source:** https://kamilkazani.substack.com/p/the-able-family
+**Author:** Kamil Kazani  
+**Source:** https://kamilkazani.substack.com/p/the-able-family  
 **Copied to Keg:** 2026-06-14
 
 > On the Social Origins of Vladimir Lenin.

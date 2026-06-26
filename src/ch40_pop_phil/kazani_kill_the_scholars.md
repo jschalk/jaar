@@ -33,7 +33,7 @@ For the most part, no one in the world has any sort of ideas other than those he
 
 NOW
 
-This creates a sort of generational dynamics for the cultural and ideological change. Boomers got imprinted with one set of ideas, they carry until their physical death, and  rarely ever amend them, whatever happens. Then boomers die. By that point, millennial generation that carries a very different type of imprints comes onto the stage. Again, they do not change or amend them, no matter what arguments or evidence is presented. Millenials die. Then zoomers come, and alpha, and so on, and so forth.
+This creates a sort of generation dynamics for the cultural and ideological change. Boomers got imprinted with one set of ideas, they carry until their physical death, and  rarely ever amend them, whatever happens. Then boomers die. By that point, millennial generation that carries a very different type of imprints comes onto the stage. Again, they do not change or amend them, no matter what arguments or evidence is presented. Millenials die. Then zoomers come, and alpha, and so on, and so forth.
 
 The cultural and ideological change in a society does not proceed from anyone “persuading” their opponents in anything, but from the fact that every generation carries a different set of ideological imprints, a different set of an unreflected, unregistered theoretical assumptions of how this world works, and “how it should be”, and than carries them to the grave, until a new generation brings a new set of ideas with them
 
@@ -53,7 +53,7 @@ Why? Because it gives us a great starting point for the further discussion, pres
 
 > Ideas of economists and political philosophers, both when they are right and when they are wrong, are more powerful than is commonly understood. Indeed the world is ruled by little else. Practical men, who believe themselves to be quite exempt from any intellectual influences, are usually the slaves of some defunct economist. Madmen in authority, who hear voices in the air, are distilling their frenzy from some academic scribbler of a few years back. I am sure that the power of vested interests is vastly exaggerated compared with the gradual encroachment of ideas. Not, indeed, immediately, but after a certain interval; for in the field of economic and political philosophy there are not many who are influenced by new theories after they are twenty-five or thirty years of age, so that the ideas which civil servants and politicians and even agitators apply to current events are not likely to be the newest
 
-If you look at the Keynes’ quote, you will see that his description is perfectly matching the model I have just outlined above. The abstract ideas matter, for they become the mental models people - including the people in power - are guided by. For the most part, people cannot make up any ideas of their own, and just borrow them somewhere, unreflectively. Again, they mostly do it until the age of 25-30, which makes them the walking imprints of the ideological and cultural world of their youth, defining the generational dynamics of political and cultural change. So, in the end, it is the intellectuals who rule, and everyone else who listens and obeys.
+If you look at the Keynes’ quote, you will see that his description is perfectly matching the model I have just outlined above. The abstract ideas matter, for they become the mental models people - including the people in power - are guided by. For the most part, people cannot make up any ideas of their own, and just borrow them somewhere, unreflectively. Again, they mostly do it until the age of 25-30, which makes them the walking imprints of the ideological and cultural world of their youth, defining the generation dynamics of political and cultural change. So, in the end, it is the intellectuals who rule, and everyone else who listens and obeys.
 
 And it is the last part, I disagree upon
 
@@ -67,7 +67,7 @@ Let me give you an example
 
 <div align="center"><img src="images/stalin_crew.webp" alt="Article image 3" width="700"></div>
 
-Joseph Stalin, a dictator holding the absolute power over the USSR for several decades, was an avid reader, and has left an enourmous personal library. What is particularly valuable is that has left a library of books full of his personal notes, remarks, highlighted passages, his own thoughts scribed on the margins. Giving us a fairly good idea of what he was reading, what kind of ideas he was absorbing and what he was paying specific attention to.
+Joseph Stalin, a dictator holding the absolute power over the USSR for several decades, was an avid reader, and has left an enourmous personal library. What is particularly valuable is that has left a library of books full of his personal notes, remarks, highlighted passages, his own thoughts scribed on the margins. Giving us a fairly good idea of what he was reading, what kind of ideas he was absorbing and what he was giving specific attention to.
 
 One interesting observation of that is:
 
@@ -75,7 +75,7 @@ There is surprisingly little Marx in all of that
 
 There is surprisingly little Engels
 
-Despite Stalin, and the Communist movement itself drawing its legitimacy from the divine authority of Marx and Engels, it does not look like Stalin himself was paying very much attention in what Marx and Engels were writing, or took any particular interest in all of that. To put it in a simple terms,
+Despite Stalin, and the Communist movement itself drawing its legitimacy from the divine authority of Marx and Engels, it does not look like Stalin himself was giving very much attention in what Marx and Engels were writing, or took any particular interest in all of that. To put it in a simple terms,
 
 <div align="center">
 

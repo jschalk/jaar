@@ -1,6 +1,12 @@
 from ch00_py.dict_toolbox import get_1_if_None
 from ch02_allot.allot import allot_scale, default_grain_num_if_None
-from ch03_contact._ref.ch03_semantic_types import ContactName, FundGrain, GroupTitle
+from ch03_contact._ref.ch03_semantic_types import (
+    ContactName,
+    FundGrain,
+    GroupTitle,
+    LordMass,
+    LoyalMass,
+)
 from dataclasses import dataclass
 
 
@@ -15,8 +21,8 @@ class GroupCore:
 
 @dataclass
 class MemberShip(GroupCore):
-    group_cred_lumen: float = 1.0
-    group_debt_lumen: float = 1.0
+    group_cred_mass: LordMass = 1.0
+    group_debt_mass: LoyalMass = 1.0
     # calculated fields
     credor_pool: float = None
     debtor_pool: float = None
@@ -28,21 +34,21 @@ class MemberShip(GroupCore):
     fund_agenda_ratio_take: float = None
     contact_name: ContactName = None
 
-    def set_group_cred_lumen(self, x_group_cred_lumen: float):
-        if x_group_cred_lumen is not None:
-            self.group_cred_lumen = x_group_cred_lumen
+    def set_group_cred_mass(self, x_group_cred_mass: LordMass):
+        if x_group_cred_mass is not None:
+            self.group_cred_mass = x_group_cred_mass
 
-    def set_group_debt_lumen(self, x_group_debt_lumen: float):
-        if x_group_debt_lumen is not None:
-            self.group_debt_lumen = x_group_debt_lumen
+    def set_group_debt_mass(self, x_group_debt_mass: LoyalMass):
+        if x_group_debt_mass is not None:
+            self.group_debt_mass = x_group_debt_mass
 
     def to_dict(self) -> dict[str, str]:
         """Returns dict that is serializable to JSON."""
 
         return {
             "group_title": self.group_title,
-            "group_cred_lumen": self.group_cred_lumen,
-            "group_debt_lumen": self.group_debt_lumen,
+            "group_cred_mass": self.group_cred_mass,
+            "group_debt_mass": self.group_debt_mass,
         }
 
     def clear_membership_fund_give_take(self):
@@ -56,14 +62,14 @@ class MemberShip(GroupCore):
 
 def membership_shop(
     group_title: GroupTitle,
-    group_cred_lumen: float = None,
-    group_debt_lumen: float = None,
+    group_cred_mass: LordMass = None,
+    group_debt_mass: LoyalMass = None,
     contact_name: ContactName = None,
 ) -> MemberShip:
     return MemberShip(
         group_title=group_title,
-        group_cred_lumen=get_1_if_None(group_cred_lumen),
-        group_debt_lumen=get_1_if_None(group_debt_lumen),
+        group_cred_mass=get_1_if_None(group_cred_mass),
+        group_debt_mass=get_1_if_None(group_debt_mass),
         credor_pool=0,
         debtor_pool=0,
         contact_name=contact_name,
@@ -73,8 +79,8 @@ def membership_shop(
 def membership_get_from_dict(x_dict: dict, x_contact_name: ContactName) -> MemberShip:
     return membership_shop(
         group_title=x_dict.get("group_title"),
-        group_cred_lumen=x_dict.get("group_cred_lumen"),
-        group_debt_lumen=x_dict.get("group_debt_lumen"),
+        group_cred_mass=x_dict.get("group_cred_mass"),
+        group_debt_mass=x_dict.get("group_debt_mass"),
         contact_name=x_contact_name,
     )
 
@@ -224,8 +230,8 @@ class GroupUnit(GroupCore):
         credit_ledger = {}
         debt_ledger = {}
         for x_contact_name, x_membership in self.memberships.items():
-            credit_ledger[x_contact_name] = x_membership.group_cred_lumen
-            debt_ledger[x_contact_name] = x_membership.group_debt_lumen
+            credit_ledger[x_contact_name] = x_membership.group_cred_mass
+            debt_ledger[x_contact_name] = x_membership.group_debt_mass
         fund_give_allot = allot_scale(credit_ledger, self.fund_give, self.fund_grain)
         fund_take_allot = allot_scale(debt_ledger, self.fund_take, self.fund_grain)
         for contact_name, x_membership in self.memberships.items():

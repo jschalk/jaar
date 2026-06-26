@@ -18,8 +18,8 @@
       }
     }, 
     "jvalues": {
-      "group_cred_lumen": { "column_ordinal": 3, "obj_type": "float", "sqlite_datatype": "REAL" }, 
-      "group_debt_lumen": { "column_ordinal": 2, "obj_type": "float", "sqlite_datatype": "REAL" }
+      "group_cred_mass": { "column_ordinal": 3, "obj_type": "float", "sqlite_datatype": "REAL" }, 
+      "group_debt_mass": { "column_ordinal": 2, "obj_type": "float", "sqlite_datatype": "REAL" }
     }, 
     "normal_specs": {"normal_table_name": "membership"}
   }, 
@@ -31,8 +31,8 @@
       "contact_name": {"column_ordinal": 0, "obj_type": "NameTerm", "sqlite_datatype": "TEXT"}
     }, 
     "jvalues": {
-      "contact_cred_lumen": { "column_ordinal": 2, "obj_type": "float", "sqlite_datatype": "REAL" }, 
-      "contact_debt_lumen": { "column_ordinal": 1, "obj_type": "float", "sqlite_datatype": "REAL" }
+      "contact_cred_mass": { "column_ordinal": 2, "obj_type": "float", "sqlite_datatype": "REAL" }, 
+      "contact_debt_mass": { "column_ordinal": 1, "obj_type": "float", "sqlite_datatype": "REAL" }
     }, 
     "normal_specs": {"normal_table_name": "contactunit"}
   }, 

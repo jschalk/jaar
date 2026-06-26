@@ -247,7 +247,7 @@ def moment_build_from_df(
         )
         momentunit_dict[x_momentunit.moment_rope] = x_momentunit
         _add_budunits_from_df(x_momentunit, bk00101_df)
-        _add_paypurchases_from_df(x_momentunit, bk00102_df)
+        _add_ceckpurchases_from_df(x_momentunit, bk00102_df)
     return momentunit_dict
 
 
@@ -299,10 +299,10 @@ def _add_budunits_from_df(x_momentunit: MomentUnit, bk00101_df: DataFrame):
         )
 
 
-def _add_paypurchases_from_df(x_momentunit: MomentUnit, bk00102_df: DataFrame):
+def _add_ceckpurchases_from_df(x_momentunit: MomentUnit, bk00102_df: DataFrame):
     query_str = f"moment_rope == '{x_momentunit.moment_rope}'"
     for index, row in bk00102_df.query(query_str).iterrows():
-        x_momentunit.add_paypurchase(
+        x_momentunit.add_ceckpurchase(
             person_name=row["person_name"],
             contact_name=row["contact_name"],
             tran_time=row["tran_time"],

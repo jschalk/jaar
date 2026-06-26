@@ -6,81 +6,81 @@ from ch99_glossary.ch_keyword import ExampleStrs as exx
 
 def test_get_patientledger_ReturnsObj():
     # ESTABLISH
-    yao_contact_cred_lumen = 8
-    bob_contact_cred_lumen = 48
-    sue_contact_cred_lumen = 66
+    yao_contact_cred_mass = 8
+    bob_contact_cred_mass = 48
+    sue_contact_cred_mass = 66
     yao_person = personunit_shop(exx.yao)
-    yao_person.add_contactunit(exx.bob, yao_contact_cred_lumen)
-    yao_person.add_contactunit(exx.sue, bob_contact_cred_lumen)
-    yao_person.add_contactunit(exx.yao, sue_contact_cred_lumen)
+    yao_person.add_contactunit(exx.bob, yao_contact_cred_mass)
+    yao_person.add_contactunit(exx.sue, bob_contact_cred_mass)
+    yao_person.add_contactunit(exx.yao, sue_contact_cred_mass)
 
     # WHEN
     yao_patientledger = get_patientledger(yao_person)
 
     # THEN
     assert len(yao_patientledger) == 3
-    assert yao_patientledger.get(exx.bob) == yao_contact_cred_lumen
-    assert yao_patientledger.get(exx.sue) == bob_contact_cred_lumen
-    assert yao_patientledger.get(exx.yao) == sue_contact_cred_lumen
+    assert yao_patientledger.get(exx.bob) == yao_contact_cred_mass
+    assert yao_patientledger.get(exx.sue) == bob_contact_cred_mass
+    assert yao_patientledger.get(exx.yao) == sue_contact_cred_mass
 
 
-def test_get_patientledger_ReturnsObjWithNoEmpty_contact_cred_lumen():
+def test_get_patientledger_ReturnsObjWithNoEmpty_contact_cred_mass():
     # ESTABLISH
-    yao_contact_cred_lumen = 8
-    bob_contact_cred_lumen = 0
-    sue_contact_cred_lumen = 66
+    yao_contact_cred_mass = 8
+    bob_contact_cred_mass = 0
+    sue_contact_cred_mass = 66
     yao_person = personunit_shop(exx.yao)
-    yao_person.add_contactunit(exx.bob, bob_contact_cred_lumen)
-    yao_person.add_contactunit(exx.sue, sue_contact_cred_lumen)
-    yao_person.add_contactunit(exx.yao, yao_contact_cred_lumen)
+    yao_person.add_contactunit(exx.bob, bob_contact_cred_mass)
+    yao_person.add_contactunit(exx.sue, sue_contact_cred_mass)
+    yao_person.add_contactunit(exx.yao, yao_contact_cred_mass)
 
     # WHEN
     yao_patientledger = get_patientledger(yao_person)
 
     # THEN
     assert yao_patientledger.get(exx.bob) is None
-    assert yao_patientledger.get(exx.sue) == sue_contact_cred_lumen
-    assert yao_patientledger.get(exx.yao) == yao_contact_cred_lumen
+    assert yao_patientledger.get(exx.sue) == sue_contact_cred_mass
+    assert yao_patientledger.get(exx.yao) == yao_contact_cred_mass
     assert len(yao_patientledger) == 2
 
 
 def test_get_doctorledger_ReturnsObj():
     # ESTABLISH
-    yao_contact_debt_lumen = 8
-    bob_contact_debt_lumen = 48
-    sue_contact_debt_lumen = 66
+    yao_contact_debt_mass = 8
+    bob_contact_debt_mass = 48
+    sue_contact_debt_mass = 66
     yao_person = personunit_shop(exx.yao)
-    yao_person.add_contactunit(exx.bob, 2, bob_contact_debt_lumen)
-    yao_person.add_contactunit(exx.sue, 2, sue_contact_debt_lumen)
-    yao_person.add_contactunit(exx.yao, 2, yao_contact_debt_lumen)
+    yao_person.add_contactunit(exx.bob, 2, bob_contact_debt_mass)
+    yao_person.add_contactunit(exx.sue, 2, sue_contact_debt_mass)
+    yao_person.add_contactunit(exx.yao, 2, yao_contact_debt_mass)
 
     # WHEN
     yao_doctorledger = get_doctorledger(yao_person)
 
     # THEN
     assert len(yao_doctorledger) == 3
-    assert yao_doctorledger.get(exx.bob) == bob_contact_debt_lumen
-    assert yao_doctorledger.get(exx.sue) == sue_contact_debt_lumen
-    assert yao_doctorledger.get(exx.yao) == yao_contact_debt_lumen
+    assert yao_doctorledger.get(exx.bob) == bob_contact_debt_mass
+    assert yao_doctorledger.get(exx.sue) == sue_contact_debt_mass
+    assert yao_doctorledger.get(exx.yao) == yao_contact_debt_mass
 
 
-def test_get_doctorledger_ReturnsObjWithNoEmpty_contact_debt_lumen():
+def test_get_doctorledger_ReturnsObjWithNoEmpty_contact_debt_mass():
     # ESTABLISH
-    yao_contact_debt_lumen = 8
-    bob_contact_debt_lumen = 48
-    sue_contact_debt_lumen = 0
+    yao_contact_debt_mass = 8
+    bob_contact_debt_mass = 48
+    sue_contact_debt_mass = 0
     yao_person = personunit_shop(exx.yao)
-    yao_person.add_contactunit(exx.bob, 2, bob_contact_debt_lumen)
-    yao_person.add_contactunit(exx.sue, 2, sue_contact_debt_lumen)
-    yao_person.add_contactunit(exx.yao, 2, yao_contact_debt_lumen)
+    yao_person.add_contactunit(exx.bob, 2, bob_contact_debt_mass)
+    yao_person.add_contactunit(exx.sue, 2, sue_contact_debt_mass)
+    yao_person.add_contactunit(exx.yao, 2, yao_contact_debt_mass)
 
     # WHEN
     yao_doctorledger = get_doctorledger(yao_person)
 
     # THEN
-    assert yao_doctorledger.get(exx.bob) == bob_contact_debt_lumen
+    assert yao_doctorledger.get(exx.bob) == bob_contact_debt_mass
     assert yao_doctorledger.get(exx.sue) is None
-    assert yao_doctorledger.get(exx.yao) == yao_contact_debt_lumen
+    assert yao_doctorledger.get(exx.yao) == yao_contact_debt_mass
     assert len(yao_doctorledger) == 2
 
 
@@ -139,13 +139,13 @@ def test_RiverRun_set_need_dues_SetsAttr():
         keep_point_magnitude=bob_mana_amount,
         mana_grain=bob_mana_grain,
     )
-    bob_contact_debt_lumen = 38
-    sue_contact_debt_lumen = 56
-    yao_contact_debt_lumen = 6
+    bob_contact_debt_mass = 38
+    sue_contact_debt_mass = 56
+    yao_contact_debt_mass = 6
     bob_person = personunit_shop(exx.bob)
-    bob_person.add_contactunit(exx.bob, 2, bob_contact_debt_lumen)
-    bob_person.add_contactunit(exx.sue, 2, sue_contact_debt_lumen)
-    bob_person.add_contactunit(exx.yao, 2, yao_contact_debt_lumen)
+    bob_person.add_contactunit(exx.bob, 2, bob_contact_debt_mass)
+    bob_person.add_contactunit(exx.sue, 2, sue_contact_debt_mass)
+    bob_person.add_contactunit(exx.yao, 2, yao_contact_debt_mass)
     bob_doctorledger = get_doctorledger(bob_person)
     assert bob_riverrun.need_dues_unpaid() is False
 
@@ -171,13 +171,13 @@ def test_RiverRun_contact_has_need_due_ReturnsBool():
         keep_point_magnitude=bob_mana_amount,
         mana_grain=bob_mana_grain,
     )
-    yao_contact_debt_lumen = 6
-    bob_contact_debt_lumen = 38
-    sue_contact_debt_lumen = 56
+    yao_contact_debt_mass = 6
+    bob_contact_debt_mass = 38
+    sue_contact_debt_mass = 56
     bob_person = personunit_shop(exx.bob)
-    bob_person.add_contactunit(exx.bob, 2, bob_contact_debt_lumen)
-    bob_person.add_contactunit(exx.sue, 2, sue_contact_debt_lumen)
-    bob_person.add_contactunit(exx.yao, 2, yao_contact_debt_lumen)
+    bob_person.add_contactunit(exx.bob, 2, bob_contact_debt_mass)
+    bob_person.add_contactunit(exx.sue, 2, sue_contact_debt_mass)
+    bob_person.add_contactunit(exx.yao, 2, yao_contact_debt_mass)
     bob_doctorledger = get_doctorledger(bob_person)
     assert bob_riverrun.contact_has_need_due(exx.bob) is False
     assert bob_riverrun.contact_has_need_due(exx.sue) is False
@@ -226,13 +226,13 @@ def test_RiverRun_get_contact_need_due_ReturnsObj():
         keep_point_magnitude=bob_mana_amount,
         mana_grain=bob_mana_grain,
     )
-    bob_contact_debt_lumen = 38
-    sue_contact_debt_lumen = 56
-    yao_contact_debt_lumen = 6
+    bob_contact_debt_mass = 38
+    sue_contact_debt_mass = 56
+    yao_contact_debt_mass = 6
     bob_person = personunit_shop(exx.bob)
-    bob_person.add_contactunit(exx.bob, 2, bob_contact_debt_lumen)
-    bob_person.add_contactunit(exx.sue, 2, sue_contact_debt_lumen)
-    bob_person.add_contactunit(exx.yao, 2, yao_contact_debt_lumen)
+    bob_person.add_contactunit(exx.bob, 2, bob_contact_debt_mass)
+    bob_person.add_contactunit(exx.sue, 2, sue_contact_debt_mass)
+    bob_person.add_contactunit(exx.yao, 2, yao_contact_debt_mass)
     bob_doctorledger = get_doctorledger(bob_person)
     assert bob_riverrun.contact_has_need_due(exx.bob) is False
     assert bob_riverrun.get_contact_need_due(exx.bob) == 0
@@ -260,13 +260,13 @@ def test_RiverRun_levy_need_due_SetsAttr_ScenarioX():
         keep_point_magnitude=bob_mana_amount,
         mana_grain=bob_mana_grain,
     )
-    bob_contact_debt_lumen = 38
-    sue_contact_debt_lumen = 56
-    yao_contact_debt_lumen = 6
+    bob_contact_debt_mass = 38
+    sue_contact_debt_mass = 56
+    yao_contact_debt_mass = 6
     bob_person = personunit_shop(exx.bob)
-    bob_person.add_contactunit(exx.bob, 2, bob_contact_debt_lumen)
-    bob_person.add_contactunit(exx.sue, 2, sue_contact_debt_lumen)
-    bob_person.add_contactunit(exx.yao, 2, yao_contact_debt_lumen)
+    bob_person.add_contactunit(exx.bob, 2, bob_contact_debt_mass)
+    bob_person.add_contactunit(exx.sue, 2, sue_contact_debt_mass)
+    bob_person.add_contactunit(exx.yao, 2, yao_contact_debt_mass)
     bob_doctorledger = get_doctorledger(bob_person)
     bob_riverrun.set_need_dues(bob_doctorledger)
     assert bob_riverrun.get_contact_need_due(exx.bob) == 380, 0

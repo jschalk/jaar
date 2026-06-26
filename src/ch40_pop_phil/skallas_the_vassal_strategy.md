@@ -1,8 +1,8 @@
 # The Vassal Strategy
 
 **Date:** 2026-04-06  
-**Author:** Paul Skallas
-**Source:** https://lindynewsletter.beehiiv.com/p/the-vassal-strategy
+**Author:** Paul Skallas  
+**Source:** https://lindynewsletter.beehiiv.com/p/the-vassal-strategy  
 **Copied to Keg:** 2026-06-14
 
 ---
@@ -11,7 +11,7 @@ I was reading last week that SpaceX, Musk’s private space company, is close to
 
 It immediately made me think of an ex-coworker of mine who put a large share of his savings into Tesla about eight years ago.
 
-He was just a normal guy with a normal job. He was not some great investor or engineer. He wasn’t even really into batteries or electric cars. He just believed in Elon Musk. He thought Musk was a visionary, the real-life Iron Man, and that investing in him would pay off.
+He was just a normal guy with a normal job. He was not some great investor or engineer. He wasn’t even really into batteries or electric cars. He just believed in Elon Musk. He thought Musk was a visionary, the real-life Iron Man, and that investing in him would give a good return.
 
 <div align="center">
 
@@ -93,7 +93,7 @@ There’s a reason you often see the same women move through overlapping circles
 ([Skallas on x.com](https://x.com/PaulSkallas/status/1828123461346062760))
 
 ### The Selection
-For the vassal strategy to work, you need to know who to follow. You can just select the most prominent member in the field. That isn’t irrational.
+For the vassal strategy to work, you need to know who to follow. You can just select the most prominent member in the field. That isn’t stupid.
 
 But most people are not choosing between titans. They are choosing inside the organizations and communities they actually inhabit. The selection problem is local before it is global.
 

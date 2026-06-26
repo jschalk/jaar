@@ -1,7 +1,7 @@
 # Suffering from success
 
 **Date:** 2026-02-27  
-**Author:** Kamil Kazani
+**Author:** Kamil Kazani  
 **Source:** https://kamilkazani.substack.com/p/suffering-from-success?utm_source=publication-search
 **Copied to Keg:** 2026-06-10 
 
@@ -36,7 +36,7 @@ When Berezovsky was forced out of Russia, he still had a lot of money. Being a r
 
 Lots of it he spent of supporting various political groups, and factions. That part, people could at least understand.
 
-But other kind of stuff was really weird. For example, he bought a random football club in Brazil, investing some obscene (exact figure is unknown, but by all accounts, obscene) amount of money there. That was so random, and so weird, that it drew a lot of public scrutiny in Brazil, being seen as some money laundering scheme. Not even his friends could understand.
+But other kind of stuff was really weird. For example, he bought a random football club in Brazil, investing some obscene (exact figure is unknown, but by all accounts, obscene) quantity of money there. That was so random, and so weird, that it drew a lot of public scrutiny in Brazil, being seen as some money laundering scheme. Not even his friends could understand.
 
 That is how his friend, Felshtinsky describes his dialogue with Berezovsky, on this Brazilian scheme:
 
@@ -81,7 +81,7 @@ For an individual, like Boris Berezovsky, a crazy, unlikely, impossible scheme h
 
 And - once it happened - it defines the rest of your life. For you won’t be able to do anything else, seeking to recreate this scheme that worked out once again, and again.
 
-(It was in fact a one time event, and will not repeat in your lifetime. It was possible only under a very particular set of circumstances: the breakdown of a planned economy, with a massive amount of functional, valuable assets to distribute. Won’t happen again. Nobody will just give you another country, no matter how much you try. But you won’t be able to accept that)
+(It was in fact a one time event, and will not repeat in your lifetime. It was possible only under a very particular set of circumstances: the breakdown of a planned economy, with a massive quantity of functional, valuable assets to distribute. Won’t happen again. Nobody will just give you another country, no matter how much you try. But you won’t be able to accept that)
 
 So once the scheme worked out (for you) and worked out marvellously, it defines your worldview, and your model of the world. It informs your understanding of how the thing works, and will shape all your actions till your deathbed.
 

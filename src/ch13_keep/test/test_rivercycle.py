@@ -156,13 +156,13 @@ def test_create_init_rivercycle_ReturnsObj_Scenario1_contactunit():
 
 def test_create_init_rivercycle_ReturnsObj_Scenario2_magnitude_Default():
     # ESTABLISH
-    yao_contact_cred_lumen = 7
-    bob_contact_cred_lumen = 3
-    zia_contact_cred_lumen = 10
+    yao_contact_cred_mass = 7
+    bob_contact_cred_mass = 3
+    zia_contact_cred_mass = 10
     yao_person = personunit_shop(exx.yao)
-    yao_person.add_contactunit(exx.yao, yao_contact_cred_lumen)
-    yao_person.add_contactunit(exx.bob, bob_contact_cred_lumen)
-    yao_person.add_contactunit(exx.zia, zia_contact_cred_lumen)
+    yao_person.add_contactunit(exx.yao, yao_contact_cred_mass)
+    yao_person.add_contactunit(exx.bob, bob_contact_cred_mass)
+    yao_person.add_contactunit(exx.zia, zia_contact_cred_mass)
     yao_patientledger = get_patientledger(yao_person)
     keep_patientledgers = {exx.yao: yao_patientledger}
     print(f"{keep_patientledgers=}")
@@ -183,13 +183,13 @@ def test_create_init_rivercycle_ReturnsObj_Scenario2_magnitude_Default():
 
 def test_create_init_rivercycle_ReturnsObj_Scenario3_contactunit():
     # ESTABLISH
-    yao_contact_cred_lumen = 7
-    bob_contact_cred_lumen = 3
-    zia_contact_cred_lumen = 10
+    yao_contact_cred_mass = 7
+    bob_contact_cred_mass = 3
+    zia_contact_cred_mass = 10
     yao_person = personunit_shop(exx.yao)
-    yao_person.add_contactunit(exx.yao, yao_contact_cred_lumen)
-    yao_person.add_contactunit(exx.bob, bob_contact_cred_lumen)
-    yao_person.add_contactunit(exx.zia, zia_contact_cred_lumen)
+    yao_person.add_contactunit(exx.yao, yao_contact_cred_mass)
+    yao_person.add_contactunit(exx.bob, bob_contact_cred_mass)
+    yao_person.add_contactunit(exx.zia, zia_contact_cred_mass)
     yao_patientledger = get_patientledger(yao_person)
     keep_patientledgers = {exx.yao: yao_patientledger}
     print(f"{keep_patientledgers=}")

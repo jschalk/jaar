@@ -35,8 +35,8 @@ def test_MemberShip_Exists():
 
     # THEN
     assert bowl_membership.group_title == bowlers_str
-    assert bowl_membership.group_cred_lumen == 1.0
-    assert bowl_membership.group_debt_lumen == 1.0
+    assert bowl_membership.group_cred_mass == 1.0
+    assert bowl_membership.group_debt_mass == 1.0
     assert not bowl_membership.credor_pool
     assert not bowl_membership.debtor_pool
     assert not bowl_membership.fund_give
@@ -51,8 +51,8 @@ def test_MemberShip_Exists():
     assert obj_attrs == {
         kw.contact_name,
         kw.group_title,
-        kw.group_cred_lumen,
-        kw.group_debt_lumen,
+        kw.group_cred_mass,
+        kw.group_debt_mass,
         kw.credor_pool,
         kw.debtor_pool,
         kw.fund_agenda_give,
@@ -67,19 +67,19 @@ def test_MemberShip_Exists():
 def test_membership_shop_ReturnsObj():
     # ESTABLISH
     bowlers_str = ",bowlers"
-    bowl_group_cred_lumen = 3.0
-    bowl_group_debt_lumen = 5.0
+    bowl_group_cred_mass = 3.0
+    bowl_group_debt_mass = 5.0
 
     # WHEN
     bowl_membership = membership_shop(
         group_title=bowlers_str,
-        group_cred_lumen=bowl_group_cred_lumen,
-        group_debt_lumen=bowl_group_debt_lumen,
+        group_cred_mass=bowl_group_cred_mass,
+        group_debt_mass=bowl_group_debt_mass,
     )
 
     # THEN
-    assert bowl_membership.group_cred_lumen == bowl_group_cred_lumen
-    assert bowl_membership.group_debt_lumen == bowl_group_debt_lumen
+    assert bowl_membership.group_cred_mass == bowl_group_cred_mass
+    assert bowl_membership.group_debt_mass == bowl_group_debt_mass
     assert bowl_membership.credor_pool == 0
     assert bowl_membership.debtor_pool == 0
     assert not bowl_membership.fund_give
@@ -102,93 +102,93 @@ def test_membership_shop_ReturnsObjAttr_contact_name():
     assert bowl_membership.contact_name == exx.yao
 
 
-def test_MemberShip_set_group_cred_lumen_SetsAttr():
+def test_MemberShip_set_group_cred_mass_SetsAttr():
     # ESTABLISH
     bowlers_str = ",bowlers"
-    old_group_cred_lumen = 3.0
-    bowl_group_debt_lumen = 5.0
+    old_group_cred_mass = 3.0
+    bowl_group_debt_mass = 5.0
     bowl_membership = membership_shop(
-        bowlers_str, old_group_cred_lumen, bowl_group_debt_lumen
+        bowlers_str, old_group_cred_mass, bowl_group_debt_mass
     )
-    assert bowl_membership.group_cred_lumen == old_group_cred_lumen
-    assert bowl_membership.group_debt_lumen == bowl_group_debt_lumen
+    assert bowl_membership.group_cred_mass == old_group_cred_mass
+    assert bowl_membership.group_debt_mass == bowl_group_debt_mass
 
     # WHEN
-    new_bowl_group_cred_lumen = 44
-    bowl_membership.set_group_cred_lumen(new_bowl_group_cred_lumen)
+    new_bowl_group_cred_mass = 44
+    bowl_membership.set_group_cred_mass(new_bowl_group_cred_mass)
 
     # THEN
-    assert bowl_membership.group_cred_lumen == new_bowl_group_cred_lumen
-    assert bowl_membership.group_debt_lumen == bowl_group_debt_lumen
+    assert bowl_membership.group_cred_mass == new_bowl_group_cred_mass
+    assert bowl_membership.group_debt_mass == bowl_group_debt_mass
 
 
-def test_MemberShip_set_group_cred_lumen_NoneParameter():
+def test_MemberShip_set_group_cred_mass_NoneParameter():
     # ESTABLISH
     bowlers_str = ",bowlers"
-    old_group_cred_lumen = 3.0
-    bowl_group_debt_lumen = 5.0
+    old_group_cred_mass = 3.0
+    bowl_group_debt_mass = 5.0
     bowl_membership = membership_shop(
-        bowlers_str, old_group_cred_lumen, bowl_group_debt_lumen
+        bowlers_str, old_group_cred_mass, bowl_group_debt_mass
     )
-    assert bowl_membership.group_cred_lumen == old_group_cred_lumen
-    assert bowl_membership.group_debt_lumen == bowl_group_debt_lumen
+    assert bowl_membership.group_cred_mass == old_group_cred_mass
+    assert bowl_membership.group_debt_mass == bowl_group_debt_mass
 
     # WHEN
-    bowl_membership.set_group_cred_lumen(None)
+    bowl_membership.set_group_cred_mass(None)
 
     # THEN
-    assert bowl_membership.group_cred_lumen == old_group_cred_lumen
-    assert bowl_membership.group_debt_lumen == bowl_group_debt_lumen
+    assert bowl_membership.group_cred_mass == old_group_cred_mass
+    assert bowl_membership.group_debt_mass == bowl_group_debt_mass
 
 
-def test_MemberShip_set_group_debt_lumen_SetsAttr():
+def test_MemberShip_set_group_debt_mass_SetsAttr():
     # ESTABLISH
     bowlers_str = ",bowlers"
-    bowl_group_cred_lumen = 3.0
-    old_group_debt_lumen = 5.0
+    bowl_group_cred_mass = 3.0
+    old_group_debt_mass = 5.0
     bowl_membership = membership_shop(
-        bowlers_str, bowl_group_cred_lumen, old_group_debt_lumen
+        bowlers_str, bowl_group_cred_mass, old_group_debt_mass
     )
-    assert bowl_membership.group_cred_lumen == bowl_group_cred_lumen
-    assert bowl_membership.group_debt_lumen == old_group_debt_lumen
+    assert bowl_membership.group_cred_mass == bowl_group_cred_mass
+    assert bowl_membership.group_debt_mass == old_group_debt_mass
 
     # WHEN
-    new_group_debt_lumen = 55
-    bowl_membership.set_group_debt_lumen(new_group_debt_lumen)
+    new_group_debt_mass = 55
+    bowl_membership.set_group_debt_mass(new_group_debt_mass)
 
     # THEN
-    assert bowl_membership.group_cred_lumen == bowl_group_cred_lumen
-    assert bowl_membership.group_debt_lumen == new_group_debt_lumen
+    assert bowl_membership.group_cred_mass == bowl_group_cred_mass
+    assert bowl_membership.group_debt_mass == new_group_debt_mass
 
 
-def test_MemberShip_set_group_debt_lumen_DoesNotSetsAttrNone():
+def test_MemberShip_set_group_debt_mass_DoesNotSetsAttrNone():
     # ESTABLISH
     bowlers_str = ",bowlers"
-    bowl_group_cred_lumen = 3.0
-    old_group_debt_lumen = 5.0
+    bowl_group_cred_mass = 3.0
+    old_group_debt_mass = 5.0
     bowl_membership = membership_shop(
-        bowlers_str, bowl_group_cred_lumen, old_group_debt_lumen
+        bowlers_str, bowl_group_cred_mass, old_group_debt_mass
     )
-    assert bowl_membership.group_cred_lumen == bowl_group_cred_lumen
-    assert bowl_membership.group_debt_lumen == old_group_debt_lumen
+    assert bowl_membership.group_cred_mass == bowl_group_cred_mass
+    assert bowl_membership.group_debt_mass == old_group_debt_mass
 
     # WHEN
-    bowl_membership.set_group_debt_lumen(None)
+    bowl_membership.set_group_debt_mass(None)
 
     # THEN
-    assert bowl_membership.group_cred_lumen == bowl_group_cred_lumen
-    assert bowl_membership.group_debt_lumen == old_group_debt_lumen
+    assert bowl_membership.group_cred_mass == bowl_group_cred_mass
+    assert bowl_membership.group_debt_mass == old_group_debt_mass
 
 
 def test_MemberShip_to_dict_ReturnsDictWithNecessaryDataForJSON():
     # ESTABLISH
     bowlers_str = ",bowlers"
-    bowl_group_cred_lumen = 3.0
-    bowl_group_debt_lumen = 5.0
+    bowl_group_cred_mass = 3.0
+    bowl_group_debt_mass = 5.0
     bowl_membership = membership_shop(
         group_title=bowlers_str,
-        group_cred_lumen=bowl_group_cred_lumen,
-        group_debt_lumen=bowl_group_debt_lumen,
+        group_cred_mass=bowl_group_cred_mass,
+        group_debt_mass=bowl_group_debt_mass,
     )
 
     print(f"{bowl_membership}")
@@ -200,20 +200,20 @@ def test_MemberShip_to_dict_ReturnsDictWithNecessaryDataForJSON():
     assert bowl_dict is not None
     assert bowl_dict == {
         kw.group_title: bowl_membership.group_title,
-        kw.group_cred_lumen: bowl_membership.group_cred_lumen,
-        kw.group_debt_lumen: bowl_membership.group_debt_lumen,
+        kw.group_cred_mass: bowl_membership.group_cred_mass,
+        kw.group_debt_mass: bowl_membership.group_debt_mass,
     }
 
 
 def test_membership_to_dict_ReturnsObj():
     # ESTABLISH
     bowlers_str = ",bowlers"
-    bowl_group_cred_lumen = 3.0
-    bowl_group_debt_lumen = 5.0
+    bowl_group_cred_mass = 3.0
+    bowl_group_debt_mass = 5.0
     before_bowl_membership = membership_shop(
         group_title=bowlers_str,
-        group_cred_lumen=bowl_group_cred_lumen,
-        group_debt_lumen=bowl_group_debt_lumen,
+        group_cred_mass=bowl_group_cred_mass,
+        group_debt_mass=bowl_group_debt_mass,
         contact_name=exx.yao,
     )
     bowl_membership_dict = before_bowl_membership.to_dict()
@@ -229,12 +229,12 @@ def test_membership_to_dict_ReturnsObj():
 def test_memberships_get_from_dict_ReturnsObj():
     # ESTABLISH
     bowlers_str = ",bowlers"
-    bowl_group_cred_lumen = 3.0
-    bowl_group_debt_lumen = 5.0
+    bowl_group_cred_mass = 3.0
+    bowl_group_debt_mass = 5.0
     before_bowl_membership = membership_shop(
         group_title=bowlers_str,
-        group_cred_lumen=bowl_group_cred_lumen,
-        group_debt_lumen=bowl_group_debt_lumen,
+        group_cred_mass=bowl_group_cred_mass,
+        group_debt_mass=bowl_group_debt_mass,
         contact_name=exx.yao,
     )
     before_bowl_memberships_objs = {bowlers_str: before_bowl_membership}

@@ -8,8 +8,8 @@ def get_person_contactunits_dataframe(x_person: PersonUnit) -> DataFrame:
         return DataFrame(
             columns=[
                 "contact_name",
-                "contact_cred_lumen",
-                "contact_debt_lumen",
+                "contact_cred_mass",
+                "contact_debt_mass",
                 "fund_give",
                 "fund_take",
                 "fund_agenda_give",

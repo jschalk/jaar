@@ -58,10 +58,10 @@ def test_etl_moment_json_contact_nets_to_moment_tranbook_nets_table_Scenario0_Ba
     t66_yao_amount = -66
     t77_tran_time = 7707
     t77_yao_amount = -77
-    a23_moment.add_paypurchase(exx.sue, exx.yao, t55_tran_time, t55_yao_amount)
-    a23_moment.add_paypurchase(exx.sue, exx.yao, t66_tran_time, t66_yao_amount)
-    a23_moment.add_paypurchase(exx.sue, exx.bob, t55_tran_time, t55_bob_amount)
-    a23_moment.add_paypurchase(exx.yao, exx.yao, t77_tran_time, t77_yao_amount)
+    a23_moment.add_ceckpurchase(exx.sue, exx.yao, t55_tran_time, t55_yao_amount)
+    a23_moment.add_ceckpurchase(exx.sue, exx.yao, t66_tran_time, t66_yao_amount)
+    a23_moment.add_ceckpurchase(exx.sue, exx.bob, t55_tran_time, t55_bob_amount)
+    a23_moment.add_ceckpurchase(exx.yao, exx.yao, t77_tran_time, t77_yao_amount)
     a23_lasso = lassounit_shop(exx.a23)
     a23_json_path = create_moment_json_path(mstr_dir, a23_lasso)
     save_json(a23_json_path, None, a23_moment.to_dict())
@@ -96,10 +96,10 @@ def test_etl_moment_json_contact_nets_to_moment_tranbook_nets_table_Scenario1_No
     t66_yao_amount = -66
     t77_tran_time = 7707
     t77_yao_amount = -77
-    a23_moment.add_paypurchase(exx.sue, exx.yao, t55_tran_time, t55_yao_amount)
-    a23_moment.add_paypurchase(exx.sue, exx.yao, t66_tran_time, t66_yao_amount)
-    a23_moment.add_paypurchase(exx.sue, exx.bob, t55_tran_time, t55_bob_amount)
-    a23_moment.add_paypurchase(exx.yao, exx.yao, t77_tran_time, t77_yao_amount)
+    a23_moment.add_ceckpurchase(exx.sue, exx.yao, t55_tran_time, t55_yao_amount)
+    a23_moment.add_ceckpurchase(exx.sue, exx.yao, t66_tran_time, t66_yao_amount)
+    a23_moment.add_ceckpurchase(exx.sue, exx.bob, t55_tran_time, t55_bob_amount)
+    a23_moment.add_ceckpurchase(exx.yao, exx.yao, t77_tran_time, t77_yao_amount)
     a23_lasso = lassounit_shop(exx.a23)
     a23_json_path = create_moment_json_path(mstr_dir, a23_lasso)
     save_json(a23_json_path, None, a23_moment.to_dict())

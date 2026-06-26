@@ -439,13 +439,13 @@ def test_LessonUnit_get_deltametric_dict_ReturnsObj():
 def test_LessonUnit_add_p_personatom_Sets_PersonUnit_contactunits():
     # ESTABLISH
     bob_lessonunit = lessonunit_shop(exx.bob)
-    bob_contact_cred_lumen = 55
-    bob_contact_debt_lumen = 66
+    bob_contact_cred_mass = 55
+    bob_contact_debt_mass = 66
     bob_contactunit = contactunit_shop(
-        exx.bob, bob_contact_cred_lumen, bob_contact_debt_lumen
+        exx.bob, bob_contact_cred_mass, bob_contact_debt_mass
     )
-    cw_str = kw.contact_cred_lumen
-    dw_str = kw.contact_debt_lumen
+    cw_str = kw.contact_cred_mass
+    dw_str = kw.contact_debt_mass
     print(f"{bob_contactunit.to_dict()=}")
     bob_required_dict = {
         kw.contact_name: bob_contactunit.to_dict().get(kw.contact_name)
@@ -484,10 +484,10 @@ def test_LessonUnit_get_edited_person_ReturnsObj_PersonUnit_insert_contact():
     dimen = kw.person_contactunit
     x_personatom = personatom_shop(dimen, kw.INSERT)
     x_personatom.set_jkey(kw.contact_name, exx.zia)
-    x_contact_cred_lumen = 55
-    x_contact_debt_lumen = 66
-    x_personatom.set_jvalue("contact_cred_lumen", x_contact_cred_lumen)
-    x_personatom.set_jvalue("contact_debt_lumen", x_contact_debt_lumen)
+    x_contact_cred_mass = 55
+    x_contact_debt_mass = 66
+    x_personatom.set_jvalue("contact_cred_mass", x_contact_cred_mass)
+    x_personatom.set_jvalue("contact_debt_mass", x_contact_debt_mass)
     sue_lessonunit.persondelta.set_personatom(x_personatom)
     print(f"{sue_lessonunit.persondelta.personatoms.keys()=}")
 
@@ -501,8 +501,8 @@ def test_LessonUnit_get_edited_person_ReturnsObj_PersonUnit_insert_contact():
     zia_contactunit = after_sue_personunit.get_contact(exx.zia)
     assert yao_contactunit is not None
     assert zia_contactunit is not None
-    assert zia_contactunit.contact_cred_lumen == x_contact_cred_lumen
-    assert zia_contactunit.contact_debt_lumen == x_contact_debt_lumen
+    assert zia_contactunit.contact_cred_mass == x_contact_cred_mass
+    assert zia_contactunit.contact_debt_mass == x_contact_debt_mass
 
 
 def test_LessonUnit_get_edited_person_RaisesErrorWhenlessonAttrsAndPersonAttrsAreNotTheSame():
@@ -523,13 +523,13 @@ def test_LessonUnit_get_edited_person_RaisesErrorWhenlessonAttrsAndPersonAttrsAr
 def test_LessonUnit_is_empty_ReturnsObj():
     # ESTABLISH
     bob_lessonunit = lessonunit_shop(exx.bob)
-    bob_contact_cred_lumen = 55
-    bob_contact_debt_lumen = 66
+    bob_contact_cred_mass = 55
+    bob_contact_debt_mass = 66
     bob_contactunit = contactunit_shop(
-        exx.bob, bob_contact_cred_lumen, bob_contact_debt_lumen
+        exx.bob, bob_contact_cred_mass, bob_contact_debt_mass
     )
-    cw_str = kw.contact_cred_lumen
-    dw_str = kw.contact_debt_lumen
+    cw_str = kw.contact_cred_mass
+    dw_str = kw.contact_debt_mass
     print(f"{bob_contactunit.to_dict()=}")
     bob_required_dict = {
         kw.contact_name: bob_contactunit.to_dict().get(kw.contact_name)

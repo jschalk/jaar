@@ -5,7 +5,10 @@ from ch01_keyword.keyword_class_builder import (
     get_keywords_src_config,
     parse_valid_ch_str,
 )
-from ch97_docs_builder._ref.ch97_path import create_keg_rank_json_path
+from ch97_docs_builder._ref.ch97_path import (
+    create_question_tier_path,
+    create_keg_exam_questions_path,
+)
 from ch97_docs_builder.glossary_ranking import (
     QuestionUnit,
     get_ch_sorted_keywords,
@@ -15,15 +18,17 @@ from ch97_docs_builder.glossary_ranking import (
     rebuild_keg_exam_questions,
     rebuild_keg_rank_json,
     set_did_you_read_orders,
+    rebuild_keg_exam_questions,
 )
 from ch99_glossary.ch_keyword import Ch97Keywords as kw
 from os.path import exists as os_path_exists
+from ch20_brick.brick_db_tool import open_csv
 
 
 def test_rebuild_keg_rank_json_SavesFile_Scenario0_NoFileExists(temp3_fs):
     # ESTABLISH
     src_dir = str(temp3_fs)
-    question_tier_path = create_keg_rank_json_path(src_dir)
+    question_tier_path = create_question_tier_path(src_dir)
     assert not os_path_exists(question_tier_path)
     # WHEN
     rebuild_keg_rank_json(src_dir)
@@ -57,7 +62,7 @@ def test_rebuild_keg_rank_json_SavesFile_Scenario0_NoFileExists(temp3_fs):
 # def test_rebuild_keg_rank_json_SavesFile_Scenario1_NoFileExists(temp3_fs):
 #     # ESTABLISH
 #     src_dir = str(temp3_fs)
-#     question_tier_path = create_keg_rank_json_path(src_dir)
+#     question_tier_path = create_question_tier_path(src_dir)
 #     assert not os_path_exists(question_tier_path)
 #     # WHEN
 #     rebuild_keg_rank_json(src_dir)
@@ -171,6 +176,8 @@ def test_rebuild_keg_exam_questions_ReturnsNone_Scenario3_CreatesCsvFile(
     rebuild_keg_exam_questions(output_csv_path=output_csv_path)
     # THEN
     assert output_csv_path.exists()
+    kg_df = open_csv(output_csv_path)
+    assert list(kg_df.columns) == ["question"]
 
 
 def test_get_ch_sorted_keywords_ReturnsObj_Scenario0_basic_sorting():

@@ -163,7 +163,7 @@ def test_riverrun_shop_ReturnsObj_Scenario1_WithoutArgs(temp3_dir):
 def test_RiverRun_set_keep_patientledger_SetsAttr(temp3_dir):
     # ESTABLISH
     mstr_dir = temp3_dir
-    yao_contact_cred_lumen = 500
+    yao_contact_cred_mass = 500
     x_riverrun = riverrun_shop(mstr_dir, exx.a23, exx.yao)
     assert x_riverrun.keep_patientledgers == {}
 
@@ -171,13 +171,11 @@ def test_RiverRun_set_keep_patientledger_SetsAttr(temp3_dir):
     x_riverrun.set_keep_patientledger(
         person_name=exx.yao,
         contact_name=exx.yao,
-        mana_ledger=yao_contact_cred_lumen,
+        mana_ledger=yao_contact_cred_mass,
     )
 
     # THEN
-    assert x_riverrun.keep_patientledgers == {
-        exx.yao: {exx.yao: yao_contact_cred_lumen}
-    }
+    assert x_riverrun.keep_patientledgers == {exx.yao: {exx.yao: yao_contact_cred_mass}}
 
 
 def test_RiverRun_delete_keep_patientledgers_person_SetsAttr(temp3_dir):

@@ -52,6 +52,8 @@ from ch97_docs_builder._ref.ch97_semantic_types import (
     TimeNum,
     TitleTerm,
     WeightNum,
+    LordMass,
+    LoyalMass,
     WorldName,
 )
 from ch97_docs_builder.glossary_definition import (
@@ -177,7 +179,7 @@ def test_get_keg_definitions_ReturnsObj_Check_semantic_types():
     all_semantic_types = get_all_semantic_types_with_doc_strs()
     for semantic_class, class_doc_str in all_semantic_types.items():
         semantic_description = keg_definitions.get(semantic_class)
-        # print(f"{semantic_class=} {class_doc_str=}")
+        print(f"{semantic_class=} {class_doc_str=}")
         assert class_doc_str in semantic_description
 
 
@@ -294,7 +296,7 @@ def test_get_keg_definitions_ReturnsObj_CheckConfigArgs():
     mmthour_args = get_moment_config_args(kw.moment_epoch_hour)
     mmtmont_args = get_moment_config_args(kw.moment_epoch_month)
     mmtweek_args = get_moment_config_args(kw.moment_epoch_weekday)
-    mmtpayy_args = get_moment_config_args(kw.moment_paybook)
+    mmtceck_args = get_moment_config_args(kw.moment_ceckbook)
     mmtoffi_args = get_moment_config_args(kw.moment_timeoffi)
     mmtunit_args = get_moment_config_args(kw.momentunit)
     nabu_args = get_nabu_args()
@@ -318,7 +320,7 @@ def test_get_keg_definitions_ReturnsObj_CheckConfigArgs():
         check_mmtunit_desc_str(mmthour_args, keyword, desc, kw.mmthour)
         check_mmtunit_desc_str(mmtmont_args, keyword, desc, kw.mmtmont)
         check_mmtunit_desc_str(mmtweek_args, keyword, desc, kw.mmtweek)
-        check_mmtunit_desc_str(mmtpayy_args, keyword, desc, kw.paybook)
+        check_mmtunit_desc_str(mmtceck_args, keyword, desc, kw.ceckbook)
         check_mmtunit_desc_str(mmtoffi_args, keyword, desc, kw.offi_time)
         check_mmtunit_desc_str(mmtunit_args, keyword, desc, "Moment")
         check_mmtunit_desc_str(nabu_args, keyword, desc, kw.nabu)
@@ -352,6 +354,8 @@ def get_all_semantic_types_with_doc_strs() -> dict[str, str]:
         HealerName.__name__: inspect_getdoc(HealerName("")),
         KnotTerm.__name__: inspect_getdoc(KnotTerm("")),
         LabelTerm.__name__: inspect_getdoc(LabelTerm("")),
+        LordMass.__name__: inspect_getdoc(LordMass(0)),
+        LoyalMass.__name__: inspect_getdoc(LoyalMass(0)),
         PitchID.__name__: inspect_getdoc(PitchID("")),
         ManaGrain.__name__: inspect_getdoc(ManaGrain(0)),
         ManaNum.__name__: inspect_getdoc(ManaNum(0)),

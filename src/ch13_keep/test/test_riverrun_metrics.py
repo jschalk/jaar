@@ -5,12 +5,12 @@ from ch99_glossary.ch_keyword import ExampleStrs as exx
 def test_RiverRun_calc_metrics_SetsAttrsScenario01(temp3_dir):
     # ESTABLISH / WHEN
     mstr_dir = temp3_dir
-    yao_contact_cred_lumen = 500
+    yao_contact_cred_mass = 500
     x_keep_point_magnitude = 444
     x_riverrun = riverrun_shop(
         mstr_dir, exx.a23, exx.yao, keep_point_magnitude=x_keep_point_magnitude
     )
-    x_riverrun.set_keep_patientledger(exx.yao, exx.yao, yao_contact_cred_lumen)
+    x_riverrun.set_keep_patientledger(exx.yao, exx.yao, yao_contact_cred_mass)
     assert x_riverrun.get_contact_need_due(exx.yao) == 0
 
     # WHEN
@@ -46,11 +46,11 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario01(temp3_dir):
 def test_RiverRun_calc_metrics_SetsAttrsScenario02(temp3_dir):
     # ESTABLISH / WHEN
     mstr_dir = temp3_dir
-    yao_contact_cred_lumen = 500
-    bob_contact_debt_lumen = 350
+    yao_contact_cred_mass = 500
+    bob_contact_debt_mass = 350
     x_riverrun = riverrun_shop(mstr_dir, exx.a23, exx.yao)
-    x_riverrun.set_keep_patientledger(exx.yao, exx.yao, yao_contact_cred_lumen)
-    x_riverrun.set_need_dues({exx.bob: bob_contact_debt_lumen})
+    x_riverrun.set_keep_patientledger(exx.yao, exx.yao, yao_contact_cred_mass)
+    x_riverrun.set_need_dues({exx.bob: bob_contact_debt_mass})
     assert x_riverrun.get_contact_need_due(exx.yao) == 0
     keep_mana_amount = x_riverrun.keep_point_magnitude
     assert x_riverrun.get_contact_need_due(exx.bob) == keep_mana_amount
@@ -89,12 +89,12 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario02(temp3_dir):
 def test_RiverRun_calc_metrics_SetsAttrsScenario03(temp3_dir):
     # ESTABLISH / WHEN
     mstr_dir = temp3_dir
-    yao_contact_cred_lumen = 500
-    bob_contact_debt_lumen = 25
-    sue_contact_debt_lumen = 75
+    yao_contact_cred_mass = 500
+    bob_contact_debt_mass = 25
+    sue_contact_debt_mass = 75
     x_riverrun = riverrun_shop(mstr_dir, exx.a23, exx.yao)
-    x_riverrun.set_keep_patientledger(exx.yao, exx.yao, yao_contact_cred_lumen)
-    doctorledger = {exx.bob: bob_contact_debt_lumen, exx.sue: sue_contact_debt_lumen}
+    x_riverrun.set_keep_patientledger(exx.yao, exx.yao, yao_contact_cred_mass)
+    doctorledger = {exx.bob: bob_contact_debt_mass, exx.sue: sue_contact_debt_mass}
     x_riverrun.set_need_dues(doctorledger)
     assert x_riverrun.get_contact_need_due(exx.yao) == 0
     keep_mana_amount = x_riverrun.keep_point_magnitude
@@ -136,14 +136,14 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario03(temp3_dir):
 def test_RiverRun_calc_metrics_SetsAttrsScenario04(temp3_dir):
     # ESTABLISH / WHEN
     mstr_dir = temp3_dir
-    yao_yao_contact_cred_lumen = 500
-    yao_sue_contact_cred_lumen = 2000
-    bob_contact_debt_lumen = 25
-    sue_contact_debt_lumen = 75
+    yao_yao_contact_cred_mass = 500
+    yao_sue_contact_cred_mass = 2000
+    bob_contact_debt_mass = 25
+    sue_contact_debt_mass = 75
     x_riverrun = riverrun_shop(mstr_dir, exx.a23, exx.yao)
-    x_riverrun.set_keep_patientledger(exx.yao, exx.yao, yao_yao_contact_cred_lumen)
-    x_riverrun.set_keep_patientledger(exx.yao, exx.sue, yao_sue_contact_cred_lumen)
-    doctorledger = {exx.bob: bob_contact_debt_lumen, exx.sue: sue_contact_debt_lumen}
+    x_riverrun.set_keep_patientledger(exx.yao, exx.yao, yao_yao_contact_cred_mass)
+    x_riverrun.set_keep_patientledger(exx.yao, exx.sue, yao_sue_contact_cred_mass)
+    doctorledger = {exx.bob: bob_contact_debt_mass, exx.sue: sue_contact_debt_mass}
     x_riverrun.set_need_dues(doctorledger)
     assert x_riverrun.get_contact_need_due(exx.yao) == 0
     keep_mana_amount = x_riverrun.keep_point_magnitude
@@ -183,9 +183,9 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario04(temp3_dir):
 def test_RiverRun_calc_metrics_SetsAttrsScenario05(temp3_dir):
     # ESTABLISH / WHEN
     mstr_dir = temp3_dir
-    yao_contact_cred_lumen = 500
+    yao_contact_cred_mass = 500
     x_riverrun = riverrun_shop(mstr_dir, exx.a23, exx.yao)
-    x_riverrun.set_keep_patientledger(exx.yao, exx.yao, yao_contact_cred_lumen)
+    x_riverrun.set_keep_patientledger(exx.yao, exx.yao, yao_contact_cred_mass)
     x_riverrun.set_need_dues({exx.yao: 1})
     keep_mana_amount = x_riverrun.keep_point_magnitude
     assert x_riverrun.get_contact_need_due(exx.yao) == keep_mana_amount
@@ -215,9 +215,9 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario05(temp3_dir):
 def test_RiverRun_calc_metrics_Resets_need_result(temp3_dir):
     # ESTABLISH / WHEN
     mstr_dir = temp3_dir
-    yao_contact_cred_lumen = 500
+    yao_contact_cred_mass = 500
     x_riverrun = riverrun_shop(mstr_dir, exx.a23, exx.yao)
-    x_riverrun.set_keep_patientledger(exx.yao, exx.yao, yao_contact_cred_lumen)
+    x_riverrun.set_keep_patientledger(exx.yao, exx.yao, yao_contact_cred_mass)
     x_riverrun.set_need_dues({exx.yao: 1})
     keep_mana_amount = x_riverrun.keep_point_magnitude
     x_riverrun.calc_metrics()

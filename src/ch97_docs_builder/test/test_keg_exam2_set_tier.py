@@ -5,7 +5,7 @@ from ch01_keyword.keyword_class_builder import (
     get_keywords_src_config,
     parse_valid_ch_str,
 )
-from ch97_docs_builder._ref.ch97_path import create_keg_rank_json_path
+from ch97_docs_builder._ref.ch97_path import create_question_tier_path
 from ch97_docs_builder.glossary_ranking import (
     QuestionUnit,
     get_ch_sorted_keywords,

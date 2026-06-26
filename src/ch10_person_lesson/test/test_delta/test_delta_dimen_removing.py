@@ -9,10 +9,10 @@ def test_PersonDelta_get_dimens_cruds_persondelta_ReturnsObjWithCorrectDimensAnd
     before_sue_person = personunit_shop(exx.sue)
     before_sue_person.add_contactunit(exx.yao)
     after_sue_person = personunit_shop(exx.sue)
-    bob_contact_cred_lumen = 33
-    bob_contact_debt_lumen = 44
+    bob_contact_cred_mass = 33
+    bob_contact_debt_mass = 44
     after_sue_person.add_contactunit(
-        exx.bob, bob_contact_cred_lumen, bob_contact_debt_lumen
+        exx.bob, bob_contact_cred_mass, bob_contact_debt_mass
     )
     after_sue_person.set_l1_plan(planunit_shop("casa"))
     old_persondelta = persondelta_shop()
@@ -31,5 +31,5 @@ def test_PersonDelta_get_dimens_cruds_persondelta_ReturnsObjWithCorrectDimensAnd
     sue_contactunit_dict = sue_insert_dict.get(kw.person_contactunit)
     bob_personatom = sue_contactunit_dict.get(exx.bob)
     assert bob_personatom.get_value(kw.contact_name) == exx.bob
-    assert bob_personatom.get_value("contact_cred_lumen") == bob_contact_cred_lumen
-    assert bob_personatom.get_value("contact_debt_lumen") == bob_contact_debt_lumen
+    assert bob_personatom.get_value("contact_cred_mass") == bob_contact_cred_mass
+    assert bob_personatom.get_value("contact_debt_mass") == bob_contact_debt_mass

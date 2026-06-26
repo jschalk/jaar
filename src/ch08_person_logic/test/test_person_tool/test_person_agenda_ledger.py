@@ -342,12 +342,12 @@ def test_get_credit_ledger_ReturnsObj_Scenario0_No_contactunits():
 def test_get_credit_ledger_ReturnsObj_Scenario1_contactunits_Exist():
     # ESTABLISH
     sue_person = personunit_shop(exx.sue)
-    bob_contact_cred_lumen = 11
-    yao_contact_cred_lumen = 13
-    xio_contact_cred_lumen = 17
-    sue_person.add_contactunit(exx.yao, yao_contact_cred_lumen)
-    sue_person.add_contactunit(exx.bob, bob_contact_cred_lumen)
-    sue_person.add_contactunit(exx.xio, xio_contact_cred_lumen)
+    bob_contact_cred_mass = 11
+    yao_contact_cred_mass = 13
+    xio_contact_cred_mass = 17
+    sue_person.add_contactunit(exx.yao, yao_contact_cred_mass)
+    sue_person.add_contactunit(exx.bob, bob_contact_cred_mass)
+    sue_person.add_contactunit(exx.xio, xio_contact_cred_mass)
 
     # WHEN
     sue_credit_ledger = get_credit_ledger(sue_person)
@@ -356,9 +356,9 @@ def test_get_credit_ledger_ReturnsObj_Scenario1_contactunits_Exist():
     print(f"{sue_credit_ledger=}")
     print("")
     expected_sue_credit_ledger = {
-        exx.bob: bob_contact_cred_lumen,
-        exx.yao: yao_contact_cred_lumen,
-        exx.xio: xio_contact_cred_lumen,
+        exx.bob: bob_contact_cred_mass,
+        exx.yao: yao_contact_cred_mass,
+        exx.xio: xio_contact_cred_mass,
     }
     print(f"{expected_sue_credit_ledger=}")
     assert sue_credit_ledger.get(exx.yao) != None

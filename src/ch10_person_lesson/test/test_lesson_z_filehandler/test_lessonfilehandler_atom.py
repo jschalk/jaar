@@ -2,9 +2,9 @@ from ch00_py.file_toolbox import create_path, get_dir_file_strs
 from ch10_person_lesson.lasso import lassounit_shop
 from ch10_person_lesson.lesson_filehandler import lessonfilehandler_shop
 from ch10_person_lesson.test._util.ch10_examples import (
-    get_atom_example_factunit_knee,
+    get_atom_example_factunit_foot,
     get_atom_example_planunit_ball,
-    get_atom_example_planunit_knee,
+    get_atom_example_planunit_foot,
     get_atom_example_planunit_sports,
     get_ch10_example_moment_lasso as moment_lasso,
 )
@@ -51,8 +51,8 @@ def test_LessonFileHandler_save_valid_atom_file_SavesFile(temp3_fs):
     assert os_path_exists(yao_lessonfilehandler.atom_file_path(one_int)) is False
 
     # WHEN
-    knee_atom = get_atom_example_factunit_knee()
-    atom_num = yao_lessonfilehandler._save_valid_atom_file(knee_atom, one_int)
+    foot_atom = get_atom_example_factunit_foot()
+    atom_num = yao_lessonfilehandler._save_valid_atom_file(foot_atom, one_int)
 
     # THEN
     assert os_path_exists(yao_lessonfilehandler.atom_file_path(one_int))
@@ -70,7 +70,7 @@ def test_LessonFileHandler_atom_file_exists_ReturnsObj(temp3_fs):
 
     # WHEN
     yao_lessonfilehandler._save_valid_atom_file(
-        get_atom_example_factunit_knee(), four_int
+        get_atom_example_factunit_foot(), four_int
     )
 
     # THEN
@@ -85,7 +85,7 @@ def test_LessonFileHandler_delete_atom_file_DeletesFile(temp3_fs):
     )
     ten_int = 10
     yao_lessonfilehandler._save_valid_atom_file(
-        get_atom_example_factunit_knee(), ten_int
+        get_atom_example_factunit_foot(), ten_int
     )
     assert yao_lessonfilehandler.h_atom_file_exists(ten_int)
 
@@ -103,7 +103,7 @@ def test_LessonFileHandler_get_max_atom_file_number_ReturnsObj(temp3_fs):
     )
     ten_int = 10
     yao_lessonfilehandler._save_valid_atom_file(
-        get_atom_example_factunit_knee(), ten_int
+        get_atom_example_factunit_foot(), ten_int
     )
     assert yao_lessonfilehandler.h_atom_file_exists(ten_int)
 
@@ -133,7 +133,7 @@ def test_LessonFileHandler_get_next_atom_file_number_ReturnsObj(temp3_fs):
 
     ten_int = 10
     yao_lessonfilehandler._save_valid_atom_file(
-        get_atom_example_factunit_knee(), ten_int
+        get_atom_example_factunit_foot(), ten_int
     )
     assert yao_lessonfilehandler.h_atom_file_exists(ten_int)
 
@@ -148,21 +148,21 @@ def test_LessonFileHandler_save_atom_file_SavesFile(temp3_fs):
     )
     ten_int = 10
     yao_lessonfilehandler._save_valid_atom_file(
-        get_atom_example_factunit_knee(), ten_int
+        get_atom_example_factunit_foot(), ten_int
     )
     assert yao_lessonfilehandler.get_max_atom_file_number() == ten_int
     eleven_int = ten_int + 1
     assert yao_lessonfilehandler.h_atom_file_exists(eleven_int) is False
 
     # WHEN
-    atom_num1 = yao_lessonfilehandler.save_atom_file(get_atom_example_factunit_knee())
+    atom_num1 = yao_lessonfilehandler.save_atom_file(get_atom_example_factunit_foot())
 
     # THEN
     assert yao_lessonfilehandler.get_max_atom_file_number() != ten_int
     assert yao_lessonfilehandler.get_max_atom_file_number() == eleven_int
     assert yao_lessonfilehandler.h_atom_file_exists(eleven_int)
     assert atom_num1 == eleven_int
-    atom_num2 = yao_lessonfilehandler.save_atom_file(get_atom_example_factunit_knee())
+    atom_num2 = yao_lessonfilehandler.save_atom_file(get_atom_example_factunit_foot())
     assert atom_num2 == 12
 
 
@@ -233,8 +233,8 @@ def test_LessonFileHandler_get_person_from_atom_files_ReturnsFile_WithFactUnit(
         get_atom_example_planunit_sports(x_moment_rope)
     )
     yao_lessonfilehandler.save_atom_file(get_atom_example_planunit_ball(x_moment_rope))
-    yao_lessonfilehandler.save_atom_file(get_atom_example_planunit_knee(x_moment_rope))
-    yao_lessonfilehandler.save_atom_file(get_atom_example_factunit_knee(x_moment_rope))
+    yao_lessonfilehandler.save_atom_file(get_atom_example_planunit_foot(x_moment_rope))
+    yao_lessonfilehandler.save_atom_file(get_atom_example_factunit_foot(x_moment_rope))
     print(f"{get_dir_file_strs(yao_lessonfilehandler.atoms_dir).keys()=}")
 
     # WHEN

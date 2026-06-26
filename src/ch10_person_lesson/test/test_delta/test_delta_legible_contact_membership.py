@@ -10,13 +10,13 @@ def test_create_legible_list_ReturnsObj_contact_membership_INSERT():
     sue_person = personunit_shop("Sue")
     dimen = kw.person_contact_membership
     bowlers_str = f"{sue_person.knot}bowlers"
-    group_cred_lumen_value = 81
-    group_debt_lumen_value = 43
+    group_cred_mass_value = 81
+    group_debt_mass_value = 43
     yao_personatom = personatom_shop(dimen, kw.INSERT)
     yao_personatom.set_arg(kw.group_title, bowlers_str)
     yao_personatom.set_arg(kw.contact_name, exx.yao)
-    yao_personatom.set_arg(kw.group_cred_lumen, group_cred_lumen_value)
-    yao_personatom.set_arg(kw.group_debt_lumen, group_debt_lumen_value)
+    yao_personatom.set_arg(kw.group_cred_mass, group_cred_mass_value)
+    yao_personatom.set_arg(kw.group_debt_mass, group_debt_mass_value)
     # print(f"{yao_personatom=}")
     x_persondelta = persondelta_shop()
     x_persondelta.set_personatom(yao_personatom)
@@ -25,25 +25,25 @@ def test_create_legible_list_ReturnsObj_contact_membership_INSERT():
     legible_list = create_legible_list(x_persondelta, sue_person)
 
     # THEN
-    x_str = f"Group '{bowlers_str}' has new membership {exx.yao} with group_cred_lumen_value{group_cred_lumen_value} and group_debt_lumen_value={group_debt_lumen_value}."
+    x_str = f"Group '{bowlers_str}' has new membership {exx.yao} with group_cred_mass_value{group_cred_mass_value} and group_debt_mass_value={group_debt_mass_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_contact_membership_UPDATE_group_cred_lumen_group_debt_lumen():
+def test_create_legible_list_ReturnsObj_contact_membership_UPDATE_group_cred_mass_group_debt_mass():
     # ESTABLISH
     sue_person = personunit_shop("Sue")
     dimen = kw.person_contact_membership
-    group_cred_lumen_str = kw.group_cred_lumen
-    group_debt_lumen_str = kw.group_debt_lumen
+    group_cred_mass_str = kw.group_cred_mass
+    group_debt_mass_str = kw.group_debt_mass
     bowlers_str = f"{sue_person.knot}bowlers"
-    group_cred_lumen_value = 81
-    group_debt_lumen_value = 43
+    group_cred_mass_value = 81
+    group_debt_mass_value = 43
     yao_personatom = personatom_shop(dimen, kw.UPDATE)
     yao_personatom.set_arg(kw.group_title, bowlers_str)
     yao_personatom.set_arg(kw.contact_name, exx.yao)
-    yao_personatom.set_arg(group_cred_lumen_str, group_cred_lumen_value)
-    yao_personatom.set_arg(group_debt_lumen_str, group_debt_lumen_value)
+    yao_personatom.set_arg(group_cred_mass_str, group_cred_mass_value)
+    yao_personatom.set_arg(group_debt_mass_str, group_debt_mass_value)
     # print(f"{yao_personatom=}")
     x_persondelta = persondelta_shop()
     x_persondelta.set_personatom(yao_personatom)
@@ -52,22 +52,22 @@ def test_create_legible_list_ReturnsObj_contact_membership_UPDATE_group_cred_lum
     legible_list = create_legible_list(x_persondelta, sue_person)
 
     # THEN
-    x_str = f"Group '{bowlers_str}' membership {exx.yao} has new group_cred_lumen_value{group_cred_lumen_value} and group_debt_lumen_value={group_debt_lumen_value}."
+    x_str = f"Group '{bowlers_str}' membership {exx.yao} has new group_cred_mass_value{group_cred_mass_value} and group_debt_mass_value={group_debt_mass_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_contact_membership_UPDATE_group_cred_lumen():
+def test_create_legible_list_ReturnsObj_contact_membership_UPDATE_group_cred_mass():
     # ESTABLISH
     sue_person = personunit_shop("Sue")
     dimen = kw.person_contact_membership
-    group_cred_lumen_str = kw.group_cred_lumen
+    group_cred_mass_str = kw.group_cred_mass
     bowlers_str = f"{sue_person.knot}bowlers"
-    group_cred_lumen_value = 81
+    group_cred_mass_value = 81
     yao_personatom = personatom_shop(dimen, kw.UPDATE)
     yao_personatom.set_arg(kw.group_title, bowlers_str)
     yao_personatom.set_arg(kw.contact_name, exx.yao)
-    yao_personatom.set_arg(group_cred_lumen_str, group_cred_lumen_value)
+    yao_personatom.set_arg(group_cred_mass_str, group_cred_mass_value)
     # print(f"{yao_personatom=}")
     x_persondelta = persondelta_shop()
     x_persondelta.set_personatom(yao_personatom)
@@ -76,22 +76,22 @@ def test_create_legible_list_ReturnsObj_contact_membership_UPDATE_group_cred_lum
     legible_list = create_legible_list(x_persondelta, sue_person)
 
     # THEN
-    x_str = f"Group '{bowlers_str}' membership {exx.yao} has new group_cred_lumen_value{group_cred_lumen_value}."
+    x_str = f"Group '{bowlers_str}' membership {exx.yao} has new group_cred_mass_value{group_cred_mass_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_contact_membership_UPDATE_group_debt_lumen():
+def test_create_legible_list_ReturnsObj_contact_membership_UPDATE_group_debt_mass():
     # ESTABLISH
     sue_person = personunit_shop("Sue")
     dimen = kw.person_contact_membership
-    group_debt_lumen_str = kw.group_debt_lumen
+    group_debt_mass_str = kw.group_debt_mass
     bowlers_str = f"{sue_person.knot}bowlers"
-    group_debt_lumen_value = 43
+    group_debt_mass_value = 43
     yao_personatom = personatom_shop(dimen, kw.UPDATE)
     yao_personatom.set_arg(kw.group_title, bowlers_str)
     yao_personatom.set_arg(kw.contact_name, exx.yao)
-    yao_personatom.set_arg(group_debt_lumen_str, group_debt_lumen_value)
+    yao_personatom.set_arg(group_debt_mass_str, group_debt_mass_value)
     # print(f"{yao_personatom=}")
     x_persondelta = persondelta_shop()
     x_persondelta.set_personatom(yao_personatom)
@@ -100,7 +100,7 @@ def test_create_legible_list_ReturnsObj_contact_membership_UPDATE_group_debt_lum
     legible_list = create_legible_list(x_persondelta, sue_person)
 
     # THEN
-    x_str = f"Group '{bowlers_str}' membership {exx.yao} has new group_debt_lumen_value={group_debt_lumen_value}."
+    x_str = f"Group '{bowlers_str}' membership {exx.yao} has new group_debt_mass_value={group_debt_mass_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

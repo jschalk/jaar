@@ -32,8 +32,8 @@ def test_get_insert_into_heard_raw_sqlstrs_ReturnsObj_PopulatesTable_Scenario0(
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 )"""
     values_clause = f"""
 VALUES
@@ -59,8 +59,8 @@ VALUES
 , {kw.moment_rope}_otx
 , {kw.person_name}_otx
 , {kw.contact_name}_otx
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 FROM {prnawar_h_raw_put_tablename}
 """
     cursor0.execute(select_sqlstr)
@@ -97,8 +97,8 @@ def test_etl_sound_vld_tables_to_heard_raw_tables_Scenario0_AddRowsToTable(
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 )"""
     values_clause = f"""
 VALUES
@@ -123,8 +123,8 @@ VALUES
 , {kw.moment_rope}_otx
 , {kw.person_name}_otx
 , {kw.contact_name}_otx
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 FROM {prncont_h_raw_put_tablename}
 """
     cursor0.execute(select_sqlstr)
@@ -160,8 +160,8 @@ def test_etl_sound_vld_tables_to_heard_raw_tables_Scenario1_Populates_inx_Column
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 )"""
     values_clause = f"""
 VALUES
@@ -186,8 +186,8 @@ VALUES
 , {kw.moment_rope}_inx
 , {kw.person_name}_inx
 , {kw.contact_name}_inx
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 FROM {prncont_h_raw_put_tablename}
 """
     cursor0.execute(select_sqlstr)
@@ -231,8 +231,8 @@ def test_etl_sound_vld_tables_to_heard_raw_tables_Scenario2_NoDuplicates(
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 )"""
     values_clause = f"""
 VALUES
@@ -277,8 +277,8 @@ def test_etl_sound_vld_tables_to_heard_raw_tables_Scenario3_NoDuplicatesUse_excl
 , {kw.moment_rope}
 , {kw.person_name}
 , {kw.contact_name}
-, {kw.contact_cred_lumen}
-, {kw.contact_debt_lumen}
+, {kw.contact_cred_mass}
+, {kw.contact_debt_mass}
 )"""
     values_clause = f"""
 VALUES

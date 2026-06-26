@@ -44,7 +44,7 @@ Ch15 is the first true integration chapter — it imports from every prior chapt
 - `moment_mstr_dir` — the root directory where all moment data is persisted.
 - `epoch` — the shared `EpochUnit` (calendar system) all persons in this moment use.
 - `personbudhistorys` — a dictionary of `PersonBudHistory` per person, tracking all scheduled fund distributions.
-- `paybook` — a `TranBook` recording all fund transactions within the moment.
+- `ceckbook` — a `TranBook` recording all fund transactions within the moment.
 - `offi_times` — the set of official time points at which distributions have been processed.
 - Grain parameters (`fund_grain`, `respect_grain`, `mana_grain`) — shared resolution settings applied when creating new persons.
 

@@ -128,7 +128,7 @@ def test_create_prime_tablename_ReturnsObj_Scenario0_ExpectedReturns():
     prnfact_s_agg_table = create_prime_tablename(kw.prnfact, kw.s_agg, put_str)
     prnfact_s_del_table = create_prime_tablename(kw.prnfact, kw.s_agg, del_str)
     mmtunit_s_agg_table = create_prime_tablename(kw.mmtunit, kw.s_agg)
-    mmtpayy_s_agg_table = create_prime_tablename(kw.mmtpayy, kw.s_agg)
+    mmtceck_s_agg_table = create_prime_tablename(kw.mmtceck, kw.s_agg)
     mmtbudd_s_agg_table = create_prime_tablename(kw.mmtbudd, kw.s_agg)
     mmthour_s_agg_table = create_prime_tablename(kw.mmthour, kw.s_agg)
     mmtmont_s_agg_table = create_prime_tablename(kw.mmtmont, kw.s_agg)
@@ -160,7 +160,7 @@ def test_create_prime_tablename_ReturnsObj_Scenario0_ExpectedReturns():
     assert prnfact_s_agg_table == f"{kw.person_plan_factunit}_put_{kw.s_agg}"
     assert prnfact_s_del_table == f"{kw.person_plan_factunit}_del_{kw.s_agg}"
     assert mmtunit_s_agg_table == f"{kw.momentunit}_{kw.s_agg}"
-    assert mmtpayy_s_agg_table == f"{kw.moment_paybook}_{kw.s_agg}"
+    assert mmtceck_s_agg_table == f"{kw.moment_ceckbook}_{kw.s_agg}"
     assert mmtbudd_s_agg_table == f"{kw.moment_budunit}_{kw.s_agg}"
     assert mmthour_s_agg_table == f"{kw.moment_epoch_hour}_{kw.s_agg}"
     assert mmtmont_s_agg_table == f"{kw.moment_epoch_month}_{kw.s_agg}"

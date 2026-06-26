@@ -34,13 +34,13 @@ def test_etl_lego_spark_lesson_json_to_spark_inherited_personunits_SetsFiles_per
     a23_bob_e7_lesson = lessonunit_shop(bob_inx, None, exx.a23, spark_num=spark7)
     prncont_dimen = kw.person_contactunit
     bob_jkeys = {kw.contact_name: bob_inx}
-    bob_jvalues = {kw.contact_cred_lumen: credit77, kw.contact_debt_lumen: None}
+    bob_jvalues = {kw.contact_cred_mass: credit77, kw.contact_debt_mass: None}
     yao_jkeys = {kw.contact_name: yao_inx}
-    yao_jvalues = {kw.contact_cred_lumen: credit44, kw.contact_debt_lumen: None}
+    yao_jvalues = {kw.contact_cred_mass: credit44, kw.contact_debt_mass: None}
     a23_bob_e3_lesson.add_p_personatom(prncont_dimen, kw.INSERT, bob_jkeys, bob_jvalues)
     a23_bob_e3_lesson.add_p_personatom(prncont_dimen, kw.INSERT, yao_jkeys, yao_jvalues)
     sue_jkeys = {kw.contact_name: sue_inx}
-    sue_jvalues = {kw.contact_cred_lumen: credit88, kw.contact_debt_lumen: None}
+    sue_jvalues = {kw.contact_cred_mass: credit88, kw.contact_debt_mass: None}
     a23_bob_e7_lesson.add_p_personatom(prncont_dimen, kw.INSERT, bob_jkeys, bob_jvalues)
     a23_bob_e7_lesson.add_p_personatom(prncont_dimen, kw.INSERT, sue_jkeys, sue_jvalues)
     e3_all_lesson_path = create_spark_all_lesson_path(x_dir, a23_lasso, bob_inx, spark3)
@@ -96,13 +96,13 @@ def test_etl_lego_spark_lesson_json_to_spark_inherited_personunits_SetsFiles_exp
     a23_bob_e7_lesson = lessonunit_shop(bob_inx, xia_inx, exx.a23, spark_num=spark7)
     prncont_dimen = kw.person_contactunit
     bob_jkeys = {kw.contact_name: bob_inx}
-    bob_jvalues = {kw.contact_cred_lumen: credit77}
+    bob_jvalues = {kw.contact_cred_mass: credit77}
     yao_jkeys = {kw.contact_name: yao_inx}
-    yao_jvalues = {kw.contact_cred_lumen: credit44}
+    yao_jvalues = {kw.contact_cred_mass: credit44}
     a23_bob_e3_lesson.add_p_personatom(prncont_dimen, kw.INSERT, bob_jkeys, bob_jvalues)
     a23_bob_e3_lesson.add_p_personatom(prncont_dimen, kw.INSERT, yao_jkeys, yao_jvalues)
     sue_jkeys = {kw.contact_name: sue_inx}
-    sue_jvalues = {kw.contact_cred_lumen: credit88}
+    sue_jvalues = {kw.contact_cred_mass: credit88}
     a23_bob_e7_lesson.add_p_personatom(prncont_dimen, kw.INSERT, bob_jkeys, bob_jvalues)
     a23_bob_e7_lesson.add_p_personatom(prncont_dimen, kw.INSERT, sue_jkeys, sue_jvalues)
     a23_bob_e3_all_lesson_path = create_spark_all_lesson_path(

@@ -1,27 +1,27 @@
 from ch07_plan.plan import planunit_shop
 from ch08_person_logic.person_main import personunit_shop
 from ch11_person_listen.listen_main import (
-    _allocate_irrational_contact_debt_lumen,
+    _allocate_irrational_contact_debt_mass,
     generate_ingest_list,
     generate_perspective_agenda,
 )
 from ch99_glossary.ch_keyword import ExampleStrs as exx
 
 
-def test_allocate_irrational_contact_debt_lumen_SetsPersonAttr():
+def test_allocate_irrational_contact_debt_mass_SetsPersonAttr():
     # ESTABLISH
-    zia_contact_cred_lumen = 47
-    zia_contact_debt_lumen = 41
+    zia_contact_cred_mass = 47
+    zia_contact_debt_mass = 41
     yao_person = personunit_shop(exx.yao)
-    yao_person.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
+    yao_person.add_contactunit(exx.zia, zia_contact_cred_mass, zia_contact_debt_mass)
     zia_contactunit = yao_person.get_contact(exx.zia)
-    assert zia_contactunit.irrational_contact_debt_lumen == 0
+    assert zia_contactunit.irrational_contact_debt_mass == 0
 
     # WHEN
-    _allocate_irrational_contact_debt_lumen(yao_person, exx.zia)
+    _allocate_irrational_contact_debt_mass(yao_person, exx.zia)
 
     # THEN
-    assert zia_contactunit.irrational_contact_debt_lumen == zia_contact_debt_lumen
+    assert zia_contactunit.irrational_contact_debt_mass == zia_contact_debt_mass
 
 
 def test_generate_perspective_agenda_GrabsAgendacase_tasks():

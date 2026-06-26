@@ -562,8 +562,8 @@ def test_create_prncont_metrics_insert_sqlstr_ReturnsObj(cursor0: Cursor):
     x_moment_rope = exx.a23
     x_person_name = "Sue"
     x_contact_name = 1
-    x_contact_cred_lumen = 2
-    x_contact_debt_lumen = 3
+    x_contact_cred_mass = 2
+    x_contact_debt_mass = 3
     x_credor_pool = 4
     x_debtor_pool = 5
     x_fund_give = 6
@@ -572,15 +572,15 @@ def test_create_prncont_metrics_insert_sqlstr_ReturnsObj(cursor0: Cursor):
     x_fund_agenda_take = 9
     x_fund_agenda_ratio_give = 10
     x_fund_agenda_ratio_take = 11
-    x_inallocable_contact_debt_lumen = 12
-    x_irrational_contact_debt_lumen = 13
+    x_inallocable_contact_debt_mass = 12
+    x_irrational_contact_debt_mass = 13
     x_groupmark = 13
     values_dict = {
         kw.moment_rope: x_moment_rope,
         kw.person_name: x_person_name,
         kw.contact_name: x_contact_name,
-        kw.contact_cred_lumen: x_contact_cred_lumen,
-        kw.contact_debt_lumen: x_contact_debt_lumen,
+        kw.contact_cred_mass: x_contact_cred_mass,
+        kw.contact_debt_mass: x_contact_debt_mass,
         kw.credor_pool: x_credor_pool,
         kw.debtor_pool: x_debtor_pool,
         kw.fund_give: x_fund_give,
@@ -589,8 +589,8 @@ def test_create_prncont_metrics_insert_sqlstr_ReturnsObj(cursor0: Cursor):
         kw.fund_agenda_take: x_fund_agenda_take,
         kw.fund_agenda_ratio_give: x_fund_agenda_ratio_give,
         kw.fund_agenda_ratio_take: x_fund_agenda_ratio_take,
-        kw.inallocable_contact_debt_lumen: x_inallocable_contact_debt_lumen,
-        kw.irrational_contact_debt_lumen: x_irrational_contact_debt_lumen,
+        kw.inallocable_contact_debt_mass: x_inallocable_contact_debt_mass,
+        kw.irrational_contact_debt_mass: x_irrational_contact_debt_mass,
         kw.groupmark: x_groupmark,
     }
     # all args included in values dict
@@ -640,8 +640,8 @@ def test_create_prnmemb_metrics_insert_sqlstr_ReturnsObj(cursor0: Cursor):
     x_person_name = "Sue"
     x_contact_name = 1
     x_group_title = 2
-    x_group_cred_lumen = 3
-    x_group_debt_lumen = 4
+    x_group_cred_mass = 3
+    x_group_debt_mass = 4
     x_credor_pool = 5
     x_debtor_pool = 6
     x_fund_give = 7
@@ -655,8 +655,8 @@ def test_create_prnmemb_metrics_insert_sqlstr_ReturnsObj(cursor0: Cursor):
         kw.person_name: x_person_name,
         kw.contact_name: x_contact_name,
         kw.group_title: x_group_title,
-        kw.group_cred_lumen: x_group_cred_lumen,
-        kw.group_debt_lumen: x_group_debt_lumen,
+        kw.group_cred_mass: x_group_cred_mass,
+        kw.group_debt_mass: x_group_debt_mass,
         kw.credor_pool: x_credor_pool,
         kw.debtor_pool: x_debtor_pool,
         kw.fund_give: x_fund_give,

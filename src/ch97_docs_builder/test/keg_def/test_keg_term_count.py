@@ -1,7 +1,8 @@
-from ch00_py.file_toolbox import save_json
 from ch01_keyword.keyword_class_builder import (
-    create_src_keywords_src_path,
     get_keywords_src_config,
+    parse_valid_ch_str,
+    get_chapter_descs,
+    get_ch_int,
 )
 from ch97_docs_builder.glossary_definition import (
     get_count_keg_terms_by_chapters,
@@ -143,23 +144,30 @@ def test_get_count_keg_terms_by_chapters_CountsTerms_Scenario0_SrcDir():
     # THEN
     keg_terms = set(get_keg_definitions().keys())
     assert set(keg_terms_by_chapters.keys()) == keg_terms
-    # # TODO move this to function in glossary_definition.py
-    # # This part finds all keg_terms used only in one chapter and changes
-    # # valid_ch from range to single chapter
-    # keywords_src_config = get_keywords_src_config()
-    # for keg_term in sorted(keg_terms_by_chapters.keys()):
-    #     ch_dir_dict = keg_terms_by_chapters.get(keg_term)
-    #     # if len(ch_dir_dict) == 2:
-    #     if keyword_config := keywords_src_config.get(keg_term):
-    #         if len(ch_dir_dict) > 0:
-    #             lone_ch = list(ch_dir_dict.keys())[0]
-    #             x_valid_ch = keyword_config.get(kw.valid_ch)
-    #             if str(lone_ch) != x_valid_ch:
-    #                 # print(f"{set(ch_dir_dict.keys())=}")
-    #                 # print(f"{keg_term} {ch_dir_dict=} {lone_ch=} {x_valid_ch=}")
-    #                 print(f"{keg_term} {sorted(set(ch_dir_dict.keys()))}")
-    #                 # print(f"{x_valid_ch=}")
-    #                 keyword_config[kw.valid_ch] = str(lone_ch)
+    # TODO move this to function in glossary_definition.py
+    # This part finds all keg_terms used only in one chapter and changes
+    # valid_ch from range to single chapter
+    chapter_descs = get_chapter_descs().keys()
+    ch_ints = {get_ch_int(chapter_desc) for chapter_desc in chapter_descs}
+    keywords_src_config = get_keywords_src_config()
+    for keg_term in sorted(keg_terms_by_chapters.keys()):
+        ch_dir_dict = keg_terms_by_chapters.get(keg_term)
+        # if len(ch_dir_dict) == 2:
+        if keyword_config := keywords_src_config.get(keg_term):
+            if len(ch_dir_dict) > 0:
+                lone_ch = list(ch_dir_dict.keys())[0]
+                x_valid_ch = keyword_config.get(kw.valid_ch)
+                valid_chapters = sorted(parse_valid_ch_str(ch_ints, x_valid_ch))
+                if str(lone_ch) != x_valid_ch:
+                    # print(f"{set(ch_dir_dict.keys())=}")
+                    # print(f"{keg_term} {ch_dir_dict=} {lone_ch=} {x_valid_ch=}")
+                    # if len(valid_chapters) - len(ch_dir_dict) > 20:
+                    if keg_term == "Loyal":
+                        print(
+                            f"{keg_term:<20} {str(sorted(set(ch_dir_dict.keys()))):<40} {valid_chapters[:20]=}"
+                        )
+                    # print(f"{x_valid_ch=}")
+                    keyword_config[kw.valid_ch] = str(lone_ch)
     # src_keywords_src_path = create_src_keywords_src_path(kw.src)
     # save_json(src_keywords_src_path, None, keywords_src_config)
     # assert 1 == 2

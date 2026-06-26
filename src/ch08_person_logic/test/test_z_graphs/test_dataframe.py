@@ -12,12 +12,12 @@ def test_get_person_contactunits_dataframe_ReturnsDataFrame():
     luca_person = personunit_shop()
     luca_person.set_credor_respect(500)
     luca_person.set_debtor_respect(400)
-    yao_contact_cred_lumen = 66
-    yao_contact_debt_lumen = 77
-    luca_person.add_contactunit(exx.yao, yao_contact_cred_lumen, yao_contact_debt_lumen)
-    sue_contact_cred_lumen = 434
-    sue_contact_debt_lumen = 323
-    luca_person.add_contactunit(exx.sue, sue_contact_cred_lumen, sue_contact_debt_lumen)
+    yao_contact_cred_mass = 66
+    yao_contact_debt_mass = 77
+    luca_person.add_contactunit(exx.yao, yao_contact_cred_mass, yao_contact_debt_mass)
+    sue_contact_cred_mass = 434
+    sue_contact_debt_mass = 323
+    luca_person.add_contactunit(exx.sue, sue_contact_cred_mass, sue_contact_debt_mass)
 
     # WHEN
     x_df = get_person_contactunits_dataframe(luca_person)
@@ -25,8 +25,8 @@ def test_get_person_contactunits_dataframe_ReturnsDataFrame():
     # THEN
     contactunit_colums = {
         kw.contact_name,
-        "contact_cred_lumen",
-        "contact_debt_lumen",
+        "contact_cred_mass",
+        "contact_debt_mass",
         "memberships",
         "fund_give",
         "fund_take",
@@ -51,8 +51,8 @@ def test_get_person_contactunits_dataframe_ReturnsEmptyDataFrame():
     # THEN
     contactunit_colums = {
         kw.contact_name,
-        "contact_cred_lumen",
-        "contact_debt_lumen",
+        "contact_cred_mass",
+        "contact_debt_mass",
         "fund_give",
         "fund_take",
         "fund_agenda_give",

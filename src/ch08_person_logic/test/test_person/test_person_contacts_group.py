@@ -82,12 +82,12 @@ def test_PersonUnit_get_groupunit_ReturnsObj():
 def test_PersonUnit_create_symmetry_groupunit_ReturnsObj():
     # ESTABLISH
     yao_person = personunit_shop(exx.yao)
-    yao_group_cred_lumen = 3
-    yao_group_debt_lumen = 2
-    zia_group_cred_lumen = 4
-    zia_group_debt_lumen = 5
-    yao_person.add_contactunit(exx.yao, yao_group_cred_lumen, yao_group_debt_lumen)
-    yao_person.add_contactunit(exx.zia, zia_group_cred_lumen, zia_group_debt_lumen)
+    yao_group_cred_mass = 3
+    yao_group_debt_mass = 2
+    zia_group_cred_mass = 4
+    zia_group_debt_mass = 5
+    yao_person.add_contactunit(exx.yao, yao_group_cred_mass, yao_group_debt_mass)
+    yao_person.add_contactunit(exx.zia, zia_group_cred_mass, zia_group_debt_mass)
 
     # WHEN
     xio_groupunit = yao_person.create_symmetry_groupunit(exx.xio)
@@ -99,7 +99,7 @@ def test_PersonUnit_create_symmetry_groupunit_ReturnsObj():
     assert len(xio_groupunit.memberships) == 2
     yao_groupunit = xio_groupunit.get_contact_membership(exx.yao)
     zia_groupunit = xio_groupunit.get_contact_membership(exx.zia)
-    assert yao_groupunit.group_cred_lumen == yao_group_cred_lumen
-    assert zia_groupunit.group_cred_lumen == zia_group_cred_lumen
-    assert yao_groupunit.group_debt_lumen == yao_group_debt_lumen
-    assert zia_groupunit.group_debt_lumen == zia_group_debt_lumen
+    assert yao_groupunit.group_cred_mass == yao_group_cred_mass
+    assert zia_groupunit.group_cred_mass == zia_group_cred_mass
+    assert yao_groupunit.group_debt_mass == yao_group_debt_mass
+    assert zia_groupunit.group_debt_mass == zia_group_debt_mass

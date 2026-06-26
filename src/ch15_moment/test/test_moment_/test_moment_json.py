@@ -15,7 +15,7 @@ from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
 
 
-def test_MomentUnit_to_dict_ReturnsObjWith_paybook(temp3_dir):
+def test_MomentUnit_to_dict_ReturnsObjWith_ceckbook(temp3_dir):
     # ESTABLISH
     moment_mstr_dir = create_path(temp3_dir, "temp1")
     a45_rope = create_rope("amy45")
@@ -28,16 +28,16 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook(temp3_dir):
     sue_x4_quota = 55
     sue_x7_tran_time = 505
     sue_x7_quota = 66
-    pay_tran_time = 15
+    ceck_tran_time = 15
     bob_sue_amount = 30000
     amy_moment.set_offi_time_max(amy_offi_time_max_int)
     amy_moment.add_budunit(exx.bob, bob_x0_tran_time, bob_x0_quota)
     amy_moment.add_budunit(exx.sue, sue_x4_tran_time, sue_x4_quota)
     amy_moment.add_budunit(exx.sue, sue_x7_tran_time, sue_x7_quota)
-    amy_moment.add_paypurchase(
+    amy_moment.add_ceckpurchase(
         person_name=exx.bob,
         contact_name=exx.sue,
-        tran_time=pay_tran_time,
+        tran_time=ceck_tran_time,
         amount=bob_sue_amount,
     )
 
@@ -46,7 +46,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook(temp3_dir):
 
     # THEN
     print(f"{ amy_moment._get_personbudhistorys_dict()=}")
-    print(f"{ amy_moment.paybook.to_dict()=}")
+    print(f"{ amy_moment.ceckbook.to_dict()=}")
     assert x_dict.get(kw.moment_rope) == a45_rope
     assert x_dict.get(kw.moment_mstr_dir) == moment_mstr_dir
     assert x_dict.get(kw.epoch) == get_default_epoch_config_dict()
@@ -56,7 +56,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook(temp3_dir):
     assert x_dict.get(kw.respect_grain) == default_grain_num_if_None()
     assert x_dict.get(kw.mana_grain) == default_grain_num_if_None()
     assert x_dict.get(kw.personbudhistorys) == amy_moment._get_personbudhistorys_dict()
-    assert x_dict.get(kw.paybook) == amy_moment.paybook.to_dict()
+    assert x_dict.get(kw.ceckbook) == amy_moment.ceckbook.to_dict()
     assert set(x_dict.keys()) == {
         kw.moment_rope,
         kw.moment_mstr_dir,
@@ -67,20 +67,20 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook(temp3_dir):
         kw.fund_grain,
         kw.respect_grain,
         kw.mana_grain,
-        kw.paybook,
+        kw.ceckbook,
     }
 
 
-def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook(temp3_dir):
+def test_MomentUnit_to_dict_ReturnsObjWithOut_ceckbook(temp3_dir):
     # ESTABLISH
     amy45_rope = create_rope("amy45")
     amy_moment = momentunit_shop(amy45_rope, temp3_dir)
 
     # WHEN
-    x_dict = amy_moment.to_dict(include_paybook=False)
+    x_dict = amy_moment.to_dict(include_ceckbook=False)
 
     # THEN
-    assert not x_dict.get(kw.paybook)
+    assert not x_dict.get(kw.ceckbook)
     assert set(x_dict.keys()) == {
         kw.moment_rope,
         kw.moment_mstr_dir,
@@ -114,7 +114,7 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario0_WithParameters(temp3_dir)
     sue_x4_quota = 55
     sue_x7_bud_time = 7
     sue_x7_quota = 66
-    pay_tran_time = 15
+    ceck_tran_time = 15
     bob_sue_amount = 30000
     amy_moment.add_budunit(exx.bob, bob_x0_bud_time, bob_x0_quota)
     amy_moment.add_budunit(exx.sue, sue_x4_bud_time, sue_x4_quota)
@@ -123,10 +123,10 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario0_WithParameters(temp3_dir)
     amy_moment.fund_grain = sue_fund_grain
     amy_moment.respect_grain = sue_respect_grain
     amy_moment.mana_grain = sue_mana_grain
-    amy_moment.add_paypurchase(
+    amy_moment.add_ceckpurchase(
         person_name=exx.bob,
         contact_name=exx.sue,
-        tran_time=pay_tran_time,
+        tran_time=ceck_tran_time,
         amount=bob_sue_amount,
     )
     x_dict = amy_moment.to_dict()
@@ -144,7 +144,7 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario0_WithParameters(temp3_dir)
     assert x_moment.respect_grain == sue_respect_grain
     assert x_moment.mana_grain == sue_mana_grain
     assert x_moment.personbudhistorys == amy_moment.personbudhistorys
-    assert x_moment.paybook == amy_moment.paybook
+    assert x_moment.ceckbook == amy_moment.ceckbook
     assert x_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
     assert x_moment != amy_moment
     x_moment.offi_time_max = 0
@@ -176,7 +176,7 @@ def test_get_momentunit_from_dict_ReturnsObj_Scenario1_WithOutParameters(temp3_d
     assert generated_moment.respect_grain == default_grain_num_if_None()
     assert generated_moment.mana_grain == 1
     assert generated_moment.personbudhistorys == amy_moment.personbudhistorys
-    assert generated_moment.paybook == amy_moment.paybook
+    assert generated_moment.ceckbook == amy_moment.ceckbook
     assert generated_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
     assert generated_moment == amy_moment
 

@@ -40,8 +40,8 @@ This is the philosophical center of keg, implemented as code. The `listen_to_spe
 **`listen_to_speaker_agenda(listener, speaker)`** — the core function:
 1. Checks the listener has the speaker as a contact (a prerequisite — you can only listen to someone you've acknowledged).
 2. Gets the perspective person.
-3. If the speaker's belief system is irrational (didn't converge), marks the full speaker `contact_debt_lumen` as `irrational_contact_debt_lumen` — the listener notes the speaker couldn't provide a coherent agenda.
-4. If the speaker has no agenda items, marks the debt as `inallocable_contact_debt_lumen`.
+3. If the speaker's belief system is irrational (didn't converge), marks the full speaker `contact_debt_mass` as `irrational_contact_debt_mass` — the listener notes the speaker couldn't provide a coherent agenda.
+4. If the speaker has no agenda items, marks the debt as `inallocable_contact_debt_mass`.
 5. Otherwise, generates the agenda, scales each plan's `poynt` by `allot_scale` against the listener's `debtor_respect`, and ingests each plan into the listener's tree via `_ingest_single_planunit`.
 
 **`listen_to_speaker_fact(listener, speaker)`** — fills in missing facts in the listener's plan tree by borrowing matching facts from the speaker. This allows the listener to become aware of real-world state they couldn't observe themselves.

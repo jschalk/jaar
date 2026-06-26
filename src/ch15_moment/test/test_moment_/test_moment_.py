@@ -36,7 +36,7 @@ def test_MomentUnit_Exists():
     assert not amy_moment.moment_rope
     assert not amy_moment.epoch
     assert not amy_moment.personbudhistorys
-    assert not amy_moment.paybook
+    assert not amy_moment.ceckbook
     assert not amy_moment.offi_times
     assert not amy_moment.knot
     assert not amy_moment.fund_grain
@@ -53,7 +53,7 @@ def test_MomentUnit_Exists():
         kw.moment_rope,
         kw.epoch,
         kw.personbudhistorys,
-        kw.paybook,
+        kw.ceckbook,
         kw.knot,
         kw.fund_grain,
         kw.respect_grain,
@@ -79,7 +79,7 @@ def test_momentunit_shop_ReturnsMomentUnit(temp3_dir):
     assert a23_moment.moment_rope == exx.a23
     assert a23_moment.epoch == epochunit_shop()
     assert a23_moment.personbudhistorys == {}
-    assert a23_moment.paybook == tranbook_shop(exx.a23)
+    assert a23_moment.ceckbook == tranbook_shop(exx.a23)
     assert a23_moment.offi_times == set()
     assert a23_moment.knot == default_knot_if_None()
     assert a23_moment.fund_grain == default_grain_num_if_None()

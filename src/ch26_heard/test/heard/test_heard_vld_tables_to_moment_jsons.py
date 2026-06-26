@@ -37,7 +37,7 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj(cursor0: Cursor):
     fu2_select_sqlstrs = get_moment_heard_select1_sqlstrs(moment_rope=exx.a23)
 
     # THEN
-    gen_mmtpayy_sqlstr = fu2_select_sqlstrs.get(kw.moment_paybook)
+    gen_mmtceck_sqlstr = fu2_select_sqlstrs.get(kw.moment_ceckbook)
     gen_momentbud_sqlstr = fu2_select_sqlstrs.get(kw.moment_budunit)
     gen_mmthour_sqlstr = fu2_select_sqlstrs.get(kw.moment_epoch_hour)
     gen_mmtmont_sqlstr = fu2_select_sqlstrs.get(kw.moment_epoch_month)
@@ -45,14 +45,14 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj(cursor0: Cursor):
     gen_mmtoffi_sqlstr = fu2_select_sqlstrs.get(kw.moment_timeoffi)
     gen_momentunit_sqlstr = fu2_select_sqlstrs.get(kw.momentunit)
     create_sound_and_heard_tables(cursor0)
-    mmtpayy_abbv7 = get_dimen_abbv7(kw.moment_paybook)
+    mmtceck_abbv7 = get_dimen_abbv7(kw.moment_ceckbook)
     momentbud_abbv7 = get_dimen_abbv7(kw.moment_budunit)
     mmthour_abbv7 = get_dimen_abbv7(kw.moment_epoch_hour)
     mmtmont_abbv7 = get_dimen_abbv7(kw.moment_epoch_month)
     mmtweek_abbv7 = get_dimen_abbv7(kw.moment_epoch_weekday)
     mmtoffi_abbv7 = get_dimen_abbv7(kw.moment_timeoffi)
     momentunit_abbv7 = get_dimen_abbv7(kw.momentunit)
-    mmtpayy_h_vld = create_prime_tablename(mmtpayy_abbv7, kw.h_vld)
+    mmtceck_h_vld = create_prime_tablename(mmtceck_abbv7, kw.h_vld)
     momentbud_h_vld = create_prime_tablename(momentbud_abbv7, kw.h_vld)
     mmthour_h_vld = create_prime_tablename(mmthour_abbv7, kw.h_vld)
     mmtmont_h_vld = create_prime_tablename(mmtmont_abbv7, kw.h_vld)
@@ -60,7 +60,7 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj(cursor0: Cursor):
     mmtoffi_h_vld = create_prime_tablename(mmtoffi_abbv7, kw.h_vld)
     momentunit_h_vld = create_prime_tablename(momentunit_abbv7, kw.h_vld)
     where_dict = {kw.moment_rope: exx.a23}
-    mmtpayy_sql = create_select_query(cursor0, mmtpayy_h_vld, [], where_dict, True)
+    mmtceck_sql = create_select_query(cursor0, mmtceck_h_vld, [], where_dict, True)
     momentbud_sql = create_select_query(cursor0, momentbud_h_vld, [], where_dict, True)
     mmthour_sql = create_select_query(cursor0, mmthour_h_vld, [], where_dict, True)
     mmtmont_sql = create_select_query(cursor0, mmtmont_h_vld, [], where_dict, True)
@@ -69,7 +69,7 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj(cursor0: Cursor):
     momentunit_sql = create_select_query(
         cursor0, momentunit_h_vld, [], where_dict, True
     )
-    mmtpayy_sqlstr_ref = f"{mmtpayy_abbv7.upper()}_FU2_SELECT_SQLSTR"
+    mmtceck_sqlstr_ref = f"{mmtceck_abbv7.upper()}_FU2_SELECT_SQLSTR"
     momentbud_sqlstr_ref = f"{momentbud_abbv7.upper()}_FU2_SELECT_SQLSTR"
     mmthour_sqlstr_ref = f"{mmthour_abbv7.upper()}_FU2_SELECT_SQLSTR"
     mmtmont_sqlstr_ref = f"{mmtmont_abbv7.upper()}_FU2_SELECT_SQLSTR"
@@ -78,14 +78,14 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj(cursor0: Cursor):
     momentunit_sqlstr_ref = f"{momentunit_abbv7.upper()}_FU2_SELECT_SQLSTR"
     qa23_str = f"'{exx.a23}'"
     blank = ""
-    print(f"""{mmtpayy_sqlstr_ref} = "{mmtpayy_sql.replace(qa23_str, blank)}" """)
+    print(f"""{mmtceck_sqlstr_ref} = "{mmtceck_sql.replace(qa23_str, blank)}" """)
     print(f"""{momentbud_sqlstr_ref} = "{momentbud_sql.replace(qa23_str, blank)}" """)
     print(f"""{mmthour_sqlstr_ref} = "{mmthour_sql.replace(qa23_str, blank)}" """)
     print(f"""{mmtmont_sqlstr_ref} = "{mmtmont_sql.replace(qa23_str, blank)}" """)
     print(f"""{mmtweek_sqlstr_ref} = "{mmtweek_sql.replace(qa23_str, blank)}" """)
     print(f"""{mmtoffi_sqlstr_ref} = "{mmtoffi_sql.replace(qa23_str, blank)}" """)
     print(f"""{momentunit_sqlstr_ref} = "{momentunit_sql.replace(qa23_str, blank)}" """)
-    assert gen_mmtpayy_sqlstr == mmtpayy_sql
+    assert gen_mmtceck_sqlstr == mmtceck_sql
     assert gen_momentbud_sqlstr == momentbud_sql
     assert gen_mmthour_sqlstr == mmthour_sql
     assert gen_mmtmont_sqlstr == mmtmont_sql

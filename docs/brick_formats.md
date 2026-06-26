@@ -13,8 +13,8 @@
 - [`bk00106`](brick_formats\bk00106.md): spark_num, spark_face, moment_rope, offi_time, knot
 - [`bk00112`](brick_formats\bk00112.md): spark_num, spark_face, moment_rope, person_name, contact_name, group_title
 - [`bk00119`](brick_formats\bk00119.md): spark_num, spark_face, moment_rope, person_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want
-- [`bk00120`](brick_formats\bk00120.md): spark_num, spark_face, moment_rope, person_name, contact_name, group_title, group_cred_lumen, group_debt_lumen, knot
-- [`bk00121`](brick_formats\bk00121.md): spark_num, spark_face, moment_rope, person_name, contact_name, contact_cred_lumen, contact_debt_lumen, knot
+- [`bk00120`](brick_formats\bk00120.md): spark_num, spark_face, moment_rope, person_name, contact_name, group_title, group_cred_mass, group_debt_mass, knot
+- [`bk00121`](brick_formats\bk00121.md): spark_num, spark_face, moment_rope, person_name, contact_name, contact_cred_mass, contact_debt_mass, knot
 - [`bk00122`](brick_formats\bk00122.md): spark_num, spark_face, person_name, plan_rope, awardee_title, give_force, take_force, knot
 - [`bk00123`](brick_formats\bk00123.md): spark_num, spark_face, person_name, plan_rope, fact_context, fact_state, fact_lower, fact_upper, knot
 - [`bk00124`](brick_formats\bk00124.md): spark_num, spark_face, person_name, plan_rope, labor_title, solo, knot

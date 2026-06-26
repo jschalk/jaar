@@ -40,8 +40,8 @@ def create_prnmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
     person_name = values_dict.get("person_name")
     contact_name = values_dict.get("contact_name")
     group_title = values_dict.get("group_title")
-    group_cred_lumen = values_dict.get("group_cred_lumen")
-    group_debt_lumen = values_dict.get("group_debt_lumen")
+    group_cred_mass = values_dict.get("group_cred_mass")
+    group_debt_mass = values_dict.get("group_debt_mass")
     credor_pool = values_dict.get("credor_pool")
     debtor_pool = values_dict.get("debtor_pool")
     fund_give = values_dict.get("fund_give")
@@ -51,14 +51,14 @@ def create_prnmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
     fund_agenda_ratio_give = values_dict.get("fund_agenda_ratio_give")
     fund_agenda_ratio_take = values_dict.get("fund_agenda_ratio_take")
     real_str = "REAL"
-    return f"""INSERT INTO person_contact_membership_job (moment_rope, person_name, contact_name, group_title, group_cred_lumen, group_debt_lumen, credor_pool, debtor_pool, fund_give, fund_take, fund_agenda_give, fund_agenda_take, fund_agenda_ratio_give, fund_agenda_ratio_take)
+    return f"""INSERT INTO person_contact_membership_job (moment_rope, person_name, contact_name, group_title, group_cred_mass, group_debt_mass, credor_pool, debtor_pool, fund_give, fund_take, fund_agenda_give, fund_agenda_take, fund_agenda_ratio_give, fund_agenda_ratio_take)
 VALUES (
   {sqlite_obj_str(moment_rope, "TEXT")}
 , {sqlite_obj_str(person_name, "TEXT")}
 , {sqlite_obj_str(contact_name, "TEXT")}
 , {sqlite_obj_str(group_title, "TEXT")}
-, {sqlite_obj_str(group_cred_lumen, real_str)}
-, {sqlite_obj_str(group_debt_lumen, real_str)}
+, {sqlite_obj_str(group_cred_mass, real_str)}
+, {sqlite_obj_str(group_debt_mass, real_str)}
 , {sqlite_obj_str(credor_pool, real_str)}
 , {sqlite_obj_str(debtor_pool, real_str)}
 , {sqlite_obj_str(fund_give, real_str)}
@@ -76,8 +76,8 @@ def create_prncont_metrics_insert_sqlstr(values_dict: dict[str,]):
     moment_rope = values_dict.get("moment_rope")
     person_name = values_dict.get("person_name")
     contact_name = values_dict.get("contact_name")
-    contact_cred_lumen = values_dict.get("contact_cred_lumen")
-    contact_debt_lumen = values_dict.get("contact_debt_lumen")
+    contact_cred_mass = values_dict.get("contact_cred_mass")
+    contact_debt_mass = values_dict.get("contact_debt_mass")
     groupmark = values_dict.get("groupmark")
     credor_pool = values_dict.get("credor_pool")
     debtor_pool = values_dict.get("debtor_pool")
@@ -87,16 +87,16 @@ def create_prncont_metrics_insert_sqlstr(values_dict: dict[str,]):
     fund_agenda_take = values_dict.get("fund_agenda_take")
     fund_agenda_ratio_give = values_dict.get("fund_agenda_ratio_give")
     fund_agenda_ratio_take = values_dict.get("fund_agenda_ratio_take")
-    inallocable_contact_debt_lumen = values_dict.get("inallocable_contact_debt_lumen")
-    irrational_contact_debt_lumen = values_dict.get("irrational_contact_debt_lumen")
+    inallocable_contact_debt_mass = values_dict.get("inallocable_contact_debt_mass")
+    irrational_contact_debt_mass = values_dict.get("irrational_contact_debt_mass")
     real_str = "REAL"
-    return f"""INSERT INTO person_contactunit_job (moment_rope, person_name, contact_name, contact_cred_lumen, contact_debt_lumen, groupmark, credor_pool, debtor_pool, fund_give, fund_take, fund_agenda_give, fund_agenda_take, fund_agenda_ratio_give, fund_agenda_ratio_take, inallocable_contact_debt_lumen, irrational_contact_debt_lumen)
+    return f"""INSERT INTO person_contactunit_job (moment_rope, person_name, contact_name, contact_cred_mass, contact_debt_mass, groupmark, credor_pool, debtor_pool, fund_give, fund_take, fund_agenda_give, fund_agenda_take, fund_agenda_ratio_give, fund_agenda_ratio_take, inallocable_contact_debt_mass, irrational_contact_debt_mass)
 VALUES (
   {sqlite_obj_str(moment_rope, "TEXT")}
 , {sqlite_obj_str(person_name, "TEXT")}
 , {sqlite_obj_str(contact_name, "TEXT")}
-, {sqlite_obj_str(contact_cred_lumen, real_str)}
-, {sqlite_obj_str(contact_debt_lumen, real_str)}
+, {sqlite_obj_str(contact_cred_mass, real_str)}
+, {sqlite_obj_str(contact_debt_mass, real_str)}
 , {sqlite_obj_str(groupmark, "TEXT")}
 , {sqlite_obj_str(credor_pool, real_str)}
 , {sqlite_obj_str(debtor_pool, real_str)}
@@ -106,8 +106,8 @@ VALUES (
 , {sqlite_obj_str(fund_agenda_take, real_str)}
 , {sqlite_obj_str(fund_agenda_ratio_give, real_str)}
 , {sqlite_obj_str(fund_agenda_ratio_take, real_str)}
-, {sqlite_obj_str(inallocable_contact_debt_lumen, real_str)}
-, {sqlite_obj_str(irrational_contact_debt_lumen, real_str)}
+, {sqlite_obj_str(inallocable_contact_debt_mass, real_str)}
+, {sqlite_obj_str(irrational_contact_debt_mass, real_str)}
 )
 ;
 """

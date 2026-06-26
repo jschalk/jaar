@@ -87,7 +87,7 @@ class MomentUnit:
     moment_mstr_dir: str = None
     epoch: EpochUnit = None
     personbudhistorys: dict[PersonName, PersonBudHistory] = None
-    paybook: TranBook = None
+    ceckbook: TranBook = None
     offi_times: set[TimeNum] = None
     knot: KnotTerm = None
     fund_grain: FundGrain = None
@@ -237,7 +237,7 @@ class MomentUnit:
         x_personbudhistory = self.get_personbudhistory(person_name)
         return x_personbudhistory.get_bud(bud_time)
 
-    def to_dict(self, include_paybook: bool = True) -> dict:
+    def to_dict(self, include_ceckbook: bool = True) -> dict:
         """Returns dict that is serializable to JSON."""
 
         x_dict = {
@@ -251,8 +251,8 @@ class MomentUnit:
             "epoch": self.epoch.to_dict(),
             "offi_times": list(self.offi_times),
         }
-        if include_paybook:
-            x_dict["paybook"] = self.paybook.to_dict()
+        if include_ceckbook:
+            x_dict["ceckbook"] = self.ceckbook.to_dict()
         return x_dict
 
     def _get_personbudhistorys_dict(self) -> dict[PersonName, dict]:
@@ -267,14 +267,14 @@ class MomentUnit:
             all_budunit_bud_times.update(x_personbudhistory.get_bud_times())
         return all_budunit_bud_times
 
-    def set_paypurchase(self, x_paypurchase: TranUnit):
-        self.paybook.set_tranunit(
-            tranunit=x_paypurchase,
+    def set_ceckpurchase(self, x_ceckpurchase: TranUnit):
+        self.ceckbook.set_tranunit(
+            tranunit=x_ceckpurchase,
             blocked_tran_times=self.get_personbudhistorys_bud_times(),
             offi_time_max=self.offi_time_max,
         )
 
-    def add_paypurchase(
+    def add_ceckpurchase(
         self,
         person_name: PersonName,
         contact_name: ContactName,
@@ -283,7 +283,7 @@ class MomentUnit:
         blocked_tran_times: set[TimeNum] = None,
         offi_time_max: TimeNum = None,
     ) -> None:
-        self.paybook.add_tranunit(
+        self.ceckbook.add_tranunit(
             person_name=person_name,
             contact_name=contact_name,
             tran_time=tran_time,
@@ -292,23 +292,23 @@ class MomentUnit:
             offi_time_max=offi_time_max,
         )
 
-    def paypurchase_exists(
+    def ceckpurchase_exists(
         self, src: PersonName, dst: ContactName, x_tran_time: TimeNum
     ) -> bool:
-        return self.paybook.tranunit_exists(src, dst, x_tran_time)
+        return self.ceckbook.tranunit_exists(src, dst, x_tran_time)
 
-    def get_paypurchase(
+    def get_ceckpurchase(
         self, src: PersonName, dst: ContactName, x_tran_time: TimeNum
     ) -> TranUnit:
-        return self.paybook.get_tranunit(src, dst, x_tran_time)
+        return self.ceckbook.get_tranunit(src, dst, x_tran_time)
 
-    def del_paypurchase(
+    def del_ceckpurchase(
         self, src: PersonName, dst: ContactName, x_tran_time: TimeNum
     ) -> TranUnit:
-        return self.paybook.del_tranunit(src, dst, x_tran_time)
+        return self.ceckbook.del_tranunit(src, dst, x_tran_time)
 
-    def clear_paypurchases(self):
-        self.paybook = tranbook_shop(self.moment_rope)
+    def clear_ceckpurchases(self):
+        self.ceckbook = tranbook_shop(self.moment_rope)
 
     # def set_offi_time(self, offi_time: TimeNum):
     #     self.offi_time = offi_time
@@ -316,9 +316,9 @@ class MomentUnit:
     #         self.offi_time_max = self.offi_time
 
     def set_offi_time_max(self, x_offi_time_max: TimeNum):
-        x_tran_times = self.paybook.get_tran_times()
+        x_tran_times = self.ceckbook.get_tran_times()
         if x_tran_times != set() and max(x_tran_times) >= x_offi_time_max:
-            exception_str = f"Cannot set offi_time_max {x_offi_time_max}, paypurchase with greater tran_time exists"
+            exception_str = f"Cannot set offi_time_max {x_offi_time_max}, ceckpurchase with greater tran_time exists"
             raise SetOffiTimeMaxError(exception_str)
         # if self.offi_time > x_offi_time_max:
         #     exception_str = f"Cannot set offi_time_max={x_offi_time_max} because it is less than offi_time={self.offi_time}"
@@ -332,7 +332,7 @@ class MomentUnit:
     #     self.set_offi_time_max(_offi_time_max)
 
     def set_all_tranbook(self) -> None:
-        x_tranunits = copy_deepcopy(self.paybook.tranunits)
+        x_tranunits = copy_deepcopy(self.ceckbook.tranunits)
         x_tranbook = tranbook_shop(self.moment_rope, x_tranunits)
         for person_name, x_personbudhistory in self.personbudhistorys.items():
             for x_bud_time, x_budunit in x_personbudhistory.buds.items():
@@ -420,7 +420,7 @@ def momentunit_shop(
         moment_mstr_dir=moment_mstr_dir,
         epoch=epoch,
         personbudhistorys={},
-        paybook=tranbook_shop(moment_rope),
+        ceckbook=tranbook_shop(moment_rope),
         offi_times=get_empty_set_if_None(offi_times),
         knot=default_knot_if_None(knot),
         fund_grain=default_grain_num_if_None(fund_grain),
@@ -462,7 +462,7 @@ def get_momentunit_from_dict(moment_dict: dict) -> MomentUnit:
     x_moment.personbudhistorys = _get_personbudhistorys_from_dict(
         moment_dict.get("personbudhistorys")
     )
-    x_moment.paybook = get_tranbook_from_dict(moment_dict.get("paybook"))
+    x_moment.ceckbook = get_tranbook_from_dict(moment_dict.get("ceckbook"))
     return x_moment
 
 

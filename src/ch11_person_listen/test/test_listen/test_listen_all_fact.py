@@ -12,9 +12,9 @@ from ch99_glossary.ch_keyword import ExampleStrs as exx
 def test_get_debtors_roll_ReturnsObj():
     # ESTABLISH
     yao_duty = personunit_shop(exx.yao)
-    zia_contact_cred_lumen = 47
-    zia_contact_debt_lumen = 41
-    yao_duty.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
+    zia_contact_cred_mass = 47
+    zia_contact_debt_mass = 41
+    yao_duty.add_contactunit(exx.zia, zia_contact_cred_mass, zia_contact_debt_mass)
     yao_duty.thinkout()
 
     # WHEN
@@ -25,16 +25,16 @@ def test_get_debtors_roll_ReturnsObj():
     assert yao_roll == [zia_contactunit]
 
 
-def test_get_debtors_roll_ReturnsObjIgnoresZero_contact_debt_lumen():
+def test_get_debtors_roll_ReturnsObjIgnoresZero_contact_debt_mass():
     # ESTABLISH
     yao_duty = personunit_shop(exx.yao)
-    zia_contact_cred_lumen = 47
-    zia_contact_debt_lumen = 41
+    zia_contact_cred_mass = 47
+    zia_contact_debt_mass = 41
     wei_str = "Wei"
-    wei_contact_cred_lumen = 67
-    wei_contact_debt_lumen = 0
-    yao_duty.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
-    yao_duty.add_contactunit(wei_str, wei_contact_cred_lumen, wei_contact_debt_lumen)
+    wei_contact_cred_mass = 67
+    wei_contact_debt_mass = 0
+    yao_duty.add_contactunit(exx.zia, zia_contact_cred_mass, zia_contact_debt_mass)
+    yao_duty.add_contactunit(wei_str, wei_contact_cred_mass, wei_contact_debt_mass)
     yao_duty.thinkout()
 
     # WHEN
@@ -48,12 +48,12 @@ def test_get_debtors_roll_ReturnsObjIgnoresZero_contact_debt_lumen():
 def test_get_ordered_debtors_roll_ReturnsObj_InOrder():
     # ESTABLISH
     yao_person = personunit_shop(exx.yao)
-    zia_contact_cred_lumen = 47
-    zia_contact_debt_lumen = 41
-    sue_contact_cred_lumen = 57
-    sue_contact_debt_lumen = 51
-    yao_person.add_contactunit(exx.zia, zia_contact_cred_lumen, zia_contact_debt_lumen)
-    yao_person.add_contactunit(exx.sue, sue_contact_cred_lumen, sue_contact_debt_lumen)
+    zia_contact_cred_mass = 47
+    zia_contact_debt_mass = 41
+    sue_contact_cred_mass = 57
+    sue_contact_debt_mass = 51
+    yao_person.add_contactunit(exx.zia, zia_contact_cred_mass, zia_contact_debt_mass)
+    yao_person.add_contactunit(exx.sue, sue_contact_cred_mass, sue_contact_debt_mass)
     yao_pool = 92
     yao_person.set_contact_respect(yao_pool)
 
@@ -67,8 +67,8 @@ def test_get_ordered_debtors_roll_ReturnsObj_InOrder():
     assert ordered_contacts1 == [sue_contact, zia_contact]
 
     # ESTABLISH
-    bob_contact_debt_lumen = 75
-    yao_person.add_contactunit(exx.bob, 0, bob_contact_debt_lumen)
+    bob_contact_debt_mass = 75
+    yao_person.add_contactunit(exx.bob, 0, bob_contact_debt_mass)
     bob_contact = yao_person.get_contact(exx.bob)
 
     # WHEN
@@ -79,17 +79,17 @@ def test_get_ordered_debtors_roll_ReturnsObj_InOrder():
     assert ordered_contacts2 == [bob_contact, sue_contact, zia_contact]
 
 
-def test_get_ordered_debtors_roll_DoesNotReturnZero_contact_debt_lumen():
+def test_get_ordered_debtors_roll_DoesNotReturnZero_contact_debt_mass():
     # ESTABLISH
     yao_person = personunit_shop(exx.yao)
-    zia_contact_debt_lumen = 41
-    sue_contact_debt_lumen = 51
+    zia_contact_debt_mass = 41
+    sue_contact_debt_mass = 51
     yao_pool = 92
     yao_person.set_contact_respect(yao_pool)
-    bob_contact_debt_lumen = 75
-    yao_person.add_contactunit(exx.zia, 0, zia_contact_debt_lumen)
-    yao_person.add_contactunit(exx.sue, 0, sue_contact_debt_lumen)
-    yao_person.add_contactunit(exx.bob, 0, bob_contact_debt_lumen)
+    bob_contact_debt_mass = 75
+    yao_person.add_contactunit(exx.zia, 0, zia_contact_debt_mass)
+    yao_person.add_contactunit(exx.sue, 0, sue_contact_debt_mass)
+    yao_person.add_contactunit(exx.bob, 0, bob_contact_debt_mass)
     yao_person.add_contactunit(exx.yao, 0, 0)
     yao_person.add_contactunit(exx.xio, 0, 0)
 
@@ -140,7 +140,7 @@ def test_set_listen_to_speaker_fact_SetsFact():
     assert len(yao_listener.get_missing_fact_reason_contexts().keys()) == 0
 
 
-def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
+def test_set_listen_to_speaker_fact_DoesNotChangeFact():
     # ESTABLISH
     yao_listener = personunit_shop(exx.yao)
     yao_listener.add_contactunit(exx.yao)

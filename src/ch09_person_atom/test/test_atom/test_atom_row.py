@@ -18,11 +18,11 @@ def test_AtomRow_Exists():
     assert x_atomrow.begin is None
     assert x_atomrow.respect_grain is None
     assert x_atomrow.close is None
-    assert x_atomrow.contact_cred_lumen is None
-    assert x_atomrow.group_cred_lumen is None
+    assert x_atomrow.contact_cred_mass is None
+    assert x_atomrow.group_cred_mass is None
     assert x_atomrow.credor_respect is None
-    assert x_atomrow.contact_debt_lumen is None
-    assert x_atomrow.group_debt_lumen is None
+    assert x_atomrow.contact_debt_mass is None
+    assert x_atomrow.group_debt_mass is None
     assert x_atomrow.debtor_respect is None
     assert x_atomrow.denom is None
     assert x_atomrow.reason_divisor is None
@@ -160,7 +160,7 @@ def test_AtomRow_get_personatoms_ReturnsObj_Scenario1_person_contactunit_str_INS
     x_dimen = kw.person_contactunit
     x_atomrow = atomrow_shop({x_dimen}, kw.INSERT)
     x_atomrow.contact_name = "Bob"
-    x_atomrow.contact_cred_lumen = 5
+    x_atomrow.contact_cred_mass = 5
 
     # WHEN
     x_personatoms = x_atomrow.get_personatoms()
@@ -169,7 +169,7 @@ def test_AtomRow_get_personatoms_ReturnsObj_Scenario1_person_contactunit_str_INS
     assert len(x_personatoms) == 1
     static_atom = personatom_shop(x_dimen, kw.INSERT)
     static_atom.set_arg(kw.contact_name, "Bob")
-    static_atom.set_arg("contact_cred_lumen", 5)
+    static_atom.set_arg("contact_cred_mass", 5)
     assert x_personatoms[0] == static_atom
 
 
@@ -191,7 +191,7 @@ def test_AtomRow_get_personatoms_ReturnsObj_Scenario3_person_contactunit_INSERT(
     x_atomrow = atomrow_shop({x_dimen}, kw.INSERT)
     x_atomrow.contact_name = "Bob"
     four_str = "4"
-    x_atomrow.contact_cred_lumen = four_str
+    x_atomrow.contact_cred_mass = four_str
 
     # WHEN
     x_personatoms = x_atomrow.get_personatoms()
@@ -201,7 +201,7 @@ def test_AtomRow_get_personatoms_ReturnsObj_Scenario3_person_contactunit_INSERT(
     static_atom = personatom_shop(x_dimen, kw.INSERT)
     static_atom.set_arg(kw.contact_name, "Bob")
     four_int = 4
-    static_atom.set_arg("contact_cred_lumen", four_int)
+    static_atom.set_arg("contact_cred_mass", four_int)
     assert x_personatoms[0] == static_atom
 
 
@@ -210,7 +210,7 @@ def test_AtomRow_get_personatoms_ReturnsObj_Scenario4_IfDimenIsCorrect():
     x_atomrow = atomrow_shop(set(), kw.INSERT)
     x_atomrow.contact_name = "Bob"
     four_str = "4"
-    x_atomrow.contact_cred_lumen = four_str
+    x_atomrow.contact_cred_mass = four_str
     assert len(x_atomrow.get_personatoms()) == 0
 
     # WHEN / THEN

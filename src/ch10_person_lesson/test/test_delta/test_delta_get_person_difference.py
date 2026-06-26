@@ -63,10 +63,10 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_contactuni
     # ESTABLISH
     before_sue_person = personunit_shop(exx.sue)
     after_sue_person = copy_deepcopy(before_sue_person)
-    xio_contact_cred_lumen = 33
-    xio_contact_debt_lumen = 44
+    xio_contact_cred_mass = 33
+    xio_contact_debt_mass = 44
     xio_contactunit = contactunit_shop(
-        exx.xio, xio_contact_cred_lumen, xio_contact_debt_lumen
+        exx.xio, xio_contact_cred_mass, xio_contact_debt_mass
     )
     after_sue_person.set_contactunit(xio_contactunit, auto_set_membership=False)
 
@@ -82,8 +82,8 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_contactuni
     sue_contactunit_dict = sue_insert_dict.get(kw.person_contactunit)
     xio_personatom = sue_contactunit_dict.get(exx.xio)
     assert xio_personatom.get_value(kw.contact_name) == exx.xio
-    assert xio_personatom.get_value("contact_cred_lumen") == xio_contact_cred_lumen
-    assert xio_personatom.get_value("contact_debt_lumen") == xio_contact_debt_lumen
+    assert xio_personatom.get_value("contact_cred_mass") == xio_contact_cred_mass
+    assert xio_personatom.get_value("contact_debt_mass") == xio_contact_debt_mass
 
     print(f"{get_personatom_total_count(sue_persondelta)=}")
     assert get_personatom_total_count(sue_persondelta) == 1
@@ -120,10 +120,10 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_contactuni
     before_sue_person = personunit_shop(exx.sue)
     after_sue_person = copy_deepcopy(before_sue_person)
     before_sue_person.add_contactunit(exx.xio)
-    xio_contact_cred_lumen = 33
-    xio_contact_debt_lumen = 44
+    xio_contact_cred_mass = 33
+    xio_contact_debt_mass = 44
     after_sue_person.add_contactunit(
-        exx.xio, xio_contact_cred_lumen, xio_contact_debt_lumen
+        exx.xio, xio_contact_cred_mass, xio_contact_debt_mass
     )
 
     # WHEN
@@ -134,8 +134,8 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_contactuni
     x_keylist = [kw.UPDATE, kw.person_contactunit, exx.xio]
     xio_personatom = get_from_nested_dict(sue_persondelta.personatoms, x_keylist)
     assert xio_personatom.get_value(kw.contact_name) == exx.xio
-    assert xio_personatom.get_value("contact_cred_lumen") == xio_contact_cred_lumen
-    assert xio_personatom.get_value("contact_debt_lumen") == xio_contact_debt_lumen
+    assert xio_personatom.get_value("contact_cred_mass") == xio_contact_cred_mass
+    assert xio_personatom.get_value("contact_debt_mass") == xio_contact_debt_mass
 
     print(f"{get_personatom_total_count(sue_persondelta)=}")
     assert get_personatom_total_count(sue_persondelta) == 1
@@ -216,8 +216,8 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_contact_me
     run_personatom = get_from_nested_dict(sue_persondelta.personatoms, x_keylist)
     assert run_personatom.get_value(kw.contact_name) == exx.zia
     assert run_personatom.get_value(kw.group_title) == exx.run
-    assert run_personatom.get_value(kw.group_cred_lumen) == zia_run_credit_w
-    assert run_personatom.get_value(kw.group_debt_lumen) == zia_run_debt_w
+    assert run_personatom.get_value(kw.group_cred_mass) == zia_run_credit_w
+    assert run_personatom.get_value(kw.group_debt_mass) == zia_run_debt_w
 
     print_personatom_keys(sue_persondelta)
     print(f"{get_personatom_total_count(sue_persondelta)=}")
@@ -257,8 +257,8 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_contact_me
     xio_personatom = get_from_nested_dict(sue_persondelta.personatoms, x_keylist)
     assert xio_personatom.get_value(kw.contact_name) == exx.xio
     assert xio_personatom.get_value(kw.group_title) == exx.run
-    assert xio_personatom.get_value(kw.group_cred_lumen) == after_xio_credit_w
-    assert xio_personatom.get_value(kw.group_debt_lumen) == after_xio_debt_w
+    assert xio_personatom.get_value(kw.group_cred_mass) == after_xio_credit_w
+    assert xio_personatom.get_value(kw.group_debt_mass) == after_xio_debt_w
 
     print(f"{get_personatom_total_count(sue_persondelta)=}")
     assert get_personatom_total_count(sue_persondelta) == 1
@@ -607,29 +607,29 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_factu
     ball_str = "basketball"
     ball_rope = before_sue_person.make_rope(sports_rope, ball_str)
     before_sue_person.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_person.make_l1_rope(knee_str)
+    foot_str = "foot"
+    foot_rope = before_sue_person.make_l1_rope(foot_str)
     bend_str = "bendable"
-    bend_rope = before_sue_person.make_rope(knee_rope, bend_str)
-    before_sue_person.set_plan_obj(planunit_shop(bend_str), knee_rope)
+    bend_rope = before_sue_person.make_rope(foot_rope, bend_str)
+    before_sue_person.set_plan_obj(planunit_shop(bend_str), foot_rope)
     damaged_str = "damaged mcl"
-    damaged_rope = before_sue_person.make_rope(knee_rope, damaged_str)
-    before_sue_person.set_l1_plan(planunit_shop(knee_str))
-    before_sue_person.set_plan_obj(planunit_shop(damaged_str), knee_rope)
+    damaged_rope = before_sue_person.make_rope(foot_rope, damaged_str)
+    before_sue_person.set_l1_plan(planunit_shop(foot_str))
+    before_sue_person.set_plan_obj(planunit_shop(damaged_str), foot_rope)
     before_fact_lower = 11
     before_fact_upper = 22
     before_fact = factunit_shop(
-        knee_rope, bend_rope, before_fact_lower, before_fact_upper
+        foot_rope, bend_rope, before_fact_lower, before_fact_upper
     )
     before_sue_person.edit_plan_attr(ball_rope, factunit=before_fact)
 
     after_sue_person = copy_deepcopy(before_sue_person)
     after_fact_lower = 55
     after_fact_upper = 66
-    knee_fact = factunit_shop(
-        knee_rope, damaged_rope, after_fact_lower, after_fact_upper
+    foot_fact = factunit_shop(
+        foot_rope, damaged_rope, after_fact_lower, after_fact_upper
     )
-    after_sue_person.edit_plan_attr(ball_rope, factunit=knee_fact)
+    after_sue_person.edit_plan_attr(ball_rope, factunit=foot_fact)
 
     # WHEN
     sue_persondelta = persondelta_shop()
@@ -638,10 +638,10 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_factu
     # THEN
     print(f"{print_personatom_keys(sue_persondelta)=}")
 
-    x_keylist = [kw.UPDATE, kw.person_plan_factunit, ball_rope, knee_rope]
+    x_keylist = [kw.UPDATE, kw.person_plan_factunit, ball_rope, foot_rope]
     ball_personatom = get_from_nested_dict(sue_persondelta.personatoms, x_keylist)
     assert ball_personatom.get_value(kw.plan_rope) == ball_rope
-    assert ball_personatom.get_value(kw.fact_context) == knee_rope
+    assert ball_personatom.get_value(kw.fact_context) == foot_rope
     assert ball_personatom.get_value(kw.fact_state) == damaged_rope
     assert ball_personatom.get_value(kw.fact_lower) == after_fact_lower
     assert ball_personatom.get_value(kw.fact_upper) == after_fact_upper
@@ -656,18 +656,18 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_factu
     ball_str = "basketball"
     ball_rope = before_sue_person.make_rope(sports_rope, ball_str)
     before_sue_person.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_person.make_l1_rope(knee_str)
+    foot_str = "foot"
+    foot_rope = before_sue_person.make_l1_rope(foot_str)
     damaged_str = "damaged mcl"
-    damaged_rope = before_sue_person.make_rope(knee_rope, damaged_str)
-    before_sue_person.set_l1_plan(planunit_shop(knee_str))
-    before_sue_person.set_plan_obj(planunit_shop(damaged_str), knee_rope)
+    damaged_rope = before_sue_person.make_rope(foot_rope, damaged_str)
+    before_sue_person.set_l1_plan(planunit_shop(foot_str))
+    before_sue_person.set_plan_obj(planunit_shop(damaged_str), foot_rope)
 
     after_sue_person = copy_deepcopy(before_sue_person)
     after_fact_lower = 55
     after_fact_upper = 66
     after_fact = factunit_shop(
-        knee_rope, damaged_rope, after_fact_lower, after_fact_upper
+        foot_rope, damaged_rope, after_fact_lower, after_fact_upper
     )
     after_sue_person.edit_plan_attr(ball_rope, factunit=after_fact)
 
@@ -677,11 +677,11 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_factu
 
     # THEN
     print(f"{print_personatom_keys(sue_persondelta)=}")
-    x_keylist = [kw.INSERT, kw.person_plan_factunit, ball_rope, knee_rope]
+    x_keylist = [kw.INSERT, kw.person_plan_factunit, ball_rope, foot_rope]
     ball_personatom = get_from_nested_dict(sue_persondelta.personatoms, x_keylist)
     print(f"{ball_personatom=}")
     assert ball_personatom.get_value(kw.plan_rope) == ball_rope
-    assert ball_personatom.get_value(kw.fact_context) == knee_rope
+    assert ball_personatom.get_value(kw.fact_context) == foot_rope
     assert ball_personatom.get_value(kw.fact_state) == damaged_rope
     assert ball_personatom.get_value(kw.fact_lower) == after_fact_lower
     assert ball_personatom.get_value(kw.fact_upper) == after_fact_upper
@@ -696,18 +696,18 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_factu
     ball_str = "basketball"
     ball_rope = before_sue_person.make_rope(sports_rope, ball_str)
     before_sue_person.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_person.make_l1_rope(knee_str)
+    foot_str = "foot"
+    foot_rope = before_sue_person.make_l1_rope(foot_str)
     damaged_str = "damaged mcl"
-    damaged_rope = before_sue_person.make_rope(knee_rope, damaged_str)
-    before_sue_person.set_l1_plan(planunit_shop(knee_str))
-    before_sue_person.set_plan_obj(planunit_shop(damaged_str), knee_rope)
+    damaged_rope = before_sue_person.make_rope(foot_rope, damaged_str)
+    before_sue_person.set_l1_plan(planunit_shop(foot_str))
+    before_sue_person.set_plan_obj(planunit_shop(damaged_str), foot_rope)
 
     after_sue_person = copy_deepcopy(before_sue_person)
     before_damaged_reason_lower = 55
     before_damaged_reason_upper = 66
     before_fact = factunit_shop(
-        fact_context=knee_rope,
+        fact_context=foot_rope,
         fact_state=damaged_rope,
         fact_lower=before_damaged_reason_lower,
         fact_upper=before_damaged_reason_upper,
@@ -720,10 +720,10 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_factu
 
     # THEN
     print(f"{print_personatom_keys(sue_persondelta)=}")
-    x_keylist = [kw.DELETE, kw.person_plan_factunit, ball_rope, knee_rope]
+    x_keylist = [kw.DELETE, kw.person_plan_factunit, ball_rope, foot_rope]
     ball_personatom = get_from_nested_dict(sue_persondelta.personatoms, x_keylist)
     assert ball_personatom.get_value(kw.plan_rope) == ball_rope
-    assert ball_personatom.get_value(kw.fact_context) == knee_rope
+    assert ball_personatom.get_value(kw.fact_context) == foot_rope
     assert get_personatom_total_count(sue_persondelta) == 1
 
 
@@ -735,17 +735,17 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_reaso
     ball_str = "basketball"
     ball_rope = before_sue_person.make_rope(sports_rope, ball_str)
     before_sue_person.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_person.make_l1_rope(knee_str)
-    before_sue_person.set_l1_plan(planunit_shop(knee_str))
+    foot_str = "foot"
+    foot_rope = before_sue_person.make_l1_rope(foot_str)
+    before_sue_person.set_l1_plan(planunit_shop(foot_str))
     damaged_str = "damaged mcl"
-    damaged_rope = before_sue_person.make_rope(knee_rope, damaged_str)
-    before_sue_person.set_plan_obj(planunit_shop(damaged_str), knee_rope)
+    damaged_rope = before_sue_person.make_rope(foot_rope, damaged_str)
+    before_sue_person.set_plan_obj(planunit_shop(damaged_str), foot_rope)
     bend_str = "bend"
-    bend_rope = before_sue_person.make_rope(knee_rope, bend_str)
-    before_sue_person.set_plan_obj(planunit_shop(bend_str), knee_rope)
+    bend_rope = before_sue_person.make_rope(foot_rope, bend_str)
+    before_sue_person.set_plan_obj(planunit_shop(bend_str), foot_rope)
     before_sue_person.edit_plan_attr(
-        ball_rope, reason_context=knee_rope, reason_case=bend_rope
+        ball_rope, reason_context=foot_rope, reason_case=bend_rope
     )
 
     after_sue_person = copy_deepcopy(before_sue_person)
@@ -754,7 +754,7 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_reaso
     damaged_reason_divisor = 3
     after_sue_person.edit_plan_attr(
         ball_rope,
-        reason_context=knee_rope,
+        reason_context=foot_rope,
         reason_case=damaged_rope,
         reason_lower=damaged_reason_lower,
         reason_upper=damaged_reason_upper,
@@ -771,12 +771,12 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_reaso
         kw.INSERT,
         kw.person_plan_reason_caseunit,
         ball_rope,
-        knee_rope,
+        foot_rope,
         damaged_rope,
     ]
     ball_personatom = get_from_nested_dict(sue_persondelta.personatoms, x_keylist)
     assert ball_personatom.get_value(kw.plan_rope) == ball_rope
-    assert ball_personatom.get_value(kw.reason_context) == knee_rope
+    assert ball_personatom.get_value(kw.reason_context) == foot_rope
     assert ball_personatom.get_value(kw.reason_state) == damaged_rope
     assert ball_personatom.get_value(kw.reason_lower) == damaged_reason_lower
     assert ball_personatom.get_value(kw.reason_upper) == damaged_reason_upper
@@ -792,24 +792,24 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_reaso
     ball_str = "basketball"
     ball_rope = before_sue_person.make_rope(sports_rope, ball_str)
     before_sue_person.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_person.make_l1_rope(knee_str)
-    before_sue_person.set_l1_plan(planunit_shop(knee_str))
+    foot_str = "foot"
+    foot_rope = before_sue_person.make_l1_rope(foot_str)
+    before_sue_person.set_l1_plan(planunit_shop(foot_str))
     damaged_str = "damaged mcl"
-    damaged_rope = before_sue_person.make_rope(knee_rope, damaged_str)
-    before_sue_person.set_plan_obj(planunit_shop(damaged_str), knee_rope)
+    damaged_rope = before_sue_person.make_rope(foot_rope, damaged_str)
+    before_sue_person.set_plan_obj(planunit_shop(damaged_str), foot_rope)
     bend_str = "bend"
-    bend_rope = before_sue_person.make_rope(knee_rope, bend_str)
-    before_sue_person.set_plan_obj(planunit_shop(bend_str), knee_rope)
+    bend_rope = before_sue_person.make_rope(foot_rope, bend_str)
+    before_sue_person.set_plan_obj(planunit_shop(bend_str), foot_rope)
     before_sue_person.edit_plan_attr(
-        ball_rope, reason_context=knee_rope, reason_case=bend_rope
+        ball_rope, reason_context=foot_rope, reason_case=bend_rope
     )
     damaged_reason_lower = 45
     damaged_reason_upper = 77
     damaged_reason_divisor = 3
     before_sue_person.edit_plan_attr(
         ball_rope,
-        reason_context=knee_rope,
+        reason_context=foot_rope,
         reason_case=damaged_rope,
         reason_lower=damaged_reason_lower,
         reason_upper=damaged_reason_upper,
@@ -818,7 +818,7 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_reaso
     after_sue_person = copy_deepcopy(before_sue_person)
     after_sue_person.edit_plan_attr(
         ball_rope,
-        reason_del_case_reason_context=knee_rope,
+        reason_del_case_reason_context=foot_rope,
         reason_del_case_reason_state=damaged_rope,
     )
 
@@ -832,12 +832,12 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_reaso
         kw.DELETE,
         kw.person_plan_reason_caseunit,
         ball_rope,
-        knee_rope,
+        foot_rope,
         damaged_rope,
     ]
     ball_personatom = get_from_nested_dict(sue_persondelta.personatoms, x_keylist)
     assert ball_personatom.get_value(kw.plan_rope) == ball_rope
-    assert ball_personatom.get_value(kw.reason_context) == knee_rope
+    assert ball_personatom.get_value(kw.reason_context) == foot_rope
     assert ball_personatom.get_value(kw.reason_state) == damaged_rope
     assert get_personatom_total_count(sue_persondelta) == 1
 
@@ -850,24 +850,24 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_reaso
     ball_str = "basketball"
     ball_rope = before_sue_person.make_rope(sports_rope, ball_str)
     before_sue_person.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_person.make_l1_rope(knee_str)
-    before_sue_person.set_l1_plan(planunit_shop(knee_str))
+    foot_str = "foot"
+    foot_rope = before_sue_person.make_l1_rope(foot_str)
+    before_sue_person.set_l1_plan(planunit_shop(foot_str))
     damaged_str = "damaged mcl"
-    damaged_rope = before_sue_person.make_rope(knee_rope, damaged_str)
-    before_sue_person.set_plan_obj(planunit_shop(damaged_str), knee_rope)
+    damaged_rope = before_sue_person.make_rope(foot_rope, damaged_str)
+    before_sue_person.set_plan_obj(planunit_shop(damaged_str), foot_rope)
     bend_str = "bend"
-    bend_rope = before_sue_person.make_rope(knee_rope, bend_str)
-    before_sue_person.set_plan_obj(planunit_shop(bend_str), knee_rope)
+    bend_rope = before_sue_person.make_rope(foot_rope, bend_str)
+    before_sue_person.set_plan_obj(planunit_shop(bend_str), foot_rope)
     before_sue_person.edit_plan_attr(
-        ball_rope, reason_context=knee_rope, reason_case=bend_rope
+        ball_rope, reason_context=foot_rope, reason_case=bend_rope
     )
     before_damaged_reason_lower = 111
     before_damaged_reason_upper = 777
     before_damaged_reason_divisor = 13
     before_sue_person.edit_plan_attr(
         ball_rope,
-        reason_context=knee_rope,
+        reason_context=foot_rope,
         reason_case=damaged_rope,
         reason_lower=before_damaged_reason_lower,
         reason_upper=before_damaged_reason_upper,
@@ -880,7 +880,7 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_reaso
     after_damaged_reason_divisor = 78
     after_sue_person.edit_plan_attr(
         ball_rope,
-        reason_context=knee_rope,
+        reason_context=foot_rope,
         reason_case=damaged_rope,
         reason_lower=after_damaged_reason_lower,
         reason_upper=after_damaged_reason_upper,
@@ -897,12 +897,12 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_reaso
         kw.UPDATE,
         kw.person_plan_reason_caseunit,
         ball_rope,
-        knee_rope,
+        foot_rope,
         damaged_rope,
     ]
     ball_personatom = get_from_nested_dict(sue_persondelta.personatoms, x_keylist)
     assert ball_personatom.get_value(kw.plan_rope) == ball_rope
-    assert ball_personatom.get_value(kw.reason_context) == knee_rope
+    assert ball_personatom.get_value(kw.reason_context) == foot_rope
     assert ball_personatom.get_value(kw.reason_state) == damaged_rope
     assert ball_personatom.get_value(kw.reason_lower) == after_damaged_reason_lower
     assert ball_personatom.get_value(kw.reason_upper) == after_damaged_reason_upper
@@ -918,12 +918,12 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_reaso
     ball_str = "basketball"
     ball_rope = before_sue_person.make_rope(sports_rope, ball_str)
     before_sue_person.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_person.make_l1_rope(knee_str)
+    foot_str = "foot"
+    foot_rope = before_sue_person.make_l1_rope(foot_str)
     medical_str = "get medical attention"
-    medical_rope = before_sue_person.make_rope(knee_rope, medical_str)
-    before_sue_person.set_l1_plan(planunit_shop(knee_str))
-    before_sue_person.set_plan_obj(planunit_shop(medical_str), knee_rope)
+    medical_rope = before_sue_person.make_rope(foot_rope, medical_str)
+    before_sue_person.set_l1_plan(planunit_shop(foot_str))
+    before_sue_person.set_plan_obj(planunit_shop(medical_str), foot_rope)
 
     after_sue_person = copy_deepcopy(before_sue_person)
     after_medical_active_requisite = False
@@ -963,12 +963,12 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_reaso
     ball_str = "basketball"
     ball_rope = before_sue_person.make_rope(sports_rope, ball_str)
     before_sue_person.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_person.make_l1_rope(knee_str)
+    foot_str = "foot"
+    foot_rope = before_sue_person.make_l1_rope(foot_str)
     medical_str = "get medical attention"
-    medical_rope = before_sue_person.make_rope(knee_rope, medical_str)
-    before_sue_person.set_l1_plan(planunit_shop(knee_str))
-    before_sue_person.set_plan_obj(planunit_shop(medical_str), knee_rope)
+    medical_rope = before_sue_person.make_rope(foot_rope, medical_str)
+    before_sue_person.set_l1_plan(planunit_shop(foot_str))
+    before_sue_person.set_plan_obj(planunit_shop(medical_str), foot_rope)
     before_medical_active_requisite = True
     before_sue_person.edit_plan_attr(
         ball_rope,
@@ -1013,12 +1013,12 @@ def test_PersonDelta_add_all_different_personatoms_Creates_PersonAtom_plan_reaso
     ball_str = "basketball"
     ball_rope = before_sue_person.make_rope(sports_rope, ball_str)
     before_sue_person.set_plan_obj(planunit_shop(ball_str), sports_rope)
-    knee_str = "knee"
-    knee_rope = before_sue_person.make_l1_rope(knee_str)
+    foot_str = "foot"
+    foot_rope = before_sue_person.make_l1_rope(foot_str)
     medical_str = "get medical attention"
-    medical_rope = before_sue_person.make_rope(knee_rope, medical_str)
-    before_sue_person.set_l1_plan(planunit_shop(knee_str))
-    before_sue_person.set_plan_obj(planunit_shop(medical_str), knee_rope)
+    medical_rope = before_sue_person.make_rope(foot_rope, medical_str)
+    before_sue_person.set_l1_plan(planunit_shop(foot_str))
+    before_sue_person.set_plan_obj(planunit_shop(medical_str), foot_rope)
     before_medical_active_requisite = True
     before_sue_person.edit_plan_attr(
         ball_rope,

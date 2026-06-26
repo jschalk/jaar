@@ -72,14 +72,14 @@ def test_ContactUnit_Exists():
     assert bob_contactunit
     assert bob_contactunit.contact_name
     assert bob_contactunit.contact_name == exx.bob
-    assert not bob_contactunit.contact_cred_lumen
-    assert not bob_contactunit.contact_debt_lumen
+    assert not bob_contactunit.contact_cred_mass
+    assert not bob_contactunit.contact_debt_mass
     # calculated fields
     assert not bob_contactunit.credor_pool
     assert not bob_contactunit.debtor_pool
     assert not bob_contactunit.memberships
-    assert not bob_contactunit.irrational_contact_debt_lumen
-    assert not bob_contactunit.inallocable_contact_debt_lumen
+    assert not bob_contactunit.irrational_contact_debt_mass
+    assert not bob_contactunit.inallocable_contact_debt_mass
     assert not bob_contactunit.fund_give
     assert not bob_contactunit.fund_take
     assert not bob_contactunit.fund_agenda_give
@@ -97,14 +97,14 @@ def test_ContactUnit_Exists():
         kw.fund_agenda_take,
         kw.fund_give,
         kw.fund_take,
-        kw.inallocable_contact_debt_lumen,
-        kw.irrational_contact_debt_lumen,
+        kw.inallocable_contact_debt_mass,
+        kw.irrational_contact_debt_mass,
         kw.memberships,
         kw.respect_grain,
         kw.contact_name,
         kw.groupmark,
-        kw.contact_cred_lumen,
-        kw.contact_debt_lumen,
+        kw.contact_cred_mass,
+        kw.contact_debt_mass,
     }
 
 
@@ -140,14 +140,14 @@ def test_contactunit_shop_SetsAttributes():
 
     # THEN
     assert yao_contactunit.contact_name == exx.yao
-    assert yao_contactunit.contact_cred_lumen == 1
-    assert yao_contactunit.contact_debt_lumen == 1
+    assert yao_contactunit.contact_cred_mass == 1
+    assert yao_contactunit.contact_debt_mass == 1
     # calculated fields
     assert yao_contactunit.credor_pool == 0
     assert yao_contactunit.debtor_pool == 0
     assert yao_contactunit.memberships == {}
-    assert yao_contactunit.irrational_contact_debt_lumen == 0
-    assert yao_contactunit.inallocable_contact_debt_lumen == 0
+    assert yao_contactunit.irrational_contact_debt_mass == 0
+    assert yao_contactunit.inallocable_contact_debt_mass == 0
     assert yao_contactunit.fund_give == 0
     assert yao_contactunit.fund_take == 0
     assert yao_contactunit.fund_agenda_give == 0
@@ -192,118 +192,118 @@ def test_ContactUnit_set_respect_grain_SetsAttribute():
     assert bob_contactunit.respect_grain == x_respect_grain
 
 
-def test_ContactUnit_set_contact_cred_lumen_SetsAttribute():
+def test_ContactUnit_set_contact_cred_mass_SetsAttribute():
     # ESTABLISH
     bob_contactunit = contactunit_shop("Bob")
 
     # WHEN
-    x_contact_cred_lumen = 23
-    bob_contactunit.set_contact_cred_lumen(x_contact_cred_lumen)
+    x_contact_cred_mass = 23
+    bob_contactunit.set_contact_cred_mass(x_contact_cred_mass)
 
     # THEN
-    assert bob_contactunit.contact_cred_lumen == x_contact_cred_lumen
+    assert bob_contactunit.contact_cred_mass == x_contact_cred_mass
 
 
-def test_ContactUnit_set_contact_debt_lumen_SetsAttribute():
+def test_ContactUnit_set_contact_debt_mass_SetsAttribute():
     # ESTABLISH
     bob_contactunit = contactunit_shop("Bob")
 
     # WHEN
-    x_contact_debt_lumen = 23
-    bob_contactunit.set_contact_debt_lumen(x_contact_debt_lumen)
+    x_contact_debt_mass = 23
+    bob_contactunit.set_contact_debt_mass(x_contact_debt_mass)
 
     # THEN
-    assert bob_contactunit.contact_debt_lumen == x_contact_debt_lumen
+    assert bob_contactunit.contact_debt_mass == x_contact_debt_mass
 
 
-def test_ContactUnit_set_credor_contact_debt_lumen_SetsAttr_Scenario0():
+def test_ContactUnit_set_credor_contact_debt_mass_SetsAttr_Scenario0():
     # ESTABLISH
     bob_contactunit = contactunit_shop("Bob")
-    assert bob_contactunit.contact_cred_lumen == 1
-    assert bob_contactunit.contact_debt_lumen == 1
+    assert bob_contactunit.contact_cred_mass == 1
+    assert bob_contactunit.contact_debt_mass == 1
 
     # WHEN
-    bob_contactunit.set_credor_contact_debt_lumen(
-        contact_cred_lumen=23, contact_debt_lumen=34
+    bob_contactunit.set_credor_contact_debt_mass(
+        contact_cred_mass=23, contact_debt_mass=34
     )
 
     # THEN
-    assert bob_contactunit.contact_cred_lumen == 23
-    assert bob_contactunit.contact_debt_lumen == 34
+    assert bob_contactunit.contact_cred_mass == 23
+    assert bob_contactunit.contact_debt_mass == 34
 
 
-def test_ContactUnit_set_credor_contact_debt_lumen_IgnoresNoneArgs_Scenario0():
+def test_ContactUnit_set_credor_contact_debt_mass_IgnoresNoneArgs_Scenario0():
     # ESTABLISH
     bob_contactunit = contactunit_shop(
-        "Bob", contact_cred_lumen=45, contact_debt_lumen=56
+        "Bob", contact_cred_mass=45, contact_debt_mass=56
     )
-    assert bob_contactunit.contact_cred_lumen == 45
-    assert bob_contactunit.contact_debt_lumen == 56
+    assert bob_contactunit.contact_cred_mass == 45
+    assert bob_contactunit.contact_debt_mass == 56
 
     # WHEN
-    bob_contactunit.set_credor_contact_debt_lumen(
-        contact_cred_lumen=None, contact_debt_lumen=None
+    bob_contactunit.set_credor_contact_debt_mass(
+        contact_cred_mass=None, contact_debt_mass=None
     )
 
     # THEN
-    assert bob_contactunit.contact_cred_lumen == 45
-    assert bob_contactunit.contact_debt_lumen == 56
+    assert bob_contactunit.contact_cred_mass == 45
+    assert bob_contactunit.contact_debt_mass == 56
 
 
-def test_ContactUnit_set_credor_contact_debt_lumen_IgnoresNoneArgs_Scenario1():
+def test_ContactUnit_set_credor_contact_debt_mass_IgnoresNoneArgs_Scenario1():
     # ESTABLISH
     bob_contactunit = contactunit_shop("Bob")
-    assert bob_contactunit.contact_cred_lumen == 1
-    assert bob_contactunit.contact_debt_lumen == 1
+    assert bob_contactunit.contact_cred_mass == 1
+    assert bob_contactunit.contact_debt_mass == 1
 
     # WHEN
-    bob_contactunit.set_credor_contact_debt_lumen(
-        contact_cred_lumen=None, contact_debt_lumen=None
+    bob_contactunit.set_credor_contact_debt_mass(
+        contact_cred_mass=None, contact_debt_mass=None
     )
 
     # THEN
-    assert bob_contactunit.contact_cred_lumen == 1
-    assert bob_contactunit.contact_debt_lumen == 1
+    assert bob_contactunit.contact_cred_mass == 1
+    assert bob_contactunit.contact_debt_mass == 1
 
 
-def test_ContactUnit_add_irrational_contact_debt_lumen_SetsAttr():
+def test_ContactUnit_add_irrational_contact_debt_mass_SetsAttr():
     # ESTABLISH
     bob_contactunit = contactunit_shop("Bob")
-    assert bob_contactunit.irrational_contact_debt_lumen == 0
+    assert bob_contactunit.irrational_contact_debt_mass == 0
 
     # WHEN
     bob_int1 = 11
-    bob_contactunit.add_irrational_contact_debt_lumen(bob_int1)
+    bob_contactunit.add_irrational_contact_debt_mass(bob_int1)
 
     # THEN
-    assert bob_contactunit.irrational_contact_debt_lumen == bob_int1
+    assert bob_contactunit.irrational_contact_debt_mass == bob_int1
 
     # WHEN
     bob_int2 = 22
-    bob_contactunit.add_irrational_contact_debt_lumen(bob_int2)
+    bob_contactunit.add_irrational_contact_debt_mass(bob_int2)
 
     # THEN
-    assert bob_contactunit.irrational_contact_debt_lumen == bob_int1 + bob_int2
+    assert bob_contactunit.irrational_contact_debt_mass == bob_int1 + bob_int2
 
 
-def test_ContactUnit_add_inallocable_contact_debt_lumen_SetsAttr():
+def test_ContactUnit_add_inallocable_contact_debt_mass_SetsAttr():
     # ESTABLISH
     bob_contactunit = contactunit_shop("Bob")
-    assert bob_contactunit.inallocable_contact_debt_lumen == 0
+    assert bob_contactunit.inallocable_contact_debt_mass == 0
 
     # WHEN
     bob_int1 = 11
-    bob_contactunit.add_inallocable_contact_debt_lumen(bob_int1)
+    bob_contactunit.add_inallocable_contact_debt_mass(bob_int1)
 
     # THEN
-    assert bob_contactunit.inallocable_contact_debt_lumen == bob_int1
+    assert bob_contactunit.inallocable_contact_debt_mass == bob_int1
 
     # WHEN
     bob_int2 = 22
-    bob_contactunit.add_inallocable_contact_debt_lumen(bob_int2)
+    bob_contactunit.add_inallocable_contact_debt_mass(bob_int2)
 
     # THEN
-    assert bob_contactunit.inallocable_contact_debt_lumen == bob_int1 + bob_int2
+    assert bob_contactunit.inallocable_contact_debt_mass == bob_int1 + bob_int2
 
 
 def test_ContactUnit_reset_listen_calculated_attrs_SetsAttr():
@@ -311,17 +311,17 @@ def test_ContactUnit_reset_listen_calculated_attrs_SetsAttr():
     bob_contactunit = contactunit_shop("Bob")
     bob_int1 = 11
     bob_int2 = 22
-    bob_contactunit.add_irrational_contact_debt_lumen(bob_int1)
-    bob_contactunit.add_inallocable_contact_debt_lumen(bob_int2)
-    assert bob_contactunit.irrational_contact_debt_lumen == bob_int1
-    assert bob_contactunit.inallocable_contact_debt_lumen == bob_int2
+    bob_contactunit.add_irrational_contact_debt_mass(bob_int1)
+    bob_contactunit.add_inallocable_contact_debt_mass(bob_int2)
+    assert bob_contactunit.irrational_contact_debt_mass == bob_int1
+    assert bob_contactunit.inallocable_contact_debt_mass == bob_int2
 
     # WHEN
     bob_contactunit.reset_listen_calculated_attrs()
 
     # THEN
-    assert bob_contactunit.irrational_contact_debt_lumen == 0
-    assert bob_contactunit.inallocable_contact_debt_lumen == 0
+    assert bob_contactunit.irrational_contact_debt_mass == 0
+    assert bob_contactunit.inallocable_contact_debt_mass == 0
 
 
 def test_ContactUnit_clear_fund_give_take_SetsAttr():
@@ -405,9 +405,7 @@ def test_ContactUnit_add_contact_fund_give_take_SetsAttr():
 
 def test_ContactUnit_set_contactunits_fund_agenda_ratios_SetsAttr():
     # ESTABLISH
-    bob_contactunit = contactunit_shop(
-        "Bob", contact_cred_lumen=15, contact_debt_lumen=7
-    )
+    bob_contactunit = contactunit_shop("Bob", contact_cred_mass=15, contact_debt_mass=7)
     bob_contactunit.fund_give = 0.4106
     bob_contactunit.fund_take = 0.1106
     bob_contactunit.fund_agenda_give = 0.041
@@ -421,8 +419,8 @@ def test_ContactUnit_set_contactunits_fund_agenda_ratios_SetsAttr():
     bob_contactunit.set_fund_agenda_ratio_give_take(
         fund_agenda_ratio_give_sum=0.2,
         fund_agenda_ratio_take_sum=0.5,
-        contactunits_contact_cred_lumen_sum=20,
-        contactunits_contact_debt_lumen_sum=14,
+        contactunits_contact_cred_mass_sum=20,
+        contactunits_contact_debt_mass_sum=14,
     )
 
     # THEN
@@ -433,8 +431,8 @@ def test_ContactUnit_set_contactunits_fund_agenda_ratios_SetsAttr():
     bob_contactunit.set_fund_agenda_ratio_give_take(
         fund_agenda_ratio_give_sum=0,
         fund_agenda_ratio_take_sum=0,
-        contactunits_contact_cred_lumen_sum=20,
-        contactunits_contact_debt_lumen_sum=14,
+        contactunits_contact_cred_mass_sum=20,
+        contactunits_contact_debt_mass_sum=14,
     )
 
     # THEN

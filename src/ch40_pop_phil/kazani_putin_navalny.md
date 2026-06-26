@@ -2,7 +2,7 @@
 
 **Date:** 2024-02-19  
 **Author:** Kamil Kazani  
-**Source:** https://kamilkazani.substack.com/p/why-did-putin-kill-navalny
+**Source:** https://kamilkazani.substack.com/p/why-did-putin-kill-navalny  
 **Copied to Keg:** 2026-06-14 
 
 
@@ -10,7 +10,7 @@
 
 On Friday, Alexey Navalny died (almost certainly killed) in prison. This is a good occasion to debunk some pervasive myths on the mechanics of power.
 
-First, getting rid of Navalny was probably a correct decision on behalf of Kremlin. Execution of this murder may have been suboptimal. Its timing may have been capricious[^1]. But the very idea to eliminate him was reasonable and makes perfect sense. There is nothing crazy or irrational about it.
+First, getting rid of Navalny was probably a correct decision on behalf of Kremlin. Execution of this murder may have been suboptimal. Its timing may have been capricious[^1]. But the decision to eliminate him was reasonable and makes perfect sense. There is nothing crazy or stupid about it.
 
 This remark may sound as cynical or paradoxical. So let me clarify my position.
 
@@ -71,7 +71,7 @@ If you have been overthrown, you were probably not Kronosmaxing hard enough.
 
 And vice versa, if you were Kronosmaxing carefully & attentively, you will probably *never ever be ousted out.*
 
-Eliminating the competition is reasonable, rational and makes total sense. “Bloody tyranny” is for the most part, just good ol’ Kronosmaxing. Kicking away the ladders to eliminate potential threats, before they truly materialised. The more diligently you Kronosmax, the more likely you are to stay in power till the very end.
+Eliminating the competition is reasonable, logical and makes total sense. “Bloody tyranny” is for the most part, just good ol’ Kronosmaxing. Kicking away the ladders to eliminate potential threats, before they truly materialised. The more diligently you Kronosmax, the more likely you are to stay in power till the very end.
 
 Eliminate the threats → Stay in power
 

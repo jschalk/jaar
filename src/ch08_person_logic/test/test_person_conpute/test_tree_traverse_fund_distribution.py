@@ -1014,7 +1014,7 @@ def clear_all_contactunits_groupunits_fund_agenda_give_take(x_person: PersonUnit
     for x_groupunit in x_person.groupunits.values():
         x_groupunit.clear_group_fund_give_take()
         # for membership_x in groupunit_x._contacts.values():
-        #     print(f"{groupunit_x.} {membership_x.}  {membership_x.fund_give:.6f} {membership_x.contact_debt_lumen=} {membership_fund_take:t:.6f} {membership_x.} ")
+        #     print(f"{groupunit_x.} {membership_x.}  {membership_x.fund_give:.6f} {membership_x.contact_debt_mass=} {membership_fund_take:t:.6f} {membership_x.} ")
 
     # delete person_agenda_debt and person_agenda_cred
     for x_contactunit in x_person.contacts.values():
@@ -1187,9 +1187,9 @@ def are_equal(x1: float, x2: float):
 def test_PersonUnit_thinkout_SetsAttrsWhenNoFactUnitsNoReasonUnitsEmpty_agenda_ratio_cred_debt():
     # ESTABLISH
     yao_person = personunit_shop(exx.yao)
-    sue_contactunit = contactunit_shop(exx.sue, 0.5, contact_debt_lumen=2)
-    bob_contactunit = contactunit_shop(exx.bob, 1.5, contact_debt_lumen=3)
-    zia_contactunit = contactunit_shop(exx.zia, 8, contact_debt_lumen=5)
+    sue_contactunit = contactunit_shop(exx.sue, 0.5, contact_debt_mass=2)
+    bob_contactunit = contactunit_shop(exx.bob, 1.5, contact_debt_mass=3)
+    zia_contactunit = contactunit_shop(exx.zia, 8, contact_debt_mass=5)
     yao_person.set_contactunit(sue_contactunit)
     yao_person.set_contactunit(bob_contactunit)
     yao_person.set_contactunit(zia_contactunit)

@@ -15,22 +15,22 @@ from ch99_glossary.ch_keyword import Ch20Keywords as kw, ExampleStrs as exx
 def test_make_persondelta_Arg_bk00121_person_contactunit_v0_0_0():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
-    sue_contact_cred_lumen = 11
-    bob_contact_cred_lumen = 13
-    yao_contact_cred_lumen = 41
-    sue_contact_debt_lumen = 23
-    bob_contact_debt_lumen = 29
-    yao_contact_debt_lumen = 37
+    sue_contact_cred_mass = 11
+    bob_contact_cred_mass = 13
+    yao_contact_cred_mass = 41
+    sue_contact_debt_mass = 23
+    bob_contact_debt_mass = 29
+    yao_contact_debt_mass = 37
     amy_moment_rope = create_rope("amy56")
     sue_personunit = personunit_shop(exx.sue, amy_moment_rope)
     sue_personunit.add_contactunit(
-        exx.sue, sue_contact_cred_lumen, sue_contact_debt_lumen
+        exx.sue, sue_contact_cred_mass, sue_contact_debt_mass
     )
     sue_personunit.add_contactunit(
-        exx.bob, bob_contact_cred_lumen, bob_contact_debt_lumen
+        exx.bob, bob_contact_cred_mass, bob_contact_debt_mass
     )
     sue_personunit.add_contactunit(
-        exx.yao, yao_contact_cred_lumen, yao_contact_debt_lumen
+        exx.yao, yao_contact_cred_mass, yao_contact_debt_mass
     )
     x_brick_name = BrickFormatsEnum.bk00121_person_contactunit_v0_0_0
     contact_dataframe = create_brick_df(sue_personunit, x_brick_name)
@@ -44,13 +44,13 @@ def test_make_persondelta_Arg_bk00121_person_contactunit_v0_0_0():
     assert sue_contact_persondelta
     sue_personatom = personatom_shop(kw.person_contactunit, kw.INSERT)
     sue_personatom.set_arg(kw.contact_name, exx.sue)
-    sue_personatom.set_arg(kw.contact_cred_lumen, sue_contact_cred_lumen)
-    sue_personatom.set_arg(kw.contact_debt_lumen, sue_contact_debt_lumen)
+    sue_personatom.set_arg(kw.contact_cred_mass, sue_contact_cred_mass)
+    sue_personatom.set_arg(kw.contact_debt_mass, sue_contact_debt_mass)
     sue_personatom.set_atom_order()
     bob_personatom = personatom_shop(kw.person_contactunit, kw.INSERT)
     bob_personatom.set_arg(kw.contact_name, exx.bob)
-    bob_personatom.set_arg(kw.contact_cred_lumen, bob_contact_cred_lumen)
-    bob_personatom.set_arg(kw.contact_debt_lumen, bob_contact_debt_lumen)
+    bob_personatom.set_arg(kw.contact_cred_mass, bob_contact_cred_mass)
+    bob_personatom.set_arg(kw.contact_debt_mass, bob_contact_debt_mass)
     bob_personatom.set_atom_order()
     # print(f"{sue_contact_persondelta.get_ordered_dict()=}")
     # print(
@@ -72,22 +72,22 @@ def test_make_persondelta_Arg_bk00121_person_contactunit_v0_0_0():
 #     sue_personunit.add_contactunit(exx.bob)
 #     sue_personunit.add_contactunit(exx.yao)
 #     iowa_str = ";Iowa"
-#     sue_iowa_group_cred_lumen = 37
-#     bob_iowa_group_cred_lumen = 43
-#     yao_iowa_group_cred_lumen = 51
-#     sue_iowa_group_debt_lumen = 57
-#     bob_iowa_group_debt_lumen = 61
-#     yao_iowa_group_debt_lumen = 67
+#     sue_iowa_group_cred_mass = 37
+#     bob_iowa_group_cred_mass = 43
+#     yao_iowa_group_cred_mass = 51
+#     sue_iowa_group_debt_mass = 57
+#     bob_iowa_group_debt_mass = 61
+#     yao_iowa_group_debt_mass = 67
 #     ohio_str = ";Ohio"
-#     yao_ohio_group_cred_lumen = 73
-#     yao_ohio_group_debt_lumen = 67
+#     yao_ohio_group_cred_mass = 73
+#     yao_ohio_group_debt_mass = 67
 #     sue_contactunit = sue_personunit.get_contact(exx.sue)
 #     bob_contactunit = sue_personunit.get_contact(exx.bob)
 #     yao_contactunit = sue_personunit.get_contact(exx.yao)
-#     sue_contactunit.add_membership(iowa_str, sue_iowa_group_cred_lumen, sue_iowa_group_debt_lumen)
-#     bob_contactunit.add_membership(iowa_str, bob_iowa_group_cred_lumen, bob_iowa_group_debt_lumen)
-#     yao_contactunit.add_membership(iowa_str, yao_iowa_group_cred_lumen, yao_iowa_group_debt_lumen)
-#     yao_contactunit.add_membership(ohio_str, yao_ohio_group_cred_lumen, yao_ohio_group_debt_lumen)
+#     sue_contactunit.add_membership(iowa_str, sue_iowa_group_cred_mass, sue_iowa_group_debt_mass)
+#     bob_contactunit.add_membership(iowa_str, bob_iowa_group_cred_mass, bob_iowa_group_debt_mass)
+#     yao_contactunit.add_membership(iowa_str, yao_iowa_group_cred_mass, yao_iowa_group_debt_mass)
+#     yao_contactunit.add_membership(ohio_str, yao_ohio_group_cred_mass, yao_ohio_group_debt_mass)
 #     x_brick_name = bk00120_person_contact_membership_v0_0_0()
 #     membership_dataframe = create_brick_df(sue_personunit, x_brick_name)
 #     assert len(membership_dataframe) == 10
@@ -112,14 +112,14 @@ def test_make_persondelta_Arg_bk00121_person_contactunit_v0_0_0():
 #     bob_iowa_personatom.set_arg(kw.contact_name, exx.bob)
 #     yao_iowa_personatom.set_arg(kw.contact_name, exx.yao)
 #     yao_ohio_personatom.set_arg(kw.contact_name, exx.yao)
-#     sue_iowa_personatom.set_arg(kw.group_cred_lumen, sue_iowa_group_cred_lumen)
-#     bob_iowa_personatom.set_arg(kw.group_cred_lumen, bob_iowa_group_cred_lumen)
-#     yao_iowa_personatom.set_arg(kw.group_cred_lumen, yao_iowa_group_cred_lumen)
-#     yao_ohio_personatom.set_arg(kw.group_cred_lumen, yao_ohio_group_cred_lumen)
-#     sue_iowa_personatom.set_arg(kw.group_debt_lumen, sue_iowa_group_debt_lumen)
-#     bob_iowa_personatom.set_arg(kw.group_debt_lumen, bob_iowa_group_debt_lumen)
-#     yao_iowa_personatom.set_arg(kw.group_debt_lumen, yao_iowa_group_debt_lumen)
-#     yao_ohio_personatom.set_arg(kw.group_debt_lumen, yao_ohio_group_debt_lumen)
+#     sue_iowa_personatom.set_arg(kw.group_cred_mass, sue_iowa_group_cred_mass)
+#     bob_iowa_personatom.set_arg(kw.group_cred_mass, bob_iowa_group_cred_mass)
+#     yao_iowa_personatom.set_arg(kw.group_cred_mass, yao_iowa_group_cred_mass)
+#     yao_ohio_personatom.set_arg(kw.group_cred_mass, yao_ohio_group_cred_mass)
+#     sue_iowa_personatom.set_arg(kw.group_debt_mass, sue_iowa_group_debt_mass)
+#     bob_iowa_personatom.set_arg(kw.group_debt_mass, bob_iowa_group_debt_mass)
+#     yao_iowa_personatom.set_arg(kw.group_debt_mass, yao_iowa_group_debt_mass)
+#     yao_ohio_personatom.set_arg(kw.group_debt_mass, yao_ohio_group_debt_mass)
 #     bob_iowa_personatom.set_atom_order()
 #     # print(f"{membership_changunit.get_ordered_personatoms()[2]=}")
 #     # print(f"{sue_iowa_personatom=}")

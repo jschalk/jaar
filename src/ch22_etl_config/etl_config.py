@@ -13,7 +13,7 @@ from copy import copy as copy_copy
 from os.path import join as os_path_join
 
 ALL_DIMEN_ABBV7 = {
-    "MMTPAYY",
+    "MMTCECK",
     "MMTBUDD",
     "MMTHOUR",
     "MMTMONT",
@@ -66,7 +66,7 @@ ALL_DIMEN_ABBV2 = {
 
 def get_dimen_abbv7(dimen: str) -> str:
     return {
-        "moment_paybook": "MMTPAYY",
+        "moment_ceckbook": "MMTCECK",
         "moment_budunit": "MMTBUDD",
         "moment_epoch_hour": "MMTHOUR",
         "moment_epoch_month": "MMTMONT",
@@ -94,7 +94,7 @@ def get_dimen_abbv7(dimen: str) -> str:
 
 def get_dimen_abbv2(dimen: str) -> str:
     return {
-        "moment_paybook": "MP",
+        "moment_ceckbook": "MP",
         "moment_budunit": "MB",
         "moment_epoch_hour": "MH",
         "moment_epoch_month": "MM",
@@ -135,7 +135,7 @@ def create_prime_tablename(
         raise PrimeTablenameError(f"'{stage_type}' '{put_del}' is not a valid put_del")
 
     abbv_references = {
-        "mmtpayy": "moment_paybook",
+        "mmtceck": "moment_ceckbook",
         "mmtbudd": "moment_budunit",
         "mmthour": "moment_epoch_hour",
         "mmtmont": "moment_epoch_month",
@@ -325,7 +325,7 @@ def remove_staging_columns(columns_set: set) -> set:
 def get_all_dimen_columns_set(x_dimen: str) -> set[str]:
     if x_dimen == "translate_core":
         translate_core_dict = etl_brick_category_config_dict().get("translate_core")
-        return set(translate_core_dict.get("override_columns"))
+        return set(translate_core_dict.get("core_columns"))
     x_config = get_brick_config_dict().get(x_dimen)
     columns = set(x_config.get("jkeys").keys())
     columns.update(set(x_config.get("jvalues").keys()))
