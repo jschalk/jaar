@@ -17,7 +17,7 @@ As the same events are being discussed with various people, and each tells you h
 
 1. He is lying. Not a word of what he just said is true
 2. He is lying, because he had been a very, very close associate of the late oligarch. And when I say associate, I actually mean a shill, a vassal. A servant.
-3. Now as the former Berezovsky’s servant switched allegiance, and now serves Putin, any kind of association with the former boss is a liability now. Much like St Peter, he repeats a formula of triple denial. Never knew. Never met him. No, we didn’t even talk.
+3. Now as the former Berezovsky’s servant switched allegiance, and now serves Putin, any kind of association with the former Godfather is a liability now. Much like St Peter, he repeats a formula of triple denial. Never knew. Never met him. No, we didn’t even talk.
 
 Now that is the beauty of this book. As all the interviews are put near each other, you can read them all and cross compare. And when you do, you will notice that each and every of his former pawns and bootlickers, tells exactly the same, there is not even much variation in how they put it.
 

@@ -9,7 +9,7 @@
 ---
 
 
-<div align="center"><img src="images/frodo_gandalf1.webp" alt="Frodo happy and trusting Gandalf" width="500"></div>
+<div align="center"><img src="images/frodo_gandalf1.webp" alt="Frodo happy hanging with Gandalf" width="500"></div>
 
 One of the most curious intellectual developments of modernity is the rise of what I would call the *Hobbit Theory of Man.*
 

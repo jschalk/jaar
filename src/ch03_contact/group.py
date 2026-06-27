@@ -4,8 +4,8 @@ from ch03_contact._ref.ch03_semantic_types import (
     ContactName,
     FundGrain,
     GroupTitle,
-    LordMass,
-    LoyalMass,
+    BossMass,
+    TrustMass,
 )
 from dataclasses import dataclass
 
@@ -21,8 +21,8 @@ class GroupCore:
 
 @dataclass
 class MemberShip(GroupCore):
-    group_cred_mass: LordMass = 1.0
-    group_debt_mass: LoyalMass = 1.0
+    group_cred_mass: BossMass = 1.0
+    group_debt_mass: TrustMass = 1.0
     # calculated fields
     credor_pool: float = None
     debtor_pool: float = None
@@ -34,11 +34,11 @@ class MemberShip(GroupCore):
     fund_agenda_ratio_take: float = None
     contact_name: ContactName = None
 
-    def set_group_cred_mass(self, x_group_cred_mass: LordMass):
+    def set_group_cred_mass(self, x_group_cred_mass: BossMass):
         if x_group_cred_mass is not None:
             self.group_cred_mass = x_group_cred_mass
 
-    def set_group_debt_mass(self, x_group_debt_mass: LoyalMass):
+    def set_group_debt_mass(self, x_group_debt_mass: TrustMass):
         if x_group_debt_mass is not None:
             self.group_debt_mass = x_group_debt_mass
 
@@ -62,8 +62,8 @@ class MemberShip(GroupCore):
 
 def membership_shop(
     group_title: GroupTitle,
-    group_cred_mass: LordMass = None,
-    group_debt_mass: LoyalMass = None,
+    group_cred_mass: BossMass = None,
+    group_debt_mass: TrustMass = None,
     contact_name: ContactName = None,
 ) -> MemberShip:
     return MemberShip(

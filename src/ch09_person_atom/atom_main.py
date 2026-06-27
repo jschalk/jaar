@@ -13,8 +13,8 @@ from ch09_person_atom._ref.ch09_semantic_types import (
     ReasonNum,
     RopeTerm,
     TitleTerm,
-    LordMass,
-    LoyalMass,
+    BossMass,
+    TrustMass,
 )
 from ch09_person_atom.atom_config import (
     CRUD_command,
@@ -567,11 +567,11 @@ class AtomRow:
     begin: float = None
     respect_grain: float = None
     close: float = None
-    contact_cred_mass: LordMass = None
-    group_cred_mass: LordMass = None
+    contact_cred_mass: BossMass = None
+    group_cred_mass: BossMass = None
     credor_respect: int = None
-    contact_debt_mass: LoyalMass = None
-    group_debt_mass: LoyalMass = None
+    contact_debt_mass: TrustMass = None
+    group_debt_mass: TrustMass = None
     debtor_respect: int = None
     denom: int = None
     reason_divisor: int = None

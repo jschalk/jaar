@@ -11,8 +11,8 @@ from ch03_contact._ref.ch03_semantic_types import (
     RespectGrain,
     RespectNum,
     TitleTerm,
-    LordMass,
-    LoyalMass,
+    BossMass,
+    TrustMass,
 )
 from ch05_rope._ref.ch05_semantic_types import (
     FirstLabel,

@@ -158,9 +158,9 @@ Did you read that the keg_definition of 'FundNum' is 'float first used in ch03. 
 Did you read that the keg_definition of 'GroupTitle' is 'str first used in ch03. If contains SepartorTerms(s) it represents a group otherwise its a ContactName.'.
 Did you read that the keg_definition of 'HealerName' is 'str first used in ch03. A NameTerm used to identify a Problem's Healer'.
 Did you read that the keg_definition of 'Lord' is 'Definition needed.'.
-"Did you read that the keg_definition of 'LordMass' is 'Number that represents how much a Person is expects loyality from a ContactUnit, how much a ContactUnit is expects loyality from a GroupTitle, LordMass inherits from float class float first used in ch03.'."
+"Did you read that the keg_definition of 'BossMass' is 'Number that represents how much a Person is expects loyality from a ContactUnit, how much a ContactUnit is expects loyality from a GroupTitle, BossMass inherits from float class float first used in ch03.'."
 Did you read that the keg_definition of 'Loyal' is 'Definition needed.'.
-"Did you read that the keg_definition of 'LoyalMass' is 'Number that represents how much a Person is loyal to a ContactUnit, how much a ContactUnit is loyal to a GroupTitle, LoyalMass inherits from float class float first used in ch03.'."
+"Did you read that the keg_definition of 'TrustMass' is 'Number that represents how much a Person is loyal to a ContactUnit, how much a ContactUnit is loyal to a GroupTitle, TrustMass inherits from float class float first used in ch03.'."
 Did you read that the keg_definition of 'NameTerm' is 'str first used in ch03. All Name string classes should inherit from this class'.
 Did you read that the keg_definition of 'RespectGrain' is 'float first used in ch03. Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!''.
 Did you read that the keg_definition of 'RespectNum' is 'float first used in ch03. RespectNum inherits from float class'.

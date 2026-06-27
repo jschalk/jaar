@@ -49,7 +49,7 @@ Now why would that be? Why would Stalin’s successor be so worse looking, so le
 
 That is a great question
 
-Okay, now let’s look at another photo. Here you see Stalin in a company of the big bosses of the Soviet Union, powerful and important people, deciding the matters of life and death for millions and millions.
+Okay, now let’s look at another photo. Here you see Stalin in a company of the big chiefs of the Soviet Union, powerful and important people, deciding the matters of life and death for millions and millions.
 
 <div align="center"><img src="images/stalin_ugly_crew.webp" alt="Description of image" width="500"></div>
 
@@ -162,13 +162,13 @@ Well, because he was an exception. He was not appointed into power, was not sele
 
 And in America, you have elements of Russian style succession
 
-I mean selection of the next leader by his boss, where the big daddy chooses some uncharismatic virgin to boss around, and to feel safe around. And then, when the bid daddy goes, the virgin he has selected inherits all the power, more or less through the sheer power of precedence.
+I mean selection of the next leader by his cheif, where the big daddy chooses some uncharismatic virgin to domineer, and to feel safe around. And then, when the bid daddy goes, the virgin he has selected inherits all the power, more or less through the sheer power of precedence.
 
 One good example would be Biden
 
 <div align="center"><img src="images/obama_biden.webp" alt="Description of image" width="600"></div>
 
-Selected by the boss for being unable to outshine the master, he, naturally, inherited everything when the master left. Just as it works in Russia
+Selected by the master for being unable to outshine the master, he, naturally, inherited everything when the master left. Just as it works in Russia
 
 Another example would be Kamala
 
