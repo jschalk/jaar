@@ -34,3 +34,13 @@ It is very important to understand that. Your pain is not worth that much. If yo
 What you can do, is suggest them another *positive* image of themselves. Which makes perfect sense. They need positive image, and they have it, but you can give them another, provided that it's also positive
 <br>
 Positive self-image (which they have) can be replaced by another one
+
+
+On June 28, 2026 in response to someone complimenting a politician's image and action. 
+> 1. Lots of people don’t believe in anything
+> 2. Lots of people who believe in something find it necessary to act performatively repulsive
+> 3. Having convictions and *not* feeling obliged to always ostracize, like, everyone, is extremely extremely rare
+>
+> (like unicorns)
+
+
