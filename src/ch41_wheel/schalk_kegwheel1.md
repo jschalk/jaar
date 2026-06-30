@@ -52,7 +52,7 @@ Logically this invitation should only be extended when the prestigious family ha
 
 Any system of centralized power can be represented as a Wheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There is an endless caravan of those without prestige who will do absolutely any service for a chance of getting prestige[6]. Promises don't even have to be made, the implication is obvious.
 
-<div align="center"><img src="images/wheel02_falling.jpg" alt="Wheel diagram showing those that Fall" width="400"></div>
+<div align="center"><img src="images/wheel02_falling.webp" alt="Wheel diagram showing those that Fall" width="400"></div>
 
 As the Wheel spins there are families that are winning and families that are losing. On the other hand some families lose so much they fall out of power. There is also the "stable" section of the Wheel where families have prestige but their influence does not increase or decrease.  
 
@@ -116,7 +116,7 @@ Going back to the Wheel: As the wheel turns there are winners and losers and the
 
 A family with prestige will only consider inviting another family into power if they have a "load-bearing" ladder. Something the prestigious family can climb. The welcoming family is climbing on top of the invited family and invited family is clinging to the welcoming family. Naturally this means that if you're trying to climb from out of power into power you can't go any higher then the welcoming family.  
 
-<div align="center"><img src="images/wheel11_welcomes.png" alt="Same 5 ladders but with style" width="600"></div>
+<div align="center"><img src="images/wheel11_welcomes_excal.webp" alt="Same 5 ladders but with style" width="600"></div>
 
 *Same 5 ladders but with style*
 

@@ -9,13 +9,13 @@
 
 Sodium Bicarbonate, also known as "Baking Soda", is the most important commodity for Kegology. 
 
-<div align="center"><img src="images/baking_soda_arm_hammer.jpg" alt="popular baking soda product" width="400"></div>
+<div align="center"><img src="images/baking_soda_arm_hammer.webp" alt="popular baking soda product" width="400"></div>
 
 Before I tell you why let me talk about personal experience. 
 
 I use it to keep my children healthy. It's good for cleaning the dishes, the kitchen surfaces, the laundry. It's used in baking. It very effective and very cheap. It can be stored almost indefinitly and put in any container. One day I'll figure out how to make toothpaste with it. 
 
-<div align="center"><img src="images/baking_soda_powder.jpg" alt="popular baking soda product" width="400"></div>
+<div align="center"><img src="images/baking_soda_powder.webp" alt="popular baking soda product" width="400"></div>
 
 Let's talk about why it is not the dominate cleaning agent.
 

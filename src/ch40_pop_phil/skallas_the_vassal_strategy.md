@@ -108,7 +108,7 @@ A lot of female choice is really a bet on momentum.
 
 That’s one reason some men end up in relationships with attractive women that do not seem to match their current status. She is betting on him.
 
-<div align="center"><img src="images/waiting_wife.jpg" alt="Description of image" width="400"></div>
+<div align="center"><img src="images/waiting_wife.webp" alt="Description of image" width="400"></div>
 
 Picture source: [@lovedropx](https://x.com/lovedropx/status/2040321654950125737)
 

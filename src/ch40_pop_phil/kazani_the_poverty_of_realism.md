@@ -7,7 +7,7 @@
 
 ---
 
-<div align="center"><img src="images/Mearsheimer_as_machiavelli.jpg" alt="Realist Theorist Mearsheimer as Machiavelli" width="300"></div>
+<div align="center"><img src="images/Mearsheimer_as_machiavelli.webp" alt="Realist Theorist Mearsheimer as Machiavelli" width="300"></div>
 
 No political theory in the world is less real than the so called “realism”.
 

@@ -253,3 +253,33 @@ def test_AllImagesAreReferencedInMarkdown() -> None:
 
     # THEN
     assert not unreferenced_images, "\n".join(unreferenced_images)
+
+
+def get_oversized_images(src_dir: Path, max_size_bytes: int = 100 * 1024) -> list[str]:
+    oversized: list[str] = []
+
+    for image_path in src_dir.rglob("*"):
+        if (
+            not image_path.is_file()
+            or image_path.suffix.lower() not in IMAGE_EXTENSIONS
+        ):
+            continue
+
+        size = image_path.stat().st_size
+        if size > max_size_bytes:
+            oversized.append(
+                f"{image_path}: {size // 1024}kb (limit {max_size_bytes // 1024}kb)"
+            )
+
+    return oversized
+
+
+def test_AllImagesUnder100kb() -> None:
+    # GIVEN
+    src_dir = Path(__file__).resolve().parents[3]
+
+    # WHEN
+    oversized_images = get_oversized_images(src_dir)
+
+    # THEN
+    assert not oversized_images, "\n".join(oversized_images)
