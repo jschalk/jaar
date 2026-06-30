@@ -194,3 +194,62 @@ def test_MarkdownFileLinksFilesExist() -> None:
 
     # THEN
     assert not missing_files, "\n".join(missing_files)
+
+
+IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp", ".bmp", ".ico"}
+
+
+def get_referenced_images(src_dir: Path) -> set[Path]:
+    referenced: set[Path] = set()
+
+    for md_file in src_dir.rglob("*.md"):
+        md_text = md_file.read_text(encoding="utf-8")
+
+        for image_path_str in get_image_paths_from_markdown(md_text):
+            image_path_str = image_path_str.strip()
+
+            # Skip external links
+            if image_path_str.startswith(("http://", "https://")):
+                continue
+
+            # Remove anchor/query portions if present
+            image_path_str = image_path_str.split("#")[0].split("?")[0]
+
+            if not image_path_str:
+                continue
+
+            if image_path_str.startswith("/"):
+                image_path = src_dir / image_path_str.lstrip("/")
+            else:
+                image_path = md_file.parent / image_path_str
+
+            referenced.add(image_path.resolve())
+
+    return referenced
+
+
+def get_unreferenced_images(src_dir: Path) -> list[str]:
+    referenced_images = get_referenced_images(src_dir)
+    unreferenced: list[str] = []
+
+    for image_file in src_dir.rglob("*"):
+        if image_file.suffix.lower() not in IMAGE_EXTENSIONS:
+            continue
+        if not image_file.is_file():
+            continue
+
+        if image_file.resolve() not in referenced_images:
+            unreferenced.append(str(image_file))
+
+    return unreferenced
+
+
+def test_AllImagesAreReferencedInMarkdown() -> None:
+    # GIVEN
+    src_dir = Path(__file__).resolve().parents[3]
+
+    # WHEN
+    unreferenced_images = get_unreferenced_images(src_dir)
+
+    # THEN
+    assert not unreferenced_images, "\n".join(unreferenced_images)

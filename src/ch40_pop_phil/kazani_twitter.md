@@ -54,3 +54,10 @@ On June 29, 2026
 > The dumbest accusation of all is an accusation in hypocrisy
 >
 > True consistency requires - at the basic minimum - omniscience and omnipresence (+ also, probably omnipotence). Short of that, every life lived is full of hypocrisy and self-contradictions, in words and actions
+
+On June 30, 2026 responding to someone who has observed a writer going through the effort of writing a paper with their own voice and then choosing to replace their voice with an AI voice.
+> That is because people are terrified to use their own voice. Like, scared to hell, expecting some sort of punishment
+> 
+> Imagine a generative AI user as an abused dog, and you won't be far from truth. The primary purpose of the generative AI slop is to escape beatings
+
+<div align="center"><img src="images/kazani_scared_of_voice_tweet.webp" alt="A horse before the cart" width="500"></div>

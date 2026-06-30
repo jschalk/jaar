@@ -9194,6 +9194,7 @@ class Ch40Keywords(str, Enum):
     last_lesson_id = "last_lesson_id"
     lego = "lego"
     lord = "lord"
+    losing = "losing"
     loyal = "loyal"
     magnitude = "magnitude"
     mana_grain = "mana_grain"

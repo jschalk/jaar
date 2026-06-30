@@ -8,6 +8,16 @@
     "jvalues": { "celldepth": {"obj_type": "int"}, "quota": {"obj_type": "int"} }, 
     "moment_static": "True"
   }, 
+  "moment_ceckbook": {
+    "jkeys": {
+      "contact_name": { "obj_type": "NameTerm" }, 
+      "moment_rope" : { "obj_type": "RopeTerm" }, 
+      "person_name" : { "obj_type": "NameTerm" }, 
+      "tran_time"   : { "obj_type": "TimeNum"  }
+    }, 
+    "jvalues": { "amount": {"obj_type": "float"} }, 
+    "moment_static": "True"
+  }, 
   "moment_epoch_hour": {
     "jkeys": {
       "cumulative_minute": { "obj_type": "int"      }, 
@@ -30,16 +40,6 @@
       "weekday_order": { "obj_type": "int"      }
     }, 
     "jvalues": { "weekday_label": {"obj_type": "LabelTerm"} }, 
-    "moment_static": "True"
-  }, 
-  "moment_ceckbook": {
-    "jkeys": {
-      "contact_name": { "obj_type": "NameTerm" }, 
-      "moment_rope" : { "obj_type": "RopeTerm" }, 
-      "person_name" : { "obj_type": "NameTerm" }, 
-      "tran_time"   : { "obj_type": "TimeNum"  }
-    }, 
-    "jvalues": { "amount": {"obj_type": "float"} }, 
     "moment_static": "True"
   }, 
   "moment_timeoffi": {
