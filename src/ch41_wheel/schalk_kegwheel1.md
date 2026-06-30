@@ -1,14 +1,21 @@
-# Kegology Theory of Power/History
+# Kegology Political Theory
 
-**Date:** 2026-06-09  
+**Date:** 2026-06-28  
 **Author:** Emmanuel Schalk
+**Description:** A generalized theory of political mechanics
 
 > Are there kneelers in the wheelers?
 
 ---
 
-Here's a footnote describing the philosophical foundations of KegWheel[^1]. Read it if you want. 
+Kamil Kazani is my favorite popular thinker and in his latest article [How to study politics](../ch40_pop_phil/kazani_how_to_study_politics.md) he wrote most historians can't generalise the interesting facts they know into a good political theory. That hurt because my dad was an historian. I've developed a political theory for other more important reasons[^1] but now I can include defending my family honor.  **Behold Kamil! My father couldn't generalize his son can.**
+ 
+Good political theory must be hard if so few are able to do it. 
 
+
+> Ronald Syne wrote ""In all ages, whatever the form and name of government, be it monarchy, republic, or democracy, an oligarchy lurks behind the façade."[^2]
+
+Here's a footnote describing the philosophical foundations of KegWheel[^3]. Read it if you want. 
 Let's start with the most important concept in Kegology. 
 
 <div align="center"><img src="../ch40_pop_phil/images/yelstin_family.webp" alt="FamilyUnit Yelstin" width="500"></div>
@@ -18,12 +25,12 @@ Let's start with the most important concept in Kegology.
 ### Start with Family
 </div>
 
-The primary unit of history is the Family. Ronald Syne wrote ""In all ages, whatever the form and name of government, be it monarchy, republic, or democracy, an oligarchy lurks behind the façade."[^2] The oligarchy can be best understand as a bunch of Families. A Family can have a dominate personality as letter but is better to think of families rather then personalities[^3] because the trusted family members of a leader can often have enourmous influence. Kamil Kazani claims that one of the people in the Yelstin family portrait above made Vladamir Putin king. It wasn't Boris Yelstin. Do you know which one it was? Do you know his name? I don't. Still I know the Family: The Yelstin Family. A Family that had **prestige** but then it fell from power.
+ The oligarchy can be best understand as a bunch of Families. A Family can have a dominate personality as letter but is better to think of families rather then personalities[^4] because the trusted family members of a leader can often have enourmous influence. Kamil Kazani claims that one of the people in the Yelstin family portrait above made Vladamir Putin king. It wasn't Boris Yelstin. Do you know which one it was? Do you know his name? I don't. Still I know the Family: The Yelstin Family. A Family that had **prestige** but then it fell from power.
 
 
 <div align="center">
 
-#### "...Status & prestige is a zero sum game..." Kamil Kazani on Twitter[^4]
+#### "...Status & prestige is a zero sum game..." Kamil Kazani on Twitter[^5]
 </div>
 
 
@@ -43,7 +50,7 @@ Logically this invitation should only be extended when the prestigious family ha
 
 <div align="center"><img src="images/wheel01_intro.webp" alt="Plato head sculpture" width="400"></div>
 
-Any system of centralized power can be represented as a Wheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There is an endless caravan of those without prestige who will do absolutely any service for a chance of getting prestige[^5]. Promises don't even have to be made, the implication is obvious.
+Any system of centralized power can be represented as a Wheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There is an endless caravan of those without prestige who will do absolutely any service for a chance of getting prestige[6]. Promises don't even have to be made, the implication is obvious.
 
 <div align="center"><img src="images/wheel02_falling.jpg" alt="Wheel diagram showing those that Fall" width="400"></div>
 
@@ -64,7 +71,7 @@ Why do Families fall? Perhaps the most important member dies or becomes unpopula
 
 <div align="center"><img src="images/wheel03_invitation.webp" alt="Diagram invitation ladder" width="400"></div>
 
-Families only invite those out of power into power when they can provide a service. Something useful to them. That is represented here as a ladder. Those out of power must have a large ladder to even be considered for invitiation. The obvious example is money. Money is not equal to prestige. But if someone in power wants money then a a ladder made of money can result in an invitation.
+Families only invite those out of power into power when they can provide a service. Something useful to them. That is represented here as a ladder. Those out of power must have a large ladder to even be considered for invitiation[^6]. The obvious example is money. Money is not equal to prestige. But if someone in power wants money then a a ladder made of money can result in an invitation.
 
 <div align="center"><img src="images/wheel04_familyunits.webp" alt="17 FamilyUnits in a Wheel diagram" width="400"></div>
 
@@ -92,7 +99,7 @@ Here's a scenario where many wheels of different color exist in touch. (Please e
 
 <div align="center"><img src="images/wheel09_many_borders.webp" alt="Many borders of different colors" width="400"></div>
 
-Here's the same scenario with many borders. Notice the space between borders. That's a feature that is important, because borders can become their own space that's weirdly part of both wheels and not.[^6] Wheels exist against each other. 
+Here's the same scenario with many borders. Notice the space between borders. That's a feature that is important, because borders can become their own space that's weirdly part of both wheels and not.[^7] Wheels exist against each other. 
 
 <div align="center"><img src="images/wheel10_climb_cling.webp" alt="Climbing and clinging" width="300"></div>
 
@@ -121,21 +128,23 @@ These are the mechanics of the the KegWheel. Next part will address what it's go
 
 ## Footnotes
 
-[^1]: Reality is infinitely complex. Any model of reality will be wrong. But some models are better than others. KegWheel Theory is a model of understanding power and predicting how to affect change. 
+[^1]: I desperately want justice in the world and for my children to grew up healthy.
+
+[^2]: Reality is infinitely complex. Any model of reality will be wrong. But some models are better than others. KegWheel Theory is a model of understanding power and predicting how to affect change. 
 
 The easiest introduction to the concepts of KegWheel is from the writings of Kamil Kazani. The quickest primer is Kazani's article on the [Mechanics of Revolution](../ch40_pop_phil/kazani_mechanics_of_revolution.md). 
 
 Fundamentally KegWheel is not motivated by Kazani's cynical worldview but by Emmanuel Levinas's MetaEthics. The source of all truth is the Face of the Other in front of me. It can get pretty complicated so leave it for later. I just wanted to declare this. It is important to me.
 
-[^2]: Ronald Syne (died 1989), Historian and Author of Books on Roman History. 
+[^3]: Ronald Syne (died 1989), Historian and Author of Books on Roman History. 
 
-[^3]: Basically all leaders have family they trust. To understand how someone of prestige got that prestige see Kazani in [The Able Family](../ch40_pop_phil/kazani_the_able_family.md) 
+[^4]: Basically all leaders have family they trust. To understand how someone of prestige got that prestige see Kazani in [The Able Family](../ch40_pop_phil/kazani_the_able_family.md) 
 
-[^4]: Taken from conversation about Ukraine [Kazani Twitter Posts](../ch40_pop_phil/kazani_twitter.md)
+[^5]: Taken from conversation about Ukraine [Kazani Twitter Posts](../ch40_pop_phil/kazani_twitter.md)
 
-[^5]: [The Vassal Strategy](../ch40_pop_phil/skallas_the_vassal_strategy.md)  
+[^6]: [The Vassal Strategy](../ch40_pop_phil/skallas_the_vassal_strategy.md)  
 
-[^6]: I grew up on a border so I have strong opinions about these things. 
+[^7]: I grew up on a border so I have strong opinions about these things. 
 
 
 ## Biblography
@@ -146,6 +155,7 @@ How power is structured: [Mechanics of Revolution](../ch40_pop_phil/kazani_mecha
 The real work of leadership: [How Stalin Came to Power](../ch40_pop_phil/kazani_how_stalin_came_to_power.md)  
 How slavish devotion is perfectly reasonable1: [Suffering from Success](../ch40_pop_phil/kazani_suffering_from_success.md)  
 How slavish devotion is perfectly reasonable2: [The Vassal Strategy](../ch40_pop_phil/skallas_the_vassal_strategy.md)  
+How a history of Rome best teaches how politics works: [How to study politics](../ch40_pop_phil/kazani_how_to_study_politics.md)
 Why Plato's power behind the throne plan fails: [Wisdom of Lenin](../ch40_pop_phil/kazani_wisdom_of_lenin.md)  
 Why and how thinkers matter: [Kill the Scholars](../ch40_pop_phil/kazani_kill_the_scholars.md)  
 Why domestic goals motivate the most: [The Poverty of Realism](../ch40_pop_phil/kazani_the_poverty_of_realism.md)  

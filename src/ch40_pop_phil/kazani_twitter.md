@@ -36,6 +36,12 @@ What you can do, is suggest them another *positive* image of themselves. Which m
 Positive self-image (which they have) can be replaced by another one
 
 
+On June 28, 2026 in response to another tweet mocking someone's personal experience.
+> The most important thing you must keep in mind is to never ever sneer. Never ever. In fact, if you register a sneer in someone’s comment, that means the comment is dumb & they are as wrong as they could be
+> 
+> Sneer -> dumb as hell
+
+
 On June 28, 2026 in response to someone complimenting a politician's image and action. 
 > 1. Lots of people don’t believe in anything
 > 2. Lots of people who believe in something find it necessary to act performatively repulsive
@@ -44,3 +50,7 @@ On June 28, 2026 in response to someone complimenting a politician's image and a
 > (like unicorns)
 
 
+On June 29, 2026
+> The dumbest accusation of all is an accusation in hypocrisy
+>
+> True consistency requires - at the basic minimum - omniscience and omnipresence (+ also, probably omnipotence). Short of that, every life lived is full of hypocrisy and self-contradictions, in words and actions
