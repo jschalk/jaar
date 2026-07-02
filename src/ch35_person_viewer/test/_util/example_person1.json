@@ -941,7 +941,20 @@
       "Asset administration": {
         "is_expanded": false, 
         "kids": {
-          "American sovereignty": {
+          "French sovereignty": {
+            "plan_label": "French sovereignty", 
+            "plan_uid": 203, 
+            "poynt": 1, 
+            "reasonunits": {
+              ";amy45;Nation-States;": {
+                "cases": {
+                  ";amy45;Nation-States;France2": {"reason_state": ";amy45;Nation-States;France2"}
+                }, 
+                "reason_context": ";amy45;Nation-States;"
+              }
+            }
+          }, 
+          "USA sovereignty": {
             "kids": {
               "portland sovereignty": {
                 "kids": {
@@ -1143,25 +1156,12 @@
                 }
               }
             }, 
-            "plan_label": "American sovereignty", 
+            "plan_label": "USA sovereignty", 
             "plan_uid": 204, 
             "poynt": 1, 
             "reasonunits": {
               ";amy45;Nation-States;": {
                 "cases": { ";amy45;Nation-States;USA": {"reason_state": ";amy45;Nation-States;USA"} }, 
-                "reason_context": ";amy45;Nation-States;"
-              }
-            }
-          }, 
-          "French sovereignty": {
-            "plan_label": "French sovereignty", 
-            "plan_uid": 203, 
-            "poynt": 1, 
-            "reasonunits": {
-              ";amy45;Nation-States;": {
-                "cases": {
-                  ";amy45;Nation-States;France2": {"reason_state": ";amy45;Nation-States;France2"}
-                }, 
                 "reason_context": ";amy45;Nation-States;"
               }
             }

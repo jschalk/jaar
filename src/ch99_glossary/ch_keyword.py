@@ -8879,6 +8879,7 @@ class Ch35Keywords(str, Enum):
 
 
 class Ch40Keywords(str, Enum):
+    American = "American"
     Anaday = "Anaday"
     Baileyday = "Baileyday"
     CRUD_command = "CRUD_command"
@@ -9328,6 +9329,7 @@ class Ch40Keywords(str, Enum):
     trlname = "trlname"
     trlrope = "trlrope"
     trltitl = "trltitl"
+    trooper = "trooper"
     unknown_str = "unknown_str"
     vow = "vow"
     week = "week"
@@ -9348,6 +9350,7 @@ class Ch40Keywords(str, Enum):
 
 
 class Ch41Keywords(str, Enum):
+    American = "American"
     Anaday = "Anaday"
     Baileyday = "Baileyday"
     CRUD_command = "CRUD_command"
@@ -9773,6 +9776,7 @@ class Ch41Keywords(str, Enum):
     sheet = "sheet"
     shop = "shop"
     shot = "shot"
+    soldier = "soldier"
     solo = "solo"
     source_dimen = "source_dimen"
     spark_face = "spark_face"

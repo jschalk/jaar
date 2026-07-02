@@ -33,8 +33,8 @@
 - ch33_pitch: Deal, Gift, Peer, PitchID, PitchUnit, ch33, deal, gift, offer, peer, pitch, pitch_id, pitcher_name, pitchs, request
 - ch34_finance: ch34, finance, financial
 - ch35_person_viewer: ch35
-- ch40_pop_phil: Hayek, Hobbit, Kronos, Monopoly, Ride, Shill, ch40, ch90, climb, cow, invitation, invite, knee, kronosmax, ladder, lord, losing, loyal, pay, power, prestige, ride, rival, shill, winner, winning
-- ch41_wheel: Climb, Discipline, Fall, KegWheel, Losing, Pay, Prestige, Shot, Stable, Welcome, Wheel, Winning, alien, bearing, ch41, cling, discipline, fall, jump, kneeler, loser, revenge, shot, stable, valor, welcome, wheel, wheelers
+- ch40_pop_phil: American, Hayek, Hobbit, Kronos, Monopoly, Ride, Shill, ch40, ch90, climb, cow, invitation, invite, knee, kronosmax, ladder, lord, losing, loyal, pay, power, prestige, ride, rival, shill, trooper, winner, winning
+- ch41_wheel: Climb, Discipline, Fall, KegWheel, Losing, Pay, Prestige, Shot, Stable, Welcome, Wheel, Winning, alien, bearing, ch41, cling, discipline, fall, jump, kneeler, loser, revenge, shot, soldier, stable, valor, welcome, wheel, wheelers
 - ch90_calcite_app: Calcite, Team, calcite, team
 - ch97_docs_builder: ch97
 - ch98_linter: ch98
