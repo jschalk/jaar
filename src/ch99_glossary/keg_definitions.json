@@ -689,6 +689,7 @@
   "unknown_str": ", TRANSLATE_LABEL arg, TRANSLATE_NAME arg, TRANSLATE_ROPE arg, TRANSLATE_TITLE arg", 
   "UPDATE": "CRUD_COMMAND to update records for a table. 'Associated dimens: personunit' in 'CRUD_COMMAND to update records for a table'", 
   "valid_ch": "Describes which chapters a keyword is allowed to be in. Format is '0:' for all chapters, '5:' for all chapters after ch06, '3,7' for only 3 and 7. Empty string for not allowed in any chapter.", 
+  "valor": "As defined in 'From Valor to Pedigree' book.", 
   "Vertical": "The height of a Pillar, Ladder, Stilt, or Scaffold. Is it enough to reach?", 
   "vertical": "The height of a Pillar, Ladder, Stilt, or Scaffold. Is it enough to reach?", 
   "vow": "ideas created for audience", 

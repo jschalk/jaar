@@ -8,6 +8,10 @@
 
 ---
 
+
+<div align="center"><img src="../ch41_wheel/images/valor_to_pedigree.webp" alt="From Valor to Pedigree by Ellery Schalk book cover" width="200"></div>
+
+
 Kamil Kazani is my favorite popular thinker and in his latest article [How to study politics](../ch40_pop_phil/kazani_how_to_study_politics.md) he wrote most historians can't generalise the interesting facts they know into a good political theory. That hurt because my dad was an historian. I've developed a political theory for other more important reasons[^1] but now I can include defending my family honor.  **Behold Kamil! My father couldn't generalize his son can.**
  
 Good political theory must be hard if so few are able to do it. 
