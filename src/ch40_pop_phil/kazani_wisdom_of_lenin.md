@@ -23,7 +23,7 @@ Will you find there some deep theoretical insights about the fates of humanity? 
 
 What he was spectacularly good at, is sharp & deep observations on the practical issues of political struggle. What you can find in his works, is some extremely good practical advice (and not only on politics)
 
-For example. There is a short article, named Where to start? (1901) summarising the plan for his future party (or rather, his faction within the Russian social democrat party). Where should you start, what will be your step one when launching a new movement?
+For example. There is a short article, named Where to start? (1901) summarising the blueprint for his future party (or rather, his faction within the Russian social democrat party). Where should you start, what will be your step one when launching a new movement?
 
 And Lenin’s answer is:
 
@@ -74,15 +74,15 @@ Plato was an impossibly good man of thought, perhaps, the single best one in the
 
 But as a man of action, and as a practical politician, he was a child. Absolute toddler. In (political) action, Vladimir Lenin towered above Plato just as much as Plato towered above him in thought.
 
-Plato of course wanted power. Nearly all intellectuals do. But - wanting power - he was childishly naive and childishly delusional about how he will get it. For what was his plan?
+Plato of course wanted power. Nearly all intellectuals do. But - wanting power - he was childishly naive and childishly delusional about how he will get it. For what was his strategy?
 
 1. Approach a tyrant, a man in power
 2. Become his advisor, a power behind the throne
 3. Use the tyrant to execute your plans & your agenda
 
-The plan is incredibly common (countless intellectuals would try it in centuries after Plato), and incredibly naive. Because obviously no man in power needs a 'philosopher’ who would be telling him what to do. That is an absolute self delusion on behalf of a philosopher. A tyrant needs servants, he needs slavs, he - if he is mentally healthy - needs a jester. But philosopher? No, he does not really need one.
+The scheme is incredibly common (countless intellectuals would try it in centuries after Plato), and incredibly naive. Because obviously no man in power needs a 'philosopher’ who would be telling him what to do. That is an absolute self delusion on behalf of a philosopher. A tyrant needs servants, he needs slavs, he - if he is mentally healthy - needs a jester. But philosopher? No, he does not really need one.
 
-What is more, Plato's plan was sort of… undignified. I mean, in a childish way. He does not want to seize power, he does not want to fight for power. He wants to find a man who already has what he wants, and use his resource as if it was his own.
+What is more, Plato's scheme was sort of… undignified. I mean, in a childish way. He does not want to seize power, he does not want to fight for power. He wants to find a man who already has what he wants, and use his resource as if it was his own.
 
 The audacity. No wonder the guy sold him to slavery, in the end
 

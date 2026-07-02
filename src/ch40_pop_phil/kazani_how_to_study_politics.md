@@ -172,7 +172,7 @@ Now that gives some additional context, to the might makes right paradigm. And t
 
 But they never abandoned the printing press. Because again, propaganda matters.
 
-Now let’s return to Ronald Syme, and set the plan of our studies. What do we need to do, practically speaking.
+Now let’s return to Ronald Syme, and set the blueprint of our studies. What do we need to do, practically speaking.
 
 What we need to do is:
 

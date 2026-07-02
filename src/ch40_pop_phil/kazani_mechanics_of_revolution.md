@@ -102,7 +102,7 @@ For the agenda has changed completely. And it is now set by the outsiders.
 
 That is called - the revolution
 
-And the radicalising dynamics that we associate with the revolution - that is political agendas, and political goals getting increasingly more extreme, over the time - is largely driven by the increasing flow of the outsiders who do not belong to the original high circle, who, increasingly, have no connection with that circle at all (like, on an iteration 5 or 6, most political players do not know the players from iterations 1 or 2, and - quite sincerely - have very little understanding of why it had all started and what had been the original plan) and - most importantly - **have no stake in the existing order of things.**
+And the radicalising dynamics that we associate with the revolution - that is political agendas, and political goals getting increasingly more extreme, over the time - is largely driven by the increasing flow of the outsiders who do not belong to the original high circle, who, increasingly, have no connection with that circle at all (like, on an iteration 5 or 6, most political players do not know the players from iterations 1 or 2, and - quite sincerely - have very little understanding of why it had all started and what had been the original strategy) and - most importantly - **have no stake in the existing order of things.**
 
 The progressive radicalisation of revolutionary process - from moderate revolutionaries of an iteration 1 to the extremists of an iteration 5, largely reflects the different social composition of the whole set of political players on the iterations 1 and 5, respectively. Those who started it all on the iteration 1 tend to belong to the upper elites, who have hella lot to lose, and having a lot to lose causes a moderating effect on their views and agenda. Those who play politics on the iteration 5, have nothing to lose, and all to gain, and their particular interest makes them considerably more radical compared to the original initiators of the revolutionary events.
 
@@ -134,7 +134,7 @@ And it is on this stage, and with the new composition of political class, and wi
 
 ## Footnotes
 
-[^1]: This won’t be an exhaustive explanation - for the reasons discussed below. still, imagining it as a sequence of coups happening in a row will be much nearer to reality than seeing it as a one, singular event. One problem with popular imagination is that it tends to fuse events happening over the months, or years into a one scene
+[^1]: This won’t be an exhaustive explication - for the reasons discussed below. still, imagining it as a sequence of coups happening in a row will be much nearer to reality than seeing it as a one, singular event. One problem with popular imagination is that it tends to fuse events happening over the months, or years into a one scene
 
 [^2]: If the political life had not been extirpated from the nation, that this nation cannot experience a revolution. All it can have is a civil war.
 

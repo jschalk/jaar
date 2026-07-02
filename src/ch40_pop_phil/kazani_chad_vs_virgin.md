@@ -64,7 +64,7 @@ Stalin is the oldest of all, yet he looks considerably better than any of his he
 
 Now why would that be?
 
-Well, the simplest explanation is probably the truest one. All of his henchmen look like shit, because looking like shit is a principal criterion of Stalin’s choice, when he is choosing the people to work with him in government. Stalin would not select anyone better looking, or more imposing, or more charismatic, into his squad. He is doing exactly the opposite. He is selecting meek, controllable people, those he will feel safe being around.
+Well, the simplest analysis is probably the truest one. All of his henchmen look like shit, because looking like shit is a principal criterion of Stalin’s choice, when he is choosing the people to work with him in government. Stalin would not select anyone better looking, or more imposing, or more charismatic, into his squad. He is doing exactly the opposite. He is selecting meek, controllable people, those he will feel safe being around.
 
 <div align="center">
 

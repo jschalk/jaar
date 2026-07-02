@@ -77,7 +77,7 @@ Now why would you want that?
 
 Well, first, because it’s cool & because it is pleasant. There is hardly anything more satisfying than connecting with another soul, from centuries and millenia ago.
 
-But there is another explanation, too. The thing with your style is that you cannot build it out of nowhere. You cannot just create it out of the void. Nope. To develop it, you need some model, some example you would love so much, you will want to emulate it. And it is by emulating what you love and enjoy, that you build your own style and your own mode of expression.
+But there is another benefit, too. The thing with your style is that you cannot build it out of nowhere. You cannot just create it out of the void. Nope. To develop it, you need some model, some example you would love so much, you will want to emulate it. And it is by emulating what you love and enjoy, that you build your own style and your own mode of expression.
 
 (That is what I always advice to those new to English. Best thing you can do, is find the author you love, whom you will want to copy. How do you think did the Renaissance artists develop their style of visual expression? They discovered the ancient works they enjoyed, and copied them. You must do the same)
 
