@@ -1,4 +1,4 @@
-# The Able Family
+ # The Able Family
 
 **Date:** 2024-09-07  
 **Author:** Kamil Kazani  
@@ -36,7 +36,7 @@ That was, beyond any doubt, an extraordinary family; a brilliant example of meri
 
 Nikolay Ulyanov was born in 1768[^3], as a serf.
 
-And when I say “serf”, I mean a “plantation slave”.
+And when I say “serf”, I mean a “field slave”.
 
 In the late 18th c., serfs made for over 90% of the Russian Empire’s population. Most were villagers, living in the countryside and working on the aristocratic estates. Serfs had little legal protection or personal autonomy. They were bought and sold, mortgaged and auctioned. They could be sold by the entire villages, they could be sold individually, they could be sold far away, separated from their family and their kin.
 
@@ -48,7 +48,7 @@ And Nikolay Ulyanov had a misfortune to be born in the age of Catherine.
 
 “Bargaining” by Nikolay Nevrev. This painting is supposed to present the 19th c. realities.
 
-There was, however, a nuance. Serfs had no rights, and could be all used as plantation slaves. And yet, the plantation mode of economy could be more profitable or less profitable depending on the **soil fertility**.
+There was, however, a nuance. Serfs had no rights, and could be all used as field slaves. And yet, the plantation mode of economy could be more profitable or less profitable depending on the **soil fertility**.
 
 To understand the history, you need to understand geography. And to understand the Russian geography, you need to internalise one crucial dichotomy:
 
@@ -74,7 +74,7 @@ When the soils were fertile, nobility focused on the grain farming and employed 
 
 And vice versa, the infertility of Non-Black soils produced relatively freer peasantry. As the grain farming was not particularly profitable, there were hardly any New World style plantations in the area. Plantation model of business just did not generate too much revenue.
 
-Serfdom + Fertile Soil = Profitable Plantations → Plantation Slavery
+Serfdom + Fertile Soil = Profitable Plantations → Field slavery
 
 Serfdom + Infertile Soil = Unprofitable Plantations → Freer peasantry
 
