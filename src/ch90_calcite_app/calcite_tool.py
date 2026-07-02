@@ -19,7 +19,7 @@ from ch23_idea_src.idea_csv import (
     create_init_idea_csv_strs,
 )
 from ch32_world.world import worlddir_shop
-from ch90_world_app._ref.ch90_semantic_types import PersonName
+from ch90_calcite_app._ref.ch90_semantic_types import PersonName
 from dataclasses import dataclass
 from io import StringIO
 from pandas import (

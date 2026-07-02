@@ -37,7 +37,7 @@ What does each one do?
 - **ch35_person_viewer**: Tools for Visualizing PersonUnits
 - **ch40_pop_phil**: Essays pop_phil
 - **ch41_wheel**: Essays pop_phil
-- **ch90_world_app**: ETL app to create day punches from excel files.
+- **ch90_calcite_app**: ETL app to create day punches from excel files.
 - **ch97_docs_builder**: Defines Tools that create documentation.
 - **ch98_linter**: Linter for repo.
 - **ch99_glossary**: Where keg terms will be defined, described, ranked.

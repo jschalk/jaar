@@ -1,8 +1,8 @@
 """
-w1_app.py  —  Simple GUI launcher for the Excel ETL pipeline.
+calcite_app.py  —  Simple GUI launcher for the Excel ETL pipeline.
 
 Usage:
-    python w1_app.py
+    python calcite_app.py
 
 Requires:
     Python 3.10+ (tkinter is included in the standard library)
@@ -15,7 +15,7 @@ from ch00_py.file_toolbox import create_path, delete_dir, open_file, set_dir
 from ch20_brick.brick_db_tool import prettify_excel_files
 from ch30_idea_dst.lego_db2df import create_lego0002_file
 from ch32_world.world import create_today_punchs
-from ch90_world_app.w1_tool import (
+from ch90_calcite_app.calcite_tool import (
     fill_spark_face_in_directory,
     get_app_default_dir,
     get_app_default_dirs,
@@ -182,7 +182,7 @@ class ETLApp(tk_Tk):
     def _state_path() -> str:
 
         app_data = os_environ.get("APPDATA") or os_path_expanduser("~")
-        state_dir = os_path_join(app_data, "w1_app")
+        state_dir = os_path_join(app_data, "calcite_app")
         os_makedirs(state_dir, exist_ok=True)
         return os_path_join(state_dir, "state.json")
 

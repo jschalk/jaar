@@ -1,5 +1,5 @@
 from ch32_world.world import worlddir_shop
-from ch90_world_app.w1_tool import (
+from ch90_calcite_app.calcite_tool import (
     ETLAppSettings,
     get_app_default_dir,
     get_app_default_dirs,
@@ -130,7 +130,7 @@ def test_get_app_default_world_name_ReturnsObj():
 def test_get_app_default_dir_ReturnsObj_UnixPath(monkeypatch):
     # ESTABLISH
     fake_home = Path("/home/testuser")
-    monkeypatch.setattr("ch90_world_app.w1_tool.Path.home", lambda: fake_home)
+    monkeypatch.setattr("ch90_calcite_app.calcite_tool.Path.home", lambda: fake_home)
     # WHEN
     path = get_app_default_dir(is_windows=False)
     # THEN

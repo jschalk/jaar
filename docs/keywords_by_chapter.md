@@ -35,7 +35,7 @@
 - ch35_person_viewer: ch35
 - ch40_pop_phil: Hayek, Hobbit, Kronos, Monopoly, Ride, Shill, ch40, ch90, climb, cow, invitation, invite, knee, kronosmax, ladder, lord, losing, loyal, pay, power, prestige, ride, rival, shill, winner, winning
 - ch41_wheel: Climb, Discipline, Fall, KegWheel, Losing, Pay, Prestige, Shot, Stable, Welcome, Wheel, Winning, alien, bearing, ch41, cling, discipline, fall, jump, kneeler, loser, revenge, shot, stable, valor, welcome, wheel, wheelers
-- ch90_world_app: Team, team
+- ch90_calcite_app: Calcite, Team, calcite, team
 - ch97_docs_builder: ch97
 - ch98_linter: ch98
 - ch99_glossary: ch99

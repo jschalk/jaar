@@ -71,6 +71,8 @@
   "c400_leap_length": "A C400Constant for building Epochs: 210,379,680 minutes in 400 year cycle", 
   "c400_number": "Epoch config Integer that represents number of 400 year cycles. Defines the range of years in epoch c400_number=7 means 2800 years, Moment arg", 
   "calc_by_thinkout": "Describes when data is defined by thinkout process. Not required seed data.", 
+  "Calcite": "Reserved for use with Calcite app.", 
+  "calcite": "Reserved for use with Calcite app.", 
   "care_amount": "Definition needed.", 
   "cares": "Definition needed.", 
   "casa": "Example key with value 'casa' used for tests throughout codebase.", 
