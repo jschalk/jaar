@@ -79,7 +79,7 @@ Well, first, because it’s cool & because it is pleasant. There is hardly anyth
 
 But there is another benefit, too. The thing with your style is that you cannot build it out of nowhere. You cannot just create it out of the void. Nope. To develop it, you need some model, some example you would love so much, you will want to emulate it. And it is by emulating what you love and enjoy, that you build your own style and your own mode of expression.
 
-(That is what I always advice to those new to English. Best thing you can do, is find the author you love, whom you will want to copy. How do you think did the Renaissance artists develop their style of visual expression? They discovered the ancient works they enjoyed, and copied them. You must do the same)
+(That is what I always advice to people new to English. Best thing you can do, is find the author you love, whom you will want to copy. How do you think did the Renaissance artists develop their style of visual expression? They discovered the ancient works they enjoyed, and copied them. You must do the same)
 
 Long story short, reading a range of old poets, and reading them daily or so, will give you a broad, and comprehensive understanding of the old literature, and with relatively little effort. And that serves as a critical groundwork, now for developing your own taste, and your own style. By and large, you can assume that the old literary culture is just better, and consuming it will make you good, very good.
 

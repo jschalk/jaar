@@ -23,7 +23,7 @@ Notice, all of that is completely bipartisan, has nothing to do with the differe
 
 Notice, how **nothing of that applies to Russia**
 
-Russian political system selects for something totally different. It would not be too much of an exaggeration to say that it selects for the qualities diametrically opposite to those that Americans are selecting for.
+Russian political system selects for something totally different. It would not be too much of an exaggeration to say that it selects for the qualities diametrically opposite to what Americans are selecting for.
 
 Let me give you an example
 
@@ -64,7 +64,7 @@ Stalin is the oldest of all, yet he looks considerably better than any of his he
 
 Now why would that be?
 
-Well, the simplest analysis is probably the truest one. All of his henchmen look like shit, because looking like shit is a principal criterion of Stalin’s choice, when he is choosing the people to work with him in government. Stalin would not select anyone better looking, or more imposing, or more charismatic, into his squad. He is doing exactly the opposite. He is selecting meek, controllable people, those he will feel safe being around.
+Well, the simplest analysis is probably the truest one. All of his henchmen look like shit, because looking like shit is a principal criterion of Stalin’s choice, when he is choosing the people to work with him in government. Stalin would not select anyone better looking, or more imposing, or more charismatic, into his squad. He is doing exactly the opposite. He is selecting meek, controllable people, who he will feel safe being around.
 
 <div align="center">
 
@@ -95,7 +95,7 @@ By that point, you may have already grasped my point. Which is:
 
 Why?
 
-Because big people, the people in government are not elected. They are selected by the Big Daddy. And when the Big Daddy is choosing people, he is selecting those who he will be feeling safe and comfortable around. He will be selecting those who look worse, talk worse, have a weaker vibe, are less imposing and less charismatic.
+Because big people, the people in government are not elected. They are selected by the Big Daddy. And when the Big Daddy is choosing people, he is selecting people who he will be feeling safe and comfortable around. He will be selecting people who look worse, talk worse, have a weaker vibe, are less imposing and less charismatic.
 
 He is systematically choosing virgins, and putting them on all the positions of power
 

@@ -464,7 +464,7 @@ class PersonUnit:
             fact_context
         ):
             # WHEN plan is "rangeroot" identify any reason.reason_contexts that are descendants
-            # calculate and set those descendant facts
+            # calculate and set these descendant facts
             # example: zietline range (0-, 1.5e9) is rangeroot
             # example: "zietline,wks" (spllt 10080) is range-descendant
             # there exists a reason reason_context "zietline,wks" with case.reason_state = "zietline,wks"

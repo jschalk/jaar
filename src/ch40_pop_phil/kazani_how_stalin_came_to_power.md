@@ -157,6 +157,6 @@ And it is this personal connection with Lenin - again, acquired to an accidental
 
 [^2]: Such as the market reforms of 1921, that shocked the file and rank of the party
 
-[^3]: As I said earlier, the lion share of grassroots organizations did not feel any need to align themselves with the politics on the top. And those who did, align themselves with Lenin’s opponents.
+[^3]: As I said earlier, the lion share of grassroots organizations did not feel any need to align themselves with the politics on the top. The ones who did, align themselves with Lenin’s opponents.
 
 

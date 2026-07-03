@@ -40,7 +40,7 @@ Let's start with the most important concept in Kegology.
 
 Let's define the term *'prestige'* the way Kazani and others do. A Family with Prestige has status, influence, power. It is something a family either has or doesn't. It cannot be shared. 
 
-The Families that have all the prestige are those in power. If they cooperate no other families will ever have prestige. The coalition will rule forever. However (most of the time) these families do not trust each other and are often in conflict. The conflict can be reasonable or unreasonable. Petty jealously, revenge or lust can motivate a conflict. To gain an upperhand a family can decide to get help from others outside of power. The non-prestigious family provides a service and the prestigious family invites the non-prestigious family into power. 
+The Families in power have all the prestige. If they cooperate no other families will ever have prestige. The coalition will rule forever. However (most of the time) these families do not trust each other and are often in conflict. The conflict can be reasonable or unreasonable. Petty jealously, revenge or lust can motivate a conflict. To gain an upperhand a family can decide to get help from others outside of power. The non-prestigious family provides a service and the prestigious family invites the non-prestigious family into power. 
 
 <div align="center">
 
@@ -54,9 +54,9 @@ Logically this invitation should only be extended when the prestigious family ha
 
 <div align="center"><img src="images/wheel01_intro.webp" alt="Plato head sculpture" width="400"></div>
 
-Any system of centralized power can be represented as a Wheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There is an endless caravan of those without prestige who will do absolutely any service for a chance of getting prestige[6]. Promises don't even have to be made, the implication is obvious.
+Any system of centralized power can be represented as a Wheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There is an endless caravan of families without prestige who will do absolutely any service for a chance of getting prestige[6]. Promises don't even have to be made, the implication is obvious.
 
-<div align="center"><img src="images/wheel02_falling.webp" alt="Wheel diagram showing those that Fall" width="400"></div>
+<div align="center"><img src="images/wheel02_falling.webp" alt="Wheel diagram showing Falling" width="400"></div>
 
 As the Wheel spins there are families that are winning and families that are losing. On the other hand some families lose so much they fall out of power. There is also the "stable" section of the Wheel where families have prestige but their influence does not increase or decrease.  
 
@@ -75,7 +75,7 @@ Why do Families fall? Perhaps the most important member dies or becomes unpopula
 
 <div align="center"><img src="images/wheel03_invitation.webp" alt="Diagram invitation ladder" width="400"></div>
 
-Families only invite those out of power into power when they can provide a service. Something useful to them. That is represented here as a ladder. Those out of power must have a large ladder to even be considered for invitiation[^6]. The obvious example is money. Money is not equal to prestige. But if someone in power wants money then a a ladder made of money can result in an invitation.
+Families only invite another Family out of power into power when they can provide a service. Something useful to them. That is represented here as a ladder. They who are out of power must have a large ladder to even be considered for invitiation[^6]. The obvious example is money. Money is not equal to prestige. But if someone in power wants money then a a ladder made of money can result in an invitation.
 
 <div align="center"><img src="images/wheel04_familyunits.webp" alt="17 FamilyUnits in a Wheel diagram" width="400"></div>
 

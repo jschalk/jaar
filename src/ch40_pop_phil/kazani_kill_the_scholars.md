@@ -27,7 +27,7 @@ Now the second thing you need to understand is how incredibly rare it is for a p
 
 (For the most part, he is just not noticing them, at all)
 
-For the most part, no one in the world has any sort of ideas other than those he has heard or read somewhere, other than those he has borrowed from someone else and, disproportionately, other than those he has absorbed in his formative years
+For the most part, no one in the world has any sort of ideas other than the ideas he has heard or read somewhere, other than the ideas he has borrowed from someone else and, disproportionately, other than the ideas he has absorbed in his formative years
 
 (That makes everyone in the world, from a truck driver to an emperor a walking vessel of the ideas imprinted in his childhood and youth, for anything absorbed at a later stage of life carries a much slighter effect)
 
@@ -41,7 +41,7 @@ WHICH
 
 Raises a question of where do these ideas even come from?
 
-Like, most people have zero ideas other than those they heard somewhere, usually in their youth. But where? From whom? You believe in what has been whispered into your ear, that is clear. But who is the whisperer?
+Like, most people have zero ideas other than the ideas they heard somewhere, usually in their youth. But where? From whom? You believe in what has been whispered into your ear, that is clear. But who is the whisperer?
 
 There is a great temptation to say it is the “intellectuals”. Intellectuals pontificate and reason, the laymen listen and learn
 
@@ -188,7 +188,7 @@ What effect did this produce?
 
 This of course stabilised the power, stabilised the social and political order
 
-As there was no independent second hand idea selling class in the USSR, those in power faced no competition from within the Soviet realm
+As there was no independent second hand idea selling class in the USSR, the ideas of people in power faced no competition from within the Soviet realm
 
 <div align="center"><img src="images/russian_thinkers_tweet.webp" alt="Article image 8" width="700"></div>
 
@@ -240,7 +240,7 @@ As a result, the system of actual beliefs of the Soviet ruling circle was - by t
 
 And that was a major reason why the economic reforms in the USSR turned the way they turned.
 
-It is not only that the elites wanted to plunder the country, to buy castles and mega-yachts. Like, it is an element of the general picture, but only an element of it, whose importance is vastly exaggerated by the envious peasantry. For a scheme to work out, you need more than just the greedy and opportunist elites.
+It is not only that the elites wanted to plunder the country, to buy castles and mega-yachts. Like, it is an element of the general picture, but only an element of it, this element's importance is vastly exaggerated by the envious peasantry. For a scheme to work out, you need more than just the greedy and opportunist elites.
 
 You need:
 

@@ -63,7 +63,7 @@ To keep the power you must eliminate competition. Best of all, you must eliminat
 
 <div align="center"><img src="images/kronosmax_eating.webp" alt="Kronos eating his child" width="500"></div>
 
-Once again, the Kronos Principle doesn't suggest you must eliminate those who already challenge you. That goes without saying. It suggests you must eliminate those who might potentially challenge you in the future. Eliminate even the possibility of a successful competition.
+Once again, the Kronos Principle doesn't suggest you must eliminate any who already challenge you. That goes without saying. It suggests you must eliminate any who might potentially challenge you in the future. Eliminate even the possibility of a successful competition.
 
 When you Kronosmax, you weed out even the seeds of potential competition. And you must Kronosmax to stay in charge in longer. That is why maximizing for the length of rule you necessarily degrade the society/institution you happen to lead.
 

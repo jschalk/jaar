@@ -87,7 +87,7 @@ Link to Sopranos clips of Christopher being a bad vassal
 
 At elite levels, this is not controversial. Loyalty is a currency, and proximity to power becomes a credential in its own right. The problem is, the middle class is taught to think in terms of merit, credentials, and formal achievement. Elite life often runs more openly on trust, vetting, and social proof. It’s more Lindy that way.
 
-There’s a reason you often see the same women move through overlapping circles of famous, rich, and powerful men. A woman who has navigated the inner circle of one powerful man signals that she is a low-chaos actor. She has been vetted by the only people whose opinions the powerful actually respect, their peers.
+There’s a reason you often see the same women move through overlapping circles of famous, rich, and powerful men. A woman who has navigated the inner circle of one powerful man signals that she is a low-chaos actor. She has been vetted by the only people with opinions the powerful actually respect, their peers.
 
 >One of the reasons why certain women rotate among rich and famous men is that they can be trusted. That's why you see so many famous men date the same women.  They are trusted in the network and get the benefits...dating normal girls is unpredictable. 
 ([Skallas on x.com](https://x.com/PaulSkallas/status/1828123461346062760))

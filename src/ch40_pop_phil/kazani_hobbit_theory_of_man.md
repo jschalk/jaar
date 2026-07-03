@@ -123,7 +123,7 @@ We are so used to this Neo-Moral theory of conflict (sweety sweet hobbits fighti
 
 One great example would be Le Morte d’Arthur.
 
-In fact, if I wanted to demonstrate the difference between the Neo-Morality of our days and the traditional morality of yore, I could have hardly chosen two better samples of comparison than Le Morte d’Arthur; and the Lord of the Rings. For despite their lore, and their aesthetics may look vaguely similarish (knights, swords, and magic), the morals, and the mechanics of the world this knights are operating in, could not be more different.
+In fact, if I wanted to demonstrate the difference between the Neo-Morality of our days and the traditional morality of yore, I could have hardly present two better samples of comparison than Le Morte d’Arthur; and the Lord of the Rings. For despite their lore, and their aesthetics may look vaguely similarish (knights, swords, and magic), the morals, and the mechanics of the world this knights are operating in, could not be more different.
 
 (to be continued)
 

@@ -371,7 +371,7 @@ def test_atom_config_NestingOrderExists():
     # When ChangUnit places an PersonAtom in a nested dictionary ChangUnit.personatoms
     # the order of required argments decides the location. The order must be
     # the same. All atom_config elements with two or more required args
-    # must assign to each of those args a nesting order
+    # must assign to each of the args a nesting order
 
     # ESTABLISH / WHEN / THEN
     # grab every atom_config with multiple required args

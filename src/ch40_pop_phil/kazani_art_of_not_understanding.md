@@ -107,14 +107,14 @@ That is because people - in general - hate feeling the power of other people ove
 
 More than that, for your subjects - that is for the populace subject to your power - noticing and formulating that you do in fact have it, is the first sign of growing discontent and rebellion. You cannot rebel against something that does not exist, but when you noticed it does - and called it out - it is basically done.
 
-The interests of power and the opposition are very different, and usually diametrically opposite to each other. If those in power must develop the art of not understanding things, those outside power, on the other hand, must develop a skill of understanding them.
+The interests of power and the opposition are very different, and usually diametrically opposite to each other. If people in power must develop the art of not understanding things, people outside power, on the other hand, must develop a skill of understanding them.
 
 <div align="center">
 
 ### That is why understanding things serves as a surest mark of political disloyalty
 </div>
 
-Someone loyal and devoted to the regime has actually zero incentive to understand anything, the only possible motivation to notice things is if you are actively fomenting a rebellion. Therefore, those in power must be actively punishing those who notice and understand. They are traitors, or will be traitors, or useful idiots for the traitors. For calling things by their names (as the traitors do) always carries a grain of resentment and the opposition to the existing order of things.
+Someone loyal and devoted to the regime has actually zero incentive to understand anything, the only possible motivation to notice things is if you are actively fomenting a rebellion. Therefore, people in power must be actively punishing people who notice and understand. They are traitors, or will be traitors, or useful idiots for the traitors. For calling things by their names (as the traitors do) always carries a grain of resentment and the opposition to the existing order of things.
 
 ---
 
