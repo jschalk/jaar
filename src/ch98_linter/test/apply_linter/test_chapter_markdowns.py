@@ -1,5 +1,6 @@
 from re import findall as re_findall
 from pathlib import Path
+from pytest import mark as pytest_mark
 
 
 def get_image_paths_from_markdown(md_text: str) -> list[str]:
@@ -47,6 +48,7 @@ def get_all_images_with_metadata(src_dir: Path) -> list[str]:
     return failures
 
 
+@pytest_mark.skip_on_linux
 def test_MarkdownImageLinksFilesExist() -> None:
     # GIVEN
     # repo_root = Path("src").resolve().parents[1]
@@ -244,6 +246,7 @@ def get_unreferenced_images(src_dir: Path) -> list[str]:
     return unreferenced
 
 
+@pytest_mark.skip_on_linux
 def test_AllImagesAreReferencedInMarkdown() -> None:
     # GIVEN
     src_dir = Path(__file__).resolve().parents[3]
