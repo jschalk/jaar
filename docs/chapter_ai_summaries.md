@@ -1720,6 +1720,7 @@ Eight named example generators build `PersonUnit`s and `MomentUnit`s programmati
 - A "Create Person Ideas" button that calls `create_lego0002_file` (ch30) to produce a person-scoped idea Excel for the named person.
 - Settings are persisted to a local JSON config file between sessions.
 
+ch96 pass
 # ch97_docs_builder — Chapter Summary
 
 *This summary is authored by AI 5-26-2026.*
