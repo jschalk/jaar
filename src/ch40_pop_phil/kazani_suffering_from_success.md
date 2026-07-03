@@ -17,7 +17,7 @@ As the same events are being discussed with various people, and each tells you h
 
 1. He is lying. Not a word of what he just said is true
 2. He is lying, because he had been a very, very close associate of the late oligarch. And when I say associate, I actually mean a shill, a vassal. A servant.
-3. Now as the former Berezovsky’s servant switched allegiance, and now serves Putin, any kind of association with the former boss is a liability now. Much like St Peter, he repeats a formula of triple denial. Never knew. Never met him. No, we didn’t even talk.
+3. Now as the former Berezovsky’s servant switched allegiance, and now serves Putin, any kind of association with the former Godfather is a liability now. Much like St Peter, he repeats a formula of triple denial. Never knew. Never met him. No, we didn’t even talk.
 
 Now that is the beauty of this book. As all the interviews are put near each other, you can read them all and cross compare. And when you do, you will notice that each and every of his former pawns and bootlickers, tells exactly the same, there is not even much variation in how they put it.
 
@@ -51,7 +51,7 @@ No president of Brazil would (and could not!) give him “the whole country” n
 
 Is it though?
 
-In fact, getting an access to president - by any means necessary - so that he “gives you the whole country” was a perfectly reasonable plan, and a perfectly reasonable expectation… **based on his previous life experience.**
+In fact, getting an access to president - by any means necessary - so that he “gives you the whole country” was a perfectly reasonable strategy, and a perfectly reasonable expectation… **based on his previous life experience.**
 
 For it was exactly what happened with Berezovsky himself. In fact, it serves a good summary of what was happening in Russia through the 1990s:
 
@@ -81,7 +81,7 @@ For an individual, like Boris Berezovsky, a crazy, unlikely, impossible scheme h
 
 And - once it happened - it defines the rest of your life. For you won’t be able to do anything else, seeking to recreate this scheme that worked out once again, and again.
 
-(It was in fact a one time event, and will not repeat in your lifetime. It was possible only under a very particular set of circumstances: the breakdown of a planned economy, with a massive quantity of functional, valuable assets to distribute. Won’t happen again. Nobody will just give you another country, no matter how much you try. But you won’t be able to accept that)
+(It was in fact a one time event, and will not repeat in your lifetime. It was possible only under a very particular set of circumstances: the breakdown of a giant command economy, with a massive quantity of functional, valuable assets to distribute. Won’t happen again. Nobody will just give you another country, no matter how much you try. But you won’t be able to accept that)
 
 So once the scheme worked out (for you) and worked out marvellously, it defines your worldview, and your model of the world. It informs your understanding of how the thing works, and will shape all your actions till your deathbed.
 

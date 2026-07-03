@@ -100,7 +100,7 @@ Now comes another question. What to do.
 
 I don’t mean any global solution, first because it does not exist (a bureaucratic institution simply cannot do it any other way), and second, if it had existed, there is no global, all-powerful actor you could sell it to. There is no omnipresent, omnipotent power waiting to listen to my commands[^2].
 
-I think a correct step would be to create a small-scale non bureaucratic learning environment. That is what I am planning to do.
+I think a correct step would be to create a small-scale non bureaucratic learning environment. That is what I am preparing to do.
 
 Away from the quantitative metrics - they actively destroy what they measure
 
@@ -110,7 +110,7 @@ Away from looking under the lamppost, venture into the unknown
 
 (where you will find yourself ignorant and dumb, and that is perfectly fine)
 
-What I am planning to do, is to recruit a small reading & writing group, and then see how it goes
+What I am going to do, is to recruit a small reading & writing group, and then see how it goes
 
 ---
 

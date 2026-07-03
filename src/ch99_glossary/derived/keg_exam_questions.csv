@@ -19,8 +19,10 @@ Did you read that the keg_definition of 'Revenge' is 'Definition needed or maybe
 "Did you read that the keg_definition of 'Rider' is 'Synonmous with Vassal as a neutral term. Someone who recognizes authority, leadership. 'I ride with that person.''."
 Did you read that the keg_definition of 'Rival' is 'A different FamilyUnit within a Wheel that is in open competition.'.
 Did you read that the keg_definition of 'Scaffold' is 'The only way to get to a wheel if not welcomed.'.
+Did you read that the keg_definition of 'Soldier' is 'As defined by Busta Rhymes in song 'My Shot''.
 Did you read that the keg_definition of 'Stilt' is 'A ladder load-bearing support of a Wheel.'.
 Did you read that the keg_definition of 'Target' is 'A FamilyUnit with prestige.'.
+Did you read that the keg_definition of 'Trooper' is 'A professional member of the armed services of a Nation-State.'.
 "Did you read that the keg_definition of 'Vertical' is 'The height of a Pillar, Ladder, Stilt, or Scaffold. Is it enough to reach?'."
 Did you read that the keg_definition of 'Winner' is 'A FamilyUnit getting more Prestige.'.
 Did you read that the keg_definition of 'axle' is 'The part of the Wheel that load-bears the most. Only Pillars.'.
@@ -150,6 +152,8 @@ Did you read that the keg_definition of 'sort_ordinal' is 'Int that represents w
 Did you read that the keg_definition of 'GrainNum' is 'float first used in ch02. GrainNum represents the smallest fraction allowed'.
 Did you read that the keg_definition of 'PoolNum' is 'float first used in ch02. PoolNum represents any possible subset of the sum of numbers in the pool.'.
 Did you read that the keg_definition of 'WeightNum' is 'float first used in ch02. WeightNum represents the unnormalized value of a ledger key. The sum of all WeightNum values in a ledger is not defined.'.
+Did you read that the keg_definition of 'Boss' is 'definition needed'.
+"Did you read that the keg_definition of 'BossMass' is 'Number that represents how much a Person is expects loyality from a ContactUnit, how much a ContactUnit is expects loyality from a GroupTitle, BossMass inherits from float class float first used in ch03.'."
 Did you read that the keg_definition of 'BreakTerm' is 'str first used in ch03. All str separator classes are BreakTerms. Exists because of the necessity to break experience reality into things so they can be understood.'.
 "Did you read that the keg_definition of 'ContactName' is 'str first used in ch03. Every ContactName object is NameTerm, must follow NameTerm format.'."
 Did you read that the keg_definition of 'FundGrain' is 'float first used in ch03. Smallest Unit of fund_num'.
@@ -158,13 +162,12 @@ Did you read that the keg_definition of 'FundNum' is 'float first used in ch03. 
 Did you read that the keg_definition of 'GroupTitle' is 'str first used in ch03. If contains SepartorTerms(s) it represents a group otherwise its a ContactName.'.
 Did you read that the keg_definition of 'HealerName' is 'str first used in ch03. A NameTerm used to identify a Problem's Healer'.
 Did you read that the keg_definition of 'Lord' is 'Definition needed.'.
-"Did you read that the keg_definition of 'LordMass' is 'Number that represents how much a Person is expects loyality from a ContactUnit, how much a ContactUnit is expects loyality from a GroupTitle, LordMass inherits from float class float first used in ch03.'."
 Did you read that the keg_definition of 'Loyal' is 'Definition needed.'.
-"Did you read that the keg_definition of 'LoyalMass' is 'Number that represents how much a Person is loyal to a ContactUnit, how much a ContactUnit is loyal to a GroupTitle, LoyalMass inherits from float class float first used in ch03.'."
 Did you read that the keg_definition of 'NameTerm' is 'str first used in ch03. All Name string classes should inherit from this class'.
 Did you read that the keg_definition of 'RespectGrain' is 'float first used in ch03. Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!''.
 Did you read that the keg_definition of 'RespectNum' is 'float first used in ch03. RespectNum inherits from float class'.
 Did you read that the keg_definition of 'TitleTerm' is 'str first used in ch03. If a TitleTerm contains SepartorTerms(s) it represents a group otherwise its a single member group of an ContactName.'.
+"Did you read that the keg_definition of 'TrustMass' is 'Number that represents how much a Person is loyal to a ContactUnit, how much a ContactUnit is loyal to a GroupTitle, TrustMass inherits from float class float first used in ch03.'."
 "Did you read that the keg_definition of 'awardee_title' is ', Award seed.'."
 "Did you read that the keg_definition of 'awardunits' is 'Every PlanUnit has AwardUnits that represent who is awarded give_fund and take_fund, Plan seed'."
 "Did you read that the keg_definition of 'contact_cred_mass' is ', Contact seed.'."
@@ -364,6 +367,7 @@ Did you read that the keg_definition of 'Epoch' is 'Definition needed.'.
 Did you read that the keg_definition of 'SparkInt' is 'int first used in ch12. Each Spark is a int that describes the order of data ingestion'.
 Did you read that the keg_definition of 'TimeNum' is 'int first used in ch12. An Integar that can represent a instant on the TimeNumLine'.
 "Did you read that the keg_definition of 'amount' is ', ceckbook arg'."
+Did you read that the keg_definition of 'boss' is 'definition needed'.
 "Did you read that the keg_definition of 'boss_facts' is ', used with Budget Cells'."
 "Did you read that the keg_definition of 'bud_contact_nets' is 'ledger of bud outcome. The PersonUnit that embodies the Budget distrubutes the funds per the PersonUnit contacts. dict[ContactName, FundNum]. FundNum can be negative.'."
 "Did you read that the keg_definition of 'bud_person_name' is ', used with Budget Cells'."
@@ -468,18 +472,18 @@ Did you read that the keg_definition of 'year_monthday_lower' is 'Required field
 Did you read that the keg_definition of 'yr4_leap' is 'A fundamental structure of time for Keg2. Includes 4 years of 365 days (yr4_core) and a leap day. The leap day is the last day.'.
 "Did you read that the keg_definition of 'yr4_leap_length' is 'A C400Constant for building Epochs: 2,103,840 minutes in 4 year cycle'."
 Did you read that the keg_definition of 'all_tranbook' is 'Definition needed.'.
+Did you read that the keg_definition of 'ceckbook' is 'Definition needed.'.
 "Did you read that the keg_definition of 'cumulative_minute' is ', mmthour argDefinition needed.'."
 "Did you read that the keg_definition of 'job_listen_rotations' is ', Moment arg'."
 Did you read that the keg_definition of 'moment_budunit' is 'Definition needed.'.
+Did you read that the keg_definition of 'moment_ceckbook' is 'Definition needed.'.
 Did you read that the keg_definition of 'moment_epoch_hour' is 'Definition needed.'.
 Did you read that the keg_definition of 'moment_epoch_month' is 'Definition needed.'.
 Did you read that the keg_definition of 'moment_epoch_weekday' is 'Definition needed.'.
-Did you read that the keg_definition of 'moment_ceckbook' is 'Definition needed.'.
 Did you read that the keg_definition of 'moment_static' is 'Used to identify if the data can change or must be identify when the Moment of instantization.'.
 Did you read that the keg_definition of 'moment_timeoffi' is 'Definition needed.'.
 Did you read that the keg_definition of 'momentunit' is 'Definition needed.'.
 Did you read that the keg_definition of 'offi_times' is 'Definition needed.'.
-Did you read that the keg_definition of 'ceckbook' is 'Definition needed.'.
 Did you read that the keg_definition of 'personbudhistorys' is 'Definition needed.'.
 "Did you read that the keg_definition of 'weekday_label' is ', mmtweek arg'."
 "Did you read that the keg_definition of 'weekday_order' is ', mmtweek arg'."
@@ -633,10 +637,10 @@ Did you read that the keg_definition of 'k_vld' is '5 character abbreviation of 
 Did you read that the keg_definition of 'lego' is '5 character abbreviation of legox_mst. stage_type_order=13 File buildout of Moments and PersonUnits. Word used to describe the end state of the core ETL pipeline. All core data should be in the database. Files may still be accessible. KPIs should all be sourced from it.'.
 Did you read that the keg_definition of 'legox_mst' is 'stage_type_order=13 File buildout of Moments and PersonUnits'.
 Did you read that the keg_definition of 'mmtbudd' is 'abbv for moment_budunit'.
+Did you read that the keg_definition of 'mmtceck' is 'abbv for moment_ceckbook'.
 Did you read that the keg_definition of 'mmthour' is 'abbv for moment_epoch_hour'.
 Did you read that the keg_definition of 'mmtmont' is 'abbv for moment_epoch_month'.
 Did you read that the keg_definition of 'mmtoffi' is 'abbv for moment_timeoffi'.
-Did you read that the keg_definition of 'mmtceck' is 'abbv for moment_ceckbook'.
 Did you read that the keg_definition of 'mmtunit' is 'abbv for momentunit'.
 Did you read that the keg_definition of 'mmtweek' is 'abbv for moment_epoch_weekday'.
 Did you read that the keg_definition of 'moment_ote1_agg' is 'Create Database Table that holds all spark_num to bud_time pairs. Include moment_rope and person_name'.
@@ -685,6 +689,7 @@ Did you read that the keg_definition of 'pitchs' is 'Definition needed.'.
 Did you read that the keg_definition of 'request' is 'Ch33 Definition needed.'.
 Did you read that the keg_definition of 'finance' is 'Definition needed.'.
 Did you read that the keg_definition of 'financial' is 'Definition needed.'.
+"Did you read that the keg_definition of 'American' is 'Defined by Joell Ortiz 'Be American, express yourself and take the credit' Notice also what he says about 'you join 'em'. Also relating to the lands, peoples, societies, and governments of the Americas'."
 "Did you read that the keg_definition of 'Hayek' is 'Fredrich Hayek, philosopher. Often incorrectly interpreted and since he's dead he can't refute them.'."
 Did you read that the keg_definition of 'Hobbit' is 'Part of Kazani theory 'The Hobbit Theory of Man' that our grandparents accepted evil within us. Not so now.'.
 Did you read that the keg_definition of 'Kronos' is 'Greek God of War and Time. Known for eating his children.'.
@@ -699,12 +704,15 @@ Did you read that the keg_definition of 'knee' is 'Knee and Kneel used to conote
 Did you read that the keg_definition of 'kronosmax' is 'To proactively elimanate not just current threats but potential threats to one's prestige.'.
 Did you read that the keg_definition of 'ladder' is 'A requirement for an invitation. The FamilyUnit out of power must have one to get prestige.'.
 Did you read that the keg_definition of 'lord' is 'Definition needed.'.
+Did you read that the keg_definition of 'losing' is 'The act of a FamilyUnit getting less Prestige.'.
 Did you read that the keg_definition of 'loyal' is 'Definition needed.'.
+Did you read that the keg_definition of 'pay' is 'If you want something you have to pay for it.'.
 Did you read that the keg_definition of 'power' is 'Not used in codebase.'.
 Did you read that the keg_definition of 'prestige' is 'An instance of Prestige.'.
 "Did you read that the keg_definition of 'ride' is 'The act of recognizing authority, leadership. 'Who do I ride with?''."
 Did you read that the keg_definition of 'rival' is 'A different FamilyUnit within a Wheel that is in open competition.'.
 Did you read that the keg_definition of 'shill' is 'A Rider for a bad person.'.
+Did you read that the keg_definition of 'trooper' is 'A professional member of the armed services of a Nation-State.'.
 Did you read that the keg_definition of 'winner' is 'A FamilyUnit getting more Prestige.'.
 Did you read that the keg_definition of 'winning' is 'The act of a FamilyUnit getting more Prestige.'.
 Did you read that the keg_definition of 'Climb' is 'To connote the action a FamilyUnit takes to gain Prestige.'.
@@ -712,6 +720,7 @@ Did you read that the keg_definition of 'Climb' is 'To connote the action a Fami
 Did you read that the keg_definition of 'Fall' is 'When a FamilyUnit loses all Prestige and exits power.'.
 Did you read that the keg_definition of 'KegWheel' is 'Theory of Political Power learned from Kamil Kazani. The political world changing is represented as a wheel where some people are going up in Prestige and some are going down. Those going down are incentized to cause chaos to try to get back up.'.
 Did you read that the keg_definition of 'Losing' is 'The act of a FamilyUnit getting less Prestige.'.
+Did you read that the keg_definition of 'Pay' is 'If you want something you have to pay for it.'.
 Did you read that the keg_definition of 'Prestige' is 'Within KegWheel Theory Prestige is the measure of the zero-sum game of power. Any Prestige gained is by definition someone else's lost. Within a MomentUnit. Not used in codebase.'.
 Did you read that the keg_definition of 'Shot' is 'I'm not throwing away my shot.'.
 Did you read that the keg_definition of 'Stable' is 'FamilyUnit with prestige and not winning or losing.'.
@@ -724,12 +733,17 @@ Did you read that the keg_definition of 'cling' is 'To connote the action a Fami
 Did you read that the keg_definition of 'discipline' is 'A moment that has Discipline. Check 'Discipline' definition.'.
 Did you read that the keg_definition of 'fall' is 'When a FamilyUnit loses all Prestige and exits power.'.
 Did you read that the keg_definition of 'jump' is 'To use keg requires a human to jump and try. Not easy. Not used in codebase.'.
+Did you read that the keg_definition of 'kneeler' is 'A FamilyUnit that sets all it's BossMass to one different FamilyUnit.'.
 Did you read that the keg_definition of 'loser' is 'A FamilyUnit getting less Prestige.'.
-Did you read that the keg_definition of 'losing' is 'The act of a FamilyUnit getting less Prestige.'.
 Did you read that the keg_definition of 'revenge' is 'Definition needed or maybe not.'.
 Did you read that the keg_definition of 'shot' is 'I'm not throwing away my shot.'.
+Did you read that the keg_definition of 'soldier' is 'As defined by Busta Rhymes in song 'My Shot''.
 Did you read that the keg_definition of 'stable' is 'FamilyUnit with prestige and not winning or losing.'.
+Did you read that the keg_definition of 'valor' is 'As defined in 'From Valor to Pedigree' book.'.
 Did you read that the keg_definition of 'welcome' is 'For a FamilyUnit outside a wheel to get into the Wheel it must be invited.'.
 Did you read that the keg_definition of 'wheel' is 'Refers to the KegWheel concept or the wheel concept in library distribution.'.
+Did you read that the keg_definition of 'wheelers' is 'FamilyUnits with Prestige and thus part of the Wheel'.
+Did you read that the keg_definition of 'Calcite' is 'Reserved for use with Calcite app.'.
 Did you read that the keg_definition of 'Team' is 'Definition needed.'.
+Did you read that the keg_definition of 'calcite' is 'Reserved for use with Calcite app.'.
 Did you read that the keg_definition of 'team' is 'Definition needed.'.

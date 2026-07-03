@@ -8,8 +8,8 @@ from ch03_contact._ref.ch03_semantic_types import (
     RespectGrain,
     RespectNum,
     default_groupmark_if_None,
-    LoyalMass,
-    LordMass,
+    TrustMass,
+    BossMass,
 )
 from ch03_contact.group import (
     GroupTitle,
@@ -57,15 +57,15 @@ class ContactUnit:
     contact_name: ContactName = None
     groupmark: str = None
     respect_grain: RespectGrain = None
-    contact_cred_mass: LordMass = None
-    contact_debt_mass: LoyalMass = None
+    contact_cred_mass: BossMass = None
+    contact_debt_mass: TrustMass = None
     # special attribute: static in json, in memory it is deleted after loading and recalculated during saving.
     memberships: dict[ContactName, MemberShip] = None
     # calculated fields
     credor_pool: RespectNum = None
     debtor_pool: RespectNum = None
-    irrational_contact_debt_mass: LoyalMass = None  # set by listening process
-    inallocable_contact_debt_mass: LoyalMass = None  # set by listening process
+    irrational_contact_debt_mass: TrustMass = None  # set by listening process
+    inallocable_contact_debt_mass: TrustMass = None  # set by listening process
     # set by thinkout()
     fund_give: FundNum = None
     fund_take: FundNum = None
@@ -82,18 +82,18 @@ class ContactUnit:
 
     def set_credor_contact_debt_mass(
         self,
-        contact_cred_mass: LordMass = None,
-        contact_debt_mass: LoyalMass = None,
+        contact_cred_mass: BossMass = None,
+        contact_debt_mass: TrustMass = None,
     ):
         if contact_cred_mass is not None:
             self.set_contact_cred_mass(contact_cred_mass)
         if contact_debt_mass is not None:
             self.set_contact_debt_mass(contact_debt_mass)
 
-    def set_contact_cred_mass(self, contact_cred_mass: LordMass):
+    def set_contact_cred_mass(self, contact_cred_mass: BossMass):
         self.contact_cred_mass = contact_cred_mass
 
-    def set_contact_debt_mass(self, contact_debt_mass: LoyalMass):
+    def set_contact_debt_mass(self, contact_debt_mass: TrustMass):
         self.contact_debt_mass = contact_debt_mass
 
     def get_contact_cred_mass(self):
@@ -111,12 +111,12 @@ class ContactUnit:
         self.fund_agenda_ratio_take = 0
 
     def add_irrational_contact_debt_mass(
-        self, x_irrational_contact_debt_mass: LoyalMass
+        self, x_irrational_contact_debt_mass: TrustMass
     ):
         self.irrational_contact_debt_mass += x_irrational_contact_debt_mass
 
     def add_inallocable_contact_debt_mass(
-        self, x_inallocable_contact_debt_mass: LoyalMass
+        self, x_inallocable_contact_debt_mass: TrustMass
     ):
         self.inallocable_contact_debt_mass += x_inallocable_contact_debt_mass
 
@@ -174,8 +174,8 @@ class ContactUnit:
     def add_membership(
         self,
         group_title: GroupTitle,
-        group_cred_mass: LordMass = None,
-        group_debt_mass: LoyalMass = None,
+        group_cred_mass: BossMass = None,
+        group_debt_mass: TrustMass = None,
     ):
         x_membership = membership_shop(group_title, group_cred_mass, group_debt_mass)
         self.set_membership(x_membership)
@@ -297,8 +297,8 @@ def contactunit_get_from_dict(contactunit_dict: dict, groupmark: str) -> Contact
 
 def contactunit_shop(
     contact_name: ContactName,
-    contact_cred_mass: LordMass = None,
-    contact_debt_mass: LoyalMass = None,
+    contact_cred_mass: BossMass = None,
+    contact_debt_mass: TrustMass = None,
     groupmark: str = None,
     respect_grain: float = None,
 ) -> ContactUnit:

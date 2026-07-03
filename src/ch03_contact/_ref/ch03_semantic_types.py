@@ -75,13 +75,13 @@ class RespectGrain(float):
     pass
 
 
-class LoyalMass(float):
-    """LoyalMass inherits from float class"""
+class TrustMass(float):
+    """TrustMass inherits from float class"""
 
     pass
 
 
-class LordMass(float):
-    """LordMass inherits from float class"""
+class BossMass(float):
+    """BossMass inherits from float class"""
 
     pass

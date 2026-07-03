@@ -52,8 +52,8 @@ from ch97_docs_builder._ref.ch97_semantic_types import (
     TimeNum,
     TitleTerm,
     WeightNum,
-    LordMass,
-    LoyalMass,
+    BossMass,
+    TrustMass,
     WorldName,
 )
 from ch97_docs_builder.glossary_definition import (
@@ -354,8 +354,8 @@ def get_all_semantic_types_with_doc_strs() -> dict[str, str]:
         HealerName.__name__: inspect_getdoc(HealerName("")),
         KnotTerm.__name__: inspect_getdoc(KnotTerm("")),
         LabelTerm.__name__: inspect_getdoc(LabelTerm("")),
-        LordMass.__name__: inspect_getdoc(LordMass(0)),
-        LoyalMass.__name__: inspect_getdoc(LoyalMass(0)),
+        BossMass.__name__: inspect_getdoc(BossMass(0)),
+        TrustMass.__name__: inspect_getdoc(TrustMass(0)),
         PitchID.__name__: inspect_getdoc(PitchID("")),
         ManaGrain.__name__: inspect_getdoc(ManaGrain(0)),
         ManaNum.__name__: inspect_getdoc(ManaNum(0)),

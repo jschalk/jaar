@@ -10,7 +10,12 @@
 
 You want to be a good person. You want to help your family and friends. Be good to the in-group. What to do now?
 
-You need to pay for what you want. This may seem obvious but it's important to note that many people, in fact most people, do not feel they get what they pay for. For example I donated what felt like lots of money to the Obama presidential campaign and I got the opposite of what I felt I paid for. To pay for what you want and not cheat to the maximum possible you must have faith that there's a small chance it's worth it. 
+<div align="center">
+
+#### You must pay for what you want.
+</div>
+
+Many people, maybe even most people, do not feel they get what they pay for and so it is better to always hustle, ie take everything they can for anyone else whenever they can. For example I donated what felt like lots of money to the Obama presidential campaign and I got the opposite of what I felt I paid for. To pay for what you want and not cheat to the maximum possible you must have faith that there's a small chance it's worth it. 
 
 So if you've decided you will pay for what you want. then you've got to decide what you want. How do you know what you want? If you made a list of all the things you want and then ranked them by poynts and 
 

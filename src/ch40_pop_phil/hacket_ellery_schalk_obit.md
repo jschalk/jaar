@@ -1,0 +1,27 @@
+# Ellery Stowell Schalk
+
+**Date:** 1997-10-01  
+**Author:** David Hackett  
+**Source:** https://www.historians.org/perspectives-article/in-memoriam-october-1997-october-1997/  
+**Copied to Keg:** 2026-06-30  
+
+Ellery Stowell Schalk, professor of history at the University of Texas at El Paso and an authority on early modern France, died of cancer on February 1, 1997, at his home in El Paso. He was 58. He is survived by his wife, Ninon Peugeot Schalk, and four sons.
+
+He was born November 10, 1938, in Pittsburgh, Pennsylvania, and raised Northampton, Massachusetts. He received his B.A degree in 1961 from Wesleyan University. A year of study at the Sorbonne in Paris (1965-66) cemented his lifelong love of French history, society, and culture. He earned his M.A and Ph.D. (1962 and 1970) at the University of California at Berkeley. He taught for a year as an instructor in the civilization program at the University of Chicago before coming to UTEP in 1970 as assistant professor. He rose through the ranks, becoming professor in 1987. He served as chair of the history department from 1986 to 1988, and again in 1990-91.
+
+Schalk rapidly developed an international reputation after the publication of his highly acclaimed book on the French nobility, From Valor to Pedigree (1986). A decade later the book was published in France as L’Epee et le Sang (1996). In that path-breaking work, Schalk used study of mentalitis to trace the evolution of the concept of nobility in the 16th and 17th centuries.
+
+Schalk’s interest in the nobility began as a graduate student at the University of California at Berkeley, where he completed a Ph.D. dissertation under William J. Bouwsma on the concepts of the nobility in France. His early published work continued that focus with articles entitled “The Appearance and Reality of Nobility in France during the Wars of Religion” (1976); “Ennoblement in France from 1390-1650” (1982); and “Nobility and the Challenges of the Modern World in Early Modern France” (1982). In 1988 he edited a festschrift by former students of William Bouwsma entitled Culture, Society and Religion in Early Modern Europe, published as a volume of Historical Reflections/Reflexions Historiques, In the following decade, he published another eight major articles in journals and collected volumes. Recently he contributed chapters to Princes, Patronage, and the Nobility (1991); Society and Institutions in Early Modern France (1991); and Evenement, identite et histoire (1991).
+
+At the time of his death, Schalk was working on a history of Marseilles from the late 15th to the early 18th centuries, based on extensive research in the archives of Marseilles conducted over the last decade, In his new book Schalk proposed to carry out his study of mentalites to the urban elites, intertwining social, political, and religious factors to explain the transformation of Marseilles from a medieval to a modern city. Proposals are under way for a group of scholars, led by David Schalk of Vassar College, to complete the unfinished manuscript and bring it to publication.
+
+Throughout his career, Schalk accepted appointments as a visiting professor at universities throughout North America and Europe. He also served as president of the Society for French Historical Studies (1991-92), as program committee member (1990-91), and as a member of the executive committee (1991-94). He was an active member of the Western Society for French History, for which he served as council member (1978-82 and 1985-88), as local arrangements committee member, and as program committee member. He was also active in the Sixteenth Century Studies Conference in which he served as chair and member of the nominating committee.
+
+Schalk was a much-loved and respected teacher at the University of Texas at El Paso. Students who got to know him discovered a genial and unpretentious man who had a vast knowledge of the early modern period in Europe, and France in particular. His major effort was to narrow the gap between European and American history, teaching the latter in a more international context. For many years he taught “America and its European Heritage,” a two-semester course that began with the Renaissance and traced major events on both continents to the present. More than once a confused student reported at the beginning of the semester that he must be in the wrong course because the professor was talking about the Renaissance in an American history course. Recently, he developed a mirror image of the course that he taught to French students at the University of Versailles-Saint Quentin.
+
+One outgrowth of his international research and teaching was his commitment to foreign study opportunities for students. In recent years he had developed exchange programs between UTEP and the University of Versailles-Saint Quentin in France and the University of Ulster at Coleraine in Northern Ireland.
+
+Our department has lost a genial colleague, who contributed much to creating the close-knit and friendly atmosphere in the UTEP history department that has benefited all of us. Despite the scholarly success he met in later years, Schalk always remained a modest and unassuming man. Many colleagues learned of his many accomplishments only after he passed away. He truly embodied in his personality the classic academic ideal of “a gentleman and a scholar.”
+
+David A. Hackett  
+*University of Texas at El Paso*

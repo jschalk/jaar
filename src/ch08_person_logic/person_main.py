@@ -58,8 +58,8 @@ from ch08_person_logic._ref.ch08_semantic_types import (
     RespectGrain,
     RespectNum,
     RopeTerm,
-    LordMass,
-    LoyalMass,
+    BossMass,
+    TrustMass,
 )
 from ch08_person_logic.person_config import max_tree_traverse_default
 from ch08_person_logic.tree_metric import TreeMetrics, treemetrics_shop
@@ -317,8 +317,8 @@ class PersonUnit:
     def add_contactunit(
         self,
         contact_name: ContactName,
-        contact_cred_mass: LordMass = None,
-        contact_debt_mass: LoyalMass = None,
+        contact_cred_mass: BossMass = None,
+        contact_debt_mass: TrustMass = None,
     ):
         x_knot = self.knot
         contactunit = contactunit_shop(
@@ -343,8 +343,8 @@ class PersonUnit:
     def edit_contactunit(
         self,
         contact_name: ContactName,
-        contact_cred_mass: LordMass = None,
-        contact_debt_mass: LoyalMass = None,
+        contact_cred_mass: BossMass = None,
+        contact_debt_mass: TrustMass = None,
     ):
         if self.contacts.get(contact_name) is None:
             raise ContactMissingError(f"ContactUnit '{contact_name}' does not exist.")

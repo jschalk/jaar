@@ -85,7 +85,7 @@ Now what you need to understand is that this process started earlier, much earli
 
 What was there before the Bolsheviks?
 
-In the beginning, you did not have any “Bolsheviks”. What you had is the Russian Social Democrat Workers Party (the Old Party). In this Old Party Lenin was just one of many, very many party bosses of the roughly equal rank, and influence.
+In the beginning, you did not have any “Bolsheviks”. What you had is the Russian Social Democrat Workers Party (the Old Party). In this Old Party Lenin was just one of many, very many party chiefs of the roughly equal rank, and influence.
 
 That did not satisfy Lenin. He wanted to have a greater degree of control over the whole structure. And yet, that was difficult to achieve, practically speaking.
 
@@ -95,15 +95,15 @@ How was the Old Party organised?
 
 Basically, it included the leadership (mostly emigre intellectuals living in Switzerland, etc) and tons of grassroots organisations scattered all over the Russian empire
 
-One thing you need to know is that this old party was a very loose structure. For the most part, grassroots cells in Russian provinces lived in different universes than the big bosses in Switzerland. There was limited contact exacerbated by the huge cultural gap. The grassroots orgs had different concerns than the bosses in Zurich
+One thing you need to know is that this old party was a very loose structure. For the most part, grassroots cells in Russian provinces lived in different universes than the big heads in Switzerland. There was limited contact exacerbated by the huge cultural gap. The grassroots orgs had different concerns than the chiefs in Zurich
 
 One implication of that being:
 
-The battles on Olympus (between) the bosses did not necessarily directly translate to the grassroots orgs, and could have surprisingly limited impact on the situation on the ground
+The battles on Olympus (between) the chiefs did not necessarily directly translate to the grassroots orgs, and could have surprisingly limited impact on the situation on the ground
 
 On the ground, all remotely socialist orgs (Marxist or not) were usually seen as one, basically the same, and often mingled together despite whatever battles may be happening in Zurich
 
-Which created a major problem for any boss who would want to seize control over the grassroots orgs in Russia. That was not easy to do, objectively speaking
+Which created a major problem for any chief who would want to seize control over the grassroots orgs in Russia. That was not easy to do, objectively speaking
 
 Now here we come to why Lenin needed Stalin in the first place
 

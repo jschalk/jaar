@@ -9,7 +9,7 @@
 ---
 
 
-<div align="center"><img src="images/frodo_gandalf1.webp" alt="Frodo happy and trusting Gandalf" width="500"></div>
+<div align="center"><img src="images/frodo_gandalf1.webp" alt="Frodo happy hanging with Gandalf" width="500"></div>
 
 One of the most curious intellectual developments of modernity is the rise of what I would call the *Hobbit Theory of Man.*
 
@@ -19,7 +19,7 @@ Traditional systems of morality - if you come from a Western culture, you may ta
 
 (Hence - “forgive me for I have sinned”-styled formulas. Nobody is asking whether you’ve sinned or not, just postulating that you did, with a 100% certainty. And that is because you are not presumed to be very good. You are presumed to have a dark side)
 
-That very fact - humans not being that good, really - serves as an explanation of the problem of evil in a pretty much every universalist teaching that I am aware of. There is no great wonder that the evil is happening. It would be weird if it did not, for every man, and every woman without exception is sort of evil-ish, and it is this individual evilish-ness of absolutely everyone in the world that explains why evil exists.
+That very fact - humans not being that good, really - explains the problem of evil in a pretty much every universalist teaching that I am aware of. There is no great wonder that the evil is happening. It would be weird if it did not, for every man, and every woman without exception is sort of evil-ish, and it is this individual evilish-ness of absolutely everyone in the world that explains why evil exists.
 
 Everyone is part-good. Everyone is part-evil. Everyone has a full potential to act in a good or in a bad way, and is doing both good and bad stuff in real life. Which - paradoxically and inconceivably for a modern person - implies that there is really no fundamental difference between the “good” and “bad” people. Goodness and badness is conditional, is circumstantial, and everyone of us is perfectly capable of both.
 

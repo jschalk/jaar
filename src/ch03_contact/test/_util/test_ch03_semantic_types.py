@@ -10,8 +10,8 @@ from ch03_contact._ref.ch03_semantic_types import (
     RespectGrain,
     RespectNum,
     TitleTerm,
-    LordMass,
-    LoyalMass,
+    BossMass,
+    TrustMass,
     default_groupmark_if_None,
 )
 from ch99_glossary.ch_keyword import Ch03Keywords as kw, ExampleStrs as exx
@@ -151,21 +151,21 @@ def test_RespectNum_Exists():
     assert inspect_getdoc(y_RespectNum) == "RespectNum inherits from float class"
 
 
-def test_LordMass_Exists():
+def test_BossMass_Exists():
     # ESTABLISH
     x_float = 0.045
     # WHEN
-    y_LordMass = LordMass(x_float)
+    y_BossMass = BossMass(x_float)
     # THEN
-    assert y_LordMass == x_float
-    assert inspect_getdoc(y_LordMass) == "LordMass inherits from float class"
+    assert y_BossMass == x_float
+    assert inspect_getdoc(y_BossMass) == "BossMass inherits from float class"
 
 
-def test_LoyalMass_Exists():
+def test_TrustMass_Exists():
     # ESTABLISH
     x_float = 0.045
     # WHEN
-    y_LoyalMass = LoyalMass(x_float)
+    y_TrustMass = TrustMass(x_float)
     # THEN
-    assert y_LoyalMass == x_float
-    assert inspect_getdoc(y_LoyalMass) == "LoyalMass inherits from float class"
+    assert y_TrustMass == x_float
+    assert inspect_getdoc(y_TrustMass) == "TrustMass inherits from float class"

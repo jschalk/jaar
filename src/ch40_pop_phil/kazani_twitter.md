@@ -34,3 +34,30 @@ It is very important to understand that. Your pain is not worth that much. If yo
 What you can do, is suggest them another *positive* image of themselves. Which makes perfect sense. They need positive image, and they have it, but you can give them another, provided that it's also positive
 <br>
 Positive self-image (which they have) can be replaced by another one
+
+
+On June 28, 2026 in response to another tweet mocking someone's personal experience.
+> The most important thing you must keep in mind is to never ever sneer. Never ever. In fact, if you register a sneer in someone’s comment, that means the comment is dumb & they are as wrong as they could be
+> 
+> Sneer -> dumb as hell
+
+
+On June 28, 2026 in response to someone complimenting a politician's image and action. 
+> 1. Lots of people don’t believe in anything
+> 2. Lots of people who believe in something find it necessary to act performatively repulsive
+> 3. Having convictions and *not* feeling obliged to always ostracize, like, everyone, is extremely extremely rare
+>
+> (like unicorns)
+
+
+On June 29, 2026
+> The dumbest accusation of all is an accusation in hypocrisy
+>
+> True consistency requires - at the basic minimum - omniscience and omnipresence (+ also, probably omnipotence). Short of that, every life lived is full of hypocrisy and self-contradictions, in words and actions
+
+On June 30, 2026 responding to someone who has observed a writer going through the effort of writing a paper with their own voice and then choosing to replace their voice with an AI voice.
+> That is because people are terrified to use their own voice. Like, scared to hell, expecting some sort of punishment
+> 
+> Imagine a generative AI user as an abused dog, and you won't be far from truth. The primary purpose of the generative AI slop is to escape beatings
+
+<div align="center"><img src="images/kazani_scared_of_voice_tweet.webp" alt="A horse before the cart" width="500"></div>

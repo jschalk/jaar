@@ -55,9 +55,9 @@ Naturally, this policy was quite unpopular. And yet, it persisted through Karimo
 
 Then he died. And with his death, in 2016, the power naturally fell into the hands of his younger deputies and lieutenants. How much younger? About 20 years. That was the age difference between the old, and the new president of Uzbekistan
 
-Now the same people who served Karimov, and enforced his agenda - were much younger, and formed in a different age, and shaped by different kinds of discourses. If they executed Karimov’s orders, that was solely because they obeyed the supreme boss, not because they believed in them. They were quite literally just following orders.
+Now the same people who served Karimov, and enforced his agenda - were much younger, and formed in a different age, and shaped by different kinds of discourses. If they executed Karimov’s orders, that was solely because they obeyed the supreme chief, not because they believed in them. They were quite literally just following orders.
 
-So when the big boss died, they did not see much reason to continue his policy any longer. Because again, the population control enforcement (through forced sterilisations etc) was extremely unpopular, and always had been. So, it was just too tempting to give their own populace a concession.
+So when the big chief died, they did not see much reason to continue his policy any longer. Because again, the population control enforcement (through forced sterilisations etc) was extremely unpopular, and always had been. So, it was just too tempting to give their own populace a concession.
 
 In just a couple of years after Karimov’s death, the policy of coercive population control seems to be rolled back, and it seems to be rolled back pretty much completely.
 

@@ -4,7 +4,7 @@
 - ch00_py: Keyword, ch00, filename, glossary, keyword, semantic_type, shop, src
 - ch01_keyword: ch01, question_tier, sort_ordinal, valid_ch
 - ch02_allot: GrainNum, PoolNum, WeightNum, ch02
-- ch03_contact: BreakTerm, ContactName, FundGrain, FundNum, GroupMark, GroupTitle, HealerName, Lord, LordMass, Loyal, LoyalMass, NameTerm, RespectGrain, RespectNum, TitleTerm, awardee_title, awardunits, ch03, contact_cred_mass, contact_debt_mass, contact_name, credor_pool, debtor_pool, fund_agenda_give, fund_agenda_ratio_give, fund_agenda_ratio_take, fund_agenda_take, fund_give, fund_grain, fund_take, give_force, group_cred_mass, group_debt_mass, group_title, groupmark, groupunits, inallocable_contact_debt_mass, irrational_contact_debt_mass, labor_title, labors, memberships, rational, respect_grain, solo, take_force, thinkout, workforceheir, workforceunit
+- ch03_contact: Boss, BossMass, BreakTerm, ContactName, FundGrain, FundNum, GroupMark, GroupTitle, HealerName, Lord, Loyal, NameTerm, RespectGrain, RespectNum, TitleTerm, TrustMass, awardee_title, awardunits, ch03, contact_cred_mass, contact_debt_mass, contact_name, credor_pool, debtor_pool, fund_agenda_give, fund_agenda_ratio_give, fund_agenda_ratio_take, fund_agenda_take, fund_give, fund_grain, fund_take, give_force, group_cred_mass, group_debt_mass, group_title, groupmark, groupunits, inallocable_contact_debt_mass, irrational_contact_debt_mass, labor_title, labors, memberships, rational, respect_grain, solo, take_force, thinkout, workforceheir, workforceunit
 - ch04_workforce: LaborHeir, ch04, laborheir, parent_solo, person, person_name, person_name_is_workforce
 - ch05_rope: FactNum, FirstLabel, KnotTerm, LabelTerm, ManaGrain, ReasonNum, RopeTerm, ch05, fact, knot, mana_grain, meaning, parent_rope
 - ch06_reason: active_requisite, case_active, case_task, cases, ch06, fact_context, fact_lower, fact_state, fact_upper, factheirs, factunits, parent_heir_active, reason_active, reason_context, reason_divisor, reason_lower, reason_state, reason_task, reason_upper, reasonunits
@@ -13,7 +13,7 @@
 - ch09_person_atom: CRUD_command, DELETE, INSERT, UPDATE, atom, awardee_title_ERASE, ch09, column_ordinal, contact_name_ERASE, crud, fact_context_ERASE, group_title_ERASE, healer_name_ERASE, labor_title_ERASE, nesting_order, normal_specs, normal_table_name, person_name_ERASE, plan_rope_ERASE, reason_context_ERASE, reason_state_ERASE
 - ch10_person_lesson: FaceName, Lasso, MomentRope, ch10, gut, job, lasso, moment, moment_mstr_dir, moment_rope, spark_face, spark_num
 - ch11_person_listen: ch11, listener, speaker
-- ch12_bud: Epoch, SparkInt, TimeNum, amount, boss_facts, bud_contact_nets, bud_person_name, bud_time, celldepth, ch12, epoch, found_facts, magnitude, offi_time, offi_time_max, person_contacts_net, personadjust, personspark_facts, quota, time, tran_time
+- ch12_bud: Epoch, SparkInt, TimeNum, amount, boss, boss_facts, bud_contact_nets, bud_person_name, bud_time, celldepth, ch12, epoch, found_facts, magnitude, offi_time, offi_time_max, person_contacts_net, personadjust, personspark_facts, quota, time, tran_time
 - ch13_keep: ManaNum, care_amount, cares, ch13, cycle_carees_curr, cycle_carees_prev, cycle_count, cycle_max, doctor_count, doctor_rank_num, doctor_rank_percent, keep_patientledgers, keep_point_magnitude, need_bill_amount, need_dues, need_got_curr, need_got_prev, need_paid_amount, need_paid_bool, need_paid_rank_num, need_paid_rank_percent, need_results, patient_count, patient_rank_num, patient_rank_percent, rewards_count, rewards_magnitude, riverbooks, rivercares, rivergrades
 - ch14_time: Anaday, Baileyday, Chiday, Danceday, Eastday, EpochLabel, TimeShoe, c100, c100_length, c400_core, c400_core_length, c400_leap, c400_leap_length, c400_number, ch14, clock, creg, cumulative_day, day, day_length, dayly_duration_min, dayly_lower_min, days, days_lower_day, days_upper_day, duration, epoch_label, epoch_length, epoch_min, every_xdays, every_xweeks, five, hour, hour_label, hours_config, month_label, monthday_index, monthly_duration_days, monthly_monthday_lower, months_config, range_duration, range_lower_min, readable, week, weekdays_config, weekly_duration_min, weekly_lower_min, weeks, weeks_lower_week, weeks_upper_week, year, year_length, year_monthday_duration_days, year_monthday_lower, yr1_jan1_offset, yr4_core, yr4_core_length, yr4_leap, yr4_leap_length
 - ch15_moment: all_tranbook, ceckbook, ch15, cumulative_minute, job_listen_rotations, moment_budunit, moment_ceckbook, moment_epoch_hour, moment_epoch_month, moment_epoch_weekday, moment_static, moment_timeoffi, momentunit, offi_times, personbudhistorys, weekday_label, weekday_order
@@ -33,9 +33,9 @@
 - ch33_pitch: Deal, Gift, Peer, PitchID, PitchUnit, ch33, deal, gift, offer, peer, pitch, pitch_id, pitcher_name, pitchs, request
 - ch34_finance: ch34, finance, financial
 - ch35_person_viewer: ch35
-- ch40_pop_phil: Hayek, Hobbit, Kronos, Monopoly, Ride, Shill, ch40, ch90, climb, cow, invitation, invite, knee, kronosmax, ladder, lord, loyal, pay, power, prestige, ride, rival, shill, winner, winning
-- ch41_wheel: Climb, Discipline, Fall, KegWheel, Losing, Pay, Prestige, Shot, Stable, Welcome, Wheel, Winning, alien, bearing, ch41, cling, discipline, fall, jump, loser, losing, revenge, shot, stable, welcome, wheel
-- ch90_world_app: Team, team
+- ch40_pop_phil: American, Hayek, Hobbit, Kronos, Monopoly, Ride, Shill, ch40, ch90, climb, cow, invitation, invite, knee, kronosmax, ladder, lord, losing, loyal, pay, power, prestige, ride, rival, shill, trooper, winner, winning
+- ch41_wheel: Climb, Discipline, Fall, KegWheel, Losing, Pay, Prestige, Shot, Stable, Welcome, Wheel, Winning, alien, bearing, ch41, cling, discipline, fall, jump, kneeler, loser, revenge, shot, soldier, stable, valor, welcome, wheel, wheelers
+- ch90_calcite_app: Calcite, Team, calcite, team
 - ch97_docs_builder: ch97
 - ch98_linter: ch98
 - ch99_glossary: ch99
