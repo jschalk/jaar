@@ -78,6 +78,7 @@
   "Revenge": {"valid_ch": ""}, 
   "Ride": {"valid_ch": "40"}, 
   "Rider": {"valid_ch": ""}, 
+  "Rise": {"valid_ch": "41"}, 
   "Rival": {"valid_ch": ""}, 
   "RopeTerm": {"semantic_type": "str", "valid_ch": "5:"}, 
   "Scaffold": {"valid_ch": ""}, 

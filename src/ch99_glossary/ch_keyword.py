@@ -9403,6 +9403,7 @@ class Ch41Keywords(str, Enum):
     ReasonNum = "ReasonNum"
     RespectGrain = "RespectGrain"
     RespectNum = "RespectNum"
+    Rise = "Rise"
     RopeTerm = "RopeTerm"
     SheetName = "SheetName"
     Shot = "Shot"
