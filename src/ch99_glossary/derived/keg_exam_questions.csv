@@ -216,7 +216,7 @@ Did you read that the keg_definition of 'LabelTerm' is 'str first used in ch05. 
 Did you read that the keg_definition of 'ManaGrain' is 'float first used in ch05. Smallest Unit of Mana.'.
 Did you read that the keg_definition of 'ReasonNum' is 'float first used in ch05. A numeric value that may converted to other Semantic Types by an external process driven by context.'.
 Did you read that the keg_definition of 'RopeTerm' is 'str first used in ch05. A string representation of a tree path. LabelTerms are seperated by knots.'.
-Did you read that the keg_definition of 'fact' is 'Facts are very important concept. I tried never to use those 4 letters anywhere that didn't refer exactly to that concept.'.
+Did you read that the keg_definition of 'fact' is 'Facts are very important concept in Kegology. I tried never to use these 4 letters anywhere that didn't refer exactly to that concept.'.
 "Did you read that the keg_definition of 'knot' is ', Moment arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed'."
 "Did you read that the keg_definition of 'mana_grain' is ', Moment arg, used with Budget Cells, Person seed.'."
 Did you read that the keg_definition of 'meaning' is 'A term specifically used to describe how defining Ropes creates meaning. Ropes with the same start and end points can have different meaning based on the Labels in between. Only referenced in ch05'.
@@ -318,7 +318,7 @@ Did you read that the keg_definition of 'offtrack_kids_poynt_set' is 'Definition
 "Did you read that the keg_definition of 'person_plan_reasonunit' is 'A person dimen representing ReasonUnit data. Keys: person_name, plan_rope, reason_context. person seed.'."
 "Did you read that the keg_definition of 'person_planunit' is 'A person dimen representing PlanUnit data. Keys: person_name, plan_rope. person seed.'."
 Did you read that the keg_definition of 'personunit' is 'A person dimen representing PersonUnit data. Keys: person_name. person seed.'.
-"Did you read that the keg_definition of 'planroot' is 'Every PersonUnit has one planunit called the planroot. It can have child planunits and those can have child planunits, etc.'."
+"Did you read that the keg_definition of 'planroot' is 'Every PersonUnit has one planunit called the planroot. It can have child planunits and each of them can have child planunits, etc.'."
 Did you read that the keg_definition of 'prnawar' is 'abbv for person_plan_awardunit'.
 Did you read that the keg_definition of 'prncase' is 'abbv for person_plan_reason_caseunit'.
 Did you read that the keg_definition of 'prncont' is 'abbv for person_contactunit'.
@@ -701,7 +701,7 @@ Did you read that the keg_definition of 'Kronos' is 'Greek God of War and Time. 
 Did you read that the keg_definition of 'Shill' is 'A Rider for a bad person.'.
 Did you read that the keg_definition of 'climb' is 'To connote the action a FamilyUnit takes to gain Prestige.'.
 Did you read that the keg_definition of 'cow' is 'A FamilyUnit without Prestige. Consider whether it's a useful term.'.
-"Did you read that the keg_definition of 'invitation' is 'From KegWheel theory, describes the act of a FamilyUnit giving another prestige. Or bringing those out of Power into Power.'."
+"Did you read that the keg_definition of 'invitation' is 'From KegWheel theory, describes the act of a FamilyUnit giving another prestige. Or bringing a family outside of Power into Power.'."
 Did you read that the keg_definition of 'invite' is 'The giving of prestige from a FamilyUnit with it to a FamilyUnit without it.'.
 Did you read that the keg_definition of 'knee' is 'Knee and Kneel used to conote a FamilyUnit without Prestige. At least within a wheel's moment. In another moment the FamilyUnit may have prestige.'.
 Did you read that the keg_definition of 'kronosmax' is 'To proactively elimanate not just current threats but potential threats to one's prestige.'.
@@ -721,7 +721,7 @@ Did you read that the keg_definition of 'winning' is 'The act of a FamilyUnit ge
 Did you read that the keg_definition of 'Climb' is 'To connote the action a FamilyUnit takes to gain Prestige.'.
 "Did you read that the keg_definition of 'Discipline' is 'Moments that have an active budget and ledger, and for which some people crawl has Discipline. A government that exists and is important.'."
 Did you read that the keg_definition of 'Fall' is 'When a FamilyUnit loses all Prestige and exits power.'.
-Did you read that the keg_definition of 'KegWheel' is 'Theory of Political Power learned from Kamil Kazani. The political world changing is represented as a wheel where some people are going up in Prestige and some are going down. Those going down are incentized to cause chaos to try to get back up.'.
+Did you read that the keg_definition of 'KegWheel' is 'Theory of Political Power learned from Kamil Kazani. The political world changing is represented as a wheel where some people are going up in Prestige and some are going down. The ones going down are incentized to cause chaos to try to get back up.'.
 Did you read that the keg_definition of 'Losing' is 'The act of a FamilyUnit getting less Prestige.'.
 Did you read that the keg_definition of 'Pay' is 'If you want something you have to pay for it.'.
 Did you read that the keg_definition of 'Prestige' is 'Within KegWheel Theory Prestige is the measure of the zero-sum game of power. Any Prestige gained is by definition someone else's lost. Within a MomentUnit. Not used in codebase.'.
@@ -732,7 +732,7 @@ Did you read that the keg_definition of 'Welcome' is 'For a FamilyUnit outside a
 Did you read that the keg_definition of 'Wheel' is 'Refers to the KegWheel concept.'.
 Did you read that the keg_definition of 'Winning' is 'The act of a FamilyUnit getting more Prestige.'.
 Did you read that the keg_definition of 'alien' is 'A bordering Wheel.'.
-Did you read that the keg_definition of 'bearing' is 'Concerns load bearing of a Wheel by those under the Wheel.'.
+Did you read that the keg_definition of 'bearing' is 'Concerns load bearing of a Wheel by families under the Wheel.'.
 Did you read that the keg_definition of 'cling' is 'To connote the action a FamilyUnit takes to avoids losing Prestige.'.
 Did you read that the keg_definition of 'discipline' is 'A moment that has Discipline. Check 'Discipline' definition.'.
 Did you read that the keg_definition of 'fall' is 'When a FamilyUnit loses all Prestige and exits power.'.
