@@ -78,7 +78,7 @@ In conclusion
 
 Sidenote: That's right, I was a insane neoliberal economist before I took up philosophy. I can never really let go of that way of thinking: wanting to objectively find the most efficient solution to make all parties happy is part of who I am. Even though I've seen it's failure every year of my life its hard to let go of what I liked in my formative years. 
 
-This project is an Introduction to Kegology. 
+**All these articles and the code stored in the github repo are an Introduction to Kegology.**
 
 ---
 
@@ -94,4 +94,6 @@ During my formative years I went to El Paso High School in El Paso, Texas. The i
 
 If a party had a keg or two that meant the party was serious and many people would go. It would be fun. There would be enough beer for everyone. So in a way kegs united a free people. Everyone was free to pick their party and would never go to a party where they were disrespected. The keg symbolized a scarifice of the party host ala I will give much money for everyone else's enjoyment. 
 
-I think about this sometimes when I write out 'Kegology'.
+If there was a keg and I knew someone was sacrificing for me and my friends. And people did this all the time. 
+
+I think about this sometimes when I write *Kegology*.
