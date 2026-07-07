@@ -70,6 +70,8 @@ And I will plan that myself and others reduce the celebrities that we know. Get 
 
 And maybe you'll forgive me.
 
-### Footnotes
+---
 
-[^1] Saturday Night Live "What's that name?"
+## Footnotes
+
+[^1]: Saturday Night Live "What's that name?"
