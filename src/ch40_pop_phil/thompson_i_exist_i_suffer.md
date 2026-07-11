@@ -1,9 +1,11 @@
 # I exist, I suffer. Please don't destroy me.
 
 **Date:** 2026-04-17  
-**Author:** Johnny Thompson
+**Author:** Johnny Thompson  
+**Source:** https://miniphilosophy.substack.com/p/i-exist-i-suffer-please-dont-destroy  
+**Copied to Keg:** 2026-07-10  
 
-> Levinas and the ethics of the face.
+*Levinas and the ethics of the face.*
 
 ---
 

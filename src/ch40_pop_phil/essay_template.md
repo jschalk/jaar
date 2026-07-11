@@ -2,8 +2,10 @@
 
 **Date:** YYYY-MM-DD  
 **Author:** Author Name
+**Source:** www.source_url.com
+**Copied to Keg:** 2026-06-24 
 
-> One-line tagline
+One-line tagline
 
 ---
 

@@ -34,6 +34,7 @@ I have to try.
 
 
 Next steps
+
 0. I will enhance keg2 library where it helps kegology be used.
 1. I am going to become active on x.com, youtube, reddit. 
 2. I'm going to ask people I know what's important to them. 
