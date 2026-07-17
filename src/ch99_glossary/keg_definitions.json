@@ -316,6 +316,8 @@
   "ideax_src": "stage_type_order=1 Idea Source files. Brick formats without SparkNum.", 
   "ii": "Idea Format Identifier. Every idea_type format starts with 'ii' and then 5 numbers. Every brick_type has a mirrored idea_type. Multiple idea_types can map to single brick_type", 
   "import": "Used so often in Python that it cannot be a kegology keyword.", 
+  "Impression": "The motivation of any decisions. Example 'Governed by the impressions of French and English revolutions, they expected to be overthrown by a military putsch.' Can be synchronic or diachronic.", 
+  "impression": "The motivation of any decisions. Example 'Governed by the impressions of French and English revolutions, they expected to be overthrown by a military putsch.' Can be synchronic or diachronic.", 
   "inallocable_contact_debt_mass": ", Contact thinkout", 
   "infinity": "As described in Totality and Infinity. Not used in codebase.", 
   "INSERT": "CRUD_COMMAND to delete records for a table", 

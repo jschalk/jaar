@@ -9121,6 +9121,7 @@ class Ch40Keywords(str, Enum):
     ideax_dst = "ideax_dst"
     ideax_src = "ideax_src"
     ii = "ii"
+    impression = "impression"
     inallocable_contact_debt_mass = "inallocable_contact_debt_mass"
     insert_multiple = "insert_multiple"
     insert_one_time = "insert_one_time"
