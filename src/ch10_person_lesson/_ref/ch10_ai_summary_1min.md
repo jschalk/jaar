@@ -49,7 +49,7 @@ New semantic types introduced in `ch10_semantic_types.py`:
 **`LessonUnit`** wraps a `PersonDelta` with provenance metadata:
 - `spark_face` (`FaceName`) — who the lesson came from.
 - `moment_rope` (`MomentRope`) — where in the temporal/moment structure this lesson belongs.
-- `person_name` — whose belief system is being updated.
+- `person_name` — who is having their belief system updated.
 - `spark_num` — the ordinal position of this lesson within a moment's sequence.
 - `lesson_id` / `delta_start` — for sequencing and resuming lesson application.
 

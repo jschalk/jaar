@@ -66,7 +66,7 @@ def get_ropeterm_description_md() -> str:
 
 
 # Introduction
-Imagine all the things in the world and how they are related. Most things are not related to other things. But we as humans can create those connections. For example an apple that I eat and the moon seem completely seperate but we can create the connection arbitrarily: the apple is in an orchard, the orchard is loved by Sue, Sue loves the moon: "apple-orchard-things Sue loves-moon".
+Imagine all the things in the world and how they are related. Most things are not related to other things. But we as humans can create these connections. For example an apple that I eat and the moon seem completely seperate but we can create the connection arbitrarily: the apple is in an orchard, the orchard is loved by Sue, Sue loves the moon: "apple-orchard-things Sue loves-moon".
 
 There are infinitely many connections that can be possibly experienced. When we're living the infinite is open to us but only some connections are actually experienced. In keg I define terms that are connections "Ropes". Imagine there is a rope connecting all things that are related to each other. Examples:
 1. My cat and her food dish. 
@@ -78,7 +78,7 @@ There are infinitely many ways of defining a rope between to things:
 2. My cat, all cats in the world, all cat dishs in the world, and her food dish. 
 3. My cat, all the things she wants, and her food dish.
 
-The way those ropes are made creates context that changes what exactly is being talked about. 
+The way these ropes are made creates context that changes what exactly is being talked about. 
 1. My cat, all basic cat food, and her food dish. 
 2. My cat, all fancy cat food, and her food dish. 
 In the first situation my cat's food has a conext of "basic" food., in the second situation the food context is "fancy". But its not explicit that the food dish has any food in it or what type it is. 

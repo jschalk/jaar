@@ -44,7 +44,7 @@ For each `_b_raw` table, produces a `{brick_type}_b_agg` table. Uses `get_groupi
 Aggregates all `spark_num`/`spark_face` pairs from every `_b_agg` table into a `sparks_b_agg` table. Flags any `spark_num` that maps to more than one `spark_face` as invalid (a spark number must belong to exactly one face). Valid sparks are written to `sparks_b_vld`. This enforces the provenance rule: a single spark event cannot be attributed to two different faces.
 
 **Stage 4 — `etl_brixk_agg_tables_to_brixk_vld_tables(conn)`**
-Produces `{brick_type}_b_vld` by JOINing the `_b_agg` table against `sparks_b_vld` — only rows whose `spark_num` is validated pass through. This is the final validated brick layer.
+Produces `{brick_type}_b_vld` by JOINing the `_b_agg` table against `sparks_b_vld` — only rows with validated `spark_num` pass through. This is the final validated brick layer.
 
 **Stage 5 — `etl_brixk_vld_tables_to_sound_raw_tables(cursor)`**
 Maps validated brick rows into "sound" dimension tables (`{ABBV7}_s_raw_put` / `{ABBV7}_s_raw_del`) by intersecting the brick's columns with the focus sound table's columns and inserting the common fields. The `brick_type` column is prepended to each inserted row for traceability. This produces the `s_raw` tables that downstream chapters will aggregate into `s_agg`, validate into `s_vld`, and ultimately use to reconstruct `PersonUnit` and `MomentUnit` objects.

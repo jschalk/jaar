@@ -1,9 +1,11 @@
 # I exist, I suffer. Please don't destroy me.
 
 **Date:** 2026-04-17  
-**Author:** Johnny Thompson
+**Author:** Johnny Thompson  
+**Source:** https://miniphilosophy.substack.com/p/i-exist-i-suffer-please-dont-destroy  
+**Copied to Keg:** 2026-07-10  
 
-> Levinas and the ethics of the face.
+*Levinas and the ethics of the face.*
 
 ---
 
@@ -38,7 +40,7 @@ Jonny
 
 ## A union of souls
 
-Sometimes, my children will lie to me. I know, I know — you expected better from a Philoso-dad like me. But, despite all those bedtime readings of Nicomachean Ethics and ethical dilemmas at breakfast, my two boys are lying little toe-rags.
+Sometimes, my children will lie to me. I know, I know — you expected better from a Philoso-dad like me. But, despite all the bedtime readings of Nicomachean Ethics and ethical dilemmas at breakfast, my two boys are lying little toe-rags.
 
 “Who put their muddy hands on this wall?”
 
@@ -62,5 +64,5 @@ In his book, The Drowned and the Saved, Primo Levi describes how the SS guard at
 
 We are living in a society determined to remove the face. We can send abuse to somebody without seeing their expression crumble. We can swipe past somebody on a dating app like they are in a catalog. We outsource our killing and our wars to a drone at the click of a button. We can read about thousands of dead in a headline and feel nothing, because there is no face.
 
-Levinas would argue that every time we remove the face from the equation, we remove the thing that makes us ethical. And so perhaps the most important ethical question of our age is not “What are the rules?” and “What are the morals?” but “Whose faces have we stopped seeing?”
+Levinas would argue that every time we remove the face from the equation, we remove the thing that makes us ethical. And so perhaps the most important ethical question of our age is not “What are the rules?” and “What are the morals?” but “Where are the faces have we stopped seeing?”
 

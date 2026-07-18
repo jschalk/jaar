@@ -585,7 +585,7 @@ def no_banned_imports_exist(ast_tree: ast_AST) -> bool:
 def find_chapter_dir(file_path: str) -> pathlib_Path | None:
     """
     Given a file path, walk upward through parent folders and return
-    the first folder whose name matches: chXX_*
+    the first folder where name matches: chXX_*
     """
     path = pathlib_Path(file_path).resolve()
     return next(

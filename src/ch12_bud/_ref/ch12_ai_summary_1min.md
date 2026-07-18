@@ -33,7 +33,7 @@ New semantic types introduced in `ch12_semantic_types.py`:
 
 ## 4. Summary of What This Chapter Does
 
-`ch12_bud` introduces the **time dimension** to keg's fund-flow system. Where ch03 defined how funds are distributed across contacts within a single `PersonUnit` evaluation, ch12 defines how those distributions are recorded as time-stamped transactions and aggregated across time.
+`ch12_bud` introduces the **time dimension** to keg's fund-flow system. Where ch03 defined how funds are distributed across contacts within a single `PersonUnit` evaluation, ch12 defines how these distributions are recorded as time-stamped transactions and aggregated across time.
 
 **`TranUnit`** is the atomic fund record: a transfer of `amount` (`FundNum`) from a source person (`src`) to a destination contact (`dst`) at a specific `tran_time` (`TimeNum`). It is keg's equivalent of a double-entry ledger line.
 

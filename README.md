@@ -2,7 +2,7 @@
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-keg2 is a desktop app that takes what matters to someone else — captured as idea files — and brings those ideas into your daily world. It updates your agenda, your KPIs, and your own ideas so you can act on them and share them with others.
+keg2 is a desktop app that takes what matters to someone else — captured as idea files — and brings these ideas into your daily world. It updates your agenda, your KPIs, and your own ideas so you can act on them and share them with others.
 
 Repository: https://github.com/jschalk/keg
 
@@ -53,7 +53,7 @@ When the app opens for the first time, fill in the following fields:
 | Field | What to enter |
 |---|---|
 | **Me** | Your name |
-| **You** | The name of the person whose ideas you are bringing in |
+| **You** | The name of the person's ideas you are bringing in |
 | **Ideas Dir** | The folder where their idea files (Excel) are stored |
 | **Bricks Dir** | The folder where your building blocks are stored |
 | **Worlds Dir** | The folder where your worlds live |
@@ -153,7 +153,7 @@ keg was built using Test-Driven Development. Every feature has a corresponding t
 
 ## Acknowledgements
 
-Jules Simon PhD — Philosopher at UTEP, whose teaching of Levinas in 2014 is still being worked through.
+Jules Simon PhD — Philosopher at UTEP. I'm still working through his teaching of Levinas in the early 2010s.
 
 Femi — for significant contributions to the project.
 

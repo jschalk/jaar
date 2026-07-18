@@ -44,7 +44,7 @@ Ontology note:
 **`brick_collector.py`** — Excel discovery and sheet reordering:
 
 - `BrickFileRef` — a dataclass identifying a specific brick sheet within an Excel file: `file_dir`, `filename`, `sheet_name`, `brick_type`.
-- `get_all_brickfilerefs(dir)` — scans a directory for `.xlsx` files, finds all sheets whose names contain a known `brick_type`, validates that the sheet has the required columns, and returns a list of `BrickFileRef` objects ready for ETL loading.
+- `get_all_brickfilerefs(dir)` — scans a directory for `.xlsx` files, finds all sheets with names that contain a known `brick_type`, validates that the sheet has the required columns, and returns a list of `BrickFileRef` objects ready for ETL loading.
 - `reorder_etl_db_sheets(filepath)` — reorders sheets in an Excel output file to match the canonical stage-type ordering defined in `etl_stage_types_config.json`.
 
 **`etl_sqlstr.py`** — SQL string generation for sound and heard tables:

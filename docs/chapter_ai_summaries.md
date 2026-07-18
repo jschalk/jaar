@@ -451,7 +451,7 @@ New semantic types introduced in `ch10_semantic_types.py`:
 **`LessonUnit`** wraps a `PersonDelta` with provenance metadata:
 - `spark_face` (`FaceName`) — who the lesson came from.
 - `moment_rope` (`MomentRope`) — where in the temporal/moment structure this lesson belongs.
-- `person_name` — whose belief system is being updated.
+- `person_name` — who is having their belief system updated.
 - `spark_num` — the ordinal position of this lesson within a moment's sequence.
 - `lesson_id` / `delta_start` — for sequencing and resuming lesson application.
 
@@ -550,7 +550,7 @@ New semantic types introduced in `ch12_semantic_types.py`:
 
 ## 4. Summary of What This Chapter Does
 
-`ch12_bud` introduces the **time dimension** to keg's fund-flow system. Where ch03 defined how funds are distributed across contacts within a single `PersonUnit` evaluation, ch12 defines how those distributions are recorded as time-stamped transactions and aggregated across time.
+`ch12_bud` introduces the **time dimension** to keg's fund-flow system. Where ch03 defined how funds are distributed across contacts within a single `PersonUnit` evaluation, ch12 defines how these distributions are recorded as time-stamped transactions and aggregated across time.
 
 **`TranUnit`** is the atomic fund record: a transfer of `amount` (`FundNum`) from a source person (`src`) to a destination contact (`dst`) at a specific `tran_time` (`TimeNum`). It is keg's equivalent of a double-entry ledger line.
 
@@ -1005,7 +1005,7 @@ Ontology note:
 **`brick_collector.py`** — Excel discovery and sheet reordering:
 
 - `BrickFileRef` — a dataclass identifying a specific brick sheet within an Excel file: `file_dir`, `filename`, `sheet_name`, `brick_type`.
-- `get_all_brickfilerefs(dir)` — scans a directory for `.xlsx` files, finds all sheets whose names contain a known `brick_type`, validates that the sheet has the required columns, and returns a list of `BrickFileRef` objects ready for ETL loading.
+- `get_all_brickfilerefs(dir)` — scans a directory for `.xlsx` files, finds all sheets with names that contain a known `brick_type`, validates that the sheet has the required columns, and returns a list of `BrickFileRef` objects ready for ETL loading.
 - `reorder_etl_db_sheets(filepath)` — reorders sheets in an Excel output file to match the canonical stage-type ordering defined in `etl_stage_types_config.json`.
 
 **`etl_sqlstr.py`** — SQL string generation for sound and heard tables:
@@ -1119,7 +1119,7 @@ For each `_b_raw` table, produces a `{brick_type}_b_agg` table. Uses `get_groupi
 Aggregates all `spark_num`/`spark_face` pairs from every `_b_agg` table into a `sparks_b_agg` table. Flags any `spark_num` that maps to more than one `spark_face` as invalid (a spark number must belong to exactly one face). Valid sparks are written to `sparks_b_vld`. This enforces the provenance rule: a single spark event cannot be attributed to two different faces.
 
 **Stage 4 — `etl_brixk_agg_tables_to_brixk_vld_tables(conn)`**
-Produces `{brick_type}_b_vld` by JOINing the `_b_agg` table against `sparks_b_vld` — only rows whose `spark_num` is validated pass through. This is the final validated brick layer.
+Produces `{brick_type}_b_vld` by JOINing the `_b_agg` table against `sparks_b_vld` — only rows with validated `spark_num` pass through. This is the final validated brick layer.
 
 **Stage 5 — `etl_brixk_vld_tables_to_sound_raw_tables(cursor)`**
 Maps validated brick rows into "sound" dimension tables (`{ABBV7}_s_raw_put` / `{ABBV7}_s_raw_del`) by intersecting the brick's columns with the focus sound table's columns and inserting the common fields. The `brick_type` column is prepended to each inserted row for traceability. This produces the `s_raw` tables that downstream chapters will aggregate into `s_agg`, validate into `s_vld`, and ultimately use to reconstruct `PersonUnit` and `MomentUnit` objects.
@@ -1429,7 +1429,7 @@ Two KPIs are currently defined, both implemented as `CREATE TABLE AS SELECT` SQL
 1. Loads the person's job `PersonUnit` from disk.
 2. Calls `add_epoch_planunit` and `set_epoch_fact` (from ch14) to inject the current datetime's `TimeNum` as a fact into the person's plan tree.
 3. Runs `thinkout()` to re-evaluate plan activation at that specific point in time.
-4. Walks the plan tree looking for active pledges whose `ReasonHeir` references a time-based fact context (using `is_sub_rope` to check against the epoch rope).
+4. Walks the plan tree looking for active pledges with `ReasonHeir` references to a time-based fact context (using `is_sub_rope` to check against the epoch rope).
 5. For each such plan, if it is under `focus_group_title`'s workforce scope, writes a "day punch" text file — a plain-text record of the plan rope, active status, and time bounds suitable for importing into Google Calendar.
 
 `get_day_punchs_persons` and `copy_person_day_punches_to_dst_dir` handle multi-person orchestration and file copying. The day-punch output is the most direct link between keg's belief system and a person's real-world schedule.
@@ -1720,6 +1720,7 @@ Eight named example generators build `PersonUnit`s and `MomentUnit`s programmati
 - A "Create Person Ideas" button that calls `create_lego0002_file` (ch30) to produce a person-scoped idea Excel for the named person.
 - Settings are persisted to a local JSON config file between sessions.
 
+ch96 pass
 # ch97_docs_builder — Chapter Summary
 
 *This summary is authored by AI 5-26-2026.*

@@ -19,7 +19,7 @@ I use it to keep my children healthy. It's good for cleaning the dishes, the kit
 
 Let's talk about why it is not the dominate cleaning agent.
 
-If it's so cheap and so effective why are there so many other cleaning products? Well some of the other products are more effective in different scenarios. But mainly it's because those other products don't really cost that much and they smell better.[^1] Which is nice but can be ignored.
+If it's so cheap and so effective why are there so many other cleaning products? Well some of the other products are more effective in different scenarios. But mainly it's because these other products don't really cost that much and they smell better.[^1] Which is nice but can be ignored.
 
 Let's list the reasons why sodium bicardonate is awesome:
 
@@ -48,7 +48,7 @@ Here's the answer:
 > ### Because it would help your family[^2]'s future.
 </div>
 
-That's kinda dramatic. But its true. Consider all the households that buy products with dollars or money easily converted from dollars. Assume 2 billion households worldwide. Assume that each of those households buy on average 1000 different products a year[^3]. Thats 2 trillion product-household connections that are defined by the dollar. If that number were to be reduced to 1.5 trillion the dollar would be less important.
+That's kinda dramatic. But its true. Consider all the households that buy products with dollars or money easily converted from dollars. Assume 2 billion households worldwide. Assume that each of these households buy on average 1000 different products a year[^3]. Thats 2 trillion product-household connections that are defined by the dollar. If that number were to be reduced to 1.5 trillion the dollar would be less important.
 
 How could you reduce the number of product-household connections? By not buying as a household but buying for more. Buy more sodium bicarbonate and ask your neighbors to accept it from you and use it. If your neighbors ask you to accept some from them say yes. Nothing wrong with mixing to batches of sodium bicarbonate.  
 

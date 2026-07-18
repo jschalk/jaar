@@ -1,10 +1,10 @@
-# How to use Kegology to help Justice
+# Kegology Political Theory
 
-**Edit Start:** 2026-06-24  
-**Edit Stop:**   
+**Date:** 2026-06-28  
 **Author:** Emmanuel Schalk
+**Description:** A generalized theory of political mechanics
 
-> Build Worlds, Pay the Oppressor
+> TODO add tag line
 
 ---
 
@@ -32,9 +32,18 @@ If you are not powerful, create your own Moments with new Wheels of Power.
 
 
 Previous Parts of this Series:  
-[KegWheel Mechanics](schalk_kegwheel1.md)  
-[KegWheel Implications](schalk_kegwheel2.md)  
+[KegWheel Mechanics](schalk_wheel0_theory.md)  
+[KegWheel Implications](schalk_wheel1_implications.md)  
 
 
 
-  
+<!--Home: I have Theory + Implications -->
+<!--Need: It's Hot outside. My children can't go play.  -->
+<!--Go: I will change the climate -->
+<!--Search: Create a list of things for Allies to do. Think it through -->
+<!--Find: I have goals, I will internalize them and be a good dad -->
+<!--Take: I will have to ignore my children to save them. I might destory society -->
+<!--Return: I will hope my children forgive me the same as I forgive my grandfather. -->
+<!--Change: I will go with Trump. I will pay Trump -->
+
+

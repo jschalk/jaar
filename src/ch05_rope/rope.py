@@ -259,16 +259,16 @@ def get_unique_short_ropes(
 
     result = {}
     for idx, parts in enumerate(parts_list):
-        chosen = None
+        selected = None
         for k in range(1, len(parts) + 1):
             cand = tuple(parts[-k:])
             if counters[k][cand] == 1:
-                chosen = cand
+                selected = cand
                 break
-        if chosen is None:
-            chosen = tuple(parts)
+        if selected is None:
+            selected = tuple(parts)
 
-        rep = knot.join(chosen)
+        rep = knot.join(selected)
         result[ropes_list[idx]] = rep
 
     return result

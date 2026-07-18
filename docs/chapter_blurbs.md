@@ -38,6 +38,7 @@ What does each one do?
 - **ch40_pop_phil**: Essays pop_phil
 - **ch41_wheel**: Essays pop_phil
 - **ch90_calcite_app**: ETL app to create day punches from excel files.
+- **ch96_exam**: Exams that return KPIs of Kegology knowledge.
 - **ch97_docs_builder**: Defines Tools that create documentation.
 - **ch98_linter**: Linter for repo.
 - **ch99_glossary**: Where keg terms will be defined, described, ranked.

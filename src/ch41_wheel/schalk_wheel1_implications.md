@@ -1,16 +1,44 @@
+# Kegology Political Theory
+
+**Date:** 2026-06-28  
+**Author:** Emmanuel Schalk
+**Description:** A generalized theory of political mechanics
+
+> TODO add tag line
+
+---
+
+<!--Home: Have Theory, I've won. America isn't impressed. -->
+
+<!--Need: Prove I haven't wasted years + Treasury  -->
+
+<!--Go: Decide to write about Implications in a way she gets -->
+
+<!--Search: Build what Kegology says you should do given Scenarios. -->
+
+<!--Find: Got the answers, I can show America what the value is. -->
+
+<!--Take: The implications are that my family will be less powerful. I'm going to die -->
+
+<!--Return: Maybe I do need church, community to weather the storm-->
+
+<!--Change: I'll reach out more -->
+
+
+
 # Kegology Wheel theory of power
 
 **Date:** 2026-06-09  
 **Author:** Emmanuel Schalk
 
-> Those who kneel can still turn the wheel.
+> If you kneel you can still turn the wheel.
 
 ---
 
 This is part 2 of KegWheel series. 
 
 Previous Parts of this Series:  
-[KegWheel Mechanics](schalk_kegwheel1.md)  
+[KegWheel Mechanics](schalk_wheel0_theory.md)  
 
 
 
@@ -27,7 +55,7 @@ I'm unable to remember which article talks about this. But the concept is that i
 
 Kegology Term *'Fall'*: The opposite of a invitation, when a family loses prestige, usually because no other family with prestige wants to invite them.
 
-To be clear having money and prestige are different. Those with money will try to buy prestige and may succeed. But it's not automatic or even likely. There is little incentive for those with prestige to sell it, better to break promises and just keep asking for more money. Relationships matter more than money.  
+To be clear having money and prestige are different. Families with money will try to buy prestige and may succeed. But it's not automatic or even likely. There is little incentive for Famlies with prestige to sell it, better to promise prestige in return for money then break the promise. The familiy without prestige has no recourse. The Family with prestige can just keep asking for more money. Relationships matter more than money.  
 
 On the flip side:
 
@@ -63,7 +91,7 @@ Instead, proposes Kazani, if you want prestige earn it. Start with a podcast.[^1
 
 Not only is that plan of action unlikely to succeed it probably also corrupting. Remember the title of this section is *What to do if you have an agenda* not 'What to do if you want power'.
 
-You don't have to be in power to get your agenda enacted, you just need those in power to enact the agenda. Lobbyists can succeed.
+You don't have to be in power to get your agenda enacted, you just need Families in power to enact the agenda. Lobbyists can succeed.
 
 1. Gain the support of the families going up by treatening to make the total power of the KegWheel less. Make their pie smaller.
 2. Neutralize 
@@ -71,7 +99,7 @@ You don't have to be in power to get your agenda enacted, you just need those in
 
 <div align="center">
 
-### An agenda is things you want. Families going up with prestige will give you those things if it increases their prestige and the general power of the KegWheel. Families going down will 
+### An agenda is things you want. Families going up with prestige will give you these things if it increases their prestige and the general power of the KegWheel. Families going down will 
 
 </div>
 
@@ -87,4 +115,4 @@ You don't have to be in power to get your agenda enacted, you just need those in
 
 ## Biblography
 
-Found in [Part 1](schalk_kegwheel1.md)  
+Found in [Part 1](schalk_wheel0_theory.md)  
