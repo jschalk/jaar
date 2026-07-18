@@ -233,20 +233,11 @@ Welcome
 welcome
 wheelers
 
-
-
-
 ######
 Home: Where I'm comfortable beling a philosopher-without and audience. Just playing with my toys.
 
 Need: Kamil Kazani declares historians bad at Theory. They are terrible at it. I need to defend family honor. 
 
-
-
-
-<!--Find: KegWheel is amazing, I'm proud of it. -->
-
-<!--Take: Now I can never be a historian. The process of making this Theory has made me into an ideaologue. I'll never be able to be like my Dad. I will always see the world through Kegology, thats how I've trained myself. My dad was trained as a historian. He was trained to view the world with the least possible of idealogy possible.-->
 
 <!--Return: I'm going to be a philosopher. I am publishing this Theory. I accept that I'm an ideaologue.-->
 
