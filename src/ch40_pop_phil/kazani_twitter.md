@@ -135,18 +135,3 @@ THOSE are the issues. We don’t need to be unkind to be honest."
 > The most important thing is to never ever ever be overly accommodating. That is a guaranteed catastrophe, in 100% of cases. People may follow a fool, they may follow an asshole, but they will never ever follow a whimp
 
 
-**July 20th, 2026**  
-In response to previous post about Chess Legend Kasparov being pro-Israel.
-> So, basically:
-> 
-> 1. Eastern Europeans are desperate for pride & self respect
-> 2. They know self respect is best won in Levant by killing brown people
-> 3. And won by people like us, our friends & neighbours from Odessa, Gomel, Krasnodar
-> 
-> That is the best story of success they have
-> I would say that Israel is so popular in Eastern Europe - that is, to the east of Berlin Wall - because the image of us being real whites killing the dirty natives (and killing easily!) resonates with the deepest desires of an Eastern European soul
-
-Later Kazani responds the following comment:  
-"At least for the eastern Europeans that were under the Ottomans, I think a big factor is also a historical enmity with Muslims, which in today’s politics is amplified.  I could say here most Bulgarians are not gonna be sympathetic to Muslims."
-
-> No, this kind of explanation is never true. Historical grievances do not explain modern conflicts. They are always activated or deactivated based on the *current* situation and current necessities, or just current vibes
