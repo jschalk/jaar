@@ -118,7 +118,7 @@ Each dimension advances through a fixed set of stages (Sound and Heard) with cle
 | Property                  | Description                                     |
 | ------------------------- | ----------------------------------------------- |
 | **Source**                | Excel workbooks                                 |
-| **Initial Landing Zone**  | bricks tables                              |
+| **Initial File Zone**     | bricks tables                                   |
 | **Core Processing Zones** | Sound and Heard                                 |
 | **Auditable by**          | Any user with Excel/SQL skills                  |
 | **ETL Constraints**       | 1 insert + 1 update per table per run           |
