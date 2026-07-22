@@ -102,7 +102,7 @@ def test_PersonUnit_get_tree_metrics_Returns_pledge_PlanRopeTerm():
             yao_person.planroot.plan_label,
             "ACME",
             "ACME Employee Responsiblities",
-            "Know Abuse Deterrence and Reporting guildlines",
+            "Know Abuse Avoidance and Reporting guildlines",
             "Accomplish Summer 2021 traaining",
         ]
     )

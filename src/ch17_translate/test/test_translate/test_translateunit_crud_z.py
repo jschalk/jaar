@@ -16,7 +16,7 @@ def test_TranslateUnit_set_mapunit_SetsAttr():
     # ESTABLISH
     sue_translateunit = translateunit_shop(exx.sue)
     namemap = namemap_shop(spark_face=exx.sue)
-    namemap.set_otx2inx("Bob", "Bob of Portland")
+    namemap.set_otx2inx("Bob", "Bob of Salem")
     assert sue_translateunit.namemap != namemap
 
     # WHEN
@@ -30,7 +30,7 @@ def test_TranslateUnit_set_mapunit_SetsAttr_SpecialSituation_RopeTerm():
     # ESTABLISH
     sue_translateunit = translateunit_shop(exx.sue)
     ropemap = ropemap_shop(spark_face=exx.sue)
-    ropemap.set_otx2inx("Bob", "Bob of Portland")
+    ropemap.set_otx2inx("Bob", "Bob of Salem")
     assert sue_translateunit.ropemap != ropemap
 
     # WHEN
@@ -103,7 +103,7 @@ def test_TranslateUnit_get_mapunit_ReturnsObj():
     # ESTABLISH
     sue_pu = translateunit_shop(exx.sue)
     static_namemap = namemap_shop(spark_face=exx.sue)
-    static_namemap.set_otx2inx("Bob", "Bob of Portland")
+    static_namemap.set_otx2inx("Bob", "Bob of Salem")
     sue_pu.set_namemap(static_namemap)
 
     # WHEN / THEN

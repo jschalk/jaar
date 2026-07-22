@@ -298,7 +298,7 @@
           "ACME Employee Responsiblities": {
             "is_expanded": false, 
             "kids": {
-              "Abuse Deterrence and Reporting guildlines": {
+              "Abuse Avoidance and Reporting guildlines": {
                 "kids": {
                   "Accomplish Summer 2021 traaining": {
                     "plan_label": "Accomplish Summer 2021 traaining", 
@@ -319,7 +319,7 @@
                     }
                   }
                 }, 
-                "plan_label": "Abuse Deterrence and Reporting guildlines", 
+                "plan_label": "Abuse Avoidance and Reporting guildlines", 
                 "plan_uid": 106, 
                 "poynt": 1
               }, 
@@ -897,7 +897,7 @@
           }, 
           "USA sovereignty": {
             "kids": {
-              "portland sovereignty": {
+              "salem sovereignty": {
                 "kids": {
                   "downtown": {
                     "kids": {
@@ -910,7 +910,7 @@
                             "reasonunits": {
                               "A;Nation-States;": {
                                 "cases": {
-                                  "A;Nation-States;USA;Portland OR;Downtown;PSU;Pool": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Pool"}
+                                  "A;Nation-States;USA;Salem OR;Downtown;PSU;Pool": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown;PSU;Pool"}
                                 }, 
                                 "reason_context": ";A;Nation-States;"
                               }
@@ -923,7 +923,7 @@
                             "reasonunits": {
                               "A;Nation-States;": {
                                 "cases": {
-                                  "A;Nation-States;USA;Portland OR;Downtown;PSU;library": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;library"}
+                                  "A;Nation-States;USA;Salem OR;Downtown;PSU;library": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown;PSU;library"}
                                 }, 
                                 "reason_context": ";A;Nation-States;"
                               }
@@ -947,7 +947,7 @@
                             "reasonunits": {
                               "A;Nation-States;": {
                                 "cases": {
-                                  "A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field"}
+                                  "A;Nation-States;USA;Salem OR;Downtown;PSU;Stott Field": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown;PSU;Stott Field"}
                                 }, 
                                 "reason_context": ";A;Nation-States;"
                               }
@@ -960,7 +960,7 @@
                         "reasonunits": {
                           "A;Nation-States;": {
                             "cases": {
-                              "A;Nation-States;USA;Portland OR;Downtown;PSU": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU"}
+                              "A;Nation-States;USA;Salem OR;Downtown;PSU": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown;PSU"}
                             }, 
                             "reason_context": ";A;Nation-States;"
                           }
@@ -975,7 +975,7 @@
                             "reasonunits": {
                               "A;Nation-States;": {
                                 "cases": {
-                                  "A;Nation-States;USA;Portland OR;Downtown;Flats;workspace;": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;workspace;"}
+                                  "A;Nation-States;USA;Salem OR;Downtown;Flats;workspace;": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown;Flats;workspace;"}
                                 }, 
                                 "reason_context": ";A;Nation-States;"
                               }
@@ -1001,8 +1001,8 @@
                             "reasonunits": {
                               "A;Nation-States;": {
                                 "cases": {
-                                  "A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden;": {
-                                    "reason_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden;"
+                                  "A;Nation-States;USA;Salem OR;Downtown;Flats;10th floor gaarden;": {
+                                    "reason_state": ";A;Nation-States;USA;Salem OR;Downtown;Flats;10th floor gaarden;"
                                   }
                                 }, 
                                 "reason_context": ";A;Nation-States;"
@@ -1016,7 +1016,7 @@
                             "reasonunits": {
                               "A;Nation-States;": {
                                 "cases": {
-                                  "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"}
+                                  "A;Nation-States;USA;Salem OR;Downtown;Flats;Apt 450": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown;Flats;Apt 450"}
                                 }, 
                                 "reason_context": ";A;Nation-States;"
                               }
@@ -1040,7 +1040,7 @@
                         "reasonunits": {
                           "A;Nation-States;": {
                             "cases": {
-                              "A;Nation-States;USA;Portland OR;Downtown;Flats": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats"}
+                              "A;Nation-States;USA;Salem OR;Downtown;Flats": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown;Flats"}
                             }, 
                             "reason_context": ";A;Nation-States;"
                           }
@@ -1053,20 +1053,20 @@
                     "reasonunits": {
                       "A;Nation-States;": {
                         "cases": {
-                          "A;Nation-States;USA;Portland OR;Downtown": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown"}
+                          "A;Nation-States;USA;Salem OR;Downtown": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown"}
                         }, 
                         "reason_context": ";A;Nation-States;"
                       }
                     }
                   }
                 }, 
-                "plan_label": "portland sovereignty", 
+                "plan_label": "salem sovereignty", 
                 "plan_uid": 206, 
                 "poynt": 1, 
                 "reasonunits": {
                   "A;Nation-States;": {
                     "cases": {
-                      "A;Nation-States;USA;Portland OR": {"reason_state": ";A;Nation-States;USA;Portland OR"}
+                      "A;Nation-States;USA;Salem OR": {"reason_state": ";A;Nation-States;USA;Salem OR"}
                     }, 
                     "reason_context": ";A;Nation-States;"
                   }
@@ -1490,7 +1490,7 @@
           "France2": {"plan_label": "France2", "plan_uid": 235, "poynt": 1}, 
           "USA": {
             "kids": {
-              "Portland OR": {
+              "Salem OR": {
                 "kids": {
                   "Downtown": {
                     "kids": {
@@ -1522,7 +1522,7 @@
                     "poynt": 1
                   }
                 }, 
-                "plan_label": "Portland OR", 
+                "plan_label": "Salem OR", 
                 "plan_uid": 237, 
                 "poynt": 1
               }, 
@@ -2434,7 +2434,7 @@
             "reasonunits": {
               "A;Nation-States;": {
                 "cases": {
-                  "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"}
+                  "A;Nation-States;USA;Salem OR;Downtown;Flats;Apt 450": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown;Flats;Apt 450"}
                 }, 
                 "reason_context": ";A;Nation-States;"
               }
@@ -2914,7 +2914,7 @@
                 "reasonunits": {
                   "A;Nation-States;": {
                     "cases": {
-                      "A;Nation-States;USA;Portland OR": {"reason_state": ";A;Nation-States;USA;Portland OR"}
+                      "A;Nation-States;USA;Salem OR": {"reason_state": ";A;Nation-States;USA;Salem OR"}
                     }, 
                     "reason_context": ";A;Nation-States;"
                   }, 
@@ -2940,7 +2940,7 @@
                 "reasonunits": {
                   "A;Nation-States;": {
                     "cases": {
-                      "A;Nation-States;USA;Portland OR": {"reason_state": ";A;Nation-States;USA;Portland OR"}
+                      "A;Nation-States;USA;Salem OR": {"reason_state": ";A;Nation-States;USA;Salem OR"}
                     }, 
                     "reason_context": ";A;Nation-States;"
                   }, 
@@ -2964,7 +2964,7 @@
             "reasonunits": {
               "A;Nation-States;": {
                 "cases": {
-                  "A;Nation-States;USA;Portland OR": {"reason_state": ";A;Nation-States;USA;Portland OR"}
+                  "A;Nation-States;USA;Salem OR": {"reason_state": ";A;Nation-States;USA;Salem OR"}
                 }, 
                 "reason_context": ";A;Nation-States;"
               }

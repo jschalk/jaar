@@ -320,7 +320,7 @@
                   }
                 }
               }, 
-              "Know Abuse Deterrence and Reporting guildlines": {
+              "Know Abuse Avoidance and Reporting guildlines": {
                 "kids": {
                   "Accomplish Summer 2021 traaining": {
                     "plan_label": "Accomplish Summer 2021 traaining", 
@@ -352,7 +352,7 @@
                     }
                   }
                 }, 
-                "plan_label": "Know Abuse Deterrence and Reporting guildlines", 
+                "plan_label": "Know Abuse Avoidance and Reporting guildlines", 
                 "plan_uid": 106, 
                 "poynt": 1
               }, 
@@ -955,7 +955,7 @@
           }, 
           "USA sovereignty": {
             "kids": {
-              "portland sovereignty": {
+              "salem sovereignty": {
                 "kids": {
                   "downtown": {
                     "is_expanded": false, 
@@ -969,7 +969,7 @@
                             "reasonunits": {
                               ";amy45;Nation-States;": {
                                 "cases": {
-                                  ";amy45;Nation-States;USA;Portland; OR;Downtown;PSU,Pool": {"reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;PSU,Pool"}
+                                  ";amy45;Nation-States;USA;Salem; OR;Downtown;PSU,Pool": {"reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;PSU,Pool"}
                                 }, 
                                 "reason_context": ";amy45;Nation-States;"
                               }
@@ -982,7 +982,7 @@
                             "reasonunits": {
                               ";amy45;Nation-States;": {
                                 "cases": {
-                                  ";amy45;Nation-States;USA;Portland; OR;Downtown;PSU;library;": {"reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;PSU;library;"}
+                                  ";amy45;Nation-States;USA;Salem; OR;Downtown;PSU;library;": {"reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;PSU;library;"}
                                 }, 
                                 "reason_context": ";amy45;Nation-States;"
                               }
@@ -1006,9 +1006,7 @@
                             "reasonunits": {
                               ";amy45;Nation-States;": {
                                 "cases": {
-                                  ";amy45;Nation-States;USA;Portland; OR;Downtown;PSU,Stott Field": {
-                                    "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;PSU,Stott Field"
-                                  }
+                                  ";amy45;Nation-States;USA;Salem; OR;Downtown;PSU,Stott Field": {"reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;PSU,Stott Field"}
                                 }, 
                                 "reason_context": ";amy45;Nation-States;"
                               }
@@ -1021,7 +1019,7 @@
                         "reasonunits": {
                           ";amy45;Nation-States;": {
                             "cases": {
-                              ";amy45;Nation-States;USA;Portland; OR;Downtown;PSU": {"reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;PSU"}
+                              ";amy45;Nation-States;USA;Salem; OR;Downtown;PSU": {"reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;PSU"}
                             }, 
                             "reason_context": ";amy45;Nation-States;"
                           }
@@ -1036,8 +1034,8 @@
                             "reasonunits": {
                               ";amy45;Nation-States;": {
                                 "cases": {
-                                  ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;workspace;": {
-                                    "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;workspace;"
+                                  ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;workspace;": {
+                                    "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;workspace;"
                                   }
                                 }, 
                                 "reason_context": ";amy45;Nation-States;"
@@ -1051,8 +1049,8 @@
                             "reasonunits": {
                               ";amy45;Nation-States;": {
                                 "cases": {
-                                  ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                                    "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                                  ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                                    "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                                   }
                                 }, 
                                 "reason_context": ";amy45;Nation-States;"
@@ -1081,8 +1079,8 @@
                             "reasonunits": {
                               ";amy45;Nation-States;": {
                                 "cases": {
-                                  ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;10th floor gaarden;": {
-                                    "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;10th floor gaarden;"
+                                  ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;10th floor gaarden;": {
+                                    "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;10th floor gaarden;"
                                   }
                                 }, 
                                 "reason_context": ";amy45;Nation-States;"
@@ -1107,9 +1105,7 @@
                         "reasonunits": {
                           ";amy45;Nation-States;": {
                             "cases": {
-                              ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;": {
-                                "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;"
-                              }
+                              ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;": {"reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;"}
                             }, 
                             "reason_context": ";amy45;Nation-States;"
                           }
@@ -1122,20 +1118,20 @@
                     "reasonunits": {
                       ";amy45;Nation-States;": {
                         "cases": {
-                          ";amy45;Nation-States;USA;Portland; OR;Downtown": {"reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown"}
+                          ";amy45;Nation-States;USA;Salem; OR;Downtown": {"reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown"}
                         }, 
                         "reason_context": ";amy45;Nation-States;"
                       }
                     }
                   }
                 }, 
-                "plan_label": "portland sovereignty", 
+                "plan_label": "salem sovereignty", 
                 "plan_uid": 206, 
                 "poynt": 1, 
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland OR": {"reason_state": ";amy45;Nation-States;USA;Portland OR"}
+                      ";amy45;Nation-States;USA;Salem OR": {"reason_state": ";amy45;Nation-States;USA;Salem OR"}
                     }, 
                     "reason_context": ";amy45;Nation-States;"
                   }
@@ -1574,7 +1570,7 @@
           "France2": {"plan_label": "France2", "plan_uid": 235, "poynt": 1}, 
           "USA": {
             "kids": {
-              "Portland OR": {
+              "Salem OR": {
                 "kids": {
                   "Downtown": {
                     "kids": {
@@ -1606,7 +1602,7 @@
                     "poynt": 1
                   }
                 }, 
-                "plan_label": "Portland OR", 
+                "plan_label": "Salem OR", 
                 "plan_uid": 237, 
                 "poynt": 1
               }, 
@@ -2057,8 +2053,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2087,8 +2083,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2116,8 +2112,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2156,8 +2152,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2185,8 +2181,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2218,8 +2214,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2262,8 +2258,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2295,8 +2291,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2328,8 +2324,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2372,8 +2368,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2405,8 +2401,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2438,8 +2434,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2471,8 +2467,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2504,8 +2500,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2533,8 +2529,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2562,8 +2558,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2591,8 +2587,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2624,8 +2620,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2657,8 +2653,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2690,8 +2686,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2723,8 +2719,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2756,8 +2752,8 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     }, 
                     "reason_context": ";amy45;Nation-States;"
@@ -2785,8 +2781,8 @@
             "reasonunits": {
               ";amy45;Nation-States;": {
                 "cases": {
-                  ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                    "reason_state": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                  ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX": {
+                    "reason_state": ";amy45;Nation-States;USA;Salem; OR;Downtown;Northfield Apt;Apt X4XX"
                   }
                 }, 
                 "reason_context": ";amy45;Nation-States;"
@@ -3326,7 +3322,7 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland OR": {"reason_state": ";amy45;Nation-States;USA;Portland OR"}
+                      ";amy45;Nation-States;USA;Salem OR": {"reason_state": ";amy45;Nation-States;USA;Salem OR"}
                     }, 
                     "reason_context": ";amy45;Nation-States;"
                   }, 
@@ -3368,7 +3364,7 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland OR": {"reason_state": ";amy45;Nation-States;USA;Portland OR"}
+                      ";amy45;Nation-States;USA;Salem OR": {"reason_state": ";amy45;Nation-States;USA;Salem OR"}
                     }, 
                     "reason_context": ";amy45;Nation-States;"
                   }, 
@@ -3403,7 +3399,7 @@
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
-                      ";amy45;Nation-States;USA;Portland OR": {"reason_state": ";amy45;Nation-States;USA;Portland OR"}
+                      ";amy45;Nation-States;USA;Salem OR": {"reason_state": ";amy45;Nation-States;USA;Salem OR"}
                     }, 
                     "reason_context": ";amy45;Nation-States;"
                   }, 
@@ -3426,7 +3422,7 @@
             "reasonunits": {
               ";amy45;Nation-States;": {
                 "cases": {
-                  ";amy45;Nation-States;USA;Portland OR": {"reason_state": ";amy45;Nation-States;USA;Portland OR"}
+                  ";amy45;Nation-States;USA;Salem OR": {"reason_state": ";amy45;Nation-States;USA;Salem OR"}
                 }, 
                 "reason_context": ";amy45;Nation-States;"
               }

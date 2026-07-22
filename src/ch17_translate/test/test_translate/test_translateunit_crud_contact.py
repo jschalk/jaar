@@ -8,7 +8,7 @@ def test_TranslateUnit_set_namemap_SetsAttr():
     # ESTABLISH
     sue_translateunit = translateunit_shop(exx.sue)
     x_namemap = namemap_shop(spark_face=exx.sue)
-    x_namemap.set_otx2inx("Bob", "Bob of Portland")
+    x_namemap.set_otx2inx("Bob", "Bob of Salem")
     assert sue_translateunit.namemap != x_namemap
 
     # WHEN
@@ -25,7 +25,7 @@ def test_TranslateUnit_set_namemap_SetsAttrWhenAttrIs_float_nan():
     x_namemap = namemap_shop(
         spark_face=exx.sue, otx_knot=x_nan, inx_knot=x_nan, unknown_str=x_nan
     )
-    x_namemap.set_otx2inx("Bob", "Bob of Portland")
+    x_namemap.set_otx2inx("Bob", "Bob of Salem")
     assert sue_translateunit.namemap != x_namemap
 
     # WHEN
@@ -98,7 +98,7 @@ def test_TranslateUnit_get_namemap_ReturnsObj():
     # ESTABLISH
     sue_translateunit = translateunit_shop(exx.sue)
     static_x_namemap = namemap_shop(spark_face=exx.sue)
-    static_x_namemap.set_otx2inx("Bob", "Bob of Portland")
+    static_x_namemap.set_otx2inx("Bob", "Bob of Salem")
     sue_translateunit.set_namemap(static_x_namemap)
 
     # WHEN
