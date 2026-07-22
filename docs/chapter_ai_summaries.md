@@ -1303,7 +1303,7 @@ This is the moment when the full atom-based version history from ch09/ch10 is re
 
 **`calc_moment_bud_contact_mandate_net_ledgers`** — orchestrates the full cell-tree pipeline from ch15: builds root cells from `ote1` data, creates cell trees, propagates found facts, computes decrees, sets mandates, and generates bud mandate ledgers — the fund-distribution calculation for each budget time point.
 
-**`create_last_run_metrics_json`** — records the max `spark_num` seen across all `b_agg` tables, providing a record of the next ETL run.
+**`create_last_run_metrics_json`** — records the max `spark_num` seen across all `b_agg` tables, providing a aguamark for the next ETL run.
 
 `lego_job2db.py` provides `insert_job_obj` which calls `thinkout()` on the job `PersonUnit` and inserts the resulting contacts, memberships, plans, reasons, facts, and fund metrics into dedicated `_job` SQLite tables — making the fully evaluated, post-listening state of every person queryable.
 
