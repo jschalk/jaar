@@ -77,42 +77,42 @@ def test_person_edit_plan_label_Modifies_factunits():
     bloomers_rope = yao_person.make_rope(casa_rope, bloomers_str)
     tulips_str = "tulips"
     tulips_rope = yao_person.make_rope(bloomers_rope, tulips_str)
-    old_water_str = "water"
-    old_water_rope = yao_person.make_l1_rope(old_water_str)
+    old_agua_str = "agua"
+    old_agua_rope = yao_person.make_l1_rope(old_agua_str)
     rain_str = "rain"
-    old_rain_rope = yao_person.make_rope(old_water_rope, rain_str)
+    old_rain_rope = yao_person.make_rope(old_agua_rope, rain_str)
 
     yao_person.set_l1_plan(planunit_shop(exx.casa))
     yao_person.set_plan_obj(planunit_shop(tulips_str), parent_rope=bloomers_rope)
-    yao_person.set_plan_obj(planunit_shop(rain_str), parent_rope=old_water_rope)
-    yao_person.add_fact(fact_context=old_water_rope, fact_state=old_rain_rope)
+    yao_person.set_plan_obj(planunit_shop(rain_str), parent_rope=old_agua_rope)
+    yao_person.add_fact(fact_context=old_agua_rope, fact_state=old_rain_rope)
 
     plan_x = yao_person.get_plan_obj(tulips_rope)
-    assert yao_person.planroot.factunits[old_water_rope] is not None
-    old_water_rain_factunit = yao_person.planroot.factunits[old_water_rope]
-    assert old_water_rain_factunit.fact_context == old_water_rope
-    assert old_water_rain_factunit.fact_state == old_rain_rope
+    assert yao_person.planroot.factunits[old_agua_rope] is not None
+    old_agua_rain_factunit = yao_person.planroot.factunits[old_agua_rope]
+    assert old_agua_rain_factunit.fact_context == old_agua_rope
+    assert old_agua_rain_factunit.fact_state == old_rain_rope
 
     # WHEN
-    new_water_str = "h2o"
-    new_water_rope = yao_person.make_l1_rope(new_water_str)
-    yao_person.set_l1_plan(planunit_shop(new_water_str))
-    assert yao_person.planroot.factunits.get(new_water_rope) is None
-    yao_person.edit_plan_label(old_rope=old_water_rope, new_plan_label=new_water_str)
+    new_agua_str = "h2o"
+    new_agua_rope = yao_person.make_l1_rope(new_agua_str)
+    yao_person.set_l1_plan(planunit_shop(new_agua_str))
+    assert yao_person.planroot.factunits.get(new_agua_rope) is None
+    yao_person.edit_plan_label(old_rope=old_agua_rope, new_plan_label=new_agua_str)
 
     # THEN
-    assert yao_person.planroot.factunits.get(old_water_rope) is None
-    assert yao_person.planroot.factunits.get(new_water_rope) is not None
-    new_water_rain_factunit = yao_person.planroot.factunits[new_water_rope]
-    assert new_water_rain_factunit.fact_context == new_water_rope
-    new_rain_rope = yao_person.make_rope(new_water_rope, rain_str)
-    assert new_water_rain_factunit.fact_state == new_rain_rope
+    assert yao_person.planroot.factunits.get(old_agua_rope) is None
+    assert yao_person.planroot.factunits.get(new_agua_rope) is not None
+    new_agua_rain_factunit = yao_person.planroot.factunits[new_agua_rope]
+    assert new_agua_rain_factunit.fact_context == new_agua_rope
+    new_rain_rope = yao_person.make_rope(new_agua_rope, rain_str)
+    assert new_agua_rain_factunit.fact_state == new_rain_rope
 
-    assert yao_person.planroot.factunits.get(new_water_rope)
-    x_factunit = yao_person.planroot.factunits.get(new_water_rope)
+    assert yao_person.planroot.factunits.get(new_agua_rope)
+    x_factunit = yao_person.planroot.factunits.get(new_agua_rope)
     # for factunit_key, x_factunit in yao_person.planroot.factunits.items():
-    #     assert factunit_key == new_water_rope
-    assert x_factunit.fact_context == new_water_rope
+    #     assert factunit_key == new_agua_rope
+    assert x_factunit.fact_context == new_agua_rope
     assert x_factunit.fact_state == new_rain_rope
 
 
