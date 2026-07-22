@@ -121,7 +121,7 @@ Responding to the following post "Might be superficial observation of mine but E
 Responding to the following post: 
 "It’s become impossible to ignore the way that people online make fun of my opponent for things that have nothing to do with her policies or politics. It’s unkind and unhelpful. If you support me, please stop. 
 
-Focus on the issues: Congresswoman Stevens has welcomed corporations and special interests to support her. She votes to send our money abroad while Michiganders struggle. She’s bought by DTE, Blue Cross, Big Tech, and Big Pharma who pick our pockets. AIPAC, Trump-aligned billionaires, and corporate PACs are spending $50,000,000+ to support her. 
+Focus on the issues: Congresswoman Stevens has ask corporations and special interests to support her. She votes to send our money abroad while Michiganders struggle. She’s bought by DTE, Blue Cross, Big Tech, and Big Pharma who pick our pockets. AIPAC, Trump-aligned billionaires, and corporate PACs are spending $50,000,000+ to support her. 
 
 THOSE are the issues. We don’t need to be unkind to be honest."
 > Daily reminder
