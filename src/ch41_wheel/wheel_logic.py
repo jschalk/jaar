@@ -10,7 +10,6 @@ class FamuStatusError(Exception):
 @dataclass
 class FamilyUnit:
     famu_name: str = None
-    pillars: list = None
     prestige: bool = None
     famu_status: str = None
 
@@ -22,7 +21,7 @@ class FamilyUnit:
 
 
 def familyunit_shop(famu_name: str, famu_status: str = None) -> FamilyUnit:
-    x_familyunit = FamilyUnit(famu_name, pillars=[], prestige=False)
+    x_familyunit = FamilyUnit(famu_name, prestige=False)
     x_familyunit.set_famu_status(famu_status)
     return x_familyunit
 
@@ -83,3 +82,13 @@ def wheelunit_shop(wheel_name: str) -> WheelUnit:
     x_wheelunit = WheelUnit(wheel_name)
     x_wheelunit.familyunits = {}
     return x_wheelunit
+
+
+@dataclass
+class LandUnit:
+    land_name: str = None
+    pillars: set[PillarUnit] = None
+
+
+def landunit_shop(land_name: str) -> LandUnit:
+    return LandUnit(land_name=land_name, pillars=set())

@@ -6,6 +6,8 @@ from ch41_wheel.wheel_logic import (
     FAMU_STATUSES,
     WheelUnit,
     wheelunit_shop,
+    LandUnit,
+    landunit_shop,
 )
 from ch99_glossary.ch_keyword import Ch41Keywords as kw, ExampleStrs as exx
 from pytest import raises as pytest_raises
@@ -20,12 +22,10 @@ def test_FamilyUnit_Exists():
     # THEN
     assert x_familyunit
     assert not x_familyunit.famu_name
-    assert not x_familyunit.pillars
     assert not x_familyunit.prestige
     assert not x_familyunit.famu_status
     assert set(x_familyunit.__dict__.keys()) == {
         "famu_name",
-        "pillars",
         kw.prestige,
         "famu_status",
     }
@@ -79,7 +79,6 @@ def test_familyunit_shop_ReturnsObj_Scenario0_MinimumParameters():
     # THEN
     assert familyunit
     assert familyunit.famu_name == kennedy_str
-    assert familyunit.pillars == []
     assert familyunit.prestige is False
     assert familyunit.famu_status is None
 
@@ -94,7 +93,6 @@ def test_familyunit_shop_ReturnsObj_Scenario1_MaxParameters():
     # THEN
     assert familyunit
     assert familyunit.famu_name == kennedy_str
-    assert familyunit.pillars == []
     assert familyunit.prestige is False
     assert familyunit.famu_status == kw.winning
 
@@ -271,3 +269,21 @@ def test_WheelUnit_get_no_prestige_familyunits_ReturnsObj_Scenario0():
     # THEN
     assert no_prestige_familyunits
     assert no_prestige_familyunits == [echoa_familyunit]
+
+
+def test_LandUnit_Exists():
+    # ESTABLISH / WHEN
+    x_landunit = LandUnit()
+    # THEN
+    assert not x_landunit.land_name
+    assert not x_landunit.pillars
+
+
+def test_landunit_shop_ReturnsObj():
+    # ESTABLISH
+    france_str = "France"
+    # WHEN
+    france_landunit = landunit_shop(france_str)
+    # THEN
+    assert france_landunit.land_name == france_str
+    assert france_landunit.pillars == set()
