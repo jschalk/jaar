@@ -11,6 +11,7 @@ dependencies = [
   "pandas",
   "plotly",
   "openpyxl",
+  "sqlglot",
   "xlsxwriter",
 ]
 description = "A Python package for communicating across cultures."
