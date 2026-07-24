@@ -106,19 +106,19 @@ def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario6_namemap_Inheri
 
     # THEN
     assert merged_translateunit
-    merged_contactbrigde = get_suita_namemap()
-    merged_contactbrigde.spark_num = spark1
-    assert merged_translateunit.namemap == merged_contactbrigde
-    merged_groupbrigde = get_bowl_titlemap()
-    merged_groupbrigde.spark_num = spark1
-    assert merged_translateunit.titlemap == merged_groupbrigde
-    merged_labelbrigde = get_clean_labelmap()
-    merged_labelbrigde.spark_num = spark1
-    assert merged_translateunit.labelmap == merged_labelbrigde
-    merged_ropebrigde = get_clean_ropemap()
-    merged_ropebrigde.spark_num = spark1
-    merged_ropebrigde.labelmap = merged_labelbrigde
-    assert merged_translateunit.ropemap == merged_ropebrigde
+    merged_contactbridge = get_suita_namemap()
+    merged_contactbridge.spark_num = spark1
+    assert merged_translateunit.namemap == merged_contactbridge
+    merged_groupbridge = get_bowl_titlemap()
+    merged_groupbridge.spark_num = spark1
+    assert merged_translateunit.titlemap == merged_groupbridge
+    merged_labelbridge = get_clean_labelmap()
+    merged_labelbridge.spark_num = spark1
+    assert merged_translateunit.labelmap == merged_labelbridge
+    merged_ropebridge = get_clean_ropemap()
+    merged_ropebridge.spark_num = spark1
+    merged_ropebridge.labelmap = merged_labelbridge
+    assert merged_translateunit.ropemap == merged_ropebridge
 
 
 def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario7_namemap_Inherited():
@@ -140,10 +140,10 @@ def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario7_namemap_Inheri
     # THEN
     assert merged_translateunit
     assert new_translateunit.nameterm_exists(bob_otx, bob_inx)
-    merged_contactbrigde = get_suita_namemap()
-    merged_contactbrigde.spark_num = spark1
-    merged_contactbrigde.set_otx2inx(bob_otx, bob_inx)
-    assert merged_translateunit.namemap == merged_contactbrigde
-    merged_groupbrigde = get_bowl_titlemap()
-    merged_groupbrigde.spark_num = spark1
-    assert merged_translateunit.titlemap == merged_groupbrigde
+    merged_contactbridge = get_suita_namemap()
+    merged_contactbridge.spark_num = spark1
+    merged_contactbridge.set_otx2inx(bob_otx, bob_inx)
+    assert merged_translateunit.namemap == merged_contactbridge
+    merged_groupbridge = get_bowl_titlemap()
+    merged_groupbridge.spark_num = spark1
+    assert merged_translateunit.titlemap == merged_groupbridge

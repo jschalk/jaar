@@ -83,3 +83,55 @@ Kazani has, at least for me, interesting opinions about how people lie and how t
 > 1. It is permissible to lie for a good cause
 > 2. Every cause is good
 > 3. Lie is always permissible
+
+
+**July 13th, 2026**  
+Reposted a personal attack against a public figure.
+> Everyone, remember:
+> 
+> No argument starting from 'he is' is worth listening to. Every time, you here these two words, just mute or throw it to the trashbin
+> 
+> That is an ironclad BS marker> 1. It is permissible to lie for a good cause
+
+
+**July 15th, 2026**  
+Reposted a twitter user's post describing Stalin as dumb because he didn't find philosophers interesting.
+> That is basically how he obtained power. Everyone thought this guy is dumb, so no one got alarmed until his power became absolute & total. And even *then*, many (like Trotsky) simply could not believe
+> 
+> Stalin was not dumb. It's human opinions that are dumb. Reject human opinions
+> 
+> Actually, this is not an exception, but rather the rule. Every time, political succession is determined by the consensus of the elites, they always choose the least alarming (-> weakest, dumbest, least charismatic, most timid) candidate
+> 
+> Occasionally, they get it wrong
+
+
+**July 18th, 2026**  
+Responding to the following post "Might be superficial observation of mine but EastAsians don't seem to be given over to navel-gazing or inward reflection in the way Westerners are prone to"
+> No, I don't think this is true
+> 
+> People are the same everywhere
+> 
+> If it looks otherwise, that is because of the cultural & linguistic barrier. Once you start talking to them, you realise that people in Shandong, in Phoenix and in Makhachkala are all exactly the same
+> Circumstances are different, yes
+> 
+> People are not
+
+
+**July 18th, 2026**  
+Responding to the following post: 
+"It’s become impossible to ignore the way that people online make fun of my opponent for things that have nothing to do with her policies or politics. It’s unkind and unhelpful. If you support me, please stop. 
+
+Focus on the issues: Congresswoman Stevens has ask corporations and special interests to support her. She votes to send our money abroad while Michiganders struggle. She’s bought by DTE, Blue Cross, Big Tech, and Big Pharma who pick our pockets. AIPAC, Trump-aligned billionaires, and corporate PACs are spending $50,000,000+ to support her. 
+
+THOSE are the issues. We don’t need to be unkind to be honest."
+> Daily reminder
+> 
+> For a politician, acting like an asshole is ten thousand times preferable to apologising. The former may be a downside, sometimes, a big downside. It depends. The latter is an immediate & guaranteed catastrophe
+> 
+> Best thing you can do, is to be firm & polite. Look at Zohran Mamdani, who towers over the pathetic American political landscape like the mountains of Uganda. Much to learn from
+> 
+> But. If you can’t be firm & polite, be just firm. That may suffice. Or not. Again, it depends
+> 
+> The most important thing is to never ever ever be overly accommodating. That is a guaranteed catastrophe, in 100% of cases. People may follow a fool, they may follow an asshole, but they will never ever follow a whimp
+
+

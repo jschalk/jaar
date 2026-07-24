@@ -158,8 +158,8 @@ def get_in_mer_str() -> LabelTerm:
     return "in_mer"
 
 
-def get_on_land_str() -> LabelTerm:
-    return "on_land"
+def get_on_terre_str() -> LabelTerm:
+    return "on_terre"
 
 
 def get_iowa_rope() -> RopeTerm:
@@ -186,8 +186,8 @@ def get_in_mer_rope() -> RopeTerm:
     return create_rope(get_location_rope(), get_in_mer_str())
 
 
-def get_on_land_rope() -> RopeTerm:
-    return create_rope(get_location_rope(), get_on_land_str())
+def get_on_terre_rope() -> RopeTerm:
+    return create_rope(get_location_rope(), get_on_terre_str())
 
 
 def get_yao_ohio_lessonfilehandler(moment_mstr_dir) -> LessonFileHandler:
@@ -247,7 +247,7 @@ def test_listen_to_person_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
     yao_gut0 = get_example_yao_gut_with_3_healers(moment_mstr_dir)
     yao_gut0.set_l1_plan(planunit_shop(get_location_str()))
     yao_gut0.set_plan_obj(planunit_shop(get_in_mer_str()), get_location_rope())
-    yao_gut0.set_plan_obj(planunit_shop(get_on_land_str()), get_location_rope())
+    yao_gut0.set_plan_obj(planunit_shop(get_on_terre_str()), get_location_rope())
     yao_gut0.set_l1_plan(planunit_shop(exx.bowl, pledge=True))
     yao_gut0.edit_reason(get_bowl_rope(), get_location_rope(), get_in_mer_rope())
     yao_gut0.add_fact(get_location_rope(), get_in_mer_rope())
@@ -367,7 +367,7 @@ def test_listen_to_person_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
     assert yao_job.plan_exists(run_rope()) is False
     assert yao_job.plan_exists(get_bowl_rope())
     assert yao_job.plan_exists(get_in_mer_rope())
-    assert yao_job.plan_exists(get_on_land_rope()) is False
+    assert yao_job.plan_exists(get_on_terre_rope()) is False
     assert yao_job.get_fact(get_location_rope()) is not None
     assert yao_job.get_fact(get_location_rope()).fact_state == get_in_mer_rope()
     assert len(yao_job.get_agenda_dict()) == 1

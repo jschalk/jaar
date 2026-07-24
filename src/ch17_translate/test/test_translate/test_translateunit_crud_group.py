@@ -8,7 +8,7 @@ def test_TranslateUnit_set_titlemap_SetsAttr():
     # ESTABLISH
     sue_translateunit = translateunit_shop(exx.sue)
     x_titlemap = titlemap_shop(spark_face=exx.sue)
-    x_titlemap.set_otx2inx("Bob", "Bob of Portland")
+    x_titlemap.set_otx2inx("Bob", "Bob of Salem")
     assert sue_translateunit.titlemap != x_titlemap
 
     # WHEN
@@ -81,7 +81,7 @@ def test_TranslateUnit_get_titlemap_ReturnsObj():
     # ESTABLISH
     sue_translateunit = translateunit_shop(exx.sue)
     static_x_titlemap = titlemap_shop(spark_face=exx.sue)
-    static_x_titlemap.set_otx2inx("Bob", "Bob of Portland")
+    static_x_titlemap.set_otx2inx("Bob", "Bob of Salem")
     sue_translateunit.set_titlemap(static_x_titlemap)
 
     # WHEN

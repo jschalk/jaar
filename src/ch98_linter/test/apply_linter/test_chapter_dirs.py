@@ -84,7 +84,7 @@ def test_Chapters_NonTestFilesDoNotHaveStringFunctionsImports():
                     assert not str(file_import[0]).endswith("_str")
 
 
-def test_Chapters_ChapterReferenceDir_ref_ExistsForEveryChapter_Scenario0():
+def test_Chapters_ReferenceDir_ref_ExistsForEveryChapter_Scenario0():
     """
     Test that all string-related functions in each chapter directory are asserted and tested.
     This test performs the following checks for each chapter:

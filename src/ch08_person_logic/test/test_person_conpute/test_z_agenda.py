@@ -182,9 +182,9 @@ def test_PersonUnit_get_agenda_dict_PersonUnitHasCorrectAttributes_personunit_v0
     ced_wk_str = "ced_wk"
     ced_wk_rope = yao_person.make_l1_rope(ced_wk_str)
     yao_person.add_fact(fact_context=ced_wk_rope, fact_state=ced_wk_rope)
-    # water_str = "WaterExistence"
-    # water_rope = yao_person.make_l1_rope(water_str)
-    # yao_person.add_fact(fact_context=water_rope, fact_state=water_rope)
+    # agua_str = "AguaExistence"
+    # agua_rope = yao_person.make_l1_rope(agua_str)
+    # yao_person.add_fact(fact_context=agua_rope, fact_state=agua_rope)
     # movie_str = "No Movie playing"
     # movie_rope = yao_person.make_l1_rope(movie_str)
     # yao_person.add_fact(fact_context=movie_rope, fact_state=movie_str)

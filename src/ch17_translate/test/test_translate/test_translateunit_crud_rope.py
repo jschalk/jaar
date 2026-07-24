@@ -8,7 +8,7 @@ def test_TranslateUnit_set_ropemap_SetsAttr():
     # ESTABLISH
     sue_translateunit = translateunit_shop(exx.sue)
     x_ropemap = ropemap_shop(spark_face=exx.sue)
-    x_ropemap.set_otx2inx("Bob", "Bob of Portland")
+    x_ropemap.set_otx2inx("Bob", "Bob of Salem")
     assert sue_translateunit.ropemap != x_ropemap
 
     # WHEN
@@ -81,7 +81,7 @@ def test_TranslateUnit_get_ropemap_ReturnsObj():
     # ESTABLISH
     sue_translateunit = translateunit_shop(exx.sue)
     static_x_ropemap = ropemap_shop(spark_face=exx.sue)
-    static_x_ropemap.set_otx2inx("Bob", "Bob of Portland")
+    static_x_ropemap.set_otx2inx("Bob", "Bob of Salem")
     sue_translateunit.set_ropemap(static_x_ropemap)
 
     # WHEN

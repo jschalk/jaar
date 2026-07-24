@@ -8,7 +8,7 @@ def test_TranslateUnit_set_labelmap_SetsAttr():
     # ESTABLISH
     sue_translateunit = translateunit_shop(exx.sue)
     x_labelmap = labelmap_shop(spark_face=exx.sue)
-    x_labelmap.set_otx2inx("Bob", "Bob of Portland")
+    x_labelmap.set_otx2inx("Bob", "Bob of Salem")
     assert sue_translateunit.labelmap != x_labelmap
 
     # WHEN
@@ -81,7 +81,7 @@ def test_TranslateUnit_get_labelmap_ReturnsObj():
     # ESTABLISH
     sue_translateunit = translateunit_shop(exx.sue)
     static_x_labelmap = labelmap_shop(spark_face=exx.sue)
-    static_x_labelmap.set_otx2inx("Bob", "Bob of Portland")
+    static_x_labelmap.set_otx2inx("Bob", "Bob of Salem")
     sue_translateunit.set_labelmap(static_x_labelmap)
 
     # WHEN

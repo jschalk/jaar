@@ -274,11 +274,11 @@
         "fact_context": ";A;Aaron Donald objects effected by him;", 
         "fact_state": ";A;Aaron Donald objects effected by him;"
       }, 
+      "A;AguaExistence;": {"fact_context": ";A;AguaExistence;", "fact_state": ";A;AguaExistence;"}, 
       "A;Moods;": {"fact_context": ";A;Moods;", "fact_state": ";A;Moods;"}, 
       "A;Nation-States;": {"fact_context": ";A;Nation-States;", "fact_state": ";A;Nation-States;"}, 
       "A;No Movie playing;": {"fact_context": ";A;No Movie playing;", "fact_state": ";A;No Movie playing;"}, 
       "A;Seasons;": {"fact_context": ";A;Seasons;", "fact_state": ";A;Seasons;"}, 
-      "A;WaterExistence;": {"fact_context": ";A;WaterExistence;", "fact_state": ";A;WaterExistence;"}, 
       "A;Websites;": {"fact_context": ";A;Websites;", "fact_state": ";A;Websites;"}, 
       "A;casa;cleaning;laundry basket situation;": {
         "fact_context": ";A;casa;cleaning;laundry basket situation;", 
@@ -298,7 +298,7 @@
           "ACME Employee Responsiblities": {
             "is_expanded": false, 
             "kids": {
-              "Abuse Deterrence and Reporting guildlines": {
+              "Abuse Avoidance and Reporting guildlines": {
                 "kids": {
                   "Accomplish Summer 2021 traaining": {
                     "plan_label": "Accomplish Summer 2021 traaining", 
@@ -319,7 +319,7 @@
                     }
                   }
                 }, 
-                "plan_label": "Abuse Deterrence and Reporting guildlines", 
+                "plan_label": "Abuse Avoidance and Reporting guildlines", 
                 "plan_uid": 106, 
                 "poynt": 1
               }, 
@@ -881,6 +881,92 @@
         "plan_uid": 261, 
         "poynt": 1
       }, 
+      "Agua Living": {
+        "is_expanded": false, 
+        "kids": {
+          "bowling in Williamette aguashed": {
+            "kids": {
+              "Go bouldering at east Circuit": {
+                "plan_label": "Go bouldering at east Circuit", 
+                "plan_uid": 226, 
+                "poynt": 1, 
+                "reasonunits": {
+                  "A;AguaExistence;": {
+                    "cases": {
+                      "A;AguaExistence;Williamette AguaShed;West side of Aguashed": {"reason_state": ";A;AguaExistence;Williamette AguaShed;West side of Aguashed"}
+                    }, 
+                    "reason_context": ";A;AguaExistence;"
+                  }
+                }
+              }, 
+              "bike around": {
+                "plan_label": "bike around", 
+                "plan_uid": 227, 
+                "poynt": 1, 
+                "reasonunits": {
+                  "A;AguaExistence;": {
+                    "cases": {
+                      "A;AguaExistence;Williamette AguaShed;East Side of Aguashed": {"reason_state": ";A;AguaExistence;Williamette AguaShed;East Side of Aguashed"}
+                    }, 
+                    "reason_context": ";A;AguaExistence;"
+                  }
+                }
+              }, 
+              "trout": {
+                "plan_label": "trout", 
+                "plan_uid": 228, 
+                "poynt": 1, 
+                "reasonunits": {
+                  "A;AguaExistence;": {
+                    "cases": {
+                      "A;AguaExistence;Williamette AguaShed;East Side of Aguashed;flat": {
+                        "reason_state": ";A;AguaExistence;Williamette AguaShed;East Side of Aguashed;flat"
+                      }
+                    }, 
+                    "reason_context": ";A;AguaExistence;"
+                  }
+                }
+              }
+            }, 
+            "plan_label": "bowling in Williamette aguashed", 
+            "plan_uid": 225, 
+            "poynt": 1, 
+            "reasonunits": {
+              "A;AguaExistence;": {
+                "cases": {
+                  "A;AguaExistence;Williamette AguaShed": {"reason_state": ";A;AguaExistence;Williamette AguaShed"}
+                }, 
+                "reason_context": ";A;AguaExistence;"
+              }
+            }
+          }
+        }, 
+        "plan_label": "Agua Living", 
+        "plan_uid": 223, 
+        "poynt": 1
+      }, 
+      "AguaExistence": {
+        "is_expanded": false, 
+        "kids": {
+          "Williamette AguaShed": {
+            "kids": {
+              "East Side of Aguashed": {
+                "kids": { "flat": {"plan_label": "flat", "plan_uid": 260, "poynt": 1} }, 
+                "plan_label": "East Side of Aguashed", 
+                "plan_uid": 258, 
+                "poynt": 1
+              }, 
+              "West side of Aguashed": {"plan_label": "West side of Aguashed", "plan_uid": 259, "poynt": 1}
+            }, 
+            "plan_label": "Williamette AguaShed", 
+            "plan_uid": 257, 
+            "poynt": 1
+          }
+        }, 
+        "plan_label": "AguaExistence", 
+        "plan_uid": 256, 
+        "poynt": 1
+      }, 
       "Asset administration": {
         "is_expanded": false, 
         "kids": {
@@ -897,7 +983,7 @@
           }, 
           "USA sovereignty": {
             "kids": {
-              "portland sovereignty": {
+              "salem sovereignty": {
                 "kids": {
                   "downtown": {
                     "kids": {
@@ -910,7 +996,7 @@
                             "reasonunits": {
                               "A;Nation-States;": {
                                 "cases": {
-                                  "A;Nation-States;USA;Portland OR;Downtown;PSU;Pool": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Pool"}
+                                  "A;Nation-States;USA;Salem OR;Downtown;PSU;Pool": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown;PSU;Pool"}
                                 }, 
                                 "reason_context": ";A;Nation-States;"
                               }
@@ -923,7 +1009,7 @@
                             "reasonunits": {
                               "A;Nation-States;": {
                                 "cases": {
-                                  "A;Nation-States;USA;Portland OR;Downtown;PSU;library": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;library"}
+                                  "A;Nation-States;USA;Salem OR;Downtown;PSU;library": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown;PSU;library"}
                                 }, 
                                 "reason_context": ";A;Nation-States;"
                               }
@@ -947,7 +1033,7 @@
                             "reasonunits": {
                               "A;Nation-States;": {
                                 "cases": {
-                                  "A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field"}
+                                  "A;Nation-States;USA;Salem OR;Downtown;PSU;Stott Field": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown;PSU;Stott Field"}
                                 }, 
                                 "reason_context": ";A;Nation-States;"
                               }
@@ -960,7 +1046,7 @@
                         "reasonunits": {
                           "A;Nation-States;": {
                             "cases": {
-                              "A;Nation-States;USA;Portland OR;Downtown;PSU": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU"}
+                              "A;Nation-States;USA;Salem OR;Downtown;PSU": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown;PSU"}
                             }, 
                             "reason_context": ";A;Nation-States;"
                           }
@@ -975,7 +1061,7 @@
                             "reasonunits": {
                               "A;Nation-States;": {
                                 "cases": {
-                                  "A;Nation-States;USA;Portland OR;Downtown;Flats;workspace;": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;workspace;"}
+                                  "A;Nation-States;USA;Salem OR;Downtown;Flats;workspace;": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown;Flats;workspace;"}
                                 }, 
                                 "reason_context": ";A;Nation-States;"
                               }
@@ -1001,8 +1087,8 @@
                             "reasonunits": {
                               "A;Nation-States;": {
                                 "cases": {
-                                  "A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden;": {
-                                    "reason_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden;"
+                                  "A;Nation-States;USA;Salem OR;Downtown;Flats;10th floor gaarden;": {
+                                    "reason_state": ";A;Nation-States;USA;Salem OR;Downtown;Flats;10th floor gaarden;"
                                   }
                                 }, 
                                 "reason_context": ";A;Nation-States;"
@@ -1016,7 +1102,7 @@
                             "reasonunits": {
                               "A;Nation-States;": {
                                 "cases": {
-                                  "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"}
+                                  "A;Nation-States;USA;Salem OR;Downtown;Flats;Apt 450": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown;Flats;Apt 450"}
                                 }, 
                                 "reason_context": ";A;Nation-States;"
                               }
@@ -1040,7 +1126,7 @@
                         "reasonunits": {
                           "A;Nation-States;": {
                             "cases": {
-                              "A;Nation-States;USA;Portland OR;Downtown;Flats": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats"}
+                              "A;Nation-States;USA;Salem OR;Downtown;Flats": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown;Flats"}
                             }, 
                             "reason_context": ";A;Nation-States;"
                           }
@@ -1053,20 +1139,20 @@
                     "reasonunits": {
                       "A;Nation-States;": {
                         "cases": {
-                          "A;Nation-States;USA;Portland OR;Downtown": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown"}
+                          "A;Nation-States;USA;Salem OR;Downtown": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown"}
                         }, 
                         "reason_context": ";A;Nation-States;"
                       }
                     }
                   }
                 }, 
-                "plan_label": "portland sovereignty", 
+                "plan_label": "salem sovereignty", 
                 "plan_uid": 206, 
                 "poynt": 1, 
                 "reasonunits": {
                   "A;Nation-States;": {
                     "cases": {
-                      "A;Nation-States;USA;Portland OR": {"reason_state": ";A;Nation-States;USA;Portland OR"}
+                      "A;Nation-States;USA;Salem OR": {"reason_state": ";A;Nation-States;USA;Salem OR"}
                     }, 
                     "reason_context": ";A;Nation-States;"
                   }
@@ -1490,7 +1576,7 @@
           "France2": {"plan_label": "France2", "plan_uid": 235, "poynt": 1}, 
           "USA": {
             "kids": {
-              "Portland OR": {
+              "Salem OR": {
                 "kids": {
                   "Downtown": {
                     "kids": {
@@ -1522,7 +1608,7 @@
                     "poynt": 1
                   }
                 }, 
-                "plan_label": "Portland OR", 
+                "plan_label": "Salem OR", 
                 "plan_uid": 237, 
                 "poynt": 1
               }, 
@@ -1638,96 +1724,6 @@
             "reason_context": ";A;Moods;"
           }
         }
-      }, 
-      "Water Living": {
-        "is_expanded": false, 
-        "kids": {
-          "bowling in Williamette watershed": {
-            "kids": {
-              "Go bouldering at east Circuit": {
-                "plan_label": "Go bouldering at east Circuit", 
-                "plan_uid": 226, 
-                "poynt": 1, 
-                "reasonunits": {
-                  "A;WaterExistence;": {
-                    "cases": {
-                      "A;WaterExistence;Williamette WaterShed;West side of Watershed": {
-                        "reason_state": ";A;WaterExistence;Williamette WaterShed;West side of Watershed"
-                      }
-                    }, 
-                    "reason_context": ";A;WaterExistence;"
-                  }
-                }
-              }, 
-              "bike around": {
-                "plan_label": "bike around", 
-                "plan_uid": 227, 
-                "poynt": 1, 
-                "reasonunits": {
-                  "A;WaterExistence;": {
-                    "cases": {
-                      "A;WaterExistence;Williamette WaterShed;East Side of Watershed": {
-                        "reason_state": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed"
-                      }
-                    }, 
-                    "reason_context": ";A;WaterExistence;"
-                  }
-                }
-              }, 
-              "trout": {
-                "plan_label": "trout", 
-                "plan_uid": 228, 
-                "poynt": 1, 
-                "reasonunits": {
-                  "A;WaterExistence;": {
-                    "cases": {
-                      "A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat": {
-                        "reason_state": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat"
-                      }
-                    }, 
-                    "reason_context": ";A;WaterExistence;"
-                  }
-                }
-              }
-            }, 
-            "plan_label": "bowling in Williamette watershed", 
-            "plan_uid": 225, 
-            "poynt": 1, 
-            "reasonunits": {
-              "A;WaterExistence;": {
-                "cases": {
-                  "A;WaterExistence;Williamette WaterShed": {"reason_state": ";A;WaterExistence;Williamette WaterShed"}
-                }, 
-                "reason_context": ";A;WaterExistence;"
-              }
-            }
-          }
-        }, 
-        "plan_label": "Water Living", 
-        "plan_uid": 223, 
-        "poynt": 1
-      }, 
-      "WaterExistence": {
-        "is_expanded": false, 
-        "kids": {
-          "Williamette WaterShed": {
-            "kids": {
-              "East Side of Watershed": {
-                "kids": { "flat": {"plan_label": "flat", "plan_uid": 260, "poynt": 1} }, 
-                "plan_label": "East Side of Watershed", 
-                "plan_uid": 258, 
-                "poynt": 1
-              }, 
-              "West side of Watershed": {"plan_label": "West side of Watershed", "plan_uid": 259, "poynt": 1}
-            }, 
-            "plan_label": "Williamette WaterShed", 
-            "plan_uid": 257, 
-            "poynt": 1
-          }
-        }, 
-        "plan_label": "WaterExistence", 
-        "plan_uid": 256, 
-        "poynt": 1
       }, 
       "Websites": {
         "is_expanded": false, 
@@ -1933,9 +1929,9 @@
           }, 
           "cleaning": {
             "kids": {
-              "check cat water": {
+              "check cat agua": {
                 "awardunits": { ";Family": {"awardee_title": ";Family", "give_force": 1.0, "take_force": 1} }, 
-                "plan_label": "check cat water", 
+                "plan_label": "check cat agua", 
                 "plan_uid": 33, 
                 "pledge": true, 
                 "poynt": 1, 
@@ -2434,7 +2430,7 @@
             "reasonunits": {
               "A;Nation-States;": {
                 "cases": {
-                  "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {"reason_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"}
+                  "A;Nation-States;USA;Salem OR;Downtown;Flats;Apt 450": {"reason_state": ";A;Nation-States;USA;Salem OR;Downtown;Flats;Apt 450"}
                 }, 
                 "reason_context": ";A;Nation-States;"
               }
@@ -2914,7 +2910,7 @@
                 "reasonunits": {
                   "A;Nation-States;": {
                     "cases": {
-                      "A;Nation-States;USA;Portland OR": {"reason_state": ";A;Nation-States;USA;Portland OR"}
+                      "A;Nation-States;USA;Salem OR": {"reason_state": ";A;Nation-States;USA;Salem OR"}
                     }, 
                     "reason_context": ";A;Nation-States;"
                   }, 
@@ -2940,7 +2936,7 @@
                 "reasonunits": {
                   "A;Nation-States;": {
                     "cases": {
-                      "A;Nation-States;USA;Portland OR": {"reason_state": ";A;Nation-States;USA;Portland OR"}
+                      "A;Nation-States;USA;Salem OR": {"reason_state": ";A;Nation-States;USA;Salem OR"}
                     }, 
                     "reason_context": ";A;Nation-States;"
                   }, 
@@ -2964,7 +2960,7 @@
             "reasonunits": {
               "A;Nation-States;": {
                 "cases": {
-                  "A;Nation-States;USA;Portland OR": {"reason_state": ";A;Nation-States;USA;Portland OR"}
+                  "A;Nation-States;USA;Salem OR": {"reason_state": ";A;Nation-States;USA;Salem OR"}
                 }, 
                 "reason_context": ";A;Nation-States;"
               }
