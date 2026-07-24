@@ -9318,6 +9318,7 @@ class Ch40Keywords(str, Enum):
     time = "time"
     titlemap = "titlemap"
     today = "today"
+    tower = "tower"
     tran_time = "tran_time"
     tran_time_inx = "tran_time_inx"
     tran_time_otx = "tran_time_otx"
