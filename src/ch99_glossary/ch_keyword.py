@@ -9112,6 +9112,7 @@ class Ch40Keywords(str, Enum):
     heard_agg = "heard_agg"
     heard_raw = "heard_raw"
     heard_vld = "heard_vld"
+    hive = "hive"
     hour = "hour"
     hour_label = "hour_label"
     hour_label_inx = "hour_label_inx"
