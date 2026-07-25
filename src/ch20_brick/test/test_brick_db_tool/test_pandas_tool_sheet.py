@@ -188,10 +188,10 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_TranslateSheetNames(
     df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
     sugar_str = "sugar"
-    honey_name1 = "honey1x"
+    salt_name1 = "salt1x"
     sugar_name1 = f"{sugar_str}2x"
-    sugar_name2 = f"honey_{sugar_str}3x"
-    save_sheet(ex_file_path, honey_name1, df1)
+    sugar_name2 = f"salt_{sugar_str}3x"
+    save_sheet(ex_file_path, salt_name1, df1)
     save_sheet(ex_file_path, sugar_name1, df2)
     save_sheet(ex_file_path, sugar_name2, df2)
 
@@ -200,7 +200,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_TranslateSheetNames(
 
     # THEN
     assert x_sheet_names
-    assert (x_dir, ex_filename, honey_name1) not in x_sheet_names
+    assert (x_dir, ex_filename, salt_name1) not in x_sheet_names
     assert (x_dir, ex_filename, sugar_name1) in x_sheet_names
     assert (x_dir, ex_filename, sugar_name2) in x_sheet_names
     assert len(x_sheet_names) == 2
@@ -214,28 +214,28 @@ def test_sheet_exists_ReturnsObj_Scenario1(temp3_fs):
     ex_file_path = create_path(x_dir, ex_filename)
     df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     sugar_str = "sugar"
-    honey_name1 = "honey1x"
+    salt_name1 = "salt1x"
     sugar_name1 = f"{sugar_str}2x"
-    sugar_name2 = f"honey_{sugar_str}3x"
-    assert sheet_exists(ex_file_path, honey_name1) is False
+    sugar_name2 = f"salt_{sugar_str}3x"
+    assert sheet_exists(ex_file_path, salt_name1) is False
     assert sheet_exists(ex_file_path, sugar_name1) is False
     assert sheet_exists(ex_file_path, sugar_name2) is False
 
     # WHEN / THEN
-    save_sheet(ex_file_path, honey_name1, df1)
-    assert sheet_exists(ex_file_path, honey_name1)
+    save_sheet(ex_file_path, salt_name1, df1)
+    assert sheet_exists(ex_file_path, salt_name1)
     assert sheet_exists(ex_file_path, sugar_name1) is False
     assert sheet_exists(ex_file_path, sugar_name2) is False
 
     # WHEN / THEN
     save_sheet(ex_file_path, sugar_name1, df1)
-    assert sheet_exists(ex_file_path, honey_name1)
+    assert sheet_exists(ex_file_path, salt_name1)
     assert sheet_exists(ex_file_path, sugar_name1)
     assert sheet_exists(ex_file_path, sugar_name2) is False
 
     # WHEN / THEN
     save_sheet(ex_file_path, sugar_name2, df1)
-    assert sheet_exists(ex_file_path, honey_name1)
+    assert sheet_exists(ex_file_path, salt_name1)
     assert sheet_exists(ex_file_path, sugar_name1)
     assert sheet_exists(ex_file_path, sugar_name2)
 
