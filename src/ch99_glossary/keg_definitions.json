@@ -195,6 +195,8 @@
   "doctor_count": "Definition needed.", 
   "doctor_rank_num": "Definition needed.", 
   "doctor_rank_percent": "Definition needed.", 
+  "Drag": "Opposite of Lift. When a FamilyUnit shuts off support to bring a FamilyUnit down.", 
+  "drag": "Opposite of Lift. When a FamilyUnit shuts off support to bring a FamilyUnit down.", 
   "duration": "Definition needed.", 
   "Eastday": "Fifth Day of 5 day week of 'Five' Epoch", 
   "ep8": "Example key with value ';ep8;' used for tests throughout codebase.", 
