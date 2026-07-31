@@ -42,7 +42,7 @@ def test_Chapters_NonTestFilesDoNotHavePrintStatments():
     # ESTABLISH
     print_str = "print"
     excluded_files = {
-        "calcite_app.py",
+        "puncher_app.py",
         "chapter_move_tool.py",
         "ch_move1.py",
         "ch_move_many.py",

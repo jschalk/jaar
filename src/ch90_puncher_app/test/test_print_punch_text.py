@@ -3,7 +3,7 @@ test_print_punch_text.py
 
 Tests for ETLApp._print_punch_text.
 
-Does NOT import calcite_app or tkinter -- each test builds a throwaway _Stub
+Does NOT import puncher_app or tkinter -- each test builds a throwaway _Stub
 class containing only the method under test. tkinter_messagebox is injected
 as an instance attribute so the real tkinter is never touched.
 

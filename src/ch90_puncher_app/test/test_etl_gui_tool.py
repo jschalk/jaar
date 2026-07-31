@@ -1,4 +1,4 @@
-from ch90_calcite_app.calcite_tool import (
+from ch90_puncher_app.puncher_tool import (
     create_elpaso_time_config_file,
     create_emmanuel_idea_file,
     create_emmanuel_lovemaking_idea_file,

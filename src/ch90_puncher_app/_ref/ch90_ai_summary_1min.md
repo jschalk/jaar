@@ -1,11 +1,11 @@
-# ch90_calcite_app — Chapter Summary
+# ch90_puncher_app — Chapter Summary
 
 *This summary is authored by AI 5-26-2026.*
 
 ## 1. Title and Summary Declaration
 
-**Chapter 50 — `ch90_calcite_app`**
-**"Calcite App — a tkinter desktop GUI that wraps the full ETL pipeline, letting non-developers run keg from an Excel-file interface"**
+**Chapter 50 — `ch90_puncher_app`**
+**"Puncher App — a tkinter desktop GUI that wraps the full ETL pipeline, letting non-developers run keg from an Excel-file interface"**
 
 ---
 
@@ -21,7 +21,7 @@ Ontology note:
 
 ## 3. Summary of Previous Relevant Chapters
 
-- **ch08_person_logic**: `personunit_shop` — used in `calcite_tool.py` to construct example `PersonUnit`s for the bundled starter idea files.
+- **ch08_person_logic**: `personunit_shop` — used in `puncher_tool.py` to construct example `PersonUnit`s for the bundled starter idea files.
 - **ch14_time**: `get_creg_config`, `get_five_config`, `epochunit_shop` — the "El Paso" and "TeamFive" example templates use real epoch configurations.
 - **ch15_moment**: `momentunit_shop` — moment objects are built for example templates.
 - **ch20_brick**: `csv_dict_to_excel`, `prettify_excel_file`, `remove_empty_sheets`, `prettify_excel_files` — all Excel output formatting is delegated to ch20.
@@ -35,9 +35,9 @@ New semantic type: none. `ch90_semantic_types.py` re-exports through ch22.
 
 ## 4. Summary of What This Chapter Does
 
-`ch90_calcite_app` is the **desktop application layer** of keg — the product that end users interact with directly.
+`ch90_puncher_app` is the **desktop application layer** of keg — the product that end users interact with directly.
 
-**`calcite_tool.py`** contains three categories of logic:
+**`puncher_tool.py`** contains three categories of logic:
 
 *App settings and defaults:*
 - `ETLAppSettings` — a dataclass holding all UI theming values (dark background `#1a1a1f`, accent yellow `#e8c547`, monospace fonts, etc.) with platform-specific font selection (Courier New on Windows, Menlo on macOS/Linux).
@@ -59,7 +59,7 @@ Eight named example generators build `PersonUnit`s and `MomentUnit`s programmati
 - `fill_spark_face_in_directory(directory, face_name)` — fills empty `spark_face` cells in all Excel files in a directory with the provided face name. Used before running the pipeline when a user has authored idea sheets without attributing them to a face.
 - `get_option_table_options()` — returns a dict mapping human-understandable option names to their generator functions, used to populate the GUI's dropdown/table of example actions.
 
-**`calcite_app.py`** — the tkinter GUI:
+**`puncher_app.py`** — the tkinter GUI:
 - A dark-themed desktop window with labeled entry fields for `world_name`, `worlds_dir`, `me_name`, `you_name`, and `output_dir`.
 - A scrollable option table listing the example generator functions from `get_option_table_options`.
 - A "Run ETL" button that calls `create_today_punchs` (ch32) — the end-to-end pipeline from ideas to Google Calendar day punches — with a live log output pane showing stdout.

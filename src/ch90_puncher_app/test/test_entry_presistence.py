@@ -2,7 +2,7 @@
 test_state_persistence.py
 
 Tests for the four state-persistence methods in ETLApp.
-Does NOT import calcite_app at all — each test builds a throwaway class
+Does NOT import puncher_app at all — each test builds a throwaway class
 that contains only the method under test, so there are zero import
 or sys.path issues.
 """
@@ -22,7 +22,7 @@ def test__state_path_Scenario0_ReturnsPathEndingInStateJsonUnderAppDataW1App():
         @staticmethod
         def _state_path() -> str:
             app_data = os.environ.get("APPDATA") or os_path_expanduser("~")
-            state_dir = os_path_join(app_data, "calcite_app")
+            state_dir = os_path_join(app_data, "puncher_app")
             os.makedirs(state_dir, exist_ok=True)
             return os_path_join(state_dir, "state.json")
 
@@ -35,7 +35,7 @@ def test__state_path_Scenario0_ReturnsPathEndingInStateJsonUnderAppDataW1App():
         result = _Stub._state_path()
 
     # THEN
-    assert result == os_path_join(fake_appdata, "calcite_app", "state.json")
+    assert result == os_path_join(fake_appdata, "puncher_app", "state.json")
 
 
 # ── _save_state ───────────────────────────────────────────────────────────────

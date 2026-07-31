@@ -1,4 +1,4 @@
-from ch90_calcite_app.calcite_app import ETLApp
+from ch90_puncher_app.puncher_app import ETLApp
 from os import environ as os_environ
 from pytest import fail as pytest_fail
 
