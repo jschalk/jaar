@@ -360,7 +360,7 @@
   "heard_vld": {"valid_ch": "22:"}, 
   "heart": {"valid_ch": ""}, 
   "hive": {"valid_ch": "40"}, 
-  "hose": {"valid_ch": ""}, 
+  "hose": {"valid_ch": "40"}, 
   "hour": {"valid_ch": "14:"}, 
   "hour_label": {"sort_ordinal": 25, "valid_ch": "14:"}, 
   "hour_label_inx": {"sort_ordinal": 27, "valid_ch": "20:"}, 
