@@ -214,6 +214,8 @@
   "excel": "A spreadsheet format.", 
   "FaceName": "str first used in ch10. The Face is the source of all outside data.", 
   "fact": "Facts are very important concept in Kegology. I tried never to use these 4 letters anywhere that didn't refer exactly to that concept.", 
+  "Faction": "A community of FamilyUnits unified by a political loyality. Power is never exercised (or won) by individuals. It is always exercised (or won) by factions. Power is always collective, factional. In the centre of it, there is always a group of individuals, tied with strong informal connections with each other. I call it, a faction.", 
+  "faction": "A community of FamilyUnits unified by a political loyality. Power is never exercised (or won) by individuals. It is always exercised (or won) by factions. Power is always collective, factional. In the centre of it, there is always a group of individuals, tied with strong informal connections with each other. I call it, a faction.", 
   "fact_context": "All facts have a foundational context, Fact seed.", 
   "fact_context_ERASE": "Definition needed.", 
   "fact_context_ERASE_inx": "The 'fact_context_ERASE' value after Translate.", 

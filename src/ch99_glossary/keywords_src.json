@@ -289,6 +289,8 @@
   "every_xweeks": {"valid_ch": "14:"}, 
   "excel": {"valid_ch": "20:"}, 
   "fact": {"valid_ch": "5:"}, 
+  "Faction": {"valid_ch": "40"}, 
+  "faction": {"valid_ch": "40"}, 
   "fact_context": {"sort_ordinal": 62, "valid_ch": "6:"}, 
   "fact_context_ERASE": {"sort_ordinal": 65, "valid_ch": "9:"}, 
   "fact_context_ERASE_inx": {"sort_ordinal": 67, "valid_ch": "20, 22"}, 
