@@ -85,8 +85,9 @@ def test_draw_trapezoid_SetsAttr_Scenario0_No_height():
 
     # THEN
     assert d0.__dict__ != d0_old.__dict__
-    print(f"{d0_old.__dict__.get("elements")=}")
-    print(f"    {d0.__dict__.get("elements")=}")
+    elements_str = "elements"
+    print(f"{d0_old.__dict__.get(elements_str)=}")
+    print(f"    {d0.__dict__.get(elements_str)=}")
     assert _get_elements_count(d0) != _get_elements_count(d0_old)
 
 
@@ -101,8 +102,9 @@ def test_draw_trapezoid_SetsAttr_Scenario1_height_Passed():
 
     # THEN
     assert d0.__dict__ != d0_old.__dict__
-    print(f"{d0_old.__dict__.get("elements")=}")
-    print(f"    {d0.__dict__.get("elements")=}")
+    elements_str = "elements"
+    print(f"{d0_old.__dict__.get(elements_str)=}")
+    print(f"    {d0.__dict__.get(elements_str)=}")
     assert _get_elements_count(d0) != _get_elements_count(d0_old)
     # save_example_image(d0)
 
@@ -118,8 +120,9 @@ def test_draw_trapezoid_row_SetsAttr_Scenario0_1Element():
 
     # THEN
     assert d0.__dict__ != d0_old.__dict__
-    print(f"{d0_old.__dict__.get("elements")=}")
-    print(f"    {d0.__dict__.get("elements")=}")
+    elements_str = "elements"
+    print(f"{d0_old.__dict__.get(elements_str)=}")
+    print(f"    {d0.__dict__.get(elements_str)=}")
     assert _get_elements_count(d0) != _get_elements_count(d0_old)
     # save_example_image(d0)
 
@@ -135,8 +138,9 @@ def test_draw_trapezoid_row_SetsAttr_Scenario1_3Elements():
 
     # THEN
     assert d0.__dict__ != d0_old.__dict__
-    print(f"{d0_old.__dict__.get("elements")=}")
-    print(f"    {d0.__dict__.get("elements")=}")
+    elements_str = "elements"
+    print(f"{d0_old.__dict__.get(elements_str)=}")
+    print(f"    {d0.__dict__.get(elements_str)=}")
     assert _get_elements_count(d0) != _get_elements_count(d0_old)
     # save_example_image(d0)
 
@@ -152,8 +156,9 @@ def test_draw_trapezoid_stack_SetsAttr_Scenario0_3Elements():
 
     # THEN
     assert d0.__dict__ != d0_old.__dict__
-    print(f"{d0_old.__dict__.get("elements")=}")
-    print(f"    {d0.__dict__.get("elements")=}")
+    elements_str = "elements"
+    print(f"{d0_old.__dict__.get(elements_str)=}")
+    print(f"    {d0.__dict__.get(elements_str)=}")
     assert _get_elements_count(d0) != _get_elements_count(d0_old)
     # save_example_image(d0)
 
