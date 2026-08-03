@@ -37,6 +37,18 @@ My copy of *From Valor to Pedigree* is far away in Oregon so I'll present the po
 Here's a footnote describing the philosophical foundations of KegWheel[^2]. Read it if you want. 
 Let's start with the most important concept in Kegology. 
 
+<div align="center"><img src="images/wheel_fig0_0.svg" alt="wheel fig0.0" width="300"></div>
+<div align="center"><img src="images/wheel_fig0_1.svg" alt="wheel fig0.0" width="300"></div>
+<div align="center"><img src="images/wheel_fig0_2.svg" alt="wheel fig0.0" width="300"></div>
+<div align="center"><img src="images/wheel_fig0_3.svg" alt="wheel fig0.0" width="300"></div>
+<div align="center"><img src="images/wheel_fig0_4.svg" alt="wheel fig0.0" width="300"></div>
+<div align="center"><img src="images/wheel_fig0_5.svg" alt="wheel fig0.0" width="300"></div>
+<div align="center"><img src="images/wheel_fig0_6.svg" alt="wheel fig0.0" width="300"></div>
+<div align="center"><img src="images/wheel_fig0_7.svg" alt="wheel fig0.0" width="300"></div>
+<div align="center"><img src="images/wheel_fig0_8.svg" alt="wheel fig0.0" width="300"></div>
+<div align="center"><img src="images/wheel_fig0_9.svg" alt="wheel fig0.0" width="300"></div>
+
+
 ### Oligarchy
 
 First let's establish Kazani's favorite political axiom: All governments are oligarchies. Kazani references a Historian that is brilliant.

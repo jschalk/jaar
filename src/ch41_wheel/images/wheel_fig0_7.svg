@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="700" height="360" viewBox="0 0 700 360">
+<defs>
+</defs>
+<rect x="0" y="0" width="800" height="600" fill="white" />
+<rect x="50" y="50" width="124" height="60" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="112.0" y="77.2" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">son's</text>
+<text x="112.0" y="94.0" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">needs</text>
+<rect x="179" y="50" width="156" height="60" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="257.0" y="77.2" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">daughter's</text>
+<text x="257.0" y="94.0" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">needs</text>
+<rect x="340" y="50" width="99" height="60" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="389.5" y="77.2" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">neighbor's</text>
+<text x="389.5" y="94.0" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">needs</text>
+<rect x="444" y="50" width="108" height="60" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="498.0" y="77.2" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">friend #2's</text>
+<text x="498.0" y="94.0" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">needs</text>
+<rect x="50" y="115" width="156" height="60" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="128.0" y="142.2" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">wife's</text>
+<text x="128.0" y="159.0" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">needs</text>
+<rect x="211" y="115" width="90" height="60" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="256.0" y="142.2" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">brother's</text>
+<text x="256.0" y="159.0" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">needs</text>
+<rect x="306" y="115" width="108" height="60" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="360.0" y="142.2" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">friend #1's</text>
+<text x="360.0" y="159.0" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">needs</text>
+<rect x="50" y="180" width="100" height="60" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="100.0" y="207.2" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">cousin's</text>
+<text x="100.0" y="224.0" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">needs</text>
+<rect x="155" y="180" width="116" height="60" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="213.0" y="207.2" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">brother #2's</text>
+<text x="213.0" y="224.0" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">needs</text>
+<rect x="276" y="180" width="108" height="60" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="330.0" y="207.2" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">uncle's</text>
+<text x="330.0" y="224.0" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">needs</text>
+<rect x="389" y="180" width="107" height="60" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="442.5" y="207.2" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">friend #5's</text>
+<text x="442.5" y="224.0" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">needs</text>
+<rect x="50" y="245" width="174" height="60" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="137.0" y="272.2" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">kid friend B1 dad's</text>
+<text x="137.0" y="289.0" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">needs</text>
+<rect x="229" y="245" width="174" height="60" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="316.0" y="272.2" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">kid friend B2 mom's</text>
+<text x="316.0" y="289.0" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">needs</text>
+<rect x="408" y="245" width="132" height="60" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="474.0" y="272.2" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">co-worker #2's</text>
+<text x="474.0" y="289.0" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">needs</text>
+<rect x="545" y="245" width="141" height="60" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="615.5" y="272.2" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">supervisor #1's</text>
+<text x="615.5" y="289.0" font-size="14" fill="black" text-anchor="middle" dominant-baseline="central">needs</text>
+<text x="350.0" y="28" font-size="18" fill="black" font-weight="bold" text-anchor="middle" dominant-baseline="central">Am I a good father?</text>
+</svg>
