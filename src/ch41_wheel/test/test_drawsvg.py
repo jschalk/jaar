@@ -7,14 +7,13 @@ from ch41_wheel.wheel_builder import (
     draw_contact_rows,
     get_standard_drawing,
     save_to_images_dir,
-    rebuild_markdown_svg_images,
+    rebuild_markdown_wheel_theory_images,
+    get_markdown_wheel_theory_drawings,
 )
-from drawsvg import (
-    Drawing,
-    Rectangle as drawsvg_Rectangle,
-)
+from drawsvg import Drawing
 from copy import deepcopy as copy_deepcopy
 from pathlib import Path
+from os.path import exists as os_path_exists
 
 
 def _get_elements_count(d: Drawing) -> int:
@@ -219,9 +218,25 @@ def test_draw_contact_rows_SetsAttr_Scenario0_2Rows():
     # save_example_image(drawing)
 
 
-def test_rebuild_markdown_svg_images_SpecialCreateImages(rebuild_images):
+def test_rebuild_markdown_wheel_theory_images_SpecialCreateImages(rebuild_images):
     # ESTABLISH / WHEN / THEN
     if rebuild_images:
-        svg_image_paths = rebuild_markdown_svg_images()
+        svg_image_paths = rebuild_markdown_wheel_theory_images()
         for svg_image_path in svg_image_paths:
             print(f"Saved {svg_image_path}")
+
+
+def test_draw_contact_rows_SetsAttr_Scenario0_MatchesStaticFile():
+    # ESTABLISH
+    for filebasename, drawing in get_markdown_wheel_theory_drawings().items():
+        project_dir = Path(__file__).resolve().parent.parent
+        # Save the SVG
+        output_file_path = project_dir / "images" / f"{filebasename}.svg"
+        assert os_path_exists(output_file_path)
+
+        # WHEN
+        curr_svg_text = output_file_path.read_text()
+
+        # THEN
+        assert curr_svg_text == drawing.as_svg()
+        print(f"{output_file_path=}")

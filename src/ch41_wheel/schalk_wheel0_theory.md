@@ -23,30 +23,39 @@ Kazani says my dad and his ilk can't theorize well. He using entertaining and ha
 
 <div align="center">
 
-### Family Honor
+### Family Honor!
 </div>
 
-*I am doing this because I am selfless right?*
-
 <!--Go: -->
-My copy of *From Valor to Pedigree* is far away in Oregon so I'll present the political theory of [Kegology](../ch41_wheel/schalk_kegology_name_origin.md). My Dad was a better scholar than me so if I can create a political theory that is awesome then he could have even better. It feels wild to write that. Let's go! 
+My copy of *From Valor to Pedigree* is far away so I'll present the political theory of [Kegology](../ch41_wheel/schalk_kegology_name_origin.md). My Dad was a better scholar than me so if I can create a political theory that is awesome then he would have had one that was even better.  
 
 <!--Search: TODO. -->
 ## Kegology Political Theory
 
-Here's a footnote describing the philosophical foundations of KegWheel[^2]. Read it if you want. 
-Let's start with the most important concept in Kegology. 
+Here's a footnote describing the philosophical foundations of Kegology[^2]. Read it if you want. The gist is Levinas (died 1995) had an awesome philosophy of the Face built from biblical traditions.
+
+The most important question in Kegology is "am i a good father?" Even if you are a woman and have given birth to children the question is still "Am I a good a Father?" The concept of Fatherhood holds contradictions: Fatherhood is and isn't about genetics. Until recently loving your children because of genetics was obvious for a Mother but required faith from the Father. 
+
+For any Levanisian, for any Kegologist the first question is "am i a good father?" And where do we go to find out. The Face of the Other. The Face of my son.
 
 <div align="center"><img src="images/wheel_fig0_0.svg" alt="wheel fig0.0" width="300"></div>
-<div align="center"><img src="images/wheel_fig0_1.svg" alt="wheel fig0.0" width="300"></div>
-<div align="center"><img src="images/wheel_fig0_2.svg" alt="wheel fig0.0" width="300"></div>
-<div align="center"><img src="images/wheel_fig0_3.svg" alt="wheel fig0.0" width="300"></div>
-<div align="center"><img src="images/wheel_fig0_4.svg" alt="wheel fig0.0" width="300"></div>
-<div align="center"><img src="images/wheel_fig0_5.svg" alt="wheel fig0.0" width="300"></div>
-<div align="center"><img src="images/wheel_fig0_6.svg" alt="wheel fig0.0" width="300"></div>
-<div align="center"><img src="images/wheel_fig0_7.svg" alt="wheel fig0.0" width="300"></div>
-<div align="center"><img src="images/wheel_fig0_8.svg" alt="wheel fig0.0" width="300"></div>
-<div align="center"><img src="images/wheel_fig0_9.svg" alt="wheel fig0.0" width="300"></div>
+
+Notice that for this graphic the son's Face is in the shape of an infinity symbol ala &infin;. That's because in Levanis's Ethics the Face of the Other is infinite. There is no way to understand it, yet we try and that attempt turns into truth. For him and me the Face being the source of all truth isn't something that should be, **it's something that is**. 
+
+Here's a natural next step in the logic...
+
+<div align="center"><img src="images/wheel_fig0_1.svg" alt="wheel fig0.0" width="400"></div>
+
+
+
+<div align="center"><img src="images/wheel_fig0_2.svg" alt="wheel fig0.0" width="400"></div>
+<div align="center"><img src="images/wheel_fig0_3.svg" alt="wheel fig0.0" width="400"></div>
+<div align="center"><img src="images/wheel_fig0_4.svg" alt="wheel fig0.0" width="400"></div>
+<div align="center"><img src="images/wheel_fig0_5.svg" alt="wheel fig0.0" width="400"></div>
+<div align="center"><img src="images/wheel_fig0_6.svg" alt="wheel fig0.0" width="400"></div>
+<div align="center"><img src="images/wheel_fig0_7.svg" alt="wheel fig0.0" width="400"></div>
+<div align="center"><img src="images/wheel_fig0_8.svg" alt="wheel fig0.0" width="400"></div>
+<div align="center"><img src="images/wheel_fig0_9.svg" alt="wheel fig0.0" width="400"></div>
 
 
 ### Oligarchy

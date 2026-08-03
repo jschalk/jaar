@@ -4,16 +4,10 @@ from drawsvg import (
     Lines as drawsvg_Lines,
     Text as drawsvg_Text,
     Path as drawsvg_Path,
-    Ellipse as drawsvg_Ellipse,
     Circle as drawsvg_Circle,
     Text as drawsvg_Text,
 )
-from math import (
-    radians as math_radians,
-    cos as math_cos,
-    sin as math_sin,
-    pi as math_pi,
-)
+from math import cos as math_cos, sin as math_sin, pi as math_pi
 from pathlib import Path
 
 
@@ -707,7 +701,7 @@ def get_standard_drawing(width: int = 800, height: int = 600) -> Drawing:
 
 def get_wheel_fig0_0(face_title_str: str) -> Drawing:
     fig = get_standard_drawing(370, 180)
-    draw_infinity_contact(fig, 120, 70, "son", "FACE")
+    draw_infinity_contact(fig, 120, 70, "son", "Face")
     add_title_to_drawing(fig, face_title_str, 18, 370, 20)
     return fig
 
@@ -732,16 +726,6 @@ def get_wheel_fig0_2(face_title_str: str) -> Drawing:
 
 
 def get_wheel_fig0_3(face_title_str: str) -> Drawing:
-    fig_width = 600
-    fig_obj = get_standard_drawing(fig_width, 300)
-    draw_infinity_contact(fig_obj, 70, 50, "son     ", "need")
-    draw_infinity_contact(fig_obj, 330, 70, "daughter", "Face")
-    draw_infinity_contact(fig_obj, 170, 180, "wife    ", "need")
-    add_title_to_drawing(fig_obj, face_title_str, 18, fig_width, 10)
-    return fig_obj
-
-
-def get_wheel_fig0_4(face_title_str: str) -> Drawing:
     fig_width = 700
     fig_obj = get_standard_drawing(fig_width, 300)
     draw_infinity_contact(fig_obj, 70, 50, "son     ", "Face")
@@ -754,7 +738,7 @@ def get_wheel_fig0_4(face_title_str: str) -> Drawing:
     return fig_obj
 
 
-def get_wheel_fig0_5(face_title_str: str) -> Drawing:
+def get_wheel_fig0_4(face_title_str: str) -> Drawing:
     fig_width = 700
     fig_obj = get_standard_drawing(fig_width, 300)
     draw_infinity_contact(fig_obj, 70, 50, "son     ", "Face")
@@ -767,7 +751,7 @@ def get_wheel_fig0_5(face_title_str: str) -> Drawing:
     return fig_obj
 
 
-def get_wheel_fig0_6(face_title_str: str) -> Drawing:
+def get_wheel_fig0_5(face_title_str: str) -> Drawing:
     fig_width = 700
     fig_obj = get_standard_drawing(fig_width, 300)
     rows = [
@@ -780,7 +764,7 @@ def get_wheel_fig0_6(face_title_str: str) -> Drawing:
     return fig_obj
 
 
-def get_wheel_fig0_7(face_title_str: str) -> Drawing:
+def get_wheel_fig0_6(face_title_str: str) -> Drawing:
     fig_width = 700
     fig_obj = get_standard_drawing(fig_width, 360)
     rows = [
@@ -804,7 +788,7 @@ def get_wheel_fig0_7(face_title_str: str) -> Drawing:
     return fig_obj
 
 
-def get_wheel_fig0_8(face_title_str: str) -> Drawing:
+def get_wheel_fig0_7(face_title_str: str) -> Drawing:
     fig_width = 700
     fig_obj = get_standard_drawing(fig_width, 360)
     rows = [
@@ -835,7 +819,7 @@ def get_wheel_fig0_8(face_title_str: str) -> Drawing:
     return fig_obj
 
 
-def get_wheel_fig0_9(face_title_str: str) -> Drawing:
+def get_wheel_fig0_8(face_title_str: str) -> Drawing:
     fig_width = 700
     fig_obj = get_standard_drawing(fig_width, 160)
     rows = [
@@ -846,27 +830,24 @@ def get_wheel_fig0_9(face_title_str: str) -> Drawing:
     return fig_obj
 
 
-def rebuild_markdown_svg_images() -> list[str]:
-    t_str = "Am I a good father?"
-    fig0_0_path = save_to_images_dir(get_wheel_fig0_0(t_str), "wheel_fig0_0")
-    fig0_1_path = save_to_images_dir(get_wheel_fig0_1(t_str), "wheel_fig0_1")
-    fig0_2_path = save_to_images_dir(get_wheel_fig0_2(t_str), "wheel_fig0_2")
-    fig0_3_path = save_to_images_dir(get_wheel_fig0_3(t_str), "wheel_fig0_3")
-    fig0_4_path = save_to_images_dir(get_wheel_fig0_4(t_str), "wheel_fig0_4")
-    fig0_5_path = save_to_images_dir(get_wheel_fig0_5(t_str), "wheel_fig0_5")
-    fig0_6_path = save_to_images_dir(get_wheel_fig0_6(t_str), "wheel_fig0_6")
-    fig0_7_path = save_to_images_dir(get_wheel_fig0_7(t_str), "wheel_fig0_7")
-    fig0_8_path = save_to_images_dir(get_wheel_fig0_8(t_str), "wheel_fig0_8")
-    fig0_9_path = save_to_images_dir(get_wheel_fig0_9(t_str), "wheel_fig0_9")
-    return [
-        fig0_0_path,
-        fig0_1_path,
-        fig0_2_path,
-        fig0_3_path,
-        fig0_4_path,
-        fig0_5_path,
-        fig0_6_path,
-        fig0_7_path,
-        fig0_8_path,
-        fig0_9_path,
-    ]
+def get_markdown_wheel_theory_drawings() -> dict[str, Drawing]:
+    t_str = "am i a good father?"
+    return {
+        "wheel_fig0_0": get_wheel_fig0_0(t_str),
+        "wheel_fig0_1": get_wheel_fig0_1(t_str),
+        "wheel_fig0_2": get_wheel_fig0_2(t_str),
+        "wheel_fig0_3": get_wheel_fig0_3(t_str),
+        "wheel_fig0_4": get_wheel_fig0_4(t_str),
+        "wheel_fig0_5": get_wheel_fig0_5(t_str),
+        "wheel_fig0_6": get_wheel_fig0_6(t_str),
+        "wheel_fig0_7": get_wheel_fig0_7(t_str),
+        "wheel_fig0_8": get_wheel_fig0_8(t_str),
+    }
+
+
+def rebuild_markdown_wheel_theory_images() -> list[str]:
+    image_file_paths = []
+    for filebasename, drawing in get_markdown_wheel_theory_drawings().items():
+        image_file_path = save_to_images_dir(drawing, filebasename)
+        image_file_paths.append(image_file_path)
+    return image_file_paths
