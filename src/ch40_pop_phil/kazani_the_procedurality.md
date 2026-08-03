@@ -2,9 +2,9 @@
 
 **Date:** 2022-5-24  
 **Author:** Kamil Kazani  
-**Source:** [www.source_url.com  ](https://kamilkazani.substack.com/p/the-procedurality)  
+**Source:** https://kamilkazani.substack.com/p/the-procedurality  
 **Copied to Keg:** 2022-06-24   
-**Copier Note:** Ends with hopefully black humor   
+**Copier Note:** Ends with either ruthless meanness or black humor   
 
 
 ---
