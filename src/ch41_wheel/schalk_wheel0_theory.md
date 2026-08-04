@@ -124,20 +124,7 @@ Ok, we now know Families exist and where they come from: Individuals having deci
 
 In a low trust society model power purely from FamilyUnits and Land.
 
-Fig 1.0   
-Fig 1.1  
-Fig 1.2  
-Fig 1.3  
-Fig 1.4  
-Fig 1.5  
-Fig 1.6  
-Fig 1.7  
-Fig 1.8  
-Fig 1.9  
-Fig 2.0  
-Fig 2.1 how a tower holds up a Wheel Family  
-
-<div align="center"><img src="images/wheel_fig1_0.svg" alt="wheel fig1.0" width="500"></div>
+<div align="center"><img src="images/wheel_fig1_0.svg" alt="wheel fig1_0" width="350"></div>   
 
 ### Oligarchy
 

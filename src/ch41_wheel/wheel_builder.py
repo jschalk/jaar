@@ -847,21 +847,21 @@ def get_wheel_fig0_8(face_title_str: str) -> Drawing:
 
 def get_wheel_fig1_0(face_title_str: str) -> Drawing:
     fig_width = 600
-    fig_obj = get_standard_drawing(fig_width, 160)
+    fig_obj = get_standard_drawing(fig_width, 250)
     trapunits = [
-        TrapeziodUnit(120, 50, 80, "Smiths"),
-        TrapeziodUnit(220, 50, 80, "Duvals"),
-        TrapeziodUnit(320, 50, 140, "Gomezs", 64),
+        TrapeziodUnit(120, 100, 90, "Smiths"),
+        TrapeziodUnit(220, 100, 90, "Duvals"),
+        TrapeziodUnit(340, 100, 150, "Gomezs", 72),
     ]
     draw_trapezoid_stack(fig_obj, trapunits)
-    add_title_to_drawing(fig_obj, face_title_str, 18, fig_width, 10)
-    draw_land(fig_obj, 75, 120, 450, "Land", stroke_width=6)
+    add_title_to_drawing(fig_obj, face_title_str, 30, fig_width, 10)
+    draw_land(fig_obj, 75, 180, 450, "Land", stroke_width=6, font_size=20)
     return fig_obj
 
 
 def get_markdown_wheel_theory_drawings() -> dict[str, Drawing]:
     t_str = "am i a good father?"
-    low_trust_str = "Low status families on the land"
+    low_trust_str = "Low status families on the Land"
     return {
         "wheel_fig0_0": get_wheel_fig0_0(t_str),
         "wheel_fig0_1": get_wheel_fig0_1(t_str),
