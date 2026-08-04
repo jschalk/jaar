@@ -19,7 +19,7 @@ He was just a normal guy with a normal job. He was not some great investor or en
 </div>
 
 
-<div align="center"><img src="images/tesla_stock.avif" alt="Description of image" width="500"></div>
+<div align="center"><img src="images/tesla_stock.avif" alt="Stock price tracker for Telsa 2013 to 2026" width="500"></div>
 
 I am personally not going to gamble my life savings on the Spacex stock. But I also would not automatically look down on someone who does. I have seen this kind of bet work before.
 
@@ -48,7 +48,7 @@ You see this constantly in sales. A star producer leaves one firm for another, a
 
 During layoffs, this can matter more than competence. A person inside the right circle often survives not because he is the best, but who he is attached too.
 
-<div align="center"><img src="images/vassal_tweet.avif" alt="Description of image" width="500"></div>
+<div align="center"><img src="images/vassal_tweet.avif" alt="Tweet of person describing their success because of being a good vassal." width="500"></div>
 
 The Political Pathology
 That is why politics attracts such awful people.
@@ -71,7 +71,7 @@ This is one of the oldest strategies in the world. Rome had patronage and client
 
 The most extreme version was the eunuch. In Byzantium, the Ottoman court, and imperial China, eunuchs controlled access to rulers, ran bureaucracies, commanded armies, and accumulated enormous power. They were useful because they could not found rival dynasties of their own. The castration was the price of admission, and for many, it was worth it.
 
-<div align="center"><img src="images/eunch_trade_offer.avif" alt="Description of image" width="400"></div>
+<div align="center"><img src="images/eunch_trade_offer.avif" alt="Very busy meme describing the tradeoff Eunuchs made." width="400"></div>
 
 The Sopranos shows the same strategy in modern form.
 
@@ -108,7 +108,7 @@ A lot of female choice is really a bet on momentum.
 
 That’s one reason some men end up in relationships with attractive women that do not seem to match their current status. She is betting on him.
 
-<div align="center"><img src="images/waiting_wife.webp" alt="Description of image" width="400"></div>
+<div align="center"><img src="images/waiting_wife.webp" alt="Meme of wife believing in husband" width="400"></div>
 
 Picture source: [@lovedropx](https://x.com/lovedropx/status/2040321654950125737)
 
@@ -118,7 +118,7 @@ They also tend to notice decline early. That is why some breakups seem to come o
 
 Older societies too, took this kind of judgment much more seriously than we do today. There’s a whole courtier literature around these kind of questions. [Machiavelli](https://en.wikipedia.org/wiki/Niccol%C3%B2_Machiavelli?utm_source=lindynewsletter.beehiiv.com&utm_medium=referral&utm_campaign=the-vassal-strategy), [Castiglione](https://en.wikipedia.org/wiki/Baldassare_Castiglione?utm_source=lindynewsletter.beehiiv.com&utm_medium=referral&utm_campaign=the-vassal-strategy), and [de Retz](https://www.gutenberg.org/files/3846/3846-h/3846-h.htm?utm_source=lindynewsletter.beehiiv.com&utm_medium=referral&utm_campaign=the-vassal-strategy). That is why book [The Art of Worldly Wisdom](https://en.wikipedia.org/wiki/The_Art_of_Worldly_Wisdom?utm_source=lindynewsletter.beehiiv.com&utm_medium=referral&utm_campaign=the-vassal-strategy) still feels so sharp. It came out of a world where survival depended on reading people correctly
 
-<div align="center"><img src="images/character_advice.avif" alt="Description of image" width="600"></div>
+<div align="center"><img src="images/character_advice.avif" alt="quote from old book describing the importance of judging men correctly for women." width="600"></div>
 
 If you are trying to spot trajectory early, there are usually a few signs you can notice. A man who is going nowhere rarely has enemies. Upward motion creates friction. It irritates rivals.
 
@@ -129,5 +129,5 @@ Rising people also tend to look a little unfinished. Their current life has not 
 ### What Do You Have to Offer?
 Selection is only one part of this equation. After that comes the harder question, what do you have to offer in the relationship? Loyalty isn’t enough. There has to be some trait, some asset you can trade.
 
-<div align="center"><img src="images/worthless_man_at_court.avif" alt="Description of image" width="600"></div>
+<div align="center"><img src="images/worthless_man_at_court.avif" alt="Quote of about importance of being valuable to others." width="600"></div>
 

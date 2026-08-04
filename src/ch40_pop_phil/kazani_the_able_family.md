@@ -52,7 +52,7 @@ There was, however, a nuance. Serfs had no rights, and could be all used as fiel
 
 To understand the history, you need to understand geography. And to understand the Russian geography, you need to internalise one crucial dichotomy:
 
-<div align="center"><img src="images/black_soils.webp" alt="A different description of image" width="700"></div>
+<div align="center"><img src="images/black_soils.webp" alt="Blacks Soils vs Non Black Soils" width="700"></div>
 
 **Blacks Soils vs Non Black Soils**. Which means the Fertile South vs Infertile North.
 
@@ -60,8 +60,7 @@ The south of what is now European Russia is classified as the “Black Soils” 
 
 To the north, you have a cold, swampy, foresty, “Non Black Soils” country. With rare exceptions, it it is just infertile. Harvests are poor, yields are low[^5]. In terms of grain farming, it ranges from bad to absolutely awful.
 
-<div align="center"><img src="images/androsovo_map.webp" alt="A different description of image" width="700"></div>
-
+<div align="center"><img src="images/androsovo_map.webp" alt="Ulyanov’s birthplace. Androsovo village in the infertile Nizhny Novgorod region." width="700"></div>
 
 Ulyanov’s birthplace. Androsovo village in the infertile Nizhny Novgorod region.
 
@@ -92,13 +91,13 @@ Nikolay Ulyanov was a serf who learnt the art of sewing. In 1791, his master was
 
 He escaped to Astrakhan instead.
 
-<div align="center"><img src="images/astrakhan_map.webp" alt="A different description of image" width="700"></div>
+<div align="center"><img src="images/astrakhan_map.webp" alt="Astrakhan on the confluence of Volga river and the Caspian Sea" width="700"></div>
 
 *Astrakhan on the confluence of Volga river and the Caspian Sea*
 
 Astrakhan was a seaport, located in the mouth of Volga where it meets the Caspian sea. Historically, it had been the Russian window to the East, to the Central Asian and the Iranic world. Far off, distant and isolated from the capital, it was a major melting pot with all sorts of people from all sorts of nations messing around. Caravans were coming from the steppes, ships were coming from the sea.
 
-<div align="center"><img src="images/astrakhan_drawing.webp" alt="A different description of image" width="700"></div>
+<div align="center"><img src="images/astrakhan_drawing.webp" alt="Astrakhan in the mid 18th c." width="700"></div>
 
 *Astrakhan in the mid 18th c.*
 
@@ -114,7 +113,7 @@ In 1796, Catherine dies and the new emperor Paul makes an immediate U-turn on ma
 
 Such as Nikolay Ulyanov.
 
-<div align="center"><img src="images/catherine2_paul1.webp" alt="A different description of image" width="700"></div>
+<div align="center"><img src="images/catherine2_paul1.webp" alt="Two paintings. One of Catherine II, and one Paul I" width="700"></div>
 
 *Catherine II Paul I*
 

@@ -137,7 +137,7 @@ And that is how Lenin noticed him
 
 Very early on, a young, uncouth activist Stalin acquired a personal connection with the Old Man through many and many ranks of the party hierarchy
 
-<div align="center"><img src="images/lenin_shill_tree3.webp" alt="Lenin Shill, 2 level." width="700"></div>
+<div align="center"><img src="images/lenin_shill_tree3.webp" alt="Lenin Shill, 2 level with Stalin." width="700"></div>
 
 What do you see on the diagram above?
 

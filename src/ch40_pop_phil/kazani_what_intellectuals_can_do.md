@@ -8,7 +8,7 @@
 
 ---
 
-<div align="center"><img src="images/king_philosopher.webp" alt="Guy kicking out the ladder that the next guy is using" width="300"></div>
+<div align="center"><img src="images/king_philosopher.webp" alt="Painting of bored king being lectured to" width="300"></div>
 
 I was recently asked:
 
@@ -54,7 +54,7 @@ a) extremely extremely extremely sexy in the eyes of all intellectuals, worldwid
 
 b) does not work in reality
 
-<div align="center"><img src="images/putin_dugin.webp" alt="Guy kicking out the ladder that the next guy is using" width="500"></div>
+<div align="center"><img src="images/putin_dugin.webp" alt="Comic of Dugin standing behind Putin and bigger than Putin" width="500"></div>
 
 *That is how Alexander Dugin became so popular internationally. All he does is selling porn to Western shitlibs. Tell them, you are a mysterious philosopher advising a powerful king, and they will believe you immediately. Why? Because they are salivating at this idea. Dugin is selling them porn, but to produce a bestseller porn, you need to correctly identify their desires. Dugin is smart enough to do just that*
 

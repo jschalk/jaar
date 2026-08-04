@@ -7,7 +7,7 @@
 
 ---
 
-<div align="center"><img src="images/syme_roman_revolution.webp" alt="Description of image" width="600"></div>
+<div align="center"><img src="images/syme_roman_revolution.webp" alt="Picture of softcover 'The Roman Revolution' by Ronald Syme" width="600"></div>
 
 Here I want to suggest you an exercise. You can (and I think you should) organise yourself a month-long course in political theory. How? By reading Ronald Syme The Roman Revolution.
 
@@ -61,7 +61,7 @@ And that is great!
 
 That is great, because it shows you both the taste & flavour of the ancient Roman culture and the **scale of your own ignorance.** You will see how dumb you are. Before reading Syme, I, for example, never imagined that much of the ancient Latin literature and private correspondence sounds like the dialogues from the *War and Peace*.
 
-<div align="center"><img src="images/war_and_peace_ball.webp" alt="Description of image" width="600"></div>
+<div align="center"><img src="images/war_and_peace_ball.webp" alt="Movie still of two Russian arstiocrats in ballro" width="600"></div>
 
 If you have read Leo Tolstoy in original, you will know that a huge part of his book is written in French. Almost 3% of the total volume. That is because Tolstoy has been writing the dialogues of Russian aristocrats, taking place in the salons of St Petersburg and Moscow, as they actually happened historically, in French.
 
@@ -71,21 +71,11 @@ All these princes and counts have been raised on the French culture, educated on
 
 So when you see the long untranslated quotes from the ancient Roman authors and politicians, you cannot help but draw the parallels with Tolstoy. It is Latin, of course, but Latin with huge number of Greeks insertions, and quotations. You cannot but contemplate how the elite education in late republican Rome was based on the Greek, and how the entire high culture was permeated by the Greek ideas, Greek stories, Greek narratives.
 
-<div align="center"><img src="images/war_and_peace_ball.webp" alt="Description of image" width="600"></div>
-
-If you have read Leo Tolstoy in original, you will know that a huge part of his book is written in French. Almost 3% of the total volume. That is because Tolstoy has been writing the dialogues of Russian aristocrats, taking place in the salons of St Petersburg and Moscow, as they actually happened historically, in French.
-
-Tolstoy aimed to represent how the actual, historical princes and counts of the Russian Empire were conversing with each other. As a result, you have entire pages of the aristocratic dialogues written in French, with only few Russian words here and there. That is historically accurate, and represents the reality of the Russian Empire, run by the largely foreign, or at least culturally foreign ruling class1.
-
-All these princes and counts have been raised on the French culture, educated on it. They can speak Russian, of course, but whenever they need to say something smart, abstract, or, in any way sophisticated, they have to say it in French. French is the original, and the Russian high culture is a reverberation of it.
-
-So when you see the long untranslated quotes from the ancient Roman authors and politicians, you cannot help but draw the parallels with Tolstoy. It is Latin, of course, but Latin with huge number of Greeks insertions, and quotations. You cannot but contemplate how the elite education in late republican Rome was based on the Greek, and how the entire high culture was permeated by the Greek ideas, Greek stories, Greek narratives.
-
-<div align="center"><img src="images/trannicide_painting.webp" alt="Description of image" width="600"></div>
+<div align="center"><img src="images/trannicide_painting.webp" alt="Painting of the murder of Caesar in the Senate." width="600"></div>
 
 *You get very much less surprised by the murder or Caesar, for example*
 
-<div align="center"><img src="images/greek_fight_painting.webp" alt="Description of image" width="600"></div>
+<div align="center"><img src="images/greek_fight_painting.webp" alt="Ancient greek painting of trannicide" width="600"></div>
 
 Once you realise that the entire Greek culture was just one endless terrorist propaganda
 
@@ -108,7 +98,7 @@ With the intestine of the last cleric”
 
 These lines are quite representative of how much of the highly privileged youth in St Petersburg felt, in the wake of Napoleonic Wars. Kill, kill, kill, kill the Tsar. Kill the royal family. Kill them all.
 
-<div align="center"><img src="images/russian_calvary_painting.webp" alt="Description of image" width="600"></div>
+<div align="center"><img src="images/russian_calvary_painting.webp" alt="Painting of Russian army in St. Petersburg 1825" width="600"></div>
 
 
 *That provides lots of historical context, on the intellectual & ideological atmosphere just before the Decembrist revolt of 1825. By that point, the murder of Tsar, and the extermination of the royals, became a fashionable conversation topic between the posh youth, many of whom served as officers in the imperial guard regiments, garrisoned in St Petersburg.*
@@ -151,7 +141,7 @@ Except - it won’t be happening in their lifetime.
 
 Notice how everything Diderot, and other *les philosophes* had been preaching, did indeed happen
 
-<div align="center"><img src="images/guillotine_king.webp" alt="Painting of King about to be Guillotine" width="600"></div>
+<div align="center"><img src="images/guillotine_king.webp" alt="Painting of King about to be guillotined" width="600"></div>
 
 *They killed the king…*
 
@@ -159,7 +149,7 @@ Notice how everything Diderot, and other *les philosophes* had been preaching, d
 
 *… slaughtered the priests, sacked the churches, and pretty much abolished Christianity*
 
-<div align="center"><img src="images/diderot_grave.webp" alt="Painting of French Revolutionary philosophy" width="600"></div>
+<div align="center"><img src="images/diderot_grave.webp" alt="Picture of Diderot grave" width="600"></div>
 
 
 Except Diderot never saw any of it. By that point, he had been long dead

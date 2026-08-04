@@ -11,7 +11,7 @@
 
 I have really enjoyed this book, The Age of Berezovsky. Cannot recommend it highly enough. It is basically a series of interviews an oligarch Petr Aven conducted with businessmen, politicians, journalists and other public figures of the 1990s. The book is centred around the colourful figure of Boris Berezovsky, and serves as an amazing crash intro into the history of the Soviet to Russian transition, as well, as a very nice collection of primary sources on the era.
 
-<div align="center"><img src="images/rashomon_poster.webp" alt="The Age of Berezovsky" width="400"></div>
+<div align="center"><img src="images/rashomon_poster.webp" alt="Rashomon movie poster" width="400"></div>
 
 As the same events are being discussed with various people, and each tells you his or her personal version of what was happening, the final result feels a bit Rashomon-ish. By the end of the book, you can make an educated guess - what are the interviewees lying about and why. For example, if a notable public figure starts telling something like; Oh, I never really knew Berezovsky. Never even met him. May be saw him once or twice from the distance. No, we never really talked, then you know:
 
@@ -28,7 +28,7 @@ You see it once. You see it twice. And the next time you see it, you know:
 ### Standard formula of triple denial
 </div>
 
-<div align="center"><img src="images/triple_denial.webp" alt="A different description of image" width="500"></div>
+<div align="center"><img src="images/triple_denial.webp" alt="Painting of someone denying denying denying" width="500"></div>
 
 This book deserved a lengthy discussion & consideration. For a moment, I want to discuss just one minor aspect of it. The madness of Boris Berezovsky. Specifically, the story of how the ex oligarch lost all of his wealth.
 
@@ -110,7 +110,7 @@ Hence, stupid failures of great people. They try to re-create their past success
 In fact, highly successful people are more prone to madness than the normies, for the highly successful people are the ones that made a crazy bet and it worked out. Hence, they make a [WRONG] conclusion that it just works, objectively speaking, and keep making it again, and again, until they just get bust.
 
 
-<div align="center"><img src="images/napolean_in_winter.webp" alt="A different description of image" width="500"></div>
+<div align="center"><img src="images/napolean_in_winter.webp" alt="Napolean in retreat in the snow" width="500"></div>
 
 *One more military campaign will absolutely do it.*
 

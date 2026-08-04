@@ -7,7 +7,7 @@
 
 ---
 
-<div align="center"><img src="images/putin_trump_alaska.webp" alt="Description of image" width="500"></div>
+<div align="center"><img src="images/putin_trump_alaska.webp" alt="Trump and Putin in Alaska" width="500"></div>
 
 This photo tells you everything you need to know about the fundamental difference between the two political systems: America and Russia. Here you see what the American politics select for, and how it is different from the state of affairs in Russia
 
@@ -27,7 +27,7 @@ Russian political system selects for something totally different. It would not b
 
 Let me give you an example
 
-<div align="center"><img src="images/stalin_khruschev1.webp" alt="Description of image" width="500"></div>
+<div align="center"><img src="images/stalin_khruschev1.webp" alt="Stalin and Khruschev." width="500"></div>
 
 What do you see here?
 
@@ -41,7 +41,7 @@ Stalin looks better than Khruschev. Much, much better, in every respect
 
 Put together, they look like a chad vs virgin caricature
 
-<div align="center"><img src="images/virgin_chad.webp" alt="Description of image" width="500"></div>
+<div align="center"><img src="images/virgin_chad.webp" alt="Comic of Virgin and Chad" width="500"></div>
 
 *Khruschev vs Stalin*
 
@@ -51,7 +51,7 @@ That is a great question
 
 Okay, now let’s look at another photo. Here you see Stalin in a company of the big chiefs of the Soviet Union, powerful and important people, deciding the matters of life and death for millions and millions.
 
-<div align="center"><img src="images/stalin_ugly_crew.webp" alt="Description of image" width="500"></div>
+<div align="center"><img src="images/stalin_ugly_crew.webp" alt="Stalin and crew, all are ugly." width="500"></div>
 
 What do you see here?
 
@@ -82,7 +82,7 @@ Left - Shkiryatov. No. 1 purge guy
 
 Right - Scherbakov. No. 1 propagandist
 
-<div align="center"><img src="images/shkiryatov_scherbakov.webp" alt="Description of image" width="600"></div>
+<div align="center"><img src="images/shkiryatov_scherbakov.webp" alt="Pictures of Shkiryatov and Scherbakov" width="600"></div>
 
 *Reportedly, Stalin would not even read the papers the guy on the right was sending. He would just sign, everything*
 
@@ -103,7 +103,7 @@ Now what happens next?
 
 Well, Big Daddy is powerful, all powerful even. But he is not immortal. One day he must grow old, and one day he must die. There is no way around that. And by the point he dies, virgins he has selected, and whom he has selected for not being able to outshine him in any way whatsoever will occupy all positions of power over the vast country. And one of this virgins, will inherit the power, and be the next king
 
-<div align="center"><img src="images/khruschev_corn.webp" alt="Description of image" width="600"></div>
+<div align="center"><img src="images/khruschev_corn.webp" alt="Really bad picture of Khruschev (looks ugly)" width="600"></div>
 
 This guy has not been selected for looking better. He has been selected for looking worse
 
@@ -117,7 +117,7 @@ They select for being tall, imposing, good looking. They select for being able t
 
 For the audience is of course a woman. That has nothing to do with gender. The audience may consist exclusively of 50 year old grey haired men with moustaches, doesn’t matter at all, for taken altogether they are a woman, and act like a woman, and think like a woman. So, being tall helps
 
-<div align="center"><img src="images/putin_obama.webp" alt="Description of image" width="600"></div>
+<div align="center"><img src="images/putin_obama.webp" alt="Picture of Obama standing over Putin" width="600"></div>
 
 *One guy had to pass through elections, another did not*
 
@@ -142,13 +142,13 @@ One good example would be Boris Yeltsin
 
 I think this is a great, and a very precise observation
 
-<div align="center"><img src="images/yelstin_tweet.webp" alt="Description of image" width="600"></div>
+<div align="center"><img src="images/yelstin_tweet.webp" alt="Tweet by LegoRacers2 describing how handsome Boris Yelstin was" width="600"></div>
 
 Because, indeed, Yeltsin looks nothing like a “normal” Russian politician, of a type we see on TV. In fact, I have a much time imagining him as a republican politician from a flyover state rather than as something who could make a career now, in Putin’s Russia.
 
 Just look at Yeltsin. He is fucking big
 
-<div align="center"><img src="images/putin_yelstin1.webp" alt="Description of image" width="600"></div>
+<div align="center"><img src="images/putin_yelstin1.webp" alt="Picture of Yelstin standing with Putin" width="600"></div>
 
 *Again, Chad vs Virgin*
 
@@ -166,7 +166,7 @@ I mean selection of the next leader by his cheif, where the big daddy chooses so
 
 One good example would be Biden
 
-<div align="center"><img src="images/obama_biden.webp" alt="Description of image" width="600"></div>
+<div align="center"><img src="images/obama_biden.webp" alt="Picture of Obama giving Biden a medal" width="600"></div>
 
 Selected by the master for being unable to outshine the master, he, naturally, inherited everything when the master left. Just as it works in Russia
 

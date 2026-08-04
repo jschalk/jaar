@@ -8,7 +8,7 @@
 
 ---
 
-<div align="center"><img src="images/tocqueville_title_page.webp" alt="A different description of image" width="700"></div>
+<div align="center"><img src="images/tocqueville_title_page.webp" alt="The Old Regime and the Revolution title page" width="700"></div>
 
 Today, I am going to talk about Alexis de Tocqueville, the single smartest and sharpest author who ever wrote on the French Revolution[^1].
 
@@ -24,7 +24,7 @@ And to answer that question, he - quite predictably - had to dig into the histor
 So that’s how it happened that the book, originally conceived as a biography of Napoleon, ended up focused on the administrative reform of the Sun King, Louis XIV.
 
 
-<div align="center"><img src="images/expectations_reality.webp" alt="A different description of image" width="500"></div>
+<div align="center"><img src="images/expectations_reality.webp" alt="Two paintings, Napolean and Louis XIV" width="500"></div>
 
 For it was in the political and administrative reform of Louis XIV that Tocqueville saw the root causes of the great revolution. The part on Napoleon, he never finished
 
@@ -43,7 +43,7 @@ Bit by a bit, the kings of France dismantled the old medieval order, subjugated 
 
 And that is, how bit by a bit, they built the structure of governance so centralised, so domineering, so all-powerful, that it - in the end - became ultra fragile. For once you submit all classes and all institutions in the country to the will of supreme ruler (which means, central bureacracy in Paris), your entire regime - and not just your regime, but the entire socio-political order - becomes brittle, like a piece of glass. For when you build a centralised, top down structure of governance, all you need is one strike, just one strike to take it out, entirely. And once you do, what you have is a vast country with a learnt habit of despotism, with a learnt habit of sumbission, that will submit itself to the will of new rulers just as eagerly, and as unquestioningly, as it used to prostrate before the will of the old ones.
 
-<div align="center"><img src="images/bending_the_knee.webp" alt="A different description of image" width="700"></div>
+<div align="center"><img src="images/bending_the_knee.webp" alt="A member of court bending the knee to probably Louis XIV" width="700"></div>
 
 For the revolution is not when the power breaks down, but when the omnipotence - built by the previous regime! - drops into the new hands, and the obedient populace follows the new leaders, and obeys their every order and every whim.
 
@@ -53,7 +53,7 @@ For the revolution is not the crazy mob doing whatever it wants - that is called
 
 The revolution is an army of droids, marching in line
 
-<div align="center"><img src="images/droids.webp" alt="A different description of image" width="700"></div>
+<div align="center"><img src="images/droids.webp" alt="Painting of dumbest droids in Star Wars on march" width="700"></div>
 
 *The army of droids will march anywhere you send it, all the way to Alexandria, Lisboa, Moscow*
 

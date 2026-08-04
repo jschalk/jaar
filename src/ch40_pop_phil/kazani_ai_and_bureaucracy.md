@@ -11,7 +11,7 @@ There’s been a lot of anguish & moral panic about the AI writing, recently. I 
 
 First, we need to understand the culture we live in. Most of our life, we spend within the confinement of large, bureaucratic structures. School. University. Corporation. All of that under the umbrella of a yet greater and more Leviathan-ish bureaucracy of the state machine.
 
-<div align="center"><img src="images/suit_tie_man.webp" alt="Description of image" width="300"></div>
+<div align="center"><img src="images/suit_tie_man.webp" alt="Portrait of Kafka?" width="300"></div>
 
 It is the bureaucracy that sets the rules, and it is the bureaucratic preferences that we must (and will) adjust to, and not the other way around. It is very important to understand that. Now one thing you need to realise about bureaucracy is that it has a strong (extremely strong!) preference for **monotony.**
 
@@ -29,7 +29,7 @@ This largely comes from necessity. Everything outstanding, unusual, bizarre - pu
 
 Bureaucracy is based on transparency, it is based on objectivity, because otherwise it will simply not work. It can work only with what is transparent and legible. **It can work only with the well known.** Now a great deal of stuff is not very well known, and much of what is not well known is important.
 
-<div align="center"><img src="images/lamppost.webp" alt="A different description of image" width="600"></div>
+<div align="center"><img src="images/lamppost.webp" alt="Looking under the Lamppost Comic" width="600"></div>
 
 *Frame it this way, and you will realise how a great mighty industrial company from the US or Europe suddenly loses everything to a palaeolithic workshop from China. The great and mighty are strictly limited to what is under the lamppost. The shameful and deplorable can venture outside. In fact they must, because everything under the lamppost has been already devoured by the great and mighty. They HAVE TO venture outside, into the epistemological darkness*
 
@@ -41,7 +41,7 @@ Criteria of decision making within a bureaucratic structure must be legible, obj
 
 Here, however, lies the problem
 
-<div align="center"><img src="images/a_b_venn_diagram.webp" alt="A different description of image" width="400"></div>
+<div align="center"><img src="images/a_b_venn_diagram.webp" alt="Venn Diagram of A and B with overlap" width="400"></div>
 
 A - important and relevant. B - quantifiable. Bureaucracy can work only and exclusively with B. Some of the things it can work with are relevant and important (shaded area). Other things, that it can and does work with, are not so relevant. And there is always a great area where it simply cannot venture, not without self-destruction. The non-shaded sector of A, is - mostly - prohibited for the mammoth structures ruling this world. Only the mice can sneak there, but the dinosaurs can’t.
 
@@ -65,7 +65,7 @@ Quantitative measures, that’s all a bureaucracy can understand. Everything els
 
 In a way, they have been all domesticated by the bureaucratic structures. And, a key feature of a man domesticated by a bureaucracy is that he is afraid of his own judgement. Like, mortally scared of it.
 
-<div align="center"><img src="images/scared_monkey.webp" alt="A different description of image" width="700"></div>
+<div align="center"><img src="images/scared_monkey.webp" alt="A monkey petrified of a man with a wipe" width="700"></div>
 
 Any ability for the personal, subjective, qualitative judgement based on own intuition and vibes (rather than on the pre-approved bureaucratic criteria) had been beaten out of him by the constant negative reinforcement, and from the very early age. By the time he reaches adulthood, he has fully interiorised the bureaucratic epistemological preferences, and is deeply uncomfortable with anything else.
 

@@ -36,27 +36,99 @@ Here's a footnote describing the philosophical foundations of Kegology[^2]. Read
 
 The most important question in Kegology is "am i a good father?" Even if you are a woman and have given birth to children the question is still "Am I a good a Father?" The concept of Fatherhood holds contradictions: Fatherhood is and isn't about genetics. Until recently loving your children because of genetics was obvious for a Mother but required faith from the Father. 
 
-For any Levanisian, for any Kegologist the first question is "am i a good father?" And where do we go to find out. The Face of the Other. The Face of my son.
+For any Levanisian, for any Kegologist the first question is "am i a good father?" And where do we go to find out? The Face of the Other. The Face of my son. 
 
 <div align="center"><img src="images/wheel_fig0_0.svg" alt="wheel fig0.0" width="300"></div>
 
-Notice that for this graphic the son's Face is in the shape of an infinity symbol ala &infin;. That's because in Levanis's Ethics the Face of the Other is infinite. There is no way to understand it, yet we try and that attempt turns into truth. For him and me the Face being the source of all truth isn't something that should be, **it's something that is**. 
-
-Here's a natural next step in the logic...
-
-<div align="center"><img src="images/wheel_fig0_1.svg" alt="wheel fig0.0" width="400"></div>
+Notice that for this graphic the son's Face is in the shape of an infinity symbol ala &infin;. That's because in Levanis's Ethics the Face of the Other is infinite. There is no way to understand it, yet we try and that attempt turns into truth. 
 
 
+<div align="center">
 
-<div align="center"><img src="images/wheel_fig0_2.svg" alt="wheel fig0.0" width="400"></div>
-<div align="center"><img src="images/wheel_fig0_3.svg" alt="wheel fig0.0" width="400"></div>
-<div align="center"><img src="images/wheel_fig0_4.svg" alt="wheel fig0.0" width="400"></div>
-<div align="center"><img src="images/wheel_fig0_5.svg" alt="wheel fig0.0" width="400"></div>
-<div align="center"><img src="images/wheel_fig0_6.svg" alt="wheel fig0.0" width="400"></div>
-<div align="center"><img src="images/wheel_fig0_7.svg" alt="wheel fig0.0" width="400"></div>
-<div align="center"><img src="images/wheel_fig0_8.svg" alt="wheel fig0.0" width="400"></div>
-<div align="center"><img src="images/wheel_fig0_9.svg" alt="wheel fig0.0" width="400"></div>
+#### For Levainas and me the Face being the source of all truth <br>isn't something that should be, **it's something that is**.
+</div>
+ 
 
+The Face of the Other tells me it's suffering and I interpret what their needs are. I'm a good father if I take care of their needs. 
+
+Naturally there are other Faces...
+
+<div align="center"><img src="images/wheel_fig0_1.svg" alt="wheel fig0.1" width="400"></div>
+
+To be good to my son I need to also be good to people he takes care of. Since each Face is infinite it's a lot of infinities. The infinities are different, disjoint.
+
+<div align="center"><img src="images/wheel_fig0_2.svg" alt="wheel fig0.2" width="400"></div>
+
+Here's the thing: You can only listen to one Face at a time. Everyone, anyone, that was previously listened to is no longer an infinite. Their suffering has been interpreted in a set of needs. Needs at are known, complete, the word used by Levinas is "totalizied". Here you see one infinite Face and three understood people. 
+
+<div align="center"><img src="images/wheel_fig0_3.svg" alt="wheel fig0.3" width="500"></div>
+
+Notice that all needs are created in the past so it's possible to both have the past needs of the son and be engaged to the Face of the son. In the graphic below you'll see that the "son's needs" block and the Face infinity both exist at the same time. 
+
+<div align="center"><img src="images/wheel_fig0_4.svg" alt="wheel fig0.4" width="500"></div>
+
+Listening to the Face is exhausting and anxiety inducing. Most of the time we're just with the needs that we've understood from the past. Confidence is required to make decisions and speak. The anxiety of listening is incompatible. So by definition when Being in the world is a Faceless experience. All we have is our knowledge of the needs of others from past encounters with the Face. 
+
+If I am good to the needs of all the contacts below I'm a good father. 
+
+<div align="center"><img src="images/wheel_fig0_5.svg" alt="wheel fig0.5" width="500"></div>
+
+Not so fast, what about others outside the family we encounter? Am I to be good to all their needs too? Its too much. If everyone is Family no one is Family. 
+
+<div align="center"><img src="images/wheel_fig0_6.svg" alt="wheel fig0.6" width="500"></div>
+
+In the graphic below you'll see I've bubbled in all the contacts needs that are in my Family.
+
+<div align="center"><img src="images/wheel_fig0_7.svg" alt="wheel fig0.7" width="500"></div>
+
+So by this grouping there are two kinds of needs to be considered when answering the question *am i a good father?*
+
+<div align="center"><img src="images/wheel_fig0_8.svg" alt="wheel fig0.8" width="500"></div>
+
+*Did I take care of my Family's needs? Or everyone else's?*
+
+## What about my Boss?
+
+A understandable retort could be that for many people today, especially educated people, most of what they do is for their boss. How can I be a good father if I mostly do stuff for my bosses and my bosses are not Family? The answer that is in a low-trust society we only work for our bosses insofar as it helps our family. Let's break this down...
+
+#### Boss/family reasons for doing anything
+
+| Reason                                         | Worker Title   |
+|------------------------------------------------|----------------|
+| Helps **family** and helps **boss**            | motivated worker |
+| Helps **family** and does not help **boss**    | family helper    |
+| Does not help **family** and helps **boss**    | honest worker    |
+| Does not help **family** and does not help **boss** | charity worker |
+
+Most people are not honest workers. If the boss tells them to do something that hurts their family they'll do everything they can not to do it. If the boss has lots of control then the worker is still not an "honest worker", they're just doing what is least painful for their family. 
+
+Question: Why I do stuff? 
+Answer: Me -> helps family -> Family
+
+### What is Family?
+
+All humans deal with this question. Ask anyone what they think.  
+
+- Pretty much everything I do is for family. 
+- My family has changed over time.
+- There are lots of reasons families change.
+- Anyone can become a member of a Family.
+- Most of the time Family members are dedicated to the same Family, i.e. you know when someone is not Family.
+
+
+
+Fig 1.0 The   
+Fig 1.1  
+Fig 1.2  
+Fig 1.3  
+Fig 1.4  
+Fig 1.5  
+Fig 1.6  
+Fig 1.7  
+Fig 1.8  
+Fig 1.9  
+Fig 2.0  
+Fig 2.1 how a tower holds up a Wheel Family  
 
 ### Oligarchy
 
@@ -97,7 +169,7 @@ Logically this invitation should only be extended when the prestigious family ha
 
 ### The Wheel
 
-<div align="center"><img src="images/wheel01_intro.webp" alt="Plato head sculpture" width="300"></div>
+<div align="center"><img src="images/wheel01_intro.webp" alt="Intro to KegWheel with Power, Families, Prestige going up and down." width="300"></div>
 
 Any system of centralized power can be represented as a Wheel. A wheel that turns. Families go up in prestige, families go down in prestige. New famlies can enter power and gain maximum prestige and old families can exit power and lose all prestige. Most of the time the oligarchy is remarkable stable. The advantages of prestige are considerable. There is the endless multitude without prestige who will do absolutely any service for a chance of getting prestige[6]. Promises don't even have to be made, the implication is obvious.
 
@@ -126,11 +198,11 @@ Families only invite a Family out of power into power when they can provide a se
 
 Here's a diagram showing what the Wheel could look like with distinct families in power, falling out of power, and totally outside of power.
 
-<div align="center"><img src="images/wheel05_alien.webp" alt="Plato head sculpture" width="300"></div>
+<div align="center"><img src="images/wheel05_alien.webp" alt="Graphic showing how alien Wheels are other Wheels in touch" width="300"></div>
 
 Here's what it looks like when a Wheel touches another Wheel. Each system of power requires institutions, customs, language so precise to their circumstances that they can only be described as "alien" by a different Wheel. 
 
-<div align="center"><img src="images/wheel06_size.webp" alt="Plato head sculpture" width="300"></div>
+<div align="center"><img src="images/wheel06_size.webp" alt="Graphic that shows what wheel_size is" width="300"></div>
 
 Let's introduce a few terms here. For every Wheel we can describe
 
@@ -176,9 +248,6 @@ And it don't matter how load-bearing your ladder is, there's no guarentee of an 
 Obviously this isn't perfect but it's good theory. 
 
 <!--Take: Now I can never be a historian. The process of making this Theory has made me into an ideaologue. I'll never be able to be like my Dad. I will always see the world through Kegology, thats how I've trained myself. My dad was trained as a historian. He was trained to view the world with the least possible of idealogy possible.-->
-
-
-
 
 
 These are the mechanics of the the KegWheel. Next part will address what it's good for. 

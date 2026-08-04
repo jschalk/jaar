@@ -8,7 +8,7 @@
 
 ---
 
-<div align="center"><img src="images/kiros_degette.webp" alt="Frodo happy hanging with Gandalf" width="500"></div>
+<div align="center"><img src="images/kiros_degette.webp" alt="Pictures or candidate Kiros and Congresswoman Degette" width="500"></div>
 
 Recently, there has been a wave of Democratic Socialist candidates displacing their usually much older establishment predecessors. The results of Colorado primaries, I found quite symbolic. A sitting congresswoman DeGette got primaried by a 40 (fucking forty!) year younger Kiros.
 
@@ -40,7 +40,7 @@ Whatever circumstances, whatever happenings there are, it is only the factions a
 
 Not in faction → not in a race → nothing that happens can possibly help you
 
-<div align="center"><img src="images/rain_reservoir.webp" alt="Frodo happy hanging with Gandalf" width="500"></div>
+<div align="center"><img src="images/rain_reservoir.webp" alt="Completely dry rain reservoir in desert" width="500"></div>
 
 *It may rain, or it may not rain. But if you have not bothered building a reservoir, there’s no upside when it rains, for you.*
 
@@ -66,7 +66,7 @@ So, hopping, and scheming, and calculating, Ibn Haldun came to a point where no 
 
 And that’s how he had the free time to produce Muqaddimah, the work of genius, that I strongly advise you to read. It is majestic, unbelievable. BUT. Had not Ibn Haldun be a scheming, unprincipled intriguer, had he not lost the trust of every political faction in Maghreb successively, he would not have been thrown away from the politics like a rabid dog, and would never have a free time to produce this majestic book.
 
-<div align="center"><img src="images/muqaddimah_book.webp" alt="Frodo happy hanging with Gandalf" width="400"></div>
+<div align="center"><img src="images/muqaddimah_book.webp" alt="Book cover of Muaqaddimah" width="400"></div>
 
 So, the time of theory is over, now we come to the practical advice. What you should do to win power, practically speaking:
 
@@ -78,6 +78,6 @@ Third, you must **do it very early on**. If you have committed early on, and sto
 
 But. If you are a loner, a coward or a schemer, who hops on and off at the first danger, this chance does not exist, and no possible tide can help you
 
-<div align="center"><img src="images/boats_and_camels.webp" alt="Frodo happy hanging with Gandalf" width="500"></div>
+<div align="center"><img src="images/boats_and_camels.webp" alt="Picture of camels hiding in shade of beached boats. Where there used to be water." width="500"></div>
 
 *Tides, are dangerous, winds unpredictable. The ocean is full of hidden rocks, and underwater currents. But, all of that in mind, no tide can bring us any good if we are not sailing anywhere*

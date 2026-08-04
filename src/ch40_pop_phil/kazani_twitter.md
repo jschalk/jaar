@@ -66,7 +66,7 @@ In response to someone who has observed a writer going through the effort of wri
 > 
 > Imagine a generative AI user as an abused dog, and you won't be far from truth. The primary purpose of the generative AI slop is to escape beatings
 
-<div align="center"><img src="images/kazani_scared_of_voice_tweet.webp" alt="A horse before the cart" width="500"></div>
+<div align="center"><img src="images/kazani_scared_of_voice_tweet.webp" alt="Kamil tweet 'terrified to use their own voice'" width="500"></div>
 
 **June 30th, 2026 #2**  
 Discussing the autobiography of Vasily Vasil'evich Nalimov (1910-1997), a prominent Russian mathematician and philosopher.
@@ -75,7 +75,7 @@ Discussing the autobiography of Vasily Vasil'evich Nalimov (1910-1997), a promin
 > It goes without saying that they were all distributed among the administration, guards, and thieves-in-law immediately upon their arrival to Magadan
 > 
  > Very interesting book of memoirs. Recommended:
-<div align="center"><img src="images/Nalimov_memoir_book.jpg" alt="A horse before the cart" width="300"></div>
+<div align="center"><img src="images/Nalimov_memoir_book.jpg" alt="Book cover of Memoir (In Russian)" width="300"></div>
 
 
 **July 2nd, 2026**  
