@@ -9,7 +9,6 @@
 
 <div align="center"><img src="images/zeng_guofan.webp" alt="Zeng Guofan, the conqueror of Taipings." width="500"></div>
 
-
 Reading the Autumn in the Heavenly Kingdom by Stephen Platt (highly recommended), I was particularly impressed by the rules of life of Zeng Guofan, the conqueror of Taipings. This scholar turned general developed some really interesting intellectual routines.
 
 Read the classics. Read it slowly, there is nowhere to rush. Take notes, when reading. Always finish one book, before starting another. Keep the diary. Take an hour meditating, every morning.
@@ -45,7 +44,7 @@ What books to read though?
 
 Notice that I am not preaching you to read the high brow “intellectual” stuff. In fact, I think that lots of people are overdoing just that. There is a huge danger that consuming too much of the over-sophisticated, nerdish content will give an ugly, overly lopsided turn to your own thoughts and conscience. Over-sophistication is just another form of grinding, something that I would certainly warn you against.
 
-<div align="center"><img src="images/bighead_selfie.webp" alt="Zeng Guofan, the conqueror of Taipings." width="200"></div>
+<div align="center"><img src="images/bighead_selfie.webp" alt="Altered picture of bald guy with giant disportioned head." width="200"></div>
 
 Not a good look
 
@@ -85,11 +84,9 @@ Long story short, reading a range of old poets, and reading them daily or so, wi
 
 Some kind of short poem, few pages a day will be enough. For that, of course, you need to keep a fresh supply of poetry at home, so you will always have it at hand in the morning. Again, I highly recommend having it all in paper form and, if possible, the form should be beautiful. If you can, start your day with interacting with a nice work of art.
 
-
-<div align="center"><img src="images/helicon_pages.webp" alt="Zeng Guofan, the conqueror of Taipings." width="700"></div>
+<div align="center"><img src="images/helicon_pages.webp" alt="Title page of Helicon series." width="700"></div>
 
 One of my recent acquisitions in that regard, Helicon series. Beautifully printed, a broad range of the English (mostly) poetry from the 16th to late 19th cc. And that the range is broad is good, for it is much more important to read widely than deeply, and more important to taste a range of authors rather than to dig into one.
-
 
 At this point, there is no need to “analyse” them, or approach them critically. Simply enjoy, try to understand, absorb the vibe, and the general context. Who is the author. When did he write, what did he write. Why. What was the culture, and what was the age he was working in. How did the discourse of the era look like. What were its cultural and the intellectual premises. I believe that this kind of effort must precede any serious approach of more fundamental, or more theoretical works.
 

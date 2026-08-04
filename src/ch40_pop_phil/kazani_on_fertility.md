@@ -16,7 +16,7 @@ All over the world, fertility is collapsing. Rich countries. Poor countries. Mid
 
 Uzbekistan may be one of the only examples of the opposite pattern: when the fertility has actually increased, in the last few years. A quick search shows that of all the countries that have increased their TFR for the past decade (usually, the increase is microscopically small), Uzbekistan bounced back the most, and by far
 
-<div align="center"><img src="images/uzbek_fertility_rate_1960_2020.webp" alt="Description of image" width="700"></div>
+<div align="center"><img src="images/uzbek_fertility_rate_1960_2020.webp" alt="Uzbekistan birthrate 1960-2023" width="700"></div>
 
 Why?
 
@@ -26,7 +26,7 @@ In the year 2016, President Islam Karimov died
 
 Immediately after his death, Uzbekistan experiences a demographic boom, absolutely unprecedented in the rest of the urbanised & industrialised world.
 
-<div align="center"><img src="images/karimov_photo1.webp" alt="A different description of image" width="300"></div>
+<div align="center"><img src="images/karimov_photo1.webp" alt="Picture of Islam Karimov" width="300"></div>
 
 
 Islam Karimov (born in 1938) was a Soviet Party secretary (= governor) of Uzbekistan. After the collapse of the USSR, he naturally inherited power and made himself (a lifelong) president.

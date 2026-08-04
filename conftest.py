@@ -43,6 +43,12 @@ def pytest_addoption(parser):
         help="Rebuild JSON files during the test run",
     )
     parser.addoption(
+        "--rebuild_images",
+        action="store_true",
+        default=False,
+        help="Rebuild image files during the test run",
+    )
+    parser.addoption(
         "--check_pip",
         action="store_true",
         default=False,
@@ -72,6 +78,12 @@ def check_pip(request):
 def rebuild_jsons(request):
     """Fixture to access the flag value in tests"""
     return request.config.getoption("--rebuild_jsons")
+
+
+@pytest.fixture
+def rebuild_images(request):
+    """Fixture to access the flag value in tests"""
+    return request.config.getoption("--rebuild_images")
 
 
 @pytest.fixture

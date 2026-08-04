@@ -11,7 +11,7 @@ I want to be a good dad. To do that I want to stop climate change. Lots of other
 
 I'm building a solution called Kegology. It's a philosophy that says instead of trying to tell others what to do the way to make good change is to listen to others more. It's taking a lot of work. My oldest asked me yesterday when I'll be done with the project so I can play more. Here's what I will tell my kid.
 
-<div align="center"><img src="../ch40_pop_phil/images/wave_small.webp" alt="A different description of image" width="200"></div>
+<div align="center"><img src="../ch40_pop_phil/images/wave_small.webp" alt="Drawing of wave in ocean" width="200"></div>
 
 
 I have to try. 

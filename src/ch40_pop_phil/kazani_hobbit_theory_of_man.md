@@ -128,5 +128,5 @@ In fact, if I wanted to demonstrate the difference between the Neo-Morality of o
 (to be continued)
 
 
-<div align="center"><img src="images/king_authur_painting.webp" alt="Orcs is battle formation" width="00"></div>
+<div align="center"><img src="images/king_authur_painting.webp" alt="Painting of King Authur" width="00"></div>
 

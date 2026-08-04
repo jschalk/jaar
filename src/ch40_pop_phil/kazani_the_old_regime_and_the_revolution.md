@@ -8,7 +8,7 @@
 
 ---
 
-<div align="center"><img src="images/tocqueville_title_page.webp" alt="A different description of image" width="700"></div>
+<div align="center"><img src="images/tocqueville_title_page.webp" alt="The Old Regime and the Revolution title page" width="700"></div>
 
 Today, I am going to talk about Alexis de Tocqueville, the single smartest and sharpest author who ever wrote on the French Revolution[^1].
 
@@ -24,7 +24,7 @@ And to answer that question, he - quite predictably - had to dig into the histor
 So that’s how it happened that the book, originally conceived as a biography of Napoleon, ended up focused on the administrative reform of the Sun King, Louis XIV.
 
 
-<div align="center"><img src="images/expectations_reality.webp" alt="A different description of image" width="500"></div>
+<div align="center"><img src="images/expectations_reality.webp" alt="Two paintings, Napolean and Louis XIV" width="500"></div>
 
 For it was in the political and administrative reform of Louis XIV that Tocqueville saw the root causes of the great revolution. The part on Napoleon, he never finished
 
@@ -43,7 +43,7 @@ Bit by a bit, the kings of France dismantled the old medieval order, subjugated 
 
 And that is, how bit by a bit, they built the structure of governance so centralised, so domineering, so all-powerful, that it - in the end - became ultra fragile. For once you submit all classes and all institutions in the country to the will of supreme ruler (which means, central bureacracy in Paris), your entire regime - and not just your regime, but the entire socio-political order - becomes brittle, like a piece of glass. For when you build a centralised, top down structure of governance, all you need is one strike, just one strike to take it out, entirely. And once you do, what you have is a vast country with a learnt habit of despotism, with a learnt habit of sumbission, that will submit itself to the will of new rulers just as eagerly, and as unquestioningly, as it used to prostrate before the will of the old ones.
 
-<div align="center"><img src="images/bending_the_knee.webp" alt="A different description of image" width="700"></div>
+<div align="center"><img src="images/bending_the_knee.webp" alt="A member of court bending the knee to probably Louis XIV" width="700"></div>
 
 For the revolution is not when the power breaks down, but when the omnipotence - built by the previous regime! - drops into the new hands, and the obedient populace follows the new leaders, and obeys their every order and every whim.
 
@@ -53,7 +53,7 @@ For the revolution is not the crazy mob doing whatever it wants - that is called
 
 The revolution is an army of droids, marching in line
 
-<div align="center"><img src="images/droids.webp" alt="A different description of image" width="700"></div>
+<div align="center"><img src="images/droids.webp" alt="Painting of dumbest droids in Star Wars on march" width="700"></div>
 
 *The army of droids will march anywhere you send it, all the way to Alexandria, Lisboa, Moscow*
 
@@ -189,13 +189,13 @@ How did the new chain of command look, in a French province?
 
 So, on top you had an intendant, sitting in the provincial capital. That is a Mr. Nobody, a young middle class guy - and never a noble - sent from Paris - and never to his native province, by the royal council. A total and absolute outsider, with no roots, and no stake, and no kin, and no friends on this place, a complete transplant, fully dependent upon the king, and for whom all power, consists in his badge.
 
-Below him, are the sub-intendants, whom he delegates into the particular counties. Now these sub-intendants have a complete power over everything. All the village communities defer to them. All the populace defers to them. They are responsible for policing, for the administration of justice, for the corvee labour, for the tax collection, for keeping the order, and long story short for everything. Should the locals argue, he will send their bailiffs. Should they argue even then, he will send the dragoons.
+Below him, are the sub-intendants, whom he delegates into the particular counties. Now these sub-intendants have a complete power over everything. All the village communities defer to them. All the populace defers to them. They are responsible for policing, for the administration of justice, for the corvee labour, for the tax collection, for keeping the order, and long story short for everything. Should the locals argue, he will send their bailiffs. Should they argue even then, he will send the infantry.
 
 Bit by a bit, and iteration by iteration the French countryside was being taken from under the feudal jurisdiction and put under what was effectively a permanent martial law, administered by the royal appointees, totally independent from the local nobility, from the ancient traditions, and the ancient custom. And, usurpation of power by this new hierarchy of royal appointees came at the expense of the old aristocracy.
 
 These reforms, that of course were not completed in one year, or in one decade, or even in one reign, were **to strip nobility of all of their power on the ground.** Previously, the lord of the manor was a natural leader and a natural chief of the populace, who exercised power over them, commanded their respect, punished and judges them as he wished, and could rally them for a cause of his choice, because again, they saw him as their natural lord and their natural liege.
 
-But then, bit by a bit, every bit of this power was stripped from the lord of the manor. His power to police, to judge, to command, to punish, all of that was transferred to the royal appointed officials (with no roots in the provinces) and, ultimately, relied upon the military power, again, provided by the king. Should a problem arise, a lord could only complain to an intendant, who - if persuasion would not work - would send dragoons. Which meant, that the peasantry no longer saw a nobleman as their lord and their liege. They did not depend upon him, did not heed to him, did not listen to him.
+But then, bit by a bit, every bit of this power was stripped from the lord of the manor. His power to police, to judge, to command, to punish, all of that was transferred to the royal appointed officials (with no roots in the provinces) and, ultimately, relied upon the military power, again, provided by the king. Should a problem arise, a lord could only complain to an intendant, who - if persuasion would not work - would send infantry. Which meant, that the peasantry no longer saw a nobleman as their lord and their liege. They did not depend upon him, did not heed to him, did not listen to him.
 
 For them, he became just another rich living dude in the castle, a useless rent-seeker to whom they owed money, well, for everything. So, basically, there is a millionaire living in a big house, whom you owe money. You owe him for milling, you owe him for sowing, you owe him for using the roads, you owe him for selling your goods on the market. Extremely petty, and extremely irritating, and of course breeding the extreme hostility to that dude. Who - other than that - has no power over you, and it is only a royal appointed official, and the royal sent troopers who shield him from your wrath.
 

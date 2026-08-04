@@ -7,7 +7,7 @@
 
 ---
 
-<div align="center"><img src="images/lenin_giant_head.webp" alt="Zeng Guofan, the conqueror of Taipings." width="700"></div>
+<div align="center"><img src="images/lenin_giant_head.webp" alt="Giant statue head of Lenin." width="700"></div>
 
 
 There is a common wisdom that men of thought want to be the men of action and men of action want to be the men of thought. I think there’s lots of truth in that. Because there’s little overlap between the two, and, yes, of course, the grass is always greener on the other side.

@@ -124,7 +124,7 @@ It is not that everyone just reads Marx and enlightens. That is not what happens
 
 It is that there is a relatively small number of “nexuses”, powerful re-interpreters, and re-translators, who define the ideological landscape in let’s say Russia. And if a (sufficient number of) these re-translators got infected by the Marxist ideas and start translating them, then the poison will be slowly accumulating, and accumulating, first invisible, then very much visible, and then defining the course of the country.
 
-But again, it is not that Marx is translating his ideas from his graveyard in Highgate
+But again, it is not that Marx is translating his ideas from his grave in Highgate
 
 <div align="center"><img src="images/lenin_grave.webp" alt="Article image 5" width="700"></div>
 

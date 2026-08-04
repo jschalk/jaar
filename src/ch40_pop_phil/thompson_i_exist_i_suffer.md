@@ -9,7 +9,7 @@
 
 ---
 
-<div align="center"><img src="images/mini_philo_podcast.webp" alt="Description of image" width="500"></div>
+<div align="center"><img src="images/mini_philo_podcast.webp" alt="MiniPhilosophy by Jonny Thomson banner" width="500"></div>
 
 Hello everybody,
 
@@ -34,7 +34,7 @@ So, our faces are important. This week, we look at just how much.
 Go well,
 Jonny
 
-<div align="center"><img src="images/thompson_selfie.webp" alt="A different description of image" width="700"></div>
+<div align="center"><img src="images/thompson_selfie.webp" alt="A good selfie by Thompson" width="700"></div>
 
 *The ridiculous story etched into my face.*
 

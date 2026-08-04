@@ -1,6 +1,8 @@
-from re import findall as re_findall
+from re import findall as re_findall, compile as re_compile, IGNORECASE as re_IGNORECASE
 from pathlib import Path
 from pytest import mark as pytest_mark
+from collections import defaultdict
+from pathlib import Path
 
 
 def get_image_paths_from_markdown(md_text: str) -> list[str]:
@@ -286,3 +288,39 @@ def test_AllImagesUnder100kb() -> None:
 
     # THEN
     assert not oversized_images, "\n".join(oversized_images)
+
+
+IMAGE_TAG_PATTERN = re_compile(
+    r'<img\b[^>]*\balt="([^"]+)"',
+    flags=re_IGNORECASE,
+)
+
+
+def test_markdown_ImageDescriptionsAreUniqueAcrossCodebase_Scenario1_NoDuplicateAltText() -> (
+    None
+):
+    # ESTABLISH
+    root_dir = Path("src")
+
+    alt_text_locations: dict[str, list[Path]] = defaultdict(list)
+
+    # WHEN
+    for markdown_path in root_dir.rglob("*.md"):
+        content = markdown_path.read_text(encoding="utf-8")
+
+        for match in IMAGE_TAG_PATTERN.finditer(content):
+            alt_text = match.group(1).strip()
+            alt_text_locations[alt_text].append(markdown_path)
+
+    duplicates = {
+        alt_text: sorted(str(path) for path in paths)
+        for alt_text, paths in alt_text_locations.items()
+        if len(paths) > 1
+    }
+
+    # THEN
+    assertion_fail_str = "Duplicate image descriptions found:\n" + "\n".join(
+        f'  alt="{alt_text}"\n    ' + "\n    ".join(paths)
+        for alt_text, paths in sorted(duplicates.items())
+    )
+    assert not duplicates, assertion_fail_str
