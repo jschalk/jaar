@@ -29,6 +29,7 @@ jobs:
           python -m pip install flask_cors
           python -m pip install compact_json
           python -m pip install sqlglot
+          python -m pip install drawsvg
       - name: Debug config
         run: |
           pwd
