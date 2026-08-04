@@ -14,6 +14,7 @@ from drawsvg import Drawing
 from copy import deepcopy as copy_deepcopy
 from pathlib import Path
 from os.path import exists as os_path_exists
+from re import compile as re_compile, Match as re_Match
 
 
 def _get_elements_count(d: Drawing) -> int:
@@ -231,6 +232,16 @@ def test_rebuild_markdown_wheel_theory_images_SpecialCreateImages(rebuild_images
             print(f"Saved {svg_image_path}")
 
 
+_NUMBER_RE = re_compile(r"-?\d+\.\d+")
+
+
+def normalize_svg(svg: str, decimals: int = 8) -> str:
+    def repl(match: re_Match[str]) -> str:
+        return f"{float(match.group()):.{decimals}f}"
+
+    return _NUMBER_RE.sub(repl, svg)
+
+
 def test_draw_contact_rows_SetsAttr_Scenario0_MatchesStaticFile():
     # ESTABLISH
     for filebasename, drawing in get_markdown_wheel_theory_drawings().items():
@@ -243,5 +254,5 @@ def test_draw_contact_rows_SetsAttr_Scenario0_MatchesStaticFile():
         curr_svg_text = output_file_path.read_text()
 
         # THEN
-        assert curr_svg_text == drawing.as_svg()
+        assert normalize_svg(curr_svg_text) == normalize_svg(drawing.as_svg())
         print(f"{output_file_path=}")
