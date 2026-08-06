@@ -43,7 +43,6 @@ def test_draw_contacts_row_SetsAttr_Scenario0_4People():
     # THEN
     assert drawing
     # save_example_image(drawing)
-    # assert 1 == 2
 
 
 def test_draw_infinity_contact_SetsAttr_Scenario0_ContactWithFace(rebuild_images):
@@ -237,8 +236,8 @@ def test_rebuild_markdown_wheel_theory_images_SpecialCreateImages(rebuild_images
     # ESTABLISH / WHEN / THEN
     if rebuild_images:
         svg_image_paths = rebuild_markdown_wheel_theory_images()
-        for svg_image_path in svg_image_paths:
-            print(f"Saved {svg_image_path}")
+        # for svg_image_path in svg_image_paths:
+        #     print(f"Saved {svg_image_path}")
 
 
 _NUMBER_RE = re_compile(r"-?\d+\.\d+")
@@ -266,7 +265,17 @@ def test_get_markdown_wheel_theory_drawings_ReturnsObj_HasExpectedKeys():
         'wheel_fig0_6',
         'wheel_fig0_7',
         'wheel_fig0_8',
-        'wheel_fig1_0',
+        "wheel_fig1_00",
+        "wheel_fig1_01",
+        "wheel_fig1_02",
+        "wheel_fig1_03",
+        "wheel_fig1_04",
+        "wheel_fig1_05",
+        "wheel_fig1_06",
+        "wheel_fig1_07",
+        "wheel_fig1_08",
+        "wheel_fig1_09",
+        "wheel_fig1_10",
     }
     assert wheel_theory_filebasenames == expected_wheel_theory_filebasenames
 

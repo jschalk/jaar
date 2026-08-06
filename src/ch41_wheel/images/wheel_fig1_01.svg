@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="600" height="350" viewBox="0 0 600 350">
+<defs>
+</defs>
+<rect x="0" y="0" width="800" height="600" fill="white" />
+<path d="M129.0,190 L201.0,190 L210,262.0 L120,262.0 Z" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="165.0" y="233.2" font-size="18" fill="black" text-anchor="middle" dominant-baseline="central">Smiths</text>
+<path d="M229.0,190 L301.0,190 L310,262 L220,262 Z" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="265.0" y="233.2" font-size="18" fill="black" text-anchor="middle" dominant-baseline="central">Duvals</text>
+<path d="M181.0,110 L269.0,110 L280,182 L170,182 Z" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="225.0" y="153.2" font-size="18" fill="black" text-anchor="middle" dominant-baseline="central">Gomezs</text>
+<text x="300.0" y="40" font-size="30" fill="black" font-weight="bold" text-anchor="middle" dominant-baseline="central">Families on the Land</text>
+<text x="300.0" y="66" font-size="16" fill="black" font-weight="bold" text-anchor="middle" dominant-baseline="central">The Smiths and the Duvals lift up the Gomezs</text>
+<path d="M75,270 L525,270" stroke="black" stroke-width="4" />
+<text x="300.0" y="296" font-size="20" text-anchor="middle" dominant-baseline="central">Land</text>
+</svg>

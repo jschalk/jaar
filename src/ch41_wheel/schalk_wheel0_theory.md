@@ -124,7 +124,17 @@ Ok, we now know Families exist and where they come from: Individuals having deci
 
 In a low trust society model power purely from FamilyUnits and Land.
 
-<div align="center"><img src="images/wheel_fig1_0.svg" alt="wheel fig1_0" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_00.svg" alt="wheel fig1_00" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_01.svg" alt="wheel fig1_01" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_02.svg" alt="wheel fig1_02" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_03.svg" alt="wheel fig1_03" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_04.svg" alt="wheel fig1_04" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_05.svg" alt="wheel fig1_05" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_06.svg" alt="wheel fig1_06" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_07.svg" alt="wheel fig1_07" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_08.svg" alt="wheel fig1_08" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_09.svg" alt="wheel fig1_09" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_10.svg" alt="wheel fig1_10" width="350"></div>   
 
 ### Oligarchy
 
