@@ -93,7 +93,6 @@ def rebuild_keg_rank_csv(src_dir: str = None):
     set_dir(derived_dir)
 
     output_path = Path(derived_dir) / "question_tier.csv"
-    print(f"{output_path=}")
 
     with output_path.open("w", encoding="utf-8", newline="") as file:
         writer = csv_writer(file)
