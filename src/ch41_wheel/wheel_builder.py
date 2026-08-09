@@ -2,6 +2,7 @@ from drawsvg import (
     Drawing,
     Rectangle as drawsvg_Rectangle,
     Lines as drawsvg_Lines,
+    Line as drawsvg_Line,
     Text as drawsvg_Text,
     Path as drawsvg_Path,
     Circle as drawsvg_Circle,
@@ -9,6 +10,7 @@ from drawsvg import (
 )
 from math import cos as math_cos, sin as math_sin, pi as math_pi
 from pathlib import Path
+from dataclasses import dataclass
 
 
 def add_title_to_drawing(
@@ -493,12 +495,12 @@ def draw_curved_dotted_line(
     }
 
 
-def draw_trapezoid(
+def draw_trapezoid_shape(
     d: Drawing,
     x: int,
     y: int,
     bottom_length: int,
-    label: str,
+    family_title: str,
     height=None,
     fill="#D9F2D9",
     stroke="black",
@@ -540,7 +542,7 @@ def draw_trapezoid(
     d.append(trapezoid)
 
     # Add centered label
-    lines = label.split("\n")
+    lines = family_title.split("\n")
     line_height = font_size * 1.2
 
     total_height = len(lines) * line_height
@@ -567,72 +569,85 @@ def draw_trapezoid(
     }
 
 
-def draw_trapezoid_row(
+def draw_land(
     d: Drawing,
-    x: int,
-    y: int,
-    bottom_length: int,
-    labels: list[str],
-    fill="#D9F2D9",
-    stroke="black",
-    stroke_width=2,
-    font_size=18,
-):
-    bottom_sum = 0
-    for label in labels:
-        draw_trapezoid(
-            d=d,
-            x=x + bottom_sum,
-            y=y,
-            bottom_length=bottom_length,
-            label=label,
-            fill=fill,
+    x: float,
+    y: float,
+    length: float,
+    label: str = "Land",
+    stroke: str = "black",
+    stroke_width: float = 2,
+    font_size: float = 14,
+    label_gap: float = 6,
+) -> dict:
+    """
+    Draw a horizontal line representing land with a centered label beneath it.
+
+    (x, y) is the left endpoint of the line.
+    """
+
+    # Draw the line.
+    d.append(
+        drawsvg_Line(
+            x,
+            y,
+            x + length,
+            y,
             stroke=stroke,
             stroke_width=stroke_width,
-            font_size=font_size,
         )
-        bottom_sum += bottom_length
+    )
+
+    # Draw the label.
+    d.append(
+        drawsvg_Text(
+            label,
+            font_size,
+            x=x + length / 2,
+            y=y + label_gap + font_size,
+            center=True,
+        )
+    )
+
+    return {
+        "x": x,
+        "y": y,
+        "length": length,
+        "label_x": x + length / 2,
+        "label_y": y + label_gap + font_size,
+    }
+
+
+@dataclass
+class TrapeziodUnit:
+    x0: int = None
+    y0: int = None
+    bottom_length: int = None
+    family_title: str = None
+    height: int = None
 
 
 def draw_trapezoid_stack(
     d: Drawing,
-    x: int,
-    y: int,
-    bottom_length: int,
-    label_rows: list[list[str]],
+    trapunits: list[TrapeziodUnit],
     fill="#D9F2D9",
     stroke="black",
     stroke_width=2,
     font_size=18,
 ):
-    trap_height = bottom_length * 0.8
-    stack_height = 0
-    max_row_labels_count = 0
-    for row_labels in label_rows:
-        if len(row_labels) > max_row_labels_count:
-            max_row_labels_count = len(row_labels)
-    stack_width = bottom_length * max_row_labels_count
-
-    tower_rows = len(label_rows)
-    curr_row_width = stack_width
-    prev_row_width = None
-
-    for row_labels in reversed(label_rows):
-        row_width = bottom_length * len(row_labels)
-        row_diff = stack_width - row_width
-
-        draw_trapezoid_row(
+    for trapunit in trapunits:
+        draw_trapezoid_shape(
             d=d,
-            x=x + (row_diff / 2),
-            y=y - stack_height,
-            bottom_length=bottom_length,
-            labels=row_labels,
+            x=trapunit.x0,
+            y=trapunit.y0,
+            bottom_length=trapunit.bottom_length,
+            height=trapunit.height,
+            family_title=trapunit.family_title,
             fill=fill,
             stroke=stroke,
             stroke_width=stroke_width,
             font_size=font_size,
         )
-        stack_height += trap_height
 
 
 # d = Drawing(800, 600, origin='top-left')
@@ -645,8 +660,8 @@ def draw_trapezoid_stack(
 
 
 # # Trapezoid (Institution)
-# trap0 = draw_trapezoid(d, x=100, y=50, bottom_length=100, label="huh\nhuh2")
-# trap1 = draw_trapezoid(d, x=200, y=50, bottom_length=100, label="what\nwhat")
+# trap0 = draw_trapezoid_shape(d, x=100, y=50, bottom_length=100, label="huh\nhuh2")
+# trap1 = draw_trapezoid_shape(d, x=200, y=50, bottom_length=100, label="what\nwhat")
 
 # d.append(trap0)
 # d.append(trap1)
@@ -830,8 +845,153 @@ def get_wheel_fig0_8(face_title_str: str) -> Drawing:
     return fig_obj
 
 
+def get_wheel_fig1_00(face_title_str: str) -> Drawing:
+    fig_width = 600
+    fig_obj = get_standard_drawing(fig_width, 250)
+    trapunits = [
+        TrapeziodUnit(120, 100, 90, "Smiths"),
+        TrapeziodUnit(220, 100, 90, "Duvals"),
+        TrapeziodUnit(340, 100, 150, "Gomezs", 72),
+    ]
+    draw_trapezoid_stack(fig_obj, trapunits)
+    add_title_to_drawing(fig_obj, face_title_str, 30, fig_width, 10)
+    draw_land(fig_obj, 75, 180, 450, "Land", stroke_width=4, font_size=20)
+    return fig_obj
+
+
+def get_wheel_fig1_01(face_title_str: str) -> Drawing:
+    smiths_str = "Smiths"
+    duvals_str = "Duvals"
+    gomezs_str = "Gomezs"
+    fig_width = 600
+    fig_obj = get_standard_drawing(fig_width, 350)
+    trapunits = [
+        TrapeziodUnit(120, 190, 90, smiths_str),
+        TrapeziodUnit(220, 190, 90, duvals_str, 72),
+        TrapeziodUnit(170, 110, 110, gomezs_str, 72),
+    ]
+    draw_trapezoid_stack(fig_obj, trapunits)
+    add_title_to_drawing(fig_obj, face_title_str, 30, fig_width, 10)
+    desc_str = f"""The {smiths_str} and the {duvals_str} lift up the {gomezs_str}"""
+    add_title_to_drawing(fig_obj, desc_str, 16, fig_width, 50)
+    draw_land(fig_obj, 75, 270, 450, "Land", stroke_width=4, font_size=20)
+    return fig_obj
+
+
+def get_wheel_fig1_02(face_title_str: str) -> Drawing:
+    smiths_str = "Smiths"
+    duvals_str = "Duvals"
+    gomezs_str = "Gomezs"
+    flores_str = "Flores"
+    fig_width = 700
+    fig_obj = get_standard_drawing(fig_width, 450)
+    trapunits = [
+        TrapeziodUnit(170, 130, 100, flores_str, 72),
+        TrapeziodUnit(140, 210, 150, gomezs_str, 72),
+        TrapeziodUnit(120, 290, 90, smiths_str),
+        TrapeziodUnit(220, 290, 90, duvals_str, 72),
+        TrapeziodUnit(470, 130, 100, gomezs_str, 72),
+        TrapeziodUnit(440, 210, 150, flores_str, 72),
+        TrapeziodUnit(420, 290, 90, smiths_str),
+        TrapeziodUnit(520, 290, 90, duvals_str, 72),
+    ]
+    draw_trapezoid_stack(fig_obj, trapunits)
+    add_title_to_drawing(fig_obj, face_title_str, 30, fig_width, 10)
+    desc_str = f"""{flores_str} lifts up the {gomezs_str} and drags themselves down"""
+    add_title_to_drawing(fig_obj, desc_str, 20, fig_width, 50)
+    draw_land(fig_obj, 75, 370, 600, "Land", stroke_width=4, font_size=20)
+    return fig_obj
+
+
+def get_wheel_fig1_03(face_title_str: str) -> Drawing:
+    smiths_str = "Smiths"
+    duvals_str = "Duvals"
+    gomezs_str = "Gomezs"
+    flores_str = "Flores"
+    fig_width = 800
+    fig_obj = get_standard_drawing(fig_width, 550)
+    trapunits = [
+        TrapeziodUnit(170, 160, 100, flores_str, 72),
+        TrapeziodUnit(140, 240, 150, gomezs_str, 72),
+        TrapeziodUnit(120, 320, 90, smiths_str),
+        TrapeziodUnit(220, 320, 90, duvals_str, 72),
+        TrapeziodUnit(470, 120, 150, gomezs_str, 85),
+        TrapeziodUnit(440, 215, 210, flores_str, 85),
+        TrapeziodUnit(400, 310, 140, smiths_str, 85),
+        TrapeziodUnit(550, 310, 140, duvals_str, 85),
+    ]
+    draw_trapezoid_stack(fig_obj, trapunits)
+    add_title_to_drawing(fig_obj, face_title_str, 30, fig_width, 10)
+    desc_str = f"""{gomezs_str} is lifted up because {flores_str} thinks things will be better"""
+    add_title_to_drawing(fig_obj, desc_str, 20, fig_width, 50)
+    draw_land(fig_obj, 75, 410, 650, "Land", stroke_width=4, font_size=20)
+    return fig_obj
+
+
+def get_wheel_fig1_04(face_title_str: str) -> Drawing:
+    fam01 = "F1"
+    fam02 = "F2"
+    fam03 = "F3"
+    fam04 = "F4"
+    fam05 = "F5"
+    fam06 = "F6"
+    fam07 = "F7"
+    fam08 = "F8"
+    fam09 = "F9"
+    fig_width = 600
+    fig_obj = get_standard_drawing(fig_width, 400)
+    trapunits = [
+        TrapeziodUnit(230, 90, 100, fam01, 50),
+        TrapeziodUnit(200, 150, 80, fam02, 50),
+        TrapeziodUnit(300, 150, 80, fam03, 50),
+        TrapeziodUnit(160, 210, 90, fam04, 50),
+        TrapeziodUnit(260, 210, 150, fam05, 50),
+        TrapeziodUnit(270, 270, 100, fam06, 50),
+        TrapeziodUnit(130, 270, 60, fam07, 50),
+        TrapeziodUnit(380, 270, 60, fam08, 50),
+        TrapeziodUnit(200, 270, 60, fam09, 50),
+    ]
+    draw_trapezoid_stack(fig_obj, trapunits)
+    add_title_to_drawing(fig_obj, face_title_str, 30, fig_width, 10)
+    desc_str = f"""TODO add sub-title better"""
+    add_title_to_drawing(fig_obj, desc_str, 20, fig_width, 50)
+    draw_land(fig_obj, 75, 330, 410, "Land", stroke_width=4, font_size=20)
+    return fig_obj
+
+
+def get_wheel_fig1_05(face_title_str: str) -> Drawing:
+    # TODO build fig
+    return get_standard_drawing(600, 250)
+
+
+def get_wheel_fig1_06(face_title_str: str) -> Drawing:
+    # TODO build fig
+    return get_standard_drawing(600, 250)
+
+
+def get_wheel_fig1_07(face_title_str: str) -> Drawing:
+    # TODO build fig
+    return get_standard_drawing(600, 250)
+
+
+def get_wheel_fig1_08(face_title_str: str) -> Drawing:
+    # TODO build fig
+    return get_standard_drawing(600, 250)
+
+
+def get_wheel_fig1_09(face_title_str: str) -> Drawing:
+    # TODO build fig
+    return get_standard_drawing(600, 250)
+
+
+def get_wheel_fig1_10(face_title_str: str) -> Drawing:
+    # TODO build fig
+    return get_standard_drawing(600, 250)
+
+
 def get_markdown_wheel_theory_drawings() -> dict[str, Drawing]:
     t_str = "am i a good father?"
+    low_trust_str = "Families on the Land"
     return {
         "wheel_fig0_0": get_wheel_fig0_0(t_str),
         "wheel_fig0_1": get_wheel_fig0_1(t_str),
@@ -842,6 +1002,17 @@ def get_markdown_wheel_theory_drawings() -> dict[str, Drawing]:
         "wheel_fig0_6": get_wheel_fig0_6(t_str),
         "wheel_fig0_7": get_wheel_fig0_7(t_str),
         "wheel_fig0_8": get_wheel_fig0_8(t_str),
+        "wheel_fig1_00": get_wheel_fig1_00(low_trust_str),
+        "wheel_fig1_01": get_wheel_fig1_01(low_trust_str),
+        "wheel_fig1_02": get_wheel_fig1_02(low_trust_str),
+        "wheel_fig1_03": get_wheel_fig1_03(low_trust_str),
+        "wheel_fig1_04": get_wheel_fig1_04(low_trust_str),
+        "wheel_fig1_05": get_wheel_fig1_05(low_trust_str),
+        "wheel_fig1_06": get_wheel_fig1_06(low_trust_str),
+        "wheel_fig1_07": get_wheel_fig1_07(low_trust_str),
+        "wheel_fig1_08": get_wheel_fig1_08(low_trust_str),
+        "wheel_fig1_09": get_wheel_fig1_09(low_trust_str),
+        "wheel_fig1_10": get_wheel_fig1_10(low_trust_str),
     }
 
 

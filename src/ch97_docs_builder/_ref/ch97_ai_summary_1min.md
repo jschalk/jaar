@@ -48,6 +48,6 @@ Ontology note:
 - `QuestionUnit` — a dataclass representing a single study question about a keg term: `keg_term`, `keg_definition`, `init_ch` (the chapter where the term is first introduced), `question_tier`, `did_you_read_order`, and optionally a `complete_question` arbitary setting.
 - `get_keg_definition_questionunits()` — iterates all keywords in `keywords_src.json`, parses their `valid_ch` range to determine `init_ch`, looks up their definition, and constructs a `QuestionUnit` for each. Default questions follow the pattern: "Did you read that the keg_definition of '{term}' is '{definition}'."
 - `rebuild_keg_exam_questions(dst_path)` — writes all questions to a CSV file, sorted by `did_you_read_order`, suitable for use as flash cards or onboarding material.
-- `rebuild_keg_rank_json(dst_path)` — writes a JSON ranking of all keg terms ordered by chapter of introduction, providing a structured learning path through the system's vocabulary.
+- `rebuild_keg_rank_csv(dst_path)` — writes a JSON ranking of all keg terms ordered by chapter of introduction, providing a structured learning path through the system's vocabulary.
 
 The positioning at chapter 97 is deliberate: by being near the end of the inductive chain, ch97 has access to the complete keyword set and all chapter descriptions — making it the only chapter with a full view of the entire codebase's vocabulary and structure.

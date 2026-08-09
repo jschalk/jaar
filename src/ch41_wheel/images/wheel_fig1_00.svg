@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="600" height="250" viewBox="0 0 600 250">
+<defs>
+</defs>
+<rect x="0" y="0" width="800" height="600" fill="white" />
+<path d="M129.0,100 L201.0,100 L210,172.0 L120,172.0 Z" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="165.0" y="143.2" font-size="18" fill="black" text-anchor="middle" dominant-baseline="central">Smiths</text>
+<path d="M229.0,100 L301.0,100 L310,172.0 L220,172.0 Z" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="265.0" y="143.2" font-size="18" fill="black" text-anchor="middle" dominant-baseline="central">Duvals</text>
+<path d="M355.0,100 L475.0,100 L490,172 L340,172 Z" fill="#D9F2D9" stroke="black" stroke-width="2" />
+<text x="415.0" y="143.2" font-size="18" fill="black" text-anchor="middle" dominant-baseline="central">Gomezs</text>
+<text x="300.0" y="40" font-size="30" fill="black" font-weight="bold" text-anchor="middle" dominant-baseline="central">Families on the Land</text>
+<path d="M75,180 L525,180" stroke="black" stroke-width="4" />
+<text x="300.0" y="206" font-size="20" text-anchor="middle" dominant-baseline="central">Land</text>
+</svg>

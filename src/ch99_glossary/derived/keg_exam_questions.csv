@@ -3,13 +3,14 @@ Have you heard of 'Kegology'?
 Have you heard the word 'Philosophy'?
 Do you believe listening is important?
 Did you read that the keg_definition of 'Alien' is 'A bordering Wheel.'.
+Did you read that the keg_definition of 'Apex' is 'The top of the Pyramid. From the perspective of the FamilyUnits in Power it is the Face of the Pyramid.'.
 Did you read that the keg_definition of 'Axle' is 'The part of the Wheel that load-bears the most. Only Pillars.'.
 Did you read that the keg_definition of 'Booster' is 'A Rider for a good person.'.
 Did you read that the keg_definition of 'Cling' is 'To connote the action a FamilyUnit takes to avoids losing Prestige.'.
 Did you read that the keg_definition of 'Closer' is 'Do not use this term so there is no confusion with 'Loser'.'.
 Did you read that the keg_definition of 'Cow' is 'A FamilyUnit without Prestige. Consider whether it's a useful term.'.
-Did you read that the keg_definition of 'Drag' is 'Opposite of Lift. When a FamilyUnit shuts off support to bring a FamilyUnit down.'.
 Have you heard of Excel spreadsheet application?
+Did you read that the keg_definition of 'Drag' is 'Opposite of Lift. When a FamilyUnit shuts off support to bring a FamilyUnit down.'.
 Did you read that the keg_definition of 'Gravity' is 'Definition needed.'.
 Did you read that the keg_definition of 'Hive' is 'A community of FamilyUnits unified by a purpose'.
 Did you read that the keg_definition of 'Hose' is 'Definition needed.'.
@@ -23,6 +24,7 @@ Did you read that the keg_definition of 'Linchpin' is 'A required part of a pill
 Did you read that the keg_definition of 'Loser' is 'A FamilyUnit getting less Prestige.'.
 Did you read that the keg_definition of 'Oil' is 'Definition needed.'.
 Did you read that the keg_definition of 'Pump' is 'Definition needed.'.
+Did you read that the keg_definition of 'Pyramid' is 'The load bearing support for any FamilyUnit in Power'.
 Did you read that the keg_definition of 'Revenge' is 'Definition needed or maybe not.'.
 "Did you read that the keg_definition of 'Rider' is 'Synonmous with Vassal as a neutral term. Someone who recognizes authority, leadership. 'I ride with that person.''."
 Did you read that the keg_definition of 'Rival' is 'A different FamilyUnit within a Wheel that is in open competition.'.
@@ -35,21 +37,21 @@ Did you read that the keg_definition of 'Trooper' is 'A professional member of t
 "Did you read that the keg_definition of 'Vertical' is 'The height of a Pillar, Ladder, Stilt, or Scaffold. Is it enough to reach?'."
 Did you read that the keg_definition of 'Winner' is 'A FamilyUnit getting more Prestige.'.
 Did you read that the keg_definition of 'Yard' is 'Definition needed.'.
+Did you read that the keg_definition of 'apex' is 'The top of the Pyramid. From the perspective of the FamilyUnits in Power it is the Face of the Pyramid.'.
 Did you read that the keg_definition of 'axle' is 'The part of the Wheel that load-bears the most. Only Pillars.'.
 Did you read that the keg_definition of 'booster' is 'A Rider for a good person.'.
 Did you read that the keg_definition of 'closer' is 'Do not use this term so there is no confusion with 'loser'.'.
 Did you read that the keg_definition of 'crawl' is 'The opposite of 'swim'. To be slave to one. To live in one moment as it allows.'.
 Did you read that the keg_definition of 'dive' is 'To go from living on land to swimming with fearlessness. Not used in codebase.'.
-Did you read that the keg_definition of 'drag' is 'Opposite of Lift. When a FamilyUnit shuts off support to bring a FamilyUnit down.'.
 "Did you read that the keg_definition of 'factory' is 'Not used in codebase. The factory method in programming is very important. However because I want 'fact' only to refer to the Keg concept I don't use the word 'factory', instead I use 'shop'.'."
 Did you read that the keg_definition of 'gravity' is 'Definition needed.'.
 Did you read that the keg_definition of 'heart' is 'Not used in codebase.'.
 "Did you read that the keg_definition of 'keg_wheel' is 'A instance of KegWheel, within a single MomentUnit. Not used in codebase.'."
 Did you read that the keg_definition of 'kegbox' is 'Anything that holds Keg worlds. Usually a computer thought it's possible to work with paper.'.
-Did you read that the keg_definition of 'lift' is 'The act of a FamilyUnit lifting another FamilyUnit above them. Ala 'I believe you'll go far!''.
 Did you read that the keg_definition of 'lumen' is 'To be defined later'.
 Did you read that the keg_definition of 'pandas_DataFrame' is 'Not used in codebase. Added as keyword it is confirmed never to appear.'.
 Did you read that the keg_definition of 'pump' is 'Definition needed.'.
+Did you read that the keg_definition of 'pyramid' is 'The load bearing support for any FamilyUnit in Power'.
 "Did you read that the keg_definition of 'rider' is 'Synonmous with Vassal as a neutral term. Someone who recognizes authority, leadership. 'I ride with that person.''."
 Did you read that the keg_definition of 'scaffold' is 'The only way to get to a wheel if not welcomed.'.
 Did you read that the keg_definition of 'stilt' is 'A ladder load-bearing support of a Wheel.'.
@@ -93,6 +95,7 @@ Did you read that the keg_definition of 'ch35' is 'Tools for Visualizing PersonU
 Did you read that the keg_definition of 'ch40' is 'Essays pop_phil'.
 Did you read that the keg_definition of 'ch90' is 'ETL app to create day punches from excel files.'.
 Did you read that the keg_definition of 'ch41' is 'Essays pop_phil'.
+Did you read that the keg_definition of 'ch54' is 'Short stories'.
 Did you read that the keg_definition of 'ch96' is 'Exams that return KPIs of Kegology knowledge.'.
 Did you read that the keg_definition of 'ch97' is 'Defines Tools that create documentation.'.
 Did you read that the keg_definition of 'ch98' is 'Linter for repo.'.
@@ -760,10 +763,12 @@ Did you read that the keg_definition of 'alien' is 'A bordering Wheel.'.
 Did you read that the keg_definition of 'bearing' is 'Concerns load bearing of a Wheel by families under the Wheel.'.
 Did you read that the keg_definition of 'cling' is 'To connote the action a FamilyUnit takes to avoids losing Prestige.'.
 Did you read that the keg_definition of 'discipline' is 'A moment that has Discipline. Check 'Discipline' definition.'.
+Did you read that the keg_definition of 'drag' is 'Opposite of Lift. When a FamilyUnit shuts off support to bring a FamilyUnit down.'.
 Did you read that the keg_definition of 'fall' is 'When a FamilyUnit loses all Prestige and exits power.'.
 Did you read that the keg_definition of 'infinity' is 'As described in Totality and Infinity. Not used in codebase.'.
 Did you read that the keg_definition of 'jump' is 'To use keg requires a human to jump and try. Not easy. Not used in codebase.'.
 Did you read that the keg_definition of 'kneeler' is 'A FamilyUnit that sets all it's BossMass to one different FamilyUnit.'.
+Did you read that the keg_definition of 'lift' is 'The act of a FamilyUnit lifting another FamilyUnit above them. Ala 'I believe you'll go far!''.
 Did you read that the keg_definition of 'linchpin' is 'A required part of a pillar. If a linchpin stops supporting the pillar it is destoryed.'.
 Did you read that the keg_definition of 'loser' is 'A FamilyUnit getting less Prestige.'.
 Did you read that the keg_definition of 'pillar' is 'A load-bearing support for a family with prestige. Built of non-prestige families.'.

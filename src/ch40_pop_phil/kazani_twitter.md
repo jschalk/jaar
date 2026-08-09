@@ -5,6 +5,16 @@
 **Source:** https://x.com/kamilkazani viewed from Emmanuel Schalk's twitter login.  
 **Copied to Keg:** 2026-06-09 
 
+**Jul 25, 2025**  
+In response to someone making fun of Economists for being divorced from reality. 
+> 1. Men can be only ruled by dogmatic affirmations
+> 2. Dogmatic affirmations do not reflect reality well
+> 
+> So, basically, every ruling ideology must be detached from reality - by necessity (otherwise, it can never rule)
+> 
+> Over the time, the gap only grows, resulting in a collapse
+
+
 **Oct 29, 2025**  
 In response to question about Ukraine being able to give Russia a symbolic vistory:
 > No. Status & prestige is a zero sum game, and the war - at this point - is being fought for status and prestige. The only thing Ukraine could do to *permanently* end the war is kneel. That includes accepting their fault for the war, and paying some reparations to Russia
@@ -134,4 +144,26 @@ THOSE are the issues. We don’t need to be unkind to be honest."
 > 
 > The most important thing is to never ever ever be overly accommodating. That is a guaranteed catastrophe, in 100% of cases. People may follow a fool, they may follow an asshole, but they will never ever follow a whimp
 
+**August 6th, 2026**
+Responding to Branko Milanovic @BrankoMilan post *The irony of Russia is the best times for ordinary people in the past 120+ years were the boring years of Brezhnev's "stagnation" (zastoi).*
+> I would say that the best times in terms of material consumption were probably under early Putin. It was only in the 2010s, that the gov realized that the uncontrollable rise in living standards makes people *more* discontent and prone for turmoil, and not the other way around
+> 
+> Broke: rich populace will be grateful & content
+>
+> Woke: rich populace will grow cocky & self important
+> 
+> And, as they are getting more & more self assured, small evils & abuses that had been born passively before, will now seem to be unbearable and infuriating
+> 
+> The enlightened ruler keeps his people in poverty
 
+Post from anon account: *Early neoloberal Putin, I'd say until the 2008 financial crisis, was looking like a Chinese leader - leave politics to me, I'll let you live your lives and grow the economy.<br>
+Then Atlas shrugged, USA looked vulnerable, and he got big ideas.*
+
+> Actually, yes. I don’t really like these labels, neoliberal schmeoliberal because they usually obfuscate more than they clarify. But at this specific case, it is up to the point. Early Putin’s policies were indeed far more “neoliberal” than almost anyone realises
+> 
+> The implication was not of course that we will be switching from producing analogue stuff to digital stuff. Nope. It was that we are shutting our analogue production altogether, and buying digital stuff in Germany
+> 
+> Fundamentally, we do not need any domestic production at all
+> Early Putin was doing hardline import substitution in a sense that he was substituting whatever was left from Soviet electronics, machinery etc complex industry with imports
+> 
+> Which was conformant cuz after 2003 he started having lots of money to fund these imports

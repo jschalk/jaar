@@ -28,7 +28,7 @@ from ch97_docs_builder._ref.ch97_path import create_chapter_ref_path
 from ch97_docs_builder.glossary_definition import rebuild_keg_definitions_contents
 from ch97_docs_builder.glossary_ranking import (
     rebuild_keg_exam_questions,
-    rebuild_keg_rank_json,
+    rebuild_keg_rank_csv,
 )
 from ch99_glossary.sorter import get_keg_elements_sort_order
 from os.path import join as os_path_join
@@ -107,7 +107,7 @@ def resave_chapter_and_keyword_json_files():
     # save_json(keywords_src_json_path, None, open_json(keywords_src_json_path))
     save_json(ex_strs_json_path, None, open_json(ex_strs_json_path))
     rebuild_keg_definitions_contents()
-    rebuild_keg_rank_json()
+    rebuild_keg_rank_csv()
     rebuild_keg_exam_questions()
 
 

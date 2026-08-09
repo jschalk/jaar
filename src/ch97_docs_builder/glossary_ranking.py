@@ -83,29 +83,26 @@ def get_keg_rank_dict() -> dict[str, dict]:
     return keg_tiers
 
 
-def rebuild_keg_rank_json(src_dir: str = None):
+def rebuild_keg_rank_csv(src_dir: str = None):
     keg_tiers = get_keg_rank_dict()
-    ordered_dict = dict(sorted(keg_tiers.items()))
+
     if src_dir is None:
         src_dir = "src"
-    output_path = Path(create_question_tier_path(src_dir))
+
     derived_dir = os_path_join(src_dir, "ch99_glossary", "derived")
     set_dir(derived_dir)
-    with output_path.open("w", encoding="utf-8", newline="\n") as file:
-        file.write("{\n")
 
-        items = list(ordered_dict.items())
-        for index, (key, value) in enumerate(items):
-            line = (
-                f'    "{key}": '
-                f'{{"keg_rank": {value["keg_rank"]}, '
-                f'"question_tier": {value["question_tier"]}, '
-                f'"chs": {json_dumps(value["chs"])}}}'
-            )
-            if index < len(items) - 1:
-                line += ","
-            file.write(line + "\n")
-        file.write("}\n")
+    output_path = Path(derived_dir) / "question_tier.csv"
+
+    with output_path.open("w", encoding="utf-8", newline="") as file:
+        writer = csv_writer(file)
+        writer.writerow(["key", "question_tier", "chs"])
+        for key, value in sorted(
+            keg_tiers.items(),
+            key=lambda item: item[1]["keg_rank"],
+        ):
+            chs_value = value["chs"]
+            writer.writerow([key, value["question_tier"], chs_value])
 
 
 def set_did_you_read_orders(keg_questions: dict[str, QuestionUnit]) -> None:

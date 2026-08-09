@@ -42,7 +42,6 @@ For any Levanisian, for any Kegologist the first question is "am i a good father
 
 Notice that for this graphic the son's Face is in the shape of an infinity symbol ala &infin;. That's because in Levanis's Ethics the Face of the Other is infinite. There is no way to understand it, yet we try and that attempt turns into truth. 
 
-
 <div align="center">
 
 #### For Levainas and me the Face being the source of all truth <br>isn't something that should be, **it's something that is**.
@@ -93,7 +92,7 @@ A understandable retort could be that for many people today, especially educated
 
 #### Boss/family reasons for doing anything
 
-| Reason                                         | Worker Title   |
+| Reason                                         | Worker Kind    |
 |------------------------------------------------|----------------|
 | Helps **family** and helps **boss**            | motivated worker |
 | Helps **family** and does not help **boss**    | family helper    |
@@ -102,12 +101,13 @@ A understandable retort could be that for many people today, especially educated
 
 Most people are not honest workers. If the boss tells them to do something that hurts their family they'll do everything they can not to do it. If the boss has lots of control then the worker is still not an "honest worker", they're just doing what is least painful for their family. 
 
+
 Question: Why I do stuff? 
 Answer: Me -> helps family -> Family
 
-### What is Family?
+And what is Family?
 
-All humans deal with this question. Ask anyone what they think.  
+All humans deal with this question. Ask anyone what they think. Here's what I've picked up.
 
 - Pretty much everything I do is for family. 
 - My family has changed over time.
@@ -115,20 +115,26 @@ All humans deal with this question. Ask anyone what they think.
 - Anyone can become a member of a Family.
 - Most of the time Family members are dedicated to the same Family, i.e. you know when someone is not Family.
 
+Ok, we now know Families exist and where they come from: Individuals having decided what their family is and then helping it. Great. Now where does power come from? How do some Families become powerful and most never move up?
 
+<div align="center">
 
-Fig 1.0 The   
-Fig 1.1  
-Fig 1.2  
-Fig 1.3  
-Fig 1.4  
-Fig 1.5  
-Fig 1.6  
-Fig 1.7  
-Fig 1.8  
-Fig 1.9  
-Fig 2.0  
-Fig 2.1 how a tower holds up a Wheel Family  
+#### Power comes Families and starts in the Land
+</div>
+
+In a low trust society model power purely from FamilyUnits and Land.
+
+<div align="center"><img src="images/wheel_fig1_00.svg" alt="wheel fig1_00" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_01.svg" alt="wheel fig1_01" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_02.svg" alt="wheel fig1_02" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_03.svg" alt="wheel fig1_03" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_04.svg" alt="wheel fig1_04" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_05.svg" alt="wheel fig1_05" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_06.svg" alt="wheel fig1_06" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_07.svg" alt="wheel fig1_07" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_08.svg" alt="wheel fig1_08" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_09.svg" alt="wheel fig1_09" width="350"></div>   
+<div align="center"><img src="images/wheel_fig1_10.svg" alt="wheel fig1_10" width="350"></div>   
 
 ### Oligarchy
 

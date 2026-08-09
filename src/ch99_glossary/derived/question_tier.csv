@@ -1,0 +1,780 @@
+key,question_tier,chs
+Alien,10,
+Apex,10,
+Axle,10,
+Booster,10,
+Cling,10,
+Closer,10,
+Cow,10,
+Drag,10,
+Gravity,10,
+Hive,10,
+Hose,10,
+Impression,10,
+Invite,10,
+Joachim,10,
+Knee,10,
+Ladder,10,
+Lift,10,
+Linchpin,10,
+Loser,10,
+Oil,10,
+Pump,10,
+Pyramid,10,
+Revenge,10,
+Rider,10,
+Rival,10,
+Scaffold,10,
+Soldier,10,
+Stilt,10,
+Target,10,
+Tower,10,
+Trooper,10,
+Vertical,10,
+Winner,10,
+Yard,10,
+apex,10,
+axle,10,
+booster,10,
+closer,10,
+crawl,10,
+dive,10,
+factory,10,
+gravity,10,
+heart,10,
+keg_wheel,10,
+kegbox,10,
+lumen,10,
+pandas_DataFrame,10,
+pump,10,
+pyramid,10,
+rider,10,
+scaffold,10,
+stilt,10,
+swim,10,
+target,10,
+totality,10,
+vertical,10,
+yard,10,
+ch00,6,0:
+ch01,6,1:
+ch02,6,2:
+ch03,6,3:
+ch04,6,4:
+ch05,6,5:
+ch06,6,6:
+ch07,6,7:
+ch08,6,8:
+ch09,6,9:
+ch10,6,10:
+ch11,6,11:
+ch12,6,12:
+ch13,6,13:
+ch14,6,14:
+ch15,6,15:
+ch16,6,16:
+ch17,6,17:
+ch18,6,18:
+ch20,6,20:
+ch22,6,22:
+ch23,6,23:
+ch24,6,24:
+ch25,6,25:
+ch26,6,26:
+ch27,6,27:
+ch30,6,30:
+ch31,6,31:
+ch32,6,32:
+ch33,6,33:
+ch34,6,34:
+ch35,6,35:
+ch40,6,40:
+ch90,6,36:
+ch41,6,41:
+ch54,6,54:
+ch96,6,96:
+ch97,6,97:
+ch98,6,98:
+ch99,6,99:
+April,0,0:
+August,0,0:
+December,0,0:
+February,0,0:
+Friday,0,0:
+January,0,0:
+July,0,0:
+June,0,0:
+March,0,0:
+May,0,0:
+Monday,0,0:
+November,0,0:
+October,0,0:
+Saturday,0,0:
+September,0,0:
+Sunday,0,0:
+Thursday,0,0:
+Tuesday,0,0:
+Wednesday,0,0:
+a23,0,0:
+a23_dash,0,0:
+a23_slash,0,0:
+assert,0,0:
+blue,0,0:
+bob,0,0:
+bowl,0,0:
+break,0,0:
+casa,0,0:
+class,0,0:
+clean,0,0:
+cuisine,0,0:
+dash,0,0:
+dirtyness,0,0:
+ep8,0,0:
+global,0,0:
+hn_blu,0,0:
+hn_red,0,0:
+hn_yel,0,0:
+import,0,0:
+match,0,0:
+mop,0,0:
+red,0,0:
+run,0,0:
+run_dash,0,0:
+scrub,0,0:
+self,0,0:
+slash,0,0:
+square,0,0:
+sue,0,0:
+sweep,0,0:
+wed,0,0:
+wk,0,0:
+xio,0,0:
+yao,0,0:
+yield,0,0:
+zia,0,0:
+Keyword,0,0:
+filename,0,0:
+glossary,0,0:
+keyword,0,0:
+semantic_type,0,0:
+shop,0,0:
+src,0,0:
+question_tier,0,"1, 97"
+sort_ordinal,0,1
+valid_ch,0,"1,97,98"
+GrainNum,0,2:
+PoolNum,0,2:
+WeightNum,0,2:
+Boss,0,"3, 8, 9, 41, 97"
+BossMass,0,"3, 8, 9, 97"
+BreakTerm,0,"3, 5, 97"
+ContactName,0,3:
+FundGrain,0,3:
+FundNum,0,3:
+GroupMark,0,3:
+GroupTitle,0,3:
+HealerName,0,3:
+Lord,0,"3, 8, 9, 40, 97"
+Loyal,0,"3, 8, 9, 40, 97"
+NameTerm,0,3:
+RespectGrain,0,3:
+RespectNum,0,3:
+TitleTerm,0,3:
+TrustMass,0,"3, 8, 9, 40, 97"
+awardee_title,0,3:
+awardunits,0,3:
+contact_cred_mass,0,3:
+contact_debt_mass,0,3:
+contact_name,0,3:
+credor_pool,0,3:
+debtor_pool,0,3:
+fund_agenda_give,0,3:
+fund_agenda_ratio_give,0,3:
+fund_agenda_ratio_take,0,3:
+fund_agenda_take,0,3:
+fund_give,0,3:
+fund_grain,0,3:
+fund_take,0,3:
+give_force,0,3:
+group_cred_mass,0,3:
+group_debt_mass,0,3:
+group_title,0,3:
+groupmark,0,3:
+groupunits,0,3:
+inallocable_contact_debt_mass,0,3:
+irrational_contact_debt_mass,0,3:
+labor_title,0,3:
+labors,0,3:
+memberships,0,3:
+rational,0,"3, 6, 8, 11, 12, 13, 15, 20, 22, 27, 31, 35, 97"
+respect_grain,0,3:
+solo,0,3:
+take_force,0,3:
+thinkout,0,3:
+workforceheir,0,3:
+workforceunit,0,3:
+LaborHeir,0,4:
+laborheir,0,4:
+parent_solo,0,4
+person,0,4:
+person_name,0,4:
+person_name_is_workforce,0,4:
+FactNum,0,5:
+FirstLabel,0,5:
+KnotTerm,0,5:
+LabelTerm,0,5:
+ManaGrain,0,5:
+ReasonNum,0,5:
+RopeTerm,0,5:
+fact,0,5:
+knot,0,5:
+mana_grain,0,5:
+meaning,0,5
+parent_rope,0,5:
+active_requisite,0,6:
+case_active,0,6:
+case_task,0,6:
+cases,0,6:
+fact_context,0,6:
+fact_lower,0,6:
+fact_state,0,6:
+fact_upper,0,6:
+factheirs,0,6:
+factunits,0,6:
+parent_heir_active,0,6:
+reason_active,0,6:
+reason_context,0,6:
+reason_divisor,0,6:
+reason_lower,0,6:
+reason_state,0,6:
+reason_task,0,6:
+reason_upper,0,6:
+reasonunits,0,6:
+addin,0,7:
+all_contact_cred,0,"7, 8, 20, 22, 27, 35, 97"
+all_contact_debt,0,"7, 8, 20, 22, 27, 35, 97"
+awardheirs,0,7:
+awardlines,0,7:
+begin,0,7:
+close,0,7:
+denom,0,7:
+descendant_pledge_count,0,7:
+fund_cease,0,7:
+fund_onset,0,7:
+fund_pool,0,7:
+fund_ratio,0,7:
+gogo_calc,0,7:
+gogo_want,0,7:
+healer_name,0,7:
+healerunit,0,7:
+healerunit_ratio,0,7:
+is_expanded,0,7:
+kids,0,"7, 8, 14, 35"
+morph,0,7:
+numor,0,7:
+plan,0,7:
+plan_active,0,7:
+plan_active_hx,0,7:
+plan_fund_total,0,7:
+plan_label,0,7:
+plan_rope,0,7:
+plan_task,0,7:
+plan_uid,0,"7, 8, 9, 35"
+pledge,0,7:
+poynt,0,7:
+problem_bool,0,7:
+range_evaluated,0,7:
+range_inheritors,0,"7, 8, 14"
+reasonheirs,0,7:
+stop_calc,0,7:
+stop_want,0,7:
+tree_level,0,7:
+tree_traverse_count,0,7:
+PersonName,0,8:
+PersonUnit,0,8:
+ancestors,0,8:
+calc_by_thinkout,0,"8, 9, 97"
+contact_mandate_ledger,0,8:
+contact_pool,0,8:
+contacts,0,8:
+context_plan_close,0,8:
+context_plan_denom,0,8:
+context_plan_morph,0,8:
+credor_respect,0,8:
+debtor_respect,0,8:
+dimen,0,8:
+dimens,0,8:
+jkeys,0,8:
+jvalues,0,8:
+keep_rope,0,8:
+keeps_buildable,0,8:
+keeps_justified,0,8:
+last_lesson_id,0,8:
+mandate,0,8:
+max_tree_traverse,0,8:
+obj_type,0,8:
+offtrack_fund,0,8:
+offtrack_kids_poynt_set,0,8:
+person_contact_membership,0,8:
+person_contactunit,0,8:
+person_groupunit,0,8:
+person_plan_awardunit,0,8:
+person_plan_factunit,0,8:
+person_plan_healerunit,0,8:
+person_plan_laborunit,0,8:
+person_plan_reason_caseunit,0,8:
+person_plan_reasonunit,0,8:
+person_planunit,0,8:
+personunit,0,8:
+planroot,0,8:
+prnawar,0,"8, 9, 20, 22, 25, 26, 27, 31, 97"
+prncase,0,"8, 9, 22, 26, 27, 31, 97, 98"
+prncont,0,"8, 9, 20, 22, 24, 25, 26, 27, 31, 32, 97"
+prnfact,0,"8, 9, 20, 22, 26, 27, 31, 97"
+prngrou,0,"8, 9, 20, 22, 26, 27, 31, 97"
+prnheal,0,"8, 9, 20, 22, 26, 27, 31, 97"
+prnlabo,0,"8, 9, 20, 22, 26, 27, 31, 97"
+prnmemb,0,"8, 9, 20, 22, 26, 27, 31, 97"
+prnplan,0,"8, 9, 22, 26, 27, 31, 97"
+prnreas,0,"8, 9, 22, 26, 27, 31, 97"
+prnunit,0,"8, 9, 22, 26, 27, 31, 32, 97"
+reason_contexts,0,8:
+sqlite_datatype,0,8:
+sum_healerunit_plans_fund_total,0,8:
+CRUD_command,0,9:
+DELETE,0,9:
+INSERT,0,9:
+UPDATE,0,9:
+atom,0,9:
+awardee_title_ERASE,0,9:
+column_ordinal,0,9
+contact_name_ERASE,0,9:
+crud,0,"9, 10, 20, 22, 23, 24, 97"
+fact_context_ERASE,0,9:
+group_title_ERASE,0,9:
+healer_name_ERASE,0,9:
+labor_title_ERASE,0,9:
+nesting_order,0,"9, 10"
+normal_specs,0,9:
+normal_table_name,0,9
+person_name_ERASE,0,9:
+plan_rope_ERASE,0,9:
+reason_context_ERASE,0,9:
+reason_state_ERASE,0,9:
+FaceName,0,10:
+Lasso,0,10:
+MomentRope,0,10:
+gut,0,10:
+job,0,10:
+lasso,0,10:
+moment,0,10:
+moment_mstr_dir,0,10:
+moment_rope,0,10:
+spark_face,0,10:
+spark_num,0,10:
+listener,0,11
+speaker,0,11
+Epoch,0,12:
+SparkInt,0,12:
+TimeNum,0,12:
+amount,0,"12, 13, 15, 17, 20, 22, 23, 26, 27, 31, 32, 35, 97"
+boss,0,"12, 15, 41"
+boss_facts,0,"12, 15"
+bud_contact_nets,0,12:
+bud_person_name,0,"12, 15"
+bud_time,0,12:
+celldepth,0,12:
+epoch,0,12:
+found_facts,0,"12, 15, 27"
+magnitude,0,12:
+offi_time,0,12:
+offi_time_max,0,12:
+person_contacts_net,0,12:
+personadjust,0,12:
+personspark_facts,0,12:
+quota,0,12:
+time,0,12:
+tran_time,0,12:
+ManaNum,0,13:
+care_amount,0,13
+cares,0,13
+cycle_carees_curr,0,13
+cycle_carees_prev,0,13
+cycle_count,0,13
+cycle_max,0,13
+doctor_count,0,13
+doctor_rank_num,0,13
+doctor_rank_percent,0,13
+keep_patientledgers,0,13
+keep_point_magnitude,0,13
+need_bill_amount,0,13
+need_dues,0,13
+need_got_curr,0,13
+need_got_prev,0,13
+need_paid_amount,0,13
+need_paid_bool,0,13
+need_paid_rank_num,0,13
+need_paid_rank_percent,0,13
+need_results,0,13
+patient_count,0,13
+patient_rank_num,0,13
+patient_rank_percent,0,13
+rewards_count,0,13
+rewards_magnitude,0,13
+riverbooks,0,13
+rivercares,0,13
+rivergrades,0,13
+Anaday,0,14:
+Baileyday,0,14:
+Chiday,0,14:
+Danceday,0,14:
+Eastday,0,14:
+EpochLabel,0,14:
+TimeShoe,0,"14, 15, 31"
+c100,0,14
+c100_length,0,14
+c400_core,0,14
+c400_core_length,0,14
+c400_leap,0,"14, 26"
+c400_leap_length,0,"14, 26"
+c400_number,0,14:
+clock,0,14:
+creg,0,14:
+cumulative_day,0,14:
+day,0,14:
+day_length,0,14
+dayly_duration_min,0,14
+dayly_lower_min,0,14
+days,0,14:
+days_lower_day,0,14
+days_upper_day,0,14
+duration,0,14
+epoch_label,0,14:
+epoch_length,0,14:
+epoch_min,0,14:
+every_xdays,0,14
+every_xweeks,0,14:
+five,0,14:
+hour,0,14:
+hour_label,0,14:
+hours_config,0,14:
+month_label,0,14:
+monthday_index,0,14:
+monthly_duration_days,0,14
+monthly_monthday_lower,0,14
+months_config,0,14:
+range_duration,0,14
+range_lower_min,0,14
+readable,0,14:
+week,0,14:
+weekdays_config,0,14:
+weekly_duration_min,0,14
+weekly_lower_min,0,14
+weeks,0,14:
+weeks_lower_week,0,14
+weeks_upper_week,0,14
+year,0,14:
+year_length,0,14
+year_monthday_duration_days,0,14
+year_monthday_lower,0,14
+yr1_jan1_offset,0,14:
+yr4_core,0,14
+yr4_core_length,0,14
+yr4_leap,0,14
+yr4_leap_length,0,14
+all_tranbook,0,"15, 27, 97"
+ceckbook,0,15:
+cumulative_minute,0,15:
+job_listen_rotations,0,15:
+moment_budunit,0,15:
+moment_ceckbook,0,15:
+moment_epoch_hour,0,15:
+moment_epoch_month,0,15:
+moment_epoch_weekday,0,15:
+moment_static,0,15
+moment_timeoffi,0,15:
+momentunit,0,15:
+offi_times,0,15:
+personbudhistorys,0,15:
+weekday_label,0,15:
+weekday_order,0,15:
+Nabu,0,16:
+NabuTime,0,"16, 26, 97"
+inx_epoch_diff,0,16:
+inx_time,0,16:
+nabu,0,16:
+nabu_timenum,0,16:
+otx2inx,0,16:
+otx_epoch_length,0,16
+otx_time,0,16:
+timenabu,0,16
+contact_name_inx,0,17:
+contact_name_otx,0,17:
+inx_knot,0,17:
+inx_label,0,17:
+inx_name,0,17:
+inx_rope,0,17:
+inx_title,0,17:
+labelmap,0,17:
+namemap,0,17:
+otx_knot,0,17:
+otx_label,0,17:
+otx_name,0,17:
+otx_rope,0,17:
+otx_title,0,17:
+ropemap,0,17:
+titlemap,0,17:
+translate,0,17:
+translate_core,0,17:
+translate_label,0,17:
+translate_name,0,17:
+translate_rope,0,17:
+translate_title,0,17:
+translateunit,0,17:
+unknown_str,0,17:
+Border,0,20
+Excel,0,20:
+SheetName,0,20:
+allowed_crud,0,20:
+attributes,0,20:
+awardee_title_ERASE_inx,0,"20, 22"
+awardee_title_ERASE_otx,0,"20, 22"
+awardee_title_inx,0,20:
+awardee_title_otx,0,20:
+bk,0,20:
+border,0,"20, 35, 41, 90"
+brick,0,20:
+brick_category,0,20:
+brick_type,0,20:
+bud_time_inx,0,20:
+bud_time_otx,0,20:
+build_order,0,20:
+contact_name_ERASE_inx,0,"20, 22"
+contact_name_ERASE_otx,0,"20, 22"
+delete_insert,0,20:
+delete_insert_update,0,20:
+delete_update,0,"20,23"
+epoch_label_inx,0,20:
+epoch_label_otx,0,20:
+error_message,0,20:
+excel,0,20:
+fact_context_ERASE_inx,0,"20, 22"
+fact_context_ERASE_otx,0,"20, 22"
+fact_context_inx,0,20:
+fact_context_otx,0,20:
+fact_lower_inx,0,20:
+fact_lower_otx,0,20:
+fact_state_inx,0,20:
+fact_state_otx,0,20:
+fact_upper_inx,0,20:
+fact_upper_otx,0,20:
+fund_rank,0,20:
+group_title_ERASE_inx,0,"20, 22"
+group_title_ERASE_otx,0,"20, 22"
+group_title_inx,0,20:
+group_title_otx,0,20:
+healer_name_ERASE_inx,0,"20, 22"
+healer_name_ERASE_otx,0,"20, 22"
+healer_name_inx,0,20:
+healer_name_otx,0,20:
+hour_label_inx,0,20:
+hour_label_otx,0,20:
+insert_multiple,0,20:
+insert_one_time,0,20:
+insert_update,0,20:
+labor_title_ERASE_inx,0,"20, 22"
+labor_title_ERASE_otx,0,"20, 22"
+labor_title_inx,0,20:
+labor_title_otx,0,20:
+moment_rope_inx,0,20:
+moment_rope_otx,0,20:
+month_label_inx,0,20:
+month_label_otx,0,20:
+net_funds,0,20:
+offi_time_inx,0,20:
+offi_time_otx,0,20:
+otx_key,0,20:
+person_name_ERASE_inx,0,"20, 22"
+person_name_ERASE_otx,0,"20, 22"
+person_name_inx,0,20:
+person_name_otx,0,20:
+plan_rope_ERASE_inx,0,"20, 22"
+plan_rope_ERASE_otx,0,"20, 22"
+plan_rope_inx,0,20:
+plan_rope_otx,0,20:
+pledges_count,0,20:
+reason_context_ERASE_inx,0,"20, 22"
+reason_context_ERASE_otx,0,"20, 22"
+reason_context_inx,0,20:
+reason_context_otx,0,20:
+reason_lower_inx,0,20:
+reason_lower_otx,0,20:
+reason_state_ERASE_inx,0,"20, 22"
+reason_state_ERASE_otx,0,"20, 22"
+reason_state_inx,0,20:
+reason_state_otx,0,20:
+reason_upper_inx,0,20:
+reason_upper_otx,0,20:
+sheet,0,20:
+source_dimen,0,20:
+spark_face_inx,0,20:
+spark_face_otx,0,20:
+tran_time_inx,0,20:
+tran_time_otx,0,20:
+translate_spark_num,0,20:
+weekday_label_inx,0,"20, 22"
+weekday_label_otx,0,"20, 22"
+world_name,0,20:
+b_agg,0,"22, 24, 27, 32, 97"
+b_raw,0,"22, 24, 27, 32, 97"
+b_src,0,"22, 23, 24, 27, 32, 90, 97"
+b_vld,0,"22, 24, 27, 32, 97"
+brixk_agg,0,22:
+brixk_raw,0,22:
+brixk_src,0,22:
+brixk_vld,0,22:
+h_agg,0,22:
+h_raw,0,22:
+h_vld,0,22:
+heard_agg,0,22:
+heard_raw,0,22:
+heard_vld,0,22:
+i_dst,0,22:
+i_src,0,22:
+idea,0,"22, 23, 27, 30, 32, 33, 40, 41, 90, 97, 98"
+ideax_dst,0,22:
+ideax_src,0,22:
+k_vld,0,22:
+lego,0,22:
+legox_mst,0,22
+mmtbudd,0,"22, 26, 97"
+mmtceck,0,"22, 26, 97"
+mmthour,0,"22, 26, 97"
+mmtmont,0,"22, 25, 26, 97"
+mmtoffi,0,"22, 26, 97"
+mmtunit,0,"22, 26, 97"
+mmtweek,0,"22, 26, 97"
+moment_ote1_agg,0,22:
+nabtime,0,22:
+person_net_amount,0,22:
+s_agg,0,22:
+s_raw,0,22:
+s_vld,0,22:
+sound_agg,0,"22, 25, 32"
+sound_raw,0,"22, 24, 25, 32"
+sound_vld,0,"22, 25, 32"
+trlcore,0,22:
+trllabe,0,22:
+trlname,0,22:
+trlrope,0,22:
+trltitl,0,22:
+day_punch,0,23:
+fission,0,23
+idea_type,0,23:
+ii,0,23:
+moment_tranbook_nets,0,23:
+sparks_b_agg,0,"24, 32"
+sparks_b_vld,0,"24, 32"
+vow,0,30:
+DayEvent,0,31
+Event,0,31:
+default_kpi_bundle,0,31:
+gcal,0,31:
+moment_kpi001_contact_nets,0,31:
+moment_kpi002_person_pledges,0,31:
+WorldName,0,32:
+today,0,32:
+Deal,0,33:
+Gift,0,33:
+Peer,0,33:
+PitchID,0,33:
+PitchUnit,0,33:
+deal,0,33:
+gift,0,"33, 40"
+offer,0,33:
+peer,0,33:
+pitch,0,33:
+pitch_id,0,33:
+pitcher_name,0,33:
+pitchs,0,33:
+request,0,33:
+finance,0,34:
+financial,0,34:
+American,0,"40, 41"
+Faction,0,40
+Hayek,0,"40, 41"
+Hobbit,0,40
+Kronos,0,40
+Land,0,"40, 41"
+Monopoly,0,"40, 41, 90"
+Ride,0,40
+Shill,0,40
+Soil,0,40
+Water,0,"40, 41"
+climb,0,"40, 41"
+cow,0,40
+faction,0,40
+hive,0,40
+hose,0,40
+impression,0,40
+invitation,0,"40, 41"
+invite,0,"40, 41"
+knee,0,"40, 41"
+kronosmax,0,40
+ladder,0,"40, 41"
+land,0,"40, 41"
+lord,0,40
+losing,0,"40, 41"
+loyal,0,40
+oil,0,40
+pay,0,"40, 41"
+power,0,"40, 41"
+prestige,0,"40, 41"
+ride,0,"40, 41"
+rival,0,40
+shill,0,40
+soil,0,40
+tower,0,"40, 41"
+trooper,0,40
+water,0,"40, 41"
+winner,0,"40, 41"
+winning,0,"40, 41"
+Climb,0,41
+Discipline,0,41
+Fall,0,41
+KegWheel,0,41
+Losing,0,41
+Pay,0,41
+Pillar,0,41
+Prestige,0,41
+Rise,0,41
+Shot,0,41
+Stable,0,41
+Welcome,0,41
+Wheel,0,41
+Winning,0,41
+alien,0,41
+bearing,0,41
+cling,0,41
+discipline,0,41
+drag,0,41
+fall,0,41
+infinity,0,41
+jump,0,41
+kneeler,0,41
+lift,0,41
+linchpin,0,41
+loser,0,41
+pillar,0,41
+revenge,0,41
+shot,0,41
+soldier,0,41
+stable,0,41
+valor,0,41
+welcome,0,41
+wheel,0,"41, 98"
+wheelers,0,"41, 98"
+Puncher,0,90
+Team,0,90
+puncher,0,"90, 98"
+team,0,90
