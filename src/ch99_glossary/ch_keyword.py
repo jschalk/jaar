@@ -9610,6 +9610,7 @@ class Ch41Keywords(str, Enum):
     heard_agg = "heard_agg"
     heard_raw = "heard_raw"
     heard_vld = "heard_vld"
+    hose = "hose"
     hour = "hour"
     hour_label = "hour_label"
     hour_label_inx = "hour_label_inx"

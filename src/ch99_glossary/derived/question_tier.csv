@@ -718,7 +718,7 @@ climb,0,"40, 41"
 cow,0,40
 faction,0,40
 hive,0,40
-hose,0,40
+hose,0,"40, 41"
 impression,0,40
 invitation,0,"40, 41"
 invite,0,"40, 41"
