@@ -167,3 +167,35 @@ Then Atlas shrugged, USA looked vulnerable, and he got big ideas.*
 > Early Putin was doing hardline import substitution in a sense that he was substituting whatever was left from Soviet electronics, machinery etc complex industry with imports
 > 
 > Which was conformant cuz after 2003 he started having lots of money to fund these imports
+
+
+**August 10, 2026**
+Responding to popular media figure asking why one politician is continually asked questions testing allegience whereas other politicians are not. 
+> A lil secret of trade
+>
+> It’s not the fans who are making one famous. It is the haters. Big, big hate wave, tsunami size, that’s what makes one a superstar
+>
+> (it is very telling that all these media figures don’t understand this basic fact)
+> 
+> How do you think Machiavelli became the No 1 political philosopher of the West? Was it all the fans’ job? No, of course not. It was all the haters, all of it.
+> 
+> They kept talking how awful, atrocious, unacceptable and completely wrong all of it is, and turned him into the star
+> 
+> To be honest with you, I don’t watch Piker’s content because I don’t watch any streams at all. But based on the public reaction it is clear to me that he is turning into one of the top public intellectuals of modernity, and may very soon be *the* top one in terms of actual impact
+
+**August 12, 2026**
+> Free market is those regulations I support
+> 
+> Socialism is those regulations I am opposed to
+
+Repsonding to Joe McReynolds @McReynoldsJoe<br>
+*Evergreen -- the US military's 1943 manual for servicemen headed to China:*
+<div align="center"><img src="images/chinese_are_americans.webp" alt="1943 US manual describing how Chinese people are like Americans" width="500"></div>
+
+> That is perfectly understandable
+> 
+> If Chinese are seen as “friends”, that means they are exactly like us, and we see sooooooo much similarities
+> 
+> If Chinese are seen as “enemies”, then they are a different biological species entirely, and we have absolutely nothing in common
+> 
+> (In this, and in other cases, people ascribe some profound eternal wisdom to what is basically just war propaganda)
