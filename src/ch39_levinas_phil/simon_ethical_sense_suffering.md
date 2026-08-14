@@ -6,7 +6,47 @@
 **Copied to Keg:** 2026-08-13 
 
 ---
+<!--TODO: remove as many keywords from chapter 39 as possible
 
+class Ch39Keywords(str, Enum):
+    Infinity = "Infinity"
+    Keyword = "Keyword"
+    KnotTerm = "KnotTerm"
+    LabelTerm = "LabelTerm"
+    LaborHeir = "LaborHeir"
+    Lasso = "Lasso"
+    ManaGrain = "ManaGrain"
+    ManaNum = "ManaNum"
+    MomentRope = "MomentRope"
+    Nabu = "Nabu"
+    NameTerm = "NameTerm"
+    Totality = "Totality"
+    border = "border"
+    brick = "brick"
+    c400_number = "c400_number"
+    case_active = "case_active"
+    case_task = "case_task"
+    cases = "cases"
+    creg = "creg"
+    discipline = "discipline"
+    fact
+    finance = "finance"
+    financial = "financial"
+    groupmark = "groupmark"
+    groupunits = "groupunits"
+    keep_rope = "keep_rope"
+    keeps_buildable = "keeps_buildable"
+    keeps_justified = "keeps_justified"
+    land = "land"
+    lasso = "lasso"
+    lego = "lego"
+    meaning = "meaning"
+    rational = "rational"
+    time = "time"
+    welcome = "welcome"
+
+
+-->
 ## I. A Phenomenology of Suffering 
 
 Throughout the body of his work, Levinas contests the dominant modern Western paradigm. He counters the view in which peace is only achievable as a dialectical resolution of the competing assertions of self-satisfying egoist superiorities. In contrast to privileging relationships of domination, he offers a phenomenology of the unrelenting obsession with responsibility for the other, in works such as *Otherwise than Being: Or Beyond Essence.*[^1] As a philosopher, he raises questions about the philosophical foundations of knowledge that subtend the three major Western ethical traditions: virtue ethics, deontological ethics, and utilitarian ethics. Especially in the modern period, utilitarian, instrumentalist ethics have come to dominate our decision making. It could even be said that a form of this sort of ethics was used to justify committing the genocidal murder of millions of Jews by the Nazis during World War II. The greatest good for the greatest number can be interpreted in many different, even obscene, ways. The German people were taught to accept this utilitarian tradition as a limit to their horizons, even though the principal intent of utilitarian ethics is to preserve the general good. But a “double bind” emerges when the general good is so defined as to entail either victimizing the excluded few within a bounded nation-state or, what was just as deleterious in the case of the Holocaust, justifying the suffering of the few for the sake of the general good. 
