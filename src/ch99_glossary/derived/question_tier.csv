@@ -91,8 +91,9 @@ ch32,6,32:
 ch33,6,33:
 ch34,6,34:
 ch35,6,35:
-ch40,6,40:
+ch39,6,39:
 ch90,6,36:
+ch40,6,40:
 ch41,6,41:
 ch54,6,54:
 ch96,6,96:
@@ -209,7 +210,7 @@ irrational_contact_debt_mass,0,3:
 labor_title,0,3:
 labors,0,3:
 memberships,0,3:
-rational,0,"3, 6, 8, 11, 12, 13, 15, 20, 22, 27, 31, 35, 97"
+rational,0,"3, 6, 8, 11, 12, 13, 15, 20, 22, 27, 31, 35, 39, 97"
 respect_grain,0,3:
 solo,0,3:
 take_force,0,3:
@@ -232,7 +233,7 @@ RopeTerm,0,5:
 fact,0,5:
 knot,0,5:
 mana_grain,0,5:
-meaning,0,5
+meaning,0,"5, 39"
 parent_rope,0,5:
 active_requisite,0,6:
 case_active,0,6:
@@ -535,7 +536,7 @@ translate_rope,0,17:
 translate_title,0,17:
 translateunit,0,17:
 unknown_str,0,17:
-Border,0,20
+Border,0,"20, 39"
 Excel,0,20:
 SheetName,0,20:
 allowed_crud,0,20:
@@ -545,7 +546,7 @@ awardee_title_ERASE_otx,0,"20, 22"
 awardee_title_inx,0,20:
 awardee_title_otx,0,20:
 bk,0,20:
-border,0,"20, 35, 41, 90"
+border,0,"20, 35, 39, 41, 90"
 brick,0,20:
 brick_category,0,20:
 brick_type,0,20:
@@ -703,7 +704,17 @@ pitchs,0,33:
 request,0,33:
 finance,0,34:
 financial,0,34:
-American,0,"40, 41"
+American,0,"39, 40, 41"
+Discipline,0,"39, 41"
+Pillar,0,"39, 41"
+bearing,0,"39, 41"
+discipline,0,"39, 41"
+hose,0,"39, 40, 41, 54"
+infinity,0,"39, 41"
+invite,0,"39, 40, 41"
+land,0,"39, 40, 41"
+power,0,"39, 40, 41"
+welcome,0,"39, 41"
 Faction,0,40
 Hayek,0,"40, 41"
 Hobbit,0,40
@@ -718,20 +729,16 @@ climb,0,"40, 41"
 cow,0,40
 faction,0,40
 hive,0,40
-hose,0,"40, 41, 54"
 impression,0,40
 invitation,0,"40, 41"
-invite,0,"40, 41"
 knee,0,"40, 41"
 kronosmax,0,40
 ladder,0,"40, 41"
-land,0,"40, 41"
 lord,0,40
-losing,0,"40, 41"
+losing,0,"40, 41, 54"
 loyal,0,40
 oil,0,40
 pay,0,"40, 41"
-power,0,"40, 41"
 prestige,0,"40, 41"
 ride,0,"40, 41"
 rival,0,40
@@ -743,12 +750,10 @@ water,0,"40, 41"
 winner,0,"40, 41"
 winning,0,"40, 41"
 Climb,0,41
-Discipline,0,41
 Fall,0,41
 KegWheel,0,41
 Losing,0,41
 Pay,0,41
-Pillar,0,41
 Prestige,0,41
 Rise,0,41
 Shot,0,41
@@ -757,12 +762,9 @@ Welcome,0,41
 Wheel,0,41
 Winning,0,41
 alien,0,41
-bearing,0,41
 cling,0,41
-discipline,0,41
 drag,0,41
 fall,0,41
-infinity,0,41
 jump,0,41
 kneeler,0,41
 lift,0,41
@@ -774,7 +776,6 @@ shot,0,41
 soldier,0,41
 stable,0,41
 valor,0,41
-welcome,0,41
 wheel,0,"41, 98"
 wheelers,0,"41, 98"
 Puncher,0,90
