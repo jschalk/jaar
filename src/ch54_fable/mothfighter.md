@@ -1,6 +1,6 @@
 ## MothPark
 
-### Lonely Steve
+### Lonely
 
 *Tell me about your company*
 
@@ -63,7 +63,7 @@
 
 <br><br>
 
-### Joyful Steve
+### Joyful
 
 *Tell me about your street ball history*
 
@@ -73,7 +73,7 @@
 
 > All the hay day we had a tournament go until midnight... and it never failed lol..<br>I would make it to the championship court and right when things got close... I screeching voice would cut thru the loud noises and grunts of the game..."Steeeeevvvveee yyya vente! Time ti come home it's late"""!!!
 
-I love it. Tell me the names of some of the friends from those games
+*I love it. Tell me the names of some of the friends from those games*
 
 <br><br>
 
@@ -81,7 +81,7 @@ I love it. Tell me the names of some of the friends from those games
 
 *Dude did you see about Argentina?*
 
-> Yeah, that shit's fucked. Satans is coming to destoy everything
+> Yeah, that shit's fucked. Satans coming to destoy everything
 
 *Lol it's a purple comet. Is purple Satan's color?* 
 
