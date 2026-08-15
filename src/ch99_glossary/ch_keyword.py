@@ -8934,6 +8934,7 @@ class Ch39Keywords(str, Enum):
     Totality = "Totality"
     UPDATE = "UPDATE"
     WeightNum = "WeightNum"
+    Wheel = "Wheel"
     WorldName = "WorldName"
     active_requisite = "active_requisite"
     addin = "addin"

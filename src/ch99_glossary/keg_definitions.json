@@ -757,7 +757,7 @@
   "WeightNum": "float first used in ch02. WeightNum represents the unnormalized value of a ledger key. The sum of all WeightNum values in a ledger is not defined.", 
   "Welcome": "For a FamilyUnit outside a wheel to get into the Wheel it must be invited.", 
   "welcome": "For a FamilyUnit outside a wheel to get into the Wheel it must be invited.", 
-  "Wheel": "Refers to the KegWheel concept.", 
+  "Wheel": "Refers to the KegWheel concept or Randolph C. Wheeler", 
   "wheel": "Refers to the KegWheel concept or the wheel concept in library distribution.", 
   "wheelers": "FamilyUnits with Prestige and thus part of the Wheel", 
   "Winner": "A FamilyUnit getting more Prestige.", 

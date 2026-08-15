@@ -120,7 +120,7 @@
   "Water": {"valid_ch": "40, 41"}, 
   "WeightNum": {"semantic_type": "float", "valid_ch": "2:"}, 
   "Welcome": {"valid_ch": "41"}, 
-  "Wheel": {"valid_ch": "41"}, 
+  "Wheel": {"valid_ch": "39, 41"}, 
   "Winner": {"valid_ch": ""}, 
   "Winning": {"valid_ch": "41"}, 
   "WorldName": {"semantic_type": "str", "valid_ch": "32:"}, 

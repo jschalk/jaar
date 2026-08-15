@@ -1,4 +1,4 @@
-# Jules Simon's Syllabus for Emmanuel Levinas 
+# Jules Simon's Syllabus for course on Emmanuel Levinas
 
 
 **Date:** 2014-1  

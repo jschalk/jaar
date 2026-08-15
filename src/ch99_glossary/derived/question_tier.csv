@@ -56,7 +56,6 @@ scaffold,10,
 stilt,10,
 swim,10,
 target,10,
-totality,10,
 vertical,10,
 yard,10,
 ch00,6,0:
@@ -452,7 +451,7 @@ dayly_lower_min,0,14
 days,0,14:
 days_lower_day,0,14
 days_upper_day,0,14
-duration,0,14
+duration,0,"14, 39"
 epoch_label,0,14:
 epoch_length,0,14:
 epoch_min,0,14:
@@ -714,6 +713,7 @@ infinity,0,"39, 41"
 invite,0,"39, 40, 41"
 land,0,"39, 40, 41"
 power,0,"39, 40, 41"
+totality,0,39
 welcome,0,"39, 41"
 Faction,0,40
 Hayek,0,"40, 41"

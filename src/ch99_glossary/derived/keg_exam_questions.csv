@@ -60,7 +60,6 @@ Did you read that the keg_definition of 'scaffold' is 'The only way to get to a 
 Did you read that the keg_definition of 'stilt' is 'A ladder load-bearing support of a Wheel.'.
 Did you read that the keg_definition of 'swim' is 'To live with faith. To be slave to many masters instead of a slave to one. To live in many moments. Not used in codebase.'.
 Did you read that the keg_definition of 'target' is 'A FamilyUnit with prestige.'.
-Did you read that the keg_definition of 'totality' is 'As described in Totality and Infinity. Not used in codebase.'.
 "Did you read that the keg_definition of 'vertical' is 'The height of a Pillar, Ladder, Stilt, or Scaffold. Is it enough to reach?'."
 Did you read that the keg_definition of 'yard' is 'Definition needed.'.
 Did you read that the keg_definition of 'ch00' is 'Creates helper tools for OS and python data manipulation.'.
@@ -720,6 +719,7 @@ Did you read that the keg_definition of 'infinity' is 'As described in Totality 
 Did you read that the keg_definition of 'invite' is 'The giving of prestige from a FamilyUnit with it to a FamilyUnit without it.'.
 "Did you read that the keg_definition of 'land' is 'When referenced in context of KegWheel, the root source of all wheel_size (Power).'."
 Did you read that the keg_definition of 'power' is 'Not used in codebase.'.
+Did you read that the keg_definition of 'totality' is 'As described in Totality and Infinity. Not used in codebase.'.
 Did you read that the keg_definition of 'welcome' is 'For a FamilyUnit outside a wheel to get into the Wheel it must be invited.'.
 "Did you read that the keg_definition of 'Faction' is 'A community of FamilyUnits unified by a political loyality. Power is never exercised (or won) by individuals. It is always exercised (or won) by factions. Power is always collective, factional. In the centre of it, there is always a group of individuals, tied with strong informal connections with each other. I call it, a faction.'."
 "Did you read that the keg_definition of 'Hayek' is 'Fredrich Hayek, philosopher. Often incorrectly interpreted and since he's dead he can't refute them.'."
