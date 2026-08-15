@@ -33,9 +33,9 @@
 - ch33_pitch: Deal, Gift, Peer, PitchID, PitchUnit, ch33, deal, gift, offer, peer, pitch, pitch_id, pitcher_name, pitchs, request
 - ch34_finance: ch34, finance, financial
 - ch35_person_viewer: ch35
-- ch39_levinas_phil: American, Infinity, Pillar, Totality, bearing, ch39, ch90, hose, infinity, invite, land, power, totality, welcome
+- ch39_levinas_phil: American, Infinity, Pillar, Totality, Wheel, bearing, ch39, ch90, hose, infinity, invite, land, power, totality, welcome
 - ch40_pop_phil: Faction, Hayek, Hobbit, Kronos, Land, Monopoly, Ride, Shill, Soil, Water, ch40, climb, cow, faction, hive, impression, invitation, knee, kronosmax, ladder, lord, losing, loyal, oil, pay, prestige, ride, rival, shill, soil, tower, trooper, water, winner, winning
-- ch41_wheel: Climb, Discipline, Fall, KegWheel, Losing, Pay, Prestige, Rise, Shot, Stable, Welcome, Wheel, Winning, alien, ch41, cling, discipline, drag, fall, jump, kneeler, lift, linchpin, loser, pillar, revenge, shot, soldier, stable, valor, wheel, wheelers
+- ch41_wheel: Climb, Discipline, Fall, KegWheel, Losing, Pay, Prestige, Rise, Shot, Stable, Welcome, Winning, alien, ch41, cling, discipline, drag, fall, jump, kneeler, lift, linchpin, loser, pillar, revenge, shot, soldier, stable, valor, wheel, wheelers
 - ch54_fable: ch54
 - ch90_puncher_app: Puncher, Team, puncher, team
 - ch96_exam: ch96
