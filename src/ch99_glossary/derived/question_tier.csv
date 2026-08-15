@@ -43,7 +43,6 @@ crawl,10,
 dive,10,
 drift,10,
 factory,10,
-gravity,10,
 heart,10,
 keg_wheel,10,
 kegbox,10,
@@ -707,14 +706,17 @@ American,0,"39, 40, 41"
 Infinity,0,"39, 41"
 Pillar,0,"39, 41"
 Totality,0,"39, 41"
+Water,0,"39, 40, 41"
 Wheel,0,"39, 41"
 bearing,0,"39, 41"
+gravity,0,39
 hose,0,"39, 40, 41, 54"
 infinity,0,"39, 41"
 invite,0,"39, 40, 41"
 land,0,"39, 40, 41"
 power,0,"39, 40, 41"
 totality,0,39
+water,0,"39, 40, 41"
 welcome,0,"39, 41"
 Faction,0,40
 Hayek,0,"40, 41"
@@ -725,7 +727,6 @@ Monopoly,0,"40, 41, 90"
 Ride,0,40
 Shill,0,40
 Soil,0,40
-Water,0,"40, 41"
 climb,0,"40, 41"
 cow,0,40
 faction,0,40
@@ -747,7 +748,6 @@ shill,0,40
 soil,0,40
 tower,0,"40, 41"
 trooper,0,40
-water,0,"40, 41"
 winner,0,"40, 41"
 winning,0,"40, 41"
 Climb,0,41

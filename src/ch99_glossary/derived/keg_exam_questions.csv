@@ -12,7 +12,7 @@ Did you read that the keg_definition of 'Cow' is 'A FamilyUnit without Prestige.
 Have you heard of Excel spreadsheet application?
 Did you read that the keg_definition of 'Drag' is 'Opposite of Lift. When a FamilyUnit shuts off support to bring a FamilyUnit down.'.
 Did you read that the keg_definition of 'Drift' is 'To move from one Moment to another Moment. Giving all concentration to the new moment.'.
-Did you read that the keg_definition of 'Gravity' is 'Definition needed.'.
+Did you read that the keg_definition of 'Gravity' is 'In Wheel Theory gravity is the natural process of returning FamilyUnits to the Land. Levinas used the term.'.
 Did you read that the keg_definition of 'Hive' is 'A community of FamilyUnits unified by a purpose'.
 Did you read that the keg_definition of 'Hose' is 'Definition needed.'.
 "Did you read that the keg_definition of 'Impression' is 'The motivation of any decisions. Example 'Governed by the impressions of French and English revolutions, they expected to be overthrown by a military putsch.' Can be synchronic or diachronic.'."
@@ -47,7 +47,6 @@ Did you read that the keg_definition of 'crawl' is 'The opposite of 'swim'. To b
 Did you read that the keg_definition of 'dive' is 'To go from living on land to swimming with fearlessness. Not used in codebase.'.
 Did you read that the keg_definition of 'drift' is 'To move from one Moment to another Moment. Giving all concentration to the new moment.'.
 "Did you read that the keg_definition of 'factory' is 'Not used in codebase. The factory method in programming is very important. However because I want 'fact' only to refer to the Keg concept I don't use the word 'factory', instead I use 'shop'.'."
-Did you read that the keg_definition of 'gravity' is 'Definition needed.'.
 Did you read that the keg_definition of 'heart' is 'Not used in codebase.'.
 "Did you read that the keg_definition of 'keg_wheel' is 'A instance of KegWheel, within a single MomentUnit. Not used in codebase.'."
 Did you read that the keg_definition of 'kegbox' is 'Anything that holds Keg worlds. Usually a computer thought it's possible to work with paper.'.
@@ -713,14 +712,17 @@ Did you read that the keg_definition of 'financial' is 'Definition needed.'.
 Did you read that the keg_definition of 'Infinity' is 'As described in Totality and Infinity. Not used in codebase.'.
 Did you read that the keg_definition of 'Pillar' is 'A load-bearing support for a family with prestige. Built of non-prestige families.'.
 Did you read that the keg_definition of 'Totality' is 'As described in Totality and Infinity. Not used in codebase.'.
+Did you read that the keg_definition of 'Water' is 'Definition needed.'.
 Did you read that the keg_definition of 'Wheel' is 'Refers to the KegWheel concept or Randolph C. Wheeler'.
 Did you read that the keg_definition of 'bearing' is 'Concerns load bearing of a Wheel by families under the Wheel.'.
+Did you read that the keg_definition of 'gravity' is 'In Wheel Theory gravity is the natural process of returning FamilyUnits to the Land. Levinas used the term.'.
 Did you read that the keg_definition of 'hose' is 'Definition needed.'.
 Did you read that the keg_definition of 'infinity' is 'As described in Totality and Infinity. Not used in codebase.'.
 Did you read that the keg_definition of 'invite' is 'The giving of prestige from a FamilyUnit with it to a FamilyUnit without it.'.
 "Did you read that the keg_definition of 'land' is 'When referenced in context of KegWheel, the root source of all wheel_size (Power).'."
 Did you read that the keg_definition of 'power' is 'Not used in codebase.'.
 Did you read that the keg_definition of 'totality' is 'As described in Totality and Infinity. Not used in codebase.'.
+Did you read that the keg_definition of 'water' is 'Definition needed.'.
 Did you read that the keg_definition of 'welcome' is 'For a FamilyUnit outside a wheel to get into the Wheel it must be invited.'.
 "Did you read that the keg_definition of 'Faction' is 'A community of FamilyUnits unified by a political loyality. Power is never exercised (or won) by individuals. It is always exercised (or won) by factions. Power is always collective, factional. In the centre of it, there is always a group of individuals, tied with strong informal connections with each other. I call it, a faction.'."
 "Did you read that the keg_definition of 'Hayek' is 'Fredrich Hayek, philosopher. Often incorrectly interpreted and since he's dead he can't refute them.'."
@@ -731,7 +733,6 @@ Did you read that the keg_definition of 'Kronos' is 'Greek God of War and Time. 
 "Did you read that the keg_definition of 'Ride' is 'The act of recognizing authority, leadership. 'Who do I ride with?''."
 Did you read that the keg_definition of 'Shill' is 'A Rider for a bad person.'.
 Did you read that the keg_definition of 'Soil' is 'Definition needed.'.
-Did you read that the keg_definition of 'Water' is 'Definition needed.'.
 Did you read that the keg_definition of 'climb' is 'To connote the action a FamilyUnit takes to gain Prestige.'.
 Did you read that the keg_definition of 'cow' is 'A FamilyUnit without Prestige. Consider whether it's a useful term.'.
 "Did you read that the keg_definition of 'faction' is 'A community of FamilyUnits unified by a political loyality. Power is never exercised (or won) by individuals. It is always exercised (or won) by factions. Power is always collective, factional. In the centre of it, there is always a group of individuals, tied with strong informal connections with each other. I call it, a faction.'."
@@ -753,7 +754,6 @@ Did you read that the keg_definition of 'shill' is 'A Rider for a bad person.'.
 Did you read that the keg_definition of 'soil' is 'Definition needed.'.
 Did you read that the keg_definition of 'tower' is 'Definition needed.'.
 Did you read that the keg_definition of 'trooper' is 'A professional member of the armed services of a Nation-State.'.
-Did you read that the keg_definition of 'water' is 'Definition needed.'.
 Did you read that the keg_definition of 'winner' is 'A FamilyUnit getting more Prestige.'.
 Did you read that the keg_definition of 'winning' is 'The act of a FamilyUnit getting more Prestige.'.
 Did you read that the keg_definition of 'Climb' is 'To connote the action a FamilyUnit takes to gain Prestige.'.
