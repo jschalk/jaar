@@ -213,14 +213,14 @@ respect_grain,0,3:
 solo,0,3:
 take_force,0,3:
 thinkout,0,3:
-workforceheir,0,3:
-workforceunit,0,3:
 LaborHeir,0,4:
 laborheir,0,4:
 parent_solo,0,4
 person,0,4:
 person_name,0,4:
 person_name_is_workforce,0,4:
+workforceheir,0,"4, 7, 8, 27, 35"
+workforceunit,0,"4, 7, 8, 9, 10, 11, 15, 23, 27, 35, 97"
 FactNum,0,5:
 FirstLabel,0,5:
 KnotTerm,0,5:

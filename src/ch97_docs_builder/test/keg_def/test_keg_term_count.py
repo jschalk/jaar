@@ -139,7 +139,7 @@ def test_get_count_keg_terms_by_chapters_CountsTerms_Scenario0_SrcDir():
     # THEN
     keg_terms = set(get_keg_definitions().keys())
     assert set(keg_terms_by_chapters.keys()) == keg_terms
-    focus_keyword_count_set = {"jkeys"}
+    focus_keyword_count_set = {"huh"}
     focus_keyword_frequency = get_focus_keyword_frequency(focus_keyword_count_set)
 
     for x_keg_term, term_curr_allowed_tup in focus_keyword_frequency.items():
