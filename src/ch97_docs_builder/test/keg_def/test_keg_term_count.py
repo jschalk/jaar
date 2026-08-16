@@ -132,7 +132,6 @@ def test_get_count_strs_by_dirs_ReturnsEmpty_Scenario6_EmptyKegTerms(
 
 
 def test_get_count_keg_terms_by_chapters_CountsTerms_Scenario0_SrcDir():
-    # sourcery skip: no-conditionals-in-tests
     # GIVEN / WHEN
     keg_terms_by_chapters = get_count_keg_terms_by_chapters()
 
