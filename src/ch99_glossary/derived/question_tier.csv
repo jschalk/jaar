@@ -727,7 +727,6 @@ Monopoly,0,"40, 41, 90"
 Ride,0,40
 Shill,0,40
 Soil,0,40
-climb,0,"40, 41"
 cow,0,40
 faction,0,40
 hive,0,40
@@ -763,6 +762,7 @@ Stable,0,41
 Welcome,0,41
 Winning,0,41
 alien,0,41
+climb,0,41
 cling,0,41
 discipline,0,41
 drag,0,41

@@ -230,7 +230,7 @@
   "ch97": {"valid_ch": "97:"}, 
   "ch98": {"valid_ch": "98:"}, 
   "ch99": {"valid_ch": "99:"}, 
-  "climb": {"valid_ch": "40, 41"}, 
+  "climb": {"valid_ch": "41"}, 
   "cling": {"valid_ch": "41"}, 
   "clock": {"valid_ch": "14:"}, 
   "close": {"sort_ordinal": 103, "valid_ch": "7:"}, 

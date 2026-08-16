@@ -27,7 +27,7 @@ Most modern industries are illegible to outsiders. If you want to understand the
 
 Most people can’t do that. They do not have the time, the access, or the technical knowledge. So instead of trying to understand the whole machine, they judge the person operating inside it.
 
-Besides, there are not many winners in life. A small number of people capture a wildly disproportionate share of the rewards. Many domains are winner-take-all, or close to it. And often the same people keep winning.
+Besides, there are not many winners in life. A small number of people capture a wildly disproportionate share of the rewards. Many domains are winner-take-all, or close to it. And often the same people keep succeeding.
 
 *link to tiktok of Peter Thiel talking about never betting against Elon Musk.*
 
@@ -122,7 +122,7 @@ Older societies too, took this kind of judgment much more seriously than we do t
 
 If you are trying to spot trajectory early, there are usually a few signs you can notice. A man who is going nowhere rarely has enemies. Upward motion creates friction. It irritates rivals.
 
-You can also see it in how he takes a hit. For the rising, a setback is often just part of the climb. He gets hit, but the motion remains.
+You can also see it in how he takes a hit. For the rising, a setback is often just part of the prevailing. He gets hit, but the motion remains.
 
 Rising people also tend to look a little unfinished. Their current life has not fully caught up to their direction. If someone seems perfectly settled he may already have reached his ceiling.
 

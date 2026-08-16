@@ -151,18 +151,9 @@ def test_get_count_keg_terms_by_chapters_CountsTerms_Scenario0_SrcDir():
     ch_ints = {get_ch_int(chapter_desc) for chapter_desc in chapter_descs}
     keywords_src_config = get_keywords_src_config()
     print_keyword_count_set = {
-        "fact_context_ERASE",
-        "fact_context_inx",
-        "fact_context_otx",
-        "fact_lower",
-        "fact_lower_inx",
-        "fact_lower_otx",
-        "fact_state",
-        "fact_state_inx",
-        "fact_state_otx",
-        "fact_upper",
-        "fact_upper_inx",
-        "fact_upper_otx",
+        "UPDATE",
+        "DELETE",
+        "INSERT",
     }
     for keg_term in sorted(keg_terms_by_chapters.keys()):
         ch_dir_dict = keg_terms_by_chapters.get(keg_term)
