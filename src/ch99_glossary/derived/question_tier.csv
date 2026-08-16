@@ -7,12 +7,14 @@ Cling,10,
 Closer,10,
 Cow,10,
 Drag,10,
+Drift,10,
 Gravity,10,
 Hive,10,
 Hose,10,
 Impression,10,
 Invite,10,
 Joachim,10,
+Jump,10,
 Knee,10,
 Ladder,10,
 Lift,10,
@@ -39,8 +41,8 @@ booster,10,
 closer,10,
 crawl,10,
 dive,10,
+drift,10,
 factory,10,
-gravity,10,
 heart,10,
 keg_wheel,10,
 kegbox,10,
@@ -53,7 +55,6 @@ scaffold,10,
 stilt,10,
 swim,10,
 target,10,
-totality,10,
 vertical,10,
 yard,10,
 ch00,6,0:
@@ -88,8 +89,9 @@ ch32,6,32:
 ch33,6,33:
 ch34,6,34:
 ch35,6,35:
-ch40,6,40:
+ch39,6,39:
 ch90,6,36:
+ch40,6,40:
 ch41,6,41:
 ch54,6,54:
 ch96,6,96:
@@ -229,7 +231,7 @@ RopeTerm,0,5:
 fact,0,5:
 knot,0,5:
 mana_grain,0,5:
-meaning,0,5
+meaning,0,"5, 39"
 parent_rope,0,5:
 active_requisite,0,6:
 case_active,0,6:
@@ -346,11 +348,11 @@ DELETE,0,9:
 INSERT,0,9:
 UPDATE,0,9:
 atom,0,9:
-awardee_title_ERASE,0,9:
+awardee_title_ERASE,0,"9, 20, 22, 97"
 column_ordinal,0,9
 contact_name_ERASE,0,9:
 crud,0,"9, 10, 20, 22, 23, 24, 97"
-fact_context_ERASE,0,9:
+fact_context_ERASE,0,"9, 20, 22, 97"
 group_title_ERASE,0,9:
 healer_name_ERASE,0,9:
 labor_title_ERASE,0,9:
@@ -378,7 +380,7 @@ Epoch,0,12:
 SparkInt,0,12:
 TimeNum,0,12:
 amount,0,"12, 13, 15, 17, 20, 22, 23, 26, 27, 31, 32, 35, 97"
-boss,0,"12, 15, 41"
+boss,0,"12, 15, 41, 54"
 boss_facts,0,"12, 15"
 bud_contact_nets,0,12:
 bud_person_name,0,"12, 15"
@@ -448,12 +450,12 @@ dayly_lower_min,0,14
 days,0,14:
 days_lower_day,0,14
 days_upper_day,0,14
-duration,0,14
+duration,0,"14, 39"
 epoch_label,0,14:
-epoch_length,0,14:
-epoch_min,0,14:
+epoch_length,0,"14, 15, 16, 26, 97"
+epoch_min,0,"14, 15, 16, 31, 97"
 every_xdays,0,14
-every_xweeks,0,14:
+every_xweeks,0,"14, 26, 97"
 five,0,14:
 hour,0,14:
 hour_label,0,14:
@@ -508,8 +510,6 @@ otx2inx,0,16:
 otx_epoch_length,0,16
 otx_time,0,16:
 timenabu,0,16
-contact_name_inx,0,17:
-contact_name_otx,0,17:
 inx_knot,0,17:
 inx_label,0,17:
 inx_name,0,17:
@@ -532,119 +532,121 @@ translate_rope,0,17:
 translate_title,0,17:
 translateunit,0,17:
 unknown_str,0,17:
-Border,0,20
+Border,0,"20, 39"
 Excel,0,20:
 SheetName,0,20:
 allowed_crud,0,20:
-attributes,0,20:
+attributes,0,"20, 23, 24, 26, 35, 39, 40, 97"
 awardee_title_ERASE_inx,0,"20, 22"
 awardee_title_ERASE_otx,0,"20, 22"
-awardee_title_inx,0,20:
-awardee_title_otx,0,20:
+awardee_title_inx,0,"20, 22, 97"
+awardee_title_otx,0,"20, 22, 97"
 bk,0,20:
-border,0,"20, 35, 41, 90"
+border,0,"20, 35, 39, 41, 90"
 brick,0,20:
-brick_category,0,20:
+brick_category,0,"20, 22, 23, 26, 97"
 brick_type,0,20:
-bud_time_inx,0,20:
-bud_time_otx,0,20:
+bud_time_inx,0,"20, 22"
+bud_time_otx,0,"20, 22"
 build_order,0,20:
 contact_name_ERASE_inx,0,"20, 22"
 contact_name_ERASE_otx,0,"20, 22"
+contact_name_inx,0,"20, 22"
+contact_name_otx,0,"20, 22"
 delete_insert,0,20:
 delete_insert_update,0,20:
 delete_update,0,"20,23"
-epoch_label_inx,0,20:
-epoch_label_otx,0,20:
+epoch_label_inx,0,"20, 22, 97"
+epoch_label_otx,0,"20, 22, 97"
 error_message,0,20:
 excel,0,20:
 fact_context_ERASE_inx,0,"20, 22"
 fact_context_ERASE_otx,0,"20, 22"
-fact_context_inx,0,20:
-fact_context_otx,0,20:
-fact_lower_inx,0,20:
-fact_lower_otx,0,20:
-fact_state_inx,0,20:
-fact_state_otx,0,20:
-fact_upper_inx,0,20:
-fact_upper_otx,0,20:
+fact_context_inx,0,"20, 22, 97"
+fact_context_otx,0,"20, 22, 97"
+fact_lower_inx,0,"20, 22, 26, 97"
+fact_lower_otx,0,"20, 22, 26, 97"
+fact_state_inx,0,"20, 22, 97"
+fact_state_otx,0,"20, 22, 97"
+fact_upper_inx,0,"20, 22, 26, 97"
+fact_upper_otx,0,"20, 22, 26, 97"
 fund_rank,0,20:
 group_title_ERASE_inx,0,"20, 22"
 group_title_ERASE_otx,0,"20, 22"
-group_title_inx,0,20:
-group_title_otx,0,20:
+group_title_inx,0,"20, 22"
+group_title_otx,0,"20, 22"
 healer_name_ERASE_inx,0,"20, 22"
 healer_name_ERASE_otx,0,"20, 22"
-healer_name_inx,0,20:
-healer_name_otx,0,20:
-hour_label_inx,0,20:
-hour_label_otx,0,20:
+healer_name_inx,0,"20, 22"
+healer_name_otx,0,"20, 22"
+hour_label_inx,0,"20, 22"
+hour_label_otx,0,"20, 22"
 insert_multiple,0,20:
 insert_one_time,0,20:
 insert_update,0,20:
 labor_title_ERASE_inx,0,"20, 22"
 labor_title_ERASE_otx,0,"20, 22"
-labor_title_inx,0,20:
-labor_title_otx,0,20:
-moment_rope_inx,0,20:
-moment_rope_otx,0,20:
-month_label_inx,0,20:
-month_label_otx,0,20:
+labor_title_inx,0,"20, 22"
+labor_title_otx,0,"20, 22"
+moment_rope_inx,0,"20, 22"
+moment_rope_otx,0,"20, 22"
+month_label_inx,0,"20, 22"
+month_label_otx,0,"20, 22"
 net_funds,0,20:
-offi_time_inx,0,20:
-offi_time_otx,0,20:
+offi_time_inx,0,"20, 22, 26"
+offi_time_otx,0,"20, 22, 26"
 otx_key,0,20:
 person_name_ERASE_inx,0,"20, 22"
 person_name_ERASE_otx,0,"20, 22"
-person_name_inx,0,20:
-person_name_otx,0,20:
+person_name_inx,0,"20, 22, 25"
+person_name_otx,0,"20, 22, 25"
 plan_rope_ERASE_inx,0,"20, 22"
 plan_rope_ERASE_otx,0,"20, 22"
-plan_rope_inx,0,20:
-plan_rope_otx,0,20:
+plan_rope_inx,0,"20, 22"
+plan_rope_otx,0,"20, 22"
 pledges_count,0,20:
 reason_context_ERASE_inx,0,"20, 22"
 reason_context_ERASE_otx,0,"20, 22"
-reason_context_inx,0,20:
-reason_context_otx,0,20:
-reason_lower_inx,0,20:
-reason_lower_otx,0,20:
+reason_context_inx,0,"20, 22, 97"
+reason_context_otx,0,"20, 22, 97"
+reason_lower_inx,0,"20, 22, 26, 97"
+reason_lower_otx,0,"20, 22, 26, 97"
 reason_state_ERASE_inx,0,"20, 22"
 reason_state_ERASE_otx,0,"20, 22"
-reason_state_inx,0,20:
-reason_state_otx,0,20:
-reason_upper_inx,0,20:
-reason_upper_otx,0,20:
+reason_state_inx,0,"20, 22, 97"
+reason_state_otx,0,"20, 22, 97"
+reason_upper_inx,0,"20, 22, 26, 97"
+reason_upper_otx,0,"20, 22, 26, 97"
 sheet,0,20:
 source_dimen,0,20:
-spark_face_inx,0,20:
-spark_face_otx,0,20:
-tran_time_inx,0,20:
-tran_time_otx,0,20:
+spark_face_inx,0,"20, 22, 26"
+spark_face_otx,0,"20, 22, 26"
+tran_time_inx,0,"20, 22"
+tran_time_otx,0,"20, 22"
 translate_spark_num,0,20:
 weekday_label_inx,0,"20, 22"
 weekday_label_otx,0,"20, 22"
 world_name,0,20:
-b_agg,0,"22, 24, 27, 32, 97"
-b_raw,0,"22, 24, 27, 32, 97"
+b_agg,0,"22, 24, 27, 32"
+b_raw,0,"22, 24, 32"
 b_src,0,"22, 23, 24, 27, 32, 90, 97"
-b_vld,0,"22, 24, 27, 32, 97"
-brixk_agg,0,22:
-brixk_raw,0,22:
-brixk_src,0,22:
-brixk_vld,0,22:
-h_agg,0,22:
-h_raw,0,22:
-h_vld,0,22:
-heard_agg,0,22:
-heard_raw,0,22:
-heard_vld,0,22:
+b_vld,0,"22, 24, 32"
+brixk_agg,0,"22, 24, 32"
+brixk_raw,0,"22, 24, 32"
+brixk_src,0,"22, 24, 32"
+brixk_vld,0,"22, 24, 32"
+h_agg,0,"22, 26, 32"
+h_raw,0,"22, 25, 26, 32"
+h_vld,0,"22, 25, 26, 27, 32"
+heard_agg,0,"22, 25, 26, 32, 98"
+heard_raw,0,"22, 25, 26, 32, 97"
+heard_vld,0,"22, 26, 32"
 i_dst,0,22:
 i_src,0,22:
-idea,0,"22, 23, 27, 30, 32, 33, 40, 41, 90, 97, 98"
+idea,0,"22, 23, 27, 30, 32, 33, 40, 41, 54, 90, 97, 98"
 ideax_dst,0,22:
 ideax_src,0,22:
-k_vld,0,22:
+k_vld,0,"22, 24, 32"
 lego,0,22:
 legox_mst,0,22
 mmtbudd,0,"22, 26, 97"
@@ -657,9 +659,9 @@ mmtweek,0,"22, 26, 97"
 moment_ote1_agg,0,22:
 nabtime,0,22:
 person_net_amount,0,22:
-s_agg,0,22:
-s_raw,0,22:
-s_vld,0,22:
+s_agg,0,"22, 24, 25, 32"
+s_raw,0,"22, 24, 25, 32"
+s_vld,0,"22, 24, 25, 26, 30, 32"
 sound_agg,0,"22, 25, 32"
 sound_raw,0,"22, 24, 25, 32"
 sound_vld,0,"22, 25, 32"
@@ -690,7 +692,7 @@ Peer,0,33:
 PitchID,0,33:
 PitchUnit,0,33:
 deal,0,33:
-gift,0,"33, 40"
+gift,0,"33, 39, 40"
 offer,0,33:
 peer,0,33:
 pitch,0,33:
@@ -700,7 +702,22 @@ pitchs,0,33:
 request,0,33:
 finance,0,34:
 financial,0,34:
-American,0,"40, 41"
+American,0,"39, 40, 41"
+Infinity,0,"39, 41"
+Pillar,0,"39, 41"
+Totality,0,"39, 41"
+Water,0,"39, 40, 41"
+Wheel,0,"39, 41"
+bearing,0,"39, 41"
+gravity,0,39
+hose,0,"39, 40, 41, 54"
+infinity,0,"39, 41"
+invite,0,"39, 40, 41"
+land,0,"39, 40, 41"
+power,0,"39, 40, 41"
+totality,0,39
+water,0,"39, 40, 41"
+welcome,0,"39, 41"
 Faction,0,40
 Hayek,0,"40, 41"
 Hobbit,0,40
@@ -710,25 +727,20 @@ Monopoly,0,"40, 41, 90"
 Ride,0,40
 Shill,0,40
 Soil,0,40
-Water,0,"40, 41"
 climb,0,"40, 41"
 cow,0,40
 faction,0,40
 hive,0,40
-hose,0,40
 impression,0,40
 invitation,0,"40, 41"
-invite,0,"40, 41"
 knee,0,"40, 41"
 kronosmax,0,40
 ladder,0,"40, 41"
-land,0,"40, 41"
 lord,0,40
-losing,0,"40, 41"
+losing,0,"40, 41, 54"
 loyal,0,40
 oil,0,40
 pay,0,"40, 41"
-power,0,"40, 41"
 prestige,0,"40, 41"
 ride,0,"40, 41"
 rival,0,40
@@ -736,7 +748,6 @@ shill,0,40
 soil,0,40
 tower,0,"40, 41"
 trooper,0,40
-water,0,"40, 41"
 winner,0,"40, 41"
 winning,0,"40, 41"
 Climb,0,41
@@ -745,21 +756,17 @@ Fall,0,41
 KegWheel,0,41
 Losing,0,41
 Pay,0,41
-Pillar,0,41
 Prestige,0,41
 Rise,0,41
 Shot,0,41
 Stable,0,41
 Welcome,0,41
-Wheel,0,41
 Winning,0,41
 alien,0,41
-bearing,0,41
 cling,0,41
 discipline,0,41
 drag,0,41
 fall,0,41
-infinity,0,41
 jump,0,41
 kneeler,0,41
 lift,0,41
@@ -771,7 +778,6 @@ shot,0,41
 soldier,0,41
 stable,0,41
 valor,0,41
-welcome,0,41
 wheel,0,"41, 98"
 wheelers,0,"41, 98"
 Puncher,0,90

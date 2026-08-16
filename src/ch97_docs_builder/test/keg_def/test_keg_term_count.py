@@ -150,6 +150,20 @@ def test_get_count_keg_terms_by_chapters_CountsTerms_Scenario0_SrcDir():
     chapter_descs = get_chapter_descs().keys()
     ch_ints = {get_ch_int(chapter_desc) for chapter_desc in chapter_descs}
     keywords_src_config = get_keywords_src_config()
+    print_keyword_count_set = {
+        "fact_context_ERASE",
+        "fact_context_inx",
+        "fact_context_otx",
+        "fact_lower",
+        "fact_lower_inx",
+        "fact_lower_otx",
+        "fact_state",
+        "fact_state_inx",
+        "fact_state_otx",
+        "fact_upper",
+        "fact_upper_inx",
+        "fact_upper_otx",
+    }
     for keg_term in sorted(keg_terms_by_chapters.keys()):
         ch_dir_dict = keg_terms_by_chapters.get(keg_term)
         # if len(ch_dir_dict) == 2:
@@ -162,7 +176,12 @@ def test_get_count_keg_terms_by_chapters_CountsTerms_Scenario0_SrcDir():
                     # print(f"{set(ch_dir_dict.keys())=}")
                     # print(f"{keg_term} {ch_dir_dict=} {lone_ch=} {x_valid_ch=}")
                     # if len(valid_chapters) - len(ch_dir_dict) > 20:
-                    if keg_term == "huh":
+                    if (
+                        keg_term in print_keyword_count_set
+                        or keg_term.endswith("agg")
+                        or keg_term.endswith("raw")
+                        or keg_term.endswith("vld")
+                    ):
                         print(
                             f"{keg_term:<20} {str(sorted(set(ch_dir_dict.keys()))):<40} {valid_chapters[:20]=}"
                         )

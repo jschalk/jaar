@@ -133,7 +133,8 @@ def get_markdown_footnote_order_failures(src_dir: Path) -> list[str]:
         if references != expected:
             failures.append(
                 f"{md_file}: footnotes are out of order "
-                f"(found {references}, expected {expected})"
+                f"\n(found   {references}"
+                f"\nexpected {expected})"
             )
 
     return failures
