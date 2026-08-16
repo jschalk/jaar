@@ -403,7 +403,7 @@
   "irrational_contact_debt_mass": {"sort_ordinal": 190, "valid_ch": "3:"}, 
   "is_expanded": {"valid_ch": "7:"}, 
   "jkeys": {"valid_ch": "8:"}, 
-  "job": {"valid_ch": "10:"}, 
+  "job": {"valid_ch": "11, 15, 17, 20, 22, 23, 26, 27, 30, 31, 32, 39, 40"}, 
   "job_listen_rotations": {"sort_ordinal": 158, "valid_ch": "15:"}, 
   "jump": {"valid_ch": "41"}, 
   "jvalues": {"valid_ch": "8:"}, 

@@ -373,13 +373,13 @@ Did you read that the keg_definition of 'FaceName' is 'str first used in ch10. T
 Did you read that the keg_definition of 'Lasso' is 'Definition needed.'.
 Did you read that the keg_definition of 'MomentRope' is 'str first used in ch10. The RopeTerm for a Moment. Must contain knots.'.
 Did you read that the keg_definition of 'gut' is 'Definition needed.'.
-Did you read that the keg_definition of 'job' is 'Definition needed.'.
 Did you read that the keg_definition of 'lasso' is 'Definition needed.'.
 Did you read that the keg_definition of 'moment' is 'Definition needed.'.
 Did you read that the keg_definition of 'moment_mstr_dir' is 'starting point for most lego file structue. Moment functions usually refernce this directory as root.'.
 "Did you read that the keg_definition of 'moment_rope' is ', Moment arg, offi_time arg, ceckbook arg, mmtweek arg, mmtmont arg, mmthour arg, bud arg, Person seed, Plan seed, Reason seed, Case seed, Fact seed, Award seed, Workforce seed, Healer seed, Contact seed, Member seed, nabu arg.'."
 Did you read that the keg_definition of 'spark_face' is 'Every spark has a spark_face that identifies which Face it belongs to. The Face is the source of all outside data. In theory a spark_face can be any data type. In practice it is currently a string data type.'.
 "Did you read that the keg_definition of 'spark_num' is 'Every spark has a spark_num that identifies its order of ingestion. Sparks are orderd but not necessarily sequential. Spark_num is an int. , used with Budget Cells'."
+Did you read that the keg_definition of 'job' is 'Definition needed.'.
 Did you read that the keg_definition of 'listener' is 'Definition needed. Only referenced in ch11.'.
 Did you read that the keg_definition of 'speaker' is 'Definition needed. Only referenced in ch11.'.
 Did you read that the keg_definition of 'Epoch' is 'Definition needed.'.

@@ -78,7 +78,7 @@ So, basically the reason - and the primary factor of involving outsiders - and i
 
 What is political entreneurship?
 
-Let’s recall Joseph Schumpeter’s classic definition of a “normal”, business entrepreneurship. From Schumpeter’s perspective, the job on an innovator (= that is entrepreneur) consists in introducing new factors of production into the production process, or making a new combination out of the existing factors.
+Let’s recall Joseph Schumpeter’s classic definition of a “normal”, business entrepreneurship. From Schumpeter’s perspective, the purpose of an innovator (= that is entrepreneur) consists in introducing new factors of production into the production process, or making a new combination out of the existing factors.
 
 (Like, for example, you wanna create a new data centre. You can either build it all from scratch - long, and costly, or you can buy an existing industial building, with the power generation capacity and stuff, and it will be super cheap, and will give you an upper hand over the competitors. So, what you did is that you introduced a new factor, and that gave you a competitive advantage)
 

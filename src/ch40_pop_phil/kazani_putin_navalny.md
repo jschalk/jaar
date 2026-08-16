@@ -22,7 +22,7 @@ And, of course, nobody gets powerful by accident[^2]
 
 Should you ever get powerful by accident, you will lose your power even faster than you got it. (Many such cases). **That is because staying in power required a constant effort.** To remain in power, you will have to guard you position from all sorts of hungry pretenders.
 
-Guarding power is all about kicking away the ladders. Guarding power = identifying competitors and eliminating them before they could eliminate you. Now once you got the power, **guarding the power becomes your main job.** That is most of what you do.
+Guarding power is all about kicking away the ladders. Guarding power = identifying competitors and eliminating them before they could eliminate you. Now once you got the power, **guarding the power becomes your main role.** That is most of what you do.
 
 *(All the other stuff is just the busywork)*
 

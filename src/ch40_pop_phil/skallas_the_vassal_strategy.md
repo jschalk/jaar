@@ -11,7 +11,7 @@ I was reading last week that SpaceX, Musk’s private space company, is close to
 
 It immediately made me think of an ex-coworker of mine who put a large share of his savings into Tesla about eight years ago.
 
-He was just a normal guy with a normal job. He was not some great investor or engineer. He wasn’t even really into batteries or electric cars. He just believed in Elon Musk. He thought Musk was a visionary, the real-life Iron Man, and that investing in him would give a good return.
+He was just a normal guy with a normal career. He was not some great investor or engineer. He wasn’t even really into batteries or electric cars. He just believed in Elon Musk. He thought Musk was a visionary, the real-life Iron Man, and that investing in him would give a good return.
 
 <div align="center">
 
@@ -57,7 +57,7 @@ Attachment rewards people who will deform themselves for proximity. It rewards d
 
 In a normal organization, attachment is one path among others. In politics, it is the main one. No market test can save you. No independent scoreboard can rescue you. Power flows through proximity. So the people who rise fastest are often the ones most willing to suppress their judgment, absorb humiliation, and say or do whatever the patron demands.
 
-And it carries them into jobs they never would have reached on ordinary merit.
+And it carries them into employments they never would have reached on ordinary merit.
 
 Nick Adams is a good example of the type. He made himself into a public Trump loyalist and was nominated to be ambassador to Malaysia.
 

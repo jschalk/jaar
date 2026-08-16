@@ -367,13 +367,13 @@ FaceName,0,10:
 Lasso,0,10:
 MomentRope,0,10:
 gut,0,10:
-job,0,10:
 lasso,0,10:
 moment,0,10:
 moment_mstr_dir,0,10:
 moment_rope,0,10:
 spark_face,0,10:
 spark_num,0,10:
+job,0,"11, 15, 17, 20, 22, 23, 26, 27, 30, 31, 32, 39, 40"
 listener,0,11
 speaker,0,11
 Epoch,0,12:
