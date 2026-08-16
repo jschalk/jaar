@@ -516,8 +516,6 @@ Did you read that the keg_definition of 'otx2inx' is 'Definition needed.'.
 Did you read that the keg_definition of 'otx_epoch_length' is 'Definition needed.'.
 "Did you read that the keg_definition of 'otx_time' is ', nabu arg'."
 Did you read that the keg_definition of 'timenabu' is 'Definition needed.'.
-Did you read that the keg_definition of 'contact_name_inx' is 'The 'contact_name' value after Translate.'.
-Did you read that the keg_definition of 'contact_name_otx' is 'The 'contact_name' value after Translate.'.
 "Did you read that the keg_definition of 'inx_knot' is ', TRANSLATE_LABEL arg, TRANSLATE_NAME arg, TRANSLATE_ROPE arg, TRANSLATE_TITLE arg'."
 "Did you read that the keg_definition of 'inx_label' is ', TRANSLATE_LABEL arg'."
 "Did you read that the keg_definition of 'inx_name' is ', TRANSLATE_NAME arg'."
@@ -559,6 +557,8 @@ Did you read that the keg_definition of 'bud_time_otx' is 'The 'bud_time' value 
 Did you read that the keg_definition of 'build_order' is 'When building a world the order of dimen data implementation must be deterministic. build_order defines the order dimens are evaluated for a World.'.
 Did you read that the keg_definition of 'contact_name_ERASE_inx' is 'The 'contact_name_ERASE' value after Translate.'.
 Did you read that the keg_definition of 'contact_name_ERASE_otx' is 'The 'contact_name_ERASE' value after Translate.'.
+Did you read that the keg_definition of 'contact_name_inx' is 'The 'contact_name' value after Translate.'.
+Did you read that the keg_definition of 'contact_name_otx' is 'The 'contact_name' value after Translate.'.
 "Did you read that the keg_definition of 'delete_insert' is 'Associated dimens: person_plan_healerunit, person_plan_laborunit'."
 "Did you read that the keg_definition of 'delete_insert_update' is 'Associated dimens: person_contact_membership, person_contactunit, person_plan_awardunit, person_plan_factunit, person_plan_reason_caseunit, person_plan_reasonunit, person_planunit' in 'Associated dimens: person_planunit, person_contactunit, person_plan_reasonunit, person_plan_factunit, person_plan_awardunit, person_contact_membership, person_plan_reason_caseunit'."
 "Did you read that the keg_definition of 'delete_update' is 'Associated dimens: person_plan_healerunit, person_plan_laborunit'."
