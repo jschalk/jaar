@@ -291,7 +291,7 @@ reasonheirs,0,7:
 stop_calc,0,7:
 stop_want,0,7:
 tree_level,0,7:
-tree_traverse_count,0,7:
+tree_traverse_count,0,"7, 8, 20, 22, 27, 97"
 PersonName,0,8:
 PersonUnit,0,8:
 ancestors,0,8:
@@ -348,21 +348,21 @@ DELETE,0,9:
 INSERT,0,9:
 UPDATE,0,9:
 atom,0,9:
-awardee_title_ERASE,0,"9, 20, 22, 97"
+awardee_title_ERASE,0,"9, 20, 22"
 column_ordinal,0,9
-contact_name_ERASE,0,9:
+contact_name_ERASE,0,"9, 20, 22"
 crud,0,"9, 10, 20, 22, 23, 24, 97"
-fact_context_ERASE,0,"9, 20, 22, 97"
-group_title_ERASE,0,9:
-healer_name_ERASE,0,9:
-labor_title_ERASE,0,9:
+fact_context_ERASE,0,"9, 20, 22"
+group_title_ERASE,0,"9, 20, 22"
+healer_name_ERASE,0,"9, 17, 20, 22"
+labor_title_ERASE,0,"9, 20, 22"
 nesting_order,0,"9, 10"
 normal_specs,0,9:
 normal_table_name,0,9
-person_name_ERASE,0,9:
-plan_rope_ERASE,0,9:
-reason_context_ERASE,0,9:
-reason_state_ERASE,0,9:
+person_name_ERASE,0,"9, 20, 22"
+plan_rope_ERASE,0,"9, 20, 22"
+reason_context_ERASE,0,"9, 20, 22"
+reason_state_ERASE,0,"9, 20, 22"
 FaceName,0,10:
 Lasso,0,10:
 MomentRope,0,10:
@@ -488,11 +488,11 @@ all_tranbook,0,"15, 27, 97"
 ceckbook,0,15:
 cumulative_minute,0,15:
 job_listen_rotations,0,15:
-moment_budunit,0,15:
-moment_ceckbook,0,15:
-moment_epoch_hour,0,15:
-moment_epoch_month,0,15:
-moment_epoch_weekday,0,15:
+moment_budunit,0,"15, 20, 22, 23, 26, 97"
+moment_ceckbook,0,"15, 20, 22, 23, 26, 97"
+moment_epoch_hour,0,"15, 20, 22, 23, 26, 97"
+moment_epoch_month,0,"15, 20, 22, 23, 26, 97"
+moment_epoch_weekday,0,"15, 20, 22, 23, 26, 97"
 moment_static,0,15
 moment_timeoffi,0,15:
 momentunit,0,15:
@@ -530,7 +530,7 @@ translate_label,0,17:
 translate_name,0,17:
 translate_rope,0,17:
 translate_title,0,17:
-translateunit,0,17:
+translateunit,0,"17, 20, 97"
 unknown_str,0,17:
 Border,0,"20, 39"
 Excel,0,20:
@@ -623,7 +623,7 @@ spark_face_inx,0,"20, 22, 26"
 spark_face_otx,0,"20, 22, 26"
 tran_time_inx,0,"20, 22"
 tran_time_otx,0,"20, 22"
-translate_spark_num,0,20:
+translate_spark_num,0,"20, 22, 97"
 weekday_label_inx,0,"20, 22"
 weekday_label_otx,0,"20, 22"
 world_name,0,20:
@@ -656,7 +656,7 @@ mmtmont,0,"22, 25, 26, 97"
 mmtoffi,0,"22, 26, 97"
 mmtunit,0,"22, 26, 97"
 mmtweek,0,"22, 26, 97"
-moment_ote1_agg,0,22:
+moment_ote1_agg,0,"22, 26, 27, 32, 97"
 nabtime,0,22:
 person_net_amount,0,22:
 s_agg,0,"22, 24, 25, 32"
@@ -665,11 +665,11 @@ s_vld,0,"22, 24, 25, 26, 30, 32"
 sound_agg,0,"22, 25, 32"
 sound_raw,0,"22, 24, 25, 32"
 sound_vld,0,"22, 25, 32"
-trlcore,0,22:
-trllabe,0,22:
-trlname,0,22:
-trlrope,0,22:
-trltitl,0,22:
+trlcore,0,"22, 25, 30, 32, 97"
+trllabe,0,"22, 25, 30, 97"
+trlname,0,"22, 25, 26, 30, 32, 97"
+trlrope,0,"22, 24, 25, 30, 97"
+trltitl,0,"22, 25, 30, 97"
 day_punch,0,23:
 fission,0,23
 idea_type,0,23:
@@ -682,8 +682,8 @@ DayEvent,0,31
 Event,0,31:
 default_kpi_bundle,0,31:
 gcal,0,31:
-moment_kpi001_contact_nets,0,31:
-moment_kpi002_person_pledges,0,31:
+moment_kpi001_contact_nets,0,"31, 32, 97"
+moment_kpi002_person_pledges,0,"31, 97"
 WorldName,0,32:
 today,0,32:
 Deal,0,33:

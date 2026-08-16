@@ -4,7 +4,11 @@ from ch01_keyword.chapter_desc_main import (
     get_chapter_desc_prefix,
     get_chapter_descs,
 )
-from ch01_keyword.keyword_class_builder import get_chapter_descs
+from ch01_keyword.keyword_class_builder import (
+    get_chapter_descs,
+    get_keywords_src_config,
+    parse_valid_ch_str,
+)
 from ch08_person_logic.person_config import (
     get_all_person_calc_args,
     get_person_config_dict,
@@ -145,3 +149,29 @@ def get_count_keg_terms_by_chapters():
         keg_term: {ch_int: count for ch_int, count in ch_counts.items() if count != 0}
         for keg_term, ch_counts in count_strs_by_dirs.items()
     }
+
+
+def get_focus_keyword_frequency(focus_keywords: set) -> dict[str, tuple[list, list]]:
+    focus_keyword_frequency = {}
+    # This part finds all keg_terms used only in one chapter and changes
+    # valid_ch from range to single chapter
+    chapter_descs = get_chapter_descs().keys()
+    ch_ints = {get_ch_int(chapter_desc) for chapter_desc in chapter_descs}
+    keywords_src_config = get_keywords_src_config()
+    keg_terms_by_chapters = get_count_keg_terms_by_chapters()
+
+    for keg_term in sorted(keg_terms_by_chapters.keys()):
+        ch_dir_dict = keg_terms_by_chapters.get(keg_term)
+        # if len(ch_dir_dict) == 2:
+        if keyword_config := keywords_src_config.get(keg_term):
+            if len(ch_dir_dict) > 0:
+                lone_ch = list(ch_dir_dict.keys())[0]
+                x_valid_ch = keyword_config.get("valid_ch")
+                valid_chapters = sorted(parse_valid_ch_str(ch_ints, x_valid_ch))
+                if str(lone_ch) != x_valid_ch:
+                    # if len(valid_chapters) - len(ch_dir_dict) > 20:
+                    if keg_term in focus_keywords:
+                        term_current_and_allowed_chs = (ch_dir_dict, valid_chapters)
+                        focus_keyword_frequency[keg_term] = term_current_and_allowed_chs
+                    keyword_config["valid_ch"] = str(lone_ch)
+    return focus_keyword_frequency
